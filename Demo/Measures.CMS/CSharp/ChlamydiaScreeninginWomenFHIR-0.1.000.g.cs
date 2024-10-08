@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -213,7 +214,7 @@ public partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ILibrary, ISingleto
     [CqlDeclaration("Patient")]
 	public Patient Patient(CqlContext context)
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -260,26 +261,26 @@ public partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ILibrary, ISingleto
 	public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
 	{
 		CqlValueSet a_ = this.Office_Visit(context);
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet c_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up(context);
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up(context);
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
+		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet h_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17(context);
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
+		IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		CqlValueSet l_ = this.Preventive_Care__Established_Office_Visit__0_to_17(context);
-		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, default);
+		IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet n_ = this.Home_Healthcare_Services(context);
-		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default);
+		IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
 		CqlValueSet r_ = this.Telephone_Visits(context);
-		IEnumerable<Encounter> s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, default);
+		IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet t_ = this.Online_Assessments(context);
-		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, default);
+		IEnumerable<Encounter> u_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> v_ = context.Operators.Union<Encounter>(s_, u_);
 		IEnumerable<Encounter> w_ = context.Operators.Union<Encounter>(q_, v_);
 		IEnumerable<Encounter> x_ = Status_1_6_000.Instance.Finished_Encounter(context, w_);
@@ -304,7 +305,7 @@ public partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ILibrary, ISingleto
 	{
 		CqlCode a_ = this.Have_you_ever_had_vaginal_intercourse__PhenX_(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> d_ = Status_1_6_000.Instance.Final_Survey_Observation(context, c_);
 		bool? e_(Observation SexualActivityAssessment)
 		{
@@ -355,12 +356,12 @@ public partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ILibrary, ISingleto
 	public bool? Has_Diagnoses_Identifying_Sexual_Activity(CqlContext context)
 	{
 		CqlValueSet a_ = this.Diagnoses_Used_to_Indicate_Sexual_Activity(context);
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		CqlValueSet c_ = this.HIV(context);
-		IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(c_, default);
+		IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
 		CqlValueSet f_ = this.Complications_of_Pregnancy__Childbirth_and_the_Puerperium(context);
-		IEnumerable<Condition> g_ = context.Operators.RetrieveByValueSet<Condition>(f_, default);
+		IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_, g_);
 		bool? i_(Condition SexualActivityDiagnosis)
 		{
@@ -381,8 +382,8 @@ public partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ILibrary, ISingleto
 	public bool? Has_Active_Contraceptive_Medications(CqlContext context)
 	{
 		CqlValueSet a_ = this.Contraceptive_Medications(context);
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
+		IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		IEnumerable<MedicationRequest> f_ = Status_1_6_000.Instance.Active_Medication(context, e_);
 		bool? g_(MedicationRequest ActiveContraceptives)
@@ -411,8 +412,8 @@ public partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ILibrary, ISingleto
 	public bool? Has_Ordered_Contraceptive_Medications(CqlContext context)
 	{
 		CqlValueSet a_ = this.Contraceptive_Medications(context);
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
+		IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		IEnumerable<MedicationRequest> f_ = Status_1_6_000.Instance.Active_or_Completed_Medication_Request(context, e_);
 		bool? g_(MedicationRequest OrderedContraceptives)
@@ -436,12 +437,12 @@ public partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ILibrary, ISingleto
 	public bool? Has_Laboratory_Tests_Identifying_Sexual_Activity_But_Not_Pregnancy(CqlContext context)
 	{
 		CqlValueSet a_ = this.Pap_Test(context);
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
+		IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		CqlValueSet c_ = this.Lab_Tests_During_Pregnancy(context);
-		IEnumerable<ServiceRequest> d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(c_, default);
+		IEnumerable<ServiceRequest> d_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		IEnumerable<ServiceRequest> e_ = context.Operators.Union<ServiceRequest>(b_, d_);
 		CqlValueSet f_ = this.Lab_Tests_for_Sexually_Transmitted_Infections(context);
-		IEnumerable<ServiceRequest> g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, default);
+		IEnumerable<ServiceRequest> g_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		IEnumerable<ServiceRequest> h_ = context.Operators.Union<ServiceRequest>(e_, g_);
 		IEnumerable<ServiceRequest> i_ = Status_1_6_000.Instance.Completed_or_Ongoing_Service_Request(context, h_);
 		bool? j_(ServiceRequest LabOrders)
@@ -465,7 +466,7 @@ public partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ILibrary, ISingleto
 	public bool? Has_Laboratory_Tests_Identifying_Sexual_Activity(CqlContext context)
 	{
 		CqlValueSet a_ = this.Pregnancy_Test(context);
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
+		IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		IEnumerable<ServiceRequest> c_ = Status_1_6_000.Instance.Completed_or_Ongoing_Service_Request(context, b_);
 		bool? d_(ServiceRequest PregnancyTest)
 		{
@@ -490,7 +491,7 @@ public partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ILibrary, ISingleto
 	public bool? Has_Diagnostic_Studies_Identifying_Sexual_Activity(CqlContext context)
 	{
 		CqlValueSet a_ = this.Diagnostic_Studies_During_Pregnancy(context);
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
+		IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		IEnumerable<ServiceRequest> c_ = Status_1_6_000.Instance.Completed_or_Ongoing_Service_Request(context, b_);
 		bool? d_(ServiceRequest SexualActivityDiagnostics)
 		{
@@ -513,7 +514,7 @@ public partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ILibrary, ISingleto
 	public bool? Has_Procedures_Identifying_Sexual_Activity(CqlContext context)
 	{
 		CqlValueSet a_ = this.Procedures_Used_to_Indicate_Sexual_Activity(context);
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_ = Status_1_6_000.Instance.Completed_Procedure(context, b_);
 		bool? d_(Procedure ProceduresForSexualActivity)
 		{
@@ -585,12 +586,12 @@ public partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ILibrary, ISingleto
 	public bool? Has_Pregnancy_Test_Exclusion(CqlContext context)
 	{
 		CqlValueSet a_ = this.Pregnancy_Test(context);
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
+		IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		IEnumerable<ServiceRequest> c_ = Status_1_6_000.Instance.Completed_or_Ongoing_Service_Request(context, b_);
 		IEnumerable<ServiceRequest> d_(ServiceRequest PregnancyTest)
 		{
 			CqlValueSet m_ = this.XRay_Study(context);
-			IEnumerable<ServiceRequest> n_ = context.Operators.RetrieveByValueSet<ServiceRequest>(m_, default);
+			IEnumerable<ServiceRequest> n_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 			IEnumerable<ServiceRequest> o_ = Status_1_6_000.Instance.Completed_or_Ongoing_Service_Request(context, n_);
 			bool? p_(ServiceRequest XrayOrder)
 			{
@@ -630,13 +631,13 @@ public partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ILibrary, ISingleto
 			return s_;
 		};
 		IEnumerable<ServiceRequest> e_ = context.Operators.SelectMany<ServiceRequest, ServiceRequest>(c_, d_);
-		IEnumerable<ServiceRequest> g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
+		IEnumerable<ServiceRequest> g_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		IEnumerable<ServiceRequest> h_ = Status_1_6_000.Instance.Completed_or_Ongoing_Service_Request(context, g_);
 		IEnumerable<ServiceRequest> i_(ServiceRequest PregnancyTestOrder)
 		{
 			CqlValueSet av_ = this.Isotretinoin(context);
-			IEnumerable<MedicationRequest> aw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(av_, default);
-			IEnumerable<MedicationRequest> ay_ = context.Operators.RetrieveByValueSet<MedicationRequest>(av_, default);
+			IEnumerable<MedicationRequest> aw_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, av_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+			IEnumerable<MedicationRequest> ay_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, av_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 			IEnumerable<MedicationRequest> az_ = context.Operators.Union<MedicationRequest>(aw_, ay_);
 			IEnumerable<MedicationRequest> ba_ = Status_1_6_000.Instance.Active_or_Completed_Medication_Request(context, az_);
 			bool? bb_(MedicationRequest AccutaneOrder)
@@ -720,7 +721,7 @@ public partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ILibrary, ISingleto
 	public bool? Numerator(CqlContext context)
 	{
 		CqlValueSet a_ = this.Chlamydia_Screening(context);
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_ = Status_1_6_000.Instance.Final_Lab_Observation(context, b_);
 		bool? d_(Observation ChlamydiaTest)
 		{

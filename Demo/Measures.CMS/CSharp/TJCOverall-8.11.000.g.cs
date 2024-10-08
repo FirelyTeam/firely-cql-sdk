@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -90,7 +91,7 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
     [CqlDeclaration("Patient")]
 	public Patient Patient(CqlContext context)
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -101,7 +102,7 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
 	public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter(CqlContext context)
 	{
 		CqlValueSet a_ = this.Nonelective_Inpatient_Encounter(context);
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		bool? c_(Encounter NonElectiveEncounter)
 		{
 			Period e_ = NonElectiveEncounter?.Period;
@@ -232,7 +233,7 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
 	public IEnumerable<object> Intervention_Comfort_Measures(CqlContext context)
 	{
 		CqlValueSet a_ = this.Comfort_Measures(context);
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
+		IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		bool? c_(ServiceRequest SR)
 		{
 			Code<RequestStatus> j_ = SR?.StatusElement;
@@ -267,7 +268,7 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
 			return aa_;
 		};
 		IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
-		IEnumerable<Procedure> f_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		bool? g_(Procedure InterventionPerformed)
 		{
 			Code<EventStatus> ab_ = InterventionPerformed?.StatusElement;

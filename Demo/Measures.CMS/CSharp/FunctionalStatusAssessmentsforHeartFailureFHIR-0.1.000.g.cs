@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -263,7 +264,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     [CqlDeclaration("Patient")]
 	public Patient Patient(CqlContext context)
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -310,12 +311,12 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 	public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
 	{
 		CqlValueSet a_ = this.Office_Visit(context);
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet c_ = this.Telephone_Visits(context);
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Online_Assessments(context);
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
+		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> h_ = context.Operators.Union<Encounter>(e_, g_);
 		IEnumerable<Encounter> i_ = Status_1_6_000.Instance.Finished_Encounter(context, h_);
 		bool? j_(Encounter ValidEncounter)
@@ -384,7 +385,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		int? h_ = context.Operators.CalculateAgeAt(d_, g_, "year");
 		bool? i_ = context.Operators.GreaterOrEqual(h_, 18);
 		CqlValueSet j_ = this.Heart_Failure(context);
-		IEnumerable<Condition> k_ = context.Operators.RetrieveByValueSet<Condition>(j_, default);
+		IEnumerable<Condition> k_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		bool? l_(Condition HeartFailure)
 		{
 			CqlInterval<CqlDateTime> s_ = QICoreCommon_2_0_000.Instance.ToPrevalenceInterval(context, HeartFailure);
@@ -419,7 +420,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		bool? a_ = Hospice_6_9_000.Instance.Has_Hospice_Services(context);
 		CqlCode b_ = this.Severe_cognitive_impairment__finding_(context);
 		IEnumerable<CqlCode> c_ = context.Operators.ToList<CqlCode>(b_);
-		IEnumerable<Condition> d_ = context.Operators.RetrieveByCodes<Condition>(c_, default);
+		IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, c_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		bool? e_(Condition Dementia)
 		{
 			CqlInterval<CqlDateTime> i_ = QICoreCommon_2_0_000.Instance.ToPrevalenceInterval(context, Dementia);
@@ -441,11 +442,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 	{
 		CqlCode a_ = this.PROMIS_10_Global_Mental_Health__GMH__score_T_score(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> d_ = Status_1_6_000.Instance.Final_Survey_Observation(context, c_);
 		CqlCode e_ = this.PROMIS_10_Global_Physical_Health__GPH__score_T_score(context);
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default);
+		IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> h_ = Status_1_6_000.Instance.Final_Survey_Observation(context, g_);
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? j_(ValueTuple<Observation, Observation> _valueTuple)
@@ -575,31 +576,31 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 	{
 		CqlCode a_ = this.PROMIS_29_Sleep_disturbance_score_T_score(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> d_ = Status_1_6_000.Instance.Final_Survey_Observation(context, c_);
 		CqlCode e_ = this.PROMIS_29_Satisfaction_with_participation_in_social_roles_score_T_score(context);
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default);
+		IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> h_ = Status_1_6_000.Instance.Final_Survey_Observation(context, g_);
 		CqlCode i_ = this.PROMIS_29_Physical_function_score_T_score(context);
 		IEnumerable<CqlCode> j_ = context.Operators.ToList<CqlCode>(i_);
-		IEnumerable<Observation> k_ = context.Operators.RetrieveByCodes<Observation>(j_, default);
+		IEnumerable<Observation> k_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, j_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> l_ = Status_1_6_000.Instance.Final_Survey_Observation(context, k_);
 		CqlCode m_ = this.PROMIS_29_Pain_interference_score_T_score(context);
 		IEnumerable<CqlCode> n_ = context.Operators.ToList<CqlCode>(m_);
-		IEnumerable<Observation> o_ = context.Operators.RetrieveByCodes<Observation>(n_, default);
+		IEnumerable<Observation> o_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, n_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> p_ = Status_1_6_000.Instance.Final_Survey_Observation(context, o_);
 		CqlCode q_ = this.PROMIS_29_Fatigue_score_T_score(context);
 		IEnumerable<CqlCode> r_ = context.Operators.ToList<CqlCode>(q_);
-		IEnumerable<Observation> s_ = context.Operators.RetrieveByCodes<Observation>(r_, default);
+		IEnumerable<Observation> s_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, r_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> t_ = Status_1_6_000.Instance.Final_Survey_Observation(context, s_);
 		CqlCode u_ = this.PROMIS_29_Depression_score_T_score(context);
 		IEnumerable<CqlCode> v_ = context.Operators.ToList<CqlCode>(u_);
-		IEnumerable<Observation> w_ = context.Operators.RetrieveByCodes<Observation>(v_, default);
+		IEnumerable<Observation> w_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, v_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> x_ = Status_1_6_000.Instance.Final_Survey_Observation(context, w_);
 		CqlCode y_ = this.PROMIS_29_Anxiety_score_T_score(context);
 		IEnumerable<CqlCode> z_ = context.Operators.ToList<CqlCode>(y_);
-		IEnumerable<Observation> aa_ = context.Operators.RetrieveByCodes<Observation>(z_, default);
+		IEnumerable<Observation> aa_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, z_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> ab_ = Status_1_6_000.Instance.Final_Survey_Observation(context, aa_);
 		IEnumerable<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation, Observation>> ac_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_, x_, ab_);
 		(Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? ad_(ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation, Observation> _valueTuple)
@@ -834,11 +835,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 	{
 		CqlCode a_ = this.VR_12_Mental_component_summary__MCS__score___oblique_method_T_score(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> d_ = Status_1_6_000.Instance.Final_Survey_Observation(context, c_);
 		CqlCode e_ = this.VR_12_Physical_component_summary__PCS__score___oblique_method_T_score(context);
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default);
+		IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> h_ = Status_1_6_000.Instance.Final_Survey_Observation(context, g_);
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple)
@@ -968,11 +969,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 	{
 		CqlCode a_ = this.VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> d_ = Status_1_6_000.Instance.Final_Survey_Observation(context, c_);
 		CqlCode e_ = this.VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score(context);
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default);
+		IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> h_ = Status_1_6_000.Instance.Final_Survey_Observation(context, g_);
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple)
@@ -1102,11 +1103,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 	{
 		CqlCode a_ = this.VR_36_Mental_component_summary__MCS__score___oblique_method_T_score(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> d_ = Status_1_6_000.Instance.Final_Survey_Observation(context, c_);
 		CqlCode e_ = this.VR_36_Physical_component_summary__PCS__score___oblique_method_T_score(context);
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default);
+		IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> h_ = Status_1_6_000.Instance.Final_Survey_Observation(context, g_);
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple)
@@ -1236,11 +1237,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 	{
 		CqlCode a_ = this.VR_36_Mental_component_summary__MCS__score___orthogonal_method_T_score(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> d_ = Status_1_6_000.Instance.Final_Survey_Observation(context, c_);
 		CqlCode e_ = this.VR_36_Physical_component_summary__PCS__score___orthogonal_method_T_score(context);
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default);
+		IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> h_ = Status_1_6_000.Instance.Final_Survey_Observation(context, g_);
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple)
@@ -1370,11 +1371,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 	{
 		CqlCode a_ = this.Physical_score__MLHFQ_(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> d_ = Status_1_6_000.Instance.Final_Survey_Observation(context, c_);
 		CqlCode e_ = this.Emotional_score__MLHFQ_(context);
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default);
+		IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> h_ = Status_1_6_000.Instance.Final_Survey_Observation(context, g_);
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(Observation MLHFQPhysical, Observation MLHFQEmotional)? j_(ValueTuple<Observation, Observation> _valueTuple)
@@ -1504,11 +1505,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 	{
 		CqlCode a_ = this.Kansas_City_Cardiomyopathy_Questionnaire___12_item__KCCQ_12_(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> d_ = Status_1_6_000.Instance.Final_Survey_Observation(context, c_);
 		CqlCode e_ = this.Overall_summary_score__KCCQ_12_(context);
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default);
+		IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> h_ = Status_1_6_000.Instance.Final_Survey_Observation(context, g_);
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(Observation KCCQ12Item, Observation KCCQ12Summary)? j_(ValueTuple<Observation, Observation> _valueTuple)
@@ -1638,27 +1639,27 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 	{
 		CqlCode a_ = this.Quality_of_life_score__KCCQ_(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> d_ = Status_1_6_000.Instance.Final_Survey_Observation(context, c_);
 		CqlCode e_ = this.Symptom_stability_score__KCCQ_(context);
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default);
+		IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> h_ = Status_1_6_000.Instance.Final_Survey_Observation(context, g_);
 		CqlCode i_ = this.Self_efficacy_score__KCCQ_(context);
 		IEnumerable<CqlCode> j_ = context.Operators.ToList<CqlCode>(i_);
-		IEnumerable<Observation> k_ = context.Operators.RetrieveByCodes<Observation>(j_, default);
+		IEnumerable<Observation> k_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, j_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> l_ = Status_1_6_000.Instance.Final_Survey_Observation(context, k_);
 		CqlCode m_ = this.Total_symptom_score__KCCQ_(context);
 		IEnumerable<CqlCode> n_ = context.Operators.ToList<CqlCode>(m_);
-		IEnumerable<Observation> o_ = context.Operators.RetrieveByCodes<Observation>(n_, default);
+		IEnumerable<Observation> o_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, n_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> p_ = Status_1_6_000.Instance.Final_Survey_Observation(context, o_);
 		CqlCode q_ = this.Physical_limitation_score__KCCQ_(context);
 		IEnumerable<CqlCode> r_ = context.Operators.ToList<CqlCode>(q_);
-		IEnumerable<Observation> s_ = context.Operators.RetrieveByCodes<Observation>(r_, default);
+		IEnumerable<Observation> s_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, r_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> t_ = Status_1_6_000.Instance.Final_Survey_Observation(context, s_);
 		CqlCode u_ = this.Social_limitation_score__KCCQ_(context);
 		IEnumerable<CqlCode> v_ = context.Operators.ToList<CqlCode>(u_);
-		IEnumerable<Observation> w_ = context.Operators.RetrieveByCodes<Observation>(v_, default);
+		IEnumerable<Observation> w_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, v_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> x_ = Status_1_6_000.Instance.Final_Survey_Observation(context, w_);
 		IEnumerable<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation>> y_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_, x_);
 		(Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? z_(ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation> _valueTuple)
@@ -1872,7 +1873,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 	{
 		CqlCode a_ = this.Overall_summary_score__KCCQ_(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> d_ = Status_1_6_000.Instance.Final_Survey_Observation(context, c_);
 		bool? e_(Observation KCCQSummaryScore)
 		{

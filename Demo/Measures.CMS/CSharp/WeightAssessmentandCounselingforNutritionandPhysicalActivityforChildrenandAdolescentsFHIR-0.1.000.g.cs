@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -237,7 +238,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     [CqlDeclaration("Patient")]
 	public Patient Patient(CqlContext context)
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -284,24 +285,24 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 	public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context)
 	{
 		CqlValueSet a_ = this.Office_Visit(context);
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet c_ = this.Preventive_Care_Services_Individual_Counseling(context);
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17(context);
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
+		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet h_ = this.Preventive_Care__Established_Office_Visit__0_to_17(context);
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
+		IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		CqlValueSet l_ = this.Preventive_Care_Services___Group_Counseling(context);
-		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, default);
+		IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet n_ = this.Home_Healthcare_Services(context);
-		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default);
+		IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
 		CqlValueSet r_ = this.Telephone_Visits(context);
-		IEnumerable<Encounter> s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, default);
+		IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> t_ = context.Operators.Union<Encounter>(q_, s_);
 		IEnumerable<Encounter> u_ = Status_1_6_000.Instance.Finished_Encounter(context, t_);
 		bool? v_(Encounter ValidEncounters)
@@ -354,7 +355,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 	public IEnumerable<Condition> Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period(CqlContext context)
 	{
 		CqlValueSet a_ = this.Pregnancy(context);
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> c_ = Status_1_6_000.Instance.Active_Condition(context, b_);
 		bool? d_(Condition Pregnancy)
 		{
@@ -385,7 +386,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     [CqlDeclaration("BMI Percentile in Measurement Period")]
 	public IEnumerable<Observation> BMI_Percentile_in_Measurement_Period(CqlContext context)
 	{
-		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
+		IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bmi"));
 		IEnumerable<Observation> b_ = Status_1_6_000.Instance.BMI(context, a_);
 		bool? c_(Observation BMIPercentile)
 		{
@@ -410,7 +411,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     [CqlDeclaration("Height in Measurement Period")]
 	public IEnumerable<Observation> Height_in_Measurement_Period(CqlContext context)
 	{
-		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
+		IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bodyheight"));
 		IEnumerable<Observation> b_ = Status_1_6_000.Instance.BodyHeight(context, a_);
 		bool? c_(Observation Height)
 		{
@@ -435,7 +436,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     [CqlDeclaration("Weight in Measurement Period")]
 	public IEnumerable<Observation> Weight_in_Measurement_Period(CqlContext context)
 	{
-		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
+		IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bodyweight"));
 		IEnumerable<Observation> b_ = Status_1_6_000.Instance.BodyWeight(context, a_);
 		bool? c_(Observation Weight)
 		{
@@ -477,7 +478,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 	public bool? Numerator_2(CqlContext context)
 	{
 		CqlValueSet a_ = this.Counseling_for_Nutrition(context);
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_ = Status_1_6_000.Instance.Completed_Procedure(context, b_);
 		bool? d_(Procedure NutritionCounseling)
 		{
@@ -500,7 +501,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 	public bool? Numerator_3(CqlContext context)
 	{
 		CqlValueSet a_ = this.Counseling_for_Physical_Activity(context);
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_ = Status_1_6_000.Instance.Completed_Procedure(context, b_);
 		bool? d_(Procedure ActivityCounseling)
 		{

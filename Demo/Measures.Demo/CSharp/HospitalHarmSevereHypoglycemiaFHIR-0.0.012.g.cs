@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -97,7 +98,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
     [CqlDeclaration("Patient")]
 	public Patient Patient(CqlContext context)
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -135,7 +136,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
 	public IEnumerable<Encounter> Inpatient_Encounter_During_Measurement_Period(CqlContext context)
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient(context);
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		bool? c_(Encounter EncounterInpatient)
 		{
 			Code<Encounter.EncounterStatus> e_ = EncounterInpatient?.StatusElement;
@@ -183,8 +184,8 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
 	public IEnumerable<MedicationAdministration> Hypoglycemic_Medication_Administration(CqlContext context)
 	{
 		CqlValueSet a_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
-		IEnumerable<MedicationAdministration> b_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, default);
-		IEnumerable<MedicationAdministration> d_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(a_, default);
+		IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationAdministration"));
+		IEnumerable<MedicationAdministration> d_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationAdministration"));
 		IEnumerable<MedicationAdministration> e_ = context.Operators.Union<MedicationAdministration>(b_, d_);
 		bool? f_(MedicationAdministration HypoMedication)
 		{
@@ -259,7 +260,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
 		bool? b_(Encounter QualifyingEncounter)
 		{
 			CqlValueSet d_ = this.Glucose_lab_test(context);
-			IEnumerable<Observation> e_ = context.Operators.RetrieveByValueSet<Observation>(d_, default);
+			IEnumerable<Observation> e_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 			IEnumerable<Observation> f_(Observation BloodGlucoseLab)
 			{
 				IEnumerable<MedicationAdministration> r_ = this.Hypoglycemic_Medication_Administration(context);
@@ -305,7 +306,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
 				return v_;
 			};
 			IEnumerable<Observation> g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
-			IEnumerable<Observation> i_ = context.Operators.RetrieveByValueSet<Observation>(d_, default);
+			IEnumerable<Observation> i_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 			IEnumerable<Observation> j_(Observation BloodGlucoseLab)
 			{
 				IEnumerable<MedicationAdministration> bd_ = this.Hypoglycemic_Medication_Administration(context);
@@ -354,7 +355,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISin
 			IEnumerable<Observation> l_(Observation BloodGlucoseLab)
 			{
 				CqlValueSet cp_ = this.Glucose_lab_test(context);
-				IEnumerable<Observation> cq_ = context.Operators.RetrieveByValueSet<Observation>(cp_, default);
+				IEnumerable<Observation> cq_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, cp_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 				bool? cr_(Observation FollowupBloodGlucoseLab)
 				{
 					DataType cv_ = FollowupBloodGlucoseLab?.Effective;

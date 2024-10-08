@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -126,7 +127,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     [CqlDeclaration("Patient")]
 	public Patient Patient(CqlContext context)
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -162,7 +163,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     [CqlDeclaration("Member Coverage")]
 	public IEnumerable<Coverage> Member_Coverage(CqlContext context)
 	{
-		IEnumerable<Coverage> a_ = context.Operators.RetrieveByValueSet<Coverage>(default, default);
+		IEnumerable<Coverage> a_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Coverage"));
 		bool? b_(Coverage C)
 		{
 			Period d_ = C?.Period;
@@ -257,7 +258,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 	public IEnumerable<Condition> Right_Mastectomy_Diagnosis(CqlContext context)
 	{
 		CqlValueSet a_ = this.Absence_of_Right_Breast(context);
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		IEnumerable<Condition> c_ = NCQAStatus_1_0_0.Instance.Active_Condition(context, b_);
 		bool? d_(Condition RightMastectomyDiagnosis)
 		{
@@ -279,10 +280,10 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 	public IEnumerable<Procedure> Right_Mastectomy_Procedure(CqlContext context)
 	{
 		CqlValueSet a_ = this.Unilateral_Mastectomy_Right(context);
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		IEnumerable<Procedure> c_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, b_);
 		CqlValueSet d_ = this.Unilateral_Mastectomy(context);
-		IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default);
+		IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		IEnumerable<Procedure> f_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, e_);
 		bool? g_(Procedure UnilateralMastectomyProcedure)
 		{
@@ -302,7 +303,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 		IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
 		IEnumerable<Procedure> i_ = context.Operators.Union<Procedure>(c_, h_);
 		CqlValueSet j_ = this.Clinical_Unilateral_Mastectomy(context);
-		IEnumerable<Procedure> k_ = context.Operators.RetrieveByValueSet<Procedure>(j_, default);
+		IEnumerable<Procedure> k_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		IEnumerable<Procedure> l_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, k_);
 		bool? m_(Procedure ClinicalUnilateralMastectomyProcedure)
 		{
@@ -342,7 +343,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 	public IEnumerable<Condition> Left_Mastectomy_Diagnosis(CqlContext context)
 	{
 		CqlValueSet a_ = this.Absence_of_Left_Breast(context);
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		IEnumerable<Condition> c_ = NCQAStatus_1_0_0.Instance.Active_Condition(context, b_);
 		bool? d_(Condition LeftMastectomyDiagnosis)
 		{
@@ -364,10 +365,10 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 	public IEnumerable<Procedure> Left_Mastectomy_Procedure(CqlContext context)
 	{
 		CqlValueSet a_ = this.Unilateral_Mastectomy_Left(context);
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		IEnumerable<Procedure> c_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, b_);
 		CqlValueSet d_ = this.Unilateral_Mastectomy(context);
-		IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default);
+		IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		IEnumerable<Procedure> f_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, e_);
 		bool? g_(Procedure UnilateralMastectomyProcedure)
 		{
@@ -387,7 +388,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 		IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
 		IEnumerable<Procedure> i_ = context.Operators.Union<Procedure>(c_, h_);
 		CqlValueSet j_ = this.Clinical_Unilateral_Mastectomy(context);
-		IEnumerable<Procedure> k_ = context.Operators.RetrieveByValueSet<Procedure>(j_, default);
+		IEnumerable<Procedure> k_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		IEnumerable<Procedure> l_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, k_);
 		bool? m_(Procedure ClinicalUnilateralMastectomyProcedure)
 		{
@@ -427,7 +428,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 	public IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis(CqlContext context)
 	{
 		CqlValueSet a_ = this.History_of_Bilateral_Mastectomy(context);
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		IEnumerable<Condition> c_ = NCQAStatus_1_0_0.Instance.Active_Condition(context, b_);
 		bool? d_(Condition BilateralMastectomyHistory)
 		{
@@ -449,10 +450,10 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 	public IEnumerable<Procedure> Bilateral_Mastectomy_Procedure(CqlContext context)
 	{
 		CqlValueSet a_ = this.Bilateral_Mastectomy(context);
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		IEnumerable<Procedure> c_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, b_);
 		CqlValueSet d_ = this.Unilateral_Mastectomy(context);
-		IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default);
+		IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		IEnumerable<Procedure> f_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, e_);
 		bool? g_(Procedure UnilateralMastectomyProcedure)
 		{
@@ -472,7 +473,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 		IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
 		IEnumerable<Procedure> i_ = context.Operators.Union<Procedure>(c_, h_);
 		CqlValueSet j_ = this.Clinical_Unilateral_Mastectomy(context);
-		IEnumerable<Procedure> k_ = context.Operators.RetrieveByValueSet<Procedure>(j_, default);
+		IEnumerable<Procedure> k_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		IEnumerable<Procedure> l_ = NCQAStatus_1_0_0.Instance.Completed_Procedure(context, k_);
 		bool? m_(Procedure ClinicalUnilateralMastectomyProcedure)
 		{
@@ -553,7 +554,7 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 	public bool? Numerator(CqlContext context)
 	{
 		CqlValueSet a_ = this.Mammography(context);
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation Mammogram)
 		{
 			DataType f_ = Mammogram?.Effective;

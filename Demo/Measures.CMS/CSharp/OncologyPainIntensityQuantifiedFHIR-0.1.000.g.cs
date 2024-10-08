@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -85,7 +86,7 @@ public partial class OncologyPainIntensityQuantifiedFHIR_0_1_000 : ILibrary, ISi
     [CqlDeclaration("Patient")]
 	public Patient Patient(CqlContext context)
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -96,7 +97,7 @@ public partial class OncologyPainIntensityQuantifiedFHIR_0_1_000 : ILibrary, ISi
 	public IEnumerable<Procedure> Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period(CqlContext context)
 	{
 		CqlValueSet a_ = this.Chemotherapy_Administration(context);
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_ = Status_1_6_000.Instance.Completed_Procedure(context, b_);
 		bool? d_(Procedure ChemoAdministration)
 		{
@@ -123,11 +124,11 @@ public partial class OncologyPainIntensityQuantifiedFHIR_0_1_000 : ILibrary, ISi
 	public IEnumerable<Encounter> Face_to_Face_or_Telehealth_Encounter_with_Ongoing_Chemotherapy(CqlContext context)
 	{
 		CqlValueSet a_ = this.Office_Visit(context);
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> c_ = Status_1_6_000.Instance.Finished_Encounter(context, b_);
 		IEnumerable<Procedure> d_ = this.Chemotherapy_Within_31_Days_Prior_and_During_Measurement_Period(context);
 		CqlValueSet f_ = this.Cancer(context);
-		IEnumerable<Condition> g_ = context.Operators.RetrieveByValueSet<Condition>(f_, default);
+		IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<ValueTuple<Encounter, Procedure, Procedure, Condition>> h_ = context.Operators.CrossJoin<Encounter, Procedure, Procedure, Condition>(c_, d_, d_, g_);
 		(Encounter FaceToFaceOrTelehealthEncounter, Procedure ChemoBeforeEncounter, Procedure ChemoAfterEncounter, Condition Cancer)? i_(ValueTuple<Encounter, Procedure, Procedure, Condition> _valueTuple)
 		{
@@ -222,12 +223,12 @@ public partial class OncologyPainIntensityQuantifiedFHIR_0_1_000 : ILibrary, ISi
 	public IEnumerable<Encounter> Radiation_Treatment_Management_During_Measurement_Period_with_Cancer_Diagnosis(CqlContext context)
 	{
 		CqlValueSet a_ = this.Radiation_Treatment_Management(context);
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> c_ = Status_1_6_000.Instance.Finished_Encounter(context, b_);
 		IEnumerable<Encounter> d_(Encounter RadiationTreatmentManagement)
 		{
 			CqlValueSet f_ = this.Cancer(context);
-			IEnumerable<Condition> g_ = context.Operators.RetrieveByValueSet<Condition>(f_, default);
+			IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			bool? h_(Condition Cancer)
 			{
 				bool? l_ = QICoreCommon_2_0_000.Instance.isActive(context, Cancer);
@@ -281,7 +282,7 @@ public partial class OncologyPainIntensityQuantifiedFHIR_0_1_000 : ILibrary, ISi
 		IEnumerable<Encounter> b_(Encounter FaceToFaceOrTelehealthEncounterWithChemo)
 		{
 			CqlValueSet d_ = this.Standardized_Pain_Assessment_Tool(context);
-			IEnumerable<Observation> e_ = context.Operators.RetrieveByValueSet<Observation>(d_, default);
+			IEnumerable<Observation> e_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 			bool? f_(Observation PainAssessed)
 			{
 				Period j_ = FaceToFaceOrTelehealthEncounterWithChemo?.Period;
@@ -322,7 +323,7 @@ public partial class OncologyPainIntensityQuantifiedFHIR_0_1_000 : ILibrary, ISi
 		IEnumerable<Encounter> b_(Encounter RadiationManagementEncounter)
 		{
 			CqlValueSet d_ = this.Standardized_Pain_Assessment_Tool(context);
-			IEnumerable<Observation> e_ = context.Operators.RetrieveByValueSet<Observation>(d_, default);
+			IEnumerable<Observation> e_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 			bool? f_(Observation PainAssessed)
 			{
 				bool? j_()

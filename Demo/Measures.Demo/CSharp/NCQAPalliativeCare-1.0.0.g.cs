@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -60,7 +61,7 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
 	public bool? Palliative_Care_Overlapping_Period(CqlContext context, CqlInterval<CqlDateTime> Period)
 	{
 		CqlValueSet a_ = this.Palliative_Care_Assessment(context);
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation PalliativeAssessment)
 		{
 			DataType ab_ = PalliativeAssessment?.Effective;
@@ -83,7 +84,7 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		bool? e_ = context.Operators.Exists<Observation>(d_);
 		CqlValueSet f_ = this.Palliative_Care_Encounter(context);
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
+		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		IEnumerable<Encounter> h_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, g_);
 		bool? i_(Encounter PalliativeEncounter)
 		{
@@ -108,7 +109,7 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
 		bool? k_ = context.Operators.Exists<Encounter>(j_);
 		bool? l_ = context.Operators.Or(e_, k_);
 		CqlValueSet m_ = this.Palliative_Care_Intervention(context);
-		IEnumerable<Procedure> n_ = context.Operators.RetrieveByValueSet<Procedure>(m_, default);
+		IEnumerable<Procedure> n_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		IEnumerable<Procedure> o_ = NCQAStatus_1_0_0.Instance.Completed_or_Ongoing_Procedure(context, n_);
 		bool? p_(Procedure PalliativeIntervention)
 		{
@@ -134,7 +135,7 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
 		bool? s_ = context.Operators.Or(l_, r_);
 		CqlCode t_ = this.Encounter_for_palliative_care(context);
 		IEnumerable<CqlCode> u_ = context.Operators.ToList<CqlCode>(t_);
-		IEnumerable<Condition> v_ = context.Operators.RetrieveByCodes<Condition>(u_, default);
+		IEnumerable<Condition> v_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, u_, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		IEnumerable<Condition> w_ = NCQAStatus_1_0_0.Instance.Active_Condition(context, v_);
 		bool? x_(Condition PalliativeDiagnosis)
 		{

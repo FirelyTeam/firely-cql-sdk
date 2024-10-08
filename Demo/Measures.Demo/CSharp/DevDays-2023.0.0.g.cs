@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -58,7 +59,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     [CqlDeclaration("Patient")]
 	public Patient Patient(CqlContext context)
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -68,7 +69,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     [CqlDeclaration("Jet engine conditions")]
 	public IEnumerable<Condition> Jet_engine_conditions(CqlContext context)
 	{
-		IEnumerable<Condition> a_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
+		IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		bool? b_(Condition c)
 		{
 			CodeableConcept d_ = c?.Code;
@@ -100,7 +101,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     [CqlDeclaration("Subsequent encounters")]
 	public IEnumerable<Condition> Subsequent_encounters(CqlContext context)
 	{
-		IEnumerable<Condition> a_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
+		IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		bool? b_(Condition c)
 		{
 			CodeableConcept d_ = c?.Code;

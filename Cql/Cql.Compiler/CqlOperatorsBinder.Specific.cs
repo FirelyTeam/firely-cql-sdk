@@ -8,6 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Compiler.Expressions;
@@ -179,7 +180,8 @@ partial class CqlOperatorsBinder
     private MethodCallExpression Retrieve(
         Expression typeExpression,
         Expression valueSetOrCodes,
-        Expression codePropertyExpression)
+        Expression codePropertyExpression,
+        Expression templateId)
     {
         if (typeExpression is not ConstantExpression ce || ce.Type != typeof(Type))
             throw new ArgumentException("First parameter to Retrieve is expected to be a constant Type", nameof(typeExpression));
@@ -198,29 +200,31 @@ partial class CqlOperatorsBinder
             codePropertyExpression = Expression.Call(typeOf, method, Expression.Constant(propName));
         }
 
-        return Retrieve(type, valueSetOrCodes, codePropertyExpression);
+        return Retrieve(type, valueSetOrCodes, codePropertyExpression, templateId);
 
     }
+
 
     protected MethodCallExpression Retrieve(
         Type resourceType,
         Expression codes,
-        Expression codeProperty)
+        Expression codeProperty,
+        Expression templateId)
     {
-        MethodInfo? forType = null;
+        var forType = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.Retrieve))!.MakeGenericMethod(resourceType);
+        Expression codeExpression = NullExpression.ForType<IEnumerable<CqlCode>>();
+        Expression valuesetExpression = NullExpression.ForType<CqlValueSet>();
+
         if (codes.Type == typeof(CqlValueSet))
-        {
-            var method = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.RetrieveByValueSet))!;
-            forType = method.MakeGenericMethod(resourceType);
-        }
+            valuesetExpression = codes;
         else if (_typeResolver.IsListType(codes.Type))
         {
             var elementType = _typeResolver.GetListElementType(codes.Type, true)!;
             if (elementType == typeof(CqlCode))
             {
-                var method = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.RetrieveByCodes))!;
-                forType = method.MakeGenericMethod(resourceType);
+                codeExpression = codes;
             }
+
             // cql-to-elm blindly calls ToList when an expression ref is used
             // for expressions like:
             // [Source : "Definition returning List<Code>"]
@@ -228,16 +232,23 @@ partial class CqlOperatorsBinder
             else if (_typeResolver.IsListType(elementType) && _typeResolver.GetListElementType(elementType) == typeof(CqlCode))
             {
                 // call Flatten.
-                codes = Flatten(codes);
-                var method = typeof(ICqlOperators).GetMethod(nameof(ICqlOperators.RetrieveByCodes))!;
-                forType = method.MakeGenericMethod(resourceType);
+                codeExpression = Flatten(codes);
             }
             else throw new ArgumentException($"Retrieve statements with an ExpressionRef in the terminology position must be list of {nameof(CqlCode)} or a list of lists of {nameof(CqlCode)}.  Instead, the list's element type is {elementType.Name}.", nameof(codes));
         }
         else
             throw new ArgumentException($"Retrieve statements can only accept terminology expressions whose type is {nameof(CqlValueSet)} or {nameof(IEnumerable<CqlCode>)}.  The expression provided has a type of {codes.Type.FullName}", nameof(codes));
 
-        var call = BindToDirectMethod(forType, codes, codeProperty);
+        var constructor = typeof(RetrieveParameters).GetConstructors(BindingFlags.Public | BindingFlags.Instance).Single();
+        var hasFilters = !codeProperty.IsNullConstant() || !codeExpression.IsNullConstant()
+                                                        || !valuesetExpression.IsNullConstant()
+                                                        || !templateId.IsNullConstant();
+
+        Expression createParameters = hasFilters
+                                   ? Expression.New(constructor, codeProperty, valuesetExpression, codeExpression, templateId)
+                                   : NullExpression.ForType<RetrieveParameters>();
+
+        var call = BindToDirectMethod(forType, createParameters);
         return call;
     }
 

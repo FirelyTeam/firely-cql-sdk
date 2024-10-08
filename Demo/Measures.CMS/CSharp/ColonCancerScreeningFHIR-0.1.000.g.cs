@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -81,7 +82,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
     [CqlDeclaration("Patient")]
 	public Patient Patient(CqlContext context)
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -158,7 +159,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 	public IEnumerable<Condition> Malignant_Neoplasm(CqlContext context)
 	{
 		CqlValueSet a_ = this.Malignant_Neoplasm_of_Colon(context);
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> c_ = Status_1_6_000.Instance.Active_Condition(context, b_);
 		bool? d_(Condition ColorectalCancer)
 		{
@@ -180,7 +181,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 	public IEnumerable<Procedure> Total_Colectomy_Performed(CqlContext context)
 	{
 		CqlValueSet a_ = this.Total_Colectomy(context);
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_ = Status_1_6_000.Instance.Completed_Procedure(context, b_);
 		bool? d_(Procedure Colectomy)
 		{
@@ -225,7 +226,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 	public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed(CqlContext context)
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_ = Status_1_6_000.Instance.Final_Lab_Observation(context, b_);
 		bool? d_(Observation FecalOccultResult)
 		{
@@ -301,7 +302,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 	public IEnumerable<Observation> Stool_DNA_with_FIT_Test_Performed(CqlContext context)
 	{
 		CqlValueSet a_ = this.sDNA_FIT_Test(context);
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_ = Status_1_6_000.Instance.Final_Lab_Observation(context, b_);
 		bool? d_(Observation sDNATest)
 		{
@@ -382,7 +383,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 	public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed(CqlContext context)
 	{
 		CqlValueSet a_ = this.Flexible_Sigmoidoscopy(context);
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_ = Status_1_6_000.Instance.Completed_Procedure(context, b_);
 		bool? d_(Procedure FlexibleSigmoidoscopy)
 		{
@@ -410,7 +411,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 	public IEnumerable<Observation> CT_Colonography_Performed(CqlContext context)
 	{
 		CqlValueSet a_ = this.CT_Colonography(context);
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_ = Status_1_6_000.Instance.Final_Observation(context, b_);
 		bool? d_(Observation Colonography)
 		{
@@ -438,7 +439,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 	public IEnumerable<Procedure> Colonoscopy_Performed(CqlContext context)
 	{
 		CqlValueSet a_ = this.Colonoscopy(context);
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_ = Status_1_6_000.Instance.Completed_Procedure(context, b_);
 		bool? d_(Procedure Colonoscopy)
 		{

@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -105,7 +106,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
     [CqlDeclaration("Patient")]
 	public Patient Patient(CqlContext context)
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -128,7 +129,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 		bool? b_(Encounter IschemicStrokeEncounter)
 		{
 			CqlValueSet l_ = this.Atrial_Ablation(context);
-			IEnumerable<Procedure> m_ = context.Operators.RetrieveByValueSet<Procedure>(l_, default);
+			IEnumerable<Procedure> m_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 			bool? n_(Procedure AtrialAblationProcedure)
 			{
 				Code<EventStatus> q_ = AtrialAblationProcedure?.StatusElement;
@@ -156,7 +157,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 		IEnumerable<Encounter> e_(Encounter IschemicStrokeEncounter)
 		{
 			CqlValueSet ad_ = this.History_of_Atrial_Ablation(context);
-			IEnumerable<Condition> ae_ = context.Operators.RetrieveByValueSet<Condition>(ad_, default);
+			IEnumerable<Condition> ae_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ad_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			bool? af_(Condition AtrialAblationDiagnosis)
 			{
 				CodeableConcept aj_ = AtrialAblationDiagnosis?.VerificationStatus;
@@ -191,7 +192,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 		IEnumerable<Encounter> i_(Encounter IschemicStrokeEncounter)
 		{
 			CqlValueSet bb_ = this.History_of_Atrial_Ablation(context);
-			IEnumerable<Observation> bc_ = context.Operators.RetrieveByValueSet<Observation>(bb_, default);
+			IEnumerable<Observation> bc_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, bb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 			bool? bd_(Observation AtrialAblationObservation)
 			{
 				Code<ObservationStatus> bh_ = AtrialAblationObservation?.StatusElement;
@@ -286,7 +287,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 		IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter)
 		{
 			CqlValueSet h_ = this.Atrial_Fibrillation_or_Flutter(context);
-			IEnumerable<Condition> i_ = context.Operators.RetrieveByValueSet<Condition>(h_, default);
+			IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			bool? j_(Condition AtrialFibrillationFlutter)
 			{
 				CodeableConcept n_ = AtrialFibrillationFlutter?.VerificationStatus;
@@ -439,8 +440,8 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 		IEnumerable<Encounter> b_(Encounter Encounter)
 		{
 			CqlValueSet d_ = this.Anticoagulant_Therapy(context);
-			IEnumerable<MedicationRequest> e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, default);
-			IEnumerable<MedicationRequest> g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, default);
+			IEnumerable<MedicationRequest> e_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+			IEnumerable<MedicationRequest> g_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 			IEnumerable<MedicationRequest> h_ = context.Operators.Union<MedicationRequest>(e_, g_);
 			bool? i_(MedicationRequest DischargeAnticoagulant)
 			{
@@ -499,7 +500,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 	public IEnumerable<MedicationRequest> Documented_Reason_for_Not_Giving_Anticoagulant_at_Discharge(CqlContext context)
 	{
 		CqlValueSet a_ = this.Anticoagulant_Therapy(context);
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
+		IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-mednotrequested"));
 		bool? c_(MedicationRequest NoAnticoagulant)
 		{
 			List<CodeableConcept> e_ = NoAnticoagulant?.ReasonCode;

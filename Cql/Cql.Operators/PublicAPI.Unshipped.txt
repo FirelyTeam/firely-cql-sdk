@@ -2,8 +2,7 @@
 Hl7.Cql.Operators.CompositeDataSource
 Hl7.Cql.Operators.CompositeDataSource.CompositeDataSource(params Hl7.Cql.Operators.IDataSource![]! sources) -> void
 Hl7.Cql.Operators.CompositeDataSource.DataSources.get -> Hl7.Cql.Operators.IDataSource![]!
-Hl7.Cql.Operators.CompositeDataSource.RetrieveByCodes<T>(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode?>? codes = null, System.Reflection.PropertyInfo? codeProperty = null) -> System.Collections.Generic.IEnumerable<T!>!
-Hl7.Cql.Operators.CompositeDataSource.RetrieveByValueSet<T>(Hl7.Cql.Primitives.CqlValueSet? valueSet = null, System.Reflection.PropertyInfo? codeProperty = null) -> System.Collections.Generic.IEnumerable<T!>!
+Hl7.Cql.Operators.CompositeDataSource.Retrieve<T>(Hl7.Cql.Operators.RetrieveParameters? parameters) -> System.Collections.Generic.IEnumerable<T!>!
 Hl7.Cql.Operators.ICqlOperators
 Hl7.Cql.Operators.ICqlOperators.Abs(decimal? argument) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.Abs(Hl7.Cql.Primitives.CqlQuantity? argument) -> Hl7.Cql.Primitives.CqlQuantity?
@@ -399,8 +398,7 @@ Hl7.Cql.Operators.ICqlOperators.Product(System.Collections.Generic.IEnumerable<l
 Hl7.Cql.Operators.ICqlOperators.Quantity(decimal? value, string? unit) -> Hl7.Cql.Primitives.CqlQuantity?
 Hl7.Cql.Operators.ICqlOperators.ReplaceMatches(string! source, string! pattern, string! substitution) -> string?
 Hl7.Cql.Operators.ICqlOperators.ResolveValueSet(Hl7.Cql.Primitives.CqlValueSet! valueSet) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>!
-Hl7.Cql.Operators.ICqlOperators.RetrieveByCodes<T>(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode?>? codes = null, System.Reflection.PropertyInfo? codeProperty = null) -> System.Collections.Generic.IEnumerable<T!>!
-Hl7.Cql.Operators.ICqlOperators.RetrieveByValueSet<T>(Hl7.Cql.Primitives.CqlValueSet? valueSet = null, System.Reflection.PropertyInfo? codeProperty = null) -> System.Collections.Generic.IEnumerable<T!>!
+Hl7.Cql.Operators.ICqlOperators.Retrieve<T>(Hl7.Cql.Operators.RetrieveParameters? parameters) -> System.Collections.Generic.IEnumerable<T!>!
 Hl7.Cql.Operators.ICqlOperators.Round(decimal? argument, int? precision) -> decimal?
 Hl7.Cql.Operators.ICqlOperators.SameAs(Hl7.Cql.Primitives.CqlDate? left, Hl7.Cql.Primitives.CqlDate? right, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.SameAs(Hl7.Cql.Primitives.CqlDateTime? left, Hl7.Cql.Primitives.CqlDateTime? right, string? precision) -> bool?
@@ -504,10 +502,30 @@ Hl7.Cql.Operators.ICqlOperators.Width(Hl7.Cql.Primitives.CqlInterval<long?>? thi
 Hl7.Cql.Operators.ICqlOperators.Xor(bool? left, bool? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Xor(System.Lazy<bool?>! left, System.Lazy<bool?>! right) -> bool?
 Hl7.Cql.Operators.IDataSource
-Hl7.Cql.Operators.IDataSource.RetrieveByCodes<T>(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode?>? codes = null, System.Reflection.PropertyInfo? codeProperty = null) -> System.Collections.Generic.IEnumerable<T!>!
-Hl7.Cql.Operators.IDataSource.RetrieveByValueSet<T>(Hl7.Cql.Primitives.CqlValueSet? valueSet = null, System.Reflection.PropertyInfo? codeProperty = null) -> System.Collections.Generic.IEnumerable<T!>!
+Hl7.Cql.Operators.IDataSource.Retrieve<T>(Hl7.Cql.Operators.RetrieveParameters? parameters) -> System.Collections.Generic.IEnumerable<T!>!
 Hl7.Cql.Operators.MessageEventArgs
 Hl7.Cql.Operators.MessageEventArgs.Code.get -> string?
 Hl7.Cql.Operators.MessageEventArgs.Message.get -> string?
 Hl7.Cql.Operators.MessageEventArgs.Severity.get -> string?
 Hl7.Cql.Operators.MessageEventArgs.Source.get -> object?
+Hl7.Cql.Operators.RetrieveParameters
+Hl7.Cql.Operators.RetrieveParameters.CodeProperty.get -> System.Reflection.PropertyInfo?
+Hl7.Cql.Operators.RetrieveParameters.CodeProperty.init -> void
+Hl7.Cql.Operators.RetrieveParameters.Codes.get -> System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode?>?
+Hl7.Cql.Operators.RetrieveParameters.Codes.init -> void
+Hl7.Cql.Operators.RetrieveParameters.Deconstruct(out System.Reflection.PropertyInfo? CodeProperty, out Hl7.Cql.Primitives.CqlValueSet? ValueSet, out System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode?>? Codes, out string? TemplateId) -> void
+Hl7.Cql.Operators.RetrieveParameters.RetrieveParameters(Hl7.Cql.Operators.RetrieveParameters! original) -> void
+Hl7.Cql.Operators.RetrieveParameters.RetrieveParameters(System.Reflection.PropertyInfo? CodeProperty, Hl7.Cql.Primitives.CqlValueSet? ValueSet, System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode?>? Codes, string? TemplateId) -> void
+Hl7.Cql.Operators.RetrieveParameters.TemplateId.get -> string?
+Hl7.Cql.Operators.RetrieveParameters.TemplateId.init -> void
+Hl7.Cql.Operators.RetrieveParameters.ValueSet.get -> Hl7.Cql.Primitives.CqlValueSet?
+Hl7.Cql.Operators.RetrieveParameters.ValueSet.init -> void
+override Hl7.Cql.Operators.RetrieveParameters.Equals(object? obj) -> bool
+override Hl7.Cql.Operators.RetrieveParameters.GetHashCode() -> int
+override Hl7.Cql.Operators.RetrieveParameters.ToString() -> string!
+static Hl7.Cql.Operators.RetrieveParameters.operator !=(Hl7.Cql.Operators.RetrieveParameters? left, Hl7.Cql.Operators.RetrieveParameters? right) -> bool
+static Hl7.Cql.Operators.RetrieveParameters.operator ==(Hl7.Cql.Operators.RetrieveParameters? left, Hl7.Cql.Operators.RetrieveParameters? right) -> bool
+virtual Hl7.Cql.Operators.RetrieveParameters.<Clone>$() -> Hl7.Cql.Operators.RetrieveParameters!
+virtual Hl7.Cql.Operators.RetrieveParameters.EqualityContract.get -> System.Type!
+virtual Hl7.Cql.Operators.RetrieveParameters.Equals(Hl7.Cql.Operators.RetrieveParameters? other) -> bool
+virtual Hl7.Cql.Operators.RetrieveParameters.PrintMembers(System.Text.StringBuilder! builder) -> bool

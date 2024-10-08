@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -299,7 +300,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
     [CqlDeclaration("Patient")]
 	public Patient Patient(CqlContext context)
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -360,11 +361,11 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	public bool? Has_Qualifying_Encounter(CqlContext context)
 	{
 		CqlValueSet a_ = this.Outpatient_Consultation(context);
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet c_ = this.Office_Visit(context);
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
-		IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(default, default);
+		IEnumerable<Encounter> f_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		bool? g_(Encounter E)
 		{
 			List<CodeableConcept> t_ = E?.Type;
@@ -390,11 +391,11 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 		};
 		IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
 		CqlValueSet i_ = this.Telephone_Visits(context);
-		IEnumerable<Encounter> j_ = context.Operators.RetrieveByValueSet<Encounter>(i_, default);
+		IEnumerable<Encounter> j_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(h_, j_);
 		IEnumerable<Encounter> l_ = context.Operators.Union<Encounter>(e_, k_);
 		CqlValueSet m_ = this.Online_Assessments(context);
-		IEnumerable<Encounter> n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, default);
+		IEnumerable<Encounter> n_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> o_ = context.Operators.Union<Encounter>(l_, n_);
 		IEnumerable<Encounter> p_ = Status_1_6_000.Instance.isEncounterPerformed(context, o_);
 		bool? q_(Encounter ValidEncounters)
@@ -449,7 +450,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	public IEnumerable<Procedure> Total_Hip_Arthroplasty_Procedure(CqlContext context)
 	{
 		CqlValueSet a_ = this.Primary_THA_Procedure(context);
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_ = Status_1_6_000.Instance.isProcedurePerformed(context, b_);
 		bool? d_(Procedure THAProcedure)
 		{
@@ -506,7 +507,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	{
 		CqlCode a_ = this.Severe_cognitive_impairment__finding_(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Condition> c_ = context.Operators.RetrieveByCodes<Condition>(b_, default);
+		IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		bool? d_(Condition Dementia)
 		{
 			CqlInterval<CqlDateTime> g_ = QICoreCommon_2_0_000.Instance.prevalenceInterval(context, Dementia);
@@ -529,7 +530,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 		IEnumerable<Procedure> b_(Procedure THAProcedure)
 		{
 			CqlValueSet e_ = this.Lower_Body_Fractures_Excluding_Ankle_and_Foot(context);
-			IEnumerable<Condition> f_ = context.Operators.RetrieveByValueSet<Condition>(e_, default);
+			IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			bool? g_(Condition LowerBodyFracture)
 			{
 				CqlInterval<CqlDateTime> k_ = QICoreCommon_2_0_000.Instance.prevalenceInterval(context, LowerBodyFracture);
@@ -571,7 +572,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	public bool? Has_Partial_Hip_Arthroplasty_Procedure(CqlContext context)
 	{
 		CqlValueSet a_ = this.Partial_Arthroplasty_of_Hip(context);
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_ = Status_1_6_000.Instance.isProcedurePerformed(context, b_);
 		IEnumerable<Procedure> d_(Procedure PartialTHAProcedure)
 		{
@@ -609,7 +610,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 		IEnumerable<Procedure> b_(Procedure THAProcedure)
 		{
 			CqlValueSet e_ = this.Removal__Revision_and_Supplement_Procedures_of_the_Lower_Body_and_Spine(context);
-			IEnumerable<Procedure> f_ = context.Operators.RetrieveByValueSet<Procedure>(e_, default);
+			IEnumerable<Procedure> f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 			IEnumerable<Procedure> g_ = Status_1_6_000.Instance.isProcedurePerformed(context, f_);
 			bool? h_(Procedure RevisionTHAProcedure)
 			{
@@ -641,7 +642,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	public bool? Has_Malignant_Neoplasm_of_Lower_and_Unspecified_Limbs(CqlContext context)
 	{
 		CqlValueSet a_ = this.Malignant_Neoplasms_of_Lower_and_Unspecified_Limbs(context);
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> c_(Condition MalignantNeoplasm)
 		{
 			IEnumerable<Procedure> f_ = this.Total_Hip_Arthroplasty_Procedure(context);
@@ -673,7 +674,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	public bool? Has_Mechanical_Complication(CqlContext context)
 	{
 		CqlValueSet a_ = this.Mechanical_Complications_Excluding_Upper_Body(context);
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> c_(Condition MechanicalComplications)
 		{
 			IEnumerable<Procedure> f_ = this.Total_Hip_Arthroplasty_Procedure(context);
@@ -708,7 +709,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 		IEnumerable<Procedure> b_(Procedure THAProcedure)
 		{
 			CqlValueSet e_ = this.Primary_THA_Procedure(context);
-			IEnumerable<Procedure> f_ = context.Operators.RetrieveByValueSet<Procedure>(e_, default);
+			IEnumerable<Procedure> f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 			IEnumerable<Procedure> g_ = Status_1_6_000.Instance.isProcedurePerformed(context, f_);
 			bool? h_(Procedure ElectiveTHAProcedure)
 			{
@@ -815,23 +816,23 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	{
 		CqlCode a_ = this.Quality_of_life_score__HOOS_(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> d_ = Status_1_6_000.Instance.isAssessmentPerformed(context, c_);
 		CqlCode e_ = this.Sport_recreation_score__HOOS_(context);
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default);
+		IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> h_ = Status_1_6_000.Instance.isAssessmentPerformed(context, g_);
 		CqlCode i_ = this.Activities_of_daily_living_score__HOOS_(context);
 		IEnumerable<CqlCode> j_ = context.Operators.ToList<CqlCode>(i_);
-		IEnumerable<Observation> k_ = context.Operators.RetrieveByCodes<Observation>(j_, default);
+		IEnumerable<Observation> k_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, j_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> l_ = Status_1_6_000.Instance.isAssessmentPerformed(context, k_);
 		CqlCode m_ = this.Symptoms_score__HOOS_(context);
 		IEnumerable<CqlCode> n_ = context.Operators.ToList<CqlCode>(m_);
-		IEnumerable<Observation> o_ = context.Operators.RetrieveByCodes<Observation>(n_, default);
+		IEnumerable<Observation> o_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, n_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> p_ = Status_1_6_000.Instance.isAssessmentPerformed(context, o_);
 		CqlCode q_ = this.Pain_score__HOOS_(context);
 		IEnumerable<CqlCode> r_ = context.Operators.ToList<CqlCode>(q_);
-		IEnumerable<Observation> s_ = context.Operators.RetrieveByCodes<Observation>(r_, default);
+		IEnumerable<Observation> s_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, r_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> t_ = Status_1_6_000.Instance.isAssessmentPerformed(context, s_);
 		IEnumerable<ValueTuple<Observation, Observation, Observation, Observation, Observation>> u_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_);
 		(Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)? v_(ValueTuple<Observation, Observation, Observation, Observation, Observation> _valueTuple)
@@ -1042,7 +1043,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	{
 		CqlCode a_ = this.Total_interval_score__HOOSJR_(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		bool? d_(Observation HOOSJr)
 		{
 			DataType h_ = HOOSJr?.Value;
@@ -1155,10 +1156,10 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	{
 		CqlCode a_ = this.PROMIS_10_Global_Mental_Health__GMH__score_T_score(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		CqlCode d_ = this.PROMIS_10_Global_Physical_Health__GPH__score_T_score(context);
 		IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-		IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, default);
+		IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<ValueTuple<Observation, Observation>> g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
 		(Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? h_(ValueTuple<Observation, Observation> _valueTuple)
 		{
@@ -1305,10 +1306,10 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	{
 		CqlCode a_ = this.VR_12_Mental_component_summary__MCS__score___oblique_method_T_score(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		CqlCode d_ = this.VR_12_Physical_component_summary__PCS__score___oblique_method_T_score(context);
 		IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-		IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, default);
+		IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<ValueTuple<Observation, Observation>> g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
 		(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? h_(ValueTuple<Observation, Observation> _valueTuple)
 		{
@@ -1455,10 +1456,10 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 	{
 		CqlCode a_ = this.VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		CqlCode d_ = this.VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score(context);
 		IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-		IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, default);
+		IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<ValueTuple<Observation, Observation>> g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
 		(Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? h_(ValueTuple<Observation, Observation> _valueTuple)
 		{

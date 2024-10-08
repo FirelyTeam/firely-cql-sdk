@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -137,7 +138,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000 : ILibrary, 
     [CqlDeclaration("Patient")]
 	public Patient Patient(CqlContext context)
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -184,7 +185,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000 : ILibrary, 
 	public IEnumerable<Condition> Prostate_Cancer_Diagnosis(CqlContext context)
 	{
 		CqlValueSet a_ = this.Prostate_Cancer(context);
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		bool? c_(Condition ProstateCancer)
 		{
 			CqlInterval<CqlDateTime> e_ = QICoreCommon_2_0_000.Instance.prevalenceInterval(context, ProstateCancer);
@@ -209,7 +210,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000 : ILibrary, 
 	public bool? Has_Diagnosis_of_Pain_related_to_Prostate_Cancer(CqlContext context)
 	{
 		CqlValueSet a_ = this.Pain_Warranting_Further_Investigation_for_Prostate_Cancer(context);
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> c_(Condition ProstateCancerPain)
 		{
 			IEnumerable<Condition> f_ = this.Prostate_Cancer_Diagnosis(context);
@@ -247,7 +248,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000 : ILibrary, 
 	public bool? Has_Salvage_Therapy_Performed_after_Prostate_Cancer_Diagnosis(CqlContext context)
 	{
 		CqlValueSet a_ = this.Salvage_Therapy(context);
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_(Procedure SalvageTherapy)
 		{
 			IEnumerable<Condition> f_ = this.Prostate_Cancer_Diagnosis(context);
@@ -286,7 +287,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000 : ILibrary, 
 	public IEnumerable<Observation> Bone_Scan_Study_Performed(CqlContext context)
 	{
 		CqlValueSet a_ = this.Bone_Scan(context);
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_(Observation BoneScan)
 		{
 			IEnumerable<Condition> e_ = this.Prostate_Cancer_Diagnosis(context);
@@ -353,7 +354,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000 : ILibrary, 
 	public Procedure First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(CqlContext context)
 	{
 		CqlValueSet a_ = this.Prostate_Cancer_Treatment(context);
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		bool? c_(Procedure ProstateCancerTreatment)
 		{
 			DataType h_ = ProstateCancerTreatment?.Performed;
@@ -402,7 +403,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000 : ILibrary, 
 	{
 		CqlCode a_ = this.Gleason_score_in_Specimen_Qualitative(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> d_(Observation GleasonScore)
 		{
 			Procedure m_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context);
@@ -476,7 +477,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000 : ILibrary, 
 	{
 		CqlCode a_ = this.Tumor_staging__tumor_staging_(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> d_(Observation ProstateCancerStaging)
 		{
 			Procedure m_ = this.First_Prostate_Cancer_Treatment_during_day_of_Measurement_Period(context);
@@ -577,7 +578,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000 : ILibrary, 
 	public bool? Most_Recent_PSA_Test_Result_is_Low(CqlContext context)
 	{
 		CqlValueSet a_ = this.Prostate_Specific_Antigen_Test(context);
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_(Observation PSATest)
 		{
 			Observation l_ = this.Most_Recent_Prostate_Cancer_Staging_Tumor_Size_T1a_to_T2a(context);

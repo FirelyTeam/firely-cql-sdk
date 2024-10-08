@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -124,7 +125,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
     [CqlDeclaration("Patient")]
 	public Patient Patient(CqlContext context)
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -171,7 +172,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 	public IEnumerable<Encounter> Telehealth_Services(CqlContext context)
 	{
 		CqlValueSet a_ = this.Telephone_Visits(context);
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		bool? c_(Encounter TelehealthEncounter)
 		{
 			Code<Encounter.EncounterStatus> e_ = TelehealthEncounter?.StatusElement;
@@ -210,7 +211,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 		bool? n_ = context.Operators.Exists<Encounter>(m_);
 		bool? o_ = context.Operators.And(j_, n_);
 		CqlValueSet p_ = this.Diabetes(context);
-		IEnumerable<Condition> q_ = context.Operators.RetrieveByValueSet<Condition>(p_, default);
+		IEnumerable<Condition> q_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		bool? r_(Condition Diabetes)
 		{
 			CqlInterval<CqlDateTime> v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, Diabetes);
@@ -240,7 +241,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 	public Observation Most_Recent_HbA1c(CqlContext context)
 	{
 		CqlValueSet a_ = this.HbA1c_Laboratory_Test(context);
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation RecentHbA1c)
 		{
 			Code<ObservationStatus> h_ = RecentHbA1c?.StatusElement;
@@ -304,7 +305,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_0_015 : ILibra
 	public bool? Has_No_Record_Of_HbA1c(CqlContext context)
 	{
 		CqlValueSet a_ = this.HbA1c_Laboratory_Test(context);
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation NoHbA1c)
 		{
 			Code<ObservationStatus> g_ = NoHbA1c?.StatusElement;

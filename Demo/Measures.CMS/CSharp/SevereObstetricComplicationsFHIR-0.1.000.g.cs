@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -341,7 +342,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     [CqlDeclaration("Patient")]
 	public Patient Patient(CqlContext context)
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -519,7 +520,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 			IEnumerable<Encounter.DiagnosisComponent> f_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)d_, e_);
 			bool? g_ = context.Operators.Exists<Encounter.DiagnosisComponent>(f_);
 			CqlValueSet h_ = this.Severe_Maternal_Morbidity_Procedures(context);
-			IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
+			IEnumerable<Procedure> i_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 			bool? j_(Procedure EncounterSMMProcedures)
 			{
 				Code<EventStatus> ah_ = EncounterSMMProcedures?.StatusElement;
@@ -575,7 +576,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 		IEnumerable<Encounter> b_(Encounter TwentyWeeksPlusEncounter)
 		{
 			CqlValueSet d_ = this.Blood_Transfusion(context);
-			IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default);
+			IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 			bool? f_(Procedure BloodTransfusion)
 			{
 				Code<EventStatus> j_ = BloodTransfusion?.StatusElement;
@@ -657,7 +658,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 			IEnumerable<Condition> j_ = context.Operators.Where<Condition>(d_, i_);
 			bool? k_ = context.Operators.Exists<Condition>(j_);
 			CqlValueSet l_ = this.Respiratory_Support_Procedures_Related_to_COVID_19(context);
-			IEnumerable<Procedure> m_ = context.Operators.RetrieveByValueSet<Procedure>(l_, default);
+			IEnumerable<Procedure> m_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 			bool? n_(Procedure COVIDRespiratoryProcedure)
 			{
 				Code<EventStatus> aa_ = COVIDRespiratoryProcedure?.StatusElement;
@@ -1346,7 +1347,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 			Id d_ = TwentyWeeksPlusEncounter?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Hematocrit_lab_test(context);
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
+			IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
 			bool? h_(Observation Hematocrit)
 			{
 				Instant z_ = Hematocrit?.IssuedElement;
@@ -1390,7 +1391,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.Instance.ToValue(context, m_);
-			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
+			IEnumerable<Observation> p_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
 			bool? q_(Observation Hematocrit)
 			{
 				Instant ax_ = Hematocrit?.IssuedElement;
@@ -1454,7 +1455,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 			Id d_ = TwentyWeeksPlusEncounter?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.White_blood_cells_count_lab_test(context);
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
+			IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
 			bool? h_(Observation WBC)
 			{
 				Instant z_ = WBC?.IssuedElement;
@@ -1498,7 +1499,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.Instance.ToValue(context, m_);
-			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
+			IEnumerable<Observation> p_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
 			bool? q_(Observation WBC)
 			{
 				Instant ax_ = WBC?.IssuedElement;
@@ -1561,7 +1562,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 		{
 			Id d_ = TwentyWeeksPlusEncounter?.IdElement;
 			string e_ = d_?.Value;
-			IEnumerable<Observation> f_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
+			IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/heartrate"));
 			bool? g_(Observation HeartRate)
 			{
 				DataType x_ = HeartRate?.Effective;
@@ -1657,7 +1658,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 		{
 			Id d_ = TwentyWeeksPlusEncounter?.IdElement;
 			string e_ = d_?.Value;
-			IEnumerable<Observation> f_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
+			IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bp"));
 			bool? g_(Observation BP)
 			{
 				DataType aa_ = BP?.Effective;
