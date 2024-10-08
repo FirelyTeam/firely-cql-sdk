@@ -208,14 +208,15 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var hasContext = false;
             var node = dependencyGraph.Nodes[libraryName];
-            if (node.Properties != null && node.Properties.ContainsKey("Library"))
+            if (node.Properties != null && node.Properties.TryGetValue("Library", out var nodeLibrary))
             {
-                hasContext = ((Elm.Library)node.Properties["Library"])?.contexts != null;
+                hasContext = ((Elm.Library)nodeLibrary)?.contexts != null;
             }
 
             // Class
             {
                 // singleton for libraries, constructors for measures
+                // files that have a context defined will get the constructor with lazy for caching
                 if (!hasContext)
                 {
                     writer.WriteLine(indentLevel, $"public static {className} Instance {{ get; }}  = new();");
@@ -435,7 +436,14 @@ namespace Hl7.Cql.CodeGeneration.NET
 
                 if (useLazy)
                 {
-                    writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, valueFunc, methodName!, "public"));
+                    // add null handler because, in some rare cases the order of the Lazy matters and a null exception is thrown in the constructor
+                    // but having it as lazy?.Value handles this without degrading performance or affecting result of execution 
+                    var valueFunction =
+                        expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, valueFunc, methodName!,
+                            "public");
+
+                    valueFunction = valueFunction.Replace(".Value", "?.Value");
+                    writer.Write(valueFunction);
                 }
                 else
                 {
@@ -447,7 +455,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
                 WriteTags(writer, indentLevel, tags);
                 writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
-                //      writer.WriteLine();
             }
         }
 
