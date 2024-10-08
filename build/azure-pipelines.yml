@@ -35,13 +35,25 @@ stages:
         - checkout: self
           fetchDepth: 0 
         - script: |
-            echo "##[group]Checking for changes outside of /docs/"
-            if git diff --name-only $(Build.SourceVersion)^ $(Build.SourceBranch) | grep -v '^docs/'; then
+            echo "##[group]Checking for changes outside docs folder"
+            # Check if we are in a PR build or normal branch build
+            if [ "$(System.PullRequest.SourceBranch)" != "" ]; then
+              # PR build: compare source branch with target branch (e.g., main)
+              git fetch origin $(System.PullRequest.TargetBranch)
+              CHANGED_FILES=$(git diff --name-only origin/$(System.PullRequest.TargetBranch) $(System.PullRequest.SourceBranch))
+            else
+              # Branch build: compare current commit with previous commit
+              git fetch origin $(Build.SourceBranch) --depth=2
+              CHANGED_FILES=$(git diff --name-only HEAD^1 HEAD)
+            fi
+
+            # Check if any files outside the /docs/ folder changed
+            if echo "$CHANGED_FILES" | grep -v '^docs/'; then
               echo "##[endgroup]"
-              echo "##[command]echo ##vso[task.setvariable variable=skipBuildStage]false"
+              echo "##vso[task.setvariable variable=skipBuildStage]false"
             else
               echo "##[endgroup]"
-              echo "##[command]echo ##vso[task.setvariable variable=skipBuildStage]true"
+              echo "##vso[task.setvariable variable=skipBuildStage]true"
             fi
           displayName: 'Check if non-docs files were changed'
         - powershell: |
