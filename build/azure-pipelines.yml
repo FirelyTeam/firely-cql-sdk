@@ -29,6 +29,8 @@ stages:
   jobs:
     - job: CheckDocChanges
       displayName: 'Check for changes outside docs folder'
+      pool: 
+        vmImage: linux-latest
       steps:
         - checkout: self
         - script: |
