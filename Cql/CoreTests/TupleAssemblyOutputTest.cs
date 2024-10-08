@@ -28,7 +28,7 @@ public class TupleAssemblyOutputTest
         Assert.IsNotNull(value);
         Assert.IsInstanceOfType(value, typeof(ValueTuple<string, string>));
         var valueTuple = (ValueTuple<string, string>)value;
-        Assert.AreEqual("success", valueTuple.status); //doesn't compile because the compiler replaces valueTuple.status with valueTuple.Item1
+        //Assert.AreEqual("success", valueTuple.status); //doesn't compile because the compiler replaces valueTuple.status with valueTuple.Item1
         Assert.IsNotNull(valueTuple.GetType().GetField("status")); // fails, because the compiler replaced all custom names with default names, the custom names are not part of the runtime type information
         Assert.IsNotNull(valueTuple.GetType().GetField("result")); // fails, because the compiler replaced all custom names with default names, the custom names are not part of the runtime type information
     }
