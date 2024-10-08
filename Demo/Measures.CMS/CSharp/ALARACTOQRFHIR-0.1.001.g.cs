@@ -21,7 +21,7 @@ public partial class ALARACTOQRFHIR_0_1_001 : ILibrary, ISingleton<ALARACTOQRFHI
     #region Library Members
     public string Name => "ALARACTOQRFHIR";
     public string Version => "0.1.001";
-    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, CQMCommon_2_0_000.Instance, QICoreCommon_2_0_000.Instance, SupplementalDataElements_3_4_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, CQMCommon_2_0_000.Instance, QICoreCommon_2_0_000.Instance, SupplementalDataElements_3_4_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Encounter Inpatient")]

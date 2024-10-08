@@ -21,7 +21,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     #region Library Members
     public string Name => "FHIRConversionTest";
     public string Version => "2023.0.0";
-    public ILibrary Dependencies => [FHIRHelpers_4_0_1.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
     #endregion Library Members
 	public Account AccountResource(CqlContext context, Account arg)
 	{

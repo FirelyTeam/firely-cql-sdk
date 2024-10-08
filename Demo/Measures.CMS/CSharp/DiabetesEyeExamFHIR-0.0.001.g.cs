@@ -21,7 +21,7 @@ public partial class DiabetesEyeExamFHIR_0_0_001 : ILibrary, ISingleton<Diabetes
     #region Library Members
     public string Name => "DiabetesEyeExamFHIR";
     public string Version => "0.0.001";
-    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance, CQMCommon_2_0_000.Instance, Hospice_6_9_000.Instance, Status_1_6_000.Instance, PalliativeCare_1_9_000.Instance, AdvancedIllnessandFrailty_1_8_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance, CQMCommon_2_0_000.Instance, Hospice_6_9_000.Instance, Status_1_6_000.Instance, PalliativeCare_1_9_000.Instance, AdvancedIllnessandFrailty_1_8_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Annual Wellness Visit")]

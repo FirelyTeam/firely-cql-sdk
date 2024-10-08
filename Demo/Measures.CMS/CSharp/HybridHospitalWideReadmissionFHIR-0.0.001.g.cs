@@ -21,7 +21,7 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
     #region Library Members
     public string Name => "HybridHospitalWideReadmissionFHIR";
     public string Version => "0.0.001";
-    public ILibrary Dependencies => [CQMCommon_2_0_000.Instance, FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance]
+    public ILibrary[] Dependencies => [CQMCommon_2_0_000.Instance, FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Bicarbonate lab test")]

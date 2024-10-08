@@ -21,7 +21,7 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
     #region Library Members
     public string Name => "CqlBooleanTest";
     public string Version => "1.0.000";
-    public ILibrary Dependencies => []
+    public ILibrary[] Dependencies => [];
     #endregion Library Members
 
     [CqlDeclaration("SomethingTrueEqualsTrue")]

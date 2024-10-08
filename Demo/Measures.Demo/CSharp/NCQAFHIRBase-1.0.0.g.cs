@@ -21,7 +21,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     #region Library Members
     public string Name => "NCQAFHIRBase";
     public string Version => "1.0.0";
-    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Patient")]

@@ -21,7 +21,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     #region Library Members
     public string Name => "FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR";
     public string Version => "0.1.000";
-    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance, CQMCommon_2_0_000.Instance, Hospice_6_9_000.Instance, CumulativeMedicationDuration_4_0_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance, CQMCommon_2_0_000.Instance, Hospice_6_9_000.Instance, CumulativeMedicationDuration_4_0_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Ambulatory")]

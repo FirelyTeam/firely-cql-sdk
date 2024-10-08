@@ -21,7 +21,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
     #region Library Members
     public string Name => "CQMCommon";
     public string Version => "2.0.000";
-    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Emergency Department Visit")]

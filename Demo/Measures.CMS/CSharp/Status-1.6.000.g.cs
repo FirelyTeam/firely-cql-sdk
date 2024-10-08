@@ -21,7 +21,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     #region Library Members
     public string Name => "Status";
     public string Version => "1.6.000";
-    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("laboratory")]

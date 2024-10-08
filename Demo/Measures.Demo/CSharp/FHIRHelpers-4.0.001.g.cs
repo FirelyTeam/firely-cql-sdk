@@ -21,7 +21,7 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
     #region Library Members
     public string Name => "FHIRHelpers";
     public string Version => "4.0.001";
-    public ILibrary Dependencies => []
+    public ILibrary[] Dependencies => [];
     #endregion Library Members
 
     [CqlDeclaration("Patient")]

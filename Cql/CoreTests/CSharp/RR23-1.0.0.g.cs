@@ -21,7 +21,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     #region Library Members
     public string Name => "RR23";
     public string Version => "1.0.0";
-    public ILibrary Dependencies => [FHIRHelpers_4_0_1.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Injury due to falling rock")]

@@ -21,7 +21,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000 : ILibrary, ISingl
     #region Library Members
     public string Name => "AppropriateTreatmentforSTEMIFHIR";
     public string Version => "1.0.000";
-    public ILibrary Dependencies => [SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance, FHIRHelpers_4_3_000.Instance, CQMCommon_2_0_000.Instance]
+    public ILibrary[] Dependencies => [SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance, FHIRHelpers_4_3_000.Instance, CQMCommon_2_0_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Active Bleeding Excluding Menses or Bleeding Diathesis")]

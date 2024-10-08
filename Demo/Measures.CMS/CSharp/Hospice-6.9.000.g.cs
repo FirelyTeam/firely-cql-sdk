@@ -21,7 +21,7 @@ public partial class Hospice_6_9_000 : ILibrary, ISingleton<Hospice_6_9_000>
     #region Library Members
     public string Name => "Hospice";
     public string Version => "6.9.000";
-    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, Status_1_6_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, Status_1_6_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Encounter Inpatient")]

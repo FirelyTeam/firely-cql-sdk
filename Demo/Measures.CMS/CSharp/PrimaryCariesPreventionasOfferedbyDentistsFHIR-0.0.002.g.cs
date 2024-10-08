@@ -21,7 +21,7 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 : IL
     #region Library Members
     public string Name => "PrimaryCariesPreventionasOfferedbyDentistsFHIR";
     public string Version => "0.0.002";
-    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance, Hospice_6_9_000.Instance, Status_1_6_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance, Hospice_6_9_000.Instance, Status_1_6_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Clinical Oral Evaluation")]

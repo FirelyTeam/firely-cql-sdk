@@ -21,7 +21,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
     #region Library Members
     public string Name => "DRCommunicationWithPhysicianManagingDiabetesFHIR";
     public string Version => "0.1.000";
-    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Care Services in Long-Term Residential Facility")]

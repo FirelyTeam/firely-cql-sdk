@@ -21,7 +21,7 @@ public partial class AdultOutpatientEncounters_4_8_000 : ILibrary, ISingleton<Ad
     #region Library Members
     public string Name => "AdultOutpatientEncounters";
     public string Version => "4.8.000";
-    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, Status_1_6_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, Status_1_6_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Annual Wellness Visit")]

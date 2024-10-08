@@ -21,7 +21,7 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
     #region Library Members
     public string Name => "TestRetrieve";
     public string Version => "1.0.1";
-    public ILibrary Dependencies => [FHIRHelpers_4_0_1.Instance, TestRetrieveInclude_1_0_1.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance, TestRetrieveInclude_1_0_1.Instance];
     #endregion Library Members
 
     [CqlDeclaration("HIV")]

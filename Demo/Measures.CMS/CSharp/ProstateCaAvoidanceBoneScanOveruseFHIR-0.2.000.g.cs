@@ -21,7 +21,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_2_000 : ILibrary, 
     #region Library Members
     public string Name => "ProstateCaAvoidanceBoneScanOveruseFHIR";
     public string Version => "0.2.000";
-    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Bone Scan")]

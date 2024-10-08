@@ -21,7 +21,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
     #region Library Members
     public string Name => "AdvancedIllnessandFrailtyExclusionECQMFHIR4";
     public string Version => "5.17.000";
-    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, CumulativeMedicationDurationFHIR4_1_0_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, CumulativeMedicationDurationFHIR4_1_0_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Acute Inpatient")]

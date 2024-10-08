@@ -21,7 +21,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
     #region Library Members
     public string Name => "HybridHWRFHIR";
     public string Version => "1.3.005";
-    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Bicarbonate lab test")]

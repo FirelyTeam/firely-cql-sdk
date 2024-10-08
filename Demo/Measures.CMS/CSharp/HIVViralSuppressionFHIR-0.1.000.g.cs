@@ -21,7 +21,7 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
     #region Library Members
     public string Name => "HIVViralSuppressionFHIR";
     public string Version => "0.1.000";
-    public ILibrary Dependencies => [CQMCommon_2_0_000.Instance, FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, SupplementalDataElements_3_4_000.Instance]
+    public ILibrary[] Dependencies => [CQMCommon_2_0_000.Instance, FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, SupplementalDataElements_3_4_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Annual Wellness Visit")]

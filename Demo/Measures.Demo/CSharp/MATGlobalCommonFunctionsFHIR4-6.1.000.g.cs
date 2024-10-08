@@ -21,7 +21,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     #region Library Members
     public string Name => "MATGlobalCommonFunctionsFHIR4";
     public string Version => "6.1.000";
-    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Emergency Department Visit")]

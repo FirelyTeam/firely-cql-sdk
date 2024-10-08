@@ -21,7 +21,7 @@ public partial class PalliativeCare_1_9_000 : ILibrary, ISingleton<PalliativeCar
     #region Library Members
     public string Name => "PalliativeCare";
     public string Version => "1.9.000";
-    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, Status_1_6_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, Status_1_6_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Palliative Care Encounter")]

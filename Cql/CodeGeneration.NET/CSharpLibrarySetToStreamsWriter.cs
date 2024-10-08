@@ -252,7 +252,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                           .Select(dep => libraryNameToClassName(dep.GetVersionedIdentifier()!))
                           .Select(typeName => $"{typeName}.Instance");
 
-            writer.WriteLine(indent, $"public ILibrary Dependencies => [{string.Join(", ", dependencies)}]");
+            writer.WriteLine(indent, $"public ILibrary[] Dependencies => [{string.Join(", ", dependencies)}];");
 
 
             writer.WriteLine(indent, "#endregion Library Members");

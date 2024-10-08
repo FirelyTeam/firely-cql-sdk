@@ -21,7 +21,7 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000 : ILibra
     #region Library Members
     public string Name => "HospitalHarmOpioidRelatedAdverseEventsFHIR";
     public string Version => "0.1.000";
-    public ILibrary Dependencies => [SupplementalDataElements_3_4_000.Instance, CQMCommon_2_0_000.Instance, QICoreCommon_2_0_000.Instance, FHIRHelpers_4_3_000.Instance]
+    public ILibrary[] Dependencies => [SupplementalDataElements_3_4_000.Instance, CQMCommon_2_0_000.Instance, QICoreCommon_2_0_000.Instance, FHIRHelpers_4_3_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Emergency Department Visit")]

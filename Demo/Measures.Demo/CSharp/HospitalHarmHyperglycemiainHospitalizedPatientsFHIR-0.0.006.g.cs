@@ -21,7 +21,7 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
     #region Library Members
     public string Name => "HospitalHarmHyperglycemiainHospitalizedPatientsFHIR";
     public string Version => "0.0.006";
-    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("birth date")]

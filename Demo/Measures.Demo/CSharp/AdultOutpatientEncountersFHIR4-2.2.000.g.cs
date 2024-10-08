@@ -21,7 +21,7 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
     #region Library Members
     public string Name => "AdultOutpatientEncountersFHIR4";
     public string Version => "2.2.000";
-    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Annual Wellness Visit")]

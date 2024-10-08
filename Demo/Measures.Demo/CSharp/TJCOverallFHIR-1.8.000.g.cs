@@ -21,7 +21,7 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
     #region Library Members
     public string Name => "TJCOverallFHIR";
     public string Version => "1.8.000";
-    public ILibrary Dependencies => [MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, FHIRHelpers_4_0_001.Instance]
+    public ILibrary[] Dependencies => [MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, FHIRHelpers_4_0_001.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Comfort Measures")]

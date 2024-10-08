@@ -21,7 +21,7 @@ public partial class NCQAHospice_1_0_0 : ILibrary, ISingleton<NCQAHospice_1_0_0>
     #region Library Members
     public string Name => "NCQAHospice";
     public string Version => "1.0.0";
-    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAFHIRBase_1_0_0.Instance, NCQAStatus_1_0_0.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAFHIRBase_1_0_0.Instance, NCQAStatus_1_0_0.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Hospice Encounter")]

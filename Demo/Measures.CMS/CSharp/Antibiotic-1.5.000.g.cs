@@ -21,7 +21,7 @@ public partial class Antibiotic_1_5_000 : ILibrary, ISingleton<Antibiotic_1_5_00
     #region Library Members
     public string Name => "Antibiotic";
     public string Version => "1.5.000";
-    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Measurement Period")]

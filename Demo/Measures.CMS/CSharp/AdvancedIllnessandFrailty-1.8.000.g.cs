@@ -21,7 +21,7 @@ public partial class AdvancedIllnessandFrailty_1_8_000 : ILibrary, ISingleton<Ad
     #region Library Members
     public string Name => "AdvancedIllnessandFrailty";
     public string Version => "1.8.000";
-    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, CQMCommon_2_0_000.Instance, CumulativeMedicationDuration_4_0_000.Instance, Status_1_6_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, CQMCommon_2_0_000.Instance, CumulativeMedicationDuration_4_0_000.Instance, Status_1_6_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Acute Inpatient")]

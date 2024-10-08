@@ -21,7 +21,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
     #region Library Members
     public string Name => "SupplementalDataElements";
     public string Version => "3.4.000";
-    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Ethnicity")]

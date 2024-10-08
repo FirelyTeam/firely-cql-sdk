@@ -21,7 +21,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_
     #region Library Members
     public string Name => "IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR";
     public string Version => "1.3.000";
-    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, SupplementalDataElements_3_4_000.Instance, CumulativeMedicationDuration_4_0_000.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, SupplementalDataElements_3_4_000.Instance, CumulativeMedicationDuration_4_0_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Active Tuberculosis for Urology Care")]

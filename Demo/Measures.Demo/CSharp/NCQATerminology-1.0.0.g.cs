@@ -21,7 +21,7 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
     #region Library Members
     public string Name => "NCQATerminology";
     public string Version => "1.0.0";
-    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance];
     #endregion Library Members
 
     [CqlDeclaration("problem-list-item")]

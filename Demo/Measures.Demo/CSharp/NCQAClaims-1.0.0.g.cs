@@ -21,7 +21,7 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     #region Library Members
     public string Name => "NCQAClaims";
     public string Version => "1.0.0";
-    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAFHIRBase_1_0_0.Instance, NCQATerminology_1_0_0.Instance]
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAFHIRBase_1_0_0.Instance, NCQATerminology_1_0_0.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Inpatient Stay")]

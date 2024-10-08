@@ -21,7 +21,7 @@ public partial class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationIn
     #region Library Members
     public string Name => "PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR";
     public string Version => "0.0.001";
-    public ILibrary Dependencies => [CQMCommon_2_0_000.Instance, Status_1_6_000.Instance, FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance, Hospice_6_9_000.Instance, CumulativeMedicationDuration_4_0_000.Instance]
+    public ILibrary[] Dependencies => [CQMCommon_2_0_000.Instance, Status_1_6_000.Instance, FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance, Hospice_6_9_000.Instance, CumulativeMedicationDuration_4_0_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Annual Wellness Visit")]
