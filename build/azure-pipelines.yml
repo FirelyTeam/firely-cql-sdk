@@ -20,9 +20,9 @@ trigger:
   branches: 
     include:
     - devops/exclude-docs-folder
-    paths:
-      exclude:
-      - 'docs/*'
+  paths:
+    exclude:
+    - 'docs/*'
 
 stages:
 - stage: build
