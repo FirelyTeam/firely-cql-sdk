@@ -60,6 +60,6 @@ public class CqlTupleTest
 
         // serialization works out of the box
         var str = JsonSerializer.Serialize(obj);
-        Assert.AreEqual("{\"status\":\"success\",\"result\":\"some result\"}", str);
+        Assert.AreEqual("{\"status\":\"success\",\"result\":{\"result1\":\"some first result\",\"result2\":\"some second result\"}}", str);
     }
 }
