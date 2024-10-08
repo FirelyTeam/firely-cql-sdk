@@ -36,6 +36,9 @@ namespace Hl7.Cql.CqlToElm.Test
 
             { "EqualNullNull", "The spec states that null elements are considered equal for list equality." },
             { "ReplaceMatchesSpaces", "The first argument should have four backslashes instead of 2" },
+
+            // This compiler error should be repaired by https://github.com/FirelyTeam/firely-cql-sdk/issues/542
+            { "Issue32DateTime", "We incorrectly compile a DateTime to an interval without a point type." }
         };
 
         internal static Dictionary<string, string> DoesNotMatchExpectation = new()
