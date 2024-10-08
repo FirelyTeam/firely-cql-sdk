@@ -1,0 +1,87 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorVersion" : "2.11.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "CqlTupleTest",
+         "version" : "1.0.0"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "3:1-7:3",
+            "name" : "Result",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "resultTypeSpecifier" : {
+               "type" : "TupleTypeSpecifier",
+               "element" : [ {
+                  "name" : "status",
+                  "elementType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               }, {
+                  "name" : "result",
+                  "elementType" : {
+                     "name" : "{urn:hl7-org:elm-types:r1}String",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ]
+            },
+            "expression" : {
+               "locator" : "4:3-7:3",
+               "type" : "Tuple",
+               "resultTypeSpecifier" : {
+                  "type" : "TupleTypeSpecifier",
+                  "element" : [ {
+                     "name" : "status",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  }, {
+                     "name" : "result",
+                     "elementType" : {
+                        "name" : "{urn:hl7-org:elm-types:r1}String",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  } ]
+               },
+               "element" : [ {
+                  "name" : "status",
+                  "value" : {
+                     "locator" : "5:13-5:21",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "success",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "name" : "result",
+                  "value" : {
+                     "locator" : "6:13-6:25",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "some result",
+                     "type" : "Literal"
+                  }
+               } ]
+            }
+         } ]
+      }
+   }
+}
+

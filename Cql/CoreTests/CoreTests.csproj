@@ -21,8 +21,8 @@
 		<PackageReference Include="MSTest.TestFramework" Version="3.6.0" />
 		<PackageReference Include="MSTest.TestAdapter" Version="3.6.0" />
 		<PackageReference Include="coverlet.collector" Version="6.0.2">
-		  <PrivateAssets>all</PrivateAssets>
-		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
 		<PackageReference Remove="Microsoft.CodeAnalysis.PublicApiAnalyzers" />
@@ -43,6 +43,8 @@
 		<LibrarySet>CoreTests.HL7</LibrarySet>
 		<CqlDirectory>$(MSBuildProjectDirectory)/input/elm/hl7</CqlDirectory>
 		<ElmDirectory>$(MSBuildProjectDirectory)/input/elm/hl7</ElmDirectory>
+		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
+    <DllDirectory>$(MSBuildProjectDirectory)/Assemblies</DllDirectory>
 		<!-- <ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory> -->
 		<!-- <TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory> -->
 	</PropertyGroup>
@@ -66,5 +68,8 @@
 		<None Update="Input\ValueSets\*.json">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
+    <None Include="Assemblies\*.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
 	</ItemGroup>
 </Project>

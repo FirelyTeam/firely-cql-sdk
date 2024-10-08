@@ -16,7 +16,6 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
-using System.Text.RegularExpressions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Microsoft.Extensions.Options;
 
@@ -137,24 +136,23 @@ internal class ExpressionToCSharpConverter(
 
         sb.AppendLine(indent, "{");
 
-        var lastExpression = block.Expressions.LastOrDefault();
-        var isFirstStatement = true;
-
-        foreach (var childStatement in block.Expressions)
+        foreach (var (childStatement, i) in block.Expressions.Select((value, i) => (value, i)))
         {
-            if (ReferenceEquals(childStatement, lastExpression))
+            if (i < block.Expressions.Count - 1)
             {
-                if (childStatement is not
-                    (CaseWhenThenExpression or UnaryExpression { NodeType: ExpressionType.Throw }))
-                {
-                    if (!isFirstStatement) sb.AppendLine();
-                    sb.Append(indent + 1, "return ");
-                }
-                sb.Append(ConvertExpression(indent + 1, childStatement, false));
+                // processing all expressions except the last one
+                sb.Append(ConvertExpression(indent + 1, childStatement));
             }
             else
             {
-                sb.Append(ConvertExpression(indent + 1, childStatement));
+                //processing last expression, potentially as a return statement
+                if (childStatement is not
+                    (CaseWhenThenExpression or UnaryExpression { NodeType: ExpressionType.Throw }))
+                {
+                    if (i > 0) sb.AppendLine();
+                    sb.Append(indent + 1, "return ");
+                }
+                sb.Append(ConvertExpression(indent + 1, childStatement, false));
             }
 
             switch (childStatement)
@@ -162,11 +160,13 @@ internal class ExpressionToCSharpConverter(
                 case CaseWhenThenExpression:
                     sb.AppendLine("");
                     break;
+                case BinaryExpression exp:
+                    sb.AppendLine(_typeToCSharpConverter.ShouldUseTupleType(exp.Type) ? "" : ";");
+                    break;
                 default:
                     sb.AppendLine(";");
                     break;
             }
-            isFirstStatement = false;
         }
 
         sb.Append(indent, "}");
@@ -376,23 +376,6 @@ internal class ExpressionToCSharpConverter(
 
     private string ConvertMemberInitExpression(int indent, string leadingIndentString, MemberInitExpression memberInit)
     {
-        if (_typeToCSharpConverter.ShouldUseTupleType(memberInit.Type))
-        {
-            var memberAssignmentsByMemberName = memberInit.Bindings
-                                                          .Cast<MemberAssignment>()
-                                                          .ToDictionary(
-                                                              ma => ma.Member.Name,
-                                                              ma => ConvertExpression(0, ma.Expression, false));
-
-            var memberValues = _typeToCSharpConverter
-                               .GetTupleProperties(memberInit.Type)
-                               .Select(p => memberAssignmentsByMemberName.GetValueOrDefault(p.Name, "default"))
-                               .ToArray();
-
-            var tupleAssignmentCode = $"({string.Join(", ", memberValues)})";
-            return tupleAssignmentCode;
-        }
-
         var memberInitSb = new StringBuilder();
         memberInitSb.Append(leadingIndentString);
         var typeName = _typeToCSharpConverter.ToCSharp(memberInit.Type);
@@ -597,6 +580,9 @@ internal class ExpressionToCSharpConverter(
             if (right is LambdaExpression le)
                 return ConvertLocalFunctionDefinition(indent, leadingIndentString, le, parameter.Name!);
 
+            if(_typeToCSharpConverter.ShouldUseTupleType(right.Type))
+                return ConvertTupleInitExpression(indent, right, ParamName(parameter));
+
             var rightCode = ConvertExpression(indent, right, false);
 
             string typeDeclaration = "var";
@@ -618,6 +604,23 @@ internal class ExpressionToCSharpConverter(
             var binaryString = $"{leadingIndentString}{leftCode} {@operator} {rightCode}";
             return binaryString;
         }
+    }
+
+    private string ConvertTupleInitExpression(int indent, Expression expression, string paramName)
+    {
+        var memberInit = (MemberInitExpression)expression;
+        var memberAssignmentsByMemberName = memberInit.Bindings
+                                                      .Cast<MemberAssignment>()
+                                                      .ToDictionary(
+                                                          ma => ma.Member.Name,
+                                                          ma => ConvertExpression(0, ma.Expression, false));
+        var sb = new StringBuilder();
+        sb.AppendLine(indent, $"dynamic {paramName} = new ExpandoObject();");
+        foreach (var kvp in memberAssignmentsByMemberName)
+        {
+            sb.AppendLine(indent, $"{paramName}.{kvp.Key} = {kvp.Value};");
+        }
+        return sb.ToString();
     }
 
     private static string BinaryOperatorFor(ExpressionType nodeType) => nodeType switch

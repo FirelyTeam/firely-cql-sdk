@@ -28,13 +28,7 @@ internal class TypeToCSharpConverter
         if (!ShouldUseTupleType(ctx.TypePartInfo))
             return ctx.Name;
 
-        TextWriterFormattableString formatTypeNameAsTuple = $"({
-            string.Join(
-                ", ",
-                GetTupleProperties(ctx.TypePartInfo)
-                    .Select(p => $"{p.Type.ToCSharpString(_typeCSharpFormat)} {p.Name}"))
-        })?"; // Notice we have to treat it as a nullable type to be consistent with the original tuple types.
-        return formatTypeNameAsTuple;
+        return $"dynamic";
     }
 
     public IEnumerable<(Type Type, string Name)> GetTupleProperties(Type type)

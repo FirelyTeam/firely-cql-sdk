@@ -12,8 +12,8 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
-[CqlLibrary("CqlBooleanTest", "1.0.000")]
-public class CqlBooleanTest_1_0_000
+[CqlLibrary("CqlNestedTupleTest", "1.0.0")]
+public class CqlNestedTupleTest_1_0_0
 {
 
 
@@ -21,26 +21,32 @@ public class CqlBooleanTest_1_0_000
 
     #region Cached values
 
-    internal Lazy<bool?> __SomethingTrueEqualsTrue;
+    internal Lazy<dynamic> __Result;
 
     #endregion
-    public CqlBooleanTest_1_0_000(CqlContext context)
+    public CqlNestedTupleTest_1_0_0(CqlContext context)
     {
         this.context = context ?? throw new ArgumentNullException("context");
 
 
-        __SomethingTrueEqualsTrue = new Lazy<bool?>(this.SomethingTrueEqualsTrue_Value);
+        __Result = new Lazy<dynamic>(this.Result_Value);
     }
-	private bool? SomethingTrueEqualsTrue_Value()
+	private dynamic Result_Value()
 	{
-		bool? a_ = context.Operators.Equal(1, 1);
-		bool? b_ = context.Operators.Equal(a_, true);
+		dynamic a_ = new ExpandoObject();
+		a_.result1 = "some first result";
+		a_.result2 = "some second result";
+
+		dynamic b_ = new ExpandoObject();
+		b_.status = "success";
+		b_.result = a_;
+
 
 		return b_;
 	}
 
-    [CqlDeclaration("SomethingTrueEqualsTrue")]
-	public bool? SomethingTrueEqualsTrue() => 
-		__SomethingTrueEqualsTrue.Value;
+    [CqlDeclaration("Result")]
+	public dynamic Result() => 
+		__Result.Value;
 
 }

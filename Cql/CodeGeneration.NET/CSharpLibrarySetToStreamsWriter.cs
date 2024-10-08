@@ -14,6 +14,7 @@ using Hl7.Cql.ValueSets;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -74,6 +75,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 typeof(IValueSetFacade).Namespace!,
                 typeof(Iso8601.DateIso8601).Namespace!,
                 typeof(PropertyInfo).Namespace!,
+                typeof(ExpandoObject).Namespace!,
             };
 
             foreach (var @using in typeResolver.ModelNamespaces)
