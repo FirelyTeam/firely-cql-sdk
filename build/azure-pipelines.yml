@@ -19,9 +19,7 @@ pool:
 trigger:
   branches: 
     include:
-    - develop*
-    - release*
-    - refs/tags/v*
+    - devops/exclude-docs-folder
 
 stages:
 - stage: build
@@ -47,39 +45,3 @@ stages:
         restoreDependencies: true
         pool: 
           vmImage: $(vmImage)
-
-- stage: deployToGitHub
-  dependsOn: build
-  displayName: Deploy packages To Github
-  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest')) # not a PR
-  jobs:
-  - deployment: gitHub
-    displayName: Deploy Packages to GitHub
-    environment: GitHub
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - template: push-nuget-package.yml@templates
-            parameters:
-              artifact: 'NuGetPackages'
-              source: https://nuget.pkg.github.com/FirelyTeam/index.json
-              apiKey: $(GITHUB_PACKAGES_APIKEY)                
-
-- stage: deployToNuget
-  dependsOn: deployToGitHub
-  displayName: Deploy packages to NuGet
-  condition: and(succeeded(), startswith(variables['Build.SourceBranch'], 'refs/tags/v'))
-  jobs:
-  - deployment: NuGet    
-    displayName: Deploy Packages to Nuget      
-    environment: NuGet
-    strategy:
-      runOnce:
-        deploy:
-          steps:
-          - template: push-nuget-package.yml@templates
-            parameters:
-              artifact: 'NuGetPackages'
-              source: https://api.nuget.org/v3/index.json
-              apiKey: $(NUGET_APIKEY)
