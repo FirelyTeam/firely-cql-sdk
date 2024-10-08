@@ -25,7 +25,7 @@ trigger:
     - 'docs/*'
 
 stages:
-- stage: pre-check-doc-changes
+- stage: checkForDocChanges
   jobs:
     - job: CheckDocChanges
       displayName: 'Check for changes outside docs folder'
