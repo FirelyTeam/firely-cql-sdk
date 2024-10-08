@@ -33,6 +33,7 @@ stages:
         vmImage: ubuntu-latest
       steps:
         - checkout: self
+          fetchDepth: 0 
         - script: |
             echo "##[group]Checking for changes outside of /docs/"
             if git diff --name-only $(Build.SourceVersion)^ $(Build.SourceBranch) | grep -v '^docs/'; then
