@@ -94,6 +94,8 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         internal ILogger<CSharpSourceCodeWriter> Log { get; }
 
+        internal IList<string> ContextLibraries { get; set; } = new List<string>();
+
         /// <summary>
         /// Writes C# source code from inputs.
         /// </summary>
@@ -208,9 +210,33 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var hasContext = false;
             var node = dependencyGraph.Nodes[libraryName];
-            if (node.Properties != null && node.Properties.TryGetValue("Library", out var nodeLibrary))
+            if (node.Properties != null 
+                && node.Properties.TryGetValue("Library", out var nodeLibrary))
             {
-                hasContext = ((Elm.Library)nodeLibrary)?.contexts != null;
+                var requiredUsesContext = false;
+                var requiredLibraries = node.ForwardEdges?
+                    .Select(edge => edge.ToId)
+                    .Except(new[] { dependencyGraph.EndNode.NodeId })
+                    .Distinct();
+
+                foreach (var dependentLibrary in requiredLibraries!)
+                {
+                    var dependentNode = dependencyGraph.Nodes[dependentLibrary];
+                    // dependency uses a constructor so we will need make the entire class scoped vs singleton
+                    if (dependentNode.Properties != null &&
+                        dependentNode.Properties.TryGetValue("Library", out var dependNodeLibrary))
+                    {
+                        if (((Elm.Library)dependNodeLibrary)?.contexts != null)
+                        {
+                            requiredUsesContext = true;
+
+                            if (!ContextLibraries.Contains(dependentLibrary))
+                                ContextLibraries.Add(dependentLibrary);
+                        }
+                    }
+                }
+
+                hasContext = ((Elm.Library)nodeLibrary)?.contexts != null || requiredUsesContext;
             }
 
             // Class
@@ -224,6 +250,12 @@ namespace Hl7.Cql.CodeGeneration.NET
                 }
                 else
                 {
+                    if (!ContextLibraries.Contains(libraryName))
+                        ContextLibraries.Add(libraryName);
+
+                    writer.WriteLine(indentLevel, $"{AccessModifierString(ContextAccessModifier)} CqlContext context;");
+                    writer.WriteLine();
+
                     writeCachedValues(definitions, libraryName, writer, indentLevel);
 
                     // Write constructor
@@ -232,12 +264,20 @@ namespace Hl7.Cql.CodeGeneration.NET
                     {
                         indentLevel += 1;
 
+                        writer.WriteLine(indentLevel, "this.context = context ?? throw new ArgumentNullException(\"context\");");
+                        writer.WriteLine();
+
+                        writeDependencies(dependencyGraph, libraryNameToClassName, libraryName, writer, indentLevel);
+                        writer.WriteLine();
+
                         writeCachedValueNames(definitions, libraryName, writer, indentLevel);
                         indentLevel -= 1;
                     }
 
                     writer.WriteLine(indentLevel, "}");
                 }
+
+                WriteLibraryMembers(writer, dependencyGraph, libraryName, libraryNameToClassName!, indentLevel);
 
                 writeMethods(definitions, libraryName, writer, indentLevel, hasContext);
 
@@ -277,7 +317,10 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private static void writeDependencies(DirectedGraph dependencyGraph, Func<string?, string?> libraryNameToClassName, string libraryName, StreamWriter writer, int indentLevel)
+        private void writeDependencies(DirectedGraph dependencyGraph, 
+            Func<string?, string?> libraryNameToClassName, 
+            string libraryName, StreamWriter writer, 
+            int indentLevel)
         {
             var node = dependencyGraph.Nodes[libraryName];
             var requiredLibraries = node.ForwardEdges?
@@ -287,9 +330,12 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             foreach (var dependentLibrary in requiredLibraries!)
             {
-                var typeName = libraryNameToClassName!(dependentLibrary);
-                var memberName = typeName;
-                writer.WriteLine(indentLevel, $"{memberName} = new {typeName}(context);");
+                if (ContextLibraries.Contains(dependentLibrary))
+                {
+                    var typeName = libraryNameToClassName!(dependentLibrary);
+                    var memberName = typeName;
+                    writer.WriteLine(indentLevel, $"{memberName} = new {typeName}(context);");
+                }
             }
         }
 
@@ -358,6 +404,39 @@ namespace Hl7.Cql.CodeGeneration.NET
             overload.Parameters.Count == 1
                 && overload.Parameters[0].Type == typeof(CqlContext);
 
+        private void WriteLibraryMembers(TextWriter writer,
+            DirectedGraph dependencyGraph,
+            string libraryName,
+            Func<string, string> libraryNameToClassName,
+            int indent)
+        {
+            var node = dependencyGraph.Nodes[libraryName];
+            var requiredLibraries = node.ForwardEdges?
+                .Select(edge => edge.ToId)
+                .Except(new[] { dependencyGraph.EndNode.NodeId })
+                .Distinct();
+            if (requiredLibraries != null)
+            {
+
+                writer.WriteLine(indent, "#region Dependencies");
+                writer.WriteLine();
+
+                foreach (var dependentLibrary in requiredLibraries)
+                {
+                    if (ContextLibraries.Contains(dependentLibrary))
+                    {
+                        var typeName = libraryNameToClassName(dependentLibrary);
+                        var memberName = typeName;
+                        writer.WriteLine(indent, $"public {typeName} {memberName} {{ get; }}");
+                    }
+                }
+
+                writer.WriteLine();
+                writer.WriteLine(indent, "#endregion");
+                writer.WriteLine();
+            }
+        }
+
         private IList<DirectedGraphNode> DetermineBuildOrder(DirectedGraph minimalGraph)
         {
             var sorted = minimalGraph.TopologicalSort()
@@ -393,7 +472,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 new LocalVariableDeduper()
             );
 
-            var expressionConverter = new ExpressionConverter(libraryName);
+            var expressionConverter = new ExpressionConverter(libraryName, ContextLibraries);
 
             // Skip CqlContext
             var parameters = overload.Parameters.Skip(1);
@@ -402,12 +481,14 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             if (isDef)
             {
-                var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
-                var privateMethodName = PrivateMethodNameFor(methodName!);
+                if (useLazy)
+                {
+                    var privateMethodName = PrivateMethodNameFor(methodName!);
 
-                var func = expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, privateMethodName, "private");
-                writer.Write(func);
-                writer.WriteLine();
+                    var func = expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, privateMethodName, "private", true);
+                    writer.Write(func);
+                    writer.WriteLine();
+                }
 
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
                 WriteTags(writer, indentLevel, tags);
@@ -427,34 +508,34 @@ namespace Hl7.Cql.CodeGeneration.NET
                     }
                 }
 
-                var lazyType = typeof(Lazy<>).MakeGenericType(visitedBody.Type);
-                var valueFunc =
-                    Expression.Lambda(
-                        Expression.MakeMemberAccess(
-                            Expression.Parameter(lazyType, cachedValueName),
-                            lazyType.GetMember("Value").Single()));
-
                 if (useLazy)
                 {
+                    var cachedValueName = DefinitionCacheKeyForMethod(methodName!);
+                    var lazyType = typeof(Lazy<>).MakeGenericType(visitedBody.Type);
+                    var valueFunc =
+                        Expression.Lambda(
+                            Expression.MakeMemberAccess(
+                                Expression.Parameter(lazyType, cachedValueName),
+                                lazyType.GetMember("Value").Single()));
+
                     // add null handler because, in some rare cases the order of the Lazy matters and a null exception is thrown in the constructor
                     // but having it as lazy?.Value handles this without degrading performance or affecting result of execution 
                     var valueFunction =
-                        expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, valueFunc, methodName!,
-                            "public");
+                        expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, valueFunc, methodName!, "public", false);
 
                     valueFunction = valueFunction.Replace(".Value", "?.Value");
                     writer.Write(valueFunction);
                 }
                 else
                 {
-                    writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
+                    writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public", true));
                 }
             }
             else
             {
                 writer.WriteLine(indentLevel, $"[CqlDeclaration(\"{cqlName}\")]");
                 WriteTags(writer, indentLevel, tags);
-                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
+                writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public", !useLazy));
             }
         }
 
