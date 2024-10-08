@@ -25,7 +25,32 @@ trigger:
     - 'docs/*'
 
 stages:
+- stage: pre-check-doc-changes
+  jobs:
+    - job: CheckDocChanges
+      displayName: 'Check for changes outside docs folder'
+      steps:
+        - checkout: self
+        - script: |
+            echo "##[group]Checking for changes outside of /docs/"
+            if git diff --name-only $(Build.SourceVersion) $(Build.SourceBranch) | grep -v '^docs/'; then
+              echo "##[endgroup]"
+              echo "##[command]echo ##vso[task.setvariable variable=skipBuildStage]false"
+            else
+              echo "##[endgroup]"
+              echo "##[command]echo ##vso[task.setvariable variable=skipBuildStage]true"
+            fi
+          displayName: 'Check if non-docs files were changed'
+        - powershell: |
+            if ($(skipBuildStage) -eq 'true') {
+              Write-Host "Only /docs/ files changed, skipping build."
+            } else {
+              Write-Host "Changes outside /docs/ detected, proceeding with build."
+            }
+          displayName: 'Output change detection result'
+
 - stage: build
+  condition: and(succeeded(), ne(variables['skipBuildStage'], 'true'))
   jobs:
   - ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build 
     - template: templates/build.yml  # Template reference
