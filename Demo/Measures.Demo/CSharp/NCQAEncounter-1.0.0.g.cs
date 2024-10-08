@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("NCQAEncounter", "1.0.0")]
-public partial class NCQAEncounter_1_0_0 : ISingleton<NCQAEncounter_1_0_0>
+public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_0_0>
 {
     private NCQAEncounter_1_0_0() {}
 
     public static NCQAEncounter_1_0_0 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "NCQAEncounter";
+    public string Version => "1.0.0";
+    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAFHIRBase_1_0_0.Instance, NCQAStatus_1_0_0.Instance, NCQATerminology_1_0_0.Instance]
+    #endregion Library Members
 	public bool? Encounter_Has_Diagnosis(CqlContext context, Encounter Encounter, IEnumerable<Condition> Conditions)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;

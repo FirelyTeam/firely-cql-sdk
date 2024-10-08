@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("AlaraCTFHIR", "0.1.001")]
-public partial class AlaraCTFHIR_0_1_001 : ISingleton<AlaraCTFHIR_0_1_001>
+public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_001>
 {
     private AlaraCTFHIR_0_1_001() {}
 
     public static AlaraCTFHIR_0_1_001 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "AlaraCTFHIR";
+    public string Version => "0.1.001";
+    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, CQMCommon_2_0_000.Instance, QICoreCommon_2_0_000.Instance, SupplementalDataElements_3_4_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Birth date")]
 	public CqlCode Birth_date(CqlContext context) => 

@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("HFBetaBlockerTherapyforLVSDFHIR", "1.3.000")]
-public partial class HFBetaBlockerTherapyforLVSDFHIR_1_3_000 : ISingleton<HFBetaBlockerTherapyforLVSDFHIR_1_3_000>
+public partial class HFBetaBlockerTherapyforLVSDFHIR_1_3_000 : ILibrary, ISingleton<HFBetaBlockerTherapyforLVSDFHIR_1_3_000>
 {
     private HFBetaBlockerTherapyforLVSDFHIR_1_3_000() {}
 
     public static HFBetaBlockerTherapyforLVSDFHIR_1_3_000 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "HFBetaBlockerTherapyforLVSDFHIR";
+    public string Version => "1.3.000";
+    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance, AHAOverall_2_6_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Allergy to Beta Blocker Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1177")]

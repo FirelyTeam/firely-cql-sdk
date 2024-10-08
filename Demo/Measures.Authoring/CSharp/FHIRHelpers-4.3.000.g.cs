@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("FHIRHelpers", "4.3.000")]
-public partial class FHIRHelpers_4_3_000 : ISingleton<FHIRHelpers_4_3_000>
+public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_000>
 {
     private FHIRHelpers_4_3_000() {}
 
     public static FHIRHelpers_4_3_000 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "FHIRHelpers";
+    public string Version => "4.3.000";
+    public ILibrary Dependencies => []
+    #endregion Library Members
 	public CqlInterval<CqlDateTime> ToInterval(CqlContext context, Period period)
 	{
 		CqlInterval<CqlDateTime> a_()

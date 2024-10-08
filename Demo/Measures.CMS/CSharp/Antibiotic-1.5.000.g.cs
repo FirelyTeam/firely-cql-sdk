@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("Antibiotic", "1.5.000")]
-public partial class Antibiotic_1_5_000 : ISingleton<Antibiotic_1_5_000>
+public partial class Antibiotic_1_5_000 : ILibrary, ISingleton<Antibiotic_1_5_000>
 {
     private Antibiotic_1_5_000() {}
 
     public static Antibiotic_1_5_000 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "Antibiotic";
+    public string Version => "1.5.000";
+    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Measurement Period")]
 	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)

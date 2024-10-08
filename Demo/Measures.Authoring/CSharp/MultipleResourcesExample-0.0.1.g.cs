@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("MultipleResourcesExample", "0.0.1")]
-public partial class MultipleResourcesExample_0_0_1 : ISingleton<MultipleResourcesExample_0_0_1>
+public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<MultipleResourcesExample_0_0_1>
 {
     private MultipleResourcesExample_0_0_1() {}
 
     public static MultipleResourcesExample_0_0_1 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "MultipleResourcesExample";
+    public string Version => "0.0.1";
+    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Lung Cancer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89")]

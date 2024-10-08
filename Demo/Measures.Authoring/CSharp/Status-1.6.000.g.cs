@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("Status", "1.6.000")]
-public partial class Status_1_6_000 : ISingleton<Status_1_6_000>
+public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 {
     private Status_1_6_000() {}
 
     public static Status_1_6_000 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "Status";
+    public string Version => "1.6.000";
+    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("laboratory")]
 	public CqlCode laboratory(CqlContext context) => 

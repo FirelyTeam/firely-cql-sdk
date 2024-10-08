@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("Cataracts2040BCVAwithin90DaysFHIR", "0.1.000")]
-public partial class Cataracts2040BCVAwithin90DaysFHIR_0_1_000 : ISingleton<Cataracts2040BCVAwithin90DaysFHIR_0_1_000>
+public partial class Cataracts2040BCVAwithin90DaysFHIR_0_1_000 : ILibrary, ISingleton<Cataracts2040BCVAwithin90DaysFHIR_0_1_000>
 {
     private Cataracts2040BCVAwithin90DaysFHIR_0_1_000() {}
 
     public static Cataracts2040BCVAwithin90DaysFHIR_0_1_000 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "Cataracts2040BCVAwithin90DaysFHIR";
+    public string Version => "0.1.000";
+    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Acute and Subacute Iridocyclitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1241")]

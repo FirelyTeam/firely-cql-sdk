@@ -22,7 +22,6 @@ using System.Text;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.Extensions.Options;
 using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.CodeGeneration.NET
@@ -150,8 +149,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                 yield break;
             }
 
-            foreach (var library in librarySet)
+            foreach (Library library in librarySet)
             {
+                var libraryVersionedIdentifier = ((IGetVersionedIdentifier)library).VersionedIdentifier.Result!;
                 string libraryName = library.GetVersionedIdentifier()!;
                 if (!callbacks.ShouldWriteLibrary(libraryName))
                 {
@@ -182,7 +182,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     indentLevel += 1;
                 }
 
-                WriteClass(definitions, librarySet, callbacks.LibraryNameToClassName, libraryName, writer, indentLevel);
+                WriteClass(definitions, librarySet, callbacks.LibraryNameToClassName, libraryName, libraryVersionedIdentifier, writer, indentLevel);
 
                 if (!string.IsNullOrWhiteSpace(Namespace))
                 {
@@ -194,10 +194,12 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private void WriteClass(DefinitionDictionary<LambdaExpression> definitions,
+        private void WriteClass(
+            DefinitionDictionary<LambdaExpression> definitions,
             LibrarySet librarySet,
             Func<string, string?> libraryNameToClassName,
             string libraryName,
+            VersionedIdentifier libraryVersionedIdentifier,
             StreamWriter writer,
             int indentLevel)
         {
@@ -217,7 +219,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             writer.WriteLine(indentLevel, $"[CqlLibrary({QuoteString(libraryAttribute)}, {QuoteString(versionAttribute)})]");
             var className = VariableNameGenerator.NormalizeIdentifier(libraryName);
-            writer.WriteLine(indentLevel, $"public partial class {className} : ISingleton<{className}>");
+            writer.WriteLine(indentLevel, $"public partial class {className} : ILibrary, ISingleton<{className}>");
             writer.WriteLine(indentLevel, "{");
             indentLevel += 1;
             // Class
@@ -226,10 +228,34 @@ namespace Hl7.Cql.CodeGeneration.NET
                 writer.WriteLine();
                 writer.WriteLine(indentLevel, $"public static {className} Instance {{ get; }} = new();");
                 writer.WriteLine();
+                WriteLibraryMembers(writer, librarySet, libraryName, libraryVersionedIdentifier, libraryNameToClassName!, indentLevel);
                 WriteMethods(definitions, libraryName, writer, indentLevel);
             }
             indentLevel -= 1;
             writer.WriteLine(indentLevel, "}");
+        }
+
+        private void WriteLibraryMembers(
+            TextWriter writer,
+            LibrarySet librarySet,
+            string libraryName,
+            VersionedIdentifier libraryVersionedIdentifier,
+            Func<string, string> libraryNameToClassName,
+            int indent)
+        {
+            writer.WriteLine(indent, "#region Library Members");
+            writer.WriteLine(indent, $"public string Name => {QuoteString(libraryVersionedIdentifier.id)};");
+            writer.WriteLine(indent, $"public string Version => {QuoteString(libraryVersionedIdentifier.version)};");
+
+            var dependencies =
+                librarySet.GetLibraryDependencies(libraryName, throwError: true)
+                          .Select(dep => libraryNameToClassName(dep.GetVersionedIdentifier()!))
+                          .Select(typeName => $"{typeName}.Instance");
+
+            writer.WriteLine(indent, $"public ILibrary Dependencies => [{string.Join(", ", dependencies)}]");
+
+
+            writer.WriteLine(indent, "#endregion Library Members");
         }
 
         private void WriteMethods(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)

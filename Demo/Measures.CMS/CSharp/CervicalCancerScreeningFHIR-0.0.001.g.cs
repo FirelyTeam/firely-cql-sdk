@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("CervicalCancerScreeningFHIR", "0.0.001")]
-public partial class CervicalCancerScreeningFHIR_0_0_001 : ISingleton<CervicalCancerScreeningFHIR_0_0_001>
+public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<CervicalCancerScreeningFHIR_0_0_001>
 {
     private CervicalCancerScreeningFHIR_0_0_001() {}
 
     public static CervicalCancerScreeningFHIR_0_0_001 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "CervicalCancerScreeningFHIR";
+    public string Version => "0.0.001";
+    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance, Hospice_6_9_000.Instance, PalliativeCare_1_9_000.Instance, Status_1_6_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Congenital or Acquired Absence of Cervix")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1016")]

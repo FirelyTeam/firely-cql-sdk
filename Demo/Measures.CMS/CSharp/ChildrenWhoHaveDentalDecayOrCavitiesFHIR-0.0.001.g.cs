@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("ChildrenWhoHaveDentalDecayOrCavitiesFHIR", "0.0.001")]
-public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ISingleton<ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001>
+public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary, ISingleton<ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001>
 {
     private ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001() {}
 
     public static ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "ChildrenWhoHaveDentalDecayOrCavitiesFHIR";
+    public string Version => "0.0.001";
+    public ILibrary Dependencies => [QICoreCommon_2_0_000.Instance, FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, Hospice_6_9_000.Instance, Status_1_6_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Clinical Oral Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003")]

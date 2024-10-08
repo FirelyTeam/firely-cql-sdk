@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("SupplementalDataElementsFHIR4", "2.0.000")]
-public partial class SupplementalDataElementsFHIR4_2_0_000 : ISingleton<SupplementalDataElementsFHIR4_2_0_000>
+public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleton<SupplementalDataElementsFHIR4_2_0_000>
 {
     private SupplementalDataElementsFHIR4_2_0_000() {}
 
     public static SupplementalDataElementsFHIR4_2_0_000 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "SupplementalDataElementsFHIR4";
+    public string Version => "2.0.000";
+    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]

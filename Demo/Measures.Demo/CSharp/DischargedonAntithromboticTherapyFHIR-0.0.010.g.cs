@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("DischargedonAntithromboticTherapyFHIR", "0.0.010")]
-public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ISingleton<DischargedonAntithromboticTherapyFHIR_0_0_010>
+public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, ISingleton<DischargedonAntithromboticTherapyFHIR_0_0_010>
 {
     private DischargedonAntithromboticTherapyFHIR_0_0_010() {}
 
     public static DischargedonAntithromboticTherapyFHIR_0_0_010 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "DischargedonAntithromboticTherapyFHIR";
+    public string Version => "0.0.010";
+    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, TJCOverallFHIR_1_8_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Antithrombotic Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.201")]

@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("NCQAFHIRBase", "1.0.0")]
-public partial class NCQAFHIRBase_1_0_0 : ISingleton<NCQAFHIRBase_1_0_0>
+public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_0>
 {
     private NCQAFHIRBase_1_0_0() {}
 
     public static NCQAFHIRBase_1_0_0 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "NCQAFHIRBase";
+    public string Version => "1.0.0";
+    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Patient")]
 	public Patient Patient(CqlContext context)

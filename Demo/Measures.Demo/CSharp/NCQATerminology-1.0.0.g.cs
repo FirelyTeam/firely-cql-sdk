@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("NCQATerminology", "1.0.0")]
-public partial class NCQATerminology_1_0_0 : ISingleton<NCQATerminology_1_0_0>
+public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminology_1_0_0>
 {
     private NCQATerminology_1_0_0() {}
 
     public static NCQATerminology_1_0_0 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "NCQATerminology";
+    public string Version => "1.0.0";
+    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("problem-list-item")]
 	public CqlCode problem_list_item(CqlContext context) => 

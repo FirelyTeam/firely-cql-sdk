@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("TJCOverall", "8.11.000")]
-public partial class TJCOverall_8_11_000 : ISingleton<TJCOverall_8_11_000>
+public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_000>
 {
     private TJCOverall_8_11_000() {}
 
     public static TJCOverall_8_11_000 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "TJCOverall";
+    public string Version => "8.11.000";
+    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, CQMCommon_2_0_000.Instance, QICoreCommon_2_0_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Comfort Measures")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45")]

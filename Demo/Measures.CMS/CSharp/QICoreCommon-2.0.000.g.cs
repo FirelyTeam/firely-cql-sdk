@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("QICoreCommon", "2.0.000")]
-public partial class QICoreCommon_2_0_000 : ISingleton<QICoreCommon_2_0_000>
+public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_0_000>
 {
     private QICoreCommon_2_0_000() {}
 
     public static QICoreCommon_2_0_000 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "QICoreCommon";
+    public string Version => "2.0.000";
+    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Birthdate")]
 	public CqlCode Birthdate(CqlContext context) => 

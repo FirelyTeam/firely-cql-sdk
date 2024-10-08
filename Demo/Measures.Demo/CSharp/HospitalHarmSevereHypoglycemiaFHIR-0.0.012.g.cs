@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("HospitalHarmSevereHypoglycemiaFHIR", "0.0.012")]
-public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ISingleton<HospitalHarmSevereHypoglycemiaFHIR_0_0_012>
+public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISingleton<HospitalHarmSevereHypoglycemiaFHIR_0_0_012>
 {
     private HospitalHarmSevereHypoglycemiaFHIR_0_0_012() {}
 
     public static HospitalHarmSevereHypoglycemiaFHIR_0_0_012 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "HospitalHarmSevereHypoglycemiaFHIR";
+    public string Version => "0.0.012";
+    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("birth date")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4")]

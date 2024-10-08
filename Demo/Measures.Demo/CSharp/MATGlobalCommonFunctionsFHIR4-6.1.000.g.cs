@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("MATGlobalCommonFunctionsFHIR4", "6.1.000")]
-public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ISingleton<MATGlobalCommonFunctionsFHIR4_6_1_000>
+public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleton<MATGlobalCommonFunctionsFHIR4_6_1_000>
 {
     private MATGlobalCommonFunctionsFHIR4_6_1_000() {}
 
     public static MATGlobalCommonFunctionsFHIR4_6_1_000 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "MATGlobalCommonFunctionsFHIR4";
+    public string Version => "6.1.000";
+    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]

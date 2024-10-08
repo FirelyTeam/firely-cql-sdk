@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("DevDays", "2023.0.0")]
-public partial class DevDays_2023_0_0 : ISingleton<DevDays_2023_0_0>
+public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 {
     private DevDays_2023_0_0() {}
 
     public static DevDays_2023_0_0 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "DevDays";
+    public string Version => "2023.0.0";
+    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Sucked into jet engine")]
 	public CqlCode Sucked_into_jet_engine(CqlContext context) => 

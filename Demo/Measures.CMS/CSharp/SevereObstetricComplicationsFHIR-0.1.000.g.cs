@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("SevereObstetricComplicationsFHIR", "0.1.000")]
-public partial class SevereObstetricComplicationsFHIR_0_1_000 : ISingleton<SevereObstetricComplicationsFHIR_0_1_000>
+public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingleton<SevereObstetricComplicationsFHIR_0_1_000>
 {
     private SevereObstetricComplicationsFHIR_0_1_000() {}
 
     public static SevereObstetricComplicationsFHIR_0_1_000 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "SevereObstetricComplicationsFHIR";
+    public string Version => "0.1.000";
+    public ILibrary Dependencies => [CQMCommon_2_0_000.Instance, FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, PCMaternal_5_16_000.Instance, QICoreCommon_2_0_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("20 to 42 Plus Weeks Gestation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.67")]

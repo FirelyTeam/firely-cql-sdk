@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("CRLReceiptofSpecialistReportFHIR", "0.2.000")]
-public partial class CRLReceiptofSpecialistReportFHIR_0_2_000 : ISingleton<CRLReceiptofSpecialistReportFHIR_0_2_000>
+public partial class CRLReceiptofSpecialistReportFHIR_0_2_000 : ILibrary, ISingleton<CRLReceiptofSpecialistReportFHIR_0_2_000>
 {
     private CRLReceiptofSpecialistReportFHIR_0_2_000() {}
 
     public static CRLReceiptofSpecialistReportFHIR_0_2_000 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "CRLReceiptofSpecialistReportFHIR";
+    public string Version => "0.2.000";
+    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Consultant Report")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.121.12.1006")]

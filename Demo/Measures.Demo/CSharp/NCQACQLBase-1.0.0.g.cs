@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("NCQACQLBase", "1.0.0")]
-public partial class NCQACQLBase_1_0_0 : ISingleton<NCQACQLBase_1_0_0>
+public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 {
     private NCQACQLBase_1_0_0() {}
 
     public static NCQACQLBase_1_0_0 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "NCQACQLBase";
+    public string Version => "1.0.0";
+    public ILibrary Dependencies => []
+    #endregion Library Members
 	public IEnumerable<CqlInterval<CqlDate>> Sort_Date_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> intervals)
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_()

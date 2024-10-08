@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("AppropriateDXAScansForWomenUnder65FHIR", "0.0.000")]
-public partial class AppropriateDXAScansForWomenUnder65FHIR_0_0_000 : ISingleton<AppropriateDXAScansForWomenUnder65FHIR_0_0_000>
+public partial class AppropriateDXAScansForWomenUnder65FHIR_0_0_000 : ILibrary, ISingleton<AppropriateDXAScansForWomenUnder65FHIR_0_0_000>
 {
     private AppropriateDXAScansForWomenUnder65FHIR_0_0_000() {}
 
     public static AppropriateDXAScansForWomenUnder65FHIR_0_0_000 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "AppropriateDXAScansForWomenUnder65FHIR";
+    public string Version => "0.0.000";
+    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, CQMCommon_2_0_000.Instance, QICoreCommon_2_0_000.Instance, Status_1_6_000.Instance, CumulativeMedicationDuration_4_0_000.Instance, Hospice_6_9_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Amenorrhea")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1022")]

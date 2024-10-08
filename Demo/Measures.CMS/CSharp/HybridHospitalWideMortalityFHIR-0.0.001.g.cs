@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("HybridHospitalWideMortalityFHIR", "0.0.001")]
-public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ISingleton<HybridHospitalWideMortalityFHIR_0_0_001>
+public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingleton<HybridHospitalWideMortalityFHIR_0_0_001>
 {
     private HybridHospitalWideMortalityFHIR_0_0_001() {}
 
     public static HybridHospitalWideMortalityFHIR_0_0_001 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "HybridHospitalWideMortalityFHIR";
+    public string Version => "0.0.001";
+    public ILibrary Dependencies => [CQMCommon_2_0_000.Instance, FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Bicarbonate lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.139")]

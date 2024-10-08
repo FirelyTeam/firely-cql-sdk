@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("AppropriateTreatmentforSTEMIFHIR", "1.0.000")]
-public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000 : ISingleton<AppropriateTreatmentforSTEMIFHIR_1_0_000>
+public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000 : ILibrary, ISingleton<AppropriateTreatmentforSTEMIFHIR_1_0_000>
 {
     private AppropriateTreatmentforSTEMIFHIR_1_0_000() {}
 
     public static AppropriateTreatmentforSTEMIFHIR_1_0_000 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "AppropriateTreatmentforSTEMIFHIR";
+    public string Version => "1.0.000";
+    public ILibrary Dependencies => [SupplementalDataElements_3_4_000.Instance, QICoreCommon_2_0_000.Instance, FHIRHelpers_4_3_000.Instance, CQMCommon_2_0_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Active Bleeding Excluding Menses or Bleeding Diathesis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4036")]

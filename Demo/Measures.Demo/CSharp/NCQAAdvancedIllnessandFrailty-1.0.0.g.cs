@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("NCQAAdvancedIllnessandFrailty", "1.0.0")]
-public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ISingleton<NCQAAdvancedIllnessandFrailty_1_0_0>
+public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<NCQAAdvancedIllnessandFrailty_1_0_0>
 {
     private NCQAAdvancedIllnessandFrailty_1_0_0() {}
 
     public static NCQAAdvancedIllnessandFrailty_1_0_0 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "NCQAAdvancedIllnessandFrailty";
+    public string Version => "1.0.0";
+    public ILibrary Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAFHIRBase_1_0_0.Instance, NCQAStatus_1_0_0.Instance, NCQAEncounter_1_0_0.Instance, NCQAClaims_1_0_0.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Acute Inpatient")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1810")]

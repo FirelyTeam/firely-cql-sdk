@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("VTEFHIR4", "4.8.000")]
-public partial class VTEFHIR4_4_8_000 : ISingleton<VTEFHIR4_4_8_000>
+public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
 {
     private VTEFHIR4_4_8_000() {}
 
     public static VTEFHIR4_4_8_000 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "VTEFHIR4";
+    public string Version => "4.8.000";
+    public ILibrary Dependencies => [MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, FHIRHelpers_4_0_001.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Intensive Care Unit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206")]

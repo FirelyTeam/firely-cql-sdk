@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("RR23", "1.0.0")]
-public partial class RR23_1_0_0 : ISingleton<RR23_1_0_0>
+public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
     private RR23_1_0_0() {}
 
     public static RR23_1_0_0 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "RR23";
+    public string Version => "1.0.0";
+    public ILibrary Dependencies => [FHIRHelpers_4_0_1.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Injury due to falling rock")]
     [CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock")]

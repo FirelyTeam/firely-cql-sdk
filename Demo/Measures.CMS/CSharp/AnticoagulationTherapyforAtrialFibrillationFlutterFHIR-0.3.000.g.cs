@@ -10,14 +10,19 @@ using System.Reflection;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("AnticoagulationTherapyforAtrialFibrillationFlutterFHIR", "0.3.000")]
-public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000 : ISingleton<AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000>
+public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000 : ILibrary, ISingleton<AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000>
 {
     private AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000() {}
 
     public static AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000 Instance { get; } = new();
 
+    #region Library Members
+    public string Name => "AnticoagulationTherapyforAtrialFibrillationFlutterFHIR";
+    public string Version => "0.3.000";
+    public ILibrary Dependencies => [FHIRHelpers_4_3_000.Instance, CQMCommon_2_0_000.Instance, QICoreCommon_2_0_000.Instance, SupplementalDataElements_3_4_000.Instance, TJCOverall_8_11_000.Instance]
+    #endregion Library Members
 
     [CqlDeclaration("Anticoagulant Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.200")]
