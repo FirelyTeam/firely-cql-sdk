@@ -62,6 +62,8 @@ stages:
             } else {
               Write-Host "Changes outside /docs/ detected, proceeding with build."
             }
+            # Explicitly set exit 0 to prevent the script from failing
+            exit 0
           displayName: 'Output change detection result'
 
 - stage: build
