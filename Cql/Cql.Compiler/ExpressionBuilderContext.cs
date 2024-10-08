@@ -6,6 +6,16 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler.Expressions;
+using Hl7.Cql.Compiler.Infrastructure;
+using Hl7.Cql.Elm;
+using Hl7.Cql.Model;
+using Hl7.Cql.Operators;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
@@ -18,16 +28,6 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Xml;
-using Hl7.Cql.Abstractions;
-using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Compiler.Expressions;
-using Hl7.Cql.Compiler.Infrastructure;
-using Hl7.Cql.Elm;
-using Hl7.Cql.Model;
-using Hl7.Cql.Operators;
-using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime;
-using Microsoft.Extensions.Logging;
 using ChoiceTypeSpecifier = Hl7.Cql.Elm.ChoiceTypeSpecifier;
 using Convert = System.Convert;
 using DateTime = Hl7.Cql.Elm.DateTime;
@@ -37,6 +37,7 @@ using ListTypeSpecifier = Hl7.Cql.Elm.ListTypeSpecifier;
 using NamedTypeSpecifier = Hl7.Cql.Elm.NamedTypeSpecifier;
 using Tuple = Hl7.Cql.Elm.Tuple;
 using TupleTypeSpecifier = Hl7.Cql.Elm.TupleTypeSpecifier;
+using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
 
 namespace Hl7.Cql.Compiler;
 
@@ -123,7 +124,8 @@ partial class ExpressionBuilderContext(
         {
             Expression expression => expression,
             Element element => TranslateElement(element),
-            var obj => Expression.Constant(obj),
+            null => NullExpression.ForType<TArg>(),
+            _ => Expression.Constant(arg),
         };
 
     private Expression TranslateElement(Element element) =>
@@ -914,23 +916,28 @@ partial class ExpressionBuilderContext(
             codeProperty = NullExpression.ForType<PropertyInfo>();
         }
 
+        var templateId = TranslateArg(retrieve.templateId);
+        var sourceElementTypeExpr = Expression.Constant(sourceElementType, typeof(Type));
+        Expression values = NullExpression.ForType<CqlValueSet>();
+
         if (retrieve.codes != null)
         {
             if (retrieve.codes is ValueSetRef valueSetRef)
             {
                 if (string.IsNullOrWhiteSpace(valueSetRef.name))
                     throw this.NewExpressionBuildingException($"The ValueSetRef at {valueSetRef.locator} is missing a name.");
-                var valueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef.libraryName, typeof(CqlValueSet));
-                return BindCqlOperator(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), valueSet, codeProperty);
-            }
 
-            // In this construct, instead of querying a value set, we're testing resources
-            // against a list of codes, e.g., as defined by the code from or codesystem construct
-            var codes = TranslateArg(retrieve.codes);
-            return BindCqlOperator(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), codes, codeProperty);
+                values = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef.libraryName, typeof(CqlValueSet));
+            }
+            else
+            {
+                // In this construct, instead of querying a value set, we're testing resources
+                // against a list of codes, e.g., as defined by the code from or codesystem construct
+                values = TranslateArg(retrieve.codes);
+            }
         }
 
-        return BindCqlOperator(CqlOperator.Retrieve, Expression.Constant(sourceElementType, typeof(Type)), NullExpression.ForType<CqlValueSet>(), codeProperty);
+        return BindCqlOperator(CqlOperator.Retrieve, sourceElementTypeExpr, values, codeProperty, templateId);
     }
 
     protected Expression Property(Property op)
@@ -1213,7 +1220,7 @@ partial class ExpressionBuilderContext(
 
 #region ArithmeticOperators
 
-partial class ExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 {
     private const string Int32MaxPlusOneAsString = "2147483648";
 
@@ -1245,7 +1252,7 @@ partial class ExpressionBuilderContext
 
 #region ComparisonOperators
 
-partial class ExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 {
     protected Expression Equivalent(Equivalent eqv)
     {
@@ -1267,7 +1274,7 @@ partial class ExpressionBuilderContext
 
 #region ErrorsAndMessaging
 
-partial class ExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 {
     private Expression Message(Message e)
     {
@@ -1298,7 +1305,7 @@ partial class ExpressionBuilderContext
 
 #region IntervalOperators
 
-partial class ExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 {
     protected Expression? Includes(Includes e)
     {
@@ -1486,7 +1493,7 @@ partial class ExpressionBuilderContext
 
 #region NullologicalOperators
 
-partial class ExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 {
     protected Expression Coalesce(Coalesce ce)
     {
@@ -1532,7 +1539,7 @@ partial class ExpressionBuilderContext
 #endregion
 
 #region Query
-partial class ExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 {
     protected Expression Query(Query query)
     {
@@ -2072,7 +2079,7 @@ partial class ExpressionBuilderContext
 
 #region Type Operators
 
-partial class ExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 {
     protected Expression As(As @as) //@ TODO: Cast - As
     {
@@ -2213,7 +2220,7 @@ partial class ExpressionBuilderContext
 
 #region ChangeType
 
-partial class ExpressionBuilderContext
+internal partial class ExpressionBuilderContext
 {
     private Expression ChangeType(
         Expression expr,

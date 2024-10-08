@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -169,7 +170,7 @@ public class Hospice_6_9_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -182,7 +183,7 @@ public class Hospice_6_9_000
 	private bool? Has_Hospice_Services_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> c_ = Status_1_6_000.isEncounterPerformed(b_);
 		bool? d_(Encounter InpatientEncounter)
 		{
@@ -211,7 +212,7 @@ public class Hospice_6_9_000
 		IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(c_, d_);
 		bool? f_ = context.Operators.Exists<Encounter>(e_);
 		CqlValueSet g_ = this.Hospice_Encounter();
-		IEnumerable<Encounter> h_ = context.Operators.RetrieveByValueSet<Encounter>(g_, default);
+		IEnumerable<Encounter> h_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> i_ = Status_1_6_000.isEncounterPerformed(h_);
 		bool? j_(Encounter HospiceEncounter)
 		{
@@ -228,7 +229,7 @@ public class Hospice_6_9_000
 		bool? m_ = context.Operators.Or(f_, l_);
 		CqlCode n_ = this.Hospice_care__Minimum_Data_Set_();
 		IEnumerable<CqlCode> o_ = context.Operators.ToList<CqlCode>(n_);
-		IEnumerable<Observation> p_ = context.Operators.RetrieveByCodes<Observation>(o_, default);
+		IEnumerable<Observation> p_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, o_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> q_ = Status_1_6_000.isAssessmentPerformed(p_);
 		bool? r_(Observation HospiceAssessment)
 		{
@@ -250,7 +251,7 @@ public class Hospice_6_9_000
 		bool? t_ = context.Operators.Exists<Observation>(s_);
 		bool? u_ = context.Operators.Or(m_, t_);
 		CqlValueSet v_ = this.Hospice_Care_Ambulatory();
-		IEnumerable<ServiceRequest> w_ = context.Operators.RetrieveByValueSet<ServiceRequest>(v_, default);
+		IEnumerable<ServiceRequest> w_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, v_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		IEnumerable<ServiceRequest> x_ = Status_1_6_000.isInterventionOrder(w_);
 		bool? y_(ServiceRequest HospiceOrder)
 		{
@@ -265,7 +266,7 @@ public class Hospice_6_9_000
 		IEnumerable<ServiceRequest> z_ = context.Operators.Where<ServiceRequest>(x_, y_);
 		bool? aa_ = context.Operators.Exists<ServiceRequest>(z_);
 		bool? ab_ = context.Operators.Or(u_, aa_);
-		IEnumerable<Procedure> ad_ = context.Operators.RetrieveByValueSet<Procedure>(v_, default);
+		IEnumerable<Procedure> ad_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, v_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> ae_ = Status_1_6_000.isInterventionPerformed(ad_);
 		bool? af_(Procedure HospicePerformed)
 		{
@@ -281,7 +282,7 @@ public class Hospice_6_9_000
 		bool? ah_ = context.Operators.Exists<Procedure>(ag_);
 		bool? ai_ = context.Operators.Or(ab_, ah_);
 		CqlValueSet aj_ = this.Hospice_Diagnosis();
-		IEnumerable<Condition> ak_ = context.Operators.RetrieveByValueSet<Condition>(aj_, default);
+		IEnumerable<Condition> ak_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		bool? al_(Condition HospiceCareDiagnosis)
 		{
 			CqlInterval<CqlDateTime> cj_ = QICoreCommon_2_0_000.prevalenceInterval(HospiceCareDiagnosis);

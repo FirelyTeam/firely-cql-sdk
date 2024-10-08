@@ -73,7 +73,7 @@ namespace Hl7.Cql.Compiler
                 "LateBoundProperty" => LateBoundProperty(args[0], args[1], args[2]),
                 "ListUnion"         => Union(args[0], args[1]),
                 "ResolveValueSet"   => ResolveValueSet(args[0]),
-                "Retrieve"          => Retrieve(args[0], args[1], args[2]),
+                "Retrieve"          => Retrieve(args[0], args[1], args[2], args[3]),
                 "Select"            => Select(args[0], args[1]),
                 "SelectMany"        => SelectMany(source: args[0], collectionSelectorLambda: args[1]),
                 "SelectManyResults" => SelectManyResults(source: args[0], collectionSelectorLambda: args[1], resultSelectorLambda: args[2]),

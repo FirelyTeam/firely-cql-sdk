@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -231,7 +232,7 @@ public class Exam125FHIR_0_0_009
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -288,9 +289,9 @@ public class Exam125FHIR_0_0_009
 	private IEnumerable<Encounter> Telehealth_Services_Value()
 	{
 		CqlValueSet a_ = this.Online_Assessments();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		CqlValueSet c_ = this.Telephone_Visits();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		bool? f_(Encounter TelehealthEncounter)
 		{
@@ -375,9 +376,9 @@ public class Exam125FHIR_0_0_009
 	private IEnumerable<Condition> Right_Mastectomy_Diagnosis_Value()
 	{
 		CqlValueSet a_ = this.Status_Post_Right_Mastectomy();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		CqlValueSet c_ = this.Unilateral_Mastectomy__Unspecified_Laterality();
-		IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(c_, default);
+		IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		bool? e_(Condition UnilateralMastectomyDiagnosis)
 		{
 			List<CodeableConcept> j_ = UnilateralMastectomyDiagnosis?.BodySite;
@@ -417,7 +418,7 @@ public class Exam125FHIR_0_0_009
 	private IEnumerable<Procedure> Right_Mastectomy_Procedure_Value()
 	{
 		CqlValueSet a_ = this.Unilateral_Mastectomy_Right();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		bool? c_(Procedure UnilateralMastectomyRightPerformed)
 		{
 			Code<EventStatus> e_ = UnilateralMastectomyRightPerformed?.StatusElement;
@@ -445,9 +446,9 @@ public class Exam125FHIR_0_0_009
 	private IEnumerable<Condition> Left_Mastectomy_Diagnosis_Value()
 	{
 		CqlValueSet a_ = this.Status_Post_Left_Mastectomy();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		CqlValueSet c_ = this.Unilateral_Mastectomy__Unspecified_Laterality();
-		IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(c_, default);
+		IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		bool? e_(Condition UnilateralMastectomyDiagnosis)
 		{
 			List<CodeableConcept> j_ = UnilateralMastectomyDiagnosis?.BodySite;
@@ -487,7 +488,7 @@ public class Exam125FHIR_0_0_009
 	private IEnumerable<Procedure> Left_Mastectomy_Procedure_Value()
 	{
 		CqlValueSet a_ = this.Unilateral_Mastectomy_Left();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		bool? c_(Procedure UnilateralMastectomyLeftPerformed)
 		{
 			Code<EventStatus> e_ = UnilateralMastectomyLeftPerformed?.StatusElement;
@@ -515,7 +516,7 @@ public class Exam125FHIR_0_0_009
 	private IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis_Value()
 	{
 		CqlValueSet a_ = this.History_of_bilateral_mastectomy();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		bool? c_(Condition BilateralMastectomyHistory)
 		{
 			CqlInterval<CqlDateTime> e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(BilateralMastectomyHistory);
@@ -538,7 +539,7 @@ public class Exam125FHIR_0_0_009
 	private IEnumerable<Procedure> Bilateral_Mastectomy_Procedure_Value()
 	{
 		CqlValueSet a_ = this.Bilateral_Mastectomy();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		bool? c_(Procedure BilateralMastectomyPerformed)
 		{
 			Code<EventStatus> e_ = BilateralMastectomyPerformed?.StatusElement;
@@ -611,7 +612,7 @@ public class Exam125FHIR_0_0_009
 	private bool? Observation_with_status_Value()
 	{
 		CqlValueSet a_ = this.Mammography();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation Mammogram)
 		{
 			Code<ObservationStatus> f_ = Mammogram?.StatusElement;
@@ -653,7 +654,7 @@ public class Exam125FHIR_0_0_009
 	private bool? Diagnostic_Report_with_status_Value()
 	{
 		CqlValueSet a_ = this.Mammography();
-		IEnumerable<DiagnosticReport> b_ = context.Operators.RetrieveByValueSet<DiagnosticReport>(a_, default);
+		IEnumerable<DiagnosticReport> b_ = context.Operators.Retrieve<DiagnosticReport>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/DiagnosticReport"));
 		bool? c_(DiagnosticReport Mammogram)
 		{
 			Code<DiagnosticReport.DiagnosticReportStatus> f_ = Mammogram?.StatusElement;
@@ -726,7 +727,7 @@ public class Exam125FHIR_0_0_009
 	private bool? Observation_without_appropriate_status_Value()
 	{
 		CqlValueSet a_ = this.Mammography();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation Mammogram)
 		{
 			Code<ObservationStatus> f_ = Mammogram?.StatusElement;
@@ -769,7 +770,7 @@ public class Exam125FHIR_0_0_009
 	private bool? Diagnostic_Report_without_appropriate_status_Value()
 	{
 		CqlValueSet a_ = this.Mammography();
-		IEnumerable<DiagnosticReport> b_ = context.Operators.RetrieveByValueSet<DiagnosticReport>(a_, default);
+		IEnumerable<DiagnosticReport> b_ = context.Operators.Retrieve<DiagnosticReport>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/DiagnosticReport"));
 		bool? c_(DiagnosticReport Mammogram)
 		{
 			Code<DiagnosticReport.DiagnosticReportStatus> f_ = Mammogram?.StatusElement;

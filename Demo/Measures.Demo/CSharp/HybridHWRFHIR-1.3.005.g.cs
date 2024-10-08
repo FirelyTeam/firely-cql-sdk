@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -307,7 +308,7 @@ public class HybridHWRFHIR_1_3_005
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -370,14 +371,14 @@ public class HybridHWRFHIR_1_3_005
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.Emergency_Department_Visit();
-			IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, default);
+			IEnumerable<Encounter> f_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 			bool? g_(Encounter LastED)
 			{
 				Period af_ = LastED?.Period;
 				CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_0_001.ToInterval(af_);
 				CqlDateTime ah_ = context.Operators.End(ag_);
 				CqlValueSet ai_ = this.Observation_Services();
-				IEnumerable<Encounter> aj_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
+				IEnumerable<Encounter> aj_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 				bool? ak_(Encounter LastObs)
 				{
 					Period cb_ = LastObs?.Period;
@@ -418,7 +419,7 @@ public class HybridHWRFHIR_1_3_005
 				CqlDateTime au_ = context.Operators.Start(at_);
 				CqlQuantity av_ = context.Operators.Quantity(1m, "hour");
 				CqlDateTime aw_ = context.Operators.Subtract(ar_ ?? au_, av_);
-				IEnumerable<Encounter> ay_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
+				IEnumerable<Encounter> ay_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 				bool? az_(Encounter LastObs)
 				{
 					Period cw_ = LastObs?.Period;
@@ -458,7 +459,7 @@ public class HybridHWRFHIR_1_3_005
 				CqlDateTime bj_ = context.Operators.Start(bi_);
 				CqlInterval<CqlDateTime> bk_ = context.Operators.Interval(aw_, bg_ ?? bj_, true, true);
 				bool? bl_ = context.Operators.In<CqlDateTime>(ah_, bk_, default);
-				IEnumerable<Encounter> bn_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
+				IEnumerable<Encounter> bn_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 				bool? bo_(Encounter LastObs)
 				{
 					Period dr_ = LastObs?.Period;
@@ -516,7 +517,7 @@ public class HybridHWRFHIR_1_3_005
 			CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_0_001.ToInterval(l_);
 			CqlDateTime n_ = context.Operators.Start(m_);
 			CqlValueSet o_ = this.Observation_Services();
-			IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, default);
+			IEnumerable<Encounter> p_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 			bool? q_(Encounter LastObs)
 			{
 				Period ep_ = LastObs?.Period;
@@ -580,9 +581,9 @@ public class HybridHWRFHIR_1_3_005
 	private IEnumerable<Encounter> Inpatient_Encounters_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		CqlValueSet c_ = this.Medicare_payer();
-		IEnumerable<Coverage> d_ = context.Operators.RetrieveByValueSet<Coverage>(c_, default);
+		IEnumerable<Coverage> d_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/StructureDefinition/Coverage"));
 		IEnumerable<ValueTuple<Encounter, Coverage>> e_ = context.Operators.CrossJoin<Encounter, Coverage>(b_, d_);
 		(Encounter InpatientEncounter, Coverage Payer)? f_(ValueTuple<Encounter, Coverage> _valueTuple)
 		{
@@ -997,46 +998,46 @@ public class HybridHWRFHIR_1_3_005
 	{
 		CqlCode a_ = this.Heart_rate();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		IEnumerable<string> d_ = this.FirstPhysicalExamWithEncounterId(c_, "FirstHeartRate");
 		CqlCode e_ = this.Systolic_blood_pressure();
 		IEnumerable<CqlCode> f_ = context.Operators.ToList<CqlCode>(e_);
-		IEnumerable<Observation> g_ = context.Operators.RetrieveByCodes<Observation>(f_, default);
+		IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, f_, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		IEnumerable<string> h_ = this.FirstPhysicalExamWithEncounterId(g_, "FirstSystolicBP");
 		CqlCode i_ = this.Respiratory_rate();
 		IEnumerable<CqlCode> j_ = context.Operators.ToList<CqlCode>(i_);
-		IEnumerable<Observation> k_ = context.Operators.RetrieveByCodes<Observation>(j_, default);
+		IEnumerable<Observation> k_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, j_, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		IEnumerable<string> l_ = this.FirstPhysicalExamWithEncounterId(k_, "FirstRespRate");
 		CqlValueSet m_ = this.Body_temperature();
-		IEnumerable<Observation> n_ = context.Operators.RetrieveByValueSet<Observation>(m_, default);
+		IEnumerable<Observation> n_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		IEnumerable<string> o_ = this.FirstPhysicalExamWithEncounterId(n_, "FirstTemperature");
 		CqlCode p_ = this.Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry();
 		IEnumerable<CqlCode> q_ = context.Operators.ToList<CqlCode>(p_);
-		IEnumerable<Observation> r_ = context.Operators.RetrieveByCodes<Observation>(q_, default);
+		IEnumerable<Observation> r_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, q_, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		IEnumerable<string> s_ = this.FirstPhysicalExamWithEncounterId(r_, "FirstO2Saturation");
 		CqlValueSet t_ = this.Body_weight();
-		IEnumerable<Observation> u_ = context.Operators.RetrieveByValueSet<Observation>(t_, default);
+		IEnumerable<Observation> u_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		IEnumerable<string> v_ = this.FirstPhysicalExamWithEncounterIdUsingLabTiming(u_, "FirstWeight");
 		CqlValueSet w_ = this.Hematocrit_lab_test();
-		IEnumerable<Observation> x_ = context.Operators.RetrieveByValueSet<Observation>(w_, default);
+		IEnumerable<Observation> x_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, w_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		IEnumerable<string> y_ = this.FirstLabTestWithEncounterId(x_, "FirstHematocrit");
 		CqlValueSet z_ = this.White_blood_cells_count_lab_test();
-		IEnumerable<Observation> aa_ = context.Operators.RetrieveByValueSet<Observation>(z_, default);
+		IEnumerable<Observation> aa_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, z_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		IEnumerable<string> ab_ = this.FirstLabTestWithEncounterId(aa_, "FirstWhiteBloodCell");
 		CqlValueSet ac_ = this.Potassium_lab_test();
-		IEnumerable<Observation> ad_ = context.Operators.RetrieveByValueSet<Observation>(ac_, default);
+		IEnumerable<Observation> ad_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ac_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		IEnumerable<string> ae_ = this.FirstLabTestWithEncounterId(ad_, "FirstPotassium");
 		CqlValueSet af_ = this.Sodium_lab_test();
-		IEnumerable<Observation> ag_ = context.Operators.RetrieveByValueSet<Observation>(af_, default);
+		IEnumerable<Observation> ag_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, af_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		IEnumerable<string> ah_ = this.FirstLabTestWithEncounterId(ag_, "FirstSodium");
 		CqlValueSet ai_ = this.Bicarbonate_lab_test();
-		IEnumerable<Observation> aj_ = context.Operators.RetrieveByValueSet<Observation>(ai_, default);
+		IEnumerable<Observation> aj_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		IEnumerable<string> ak_ = this.FirstLabTestWithEncounterId(aj_, "FirstBicarbonate");
 		CqlValueSet al_ = this.Creatinine_lab_test();
-		IEnumerable<Observation> am_ = context.Operators.RetrieveByValueSet<Observation>(al_, default);
+		IEnumerable<Observation> am_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, al_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		IEnumerable<string> an_ = this.FirstLabTestWithEncounterId(am_, "FirstCreatinine");
 		CqlValueSet ao_ = this.Glucose_lab_test();
-		IEnumerable<Observation> ap_ = context.Operators.RetrieveByValueSet<Observation>(ao_, default);
+		IEnumerable<Observation> ap_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ao_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		IEnumerable<string> aq_ = this.FirstLabTestWithEncounterId(ap_, "FirstGlucose");
 		IEnumerable<string>[] ar_ = [
 			d_,

@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -831,7 +832,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -844,17 +845,17 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<Encounter> Qualifying_Encounters_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet c_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
+		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet h_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
+		IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
-		IEnumerable<Encounter> l_ = context.Operators.RetrieveByValueSet<Encounter>(default, default);
+		IEnumerable<Encounter> l_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		bool? m_(Encounter E)
 		{
 			List<CodeableConcept> y_ = E?.Type;
@@ -880,11 +881,11 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		};
 		IEnumerable<Encounter> n_ = context.Operators.Where<Encounter>(l_, m_);
 		CqlValueSet o_ = this.Online_Assessments();
-		IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, default);
+		IEnumerable<Encounter> p_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(n_, p_);
 		IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(k_, q_);
 		CqlValueSet s_ = this.Telephone_Visits();
-		IEnumerable<Encounter> t_ = context.Operators.RetrieveByValueSet<Encounter>(s_, default);
+		IEnumerable<Encounter> t_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, s_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> u_ = context.Operators.Union<Encounter>(r_, t_);
 		IEnumerable<Encounter> v_ = Status_1_6_000.Finished_Encounter(u_);
 		bool? w_(Encounter ValidEncounters)
@@ -976,7 +977,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private bool? Has_Severe_Combined_Immunodeficiency_Value()
 	{
 		CqlValueSet a_ = this.Severe_Combined_Immunodeficiency();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(b_);
 		bool? d_(Condition SevereImmuneDisorder)
 		{
@@ -1001,7 +1002,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private bool? Has_Immunodeficiency_Value()
 	{
 		CqlValueSet a_ = this.Disorders_of_the_Immune_System();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(b_);
 		bool? d_(Condition ImmuneDisorder)
 		{
@@ -1026,7 +1027,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private bool? Has_HIV_Value()
 	{
 		CqlValueSet a_ = this.HIV();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(b_);
 		bool? d_(Condition HIV)
 		{
@@ -1051,7 +1052,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private bool? Has_Lymphoreticular_Cancer__Multiple_Myeloma_or_Leukemia_Value()
 	{
 		CqlValueSet a_ = this.Malignant_Neoplasm_of_Lymphatic_and_Hematopoietic_Tissue();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(b_);
 		bool? d_(Condition LymphaticMalignantNeoplasm)
 		{
@@ -1076,7 +1077,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private bool? Has_Intussusception_Value()
 	{
 		CqlValueSet a_ = this.Intussusception();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(b_);
 		bool? d_(Condition IntussusceptionDisorder)
 		{
@@ -1142,7 +1143,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<CqlDate> DTaP_Immunizations_or_Procedures_Value()
 	{
 		CqlValueSet a_ = this.DTaP_Vaccine();
-		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
+		IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
 		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization DTaPVaccination)
 		{
@@ -1170,7 +1171,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		};
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.DTaP_Vaccine_Administered();
-		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
+		IEnumerable<Procedure> i_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure DTaPProcedure)
 		{
@@ -1246,9 +1247,9 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<Condition> DTaP_Numerator_Inclusion_Conditions_Value()
 	{
 		CqlValueSet a_ = this.Anaphylactic_Reaction_to_DTaP_Vaccine();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		CqlValueSet c_ = this.Encephalitis_Due_to_Diphtheria__Tetanus_or_Pertussis_Vaccine();
-		IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(c_, default);
+		IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
 		IEnumerable<Condition> f_ = Status_1_6_000.Active_Condition(e_);
 		bool? g_(Condition DTaPConditions)
@@ -1273,7 +1274,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<CqlDate> Polio_Immunizations_or_Procedures_Value()
 	{
 		CqlValueSet a_ = this.Inactivated_Polio_Vaccine__IPV_();
-		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
+		IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
 		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization PolioVaccination)
 		{
@@ -1301,7 +1302,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		};
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.Inactivated_Polio_Vaccine__IPV__Administered();
-		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
+		IEnumerable<Procedure> i_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure PolioProcedure)
 		{
@@ -1375,7 +1376,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_human_poliovirus_antigen__disorder_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Condition> c_ = context.Operators.RetrieveByCodes<Condition>(b_, default);
+		IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> d_ = Status_1_6_000.Active_Condition(c_);
 		bool? e_(Condition PolioConditions)
 		{
@@ -1430,7 +1431,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<object> One_MMR_Vaccination_Value()
 	{
 		CqlValueSet a_ = this.Measles__Mumps_and_Rubella__MMR__Vaccine();
-		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
+		IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
 		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization MMRVaccination)
 		{
@@ -1445,7 +1446,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		};
 		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlValueSet f_ = this.Measles__Mumps_and_Rubella__MMR__Vaccine_Administered();
-		IEnumerable<Procedure> g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, default);
+		IEnumerable<Procedure> g_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> h_ = Status_1_6_000.Completed_Procedure(g_);
 		bool? i_(Procedure MMRProcedure)
 		{
@@ -1472,7 +1473,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Measles_morbillivirus_and_Mumps_orthorubulavirus_and_Rubella_virus_antigens__disorder_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Condition> c_ = context.Operators.RetrieveByCodes<Condition>(b_, default);
+		IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> d_ = Status_1_6_000.Active_Condition(c_);
 		bool? e_(Condition MMRConditions)
 		{
@@ -1496,7 +1497,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<Condition> Measles_Indicators_Value()
 	{
 		CqlValueSet a_ = this.Measles();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(b_);
 		bool? d_(Condition MeaslesDiagnosis)
 		{
@@ -1520,7 +1521,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<Condition> Mumps_Indicators_Value()
 	{
 		CqlValueSet a_ = this.Mumps();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(b_);
 		bool? d_(Condition MumpsDiagnosis)
 		{
@@ -1544,7 +1545,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<Condition> Rubella_Indicators_Value()
 	{
 		CqlValueSet a_ = this.Rubella();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> c_ = Status_1_6_000.Active_Condition(b_);
 		bool? d_(Condition RubellaDiagnosis)
 		{
@@ -1568,7 +1569,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<CqlDate> Hib_3_Dose_Immunizations_or_Procedures_Value()
 	{
 		CqlValueSet a_ = this.Hib_Vaccine__3_dose_schedule_();
-		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
+		IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
 		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization ThreeDoseHibVaccine)
 		{
@@ -1596,7 +1597,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		};
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.Hib_Vaccine__3_dose_schedule__Administered();
-		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
+		IEnumerable<Procedure> i_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure ThreeDoseHibProcedure)
 		{
@@ -1635,7 +1636,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<CqlDate> Hib_4_Dose_Immunizations_or_Procedures_Value()
 	{
 		CqlValueSet a_ = this.Hib_Vaccine__4_dose_schedule_();
-		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
+		IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
 		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization HibVaccine)
 		{
@@ -1663,7 +1664,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		};
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.Hib_Vaccine__4_dose_schedule__Administered();
-		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
+		IEnumerable<Procedure> i_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure HibProcedure)
 		{
@@ -1786,7 +1787,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		CqlCode a_ = this.Anaphylaxis_due_to_Haemophilus_influenzae_type_b_vaccine__disorder_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Condition> c_ = context.Operators.RetrieveByCodes<Condition>(b_, default);
+		IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> d_ = Status_1_6_000.Active_Condition(c_);
 		bool? e_(Condition HibReaction)
 		{
@@ -1810,7 +1811,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<CqlDate> Hepatitis_B_Immunizations_or_Procedures_Value()
 	{
 		CqlValueSet a_ = this.Hepatitis_B_Vaccine();
-		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
+		IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
 		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization HepatitisBVaccination)
 		{
@@ -1838,7 +1839,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		};
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.Hepatitis_B_Vaccine_Administered();
-		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
+		IEnumerable<Procedure> i_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure HepatitisBProcedure)
 		{
@@ -1912,7 +1913,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		CqlCode a_ = this.Introduction_of_Serum__Toxoid_and_Vaccine_into_Muscle__Percutaneous_Approach();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Procedure> c_ = context.Operators.RetrieveByCodes<Procedure>(b_, default);
+		IEnumerable<Procedure> c_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> d_ = Status_1_6_000.Completed_Procedure(c_);
 		bool? e_(Procedure NewBornVaccine)
 		{
@@ -2000,9 +2001,9 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		CqlCode a_ = this.Anaphylaxis_due_to_Hepatitis_B_vaccine__disorder_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Condition> c_ = context.Operators.RetrieveByCodes<Condition>(b_, default);
+		IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		CqlValueSet d_ = this.Hepatitis_B();
-		IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, default);
+		IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> f_ = context.Operators.Union<Condition>(c_, e_);
 		IEnumerable<Condition> g_ = Status_1_6_000.Active_Condition(f_);
 		bool? h_(Condition HepBConditions)
@@ -2027,7 +2028,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<object> One_Chicken_Pox_Vaccination_Value()
 	{
 		CqlValueSet a_ = this.Varicella_Zoster_Vaccine__VZV_();
-		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
+		IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
 		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization ChickenPoxVaccination)
 		{
@@ -2042,7 +2043,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		};
 		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlValueSet f_ = this.Varicella_Zoster_Vaccine__VZV__Administered();
-		IEnumerable<Procedure> g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, default);
+		IEnumerable<Procedure> g_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> h_ = Status_1_6_000.Completed_Procedure(g_);
 		bool? i_(Procedure ChickenPoxProcedure)
 		{
@@ -2068,10 +2069,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<Condition> Varicella_Zoster_Numerator_Inclusion_Conditions_Value()
 	{
 		CqlValueSet a_ = this.Varicella_Zoster();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		CqlCode c_ = this.Anaphylaxis_caused_by_vaccine_containing_Human_alphaherpesvirus_3_antigen__disorder_();
 		IEnumerable<CqlCode> d_ = context.Operators.ToList<CqlCode>(c_);
-		IEnumerable<Condition> e_ = context.Operators.RetrieveByCodes<Condition>(d_, default);
+		IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, d_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> f_ = context.Operators.Union<Condition>(b_, e_);
 		IEnumerable<Condition> g_ = Status_1_6_000.Active_Condition(f_);
 		bool? h_(Condition VaricellaZoster)
@@ -2096,7 +2097,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<CqlDate> Pneumococcal_Conjugate_Immunizations_or_Procedures_Value()
 	{
 		CqlValueSet a_ = this.Pneumococcal_Conjugate_Vaccine();
-		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
+		IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
 		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization PneumococcalVaccination)
 		{
@@ -2124,7 +2125,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		};
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.Pneumococcal_Conjugate_Vaccine_Administered();
-		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
+		IEnumerable<Procedure> i_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure PneumococcalProcedure)
 		{
@@ -2201,7 +2202,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Streptococcus_pneumoniae_antigen__disorder_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Condition> c_ = context.Operators.RetrieveByCodes<Condition>(b_, default);
+		IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> d_ = Status_1_6_000.Active_Condition(c_);
 		bool? e_(Condition PneumococcalReaction)
 		{
@@ -2225,7 +2226,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<object> One_Hepatitis_A_Vaccinations_Value()
 	{
 		CqlValueSet a_ = this.Hepatitis_A_Vaccine();
-		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
+		IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
 		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization HepatitisAVaccination)
 		{
@@ -2240,7 +2241,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		};
 		IEnumerable<Immunization> e_ = context.Operators.Where<Immunization>(c_, d_);
 		CqlValueSet f_ = this.Hepatitis_A_Vaccine_Administered();
-		IEnumerable<Procedure> g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, default);
+		IEnumerable<Procedure> g_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> h_ = Status_1_6_000.Completed_Procedure(g_);
 		bool? i_(Procedure HepatitisAProcedure)
 		{
@@ -2266,10 +2267,10 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<Condition> Hepatitis_A_Numerator_Inclusion_Conditions_Value()
 	{
 		CqlValueSet a_ = this.Hepatitis_A();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		CqlCode c_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Hepatitis_A_virus_antigen__disorder_();
 		IEnumerable<CqlCode> d_ = context.Operators.ToList<CqlCode>(c_);
-		IEnumerable<Condition> e_ = context.Operators.RetrieveByCodes<Condition>(d_, default);
+		IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, d_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> f_ = context.Operators.Union<Condition>(b_, e_);
 		IEnumerable<Condition> g_ = Status_1_6_000.Active_Condition(f_);
 		bool? h_(Condition HepatitisADiagnosis)
@@ -2295,7 +2296,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		CqlCode a_ = this.rotavirus__live__monovalent_vaccine();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Immunization> c_ = context.Operators.RetrieveByCodes<Immunization>(b_, default);
+		IEnumerable<Immunization> c_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
 		IEnumerable<Immunization> d_ = Status_1_6_000.Completed_Immunization(c_);
 		bool? e_(Immunization TwoDoseRotavirusVaccine)
 		{
@@ -2323,7 +2324,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		};
 		IEnumerable<CqlDate> h_ = context.Operators.Select<Immunization, CqlDate>(f_, g_);
 		CqlValueSet i_ = this.Rotavirus_Vaccine__2_dose_schedule__Administered();
-		IEnumerable<Procedure> j_ = context.Operators.RetrieveByValueSet<Procedure>(i_, default);
+		IEnumerable<Procedure> j_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> k_ = Status_1_6_000.Completed_Procedure(j_);
 		bool? l_(Procedure TwoDoseRotavirusProcedure)
 		{
@@ -2362,7 +2363,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<CqlDate> Rotavirus_3_Dose_Immunizations_or_Procedures_Value()
 	{
 		CqlValueSet a_ = this.Rotavirus_Vaccine__3_dose_schedule_();
-		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
+		IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
 		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization ThreeDoseRotavirusVaccine)
 		{
@@ -2390,7 +2391,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		};
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.Rotavirus_Vaccine__3_dose_schedule__Administered();
-		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
+		IEnumerable<Procedure> i_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure ThreeDoseRotavirusAdministered)
 		{
@@ -2513,7 +2514,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		CqlCode a_ = this.Anaphylaxis_due_to_rotavirus_vaccine__disorder_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Condition> c_ = context.Operators.RetrieveByCodes<Condition>(b_, default);
+		IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> d_ = Status_1_6_000.Active_Condition(c_);
 		bool? e_(Condition RotavirusConditions)
 		{
@@ -2557,7 +2558,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<CqlDate> Influenza_Immunizations_or_Procedures_Value()
 	{
 		CqlValueSet a_ = this.Child_Influenza_Immunization_Administered();
-		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
+		IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
 		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization InfluenzaVaccine)
 		{
@@ -2585,7 +2586,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		};
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.Child_Influenza_Vaccine_Administered();
-		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
+		IEnumerable<Procedure> i_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure InfluenzaAdministration)
 		{
@@ -2661,7 +2662,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	private IEnumerable<CqlDate> LAIV_Vaccinations_Value()
 	{
 		CqlValueSet a_ = this.Influenza_Virus_LAIV_Immunization();
-		IEnumerable<Immunization> b_ = context.Operators.RetrieveByValueSet<Immunization>(a_, default);
+		IEnumerable<Immunization> b_ = context.Operators.Retrieve<Immunization>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-immunization"));
 		IEnumerable<Immunization> c_ = Status_1_6_000.Completed_Immunization(b_);
 		bool? d_(Immunization LAIVVaccine)
 		{
@@ -2690,7 +2691,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 		};
 		IEnumerable<CqlDate> g_ = context.Operators.Select<Immunization, CqlDate>(e_, f_);
 		CqlValueSet h_ = this.Influenza_Virus_LAIV_Procedure();
-		IEnumerable<Procedure> i_ = context.Operators.RetrieveByValueSet<Procedure>(h_, default);
+		IEnumerable<Procedure> i_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> j_ = Status_1_6_000.Completed_Procedure(i_);
 		bool? k_(Procedure InfluenzaAdministration)
 		{
@@ -2746,7 +2747,7 @@ public class ChildhoodImmunizationStatusFHIR_0_1_000
 	{
 		CqlCode a_ = this.Anaphylaxis_caused_by_vaccine_product_containing_Influenza_virus_antigen__disorder_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Condition> c_ = context.Operators.RetrieveByCodes<Condition>(b_, default);
+		IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> d_ = Status_1_6_000.Active_Condition(c_);
 		bool? e_(Condition InfluenzaConditions)
 		{

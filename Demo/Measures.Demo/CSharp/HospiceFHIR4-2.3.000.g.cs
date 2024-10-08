@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -110,7 +111,7 @@ public class HospiceFHIR4_2_3_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -123,7 +124,7 @@ public class HospiceFHIR4_2_3_000
 	private bool? Has_Hospice_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		bool? c_(Encounter DischargeHospice)
 		{
 			Code<Encounter.EncounterStatus> r_ = DischargeHospice?.StatusElement;
@@ -154,7 +155,7 @@ public class HospiceFHIR4_2_3_000
 		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
 		bool? e_ = context.Operators.Exists<Encounter>(d_);
 		CqlValueSet f_ = this.Hospice_care_ambulatory();
-		IEnumerable<ServiceRequest> g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, default);
+		IEnumerable<ServiceRequest> g_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
 		bool? h_(ServiceRequest HospiceOrder)
 		{
 			Code<RequestStatus> ao_ = HospiceOrder?.StatusElement;
@@ -179,7 +180,7 @@ public class HospiceFHIR4_2_3_000
 		IEnumerable<ServiceRequest> i_ = context.Operators.Where<ServiceRequest>(g_, h_);
 		bool? j_ = context.Operators.Exists<ServiceRequest>(i_);
 		bool? k_ = context.Operators.Or(e_, j_);
-		IEnumerable<Procedure> m_ = context.Operators.RetrieveByValueSet<Procedure>(f_, default);
+		IEnumerable<Procedure> m_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		bool? n_(Procedure HospicePerformed)
 		{
 			Code<EventStatus> bb_ = HospicePerformed?.StatusElement;

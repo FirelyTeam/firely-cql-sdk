@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -121,7 +122,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -178,7 +179,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 	private IEnumerable<Encounter> Qualifying_Encounter_during_day_of_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Encounter_to_Document_Medications();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		bool? c_(Encounter ValidEncounter)
 		{
 			Code<Encounter.EncounterStatus> e_ = ValidEncounter?.StatusElement;
@@ -231,7 +232,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 		{
 			CqlCode d_ = this.Documentation_of_current_medications__procedure_();
 			IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-			IEnumerable<Procedure> f_ = context.Operators.RetrieveByCodes<Procedure>(e_, default);
+			IEnumerable<Procedure> f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 			bool? g_(Procedure MedicationsDocumented)
 			{
 				DataType k_ = MedicationsDocumented?.Performed;
@@ -272,7 +273,7 @@ public class DocumentationofCurrentMedicationsFHIR_0_2_000
 		{
 			CqlCode d_ = this.Documentation_of_current_medications__procedure_();
 			IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-			IEnumerable<Procedure> f_ = context.Operators.RetrieveByCodes<Procedure>(e_, default);
+			IEnumerable<Procedure> f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedurenotdone"));
 			bool? g_(Procedure MedicationsNotDocumented)
 			{
 				bool? k_(Extension @this)

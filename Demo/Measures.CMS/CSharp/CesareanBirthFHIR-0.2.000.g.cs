@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -245,7 +246,7 @@ public class CesareanBirthFHIR_0_2_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -378,7 +379,7 @@ public class CesareanBirthFHIR_0_2_000
 	{
 		CqlCode a_ = this.____Pregnancies();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		bool? d_(Observation Gravida)
 		{
 			DataType k_ = Gravida?.Value;
@@ -531,7 +532,7 @@ public class CesareanBirthFHIR_0_2_000
 	{
 		CqlCode a_ = this.____Parity();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		bool? d_(Observation Parity)
 		{
 			object k_()
@@ -684,7 +685,7 @@ public class CesareanBirthFHIR_0_2_000
 	{
 		CqlCode a_ = this.____Births_preterm();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		bool? d_(Observation PretermBirth)
 		{
 			object k_()
@@ -837,7 +838,7 @@ public class CesareanBirthFHIR_0_2_000
 	{
 		CqlCode a_ = this.____Births_term();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		bool? d_(Observation TermBirth)
 		{
 			object k_()
@@ -1025,7 +1026,7 @@ public class CesareanBirthFHIR_0_2_000
 				bool n_()
 				{
 					CqlValueSet q_ = this.Abnormal_Presentation();
-					IEnumerable<Observation> r_ = context.Operators.RetrieveByValueSet<Observation>(q_, default);
+					IEnumerable<Observation> r_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, q_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 					bool? s_(Observation AbnormalPresentation)
 					{
 						object aa_()
@@ -1167,7 +1168,7 @@ public class CesareanBirthFHIR_0_2_000
 				bool o_()
 				{
 					CqlValueSet bx_ = this.Abnormal_Presentation();
-					IEnumerable<Observation> by_ = context.Operators.RetrieveByValueSet<Observation>(bx_, default);
+					IEnumerable<Observation> by_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, bx_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 					bool? bz_(Observation AbnormalPresentation)
 					{
 						object ch_()
@@ -1309,7 +1310,7 @@ public class CesareanBirthFHIR_0_2_000
 				bool p_()
 				{
 					CqlValueSet ee_ = this.Abnormal_Presentation();
-					IEnumerable<Observation> ef_ = context.Operators.RetrieveByValueSet<Observation>(ee_, default);
+					IEnumerable<Observation> ef_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ee_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 					bool? eg_(Observation AbnormalPresentation)
 					{
 						object eo_()
@@ -1451,7 +1452,7 @@ public class CesareanBirthFHIR_0_2_000
 				if (n_())
 				{
 					CqlValueSet gl_ = this.Abnormal_Presentation();
-					IEnumerable<Observation> gm_ = context.Operators.RetrieveByValueSet<Observation>(gl_, default);
+					IEnumerable<Observation> gm_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, gl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 					bool? gn_(Observation AbnormalPresentation)
 					{
 						object gu_()
@@ -1592,7 +1593,7 @@ public class CesareanBirthFHIR_0_2_000
 				else if (o_())
 				{
 					CqlValueSet ir_ = this.Abnormal_Presentation();
-					IEnumerable<Observation> is_ = context.Operators.RetrieveByValueSet<Observation>(ir_, default);
+					IEnumerable<Observation> is_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, ir_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 					bool? it_(Observation AbnormalPresentation)
 					{
 						object ja_()
@@ -1733,7 +1734,7 @@ public class CesareanBirthFHIR_0_2_000
 				else if (p_())
 				{
 					CqlValueSet kx_ = this.Abnormal_Presentation();
-					IEnumerable<Observation> ky_ = context.Operators.RetrieveByValueSet<Observation>(kx_, default);
+					IEnumerable<Observation> ky_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, kx_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 					bool? kz_(Observation AbnormalPresentation)
 					{
 						object lg_()
@@ -1990,7 +1991,7 @@ public class CesareanBirthFHIR_0_2_000
 		IEnumerable<Encounter> b_(Encounter ThirtysevenWeeksPlusEncounter)
 		{
 			CqlValueSet d_ = this.Cesarean_Birth();
-			IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default);
+			IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 			bool? f_(Procedure CSection)
 			{
 				CqlInterval<CqlDateTime> j_ = PCMaternal_5_16_000.hospitalizationWithEDOBTriageObservation(ThirtysevenWeeksPlusEncounter);
