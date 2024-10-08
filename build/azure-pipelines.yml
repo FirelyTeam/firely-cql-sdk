@@ -30,7 +30,7 @@ stages:
     - job: CheckDocChanges
       displayName: 'Check for changes outside docs folder'
       pool: 
-        vmImage: linux-latest
+        vmImage: ubuntu-latest
       steps:
         - checkout: self
         - script: |
