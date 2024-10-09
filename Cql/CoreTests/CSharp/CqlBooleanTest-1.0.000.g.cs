@@ -36,12 +36,11 @@ public class CqlBooleanTest_1_0_000
 	{
 		bool? a_ = context.Operators.Equal(1, 1);
 		bool? b_ = context.Operators.Equal(a_, true);
-
 		return b_;
 	}
 
     [CqlDeclaration("SomethingTrueEqualsTrue")]
-	public bool? SomethingTrueEqualsTrue() =>
+	public bool? SomethingTrueEqualsTrue() => 
 		__SomethingTrueEqualsTrue.Value;
 
 }

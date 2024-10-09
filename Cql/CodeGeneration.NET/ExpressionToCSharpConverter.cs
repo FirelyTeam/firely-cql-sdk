@@ -133,23 +133,24 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             sb.AppendLine(indent, "{");
 
-            foreach (var (childStatement, i) in block.Expressions.Select((value, i) => (value, i)))
+            var lastExpression = block.Expressions.LastOrDefault();
+            var isFirstStatement = true;
+
+            foreach (var childStatement in block.Expressions)
             {
-                if (i < block.Expressions.Count - 1)
+                if (ReferenceEquals(childStatement, lastExpression))
                 {
-                    // processing all expressions except the last one
-                    sb.Append(ConvertExpression(indent + 1, childStatement));
-                }
-                else
-                {
-                    //processing last expression, potentially as a return statement
                     if (childStatement is not
                         (CaseWhenThenExpression or UnaryExpression { NodeType: ExpressionType.Throw }))
                     {
-                        if (i > 0) sb.AppendLine();
+                        if (!isFirstStatement) sb.AppendLine();
                         sb.Append(indent + 1, "return ");
                     }
                     sb.Append(ConvertExpression(indent + 1, childStatement, false));
+                }
+                else
+                {
+                    sb.Append(ConvertExpression(indent + 1, childStatement));
                 }
 
                 switch (childStatement)
@@ -580,9 +581,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     return ConvertTupleInitExpression(indent, right, ParamName(parameter));
 
                 var rightCode = ConvertExpression(indent, right, false);
-
                 var typeDeclaration = _typeToCSharpConverter.ToCSharp(left.Type);
-
                 var assignment = $"{leadingIndentString}{typeDeclaration} {ParamName(parameter)} = {rightCode}";
                 return assignment;
             }

@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using System.Dynamic;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
@@ -40,7 +41,6 @@ public class CqlNestedTupleTest_1_0_0
 		dynamic b_ = new ExpandoObject();
 		b_.status = "success";
 		b_.result = a_;
-
 
 		return b_;
 	}

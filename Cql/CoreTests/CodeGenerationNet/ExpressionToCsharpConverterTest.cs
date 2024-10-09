@@ -16,11 +16,7 @@ internal class Tuple_123
 [TestClass]
 public class ExpressionToCsharpConverterTest
 {
-    static readonly IOptions<CSharpCodeWriterOptions> _codeWriterOptions =
-        new OptionsWrapper<CSharpCodeWriterOptions>(new CSharpCodeWriterOptions());
-
     readonly ExpressionToCSharpConverter _converter = new(
-        _codeWriterOptions,
         new TypeToCSharpConverter(),
         "");
 
@@ -44,6 +40,6 @@ public class ExpressionToCsharpConverterTest
         var res = _converter.ConvertTopLevelFunctionDefinition(0, func, "TestFunction", "private");
 
         // Assert
-        Assert.AreEqual("private dynamic TestFunction()\r\n{\r\n\tdynamic a = new ExpandoObject();\r\n\ta.status = \"success\";\r\n\ta.result = \"some result\";\r\n\r\n\r\n\treturn a;\r\n}\r\n", res);
+        Assert.AreEqual("private dynamic TestFunction()\r\n{\r\n\tdynamic a = new ExpandoObject();\r\n\ta.status = \"success\";\r\n\ta.result = \"some result\";\r\n\r\n\treturn a;\r\n}\r\n", res);
     }
 }

@@ -42,52 +42,52 @@ public class TestRetrieveInclude_1_0_1
         __Inflammatory_Diseases_of_Female_Reproductive_Organs = new Lazy<CqlValueSet>(this.Inflammatory_Diseases_of_Female_Reproductive_Organs_Value);
         __Chlamydia = new Lazy<CqlValueSet>(this.Chlamydia_Value);
     }
-	private CqlValueSet Female_Administrative_Sex_Value() =>
+	private CqlValueSet Female_Administrative_Sex_Value() => 
 		new CqlValueSet("2.16.840.1.113883.3.560.100.2", default);
 
     [CqlDeclaration("Female Administrative Sex")]
     [CqlValueSet("2.16.840.1.113883.3.560.100.2")]
-	public CqlValueSet Female_Administrative_Sex() =>
+	public CqlValueSet Female_Administrative_Sex() => 
 		__Female_Administrative_Sex.Value;
 
-	private CqlValueSet Other_Female_Reproductive_Conditions_Value() =>
+	private CqlValueSet Other_Female_Reproductive_Conditions_Value() => 
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1006", default);
 
     [CqlDeclaration("Other Female Reproductive Conditions")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1006")]
-	public CqlValueSet Other_Female_Reproductive_Conditions() =>
+	public CqlValueSet Other_Female_Reproductive_Conditions() => 
 		__Other_Female_Reproductive_Conditions.Value;
 
-	private CqlValueSet Genital_Herpes_Value() =>
+	private CqlValueSet Genital_Herpes_Value() => 
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1049", default);
 
     [CqlDeclaration("Genital Herpes")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1049")]
-	public CqlValueSet Genital_Herpes() =>
+	public CqlValueSet Genital_Herpes() => 
 		__Genital_Herpes.Value;
 
-	private CqlValueSet Genococcal_Infections_and_Venereal_Diseases_Value() =>
+	private CqlValueSet Genococcal_Infections_and_Venereal_Diseases_Value() => 
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1001", default);
 
     [CqlDeclaration("Genococcal Infections and Venereal Diseases")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1001")]
-	public CqlValueSet Genococcal_Infections_and_Venereal_Diseases() =>
+	public CqlValueSet Genococcal_Infections_and_Venereal_Diseases() => 
 		__Genococcal_Infections_and_Venereal_Diseases.Value;
 
-	private CqlValueSet Inflammatory_Diseases_of_Female_Reproductive_Organs_Value() =>
+	private CqlValueSet Inflammatory_Diseases_of_Female_Reproductive_Organs_Value() => 
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1004", default);
 
     [CqlDeclaration("Inflammatory Diseases of Female Reproductive Organs")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1004")]
-	public CqlValueSet Inflammatory_Diseases_of_Female_Reproductive_Organs() =>
+	public CqlValueSet Inflammatory_Diseases_of_Female_Reproductive_Organs() => 
 		__Inflammatory_Diseases_of_Female_Reproductive_Organs.Value;
 
-	private CqlValueSet Chlamydia_Value() =>
+	private CqlValueSet Chlamydia_Value() => 
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1003", default);
 
     [CqlDeclaration("Chlamydia")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1003")]
-	public CqlValueSet Chlamydia() =>
+	public CqlValueSet Chlamydia() => 
 		__Chlamydia.Value;
 
 }
