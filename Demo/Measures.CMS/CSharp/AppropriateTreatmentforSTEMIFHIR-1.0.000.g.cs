@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -485,7 +486,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -498,7 +499,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	private IEnumerable<Encounter> ED_Encounter_with_Encounter_Diagnosis_of_STEMI_Value()
 	{
 		CqlValueSet a_ = this.ED();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		bool? c_(Encounter EDEncounter)
 		{
 			Code<Encounter.EncounterStatus> e_ = EDEncounter?.StatusElement;
@@ -554,11 +555,11 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 	private IEnumerable<Encounter> ED_Encounter_with_Diagnosis_of_STEMI_Value()
 	{
 		CqlValueSet a_ = this.ED();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> c_(Encounter EDEncounter)
 		{
 			CqlValueSet e_ = this.STEMI();
-			IEnumerable<Condition> f_ = context.Operators.RetrieveByValueSet<Condition>(e_, default);
+			IEnumerable<Condition> f_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			bool? g_(Condition DxSTEMI)
 			{
 				CodeableConcept k_ = DxSTEMI?.ClinicalStatus;
@@ -662,7 +663,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 		IEnumerable<Encounter> b_(Encounter EDwSTEMI)
 		{
 			CqlValueSet d_ = this.Thrombolytic_medications();
-			IEnumerable<AllergyIntolerance> e_ = context.Operators.RetrieveByValueSet<AllergyIntolerance>(d_, default);
+			IEnumerable<AllergyIntolerance> e_ = context.Operators.Retrieve<AllergyIntolerance>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-allergyintolerance"));
 			bool? f_(AllergyIntolerance ThrombolyticAllergy)
 			{
 				CodeableConcept j_ = ThrombolyticAllergy?.ClinicalStatus;
@@ -702,7 +703,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 		IEnumerable<Encounter> b_(Encounter EDwSTEMI)
 		{
 			CqlValueSet d_ = this.Adverse_reaction_to_thrombolytics();
-			IEnumerable<AdverseEvent> e_ = context.Operators.RetrieveByValueSet<AdverseEvent>(d_, default);
+			IEnumerable<AdverseEvent> e_ = context.Operators.Retrieve<AdverseEvent>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-adverseevent"));
 			bool? f_(AdverseEvent ThrombolyticAdverseEvent)
 			{
 				FhirDateTime j_ = ThrombolyticAdverseEvent?.RecordedDateElement;
@@ -741,20 +742,20 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
 		{
 			CqlValueSet d_ = this.Active_Bleeding_Excluding_Menses_or_Bleeding_Diathesis();
-			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, default);
+			IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			CqlValueSet f_ = this.Malignant_Intracranial_Neoplasm_Group();
-			IEnumerable<Condition> g_ = context.Operators.RetrieveByValueSet<Condition>(f_, default);
+			IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_, g_);
 			CqlValueSet i_ = this.Cerebral_Vascular_Lesion();
-			IEnumerable<Condition> j_ = context.Operators.RetrieveByValueSet<Condition>(i_, default);
+			IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			CqlValueSet k_ = this.Dementia();
-			IEnumerable<Condition> l_ = context.Operators.RetrieveByValueSet<Condition>(k_, default);
+			IEnumerable<Condition> l_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, k_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			IEnumerable<Condition> m_ = context.Operators.Union<Condition>(j_, l_);
 			IEnumerable<Condition> n_ = context.Operators.Union<Condition>(h_, m_);
 			CqlValueSet o_ = this.Pregnancy_ICD10_SNOMEDCT();
-			IEnumerable<Condition> p_ = context.Operators.RetrieveByValueSet<Condition>(o_, default);
+			IEnumerable<Condition> p_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			CqlValueSet q_ = this.Allergy_to_thrombolytics();
-			IEnumerable<Condition> r_ = context.Operators.RetrieveByValueSet<Condition>(q_, default);
+			IEnumerable<Condition> r_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, q_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			IEnumerable<Condition> s_ = context.Operators.Union<Condition>(p_, r_);
 			IEnumerable<Condition> t_ = context.Operators.Union<Condition>(n_, s_);
 			bool? u_(Condition ActiveExclusionDx)
@@ -788,8 +789,8 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
 		{
 			CqlValueSet d_ = this.Oral_Anticoagulant_Medications();
-			IEnumerable<MedicationRequest> e_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, default);
-			IEnumerable<MedicationRequest> g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(d_, default);
+			IEnumerable<MedicationRequest> e_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+			IEnumerable<MedicationRequest> g_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 			IEnumerable<MedicationRequest> h_ = context.Operators.Union<MedicationRequest>(e_, g_);
 			bool? i_(MedicationRequest OralAnticoagulant)
 			{
@@ -834,12 +835,12 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
 		{
 			CqlValueSet d_ = this.Aortic_Dissection_and_Rupture();
-			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, default);
+			IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			CqlValueSet f_ = this.Neurologic_impairment();
-			IEnumerable<Condition> g_ = context.Operators.RetrieveByValueSet<Condition>(f_, default);
+			IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_, g_);
 			CqlValueSet i_ = this.Cardiopulmonary_Arrest();
-			IEnumerable<Condition> j_ = context.Operators.RetrieveByValueSet<Condition>(i_, default);
+			IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			IEnumerable<Condition> k_ = context.Operators.Union<Condition>(h_, j_);
 			bool? l_(Condition ExclusionDiagnosis)
 			{
@@ -887,7 +888,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
 		{
 			CqlValueSet d_ = this.Major_Surgical_Procedure();
-			IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default);
+			IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 			bool? f_(Procedure MajorSurgery)
 			{
 				DataType j_ = MajorSurgery?.Performed;
@@ -937,9 +938,9 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
 		{
 			CqlValueSet d_ = this.Endotracheal_Intubation();
-			IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default);
+			IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 			CqlValueSet f_ = this.Insertion_or_Replacement_of_Mechanical_Circulatory_Assist_Device();
-			IEnumerable<Procedure> g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, default);
+			IEnumerable<Procedure> g_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 			IEnumerable<Procedure> h_ = context.Operators.Union<Procedure>(e_, g_);
 			bool? i_(Procedure AirwayProcedure)
 			{
@@ -996,14 +997,14 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 		IEnumerable<Encounter> b_(Encounter EDwSTEMI)
 		{
 			CqlValueSet d_ = this.Ischemic_Stroke();
-			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, default);
+			IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			CqlValueSet f_ = this.Closed_Head_and_Facial_Trauma();
-			IEnumerable<Condition> g_ = context.Operators.RetrieveByValueSet<Condition>(f_, default);
+			IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			IEnumerable<Condition> h_ = context.Operators.Union<Condition>(e_, g_);
 			CqlValueSet i_ = this.Active_Peptic_Ulcer();
-			IEnumerable<Condition> j_ = context.Operators.RetrieveByValueSet<Condition>(i_, default);
+			IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			CqlValueSet k_ = this.Cardiopulmonary_Arrest();
-			IEnumerable<Condition> l_ = context.Operators.RetrieveByValueSet<Condition>(k_, default);
+			IEnumerable<Condition> l_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, k_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			IEnumerable<Condition> m_ = context.Operators.Union<Condition>(j_, l_);
 			IEnumerable<Condition> n_ = context.Operators.Union<Condition>(h_, m_);
 			bool? o_(Condition ExclusionCondition)
@@ -1044,7 +1045,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
 		{
 			CqlValueSet d_ = this.Intracranial_or_Intraspinal_surgery();
-			IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default);
+			IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 			bool? f_(Procedure CranialorSpinalSurgery)
 			{
 				DataType j_ = CranialorSpinalSurgery?.Performed;
@@ -1176,8 +1177,8 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
 		{
 			CqlValueSet d_ = this.Fibrinolytic_Therapy();
-			IEnumerable<MedicationAdministration> e_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(d_, default);
-			IEnumerable<MedicationAdministration> g_ = context.Operators.RetrieveByValueSet<MedicationAdministration>(d_, default);
+			IEnumerable<MedicationAdministration> e_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
+			IEnumerable<MedicationAdministration> g_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 			IEnumerable<MedicationAdministration> h_ = context.Operators.Union<MedicationAdministration>(e_, g_);
 			bool? i_(MedicationAdministration Fibrinolytic)
 			{
@@ -1222,7 +1223,7 @@ public class AppropriateTreatmentforSTEMIFHIR_1_0_000
 		IEnumerable<Encounter> b_(Encounter EDwithSTEMI)
 		{
 			CqlValueSet d_ = this.Percutaneous_Coronary_Intervention();
-			IEnumerable<Procedure> e_ = context.Operators.RetrieveByValueSet<Procedure>(d_, default);
+			IEnumerable<Procedure> e_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 			bool? f_(Procedure PCI)
 			{
 				DataType j_ = PCI?.Performed;

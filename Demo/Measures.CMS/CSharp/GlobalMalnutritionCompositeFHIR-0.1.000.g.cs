@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -301,7 +302,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -358,7 +359,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	private IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		bool? c_(Encounter EncounterInpatient)
 		{
 			Period e_ = EncounterInpatient?.Period;
@@ -426,7 +427,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Hospital_Dietitian_Referral();
-		IEnumerable<Procedure> c_ = context.Operators.RetrieveByValueSet<Procedure>(b_, default);
+		IEnumerable<Procedure> c_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<ValueTuple<Encounter, Procedure>> d_ = context.Operators.CrossJoin<Encounter, Procedure>(a_, c_);
 		(Encounter QualifyingEncounter, Procedure HospitalDietitianReferral)? e_(ValueTuple<Encounter, Procedure> _valueTuple)
 		{
@@ -476,7 +477,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Malnutrition_Risk_Screening();
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? e_(ValueTuple<Encounter, Observation> _valueTuple)
 		{
@@ -561,7 +562,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Malnutrition_Risk_Screening();
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? e_(ValueTuple<Encounter, Observation> _valueTuple)
 		{
@@ -643,7 +644,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Malnutrition_Risk_Screening();
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? e_(ValueTuple<Encounter, Observation> _valueTuple)
 		{
@@ -724,7 +725,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Nutrition_Assessment();
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(Encounter QualifyingEncounter, Observation NutritionAssessment)? e_(ValueTuple<Encounter, Observation> _valueTuple)
 		{
@@ -788,7 +789,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Nutrition_Assessment();
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(Encounter QualifyingEncounter, Observation NutritionAssessment)? e_(ValueTuple<Encounter, Observation> _valueTuple)
 		{
@@ -848,7 +849,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Nutrition_Assessment();
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByValueSet<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(Encounter QualifyingEncounter, Observation NutritionAssessment)? e_(ValueTuple<Encounter, Observation> _valueTuple)
 		{
@@ -904,7 +905,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Malnutrition_Diagnosis();
-		IEnumerable<Condition> c_ = context.Operators.RetrieveByValueSet<Condition>(b_, default);
+		IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<ValueTuple<Encounter, Condition>> d_ = context.Operators.CrossJoin<Encounter, Condition>(a_, c_);
 		(Encounter QualifyingEncounter, Condition MalnutritionDiagnosis)? e_(ValueTuple<Encounter, Condition> _valueTuple)
 		{
@@ -943,7 +944,7 @@ public class GlobalMalnutritionCompositeFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter();
 		CqlValueSet b_ = this.Nutrition_Care_Plan();
-		IEnumerable<Procedure> c_ = context.Operators.RetrieveByValueSet<Procedure>(b_, default);
+		IEnumerable<Procedure> c_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<ValueTuple<Encounter, Procedure>> d_ = context.Operators.CrossJoin<Encounter, Procedure>(a_, c_);
 		(Encounter QualifyingEncounter, Procedure NutritionCarePlan)? e_(ValueTuple<Encounter, Procedure> _valueTuple)
 		{

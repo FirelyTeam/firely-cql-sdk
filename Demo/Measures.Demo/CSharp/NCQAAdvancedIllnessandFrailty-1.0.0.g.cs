@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -210,7 +211,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -223,7 +224,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 	private bool? Has_Criteria_Indicating_Frailty_Value()
 	{
 		CqlValueSet a_ = this.Frailty_Device();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation FrailtyDeviceApplied)
 		{
 			DataType z_ = FrailtyDeviceApplied?.Effective;
@@ -236,7 +237,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
 		bool? e_ = context.Operators.Exists<Observation>(d_);
 		CqlValueSet f_ = this.Frailty_Diagnosis();
-		IEnumerable<Condition> g_ = context.Operators.RetrieveByValueSet<Condition>(f_, default);
+		IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		IEnumerable<Condition> h_ = NCQAStatus_1_0_0.Active_Condition(g_);
 		bool? i_(Condition FrailtyDiagnosis)
 		{
@@ -250,7 +251,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		bool? k_ = context.Operators.Exists<Condition>(j_);
 		bool? l_ = context.Operators.Or(e_, k_);
 		CqlValueSet m_ = this.Frailty_Encounter();
-		IEnumerable<Encounter> n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, default);
+		IEnumerable<Encounter> n_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		IEnumerable<Encounter> o_ = NCQAStatus_1_0_0.Finished_Encounter(n_);
 		bool? p_(Encounter FrailtyEncounter)
 		{
@@ -265,7 +266,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 		bool? r_ = context.Operators.Exists<Encounter>(q_);
 		bool? s_ = context.Operators.Or(l_, r_);
 		CqlValueSet t_ = this.Frailty_Symptom();
-		IEnumerable<Observation> u_ = context.Operators.RetrieveByValueSet<Observation>(t_, default);
+		IEnumerable<Observation> u_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? v_(Observation FrailtySymptom)
 		{
 			DataType ak_ = FrailtySymptom?.Effective;
@@ -289,27 +290,27 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 	private IEnumerable<CqlDate> Outpatient_Encounters_with_Advanced_Illness_Value()
 	{
 		CqlValueSet a_ = this.Outpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		CqlValueSet c_ = this.Observation();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.ED();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
+		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		CqlValueSet h_ = this.Telephone_Visits();
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
+		IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		CqlValueSet l_ = this.Online_Assessments();
-		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, default);
+		IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		CqlValueSet n_ = this.Nonacute_Inpatient();
-		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default);
+		IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
 		IEnumerable<Encounter> r_ = NCQAStatus_1_0_0.Finished_Encounter(q_);
 		bool? s_(Encounter OutpatientEncounter)
 		{
 			CqlValueSet w_ = this.Advanced_Illness();
-			IEnumerable<Condition> x_ = context.Operators.RetrieveByValueSet<Condition>(w_, default);
+			IEnumerable<Condition> x_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, w_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 			bool? y_ = NCQAEncounter_1_0_0.Encounter_Has_Diagnosis(OutpatientEncounter, x_);
 			Period z_ = OutpatientEncounter?.Period;
 			CqlInterval<CqlDateTime> aa_ = NCQAFHIRBase_1_0_0.Normalize_Interval(z_ as object);
@@ -349,7 +350,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 
 	private IEnumerable<CqlDate> Nonacute_Inpatient_Discharge_with_Advanced_Illness_Value()
 	{
-		IEnumerable<Claim> a_ = context.Operators.RetrieveByValueSet<Claim>(default, default);
+		IEnumerable<Claim> a_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Claim"));
 		(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? b_ = NCQAClaims_1_0_0.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(a_);
 		IEnumerable<Claim> c_ = b_?.NonacuteInpatientDischarge;
 		CqlValueSet d_ = this.Advanced_Illness();
@@ -470,12 +471,12 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 	private bool? Acute_Inpatient_Encounter_with_Advanced_Illness_Value()
 	{
 		CqlValueSet a_ = this.Acute_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		IEnumerable<Encounter> c_ = NCQAStatus_1_0_0.Finished_Encounter(b_);
 		bool? d_(Encounter InpatientEncounter)
 		{
 			CqlValueSet g_ = this.Advanced_Illness();
-			IEnumerable<Condition> h_ = context.Operators.RetrieveByValueSet<Condition>(g_, default);
+			IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 			bool? i_ = NCQAEncounter_1_0_0.Encounter_Has_Diagnosis(InpatientEncounter, h_);
 			Period j_ = InpatientEncounter?.Period;
 			CqlInterval<CqlDateTime> k_ = NCQAFHIRBase_1_0_0.Normalize_Interval(j_ as object);
@@ -506,7 +507,7 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 
 	private bool? Acute_Inpatient_Discharge_with_Advanced_Illness_Value()
 	{
-		IEnumerable<Claim> a_ = context.Operators.RetrieveByValueSet<Claim>(default, default);
+		IEnumerable<Claim> a_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Claim"));
 		(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? b_ = NCQAClaims_1_0_0.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(a_);
 		IEnumerable<Claim> c_ = b_?.AcuteInpatientDischarge;
 		CqlValueSet d_ = this.Advanced_Illness();
@@ -542,8 +543,8 @@ public class NCQAAdvancedIllnessandFrailty_1_0_0
 	private bool? Dementia_Medications_In_Year_Before_or_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Dementia_Medications();
-		IEnumerable<MedicationDispense> b_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, default);
-		IEnumerable<MedicationDispense> d_ = context.Operators.RetrieveByValueSet<MedicationDispense>(a_, default);
+		IEnumerable<MedicationDispense> b_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationDispense"));
+		IEnumerable<MedicationDispense> d_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationDispense"));
 		IEnumerable<MedicationDispense> e_ = context.Operators.Union<MedicationDispense>(b_, d_);
 		IEnumerable<MedicationDispense> f_ = NCQAStatus_1_0_0.Dispensed_Medication(e_);
 		bool? g_(MedicationDispense DementiaMedDispensed)

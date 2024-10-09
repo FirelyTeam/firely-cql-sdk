@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -267,7 +268,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -280,13 +281,13 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 	private IEnumerable<Encounter> Inpatient_Encounters_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> c_(Encounter InpatientEncounter)
 		{
 			CqlValueSet e_ = this.Medicare_FFS_payer();
-			IEnumerable<Coverage> f_ = context.Operators.RetrieveByValueSet<Coverage>(e_, default);
+			IEnumerable<Coverage> f_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-coverage"));
 			CqlValueSet g_ = this.Medicare_Advantage_payer();
-			IEnumerable<Coverage> h_ = context.Operators.RetrieveByValueSet<Coverage>(g_, default);
+			IEnumerable<Coverage> h_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-coverage"));
 			IEnumerable<Coverage> i_ = context.Operators.Union<Coverage>(f_, h_);
 			bool? j_(Coverage MedicarePayer)
 			{
@@ -352,7 +353,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
-			IEnumerable<Observation> f_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
+			IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bodytemp"));
 			bool? g_(Observation temperature)
 			{
 				DataType x_ = temperature?.Effective;
@@ -466,7 +467,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
-			IEnumerable<Observation> f_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
+			IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/heartrate"));
 			bool? g_(Observation HeartRate)
 			{
 				DataType x_ = HeartRate?.Effective;
@@ -581,7 +582,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Oxygen_Saturation_by_Pulse_Oximetry();
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
+			IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 			bool? h_(Observation O2Saturation)
 			{
 				object r_()
@@ -734,7 +735,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				bool cc_()
 				{
 					CqlValueSet cf_ = this.Oxygen_Saturation_by_Pulse_Oximetry();
-					IEnumerable<Observation> cg_ = context.Operators.RetrieveByValueSet<Observation>(cf_, default);
+					IEnumerable<Observation> cg_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, cf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 					bool? ch_(Observation O2Saturation)
 					{
 						object cp_()
@@ -889,7 +890,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				bool cd_()
 				{
 					CqlValueSet fa_ = this.Oxygen_Saturation_by_Pulse_Oximetry();
-					IEnumerable<Observation> fb_ = context.Operators.RetrieveByValueSet<Observation>(fa_, default);
+					IEnumerable<Observation> fb_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, fa_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 					bool? fc_(Observation O2Saturation)
 					{
 						object fk_()
@@ -1044,7 +1045,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				bool ce_()
 				{
 					CqlValueSet hv_ = this.Oxygen_Saturation_by_Pulse_Oximetry();
-					IEnumerable<Observation> hw_ = context.Operators.RetrieveByValueSet<Observation>(hv_, default);
+					IEnumerable<Observation> hw_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, hv_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 					bool? hx_(Observation O2Saturation)
 					{
 						object if_()
@@ -1199,7 +1200,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				if (cc_())
 				{
 					CqlValueSet kq_ = this.Oxygen_Saturation_by_Pulse_Oximetry();
-					IEnumerable<Observation> kr_ = context.Operators.RetrieveByValueSet<Observation>(kq_, default);
+					IEnumerable<Observation> kr_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, kq_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 					bool? ks_(Observation O2Saturation)
 					{
 						object kz_()
@@ -1353,7 +1354,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				else if (cd_())
 				{
 					CqlValueSet nk_ = this.Oxygen_Saturation_by_Pulse_Oximetry();
-					IEnumerable<Observation> nl_ = context.Operators.RetrieveByValueSet<Observation>(nk_, default);
+					IEnumerable<Observation> nl_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, nk_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 					bool? nm_(Observation O2Saturation)
 					{
 						object nt_()
@@ -1507,7 +1508,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 				else if (ce_())
 				{
 					CqlValueSet qe_ = this.Oxygen_Saturation_by_Pulse_Oximetry();
-					IEnumerable<Observation> qf_ = context.Operators.RetrieveByValueSet<Observation>(qe_, default);
+					IEnumerable<Observation> qf_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, qe_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 					bool? qg_(Observation O2Saturation)
 					{
 						object qn_()
@@ -1679,7 +1680,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 
 	private IEnumerable<Observation> Blood_Pressure_Reading_Value()
 	{
-		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
+		IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bp"));
 		bool? b_(Observation BloodPressure)
 		{
 			Code<ObservationStatus> d_ = BloodPressure?.StatusElement;
@@ -1722,7 +1723,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Bicarbonate_lab_test();
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
+			IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
 			bool? h_(Observation BicarbonateLab)
 			{
 				Instant z_ = BicarbonateLab?.IssuedElement;
@@ -1770,7 +1771,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
+			IEnumerable<Observation> p_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
 			bool? q_(Observation BicarbonateLab)
 			{
 				Instant bd_ = BicarbonateLab?.IssuedElement;
@@ -1840,7 +1841,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Creatinine_lab_test();
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
+			IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
 			bool? h_(Observation CreatinineLab)
 			{
 				Instant z_ = CreatinineLab?.IssuedElement;
@@ -1888,7 +1889,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
+			IEnumerable<Observation> p_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
 			bool? q_(Observation CreatinineLab)
 			{
 				Instant bd_ = CreatinineLab?.IssuedElement;
@@ -1958,7 +1959,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Hematocrit_lab_test();
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
+			IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
 			bool? h_(Observation HematocritLab)
 			{
 				Instant z_ = HematocritLab?.IssuedElement;
@@ -2006,7 +2007,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
+			IEnumerable<Observation> p_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
 			bool? q_(Observation HematocritLab)
 			{
 				Instant bd_ = HematocritLab?.IssuedElement;
@@ -2076,7 +2077,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Platelet_count_lab_test();
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
+			IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
 			bool? h_(Observation PlateletLab)
 			{
 				Instant z_ = PlateletLab?.IssuedElement;
@@ -2124,7 +2125,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
+			IEnumerable<Observation> p_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
 			bool? q_(Observation PlateletLab)
 			{
 				Instant bd_ = PlateletLab?.IssuedElement;
@@ -2194,7 +2195,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Sodium_lab_test();
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
+			IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
 			bool? h_(Observation SodiumLab)
 			{
 				Instant z_ = SodiumLab?.IssuedElement;
@@ -2242,7 +2243,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
+			IEnumerable<Observation> p_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
 			bool? q_(Observation SodiumLab)
 			{
 				Instant bd_ = SodiumLab?.IssuedElement;
@@ -2312,7 +2313,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.White_blood_cells_count_lab_test();
-			IEnumerable<Observation> g_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
+			IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
 			bool? h_(Observation WhiteBloodCellLab)
 			{
 				Instant z_ = WhiteBloodCellLab?.IssuedElement;
@@ -2360,7 +2361,7 @@ public class HybridHospitalWideMortalityFHIR_0_0_001
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.ToValue(m_);
-			IEnumerable<Observation> p_ = context.Operators.RetrieveByValueSet<Observation>(f_, default);
+			IEnumerable<Observation> p_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
 			bool? q_(Observation WhiteBloodCellLab)
 			{
 				Instant bd_ = WhiteBloodCellLab?.IssuedElement;

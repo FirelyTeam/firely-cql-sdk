@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -423,7 +424,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -436,8 +437,8 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private IEnumerable<Encounter> Qualifying_Visit_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
-		IEnumerable<Encounter> c_ = context.Operators.RetrieveByValueSet<Encounter>(default, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+		IEnumerable<Encounter> c_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		bool? d_(Encounter E)
 		{
 			List<CodeableConcept> ar_ = E?.Type;
@@ -488,35 +489,35 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		};
 		IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(c_, h_);
 		CqlValueSet j_ = this.Occupational_Therapy_Evaluation();
-		IEnumerable<Encounter> k_ = context.Operators.RetrieveByValueSet<Encounter>(j_, default);
+		IEnumerable<Encounter> k_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> l_ = context.Operators.Union<Encounter>(i_, k_);
 		IEnumerable<Encounter> m_ = context.Operators.Union<Encounter>(f_, l_);
 		CqlValueSet n_ = this.Office_Visit();
-		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default);
+		IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet p_ = this.Ophthalmological_Services();
-		IEnumerable<Encounter> q_ = context.Operators.RetrieveByValueSet<Encounter>(p_, default);
+		IEnumerable<Encounter> q_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, p_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(o_, q_);
 		IEnumerable<Encounter> s_ = context.Operators.Union<Encounter>(m_, r_);
 		CqlValueSet t_ = this.Physical_Therapy_Evaluation();
-		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, default);
+		IEnumerable<Encounter> u_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet v_ = this.Psych_Visit_Diagnostic_Evaluation();
-		IEnumerable<Encounter> w_ = context.Operators.RetrieveByValueSet<Encounter>(v_, default);
+		IEnumerable<Encounter> w_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, v_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> x_ = context.Operators.Union<Encounter>(u_, w_);
 		IEnumerable<Encounter> y_ = context.Operators.Union<Encounter>(s_, x_);
 		CqlValueSet z_ = this.Psych_Visit_Psychotherapy();
-		IEnumerable<Encounter> aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, default);
+		IEnumerable<Encounter> aa_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, z_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet ab_ = this.Psychoanalysis();
-		IEnumerable<Encounter> ac_ = context.Operators.RetrieveByValueSet<Encounter>(ab_, default);
+		IEnumerable<Encounter> ac_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ab_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> ad_ = context.Operators.Union<Encounter>(aa_, ac_);
 		IEnumerable<Encounter> ae_ = context.Operators.Union<Encounter>(y_, ad_);
 		CqlValueSet af_ = this.Speech_and_Hearing_Evaluation();
-		IEnumerable<Encounter> ag_ = context.Operators.RetrieveByValueSet<Encounter>(af_, default);
+		IEnumerable<Encounter> ag_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, af_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet ah_ = this.Telephone_Visits();
-		IEnumerable<Encounter> ai_ = context.Operators.RetrieveByValueSet<Encounter>(ah_, default);
+		IEnumerable<Encounter> ai_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ah_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> aj_ = context.Operators.Union<Encounter>(ag_, ai_);
 		IEnumerable<Encounter> ak_ = context.Operators.Union<Encounter>(ae_, aj_);
 		CqlValueSet al_ = this.Online_Assessments();
-		IEnumerable<Encounter> am_ = context.Operators.RetrieveByValueSet<Encounter>(al_, default);
+		IEnumerable<Encounter> am_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, al_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> an_ = context.Operators.Union<Encounter>(ak_, am_);
 		IEnumerable<Encounter> ao_ = Status_1_6_000.isEncounterPerformed(an_);
 		bool? ap_(Encounter OfficeBasedEncounter)
@@ -541,13 +542,13 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private IEnumerable<Encounter> Preventive_Visit_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Annual_Wellness_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet c_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Preventive_Care_Services_Group_Counseling();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
-		IEnumerable<Encounter> h_ = context.Operators.RetrieveByValueSet<Encounter>(default, default);
+		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
+		IEnumerable<Encounter> h_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		bool? i_(Encounter E)
 		{
 			List<CodeableConcept> ac_ = E?.Type;
@@ -575,7 +576,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(g_, j_);
 		IEnumerable<Encounter> l_ = context.Operators.Union<Encounter>(e_, k_);
 		CqlValueSet m_ = this.Preventive_Care_Services_Individual_Counseling();
-		IEnumerable<Encounter> n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, default);
+		IEnumerable<Encounter> n_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		bool? p_(Encounter E)
 		{
 			List<CodeableConcept> am_ = E?.Type;
@@ -603,9 +604,9 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(n_, q_);
 		IEnumerable<Encounter> s_ = context.Operators.Union<Encounter>(l_, r_);
 		CqlValueSet t_ = this.Nutrition_Services();
-		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, default);
+		IEnumerable<Encounter> u_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet v_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		IEnumerable<Encounter> w_ = context.Operators.RetrieveByValueSet<Encounter>(v_, default);
+		IEnumerable<Encounter> w_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, v_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> x_ = context.Operators.Union<Encounter>(u_, w_);
 		IEnumerable<Encounter> y_ = context.Operators.Union<Encounter>(s_, x_);
 		IEnumerable<Encounter> z_ = Status_1_6_000.isEncounterPerformed(y_);
@@ -668,7 +669,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private Observation Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User_Value()
 	{
 		CqlValueSet a_ = this.Tobacco_Use_Screening();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_ = Status_1_6_000.isAssessmentPerformed(b_);
 		bool? d_(Observation TobaccoUseScreening)
 		{
@@ -742,7 +743,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private Observation Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User_Value()
 	{
 		CqlValueSet a_ = this.Tobacco_Use_Screening();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_ = Status_1_6_000.isAssessmentPerformed(b_);
 		bool? d_(Observation TobaccoUseScreening)
 		{
@@ -806,7 +807,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private IEnumerable<object> Tobacco_Cessation_Counseling_Given_Value()
 	{
 		CqlValueSet a_ = this.Tobacco_Use_Cessation_Counseling();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_ = Status_1_6_000.isInterventionPerformed(b_);
 		bool? d_(Procedure TobaccoCessationCounseling)
 		{
@@ -826,7 +827,7 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 		IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
 		CqlCode f_ = this.Tobacco_abuse_counseling();
 		IEnumerable<CqlCode> g_ = context.Operators.ToList<CqlCode>(f_);
-		IEnumerable<Condition> h_ = context.Operators.RetrieveByCodes<Condition>(g_, default);
+		IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, g_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		bool? i_(Condition TobaccoCounseling)
 		{
 			CqlInterval<CqlDateTime> w_ = QICoreCommon_2_0_000.prevalenceInterval(TobaccoCounseling);
@@ -854,8 +855,8 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private IEnumerable<MedicationRequest> Tobacco_Cessation_Pharmacotherapy_Ordered_Value()
 	{
 		CqlValueSet a_ = this.Tobacco_Use_Cessation_Pharmacotherapy();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
+		IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		IEnumerable<MedicationRequest> f_ = Status_1_6_000.isMedicationOrder(e_);
 		bool? g_(MedicationRequest CessationPharmacotherapyOrdered)
@@ -884,8 +885,8 @@ public class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventi
 	private IEnumerable<MedicationRequest> Active_Pharmacotherapy_for_Tobacco_Cessation_Value()
 	{
 		CqlValueSet a_ = this.Tobacco_Use_Cessation_Pharmacotherapy();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
+		IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		IEnumerable<MedicationRequest> f_ = Status_1_6_000.isMedicationActive(e_);
 		bool? g_(MedicationRequest TakingCessationPharmacotherapy)

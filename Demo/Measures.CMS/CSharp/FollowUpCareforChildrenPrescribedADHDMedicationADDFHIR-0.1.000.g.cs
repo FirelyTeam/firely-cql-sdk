@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -409,7 +410,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -468,44 +469,44 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private IEnumerable<(CqlDate startDate, nint _)?> ADHD_Medication_Prescribed_During_Intake_Period_and_Not_Previously_on_ADHD_Medication_Value()
 	{
 		CqlValueSet a_ = this.Atomoxetine();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
+		IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		CqlValueSet f_ = this.Clonidine();
-		IEnumerable<MedicationRequest> g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, default);
-		IEnumerable<MedicationRequest> i_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, default);
+		IEnumerable<MedicationRequest> g_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> i_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> j_ = context.Operators.Union<MedicationRequest>(g_, i_);
 		IEnumerable<MedicationRequest> k_ = context.Operators.Union<MedicationRequest>(e_, j_);
 		CqlValueSet l_ = this.Dexmethylphenidate();
-		IEnumerable<MedicationRequest> m_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, default);
-		IEnumerable<MedicationRequest> o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, default);
+		IEnumerable<MedicationRequest> m_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> o_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> p_ = context.Operators.Union<MedicationRequest>(m_, o_);
 		IEnumerable<MedicationRequest> q_ = context.Operators.Union<MedicationRequest>(k_, p_);
 		CqlValueSet r_ = this.Dextroamphetamine();
-		IEnumerable<MedicationRequest> s_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, default);
-		IEnumerable<MedicationRequest> u_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, default);
+		IEnumerable<MedicationRequest> s_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> u_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> v_ = context.Operators.Union<MedicationRequest>(s_, u_);
 		IEnumerable<MedicationRequest> w_ = context.Operators.Union<MedicationRequest>(q_, v_);
 		CqlValueSet x_ = this.Lisdexamfetamine();
-		IEnumerable<MedicationRequest> y_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, default);
-		IEnumerable<MedicationRequest> aa_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, default);
+		IEnumerable<MedicationRequest> y_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> aa_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> ab_ = context.Operators.Union<MedicationRequest>(y_, aa_);
 		IEnumerable<MedicationRequest> ac_ = context.Operators.Union<MedicationRequest>(w_, ab_);
 		CqlCode ad_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet();
 		IEnumerable<CqlCode> ae_ = context.Operators.ToList<CqlCode>(ad_);
-		IEnumerable<MedicationRequest> af_ = context.Operators.RetrieveByCodes<MedicationRequest>(ae_, default);
+		IEnumerable<MedicationRequest> af_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, ae_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<CqlCode> ah_ = context.Operators.ToList<CqlCode>(ad_);
-		IEnumerable<MedicationRequest> ai_ = context.Operators.RetrieveByCodes<MedicationRequest>(ah_, default);
+		IEnumerable<MedicationRequest> ai_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, ah_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> aj_ = context.Operators.Union<MedicationRequest>(af_, ai_);
 		IEnumerable<MedicationRequest> ak_ = context.Operators.Union<MedicationRequest>(ac_, aj_);
 		CqlValueSet al_ = this.Methylphenidate();
-		IEnumerable<MedicationRequest> am_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, default);
-		IEnumerable<MedicationRequest> ao_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, default);
+		IEnumerable<MedicationRequest> am_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, al_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> ao_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, al_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> ap_ = context.Operators.Union<MedicationRequest>(am_, ao_);
 		IEnumerable<MedicationRequest> aq_ = context.Operators.Union<MedicationRequest>(ak_, ap_);
 		CqlValueSet ar_ = this.Guanfacine();
-		IEnumerable<MedicationRequest> as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, default);
-		IEnumerable<MedicationRequest> au_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, default);
+		IEnumerable<MedicationRequest> as_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ar_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> au_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ar_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> av_ = context.Operators.Union<MedicationRequest>(as_, au_);
 		IEnumerable<MedicationRequest> aw_ = context.Operators.Union<MedicationRequest>(aq_, av_);
 		bool? ax_(MedicationRequest ADHDMedications)
@@ -519,37 +520,37 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 			return dj_;
 		};
 		IEnumerable<MedicationRequest> ay_ = context.Operators.Where<MedicationRequest>(aw_, ax_);
-		IEnumerable<MedicationRequest> ba_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
-		IEnumerable<MedicationRequest> bc_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
+		IEnumerable<MedicationRequest> ba_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> bc_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> bd_ = context.Operators.Union<MedicationRequest>(ba_, bc_);
-		IEnumerable<MedicationRequest> bf_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, default);
-		IEnumerable<MedicationRequest> bh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, default);
+		IEnumerable<MedicationRequest> bf_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> bh_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> bi_ = context.Operators.Union<MedicationRequest>(bf_, bh_);
 		IEnumerable<MedicationRequest> bj_ = context.Operators.Union<MedicationRequest>(bd_, bi_);
-		IEnumerable<MedicationRequest> bl_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, default);
-		IEnumerable<MedicationRequest> bn_ = context.Operators.RetrieveByValueSet<MedicationRequest>(l_, default);
+		IEnumerable<MedicationRequest> bl_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> bn_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> bo_ = context.Operators.Union<MedicationRequest>(bl_, bn_);
 		IEnumerable<MedicationRequest> bp_ = context.Operators.Union<MedicationRequest>(bj_, bo_);
-		IEnumerable<MedicationRequest> br_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, default);
-		IEnumerable<MedicationRequest> bt_ = context.Operators.RetrieveByValueSet<MedicationRequest>(r_, default);
+		IEnumerable<MedicationRequest> br_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> bt_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> bu_ = context.Operators.Union<MedicationRequest>(br_, bt_);
 		IEnumerable<MedicationRequest> bv_ = context.Operators.Union<MedicationRequest>(bp_, bu_);
-		IEnumerable<MedicationRequest> bx_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, default);
-		IEnumerable<MedicationRequest> bz_ = context.Operators.RetrieveByValueSet<MedicationRequest>(x_, default);
+		IEnumerable<MedicationRequest> bx_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> bz_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> ca_ = context.Operators.Union<MedicationRequest>(bx_, bz_);
 		IEnumerable<MedicationRequest> cb_ = context.Operators.Union<MedicationRequest>(bv_, ca_);
 		IEnumerable<CqlCode> cd_ = context.Operators.ToList<CqlCode>(ad_);
-		IEnumerable<MedicationRequest> ce_ = context.Operators.RetrieveByCodes<MedicationRequest>(cd_, default);
+		IEnumerable<MedicationRequest> ce_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, cd_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<CqlCode> cg_ = context.Operators.ToList<CqlCode>(ad_);
-		IEnumerable<MedicationRequest> ch_ = context.Operators.RetrieveByCodes<MedicationRequest>(cg_, default);
+		IEnumerable<MedicationRequest> ch_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, cg_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> ci_ = context.Operators.Union<MedicationRequest>(ce_, ch_);
 		IEnumerable<MedicationRequest> cj_ = context.Operators.Union<MedicationRequest>(cb_, ci_);
-		IEnumerable<MedicationRequest> cl_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, default);
-		IEnumerable<MedicationRequest> cn_ = context.Operators.RetrieveByValueSet<MedicationRequest>(al_, default);
+		IEnumerable<MedicationRequest> cl_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, al_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> cn_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, al_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> co_ = context.Operators.Union<MedicationRequest>(cl_, cn_);
 		IEnumerable<MedicationRequest> cp_ = context.Operators.Union<MedicationRequest>(cj_, co_);
-		IEnumerable<MedicationRequest> cr_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, default);
-		IEnumerable<MedicationRequest> ct_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, default);
+		IEnumerable<MedicationRequest> cr_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ar_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> ct_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ar_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> cu_ = context.Operators.Union<MedicationRequest>(cr_, ct_);
 		IEnumerable<MedicationRequest> cv_ = context.Operators.Union<MedicationRequest>(cp_, cu_);
 		bool? cw_(MedicationRequest ADHDMedications)
@@ -566,44 +567,44 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<MedicationRequest> cy_(MedicationRequest ADHDMedicationOrder)
 		{
 			CqlValueSet dp_ = this.Atomoxetine();
-			IEnumerable<MedicationRequest> dq_ = context.Operators.RetrieveByValueSet<MedicationRequest>(dp_, default);
-			IEnumerable<MedicationRequest> ds_ = context.Operators.RetrieveByValueSet<MedicationRequest>(dp_, default);
+			IEnumerable<MedicationRequest> dq_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, dp_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+			IEnumerable<MedicationRequest> ds_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, dp_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 			IEnumerable<MedicationRequest> dt_ = context.Operators.Union<MedicationRequest>(dq_, ds_);
 			CqlValueSet du_ = this.Clonidine();
-			IEnumerable<MedicationRequest> dv_ = context.Operators.RetrieveByValueSet<MedicationRequest>(du_, default);
-			IEnumerable<MedicationRequest> dx_ = context.Operators.RetrieveByValueSet<MedicationRequest>(du_, default);
+			IEnumerable<MedicationRequest> dv_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, du_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+			IEnumerable<MedicationRequest> dx_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, du_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 			IEnumerable<MedicationRequest> dy_ = context.Operators.Union<MedicationRequest>(dv_, dx_);
 			IEnumerable<MedicationRequest> dz_ = context.Operators.Union<MedicationRequest>(dt_, dy_);
 			CqlValueSet ea_ = this.Dexmethylphenidate();
-			IEnumerable<MedicationRequest> eb_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ea_, default);
-			IEnumerable<MedicationRequest> ed_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ea_, default);
+			IEnumerable<MedicationRequest> eb_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ea_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+			IEnumerable<MedicationRequest> ed_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ea_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 			IEnumerable<MedicationRequest> ee_ = context.Operators.Union<MedicationRequest>(eb_, ed_);
 			IEnumerable<MedicationRequest> ef_ = context.Operators.Union<MedicationRequest>(dz_, ee_);
 			CqlValueSet eg_ = this.Dextroamphetamine();
-			IEnumerable<MedicationRequest> eh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(eg_, default);
-			IEnumerable<MedicationRequest> ej_ = context.Operators.RetrieveByValueSet<MedicationRequest>(eg_, default);
+			IEnumerable<MedicationRequest> eh_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, eg_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+			IEnumerable<MedicationRequest> ej_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, eg_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 			IEnumerable<MedicationRequest> ek_ = context.Operators.Union<MedicationRequest>(eh_, ej_);
 			IEnumerable<MedicationRequest> el_ = context.Operators.Union<MedicationRequest>(ef_, ek_);
 			CqlValueSet em_ = this.Lisdexamfetamine();
-			IEnumerable<MedicationRequest> en_ = context.Operators.RetrieveByValueSet<MedicationRequest>(em_, default);
-			IEnumerable<MedicationRequest> ep_ = context.Operators.RetrieveByValueSet<MedicationRequest>(em_, default);
+			IEnumerable<MedicationRequest> en_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, em_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+			IEnumerable<MedicationRequest> ep_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, em_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 			IEnumerable<MedicationRequest> eq_ = context.Operators.Union<MedicationRequest>(en_, ep_);
 			IEnumerable<MedicationRequest> er_ = context.Operators.Union<MedicationRequest>(el_, eq_);
 			CqlCode es_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet();
 			IEnumerable<CqlCode> et_ = context.Operators.ToList<CqlCode>(es_);
-			IEnumerable<MedicationRequest> eu_ = context.Operators.RetrieveByCodes<MedicationRequest>(et_, default);
+			IEnumerable<MedicationRequest> eu_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, et_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 			IEnumerable<CqlCode> ew_ = context.Operators.ToList<CqlCode>(es_);
-			IEnumerable<MedicationRequest> ex_ = context.Operators.RetrieveByCodes<MedicationRequest>(ew_, default);
+			IEnumerable<MedicationRequest> ex_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, ew_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 			IEnumerable<MedicationRequest> ey_ = context.Operators.Union<MedicationRequest>(eu_, ex_);
 			IEnumerable<MedicationRequest> ez_ = context.Operators.Union<MedicationRequest>(er_, ey_);
 			CqlValueSet fa_ = this.Methylphenidate();
-			IEnumerable<MedicationRequest> fb_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fa_, default);
-			IEnumerable<MedicationRequest> fd_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fa_, default);
+			IEnumerable<MedicationRequest> fb_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, fa_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+			IEnumerable<MedicationRequest> fd_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, fa_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 			IEnumerable<MedicationRequest> fe_ = context.Operators.Union<MedicationRequest>(fb_, fd_);
 			IEnumerable<MedicationRequest> ff_ = context.Operators.Union<MedicationRequest>(ez_, fe_);
 			CqlValueSet fg_ = this.Guanfacine();
-			IEnumerable<MedicationRequest> fh_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fg_, default);
-			IEnumerable<MedicationRequest> fj_ = context.Operators.RetrieveByValueSet<MedicationRequest>(fg_, default);
+			IEnumerable<MedicationRequest> fh_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, fg_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+			IEnumerable<MedicationRequest> fj_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, fg_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 			IEnumerable<MedicationRequest> fk_ = context.Operators.Union<MedicationRequest>(fh_, fj_);
 			IEnumerable<MedicationRequest> fl_ = context.Operators.Union<MedicationRequest>(ff_, fk_);
 			bool? fm_(MedicationRequest ActiveADHDMedication)
@@ -697,14 +698,14 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet c_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
+		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet h_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
+		IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		bool? l_(Encounter ValidEncounters)
@@ -757,7 +758,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<Encounter.DiagnosisComponent> c_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
 		Condition d_(Encounter.DiagnosisComponent PD)
 		{
-			IEnumerable<Condition> i_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
+			IEnumerable<Condition> i_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			bool? j_(Condition C)
 			{
 				Id m_ = C?.IdElement;
@@ -783,7 +784,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		bool? c_(Encounter InpatientStay)
 		{
 			IEnumerable<Condition> e_ = this.PrincipalDiagnosis(InpatientStay);
@@ -889,7 +890,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private IEnumerable<Condition> Narcolepsy_Exclusion_Value()
 	{
 		CqlValueSet a_ = this.Narcolepsy();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		bool? c_(Condition Narcolepsy)
 		{
 			CqlInterval<CqlDateTime> e_ = QICoreCommon_2_0_000.ToPrevalenceInterval(Narcolepsy);
@@ -926,20 +927,20 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private IEnumerable<Encounter> Qualifying_Numerator_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet c_ = this.Initial_Hospital_Observation_Care();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Preventive_Care_Services_Group_Counseling();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
+		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet h_ = this.Behavioral_Health_Follow_up_Visit();
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
+		IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		CqlValueSet l_ = this.Preventive_Care_Services_Individual_Counseling();
-		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, default);
+		IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet n_ = this.Psychotherapy_and_Pharmacologic_Management();
-		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default);
+		IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		bool? p_(Encounter PsychPharmManagement)
 		{
 			List<Encounter.LocationComponent> ao_ = PsychPharmManagement?.Location;
@@ -969,25 +970,25 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(m_, q_);
 		IEnumerable<Encounter> s_ = context.Operators.Union<Encounter>(k_, r_);
 		CqlValueSet t_ = this.Outpatient_Consultation();
-		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, default);
+		IEnumerable<Encounter> u_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet v_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> w_ = context.Operators.RetrieveByValueSet<Encounter>(v_, default);
+		IEnumerable<Encounter> w_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, v_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> x_ = context.Operators.Union<Encounter>(u_, w_);
 		IEnumerable<Encounter> y_ = context.Operators.Union<Encounter>(s_, x_);
 		CqlValueSet z_ = this.Preventive_Care_Services__Initial_Office_Visit__0_to_17();
-		IEnumerable<Encounter> aa_ = context.Operators.RetrieveByValueSet<Encounter>(z_, default);
+		IEnumerable<Encounter> aa_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, z_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet ab_ = this.Preventive_Care__Established_Office_Visit__0_to_17();
-		IEnumerable<Encounter> ac_ = context.Operators.RetrieveByValueSet<Encounter>(ab_, default);
+		IEnumerable<Encounter> ac_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ab_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> ad_ = context.Operators.Union<Encounter>(aa_, ac_);
 		IEnumerable<Encounter> ae_ = context.Operators.Union<Encounter>(y_, ad_);
 		CqlValueSet af_ = this.Psych_Visit_Diagnostic_Evaluation();
-		IEnumerable<Encounter> ag_ = context.Operators.RetrieveByValueSet<Encounter>(af_, default);
+		IEnumerable<Encounter> ag_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, af_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet ah_ = this.Psych_Visit_Psychotherapy();
-		IEnumerable<Encounter> ai_ = context.Operators.RetrieveByValueSet<Encounter>(ah_, default);
+		IEnumerable<Encounter> ai_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ah_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> aj_ = context.Operators.Union<Encounter>(ag_, ai_);
 		IEnumerable<Encounter> ak_ = context.Operators.Union<Encounter>(ae_, aj_);
 		CqlValueSet al_ = this.Telephone_Visits();
-		IEnumerable<Encounter> am_ = context.Operators.RetrieveByValueSet<Encounter>(al_, default);
+		IEnumerable<Encounter> am_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, al_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> an_ = context.Operators.Union<Encounter>(ak_, am_);
 
 		return an_;
@@ -1040,8 +1041,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private IEnumerable<CqlInterval<CqlDate>> ADHD_Medications_Taken_on_IPSD_or_During_Continuation_and_Maintenance_Phase_Value()
 	{
 		CqlValueSet a_ = this.Atomoxetine();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
+		IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? f_(MedicationRequest AtomoxetineMed)
 		{
@@ -1076,8 +1077,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<CqlInterval<CqlDate>> m_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(k_, l_);
 		IEnumerable<CqlInterval<CqlDate>> n_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(m_);
 		CqlValueSet o_ = this.Clonidine();
-		IEnumerable<MedicationRequest> p_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, default);
-		IEnumerable<MedicationRequest> r_ = context.Operators.RetrieveByValueSet<MedicationRequest>(o_, default);
+		IEnumerable<MedicationRequest> p_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> r_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> s_ = context.Operators.Union<MedicationRequest>(p_, r_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? t_(MedicationRequest ClonidineMed)
 		{
@@ -1113,8 +1114,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<CqlInterval<CqlDate>> ab_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(aa_);
 		IEnumerable<CqlInterval<CqlDate>> ac_ = context.Operators.Union<CqlInterval<CqlDate>>(n_, ab_);
 		CqlValueSet ad_ = this.Dexmethylphenidate();
-		IEnumerable<MedicationRequest> ae_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ad_, default);
-		IEnumerable<MedicationRequest> ag_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ad_, default);
+		IEnumerable<MedicationRequest> ae_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ad_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> ag_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ad_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> ah_ = context.Operators.Union<MedicationRequest>(ae_, ag_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? ai_(MedicationRequest DexmethylphenidateMed)
 		{
@@ -1149,8 +1150,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<CqlInterval<CqlDate>> ap_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(an_, ao_);
 		IEnumerable<CqlInterval<CqlDate>> aq_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(ap_);
 		CqlValueSet ar_ = this.Dextroamphetamine();
-		IEnumerable<MedicationRequest> as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, default);
-		IEnumerable<MedicationRequest> au_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ar_, default);
+		IEnumerable<MedicationRequest> as_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ar_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> au_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ar_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> av_ = context.Operators.Union<MedicationRequest>(as_, au_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? aw_(MedicationRequest DextroamphetamineMed)
 		{
@@ -1187,8 +1188,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<CqlInterval<CqlDate>> bf_ = context.Operators.Union<CqlInterval<CqlDate>>(aq_, be_);
 		IEnumerable<CqlInterval<CqlDate>> bg_ = context.Operators.Union<CqlInterval<CqlDate>>(ac_, bf_);
 		CqlValueSet bh_ = this.Lisdexamfetamine();
-		IEnumerable<MedicationRequest> bi_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bh_, default);
-		IEnumerable<MedicationRequest> bk_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bh_, default);
+		IEnumerable<MedicationRequest> bi_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, bh_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> bk_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, bh_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> bl_ = context.Operators.Union<MedicationRequest>(bi_, bk_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? bm_(MedicationRequest LisdexamfetamineMed)
 		{
@@ -1223,8 +1224,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<CqlInterval<CqlDate>> bt_ = context.Operators.Select<(CqlInterval<CqlDate> period, CqlDate periodStart)?, CqlInterval<CqlDate>>(br_, bs_);
 		IEnumerable<CqlInterval<CqlDate>> bu_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(bt_);
 		CqlValueSet bv_ = this.Methylphenidate();
-		IEnumerable<MedicationRequest> bw_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, default);
-		IEnumerable<MedicationRequest> by_ = context.Operators.RetrieveByValueSet<MedicationRequest>(bv_, default);
+		IEnumerable<MedicationRequest> bw_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, bv_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> by_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, bv_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> bz_ = context.Operators.Union<MedicationRequest>(bw_, by_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? ca_(MedicationRequest MethylphenidateMed)
 		{
@@ -1261,8 +1262,8 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<CqlInterval<CqlDate>> cj_ = context.Operators.Union<CqlInterval<CqlDate>>(bu_, ci_);
 		IEnumerable<CqlInterval<CqlDate>> ck_ = context.Operators.Union<CqlInterval<CqlDate>>(bg_, cj_);
 		CqlValueSet cl_ = this.Guanfacine();
-		IEnumerable<MedicationRequest> cm_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, default);
-		IEnumerable<MedicationRequest> co_ = context.Operators.RetrieveByValueSet<MedicationRequest>(cl_, default);
+		IEnumerable<MedicationRequest> cm_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, cl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> co_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, cl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> cp_ = context.Operators.Union<MedicationRequest>(cm_, co_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? cq_(MedicationRequest GuanfacineMed)
 		{
@@ -1298,9 +1299,9 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 		IEnumerable<CqlInterval<CqlDate>> cy_ = CumulativeMedicationDuration_4_0_000.RolloutIntervals(cx_);
 		CqlCode cz_ = this.methamphetamine_hydrochloride_5_MG_Oral_Tablet();
 		IEnumerable<CqlCode> da_ = context.Operators.ToList<CqlCode>(cz_);
-		IEnumerable<MedicationRequest> db_ = context.Operators.RetrieveByCodes<MedicationRequest>(da_, default);
+		IEnumerable<MedicationRequest> db_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, da_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<CqlCode> dd_ = context.Operators.ToList<CqlCode>(cz_);
-		IEnumerable<MedicationRequest> de_ = context.Operators.RetrieveByCodes<MedicationRequest>(dd_, default);
+		IEnumerable<MedicationRequest> de_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, default, dd_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> df_ = context.Operators.Union<MedicationRequest>(db_, de_);
 		(CqlInterval<CqlDate> period, CqlDate periodStart)? dg_(MedicationRequest MethamphetamineMed)
 		{
@@ -1511,7 +1512,7 @@ public class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000
 	private IEnumerable<CqlDate> Online_Assessment_31_to_300_Days_into_Continuation_and_Maintenance_Phase_Value()
 	{
 		CqlValueSet a_ = this.Online_Assessments();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		bool? c_(Encounter OnlineAssessment)
 		{
 			Period g_ = OnlineAssessment?.Period;

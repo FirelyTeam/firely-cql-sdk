@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using System.Dynamic;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
@@ -68,99 +69,99 @@ public class TestRetrieve_1_0_1
 
     #endregion
 
-	private CqlValueSet HIV_Value() => 
+	private CqlValueSet HIV_Value() =>
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.120.12.1003", default);
 
     [CqlDeclaration("HIV")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.120.12.1003")]
-	public CqlValueSet HIV() => 
+	public CqlValueSet HIV() =>
 		__HIV.Value;
 
-	private CqlValueSet Syphilis_Value() => 
+	private CqlValueSet Syphilis_Value() =>
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1002", default);
 
     [CqlDeclaration("Syphilis")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1002")]
-	public CqlValueSet Syphilis() => 
+	public CqlValueSet Syphilis() =>
 		__Syphilis.Value;
 
-	private CqlValueSet Complications_of_Pregnancy__Childbirth_and_the_Puerperium_Value() => 
+	private CqlValueSet Complications_of_Pregnancy__Childbirth_and_the_Puerperium_Value() =>
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1012", default);
 
     [CqlDeclaration("Complications of Pregnancy, Childbirth and the Puerperium")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1012")]
-	public CqlValueSet Complications_of_Pregnancy__Childbirth_and_the_Puerperium() => 
+	public CqlValueSet Complications_of_Pregnancy__Childbirth_and_the_Puerperium() =>
 		__Complications_of_Pregnancy__Childbirth_and_the_Puerperium.Value;
 
-	private CqlValueSet Pregnancy_Test_Value() => 
+	private CqlValueSet Pregnancy_Test_Value() =>
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1011", default);
 
     [CqlDeclaration("Pregnancy Test")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1011")]
-	public CqlValueSet Pregnancy_Test() => 
+	public CqlValueSet Pregnancy_Test() =>
 		__Pregnancy_Test.Value;
 
-	private CqlValueSet Pap_Test_Value() => 
+	private CqlValueSet Pap_Test_Value() =>
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.108.12.1017", default);
 
     [CqlDeclaration("Pap Test")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.108.12.1017")]
-	public CqlValueSet Pap_Test() => 
+	public CqlValueSet Pap_Test() =>
 		__Pap_Test.Value;
 
-	private CqlValueSet Lab_Tests_During_Pregnancy_Value() => 
+	private CqlValueSet Lab_Tests_During_Pregnancy_Value() =>
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1007", default);
 
     [CqlDeclaration("Lab Tests During Pregnancy")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1007")]
-	public CqlValueSet Lab_Tests_During_Pregnancy() => 
+	public CqlValueSet Lab_Tests_During_Pregnancy() =>
 		__Lab_Tests_During_Pregnancy.Value;
 
-	private CqlValueSet Lab_Tests_for_Sexually_Transmitted_Infections_Value() => 
+	private CqlValueSet Lab_Tests_for_Sexually_Transmitted_Infections_Value() =>
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1051", default);
 
     [CqlDeclaration("Lab Tests for Sexually Transmitted Infections")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1051")]
-	public CqlValueSet Lab_Tests_for_Sexually_Transmitted_Infections() => 
+	public CqlValueSet Lab_Tests_for_Sexually_Transmitted_Infections() =>
 		__Lab_Tests_for_Sexually_Transmitted_Infections.Value;
 
-	private CqlValueSet Chlamydia_Screening_Value() => 
+	private CqlValueSet Chlamydia_Screening_Value() =>
 		new CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1052", default);
 
     [CqlDeclaration("Chlamydia Screening")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1052")]
-	public CqlValueSet Chlamydia_Screening() => 
+	public CqlValueSet Chlamydia_Screening() =>
 		__Chlamydia_Screening.Value;
 
-	private CqlValueSet Palliative_Care_Assessment_Value() => 
+	private CqlValueSet Palliative_Care_Assessment_Value() =>
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225", default);
 
     [CqlDeclaration("Palliative Care Assessment")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2225")]
-	public CqlValueSet Palliative_Care_Assessment() => 
+	public CqlValueSet Palliative_Care_Assessment() =>
 		__Palliative_Care_Assessment.Value;
 
-	private CqlValueSet Palliative_Care_Encounter_Value() => 
+	private CqlValueSet Palliative_Care_Encounter_Value() =>
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450", default);
 
     [CqlDeclaration("Palliative Care Encounter")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1450")]
-	public CqlValueSet Palliative_Care_Encounter() => 
+	public CqlValueSet Palliative_Care_Encounter() =>
 		__Palliative_Care_Encounter.Value;
 
-	private CqlValueSet Palliative_Care_Intervention_Value() => 
+	private CqlValueSet Palliative_Care_Intervention_Value() =>
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224", default);
 
     [CqlDeclaration("Palliative Care Intervention")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.2224")]
-	public CqlValueSet Palliative_Care_Intervention() => 
+	public CqlValueSet Palliative_Care_Intervention() =>
 		__Palliative_Care_Intervention.Value;
 
-	private CqlCode Encounter_for_palliative_care_Value() => 
+	private CqlCode Encounter_for_palliative_care_Value() =>
 		new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", default, default);
 
     [CqlDeclaration("Encounter for palliative care")]
-	public CqlCode Encounter_for_palliative_care() => 
+	public CqlCode Encounter_for_palliative_care() =>
 		__Encounter_for_palliative_care.Value;
 
 	private CqlCode[] ICD_10_Value()
@@ -173,7 +174,7 @@ public class TestRetrieve_1_0_1
 	}
 
     [CqlDeclaration("ICD-10")]
-	public CqlCode[] ICD_10() => 
+	public CqlCode[] ICD_10() =>
 		__ICD_10.Value;
 
 	private object MeasurementPeriod_Value()
@@ -187,19 +188,19 @@ public class TestRetrieve_1_0_1
 	}
 
     [CqlDeclaration("MeasurementPeriod")]
-	public object MeasurementPeriod() => 
+	public object MeasurementPeriod() =>
 		__MeasurementPeriod.Value;
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
 	}
 
     [CqlDeclaration("Patient")]
-	public Patient Patient() => 
+	public Patient Patient() =>
 		__Patient.Value;
 
 }

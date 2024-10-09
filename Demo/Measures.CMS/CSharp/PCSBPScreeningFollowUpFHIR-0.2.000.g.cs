@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -379,7 +380,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -392,7 +393,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private IEnumerable<Encounter> Qualifying_Encounter_during_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Encounter_to_Screen_for_Blood_Pressure();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		bool? c_(Encounter ValidEncounter)
 		{
 			CqlInterval<CqlDateTime> e_ = this.Measurement_Period();
@@ -464,7 +465,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> b_(Encounter QualifyingEncounter)
 		{
 			CqlValueSet d_ = this.Diagnosis_of_Hypertension();
-			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, default);
+			IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			bool? f_(Condition Hypertension)
 			{
 				bool? j_ = QICoreCommon_2_0_000.isProblemListItem(Hypertension);
@@ -523,7 +524,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
 		{
-			IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
+			IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bp"));
 			bool? e_(Observation BloodPressure)
 			{
 				DataType ak_ = BloodPressure?.Effective;
@@ -661,7 +662,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
 		{
-			IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
+			IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bp"));
 			bool? e_(Observation BloodPressure)
 			{
 				DataType ak_ = BloodPressure?.Effective;
@@ -799,10 +800,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	{
 		CqlCode a_ = this.Follow_up_2_3_months__finding_();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<ServiceRequest> c_ = context.Operators.RetrieveByCodes<ServiceRequest>(b_, default);
+		IEnumerable<ServiceRequest> c_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		CqlCode d_ = this.Follow_up_4_6_months__finding_();
 		IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-		IEnumerable<ServiceRequest> f_ = context.Operators.RetrieveByCodes<ServiceRequest>(e_, default);
+		IEnumerable<ServiceRequest> f_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		IEnumerable<ServiceRequest> g_ = context.Operators.Union<ServiceRequest>(c_, f_);
 		bool? h_(ServiceRequest FollowUp)
 		{
@@ -825,18 +826,18 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private IEnumerable<ServiceRequest> NonPharmacological_Interventions_Value()
 	{
 		CqlValueSet a_ = this.Lifestyle_Recommendation();
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
+		IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		CqlValueSet c_ = this.Weight_Reduction_Recommended();
-		IEnumerable<ServiceRequest> d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(c_, default);
+		IEnumerable<ServiceRequest> d_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		IEnumerable<ServiceRequest> e_ = context.Operators.Union<ServiceRequest>(b_, d_);
 		CqlValueSet f_ = this.Dietary_Recommendations();
-		IEnumerable<ServiceRequest> g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, default);
+		IEnumerable<ServiceRequest> g_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		CqlValueSet h_ = this.Recommendation_to_Increase_Physical_Activity();
-		IEnumerable<ServiceRequest> i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(h_, default);
+		IEnumerable<ServiceRequest> i_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		IEnumerable<ServiceRequest> j_ = context.Operators.Union<ServiceRequest>(g_, i_);
 		IEnumerable<ServiceRequest> k_ = context.Operators.Union<ServiceRequest>(e_, j_);
 		CqlValueSet l_ = this.Referral_or_Counseling_for_Alcohol_Consumption();
-		IEnumerable<ServiceRequest> m_ = context.Operators.RetrieveByValueSet<ServiceRequest>(l_, default);
+		IEnumerable<ServiceRequest> m_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		IEnumerable<ServiceRequest> n_ = context.Operators.Union<ServiceRequest>(k_, m_);
 		bool? o_(ServiceRequest NonPharmaInterventions)
 		{
@@ -859,7 +860,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private IEnumerable<ServiceRequest> Referral_to_Alternate_or_Primary_Healthcare_Professional_for_Hypertensive_Reading_Value()
 	{
 		CqlValueSet a_ = this.Referral_to_Primary_Care_or_Alternate_Provider();
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
+		IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		bool? c_(ServiceRequest Referral)
 		{
 			List<CodeableConcept> e_ = Referral?.ReasonCode;
@@ -969,7 +970,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
 		{
-			IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
+			IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bp"));
 			bool? e_(Observation BloodPressure)
 			{
 				DataType bk_ = BloodPressure?.Effective;
@@ -1261,7 +1262,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
 		{
-			IEnumerable<Observation> f_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
+			IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bp"));
 			bool? g_(Observation BloodPressure)
 			{
 				DataType bm_ = BloodPressure?.Effective;
@@ -1473,7 +1474,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private IEnumerable<ServiceRequest> First_Hypertensive_Reading_Interventions_or_Referral_to_Alternate_Professional_Value()
 	{
 		CqlValueSet a_ = this.Follow_Up_Within_4_Weeks();
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
+		IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		IEnumerable<ServiceRequest> c_(ServiceRequest FourWeekRescreen)
 		{
 			IEnumerable<ServiceRequest> g_ = this.NonPharmacological_Interventions();
@@ -1550,7 +1551,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
 		{
-			IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
+			IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bp"));
 			bool? e_(Observation BloodPressure)
 			{
 				DataType bs_ = BloodPressure?.Effective;
@@ -1810,13 +1811,13 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	{
 		CqlCode a_ = this._12_lead_EKG_panel();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<ServiceRequest> c_ = context.Operators.RetrieveByCodes<ServiceRequest>(b_, default);
+		IEnumerable<ServiceRequest> c_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		CqlCode d_ = this.EKG_study();
 		IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-		IEnumerable<ServiceRequest> f_ = context.Operators.RetrieveByCodes<ServiceRequest>(e_, default);
+		IEnumerable<ServiceRequest> f_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		IEnumerable<ServiceRequest> g_ = context.Operators.Union<ServiceRequest>(c_, f_);
 		CqlValueSet h_ = this.Laboratory_Tests_for_Hypertension();
-		IEnumerable<ServiceRequest> i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(h_, default);
+		IEnumerable<ServiceRequest> i_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		IEnumerable<ServiceRequest> j_ = context.Operators.Union<ServiceRequest>(g_, i_);
 		bool? k_(ServiceRequest EKGLab)
 		{
@@ -1950,7 +1951,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_during_Measurement_Period();
 		bool? b_(Encounter QualifyingEncounter)
 		{
-			IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
+			IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bp"));
 			bool? e_(Observation BloodPressure)
 			{
 				DataType bn_ = BloodPressure?.Effective;
@@ -2203,7 +2204,7 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Value()
 	{
 		CqlValueSet a_ = this.Follow_Up_Within_4_Weeks();
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
+		IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		IEnumerable<ServiceRequest> c_(ServiceRequest WeeksRescreen)
 		{
 			IEnumerable<ServiceRequest> i_ = this.Laboratory_Test_or_ECG_for_Hypertension();
@@ -2261,8 +2262,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<ServiceRequest> g_(ServiceRequest WeeksRescreen)
 		{
 			CqlValueSet ap_ = this.Pharmacologic_Therapy_for_Hypertension();
-			IEnumerable<MedicationRequest> aq_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ap_, default);
-			IEnumerable<MedicationRequest> as_ = context.Operators.RetrieveByValueSet<MedicationRequest>(ap_, default);
+			IEnumerable<MedicationRequest> aq_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ap_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+			IEnumerable<MedicationRequest> as_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ap_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 			IEnumerable<MedicationRequest> at_ = context.Operators.Union<MedicationRequest>(aq_, as_);
 			bool? au_(MedicationRequest Medications)
 			{
@@ -2374,10 +2375,10 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		{
 			CqlCode d_ = this.Systolic_blood_pressure();
 			IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-			IEnumerable<Observation> f_ = context.Operators.RetrieveByCodes<Observation>(e_, default);
+			IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
 			CqlCode g_ = this.Diastolic_blood_pressure();
 			IEnumerable<CqlCode> h_ = context.Operators.ToList<CqlCode>(g_);
-			IEnumerable<Observation> i_ = context.Operators.RetrieveByCodes<Observation>(h_, default);
+			IEnumerable<Observation> i_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, h_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
 			IEnumerable<Observation> j_ = context.Operators.Union<Observation>(f_, i_);
 			bool? k_(Observation NoBPScreen)
 			{
@@ -2462,27 +2463,27 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private IEnumerable<ServiceRequest> NonPharmacological_Intervention_Not_Ordered_Value()
 	{
 		CqlValueSet a_ = this.Lifestyle_Recommendation();
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
-		IEnumerable<ServiceRequest> d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
+		IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
+		IEnumerable<ServiceRequest> d_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 		IEnumerable<ServiceRequest> e_ = context.Operators.Union<ServiceRequest>(b_, d_);
 		CqlValueSet f_ = this.Weight_Reduction_Recommended();
-		IEnumerable<ServiceRequest> g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, default);
-		IEnumerable<ServiceRequest> i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, default);
+		IEnumerable<ServiceRequest> g_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
+		IEnumerable<ServiceRequest> i_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 		IEnumerable<ServiceRequest> j_ = context.Operators.Union<ServiceRequest>(g_, i_);
 		IEnumerable<ServiceRequest> k_ = context.Operators.Union<ServiceRequest>(e_, j_);
 		CqlValueSet l_ = this.Dietary_Recommendations();
-		IEnumerable<ServiceRequest> m_ = context.Operators.RetrieveByValueSet<ServiceRequest>(l_, default);
-		IEnumerable<ServiceRequest> o_ = context.Operators.RetrieveByValueSet<ServiceRequest>(l_, default);
+		IEnumerable<ServiceRequest> m_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
+		IEnumerable<ServiceRequest> o_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 		IEnumerable<ServiceRequest> p_ = context.Operators.Union<ServiceRequest>(m_, o_);
 		IEnumerable<ServiceRequest> q_ = context.Operators.Union<ServiceRequest>(k_, p_);
 		CqlValueSet r_ = this.Recommendation_to_Increase_Physical_Activity();
-		IEnumerable<ServiceRequest> s_ = context.Operators.RetrieveByValueSet<ServiceRequest>(r_, default);
-		IEnumerable<ServiceRequest> u_ = context.Operators.RetrieveByValueSet<ServiceRequest>(r_, default);
+		IEnumerable<ServiceRequest> s_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
+		IEnumerable<ServiceRequest> u_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 		IEnumerable<ServiceRequest> v_ = context.Operators.Union<ServiceRequest>(s_, u_);
 		IEnumerable<ServiceRequest> w_ = context.Operators.Union<ServiceRequest>(q_, v_);
 		CqlValueSet x_ = this.Referral_or_Counseling_for_Alcohol_Consumption();
-		IEnumerable<ServiceRequest> y_ = context.Operators.RetrieveByValueSet<ServiceRequest>(x_, default);
-		IEnumerable<ServiceRequest> aa_ = context.Operators.RetrieveByValueSet<ServiceRequest>(x_, default);
+		IEnumerable<ServiceRequest> y_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
+		IEnumerable<ServiceRequest> aa_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 		IEnumerable<ServiceRequest> ab_ = context.Operators.Union<ServiceRequest>(y_, aa_);
 		IEnumerable<ServiceRequest> ac_ = context.Operators.Union<ServiceRequest>(w_, ab_);
 		bool? ad_(ServiceRequest NonPharmIntervention)
@@ -2531,14 +2532,14 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	{
 		CqlCode a_ = this._12_lead_EKG_panel();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<ServiceRequest> c_ = context.Operators.RetrieveByCodes<ServiceRequest>(b_, default);
+		IEnumerable<ServiceRequest> c_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 		CqlCode d_ = this.EKG_study();
 		IEnumerable<CqlCode> e_ = context.Operators.ToList<CqlCode>(d_);
-		IEnumerable<ServiceRequest> f_ = context.Operators.RetrieveByCodes<ServiceRequest>(e_, default);
+		IEnumerable<ServiceRequest> f_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, e_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 		IEnumerable<ServiceRequest> g_ = context.Operators.Union<ServiceRequest>(c_, f_);
 		CqlValueSet h_ = this.Laboratory_Tests_for_Hypertension();
-		IEnumerable<ServiceRequest> i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(h_, default);
-		IEnumerable<ServiceRequest> k_ = context.Operators.RetrieveByValueSet<ServiceRequest>(h_, default);
+		IEnumerable<ServiceRequest> i_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
+		IEnumerable<ServiceRequest> k_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 		IEnumerable<ServiceRequest> l_ = context.Operators.Union<ServiceRequest>(i_, k_);
 		IEnumerable<ServiceRequest> m_ = context.Operators.Union<ServiceRequest>(g_, l_);
 		bool? n_(ServiceRequest LabECGNotDone)
@@ -2581,15 +2582,15 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private IEnumerable<ServiceRequest> Second_Hypertensive_Reading_SBP_130_to_139_OR_DBP_80_to_89_Interventions_Declined_Value()
 	{
 		CqlValueSet a_ = this.Referral_to_Primary_Care_or_Alternate_Provider();
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
-		IEnumerable<ServiceRequest> d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
+		IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
+		IEnumerable<ServiceRequest> d_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 		IEnumerable<ServiceRequest> e_ = context.Operators.Union<ServiceRequest>(b_, d_);
 		CqlCode f_ = this.Follow_up_2_3_months__finding_();
 		IEnumerable<CqlCode> g_ = context.Operators.ToList<CqlCode>(f_);
-		IEnumerable<ServiceRequest> h_ = context.Operators.RetrieveByCodes<ServiceRequest>(g_, default);
+		IEnumerable<ServiceRequest> h_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, g_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 		CqlCode i_ = this.Follow_up_4_6_months__finding_();
 		IEnumerable<CqlCode> j_ = context.Operators.ToList<CqlCode>(i_);
-		IEnumerable<ServiceRequest> k_ = context.Operators.RetrieveByCodes<ServiceRequest>(j_, default);
+		IEnumerable<ServiceRequest> k_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, j_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 		IEnumerable<ServiceRequest> l_ = context.Operators.Union<ServiceRequest>(h_, k_);
 		IEnumerable<ServiceRequest> m_ = context.Operators.Union<ServiceRequest>(e_, l_);
 		bool? n_(ServiceRequest SecondHTNDeclinedReferralAndFollowUp)
@@ -2641,12 +2642,12 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 	private IEnumerable<object> Second_Hypertensive_Reading_SBP_Greater_than_or_Equal_to_140_OR_DBP_Greater_than_or_Equal_to_90_Interventions_Declined_Value()
 	{
 		CqlValueSet a_ = this.Referral_to_Primary_Care_or_Alternate_Provider();
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
-		IEnumerable<ServiceRequest> d_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
+		IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
+		IEnumerable<ServiceRequest> d_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 		IEnumerable<ServiceRequest> e_ = context.Operators.Union<ServiceRequest>(b_, d_);
 		CqlValueSet f_ = this.Follow_Up_Within_4_Weeks();
-		IEnumerable<ServiceRequest> g_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, default);
-		IEnumerable<ServiceRequest> i_ = context.Operators.RetrieveByValueSet<ServiceRequest>(f_, default);
+		IEnumerable<ServiceRequest> g_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
+		IEnumerable<ServiceRequest> i_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 		IEnumerable<ServiceRequest> j_ = context.Operators.Union<ServiceRequest>(g_, i_);
 		IEnumerable<ServiceRequest> k_ = context.Operators.Union<ServiceRequest>(e_, j_);
 		bool? l_(ServiceRequest SecondHTN140Over90ReferralFollowUpNotDone)
@@ -2684,8 +2685,8 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		};
 		IEnumerable<ServiceRequest> m_ = context.Operators.Where<ServiceRequest>(k_, l_);
 		CqlValueSet n_ = this.Pharmacologic_Therapy_for_Hypertension();
-		IEnumerable<MedicationRequest> o_ = context.Operators.RetrieveByValueSet<MedicationRequest>(n_, default);
-		IEnumerable<MedicationRequest> q_ = context.Operators.RetrieveByValueSet<MedicationRequest>(n_, default);
+		IEnumerable<MedicationRequest> o_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-mednotrequested"));
+		IEnumerable<MedicationRequest> q_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-mednotrequested"));
 		IEnumerable<MedicationRequest> r_ = context.Operators.Union<MedicationRequest>(o_, q_);
 		bool? s_(MedicationRequest MedicationRequestNotOrdered)
 		{
@@ -2716,15 +2717,15 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> b_(Encounter ElevatedBPEncounter)
 		{
 			CqlValueSet x_ = this.Referral_to_Primary_Care_or_Alternate_Provider();
-			IEnumerable<ServiceRequest> y_ = context.Operators.RetrieveByValueSet<ServiceRequest>(x_, default);
-			IEnumerable<ServiceRequest> aa_ = context.Operators.RetrieveByValueSet<ServiceRequest>(x_, default);
+			IEnumerable<ServiceRequest> y_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
+			IEnumerable<ServiceRequest> aa_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 			IEnumerable<ServiceRequest> ab_ = context.Operators.Union<ServiceRequest>(y_, aa_);
 			CqlCode ac_ = this.Follow_up_2_3_months__finding_();
 			IEnumerable<CqlCode> ad_ = context.Operators.ToList<CqlCode>(ac_);
-			IEnumerable<ServiceRequest> ae_ = context.Operators.RetrieveByCodes<ServiceRequest>(ad_, default);
+			IEnumerable<ServiceRequest> ae_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, ad_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 			CqlCode af_ = this.Follow_up_4_6_months__finding_();
 			IEnumerable<CqlCode> ag_ = context.Operators.ToList<CqlCode>(af_);
-			IEnumerable<ServiceRequest> ah_ = context.Operators.RetrieveByCodes<ServiceRequest>(ag_, default);
+			IEnumerable<ServiceRequest> ah_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, ag_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 			IEnumerable<ServiceRequest> ai_ = context.Operators.Union<ServiceRequest>(ae_, ah_);
 			IEnumerable<ServiceRequest> aj_ = context.Operators.Union<ServiceRequest>(ab_, ai_);
 			bool? ak_(ServiceRequest ElevatedBPDeclinedInterventions)
@@ -2800,12 +2801,12 @@ public class PCSBPScreeningFollowUpFHIR_0_2_000
 		IEnumerable<Encounter> i_(Encounter FirstHTNEncounter)
 		{
 			CqlValueSet bw_ = this.Follow_Up_Within_4_Weeks();
-			IEnumerable<ServiceRequest> bx_ = context.Operators.RetrieveByValueSet<ServiceRequest>(bw_, default);
-			IEnumerable<ServiceRequest> bz_ = context.Operators.RetrieveByValueSet<ServiceRequest>(bw_, default);
+			IEnumerable<ServiceRequest> bx_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, bw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
+			IEnumerable<ServiceRequest> bz_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, bw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 			IEnumerable<ServiceRequest> ca_ = context.Operators.Union<ServiceRequest>(bx_, bz_);
 			CqlValueSet cb_ = this.Referral_to_Primary_Care_or_Alternate_Provider();
-			IEnumerable<ServiceRequest> cc_ = context.Operators.RetrieveByValueSet<ServiceRequest>(cb_, default);
-			IEnumerable<ServiceRequest> ce_ = context.Operators.RetrieveByValueSet<ServiceRequest>(cb_, default);
+			IEnumerable<ServiceRequest> cc_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, cb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
+			IEnumerable<ServiceRequest> ce_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, cb_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicenotrequested"));
 			IEnumerable<ServiceRequest> cf_ = context.Operators.Union<ServiceRequest>(cc_, ce_);
 			IEnumerable<ServiceRequest> cg_ = context.Operators.Union<ServiceRequest>(ca_, cf_);
 			bool? ch_(ServiceRequest FirstHTNDeclinedInterventions)

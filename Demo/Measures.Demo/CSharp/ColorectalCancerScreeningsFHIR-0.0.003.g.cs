@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -469,7 +470,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -526,9 +527,9 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Encounter> Telehealth_Services_Value()
 	{
 		CqlValueSet a_ = this.Online_Assessments();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		CqlValueSet c_ = this.Telephone_Visits();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		bool? f_(Encounter TelehealthEncounter)
 		{
@@ -609,7 +610,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Condition> Malignant_Neoplasm_Value()
 	{
 		CqlValueSet a_ = this.Malignant_Neoplasm_of_Colon();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		bool? c_(Condition ColorectalCancer)
 		{
 			CqlInterval<CqlDateTime> e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(ColorectalCancer);
@@ -632,7 +633,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Procedure> Total_Colectomy_Performed_Value()
 	{
 		CqlValueSet a_ = this.Total_Colectomy();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		bool? c_(Procedure Colectomy)
 		{
 			Code<EventStatus> e_ = Colectomy?.StatusElement;
@@ -660,7 +661,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Condition> Total_Colectomy_Condition_Value()
 	{
 		CqlValueSet a_ = this.Total_Colectomy_ICD9();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		bool? c_(Condition ColectomyDx)
 		{
 			CqlInterval<CqlDateTime> e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Prevalence_Period(ColectomyDx);
@@ -719,7 +720,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status_Value()
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation FecalOccult)
 		{
 			DataType g_ = FecalOccult?.Effective;
@@ -820,7 +821,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_Value()
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation FecalOccult)
 		{
 			Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
@@ -898,7 +899,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed__day_of_TZoffset_Value()
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation FecalOccult)
 		{
 			Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
@@ -976,7 +977,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Value()
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation FecalOccult)
 		{
 			List<CodeableConcept> e_ = FecalOccult?.Category;
@@ -1046,7 +1047,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Value()
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation FecalOccult)
 		{
 			Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
@@ -1081,7 +1082,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status_Value()
 	{
 		CqlValueSet a_ = this.FIT_DNA();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation FitDNA)
 		{
 			DataType g_ = FitDNA?.Effective;
@@ -1185,7 +1186,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_Value()
 	{
 		CqlValueSet a_ = this.FIT_DNA();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation FitDNA)
 		{
 			Code<ObservationStatus> e_ = FitDNA?.StatusElement;
@@ -1271,7 +1272,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset_Value()
 	{
 		CqlValueSet a_ = this.FIT_DNA();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation FitDNA)
 		{
 			Code<ObservationStatus> e_ = FitDNA?.StatusElement;
@@ -1357,7 +1358,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset_Value()
 	{
 		CqlValueSet a_ = this.FIT_DNA();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation FitDNA)
 		{
 			List<CodeableConcept> e_ = FitDNA?.Category;
@@ -1435,7 +1436,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset_Value()
 	{
 		CqlValueSet a_ = this.FIT_DNA();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation FitDNA)
 		{
 			Code<ObservationStatus> e_ = FitDNA?.StatusElement;
@@ -1478,7 +1479,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<CqlDateTime> CT_Colonography_Display_Date_Value()
 	{
 		CqlValueSet a_ = this.CT_Colonography();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation Colonography)
 		{
 			DataType g_ = Colonography?.Effective;
@@ -1517,7 +1518,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Observation> CT_Colonography_Performed_Value()
 	{
 		CqlValueSet a_ = this.CT_Colonography();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation Colonography)
 		{
 			Code<ObservationStatus> e_ = Colonography?.StatusElement;
@@ -1558,7 +1559,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Observation> CT_Colonography_Performed_without_appropriate_status_Value()
 	{
 		CqlValueSet a_ = this.CT_Colonography();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? c_(Observation Colonography)
 		{
 			Code<ObservationStatus> e_ = Colonography?.StatusElement;
@@ -1600,7 +1601,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<CqlDateTime> Flexible_Sigmoidoscopy_Display_Date_Value()
 	{
 		CqlValueSet a_ = this.Flexible_Sigmoidoscopy();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		bool? c_(Procedure FlexibleSigmoidoscopy)
 		{
 			DataType g_ = FlexibleSigmoidoscopy?.Performed;
@@ -1639,7 +1640,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_Value()
 	{
 		CqlValueSet a_ = this.Flexible_Sigmoidoscopy();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		bool? c_(Procedure FlexibleSigmoidoscopy)
 		{
 			Code<EventStatus> e_ = FlexibleSigmoidoscopy?.StatusElement;
@@ -1674,7 +1675,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_without_appropriate_status_Value()
 	{
 		CqlValueSet a_ = this.Flexible_Sigmoidoscopy();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		bool? c_(Procedure FlexibleSigmoidoscopy)
 		{
 			Code<EventStatus> e_ = FlexibleSigmoidoscopy?.StatusElement;
@@ -1710,7 +1711,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<CqlDateTime> Colonoscopy_Display_Date_Value()
 	{
 		CqlValueSet a_ = this.Colonoscopy();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		bool? c_(Procedure Colonoscopy)
 		{
 			DataType g_ = Colonoscopy?.Performed;
@@ -1749,7 +1750,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Procedure> Colonoscopy_Performed_Value()
 	{
 		CqlValueSet a_ = this.Colonoscopy();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		bool? c_(Procedure Colonoscopy)
 		{
 			Code<EventStatus> e_ = Colonoscopy?.StatusElement;
@@ -1784,7 +1785,7 @@ public class ColorectalCancerScreeningsFHIR_0_0_003
 	private IEnumerable<Procedure> Colonoscopy_Performed_without_appropriate_status_Value()
 	{
 		CqlValueSet a_ = this.Colonoscopy();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
 		bool? c_(Procedure Colonoscopy)
 		{
 			Code<EventStatus> e_ = Colonoscopy?.StatusElement;

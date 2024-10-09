@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -87,7 +88,7 @@ public class MultipleResourcesExample_0_0_1
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -101,7 +102,7 @@ public class MultipleResourcesExample_0_0_1
 	{
 		CqlCode a_ = this.Tobacco_Smoking_Status();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/StructureDefinition/Observation"));
 		bool? d_(Observation O)
 		{
 			Code<ObservationStatus> f_ = O?.StatusElement;
@@ -126,7 +127,7 @@ public class MultipleResourcesExample_0_0_1
 	private IEnumerable<Condition> Lung_cancer_diagnosis_Value()
 	{
 		CqlValueSet a_ = this.Lung_Cancer();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		bool? c_(Condition C)
 		{
 			CodeableConcept e_ = C?.ClinicalStatus;

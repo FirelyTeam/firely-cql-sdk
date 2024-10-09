@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -3384,7 +3385,7 @@ public class NCQAClaims_1_0_0
 		];
 		(int? IdentifierCount, nint _)? e_((IEnumerable<(Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?> CareTeams, nint _)? ClaimProperties)
 		{
-			IEnumerable<Practitioner> at_ = context.Operators.RetrieveByValueSet<Practitioner>(default, default);
+			IEnumerable<Practitioner> at_ = context.Operators.Retrieve<Practitioner>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Practitioner"));
 			bool? au_(Practitioner p)
 			{
 				Id bb_ = p?.IdElement;
@@ -3677,7 +3678,7 @@ public class NCQAClaims_1_0_0
 		];
 		(int? IdentifierCount, nint _)? e_((IEnumerable<(IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?> ItemsLocationReferences, nint _)? ClaimProperties)
 		{
-			IEnumerable<Location> aw_ = context.Operators.RetrieveByValueSet<Location>(default, default);
+			IEnumerable<Location> aw_ = context.Operators.Retrieve<Location>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Location"));
 			bool? ax_(Location l)
 			{
 				Id be_ = l?.IdElement;

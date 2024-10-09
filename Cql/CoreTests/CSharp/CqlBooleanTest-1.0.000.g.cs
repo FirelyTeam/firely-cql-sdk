@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using System.Dynamic;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
@@ -40,7 +41,7 @@ public class CqlBooleanTest_1_0_000
 	}
 
     [CqlDeclaration("SomethingTrueEqualsTrue")]
-	public bool? SomethingTrueEqualsTrue() => 
+	public bool? SomethingTrueEqualsTrue() =>
 		__SomethingTrueEqualsTrue.Value;
 
 }

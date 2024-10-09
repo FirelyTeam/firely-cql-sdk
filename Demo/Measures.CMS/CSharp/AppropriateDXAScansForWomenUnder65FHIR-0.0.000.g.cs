@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -697,7 +698,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -754,11 +755,11 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	private IEnumerable<Encounter> Qualifying_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Office_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet c_ = this.Preventive_Care_Services_Established_Office_Visit__18_and_Up();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
-		IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(default, default);
+		IEnumerable<Encounter> f_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		bool? g_(Encounter E)
 		{
 			List<CodeableConcept> x_ = E?.Type;
@@ -784,17 +785,17 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		};
 		IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
 		CqlValueSet i_ = this.Preventive_Care_Services_Initial_Office_Visit__18_and_Up();
-		IEnumerable<Encounter> j_ = context.Operators.RetrieveByValueSet<Encounter>(i_, default);
+		IEnumerable<Encounter> j_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(h_, j_);
 		IEnumerable<Encounter> l_ = context.Operators.Union<Encounter>(e_, k_);
 		CqlValueSet m_ = this.Outpatient_Consultation();
-		IEnumerable<Encounter> n_ = context.Operators.RetrieveByValueSet<Encounter>(m_, default);
+		IEnumerable<Encounter> n_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet o_ = this.Online_Assessments();
-		IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, default);
+		IEnumerable<Encounter> p_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(n_, p_);
 		IEnumerable<Encounter> r_ = context.Operators.Union<Encounter>(l_, q_);
 		CqlValueSet s_ = this.Telephone_Visits();
-		IEnumerable<Encounter> t_ = context.Operators.RetrieveByValueSet<Encounter>(s_, default);
+		IEnumerable<Encounter> t_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, s_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> u_ = context.Operators.Union<Encounter>(r_, t_);
 		bool? v_(Encounter ValidEncounters)
 		{
@@ -856,7 +857,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 
 	private Observation First_BMI_in_Measurement_Period_Value()
 	{
-		IEnumerable<Observation> a_ = context.Operators.RetrieveByValueSet<Observation>(default, default);
+		IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bmi"));
 		IEnumerable<Observation> b_ = Status_1_6_000.BMI(a_);
 		bool? c_(Observation BMIRatio)
 		{
@@ -921,7 +922,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	{
 		CqlCode a_ = this.Alcoholic_drinks_per_drinking_day___Reported();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> d_ = Status_1_6_000.Final_Survey_Observation(c_);
 		bool? e_(Observation AverageDrinks)
 		{
@@ -977,7 +978,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	private bool? Has_Osteoporosis_Before_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Osteoporosis();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		bool? c_(Condition OsteoporosisDiagnosis)
 		{
 			CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(OsteoporosisDiagnosis);
@@ -1001,7 +1002,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	private bool? Has_Osteopenia_Before_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Osteopenia();
-		IEnumerable<Condition> b_ = context.Operators.RetrieveByValueSet<Condition>(a_, default);
+		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		bool? c_(Condition OsteopeniaDiagnosis)
 		{
 			CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.ToPrevalenceInterval(OsteopeniaDiagnosis);
@@ -1038,7 +1039,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	private IEnumerable<Observation> Parent_History_of_Hip_Fracture_Assessment_Value()
 	{
 		CqlValueSet a_ = this.History_of_hip_fracture_in_parent();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_ = Status_1_6_000.Final_Survey_Observation(b_);
 		bool? d_(Observation ParentFractureHistory)
 		{
@@ -1064,7 +1065,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	private bool? Has_Risk_Factor_Any_Time_in_History_Prior_to_Measurement_Period_and_Do_Not_Need_to_be_Active_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.Gastric_Bypass_Surgery();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_ = Status_1_6_000.Completed_Procedure(b_);
 		bool? d_(Procedure GastricBypass)
 		{
@@ -1080,8 +1081,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		};
 		IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
 		CqlValueSet f_ = this.Aromatase_Inhibitors();
-		IEnumerable<MedicationRequest> g_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, default);
-		IEnumerable<MedicationRequest> i_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, default);
+		IEnumerable<MedicationRequest> g_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> i_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> j_ = context.Operators.Union<MedicationRequest>(g_, i_);
 		IEnumerable<MedicationRequest> k_ = Status_1_6_000.Active_Medication(j_);
 		bool? l_(MedicationRequest AromataseInhibitorActive)
@@ -1097,8 +1098,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		};
 		IEnumerable<MedicationRequest> m_ = context.Operators.Where<MedicationRequest>(k_, l_);
 		IEnumerable<object> n_ = context.Operators.Union<object>(e_ as IEnumerable<object>, m_ as IEnumerable<object>);
-		IEnumerable<MedicationRequest> p_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, default);
-		IEnumerable<MedicationRequest> r_ = context.Operators.RetrieveByValueSet<MedicationRequest>(f_, default);
+		IEnumerable<MedicationRequest> p_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> r_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> s_ = context.Operators.Union<MedicationRequest>(p_, r_);
 		IEnumerable<MedicationRequest> t_ = Status_1_6_000.Active_or_Completed_Medication_Request(s_);
 		bool? u_(MedicationRequest AromataseInhibitorOrder)
@@ -1149,8 +1150,8 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	private int? Glucocorticoid_Active_Medication_Duration_in_Days_Value()
 	{
 		CqlValueSet a_ = this.Glucocorticoids__oral_only_();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
-		IEnumerable<MedicationRequest> d_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
+		IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
+		IEnumerable<MedicationRequest> d_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> e_ = context.Operators.Union<MedicationRequest>(b_, d_);
 		IEnumerable<MedicationRequest> f_ = Status_1_6_000.Active_Medication(e_);
 		bool? g_(MedicationRequest OralGlucocorticoid)
@@ -1255,16 +1256,16 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	private bool? Has_Double_or_Bilateral_Oophorectomy_Value()
 	{
 		CqlValueSet a_ = this.Bilateral_Oophorectomy();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_ = this.ProcedureInPatientHistory(b_);
 		bool? d_ = context.Operators.Exists<Procedure>(c_);
 		CqlValueSet e_ = this.Evidence_of_Bilateral_Oophorectomy();
-		IEnumerable<Procedure> f_ = context.Operators.RetrieveByValueSet<Procedure>(e_, default);
+		IEnumerable<Procedure> f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> g_ = this.ProcedureInPatientHistory(f_);
 		bool? h_ = context.Operators.Exists<Procedure>(g_);
 		bool? i_ = context.Operators.Or(d_, h_);
 		CqlValueSet j_ = this.Unilateral_Oophorectomy__Unspecified_Laterality();
-		IEnumerable<Procedure> k_ = context.Operators.RetrieveByValueSet<Procedure>(j_, default);
+		IEnumerable<Procedure> k_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		bool? l_(Procedure UnilateralOophorectomy)
 		{
 			List<CodeableConcept> ad_ = UnilateralOophorectomy?.BodySite;
@@ -1290,11 +1291,11 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		};
 		IEnumerable<Procedure> m_ = context.Operators.Where<Procedure>(k_, l_);
 		CqlValueSet n_ = this.Unilateral_Oophorectomy_Right();
-		IEnumerable<Procedure> o_ = context.Operators.RetrieveByValueSet<Procedure>(n_, default);
+		IEnumerable<Procedure> o_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> p_ = context.Operators.Union<Procedure>(m_, o_);
 		IEnumerable<Procedure> q_ = this.ProcedureInPatientHistory(p_);
 		bool? r_ = context.Operators.Exists<Procedure>(q_);
-		IEnumerable<Procedure> t_ = context.Operators.RetrieveByValueSet<Procedure>(j_, default);
+		IEnumerable<Procedure> t_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		bool? u_(Procedure UnilateralOophorectomy)
 		{
 			List<CodeableConcept> an_ = UnilateralOophorectomy?.BodySite;
@@ -1320,7 +1321,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		};
 		IEnumerable<Procedure> v_ = context.Operators.Where<Procedure>(t_, u_);
 		CqlValueSet w_ = this.Unilateral_Oophorectomy_Left();
-		IEnumerable<Procedure> x_ = context.Operators.RetrieveByValueSet<Procedure>(w_, default);
+		IEnumerable<Procedure> x_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, w_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> y_ = context.Operators.Union<Procedure>(v_, x_);
 		IEnumerable<Procedure> z_ = this.ProcedureInPatientHistory(y_);
 		bool? aa_ = context.Operators.Exists<Procedure>(z_);
@@ -1337,12 +1338,12 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	private bool? Has_Organ_Transplants_Value()
 	{
 		CqlValueSet a_ = this.Major_Transplant();
-		IEnumerable<Procedure> b_ = context.Operators.RetrieveByValueSet<Procedure>(a_, default);
+		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		CqlValueSet c_ = this.Kidney_Transplant();
-		IEnumerable<Procedure> d_ = context.Operators.RetrieveByValueSet<Procedure>(c_, default);
+		IEnumerable<Procedure> d_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> e_ = context.Operators.Union<Procedure>(b_, d_);
 		CqlValueSet f_ = this.Bone_Marrow_Transplant();
-		IEnumerable<Procedure> g_ = context.Operators.RetrieveByValueSet<Procedure>(f_, default);
+		IEnumerable<Procedure> g_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> h_ = context.Operators.Union<Procedure>(e_, g_);
 		IEnumerable<Procedure> i_ = this.ProcedureInPatientHistory(h_);
 		bool? j_ = context.Operators.Exists<Procedure>(i_);
@@ -1358,69 +1359,69 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	{
 		bool? a_ = this.Has_90_or_More_Active_Glucocorticoid_Medication_Days();
 		CqlValueSet b_ = this.Osteoporotic_Fractures();
-		IEnumerable<Condition> c_ = context.Operators.RetrieveByValueSet<Condition>(b_, default);
+		IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		CqlValueSet d_ = this.Malabsorption_Syndromes();
-		IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, default);
+		IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> f_ = context.Operators.Union<Condition>(c_, e_);
 		CqlValueSet g_ = this.Chronic_Malnutrition();
-		IEnumerable<Condition> h_ = context.Operators.RetrieveByValueSet<Condition>(g_, default);
+		IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		CqlValueSet i_ = this.Chronic_Liver_Disease();
-		IEnumerable<Condition> j_ = context.Operators.RetrieveByValueSet<Condition>(i_, default);
+		IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, i_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> k_ = context.Operators.Union<Condition>(h_, j_);
 		IEnumerable<Condition> l_ = context.Operators.Union<Condition>(f_, k_);
 		CqlValueSet m_ = this.Rheumatoid_Arthritis();
-		IEnumerable<Condition> n_ = context.Operators.RetrieveByValueSet<Condition>(m_, default);
+		IEnumerable<Condition> n_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		CqlValueSet o_ = this.Hyperthyroidism();
-		IEnumerable<Condition> p_ = context.Operators.RetrieveByValueSet<Condition>(o_, default);
+		IEnumerable<Condition> p_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> q_ = context.Operators.Union<Condition>(n_, p_);
 		IEnumerable<Condition> r_ = context.Operators.Union<Condition>(l_, q_);
 		CqlValueSet s_ = this.Type_1_Diabetes();
-		IEnumerable<Condition> t_ = context.Operators.RetrieveByValueSet<Condition>(s_, default);
+		IEnumerable<Condition> t_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, s_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		CqlValueSet u_ = this.End_Stage_Renal_Disease();
-		IEnumerable<Condition> v_ = context.Operators.RetrieveByValueSet<Condition>(u_, default);
+		IEnumerable<Condition> v_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, u_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> w_ = context.Operators.Union<Condition>(t_, v_);
 		IEnumerable<Condition> x_ = context.Operators.Union<Condition>(r_, w_);
 		CqlValueSet y_ = this.Osteogenesis_Imperfecta();
-		IEnumerable<Condition> z_ = context.Operators.RetrieveByValueSet<Condition>(y_, default);
+		IEnumerable<Condition> z_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		CqlValueSet aa_ = this.Ankylosing_Spondylitis();
-		IEnumerable<Condition> ab_ = context.Operators.RetrieveByValueSet<Condition>(aa_, default);
+		IEnumerable<Condition> ab_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, aa_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> ac_ = context.Operators.Union<Condition>(z_, ab_);
 		IEnumerable<Condition> ad_ = context.Operators.Union<Condition>(x_, ac_);
 		CqlValueSet ae_ = this.Psoriatic_Arthritis();
-		IEnumerable<Condition> af_ = context.Operators.RetrieveByValueSet<Condition>(ae_, default);
+		IEnumerable<Condition> af_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ae_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		CqlValueSet ag_ = this.Ehlers_Danlos_Syndrome();
-		IEnumerable<Condition> ah_ = context.Operators.RetrieveByValueSet<Condition>(ag_, default);
+		IEnumerable<Condition> ah_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ag_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> ai_ = context.Operators.Union<Condition>(af_, ah_);
 		IEnumerable<Condition> aj_ = context.Operators.Union<Condition>(ad_, ai_);
 		CqlValueSet ak_ = this.Cushings_Syndrome();
-		IEnumerable<Condition> al_ = context.Operators.RetrieveByValueSet<Condition>(ak_, default);
+		IEnumerable<Condition> al_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ak_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		CqlValueSet am_ = this.Hyperparathyroidism();
-		IEnumerable<Condition> an_ = context.Operators.RetrieveByValueSet<Condition>(am_, default);
+		IEnumerable<Condition> an_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, am_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> ao_ = context.Operators.Union<Condition>(al_, an_);
 		IEnumerable<Condition> ap_ = context.Operators.Union<Condition>(aj_, ao_);
 		CqlValueSet aq_ = this.Marfans_Syndrome();
-		IEnumerable<Condition> ar_ = context.Operators.RetrieveByValueSet<Condition>(aq_, default);
+		IEnumerable<Condition> ar_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, aq_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		CqlValueSet as_ = this.Lupus();
-		IEnumerable<Condition> at_ = context.Operators.RetrieveByValueSet<Condition>(as_, default);
+		IEnumerable<Condition> at_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, as_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> au_ = context.Operators.Union<Condition>(ar_, at_);
 		IEnumerable<Condition> av_ = context.Operators.Union<Condition>(ap_, au_);
 		CqlValueSet aw_ = this.Multiple_Myeloma();
-		IEnumerable<Condition> ax_ = context.Operators.RetrieveByValueSet<Condition>(aw_, default);
+		IEnumerable<Condition> ax_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, aw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		CqlValueSet ay_ = this.Premature_Menopause();
-		IEnumerable<Condition> az_ = context.Operators.RetrieveByValueSet<Condition>(ay_, default);
+		IEnumerable<Condition> az_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, ay_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> ba_ = context.Operators.Union<Condition>(ax_, az_);
 		IEnumerable<Condition> bb_ = context.Operators.Union<Condition>(av_, ba_);
 		CqlValueSet bc_ = this.Eating_Disorders();
-		IEnumerable<Condition> bd_ = context.Operators.RetrieveByValueSet<Condition>(bc_, default);
+		IEnumerable<Condition> bd_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, bc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		CqlValueSet be_ = this.Amenorrhea();
-		IEnumerable<Condition> bf_ = context.Operators.RetrieveByValueSet<Condition>(be_, default);
+		IEnumerable<Condition> bf_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, be_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> bg_ = context.Operators.Union<Condition>(bd_, bf_);
 		IEnumerable<Condition> bh_ = context.Operators.Union<Condition>(bb_, bg_);
 		IEnumerable<Condition> bi_ = this.DiagnosisInPatientHistory(bh_);
 		bool? bj_ = context.Operators.Exists<Condition>(bi_);
 		bool? bk_ = context.Operators.Or(a_, bj_);
 		CqlValueSet bl_ = this.Chemotherapy();
-		IEnumerable<Procedure> bm_ = context.Operators.RetrieveByValueSet<Procedure>(bl_, default);
+		IEnumerable<Procedure> bm_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, bl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> bn_ = this.ProcedureInPatientHistory(bm_);
 		bool? bo_ = context.Operators.Exists<Procedure>(bn_);
 		bool? bp_ = context.Operators.Or(bk_, bo_);
@@ -1456,7 +1457,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	private IEnumerable<ServiceRequest> DXA_Scan_Order_During_Measurement_Period_Value()
 	{
 		CqlValueSet a_ = this.DXA__Dual_energy_Xray_Absorptiometry__Scan();
-		IEnumerable<ServiceRequest> b_ = context.Operators.RetrieveByValueSet<ServiceRequest>(a_, default);
+		IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
 		IEnumerable<ServiceRequest> c_ = Status_1_6_000.Completed_or_Ongoing_Service_Request(b_);
 		bool? d_(ServiceRequest DXA)
 		{
@@ -1501,7 +1502,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 	{
 		CqlCode a_ = this.Major_osteoporotic_fracture_10_year_probability__Likelihood__Fracture_Risk_Assessment();
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
-		IEnumerable<Observation> c_ = context.Operators.RetrieveByCodes<Observation>(b_, default);
+		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> d_ = Status_1_6_000.Final_Survey_Observation(c_);
 		bool? e_(Observation FRAX)
 		{
@@ -1515,7 +1516,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
 		CqlCode g_ = this.Osteoporosis_Risk_Assessment_Instrument();
 		IEnumerable<CqlCode> h_ = context.Operators.ToList<CqlCode>(g_);
-		IEnumerable<Observation> i_ = context.Operators.RetrieveByCodes<Observation>(h_, default);
+		IEnumerable<Observation> i_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, h_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> j_ = Status_1_6_000.Final_Survey_Observation(i_);
 		bool? k_(Observation ORAI)
 		{
@@ -1529,7 +1530,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<Observation> m_ = context.Operators.Union<Observation>(f_, l_);
 		CqlCode n_ = this.Osteoporosis_Index_of_Risk_panel();
 		IEnumerable<CqlCode> o_ = context.Operators.ToList<CqlCode>(n_);
-		IEnumerable<Observation> p_ = context.Operators.RetrieveByCodes<Observation>(o_, default);
+		IEnumerable<Observation> p_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, o_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> q_ = Status_1_6_000.Final_Survey_Observation(p_);
 		bool? r_(Observation OSIRIS)
 		{
@@ -1543,7 +1544,7 @@ public class AppropriateDXAScansForWomenUnder65FHIR_0_0_000
 		IEnumerable<Observation> s_ = context.Operators.Where<Observation>(q_, r_);
 		CqlCode t_ = this.Osteoporosis_Self_Assessment_Tool();
 		IEnumerable<CqlCode> u_ = context.Operators.ToList<CqlCode>(t_);
-		IEnumerable<Observation> v_ = context.Operators.RetrieveByCodes<Observation>(u_, default);
+		IEnumerable<Observation> v_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, u_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> w_ = Status_1_6_000.Final_Survey_Observation(v_);
 		bool? x_(Observation OST)
 		{

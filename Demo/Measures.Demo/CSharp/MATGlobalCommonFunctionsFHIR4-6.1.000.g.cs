@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -473,7 +474,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -496,7 +497,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	private IEnumerable<Encounter> Inpatient_Encounter_Value()
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		bool? c_(Encounter EncounterInpatient)
 		{
 			Code<Encounter.EncounterStatus> e_ = EncounterInpatient?.StatusElement;
@@ -528,7 +529,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 	public Encounter ED_Visit(Encounter TheEncounter)
 	{
 		CqlValueSet a_ = this.Emergency_Department_Visit();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		bool? c_(Encounter EDVisit)
 		{
 			Code<Encounter.EncounterStatus> h_ = EDVisit?.StatusElement;
@@ -706,14 +707,14 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.Emergency_Department_Visit();
-			IEnumerable<Encounter> f_ = context.Operators.RetrieveByValueSet<Encounter>(e_, default);
+			IEnumerable<Encounter> f_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 			bool? g_(Encounter LastED)
 			{
 				Period af_ = LastED?.Period;
 				CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_0_001.ToInterval(af_);
 				CqlDateTime ah_ = context.Operators.End(ag_);
 				CqlValueSet ai_ = this.Observation_Services();
-				IEnumerable<Encounter> aj_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
+				IEnumerable<Encounter> aj_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 				bool? ak_(Encounter LastObs)
 				{
 					Period cb_ = LastObs?.Period;
@@ -754,7 +755,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				CqlDateTime au_ = context.Operators.Start(at_);
 				CqlQuantity av_ = context.Operators.Quantity(1m, "hour");
 				CqlDateTime aw_ = context.Operators.Subtract(ar_ ?? au_, av_);
-				IEnumerable<Encounter> ay_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
+				IEnumerable<Encounter> ay_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 				bool? az_(Encounter LastObs)
 				{
 					Period cw_ = LastObs?.Period;
@@ -794,7 +795,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 				CqlDateTime bj_ = context.Operators.Start(bi_);
 				CqlInterval<CqlDateTime> bk_ = context.Operators.Interval(aw_, bg_ ?? bj_, true, true);
 				bool? bl_ = context.Operators.In<CqlDateTime>(ah_, bk_, default);
-				IEnumerable<Encounter> bn_ = context.Operators.RetrieveByValueSet<Encounter>(ai_, default);
+				IEnumerable<Encounter> bn_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 				bool? bo_(Encounter LastObs)
 				{
 					Period dr_ = LastObs?.Period;
@@ -852,7 +853,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_0_001.ToInterval(l_);
 			CqlDateTime n_ = context.Operators.Start(m_);
 			CqlValueSet o_ = this.Observation_Services();
-			IEnumerable<Encounter> p_ = context.Operators.RetrieveByValueSet<Encounter>(o_, default);
+			IEnumerable<Encounter> p_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 			bool? q_(Encounter LastObs)
 			{
 				Period ep_ = LastObs?.Period;
@@ -1326,7 +1327,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
 		Condition b_(Encounter.DiagnosisComponent D)
 		{
-			IEnumerable<Condition> d_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
+			IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 			bool? e_(Condition C)
 			{
 				Id h_ = C?.IdElement;
@@ -1352,7 +1353,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     [CqlDeclaration("GetCondition")]
 	public Condition GetCondition(ResourceReference reference)
 	{
-		IEnumerable<Condition> a_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
+		IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		bool? b_(Condition C)
 		{
 			Id e_ = C?.IdElement;
@@ -1460,7 +1461,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 		];
 		Condition f_(Encounter.DiagnosisComponent PD)
 		{
-			IEnumerable<Condition> m_ = context.Operators.RetrieveByValueSet<Condition>(default, default);
+			IEnumerable<Condition> m_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 			bool? n_(Condition C)
 			{
 				Id q_ = C?.IdElement;
@@ -1487,7 +1488,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
     [CqlDeclaration("GetLocation")]
 	public Location GetLocation(ResourceReference reference)
 	{
-		IEnumerable<Location> a_ = context.Operators.RetrieveByValueSet<Location>(default, default);
+		IEnumerable<Location> a_ = context.Operators.Retrieve<Location>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Location"));
 		bool? b_(Location L)
 		{
 			Id e_ = L?.IdElement;
@@ -1591,7 +1592,7 @@ public class MATGlobalCommonFunctionsFHIR4_6_1_000
 			}
 			else
 			{
-				IEnumerable<Medication> f_ = context.Operators.RetrieveByValueSet<Medication>(default, default);
+				IEnumerable<Medication> f_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Medication"));
 				bool? g_(Medication M)
 				{
 					Id k_ = M?.IdElement;

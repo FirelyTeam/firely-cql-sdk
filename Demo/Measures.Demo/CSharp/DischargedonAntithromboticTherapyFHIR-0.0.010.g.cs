@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -226,7 +227,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -250,7 +251,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 	private IEnumerable<MedicationRequest> Antithrombotic_Not_Given_at_Discharge_Value()
 	{
 		CqlValueSet a_ = this.Antithrombotic_Therapy();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
+		IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 		bool? c_(MedicationRequest NoAntithromboticDischarge)
 		{
 			FhirBoolean e_ = NoAntithromboticDischarge?.DoNotPerformElement;
@@ -353,7 +354,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 	private IEnumerable<MedicationRequest> Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge_Value()
 	{
 		CqlValueSet a_ = this.Pharmacological_Contraindications_For_Antithrombotic_Therapy();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
+		IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 		bool? c_(MedicationRequest Pharmacological)
 		{
 			FhirBoolean e_ = Pharmacological?.DoNotPerformElement;
@@ -473,7 +474,7 @@ public class DischargedonAntithromboticTherapyFHIR_0_0_010
 	private IEnumerable<MedicationRequest> Antithrombotic_Therapy_at_Discharge_Value()
 	{
 		CqlValueSet a_ = this.Antithrombotic_Therapy();
-		IEnumerable<MedicationRequest> b_ = context.Operators.RetrieveByValueSet<MedicationRequest>(a_, default);
+		IEnumerable<MedicationRequest> b_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
 		bool? c_(MedicationRequest Antithrombotic)
 		{
 			FhirBoolean e_ = Antithrombotic?.DoNotPerformElement;

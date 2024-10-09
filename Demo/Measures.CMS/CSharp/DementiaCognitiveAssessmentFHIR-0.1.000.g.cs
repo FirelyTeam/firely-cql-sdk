@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Iso8601;
 using System.Reflection;
+using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
@@ -249,7 +250,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 
 	private Patient Patient_Value()
 	{
-		IEnumerable<Patient> a_ = context.Operators.RetrieveByValueSet<Patient>(default, default);
+		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
 		return b_;
@@ -262,30 +263,30 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 	private IEnumerable<Encounter> Encounter_to_Assess_Cognition_Value()
 	{
 		CqlValueSet a_ = this.Psych_Visit_Diagnostic_Evaluation();
-		IEnumerable<Encounter> b_ = context.Operators.RetrieveByValueSet<Encounter>(a_, default);
+		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet c_ = this.Nursing_Facility_Visit();
-		IEnumerable<Encounter> d_ = context.Operators.RetrieveByValueSet<Encounter>(c_, default);
+		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
 		CqlValueSet f_ = this.Care_Services_in_Long_Term_Residential_Facility();
-		IEnumerable<Encounter> g_ = context.Operators.RetrieveByValueSet<Encounter>(f_, default);
+		IEnumerable<Encounter> g_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet h_ = this.Home_Healthcare_Services();
-		IEnumerable<Encounter> i_ = context.Operators.RetrieveByValueSet<Encounter>(h_, default);
+		IEnumerable<Encounter> i_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, h_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> j_ = context.Operators.Union<Encounter>(g_, i_);
 		IEnumerable<Encounter> k_ = context.Operators.Union<Encounter>(e_, j_);
 		CqlValueSet l_ = this.Psych_Visit_Psychotherapy();
-		IEnumerable<Encounter> m_ = context.Operators.RetrieveByValueSet<Encounter>(l_, default);
+		IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet n_ = this.Behavioral_Neuropsych_Assessment();
-		IEnumerable<Encounter> o_ = context.Operators.RetrieveByValueSet<Encounter>(n_, default);
+		IEnumerable<Encounter> o_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
 		CqlValueSet r_ = this.Occupational_Therapy_Evaluation();
-		IEnumerable<Encounter> s_ = context.Operators.RetrieveByValueSet<Encounter>(r_, default);
+		IEnumerable<Encounter> s_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, r_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		CqlValueSet t_ = this.Office_Visit();
-		IEnumerable<Encounter> u_ = context.Operators.RetrieveByValueSet<Encounter>(t_, default);
+		IEnumerable<Encounter> u_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> v_ = context.Operators.Union<Encounter>(s_, u_);
 		IEnumerable<Encounter> w_ = context.Operators.Union<Encounter>(q_, v_);
 		CqlValueSet x_ = this.Outpatient_Consultation();
-		IEnumerable<Encounter> y_ = context.Operators.RetrieveByValueSet<Encounter>(x_, default);
+		IEnumerable<Encounter> y_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> z_ = context.Operators.Union<Encounter>(w_, y_);
 
 		return z_;
@@ -301,7 +302,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 		IEnumerable<Encounter> b_(Encounter EncounterAssessCognition)
 		{
 			CqlValueSet d_ = this.Dementia_and_Mental_Degenerations();
-			IEnumerable<Condition> e_ = context.Operators.RetrieveByValueSet<Condition>(d_, default);
+			IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 			bool? f_(Condition Dementia)
 			{
 				CqlInterval<CqlDateTime> j_ = this.Measurement_Period();
@@ -354,7 +355,7 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_to_Assess_Cognition();
 		CqlValueSet b_ = this.Patient_Provider_Interaction();
-		IEnumerable<Encounter> c_ = context.Operators.RetrieveByValueSet<Encounter>(b_, default);
+		IEnumerable<Encounter> c_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> d_ = context.Operators.Union<Encounter>(a_, c_);
 		bool? e_(Encounter ValidEncounter)
 		{
@@ -409,9 +410,9 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 	private IEnumerable<Observation> Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods_Value()
 	{
 		CqlValueSet a_ = this.Standardized_Tools_Score_for_Assessment_of_Cognition();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		CqlValueSet c_ = this.Cognitive_Assessment();
-		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(c_, default);
+		IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> e_ = context.Operators.Union<Observation>(b_, d_);
 		IEnumerable<Observation> f_(Observation CognitiveAssessment)
 		{
@@ -490,9 +491,9 @@ public class DementiaCognitiveAssessmentFHIR_0_1_000
 	private IEnumerable<Observation> Patient_Reason_for_Not_Performing_Assessment_of_Cognition_Using_Standardized_Tools_or_Alternate_Methods_Value()
 	{
 		CqlValueSet a_ = this.Standardized_Tools_Score_for_Assessment_of_Cognition();
-		IEnumerable<Observation> b_ = context.Operators.RetrieveByValueSet<Observation>(a_, default);
+		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
 		CqlValueSet c_ = this.Cognitive_Assessment();
-		IEnumerable<Observation> d_ = context.Operators.RetrieveByValueSet<Observation>(c_, default);
+		IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
 		IEnumerable<Observation> e_ = context.Operators.Union<Observation>(b_, d_);
 		IEnumerable<Observation> f_(Observation NoCognitiveAssessment)
 		{
