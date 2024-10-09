@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Runtime.Loader;
+using System.Text.Json;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -31,5 +32,8 @@ public class TupleAssemblyOutputTest
         //Assert.AreEqual("success", valueTuple.status); //doesn't compile because the compiler replaces valueTuple.status with valueTuple.Item1
         Assert.IsNotNull(valueTuple.GetType().GetField("status")); // fails, because the compiler replaced all custom names with default names, the custom names are not part of the runtime type information
         Assert.IsNotNull(valueTuple.GetType().GetField("result")); // fails, because the compiler replaced all custom names with default names, the custom names are not part of the runtime type information
+
+        var str = JsonSerializer.Serialize(valueTuple);
+        Assert.AreEqual("{\"status\":\"success\",\"result\":\"some result\"}", str); //fails, because a tuple without field names can't be serialized to JSON
     }
 }

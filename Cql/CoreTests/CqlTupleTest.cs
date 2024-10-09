@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -31,5 +26,8 @@ public class CqlTupleTest
         Assert.IsNotNull(resultValue.GetType().GetField("status")); // fails, because the compiler replaced all custom names with default names, the custom names are not part of the runtime type information
         Assert.IsNotNull(resultValue.GetType().GetField("result")); // fails, because the compiler replaced all custom names with default names, the custom names are not part of the runtime type information
         // see https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/builtin-types/value-tuples#tuple-field-names
+
+        var str = JsonSerializer.Serialize(resultValue);
+        Assert.AreEqual("{\"status\":\"success\",\"result\":\"some result\"}", str); //fails, because a tuple without field names can't be serialized to JSON
     }
 }
