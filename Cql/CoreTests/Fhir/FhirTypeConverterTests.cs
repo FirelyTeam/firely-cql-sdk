@@ -21,7 +21,6 @@ public class FhirCqlContextCreateTests
     [ClassInitialize]
     public static void ClassInitialize(TestContext context)
     {
-        // Ensure that the FhirTypeConverter is initialized
         CacheForFhirTypeConverterDefaultWithCache = FhirTypeConverter.DefaultWithCache.GetLRUCache().Value;
     }
 
