@@ -114,7 +114,7 @@ file static class Extensions
     }
 }
 
-public readonly record struct Maybe<T>
+file readonly record struct Maybe<T>
 {
     private readonly T _value;
 
@@ -130,7 +130,7 @@ public readonly record struct Maybe<T>
     public static implicit operator Maybe<T>(T? value) => value is null ? default : new(value);
 }
 
-public class DynamicMemberAccessor(object? value) : DynamicObject
+file class DynamicMemberAccessor(object? value) : DynamicObject
 {
     public static readonly DynamicMemberAccessor Null = new(null);
     private object? Value { get; } = value;
