@@ -1,5 +1,6 @@
 ﻿#nullable enable
 using System;
+using System.Collections.Generic;
 using System.Dynamic;
 using System.Linq;
 using System.Reflection;
@@ -99,8 +100,10 @@ file static class Extensions
 
     public static Maybe<LRUCache<CqlDateTime>> GetLRUCache(this TypeConverter typeConverter)
     {
-        var fhirDateTimeConverters = typeConverter._converters[typeof(FhirDateTime)];
-        LRUCache<CqlDateTime>? lruCache = fhirDateTimeConverters.Values.First().Target!.AccessMembersDynamically().conversion.Target.dateTimes;
+        Dictionary<Type, Dictionary<Type, Func<object, object>>> converters = typeConverter.AccessMembersDynamically()._converters;
+        Dictionary<Type, Func<object, object>> fhirDateTimeConverters = converters[typeof(FhirDateTime)];
+        Func<object, object> firstConversion = fhirDateTimeConverters.Values.First();
+        LRUCache<CqlDateTime>? lruCache = firstConversion.Target!.AccessMembersDynamically().conversion.Target.dateTimes;
         return lruCache;
     }
 

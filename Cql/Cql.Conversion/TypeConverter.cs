@@ -37,7 +37,7 @@ namespace Hl7.Cql.Conversion
     /// </summary>
     public class TypeConverter : IDisposable
     {
-        internal readonly Dictionary<Type, Dictionary<Type, Func<object, object>>> _converters = new(); // Internal for unit testing
+        private readonly Dictionary<Type, Dictionary<Type, Func<object, object>>> _converters = new();
         private readonly List<ITypeConverterEntry> _customConverters = [];
         private readonly HashSet<string> _conversionsAvailable = new();
         private readonly HashSet<string> _conversionsUsed = new();
