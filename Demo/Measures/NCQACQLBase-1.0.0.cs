@@ -16,6 +16,11 @@ public class NCQACQLBase_1_0_0
 
     public static NCQACQLBase_1_0_0 Instance { get; }  = new();
 
+    #region Dependencies
+
+
+    #endregion
+
     [CqlDeclaration("Sort Date Intervals")]
 	public IEnumerable<CqlInterval<CqlDate>> Sort_Date_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> intervals)
 	{

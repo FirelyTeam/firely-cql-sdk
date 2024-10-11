@@ -14,30 +14,76 @@ using Task = Hl7.Fhir.Model.Task;
 public class SupplementalDataElementsFHIR4_2_0_000
 {
 
-    public static SupplementalDataElementsFHIR4_2_0_000 Instance { get; }  = new();
+    internal CqlContext context;
+
+    #region Cached values
+
+    internal Lazy<CqlValueSet> __Ethnicity;
+    internal Lazy<CqlValueSet> __ONC_Administrative_Sex;
+    internal Lazy<CqlValueSet> __Payer;
+    internal Lazy<CqlValueSet> __Race;
+    internal Lazy<Patient> __Patient;
+    internal Lazy<IEnumerable<Coding>> __SDE_Ethnicity;
+    internal Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>> __SDE_Payer;
+    internal Lazy<IEnumerable<Coding>> __SDE_Race;
+    internal Lazy<CqlCode> __SDE_Sex;
+
+    #endregion
+    public SupplementalDataElementsFHIR4_2_0_000(CqlContext context)
+    {
+        this.context = context ?? throw new ArgumentNullException("context");
+
+        FHIRHelpers_4_0_001 = new FHIRHelpers_4_0_001(context);
+
+        __Ethnicity = new Lazy<CqlValueSet>(this.Ethnicity_Value(context));
+        __ONC_Administrative_Sex = new Lazy<CqlValueSet>(this.ONC_Administrative_Sex_Value(context));
+        __Payer = new Lazy<CqlValueSet>(this.Payer_Value(context));
+        __Race = new Lazy<CqlValueSet>(this.Race_Value(context));
+        __Patient = new Lazy<Patient>(this.Patient_Value(context));
+        __SDE_Ethnicity = new Lazy<IEnumerable<Coding>>(this.SDE_Ethnicity_Value(context));
+        __SDE_Payer = new Lazy<IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG>>(this.SDE_Payer_Value(context));
+        __SDE_Race = new Lazy<IEnumerable<Coding>>(this.SDE_Race_Value(context));
+        __SDE_Sex = new Lazy<CqlCode>(this.SDE_Sex_Value(context));
+    }
+    #region Dependencies
+
+    public FHIRHelpers_4_0_001 FHIRHelpers_4_0_001 { get; }
+
+    #endregion
+
+	private CqlValueSet Ethnicity_Value(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", null);
 
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
-	public CqlValueSet Ethnicity(CqlContext context) => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", null);
+	public CqlValueSet Ethnicity() => 
+		__Ethnicity?.Value;
+
+	private CqlValueSet ONC_Administrative_Sex_Value(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", null);
 
     [CqlDeclaration("ONC Administrative Sex")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1")]
-	public CqlValueSet ONC_Administrative_Sex(CqlContext context) => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", null);
+	public CqlValueSet ONC_Administrative_Sex() => 
+		__ONC_Administrative_Sex?.Value;
+
+	private CqlValueSet Payer_Value(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", null);
 
     [CqlDeclaration("Payer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591")]
-	public CqlValueSet Payer(CqlContext context) => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", null);
+	public CqlValueSet Payer() => 
+		__Payer?.Value;
+
+	private CqlValueSet Race_Value(CqlContext context) => 
+		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", null);
 
     [CqlDeclaration("Race")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836")]
-	public CqlValueSet Race(CqlContext context) => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", null);
+	public CqlValueSet Race() => 
+		__Race?.Value;
 
-    [CqlDeclaration("Patient")]
-	public Patient Patient(CqlContext context)
+	private Patient Patient_Value(CqlContext context)
 	{
 		var a_ = context.Operators.RetrieveByValueSet<Patient>(null, null);
 		var b_ = context.Operators.SingleOrNull<Patient>(a_);
@@ -45,14 +91,17 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		return b_;
 	}
 
-    [CqlDeclaration("SDE Ethnicity")]
-	public IEnumerable<Coding> SDE_Ethnicity(CqlContext context)
+    [CqlDeclaration("Patient")]
+	public Patient Patient() => 
+		__Patient?.Value;
+
+	private IEnumerable<Coding> SDE_Ethnicity_Value(CqlContext context)
 	{
 		IEnumerable<Extension> a_()
 		{
-			if (this.Patient(context) is DomainResource)
+			if (this.Patient() is DomainResource)
 			{
-				var k_ = this.Patient(context);
+				var k_ = this.Patient();
 
 				return ((k_ as DomainResource).Extension as IEnumerable<Extension>);
 			}
@@ -93,10 +142,13 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		return j_;
 	}
 
-    [CqlDeclaration("SDE Payer")]
-	public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer(CqlContext context)
+    [CqlDeclaration("SDE Ethnicity")]
+	public IEnumerable<Coding> SDE_Ethnicity() => 
+		__SDE_Ethnicity?.Value;
+
+	private IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer_Value(CqlContext context)
 	{
-		var a_ = this.Payer(context);
+		var a_ = this.Payer();
 		var b_ = context.Operators.RetrieveByValueSet<Coverage>(a_, null);
 		Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG c_(Coverage Payer)
 		{
@@ -113,14 +165,17 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		return d_;
 	}
 
-    [CqlDeclaration("SDE Race")]
-	public IEnumerable<Coding> SDE_Race(CqlContext context)
+    [CqlDeclaration("SDE Payer")]
+	public IEnumerable<Tuples.Tuple_CFQHSgYJOXjAOCKdWLdZNNHDG> SDE_Payer() => 
+		__SDE_Payer?.Value;
+
+	private IEnumerable<Coding> SDE_Race_Value(CqlContext context)
 	{
 		IEnumerable<Extension> a_()
 		{
-			if (this.Patient(context) is DomainResource)
+			if (this.Patient() is DomainResource)
 			{
-				var k_ = this.Patient(context);
+				var k_ = this.Patient();
 
 				return ((k_ as DomainResource).Extension as IEnumerable<Extension>);
 			}
@@ -161,18 +216,21 @@ public class SupplementalDataElementsFHIR4_2_0_000
 		return j_;
 	}
 
-    [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex(CqlContext context)
+    [CqlDeclaration("SDE Race")]
+	public IEnumerable<Coding> SDE_Race() => 
+		__SDE_Race?.Value;
+
+	private CqlCode SDE_Sex_Value(CqlContext context)
 	{
 		CqlCode a_()
 		{
-			if ((context.Operators.Equal(context.Operators.Convert<string>(this.Patient(context)?.GenderElement), "male") ?? false))
+			if ((context.Operators.Equal(context.Operators.Convert<string>(this.Patient()?.GenderElement), "male") ?? false))
 			{
 				string b_ = null;
 
 				return new CqlCode("M", "http://hl7.org/fhir/v3/AdministrativeGender", b_, "Male");
 			}
-			else if ((context.Operators.Equal(context.Operators.Convert<string>(this.Patient(context)?.GenderElement), "female") ?? false))
+			else if ((context.Operators.Equal(context.Operators.Convert<string>(this.Patient()?.GenderElement), "female") ?? false))
 			{
 				string c_ = null;
 
@@ -186,5 +244,9 @@ public class SupplementalDataElementsFHIR4_2_0_000
 
 		return a_();
 	}
+
+    [CqlDeclaration("SDE Sex")]
+	public CqlCode SDE_Sex() => 
+		__SDE_Sex?.Value;
 
 }
