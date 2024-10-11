@@ -23,7 +23,7 @@ namespace Hl7.Cql.Fhir
     /// </summary>
     public static class FhirTypeConverter
     {
-        internal const int DefaultCacheSize = 10000;
+        internal const int DefaultCacheSize = 10_000;
         private static readonly LRUCache<CqlDateTime> DefaultDateTimesCache = new(DefaultCacheSize);
 
         /// <summary>
