@@ -6,19 +6,21 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 using Hl7.Cql.Comparers;
+using Hl7.Cql.Conversion;
+using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir
 {
     /// <summary>
-    /// Defines behavior options to configure the Firely CQL model binding.
+    /// Defines behavior options to configure the CQL context for FHIR model binding.
     /// </summary>
-    public class FhirModelBindingOptions
+    public class FhirCqlContextOptions
     {
         /// <summary>
         /// Gets the default CQL options.
         /// </summary>
-        public static readonly FhirModelBindingOptions Default = new();
+        public static readonly FhirCqlContextOptions Default = new();
 
         /// <summary>
         /// When not <see langword="null"/>, all FHIR resource types will be compared only by their <see cref="Resource.Id"/> property
@@ -48,8 +50,20 @@ namespace Hl7.Cql.Fhir
         }
 
         /// <summary>
-        /// The size of the LRU cache to use for the resource packager.
+        /// The default LRU cache to use is in the <see cref="FhirTypeConverter"/> is <c>10000</c>, unless otherwise overriden here.
         /// </summary>
-        public int LRUCacheSize { get; init; } = 10000;
+        /// <remarks>Changing this value, will create a new <see cref="TypeConverter"/>, unless a custom one was provided in <see cref="OverrideTypeConverter"/>.</remarks>
+        public int? OverrideFhirTypeConverterCacheSize { get; init; }
+
+        /// <summary>
+        /// The default <see cref="ModelInspector"/> to use is <see cref="ModelInfo.ModelInspector"/>, unless otherwise overriden here.
+        /// </summary>
+        /// <remarks>Changing this value, will create a new <see cref="TypeConverter"/>, unless a custom one was provided in <see cref="OverrideTypeConverter"/>.</remarks>
+        public ModelInspector? OverrideModelInspector { get; init; }
+
+        /// <summary>
+        /// The default <see cref="TypeConverter"/> to use is <see cref="FhirTypeConverter.Create(ModelInspector,Nullable{int})"/>, unless otherwise overriden here.
+        /// </summary>
+        public TypeConverter? OverrideTypeConverter { get; init; }
     }
 }
