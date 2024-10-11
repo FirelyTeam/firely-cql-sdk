@@ -48,7 +48,7 @@ stages:
             if [ "$(System.PullRequest.SourceBranch)" != "" ]; then
               # PR build: compare source branch with target branch (e.g., main)
               git fetch origin $(SOURCE_BRANCH)
-              CHANGED_FILES=$(git diff --name-only origin/$(TARGET_BRANCH) $(SOURCE_BRANCH))
+              CHANGED_FILES=$(git diff --name-only origin/$(TARGET_BRANCH))
               echo "Checking changes between $(TARGET_BRANCH) and $(SOURCE_BRANCH) results in the following files: $(CHANGED_FILES)"
             else
               # Branch build: compare current commit with previous commit
