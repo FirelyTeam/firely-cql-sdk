@@ -14,7 +14,6 @@ using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
-using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir

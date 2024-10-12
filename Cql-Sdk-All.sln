@@ -53,6 +53,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cql", "Cql", "{4B5D75F5-E2FC-4CCB-90EF-6DC4A0193032}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		cql-base.props = cql-base.props
 		cql-sdk.props = cql-sdk.props
 	EndProjectSection
 EndProject

@@ -1,13 +1,15 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
-	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-	</PropertyGroup>
+	<Import Project="cql-base.props" />
 
-	<PropertyGroup>
+	<!-- <PropertyGroup> -->
+		<!-- <TargetFramework>net8.0</TargetFramework> -->
+	<!-- </PropertyGroup> -->
+
+	<!-- <PropertyGroup> -->
 		<!-- Keep this in sync between cql-sdk.props and cql-demo.props -->
-		<FirelySdkVersion>5.10.3</FirelySdkVersion>
-	</PropertyGroup>
+		<!-- <FirelySdkVersion>5.10.3</FirelySdkVersion> -->
+	<!-- </PropertyGroup> -->
 
 	<!-- Solution-wide properties for NuGet packaging -->
 	<PropertyGroup>
@@ -27,7 +29,7 @@
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
-		<CqlSolutionDir>$(MSBuildThisFileDirectory)</CqlSolutionDir>
+		<!-- <CqlSolutionDir>$(MSBuildThisFileDirectory)</CqlSolutionDir> -->
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -40,8 +42,8 @@
 
 	<!-- Compiler settings -->
 	<PropertyGroup>
-		<Nullable>enable</Nullable>
-		<LangVersion>12</LangVersion>
+		<!-- <Nullable>enable</Nullable> -->
+		<!-- <LangVersion>12</LangVersion> -->
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<Configurations>Debug;Release;FullDebug</Configurations>
 		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>
@@ -49,23 +51,23 @@
 		<NoWarn>RS0026</NoWarn>  <!-- Too many bogus warnings, see https://github.com/dotnet/roslyn-analyzers/issues/6757 -->
 	</PropertyGroup>
 
-	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'FullDebug' ">
-		<DebugType>portable</DebugType>
-		<DebugSymbols>True</DebugSymbols>
-		<Optimize>false</Optimize>
-		<DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
-		<LibraryPKHash></LibraryPKHash>
-	</PropertyGroup>
-
-	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-		<SignAssembly>True</SignAssembly>
-		<DelaySign>true</DelaySign>
-		<AssemblyOriginatorKeyFile>..\..\cql-sdk.publickey</AssemblyOriginatorKeyFile>
-		<IncludeSymbols>True</IncludeSymbols>
-		<GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<LibraryPKHash>00240000048000009400000006020000002400005253413100040000010001006d866cf0363db3976082a2439c420bd942b78243c0ce6c289f3c07d6901ecf149c38bafc12167f6eba7618b288e5327a7e4ab554c9a294ae6c68d7455b6562f846455b6bfdde68542a7046a632f1730a1647f2d365f8a25f73860c14d1428e7319df673e2d3212fa535f310c52a7c7ec17de772cb49961f4ea195fa4ea601dcd</LibraryPKHash>
-	</PropertyGroup>
+	<!-- <PropertyGroup Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'FullDebug' "> -->
+	<!-- 	<DebugType>portable</DebugType> -->
+	<!-- 	<DebugSymbols>True</DebugSymbols> -->
+	<!-- 	<Optimize>false</Optimize> -->
+	<!-- 	<DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants> -->
+	<!-- 	<LibraryPKHash></LibraryPKHash> -->
+	<!-- </PropertyGroup> -->
+	<!-- -->
+	<!-- <PropertyGroup Condition=" '$(Configuration)' == 'Release' "> -->
+	<!-- 	<SignAssembly>True</SignAssembly> -->
+	<!-- 	<DelaySign>true</DelaySign> -->
+	<!-- 	<AssemblyOriginatorKeyFile>..\..\cql-sdk.publickey</AssemblyOriginatorKeyFile> -->
+	<!-- 	<IncludeSymbols>True</IncludeSymbols> -->
+	<!-- 	<GeneratePackageOnBuild>False</GeneratePackageOnBuild> -->
+	<!-- 	<SymbolPackageFormat>snupkg</SymbolPackageFormat> -->
+	<!-- 	<LibraryPKHash>00240000048000009400000006020000002400005253413100040000010001006d866cf0363db3976082a2439c420bd942b78243c0ce6c289f3c07d6901ecf149c38bafc12167f6eba7618b288e5327a7e4ab554c9a294ae6c68d7455b6562f846455b6bfdde68542a7046a632f1730a1647f2d365f8a25f73860c14d1428e7319df673e2d3212fa535f310c52a7c7ec17de772cb49961f4ea195fa4ea601dcd</LibraryPKHash> -->
+	<!-- </PropertyGroup> -->
 
 	<ItemGroup>
 		<!--
@@ -78,12 +80,12 @@
 		metadata, just define 'JETBRAINS_ANNOTATIONS' conditional compilation symbol in your projects.
 		see more: https://www.nuget.org/packages/JetBrains.Annotations/
 		-->
-		<PackageReference Include="JetBrains.Annotations" Version="2024.2.0" />
+		<!-- <PackageReference Include="JetBrains.Annotations" Version="2024.2.0" /> -->
 		<PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24318.1" PrivateAssets="All" />
 	</ItemGroup>
 
-	<PropertyGroup>
-		<Box> __________________________________________________________________________________________&#10;/&#10;{Text}&#10;\</Box>
-	</PropertyGroup>
+	<!-- <PropertyGroup> -->
+	<!-- 	<Box> __________________________________________________________________________________________&#10;/&#10;{Text}&#10;\</Box> -->
+	<!-- </PropertyGroup> -->
 
 </Project>
