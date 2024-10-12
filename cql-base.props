@@ -41,7 +41,7 @@
 	<!-- Compiler settings -->
 	<PropertyGroup>
 		<Nullable>enable</Nullable>
-		<LangVersion>12</LangVersion>
+		<!-- <LangVersion>12</LangVersion> -->
 		<!-- <GenerateDocumentationFile>True</GenerateDocumentationFile> -->
 		<!-- <Configurations>Debug;Release;FullDebug</Configurations> -->
 		<!-- <AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization> -->
