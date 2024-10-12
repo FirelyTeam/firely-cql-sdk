@@ -23,6 +23,8 @@ namespace Hl7.Cql.Fhir
     /// </summary>
     public static class FhirTypeConverter
     {
+        internal static bool DisableReuseForBenchmarks = false;
+
         internal const int DefaultCacheSize = 10_000;
         private static readonly LRUCache<CqlDateTime> DefaultDateTimesCache = new(DefaultCacheSize);
 
@@ -46,6 +48,9 @@ namespace Hl7.Cql.Fhir
         /// <returns>the type converter</returns>
         public static TypeConverter Create(ModelInspector model, int? cacheSize = null)
         {
+            if (DisableReuseForBenchmarks)
+                return CreateImpl(model, cacheSize ?? 0);
+
             return (cacheSize ?? 0) switch
             {
                 < 0 => throw new ArgumentOutOfRangeException(nameof(cacheSize), cacheSize, "CacheSize cannot be negative."),
