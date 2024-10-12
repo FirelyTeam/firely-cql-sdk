@@ -1,18 +1,19 @@
 ﻿using BenchmarkDotNet.Attributes;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
-using System.Collections.Generic;
 using System;
 using System.Runtime.CompilerServices;
+using BenchmarkDotNet.Jobs;
 
 namespace Benchmarks;
 
 //[SimpleJob]
-[ShortRunJob]
+[ShortRunJob(RuntimeMoniker.Net80)]
+[ShortRunJob(RuntimeMoniker.Net90)]
 [MemoryDiagnoser]
 public class RecreateCqlContextBenchmarks
 {
-    [Benchmark(Description = "Creating CqlContext with no cache for FhirTypeConverter")]
+    [Benchmark(Description = "Creating CqlContext with no cache for FhirTypeConverter", Baseline = true)]
     public CqlContext CreateContext_WithNoLRUCache()
     {
         DoNotJitAway(Random.Shared.Next(10, 50));
