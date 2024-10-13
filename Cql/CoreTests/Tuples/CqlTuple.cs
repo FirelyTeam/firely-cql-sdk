@@ -8,6 +8,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Hl7.Cql.Elm.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
@@ -28,82 +29,79 @@ public class CqlTupleTest
     }
 
     [TestMethod]
-    public void TestJson()
+    public void TestJsonSerialization()
     {
         CqlTuple<(string? Name, DateTime? DOB)> tupleA1 = new(TupleOnLibraryAProperties, ("Paul", new DateTime(2000, 12, 31)));
-        var serialize = JsonSerializer.Serialize(tupleA1);
+        var serializedJson = JsonSerializer.Serialize(tupleA1);
+        Assert.AreEqual("{\"Name\":\"Paul\",\"DOB\":\"2000-12-31T00:00:00\"}", serializedJson);
     }
 }
 
-
-//[JsonConverter(typeof(CqlTupleJsonConverter))]
-public readonly struct CqlTuple<TTuple> : IEquatable<CqlTuple<TTuple>>, IJsonSerializable where TTuple : ITuple
+public class CqlTupleJsonConverterFactory : JsonConverterFactory
 {
-    private string[] Properties { get; }
-    public TTuple Value { get; }
-
-    public CqlTuple(string[] properties, TTuple value)
+    public override bool CanConvert(Type typeToConvert)
     {
-        Properties = properties;
-        Value = value;
+        return typeToConvert.IsGenericType
+               && typeToConvert.GetGenericTypeDefinition() == typeof(CqlTuple<>);
     }
 
-    public override bool Equals(object? obj)
+    public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
-        return obj is CqlTuple<TTuple> tuple &&
-               Equals(tuple);
+        var tupleType = typeToConvert.GetGenericArguments()[0] ??
+                      throw new InvalidOperationException("This converter only handles array types.");
+
+        var type = typeof(CqlTupleJsonConverter<>).MakeGenericType(tupleType);
+        var instance = (JsonConverter)Activator.CreateInstance(type)!;
+        return instance;
+    }
+}
+
+public class CqlTupleJsonConverter<TTuple> : JsonConverter<CqlTuple<TTuple>> where TTuple : struct, ITuple
+{
+    public override CqlTuple<TTuple> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        throw new NotImplementedException();
     }
 
-    public bool Equals(CqlTuple<TTuple> other)
-    {
-        return Properties.SequenceEqual(other.Properties) && EqualityComparer<TTuple>.Default.Equals(Value, other.Value);
-    }
-
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(Properties, Value);
-    }
-
-    public void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, CqlTuple<TTuple> value, JsonSerializerOptions options)
     {
         writer.WriteStartObject();
 
-        for (int i = 0; i < Properties.Length; i++)
+        INamedPropertiesTuple namedPropertiesTuple = value;
+        for (int i = 0; i < namedPropertiesTuple.Properties.Length; i++)
         {
-            writer.WritePropertyName(Properties[i]);
-            JsonSerializer.Serialize(writer, Value[i], options);
+            writer.WritePropertyName(namedPropertiesTuple.Properties[i]);
+            JsonSerializer.Serialize(writer, namedPropertiesTuple[i], options);
         }
 
         writer.WriteEndObject();
     }
-
-    // public void Deserialize(JsonElement element, JsonSerializerOptions options)
-    // {
-    //     if (element.ValueKind != JsonValueKind.Object)
-    //     {
-    //         throw new JsonException("Invalid JSON format");
-    //     }
-    //
-    //     var jsonObject = element.GetObject();
-    //
-    //     foreach (var property in jsonObject.Properties)
-    //     {
-    //         var propertyName = property.Name;
-    //         var propertyValue = property.Value;
-    //
-    //         var index = Array.IndexOf(Properties, propertyName);
-    //         if (index >= 0)
-    //         {
-    //             Value[index] = JsonSerializer.Deserialize(propertyValue.GetRawText(), typeof(TTuple).GetGenericArguments()[index], options);
-    //         }
-    //     }
-    // }
 }
 
-
-
-public interface IJsonSerializable
+public interface INamedPropertiesTuple : ITuple
 {
-    void Serialize(Utf8JsonWriter writer, JsonSerializerOptions options);
-    // void Deserialize(JsonElement element, JsonSerializerOptions options);
+    string[] Properties { get; }
+}
+
+[JsonConverter(typeof(CqlTupleJsonConverterFactory))]
+public readonly struct CqlTuple<TTuple>(
+    string[] properties,
+    TTuple value) : IEquatable<CqlTuple<TTuple>>, INamedPropertiesTuple
+    where TTuple : struct, ITuple
+{
+    private string[] Properties { get; } = properties;
+
+    public TTuple Value { get; } = value;
+
+    public override bool Equals(object? obj) => obj is CqlTuple<TTuple> tuple && Equals(tuple);
+
+    public bool Equals(CqlTuple<TTuple> other) => Properties.SequenceEqual(other.Properties) && EqualityComparer<TTuple>.Default.Equals(Value, other.Value);
+
+    public override int GetHashCode() => HashCode.Combine(Properties, Value);
+
+    object? ITuple.this[int index] => Value[index];
+
+    int ITuple.Length => Value.Length;
+
+    string[] INamedPropertiesTuple.Properties => Properties;
 }
