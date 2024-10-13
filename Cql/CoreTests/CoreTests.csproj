@@ -35,6 +35,7 @@
 		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
 		<ProjectReference Include="..\Cql.Packaging\Cql.Packaging.csproj" />
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
+		<ProjectReference Include="..\Cql.Tuples\Cql.Tuples.csproj" />
 		<ProjectReference Include="..\Elm\Elm.csproj" />
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
 	</ItemGroup>

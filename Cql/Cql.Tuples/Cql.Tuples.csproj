@@ -9,4 +9,8 @@
 		<Description>Support package for Hl7.Cql. Contains support infrastructure for using value tuples in CQL execution.</Description>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Cql.Abstractions\Cql.Abstractions.csproj" />
+	</ItemGroup>
+
 </Project>
