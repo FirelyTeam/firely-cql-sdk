@@ -1,14 +1,10 @@
 ﻿#nullable enable
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using System.Threading.Tasks;
-using Hl7.Cql.Elm.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 
@@ -33,7 +29,42 @@ public class CqlTupleTest
     {
         CqlTuple<(string? Name, DateTime? DOB)> tupleA1 = new(TupleOnLibraryAProperties, ("Paul", new DateTime(2000, 12, 31)));
         var serializedJson = JsonSerializer.Serialize(tupleA1);
-        Assert.AreEqual("{\"Name\":\"Paul\",\"DOB\":\"2000-12-31T00:00:00\"}", serializedJson);
+        Assert.AreEqual("""{"Name":"Paul","DOB":"2000-12-31T00:00:00"}""", serializedJson);
+    }
+
+    public static readonly string[] PersonProperties = ["Name", "ID", "Addresses"];
+    public static readonly string[] AddressProperties = ["AddressType", "Street", "City", "Country"];
+
+    [TestMethod]
+    public void TestJsonSerializationNested()
+    {
+        CqlTuple<(string? AddressType, string? Street, string? City, string? Country)> homeAddr = new(AddressProperties, ( "Home", "Joe Street", "Springfield", "USA"));
+        CqlTuple<(string? AddressType, string? Street, string? City, string? Country)> workAddr = new(AddressProperties, ("Work", "Sue Street", "Jumpville", "Canada"));
+        CqlTuple<(string? Name, int? ID, CqlTuple<(string? AddressType, string? Street, string? City, string? Country)>[]? Addressses)> person =
+            new(PersonProperties, ("John", 10, [homeAddr, workAddr]));
+
+        var serializedJson = JsonSerializer.Serialize(person, new JsonSerializerOptions { WriteIndented = true});
+        Assert.AreEqual(
+            """
+            {
+              "Name": "John",
+              "ID": 10,
+              "Addresses": [
+                {
+                  "AddressType": "Home",
+                  "Street": "Joe Street",
+                  "City": "Springfield",
+                  "Country": "USA"
+                },
+                {
+                  "AddressType": "Work",
+                  "Street": "Sue Street",
+                  "City": "Jumpville",
+                  "Country": "Canada"
+                }
+              ]
+            }
+            """, serializedJson);
     }
 }
 
