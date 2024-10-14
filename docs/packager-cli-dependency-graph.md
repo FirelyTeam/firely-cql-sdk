@@ -10,6 +10,11 @@ Remarks
 * Classes are group by their respective projects
 
 ```mermaid
+%%{init: {
+    'themeVariables':{  
+      'lineColor': '#888',
+      'lineWidth': 4
+}}}%%
 
 classDiagram
 
