@@ -5,7 +5,7 @@
   </PropertyGroup>
 
 	<PropertyGroup>
-		<!-- Keep this in sync between cql-sdk.props and cql-demo.props -->
+		<!-- Keep this in sync between cql-base.props and cql-demo.props -->
 		<FirelySdkVersion>5.10.3</FirelySdkVersion>
 	</PropertyGroup>
 

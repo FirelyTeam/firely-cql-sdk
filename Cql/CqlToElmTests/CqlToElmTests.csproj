@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<Import Project="..\..\cql-sdk.props" />
+	<Import Project="..\..\cql-base.props" />
 
 	<PropertyGroup>
 		<IsPackable>false</IsPackable>
