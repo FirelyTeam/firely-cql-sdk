@@ -11,36 +11,27 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("CqlBooleanTest", "1.0.000")]
-public class CqlBooleanTest_1_0_000
+public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTest_1_0_000>
 {
+    private CqlBooleanTest_1_0_000() {}
 
+    public static CqlBooleanTest_1_0_000 Instance { get; } = new();
 
-    internal CqlContext context;
+    #region Library Members
+    public string Name => "CqlBooleanTest";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [];
+    #endregion Library Members
 
-    #region Cached values
-
-    internal Lazy<bool?> __SomethingTrueEqualsTrue;
-
-    #endregion
-    public CqlBooleanTest_1_0_000(CqlContext context)
-    {
-        this.context = context ?? throw new ArgumentNullException("context");
-
-
-        __SomethingTrueEqualsTrue = new Lazy<bool?>(this.SomethingTrueEqualsTrue_Value);
-    }
-	private bool? SomethingTrueEqualsTrue_Value()
+    [CqlDeclaration("SomethingTrueEqualsTrue")]
+	public bool? SomethingTrueEqualsTrue(CqlContext context)
 	{
 		bool? a_ = context.Operators.Equal(1, 1);
 		bool? b_ = context.Operators.Equal(a_, true);
 
 		return b_;
 	}
-
-    [CqlDeclaration("SomethingTrueEqualsTrue")]
-	public bool? SomethingTrueEqualsTrue() => 
-		__SomethingTrueEqualsTrue.Value;
 
 }
