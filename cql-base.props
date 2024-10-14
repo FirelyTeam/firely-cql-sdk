@@ -5,48 +5,18 @@
 	</PropertyGroup>
 
 	<PropertyGroup>
-		<!-- Keep this in sync between cql-sdk.props and cql-demo.props -->
+		<!-- Keep this in sync between cql-base.props and cql-demo.props -->
 		<FirelySdkVersion>5.10.3</FirelySdkVersion>
 	</PropertyGroup>
 
 	<!-- Solution-wide properties for NuGet packaging -->
 	<PropertyGroup>
-		<!--
-			Instructions when updating VersionPrefix/VersionSuffix : https://github.com/FirelyTeam/firely-cql-sdk/wiki/Creating-Tags-and-Releases
-			-->
-		<!-- <VersionPrefix>2.0.4</VersionPrefix> -->
-		<!-- <VersionSuffix>alpha</VersionSuffix> -->
-		<!-- <Authors>NCQA, Firely (info@fire.ly) and contributors</Authors> -->
-		<!-- <Copyright>Copyright 2013-2024 NCQA, Firely. Contains materials (C) HL7 International</Copyright> -->
-		<!-- <PackageProjectUrl>https://github.com/FirelyTeam/firely-cql-sdk</PackageProjectUrl> -->
-		<!-- <RepositoryUrl>https://github.com/FirelyTeam/firely-cql-sdk</RepositoryUrl> -->
-		<!-- <RepositoryType>git</RepositoryType> -->
-		<!-- <PackageReleaseNotes>See https://github.com/FirelyTeam/firely-cql-sdk/releases</PackageReleaseNotes> -->
-		<!-- <PackageLicenseExpression>BSD-3-Clause</PackageLicenseExpression> -->
-		<!-- <PackageReadmeFile>README.md</PackageReadmeFile> -->
-		<!-- <PublishRepositoryUrl>true</PublishRepositoryUrl> -->
-		<!-- <EmbedUntrackedSources>true</EmbedUntrackedSources> -->
-		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
 		<CqlSolutionDir>$(MSBuildThisFileDirectory)</CqlSolutionDir>
 	</PropertyGroup>
-
-	<!-- <ItemGroup> -->
-		<!-- <None Include="..\..\README.md" Pack="true" PackagePath=""/> -->
-	<!-- </ItemGroup> -->
-
-	<!-- <ItemGroup> -->
-		<!-- <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All"/> -->
-	<!-- </ItemGroup> -->
 
 	<!-- Compiler settings -->
 	<PropertyGroup>
 		<Nullable>enable</Nullable>
-		<!-- <LangVersion>12</LangVersion> -->
-		<!-- <GenerateDocumentationFile>True</GenerateDocumentationFile> -->
-		<!-- <Configurations>Debug;Release;FullDebug</Configurations> -->
-		<!-- <AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization> -->
-		<!-- <TreatWarningsAsErrors>true</TreatWarningsAsErrors> -->
-		<!-- <NoWarn>RS0026</NoWarn> -->  <!-- Too many bogus warnings, see https://github.com/dotnet/roslyn-analyzers/issues/6757 -->
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'FullDebug' ">
@@ -79,7 +49,6 @@
 		see more: https://www.nuget.org/packages/JetBrains.Annotations/
 		-->
 		<PackageReference Include="JetBrains.Annotations" Version="2024.2.0" />
-		<!-- <PackageReference Include="Microsoft.CodeAnalysis.PublicApiAnalyzers" Version="3.11.0-beta1.24318.1" PrivateAssets="All" /> -->
 	</ItemGroup>
 
 	<PropertyGroup>
