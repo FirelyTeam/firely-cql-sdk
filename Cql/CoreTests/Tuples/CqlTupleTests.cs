@@ -11,7 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace CoreTests.Tuples;
 
 [TestClass]
-public class CqlTupleTest
+public class CqlTupleTests
 {
     public static readonly string[] TupleOnLibraryAProperties = ["Name", "DOB"];
     public static readonly string[] TupleOnLibraryBProperties = ["Name", "DOB"];
@@ -38,8 +38,12 @@ public class CqlTupleTest
     [TestMethod]
     public void TestJsonSerializationNested()
     {
-        CqlTuple<(string? AddressType, string? Street, string? City, string? Country)> homeAddr = new(AddressProperties, ( "Home", "Joe Street", "Springfield", "USA"));
-        CqlTuple<(string? AddressType, string? Street, string? City, string? Country)> workAddr = new(AddressProperties, ("Work", "Sue Street", "Jumpville", "Canada"));
+        CqlTuple<(string? AddressType, string? Street, string? City, string? Country)> homeAddr =
+            new(AddressProperties, ( "Home", "Joe Street", "Springfield", "USA"));
+
+        CqlTuple<(string? AddressType, string? Street, string? City, string? Country)> workAddr =
+            new(AddressProperties, ("Work", "Sue Street", "Jumpville", "Canada"));
+
         CqlTuple<(string? Name, int? ID, CqlTuple<(string? AddressType, string? Street, string? City, string? Country)>[]? Addressses)> person =
             new(PersonProperties, ("John", 10, [homeAddr, workAddr]));
 
