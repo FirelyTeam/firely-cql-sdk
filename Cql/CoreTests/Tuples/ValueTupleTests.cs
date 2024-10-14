@@ -1,33 +1,28 @@
 ﻿#nullable enable
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using System.Text.Json.Serialization;
-using Hl7.Cql.Elm;
 
 namespace CoreTests.Tuples;
 
 [TestClass]
 public class ValueTupleTests
 {
-    public static readonly string[] PersonProperties = ["Name", "ID", "Addresses"];
-    public static readonly string[] AddressProperties = ["AddressType", "Street", "City", "Country"];
+    public static readonly TupleMetadata PersonProperties = new(["Name", "ID", "Addresses"]);
+    public static readonly TupleMetadata AddressProperties = new (["AddressType", "Street", "City", "Country"]);
 
     [TestMethod]
     public void TestJsonSerializationNested()
     {
-        (string[], string? AddressType, string? Street, string? City, string? Country) homeAddr =
+        (TupleMetadata, string? AddressType, string? Street, string? City, string? Country) homeAddr =
             (AddressProperties, "Home", "Joe Street", "Springfield", "USA");
 
-        (string[], string? AddressType, string? Street, string? City, string? Country) workAddr =
+        (TupleMetadata, string? AddressType, string? Street, string? City, string? Country) workAddr =
             (AddressProperties, "Work", "Sue Street", "Jumpville", "Canada");
 
-        (string[], string? Name, int? ID, (string[], string? AddressType, string? Street, string? City, string? Country)[]? addressses) person =
+        (TupleMetadata, string? Name, int? ID, (TupleMetadata, string? AddressType, string? Street, string? City, string? Country)[]? addressses) person =
             (PersonProperties, "John", 10, [homeAddr, workAddr]);
 
         var serializedJson = JsonSerializer.Serialize(person, new JsonSerializerOptions {
@@ -58,26 +53,25 @@ public class ValueTupleTests
     }
 }
 
+public record TupleMetadata(string[] PropertyNames);
+
 public class ValueTupleJsonConverterFactory : JsonConverterFactory
 {
     public override bool CanConvert(Type typeToConvert)
     {
-        var isTuple = typeof(ITuple).IsAssignableFrom(typeToConvert);
-        var canConvert = isTuple
-            && typeToConvert.IsGenericType
-            && typeToConvert.GenericTypeArguments[0] == typeof(string[]);
+        var canConvert = typeof(ITuple).IsAssignableFrom(typeToConvert)
+                         && typeToConvert.IsGenericType
+                         && typeToConvert.GenericTypeArguments[0] == typeof(TupleMetadata);
         return canConvert;
     }
 
-    public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
-    {
-        return ValueTupleJsonConverter.Default;
-    }
+    public override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options) =>
+        ValueTupleJsonConverter.Default;
 }
 
 public class ValueTupleJsonConverter : JsonConverter<ITuple>
 {
-    public static ValueTupleJsonConverter Default { get; } = new ValueTupleJsonConverter();
+    public static ValueTupleJsonConverter Default { get; } = new();
 
     public override ITuple Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
@@ -88,7 +82,7 @@ public class ValueTupleJsonConverter : JsonConverter<ITuple>
     {
         writer.WriteStartObject();
 
-        if (value[0] is string[] properties)
+        if (value[0] is TupleMetadata { PropertyNames: { } properties })
         {
             for (int i = 1; i < value.Length; i++)
             {
