@@ -22,7 +22,12 @@ public interface IStructuralValue<out T1, out T2> : IStructuralValue<T1>
     T2 Item2 { get; }
 }
 
-public interface IStructuralValue<out T1, out T2, out T3> : IStructuralValue<T2>
+public interface IStructuralValue<out T1, out T2, out T3> : IStructuralValue<T1, T2>
 {
     T3 Item3 { get; }
+}
+
+public interface IStructuralValue<out T1, out T2, out T3, out T4> : IStructuralValue<T1, T2, T3>
+{
+    T4 Item4 { get; }
 }
