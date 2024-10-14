@@ -53,6 +53,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Cql", "Cql", "{4B5D75F5-E2FC-4CCB-90EF-6DC4A0193032}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
+		cql-base.props = cql-base.props
 		cql-sdk.props = cql-sdk.props
 	EndProjectSection
 EndProject
@@ -120,8 +121,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ncqa.HT.DeckTests", "submodules\Ncqa.DQIC\Ncqa.HT.DeckTests\Ncqa.HT.DeckTests.csproj", "{C573B0CB-733A-4E22-9693-4581E683109C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ncqa.HT.MeasuresTests", "submodules\Ncqa.DQIC\Ncqa.HT.MeasuresTests\Ncqa.HT.MeasuresTests.csproj", "{584116D7-4E88-401E-8089-BAA6A35DB591}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cql.Tuples", "cql\Cql.Tuples\Cql.Tuples.csproj", "{AC23236B-2C94-4081-9E6C-3416505E7C14}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -387,14 +386,6 @@ Global
 		{584116D7-4E88-401E-8089-BAA6A35DB591}.Generate-CQL-to-ELM|Any CPU.Build.0 = Debug|Any CPU
 		{584116D7-4E88-401E-8089-BAA6A35DB591}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{584116D7-4E88-401E-8089-BAA6A35DB591}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AC23236B-2C94-4081-9E6C-3416505E7C14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC23236B-2C94-4081-9E6C-3416505E7C14}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AC23236B-2C94-4081-9E6C-3416505E7C14}.FullDebug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC23236B-2C94-4081-9E6C-3416505E7C14}.FullDebug|Any CPU.Build.0 = Debug|Any CPU
-		{AC23236B-2C94-4081-9E6C-3416505E7C14}.Generate-CQL-to-ELM|Any CPU.ActiveCfg = Debug|Any CPU
-		{AC23236B-2C94-4081-9E6C-3416505E7C14}.Generate-CQL-to-ELM|Any CPU.Build.0 = Debug|Any CPU
-		{AC23236B-2C94-4081-9E6C-3416505E7C14}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AC23236B-2C94-4081-9E6C-3416505E7C14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -442,7 +433,6 @@ Global
 		{B5BF0EDC-D95F-4368-A74B-B5794FB34F9E} = {1AF2E4B2-99C5-4678-B926-D224CC83A8F7}
 		{C573B0CB-733A-4E22-9693-4581E683109C} = {1AF2E4B2-99C5-4678-B926-D224CC83A8F7}
 		{584116D7-4E88-401E-8089-BAA6A35DB591} = {1AF2E4B2-99C5-4678-B926-D224CC83A8F7}
-		{AC23236B-2C94-4081-9E6C-3416505E7C14} = {D0F1B9D3-DD8C-4F25-B7AF-0C2EB4E17AC3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}

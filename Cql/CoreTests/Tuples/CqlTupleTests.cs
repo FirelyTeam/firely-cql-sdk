@@ -10,24 +10,33 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoreTests.Tuples;
 
+#region Tests
+
 [TestClass]
 public class CqlTupleTests
 {
+    // Generated C# as part of Library
     public static readonly string[] TupleOnLibraryAProperties = ["Name", "DOB"];
     public static readonly string[] TupleOnLibraryBProperties = ["Name", "DOB"];
 
     [TestMethod]
     public void TestEquality()
     {
+        // Generated C# as part of Library
         CqlTuple<(string? Name, DateTime? DOB)> tupleA1 = new(TupleOnLibraryAProperties, ("Paul", new DateTime(2000, 12, 31)));
         CqlTuple<(string? Name, DateTime? DOB)> tupleA2 = new(TupleOnLibraryBProperties, ("Paul", new DateTime(2000, 12, 31)));
+
+
         Assert.AreEqual(tupleA1, tupleA2);
     }
 
     [TestMethod]
     public void TestJsonSerialization()
     {
+        // Generated C# as part of Library
         CqlTuple<(string? Name, DateTime? DOB)> tupleA1 = new(TupleOnLibraryAProperties, ("Paul", new DateTime(2000, 12, 31)));
+
+
         var serializedJson = JsonSerializer.Serialize(tupleA1);
         Assert.AreEqual("""{"Name":"Paul","DOB":"2000-12-31T00:00:00"}""", serializedJson);
     }
@@ -38,6 +47,7 @@ public class CqlTupleTests
     [TestMethod]
     public void TestJsonSerializationNested()
     {
+        // Generated C# as part of Library
         CqlTuple<(string? AddressType, string? Street, string? City, string? Country)> homeAddr =
             new(AddressProperties, ( "Home", "Joe Street", "Springfield", "USA"));
 
@@ -46,6 +56,7 @@ public class CqlTupleTests
 
         CqlTuple<(string? Name, int? ID, CqlTuple<(string? AddressType, string? Street, string? City, string? Country)>[]? Addressses)> person =
             new(PersonProperties, ("John", 10, [homeAddr, workAddr]));
+
 
         var serializedJson = JsonSerializer.Serialize(person, new JsonSerializerOptions { WriteIndented = true});
         Assert.AreEqual(
@@ -72,6 +83,10 @@ public class CqlTupleTests
     }
 }
 
+#endregion
+
+#region Serializers (Runtime)
+
 public class CqlTupleJsonConverterFactory : JsonConverterFactory
 {
     public override bool CanConvert(Type typeToConvert)
@@ -83,7 +98,7 @@ public class CqlTupleJsonConverterFactory : JsonConverterFactory
     public override JsonConverter? CreateConverter(Type typeToConvert, JsonSerializerOptions options)
     {
         var tupleType = typeToConvert.GetGenericArguments()[0] ??
-                      throw new InvalidOperationException("This converter only handles array types.");
+                        throw new InvalidOperationException("This converter only handles array types.");
 
         var type = typeof(CqlTupleJsonConverter<>).MakeGenericType(tupleType);
         var instance = (JsonConverter)Activator.CreateInstance(type)!;
@@ -113,6 +128,10 @@ public class CqlTupleJsonConverter<TTuple> : JsonConverter<CqlTuple<TTuple>> whe
     }
 }
 
+#endregion
+
+#region Runtime SDK
+
 public interface INamedPropertiesTuple : ITuple
 {
     string[] Properties { get; }
@@ -140,3 +159,5 @@ public readonly struct CqlTuple<TTuple>(
 
     string[] INamedPropertiesTuple.Properties => Properties;
 }
+
+#endregion

@@ -10,12 +10,14 @@ namespace CoreTests.Tuples;
 [TestClass]
 public class ValueTupleTests
 {
+    // Generated C# as part of Library
     public static readonly TupleMetadata PersonProperties = new(["Name", "ID", "Addresses"]);
     public static readonly TupleMetadata AddressProperties = new (["AddressType", "Street", "City", "Country"]);
 
     [TestMethod]
     public void TestJsonSerializationNested()
     {
+        // Generated C# as part of Library
         (TupleMetadata, string? AddressType, string? Street, string? City, string? Country) homeAddr =
             (AddressProperties, "Home", "Joe Street", "Springfield", "USA");
 
@@ -28,6 +30,7 @@ public class ValueTupleTests
         var serializedJson = JsonSerializer.Serialize(person, new JsonSerializerOptions {
             Converters = { new ValueTupleJsonConverterFactory() },
             WriteIndented = true });
+
 
         Assert.AreEqual(
             """
@@ -53,7 +56,13 @@ public class ValueTupleTests
     }
 }
 
+#region Runtime SDK
+
 public record TupleMetadata(string[] PropertyNames);
+
+#endregion
+
+#region Serializers (Runtime)
 
 public class ValueTupleJsonConverterFactory : JsonConverterFactory
 {
@@ -95,3 +104,6 @@ public class ValueTupleJsonConverter : JsonConverter<ITuple>
         writer.WriteEndObject();
     }
 }
+
+
+#endregion
