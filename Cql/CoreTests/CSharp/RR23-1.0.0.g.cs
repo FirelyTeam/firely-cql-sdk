@@ -11,84 +11,44 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.4.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("RR23", "1.0.0")]
-public class RR23_1_0_0
+public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
+    private RR23_1_0_0() {}
 
+    public static RR23_1_0_0 Instance { get; } = new();
 
-    internal CqlContext context;
-
-    #region Cached values
-
-    internal Lazy<CqlValueSet> __Injury_due_to_falling_rock;
-    internal Lazy<CqlValueSet> __Roadrunners_Syndrome_Indicators;
-    internal Lazy<CqlCode> __Tiny_Umbrella;
-    internal Lazy<CqlCode> __entered_in_error;
-    internal Lazy<CqlCode[]> __ACME_Product_Catalog;
-    internal Lazy<CqlCode[]> __ConditionVerificationStatusCodes;
-    internal Lazy<object> __Measurement_Period;
-    internal Lazy<Patient> __Patient;
-    internal Lazy<IEnumerable<Condition>> __Injury_due_to_falling_rock_within_measurement_period;
-    internal Lazy<Condition> __Latest_injury_due_to_falling_rock;
-    internal Lazy<IEnumerable<SupplyDelivery>> __Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock;
-
-    #endregion
-    public RR23_1_0_0(CqlContext context)
-    {
-        this.context = context ?? throw new ArgumentNullException("context");
-
-        FHIRHelpers_4_0_1 = new FHIRHelpers_4_0_1(context);
-
-        __Injury_due_to_falling_rock = new Lazy<CqlValueSet>(this.Injury_due_to_falling_rock_Value);
-        __Roadrunners_Syndrome_Indicators = new Lazy<CqlValueSet>(this.Roadrunners_Syndrome_Indicators_Value);
-        __Tiny_Umbrella = new Lazy<CqlCode>(this.Tiny_Umbrella_Value);
-        __entered_in_error = new Lazy<CqlCode>(this.entered_in_error_Value);
-        __ACME_Product_Catalog = new Lazy<CqlCode[]>(this.ACME_Product_Catalog_Value);
-        __ConditionVerificationStatusCodes = new Lazy<CqlCode[]>(this.ConditionVerificationStatusCodes_Value);
-        __Measurement_Period = new Lazy<object>(this.Measurement_Period_Value);
-        __Patient = new Lazy<Patient>(this.Patient_Value);
-        __Injury_due_to_falling_rock_within_measurement_period = new Lazy<IEnumerable<Condition>>(this.Injury_due_to_falling_rock_within_measurement_period_Value);
-        __Latest_injury_due_to_falling_rock = new Lazy<Condition>(this.Latest_injury_due_to_falling_rock_Value);
-        __Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock = new Lazy<IEnumerable<SupplyDelivery>>(this.Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock_Value);
-    }
-    #region Dependencies
-
-    public FHIRHelpers_4_0_1 FHIRHelpers_4_0_1 { get; }
-
-    #endregion
-
-	private CqlValueSet Injury_due_to_falling_rock_Value() => 
-		new CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock", default);
+    #region Library Members
+    public string Name => "RR23";
+    public string Version => "1.0.0";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
+    #endregion Library Members
 
     [CqlDeclaration("Injury due to falling rock")]
     [CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock")]
-	public CqlValueSet Injury_due_to_falling_rock() => 
-		__Injury_due_to_falling_rock.Value;
+	public CqlValueSet Injury_due_to_falling_rock(CqlContext context) => 
+		new CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock", default);
 
-	private CqlValueSet Roadrunners_Syndrome_Indicators_Value() => 
-		new CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome", default);
 
     [CqlDeclaration("Roadrunners Syndrome Indicators")]
     [CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome")]
-	public CqlValueSet Roadrunners_Syndrome_Indicators() => 
-		__Roadrunners_Syndrome_Indicators.Value;
+	public CqlValueSet Roadrunners_Syndrome_Indicators(CqlContext context) => 
+		new CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome", default);
 
-	private CqlCode Tiny_Umbrella_Value() => 
-		new CqlCode("U707", "http://acme.org/product-catalog", default, default);
 
     [CqlDeclaration("Tiny Umbrella")]
-	public CqlCode Tiny_Umbrella() => 
-		__Tiny_Umbrella.Value;
+	public CqlCode Tiny_Umbrella(CqlContext context) => 
+		new CqlCode("U707", "http://acme.org/product-catalog", default, default);
 
-	private CqlCode entered_in_error_Value() => 
-		new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
     [CqlDeclaration("entered-in-error")]
-	public CqlCode entered_in_error() => 
-		__entered_in_error.Value;
+	public CqlCode entered_in_error(CqlContext context) => 
+		new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
-	private CqlCode[] ACME_Product_Catalog_Value()
+
+    [CqlDeclaration("ACME Product Catalog")]
+	public CqlCode[] ACME_Product_Catalog(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("U707", "http://acme.org/product-catalog", default, default),
@@ -97,11 +57,9 @@ public class RR23_1_0_0
 		return a_;
 	}
 
-    [CqlDeclaration("ACME Product Catalog")]
-	public CqlCode[] ACME_Product_Catalog() => 
-		__ACME_Product_Catalog.Value;
 
-	private CqlCode[] ConditionVerificationStatusCodes_Value()
+    [CqlDeclaration("ConditionVerificationStatusCodes")]
+	public CqlCode[] ConditionVerificationStatusCodes(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default),
@@ -110,11 +68,9 @@ public class RR23_1_0_0
 		return a_;
 	}
 
-    [CqlDeclaration("ConditionVerificationStatusCodes")]
-	public CqlCode[] ConditionVerificationStatusCodes() => 
-		__ConditionVerificationStatusCodes.Value;
 
-	private object Measurement_Period_Value()
+    [CqlDeclaration("Measurement Period")]
+	public object Measurement_Period(CqlContext context)
 	{
 		CqlDate a_ = context.Operators.Date(2023, 1, 1);
 		CqlDate b_ = context.Operators.Date(2023, 12, 31);
@@ -124,11 +80,9 @@ public class RR23_1_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("Measurement Period")]
-	public object Measurement_Period() => 
-		__Measurement_Period.Value;
 
-	private Patient Patient_Value()
+    [CqlDeclaration("Patient")]
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -136,19 +90,21 @@ public class RR23_1_0_0
 		return b_;
 	}
 
-    [CqlDeclaration("Patient")]
-	public Patient Patient() => 
-		__Patient.Value;
 
-	private IEnumerable<Condition> Injury_due_to_falling_rock_within_measurement_period_Value()
+    [CqlDeclaration("Injury due to falling rock within measurement period")]
+    [CqlTag("description", "Conditions of type 'Injury due to falling rock' within the measurement period")]
+    [CqlTag("fhirquery", "akin to Condition?code:in=http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock&onset-date=sa[Period-start]&onset-date=eb[Period-end]")]
+    [CqlTag("datarequirement", "\"code\",\"onset.ofType(DateTime)\",\"subject.ofType(Patient)\"]")]
+    [CqlTag("coderequirement", "Condition.code http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock")]
+	public IEnumerable<Condition> Injury_due_to_falling_rock_within_measurement_period(CqlContext context)
 	{
-		CqlValueSet a_ = this.Injury_due_to_falling_rock();
+		CqlValueSet a_ = this.Injury_due_to_falling_rock(context);
 		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		bool? c_(Condition C)
 		{
 			DataType e_ = C?.Onset;
 			object f_ = context.Operators.LateBoundProperty<object>(e_, "value");
-			object g_ = this.Measurement_Period();
+			object g_ = this.Measurement_Period(context);
 			CqlDate h_ = ((CqlInterval<CqlDate>)g_)?.low;
 			CqlDateTime i_ = context.Operators.ConvertDateToDateTime(h_);
 			CqlDate k_ = ((CqlInterval<CqlDate>)g_)?.high;
@@ -165,17 +121,11 @@ public class RR23_1_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("Injury due to falling rock within measurement period")]
-    [CqlTag("description", "Conditions of type 'Injury due to falling rock' within the measurement period")]
-    [CqlTag("fhirquery", "akin to Condition?code:in=http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock&onset-date=sa[Period-start]&onset-date=eb[Period-end]")]
-    [CqlTag("datarequirement", "\"code\",\"onset.ofType(DateTime)\",\"subject.ofType(Patient)\"]")]
-    [CqlTag("coderequirement", "Condition.code http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock")]
-	public IEnumerable<Condition> Injury_due_to_falling_rock_within_measurement_period() => 
-		__Injury_due_to_falling_rock_within_measurement_period.Value;
 
-	private Condition Latest_injury_due_to_falling_rock_Value()
+    [CqlDeclaration("Latest injury due to falling rock")]
+	public Condition Latest_injury_due_to_falling_rock(CqlContext context)
 	{
-		IEnumerable<Condition> a_ = this.Injury_due_to_falling_rock_within_measurement_period();
+		IEnumerable<Condition> a_ = this.Injury_due_to_falling_rock_within_measurement_period(context);
 		object b_(Condition @this)
 		{
 			DataType e_ = @this?.Onset;
@@ -189,22 +139,24 @@ public class RR23_1_0_0
 		return d_;
 	}
 
-    [CqlDeclaration("Latest injury due to falling rock")]
-	public Condition Latest_injury_due_to_falling_rock() => 
-		__Latest_injury_due_to_falling_rock.Value;
 
-	private IEnumerable<SupplyDelivery> Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock_Value()
+    [CqlDeclaration("Tiny Umbrella Supply within 7 days after most recent injury due to falling rock")]
+    [CqlTag("description", "\"recording of the (latest) rock fall condition within the measurement period\"")]
+    [CqlTag("fhirquery", "akin to /SupplyDelivery?supplied-item=http://acme.org/product-catalog|U707&ocurrence-datetime=lt[Condition onset date+7 days]")]
+    [CqlTag("datarequirement", "\"suppliedItem.item.ofType(CodeableConcept)\",\"occurrenceDateTime\",\"patient\"]")]
+    [CqlTag("coderequirement", "SupplyDelivery.item.orfType(CodeableConcept) http://acme.org/product-catalog|U707")]
+	public IEnumerable<SupplyDelivery> Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock(CqlContext context)
 	{
 		IEnumerable<SupplyDelivery> a_ = context.Operators.Retrieve<SupplyDelivery>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/SupplyDelivery"));
 		bool? b_(SupplyDelivery SD)
 		{
 			SupplyDelivery.SuppliedItemComponent d_ = SD?.SuppliedItem;
 			DataType e_ = d_?.Item;
-			CqlConcept f_ = FHIRHelpers_4_0_1.ToConcept(e_ as CodeableConcept);
-			CqlCode g_ = this.Tiny_Umbrella();
+			CqlConcept f_ = FHIRHelpers_4_0_1.Instance.ToConcept(context, e_ as CodeableConcept);
+			CqlCode g_ = this.Tiny_Umbrella(context);
 			CqlConcept h_ = context.Operators.ConvertCodeToConcept(g_);
 			bool? i_ = context.Operators.Equivalent(f_, h_);
-			Condition j_ = this.Latest_injury_due_to_falling_rock();
+			Condition j_ = this.Latest_injury_due_to_falling_rock(context);
 			Condition[] k_ = [
 				j_,
 			];
@@ -236,13 +188,5 @@ public class RR23_1_0_0
 
 		return c_;
 	}
-
-    [CqlDeclaration("Tiny Umbrella Supply within 7 days after most recent injury due to falling rock")]
-    [CqlTag("description", "\"recording of the (latest) rock fall condition within the measurement period\"")]
-    [CqlTag("fhirquery", "akin to /SupplyDelivery?supplied-item=http://acme.org/product-catalog|U707&ocurrence-datetime=lt[Condition onset date+7 days]")]
-    [CqlTag("datarequirement", "\"suppliedItem.item.ofType(CodeableConcept)\",\"occurrenceDateTime\",\"patient\"]")]
-    [CqlTag("coderequirement", "SupplyDelivery.item.orfType(CodeableConcept) http://acme.org/product-catalog|U707")]
-	public IEnumerable<SupplyDelivery> Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock() => 
-		__Tiny_Umbrella_Supply_within_7_days_after_most_recent_injury_due_to_falling_rock.Value;
 
 }

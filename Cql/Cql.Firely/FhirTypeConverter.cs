@@ -14,6 +14,7 @@ using System.Reflection;
 using System.Text;
 using Hl7.Cql.Abstractions.Infrastructure;
 using M = Hl7.Fhir.Model;
+using System.Collections.Concurrent;
 
 namespace Hl7.Cql.Fhir
 {
@@ -22,12 +23,22 @@ namespace Hl7.Cql.Fhir
     /// </summary>
     public static class FhirTypeConverter
     {
+        internal static bool DisableReuseForBenchmarks = false;
+
+        internal const int DefaultCacheSize = 10_000;
+        private static readonly LRUCache<CqlDateTime> DefaultDateTimesCache = new(DefaultCacheSize);
+
         /// <summary>
         /// Singleton for the default configuration of this TypeConverter
         /// </summary>
-        public static readonly TypeConverter Default = Create(M.ModelInfo.ModelInspector);
+        public static readonly TypeConverter Default = CreateImpl(M.ModelInfo.ModelInspector);
 
-        private static LRUCache<CqlDateTime>? _dateTimes;
+        /// <summary>
+        /// Singleton for the default configuration of this TypeConverter with an LRU cache of 10000
+        /// </summary>
+        internal static readonly TypeConverter DefaultWithCache = CreateImpl(M.ModelInfo.ModelInspector, DefaultCacheSize);
+
+        private static readonly ConcurrentDictionary<(ModelInspector, int?), WeakReference<TypeConverter>> ConverterCache = new ();
 
         /// <summary>
         /// Allows for the creation of a converter with the specified model
@@ -37,10 +48,53 @@ namespace Hl7.Cql.Fhir
         /// <returns>the type converter</returns>
         public static TypeConverter Create(ModelInspector model, int? cacheSize = null)
         {
-            var lruCacheSize = cacheSize ?? 0;
-            if (lruCacheSize > 0 && _dateTimes is null)
+            if (DisableReuseForBenchmarks)
+                return CreateImpl(model, cacheSize ?? 0);
+
+            return (cacheSize ?? 0) switch
             {
-                _dateTimes = new LRUCache<CqlDateTime>(lruCacheSize);
+                < 0 => throw new ArgumentOutOfRangeException(nameof(cacheSize), cacheSize, "CacheSize cannot be negative."),
+                0 when model == M.ModelInfo.ModelInspector                         => Default,
+                DefaultCacheSize when model == M.ModelInfo.ModelInspector => DefaultWithCache,
+                { } size                                                           => GetOrCreateConverter(model, size)
+            };
+
+            static TypeConverter GetOrCreateConverter(ModelInspector model, int cacheSize)
+            {
+                var key = (model, cacheSize);
+                if (ConverterCache.TryGetValue(key, out var weakRef) && weakRef.TryGetTarget(out var converter))
+                {
+                    return converter;
+                }
+
+                var newConverter = CreateImpl(model, cacheSize);
+                ConverterCache[key] = new WeakReference<TypeConverter>(newConverter);
+                return newConverter;
+            }
+        }
+
+        private static readonly ConcurrentDictionary<int, WeakReference<LRUCache<CqlDateTime>>> LRUCacheCache = new();
+
+        private static TypeConverter CreateImpl(ModelInspector model, int cacheSize = 0)
+        {
+            LRUCache<CqlDateTime>? dateTimesCache = cacheSize switch
+            {
+                < 0 => throw new ArgumentOutOfRangeException(nameof(cacheSize), cacheSize, "CacheSize cannot be negative."),
+                0                         => null,
+                DefaultCacheSize => DefaultDateTimesCache,
+                _                         => GetOrCreateLRUCache(cacheSize)
+            };
+
+            static LRUCache<CqlDateTime> GetOrCreateLRUCache(int cacheSize)
+            {
+                if (LRUCacheCache.TryGetValue(cacheSize, out var weakRef) && weakRef.TryGetTarget(out var lruCache))
+                {
+                    return lruCache;
+                }
+
+                var newLRUCache = new LRUCache<CqlDateTime>(cacheSize);
+                LRUCacheCache[cacheSize] = new WeakReference<LRUCache<CqlDateTime>>(newLRUCache);
+                return newLRUCache;
             }
 
             var converter = TypeConverter
@@ -48,12 +102,12 @@ namespace Hl7.Cql.Fhir
                             .ConvertDataTypeChoices()
                             .CreateQuantityConversions()
                             .ConvertSystemTypes()
-                            .ConvertFhirToCqlPrimitives()
+                            .ConvertFhirToCqlPrimitives(dateTimesCache)
                             .ConvertCqlPrimitivesToFhir()
                             .ConvertCodeTypes(model)
                             .ConvertEnumToStrings()
                             .ConvertSubtypeRelationships()
-                            ;
+                ;
             return converter;
         }
 
@@ -68,7 +122,9 @@ namespace Hl7.Cql.Fhir
             return converter;
         }
 
-        internal static TypeConverter ConvertFhirToCqlPrimitives(this TypeConverter converter)
+        internal static TypeConverter ConvertFhirToCqlPrimitives(
+            this TypeConverter converter,
+            LRUCache<CqlDateTime>? dateTimes = null)
         {
             HashSet<Type> toTypes = new();
 
@@ -78,11 +134,10 @@ namespace Hl7.Cql.Fhir
             add((M.FhirDecimal p) => p.Value);
             add((M.Markdown p) => p.Value);
             add((M.Instant p) => p.Value);
-            add((M.Instant p) =>
+            add((M.Instant p) => p.Value switch
             {
-                if(p.Value is { } dto)
-                    return new CqlDateTime(dto.Year, dto.Month, dto.Day, dto.Hour, dto.Minute, dto.Second, dto.Millisecond, dto.Offset.Hours, dto.Offset.Minutes);
-                return null;
+                { } dto => new CqlDateTime(dto.Year, dto.Month, dto.Day, dto.Hour, dto.Minute, dto.Second, dto.Millisecond, dto.Offset.Hours, dto.Offset.Minutes),
+                _ => null
             });
             add((M.FhirUrl p) => p.Value);
             add((M.Integer c) => new M.UnsignedInt(c.Value));
@@ -93,63 +148,17 @@ namespace Hl7.Cql.Fhir
             add((M.Date f) => f.ToString());
             add((M.Time f) => f.TryToTime(out var time) ? new CqlTime(time!.Hours!.Value, time.Minutes, time.Seconds, time.Millis, null, null) : null);
             add((M.Time f) => f.ToString());
-            add((M.FhirDateTime f) =>
-            {
-                if (f.Value is null)
-                    return null;
-
-                if (_dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
-                {
-                    return datetime;
-                }
-
-                if (f.TryToDateTime(out var dt))
-                {
-                    var cqlDateTime = new CqlDateTime(
-                        dt!.Years!.Value, dt.Months,
-                        dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
-                        dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null);
-
-                    _dateTimes?.Insert(f.Value, cqlDateTime);
-                    return cqlDateTime;
-                }
-
-                return null;
-            });
+            add((M.FhirDateTime f) => FhirDateTimeToCqlDateTimeViaCaching(f));
             add((M.FhirDateTime f) => f.ToString());
-            add((M.FhirDateTime f) => {
-                if (f.Value is null)
-                    return null;
-
-                if (_dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
-                    return datetime.DateOnly;
-
-                if (f.TryToDateTime(out var dt))
-                {
-                    var cqlDateTime = new CqlDateTime(
-                        dt!.Years!.Value, dt.Months,
-                        dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
-                        dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null);
-
-                    _dateTimes?.Insert(f.Value, cqlDateTime);
-                    return cqlDateTime.DateOnly;
-                }
-
-                return null;
-            });
+            add((M.FhirDateTime f) => FhirDateTimeToCqlDateTimeViaCaching(f)?.DateOnly);
             add((M.Quantity f) => new CqlQuantity(f.Value, f.Unit));
             add((M.Quantity f) => f.Value);
             add((M.Quantity f) => (int?)f.Value);
-            add((M.Period f) => new CqlInterval<CqlDateTime>(
-                converter.Convert<CqlDateTime>(f.StartElement), converter.Convert<CqlDateTime>(f.EndElement), lowClosed: true, highClosed: true));
-            add((M.Period f) => new CqlInterval<CqlDate>(
-                converter.Convert<CqlDate>(f.StartElement), converter.Convert<CqlDate>(f.EndElement), lowClosed: true, highClosed: true));
-            add((M.Range f) => new CqlInterval<CqlQuantity>(
-                    converter.Convert<CqlQuantity>(f.Low), converter.Convert<CqlQuantity>(f.High), lowClosed: true, highClosed: true));
-            add((M.Range f) => new CqlInterval<decimal?>(converter.Convert<decimal?>(f.Low), converter.Convert<decimal?>(f.High),
-                lowClosed: true, highClosed: true));
-            add((M.Range f) => new CqlInterval<int?>(converter.Convert<int?>(f.Low), converter.Convert<int?>(f.High),
-                lowClosed: true, highClosed: true));
+            add((M.Period f) => new CqlInterval<CqlDateTime>(converter.Convert<CqlDateTime>(f.StartElement), converter.Convert<CqlDateTime>(f.EndElement), lowClosed: true, highClosed: true));
+            add((M.Period f) => new CqlInterval<CqlDate>(converter.Convert<CqlDate>(f.StartElement), converter.Convert<CqlDate>(f.EndElement), lowClosed: true, highClosed: true));
+            add((M.Range f) => new CqlInterval<CqlQuantity>(converter.Convert<CqlQuantity>(f.Low), converter.Convert<CqlQuantity>(f.High), lowClosed: true, highClosed: true));
+            add((M.Range f) => new CqlInterval<decimal?>(converter.Convert<decimal?>(f.Low), converter.Convert<decimal?>(f.High), lowClosed: true, highClosed: true));
+            add((M.Range f) => new CqlInterval<int?>(converter.Convert<int?>(f.Low), converter.Convert<int?>(f.High), lowClosed: true, highClosed: true));
 
             add((M.Id id) => id.Value);
 
@@ -191,8 +200,28 @@ namespace Hl7.Cql.Fhir
                     _ => throw new InvalidCastException($"Cannot cast a FHIR value of type {dt.TypeName} to a string")
                 };
             }
-        }
 
+            CqlDateTime? FhirDateTimeToCqlDateTimeViaCaching(M.FhirDateTime f)
+            {
+                if (f.Value is null)
+                    return null;
+
+                if (dateTimes?.TryGetValue(f.Value, out var datetime) ?? false)
+                    return datetime;
+
+                if (!f.TryToDateTime(out var dt))
+                    return null;
+
+                var cqlDateTime = new CqlDateTime(
+                    dt!.Years!.Value, dt.Months,
+                    dt.Days, dt.Hours, dt.Minutes, dt.Seconds, dt.Millis,
+                    dt.HasOffset ? dt.Offset!.Value.Hours : null, dt.HasOffset ? dt.Offset!.Value.Minutes : null);
+
+                dateTimes?.Insert(f.Value, cqlDateTime);
+                return cqlDateTime;
+
+            }
+        }
 
         private class DataTypeSubTypeConverter(TypeConverter converter) : ITypeConverterEntry
         {

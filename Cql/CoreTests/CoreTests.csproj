@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<Import Project="..\..\cql-sdk.props" />
+	<Import Project="..\..\cql-base.props" />
 
 	<PropertyGroup>
 		<Configurations>Debug;Release;Generate-CQL-to-ELM</Configurations>
@@ -14,6 +14,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<PackageReference Include="BenchmarkDotNet" Version="0.14.0" />
 		<PackageReference Include="FluentAssertions" Version="6.12.1" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="8.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />

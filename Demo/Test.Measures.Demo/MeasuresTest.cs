@@ -35,9 +35,9 @@ namespace Test
         public void BCSEHEDIS2022_Numerator()
         {
             var patientEverything = new Bundle();  // add some data
-            var context = FhirCqlContext.ForBundle(patientEverything, MY2023);
-            var bcs = new BCSEHEDISMY2022_1_0_0(context);
-            var numerator = bcs.Numerator();
+            var ctx = FhirCqlContext.ForBundle(patientEverything, MY2023);
+            var bcs = BCSEHEDISMY2022_1_0_0.Instance;
+            var numerator = bcs.Numerator(ctx);
             Assert.IsFalse(numerator);
         }
 
@@ -51,16 +51,16 @@ namespace Test
 
             var patientEverything = new Bundle();   // Add data
             var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
-            var context = FhirCqlContext.ForBundle(patientEverything, MY2023, valueSets);
+            var ctx = FhirCqlContext.ForBundle(patientEverything, MY2023, valueSets);
 
-            var results = asmContext.Run(lib, version, context);
+            var results = asmContext.Run(lib, version, ctx);
 
             Assert.IsTrue(results.TryGetValue("Numerator", out var numerator));
             Assert.IsInstanceOfType(numerator, typeof(bool?));
             Assert.IsFalse((bool?)numerator);
 
-            var lib2 = new BCSEHEDISMY2022_1_0_0(context);
-            var num = lib2.Numerator();
+            var lib2 = BCSEHEDISMY2022_1_0_0.Instance;
+            var num = lib2.Numerator(ctx);
             Assert.IsFalse((bool?)num);
         }
 

@@ -83,13 +83,9 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             var sb = new StringBuilder();
             sb.Append(leadingIndentString);
-
-            var target = dce.LibraryName == LibraryName ? "this" :
-                VariableNameGenerator.NormalizeIdentifier(dce.LibraryName);
-            var csFunctionName = VariableNameGenerator.NormalizeIdentifier(dce.DefinitionName);
-
-            sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}()");
-
+            var targetMember = GetTargetedMemberName(dce.LibraryName, dce.DefinitionName);
+            sb.Append(targetMember);
+            sb.Append("(context)");
             return sb.ToString();
         }
 
@@ -97,15 +93,19 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             var sb = new StringBuilder();
             sb.Append(leadingIndentString);
-
-            var target = fce.LibraryName == LibraryName ? "this" :
-                VariableNameGenerator.NormalizeIdentifier(fce.LibraryName);
-            var csFunctionName = VariableNameGenerator.NormalizeIdentifier(fce.FunctionName);
-
-            sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}");
-            sb.Append(ConvertArguments(indent, fce.Arguments.Skip(1)));  // skip cqlContext
-
+            var targetMember = GetTargetedMemberName(fce.LibraryName, fce.FunctionName);
+            sb.Append(targetMember);
+            sb.Append(ConvertArguments(indent, fce.Arguments));
             return sb.ToString();
+        }
+
+        private string GetTargetedMemberName(
+            string targetName,
+            string memberName)
+        {
+            var target = targetName == LibraryName ? "this" : $"{VariableNameGenerator.NormalizeIdentifier(targetName)}.Instance";
+            var member = VariableNameGenerator.NormalizeIdentifier(memberName);
+            return $"{target}.{member}";
         }
 
         private string ConvertBlockExpression(int indent, BlockExpression block)
@@ -428,8 +428,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                     {
                         var newArraySb = new StringBuilder();
                         newArraySb.Append(leadingIndentString);
-                        var arrayType = _typeToCSharpConverter.ToCSharp(newArray.Type.GetElementType()!);
-                        var size = ConvertExpression(0, newArray.Expressions[0], false);
+                        // var arrayType = _typeToCSharpConverter.ToCSharp(newArray.Type.GetElementType()!);
+                        // var size = ConvertExpression(0, newArray.Expressions[0], false);
 #pragma warning disable CA1305 // Specify IFormatProvider
                         newArraySb.AppendLine("[]");
 #pragma warning restore CA1305 // Specify IFormatProvider
@@ -465,7 +465,12 @@ namespace Hl7.Cql.CodeGeneration.NET
             var lambdaSb = new StringBuilder();
             lambdaSb.Append(leadingIndentString);
 
-            var lambdaParameters = $"({string.Join(", ", lambda.Parameters.Select(p => $"{_typeToCSharpConverter.ToCSharp(p.Type)} {EscapeKeywords(p.Name!)}"))})";
+            var parameters = lambda.Parameters.Select(p => $"{_typeToCSharpConverter.ToCSharp(p.Type)} {EscapeKeywords(p.Name!)}").ToList();
+            // inserts the context parameter in the start of the lambda expression
+            if (indent == 1)
+                parameters.Insert(0, "CqlContext context");
+
+            var lambdaParameters = $"({string.Join(", ", parameters)})";
             lambdaSb.Append(lambdaParameters);
 
             if (lambda.Body is BlockExpression)
