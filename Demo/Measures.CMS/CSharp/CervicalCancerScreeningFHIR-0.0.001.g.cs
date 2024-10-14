@@ -267,22 +267,22 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 				};
 				if (t_())
 				{
-					DataType af_ = CervicalCytology?.Effective;
-					object ag_ = FHIRHelpers_4_3_000.Instance.ToValue(context, af_);
+DataType af_ = CervicalCytology?.Effective;
+object ag_ = FHIRHelpers_4_3_000.Instance.ToValue(context, af_);
 
 					return (ag_ as CqlDateTime) as object;
 				}
 				else if (u_())
 				{
-					DataType ah_ = CervicalCytology?.Effective;
-					object ai_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ah_);
+DataType ah_ = CervicalCytology?.Effective;
+object ai_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ah_);
 
 					return (ai_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (v_())
 				{
-					DataType aj_ = CervicalCytology?.Effective;
-					object ak_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aj_);
+DataType aj_ = CervicalCytology?.Effective;
+object ak_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aj_);
 
 					return (ak_ as CqlDateTime) as object;
 				}
@@ -352,22 +352,22 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 				};
 				if (ad_())
 				{
-					DataType ap_ = HPVTest?.Effective;
-					object aq_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ap_);
+DataType ap_ = HPVTest?.Effective;
+object aq_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ap_);
 
 					return (aq_ as CqlDateTime) as object;
 				}
 				else if (ae_())
 				{
-					DataType ar_ = HPVTest?.Effective;
-					object as_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ar_);
+DataType ar_ = HPVTest?.Effective;
+object as_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ar_);
 
 					return (as_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (af_())
 				{
-					DataType at_ = HPVTest?.Effective;
-					object au_ = FHIRHelpers_4_3_000.Instance.ToValue(context, at_);
+DataType at_ = HPVTest?.Effective;
+object au_ = FHIRHelpers_4_3_000.Instance.ToValue(context, at_);
 
 					return (au_ as CqlDateTime) as object;
 				}
@@ -408,22 +408,22 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 				};
 				if (av_())
 				{
-					DataType bh_ = HPVTest?.Effective;
-					object bi_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bh_);
+DataType bh_ = HPVTest?.Effective;
+object bi_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bh_);
 
 					return (bi_ as CqlDateTime) as object;
 				}
 				else if (aw_())
 				{
-					DataType bj_ = HPVTest?.Effective;
-					object bk_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bj_);
+DataType bj_ = HPVTest?.Effective;
+object bk_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bj_);
 
 					return (bk_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (ax_())
 				{
-					DataType bl_ = HPVTest?.Effective;
-					object bm_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bl_);
+DataType bl_ = HPVTest?.Effective;
+object bm_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bl_);
 
 					return (bm_ as CqlDateTime) as object;
 				}
@@ -468,27 +468,27 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
+		IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
 		return a_;
 	}

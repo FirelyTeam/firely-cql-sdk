@@ -60,27 +60,27 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
+		IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
 		return a_;
 	}
@@ -189,22 +189,22 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 				};
 				if (m_())
 				{
-					DataType y_ = RecentHbA1c?.Effective;
-					object z_ = FHIRHelpers_4_3_000.Instance.ToValue(context, y_);
+DataType y_ = RecentHbA1c?.Effective;
+object z_ = FHIRHelpers_4_3_000.Instance.ToValue(context, y_);
 
 					return (z_ as CqlDateTime) as object;
 				}
 				else if (n_())
 				{
-					DataType aa_ = RecentHbA1c?.Effective;
-					object ab_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
+DataType aa_ = RecentHbA1c?.Effective;
+object ab_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
 
 					return (ab_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (o_())
 				{
-					DataType ac_ = RecentHbA1c?.Effective;
-					object ad_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ac_);
+DataType ac_ = RecentHbA1c?.Effective;
+object ad_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ac_);
 
 					return (ad_ as CqlDateTime) as object;
 				}
@@ -298,22 +298,22 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 				};
 				if (l_())
 				{
-					DataType x_ = NoHbA1c?.Effective;
-					object y_ = FHIRHelpers_4_3_000.Instance.ToValue(context, x_);
+DataType x_ = NoHbA1c?.Effective;
+object y_ = FHIRHelpers_4_3_000.Instance.ToValue(context, x_);
 
 					return (y_ as CqlDateTime) as object;
 				}
 				else if (m_())
 				{
-					DataType z_ = NoHbA1c?.Effective;
-					object aa_ = FHIRHelpers_4_3_000.Instance.ToValue(context, z_);
+DataType z_ = NoHbA1c?.Effective;
+object aa_ = FHIRHelpers_4_3_000.Instance.ToValue(context, z_);
 
 					return (aa_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (n_())
 				{
-					DataType ab_ = NoHbA1c?.Effective;
-					object ac_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ab_);
+DataType ab_ = NoHbA1c?.Effective;
+object ac_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ab_);
 
 					return (ac_ as CqlDateTime) as object;
 				}

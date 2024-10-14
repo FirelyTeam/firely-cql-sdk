@@ -239,20 +239,20 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			{
 				if (X is null)
 				{
-					Period g_ = TheEncounter?.Period;
-					CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, g_);
+Period g_ = TheEncounter?.Period;
+CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, g_);
 
 					return h_;
 				}
 				else
 				{
-					Period i_ = X?.Period;
-					CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, i_);
-					CqlDateTime k_ = context.Operators.Start(j_);
-					Period l_ = TheEncounter?.Period;
-					CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, l_);
-					CqlDateTime n_ = context.Operators.End(m_);
-					CqlInterval<CqlDateTime> o_ = context.Operators.Interval(k_, n_, true, false);
+Period i_ = X?.Period;
+CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, i_);
+CqlDateTime k_ = context.Operators.Start(j_);
+Period l_ = TheEncounter?.Period;
+CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, l_);
+CqlDateTime n_ = context.Operators.End(m_);
+CqlInterval<CqlDateTime> o_ = context.Operators.Interval(k_, n_, true, false);
 
 					return o_;
 				}
@@ -278,20 +278,20 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			{
 				if (X is null)
 				{
-					Period g_ = TheEncounter?.Period;
-					CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, g_);
+Period g_ = TheEncounter?.Period;
+CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, g_);
 
 					return h_;
 				}
 				else
 				{
-					Period i_ = X?.Period;
-					CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, i_);
-					CqlDateTime k_ = context.Operators.Start(j_);
-					Period l_ = TheEncounter?.Period;
-					CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, l_);
-					CqlDateTime n_ = context.Operators.End(m_);
-					CqlInterval<CqlDateTime> o_ = context.Operators.Interval(k_, n_, true, true);
+Period i_ = X?.Period;
+CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, i_);
+CqlDateTime k_ = context.Operators.Start(j_);
+Period l_ = TheEncounter?.Period;
+CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, l_);
+CqlDateTime n_ = context.Operators.End(m_);
+CqlInterval<CqlDateTime> o_ = context.Operators.Interval(k_, n_, true, true);
 
 					return o_;
 				}
@@ -317,19 +317,19 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			{
 				if (EDEncounter is null)
 				{
-					List<Encounter.LocationComponent> g_ = TheEncounter?.Location;
+List<Encounter.LocationComponent> g_ = TheEncounter?.Location;
 
 					return (IEnumerable<Encounter.LocationComponent>)g_;
 				}
 				else
 				{
-					List<Encounter.LocationComponent> h_ = EDEncounter?.Location;
-					List<Encounter.LocationComponent> i_ = TheEncounter?.Location;
-					IEnumerable<Encounter.LocationComponent>[] j_ = [
+List<Encounter.LocationComponent> h_ = EDEncounter?.Location;
+List<Encounter.LocationComponent> i_ = TheEncounter?.Location;
+IEnumerable<Encounter.LocationComponent>[] j_ = [
 						(IEnumerable<Encounter.LocationComponent>)h_,
 						(IEnumerable<Encounter.LocationComponent>)i_,
 					];
-					IEnumerable<Encounter.LocationComponent> k_ = context.Operators.Flatten<Encounter.LocationComponent>(j_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>);
+IEnumerable<Encounter.LocationComponent> k_ = context.Operators.Flatten<Encounter.LocationComponent>(j_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>);
 
 					return k_;
 				}
@@ -355,19 +355,19 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			{
 				if (EDEncounter is null)
 				{
-					List<Encounter.LocationComponent> g_ = TheEncounter?.Location;
+List<Encounter.LocationComponent> g_ = TheEncounter?.Location;
 
 					return (IEnumerable<Encounter.LocationComponent>)g_;
 				}
 				else
 				{
-					List<Encounter.LocationComponent> h_ = EDEncounter?.Location;
-					List<Encounter.LocationComponent> i_ = TheEncounter?.Location;
-					IEnumerable<Encounter.LocationComponent>[] j_ = [
+List<Encounter.LocationComponent> h_ = EDEncounter?.Location;
+List<Encounter.LocationComponent> i_ = TheEncounter?.Location;
+IEnumerable<Encounter.LocationComponent>[] j_ = [
 						(IEnumerable<Encounter.LocationComponent>)h_,
 						(IEnumerable<Encounter.LocationComponent>)i_,
 					];
-					IEnumerable<Encounter.LocationComponent> k_ = context.Operators.Flatten<Encounter.LocationComponent>(j_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>);
+IEnumerable<Encounter.LocationComponent> k_ = context.Operators.Flatten<Encounter.LocationComponent>(j_ as IEnumerable<IEnumerable<Encounter.LocationComponent>>);
 
 					return k_;
 				}
@@ -3127,31 +3127,31 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			};
 			if (b_())
 			{
-				DataType f_ = request?.Medication;
-				object g_ = FHIRHelpers_4_3_000.Instance.ToValue(context, f_);
+DataType f_ = request?.Medication;
+object g_ = FHIRHelpers_4_3_000.Instance.ToValue(context, f_);
 
 				return g_ as CqlConcept;
 			}
 			else
 			{
-				IEnumerable<Medication> h_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-				bool? i_(Medication M)
+IEnumerable<Medication> h_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+bool? i_(Medication M)
 				{
-					Id n_ = M?.IdElement;
-					string o_ = n_?.Value;
-					DataType p_ = request?.Medication;
-					object q_ = FHIRHelpers_4_3_000.Instance.ToValue(context, p_);
-					FhirString r_ = (q_ as ResourceReference)?.ReferenceElement;
-					string s_ = r_?.Value;
-					string t_ = QICoreCommon_2_0_000.Instance.getId(context, s_);
-					bool? u_ = context.Operators.Equal(o_, t_);
+Id n_ = M?.IdElement;
+string o_ = n_?.Value;
+DataType p_ = request?.Medication;
+object q_ = FHIRHelpers_4_3_000.Instance.ToValue(context, p_);
+FhirString r_ = (q_ as ResourceReference)?.ReferenceElement;
+string s_ = r_?.Value;
+string t_ = QICoreCommon_2_0_000.Instance.getId(context, s_);
+bool? u_ = context.Operators.Equal(o_, t_);
 
 					return u_;
 				};
-				IEnumerable<Medication> j_ = context.Operators.Where<Medication>(h_, i_);
-				Medication k_ = context.Operators.SingletonFrom<Medication>(j_);
-				CodeableConcept l_ = k_?.Code;
-				CqlConcept m_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, l_);
+IEnumerable<Medication> j_ = context.Operators.Where<Medication>(h_, i_);
+Medication k_ = context.Operators.SingletonFrom<Medication>(j_);
+CodeableConcept l_ = k_?.Code;
+CqlConcept m_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, l_);
 
 				return m_;
 			}
@@ -3174,31 +3174,31 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			};
 			if (b_())
 			{
-				DataType f_ = request?.Medication;
-				object g_ = FHIRHelpers_4_3_000.Instance.ToValue(context, f_);
+DataType f_ = request?.Medication;
+object g_ = FHIRHelpers_4_3_000.Instance.ToValue(context, f_);
 
 				return g_ as CqlConcept;
 			}
 			else
 			{
-				IEnumerable<Medication> h_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-				bool? i_(Medication M)
+IEnumerable<Medication> h_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
+bool? i_(Medication M)
 				{
-					Id n_ = M?.IdElement;
-					string o_ = n_?.Value;
-					DataType p_ = request?.Medication;
-					object q_ = FHIRHelpers_4_3_000.Instance.ToValue(context, p_);
-					FhirString r_ = (q_ as ResourceReference)?.ReferenceElement;
-					string s_ = r_?.Value;
-					string t_ = QICoreCommon_2_0_000.Instance.getId(context, s_);
-					bool? u_ = context.Operators.Equal(o_, t_);
+Id n_ = M?.IdElement;
+string o_ = n_?.Value;
+DataType p_ = request?.Medication;
+object q_ = FHIRHelpers_4_3_000.Instance.ToValue(context, p_);
+FhirString r_ = (q_ as ResourceReference)?.ReferenceElement;
+string s_ = r_?.Value;
+string t_ = QICoreCommon_2_0_000.Instance.getId(context, s_);
+bool? u_ = context.Operators.Equal(o_, t_);
 
 					return u_;
 				};
-				IEnumerable<Medication> j_ = context.Operators.Where<Medication>(h_, i_);
-				Medication k_ = context.Operators.SingletonFrom<Medication>(j_);
-				CodeableConcept l_ = k_?.Code;
-				CqlConcept m_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, l_);
+IEnumerable<Medication> j_ = context.Operators.Where<Medication>(h_, i_);
+Medication k_ = context.Operators.SingletonFrom<Medication>(j_);
+CodeableConcept l_ = k_?.Code;
+CqlConcept m_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, l_);
 
 				return m_;
 			}

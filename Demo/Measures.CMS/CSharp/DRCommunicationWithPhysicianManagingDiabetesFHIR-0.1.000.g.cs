@@ -182,27 +182,27 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
+		IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
 		return a_;
 	}
@@ -574,8 +574,8 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
 					return ac_;
 				};
 				IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(LevelOfSeverityNotCommunicated is DomainResource
-						? (LevelOfSeverityNotCommunicated as DomainResource).Extension
-						: default), q_);
+	? (LevelOfSeverityNotCommunicated as DomainResource).Extension
+	: default), q_);
 				DataType s_(Extension @this)
 				{
 					DataType ad_ = @this?.Value;
@@ -641,8 +641,8 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
 					return ac_;
 				};
 				IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(MacularEdemaAbsentNotCommunicated is DomainResource
-						? (MacularEdemaAbsentNotCommunicated as DomainResource).Extension
-						: default), q_);
+	? (MacularEdemaAbsentNotCommunicated as DomainResource).Extension
+	: default), q_);
 				DataType s_(Extension @this)
 				{
 					DataType ad_ = @this?.Value;
@@ -708,8 +708,8 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
 					return ac_;
 				};
 				IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(MacularEdemaPresentNotCommunicated is DomainResource
-						? (MacularEdemaPresentNotCommunicated as DomainResource).Extension
-						: default), q_);
+	? (MacularEdemaPresentNotCommunicated as DomainResource).Extension
+	: default), q_);
 				DataType s_(Extension @this)
 				{
 					DataType ad_ = @this?.Value;

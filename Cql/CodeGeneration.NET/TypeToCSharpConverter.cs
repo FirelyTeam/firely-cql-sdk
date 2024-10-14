@@ -28,7 +28,7 @@ internal class TypeToCSharpConverter
         if (!ShouldUseTupleType(ctx.TypePartInfo))
             return ctx.Name;
 
-        TextWriterFormattableString formatTypeNameAsTuple = $"({
+        TextWriterFormattableString formatTypeNameAsTuple = $"(CqlTupleMetadata, {
             string.Join(
                 ", ",
                 GetTupleProperties(ctx.TypePartInfo)

@@ -176,25 +176,25 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 			return s_;
 		};
 		IEnumerable<MedicationDispense> h_ = context.Operators.Where<MedicationDispense>(f_, g_);
-		(CqlDate AntidepressantDate, nint _)? i_(MedicationDispense Antidepressant)
+		(CqlTupleMetadata, CqlDate AntidepressantDate, nint _)? i_(MedicationDispense Antidepressant)
 		{
 			CqlInterval<CqlDate> t_ = CumulativeMedicationDuration_4_0_000.Instance.MedicationDispensePeriod(context, Antidepressant);
 			CqlDate u_ = context.Operators.Start(t_);
 			CqlDateTime v_ = context.Operators.ConvertDateToDateTime(u_);
 			CqlDate w_ = context.Operators.DateFrom(v_);
-			(CqlDate AntidepressantDate, nint _)? x_ = (w_, default);
+			(CqlTupleMetadata, CqlDate AntidepressantDate, nint _)? x_ = (default(CqlTupleMetadata), w_, default);
 
 			return x_;
 		};
-		IEnumerable<(CqlDate AntidepressantDate, nint _)?> j_ = context.Operators.Select<MedicationDispense, (CqlDate AntidepressantDate, nint _)?>(h_, i_);
-		object k_((CqlDate AntidepressantDate, nint _)? @this)
+		IEnumerable<(CqlTupleMetadata, CqlDate AntidepressantDate, nint _)?> j_ = context.Operators.Select<MedicationDispense, (CqlTupleMetadata, CqlDate AntidepressantDate, nint _)?>(h_, i_);
+		object k_((CqlTupleMetadata, CqlDate AntidepressantDate, nint _)? @this)
 		{
 			CqlDate y_ = @this?.AntidepressantDate;
 
 			return y_;
 		};
-		IEnumerable<(CqlDate AntidepressantDate, nint _)?> l_ = context.Operators.SortBy<(CqlDate AntidepressantDate, nint _)?>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
-		(CqlDate AntidepressantDate, nint _)? m_ = context.Operators.First<(CqlDate AntidepressantDate, nint _)?>(l_);
+		IEnumerable<(CqlTupleMetadata, CqlDate AntidepressantDate, nint _)?> l_ = context.Operators.SortBy<(CqlTupleMetadata, CqlDate AntidepressantDate, nint _)?>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
+		(CqlTupleMetadata, CqlDate AntidepressantDate, nint _)? m_ = context.Operators.First<(CqlTupleMetadata, CqlDate AntidepressantDate, nint _)?>(l_);
 		CqlDate n_ = m_?.AntidepressantDate;
 
 		return n_;
@@ -460,27 +460,27 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
+		IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
 		return a_;
 	}

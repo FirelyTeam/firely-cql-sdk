@@ -400,27 +400,27 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_0_000 : ILibrary, 
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
+		IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
 		return a_;
 	}
@@ -784,10 +784,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_0_000 : ILibrary, 
 				}
 				else
 				{
-					CqlInterval<CqlDateTime> av_ = this.Measurement_Period(context);
-					CqlDateTime aw_ = context.Operators.Start(av_);
-					CqlDateTime ay_ = context.Operators.Start(av_);
-					CqlInterval<CqlDateTime> az_ = context.Operators.Interval(aw_, ay_, true, true);
+CqlInterval<CqlDateTime> av_ = this.Measurement_Period(context);
+CqlDateTime aw_ = context.Operators.Start(av_);
+CqlDateTime ay_ = context.Operators.Start(av_);
+CqlInterval<CqlDateTime> az_ = context.Operators.Interval(aw_, ay_, true, true);
 
 					return az_;
 				}

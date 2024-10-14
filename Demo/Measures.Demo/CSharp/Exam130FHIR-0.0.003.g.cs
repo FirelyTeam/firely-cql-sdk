@@ -27,197 +27,197 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
     [CqlDeclaration("Acute Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083")]
-	public CqlValueSet Acute_Inpatient(CqlContext context) => 
+	public CqlValueSet Acute_Inpatient	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083", default);
 
 
     [CqlDeclaration("Advanced Illness")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082")]
-	public CqlValueSet Advanced_Illness(CqlContext context) => 
+	public CqlValueSet Advanced_Illness	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", default);
 
 
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
-	public CqlValueSet Annual_Wellness_Visit(CqlContext context) => 
+	public CqlValueSet Annual_Wellness_Visit	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default);
 
 
     [CqlDeclaration("Care Services in Long-Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
-	public CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) => 
+	public CqlValueSet Care_Services_in_Long_Term_Residential_Facility	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
 
 
     [CqlDeclaration("Colonoscopy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1020")]
-	public CqlValueSet Colonoscopy(CqlContext context) => 
+	public CqlValueSet Colonoscopy	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1020", default);
 
 
     [CqlDeclaration("CT Colonography")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1038")]
-	public CqlValueSet CT_Colonography(CqlContext context) => 
+	public CqlValueSet CT_Colonography	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1038", default);
 
 
     [CqlDeclaration("Dementia Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510")]
-	public CqlValueSet Dementia_Medications(CqlContext context) => 
+	public CqlValueSet Dementia_Medications	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510", default);
 
 
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207")]
-	public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care(CqlContext context) => 
+	public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", default);
 
 
     [CqlDeclaration("Discharged to Home for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
-	public CqlValueSet Discharged_to_Home_for_Hospice_Care(CqlContext context) => 
+	public CqlValueSet Discharged_to_Home_for_Hospice_Care	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", default);
 
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public CqlValueSet Encounter_Inpatient(CqlContext context) => 
+	public CqlValueSet Encounter_Inpatient	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
 
     [CqlDeclaration("Fecal Occult Blood Test (FOBT)")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1011")]
-	public CqlValueSet Fecal_Occult_Blood_Test__FOBT_(CqlContext context) => 
+	public CqlValueSet Fecal_Occult_Blood_Test__FOBT_	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1011", default);
 
 
     [CqlDeclaration("FIT DNA")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1039")]
-	public CqlValueSet FIT_DNA(CqlContext context) => 
+	public CqlValueSet FIT_DNA	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1039", default);
 
 
     [CqlDeclaration("Flexible Sigmoidoscopy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1010")]
-	public CqlValueSet Flexible_Sigmoidoscopy(CqlContext context) => 
+	public CqlValueSet Flexible_Sigmoidoscopy	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1010", default);
 
 
     [CqlDeclaration("Frailty Device")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300")]
-	public CqlValueSet Frailty_Device(CqlContext context) => 
+	public CqlValueSet Frailty_Device	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300", default);
 
 
     [CqlDeclaration("Frailty Diagnosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074")]
-	public CqlValueSet Frailty_Diagnosis(CqlContext context) => 
+	public CqlValueSet Frailty_Diagnosis	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074", default);
 
 
     [CqlDeclaration("Frailty Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088")]
-	public CqlValueSet Frailty_Encounter(CqlContext context) => 
+	public CqlValueSet Frailty_Encounter	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088", default);
 
 
     [CqlDeclaration("Frailty Symptom")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075")]
-	public CqlValueSet Frailty_Symptom(CqlContext context) => 
+	public CqlValueSet Frailty_Symptom	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075", default);
 
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-	public CqlValueSet Home_Healthcare_Services(CqlContext context) => 
+	public CqlValueSet Home_Healthcare_Services	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
 
     [CqlDeclaration("Hospice care ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15")]
-	public CqlValueSet Hospice_care_ambulatory(CqlContext context) => 
+	public CqlValueSet Hospice_care_ambulatory	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15", default);
 
 
     [CqlDeclaration("Malignant Neoplasm of Colon")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1001")]
-	public CqlValueSet Malignant_Neoplasm_of_Colon(CqlContext context) => 
+	public CqlValueSet Malignant_Neoplasm_of_Colon	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1001", default);
 
 
     [CqlDeclaration("Nonacute Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1084")]
-	public CqlValueSet Nonacute_Inpatient(CqlContext context) => 
+	public CqlValueSet Nonacute_Inpatient	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1084", default);
 
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
-	public CqlValueSet Nursing_Facility_Visit(CqlContext context) => 
+	public CqlValueSet Nursing_Facility_Visit	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
 
     [CqlDeclaration("Observation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1086")]
-	public CqlValueSet Observation(CqlContext context) => 
+	public CqlValueSet Observation	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1086", default);
 
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public CqlValueSet Office_Visit(CqlContext context) => 
+	public CqlValueSet Office_Visit	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-	public CqlValueSet Online_Assessments(CqlContext context) => 
+	public CqlValueSet Online_Assessments	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
 
     [CqlDeclaration("Outpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1087")]
-	public CqlValueSet Outpatient(CqlContext context) => 
+	public CqlValueSet Outpatient	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1087", default);
 
 
     [CqlDeclaration("Preventive Care Services - Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-	public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up(CqlContext context) => 
+	public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
 
     [CqlDeclaration("Preventive Care Services-Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-	public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) => 
+	public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-	public CqlValueSet Telephone_Visits(CqlContext context) => 
+	public CqlValueSet Telephone_Visits	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
 
     [CqlDeclaration("Total Colectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1019")]
-	public CqlValueSet Total_Colectomy(CqlContext context) => 
+	public CqlValueSet Total_Colectomy	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1019", default);
 
 
     [CqlDeclaration("Total Colectomy ICD9")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.11.1136")]
-	public CqlValueSet Total_Colectomy_ICD9(CqlContext context) => 
+	public CqlValueSet Total_Colectomy_ICD9	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.11.1136", default);
 
 
     [CqlDeclaration("laboratory")]
-	public CqlCode laboratory(CqlContext context) => 
+	public CqlCode laboratory	(CqlContext context) => 
 		new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
 
     [CqlDeclaration("ObservationCategoryCodes")]
-	public CqlCode[] ObservationCategoryCodes(CqlContext context)
+	public CqlCode[] ObservationCategoryCodes	(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
@@ -228,7 +228,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period	(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2021, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2022, 1, 1, 0, 0, 0, 0, default);
@@ -240,7 +240,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient(CqlContext context)
+	public Patient Patient	(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -250,7 +250,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public IEnumerable<Coding> SDE_Ethnicity(CqlContext context)
+	public IEnumerable<Coding> SDE_Ethnicity	(CqlContext context)
 	{
 		IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
 
@@ -259,16 +259,16 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CodeableConcept code, Period period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer	(CqlContext context)
 	{
-		IEnumerable<(CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
+		IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Race")]
-	public IEnumerable<Coding> SDE_Race(CqlContext context)
+	public IEnumerable<Coding> SDE_Race	(CqlContext context)
 	{
 		IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
 
@@ -277,7 +277,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex	(CqlContext context)
 	{
 		CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
 
@@ -286,14 +286,14 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Telehealth Services")]
-	public IEnumerable<Encounter> Telehealth_Services(CqlContext context)
+	public IEnumerable<Encounter> Telehealth_Services	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Online_Assessments(context);
 		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		CqlValueSet c_ = this.Telephone_Visits(context);
 		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
-		bool? f_(Encounter TelehealthEncounter)
+		bool? f_		(Encounter TelehealthEncounter)
 		{
 			Code<Encounter.EncounterStatus> h_ = TelehealthEncounter?.StatusElement;
 			string i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
@@ -313,7 +313,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Age at start of Measurement Period")]
-	public int? Age_at_start_of_Measurement_Period(CqlContext context)
+	public int? Age_at_start_of_Measurement_Period	(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -329,7 +329,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Initial Population")]
-	public bool? Initial_Population(CqlContext context)
+	public bool? Initial_Population	(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -352,7 +352,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Denominator")]
-	public bool? Denominator(CqlContext context)
+	public bool? Denominator	(CqlContext context)
 	{
 		bool? a_ = this.Initial_Population(context);
 
@@ -361,11 +361,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Malignant Neoplasm")]
-	public IEnumerable<Condition> Malignant_Neoplasm(CqlContext context)
+	public IEnumerable<Condition> Malignant_Neoplasm	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Malignant_Neoplasm_of_Colon(context);
 		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-		bool? c_(Condition ColorectalCancer)
+		bool? c_		(Condition ColorectalCancer)
 		{
 			CqlInterval<CqlDateTime> e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, ColorectalCancer);
 			CqlDateTime f_ = context.Operators.Start(e_);
@@ -382,11 +382,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Total Colectomy Performed")]
-	public IEnumerable<Procedure> Total_Colectomy_Performed(CqlContext context)
+	public IEnumerable<Procedure> Total_Colectomy_Performed	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Total_Colectomy(context);
 		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-		bool? c_(Procedure Colectomy)
+		bool? c_		(Procedure Colectomy)
 		{
 			Code<EventStatus> e_ = Colectomy?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
@@ -408,11 +408,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Total Colectomy Condition")]
-	public IEnumerable<Condition> Total_Colectomy_Condition(CqlContext context)
+	public IEnumerable<Condition> Total_Colectomy_Condition	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Total_Colectomy_ICD9(context);
 		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-		bool? c_(Condition ColectomyDx)
+		bool? c_		(Condition ColectomyDx)
 		{
 			CqlInterval<CqlDateTime> e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, ColectomyDx);
 			CqlDateTime f_ = context.Operators.Start(e_);
@@ -429,7 +429,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Denominator Exclusions")]
-	public bool? Denominator_Exclusions(CqlContext context)
+	public bool? Denominator_Exclusions	(CqlContext context)
 	{
 		bool? a_ = HospiceFHIR4_2_3_000.Instance.Has_Hospice(context);
 		IEnumerable<Condition> b_ = this.Malignant_Neoplasm(context);
@@ -463,11 +463,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Fecal Occult Blood Test Display Date, Result, Category, Status")]
-	public IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Occult_Blood_Test_Display_Date__Result__Category__Status	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-		bool? c_(Observation FecalOccult)
+		bool? c_		(Observation FecalOccult)
 		{
 			DataType g_ = FecalOccult?.Effective;
 			CqlDateTime h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, g_);
@@ -482,13 +482,13 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 			return p_;
 		};
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
-		(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? e_(Observation FecalOccult)
+		(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? e_		(Observation FecalOccult)
 		{
 			DataType q_ = FecalOccult?.Effective;
 			CqlDateTime r_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, q_);
 			DataType s_ = FecalOccult?.Value;
 			IEnumerable<Coding> t_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(s_, "coding");
-			bool? u_(Coding @this)
+			bool? u_			(Coding @this)
 			{
 				FhirString ao_ = @this?.DisplayElement;
 				bool? ap_ = context.Operators.Not((bool?)(ao_ is null));
@@ -496,7 +496,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 				return ap_;
 			};
 			IEnumerable<Coding> v_ = context.Operators.Where<Coding>(t_, u_);
-			FhirString w_(Coding @this)
+			FhirString w_			(Coding @this)
 			{
 				FhirString aq_ = @this?.DisplayElement;
 
@@ -504,7 +504,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 			};
 			IEnumerable<FhirString> x_ = context.Operators.Select<Coding, FhirString>(v_, w_);
 			List<CodeableConcept> y_ = FecalOccult?.Category;
-			bool? z_(CodeableConcept @this)
+			bool? z_			(CodeableConcept @this)
 			{
 				List<Coding> ar_ = @this?.Coding;
 				bool? as_ = context.Operators.Not((bool?)(ar_ is null));
@@ -512,7 +512,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 				return as_;
 			};
 			IEnumerable<CodeableConcept> aa_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)y_, z_);
-			List<Coding> ab_(CodeableConcept @this)
+			List<Coding> ab_			(CodeableConcept @this)
 			{
 				List<Coding> at_ = @this?.Coding;
 
@@ -520,7 +520,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 			};
 			IEnumerable<List<Coding>> ac_ = context.Operators.Select<CodeableConcept, List<Coding>>(aa_, ab_);
 			IEnumerable<Coding> ad_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)ac_);
-			bool? ae_(Coding @this)
+			bool? ae_			(Coding @this)
 			{
 				Code au_ = @this?.CodeElement;
 				bool? av_ = context.Operators.Not((bool?)(au_ is null));
@@ -528,14 +528,14 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 				return av_;
 			};
 			IEnumerable<Coding> af_ = context.Operators.Where<Coding>(ad_, ae_);
-			Code ag_(Coding @this)
+			Code ag_			(Coding @this)
 			{
 				Code aw_ = @this?.CodeElement;
 
 				return aw_;
 			};
 			IEnumerable<Code> ah_ = context.Operators.Select<Coding, Code>(af_, ag_);
-			bool? ai_(Code @this)
+			bool? ai_			(Code @this)
 			{
 				string ax_ = @this?.Value;
 				bool? ay_ = context.Operators.Not((bool?)(ax_ is null));
@@ -543,7 +543,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 				return ay_;
 			};
 			IEnumerable<Code> aj_ = context.Operators.Where<Code>(ah_, ai_);
-			string ak_(Code @this)
+			string ak_			(Code @this)
 			{
 				string az_ = @this?.Value;
 
@@ -551,22 +551,22 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 			};
 			IEnumerable<string> al_ = context.Operators.Select<Code, string>(aj_, ak_);
 			Code<ObservationStatus> am_ = FecalOccult?.StatusElement;
-			(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? an_ = (r_, x_, al_, am_);
+			(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? an_ = (default(CqlTupleMetadata), r_, x_, al_, am_);
 
 			return an_;
 		};
-		IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> f_ = context.Operators.Select<Observation, (CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(d_, e_);
+		IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> f_ = context.Operators.Select<Observation, (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(d_, e_);
 
 		return f_;
 	}
 
 
     [CqlDeclaration("Fecal Occult Blood Test Performed")]
-	public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed(CqlContext context)
+	public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-		bool? c_(Observation FecalOccult)
+		bool? c_		(Observation FecalOccult)
 		{
 			Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
@@ -577,10 +577,10 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 			];
 			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = FecalOccult?.Category;
-			bool? j_(CodeableConcept FecalOccultCategory)
+			bool? j_			(CodeableConcept FecalOccultCategory)
 			{
 				List<Coding> v_ = FecalOccultCategory?.Coding;
-				bool? w_(Coding @this)
+				bool? w_				(Coding @this)
 				{
 					Code ag_ = @this?.CodeElement;
 					bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
@@ -588,14 +588,14 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 					return ah_;
 				};
 				IEnumerable<Coding> x_ = context.Operators.Where<Coding>((IEnumerable<Coding>)v_, w_);
-				Code y_(Coding @this)
+				Code y_				(Coding @this)
 				{
 					Code ai_ = @this?.CodeElement;
 
 					return ai_;
 				};
 				IEnumerable<Code> z_ = context.Operators.Select<Coding, Code>(x_, y_);
-				bool? aa_(Code @this)
+				bool? aa_				(Code @this)
 				{
 					string aj_ = @this?.Value;
 					bool? ak_ = context.Operators.Not((bool?)(aj_ is null));
@@ -603,7 +603,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 					return ak_;
 				};
 				IEnumerable<Code> ab_ = context.Operators.Where<Code>(z_, aa_);
-				string ac_(Code @this)
+				string ac_				(Code @this)
 				{
 					string al_ = @this?.Value;
 
@@ -638,11 +638,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Fecal Occult Blood Test Performed, day of TZoffset")]
-	public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed__day_of_TZoffset(CqlContext context)
+	public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed__day_of_TZoffset	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-		bool? c_(Observation FecalOccult)
+		bool? c_		(Observation FecalOccult)
 		{
 			Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
@@ -653,10 +653,10 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 			];
 			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = FecalOccult?.Category;
-			bool? j_(CodeableConcept FecalOccultCategory)
+			bool? j_			(CodeableConcept FecalOccultCategory)
 			{
 				List<Coding> v_ = FecalOccultCategory?.Coding;
-				bool? w_(Coding @this)
+				bool? w_				(Coding @this)
 				{
 					Code ag_ = @this?.CodeElement;
 					bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
@@ -664,14 +664,14 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 					return ah_;
 				};
 				IEnumerable<Coding> x_ = context.Operators.Where<Coding>((IEnumerable<Coding>)v_, w_);
-				Code y_(Coding @this)
+				Code y_				(Coding @this)
 				{
 					Code ai_ = @this?.CodeElement;
 
 					return ai_;
 				};
 				IEnumerable<Code> z_ = context.Operators.Select<Coding, Code>(x_, y_);
-				bool? aa_(Code @this)
+				bool? aa_				(Code @this)
 				{
 					string aj_ = @this?.Value;
 					bool? ak_ = context.Operators.Not((bool?)(aj_ is null));
@@ -679,7 +679,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 					return ak_;
 				};
 				IEnumerable<Code> ab_ = context.Operators.Where<Code>(z_, aa_);
-				string ac_(Code @this)
+				string ac_				(Code @this)
 				{
 					string al_ = @this?.Value;
 
@@ -714,17 +714,17 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Fecal Occult Blood Test Performed without appropriate category, ignore status, day of TZoffset")]
-	public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset(CqlContext context)
+	public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_category__ignore_status__day_of_TZoffset	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-		bool? c_(Observation FecalOccult)
+		bool? c_		(Observation FecalOccult)
 		{
 			List<CodeableConcept> e_ = FecalOccult?.Category;
-			bool? f_(CodeableConcept FecalOccultCategory)
+			bool? f_			(CodeableConcept FecalOccultCategory)
 			{
 				List<Coding> q_ = FecalOccultCategory?.Coding;
-				bool? r_(Coding @this)
+				bool? r_				(Coding @this)
 				{
 					Code ac_ = @this?.CodeElement;
 					bool? ad_ = context.Operators.Not((bool?)(ac_ is null));
@@ -732,14 +732,14 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 					return ad_;
 				};
 				IEnumerable<Coding> s_ = context.Operators.Where<Coding>((IEnumerable<Coding>)q_, r_);
-				Code t_(Coding @this)
+				Code t_				(Coding @this)
 				{
 					Code ae_ = @this?.CodeElement;
 
 					return ae_;
 				};
 				IEnumerable<Code> u_ = context.Operators.Select<Coding, Code>(s_, t_);
-				bool? v_(Code @this)
+				bool? v_				(Code @this)
 				{
 					string af_ = @this?.Value;
 					bool? ag_ = context.Operators.Not((bool?)(af_ is null));
@@ -747,7 +747,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 					return ag_;
 				};
 				IEnumerable<Code> w_ = context.Operators.Where<Code>(u_, v_);
-				string x_(Code @this)
+				string x_				(Code @this)
 				{
 					string ah_ = @this?.Value;
 
@@ -782,11 +782,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Fecal Occult Blood Test Performed without appropriate status, ignore category, day of TZoffset")]
-	public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset(CqlContext context)
+	public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed_without_appropriate_status__ignore_category__day_of_TZoffset	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-		bool? c_(Observation FecalOccult)
+		bool? c_		(Observation FecalOccult)
 		{
 			Code<ObservationStatus> e_ = FecalOccult?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
@@ -815,11 +815,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Fecal Immunochemical Test DNA Display Date, Result, Category, Status")]
-	public IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> Fecal_Immunochemical_Test_DNA_Display_Date__Result__Category__Status	(CqlContext context)
 	{
 		CqlValueSet a_ = this.FIT_DNA(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-		bool? c_(Observation FitDNA)
+		bool? c_		(Observation FitDNA)
 		{
 			DataType g_ = FitDNA?.Effective;
 			CqlDateTime h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, g_);
@@ -837,13 +837,13 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 			return t_;
 		};
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
-		(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? e_(Observation FitDNA)
+		(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? e_		(Observation FitDNA)
 		{
 			DataType u_ = FitDNA?.Effective;
 			CqlDateTime v_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, u_);
 			DataType w_ = FitDNA?.Value;
 			IEnumerable<Coding> x_ = context.Operators.LateBoundProperty<IEnumerable<Coding>>(w_, "coding");
-			bool? y_(Coding @this)
+			bool? y_			(Coding @this)
 			{
 				FhirString as_ = @this?.DisplayElement;
 				bool? at_ = context.Operators.Not((bool?)(as_ is null));
@@ -851,7 +851,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 				return at_;
 			};
 			IEnumerable<Coding> z_ = context.Operators.Where<Coding>(x_, y_);
-			FhirString aa_(Coding @this)
+			FhirString aa_			(Coding @this)
 			{
 				FhirString au_ = @this?.DisplayElement;
 
@@ -859,7 +859,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 			};
 			IEnumerable<FhirString> ab_ = context.Operators.Select<Coding, FhirString>(z_, aa_);
 			List<CodeableConcept> ac_ = FitDNA?.Category;
-			bool? ad_(CodeableConcept @this)
+			bool? ad_			(CodeableConcept @this)
 			{
 				List<Coding> av_ = @this?.Coding;
 				bool? aw_ = context.Operators.Not((bool?)(av_ is null));
@@ -867,7 +867,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 				return aw_;
 			};
 			IEnumerable<CodeableConcept> ae_ = context.Operators.Where<CodeableConcept>((IEnumerable<CodeableConcept>)ac_, ad_);
-			List<Coding> af_(CodeableConcept @this)
+			List<Coding> af_			(CodeableConcept @this)
 			{
 				List<Coding> ax_ = @this?.Coding;
 
@@ -875,7 +875,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 			};
 			IEnumerable<List<Coding>> ag_ = context.Operators.Select<CodeableConcept, List<Coding>>(ae_, af_);
 			IEnumerable<Coding> ah_ = context.Operators.Flatten<Coding>((IEnumerable<IEnumerable<Coding>>)ag_);
-			bool? ai_(Coding @this)
+			bool? ai_			(Coding @this)
 			{
 				Code ay_ = @this?.CodeElement;
 				bool? az_ = context.Operators.Not((bool?)(ay_ is null));
@@ -883,14 +883,14 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 				return az_;
 			};
 			IEnumerable<Coding> aj_ = context.Operators.Where<Coding>(ah_, ai_);
-			Code ak_(Coding @this)
+			Code ak_			(Coding @this)
 			{
 				Code ba_ = @this?.CodeElement;
 
 				return ba_;
 			};
 			IEnumerable<Code> al_ = context.Operators.Select<Coding, Code>(aj_, ak_);
-			bool? am_(Code @this)
+			bool? am_			(Code @this)
 			{
 				string bb_ = @this?.Value;
 				bool? bc_ = context.Operators.Not((bool?)(bb_ is null));
@@ -898,7 +898,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 				return bc_;
 			};
 			IEnumerable<Code> an_ = context.Operators.Where<Code>(al_, am_);
-			string ao_(Code @this)
+			string ao_			(Code @this)
 			{
 				string bd_ = @this?.Value;
 
@@ -906,22 +906,22 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 			};
 			IEnumerable<string> ap_ = context.Operators.Select<Code, string>(an_, ao_);
 			Code<ObservationStatus> aq_ = FitDNA?.StatusElement;
-			(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? ar_ = (v_, ab_, ap_, aq_);
+			(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? ar_ = (default(CqlTupleMetadata), v_, ab_, ap_, aq_);
 
 			return ar_;
 		};
-		IEnumerable<(CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> f_ = context.Operators.Select<Observation, (CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(d_, e_);
+		IEnumerable<(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?> f_ = context.Operators.Select<Observation, (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)?>(d_, e_);
 
 		return f_;
 	}
 
 
     [CqlDeclaration("Fecal Immunochemical Test DNA Performed")]
-	public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed(CqlContext context)
+	public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed	(CqlContext context)
 	{
 		CqlValueSet a_ = this.FIT_DNA(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-		bool? c_(Observation FitDNA)
+		bool? c_		(Observation FitDNA)
 		{
 			Code<ObservationStatus> e_ = FitDNA?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
@@ -932,10 +932,10 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 			];
 			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = FitDNA?.Category;
-			bool? j_(CodeableConcept FitDNACategory)
+			bool? j_			(CodeableConcept FitDNACategory)
 			{
 				List<Coding> af_ = FitDNACategory?.Coding;
-				bool? ag_(Coding @this)
+				bool? ag_				(Coding @this)
 				{
 					Code aq_ = @this?.CodeElement;
 					bool? ar_ = context.Operators.Not((bool?)(aq_ is null));
@@ -943,14 +943,14 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 					return ar_;
 				};
 				IEnumerable<Coding> ah_ = context.Operators.Where<Coding>((IEnumerable<Coding>)af_, ag_);
-				Code ai_(Coding @this)
+				Code ai_				(Coding @this)
 				{
 					Code as_ = @this?.CodeElement;
 
 					return as_;
 				};
 				IEnumerable<Code> aj_ = context.Operators.Select<Coding, Code>(ah_, ai_);
-				bool? ak_(Code @this)
+				bool? ak_				(Code @this)
 				{
 					string at_ = @this?.Value;
 					bool? au_ = context.Operators.Not((bool?)(at_ is null));
@@ -958,7 +958,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 					return au_;
 				};
 				IEnumerable<Code> al_ = context.Operators.Where<Code>(aj_, ak_);
-				string am_(Code @this)
+				string am_				(Code @this)
 				{
 					string av_ = @this?.Value;
 
@@ -1001,11 +1001,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Fecal Immunochemical Test DNA Performed, day of TZoffset")]
-	public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset(CqlContext context)
+	public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed__day_of_TZoffset	(CqlContext context)
 	{
 		CqlValueSet a_ = this.FIT_DNA(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-		bool? c_(Observation FitDNA)
+		bool? c_		(Observation FitDNA)
 		{
 			Code<ObservationStatus> e_ = FitDNA?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
@@ -1016,10 +1016,10 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 			];
 			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = FitDNA?.Category;
-			bool? j_(CodeableConcept FitDNACategory)
+			bool? j_			(CodeableConcept FitDNACategory)
 			{
 				List<Coding> af_ = FitDNACategory?.Coding;
-				bool? ag_(Coding @this)
+				bool? ag_				(Coding @this)
 				{
 					Code aq_ = @this?.CodeElement;
 					bool? ar_ = context.Operators.Not((bool?)(aq_ is null));
@@ -1027,14 +1027,14 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 					return ar_;
 				};
 				IEnumerable<Coding> ah_ = context.Operators.Where<Coding>((IEnumerable<Coding>)af_, ag_);
-				Code ai_(Coding @this)
+				Code ai_				(Coding @this)
 				{
 					Code as_ = @this?.CodeElement;
 
 					return as_;
 				};
 				IEnumerable<Code> aj_ = context.Operators.Select<Coding, Code>(ah_, ai_);
-				bool? ak_(Code @this)
+				bool? ak_				(Code @this)
 				{
 					string at_ = @this?.Value;
 					bool? au_ = context.Operators.Not((bool?)(at_ is null));
@@ -1042,7 +1042,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 					return au_;
 				};
 				IEnumerable<Code> al_ = context.Operators.Where<Code>(aj_, ak_);
-				string am_(Code @this)
+				string am_				(Code @this)
 				{
 					string av_ = @this?.Value;
 
@@ -1085,17 +1085,17 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Fecal Immunochemical Test DNA Performed without appropriate category, ignore status, day of TZoffset")]
-	public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset(CqlContext context)
+	public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_category__ignore_status__day_of_TZoffset	(CqlContext context)
 	{
 		CqlValueSet a_ = this.FIT_DNA(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-		bool? c_(Observation FitDNA)
+		bool? c_		(Observation FitDNA)
 		{
 			List<CodeableConcept> e_ = FitDNA?.Category;
-			bool? f_(CodeableConcept FitDNACategory)
+			bool? f_			(CodeableConcept FitDNACategory)
 			{
 				List<Coding> aa_ = FitDNACategory?.Coding;
-				bool? ab_(Coding @this)
+				bool? ab_				(Coding @this)
 				{
 					Code am_ = @this?.CodeElement;
 					bool? an_ = context.Operators.Not((bool?)(am_ is null));
@@ -1103,14 +1103,14 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 					return an_;
 				};
 				IEnumerable<Coding> ac_ = context.Operators.Where<Coding>((IEnumerable<Coding>)aa_, ab_);
-				Code ad_(Coding @this)
+				Code ad_				(Coding @this)
 				{
 					Code ao_ = @this?.CodeElement;
 
 					return ao_;
 				};
 				IEnumerable<Code> ae_ = context.Operators.Select<Coding, Code>(ac_, ad_);
-				bool? af_(Code @this)
+				bool? af_				(Code @this)
 				{
 					string ap_ = @this?.Value;
 					bool? aq_ = context.Operators.Not((bool?)(ap_ is null));
@@ -1118,7 +1118,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 					return aq_;
 				};
 				IEnumerable<Code> ag_ = context.Operators.Where<Code>(ae_, af_);
-				string ah_(Code @this)
+				string ah_				(Code @this)
 				{
 					string ar_ = @this?.Value;
 
@@ -1161,11 +1161,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Fecal Immunochemical Test DNA Performed without appropriate status, ignore category, day of TZoffset")]
-	public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset(CqlContext context)
+	public IEnumerable<Observation> Fecal_Immunochemical_Test_DNA_Performed_without_appropriate_status__ignore_category__day_of_TZoffset	(CqlContext context)
 	{
 		CqlValueSet a_ = this.FIT_DNA(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-		bool? c_(Observation FitDNA)
+		bool? c_		(Observation FitDNA)
 		{
 			Code<ObservationStatus> e_ = FitDNA?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
@@ -1202,11 +1202,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("CT Colonography Display Date")]
-	public IEnumerable<CqlDateTime> CT_Colonography_Display_Date(CqlContext context)
+	public IEnumerable<CqlDateTime> CT_Colonography_Display_Date	(CqlContext context)
 	{
 		CqlValueSet a_ = this.CT_Colonography(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-		bool? c_(Observation Colonography)
+		bool? c_		(Observation Colonography)
 		{
 			DataType g_ = Colonography?.Effective;
 			CqlInterval<CqlDateTime> h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, g_);
@@ -1225,7 +1225,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 			return u_;
 		};
 		IEnumerable<Observation> d_ = context.Operators.Where<Observation>(b_, c_);
-		CqlDateTime e_(Observation Colonography)
+		CqlDateTime e_		(Observation Colonography)
 		{
 			DataType v_ = Colonography?.Effective;
 			CqlDateTime w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, v_);
@@ -1239,11 +1239,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("CT Colonography Performed")]
-	public IEnumerable<Observation> CT_Colonography_Performed(CqlContext context)
+	public IEnumerable<Observation> CT_Colonography_Performed	(CqlContext context)
 	{
 		CqlValueSet a_ = this.CT_Colonography(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-		bool? c_(Observation Colonography)
+		bool? c_		(Observation Colonography)
 		{
 			Code<ObservationStatus> e_ = Colonography?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
@@ -1278,11 +1278,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("CT Colonography Performed without appropriate status")]
-	public IEnumerable<Observation> CT_Colonography_Performed_without_appropriate_status(CqlContext context)
+	public IEnumerable<Observation> CT_Colonography_Performed_without_appropriate_status	(CqlContext context)
 	{
 		CqlValueSet a_ = this.CT_Colonography(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-		bool? c_(Observation Colonography)
+		bool? c_		(Observation Colonography)
 		{
 			Code<ObservationStatus> e_ = Colonography?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
@@ -1318,11 +1318,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Flexible Sigmoidoscopy Display Date")]
-	public IEnumerable<CqlDateTime> Flexible_Sigmoidoscopy_Display_Date(CqlContext context)
+	public IEnumerable<CqlDateTime> Flexible_Sigmoidoscopy_Display_Date	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Flexible_Sigmoidoscopy(context);
 		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-		bool? c_(Procedure FlexibleSigmoidoscopy)
+		bool? c_		(Procedure FlexibleSigmoidoscopy)
 		{
 			DataType g_ = FlexibleSigmoidoscopy?.Performed;
 			CqlInterval<CqlDateTime> h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, g_);
@@ -1341,7 +1341,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 			return u_;
 		};
 		IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
-		CqlDateTime e_(Procedure FlexibleSigmoidoscopy)
+		CqlDateTime e_		(Procedure FlexibleSigmoidoscopy)
 		{
 			DataType v_ = FlexibleSigmoidoscopy?.Performed;
 			CqlDateTime w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, v_);
@@ -1355,11 +1355,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Flexible Sigmoidoscopy Performed")]
-	public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed(CqlContext context)
+	public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Flexible_Sigmoidoscopy(context);
 		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-		bool? c_(Procedure FlexibleSigmoidoscopy)
+		bool? c_		(Procedure FlexibleSigmoidoscopy)
 		{
 			Code<EventStatus> e_ = FlexibleSigmoidoscopy?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
@@ -1388,11 +1388,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Flexible Sigmoidoscopy Performed without appropriate status")]
-	public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_without_appropriate_status(CqlContext context)
+	public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed_without_appropriate_status	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Flexible_Sigmoidoscopy(context);
 		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-		bool? c_(Procedure FlexibleSigmoidoscopy)
+		bool? c_		(Procedure FlexibleSigmoidoscopy)
 		{
 			Code<EventStatus> e_ = FlexibleSigmoidoscopy?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
@@ -1422,11 +1422,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Colonoscopy Display Date")]
-	public IEnumerable<CqlDateTime> Colonoscopy_Display_Date(CqlContext context)
+	public IEnumerable<CqlDateTime> Colonoscopy_Display_Date	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Colonoscopy(context);
 		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-		bool? c_(Procedure Colonoscopy)
+		bool? c_		(Procedure Colonoscopy)
 		{
 			DataType g_ = Colonoscopy?.Performed;
 			CqlInterval<CqlDateTime> h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, g_);
@@ -1445,7 +1445,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 			return u_;
 		};
 		IEnumerable<Procedure> d_ = context.Operators.Where<Procedure>(b_, c_);
-		CqlDateTime e_(Procedure Colonoscopy)
+		CqlDateTime e_		(Procedure Colonoscopy)
 		{
 			DataType v_ = Colonoscopy?.Performed;
 			CqlDateTime w_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, v_);
@@ -1459,11 +1459,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Colonoscopy Performed")]
-	public IEnumerable<Procedure> Colonoscopy_Performed(CqlContext context)
+	public IEnumerable<Procedure> Colonoscopy_Performed	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Colonoscopy(context);
 		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-		bool? c_(Procedure Colonoscopy)
+		bool? c_		(Procedure Colonoscopy)
 		{
 			Code<EventStatus> e_ = Colonoscopy?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
@@ -1492,11 +1492,11 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Colonoscopy Performed without appropriate status")]
-	public IEnumerable<Procedure> Colonoscopy_Performed_without_appropriate_status(CqlContext context)
+	public IEnumerable<Procedure> Colonoscopy_Performed_without_appropriate_status	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Colonoscopy(context);
 		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-		bool? c_(Procedure Colonoscopy)
+		bool? c_		(Procedure Colonoscopy)
 		{
 			Code<EventStatus> e_ = Colonoscopy?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
@@ -1526,7 +1526,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Numerator")]
-	public bool? Numerator(CqlContext context)
+	public bool? Numerator	(CqlContext context)
 	{
 		IEnumerable<Procedure> a_ = this.Colonoscopy_Performed(context);
 		bool? b_ = context.Operators.Exists<Procedure>(a_);
@@ -1548,7 +1548,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
 
 
     [CqlDeclaration("Final Numerator Population")]
-	public bool? Final_Numerator_Population(CqlContext context)
+	public bool? Final_Numerator_Population	(CqlContext context)
 	{
 		bool? a_ = this.Numerator(context);
 		bool? b_ = this.Initial_Population(context);

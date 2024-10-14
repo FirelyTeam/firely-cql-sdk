@@ -440,22 +440,22 @@ public partial class PCMaternal_5_16_000 : ILibrary, ISingleton<PCMaternal_5_16_
 				};
 				if (ae_())
 				{
-					DataType aq_ = TimeOfDelivery?.Effective;
-					object ar_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aq_);
+DataType aq_ = TimeOfDelivery?.Effective;
+object ar_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aq_);
 
 					return (ar_ as CqlDateTime) as object;
 				}
 				else if (af_())
 				{
-					DataType as_ = TimeOfDelivery?.Effective;
-					object at_ = FHIRHelpers_4_3_000.Instance.ToValue(context, as_);
+DataType as_ = TimeOfDelivery?.Effective;
+object at_ = FHIRHelpers_4_3_000.Instance.ToValue(context, as_);
 
 					return (at_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (ag_())
 				{
-					DataType au_ = TimeOfDelivery?.Effective;
-					object av_ = FHIRHelpers_4_3_000.Instance.ToValue(context, au_);
+DataType au_ = TimeOfDelivery?.Effective;
+object av_ = FHIRHelpers_4_3_000.Instance.ToValue(context, au_);
 
 					return (av_ as CqlDateTime) as object;
 				}
@@ -505,22 +505,22 @@ public partial class PCMaternal_5_16_000 : ILibrary, ISingleton<PCMaternal_5_16_
 				};
 				if (ay_())
 				{
-					DataType bk_ = @this?.Effective;
-					object bl_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bk_);
+DataType bk_ = @this?.Effective;
+object bl_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bk_);
 
 					return (bl_ as CqlDateTime) as object;
 				}
 				else if (az_())
 				{
-					DataType bm_ = @this?.Effective;
-					object bn_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bm_);
+DataType bm_ = @this?.Effective;
+object bn_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bm_);
 
 					return (bn_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (ba_())
 				{
-					DataType bo_ = @this?.Effective;
-					object bp_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bo_);
+DataType bo_ = @this?.Effective;
+object bp_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bo_);
 
 					return (bp_ as CqlDateTime) as object;
 				}
@@ -590,22 +590,22 @@ public partial class PCMaternal_5_16_000 : ILibrary, ISingleton<PCMaternal_5_16_
 				};
 				if (ag_())
 				{
-					DataType as_ = EstimatedDateOfDelivery?.Effective;
-					object at_ = FHIRHelpers_4_3_000.Instance.ToValue(context, as_);
+DataType as_ = EstimatedDateOfDelivery?.Effective;
+object at_ = FHIRHelpers_4_3_000.Instance.ToValue(context, as_);
 
 					return (at_ as CqlDateTime) as object;
 				}
 				else if (ah_())
 				{
-					DataType au_ = EstimatedDateOfDelivery?.Effective;
-					object av_ = FHIRHelpers_4_3_000.Instance.ToValue(context, au_);
+DataType au_ = EstimatedDateOfDelivery?.Effective;
+object av_ = FHIRHelpers_4_3_000.Instance.ToValue(context, au_);
 
 					return (av_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (ai_())
 				{
-					DataType aw_ = EstimatedDateOfDelivery?.Effective;
-					object ax_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aw_);
+DataType aw_ = EstimatedDateOfDelivery?.Effective;
+object ax_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aw_);
 
 					return (ax_ as CqlDateTime) as object;
 				}
@@ -657,22 +657,22 @@ public partial class PCMaternal_5_16_000 : ILibrary, ISingleton<PCMaternal_5_16_
 				};
 				if (ba_())
 				{
-					DataType bm_ = @this?.Effective;
-					object bn_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bm_);
+DataType bm_ = @this?.Effective;
+object bn_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bm_);
 
 					return (bn_ as CqlDateTime) as object;
 				}
 				else if (bb_())
 				{
-					DataType bo_ = @this?.Effective;
-					object bp_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bo_);
+DataType bo_ = @this?.Effective;
+object bp_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bo_);
 
 					return (bp_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (bc_())
 				{
-					DataType bq_ = @this?.Effective;
-					object br_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bq_);
+DataType bq_ = @this?.Effective;
+object br_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bq_);
 
 					return (br_ as CqlDateTime) as object;
 				}
@@ -706,19 +706,19 @@ public partial class PCMaternal_5_16_000 : ILibrary, ISingleton<PCMaternal_5_16_
 
 
     [CqlDeclaration("Variable Calculated Gestational Age")]
-	public IEnumerable<(string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> Variable_Calculated_Gestational_Age(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Delivery_Encounter_with_Age_Range(context);
-		(string EncounterID, int? CalculatedCGA)? b_(Encounter DeliveryEncounter)
+		(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)? b_(Encounter DeliveryEncounter)
 		{
 			Id d_ = DeliveryEncounter?.IdElement;
 			string e_ = d_?.Value;
 			int? f_ = this.calculatedGestationalAge(context, DeliveryEncounter);
-			(string EncounterID, int? CalculatedCGA)? g_ = (e_, f_);
+			(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)? g_ = (default(CqlTupleMetadata), e_, f_);
 
 			return g_;
 		};
-		IEnumerable<(string EncounterID, int? CalculatedCGA)?> c_ = context.Operators.Select<Encounter, (string EncounterID, int? CalculatedCGA)?>(a_, b_);
+		IEnumerable<(CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?> c_ = context.Operators.Select<Encounter, (CqlTupleMetadata, string EncounterID, int? CalculatedCGA)?>(a_, b_);
 
 		return c_;
 	}
@@ -757,22 +757,22 @@ public partial class PCMaternal_5_16_000 : ILibrary, ISingleton<PCMaternal_5_16_
 				};
 				if (at_())
 				{
-					DataType bf_ = EstimatedGestationalAge?.Effective;
-					object bg_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bf_);
+DataType bf_ = EstimatedGestationalAge?.Effective;
+object bg_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bf_);
 
 					return (bg_ as CqlDateTime) as object;
 				}
 				else if (au_())
 				{
-					DataType bh_ = EstimatedGestationalAge?.Effective;
-					object bi_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bh_);
+DataType bh_ = EstimatedGestationalAge?.Effective;
+object bi_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bh_);
 
 					return (bi_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (av_())
 				{
-					DataType bj_ = EstimatedGestationalAge?.Effective;
-					object bk_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bj_);
+DataType bj_ = EstimatedGestationalAge?.Effective;
+object bk_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bj_);
 
 					return (bk_ as CqlDateTime) as object;
 				}
@@ -832,22 +832,22 @@ public partial class PCMaternal_5_16_000 : ILibrary, ISingleton<PCMaternal_5_16_
 				};
 				if (bl_())
 				{
-					DataType bx_ = EstimatedGestationalAge?.Effective;
-					object by_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bx_);
+DataType bx_ = EstimatedGestationalAge?.Effective;
+object by_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bx_);
 
 					return (by_ as CqlDateTime) as object;
 				}
 				else if (bm_())
 				{
-					DataType bz_ = EstimatedGestationalAge?.Effective;
-					object ca_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bz_);
+DataType bz_ = EstimatedGestationalAge?.Effective;
+object ca_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bz_);
 
 					return (ca_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (bn_())
 				{
-					DataType cb_ = EstimatedGestationalAge?.Effective;
-					object cc_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cb_);
+DataType cb_ = EstimatedGestationalAge?.Effective;
+object cc_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cb_);
 
 					return (cc_ as CqlDateTime) as object;
 				}
@@ -886,22 +886,22 @@ public partial class PCMaternal_5_16_000 : ILibrary, ISingleton<PCMaternal_5_16_
 				};
 				if (cd_())
 				{
-					DataType cp_ = EstimatedGestationalAge?.Effective;
-					object cq_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cp_);
+DataType cp_ = EstimatedGestationalAge?.Effective;
+object cq_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cp_);
 
 					return (cq_ as CqlDateTime) as object;
 				}
 				else if (ce_())
 				{
-					DataType cr_ = EstimatedGestationalAge?.Effective;
-					object cs_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cr_);
+DataType cr_ = EstimatedGestationalAge?.Effective;
+object cs_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cr_);
 
 					return (cs_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (cf_())
 				{
-					DataType ct_ = EstimatedGestationalAge?.Effective;
-					object cu_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ct_);
+DataType ct_ = EstimatedGestationalAge?.Effective;
+object cu_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ct_);
 
 					return (cu_ as CqlDateTime) as object;
 				}
@@ -952,22 +952,22 @@ public partial class PCMaternal_5_16_000 : ILibrary, ISingleton<PCMaternal_5_16_
 				};
 				if (cx_())
 				{
-					DataType dj_ = @this?.Effective;
-					object dk_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dj_);
+DataType dj_ = @this?.Effective;
+object dk_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dj_);
 
 					return (dk_ as CqlDateTime) as object;
 				}
 				else if (cy_())
 				{
-					DataType dl_ = @this?.Effective;
-					object dm_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dl_);
+DataType dl_ = @this?.Effective;
+object dm_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dl_);
 
 					return (dm_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (cz_())
 				{
-					DataType dn_ = @this?.Effective;
-					object do_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dn_);
+DataType dn_ = @this?.Effective;
+object do_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dn_);
 
 					return (do_ as CqlDateTime) as object;
 				}

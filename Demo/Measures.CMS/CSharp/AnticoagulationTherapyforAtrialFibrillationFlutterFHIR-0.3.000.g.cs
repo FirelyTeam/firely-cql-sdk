@@ -233,22 +233,22 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 					};
 					if (bu_())
 					{
-						DataType cg_ = AtrialAblationObservation?.Effective;
-						object ch_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cg_);
+DataType cg_ = AtrialAblationObservation?.Effective;
+object ch_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cg_);
 
 						return (ch_ as CqlDateTime) as object;
 					}
 					else if (bv_())
 					{
-						DataType ci_ = AtrialAblationObservation?.Effective;
-						object cj_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ci_);
+DataType ci_ = AtrialAblationObservation?.Effective;
+object cj_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ci_);
 
 						return (cj_ as CqlInterval<CqlDateTime>) as object;
 					}
 					else if (bw_())
 					{
-						DataType ck_ = AtrialAblationObservation?.Effective;
-						object cl_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ck_);
+DataType ck_ = AtrialAblationObservation?.Effective;
+object cl_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ck_);
 
 						return (cl_ as CqlDateTime) as object;
 					}
@@ -579,27 +579,27 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
+		IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
 		return a_;
 	}

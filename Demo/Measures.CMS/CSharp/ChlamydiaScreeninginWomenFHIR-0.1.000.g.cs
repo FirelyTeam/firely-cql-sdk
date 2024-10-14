@@ -222,27 +222,27 @@ public partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ILibrary, ISingleto
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
+		IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
 		return a_;
 	}
@@ -332,10 +332,10 @@ public partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ILibrary, ISingleto
 				}
 				else
 				{
-					CqlInterval<CqlDateTime> v_ = this.Measurement_Period(context);
-					CqlDateTime w_ = context.Operators.End(v_);
-					CqlDateTime y_ = context.Operators.End(v_);
-					CqlInterval<CqlDateTime> z_ = context.Operators.Interval(w_, y_, true, true);
+CqlInterval<CqlDateTime> v_ = this.Measurement_Period(context);
+CqlDateTime w_ = context.Operators.End(v_);
+CqlDateTime y_ = context.Operators.End(v_);
+CqlInterval<CqlDateTime> z_ = context.Operators.Interval(w_, y_, true, true);
 
 					return z_;
 				}
@@ -753,22 +753,22 @@ public partial class ChlamydiaScreeninginWomenFHIR_0_1_000 : ILibrary, ISingleto
 				};
 				if (o_())
 				{
-					DataType aa_ = ChlamydiaTest?.Effective;
-					object ab_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
+DataType aa_ = ChlamydiaTest?.Effective;
+object ab_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
 
 					return (ab_ as CqlDateTime) as object;
 				}
 				else if (p_())
 				{
-					DataType ac_ = ChlamydiaTest?.Effective;
-					object ad_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ac_);
+DataType ac_ = ChlamydiaTest?.Effective;
+object ad_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ac_);
 
 					return (ad_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (q_())
 				{
-					DataType ae_ = ChlamydiaTest?.Effective;
-					object af_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ae_);
+DataType ae_ = ChlamydiaTest?.Effective;
+object af_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ae_);
 
 					return (af_ as CqlDateTime) as object;
 				}

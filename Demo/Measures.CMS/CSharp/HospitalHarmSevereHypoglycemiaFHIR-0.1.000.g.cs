@@ -27,42 +27,42 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
     [CqlDeclaration("birth date")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4")]
-	public CqlValueSet birth_date(CqlContext context) => 
+	public CqlValueSet birth_date	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4", default);
 
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
-	public CqlValueSet Emergency_Department_Visit(CqlContext context) => 
+	public CqlValueSet Emergency_Department_Visit	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public CqlValueSet Encounter_Inpatient(CqlContext context) => 
+	public CqlValueSet Encounter_Inpatient	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
 
     [CqlDeclaration("Glucose Lab Test Mass Per Volume")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.34")]
-	public CqlValueSet Glucose_Lab_Test_Mass_Per_Volume(CqlContext context) => 
+	public CqlValueSet Glucose_Lab_Test_Mass_Per_Volume	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.34", default);
 
 
     [CqlDeclaration("Hypoglycemics Severe Hypoglycemia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1196.393")]
-	public CqlValueSet Hypoglycemics_Severe_Hypoglycemia(CqlContext context) => 
+	public CqlValueSet Hypoglycemics_Severe_Hypoglycemia	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1196.393", default);
 
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
-	public CqlValueSet Observation_Services(CqlContext context) => 
+	public CqlValueSet Observation_Services	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period	(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -74,7 +74,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient(CqlContext context)
+	public Patient Patient	(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -84,11 +84,11 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 
     [CqlDeclaration("Qualifying Encounter")]
-	public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context)
+	public IEnumerable<Encounter> Qualifying_Encounter	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient(context);
 		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-		bool? c_(Encounter InpatientEncounter)
+		bool? c_		(Encounter InpatientEncounter)
 		{
 			Patient e_ = this.Patient(context);
 			Date f_ = e_?.BirthDateElement;
@@ -120,13 +120,13 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 
     [CqlDeclaration("Hypoglycemic Medication Administration")]
-	public IEnumerable<MedicationAdministration> Hypoglycemic_Medication_Administration(CqlContext context)
+	public IEnumerable<MedicationAdministration> Hypoglycemic_Medication_Administration	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Hypoglycemics_Severe_Hypoglycemia(context);
 		IEnumerable<MedicationAdministration> b_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 		IEnumerable<MedicationAdministration> d_ = context.Operators.Retrieve<MedicationAdministration>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationadministration"));
 		IEnumerable<MedicationAdministration> e_ = context.Operators.Union<MedicationAdministration>(b_, d_);
-		bool? f_(MedicationAdministration HypoMedication)
+		bool? f_		(MedicationAdministration HypoMedication)
 		{
 			Code<MedicationAdministration.MedicationAdministrationStatusCodes> h_ = HypoMedication?.StatusElement;
 			MedicationAdministration.MedicationAdministrationStatusCodes? i_ = h_?.Value;
@@ -147,13 +147,13 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 
     [CqlDeclaration("Encounter with Hypoglycemic Medication Administration")]
-	public IEnumerable<Encounter> Encounter_with_Hypoglycemic_Medication_Administration(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Hypoglycemic_Medication_Administration	(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter(context);
-		IEnumerable<Encounter> b_(Encounter InpatientHospitalization)
+		IEnumerable<Encounter> b_		(Encounter InpatientHospitalization)
 		{
 			IEnumerable<MedicationAdministration> d_ = this.Hypoglycemic_Medication_Administration(context);
-			bool? e_(MedicationAdministration HypoglycemicMedication)
+			bool? e_			(MedicationAdministration HypoglycemicMedication)
 			{
 				DataType i_ = HypoglycemicMedication?.Effective;
 				object j_ = FHIRHelpers_4_3_000.Instance.ToValue(context, i_);
@@ -165,7 +165,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 				return n_;
 			};
 			IEnumerable<MedicationAdministration> f_ = context.Operators.Where<MedicationAdministration>(d_, e_);
-			Encounter g_(MedicationAdministration HypoglycemicMedication) => 
+			Encounter g_			(MedicationAdministration HypoglycemicMedication) => 
 				InpatientHospitalization;
 			IEnumerable<Encounter> h_ = context.Operators.Select<MedicationAdministration, Encounter>(f_, g_);
 
@@ -178,7 +178,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 
     [CqlDeclaration("Initial Population")]
-	public IEnumerable<Encounter> Initial_Population(CqlContext context)
+	public IEnumerable<Encounter> Initial_Population	(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Hypoglycemic_Medication_Administration(context);
 
@@ -187,7 +187,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 
     [CqlDeclaration("Denominator")]
-	public IEnumerable<Encounter> Denominator(CqlContext context)
+	public IEnumerable<Encounter> Denominator	(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Initial_Population(context);
 
@@ -196,25 +196,25 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 
     [CqlDeclaration("Glucose Test with Result Less Than 40")]
-	public IEnumerable<Observation> Glucose_Test_with_Result_Less_Than_40(CqlContext context)
+	public IEnumerable<Observation> Glucose_Test_with_Result_Less_Than_40	(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Denominator(context);
 		IEnumerable<MedicationAdministration> b_ = this.Hypoglycemic_Medication_Administration(context);
 		CqlValueSet c_ = this.Glucose_Lab_Test_Mass_Per_Volume(context);
 		IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<ValueTuple<Encounter, MedicationAdministration, Observation>> e_ = context.Operators.CrossJoin<Encounter, MedicationAdministration, Observation>(a_, b_, d_);
-		(Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? f_(ValueTuple<Encounter, MedicationAdministration, Observation> _valueTuple)
+		(CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? f_		(ValueTuple<Encounter, MedicationAdministration, Observation> _valueTuple)
 		{
-			(Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? l_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+			(CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? l_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
 		};
-		IEnumerable<(Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?> g_ = context.Operators.Select<ValueTuple<Encounter, MedicationAdministration, Observation>, (Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?>(e_, f_);
-		bool? h_((Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? tuple_btymmdgachdragrhofgxbxgho)
+		IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?> g_ = context.Operators.Select<ValueTuple<Encounter, MedicationAdministration, Observation>, (CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?>(e_, f_);
+		bool? h_		((CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? tuple_btymmdgachdragrhofgxbxgho)
 		{
-			object m_()
+			object m_			()
 			{
-				bool at_()
+				bool at_				()
 				{
 					DataType aw_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object ax_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aw_);
@@ -222,7 +222,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return ay_;
 				};
-				bool au_()
+				bool au_				()
 				{
 					DataType az_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object ba_ = FHIRHelpers_4_3_000.Instance.ToValue(context, az_);
@@ -230,7 +230,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return bb_;
 				};
-				bool av_()
+				bool av_				()
 				{
 					DataType bc_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object bd_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bc_);
@@ -240,22 +240,22 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 				};
 				if (at_())
 				{
-					DataType bf_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-					object bg_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bf_);
+DataType bf_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+object bg_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bf_);
 
 					return (bg_ as CqlDateTime) as object;
 				}
 				else if (au_())
 				{
-					DataType bh_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-					object bi_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bh_);
+DataType bh_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+object bi_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bh_);
 
 					return (bi_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (av_())
 				{
-					DataType bj_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-					object bk_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bj_);
+DataType bj_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+object bk_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bj_);
 
 					return (bk_ as CqlDateTime) as object;
 				}
@@ -287,9 +287,9 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 			object ad_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ac_);
 			CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.Instance.ToInterval(context, ad_);
 			CqlDateTime af_ = context.Operators.Start(ae_);
-			object ag_()
+			object ag_			()
 			{
-				bool bl_()
+				bool bl_				()
 				{
 					DataType bo_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object bp_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bo_);
@@ -297,7 +297,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return bq_;
 				};
-				bool bm_()
+				bool bm_				()
 				{
 					DataType br_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object bs_ = FHIRHelpers_4_3_000.Instance.ToValue(context, br_);
@@ -305,7 +305,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return bt_;
 				};
-				bool bn_()
+				bool bn_				()
 				{
 					DataType bu_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object bv_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bu_);
@@ -315,22 +315,22 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 				};
 				if (bl_())
 				{
-					DataType bx_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-					object by_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bx_);
+DataType bx_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+object by_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bx_);
 
 					return (by_ as CqlDateTime) as object;
 				}
 				else if (bm_())
 				{
-					DataType bz_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-					object ca_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bz_);
+DataType bz_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+object ca_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bz_);
 
 					return (ca_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (bn_())
 				{
-					DataType cb_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-					object cc_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cb_);
+DataType cb_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+object cc_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cb_);
 
 					return (cc_ as CqlDateTime) as object;
 				}
@@ -342,9 +342,9 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 			CqlDateTime ah_ = QICoreCommon_2_0_000.Instance.Earliest(context, ag_());
 			CqlQuantity ai_ = context.Operators.Quantity(24m, "hours");
 			CqlDateTime aj_ = context.Operators.Subtract(ah_, ai_);
-			object ak_()
+			object ak_			()
 			{
-				bool cd_()
+				bool cd_				()
 				{
 					DataType cg_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object ch_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cg_);
@@ -352,7 +352,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return ci_;
 				};
-				bool ce_()
+				bool ce_				()
 				{
 					DataType cj_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object ck_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cj_);
@@ -360,7 +360,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return cl_;
 				};
-				bool cf_()
+				bool cf_				()
 				{
 					DataType cm_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object cn_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cm_);
@@ -370,22 +370,22 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 				};
 				if (cd_())
 				{
-					DataType cp_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-					object cq_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cp_);
+DataType cp_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+object cq_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cp_);
 
 					return (cq_ as CqlDateTime) as object;
 				}
 				else if (ce_())
 				{
-					DataType cr_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-					object cs_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cr_);
+DataType cr_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+object cs_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cr_);
 
 					return (cs_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (cf_())
 				{
-					DataType ct_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-					object cu_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ct_);
+DataType ct_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+object cu_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ct_);
 
 					return (cu_ as CqlDateTime) as object;
 				}
@@ -397,9 +397,9 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 			CqlDateTime al_ = QICoreCommon_2_0_000.Instance.Earliest(context, ak_());
 			CqlInterval<CqlDateTime> am_ = context.Operators.Interval(aj_, al_, true, true);
 			bool? an_ = context.Operators.In<CqlDateTime>(af_, am_, default);
-			object ao_()
+			object ao_			()
 			{
-				bool cv_()
+				bool cv_				()
 				{
 					DataType cy_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object cz_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cy_);
@@ -407,7 +407,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return da_;
 				};
-				bool cw_()
+				bool cw_				()
 				{
 					DataType db_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object dc_ = FHIRHelpers_4_3_000.Instance.ToValue(context, db_);
@@ -415,7 +415,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return dd_;
 				};
-				bool cx_()
+				bool cx_				()
 				{
 					DataType de_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
 					object df_ = FHIRHelpers_4_3_000.Instance.ToValue(context, de_);
@@ -425,22 +425,22 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 				};
 				if (cv_())
 				{
-					DataType dh_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-					object di_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dh_);
+DataType dh_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+object di_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dh_);
 
 					return (di_ as CqlDateTime) as object;
 				}
 				else if (cw_())
 				{
-					DataType dj_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-					object dk_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dj_);
+DataType dj_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+object dk_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dj_);
 
 					return (dk_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (cx_())
 				{
-					DataType dl_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
-					object dm_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dl_);
+DataType dl_ = tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest?.Effective;
+object dm_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dl_);
 
 					return (dm_ as CqlDateTime) as object;
 				}
@@ -456,35 +456,35 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 			return as_;
 		};
-		IEnumerable<(Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?> i_ = context.Operators.Where<(Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?>(g_, h_);
-		Observation j_((Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? tuple_btymmdgachdragrhofgxbxgho) => 
+		IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?> i_ = context.Operators.Where<(CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?>(g_, h_);
+		Observation j_		((CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? tuple_btymmdgachdragrhofgxbxgho) => 
 			tuple_btymmdgachdragrhofgxbxgho?.GlucoseTest;
-		IEnumerable<Observation> k_ = context.Operators.Select<(Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?, Observation>(i_, j_);
+		IEnumerable<Observation> k_ = context.Operators.Select<(CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)?, Observation>(i_, j_);
 
 		return k_;
 	}
 
 
     [CqlDeclaration("Low Glucose Test Followed By Glucose Test Result Greater Than 80")]
-	public IEnumerable<Observation> Low_Glucose_Test_Followed_By_Glucose_Test_Result_Greater_Than_80(CqlContext context)
+	public IEnumerable<Observation> Low_Glucose_Test_Followed_By_Glucose_Test_Result_Greater_Than_80	(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Denominator(context);
 		IEnumerable<Observation> b_ = this.Glucose_Test_with_Result_Less_Than_40(context);
 		CqlValueSet c_ = this.Glucose_Lab_Test_Mass_Per_Volume(context);
 		IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<ValueTuple<Encounter, Observation, Observation>> e_ = context.Operators.CrossJoin<Encounter, Observation, Observation>(a_, b_, d_);
-		(Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? f_(ValueTuple<Encounter, Observation, Observation> _valueTuple)
+		(CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? f_		(ValueTuple<Encounter, Observation, Observation> _valueTuple)
 		{
-			(Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? l_ = (_valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? l_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
 		};
-		IEnumerable<(Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?> g_ = context.Operators.Select<ValueTuple<Encounter, Observation, Observation>, (Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?>(e_, f_);
-		bool? h_((Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? tuple_clljqcgdejtdiiewkzyjpwapd)
+		IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?> g_ = context.Operators.Select<ValueTuple<Encounter, Observation, Observation>, (CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?>(e_, f_);
+		bool? h_		((CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? tuple_clljqcgdejtdiiewkzyjpwapd)
 		{
-			object m_()
+			object m_			()
 			{
-				bool bd_()
+				bool bd_				()
 				{
 					DataType bg_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
 					object bh_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bg_);
@@ -492,7 +492,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return bi_;
 				};
-				bool be_()
+				bool be_				()
 				{
 					DataType bj_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
 					object bk_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bj_);
@@ -500,7 +500,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return bl_;
 				};
-				bool bf_()
+				bool bf_				()
 				{
 					DataType bm_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
 					object bn_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bm_);
@@ -510,22 +510,22 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 				};
 				if (bd_())
 				{
-					DataType bp_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-					object bq_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bp_);
+DataType bp_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+object bq_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bp_);
 
 					return (bq_ as CqlDateTime) as object;
 				}
 				else if (be_())
 				{
-					DataType br_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-					object bs_ = FHIRHelpers_4_3_000.Instance.ToValue(context, br_);
+DataType br_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+object bs_ = FHIRHelpers_4_3_000.Instance.ToValue(context, br_);
 
 					return (bs_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (bf_())
 				{
-					DataType bt_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-					object bu_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bt_);
+DataType bt_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+object bu_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bt_);
 
 					return (bu_ as CqlDateTime) as object;
 				}
@@ -535,9 +535,9 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 				}
 			};
 			CqlDateTime n_ = QICoreCommon_2_0_000.Instance.Earliest(context, m_());
-			object o_()
+			object o_			()
 			{
-				bool bv_()
+				bool bv_				()
 				{
 					DataType by_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object bz_ = FHIRHelpers_4_3_000.Instance.ToValue(context, by_);
@@ -545,7 +545,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return ca_;
 				};
-				bool bw_()
+				bool bw_				()
 				{
 					DataType cb_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object cc_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cb_);
@@ -553,7 +553,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return cd_;
 				};
-				bool bx_()
+				bool bx_				()
 				{
 					DataType ce_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object cf_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ce_);
@@ -563,22 +563,22 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 				};
 				if (bv_())
 				{
-					DataType ch_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-					object ci_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ch_);
+DataType ch_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+object ci_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ch_);
 
 					return (ci_ as CqlDateTime) as object;
 				}
 				else if (bw_())
 				{
-					DataType cj_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-					object ck_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cj_);
+DataType cj_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+object ck_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cj_);
 
 					return (ck_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (bx_())
 				{
-					DataType cl_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-					object cm_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cl_);
+DataType cl_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+object cm_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cl_);
 
 					return (cm_ as CqlDateTime) as object;
 				}
@@ -588,9 +588,9 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 				}
 			};
 			CqlDateTime p_ = QICoreCommon_2_0_000.Instance.Earliest(context, o_());
-			object q_()
+			object q_			()
 			{
-				bool cn_()
+				bool cn_				()
 				{
 					DataType cq_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object cr_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cq_);
@@ -598,7 +598,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return cs_;
 				};
-				bool co_()
+				bool co_				()
 				{
 					DataType ct_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object cu_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ct_);
@@ -606,7 +606,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return cv_;
 				};
-				bool cp_()
+				bool cp_				()
 				{
 					DataType cw_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object cx_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cw_);
@@ -616,22 +616,22 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 				};
 				if (cn_())
 				{
-					DataType cz_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-					object da_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cz_);
+DataType cz_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+object da_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cz_);
 
 					return (da_ as CqlDateTime) as object;
 				}
 				else if (co_())
 				{
-					DataType db_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-					object dc_ = FHIRHelpers_4_3_000.Instance.ToValue(context, db_);
+DataType db_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+object dc_ = FHIRHelpers_4_3_000.Instance.ToValue(context, db_);
 
 					return (dc_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (cp_())
 				{
-					DataType dd_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-					object de_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dd_);
+DataType dd_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+object de_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dd_);
 
 					return (de_ as CqlDateTime) as object;
 				}
@@ -645,9 +645,9 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 			CqlDateTime t_ = context.Operators.Add(r_, s_);
 			CqlInterval<CqlDateTime> u_ = context.Operators.Interval(p_, t_, false, true);
 			bool? v_ = context.Operators.In<CqlDateTime>(n_, u_, default);
-			object w_()
+			object w_			()
 			{
-				bool df_()
+				bool df_				()
 				{
 					DataType di_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object dj_ = FHIRHelpers_4_3_000.Instance.ToValue(context, di_);
@@ -655,7 +655,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return dk_;
 				};
-				bool dg_()
+				bool dg_				()
 				{
 					DataType dl_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object dm_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dl_);
@@ -663,7 +663,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return dn_;
 				};
-				bool dh_()
+				bool dh_				()
 				{
 					DataType do_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object dp_ = FHIRHelpers_4_3_000.Instance.ToValue(context, do_);
@@ -673,22 +673,22 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 				};
 				if (df_())
 				{
-					DataType dr_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-					object ds_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dr_);
+DataType dr_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+object ds_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dr_);
 
 					return (ds_ as CqlDateTime) as object;
 				}
 				else if (dg_())
 				{
-					DataType dt_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-					object du_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dt_);
+DataType dt_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+object du_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dt_);
 
 					return (du_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (dh_())
 				{
-					DataType dv_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-					object dw_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dv_);
+DataType dv_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+object dw_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dv_);
 
 					return (dw_ as CqlDateTime) as object;
 				}
@@ -700,9 +700,9 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 			CqlDateTime x_ = QICoreCommon_2_0_000.Instance.Earliest(context, w_());
 			bool? y_ = context.Operators.Not((bool?)(x_ is null));
 			bool? z_ = context.Operators.And(v_, y_);
-			object aa_()
+			object aa_			()
 			{
-				bool dx_()
+				bool dx_				()
 				{
 					DataType ea_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object eb_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ea_);
@@ -710,7 +710,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return ec_;
 				};
-				bool dy_()
+				bool dy_				()
 				{
 					DataType ed_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object ee_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ed_);
@@ -718,7 +718,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return ef_;
 				};
-				bool dz_()
+				bool dz_				()
 				{
 					DataType eg_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
 					object eh_ = FHIRHelpers_4_3_000.Instance.ToValue(context, eg_);
@@ -728,22 +728,22 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 				};
 				if (dx_())
 				{
-					DataType ej_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-					object ek_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ej_);
+DataType ej_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+object ek_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ej_);
 
 					return (ek_ as CqlDateTime) as object;
 				}
 				else if (dy_())
 				{
-					DataType el_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-					object em_ = FHIRHelpers_4_3_000.Instance.ToValue(context, el_);
+DataType el_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+object em_ = FHIRHelpers_4_3_000.Instance.ToValue(context, el_);
 
 					return (em_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (dz_())
 				{
-					DataType en_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
-					object eo_ = FHIRHelpers_4_3_000.Instance.ToValue(context, en_);
+DataType en_ = tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest?.Effective;
+object eo_ = FHIRHelpers_4_3_000.Instance.ToValue(context, en_);
 
 					return (eo_ as CqlDateTime) as object;
 				}
@@ -756,9 +756,9 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 			CqlInterval<CqlDateTime> ac_ = CQMCommon_2_0_000.Instance.HospitalizationWithObservation(context, tuple_clljqcgdejtdiiewkzyjpwapd?.QualifyingEncounter);
 			bool? ad_ = context.Operators.In<CqlDateTime>(ab_, ac_, default);
 			bool? ae_ = context.Operators.And(z_, ad_);
-			object af_()
+			object af_			()
 			{
-				bool ep_()
+				bool ep_				()
 				{
 					DataType es_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
 					object et_ = FHIRHelpers_4_3_000.Instance.ToValue(context, es_);
@@ -766,7 +766,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return eu_;
 				};
-				bool eq_()
+				bool eq_				()
 				{
 					DataType ev_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
 					object ew_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ev_);
@@ -774,7 +774,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return ex_;
 				};
-				bool er_()
+				bool er_				()
 				{
 					DataType ey_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
 					object ez_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ey_);
@@ -784,22 +784,22 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 				};
 				if (ep_())
 				{
-					DataType fb_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-					object fc_ = FHIRHelpers_4_3_000.Instance.ToValue(context, fb_);
+DataType fb_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+object fc_ = FHIRHelpers_4_3_000.Instance.ToValue(context, fb_);
 
 					return (fc_ as CqlDateTime) as object;
 				}
 				else if (eq_())
 				{
-					DataType fd_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-					object fe_ = FHIRHelpers_4_3_000.Instance.ToValue(context, fd_);
+DataType fd_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+object fe_ = FHIRHelpers_4_3_000.Instance.ToValue(context, fd_);
 
 					return (fe_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (er_())
 				{
-					DataType ff_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
-					object fg_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ff_);
+DataType ff_ = tuple_clljqcgdejtdiiewkzyjpwapd?.FollowupGlucoseTest?.Effective;
+object fg_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ff_);
 
 					return (fg_ as CqlDateTime) as object;
 				}
@@ -837,25 +837,25 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 			return bc_;
 		};
-		IEnumerable<(Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?> i_ = context.Operators.Where<(Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?>(g_, h_);
-		Observation j_((Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? tuple_clljqcgdejtdiiewkzyjpwapd) => 
+		IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?> i_ = context.Operators.Where<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?>(g_, h_);
+		Observation j_		((CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? tuple_clljqcgdejtdiiewkzyjpwapd) => 
 			tuple_clljqcgdejtdiiewkzyjpwapd?.LowGlucoseTest;
-		IEnumerable<Observation> k_ = context.Operators.Select<(Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?, Observation>(i_, j_);
+		IEnumerable<Observation> k_ = context.Operators.Select<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)?, Observation>(i_, j_);
 
 		return k_;
 	}
 
 
     [CqlDeclaration("Severe Hypoglycemic Harm Event")]
-	public IEnumerable<Observation> Severe_Hypoglycemic_Harm_Event(CqlContext context)
+	public IEnumerable<Observation> Severe_Hypoglycemic_Harm_Event	(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = this.Glucose_Test_with_Result_Less_Than_40(context);
-		bool? b_(Observation LowGlucoseTest)
+		bool? b_		(Observation LowGlucoseTest)
 		{
 			Id d_ = LowGlucoseTest?.IdElement;
 			string e_ = d_?.Value;
 			IEnumerable<Observation> f_ = this.Low_Glucose_Test_Followed_By_Glucose_Test_Result_Greater_Than_80(context);
-			bool? g_(Observation @this)
+			bool? g_			(Observation @this)
 			{
 				string m_ = (@this is Resource
 	? (@this as Resource).IdElement
@@ -865,7 +865,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 				return n_;
 			};
 			IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
-			string i_(Observation @this)
+			string i_			(Observation @this)
 			{
 				string o_ = (@this is Resource
 	? (@this as Resource).IdElement
@@ -886,23 +886,23 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 
     [CqlDeclaration("Encounter with Severe Hypoglycemic Harm Event")]
-	public IEnumerable<Encounter> Encounter_with_Severe_Hypoglycemic_Harm_Event(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Severe_Hypoglycemic_Harm_Event	(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Denominator(context);
 		IEnumerable<Observation> b_ = this.Severe_Hypoglycemic_Harm_Event(context);
 		IEnumerable<ValueTuple<Encounter, Observation>> c_ = context.Operators.CrossJoin<Encounter, Observation>(a_, b_);
-		(Encounter QualifyingEncounter, Observation HypoglycemicEvent)? d_(ValueTuple<Encounter, Observation> _valueTuple)
+		(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)? d_		(ValueTuple<Encounter, Observation> _valueTuple)
 		{
-			(Encounter QualifyingEncounter, Observation HypoglycemicEvent)? j_ = (_valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)? j_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
 
 			return j_;
 		};
-		IEnumerable<(Encounter QualifyingEncounter, Observation HypoglycemicEvent)?> e_ = context.Operators.Select<ValueTuple<Encounter, Observation>, (Encounter QualifyingEncounter, Observation HypoglycemicEvent)?>(c_, d_);
-		bool? f_((Encounter QualifyingEncounter, Observation HypoglycemicEvent)? tuple_hfnempjqliopfnrmypnydhffr)
+		IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)?> e_ = context.Operators.Select<ValueTuple<Encounter, Observation>, (CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)?>(c_, d_);
+		bool? f_		((CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)? tuple_hfnempjqliopfnrmypnydhffr)
 		{
-			object k_()
+			object k_			()
 			{
-				bool o_()
+				bool o_				()
 				{
 					DataType r_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
 					object s_ = FHIRHelpers_4_3_000.Instance.ToValue(context, r_);
@@ -910,7 +910,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return t_;
 				};
-				bool p_()
+				bool p_				()
 				{
 					DataType u_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
 					object v_ = FHIRHelpers_4_3_000.Instance.ToValue(context, u_);
@@ -918,7 +918,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 					return w_;
 				};
-				bool q_()
+				bool q_				()
 				{
 					DataType x_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
 					object y_ = FHIRHelpers_4_3_000.Instance.ToValue(context, x_);
@@ -928,22 +928,22 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 				};
 				if (o_())
 				{
-					DataType aa_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
-					object ab_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
+DataType aa_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
+object ab_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aa_);
 
 					return (ab_ as CqlDateTime) as object;
 				}
 				else if (p_())
 				{
-					DataType ac_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
-					object ad_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ac_);
+DataType ac_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
+object ad_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ac_);
 
 					return (ad_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (q_())
 				{
-					DataType ae_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
-					object af_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ae_);
+DataType ae_ = tuple_hfnempjqliopfnrmypnydhffr?.HypoglycemicEvent?.Effective;
+object af_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ae_);
 
 					return (af_ as CqlDateTime) as object;
 				}
@@ -958,17 +958,17 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 			return n_;
 		};
-		IEnumerable<(Encounter QualifyingEncounter, Observation HypoglycemicEvent)?> g_ = context.Operators.Where<(Encounter QualifyingEncounter, Observation HypoglycemicEvent)?>(e_, f_);
-		Encounter h_((Encounter QualifyingEncounter, Observation HypoglycemicEvent)? tuple_hfnempjqliopfnrmypnydhffr) => 
+		IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)?> g_ = context.Operators.Where<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)?>(e_, f_);
+		Encounter h_		((CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)? tuple_hfnempjqliopfnrmypnydhffr) => 
 			tuple_hfnempjqliopfnrmypnydhffr?.QualifyingEncounter;
-		IEnumerable<Encounter> i_ = context.Operators.Select<(Encounter QualifyingEncounter, Observation HypoglycemicEvent)?, Encounter>(g_, h_);
+		IEnumerable<Encounter> i_ = context.Operators.Select<(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)?, Encounter>(g_, h_);
 
 		return i_;
 	}
 
 
     [CqlDeclaration("Numerator")]
-	public IEnumerable<Encounter> Numerator(CqlContext context)
+	public IEnumerable<Encounter> Numerator	(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Severe_Hypoglycemic_Harm_Event(context);
 
@@ -977,34 +977,34 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity	(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer	(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
+		IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race	(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex	(CqlContext context)
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.Instance.SDE_Sex(context);
 

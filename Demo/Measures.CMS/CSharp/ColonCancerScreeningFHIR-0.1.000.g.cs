@@ -90,27 +90,27 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
+		IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
 		return a_;
 	}
@@ -261,22 +261,22 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 				};
 				if (n_())
 				{
-					DataType z_ = FecalOccultResult?.Effective;
-					object aa_ = FHIRHelpers_4_3_000.Instance.ToValue(context, z_);
+DataType z_ = FecalOccultResult?.Effective;
+object aa_ = FHIRHelpers_4_3_000.Instance.ToValue(context, z_);
 
 					return (aa_ as CqlDateTime) as object;
 				}
 				else if (o_())
 				{
-					DataType ab_ = FecalOccultResult?.Effective;
-					object ac_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ab_);
+DataType ab_ = FecalOccultResult?.Effective;
+object ac_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ab_);
 
 					return (ac_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (p_())
 				{
-					DataType ad_ = FecalOccultResult?.Effective;
-					object ae_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ad_);
+DataType ad_ = FecalOccultResult?.Effective;
+object ae_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ad_);
 
 					return (ae_ as CqlDateTime) as object;
 				}
@@ -337,22 +337,22 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 				};
 				if (t_())
 				{
-					DataType af_ = sDNATest?.Effective;
-					object ag_ = FHIRHelpers_4_3_000.Instance.ToValue(context, af_);
+DataType af_ = sDNATest?.Effective;
+object ag_ = FHIRHelpers_4_3_000.Instance.ToValue(context, af_);
 
 					return (ag_ as CqlDateTime) as object;
 				}
 				else if (u_())
 				{
-					DataType ah_ = sDNATest?.Effective;
-					object ai_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ah_);
+DataType ah_ = sDNATest?.Effective;
+object ai_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ah_);
 
 					return (ai_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (v_())
 				{
-					DataType aj_ = sDNATest?.Effective;
-					object ak_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aj_);
+DataType aj_ = sDNATest?.Effective;
+object ak_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aj_);
 
 					return (ak_ as CqlDateTime) as object;
 				}

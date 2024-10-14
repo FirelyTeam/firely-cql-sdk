@@ -137,7 +137,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_2_000 : ILibrary, ISingl
 
 
     [CqlDeclaration("First Referral during First 10 Months of Measurement Period")]
-	public (string ID, CqlDateTime AuthorDate)? First_Referral_during_First_10_Months_of_Measurement_Period(CqlContext context)
+	public (CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? First_Referral_during_First_10_Months_of_Measurement_Period(CqlContext context)
 	{
 		CqlValueSet a_ = this.Referral(context);
 		IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
@@ -172,25 +172,25 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_2_000 : ILibrary, ISingl
 			return af_;
 		};
 		IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
-		(string ID, CqlDateTime AuthorDate)? e_(ServiceRequest ReferralOrder)
+		(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? e_(ServiceRequest ReferralOrder)
 		{
 			Id ag_ = ReferralOrder?.IdElement;
 			string ah_ = ag_?.Value;
 			FhirDateTime ai_ = ReferralOrder?.AuthoredOnElement;
 			CqlDateTime aj_ = context.Operators.Convert<CqlDateTime>(ai_);
-			(string ID, CqlDateTime AuthorDate)? ak_ = (ah_, aj_);
+			(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? ak_ = (default(CqlTupleMetadata), ah_, aj_);
 
 			return ak_;
 		};
-		IEnumerable<(string ID, CqlDateTime AuthorDate)?> f_ = context.Operators.Select<ServiceRequest, (string ID, CqlDateTime AuthorDate)?>(d_, e_);
-		object g_((string ID, CqlDateTime AuthorDate)? @this)
+		IEnumerable<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?> f_ = context.Operators.Select<ServiceRequest, (CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?>(d_, e_);
+		object g_((CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? @this)
 		{
 			CqlDateTime al_ = @this?.AuthorDate;
 
 			return al_;
 		};
-		IEnumerable<(string ID, CqlDateTime AuthorDate)?> h_ = context.Operators.SortBy<(string ID, CqlDateTime AuthorDate)?>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
-		(string ID, CqlDateTime AuthorDate)? i_ = context.Operators.First<(string ID, CqlDateTime AuthorDate)?>(h_);
+		IEnumerable<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?> h_ = context.Operators.SortBy<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
+		(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? i_ = context.Operators.First<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?>(h_);
 
 		return i_;
 	}
@@ -200,7 +200,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_2_000 : ILibrary, ISingl
 	public bool? Initial_Population(CqlContext context)
 	{
 		bool? a_ = this.Has_Encounter_during_Measurement_Period(context);
-		(string ID, CqlDateTime AuthorDate)? b_ = this.First_Referral_during_First_10_Months_of_Measurement_Period(context);
+		(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? b_ = this.First_Referral_during_First_10_Months_of_Measurement_Period(context);
 		bool? c_ = context.Operators.Not((bool?)(b_ is null));
 		bool? d_ = context.Operators.And(a_, c_);
 
@@ -218,27 +218,27 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_2_000 : ILibrary, ISingl
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
+		IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
 		return a_;
 	}
@@ -276,11 +276,11 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_2_000 : ILibrary, ISingl
 		IEnumerable<Task> b_ = context.Operators.Retrieve<Task>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-task"));
 		IEnumerable<Task> c_(Task ConsultantReportObtained)
 		{
-			(string ID, CqlDateTime AuthorDate)? f_ = this.First_Referral_during_First_10_Months_of_Measurement_Period(context);
-			(string ID, CqlDateTime AuthorDate)?[] g_ = [
+			(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? f_ = this.First_Referral_during_First_10_Months_of_Measurement_Period(context);
+			(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?[] g_ = [
 				f_,
 			];
-			bool? h_((string ID, CqlDateTime AuthorDate)? FirstReferral)
+			bool? h_((CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? FirstReferral)
 			{
 				string l_ = FirstReferral?.ID;
 				IEnumerable<string> m_ = this.TaskGetRequestID(context, ConsultantReportObtained);
@@ -304,10 +304,10 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_2_000 : ILibrary, ISingl
 
 				return ae_;
 			};
-			IEnumerable<(string ID, CqlDateTime AuthorDate)?> i_ = context.Operators.Where<(string ID, CqlDateTime AuthorDate)?>((IEnumerable<(string ID, CqlDateTime AuthorDate)?>)g_, h_);
-			Task j_((string ID, CqlDateTime AuthorDate)? FirstReferral) => 
+			IEnumerable<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?> i_ = context.Operators.Where<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?>((IEnumerable<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?>)g_, h_);
+			Task j_((CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? FirstReferral) => 
 				ConsultantReportObtained;
-			IEnumerable<Task> k_ = context.Operators.Select<(string ID, CqlDateTime AuthorDate)?, Task>(i_, j_);
+			IEnumerable<Task> k_ = context.Operators.Select<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?, Task>(i_, j_);
 
 			return k_;
 		};

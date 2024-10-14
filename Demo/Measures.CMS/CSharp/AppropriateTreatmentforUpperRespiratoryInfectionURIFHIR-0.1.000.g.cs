@@ -178,27 +178,27 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
+		IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
 		return a_;
 	}
 
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
-		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
 		return a_;
 	}
@@ -316,14 +316,14 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
 		CqlValueSet b_ = this.Upper_Respiratory_Infection(context);
 		IEnumerable<Condition> c_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<ValueTuple<Encounter, Condition>> d_ = context.Operators.CrossJoin<Encounter, Condition>(a_, c_);
-		(Encounter QualifyingEncounters, Condition URI)? e_(ValueTuple<Encounter, Condition> _valueTuple)
+		(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)? e_(ValueTuple<Encounter, Condition> _valueTuple)
 		{
-			(Encounter QualifyingEncounters, Condition URI)? k_ = (_valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)? k_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
-		IEnumerable<(Encounter QualifyingEncounters, Condition URI)?> f_ = context.Operators.Select<ValueTuple<Encounter, Condition>, (Encounter QualifyingEncounters, Condition URI)?>(d_, e_);
-		bool? g_((Encounter QualifyingEncounters, Condition URI)? tuple_figmirinmncaavfkbmahdktce)
+		IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?> f_ = context.Operators.Select<ValueTuple<Encounter, Condition>, (CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?>(d_, e_);
+		bool? g_((CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)? tuple_figmirinmncaavfkbmahdktce)
 		{
 			CqlInterval<CqlDateTime> l_ = QICoreCommon_2_0_000.Instance.ToPrevalenceInterval(context, tuple_figmirinmncaavfkbmahdktce?.URI);
 			CqlDateTime m_ = context.Operators.Start(l_);
@@ -338,10 +338,10 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
 
 			return w_;
 		};
-		IEnumerable<(Encounter QualifyingEncounters, Condition URI)?> h_ = context.Operators.Where<(Encounter QualifyingEncounters, Condition URI)?>(f_, g_);
-		Encounter i_((Encounter QualifyingEncounters, Condition URI)? tuple_figmirinmncaavfkbmahdktce) => 
+		IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?>(f_, g_);
+		Encounter i_((CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)? tuple_figmirinmncaavfkbmahdktce) => 
 			tuple_figmirinmncaavfkbmahdktce?.QualifyingEncounters;
-		IEnumerable<Encounter> j_ = context.Operators.Select<(Encounter QualifyingEncounters, Condition URI)?, Encounter>(h_, i_);
+		IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?, Encounter>(h_, i_);
 
 		return j_;
 	}

@@ -27,84 +27,84 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     [CqlDeclaration("Acute Inpatient")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1810")]
-	public CqlValueSet Acute_Inpatient(CqlContext context) => 
+	public CqlValueSet Acute_Inpatient	(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1810", default);
 
 
     [CqlDeclaration("Advanced Illness")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1465")]
-	public CqlValueSet Advanced_Illness(CqlContext context) => 
+	public CqlValueSet Advanced_Illness	(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1465", default);
 
 
     [CqlDeclaration("Dementia Medications")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1729")]
-	public CqlValueSet Dementia_Medications(CqlContext context) => 
+	public CqlValueSet Dementia_Medications	(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1729", default);
 
 
     [CqlDeclaration("ED")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1086")]
-	public CqlValueSet ED(CqlContext context) => 
+	public CqlValueSet ED	(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1086", default);
 
 
     [CqlDeclaration("Frailty Device")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1530")]
-	public CqlValueSet Frailty_Device(CqlContext context) => 
+	public CqlValueSet Frailty_Device	(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1530", default);
 
 
     [CqlDeclaration("Frailty Diagnosis")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1531")]
-	public CqlValueSet Frailty_Diagnosis(CqlContext context) => 
+	public CqlValueSet Frailty_Diagnosis	(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1531", default);
 
 
     [CqlDeclaration("Frailty Encounter")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1532")]
-	public CqlValueSet Frailty_Encounter(CqlContext context) => 
+	public CqlValueSet Frailty_Encounter	(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1532", default);
 
 
     [CqlDeclaration("Frailty Symptom")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1533")]
-	public CqlValueSet Frailty_Symptom(CqlContext context) => 
+	public CqlValueSet Frailty_Symptom	(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1533", default);
 
 
     [CqlDeclaration("Nonacute Inpatient")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1189")]
-	public CqlValueSet Nonacute_Inpatient(CqlContext context) => 
+	public CqlValueSet Nonacute_Inpatient	(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1189", default);
 
 
     [CqlDeclaration("Observation")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1191")]
-	public CqlValueSet Observation(CqlContext context) => 
+	public CqlValueSet Observation	(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1191", default);
 
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1446")]
-	public CqlValueSet Online_Assessments(CqlContext context) => 
+	public CqlValueSet Online_Assessments	(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1446", default);
 
 
     [CqlDeclaration("Outpatient")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1202")]
-	public CqlValueSet Outpatient(CqlContext context) => 
+	public CqlValueSet Outpatient	(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1202", default);
 
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1246")]
-	public CqlValueSet Telephone_Visits(CqlContext context) => 
+	public CqlValueSet Telephone_Visits	(CqlContext context) => 
 		new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1246", default);
 
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period	(CqlContext context)
 	{
 		object a_ = context.ResolveParameter("NCQAAdvancedIllnessandFrailty-1.0.0", "Measurement Period", null);
 
@@ -113,7 +113,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient(CqlContext context)
+	public Patient Patient	(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -123,11 +123,11 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Has Criteria Indicating Frailty")]
-	public bool? Has_Criteria_Indicating_Frailty(CqlContext context)
+	public bool? Has_Criteria_Indicating_Frailty	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Frailty_Device(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-		bool? c_(Observation FrailtyDeviceApplied)
+		bool? c_		(Observation FrailtyDeviceApplied)
 		{
 			DataType z_ = FrailtyDeviceApplied?.Effective;
 			CqlInterval<CqlDateTime> aa_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, z_);
@@ -141,7 +141,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 		CqlValueSet f_ = this.Frailty_Diagnosis(context);
 		IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		IEnumerable<Condition> h_ = NCQAStatus_1_0_0.Instance.Active_Condition(context, g_);
-		bool? i_(Condition FrailtyDiagnosis)
+		bool? i_		(Condition FrailtyDiagnosis)
 		{
 			CqlInterval<CqlDateTime> ad_ = NCQAFHIRBase_1_0_0.Instance.Prevalence_Period(context, FrailtyDiagnosis);
 			CqlInterval<CqlDateTime> ae_ = this.Measurement_Period(context);
@@ -155,7 +155,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 		CqlValueSet m_ = this.Frailty_Encounter(context);
 		IEnumerable<Encounter> n_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, m_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		IEnumerable<Encounter> o_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, n_);
-		bool? p_(Encounter FrailtyEncounter)
+		bool? p_		(Encounter FrailtyEncounter)
 		{
 			Period ag_ = FrailtyEncounter?.Period;
 			CqlInterval<CqlDateTime> ah_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ag_ as object);
@@ -169,7 +169,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 		bool? s_ = context.Operators.Or(l_, r_);
 		CqlValueSet t_ = this.Frailty_Symptom(context);
 		IEnumerable<Observation> u_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, t_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-		bool? v_(Observation FrailtySymptom)
+		bool? v_		(Observation FrailtySymptom)
 		{
 			DataType ak_ = FrailtySymptom?.Effective;
 			CqlInterval<CqlDateTime> al_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ak_);
@@ -187,7 +187,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Outpatient Encounters with Advanced Illness")]
-	public IEnumerable<CqlDate> Outpatient_Encounters_with_Advanced_Illness(CqlContext context)
+	public IEnumerable<CqlDate> Outpatient_Encounters_with_Advanced_Illness	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Outpatient(context);
 		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
@@ -207,7 +207,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
 		IEnumerable<Encounter> r_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, q_);
-		bool? s_(Encounter OutpatientEncounter)
+		bool? s_		(Encounter OutpatientEncounter)
 		{
 			CqlValueSet w_ = this.Advanced_Illness(context);
 			IEnumerable<Condition> x_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, w_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
@@ -230,7 +230,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 			return an_;
 		};
 		IEnumerable<Encounter> t_ = context.Operators.Where<Encounter>(r_, s_);
-		CqlDate u_(Encounter EncounterWithDiagnosis)
+		CqlDate u_		(Encounter EncounterWithDiagnosis)
 		{
 			Period ao_ = EncounterWithDiagnosis?.Period;
 			CqlInterval<CqlDateTime> ap_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, ao_ as object);
@@ -246,16 +246,16 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Nonacute Inpatient Discharge with Advanced Illness")]
-	public IEnumerable<CqlDate> Nonacute_Inpatient_Discharge_with_Advanced_Illness(CqlContext context)
+	public IEnumerable<CqlDate> Nonacute_Inpatient_Discharge_with_Advanced_Illness	(CqlContext context)
 	{
 		IEnumerable<Claim> a_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Claim"));
-		(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? b_ = NCQAClaims_1_0_0.Instance.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(context, a_);
+		(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? b_ = NCQAClaims_1_0_0.Instance.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(context, a_);
 		IEnumerable<Claim> c_ = b_?.NonacuteInpatientDischarge;
 		CqlValueSet d_ = this.Advanced_Illness(context);
 		IValueSetFacade e_ = context.Operators.CreateValueSetFacade(d_);
-		(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? f_ = NCQAClaims_1_0_0.Instance.Medical_Claims_With_Diagnosis(context, c_, e_);
+		(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? f_ = NCQAClaims_1_0_0.Instance.Medical_Claims_With_Diagnosis(context, c_, e_);
 		IEnumerable<CqlInterval<CqlDateTime>> g_ = f_?.ServicePeriod;
-		bool? h_(CqlInterval<CqlDateTime> DischargeWithDiagnosis)
+		bool? h_		(CqlInterval<CqlDateTime> DischargeWithDiagnosis)
 		{
 			CqlDateTime l_ = context.Operators.End(DischargeWithDiagnosis);
 			CqlDate m_ = context.Operators.DateFrom(l_);
@@ -272,7 +272,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 			return w_;
 		};
 		IEnumerable<CqlInterval<CqlDateTime>> i_ = context.Operators.Where<CqlInterval<CqlDateTime>>(g_, h_);
-		CqlDate j_(CqlInterval<CqlDateTime> InpatientDischarge)
+		CqlDate j_		(CqlInterval<CqlDateTime> InpatientDischarge)
 		{
 			CqlDateTime x_ = context.Operators.End(InpatientDischarge);
 			CqlDate y_ = context.Operators.DateFrom(x_);
@@ -286,11 +286,11 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Outpatient Encounters or Discharges with Advanced Illness")]
-	public IEnumerable<CqlDate> Outpatient_Encounters_or_Discharges_with_Advanced_Illness(CqlContext context)
+	public IEnumerable<CqlDate> Outpatient_Encounters_or_Discharges_with_Advanced_Illness	(CqlContext context)
 	{
-		IEnumerable<CqlDate> a_()
+		IEnumerable<CqlDate> a_		()
 		{
-			bool b_()
+			bool b_			()
 			{
 				IEnumerable<CqlDate> c_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
 				IEnumerable<CqlDate> d_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
@@ -301,21 +301,21 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 			};
 			if (b_())
 			{
-				IEnumerable<CqlDate> g_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
-				IEnumerable<CqlDate> h_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
-				IEnumerable<CqlDate> i_ = context.Operators.Union<CqlDate>(g_, h_);
+IEnumerable<CqlDate> g_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
+IEnumerable<CqlDate> h_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
+IEnumerable<CqlDate> i_ = context.Operators.Union<CqlDate>(g_, h_);
 
 				return i_;
 			}
 			else if ((this.Outpatient_Encounters_with_Advanced_Illness(context)) is null)
 			{
-				IEnumerable<CqlDate> j_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
+IEnumerable<CqlDate> j_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
 
 				return j_;
 			}
 			else if ((this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context)) is null)
 			{
-				IEnumerable<CqlDate> k_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
+IEnumerable<CqlDate> k_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
 
 				return k_;
 			}
@@ -330,18 +330,18 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Two Outpatient Visits with Advanced Illness on Different Dates of Service")]
-	public bool? Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service(CqlContext context)
+	public bool? Two_Outpatient_Visits_with_Advanced_Illness_on_Different_Dates_of_Service	(CqlContext context)
 	{
 		IEnumerable<CqlDate> a_ = this.Outpatient_Encounters_or_Discharges_with_Advanced_Illness(context);
 		IEnumerable<ValueTuple<CqlDate, CqlDate>> c_ = context.Operators.CrossJoin<CqlDate, CqlDate>(a_, a_);
-		(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? d_(ValueTuple<CqlDate, CqlDate> _valueTuple)
+		(CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? d_		(ValueTuple<CqlDate, CqlDate> _valueTuple)
 		{
-			(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? k_ = (_valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? k_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
-		IEnumerable<(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?> e_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate>, (CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?>(c_, d_);
-		bool? f_((CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? tuple_cmsergtjgkisksqucnzwkeggv)
+		IEnumerable<(CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?> e_ = context.Operators.Select<ValueTuple<CqlDate, CqlDate>, (CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?>(c_, d_);
+		bool? f_		((CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? tuple_cmsergtjgkisksqucnzwkeggv)
 		{
 			CqlQuantity l_ = context.Operators.Quantity(1m, "day");
 			CqlDate m_ = context.Operators.Add(tuple_cmsergtjgkisksqucnzwkeggv?.OutpatientVisit1, l_);
@@ -349,10 +349,10 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
 			return n_;
 		};
-		IEnumerable<(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?> g_ = context.Operators.Where<(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?>(e_, f_);
-		CqlDate h_((CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? tuple_cmsergtjgkisksqucnzwkeggv) => 
+		IEnumerable<(CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?> g_ = context.Operators.Where<(CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?>(e_, f_);
+		CqlDate h_		((CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)? tuple_cmsergtjgkisksqucnzwkeggv) => 
 			tuple_cmsergtjgkisksqucnzwkeggv?.OutpatientVisit1;
-		IEnumerable<CqlDate> i_ = context.Operators.Select<(CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?, CqlDate>(g_, h_);
+		IEnumerable<CqlDate> i_ = context.Operators.Select<(CqlTupleMetadata, CqlDate OutpatientVisit1, CqlDate OutpatientVisit2)?, CqlDate>(g_, h_);
 		bool? j_ = context.Operators.Exists<CqlDate>(i_);
 
 		return j_;
@@ -360,12 +360,12 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Acute Inpatient Encounter with Advanced Illness")]
-	public bool? Acute_Inpatient_Encounter_with_Advanced_Illness(CqlContext context)
+	public bool? Acute_Inpatient_Encounter_with_Advanced_Illness	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Acute_Inpatient(context);
 		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		IEnumerable<Encounter> c_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, b_);
-		bool? d_(Encounter InpatientEncounter)
+		bool? d_		(Encounter InpatientEncounter)
 		{
 			CqlValueSet g_ = this.Advanced_Illness(context);
 			IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
@@ -395,16 +395,16 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Acute Inpatient Discharge with Advanced Illness")]
-	public bool? Acute_Inpatient_Discharge_with_Advanced_Illness(CqlContext context)
+	public bool? Acute_Inpatient_Discharge_with_Advanced_Illness	(CqlContext context)
 	{
 		IEnumerable<Claim> a_ = context.Operators.Retrieve<Claim>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Claim"));
-		(IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? b_ = NCQAClaims_1_0_0.Instance.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(context, a_);
+		(CqlTupleMetadata, IEnumerable<Claim> InpatientDischarge, IEnumerable<Claim> NonacuteInpatientDischarge, IEnumerable<Claim> AcuteInpatientDischarge)? b_ = NCQAClaims_1_0_0.Instance.Medical_Claims_With_Nonacute_or_Acute_Inpatient_Discharge(context, a_);
 		IEnumerable<Claim> c_ = b_?.AcuteInpatientDischarge;
 		CqlValueSet d_ = this.Advanced_Illness(context);
 		IValueSetFacade e_ = context.Operators.CreateValueSetFacade(d_);
-		(IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? f_ = NCQAClaims_1_0_0.Instance.Medical_Claims_With_Diagnosis(context, c_, e_);
+		(CqlTupleMetadata, IEnumerable<Claim> Claim, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod)? f_ = NCQAClaims_1_0_0.Instance.Medical_Claims_With_Diagnosis(context, c_, e_);
 		IEnumerable<CqlInterval<CqlDateTime>> g_ = f_?.ServicePeriod;
-		bool? h_(CqlInterval<CqlDateTime> InpatientDischarge)
+		bool? h_		(CqlInterval<CqlDateTime> InpatientDischarge)
 		{
 			CqlDateTime k_ = context.Operators.End(InpatientDischarge);
 			CqlDate l_ = context.Operators.DateFrom(k_);
@@ -428,14 +428,14 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Dementia Medications In Year Before or During Measurement Period")]
-	public bool? Dementia_Medications_In_Year_Before_or_During_Measurement_Period(CqlContext context)
+	public bool? Dementia_Medications_In_Year_Before_or_During_Measurement_Period	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Dementia_Medications(context);
 		IEnumerable<MedicationDispense> b_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationDispense"));
 		IEnumerable<MedicationDispense> d_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/MedicationDispense"));
 		IEnumerable<MedicationDispense> e_ = context.Operators.Union<MedicationDispense>(b_, d_);
 		IEnumerable<MedicationDispense> f_ = NCQAStatus_1_0_0.Instance.Dispensed_Medication(context, e_);
-		bool? g_(MedicationDispense DementiaMedDispensed)
+		bool? g_		(MedicationDispense DementiaMedDispensed)
 		{
 			FhirDateTime j_ = DementiaMedDispensed?.WhenHandedOverElement;
 			CqlInterval<CqlDateTime> k_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, j_ as object);
@@ -461,7 +461,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Advanced Illness and Frailty Exclusion Including Over Age 80")]
-	public bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80(CqlContext context)
+	public bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80	(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -498,7 +498,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Advanced Illness and Frailty Exclusion Not Including Over Age 80")]
-	public bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(CqlContext context)
+	public bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80	(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;

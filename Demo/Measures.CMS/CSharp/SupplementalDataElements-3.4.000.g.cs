@@ -60,7 +60,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		List<Extension> a_()
 		{
@@ -73,7 +73,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 			};
 			if (i_())
 			{
-				Patient l_ = this.Patient(context);
+Patient l_ = this.Patient(context);
 
 				return (l_ as DomainResource).Extension;
 			}
@@ -96,7 +96,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 		Extension[] e_ = [
 			d_,
 		];
-		(IEnumerable<CqlCode> codes, string display)? f_(Extension E)
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? f_(Extension E)
 		{
 			bool? q_(Extension @this)
 			{
@@ -108,8 +108,8 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 				return ao_;
 			};
 			IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
-					? (E as Element).Extension
-					: default), q_);
+	? (E as Element).Extension
+	: default), q_);
 			object s_(Extension @this)
 			{
 				DataType ap_ = @this?.Value;
@@ -132,8 +132,8 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 				return at_;
 			};
 			IEnumerable<Extension> y_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
-					? (E as Element).Extension
-					: default), x_);
+	? (E as Element).Extension
+	: default), x_);
 			object z_(Extension @this)
 			{
 				DataType au_ = @this?.Value;
@@ -159,8 +159,8 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 				return az_;
 			};
 			IEnumerable<Extension> af_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
-					? (E as Element).Extension
-					: default), ae_);
+	? (E as Element).Extension
+	: default), ae_);
 			DataType ag_(Extension @this)
 			{
 				DataType ba_ = @this?.Value;
@@ -170,40 +170,40 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 			IEnumerable<DataType> ah_ = context.Operators.Select<Extension, DataType>(af_, ag_);
 			DataType ai_ = context.Operators.SingletonFrom<DataType>(ah_);
 			string aj_ = context.Operators.Convert<string>(ai_);
-			(IEnumerable<CqlCode> codes, string display)? ak_ = (ad_, aj_);
+			(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? ak_ = (default(CqlTupleMetadata), ad_, aj_);
 
 			return ak_;
 		};
-		IEnumerable<(IEnumerable<CqlCode> codes, string display)?> g_ = context.Operators.Select<Extension, (IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension>)e_, f_);
-		(IEnumerable<CqlCode> codes, string display)? h_ = context.Operators.SingletonFrom<(IEnumerable<CqlCode> codes, string display)?>(g_);
+		IEnumerable<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> g_ = context.Operators.Select<Extension, (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension>)e_, f_);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? h_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(g_);
 
 		return h_;
 	}
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		CqlValueSet a_ = this.Payer_Type(context);
 		IEnumerable<Coverage> b_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-coverage"));
-		(CqlConcept code, CqlInterval<CqlDateTime> period)? c_(Coverage Payer)
+		(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)? c_(Coverage Payer)
 		{
 			CodeableConcept e_ = Payer?.Type;
 			CqlConcept f_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, e_);
 			Period g_ = Payer?.Period;
 			CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, g_);
-			(CqlConcept code, CqlInterval<CqlDateTime> period)? i_ = (f_, h_);
+			(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)? i_ = (default(CqlTupleMetadata), f_, h_);
 
 			return i_;
 		};
-		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> d_ = context.Operators.Select<Coverage, (CqlConcept code, CqlInterval<CqlDateTime> period)?>(b_, c_);
+		IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> d_ = context.Operators.Select<Coverage, (CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?>(b_, c_);
 
 		return d_;
 	}
 
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		List<Extension> a_()
 		{
@@ -216,7 +216,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 			};
 			if (i_())
 			{
-				Patient l_ = this.Patient(context);
+Patient l_ = this.Patient(context);
 
 				return (l_ as DomainResource).Extension;
 			}
@@ -239,7 +239,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 		Extension[] e_ = [
 			d_,
 		];
-		(IEnumerable<CqlCode> codes, string display)? f_(Extension R)
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? f_(Extension R)
 		{
 			bool? q_(Extension @this)
 			{
@@ -251,8 +251,8 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 				return an_;
 			};
 			IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
-					? (R as Element).Extension
-					: default), q_);
+	? (R as Element).Extension
+	: default), q_);
 			object s_(Extension @this)
 			{
 				DataType ao_ = @this?.Value;
@@ -277,8 +277,8 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 				return at_;
 			};
 			IEnumerable<Extension> x_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
-					? (R as Element).Extension
-					: default), w_);
+	? (R as Element).Extension
+	: default), w_);
 			object y_(Extension @this)
 			{
 				DataType au_ = @this?.Value;
@@ -304,8 +304,8 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 				return az_;
 			};
 			IEnumerable<Extension> ae_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
-					? (R as Element).Extension
-					: default), ad_);
+	? (R as Element).Extension
+	: default), ad_);
 			DataType af_(Extension @this)
 			{
 				DataType ba_ = @this?.Value;
@@ -315,12 +315,12 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 			IEnumerable<DataType> ag_ = context.Operators.Select<Extension, DataType>(ae_, af_);
 			DataType ah_ = context.Operators.SingletonFrom<DataType>(ag_);
 			string ai_ = context.Operators.Convert<string>(ah_);
-			(IEnumerable<CqlCode> codes, string display)? aj_ = (ac_, ai_);
+			(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? aj_ = (default(CqlTupleMetadata), ac_, ai_);
 
 			return aj_;
 		};
-		IEnumerable<(IEnumerable<CqlCode> codes, string display)?> g_ = context.Operators.Select<Extension, (IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension>)e_, f_);
-		(IEnumerable<CqlCode> codes, string display)? h_ = context.Operators.SingletonFrom<(IEnumerable<CqlCode> codes, string display)?>(g_);
+		IEnumerable<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?> g_ = context.Operators.Select<Extension, (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>((IEnumerable<Extension>)e_, f_);
+		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? h_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)?>(g_);
 
 		return h_;
 	}

@@ -24,10 +24,10 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
     public string Version => "1.0.0";
     public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAFHIRBase_1_0_0.Instance, NCQAStatus_1_0_0.Instance, NCQATerminology_1_0_0.Instance];
     #endregion Library Members
-	public bool? Encounter_Has_Diagnosis(CqlContext context, Encounter Encounter, IEnumerable<Condition> Conditions)
+	public bool? Encounter_Has_Diagnosis	(CqlContext context, Encounter Encounter, IEnumerable<Condition> Conditions)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
-		FhirString b_(Encounter.DiagnosisComponent D)
+		FhirString b_		(Encounter.DiagnosisComponent D)
 		{
 			ResourceReference g_ = D?.Condition;
 			FhirString h_ = g_?.ReferenceElement;
@@ -35,9 +35,9 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
 			return h_;
 		};
 		IEnumerable<FhirString> c_ = context.Operators.Select<Encounter.DiagnosisComponent, FhirString>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
-		bool? d_(FhirString CRef)
+		bool? d_		(FhirString CRef)
 		{
-			bool? i_(Condition C)
+			bool? i_			(Condition C)
 			{
 				Id l_ = C?.IdElement;
 				string m_ = FHIRHelpers_4_0_001.Instance.ToString(context, l_);
@@ -58,10 +58,10 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
 		return f_;
 	}
 
-	public bool? Encounter_Has_Principal_Diagnosis(CqlContext context, Encounter Encounter, IEnumerable<Condition> Conditions)
+	public bool? Encounter_Has_Principal_Diagnosis	(CqlContext context, Encounter Encounter, IEnumerable<Condition> Conditions)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
-		bool? b_(Encounter.DiagnosisComponent D)
+		bool? b_		(Encounter.DiagnosisComponent D)
 		{
 			PositiveInt i_ = D?.RankElement;
 			Integer j_ = context.Operators.Convert<Integer>(i_);
@@ -75,9 +75,9 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
 		Encounter.DiagnosisComponent[] e_ = [
 			d_,
 		];
-		bool? f_(Encounter.DiagnosisComponent PrincipalDiagnosis)
+		bool? f_		(Encounter.DiagnosisComponent PrincipalDiagnosis)
 		{
-			bool? m_(Condition C)
+			bool? m_			(Condition C)
 			{
 				Id p_ = C?.IdElement;
 				string q_ = FHIRHelpers_4_0_001.Instance.ToString(context, p_);
@@ -100,10 +100,10 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
 		return h_;
 	}
 
-	public bool? Encounter_Completed_during_Period(CqlContext context, IEnumerable<Encounter> Enc, CqlInterval<CqlDateTime> timeperiod)
+	public bool? Encounter_Completed_during_Period	(CqlContext context, IEnumerable<Encounter> Enc, CqlInterval<CqlDateTime> timeperiod)
 	{
 		IEnumerable<Encounter> a_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, Enc);
-		bool? b_(Encounter EncounterPeriod)
+		bool? b_		(Encounter EncounterPeriod)
 		{
 			Period e_ = EncounterPeriod?.Period;
 			CqlInterval<CqlDateTime> f_ = NCQAFHIRBase_1_0_0.Instance.Normalize_Interval(context, e_ as object);
@@ -118,10 +118,10 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
 		return d_;
 	}
 
-	public IEnumerable<Encounter> Finished_Encounter_with_Telehealth_POS(CqlContext context, IEnumerable<Encounter> Encounter)
+	public IEnumerable<Encounter> Finished_Encounter_with_Telehealth_POS	(CqlContext context, IEnumerable<Encounter> Encounter)
 	{
 		IEnumerable<Encounter> a_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, Encounter);
-		bool? b_(Encounter E)
+		bool? b_		(Encounter E)
 		{
 			Coding d_ = E?.Class;
 			bool? e_ = context.Operators.Not((bool?)(d_ is null));
@@ -137,10 +137,10 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
 		return c_;
 	}
 
-	public IEnumerable<Encounter> Finished_Encounter_with_Outpatient_POS(CqlContext context, IEnumerable<Encounter> Encounter)
+	public IEnumerable<Encounter> Finished_Encounter_with_Outpatient_POS	(CqlContext context, IEnumerable<Encounter> Encounter)
 	{
 		IEnumerable<Encounter> a_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, Encounter);
-		bool? b_(Encounter E)
+		bool? b_		(Encounter E)
 		{
 			Coding d_ = E?.Class;
 			bool? e_ = context.Operators.Not((bool?)(d_ is null));
@@ -160,10 +160,10 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
 		return c_;
 	}
 
-	public IEnumerable<Encounter> Finished_Encounter_with_Ambulatory_POS(CqlContext context, IEnumerable<Encounter> Encounter)
+	public IEnumerable<Encounter> Finished_Encounter_with_Ambulatory_POS	(CqlContext context, IEnumerable<Encounter> Encounter)
 	{
 		IEnumerable<Encounter> a_ = NCQAStatus_1_0_0.Instance.Finished_Encounter(context, Encounter);
-		bool? b_(Encounter E)
+		bool? b_		(Encounter E)
 		{
 			Coding d_ = E?.Class;
 			bool? e_ = context.Operators.Not((bool?)(d_ is null));
