@@ -42,7 +42,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             try
             {
-                var (indentString, indent, useIndent) = (IndentString: args.IndentString, args.Indent, args.UseIndent);
+                var (indentString, indent) = (args.IndentString, args.Indent);
                 var result = expression switch
                 {
                     ConstantExpression constant           => ConvertConstantExpression(constant, indentString),
@@ -64,7 +64,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     CaseWhenThenExpression cwt            => ConvertCaseWhenThenExpression(cwt, indent),
                     FunctionCallExpression fce            => ConvertFunctionCallExpression(fce, indent, indentString),
                     DefinitionCallExpression dce          => ConvertDefinitionCallExpression(dce, indentString),
-                    ElmAsExpression ea                    => ConvertExpression(ea.Reduce(), new ConvExprArgs(indent, useIndent)),
+                    ElmAsExpression ea                    => ConvertExpression(ea.Reduce(), args),
                     _                                     => throw new NotSupportedException($"Don't know how to convert an expression of type {expression.GetType()} into C#."),
                 };
                 return result;
