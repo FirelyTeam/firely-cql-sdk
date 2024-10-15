@@ -7,6 +7,7 @@ Hl7.Cql.Runtime.ContextEventArgs.State.get -> object?
 Hl7.Cql.Runtime.CqlChoiceMetadata
 Hl7.Cql.Runtime.CqlChoiceMetadata.ChoiceTypes.get -> System.Collections.Generic.IReadOnlyList<System.Type!>!
 Hl7.Cql.Runtime.CqlChoiceMetadata.CqlChoiceMetadata(System.Type![]? choiceTypes = null) -> void
+Hl7.Cql.Runtime.CqlChoiceMetadata.Equals(Hl7.Cql.Runtime.CqlChoiceMetadata? obj) -> bool
 Hl7.Cql.Runtime.CqlContext
 Hl7.Cql.Runtime.CqlContext.ContextEvent -> System.EventHandler<Hl7.Cql.Runtime.ContextEventArgs!>?
 Hl7.Cql.Runtime.CqlContext.CqlContext(Hl7.Cql.Operators.ICqlOperators! operators, System.Collections.Generic.IDictionary<string!, object!>? parameters = null, Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate!>? delegates = null) -> void
@@ -18,6 +19,7 @@ Hl7.Cql.Runtime.CqlContext.RaiseContextEvent(Hl7.Cql.Runtime.ContextEventArgs! e
 Hl7.Cql.Runtime.CqlContext.ResolveParameter(string! libraryVersionedIdentifier, string! parameterName, object? defaultValue) -> object?
 Hl7.Cql.Runtime.CqlTupleMetadata
 Hl7.Cql.Runtime.CqlTupleMetadata.CqlTupleMetadata(System.Type![]? itemTypes = null, string![]? itemNames = null) -> void
+Hl7.Cql.Runtime.CqlTupleMetadata.Equals(Hl7.Cql.Runtime.CqlTupleMetadata? obj) -> bool
 Hl7.Cql.Runtime.CqlTupleMetadata.ItemNames.get -> System.Collections.Generic.IReadOnlyList<string!>!
 Hl7.Cql.Runtime.CqlTupleMetadata.ItemTypes.get -> System.Collections.Generic.IReadOnlyList<System.Type!>!
 Hl7.Cql.Runtime.DefinitionDictionary<T>
@@ -62,5 +64,3 @@ static Hl7.Cql.Runtime.CqlTupleMetadata.operator !=(Hl7.Cql.Runtime.CqlTupleMeta
 static Hl7.Cql.Runtime.CqlTupleMetadata.operator ==(Hl7.Cql.Runtime.CqlTupleMetadata? left, Hl7.Cql.Runtime.CqlTupleMetadata? right) -> bool
 static Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Default.get -> Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter!
 virtual Hl7.Cql.Runtime.BaseTypeResolver.GetPropertyCore(System.Type! type, string! propertyName) -> System.Reflection.PropertyInfo?
-virtual Hl7.Cql.Runtime.CqlChoiceMetadata.Equals(Hl7.Cql.Runtime.CqlChoiceMetadata? obj) -> bool
-virtual Hl7.Cql.Runtime.CqlTupleMetadata.Equals(Hl7.Cql.Runtime.CqlTupleMetadata? obj) -> bool

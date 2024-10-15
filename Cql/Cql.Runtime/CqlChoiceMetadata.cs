@@ -17,7 +17,7 @@ namespace Hl7.Cql.Runtime;
 /// <summary>
 /// Represents the metadata for a choice type.
 /// </summary>
-public class CqlChoiceMetadata : IEquatable<CqlChoiceMetadata>
+public sealed class CqlChoiceMetadata : IEquatable<CqlChoiceMetadata>
 {
     /// <summary>
     /// Represents the metadata for a choice type.
@@ -59,7 +59,7 @@ public class CqlChoiceMetadata : IEquatable<CqlChoiceMetadata>
     }
 
     /// <inheritdoc cref="Equals(object?)"/>
-    public virtual bool Equals(CqlChoiceMetadata? obj)
+    public bool Equals(CqlChoiceMetadata? obj)
     {
         if (obj is null) return false;
         if (ReferenceEquals(this, obj)) return true;
