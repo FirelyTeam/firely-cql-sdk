@@ -40,12 +40,12 @@ public class CqlTupleMetadata : IEquatable<CqlTupleMetadata>
     /// <summary>
     /// The name for each item in the tuple.
     /// </summary>
-    public IReadOnlyCollection<string> ItemNames { get; }
+    public IReadOnlyList<string> ItemNames { get; }
 
     /// <summary>
     /// The name for each item in the tuple.
     /// </summary>
-    public IReadOnlyCollection<Type> ItemTypes { get; }
+    public IReadOnlyList<Type> ItemTypes { get; }
 
     private readonly string _signatureHashString;
     private readonly int _hashCode;

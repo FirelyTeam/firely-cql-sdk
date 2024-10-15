@@ -15,8 +15,8 @@ Hl7.Cql.Runtime.CqlContext.RaiseContextEvent(Hl7.Cql.Runtime.ContextEventArgs! e
 Hl7.Cql.Runtime.CqlContext.ResolveParameter(string! libraryVersionedIdentifier, string! parameterName, object? defaultValue) -> object?
 Hl7.Cql.Runtime.CqlTupleMetadata
 Hl7.Cql.Runtime.CqlTupleMetadata.CqlTupleMetadata(System.Type![]? itemTypes = null, string![]? itemNames = null) -> void
-Hl7.Cql.Runtime.CqlTupleMetadata.ItemNames.get -> System.Collections.Generic.IReadOnlyCollection<string!>!
-Hl7.Cql.Runtime.CqlTupleMetadata.ItemTypes.get -> System.Collections.Generic.IReadOnlyCollection<System.Type!>!
+Hl7.Cql.Runtime.CqlTupleMetadata.ItemNames.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Hl7.Cql.Runtime.CqlTupleMetadata.ItemTypes.get -> System.Collections.Generic.IReadOnlyList<System.Type!>!
 Hl7.Cql.Runtime.DefinitionDictionary<T>
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Add(string! libraryName, string! definition, System.Type![]! signature, T! expression) -> void
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Add(string! libraryName, string! definition, T! expression) -> void
@@ -36,13 +36,22 @@ Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetDefinitionsForLibrary(string? libr
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetTags(string! library, string! definition, System.Type![]! signature, out System.Linq.ILookup<string!, string!>? tags) -> bool
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetValue(string? libraryName, string! definition, out T? expression) -> bool
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetValue(string? libraryName, string! definition, System.Type![]! signature, out T? expression) -> bool
+Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter
+Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.CqlValueTupleJsonConverter() -> void
+Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory
+Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CqlValueTupleJsonConverterFactory() -> void
 override Hl7.Cql.Runtime.BaseTypeResolver.GetListElementType(System.Type! type, bool throwError = false) -> System.Type?
 override Hl7.Cql.Runtime.BaseTypeResolver.ResolveType(string! typeSpecifier, bool throwError = true) -> System.Type?
 override Hl7.Cql.Runtime.CqlTupleMetadata.Equals(object? obj) -> bool
 override Hl7.Cql.Runtime.CqlTupleMetadata.GetHashCode() -> int
 override Hl7.Cql.Runtime.CqlTupleMetadata.ToString() -> string!
+override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Read(ref System.Text.Json.Utf8JsonReader reader, System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Runtime.CompilerServices.ITuple!
+override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Write(System.Text.Json.Utf8JsonWriter! writer, System.Runtime.CompilerServices.ITuple! value, System.Text.Json.JsonSerializerOptions! options) -> void
+override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CanConvert(System.Type! typeToConvert) -> bool
+override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CreateConverter(System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Text.Json.Serialization.JsonConverter!
 readonly Hl7.Cql.Runtime.BaseTypeResolver.Types -> System.Collections.Generic.Dictionary<string!, System.Type!>!
 static Hl7.Cql.Runtime.CqlTupleMetadata.operator !=(Hl7.Cql.Runtime.CqlTupleMetadata? left, Hl7.Cql.Runtime.CqlTupleMetadata? right) -> bool
 static Hl7.Cql.Runtime.CqlTupleMetadata.operator ==(Hl7.Cql.Runtime.CqlTupleMetadata? left, Hl7.Cql.Runtime.CqlTupleMetadata? right) -> bool
+static Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Default.get -> Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter!
 virtual Hl7.Cql.Runtime.BaseTypeResolver.GetPropertyCore(System.Type! type, string! propertyName) -> System.Reflection.PropertyInfo?
 virtual Hl7.Cql.Runtime.CqlTupleMetadata.Equals(Hl7.Cql.Runtime.CqlTupleMetadata? obj) -> bool
