@@ -80,7 +80,8 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             _cSharpLibrarySetToStreamsWriter.ProcessDefinitions(
                 librarySet,
-                definitions, new(onAfterStep: CSharpSourceCodeStep));
+                definitions,
+                callbacks: new(onAfterStep: CSharpSourceCodeStep));
 
             return results;
 
