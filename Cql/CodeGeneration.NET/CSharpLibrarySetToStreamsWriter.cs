@@ -331,7 +331,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 }
             }
 
-            writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(overload, new ConvExprArgs(indentLevel), methodName!, "public"));
+            writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(overload, expressionConverter.NewArgs(indentLevel), methodName!, "public"));
         }
 
         private ExpressionToCSharpConverter NewExpressionToCSharpConverter(string libraryName) =>

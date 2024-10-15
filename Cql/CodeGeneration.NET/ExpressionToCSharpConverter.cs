@@ -20,28 +20,38 @@ using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
-    internal class ConvExprArgs(int indent = 0, bool useIndent = true)
-    {
-        public int Indent { get; init;  } = indent;
-        public bool UseIndent { get; init;  } = useIndent;
-        public string IndentString => UseIndent ? StringUtility.IndentString(Indent) : string.Empty;
-    }
-
     internal class ExpressionToCSharpConverter(
         TypeToCSharpConverter typeToCSharpConverter,
         string libraryName)
     {
+        internal readonly record struct Args(
+            int Indent = 0,
+            bool UseIndent = true)
+        {
+            public int Indent { get; } = Indent;
+            public bool UseIndent { get; } = UseIndent;
+            public string IndentString => UseIndent ? StringExtensions.IndentString(Indent) : string.Empty;
+
+            public Args With(Func<int, int>? indentFn = null, Func<bool, bool>? useIndentFn = null) =>
+                new(indentFn?.Invoke(Indent) ?? Indent, useIndentFn?.Invoke(UseIndent) ?? UseIndent);
+
+            public Args DontUseIndent() => With(useIndentFn: _ => false);
+
+            public Args DoUseIndent() => With(useIndentFn: _ => true);
+        }
+
+        public Args NewArgs(int indent = 0, bool useIndent = true) => new(indent, useIndent);
+
         public string LibraryName { get; } = libraryName;
 
         private readonly TypeToCSharpConverter _typeToCSharpConverter = typeToCSharpConverter;
 
         public string ConvertExpression(
             Expression expression,
-            ConvExprArgs args)
+            Args args)
         {
             try
             {
-                var (indentString, indent) = (args.IndentString, args.Indent);
                 var result = expression switch
                 {
                     ConstantExpression constant           => ConvertConstantExpression(constant, args),
@@ -89,11 +99,10 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertDefinitionCallExpression(
             DefinitionCallExpression dce,
-            ConvExprArgs args)
+            Args args)
         {
-            var indentString = args.IndentString;
             var sb = new StringBuilder();
-            sb.Append(indentString);
+            sb.Append(args.IndentString);
             var targetMember = GetTargetedMemberName(dce.LibraryName, dce.DefinitionName);
             sb.Append(targetMember);
             sb.Append("(context)");
@@ -102,14 +111,13 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertFunctionCallExpression(
             FunctionCallExpression fce,
-            ConvExprArgs args)
+            Args args)
         {
-            var (indent, indentString) = (args.Indent, args.IndentString);
             var sb = new StringBuilder();
-            sb.Append(indentString);
+            sb.Append(args.IndentString);
             var targetMember = GetTargetedMemberName(fce.LibraryName, fce.FunctionName);
             sb.Append(targetMember);
-            sb.Append(ConvertArguments(indent, fce.Arguments));
+            sb.Append(ConvertArguments(fce.Arguments, args));
             return sb.ToString();
         }
 
@@ -124,16 +132,17 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertBlockExpression(
             BlockExpression block,
-            ConvExprArgs args)
+            Args args)
         {
-            var indent = args.Indent;
             var sb = new StringBuilder();
 
-            sb.AppendLine(indent, "{");
+            sb.AppendLine(args.Indent, "{");
 
             var lastExpression = block.Expressions.LastOrDefault();
             var isFirstStatement = true;
 
+            var nextArgsUseIndentTrue = args.With(indent => indent + 1, _ => true);
+            var nextArgsUseIndentFalse = args.With(indent => indent + 1, _ => false);
             foreach (var childStatement in block.Expressions)
             {
                 if (ReferenceEquals(childStatement, lastExpression))
@@ -142,16 +151,14 @@ namespace Hl7.Cql.CodeGeneration.NET
                         (CaseWhenThenExpression or UnaryExpression { NodeType: ExpressionType.Throw }))
                     {
                         if (!isFirstStatement) sb.AppendLine();
-                        sb.Append(indent + 1, "return ");
+                        sb.Append(args.Indent + 1, "return ");
                     }
 
-                    int indent1 = indent + 1;
-                    sb.Append(ConvertExpression(childStatement, new ConvExprArgs(indent1, false)));
+                    sb.Append(ConvertExpression(childStatement, nextArgsUseIndentFalse));
                 }
                 else
                 {
-                    int indent1 = indent + 1;
-                    sb.Append(ConvertExpression(childStatement, new ConvExprArgs(indent1)));
+                    sb.Append(ConvertExpression(childStatement, nextArgsUseIndentTrue));
                 }
 
                 switch (childStatement)
@@ -166,34 +173,32 @@ namespace Hl7.Cql.CodeGeneration.NET
                 isFirstStatement = false;
             }
 
-            sb.Append(indent, "}");
+            sb.Append(args.Indent, "}");
 
             return sb.ToString();
         }
 
         private string ConvertNullConditionalMemberExpression(
             NullConditionalMemberExpression nullp,
-            ConvExprArgs args)
+            Args args)
         {
-            var indentString = args.IndentString;
-            var @object = ConvertExpression(nullp.MemberExpression.Expression!, new ConvExprArgs(0));
-            @object = ParenthesizeIfNeeded(@object);
-            return $"{indentString}{@object}?.{nullp.MemberExpression.Member.Name}";
+            var @object = ConvertExpression(nullp.MemberExpression.Expression!, new Args(0));
+            @object = @object.ParenthesizeIfNeeded();
+            return $"{args.IndentString}{@object}?.{nullp.MemberExpression.Member.Name}";
         }
 
         private string ConvertConstantExpression(
             ConstantExpression constant,
-            ConvExprArgs args)
+            Args args)
         {
-            var (constantType, value, indentString) = (constant.Type, constant.Value, args.IndentString);
             string text;
-            var type = value?.GetType() ?? constantType;
+            var type = constant.Value?.GetType() ?? constant.Type;
             type = Nullable.GetUnderlyingType(type) ?? type;
 
             if (type.IsValueType)
             {
                 // Value Types
-                text = value switch
+                text = constant.Value switch
                 {
                     // Value Types
                     Enum e when Enum.IsDefined(e.GetType(), e) => $"{e.GetType().FullName}.{e}", // 'e' will be the name of the defined enum
@@ -202,24 +207,24 @@ namespace Hl7.Cql.CodeGeneration.NET
                     decimal d => FormattableString.Invariant($"{d}m"),
                     int i => FormattableString.Invariant($"{i}"),
                     var v when v.IsObjectNullOrDefault() => DefaultExpressionForType(),
-                    _ => FormattableString.Invariant($"{value}"),
+                    var v => FormattableString.Invariant($"{v}"),
                 };
             }
             else
             {
                 // Reference Types
-                text = value switch
+                text = constant.Value switch
                 {
                     null when type == typeof(object) => "null",
                     null                             => DefaultExpressionForType(),
                     Type t                           => $"typeof({_typeToCSharpConverter.ToCSharp(t)})",
                     Uri u                            => $"new Uri(\"{u}\")",
-                    string s                         => QuoteString(s),
-                    _                                => FormattableString.Invariant($"{value}")
+                    string s                         => s.QuoteString(),
+                    var v                                => FormattableString.Invariant($"{v}")
                 };
             }
 
-            return $"{indentString}{text}";
+            return $"{args.IndentString}{text}";
 
             string DefaultExpressionForType()
             {
@@ -232,40 +237,35 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private string QuoteString(string s) => SymbolDisplay.FormatLiteral(s, true);
-
         private static string ConvertParameterExpression(
             ParameterExpression pe,
-            ConvExprArgs args)
+            Args args)
         {
-            var indentString = args.IndentString;
-            return $"{indentString}{ParamName(pe)}";
+            return $"{args.IndentString}{StringExtensions.GetOrCreateName(pe)}";
         }
 
         private static string ConvertInvocationExpression(
             InvocationExpression invoc,
-            ConvExprArgs args)
+            Args args)
         {
-            var indentString = args.IndentString;
             if (invoc.Expression is ParameterExpression pe && !invoc.Arguments.Any())
-                return $"{indentString}{pe.Name}()";
+                return $"{args.IndentString}{pe.Name}()";
             else
                 throw new NotImplementedException();
         }
 
         private string ConvertMethodCallExpression(
             MethodCallExpression call,
-            ConvExprArgs args)
+            Args args)
         {
-            var (indent, indentString) = (args.Indent, args.IndentString);
             var sb = new StringBuilder();
-            sb.Append(indentString);
+            sb.Append(args.IndentString);
 
             var @object = call switch
             {
-                { Object: not null } => $"{ConvertExpression(call.Object, new ConvExprArgs(indent, false))}.",
+                { Object: not null } => $"{ConvertExpression(call.Object, new Args(args.Indent, false))}.",
                 { Method.IsStatic: true } ext when ext.Method.IsExtensionMethod() =>
-                        $"{ConvertExpression(call.Arguments[0], new ConvExprArgs(indent, false))}.",
+                        $"{ConvertExpression(call.Arguments[0], new Args(args.Indent, false))}.",
                 { Method.IsStatic: true } => $"{_typeToCSharpConverter.ToCSharp(call.Method.DeclaringType!)}.",
                 _                         => throw new InvalidOperationException("Calls should be either static or have a non-null object.")
             };
@@ -274,20 +274,22 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var paramList = call.Method.IsExtensionMethod() ? call.Arguments.Skip(1) : call.Arguments;
 
-            sb.Append(ConvertArguments(indent, paramList));
+            sb.Append(ConvertArguments(paramList, args));
             return sb.ToString();
         }
 
-        private string ConvertArguments(int indent, IEnumerable<Expression> paramList)
+        private string ConvertArguments(
+            IEnumerable<Expression> paramList,
+            Args args)
         {
             var sb = new StringBuilder();
             sb.Append("(");
 
             bool firstArg = true;
+            var argsForArgument = args.With(indent => indent+1, _ => false);
             foreach (var argument in paramList)
             {
-                int indent1 = indent + 1;
-                var argAsCode = ConvertExpression(argument, new ConvExprArgs(indent1, false));
+                var argAsCode = ConvertExpression(argument, argsForArgument);
                 if (firstArg)
                 {
                     sb.Append(argAsCode);
@@ -307,22 +309,20 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertDefaultExpression(
             DefaultExpression de,
-            ConvExprArgs args)
+            Args args)
         {
-            var indentString = args.IndentString;
             var isNullableType = !de.Type.IsValueType || Nullable.GetUnderlyingType(de.Type) is not null;
             var defaultExpression = isNullableType ? "null" : $"default({_typeToCSharpConverter.ToCSharp(de.Type)})";
-            return $"{indentString}{defaultExpression}";
+            return $"{args.IndentString}{defaultExpression}";
         }
 
         private string ConvertTypeBinaryExpression(
             TypeBinaryExpression typeBinary,
-            ConvExprArgs args)
+            Args args)
         {
-            var indent = args.Indent;
             if (typeBinary.NodeType == ExpressionType.TypeIs)
             {
-                var left = ConvertExpression(typeBinary.Expression, new ConvExprArgs(indent, false));
+                var left = ConvertExpression(typeBinary.Expression, args.DontUseIndent());
                 var type = _typeToCSharpConverter.ToCSharp(typeBinary.TypeOperand);
                 var @is = $"{left} is {type}";
                 return @is;
@@ -333,21 +333,20 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertConditionalExpression(
             ConditionalExpression ce,
-            ConvExprArgs args)
+            Args args)
         {
-            var (indent, indentString) = (args.Indent, args.IndentString);
             var conditionalSb = new StringBuilder();
-            conditionalSb.Append(indentString);
+            conditionalSb.Append(args.IndentString);
             conditionalSb.Append('(');
-            var test = ConvertExpression(ce.Test, new ConvExprArgs(indent, false));
+            var nextArgs = args.DontUseIndent();
+            var test = ConvertExpression(ce.Test, nextArgs);
             conditionalSb.AppendLine(CultureInfo.InvariantCulture, $"{test}");
 
-            int indent1 = indent + 2;
-            var ifTrue = $"{ConvertExpression(ce.IfTrue, new ConvExprArgs(indent1, false))}";
-            int indent2 = indent + 2;
-            var ifFalse = $"{ConvertExpression(ce.IfFalse, new ConvExprArgs(indent2, false))}";
-            conditionalSb.AppendLine(CultureInfo.InvariantCulture, $"{StringUtility.IndentString(indent + 1)}? {ifTrue}");
-            conditionalSb.Append(CultureInfo.InvariantCulture, $"{StringUtility.IndentString(indent + 1)}: {ifFalse})");
+            var nextArgs2 = nextArgs.With(indent => indent + 2);
+            var ifTrue = $"{ConvertExpression(ce.IfTrue, nextArgs2)}";
+            var ifFalse = $"{ConvertExpression(ce.IfFalse, nextArgs2)}";
+            conditionalSb.AppendLine(CultureInfo.InvariantCulture, $"{StringExtensions.IndentString(args.Indent + 1)}? {ifTrue}");
+            conditionalSb.Append(CultureInfo.InvariantCulture, $"{StringExtensions.IndentString(args.Indent + 1)}: {ifFalse})");
 
             if (ce.IfTrue.Type != ce.Type || ce.IfFalse.Type != ce.Type)
                 return $"({_typeToCSharpConverter.ToCSharp(ce.Type)}){conditionalSb}";
@@ -357,47 +356,48 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertCaseWhenThenExpression(
             CaseWhenThenExpression conditional,
-            ConvExprArgs args)
+            Args args)
         {
-            var indent = args.Indent;
             var sb = new StringBuilder();
 
             bool firstCase = true;
+            var nextArgs = args.With(indent => indent + 1, _ => false);
             foreach (var c in conditional.WhenThenCases)
             {
                 if (firstCase)
-                    sb.Append(indent, "if (");
+                    sb.Append(args.Indent, "if (");
                 else
-                    sb.Append(indent, "else if (");
+                    sb.Append(args.Indent, "else if (");
 
-                int indent1 = indent + 1;
-                sb.Append(ConvertExpression(c.When, new ConvExprArgs(indent1, false)));
+                sb.Append(ConvertExpression(c.When, nextArgs));
                 sb.AppendLine(")");
-                sb.AppendLine(ConvertConditionalStatementBlock(indent, c.Then));
+                sb.AppendLine(ConvertConditionalStatementBlock(c.Then, args));
                 firstCase = false;
             }
 
-            sb.AppendLine(indent, "else");
-            sb.Append(ConvertConditionalStatementBlock(indent, conditional.ElseCase));
+            sb.AppendLine(args.Indent, "else");
+            sb.Append(ConvertConditionalStatementBlock(conditional.ElseCase, args));
 
             return sb.ToString();
         }
 
-        private string ConvertConditionalStatementBlock(int indent, Expression conditionalActionBlock)
+        private string ConvertConditionalStatementBlock(
+            Expression conditionalActionBlock,
+            Args args)
         {
+            var nextArgs = args.With(indent => indent+1, _ => false);
             if (conditionalActionBlock is BlockExpression)
             {
-                return ConvertExpression(conditionalActionBlock, new ConvExprArgs(indent));
+                return ConvertExpression(conditionalActionBlock, args.DoUseIndent());
             }
             else
             {
                 var sb = new StringBuilder();
-                sb.AppendLine(indent, "{");
-                sb.Append(indent + 1, "return ");
-                int indent1 = indent + 1;
-                sb.Append(ConvertExpression(conditionalActionBlock, new ConvExprArgs(indent1, false)));
+                sb.AppendLine(args.Indent, "{");
+                sb.Append(nextArgs.Indent, "return ");
+                sb.Append(ConvertExpression(conditionalActionBlock, nextArgs));
                 sb.AppendLine(";");
-                sb.Append(indent, "}");
+                sb.Append(args.Indent, "}");
 
                 return sb.ToString();
             }
@@ -405,16 +405,15 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertMemberInitExpression(
             MemberInitExpression memberInit,
-            ConvExprArgs args)
+            Args args)
         {
-            var (indent, indentString) = (args.Indent, args.IndentString);
             if (_typeToCSharpConverter.ShouldUseTupleType(memberInit.Type))
             {
                 var memberAssignmentsByMemberName = memberInit.Bindings
                                            .Cast<MemberAssignment>()
                                            .ToDictionary(
                                                ma => ma.Member.Name,
-                                               ma => ConvertExpression(ma.Expression, new ConvExprArgs(0, false)));
+                                               ma => ConvertExpression(ma.Expression, new Args(0, false)));
 
                 var memberValues = _typeToCSharpConverter
                                    .GetTupleProperties(memberInit.Type)
@@ -426,23 +425,23 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
 
             var memberInitSb = new StringBuilder();
-            memberInitSb.Append(indentString);
+            memberInitSb.Append(args.IndentString);
             var typeName = _typeToCSharpConverter.ToCSharp(memberInit.Type);
 #pragma warning disable CA1305 // Specify IFormatProvider
             memberInitSb.AppendLine($"new {typeName}");
 #pragma warning restore CA1305 // Specify IFormatProvider
-            var braceIndent = StringUtility.IndentString(indent);
+            var braceIndent = StringExtensions.IndentString(args.Indent);
             memberInitSb.Append(braceIndent);
             memberInitSb.AppendLine("{");
-            var braceIndentPlusOne = StringUtility.IndentString(indent + 1);
+            var braceIndentPlusOne = StringExtensions.IndentString(args.Indent + 1);
 
             foreach (var binding in memberInit.Bindings)
             {
                 if (binding is MemberAssignment assignment)
                 {
                     var memberName = assignment.Member.Name;
-                    int indent1 = indent + 1;
-                    var assignmentCode = ConvertExpression(assignment.Expression, new ConvExprArgs(indent1, false));
+                    int indent1 = args.Indent + 1;
+                    var assignmentCode = ConvertExpression(assignment.Expression, new Args(indent1, false));
                     memberInitSb.Append(braceIndentPlusOne);
 #pragma warning disable CA1305 // Specify IFormatProvider
                     memberInitSb.Append($"{memberName} = {assignmentCode}");
@@ -461,21 +460,20 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertNewArrayExpression(
             NewArrayExpression newArray,
-            ConvExprArgs args)
+            Args args)
         {
-            var (indent, indentString) = (args.Indent, args.IndentString);
             switch (newArray.NodeType)
             {
                 case ExpressionType.NewArrayInit:
                     {
                         var newArraySb = new StringBuilder();
-                        var braceIndent = StringUtility.IndentString(indent);
+                        var braceIndent = StringExtensions.IndentString(args.Indent);
                         newArraySb.AppendLine("[");
 
                         foreach (var expr in newArray.Expressions)
                         {
-                            int indent1 = indent + 1;
-                            var exprCode = ConvertExpression(expr, new ConvExprArgs(indent1));
+                            int indent1 = args.Indent + 1;
+                            var exprCode = ConvertExpression(expr, new Args(indent1));
                             newArraySb.Append(exprCode);
                             newArraySb.AppendLine(",");
                         }
@@ -487,7 +485,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 case ExpressionType.NewArrayBounds:
                     {
                         var newArraySb = new StringBuilder();
-                        newArraySb.Append(indentString);
+                        newArraySb.Append(args.IndentString);
                         // var arrayType = _typeToCSharpConverter.ToCSharp(newArray.Type.GetElementType()!);
                         // var size = ConvertExpression(0, newArray.Expressions[0], false);
 #pragma warning disable CA1305 // Specify IFormatProvider
@@ -503,41 +501,38 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertNewExpression(
             NewExpression @new,
-            ConvExprArgs args)
+            Args args)
         {
-            var indentString = args.IndentString;
-            var arguments = @new.Arguments.Select(a => ConvertExpression(a, new ConvExprArgs(0)));
+            var arguments = @new.Arguments.Select(a => ConvertExpression(a, new Args(0)));
             var argString = string.Join(", ", arguments);
             var newSb = new StringBuilder();
-            newSb.Append(CultureInfo.InvariantCulture, $"{indentString}new {_typeToCSharpConverter.ToCSharp(@new.Type)}");
+            newSb.Append(CultureInfo.InvariantCulture, $"{args.IndentString}new {_typeToCSharpConverter.ToCSharp(@new.Type)}");
             newSb.Append(CultureInfo.InvariantCulture, $"({argString})");
             return newSb.ToString();
         }
 
         private string ConvertMemberExpression(
             MemberExpression me,
-            ConvExprArgs args)
+            Args args)
         {
-            var indentString = args.IndentString;
             var nullProp = _typeToCSharpConverter.GetMemberAccessNullabilityOperator(me.Expression?.Type);
-            var @object = me.Expression is not null ? ConvertExpression(me.Expression, new ConvExprArgs(0)) : _typeToCSharpConverter.ToCSharp(me.Member.DeclaringType!);
-            @object = ParenthesizeIfNeeded(@object);
-            var memberName = EscapeKeywords(me.Member.Name);
-            return $"{indentString}{@object}{nullProp}.{memberName}";
+            var @object = me.Expression is not null ? ConvertExpression(me.Expression, new Args(0)) : _typeToCSharpConverter.ToCSharp(me.Member.DeclaringType!);
+            @object = @object.ParenthesizeIfNeeded();
+            var memberName = me.Member.Name.EscapeKeywords();
+            return $"{args.IndentString}{@object}{nullProp}.{memberName}";
         }
 
         private string ConvertLambdaExpression(
             LambdaExpression lambda,
-            ConvExprArgs args,
+            Args args,
             bool functionMode = false)
         {
-            var (indent, indentString) = (args.Indent, args.IndentString);
             var lambdaSb = new StringBuilder();
-            lambdaSb.Append(indentString);
+            lambdaSb.Append(args.IndentString);
 
-            var parameters = lambda.Parameters.Select(p => $"{_typeToCSharpConverter.ToCSharp(p.Type)} {EscapeKeywords(p.Name!)}").ToList();
+            var parameters = lambda.Parameters.Select(p => $"{_typeToCSharpConverter.ToCSharp(p.Type)} {p.Name!.EscapeKeywords()}").ToList();
             // inserts the context parameter in the start of the lambda expression
-            if (indent == 1)
+            if (args.Indent == 1)
                 parameters.Insert(0, "CqlContext context");
 
             var lambdaParameters = $"({string.Join(", ", parameters)})";
@@ -550,14 +545,14 @@ namespace Hl7.Cql.CodeGeneration.NET
                 else
                     lambdaSb.AppendLine();
 
-                var lambdaBody = ConvertExpression(lambda.Body, new ConvExprArgs(indent));
+                var lambdaBody = ConvertExpression(lambda.Body, new Args(args.Indent));
                 lambdaSb.Append(lambdaBody);
             }
             else
             {
                 lambdaSb.AppendLine(" => ");
-                int indent1 = indent + 1;
-                var lambdaBody = ConvertExpression(lambda.Body, new ConvExprArgs(indent1));
+                int indent1 = args.Indent + 1;
+                var lambdaBody = ConvertExpression(lambda.Body, new Args(indent1));
                 lambdaSb.Append(lambdaBody);
             }
 
@@ -566,12 +561,11 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertLocalFunctionDefinition(
             LambdaExpression function,
-            ConvExprArgs args,
+            Args args,
             string name)
         {
-            var indentString = args.IndentString;
             var funcSb = new StringBuilder();
-            funcSb.Append(indentString);
+            funcSb.Append(args.IndentString);
             funcSb.Append(_typeToCSharpConverter.ToCSharp(function.ReturnType) + " ");
             funcSb.Append(name);
 
@@ -583,14 +577,13 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public string ConvertTopLevelFunctionDefinition(
             LambdaExpression function,
-            ConvExprArgs args,
+            Args args,
             string name,
             string specifiers)
         {
-            var indent = args.Indent;
             var funcSb = new StringBuilder();
 
-            funcSb.Append(indent, specifiers + " ");
+            funcSb.Append(args.Indent, specifiers + " ");
             funcSb.Append(_typeToCSharpConverter.ToCSharp(function.ReturnType) + " ");
             funcSb.Append(name);
 
@@ -604,7 +597,6 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             return funcSb.ToString();
         }
-
 
         // Linq.Expressions needs an explicit conversion from a value type
         // type to object, but the C# compiler will insert that boxing,
@@ -632,13 +624,12 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private string ConvertUnaryExpression(
             UnaryExpression unary,
-            ConvExprArgs args)
+            Args args)
         {
-            var (indent, indentString) = (args.Indent, args.IndentString);
             var stripped = StripBoxing(unary);
 
             if (stripped is not UnaryExpression strippedUnary)
-                return ConvertExpression(stripped, new ConvExprArgs(indent, false));
+                return ConvertExpression(stripped, new Args(args.Indent, false));
 
             switch (strippedUnary.NodeType)
             {
@@ -646,35 +637,29 @@ namespace Hl7.Cql.CodeGeneration.NET
                 case ExpressionType.Convert:
                 case ExpressionType.TypeAs:
                     {
-                        var operand = ConvertExpression(strippedUnary.Operand, new ConvExprArgs(indent, false));
-                        operand = ParenthesizeIfNeeded(operand);
+                        var operand = ConvertExpression(strippedUnary.Operand, new Args(args.Indent, false));
+                        operand = operand.ParenthesizeIfNeeded();
                         var typeName = _typeToCSharpConverter.ToCSharp(strippedUnary.Type);
                         var code = strippedUnary.NodeType == ExpressionType.TypeAs ?
-                            $"{indentString}{operand} as {typeName}" :
-                            $"{indentString}({typeName}){operand}";
+                            $"{args.IndentString}{operand} as {typeName}" :
+                            $"{args.IndentString}({typeName}){operand}";
                         return code;
                     }
                     case ExpressionType.Throw:
                     {
-                        var operand = ConvertExpression(strippedUnary.Operand, new ConvExprArgs(indent, false));
-                        return $"{indentString}throw ({operand})";
+                        var operand = ConvertExpression(strippedUnary.Operand, new Args(args.Indent, false));
+                        return $"{args.IndentString}throw ({operand})";
                     }
                 default:
                     throw new NotSupportedException($"Don't know how to convert unary operator {strippedUnary.NodeType} into C#.");
             }
         }
 
-#pragma warning disable SYSLIB0050 // Type or member is obsolete
-        private static readonly ObjectIDGenerator Gen = new();
-#pragma warning restore SYSLIB0050 // Type or member is obsolete
-
-        private static string ParamName(ParameterExpression p) => p.Name ?? $"var{Gen.GetId(p, out _)}";
-
         private string ConvertBinaryExpression(
             BinaryExpression binary,
-            ConvExprArgs args)
+            Args args)
         {
-            var (indent, indentString) = (args.Indent, args.IndentString);
+            var nextArgs = args.DontUseIndent();
             var left = StripBoxing(binary.Left);
             var right = StripBoxing(binary.Right);
 
@@ -684,9 +669,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                 if (right is LambdaExpression le)
                     return ConvertLocalFunctionDefinition(le, args, parameter.Name!);
 
-                var rightCode = ConvertExpression(right, new ConvExprArgs(indent, false));
+                var rightCode = ConvertExpression(right, nextArgs);
                 var typeDeclaration = _typeToCSharpConverter.ToCSharp(left.Type);
-                var assignment = $"{indentString}{typeDeclaration} {ParamName(parameter)} = {rightCode}";
+                var assignment = $"{args.IndentString}{typeDeclaration} {StringExtensions.GetOrCreateName(parameter)} = {rightCode}";
                 return assignment;
             }
             else
@@ -695,10 +680,10 @@ namespace Hl7.Cql.CodeGeneration.NET
                     ? "is"
                     : BinaryOperatorFor(binary.NodeType);
 
-                var leftCode =  ConvertExpression(left, new ConvExprArgs(indent, false));
-                leftCode = ParenthesizeIfNeeded(leftCode);
-                var rightCode = ConvertExpression(right, new ConvExprArgs(indent, false));
-                var binaryString = $"{indentString}{leftCode} {@operator} {rightCode}";
+                var leftCode =  ConvertExpression(left, nextArgs);
+                leftCode = leftCode.ParenthesizeIfNeeded();
+                var rightCode = ConvertExpression(right, nextArgs);
+                var binaryString = $"{args.IndentString}{leftCode} {@operator} {rightCode}";
                 return binaryString;
             }
         }
@@ -750,8 +735,22 @@ namespace Hl7.Cql.CodeGeneration.NET
             else
                 return method.Name;
         }
+    }
 
-        private string ParenthesizeIfNeeded(string term)
+    file static class StringExtensions
+    {
+        public static string QuoteString(this string s) => SymbolDisplay.FormatLiteral(s, true);
+
+        public static string EscapeKeywords(this string symbol)
+        {
+            var keyword = SyntaxFacts.GetKeywordKind(symbol);
+            return keyword == SyntaxKind.None ? symbol : $"@{symbol}";
+        }
+
+        public static string IndentString(int indent) => new('\t', indent);
+
+
+        public static string ParenthesizeIfNeeded(this string term)
         {
             term = term.Trim();
 
@@ -772,13 +771,12 @@ namespace Hl7.Cql.CodeGeneration.NET
             return term;
         }
 
-
         // Check whether the term has matching opening and closing parentheses.
         // (so this matches "(a)" but not "(x) + (y)" nor "a + (b) + c").
         private static bool IsSingleParenthesizedTerm(string term)
         {
             var opens = 0;
-            for(var index = 0; index < term.Length; index++)
+            for (var index = 0; index < term.Length; index++)
             {
                 opens = term[index] switch
                 {
@@ -787,25 +785,35 @@ namespace Hl7.Cql.CodeGeneration.NET
                     _   => opens
                 };
 
-                if(opens == 0)
+                if (opens == 0)
                 {
-                    return index == term.Length-1;
+                    return index == term.Length - 1;
                 }
             }
 
             throw new InvalidOperationException($"Unbalanced parentheses in expression '{term}'");
         }
 
+#pragma warning disable SYSLIB0050 // Type or member is obsolete
+        private static readonly ObjectIDGenerator Gen = new();
+#pragma warning restore SYSLIB0050 // Type or member is obsolete
 
-        private static string EscapeKeywords(string symbol)
-        {
-            var keyword = SyntaxFacts.GetKeywordKind(symbol);
-            return keyword == SyntaxKind.None ? symbol : $"@{symbol}";
-        }
+        public static string GetOrCreateName(ParameterExpression p) => p.Name ?? $"var{Gen.GetId(p, out _)}";
     }
 
-    file static class StringUtility
+    internal record CqlTupleMetadata(string[] PropertyNames)
     {
-        public static string IndentString(int indent) => new('\t', indent);
+        public string[] PropertyNames { get; } = PropertyNames;
+        private readonly int _hashCode = PropertyNames.Aggregate(0, HashCode.Combine);
+
+        public virtual bool Equals(CqlTupleMetadata? other)
+        {
+            if (other is null) return false;
+            if (ReferenceEquals(this, other)) return true;
+            if (_hashCode != other._hashCode) return false;
+            return PropertyNames.SequenceEqual(other.PropertyNames);
+        }
+
+        public override int GetHashCode() => _hashCode;
     }
 }
