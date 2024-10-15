@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("QICoreCommon", "2.0.000")]
 public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_0_000>
 {
-    private QICoreCommon_2_0_000() {}
+private QICoreCommon_2_0_000() {}
 
-    public static QICoreCommon_2_0_000 Instance { get; } = new();
+public static QICoreCommon_2_0_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "QICoreCommon";

@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("GlobalMalnutritionCompositeFHIR", "0.1.000")]
 public partial class GlobalMalnutritionCompositeFHIR_0_1_000 : ILibrary, ISingleton<GlobalMalnutritionCompositeFHIR_0_1_000>
 {
-    private GlobalMalnutritionCompositeFHIR_0_1_000() {}
+private GlobalMalnutritionCompositeFHIR_0_1_000() {}
 
-    public static GlobalMalnutritionCompositeFHIR_0_1_000 Instance { get; } = new();
+public static GlobalMalnutritionCompositeFHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "GlobalMalnutritionCompositeFHIR";

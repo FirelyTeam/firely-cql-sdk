@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR", "0.0.001")]
 public partial class PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001 : ILibrary, ISingleton<PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001>
 {
-    private PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001() {}
+private PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001() {}
 
-    public static PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001 Instance { get; } = new();
+public static PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR_0_0_001 Instance { get; } = new();
 
     #region Library Members
     public string Name => "PreventiveCareAndScreeningTobaccoUseScreeningAndCessationInterventionFHIR";

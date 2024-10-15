@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("DischargedonAntithromboticTherapyFHIR", "0.0.010")]
 public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, ISingleton<DischargedonAntithromboticTherapyFHIR_0_0_010>
 {
-    private DischargedonAntithromboticTherapyFHIR_0_0_010() {}
+private DischargedonAntithromboticTherapyFHIR_0_0_010() {}
 
-    public static DischargedonAntithromboticTherapyFHIR_0_0_010 Instance { get; } = new();
+public static DischargedonAntithromboticTherapyFHIR_0_0_010 Instance { get; } = new();
 
     #region Library Members
     public string Name => "DischargedonAntithromboticTherapyFHIR";

@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CumulativeMedicationDurationFHIR4", "1.0.000")]
 public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISingleton<CumulativeMedicationDurationFHIR4_1_0_000>
 {
-    private CumulativeMedicationDurationFHIR4_1_0_000() {}
+private CumulativeMedicationDurationFHIR4_1_0_000() {}
 
-    public static CumulativeMedicationDurationFHIR4_1_0_000 Instance { get; } = new();
+public static CumulativeMedicationDurationFHIR4_1_0_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "CumulativeMedicationDurationFHIR4";

@@ -115,19 +115,17 @@ namespace Hl7.Cql.CqlToElm.Test
             var cSharpLibrarySetToStreamsWriter = ServiceProvider.GetCSharpLibrarySetToStreamsWriter();
 
             Dictionary<string, string> cSharpCodeByLibraryName = new();
-            cSharpLibrarySetToStreamsWriter.ProcessDefinitions(
-                librarySetDefinitions.Definitions,
-                librarySetDefinitions.LibrarySet,
-                new CSharpSourceCodeWriterCallbacks(onAfterStep: step =>
-                {
-                    if (step is CSharpSourceCodeStep.OnStream onStream)
-                    {
-                        onStream.Stream.Seek(0, SeekOrigin.Begin);
-                        using var reader = new StreamReader(onStream.Stream);
-                        var code = reader.ReadToEnd();
-                        cSharpCodeByLibraryName.Add(onStream.Name, code);
-                    }
-                }));
+            cSharpLibrarySetToStreamsWriter.ProcessDefinitions(librarySetDefinitions.LibrarySet,
+                                                               librarySetDefinitions.Definitions, new CSharpSourceCodeWriterCallbacks(onAfterStep: step =>
+                                                               {
+                                                                   if (step is CSharpSourceCodeStep.OnStream onStream)
+                                                                   {
+                                                                       onStream.Stream.Seek(0, SeekOrigin.Begin);
+                                                                       using var reader = new StreamReader(onStream.Stream);
+                                                                       var code = reader.ReadToEnd();
+                                                                       cSharpCodeByLibraryName.Add(onStream.Name, code);
+                                                                   }
+                                                               }));
             return new(librarySetDefinitions, cSharpCodeByLibraryName.AsReadOnly());
         }
 
@@ -312,7 +310,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var ls = new LibrarySet("", library);
             var csByNav = new Dictionary<string, string>();
             var callbacks = new CSharpSourceCodeWriterCallbacks(onAfterStep: afterWrite);
-            SourceCodeWriter.ProcessDefinitions(lambdas, ls, callbacks);
+            SourceCodeWriter.ProcessDefinitions(ls, lambdas, callbacks);
             return csByNav[library.GetVersionedIdentifier()!];
 
             void afterWrite(CSharpSourceCodeStep step)

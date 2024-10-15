@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("PCMaternal", "5.16.000")]
 public partial class PCMaternal_5_16_000 : ILibrary, ISingleton<PCMaternal_5_16_000>
 {
-    private PCMaternal_5_16_000() {}
+private PCMaternal_5_16_000() {}
 
-    public static PCMaternal_5_16_000 Instance { get; } = new();
+public static PCMaternal_5_16_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "PCMaternal";

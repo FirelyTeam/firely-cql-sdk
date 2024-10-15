@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("AppropriateTestingforPharyngitisFHIR", "0.1.000")]
 public partial class AppropriateTestingforPharyngitisFHIR_0_1_000 : ILibrary, ISingleton<AppropriateTestingforPharyngitisFHIR_0_1_000>
 {
-    private AppropriateTestingforPharyngitisFHIR_0_1_000() {}
+private AppropriateTestingforPharyngitisFHIR_0_1_000() {}
 
-    public static AppropriateTestingforPharyngitisFHIR_0_1_000 Instance { get; } = new();
+public static AppropriateTestingforPharyngitisFHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "AppropriateTestingforPharyngitisFHIR";

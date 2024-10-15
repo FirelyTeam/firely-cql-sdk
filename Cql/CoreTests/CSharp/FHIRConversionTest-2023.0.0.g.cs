@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("FHIRConversionTest", "2023.0.0")]
 public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConversionTest_2023_0_0>
 {
-    private FHIRConversionTest_2023_0_0() {}
+private FHIRConversionTest_2023_0_0() {}
 
-    public static FHIRConversionTest_2023_0_0 Instance { get; } = new();
+public static FHIRConversionTest_2023_0_0 Instance { get; } = new();
 
     #region Library Members
     public string Name => "FHIRConversionTest";

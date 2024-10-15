@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("NCQAAdvancedIllnessandFrailty", "1.0.0")]
 public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<NCQAAdvancedIllnessandFrailty_1_0_0>
 {
-    private NCQAAdvancedIllnessandFrailty_1_0_0() {}
+private NCQAAdvancedIllnessandFrailty_1_0_0() {}
 
-    public static NCQAAdvancedIllnessandFrailty_1_0_0 Instance { get; } = new();
+public static NCQAAdvancedIllnessandFrailty_1_0_0 Instance { get; } = new();
 
     #region Library Members
     public string Name => "NCQAAdvancedIllnessandFrailty";

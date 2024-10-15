@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("MATGlobalCommonFunctionsFHIR4", "6.1.000")]
 public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleton<MATGlobalCommonFunctionsFHIR4_6_1_000>
 {
-    private MATGlobalCommonFunctionsFHIR4_6_1_000() {}
+private MATGlobalCommonFunctionsFHIR4_6_1_000() {}
 
-    public static MATGlobalCommonFunctionsFHIR4_6_1_000 Instance { get; } = new();
+public static MATGlobalCommonFunctionsFHIR4_6_1_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "MATGlobalCommonFunctionsFHIR4";

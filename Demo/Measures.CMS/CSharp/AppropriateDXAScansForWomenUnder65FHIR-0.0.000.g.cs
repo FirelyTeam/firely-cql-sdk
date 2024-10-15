@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("AppropriateDXAScansForWomenUnder65FHIR", "0.0.000")]
 public partial class AppropriateDXAScansForWomenUnder65FHIR_0_0_000 : ILibrary, ISingleton<AppropriateDXAScansForWomenUnder65FHIR_0_0_000>
 {
-    private AppropriateDXAScansForWomenUnder65FHIR_0_0_000() {}
+private AppropriateDXAScansForWomenUnder65FHIR_0_0_000() {}
 
-    public static AppropriateDXAScansForWomenUnder65FHIR_0_0_000 Instance { get; } = new();
+public static AppropriateDXAScansForWomenUnder65FHIR_0_0_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "AppropriateDXAScansForWomenUnder65FHIR";

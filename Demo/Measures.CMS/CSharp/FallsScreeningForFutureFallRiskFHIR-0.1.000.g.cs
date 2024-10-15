@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("FallsScreeningForFutureFallRiskFHIR", "0.1.000")]
 public partial class FallsScreeningForFutureFallRiskFHIR_0_1_000 : ILibrary, ISingleton<FallsScreeningForFutureFallRiskFHIR_0_1_000>
 {
-    private FallsScreeningForFutureFallRiskFHIR_0_1_000() {}
+private FallsScreeningForFutureFallRiskFHIR_0_1_000() {}
 
-    public static FallsScreeningForFutureFallRiskFHIR_0_1_000 Instance { get; } = new();
+public static FallsScreeningForFutureFallRiskFHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "FallsScreeningForFutureFallRiskFHIR";

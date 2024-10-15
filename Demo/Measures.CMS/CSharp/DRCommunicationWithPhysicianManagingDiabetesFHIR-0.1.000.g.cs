@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("DRCommunicationWithPhysicianManagingDiabetesFHIR", "0.1.000")]
 public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : ILibrary, ISingleton<DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000>
 {
-    private DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000() {}
+private DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000() {}
 
-    public static DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 Instance { get; } = new();
+public static DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "DRCommunicationWithPhysicianManagingDiabetesFHIR";

@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("AHAOverall", "2.6.000")]
 public partial class AHAOverall_2_6_000 : ILibrary, ISingleton<AHAOverall_2_6_000>
 {
-    private AHAOverall_2_6_000() {}
+private AHAOverall_2_6_000() {}
 
-    public static AHAOverall_2_6_000 Instance { get; } = new();
+public static AHAOverall_2_6_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "AHAOverall";

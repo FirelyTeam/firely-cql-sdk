@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("Cataracts2040BCVAwithin90DaysFHIR", "0.1.000")]
 public partial class Cataracts2040BCVAwithin90DaysFHIR_0_1_000 : ILibrary, ISingleton<Cataracts2040BCVAwithin90DaysFHIR_0_1_000>
 {
-    private Cataracts2040BCVAwithin90DaysFHIR_0_1_000() {}
+private Cataracts2040BCVAwithin90DaysFHIR_0_1_000() {}
 
-    public static Cataracts2040BCVAwithin90DaysFHIR_0_1_000 Instance { get; } = new();
+public static Cataracts2040BCVAwithin90DaysFHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "Cataracts2040BCVAwithin90DaysFHIR";

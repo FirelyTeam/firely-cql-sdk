@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("PrimaryCariesPreventionasOfferedbyDentistsFHIR", "0.0.002")]
 public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 : ILibrary, ISingleton<PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002>
 {
-    private PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002() {}
+private PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002() {}
 
-    public static PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 Instance { get; } = new();
+public static PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 Instance { get; } = new();
 
     #region Library Members
     public string Name => "PrimaryCariesPreventionasOfferedbyDentistsFHIR";

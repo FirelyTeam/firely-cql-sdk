@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("DementiaCognitiveAssessmentFHIR", "0.1.000")]
 public partial class DementiaCognitiveAssessmentFHIR_0_1_000 : ILibrary, ISingleton<DementiaCognitiveAssessmentFHIR_0_1_000>
 {
-    private DementiaCognitiveAssessmentFHIR_0_1_000() {}
+private DementiaCognitiveAssessmentFHIR_0_1_000() {}
 
-    public static DementiaCognitiveAssessmentFHIR_0_1_000 Instance { get; } = new();
+public static DementiaCognitiveAssessmentFHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "DementiaCognitiveAssessmentFHIR";

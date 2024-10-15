@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("AppropriateTreatmentforSTEMIFHIR", "1.0.000")]
 public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000 : ILibrary, ISingleton<AppropriateTreatmentforSTEMIFHIR_1_0_000>
 {
-    private AppropriateTreatmentforSTEMIFHIR_1_0_000() {}
+private AppropriateTreatmentforSTEMIFHIR_1_0_000() {}
 
-    public static AppropriateTreatmentforSTEMIFHIR_1_0_000 Instance { get; } = new();
+public static AppropriateTreatmentforSTEMIFHIR_1_0_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "AppropriateTreatmentforSTEMIFHIR";

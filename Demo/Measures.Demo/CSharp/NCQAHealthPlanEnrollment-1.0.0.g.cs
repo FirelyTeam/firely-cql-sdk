@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("NCQAHealthPlanEnrollment", "1.0.0")]
 public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAHealthPlanEnrollment_1_0_0>
 {
-    private NCQAHealthPlanEnrollment_1_0_0() {}
+private NCQAHealthPlanEnrollment_1_0_0() {}
 
-    public static NCQAHealthPlanEnrollment_1_0_0 Instance { get; } = new();
+public static NCQAHealthPlanEnrollment_1_0_0 Instance { get; } = new();
 
     #region Library Members
     public string Name => "NCQAHealthPlanEnrollment";

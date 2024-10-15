@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CRLReceiptofSpecialistReportFHIR", "0.2.000")]
 public partial class CRLReceiptofSpecialistReportFHIR_0_2_000 : ILibrary, ISingleton<CRLReceiptofSpecialistReportFHIR_0_2_000>
 {
-    private CRLReceiptofSpecialistReportFHIR_0_2_000() {}
+private CRLReceiptofSpecialistReportFHIR_0_2_000() {}
 
-    public static CRLReceiptofSpecialistReportFHIR_0_2_000 Instance { get; } = new();
+public static CRLReceiptofSpecialistReportFHIR_0_2_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "CRLReceiptofSpecialistReportFHIR";

@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("HybridHospitalWideReadmissionFHIR", "0.0.001")]
 public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISingleton<HybridHospitalWideReadmissionFHIR_0_0_001>
 {
-    private HybridHospitalWideReadmissionFHIR_0_0_001() {}
+private HybridHospitalWideReadmissionFHIR_0_0_001() {}
 
-    public static HybridHospitalWideReadmissionFHIR_0_0_001 Instance { get; } = new();
+public static HybridHospitalWideReadmissionFHIR_0_0_001 Instance { get; } = new();
 
     #region Library Members
     public string Name => "HybridHospitalWideReadmissionFHIR";

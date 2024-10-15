@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("FunctionalStatusAssessmentsforHeartFailureFHIR", "0.1.000")]
 public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : ILibrary, ISingleton<FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000>
 {
-    private FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000() {}
+private FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000() {}
 
-    public static FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 Instance { get; } = new();
+public static FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "FunctionalStatusAssessmentsforHeartFailureFHIR";

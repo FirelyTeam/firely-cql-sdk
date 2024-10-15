@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("HFBetaBlockerTherapyforLVSDFHIR", "1.3.000")]
 public partial class HFBetaBlockerTherapyforLVSDFHIR_1_3_000 : ILibrary, ISingleton<HFBetaBlockerTherapyforLVSDFHIR_1_3_000>
 {
-    private HFBetaBlockerTherapyforLVSDFHIR_1_3_000() {}
+private HFBetaBlockerTherapyforLVSDFHIR_1_3_000() {}
 
-    public static HFBetaBlockerTherapyforLVSDFHIR_1_3_000 Instance { get; } = new();
+public static HFBetaBlockerTherapyforLVSDFHIR_1_3_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "HFBetaBlockerTherapyforLVSDFHIR";

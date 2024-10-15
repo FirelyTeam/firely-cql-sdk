@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("VTEFHIR4", "4.8.000")]
 public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
 {
-    private VTEFHIR4_4_8_000() {}
+private VTEFHIR4_4_8_000() {}
 
-    public static VTEFHIR4_4_8_000 Instance { get; } = new();
+public static VTEFHIR4_4_8_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "VTEFHIR4";

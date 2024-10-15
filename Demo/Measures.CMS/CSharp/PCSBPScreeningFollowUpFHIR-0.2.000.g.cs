@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("PCSBPScreeningFollowUpFHIR", "0.2.000")]
 public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<PCSBPScreeningFollowUpFHIR_0_2_000>
 {
-    private PCSBPScreeningFollowUpFHIR_0_2_000() {}
+private PCSBPScreeningFollowUpFHIR_0_2_000() {}
 
-    public static PCSBPScreeningFollowUpFHIR_0_2_000 Instance { get; } = new();
+public static PCSBPScreeningFollowUpFHIR_0_2_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "PCSBPScreeningFollowUpFHIR";

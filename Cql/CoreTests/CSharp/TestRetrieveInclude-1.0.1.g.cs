@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("TestRetrieveInclude", "1.0.1")]
 public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrieveInclude_1_0_1>
 {
-    private TestRetrieveInclude_1_0_1() {}
+private TestRetrieveInclude_1_0_1() {}
 
-    public static TestRetrieveInclude_1_0_1 Instance { get; } = new();
+public static TestRetrieveInclude_1_0_1 Instance { get; } = new();
 
     #region Library Members
     public string Name => "TestRetrieveInclude";

@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("DiabetesHemoglobinA1cHbA1cPoorControl9FHIR", "0.1.000")]
 public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibrary, ISingleton<DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000>
 {
-    private DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000() {}
+private DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000() {}
 
-    public static DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 Instance { get; } = new();
+public static DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "DiabetesHemoglobinA1cHbA1cPoorControl9FHIR";

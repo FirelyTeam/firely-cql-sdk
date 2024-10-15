@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR", "1.3.000")]
 public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000 : ILibrary, ISingleton<IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000>
 {
-    private IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000() {}
+private IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000() {}
 
-    public static IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000 Instance { get; } = new();
+public static IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR";

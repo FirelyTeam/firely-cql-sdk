@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("ChildrenWhoHaveDentalDecayOrCavitiesFHIR", "0.0.001")]
 public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary, ISingleton<ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001>
 {
-    private ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001() {}
+private ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001() {}
 
-    public static ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 Instance { get; } = new();
+public static ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 Instance { get; } = new();
 
     #region Library Members
     public string Name => "ChildrenWhoHaveDentalDecayOrCavitiesFHIR";

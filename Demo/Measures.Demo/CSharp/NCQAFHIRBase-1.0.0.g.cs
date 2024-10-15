@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("NCQAFHIRBase", "1.0.0")]
 public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_0>
 {
-    private NCQAFHIRBase_1_0_0() {}
+private NCQAFHIRBase_1_0_0() {}
 
-    public static NCQAFHIRBase_1_0_0 Instance { get; } = new();
+public static NCQAFHIRBase_1_0_0 Instance { get; } = new();
 
     #region Library Members
     public string Name => "NCQAFHIRBase";

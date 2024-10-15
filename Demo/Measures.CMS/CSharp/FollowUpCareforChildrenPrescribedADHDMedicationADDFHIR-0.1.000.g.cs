@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR", "0.1.000")]
 public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000 : ILibrary, ISingleton<FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000>
 {
-    private FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000() {}
+private FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000() {}
 
-    public static FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000 Instance { get; } = new();
+public static FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR";

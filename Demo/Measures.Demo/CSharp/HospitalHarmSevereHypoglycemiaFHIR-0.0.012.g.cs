@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("HospitalHarmSevereHypoglycemiaFHIR", "0.0.012")]
 public partial class HospitalHarmSevereHypoglycemiaFHIR_0_0_012 : ILibrary, ISingleton<HospitalHarmSevereHypoglycemiaFHIR_0_0_012>
 {
-    private HospitalHarmSevereHypoglycemiaFHIR_0_0_012() {}
+private HospitalHarmSevereHypoglycemiaFHIR_0_0_012() {}
 
-    public static HospitalHarmSevereHypoglycemiaFHIR_0_0_012 Instance { get; } = new();
+public static HospitalHarmSevereHypoglycemiaFHIR_0_0_012 Instance { get; } = new();
 
     #region Library Members
     public string Name => "HospitalHarmSevereHypoglycemiaFHIR";

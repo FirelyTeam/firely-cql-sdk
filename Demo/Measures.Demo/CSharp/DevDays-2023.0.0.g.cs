@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("DevDays", "2023.0.0")]
 public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 {
-    private DevDays_2023_0_0() {}
+private DevDays_2023_0_0() {}
 
-    public static DevDays_2023_0_0 Instance { get; } = new();
+public static DevDays_2023_0_0 Instance { get; } = new();
 
     #region Library Members
     public string Name => "DevDays";

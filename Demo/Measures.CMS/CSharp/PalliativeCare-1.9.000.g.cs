@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("PalliativeCare", "1.9.000")]
 public partial class PalliativeCare_1_9_000 : ILibrary, ISingleton<PalliativeCare_1_9_000>
 {
-    private PalliativeCare_1_9_000() {}
+private PalliativeCare_1_9_000() {}
 
-    public static PalliativeCare_1_9_000 Instance { get; } = new();
+public static PalliativeCare_1_9_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "PalliativeCare";

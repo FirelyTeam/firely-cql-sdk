@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR", "1.3.000")]
 public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_000 : ILibrary, ISingleton<UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_000>
 {
-    private UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_000() {}
+private UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_000() {}
 
-    public static UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_000 Instance { get; } = new();
+public static UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_3_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR";

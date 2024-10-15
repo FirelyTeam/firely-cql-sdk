@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CqlBooleanTest", "1.0.000")]
 public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTest_1_0_000>
 {
-    private CqlBooleanTest_1_0_000() {}
+private CqlBooleanTest_1_0_000() {}
 
-    public static CqlBooleanTest_1_0_000 Instance { get; } = new();
+public static CqlBooleanTest_1_0_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "CqlBooleanTest";

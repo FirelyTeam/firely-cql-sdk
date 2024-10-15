@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("AntidepressantMedicationManagementFHIR", "0.1.000")]
 public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, ISingleton<AntidepressantMedicationManagementFHIR_0_1_000>
 {
-    private AntidepressantMedicationManagementFHIR_0_1_000() {}
+private AntidepressantMedicationManagementFHIR_0_1_000() {}
 
-    public static AntidepressantMedicationManagementFHIR_0_1_000 Instance { get; } = new();
+public static AntidepressantMedicationManagementFHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "AntidepressantMedicationManagementFHIR";

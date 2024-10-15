@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("SupplementalDataElements", "3.4.000")]
 public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<SupplementalDataElements_3_4_000>
 {
-    private SupplementalDataElements_3_4_000() {}
+private SupplementalDataElements_3_4_000() {}
 
-    public static SupplementalDataElements_3_4_000 Instance { get; } = new();
+public static SupplementalDataElements_3_4_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "SupplementalDataElements";

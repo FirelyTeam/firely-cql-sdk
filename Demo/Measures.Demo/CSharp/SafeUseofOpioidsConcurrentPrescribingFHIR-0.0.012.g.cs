@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("SafeUseofOpioidsConcurrentPrescribingFHIR", "0.0.012")]
 public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrary, ISingleton<SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012>
 {
-    private SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012() {}
+private SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012() {}
 
-    public static SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 Instance { get; } = new();
+public static SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 Instance { get; } = new();
 
     #region Library Members
     public string Name => "SafeUseofOpioidsConcurrentPrescribingFHIR";

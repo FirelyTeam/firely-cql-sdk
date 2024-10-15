@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("CQMCommon", "2.0.000")]
 public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 {
-    private CQMCommon_2_0_000() {}
+private CQMCommon_2_0_000() {}
 
-    public static CQMCommon_2_0_000 Instance { get; } = new();
+public static CQMCommon_2_0_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "CQMCommon";

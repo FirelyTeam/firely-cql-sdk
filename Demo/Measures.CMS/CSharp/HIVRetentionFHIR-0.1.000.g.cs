@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("HIVRetentionFHIR", "0.1.000")]
 public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentionFHIR_0_1_000>
 {
-    private HIVRetentionFHIR_0_1_000() {}
+private HIVRetentionFHIR_0_1_000() {}
 
-    public static HIVRetentionFHIR_0_1_000 Instance { get; } = new();
+public static HIVRetentionFHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "HIVRetentionFHIR";

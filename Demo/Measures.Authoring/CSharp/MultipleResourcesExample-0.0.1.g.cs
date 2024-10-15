@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("MultipleResourcesExample", "0.0.1")]
 public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<MultipleResourcesExample_0_0_1>
 {
-    private MultipleResourcesExample_0_0_1() {}
+private MultipleResourcesExample_0_0_1() {}
 
-    public static MultipleResourcesExample_0_0_1 Instance { get; } = new();
+public static MultipleResourcesExample_0_0_1 Instance { get; } = new();
 
     #region Library Members
     public string Name => "MultipleResourcesExample";

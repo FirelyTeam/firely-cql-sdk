@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR", "0.1.000")]
 public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000 : ILibrary, ISingleton<AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000>
 {
-    private AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000() {}
+private AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000() {}
 
-    public static AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000 Instance { get; } = new();
+public static AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR";

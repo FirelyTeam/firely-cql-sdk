@@ -15,9 +15,9 @@ using Task = Hl7.Fhir.Model.Task;
 [CqlLibrary("UseofHighRiskMedicationsintheElderlyFHIR", "0.1.000")]
 public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000 : ILibrary, ISingleton<UseofHighRiskMedicationsintheElderlyFHIR_0_1_000>
 {
-    private UseofHighRiskMedicationsintheElderlyFHIR_0_1_000() {}
+private UseofHighRiskMedicationsintheElderlyFHIR_0_1_000() {}
 
-    public static UseofHighRiskMedicationsintheElderlyFHIR_0_1_000 Instance { get; } = new();
+public static UseofHighRiskMedicationsintheElderlyFHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "UseofHighRiskMedicationsintheElderlyFHIR";
