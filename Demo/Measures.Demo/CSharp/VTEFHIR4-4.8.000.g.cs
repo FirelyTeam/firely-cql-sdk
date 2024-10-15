@@ -28,127 +28,127 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
 
     [CqlDeclaration("Intensive Care Unit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206")]
-	public CqlValueSet Intensive_Care_Unit(CqlContext context) => 
-		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", default);
+    public CqlValueSet Intensive_Care_Unit(CqlContext context) => 
+        new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", default);
 
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
-	{
-		CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
-		CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
-		CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
-		object d_ = context.ResolveParameter("VTEFHIR4-4.8.000", "Measurement Period", c_);
+    public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+    {
+        CqlDateTime a_ = context.Operators.DateTime(2019, 1, 1, 0, 0, 0, 0, default);
+        CqlDateTime b_ = context.Operators.DateTime(2020, 1, 1, 0, 0, 0, 0, default);
+        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+        object d_ = context.ResolveParameter("VTEFHIR4-4.8.000", "Measurement Period", c_);
 
-		return (CqlInterval<CqlDateTime>)d_;
-	}
+        return (CqlInterval<CqlDateTime>)d_;
+    }
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient(CqlContext context)
-	{
-		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
-		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
+    public Patient Patient(CqlContext context)
+    {
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+        Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
 
-		return b_;
-	}
+        return b_;
+    }
 
-	public Encounter.LocationComponent FirstInpatientIntensiveCareUnit(CqlContext context, Encounter Encounter)
-	{
-		List<Encounter.LocationComponent> a_ = Encounter?.Location;
-		bool? b_(Encounter.LocationComponent HospitalLocation)
-		{
-			ResourceReference g_ = HospitalLocation?.Location;
-			Location h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetLocation(context, g_);
-			List<CodeableConcept> i_ = h_?.Type;
-			CqlConcept j_(CodeableConcept X)
-			{
-				CqlConcept t_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
+    public Encounter.LocationComponent FirstInpatientIntensiveCareUnit(CqlContext context, Encounter Encounter)
+    {
+        List<Encounter.LocationComponent> a_ = Encounter?.Location;
+        bool? b_(Encounter.LocationComponent HospitalLocation)
+        {
+            ResourceReference g_ = HospitalLocation?.Location;
+            Location h_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.GetLocation(context, g_);
+            List<CodeableConcept> i_ = h_?.Type;
+            CqlConcept j_(CodeableConcept X)
+            {
+                CqlConcept t_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
 
-				return t_;
-			};
-			IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
-			CqlValueSet l_ = this.Intensive_Care_Unit(context);
-			bool? m_ = context.Operators.ConceptsInValueSet(k_, l_);
-			Period n_ = Encounter?.Period;
-			CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, n_);
-			Period p_ = HospitalLocation?.Period;
-			CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, p_);
-			bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, default);
-			bool? s_ = context.Operators.And(m_, r_);
+                return t_;
+            };
+            IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
+            CqlValueSet l_ = this.Intensive_Care_Unit(context);
+            bool? m_ = context.Operators.ConceptsInValueSet(k_, l_);
+            Period n_ = Encounter?.Period;
+            CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, n_);
+            Period p_ = HospitalLocation?.Period;
+            CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, p_);
+            bool? r_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(o_, q_, default);
+            bool? s_ = context.Operators.And(m_, r_);
 
-			return s_;
-		};
-		IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
-		object d_(Encounter.LocationComponent @this)
-		{
-			Period u_ = @this?.Period;
-			CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, u_);
-			CqlDateTime w_ = context.Operators.Start(v_);
+            return s_;
+        };
+        IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
+        object d_(Encounter.LocationComponent @this)
+        {
+            Period u_ = @this?.Period;
+            CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, u_);
+            CqlDateTime w_ = context.Operators.Start(v_);
 
-			return w_;
-		};
-		IEnumerable<Encounter.LocationComponent> e_ = context.Operators.SortBy<Encounter.LocationComponent>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
-		Encounter.LocationComponent f_ = context.Operators.First<Encounter.LocationComponent>(e_);
+            return w_;
+        };
+        IEnumerable<Encounter.LocationComponent> e_ = context.Operators.SortBy<Encounter.LocationComponent>(c_, d_, System.ComponentModel.ListSortDirection.Ascending);
+        Encounter.LocationComponent f_ = context.Operators.First<Encounter.LocationComponent>(e_);
 
-		return f_;
-	}
+        return f_;
+    }
 
-	public Period FirstICULocationPeriod(CqlContext context, Encounter Encounter)
-	{
-		Encounter.LocationComponent a_ = this.FirstInpatientIntensiveCareUnit(context, Encounter);
-		Period b_ = a_?.Period;
+    public Period FirstICULocationPeriod(CqlContext context, Encounter Encounter)
+    {
+        Encounter.LocationComponent a_ = this.FirstInpatientIntensiveCareUnit(context, Encounter);
+        Period b_ = a_?.Period;
 
-		return b_;
-	}
+        return b_;
+    }
 
-	public CqlDateTime StartOfFirstICU(CqlContext context, Encounter Encounter)
-	{
-		Period a_ = this.FirstICULocationPeriod(context, Encounter);
-		CqlInterval<CqlDateTime> b_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, a_);
-		CqlDateTime c_ = context.Operators.Start(b_);
+    public CqlDateTime StartOfFirstICU(CqlContext context, Encounter Encounter)
+    {
+        Period a_ = this.FirstICULocationPeriod(context, Encounter);
+        CqlInterval<CqlDateTime> b_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, a_);
+        CqlDateTime c_ = context.Operators.Start(b_);
 
-		return c_;
-	}
+        return c_;
+    }
 
-	public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlContext context, CqlDateTime StartValue)
-	{
-		CqlDate a_ = context.Operators.DateFrom(StartValue);
-		CqlQuantity c_ = context.Operators.Quantity(1m, "day");
-		CqlDate d_ = context.Operators.Add(a_, c_);
-		CqlInterval<CqlDate> e_ = context.Operators.Interval(a_, d_, true, true);
+    public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlContext context, CqlDateTime StartValue)
+    {
+        CqlDate a_ = context.Operators.DateFrom(StartValue);
+        CqlQuantity c_ = context.Operators.Quantity(1m, "day");
+        CqlDate d_ = context.Operators.Add(a_, c_);
+        CqlInterval<CqlDate> e_ = context.Operators.Interval(a_, d_, true, true);
 
-		return e_;
-	}
+        return e_;
+    }
 
-	public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterAdmission(CqlContext context, Encounter Encounter)
-	{
-		CqlInterval<CqlDateTime> a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, Encounter);
-		CqlDateTime b_ = context.Operators.Start(a_);
-		CqlDate c_ = context.Operators.DateFrom(b_);
-		Period d_ = Encounter?.Period;
-		CqlInterval<CqlDateTime> e_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, d_);
-		CqlDateTime f_ = context.Operators.Start(e_);
-		CqlDate g_ = context.Operators.DateFrom(f_);
-		CqlQuantity h_ = context.Operators.Quantity(1m, "day");
-		CqlDate i_ = context.Operators.Add(g_, h_);
-		CqlInterval<CqlDate> j_ = context.Operators.Interval(c_, i_, true, true);
+    public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterAdmission(CqlContext context, Encounter Encounter)
+    {
+        CqlInterval<CqlDateTime> a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, Encounter);
+        CqlDateTime b_ = context.Operators.Start(a_);
+        CqlDate c_ = context.Operators.DateFrom(b_);
+        Period d_ = Encounter?.Period;
+        CqlInterval<CqlDateTime> e_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, d_);
+        CqlDateTime f_ = context.Operators.Start(e_);
+        CqlDate g_ = context.Operators.DateFrom(f_);
+        CqlQuantity h_ = context.Operators.Quantity(1m, "day");
+        CqlDate i_ = context.Operators.Add(g_, h_);
+        CqlInterval<CqlDate> j_ = context.Operators.Interval(c_, i_, true, true);
 
-		return j_;
-	}
+        return j_;
+    }
 
-	public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterFirstICU(CqlContext context, Encounter Encounter)
-	{
-		CqlInterval<CqlDateTime> a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, Encounter);
-		CqlDateTime b_ = context.Operators.Start(a_);
-		CqlDate c_ = context.Operators.DateFrom(b_);
-		CqlDateTime d_ = this.StartOfFirstICU(context, Encounter);
-		CqlDate e_ = context.Operators.DateFrom(d_);
-		CqlQuantity f_ = context.Operators.Quantity(1m, "day");
-		CqlDate g_ = context.Operators.Add(e_, f_);
-		CqlInterval<CqlDate> h_ = context.Operators.Interval(c_, g_, true, true);
+    public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterFirstICU(CqlContext context, Encounter Encounter)
+    {
+        CqlInterval<CqlDateTime> a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.HospitalizationWithObservation(context, Encounter);
+        CqlDateTime b_ = context.Operators.Start(a_);
+        CqlDate c_ = context.Operators.DateFrom(b_);
+        CqlDateTime d_ = this.StartOfFirstICU(context, Encounter);
+        CqlDate e_ = context.Operators.DateFrom(d_);
+        CqlQuantity f_ = context.Operators.Quantity(1m, "day");
+        CqlDate g_ = context.Operators.Add(e_, f_);
+        CqlInterval<CqlDate> h_ = context.Operators.Interval(c_, g_, true, true);
 
-		return h_;
-	}
+        return h_;
+    }
 
 }

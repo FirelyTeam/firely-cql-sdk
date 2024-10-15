@@ -18,28 +18,24 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public static void WriteLine(this TextWriter writer, int indent, string text)
         {
-            for (int i = 0; i < indent * SpacesPerIndentLevel; i++)
-                writer.Write(' ');
+            writer.Write(StringExtensions.IndentString(indent));
             writer.WriteLine(text);
         }
         public static void Write(this TextWriter writer, int indent, string text)
         {
-            for (int i = 0; i < indent * SpacesPerIndentLevel; i++)
-                writer.Write(' ');
+            writer.Write(StringExtensions.IndentString(indent));
             writer.Write(text);
         }
 
-        private static string IndentString(int indent) => new('\t', indent);
-
         public static void AppendLine(this StringBuilder sb, int indent, string text)
         {
-            sb.Append(IndentString(indent));
+            sb.Append(StringExtensions.IndentString(indent));
             sb.AppendLine(text);
         }
 
         public static void Append(this StringBuilder sb, int indent, string text)
         {
-            sb.Append(IndentString(indent));
+            sb.Append(StringExtensions.IndentString(indent));
             sb.Append(text);
         }
 
