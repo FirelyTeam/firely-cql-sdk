@@ -11,7 +11,28 @@ public class CqlTupleTests
 {
     // Generated C# as part of Library
     public static readonly CqlTupleMetadata PersonProperties = new([typeof(string), typeof(int?), typeof((CqlTupleMetadata, string?, string?, string?)[])], ["Name", "ID", "Addresses"]);
-    public static readonly CqlTupleMetadata AddressProperties = new ([typeof(string), typeof(string), typeof(string)], ["AddressType", "Street", "City", "Country"]);
+    public static readonly CqlTupleMetadata AddressProperties = new ([typeof(string), typeof(string), typeof(string), typeof(string)], ["AddressType", "Street", "City", "Country"]);
+
+    [TestMethod]
+    public void TestCqlTupleMetadataEquality()
+    {
+        CqlTupleMetadata m1 = new CqlTupleMetadata([typeof(int?), typeof(string)], ["id", "name"]);
+        CqlTupleMetadata m2 = new CqlTupleMetadata([typeof(int?), typeof(string)], ["id", "name"]);
+        CqlTupleMetadata mOther = new CqlTupleMetadata([typeof(string)], ["name"]);
+
+        Assert.AreEqual(m1, m2);
+        Assert.IsFalse(m1.Equals(null));
+        Assert.IsTrue(m1.Equals(m2));
+        Assert.IsTrue(m1.Equals((object)m2));
+        Assert.IsTrue(m1 == m2);
+        Assert.IsFalse(m1 != m2);
+
+        Assert.AreNotEqual(m1, mOther);
+        Assert.IsFalse(m1.Equals(mOther));
+        Assert.IsFalse(m1.Equals((object)mOther));
+        Assert.IsFalse(m1 == mOther);
+        Assert.IsTrue(m1 != mOther);
+    }
 
     [TestMethod]
     public void TestJsonSerializationNested()
