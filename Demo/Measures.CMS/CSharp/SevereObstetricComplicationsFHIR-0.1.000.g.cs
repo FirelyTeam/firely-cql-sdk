@@ -1813,13 +1813,17 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     private static CqlTupleMetadata CqlTupleMetadata_DIHdhbAJeJTdiAVUAELUHRNdS = new(
         [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
         ["EncounterId", "FirstHematocritResult", "Timing"]);
+
     private static CqlTupleMetadata CqlTupleMetadata_ESFBYaBAeYMhOBFMjVCbeLhQA = new(
         [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
         ["EncounterId", "FirstWBCResult", "Timing"]);
+
     private static CqlTupleMetadata CqlTupleMetadata_HOiMaDjifIOTXXFShNKiWLBLV = new(
         [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
         ["EncounterId", "FirstHRResult", "Timing"]);
+
     private static CqlTupleMetadata CqlTupleMetadata_FjSKXeIESORPNbRGajibMfUaK = new(
         [typeof(string), typeof(IEnumerable<CqlQuantity>), typeof(CqlDateTime)],
         ["EncounterId", "FirstSBPResult", "Timing"]);
+
 }

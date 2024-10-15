@@ -256,4 +256,5 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     private static CqlTupleMetadata CqlTupleMetadata_CaKghTfWMNOTHSWhifjFZOVYO = new(
         [typeof(CodeableConcept), typeof(Period)],
         ["code", "period"]);
+
 }

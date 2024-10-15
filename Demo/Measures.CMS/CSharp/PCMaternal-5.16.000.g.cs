@@ -992,4 +992,5 @@ public partial class PCMaternal_5_16_000 : ILibrary, ISingleton<PCMaternal_5_16_
     private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
         [typeof(string), typeof(int?)],
         ["EncounterID", "CalculatedCGA"]);
+
 }

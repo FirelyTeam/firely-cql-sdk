@@ -2375,19 +2375,25 @@ public partial class ChildhoodImmunizationStatusFHIR_0_1_000 : ILibrary, ISingle
     private static CqlTupleMetadata CqlTupleMetadata_EMDhFLcFhWVERAVVNfLAZYXJi = new(
         [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
         ["DTaPVaccination1", "DTaPVaccination2", "DTaPVaccination3", "DTaPVaccination4"]);
+
     private static CqlTupleMetadata CqlTupleMetadata_CNGHaZROXaJTHPICcbIaJbRXV = new(
         [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
         ["PolioVaccination1", "PolioVaccination2", "PolioVaccination3"]);
+
     private static CqlTupleMetadata CqlTupleMetadata_EZTgahAUWGgSdGaDCgQNNIPGW = new(
         [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
         ["HepatitisBVaccination1", "HepatitisBVaccination2", "HepatitisBVaccination3"]);
+
     private static CqlTupleMetadata CqlTupleMetadata_HDfaMbZGBWDPFETGQNFbceEeg = new(
         [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
         ["HepatitisBVaccination1", "HepatitisBVaccination2", "NewBornVaccine3"]);
+
     private static CqlTupleMetadata CqlTupleMetadata_DdPDeOJhPYESfHGCOcBNOiPPP = new(
         [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
         ["PneumococcalVaccination1", "PneumococcalVaccination2", "PneumococcalVaccination3", "PneumococcalVaccination4"]);
+
     private static CqlTupleMetadata CqlTupleMetadata_BZhFLeRDagbPQMNheVJcUNfNQ = new(
         [typeof(CqlDate), typeof(CqlDate)],
         ["FluVaccination1", "FluVaccination2"]);
+
 }

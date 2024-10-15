@@ -538,4 +538,5 @@ public partial class AdvancedIllnessandFrailty_1_8_000 : ILibrary, ISingleton<Ad
     private static CqlTupleMetadata CqlTupleMetadata_EaLaedgLDgRRYaLbKIIcBTOiA = new(
         [typeof(Encounter), typeof(Encounter)],
         ["OutpatientEncounter1", "OutpatientEncounter2"]);
+
 }

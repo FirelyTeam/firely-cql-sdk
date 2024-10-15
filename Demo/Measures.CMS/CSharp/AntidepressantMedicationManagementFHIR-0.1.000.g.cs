@@ -498,4 +498,5 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
     private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
         [typeof(CqlDate)],
         ["AntidepressantDate"]);
+
 }

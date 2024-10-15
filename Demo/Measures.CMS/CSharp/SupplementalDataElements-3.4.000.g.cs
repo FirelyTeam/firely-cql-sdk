@@ -372,7 +372,9 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
     private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
         [typeof(IEnumerable<CqlCode>), typeof(string)],
         ["codes", "display"]);
+
     private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
         [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
         ["code", "period"]);
+
 }

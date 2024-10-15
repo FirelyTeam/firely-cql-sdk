@@ -265,6 +265,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 writer.WriteLine(indentLevel, $"private static CqlTupleMetadata {propertyName} = new(");
                 writer.WriteLine(indentLevel+1, $"[{types}],");
                 writer.WriteLine(indentLevel+1, $"[{names}]);");
+                writer.WriteLine();
             }
         }
 

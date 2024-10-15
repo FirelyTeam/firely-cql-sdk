@@ -1300,10 +1300,13 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     private static CqlTupleMetadata CqlTupleMetadata_CfANiScMYDdVZFgRERKJQEVca = new(
         [typeof(IEnumerable<CqlDate>)],
         ["SortedDates"]);
+
     private static CqlTupleMetadata CqlTupleMetadata_BDeBMdFeZaVSehBSFYjTFdYYD = new(
         [typeof(IEnumerable<CqlDate>), typeof(int?)],
         ["SortedList", "AnchorIndex"]);
+
     private static CqlTupleMetadata CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc = new(
         [typeof(CqlDate), typeof(IEnumerable<CqlDate>), typeof(int?)],
         ["NextDate", "NewList", "IndexofNewDate"]);
+
 }
