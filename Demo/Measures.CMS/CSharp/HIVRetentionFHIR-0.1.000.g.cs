@@ -712,5 +712,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
 		return c_;
 	}
 
-    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new([typeof(IEnumerable<CqlCode>), typeof(string)], ["codes", "display"]);
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
 }

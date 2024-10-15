@@ -751,5 +751,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_3_000 : ILibrary, ISingle
 		return a_;
 	}
 
-    private static CqlTupleMetadata CqlTupleMetadata_FUFPMQdRaTBgLhghDWfUUBaNF = new([typeof(Observation), typeof(Encounter)], ["HeartRate", "ModerateOrSevereLVSDHFOutpatientEncounter"]);
+    private static CqlTupleMetadata CqlTupleMetadata_FUFPMQdRaTBgLhghDWfUUBaNF = new(
+        [typeof(Observation), typeof(Encounter)],
+        ["HeartRate", "ModerateOrSevereLVSDHFOutpatientEncounter"]);
 }

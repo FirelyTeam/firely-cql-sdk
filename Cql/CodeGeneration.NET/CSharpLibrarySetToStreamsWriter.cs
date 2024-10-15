@@ -251,7 +251,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 var types = string.Join(", ", signature.Select(t => $"typeof({_typeToCSharpConverter.ToCSharp(t.Type)})"));
                 var names = string.Join(", ", signature.Select(t => t.Name.QuoteString()));
-                writer.WriteLine(indentLevel, $"private static CqlTupleMetadata {propertyName} = new([{types}], [{names}]);");
+                writer.WriteLine(indentLevel, $"private static CqlTupleMetadata {propertyName} = new(");
+                writer.WriteLine(indentLevel+1, $"[{types}],");
+                writer.WriteLine(indentLevel+1, $"[{names}]);");
             }
         }
 

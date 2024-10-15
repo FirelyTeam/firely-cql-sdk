@@ -523,5 +523,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 		return s_;
 	}
 
-    private static CqlTupleMetadata CqlTupleMetadata_CMSeRgTJgKISKSQUcNZWKegGV = new([typeof(CqlDate), typeof(CqlDate)], ["OutpatientVisit1", "OutpatientVisit2"]);
+    private static CqlTupleMetadata CqlTupleMetadata_CMSeRgTJgKISKSQUcNZWKegGV = new(
+        [typeof(CqlDate), typeof(CqlDate)],
+        ["OutpatientVisit1", "OutpatientVisit2"]);
 }

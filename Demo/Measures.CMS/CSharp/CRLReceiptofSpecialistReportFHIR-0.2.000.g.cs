@@ -326,5 +326,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_2_000 : ILibrary, ISingl
 		return a_;
 	}
 
-    private static CqlTupleMetadata CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb = new([typeof(string), typeof(CqlDateTime)], ["ID", "AuthorDate"]);
+    private static CqlTupleMetadata CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb = new(
+        [typeof(string), typeof(CqlDateTime)],
+        ["ID", "AuthorDate"]);
 }

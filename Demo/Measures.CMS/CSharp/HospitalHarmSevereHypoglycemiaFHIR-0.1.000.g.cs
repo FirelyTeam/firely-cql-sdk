@@ -1011,7 +1011,13 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 		return a_;
 	}
 
-    private static CqlTupleMetadata CqlTupleMetadata_FSGEiXEbHOWUcRPJgTjPZFYcO = new([typeof(Encounter), typeof(MedicationAdministration), typeof(Observation)], ["QualifyingEncounter", "HypoglycemicMedication", "GlucoseTest"]);
-    private static CqlTupleMetadata CqlTupleMetadata_BfZBOfPTWgQBddbhgdIFdbKHU = new([typeof(Encounter), typeof(Observation), typeof(Observation)], ["QualifyingEncounter", "LowGlucoseTest", "FollowupGlucoseTest"]);
-    private static CqlTupleMetadata CqlTupleMetadata_GNOWceaaAJjTLNBBKCiSMeeVD = new([typeof(Encounter), typeof(Observation)], ["QualifyingEncounter", "HypoglycemicEvent"]);
+    private static CqlTupleMetadata CqlTupleMetadata_FSGEiXEbHOWUcRPJgTjPZFYcO = new(
+        [typeof(Encounter), typeof(MedicationAdministration), typeof(Observation)],
+        ["QualifyingEncounter", "HypoglycemicMedication", "GlucoseTest"]);
+    private static CqlTupleMetadata CqlTupleMetadata_BfZBOfPTWgQBddbhgdIFdbKHU = new(
+        [typeof(Encounter), typeof(Observation), typeof(Observation)],
+        ["QualifyingEncounter", "LowGlucoseTest", "FollowupGlucoseTest"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GNOWceaaAJjTLNBBKCiSMeeVD = new(
+        [typeof(Encounter), typeof(Observation)],
+        ["QualifyingEncounter", "HypoglycemicEvent"]);
 }

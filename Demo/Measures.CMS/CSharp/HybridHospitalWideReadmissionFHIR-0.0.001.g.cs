@@ -2644,9 +2644,19 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 		return a_;
 	}
 
-    private static CqlTupleMetadata CqlTupleMetadata_GIbILVAdXLLNYBgcQIEiUiKaK = new([typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)], ["EncounterId", "FirstTemperatureResult", "Timing"]);
-    private static CqlTupleMetadata CqlTupleMetadata_DhbJAfCiKIAGYKTjJXYGSKECQ = new([typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)], ["EncounterId", "FirstHeartRateResult", "Timing"]);
-    private static CqlTupleMetadata CqlTupleMetadata_FdREYEdHOZIcMCNYCRFJYJReA = new([typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)], ["EncounterId", "FirstOxygenSatResult", "Timing"]);
-    private static CqlTupleMetadata CqlTupleMetadata_CYbMQaXdPgTVSLXJSHHNTbhVM = new([typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)], ["EncounterId", "FirstRespRateResult", "Timing"]);
-    private static CqlTupleMetadata CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd = new([typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)], ["EncounterId", "FirstResult", "Timing"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GIbILVAdXLLNYBgcQIEiUiKaK = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstTemperatureResult", "Timing"]);
+    private static CqlTupleMetadata CqlTupleMetadata_DhbJAfCiKIAGYKTjJXYGSKECQ = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstHeartRateResult", "Timing"]);
+    private static CqlTupleMetadata CqlTupleMetadata_FdREYEdHOZIcMCNYCRFJYJReA = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstOxygenSatResult", "Timing"]);
+    private static CqlTupleMetadata CqlTupleMetadata_CYbMQaXdPgTVSLXJSHHNTbhVM = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstRespRateResult", "Timing"]);
+    private static CqlTupleMetadata CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstResult", "Timing"]);
 }

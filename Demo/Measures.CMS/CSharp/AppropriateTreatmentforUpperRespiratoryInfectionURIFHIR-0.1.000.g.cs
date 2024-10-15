@@ -562,5 +562,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
 		return e_;
 	}
 
-    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new([typeof(Encounter), typeof(Condition)], ["QualifyingEncounters", "URI"]);
+    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["QualifyingEncounters", "URI"]);
 }

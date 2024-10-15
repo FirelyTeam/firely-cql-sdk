@@ -951,5 +951,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
 		return b_;
 	}
 
-    private static CqlTupleMetadata CqlTupleMetadata_EFSKhGUTUCLEXZENTURVLjeND = new([typeof(Encounter), typeof(Coverage)], ["InpatientEncounter", "Payer"]);
+    private static CqlTupleMetadata CqlTupleMetadata_EFSKhGUTUCLEXZENTURVLjeND = new(
+        [typeof(Encounter), typeof(Coverage)],
+        ["InpatientEncounter", "Payer"]);
 }

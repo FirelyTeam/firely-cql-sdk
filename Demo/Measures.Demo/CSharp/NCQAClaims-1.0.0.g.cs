@@ -3832,44 +3832,124 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
 		return g_;
 	}
 
-    private static CqlTupleMetadata CqlTupleMetadata_GIgcTXSQJbIXPiNgNbAIdOBXi = new([typeof(IEnumerable<Claim>), typeof(IEnumerable<string>), typeof(IEnumerable<string>)], ["MedicalClaim", "ProceduresAsStrings", "POSAsString"]);
-    private static CqlTupleMetadata CqlTupleMetadata_HSdidNdfHCNCFSUTgBiYLcgXP = new([typeof(Claim), typeof(IEnumerable<Claim.ItemComponent>)], ["Claim", "LineItems"]);
-    private static CqlTupleMetadata CqlTupleMetadata_GDUUTAIXZafehWFjcGfNKBcTd = new([typeof(Claim), typeof(IEnumerable<CqlInterval<CqlDateTime>>)], ["Claim", "ServicePeriod"]);
-    private static CqlTupleMetadata CqlTupleMetadata_GKQGAFOMQbCPRXAANKASUIHMf = new([typeof(IEnumerable<Claim>), typeof(IEnumerable<string>)], ["MedicalClaim", "DiagnosesAsStrings"]);
-    private static CqlTupleMetadata CqlTupleMetadata_GDVcejYEWXWNHUIODacaMaBhV = new([typeof(IEnumerable<Claim>)], ["DiagnosisItems"]);
-    private static CqlTupleMetadata CqlTupleMetadata_CWDDWHRXGADEbdaKXCdKbgEfg = new([typeof(IEnumerable<Claim>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)], ["Claim", "ServicePeriod"]);
-    private static CqlTupleMetadata CqlTupleMetadata_CZJDcULSYFOUeGSUcDccghjMK = new([typeof(IEnumerable<Claim>), typeof(IEnumerable<string>)], ["PharmacyClaim", "MedicationsAsStrings"]);
-    private static CqlTupleMetadata CqlTupleMetadata_HDUYFgZGRCJCdTeEcMSVCMQNN = new([typeof(CqlInterval<CqlDateTime>)], ["DaysSupplyInterval"]);
-    private static CqlTupleMetadata CqlTupleMetadata_fQfNOLePNSNdOZROKRAfMQPE = new([typeof(IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?>)], ["CoveredDays"]);
-    private static CqlTupleMetadata CqlTupleMetadata_FCdHTREUGBEaiYVQNNGRPZFjf = new([typeof(Claim), typeof(IEnumerable<Claim.ItemComponent>), typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)], ["Claim", "LineItem", "ServicePeriod", "CoveredDays"]);
-    private static CqlTupleMetadata CqlTupleMetadata_GQFgMiKhOZgECFTScigSABdXb = new([typeof(IEnumerable<Claim>), typeof(IEnumerable<string>), typeof(IEnumerable<string>)], ["MedicalClaim", "DiagnosesAsStrings", "ProceduresAsStrings"]);
-    private static CqlTupleMetadata CqlTupleMetadata_CXESjjTOQIGKICAEMDgcfPdJG = new([typeof(Claim)], ["ProcedureItems"]);
-    private static CqlTupleMetadata CqlTupleMetadata_FYaKYiIDIQCIRBfhZCGRDYQLX = new([typeof(Claim), typeof(Claim)], ["Claim", "ProcedureItems"]);
-    private static CqlTupleMetadata CqlTupleMetadata_iYTJVNYRMBhJCKDIUSKFMUHe = new([typeof(IEnumerable<Claim.ItemComponent>), typeof(Claim)], ["Procedure", "LineItems"]);
-    private static CqlTupleMetadata CqlTupleMetadata_DBEDLLOihLKGPWLHVWXRKfGdL = new([typeof(IEnumerable<Claim>)], ["LineItems"]);
-    private static CqlTupleMetadata CqlTupleMetadata_ESGibVhJBKTGTjRhHBeNDHASE = new([typeof(IEnumerable<ClaimResponse>), typeof(IEnumerable<Claim>)], ["MedicalClaimResponse", "MedicalClaim"]);
-    private static CqlTupleMetadata CqlTupleMetadata_DbDPVOODdCjASWRZfBTBPUJKR = new([typeof(IEnumerable<ClaimResponse>)], ["PaidResponse"]);
-    private static CqlTupleMetadata CqlTupleMetadata_FfbRdLZNBbFHejZXDegUDAhjO = new([typeof(ClaimResponse), typeof(string), typeof(IEnumerable<ClaimResponse.ItemComponent>)], ["Response", "ResponseID", "LineItems"]);
-    private static CqlTupleMetadata CqlTupleMetadata_GUCaFdHVHVNcfKfMNEFbbNGUi = new([typeof(Claim), typeof(Id), typeof(IEnumerable<Claim.ItemComponent>)], ["ClaimofInterest", "ClaimID", "LineItems"]);
-    private static CqlTupleMetadata CqlTupleMetadata_DiTbeIhUdTbFXAOeUfBeANOcV = new([typeof(IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>), typeof(IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>)], ["PaidMedicalClaimResponse", "MedicalClaim"]);
-    private static CqlTupleMetadata CqlTupleMetadata_HANAFPgdEHHITIiaCbHRMCNfZ = new([typeof((CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?), typeof(IEnumerable<Claim.ItemComponent>)], ["PaidClaim", "ClaimItem"]);
-    private static CqlTupleMetadata CqlTupleMetadata_GUibhjYMgjAQISFDJORUOccJC = new([typeof(IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>)], ["AggregateClaim"]);
-    private static CqlTupleMetadata CqlTupleMetadata_FCOUVKRRWVHcKiBDUdGgLciKR = new([typeof(IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)], ["originalClaim", "ServicePeriod"]);
-    private static CqlTupleMetadata CqlTupleMetadata_EgMIjgYNSTYejjeaeeSfTCGLV = new([typeof(IEnumerable<ClaimResponse>), typeof(IEnumerable<Claim>)], ["PharmacyClaimResponse", "PharmacyClaim"]);
-    private static CqlTupleMetadata CqlTupleMetadata_EhcebFbUeFgabTLNPALjRJQCF = new([typeof(IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>), typeof(IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>)], ["PaidPharmacyClaimResponse", "MedicalClaim"]);
-    private static CqlTupleMetadata CqlTupleMetadata_BiVTcKEZOfgFCDEReGAXJRAUK = new([typeof((CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?), typeof(IEnumerable<Claim.ItemComponent>)], ["PaidClaim", "ClaimItem"]);
-    private static CqlTupleMetadata CqlTupleMetadata_EMbbXAAHNDcXYSgLIhAhQCWON = new([typeof(IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>)], ["AggregateClaim"]);
-    private static CqlTupleMetadata CqlTupleMetadata_DXGMEVDRBZgHMANCfXfEUYMNW = new([typeof(IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>), typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDate>>)], ["originalClaim", "ServicePeriod", "CoveredDays"]);
-    private static CqlTupleMetadata CqlTupleMetadata_CZThYJbgajVLdhIZdgZiXBFQK = new([typeof(IEnumerable<ClaimResponse>), typeof(IEnumerable<Claim>)], ["ClaimResponse", "OriginalClaim"]);
-    private static CqlTupleMetadata CqlTupleMetadata_GFUjSKcYaHagAZIhSUhffHjHP = new([typeof(IEnumerable<Claim>), typeof(IEnumerable<Claim>)], ["InpatientStayLineItems", "NonacuteInpatientLineItems"]);
-    private static CqlTupleMetadata CqlTupleMetadata_DBGUUNgWTQDYFIeOfMhQJAYTB = new([typeof(IEnumerable<Claim>), typeof(IEnumerable<Claim>), typeof(IEnumerable<Claim>)], ["InpatientDischarge", "NonacuteInpatientDischarge", "AcuteInpatientDischarge"]);
-    private static CqlTupleMetadata CqlTupleMetadata_BWiFKXdFieUciRMVTUCdIFCVO = new([typeof(Claim), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<string>)], ["SingleCareTeam", "CareTeamsProvider", "CareTeamsProviderID"]);
-    private static CqlTupleMetadata CqlTupleMetadata_HFNJUcNhcbGBLBgHAJMMSPfQH = new([typeof(IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?>)], ["CareTeams"]);
-    private static CqlTupleMetadata CqlTupleMetadata_FPVdJEEOUKFVhQPTfKhShUNO = new([typeof(IEnumerable<Practitioner>)], ["Practitioners"]);
-    private static CqlTupleMetadata CqlTupleMetadata_EheHUARRFfQdCcHKeSEhfYZMj = new([typeof(IEnumerable<FhirString>), typeof(IEnumerable<Identifier>)], ["AllIdentifiers", "NullIdentifiers"]);
-    private static CqlTupleMetadata CqlTupleMetadata_EZUSISLPSZWTXahaQjXaSAJBE = new([typeof(IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?>)], ["IdentifierTuple"]);
-    private static CqlTupleMetadata CqlTupleMetadata_FBUdWLSDMgYFFiVXYhKEiUNQS = new([typeof(int?)], ["IdentifierCount"]);
-    private static CqlTupleMetadata CqlTupleMetadata_gFQSaDQdhfIVgTfEbUhWdbBB = new([typeof(IEnumerable<Claim.ItemComponent>), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<string>)], ["SingleItem", "ItemLocation", "ItemLocationID"]);
-    private static CqlTupleMetadata CqlTupleMetadata_ESTVjUCCVhLEXJGPZBeEcQDHX = new([typeof(IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>)], ["ItemsLocationReferences"]);
-    private static CqlTupleMetadata CqlTupleMetadata_GWYcfjEGjPEdPbTNdfROfTUAf = new([typeof(IEnumerable<Location>)], ["CorrespondingLocations"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GIgcTXSQJbIXPiNgNbAIdOBXi = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<string>), typeof(IEnumerable<string>)],
+        ["MedicalClaim", "ProceduresAsStrings", "POSAsString"]);
+    private static CqlTupleMetadata CqlTupleMetadata_HSdidNdfHCNCFSUTgBiYLcgXP = new(
+        [typeof(Claim), typeof(IEnumerable<Claim.ItemComponent>)],
+        ["Claim", "LineItems"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GDUUTAIXZafehWFjcGfNKBcTd = new(
+        [typeof(Claim), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["Claim", "ServicePeriod"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GKQGAFOMQbCPRXAANKASUIHMf = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<string>)],
+        ["MedicalClaim", "DiagnosesAsStrings"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GDVcejYEWXWNHUIODacaMaBhV = new(
+        [typeof(IEnumerable<Claim>)],
+        ["DiagnosisItems"]);
+    private static CqlTupleMetadata CqlTupleMetadata_CWDDWHRXGADEbdaKXCdKbgEfg = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["Claim", "ServicePeriod"]);
+    private static CqlTupleMetadata CqlTupleMetadata_CZJDcULSYFOUeGSUcDccghjMK = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<string>)],
+        ["PharmacyClaim", "MedicationsAsStrings"]);
+    private static CqlTupleMetadata CqlTupleMetadata_HDUYFgZGRCJCdTeEcMSVCMQNN = new(
+        [typeof(CqlInterval<CqlDateTime>)],
+        ["DaysSupplyInterval"]);
+    private static CqlTupleMetadata CqlTupleMetadata_fQfNOLePNSNdOZROKRAfMQPE = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?>)],
+        ["CoveredDays"]);
+    private static CqlTupleMetadata CqlTupleMetadata_FCdHTREUGBEaiYVQNNGRPZFjf = new(
+        [typeof(Claim), typeof(IEnumerable<Claim.ItemComponent>), typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["Claim", "LineItem", "ServicePeriod", "CoveredDays"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GQFgMiKhOZgECFTScigSABdXb = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<string>), typeof(IEnumerable<string>)],
+        ["MedicalClaim", "DiagnosesAsStrings", "ProceduresAsStrings"]);
+    private static CqlTupleMetadata CqlTupleMetadata_CXESjjTOQIGKICAEMDgcfPdJG = new(
+        [typeof(Claim)],
+        ["ProcedureItems"]);
+    private static CqlTupleMetadata CqlTupleMetadata_FYaKYiIDIQCIRBfhZCGRDYQLX = new(
+        [typeof(Claim), typeof(Claim)],
+        ["Claim", "ProcedureItems"]);
+    private static CqlTupleMetadata CqlTupleMetadata_iYTJVNYRMBhJCKDIUSKFMUHe = new(
+        [typeof(IEnumerable<Claim.ItemComponent>), typeof(Claim)],
+        ["Procedure", "LineItems"]);
+    private static CqlTupleMetadata CqlTupleMetadata_DBEDLLOihLKGPWLHVWXRKfGdL = new(
+        [typeof(IEnumerable<Claim>)],
+        ["LineItems"]);
+    private static CqlTupleMetadata CqlTupleMetadata_ESGibVhJBKTGTjRhHBeNDHASE = new(
+        [typeof(IEnumerable<ClaimResponse>), typeof(IEnumerable<Claim>)],
+        ["MedicalClaimResponse", "MedicalClaim"]);
+    private static CqlTupleMetadata CqlTupleMetadata_DbDPVOODdCjASWRZfBTBPUJKR = new(
+        [typeof(IEnumerable<ClaimResponse>)],
+        ["PaidResponse"]);
+    private static CqlTupleMetadata CqlTupleMetadata_FfbRdLZNBbFHejZXDegUDAhjO = new(
+        [typeof(ClaimResponse), typeof(string), typeof(IEnumerable<ClaimResponse.ItemComponent>)],
+        ["Response", "ResponseID", "LineItems"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GUCaFdHVHVNcfKfMNEFbbNGUi = new(
+        [typeof(Claim), typeof(Id), typeof(IEnumerable<Claim.ItemComponent>)],
+        ["ClaimofInterest", "ClaimID", "LineItems"]);
+    private static CqlTupleMetadata CqlTupleMetadata_DiTbeIhUdTbFXAOeUfBeANOcV = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>), typeof(IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>)],
+        ["PaidMedicalClaimResponse", "MedicalClaim"]);
+    private static CqlTupleMetadata CqlTupleMetadata_HANAFPgdEHHITIiaCbHRMCNfZ = new(
+        [typeof((CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?), typeof(IEnumerable<Claim.ItemComponent>)],
+        ["PaidClaim", "ClaimItem"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GUibhjYMgjAQISFDJORUOccJC = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>)],
+        ["AggregateClaim"]);
+    private static CqlTupleMetadata CqlTupleMetadata_FCOUVKRRWVHcKiBDUdGgLciKR = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["originalClaim", "ServicePeriod"]);
+    private static CqlTupleMetadata CqlTupleMetadata_EgMIjgYNSTYejjeaeeSfTCGLV = new(
+        [typeof(IEnumerable<ClaimResponse>), typeof(IEnumerable<Claim>)],
+        ["PharmacyClaimResponse", "PharmacyClaim"]);
+    private static CqlTupleMetadata CqlTupleMetadata_EhcebFbUeFgabTLNPALjRJQCF = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>), typeof(IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>)],
+        ["PaidPharmacyClaimResponse", "MedicalClaim"]);
+    private static CqlTupleMetadata CqlTupleMetadata_BiVTcKEZOfgFCDEReGAXJRAUK = new(
+        [typeof((CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?), typeof(IEnumerable<Claim.ItemComponent>)],
+        ["PaidClaim", "ClaimItem"]);
+    private static CqlTupleMetadata CqlTupleMetadata_EMbbXAAHNDcXYSgLIhAhQCWON = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>)],
+        ["AggregateClaim"]);
+    private static CqlTupleMetadata CqlTupleMetadata_DXGMEVDRBZgHMANCfXfEUYMNW = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>), typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["originalClaim", "ServicePeriod", "CoveredDays"]);
+    private static CqlTupleMetadata CqlTupleMetadata_CZThYJbgajVLdhIZdgZiXBFQK = new(
+        [typeof(IEnumerable<ClaimResponse>), typeof(IEnumerable<Claim>)],
+        ["ClaimResponse", "OriginalClaim"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GFUjSKcYaHagAZIhSUhffHjHP = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<Claim>)],
+        ["InpatientStayLineItems", "NonacuteInpatientLineItems"]);
+    private static CqlTupleMetadata CqlTupleMetadata_DBGUUNgWTQDYFIeOfMhQJAYTB = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<Claim>), typeof(IEnumerable<Claim>)],
+        ["InpatientDischarge", "NonacuteInpatientDischarge", "AcuteInpatientDischarge"]);
+    private static CqlTupleMetadata CqlTupleMetadata_BWiFKXdFieUciRMVTUCdIFCVO = new(
+        [typeof(Claim), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<string>)],
+        ["SingleCareTeam", "CareTeamsProvider", "CareTeamsProviderID"]);
+    private static CqlTupleMetadata CqlTupleMetadata_HFNJUcNhcbGBLBgHAJMMSPfQH = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?>)],
+        ["CareTeams"]);
+    private static CqlTupleMetadata CqlTupleMetadata_FPVdJEEOUKFVhQPTfKhShUNO = new(
+        [typeof(IEnumerable<Practitioner>)],
+        ["Practitioners"]);
+    private static CqlTupleMetadata CqlTupleMetadata_EheHUARRFfQdCcHKeSEhfYZMj = new(
+        [typeof(IEnumerable<FhirString>), typeof(IEnumerable<Identifier>)],
+        ["AllIdentifiers", "NullIdentifiers"]);
+    private static CqlTupleMetadata CqlTupleMetadata_EZUSISLPSZWTXahaQjXaSAJBE = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?>)],
+        ["IdentifierTuple"]);
+    private static CqlTupleMetadata CqlTupleMetadata_FBUdWLSDMgYFFiVXYhKEiUNQS = new(
+        [typeof(int?)],
+        ["IdentifierCount"]);
+    private static CqlTupleMetadata CqlTupleMetadata_gFQSaDQdhfIVgTfEbUhWdbBB = new(
+        [typeof(IEnumerable<Claim.ItemComponent>), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<string>)],
+        ["SingleItem", "ItemLocation", "ItemLocationID"]);
+    private static CqlTupleMetadata CqlTupleMetadata_ESTVjUCCVhLEXJGPZBeEcQDHX = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>)],
+        ["ItemsLocationReferences"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GWYcfjEGjPEdPbTNdfROfTUAf = new(
+        [typeof(IEnumerable<Location>)],
+        ["CorrespondingLocations"]);
 }
