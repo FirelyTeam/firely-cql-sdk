@@ -27,24 +27,24 @@ public partial class VTE_8_6_000 : ILibrary, ISingleton<VTE_8_6_000>
 
     [CqlDeclaration("Obstetrical or Pregnancy Related Conditions")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.263")]
-	public CqlValueSet Obstetrical_or_Pregnancy_Related_Conditions(CqlContext context) => 
+	public CqlValueSet Obstetrical_or_Pregnancy_Related_Conditions	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.263", default);
 
 
     [CqlDeclaration("Obstetrics VTE")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.264")]
-	public CqlValueSet Obstetrics_VTE(CqlContext context) => 
+	public CqlValueSet Obstetrics_VTE	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.264", default);
 
 
     [CqlDeclaration("Venous Thromboembolism")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.279")]
-	public CqlValueSet Venous_Thromboembolism(CqlContext context) => 
+	public CqlValueSet Venous_Thromboembolism	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.279", default);
 
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period	(CqlContext context)
 	{
 		object a_ = context.ResolveParameter("VTE-8.6.000", "Measurement Period", null);
 
@@ -53,7 +53,7 @@ public partial class VTE_8_6_000 : ILibrary, ISingleton<VTE_8_6_000>
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient(CqlContext context)
+	public Patient Patient	(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -63,13 +63,13 @@ public partial class VTE_8_6_000 : ILibrary, ISingleton<VTE_8_6_000>
 
 
     [CqlDeclaration("Admission without VTE or Obstetrical Conditions")]
-	public IEnumerable<Encounter> Admission_without_VTE_or_Obstetrical_Conditions(CqlContext context)
+	public IEnumerable<Encounter> Admission_without_VTE_or_Obstetrical_Conditions	(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = CQMCommon_2_0_000.Instance.Inpatient_Encounter(context);
-		bool? b_(Encounter InpatientEncounter)
+		bool? b_		(Encounter InpatientEncounter)
 		{
 			IEnumerable<Condition> d_ = CQMCommon_2_0_000.Instance.encounterDiagnosis(context, InpatientEncounter);
-			bool? e_(Condition EncDx)
+			bool? e_			(Condition EncDx)
 			{
 				CodeableConcept i_ = EncDx?.Code;
 				CqlConcept j_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, i_);
@@ -99,10 +99,10 @@ public partial class VTE_8_6_000 : ILibrary, ISingleton<VTE_8_6_000>
 
 
     [CqlDeclaration("Encounter with Age Range and without VTE Diagnosis or Obstetrical Conditions")]
-	public IEnumerable<Encounter> Encounter_with_Age_Range_and_without_VTE_Diagnosis_or_Obstetrical_Conditions(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Age_Range_and_without_VTE_Diagnosis_or_Obstetrical_Conditions	(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = CQMCommon_2_0_000.Instance.Inpatient_Encounter(context);
-		bool? b_(Encounter InpatientEncounter)
+		bool? b_		(Encounter InpatientEncounter)
 		{
 			Patient f_ = this.Patient(context);
 			Date g_ = f_?.BirthDateElement;
@@ -126,14 +126,14 @@ public partial class VTE_8_6_000 : ILibrary, ISingleton<VTE_8_6_000>
 
 
     [CqlDeclaration("Initial Population")]
-	public IEnumerable<Encounter> Initial_Population(CqlContext context)
+	public IEnumerable<Encounter> Initial_Population	(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Age_Range_and_without_VTE_Diagnosis_or_Obstetrical_Conditions(context);
 
 		return a_;
 	}
 
-	public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterAdmission(CqlContext context, Encounter Encounter)
+	public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterAdmission	(CqlContext context, Encounter Encounter)
 	{
 		CqlInterval<CqlDateTime> a_ = CQMCommon_2_0_000.Instance.hospitalizationWithObservation(context, Encounter);
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -149,7 +149,7 @@ public partial class VTE_8_6_000 : ILibrary, ISingleton<VTE_8_6_000>
 		return j_;
 	}
 
-	public CqlDateTime StartOfFirstICU(CqlContext context, Encounter Encounter)
+	public CqlDateTime StartOfFirstICU	(CqlContext context, Encounter Encounter)
 	{
 		Encounter.LocationComponent a_ = CQMCommon_2_0_000.Instance.firstInpatientIntensiveCareUnit(context, Encounter);
 		Period b_ = a_?.Period;
@@ -159,7 +159,7 @@ public partial class VTE_8_6_000 : ILibrary, ISingleton<VTE_8_6_000>
 		return d_;
 	}
 
-	public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterFirstICU(CqlContext context, Encounter Encounter)
+	public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterFirstICU	(CqlContext context, Encounter Encounter)
 	{
 		CqlInterval<CqlDateTime> a_ = CQMCommon_2_0_000.Instance.hospitalizationWithObservation(context, Encounter);
 		CqlDateTime b_ = context.Operators.Start(a_);

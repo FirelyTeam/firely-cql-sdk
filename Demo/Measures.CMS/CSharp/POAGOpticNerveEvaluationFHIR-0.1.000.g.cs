@@ -27,76 +27,76 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
     [CqlDeclaration("Care Services in Long-Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
-	public CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) => 
+	public CqlValueSet Care_Services_in_Long_Term_Residential_Facility	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
 
 
     [CqlDeclaration("Cup to Disc Ratio")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1333")]
-	public CqlValueSet Cup_to_Disc_Ratio(CqlContext context) => 
+	public CqlValueSet Cup_to_Disc_Ratio	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1333", default);
 
 
     [CqlDeclaration("Face-to-Face Interaction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048")]
-	public CqlValueSet Face_to_Face_Interaction(CqlContext context) => 
+	public CqlValueSet Face_to_Face_Interaction	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048", default);
 
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
-	public CqlValueSet Medical_Reason(CqlContext context) => 
+	public CqlValueSet Medical_Reason	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
 
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
-	public CqlValueSet Nursing_Facility_Visit(CqlContext context) => 
+	public CqlValueSet Nursing_Facility_Visit	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public CqlValueSet Office_Visit(CqlContext context) => 
+	public CqlValueSet Office_Visit	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
 
     [CqlDeclaration("Ophthalmological Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285")]
-	public CqlValueSet Ophthalmological_Services(CqlContext context) => 
+	public CqlValueSet Ophthalmological_Services	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", default);
 
 
     [CqlDeclaration("Optic Disc Exam for Structural Abnormalities")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1334")]
-	public CqlValueSet Optic_Disc_Exam_for_Structural_Abnormalities(CqlContext context) => 
+	public CqlValueSet Optic_Disc_Exam_for_Structural_Abnormalities	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1334", default);
 
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-	public CqlValueSet Outpatient_Consultation(CqlContext context) => 
+	public CqlValueSet Outpatient_Consultation	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
 
     [CqlDeclaration("Primary Open-Angle Glaucoma")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.326")]
-	public CqlValueSet Primary_Open_Angle_Glaucoma(CqlContext context) => 
+	public CqlValueSet Primary_Open_Angle_Glaucoma	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.326", default);
 
 
     [CqlDeclaration("virtual")]
-	public CqlCode @virtual(CqlContext context) => 
+	public CqlCode @virtual	(CqlContext context) => 
 		new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
 
     [CqlDeclaration("AMB")]
-	public CqlCode AMB(CqlContext context) => 
+	public CqlCode AMB	(CqlContext context) => 
 		new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
 
     [CqlDeclaration("ActCode")]
-	public CqlCode[] ActCode(CqlContext context)
+	public CqlCode[] ActCode	(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default),
@@ -108,7 +108,7 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period	(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -120,7 +120,7 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient(CqlContext context)
+	public Patient Patient	(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -130,7 +130,7 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity	(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
@@ -139,7 +139,7 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer	(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
@@ -148,7 +148,7 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race	(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
@@ -157,7 +157,7 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex	(CqlContext context)
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.Instance.SDE_Sex(context);
 
@@ -166,7 +166,7 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("Qualifying Encounter During Measurement Period")]
-	public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context)
+	public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Office_Visit(context);
 		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
@@ -182,7 +182,7 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 		CqlValueSet l_ = this.Care_Services_in_Long_Term_Residential_Facility(context);
 		IEnumerable<Encounter> m_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> n_ = context.Operators.Union<Encounter>(k_, m_);
-		bool? o_(Encounter QualifyingEncounter)
+		bool? o_		(Encounter QualifyingEncounter)
 		{
 			CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
 			Period r_ = QualifyingEncounter?.Period;
@@ -209,14 +209,14 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("Primary Open Angle Glaucoma Encounter")]
-	public IEnumerable<Encounter> Primary_Open_Angle_Glaucoma_Encounter(CqlContext context)
+	public IEnumerable<Encounter> Primary_Open_Angle_Glaucoma_Encounter	(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Qualifying_Encounter_During_Measurement_Period(context);
-		IEnumerable<Encounter> b_(Encounter ValidQualifyingEncounter)
+		IEnumerable<Encounter> b_		(Encounter ValidQualifyingEncounter)
 		{
 			CqlValueSet d_ = this.Primary_Open_Angle_Glaucoma(context);
 			IEnumerable<Condition> e_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, d_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-			bool? f_(Condition PrimaryOpenAngleGlaucoma)
+			bool? f_			(Condition PrimaryOpenAngleGlaucoma)
 			{
 				CqlInterval<CqlDateTime> j_ = QICoreCommon_2_0_000.Instance.prevalenceInterval(context, PrimaryOpenAngleGlaucoma);
 				Period k_ = ValidQualifyingEncounter?.Period;
@@ -245,7 +245,7 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 				return ah_;
 			};
 			IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
-			Encounter h_(Condition PrimaryOpenAngleGlaucoma) => 
+			Encounter h_			(Condition PrimaryOpenAngleGlaucoma) => 
 				ValidQualifyingEncounter;
 			IEnumerable<Encounter> i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
@@ -258,7 +258,7 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("Initial Population")]
-	public bool? Initial_Population(CqlContext context)
+	public bool? Initial_Population	(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -278,7 +278,7 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("Denominator")]
-	public bool? Denominator(CqlContext context)
+	public bool? Denominator	(CqlContext context)
 	{
 		bool? a_ = this.Initial_Population(context);
 
@@ -287,16 +287,16 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("Medical Reason for Not Performing Cup to Disc Ratio")]
-	public IEnumerable<Observation> Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio(CqlContext context)
+	public IEnumerable<Observation> Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Cup_to_Disc_Ratio(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
 		IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
 		IEnumerable<Observation> e_ = context.Operators.Union<Observation>(b_, d_);
-		IEnumerable<Observation> f_(Observation CupToDiscExamNotPerformed)
+		IEnumerable<Observation> f_		(Observation CupToDiscExamNotPerformed)
 		{
 			IEnumerable<Encounter> j_ = this.Primary_Open_Angle_Glaucoma_Encounter(context);
-			bool? k_(Encounter EncounterWithPOAG)
+			bool? k_			(Encounter EncounterWithPOAG)
 			{
 				Instant o_ = CupToDiscExamNotPerformed?.IssuedElement;
 				DateTimeOffset? p_ = o_?.Value;
@@ -308,16 +308,16 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 				return t_;
 			};
 			IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
-			Observation m_(Encounter EncounterWithPOAG) => 
+			Observation m_			(Encounter EncounterWithPOAG) => 
 				CupToDiscExamNotPerformed;
 			IEnumerable<Observation> n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
 			return n_;
 		};
 		IEnumerable<Observation> g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
-		bool? h_(Observation CupToDiscExamNotPerformed)
+		bool? h_		(Observation CupToDiscExamNotPerformed)
 		{
-			bool? u_(Extension @this)
+			bool? u_			(Extension @this)
 			{
 				string ac_ = @this?.Url;
 				FhirString ad_ = context.Operators.Convert<FhirString>(ac_);
@@ -329,7 +329,7 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(CupToDiscExamNotPerformed is DomainResource
 					? (CupToDiscExamNotPerformed as DomainResource).Extension
 					: default), u_);
-			object w_(Extension @this)
+			object w_			(Extension @this)
 			{
 				DataType ag_ = @this?.Value;
 
@@ -350,16 +350,16 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("Medical Reason for Not Performing Optic Disc Exam")]
-	public IEnumerable<Observation> Medical_Reason_for_Not_Performing_Optic_Disc_Exam(CqlContext context)
+	public IEnumerable<Observation> Medical_Reason_for_Not_Performing_Optic_Disc_Exam	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Optic_Disc_Exam_for_Structural_Abnormalities(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
 		IEnumerable<Observation> d_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone"));
 		IEnumerable<Observation> e_ = context.Operators.Union<Observation>(b_, d_);
-		IEnumerable<Observation> f_(Observation OpticDiscExamNotPerformed)
+		IEnumerable<Observation> f_		(Observation OpticDiscExamNotPerformed)
 		{
 			IEnumerable<Encounter> j_ = this.Primary_Open_Angle_Glaucoma_Encounter(context);
-			bool? k_(Encounter EncounterWithPOAG)
+			bool? k_			(Encounter EncounterWithPOAG)
 			{
 				Instant o_ = OpticDiscExamNotPerformed?.IssuedElement;
 				DateTimeOffset? p_ = o_?.Value;
@@ -371,16 +371,16 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 				return t_;
 			};
 			IEnumerable<Encounter> l_ = context.Operators.Where<Encounter>(j_, k_);
-			Observation m_(Encounter EncounterWithPOAG) => 
+			Observation m_			(Encounter EncounterWithPOAG) => 
 				OpticDiscExamNotPerformed;
 			IEnumerable<Observation> n_ = context.Operators.Select<Encounter, Observation>(l_, m_);
 
 			return n_;
 		};
 		IEnumerable<Observation> g_ = context.Operators.SelectMany<Observation, Observation>(e_, f_);
-		bool? h_(Observation OpticDiscExamNotPerformed)
+		bool? h_		(Observation OpticDiscExamNotPerformed)
 		{
-			bool? u_(Extension @this)
+			bool? u_			(Extension @this)
 			{
 				string ac_ = @this?.Url;
 				FhirString ad_ = context.Operators.Convert<FhirString>(ac_);
@@ -392,7 +392,7 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(OpticDiscExamNotPerformed is DomainResource
 					? (OpticDiscExamNotPerformed as DomainResource).Extension
 					: default), u_);
-			object w_(Extension @this)
+			object w_			(Extension @this)
 			{
 				DataType ag_ = @this?.Value;
 
@@ -413,7 +413,7 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("Denominator Exceptions")]
-	public bool? Denominator_Exceptions(CqlContext context)
+	public bool? Denominator_Exceptions	(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = this.Medical_Reason_for_Not_Performing_Cup_to_Disc_Ratio(context);
 		bool? b_ = context.Operators.Exists<Observation>(a_);
@@ -426,14 +426,14 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("Cup to Disc Ratio Performed with Result")]
-	public IEnumerable<Observation> Cup_to_Disc_Ratio_Performed_with_Result(CqlContext context)
+	public IEnumerable<Observation> Cup_to_Disc_Ratio_Performed_with_Result	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Cup_to_Disc_Ratio(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-		IEnumerable<Observation> c_(Observation CupToDiscExamPerformed)
+		IEnumerable<Observation> c_		(Observation CupToDiscExamPerformed)
 		{
 			IEnumerable<Encounter> g_ = this.Primary_Open_Angle_Glaucoma_Encounter(context);
-			bool? h_(Encounter EncounterWithPOAG)
+			bool? h_			(Encounter EncounterWithPOAG)
 			{
 				Period l_ = EncounterWithPOAG?.Period;
 				CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, l_);
@@ -445,14 +445,14 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 				return q_;
 			};
 			IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
-			Observation j_(Encounter EncounterWithPOAG) => 
+			Observation j_			(Encounter EncounterWithPOAG) => 
 				CupToDiscExamPerformed;
 			IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
 			return k_;
 		};
 		IEnumerable<Observation> d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
-		bool? e_(Observation CupToDiscExamPerformed)
+		bool? e_		(Observation CupToDiscExamPerformed)
 		{
 			DataType r_ = CupToDiscExamPerformed?.Value;
 			object s_ = FHIRHelpers_4_3_000.Instance.ToValue(context, r_);
@@ -478,14 +478,14 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("Optic Disc Exam Performed with Result")]
-	public IEnumerable<Observation> Optic_Disc_Exam_Performed_with_Result(CqlContext context)
+	public IEnumerable<Observation> Optic_Disc_Exam_Performed_with_Result	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Optic_Disc_Exam_for_Structural_Abnormalities(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-		IEnumerable<Observation> c_(Observation OpticDiscExamPerformed)
+		IEnumerable<Observation> c_		(Observation OpticDiscExamPerformed)
 		{
 			IEnumerable<Encounter> g_ = this.Primary_Open_Angle_Glaucoma_Encounter(context);
-			bool? h_(Encounter EncounterWithPOAG)
+			bool? h_			(Encounter EncounterWithPOAG)
 			{
 				Period l_ = EncounterWithPOAG?.Period;
 				CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, l_);
@@ -497,14 +497,14 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 				return q_;
 			};
 			IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
-			Observation j_(Encounter EncounterWithPOAG) => 
+			Observation j_			(Encounter EncounterWithPOAG) => 
 				OpticDiscExamPerformed;
 			IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
 			return k_;
 		};
 		IEnumerable<Observation> d_ = context.Operators.SelectMany<Observation, Observation>(b_, c_);
-		bool? e_(Observation OpticDiscExamPerformed)
+		bool? e_		(Observation OpticDiscExamPerformed)
 		{
 			DataType r_ = OpticDiscExamPerformed?.Value;
 			object s_ = FHIRHelpers_4_3_000.Instance.ToValue(context, r_);
@@ -530,7 +530,7 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("Numerator")]
-	public bool? Numerator(CqlContext context)
+	public bool? Numerator	(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = this.Cup_to_Disc_Ratio_Performed_with_Result(context);
 		bool? b_ = context.Operators.Exists<Observation>(a_);

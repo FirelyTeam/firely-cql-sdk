@@ -284,9 +284,10 @@ namespace Hl7.Cql.CodeGeneration.NET
             else return "__" + methodName;
         }
 
-        private string PrivateMethodNameFor(string methodName) => methodName + "_Value";
-
-        private void WriteMethod(string libraryName, TextWriter writer, int indentLevel,
+        private void WriteMethod(
+            string libraryName,
+            TextWriter writer,
+            int indentLevel,
             string cqlName,
             LambdaExpression overload,
             ILookup<string, string>? tags)
@@ -330,7 +331,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 }
             }
 
-            writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
+            writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(overload, new ConvExprArgs(indentLevel), methodName!, "public"));
         }
 
         private ExpressionToCSharpConverter NewExpressionToCSharpConverter(string libraryName) =>

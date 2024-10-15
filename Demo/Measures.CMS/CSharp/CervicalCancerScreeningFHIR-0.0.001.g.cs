@@ -27,66 +27,66 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
     [CqlDeclaration("Congenital or Acquired Absence of Cervix")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1016")]
-	public CqlValueSet Congenital_or_Acquired_Absence_of_Cervix(CqlContext context) => 
+	public CqlValueSet Congenital_or_Acquired_Absence_of_Cervix	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1016", default);
 
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-	public CqlValueSet Home_Healthcare_Services(CqlContext context) => 
+	public CqlValueSet Home_Healthcare_Services	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
 
     [CqlDeclaration("HPV Test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1059")]
-	public CqlValueSet HPV_Test(CqlContext context) => 
+	public CqlValueSet HPV_Test	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1059", default);
 
 
     [CqlDeclaration("Hysterectomy with No Residual Cervix")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1014")]
-	public CqlValueSet Hysterectomy_with_No_Residual_Cervix(CqlContext context) => 
+	public CqlValueSet Hysterectomy_with_No_Residual_Cervix	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1014", default);
 
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public CqlValueSet Office_Visit(CqlContext context) => 
+	public CqlValueSet Office_Visit	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-	public CqlValueSet Online_Assessments(CqlContext context) => 
+	public CqlValueSet Online_Assessments	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
 
     [CqlDeclaration("Pap Test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1017")]
-	public CqlValueSet Pap_Test(CqlContext context) => 
+	public CqlValueSet Pap_Test	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1017", default);
 
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-	public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) => 
+	public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-	public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) => 
+	public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-	public CqlValueSet Telephone_Visits(CqlContext context) => 
+	public CqlValueSet Telephone_Visits	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period	(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -98,7 +98,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient(CqlContext context)
+	public Patient Patient	(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -108,7 +108,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Qualifying Encounters")]
-	public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
+	public IEnumerable<Encounter> Qualifying_Encounters	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Office_Visit(context);
 		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
@@ -128,7 +128,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 		IEnumerable<Encounter> p_ = context.Operators.Union<Encounter>(m_, o_);
 		IEnumerable<Encounter> q_ = context.Operators.Union<Encounter>(k_, p_);
 		IEnumerable<Encounter> r_ = Status_1_6_000.Instance.isEncounterPerformed(context, q_);
-		bool? s_(Encounter ValidEncounters)
+		bool? s_		(Encounter ValidEncounters)
 		{
 			CqlInterval<CqlDateTime> u_ = this.Measurement_Period(context);
 			Period v_ = ValidEncounters?.Period;
@@ -145,7 +145,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Initial Population")]
-	public bool? Initial_Population(CqlContext context)
+	public bool? Initial_Population	(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -171,7 +171,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Denominator")]
-	public bool? Denominator(CqlContext context)
+	public bool? Denominator	(CqlContext context)
 	{
 		bool? a_ = this.Initial_Population(context);
 
@@ -180,12 +180,12 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Absence of Cervix")]
-	public IEnumerable<object> Absence_of_Cervix(CqlContext context)
+	public IEnumerable<object> Absence_of_Cervix	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Hysterectomy_with_No_Residual_Cervix(context);
 		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_ = Status_1_6_000.Instance.isProcedurePerformed(context, b_);
-		bool? d_(Procedure NoCervixProcedure)
+		bool? d_		(Procedure NoCervixProcedure)
 		{
 			DataType k_ = NoCervixProcedure?.Performed;
 			object l_ = FHIRHelpers_4_3_000.Instance.ToValue(context, k_);
@@ -200,7 +200,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 		IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
 		CqlValueSet f_ = this.Congenital_or_Acquired_Absence_of_Cervix(context);
 		IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-		bool? h_(Condition NoCervixDiagnosis)
+		bool? h_		(Condition NoCervixDiagnosis)
 		{
 			CqlInterval<CqlDateTime> r_ = QICoreCommon_2_0_000.Instance.prevalenceInterval(context, NoCervixDiagnosis);
 			CqlDateTime s_ = context.Operators.Start(r_);
@@ -218,7 +218,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Denominator Exclusions")]
-	public bool? Denominator_Exclusions(CqlContext context)
+	public bool? Denominator_Exclusions	(CqlContext context)
 	{
 		bool? a_ = Hospice_6_9_000.Instance.Has_Hospice_Services(context);
 		IEnumerable<object> b_ = this.Absence_of_Cervix(context);
@@ -232,16 +232,16 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Cervical Cytology Within 3 Years")]
-	public IEnumerable<Observation> Cervical_Cytology_Within_3_Years(CqlContext context)
+	public IEnumerable<Observation> Cervical_Cytology_Within_3_Years	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Pap_Test(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_ = Status_1_6_000.Instance.isLaboratoryTestPerformed(context, b_);
-		bool? d_(Observation CervicalCytology)
+		bool? d_		(Observation CervicalCytology)
 		{
-			object f_()
+			object f_			()
 			{
-				bool t_()
+				bool t_				()
 				{
 					DataType w_ = CervicalCytology?.Effective;
 					object x_ = FHIRHelpers_4_3_000.Instance.ToValue(context, w_);
@@ -249,7 +249,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 					return y_;
 				};
-				bool u_()
+				bool u_				()
 				{
 					DataType z_ = CervicalCytology?.Effective;
 					object aa_ = FHIRHelpers_4_3_000.Instance.ToValue(context, z_);
@@ -257,7 +257,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 					return ab_;
 				};
-				bool v_()
+				bool v_				()
 				{
 					DataType ac_ = CervicalCytology?.Effective;
 					object ad_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ac_);
@@ -313,20 +313,20 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("HPV Test Within 5 Years for Women Age 30 and Older")]
-	public IEnumerable<Observation> HPV_Test_Within_5_Years_for_Women_Age_30_and_Older(CqlContext context)
+	public IEnumerable<Observation> HPV_Test_Within_5_Years_for_Women_Age_30_and_Older	(CqlContext context)
 	{
 		CqlValueSet a_ = this.HPV_Test(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_ = Status_1_6_000.Instance.isLaboratoryTestPerformed(context, b_);
-		bool? d_(Observation HPVTest)
+		bool? d_		(Observation HPVTest)
 		{
 			Patient f_ = this.Patient(context);
 			Date g_ = f_?.BirthDateElement;
 			string h_ = g_?.Value;
 			CqlDate i_ = context.Operators.ConvertStringToDate(h_);
-			object j_()
+			object j_			()
 			{
-				bool ad_()
+				bool ad_				()
 				{
 					DataType ag_ = HPVTest?.Effective;
 					object ah_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ag_);
@@ -334,7 +334,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 					return ai_;
 				};
-				bool ae_()
+				bool ae_				()
 				{
 					DataType aj_ = HPVTest?.Effective;
 					object ak_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aj_);
@@ -342,7 +342,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 					return al_;
 				};
-				bool af_()
+				bool af_				()
 				{
 					DataType am_ = HPVTest?.Effective;
 					object an_ = FHIRHelpers_4_3_000.Instance.ToValue(context, am_);
@@ -380,9 +380,9 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 			CqlDate l_ = context.Operators.DateFrom(k_);
 			int? m_ = context.Operators.CalculateAgeAt(i_, l_, "year");
 			bool? n_ = context.Operators.GreaterOrEqual(m_, 30);
-			object o_()
+			object o_			()
 			{
-				bool av_()
+				bool av_				()
 				{
 					DataType ay_ = HPVTest?.Effective;
 					object az_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ay_);
@@ -390,7 +390,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 					return ba_;
 				};
-				bool aw_()
+				bool aw_				()
 				{
 					DataType bb_ = HPVTest?.Effective;
 					object bc_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bb_);
@@ -398,7 +398,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 					return bd_;
 				};
-				bool ax_()
+				bool ax_				()
 				{
 					DataType be_ = HPVTest?.Effective;
 					object bf_ = FHIRHelpers_4_3_000.Instance.ToValue(context, be_);
@@ -455,7 +455,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("Numerator")]
-	public bool? Numerator(CqlContext context)
+	public bool? Numerator	(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = this.Cervical_Cytology_Within_3_Years(context);
 		bool? b_ = context.Operators.Exists<Observation>(a_);
@@ -468,7 +468,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity	(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
@@ -477,7 +477,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer	(CqlContext context)
 	{
 		IEnumerable<(CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
@@ -486,7 +486,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("SDE Race")]
-	public (IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (IEnumerable<CqlCode> codes, string display)? SDE_Race	(CqlContext context)
 	{
 		(IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
@@ -495,7 +495,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex	(CqlContext context)
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.Instance.SDE_Sex(context);
 
