@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.6.0")]
 [CqlLibrary("AppropriateTreatmentforSTEMIFHIR", "1.0.000")]
 public partial class AppropriateTreatmentforSTEMIFHIR_1_0_000 : ILibrary, ISingleton<AppropriateTreatmentforSTEMIFHIR_1_0_000>
 {

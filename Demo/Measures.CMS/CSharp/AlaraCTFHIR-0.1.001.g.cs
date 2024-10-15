@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.6.0")]
 [CqlLibrary("AlaraCTFHIR", "0.1.001")]
 public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_001>
 {
