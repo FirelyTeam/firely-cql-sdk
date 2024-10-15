@@ -27,78 +27,78 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
-	public CqlValueSet Annual_Wellness_Visit	(CqlContext context) => 
+	public CqlValueSet Annual_Wellness_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default);
 
 
     [CqlDeclaration("Antidepressant Medication")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1213")]
-	public CqlValueSet Antidepressant_Medication	(CqlContext context) => 
+	public CqlValueSet Antidepressant_Medication(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1213", default);
 
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-	public CqlValueSet Home_Healthcare_Services	(CqlContext context) => 
+	public CqlValueSet Home_Healthcare_Services(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
 
     [CqlDeclaration("Major Depression")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1007")]
-	public CqlValueSet Major_Depression	(CqlContext context) => 
+	public CqlValueSet Major_Depression(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1007", default);
 
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
-	public CqlValueSet Nursing_Facility_Visit	(CqlContext context) => 
+	public CqlValueSet Nursing_Facility_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-	public CqlValueSet Office_Visit	(CqlContext context) => 
+	public CqlValueSet Office_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-	public CqlValueSet Online_Assessments	(CqlContext context) => 
+	public CqlValueSet Online_Assessments(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-	public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up	(CqlContext context) => 
+	public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-	public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up	(CqlContext context) => 
+	public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
 
     [CqlDeclaration("Psych Visit Diagnostic Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492")]
-	public CqlValueSet Psych_Visit_Diagnostic_Evaluation	(CqlContext context) => 
+	public CqlValueSet Psych_Visit_Diagnostic_Evaluation(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", default);
 
 
     [CqlDeclaration("Psych Visit Psychotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496")]
-	public CqlValueSet Psych_Visit_Psychotherapy	(CqlContext context) => 
+	public CqlValueSet Psych_Visit_Psychotherapy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", default);
 
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-	public CqlValueSet Telephone_Visits	(CqlContext context) => 
+	public CqlValueSet Telephone_Visits(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period	(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -110,7 +110,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient	(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -120,7 +120,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("April 30 of the Measurement Period")]
-	public CqlDateTime April_30_of_the_Measurement_Period	(CqlContext context)
+	public CqlDateTime April_30_of_the_Measurement_Period(CqlContext context)
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -133,7 +133,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("May 1 of the Year Prior to the Measurement Period")]
-	public CqlDateTime May_1_of_the_Year_Prior_to_the_Measurement_Period	(CqlContext context)
+	public CqlDateTime May_1_of_the_Year_Prior_to_the_Measurement_Period(CqlContext context)
 	{
 		CqlInterval<CqlDateTime> a_ = this.Measurement_Period(context);
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -147,7 +147,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("Intake Period")]
-	public CqlInterval<CqlDateTime> Intake_Period	(CqlContext context)
+	public CqlInterval<CqlDateTime> Intake_Period(CqlContext context)
 	{
 		CqlDateTime a_ = this.May_1_of_the_Year_Prior_to_the_Measurement_Period(context);
 		CqlDateTime b_ = this.April_30_of_the_Measurement_Period(context);
@@ -158,14 +158,14 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("Earliest Antidepressant Dispensed During Intake Period")]
-	public CqlDate Earliest_Antidepressant_Dispensed_During_Intake_Period	(CqlContext context)
+	public CqlDate Earliest_Antidepressant_Dispensed_During_Intake_Period(CqlContext context)
 	{
 		CqlValueSet a_ = this.Antidepressant_Medication(context);
 		IEnumerable<MedicationDispense> b_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
 		IEnumerable<MedicationDispense> d_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
 		IEnumerable<MedicationDispense> e_ = context.Operators.Union<MedicationDispense>(b_, d_);
 		IEnumerable<MedicationDispense> f_ = Status_1_6_000.Instance.Dispensed_Medication(context, e_);
-		bool? g_		(MedicationDispense Antidepressant)
+		bool? g_(MedicationDispense Antidepressant)
 		{
 			CqlInterval<CqlDate> o_ = CumulativeMedicationDuration_4_0_000.Instance.MedicationDispensePeriod(context, Antidepressant);
 			CqlDate p_ = context.Operators.Start(o_);
@@ -176,7 +176,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 			return s_;
 		};
 		IEnumerable<MedicationDispense> h_ = context.Operators.Where<MedicationDispense>(f_, g_);
-		(CqlTupleMetadata, CqlDate AntidepressantDate)? i_		(MedicationDispense Antidepressant)
+		(CqlTupleMetadata, CqlDate AntidepressantDate)? i_(MedicationDispense Antidepressant)
 		{
 			CqlInterval<CqlDate> t_ = CumulativeMedicationDuration_4_0_000.Instance.MedicationDispensePeriod(context, Antidepressant);
 			CqlDate u_ = context.Operators.Start(t_);
@@ -187,7 +187,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 			return x_;
 		};
 		IEnumerable<(CqlTupleMetadata, CqlDate AntidepressantDate)?> j_ = context.Operators.Select<MedicationDispense, (CqlTupleMetadata, CqlDate AntidepressantDate)?>(h_, i_);
-		object k_		((CqlTupleMetadata, CqlDate AntidepressantDate)? @this)
+		object k_((CqlTupleMetadata, CqlDate AntidepressantDate)? @this)
 		{
 			CqlDate y_ = @this?.AntidepressantDate;
 
@@ -202,11 +202,11 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("Has Initial Major Depression Diagnosis")]
-	public bool? Has_Initial_Major_Depression_Diagnosis	(CqlContext context)
+	public bool? Has_Initial_Major_Depression_Diagnosis(CqlContext context)
 	{
 		CqlValueSet a_ = this.Major_Depression(context);
 		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-		bool? c_		(Condition MajorDepression)
+		bool? c_(Condition MajorDepression)
 		{
 			CqlDate f_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period(context);
 			bool? g_ = context.Operators.Not((bool?)(f_ is null));
@@ -232,7 +232,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("Qualifying Encounters")]
-	public IEnumerable<Encounter> Qualifying_Encounters	(CqlContext context)
+	public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
 	{
 		CqlValueSet a_ = this.Office_Visit(context);
 		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
@@ -263,7 +263,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 		IEnumerable<Encounter> aa_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, z_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
 		IEnumerable<Encounter> ab_ = context.Operators.Union<Encounter>(y_, aa_);
 		IEnumerable<Encounter> ac_ = context.Operators.Union<Encounter>(w_, ab_);
-		bool? ad_		(Encounter ValidEncounter)
+		bool? ad_(Encounter ValidEncounter)
 		{
 			Period af_ = ValidEncounter?.Period;
 			CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, af_);
@@ -288,7 +288,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("Initial Population")]
-	public bool? Initial_Population	(CqlContext context)
+	public bool? Initial_Population(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -309,7 +309,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("Denominator")]
-	public bool? Denominator	(CqlContext context)
+	public bool? Denominator(CqlContext context)
 	{
 		bool? a_ = this.Initial_Population(context);
 
@@ -318,7 +318,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("Denominator Exclusions")]
-	public bool? Denominator_Exclusions	(CqlContext context)
+	public bool? Denominator_Exclusions(CqlContext context)
 	{
 		bool? a_ = Hospice_6_9_000.Instance.Has_Hospice_Services(context);
 		CqlValueSet b_ = this.Antidepressant_Medication(context);
@@ -326,7 +326,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 		IEnumerable<MedicationRequest> e_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, b_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest"));
 		IEnumerable<MedicationRequest> f_ = context.Operators.Union<MedicationRequest>(c_, e_);
 		IEnumerable<MedicationRequest> g_ = Status_1_6_000.Instance.Active_Medication(context, f_);
-		bool? h_		(MedicationRequest ActiveAntidepressant)
+		bool? h_(MedicationRequest ActiveAntidepressant)
 		{
 			CqlDate l_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period(context);
 			bool? m_ = context.Operators.Not((bool?)(l_ is null));
@@ -339,7 +339,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 			object[] t_ = [
 				s_,
 			];
-			CqlInterval<CqlDateTime> u_			(object Meds)
+			CqlInterval<CqlDateTime> u_(object Meds)
 			{
 				CqlInterval<CqlDateTime> af_ = this.Intake_Period(context);
 				CqlDateTime ag_ = context.Operators.Start(af_);
@@ -370,14 +370,14 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("Antidepressant Medication Period Between IPSD and 114 Days After IPSD")]
-	public IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD	(CqlContext context)
+	public IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD(CqlContext context)
 	{
 		CqlValueSet a_ = this.Antidepressant_Medication(context);
 		IEnumerable<MedicationDispense> b_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
 		IEnumerable<MedicationDispense> d_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
 		IEnumerable<MedicationDispense> e_ = context.Operators.Union<MedicationDispense>(b_, d_);
 		IEnumerable<MedicationDispense> f_ = Status_1_6_000.Instance.Dispensed_Medication(context, e_);
-		CqlInterval<CqlDate> g_		(MedicationDispense Antidepressant)
+		CqlInterval<CqlDate> g_(MedicationDispense Antidepressant)
 		{
 			CqlInterval<CqlDate> i_ = CumulativeMedicationDuration_4_0_000.Instance.MedicationDispensePeriod(context, Antidepressant);
 			CqlDate j_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period(context);
@@ -395,7 +395,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("Cumulative Medication Duration Greater Than or Equal to 84 Days")]
-	public bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days	(CqlContext context)
+	public bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days(CqlContext context)
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_ = this.Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD(context);
 		int? b_ = CumulativeMedicationDuration_4_0_000.Instance.CumulativeDuration(context, a_);
@@ -406,7 +406,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("Numerator 1")]
-	public bool? Numerator_1	(CqlContext context)
+	public bool? Numerator_1(CqlContext context)
 	{
 		bool? a_ = this.Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days(context);
 
@@ -415,14 +415,14 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("Antidepressant Medication Period Between IPSD and 231 Days After IPSD")]
-	public IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD	(CqlContext context)
+	public IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD(CqlContext context)
 	{
 		CqlValueSet a_ = this.Antidepressant_Medication(context);
 		IEnumerable<MedicationDispense> b_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
 		IEnumerable<MedicationDispense> d_ = context.Operators.Retrieve<MedicationDispense>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationdispense"));
 		IEnumerable<MedicationDispense> e_ = context.Operators.Union<MedicationDispense>(b_, d_);
 		IEnumerable<MedicationDispense> f_ = Status_1_6_000.Instance.Dispensed_Medication(context, e_);
-		CqlInterval<CqlDate> g_		(MedicationDispense Antidepressant)
+		CqlInterval<CqlDate> g_(MedicationDispense Antidepressant)
 		{
 			CqlInterval<CqlDate> i_ = CumulativeMedicationDuration_4_0_000.Instance.MedicationDispensePeriod(context, Antidepressant);
 			CqlDate j_ = this.Earliest_Antidepressant_Dispensed_During_Intake_Period(context);
@@ -440,7 +440,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("Cumulative Medication Duration Greater Than or Equal to 180 Days")]
-	public bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days	(CqlContext context)
+	public bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days(CqlContext context)
 	{
 		IEnumerable<CqlInterval<CqlDate>> a_ = this.Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD(context);
 		int? b_ = CumulativeMedicationDuration_4_0_000.Instance.CumulativeDuration(context, a_);
@@ -451,7 +451,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("Numerator 2")]
-	public bool? Numerator_2	(CqlContext context)
+	public bool? Numerator_2(CqlContext context)
 	{
 		bool? a_ = this.Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days(context);
 
@@ -460,7 +460,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity	(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
@@ -469,7 +469,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer	(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
@@ -478,7 +478,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("SDE Race")]
-	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race	(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
@@ -487,7 +487,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex	(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.Instance.SDE_Sex(context);
 

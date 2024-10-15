@@ -26,27 +26,27 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
     #endregion Library Members
 
     [CqlDeclaration("Birth date")]
-	public CqlCode Birth_date	(CqlContext context) => 
+	public CqlCode Birth_date(CqlContext context) => 
 		new CqlCode("21112-8", "http://loinc.org", default, default);
 
 
     [CqlDeclaration("Calculated CT global noise")]
-	public CqlCode Calculated_CT_global_noise	(CqlContext context) => 
+	public CqlCode Calculated_CT_global_noise(CqlContext context) => 
 		new CqlCode("96912-1", "http://loinc.org", default, default);
 
 
     [CqlDeclaration("Calculated CT size-adjusted dose")]
-	public CqlCode Calculated_CT_size_adjusted_dose	(CqlContext context) => 
+	public CqlCode Calculated_CT_size_adjusted_dose(CqlContext context) => 
 		new CqlCode("96913-9", "http://loinc.org", default, default);
 
 
     [CqlDeclaration("CT dose and image quality category")]
-	public CqlCode CT_dose_and_image_quality_category	(CqlContext context) => 
+	public CqlCode CT_dose_and_image_quality_category(CqlContext context) => 
 		new CqlCode("96914-7", "http://loinc.org", default, default);
 
 
     [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC	(CqlContext context)
+	public CqlCode[] LOINC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("21112-8", "http://loinc.org", default, default),
@@ -60,7 +60,7 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period	(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -72,7 +72,7 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient	(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -82,7 +82,7 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity	(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
@@ -91,7 +91,7 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer	(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
@@ -100,7 +100,7 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 
 
     [CqlDeclaration("SDE Race")]
-	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race	(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
@@ -109,7 +109,7 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex	(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.Instance.SDE_Sex(context);
 
@@ -118,12 +118,12 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 
 
     [CqlDeclaration("Qualifying CTScan")]
-	public IEnumerable<Observation> Qualifying_CTScan	(CqlContext context)
+	public IEnumerable<Observation> Qualifying_CTScan(CqlContext context)
 	{
 		CqlCode a_ = this.CT_dose_and_image_quality_category(context);
 		IEnumerable<CqlCode> b_ = context.Operators.ToList<CqlCode>(a_);
 		IEnumerable<Observation> c_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, b_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-		bool? d_		(Observation CTScanResult)
+		bool? d_(Observation CTScanResult)
 		{
 			CqlInterval<CqlDateTime> f_ = this.Measurement_Period(context);
 			DataType g_ = CTScanResult?.Effective;
@@ -146,10 +146,10 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 		return e_;
 	}
 
-	public decimal? Global_Noise_Value	(CqlContext context, Observation Obs)
+	public decimal? Global_Noise_Value(CqlContext context, Observation Obs)
 	{
 		List<Observation.ComponentComponent> a_ = Obs?.Component;
-		bool? b_		(Observation.ComponentComponent C)
+		bool? b_(Observation.ComponentComponent C)
 		{
 			CodeableConcept g_ = C?.Code;
 			CqlConcept h_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, g_);
@@ -165,7 +165,7 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 			return p_;
 		};
 		IEnumerable<Observation.ComponentComponent> c_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)a_, b_);
-		decimal? d_		(Observation.ComponentComponent C)
+		decimal? d_(Observation.ComponentComponent C)
 		{
 			DataType q_ = C?.Value;
 			object r_ = FHIRHelpers_4_3_000.Instance.ToValue(context, q_);
@@ -179,10 +179,10 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 		return f_;
 	}
 
-	public decimal? Size_Adjusted_Value	(CqlContext context, Observation Obs)
+	public decimal? Size_Adjusted_Value(CqlContext context, Observation Obs)
 	{
 		List<Observation.ComponentComponent> a_ = Obs?.Component;
-		bool? b_		(Observation.ComponentComponent C)
+		bool? b_(Observation.ComponentComponent C)
 		{
 			CodeableConcept g_ = C?.Code;
 			CqlConcept h_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, g_);
@@ -198,7 +198,7 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 			return p_;
 		};
 		IEnumerable<Observation.ComponentComponent> c_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)a_, b_);
-		decimal? d_		(Observation.ComponentComponent C)
+		decimal? d_(Observation.ComponentComponent C)
 		{
 			DataType q_ = C?.Value;
 			object r_ = FHIRHelpers_4_3_000.Instance.ToValue(context, q_);
@@ -214,10 +214,10 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 
 
     [CqlDeclaration("Qualifying CTScan with Values")]
-	public IEnumerable<Observation> Qualifying_CTScan_with_Values	(CqlContext context)
+	public IEnumerable<Observation> Qualifying_CTScan_with_Values(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = this.Qualifying_CTScan(context);
-		bool? b_		(Observation CTScan)
+		bool? b_(Observation CTScan)
 		{
 			decimal? d_ = this.Global_Noise_Value(context, CTScan);
 			bool? e_ = context.Operators.Not((bool?)(d_ is null));
@@ -238,7 +238,7 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 
 
     [CqlDeclaration("Initial Population")]
-	public bool? Initial_Population	(CqlContext context)
+	public bool? Initial_Population(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = this.Qualifying_CTScan(context);
 		bool? b_ = context.Operators.Exists<Observation>(a_);
@@ -248,7 +248,7 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 
 
     [CqlDeclaration("Denominator")]
-	public bool? Denominator	(CqlContext context)
+	public bool? Denominator(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = this.Qualifying_CTScan_with_Values(context);
 		bool? b_ = context.Operators.Exists<Observation>(a_);
@@ -258,15 +258,15 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 
 
     [CqlDeclaration("Denominator Exclusion")]
-	public bool? Denominator_Exclusion	(CqlContext context)
+	public bool? Denominator_Exclusion(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = this.Qualifying_CTScan_with_Values(context);
-		bool? b_		(Observation CTScan)
+		bool? b_(Observation CTScan)
 		{
 			DataType e_ = CTScan?.Value;
 			object f_ = FHIRHelpers_4_3_000.Instance.ToValue(context, e_);
 			CqlCode[] g_ = (f_ as CqlConcept)?.codes;
-			bool? h_			(CqlCode @this)
+			bool? h_(CqlCode @this)
 			{
 				string m_ = @this?.code;
 				bool? n_ = context.Operators.Not((bool?)(m_ is null));
@@ -274,7 +274,7 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 				return n_;
 			};
 			IEnumerable<CqlCode> i_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)g_, h_);
-			string j_			(CqlCode @this)
+			string j_(CqlCode @this)
 			{
 				string o_ = @this?.code;
 
@@ -291,12 +291,12 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 		return d_;
 	}
 
-	public bool? Qualifies	(CqlContext context, Observation Obs, string code, decimal? noiseThreshold, decimal? sizeDoseThreshold)
+	public bool? Qualifies(CqlContext context, Observation Obs, string code, decimal? noiseThreshold, decimal? sizeDoseThreshold)
 	{
 		DataType a_ = Obs?.Value;
 		object b_ = FHIRHelpers_4_3_000.Instance.ToValue(context, a_);
 		CqlCode[] c_ = (b_ as CqlConcept)?.codes;
-		bool? d_		(CqlCode @this)
+		bool? d_(CqlCode @this)
 		{
 			string o_ = @this?.code;
 			bool? p_ = context.Operators.Not((bool?)(o_ is null));
@@ -304,7 +304,7 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 			return p_;
 		};
 		IEnumerable<CqlCode> e_ = context.Operators.Where<CqlCode>((IEnumerable<CqlCode>)c_, d_);
-		string f_		(CqlCode @this)
+		string f_(CqlCode @this)
 		{
 			string q_ = @this?.code;
 
@@ -322,7 +322,7 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 		return n_;
 	}
 
-	public bool? CT_Scan_Qualifies	(CqlContext context, Observation IP)
+	public bool? CT_Scan_Qualifies(CqlContext context, Observation IP)
 	{
 		decimal? a_ = context.Operators.ConvertIntegerToDecimal(64);
 		decimal? b_ = context.Operators.ConvertIntegerToDecimal(598);
@@ -388,10 +388,10 @@ public partial class AlaraCTFHIR_0_1_001 : ILibrary, ISingleton<AlaraCTFHIR_0_1_
 
 
     [CqlDeclaration("Numerator")]
-	public bool? Numerator	(CqlContext context)
+	public bool? Numerator(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = this.Qualifying_CTScan_with_Values(context);
-		bool? b_		(Observation CTScan)
+		bool? b_(Observation CTScan)
 		{
 			bool? e_ = this.CT_Scan_Qualifies(context, CTScan);
 

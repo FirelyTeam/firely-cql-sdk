@@ -27,18 +27,18 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
     [CqlDeclaration("Diabetes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001")]
-	public CqlValueSet Diabetes	(CqlContext context) => 
+	public CqlValueSet Diabetes(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", default);
 
 
     [CqlDeclaration("HbA1c Laboratory Test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1013")]
-	public CqlValueSet HbA1c_Laboratory_Test	(CqlContext context) => 
+	public CqlValueSet HbA1c_Laboratory_Test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1013", default);
 
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period	(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -50,7 +50,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient	(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -60,7 +60,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity	(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
@@ -69,7 +69,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer	(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
@@ -78,7 +78,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 
     [CqlDeclaration("SDE Race")]
-	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race	(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
@@ -87,7 +87,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex	(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.Instance.SDE_Sex(context);
 
@@ -96,7 +96,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 
     [CqlDeclaration("Initial Population")]
-	public bool? Initial_Population	(CqlContext context)
+	public bool? Initial_Population(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -113,7 +113,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 		bool? m_ = context.Operators.And(j_, l_);
 		CqlValueSet n_ = this.Diabetes(context);
 		IEnumerable<Condition> o_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, n_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-		bool? p_		(Condition Diabetes)
+		bool? p_(Condition Diabetes)
 		{
 			CqlInterval<CqlDateTime> t_ = QICoreCommon_2_0_000.Instance.ToPrevalenceInterval(context, Diabetes);
 			CqlInterval<CqlDateTime> u_ = this.Measurement_Period(context);
@@ -130,7 +130,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 
     [CqlDeclaration("Denominator")]
-	public bool? Denominator	(CqlContext context)
+	public bool? Denominator(CqlContext context)
 	{
 		bool? a_ = this.Initial_Population(context);
 
@@ -139,7 +139,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 
     [CqlDeclaration("Denominator Exclusions")]
-	public bool? Denominator_Exclusions	(CqlContext context)
+	public bool? Denominator_Exclusions(CqlContext context)
 	{
 		bool? a_ = Hospice_6_9_000.Instance.Has_Hospice_Services(context);
 		bool? b_ = AdvancedIllnessandFrailty_1_8_000.Instance.Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(context);
@@ -154,16 +154,16 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 
     [CqlDeclaration("Most Recent HbA1c")]
-	public Observation Most_Recent_HbA1c	(CqlContext context)
+	public Observation Most_Recent_HbA1c(CqlContext context)
 	{
 		CqlValueSet a_ = this.HbA1c_Laboratory_Test(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_ = Status_1_6_000.Instance.isLaboratoryTestPerformed(context, b_);
-		bool? d_		(Observation RecentHbA1c)
+		bool? d_(Observation RecentHbA1c)
 		{
-			object i_			()
+			object i_()
 			{
-				bool m_				()
+				bool m_()
 				{
 					DataType p_ = RecentHbA1c?.Effective;
 					object q_ = FHIRHelpers_4_3_000.Instance.ToValue(context, p_);
@@ -171,7 +171,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 					return r_;
 				};
-				bool n_				()
+				bool n_()
 				{
 					DataType s_ = RecentHbA1c?.Effective;
 					object t_ = FHIRHelpers_4_3_000.Instance.ToValue(context, s_);
@@ -179,7 +179,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 					return u_;
 				};
-				bool o_				()
+				bool o_()
 				{
 					DataType v_ = RecentHbA1c?.Effective;
 					object w_ = FHIRHelpers_4_3_000.Instance.ToValue(context, v_);
@@ -220,7 +220,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 			return l_;
 		};
 		IEnumerable<Observation> e_ = context.Operators.Where<Observation>(c_, d_);
-		object f_		(Observation @this)
+		object f_(Observation @this)
 		{
 			DataType ae_ = @this?.Effective;
 			object af_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ae_);
@@ -237,7 +237,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 
     [CqlDeclaration("Has Most Recent HbA1c Without Result")]
-	public bool? Has_Most_Recent_HbA1c_Without_Result	(CqlContext context)
+	public bool? Has_Most_Recent_HbA1c_Without_Result(CqlContext context)
 	{
 		Observation a_ = this.Most_Recent_HbA1c(context);
 		bool? b_ = context.Operators.Not((bool?)(a_ is null));
@@ -250,7 +250,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 
     [CqlDeclaration("Has Most Recent Elevated HbA1c")]
-	public bool? Has_Most_Recent_Elevated_HbA1c	(CqlContext context)
+	public bool? Has_Most_Recent_Elevated_HbA1c(CqlContext context)
 	{
 		Observation a_ = this.Most_Recent_HbA1c(context);
 		DataType b_ = a_?.Value;
@@ -263,16 +263,16 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 
     [CqlDeclaration("Has No Record Of HbA1c")]
-	public bool? Has_No_Record_Of_HbA1c	(CqlContext context)
+	public bool? Has_No_Record_Of_HbA1c(CqlContext context)
 	{
 		CqlValueSet a_ = this.HbA1c_Laboratory_Test(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_ = Status_1_6_000.Instance.isLaboratoryTestPerformed(context, b_);
-		bool? d_		(Observation NoHbA1c)
+		bool? d_(Observation NoHbA1c)
 		{
-			object h_			()
+			object h_()
 			{
-				bool l_				()
+				bool l_()
 				{
 					DataType o_ = NoHbA1c?.Effective;
 					object p_ = FHIRHelpers_4_3_000.Instance.ToValue(context, o_);
@@ -280,7 +280,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 					return q_;
 				};
-				bool m_				()
+				bool m_()
 				{
 					DataType r_ = NoHbA1c?.Effective;
 					object s_ = FHIRHelpers_4_3_000.Instance.ToValue(context, r_);
@@ -288,7 +288,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 					return t_;
 				};
-				bool n_				()
+				bool n_()
 				{
 					DataType u_ = NoHbA1c?.Effective;
 					object v_ = FHIRHelpers_4_3_000.Instance.ToValue(context, u_);
@@ -337,7 +337,7 @@ public partial class DiabetesHemoglobinA1cHbA1cPoorControl9FHIR_0_1_000 : ILibra
 
 
     [CqlDeclaration("Numerator")]
-	public bool? Numerator	(CqlContext context)
+	public bool? Numerator(CqlContext context)
 	{
 		bool? a_ = this.Has_Most_Recent_HbA1c_Without_Result(context);
 		bool? b_ = this.Has_Most_Recent_Elevated_HbA1c(context);

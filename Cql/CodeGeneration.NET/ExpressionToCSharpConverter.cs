@@ -565,7 +565,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             bool functionMode = false)
         {
             var lambdaSb = new StringBuilder();
-            lambdaSb.Append(context.IndentString);
 
             var parameters = lambda.Parameters.Select(p => $"{_typeToCSharpConverter.ToCSharp(p.Type)} {p.Name!.EscapeKeywords()}").ToList();
             // inserts the context parameter in the start of the lambda expression

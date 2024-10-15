@@ -27,78 +27,78 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
     [CqlDeclaration("Bilateral Mastectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1005")]
-	public CqlValueSet Bilateral_Mastectomy	(CqlContext context) => 
+	public CqlValueSet Bilateral_Mastectomy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1005", default);
 
 
     [CqlDeclaration("History of bilateral mastectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1068")]
-	public CqlValueSet History_of_bilateral_mastectomy	(CqlContext context) => 
+	public CqlValueSet History_of_bilateral_mastectomy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1068", default);
 
 
     [CqlDeclaration("Left")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1036")]
-	public CqlValueSet Left	(CqlContext context) => 
+	public CqlValueSet Left(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1036", default);
 
 
     [CqlDeclaration("Mammography")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.11.1047")]
-	public CqlValueSet Mammography	(CqlContext context) => 
+	public CqlValueSet Mammography(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.11.1047", default);
 
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-	public CqlValueSet Online_Assessments	(CqlContext context) => 
+	public CqlValueSet Online_Assessments(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
 
     [CqlDeclaration("Right")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1035")]
-	public CqlValueSet Right	(CqlContext context) => 
+	public CqlValueSet Right(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1035", default);
 
 
     [CqlDeclaration("Status Post Left Mastectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1069")]
-	public CqlValueSet Status_Post_Left_Mastectomy	(CqlContext context) => 
+	public CqlValueSet Status_Post_Left_Mastectomy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1069", default);
 
 
     [CqlDeclaration("Status Post Right Mastectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1070")]
-	public CqlValueSet Status_Post_Right_Mastectomy	(CqlContext context) => 
+	public CqlValueSet Status_Post_Right_Mastectomy(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1070", default);
 
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-	public CqlValueSet Telephone_Visits	(CqlContext context) => 
+	public CqlValueSet Telephone_Visits(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
 
     [CqlDeclaration("Unilateral Mastectomy Left")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1133")]
-	public CqlValueSet Unilateral_Mastectomy_Left	(CqlContext context) => 
+	public CqlValueSet Unilateral_Mastectomy_Left(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1133", default);
 
 
     [CqlDeclaration("Unilateral Mastectomy Right")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1134")]
-	public CqlValueSet Unilateral_Mastectomy_Right	(CqlContext context) => 
+	public CqlValueSet Unilateral_Mastectomy_Right(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1134", default);
 
 
     [CqlDeclaration("Unilateral Mastectomy, Unspecified Laterality")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1071")]
-	public CqlValueSet Unilateral_Mastectomy__Unspecified_Laterality	(CqlContext context) => 
+	public CqlValueSet Unilateral_Mastectomy__Unspecified_Laterality(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1071", default);
 
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period	(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2021, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2022, 1, 1, 0, 0, 0, 0, default);
@@ -110,7 +110,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient	(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -120,7 +120,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public IEnumerable<Coding> SDE_Ethnicity	(CqlContext context)
+	public IEnumerable<Coding> SDE_Ethnicity(CqlContext context)
 	{
 		IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Ethnicity(context);
 
@@ -129,7 +129,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer	(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Payer(context);
 
@@ -138,7 +138,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("SDE Race")]
-	public IEnumerable<Coding> SDE_Race	(CqlContext context)
+	public IEnumerable<Coding> SDE_Race(CqlContext context)
 	{
 		IEnumerable<Coding> a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Race(context);
 
@@ -147,7 +147,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex	(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = SupplementalDataElementsFHIR4_2_0_000.Instance.SDE_Sex(context);
 
@@ -156,14 +156,14 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Telehealth Services")]
-	public IEnumerable<Encounter> Telehealth_Services	(CqlContext context)
+	public IEnumerable<Encounter> Telehealth_Services(CqlContext context)
 	{
 		CqlValueSet a_ = this.Online_Assessments(context);
 		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		CqlValueSet c_ = this.Telephone_Visits(context);
 		IEnumerable<Encounter> d_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/StructureDefinition/Encounter"));
 		IEnumerable<Encounter> e_ = context.Operators.Union<Encounter>(b_, d_);
-		bool? f_		(Encounter TelehealthEncounter)
+		bool? f_(Encounter TelehealthEncounter)
 		{
 			Code<Encounter.EncounterStatus> h_ = TelehealthEncounter?.StatusElement;
 			string i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
@@ -183,7 +183,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Age at start of Measurement Period")]
-	public int? Age_at_start_of_Measurement_Period	(CqlContext context)
+	public int? Age_at_start_of_Measurement_Period(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -199,7 +199,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Initial Population")]
-	public bool? Initial_Population	(CqlContext context)
+	public bool? Initial_Population(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -226,7 +226,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Denominator")]
-	public bool? Denominator	(CqlContext context)
+	public bool? Denominator(CqlContext context)
 	{
 		bool? a_ = this.Initial_Population(context);
 
@@ -235,16 +235,16 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Right Mastectomy Diagnosis")]
-	public IEnumerable<Condition> Right_Mastectomy_Diagnosis	(CqlContext context)
+	public IEnumerable<Condition> Right_Mastectomy_Diagnosis(CqlContext context)
 	{
 		CqlValueSet a_ = this.Status_Post_Right_Mastectomy(context);
 		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		CqlValueSet c_ = this.Unilateral_Mastectomy__Unspecified_Laterality(context);
 		IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-		bool? e_		(Condition UnilateralMastectomyDiagnosis)
+		bool? e_(Condition UnilateralMastectomyDiagnosis)
 		{
 			List<CodeableConcept> j_ = UnilateralMastectomyDiagnosis?.BodySite;
-			CqlConcept k_			(CodeableConcept X)
+			CqlConcept k_(CodeableConcept X)
 			{
 				CqlConcept o_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
 
@@ -258,7 +258,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 		};
 		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 		IEnumerable<Condition> g_ = context.Operators.Union<Condition>(b_, f_);
-		bool? h_		(Condition RightMastectomy)
+		bool? h_(Condition RightMastectomy)
 		{
 			CqlInterval<CqlDateTime> p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, RightMastectomy);
 			CqlDateTime q_ = context.Operators.Start(p_);
@@ -275,11 +275,11 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Right Mastectomy Procedure")]
-	public IEnumerable<Procedure> Right_Mastectomy_Procedure	(CqlContext context)
+	public IEnumerable<Procedure> Right_Mastectomy_Procedure(CqlContext context)
 	{
 		CqlValueSet a_ = this.Unilateral_Mastectomy_Right(context);
 		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-		bool? c_		(Procedure UnilateralMastectomyRightPerformed)
+		bool? c_(Procedure UnilateralMastectomyRightPerformed)
 		{
 			Code<EventStatus> e_ = UnilateralMastectomyRightPerformed?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
@@ -301,16 +301,16 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Left Mastectomy Diagnosis")]
-	public IEnumerable<Condition> Left_Mastectomy_Diagnosis	(CqlContext context)
+	public IEnumerable<Condition> Left_Mastectomy_Diagnosis(CqlContext context)
 	{
 		CqlValueSet a_ = this.Status_Post_Left_Mastectomy(context);
 		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
 		CqlValueSet c_ = this.Unilateral_Mastectomy__Unspecified_Laterality(context);
 		IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, c_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-		bool? e_		(Condition UnilateralMastectomyDiagnosis)
+		bool? e_(Condition UnilateralMastectomyDiagnosis)
 		{
 			List<CodeableConcept> j_ = UnilateralMastectomyDiagnosis?.BodySite;
-			CqlConcept k_			(CodeableConcept X)
+			CqlConcept k_(CodeableConcept X)
 			{
 				CqlConcept o_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, X);
 
@@ -324,7 +324,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 		};
 		IEnumerable<Condition> f_ = context.Operators.Where<Condition>(d_, e_);
 		IEnumerable<Condition> g_ = context.Operators.Union<Condition>(b_, f_);
-		bool? h_		(Condition LeftMastectomy)
+		bool? h_(Condition LeftMastectomy)
 		{
 			CqlInterval<CqlDateTime> p_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, LeftMastectomy);
 			CqlDateTime q_ = context.Operators.Start(p_);
@@ -341,11 +341,11 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Left Mastectomy Procedure")]
-	public IEnumerable<Procedure> Left_Mastectomy_Procedure	(CqlContext context)
+	public IEnumerable<Procedure> Left_Mastectomy_Procedure(CqlContext context)
 	{
 		CqlValueSet a_ = this.Unilateral_Mastectomy_Left(context);
 		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-		bool? c_		(Procedure UnilateralMastectomyLeftPerformed)
+		bool? c_(Procedure UnilateralMastectomyLeftPerformed)
 		{
 			Code<EventStatus> e_ = UnilateralMastectomyLeftPerformed?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
@@ -367,11 +367,11 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Bilateral Mastectomy Diagnosis")]
-	public IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis	(CqlContext context)
+	public IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis(CqlContext context)
 	{
 		CqlValueSet a_ = this.History_of_bilateral_mastectomy(context);
 		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-		bool? c_		(Condition BilateralMastectomyHistory)
+		bool? c_(Condition BilateralMastectomyHistory)
 		{
 			CqlInterval<CqlDateTime> e_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, BilateralMastectomyHistory);
 			CqlDateTime f_ = context.Operators.Start(e_);
@@ -388,11 +388,11 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Bilateral Mastectomy Procedure")]
-	public IEnumerable<Procedure> Bilateral_Mastectomy_Procedure	(CqlContext context)
+	public IEnumerable<Procedure> Bilateral_Mastectomy_Procedure(CqlContext context)
 	{
 		CqlValueSet a_ = this.Bilateral_Mastectomy(context);
 		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-		bool? c_		(Procedure BilateralMastectomyPerformed)
+		bool? c_(Procedure BilateralMastectomyPerformed)
 		{
 			Code<EventStatus> e_ = BilateralMastectomyPerformed?.StatusElement;
 			string f_ = FHIRHelpers_4_0_001.Instance.ToString(context, e_);
@@ -414,7 +414,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Denominator Exclusions")]
-	public bool? Denominator_Exclusions	(CqlContext context)
+	public bool? Denominator_Exclusions(CqlContext context)
 	{
 		bool? a_ = HospiceFHIR4_2_3_000.Instance.Has_Hospice(context);
 		IEnumerable<Condition> b_ = this.Right_Mastectomy_Diagnosis(context);
@@ -457,11 +457,11 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Observation with status")]
-	public bool? Observation_with_status	(CqlContext context)
+	public bool? Observation_with_status(CqlContext context)
 	{
 		CqlValueSet a_ = this.Mammography(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-		bool? c_		(Observation Mammogram)
+		bool? c_(Observation Mammogram)
 		{
 			Code<ObservationStatus> f_ = Mammogram?.StatusElement;
 			string g_ = FHIRHelpers_4_0_001.Instance.ToString(context, f_);
@@ -497,11 +497,11 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Diagnostic Report with status")]
-	public bool? Diagnostic_Report_with_status	(CqlContext context)
+	public bool? Diagnostic_Report_with_status(CqlContext context)
 	{
 		CqlValueSet a_ = this.Mammography(context);
 		IEnumerable<DiagnosticReport> b_ = context.Operators.Retrieve<DiagnosticReport>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/DiagnosticReport"));
-		bool? c_		(DiagnosticReport Mammogram)
+		bool? c_(DiagnosticReport Mammogram)
 		{
 			Code<DiagnosticReport.DiagnosticReportStatus> f_ = Mammogram?.StatusElement;
 			string g_ = FHIRHelpers_4_0_001.Instance.ToString(context, f_);
@@ -537,7 +537,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Numerator")]
-	public bool? Numerator	(CqlContext context)
+	public bool? Numerator(CqlContext context)
 	{
 		bool? a_ = this.Observation_with_status(context);
 		bool? b_ = this.Diagnostic_Report_with_status(context);
@@ -548,7 +548,7 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Final Numerator Population")]
-	public bool? Final_Numerator_Population	(CqlContext context)
+	public bool? Final_Numerator_Population(CqlContext context)
 	{
 		bool? a_ = this.Numerator(context);
 		bool? b_ = this.Initial_Population(context);
@@ -564,11 +564,11 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Observation without appropriate status")]
-	public bool? Observation_without_appropriate_status	(CqlContext context)
+	public bool? Observation_without_appropriate_status(CqlContext context)
 	{
 		CqlValueSet a_ = this.Mammography(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
-		bool? c_		(Observation Mammogram)
+		bool? c_(Observation Mammogram)
 		{
 			Code<ObservationStatus> f_ = Mammogram?.StatusElement;
 			string g_ = FHIRHelpers_4_0_001.Instance.ToString(context, f_);
@@ -605,11 +605,11 @@ public partial class Exam125FHIR_0_0_009 : ILibrary, ISingleton<Exam125FHIR_0_0_
 
 
     [CqlDeclaration("Diagnostic Report without appropriate status")]
-	public bool? Diagnostic_Report_without_appropriate_status	(CqlContext context)
+	public bool? Diagnostic_Report_without_appropriate_status(CqlContext context)
 	{
 		CqlValueSet a_ = this.Mammography(context);
 		IEnumerable<DiagnosticReport> b_ = context.Operators.Retrieve<DiagnosticReport>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/StructureDefinition/DiagnosticReport"));
-		bool? c_		(DiagnosticReport Mammogram)
+		bool? c_(DiagnosticReport Mammogram)
 		{
 			Code<DiagnosticReport.DiagnosticReportStatus> f_ = Mammogram?.StatusElement;
 			string g_ = FHIRHelpers_4_0_001.Instance.ToString(context, f_);

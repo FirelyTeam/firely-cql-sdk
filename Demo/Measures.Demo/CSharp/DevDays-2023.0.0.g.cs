@@ -26,17 +26,17 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     #endregion Library Members
 
     [CqlDeclaration("Sucked into jet engine")]
-	public CqlCode Sucked_into_jet_engine	(CqlContext context) => 
+	public CqlCode Sucked_into_jet_engine(CqlContext context) => 
 		new CqlCode("V97.33", "http://hl7.org/fhir/sid/icd-10", default, default);
 
 
     [CqlDeclaration("Sucked into jet engine, subsequent encounter")]
-	public CqlCode Sucked_into_jet_engine__subsequent_encounter	(CqlContext context) => 
+	public CqlCode Sucked_into_jet_engine__subsequent_encounter(CqlContext context) => 
 		new CqlCode("V97.33XD", "http://hl7.org/fhir/sid/icd-10", default, default);
 
 
     [CqlDeclaration("ICD10")]
-	public CqlCode[] ICD10	(CqlContext context)
+	public CqlCode[] ICD10(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("V97.33", "http://hl7.org/fhir/sid/icd-10", default, default),
@@ -48,7 +48,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period	(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		object a_ = context.ResolveParameter("DevDays-2023.0.0", "Measurement Period", null);
 
@@ -57,7 +57,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient	(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -67,14 +67,14 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
 
     [CqlDeclaration("Jet engine conditions")]
-	public IEnumerable<Condition> Jet_engine_conditions	(CqlContext context)
+	public IEnumerable<Condition> Jet_engine_conditions(CqlContext context)
 	{
 		IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-		bool? b_		(Condition c)
+		bool? b_(Condition c)
 		{
 			CodeableConcept d_ = c?.Code;
 			List<Coding> e_ = d_?.Coding;
-			bool? f_			(Coding coding)
+			bool? f_(Coding coding)
 			{
 				CqlCode n_ = FHIRHelpers_4_0_001.Instance.ToCode(context, coding);
 				CqlCode o_ = this.Sucked_into_jet_engine(context);
@@ -99,14 +99,14 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
 
     [CqlDeclaration("Subsequent encounters")]
-	public IEnumerable<Condition> Subsequent_encounters	(CqlContext context)
+	public IEnumerable<Condition> Subsequent_encounters(CqlContext context)
 	{
 		IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-		bool? b_		(Condition c)
+		bool? b_(Condition c)
 		{
 			CodeableConcept d_ = c?.Code;
 			List<Coding> e_ = d_?.Coding;
-			bool? f_			(Coding coding)
+			bool? f_(Coding coding)
 			{
 				CqlCode n_ = FHIRHelpers_4_0_001.Instance.ToCode(context, coding);
 				CqlCode o_ = this.Sucked_into_jet_engine__subsequent_encounter(context);
@@ -131,7 +131,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
 
     [CqlDeclaration("Initial population")]
-	public bool? Initial_population	(CqlContext context)
+	public bool? Initial_population(CqlContext context)
 	{
 		IEnumerable<Condition> a_ = this.Jet_engine_conditions(context);
 		bool? b_ = context.Operators.Exists<Condition>(a_);
@@ -141,7 +141,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
 
     [CqlDeclaration("Numerator")]
-	public bool? Numerator	(CqlContext context)
+	public bool? Numerator(CqlContext context)
 	{
 		IEnumerable<Condition> a_ = this.Subsequent_encounters(context);
 		bool? b_ = context.Operators.Exists<Condition>(a_);

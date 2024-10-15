@@ -26,7 +26,7 @@ public partial class Antibiotic_1_5_000 : ILibrary, ISingleton<Antibiotic_1_5_00
     #endregion Library Members
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period	(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		object a_ = context.ResolveParameter("Antibiotic-1.5.000", "Measurement Period", null);
 
@@ -35,7 +35,7 @@ public partial class Antibiotic_1_5_000 : ILibrary, ISingleton<Antibiotic_1_5_00
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient	(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -43,11 +43,11 @@ public partial class Antibiotic_1_5_000 : ILibrary, ISingleton<Antibiotic_1_5_00
 		return b_;
 	}
 
-	public IEnumerable<Encounter> Has_Comorbid_Condition_History	(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<Condition> comorbidConditions)
+	public IEnumerable<Encounter> Has_Comorbid_Condition_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<Condition> comorbidConditions)
 	{
-		IEnumerable<Encounter> a_		(Encounter eDate)
+		IEnumerable<Encounter> a_(Encounter eDate)
 		{
-			bool? e_			(Condition comcondition)
+			bool? e_(Condition comcondition)
 			{
 				CqlInterval<CqlDateTime> i_ = QICoreCommon_2_0_000.Instance.ToPrevalenceInterval(context, comcondition);
 				CqlDateTime j_ = context.Operators.Start(i_);
@@ -69,25 +69,25 @@ public partial class Antibiotic_1_5_000 : ILibrary, ISingleton<Antibiotic_1_5_00
 				return y_;
 			};
 			IEnumerable<Condition> f_ = context.Operators.Where<Condition>(comorbidConditions, e_);
-			Encounter g_			(Condition comcondition) => 
+			Encounter g_(Condition comcondition) => 
 				eDate;
 			IEnumerable<Encounter> h_ = context.Operators.Select<Condition, Encounter>(f_, g_);
 
 			return h_;
 		};
 		IEnumerable<Encounter> b_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, a_);
-		Encounter c_		(Encounter eDate) => 
+		Encounter c_(Encounter eDate) => 
 			eDate;
 		IEnumerable<Encounter> d_ = context.Operators.Select<Encounter, Encounter>(b_, c_);
 
 		return d_;
 	}
 
-	public IEnumerable<Encounter> Has_Competing_Diagnosis_History	(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<Condition> competingConditions)
+	public IEnumerable<Encounter> Has_Competing_Diagnosis_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<Condition> competingConditions)
 	{
-		IEnumerable<Encounter> a_		(Encounter eDate)
+		IEnumerable<Encounter> a_(Encounter eDate)
 		{
-			bool? e_			(Condition competcondition)
+			bool? e_(Condition competcondition)
 			{
 				CqlInterval<CqlDateTime> i_ = QICoreCommon_2_0_000.Instance.ToPrevalenceInterval(context, competcondition);
 				CqlDateTime j_ = context.Operators.Start(i_);
@@ -108,28 +108,28 @@ public partial class Antibiotic_1_5_000 : ILibrary, ISingleton<Antibiotic_1_5_00
 				return y_;
 			};
 			IEnumerable<Condition> f_ = context.Operators.Where<Condition>(competingConditions, e_);
-			Encounter g_			(Condition competcondition) => 
+			Encounter g_(Condition competcondition) => 
 				eDate;
 			IEnumerable<Encounter> h_ = context.Operators.Select<Condition, Encounter>(f_, g_);
 
 			return h_;
 		};
 		IEnumerable<Encounter> b_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, a_);
-		Encounter c_		(Encounter eDate) => 
+		Encounter c_(Encounter eDate) => 
 			eDate;
 		IEnumerable<Encounter> d_ = context.Operators.Select<Encounter, Encounter>(b_, c_);
 
 		return d_;
 	}
 
-	public IEnumerable<Encounter> Has_Antibiotic_Medication_History	(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<MedicationRequest> antibioticMedications)
+	public IEnumerable<Encounter> Has_Antibiotic_Medication_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<MedicationRequest> antibioticMedications)
 	{
-		IEnumerable<Encounter> a_		(Encounter DateOfEpisode)
+		IEnumerable<Encounter> a_(Encounter DateOfEpisode)
 		{
-			bool? c_			(MedicationRequest ActiveMedication)
+			bool? c_(MedicationRequest ActiveMedication)
 			{
 				List<Dosage> g_ = ActiveMedication?.DosageInstruction;
-				bool? h_				(Dosage @this)
+				bool? h_(Dosage @this)
 				{
 					Timing o_ = @this?.Timing;
 					bool? p_ = context.Operators.Not((bool?)(o_ is null));
@@ -137,14 +137,14 @@ public partial class Antibiotic_1_5_000 : ILibrary, ISingleton<Antibiotic_1_5_00
 					return p_;
 				};
 				IEnumerable<Dosage> i_ = context.Operators.Where<Dosage>((IEnumerable<Dosage>)g_, h_);
-				Timing j_				(Dosage @this)
+				Timing j_(Dosage @this)
 				{
 					Timing q_ = @this?.Timing;
 
 					return q_;
 				};
 				IEnumerable<Timing> k_ = context.Operators.Select<Dosage, Timing>(i_, j_);
-				bool? l_				(Timing T)
+				bool? l_(Timing T)
 				{
 					Timing.RepeatComponent r_ = T?.Repeat;
 					DataType s_ = r_?.Bounds;
@@ -214,7 +214,7 @@ public partial class Antibiotic_1_5_000 : ILibrary, ISingleton<Antibiotic_1_5_00
 				return n_;
 			};
 			IEnumerable<MedicationRequest> d_ = context.Operators.Where<MedicationRequest>(antibioticMedications, c_);
-			Encounter e_			(MedicationRequest ActiveMedication) => 
+			Encounter e_(MedicationRequest ActiveMedication) => 
 				DateOfEpisode;
 			IEnumerable<Encounter> f_ = context.Operators.Select<MedicationRequest, Encounter>(d_, e_);
 

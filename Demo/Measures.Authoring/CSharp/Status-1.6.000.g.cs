@@ -26,32 +26,32 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     #endregion Library Members
 
     [CqlDeclaration("laboratory")]
-	public CqlCode laboratory	(CqlContext context) => 
+	public CqlCode laboratory(CqlContext context) => 
 		new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
 
     [CqlDeclaration("exam")]
-	public CqlCode exam	(CqlContext context) => 
+	public CqlCode exam(CqlContext context) => 
 		new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
 
     [CqlDeclaration("survey")]
-	public CqlCode survey	(CqlContext context) => 
+	public CqlCode survey(CqlContext context) => 
 		new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
 
     [CqlDeclaration("vital-signs")]
-	public CqlCode vital_signs	(CqlContext context) => 
+	public CqlCode vital_signs(CqlContext context) => 
 		new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
 
     [CqlDeclaration("active")]
-	public CqlCode active	(CqlContext context) => 
+	public CqlCode active(CqlContext context) => 
 		new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
 
     [CqlDeclaration("ObservationCategoryCodes")]
-	public CqlCode[] ObservationCategoryCodes	(CqlContext context)
+	public CqlCode[] ObservationCategoryCodes(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default),
@@ -65,7 +65,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 
 
     [CqlDeclaration("ConditionClinicalStatusCodes")]
-	public CqlCode[] ConditionClinicalStatusCodes	(CqlContext context)
+	public CqlCode[] ConditionClinicalStatusCodes(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default),
@@ -76,7 +76,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient	(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -84,9 +84,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> Final_Survey_Observation	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> Final_Survey_Observation(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
@@ -99,14 +99,14 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 			];
 			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = O?.Category;
-			CqlConcept j_			(CodeableConcept @this)
+			CqlConcept j_(CodeableConcept @this)
 			{
 				CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
 				return p_;
 			};
 			IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
-			bool? l_			(CqlConcept ObservationCategory)
+			bool? l_(CqlConcept ObservationCategory)
 			{
 				CqlCode q_ = this.survey(context);
 				CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
@@ -125,9 +125,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> isAssessmentPerformed	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> isAssessmentPerformed(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
@@ -140,14 +140,14 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 			];
 			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = O?.Category;
-			CqlConcept j_			(CodeableConcept @this)
+			CqlConcept j_(CodeableConcept @this)
 			{
 				CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
 				return p_;
 			};
 			IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
-			bool? l_			(CqlConcept ObservationCategory)
+			bool? l_(CqlConcept ObservationCategory)
 			{
 				CqlCode q_ = this.survey(context);
 				CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
@@ -166,9 +166,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Condition> Active_Condition	(CqlContext context, IEnumerable<Condition> Condition)
+	public IEnumerable<Condition> Active_Condition(CqlContext context, IEnumerable<Condition> Condition)
 	{
-		bool? a_		(Condition C)
+		bool? a_(Condition C)
 		{
 			CodeableConcept c_ = C?.ClinicalStatus;
 			CqlConcept d_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, c_);
@@ -183,9 +183,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Condition> isActiveOnly	(CqlContext context, IEnumerable<Condition> Condition)
+	public IEnumerable<Condition> isActiveOnly(CqlContext context, IEnumerable<Condition> Condition)
 	{
-		bool? a_		(Condition C)
+		bool? a_(Condition C)
 		{
 			CodeableConcept c_ = C?.ClinicalStatus;
 			CqlConcept d_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, c_);
@@ -200,9 +200,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<DeviceRequest> Completed_or_Ongoing_Device_Request	(CqlContext context, IEnumerable<DeviceRequest> DeviceRequest)
+	public IEnumerable<DeviceRequest> Completed_or_Ongoing_Device_Request(CqlContext context, IEnumerable<DeviceRequest> DeviceRequest)
 	{
-		bool? a_		(DeviceRequest D)
+		bool? a_(DeviceRequest D)
 		{
 			Code<RequestStatus> c_ = D?.StatusElement;
 			RequestStatus? d_ = c_?.Value;
@@ -226,9 +226,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<DeviceRequest> isDeviceOrder	(CqlContext context, IEnumerable<DeviceRequest> DeviceRequest)
+	public IEnumerable<DeviceRequest> isDeviceOrder(CqlContext context, IEnumerable<DeviceRequest> DeviceRequest)
 	{
-		bool? a_		(DeviceRequest D)
+		bool? a_(DeviceRequest D)
 		{
 			Code<RequestStatus> c_ = D?.StatusElement;
 			RequestStatus? d_ = c_?.Value;
@@ -252,9 +252,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<ServiceRequest> Completed_or_Ongoing_Service_Request	(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
+	public IEnumerable<ServiceRequest> Completed_or_Ongoing_Service_Request(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
 	{
-		bool? a_		(ServiceRequest S)
+		bool? a_(ServiceRequest S)
 		{
 			Code<RequestStatus> c_ = S?.StatusElement;
 			RequestStatus? d_ = c_?.Value;
@@ -278,9 +278,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<ServiceRequest> isDiagnosticStudyOrder	(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
+	public IEnumerable<ServiceRequest> isDiagnosticStudyOrder(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
 	{
-		bool? a_		(ServiceRequest S)
+		bool? a_(ServiceRequest S)
 		{
 			Code<RequestStatus> c_ = S?.StatusElement;
 			RequestStatus? d_ = c_?.Value;
@@ -304,9 +304,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<ServiceRequest> isInterventionOrder	(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
+	public IEnumerable<ServiceRequest> isInterventionOrder(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
 	{
-		bool? a_		(ServiceRequest S)
+		bool? a_(ServiceRequest S)
 		{
 			Code<RequestStatus> c_ = S?.StatusElement;
 			RequestStatus? d_ = c_?.Value;
@@ -330,9 +330,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<ServiceRequest> isLaboratoryTestOrder	(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
+	public IEnumerable<ServiceRequest> isLaboratoryTestOrder(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
 	{
-		bool? a_		(ServiceRequest S)
+		bool? a_(ServiceRequest S)
 		{
 			Code<RequestStatus> c_ = S?.StatusElement;
 			RequestStatus? d_ = c_?.Value;
@@ -356,9 +356,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> Final_Observation	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> Final_Observation(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
@@ -378,9 +378,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> isDiagnosticStudyPerformed	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> isDiagnosticStudyPerformed(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
@@ -400,9 +400,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Encounter> Finished_Encounter	(CqlContext context, IEnumerable<Encounter> Enc)
+	public IEnumerable<Encounter> Finished_Encounter(CqlContext context, IEnumerable<Encounter> Enc)
 	{
-		bool? a_		(Encounter E)
+		bool? a_(Encounter E)
 		{
 			Code<Encounter.EncounterStatus> c_ = E?.StatusElement;
 			Encounter.EncounterStatus? d_ = c_?.Value;
@@ -424,9 +424,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Encounter> isEncounterPerformed	(CqlContext context, IEnumerable<Encounter> Enc)
+	public IEnumerable<Encounter> isEncounterPerformed(CqlContext context, IEnumerable<Encounter> Enc)
 	{
-		bool? a_		(Encounter E)
+		bool? a_(Encounter E)
 		{
 			Code<Encounter.EncounterStatus> c_ = E?.StatusElement;
 			Encounter.EncounterStatus? d_ = c_?.Value;
@@ -448,9 +448,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Immunization> Completed_Immunization	(CqlContext context, IEnumerable<Immunization> Immunization)
+	public IEnumerable<Immunization> Completed_Immunization(CqlContext context, IEnumerable<Immunization> Immunization)
 	{
-		bool? a_		(Immunization I)
+		bool? a_(Immunization I)
 		{
 			Code<Immunization.ImmunizationStatusCodes> c_ = I?.StatusElement;
 			Immunization.ImmunizationStatusCodes? d_ = c_?.Value;
@@ -464,9 +464,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Immunization> isImmunizationAdministered	(CqlContext context, IEnumerable<Immunization> Immunization)
+	public IEnumerable<Immunization> isImmunizationAdministered(CqlContext context, IEnumerable<Immunization> Immunization)
 	{
-		bool? a_		(Immunization I)
+		bool? a_(Immunization I)
 		{
 			Code<Immunization.ImmunizationStatusCodes> c_ = I?.StatusElement;
 			Immunization.ImmunizationStatusCodes? d_ = c_?.Value;
@@ -480,9 +480,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Procedure> Completed_Procedure	(CqlContext context, IEnumerable<Procedure> Proc)
+	public IEnumerable<Procedure> Completed_Procedure(CqlContext context, IEnumerable<Procedure> Proc)
 	{
-		bool? a_		(Procedure P)
+		bool? a_(Procedure P)
 		{
 			Code<EventStatus> c_ = P?.StatusElement;
 			EventStatus? d_ = c_?.Value;
@@ -496,9 +496,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Procedure> isInterventionPerformed	(CqlContext context, IEnumerable<Procedure> Proc)
+	public IEnumerable<Procedure> isInterventionPerformed(CqlContext context, IEnumerable<Procedure> Proc)
 	{
-		bool? a_		(Procedure P)
+		bool? a_(Procedure P)
 		{
 			Code<EventStatus> c_ = P?.StatusElement;
 			EventStatus? d_ = c_?.Value;
@@ -512,9 +512,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Procedure> isProcedurePerformed	(CqlContext context, IEnumerable<Procedure> Proc)
+	public IEnumerable<Procedure> isProcedurePerformed(CqlContext context, IEnumerable<Procedure> Proc)
 	{
-		bool? a_		(Procedure P)
+		bool? a_(Procedure P)
 		{
 			Code<EventStatus> c_ = P?.StatusElement;
 			EventStatus? d_ = c_?.Value;
@@ -528,9 +528,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> Final_Lab_Observation	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> Final_Lab_Observation(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
@@ -543,14 +543,14 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 			];
 			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = O?.Category;
-			CqlConcept j_			(CodeableConcept @this)
+			CqlConcept j_(CodeableConcept @this)
 			{
 				CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
 				return p_;
 			};
 			IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
-			bool? l_			(CqlConcept ObservationCategory)
+			bool? l_(CqlConcept ObservationCategory)
 			{
 				CqlCode q_ = this.laboratory(context);
 				CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
@@ -569,9 +569,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> isLaboratoryTestPerformed	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> isLaboratoryTestPerformed(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
@@ -584,14 +584,14 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 			];
 			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = O?.Category;
-			CqlConcept j_			(CodeableConcept @this)
+			CqlConcept j_(CodeableConcept @this)
 			{
 				CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
 				return p_;
 			};
 			IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
-			bool? l_			(CqlConcept ObservationCategory)
+			bool? l_(CqlConcept ObservationCategory)
 			{
 				CqlCode q_ = this.laboratory(context);
 				CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
@@ -610,9 +610,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<MedicationRequest> Active_Medication	(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
+	public IEnumerable<MedicationRequest> Active_Medication(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
 	{
-		bool? a_		(MedicationRequest M)
+		bool? a_(MedicationRequest M)
 		{
 			Code<MedicationRequest.MedicationrequestStatus> c_ = M?.StatusElement;
 			MedicationRequest.MedicationrequestStatus? d_ = c_?.Value;
@@ -631,9 +631,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<MedicationRequest> isMedicationActive	(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
+	public IEnumerable<MedicationRequest> isMedicationActive(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
 	{
-		bool? a_		(MedicationRequest M)
+		bool? a_(MedicationRequest M)
 		{
 			Code<MedicationRequest.MedicationrequestStatus> c_ = M?.StatusElement;
 			MedicationRequest.MedicationrequestStatus? d_ = c_?.Value;
@@ -652,9 +652,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<MedicationDispense> Dispensed_Medication	(CqlContext context, IEnumerable<MedicationDispense> Med)
+	public IEnumerable<MedicationDispense> Dispensed_Medication(CqlContext context, IEnumerable<MedicationDispense> Med)
 	{
-		bool? a_		(MedicationDispense M)
+		bool? a_(MedicationDispense M)
 		{
 			Code<MedicationDispense.MedicationDispenseStatusCodes> c_ = M?.StatusElement;
 			MedicationDispense.MedicationDispenseStatusCodes? d_ = c_?.Value;
@@ -674,9 +674,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<MedicationDispense> isMedicationDispensed	(CqlContext context, IEnumerable<MedicationDispense> Med)
+	public IEnumerable<MedicationDispense> isMedicationDispensed(CqlContext context, IEnumerable<MedicationDispense> Med)
 	{
-		bool? a_		(MedicationDispense M)
+		bool? a_(MedicationDispense M)
 		{
 			Code<MedicationDispense.MedicationDispenseStatusCodes> c_ = M?.StatusElement;
 			MedicationDispense.MedicationDispenseStatusCodes? d_ = c_?.Value;
@@ -696,9 +696,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<MedicationRequest> Active_or_Completed_Medication_Request	(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
+	public IEnumerable<MedicationRequest> Active_or_Completed_Medication_Request(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
 	{
-		bool? a_		(MedicationRequest M)
+		bool? a_(MedicationRequest M)
 		{
 			Code<MedicationRequest.MedicationrequestStatus> c_ = M?.StatusElement;
 			MedicationRequest.MedicationrequestStatus? d_ = c_?.Value;
@@ -721,9 +721,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<MedicationRequest> isMedicationOrder	(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
+	public IEnumerable<MedicationRequest> isMedicationOrder(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
 	{
-		bool? a_		(MedicationRequest M)
+		bool? a_(MedicationRequest M)
 		{
 			Code<MedicationRequest.MedicationrequestStatus> c_ = M?.StatusElement;
 			MedicationRequest.MedicationrequestStatus? d_ = c_?.Value;
@@ -746,9 +746,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> Final_Exam_Observation	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> Final_Exam_Observation(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
@@ -761,14 +761,14 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 			];
 			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = O?.Category;
-			CqlConcept j_			(CodeableConcept @this)
+			CqlConcept j_(CodeableConcept @this)
 			{
 				CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
 				return p_;
 			};
 			IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
-			bool? l_			(CqlConcept ObservationCategory)
+			bool? l_(CqlConcept ObservationCategory)
 			{
 				CqlCode q_ = this.exam(context);
 				CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
@@ -787,9 +787,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> isPhysicalExamPerformed	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> isPhysicalExamPerformed(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
@@ -802,14 +802,14 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 			];
 			bool? h_ = context.Operators.In<string>(f_, g_ as IEnumerable<string>);
 			List<CodeableConcept> i_ = O?.Category;
-			CqlConcept j_			(CodeableConcept @this)
+			CqlConcept j_(CodeableConcept @this)
 			{
 				CqlConcept p_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
 				return p_;
 			};
 			IEnumerable<CqlConcept> k_ = context.Operators.Select<CodeableConcept, CqlConcept>((IEnumerable<CodeableConcept>)i_, j_);
-			bool? l_			(CqlConcept ObservationCategory)
+			bool? l_(CqlConcept ObservationCategory)
 			{
 				CqlCode q_ = this.exam(context);
 				CqlConcept r_ = context.Operators.ConvertCodeToConcept(q_);
@@ -828,9 +828,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> BloodPressure	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> BloodPressure(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
@@ -849,9 +849,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> BodyHeight	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> BodyHeight(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
@@ -870,9 +870,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> BodyWeight	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> BodyWeight(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
@@ -891,9 +891,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> BMI	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> BMI(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
@@ -912,9 +912,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> isObservationBP	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> isObservationBP(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
@@ -933,9 +933,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> isObservationBodyHeight	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> isObservationBodyHeight(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
@@ -954,9 +954,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> isObservationBodyWeight	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> isObservationBodyWeight(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
@@ -975,9 +975,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> isObservationBMI	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> isObservationBMI(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
@@ -996,9 +996,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> Initial_or_Final_Observation	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> Initial_or_Final_Observation(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;
@@ -1019,9 +1019,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 		return b_;
 	}
 
-	public IEnumerable<Observation> isSymptom	(CqlContext context, IEnumerable<Observation> Obs)
+	public IEnumerable<Observation> isSymptom(CqlContext context, IEnumerable<Observation> Obs)
 	{
-		bool? a_		(Observation O)
+		bool? a_(Observation O)
 		{
 			Code<ObservationStatus> c_ = O?.StatusElement;
 			ObservationStatus? d_ = c_?.Value;

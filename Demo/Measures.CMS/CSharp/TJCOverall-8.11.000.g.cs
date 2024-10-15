@@ -27,60 +27,60 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
 
     [CqlDeclaration("Comfort Measures")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45")]
-	public CqlValueSet Comfort_Measures	(CqlContext context) => 
+	public CqlValueSet Comfort_Measures(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45", default);
 
 
     [CqlDeclaration("Discharge To Acute Care Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87")]
-	public CqlValueSet Discharge_To_Acute_Care_Facility	(CqlContext context) => 
+	public CqlValueSet Discharge_To_Acute_Care_Facility(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", default);
 
 
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207")]
-	public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care	(CqlContext context) => 
+	public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", default);
 
 
     [CqlDeclaration("Discharged to Home for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
-	public CqlValueSet Discharged_to_Home_for_Hospice_Care	(CqlContext context) => 
+	public CqlValueSet Discharged_to_Home_for_Hospice_Care(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", default);
 
 
     [CqlDeclaration("Hemorrhagic Stroke")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.212")]
-	public CqlValueSet Hemorrhagic_Stroke	(CqlContext context) => 
+	public CqlValueSet Hemorrhagic_Stroke(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.212", default);
 
 
     [CqlDeclaration("Ischemic Stroke")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247")]
-	public CqlValueSet Ischemic_Stroke	(CqlContext context) => 
+	public CqlValueSet Ischemic_Stroke(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247", default);
 
 
     [CqlDeclaration("Left Against Medical Advice")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308")]
-	public CqlValueSet Left_Against_Medical_Advice	(CqlContext context) => 
+	public CqlValueSet Left_Against_Medical_Advice(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", default);
 
 
     [CqlDeclaration("Nonelective Inpatient Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424")]
-	public CqlValueSet Nonelective_Inpatient_Encounter	(CqlContext context) => 
+	public CqlValueSet Nonelective_Inpatient_Encounter(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424", default);
 
 
     [CqlDeclaration("Patient Expired")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309")]
-	public CqlValueSet Patient_Expired	(CqlContext context) => 
+	public CqlValueSet Patient_Expired(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", default);
 
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period	(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		object a_ = context.ResolveParameter("TJCOverall-8.11.000", "Measurement Period", null);
 
@@ -89,7 +89,7 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient	(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -99,11 +99,11 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
 
 
     [CqlDeclaration("Non Elective Inpatient Encounter")]
-	public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter	(CqlContext context)
+	public IEnumerable<Encounter> Non_Elective_Inpatient_Encounter(CqlContext context)
 	{
 		CqlValueSet a_ = this.Nonelective_Inpatient_Encounter(context);
 		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-		bool? c_		(Encounter NonElectiveEncounter)
+		bool? c_(Encounter NonElectiveEncounter)
 		{
 			Period e_ = NonElectiveEncounter?.Period;
 			CqlInterval<CqlDateTime> f_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, e_);
@@ -120,10 +120,10 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
 
 
     [CqlDeclaration("All Stroke Encounter")]
-	public IEnumerable<Encounter> All_Stroke_Encounter	(CqlContext context)
+	public IEnumerable<Encounter> All_Stroke_Encounter(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Non_Elective_Inpatient_Encounter(context);
-		bool? b_		(Encounter NonElectiveEncounter)
+		bool? b_(Encounter NonElectiveEncounter)
 		{
 			Condition d_ = CQMCommon_2_0_000.Instance.principalDiagnosis(context, NonElectiveEncounter);
 			CodeableConcept e_ = d_?.Code;
@@ -145,10 +145,10 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
 
 
     [CqlDeclaration("Encounter with Principal Diagnosis and Age")]
-	public IEnumerable<Encounter> Encounter_with_Principal_Diagnosis_and_Age	(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Principal_Diagnosis_and_Age(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.All_Stroke_Encounter(context);
-		bool? b_		(Encounter AllStrokeEncounter)
+		bool? b_(Encounter AllStrokeEncounter)
 		{
 			Patient d_ = this.Patient(context);
 			Date e_ = d_?.BirthDateElement;
@@ -170,10 +170,10 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
 
 
     [CqlDeclaration("Ischemic Stroke Encounter")]
-	public IEnumerable<Encounter> Ischemic_Stroke_Encounter	(CqlContext context)
+	public IEnumerable<Encounter> Ischemic_Stroke_Encounter(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Encounter_with_Principal_Diagnosis_and_Age(context);
-		bool? b_		(Encounter EncounterWithAge)
+		bool? b_(Encounter EncounterWithAge)
 		{
 			Condition d_ = CQMCommon_2_0_000.Instance.principalDiagnosis(context, EncounterWithAge);
 			CodeableConcept e_ = d_?.Code;
@@ -190,10 +190,10 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
 
 
     [CqlDeclaration("Ischemic Stroke Encounters with Discharge Disposition")]
-	public IEnumerable<Encounter> Ischemic_Stroke_Encounters_with_Discharge_Disposition	(CqlContext context)
+	public IEnumerable<Encounter> Ischemic_Stroke_Encounters_with_Discharge_Disposition(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Ischemic_Stroke_Encounter(context);
-		bool? b_		(Encounter IschemicStrokeEncounter)
+		bool? b_(Encounter IschemicStrokeEncounter)
 		{
 			Encounter.HospitalizationComponent d_ = IschemicStrokeEncounter?.Hospitalization;
 			CodeableConcept e_ = d_?.DischargeDisposition;
@@ -230,11 +230,11 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
 
 
     [CqlDeclaration("Intervention Comfort Measures")]
-	public IEnumerable<object> Intervention_Comfort_Measures	(CqlContext context)
+	public IEnumerable<object> Intervention_Comfort_Measures(CqlContext context)
 	{
 		CqlValueSet a_ = this.Comfort_Measures(context);
 		IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
-		bool? c_		(ServiceRequest SR)
+		bool? c_(ServiceRequest SR)
 		{
 			Code<RequestStatus> j_ = SR?.StatusElement;
 			RequestStatus? k_ = j_?.Value;
@@ -269,7 +269,7 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
 		};
 		IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
 		IEnumerable<Procedure> f_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
-		bool? g_		(Procedure InterventionPerformed)
+		bool? g_(Procedure InterventionPerformed)
 		{
 			Code<EventStatus> ab_ = InterventionPerformed?.StatusElement;
 			EventStatus? ac_ = ab_?.Value;
@@ -290,13 +290,13 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
 
 
     [CqlDeclaration("Comfort Measures during Hospitalization")]
-	public IEnumerable<Encounter> Comfort_Measures_during_Hospitalization	(CqlContext context)
+	public IEnumerable<Encounter> Comfort_Measures_during_Hospitalization(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Ischemic_Stroke_Encounter(context);
-		IEnumerable<Encounter> b_		(Encounter IschemicStrokeEncounter)
+		IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter)
 		{
 			IEnumerable<object> d_ = this.Intervention_Comfort_Measures(context);
-			bool? e_			(object ComfortMeasure)
+			bool? e_(object ComfortMeasure)
 			{
 				object i_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
 				object j_ = FHIRHelpers_4_3_000.Instance.ToValue(context, i_);
@@ -310,7 +310,7 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
 				return p_;
 			};
 			IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-			Encounter g_			(object ComfortMeasure) => 
+			Encounter g_(object ComfortMeasure) => 
 				IschemicStrokeEncounter;
 			IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
@@ -323,13 +323,13 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
 
 
     [CqlDeclaration("Encounter with Comfort Measures during Hospitalization")]
-	public IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization	(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_Comfort_Measures_during_Hospitalization(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Ischemic_Stroke_Encounter(context);
-		IEnumerable<Encounter> b_		(Encounter IschemicStrokeEncounter)
+		IEnumerable<Encounter> b_(Encounter IschemicStrokeEncounter)
 		{
 			IEnumerable<object> d_ = this.Intervention_Comfort_Measures(context);
-			bool? e_			(object ComfortMeasure)
+			bool? e_(object ComfortMeasure)
 			{
 				object i_ = context.Operators.LateBoundProperty<object>(ComfortMeasure, "performed");
 				object j_ = FHIRHelpers_4_3_000.Instance.ToValue(context, i_);
@@ -343,7 +343,7 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
 				return p_;
 			};
 			IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-			Encounter g_			(object ComfortMeasure) => 
+			Encounter g_(object ComfortMeasure) => 
 				IschemicStrokeEncounter;
 			IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
@@ -354,7 +354,7 @@ public partial class TJCOverall_8_11_000 : ILibrary, ISingleton<TJCOverall_8_11_
 		return c_;
 	}
 
-	public CqlInterval<CqlDate> CalendarDayOfOrDayAfter	(CqlContext context, CqlDateTime StartValue)
+	public CqlInterval<CqlDate> CalendarDayOfOrDayAfter(CqlContext context, CqlDateTime StartValue)
 	{
 		CqlDate a_ = context.Operators.DateFrom(StartValue);
 		CqlQuantity c_ = context.Operators.Quantity(1m, "day");

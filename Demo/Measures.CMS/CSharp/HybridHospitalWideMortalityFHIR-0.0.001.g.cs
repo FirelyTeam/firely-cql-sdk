@@ -27,81 +27,81 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
     [CqlDeclaration("Bicarbonate lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.139")]
-	public CqlValueSet Bicarbonate_lab_test	(CqlContext context) => 
+	public CqlValueSet Bicarbonate_lab_test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.139", default);
 
 
     [CqlDeclaration("Creatinine lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.2363")]
-	public CqlValueSet Creatinine_lab_test	(CqlContext context) => 
+	public CqlValueSet Creatinine_lab_test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.2363", default);
 
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public CqlValueSet Encounter_Inpatient	(CqlContext context) => 
+	public CqlValueSet Encounter_Inpatient(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
 
     [CqlDeclaration("Hematocrit lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114")]
-	public CqlValueSet Hematocrit_lab_test	(CqlContext context) => 
+	public CqlValueSet Hematocrit_lab_test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.114", default);
 
 
     [CqlDeclaration("Medicare Advantage payer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.12")]
-	public CqlValueSet Medicare_Advantage_payer	(CqlContext context) => 
+	public CqlValueSet Medicare_Advantage_payer(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.12", default);
 
 
     [CqlDeclaration("Medicare FFS payer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.10")]
-	public CqlValueSet Medicare_FFS_payer	(CqlContext context) => 
+	public CqlValueSet Medicare_FFS_payer(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1104.10", default);
 
 
     [CqlDeclaration("Oxygen Saturation by Pulse Oximetry")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.151")]
-	public CqlValueSet Oxygen_Saturation_by_Pulse_Oximetry	(CqlContext context) => 
+	public CqlValueSet Oxygen_Saturation_by_Pulse_Oximetry(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.151", default);
 
 
     [CqlDeclaration("Platelet count lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.127")]
-	public CqlValueSet Platelet_count_lab_test	(CqlContext context) => 
+	public CqlValueSet Platelet_count_lab_test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.127", default);
 
 
     [CqlDeclaration("Sodium lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.119")]
-	public CqlValueSet Sodium_lab_test	(CqlContext context) => 
+	public CqlValueSet Sodium_lab_test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.119", default);
 
 
     [CqlDeclaration("White blood cells count lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129")]
-	public CqlValueSet White_blood_cells_count_lab_test	(CqlContext context) => 
+	public CqlValueSet White_blood_cells_count_lab_test(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.129", default);
 
 
     [CqlDeclaration("Oxygen saturation in Arterial blood")]
-	public CqlCode Oxygen_saturation_in_Arterial_blood	(CqlContext context) => 
+	public CqlCode Oxygen_saturation_in_Arterial_blood(CqlContext context) => 
 		new CqlCode("2708-6", "http://loinc.org", default, default);
 
 
     [CqlDeclaration("Oxygen saturation in Arterial blood by Pulse oximetry")]
-	public CqlCode Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry	(CqlContext context) => 
+	public CqlCode Oxygen_saturation_in_Arterial_blood_by_Pulse_oximetry(CqlContext context) => 
 		new CqlCode("59408-5", "http://loinc.org", default, default);
 
 
     [CqlDeclaration("Systolic blood pressure")]
-	public CqlCode Systolic_blood_pressure	(CqlContext context) => 
+	public CqlCode Systolic_blood_pressure(CqlContext context) => 
 		new CqlCode("8480-6", "http://loinc.org", default, default);
 
 
     [CqlDeclaration("LOINC")]
-	public CqlCode[] LOINC	(CqlContext context)
+	public CqlCode[] LOINC(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("2708-6", "http://loinc.org", default, default),
@@ -114,7 +114,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("ActCode")]
-	public CqlCode[] ActCode	(CqlContext context)
+	public CqlCode[] ActCode(CqlContext context)
 	{
 		CqlCode[] a_ = []
 ;
@@ -124,7 +124,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("Source of Payment Typology")]
-	public CqlCode[] Source_of_Payment_Typology	(CqlContext context)
+	public CqlCode[] Source_of_Payment_Typology(CqlContext context)
 	{
 		CqlCode[] a_ = []
 ;
@@ -134,7 +134,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period	(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -146,7 +146,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient	(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -156,18 +156,18 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("Inpatient Encounters")]
-	public IEnumerable<Encounter> Inpatient_Encounters	(CqlContext context)
+	public IEnumerable<Encounter> Inpatient_Encounters(CqlContext context)
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient(context);
 		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-		IEnumerable<Encounter> c_		(Encounter InpatientEncounter)
+		IEnumerable<Encounter> c_(Encounter InpatientEncounter)
 		{
 			CqlValueSet e_ = this.Medicare_FFS_payer(context);
 			IEnumerable<Coverage> f_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-coverage"));
 			CqlValueSet g_ = this.Medicare_Advantage_payer(context);
 			IEnumerable<Coverage> h_ = context.Operators.Retrieve<Coverage>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-coverage"));
 			IEnumerable<Coverage> i_ = context.Operators.Union<Coverage>(f_, h_);
-			bool? j_			(Coverage MedicarePayer)
+			bool? j_(Coverage MedicarePayer)
 			{
 				CqlInterval<CqlDateTime> n_ = CQMCommon_2_0_000.Instance.hospitalizationWithObservationAndOutpatientSurgeryService(context, InpatientEncounter);
 				int? o_ = CQMCommon_2_0_000.Instance.lengthInDays(context, n_);
@@ -198,7 +198,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return am_;
 			};
 			IEnumerable<Coverage> k_ = context.Operators.Where<Coverage>(i_, j_);
-			Encounter l_			(Coverage MedicarePayer) => 
+			Encounter l_(Coverage MedicarePayer) => 
 				InpatientEncounter;
 			IEnumerable<Encounter> m_ = context.Operators.Select<Coverage, Encounter>(k_, l_);
 
@@ -211,7 +211,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("Initial Population")]
-	public IEnumerable<Encounter> Initial_Population	(CqlContext context)
+	public IEnumerable<Encounter> Initial_Population(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 
@@ -220,15 +220,15 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("Encounter with First Body Temperature")]
-	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?> Encounter_with_First_Body_Temperature	(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)?> Encounter_with_First_Body_Temperature(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
-		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)? b_		(Encounter EncounterInpatient)
+		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bodytemp"));
-			bool? g_			(Observation temperature)
+			bool? g_(Observation temperature)
 			{
 				DataType x_ = temperature?.Effective;
 				object y_ = FHIRHelpers_4_3_000.Instance.ToValue(context, x_);
@@ -262,7 +262,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return av_;
 			};
 			IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
-			object i_			(Observation @this)
+			object i_(Observation @this)
 			{
 				DataType aw_ = @this?.Effective;
 				object ax_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aw_);
@@ -274,7 +274,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 			Observation k_ = context.Operators.First<Observation>(j_);
 			DataType l_ = k_?.Value;
 			CqlQuantity m_ = FHIRHelpers_4_3_000.Instance.ToQuantity(context, l_ as Quantity);
-			bool? o_			(Observation temperature)
+			bool? o_(Observation temperature)
 			{
 				DataType az_ = temperature?.Effective;
 				object ba_ = FHIRHelpers_4_3_000.Instance.ToValue(context, az_);
@@ -308,7 +308,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return bx_;
 			};
 			IEnumerable<Observation> p_ = context.Operators.Where<Observation>(f_, o_);
-			object q_			(Observation @this)
+			object q_(Observation @this)
 			{
 				DataType by_ = @this?.Effective;
 				object bz_ = FHIRHelpers_4_3_000.Instance.ToValue(context, by_);
@@ -332,15 +332,15 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("Encounter with First Heart Rate")]
-	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?> Encounter_with_First_Heart_Rate	(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)?> Encounter_with_First_Heart_Rate(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
-		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)? b_		(Encounter EncounterInpatient)
+		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			IEnumerable<Observation> f_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/heartrate"));
-			bool? g_			(Observation HeartRate)
+			bool? g_(Observation HeartRate)
 			{
 				DataType x_ = HeartRate?.Effective;
 				object y_ = FHIRHelpers_4_3_000.Instance.ToValue(context, x_);
@@ -374,7 +374,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return av_;
 			};
 			IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
-			object i_			(Observation @this)
+			object i_(Observation @this)
 			{
 				DataType aw_ = @this?.Effective;
 				object ax_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aw_);
@@ -386,7 +386,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 			Observation k_ = context.Operators.First<Observation>(j_);
 			DataType l_ = k_?.Value;
 			CqlQuantity m_ = FHIRHelpers_4_3_000.Instance.ToQuantity(context, l_ as Quantity);
-			bool? o_			(Observation HeartRate)
+			bool? o_(Observation HeartRate)
 			{
 				DataType az_ = HeartRate?.Effective;
 				object ba_ = FHIRHelpers_4_3_000.Instance.ToValue(context, az_);
@@ -420,7 +420,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return bx_;
 			};
 			IEnumerable<Observation> p_ = context.Operators.Where<Observation>(f_, o_);
-			object q_			(Observation @this)
+			object q_(Observation @this)
 			{
 				DataType by_ = @this?.Effective;
 				object bz_ = FHIRHelpers_4_3_000.Instance.ToValue(context, by_);
@@ -444,20 +444,20 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("Encounter with First Oxygen Saturation")]
-	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?> Encounter_with_First_Oxygen_Saturation	(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)?> Encounter_with_First_Oxygen_Saturation(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
-		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)? b_		(Encounter EncounterInpatient)
+		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Oxygen_Saturation_by_Pulse_Oximetry(context);
 			IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-			bool? h_			(Observation O2Saturation)
+			bool? h_(Observation O2Saturation)
 			{
-				object r_				()
+				object r_()
 				{
-					bool aq_					()
+					bool aq_()
 					{
 						DataType at_ = O2Saturation?.Effective;
 						object au_ = FHIRHelpers_4_3_000.Instance.ToValue(context, at_);
@@ -465,7 +465,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 						return av_;
 					};
-					bool ar_					()
+					bool ar_()
 					{
 						DataType aw_ = O2Saturation?.Effective;
 						object ax_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aw_);
@@ -473,7 +473,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 						return ay_;
 					};
-					bool as_					()
+					bool as_()
 					{
 						DataType az_ = O2Saturation?.Effective;
 						object ba_ = FHIRHelpers_4_3_000.Instance.ToValue(context, az_);
@@ -538,11 +538,11 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return ap_;
 			};
 			IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
-			object j_			(Observation @this)
+			object j_(Observation @this)
 			{
-				object bi_				()
+				object bi_()
 				{
-					bool bk_					()
+					bool bk_()
 					{
 						DataType bn_ = @this?.Effective;
 						object bo_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bn_);
@@ -550,7 +550,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 						return bp_;
 					};
-					bool bl_					()
+					bool bl_()
 					{
 						DataType bq_ = @this?.Effective;
 						object br_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bq_);
@@ -558,7 +558,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 						return bs_;
 					};
-					bool bm_					()
+					bool bm_()
 					{
 						DataType bt_ = @this?.Effective;
 						object bu_ = FHIRHelpers_4_3_000.Instance.ToValue(context, bt_);
@@ -600,17 +600,17 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 			Observation l_ = context.Operators.First<Observation>(k_);
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.Instance.ToValue(context, m_);
-			object o_			()
+			object o_()
 			{
-				bool cc_				()
+				bool cc_()
 				{
 					CqlValueSet cf_ = this.Oxygen_Saturation_by_Pulse_Oximetry(context);
 					IEnumerable<Observation> cg_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, cf_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-					bool? ch_					(Observation O2Saturation)
+					bool? ch_(Observation O2Saturation)
 					{
-						object cp_						()
+						object cp_()
 						{
-							bool do_							()
+							bool do_()
 							{
 								DataType dr_ = O2Saturation?.Effective;
 								object ds_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dr_);
@@ -618,7 +618,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return dt_;
 							};
-							bool dp_							()
+							bool dp_()
 							{
 								DataType du_ = O2Saturation?.Effective;
 								object dv_ = FHIRHelpers_4_3_000.Instance.ToValue(context, du_);
@@ -626,7 +626,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return dw_;
 							};
-							bool dq_							()
+							bool dq_()
 							{
 								DataType dx_ = O2Saturation?.Effective;
 								object dy_ = FHIRHelpers_4_3_000.Instance.ToValue(context, dx_);
@@ -691,11 +691,11 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 						return dn_;
 					};
 					IEnumerable<Observation> ci_ = context.Operators.Where<Observation>(cg_, ch_);
-					object cj_					(Observation @this)
+					object cj_(Observation @this)
 					{
-						object eg_						()
+						object eg_()
 						{
-							bool ei_							()
+							bool ei_()
 							{
 								DataType el_ = @this?.Effective;
 								object em_ = FHIRHelpers_4_3_000.Instance.ToValue(context, el_);
@@ -703,7 +703,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return en_;
 							};
-							bool ej_							()
+							bool ej_()
 							{
 								DataType eo_ = @this?.Effective;
 								object ep_ = FHIRHelpers_4_3_000.Instance.ToValue(context, eo_);
@@ -711,7 +711,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return eq_;
 							};
-							bool ek_							()
+							bool ek_()
 							{
 								DataType er_ = @this?.Effective;
 								object es_ = FHIRHelpers_4_3_000.Instance.ToValue(context, er_);
@@ -757,15 +757,15 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 					return co_;
 				};
-				bool cd_				()
+				bool cd_()
 				{
 					CqlValueSet fa_ = this.Oxygen_Saturation_by_Pulse_Oximetry(context);
 					IEnumerable<Observation> fb_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, fa_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-					bool? fc_					(Observation O2Saturation)
+					bool? fc_(Observation O2Saturation)
 					{
-						object fk_						()
+						object fk_()
 						{
-							bool gj_							()
+							bool gj_()
 							{
 								DataType gm_ = O2Saturation?.Effective;
 								object gn_ = FHIRHelpers_4_3_000.Instance.ToValue(context, gm_);
@@ -773,7 +773,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return go_;
 							};
-							bool gk_							()
+							bool gk_()
 							{
 								DataType gp_ = O2Saturation?.Effective;
 								object gq_ = FHIRHelpers_4_3_000.Instance.ToValue(context, gp_);
@@ -781,7 +781,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return gr_;
 							};
-							bool gl_							()
+							bool gl_()
 							{
 								DataType gs_ = O2Saturation?.Effective;
 								object gt_ = FHIRHelpers_4_3_000.Instance.ToValue(context, gs_);
@@ -846,11 +846,11 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 						return gi_;
 					};
 					IEnumerable<Observation> fd_ = context.Operators.Where<Observation>(fb_, fc_);
-					object fe_					(Observation @this)
+					object fe_(Observation @this)
 					{
-						object hb_						()
+						object hb_()
 						{
-							bool hd_							()
+							bool hd_()
 							{
 								DataType hg_ = @this?.Effective;
 								object hh_ = FHIRHelpers_4_3_000.Instance.ToValue(context, hg_);
@@ -858,7 +858,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return hi_;
 							};
-							bool he_							()
+							bool he_()
 							{
 								DataType hj_ = @this?.Effective;
 								object hk_ = FHIRHelpers_4_3_000.Instance.ToValue(context, hj_);
@@ -866,7 +866,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return hl_;
 							};
-							bool hf_							()
+							bool hf_()
 							{
 								DataType hm_ = @this?.Effective;
 								object hn_ = FHIRHelpers_4_3_000.Instance.ToValue(context, hm_);
@@ -912,15 +912,15 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 					return fj_;
 				};
-				bool ce_				()
+				bool ce_()
 				{
 					CqlValueSet hv_ = this.Oxygen_Saturation_by_Pulse_Oximetry(context);
 					IEnumerable<Observation> hw_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, hv_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-					bool? hx_					(Observation O2Saturation)
+					bool? hx_(Observation O2Saturation)
 					{
-						object if_						()
+						object if_()
 						{
-							bool je_							()
+							bool je_()
 							{
 								DataType jh_ = O2Saturation?.Effective;
 								object ji_ = FHIRHelpers_4_3_000.Instance.ToValue(context, jh_);
@@ -928,7 +928,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return jj_;
 							};
-							bool jf_							()
+							bool jf_()
 							{
 								DataType jk_ = O2Saturation?.Effective;
 								object jl_ = FHIRHelpers_4_3_000.Instance.ToValue(context, jk_);
@@ -936,7 +936,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return jm_;
 							};
-							bool jg_							()
+							bool jg_()
 							{
 								DataType jn_ = O2Saturation?.Effective;
 								object jo_ = FHIRHelpers_4_3_000.Instance.ToValue(context, jn_);
@@ -1001,11 +1001,11 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 						return jd_;
 					};
 					IEnumerable<Observation> hy_ = context.Operators.Where<Observation>(hw_, hx_);
-					object hz_					(Observation @this)
+					object hz_(Observation @this)
 					{
-						object jw_						()
+						object jw_()
 						{
-							bool jy_							()
+							bool jy_()
 							{
 								DataType kb_ = @this?.Effective;
 								object kc_ = FHIRHelpers_4_3_000.Instance.ToValue(context, kb_);
@@ -1013,7 +1013,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return kd_;
 							};
-							bool jz_							()
+							bool jz_()
 							{
 								DataType ke_ = @this?.Effective;
 								object kf_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ke_);
@@ -1021,7 +1021,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return kg_;
 							};
-							bool ka_							()
+							bool ka_()
 							{
 								DataType kh_ = @this?.Effective;
 								object ki_ = FHIRHelpers_4_3_000.Instance.ToValue(context, kh_);
@@ -1071,11 +1071,11 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				{
 					CqlValueSet kq_ = this.Oxygen_Saturation_by_Pulse_Oximetry(context);
 					IEnumerable<Observation> kr_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, kq_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-					bool? ks_					(Observation O2Saturation)
+					bool? ks_(Observation O2Saturation)
 					{
-						object kz_						()
+						object kz_()
 						{
-							bool ly_							()
+							bool ly_()
 							{
 								DataType mb_ = O2Saturation?.Effective;
 								object mc_ = FHIRHelpers_4_3_000.Instance.ToValue(context, mb_);
@@ -1083,7 +1083,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return md_;
 							};
-							bool lz_							()
+							bool lz_()
 							{
 								DataType me_ = O2Saturation?.Effective;
 								object mf_ = FHIRHelpers_4_3_000.Instance.ToValue(context, me_);
@@ -1091,7 +1091,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return mg_;
 							};
-							bool ma_							()
+							bool ma_()
 							{
 								DataType mh_ = O2Saturation?.Effective;
 								object mi_ = FHIRHelpers_4_3_000.Instance.ToValue(context, mh_);
@@ -1156,11 +1156,11 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 						return lx_;
 					};
 					IEnumerable<Observation> kt_ = context.Operators.Where<Observation>(kr_, ks_);
-					object ku_					(Observation @this)
+					object ku_(Observation @this)
 					{
-						object mq_						()
+						object mq_()
 						{
-							bool ms_							()
+							bool ms_()
 							{
 								DataType mv_ = @this?.Effective;
 								object mw_ = FHIRHelpers_4_3_000.Instance.ToValue(context, mv_);
@@ -1168,7 +1168,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return mx_;
 							};
-							bool mt_							()
+							bool mt_()
 							{
 								DataType my_ = @this?.Effective;
 								object mz_ = FHIRHelpers_4_3_000.Instance.ToValue(context, my_);
@@ -1176,7 +1176,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return na_;
 							};
-							bool mu_							()
+							bool mu_()
 							{
 								DataType nb_ = @this?.Effective;
 								object nc_ = FHIRHelpers_4_3_000.Instance.ToValue(context, nb_);
@@ -1225,11 +1225,11 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				{
 					CqlValueSet nk_ = this.Oxygen_Saturation_by_Pulse_Oximetry(context);
 					IEnumerable<Observation> nl_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, nk_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-					bool? nm_					(Observation O2Saturation)
+					bool? nm_(Observation O2Saturation)
 					{
-						object nt_						()
+						object nt_()
 						{
-							bool os_							()
+							bool os_()
 							{
 								DataType ov_ = O2Saturation?.Effective;
 								object ow_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ov_);
@@ -1237,7 +1237,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return ox_;
 							};
-							bool ot_							()
+							bool ot_()
 							{
 								DataType oy_ = O2Saturation?.Effective;
 								object oz_ = FHIRHelpers_4_3_000.Instance.ToValue(context, oy_);
@@ -1245,7 +1245,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return pa_;
 							};
-							bool ou_							()
+							bool ou_()
 							{
 								DataType pb_ = O2Saturation?.Effective;
 								object pc_ = FHIRHelpers_4_3_000.Instance.ToValue(context, pb_);
@@ -1310,11 +1310,11 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 						return or_;
 					};
 					IEnumerable<Observation> nn_ = context.Operators.Where<Observation>(nl_, nm_);
-					object no_					(Observation @this)
+					object no_(Observation @this)
 					{
-						object pk_						()
+						object pk_()
 						{
-							bool pm_							()
+							bool pm_()
 							{
 								DataType pp_ = @this?.Effective;
 								object pq_ = FHIRHelpers_4_3_000.Instance.ToValue(context, pp_);
@@ -1322,7 +1322,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return pr_;
 							};
-							bool pn_							()
+							bool pn_()
 							{
 								DataType ps_ = @this?.Effective;
 								object pt_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ps_);
@@ -1330,7 +1330,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return pu_;
 							};
-							bool po_							()
+							bool po_()
 							{
 								DataType pv_ = @this?.Effective;
 								object pw_ = FHIRHelpers_4_3_000.Instance.ToValue(context, pv_);
@@ -1379,11 +1379,11 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				{
 					CqlValueSet qe_ = this.Oxygen_Saturation_by_Pulse_Oximetry(context);
 					IEnumerable<Observation> qf_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, qe_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
-					bool? qg_					(Observation O2Saturation)
+					bool? qg_(Observation O2Saturation)
 					{
-						object qn_						()
+						object qn_()
 						{
-							bool rm_							()
+							bool rm_()
 							{
 								DataType rp_ = O2Saturation?.Effective;
 								object rq_ = FHIRHelpers_4_3_000.Instance.ToValue(context, rp_);
@@ -1391,7 +1391,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return rr_;
 							};
-							bool rn_							()
+							bool rn_()
 							{
 								DataType rs_ = O2Saturation?.Effective;
 								object rt_ = FHIRHelpers_4_3_000.Instance.ToValue(context, rs_);
@@ -1399,7 +1399,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return ru_;
 							};
-							bool ro_							()
+							bool ro_()
 							{
 								DataType rv_ = O2Saturation?.Effective;
 								object rw_ = FHIRHelpers_4_3_000.Instance.ToValue(context, rv_);
@@ -1464,11 +1464,11 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 						return rl_;
 					};
 					IEnumerable<Observation> qh_ = context.Operators.Where<Observation>(qf_, qg_);
-					object qi_					(Observation @this)
+					object qi_(Observation @this)
 					{
-						object se_						()
+						object se_()
 						{
-							bool sg_							()
+							bool sg_()
 							{
 								DataType sj_ = @this?.Effective;
 								object sk_ = FHIRHelpers_4_3_000.Instance.ToValue(context, sj_);
@@ -1476,7 +1476,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return sl_;
 							};
-							bool sh_							()
+							bool sh_()
 							{
 								DataType sm_ = @this?.Effective;
 								object sn_ = FHIRHelpers_4_3_000.Instance.ToValue(context, sm_);
@@ -1484,7 +1484,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 								return so_;
 							};
-							bool si_							()
+							bool si_()
 							{
 								DataType sp_ = @this?.Effective;
 								object sq_ = FHIRHelpers_4_3_000.Instance.ToValue(context, sp_);
@@ -1546,10 +1546,10 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("Blood Pressure Reading")]
-	public IEnumerable<Observation> Blood_Pressure_Reading	(CqlContext context)
+	public IEnumerable<Observation> Blood_Pressure_Reading(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/bp"));
-		bool? b_		(Observation BloodPressure)
+		bool? b_(Observation BloodPressure)
 		{
 			Code<ObservationStatus> d_ = BloodPressure?.StatusElement;
 			ObservationStatus? e_ = d_?.Value;
@@ -1570,7 +1570,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("Encounter with First Systolic Blood Pressure")]
-	public IEnumerable<Encounter> Encounter_with_First_Systolic_Blood_Pressure	(CqlContext context)
+	public IEnumerable<Encounter> Encounter_with_First_Systolic_Blood_Pressure(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
 
@@ -1579,16 +1579,16 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("Encounter with First Bicarbonate Lab Test")]
-	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstBicarbonateResult, CqlDateTime Timing)?> Encounter_with_First_Bicarbonate_Lab_Test	(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstBicarbonateResult, CqlDateTime Timing)?> Encounter_with_First_Bicarbonate_Lab_Test(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
-		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstBicarbonateResult, CqlDateTime Timing)? b_		(Encounter EncounterInpatient)
+		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstBicarbonateResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Bicarbonate_lab_test(context);
 			IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
-			bool? h_			(Observation BicarbonateLab)
+			bool? h_(Observation BicarbonateLab)
 			{
 				Instant z_ = BicarbonateLab?.IssuedElement;
 				DateTimeOffset? aa_ = z_?.Value;
@@ -1622,7 +1622,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return ay_;
 			};
 			IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
-			object j_			(Observation @this)
+			object j_(Observation @this)
 			{
 				Instant az_ = @this?.IssuedElement;
 				DateTimeOffset? ba_ = az_?.Value;
@@ -1636,7 +1636,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.Instance.ToValue(context, m_);
 			IEnumerable<Observation> p_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
-			bool? q_			(Observation BicarbonateLab)
+			bool? q_(Observation BicarbonateLab)
 			{
 				Instant bd_ = BicarbonateLab?.IssuedElement;
 				DateTimeOffset? be_ = bd_?.Value;
@@ -1670,7 +1670,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return cc_;
 			};
 			IEnumerable<Observation> r_ = context.Operators.Where<Observation>(p_, q_);
-			object s_			(Observation @this)
+			object s_(Observation @this)
 			{
 				Instant cd_ = @this?.IssuedElement;
 				DateTimeOffset? ce_ = cd_?.Value;
@@ -1695,16 +1695,16 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("Encounter with First Creatinine Lab Test")]
-	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstCreatinineResult, CqlDateTime Timing)?> Encounter_with_First_Creatinine_Lab_Test	(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstCreatinineResult, CqlDateTime Timing)?> Encounter_with_First_Creatinine_Lab_Test(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
-		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstCreatinineResult, CqlDateTime Timing)? b_		(Encounter EncounterInpatient)
+		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstCreatinineResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Creatinine_lab_test(context);
 			IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
-			bool? h_			(Observation CreatinineLab)
+			bool? h_(Observation CreatinineLab)
 			{
 				Instant z_ = CreatinineLab?.IssuedElement;
 				DateTimeOffset? aa_ = z_?.Value;
@@ -1738,7 +1738,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return ay_;
 			};
 			IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
-			object j_			(Observation @this)
+			object j_(Observation @this)
 			{
 				Instant az_ = @this?.IssuedElement;
 				DateTimeOffset? ba_ = az_?.Value;
@@ -1752,7 +1752,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.Instance.ToValue(context, m_);
 			IEnumerable<Observation> p_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
-			bool? q_			(Observation CreatinineLab)
+			bool? q_(Observation CreatinineLab)
 			{
 				Instant bd_ = CreatinineLab?.IssuedElement;
 				DateTimeOffset? be_ = bd_?.Value;
@@ -1786,7 +1786,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return cc_;
 			};
 			IEnumerable<Observation> r_ = context.Operators.Where<Observation>(p_, q_);
-			object s_			(Observation @this)
+			object s_(Observation @this)
 			{
 				Instant cd_ = @this?.IssuedElement;
 				DateTimeOffset? ce_ = cd_?.Value;
@@ -1811,16 +1811,16 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("Encounter with First Hematocrit Lab Test")]
-	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?> Encounter_with_First_Hematocrit_Lab_Test	(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)?> Encounter_with_First_Hematocrit_Lab_Test(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
-		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)? b_		(Encounter EncounterInpatient)
+		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Hematocrit_lab_test(context);
 			IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
-			bool? h_			(Observation HematocritLab)
+			bool? h_(Observation HematocritLab)
 			{
 				Instant z_ = HematocritLab?.IssuedElement;
 				DateTimeOffset? aa_ = z_?.Value;
@@ -1854,7 +1854,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return ay_;
 			};
 			IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
-			object j_			(Observation @this)
+			object j_(Observation @this)
 			{
 				Instant az_ = @this?.IssuedElement;
 				DateTimeOffset? ba_ = az_?.Value;
@@ -1868,7 +1868,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.Instance.ToValue(context, m_);
 			IEnumerable<Observation> p_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
-			bool? q_			(Observation HematocritLab)
+			bool? q_(Observation HematocritLab)
 			{
 				Instant bd_ = HematocritLab?.IssuedElement;
 				DateTimeOffset? be_ = bd_?.Value;
@@ -1902,7 +1902,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return cc_;
 			};
 			IEnumerable<Observation> r_ = context.Operators.Where<Observation>(p_, q_);
-			object s_			(Observation @this)
+			object s_(Observation @this)
 			{
 				Instant cd_ = @this?.IssuedElement;
 				DateTimeOffset? ce_ = cd_?.Value;
@@ -1927,16 +1927,16 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("Encounter with First Platelet Lab Test")]
-	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstPlateletResult, CqlDateTime Timing)?> Encounter_with_First_Platelet_Lab_Test	(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstPlateletResult, CqlDateTime Timing)?> Encounter_with_First_Platelet_Lab_Test(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
-		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstPlateletResult, CqlDateTime Timing)? b_		(Encounter EncounterInpatient)
+		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstPlateletResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Platelet_count_lab_test(context);
 			IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
-			bool? h_			(Observation PlateletLab)
+			bool? h_(Observation PlateletLab)
 			{
 				Instant z_ = PlateletLab?.IssuedElement;
 				DateTimeOffset? aa_ = z_?.Value;
@@ -1970,7 +1970,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return ay_;
 			};
 			IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
-			object j_			(Observation @this)
+			object j_(Observation @this)
 			{
 				Instant az_ = @this?.IssuedElement;
 				DateTimeOffset? ba_ = az_?.Value;
@@ -1984,7 +1984,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.Instance.ToValue(context, m_);
 			IEnumerable<Observation> p_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
-			bool? q_			(Observation PlateletLab)
+			bool? q_(Observation PlateletLab)
 			{
 				Instant bd_ = PlateletLab?.IssuedElement;
 				DateTimeOffset? be_ = bd_?.Value;
@@ -2018,7 +2018,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return cc_;
 			};
 			IEnumerable<Observation> r_ = context.Operators.Where<Observation>(p_, q_);
-			object s_			(Observation @this)
+			object s_(Observation @this)
 			{
 				Instant cd_ = @this?.IssuedElement;
 				DateTimeOffset? ce_ = cd_?.Value;
@@ -2043,16 +2043,16 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("Encounter with First Sodium Lab Test")]
-	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSodiumResult, CqlDateTime Timing)?> Encounter_with_First_Sodium_Lab_Test	(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSodiumResult, CqlDateTime Timing)?> Encounter_with_First_Sodium_Lab_Test(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
-		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSodiumResult, CqlDateTime Timing)? b_		(Encounter EncounterInpatient)
+		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstSodiumResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.Sodium_lab_test(context);
 			IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
-			bool? h_			(Observation SodiumLab)
+			bool? h_(Observation SodiumLab)
 			{
 				Instant z_ = SodiumLab?.IssuedElement;
 				DateTimeOffset? aa_ = z_?.Value;
@@ -2086,7 +2086,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return ay_;
 			};
 			IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
-			object j_			(Observation @this)
+			object j_(Observation @this)
 			{
 				Instant az_ = @this?.IssuedElement;
 				DateTimeOffset? ba_ = az_?.Value;
@@ -2100,7 +2100,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.Instance.ToValue(context, m_);
 			IEnumerable<Observation> p_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
-			bool? q_			(Observation SodiumLab)
+			bool? q_(Observation SodiumLab)
 			{
 				Instant bd_ = SodiumLab?.IssuedElement;
 				DateTimeOffset? be_ = bd_?.Value;
@@ -2134,7 +2134,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return cc_;
 			};
 			IEnumerable<Observation> r_ = context.Operators.Where<Observation>(p_, q_);
-			object s_			(Observation @this)
+			object s_(Observation @this)
 			{
 				Instant cd_ = @this?.IssuedElement;
 				DateTimeOffset? ce_ = cd_?.Value;
@@ -2159,16 +2159,16 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("Encounter with First White Blood Cells Lab Test")]
-	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWhiteBloodCellResult, CqlDateTime Timing)?> Encounter_with_First_White_Blood_Cells_Lab_Test	(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWhiteBloodCellResult, CqlDateTime Timing)?> Encounter_with_First_White_Blood_Cells_Lab_Test(CqlContext context)
 	{
 		IEnumerable<Encounter> a_ = this.Inpatient_Encounters(context);
-		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWhiteBloodCellResult, CqlDateTime Timing)? b_		(Encounter EncounterInpatient)
+		(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWhiteBloodCellResult, CqlDateTime Timing)? b_(Encounter EncounterInpatient)
 		{
 			Id d_ = EncounterInpatient?.IdElement;
 			string e_ = d_?.Value;
 			CqlValueSet f_ = this.White_blood_cells_count_lab_test(context);
 			IEnumerable<Observation> g_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
-			bool? h_			(Observation WhiteBloodCellLab)
+			bool? h_(Observation WhiteBloodCellLab)
 			{
 				Instant z_ = WhiteBloodCellLab?.IssuedElement;
 				DateTimeOffset? aa_ = z_?.Value;
@@ -2202,7 +2202,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return ay_;
 			};
 			IEnumerable<Observation> i_ = context.Operators.Where<Observation>(g_, h_);
-			object j_			(Observation @this)
+			object j_(Observation @this)
 			{
 				Instant az_ = @this?.IssuedElement;
 				DateTimeOffset? ba_ = az_?.Value;
@@ -2216,7 +2216,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 			DataType m_ = l_?.Value;
 			object n_ = FHIRHelpers_4_3_000.Instance.ToValue(context, m_);
 			IEnumerable<Observation> p_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/us/core/StructureDefinition/us-core-observation-lab"));
-			bool? q_			(Observation WhiteBloodCellLab)
+			bool? q_(Observation WhiteBloodCellLab)
 			{
 				Instant bd_ = WhiteBloodCellLab?.IssuedElement;
 				DateTimeOffset? be_ = bd_?.Value;
@@ -2250,7 +2250,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 				return cc_;
 			};
 			IEnumerable<Observation> r_ = context.Operators.Where<Observation>(p_, q_);
-			object s_			(Observation @this)
+			object s_(Observation @this)
 			{
 				Instant cd_ = @this?.IssuedElement;
 				DateTimeOffset? ce_ = cd_?.Value;
@@ -2275,7 +2275,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity	(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
 	{
 		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
@@ -2284,7 +2284,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer	(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
 	{
 		IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
@@ -2293,7 +2293,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("SDE Race")]
-	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race	(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
 	{
 		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
@@ -2302,7 +2302,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
 
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex	(CqlContext context)
+	public CqlCode SDE_Sex(CqlContext context)
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.Instance.SDE_Sex(context);
 

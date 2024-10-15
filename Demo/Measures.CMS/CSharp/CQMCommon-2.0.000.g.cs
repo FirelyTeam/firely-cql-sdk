@@ -27,42 +27,42 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
-	public CqlValueSet Emergency_Department_Visit	(CqlContext context) => 
+	public CqlValueSet Emergency_Department_Visit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-	public CqlValueSet Encounter_Inpatient	(CqlContext context) => 
+	public CqlValueSet Encounter_Inpatient(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
 
     [CqlDeclaration("Intensive Care Unit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206")]
-	public CqlValueSet Intensive_Care_Unit	(CqlContext context) => 
+	public CqlValueSet Intensive_Care_Unit(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", default);
 
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
-	public CqlValueSet Observation_Services	(CqlContext context) => 
+	public CqlValueSet Observation_Services(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
 
     [CqlDeclaration("Outpatient Surgery Service")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.38")]
-	public CqlValueSet Outpatient_Surgery_Service	(CqlContext context) => 
+	public CqlValueSet Outpatient_Surgery_Service(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.38", default);
 
 
     [CqlDeclaration("Present on Admission or Clinically Undetermined")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197")]
-	public CqlValueSet Present_on_Admission_or_Clinically_Undetermined	(CqlContext context) => 
+	public CqlValueSet Present_on_Admission_or_Clinically_Undetermined(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", default);
 
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period	(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -74,7 +74,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient	(CqlContext context)
+	public Patient Patient(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -84,11 +84,11 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 
 
     [CqlDeclaration("Inpatient Encounter")]
-	public IEnumerable<Encounter> Inpatient_Encounter	(CqlContext context)
+	public IEnumerable<Encounter> Inpatient_Encounter(CqlContext context)
 	{
 		CqlValueSet a_ = this.Encounter_Inpatient(context);
 		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-		bool? c_		(Encounter EncounterInpatient)
+		bool? c_(Encounter EncounterInpatient)
 		{
 			Code<Encounter.EncounterStatus> e_ = EncounterInpatient?.StatusElement;
 			Encounter.EncounterStatus? f_ = e_?.Value;
@@ -108,7 +108,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return d_;
 	}
 
-	public CqlInterval<CqlDate> ToDateInterval	(CqlContext context, CqlInterval<CqlDateTime> period)
+	public CqlInterval<CqlDate> ToDateInterval(CqlContext context, CqlInterval<CqlDateTime> period)
 	{
 		CqlDateTime a_ = context.Operators.Start(period);
 		CqlDate b_ = context.Operators.DateFrom(a_);
@@ -119,7 +119,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return e_;
 	}
 
-	public int? LengthInDays	(CqlContext context, CqlInterval<CqlDateTime> Value)
+	public int? LengthInDays(CqlContext context, CqlInterval<CqlDateTime> Value)
 	{
 		CqlDateTime a_ = context.Operators.Start(Value);
 		CqlDateTime b_ = context.Operators.End(Value);
@@ -128,7 +128,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return c_;
 	}
 
-	public int? lengthInDays	(CqlContext context, CqlInterval<CqlDateTime> Value)
+	public int? lengthInDays(CqlContext context, CqlInterval<CqlDateTime> Value)
 	{
 		CqlDateTime a_ = context.Operators.Start(Value);
 		CqlDateTime b_ = context.Operators.End(Value);
@@ -137,11 +137,11 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return c_;
 	}
 
-	public Encounter ED_Visit	(CqlContext context, Encounter TheEncounter)
+	public Encounter ED_Visit(CqlContext context, Encounter TheEncounter)
 	{
 		CqlValueSet a_ = this.Emergency_Department_Visit(context);
 		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-		bool? c_		(Encounter EDVisit)
+		bool? c_(Encounter EDVisit)
 		{
 			Code<Encounter.EncounterStatus> h_ = EDVisit?.StatusElement;
 			Encounter.EncounterStatus? i_ = h_?.Value;
@@ -168,7 +168,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			return ad_;
 		};
 		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
-		object e_		(Encounter @this)
+		object e_(Encounter @this)
 		{
 			Period ae_ = @this?.Period;
 			CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ae_);
@@ -182,11 +182,11 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return g_;
 	}
 
-	public Encounter edVisit	(CqlContext context, Encounter TheEncounter)
+	public Encounter edVisit(CqlContext context, Encounter TheEncounter)
 	{
 		CqlValueSet a_ = this.Emergency_Department_Visit(context);
 		IEnumerable<Encounter> b_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-		bool? c_		(Encounter EDVisit)
+		bool? c_(Encounter EDVisit)
 		{
 			Code<Encounter.EncounterStatus> h_ = EDVisit?.StatusElement;
 			Encounter.EncounterStatus? i_ = h_?.Value;
@@ -213,7 +213,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			return ad_;
 		};
 		IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
-		object e_		(Encounter @this)
+		object e_(Encounter @this)
 		{
 			Period ae_ = @this?.Period;
 			CqlInterval<CqlDateTime> af_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ae_);
@@ -227,15 +227,15 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return g_;
 	}
 
-	public CqlInterval<CqlDateTime> Hospitalization	(CqlContext context, Encounter TheEncounter)
+	public CqlInterval<CqlDateTime> Hospitalization(CqlContext context, Encounter TheEncounter)
 	{
 		Encounter a_ = this.ED_Visit(context, TheEncounter);
 		Encounter[] b_ = [
 			a_,
 		];
-		CqlInterval<CqlDateTime> c_		(Encounter X)
+		CqlInterval<CqlDateTime> c_(Encounter X)
 		{
-			CqlInterval<CqlDateTime> f_			()
+			CqlInterval<CqlDateTime> f_()
 			{
 				if (X is null)
 				{
@@ -266,15 +266,15 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return e_;
 	}
 
-	public CqlInterval<CqlDateTime> hospitalization	(CqlContext context, Encounter TheEncounter)
+	public CqlInterval<CqlDateTime> hospitalization(CqlContext context, Encounter TheEncounter)
 	{
 		Encounter a_ = this.edVisit(context, TheEncounter);
 		Encounter[] b_ = [
 			a_,
 		];
-		CqlInterval<CqlDateTime> c_		(Encounter X)
+		CqlInterval<CqlDateTime> c_(Encounter X)
 		{
-			CqlInterval<CqlDateTime> f_			()
+			CqlInterval<CqlDateTime> f_()
 			{
 				if (X is null)
 				{
@@ -305,15 +305,15 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return e_;
 	}
 
-	public IEnumerable<Encounter.LocationComponent> Hospitalization_Locations	(CqlContext context, Encounter TheEncounter)
+	public IEnumerable<Encounter.LocationComponent> Hospitalization_Locations(CqlContext context, Encounter TheEncounter)
 	{
 		Encounter a_ = this.ED_Visit(context, TheEncounter);
 		Encounter[] b_ = [
 			a_,
 		];
-		IEnumerable<Encounter.LocationComponent> c_		(Encounter EDEncounter)
+		IEnumerable<Encounter.LocationComponent> c_(Encounter EDEncounter)
 		{
-			IEnumerable<Encounter.LocationComponent> f_			()
+			IEnumerable<Encounter.LocationComponent> f_()
 			{
 				if (EDEncounter is null)
 				{
@@ -343,15 +343,15 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return e_;
 	}
 
-	public IEnumerable<Encounter.LocationComponent> hospitalizationLocations	(CqlContext context, Encounter TheEncounter)
+	public IEnumerable<Encounter.LocationComponent> hospitalizationLocations(CqlContext context, Encounter TheEncounter)
 	{
 		Encounter a_ = this.edVisit(context, TheEncounter);
 		Encounter[] b_ = [
 			a_,
 		];
-		IEnumerable<Encounter.LocationComponent> c_		(Encounter EDEncounter)
+		IEnumerable<Encounter.LocationComponent> c_(Encounter EDEncounter)
 		{
-			IEnumerable<Encounter.LocationComponent> f_			()
+			IEnumerable<Encounter.LocationComponent> f_()
 			{
 				if (EDEncounter is null)
 				{
@@ -381,7 +381,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return e_;
 	}
 
-	public int? Hospitalization_Length_of_Stay	(CqlContext context, Encounter TheEncounter)
+	public int? Hospitalization_Length_of_Stay(CqlContext context, Encounter TheEncounter)
 	{
 		CqlInterval<CqlDateTime> a_ = this.Hospitalization(context, TheEncounter);
 		int? b_ = this.LengthInDays(context, a_);
@@ -389,7 +389,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return b_;
 	}
 
-	public int? hospitalizationLengthOfStay	(CqlContext context, Encounter TheEncounter)
+	public int? hospitalizationLengthOfStay(CqlContext context, Encounter TheEncounter)
 	{
 		CqlInterval<CqlDateTime> a_ = this.hospitalization(context, TheEncounter);
 		int? b_ = this.lengthInDays(context, a_);
@@ -397,7 +397,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return b_;
 	}
 
-	public CqlDateTime Hospital_Admission_Time	(CqlContext context, Encounter TheEncounter)
+	public CqlDateTime Hospital_Admission_Time(CqlContext context, Encounter TheEncounter)
 	{
 		CqlInterval<CqlDateTime> a_ = this.Hospitalization(context, TheEncounter);
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -405,7 +405,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return b_;
 	}
 
-	public CqlDateTime hospitalAdmissionTime	(CqlContext context, Encounter TheEncounter)
+	public CqlDateTime hospitalAdmissionTime(CqlContext context, Encounter TheEncounter)
 	{
 		CqlInterval<CqlDateTime> a_ = this.hospitalization(context, TheEncounter);
 		CqlDateTime b_ = context.Operators.Start(a_);
@@ -413,7 +413,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return b_;
 	}
 
-	public CqlDateTime Hospital_Discharge_Time	(CqlContext context, Encounter TheEncounter)
+	public CqlDateTime Hospital_Discharge_Time(CqlContext context, Encounter TheEncounter)
 	{
 		Period a_ = TheEncounter?.Period;
 		CqlInterval<CqlDateTime> b_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, a_);
@@ -422,7 +422,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return c_;
 	}
 
-	public CqlDateTime hospitalDischargeTime	(CqlContext context, Encounter TheEncounter)
+	public CqlDateTime hospitalDischargeTime(CqlContext context, Encounter TheEncounter)
 	{
 		Period a_ = TheEncounter?.Period;
 		CqlInterval<CqlDateTime> b_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, a_);
@@ -431,10 +431,10 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return c_;
 	}
 
-	public CqlDateTime Hospital_Arrival_Time	(CqlContext context, Encounter TheEncounter)
+	public CqlDateTime Hospital_Arrival_Time(CqlContext context, Encounter TheEncounter)
 	{
 		IEnumerable<Encounter.LocationComponent> a_ = this.Hospitalization_Locations(context, TheEncounter);
-		object b_		(Encounter.LocationComponent @this)
+		object b_(Encounter.LocationComponent @this)
 		{
 			Period h_ = @this?.Period;
 			CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, h_);
@@ -451,10 +451,10 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return g_;
 	}
 
-	public CqlDateTime hospitalArrivalTime	(CqlContext context, Encounter TheEncounter)
+	public CqlDateTime hospitalArrivalTime(CqlContext context, Encounter TheEncounter)
 	{
 		IEnumerable<Encounter.LocationComponent> a_ = this.hospitalizationLocations(context, TheEncounter);
-		object b_		(Encounter.LocationComponent @this)
+		object b_(Encounter.LocationComponent @this)
 		{
 			Period h_ = @this?.Period;
 			CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, h_);
@@ -471,10 +471,10 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return g_;
 	}
 
-	public CqlDateTime Hospital_Departure_Time	(CqlContext context, Encounter TheEncounter)
+	public CqlDateTime Hospital_Departure_Time(CqlContext context, Encounter TheEncounter)
 	{
 		IEnumerable<Encounter.LocationComponent> a_ = this.Hospitalization_Locations(context, TheEncounter);
-		object b_		(Encounter.LocationComponent @this)
+		object b_(Encounter.LocationComponent @this)
 		{
 			Period h_ = @this?.Period;
 			CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, h_);
@@ -491,10 +491,10 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return g_;
 	}
 
-	public CqlDateTime hospitalDepartureTime	(CqlContext context, Encounter TheEncounter)
+	public CqlDateTime hospitalDepartureTime(CqlContext context, Encounter TheEncounter)
 	{
 		IEnumerable<Encounter.LocationComponent> a_ = this.hospitalizationLocations(context, TheEncounter);
-		object b_		(Encounter.LocationComponent @this)
+		object b_(Encounter.LocationComponent @this)
 		{
 			Period h_ = @this?.Period;
 			CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, h_);
@@ -511,10 +511,10 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return g_;
 	}
 
-	public Location GetLocation	(CqlContext context, ResourceReference reference)
+	public Location GetLocation(CqlContext context, ResourceReference reference)
 	{
 		IEnumerable<Location> a_ = context.Operators.Retrieve<Location>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-location"));
-		bool? b_		(Location L)
+		bool? b_(Location L)
 		{
 			Id e_ = L?.IdElement;
 			string f_ = e_?.Value;
@@ -531,15 +531,15 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return d_;
 	}
 
-	public CqlDateTime Emergency_Department_Arrival_Time	(CqlContext context, Encounter TheEncounter)
+	public CqlDateTime Emergency_Department_Arrival_Time(CqlContext context, Encounter TheEncounter)
 	{
 		IEnumerable<Encounter.LocationComponent> a_ = this.Hospitalization_Locations(context, TheEncounter);
-		bool? b_		(Encounter.LocationComponent HospitalLocation)
+		bool? b_(Encounter.LocationComponent HospitalLocation)
 		{
 			ResourceReference h_ = HospitalLocation?.Location;
 			Location i_ = this.GetLocation(context, h_);
 			List<CodeableConcept> j_ = i_?.Type;
-			CqlConcept k_			(CodeableConcept @this)
+			CqlConcept k_(CodeableConcept @this)
 			{
 				CqlConcept o_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
@@ -560,15 +560,15 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return g_;
 	}
 
-	public CqlDateTime emergencyDepartmentArrivalTime	(CqlContext context, Encounter TheEncounter)
+	public CqlDateTime emergencyDepartmentArrivalTime(CqlContext context, Encounter TheEncounter)
 	{
 		IEnumerable<Encounter.LocationComponent> a_ = this.hospitalizationLocations(context, TheEncounter);
-		bool? b_		(Encounter.LocationComponent HospitalLocation)
+		bool? b_(Encounter.LocationComponent HospitalLocation)
 		{
 			ResourceReference h_ = HospitalLocation?.Location;
 			Location i_ = this.GetLocation(context, h_);
 			List<CodeableConcept> j_ = i_?.Type;
-			CqlConcept k_			(CodeableConcept @this)
+			CqlConcept k_(CodeableConcept @this)
 			{
 				CqlConcept o_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
@@ -589,23 +589,23 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return g_;
 	}
 
-	public CqlInterval<CqlDateTime> HospitalizationWithObservationAndOutpatientSurgeryService	(CqlContext context, Encounter TheEncounter)
+	public CqlInterval<CqlDateTime> HospitalizationWithObservationAndOutpatientSurgeryService(CqlContext context, Encounter TheEncounter)
 	{
 		Encounter[] a_ = [
 			TheEncounter,
 		];
-		CqlInterval<CqlDateTime> b_		(Encounter Visit)
+		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.Outpatient_Surgery_Service(context);
 			IEnumerable<Encounter> f_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-			bool? g_			(Encounter LastSurgeryOP)
+			bool? g_(Encounter LastSurgeryOP)
 			{
 				Period ap_ = LastSurgeryOP?.Period;
 				CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ap_);
 				CqlDateTime ar_ = context.Operators.End(aq_);
 				CqlValueSet as_ = this.Emergency_Department_Visit(context);
 				IEnumerable<Encounter> at_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, as_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? au_				(Encounter LastED)
+				bool? au_(Encounter LastED)
 				{
 					Code<Encounter.EncounterStatus> dp_ = LastED?.StatusElement;
 					Encounter.EncounterStatus? dq_ = dp_?.Value;
@@ -616,7 +616,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlDateTime dv_ = context.Operators.End(du_);
 					CqlValueSet dw_ = this.Observation_Services(context);
 					IEnumerable<Encounter> dx_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, dw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? dy_					(Encounter LastObs)
+					bool? dy_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> fq_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? fr_ = fq_?.Value;
@@ -643,7 +643,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return gm_;
 					};
 					IEnumerable<Encounter> dz_ = context.Operators.Where<Encounter>(dx_, dy_);
-					object ea_					(Encounter @this)
+					object ea_(Encounter @this)
 					{
 						Period gn_ = @this?.Period;
 						CqlInterval<CqlDateTime> go_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, gn_);
@@ -662,7 +662,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlQuantity ej_ = context.Operators.Quantity(1m, "hour");
 					CqlDateTime ek_ = context.Operators.Subtract(ef_ ?? ei_, ej_);
 					IEnumerable<Encounter> em_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, dw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? en_					(Encounter LastObs)
+					bool? en_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> gq_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? gr_ = gq_?.Value;
@@ -689,7 +689,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return hm_;
 					};
 					IEnumerable<Encounter> eo_ = context.Operators.Where<Encounter>(em_, en_);
-					object ep_					(Encounter @this)
+					object ep_(Encounter @this)
 					{
 						Period hn_ = @this?.Period;
 						CqlInterval<CqlDateTime> ho_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, hn_);
@@ -707,7 +707,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlInterval<CqlDateTime> ey_ = context.Operators.Interval(ek_, eu_ ?? ex_, true, true);
 					bool? ez_ = context.Operators.In<CqlDateTime>(dv_, ey_, default);
 					IEnumerable<Encounter> fb_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, dw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? fc_					(Encounter LastObs)
+					bool? fc_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> hq_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? hr_ = hq_?.Value;
@@ -734,7 +734,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return im_;
 					};
 					IEnumerable<Encounter> fd_ = context.Operators.Where<Encounter>(fb_, fc_);
-					object fe_					(Encounter @this)
+					object fe_(Encounter @this)
 					{
 						Period in_ = @this?.Period;
 						CqlInterval<CqlDateTime> io_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, in_);
@@ -756,7 +756,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return fp_;
 				};
 				IEnumerable<Encounter> av_ = context.Operators.Where<Encounter>(at_, au_);
-				object aw_				(Encounter @this)
+				object aw_(Encounter @this)
 				{
 					Period iq_ = @this?.Period;
 					CqlInterval<CqlDateTime> ir_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, iq_);
@@ -771,7 +771,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlDateTime bb_ = context.Operators.Start(ba_);
 				CqlValueSet bc_ = this.Observation_Services(context);
 				IEnumerable<Encounter> bd_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, bc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? be_				(Encounter LastObs)
+				bool? be_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> it_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? iu_ = it_?.Value;
@@ -798,7 +798,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return jp_;
 				};
 				IEnumerable<Encounter> bf_ = context.Operators.Where<Encounter>(bd_, be_);
-				object bg_				(Encounter @this)
+				object bg_(Encounter @this)
 				{
 					Period jq_ = @this?.Period;
 					CqlInterval<CqlDateTime> jr_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, jq_);
@@ -817,7 +817,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlQuantity bp_ = context.Operators.Quantity(1m, "hour");
 				CqlDateTime bq_ = context.Operators.Subtract(bb_ ?? bl_ ?? bo_, bp_);
 				IEnumerable<Encounter> bs_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, as_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? bt_				(Encounter LastED)
+				bool? bt_(Encounter LastED)
 				{
 					Code<Encounter.EncounterStatus> jt_ = LastED?.StatusElement;
 					Encounter.EncounterStatus? ju_ = jt_?.Value;
@@ -828,7 +828,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlDateTime jz_ = context.Operators.End(jy_);
 					CqlValueSet ka_ = this.Observation_Services(context);
 					IEnumerable<Encounter> kb_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ka_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? kc_					(Encounter LastObs)
+					bool? kc_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> lu_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? lv_ = lu_?.Value;
@@ -855,7 +855,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return mq_;
 					};
 					IEnumerable<Encounter> kd_ = context.Operators.Where<Encounter>(kb_, kc_);
-					object ke_					(Encounter @this)
+					object ke_(Encounter @this)
 					{
 						Period mr_ = @this?.Period;
 						CqlInterval<CqlDateTime> ms_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, mr_);
@@ -874,7 +874,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlQuantity kn_ = context.Operators.Quantity(1m, "hour");
 					CqlDateTime ko_ = context.Operators.Subtract(kj_ ?? km_, kn_);
 					IEnumerable<Encounter> kq_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ka_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? kr_					(Encounter LastObs)
+					bool? kr_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> mu_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? mv_ = mu_?.Value;
@@ -901,7 +901,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return nq_;
 					};
 					IEnumerable<Encounter> ks_ = context.Operators.Where<Encounter>(kq_, kr_);
-					object kt_					(Encounter @this)
+					object kt_(Encounter @this)
 					{
 						Period nr_ = @this?.Period;
 						CqlInterval<CqlDateTime> ns_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, nr_);
@@ -919,7 +919,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlInterval<CqlDateTime> lc_ = context.Operators.Interval(ko_, ky_ ?? lb_, true, true);
 					bool? ld_ = context.Operators.In<CqlDateTime>(jz_, lc_, default);
 					IEnumerable<Encounter> lf_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ka_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? lg_					(Encounter LastObs)
+					bool? lg_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> nu_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? nv_ = nu_?.Value;
@@ -946,7 +946,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return oq_;
 					};
 					IEnumerable<Encounter> lh_ = context.Operators.Where<Encounter>(lf_, lg_);
-					object li_					(Encounter @this)
+					object li_(Encounter @this)
 					{
 						Period or_ = @this?.Period;
 						CqlInterval<CqlDateTime> os_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, or_);
@@ -968,7 +968,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return lt_;
 				};
 				IEnumerable<Encounter> bu_ = context.Operators.Where<Encounter>(bs_, bt_);
-				object bv_				(Encounter @this)
+				object bv_(Encounter @this)
 				{
 					Period ou_ = @this?.Period;
 					CqlInterval<CqlDateTime> ov_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ou_);
@@ -982,7 +982,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlInterval<CqlDateTime> bz_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, by_);
 				CqlDateTime ca_ = context.Operators.Start(bz_);
 				IEnumerable<Encounter> cc_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, bc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? cd_				(Encounter LastObs)
+				bool? cd_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> ox_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? oy_ = ox_?.Value;
@@ -1009,7 +1009,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return pt_;
 				};
 				IEnumerable<Encounter> ce_ = context.Operators.Where<Encounter>(cc_, cd_);
-				object cf_				(Encounter @this)
+				object cf_(Encounter @this)
 				{
 					Period pu_ = @this?.Period;
 					CqlInterval<CqlDateTime> pv_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, pu_);
@@ -1027,7 +1027,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlInterval<CqlDateTime> co_ = context.Operators.Interval(bq_, ca_ ?? ck_ ?? cn_, true, true);
 				bool? cp_ = context.Operators.In<CqlDateTime>(ar_, co_, default);
 				IEnumerable<Encounter> cr_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, as_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? cs_				(Encounter LastED)
+				bool? cs_(Encounter LastED)
 				{
 					Code<Encounter.EncounterStatus> px_ = LastED?.StatusElement;
 					Encounter.EncounterStatus? py_ = px_?.Value;
@@ -1038,7 +1038,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlDateTime qd_ = context.Operators.End(qc_);
 					CqlValueSet qe_ = this.Observation_Services(context);
 					IEnumerable<Encounter> qf_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, qe_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? qg_					(Encounter LastObs)
+					bool? qg_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> ry_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? rz_ = ry_?.Value;
@@ -1065,7 +1065,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return su_;
 					};
 					IEnumerable<Encounter> qh_ = context.Operators.Where<Encounter>(qf_, qg_);
-					object qi_					(Encounter @this)
+					object qi_(Encounter @this)
 					{
 						Period sv_ = @this?.Period;
 						CqlInterval<CqlDateTime> sw_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, sv_);
@@ -1084,7 +1084,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlQuantity qr_ = context.Operators.Quantity(1m, "hour");
 					CqlDateTime qs_ = context.Operators.Subtract(qn_ ?? qq_, qr_);
 					IEnumerable<Encounter> qu_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, qe_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? qv_					(Encounter LastObs)
+					bool? qv_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> sy_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? sz_ = sy_?.Value;
@@ -1111,7 +1111,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return tu_;
 					};
 					IEnumerable<Encounter> qw_ = context.Operators.Where<Encounter>(qu_, qv_);
-					object qx_					(Encounter @this)
+					object qx_(Encounter @this)
 					{
 						Period tv_ = @this?.Period;
 						CqlInterval<CqlDateTime> tw_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, tv_);
@@ -1129,7 +1129,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlInterval<CqlDateTime> rg_ = context.Operators.Interval(qs_, rc_ ?? rf_, true, true);
 					bool? rh_ = context.Operators.In<CqlDateTime>(qd_, rg_, default);
 					IEnumerable<Encounter> rj_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, qe_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? rk_					(Encounter LastObs)
+					bool? rk_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> ty_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? tz_ = ty_?.Value;
@@ -1156,7 +1156,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return uu_;
 					};
 					IEnumerable<Encounter> rl_ = context.Operators.Where<Encounter>(rj_, rk_);
-					object rm_					(Encounter @this)
+					object rm_(Encounter @this)
 					{
 						Period uv_ = @this?.Period;
 						CqlInterval<CqlDateTime> uw_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, uv_);
@@ -1178,7 +1178,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return rx_;
 				};
 				IEnumerable<Encounter> ct_ = context.Operators.Where<Encounter>(cr_, cs_);
-				object cu_				(Encounter @this)
+				object cu_(Encounter @this)
 				{
 					Period uy_ = @this?.Period;
 					CqlInterval<CqlDateTime> uz_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, uy_);
@@ -1192,7 +1192,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlInterval<CqlDateTime> cy_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, cx_);
 				CqlDateTime cz_ = context.Operators.Start(cy_);
 				IEnumerable<Encounter> db_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, bc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? dc_				(Encounter LastObs)
+				bool? dc_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> vb_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? vc_ = vb_?.Value;
@@ -1219,7 +1219,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return vx_;
 				};
 				IEnumerable<Encounter> dd_ = context.Operators.Where<Encounter>(db_, dc_);
-				object de_				(Encounter @this)
+				object de_(Encounter @this)
 				{
 					Period vy_ = @this?.Period;
 					CqlInterval<CqlDateTime> vz_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, vy_);
@@ -1240,7 +1240,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				return do_;
 			};
 			IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
-			object i_			(Encounter @this)
+			object i_(Encounter @this)
 			{
 				Period wb_ = @this?.Period;
 				CqlInterval<CqlDateTime> wc_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, wb_);
@@ -1255,7 +1255,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			CqlDateTime n_ = context.Operators.Start(m_);
 			CqlValueSet o_ = this.Emergency_Department_Visit(context);
 			IEnumerable<Encounter> p_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-			bool? q_			(Encounter LastED)
+			bool? q_(Encounter LastED)
 			{
 				Code<Encounter.EncounterStatus> we_ = LastED?.StatusElement;
 				Encounter.EncounterStatus? wf_ = we_?.Value;
@@ -1266,7 +1266,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlDateTime wk_ = context.Operators.End(wj_);
 				CqlValueSet wl_ = this.Observation_Services(context);
 				IEnumerable<Encounter> wm_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, wl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? wn_				(Encounter LastObs)
+				bool? wn_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> yf_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? yg_ = yf_?.Value;
@@ -1293,7 +1293,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return zb_;
 				};
 				IEnumerable<Encounter> wo_ = context.Operators.Where<Encounter>(wm_, wn_);
-				object wp_				(Encounter @this)
+				object wp_(Encounter @this)
 				{
 					Period zc_ = @this?.Period;
 					CqlInterval<CqlDateTime> zd_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, zc_);
@@ -1312,7 +1312,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlQuantity wy_ = context.Operators.Quantity(1m, "hour");
 				CqlDateTime wz_ = context.Operators.Subtract(wu_ ?? wx_, wy_);
 				IEnumerable<Encounter> xb_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, wl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? xc_				(Encounter LastObs)
+				bool? xc_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> zf_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? zg_ = zf_?.Value;
@@ -1339,7 +1339,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return azb_;
 				};
 				IEnumerable<Encounter> xd_ = context.Operators.Where<Encounter>(xb_, xc_);
-				object xe_				(Encounter @this)
+				object xe_(Encounter @this)
 				{
 					Period azc_ = @this?.Period;
 					CqlInterval<CqlDateTime> azd_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, azc_);
@@ -1357,7 +1357,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlInterval<CqlDateTime> xn_ = context.Operators.Interval(wz_, xj_ ?? xm_, true, true);
 				bool? xo_ = context.Operators.In<CqlDateTime>(wk_, xn_, default);
 				IEnumerable<Encounter> xq_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, wl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? xr_				(Encounter LastObs)
+				bool? xr_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> azf_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? azg_ = azf_?.Value;
@@ -1384,7 +1384,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return bzb_;
 				};
 				IEnumerable<Encounter> xs_ = context.Operators.Where<Encounter>(xq_, xr_);
-				object xt_				(Encounter @this)
+				object xt_(Encounter @this)
 				{
 					Period bzc_ = @this?.Period;
 					CqlInterval<CqlDateTime> bzd_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, bzc_);
@@ -1406,7 +1406,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				return ye_;
 			};
 			IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
-			object s_			(Encounter @this)
+			object s_(Encounter @this)
 			{
 				Period bzf_ = @this?.Period;
 				CqlInterval<CqlDateTime> bzg_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, bzf_);
@@ -1421,7 +1421,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			CqlDateTime x_ = context.Operators.Start(w_);
 			CqlValueSet y_ = this.Observation_Services(context);
 			IEnumerable<Encounter> z_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-			bool? aa_			(Encounter LastObs)
+			bool? aa_(Encounter LastObs)
 			{
 				Code<Encounter.EncounterStatus> bzi_ = LastObs?.StatusElement;
 				Encounter.EncounterStatus? bzj_ = bzi_?.Value;
@@ -1448,7 +1448,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				return cze_;
 			};
 			IEnumerable<Encounter> ab_ = context.Operators.Where<Encounter>(z_, aa_);
-			object ac_			(Encounter @this)
+			object ac_(Encounter @this)
 			{
 				Period czf_ = @this?.Period;
 				CqlInterval<CqlDateTime> czg_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, czf_);
@@ -1476,23 +1476,23 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return d_;
 	}
 
-	public CqlInterval<CqlDateTime> hospitalizationWithObservationAndOutpatientSurgeryService	(CqlContext context, Encounter TheEncounter)
+	public CqlInterval<CqlDateTime> hospitalizationWithObservationAndOutpatientSurgeryService(CqlContext context, Encounter TheEncounter)
 	{
 		Encounter[] a_ = [
 			TheEncounter,
 		];
-		CqlInterval<CqlDateTime> b_		(Encounter Visit)
+		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.Outpatient_Surgery_Service(context);
 			IEnumerable<Encounter> f_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-			bool? g_			(Encounter LastSurgeryOP)
+			bool? g_(Encounter LastSurgeryOP)
 			{
 				Period ap_ = LastSurgeryOP?.Period;
 				CqlInterval<CqlDateTime> aq_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ap_);
 				CqlDateTime ar_ = context.Operators.End(aq_);
 				CqlValueSet as_ = this.Emergency_Department_Visit(context);
 				IEnumerable<Encounter> at_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, as_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? au_				(Encounter LastED)
+				bool? au_(Encounter LastED)
 				{
 					Code<Encounter.EncounterStatus> dp_ = LastED?.StatusElement;
 					Encounter.EncounterStatus? dq_ = dp_?.Value;
@@ -1503,7 +1503,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlDateTime dv_ = context.Operators.End(du_);
 					CqlValueSet dw_ = this.Observation_Services(context);
 					IEnumerable<Encounter> dx_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, dw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? dy_					(Encounter LastObs)
+					bool? dy_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> fq_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? fr_ = fq_?.Value;
@@ -1530,7 +1530,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return gm_;
 					};
 					IEnumerable<Encounter> dz_ = context.Operators.Where<Encounter>(dx_, dy_);
-					object ea_					(Encounter @this)
+					object ea_(Encounter @this)
 					{
 						Period gn_ = @this?.Period;
 						CqlInterval<CqlDateTime> go_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, gn_);
@@ -1549,7 +1549,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlQuantity ej_ = context.Operators.Quantity(1m, "hour");
 					CqlDateTime ek_ = context.Operators.Subtract(ef_ ?? ei_, ej_);
 					IEnumerable<Encounter> em_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, dw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? en_					(Encounter LastObs)
+					bool? en_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> gq_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? gr_ = gq_?.Value;
@@ -1576,7 +1576,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return hm_;
 					};
 					IEnumerable<Encounter> eo_ = context.Operators.Where<Encounter>(em_, en_);
-					object ep_					(Encounter @this)
+					object ep_(Encounter @this)
 					{
 						Period hn_ = @this?.Period;
 						CqlInterval<CqlDateTime> ho_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, hn_);
@@ -1594,7 +1594,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlInterval<CqlDateTime> ey_ = context.Operators.Interval(ek_, eu_ ?? ex_, true, true);
 					bool? ez_ = context.Operators.In<CqlDateTime>(dv_, ey_, default);
 					IEnumerable<Encounter> fb_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, dw_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? fc_					(Encounter LastObs)
+					bool? fc_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> hq_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? hr_ = hq_?.Value;
@@ -1621,7 +1621,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return im_;
 					};
 					IEnumerable<Encounter> fd_ = context.Operators.Where<Encounter>(fb_, fc_);
-					object fe_					(Encounter @this)
+					object fe_(Encounter @this)
 					{
 						Period in_ = @this?.Period;
 						CqlInterval<CqlDateTime> io_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, in_);
@@ -1643,7 +1643,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return fp_;
 				};
 				IEnumerable<Encounter> av_ = context.Operators.Where<Encounter>(at_, au_);
-				object aw_				(Encounter @this)
+				object aw_(Encounter @this)
 				{
 					Period iq_ = @this?.Period;
 					CqlInterval<CqlDateTime> ir_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, iq_);
@@ -1658,7 +1658,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlDateTime bb_ = context.Operators.Start(ba_);
 				CqlValueSet bc_ = this.Observation_Services(context);
 				IEnumerable<Encounter> bd_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, bc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? be_				(Encounter LastObs)
+				bool? be_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> it_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? iu_ = it_?.Value;
@@ -1685,7 +1685,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return jp_;
 				};
 				IEnumerable<Encounter> bf_ = context.Operators.Where<Encounter>(bd_, be_);
-				object bg_				(Encounter @this)
+				object bg_(Encounter @this)
 				{
 					Period jq_ = @this?.Period;
 					CqlInterval<CqlDateTime> jr_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, jq_);
@@ -1704,7 +1704,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlQuantity bp_ = context.Operators.Quantity(1m, "hour");
 				CqlDateTime bq_ = context.Operators.Subtract(bb_ ?? bl_ ?? bo_, bp_);
 				IEnumerable<Encounter> bs_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, as_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? bt_				(Encounter LastED)
+				bool? bt_(Encounter LastED)
 				{
 					Code<Encounter.EncounterStatus> jt_ = LastED?.StatusElement;
 					Encounter.EncounterStatus? ju_ = jt_?.Value;
@@ -1715,7 +1715,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlDateTime jz_ = context.Operators.End(jy_);
 					CqlValueSet ka_ = this.Observation_Services(context);
 					IEnumerable<Encounter> kb_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ka_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? kc_					(Encounter LastObs)
+					bool? kc_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> lu_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? lv_ = lu_?.Value;
@@ -1742,7 +1742,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return mq_;
 					};
 					IEnumerable<Encounter> kd_ = context.Operators.Where<Encounter>(kb_, kc_);
-					object ke_					(Encounter @this)
+					object ke_(Encounter @this)
 					{
 						Period mr_ = @this?.Period;
 						CqlInterval<CqlDateTime> ms_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, mr_);
@@ -1761,7 +1761,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlQuantity kn_ = context.Operators.Quantity(1m, "hour");
 					CqlDateTime ko_ = context.Operators.Subtract(kj_ ?? km_, kn_);
 					IEnumerable<Encounter> kq_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ka_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? kr_					(Encounter LastObs)
+					bool? kr_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> mu_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? mv_ = mu_?.Value;
@@ -1788,7 +1788,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return nq_;
 					};
 					IEnumerable<Encounter> ks_ = context.Operators.Where<Encounter>(kq_, kr_);
-					object kt_					(Encounter @this)
+					object kt_(Encounter @this)
 					{
 						Period nr_ = @this?.Period;
 						CqlInterval<CqlDateTime> ns_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, nr_);
@@ -1806,7 +1806,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlInterval<CqlDateTime> lc_ = context.Operators.Interval(ko_, ky_ ?? lb_, true, true);
 					bool? ld_ = context.Operators.In<CqlDateTime>(jz_, lc_, default);
 					IEnumerable<Encounter> lf_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, ka_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? lg_					(Encounter LastObs)
+					bool? lg_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> nu_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? nv_ = nu_?.Value;
@@ -1833,7 +1833,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return oq_;
 					};
 					IEnumerable<Encounter> lh_ = context.Operators.Where<Encounter>(lf_, lg_);
-					object li_					(Encounter @this)
+					object li_(Encounter @this)
 					{
 						Period or_ = @this?.Period;
 						CqlInterval<CqlDateTime> os_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, or_);
@@ -1855,7 +1855,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return lt_;
 				};
 				IEnumerable<Encounter> bu_ = context.Operators.Where<Encounter>(bs_, bt_);
-				object bv_				(Encounter @this)
+				object bv_(Encounter @this)
 				{
 					Period ou_ = @this?.Period;
 					CqlInterval<CqlDateTime> ov_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ou_);
@@ -1869,7 +1869,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlInterval<CqlDateTime> bz_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, by_);
 				CqlDateTime ca_ = context.Operators.Start(bz_);
 				IEnumerable<Encounter> cc_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, bc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? cd_				(Encounter LastObs)
+				bool? cd_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> ox_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? oy_ = ox_?.Value;
@@ -1896,7 +1896,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return pt_;
 				};
 				IEnumerable<Encounter> ce_ = context.Operators.Where<Encounter>(cc_, cd_);
-				object cf_				(Encounter @this)
+				object cf_(Encounter @this)
 				{
 					Period pu_ = @this?.Period;
 					CqlInterval<CqlDateTime> pv_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, pu_);
@@ -1914,7 +1914,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlInterval<CqlDateTime> co_ = context.Operators.Interval(bq_, ca_ ?? ck_ ?? cn_, true, true);
 				bool? cp_ = context.Operators.In<CqlDateTime>(ar_, co_, default);
 				IEnumerable<Encounter> cr_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, as_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? cs_				(Encounter LastED)
+				bool? cs_(Encounter LastED)
 				{
 					Code<Encounter.EncounterStatus> px_ = LastED?.StatusElement;
 					Encounter.EncounterStatus? py_ = px_?.Value;
@@ -1925,7 +1925,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlDateTime qd_ = context.Operators.End(qc_);
 					CqlValueSet qe_ = this.Observation_Services(context);
 					IEnumerable<Encounter> qf_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, qe_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? qg_					(Encounter LastObs)
+					bool? qg_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> ry_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? rz_ = ry_?.Value;
@@ -1952,7 +1952,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return su_;
 					};
 					IEnumerable<Encounter> qh_ = context.Operators.Where<Encounter>(qf_, qg_);
-					object qi_					(Encounter @this)
+					object qi_(Encounter @this)
 					{
 						Period sv_ = @this?.Period;
 						CqlInterval<CqlDateTime> sw_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, sv_);
@@ -1971,7 +1971,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlQuantity qr_ = context.Operators.Quantity(1m, "hour");
 					CqlDateTime qs_ = context.Operators.Subtract(qn_ ?? qq_, qr_);
 					IEnumerable<Encounter> qu_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, qe_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? qv_					(Encounter LastObs)
+					bool? qv_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> sy_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? sz_ = sy_?.Value;
@@ -1998,7 +1998,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return tu_;
 					};
 					IEnumerable<Encounter> qw_ = context.Operators.Where<Encounter>(qu_, qv_);
-					object qx_					(Encounter @this)
+					object qx_(Encounter @this)
 					{
 						Period tv_ = @this?.Period;
 						CqlInterval<CqlDateTime> tw_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, tv_);
@@ -2016,7 +2016,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					CqlInterval<CqlDateTime> rg_ = context.Operators.Interval(qs_, rc_ ?? rf_, true, true);
 					bool? rh_ = context.Operators.In<CqlDateTime>(qd_, rg_, default);
 					IEnumerable<Encounter> rj_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, qe_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-					bool? rk_					(Encounter LastObs)
+					bool? rk_(Encounter LastObs)
 					{
 						Code<Encounter.EncounterStatus> ty_ = LastObs?.StatusElement;
 						Encounter.EncounterStatus? tz_ = ty_?.Value;
@@ -2043,7 +2043,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 						return uu_;
 					};
 					IEnumerable<Encounter> rl_ = context.Operators.Where<Encounter>(rj_, rk_);
-					object rm_					(Encounter @this)
+					object rm_(Encounter @this)
 					{
 						Period uv_ = @this?.Period;
 						CqlInterval<CqlDateTime> uw_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, uv_);
@@ -2065,7 +2065,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return rx_;
 				};
 				IEnumerable<Encounter> ct_ = context.Operators.Where<Encounter>(cr_, cs_);
-				object cu_				(Encounter @this)
+				object cu_(Encounter @this)
 				{
 					Period uy_ = @this?.Period;
 					CqlInterval<CqlDateTime> uz_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, uy_);
@@ -2079,7 +2079,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlInterval<CqlDateTime> cy_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, cx_);
 				CqlDateTime cz_ = context.Operators.Start(cy_);
 				IEnumerable<Encounter> db_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, bc_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? dc_				(Encounter LastObs)
+				bool? dc_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> vb_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? vc_ = vb_?.Value;
@@ -2106,7 +2106,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return vx_;
 				};
 				IEnumerable<Encounter> dd_ = context.Operators.Where<Encounter>(db_, dc_);
-				object de_				(Encounter @this)
+				object de_(Encounter @this)
 				{
 					Period vy_ = @this?.Period;
 					CqlInterval<CqlDateTime> vz_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, vy_);
@@ -2127,7 +2127,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				return do_;
 			};
 			IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
-			object i_			(Encounter @this)
+			object i_(Encounter @this)
 			{
 				Period wb_ = @this?.Period;
 				CqlInterval<CqlDateTime> wc_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, wb_);
@@ -2142,7 +2142,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			CqlDateTime n_ = context.Operators.Start(m_);
 			CqlValueSet o_ = this.Emergency_Department_Visit(context);
 			IEnumerable<Encounter> p_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-			bool? q_			(Encounter LastED)
+			bool? q_(Encounter LastED)
 			{
 				Code<Encounter.EncounterStatus> we_ = LastED?.StatusElement;
 				Encounter.EncounterStatus? wf_ = we_?.Value;
@@ -2153,7 +2153,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlDateTime wk_ = context.Operators.End(wj_);
 				CqlValueSet wl_ = this.Observation_Services(context);
 				IEnumerable<Encounter> wm_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, wl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? wn_				(Encounter LastObs)
+				bool? wn_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> yf_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? yg_ = yf_?.Value;
@@ -2180,7 +2180,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return zb_;
 				};
 				IEnumerable<Encounter> wo_ = context.Operators.Where<Encounter>(wm_, wn_);
-				object wp_				(Encounter @this)
+				object wp_(Encounter @this)
 				{
 					Period zc_ = @this?.Period;
 					CqlInterval<CqlDateTime> zd_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, zc_);
@@ -2199,7 +2199,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlQuantity wy_ = context.Operators.Quantity(1m, "hour");
 				CqlDateTime wz_ = context.Operators.Subtract(wu_ ?? wx_, wy_);
 				IEnumerable<Encounter> xb_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, wl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? xc_				(Encounter LastObs)
+				bool? xc_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> zf_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? zg_ = zf_?.Value;
@@ -2226,7 +2226,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return azb_;
 				};
 				IEnumerable<Encounter> xd_ = context.Operators.Where<Encounter>(xb_, xc_);
-				object xe_				(Encounter @this)
+				object xe_(Encounter @this)
 				{
 					Period azc_ = @this?.Period;
 					CqlInterval<CqlDateTime> azd_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, azc_);
@@ -2244,7 +2244,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlInterval<CqlDateTime> xn_ = context.Operators.Interval(wz_, xj_ ?? xm_, true, true);
 				bool? xo_ = context.Operators.In<CqlDateTime>(wk_, xn_, default);
 				IEnumerable<Encounter> xq_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, wl_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? xr_				(Encounter LastObs)
+				bool? xr_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> azf_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? azg_ = azf_?.Value;
@@ -2271,7 +2271,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return bzb_;
 				};
 				IEnumerable<Encounter> xs_ = context.Operators.Where<Encounter>(xq_, xr_);
-				object xt_				(Encounter @this)
+				object xt_(Encounter @this)
 				{
 					Period bzc_ = @this?.Period;
 					CqlInterval<CqlDateTime> bzd_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, bzc_);
@@ -2293,7 +2293,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				return ye_;
 			};
 			IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
-			object s_			(Encounter @this)
+			object s_(Encounter @this)
 			{
 				Period bzf_ = @this?.Period;
 				CqlInterval<CqlDateTime> bzg_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, bzf_);
@@ -2308,7 +2308,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			CqlDateTime x_ = context.Operators.Start(w_);
 			CqlValueSet y_ = this.Observation_Services(context);
 			IEnumerable<Encounter> z_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-			bool? aa_			(Encounter LastObs)
+			bool? aa_(Encounter LastObs)
 			{
 				Code<Encounter.EncounterStatus> bzi_ = LastObs?.StatusElement;
 				Encounter.EncounterStatus? bzj_ = bzi_?.Value;
@@ -2335,7 +2335,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				return cze_;
 			};
 			IEnumerable<Encounter> ab_ = context.Operators.Where<Encounter>(z_, aa_);
-			object ac_			(Encounter @this)
+			object ac_(Encounter @this)
 			{
 				Period czf_ = @this?.Period;
 				CqlInterval<CqlDateTime> czg_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, czf_);
@@ -2363,16 +2363,16 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return d_;
 	}
 
-	public CqlInterval<CqlDateTime> HospitalizationWithObservation	(CqlContext context, Encounter TheEncounter)
+	public CqlInterval<CqlDateTime> HospitalizationWithObservation(CqlContext context, Encounter TheEncounter)
 	{
 		Encounter[] a_ = [
 			TheEncounter,
 		];
-		CqlInterval<CqlDateTime> b_		(Encounter Visit)
+		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.Emergency_Department_Visit(context);
 			IEnumerable<Encounter> f_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-			bool? g_			(Encounter LastED)
+			bool? g_(Encounter LastED)
 			{
 				Code<Encounter.EncounterStatus> af_ = LastED?.StatusElement;
 				Encounter.EncounterStatus? ag_ = af_?.Value;
@@ -2383,7 +2383,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlDateTime al_ = context.Operators.End(ak_);
 				CqlValueSet am_ = this.Observation_Services(context);
 				IEnumerable<Encounter> an_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, am_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? ao_				(Encounter LastObs)
+				bool? ao_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> cg_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? ch_ = cg_?.Value;
@@ -2410,7 +2410,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return dc_;
 				};
 				IEnumerable<Encounter> ap_ = context.Operators.Where<Encounter>(an_, ao_);
-				object aq_				(Encounter @this)
+				object aq_(Encounter @this)
 				{
 					Period dd_ = @this?.Period;
 					CqlInterval<CqlDateTime> de_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, dd_);
@@ -2429,7 +2429,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlQuantity az_ = context.Operators.Quantity(1m, "hour");
 				CqlDateTime ba_ = context.Operators.Subtract(av_ ?? ay_, az_);
 				IEnumerable<Encounter> bc_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, am_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? bd_				(Encounter LastObs)
+				bool? bd_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> dg_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? dh_ = dg_?.Value;
@@ -2456,7 +2456,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return ec_;
 				};
 				IEnumerable<Encounter> be_ = context.Operators.Where<Encounter>(bc_, bd_);
-				object bf_				(Encounter @this)
+				object bf_(Encounter @this)
 				{
 					Period ed_ = @this?.Period;
 					CqlInterval<CqlDateTime> ee_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ed_);
@@ -2474,7 +2474,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlInterval<CqlDateTime> bo_ = context.Operators.Interval(ba_, bk_ ?? bn_, true, true);
 				bool? bp_ = context.Operators.In<CqlDateTime>(al_, bo_, default);
 				IEnumerable<Encounter> br_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, am_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? bs_				(Encounter LastObs)
+				bool? bs_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> eg_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? eh_ = eg_?.Value;
@@ -2501,7 +2501,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return fc_;
 				};
 				IEnumerable<Encounter> bt_ = context.Operators.Where<Encounter>(br_, bs_);
-				object bu_				(Encounter @this)
+				object bu_(Encounter @this)
 				{
 					Period fd_ = @this?.Period;
 					CqlInterval<CqlDateTime> fe_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, fd_);
@@ -2523,7 +2523,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				return cf_;
 			};
 			IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
-			object i_			(Encounter @this)
+			object i_(Encounter @this)
 			{
 				Period fg_ = @this?.Period;
 				CqlInterval<CqlDateTime> fh_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, fg_);
@@ -2538,7 +2538,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			CqlDateTime n_ = context.Operators.Start(m_);
 			CqlValueSet o_ = this.Observation_Services(context);
 			IEnumerable<Encounter> p_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-			bool? q_			(Encounter LastObs)
+			bool? q_(Encounter LastObs)
 			{
 				Code<Encounter.EncounterStatus> fj_ = LastObs?.StatusElement;
 				Encounter.EncounterStatus? fk_ = fj_?.Value;
@@ -2565,7 +2565,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				return gf_;
 			};
 			IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
-			object s_			(Encounter @this)
+			object s_(Encounter @this)
 			{
 				Period gg_ = @this?.Period;
 				CqlInterval<CqlDateTime> gh_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, gg_);
@@ -2593,16 +2593,16 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return d_;
 	}
 
-	public CqlInterval<CqlDateTime> hospitalizationWithObservation	(CqlContext context, Encounter TheEncounter)
+	public CqlInterval<CqlDateTime> hospitalizationWithObservation(CqlContext context, Encounter TheEncounter)
 	{
 		Encounter[] a_ = [
 			TheEncounter,
 		];
-		CqlInterval<CqlDateTime> b_		(Encounter Visit)
+		CqlInterval<CqlDateTime> b_(Encounter Visit)
 		{
 			CqlValueSet e_ = this.Emergency_Department_Visit(context);
 			IEnumerable<Encounter> f_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, e_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-			bool? g_			(Encounter LastED)
+			bool? g_(Encounter LastED)
 			{
 				Code<Encounter.EncounterStatus> af_ = LastED?.StatusElement;
 				Encounter.EncounterStatus? ag_ = af_?.Value;
@@ -2613,7 +2613,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlDateTime al_ = context.Operators.End(ak_);
 				CqlValueSet am_ = this.Observation_Services(context);
 				IEnumerable<Encounter> an_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, am_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? ao_				(Encounter LastObs)
+				bool? ao_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> cg_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? ch_ = cg_?.Value;
@@ -2640,7 +2640,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return dc_;
 				};
 				IEnumerable<Encounter> ap_ = context.Operators.Where<Encounter>(an_, ao_);
-				object aq_				(Encounter @this)
+				object aq_(Encounter @this)
 				{
 					Period dd_ = @this?.Period;
 					CqlInterval<CqlDateTime> de_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, dd_);
@@ -2659,7 +2659,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlQuantity az_ = context.Operators.Quantity(1m, "hour");
 				CqlDateTime ba_ = context.Operators.Subtract(av_ ?? ay_, az_);
 				IEnumerable<Encounter> bc_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, am_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? bd_				(Encounter LastObs)
+				bool? bd_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> dg_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? dh_ = dg_?.Value;
@@ -2686,7 +2686,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return ec_;
 				};
 				IEnumerable<Encounter> be_ = context.Operators.Where<Encounter>(bc_, bd_);
-				object bf_				(Encounter @this)
+				object bf_(Encounter @this)
 				{
 					Period ed_ = @this?.Period;
 					CqlInterval<CqlDateTime> ee_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ed_);
@@ -2704,7 +2704,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				CqlInterval<CqlDateTime> bo_ = context.Operators.Interval(ba_, bk_ ?? bn_, true, true);
 				bool? bp_ = context.Operators.In<CqlDateTime>(al_, bo_, default);
 				IEnumerable<Encounter> br_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, am_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-				bool? bs_				(Encounter LastObs)
+				bool? bs_(Encounter LastObs)
 				{
 					Code<Encounter.EncounterStatus> eg_ = LastObs?.StatusElement;
 					Encounter.EncounterStatus? eh_ = eg_?.Value;
@@ -2731,7 +2731,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 					return fc_;
 				};
 				IEnumerable<Encounter> bt_ = context.Operators.Where<Encounter>(br_, bs_);
-				object bu_				(Encounter @this)
+				object bu_(Encounter @this)
 				{
 					Period fd_ = @this?.Period;
 					CqlInterval<CqlDateTime> fe_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, fd_);
@@ -2753,7 +2753,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				return cf_;
 			};
 			IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
-			object i_			(Encounter @this)
+			object i_(Encounter @this)
 			{
 				Period fg_ = @this?.Period;
 				CqlInterval<CqlDateTime> fh_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, fg_);
@@ -2768,7 +2768,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			CqlDateTime n_ = context.Operators.Start(m_);
 			CqlValueSet o_ = this.Observation_Services(context);
 			IEnumerable<Encounter> p_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, o_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
-			bool? q_			(Encounter LastObs)
+			bool? q_(Encounter LastObs)
 			{
 				Code<Encounter.EncounterStatus> fj_ = LastObs?.StatusElement;
 				Encounter.EncounterStatus? fk_ = fj_?.Value;
@@ -2795,7 +2795,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 				return gf_;
 			};
 			IEnumerable<Encounter> r_ = context.Operators.Where<Encounter>(p_, q_);
-			object s_			(Encounter @this)
+			object s_(Encounter @this)
 			{
 				Period gg_ = @this?.Period;
 				CqlInterval<CqlDateTime> gh_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, gg_);
@@ -2823,7 +2823,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return d_;
 	}
 
-	public int? HospitalizationWithObservationLengthofStay	(CqlContext context, Encounter TheEncounter)
+	public int? HospitalizationWithObservationLengthofStay(CqlContext context, Encounter TheEncounter)
 	{
 		CqlInterval<CqlDateTime> a_ = this.HospitalizationWithObservation(context, TheEncounter);
 		int? b_ = this.LengthInDays(context, a_);
@@ -2831,7 +2831,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return b_;
 	}
 
-	public int? hospitalizationWithObservationLengthofStay	(CqlContext context, Encounter TheEncounter)
+	public int? hospitalizationWithObservationLengthofStay(CqlContext context, Encounter TheEncounter)
 	{
 		CqlInterval<CqlDateTime> a_ = this.hospitalizationWithObservation(context, TheEncounter);
 		int? b_ = this.lengthInDays(context, a_);
@@ -2839,15 +2839,15 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return b_;
 	}
 
-	public Encounter.LocationComponent FirstInpatientIntensiveCareUnit	(CqlContext context, Encounter Encounter)
+	public Encounter.LocationComponent FirstInpatientIntensiveCareUnit(CqlContext context, Encounter Encounter)
 	{
 		List<Encounter.LocationComponent> a_ = Encounter?.Location;
-		bool? b_		(Encounter.LocationComponent HospitalLocation)
+		bool? b_(Encounter.LocationComponent HospitalLocation)
 		{
 			ResourceReference g_ = HospitalLocation?.Location;
 			Location h_ = this.GetLocation(context, g_);
 			List<CodeableConcept> i_ = h_?.Type;
-			CqlConcept j_			(CodeableConcept @this)
+			CqlConcept j_(CodeableConcept @this)
 			{
 				CqlConcept t_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
@@ -2866,7 +2866,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			return s_;
 		};
 		IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
-		object d_		(Encounter.LocationComponent @this)
+		object d_(Encounter.LocationComponent @this)
 		{
 			Period u_ = @this?.Period;
 			CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, u_);
@@ -2880,15 +2880,15 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return f_;
 	}
 
-	public Encounter.LocationComponent firstInpatientIntensiveCareUnit	(CqlContext context, Encounter Encounter)
+	public Encounter.LocationComponent firstInpatientIntensiveCareUnit(CqlContext context, Encounter Encounter)
 	{
 		List<Encounter.LocationComponent> a_ = Encounter?.Location;
-		bool? b_		(Encounter.LocationComponent HospitalLocation)
+		bool? b_(Encounter.LocationComponent HospitalLocation)
 		{
 			ResourceReference g_ = HospitalLocation?.Location;
 			Location h_ = this.GetLocation(context, g_);
 			List<CodeableConcept> i_ = h_?.Type;
-			CqlConcept j_			(CodeableConcept @this)
+			CqlConcept j_(CodeableConcept @this)
 			{
 				CqlConcept t_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, @this);
 
@@ -2907,7 +2907,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			return s_;
 		};
 		IEnumerable<Encounter.LocationComponent> c_ = context.Operators.Where<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)a_, b_);
-		object d_		(Encounter.LocationComponent @this)
+		object d_(Encounter.LocationComponent @this)
 		{
 			Period u_ = @this?.Period;
 			CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, u_);
@@ -2921,13 +2921,13 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return f_;
 	}
 
-	public IEnumerable<Condition> EncounterDiagnosis	(CqlContext context, Encounter Encounter)
+	public IEnumerable<Condition> EncounterDiagnosis(CqlContext context, Encounter Encounter)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
-		Condition b_		(Encounter.DiagnosisComponent D)
+		Condition b_(Encounter.DiagnosisComponent D)
 		{
 			IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-			bool? e_			(Condition C)
+			bool? e_(Condition C)
 			{
 				Id h_ = C?.IdElement;
 				string i_ = h_?.Value;
@@ -2949,13 +2949,13 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return c_;
 	}
 
-	public IEnumerable<Condition> encounterDiagnosis	(CqlContext context, Encounter Encounter)
+	public IEnumerable<Condition> encounterDiagnosis(CqlContext context, Encounter Encounter)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
-		Condition b_		(Encounter.DiagnosisComponent D)
+		Condition b_(Encounter.DiagnosisComponent D)
 		{
 			IEnumerable<Condition> d_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-			bool? e_			(Condition C)
+			bool? e_(Condition C)
 			{
 				Id h_ = C?.IdElement;
 				string i_ = h_?.Value;
@@ -2977,10 +2977,10 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return c_;
 	}
 
-	public Condition GetCondition	(CqlContext context, ResourceReference reference)
+	public Condition GetCondition(CqlContext context, ResourceReference reference)
 	{
 		IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-		bool? b_		(Condition C)
+		bool? b_(Condition C)
 		{
 			Id e_ = C?.IdElement;
 			string f_ = e_?.Value;
@@ -2997,10 +2997,10 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return d_;
 	}
 
-	public Condition getCondition	(CqlContext context, ResourceReference reference)
+	public Condition getCondition(CqlContext context, ResourceReference reference)
 	{
 		IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-		bool? b_		(Condition C)
+		bool? b_(Condition C)
 		{
 			Id e_ = C?.IdElement;
 			string f_ = e_?.Value;
@@ -3017,10 +3017,10 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return d_;
 	}
 
-	public Condition PrincipalDiagnosis	(CqlContext context, Encounter Encounter)
+	public Condition PrincipalDiagnosis(CqlContext context, Encounter Encounter)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
-		bool? b_		(Encounter.DiagnosisComponent D)
+		bool? b_(Encounter.DiagnosisComponent D)
 		{
 			PositiveInt g_ = D?.RankElement;
 			int? h_ = g_?.Value;
@@ -3029,10 +3029,10 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			return i_;
 		};
 		IEnumerable<Encounter.DiagnosisComponent> c_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
-		Condition d_		(Encounter.DiagnosisComponent PD)
+		Condition d_(Encounter.DiagnosisComponent PD)
 		{
 			IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-			bool? k_			(Condition C)
+			bool? k_(Condition C)
 			{
 				Id n_ = C?.IdElement;
 				string o_ = n_?.Value;
@@ -3055,10 +3055,10 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return f_;
 	}
 
-	public Condition principalDiagnosis	(CqlContext context, Encounter Encounter)
+	public Condition principalDiagnosis(CqlContext context, Encounter Encounter)
 	{
 		List<Encounter.DiagnosisComponent> a_ = Encounter?.Diagnosis;
-		bool? b_		(Encounter.DiagnosisComponent D)
+		bool? b_(Encounter.DiagnosisComponent D)
 		{
 			PositiveInt g_ = D?.RankElement;
 			int? h_ = g_?.Value;
@@ -3067,10 +3067,10 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			return i_;
 		};
 		IEnumerable<Encounter.DiagnosisComponent> c_ = context.Operators.Where<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)a_, b_);
-		Condition d_		(Encounter.DiagnosisComponent PD)
+		Condition d_(Encounter.DiagnosisComponent PD)
 		{
 			IEnumerable<Condition> j_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
-			bool? k_			(Condition C)
+			bool? k_(Condition C)
 			{
 				Id n_ = C?.IdElement;
 				string o_ = n_?.Value;
@@ -3093,10 +3093,10 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return f_;
 	}
 
-	public Location getLocation	(CqlContext context, ResourceReference reference)
+	public Location getLocation(CqlContext context, ResourceReference reference)
 	{
 		IEnumerable<Location> a_ = context.Operators.Retrieve<Location>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-location"));
-		bool? b_		(Location L)
+		bool? b_(Location L)
 		{
 			Id e_ = L?.IdElement;
 			string f_ = e_?.Value;
@@ -3113,11 +3113,11 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return d_;
 	}
 
-	public CqlConcept GetMedicationCode	(CqlContext context, MedicationRequest request)
+	public CqlConcept GetMedicationCode(CqlContext context, MedicationRequest request)
 	{
-		CqlConcept a_		()
+		CqlConcept a_()
 		{
-			bool b_			()
+			bool b_()
 			{
 				DataType c_ = request?.Medication;
 				object d_ = FHIRHelpers_4_3_000.Instance.ToValue(context, c_);
@@ -3135,7 +3135,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			else
 			{
 				IEnumerable<Medication> h_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-				bool? i_				(Medication M)
+				bool? i_(Medication M)
 				{
 					Id n_ = M?.IdElement;
 					string o_ = n_?.Value;
@@ -3160,11 +3160,11 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 		return a_();
 	}
 
-	public CqlConcept getMedicationCode	(CqlContext context, MedicationRequest request)
+	public CqlConcept getMedicationCode(CqlContext context, MedicationRequest request)
 	{
-		CqlConcept a_		()
+		CqlConcept a_()
 		{
-			bool b_			()
+			bool b_()
 			{
 				DataType c_ = request?.Medication;
 				object d_ = FHIRHelpers_4_3_000.Instance.ToValue(context, c_);
@@ -3182,7 +3182,7 @@ public partial class CQMCommon_2_0_000 : ILibrary, ISingleton<CQMCommon_2_0_000>
 			else
 			{
 				IEnumerable<Medication> h_ = context.Operators.Retrieve<Medication>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medication"));
-				bool? i_				(Medication M)
+				bool? i_(Medication M)
 				{
 					Id n_ = M?.IdElement;
 					string o_ = n_?.Value;

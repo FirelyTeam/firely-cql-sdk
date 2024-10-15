@@ -24,12 +24,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     public string Version => "2023.0.0";
     public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
     #endregion Library Members
-	public Account AccountResource	(CqlContext context, Account arg)
+	public Account AccountResource(CqlContext context, Account arg)
 	{
 		Account[] a_ = [
 			arg,
 		];
-		Account b_		(Account a)
+		Account b_(Account a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<Account.AccountStatus> f_ = a?.StatusElement;
@@ -65,12 +65,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public ActivityDefinition ActivityDefinitionResource	(CqlContext context, ActivityDefinition arg)
+	public ActivityDefinition ActivityDefinitionResource(CqlContext context, ActivityDefinition arg)
 	{
 		ActivityDefinition[] a_ = [
 			arg,
 		];
-		ActivityDefinition b_		(ActivityDefinition a)
+		ActivityDefinition b_(ActivityDefinition a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			List<Identifier> f_ = a?.Identifier;
@@ -176,12 +176,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public AdverseEvent AdverseEventResource	(CqlContext context, AdverseEvent arg)
+	public AdverseEvent AdverseEventResource(CqlContext context, AdverseEvent arg)
 	{
 		AdverseEvent[] a_ = [
 			arg,
 		];
-		AdverseEvent b_		(AdverseEvent a)
+		AdverseEvent b_(AdverseEvent a)
 		{
 			Identifier e_ = a?.Identifier;
 			Code<AdverseEvent.AdverseEventActuality> f_ = a?.ActualityElement;
@@ -235,12 +235,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public AllergyIntolerance AllergyIntoleranceResource	(CqlContext context, AllergyIntolerance arg)
+	public AllergyIntolerance AllergyIntoleranceResource(CqlContext context, AllergyIntolerance arg)
 	{
 		AllergyIntolerance[] a_ = [
 			arg,
 		];
-		AllergyIntolerance b_		(AllergyIntolerance a)
+		AllergyIntolerance b_(AllergyIntolerance a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			CodeableConcept f_ = a?.ClinicalStatus;
@@ -286,12 +286,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Appointment AppointmentResource	(CqlContext context, Appointment arg)
+	public Appointment AppointmentResource(CqlContext context, Appointment arg)
 	{
 		Appointment[] a_ = [
 			arg,
 		];
-		Appointment b_		(Appointment a)
+		Appointment b_(Appointment a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<Appointment.AppointmentStatus> f_ = a?.StatusElement;
@@ -353,12 +353,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public AppointmentResponse AppointmentResponseResource	(CqlContext context, AppointmentResponse arg)
+	public AppointmentResponse AppointmentResponseResource(CqlContext context, AppointmentResponse arg)
 	{
 		AppointmentResponse[] a_ = [
 			arg,
 		];
-		AppointmentResponse b_		(AppointmentResponse a)
+		AppointmentResponse b_(AppointmentResponse a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			ResourceReference f_ = a?.Appointment;
@@ -388,12 +388,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public AuditEvent AuditEventResource	(CqlContext context, AuditEvent arg)
+	public AuditEvent AuditEventResource(CqlContext context, AuditEvent arg)
 	{
 		AuditEvent[] a_ = [
 			arg,
 		];
-		AuditEvent b_		(AuditEvent a)
+		AuditEvent b_(AuditEvent a)
 		{
 			Coding e_ = a?.Type;
 			List<Coding> f_ = a?.Subtype;
@@ -429,12 +429,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Basic BasicResource	(CqlContext context, Basic arg)
+	public Basic BasicResource(CqlContext context, Basic arg)
 	{
 		Basic[] a_ = [
 			arg,
 		];
-		Basic b_		(Basic a)
+		Basic b_(Basic a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			CodeableConcept f_ = a?.Code;
@@ -458,12 +458,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public BiologicallyDerivedProduct BiologicallyDerivedProductResource	(CqlContext context, BiologicallyDerivedProduct arg)
+	public BiologicallyDerivedProduct BiologicallyDerivedProductResource(CqlContext context, BiologicallyDerivedProduct arg)
 	{
 		BiologicallyDerivedProduct[] a_ = [
 			arg,
 		];
-		BiologicallyDerivedProduct b_		(BiologicallyDerivedProduct a)
+		BiologicallyDerivedProduct b_(BiologicallyDerivedProduct a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<BiologicallyDerivedProduct.BiologicallyDerivedProductCategory> f_ = a?.ProductCategoryElement;
@@ -499,12 +499,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public BodyStructure BodyStructureResource	(CqlContext context, BodyStructure arg)
+	public BodyStructure BodyStructureResource(CqlContext context, BodyStructure arg)
 	{
 		BodyStructure[] a_ = [
 			arg,
 		];
-		BodyStructure b_		(BodyStructure a)
+		BodyStructure b_(BodyStructure a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			FhirBoolean f_ = a?.ActiveElement;
@@ -534,12 +534,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public CarePlan CarePlanResource	(CqlContext context, CarePlan arg)
+	public CarePlan CarePlanResource(CqlContext context, CarePlan arg)
 	{
 		CarePlan[] a_ = [
 			arg,
 		];
-		CarePlan b_		(CarePlan a)
+		CarePlan b_(CarePlan a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<Canonical> f_ = a?.InstantiatesCanonicalElement;
@@ -599,12 +599,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public CareTeam CareTeamResource	(CqlContext context, CareTeam arg)
+	public CareTeam CareTeamResource(CqlContext context, CareTeam arg)
 	{
 		CareTeam[] a_ = [
 			arg,
 		];
-		CareTeam b_		(CareTeam a)
+		CareTeam b_(CareTeam a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<CareTeam.CareTeamStatus> f_ = a?.StatusElement;
@@ -644,12 +644,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public CatalogEntry CatalogEntryResource	(CqlContext context, CatalogEntry arg)
+	public CatalogEntry CatalogEntryResource(CqlContext context, CatalogEntry arg)
 	{
 		CatalogEntry[] a_ = [
 			arg,
 		];
-		CatalogEntry b_		(CatalogEntry a)
+		CatalogEntry b_(CatalogEntry a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			CodeableConcept f_ = a?.Type;
@@ -689,12 +689,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public ChargeItem ChargeItemResource	(CqlContext context, ChargeItem arg)
+	public ChargeItem ChargeItemResource(CqlContext context, ChargeItem arg)
 	{
 		ChargeItem[] a_ = [
 			arg,
 		];
-		ChargeItem b_		(ChargeItem a)
+		ChargeItem b_(ChargeItem a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<FhirUri> f_ = a?.DefinitionUriElement;
@@ -760,12 +760,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public ChargeItemDefinition ChargeItemDefinitionResource	(CqlContext context, ChargeItemDefinition arg)
+	public ChargeItemDefinition ChargeItemDefinitionResource(CqlContext context, ChargeItemDefinition arg)
 	{
 		ChargeItemDefinition[] a_ = [
 			arg,
 		];
-		ChargeItemDefinition b_		(ChargeItemDefinition a)
+		ChargeItemDefinition b_(ChargeItemDefinition a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			List<Identifier> f_ = a?.Identifier;
@@ -825,12 +825,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Claim ClaimResource	(CqlContext context, Claim arg)
+	public Claim ClaimResource(CqlContext context, Claim arg)
 	{
 		Claim[] a_ = [
 			arg,
 		];
-		Claim b_		(Claim a)
+		Claim b_(Claim a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
@@ -898,12 +898,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public ClaimResponse ClaimResponseResource	(CqlContext context, ClaimResponse arg)
+	public ClaimResponse ClaimResponseResource(CqlContext context, ClaimResponse arg)
 	{
 		ClaimResponse[] a_ = [
 			arg,
 		];
-		ClaimResponse b_		(ClaimResponse a)
+		ClaimResponse b_(ClaimResponse a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
@@ -971,12 +971,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public ClinicalImpression ClinicalImpressionResource	(CqlContext context, ClinicalImpression arg)
+	public ClinicalImpression ClinicalImpressionResource(CqlContext context, ClinicalImpression arg)
 	{
 		ClinicalImpression[] a_ = [
 			arg,
 		];
-		ClinicalImpression b_		(ClinicalImpression a)
+		ClinicalImpression b_(ClinicalImpression a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<ClinicalImpression.ClinicalImpressionStatus> f_ = a?.StatusElement;
@@ -1030,12 +1030,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public CodeSystem CodeSystemResource	(CqlContext context, CodeSystem arg)
+	public CodeSystem CodeSystemResource(CqlContext context, CodeSystem arg)
 	{
 		CodeSystem[] a_ = [
 			arg,
 		];
-		CodeSystem b_		(CodeSystem a)
+		CodeSystem b_(CodeSystem a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			List<Identifier> f_ = a?.Identifier;
@@ -1103,12 +1103,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Communication CommunicationResource	(CqlContext context, Communication arg)
+	public Communication CommunicationResource(CqlContext context, Communication arg)
 	{
 		Communication[] a_ = [
 			arg,
 		];
-		Communication b_		(Communication a)
+		Communication b_(Communication a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<Canonical> f_ = a?.InstantiatesCanonicalElement;
@@ -1168,12 +1168,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public CommunicationRequest CommunicationRequestResource	(CqlContext context, CommunicationRequest arg)
+	public CommunicationRequest CommunicationRequestResource(CqlContext context, CommunicationRequest arg)
 	{
 		CommunicationRequest[] a_ = [
 			arg,
 		];
-		CommunicationRequest b_		(CommunicationRequest a)
+		CommunicationRequest b_(CommunicationRequest a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<ResourceReference> f_ = a?.BasedOn;
@@ -1231,12 +1231,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Composition CompositionResource	(CqlContext context, Composition arg)
+	public Composition CompositionResource(CqlContext context, Composition arg)
 	{
 		Composition[] a_ = [
 			arg,
 		];
-		Composition b_		(Composition a)
+		Composition b_(Composition a)
 		{
 			Identifier e_ = a?.Identifier;
 			Code<CompositionStatus> f_ = a?.StatusElement;
@@ -1280,12 +1280,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public ConceptMap ConceptMapResource	(CqlContext context, ConceptMap arg)
+	public ConceptMap ConceptMapResource(CqlContext context, ConceptMap arg)
 	{
 		ConceptMap[] a_ = [
 			arg,
 		];
-		ConceptMap b_		(ConceptMap a)
+		ConceptMap b_(ConceptMap a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			Identifier f_ = a?.Identifier;
@@ -1335,12 +1335,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Condition ConditionResource	(CqlContext context, Condition arg)
+	public Condition ConditionResource(CqlContext context, Condition arg)
 	{
 		Condition[] a_ = [
 			arg,
 		];
-		Condition b_		(Condition a)
+		Condition b_(Condition a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			CodeableConcept f_ = a?.ClinicalStatus;
@@ -1388,12 +1388,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Consent ConsentResource	(CqlContext context, Consent arg)
+	public Consent ConsentResource(CqlContext context, Consent arg)
 	{
 		Consent[] a_ = [
 			arg,
 		];
-		Consent b_		(Consent a)
+		Consent b_(Consent a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<Consent.ConsentState> f_ = a?.StatusElement;
@@ -1433,12 +1433,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Contract ContractResource	(CqlContext context, Contract arg)
+	public Contract ContractResource(CqlContext context, Contract arg)
 	{
 		Contract[] a_ = [
 			arg,
 		];
-		Contract b_		(Contract a)
+		Contract b_(Contract a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			FhirUri f_ = a?.UrlElement;
@@ -1518,12 +1518,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Coverage CoverageResource	(CqlContext context, Coverage arg)
+	public Coverage CoverageResource(CqlContext context, Coverage arg)
 	{
 		Coverage[] a_ = [
 			arg,
 		];
-		Coverage b_		(Coverage a)
+		Coverage b_(Coverage a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
@@ -1573,12 +1573,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public CoverageEligibilityRequest CoverageEligibilityRequestResource	(CqlContext context, CoverageEligibilityRequest arg)
+	public CoverageEligibilityRequest CoverageEligibilityRequestResource(CqlContext context, CoverageEligibilityRequest arg)
 	{
 		CoverageEligibilityRequest[] a_ = [
 			arg,
 		];
-		CoverageEligibilityRequest b_		(CoverageEligibilityRequest a)
+		CoverageEligibilityRequest b_(CoverageEligibilityRequest a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
@@ -1620,12 +1620,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public CoverageEligibilityResponse CoverageEligibilityResponseResource	(CqlContext context, CoverageEligibilityResponse arg)
+	public CoverageEligibilityResponse CoverageEligibilityResponseResource(CqlContext context, CoverageEligibilityResponse arg)
 	{
 		CoverageEligibilityResponse[] a_ = [
 			arg,
 		];
-		CoverageEligibilityResponse b_		(CoverageEligibilityResponse a)
+		CoverageEligibilityResponse b_(CoverageEligibilityResponse a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
@@ -1669,12 +1669,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public DetectedIssue DetectedIssueResource	(CqlContext context, DetectedIssue arg)
+	public DetectedIssue DetectedIssueResource(CqlContext context, DetectedIssue arg)
 	{
 		DetectedIssue[] a_ = [
 			arg,
 		];
-		DetectedIssue b_		(DetectedIssue a)
+		DetectedIssue b_(DetectedIssue a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<ObservationStatus> f_ = a?.StatusElement;
@@ -1712,12 +1712,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Device DeviceResource	(CqlContext context, Device arg)
+	public Device DeviceResource(CqlContext context, Device arg)
 	{
 		Device[] a_ = [
 			arg,
 		];
-		Device b_		(Device a)
+		Device b_(Device a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			ResourceReference f_ = a?.Definition;
@@ -1783,12 +1783,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public DeviceDefinition DeviceDefinitionResource	(CqlContext context, DeviceDefinition arg)
+	public DeviceDefinition DeviceDefinitionResource(CqlContext context, DeviceDefinition arg)
 	{
 		DeviceDefinition[] a_ = [
 			arg,
 		];
-		DeviceDefinition b_		(DeviceDefinition a)
+		DeviceDefinition b_(DeviceDefinition a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<DeviceDefinition.UdiDeviceIdentifierComponent> f_ = a?.UdiDeviceIdentifier;
@@ -1846,12 +1846,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public DeviceMetric DeviceMetricResource	(CqlContext context, DeviceMetric arg)
+	public DeviceMetric DeviceMetricResource(CqlContext context, DeviceMetric arg)
 	{
 		DeviceMetric[] a_ = [
 			arg,
 		];
-		DeviceMetric b_		(DeviceMetric a)
+		DeviceMetric b_(DeviceMetric a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			CodeableConcept f_ = a?.Type;
@@ -1885,12 +1885,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public DeviceRequest DeviceRequestResource	(CqlContext context, DeviceRequest arg)
+	public DeviceRequest DeviceRequestResource(CqlContext context, DeviceRequest arg)
 	{
 		DeviceRequest[] a_ = [
 			arg,
 		];
-		DeviceRequest b_		(DeviceRequest a)
+		DeviceRequest b_(DeviceRequest a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<Canonical> f_ = a?.InstantiatesCanonicalElement;
@@ -1952,12 +1952,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public DeviceUseStatement DeviceUseStatementResource	(CqlContext context, DeviceUseStatement arg)
+	public DeviceUseStatement DeviceUseStatementResource(CqlContext context, DeviceUseStatement arg)
 	{
 		DeviceUseStatement[] a_ = [
 			arg,
 		];
-		DeviceUseStatement b_		(DeviceUseStatement a)
+		DeviceUseStatement b_(DeviceUseStatement a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<ResourceReference> f_ = a?.BasedOn;
@@ -1997,12 +1997,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public DiagnosticReport DiagnosticReportResource	(CqlContext context, DiagnosticReport arg)
+	public DiagnosticReport DiagnosticReportResource(CqlContext context, DiagnosticReport arg)
 	{
 		DiagnosticReport[] a_ = [
 			arg,
 		];
-		DiagnosticReport b_		(DiagnosticReport a)
+		DiagnosticReport b_(DiagnosticReport a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<ResourceReference> f_ = a?.BasedOn;
@@ -2052,12 +2052,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public DocumentManifest DocumentManifestResource	(CqlContext context, DocumentManifest arg)
+	public DocumentManifest DocumentManifestResource(CqlContext context, DocumentManifest arg)
 	{
 		DocumentManifest[] a_ = [
 			arg,
 		];
-		DocumentManifest b_		(DocumentManifest a)
+		DocumentManifest b_(DocumentManifest a)
 		{
 			Identifier e_ = a?.MasterIdentifier;
 			List<Identifier> f_ = a?.Identifier;
@@ -2095,12 +2095,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public DocumentReference DocumentReferenceResource	(CqlContext context, DocumentReference arg)
+	public DocumentReference DocumentReferenceResource(CqlContext context, DocumentReference arg)
 	{
 		DocumentReference[] a_ = [
 			arg,
 		];
-		DocumentReference b_		(DocumentReference a)
+		DocumentReference b_(DocumentReference a)
 		{
 			Identifier e_ = a?.MasterIdentifier;
 			List<Identifier> f_ = a?.Identifier;
@@ -2146,12 +2146,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public EffectEvidenceSynthesis EffectEvidenceSynthesisResource	(CqlContext context, EffectEvidenceSynthesis arg)
+	public EffectEvidenceSynthesis EffectEvidenceSynthesisResource(CqlContext context, EffectEvidenceSynthesis arg)
 	{
 		EffectEvidenceSynthesis[] a_ = [
 			arg,
 		];
-		EffectEvidenceSynthesis b_		(EffectEvidenceSynthesis a)
+		EffectEvidenceSynthesis b_(EffectEvidenceSynthesis a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			List<Identifier> f_ = a?.Identifier;
@@ -2231,12 +2231,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Encounter EncounterResource	(CqlContext context, Encounter arg)
+	public Encounter EncounterResource(CqlContext context, Encounter arg)
 	{
 		Encounter[] a_ = [
 			arg,
 		];
-		Encounter b_		(Encounter a)
+		Encounter b_(Encounter a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<Encounter.EncounterStatus> f_ = a?.StatusElement;
@@ -2296,12 +2296,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Endpoint EndpointResource	(CqlContext context, Endpoint arg)
+	public Endpoint EndpointResource(CqlContext context, Endpoint arg)
 	{
 		Endpoint[] a_ = [
 			arg,
 		];
-		Endpoint b_		(Endpoint a)
+		Endpoint b_(Endpoint a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<Endpoint.EndpointStatus> f_ = a?.StatusElement;
@@ -2337,12 +2337,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public EnrollmentRequest EnrollmentRequestResource	(CqlContext context, EnrollmentRequest arg)
+	public EnrollmentRequest EnrollmentRequestResource(CqlContext context, EnrollmentRequest arg)
 	{
 		EnrollmentRequest[] a_ = [
 			arg,
 		];
-		EnrollmentRequest b_		(EnrollmentRequest a)
+		EnrollmentRequest b_(EnrollmentRequest a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
@@ -2370,12 +2370,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public EnrollmentResponse EnrollmentResponseResource	(CqlContext context, EnrollmentResponse arg)
+	public EnrollmentResponse EnrollmentResponseResource(CqlContext context, EnrollmentResponse arg)
 	{
 		EnrollmentResponse[] a_ = [
 			arg,
 		];
-		EnrollmentResponse b_		(EnrollmentResponse a)
+		EnrollmentResponse b_(EnrollmentResponse a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
@@ -2405,12 +2405,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public EpisodeOfCare EpisodeOfCareResource	(CqlContext context, EpisodeOfCare arg)
+	public EpisodeOfCare EpisodeOfCareResource(CqlContext context, EpisodeOfCare arg)
 	{
 		EpisodeOfCare[] a_ = [
 			arg,
 		];
-		EpisodeOfCare b_		(EpisodeOfCare a)
+		EpisodeOfCare b_(EpisodeOfCare a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<EpisodeOfCare.EpisodeOfCareStatus> f_ = a?.StatusElement;
@@ -2448,12 +2448,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public EventDefinition EventDefinitionResource	(CqlContext context, EventDefinition arg)
+	public EventDefinition EventDefinitionResource(CqlContext context, EventDefinition arg)
 	{
 		EventDefinition[] a_ = [
 			arg,
 		];
-		EventDefinition b_		(EventDefinition a)
+		EventDefinition b_(EventDefinition a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			List<Identifier> f_ = a?.Identifier;
@@ -2523,12 +2523,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Evidence EvidenceResource	(CqlContext context, Evidence arg)
+	public Evidence EvidenceResource(CqlContext context, Evidence arg)
 	{
 		Evidence[] a_ = [
 			arg,
 		];
-		Evidence b_		(Evidence a)
+		Evidence b_(Evidence a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			List<Identifier> f_ = a?.Identifier;
@@ -2598,12 +2598,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public EvidenceVariable EvidenceVariableResource	(CqlContext context, EvidenceVariable arg)
+	public EvidenceVariable EvidenceVariableResource(CqlContext context, EvidenceVariable arg)
 	{
 		EvidenceVariable[] a_ = [
 			arg,
 		];
-		EvidenceVariable b_		(EvidenceVariable a)
+		EvidenceVariable b_(EvidenceVariable a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			List<Identifier> f_ = a?.Identifier;
@@ -2671,12 +2671,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public ExplanationOfBenefit ExplanationOfBenefitResource	(CqlContext context, ExplanationOfBenefit arg)
+	public ExplanationOfBenefit ExplanationOfBenefitResource(CqlContext context, ExplanationOfBenefit arg)
 	{
 		ExplanationOfBenefit[] a_ = [
 			arg,
 		];
-		ExplanationOfBenefit b_		(ExplanationOfBenefit a)
+		ExplanationOfBenefit b_(ExplanationOfBenefit a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<ExplanationOfBenefit.ExplanationOfBenefitStatus> f_ = a?.StatusElement;
@@ -2778,12 +2778,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public FamilyMemberHistory FamilyMemberHistoryResource	(CqlContext context, FamilyMemberHistory arg)
+	public FamilyMemberHistory FamilyMemberHistoryResource(CqlContext context, FamilyMemberHistory arg)
 	{
 		FamilyMemberHistory[] a_ = [
 			arg,
 		];
-		FamilyMemberHistory b_		(FamilyMemberHistory a)
+		FamilyMemberHistory b_(FamilyMemberHistory a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<Canonical> f_ = a?.InstantiatesCanonicalElement;
@@ -2833,12 +2833,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Flag FlagResource	(CqlContext context, Flag arg)
+	public Flag FlagResource(CqlContext context, Flag arg)
 	{
 		Flag[] a_ = [
 			arg,
 		];
-		Flag b_		(Flag a)
+		Flag b_(Flag a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<Flag.FlagStatus> f_ = a?.StatusElement;
@@ -2868,12 +2868,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Goal GoalResource	(CqlContext context, Goal arg)
+	public Goal GoalResource(CqlContext context, Goal arg)
 	{
 		Goal[] a_ = [
 			arg,
 		];
-		Goal b_		(Goal a)
+		Goal b_(Goal a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<Goal.GoalLifecycleStatus> f_ = a?.LifecycleStatusElement;
@@ -2919,12 +2919,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Group GroupResource	(CqlContext context, Group arg)
+	public Group GroupResource(CqlContext context, Group arg)
 	{
 		Group[] a_ = [
 			arg,
 		];
-		Group b_		(Group a)
+		Group b_(Group a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			FhirBoolean f_ = a?.ActiveElement;
@@ -2960,12 +2960,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public GuidanceResponse GuidanceResponseResource	(CqlContext context, GuidanceResponse arg)
+	public GuidanceResponse GuidanceResponseResource(CqlContext context, GuidanceResponse arg)
 	{
 		GuidanceResponse[] a_ = [
 			arg,
 		];
-		GuidanceResponse b_		(GuidanceResponse a)
+		GuidanceResponse b_(GuidanceResponse a)
 		{
 			Identifier e_ = a?.RequestIdentifier;
 			List<Identifier> f_ = a?.Identifier;
@@ -3009,12 +3009,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public HealthcareService HealthcareServiceResource	(CqlContext context, HealthcareService arg)
+	public HealthcareService HealthcareServiceResource(CqlContext context, HealthcareService arg)
 	{
 		HealthcareService[] a_ = [
 			arg,
 		];
-		HealthcareService b_		(HealthcareService a)
+		HealthcareService b_(HealthcareService a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			FhirBoolean f_ = a?.ActiveElement;
@@ -3076,12 +3076,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public ImagingStudy ImagingStudyResource	(CqlContext context, ImagingStudy arg)
+	public ImagingStudy ImagingStudyResource(CqlContext context, ImagingStudy arg)
 	{
 		ImagingStudy[] a_ = [
 			arg,
 		];
-		ImagingStudy b_		(ImagingStudy a)
+		ImagingStudy b_(ImagingStudy a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<ImagingStudy.ImagingStudyStatus> f_ = a?.StatusElement;
@@ -3139,12 +3139,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Immunization ImmunizationResource	(CqlContext context, Immunization arg)
+	public Immunization ImmunizationResource(CqlContext context, Immunization arg)
 	{
 		Immunization[] a_ = [
 			arg,
 		];
-		Immunization b_		(Immunization a)
+		Immunization b_(Immunization a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<Immunization.ImmunizationStatusCodes> f_ = a?.StatusElement;
@@ -3214,12 +3214,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public ImmunizationEvaluation ImmunizationEvaluationResource	(CqlContext context, ImmunizationEvaluation arg)
+	public ImmunizationEvaluation ImmunizationEvaluationResource(CqlContext context, ImmunizationEvaluation arg)
 	{
 		ImmunizationEvaluation[] a_ = [
 			arg,
 		];
-		ImmunizationEvaluation b_		(ImmunizationEvaluation a)
+		ImmunizationEvaluation b_(ImmunizationEvaluation a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<ImmunizationEvaluation.ImmunizationEvaluationStatusCodes> f_ = a?.StatusElement;
@@ -3259,12 +3259,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public ImmunizationRecommendation ImmunizationRecommendationResource	(CqlContext context, ImmunizationRecommendation arg)
+	public ImmunizationRecommendation ImmunizationRecommendationResource(CqlContext context, ImmunizationRecommendation arg)
 	{
 		ImmunizationRecommendation[] a_ = [
 			arg,
 		];
-		ImmunizationRecommendation b_		(ImmunizationRecommendation a)
+		ImmunizationRecommendation b_(ImmunizationRecommendation a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			ResourceReference f_ = a?.Patient;
@@ -3288,12 +3288,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public InsurancePlan InsurancePlanResource	(CqlContext context, InsurancePlan arg)
+	public InsurancePlan InsurancePlanResource(CqlContext context, InsurancePlan arg)
 	{
 		InsurancePlan[] a_ = [
 			arg,
 		];
-		InsurancePlan b_		(InsurancePlan a)
+		InsurancePlan b_(InsurancePlan a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<PublicationStatus> f_ = a?.StatusElement;
@@ -3335,12 +3335,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Invoice InvoiceResource	(CqlContext context, Invoice arg)
+	public Invoice InvoiceResource(CqlContext context, Invoice arg)
 	{
 		Invoice[] a_ = [
 			arg,
 		];
-		Invoice b_		(Invoice a)
+		Invoice b_(Invoice a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<Invoice.InvoiceStatus> f_ = a?.StatusElement;
@@ -3386,12 +3386,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Library LibraryResource	(CqlContext context, Library arg)
+	public Library LibraryResource(CqlContext context, Library arg)
 	{
 		Library[] a_ = [
 			arg,
 		];
-		Library b_		(Library a)
+		Library b_(Library a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			List<Identifier> f_ = a?.Identifier;
@@ -3467,12 +3467,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Linkage LinkageResource	(CqlContext context, Linkage arg)
+	public Linkage LinkageResource(CqlContext context, Linkage arg)
 	{
 		Linkage[] a_ = [
 			arg,
 		];
-		Linkage b_		(Linkage a)
+		Linkage b_(Linkage a)
 		{
 			FhirBoolean e_ = a?.ActiveElement;
 			ResourceReference f_ = a?.Author;
@@ -3492,12 +3492,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Location LocationResource	(CqlContext context, Location arg)
+	public Location LocationResource(CqlContext context, Location arg)
 	{
 		Location[] a_ = [
 			arg,
 		];
-		Location b_		(Location a)
+		Location b_(Location a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<Location.LocationStatus> f_ = a?.StatusElement;
@@ -3545,12 +3545,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Measure MeasureResource	(CqlContext context, Measure arg)
+	public Measure MeasureResource(CqlContext context, Measure arg)
 	{
 		Measure[] a_ = [
 			arg,
 		];
-		Measure b_		(Measure a)
+		Measure b_(Measure a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			List<Identifier> f_ = a?.Identifier;
@@ -3646,12 +3646,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public MeasureReport MeasureReportResource	(CqlContext context, MeasureReport arg)
+	public MeasureReport MeasureReportResource(CqlContext context, MeasureReport arg)
 	{
 		MeasureReport[] a_ = [
 			arg,
 		];
-		MeasureReport b_		(MeasureReport a)
+		MeasureReport b_(MeasureReport a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<MeasureReport.MeasureReportStatus> f_ = a?.StatusElement;
@@ -3687,12 +3687,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Medication MedicationResource	(CqlContext context, Medication arg)
+	public Medication MedicationResource(CqlContext context, Medication arg)
 	{
 		Medication[] a_ = [
 			arg,
 		];
-		Medication b_		(Medication a)
+		Medication b_(Medication a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			CodeableConcept f_ = a?.Code;
@@ -3722,12 +3722,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public MedicationAdministration MedicationAdministrationResource	(CqlContext context, MedicationAdministration arg)
+	public MedicationAdministration MedicationAdministrationResource(CqlContext context, MedicationAdministration arg)
 	{
 		MedicationAdministration[] a_ = [
 			arg,
 		];
-		MedicationAdministration b_		(MedicationAdministration a)
+		MedicationAdministration b_(MedicationAdministration a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<FhirUri> f_ = a?.InstantiatesElement;
@@ -3779,12 +3779,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public MedicationDispense MedicationDispenseResource	(CqlContext context, MedicationDispense arg)
+	public MedicationDispense MedicationDispenseResource(CqlContext context, MedicationDispense arg)
 	{
 		MedicationDispense[] a_ = [
 			arg,
 		];
-		MedicationDispense b_		(MedicationDispense a)
+		MedicationDispense b_(MedicationDispense a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<ResourceReference> f_ = a?.PartOf;
@@ -3846,12 +3846,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public MedicationKnowledge MedicationKnowledgeResource	(CqlContext context, MedicationKnowledge arg)
+	public MedicationKnowledge MedicationKnowledgeResource(CqlContext context, MedicationKnowledge arg)
 	{
 		MedicationKnowledge[] a_ = [
 			arg,
 		];
-		MedicationKnowledge b_		(MedicationKnowledge a)
+		MedicationKnowledge b_(MedicationKnowledge a)
 		{
 			CodeableConcept e_ = a?.Code;
 			Code<MedicationKnowledge.MedicationKnowledgeStatusCodes> f_ = a?.StatusElement;
@@ -3909,12 +3909,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public MedicationRequest MedicationRequestResource	(CqlContext context, MedicationRequest arg)
+	public MedicationRequest MedicationRequestResource(CqlContext context, MedicationRequest arg)
 	{
 		MedicationRequest[] a_ = [
 			arg,
 		];
-		MedicationRequest b_		(MedicationRequest a)
+		MedicationRequest b_(MedicationRequest a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<MedicationRequest.MedicationrequestStatus> f_ = a?.StatusElement;
@@ -3992,12 +3992,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public MedicationStatement MedicationStatementResource	(CqlContext context, MedicationStatement arg)
+	public MedicationStatement MedicationStatementResource(CqlContext context, MedicationStatement arg)
 	{
 		MedicationStatement[] a_ = [
 			arg,
 		];
-		MedicationStatement b_		(MedicationStatement a)
+		MedicationStatement b_(MedicationStatement a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<ResourceReference> f_ = a?.BasedOn;
@@ -4045,12 +4045,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public MedicinalProduct MedicinalProductResource	(CqlContext context, MedicinalProduct arg)
+	public MedicinalProduct MedicinalProductResource(CqlContext context, MedicinalProduct arg)
 	{
 		MedicinalProduct[] a_ = [
 			arg,
 		];
-		MedicinalProduct b_		(MedicinalProduct a)
+		MedicinalProduct b_(MedicinalProduct a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			CodeableConcept f_ = a?.Type;
@@ -4104,12 +4104,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public MedicinalProductAuthorization MedicinalProductAuthorizationResource	(CqlContext context, MedicinalProductAuthorization arg)
+	public MedicinalProductAuthorization MedicinalProductAuthorizationResource(CqlContext context, MedicinalProductAuthorization arg)
 	{
 		MedicinalProductAuthorization[] a_ = [
 			arg,
 		];
-		MedicinalProductAuthorization b_		(MedicinalProductAuthorization a)
+		MedicinalProductAuthorization b_(MedicinalProductAuthorization a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			ResourceReference f_ = a?.Subject;
@@ -4155,12 +4155,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public MedicinalProductContraindication MedicinalProductContraindicationResource	(CqlContext context, MedicinalProductContraindication arg)
+	public MedicinalProductContraindication MedicinalProductContraindicationResource(CqlContext context, MedicinalProductContraindication arg)
 	{
 		MedicinalProductContraindication[] a_ = [
 			arg,
 		];
-		MedicinalProductContraindication b_		(MedicinalProductContraindication a)
+		MedicinalProductContraindication b_(MedicinalProductContraindication a)
 		{
 			List<ResourceReference> e_ = a?.Subject;
 			CodeableConcept f_ = a?.Disease;
@@ -4188,12 +4188,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public MedicinalProductIngredient MedicinalProductIngredientResource	(CqlContext context, MedicinalProductIngredient arg)
+	public MedicinalProductIngredient MedicinalProductIngredientResource(CqlContext context, MedicinalProductIngredient arg)
 	{
 		MedicinalProductIngredient[] a_ = [
 			arg,
 		];
-		MedicinalProductIngredient b_		(MedicinalProductIngredient a)
+		MedicinalProductIngredient b_(MedicinalProductIngredient a)
 		{
 			Identifier e_ = a?.Identifier;
 			CodeableConcept f_ = a?.Role;
@@ -4219,12 +4219,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public MedicinalProductInteraction MedicinalProductInteractionResource	(CqlContext context, MedicinalProductInteraction arg)
+	public MedicinalProductInteraction MedicinalProductInteractionResource(CqlContext context, MedicinalProductInteraction arg)
 	{
 		MedicinalProductInteraction[] a_ = [
 			arg,
 		];
-		MedicinalProductInteraction b_		(MedicinalProductInteraction a)
+		MedicinalProductInteraction b_(MedicinalProductInteraction a)
 		{
 			List<ResourceReference> e_ = a?.Subject;
 			FhirString f_ = a?.DescriptionElement;
@@ -4252,12 +4252,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public MedicinalProductManufactured MedicinalProductManufacturedResource	(CqlContext context, MedicinalProductManufactured arg)
+	public MedicinalProductManufactured MedicinalProductManufacturedResource(CqlContext context, MedicinalProductManufactured arg)
 	{
 		MedicinalProductManufactured[] a_ = [
 			arg,
 		];
-		MedicinalProductManufactured b_		(MedicinalProductManufactured a)
+		MedicinalProductManufactured b_(MedicinalProductManufactured a)
 		{
 			CodeableConcept e_ = a?.ManufacturedDoseForm;
 			CodeableConcept f_ = a?.UnitOfPresentation;
@@ -4285,12 +4285,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public MedicinalProductPackaged MedicinalProductPackagedResource	(CqlContext context, MedicinalProductPackaged arg)
+	public MedicinalProductPackaged MedicinalProductPackagedResource(CqlContext context, MedicinalProductPackaged arg)
 	{
 		MedicinalProductPackaged[] a_ = [
 			arg,
 		];
-		MedicinalProductPackaged b_		(MedicinalProductPackaged a)
+		MedicinalProductPackaged b_(MedicinalProductPackaged a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<ResourceReference> f_ = a?.Subject;
@@ -4322,12 +4322,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public MedicinalProductPharmaceutical MedicinalProductPharmaceuticalResource	(CqlContext context, MedicinalProductPharmaceutical arg)
+	public MedicinalProductPharmaceutical MedicinalProductPharmaceuticalResource(CqlContext context, MedicinalProductPharmaceutical arg)
 	{
 		MedicinalProductPharmaceutical[] a_ = [
 			arg,
 		];
-		MedicinalProductPharmaceutical b_		(MedicinalProductPharmaceutical a)
+		MedicinalProductPharmaceutical b_(MedicinalProductPharmaceutical a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			CodeableConcept f_ = a?.AdministrableDoseForm;
@@ -4355,12 +4355,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public MedicinalProductUndesirableEffect MedicinalProductUndesirableEffectResource	(CqlContext context, MedicinalProductUndesirableEffect arg)
+	public MedicinalProductUndesirableEffect MedicinalProductUndesirableEffectResource(CqlContext context, MedicinalProductUndesirableEffect arg)
 	{
 		MedicinalProductUndesirableEffect[] a_ = [
 			arg,
 		];
-		MedicinalProductUndesirableEffect b_		(MedicinalProductUndesirableEffect a)
+		MedicinalProductUndesirableEffect b_(MedicinalProductUndesirableEffect a)
 		{
 			List<ResourceReference> e_ = a?.Subject;
 			CodeableConcept f_ = a?.SymptomConditionEffect;
@@ -4384,12 +4384,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public MessageHeader MessageHeaderResource	(CqlContext context, MessageHeader arg)
+	public MessageHeader MessageHeaderResource(CqlContext context, MessageHeader arg)
 	{
 		MessageHeader[] a_ = [
 			arg,
 		];
-		MessageHeader b_		(MessageHeader a)
+		MessageHeader b_(MessageHeader a)
 		{
 			DataType e_ = a?.Event;
 			List<MessageHeader.MessageDestinationComponent> f_ = a?.Destination;
@@ -4425,12 +4425,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public MolecularSequence MolecularSequenceResource	(CqlContext context, MolecularSequence arg)
+	public MolecularSequence MolecularSequenceResource(CqlContext context, MolecularSequence arg)
 	{
 		MolecularSequence[] a_ = [
 			arg,
 		];
-		MolecularSequence b_		(MolecularSequence a)
+		MolecularSequence b_(MolecularSequence a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<MolecularSequence.SequenceType> f_ = a?.TypeElement;
@@ -4476,12 +4476,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public NamingSystem NamingSystemResource	(CqlContext context, NamingSystem arg)
+	public NamingSystem NamingSystemResource(CqlContext context, NamingSystem arg)
 	{
 		NamingSystem[] a_ = [
 			arg,
 		];
-		NamingSystem b_		(NamingSystem a)
+		NamingSystem b_(NamingSystem a)
 		{
 			FhirString e_ = a?.NameElement;
 			Code<PublicationStatus> f_ = a?.StatusElement;
@@ -4521,12 +4521,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public NutritionOrder NutritionOrderResource	(CqlContext context, NutritionOrder arg)
+	public NutritionOrder NutritionOrderResource(CqlContext context, NutritionOrder arg)
 	{
 		NutritionOrder[] a_ = [
 			arg,
 		];
-		NutritionOrder b_		(NutritionOrder a)
+		NutritionOrder b_(NutritionOrder a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<Canonical> f_ = a?.InstantiatesCanonicalElement;
@@ -4574,12 +4574,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Observation ObservationResource	(CqlContext context, Observation arg)
+	public Observation ObservationResource(CqlContext context, Observation arg)
 	{
 		Observation[] a_ = [
 			arg,
 		];
-		Observation b_		(Observation a)
+		Observation b_(Observation a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<ResourceReference> f_ = a?.BasedOn;
@@ -4641,12 +4641,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public ObservationDefinition ObservationDefinitionResource	(CqlContext context, ObservationDefinition arg)
+	public ObservationDefinition ObservationDefinitionResource(CqlContext context, ObservationDefinition arg)
 	{
 		ObservationDefinition[] a_ = [
 			arg,
 		];
-		ObservationDefinition b_		(ObservationDefinition a)
+		ObservationDefinition b_(ObservationDefinition a)
 		{
 			List<CodeableConcept> e_ = a?.Category;
 			CodeableConcept f_ = a?.Code;
@@ -4686,12 +4686,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public OperationOutcome OperationOutcomeResource	(CqlContext context, OperationOutcome arg)
+	public OperationOutcome OperationOutcomeResource(CqlContext context, OperationOutcome arg)
 	{
 		OperationOutcome[] a_ = [
 			arg,
 		];
-		OperationOutcome b_		(OperationOutcome a)
+		OperationOutcome b_(OperationOutcome a)
 		{
 			List<OperationOutcome.IssueComponent> e_ = a?.Issue;
 			OperationOutcome f_ = new OperationOutcome
@@ -4707,12 +4707,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Organization OrganizationResource	(CqlContext context, Organization arg)
+	public Organization OrganizationResource(CqlContext context, Organization arg)
 	{
 		Organization[] a_ = [
 			arg,
 		];
-		Organization b_		(Organization a)
+		Organization b_(Organization a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			FhirBoolean f_ = a?.ActiveElement;
@@ -4746,12 +4746,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public OrganizationAffiliation OrganizationAffiliationResource	(CqlContext context, OrganizationAffiliation arg)
+	public OrganizationAffiliation OrganizationAffiliationResource(CqlContext context, OrganizationAffiliation arg)
 	{
 		OrganizationAffiliation[] a_ = [
 			arg,
 		];
-		OrganizationAffiliation b_		(OrganizationAffiliation a)
+		OrganizationAffiliation b_(OrganizationAffiliation a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			FhirBoolean f_ = a?.ActiveElement;
@@ -4789,12 +4789,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Patient PatientResource	(CqlContext context, Patient arg)
+	public Patient PatientResource(CqlContext context, Patient arg)
 	{
 		Patient[] a_ = [
 			arg,
 		];
-		Patient b_		(Patient a)
+		Patient b_(Patient a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			FhirBoolean f_ = a?.ActiveElement;
@@ -4840,12 +4840,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public PaymentNotice PaymentNoticeResource	(CqlContext context, PaymentNotice arg)
+	public PaymentNotice PaymentNoticeResource(CqlContext context, PaymentNotice arg)
 	{
 		PaymentNotice[] a_ = [
 			arg,
 		];
-		PaymentNotice b_		(PaymentNotice a)
+		PaymentNotice b_(PaymentNotice a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
@@ -4883,12 +4883,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public PaymentReconciliation PaymentReconciliationResource	(CqlContext context, PaymentReconciliation arg)
+	public PaymentReconciliation PaymentReconciliationResource(CqlContext context, PaymentReconciliation arg)
 	{
 		PaymentReconciliation[] a_ = [
 			arg,
 		];
-		PaymentReconciliation b_		(PaymentReconciliation a)
+		PaymentReconciliation b_(PaymentReconciliation a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
@@ -4932,12 +4932,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Person PersonResource	(CqlContext context, Person arg)
+	public Person PersonResource(CqlContext context, Person arg)
 	{
 		Person[] a_ = [
 			arg,
 		];
-		Person b_		(Person a)
+		Person b_(Person a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<HumanName> f_ = a?.Name;
@@ -4971,12 +4971,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public PlanDefinition PlanDefinitionResource	(CqlContext context, PlanDefinition arg)
+	public PlanDefinition PlanDefinitionResource(CqlContext context, PlanDefinition arg)
 	{
 		PlanDefinition[] a_ = [
 			arg,
 		];
-		PlanDefinition b_		(PlanDefinition a)
+		PlanDefinition b_(PlanDefinition a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			List<Identifier> f_ = a?.Identifier;
@@ -5052,12 +5052,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Practitioner PractitionerResource	(CqlContext context, Practitioner arg)
+	public Practitioner PractitionerResource(CqlContext context, Practitioner arg)
 	{
 		Practitioner[] a_ = [
 			arg,
 		];
-		Practitioner b_		(Practitioner a)
+		Practitioner b_(Practitioner a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			FhirBoolean f_ = a?.ActiveElement;
@@ -5091,12 +5091,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public PractitionerRole PractitionerRoleResource	(CqlContext context, PractitionerRole arg)
+	public PractitionerRole PractitionerRoleResource(CqlContext context, PractitionerRole arg)
 	{
 		PractitionerRole[] a_ = [
 			arg,
 		];
-		PractitionerRole b_		(PractitionerRole a)
+		PractitionerRole b_(PractitionerRole a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			FhirBoolean f_ = a?.ActiveElement;
@@ -5138,12 +5138,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Procedure ProcedureResource	(CqlContext context, Procedure arg)
+	public Procedure ProcedureResource(CqlContext context, Procedure arg)
 	{
 		Procedure[] a_ = [
 			arg,
 		];
-		Procedure b_		(Procedure a)
+		Procedure b_(Procedure a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<Canonical> f_ = a?.InstantiatesCanonicalElement;
@@ -5213,12 +5213,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Provenance ProvenanceResource	(CqlContext context, Provenance arg)
+	public Provenance ProvenanceResource(CqlContext context, Provenance arg)
 	{
 		Provenance[] a_ = [
 			arg,
 		];
-		Provenance b_		(Provenance a)
+		Provenance b_(Provenance a)
 		{
 			List<ResourceReference> e_ = a?.Target;
 			DataType f_ = a?.Occurred;
@@ -5252,12 +5252,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public QuestionnaireResponse QuestionnaireResponseResource	(CqlContext context, QuestionnaireResponse arg)
+	public QuestionnaireResponse QuestionnaireResponseResource(CqlContext context, QuestionnaireResponse arg)
 	{
 		QuestionnaireResponse[] a_ = [
 			arg,
 		];
-		QuestionnaireResponse b_		(QuestionnaireResponse a)
+		QuestionnaireResponse b_(QuestionnaireResponse a)
 		{
 			Identifier e_ = a?.Identifier;
 			List<ResourceReference> f_ = a?.BasedOn;
@@ -5293,12 +5293,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public RelatedPerson RelatedPersonResource	(CqlContext context, RelatedPerson arg)
+	public RelatedPerson RelatedPersonResource(CqlContext context, RelatedPerson arg)
 	{
 		RelatedPerson[] a_ = [
 			arg,
 		];
-		RelatedPerson b_		(RelatedPerson a)
+		RelatedPerson b_(RelatedPerson a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			FhirBoolean f_ = a?.ActiveElement;
@@ -5336,12 +5336,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public RequestGroup RequestGroupResource	(CqlContext context, RequestGroup arg)
+	public RequestGroup RequestGroupResource(CqlContext context, RequestGroup arg)
 	{
 		RequestGroup[] a_ = [
 			arg,
 		];
-		RequestGroup b_		(RequestGroup a)
+		RequestGroup b_(RequestGroup a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<Canonical> f_ = a?.InstantiatesCanonicalElement;
@@ -5391,12 +5391,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public ResearchDefinition ResearchDefinitionResource	(CqlContext context, ResearchDefinition arg)
+	public ResearchDefinition ResearchDefinitionResource(CqlContext context, ResearchDefinition arg)
 	{
 		ResearchDefinition[] a_ = [
 			arg,
 		];
-		ResearchDefinition b_		(ResearchDefinition a)
+		ResearchDefinition b_(ResearchDefinition a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			List<Identifier> f_ = a?.Identifier;
@@ -5478,12 +5478,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public ResearchElementDefinition ResearchElementDefinitionResource	(CqlContext context, ResearchElementDefinition arg)
+	public ResearchElementDefinition ResearchElementDefinitionResource(CqlContext context, ResearchElementDefinition arg)
 	{
 		ResearchElementDefinition[] a_ = [
 			arg,
 		];
-		ResearchElementDefinition b_		(ResearchElementDefinition a)
+		ResearchElementDefinition b_(ResearchElementDefinition a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			List<Identifier> f_ = a?.Identifier;
@@ -5563,12 +5563,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public ResearchStudy ResearchStudyResource	(CqlContext context, ResearchStudy arg)
+	public ResearchStudy ResearchStudyResource(CqlContext context, ResearchStudy arg)
 	{
 		ResearchStudy[] a_ = [
 			arg,
 		];
-		ResearchStudy b_		(ResearchStudy a)
+		ResearchStudy b_(ResearchStudy a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			FhirString f_ = a?.TitleElement;
@@ -5630,12 +5630,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public ResearchSubject ResearchSubjectResource	(CqlContext context, ResearchSubject arg)
+	public ResearchSubject ResearchSubjectResource(CqlContext context, ResearchSubject arg)
 	{
 		ResearchSubject[] a_ = [
 			arg,
 		];
-		ResearchSubject b_		(ResearchSubject a)
+		ResearchSubject b_(ResearchSubject a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<ResearchSubject.ResearchSubjectStatus> f_ = a?.StatusElement;
@@ -5665,12 +5665,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public RiskAssessment RiskAssessmentResource	(CqlContext context, RiskAssessment arg)
+	public RiskAssessment RiskAssessmentResource(CqlContext context, RiskAssessment arg)
 	{
 		RiskAssessment[] a_ = [
 			arg,
 		];
-		RiskAssessment b_		(RiskAssessment a)
+		RiskAssessment b_(RiskAssessment a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			ResourceReference f_ = a?.BasedOn;
@@ -5718,12 +5718,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public RiskEvidenceSynthesis RiskEvidenceSynthesisResource	(CqlContext context, RiskEvidenceSynthesis arg)
+	public RiskEvidenceSynthesis RiskEvidenceSynthesisResource(CqlContext context, RiskEvidenceSynthesis arg)
 	{
 		RiskEvidenceSynthesis[] a_ = [
 			arg,
 		];
-		RiskEvidenceSynthesis b_		(RiskEvidenceSynthesis a)
+		RiskEvidenceSynthesis b_(RiskEvidenceSynthesis a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			List<Identifier> f_ = a?.Identifier;
@@ -5799,12 +5799,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Schedule ScheduleResource	(CqlContext context, Schedule arg)
+	public Schedule ScheduleResource(CqlContext context, Schedule arg)
 	{
 		Schedule[] a_ = [
 			arg,
 		];
-		Schedule b_		(Schedule a)
+		Schedule b_(Schedule a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			FhirBoolean f_ = a?.ActiveElement;
@@ -5834,12 +5834,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public ServiceRequest ServiceRequestResource	(CqlContext context, ServiceRequest arg)
+	public ServiceRequest ServiceRequestResource(CqlContext context, ServiceRequest arg)
 	{
 		ServiceRequest[] a_ = [
 			arg,
 		];
-		ServiceRequest b_		(ServiceRequest a)
+		ServiceRequest b_(ServiceRequest a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<Canonical> f_ = a?.InstantiatesCanonicalElement;
@@ -5919,12 +5919,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Slot SlotResource	(CqlContext context, Slot arg)
+	public Slot SlotResource(CqlContext context, Slot arg)
 	{
 		Slot[] a_ = [
 			arg,
 		];
-		Slot b_		(Slot a)
+		Slot b_(Slot a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<CodeableConcept> f_ = a?.ServiceCategory;
@@ -5960,12 +5960,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Specimen SpecimenResource	(CqlContext context, Specimen arg)
+	public Specimen SpecimenResource(CqlContext context, Specimen arg)
 	{
 		Specimen[] a_ = [
 			arg,
 		];
-		Specimen b_		(Specimen a)
+		Specimen b_(Specimen a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Identifier f_ = a?.AccessionIdentifier;
@@ -6005,12 +6005,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public SpecimenDefinition SpecimenDefinitionResource	(CqlContext context, SpecimenDefinition arg)
+	public SpecimenDefinition SpecimenDefinitionResource(CqlContext context, SpecimenDefinition arg)
 	{
 		SpecimenDefinition[] a_ = [
 			arg,
 		];
-		SpecimenDefinition b_		(SpecimenDefinition a)
+		SpecimenDefinition b_(SpecimenDefinition a)
 		{
 			Identifier e_ = a?.Identifier;
 			CodeableConcept f_ = a?.TypeCollected;
@@ -6036,12 +6036,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public StructureDefinition StructureDefinitionResource	(CqlContext context, StructureDefinition arg)
+	public StructureDefinition StructureDefinitionResource(CqlContext context, StructureDefinition arg)
 	{
 		StructureDefinition[] a_ = [
 			arg,
 		];
-		StructureDefinition b_		(StructureDefinition a)
+		StructureDefinition b_(StructureDefinition a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			List<Identifier> f_ = a?.Identifier;
@@ -6109,12 +6109,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public StructureMap StructureMapResource	(CqlContext context, StructureMap arg)
+	public StructureMap StructureMapResource(CqlContext context, StructureMap arg)
 	{
 		StructureMap[] a_ = [
 			arg,
 		];
-		StructureMap b_		(StructureMap a)
+		StructureMap b_(StructureMap a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			List<Identifier> f_ = a?.Identifier;
@@ -6164,12 +6164,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Subscription SubscriptionResource	(CqlContext context, Subscription arg)
+	public Subscription SubscriptionResource(CqlContext context, Subscription arg)
 	{
 		Subscription[] a_ = [
 			arg,
 		];
-		Subscription b_		(Subscription a)
+		Subscription b_(Subscription a)
 		{
 			Code<Subscription.SubscriptionStatus> e_ = a?.StatusElement;
 			List<ContactPoint> f_ = a?.Contact;
@@ -6197,12 +6197,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Substance SubstanceResource	(CqlContext context, Substance arg)
+	public Substance SubstanceResource(CqlContext context, Substance arg)
 	{
 		Substance[] a_ = [
 			arg,
 		];
-		Substance b_		(Substance a)
+		Substance b_(Substance a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<Substance.FHIRSubstanceStatus> f_ = a?.StatusElement;
@@ -6230,12 +6230,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public SubstanceNucleicAcid SubstanceNucleicAcidResource	(CqlContext context, SubstanceNucleicAcid arg)
+	public SubstanceNucleicAcid SubstanceNucleicAcidResource(CqlContext context, SubstanceNucleicAcid arg)
 	{
 		SubstanceNucleicAcid[] a_ = [
 			arg,
 		];
-		SubstanceNucleicAcid b_		(SubstanceNucleicAcid a)
+		SubstanceNucleicAcid b_(SubstanceNucleicAcid a)
 		{
 			CodeableConcept e_ = a?.SequenceType;
 			Integer f_ = a?.NumberOfSubunitsElement;
@@ -6259,12 +6259,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public SubstancePolymer SubstancePolymerResource	(CqlContext context, SubstancePolymer arg)
+	public SubstancePolymer SubstancePolymerResource(CqlContext context, SubstancePolymer arg)
 	{
 		SubstancePolymer[] a_ = [
 			arg,
 		];
-		SubstancePolymer b_		(SubstancePolymer a)
+		SubstancePolymer b_(SubstancePolymer a)
 		{
 			CodeableConcept e_ = a?.Class;
 			CodeableConcept f_ = a?.Geometry;
@@ -6290,12 +6290,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public SubstanceProtein SubstanceProteinResource	(CqlContext context, SubstanceProtein arg)
+	public SubstanceProtein SubstanceProteinResource(CqlContext context, SubstanceProtein arg)
 	{
 		SubstanceProtein[] a_ = [
 			arg,
 		];
-		SubstanceProtein b_		(SubstanceProtein a)
+		SubstanceProtein b_(SubstanceProtein a)
 		{
 			CodeableConcept e_ = a?.SequenceType;
 			Integer f_ = a?.NumberOfSubunitsElement;
@@ -6317,12 +6317,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public SubstanceReferenceInformation SubstanceReferenceInformationResource	(CqlContext context, SubstanceReferenceInformation arg)
+	public SubstanceReferenceInformation SubstanceReferenceInformationResource(CqlContext context, SubstanceReferenceInformation arg)
 	{
 		SubstanceReferenceInformation[] a_ = [
 			arg,
 		];
-		SubstanceReferenceInformation b_		(SubstanceReferenceInformation a)
+		SubstanceReferenceInformation b_(SubstanceReferenceInformation a)
 		{
 			FhirString e_ = a?.CommentElement;
 			List<SubstanceReferenceInformation.GeneComponent> f_ = a?.Gene;
@@ -6346,12 +6346,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public SubstanceSourceMaterial SubstanceSourceMaterialResource	(CqlContext context, SubstanceSourceMaterial arg)
+	public SubstanceSourceMaterial SubstanceSourceMaterialResource(CqlContext context, SubstanceSourceMaterial arg)
 	{
 		SubstanceSourceMaterial[] a_ = [
 			arg,
 		];
-		SubstanceSourceMaterial b_		(SubstanceSourceMaterial a)
+		SubstanceSourceMaterial b_(SubstanceSourceMaterial a)
 		{
 			CodeableConcept e_ = a?.SourceMaterialClass;
 			CodeableConcept f_ = a?.SourceMaterialType;
@@ -6391,12 +6391,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public SubstanceSpecification SubstanceSpecificationResource	(CqlContext context, SubstanceSpecification arg)
+	public SubstanceSpecification SubstanceSpecificationResource(CqlContext context, SubstanceSpecification arg)
 	{
 		SubstanceSpecification[] a_ = [
 			arg,
 		];
-		SubstanceSpecification b_		(SubstanceSpecification a)
+		SubstanceSpecification b_(SubstanceSpecification a)
 		{
 			Identifier e_ = a?.Identifier;
 			CodeableConcept f_ = a?.Type;
@@ -6448,12 +6448,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public SupplyDelivery SupplyDeliveryResource	(CqlContext context, SupplyDelivery arg)
+	public SupplyDelivery SupplyDeliveryResource(CqlContext context, SupplyDelivery arg)
 	{
 		SupplyDelivery[] a_ = [
 			arg,
 		];
-		SupplyDelivery b_		(SupplyDelivery a)
+		SupplyDelivery b_(SupplyDelivery a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			List<ResourceReference> f_ = a?.BasedOn;
@@ -6489,12 +6489,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public SupplyRequest SupplyRequestResource	(CqlContext context, SupplyRequest arg)
+	public SupplyRequest SupplyRequestResource(CqlContext context, SupplyRequest arg)
 	{
 		SupplyRequest[] a_ = [
 			arg,
 		];
-		SupplyRequest b_		(SupplyRequest a)
+		SupplyRequest b_(SupplyRequest a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<SupplyRequest.SupplyRequestStatus> f_ = a?.StatusElement;
@@ -6538,12 +6538,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public Task TaskResource	(CqlContext context, Task arg)
+	public Task TaskResource(CqlContext context, Task arg)
 	{
 		Task[] a_ = [
 			arg,
 		];
-		Task b_		(Task a)
+		Task b_(Task a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Canonical f_ = a?.InstantiatesCanonicalElement;
@@ -6619,12 +6619,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public TerminologyCapabilities TerminologyCapabilitiesResource	(CqlContext context, TerminologyCapabilities arg)
+	public TerminologyCapabilities TerminologyCapabilitiesResource(CqlContext context, TerminologyCapabilities arg)
 	{
 		TerminologyCapabilities[] a_ = [
 			arg,
 		];
-		TerminologyCapabilities b_		(TerminologyCapabilities a)
+		TerminologyCapabilities b_(TerminologyCapabilities a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			FhirString f_ = a?.VersionElement;
@@ -6686,12 +6686,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public TestReport TestReportResource	(CqlContext context, TestReport arg)
+	public TestReport TestReportResource(CqlContext context, TestReport arg)
 	{
 		TestReport[] a_ = [
 			arg,
 		];
-		TestReport b_		(TestReport a)
+		TestReport b_(TestReport a)
 		{
 			Identifier e_ = a?.Identifier;
 			FhirString f_ = a?.NameElement;
@@ -6729,12 +6729,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public TestScript TestScriptResource	(CqlContext context, TestScript arg)
+	public TestScript TestScriptResource(CqlContext context, TestScript arg)
 	{
 		TestScript[] a_ = [
 			arg,
 		];
-		TestScript b_		(TestScript a)
+		TestScript b_(TestScript a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			Identifier f_ = a?.Identifier;
@@ -6796,12 +6796,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public ValueSet ValueSetResource	(CqlContext context, ValueSet arg)
+	public ValueSet ValueSetResource(CqlContext context, ValueSet arg)
 	{
 		ValueSet[] a_ = [
 			arg,
 		];
-		ValueSet b_		(ValueSet a)
+		ValueSet b_(ValueSet a)
 		{
 			FhirUri e_ = a?.UrlElement;
 			List<Identifier> f_ = a?.Identifier;
@@ -6851,12 +6851,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public VerificationResult VerificationResultResource	(CqlContext context, VerificationResult arg)
+	public VerificationResult VerificationResultResource(CqlContext context, VerificationResult arg)
 	{
 		VerificationResult[] a_ = [
 			arg,
 		];
-		VerificationResult b_		(VerificationResult a)
+		VerificationResult b_(VerificationResult a)
 		{
 			List<ResourceReference> e_ = a?.Target;
 			List<FhirString> f_ = a?.TargetLocationElement;
@@ -6898,12 +6898,12 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 		return d_;
 	}
 
-	public VisionPrescription VisionPrescriptionResource	(CqlContext context, VisionPrescription arg)
+	public VisionPrescription VisionPrescriptionResource(CqlContext context, VisionPrescription arg)
 	{
 		VisionPrescription[] a_ = [
 			arg,
 		];
-		VisionPrescription b_		(VisionPrescription a)
+		VisionPrescription b_(VisionPrescription a)
 		{
 			List<Identifier> e_ = a?.Identifier;
 			Code<FinancialResourceStatusCodes> f_ = a?.StatusElement;
