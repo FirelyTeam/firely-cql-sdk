@@ -207,11 +207,9 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             // Namespace
             if (!string.IsNullOrWhiteSpace(Namespace))
-            {
                 libraryContext.Writer.WriteLine($"namespace {Namespace};");
-                libraryContext.Writer.WriteLine();
-            }
 
+            libraryContext.Writer.WriteLine();
             WriteClass(libraryContext);
         }
 
@@ -220,8 +218,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             var libraryName = libraryContext.LibraryName;
             var writer = libraryContext.Writer;
-            var indentLevel = libraryContext.Indent;
-            writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode({_tool.QuoteString()}, {_version.QuoteString()})]");
+            writer.WriteLine(libraryContext.Indent, $"[System.CodeDom.Compiler.GeneratedCode({_tool.QuoteString()}, {_version.QuoteString()})]");
 
             var libraryAttribute = libraryName;
             var versionAttribute = string.Empty;
@@ -235,22 +232,22 @@ namespace Hl7.Cql.CodeGeneration.NET
                 }
             }
 
-            writer.WriteLine(indentLevel, $"[CqlLibrary({libraryAttribute.QuoteString()}, {versionAttribute.QuoteString()})]");
+            writer.WriteLine(libraryContext.Indent, $"[CqlLibrary({libraryAttribute.QuoteString()}, {versionAttribute.QuoteString()})]");
             var className = VariableNameGenerator.NormalizeIdentifier(libraryName);
-            writer.WriteLine(indentLevel, $"public partial class {className} : ILibrary, ISingleton<{className}>");
-            writer.WriteLine(indentLevel, "{");
+            writer.WriteLine(libraryContext.Indent, $"public partial class {className} : ILibrary, ISingleton<{className}>");
+            writer.WriteLine(libraryContext.Indent, "{");
             // Class
             {
-                var newLibraryContext = libraryContext with { Indent = indentLevel + 1 };
-                writer.WriteLine(indentLevel, $"private {className}() {{}}");
+                var newLibraryContext = libraryContext with { Indent = libraryContext.Indent + 1 };
+                writer.WriteLine(newLibraryContext.Indent, $"private {className}() {{}}");
                 writer.WriteLine();
-                writer.WriteLine(indentLevel, $"public static {className} Instance {{ get; }} = new();");
+                writer.WriteLine(newLibraryContext.Indent, $"public static {className} Instance {{ get; }} = new();");
                 writer.WriteLine();
                 WriteLibraryMembers(newLibraryContext);
                 WriteMethods(newLibraryContext);
                 WriteCqlTupleMetadataProperties(newLibraryContext);
             }
-            writer.WriteLine(indentLevel, "}");
+            writer.WriteLine(libraryContext.Indent, "}");
         }
 
         private void WriteCqlTupleMetadataProperties(

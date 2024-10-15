@@ -11,13 +11,14 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("RR23", "1.0.0")]
 public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 {
-private RR23_1_0_0() {}
+    private RR23_1_0_0() {}
 
-public static RR23_1_0_0 Instance { get; } = new();
+    public static RR23_1_0_0 Instance { get; } = new();
 
     #region Library Members
     public string Name => "RR23";

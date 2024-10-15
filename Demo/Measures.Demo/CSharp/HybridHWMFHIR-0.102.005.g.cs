@@ -11,13 +11,14 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("HybridHWMFHIR", "0.102.005")]
 public partial class HybridHWMFHIR_0_102_005 : ILibrary, ISingleton<HybridHWMFHIR_0_102_005>
 {
-private HybridHWMFHIR_0_102_005() {}
+    private HybridHWMFHIR_0_102_005() {}
 
-public static HybridHWMFHIR_0_102_005 Instance { get; } = new();
+    public static HybridHWMFHIR_0_102_005 Instance { get; } = new();
 
     #region Library Members
     public string Name => "HybridHWMFHIR";

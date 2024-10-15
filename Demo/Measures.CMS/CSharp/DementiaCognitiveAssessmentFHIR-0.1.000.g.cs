@@ -11,13 +11,14 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("DementiaCognitiveAssessmentFHIR", "0.1.000")]
 public partial class DementiaCognitiveAssessmentFHIR_0_1_000 : ILibrary, ISingleton<DementiaCognitiveAssessmentFHIR_0_1_000>
 {
-private DementiaCognitiveAssessmentFHIR_0_1_000() {}
+    private DementiaCognitiveAssessmentFHIR_0_1_000() {}
 
-public static DementiaCognitiveAssessmentFHIR_0_1_000 Instance { get; } = new();
+    public static DementiaCognitiveAssessmentFHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "DementiaCognitiveAssessmentFHIR";

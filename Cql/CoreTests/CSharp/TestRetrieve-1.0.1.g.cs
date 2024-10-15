@@ -11,13 +11,14 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("TestRetrieve", "1.0.1")]
 public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_1>
 {
-private TestRetrieve_1_0_1() {}
+    private TestRetrieve_1_0_1() {}
 
-public static TestRetrieve_1_0_1 Instance { get; } = new();
+    public static TestRetrieve_1_0_1 Instance { get; } = new();
 
     #region Library Members
     public string Name => "TestRetrieve";

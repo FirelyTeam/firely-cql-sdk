@@ -11,13 +11,14 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("NCQATerminology", "1.0.0")]
 public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminology_1_0_0>
 {
-private NCQATerminology_1_0_0() {}
+    private NCQATerminology_1_0_0() {}
 
-public static NCQATerminology_1_0_0 Instance { get; } = new();
+    public static NCQATerminology_1_0_0 Instance { get; } = new();
 
     #region Library Members
     public string Name => "NCQATerminology";

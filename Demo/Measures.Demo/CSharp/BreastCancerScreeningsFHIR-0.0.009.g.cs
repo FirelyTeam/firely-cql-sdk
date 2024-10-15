@@ -11,13 +11,14 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("BreastCancerScreeningsFHIR", "0.0.009")]
 public partial class BreastCancerScreeningsFHIR_0_0_009 : ILibrary, ISingleton<BreastCancerScreeningsFHIR_0_0_009>
 {
-private BreastCancerScreeningsFHIR_0_0_009() {}
+    private BreastCancerScreeningsFHIR_0_0_009() {}
 
-public static BreastCancerScreeningsFHIR_0_0_009 Instance { get; } = new();
+    public static BreastCancerScreeningsFHIR_0_0_009 Instance { get; } = new();
 
     #region Library Members
     public string Name => "BreastCancerScreeningsFHIR";

@@ -11,13 +11,14 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("Antibiotic", "1.5.000")]
 public partial class Antibiotic_1_5_000 : ILibrary, ISingleton<Antibiotic_1_5_000>
 {
-private Antibiotic_1_5_000() {}
+    private Antibiotic_1_5_000() {}
 
-public static Antibiotic_1_5_000 Instance { get; } = new();
+    public static Antibiotic_1_5_000 Instance { get; } = new();
 
     #region Library Members
     public string Name => "Antibiotic";

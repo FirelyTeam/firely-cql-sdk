@@ -11,13 +11,14 @@ using Hl7.Cql.Operators;
 using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.5.0")]
 [CqlLibrary("DiabetesEyeExamFHIR", "0.0.001")]
 public partial class DiabetesEyeExamFHIR_0_0_001 : ILibrary, ISingleton<DiabetesEyeExamFHIR_0_0_001>
 {
-private DiabetesEyeExamFHIR_0_0_001() {}
+    private DiabetesEyeExamFHIR_0_0_001() {}
 
-public static DiabetesEyeExamFHIR_0_0_001 Instance { get; } = new();
+    public static DiabetesEyeExamFHIR_0_0_001 Instance { get; } = new();
 
     #region Library Members
     public string Name => "DiabetesEyeExamFHIR";
