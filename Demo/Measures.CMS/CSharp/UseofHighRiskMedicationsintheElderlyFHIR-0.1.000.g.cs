@@ -1072,7 +1072,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000 : ILibrary
             }
             else
             {
-                return default;
+                return null;
             }
         };
 
@@ -1125,7 +1125,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_1_000 : ILibrary
                 }
                 else
                 {
-                    return default;
+                    return null;
                 }
             };
 

@@ -362,7 +362,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
             }
             else
             {
-                return default;
+                return null;
             }
         };
 

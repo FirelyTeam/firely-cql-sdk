@@ -1119,7 +1119,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             }
             else
             {
-                return null as CqlInterval<CqlDateTime>;
+                return null;
             }
         };
 
@@ -1258,7 +1258,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             }
             else
             {
-                return null as CqlInterval<CqlDateTime>;
+                return null;
             }
         };
 
@@ -1457,7 +1457,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             }
             else
             {
-                return null as CqlInterval<CqlDateTime>;
+                return null;
             }
         };
 
@@ -1656,7 +1656,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
             }
             else
             {
-                return null as CqlInterval<CqlDateTime>;
+                return null;
             }
         };
 

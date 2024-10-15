@@ -1144,7 +1144,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_
             }
             else
             {
-                return null as CqlInterval<CqlDateTime>;
+                return null;
             }
         };
 

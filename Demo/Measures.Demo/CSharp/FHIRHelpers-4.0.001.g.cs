@@ -41,7 +41,7 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
         {
             if (period is null)
             {
-                return null as CqlInterval<CqlDateTime>;
+                return null;
             }
             else
             {
@@ -64,7 +64,7 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
         {
             if (range is null)
             {
-                return null as CqlInterval<CqlQuantity>;
+                return null;
             }
             else
             {
@@ -87,7 +87,7 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
         {
             if (quantity is null)
             {
-                return default;
+                return null;
             }
             else
             {
@@ -109,7 +109,7 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
         {
             if (ratio is null)
             {
-                return default;
+                return null;
             }
             else
             {
@@ -131,7 +131,7 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
         {
             if (coding is null)
             {
-                return default;
+                return null;
             }
             else
             {
@@ -157,7 +157,7 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
         {
             if (concept is null)
             {
-                return default;
+                return null;
             }
             else
             {

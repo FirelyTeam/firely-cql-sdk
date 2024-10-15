@@ -620,7 +620,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             };
             if (r_())
             {
-                return null as CqlInterval<CqlDate>;
+                return null;
             }
             else
             {
@@ -1116,7 +1116,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             };
             if (t_())
             {
-                return null as CqlInterval<CqlDateTime>;
+                return null;
             }
             else
             {

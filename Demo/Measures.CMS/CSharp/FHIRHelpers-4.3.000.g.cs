@@ -31,7 +31,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
         {
             if (period is null)
             {
-                return null as CqlInterval<CqlDateTime>;
+                return null;
             }
             else if (period?.StartElement is null)
             {
@@ -64,7 +64,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
         {
             if (quantity is null)
             {
-                return null as CqlInterval<CqlQuantity>;
+                return null;
             }
             else
             {
@@ -109,28 +109,28 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
                     if (c_())
                     {
                         CqlQuantity w_ = this.ToQuantityIgnoringComparator(context, quantity);
-                        CqlInterval<CqlQuantity> x_ = context.Operators.Interval(default, w_, true, false);
+                        CqlInterval<CqlQuantity> x_ = context.Operators.Interval(null, w_, true, false);
 
                         return x_;
                     }
                     else if (d_())
                     {
                         CqlQuantity y_ = this.ToQuantityIgnoringComparator(context, quantity);
-                        CqlInterval<CqlQuantity> z_ = context.Operators.Interval(default, y_, true, true);
+                        CqlInterval<CqlQuantity> z_ = context.Operators.Interval(null, y_, true, true);
 
                         return z_;
                     }
                     else if (e_())
                     {
                         CqlQuantity aa_ = this.ToQuantityIgnoringComparator(context, quantity);
-                        CqlInterval<CqlQuantity> ab_ = context.Operators.Interval(aa_, default, true, true);
+                        CqlInterval<CqlQuantity> ab_ = context.Operators.Interval(aa_, null, true, true);
 
                         return ab_;
                     }
                     else if (f_())
                     {
                         CqlQuantity ac_ = this.ToQuantityIgnoringComparator(context, quantity);
-                        CqlInterval<CqlQuantity> ad_ = context.Operators.Interval(ac_, default, false, true);
+                        CqlInterval<CqlQuantity> ad_ = context.Operators.Interval(ac_, null, false, true);
 
                         return ad_;
                     }
@@ -156,7 +156,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
         {
             if (range is null)
             {
-                return null as CqlInterval<CqlQuantity>;
+                return null;
             }
             else
             {
@@ -243,11 +243,11 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
             };
             if (quantity is null)
             {
-                return default;
+                return null;
             }
             else if (quantity?.ValueElement is null)
             {
-                return default;
+                return null;
             }
             else if (b_())
             {
@@ -308,11 +308,11 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
             };
             if (quantity is null)
             {
-                return default;
+                return null;
             }
             else if (quantity?.ValueElement is null)
             {
-                return default;
+                return null;
             }
             else if (b_())
             {
@@ -355,7 +355,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
         {
             if (ratio is null)
             {
-                return default;
+                return null;
             }
             else
             {
@@ -377,7 +377,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
         {
             if (coding is null)
             {
-                return default;
+                return null;
             }
             else
             {
@@ -403,7 +403,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
         {
             if (concept is null)
             {
-                return default;
+                return null;
             }
             else
             {
@@ -431,7 +431,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
         {
             if (uri is null)
             {
-                return default;
+                return null;
             }
             else
             {
@@ -453,7 +453,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
         {
             if (reference is null)
             {
-                return default;
+                return null;
             }
             else
             {

@@ -322,7 +322,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
             }
             else
             {
-                return null as IEnumerable<CqlDate>;
+                return null;
             }
         };
 

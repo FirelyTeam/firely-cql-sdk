@@ -246,7 +246,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
             }
             else
             {
-                return default;
+                return null;
             }
         };
 

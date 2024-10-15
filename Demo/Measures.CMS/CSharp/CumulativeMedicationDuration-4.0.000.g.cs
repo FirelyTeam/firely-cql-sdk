@@ -1322,7 +1322,7 @@ public partial class CumulativeMedicationDuration_4_0_000 : ILibrary, ISingleton
     public CqlQuantity Quantity(CqlContext context, decimal? value, string unit) => 
         ((context.Operators.Not((bool?)(value is null))) ?? false
             ? new CqlQuantity(value, unit)
-            : default);
+            : null);
 
     public CqlInterval<CqlDate> MedicationRequestPeriod(CqlContext context, MedicationRequest Request)
     {
@@ -1569,7 +1569,7 @@ public partial class CumulativeMedicationDuration_4_0_000 : ILibrary, ISingleton
                 }
                 else
                 {
-                    return null as CqlInterval<CqlDate>;
+                    return null;
                 }
             };
 
@@ -1730,7 +1730,7 @@ public partial class CumulativeMedicationDuration_4_0_000 : ILibrary, ISingleton
                 }
                 else
                 {
-                    return null as CqlInterval<CqlDate>;
+                    return null;
                 }
             };
 
@@ -1794,7 +1794,7 @@ public partial class CumulativeMedicationDuration_4_0_000 : ILibrary, ISingleton
                 }
                 else
                 {
-                    return null as CqlInterval<CqlDate>;
+                    return null;
                 }
             };
 
@@ -1829,7 +1829,7 @@ public partial class CumulativeMedicationDuration_4_0_000 : ILibrary, ISingleton
             }
             else
             {
-                return default;
+                return null;
             }
         };
 
@@ -1880,7 +1880,7 @@ public partial class CumulativeMedicationDuration_4_0_000 : ILibrary, ISingleton
 
             return h_;
         };
-        IEnumerable<CqlInterval<CqlDate>> b_ = context.Operators.Aggregate<CqlInterval<CqlDate>, IEnumerable<CqlInterval<CqlDate>>>(intervals, a_, null as IEnumerable<CqlInterval<CqlDate>>);
+        IEnumerable<CqlInterval<CqlDate>> b_ = context.Operators.Aggregate<CqlInterval<CqlDate>, IEnumerable<CqlInterval<CqlDate>>>(intervals, a_, null);
 
         return b_;
     }
@@ -1903,7 +1903,7 @@ public partial class CumulativeMedicationDuration_4_0_000 : ILibrary, ISingleton
             }
             else
             {
-                return null as CqlInterval<CqlDate>;
+                return null;
             }
         };
 
