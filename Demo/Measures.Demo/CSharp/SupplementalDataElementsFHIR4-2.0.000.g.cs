@@ -135,7 +135,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
 		{
 			CodeableConcept e_ = Payer?.Type;
 			Period f_ = Payer?.Period;
-			(CqlTupleMetadata, CodeableConcept code, Period period)? g_ = (default(CqlTupleMetadata), e_, f_);
+			(CqlTupleMetadata, CodeableConcept code, Period period)? g_ = (CqlTupleMetadata_CaKghTfWMNOTHSWhifjFZOVYO, e_, f_);
 
 			return g_;
 		};
@@ -252,4 +252,5 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
 		return a_();
 	}
 
+    private static CqlTupleMetadata CqlTupleMetadata_CaKghTfWMNOTHSWhifjFZOVYO = new([typeof(CodeableConcept), typeof(Period)], ["code", "period"]);
 }

@@ -7,14 +7,24 @@
  */
 using System;
 using System.Collections.Generic;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
 internal class TupleMetadataBuilder
 {
+    private readonly Dictionary<string, IReadOnlyCollection<(string Name, Type Type)>> _signaturesByHash = new();
+
     public string GetTupleMetadataPropertyName(
-        IReadOnlyCollection<(Type Type, string Name)> tupleItemsSignature)
+        IReadOnlyCollection<(string Name, Type Type)> tupleItemsSignature)
     {
-        return "default(CqlTupleMetadata)";
+        var propName = CqlTupleMetadata.BuildSignatureHashString(tupleItemsSignature);
+        _signaturesByHash[propName] = tupleItemsSignature;
+        return propName;
     }
+
+    public IReadOnlyCollection<(string PropertyName, IReadOnlyCollection<(string Name, Type Type)> Signature)> GetAllTupleMetadataPropertySignatures() =>
+        _signaturesByHash
+            .SelectToArray(kv => (kv.Key, kv.Value));
 }

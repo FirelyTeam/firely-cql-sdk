@@ -302,7 +302,7 @@ public partial class AdvancedIllnessandFrailty_1_8_000 : ILibrary, ISingleton<Ad
 		IEnumerable<ValueTuple<Encounter, Encounter>> c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
 		(CqlTupleMetadata, Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)? d_		(ValueTuple<Encounter, Encounter> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)? k_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)? k_ = (CqlTupleMetadata_EaLaedgLDgRRYaLbKIIcBTOiA, _valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
@@ -534,4 +534,5 @@ public partial class AdvancedIllnessandFrailty_1_8_000 : ILibrary, ISingleton<Ad
 		return x_;
 	}
 
+    private static CqlTupleMetadata CqlTupleMetadata_EaLaedgLDgRRYaLbKIIcBTOiA = new([typeof(Encounter), typeof(Encounter)], ["OutpatientEncounter1", "OutpatientEncounter2"]);
 }

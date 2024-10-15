@@ -551,7 +551,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
 			};
 			IEnumerable<string> al_ = context.Operators.Select<Code, string>(aj_, ak_);
 			Code<ObservationStatus> am_ = FecalOccult?.StatusElement;
-			(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? an_ = (default(CqlTupleMetadata), r_, x_, al_, am_);
+			(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? an_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, r_, x_, al_, am_);
 
 			return an_;
 		};
@@ -906,7 +906,7 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
 			};
 			IEnumerable<string> ap_ = context.Operators.Select<Code, string>(an_, ao_);
 			Code<ObservationStatus> aq_ = FitDNA?.StatusElement;
-			(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? ar_ = (default(CqlTupleMetadata), v_, ab_, ap_, aq_);
+			(CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? ar_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, v_, ab_, ap_, aq_);
 
 			return ar_;
 		};
@@ -1562,4 +1562,5 @@ public partial class ColorectalCancerScreeningsFHIR_0_0_003 : ILibrary, ISinglet
 		return h_;
 	}
 
+    private static CqlTupleMetadata CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV = new([typeof(CqlDateTime), typeof(IEnumerable<FhirString>), typeof(IEnumerable<string>), typeof(Code<ObservationStatus>)], ["occultDate", "occultResult", "occultCategoryCode", "occultStatus"]);
 }

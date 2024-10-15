@@ -1436,7 +1436,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 			Instant v_ = u_?.IssuedElement;
 			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)? y_ = (default(CqlTupleMetadata), e_, n_ as CqlQuantity, x_);
+			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHematocritResult, CqlDateTime Timing)? y_ = (CqlTupleMetadata_DIHdhbAJeJTdiAVUAELUHRNdS, e_, n_ as CqlQuantity, x_);
 
 			return y_;
 		};
@@ -1544,7 +1544,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 			Instant v_ = u_?.IssuedElement;
 			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)? y_ = (default(CqlTupleMetadata), e_, n_ as CqlQuantity, x_);
+			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstWBCResult, CqlDateTime Timing)? y_ = (CqlTupleMetadata_ESFBYaBAeYMhOBFMjVCbeLhQA, e_, n_ as CqlQuantity, x_);
 
 			return y_;
 		};
@@ -1640,7 +1640,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 			DataType t_ = s_?.Effective;
 			object u_ = FHIRHelpers_4_3_000.Instance.ToValue(context, t_);
 			CqlDateTime v_ = QICoreCommon_2_0_000.Instance.earliest(context, u_);
-			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)? w_ = (default(CqlTupleMetadata), e_, m_ as CqlQuantity, v_);
+			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHRResult, CqlDateTime Timing)? w_ = (CqlTupleMetadata_HOiMaDjifIOTXXFShNKiWLBLV, e_, m_ as CqlQuantity, v_);
 
 			return w_;
 		};
@@ -1754,7 +1754,7 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 			DataType w_ = v_?.Effective;
 			object x_ = FHIRHelpers_4_3_000.Instance.ToValue(context, w_);
 			CqlDateTime y_ = QICoreCommon_2_0_000.Instance.earliest(context, x_);
-			(CqlTupleMetadata, string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)? z_ = (default(CqlTupleMetadata), e_, p_, y_);
+			(CqlTupleMetadata, string EncounterId, IEnumerable<CqlQuantity> FirstSBPResult, CqlDateTime Timing)? z_ = (CqlTupleMetadata_FjSKXeIESORPNbRGajibMfUaK, e_, p_, y_);
 
 			return z_;
 		};
@@ -1809,4 +1809,8 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 		return e_;
 	}
 
+    private static CqlTupleMetadata CqlTupleMetadata_DIHdhbAJeJTdiAVUAELUHRNdS = new([typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)], ["EncounterId", "FirstHematocritResult", "Timing"]);
+    private static CqlTupleMetadata CqlTupleMetadata_ESFBYaBAeYMhOBFMjVCbeLhQA = new([typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)], ["EncounterId", "FirstWBCResult", "Timing"]);
+    private static CqlTupleMetadata CqlTupleMetadata_HOiMaDjifIOTXXFShNKiWLBLV = new([typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)], ["EncounterId", "FirstHRResult", "Timing"]);
+    private static CqlTupleMetadata CqlTupleMetadata_FjSKXeIESORPNbRGajibMfUaK = new([typeof(string), typeof(IEnumerable<CqlQuantity>), typeof(CqlDateTime)], ["EncounterId", "FirstSBPResult", "Timing"]);
 }

@@ -363,7 +363,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 			CqlDateTime s_ = QICoreCommon_2_0_000.Instance.earliest(context, r_());
 			DataType t_ = IPSSAssessment?.Value;
 			object u_ = FHIRHelpers_4_3_000.Instance.ToValue(context, t_);
-			(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? v_ = (default(CqlTupleMetadata), s_, u_ as int?);
+			(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? v_ = (CqlTupleMetadata_GNNDVIQPcTANSdLebhBKYIdga, s_, u_ as int?);
 
 			return v_;
 		};
@@ -688,7 +688,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 			DataType ao_ = an_?.Value;
 			object ap_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ao_);
 			int? aq_ = context.Operators.Add(af_ as int?, ap_ as int?);
-			(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? ar_ = (default(CqlTupleMetadata), ad_, aq_);
+			(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? ar_ = (CqlTupleMetadata_GNNDVIQPcTANSdLebhBKYIdga, ad_, aq_);
 
 			return ar_;
 		};
@@ -1062,7 +1062,7 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 		IEnumerable<ValueTuple<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>> e_ = context.Operators.CrossJoin<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>((IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>)b_, (IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?>)d_);
 		(CqlTupleMetadata, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FirstUSSAssessment, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment)? f_		(ValueTuple<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> _valueTuple)
 		{
-			(CqlTupleMetadata, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FirstUSSAssessment, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment)? k_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FirstUSSAssessment, (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? FollowUpUSSAssessment)? k_ = (CqlTupleMetadata_FBHNjYWJgMKheadEZUgcdQGXN, _valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
@@ -1147,4 +1147,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 		return a_;
 	}
 
+    private static CqlTupleMetadata CqlTupleMetadata_GNNDVIQPcTANSdLebhBKYIdga = new([typeof(CqlDateTime), typeof(int?)], ["effectiveDatetime", "valueInteger"]);
+    private static CqlTupleMetadata CqlTupleMetadata_FBHNjYWJgMKheadEZUgcdQGXN = new([typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?), typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?)], ["FirstUSSAssessment", "FollowUpUSSAssessment"]);
 }

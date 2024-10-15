@@ -255,7 +255,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
 			IEnumerable<DataType> ah_ = context.Operators.Select<Extension, DataType>(af_, ag_);
 			DataType ai_ = context.Operators.SingletonFrom<DataType>(ah_);
 			string aj_ = context.Operators.Convert<string>(ai_);
-			(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? ak_ = (default(CqlTupleMetadata), ad_, aj_);
+			(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? ak_ = (CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR, ad_, aj_);
 
 			return ak_;
 		};
@@ -379,7 +379,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
 			IEnumerable<DataType> ag_ = context.Operators.Select<Extension, DataType>(ae_, af_);
 			DataType ah_ = context.Operators.SingletonFrom<DataType>(ag_);
 			string ai_ = context.Operators.Convert<string>(ah_);
-			(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? aj_ = (default(CqlTupleMetadata), ac_, ai_);
+			(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? aj_ = (CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR, ac_, ai_);
 
 			return aj_;
 		};
@@ -712,4 +712,5 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
 		return c_;
 	}
 
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new([typeof(IEnumerable<CqlCode>), typeof(string)], ["codes", "display"]);
 }

@@ -7,14 +7,12 @@
  */
 
 using Hl7.Cql.Compiler.Expressions;
-using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.Serialization;
 using System.Text;
 using Hl7.Cql.Abstractions.Infrastructure;
 
@@ -24,25 +22,50 @@ namespace Hl7.Cql.CodeGeneration.NET
         TypeToCSharpConverter typeToCSharpConverter,
         string libraryName)
     {
-        internal readonly record struct Context(
-            int Indent = 0,
-            bool UseIndent = true)
+        internal readonly record struct Context
         {
-            public int Indent { get; } = Indent;
-            public bool UseIndent { get; } = UseIndent;
+            private const int DefaultIndent = 0;
+            private const bool DefaultUseIndent = true;
+
+            private readonly TupleMetadataBuilder _tupleMetadataBuilder;
+
+            public Context(
+                TupleMetadataBuilder tupleMetadataBuilder,
+                int Indent = DefaultIndent,
+                bool UseIndent = DefaultUseIndent)
+            {
+                _tupleMetadataBuilder = tupleMetadataBuilder;
+                this.Indent = Indent;
+                this.UseIndent = UseIndent;
+            }
+
+            public int Indent { get; }
+            public bool UseIndent { get; }
             public string IndentString => UseIndent ? StringExtensions.IndentString(Indent) : string.Empty;
 
-            public Context With(Func<int, int>? indentFn = null, Func<bool, bool>? useIndentFn = null) =>
-                new(indentFn?.Invoke(Indent) ?? Indent, useIndentFn?.Invoke(UseIndent) ?? UseIndent);
+            public Context WithOverride(Func<int, int>? indentFn = null, Func<bool, bool>? useIndentFn = null) =>
+                new(_tupleMetadataBuilder, indentFn?.Invoke(Indent) ?? Indent, useIndentFn?.Invoke(UseIndent) ?? UseIndent);
 
-            public Context DontUseIndent() => With(useIndentFn: _ => false);
+            public Context WithDontUseIndent() => WithOverride(useIndentFn: _ => false);
 
-            public Context DoUseIndent() => With(useIndentFn: _ => true);
+            public Context WithDoUseIndent() => WithOverride(useIndentFn: _ => true);
 
-            public string GetTupleMetadataPropertyName(List<(Type Type, string Name)> tupleProperties) => "default(CqlTupleMetadata)";
+            public string GetTupleMetadataPropertyName(IReadOnlyCollection<(string Name, Type Type)> tupleProperties) =>
+                _tupleMetadataBuilder.GetTupleMetadataPropertyName(tupleProperties);
+
+            public void Deconstruct(
+                out int Indent,
+                out bool UseIndent)
+            {
+                Indent = this.Indent;
+                UseIndent = this.UseIndent;
+            }
         }
 
-        public Context NewContext(int indent = 0, bool useIndent = true) => new(indent, useIndent);
+        public Context NewContext(
+            TupleMetadataBuilder tupleMetadataBuilder,
+            int indent = 0,
+            bool useIndent = true) => new(tupleMetadataBuilder, indent, useIndent);
 
         public string LibraryName { get; } = libraryName;
 
@@ -143,8 +166,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             var lastExpression = block.Expressions.LastOrDefault();
             var isFirstStatement = true;
 
-            var nextArgsUseIndentTrue = context.With(indent => indent + 1, _ => true);
-            var nextArgsUseIndentFalse = context.With(indent => indent + 1, _ => false);
+            var nextArgsUseIndentTrue = context.WithOverride(indent => indent + 1, _ => true);
+            var nextArgsUseIndentFalse = context.WithOverride(indent => indent + 1, _ => false);
             foreach (var childStatement in block.Expressions)
             {
                 if (ReferenceEquals(childStatement, lastExpression))
@@ -184,7 +207,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             NullConditionalMemberExpression nullp,
             Context context)
         {
-            var @object = ConvertExpression(nullp.MemberExpression.Expression!, new Context(0));
+            var @object = ConvertExpression(nullp.MemberExpression.Expression!, context.WithOverride(indent => 0, useIndent => true));
             @object = @object.ParenthesizeIfNeeded();
             return $"{context.IndentString}{@object}?.{nullp.MemberExpression.Member.Name}";
         }
@@ -265,9 +288,9 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var @object = call switch
             {
-                { Object: not null } => $"{ConvertExpression(call.Object, new Context(context.Indent, false))}.",
+                { Object: not null } => $"{ConvertExpression(call.Object, context.WithDontUseIndent())}.",
                 { Method.IsStatic: true } ext when ext.Method.IsExtensionMethod() =>
-                        $"{ConvertExpression(call.Arguments[0], new Context(context.Indent, false))}.",
+                        $"{ConvertExpression(call.Arguments[0], context.WithDontUseIndent())}.",
                 { Method.IsStatic: true } => $"{_typeToCSharpConverter.ToCSharp(call.Method.DeclaringType!)}.",
                 _                         => throw new InvalidOperationException("Calls should be either static or have a non-null object.")
             };
@@ -288,7 +311,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             sb.Append("(");
 
             bool firstArg = true;
-            var argsForArgument = context.With(indent => indent+1, _ => false);
+            var argsForArgument = context.WithOverride(indent => indent+1, _ => false);
             foreach (var argument in paramList)
             {
                 var argAsCode = ConvertExpression(argument, argsForArgument);
@@ -324,7 +347,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             if (typeBinary.NodeType == ExpressionType.TypeIs)
             {
-                var left = ConvertExpression(typeBinary.Expression, context.DontUseIndent());
+                var left = ConvertExpression(typeBinary.Expression, context.WithDontUseIndent());
                 var type = _typeToCSharpConverter.ToCSharp(typeBinary.TypeOperand);
                 var @is = $"{left} is {type}";
                 return @is;
@@ -340,11 +363,11 @@ namespace Hl7.Cql.CodeGeneration.NET
             var conditionalSb = new StringBuilder();
             conditionalSb.Append(context.IndentString);
             conditionalSb.Append('(');
-            var nextArgs = context.DontUseIndent();
+            var nextArgs = context.WithDontUseIndent();
             var test = ConvertExpression(ce.Test, nextArgs);
             conditionalSb.AppendLine(CultureInfo.InvariantCulture, $"{test}");
 
-            var nextArgs2 = nextArgs.With(indent => indent + 2);
+            var nextArgs2 = nextArgs.WithOverride(indent => indent + 2);
             var ifTrue = $"{ConvertExpression(ce.IfTrue, nextArgs2)}";
             var ifFalse = $"{ConvertExpression(ce.IfFalse, nextArgs2)}";
             conditionalSb.AppendLine(CultureInfo.InvariantCulture, $"{StringExtensions.IndentString(context.Indent + 1)}? {ifTrue}");
@@ -363,7 +386,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var sb = new StringBuilder();
 
             bool firstCase = true;
-            var nextArgs = context.With(indent => indent + 1, _ => false);
+            var nextArgs = context.WithOverride(indent => indent + 1, _ => false);
             foreach (var c in conditional.WhenThenCases)
             {
                 if (firstCase)
@@ -387,10 +410,10 @@ namespace Hl7.Cql.CodeGeneration.NET
             Expression conditionalActionBlock,
             Context context)
         {
-            var nextArgs = context.With(indent => indent+1, _ => false);
+            var nextArgs = context.WithOverride(indent => indent+1, _ => false);
             if (conditionalActionBlock is BlockExpression)
             {
-                return ConvertExpression(conditionalActionBlock, context.DoUseIndent());
+                return ConvertExpression(conditionalActionBlock, context.WithDoUseIndent());
             }
             else
             {
@@ -423,13 +446,13 @@ namespace Hl7.Cql.CodeGeneration.NET
             memberInitSb.AppendLine("{");
             var braceIndentPlusOne = StringExtensions.IndentString(context.Indent + 1);
 
+            var nextContext = context.WithOverride(indent => indent + 1, _ => false);
             foreach (var binding in memberInit.Bindings)
             {
                 if (binding is MemberAssignment assignment)
                 {
                     var memberName = assignment.Member.Name;
-                    int indent1 = context.Indent + 1;
-                    var assignmentCode = ConvertExpression(assignment.Expression, new Context(indent1, false));
+                    var assignmentCode = ConvertExpression(assignment.Expression, nextContext);
                     memberInitSb.Append(braceIndentPlusOne);
 #pragma warning disable CA1305 // Specify IFormatProvider
                     memberInitSb.Append($"{memberName} = {assignmentCode}");
@@ -455,7 +478,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                           .Cast<MemberAssignment>()
                           .ToDictionary(
                               ma => ma.Member.Name,
-                              ma => ConvertExpression(ma.Expression, context.With(indent => 0, useIndent => false)));
+                              ma => ConvertExpression(ma.Expression, context.WithOverride(indent => 0, useIndent => false)));
 
             var tupleProperties = _typeToCSharpConverter
                 .GetTupleProperties(memberInit.Type)
@@ -483,10 +506,10 @@ namespace Hl7.Cql.CodeGeneration.NET
                         var braceIndent = StringExtensions.IndentString(context.Indent);
                         newArraySb.AppendLine("[");
 
+                        var nextContext = context.WithOverride(indent => indent + 1, _ => true);
                         foreach (var expr in newArray.Expressions)
                         {
-                            int indent1 = context.Indent + 1;
-                            var exprCode = ConvertExpression(expr, new Context(indent1));
+                            var exprCode = ConvertExpression(expr, nextContext);
                             newArraySb.Append(exprCode);
                             newArraySb.AppendLine(",");
                         }
@@ -516,7 +539,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             NewExpression @new,
             Context context)
         {
-            var arguments = @new.Arguments.Select(a => ConvertExpression(a, new Context(0)));
+            var nextContext = context.WithOverride(indent => 0, _ => true);
+            var arguments = @new.Arguments.Select(a => ConvertExpression(a, nextContext));
             var argString = string.Join(", ", arguments);
             var newSb = new StringBuilder();
             newSb.Append(CultureInfo.InvariantCulture, $"{context.IndentString}new {_typeToCSharpConverter.ToCSharp(@new.Type)}");
@@ -529,7 +553,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             Context context)
         {
             var nullProp = _typeToCSharpConverter.GetMemberAccessNullabilityOperator(me.Expression?.Type);
-            var @object = me.Expression is not null ? ConvertExpression(me.Expression, new Context(0)) : _typeToCSharpConverter.ToCSharp(me.Member.DeclaringType!);
+            var @object = me.Expression is not null ? ConvertExpression(me.Expression, context.WithOverride(_ => 0, _ => true)) : _typeToCSharpConverter.ToCSharp(me.Member.DeclaringType!);
             @object = @object.ParenthesizeIfNeeded();
             var memberName = me.Member.Name.EscapeKeywords();
             return $"{context.IndentString}{@object}{nullProp}.{memberName}";
@@ -558,14 +582,13 @@ namespace Hl7.Cql.CodeGeneration.NET
                 else
                     lambdaSb.AppendLine();
 
-                var lambdaBody = ConvertExpression(lambda.Body, new Context(context.Indent));
+                var lambdaBody = ConvertExpression(lambda.Body, context.WithDoUseIndent());
                 lambdaSb.Append(lambdaBody);
             }
             else
             {
                 lambdaSb.AppendLine(" => ");
-                int indent1 = context.Indent + 1;
-                var lambdaBody = ConvertExpression(lambda.Body, new Context(indent1));
+                var lambdaBody = ConvertExpression(lambda.Body, context.WithOverride(indent => indent + 1, _ => true));
                 lambdaSb.Append(lambdaBody);
             }
 
@@ -642,7 +665,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var stripped = StripBoxing(unary);
 
             if (stripped is not UnaryExpression strippedUnary)
-                return ConvertExpression(stripped, new Context(context.Indent, false));
+                return ConvertExpression(stripped, context.WithDontUseIndent());
 
             switch (strippedUnary.NodeType)
             {
@@ -650,7 +673,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 case ExpressionType.Convert:
                 case ExpressionType.TypeAs:
                     {
-                        var operand = ConvertExpression(strippedUnary.Operand, new Context(context.Indent, false));
+                        var operand = ConvertExpression(strippedUnary.Operand, context.WithDontUseIndent());
                         operand = operand.ParenthesizeIfNeeded();
                         var typeName = _typeToCSharpConverter.ToCSharp(strippedUnary.Type);
                         var code = strippedUnary.NodeType == ExpressionType.TypeAs ?
@@ -660,7 +683,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     }
                     case ExpressionType.Throw:
                     {
-                        var operand = ConvertExpression(strippedUnary.Operand, new Context(context.Indent, false));
+                        var operand = ConvertExpression(strippedUnary.Operand, context.WithDontUseIndent());
                         return $"{context.IndentString}throw ({operand})";
                     }
                 default:
@@ -672,7 +695,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             BinaryExpression binary,
             Context context)
         {
-            var nextArgs = context.DontUseIndent();
+            var nextArgs = context.WithDontUseIndent();
             var left = StripBoxing(binary.Left);
             var right = StripBoxing(binary.Right);
 
@@ -748,85 +771,5 @@ namespace Hl7.Cql.CodeGeneration.NET
             else
                 return method.Name;
         }
-    }
-
-    file static class StringExtensions
-    {
-        public static string QuoteString(this string s) => SymbolDisplay.FormatLiteral(s, true);
-
-        public static string EscapeKeywords(this string symbol)
-        {
-            var keyword = SyntaxFacts.GetKeywordKind(symbol);
-            return keyword == SyntaxKind.None ? symbol : $"@{symbol}";
-        }
-
-        public static string IndentString(int indent) => new('\t', indent);
-
-
-        public static string ParenthesizeIfNeeded(this string term)
-        {
-            term = term.Trim();
-
-            if (IsSingleParenthesizedTerm(term))
-                return term; // No need to parenthesize if already parenthesized
-
-            // Handles cases such as:
-            // 1. ((CqlInterval<CqlDate>)g_)?.lowClosed;
-            //     ^-----------------------
-            // 2. an_ ?? (at_ as CqlQuantity)?.value
-            //    --------------------------^
-            if (term.StartsWith('(') ^ term.EndsWith(')'))
-                return $"({term})";
-
-            if (term.Any(char.IsWhiteSpace))
-                return $"({term})";
-
-            return term;
-        }
-
-        // Check whether the term has matching opening and closing parentheses.
-        // (so this matches "(a)" but not "(x) + (y)" nor "a + (b) + c").
-        private static bool IsSingleParenthesizedTerm(string term)
-        {
-            var opens = 0;
-            for (var index = 0; index < term.Length; index++)
-            {
-                opens = term[index] switch
-                {
-                    '(' => opens + 1,
-                    ')' => opens - 1,
-                    _   => opens
-                };
-
-                if (opens == 0)
-                {
-                    return index == term.Length - 1;
-                }
-            }
-
-            throw new InvalidOperationException($"Unbalanced parentheses in expression '{term}'");
-        }
-
-#pragma warning disable SYSLIB0050 // Type or member is obsolete
-        private static readonly ObjectIDGenerator Gen = new();
-#pragma warning restore SYSLIB0050 // Type or member is obsolete
-
-        public static string GetOrCreateName(ParameterExpression p) => p.Name ?? $"var{Gen.GetId(p, out _)}";
-    }
-
-    internal record CqlTupleMetadata(string[] PropertyNames)
-    {
-        public string[] PropertyNames { get; } = PropertyNames;
-        private readonly int _hashCode = PropertyNames.Aggregate(0, HashCode.Combine);
-
-        public virtual bool Equals(CqlTupleMetadata? other)
-        {
-            if (other is null) return false;
-            if (ReferenceEquals(this, other)) return true;
-            if (_hashCode != other._hashCode) return false;
-            return PropertyNames.SequenceEqual(other.PropertyNames);
-        }
-
-        public override int GetHashCode() => _hashCode;
     }
 }

@@ -342,7 +342,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Encounter, Encounter>> c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
 		(CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)? d_		(ValueTuple<Encounter, Encounter> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)? j_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)? j_ = (CqlTupleMetadata_DbNMMZBTISSRTNdiShceSFVih, _valueTuple.Item1, _valueTuple.Item2);
 
 			return j_;
 		};
@@ -451,7 +451,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? j_		(ValueTuple<Observation, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? p_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? p_ = (CqlTupleMetadata_DDTAOdcFieSJbGgRLLZPYbGQb, _valueTuple.Item1, _valueTuple.Item2);
 
 			return p_;
 		};
@@ -515,7 +515,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
 		(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? e_		(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? l_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? l_ = (CqlTupleMetadata_BGYjYGLNPKWAZTBCVAdLDDTMj, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
 		};
@@ -605,7 +605,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation, Observation>> ac_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_, x_, ab_);
 		(CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? ad_		(ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? aj_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4, _valueTuple.Item5, _valueTuple.Item6, _valueTuple.Item7);
+			(CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? aj_ = (CqlTupleMetadata_DBUJFOVGBcbhIQPWARNQHKUaX, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4, _valueTuple.Item5, _valueTuple.Item6, _valueTuple.Item7);
 
 			return aj_;
 		};
@@ -774,7 +774,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
 		(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? e_		(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? l_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? l_ = (CqlTupleMetadata_DSZKEYVbCINNIeAQiZdVaEJhG, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
 		};
@@ -844,7 +844,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? j_		(ValueTuple<Observation, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? p_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? p_ = (CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH, _valueTuple.Item1, _valueTuple.Item2);
 
 			return p_;
 		};
@@ -908,7 +908,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
 		(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? e_		(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? l_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? l_ = (CqlTupleMetadata_FQKGdEYLiDFGMNAUAMETIHUQT, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
 		};
@@ -978,7 +978,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? j_		(ValueTuple<Observation, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? p_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? p_ = (CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH, _valueTuple.Item1, _valueTuple.Item2);
 
 			return p_;
 		};
@@ -1042,7 +1042,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
 		(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? e_		(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? l_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? l_ = (CqlTupleMetadata_HSSAQEFQAOXLjUcOKGgicELWB, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
 		};
@@ -1112,7 +1112,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? j_		(ValueTuple<Observation, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? p_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? p_ = (CqlTupleMetadata_DUcFTCLcQEWDGGQdFCWTHFaUK, _valueTuple.Item1, _valueTuple.Item2);
 
 			return p_;
 		};
@@ -1176,7 +1176,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
 		(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? e_		(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? l_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? l_ = (CqlTupleMetadata_HQfcMfhQUSTNYMWSgJHiFeahQ, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
 		};
@@ -1246,7 +1246,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? j_		(ValueTuple<Observation, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? p_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? p_ = (CqlTupleMetadata_DUcFTCLcQEWDGGQdFCWTHFaUK, _valueTuple.Item1, _valueTuple.Item2);
 
 			return p_;
 		};
@@ -1310,7 +1310,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
 		(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? e_		(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? l_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? l_ = (CqlTupleMetadata_BFZHWdOOROjSjFSECHcQiaZZZ, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
 		};
@@ -1380,7 +1380,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)? j_		(ValueTuple<Observation, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)? p_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)? p_ = (CqlTupleMetadata_EBLWeAeedHPAfOJXKPZJKSCUf, _valueTuple.Item1, _valueTuple.Item2);
 
 			return p_;
 		};
@@ -1444,7 +1444,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
 		(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? e_		(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? l_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? l_ = (CqlTupleMetadata_CcaWSNDiVeaLebVKKWWWiBcEU, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
 		};
@@ -1514,7 +1514,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
 		(CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)? j_		(ValueTuple<Observation, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)? p_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)? p_ = (CqlTupleMetadata_DFKXORghhYafccUSbQaMfNTDj, _valueTuple.Item1, _valueTuple.Item2);
 
 			return p_;
 		};
@@ -1578,7 +1578,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
 		(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? e_		(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? l_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? l_ = (CqlTupleMetadata_EQQLFFBVIbLIQLiZDNfeYdMU, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
 		};
@@ -1664,7 +1664,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation>> y_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_, x_);
 		(CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? z_		(ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? af_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4, _valueTuple.Item5, _valueTuple.Item6);
+			(CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? af_ = (CqlTupleMetadata_BbPMcXSJeOeGdRcaZWGYPhGBL, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4, _valueTuple.Item5, _valueTuple.Item6);
 
 			return af_;
 		};
@@ -1812,7 +1812,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
 		(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? e_		(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? l_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? l_ = (CqlTupleMetadata_HEFWLcHhCNCOQegEOfjWTXiGN, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
 		};
@@ -1912,7 +1912,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
 		(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? e_		(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? l_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+			(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? l_ = (CqlTupleMetadata_DggZKjEbQUfLADMDMBeASLDR, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
 		};
@@ -1994,4 +1994,22 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 		return s_;
 	}
 
+    private static CqlTupleMetadata CqlTupleMetadata_DbNMMZBTISSRTNdiShceSFVih = new([typeof(Encounter), typeof(Encounter)], ["OfficeVisit1", "OfficeVisit2"]);
+    private static CqlTupleMetadata CqlTupleMetadata_DDTAOdcFieSJbGgRLLZPYbGQb = new([typeof(Observation), typeof(Observation)], ["PROMIS10MentalScore", "PROMIS10PhysicalScore"]);
+    private static CqlTupleMetadata CqlTupleMetadata_BGYjYGLNPKWAZTBCVAdLDDTMj = new([typeof(Encounter), typeof(CqlDate), typeof(CqlDate)], ["ValidEncounters", "InitialPROMIS10Date", "FollowupPROMIS10Date"]);
+    private static CqlTupleMetadata CqlTupleMetadata_DBUJFOVGBcbhIQPWARNQHKUaX = new([typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)], ["Promis29Sleep", "Promis29SocialRoles", "Promis29Physical", "Promis29Pain", "Promis29Fatigue", "Promis29Depression", "Promis29Anxiety"]);
+    private static CqlTupleMetadata CqlTupleMetadata_DSZKEYVbCINNIeAQiZdVaEJhG = new([typeof(Encounter), typeof(CqlDate), typeof(CqlDate)], ["ValidEncounters", "InitialPROMIS29Date", "FollowupPROMIS29Date"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH = new([typeof(Observation), typeof(Observation)], ["VR12MentalAssessment", "VR12PhysicalAssessment"]);
+    private static CqlTupleMetadata CqlTupleMetadata_FQKGdEYLiDFGMNAUAMETIHUQT = new([typeof(Encounter), typeof(CqlDate), typeof(CqlDate)], ["ValidEncounters", "InitialVR12ObliqueDate", "FollowupVR12ObliqueDate"]);
+    private static CqlTupleMetadata CqlTupleMetadata_HSSAQEFQAOXLjUcOKGgicELWB = new([typeof(Encounter), typeof(CqlDate), typeof(CqlDate)], ["ValidEncounters", "InitialVR12OrthogonalDate", "FollowupVR12OrthogonalDate"]);
+    private static CqlTupleMetadata CqlTupleMetadata_DUcFTCLcQEWDGGQdFCWTHFaUK = new([typeof(Observation), typeof(Observation)], ["VR36MentalAssessment", "VR36PhysicalAssessment"]);
+    private static CqlTupleMetadata CqlTupleMetadata_HQfcMfhQUSTNYMWSgJHiFeahQ = new([typeof(Encounter), typeof(CqlDate), typeof(CqlDate)], ["ValidEncounters", "InitialVR36ObliqueDate", "FollowupVR36ObliqueDate"]);
+    private static CqlTupleMetadata CqlTupleMetadata_BFZHWdOOROjSjFSECHcQiaZZZ = new([typeof(Encounter), typeof(CqlDate), typeof(CqlDate)], ["ValidEncounters", "InitialVR36OrthogonalDate", "FollowupVR36OrthogonalDate"]);
+    private static CqlTupleMetadata CqlTupleMetadata_EBLWeAeedHPAfOJXKPZJKSCUf = new([typeof(Observation), typeof(Observation)], ["MLHFQPhysical", "MLHFQEmotional"]);
+    private static CqlTupleMetadata CqlTupleMetadata_CcaWSNDiVeaLebVKKWWWiBcEU = new([typeof(Encounter), typeof(CqlDate), typeof(CqlDate)], ["ValidEncounters", "InitialMLHFQDate", "FollowupMLHFQDate"]);
+    private static CqlTupleMetadata CqlTupleMetadata_DFKXORghhYafccUSbQaMfNTDj = new([typeof(Observation), typeof(Observation)], ["KCCQ12Item", "KCCQ12Summary"]);
+    private static CqlTupleMetadata CqlTupleMetadata_EQQLFFBVIbLIQLiZDNfeYdMU = new([typeof(Encounter), typeof(CqlDate), typeof(CqlDate)], ["ValidEncounters", "InitialKCCQ12Date", "FollowupKCCQ12Date"]);
+    private static CqlTupleMetadata CqlTupleMetadata_BbPMcXSJeOeGdRcaZWGYPhGBL = new([typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)], ["KCCQLifeQuality", "KCCQSymptomStability", "KCCQSelfEfficacy", "KCCQSymptoms", "KCCQPhysicalLimits", "KCCQSocialLimits"]);
+    private static CqlTupleMetadata CqlTupleMetadata_HEFWLcHhCNCOQegEOfjWTXiGN = new([typeof(Encounter), typeof(CqlDate), typeof(CqlDate)], ["ValidEncounters", "InitialKCCQAssessmentDate", "FollowupKCCQAssessmentDate"]);
+    private static CqlTupleMetadata CqlTupleMetadata_DggZKjEbQUfLADMDMBeASLDR = new([typeof(Encounter), typeof(CqlDate), typeof(CqlDate)], ["ValidEncounters", "InitialKCCQTotalScore", "FollowupKCCQTotalScore"]);
 }

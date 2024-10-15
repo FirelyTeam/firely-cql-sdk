@@ -279,7 +279,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_1_000 : ILibrary, ISingle
 		IEnumerable<ValueTuple<Encounter, Procedure>> d_ = context.Operators.CrossJoin<Encounter, Procedure>(a_, c_);
 		(CqlTupleMetadata, Encounter QualifyingEncounter, Procedure HospitalDietitianReferral)? e_		(ValueTuple<Encounter, Procedure> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter QualifyingEncounter, Procedure HospitalDietitianReferral)? k_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Encounter QualifyingEncounter, Procedure HospitalDietitianReferral)? k_ = (CqlTupleMetadata_GVQcZJVjNdGAcjPedLaYDjEME, _valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
@@ -327,7 +327,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_1_000 : ILibrary, ISingle
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(CqlTupleMetadata, Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? e_		(ValueTuple<Encounter, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? k_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? k_ = (CqlTupleMetadata_XadcRffdjUdMDMjcTIdSXKKS, _valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
@@ -408,7 +408,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_1_000 : ILibrary, ISingle
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(CqlTupleMetadata, Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? e_		(ValueTuple<Encounter, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? k_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? k_ = (CqlTupleMetadata_XadcRffdjUdMDMjcTIdSXKKS, _valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
@@ -486,7 +486,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_1_000 : ILibrary, ISingle
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(CqlTupleMetadata, Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? e_		(ValueTuple<Encounter, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? k_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation MalnutritionRiskScreening)? k_ = (CqlTupleMetadata_XadcRffdjUdMDMjcTIdSXKKS, _valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
@@ -563,7 +563,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_1_000 : ILibrary, ISingle
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(CqlTupleMetadata, Encounter QualifyingEncounter, Observation NutritionAssessment)? e_		(ValueTuple<Encounter, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation NutritionAssessment)? k_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation NutritionAssessment)? k_ = (CqlTupleMetadata_GFjZJIRJbJMHZiLMbCVCEiHgh, _valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
@@ -625,7 +625,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_1_000 : ILibrary, ISingle
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(CqlTupleMetadata, Encounter QualifyingEncounter, Observation NutritionAssessment)? e_		(ValueTuple<Encounter, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation NutritionAssessment)? k_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation NutritionAssessment)? k_ = (CqlTupleMetadata_GFjZJIRJbJMHZiLMbCVCEiHgh, _valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
@@ -683,7 +683,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_1_000 : ILibrary, ISingle
 		IEnumerable<ValueTuple<Encounter, Observation>> d_ = context.Operators.CrossJoin<Encounter, Observation>(a_, c_);
 		(CqlTupleMetadata, Encounter QualifyingEncounter, Observation NutritionAssessment)? e_		(ValueTuple<Encounter, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation NutritionAssessment)? k_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation NutritionAssessment)? k_ = (CqlTupleMetadata_GFjZJIRJbJMHZiLMbCVCEiHgh, _valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
@@ -737,7 +737,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_1_000 : ILibrary, ISingle
 		IEnumerable<ValueTuple<Encounter, Condition>> d_ = context.Operators.CrossJoin<Encounter, Condition>(a_, c_);
 		(CqlTupleMetadata, Encounter QualifyingEncounter, Condition MalnutritionDiagnosis)? e_		(ValueTuple<Encounter, Condition> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter QualifyingEncounter, Condition MalnutritionDiagnosis)? k_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Encounter QualifyingEncounter, Condition MalnutritionDiagnosis)? k_ = (CqlTupleMetadata_CTGXhDDGNAgcaKfhTDIBGVLYU, _valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
@@ -774,7 +774,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_1_000 : ILibrary, ISingle
 		IEnumerable<ValueTuple<Encounter, Procedure>> d_ = context.Operators.CrossJoin<Encounter, Procedure>(a_, c_);
 		(CqlTupleMetadata, Encounter QualifyingEncounter, Procedure NutritionCarePlan)? e_		(ValueTuple<Encounter, Procedure> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter QualifyingEncounter, Procedure NutritionCarePlan)? k_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Encounter QualifyingEncounter, Procedure NutritionCarePlan)? k_ = (CqlTupleMetadata_TVETjQTNGSKUhAIhIbeKTXMI, _valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
@@ -1106,4 +1106,9 @@ public partial class GlobalMalnutritionCompositeFHIR_0_1_000 : ILibrary, ISingle
 		return g_;
 	}
 
+    private static CqlTupleMetadata CqlTupleMetadata_GVQcZJVjNdGAcjPedLaYDjEME = new([typeof(Encounter), typeof(Procedure)], ["QualifyingEncounter", "HospitalDietitianReferral"]);
+    private static CqlTupleMetadata CqlTupleMetadata_XadcRffdjUdMDMjcTIdSXKKS = new([typeof(Encounter), typeof(Observation)], ["QualifyingEncounter", "MalnutritionRiskScreening"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GFjZJIRJbJMHZiLMbCVCEiHgh = new([typeof(Encounter), typeof(Observation)], ["QualifyingEncounter", "NutritionAssessment"]);
+    private static CqlTupleMetadata CqlTupleMetadata_CTGXhDDGNAgcaKfhTDIBGVLYU = new([typeof(Encounter), typeof(Condition)], ["QualifyingEncounter", "MalnutritionDiagnosis"]);
+    private static CqlTupleMetadata CqlTupleMetadata_TVETjQTNGSKUhAIhIbeKTXMI = new([typeof(Encounter), typeof(Procedure)], ["QualifyingEncounter", "NutritionCarePlan"]);
 }

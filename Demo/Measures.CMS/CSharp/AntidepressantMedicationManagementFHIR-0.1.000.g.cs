@@ -176,25 +176,25 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 			return s_;
 		};
 		IEnumerable<MedicationDispense> h_ = context.Operators.Where<MedicationDispense>(f_, g_);
-		(CqlTupleMetadata, CqlDate AntidepressantDate, nint _)? i_		(MedicationDispense Antidepressant)
+		(CqlTupleMetadata, CqlDate AntidepressantDate)? i_		(MedicationDispense Antidepressant)
 		{
 			CqlInterval<CqlDate> t_ = CumulativeMedicationDuration_4_0_000.Instance.MedicationDispensePeriod(context, Antidepressant);
 			CqlDate u_ = context.Operators.Start(t_);
 			CqlDateTime v_ = context.Operators.ConvertDateToDateTime(u_);
 			CqlDate w_ = context.Operators.DateFrom(v_);
-			(CqlTupleMetadata, CqlDate AntidepressantDate, nint _)? x_ = (default(CqlTupleMetadata), w_, default);
+			(CqlTupleMetadata, CqlDate AntidepressantDate)? x_ = (CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL, w_);
 
 			return x_;
 		};
-		IEnumerable<(CqlTupleMetadata, CqlDate AntidepressantDate, nint _)?> j_ = context.Operators.Select<MedicationDispense, (CqlTupleMetadata, CqlDate AntidepressantDate, nint _)?>(h_, i_);
-		object k_		((CqlTupleMetadata, CqlDate AntidepressantDate, nint _)? @this)
+		IEnumerable<(CqlTupleMetadata, CqlDate AntidepressantDate)?> j_ = context.Operators.Select<MedicationDispense, (CqlTupleMetadata, CqlDate AntidepressantDate)?>(h_, i_);
+		object k_		((CqlTupleMetadata, CqlDate AntidepressantDate)? @this)
 		{
 			CqlDate y_ = @this?.AntidepressantDate;
 
 			return y_;
 		};
-		IEnumerable<(CqlTupleMetadata, CqlDate AntidepressantDate, nint _)?> l_ = context.Operators.SortBy<(CqlTupleMetadata, CqlDate AntidepressantDate, nint _)?>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
-		(CqlTupleMetadata, CqlDate AntidepressantDate, nint _)? m_ = context.Operators.First<(CqlTupleMetadata, CqlDate AntidepressantDate, nint _)?>(l_);
+		IEnumerable<(CqlTupleMetadata, CqlDate AntidepressantDate)?> l_ = context.Operators.SortBy<(CqlTupleMetadata, CqlDate AntidepressantDate)?>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
+		(CqlTupleMetadata, CqlDate AntidepressantDate)? m_ = context.Operators.First<(CqlTupleMetadata, CqlDate AntidepressantDate)?>(l_);
 		CqlDate n_ = m_?.AntidepressantDate;
 
 		return n_;
@@ -494,4 +494,5 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_000 : ILibrary, 
 		return a_;
 	}
 
+    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new([typeof(CqlDate)], ["AntidepressantDate"]);
 }

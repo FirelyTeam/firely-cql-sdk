@@ -449,7 +449,7 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
 		IEnumerable<ValueTuple<Encounter, Coverage>> e_ = context.Operators.CrossJoin<Encounter, Coverage>(b_, d_);
 		(CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)? f_		(ValueTuple<Encounter, Coverage> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)? l_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Encounter InpatientEncounter, Coverage Payer)? l_ = (CqlTupleMetadata_EFSKhGUTUCLEXZENTURVLjeND, _valueTuple.Item1, _valueTuple.Item2);
 
 			return l_;
 		};
@@ -951,4 +951,5 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
 		return b_;
 	}
 
+    private static CqlTupleMetadata CqlTupleMetadata_EFSKhGUTUCLEXZENTURVLjeND = new([typeof(Encounter), typeof(Coverage)], ["InpatientEncounter", "Payer"]);
 }

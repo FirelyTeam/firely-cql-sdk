@@ -28,26 +28,21 @@ internal class TypeToCSharpConverter
         if (!ShouldUseTupleType(ctx.TypePartInfo))
             return ctx.Name;
 
-        TextWriterFormattableString formatTypeNameAsTuple = $"(CqlTupleMetadata, {
-            string.Join(
-                ", ",
-                GetTupleProperties(ctx.TypePartInfo)
-                    .Select(p => $"{p.Type.ToCSharpString(_typeCSharpFormat)} {p.Name}"))
-        })?"; // Notice we have to treat it as a nullable type to be consistent with the original tuple types.
+        var rest = string.Join(
+            ", ",
+            GetTupleProperties(ctx.TypePartInfo).Select(p => $"{p.Type.ToCSharpString(_typeCSharpFormat)} {p.Name}"));
+        TextWriterFormattableString formatTypeNameAsTuple = $"(CqlTupleMetadata, {rest})?"; // Notice we have to treat it as a nullable type to be consistent with the original tuple types.
         return formatTypeNameAsTuple;
     }
 
-    public IEnumerable<(Type Type, string Name)> GetTupleProperties(Type type)
+    public IEnumerable<(string Name, Type Type)> GetTupleProperties(Type type)
     {
         var length = type.GetProperties().Length;
         for (var i = 0; i < length; i++)
         {
             var prop = type.GetProperties()[i];
-            yield return (prop.PropertyType, prop.Name);
+            yield return (prop.Name, prop.PropertyType);
         }
-
-        if (length == 1)
-            yield return (typeof(nint), "_");
     }
 
     public bool ShouldUseTupleType(Type type) =>

@@ -278,7 +278,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_3_000 : ILibrary, ISingle
 		IEnumerable<ValueTuple<Observation, Encounter>> c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
 		(CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)? d_		(ValueTuple<Observation, Encounter> _valueTuple)
 		{
-			(CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)? k_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)? k_ = (CqlTupleMetadata_FUFPMQdRaTBgLhghDWfUUBaNF, _valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
@@ -751,4 +751,5 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_3_000 : ILibrary, ISingle
 		return a_;
 	}
 
+    private static CqlTupleMetadata CqlTupleMetadata_FUFPMQdRaTBgLhghDWfUUBaNF = new([typeof(Observation), typeof(Encounter)], ["HeartRate", "ModerateOrSevereLVSDHFOutpatientEncounter"]);
 }

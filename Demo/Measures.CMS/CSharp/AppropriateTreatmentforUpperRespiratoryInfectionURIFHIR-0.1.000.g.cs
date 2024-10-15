@@ -318,7 +318,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
 		IEnumerable<ValueTuple<Encounter, Condition>> d_ = context.Operators.CrossJoin<Encounter, Condition>(a_, c_);
 		(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)? e_		(ValueTuple<Encounter, Condition> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)? k_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)? k_ = (CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce, _valueTuple.Item1, _valueTuple.Item2);
 
 			return k_;
 		};
@@ -562,4 +562,5 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
 		return e_;
 	}
 
+    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new([typeof(Encounter), typeof(Condition)], ["QualifyingEncounters", "URI"]);
 }

@@ -326,7 +326,7 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 			DataType t_ = s_?.Effective;
 			object u_ = FHIRHelpers_4_3_000.Instance.ToValue(context, t_);
 			CqlDateTime v_ = QICoreCommon_2_0_000.Instance.earliest(context, u_);
-			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)? w_ = (default(CqlTupleMetadata), e_, m_ as CqlQuantity, v_);
+			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstTemperatureResult, CqlDateTime Timing)? w_ = (CqlTupleMetadata_GIbILVAdXLLNYBgcQIEiUiKaK, e_, m_ as CqlQuantity, v_);
 
 			return w_;
 		};
@@ -438,7 +438,7 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 			DataType t_ = s_?.Effective;
 			object u_ = FHIRHelpers_4_3_000.Instance.ToValue(context, t_);
 			CqlDateTime v_ = QICoreCommon_2_0_000.Instance.earliest(context, u_);
-			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)? w_ = (default(CqlTupleMetadata), e_, m_ as CqlQuantity, v_);
+			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstHeartRateResult, CqlDateTime Timing)? w_ = (CqlTupleMetadata_DhbJAfCiKIAGYKTjJXYGSKECQ, e_, m_ as CqlQuantity, v_);
 
 			return w_;
 		};
@@ -1540,7 +1540,7 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 				}
 			};
 			CqlDateTime p_ = QICoreCommon_2_0_000.Instance.earliest(context, o_());
-			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)? q_ = (default(CqlTupleMetadata), e_, n_ as CqlQuantity, p_);
+			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstOxygenSatResult, CqlDateTime Timing)? q_ = (CqlTupleMetadata_FdREYEdHOZIcMCNYCRFJYJReA, e_, n_ as CqlQuantity, p_);
 
 			return q_;
 		};
@@ -1652,7 +1652,7 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 			DataType t_ = s_?.Effective;
 			object u_ = FHIRHelpers_4_3_000.Instance.ToValue(context, t_);
 			CqlDateTime v_ = QICoreCommon_2_0_000.Instance.earliest(context, u_);
-			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstRespRateResult, CqlDateTime Timing)? w_ = (default(CqlTupleMetadata), e_, m_ as CqlQuantity, v_);
+			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstRespRateResult, CqlDateTime Timing)? w_ = (CqlTupleMetadata_CYbMQaXdPgTVSLXJSHHNTbhVM, e_, m_ as CqlQuantity, v_);
 
 			return w_;
 		};
@@ -1809,7 +1809,7 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 			Instant v_ = u_?.IssuedElement;
 			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? y_ = (default(CqlTupleMetadata), e_, n_ as CqlQuantity, x_);
+			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? y_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity, x_);
 
 			return y_;
 		};
@@ -1925,7 +1925,7 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 			Instant v_ = u_?.IssuedElement;
 			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? y_ = (default(CqlTupleMetadata), e_, n_ as CqlQuantity, x_);
+			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? y_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity, x_);
 
 			return y_;
 		};
@@ -2041,7 +2041,7 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 			Instant v_ = u_?.IssuedElement;
 			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? y_ = (default(CqlTupleMetadata), e_, n_ as CqlQuantity, x_);
+			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? y_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity, x_);
 
 			return y_;
 		};
@@ -2157,7 +2157,7 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 			Instant v_ = u_?.IssuedElement;
 			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? y_ = (default(CqlTupleMetadata), e_, n_ as CqlQuantity, x_);
+			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? y_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity, x_);
 
 			return y_;
 		};
@@ -2273,7 +2273,7 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 			Instant v_ = u_?.IssuedElement;
 			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? y_ = (default(CqlTupleMetadata), e_, n_ as CqlQuantity, x_);
+			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? y_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity, x_);
 
 			return y_;
 		};
@@ -2389,7 +2389,7 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 			Instant v_ = u_?.IssuedElement;
 			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? y_ = (default(CqlTupleMetadata), e_, n_ as CqlQuantity, x_);
+			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? y_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity, x_);
 
 			return y_;
 		};
@@ -2505,7 +2505,7 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 			Instant v_ = u_?.IssuedElement;
 			DateTimeOffset? w_ = v_?.Value;
 			CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? y_ = (default(CqlTupleMetadata), e_, n_ as CqlQuantity, x_);
+			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? y_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, n_ as CqlQuantity, x_);
 
 			return y_;
 		};
@@ -2599,7 +2599,7 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 			DataType t_ = s_?.Effective;
 			object u_ = FHIRHelpers_4_3_000.Instance.ToValue(context, t_);
 			CqlDateTime v_ = QICoreCommon_2_0_000.Instance.earliest(context, u_);
-			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? w_ = (default(CqlTupleMetadata), e_, m_ as CqlQuantity, v_);
+			(CqlTupleMetadata, string EncounterId, CqlQuantity FirstResult, CqlDateTime Timing)? w_ = (CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd, e_, m_ as CqlQuantity, v_);
 
 			return w_;
 		};
@@ -2644,4 +2644,9 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 		return a_;
 	}
 
+    private static CqlTupleMetadata CqlTupleMetadata_GIbILVAdXLLNYBgcQIEiUiKaK = new([typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)], ["EncounterId", "FirstTemperatureResult", "Timing"]);
+    private static CqlTupleMetadata CqlTupleMetadata_DhbJAfCiKIAGYKTjJXYGSKECQ = new([typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)], ["EncounterId", "FirstHeartRateResult", "Timing"]);
+    private static CqlTupleMetadata CqlTupleMetadata_FdREYEdHOZIcMCNYCRFJYJReA = new([typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)], ["EncounterId", "FirstOxygenSatResult", "Timing"]);
+    private static CqlTupleMetadata CqlTupleMetadata_CYbMQaXdPgTVSLXJSHHNTbhVM = new([typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)], ["EncounterId", "FirstRespRateResult", "Timing"]);
+    private static CqlTupleMetadata CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd = new([typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)], ["EncounterId", "FirstResult", "Timing"]);
 }

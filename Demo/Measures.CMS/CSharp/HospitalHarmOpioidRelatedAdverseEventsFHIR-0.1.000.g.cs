@@ -293,7 +293,7 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000 : ILibra
 		IEnumerable<ValueTuple<MedicationAdministration, MedicationAdministration, Encounter>> d_ = context.Operators.CrossJoin<MedicationAdministration, MedicationAdministration, Encounter>(a_, b_, c_);
 		(CqlTupleMetadata, MedicationAdministration OpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter EncounterWithQualifyingAge)? e_		(ValueTuple<MedicationAdministration, MedicationAdministration, Encounter> _valueTuple)
 		{
-			(CqlTupleMetadata, MedicationAdministration OpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter EncounterWithQualifyingAge)? k_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+			(CqlTupleMetadata, MedicationAdministration OpioidAntagonistGiven, MedicationAdministration OpioidGiven, Encounter EncounterWithQualifyingAge)? k_ = (CqlTupleMetadata_DBJShWTZiKWMABGVHCaJVcMhY, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return k_;
 		};
@@ -423,4 +423,5 @@ public partial class HospitalHarmOpioidRelatedAdverseEventsFHIR_0_1_000 : ILibra
 		return a_;
 	}
 
+    private static CqlTupleMetadata CqlTupleMetadata_DBJShWTZiKWMABGVHCaJVcMhY = new([typeof(MedicationAdministration), typeof(MedicationAdministration), typeof(Encounter)], ["OpioidAntagonistGiven", "OpioidGiven", "EncounterWithQualifyingAge"]);
 }

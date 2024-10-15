@@ -2104,7 +2104,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
 				}
 			};
 			CqlInterval<CqlDateTime> k_ = context.Operators.Interval(i_, j_(), true, false);
-			(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? l_ = (default(CqlTupleMetadata), DayIndex, k_);
+			(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? l_ = (CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie, DayIndex, k_);
 
 			return l_;
 		};
@@ -2163,7 +2163,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
 				}
 			};
 			CqlInterval<CqlDateTime> k_ = context.Operators.Interval(i_, j_(), true, false);
-			(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? l_ = (default(CqlTupleMetadata), DayIndex, k_);
+			(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? l_ = (CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie, DayIndex, k_);
 
 			return l_;
 		};
@@ -2172,4 +2172,5 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
 		return c_;
 	}
 
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new([typeof(int?), typeof(CqlInterval<CqlDateTime>)], ["dayIndex", "dayPeriod"]);
 }

@@ -205,7 +205,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 		IEnumerable<ValueTuple<Encounter, MedicationAdministration, Observation>> e_ = context.Operators.CrossJoin<Encounter, MedicationAdministration, Observation>(a_, b_, d_);
 		(CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? f_		(ValueTuple<Encounter, MedicationAdministration, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? l_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+			(CqlTupleMetadata, Encounter QualifyingEncounter, MedicationAdministration HypoglycemicMedication, Observation GlucoseTest)? l_ = (CqlTupleMetadata_FSGEiXEbHOWUcRPJgTjPZFYcO, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
 		};
@@ -475,7 +475,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 		IEnumerable<ValueTuple<Encounter, Observation, Observation>> e_ = context.Operators.CrossJoin<Encounter, Observation, Observation>(a_, b_, d_);
 		(CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? f_		(ValueTuple<Encounter, Observation, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? l_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation LowGlucoseTest, Observation FollowupGlucoseTest)? l_ = (CqlTupleMetadata_BfZBOfPTWgQBddbhgdIFdbKHU, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
 			return l_;
 		};
@@ -893,7 +893,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 		IEnumerable<ValueTuple<Encounter, Observation>> c_ = context.Operators.CrossJoin<Encounter, Observation>(a_, b_);
 		(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)? d_		(ValueTuple<Encounter, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)? j_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Encounter QualifyingEncounter, Observation HypoglycemicEvent)? j_ = (CqlTupleMetadata_GNOWceaaAJjTLNBBKCiSMeeVD, _valueTuple.Item1, _valueTuple.Item2);
 
 			return j_;
 		};
@@ -1011,4 +1011,7 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
 		return a_;
 	}
 
+    private static CqlTupleMetadata CqlTupleMetadata_FSGEiXEbHOWUcRPJgTjPZFYcO = new([typeof(Encounter), typeof(MedicationAdministration), typeof(Observation)], ["QualifyingEncounter", "HypoglycemicMedication", "GlucoseTest"]);
+    private static CqlTupleMetadata CqlTupleMetadata_BfZBOfPTWgQBddbhgdIFdbKHU = new([typeof(Encounter), typeof(Observation), typeof(Observation)], ["QualifyingEncounter", "LowGlucoseTest", "FollowupGlucoseTest"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GNOWceaaAJjTLNBBKCiSMeeVD = new([typeof(Encounter), typeof(Observation)], ["QualifyingEncounter", "HypoglycemicEvent"]);
 }

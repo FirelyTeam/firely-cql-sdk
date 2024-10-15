@@ -837,7 +837,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 		IEnumerable<ValueTuple<Observation, Observation, Observation, Observation, Observation>> u_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_);
 		(CqlTupleMetadata, Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)? v_		(ValueTuple<Observation, Observation, Observation, Observation, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)? ab_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4, _valueTuple.Item5);
+			(CqlTupleMetadata, Observation HOOSLifeQuality, Observation HOOSSport, Observation HOOSActivityScore, Observation HOOSSymptoms, Observation HOOSPain)? ab_ = (CqlTupleMetadata_GVNUVHGXYWXVGgfjdTEahUfhP, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4, _valueTuple.Item5);
 
 			return ab_;
 		};
@@ -1163,7 +1163,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 		IEnumerable<ValueTuple<Observation, Observation>> g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
 		(CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? h_		(ValueTuple<Observation, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? n_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? n_ = (CqlTupleMetadata_DDTAOdcFieSJbGgRLLZPYbGQb, _valueTuple.Item1, _valueTuple.Item2);
 
 			return n_;
 		};
@@ -1313,7 +1313,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 		IEnumerable<ValueTuple<Observation, Observation>> g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
 		(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? h_		(ValueTuple<Observation, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? n_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? n_ = (CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH, _valueTuple.Item1, _valueTuple.Item2);
 
 			return n_;
 		};
@@ -1463,7 +1463,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 		IEnumerable<ValueTuple<Observation, Observation>> g_ = context.Operators.CrossJoin<Observation, Observation>(c_, f_);
 		(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? h_		(ValueTuple<Observation, Observation> _valueTuple)
 		{
-			(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? n_ = (default(CqlTupleMetadata), _valueTuple.Item1, _valueTuple.Item2);
+			(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? n_ = (CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH, _valueTuple.Item1, _valueTuple.Item2);
 
 			return n_;
 		};
@@ -1617,4 +1617,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
 		return i_;
 	}
 
+    private static CqlTupleMetadata CqlTupleMetadata_GVNUVHGXYWXVGgfjdTEahUfhP = new([typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)], ["HOOSLifeQuality", "HOOSSport", "HOOSActivityScore", "HOOSSymptoms", "HOOSPain"]);
+    private static CqlTupleMetadata CqlTupleMetadata_DDTAOdcFieSJbGgRLLZPYbGQb = new([typeof(Observation), typeof(Observation)], ["PROMIS10MentalScore", "PROMIS10PhysicalScore"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH = new([typeof(Observation), typeof(Observation)], ["VR12MentalAssessment", "VR12PhysicalAssessment"]);
 }
