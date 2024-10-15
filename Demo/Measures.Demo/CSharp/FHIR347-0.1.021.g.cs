@@ -957,15 +957,15 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
 					};
 					if (an_())
 					{
-Timing.RepeatComponent av_ = T?.Repeat;
-DataType aw_ = av_?.Bounds;
+						Timing.RepeatComponent av_ = T?.Repeat;
+						DataType aw_ = av_?.Bounds;
 
 						return (aw_ as Range) as object;
 					}
 					else if (ao_())
 					{
-Timing.RepeatComponent ax_ = T?.Repeat;
-DataType ay_ = ax_?.Bounds;
+						Timing.RepeatComponent ax_ = T?.Repeat;
+						DataType ay_ = ax_?.Bounds;
 
 						return (ay_ as Period) as object;
 					}

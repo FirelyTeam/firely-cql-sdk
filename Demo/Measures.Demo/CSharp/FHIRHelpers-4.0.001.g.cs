@@ -44,11 +44,11 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
 			}
 			else
 			{
-FhirDateTime b_ = period?.StartElement;
-CqlDateTime c_ = context.Operators.Convert<CqlDateTime>(b_);
-FhirDateTime d_ = period?.EndElement;
-CqlDateTime e_ = context.Operators.Convert<CqlDateTime>(d_);
-CqlInterval<CqlDateTime> f_ = context.Operators.Interval(c_, e_, true, true);
+				FhirDateTime b_ = period?.StartElement;
+				CqlDateTime c_ = context.Operators.Convert<CqlDateTime>(b_);
+				FhirDateTime d_ = period?.EndElement;
+				CqlDateTime e_ = context.Operators.Convert<CqlDateTime>(d_);
+				CqlInterval<CqlDateTime> f_ = context.Operators.Interval(c_, e_, true, true);
 
 				return f_;
 			}
@@ -67,11 +67,11 @@ CqlInterval<CqlDateTime> f_ = context.Operators.Interval(c_, e_, true, true);
 			}
 			else
 			{
-Quantity b_ = range?.Low;
-CqlQuantity c_ = this.ToQuantity(context, b_);
-Quantity d_ = range?.High;
-CqlQuantity e_ = this.ToQuantity(context, d_);
-CqlInterval<CqlQuantity> f_ = context.Operators.Interval(c_, e_, true, true);
+				Quantity b_ = range?.Low;
+				CqlQuantity c_ = this.ToQuantity(context, b_);
+				Quantity d_ = range?.High;
+				CqlQuantity e_ = this.ToQuantity(context, d_);
+				CqlInterval<CqlQuantity> f_ = context.Operators.Interval(c_, e_, true, true);
 
 				return f_;
 			}
@@ -90,10 +90,10 @@ CqlInterval<CqlQuantity> f_ = context.Operators.Interval(c_, e_, true, true);
 			}
 			else
 			{
-FhirDecimal b_ = quantity?.ValueElement;
-decimal? c_ = b_?.Value;
-FhirString d_ = quantity?.UnitElement;
-string e_ = d_?.Value;
+				FhirDecimal b_ = quantity?.ValueElement;
+				decimal? c_ = b_?.Value;
+				FhirString d_ = quantity?.UnitElement;
+				string e_ = d_?.Value;
 
 				return new CqlQuantity(c_, e_);
 			}
@@ -112,10 +112,10 @@ string e_ = d_?.Value;
 			}
 			else
 			{
-Quantity b_ = ratio?.Numerator;
-CqlQuantity c_ = this.ToQuantity(context, b_);
-Quantity d_ = ratio?.Denominator;
-CqlQuantity e_ = this.ToQuantity(context, d_);
+				Quantity b_ = ratio?.Numerator;
+				CqlQuantity c_ = this.ToQuantity(context, b_);
+				Quantity d_ = ratio?.Denominator;
+				CqlQuantity e_ = this.ToQuantity(context, d_);
 
 				return new CqlRatio(c_, e_);
 			}
@@ -134,14 +134,14 @@ CqlQuantity e_ = this.ToQuantity(context, d_);
 			}
 			else
 			{
-Code b_ = coding?.CodeElement;
-string c_ = b_?.Value;
-FhirUri d_ = coding?.SystemElement;
-string e_ = d_?.Value;
-FhirString f_ = coding?.VersionElement;
-string g_ = f_?.Value;
-FhirString h_ = coding?.DisplayElement;
-string i_ = h_?.Value;
+				Code b_ = coding?.CodeElement;
+				string c_ = b_?.Value;
+				FhirUri d_ = coding?.SystemElement;
+				string e_ = d_?.Value;
+				FhirString f_ = coding?.VersionElement;
+				string g_ = f_?.Value;
+				FhirString h_ = coding?.DisplayElement;
+				string i_ = h_?.Value;
 
 				return new CqlCode(c_, e_, g_, i_);
 			}
@@ -160,16 +160,16 @@ string i_ = h_?.Value;
 			}
 			else
 			{
-List<Coding> b_ = concept?.Coding;
-CqlCode c_(Coding C)
+				List<Coding> b_ = concept?.Coding;
+				CqlCode c_				(Coding C)
 				{
-CqlCode g_ = this.ToCode(context, C);
+					CqlCode g_ = this.ToCode(context, C);
 
 					return g_;
 				};
-IEnumerable<CqlCode> d_ = context.Operators.Select<Coding, CqlCode>((IEnumerable<Coding>)b_, c_);
-FhirString e_ = concept?.TextElement;
-string f_ = e_?.Value;
+				IEnumerable<CqlCode> d_ = context.Operators.Select<Coding, CqlCode>((IEnumerable<Coding>)b_, c_);
+				FhirString e_ = concept?.TextElement;
+				string f_ = e_?.Value;
 
 				return new CqlConcept(d_, f_);
 			}

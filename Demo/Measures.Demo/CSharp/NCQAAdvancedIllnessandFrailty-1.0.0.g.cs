@@ -301,21 +301,21 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 			};
 			if (b_())
 			{
-IEnumerable<CqlDate> g_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
-IEnumerable<CqlDate> h_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
-IEnumerable<CqlDate> i_ = context.Operators.Union<CqlDate>(g_, h_);
+				IEnumerable<CqlDate> g_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
+				IEnumerable<CqlDate> h_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
+				IEnumerable<CqlDate> i_ = context.Operators.Union<CqlDate>(g_, h_);
 
 				return i_;
 			}
 			else if ((this.Outpatient_Encounters_with_Advanced_Illness(context)) is null)
 			{
-IEnumerable<CqlDate> j_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
+				IEnumerable<CqlDate> j_ = this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context);
 
 				return j_;
 			}
 			else if ((this.Nonacute_Inpatient_Discharge_with_Advanced_Illness(context)) is null)
 			{
-IEnumerable<CqlDate> k_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
+				IEnumerable<CqlDate> k_ = this.Outpatient_Encounters_with_Advanced_Illness(context);
 
 				return k_;
 			}

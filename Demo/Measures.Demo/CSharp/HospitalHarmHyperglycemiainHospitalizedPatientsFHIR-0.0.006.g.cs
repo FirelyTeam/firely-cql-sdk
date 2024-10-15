@@ -395,22 +395,22 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 				};
 				if (m_())
 				{
-CqlDateTime w_ = context.Operators.Start(Period);
-CqlQuantity x_ = context.Operators.Quantity(24m, "hours");
-int? y_ = context.Operators.Subtract(DayIndex, 1);
-CqlQuantity z_ = context.Operators.ConvertIntegerToQuantity(y_);
-CqlQuantity aa_ = context.Operators.Multiply(x_, z_);
-CqlDateTime ab_ = context.Operators.Add(w_, aa_);
+					CqlDateTime w_ = context.Operators.Start(Period);
+					CqlQuantity x_ = context.Operators.Quantity(24m, "hours");
+					int? y_ = context.Operators.Subtract(DayIndex, 1);
+					CqlQuantity z_ = context.Operators.ConvertIntegerToQuantity(y_);
+					CqlQuantity aa_ = context.Operators.Multiply(x_, z_);
+					CqlDateTime ab_ = context.Operators.Add(w_, aa_);
 
 					return ab_;
 				}
 				else
 				{
-CqlDateTime ac_ = context.Operators.Start(Period);
-CqlQuantity ad_ = context.Operators.Quantity(24m, "hours");
-CqlQuantity ae_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
-CqlQuantity af_ = context.Operators.Multiply(ad_, ae_);
-CqlDateTime ag_ = context.Operators.Add(ac_, af_);
+					CqlDateTime ac_ = context.Operators.Start(Period);
+					CqlQuantity ad_ = context.Operators.Quantity(24m, "hours");
+					CqlQuantity ae_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
+					CqlQuantity af_ = context.Operators.Multiply(ad_, ae_);
+					CqlDateTime ag_ = context.Operators.Add(ac_, af_);
 
 					return ag_;
 				}

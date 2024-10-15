@@ -202,8 +202,8 @@ public partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ILibrary, ISinglet
 					return z_;
 				};
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(EncounterDiag is Element
-	? (EncounterDiag as Element).Extension
-	: default), n_);
+						? (EncounterDiag as Element).Extension
+						: default), n_);
 				object p_				(Extension @this)
 				{
 					DataType aa_ = @this?.Value;
@@ -320,8 +320,8 @@ public partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ILibrary, ISinglet
 					return z_;
 				};
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Stage234UnstageablePressureInjury is Element
-	? (Stage234UnstageablePressureInjury as Element).Extension
-	: default), n_);
+						? (Stage234UnstageablePressureInjury as Element).Extension
+						: default), n_);
 				object p_				(Extension @this)
 				{
 					DataType aa_ = @this?.Value;
@@ -478,8 +478,8 @@ public partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ILibrary, ISinglet
 					return z_;
 				};
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(EncounterDiag is Element
-	? (EncounterDiag as Element).Extension
-	: default), n_);
+						? (EncounterDiag as Element).Extension
+						: default), n_);
 				object p_				(Extension @this)
 				{
 					DataType aa_ = @this?.Value;
@@ -616,8 +616,8 @@ public partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ILibrary, ISinglet
 					return z_;
 				};
 				IEnumerable<Extension> o_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(Stage234UnstageablePressureInjury is Element
-	? (Stage234UnstageablePressureInjury as Element).Extension
-	: default), n_);
+						? (Stage234UnstageablePressureInjury as Element).Extension
+						: default), n_);
 				object p_				(Extension @this)
 				{
 					DataType aa_ = @this?.Value;

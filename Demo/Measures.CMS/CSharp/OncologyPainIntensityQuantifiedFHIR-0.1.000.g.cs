@@ -353,34 +353,34 @@ public partial class OncologyPainIntensityQuantifiedFHIR_0_1_000 : ILibrary, ISi
 					};
 					if (t_())
 					{
-DataType ae_ = PainAssessed?.Effective;
-object af_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ae_);
-CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.Instance.toInterval(context, af_);
-CqlDateTime ah_ = context.Operators.End(ag_);
-Period ai_ = RadiationManagementEncounter?.Period;
-CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ai_);
-CqlDateTime ak_ = context.Operators.Start(aj_);
-CqlQuantity al_ = context.Operators.Quantity(6m, "days");
-CqlDateTime am_ = context.Operators.Subtract(ak_, al_);
-CqlInterval<CqlDateTime> ao_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ai_);
-CqlDateTime ap_ = context.Operators.Start(ao_);
-CqlInterval<CqlDateTime> aq_ = context.Operators.Interval(am_, ap_, true, true);
-bool? ar_ = context.Operators.In<CqlDateTime>(ah_, aq_, "day");
-CqlInterval<CqlDateTime> at_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ai_);
-CqlDateTime au_ = context.Operators.Start(at_);
-bool? av_ = context.Operators.Not((bool?)(au_ is null));
-bool? aw_ = context.Operators.And(ar_, av_);
+						DataType ae_ = PainAssessed?.Effective;
+						object af_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ae_);
+						CqlInterval<CqlDateTime> ag_ = QICoreCommon_2_0_000.Instance.toInterval(context, af_);
+						CqlDateTime ah_ = context.Operators.End(ag_);
+						Period ai_ = RadiationManagementEncounter?.Period;
+						CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ai_);
+						CqlDateTime ak_ = context.Operators.Start(aj_);
+						CqlQuantity al_ = context.Operators.Quantity(6m, "days");
+						CqlDateTime am_ = context.Operators.Subtract(ak_, al_);
+						CqlInterval<CqlDateTime> ao_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ai_);
+						CqlDateTime ap_ = context.Operators.Start(ao_);
+						CqlInterval<CqlDateTime> aq_ = context.Operators.Interval(am_, ap_, true, true);
+						bool? ar_ = context.Operators.In<CqlDateTime>(ah_, aq_, "day");
+						CqlInterval<CqlDateTime> at_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ai_);
+						CqlDateTime au_ = context.Operators.Start(at_);
+						bool? av_ = context.Operators.Not((bool?)(au_ is null));
+						bool? aw_ = context.Operators.And(ar_, av_);
 
 						return aw_;
 					}
 					else
 					{
-Period ax_ = RadiationManagementEncounter?.Period;
-CqlInterval<CqlDateTime> ay_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ax_);
-DataType az_ = PainAssessed?.Effective;
-object ba_ = FHIRHelpers_4_3_000.Instance.ToValue(context, az_);
-CqlInterval<CqlDateTime> bb_ = QICoreCommon_2_0_000.Instance.toInterval(context, ba_);
-bool? bc_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ay_, bb_, "day");
+						Period ax_ = RadiationManagementEncounter?.Period;
+						CqlInterval<CqlDateTime> ay_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ax_);
+						DataType az_ = PainAssessed?.Effective;
+						object ba_ = FHIRHelpers_4_3_000.Instance.ToValue(context, az_);
+						CqlInterval<CqlDateTime> bb_ = QICoreCommon_2_0_000.Instance.toInterval(context, ba_);
+						bool? bc_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ay_, bb_, "day");
 
 						return bc_;
 					}

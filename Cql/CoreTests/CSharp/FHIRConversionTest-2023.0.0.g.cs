@@ -43,19 +43,19 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 			List<Account.GuarantorComponent> n_ = a?.Guarantor;
 			ResourceReference o_ = a?.PartOf;
 			Account p_ = new Account
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Type = g_,
-NameElement = h_,
-Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
-ServicePeriod = j_,
-Coverage = new List<Account.CoverageComponent>((IEnumerable<Account.CoverageComponent>)k_),
-Owner = l_,
-DescriptionElement = m_,
-Guarantor = new List<Account.GuarantorComponent>((IEnumerable<Account.GuarantorComponent>)n_),
-PartOf = o_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Type = g_,
+				NameElement = h_,
+				Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
+				ServicePeriod = j_,
+				Coverage = new List<Account.CoverageComponent>((IEnumerable<Account.CoverageComponent>)k_),
+				Owner = l_,
+				DescriptionElement = m_,
+				Guarantor = new List<Account.GuarantorComponent>((IEnumerable<Account.GuarantorComponent>)n_),
+				PartOf = o_,
+			};
 
 			return p_;
 		};
@@ -119,54 +119,54 @@ PartOf = o_,
 			Canonical aw_ = a?.TransformElement;
 			List<ActivityDefinition.DynamicValueComponent> ax_ = a?.DynamicValue;
 			ActivityDefinition ay_ = new ActivityDefinition
-{
-UrlElement = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-VersionElement = g_,
-NameElement = h_,
-TitleElement = i_,
-SubtitleElement = j_,
-StatusElement = k_,
-ExperimentalElement = l_,
-Subject = (DataType)m_,
-DateElement = n_,
-PublisherElement = o_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)p_),
-DescriptionElement = q_,
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)r_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
-PurposeElement = t_,
-UsageElement = u_,
-CopyrightElement = v_,
-ApprovalDateElement = w_,
-LastReviewDateElement = x_,
-EffectivePeriod = y_,
-Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)z_),
-Author = new List<ContactDetail>((IEnumerable<ContactDetail>)aa_),
-Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)ab_),
-Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)ac_),
-Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)ad_),
-RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)ae_),
-LibraryElement = new List<Canonical>((IEnumerable<Canonical>)af_),
-KindElement = ag_,
-ProfileElement = ah_,
-Code = ai_,
-IntentElement = aj_,
-PriorityElement = ak_,
-DoNotPerformElement = al_,
-Timing = (DataType)am_,
-Location = an_,
-Participant = new List<ActivityDefinition.ParticipantComponent>((IEnumerable<ActivityDefinition.ParticipantComponent>)ao_),
-Product = (DataType)ap_,
-Quantity = aq_,
-Dosage = new List<Dosage>((IEnumerable<Dosage>)ar_),
-BodySite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)as_),
-SpecimenRequirement = new List<ResourceReference>((IEnumerable<ResourceReference>)at_),
-ObservationRequirement = new List<ResourceReference>((IEnumerable<ResourceReference>)au_),
-ObservationResultRequirement = new List<ResourceReference>((IEnumerable<ResourceReference>)av_),
-TransformElement = aw_,
-DynamicValue = new List<ActivityDefinition.DynamicValueComponent>((IEnumerable<ActivityDefinition.DynamicValueComponent>)ax_),
-};
+			{
+				UrlElement = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				VersionElement = g_,
+				NameElement = h_,
+				TitleElement = i_,
+				SubtitleElement = j_,
+				StatusElement = k_,
+				ExperimentalElement = l_,
+				Subject = (DataType)m_,
+				DateElement = n_,
+				PublisherElement = o_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)p_),
+				DescriptionElement = q_,
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)r_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
+				PurposeElement = t_,
+				UsageElement = u_,
+				CopyrightElement = v_,
+				ApprovalDateElement = w_,
+				LastReviewDateElement = x_,
+				EffectivePeriod = y_,
+				Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)z_),
+				Author = new List<ContactDetail>((IEnumerable<ContactDetail>)aa_),
+				Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)ab_),
+				Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)ac_),
+				Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)ad_),
+				RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)ae_),
+				LibraryElement = new List<Canonical>((IEnumerable<Canonical>)af_),
+				KindElement = ag_,
+				ProfileElement = ah_,
+				Code = ai_,
+				IntentElement = aj_,
+				PriorityElement = ak_,
+				DoNotPerformElement = al_,
+				Timing = (DataType)am_,
+				Location = an_,
+				Participant = new List<ActivityDefinition.ParticipantComponent>((IEnumerable<ActivityDefinition.ParticipantComponent>)ao_),
+				Product = (DataType)ap_,
+				Quantity = aq_,
+				Dosage = new List<Dosage>((IEnumerable<Dosage>)ar_),
+				BodySite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)as_),
+				SpecimenRequirement = new List<ResourceReference>((IEnumerable<ResourceReference>)at_),
+				ObservationRequirement = new List<ResourceReference>((IEnumerable<ResourceReference>)au_),
+				ObservationResultRequirement = new List<ResourceReference>((IEnumerable<ResourceReference>)av_),
+				TransformElement = aw_,
+				DynamicValue = new List<ActivityDefinition.DynamicValueComponent>((IEnumerable<ActivityDefinition.DynamicValueComponent>)ax_),
+			};
 
 			return ay_;
 		};
@@ -204,28 +204,28 @@ DynamicValue = new List<ActivityDefinition.DynamicValueComponent>((IEnumerable<A
 			List<ResourceReference> w_ = a?.ReferenceDocument;
 			List<ResourceReference> x_ = a?.Study;
 			AdverseEvent y_ = new AdverseEvent
-{
-Identifier = e_,
-ActualityElement = f_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
-Event = h_,
-Subject = i_,
-Encounter = j_,
-DateElement = k_,
-DetectedElement = l_,
-RecordedDateElement = m_,
-ResultingCondition = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
-Location = o_,
-Seriousness = p_,
-Severity = q_,
-Outcome = r_,
-Recorder = s_,
-Contributor = new List<ResourceReference>((IEnumerable<ResourceReference>)t_),
-SuspectEntity = new List<AdverseEvent.SuspectEntityComponent>((IEnumerable<AdverseEvent.SuspectEntityComponent>)u_),
-SubjectMedicalHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)v_),
-ReferenceDocument = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
-Study = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
-};
+			{
+				Identifier = e_,
+				ActualityElement = f_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
+				Event = h_,
+				Subject = i_,
+				Encounter = j_,
+				DateElement = k_,
+				DetectedElement = l_,
+				RecordedDateElement = m_,
+				ResultingCondition = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
+				Location = o_,
+				Seriousness = p_,
+				Severity = q_,
+				Outcome = r_,
+				Recorder = s_,
+				Contributor = new List<ResourceReference>((IEnumerable<ResourceReference>)t_),
+				SuspectEntity = new List<AdverseEvent.SuspectEntityComponent>((IEnumerable<AdverseEvent.SuspectEntityComponent>)u_),
+				SubjectMedicalHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)v_),
+				ReferenceDocument = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
+				Study = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
+			};
 
 			return y_;
 		};
@@ -259,24 +259,24 @@ Study = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
 			List<Annotation> s_ = a?.Note;
 			List<AllergyIntolerance.ReactionComponent> t_ = a?.Reaction;
 			AllergyIntolerance u_ = new AllergyIntolerance
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-ClinicalStatus = f_,
-VerificationStatus = g_,
-TypeElement = h_,
-CategoryElement = new List<Code<AllergyIntolerance.AllergyIntoleranceCategory>>((IEnumerable<Code<AllergyIntolerance.AllergyIntoleranceCategory>>)i_),
-CriticalityElement = j_,
-Code = k_,
-Patient = l_,
-Encounter = m_,
-Onset = (DataType)n_,
-RecordedDateElement = o_,
-Recorder = p_,
-Asserter = q_,
-LastOccurrenceElement = r_,
-Note = new List<Annotation>((IEnumerable<Annotation>)s_),
-Reaction = new List<AllergyIntolerance.ReactionComponent>((IEnumerable<AllergyIntolerance.ReactionComponent>)t_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				ClinicalStatus = f_,
+				VerificationStatus = g_,
+				TypeElement = h_,
+				CategoryElement = new List<Code<AllergyIntolerance.AllergyIntoleranceCategory>>((IEnumerable<Code<AllergyIntolerance.AllergyIntoleranceCategory>>)i_),
+				CriticalityElement = j_,
+				Code = k_,
+				Patient = l_,
+				Encounter = m_,
+				Onset = (DataType)n_,
+				RecordedDateElement = o_,
+				Recorder = p_,
+				Asserter = q_,
+				LastOccurrenceElement = r_,
+				Note = new List<Annotation>((IEnumerable<Annotation>)s_),
+				Reaction = new List<AllergyIntolerance.ReactionComponent>((IEnumerable<AllergyIntolerance.ReactionComponent>)t_),
+			};
 
 			return u_;
 		};
@@ -320,30 +320,30 @@ Reaction = new List<AllergyIntolerance.ReactionComponent>((IEnumerable<AllergyIn
 			List<Appointment.ParticipantComponent> ac_ = a?.Participant;
 			List<Period> ad_ = a?.RequestedPeriod;
 			Appointment ae_ = new Appointment
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-CancelationReason = g_,
-ServiceCategory = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
-ServiceType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
-Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)j_),
-AppointmentType = k_,
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)l_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
-PriorityElement = p_,
-DescriptionElement = q_,
-SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
-StartElement = s_,
-EndElement = t_,
-MinutesDurationElement = w_,
-Slot = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
-CreatedElement = y_,
-CommentElement = z_,
-PatientInstructionElement = aa_,
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)ab_),
-Participant = new List<Appointment.ParticipantComponent>((IEnumerable<Appointment.ParticipantComponent>)ac_),
-RequestedPeriod = new List<Period>((IEnumerable<Period>)ad_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				CancelationReason = g_,
+				ServiceCategory = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
+				ServiceType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
+				Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)j_),
+				AppointmentType = k_,
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)l_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
+				PriorityElement = p_,
+				DescriptionElement = q_,
+				SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
+				StartElement = s_,
+				EndElement = t_,
+				MinutesDurationElement = w_,
+				Slot = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
+				CreatedElement = y_,
+				CommentElement = z_,
+				PatientInstructionElement = aa_,
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)ab_),
+				Participant = new List<Appointment.ParticipantComponent>((IEnumerable<Appointment.ParticipantComponent>)ac_),
+				RequestedPeriod = new List<Period>((IEnumerable<Period>)ad_),
+			};
 
 			return ae_;
 		};
@@ -369,16 +369,16 @@ RequestedPeriod = new List<Period>((IEnumerable<Period>)ad_),
 			Code<ParticipationStatus> k_ = a?.ParticipantStatusElement;
 			FhirString l_ = a?.CommentElement;
 			AppointmentResponse m_ = new AppointmentResponse
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-Appointment = f_,
-StartElement = g_,
-EndElement = h_,
-ParticipantType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
-Actor = j_,
-ParticipantStatusElement = k_,
-CommentElement = l_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				Appointment = f_,
+				StartElement = g_,
+				EndElement = h_,
+				ParticipantType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
+				Actor = j_,
+				ParticipantStatusElement = k_,
+				CommentElement = l_,
+			};
 
 			return m_;
 		};
@@ -407,19 +407,19 @@ CommentElement = l_,
 			AuditEvent.SourceComponent n_ = a?.Source;
 			List<AuditEvent.EntityComponent> o_ = a?.Entity;
 			AuditEvent p_ = new AuditEvent
-{
-Type = e_,
-Subtype = new List<Coding>((IEnumerable<Coding>)f_),
-ActionElement = g_,
-Period = h_,
-RecordedElement = i_,
-OutcomeElement = j_,
-OutcomeDescElement = k_,
-PurposeOfEvent = new List<CodeableConcept>((IEnumerable<CodeableConcept>)l_),
-Agent = new List<AuditEvent.AgentComponent>((IEnumerable<AuditEvent.AgentComponent>)m_),
-Source = n_,
-Entity = new List<AuditEvent.EntityComponent>((IEnumerable<AuditEvent.EntityComponent>)o_),
-};
+			{
+				Type = e_,
+				Subtype = new List<Coding>((IEnumerable<Coding>)f_),
+				ActionElement = g_,
+				Period = h_,
+				RecordedElement = i_,
+				OutcomeElement = j_,
+				OutcomeDescElement = k_,
+				PurposeOfEvent = new List<CodeableConcept>((IEnumerable<CodeableConcept>)l_),
+				Agent = new List<AuditEvent.AgentComponent>((IEnumerable<AuditEvent.AgentComponent>)m_),
+				Source = n_,
+				Entity = new List<AuditEvent.EntityComponent>((IEnumerable<AuditEvent.EntityComponent>)o_),
+			};
 
 			return p_;
 		};
@@ -442,13 +442,13 @@ Entity = new List<AuditEvent.EntityComponent>((IEnumerable<AuditEvent.EntityComp
 			Date h_ = a?.CreatedElement;
 			ResourceReference i_ = a?.Author;
 			Basic j_ = new Basic
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-Code = f_,
-Subject = g_,
-CreatedElement = h_,
-Author = i_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				Code = f_,
+				Subject = g_,
+				CreatedElement = h_,
+				Author = i_,
+			};
 
 			return j_;
 		};
@@ -477,19 +477,19 @@ Author = i_,
 			BiologicallyDerivedProduct.ManipulationComponent n_ = a?.Manipulation;
 			List<BiologicallyDerivedProduct.StorageComponent> o_ = a?.Storage;
 			BiologicallyDerivedProduct p_ = new BiologicallyDerivedProduct
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-ProductCategoryElement = f_,
-ProductCode = g_,
-StatusElement = h_,
-Request = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
-QuantityElement = j_,
-Parent = new List<ResourceReference>((IEnumerable<ResourceReference>)k_),
-Collection = l_,
-Processing = new List<BiologicallyDerivedProduct.ProcessingComponent>((IEnumerable<BiologicallyDerivedProduct.ProcessingComponent>)m_),
-Manipulation = n_,
-Storage = new List<BiologicallyDerivedProduct.StorageComponent>((IEnumerable<BiologicallyDerivedProduct.StorageComponent>)o_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				ProductCategoryElement = f_,
+				ProductCode = g_,
+				StatusElement = h_,
+				Request = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
+				QuantityElement = j_,
+				Parent = new List<ResourceReference>((IEnumerable<ResourceReference>)k_),
+				Collection = l_,
+				Processing = new List<BiologicallyDerivedProduct.ProcessingComponent>((IEnumerable<BiologicallyDerivedProduct.ProcessingComponent>)m_),
+				Manipulation = n_,
+				Storage = new List<BiologicallyDerivedProduct.StorageComponent>((IEnumerable<BiologicallyDerivedProduct.StorageComponent>)o_),
+			};
 
 			return p_;
 		};
@@ -515,16 +515,16 @@ Storage = new List<BiologicallyDerivedProduct.StorageComponent>((IEnumerable<Bio
 			List<Attachment> k_ = a?.Image;
 			ResourceReference l_ = a?.Patient;
 			BodyStructure m_ = new BodyStructure
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-ActiveElement = f_,
-Morphology = g_,
-Location = h_,
-LocationQualifier = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
-DescriptionElement = j_,
-Image = new List<Attachment>((IEnumerable<Attachment>)k_),
-Patient = l_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				ActiveElement = f_,
+				Morphology = g_,
+				Location = h_,
+				LocationQualifier = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
+				DescriptionElement = j_,
+				Image = new List<Attachment>((IEnumerable<Attachment>)k_),
+				Patient = l_,
+			};
 
 			return m_;
 		};
@@ -565,31 +565,31 @@ Patient = l_,
 			List<CarePlan.ActivityComponent> z_ = a?.Activity;
 			List<Annotation> aa_ = a?.Note;
 			CarePlan ab_ = new CarePlan
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
-InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)g_),
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
-Replaces = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
-PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)j_),
-StatusElement = k_,
-IntentElement = l_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
-TitleElement = n_,
-DescriptionElement = o_,
-Subject = p_,
-Encounter = q_,
-Period = r_,
-CreatedElement = s_,
-Author = t_,
-Contributor = new List<ResourceReference>((IEnumerable<ResourceReference>)u_),
-CareTeam = new List<ResourceReference>((IEnumerable<ResourceReference>)v_),
-Addresses = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
-SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
-Goal = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
-Activity = new List<CarePlan.ActivityComponent>((IEnumerable<CarePlan.ActivityComponent>)z_),
-Note = new List<Annotation>((IEnumerable<Annotation>)aa_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
+				InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)g_),
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
+				Replaces = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
+				PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)j_),
+				StatusElement = k_,
+				IntentElement = l_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
+				TitleElement = n_,
+				DescriptionElement = o_,
+				Subject = p_,
+				Encounter = q_,
+				Period = r_,
+				CreatedElement = s_,
+				Author = t_,
+				Contributor = new List<ResourceReference>((IEnumerable<ResourceReference>)u_),
+				CareTeam = new List<ResourceReference>((IEnumerable<ResourceReference>)v_),
+				Addresses = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
+				SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
+				Goal = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
+				Activity = new List<CarePlan.ActivityComponent>((IEnumerable<CarePlan.ActivityComponent>)z_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)aa_),
+			};
 
 			return ab_;
 		};
@@ -620,21 +620,21 @@ Note = new List<Annotation>((IEnumerable<Annotation>)aa_),
 			List<ContactPoint> p_ = a?.Telecom;
 			List<Annotation> q_ = a?.Note;
 			CareTeam r_ = new CareTeam
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
-NameElement = h_,
-Subject = i_,
-Encounter = j_,
-Period = k_,
-Participant = new List<CareTeam.ParticipantComponent>((IEnumerable<CareTeam.ParticipantComponent>)l_),
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
-ManagingOrganization = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
-Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)p_),
-Note = new List<Annotation>((IEnumerable<Annotation>)q_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
+				NameElement = h_,
+				Subject = i_,
+				Encounter = j_,
+				Period = k_,
+				Participant = new List<CareTeam.ParticipantComponent>((IEnumerable<CareTeam.ParticipantComponent>)l_),
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
+				ManagingOrganization = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
+				Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)p_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)q_),
+			};
 
 			return r_;
 		};
@@ -665,21 +665,21 @@ Note = new List<Annotation>((IEnumerable<Annotation>)q_),
 			List<CodeableConcept> p_ = a?.AdditionalClassification;
 			List<CatalogEntry.RelatedEntryComponent> q_ = a?.RelatedEntry;
 			CatalogEntry r_ = new CatalogEntry
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-Type = f_,
-OrderableElement = g_,
-ReferencedItem = h_,
-AdditionalIdentifier = new List<Identifier>((IEnumerable<Identifier>)i_),
-Classification = new List<CodeableConcept>((IEnumerable<CodeableConcept>)j_),
-StatusElement = k_,
-ValidityPeriod = l_,
-ValidToElement = m_,
-LastUpdatedElement = n_,
-AdditionalCharacteristic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)o_),
-AdditionalClassification = new List<CodeableConcept>((IEnumerable<CodeableConcept>)p_),
-RelatedEntry = new List<CatalogEntry.RelatedEntryComponent>((IEnumerable<CatalogEntry.RelatedEntryComponent>)q_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				Type = f_,
+				OrderableElement = g_,
+				ReferencedItem = h_,
+				AdditionalIdentifier = new List<Identifier>((IEnumerable<Identifier>)i_),
+				Classification = new List<CodeableConcept>((IEnumerable<CodeableConcept>)j_),
+				StatusElement = k_,
+				ValidityPeriod = l_,
+				ValidToElement = m_,
+				LastUpdatedElement = n_,
+				AdditionalCharacteristic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)o_),
+				AdditionalClassification = new List<CodeableConcept>((IEnumerable<CodeableConcept>)p_),
+				RelatedEntry = new List<CatalogEntry.RelatedEntryComponent>((IEnumerable<CatalogEntry.RelatedEntryComponent>)q_),
+			};
 
 			return r_;
 		};
@@ -723,34 +723,34 @@ RelatedEntry = new List<CatalogEntry.RelatedEntryComponent>((IEnumerable<Catalog
 			List<Annotation> ac_ = a?.Note;
 			List<ResourceReference> ad_ = a?.SupportingInformation;
 			ChargeItem ae_ = new ChargeItem
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-DefinitionUriElement = new List<FhirUri>((IEnumerable<FhirUri>)f_),
-DefinitionCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)g_),
-StatusElement = h_,
-PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
-Code = j_,
-Subject = k_,
-Context = l_,
-Occurrence = (DataType)m_,
-Performer = new List<ChargeItem.PerformerComponent>((IEnumerable<ChargeItem.PerformerComponent>)n_),
-PerformingOrganization = o_,
-RequestingOrganization = p_,
-CostCenter = q_,
-Quantity = r_,
-Bodysite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
-FactorOverrideElement = t_,
-PriceOverride = u_,
-OverrideReasonElement = v_,
-Enterer = w_,
-EnteredDateElement = x_,
-Reason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)y_),
-Service = new List<ResourceReference>((IEnumerable<ResourceReference>)z_),
-Product = (DataType)aa_,
-Account = new List<ResourceReference>((IEnumerable<ResourceReference>)ab_),
-Note = new List<Annotation>((IEnumerable<Annotation>)ac_),
-SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)ad_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				DefinitionUriElement = new List<FhirUri>((IEnumerable<FhirUri>)f_),
+				DefinitionCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)g_),
+				StatusElement = h_,
+				PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
+				Code = j_,
+				Subject = k_,
+				Context = l_,
+				Occurrence = (DataType)m_,
+				Performer = new List<ChargeItem.PerformerComponent>((IEnumerable<ChargeItem.PerformerComponent>)n_),
+				PerformingOrganization = o_,
+				RequestingOrganization = p_,
+				CostCenter = q_,
+				Quantity = r_,
+				Bodysite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
+				FactorOverrideElement = t_,
+				PriceOverride = u_,
+				OverrideReasonElement = v_,
+				Enterer = w_,
+				EnteredDateElement = x_,
+				Reason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)y_),
+				Service = new List<ResourceReference>((IEnumerable<ResourceReference>)z_),
+				Product = (DataType)aa_,
+				Account = new List<ResourceReference>((IEnumerable<ResourceReference>)ab_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)ac_),
+				SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)ad_),
+			};
 
 			return ae_;
 		};
@@ -791,31 +791,31 @@ SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReferen
 			List<ChargeItemDefinition.ApplicabilityComponent> z_ = a?.Applicability;
 			List<ChargeItemDefinition.PropertyGroupComponent> aa_ = a?.PropertyGroup;
 			ChargeItemDefinition ab_ = new ChargeItemDefinition
-{
-UrlElement = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-VersionElement = g_,
-TitleElement = h_,
-DerivedFromUriElement = new List<FhirUri>((IEnumerable<FhirUri>)i_),
-PartOfElement = new List<Canonical>((IEnumerable<Canonical>)j_),
-ReplacesElement = new List<Canonical>((IEnumerable<Canonical>)k_),
-StatusElement = l_,
-ExperimentalElement = m_,
-DateElement = n_,
-PublisherElement = o_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)p_),
-DescriptionElement = q_,
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)r_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
-CopyrightElement = t_,
-ApprovalDateElement = u_,
-LastReviewDateElement = v_,
-EffectivePeriod = w_,
-Code = x_,
-Instance = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
-Applicability = new List<ChargeItemDefinition.ApplicabilityComponent>((IEnumerable<ChargeItemDefinition.ApplicabilityComponent>)z_),
-PropertyGroup = new List<ChargeItemDefinition.PropertyGroupComponent>((IEnumerable<ChargeItemDefinition.PropertyGroupComponent>)aa_),
-};
+			{
+				UrlElement = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				VersionElement = g_,
+				TitleElement = h_,
+				DerivedFromUriElement = new List<FhirUri>((IEnumerable<FhirUri>)i_),
+				PartOfElement = new List<Canonical>((IEnumerable<Canonical>)j_),
+				ReplacesElement = new List<Canonical>((IEnumerable<Canonical>)k_),
+				StatusElement = l_,
+				ExperimentalElement = m_,
+				DateElement = n_,
+				PublisherElement = o_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)p_),
+				DescriptionElement = q_,
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)r_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
+				CopyrightElement = t_,
+				ApprovalDateElement = u_,
+				LastReviewDateElement = v_,
+				EffectivePeriod = w_,
+				Code = x_,
+				Instance = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
+				Applicability = new List<ChargeItemDefinition.ApplicabilityComponent>((IEnumerable<ChargeItemDefinition.ApplicabilityComponent>)z_),
+				PropertyGroup = new List<ChargeItemDefinition.PropertyGroupComponent>((IEnumerable<ChargeItemDefinition.PropertyGroupComponent>)aa_),
+			};
 
 			return ab_;
 		};
@@ -860,35 +860,35 @@ PropertyGroup = new List<ChargeItemDefinition.PropertyGroupComponent>((IEnumerab
 			List<Claim.ItemComponent> ad_ = a?.Item;
 			Money ae_ = a?.Total;
 			Claim af_ = new Claim
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Type = g_,
-SubType = h_,
-UseElement = i_,
-Patient = j_,
-BillablePeriod = k_,
-CreatedElement = l_,
-Enterer = m_,
-Insurer = n_,
-Provider = o_,
-Priority = p_,
-FundsReserve = q_,
-Related = new List<Claim.RelatedClaimComponent>((IEnumerable<Claim.RelatedClaimComponent>)r_),
-Prescription = s_,
-OriginalPrescription = t_,
-Payee = u_,
-Referral = v_,
-Facility = w_,
-CareTeam = new List<Claim.CareTeamComponent>((IEnumerable<Claim.CareTeamComponent>)x_),
-SupportingInfo = new List<Claim.SupportingInformationComponent>((IEnumerable<Claim.SupportingInformationComponent>)y_),
-Diagnosis = new List<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)z_),
-Procedure = new List<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)aa_),
-Insurance = new List<Claim.InsuranceComponent>((IEnumerable<Claim.InsuranceComponent>)ab_),
-Accident = ac_,
-Item = new List<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ad_),
-Total = ae_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Type = g_,
+				SubType = h_,
+				UseElement = i_,
+				Patient = j_,
+				BillablePeriod = k_,
+				CreatedElement = l_,
+				Enterer = m_,
+				Insurer = n_,
+				Provider = o_,
+				Priority = p_,
+				FundsReserve = q_,
+				Related = new List<Claim.RelatedClaimComponent>((IEnumerable<Claim.RelatedClaimComponent>)r_),
+				Prescription = s_,
+				OriginalPrescription = t_,
+				Payee = u_,
+				Referral = v_,
+				Facility = w_,
+				CareTeam = new List<Claim.CareTeamComponent>((IEnumerable<Claim.CareTeamComponent>)x_),
+				SupportingInfo = new List<Claim.SupportingInformationComponent>((IEnumerable<Claim.SupportingInformationComponent>)y_),
+				Diagnosis = new List<Claim.DiagnosisComponent>((IEnumerable<Claim.DiagnosisComponent>)z_),
+				Procedure = new List<Claim.ProcedureComponent>((IEnumerable<Claim.ProcedureComponent>)aa_),
+				Insurance = new List<Claim.InsuranceComponent>((IEnumerable<Claim.InsuranceComponent>)ab_),
+				Accident = ac_,
+				Item = new List<Claim.ItemComponent>((IEnumerable<Claim.ItemComponent>)ad_),
+				Total = ae_,
+			};
 
 			return af_;
 		};
@@ -933,35 +933,35 @@ Total = ae_,
 			List<ClaimResponse.InsuranceComponent> ad_ = a?.Insurance;
 			List<ClaimResponse.ErrorComponent> ae_ = a?.Error;
 			ClaimResponse af_ = new ClaimResponse
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Type = g_,
-SubType = h_,
-UseElement = i_,
-Patient = j_,
-CreatedElement = k_,
-Insurer = l_,
-Requestor = m_,
-Request = n_,
-OutcomeElement = o_,
-DispositionElement = p_,
-PreAuthRefElement = q_,
-PreAuthPeriod = r_,
-PayeeType = s_,
-Item = new List<ClaimResponse.ItemComponent>((IEnumerable<ClaimResponse.ItemComponent>)t_),
-AddItem = new List<ClaimResponse.AddedItemComponent>((IEnumerable<ClaimResponse.AddedItemComponent>)u_),
-Adjudication = new List<ClaimResponse.AdjudicationComponent>((IEnumerable<ClaimResponse.AdjudicationComponent>)v_),
-Total = new List<ClaimResponse.TotalComponent>((IEnumerable<ClaimResponse.TotalComponent>)w_),
-Payment = x_,
-FundsReserve = y_,
-FormCode = z_,
-Form = aa_,
-ProcessNote = new List<ClaimResponse.NoteComponent>((IEnumerable<ClaimResponse.NoteComponent>)ab_),
-CommunicationRequest = new List<ResourceReference>((IEnumerable<ResourceReference>)ac_),
-Insurance = new List<ClaimResponse.InsuranceComponent>((IEnumerable<ClaimResponse.InsuranceComponent>)ad_),
-Error = new List<ClaimResponse.ErrorComponent>((IEnumerable<ClaimResponse.ErrorComponent>)ae_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Type = g_,
+				SubType = h_,
+				UseElement = i_,
+				Patient = j_,
+				CreatedElement = k_,
+				Insurer = l_,
+				Requestor = m_,
+				Request = n_,
+				OutcomeElement = o_,
+				DispositionElement = p_,
+				PreAuthRefElement = q_,
+				PreAuthPeriod = r_,
+				PayeeType = s_,
+				Item = new List<ClaimResponse.ItemComponent>((IEnumerable<ClaimResponse.ItemComponent>)t_),
+				AddItem = new List<ClaimResponse.AddedItemComponent>((IEnumerable<ClaimResponse.AddedItemComponent>)u_),
+				Adjudication = new List<ClaimResponse.AdjudicationComponent>((IEnumerable<ClaimResponse.AdjudicationComponent>)v_),
+				Total = new List<ClaimResponse.TotalComponent>((IEnumerable<ClaimResponse.TotalComponent>)w_),
+				Payment = x_,
+				FundsReserve = y_,
+				FormCode = z_,
+				Form = aa_,
+				ProcessNote = new List<ClaimResponse.NoteComponent>((IEnumerable<ClaimResponse.NoteComponent>)ab_),
+				CommunicationRequest = new List<ResourceReference>((IEnumerable<ResourceReference>)ac_),
+				Insurance = new List<ClaimResponse.InsuranceComponent>((IEnumerable<ClaimResponse.InsuranceComponent>)ad_),
+				Error = new List<ClaimResponse.ErrorComponent>((IEnumerable<ClaimResponse.ErrorComponent>)ae_),
+			};
 
 			return af_;
 		};
@@ -999,28 +999,28 @@ Error = new List<ClaimResponse.ErrorComponent>((IEnumerable<ClaimResponse.ErrorC
 			List<ResourceReference> w_ = a?.SupportingInfo;
 			List<Annotation> x_ = a?.Note;
 			ClinicalImpression y_ = new ClinicalImpression
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-StatusReason = g_,
-Code = h_,
-DescriptionElement = i_,
-Subject = j_,
-Encounter = k_,
-Effective = (DataType)l_,
-DateElement = m_,
-Assessor = n_,
-Previous = o_,
-Problem = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
-Investigation = new List<ClinicalImpression.InvestigationComponent>((IEnumerable<ClinicalImpression.InvestigationComponent>)q_),
-ProtocolElement = new List<FhirUri>((IEnumerable<FhirUri>)r_),
-SummaryElement = s_,
-Finding = new List<ClinicalImpression.FindingComponent>((IEnumerable<ClinicalImpression.FindingComponent>)t_),
-PrognosisCodeableConcept = new List<CodeableConcept>((IEnumerable<CodeableConcept>)u_),
-PrognosisReference = new List<ResourceReference>((IEnumerable<ResourceReference>)v_),
-SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
-Note = new List<Annotation>((IEnumerable<Annotation>)x_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				StatusReason = g_,
+				Code = h_,
+				DescriptionElement = i_,
+				Subject = j_,
+				Encounter = k_,
+				Effective = (DataType)l_,
+				DateElement = m_,
+				Assessor = n_,
+				Previous = o_,
+				Problem = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
+				Investigation = new List<ClinicalImpression.InvestigationComponent>((IEnumerable<ClinicalImpression.InvestigationComponent>)q_),
+				ProtocolElement = new List<FhirUri>((IEnumerable<FhirUri>)r_),
+				SummaryElement = s_,
+				Finding = new List<ClinicalImpression.FindingComponent>((IEnumerable<ClinicalImpression.FindingComponent>)t_),
+				PrognosisCodeableConcept = new List<CodeableConcept>((IEnumerable<CodeableConcept>)u_),
+				PrognosisReference = new List<ResourceReference>((IEnumerable<ResourceReference>)v_),
+				SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)x_),
+			};
 
 			return y_;
 		};
@@ -1066,34 +1066,34 @@ Note = new List<Annotation>((IEnumerable<Annotation>)x_),
 			List<CodeSystem.PropertyComponent> ae_ = a?.Property;
 			List<CodeSystem.ConceptDefinitionComponent> af_ = a?.Concept;
 			CodeSystem ag_ = new CodeSystem
-{
-UrlElement = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-VersionElement = g_,
-NameElement = h_,
-TitleElement = i_,
-StatusElement = j_,
-ExperimentalElement = k_,
-DateElement = l_,
-PublisherElement = m_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)n_),
-DescriptionElement = o_,
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)p_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
-PurposeElement = r_,
-CopyrightElement = s_,
-CaseSensitiveElement = t_,
-ValueSetElement = u_,
-HierarchyMeaningElement = v_,
-CompositionalElement = w_,
-VersionNeededElement = x_,
-ContentElement = y_,
-SupplementsElement = z_,
-CountElement = ac_,
-Filter = new List<CodeSystem.FilterComponent>((IEnumerable<CodeSystem.FilterComponent>)ad_),
-Property = new List<CodeSystem.PropertyComponent>((IEnumerable<CodeSystem.PropertyComponent>)ae_),
-Concept = new List<CodeSystem.ConceptDefinitionComponent>((IEnumerable<CodeSystem.ConceptDefinitionComponent>)af_),
-};
+			{
+				UrlElement = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				VersionElement = g_,
+				NameElement = h_,
+				TitleElement = i_,
+				StatusElement = j_,
+				ExperimentalElement = k_,
+				DateElement = l_,
+				PublisherElement = m_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)n_),
+				DescriptionElement = o_,
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)p_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
+				PurposeElement = r_,
+				CopyrightElement = s_,
+				CaseSensitiveElement = t_,
+				ValueSetElement = u_,
+				HierarchyMeaningElement = v_,
+				CompositionalElement = w_,
+				VersionNeededElement = x_,
+				ContentElement = y_,
+				SupplementsElement = z_,
+				CountElement = ac_,
+				Filter = new List<CodeSystem.FilterComponent>((IEnumerable<CodeSystem.FilterComponent>)ad_),
+				Property = new List<CodeSystem.PropertyComponent>((IEnumerable<CodeSystem.PropertyComponent>)ae_),
+				Concept = new List<CodeSystem.ConceptDefinitionComponent>((IEnumerable<CodeSystem.ConceptDefinitionComponent>)af_),
+			};
 
 			return ag_;
 		};
@@ -1134,31 +1134,31 @@ Concept = new List<CodeSystem.ConceptDefinitionComponent>((IEnumerable<CodeSyste
 			List<Communication.PayloadComponent> z_ = a?.Payload;
 			List<Annotation> aa_ = a?.Note;
 			Communication ab_ = new Communication
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
-InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)g_),
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
-PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
-InResponseTo = new List<ResourceReference>((IEnumerable<ResourceReference>)j_),
-StatusElement = k_,
-StatusReason = l_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
-PriorityElement = n_,
-Medium = new List<CodeableConcept>((IEnumerable<CodeableConcept>)o_),
-Subject = p_,
-Topic = q_,
-About = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
-Encounter = s_,
-SentElement = t_,
-ReceivedElement = u_,
-Recipient = new List<ResourceReference>((IEnumerable<ResourceReference>)v_),
-Sender = w_,
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)x_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
-Payload = new List<Communication.PayloadComponent>((IEnumerable<Communication.PayloadComponent>)z_),
-Note = new List<Annotation>((IEnumerable<Annotation>)aa_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
+				InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)g_),
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
+				PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
+				InResponseTo = new List<ResourceReference>((IEnumerable<ResourceReference>)j_),
+				StatusElement = k_,
+				StatusReason = l_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
+				PriorityElement = n_,
+				Medium = new List<CodeableConcept>((IEnumerable<CodeableConcept>)o_),
+				Subject = p_,
+				Topic = q_,
+				About = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
+				Encounter = s_,
+				SentElement = t_,
+				ReceivedElement = u_,
+				Recipient = new List<ResourceReference>((IEnumerable<ResourceReference>)v_),
+				Sender = w_,
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)x_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
+				Payload = new List<Communication.PayloadComponent>((IEnumerable<Communication.PayloadComponent>)z_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)aa_),
+			};
 
 			return ab_;
 		};
@@ -1198,30 +1198,30 @@ Note = new List<Annotation>((IEnumerable<Annotation>)aa_),
 			List<ResourceReference> y_ = a?.ReasonReference;
 			List<Annotation> z_ = a?.Note;
 			CommunicationRequest aa_ = new CommunicationRequest
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
-Replaces = new List<ResourceReference>((IEnumerable<ResourceReference>)g_),
-GroupIdentifier = h_,
-StatusElement = i_,
-StatusReason = j_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)k_),
-PriorityElement = l_,
-DoNotPerformElement = m_,
-Medium = new List<CodeableConcept>((IEnumerable<CodeableConcept>)n_),
-Subject = o_,
-About = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
-Encounter = q_,
-Payload = new List<CommunicationRequest.PayloadComponent>((IEnumerable<CommunicationRequest.PayloadComponent>)r_),
-Occurrence = (DataType)s_,
-AuthoredOnElement = t_,
-Requester = u_,
-Recipient = new List<ResourceReference>((IEnumerable<ResourceReference>)v_),
-Sender = w_,
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)x_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
-Note = new List<Annotation>((IEnumerable<Annotation>)z_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
+				Replaces = new List<ResourceReference>((IEnumerable<ResourceReference>)g_),
+				GroupIdentifier = h_,
+				StatusElement = i_,
+				StatusReason = j_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)k_),
+				PriorityElement = l_,
+				DoNotPerformElement = m_,
+				Medium = new List<CodeableConcept>((IEnumerable<CodeableConcept>)n_),
+				Subject = o_,
+				About = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
+				Encounter = q_,
+				Payload = new List<CommunicationRequest.PayloadComponent>((IEnumerable<CommunicationRequest.PayloadComponent>)r_),
+				Occurrence = (DataType)s_,
+				AuthoredOnElement = t_,
+				Requester = u_,
+				Recipient = new List<ResourceReference>((IEnumerable<ResourceReference>)v_),
+				Sender = w_,
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)x_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)z_),
+			};
 
 			return aa_;
 		};
@@ -1254,23 +1254,23 @@ Note = new List<Annotation>((IEnumerable<Annotation>)z_),
 			List<Composition.EventComponent> r_ = a?.Event;
 			List<Composition.SectionComponent> s_ = a?.Section;
 			Composition t_ = new Composition
-{
-Identifier = e_,
-StatusElement = f_,
-Type = g_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
-Subject = i_,
-Encounter = j_,
-DateElement = k_,
-Author = new List<ResourceReference>((IEnumerable<ResourceReference>)l_),
-TitleElement = m_,
-ConfidentialityElement = n_,
-Attester = new List<Composition.AttesterComponent>((IEnumerable<Composition.AttesterComponent>)o_),
-Custodian = p_,
-RelatesTo = new List<Composition.RelatesToComponent>((IEnumerable<Composition.RelatesToComponent>)q_),
-Event = new List<Composition.EventComponent>((IEnumerable<Composition.EventComponent>)r_),
-Section = new List<Composition.SectionComponent>((IEnumerable<Composition.SectionComponent>)s_),
-};
+			{
+				Identifier = e_,
+				StatusElement = f_,
+				Type = g_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
+				Subject = i_,
+				Encounter = j_,
+				DateElement = k_,
+				Author = new List<ResourceReference>((IEnumerable<ResourceReference>)l_),
+				TitleElement = m_,
+				ConfidentialityElement = n_,
+				Attester = new List<Composition.AttesterComponent>((IEnumerable<Composition.AttesterComponent>)o_),
+				Custodian = p_,
+				RelatesTo = new List<Composition.RelatesToComponent>((IEnumerable<Composition.RelatesToComponent>)q_),
+				Event = new List<Composition.EventComponent>((IEnumerable<Composition.EventComponent>)r_),
+				Section = new List<Composition.SectionComponent>((IEnumerable<Composition.SectionComponent>)s_),
+			};
 
 			return t_;
 		};
@@ -1306,26 +1306,26 @@ Section = new List<Composition.SectionComponent>((IEnumerable<Composition.Sectio
 			DataType u_ = a?.Target;
 			List<ConceptMap.GroupComponent> v_ = a?.Group;
 			ConceptMap w_ = new ConceptMap
-{
-UrlElement = e_,
-Identifier = f_,
-VersionElement = g_,
-NameElement = h_,
-TitleElement = i_,
-StatusElement = j_,
-ExperimentalElement = k_,
-DateElement = l_,
-PublisherElement = m_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)n_),
-DescriptionElement = o_,
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)p_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
-PurposeElement = r_,
-CopyrightElement = s_,
-Source = (DataType)t_,
-Target = (DataType)u_,
-Group = new List<ConceptMap.GroupComponent>((IEnumerable<ConceptMap.GroupComponent>)v_),
-};
+			{
+				UrlElement = e_,
+				Identifier = f_,
+				VersionElement = g_,
+				NameElement = h_,
+				TitleElement = i_,
+				StatusElement = j_,
+				ExperimentalElement = k_,
+				DateElement = l_,
+				PublisherElement = m_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)n_),
+				DescriptionElement = o_,
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)p_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
+				PurposeElement = r_,
+				CopyrightElement = s_,
+				Source = (DataType)t_,
+				Target = (DataType)u_,
+				Group = new List<ConceptMap.GroupComponent>((IEnumerable<ConceptMap.GroupComponent>)v_),
+			};
 
 			return w_;
 		};
@@ -1360,25 +1360,25 @@ Group = new List<ConceptMap.GroupComponent>((IEnumerable<ConceptMap.GroupCompone
 			List<Condition.EvidenceComponent> t_ = a?.Evidence;
 			List<Annotation> u_ = a?.Note;
 			Condition v_ = new Condition
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-ClinicalStatus = f_,
-VerificationStatus = g_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
-Severity = i_,
-Code = j_,
-BodySite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)k_),
-Subject = l_,
-Encounter = m_,
-Onset = (DataType)n_,
-Abatement = (DataType)o_,
-RecordedDateElement = p_,
-Recorder = q_,
-Asserter = r_,
-Stage = new List<Condition.StageComponent>((IEnumerable<Condition.StageComponent>)s_),
-Evidence = new List<Condition.EvidenceComponent>((IEnumerable<Condition.EvidenceComponent>)t_),
-Note = new List<Annotation>((IEnumerable<Annotation>)u_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				ClinicalStatus = f_,
+				VerificationStatus = g_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
+				Severity = i_,
+				Code = j_,
+				BodySite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)k_),
+				Subject = l_,
+				Encounter = m_,
+				Onset = (DataType)n_,
+				Abatement = (DataType)o_,
+				RecordedDateElement = p_,
+				Recorder = q_,
+				Asserter = r_,
+				Stage = new List<Condition.StageComponent>((IEnumerable<Condition.StageComponent>)s_),
+				Evidence = new List<Condition.EvidenceComponent>((IEnumerable<Condition.EvidenceComponent>)t_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)u_),
+			};
 
 			return v_;
 		};
@@ -1409,21 +1409,21 @@ Note = new List<Annotation>((IEnumerable<Annotation>)u_),
 			List<Consent.VerificationComponent> p_ = a?.Verification;
 			Consent.provisionComponent q_ = a?.Provision;
 			Consent r_ = new Consent
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Scope = g_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
-Patient = i_,
-DateTimeElement = j_,
-Performer = new List<ResourceReference>((IEnumerable<ResourceReference>)k_),
-Organization = new List<ResourceReference>((IEnumerable<ResourceReference>)l_),
-Source = (DataType)m_,
-Policy = new List<Consent.PolicyComponent>((IEnumerable<Consent.PolicyComponent>)n_),
-PolicyRule = o_,
-Verification = new List<Consent.VerificationComponent>((IEnumerable<Consent.VerificationComponent>)p_),
-Provision = q_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Scope = g_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
+				Patient = i_,
+				DateTimeElement = j_,
+				Performer = new List<ResourceReference>((IEnumerable<ResourceReference>)k_),
+				Organization = new List<ResourceReference>((IEnumerable<ResourceReference>)l_),
+				Source = (DataType)m_,
+				Policy = new List<Consent.PolicyComponent>((IEnumerable<Consent.PolicyComponent>)n_),
+				PolicyRule = o_,
+				Verification = new List<Consent.VerificationComponent>((IEnumerable<Consent.VerificationComponent>)p_),
+				Provision = q_,
+			};
 
 			return r_;
 		};
@@ -1474,41 +1474,41 @@ Provision = q_,
 			List<Contract.ComputableLanguageComponent> aj_ = a?.Rule;
 			DataType ak_ = a?.LegallyBinding;
 			Contract al_ = new Contract
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-UrlElement = f_,
-VersionElement = g_,
-StatusElement = h_,
-LegalState = i_,
-InstantiatesCanonical = j_,
-InstantiatesUriElement = k_,
-ContentDerivative = l_,
-IssuedElement = m_,
-Applies = n_,
-ExpirationType = o_,
-Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
-Authority = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
-Domain = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
-Site = new List<ResourceReference>((IEnumerable<ResourceReference>)s_),
-NameElement = t_,
-TitleElement = u_,
-SubtitleElement = v_,
-AliasElement = new List<FhirString>((IEnumerable<FhirString>)w_),
-Author = x_,
-Scope = y_,
-Topic = (DataType)z_,
-Type = aa_,
-SubType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ab_),
-ContentDefinition = ac_,
-Term = new List<Contract.TermComponent>((IEnumerable<Contract.TermComponent>)ad_),
-SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)ae_),
-RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)af_),
-Signer = new List<Contract.SignatoryComponent>((IEnumerable<Contract.SignatoryComponent>)ag_),
-Friendly = new List<Contract.FriendlyLanguageComponent>((IEnumerable<Contract.FriendlyLanguageComponent>)ah_),
-Legal = new List<Contract.LegalLanguageComponent>((IEnumerable<Contract.LegalLanguageComponent>)ai_),
-Rule = new List<Contract.ComputableLanguageComponent>((IEnumerable<Contract.ComputableLanguageComponent>)aj_),
-LegallyBinding = (DataType)ak_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				UrlElement = f_,
+				VersionElement = g_,
+				StatusElement = h_,
+				LegalState = i_,
+				InstantiatesCanonical = j_,
+				InstantiatesUriElement = k_,
+				ContentDerivative = l_,
+				IssuedElement = m_,
+				Applies = n_,
+				ExpirationType = o_,
+				Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
+				Authority = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
+				Domain = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
+				Site = new List<ResourceReference>((IEnumerable<ResourceReference>)s_),
+				NameElement = t_,
+				TitleElement = u_,
+				SubtitleElement = v_,
+				AliasElement = new List<FhirString>((IEnumerable<FhirString>)w_),
+				Author = x_,
+				Scope = y_,
+				Topic = (DataType)z_,
+				Type = aa_,
+				SubType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ab_),
+				ContentDefinition = ac_,
+				Term = new List<Contract.TermComponent>((IEnumerable<Contract.TermComponent>)ad_),
+				SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)ae_),
+				RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)af_),
+				Signer = new List<Contract.SignatoryComponent>((IEnumerable<Contract.SignatoryComponent>)ag_),
+				Friendly = new List<Contract.FriendlyLanguageComponent>((IEnumerable<Contract.FriendlyLanguageComponent>)ah_),
+				Legal = new List<Contract.LegalLanguageComponent>((IEnumerable<Contract.LegalLanguageComponent>)ai_),
+				Rule = new List<Contract.ComputableLanguageComponent>((IEnumerable<Contract.ComputableLanguageComponent>)aj_),
+				LegallyBinding = (DataType)ak_,
+			};
 
 			return al_;
 		};
@@ -1545,25 +1545,25 @@ LegallyBinding = (DataType)ak_,
 			FhirBoolean v_ = a?.SubrogationElement;
 			List<ResourceReference> w_ = a?.Contract;
 			Coverage x_ = new Coverage
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Type = g_,
-PolicyHolder = h_,
-Subscriber = i_,
-SubscriberIdElement = j_,
-Beneficiary = k_,
-DependentElement = l_,
-Relationship = m_,
-Period = n_,
-Payor = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
-Class = new List<Coverage.ClassComponent>((IEnumerable<Coverage.ClassComponent>)p_),
-OrderElement = s_,
-NetworkElement = t_,
-CostToBeneficiary = new List<Coverage.CostToBeneficiaryComponent>((IEnumerable<Coverage.CostToBeneficiaryComponent>)u_),
-SubrogationElement = v_,
-Contract = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Type = g_,
+				PolicyHolder = h_,
+				Subscriber = i_,
+				SubscriberIdElement = j_,
+				Beneficiary = k_,
+				DependentElement = l_,
+				Relationship = m_,
+				Period = n_,
+				Payor = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
+				Class = new List<Coverage.ClassComponent>((IEnumerable<Coverage.ClassComponent>)p_),
+				OrderElement = s_,
+				NetworkElement = t_,
+				CostToBeneficiary = new List<Coverage.CostToBeneficiaryComponent>((IEnumerable<Coverage.CostToBeneficiaryComponent>)u_),
+				SubrogationElement = v_,
+				Contract = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
+			};
 
 			return x_;
 		};
@@ -1595,22 +1595,22 @@ Contract = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
 			List<CoverageEligibilityRequest.InsuranceComponent> q_ = a?.Insurance;
 			List<CoverageEligibilityRequest.DetailsComponent> r_ = a?.Item;
 			CoverageEligibilityRequest s_ = new CoverageEligibilityRequest
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Priority = g_,
-PurposeElement = new List<Code<CoverageEligibilityRequest.EligibilityRequestPurpose>>((IEnumerable<Code<CoverageEligibilityRequest.EligibilityRequestPurpose>>)h_),
-Patient = i_,
-Serviced = (DataType)j_,
-CreatedElement = k_,
-Enterer = l_,
-Provider = m_,
-Insurer = n_,
-Facility = o_,
-SupportingInfo = new List<CoverageEligibilityRequest.SupportingInformationComponent>((IEnumerable<CoverageEligibilityRequest.SupportingInformationComponent>)p_),
-Insurance = new List<CoverageEligibilityRequest.InsuranceComponent>((IEnumerable<CoverageEligibilityRequest.InsuranceComponent>)q_),
-Item = new List<CoverageEligibilityRequest.DetailsComponent>((IEnumerable<CoverageEligibilityRequest.DetailsComponent>)r_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Priority = g_,
+				PurposeElement = new List<Code<CoverageEligibilityRequest.EligibilityRequestPurpose>>((IEnumerable<Code<CoverageEligibilityRequest.EligibilityRequestPurpose>>)h_),
+				Patient = i_,
+				Serviced = (DataType)j_,
+				CreatedElement = k_,
+				Enterer = l_,
+				Provider = m_,
+				Insurer = n_,
+				Facility = o_,
+				SupportingInfo = new List<CoverageEligibilityRequest.SupportingInformationComponent>((IEnumerable<CoverageEligibilityRequest.SupportingInformationComponent>)p_),
+				Insurance = new List<CoverageEligibilityRequest.InsuranceComponent>((IEnumerable<CoverageEligibilityRequest.InsuranceComponent>)q_),
+				Item = new List<CoverageEligibilityRequest.DetailsComponent>((IEnumerable<CoverageEligibilityRequest.DetailsComponent>)r_),
+			};
 
 			return s_;
 		};
@@ -1643,23 +1643,23 @@ Item = new List<CoverageEligibilityRequest.DetailsComponent>((IEnumerable<Covera
 			CodeableConcept r_ = a?.Form;
 			List<CoverageEligibilityResponse.ErrorsComponent> s_ = a?.Error;
 			CoverageEligibilityResponse t_ = new CoverageEligibilityResponse
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-PurposeElement = new List<Code<CoverageEligibilityResponse.EligibilityResponsePurpose>>((IEnumerable<Code<CoverageEligibilityResponse.EligibilityResponsePurpose>>)g_),
-Patient = h_,
-Serviced = (DataType)i_,
-CreatedElement = j_,
-Requestor = k_,
-Request = l_,
-OutcomeElement = m_,
-DispositionElement = n_,
-Insurer = o_,
-Insurance = new List<CoverageEligibilityResponse.InsuranceComponent>((IEnumerable<CoverageEligibilityResponse.InsuranceComponent>)p_),
-PreAuthRefElement = q_,
-Form = r_,
-Error = new List<CoverageEligibilityResponse.ErrorsComponent>((IEnumerable<CoverageEligibilityResponse.ErrorsComponent>)s_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				PurposeElement = new List<Code<CoverageEligibilityResponse.EligibilityResponsePurpose>>((IEnumerable<Code<CoverageEligibilityResponse.EligibilityResponsePurpose>>)g_),
+				Patient = h_,
+				Serviced = (DataType)i_,
+				CreatedElement = j_,
+				Requestor = k_,
+				Request = l_,
+				OutcomeElement = m_,
+				DispositionElement = n_,
+				Insurer = o_,
+				Insurance = new List<CoverageEligibilityResponse.InsuranceComponent>((IEnumerable<CoverageEligibilityResponse.InsuranceComponent>)p_),
+				PreAuthRefElement = q_,
+				Form = r_,
+				Error = new List<CoverageEligibilityResponse.ErrorsComponent>((IEnumerable<CoverageEligibilityResponse.ErrorsComponent>)s_),
+			};
 
 			return t_;
 		};
@@ -1689,20 +1689,20 @@ Error = new List<CoverageEligibilityResponse.ErrorsComponent>((IEnumerable<Cover
 			FhirUri o_ = a?.ReferenceElement;
 			List<DetectedIssue.MitigationComponent> p_ = a?.Mitigation;
 			DetectedIssue q_ = new DetectedIssue
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Code = g_,
-SeverityElement = h_,
-Patient = i_,
-Identified = (DataType)j_,
-Author = k_,
-Implicated = new List<ResourceReference>((IEnumerable<ResourceReference>)l_),
-Evidence = new List<DetectedIssue.EvidenceComponent>((IEnumerable<DetectedIssue.EvidenceComponent>)m_),
-DetailElement = n_,
-ReferenceElement = o_,
-Mitigation = new List<DetectedIssue.MitigationComponent>((IEnumerable<DetectedIssue.MitigationComponent>)p_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Code = g_,
+				SeverityElement = h_,
+				Patient = i_,
+				Identified = (DataType)j_,
+				Author = k_,
+				Implicated = new List<ResourceReference>((IEnumerable<ResourceReference>)l_),
+				Evidence = new List<DetectedIssue.EvidenceComponent>((IEnumerable<DetectedIssue.EvidenceComponent>)m_),
+				DetailElement = n_,
+				ReferenceElement = o_,
+				Mitigation = new List<DetectedIssue.MitigationComponent>((IEnumerable<DetectedIssue.MitigationComponent>)p_),
+			};
 
 			return q_;
 		};
@@ -1746,34 +1746,34 @@ Mitigation = new List<DetectedIssue.MitigationComponent>((IEnumerable<DetectedIs
 			List<CodeableConcept> ac_ = a?.Safety;
 			ResourceReference ad_ = a?.Parent;
 			Device ae_ = new Device
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-Definition = f_,
-UdiCarrier = new List<Device.UdiCarrierComponent>((IEnumerable<Device.UdiCarrierComponent>)g_),
-StatusElement = h_,
-StatusReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
-DistinctIdentifierElement = j_,
-ManufacturerElement = k_,
-ManufactureDateElement = l_,
-ExpirationDateElement = m_,
-LotNumberElement = n_,
-SerialNumberElement = o_,
-DeviceName = new List<Device.DeviceNameComponent>((IEnumerable<Device.DeviceNameComponent>)p_),
-ModelNumberElement = q_,
-PartNumberElement = r_,
-Type = s_,
-Specialization = new List<Device.SpecializationComponent>((IEnumerable<Device.SpecializationComponent>)t_),
-Version = new List<Device.VersionComponent>((IEnumerable<Device.VersionComponent>)u_),
-Property = new List<Device.PropertyComponent>((IEnumerable<Device.PropertyComponent>)v_),
-Patient = w_,
-Owner = x_,
-Contact = new List<ContactPoint>((IEnumerable<ContactPoint>)y_),
-Location = z_,
-UrlElement = aa_,
-Note = new List<Annotation>((IEnumerable<Annotation>)ab_),
-Safety = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ac_),
-Parent = ad_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				Definition = f_,
+				UdiCarrier = new List<Device.UdiCarrierComponent>((IEnumerable<Device.UdiCarrierComponent>)g_),
+				StatusElement = h_,
+				StatusReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
+				DistinctIdentifierElement = j_,
+				ManufacturerElement = k_,
+				ManufactureDateElement = l_,
+				ExpirationDateElement = m_,
+				LotNumberElement = n_,
+				SerialNumberElement = o_,
+				DeviceName = new List<Device.DeviceNameComponent>((IEnumerable<Device.DeviceNameComponent>)p_),
+				ModelNumberElement = q_,
+				PartNumberElement = r_,
+				Type = s_,
+				Specialization = new List<Device.SpecializationComponent>((IEnumerable<Device.SpecializationComponent>)t_),
+				Version = new List<Device.VersionComponent>((IEnumerable<Device.VersionComponent>)u_),
+				Property = new List<Device.PropertyComponent>((IEnumerable<Device.PropertyComponent>)v_),
+				Patient = w_,
+				Owner = x_,
+				Contact = new List<ContactPoint>((IEnumerable<ContactPoint>)y_),
+				Location = z_,
+				UrlElement = aa_,
+				Note = new List<Annotation>((IEnumerable<Annotation>)ab_),
+				Safety = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ac_),
+				Parent = ad_,
+			};
 
 			return ae_;
 		};
@@ -1813,30 +1813,30 @@ Parent = ad_,
 			ResourceReference y_ = a?.ParentDevice;
 			List<DeviceDefinition.MaterialComponent> z_ = a?.Material;
 			DeviceDefinition aa_ = new DeviceDefinition
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-UdiDeviceIdentifier = new List<DeviceDefinition.UdiDeviceIdentifierComponent>((IEnumerable<DeviceDefinition.UdiDeviceIdentifierComponent>)f_),
-Manufacturer = (DataType)g_,
-DeviceName = new List<DeviceDefinition.DeviceNameComponent>((IEnumerable<DeviceDefinition.DeviceNameComponent>)h_),
-ModelNumberElement = i_,
-Type = j_,
-Specialization = new List<DeviceDefinition.SpecializationComponent>((IEnumerable<DeviceDefinition.SpecializationComponent>)k_),
-VersionElement = new List<FhirString>((IEnumerable<FhirString>)l_),
-Safety = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
-ShelfLifeStorage = new List<ProductShelfLife>((IEnumerable<ProductShelfLife>)n_),
-PhysicalCharacteristics = o_,
-LanguageCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)p_),
-Capability = new List<DeviceDefinition.CapabilityComponent>((IEnumerable<DeviceDefinition.CapabilityComponent>)q_),
-Property = new List<DeviceDefinition.PropertyComponent>((IEnumerable<DeviceDefinition.PropertyComponent>)r_),
-Owner = s_,
-Contact = new List<ContactPoint>((IEnumerable<ContactPoint>)t_),
-UrlElement = u_,
-OnlineInformationElement = v_,
-Note = new List<Annotation>((IEnumerable<Annotation>)w_),
-Quantity = x_,
-ParentDevice = y_,
-Material = new List<DeviceDefinition.MaterialComponent>((IEnumerable<DeviceDefinition.MaterialComponent>)z_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				UdiDeviceIdentifier = new List<DeviceDefinition.UdiDeviceIdentifierComponent>((IEnumerable<DeviceDefinition.UdiDeviceIdentifierComponent>)f_),
+				Manufacturer = (DataType)g_,
+				DeviceName = new List<DeviceDefinition.DeviceNameComponent>((IEnumerable<DeviceDefinition.DeviceNameComponent>)h_),
+				ModelNumberElement = i_,
+				Type = j_,
+				Specialization = new List<DeviceDefinition.SpecializationComponent>((IEnumerable<DeviceDefinition.SpecializationComponent>)k_),
+				VersionElement = new List<FhirString>((IEnumerable<FhirString>)l_),
+				Safety = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
+				ShelfLifeStorage = new List<ProductShelfLife>((IEnumerable<ProductShelfLife>)n_),
+				PhysicalCharacteristics = o_,
+				LanguageCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)p_),
+				Capability = new List<DeviceDefinition.CapabilityComponent>((IEnumerable<DeviceDefinition.CapabilityComponent>)q_),
+				Property = new List<DeviceDefinition.PropertyComponent>((IEnumerable<DeviceDefinition.PropertyComponent>)r_),
+				Owner = s_,
+				Contact = new List<ContactPoint>((IEnumerable<ContactPoint>)t_),
+				UrlElement = u_,
+				OnlineInformationElement = v_,
+				Note = new List<Annotation>((IEnumerable<Annotation>)w_),
+				Quantity = x_,
+				ParentDevice = y_,
+				Material = new List<DeviceDefinition.MaterialComponent>((IEnumerable<DeviceDefinition.MaterialComponent>)z_),
+			};
 
 			return aa_;
 		};
@@ -1864,18 +1864,18 @@ Material = new List<DeviceDefinition.MaterialComponent>((IEnumerable<DeviceDefin
 			Timing m_ = a?.MeasurementPeriod;
 			List<DeviceMetric.CalibrationComponent> n_ = a?.Calibration;
 			DeviceMetric o_ = new DeviceMetric
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-Type = f_,
-Unit = g_,
-Source = h_,
-Parent = i_,
-OperationalStatusElement = j_,
-ColorElement = k_,
-CategoryElement = l_,
-MeasurementPeriod = m_,
-Calibration = new List<DeviceMetric.CalibrationComponent>((IEnumerable<DeviceMetric.CalibrationComponent>)n_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				Type = f_,
+				Unit = g_,
+				Source = h_,
+				Parent = i_,
+				OperationalStatusElement = j_,
+				ColorElement = k_,
+				CategoryElement = l_,
+				MeasurementPeriod = m_,
+				Calibration = new List<DeviceMetric.CalibrationComponent>((IEnumerable<DeviceMetric.CalibrationComponent>)n_),
+			};
 
 			return o_;
 		};
@@ -1917,32 +1917,32 @@ Calibration = new List<DeviceMetric.CalibrationComponent>((IEnumerable<DeviceMet
 			List<Annotation> aa_ = a?.Note;
 			List<ResourceReference> ab_ = a?.RelevantHistory;
 			DeviceRequest ac_ = new DeviceRequest
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
-InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)g_),
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
-PriorRequest = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
-GroupIdentifier = j_,
-StatusElement = k_,
-IntentElement = l_,
-PriorityElement = m_,
-Code = (DataType)n_,
-Parameter = new List<DeviceRequest.ParameterComponent>((IEnumerable<DeviceRequest.ParameterComponent>)o_),
-Subject = p_,
-Encounter = q_,
-Occurrence = (DataType)r_,
-AuthoredOnElement = s_,
-Requester = t_,
-PerformerType = u_,
-Performer = v_,
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)w_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
-Insurance = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
-SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)z_),
-Note = new List<Annotation>((IEnumerable<Annotation>)aa_),
-RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)ab_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
+				InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)g_),
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
+				PriorRequest = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
+				GroupIdentifier = j_,
+				StatusElement = k_,
+				IntentElement = l_,
+				PriorityElement = m_,
+				Code = (DataType)n_,
+				Parameter = new List<DeviceRequest.ParameterComponent>((IEnumerable<DeviceRequest.ParameterComponent>)o_),
+				Subject = p_,
+				Encounter = q_,
+				Occurrence = (DataType)r_,
+				AuthoredOnElement = s_,
+				Requester = t_,
+				PerformerType = u_,
+				Performer = v_,
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)w_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
+				Insurance = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
+				SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)z_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)aa_),
+				RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)ab_),
+			};
 
 			return ac_;
 		};
@@ -1973,21 +1973,21 @@ RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)ab
 			CodeableConcept p_ = a?.BodySite;
 			List<Annotation> q_ = a?.Note;
 			DeviceUseStatement r_ = new DeviceUseStatement
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
-StatusElement = g_,
-Subject = h_,
-DerivedFrom = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
-Timing = (DataType)j_,
-RecordedOnElement = k_,
-Source = l_,
-Device = m_,
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)n_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
-BodySite = p_,
-Note = new List<Annotation>((IEnumerable<Annotation>)q_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
+				StatusElement = g_,
+				Subject = h_,
+				DerivedFrom = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
+				Timing = (DataType)j_,
+				RecordedOnElement = k_,
+				Source = l_,
+				Device = m_,
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)n_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
+				BodySite = p_,
+				Note = new List<Annotation>((IEnumerable<Annotation>)q_),
+			};
 
 			return r_;
 		};
@@ -2023,26 +2023,26 @@ Note = new List<Annotation>((IEnumerable<Annotation>)q_),
 			List<CodeableConcept> u_ = a?.ConclusionCode;
 			List<Attachment> v_ = a?.PresentedForm;
 			DiagnosticReport w_ = new DiagnosticReport
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
-StatusElement = g_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
-Code = i_,
-Subject = j_,
-Encounter = k_,
-Effective = (DataType)l_,
-IssuedElement = m_,
-Performer = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
-ResultsInterpreter = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
-Specimen = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
-Result = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
-ImagingStudy = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
-Media = new List<DiagnosticReport.MediaComponent>((IEnumerable<DiagnosticReport.MediaComponent>)s_),
-ConclusionElement = t_,
-ConclusionCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)u_),
-PresentedForm = new List<Attachment>((IEnumerable<Attachment>)v_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
+				StatusElement = g_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
+				Code = i_,
+				Subject = j_,
+				Encounter = k_,
+				Effective = (DataType)l_,
+				IssuedElement = m_,
+				Performer = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
+				ResultsInterpreter = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
+				Specimen = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
+				Result = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
+				ImagingStudy = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
+				Media = new List<DiagnosticReport.MediaComponent>((IEnumerable<DiagnosticReport.MediaComponent>)s_),
+				ConclusionElement = t_,
+				ConclusionCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)u_),
+				PresentedForm = new List<Attachment>((IEnumerable<Attachment>)v_),
+			};
 
 			return w_;
 		};
@@ -2072,20 +2072,20 @@ PresentedForm = new List<Attachment>((IEnumerable<Attachment>)v_),
 			List<ResourceReference> o_ = a?.Content;
 			List<DocumentManifest.RelatedComponent> p_ = a?.Related;
 			DocumentManifest q_ = new DocumentManifest
-{
-MasterIdentifier = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-StatusElement = g_,
-Type = h_,
-Subject = i_,
-CreatedElement = j_,
-Author = new List<ResourceReference>((IEnumerable<ResourceReference>)k_),
-Recipient = new List<ResourceReference>((IEnumerable<ResourceReference>)l_),
-SourceElement = m_,
-DescriptionElement = n_,
-Content = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
-Related = new List<DocumentManifest.RelatedComponent>((IEnumerable<DocumentManifest.RelatedComponent>)p_),
-};
+			{
+				MasterIdentifier = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				StatusElement = g_,
+				Type = h_,
+				Subject = i_,
+				CreatedElement = j_,
+				Author = new List<ResourceReference>((IEnumerable<ResourceReference>)k_),
+				Recipient = new List<ResourceReference>((IEnumerable<ResourceReference>)l_),
+				SourceElement = m_,
+				DescriptionElement = n_,
+				Content = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
+				Related = new List<DocumentManifest.RelatedComponent>((IEnumerable<DocumentManifest.RelatedComponent>)p_),
+			};
 
 			return q_;
 		};
@@ -2119,24 +2119,24 @@ Related = new List<DocumentManifest.RelatedComponent>((IEnumerable<DocumentManif
 			List<DocumentReference.ContentComponent> s_ = a?.Content;
 			DocumentReference.ContextComponent t_ = a?.Context;
 			DocumentReference u_ = new DocumentReference
-{
-MasterIdentifier = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-StatusElement = g_,
-DocStatusElement = h_,
-Type = i_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)j_),
-Subject = k_,
-DateElement = l_,
-Author = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
-Authenticator = n_,
-Custodian = o_,
-RelatesTo = new List<DocumentReference.RelatesToComponent>((IEnumerable<DocumentReference.RelatesToComponent>)p_),
-DescriptionElement = q_,
-SecurityLabel = new List<CodeableConcept>((IEnumerable<CodeableConcept>)r_),
-Content = new List<DocumentReference.ContentComponent>((IEnumerable<DocumentReference.ContentComponent>)s_),
-Context = t_,
-};
+			{
+				MasterIdentifier = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				StatusElement = g_,
+				DocStatusElement = h_,
+				Type = i_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)j_),
+				Subject = k_,
+				DateElement = l_,
+				Author = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
+				Authenticator = n_,
+				Custodian = o_,
+				RelatesTo = new List<DocumentReference.RelatesToComponent>((IEnumerable<DocumentReference.RelatesToComponent>)p_),
+				DescriptionElement = q_,
+				SecurityLabel = new List<CodeableConcept>((IEnumerable<CodeableConcept>)r_),
+				Content = new List<DocumentReference.ContentComponent>((IEnumerable<DocumentReference.ContentComponent>)s_),
+				Context = t_,
+			};
 
 			return u_;
 		};
@@ -2187,41 +2187,41 @@ Context = t_,
 			List<EffectEvidenceSynthesis.EffectEstimateComponent> aj_ = a?.EffectEstimate;
 			List<EffectEvidenceSynthesis.CertaintyComponent> ak_ = a?.Certainty;
 			EffectEvidenceSynthesis al_ = new EffectEvidenceSynthesis
-{
-UrlElement = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-VersionElement = g_,
-NameElement = h_,
-TitleElement = i_,
-StatusElement = j_,
-DateElement = k_,
-PublisherElement = l_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)m_),
-DescriptionElement = n_,
-Note = new List<Annotation>((IEnumerable<Annotation>)o_),
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)p_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
-CopyrightElement = r_,
-ApprovalDateElement = s_,
-LastReviewDateElement = t_,
-EffectivePeriod = u_,
-Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)v_),
-Author = new List<ContactDetail>((IEnumerable<ContactDetail>)w_),
-Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)x_),
-Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)y_),
-Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)z_),
-RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)aa_),
-SynthesisType = ab_,
-StudyType = ac_,
-Population = ad_,
-Exposure = ae_,
-ExposureAlternative = af_,
-Outcome = ag_,
-SampleSize = ah_,
-ResultsByExposure = new List<EffectEvidenceSynthesis.ResultsByExposureComponent>((IEnumerable<EffectEvidenceSynthesis.ResultsByExposureComponent>)ai_),
-EffectEstimate = new List<EffectEvidenceSynthesis.EffectEstimateComponent>((IEnumerable<EffectEvidenceSynthesis.EffectEstimateComponent>)aj_),
-Certainty = new List<EffectEvidenceSynthesis.CertaintyComponent>((IEnumerable<EffectEvidenceSynthesis.CertaintyComponent>)ak_),
-};
+			{
+				UrlElement = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				VersionElement = g_,
+				NameElement = h_,
+				TitleElement = i_,
+				StatusElement = j_,
+				DateElement = k_,
+				PublisherElement = l_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)m_),
+				DescriptionElement = n_,
+				Note = new List<Annotation>((IEnumerable<Annotation>)o_),
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)p_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
+				CopyrightElement = r_,
+				ApprovalDateElement = s_,
+				LastReviewDateElement = t_,
+				EffectivePeriod = u_,
+				Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)v_),
+				Author = new List<ContactDetail>((IEnumerable<ContactDetail>)w_),
+				Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)x_),
+				Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)y_),
+				Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)z_),
+				RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)aa_),
+				SynthesisType = ab_,
+				StudyType = ac_,
+				Population = ad_,
+				Exposure = ae_,
+				ExposureAlternative = af_,
+				Outcome = ag_,
+				SampleSize = ah_,
+				ResultsByExposure = new List<EffectEvidenceSynthesis.ResultsByExposureComponent>((IEnumerable<EffectEvidenceSynthesis.ResultsByExposureComponent>)ai_),
+				EffectEstimate = new List<EffectEvidenceSynthesis.EffectEstimateComponent>((IEnumerable<EffectEvidenceSynthesis.EffectEstimateComponent>)aj_),
+				Certainty = new List<EffectEvidenceSynthesis.CertaintyComponent>((IEnumerable<EffectEvidenceSynthesis.CertaintyComponent>)ak_),
+			};
 
 			return al_;
 		};
@@ -2262,31 +2262,31 @@ Certainty = new List<EffectEvidenceSynthesis.CertaintyComponent>((IEnumerable<Ef
 			ResourceReference z_ = a?.ServiceProvider;
 			ResourceReference aa_ = a?.PartOf;
 			Encounter ab_ = new Encounter
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-StatusHistory = new List<Encounter.StatusHistoryComponent>((IEnumerable<Encounter.StatusHistoryComponent>)g_),
-Class = h_,
-ClassHistory = new List<Encounter.ClassHistoryComponent>((IEnumerable<Encounter.ClassHistoryComponent>)i_),
-Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)j_),
-ServiceType = k_,
-Priority = l_,
-Subject = m_,
-EpisodeOfCare = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
-Participant = new List<Encounter.ParticipantComponent>((IEnumerable<Encounter.ParticipantComponent>)p_),
-Appointment = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
-Period = r_,
-Length = s_,
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)t_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)u_),
-Diagnosis = new List<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)v_),
-Account = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
-Hospitalization = x_,
-Location = new List<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)y_),
-ServiceProvider = z_,
-PartOf = aa_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				StatusHistory = new List<Encounter.StatusHistoryComponent>((IEnumerable<Encounter.StatusHistoryComponent>)g_),
+				Class = h_,
+				ClassHistory = new List<Encounter.ClassHistoryComponent>((IEnumerable<Encounter.ClassHistoryComponent>)i_),
+				Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)j_),
+				ServiceType = k_,
+				Priority = l_,
+				Subject = m_,
+				EpisodeOfCare = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
+				Participant = new List<Encounter.ParticipantComponent>((IEnumerable<Encounter.ParticipantComponent>)p_),
+				Appointment = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
+				Period = r_,
+				Length = s_,
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)t_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)u_),
+				Diagnosis = new List<Encounter.DiagnosisComponent>((IEnumerable<Encounter.DiagnosisComponent>)v_),
+				Account = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
+				Hospitalization = x_,
+				Location = new List<Encounter.LocationComponent>((IEnumerable<Encounter.LocationComponent>)y_),
+				ServiceProvider = z_,
+				PartOf = aa_,
+			};
 
 			return ab_;
 		};
@@ -2315,19 +2315,19 @@ PartOf = aa_,
 			FhirUrl n_ = a?.AddressElement;
 			List<FhirString> o_ = a?.HeaderElement;
 			Endpoint p_ = new Endpoint
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-ConnectionType = g_,
-NameElement = h_,
-ManagingOrganization = i_,
-Contact = new List<ContactPoint>((IEnumerable<ContactPoint>)j_),
-Period = k_,
-PayloadType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)l_),
-PayloadMimeTypeElement = new List<Code>((IEnumerable<Code>)m_),
-AddressElement = n_,
-HeaderElement = new List<FhirString>((IEnumerable<FhirString>)o_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				ConnectionType = g_,
+				NameElement = h_,
+				ManagingOrganization = i_,
+				Contact = new List<ContactPoint>((IEnumerable<ContactPoint>)j_),
+				Period = k_,
+				PayloadType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)l_),
+				PayloadMimeTypeElement = new List<Code>((IEnumerable<Code>)m_),
+				AddressElement = n_,
+				HeaderElement = new List<FhirString>((IEnumerable<FhirString>)o_),
+			};
 
 			return p_;
 		};
@@ -2352,15 +2352,15 @@ HeaderElement = new List<FhirString>((IEnumerable<FhirString>)o_),
 			ResourceReference j_ = a?.Candidate;
 			ResourceReference k_ = a?.Coverage;
 			EnrollmentRequest l_ = new EnrollmentRequest
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-CreatedElement = g_,
-Insurer = h_,
-Provider = i_,
-Candidate = j_,
-Coverage = k_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				CreatedElement = g_,
+				Insurer = h_,
+				Provider = i_,
+				Candidate = j_,
+				Coverage = k_,
+			};
 
 			return l_;
 		};
@@ -2386,16 +2386,16 @@ Coverage = k_,
 			ResourceReference k_ = a?.Organization;
 			ResourceReference l_ = a?.RequestProvider;
 			EnrollmentResponse m_ = new EnrollmentResponse
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Request = g_,
-OutcomeElement = h_,
-DispositionElement = i_,
-CreatedElement = j_,
-Organization = k_,
-RequestProvider = l_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Request = g_,
+				OutcomeElement = h_,
+				DispositionElement = i_,
+				CreatedElement = j_,
+				Organization = k_,
+				RequestProvider = l_,
+			};
 
 			return m_;
 		};
@@ -2425,20 +2425,20 @@ RequestProvider = l_,
 			List<ResourceReference> o_ = a?.Team;
 			List<ResourceReference> p_ = a?.Account;
 			EpisodeOfCare q_ = new EpisodeOfCare
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-StatusHistory = new List<EpisodeOfCare.StatusHistoryComponent>((IEnumerable<EpisodeOfCare.StatusHistoryComponent>)g_),
-Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
-Diagnosis = new List<EpisodeOfCare.DiagnosisComponent>((IEnumerable<EpisodeOfCare.DiagnosisComponent>)i_),
-Patient = j_,
-ManagingOrganization = k_,
-Period = l_,
-ReferralRequest = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
-CareManager = n_,
-Team = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
-Account = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				StatusHistory = new List<EpisodeOfCare.StatusHistoryComponent>((IEnumerable<EpisodeOfCare.StatusHistoryComponent>)g_),
+				Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
+				Diagnosis = new List<EpisodeOfCare.DiagnosisComponent>((IEnumerable<EpisodeOfCare.DiagnosisComponent>)i_),
+				Patient = j_,
+				ManagingOrganization = k_,
+				Period = l_,
+				ReferralRequest = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
+				CareManager = n_,
+				Team = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
+				Account = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
+			};
 
 			return q_;
 		};
@@ -2484,36 +2484,36 @@ Account = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
 			List<RelatedArtifact> ae_ = a?.RelatedArtifact;
 			List<TriggerDefinition> af_ = a?.Trigger;
 			EventDefinition ag_ = new EventDefinition
-{
-UrlElement = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-VersionElement = g_,
-NameElement = h_,
-TitleElement = i_,
-SubtitleElement = j_,
-StatusElement = k_,
-ExperimentalElement = l_,
-Subject = (DataType)m_,
-DateElement = n_,
-PublisherElement = o_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)p_),
-DescriptionElement = q_,
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)r_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
-PurposeElement = t_,
-UsageElement = u_,
-CopyrightElement = v_,
-ApprovalDateElement = w_,
-LastReviewDateElement = x_,
-EffectivePeriod = y_,
-Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)z_),
-Author = new List<ContactDetail>((IEnumerable<ContactDetail>)aa_),
-Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)ab_),
-Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)ac_),
-Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)ad_),
-RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)ae_),
-Trigger = new List<TriggerDefinition>((IEnumerable<TriggerDefinition>)af_),
-};
+			{
+				UrlElement = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				VersionElement = g_,
+				NameElement = h_,
+				TitleElement = i_,
+				SubtitleElement = j_,
+				StatusElement = k_,
+				ExperimentalElement = l_,
+				Subject = (DataType)m_,
+				DateElement = n_,
+				PublisherElement = o_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)p_),
+				DescriptionElement = q_,
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)r_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
+				PurposeElement = t_,
+				UsageElement = u_,
+				CopyrightElement = v_,
+				ApprovalDateElement = w_,
+				LastReviewDateElement = x_,
+				EffectivePeriod = y_,
+				Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)z_),
+				Author = new List<ContactDetail>((IEnumerable<ContactDetail>)aa_),
+				Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)ab_),
+				Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)ac_),
+				Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)ad_),
+				RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)ae_),
+				Trigger = new List<TriggerDefinition>((IEnumerable<TriggerDefinition>)af_),
+			};
 
 			return ag_;
 		};
@@ -2559,36 +2559,36 @@ Trigger = new List<TriggerDefinition>((IEnumerable<TriggerDefinition>)af_),
 			List<ResourceReference> ae_ = a?.ExposureVariant;
 			List<ResourceReference> af_ = a?.Outcome;
 			Evidence ag_ = new Evidence
-{
-UrlElement = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-VersionElement = g_,
-NameElement = h_,
-TitleElement = i_,
-ShortTitleElement = j_,
-SubtitleElement = k_,
-StatusElement = l_,
-DateElement = m_,
-PublisherElement = n_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)o_),
-DescriptionElement = p_,
-Note = new List<Annotation>((IEnumerable<Annotation>)q_),
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)r_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
-CopyrightElement = t_,
-ApprovalDateElement = u_,
-LastReviewDateElement = v_,
-EffectivePeriod = w_,
-Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)x_),
-Author = new List<ContactDetail>((IEnumerable<ContactDetail>)y_),
-Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)z_),
-Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)aa_),
-Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)ab_),
-RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)ac_),
-ExposureBackground = ad_,
-ExposureVariant = new List<ResourceReference>((IEnumerable<ResourceReference>)ae_),
-Outcome = new List<ResourceReference>((IEnumerable<ResourceReference>)af_),
-};
+			{
+				UrlElement = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				VersionElement = g_,
+				NameElement = h_,
+				TitleElement = i_,
+				ShortTitleElement = j_,
+				SubtitleElement = k_,
+				StatusElement = l_,
+				DateElement = m_,
+				PublisherElement = n_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)o_),
+				DescriptionElement = p_,
+				Note = new List<Annotation>((IEnumerable<Annotation>)q_),
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)r_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
+				CopyrightElement = t_,
+				ApprovalDateElement = u_,
+				LastReviewDateElement = v_,
+				EffectivePeriod = w_,
+				Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)x_),
+				Author = new List<ContactDetail>((IEnumerable<ContactDetail>)y_),
+				Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)z_),
+				Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)aa_),
+				Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)ab_),
+				RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)ac_),
+				ExposureBackground = ad_,
+				ExposureVariant = new List<ResourceReference>((IEnumerable<ResourceReference>)ae_),
+				Outcome = new List<ResourceReference>((IEnumerable<ResourceReference>)af_),
+			};
 
 			return ag_;
 		};
@@ -2633,35 +2633,35 @@ Outcome = new List<ResourceReference>((IEnumerable<ResourceReference>)af_),
 			Code<VariableTypeCode> ad_ = a?.TypeElement;
 			List<EvidenceVariable.CharacteristicComponent> ae_ = a?.Characteristic;
 			EvidenceVariable af_ = new EvidenceVariable
-{
-UrlElement = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-VersionElement = g_,
-NameElement = h_,
-TitleElement = i_,
-ShortTitleElement = j_,
-SubtitleElement = k_,
-StatusElement = l_,
-DateElement = m_,
-PublisherElement = n_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)o_),
-DescriptionElement = p_,
-Note = new List<Annotation>((IEnumerable<Annotation>)q_),
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)r_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
-CopyrightElement = t_,
-ApprovalDateElement = u_,
-LastReviewDateElement = v_,
-EffectivePeriod = w_,
-Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)x_),
-Author = new List<ContactDetail>((IEnumerable<ContactDetail>)y_),
-Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)z_),
-Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)aa_),
-Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)ab_),
-RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)ac_),
-TypeElement = ad_,
-Characteristic = new List<EvidenceVariable.CharacteristicComponent>((IEnumerable<EvidenceVariable.CharacteristicComponent>)ae_),
-};
+			{
+				UrlElement = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				VersionElement = g_,
+				NameElement = h_,
+				TitleElement = i_,
+				ShortTitleElement = j_,
+				SubtitleElement = k_,
+				StatusElement = l_,
+				DateElement = m_,
+				PublisherElement = n_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)o_),
+				DescriptionElement = p_,
+				Note = new List<Annotation>((IEnumerable<Annotation>)q_),
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)r_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
+				CopyrightElement = t_,
+				ApprovalDateElement = u_,
+				LastReviewDateElement = v_,
+				EffectivePeriod = w_,
+				Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)x_),
+				Author = new List<ContactDetail>((IEnumerable<ContactDetail>)y_),
+				Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)z_),
+				Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)aa_),
+				Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)ab_),
+				RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)ac_),
+				TypeElement = ad_,
+				Characteristic = new List<EvidenceVariable.CharacteristicComponent>((IEnumerable<EvidenceVariable.CharacteristicComponent>)ae_),
+			};
 
 			return af_;
 		};
@@ -2724,51 +2724,51 @@ Characteristic = new List<EvidenceVariable.CharacteristicComponent>((IEnumerable
 			Period av_ = a?.BenefitPeriod;
 			List<ExplanationOfBenefit.BenefitBalanceComponent> aw_ = a?.BenefitBalance;
 			ExplanationOfBenefit ax_ = new ExplanationOfBenefit
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Type = g_,
-SubType = h_,
-UseElement = i_,
-Patient = j_,
-BillablePeriod = k_,
-CreatedElement = l_,
-Enterer = m_,
-Insurer = n_,
-Provider = o_,
-Priority = p_,
-FundsReserveRequested = q_,
-FundsReserve = r_,
-Related = new List<ExplanationOfBenefit.RelatedClaimComponent>((IEnumerable<ExplanationOfBenefit.RelatedClaimComponent>)s_),
-Prescription = t_,
-OriginalPrescription = u_,
-Payee = v_,
-Referral = w_,
-Facility = x_,
-Claim = y_,
-ClaimResponse = z_,
-OutcomeElement = aa_,
-DispositionElement = ab_,
-PreAuthRefElement = new List<FhirString>((IEnumerable<FhirString>)ac_),
-PreAuthRefPeriod = new List<Period>((IEnumerable<Period>)ad_),
-CareTeam = new List<ExplanationOfBenefit.CareTeamComponent>((IEnumerable<ExplanationOfBenefit.CareTeamComponent>)ae_),
-SupportingInfo = new List<ExplanationOfBenefit.SupportingInformationComponent>((IEnumerable<ExplanationOfBenefit.SupportingInformationComponent>)af_),
-Diagnosis = new List<ExplanationOfBenefit.DiagnosisComponent>((IEnumerable<ExplanationOfBenefit.DiagnosisComponent>)ag_),
-Procedure = new List<ExplanationOfBenefit.ProcedureComponent>((IEnumerable<ExplanationOfBenefit.ProcedureComponent>)ah_),
-PrecedenceElement = ak_,
-Insurance = new List<ExplanationOfBenefit.InsuranceComponent>((IEnumerable<ExplanationOfBenefit.InsuranceComponent>)al_),
-Accident = am_,
-Item = new List<ExplanationOfBenefit.ItemComponent>((IEnumerable<ExplanationOfBenefit.ItemComponent>)an_),
-AddItem = new List<ExplanationOfBenefit.AddedItemComponent>((IEnumerable<ExplanationOfBenefit.AddedItemComponent>)ao_),
-Adjudication = new List<ExplanationOfBenefit.AdjudicationComponent>((IEnumerable<ExplanationOfBenefit.AdjudicationComponent>)ap_),
-Total = new List<ExplanationOfBenefit.TotalComponent>((IEnumerable<ExplanationOfBenefit.TotalComponent>)aq_),
-Payment = ar_,
-FormCode = as_,
-Form = at_,
-ProcessNote = new List<ExplanationOfBenefit.NoteComponent>((IEnumerable<ExplanationOfBenefit.NoteComponent>)au_),
-BenefitPeriod = av_,
-BenefitBalance = new List<ExplanationOfBenefit.BenefitBalanceComponent>((IEnumerable<ExplanationOfBenefit.BenefitBalanceComponent>)aw_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Type = g_,
+				SubType = h_,
+				UseElement = i_,
+				Patient = j_,
+				BillablePeriod = k_,
+				CreatedElement = l_,
+				Enterer = m_,
+				Insurer = n_,
+				Provider = o_,
+				Priority = p_,
+				FundsReserveRequested = q_,
+				FundsReserve = r_,
+				Related = new List<ExplanationOfBenefit.RelatedClaimComponent>((IEnumerable<ExplanationOfBenefit.RelatedClaimComponent>)s_),
+				Prescription = t_,
+				OriginalPrescription = u_,
+				Payee = v_,
+				Referral = w_,
+				Facility = x_,
+				Claim = y_,
+				ClaimResponse = z_,
+				OutcomeElement = aa_,
+				DispositionElement = ab_,
+				PreAuthRefElement = new List<FhirString>((IEnumerable<FhirString>)ac_),
+				PreAuthRefPeriod = new List<Period>((IEnumerable<Period>)ad_),
+				CareTeam = new List<ExplanationOfBenefit.CareTeamComponent>((IEnumerable<ExplanationOfBenefit.CareTeamComponent>)ae_),
+				SupportingInfo = new List<ExplanationOfBenefit.SupportingInformationComponent>((IEnumerable<ExplanationOfBenefit.SupportingInformationComponent>)af_),
+				Diagnosis = new List<ExplanationOfBenefit.DiagnosisComponent>((IEnumerable<ExplanationOfBenefit.DiagnosisComponent>)ag_),
+				Procedure = new List<ExplanationOfBenefit.ProcedureComponent>((IEnumerable<ExplanationOfBenefit.ProcedureComponent>)ah_),
+				PrecedenceElement = ak_,
+				Insurance = new List<ExplanationOfBenefit.InsuranceComponent>((IEnumerable<ExplanationOfBenefit.InsuranceComponent>)al_),
+				Accident = am_,
+				Item = new List<ExplanationOfBenefit.ItemComponent>((IEnumerable<ExplanationOfBenefit.ItemComponent>)an_),
+				AddItem = new List<ExplanationOfBenefit.AddedItemComponent>((IEnumerable<ExplanationOfBenefit.AddedItemComponent>)ao_),
+				Adjudication = new List<ExplanationOfBenefit.AdjudicationComponent>((IEnumerable<ExplanationOfBenefit.AdjudicationComponent>)ap_),
+				Total = new List<ExplanationOfBenefit.TotalComponent>((IEnumerable<ExplanationOfBenefit.TotalComponent>)aq_),
+				Payment = ar_,
+				FormCode = as_,
+				Form = at_,
+				ProcessNote = new List<ExplanationOfBenefit.NoteComponent>((IEnumerable<ExplanationOfBenefit.NoteComponent>)au_),
+				BenefitPeriod = av_,
+				BenefitBalance = new List<ExplanationOfBenefit.BenefitBalanceComponent>((IEnumerable<ExplanationOfBenefit.BenefitBalanceComponent>)aw_),
+			};
 
 			return ax_;
 		};
@@ -2804,26 +2804,26 @@ BenefitBalance = new List<ExplanationOfBenefit.BenefitBalanceComponent>((IEnumer
 			List<Annotation> u_ = a?.Note;
 			List<FamilyMemberHistory.ConditionComponent> v_ = a?.Condition;
 			FamilyMemberHistory w_ = new FamilyMemberHistory
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
-InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)g_),
-StatusElement = h_,
-DataAbsentReason = i_,
-Patient = j_,
-DateElement = k_,
-NameElement = l_,
-Relationship = m_,
-Sex = n_,
-Born = (DataType)o_,
-Age = (DataType)p_,
-EstimatedAgeElement = q_,
-Deceased = (DataType)r_,
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)t_),
-Note = new List<Annotation>((IEnumerable<Annotation>)u_),
-Condition = new List<FamilyMemberHistory.ConditionComponent>((IEnumerable<FamilyMemberHistory.ConditionComponent>)v_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
+				InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)g_),
+				StatusElement = h_,
+				DataAbsentReason = i_,
+				Patient = j_,
+				DateElement = k_,
+				NameElement = l_,
+				Relationship = m_,
+				Sex = n_,
+				Born = (DataType)o_,
+				Age = (DataType)p_,
+				EstimatedAgeElement = q_,
+				Deceased = (DataType)r_,
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)t_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)u_),
+				Condition = new List<FamilyMemberHistory.ConditionComponent>((IEnumerable<FamilyMemberHistory.ConditionComponent>)v_),
+			};
 
 			return w_;
 		};
@@ -2849,16 +2849,16 @@ Condition = new List<FamilyMemberHistory.ConditionComponent>((IEnumerable<Family
 			ResourceReference k_ = a?.Encounter;
 			ResourceReference l_ = a?.Author;
 			Flag m_ = new Flag
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
-Code = h_,
-Subject = i_,
-Period = j_,
-Encounter = k_,
-Author = l_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
+				Code = h_,
+				Subject = i_,
+				Period = j_,
+				Encounter = k_,
+				Author = l_,
+			};
 
 			return m_;
 		};
@@ -2892,24 +2892,24 @@ Author = l_,
 			List<CodeableConcept> s_ = a?.OutcomeCode;
 			List<ResourceReference> t_ = a?.OutcomeReference;
 			Goal u_ = new Goal
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-LifecycleStatusElement = f_,
-AchievementStatus = g_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
-Priority = i_,
-Description = j_,
-Subject = k_,
-Start = (DataType)l_,
-Target = new List<Goal.TargetComponent>((IEnumerable<Goal.TargetComponent>)m_),
-StatusDateElement = n_,
-StatusReasonElement = o_,
-ExpressedBy = p_,
-Addresses = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
-Note = new List<Annotation>((IEnumerable<Annotation>)r_),
-OutcomeCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
-OutcomeReference = new List<ResourceReference>((IEnumerable<ResourceReference>)t_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				LifecycleStatusElement = f_,
+				AchievementStatus = g_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
+				Priority = i_,
+				Description = j_,
+				Subject = k_,
+				Start = (DataType)l_,
+				Target = new List<Goal.TargetComponent>((IEnumerable<Goal.TargetComponent>)m_),
+				StatusDateElement = n_,
+				StatusReasonElement = o_,
+				ExpressedBy = p_,
+				Addresses = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)r_),
+				OutcomeCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
+				OutcomeReference = new List<ResourceReference>((IEnumerable<ResourceReference>)t_),
+			};
 
 			return u_;
 		};
@@ -2939,18 +2939,18 @@ OutcomeReference = new List<ResourceReference>((IEnumerable<ResourceReference>)t
 			List<Group.CharacteristicComponent> o_ = a?.Characteristic;
 			List<Group.MemberComponent> p_ = a?.Member;
 			Group q_ = new Group
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-ActiveElement = f_,
-TypeElement = g_,
-ActualElement = h_,
-Code = i_,
-NameElement = j_,
-QuantityElement = m_,
-ManagingEntity = n_,
-Characteristic = new List<Group.CharacteristicComponent>((IEnumerable<Group.CharacteristicComponent>)o_),
-Member = new List<Group.MemberComponent>((IEnumerable<Group.MemberComponent>)p_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				ActiveElement = f_,
+				TypeElement = g_,
+				ActualElement = h_,
+				Code = i_,
+				NameElement = j_,
+				QuantityElement = m_,
+				ManagingEntity = n_,
+				Characteristic = new List<Group.CharacteristicComponent>((IEnumerable<Group.CharacteristicComponent>)o_),
+				Member = new List<Group.MemberComponent>((IEnumerable<Group.MemberComponent>)p_),
+			};
 
 			return q_;
 		};
@@ -2983,23 +2983,23 @@ Member = new List<Group.MemberComponent>((IEnumerable<Group.MemberComponent>)p_)
 			ResourceReference r_ = a?.Result;
 			List<DataRequirement> s_ = a?.DataRequirement;
 			GuidanceResponse t_ = new GuidanceResponse
-{
-RequestIdentifier = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-Module = (DataType)g_,
-StatusElement = h_,
-Subject = i_,
-Encounter = j_,
-OccurrenceDateTimeElement = k_,
-Performer = l_,
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
-Note = new List<Annotation>((IEnumerable<Annotation>)o_),
-EvaluationMessage = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
-OutputParameters = q_,
-Result = r_,
-DataRequirement = new List<DataRequirement>((IEnumerable<DataRequirement>)s_),
-};
+			{
+				RequestIdentifier = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				Module = (DataType)g_,
+				StatusElement = h_,
+				Subject = i_,
+				Encounter = j_,
+				OccurrenceDateTimeElement = k_,
+				Performer = l_,
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)o_),
+				EvaluationMessage = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
+				OutputParameters = q_,
+				Result = r_,
+				DataRequirement = new List<DataRequirement>((IEnumerable<DataRequirement>)s_),
+			};
 
 			return t_;
 		};
@@ -3041,32 +3041,32 @@ DataRequirement = new List<DataRequirement>((IEnumerable<DataRequirement>)s_),
 			FhirString aa_ = a?.AvailabilityExceptionsElement;
 			List<ResourceReference> ab_ = a?.Endpoint;
 			HealthcareService ac_ = new HealthcareService
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-ActiveElement = f_,
-ProvidedBy = g_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
-Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
-Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)j_),
-Location = new List<ResourceReference>((IEnumerable<ResourceReference>)k_),
-NameElement = l_,
-CommentElement = m_,
-ExtraDetailsElement = n_,
-Photo = o_,
-Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)p_),
-CoverageArea = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
-ServiceProvisionCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)r_),
-Eligibility = new List<HealthcareService.EligibilityComponent>((IEnumerable<HealthcareService.EligibilityComponent>)s_),
-Program = new List<CodeableConcept>((IEnumerable<CodeableConcept>)t_),
-Characteristic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)u_),
-Communication = new List<CodeableConcept>((IEnumerable<CodeableConcept>)v_),
-ReferralMethod = new List<CodeableConcept>((IEnumerable<CodeableConcept>)w_),
-AppointmentRequiredElement = x_,
-AvailableTime = new List<HealthcareService.AvailableTimeComponent>((IEnumerable<HealthcareService.AvailableTimeComponent>)y_),
-NotAvailable = new List<HealthcareService.NotAvailableComponent>((IEnumerable<HealthcareService.NotAvailableComponent>)z_),
-AvailabilityExceptionsElement = aa_,
-Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)ab_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				ActiveElement = f_,
+				ProvidedBy = g_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
+				Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
+				Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)j_),
+				Location = new List<ResourceReference>((IEnumerable<ResourceReference>)k_),
+				NameElement = l_,
+				CommentElement = m_,
+				ExtraDetailsElement = n_,
+				Photo = o_,
+				Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)p_),
+				CoverageArea = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
+				ServiceProvisionCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)r_),
+				Eligibility = new List<HealthcareService.EligibilityComponent>((IEnumerable<HealthcareService.EligibilityComponent>)s_),
+				Program = new List<CodeableConcept>((IEnumerable<CodeableConcept>)t_),
+				Characteristic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)u_),
+				Communication = new List<CodeableConcept>((IEnumerable<CodeableConcept>)v_),
+				ReferralMethod = new List<CodeableConcept>((IEnumerable<CodeableConcept>)w_),
+				AppointmentRequiredElement = x_,
+				AvailableTime = new List<HealthcareService.AvailableTimeComponent>((IEnumerable<HealthcareService.AvailableTimeComponent>)y_),
+				NotAvailable = new List<HealthcareService.NotAvailableComponent>((IEnumerable<HealthcareService.NotAvailableComponent>)z_),
+				AvailabilityExceptionsElement = aa_,
+				Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)ab_),
+			};
 
 			return ac_;
 		};
@@ -3108,28 +3108,28 @@ Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)ab_),
 			FhirString aa_ = a?.DescriptionElement;
 			List<ImagingStudy.SeriesComponent> ab_ = a?.Series;
 			ImagingStudy ac_ = new ImagingStudy
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Modality = new List<Coding>((IEnumerable<Coding>)g_),
-Subject = h_,
-Encounter = i_,
-StartedElement = j_,
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)k_),
-Referrer = l_,
-Interpreter = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
-Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
-NumberOfSeriesElement = q_,
-NumberOfInstancesElement = t_,
-ProcedureReference = u_,
-ProcedureCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)v_),
-Location = w_,
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)x_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
-Note = new List<Annotation>((IEnumerable<Annotation>)z_),
-DescriptionElement = aa_,
-Series = new List<ImagingStudy.SeriesComponent>((IEnumerable<ImagingStudy.SeriesComponent>)ab_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Modality = new List<Coding>((IEnumerable<Coding>)g_),
+				Subject = h_,
+				Encounter = i_,
+				StartedElement = j_,
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)k_),
+				Referrer = l_,
+				Interpreter = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
+				Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
+				NumberOfSeriesElement = q_,
+				NumberOfInstancesElement = t_,
+				ProcedureReference = u_,
+				ProcedureCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)v_),
+				Location = w_,
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)x_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)z_),
+				DescriptionElement = aa_,
+				Series = new List<ImagingStudy.SeriesComponent>((IEnumerable<ImagingStudy.SeriesComponent>)ab_),
+			};
 
 			return ac_;
 		};
@@ -3175,36 +3175,36 @@ Series = new List<ImagingStudy.SeriesComponent>((IEnumerable<ImagingStudy.Series
 			List<Immunization.ReactionComponent> ae_ = a?.Reaction;
 			List<Immunization.ProtocolAppliedComponent> af_ = a?.ProtocolApplied;
 			Immunization ag_ = new Immunization
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-StatusReason = g_,
-VaccineCode = h_,
-Patient = i_,
-Encounter = j_,
-Occurrence = (DataType)k_,
-RecordedElement = l_,
-PrimarySourceElement = m_,
-ReportOrigin = n_,
-Location = o_,
-Manufacturer = p_,
-LotNumberElement = q_,
-ExpirationDateElement = r_,
-Site = s_,
-Route = t_,
-DoseQuantity = u_,
-Performer = new List<Immunization.PerformerComponent>((IEnumerable<Immunization.PerformerComponent>)v_),
-Note = new List<Annotation>((IEnumerable<Annotation>)w_),
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)x_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
-IsSubpotentElement = z_,
-SubpotentReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)aa_),
-Education = new List<Immunization.EducationComponent>((IEnumerable<Immunization.EducationComponent>)ab_),
-ProgramEligibility = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ac_),
-FundingSource = ad_,
-Reaction = new List<Immunization.ReactionComponent>((IEnumerable<Immunization.ReactionComponent>)ae_),
-ProtocolApplied = new List<Immunization.ProtocolAppliedComponent>((IEnumerable<Immunization.ProtocolAppliedComponent>)af_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				StatusReason = g_,
+				VaccineCode = h_,
+				Patient = i_,
+				Encounter = j_,
+				Occurrence = (DataType)k_,
+				RecordedElement = l_,
+				PrimarySourceElement = m_,
+				ReportOrigin = n_,
+				Location = o_,
+				Manufacturer = p_,
+				LotNumberElement = q_,
+				ExpirationDateElement = r_,
+				Site = s_,
+				Route = t_,
+				DoseQuantity = u_,
+				Performer = new List<Immunization.PerformerComponent>((IEnumerable<Immunization.PerformerComponent>)v_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)w_),
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)x_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
+				IsSubpotentElement = z_,
+				SubpotentReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)aa_),
+				Education = new List<Immunization.EducationComponent>((IEnumerable<Immunization.EducationComponent>)ab_),
+				ProgramEligibility = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ac_),
+				FundingSource = ad_,
+				Reaction = new List<Immunization.ReactionComponent>((IEnumerable<Immunization.ReactionComponent>)ae_),
+				ProtocolApplied = new List<Immunization.ProtocolAppliedComponent>((IEnumerable<Immunization.ProtocolAppliedComponent>)af_),
+			};
 
 			return ag_;
 		};
@@ -3235,21 +3235,21 @@ ProtocolApplied = new List<Immunization.ProtocolAppliedComponent>((IEnumerable<I
 			DataType p_ = a?.DoseNumber;
 			DataType q_ = a?.SeriesDoses;
 			ImmunizationEvaluation r_ = new ImmunizationEvaluation
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Patient = g_,
-DateElement = h_,
-Authority = i_,
-TargetDisease = j_,
-ImmunizationEvent = k_,
-DoseStatus = l_,
-DoseStatusReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
-DescriptionElement = n_,
-SeriesElement = o_,
-DoseNumber = (DataType)p_,
-SeriesDoses = (DataType)q_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Patient = g_,
+				DateElement = h_,
+				Authority = i_,
+				TargetDisease = j_,
+				ImmunizationEvent = k_,
+				DoseStatus = l_,
+				DoseStatusReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
+				DescriptionElement = n_,
+				SeriesElement = o_,
+				DoseNumber = (DataType)p_,
+				SeriesDoses = (DataType)q_,
+			};
 
 			return r_;
 		};
@@ -3272,13 +3272,13 @@ SeriesDoses = (DataType)q_,
 			ResourceReference h_ = a?.Authority;
 			List<ImmunizationRecommendation.RecommendationComponent> i_ = a?.Recommendation;
 			ImmunizationRecommendation j_ = new ImmunizationRecommendation
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-Patient = f_,
-DateElement = g_,
-Authority = h_,
-Recommendation = new List<ImmunizationRecommendation.RecommendationComponent>((IEnumerable<ImmunizationRecommendation.RecommendationComponent>)i_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				Patient = f_,
+				DateElement = g_,
+				Authority = h_,
+				Recommendation = new List<ImmunizationRecommendation.RecommendationComponent>((IEnumerable<ImmunizationRecommendation.RecommendationComponent>)i_),
+			};
 
 			return j_;
 		};
@@ -3310,22 +3310,22 @@ Recommendation = new List<ImmunizationRecommendation.RecommendationComponent>((I
 			List<InsurancePlan.CoverageComponent> q_ = a?.Coverage;
 			List<InsurancePlan.PlanComponent> r_ = a?.Plan;
 			InsurancePlan s_ = new InsurancePlan
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
-NameElement = h_,
-AliasElement = new List<FhirString>((IEnumerable<FhirString>)i_),
-Period = j_,
-OwnedBy = k_,
-AdministeredBy = l_,
-CoverageArea = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
-Contact = new List<InsurancePlan.ContactComponent>((IEnumerable<InsurancePlan.ContactComponent>)n_),
-Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
-Network = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
-Coverage = new List<InsurancePlan.CoverageComponent>((IEnumerable<InsurancePlan.CoverageComponent>)q_),
-Plan = new List<InsurancePlan.PlanComponent>((IEnumerable<InsurancePlan.PlanComponent>)r_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
+				NameElement = h_,
+				AliasElement = new List<FhirString>((IEnumerable<FhirString>)i_),
+				Period = j_,
+				OwnedBy = k_,
+				AdministeredBy = l_,
+				CoverageArea = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
+				Contact = new List<InsurancePlan.ContactComponent>((IEnumerable<InsurancePlan.ContactComponent>)n_),
+				Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
+				Network = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
+				Coverage = new List<InsurancePlan.CoverageComponent>((IEnumerable<InsurancePlan.CoverageComponent>)q_),
+				Plan = new List<InsurancePlan.PlanComponent>((IEnumerable<InsurancePlan.PlanComponent>)r_),
+			};
 
 			return s_;
 		};
@@ -3359,24 +3359,24 @@ Plan = new List<InsurancePlan.PlanComponent>((IEnumerable<InsurancePlan.PlanComp
 			Markdown s_ = a?.PaymentTermsElement;
 			List<Annotation> t_ = a?.Note;
 			Invoice u_ = new Invoice
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-CancelledReasonElement = g_,
-Type = h_,
-Subject = i_,
-Recipient = j_,
-DateElement = k_,
-Participant = new List<Invoice.ParticipantComponent>((IEnumerable<Invoice.ParticipantComponent>)l_),
-Issuer = m_,
-Account = n_,
-LineItem = new List<Invoice.LineItemComponent>((IEnumerable<Invoice.LineItemComponent>)o_),
-TotalPriceComponent = new List<Invoice.PriceComponentComponent>((IEnumerable<Invoice.PriceComponentComponent>)p_),
-TotalNet = q_,
-TotalGross = r_,
-PaymentTermsElement = s_,
-Note = new List<Annotation>((IEnumerable<Annotation>)t_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				CancelledReasonElement = g_,
+				Type = h_,
+				Subject = i_,
+				Recipient = j_,
+				DateElement = k_,
+				Participant = new List<Invoice.ParticipantComponent>((IEnumerable<Invoice.ParticipantComponent>)l_),
+				Issuer = m_,
+				Account = n_,
+				LineItem = new List<Invoice.LineItemComponent>((IEnumerable<Invoice.LineItemComponent>)o_),
+				TotalPriceComponent = new List<Invoice.PriceComponentComponent>((IEnumerable<Invoice.PriceComponentComponent>)p_),
+				TotalNet = q_,
+				TotalGross = r_,
+				PaymentTermsElement = s_,
+				Note = new List<Annotation>((IEnumerable<Annotation>)t_),
+			};
 
 			return u_;
 		};
@@ -3425,39 +3425,39 @@ Note = new List<Annotation>((IEnumerable<Annotation>)t_),
 			List<DataRequirement> ah_ = a?.DataRequirement;
 			List<Attachment> ai_ = a?.Content;
 			Library aj_ = new Library
-{
-UrlElement = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-VersionElement = g_,
-NameElement = h_,
-TitleElement = i_,
-SubtitleElement = j_,
-StatusElement = k_,
-ExperimentalElement = l_,
-Type = m_,
-Subject = (DataType)n_,
-DateElement = o_,
-PublisherElement = p_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)q_),
-DescriptionElement = r_,
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)s_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)t_),
-PurposeElement = u_,
-UsageElement = v_,
-CopyrightElement = w_,
-ApprovalDateElement = x_,
-LastReviewDateElement = y_,
-EffectivePeriod = z_,
-Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)aa_),
-Author = new List<ContactDetail>((IEnumerable<ContactDetail>)ab_),
-Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)ac_),
-Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)ad_),
-Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)ae_),
-RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)af_),
-Parameter = new List<ParameterDefinition>((IEnumerable<ParameterDefinition>)ag_),
-DataRequirement = new List<DataRequirement>((IEnumerable<DataRequirement>)ah_),
-Content = new List<Attachment>((IEnumerable<Attachment>)ai_),
-};
+			{
+				UrlElement = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				VersionElement = g_,
+				NameElement = h_,
+				TitleElement = i_,
+				SubtitleElement = j_,
+				StatusElement = k_,
+				ExperimentalElement = l_,
+				Type = m_,
+				Subject = (DataType)n_,
+				DateElement = o_,
+				PublisherElement = p_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)q_),
+				DescriptionElement = r_,
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)s_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)t_),
+				PurposeElement = u_,
+				UsageElement = v_,
+				CopyrightElement = w_,
+				ApprovalDateElement = x_,
+				LastReviewDateElement = y_,
+				EffectivePeriod = z_,
+				Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)aa_),
+				Author = new List<ContactDetail>((IEnumerable<ContactDetail>)ab_),
+				Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)ac_),
+				Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)ad_),
+				Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)ae_),
+				RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)af_),
+				Parameter = new List<ParameterDefinition>((IEnumerable<ParameterDefinition>)ag_),
+				DataRequirement = new List<DataRequirement>((IEnumerable<DataRequirement>)ah_),
+				Content = new List<Attachment>((IEnumerable<Attachment>)ai_),
+			};
 
 			return aj_;
 		};
@@ -3478,11 +3478,11 @@ Content = new List<Attachment>((IEnumerable<Attachment>)ai_),
 			ResourceReference f_ = a?.Author;
 			List<Linkage.ItemComponent> g_ = a?.Item;
 			Linkage h_ = new Linkage
-{
-ActiveElement = e_,
-Author = f_,
-Item = new List<Linkage.ItemComponent>((IEnumerable<Linkage.ItemComponent>)g_),
-};
+			{
+				ActiveElement = e_,
+				Author = f_,
+				Item = new List<Linkage.ItemComponent>((IEnumerable<Linkage.ItemComponent>)g_),
+			};
 
 			return h_;
 		};
@@ -3517,25 +3517,25 @@ Item = new List<Linkage.ItemComponent>((IEnumerable<Linkage.ItemComponent>)g_),
 			FhirString t_ = a?.AvailabilityExceptionsElement;
 			List<ResourceReference> u_ = a?.Endpoint;
 			Location v_ = new Location
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-OperationalStatus = g_,
-NameElement = h_,
-AliasElement = new List<FhirString>((IEnumerable<FhirString>)i_),
-DescriptionElement = j_,
-ModeElement = k_,
-Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)l_),
-Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)m_),
-Address = n_,
-PhysicalType = o_,
-Position = p_,
-ManagingOrganization = q_,
-PartOf = r_,
-HoursOfOperation = new List<Location.HoursOfOperationComponent>((IEnumerable<Location.HoursOfOperationComponent>)s_),
-AvailabilityExceptionsElement = t_,
-Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)u_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				OperationalStatus = g_,
+				NameElement = h_,
+				AliasElement = new List<FhirString>((IEnumerable<FhirString>)i_),
+				DescriptionElement = j_,
+				ModeElement = k_,
+				Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)l_),
+				Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)m_),
+				Address = n_,
+				PhysicalType = o_,
+				Position = p_,
+				ManagingOrganization = q_,
+				PartOf = r_,
+				HoursOfOperation = new List<Location.HoursOfOperationComponent>((IEnumerable<Location.HoursOfOperationComponent>)s_),
+				AvailabilityExceptionsElement = t_,
+				Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)u_),
+			};
 
 			return v_;
 		};
@@ -3594,49 +3594,49 @@ Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)u_),
 			List<Measure.GroupComponent> ar_ = a?.Group;
 			List<Measure.SupplementalDataComponent> as_ = a?.SupplementalData;
 			Measure at_ = new Measure
-{
-UrlElement = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-VersionElement = g_,
-NameElement = h_,
-TitleElement = i_,
-SubtitleElement = j_,
-StatusElement = k_,
-ExperimentalElement = l_,
-Subject = (DataType)m_,
-DateElement = n_,
-PublisherElement = o_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)p_),
-DescriptionElement = q_,
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)r_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
-PurposeElement = t_,
-UsageElement = u_,
-CopyrightElement = v_,
-ApprovalDateElement = w_,
-LastReviewDateElement = x_,
-EffectivePeriod = y_,
-Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)z_),
-Author = new List<ContactDetail>((IEnumerable<ContactDetail>)aa_),
-Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)ab_),
-Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)ac_),
-Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)ad_),
-RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)ae_),
-LibraryElement = new List<Canonical>((IEnumerable<Canonical>)af_),
-DisclaimerElement = ag_,
-Scoring = ah_,
-CompositeScoring = ai_,
-Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)aj_),
-RiskAdjustmentElement = ak_,
-RateAggregationElement = al_,
-RationaleElement = am_,
-ClinicalRecommendationStatementElement = an_,
-ImprovementNotation = ao_,
-DefinitionElement = new List<Markdown>((IEnumerable<Markdown>)ap_),
-GuidanceElement = aq_,
-Group = new List<Measure.GroupComponent>((IEnumerable<Measure.GroupComponent>)ar_),
-SupplementalData = new List<Measure.SupplementalDataComponent>((IEnumerable<Measure.SupplementalDataComponent>)as_),
-};
+			{
+				UrlElement = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				VersionElement = g_,
+				NameElement = h_,
+				TitleElement = i_,
+				SubtitleElement = j_,
+				StatusElement = k_,
+				ExperimentalElement = l_,
+				Subject = (DataType)m_,
+				DateElement = n_,
+				PublisherElement = o_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)p_),
+				DescriptionElement = q_,
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)r_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
+				PurposeElement = t_,
+				UsageElement = u_,
+				CopyrightElement = v_,
+				ApprovalDateElement = w_,
+				LastReviewDateElement = x_,
+				EffectivePeriod = y_,
+				Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)z_),
+				Author = new List<ContactDetail>((IEnumerable<ContactDetail>)aa_),
+				Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)ab_),
+				Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)ac_),
+				Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)ad_),
+				RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)ae_),
+				LibraryElement = new List<Canonical>((IEnumerable<Canonical>)af_),
+				DisclaimerElement = ag_,
+				Scoring = ah_,
+				CompositeScoring = ai_,
+				Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)aj_),
+				RiskAdjustmentElement = ak_,
+				RateAggregationElement = al_,
+				RationaleElement = am_,
+				ClinicalRecommendationStatementElement = an_,
+				ImprovementNotation = ao_,
+				DefinitionElement = new List<Markdown>((IEnumerable<Markdown>)ap_),
+				GuidanceElement = aq_,
+				Group = new List<Measure.GroupComponent>((IEnumerable<Measure.GroupComponent>)ar_),
+				SupplementalData = new List<Measure.SupplementalDataComponent>((IEnumerable<Measure.SupplementalDataComponent>)as_),
+			};
 
 			return at_;
 		};
@@ -3665,19 +3665,19 @@ SupplementalData = new List<Measure.SupplementalDataComponent>((IEnumerable<Meas
 			List<MeasureReport.GroupComponent> n_ = a?.Group;
 			List<ResourceReference> o_ = a?.EvaluatedResource;
 			MeasureReport p_ = new MeasureReport
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-TypeElement = g_,
-MeasureElement = h_,
-Subject = i_,
-DateElement = j_,
-Reporter = k_,
-Period = l_,
-ImprovementNotation = m_,
-Group = new List<MeasureReport.GroupComponent>((IEnumerable<MeasureReport.GroupComponent>)n_),
-EvaluatedResource = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				TypeElement = g_,
+				MeasureElement = h_,
+				Subject = i_,
+				DateElement = j_,
+				Reporter = k_,
+				Period = l_,
+				ImprovementNotation = m_,
+				Group = new List<MeasureReport.GroupComponent>((IEnumerable<MeasureReport.GroupComponent>)n_),
+				EvaluatedResource = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
+			};
 
 			return p_;
 		};
@@ -3703,16 +3703,16 @@ EvaluatedResource = new List<ResourceReference>((IEnumerable<ResourceReference>)
 			List<Medication.IngredientComponent> k_ = a?.Ingredient;
 			Medication.BatchComponent l_ = a?.Batch;
 			Medication m_ = new Medication
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-Code = f_,
-StatusElement = g_,
-Manufacturer = h_,
-Form = i_,
-Amount = j_,
-Ingredient = new List<Medication.IngredientComponent>((IEnumerable<Medication.IngredientComponent>)k_),
-Batch = l_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				Code = f_,
+				StatusElement = g_,
+				Manufacturer = h_,
+				Form = i_,
+				Amount = j_,
+				Ingredient = new List<Medication.IngredientComponent>((IEnumerable<Medication.IngredientComponent>)k_),
+				Batch = l_,
+			};
 
 			return m_;
 		};
@@ -3749,27 +3749,27 @@ Batch = l_,
 			MedicationAdministration.DosageComponent v_ = a?.Dosage;
 			List<ResourceReference> w_ = a?.EventHistory;
 			MedicationAdministration x_ = new MedicationAdministration
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-InstantiatesElement = new List<FhirUri>((IEnumerable<FhirUri>)f_),
-PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)g_),
-StatusElement = h_,
-StatusReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
-Category = j_,
-Medication = (DataType)k_,
-Subject = l_,
-Context = m_,
-SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
-Effective = (DataType)o_,
-Performer = new List<MedicationAdministration.PerformerComponent>((IEnumerable<MedicationAdministration.PerformerComponent>)p_),
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
-Request = s_,
-Device = new List<ResourceReference>((IEnumerable<ResourceReference>)t_),
-Note = new List<Annotation>((IEnumerable<Annotation>)u_),
-Dosage = v_,
-EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				InstantiatesElement = new List<FhirUri>((IEnumerable<FhirUri>)f_),
+				PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)g_),
+				StatusElement = h_,
+				StatusReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
+				Category = j_,
+				Medication = (DataType)k_,
+				Subject = l_,
+				Context = m_,
+				SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
+				Effective = (DataType)o_,
+				Performer = new List<MedicationAdministration.PerformerComponent>((IEnumerable<MedicationAdministration.PerformerComponent>)p_),
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
+				Request = s_,
+				Device = new List<ResourceReference>((IEnumerable<ResourceReference>)t_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)u_),
+				Dosage = v_,
+				EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
+			};
 
 			return x_;
 		};
@@ -3811,32 +3811,32 @@ EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
 			List<ResourceReference> aa_ = a?.DetectedIssue;
 			List<ResourceReference> ab_ = a?.EventHistory;
 			MedicationDispense ac_ = new MedicationDispense
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
-StatusElement = g_,
-StatusReason = (DataType)h_,
-Category = i_,
-Medication = (DataType)j_,
-Subject = k_,
-Context = l_,
-SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
-Performer = new List<MedicationDispense.PerformerComponent>((IEnumerable<MedicationDispense.PerformerComponent>)n_),
-Location = o_,
-AuthorizingPrescription = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
-Type = q_,
-Quantity = r_,
-DaysSupply = s_,
-WhenPreparedElement = t_,
-WhenHandedOverElement = u_,
-Destination = v_,
-Receiver = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
-Note = new List<Annotation>((IEnumerable<Annotation>)x_),
-DosageInstruction = new List<Dosage>((IEnumerable<Dosage>)y_),
-Substitution = z_,
-DetectedIssue = new List<ResourceReference>((IEnumerable<ResourceReference>)aa_),
-EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)ab_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
+				StatusElement = g_,
+				StatusReason = (DataType)h_,
+				Category = i_,
+				Medication = (DataType)j_,
+				Subject = k_,
+				Context = l_,
+				SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
+				Performer = new List<MedicationDispense.PerformerComponent>((IEnumerable<MedicationDispense.PerformerComponent>)n_),
+				Location = o_,
+				AuthorizingPrescription = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
+				Type = q_,
+				Quantity = r_,
+				DaysSupply = s_,
+				WhenPreparedElement = t_,
+				WhenHandedOverElement = u_,
+				Destination = v_,
+				Receiver = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)x_),
+				DosageInstruction = new List<Dosage>((IEnumerable<Dosage>)y_),
+				Substitution = z_,
+				DetectedIssue = new List<ResourceReference>((IEnumerable<ResourceReference>)aa_),
+				EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)ab_),
+			};
 
 			return ac_;
 		};
@@ -3876,30 +3876,30 @@ EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)ab_),
 			List<MedicationKnowledge.RegulatoryComponent> y_ = a?.Regulatory;
 			List<MedicationKnowledge.KineticsComponent> z_ = a?.Kinetics;
 			MedicationKnowledge aa_ = new MedicationKnowledge
-{
-Code = e_,
-StatusElement = f_,
-Manufacturer = g_,
-DoseForm = h_,
-Amount = i_,
-SynonymElement = new List<FhirString>((IEnumerable<FhirString>)j_),
-RelatedMedicationKnowledge = new List<MedicationKnowledge.RelatedMedicationKnowledgeComponent>((IEnumerable<MedicationKnowledge.RelatedMedicationKnowledgeComponent>)k_),
-AssociatedMedication = new List<ResourceReference>((IEnumerable<ResourceReference>)l_),
-ProductType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
-Monograph = new List<MedicationKnowledge.MonographComponent>((IEnumerable<MedicationKnowledge.MonographComponent>)n_),
-Ingredient = new List<MedicationKnowledge.IngredientComponent>((IEnumerable<MedicationKnowledge.IngredientComponent>)o_),
-PreparationInstructionElement = p_,
-IntendedRoute = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
-Cost = new List<MedicationKnowledge.CostComponent>((IEnumerable<MedicationKnowledge.CostComponent>)r_),
-MonitoringProgram = new List<MedicationKnowledge.MonitoringProgramComponent>((IEnumerable<MedicationKnowledge.MonitoringProgramComponent>)s_),
-AdministrationGuidelines = new List<MedicationKnowledge.AdministrationGuidelinesComponent>((IEnumerable<MedicationKnowledge.AdministrationGuidelinesComponent>)t_),
-MedicineClassification = new List<MedicationKnowledge.MedicineClassificationComponent>((IEnumerable<MedicationKnowledge.MedicineClassificationComponent>)u_),
-Packaging = v_,
-DrugCharacteristic = new List<MedicationKnowledge.DrugCharacteristicComponent>((IEnumerable<MedicationKnowledge.DrugCharacteristicComponent>)w_),
-Contraindication = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
-Regulatory = new List<MedicationKnowledge.RegulatoryComponent>((IEnumerable<MedicationKnowledge.RegulatoryComponent>)y_),
-Kinetics = new List<MedicationKnowledge.KineticsComponent>((IEnumerable<MedicationKnowledge.KineticsComponent>)z_),
-};
+			{
+				Code = e_,
+				StatusElement = f_,
+				Manufacturer = g_,
+				DoseForm = h_,
+				Amount = i_,
+				SynonymElement = new List<FhirString>((IEnumerable<FhirString>)j_),
+				RelatedMedicationKnowledge = new List<MedicationKnowledge.RelatedMedicationKnowledgeComponent>((IEnumerable<MedicationKnowledge.RelatedMedicationKnowledgeComponent>)k_),
+				AssociatedMedication = new List<ResourceReference>((IEnumerable<ResourceReference>)l_),
+				ProductType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
+				Monograph = new List<MedicationKnowledge.MonographComponent>((IEnumerable<MedicationKnowledge.MonographComponent>)n_),
+				Ingredient = new List<MedicationKnowledge.IngredientComponent>((IEnumerable<MedicationKnowledge.IngredientComponent>)o_),
+				PreparationInstructionElement = p_,
+				IntendedRoute = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
+				Cost = new List<MedicationKnowledge.CostComponent>((IEnumerable<MedicationKnowledge.CostComponent>)r_),
+				MonitoringProgram = new List<MedicationKnowledge.MonitoringProgramComponent>((IEnumerable<MedicationKnowledge.MonitoringProgramComponent>)s_),
+				AdministrationGuidelines = new List<MedicationKnowledge.AdministrationGuidelinesComponent>((IEnumerable<MedicationKnowledge.AdministrationGuidelinesComponent>)t_),
+				MedicineClassification = new List<MedicationKnowledge.MedicineClassificationComponent>((IEnumerable<MedicationKnowledge.MedicineClassificationComponent>)u_),
+				Packaging = v_,
+				DrugCharacteristic = new List<MedicationKnowledge.DrugCharacteristicComponent>((IEnumerable<MedicationKnowledge.DrugCharacteristicComponent>)w_),
+				Contraindication = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
+				Regulatory = new List<MedicationKnowledge.RegulatoryComponent>((IEnumerable<MedicationKnowledge.RegulatoryComponent>)y_),
+				Kinetics = new List<MedicationKnowledge.KineticsComponent>((IEnumerable<MedicationKnowledge.KineticsComponent>)z_),
+			};
 
 			return aa_;
 		};
@@ -3949,40 +3949,40 @@ Kinetics = new List<MedicationKnowledge.KineticsComponent>((IEnumerable<Medicati
 			List<ResourceReference> ai_ = a?.DetectedIssue;
 			List<ResourceReference> aj_ = a?.EventHistory;
 			MedicationRequest ak_ = new MedicationRequest
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-StatusReason = g_,
-IntentElement = h_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
-PriorityElement = j_,
-DoNotPerformElement = k_,
-Reported = (DataType)l_,
-Medication = (DataType)m_,
-Subject = n_,
-Encounter = o_,
-SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
-AuthoredOnElement = q_,
-Requester = r_,
-Performer = s_,
-PerformerType = t_,
-Recorder = u_,
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)v_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
-InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)x_),
-InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)y_),
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)z_),
-GroupIdentifier = aa_,
-CourseOfTherapyType = ab_,
-Insurance = new List<ResourceReference>((IEnumerable<ResourceReference>)ac_),
-Note = new List<Annotation>((IEnumerable<Annotation>)ad_),
-DosageInstruction = new List<Dosage>((IEnumerable<Dosage>)ae_),
-DispenseRequest = af_,
-Substitution = ag_,
-PriorPrescription = ah_,
-DetectedIssue = new List<ResourceReference>((IEnumerable<ResourceReference>)ai_),
-EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)aj_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				StatusReason = g_,
+				IntentElement = h_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
+				PriorityElement = j_,
+				DoNotPerformElement = k_,
+				Reported = (DataType)l_,
+				Medication = (DataType)m_,
+				Subject = n_,
+				Encounter = o_,
+				SupportingInformation = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
+				AuthoredOnElement = q_,
+				Requester = r_,
+				Performer = s_,
+				PerformerType = t_,
+				Recorder = u_,
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)v_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)w_),
+				InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)x_),
+				InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)y_),
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)z_),
+				GroupIdentifier = aa_,
+				CourseOfTherapyType = ab_,
+				Insurance = new List<ResourceReference>((IEnumerable<ResourceReference>)ac_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)ad_),
+				DosageInstruction = new List<Dosage>((IEnumerable<Dosage>)ae_),
+				DispenseRequest = af_,
+				Substitution = ag_,
+				PriorPrescription = ah_,
+				DetectedIssue = new List<ResourceReference>((IEnumerable<ResourceReference>)ai_),
+				EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)aj_),
+			};
 
 			return ak_;
 		};
@@ -4017,25 +4017,25 @@ EventHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)aj_),
 			List<Annotation> t_ = a?.Note;
 			List<Dosage> u_ = a?.Dosage;
 			MedicationStatement v_ = new MedicationStatement
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
-PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)g_),
-StatusElement = h_,
-StatusReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
-Category = j_,
-Medication = (DataType)k_,
-Subject = l_,
-Context = m_,
-Effective = (DataType)n_,
-DateAssertedElement = o_,
-InformationSource = p_,
-DerivedFrom = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)r_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)s_),
-Note = new List<Annotation>((IEnumerable<Annotation>)t_),
-Dosage = new List<Dosage>((IEnumerable<Dosage>)u_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
+				PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)g_),
+				StatusElement = h_,
+				StatusReason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
+				Category = j_,
+				Medication = (DataType)k_,
+				Subject = l_,
+				Context = m_,
+				Effective = (DataType)n_,
+				DateAssertedElement = o_,
+				InformationSource = p_,
+				DerivedFrom = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)r_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)s_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)t_),
+				Dosage = new List<Dosage>((IEnumerable<Dosage>)u_),
+			};
 
 			return v_;
 		};
@@ -4073,28 +4073,28 @@ Dosage = new List<Dosage>((IEnumerable<Dosage>)u_),
 			List<MedicinalProduct.ManufacturingBusinessOperationComponent> w_ = a?.ManufacturingBusinessOperation;
 			List<MedicinalProduct.SpecialDesignationComponent> x_ = a?.SpecialDesignation;
 			MedicinalProduct y_ = new MedicinalProduct
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-Type = f_,
-Domain = g_,
-CombinedPharmaceuticalDoseForm = h_,
-LegalStatusOfSupply = i_,
-AdditionalMonitoringIndicator = j_,
-SpecialMeasuresElement = new List<FhirString>((IEnumerable<FhirString>)k_),
-PaediatricUseIndicator = l_,
-ProductClassification = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
-MarketingStatus = new List<MarketingStatus>((IEnumerable<MarketingStatus>)n_),
-PharmaceuticalProduct = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
-PackagedMedicinalProduct = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
-AttachedDocument = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
-MasterFile = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
-Contact = new List<ResourceReference>((IEnumerable<ResourceReference>)s_),
-ClinicalTrial = new List<ResourceReference>((IEnumerable<ResourceReference>)t_),
-Name = new List<MedicinalProduct.NameComponent>((IEnumerable<MedicinalProduct.NameComponent>)u_),
-CrossReference = new List<Identifier>((IEnumerable<Identifier>)v_),
-ManufacturingBusinessOperation = new List<MedicinalProduct.ManufacturingBusinessOperationComponent>((IEnumerable<MedicinalProduct.ManufacturingBusinessOperationComponent>)w_),
-SpecialDesignation = new List<MedicinalProduct.SpecialDesignationComponent>((IEnumerable<MedicinalProduct.SpecialDesignationComponent>)x_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				Type = f_,
+				Domain = g_,
+				CombinedPharmaceuticalDoseForm = h_,
+				LegalStatusOfSupply = i_,
+				AdditionalMonitoringIndicator = j_,
+				SpecialMeasuresElement = new List<FhirString>((IEnumerable<FhirString>)k_),
+				PaediatricUseIndicator = l_,
+				ProductClassification = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
+				MarketingStatus = new List<MarketingStatus>((IEnumerable<MarketingStatus>)n_),
+				PharmaceuticalProduct = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
+				PackagedMedicinalProduct = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
+				AttachedDocument = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
+				MasterFile = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
+				Contact = new List<ResourceReference>((IEnumerable<ResourceReference>)s_),
+				ClinicalTrial = new List<ResourceReference>((IEnumerable<ResourceReference>)t_),
+				Name = new List<MedicinalProduct.NameComponent>((IEnumerable<MedicinalProduct.NameComponent>)u_),
+				CrossReference = new List<Identifier>((IEnumerable<Identifier>)v_),
+				ManufacturingBusinessOperation = new List<MedicinalProduct.ManufacturingBusinessOperationComponent>((IEnumerable<MedicinalProduct.ManufacturingBusinessOperationComponent>)w_),
+				SpecialDesignation = new List<MedicinalProduct.SpecialDesignationComponent>((IEnumerable<MedicinalProduct.SpecialDesignationComponent>)x_),
+			};
 
 			return y_;
 		};
@@ -4128,24 +4128,24 @@ SpecialDesignation = new List<MedicinalProduct.SpecialDesignationComponent>((IEn
 			ResourceReference s_ = a?.Regulator;
 			MedicinalProductAuthorization.ProcedureComponent t_ = a?.Procedure;
 			MedicinalProductAuthorization u_ = new MedicinalProductAuthorization
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-Subject = f_,
-Country = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
-Status = i_,
-StatusDateElement = j_,
-RestoreDateElement = k_,
-ValidityPeriod = l_,
-DataExclusivityPeriod = m_,
-DateOfFirstAuthorizationElement = n_,
-InternationalBirthDateElement = o_,
-LegalBasis = p_,
-JurisdictionalAuthorization = new List<MedicinalProductAuthorization.JurisdictionalAuthorizationComponent>((IEnumerable<MedicinalProductAuthorization.JurisdictionalAuthorizationComponent>)q_),
-Holder = r_,
-Regulator = s_,
-Procedure = t_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				Subject = f_,
+				Country = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
+				Status = i_,
+				StatusDateElement = j_,
+				RestoreDateElement = k_,
+				ValidityPeriod = l_,
+				DataExclusivityPeriod = m_,
+				DateOfFirstAuthorizationElement = n_,
+				InternationalBirthDateElement = o_,
+				LegalBasis = p_,
+				JurisdictionalAuthorization = new List<MedicinalProductAuthorization.JurisdictionalAuthorizationComponent>((IEnumerable<MedicinalProductAuthorization.JurisdictionalAuthorizationComponent>)q_),
+				Holder = r_,
+				Regulator = s_,
+				Procedure = t_,
+			};
 
 			return u_;
 		};
@@ -4170,15 +4170,15 @@ Procedure = t_,
 			List<MedicinalProductContraindication.OtherTherapyComponent> j_ = a?.OtherTherapy;
 			List<Population> k_ = a?.Population;
 			MedicinalProductContraindication l_ = new MedicinalProductContraindication
-{
-Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)e_),
-Disease = f_,
-DiseaseStatus = g_,
-Comorbidity = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
-TherapeuticIndication = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
-OtherTherapy = new List<MedicinalProductContraindication.OtherTherapyComponent>((IEnumerable<MedicinalProductContraindication.OtherTherapyComponent>)j_),
-Population = new List<Population>((IEnumerable<Population>)k_),
-};
+			{
+				Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)e_),
+				Disease = f_,
+				DiseaseStatus = g_,
+				Comorbidity = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
+				TherapeuticIndication = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
+				OtherTherapy = new List<MedicinalProductContraindication.OtherTherapyComponent>((IEnumerable<MedicinalProductContraindication.OtherTherapyComponent>)j_),
+				Population = new List<Population>((IEnumerable<Population>)k_),
+			};
 
 			return l_;
 		};
@@ -4202,14 +4202,14 @@ Population = new List<Population>((IEnumerable<Population>)k_),
 			List<MedicinalProductIngredient.SpecifiedSubstanceComponent> i_ = a?.SpecifiedSubstance;
 			MedicinalProductIngredient.SubstanceComponent j_ = a?.Substance;
 			MedicinalProductIngredient k_ = new MedicinalProductIngredient
-{
-Identifier = e_,
-Role = f_,
-AllergenicIndicatorElement = g_,
-Manufacturer = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
-SpecifiedSubstance = new List<MedicinalProductIngredient.SpecifiedSubstanceComponent>((IEnumerable<MedicinalProductIngredient.SpecifiedSubstanceComponent>)i_),
-Substance = j_,
-};
+			{
+				Identifier = e_,
+				Role = f_,
+				AllergenicIndicatorElement = g_,
+				Manufacturer = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
+				SpecifiedSubstance = new List<MedicinalProductIngredient.SpecifiedSubstanceComponent>((IEnumerable<MedicinalProductIngredient.SpecifiedSubstanceComponent>)i_),
+				Substance = j_,
+			};
 
 			return k_;
 		};
@@ -4234,15 +4234,15 @@ Substance = j_,
 			CodeableConcept j_ = a?.Incidence;
 			CodeableConcept k_ = a?.Management;
 			MedicinalProductInteraction l_ = new MedicinalProductInteraction
-{
-Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)e_),
-DescriptionElement = f_,
-Interactant = new List<MedicinalProductInteraction.InteractantComponent>((IEnumerable<MedicinalProductInteraction.InteractantComponent>)g_),
-Type = h_,
-Effect = i_,
-Incidence = j_,
-Management = k_,
-};
+			{
+				Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)e_),
+				DescriptionElement = f_,
+				Interactant = new List<MedicinalProductInteraction.InteractantComponent>((IEnumerable<MedicinalProductInteraction.InteractantComponent>)g_),
+				Type = h_,
+				Effect = i_,
+				Incidence = j_,
+				Management = k_,
+			};
 
 			return l_;
 		};
@@ -4267,15 +4267,15 @@ Management = k_,
 			ProdCharacteristic j_ = a?.PhysicalCharacteristics;
 			List<CodeableConcept> k_ = a?.OtherCharacteristics;
 			MedicinalProductManufactured l_ = new MedicinalProductManufactured
-{
-ManufacturedDoseForm = e_,
-UnitOfPresentation = f_,
-Quantity = g_,
-Manufacturer = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
-Ingredient = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
-PhysicalCharacteristics = j_,
-OtherCharacteristics = new List<CodeableConcept>((IEnumerable<CodeableConcept>)k_),
-};
+			{
+				ManufacturedDoseForm = e_,
+				UnitOfPresentation = f_,
+				Quantity = g_,
+				Manufacturer = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
+				Ingredient = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
+				PhysicalCharacteristics = j_,
+				OtherCharacteristics = new List<CodeableConcept>((IEnumerable<CodeableConcept>)k_),
+			};
 
 			return l_;
 		};
@@ -4302,17 +4302,17 @@ OtherCharacteristics = new List<CodeableConcept>((IEnumerable<CodeableConcept>)k
 			List<MedicinalProductPackaged.BatchIdentifierComponent> l_ = a?.BatchIdentifier;
 			List<MedicinalProductPackaged.PackageItemComponent> m_ = a?.PackageItem;
 			MedicinalProductPackaged n_ = new MedicinalProductPackaged
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
-DescriptionElement = g_,
-LegalStatusOfSupply = h_,
-MarketingStatus = new List<MarketingStatus>((IEnumerable<MarketingStatus>)i_),
-MarketingAuthorization = j_,
-Manufacturer = new List<ResourceReference>((IEnumerable<ResourceReference>)k_),
-BatchIdentifier = new List<MedicinalProductPackaged.BatchIdentifierComponent>((IEnumerable<MedicinalProductPackaged.BatchIdentifierComponent>)l_),
-PackageItem = new List<MedicinalProductPackaged.PackageItemComponent>((IEnumerable<MedicinalProductPackaged.PackageItemComponent>)m_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
+				DescriptionElement = g_,
+				LegalStatusOfSupply = h_,
+				MarketingStatus = new List<MarketingStatus>((IEnumerable<MarketingStatus>)i_),
+				MarketingAuthorization = j_,
+				Manufacturer = new List<ResourceReference>((IEnumerable<ResourceReference>)k_),
+				BatchIdentifier = new List<MedicinalProductPackaged.BatchIdentifierComponent>((IEnumerable<MedicinalProductPackaged.BatchIdentifierComponent>)l_),
+				PackageItem = new List<MedicinalProductPackaged.PackageItemComponent>((IEnumerable<MedicinalProductPackaged.PackageItemComponent>)m_),
+			};
 
 			return n_;
 		};
@@ -4337,15 +4337,15 @@ PackageItem = new List<MedicinalProductPackaged.PackageItemComponent>((IEnumerab
 			List<MedicinalProductPharmaceutical.CharacteristicsComponent> j_ = a?.Characteristics;
 			List<MedicinalProductPharmaceutical.RouteOfAdministrationComponent> k_ = a?.RouteOfAdministration;
 			MedicinalProductPharmaceutical l_ = new MedicinalProductPharmaceutical
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-AdministrableDoseForm = f_,
-UnitOfPresentation = g_,
-Ingredient = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
-Device = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
-Characteristics = new List<MedicinalProductPharmaceutical.CharacteristicsComponent>((IEnumerable<MedicinalProductPharmaceutical.CharacteristicsComponent>)j_),
-RouteOfAdministration = new List<MedicinalProductPharmaceutical.RouteOfAdministrationComponent>((IEnumerable<MedicinalProductPharmaceutical.RouteOfAdministrationComponent>)k_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				AdministrableDoseForm = f_,
+				UnitOfPresentation = g_,
+				Ingredient = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
+				Device = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
+				Characteristics = new List<MedicinalProductPharmaceutical.CharacteristicsComponent>((IEnumerable<MedicinalProductPharmaceutical.CharacteristicsComponent>)j_),
+				RouteOfAdministration = new List<MedicinalProductPharmaceutical.RouteOfAdministrationComponent>((IEnumerable<MedicinalProductPharmaceutical.RouteOfAdministrationComponent>)k_),
+			};
 
 			return l_;
 		};
@@ -4368,13 +4368,13 @@ RouteOfAdministration = new List<MedicinalProductPharmaceutical.RouteOfAdministr
 			CodeableConcept h_ = a?.FrequencyOfOccurrence;
 			List<Population> i_ = a?.Population;
 			MedicinalProductUndesirableEffect j_ = new MedicinalProductUndesirableEffect
-{
-Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)e_),
-SymptomConditionEffect = f_,
-Classification = g_,
-FrequencyOfOccurrence = h_,
-Population = new List<Population>((IEnumerable<Population>)i_),
-};
+			{
+				Subject = new List<ResourceReference>((IEnumerable<ResourceReference>)e_),
+				SymptomConditionEffect = f_,
+				Classification = g_,
+				FrequencyOfOccurrence = h_,
+				Population = new List<Population>((IEnumerable<Population>)i_),
+			};
 
 			return j_;
 		};
@@ -4403,19 +4403,19 @@ Population = new List<Population>((IEnumerable<Population>)i_),
 			List<ResourceReference> n_ = a?.Focus;
 			Canonical o_ = a?.DefinitionElement;
 			MessageHeader p_ = new MessageHeader
-{
-Event = (DataType)e_,
-Destination = new List<MessageHeader.MessageDestinationComponent>((IEnumerable<MessageHeader.MessageDestinationComponent>)f_),
-Sender = g_,
-Enterer = h_,
-Author = i_,
-Source = j_,
-Responsible = k_,
-Reason = l_,
-Response = m_,
-Focus = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
-DefinitionElement = o_,
-};
+			{
+				Event = (DataType)e_,
+				Destination = new List<MessageHeader.MessageDestinationComponent>((IEnumerable<MessageHeader.MessageDestinationComponent>)f_),
+				Sender = g_,
+				Enterer = h_,
+				Author = i_,
+				Source = j_,
+				Responsible = k_,
+				Reason = l_,
+				Response = m_,
+				Focus = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
+				DefinitionElement = o_,
+			};
 
 			return p_;
 		};
@@ -4449,24 +4449,24 @@ DefinitionElement = o_,
 			List<ResourceReference> s_ = a?.Pointer;
 			List<MolecularSequence.StructureVariantComponent> t_ = a?.StructureVariant;
 			MolecularSequence u_ = new MolecularSequence
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-TypeElement = f_,
-CoordinateSystemElement = g_,
-Patient = h_,
-Specimen = i_,
-Device = j_,
-Performer = k_,
-Quantity = l_,
-ReferenceSeq = m_,
-Variant = new List<MolecularSequence.VariantComponent>((IEnumerable<MolecularSequence.VariantComponent>)n_),
-ObservedSeqElement = o_,
-Quality = new List<MolecularSequence.QualityComponent>((IEnumerable<MolecularSequence.QualityComponent>)p_),
-ReadCoverageElement = q_,
-Repository = new List<MolecularSequence.RepositoryComponent>((IEnumerable<MolecularSequence.RepositoryComponent>)r_),
-Pointer = new List<ResourceReference>((IEnumerable<ResourceReference>)s_),
-StructureVariant = new List<MolecularSequence.StructureVariantComponent>((IEnumerable<MolecularSequence.StructureVariantComponent>)t_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				TypeElement = f_,
+				CoordinateSystemElement = g_,
+				Patient = h_,
+				Specimen = i_,
+				Device = j_,
+				Performer = k_,
+				Quantity = l_,
+				ReferenceSeq = m_,
+				Variant = new List<MolecularSequence.VariantComponent>((IEnumerable<MolecularSequence.VariantComponent>)n_),
+				ObservedSeqElement = o_,
+				Quality = new List<MolecularSequence.QualityComponent>((IEnumerable<MolecularSequence.QualityComponent>)p_),
+				ReadCoverageElement = q_,
+				Repository = new List<MolecularSequence.RepositoryComponent>((IEnumerable<MolecularSequence.RepositoryComponent>)r_),
+				Pointer = new List<ResourceReference>((IEnumerable<ResourceReference>)s_),
+				StructureVariant = new List<MolecularSequence.StructureVariantComponent>((IEnumerable<MolecularSequence.StructureVariantComponent>)t_),
+			};
 
 			return u_;
 		};
@@ -4497,21 +4497,21 @@ StructureVariant = new List<MolecularSequence.StructureVariantComponent>((IEnume
 			FhirString p_ = a?.UsageElement;
 			List<NamingSystem.UniqueIdComponent> q_ = a?.UniqueId;
 			NamingSystem r_ = new NamingSystem
-{
-NameElement = e_,
-StatusElement = f_,
-KindElement = g_,
-DateElement = h_,
-PublisherElement = i_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)j_),
-ResponsibleElement = k_,
-Type = l_,
-DescriptionElement = m_,
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)n_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)o_),
-UsageElement = p_,
-UniqueId = new List<NamingSystem.UniqueIdComponent>((IEnumerable<NamingSystem.UniqueIdComponent>)q_),
-};
+			{
+				NameElement = e_,
+				StatusElement = f_,
+				KindElement = g_,
+				DateElement = h_,
+				PublisherElement = i_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)j_),
+				ResponsibleElement = k_,
+				Type = l_,
+				DescriptionElement = m_,
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)n_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)o_),
+				UsageElement = p_,
+				UniqueId = new List<NamingSystem.UniqueIdComponent>((IEnumerable<NamingSystem.UniqueIdComponent>)q_),
+			};
 
 			return r_;
 		};
@@ -4546,25 +4546,25 @@ UniqueId = new List<NamingSystem.UniqueIdComponent>((IEnumerable<NamingSystem.Un
 			NutritionOrder.EnteralFormulaComponent t_ = a?.EnteralFormula;
 			List<Annotation> u_ = a?.Note;
 			NutritionOrder v_ = new NutritionOrder
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
-InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)g_),
-InstantiatesElement = new List<FhirUri>((IEnumerable<FhirUri>)h_),
-StatusElement = i_,
-IntentElement = j_,
-Patient = k_,
-Encounter = l_,
-DateTimeElement = m_,
-Orderer = n_,
-AllergyIntolerance = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
-FoodPreferenceModifier = new List<CodeableConcept>((IEnumerable<CodeableConcept>)p_),
-ExcludeFoodModifier = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
-OralDiet = r_,
-Supplement = new List<NutritionOrder.SupplementComponent>((IEnumerable<NutritionOrder.SupplementComponent>)s_),
-EnteralFormula = t_,
-Note = new List<Annotation>((IEnumerable<Annotation>)u_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
+				InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)g_),
+				InstantiatesElement = new List<FhirUri>((IEnumerable<FhirUri>)h_),
+				StatusElement = i_,
+				IntentElement = j_,
+				Patient = k_,
+				Encounter = l_,
+				DateTimeElement = m_,
+				Orderer = n_,
+				AllergyIntolerance = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
+				FoodPreferenceModifier = new List<CodeableConcept>((IEnumerable<CodeableConcept>)p_),
+				ExcludeFoodModifier = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
+				OralDiet = r_,
+				Supplement = new List<NutritionOrder.SupplementComponent>((IEnumerable<NutritionOrder.SupplementComponent>)s_),
+				EnteralFormula = t_,
+				Note = new List<Annotation>((IEnumerable<Annotation>)u_),
+			};
 
 			return v_;
 		};
@@ -4606,32 +4606,32 @@ Note = new List<Annotation>((IEnumerable<Annotation>)u_),
 			List<ResourceReference> aa_ = a?.DerivedFrom;
 			List<Observation.ComponentComponent> ab_ = a?.Component;
 			Observation ac_ = new Observation
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
-PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)g_),
-StatusElement = h_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
-Code = j_,
-Subject = k_,
-Focus = new List<ResourceReference>((IEnumerable<ResourceReference>)l_),
-Encounter = m_,
-Effective = (DataType)n_,
-IssuedElement = o_,
-Performer = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
-Value = (DataType)q_,
-DataAbsentReason = r_,
-Interpretation = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
-Note = new List<Annotation>((IEnumerable<Annotation>)t_),
-BodySite = u_,
-Method = v_,
-Specimen = w_,
-Device = x_,
-ReferenceRange = new List<Observation.ReferenceRangeComponent>((IEnumerable<Observation.ReferenceRangeComponent>)y_),
-HasMember = new List<ResourceReference>((IEnumerable<ResourceReference>)z_),
-DerivedFrom = new List<ResourceReference>((IEnumerable<ResourceReference>)aa_),
-Component = new List<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ab_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
+				PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)g_),
+				StatusElement = h_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
+				Code = j_,
+				Subject = k_,
+				Focus = new List<ResourceReference>((IEnumerable<ResourceReference>)l_),
+				Encounter = m_,
+				Effective = (DataType)n_,
+				IssuedElement = o_,
+				Performer = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
+				Value = (DataType)q_,
+				DataAbsentReason = r_,
+				Interpretation = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)t_),
+				BodySite = u_,
+				Method = v_,
+				Specimen = w_,
+				Device = x_,
+				ReferenceRange = new List<Observation.ReferenceRangeComponent>((IEnumerable<Observation.ReferenceRangeComponent>)y_),
+				HasMember = new List<ResourceReference>((IEnumerable<ResourceReference>)z_),
+				DerivedFrom = new List<ResourceReference>((IEnumerable<ResourceReference>)aa_),
+				Component = new List<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)ab_),
+			};
 
 			return ac_;
 		};
@@ -4662,21 +4662,21 @@ Component = new List<Observation.ComponentComponent>((IEnumerable<Observation.Co
 			ResourceReference p_ = a?.AbnormalCodedValueSet;
 			ResourceReference q_ = a?.CriticalCodedValueSet;
 			ObservationDefinition r_ = new ObservationDefinition
-{
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)e_),
-Code = f_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)g_),
-PermittedDataTypeElement = new List<Code<ObservationDefinition.ObservationDataType>>((IEnumerable<Code<ObservationDefinition.ObservationDataType>>)h_),
-MultipleResultsAllowedElement = i_,
-Method = j_,
-PreferredReportNameElement = k_,
-QuantitativeDetails = l_,
-QualifiedInterval = new List<ObservationDefinition.QualifiedIntervalComponent>((IEnumerable<ObservationDefinition.QualifiedIntervalComponent>)m_),
-ValidCodedValueSet = n_,
-NormalCodedValueSet = o_,
-AbnormalCodedValueSet = p_,
-CriticalCodedValueSet = q_,
-};
+			{
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)e_),
+				Code = f_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)g_),
+				PermittedDataTypeElement = new List<Code<ObservationDefinition.ObservationDataType>>((IEnumerable<Code<ObservationDefinition.ObservationDataType>>)h_),
+				MultipleResultsAllowedElement = i_,
+				Method = j_,
+				PreferredReportNameElement = k_,
+				QuantitativeDetails = l_,
+				QualifiedInterval = new List<ObservationDefinition.QualifiedIntervalComponent>((IEnumerable<ObservationDefinition.QualifiedIntervalComponent>)m_),
+				ValidCodedValueSet = n_,
+				NormalCodedValueSet = o_,
+				AbnormalCodedValueSet = p_,
+				CriticalCodedValueSet = q_,
+			};
 
 			return r_;
 		};
@@ -4695,9 +4695,9 @@ CriticalCodedValueSet = q_,
 		{
 			List<OperationOutcome.IssueComponent> e_ = a?.Issue;
 			OperationOutcome f_ = new OperationOutcome
-{
-Issue = new List<OperationOutcome.IssueComponent>((IEnumerable<OperationOutcome.IssueComponent>)e_),
-};
+			{
+				Issue = new List<OperationOutcome.IssueComponent>((IEnumerable<OperationOutcome.IssueComponent>)e_),
+			};
 
 			return f_;
 		};
@@ -4725,18 +4725,18 @@ Issue = new List<OperationOutcome.IssueComponent>((IEnumerable<OperationOutcome.
 			List<Organization.ContactComponent> m_ = a?.Contact;
 			List<ResourceReference> n_ = a?.Endpoint;
 			Organization o_ = new Organization
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-ActiveElement = f_,
-Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
-NameElement = h_,
-AliasElement = new List<FhirString>((IEnumerable<FhirString>)i_),
-Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)j_),
-Address = new List<Address>((IEnumerable<Address>)k_),
-PartOf = l_,
-Contact = new List<Organization.ContactComponent>((IEnumerable<Organization.ContactComponent>)m_),
-Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				ActiveElement = f_,
+				Type = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
+				NameElement = h_,
+				AliasElement = new List<FhirString>((IEnumerable<FhirString>)i_),
+				Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)j_),
+				Address = new List<Address>((IEnumerable<Address>)k_),
+				PartOf = l_,
+				Contact = new List<Organization.ContactComponent>((IEnumerable<Organization.ContactComponent>)m_),
+				Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
+			};
 
 			return o_;
 		};
@@ -4766,20 +4766,20 @@ Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
 			List<ContactPoint> o_ = a?.Telecom;
 			List<ResourceReference> p_ = a?.Endpoint;
 			OrganizationAffiliation q_ = new OrganizationAffiliation
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-ActiveElement = f_,
-Period = g_,
-Organization = h_,
-ParticipatingOrganization = i_,
-Network = new List<ResourceReference>((IEnumerable<ResourceReference>)j_),
-Code = new List<CodeableConcept>((IEnumerable<CodeableConcept>)k_),
-Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)l_),
-Location = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
-HealthcareService = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
-Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)o_),
-Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				ActiveElement = f_,
+				Period = g_,
+				Organization = h_,
+				ParticipatingOrganization = i_,
+				Network = new List<ResourceReference>((IEnumerable<ResourceReference>)j_),
+				Code = new List<CodeableConcept>((IEnumerable<CodeableConcept>)k_),
+				Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)l_),
+				Location = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
+				HealthcareService = new List<ResourceReference>((IEnumerable<ResourceReference>)n_),
+				Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)o_),
+				Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
+			};
 
 			return q_;
 		};
@@ -4813,24 +4813,24 @@ Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)p_),
 			ResourceReference s_ = a?.ManagingOrganization;
 			List<Patient.LinkComponent> t_ = a?.Link;
 			Patient u_ = new Patient
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-ActiveElement = f_,
-Name = new List<HumanName>((IEnumerable<HumanName>)g_),
-Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)h_),
-GenderElement = i_,
-BirthDateElement = j_,
-Deceased = (DataType)k_,
-Address = new List<Address>((IEnumerable<Address>)l_),
-MaritalStatus = m_,
-MultipleBirth = (DataType)n_,
-Photo = new List<Attachment>((IEnumerable<Attachment>)o_),
-Contact = new List<Patient.ContactComponent>((IEnumerable<Patient.ContactComponent>)p_),
-Communication = new List<Patient.CommunicationComponent>((IEnumerable<Patient.CommunicationComponent>)q_),
-GeneralPractitioner = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
-ManagingOrganization = s_,
-Link = new List<Patient.LinkComponent>((IEnumerable<Patient.LinkComponent>)t_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				ActiveElement = f_,
+				Name = new List<HumanName>((IEnumerable<HumanName>)g_),
+				Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)h_),
+				GenderElement = i_,
+				BirthDateElement = j_,
+				Deceased = (DataType)k_,
+				Address = new List<Address>((IEnumerable<Address>)l_),
+				MaritalStatus = m_,
+				MultipleBirth = (DataType)n_,
+				Photo = new List<Attachment>((IEnumerable<Attachment>)o_),
+				Contact = new List<Patient.ContactComponent>((IEnumerable<Patient.ContactComponent>)p_),
+				Communication = new List<Patient.CommunicationComponent>((IEnumerable<Patient.CommunicationComponent>)q_),
+				GeneralPractitioner = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
+				ManagingOrganization = s_,
+				Link = new List<Patient.LinkComponent>((IEnumerable<Patient.LinkComponent>)t_),
+			};
 
 			return u_;
 		};
@@ -4860,20 +4860,20 @@ Link = new List<Patient.LinkComponent>((IEnumerable<Patient.LinkComponent>)t_),
 			Money o_ = a?.Amount;
 			CodeableConcept p_ = a?.PaymentStatus;
 			PaymentNotice q_ = new PaymentNotice
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Request = g_,
-Response = h_,
-CreatedElement = i_,
-Provider = j_,
-Payment = k_,
-PaymentDateElement = l_,
-Payee = m_,
-Recipient = n_,
-Amount = o_,
-PaymentStatus = p_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Request = g_,
+				Response = h_,
+				CreatedElement = i_,
+				Provider = j_,
+				Payment = k_,
+				PaymentDateElement = l_,
+				Payee = m_,
+				Recipient = n_,
+				Amount = o_,
+				PaymentStatus = p_,
+			};
 
 			return q_;
 		};
@@ -4906,23 +4906,23 @@ PaymentStatus = p_,
 			CodeableConcept r_ = a?.FormCode;
 			List<PaymentReconciliation.NotesComponent> s_ = a?.ProcessNote;
 			PaymentReconciliation t_ = new PaymentReconciliation
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Period = g_,
-CreatedElement = h_,
-PaymentIssuer = i_,
-Request = j_,
-Requestor = k_,
-OutcomeElement = l_,
-DispositionElement = m_,
-PaymentDateElement = n_,
-PaymentAmount = o_,
-PaymentIdentifier = p_,
-Detail = new List<PaymentReconciliation.DetailsComponent>((IEnumerable<PaymentReconciliation.DetailsComponent>)q_),
-FormCode = r_,
-ProcessNote = new List<PaymentReconciliation.NotesComponent>((IEnumerable<PaymentReconciliation.NotesComponent>)s_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Period = g_,
+				CreatedElement = h_,
+				PaymentIssuer = i_,
+				Request = j_,
+				Requestor = k_,
+				OutcomeElement = l_,
+				DispositionElement = m_,
+				PaymentDateElement = n_,
+				PaymentAmount = o_,
+				PaymentIdentifier = p_,
+				Detail = new List<PaymentReconciliation.DetailsComponent>((IEnumerable<PaymentReconciliation.DetailsComponent>)q_),
+				FormCode = r_,
+				ProcessNote = new List<PaymentReconciliation.NotesComponent>((IEnumerable<PaymentReconciliation.NotesComponent>)s_),
+			};
 
 			return t_;
 		};
@@ -4950,18 +4950,18 @@ ProcessNote = new List<PaymentReconciliation.NotesComponent>((IEnumerable<Paymen
 			FhirBoolean m_ = a?.ActiveElement;
 			List<Person.LinkComponent> n_ = a?.Link;
 			Person o_ = new Person
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-Name = new List<HumanName>((IEnumerable<HumanName>)f_),
-Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)g_),
-GenderElement = h_,
-BirthDateElement = i_,
-Address = new List<Address>((IEnumerable<Address>)j_),
-Photo = k_,
-ManagingOrganization = l_,
-ActiveElement = m_,
-Link = new List<Person.LinkComponent>((IEnumerable<Person.LinkComponent>)n_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				Name = new List<HumanName>((IEnumerable<HumanName>)f_),
+				Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)g_),
+				GenderElement = h_,
+				BirthDateElement = i_,
+				Address = new List<Address>((IEnumerable<Address>)j_),
+				Photo = k_,
+				ManagingOrganization = l_,
+				ActiveElement = m_,
+				Link = new List<Person.LinkComponent>((IEnumerable<Person.LinkComponent>)n_),
+			};
 
 			return o_;
 		};
@@ -5010,39 +5010,39 @@ Link = new List<Person.LinkComponent>((IEnumerable<Person.LinkComponent>)n_),
 			List<PlanDefinition.GoalComponent> ah_ = a?.Goal;
 			List<PlanDefinition.ActionComponent> ai_ = a?.Action;
 			PlanDefinition aj_ = new PlanDefinition
-{
-UrlElement = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-VersionElement = g_,
-NameElement = h_,
-TitleElement = i_,
-SubtitleElement = j_,
-Type = k_,
-StatusElement = l_,
-ExperimentalElement = m_,
-Subject = (DataType)n_,
-DateElement = o_,
-PublisherElement = p_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)q_),
-DescriptionElement = r_,
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)s_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)t_),
-PurposeElement = u_,
-UsageElement = v_,
-CopyrightElement = w_,
-ApprovalDateElement = x_,
-LastReviewDateElement = y_,
-EffectivePeriod = z_,
-Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)aa_),
-Author = new List<ContactDetail>((IEnumerable<ContactDetail>)ab_),
-Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)ac_),
-Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)ad_),
-Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)ae_),
-RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)af_),
-LibraryElement = new List<Canonical>((IEnumerable<Canonical>)ag_),
-Goal = new List<PlanDefinition.GoalComponent>((IEnumerable<PlanDefinition.GoalComponent>)ah_),
-Action = new List<PlanDefinition.ActionComponent>((IEnumerable<PlanDefinition.ActionComponent>)ai_),
-};
+			{
+				UrlElement = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				VersionElement = g_,
+				NameElement = h_,
+				TitleElement = i_,
+				SubtitleElement = j_,
+				Type = k_,
+				StatusElement = l_,
+				ExperimentalElement = m_,
+				Subject = (DataType)n_,
+				DateElement = o_,
+				PublisherElement = p_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)q_),
+				DescriptionElement = r_,
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)s_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)t_),
+				PurposeElement = u_,
+				UsageElement = v_,
+				CopyrightElement = w_,
+				ApprovalDateElement = x_,
+				LastReviewDateElement = y_,
+				EffectivePeriod = z_,
+				Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)aa_),
+				Author = new List<ContactDetail>((IEnumerable<ContactDetail>)ab_),
+				Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)ac_),
+				Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)ad_),
+				Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)ae_),
+				RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)af_),
+				LibraryElement = new List<Canonical>((IEnumerable<Canonical>)ag_),
+				Goal = new List<PlanDefinition.GoalComponent>((IEnumerable<PlanDefinition.GoalComponent>)ah_),
+				Action = new List<PlanDefinition.ActionComponent>((IEnumerable<PlanDefinition.ActionComponent>)ai_),
+			};
 
 			return aj_;
 		};
@@ -5070,18 +5070,18 @@ Action = new List<PlanDefinition.ActionComponent>((IEnumerable<PlanDefinition.Ac
 			List<Practitioner.QualificationComponent> m_ = a?.Qualification;
 			List<CodeableConcept> n_ = a?.Communication;
 			Practitioner o_ = new Practitioner
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-ActiveElement = f_,
-Name = new List<HumanName>((IEnumerable<HumanName>)g_),
-Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)h_),
-Address = new List<Address>((IEnumerable<Address>)i_),
-GenderElement = j_,
-BirthDateElement = k_,
-Photo = new List<Attachment>((IEnumerable<Attachment>)l_),
-Qualification = new List<Practitioner.QualificationComponent>((IEnumerable<Practitioner.QualificationComponent>)m_),
-Communication = new List<CodeableConcept>((IEnumerable<CodeableConcept>)n_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				ActiveElement = f_,
+				Name = new List<HumanName>((IEnumerable<HumanName>)g_),
+				Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)h_),
+				Address = new List<Address>((IEnumerable<Address>)i_),
+				GenderElement = j_,
+				BirthDateElement = k_,
+				Photo = new List<Attachment>((IEnumerable<Attachment>)l_),
+				Qualification = new List<Practitioner.QualificationComponent>((IEnumerable<Practitioner.QualificationComponent>)m_),
+				Communication = new List<CodeableConcept>((IEnumerable<CodeableConcept>)n_),
+			};
 
 			return o_;
 		};
@@ -5113,22 +5113,22 @@ Communication = new List<CodeableConcept>((IEnumerable<CodeableConcept>)n_),
 			FhirString q_ = a?.AvailabilityExceptionsElement;
 			List<ResourceReference> r_ = a?.Endpoint;
 			PractitionerRole s_ = new PractitionerRole
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-ActiveElement = f_,
-Period = g_,
-Practitioner = h_,
-Organization = i_,
-Code = new List<CodeableConcept>((IEnumerable<CodeableConcept>)j_),
-Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)k_),
-Location = new List<ResourceReference>((IEnumerable<ResourceReference>)l_),
-HealthcareService = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
-Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)n_),
-AvailableTime = new List<PractitionerRole.AvailableTimeComponent>((IEnumerable<PractitionerRole.AvailableTimeComponent>)o_),
-NotAvailable = new List<PractitionerRole.NotAvailableComponent>((IEnumerable<PractitionerRole.NotAvailableComponent>)p_),
-AvailabilityExceptionsElement = q_,
-Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				ActiveElement = f_,
+				Period = g_,
+				Practitioner = h_,
+				Organization = i_,
+				Code = new List<CodeableConcept>((IEnumerable<CodeableConcept>)j_),
+				Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)k_),
+				Location = new List<ResourceReference>((IEnumerable<ResourceReference>)l_),
+				HealthcareService = new List<ResourceReference>((IEnumerable<ResourceReference>)m_),
+				Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)n_),
+				AvailableTime = new List<PractitionerRole.AvailableTimeComponent>((IEnumerable<PractitionerRole.AvailableTimeComponent>)o_),
+				NotAvailable = new List<PractitionerRole.NotAvailableComponent>((IEnumerable<PractitionerRole.NotAvailableComponent>)p_),
+				AvailabilityExceptionsElement = q_,
+				Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
+			};
 
 			return s_;
 		};
@@ -5174,36 +5174,36 @@ Endpoint = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
 			List<ResourceReference> ae_ = a?.UsedReference;
 			List<CodeableConcept> af_ = a?.UsedCode;
 			Procedure ag_ = new Procedure
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
-InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)g_),
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
-PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
-StatusElement = j_,
-StatusReason = k_,
-Category = l_,
-Code = m_,
-Subject = n_,
-Encounter = o_,
-Performed = (DataType)p_,
-Recorder = q_,
-Asserter = r_,
-Performer = new List<Procedure.PerformerComponent>((IEnumerable<Procedure.PerformerComponent>)s_),
-Location = t_,
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)u_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)v_),
-BodySite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)w_),
-Outcome = x_,
-Report = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
-Complication = new List<CodeableConcept>((IEnumerable<CodeableConcept>)z_),
-ComplicationDetail = new List<ResourceReference>((IEnumerable<ResourceReference>)aa_),
-FollowUp = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ab_),
-Note = new List<Annotation>((IEnumerable<Annotation>)ac_),
-FocalDevice = new List<Procedure.FocalDeviceComponent>((IEnumerable<Procedure.FocalDeviceComponent>)ad_),
-UsedReference = new List<ResourceReference>((IEnumerable<ResourceReference>)ae_),
-UsedCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)af_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
+				InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)g_),
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
+				PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
+				StatusElement = j_,
+				StatusReason = k_,
+				Category = l_,
+				Code = m_,
+				Subject = n_,
+				Encounter = o_,
+				Performed = (DataType)p_,
+				Recorder = q_,
+				Asserter = r_,
+				Performer = new List<Procedure.PerformerComponent>((IEnumerable<Procedure.PerformerComponent>)s_),
+				Location = t_,
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)u_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)v_),
+				BodySite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)w_),
+				Outcome = x_,
+				Report = new List<ResourceReference>((IEnumerable<ResourceReference>)y_),
+				Complication = new List<CodeableConcept>((IEnumerable<CodeableConcept>)z_),
+				ComplicationDetail = new List<ResourceReference>((IEnumerable<ResourceReference>)aa_),
+				FollowUp = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ab_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)ac_),
+				FocalDevice = new List<Procedure.FocalDeviceComponent>((IEnumerable<Procedure.FocalDeviceComponent>)ad_),
+				UsedReference = new List<ResourceReference>((IEnumerable<ResourceReference>)ae_),
+				UsedCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)af_),
+			};
 
 			return ag_;
 		};
@@ -5231,18 +5231,18 @@ UsedCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)af_),
 			List<Provenance.EntityComponent> m_ = a?.Entity;
 			List<Signature> n_ = a?.Signature;
 			Provenance o_ = new Provenance
-{
-Target = new List<ResourceReference>((IEnumerable<ResourceReference>)e_),
-Occurred = (DataType)f_,
-RecordedElement = g_,
-PolicyElement = new List<FhirUri>((IEnumerable<FhirUri>)h_),
-Location = i_,
-Reason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)j_),
-Activity = k_,
-Agent = new List<Provenance.AgentComponent>((IEnumerable<Provenance.AgentComponent>)l_),
-Entity = new List<Provenance.EntityComponent>((IEnumerable<Provenance.EntityComponent>)m_),
-Signature = new List<Signature>((IEnumerable<Signature>)n_),
-};
+			{
+				Target = new List<ResourceReference>((IEnumerable<ResourceReference>)e_),
+				Occurred = (DataType)f_,
+				RecordedElement = g_,
+				PolicyElement = new List<FhirUri>((IEnumerable<FhirUri>)h_),
+				Location = i_,
+				Reason = new List<CodeableConcept>((IEnumerable<CodeableConcept>)j_),
+				Activity = k_,
+				Agent = new List<Provenance.AgentComponent>((IEnumerable<Provenance.AgentComponent>)l_),
+				Entity = new List<Provenance.EntityComponent>((IEnumerable<Provenance.EntityComponent>)m_),
+				Signature = new List<Signature>((IEnumerable<Signature>)n_),
+			};
 
 			return o_;
 		};
@@ -5271,19 +5271,19 @@ Signature = new List<Signature>((IEnumerable<Signature>)n_),
 			ResourceReference n_ = a?.Source;
 			List<QuestionnaireResponse.ItemComponent> o_ = a?.Item;
 			QuestionnaireResponse p_ = new QuestionnaireResponse
-{
-Identifier = e_,
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
-PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)g_),
-QuestionnaireElement = h_,
-StatusElement = i_,
-Subject = j_,
-Encounter = k_,
-AuthoredElement = l_,
-Author = m_,
-Source = n_,
-Item = new List<QuestionnaireResponse.ItemComponent>((IEnumerable<QuestionnaireResponse.ItemComponent>)o_),
-};
+			{
+				Identifier = e_,
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
+				PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)g_),
+				QuestionnaireElement = h_,
+				StatusElement = i_,
+				Subject = j_,
+				Encounter = k_,
+				AuthoredElement = l_,
+				Author = m_,
+				Source = n_,
+				Item = new List<QuestionnaireResponse.ItemComponent>((IEnumerable<QuestionnaireResponse.ItemComponent>)o_),
+			};
 
 			return p_;
 		};
@@ -5313,20 +5313,20 @@ Item = new List<QuestionnaireResponse.ItemComponent>((IEnumerable<QuestionnaireR
 			Period o_ = a?.Period;
 			List<RelatedPerson.CommunicationComponent> p_ = a?.Communication;
 			RelatedPerson q_ = new RelatedPerson
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-ActiveElement = f_,
-Patient = g_,
-Relationship = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
-Name = new List<HumanName>((IEnumerable<HumanName>)i_),
-Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)j_),
-GenderElement = k_,
-BirthDateElement = l_,
-Address = new List<Address>((IEnumerable<Address>)m_),
-Photo = new List<Attachment>((IEnumerable<Attachment>)n_),
-Period = o_,
-Communication = new List<RelatedPerson.CommunicationComponent>((IEnumerable<RelatedPerson.CommunicationComponent>)p_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				ActiveElement = f_,
+				Patient = g_,
+				Relationship = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
+				Name = new List<HumanName>((IEnumerable<HumanName>)i_),
+				Telecom = new List<ContactPoint>((IEnumerable<ContactPoint>)j_),
+				GenderElement = k_,
+				BirthDateElement = l_,
+				Address = new List<Address>((IEnumerable<Address>)m_),
+				Photo = new List<Attachment>((IEnumerable<Attachment>)n_),
+				Period = o_,
+				Communication = new List<RelatedPerson.CommunicationComponent>((IEnumerable<RelatedPerson.CommunicationComponent>)p_),
+			};
 
 			return q_;
 		};
@@ -5362,26 +5362,26 @@ Communication = new List<RelatedPerson.CommunicationComponent>((IEnumerable<Rela
 			List<Annotation> u_ = a?.Note;
 			List<RequestGroup.ActionComponent> v_ = a?.Action;
 			RequestGroup w_ = new RequestGroup
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
-InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)g_),
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
-Replaces = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
-GroupIdentifier = j_,
-StatusElement = k_,
-IntentElement = l_,
-PriorityElement = m_,
-Code = n_,
-Subject = o_,
-Encounter = p_,
-AuthoredOnElement = q_,
-Author = r_,
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)t_),
-Note = new List<Annotation>((IEnumerable<Annotation>)u_),
-Action = new List<RequestGroup.ActionComponent>((IEnumerable<RequestGroup.ActionComponent>)v_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
+				InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)g_),
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
+				Replaces = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
+				GroupIdentifier = j_,
+				StatusElement = k_,
+				IntentElement = l_,
+				PriorityElement = m_,
+				Code = n_,
+				Subject = o_,
+				Encounter = p_,
+				AuthoredOnElement = q_,
+				Author = r_,
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)s_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)t_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)u_),
+				Action = new List<RequestGroup.ActionComponent>((IEnumerable<RequestGroup.ActionComponent>)v_),
+			};
 
 			return w_;
 		};
@@ -5433,42 +5433,42 @@ Action = new List<RequestGroup.ActionComponent>((IEnumerable<RequestGroup.Action
 			ResourceReference ak_ = a?.ExposureAlternative;
 			ResourceReference al_ = a?.Outcome;
 			ResearchDefinition am_ = new ResearchDefinition
-{
-UrlElement = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-VersionElement = g_,
-NameElement = h_,
-TitleElement = i_,
-ShortTitleElement = j_,
-SubtitleElement = k_,
-StatusElement = l_,
-ExperimentalElement = m_,
-Subject = (DataType)n_,
-DateElement = o_,
-PublisherElement = p_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)q_),
-DescriptionElement = r_,
-CommentElement = new List<FhirString>((IEnumerable<FhirString>)s_),
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)t_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)u_),
-PurposeElement = v_,
-UsageElement = w_,
-CopyrightElement = x_,
-ApprovalDateElement = y_,
-LastReviewDateElement = z_,
-EffectivePeriod = aa_,
-Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ab_),
-Author = new List<ContactDetail>((IEnumerable<ContactDetail>)ac_),
-Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)ad_),
-Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)ae_),
-Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)af_),
-RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)ag_),
-LibraryElement = new List<Canonical>((IEnumerable<Canonical>)ah_),
-Population = ai_,
-Exposure = aj_,
-ExposureAlternative = ak_,
-Outcome = al_,
-};
+			{
+				UrlElement = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				VersionElement = g_,
+				NameElement = h_,
+				TitleElement = i_,
+				ShortTitleElement = j_,
+				SubtitleElement = k_,
+				StatusElement = l_,
+				ExperimentalElement = m_,
+				Subject = (DataType)n_,
+				DateElement = o_,
+				PublisherElement = p_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)q_),
+				DescriptionElement = r_,
+				CommentElement = new List<FhirString>((IEnumerable<FhirString>)s_),
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)t_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)u_),
+				PurposeElement = v_,
+				UsageElement = w_,
+				CopyrightElement = x_,
+				ApprovalDateElement = y_,
+				LastReviewDateElement = z_,
+				EffectivePeriod = aa_,
+				Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ab_),
+				Author = new List<ContactDetail>((IEnumerable<ContactDetail>)ac_),
+				Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)ad_),
+				Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)ae_),
+				Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)af_),
+				RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)ag_),
+				LibraryElement = new List<Canonical>((IEnumerable<Canonical>)ah_),
+				Population = ai_,
+				Exposure = aj_,
+				ExposureAlternative = ak_,
+				Outcome = al_,
+			};
 
 			return am_;
 		};
@@ -5519,41 +5519,41 @@ Outcome = al_,
 			Code<VariableTypeCode> aj_ = a?.VariableTypeElement;
 			List<ResearchElementDefinition.CharacteristicComponent> ak_ = a?.Characteristic;
 			ResearchElementDefinition al_ = new ResearchElementDefinition
-{
-UrlElement = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-VersionElement = g_,
-NameElement = h_,
-TitleElement = i_,
-ShortTitleElement = j_,
-SubtitleElement = k_,
-StatusElement = l_,
-ExperimentalElement = m_,
-Subject = (DataType)n_,
-DateElement = o_,
-PublisherElement = p_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)q_),
-DescriptionElement = r_,
-CommentElement = new List<FhirString>((IEnumerable<FhirString>)s_),
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)t_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)u_),
-PurposeElement = v_,
-UsageElement = w_,
-CopyrightElement = x_,
-ApprovalDateElement = y_,
-LastReviewDateElement = z_,
-EffectivePeriod = aa_,
-Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ab_),
-Author = new List<ContactDetail>((IEnumerable<ContactDetail>)ac_),
-Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)ad_),
-Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)ae_),
-Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)af_),
-RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)ag_),
-LibraryElement = new List<Canonical>((IEnumerable<Canonical>)ah_),
-TypeElement = ai_,
-VariableTypeElement = aj_,
-Characteristic = new List<ResearchElementDefinition.CharacteristicComponent>((IEnumerable<ResearchElementDefinition.CharacteristicComponent>)ak_),
-};
+			{
+				UrlElement = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				VersionElement = g_,
+				NameElement = h_,
+				TitleElement = i_,
+				ShortTitleElement = j_,
+				SubtitleElement = k_,
+				StatusElement = l_,
+				ExperimentalElement = m_,
+				Subject = (DataType)n_,
+				DateElement = o_,
+				PublisherElement = p_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)q_),
+				DescriptionElement = r_,
+				CommentElement = new List<FhirString>((IEnumerable<FhirString>)s_),
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)t_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)u_),
+				PurposeElement = v_,
+				UsageElement = w_,
+				CopyrightElement = x_,
+				ApprovalDateElement = y_,
+				LastReviewDateElement = z_,
+				EffectivePeriod = aa_,
+				Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ab_),
+				Author = new List<ContactDetail>((IEnumerable<ContactDetail>)ac_),
+				Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)ad_),
+				Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)ae_),
+				Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)af_),
+				RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)ag_),
+				LibraryElement = new List<Canonical>((IEnumerable<Canonical>)ah_),
+				TypeElement = ai_,
+				VariableTypeElement = aj_,
+				Characteristic = new List<ResearchElementDefinition.CharacteristicComponent>((IEnumerable<ResearchElementDefinition.CharacteristicComponent>)ak_),
+			};
 
 			return al_;
 		};
@@ -5595,32 +5595,32 @@ Characteristic = new List<ResearchElementDefinition.CharacteristicComponent>((IE
 			List<ResearchStudy.ArmComponent> aa_ = a?.Arm;
 			List<ResearchStudy.ObjectiveComponent> ab_ = a?.Objective;
 			ResearchStudy ac_ = new ResearchStudy
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-TitleElement = f_,
-Protocol = new List<ResourceReference>((IEnumerable<ResourceReference>)g_),
-PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
-StatusElement = i_,
-PrimaryPurposeType = j_,
-Phase = k_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)l_),
-Focus = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
-Condition = new List<CodeableConcept>((IEnumerable<CodeableConcept>)n_),
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)o_),
-RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)p_),
-Keyword = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
-Location = new List<CodeableConcept>((IEnumerable<CodeableConcept>)r_),
-DescriptionElement = s_,
-Enrollment = new List<ResourceReference>((IEnumerable<ResourceReference>)t_),
-Period = u_,
-Sponsor = v_,
-PrincipalInvestigator = w_,
-Site = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
-ReasonStopped = y_,
-Note = new List<Annotation>((IEnumerable<Annotation>)z_),
-Arm = new List<ResearchStudy.ArmComponent>((IEnumerable<ResearchStudy.ArmComponent>)aa_),
-Objective = new List<ResearchStudy.ObjectiveComponent>((IEnumerable<ResearchStudy.ObjectiveComponent>)ab_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				TitleElement = f_,
+				Protocol = new List<ResourceReference>((IEnumerable<ResourceReference>)g_),
+				PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
+				StatusElement = i_,
+				PrimaryPurposeType = j_,
+				Phase = k_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)l_),
+				Focus = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
+				Condition = new List<CodeableConcept>((IEnumerable<CodeableConcept>)n_),
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)o_),
+				RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)p_),
+				Keyword = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
+				Location = new List<CodeableConcept>((IEnumerable<CodeableConcept>)r_),
+				DescriptionElement = s_,
+				Enrollment = new List<ResourceReference>((IEnumerable<ResourceReference>)t_),
+				Period = u_,
+				Sponsor = v_,
+				PrincipalInvestigator = w_,
+				Site = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
+				ReasonStopped = y_,
+				Note = new List<Annotation>((IEnumerable<Annotation>)z_),
+				Arm = new List<ResearchStudy.ArmComponent>((IEnumerable<ResearchStudy.ArmComponent>)aa_),
+				Objective = new List<ResearchStudy.ObjectiveComponent>((IEnumerable<ResearchStudy.ObjectiveComponent>)ab_),
+			};
 
 			return ac_;
 		};
@@ -5646,16 +5646,16 @@ Objective = new List<ResearchStudy.ObjectiveComponent>((IEnumerable<ResearchStud
 			FhirString k_ = a?.ActualArmElement;
 			ResourceReference l_ = a?.Consent;
 			ResearchSubject m_ = new ResearchSubject
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Period = g_,
-Study = h_,
-Individual = i_,
-AssignedArmElement = j_,
-ActualArmElement = k_,
-Consent = l_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Period = g_,
+				Study = h_,
+				Individual = i_,
+				AssignedArmElement = j_,
+				ActualArmElement = k_,
+				Consent = l_,
+			};
 
 			return m_;
 		};
@@ -5690,25 +5690,25 @@ Consent = l_,
 			FhirString t_ = a?.MitigationElement;
 			List<Annotation> u_ = a?.Note;
 			RiskAssessment v_ = new RiskAssessment
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-BasedOn = f_,
-Parent = g_,
-StatusElement = h_,
-Method = i_,
-Code = j_,
-Subject = k_,
-Encounter = l_,
-Occurrence = (DataType)m_,
-Condition = n_,
-Performer = o_,
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)p_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
-Basis = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
-Prediction = new List<RiskAssessment.PredictionComponent>((IEnumerable<RiskAssessment.PredictionComponent>)s_),
-MitigationElement = t_,
-Note = new List<Annotation>((IEnumerable<Annotation>)u_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				BasedOn = f_,
+				Parent = g_,
+				StatusElement = h_,
+				Method = i_,
+				Code = j_,
+				Subject = k_,
+				Encounter = l_,
+				Occurrence = (DataType)m_,
+				Condition = n_,
+				Performer = o_,
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)p_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
+				Basis = new List<ResourceReference>((IEnumerable<ResourceReference>)r_),
+				Prediction = new List<RiskAssessment.PredictionComponent>((IEnumerable<RiskAssessment.PredictionComponent>)s_),
+				MitigationElement = t_,
+				Note = new List<Annotation>((IEnumerable<Annotation>)u_),
+			};
 
 			return v_;
 		};
@@ -5757,39 +5757,39 @@ Note = new List<Annotation>((IEnumerable<Annotation>)u_),
 			RiskEvidenceSynthesis.RiskEstimateComponent ah_ = a?.RiskEstimate;
 			List<RiskEvidenceSynthesis.CertaintyComponent> ai_ = a?.Certainty;
 			RiskEvidenceSynthesis aj_ = new RiskEvidenceSynthesis
-{
-UrlElement = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-VersionElement = g_,
-NameElement = h_,
-TitleElement = i_,
-StatusElement = j_,
-DateElement = k_,
-PublisherElement = l_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)m_),
-DescriptionElement = n_,
-Note = new List<Annotation>((IEnumerable<Annotation>)o_),
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)p_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
-CopyrightElement = r_,
-ApprovalDateElement = s_,
-LastReviewDateElement = t_,
-EffectivePeriod = u_,
-Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)v_),
-Author = new List<ContactDetail>((IEnumerable<ContactDetail>)w_),
-Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)x_),
-Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)y_),
-Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)z_),
-RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)aa_),
-SynthesisType = ab_,
-StudyType = ac_,
-Population = ad_,
-Exposure = ae_,
-Outcome = af_,
-SampleSize = ag_,
-RiskEstimate = ah_,
-Certainty = new List<RiskEvidenceSynthesis.CertaintyComponent>((IEnumerable<RiskEvidenceSynthesis.CertaintyComponent>)ai_),
-};
+			{
+				UrlElement = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				VersionElement = g_,
+				NameElement = h_,
+				TitleElement = i_,
+				StatusElement = j_,
+				DateElement = k_,
+				PublisherElement = l_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)m_),
+				DescriptionElement = n_,
+				Note = new List<Annotation>((IEnumerable<Annotation>)o_),
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)p_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
+				CopyrightElement = r_,
+				ApprovalDateElement = s_,
+				LastReviewDateElement = t_,
+				EffectivePeriod = u_,
+				Topic = new List<CodeableConcept>((IEnumerable<CodeableConcept>)v_),
+				Author = new List<ContactDetail>((IEnumerable<ContactDetail>)w_),
+				Editor = new List<ContactDetail>((IEnumerable<ContactDetail>)x_),
+				Reviewer = new List<ContactDetail>((IEnumerable<ContactDetail>)y_),
+				Endorser = new List<ContactDetail>((IEnumerable<ContactDetail>)z_),
+				RelatedArtifact = new List<RelatedArtifact>((IEnumerable<RelatedArtifact>)aa_),
+				SynthesisType = ab_,
+				StudyType = ac_,
+				Population = ad_,
+				Exposure = ae_,
+				Outcome = af_,
+				SampleSize = ag_,
+				RiskEstimate = ah_,
+				Certainty = new List<RiskEvidenceSynthesis.CertaintyComponent>((IEnumerable<RiskEvidenceSynthesis.CertaintyComponent>)ai_),
+			};
 
 			return aj_;
 		};
@@ -5815,16 +5815,16 @@ Certainty = new List<RiskEvidenceSynthesis.CertaintyComponent>((IEnumerable<Risk
 			Period k_ = a?.PlanningHorizon;
 			FhirString l_ = a?.CommentElement;
 			Schedule m_ = new Schedule
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-ActiveElement = f_,
-ServiceCategory = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
-ServiceType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
-Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
-Actor = new List<ResourceReference>((IEnumerable<ResourceReference>)j_),
-PlanningHorizon = k_,
-CommentElement = l_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				ActiveElement = f_,
+				ServiceCategory = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
+				ServiceType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
+				Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
+				Actor = new List<ResourceReference>((IEnumerable<ResourceReference>)j_),
+				PlanningHorizon = k_,
+				CommentElement = l_,
+			};
 
 			return m_;
 		};
@@ -5875,41 +5875,41 @@ CommentElement = l_,
 			FhirString aj_ = a?.PatientInstructionElement;
 			List<ResourceReference> ak_ = a?.RelevantHistory;
 			ServiceRequest al_ = new ServiceRequest
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
-InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)g_),
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
-Replaces = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
-Requisition = j_,
-StatusElement = k_,
-IntentElement = l_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
-PriorityElement = n_,
-DoNotPerformElement = o_,
-Code = p_,
-OrderDetail = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
-Quantity = (DataType)r_,
-Subject = s_,
-Encounter = t_,
-Occurrence = (DataType)u_,
-AsNeeded = (DataType)v_,
-AuthoredOnElement = w_,
-Requester = x_,
-PerformerType = y_,
-Performer = new List<ResourceReference>((IEnumerable<ResourceReference>)z_),
-LocationCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)aa_),
-LocationReference = new List<ResourceReference>((IEnumerable<ResourceReference>)ab_),
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ac_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)ad_),
-Insurance = new List<ResourceReference>((IEnumerable<ResourceReference>)ae_),
-SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)af_),
-Specimen = new List<ResourceReference>((IEnumerable<ResourceReference>)ag_),
-BodySite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ah_),
-Note = new List<Annotation>((IEnumerable<Annotation>)ai_),
-PatientInstructionElement = aj_,
-RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)ak_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				InstantiatesCanonicalElement = new List<Canonical>((IEnumerable<Canonical>)f_),
+				InstantiatesUriElement = new List<FhirUri>((IEnumerable<FhirUri>)g_),
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
+				Replaces = new List<ResourceReference>((IEnumerable<ResourceReference>)i_),
+				Requisition = j_,
+				StatusElement = k_,
+				IntentElement = l_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)m_),
+				PriorityElement = n_,
+				DoNotPerformElement = o_,
+				Code = p_,
+				OrderDetail = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
+				Quantity = (DataType)r_,
+				Subject = s_,
+				Encounter = t_,
+				Occurrence = (DataType)u_,
+				AsNeeded = (DataType)v_,
+				AuthoredOnElement = w_,
+				Requester = x_,
+				PerformerType = y_,
+				Performer = new List<ResourceReference>((IEnumerable<ResourceReference>)z_),
+				LocationCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)aa_),
+				LocationReference = new List<ResourceReference>((IEnumerable<ResourceReference>)ab_),
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ac_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)ad_),
+				Insurance = new List<ResourceReference>((IEnumerable<ResourceReference>)ae_),
+				SupportingInfo = new List<ResourceReference>((IEnumerable<ResourceReference>)af_),
+				Specimen = new List<ResourceReference>((IEnumerable<ResourceReference>)ag_),
+				BodySite = new List<CodeableConcept>((IEnumerable<CodeableConcept>)ah_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)ai_),
+				PatientInstructionElement = aj_,
+				RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)ak_),
+			};
 
 			return al_;
 		};
@@ -5938,19 +5938,19 @@ RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)ak
 			FhirBoolean n_ = a?.OverbookedElement;
 			FhirString o_ = a?.CommentElement;
 			Slot p_ = new Slot
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-ServiceCategory = new List<CodeableConcept>((IEnumerable<CodeableConcept>)f_),
-ServiceType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
-Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
-AppointmentType = i_,
-Schedule = j_,
-StatusElement = k_,
-StartElement = l_,
-EndElement = m_,
-OverbookedElement = n_,
-CommentElement = o_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				ServiceCategory = new List<CodeableConcept>((IEnumerable<CodeableConcept>)f_),
+				ServiceType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
+				Specialty = new List<CodeableConcept>((IEnumerable<CodeableConcept>)h_),
+				AppointmentType = i_,
+				Schedule = j_,
+				StatusElement = k_,
+				StartElement = l_,
+				EndElement = m_,
+				OverbookedElement = n_,
+				CommentElement = o_,
+			};
 
 			return p_;
 		};
@@ -5981,21 +5981,21 @@ CommentElement = o_,
 			List<CodeableConcept> p_ = a?.Condition;
 			List<Annotation> q_ = a?.Note;
 			Specimen r_ = new Specimen
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-AccessionIdentifier = f_,
-StatusElement = g_,
-Type = h_,
-Subject = i_,
-ReceivedTimeElement = j_,
-Parent = new List<ResourceReference>((IEnumerable<ResourceReference>)k_),
-Request = new List<ResourceReference>((IEnumerable<ResourceReference>)l_),
-Collection = m_,
-Processing = new List<Specimen.ProcessingComponent>((IEnumerable<Specimen.ProcessingComponent>)n_),
-Container = new List<Specimen.ContainerComponent>((IEnumerable<Specimen.ContainerComponent>)o_),
-Condition = new List<CodeableConcept>((IEnumerable<CodeableConcept>)p_),
-Note = new List<Annotation>((IEnumerable<Annotation>)q_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				AccessionIdentifier = f_,
+				StatusElement = g_,
+				Type = h_,
+				Subject = i_,
+				ReceivedTimeElement = j_,
+				Parent = new List<ResourceReference>((IEnumerable<ResourceReference>)k_),
+				Request = new List<ResourceReference>((IEnumerable<ResourceReference>)l_),
+				Collection = m_,
+				Processing = new List<Specimen.ProcessingComponent>((IEnumerable<Specimen.ProcessingComponent>)n_),
+				Container = new List<Specimen.ContainerComponent>((IEnumerable<Specimen.ContainerComponent>)o_),
+				Condition = new List<CodeableConcept>((IEnumerable<CodeableConcept>)p_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)q_),
+			};
 
 			return r_;
 		};
@@ -6019,14 +6019,14 @@ Note = new List<Annotation>((IEnumerable<Annotation>)q_),
 			List<CodeableConcept> i_ = a?.Collection;
 			List<SpecimenDefinition.TypeTestedComponent> j_ = a?.TypeTested;
 			SpecimenDefinition k_ = new SpecimenDefinition
-{
-Identifier = e_,
-TypeCollected = f_,
-PatientPreparation = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
-TimeAspectElement = h_,
-Collection = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
-TypeTested = new List<SpecimenDefinition.TypeTestedComponent>((IEnumerable<SpecimenDefinition.TypeTestedComponent>)j_),
-};
+			{
+				Identifier = e_,
+				TypeCollected = f_,
+				PatientPreparation = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
+				TimeAspectElement = h_,
+				Collection = new List<CodeableConcept>((IEnumerable<CodeableConcept>)i_),
+				TypeTested = new List<SpecimenDefinition.TypeTestedComponent>((IEnumerable<SpecimenDefinition.TypeTestedComponent>)j_),
+			};
 
 			return k_;
 		};
@@ -6071,35 +6071,35 @@ TypeTested = new List<SpecimenDefinition.TypeTestedComponent>((IEnumerable<Speci
 			StructureDefinition.SnapshotComponent ad_ = a?.Snapshot;
 			StructureDefinition.DifferentialComponent ae_ = a?.Differential;
 			StructureDefinition af_ = new StructureDefinition
-{
-UrlElement = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-VersionElement = g_,
-NameElement = h_,
-TitleElement = i_,
-StatusElement = j_,
-ExperimentalElement = k_,
-DateElement = l_,
-PublisherElement = m_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)n_),
-DescriptionElement = o_,
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)p_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
-PurposeElement = r_,
-CopyrightElement = s_,
-Keyword = new List<Coding>((IEnumerable<Coding>)t_),
-FhirVersionElement = u_,
-Mapping = new List<StructureDefinition.MappingComponent>((IEnumerable<StructureDefinition.MappingComponent>)v_),
-KindElement = w_,
-AbstractElement = x_,
-Context = new List<StructureDefinition.ContextComponent>((IEnumerable<StructureDefinition.ContextComponent>)y_),
-ContextInvariantElement = new List<FhirString>((IEnumerable<FhirString>)z_),
-TypeElement = aa_,
-BaseDefinitionElement = ab_,
-DerivationElement = ac_,
-Snapshot = ad_,
-Differential = ae_,
-};
+			{
+				UrlElement = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				VersionElement = g_,
+				NameElement = h_,
+				TitleElement = i_,
+				StatusElement = j_,
+				ExperimentalElement = k_,
+				DateElement = l_,
+				PublisherElement = m_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)n_),
+				DescriptionElement = o_,
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)p_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
+				PurposeElement = r_,
+				CopyrightElement = s_,
+				Keyword = new List<Coding>((IEnumerable<Coding>)t_),
+				FhirVersionElement = u_,
+				Mapping = new List<StructureDefinition.MappingComponent>((IEnumerable<StructureDefinition.MappingComponent>)v_),
+				KindElement = w_,
+				AbstractElement = x_,
+				Context = new List<StructureDefinition.ContextComponent>((IEnumerable<StructureDefinition.ContextComponent>)y_),
+				ContextInvariantElement = new List<FhirString>((IEnumerable<FhirString>)z_),
+				TypeElement = aa_,
+				BaseDefinitionElement = ab_,
+				DerivationElement = ac_,
+				Snapshot = ad_,
+				Differential = ae_,
+			};
 
 			return af_;
 		};
@@ -6135,26 +6135,26 @@ Differential = ae_,
 			List<Canonical> u_ = a?.ImportElement;
 			List<StructureMap.GroupComponent> v_ = a?.Group;
 			StructureMap w_ = new StructureMap
-{
-UrlElement = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-VersionElement = g_,
-NameElement = h_,
-TitleElement = i_,
-StatusElement = j_,
-ExperimentalElement = k_,
-DateElement = l_,
-PublisherElement = m_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)n_),
-DescriptionElement = o_,
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)p_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
-PurposeElement = r_,
-CopyrightElement = s_,
-Structure = new List<StructureMap.StructureComponent>((IEnumerable<StructureMap.StructureComponent>)t_),
-ImportElement = new List<Canonical>((IEnumerable<Canonical>)u_),
-Group = new List<StructureMap.GroupComponent>((IEnumerable<StructureMap.GroupComponent>)v_),
-};
+			{
+				UrlElement = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				VersionElement = g_,
+				NameElement = h_,
+				TitleElement = i_,
+				StatusElement = j_,
+				ExperimentalElement = k_,
+				DateElement = l_,
+				PublisherElement = m_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)n_),
+				DescriptionElement = o_,
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)p_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
+				PurposeElement = r_,
+				CopyrightElement = s_,
+				Structure = new List<StructureMap.StructureComponent>((IEnumerable<StructureMap.StructureComponent>)t_),
+				ImportElement = new List<Canonical>((IEnumerable<Canonical>)u_),
+				Group = new List<StructureMap.GroupComponent>((IEnumerable<StructureMap.GroupComponent>)v_),
+			};
 
 			return w_;
 		};
@@ -6179,15 +6179,15 @@ Group = new List<StructureMap.GroupComponent>((IEnumerable<StructureMap.GroupCom
 			FhirString j_ = a?.ErrorElement;
 			Subscription.ChannelComponent k_ = a?.Channel;
 			Subscription l_ = new Subscription
-{
-StatusElement = e_,
-Contact = new List<ContactPoint>((IEnumerable<ContactPoint>)f_),
-EndElement = g_,
-ReasonElement = h_,
-CriteriaElement = i_,
-ErrorElement = j_,
-Channel = k_,
-};
+			{
+				StatusElement = e_,
+				Contact = new List<ContactPoint>((IEnumerable<ContactPoint>)f_),
+				EndElement = g_,
+				ReasonElement = h_,
+				CriteriaElement = i_,
+				ErrorElement = j_,
+				Channel = k_,
+			};
 
 			return l_;
 		};
@@ -6212,15 +6212,15 @@ Channel = k_,
 			List<Substance.InstanceComponent> j_ = a?.Instance;
 			List<Substance.IngredientComponent> k_ = a?.Ingredient;
 			Substance l_ = new Substance
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
-Code = h_,
-DescriptionElement = i_,
-Instance = new List<Substance.InstanceComponent>((IEnumerable<Substance.InstanceComponent>)j_),
-Ingredient = new List<Substance.IngredientComponent>((IEnumerable<Substance.IngredientComponent>)k_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Category = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
+				Code = h_,
+				DescriptionElement = i_,
+				Instance = new List<Substance.InstanceComponent>((IEnumerable<Substance.InstanceComponent>)j_),
+				Ingredient = new List<Substance.IngredientComponent>((IEnumerable<Substance.IngredientComponent>)k_),
+			};
 
 			return l_;
 		};
@@ -6243,13 +6243,13 @@ Ingredient = new List<Substance.IngredientComponent>((IEnumerable<Substance.Ingr
 			CodeableConcept h_ = a?.OligoNucleotideType;
 			List<SubstanceNucleicAcid.SubunitComponent> i_ = a?.Subunit;
 			SubstanceNucleicAcid j_ = new SubstanceNucleicAcid
-{
-SequenceType = e_,
-NumberOfSubunitsElement = f_,
-AreaOfHybridisationElement = g_,
-OligoNucleotideType = h_,
-Subunit = new List<SubstanceNucleicAcid.SubunitComponent>((IEnumerable<SubstanceNucleicAcid.SubunitComponent>)i_),
-};
+			{
+				SequenceType = e_,
+				NumberOfSubunitsElement = f_,
+				AreaOfHybridisationElement = g_,
+				OligoNucleotideType = h_,
+				Subunit = new List<SubstanceNucleicAcid.SubunitComponent>((IEnumerable<SubstanceNucleicAcid.SubunitComponent>)i_),
+			};
 
 			return j_;
 		};
@@ -6273,14 +6273,14 @@ Subunit = new List<SubstanceNucleicAcid.SubunitComponent>((IEnumerable<Substance
 			List<SubstancePolymer.MonomerSetComponent> i_ = a?.MonomerSet;
 			List<SubstancePolymer.RepeatComponent> j_ = a?.Repeat;
 			SubstancePolymer k_ = new SubstancePolymer
-{
-Class = e_,
-Geometry = f_,
-CopolymerConnectivity = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
-ModificationElement = new List<FhirString>((IEnumerable<FhirString>)h_),
-MonomerSet = new List<SubstancePolymer.MonomerSetComponent>((IEnumerable<SubstancePolymer.MonomerSetComponent>)i_),
-Repeat = new List<SubstancePolymer.RepeatComponent>((IEnumerable<SubstancePolymer.RepeatComponent>)j_),
-};
+			{
+				Class = e_,
+				Geometry = f_,
+				CopolymerConnectivity = new List<CodeableConcept>((IEnumerable<CodeableConcept>)g_),
+				ModificationElement = new List<FhirString>((IEnumerable<FhirString>)h_),
+				MonomerSet = new List<SubstancePolymer.MonomerSetComponent>((IEnumerable<SubstancePolymer.MonomerSetComponent>)i_),
+				Repeat = new List<SubstancePolymer.RepeatComponent>((IEnumerable<SubstancePolymer.RepeatComponent>)j_),
+			};
 
 			return k_;
 		};
@@ -6302,12 +6302,12 @@ Repeat = new List<SubstancePolymer.RepeatComponent>((IEnumerable<SubstancePolyme
 			List<FhirString> g_ = a?.DisulfideLinkageElement;
 			List<SubstanceProtein.SubunitComponent> h_ = a?.Subunit;
 			SubstanceProtein i_ = new SubstanceProtein
-{
-SequenceType = e_,
-NumberOfSubunitsElement = f_,
-DisulfideLinkageElement = new List<FhirString>((IEnumerable<FhirString>)g_),
-Subunit = new List<SubstanceProtein.SubunitComponent>((IEnumerable<SubstanceProtein.SubunitComponent>)h_),
-};
+			{
+				SequenceType = e_,
+				NumberOfSubunitsElement = f_,
+				DisulfideLinkageElement = new List<FhirString>((IEnumerable<FhirString>)g_),
+				Subunit = new List<SubstanceProtein.SubunitComponent>((IEnumerable<SubstanceProtein.SubunitComponent>)h_),
+			};
 
 			return i_;
 		};
@@ -6330,13 +6330,13 @@ Subunit = new List<SubstanceProtein.SubunitComponent>((IEnumerable<SubstanceProt
 			List<SubstanceReferenceInformation.ClassificationComponent> h_ = a?.Classification;
 			List<SubstanceReferenceInformation.TargetComponent> i_ = a?.Target;
 			SubstanceReferenceInformation j_ = new SubstanceReferenceInformation
-{
-CommentElement = e_,
-Gene = new List<SubstanceReferenceInformation.GeneComponent>((IEnumerable<SubstanceReferenceInformation.GeneComponent>)f_),
-GeneElement = new List<SubstanceReferenceInformation.GeneElementComponent>((IEnumerable<SubstanceReferenceInformation.GeneElementComponent>)g_),
-Classification = new List<SubstanceReferenceInformation.ClassificationComponent>((IEnumerable<SubstanceReferenceInformation.ClassificationComponent>)h_),
-Target = new List<SubstanceReferenceInformation.TargetComponent>((IEnumerable<SubstanceReferenceInformation.TargetComponent>)i_),
-};
+			{
+				CommentElement = e_,
+				Gene = new List<SubstanceReferenceInformation.GeneComponent>((IEnumerable<SubstanceReferenceInformation.GeneComponent>)f_),
+				GeneElement = new List<SubstanceReferenceInformation.GeneElementComponent>((IEnumerable<SubstanceReferenceInformation.GeneElementComponent>)g_),
+				Classification = new List<SubstanceReferenceInformation.ClassificationComponent>((IEnumerable<SubstanceReferenceInformation.ClassificationComponent>)h_),
+				Target = new List<SubstanceReferenceInformation.TargetComponent>((IEnumerable<SubstanceReferenceInformation.TargetComponent>)i_),
+			};
 
 			return j_;
 		};
@@ -6367,21 +6367,21 @@ Target = new List<SubstanceReferenceInformation.TargetComponent>((IEnumerable<Su
 			SubstanceSourceMaterial.OrganismComponent p_ = a?.Organism;
 			List<SubstanceSourceMaterial.PartDescriptionComponent> q_ = a?.PartDescription;
 			SubstanceSourceMaterial r_ = new SubstanceSourceMaterial
-{
-SourceMaterialClass = e_,
-SourceMaterialType = f_,
-SourceMaterialState = g_,
-OrganismId = h_,
-OrganismNameElement = i_,
-ParentSubstanceId = new List<Identifier>((IEnumerable<Identifier>)j_),
-ParentSubstanceNameElement = new List<FhirString>((IEnumerable<FhirString>)k_),
-CountryOfOrigin = new List<CodeableConcept>((IEnumerable<CodeableConcept>)l_),
-GeographicalLocationElement = new List<FhirString>((IEnumerable<FhirString>)m_),
-DevelopmentStage = n_,
-FractionDescription = new List<SubstanceSourceMaterial.FractionDescriptionComponent>((IEnumerable<SubstanceSourceMaterial.FractionDescriptionComponent>)o_),
-Organism = p_,
-PartDescription = new List<SubstanceSourceMaterial.PartDescriptionComponent>((IEnumerable<SubstanceSourceMaterial.PartDescriptionComponent>)q_),
-};
+			{
+				SourceMaterialClass = e_,
+				SourceMaterialType = f_,
+				SourceMaterialState = g_,
+				OrganismId = h_,
+				OrganismNameElement = i_,
+				ParentSubstanceId = new List<Identifier>((IEnumerable<Identifier>)j_),
+				ParentSubstanceNameElement = new List<FhirString>((IEnumerable<FhirString>)k_),
+				CountryOfOrigin = new List<CodeableConcept>((IEnumerable<CodeableConcept>)l_),
+				GeographicalLocationElement = new List<FhirString>((IEnumerable<FhirString>)m_),
+				DevelopmentStage = n_,
+				FractionDescription = new List<SubstanceSourceMaterial.FractionDescriptionComponent>((IEnumerable<SubstanceSourceMaterial.FractionDescriptionComponent>)o_),
+				Organism = p_,
+				PartDescription = new List<SubstanceSourceMaterial.PartDescriptionComponent>((IEnumerable<SubstanceSourceMaterial.PartDescriptionComponent>)q_),
+			};
 
 			return r_;
 		};
@@ -6418,27 +6418,27 @@ PartDescription = new List<SubstanceSourceMaterial.PartDescriptionComponent>((IE
 			ResourceReference v_ = a?.Protein;
 			ResourceReference w_ = a?.SourceMaterial;
 			SubstanceSpecification x_ = new SubstanceSpecification
-{
-Identifier = e_,
-Type = f_,
-Status = g_,
-Domain = h_,
-DescriptionElement = i_,
-Source = new List<ResourceReference>((IEnumerable<ResourceReference>)j_),
-CommentElement = k_,
-Moiety = new List<SubstanceSpecification.MoietyComponent>((IEnumerable<SubstanceSpecification.MoietyComponent>)l_),
-Property = new List<SubstanceSpecification.PropertyComponent>((IEnumerable<SubstanceSpecification.PropertyComponent>)m_),
-ReferenceInformation = n_,
-Structure = o_,
-Code = new List<SubstanceSpecification.CodeComponent>((IEnumerable<SubstanceSpecification.CodeComponent>)p_),
-Name = new List<SubstanceSpecification.NameComponent>((IEnumerable<SubstanceSpecification.NameComponent>)q_),
-MolecularWeight = new List<SubstanceSpecification.MolecularWeightComponent>((IEnumerable<SubstanceSpecification.MolecularWeightComponent>)r_),
-Relationship = new List<SubstanceSpecification.RelationshipComponent>((IEnumerable<SubstanceSpecification.RelationshipComponent>)s_),
-NucleicAcid = t_,
-Polymer = u_,
-Protein = v_,
-SourceMaterial = w_,
-};
+			{
+				Identifier = e_,
+				Type = f_,
+				Status = g_,
+				Domain = h_,
+				DescriptionElement = i_,
+				Source = new List<ResourceReference>((IEnumerable<ResourceReference>)j_),
+				CommentElement = k_,
+				Moiety = new List<SubstanceSpecification.MoietyComponent>((IEnumerable<SubstanceSpecification.MoietyComponent>)l_),
+				Property = new List<SubstanceSpecification.PropertyComponent>((IEnumerable<SubstanceSpecification.PropertyComponent>)m_),
+				ReferenceInformation = n_,
+				Structure = o_,
+				Code = new List<SubstanceSpecification.CodeComponent>((IEnumerable<SubstanceSpecification.CodeComponent>)p_),
+				Name = new List<SubstanceSpecification.NameComponent>((IEnumerable<SubstanceSpecification.NameComponent>)q_),
+				MolecularWeight = new List<SubstanceSpecification.MolecularWeightComponent>((IEnumerable<SubstanceSpecification.MolecularWeightComponent>)r_),
+				Relationship = new List<SubstanceSpecification.RelationshipComponent>((IEnumerable<SubstanceSpecification.RelationshipComponent>)s_),
+				NucleicAcid = t_,
+				Polymer = u_,
+				Protein = v_,
+				SourceMaterial = w_,
+			};
 
 			return x_;
 		};
@@ -6467,19 +6467,19 @@ SourceMaterial = w_,
 			ResourceReference n_ = a?.Destination;
 			List<ResourceReference> o_ = a?.Receiver;
 			SupplyDelivery p_ = new SupplyDelivery
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
-PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)g_),
-StatusElement = h_,
-Patient = i_,
-Type = j_,
-SuppliedItem = k_,
-Occurrence = (DataType)l_,
-Supplier = m_,
-Destination = n_,
-Receiver = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)f_),
+				PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)g_),
+				StatusElement = h_,
+				Patient = i_,
+				Type = j_,
+				SuppliedItem = k_,
+				Occurrence = (DataType)l_,
+				Supplier = m_,
+				Destination = n_,
+				Receiver = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
+			};
 
 			return p_;
 		};
@@ -6512,23 +6512,23 @@ Receiver = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
 			ResourceReference r_ = a?.DeliverFrom;
 			ResourceReference s_ = a?.DeliverTo;
 			SupplyRequest t_ = new SupplyRequest
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-Category = g_,
-PriorityElement = h_,
-Item = (DataType)i_,
-Quantity = j_,
-Parameter = new List<SupplyRequest.ParameterComponent>((IEnumerable<SupplyRequest.ParameterComponent>)k_),
-Occurrence = (DataType)l_,
-AuthoredOnElement = m_,
-Requester = n_,
-Supplier = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
-ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)p_),
-ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
-DeliverFrom = r_,
-DeliverTo = s_,
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				Category = g_,
+				PriorityElement = h_,
+				Item = (DataType)i_,
+				Quantity = j_,
+				Parameter = new List<SupplyRequest.ParameterComponent>((IEnumerable<SupplyRequest.ParameterComponent>)k_),
+				Occurrence = (DataType)l_,
+				AuthoredOnElement = m_,
+				Requester = n_,
+				Supplier = new List<ResourceReference>((IEnumerable<ResourceReference>)o_),
+				ReasonCode = new List<CodeableConcept>((IEnumerable<CodeableConcept>)p_),
+				ReasonReference = new List<ResourceReference>((IEnumerable<ResourceReference>)q_),
+				DeliverFrom = r_,
+				DeliverTo = s_,
+			};
 
 			return t_;
 		};
@@ -6577,39 +6577,39 @@ DeliverTo = s_,
 			List<Task.ParameterComponent> ah_ = a?.Input;
 			List<Task.OutputComponent> ai_ = a?.Output;
 			Task aj_ = new Task
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-InstantiatesCanonicalElement = f_,
-InstantiatesUriElement = g_,
-BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
-GroupIdentifier = i_,
-PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)j_),
-StatusElement = k_,
-StatusReason = l_,
-BusinessStatus = m_,
-IntentElement = n_,
-PriorityElement = o_,
-Code = p_,
-DescriptionElement = q_,
-Focus = r_,
-For = s_,
-Encounter = t_,
-ExecutionPeriod = u_,
-AuthoredOnElement = v_,
-LastModifiedElement = w_,
-Requester = x_,
-PerformerType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)y_),
-Owner = z_,
-Location = aa_,
-ReasonCode = ab_,
-ReasonReference = ac_,
-Insurance = new List<ResourceReference>((IEnumerable<ResourceReference>)ad_),
-Note = new List<Annotation>((IEnumerable<Annotation>)ae_),
-RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)af_),
-Restriction = ag_,
-Input = new List<Task.ParameterComponent>((IEnumerable<Task.ParameterComponent>)ah_),
-Output = new List<Task.OutputComponent>((IEnumerable<Task.OutputComponent>)ai_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				InstantiatesCanonicalElement = f_,
+				InstantiatesUriElement = g_,
+				BasedOn = new List<ResourceReference>((IEnumerable<ResourceReference>)h_),
+				GroupIdentifier = i_,
+				PartOf = new List<ResourceReference>((IEnumerable<ResourceReference>)j_),
+				StatusElement = k_,
+				StatusReason = l_,
+				BusinessStatus = m_,
+				IntentElement = n_,
+				PriorityElement = o_,
+				Code = p_,
+				DescriptionElement = q_,
+				Focus = r_,
+				For = s_,
+				Encounter = t_,
+				ExecutionPeriod = u_,
+				AuthoredOnElement = v_,
+				LastModifiedElement = w_,
+				Requester = x_,
+				PerformerType = new List<CodeableConcept>((IEnumerable<CodeableConcept>)y_),
+				Owner = z_,
+				Location = aa_,
+				ReasonCode = ab_,
+				ReasonReference = ac_,
+				Insurance = new List<ResourceReference>((IEnumerable<ResourceReference>)ad_),
+				Note = new List<Annotation>((IEnumerable<Annotation>)ae_),
+				RelevantHistory = new List<ResourceReference>((IEnumerable<ResourceReference>)af_),
+				Restriction = ag_,
+				Input = new List<Task.ParameterComponent>((IEnumerable<Task.ParameterComponent>)ah_),
+				Output = new List<Task.OutputComponent>((IEnumerable<Task.OutputComponent>)ai_),
+			};
 
 			return aj_;
 		};
@@ -6651,32 +6651,32 @@ Output = new List<Task.OutputComponent>((IEnumerable<Task.OutputComponent>)ai_),
 			TerminologyCapabilities.TranslationComponent aa_ = a?.Translation;
 			TerminologyCapabilities.ClosureComponent ab_ = a?.Closure;
 			TerminologyCapabilities ac_ = new TerminologyCapabilities
-{
-UrlElement = e_,
-VersionElement = f_,
-NameElement = g_,
-TitleElement = h_,
-StatusElement = i_,
-ExperimentalElement = j_,
-DateElement = k_,
-PublisherElement = l_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)m_),
-DescriptionElement = n_,
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)o_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)p_),
-PurposeElement = q_,
-CopyrightElement = r_,
-KindElement = s_,
-Software = t_,
-Implementation = u_,
-LockedDateElement = v_,
-CodeSystem = new List<TerminologyCapabilities.CodeSystemComponent>((IEnumerable<TerminologyCapabilities.CodeSystemComponent>)w_),
-Expansion = x_,
-CodeSearchElement = y_,
-ValidateCode = z_,
-Translation = aa_,
-Closure = ab_,
-};
+			{
+				UrlElement = e_,
+				VersionElement = f_,
+				NameElement = g_,
+				TitleElement = h_,
+				StatusElement = i_,
+				ExperimentalElement = j_,
+				DateElement = k_,
+				PublisherElement = l_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)m_),
+				DescriptionElement = n_,
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)o_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)p_),
+				PurposeElement = q_,
+				CopyrightElement = r_,
+				KindElement = s_,
+				Software = t_,
+				Implementation = u_,
+				LockedDateElement = v_,
+				CodeSystem = new List<TerminologyCapabilities.CodeSystemComponent>((IEnumerable<TerminologyCapabilities.CodeSystemComponent>)w_),
+				Expansion = x_,
+				CodeSearchElement = y_,
+				ValidateCode = z_,
+				Translation = aa_,
+				Closure = ab_,
+			};
 
 			return ac_;
 		};
@@ -6706,20 +6706,20 @@ Closure = ab_,
 			List<TestReport.TestComponent> o_ = a?.Test;
 			TestReport.TeardownComponent p_ = a?.Teardown;
 			TestReport q_ = new TestReport
-{
-Identifier = e_,
-NameElement = f_,
-StatusElement = g_,
-TestScript = h_,
-ResultElement = i_,
-ScoreElement = j_,
-TesterElement = k_,
-IssuedElement = l_,
-Participant = new List<TestReport.ParticipantComponent>((IEnumerable<TestReport.ParticipantComponent>)m_),
-Setup = n_,
-Test = new List<TestReport.TestComponent>((IEnumerable<TestReport.TestComponent>)o_),
-Teardown = p_,
-};
+			{
+				Identifier = e_,
+				NameElement = f_,
+				StatusElement = g_,
+				TestScript = h_,
+				ResultElement = i_,
+				ScoreElement = j_,
+				TesterElement = k_,
+				IssuedElement = l_,
+				Participant = new List<TestReport.ParticipantComponent>((IEnumerable<TestReport.ParticipantComponent>)m_),
+				Setup = n_,
+				Test = new List<TestReport.TestComponent>((IEnumerable<TestReport.TestComponent>)o_),
+				Teardown = p_,
+			};
 
 			return q_;
 		};
@@ -6761,32 +6761,32 @@ Teardown = p_,
 			List<TestScript.TestComponent> aa_ = a?.Test;
 			TestScript.TeardownComponent ab_ = a?.Teardown;
 			TestScript ac_ = new TestScript
-{
-UrlElement = e_,
-Identifier = f_,
-VersionElement = g_,
-NameElement = h_,
-TitleElement = i_,
-StatusElement = j_,
-ExperimentalElement = k_,
-DateElement = l_,
-PublisherElement = m_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)n_),
-DescriptionElement = o_,
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)p_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
-PurposeElement = r_,
-CopyrightElement = s_,
-Origin = new List<TestScript.OriginComponent>((IEnumerable<TestScript.OriginComponent>)t_),
-Destination = new List<TestScript.DestinationComponent>((IEnumerable<TestScript.DestinationComponent>)u_),
-Metadata = v_,
-Fixture = new List<TestScript.FixtureComponent>((IEnumerable<TestScript.FixtureComponent>)w_),
-Profile = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
-Variable = new List<TestScript.VariableComponent>((IEnumerable<TestScript.VariableComponent>)y_),
-Setup = z_,
-Test = new List<TestScript.TestComponent>((IEnumerable<TestScript.TestComponent>)aa_),
-Teardown = ab_,
-};
+			{
+				UrlElement = e_,
+				Identifier = f_,
+				VersionElement = g_,
+				NameElement = h_,
+				TitleElement = i_,
+				StatusElement = j_,
+				ExperimentalElement = k_,
+				DateElement = l_,
+				PublisherElement = m_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)n_),
+				DescriptionElement = o_,
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)p_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
+				PurposeElement = r_,
+				CopyrightElement = s_,
+				Origin = new List<TestScript.OriginComponent>((IEnumerable<TestScript.OriginComponent>)t_),
+				Destination = new List<TestScript.DestinationComponent>((IEnumerable<TestScript.DestinationComponent>)u_),
+				Metadata = v_,
+				Fixture = new List<TestScript.FixtureComponent>((IEnumerable<TestScript.FixtureComponent>)w_),
+				Profile = new List<ResourceReference>((IEnumerable<ResourceReference>)x_),
+				Variable = new List<TestScript.VariableComponent>((IEnumerable<TestScript.VariableComponent>)y_),
+				Setup = z_,
+				Test = new List<TestScript.TestComponent>((IEnumerable<TestScript.TestComponent>)aa_),
+				Teardown = ab_,
+			};
 
 			return ac_;
 		};
@@ -6822,26 +6822,26 @@ Teardown = ab_,
 			ValueSet.ComposeComponent u_ = a?.Compose;
 			ValueSet.ExpansionComponent v_ = a?.Expansion;
 			ValueSet w_ = new ValueSet
-{
-UrlElement = e_,
-Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
-VersionElement = g_,
-NameElement = h_,
-TitleElement = i_,
-StatusElement = j_,
-ExperimentalElement = k_,
-DateElement = l_,
-PublisherElement = m_,
-Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)n_),
-DescriptionElement = o_,
-UseContext = new List<UsageContext>((IEnumerable<UsageContext>)p_),
-Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
-ImmutableElement = r_,
-PurposeElement = s_,
-CopyrightElement = t_,
-Compose = u_,
-Expansion = v_,
-};
+			{
+				UrlElement = e_,
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)f_),
+				VersionElement = g_,
+				NameElement = h_,
+				TitleElement = i_,
+				StatusElement = j_,
+				ExperimentalElement = k_,
+				DateElement = l_,
+				PublisherElement = m_,
+				Contact = new List<ContactDetail>((IEnumerable<ContactDetail>)n_),
+				DescriptionElement = o_,
+				UseContext = new List<UsageContext>((IEnumerable<UsageContext>)p_),
+				Jurisdiction = new List<CodeableConcept>((IEnumerable<CodeableConcept>)q_),
+				ImmutableElement = r_,
+				PurposeElement = s_,
+				CopyrightElement = t_,
+				Compose = u_,
+				Expansion = v_,
+			};
 
 			return w_;
 		};
@@ -6873,22 +6873,22 @@ Expansion = v_,
 			VerificationResult.AttestationComponent q_ = a?.Attestation;
 			List<VerificationResult.ValidatorComponent> r_ = a?.Validator;
 			VerificationResult s_ = new VerificationResult
-{
-Target = new List<ResourceReference>((IEnumerable<ResourceReference>)e_),
-TargetLocationElement = new List<FhirString>((IEnumerable<FhirString>)f_),
-Need = g_,
-StatusElement = h_,
-StatusDateElement = i_,
-ValidationType = j_,
-ValidationProcess = new List<CodeableConcept>((IEnumerable<CodeableConcept>)k_),
-Frequency = l_,
-LastPerformedElement = m_,
-NextScheduledElement = n_,
-FailureAction = o_,
-PrimarySource = new List<VerificationResult.PrimarySourceComponent>((IEnumerable<VerificationResult.PrimarySourceComponent>)p_),
-Attestation = q_,
-Validator = new List<VerificationResult.ValidatorComponent>((IEnumerable<VerificationResult.ValidatorComponent>)r_),
-};
+			{
+				Target = new List<ResourceReference>((IEnumerable<ResourceReference>)e_),
+				TargetLocationElement = new List<FhirString>((IEnumerable<FhirString>)f_),
+				Need = g_,
+				StatusElement = h_,
+				StatusDateElement = i_,
+				ValidationType = j_,
+				ValidationProcess = new List<CodeableConcept>((IEnumerable<CodeableConcept>)k_),
+				Frequency = l_,
+				LastPerformedElement = m_,
+				NextScheduledElement = n_,
+				FailureAction = o_,
+				PrimarySource = new List<VerificationResult.PrimarySourceComponent>((IEnumerable<VerificationResult.PrimarySourceComponent>)p_),
+				Attestation = q_,
+				Validator = new List<VerificationResult.ValidatorComponent>((IEnumerable<VerificationResult.ValidatorComponent>)r_),
+			};
 
 			return s_;
 		};
@@ -6914,16 +6914,16 @@ Validator = new List<VerificationResult.ValidatorComponent>((IEnumerable<Verific
 			ResourceReference k_ = a?.Prescriber;
 			List<VisionPrescription.LensSpecificationComponent> l_ = a?.LensSpecification;
 			VisionPrescription m_ = new VisionPrescription
-{
-Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
-StatusElement = f_,
-CreatedElement = g_,
-Patient = h_,
-Encounter = i_,
-DateWrittenElement = j_,
-Prescriber = k_,
-LensSpecification = new List<VisionPrescription.LensSpecificationComponent>((IEnumerable<VisionPrescription.LensSpecificationComponent>)l_),
-};
+			{
+				Identifier = new List<Identifier>((IEnumerable<Identifier>)e_),
+				StatusElement = f_,
+				CreatedElement = g_,
+				Patient = h_,
+				Encounter = i_,
+				DateWrittenElement = j_,
+				Prescriber = k_,
+				LensSpecification = new List<VisionPrescription.LensSpecificationComponent>((IEnumerable<VisionPrescription.LensSpecificationComponent>)l_),
+			};
 
 			return m_;
 		};

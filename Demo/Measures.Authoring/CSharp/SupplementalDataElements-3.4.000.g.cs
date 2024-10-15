@@ -73,7 +73,7 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 			};
 			if (i_())
 			{
-Patient l_ = this.Patient(context);
+				Patient l_ = this.Patient(context);
 
 				return (l_ as DomainResource).Extension;
 			}
@@ -108,8 +108,8 @@ Patient l_ = this.Patient(context);
 				return ao_;
 			};
 			IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
-	? (E as Element).Extension
-	: default), q_);
+					? (E as Element).Extension
+					: default), q_);
 			object s_			(Extension @this)
 			{
 				DataType ap_ = @this?.Value;
@@ -132,8 +132,8 @@ Patient l_ = this.Patient(context);
 				return at_;
 			};
 			IEnumerable<Extension> y_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
-	? (E as Element).Extension
-	: default), x_);
+					? (E as Element).Extension
+					: default), x_);
 			object z_			(Extension @this)
 			{
 				DataType au_ = @this?.Value;
@@ -159,8 +159,8 @@ Patient l_ = this.Patient(context);
 				return az_;
 			};
 			IEnumerable<Extension> af_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(E is Element
-	? (E as Element).Extension
-	: default), ae_);
+					? (E as Element).Extension
+					: default), ae_);
 			DataType ag_			(Extension @this)
 			{
 				DataType ba_ = @this?.Value;
@@ -216,7 +216,7 @@ Patient l_ = this.Patient(context);
 			};
 			if (i_())
 			{
-Patient l_ = this.Patient(context);
+				Patient l_ = this.Patient(context);
 
 				return (l_ as DomainResource).Extension;
 			}
@@ -251,8 +251,8 @@ Patient l_ = this.Patient(context);
 				return an_;
 			};
 			IEnumerable<Extension> r_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
-	? (R as Element).Extension
-	: default), q_);
+					? (R as Element).Extension
+					: default), q_);
 			object s_			(Extension @this)
 			{
 				DataType ao_ = @this?.Value;
@@ -277,8 +277,8 @@ Patient l_ = this.Patient(context);
 				return at_;
 			};
 			IEnumerable<Extension> x_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
-	? (R as Element).Extension
-	: default), w_);
+					? (R as Element).Extension
+					: default), w_);
 			object y_			(Extension @this)
 			{
 				DataType au_ = @this?.Value;
@@ -304,8 +304,8 @@ Patient l_ = this.Patient(context);
 				return az_;
 			};
 			IEnumerable<Extension> ae_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(R is Element
-	? (R as Element).Extension
-	: default), ad_);
+					? (R as Element).Extension
+					: default), ad_);
 			DataType af_			(Extension @this)
 			{
 				DataType ba_ = @this?.Value;

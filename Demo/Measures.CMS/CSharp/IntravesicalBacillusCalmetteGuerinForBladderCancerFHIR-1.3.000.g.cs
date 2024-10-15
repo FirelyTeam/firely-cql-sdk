@@ -569,8 +569,8 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_
 					return az_;
 				};
 				IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(BCGNotGiven is DomainResource
-	? (BCGNotGiven as DomainResource).Extension
-	: default), p_);
+						? (BCGNotGiven as DomainResource).Extension
+						: default), p_);
 				DataType r_				(Extension @this)
 				{
 					DataType ba_ = @this?.Value;
@@ -606,8 +606,8 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_
 					return be_;
 				};
 				IEnumerable<Extension> ao_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(BCGNotGiven is DomainResource
-	? (BCGNotGiven as DomainResource).Extension
-	: default), an_);
+						? (BCGNotGiven as DomainResource).Extension
+						: default), an_);
 				DataType ap_				(Extension @this)
 				{
 					DataType bf_ = @this?.Value;
@@ -1133,7 +1133,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_3_
 		{
 			if ((context.Operators.Not((bool?)(pointInTime is null))) ?? false)
 			{
-CqlInterval<CqlDateTime> b_ = context.Operators.Interval(pointInTime, pointInTime, true, true);
+				CqlInterval<CqlDateTime> b_ = context.Operators.Interval(pointInTime, pointInTime, true, true);
 
 				return b_;
 			}

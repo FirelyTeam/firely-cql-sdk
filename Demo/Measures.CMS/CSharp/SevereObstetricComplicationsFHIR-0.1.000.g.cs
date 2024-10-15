@@ -500,8 +500,8 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 					return af_;
 				};
 				IEnumerable<Extension> u_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(EncounterDiagnoses is Element
-	? (EncounterDiagnoses as Element).Extension
-	: default), t_);
+						? (EncounterDiagnoses as Element).Extension
+						: default), t_);
 				object v_				(Extension @this)
 				{
 					DataType ag_ = @this?.Value;
@@ -762,8 +762,8 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 				return q_;
 			};
 			IEnumerable<Extension> g_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(EncounterDiagnoses is Element
-	? (EncounterDiagnoses as Element).Extension
-	: default), f_);
+					? (EncounterDiagnoses as Element).Extension
+					: default), f_);
 			object h_			(Extension @this)
 			{
 				DataType r_ = @this?.Value;
@@ -1778,8 +1778,8 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 				return q_;
 			};
 			IEnumerable<Extension> g_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(EncounterDiagnoses is Element
-	? (EncounterDiagnoses as Element).Extension
-	: default), f_);
+					? (EncounterDiagnoses as Element).Extension
+					: default), f_);
 			object h_			(Extension @this)
 			{
 				DataType r_ = @this?.Value;

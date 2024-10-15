@@ -26,247 +26,247 @@ public partial class CumulativeMedicationDuration_4_0_000 : ILibrary, ISingleton
     #endregion Library Members
 
     [CqlDeclaration("HS")]
-	public CqlCode HS(CqlContext context) => 
+	public CqlCode HS	(CqlContext context) => 
 		new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
     [CqlDeclaration("WAKE")]
-	public CqlCode WAKE(CqlContext context) => 
+	public CqlCode WAKE	(CqlContext context) => 
 		new CqlCode("WAKE", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
     [CqlDeclaration("C")]
-	public CqlCode C(CqlContext context) => 
+	public CqlCode C	(CqlContext context) => 
 		new CqlCode("C", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
     [CqlDeclaration("CM")]
-	public CqlCode CM(CqlContext context) => 
+	public CqlCode CM	(CqlContext context) => 
 		new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
     [CqlDeclaration("CD")]
-	public CqlCode CD(CqlContext context) => 
+	public CqlCode CD	(CqlContext context) => 
 		new CqlCode("CD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
     [CqlDeclaration("CV")]
-	public CqlCode CV(CqlContext context) => 
+	public CqlCode CV	(CqlContext context) => 
 		new CqlCode("CV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
     [CqlDeclaration("AC")]
-	public CqlCode AC(CqlContext context) => 
+	public CqlCode AC	(CqlContext context) => 
 		new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
     [CqlDeclaration("ACM")]
-	public CqlCode ACM(CqlContext context) => 
+	public CqlCode ACM	(CqlContext context) => 
 		new CqlCode("ACM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
     [CqlDeclaration("ACD")]
-	public CqlCode ACD(CqlContext context) => 
+	public CqlCode ACD	(CqlContext context) => 
 		new CqlCode("ACD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
     [CqlDeclaration("ACV")]
-	public CqlCode ACV(CqlContext context) => 
+	public CqlCode ACV	(CqlContext context) => 
 		new CqlCode("ACV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
     [CqlDeclaration("PC")]
-	public CqlCode PC(CqlContext context) => 
+	public CqlCode PC	(CqlContext context) => 
 		new CqlCode("PC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
     [CqlDeclaration("PCM")]
-	public CqlCode PCM(CqlContext context) => 
+	public CqlCode PCM	(CqlContext context) => 
 		new CqlCode("PCM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
     [CqlDeclaration("PCD")]
-	public CqlCode PCD(CqlContext context) => 
+	public CqlCode PCD	(CqlContext context) => 
 		new CqlCode("PCD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
     [CqlDeclaration("PCV")]
-	public CqlCode PCV(CqlContext context) => 
+	public CqlCode PCV	(CqlContext context) => 
 		new CqlCode("PCV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
     [CqlDeclaration("MORN")]
-	public CqlCode MORN(CqlContext context) => 
+	public CqlCode MORN	(CqlContext context) => 
 		new CqlCode("MORN", "http://hl7.org/fhir/event-timing", default, default);
 
 
     [CqlDeclaration("MORN.early")]
-	public CqlCode MORN_early(CqlContext context) => 
+	public CqlCode MORN_early	(CqlContext context) => 
 		new CqlCode("MORN.early", "http://hl7.org/fhir/event-timing", default, default);
 
 
     [CqlDeclaration("MORN.late")]
-	public CqlCode MORN_late(CqlContext context) => 
+	public CqlCode MORN_late	(CqlContext context) => 
 		new CqlCode("MORN.late", "http://hl7.org/fhir/event-timing", default, default);
 
 
     [CqlDeclaration("NOON")]
-	public CqlCode NOON(CqlContext context) => 
+	public CqlCode NOON	(CqlContext context) => 
 		new CqlCode("NOON", "http://hl7.org/fhir/event-timing", default, default);
 
 
     [CqlDeclaration("AFT")]
-	public CqlCode AFT(CqlContext context) => 
+	public CqlCode AFT	(CqlContext context) => 
 		new CqlCode("AFT", "http://hl7.org/fhir/event-timing", default, default);
 
 
     [CqlDeclaration("AFT.early")]
-	public CqlCode AFT_early(CqlContext context) => 
+	public CqlCode AFT_early	(CqlContext context) => 
 		new CqlCode("AFT.early", "http://hl7.org/fhir/event-timing", default, default);
 
 
     [CqlDeclaration("AFT.late")]
-	public CqlCode AFT_late(CqlContext context) => 
+	public CqlCode AFT_late	(CqlContext context) => 
 		new CqlCode("AFT.late", "http://hl7.org/fhir/event-timing", default, default);
 
 
     [CqlDeclaration("EVE")]
-	public CqlCode EVE(CqlContext context) => 
+	public CqlCode EVE	(CqlContext context) => 
 		new CqlCode("EVE", "http://hl7.org/fhir/event-timing", default, default);
 
 
     [CqlDeclaration("EVE.early")]
-	public CqlCode EVE_early(CqlContext context) => 
+	public CqlCode EVE_early	(CqlContext context) => 
 		new CqlCode("EVE.early", "http://hl7.org/fhir/event-timing", default, default);
 
 
     [CqlDeclaration("EVE.late")]
-	public CqlCode EVE_late(CqlContext context) => 
+	public CqlCode EVE_late	(CqlContext context) => 
 		new CqlCode("EVE.late", "http://hl7.org/fhir/event-timing", default, default);
 
 
     [CqlDeclaration("NIGHT")]
-	public CqlCode NIGHT(CqlContext context) => 
+	public CqlCode NIGHT	(CqlContext context) => 
 		new CqlCode("NIGHT", "http://hl7.org/fhir/event-timing", default, default);
 
 
     [CqlDeclaration("PHS")]
-	public CqlCode PHS(CqlContext context) => 
+	public CqlCode PHS	(CqlContext context) => 
 		new CqlCode("PHS", "http://hl7.org/fhir/event-timing", default, default);
 
 
     [CqlDeclaration("Every eight hours (qualifier value)")]
-	public CqlCode Every_eight_hours__qualifier_value_(CqlContext context) => 
+	public CqlCode Every_eight_hours__qualifier_value_	(CqlContext context) => 
 		new CqlCode("307469008", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Every eight to twelve hours (qualifier value)")]
-	public CqlCode Every_eight_to_twelve_hours__qualifier_value_(CqlContext context) => 
+	public CqlCode Every_eight_to_twelve_hours__qualifier_value_	(CqlContext context) => 
 		new CqlCode("396140003", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Every forty eight hours (qualifier value)")]
-	public CqlCode Every_forty_eight_hours__qualifier_value_(CqlContext context) => 
+	public CqlCode Every_forty_eight_hours__qualifier_value_	(CqlContext context) => 
 		new CqlCode("396131002", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Every forty hours (qualifier value)")]
-	public CqlCode Every_forty_hours__qualifier_value_(CqlContext context) => 
+	public CqlCode Every_forty_hours__qualifier_value_	(CqlContext context) => 
 		new CqlCode("396130001", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Every four hours (qualifier value)")]
-	public CqlCode Every_four_hours__qualifier_value_(CqlContext context) => 
+	public CqlCode Every_four_hours__qualifier_value_	(CqlContext context) => 
 		new CqlCode("225756002", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Every seventy two hours (qualifier value)")]
-	public CqlCode Every_seventy_two_hours__qualifier_value_(CqlContext context) => 
+	public CqlCode Every_seventy_two_hours__qualifier_value_	(CqlContext context) => 
 		new CqlCode("396143001", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Every six hours (qualifier value)")]
-	public CqlCode Every_six_hours__qualifier_value_(CqlContext context) => 
+	public CqlCode Every_six_hours__qualifier_value_	(CqlContext context) => 
 		new CqlCode("307468000", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Every six to eight hours (qualifier value)")]
-	public CqlCode Every_six_to_eight_hours__qualifier_value_(CqlContext context) => 
+	public CqlCode Every_six_to_eight_hours__qualifier_value_	(CqlContext context) => 
 		new CqlCode("396139000", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Every thirty six hours (qualifier value)")]
-	public CqlCode Every_thirty_six_hours__qualifier_value_(CqlContext context) => 
+	public CqlCode Every_thirty_six_hours__qualifier_value_	(CqlContext context) => 
 		new CqlCode("396126004", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Every three to four hours (qualifier value)")]
-	public CqlCode Every_three_to_four_hours__qualifier_value_(CqlContext context) => 
+	public CqlCode Every_three_to_four_hours__qualifier_value_	(CqlContext context) => 
 		new CqlCode("225754004", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Every three to six hours (qualifier value)")]
-	public CqlCode Every_three_to_six_hours__qualifier_value_(CqlContext context) => 
+	public CqlCode Every_three_to_six_hours__qualifier_value_	(CqlContext context) => 
 		new CqlCode("396127008", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Every twelve hours (qualifier value)")]
-	public CqlCode Every_twelve_hours__qualifier_value_(CqlContext context) => 
+	public CqlCode Every_twelve_hours__qualifier_value_	(CqlContext context) => 
 		new CqlCode("307470009", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Every twenty four hours (qualifier value)")]
-	public CqlCode Every_twenty_four_hours__qualifier_value_(CqlContext context) => 
+	public CqlCode Every_twenty_four_hours__qualifier_value_	(CqlContext context) => 
 		new CqlCode("396125000", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Every two to four hours (qualifier value)")]
-	public CqlCode Every_two_to_four_hours__qualifier_value_(CqlContext context) => 
+	public CqlCode Every_two_to_four_hours__qualifier_value_	(CqlContext context) => 
 		new CqlCode("225752000", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Four times daily (qualifier value)")]
-	public CqlCode Four_times_daily__qualifier_value_(CqlContext context) => 
+	public CqlCode Four_times_daily__qualifier_value_	(CqlContext context) => 
 		new CqlCode("307439001", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Once daily (qualifier value)")]
-	public CqlCode Once_daily__qualifier_value_(CqlContext context) => 
+	public CqlCode Once_daily__qualifier_value_	(CqlContext context) => 
 		new CqlCode("229797004", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("One to four times a day (qualifier value)")]
-	public CqlCode One_to_four_times_a_day__qualifier_value_(CqlContext context) => 
+	public CqlCode One_to_four_times_a_day__qualifier_value_	(CqlContext context) => 
 		new CqlCode("396109005", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("One to three times a day (qualifier value)")]
-	public CqlCode One_to_three_times_a_day__qualifier_value_(CqlContext context) => 
+	public CqlCode One_to_three_times_a_day__qualifier_value_	(CqlContext context) => 
 		new CqlCode("396108002", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("One to two times a day (qualifier value)")]
-	public CqlCode One_to_two_times_a_day__qualifier_value_(CqlContext context) => 
+	public CqlCode One_to_two_times_a_day__qualifier_value_	(CqlContext context) => 
 		new CqlCode("396107007", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Three times daily (qualifier value)")]
-	public CqlCode Three_times_daily__qualifier_value_(CqlContext context) => 
+	public CqlCode Three_times_daily__qualifier_value_	(CqlContext context) => 
 		new CqlCode("229798009", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Twice a day (qualifier value)")]
-	public CqlCode Twice_a_day__qualifier_value_(CqlContext context) => 
+	public CqlCode Twice_a_day__qualifier_value_	(CqlContext context) => 
 		new CqlCode("229799001", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("Two to four times a day (qualifier value)")]
-	public CqlCode Two_to_four_times_a_day__qualifier_value_(CqlContext context) => 
+	public CqlCode Two_to_four_times_a_day__qualifier_value_	(CqlContext context) => 
 		new CqlCode("396111001", "http://snomed.info/sct", default, default);
 
 
     [CqlDeclaration("V3TimingEvent")]
-	public CqlCode[] V3TimingEvent(CqlContext context)
+	public CqlCode[] V3TimingEvent	(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default),
@@ -290,7 +290,7 @@ public partial class CumulativeMedicationDuration_4_0_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("EventTiming")]
-	public CqlCode[] EventTiming(CqlContext context)
+	public CqlCode[] EventTiming	(CqlContext context)
 	{
 		CqlCode[] a_ = [
 			new CqlCode("MORN", "http://hl7.org/fhir/event-timing", default, default),
@@ -312,7 +312,7 @@ public partial class CumulativeMedicationDuration_4_0_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("ErrorLevel")]
-	public string ErrorLevel(CqlContext context)
+	public string ErrorLevel	(CqlContext context)
 	{
 		object a_ = context.ResolveParameter("CumulativeMedicationDuration-4.0.000", "ErrorLevel", "Warning");
 
@@ -321,7 +321,7 @@ public partial class CumulativeMedicationDuration_4_0_000 : ILibrary, ISingleton
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient(CqlContext context)
+	public Patient Patient	(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -329,151 +329,151 @@ public partial class CumulativeMedicationDuration_4_0_000 : ILibrary, ISingleton
 		return b_;
 	}
 
-	public decimal? ToDaily(CqlContext context, int? frequency, CqlQuantity period)
+	public decimal? ToDaily	(CqlContext context, int? frequency, CqlQuantity period)
 	{
-		decimal? a_()
+		decimal? a_		()
 		{
-			bool b_()
+			bool b_			()
 			{
 				string w_ = period?.unit;
 				bool? x_ = context.Operators.Equal(w_, "h");
 
 				return x_ ?? false;
 			};
-			bool c_()
+			bool c_			()
 			{
 				string y_ = period?.unit;
 				bool? z_ = context.Operators.Equal(y_, "min");
 
 				return z_ ?? false;
 			};
-			bool d_()
+			bool d_			()
 			{
 				string aa_ = period?.unit;
 				bool? ab_ = context.Operators.Equal(aa_, "s");
 
 				return ab_ ?? false;
 			};
-			bool e_()
+			bool e_			()
 			{
 				string ac_ = period?.unit;
 				bool? ad_ = context.Operators.Equal(ac_, "d");
 
 				return ad_ ?? false;
 			};
-			bool f_()
+			bool f_			()
 			{
 				string ae_ = period?.unit;
 				bool? af_ = context.Operators.Equal(ae_, "wk");
 
 				return af_ ?? false;
 			};
-			bool g_()
+			bool g_			()
 			{
 				string ag_ = period?.unit;
 				bool? ah_ = context.Operators.Equal(ag_, "mo");
 
 				return ah_ ?? false;
 			};
-			bool h_()
+			bool h_			()
 			{
 				string ai_ = period?.unit;
 				bool? aj_ = context.Operators.Equal(ai_, "a");
 
 				return aj_ ?? false;
 			};
-			bool i_()
+			bool i_			()
 			{
 				string ak_ = period?.unit;
 				bool? al_ = context.Operators.Equal(ak_, "hour");
 
 				return al_ ?? false;
 			};
-			bool j_()
+			bool j_			()
 			{
 				string am_ = period?.unit;
 				bool? an_ = context.Operators.Equal(am_, "minute");
 
 				return an_ ?? false;
 			};
-			bool k_()
+			bool k_			()
 			{
 				string ao_ = period?.unit;
 				bool? ap_ = context.Operators.Equal(ao_, "second");
 
 				return ap_ ?? false;
 			};
-			bool l_()
+			bool l_			()
 			{
 				string aq_ = period?.unit;
 				bool? ar_ = context.Operators.Equal(aq_, "day");
 
 				return ar_ ?? false;
 			};
-			bool m_()
+			bool m_			()
 			{
 				string as_ = period?.unit;
 				bool? at_ = context.Operators.Equal(as_, "week");
 
 				return at_ ?? false;
 			};
-			bool n_()
+			bool n_			()
 			{
 				string au_ = period?.unit;
 				bool? av_ = context.Operators.Equal(au_, "month");
 
 				return av_ ?? false;
 			};
-			bool o_()
+			bool o_			()
 			{
 				string aw_ = period?.unit;
 				bool? ax_ = context.Operators.Equal(aw_, "year");
 
 				return ax_ ?? false;
 			};
-			bool p_()
+			bool p_			()
 			{
 				string ay_ = period?.unit;
 				bool? az_ = context.Operators.Equal(ay_, "hours");
 
 				return az_ ?? false;
 			};
-			bool q_()
+			bool q_			()
 			{
 				string ba_ = period?.unit;
 				bool? bb_ = context.Operators.Equal(ba_, "minutes");
 
 				return bb_ ?? false;
 			};
-			bool r_()
+			bool r_			()
 			{
 				string bc_ = period?.unit;
 				bool? bd_ = context.Operators.Equal(bc_, "seconds");
 
 				return bd_ ?? false;
 			};
-			bool s_()
+			bool s_			()
 			{
 				string be_ = period?.unit;
 				bool? bf_ = context.Operators.Equal(be_, "days");
 
 				return bf_ ?? false;
 			};
-			bool t_()
+			bool t_			()
 			{
 				string bg_ = period?.unit;
 				bool? bh_ = context.Operators.Equal(bg_, "weeks");
 
 				return bh_ ?? false;
 			};
-			bool u_()
+			bool u_			()
 			{
 				string bi_ = period?.unit;
 				bool? bj_ = context.Operators.Equal(bi_, "months");
 
 				return bj_ ?? false;
 			};
-			bool v_()
+			bool v_			()
 			{
 				string bk_ = period?.unit;
 				bool? bl_ = context.Operators.Equal(bk_, "years");
@@ -482,247 +482,247 @@ public partial class CumulativeMedicationDuration_4_0_000 : ILibrary, ISingleton
 			};
 			if (b_())
 			{
-decimal? bm_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? bn_ = period?.value;
-decimal? bo_ = context.Operators.Divide(24.0m, bn_);
-decimal? bp_ = context.Operators.Multiply(bm_, bo_);
+				decimal? bm_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? bn_ = period?.value;
+				decimal? bo_ = context.Operators.Divide(24.0m, bn_);
+				decimal? bp_ = context.Operators.Multiply(bm_, bo_);
 
 				return bp_;
 			}
 			else if (c_())
 			{
-decimal? bq_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? br_ = period?.value;
-decimal? bs_ = context.Operators.Divide(24.0m, br_);
-decimal? bt_ = context.Operators.Multiply(bq_, bs_);
-decimal? bu_ = context.Operators.ConvertIntegerToDecimal(60);
-decimal? bv_ = context.Operators.Multiply(bt_, bu_);
+				decimal? bq_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? br_ = period?.value;
+				decimal? bs_ = context.Operators.Divide(24.0m, br_);
+				decimal? bt_ = context.Operators.Multiply(bq_, bs_);
+				decimal? bu_ = context.Operators.ConvertIntegerToDecimal(60);
+				decimal? bv_ = context.Operators.Multiply(bt_, bu_);
 
 				return bv_;
 			}
 			else if (d_())
 			{
-decimal? bw_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? bx_ = period?.value;
-decimal? by_ = context.Operators.Divide(24.0m, bx_);
-decimal? bz_ = context.Operators.Multiply(bw_, by_);
-decimal? ca_ = context.Operators.ConvertIntegerToDecimal(60);
-decimal? cb_ = context.Operators.Multiply(bz_, ca_);
-decimal? cd_ = context.Operators.Multiply(cb_, ca_);
+				decimal? bw_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? bx_ = period?.value;
+				decimal? by_ = context.Operators.Divide(24.0m, bx_);
+				decimal? bz_ = context.Operators.Multiply(bw_, by_);
+				decimal? ca_ = context.Operators.ConvertIntegerToDecimal(60);
+				decimal? cb_ = context.Operators.Multiply(bz_, ca_);
+				decimal? cd_ = context.Operators.Multiply(cb_, ca_);
 
 				return cd_;
 			}
 			else if (e_())
 			{
-decimal? ce_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? cf_ = period?.value;
-decimal? cg_ = context.Operators.Divide(24.0m, cf_);
-decimal? ch_ = context.Operators.Multiply(ce_, cg_);
-decimal? ci_ = context.Operators.ConvertIntegerToDecimal(24);
-decimal? cj_ = context.Operators.Divide(ch_, ci_);
+				decimal? ce_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? cf_ = period?.value;
+				decimal? cg_ = context.Operators.Divide(24.0m, cf_);
+				decimal? ch_ = context.Operators.Multiply(ce_, cg_);
+				decimal? ci_ = context.Operators.ConvertIntegerToDecimal(24);
+				decimal? cj_ = context.Operators.Divide(ch_, ci_);
 
 				return cj_;
 			}
 			else if (f_())
 			{
-decimal? ck_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? cl_ = period?.value;
-decimal? cm_ = context.Operators.Divide(24.0m, cl_);
-decimal? cn_ = context.Operators.Multiply(ck_, cm_);
-int? co_ = context.Operators.Multiply(24, 7);
-decimal? cp_ = context.Operators.ConvertIntegerToDecimal(co_);
-decimal? cq_ = context.Operators.Divide(cn_, cp_);
+				decimal? ck_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? cl_ = period?.value;
+				decimal? cm_ = context.Operators.Divide(24.0m, cl_);
+				decimal? cn_ = context.Operators.Multiply(ck_, cm_);
+				int? co_ = context.Operators.Multiply(24, 7);
+				decimal? cp_ = context.Operators.ConvertIntegerToDecimal(co_);
+				decimal? cq_ = context.Operators.Divide(cn_, cp_);
 
 				return cq_;
 			}
 			else if (g_())
 			{
-decimal? cr_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? cs_ = period?.value;
-decimal? ct_ = context.Operators.Divide(24.0m, cs_);
-decimal? cu_ = context.Operators.Multiply(cr_, ct_);
-int? cv_ = context.Operators.Multiply(24, 30);
-decimal? cw_ = context.Operators.ConvertIntegerToDecimal(cv_);
-decimal? cx_ = context.Operators.Divide(cu_, cw_);
+				decimal? cr_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? cs_ = period?.value;
+				decimal? ct_ = context.Operators.Divide(24.0m, cs_);
+				decimal? cu_ = context.Operators.Multiply(cr_, ct_);
+				int? cv_ = context.Operators.Multiply(24, 30);
+				decimal? cw_ = context.Operators.ConvertIntegerToDecimal(cv_);
+				decimal? cx_ = context.Operators.Divide(cu_, cw_);
 
 				return cx_;
 			}
 			else if (h_())
 			{
-decimal? cy_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? cz_ = period?.value;
-decimal? da_ = context.Operators.Divide(24.0m, cz_);
-decimal? db_ = context.Operators.Multiply(cy_, da_);
-int? dc_ = context.Operators.Multiply(24, 365);
-decimal? dd_ = context.Operators.ConvertIntegerToDecimal(dc_);
-decimal? de_ = context.Operators.Divide(db_, dd_);
+				decimal? cy_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? cz_ = period?.value;
+				decimal? da_ = context.Operators.Divide(24.0m, cz_);
+				decimal? db_ = context.Operators.Multiply(cy_, da_);
+				int? dc_ = context.Operators.Multiply(24, 365);
+				decimal? dd_ = context.Operators.ConvertIntegerToDecimal(dc_);
+				decimal? de_ = context.Operators.Divide(db_, dd_);
 
 				return de_;
 			}
 			else if (i_())
 			{
-decimal? df_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? dg_ = period?.value;
-decimal? dh_ = context.Operators.Divide(24.0m, dg_);
-decimal? di_ = context.Operators.Multiply(df_, dh_);
+				decimal? df_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? dg_ = period?.value;
+				decimal? dh_ = context.Operators.Divide(24.0m, dg_);
+				decimal? di_ = context.Operators.Multiply(df_, dh_);
 
 				return di_;
 			}
 			else if (j_())
 			{
-decimal? dj_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? dk_ = period?.value;
-decimal? dl_ = context.Operators.Divide(24.0m, dk_);
-decimal? dm_ = context.Operators.Multiply(dj_, dl_);
-decimal? dn_ = context.Operators.ConvertIntegerToDecimal(60);
-decimal? do_ = context.Operators.Multiply(dm_, dn_);
+				decimal? dj_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? dk_ = period?.value;
+				decimal? dl_ = context.Operators.Divide(24.0m, dk_);
+				decimal? dm_ = context.Operators.Multiply(dj_, dl_);
+				decimal? dn_ = context.Operators.ConvertIntegerToDecimal(60);
+				decimal? do_ = context.Operators.Multiply(dm_, dn_);
 
 				return do_;
 			}
 			else if (k_())
 			{
-decimal? dp_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? dq_ = period?.value;
-decimal? dr_ = context.Operators.Divide(24.0m, dq_);
-decimal? ds_ = context.Operators.Multiply(dp_, dr_);
-decimal? dt_ = context.Operators.ConvertIntegerToDecimal(60);
-decimal? du_ = context.Operators.Multiply(ds_, dt_);
-decimal? dw_ = context.Operators.Multiply(du_, dt_);
+				decimal? dp_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? dq_ = period?.value;
+				decimal? dr_ = context.Operators.Divide(24.0m, dq_);
+				decimal? ds_ = context.Operators.Multiply(dp_, dr_);
+				decimal? dt_ = context.Operators.ConvertIntegerToDecimal(60);
+				decimal? du_ = context.Operators.Multiply(ds_, dt_);
+				decimal? dw_ = context.Operators.Multiply(du_, dt_);
 
 				return dw_;
 			}
 			else if (l_())
 			{
-decimal? dx_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? dy_ = period?.value;
-decimal? dz_ = context.Operators.Divide(24.0m, dy_);
-decimal? ea_ = context.Operators.Multiply(dx_, dz_);
-decimal? eb_ = context.Operators.ConvertIntegerToDecimal(24);
-decimal? ec_ = context.Operators.Divide(ea_, eb_);
+				decimal? dx_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? dy_ = period?.value;
+				decimal? dz_ = context.Operators.Divide(24.0m, dy_);
+				decimal? ea_ = context.Operators.Multiply(dx_, dz_);
+				decimal? eb_ = context.Operators.ConvertIntegerToDecimal(24);
+				decimal? ec_ = context.Operators.Divide(ea_, eb_);
 
 				return ec_;
 			}
 			else if (m_())
 			{
-decimal? ed_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? ee_ = period?.value;
-decimal? ef_ = context.Operators.Divide(24.0m, ee_);
-decimal? eg_ = context.Operators.Multiply(ed_, ef_);
-int? eh_ = context.Operators.Multiply(24, 7);
-decimal? ei_ = context.Operators.ConvertIntegerToDecimal(eh_);
-decimal? ej_ = context.Operators.Divide(eg_, ei_);
+				decimal? ed_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? ee_ = period?.value;
+				decimal? ef_ = context.Operators.Divide(24.0m, ee_);
+				decimal? eg_ = context.Operators.Multiply(ed_, ef_);
+				int? eh_ = context.Operators.Multiply(24, 7);
+				decimal? ei_ = context.Operators.ConvertIntegerToDecimal(eh_);
+				decimal? ej_ = context.Operators.Divide(eg_, ei_);
 
 				return ej_;
 			}
 			else if (n_())
 			{
-decimal? ek_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? el_ = period?.value;
-decimal? em_ = context.Operators.Divide(24.0m, el_);
-decimal? en_ = context.Operators.Multiply(ek_, em_);
-int? eo_ = context.Operators.Multiply(24, 30);
-decimal? ep_ = context.Operators.ConvertIntegerToDecimal(eo_);
-decimal? eq_ = context.Operators.Divide(en_, ep_);
+				decimal? ek_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? el_ = period?.value;
+				decimal? em_ = context.Operators.Divide(24.0m, el_);
+				decimal? en_ = context.Operators.Multiply(ek_, em_);
+				int? eo_ = context.Operators.Multiply(24, 30);
+				decimal? ep_ = context.Operators.ConvertIntegerToDecimal(eo_);
+				decimal? eq_ = context.Operators.Divide(en_, ep_);
 
 				return eq_;
 			}
 			else if (o_())
 			{
-decimal? er_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? es_ = period?.value;
-decimal? et_ = context.Operators.Divide(24.0m, es_);
-decimal? eu_ = context.Operators.Multiply(er_, et_);
-int? ev_ = context.Operators.Multiply(24, 365);
-decimal? ew_ = context.Operators.ConvertIntegerToDecimal(ev_);
-decimal? ex_ = context.Operators.Divide(eu_, ew_);
+				decimal? er_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? es_ = period?.value;
+				decimal? et_ = context.Operators.Divide(24.0m, es_);
+				decimal? eu_ = context.Operators.Multiply(er_, et_);
+				int? ev_ = context.Operators.Multiply(24, 365);
+				decimal? ew_ = context.Operators.ConvertIntegerToDecimal(ev_);
+				decimal? ex_ = context.Operators.Divide(eu_, ew_);
 
 				return ex_;
 			}
 			else if (p_())
 			{
-decimal? ey_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? ez_ = period?.value;
-decimal? fa_ = context.Operators.Divide(24.0m, ez_);
-decimal? fb_ = context.Operators.Multiply(ey_, fa_);
+				decimal? ey_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? ez_ = period?.value;
+				decimal? fa_ = context.Operators.Divide(24.0m, ez_);
+				decimal? fb_ = context.Operators.Multiply(ey_, fa_);
 
 				return fb_;
 			}
 			else if (q_())
 			{
-decimal? fc_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? fd_ = period?.value;
-decimal? fe_ = context.Operators.Divide(24.0m, fd_);
-decimal? ff_ = context.Operators.Multiply(fc_, fe_);
-decimal? fg_ = context.Operators.ConvertIntegerToDecimal(60);
-decimal? fh_ = context.Operators.Multiply(ff_, fg_);
+				decimal? fc_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? fd_ = period?.value;
+				decimal? fe_ = context.Operators.Divide(24.0m, fd_);
+				decimal? ff_ = context.Operators.Multiply(fc_, fe_);
+				decimal? fg_ = context.Operators.ConvertIntegerToDecimal(60);
+				decimal? fh_ = context.Operators.Multiply(ff_, fg_);
 
 				return fh_;
 			}
 			else if (r_())
 			{
-decimal? fi_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? fj_ = period?.value;
-decimal? fk_ = context.Operators.Divide(24.0m, fj_);
-decimal? fl_ = context.Operators.Multiply(fi_, fk_);
-decimal? fm_ = context.Operators.ConvertIntegerToDecimal(60);
-decimal? fn_ = context.Operators.Multiply(fl_, fm_);
-decimal? fp_ = context.Operators.Multiply(fn_, fm_);
+				decimal? fi_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? fj_ = period?.value;
+				decimal? fk_ = context.Operators.Divide(24.0m, fj_);
+				decimal? fl_ = context.Operators.Multiply(fi_, fk_);
+				decimal? fm_ = context.Operators.ConvertIntegerToDecimal(60);
+				decimal? fn_ = context.Operators.Multiply(fl_, fm_);
+				decimal? fp_ = context.Operators.Multiply(fn_, fm_);
 
 				return fp_;
 			}
 			else if (s_())
 			{
-decimal? fq_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? fr_ = period?.value;
-decimal? fs_ = context.Operators.Divide(24.0m, fr_);
-decimal? ft_ = context.Operators.Multiply(fq_, fs_);
-decimal? fu_ = context.Operators.ConvertIntegerToDecimal(24);
-decimal? fv_ = context.Operators.Divide(ft_, fu_);
+				decimal? fq_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? fr_ = period?.value;
+				decimal? fs_ = context.Operators.Divide(24.0m, fr_);
+				decimal? ft_ = context.Operators.Multiply(fq_, fs_);
+				decimal? fu_ = context.Operators.ConvertIntegerToDecimal(24);
+				decimal? fv_ = context.Operators.Divide(ft_, fu_);
 
 				return fv_;
 			}
 			else if (t_())
 			{
-decimal? fw_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? fx_ = period?.value;
-decimal? fy_ = context.Operators.Divide(24.0m, fx_);
-decimal? fz_ = context.Operators.Multiply(fw_, fy_);
-int? ga_ = context.Operators.Multiply(24, 7);
-decimal? gb_ = context.Operators.ConvertIntegerToDecimal(ga_);
-decimal? gc_ = context.Operators.Divide(fz_, gb_);
+				decimal? fw_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? fx_ = period?.value;
+				decimal? fy_ = context.Operators.Divide(24.0m, fx_);
+				decimal? fz_ = context.Operators.Multiply(fw_, fy_);
+				int? ga_ = context.Operators.Multiply(24, 7);
+				decimal? gb_ = context.Operators.ConvertIntegerToDecimal(ga_);
+				decimal? gc_ = context.Operators.Divide(fz_, gb_);
 
 				return gc_;
 			}
 			else if (u_())
 			{
-decimal? gd_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? ge_ = period?.value;
-decimal? gf_ = context.Operators.Divide(24.0m, ge_);
-decimal? gg_ = context.Operators.Multiply(gd_, gf_);
-int? gh_ = context.Operators.Multiply(24, 30);
-decimal? gi_ = context.Operators.ConvertIntegerToDecimal(gh_);
-decimal? gj_ = context.Operators.Divide(gg_, gi_);
+				decimal? gd_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? ge_ = period?.value;
+				decimal? gf_ = context.Operators.Divide(24.0m, ge_);
+				decimal? gg_ = context.Operators.Multiply(gd_, gf_);
+				int? gh_ = context.Operators.Multiply(24, 30);
+				decimal? gi_ = context.Operators.ConvertIntegerToDecimal(gh_);
+				decimal? gj_ = context.Operators.Divide(gg_, gi_);
 
 				return gj_;
 			}
 			else if (v_())
 			{
-decimal? gk_ = context.Operators.ConvertIntegerToDecimal(frequency);
-decimal? gl_ = period?.value;
-decimal? gm_ = context.Operators.Divide(24.0m, gl_);
-decimal? gn_ = context.Operators.Multiply(gk_, gm_);
-int? go_ = context.Operators.Multiply(24, 365);
-decimal? gp_ = context.Operators.ConvertIntegerToDecimal(go_);
-decimal? gq_ = context.Operators.Divide(gn_, gp_);
+				decimal? gk_ = context.Operators.ConvertIntegerToDecimal(frequency);
+				decimal? gl_ = period?.value;
+				decimal? gm_ = context.Operators.Divide(24.0m, gl_);
+				decimal? gn_ = context.Operators.Multiply(gk_, gm_);
+				int? go_ = context.Operators.Multiply(24, 365);
+				decimal? gp_ = context.Operators.ConvertIntegerToDecimal(go_);
+				decimal? gq_ = context.Operators.Divide(gn_, gp_);
 
 				return gq_;
 			}
 			else
 			{
-string gr_ = this.ErrorLevel(context);
-string gs_ = period?.unit;
-string gt_ = context.Operators.Concatenate("Unknown unit ", gs_ ?? "");
-object gu_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownUnit", gr_, gt_);
+				string gr_ = this.ErrorLevel(context);
+				string gs_ = period?.unit;
+				string gt_ = context.Operators.Concatenate("Unknown unit ", gs_ ?? "");
+				object gu_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownUnit", gr_, gt_);
 
 				return gu_ as decimal?;
 			}
@@ -731,333 +731,333 @@ object gu_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownUn
 		return a_();
 	}
 
-	public decimal? ToDaily(CqlContext context, CqlCode frequency)
+	public decimal? ToDaily	(CqlContext context, CqlCode frequency)
 	{
-		decimal? a_()
+		decimal? a_		()
 		{
-			bool b_()
+			bool b_			()
 			{
 				CqlCode aw_ = this.HS(context);
 				bool? ax_ = context.Operators.Equivalent(frequency, aw_);
 
 				return ax_ ?? false;
 			};
-			bool c_()
+			bool c_			()
 			{
 				CqlCode ay_ = this.WAKE(context);
 				bool? az_ = context.Operators.Equivalent(frequency, ay_);
 
 				return az_ ?? false;
 			};
-			bool d_()
+			bool d_			()
 			{
 				CqlCode ba_ = this.C(context);
 				bool? bb_ = context.Operators.Equivalent(frequency, ba_);
 
 				return bb_ ?? false;
 			};
-			bool e_()
+			bool e_			()
 			{
 				CqlCode bc_ = this.CM(context);
 				bool? bd_ = context.Operators.Equivalent(frequency, bc_);
 
 				return bd_ ?? false;
 			};
-			bool f_()
+			bool f_			()
 			{
 				CqlCode be_ = this.CD(context);
 				bool? bf_ = context.Operators.Equivalent(frequency, be_);
 
 				return bf_ ?? false;
 			};
-			bool g_()
+			bool g_			()
 			{
 				CqlCode bg_ = this.CV(context);
 				bool? bh_ = context.Operators.Equivalent(frequency, bg_);
 
 				return bh_ ?? false;
 			};
-			bool h_()
+			bool h_			()
 			{
 				CqlCode bi_ = this.AC(context);
 				bool? bj_ = context.Operators.Equivalent(frequency, bi_);
 
 				return bj_ ?? false;
 			};
-			bool i_()
+			bool i_			()
 			{
 				CqlCode bk_ = this.ACM(context);
 				bool? bl_ = context.Operators.Equivalent(frequency, bk_);
 
 				return bl_ ?? false;
 			};
-			bool j_()
+			bool j_			()
 			{
 				CqlCode bm_ = this.ACD(context);
 				bool? bn_ = context.Operators.Equivalent(frequency, bm_);
 
 				return bn_ ?? false;
 			};
-			bool k_()
+			bool k_			()
 			{
 				CqlCode bo_ = this.ACV(context);
 				bool? bp_ = context.Operators.Equivalent(frequency, bo_);
 
 				return bp_ ?? false;
 			};
-			bool l_()
+			bool l_			()
 			{
 				CqlCode bq_ = this.PC(context);
 				bool? br_ = context.Operators.Equivalent(frequency, bq_);
 
 				return br_ ?? false;
 			};
-			bool m_()
+			bool m_			()
 			{
 				CqlCode bs_ = this.PCM(context);
 				bool? bt_ = context.Operators.Equivalent(frequency, bs_);
 
 				return bt_ ?? false;
 			};
-			bool n_()
+			bool n_			()
 			{
 				CqlCode bu_ = this.PCD(context);
 				bool? bv_ = context.Operators.Equivalent(frequency, bu_);
 
 				return bv_ ?? false;
 			};
-			bool o_()
+			bool o_			()
 			{
 				CqlCode bw_ = this.PCV(context);
 				bool? bx_ = context.Operators.Equivalent(frequency, bw_);
 
 				return bx_ ?? false;
 			};
-			bool p_()
+			bool p_			()
 			{
 				CqlCode by_ = this.MORN(context);
 				bool? bz_ = context.Operators.Equivalent(frequency, by_);
 
 				return bz_ ?? false;
 			};
-			bool q_()
+			bool q_			()
 			{
 				CqlCode ca_ = this.MORN_early(context);
 				bool? cb_ = context.Operators.Equivalent(frequency, ca_);
 
 				return cb_ ?? false;
 			};
-			bool r_()
+			bool r_			()
 			{
 				CqlCode cc_ = this.MORN_late(context);
 				bool? cd_ = context.Operators.Equivalent(frequency, cc_);
 
 				return cd_ ?? false;
 			};
-			bool s_()
+			bool s_			()
 			{
 				CqlCode ce_ = this.NOON(context);
 				bool? cf_ = context.Operators.Equivalent(frequency, ce_);
 
 				return cf_ ?? false;
 			};
-			bool t_()
+			bool t_			()
 			{
 				CqlCode cg_ = this.AFT(context);
 				bool? ch_ = context.Operators.Equivalent(frequency, cg_);
 
 				return ch_ ?? false;
 			};
-			bool u_()
+			bool u_			()
 			{
 				CqlCode ci_ = this.AFT_early(context);
 				bool? cj_ = context.Operators.Equivalent(frequency, ci_);
 
 				return cj_ ?? false;
 			};
-			bool v_()
+			bool v_			()
 			{
 				CqlCode ck_ = this.AFT_late(context);
 				bool? cl_ = context.Operators.Equivalent(frequency, ck_);
 
 				return cl_ ?? false;
 			};
-			bool w_()
+			bool w_			()
 			{
 				CqlCode cm_ = this.EVE(context);
 				bool? cn_ = context.Operators.Equivalent(frequency, cm_);
 
 				return cn_ ?? false;
 			};
-			bool x_()
+			bool x_			()
 			{
 				CqlCode co_ = this.EVE_early(context);
 				bool? cp_ = context.Operators.Equivalent(frequency, co_);
 
 				return cp_ ?? false;
 			};
-			bool y_()
+			bool y_			()
 			{
 				CqlCode cq_ = this.EVE_late(context);
 				bool? cr_ = context.Operators.Equivalent(frequency, cq_);
 
 				return cr_ ?? false;
 			};
-			bool z_()
+			bool z_			()
 			{
 				CqlCode cs_ = this.NIGHT(context);
 				bool? ct_ = context.Operators.Equivalent(frequency, cs_);
 
 				return ct_ ?? false;
 			};
-			bool aa_()
+			bool aa_			()
 			{
 				CqlCode cu_ = this.PHS(context);
 				bool? cv_ = context.Operators.Equivalent(frequency, cu_);
 
 				return cv_ ?? false;
 			};
-			bool ab_()
+			bool ab_			()
 			{
 				CqlCode cw_ = this.Once_daily__qualifier_value_(context);
 				bool? cx_ = context.Operators.Equivalent(frequency, cw_);
 
 				return cx_ ?? false;
 			};
-			bool ac_()
+			bool ac_			()
 			{
 				CqlCode cy_ = this.Twice_a_day__qualifier_value_(context);
 				bool? cz_ = context.Operators.Equivalent(frequency, cy_);
 
 				return cz_ ?? false;
 			};
-			bool ad_()
+			bool ad_			()
 			{
 				CqlCode da_ = this.Three_times_daily__qualifier_value_(context);
 				bool? db_ = context.Operators.Equivalent(frequency, da_);
 
 				return db_ ?? false;
 			};
-			bool ae_()
+			bool ae_			()
 			{
 				CqlCode dc_ = this.Four_times_daily__qualifier_value_(context);
 				bool? dd_ = context.Operators.Equivalent(frequency, dc_);
 
 				return dd_ ?? false;
 			};
-			bool af_()
+			bool af_			()
 			{
 				CqlCode de_ = this.Every_twenty_four_hours__qualifier_value_(context);
 				bool? df_ = context.Operators.Equivalent(frequency, de_);
 
 				return df_ ?? false;
 			};
-			bool ag_()
+			bool ag_			()
 			{
 				CqlCode dg_ = this.Every_twelve_hours__qualifier_value_(context);
 				bool? dh_ = context.Operators.Equivalent(frequency, dg_);
 
 				return dh_ ?? false;
 			};
-			bool ah_()
+			bool ah_			()
 			{
 				CqlCode di_ = this.Every_thirty_six_hours__qualifier_value_(context);
 				bool? dj_ = context.Operators.Equivalent(frequency, di_);
 
 				return dj_ ?? false;
 			};
-			bool ai_()
+			bool ai_			()
 			{
 				CqlCode dk_ = this.Every_eight_hours__qualifier_value_(context);
 				bool? dl_ = context.Operators.Equivalent(frequency, dk_);
 
 				return dl_ ?? false;
 			};
-			bool aj_()
+			bool aj_			()
 			{
 				CqlCode dm_ = this.Every_four_hours__qualifier_value_(context);
 				bool? dn_ = context.Operators.Equivalent(frequency, dm_);
 
 				return dn_ ?? false;
 			};
-			bool ak_()
+			bool ak_			()
 			{
 				CqlCode do_ = this.Every_six_hours__qualifier_value_(context);
 				bool? dp_ = context.Operators.Equivalent(frequency, do_);
 
 				return dp_ ?? false;
 			};
-			bool al_()
+			bool al_			()
 			{
 				CqlCode dq_ = this.Every_seventy_two_hours__qualifier_value_(context);
 				bool? dr_ = context.Operators.Equivalent(frequency, dq_);
 
 				return dr_ ?? false;
 			};
-			bool am_()
+			bool am_			()
 			{
 				CqlCode ds_ = this.Every_forty_eight_hours__qualifier_value_(context);
 				bool? dt_ = context.Operators.Equivalent(frequency, ds_);
 
 				return dt_ ?? false;
 			};
-			bool an_()
+			bool an_			()
 			{
 				CqlCode du_ = this.Every_eight_to_twelve_hours__qualifier_value_(context);
 				bool? dv_ = context.Operators.Equivalent(frequency, du_);
 
 				return dv_ ?? false;
 			};
-			bool ao_()
+			bool ao_			()
 			{
 				CqlCode dw_ = this.Every_six_to_eight_hours__qualifier_value_(context);
 				bool? dx_ = context.Operators.Equivalent(frequency, dw_);
 
 				return dx_ ?? false;
 			};
-			bool ap_()
+			bool ap_			()
 			{
 				CqlCode dy_ = this.Every_three_to_four_hours__qualifier_value_(context);
 				bool? dz_ = context.Operators.Equivalent(frequency, dy_);
 
 				return dz_ ?? false;
 			};
-			bool aq_()
+			bool aq_			()
 			{
 				CqlCode ea_ = this.Every_three_to_six_hours__qualifier_value_(context);
 				bool? eb_ = context.Operators.Equivalent(frequency, ea_);
 
 				return eb_ ?? false;
 			};
-			bool ar_()
+			bool ar_			()
 			{
 				CqlCode ec_ = this.Every_two_to_four_hours__qualifier_value_(context);
 				bool? ed_ = context.Operators.Equivalent(frequency, ec_);
 
 				return ed_ ?? false;
 			};
-			bool as_()
+			bool as_			()
 			{
 				CqlCode ee_ = this.One_to_four_times_a_day__qualifier_value_(context);
 				bool? ef_ = context.Operators.Equivalent(frequency, ee_);
 
 				return ef_ ?? false;
 			};
-			bool at_()
+			bool at_			()
 			{
 				CqlCode eg_ = this.One_to_three_times_a_day__qualifier_value_(context);
 				bool? eh_ = context.Operators.Equivalent(frequency, eg_);
 
 				return eh_ ?? false;
 			};
-			bool au_()
+			bool au_			()
 			{
 				CqlCode ei_ = this.One_to_two_times_a_day__qualifier_value_(context);
 				bool? ej_ = context.Operators.Equivalent(frequency, ei_);
 
 				return ej_ ?? false;
 			};
-			bool av_()
+			bool av_			()
 			{
 				CqlCode ek_ = this.Two_to_four_times_a_day__qualifier_value_(context);
 				bool? el_ = context.Operators.Equivalent(frequency, ek_);
@@ -1066,157 +1066,157 @@ object gu_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownUn
 			};
 			if (b_())
 			{
-decimal? em_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? em_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return em_;
 			}
 			else if (c_())
 			{
-decimal? en_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? en_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return en_;
 			}
 			else if (d_())
 			{
-decimal? eo_ = context.Operators.ConvertIntegerToDecimal(3);
+				decimal? eo_ = context.Operators.ConvertIntegerToDecimal(3);
 
 				return eo_;
 			}
 			else if (e_())
 			{
-decimal? ep_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? ep_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return ep_;
 			}
 			else if (f_())
 			{
-decimal? eq_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? eq_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return eq_;
 			}
 			else if (g_())
 			{
-decimal? er_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? er_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return er_;
 			}
 			else if (h_())
 			{
-decimal? es_ = context.Operators.ConvertIntegerToDecimal(3);
+				decimal? es_ = context.Operators.ConvertIntegerToDecimal(3);
 
 				return es_;
 			}
 			else if (i_())
 			{
-decimal? et_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? et_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return et_;
 			}
 			else if (j_())
 			{
-decimal? eu_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? eu_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return eu_;
 			}
 			else if (k_())
 			{
-decimal? ev_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? ev_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return ev_;
 			}
 			else if (l_())
 			{
-decimal? ew_ = context.Operators.ConvertIntegerToDecimal(3);
+				decimal? ew_ = context.Operators.ConvertIntegerToDecimal(3);
 
 				return ew_;
 			}
 			else if (m_())
 			{
-decimal? ex_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? ex_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return ex_;
 			}
 			else if (n_())
 			{
-decimal? ey_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? ey_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return ey_;
 			}
 			else if (o_())
 			{
-decimal? ez_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? ez_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return ez_;
 			}
 			else if (p_())
 			{
-decimal? fa_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? fa_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return fa_;
 			}
 			else if (q_())
 			{
-decimal? fb_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? fb_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return fb_;
 			}
 			else if (r_())
 			{
-decimal? fc_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? fc_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return fc_;
 			}
 			else if (s_())
 			{
-decimal? fd_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? fd_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return fd_;
 			}
 			else if (t_())
 			{
-decimal? fe_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? fe_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return fe_;
 			}
 			else if (u_())
 			{
-decimal? ff_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? ff_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return ff_;
 			}
 			else if (v_())
 			{
-decimal? fg_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? fg_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return fg_;
 			}
 			else if (w_())
 			{
-decimal? fh_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? fh_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return fh_;
 			}
 			else if (x_())
 			{
-decimal? fi_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? fi_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return fi_;
 			}
 			else if (y_())
 			{
-decimal? fj_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? fj_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return fj_;
 			}
 			else if (z_())
 			{
-decimal? fk_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? fk_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return fk_;
 			}
 			else if (aa_())
 			{
-decimal? fl_ = context.Operators.ConvertIntegerToDecimal(1);
+				decimal? fl_ = context.Operators.ConvertIntegerToDecimal(1);
 
 				return fl_;
 			}
@@ -1306,10 +1306,10 @@ decimal? fl_ = context.Operators.ConvertIntegerToDecimal(1);
 			}
 			else
 			{
-string fm_ = this.ErrorLevel(context);
-string fn_ = frequency?.code;
-string fo_ = context.Operators.Concatenate("Unknown frequency code ", fn_ ?? "");
-object fp_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownFrequencyCode", fm_, fo_);
+				string fm_ = this.ErrorLevel(context);
+				string fn_ = frequency?.code;
+				string fo_ = context.Operators.Concatenate("Unknown frequency code ", fn_ ?? "");
+				object fp_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownFrequencyCode", fm_, fo_);
 
 				return fp_ as decimal?;
 			}
@@ -1318,21 +1318,21 @@ object fp_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownFr
 		return a_();
 	}
 
-	public CqlQuantity Quantity(CqlContext context, decimal? value, string unit) => 
+	public CqlQuantity Quantity	(CqlContext context, decimal? value, string unit) => 
 		((context.Operators.Not((bool?)(value is null))) ?? false
 			? new CqlQuantity(value, unit)
 			: default);
 
-	public CqlInterval<CqlDate> MedicationRequestPeriod(CqlContext context, MedicationRequest Request)
+	public CqlInterval<CqlDate> MedicationRequestPeriod	(CqlContext context, MedicationRequest Request)
 	{
 		MedicationRequest[] a_ = [
 			Request,
 		];
-		CqlInterval<CqlDate> b_(MedicationRequest R)
+		CqlInterval<CqlDate> b_		(MedicationRequest R)
 		{
-			CqlInterval<CqlDate> e_()
+			CqlInterval<CqlDate> e_			()
 			{
-				bool f_()
+				bool f_				()
 				{
 					List<Dosage> h_ = R?.DosageInstruction;
 					Dosage i_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)h_);
@@ -1412,7 +1412,7 @@ object fp_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownFr
 
 					return cn_ ?? false;
 				};
-				bool g_()
+				bool g_				()
 				{
 					List<Dosage> co_ = R?.DosageInstruction;
 					Dosage cp_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
@@ -1444,125 +1444,125 @@ object fp_ = context.Operators.Message<object>(null, "CMDLogic.ToDaily.UnknownFr
 				};
 				if (f_())
 				{
-List<Dosage> do_ = R?.DosageInstruction;
-Dosage dp_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
-Timing dq_ = dp_?.Timing;
-Timing.RepeatComponent dr_ = dq_?.Repeat;
-DataType ds_ = dr_?.Bounds;
-object dt_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ds_);
-CqlDateTime du_ = context.Operators.Start(dt_ as CqlInterval<CqlDateTime>);
-CqlDate dv_ = context.Operators.DateFrom(du_);
-FhirDateTime dw_ = R?.AuthoredOnElement;
-CqlDateTime dx_ = context.Operators.Convert<CqlDateTime>(dw_);
-CqlDate dy_ = context.Operators.DateFrom(dx_);
-MedicationRequest.DispenseRequestComponent dz_ = R?.DispenseRequest;
-Period ea_ = dz_?.ValidityPeriod;
-CqlInterval<CqlDateTime> eb_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ea_);
-CqlDateTime ec_ = context.Operators.Start(eb_);
-CqlDate ed_ = context.Operators.DateFrom(ec_);
-Dosage ef_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
-Timing eg_ = ef_?.Timing;
-Timing.RepeatComponent eh_ = eg_?.Repeat;
-DataType ei_ = eh_?.Bounds;
-object ej_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ei_);
-CqlDateTime ek_ = context.Operators.Start(ej_ as CqlInterval<CqlDateTime>);
-CqlDate el_ = context.Operators.DateFrom(ek_);
-CqlDateTime en_ = context.Operators.Convert<CqlDateTime>(dw_);
-CqlDate eo_ = context.Operators.DateFrom(en_);
-Period eq_ = dz_?.ValidityPeriod;
-CqlInterval<CqlDateTime> er_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, eq_);
-CqlDateTime es_ = context.Operators.Start(er_);
-CqlDate et_ = context.Operators.DateFrom(es_);
-Duration ev_ = dz_?.ExpectedSupplyDuration;
-CqlQuantity ew_ = FHIRHelpers_4_3_000.Instance.ToQuantity(context, ev_);
-CqlQuantity ex_ = context.Operators.ConvertQuantity(ew_, "d");
-decimal? ey_ = ex_?.value;
-Quantity fa_ = dz_?.Quantity;
-CqlQuantity fb_ = FHIRHelpers_4_3_000.Instance.ToQuantity(context, fa_);
-decimal? fc_ = fb_?.value;
-Dosage fe_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
-List<Dosage.DoseAndRateComponent> ff_ = fe_?.DoseAndRate;
-Dosage.DoseAndRateComponent fg_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)ff_);
-DataType fh_ = fg_?.Dose;
-object fi_ = FHIRHelpers_4_3_000.Instance.ToValue(context, fh_);
-CqlQuantity fj_ = context.Operators.End(fi_ as CqlInterval<CqlQuantity>);
-Dosage fl_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
-List<Dosage.DoseAndRateComponent> fm_ = fl_?.DoseAndRate;
-Dosage.DoseAndRateComponent fn_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)fm_);
-DataType fo_ = fn_?.Dose;
-object fp_ = FHIRHelpers_4_3_000.Instance.ToValue(context, fo_);
-decimal? fq_ = (fj_ ?? fp_ as CqlQuantity)?.value;
-Dosage fs_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
-Timing ft_ = fs_?.Timing;
-Timing.RepeatComponent fu_ = ft_?.Repeat;
-PositiveInt fv_ = fu_?.FrequencyMaxElement;
-int? fw_ = fv_?.Value;
-Dosage fy_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
-Timing fz_ = fy_?.Timing;
-Timing.RepeatComponent ga_ = fz_?.Repeat;
-PositiveInt gb_ = ga_?.FrequencyElement;
-int? gc_ = gb_?.Value;
-Dosage ge_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
-Timing gf_ = ge_?.Timing;
-Timing.RepeatComponent gg_ = gf_?.Repeat;
-FhirDecimal gh_ = gg_?.PeriodElement;
-decimal? gi_ = gh_?.Value;
-Dosage gk_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
-Timing gl_ = gk_?.Timing;
-Timing.RepeatComponent gm_ = gl_?.Repeat;
-Code<Timing.UnitsOfTime> gn_ = gm_?.PeriodUnitElement;
-Timing.UnitsOfTime? go_ = gn_?.Value;
-string gp_ = context.Operators.Convert<string>(go_);
-CqlQuantity gq_ = this.Quantity(context, gi_, gp_);
-decimal? gr_ = this.ToDaily(context, fw_ ?? gc_, gq_);
-Dosage gt_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
-Timing gu_ = gt_?.Timing;
-Timing.RepeatComponent gv_ = gu_?.Repeat;
-List<Time> gw_ = gv_?.TimeOfDayElement;
-IEnumerable<CqlTime> gx_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(gw_, "value");
-int? gy_ = context.Operators.Count<CqlTime>(gx_);
-decimal? gz_ = context.Operators.ConvertIntegerToDecimal(gy_);
-decimal? ha_ = context.Operators.Multiply(fq_, (gr_ ?? gz_) ?? 1.0m);
-decimal? hb_ = context.Operators.Divide(fc_, ha_);
-UnsignedInt hd_ = dz_?.NumberOfRepeatsAllowedElement;
-int? he_ = hd_?.Value;
-int? hf_ = context.Operators.Add(1, he_ ?? 0);
-decimal? hg_ = context.Operators.ConvertIntegerToDecimal(hf_);
-decimal? hh_ = context.Operators.Multiply(ey_ ?? hb_, hg_);
-decimal? hi_ = context.Operators.ConvertIntegerToDecimal(1);
-decimal? hj_ = context.Operators.Subtract(hh_, hi_);
-CqlQuantity hk_ = this.Quantity(context, hj_, "day");
-CqlDate hl_ = context.Operators.Add((el_ ?? eo_) ?? et_, hk_);
-CqlInterval<CqlDate> hm_ = context.Operators.Interval((dv_ ?? dy_) ?? ed_, hl_, true, true);
+					List<Dosage> do_ = R?.DosageInstruction;
+					Dosage dp_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
+					Timing dq_ = dp_?.Timing;
+					Timing.RepeatComponent dr_ = dq_?.Repeat;
+					DataType ds_ = dr_?.Bounds;
+					object dt_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ds_);
+					CqlDateTime du_ = context.Operators.Start(dt_ as CqlInterval<CqlDateTime>);
+					CqlDate dv_ = context.Operators.DateFrom(du_);
+					FhirDateTime dw_ = R?.AuthoredOnElement;
+					CqlDateTime dx_ = context.Operators.Convert<CqlDateTime>(dw_);
+					CqlDate dy_ = context.Operators.DateFrom(dx_);
+					MedicationRequest.DispenseRequestComponent dz_ = R?.DispenseRequest;
+					Period ea_ = dz_?.ValidityPeriod;
+					CqlInterval<CqlDateTime> eb_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, ea_);
+					CqlDateTime ec_ = context.Operators.Start(eb_);
+					CqlDate ed_ = context.Operators.DateFrom(ec_);
+					Dosage ef_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
+					Timing eg_ = ef_?.Timing;
+					Timing.RepeatComponent eh_ = eg_?.Repeat;
+					DataType ei_ = eh_?.Bounds;
+					object ej_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ei_);
+					CqlDateTime ek_ = context.Operators.Start(ej_ as CqlInterval<CqlDateTime>);
+					CqlDate el_ = context.Operators.DateFrom(ek_);
+					CqlDateTime en_ = context.Operators.Convert<CqlDateTime>(dw_);
+					CqlDate eo_ = context.Operators.DateFrom(en_);
+					Period eq_ = dz_?.ValidityPeriod;
+					CqlInterval<CqlDateTime> er_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, eq_);
+					CqlDateTime es_ = context.Operators.Start(er_);
+					CqlDate et_ = context.Operators.DateFrom(es_);
+					Duration ev_ = dz_?.ExpectedSupplyDuration;
+					CqlQuantity ew_ = FHIRHelpers_4_3_000.Instance.ToQuantity(context, ev_);
+					CqlQuantity ex_ = context.Operators.ConvertQuantity(ew_, "d");
+					decimal? ey_ = ex_?.value;
+					Quantity fa_ = dz_?.Quantity;
+					CqlQuantity fb_ = FHIRHelpers_4_3_000.Instance.ToQuantity(context, fa_);
+					decimal? fc_ = fb_?.value;
+					Dosage fe_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
+					List<Dosage.DoseAndRateComponent> ff_ = fe_?.DoseAndRate;
+					Dosage.DoseAndRateComponent fg_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)ff_);
+					DataType fh_ = fg_?.Dose;
+					object fi_ = FHIRHelpers_4_3_000.Instance.ToValue(context, fh_);
+					CqlQuantity fj_ = context.Operators.End(fi_ as CqlInterval<CqlQuantity>);
+					Dosage fl_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
+					List<Dosage.DoseAndRateComponent> fm_ = fl_?.DoseAndRate;
+					Dosage.DoseAndRateComponent fn_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)fm_);
+					DataType fo_ = fn_?.Dose;
+					object fp_ = FHIRHelpers_4_3_000.Instance.ToValue(context, fo_);
+					decimal? fq_ = (fj_ ?? fp_ as CqlQuantity)?.value;
+					Dosage fs_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
+					Timing ft_ = fs_?.Timing;
+					Timing.RepeatComponent fu_ = ft_?.Repeat;
+					PositiveInt fv_ = fu_?.FrequencyMaxElement;
+					int? fw_ = fv_?.Value;
+					Dosage fy_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
+					Timing fz_ = fy_?.Timing;
+					Timing.RepeatComponent ga_ = fz_?.Repeat;
+					PositiveInt gb_ = ga_?.FrequencyElement;
+					int? gc_ = gb_?.Value;
+					Dosage ge_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
+					Timing gf_ = ge_?.Timing;
+					Timing.RepeatComponent gg_ = gf_?.Repeat;
+					FhirDecimal gh_ = gg_?.PeriodElement;
+					decimal? gi_ = gh_?.Value;
+					Dosage gk_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
+					Timing gl_ = gk_?.Timing;
+					Timing.RepeatComponent gm_ = gl_?.Repeat;
+					Code<Timing.UnitsOfTime> gn_ = gm_?.PeriodUnitElement;
+					Timing.UnitsOfTime? go_ = gn_?.Value;
+					string gp_ = context.Operators.Convert<string>(go_);
+					CqlQuantity gq_ = this.Quantity(context, gi_, gp_);
+					decimal? gr_ = this.ToDaily(context, fw_ ?? gc_, gq_);
+					Dosage gt_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)do_);
+					Timing gu_ = gt_?.Timing;
+					Timing.RepeatComponent gv_ = gu_?.Repeat;
+					List<Time> gw_ = gv_?.TimeOfDayElement;
+					IEnumerable<CqlTime> gx_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(gw_, "value");
+					int? gy_ = context.Operators.Count<CqlTime>(gx_);
+					decimal? gz_ = context.Operators.ConvertIntegerToDecimal(gy_);
+					decimal? ha_ = context.Operators.Multiply(fq_, (gr_ ?? gz_) ?? 1.0m);
+					decimal? hb_ = context.Operators.Divide(fc_, ha_);
+					UnsignedInt hd_ = dz_?.NumberOfRepeatsAllowedElement;
+					int? he_ = hd_?.Value;
+					int? hf_ = context.Operators.Add(1, he_ ?? 0);
+					decimal? hg_ = context.Operators.ConvertIntegerToDecimal(hf_);
+					decimal? hh_ = context.Operators.Multiply(ey_ ?? hb_, hg_);
+					decimal? hi_ = context.Operators.ConvertIntegerToDecimal(1);
+					decimal? hj_ = context.Operators.Subtract(hh_, hi_);
+					CqlQuantity hk_ = this.Quantity(context, hj_, "day");
+					CqlDate hl_ = context.Operators.Add((el_ ?? eo_) ?? et_, hk_);
+					CqlInterval<CqlDate> hm_ = context.Operators.Interval((dv_ ?? dy_) ?? ed_, hl_, true, true);
 
 					return hm_;
 				}
 				else if (g_())
 				{
-List<Dosage> hn_ = R?.DosageInstruction;
-Dosage ho_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)hn_);
-Timing hp_ = ho_?.Timing;
-Timing.RepeatComponent hq_ = hp_?.Repeat;
-DataType hr_ = hq_?.Bounds;
-object hs_ = FHIRHelpers_4_3_000.Instance.ToValue(context, hr_);
-CqlDateTime ht_ = context.Operators.Start(hs_ as CqlInterval<CqlDateTime>);
-CqlDate hu_ = context.Operators.DateFrom(ht_);
-FhirDateTime hv_ = R?.AuthoredOnElement;
-CqlDateTime hw_ = context.Operators.Convert<CqlDateTime>(hv_);
-CqlDate hx_ = context.Operators.DateFrom(hw_);
-MedicationRequest.DispenseRequestComponent hy_ = R?.DispenseRequest;
-Period hz_ = hy_?.ValidityPeriod;
-CqlInterval<CqlDateTime> ia_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, hz_);
-CqlDateTime ib_ = context.Operators.Start(ia_);
-CqlDate ic_ = context.Operators.DateFrom(ib_);
-Dosage ie_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)hn_);
-Timing if_ = ie_?.Timing;
-Timing.RepeatComponent ig_ = if_?.Repeat;
-DataType ih_ = ig_?.Bounds;
-object ii_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ih_);
-CqlDateTime ij_ = context.Operators.End(ii_ as CqlInterval<CqlDateTime>);
-CqlDate ik_ = context.Operators.DateFrom(ij_);
-CqlInterval<CqlDate> il_ = context.Operators.Interval((hu_ ?? hx_) ?? ic_, ik_, true, true);
+					List<Dosage> hn_ = R?.DosageInstruction;
+					Dosage ho_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)hn_);
+					Timing hp_ = ho_?.Timing;
+					Timing.RepeatComponent hq_ = hp_?.Repeat;
+					DataType hr_ = hq_?.Bounds;
+					object hs_ = FHIRHelpers_4_3_000.Instance.ToValue(context, hr_);
+					CqlDateTime ht_ = context.Operators.Start(hs_ as CqlInterval<CqlDateTime>);
+					CqlDate hu_ = context.Operators.DateFrom(ht_);
+					FhirDateTime hv_ = R?.AuthoredOnElement;
+					CqlDateTime hw_ = context.Operators.Convert<CqlDateTime>(hv_);
+					CqlDate hx_ = context.Operators.DateFrom(hw_);
+					MedicationRequest.DispenseRequestComponent hy_ = R?.DispenseRequest;
+					Period hz_ = hy_?.ValidityPeriod;
+					CqlInterval<CqlDateTime> ia_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, hz_);
+					CqlDateTime ib_ = context.Operators.Start(ia_);
+					CqlDate ic_ = context.Operators.DateFrom(ib_);
+					Dosage ie_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)hn_);
+					Timing if_ = ie_?.Timing;
+					Timing.RepeatComponent ig_ = if_?.Repeat;
+					DataType ih_ = ig_?.Bounds;
+					object ii_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ih_);
+					CqlDateTime ij_ = context.Operators.End(ii_ as CqlInterval<CqlDateTime>);
+					CqlDate ik_ = context.Operators.DateFrom(ij_);
+					CqlInterval<CqlDate> il_ = context.Operators.Interval((hu_ ?? hx_) ?? ic_, ik_, true, true);
 
 					return il_;
 				}
@@ -1580,16 +1580,16 @@ CqlInterval<CqlDate> il_ = context.Operators.Interval((hu_ ?? hx_) ?? ic_, ik_, 
 		return d_;
 	}
 
-	public CqlInterval<CqlDate> MedicationDispensePeriod(CqlContext context, MedicationDispense Dispense)
+	public CqlInterval<CqlDate> MedicationDispensePeriod	(CqlContext context, MedicationDispense Dispense)
 	{
 		MedicationDispense[] a_ = [
 			Dispense,
 		];
-		CqlInterval<CqlDate> b_(MedicationDispense D)
+		CqlInterval<CqlDate> b_		(MedicationDispense D)
 		{
-			CqlInterval<CqlDate> e_()
+			CqlInterval<CqlDate> e_			()
 			{
-				bool f_()
+				bool f_				()
 				{
 					FhirDateTime g_ = D?.WhenHandedOverElement;
 					CqlDateTime h_ = context.Operators.Convert<CqlDateTime>(g_);
@@ -1657,73 +1657,73 @@ CqlInterval<CqlDate> il_ = context.Operators.Interval((hu_ ?? hx_) ?? ic_, ik_, 
 				};
 				if (f_())
 				{
-FhirDateTime bv_ = D?.WhenHandedOverElement;
-CqlDateTime bw_ = context.Operators.Convert<CqlDateTime>(bv_);
-CqlDate bx_ = context.Operators.DateFrom(bw_);
-FhirDateTime by_ = D?.WhenPreparedElement;
-CqlDateTime bz_ = context.Operators.Convert<CqlDateTime>(by_);
-CqlDate ca_ = context.Operators.DateFrom(bz_);
-CqlDateTime cc_ = context.Operators.Convert<CqlDateTime>(bv_);
-CqlDate cd_ = context.Operators.DateFrom(cc_);
-CqlDateTime cf_ = context.Operators.Convert<CqlDateTime>(by_);
-CqlDate cg_ = context.Operators.DateFrom(cf_);
-Quantity ch_ = D?.DaysSupply;
-CqlQuantity ci_ = FHIRHelpers_4_3_000.Instance.ToQuantity(context, ch_);
-CqlQuantity cj_ = context.Operators.ConvertQuantity(ci_, "d");
-decimal? ck_ = cj_?.value;
-Quantity cl_ = D?.Quantity;
-CqlQuantity cm_ = FHIRHelpers_4_3_000.Instance.ToQuantity(context, cl_);
-decimal? cn_ = cm_?.value;
-List<Dosage> co_ = D?.DosageInstruction;
-Dosage cp_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
-List<Dosage.DoseAndRateComponent> cq_ = cp_?.DoseAndRate;
-Dosage.DoseAndRateComponent cr_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)cq_);
-DataType cs_ = cr_?.Dose;
-object ct_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cs_);
-CqlQuantity cu_ = context.Operators.End(ct_ as CqlInterval<CqlQuantity>);
-Dosage cw_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
-List<Dosage.DoseAndRateComponent> cx_ = cw_?.DoseAndRate;
-Dosage.DoseAndRateComponent cy_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)cx_);
-DataType cz_ = cy_?.Dose;
-object da_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cz_);
-decimal? db_ = (cu_ ?? da_ as CqlQuantity)?.value;
-Dosage dd_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
-Timing de_ = dd_?.Timing;
-Timing.RepeatComponent df_ = de_?.Repeat;
-PositiveInt dg_ = df_?.FrequencyMaxElement;
-int? dh_ = dg_?.Value;
-Dosage dj_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
-Timing dk_ = dj_?.Timing;
-Timing.RepeatComponent dl_ = dk_?.Repeat;
-PositiveInt dm_ = dl_?.FrequencyElement;
-int? dn_ = dm_?.Value;
-Dosage dp_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
-Timing dq_ = dp_?.Timing;
-Timing.RepeatComponent dr_ = dq_?.Repeat;
-FhirDecimal ds_ = dr_?.PeriodElement;
-decimal? dt_ = ds_?.Value;
-Dosage dv_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
-Timing dw_ = dv_?.Timing;
-Timing.RepeatComponent dx_ = dw_?.Repeat;
-Code<Timing.UnitsOfTime> dy_ = dx_?.PeriodUnitElement;
-Timing.UnitsOfTime? dz_ = dy_?.Value;
-string ea_ = context.Operators.Convert<string>(dz_);
-CqlQuantity eb_ = this.Quantity(context, dt_, ea_);
-decimal? ec_ = this.ToDaily(context, dh_ ?? dn_, eb_);
-Dosage ee_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
-Timing ef_ = ee_?.Timing;
-Timing.RepeatComponent eg_ = ef_?.Repeat;
-List<Time> eh_ = eg_?.TimeOfDayElement;
-IEnumerable<CqlTime> ei_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(eh_, "value");
-int? ej_ = context.Operators.Count<CqlTime>(ei_);
-decimal? ek_ = context.Operators.ConvertIntegerToDecimal(ej_);
-decimal? el_ = context.Operators.Multiply(db_, (ec_ ?? ek_) ?? 1.0m);
-decimal? em_ = context.Operators.Divide(cn_, el_);
-decimal? en_ = context.Operators.ConvertIntegerToDecimal(1);
-decimal? eo_ = context.Operators.Subtract(ck_ ?? em_, en_);
-CqlQuantity ep_ = this.Quantity(context, eo_, "day");
-CqlDate eq_ = context.Operators.Add(cd_ ?? cg_, ep_);
-CqlInterval<CqlDate> er_ = context.Operators.Interval(bx_ ?? ca_, eq_, true, true);
+					FhirDateTime bv_ = D?.WhenHandedOverElement;
+					CqlDateTime bw_ = context.Operators.Convert<CqlDateTime>(bv_);
+					CqlDate bx_ = context.Operators.DateFrom(bw_);
+					FhirDateTime by_ = D?.WhenPreparedElement;
+					CqlDateTime bz_ = context.Operators.Convert<CqlDateTime>(by_);
+					CqlDate ca_ = context.Operators.DateFrom(bz_);
+					CqlDateTime cc_ = context.Operators.Convert<CqlDateTime>(bv_);
+					CqlDate cd_ = context.Operators.DateFrom(cc_);
+					CqlDateTime cf_ = context.Operators.Convert<CqlDateTime>(by_);
+					CqlDate cg_ = context.Operators.DateFrom(cf_);
+					Quantity ch_ = D?.DaysSupply;
+					CqlQuantity ci_ = FHIRHelpers_4_3_000.Instance.ToQuantity(context, ch_);
+					CqlQuantity cj_ = context.Operators.ConvertQuantity(ci_, "d");
+					decimal? ck_ = cj_?.value;
+					Quantity cl_ = D?.Quantity;
+					CqlQuantity cm_ = FHIRHelpers_4_3_000.Instance.ToQuantity(context, cl_);
+					decimal? cn_ = cm_?.value;
+					List<Dosage> co_ = D?.DosageInstruction;
+					Dosage cp_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
+					List<Dosage.DoseAndRateComponent> cq_ = cp_?.DoseAndRate;
+					Dosage.DoseAndRateComponent cr_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)cq_);
+					DataType cs_ = cr_?.Dose;
+					object ct_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cs_);
+					CqlQuantity cu_ = context.Operators.End(ct_ as CqlInterval<CqlQuantity>);
+					Dosage cw_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
+					List<Dosage.DoseAndRateComponent> cx_ = cw_?.DoseAndRate;
+					Dosage.DoseAndRateComponent cy_ = context.Operators.SingletonFrom<Dosage.DoseAndRateComponent>((IEnumerable<Dosage.DoseAndRateComponent>)cx_);
+					DataType cz_ = cy_?.Dose;
+					object da_ = FHIRHelpers_4_3_000.Instance.ToValue(context, cz_);
+					decimal? db_ = (cu_ ?? da_ as CqlQuantity)?.value;
+					Dosage dd_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
+					Timing de_ = dd_?.Timing;
+					Timing.RepeatComponent df_ = de_?.Repeat;
+					PositiveInt dg_ = df_?.FrequencyMaxElement;
+					int? dh_ = dg_?.Value;
+					Dosage dj_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
+					Timing dk_ = dj_?.Timing;
+					Timing.RepeatComponent dl_ = dk_?.Repeat;
+					PositiveInt dm_ = dl_?.FrequencyElement;
+					int? dn_ = dm_?.Value;
+					Dosage dp_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
+					Timing dq_ = dp_?.Timing;
+					Timing.RepeatComponent dr_ = dq_?.Repeat;
+					FhirDecimal ds_ = dr_?.PeriodElement;
+					decimal? dt_ = ds_?.Value;
+					Dosage dv_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
+					Timing dw_ = dv_?.Timing;
+					Timing.RepeatComponent dx_ = dw_?.Repeat;
+					Code<Timing.UnitsOfTime> dy_ = dx_?.PeriodUnitElement;
+					Timing.UnitsOfTime? dz_ = dy_?.Value;
+					string ea_ = context.Operators.Convert<string>(dz_);
+					CqlQuantity eb_ = this.Quantity(context, dt_, ea_);
+					decimal? ec_ = this.ToDaily(context, dh_ ?? dn_, eb_);
+					Dosage ee_ = context.Operators.SingletonFrom<Dosage>((IEnumerable<Dosage>)co_);
+					Timing ef_ = ee_?.Timing;
+					Timing.RepeatComponent eg_ = ef_?.Repeat;
+					List<Time> eh_ = eg_?.TimeOfDayElement;
+					IEnumerable<CqlTime> ei_ = context.Operators.LateBoundProperty<IEnumerable<CqlTime>>(eh_, "value");
+					int? ej_ = context.Operators.Count<CqlTime>(ei_);
+					decimal? ek_ = context.Operators.ConvertIntegerToDecimal(ej_);
+					decimal? el_ = context.Operators.Multiply(db_, (ec_ ?? ek_) ?? 1.0m);
+					decimal? em_ = context.Operators.Divide(cn_, el_);
+					decimal? en_ = context.Operators.ConvertIntegerToDecimal(1);
+					decimal? eo_ = context.Operators.Subtract(ck_ ?? em_, en_);
+					CqlQuantity ep_ = this.Quantity(context, eo_, "day");
+					CqlDate eq_ = context.Operators.Add(cd_ ?? cg_, ep_);
+					CqlInterval<CqlDate> er_ = context.Operators.Interval(bx_ ?? ca_, eq_, true, true);
 
 					return er_;
 				}
@@ -1741,23 +1741,23 @@ CqlInterval<CqlDate> er_ = context.Operators.Interval(bx_ ?? ca_, eq_, true, tru
 		return d_;
 	}
 
-	public CqlQuantity TherapeuticDuration(CqlContext context, CqlConcept medication)
+	public CqlQuantity TherapeuticDuration	(CqlContext context, CqlConcept medication)
 	{
 		CqlQuantity a_ = context.Operators.Quantity(14m, "days");
 
 		return a_;
 	}
 
-	public CqlInterval<CqlDate> MedicationAdministrationPeriod(CqlContext context, MedicationAdministration Administration)
+	public CqlInterval<CqlDate> MedicationAdministrationPeriod	(CqlContext context, MedicationAdministration Administration)
 	{
 		MedicationAdministration[] a_ = [
 			Administration,
 		];
-		CqlInterval<CqlDate> b_(MedicationAdministration M)
+		CqlInterval<CqlDate> b_		(MedicationAdministration M)
 		{
-			CqlInterval<CqlDate> e_()
+			CqlInterval<CqlDate> e_			()
 			{
-				bool f_()
+				bool f_				()
 				{
 					DataType g_ = Administration?.Effective;
 					object h_ = FHIRHelpers_4_3_000.Instance.ToValue(context, g_);
@@ -1774,20 +1774,20 @@ CqlInterval<CqlDate> er_ = context.Operators.Interval(bx_ ?? ca_, eq_, true, tru
 				};
 				if (f_())
 				{
-DataType q_ = Administration?.Effective;
-object r_ = FHIRHelpers_4_3_000.Instance.ToValue(context, q_);
-CqlDateTime s_ = context.Operators.Start(r_ as CqlInterval<CqlDateTime>);
-CqlDate t_ = context.Operators.DateFrom(s_);
-object v_ = FHIRHelpers_4_3_000.Instance.ToValue(context, q_);
-CqlDateTime w_ = context.Operators.Start(v_ as CqlInterval<CqlDateTime>);
-CqlDate x_ = context.Operators.DateFrom(w_);
-DataType y_ = Administration?.Medication;
-object z_ = FHIRHelpers_4_3_000.Instance.ToValue(context, y_);
-CqlQuantity aa_ = this.TherapeuticDuration(context, z_ as CqlConcept);
-CqlDate ab_ = context.Operators.Add(x_, aa_);
-CqlQuantity ac_ = context.Operators.ConvertIntegerToQuantity(1);
-CqlDate ad_ = context.Operators.Subtract(ab_, ac_);
-CqlInterval<CqlDate> ae_ = context.Operators.Interval(t_, ad_, true, true);
+					DataType q_ = Administration?.Effective;
+					object r_ = FHIRHelpers_4_3_000.Instance.ToValue(context, q_);
+					CqlDateTime s_ = context.Operators.Start(r_ as CqlInterval<CqlDateTime>);
+					CqlDate t_ = context.Operators.DateFrom(s_);
+					object v_ = FHIRHelpers_4_3_000.Instance.ToValue(context, q_);
+					CqlDateTime w_ = context.Operators.Start(v_ as CqlInterval<CqlDateTime>);
+					CqlDate x_ = context.Operators.DateFrom(w_);
+					DataType y_ = Administration?.Medication;
+					object z_ = FHIRHelpers_4_3_000.Instance.ToValue(context, y_);
+					CqlQuantity aa_ = this.TherapeuticDuration(context, z_ as CqlConcept);
+					CqlDate ab_ = context.Operators.Add(x_, aa_);
+					CqlQuantity ac_ = context.Operators.ConvertIntegerToQuantity(1);
+					CqlDate ad_ = context.Operators.Subtract(ab_, ac_);
+					CqlInterval<CqlDate> ae_ = context.Operators.Interval(t_, ad_, true, true);
 
 					return ae_;
 				}
@@ -1805,24 +1805,24 @@ CqlInterval<CqlDate> ae_ = context.Operators.Interval(t_, ad_, true, true);
 		return d_;
 	}
 
-	public int? CumulativeDuration(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
+	public int? CumulativeDuration	(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
 	{
-		int? a_()
+		int? a_		()
 		{
 			if ((context.Operators.Not((bool?)(Intervals is null))) ?? false)
 			{
-IEnumerable<CqlInterval<CqlDate>> b_ = context.Operators.Collapse(Intervals, "day");
-int? c_(CqlInterval<CqlDate> X)
+				IEnumerable<CqlInterval<CqlDate>> b_ = context.Operators.Collapse(Intervals, "day");
+				int? c_				(CqlInterval<CqlDate> X)
 				{
-CqlDate f_ = context.Operators.Start(X);
-CqlDate g_ = context.Operators.End(X);
-int? h_ = context.Operators.DifferenceBetween(f_, g_, "day");
-int? i_ = context.Operators.Add(h_, 1);
+					CqlDate f_ = context.Operators.Start(X);
+					CqlDate g_ = context.Operators.End(X);
+					int? h_ = context.Operators.DifferenceBetween(f_, g_, "day");
+					int? i_ = context.Operators.Add(h_, 1);
 
 					return i_;
 				};
-IEnumerable<int?> d_ = context.Operators.Select<CqlInterval<CqlDate>, int?>(b_, c_);
-int? e_ = context.Operators.Sum(d_);
+				IEnumerable<int?> d_ = context.Operators.Select<CqlInterval<CqlDate>, int?>(b_, c_);
+				int? e_ = context.Operators.Sum(d_);
 
 				return e_;
 			}
@@ -1835,14 +1835,14 @@ int? e_ = context.Operators.Sum(d_);
 		return a_();
 	}
 
-	public IEnumerable<CqlInterval<CqlDate>> RolloutIntervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> intervals)
+	public IEnumerable<CqlInterval<CqlDate>> RolloutIntervals	(CqlContext context, IEnumerable<CqlInterval<CqlDate>> intervals)
 	{
-		IEnumerable<CqlInterval<CqlDate>> a_(IEnumerable<CqlInterval<CqlDate>> R, CqlInterval<CqlDate> I)
+		IEnumerable<CqlInterval<CqlDate>> a_		(IEnumerable<CqlInterval<CqlDate>> R, CqlInterval<CqlDate> I)
 		{
 			CqlInterval<CqlDate>[] c_ = [
 				I,
 			];
-			CqlInterval<CqlDate> d_(CqlInterval<CqlDate> X)
+			CqlInterval<CqlDate> d_			(CqlInterval<CqlDate> X)
 			{
 				CqlInterval<CqlDate> i_ = context.Operators.Last<CqlInterval<CqlDate>>(R);
 				CqlDate j_ = context.Operators.End(i_);
@@ -1884,19 +1884,19 @@ int? e_ = context.Operators.Sum(d_);
 		return b_;
 	}
 
-	public CqlInterval<CqlDate> MedicationPeriod(CqlContext context, object medication)
+	public CqlInterval<CqlDate> MedicationPeriod	(CqlContext context, object medication)
 	{
-		CqlInterval<CqlDate> a_()
+		CqlInterval<CqlDate> a_		()
 		{
 			if (medication is MedicationRequest)
 			{
-CqlInterval<CqlDate> b_ = this.MedicationRequestPeriod(context, medication as MedicationRequest);
+				CqlInterval<CqlDate> b_ = this.MedicationRequestPeriod(context, medication as MedicationRequest);
 
 				return b_;
 			}
 			else if (medication is MedicationDispense)
 			{
-CqlInterval<CqlDate> c_ = this.MedicationDispensePeriod(context, medication as MedicationDispense);
+				CqlInterval<CqlDate> c_ = this.MedicationDispensePeriod(context, medication as MedicationDispense);
 
 				return c_;
 			}
@@ -1909,30 +1909,30 @@ CqlInterval<CqlDate> c_ = this.MedicationDispensePeriod(context, medication as M
 		return a_();
 	}
 
-	public int? CumulativeMedicationDuration(CqlContext context, IEnumerable<object> Medications)
+	public int? CumulativeMedicationDuration	(CqlContext context, IEnumerable<object> Medications)
 	{
-		bool? a_(object M)
+		bool? a_		(object M)
 		{
 			bool l_ = M is MedicationRequest;
 
 			return l_ as bool?;
 		};
 		IEnumerable<object> b_ = context.Operators.Where<object>(Medications, a_);
-		CqlInterval<CqlDate> c_(object M)
+		CqlInterval<CqlDate> c_		(object M)
 		{
 			CqlInterval<CqlDate> m_ = this.MedicationRequestPeriod(context, M as MedicationRequest);
 
 			return m_;
 		};
 		IEnumerable<CqlInterval<CqlDate>> d_ = context.Operators.Select<object, CqlInterval<CqlDate>>(b_, c_);
-		bool? e_(object M)
+		bool? e_		(object M)
 		{
 			bool n_ = M is MedicationDispense;
 
 			return n_ as bool?;
 		};
 		IEnumerable<object> f_ = context.Operators.Where<object>(Medications, e_);
-		CqlInterval<CqlDate> g_(object M)
+		CqlInterval<CqlDate> g_		(object M)
 		{
 			CqlInterval<CqlDate> o_ = this.MedicationDispensePeriod(context, M as MedicationDispense);
 

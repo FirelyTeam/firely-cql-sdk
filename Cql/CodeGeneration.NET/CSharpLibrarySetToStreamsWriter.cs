@@ -184,8 +184,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     indentLevel += 1;
                 }
 
-                var tupleMetadataBuilder = new TupleMetadataBuilder();
-                WriteClass(definitions, librarySet, callbacks.LibraryNameToClassName, libraryName, libraryVersionedIdentifier, writer, indentLevel, tupleMetadataBuilder);
+                WriteClass(definitions, librarySet, callbacks.LibraryNameToClassName, libraryName, libraryVersionedIdentifier, writer, indentLevel);
 
                 if (!string.IsNullOrWhiteSpace(Namespace))
                 {
@@ -204,8 +203,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             string libraryName,
             VersionedIdentifier libraryVersionedIdentifier,
             StreamWriter writer,
-            int indentLevel,
-            TupleMetadataBuilder tupleMetadataBuilder)
+            int indentLevel)
         {
             writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode({QuoteString(_tool)}, {QuoteString(_version)})]");
 
@@ -233,7 +231,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 writer.WriteLine(indentLevel, $"public static {className} Instance {{ get; }} = new();");
                 writer.WriteLine();
                 WriteLibraryMembers(writer, librarySet, libraryName, libraryVersionedIdentifier, libraryNameToClassName!, indentLevel);
-                WriteMethods(definitions, libraryName, writer, indentLevel, tupleMetadataBuilder);
+                WriteMethods(definitions, libraryName, writer, indentLevel);
             }
             indentLevel -= 1;
             writer.WriteLine(indentLevel, "}");
@@ -262,19 +260,14 @@ namespace Hl7.Cql.CodeGeneration.NET
             writer.WriteLine(indent, "#endregion Library Members");
         }
 
-        private void WriteMethods(
-            DefinitionDictionary<LambdaExpression> definitions,
-            string libraryName,
-            StreamWriter writer,
-            int indentLevel,
-            TupleMetadataBuilder tupleMetadataBuilder)
+        private void WriteMethods(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
         {
             foreach (var kvp in definitions.DefinitionsForLibrary(libraryName))
             {
                 foreach (var overload in kvp.Value)
                 {
                     definitions.TryGetTags(libraryName, kvp.Key, overload.Signature, out var tags);
-                    WriteMethod(libraryName, writer, indentLevel, kvp.Key, overload.T, tags, tupleMetadataBuilder);
+                    WriteMethod(libraryName, writer, indentLevel, kvp.Key, overload.T, tags);
                     writer.WriteLine();
                 }
             }
@@ -291,11 +284,13 @@ namespace Hl7.Cql.CodeGeneration.NET
             else return "__" + methodName;
         }
 
-        private void WriteMethod(string libraryName, TextWriter writer, int indentLevel,
+        private void WriteMethod(
+            string libraryName,
+            TextWriter writer,
+            int indentLevel,
             string cqlName,
             LambdaExpression overload,
-            ILookup<string, string>? tags,
-            TupleMetadataBuilder tupleMetadataBuilder)
+            ILookup<string, string>? tags)
         {
             var methodName = VariableNameGenerator.NormalizeIdentifier(cqlName);
             var isDef = IsDefinition(overload);
@@ -336,8 +331,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 }
             }
 
-            writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(
-                new ConvertExpressionArgs<LambdaExpression>(indentLevel, overload, tupleMetadataBuilder), methodName!, "public"));
+            writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(overload, expressionConverter.NewContext(indentLevel), methodName!, "public"));
         }
 
         private ExpressionToCSharpConverter NewExpressionToCSharpConverter(string libraryName) =>

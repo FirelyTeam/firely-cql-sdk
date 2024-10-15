@@ -27,48 +27,48 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 
     [CqlDeclaration("Colonoscopy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1020")]
-	public CqlValueSet Colonoscopy(CqlContext context) => 
+	public CqlValueSet Colonoscopy	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1020", default);
 
 
     [CqlDeclaration("CT Colonography")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1038")]
-	public CqlValueSet CT_Colonography(CqlContext context) => 
+	public CqlValueSet CT_Colonography	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1038", default);
 
 
     [CqlDeclaration("Fecal Occult Blood Test (FOBT)")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1011")]
-	public CqlValueSet Fecal_Occult_Blood_Test__FOBT_(CqlContext context) => 
+	public CqlValueSet Fecal_Occult_Blood_Test__FOBT_	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1011", default);
 
 
     [CqlDeclaration("sDNA FIT Test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1039")]
-	public CqlValueSet sDNA_FIT_Test(CqlContext context) => 
+	public CqlValueSet sDNA_FIT_Test	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1039", default);
 
 
     [CqlDeclaration("Flexible Sigmoidoscopy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1010")]
-	public CqlValueSet Flexible_Sigmoidoscopy(CqlContext context) => 
+	public CqlValueSet Flexible_Sigmoidoscopy	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1010", default);
 
 
     [CqlDeclaration("Malignant Neoplasm of Colon")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1001")]
-	public CqlValueSet Malignant_Neoplasm_of_Colon(CqlContext context) => 
+	public CqlValueSet Malignant_Neoplasm_of_Colon	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1001", default);
 
 
     [CqlDeclaration("Total Colectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1019")]
-	public CqlValueSet Total_Colectomy(CqlContext context) => 
+	public CqlValueSet Total_Colectomy	(CqlContext context) => 
 		new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1019", default);
 
 
     [CqlDeclaration("Measurement Period")]
-	public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
+	public CqlInterval<CqlDateTime> Measurement_Period	(CqlContext context)
 	{
 		CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
 		CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
@@ -80,7 +80,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 
 
     [CqlDeclaration("Patient")]
-	public Patient Patient(CqlContext context)
+	public Patient Patient	(CqlContext context)
 	{
 		IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient"));
 		Patient b_ = context.Operators.SingletonFrom<Patient>(a_);
@@ -90,7 +90,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 
 
     [CqlDeclaration("SDE Ethnicity")]
-	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity	(CqlContext context)
 	{
 		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
 
@@ -99,7 +99,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 
 
     [CqlDeclaration("SDE Payer")]
-	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
+	public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer	(CqlContext context)
 	{
 		IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
 
@@ -108,7 +108,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 
 
     [CqlDeclaration("SDE Race")]
-	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
+	public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race	(CqlContext context)
 	{
 		(CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
 
@@ -117,7 +117,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 
 
     [CqlDeclaration("SDE Sex")]
-	public CqlCode SDE_Sex(CqlContext context)
+	public CqlCode SDE_Sex	(CqlContext context)
 	{
 		CqlCode a_ = SupplementalDataElements_3_4_000.Instance.SDE_Sex(context);
 
@@ -126,7 +126,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 
 
     [CqlDeclaration("Initial Population")]
-	public bool? Initial_Population(CqlContext context)
+	public bool? Initial_Population	(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -147,7 +147,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 
 
     [CqlDeclaration("Denominator")]
-	public bool? Denominator(CqlContext context)
+	public bool? Denominator	(CqlContext context)
 	{
 		bool? a_ = this.Initial_Population(context);
 
@@ -156,12 +156,12 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 
 
     [CqlDeclaration("Malignant Neoplasm")]
-	public IEnumerable<Condition> Malignant_Neoplasm(CqlContext context)
+	public IEnumerable<Condition> Malignant_Neoplasm	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Malignant_Neoplasm_of_Colon(context);
 		IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
 		IEnumerable<Condition> c_ = Status_1_6_000.Instance.Active_Condition(context, b_);
-		bool? d_(Condition ColorectalCancer)
+		bool? d_		(Condition ColorectalCancer)
 		{
 			CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.Instance.ToPrevalenceInterval(context, ColorectalCancer);
 			CqlDateTime g_ = context.Operators.Start(f_);
@@ -178,12 +178,12 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 
 
     [CqlDeclaration("Total Colectomy Performed")]
-	public IEnumerable<Procedure> Total_Colectomy_Performed(CqlContext context)
+	public IEnumerable<Procedure> Total_Colectomy_Performed	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Total_Colectomy(context);
 		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_ = Status_1_6_000.Instance.Completed_Procedure(context, b_);
-		bool? d_(Procedure Colectomy)
+		bool? d_		(Procedure Colectomy)
 		{
 			DataType f_ = Colectomy?.Performed;
 			object g_ = FHIRHelpers_4_3_000.Instance.ToValue(context, f_);
@@ -202,7 +202,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 
 
     [CqlDeclaration("Denominator Exclusion")]
-	public bool? Denominator_Exclusion(CqlContext context)
+	public bool? Denominator_Exclusion	(CqlContext context)
 	{
 		bool? a_ = Hospice_6_9_000.Instance.Has_Hospice_Services(context);
 		IEnumerable<Condition> b_ = this.Malignant_Neoplasm(context);
@@ -223,19 +223,19 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 
 
     [CqlDeclaration("Fecal Occult Blood Test Performed")]
-	public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed(CqlContext context)
+	public IEnumerable<Observation> Fecal_Occult_Blood_Test_Performed	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Fecal_Occult_Blood_Test__FOBT_(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_ = Status_1_6_000.Instance.Final_Lab_Observation(context, b_);
-		bool? d_(Observation FecalOccultResult)
+		bool? d_		(Observation FecalOccultResult)
 		{
 			DataType f_ = FecalOccultResult?.Value;
 			object g_ = FHIRHelpers_4_3_000.Instance.ToValue(context, f_);
 			bool? h_ = context.Operators.Not((bool?)(g_ is null));
-			object i_()
+			object i_			()
 			{
-				bool n_()
+				bool n_				()
 				{
 					DataType q_ = FecalOccultResult?.Effective;
 					object r_ = FHIRHelpers_4_3_000.Instance.ToValue(context, q_);
@@ -243,7 +243,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 
 					return s_;
 				};
-				bool o_()
+				bool o_				()
 				{
 					DataType t_ = FecalOccultResult?.Effective;
 					object u_ = FHIRHelpers_4_3_000.Instance.ToValue(context, t_);
@@ -251,7 +251,7 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 
 					return v_;
 				};
-				bool p_()
+				bool p_				()
 				{
 					DataType w_ = FecalOccultResult?.Effective;
 					object x_ = FHIRHelpers_4_3_000.Instance.ToValue(context, w_);
@@ -261,22 +261,22 @@ public partial class ColonCancerScreeningFHIR_0_1_000 : ILibrary, ISingleton<Col
 				};
 				if (n_())
 				{
-DataType z_ = FecalOccultResult?.Effective;
-object aa_ = FHIRHelpers_4_3_000.Instance.ToValue(context, z_);
+					DataType z_ = FecalOccultResult?.Effective;
+					object aa_ = FHIRHelpers_4_3_000.Instance.ToValue(context, z_);
 
 					return (aa_ as CqlDateTime) as object;
 				}
 				else if (o_())
 				{
-DataType ab_ = FecalOccultResult?.Effective;
-object ac_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ab_);
+					DataType ab_ = FecalOccultResult?.Effective;
+					object ac_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ab_);
 
 					return (ac_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (p_())
 				{
-DataType ad_ = FecalOccultResult?.Effective;
-object ae_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ad_);
+					DataType ad_ = FecalOccultResult?.Effective;
+					object ae_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ad_);
 
 					return (ae_ as CqlDateTime) as object;
 				}
@@ -299,19 +299,19 @@ object ae_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ad_);
 
 
     [CqlDeclaration("Stool DNA with FIT Test Performed")]
-	public IEnumerable<Observation> Stool_DNA_with_FIT_Test_Performed(CqlContext context)
+	public IEnumerable<Observation> Stool_DNA_with_FIT_Test_Performed	(CqlContext context)
 	{
 		CqlValueSet a_ = this.sDNA_FIT_Test(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_ = Status_1_6_000.Instance.Final_Lab_Observation(context, b_);
-		bool? d_(Observation sDNATest)
+		bool? d_		(Observation sDNATest)
 		{
 			DataType f_ = sDNATest?.Value;
 			object g_ = FHIRHelpers_4_3_000.Instance.ToValue(context, f_);
 			bool? h_ = context.Operators.Not((bool?)(g_ is null));
-			object i_()
+			object i_			()
 			{
-				bool t_()
+				bool t_				()
 				{
 					DataType w_ = sDNATest?.Effective;
 					object x_ = FHIRHelpers_4_3_000.Instance.ToValue(context, w_);
@@ -319,7 +319,7 @@ object ae_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ad_);
 
 					return y_;
 				};
-				bool u_()
+				bool u_				()
 				{
 					DataType z_ = sDNATest?.Effective;
 					object aa_ = FHIRHelpers_4_3_000.Instance.ToValue(context, z_);
@@ -327,7 +327,7 @@ object ae_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ad_);
 
 					return ab_;
 				};
-				bool v_()
+				bool v_				()
 				{
 					DataType ac_ = sDNATest?.Effective;
 					object ad_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ac_);
@@ -337,22 +337,22 @@ object ae_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ad_);
 				};
 				if (t_())
 				{
-DataType af_ = sDNATest?.Effective;
-object ag_ = FHIRHelpers_4_3_000.Instance.ToValue(context, af_);
+					DataType af_ = sDNATest?.Effective;
+					object ag_ = FHIRHelpers_4_3_000.Instance.ToValue(context, af_);
 
 					return (ag_ as CqlDateTime) as object;
 				}
 				else if (u_())
 				{
-DataType ah_ = sDNATest?.Effective;
-object ai_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ah_);
+					DataType ah_ = sDNATest?.Effective;
+					object ai_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ah_);
 
 					return (ai_ as CqlInterval<CqlDateTime>) as object;
 				}
 				else if (v_())
 				{
-DataType aj_ = sDNATest?.Effective;
-object ak_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aj_);
+					DataType aj_ = sDNATest?.Effective;
+					object ak_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aj_);
 
 					return (ak_ as CqlDateTime) as object;
 				}
@@ -380,12 +380,12 @@ object ak_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aj_);
 
 
     [CqlDeclaration("Flexible Sigmoidoscopy Performed")]
-	public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed(CqlContext context)
+	public IEnumerable<Procedure> Flexible_Sigmoidoscopy_Performed	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Flexible_Sigmoidoscopy(context);
 		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_ = Status_1_6_000.Instance.Completed_Procedure(context, b_);
-		bool? d_(Procedure FlexibleSigmoidoscopy)
+		bool? d_		(Procedure FlexibleSigmoidoscopy)
 		{
 			DataType f_ = FlexibleSigmoidoscopy?.Performed;
 			object g_ = FHIRHelpers_4_3_000.Instance.ToValue(context, f_);
@@ -408,12 +408,12 @@ object ak_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aj_);
 
 
     [CqlDeclaration("CT Colonography Performed")]
-	public IEnumerable<Observation> CT_Colonography_Performed(CqlContext context)
+	public IEnumerable<Observation> CT_Colonography_Performed	(CqlContext context)
 	{
 		CqlValueSet a_ = this.CT_Colonography(context);
 		IEnumerable<Observation> b_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation"));
 		IEnumerable<Observation> c_ = Status_1_6_000.Instance.Final_Observation(context, b_);
-		bool? d_(Observation Colonography)
+		bool? d_		(Observation Colonography)
 		{
 			DataType f_ = Colonography?.Effective;
 			object g_ = FHIRHelpers_4_3_000.Instance.ToValue(context, f_);
@@ -436,12 +436,12 @@ object ak_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aj_);
 
 
     [CqlDeclaration("Colonoscopy Performed")]
-	public IEnumerable<Procedure> Colonoscopy_Performed(CqlContext context)
+	public IEnumerable<Procedure> Colonoscopy_Performed	(CqlContext context)
 	{
 		CqlValueSet a_ = this.Colonoscopy(context);
 		IEnumerable<Procedure> b_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure"));
 		IEnumerable<Procedure> c_ = Status_1_6_000.Instance.Completed_Procedure(context, b_);
-		bool? d_(Procedure Colonoscopy)
+		bool? d_		(Procedure Colonoscopy)
 		{
 			DataType f_ = Colonoscopy?.Performed;
 			object g_ = FHIRHelpers_4_3_000.Instance.ToValue(context, f_);
@@ -464,7 +464,7 @@ object ak_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aj_);
 
 
     [CqlDeclaration("Numerator")]
-	public bool? Numerator(CqlContext context)
+	public bool? Numerator	(CqlContext context)
 	{
 		IEnumerable<Observation> a_ = this.Fecal_Occult_Blood_Test_Performed(context);
 		bool? b_ = context.Operators.Exists<Observation>(a_);
@@ -486,7 +486,7 @@ object ak_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aj_);
 
 
     [CqlDeclaration("Stratification 1")]
-	public bool? Stratification_1(CqlContext context)
+	public bool? Stratification_1	(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;
@@ -504,7 +504,7 @@ object ak_ = FHIRHelpers_4_3_000.Instance.ToValue(context, aj_);
 
 
     [CqlDeclaration("Stratification 2")]
-	public bool? Stratification_2(CqlContext context)
+	public bool? Stratification_2	(CqlContext context)
 	{
 		Patient a_ = this.Patient(context);
 		Date b_ = a_?.BirthDateElement;

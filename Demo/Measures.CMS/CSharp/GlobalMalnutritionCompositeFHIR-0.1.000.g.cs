@@ -841,8 +841,8 @@ public partial class GlobalMalnutritionCompositeFHIR_0_1_000 : ILibrary, ISingle
 			else if (c_())
 			{
 				return ((context.Operators.Contains<Encounter>(this.Encounter_with_Nutrition_Assessment_and_Identified_Status(context), NutritionAssessment)) ?? false
-	? 1
-	: 0);
+					? 1
+					: 0);
 			}
 			else
 			{
@@ -877,30 +877,30 @@ public partial class GlobalMalnutritionCompositeFHIR_0_1_000 : ILibrary, ISingle
 			}
 			else if (c_())
 			{
-int? h_()
+				int? h_				()
 				{
-bool i_()
+					bool i_					()
 					{
-IEnumerable<Encounter> j_ = this.Encounter_with_Malnutrition_Diagnosis(context);
-bool? k_ = context.Operators.Contains<Encounter>(j_, MalnutritionDiagonsis);
+						IEnumerable<Encounter> j_ = this.Encounter_with_Malnutrition_Diagnosis(context);
+						bool? k_ = context.Operators.Contains<Encounter>(j_, MalnutritionDiagonsis);
 
 						return k_ ?? false;
 					};
 					if (i_())
 					{
-int? l_()
+						int? l_						()
 						{
-bool m_()
+							bool m_							()
 							{
-IEnumerable<Encounter> o_ = this.Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished(context);
-bool? p_ = context.Operators.Contains<Encounter>(o_, MalnutritionDiagonsis);
+								IEnumerable<Encounter> o_ = this.Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished(context);
+								bool? p_ = context.Operators.Contains<Encounter>(o_, MalnutritionDiagonsis);
 
 								return p_ ?? false;
 							};
-bool n_()
+							bool n_							()
 							{
-IEnumerable<Encounter> q_ = this.Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished(context);
-bool? r_ = context.Operators.Contains<Encounter>(q_, MalnutritionDiagonsis);
+								IEnumerable<Encounter> q_ = this.Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished(context);
+								bool? r_ = context.Operators.Contains<Encounter>(q_, MalnutritionDiagonsis);
 
 								return r_ ?? false;
 							};
@@ -961,30 +961,30 @@ bool? r_ = context.Operators.Contains<Encounter>(q_, MalnutritionDiagonsis);
 			}
 			else if (c_())
 			{
-int? h_()
+				int? h_				()
 				{
-bool i_()
+					bool i_					()
 					{
-IEnumerable<Encounter> j_ = this.Encounter_with_Nutrition_Care_Plan(context);
-bool? k_ = context.Operators.Contains<Encounter>(j_, NutritionCarePlan);
+						IEnumerable<Encounter> j_ = this.Encounter_with_Nutrition_Care_Plan(context);
+						bool? k_ = context.Operators.Contains<Encounter>(j_, NutritionCarePlan);
 
 						return k_ ?? false;
 					};
 					if (i_())
 					{
-int? l_()
+						int? l_						()
 						{
-bool m_()
+							bool m_							()
 							{
-IEnumerable<Encounter> o_ = this.Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished(context);
-bool? p_ = context.Operators.Contains<Encounter>(o_, NutritionCarePlan);
+								IEnumerable<Encounter> o_ = this.Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished(context);
+								bool? p_ = context.Operators.Contains<Encounter>(o_, NutritionCarePlan);
 
 								return p_ ?? false;
 							};
-bool n_()
+							bool n_							()
 							{
-IEnumerable<Encounter> q_ = this.Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished(context);
-bool? r_ = context.Operators.Contains<Encounter>(q_, NutritionCarePlan);
+								IEnumerable<Encounter> q_ = this.Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished(context);
+								bool? r_ = context.Operators.Contains<Encounter>(q_, NutritionCarePlan);
 
 								return r_ ?? false;
 							};

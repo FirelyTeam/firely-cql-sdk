@@ -214,8 +214,8 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 					return ah_;
 				};
 				IEnumerable<Extension> l_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(MedicationsNotDocumented is DomainResource
-	? (MedicationsNotDocumented as DomainResource).Extension
-	: default), k_);
+						? (MedicationsNotDocumented as DomainResource).Extension
+						: default), k_);
 				DataType m_				(Extension @this)
 				{
 					DataType ai_ = @this?.Value;

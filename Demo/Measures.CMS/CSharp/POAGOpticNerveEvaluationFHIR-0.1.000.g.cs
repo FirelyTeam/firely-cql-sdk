@@ -327,8 +327,8 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 				return af_;
 			};
 			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(CupToDiscExamNotPerformed is DomainResource
-	? (CupToDiscExamNotPerformed as DomainResource).Extension
-	: default), u_);
+					? (CupToDiscExamNotPerformed as DomainResource).Extension
+					: default), u_);
 			object w_			(Extension @this)
 			{
 				DataType ag_ = @this?.Value;
@@ -390,8 +390,8 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 				return af_;
 			};
 			IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(OpticDiscExamNotPerformed is DomainResource
-	? (OpticDiscExamNotPerformed as DomainResource).Extension
-	: default), u_);
+					? (OpticDiscExamNotPerformed as DomainResource).Extension
+					: default), u_);
 			object w_			(Extension @this)
 			{
 				DataType ag_ = @this?.Value;

@@ -73,7 +73,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
 			};
 			if (k_())
 			{
-Patient n_ = this.Patient(context);
+				Patient n_ = this.Patient(context);
 
 				return (IEnumerable<Extension>)((n_ as DomainResource).Extension);
 			}
@@ -159,7 +159,7 @@ Patient n_ = this.Patient(context);
 			};
 			if (k_())
 			{
-Patient n_ = this.Patient(context);
+				Patient n_ = this.Patient(context);
 
 				return (IEnumerable<Extension>)((n_ as DomainResource).Extension);
 			}

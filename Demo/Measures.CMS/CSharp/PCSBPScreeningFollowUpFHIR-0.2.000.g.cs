@@ -296,10 +296,10 @@ public partial class PCSBPScreeningFollowUpFHIR_0_2_000 : ILibrary, ISingleton<P
 					}
 					else
 					{
-CqlInterval<CqlDateTime> w_ = QICoreCommon_2_0_000.Instance.prevalenceInterval(context, Hypertension);
-CqlDateTime x_ = context.Operators.Start(w_);
-CqlDateTime z_ = context.Operators.Start(w_);
-CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(x_, z_, true, true);
+						CqlInterval<CqlDateTime> w_ = QICoreCommon_2_0_000.Instance.prevalenceInterval(context, Hypertension);
+						CqlDateTime x_ = context.Operators.Start(w_);
+						CqlDateTime z_ = context.Operators.Start(w_);
+						CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(x_, z_, true, true);
 
 						return aa_;
 					}
@@ -2168,8 +2168,8 @@ CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(x_, z_, true, true);
 					return au_;
 				};
 				IEnumerable<Extension> v_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoBPScreen is DomainResource
-	? (NoBPScreen as DomainResource).Extension
-	: default), u_);
+						? (NoBPScreen as DomainResource).Extension
+						: default), u_);
 				object w_				(Extension @this)
 				{
 					DataType av_ = @this?.Value;
@@ -2191,8 +2191,8 @@ CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(x_, z_, true, true);
 					return az_;
 				};
 				IEnumerable<Extension> ad_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NoBPScreen is DomainResource
-	? (NoBPScreen as DomainResource).Extension
-	: default), ac_);
+						? (NoBPScreen as DomainResource).Extension
+						: default), ac_);
 				object ae_				(Extension @this)
 				{
 					DataType ba_ = @this?.Value;
@@ -2266,8 +2266,8 @@ CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(x_, z_, true, true);
 				return av_;
 			};
 			IEnumerable<Extension> ag_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(NonPharmIntervention is DomainResource
-	? (NonPharmIntervention as DomainResource).Extension
-	: default), af_);
+					? (NonPharmIntervention as DomainResource).Extension
+					: default), af_);
 			object ah_			(Extension @this)
 			{
 				DataType aw_ = @this?.Value;
@@ -2320,8 +2320,8 @@ CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(x_, z_, true, true);
 				return aa_;
 			};
 			IEnumerable<Extension> q_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(LabECGNotDone is DomainResource
-	? (LabECGNotDone as DomainResource).Extension
-	: default), p_);
+					? (LabECGNotDone as DomainResource).Extension
+					: default), p_);
 			object r_			(Extension @this)
 			{
 				DataType ab_ = @this?.Value;
@@ -2369,8 +2369,8 @@ CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(x_, z_, true, true);
 				return aj_;
 			};
 			IEnumerable<Extension> u_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(SecondHTNDeclinedReferralAndFollowUp is DomainResource
-	? (SecondHTNDeclinedReferralAndFollowUp as DomainResource).Extension
-	: default), t_);
+					? (SecondHTNDeclinedReferralAndFollowUp as DomainResource).Extension
+					: default), t_);
 			object v_			(Extension @this)
 			{
 				DataType ak_ = @this?.Value;
@@ -2424,8 +2424,8 @@ CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(x_, z_, true, true);
 				return ap_;
 			};
 			IEnumerable<Extension> aa_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(SecondHTN140Over90ReferralFollowUpNotDone is DomainResource
-	? (SecondHTN140Over90ReferralFollowUpNotDone as DomainResource).Extension
-	: default), z_);
+					? (SecondHTN140Over90ReferralFollowUpNotDone as DomainResource).Extension
+					: default), z_);
 			object ab_			(Extension @this)
 			{
 				DataType aq_ = @this?.Value;
@@ -2500,8 +2500,8 @@ CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(x_, z_, true, true);
 					return bk_;
 				};
 				IEnumerable<Extension> ap_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(ElevatedBPDeclinedInterventions is DomainResource
-	? (ElevatedBPDeclinedInterventions as DomainResource).Extension
-	: default), ao_);
+						? (ElevatedBPDeclinedInterventions as DomainResource).Extension
+						: default), ao_);
 				object aq_				(Extension @this)
 				{
 					DataType bl_ = @this?.Value;
@@ -2581,8 +2581,8 @@ CqlInterval<CqlDateTime> aa_ = context.Operators.Interval(x_, z_, true, true);
 					return dh_;
 				};
 				IEnumerable<Extension> cm_ = context.Operators.Where<Extension>((IEnumerable<Extension>)(FirstHTNDeclinedInterventions is DomainResource
-	? (FirstHTNDeclinedInterventions as DomainResource).Extension
-	: default), cl_);
+						? (FirstHTNDeclinedInterventions as DomainResource).Extension
+						: default), cl_);
 				object cn_				(Extension @this)
 				{
 					DataType di_ = @this?.Value;
