@@ -4,6 +4,8 @@ Hl7.Cql.Runtime.BaseTypeResolver.BaseTypeResolver() -> void
 Hl7.Cql.Runtime.ContextEventArgs
 Hl7.Cql.Runtime.ContextEventArgs.ContextEventArgs(object? state = null) -> void
 Hl7.Cql.Runtime.ContextEventArgs.State.get -> object?
+Hl7.Cql.Runtime.CqlChoiceMetadata
+Hl7.Cql.Runtime.CqlChoiceMetadata.CqlChoiceMetadata() -> void
 Hl7.Cql.Runtime.CqlContext
 Hl7.Cql.Runtime.CqlContext.ContextEvent -> System.EventHandler<Hl7.Cql.Runtime.ContextEventArgs!>?
 Hl7.Cql.Runtime.CqlContext.CqlContext(Hl7.Cql.Operators.ICqlOperators! operators, System.Collections.Generic.IDictionary<string!, object!>? parameters = null, Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate!>? delegates = null) -> void
