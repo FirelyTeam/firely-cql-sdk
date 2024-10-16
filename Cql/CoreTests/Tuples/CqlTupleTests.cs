@@ -101,10 +101,18 @@ public class CqlTupleTests
 
         result.TryGetValue("Result", out var obj);
         Assert.IsNotNull(obj);
-        Assert.IsInstanceOfType(obj, typeof(ValueTuple));
+        Assert.IsInstanceOfType(obj, typeof(ITuple));
 
-        // serialization works out of the box
-        //var str = JsonSerializer.Serialize(obj);
-        //Assert.AreEqual("{\"status\":\"success\",\"result\":\"some result\"}", str);
+        var str = JsonSerializer.Serialize(obj, new JsonSerializerOptions() { WriteIndented = true, Converters = { new CqlValueTupleJsonConverterFactory() }});
+        Assert.AreEqual(
+            """
+            {
+              "status": "success",
+              "result": {
+                "result1": "some first result",
+                "result2": "some second result"
+              }
+            }
+            """, str);
     }
 }
