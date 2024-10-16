@@ -1,6 +1,16 @@
 ﻿#nullable enable
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using System.Runtime.Loader;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Text.Json;
+using Hl7.Cql.Fhir;
+using Hl7.Cql.Packaging;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Serialization;
 
@@ -73,5 +83,27 @@ public class CqlTupleTests
               ]
             }
             """, serializedJson);
+    }
+
+
+    [TestMethod]
+    public void ExpressionReturningNestedTuples_ResultCanBeSerialized()
+    {
+        var ctx = FhirCqlContext.ForBundle();
+        var obj = CqlNestedTupleTest_1_0_0.Instance.Result(ctx);
+        Assert.IsNotNull(obj);
+        Assert.IsInstanceOfType(obj, typeof(ITuple));
+
+        var str = JsonSerializer.Serialize(obj, new JsonSerializerOptions() { WriteIndented = true, Converters = { new CqlValueTupleJsonConverterFactory() }});
+        Assert.AreEqual(
+            """
+            {
+              "status": "success",
+              "result": {
+                "result1": "some first result",
+                "result2": "some second result"
+              }
+            }
+            """, str);
     }
 }
