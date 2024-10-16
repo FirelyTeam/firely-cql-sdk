@@ -9,8 +9,10 @@
 using Hl7.Cql.Model;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace Hl7.Cql.Elm
 {
@@ -22,28 +24,29 @@ namespace Hl7.Cql.Elm
         /// <inheritdoc/>
         public override int GetHashCode() => base.GetHashCode();
 
-        /// <inheritdoc/>
+        /// <nodoc/>
         public static bool operator ==(TypeSpecifier? a, TypeSpecifier? b) => a?.Equals(b) ?? b is null;
 
-        /// <inheritdoc/>
+        /// <nodoc/>
         public static bool operator !=(TypeSpecifier? a, TypeSpecifier? b) => !(a == b);
 
-        internal static bool SequenceEquals<T>(IEnumerable<T>? a, IEnumerable<T>? b) => EmptyIfNull(a).SequenceEqual(EmptyIfNull(b));
+        internal static bool SequenceEquals<T>(IEnumerable<T>? a, IEnumerable<T>? b) => (a, b) switch
+        {
+            (null, null) => true,
+            (null,_ )     => false,
+            (_, null)   => false,
+            _            => a.SequenceEqual(b)
+        };
+
         internal static bool SetEquals<T>(IEnumerable<T>? a, IEnumerable<T>? b)
         {
-            // tried using HashSet<>.SetEquals and it does not work even though all hashcodes are equal
-            var bCodes = b?
-                .Select(_b => _b?.GetHashCode() ?? default)
-                .ToArray()
-                ?? Array.Empty<int>();
-            if (a?.Count() != b?.Count())
-                return false;
-            foreach(var aCode in a?.Select(_a => _a?.GetHashCode() ?? default) ?? Enumerable.Empty<int>())
+            return (a, b) switch
             {
-                if (!bCodes.Contains(aCode))
-                    return false;
-            }
-            return true;
+                (null, null) => true,
+                (null, _)    => false,
+                (_, null)    => false,
+                _            => !a.Except(b).Any()
+            };
         }
 
         internal static IEnumerable<T> EmptyIfNull<T>(IEnumerable<T>? a) => a ?? Enumerable.Empty<T>();
@@ -82,7 +85,7 @@ namespace Hl7.Cql.Elm
         public override bool Equals([NotNullWhen(true)] object? other) => Equals(other as ChoiceTypeSpecifier);
 
         /// <inheritdoc/>
-        public bool Equals(ChoiceTypeSpecifier? other) => other == null ? false : SetEquals(other.choice, choice);
+        public bool Equals(ChoiceTypeSpecifier? other) => other != null && SetEquals(other.choice, choice);
 
         /// <inheritdoc/>
         public override int GetHashCode() => HashCode.Combine(typeof(ChoiceTypeSpecifier), choice?.Length, choice?.FirstOrDefault());
