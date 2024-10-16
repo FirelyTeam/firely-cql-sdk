@@ -3,7 +3,7 @@
 	<Import Project="..\..\cql-base.props" />
 
 	<PropertyGroup>
-		<Configurations>Debug;Release;Generate-CQL-to-ELM</Configurations>
+		<Configurations>Debug;Release;Generate-CQL-to-ELM;Generate-ELM-to-CSharp</Configurations>
 	</PropertyGroup>
 
 	<PropertyGroup>

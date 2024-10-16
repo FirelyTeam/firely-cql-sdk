@@ -10,6 +10,7 @@ using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
+using Hl7.Cql.Runtime;
 using Hl7.Fhir.Utility;
 
 namespace Hl7.Cql.Compiler.Expressions;
@@ -31,6 +32,11 @@ internal static class ExpressionExtensions
     {
         if (expression.Type == type)
             return (expression, TypeConversion.ExactType);
+
+        if (type == typeof(ValueTuple<Type[], object>))
+        {
+            ;
+        }
 
         if (expression is ConstantExpression { Value: var constantValue })
         {
