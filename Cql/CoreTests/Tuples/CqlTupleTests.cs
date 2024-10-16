@@ -89,17 +89,8 @@ public class CqlTupleTests
     [TestMethod]
     public void ExpressionReturningNestedTuples_ResultCanBeSerialized()
     {
-        var file = @"Dlls/CqlNestedTupleTest-1.0.0.dll";
-        var filePath = Path.GetFullPath(file);
-
-        var asm = new AssemblyLoadContext("CqlNestedTupleTest");
-        asm.LoadFromAssemblyPath(filePath);
-
         var ctx = FhirCqlContext.ForBundle();
-        var result = asm.Run("CqlNestedTupleTest", "1.0.0", ctx);
-        Assert.IsNotNull(result);
-
-        result.TryGetValue("Result", out var obj);
+        var obj = CqlNestedTupleTest_1_0_0.Instance.Result(ctx);
         Assert.IsNotNull(obj);
         Assert.IsInstanceOfType(obj, typeof(ITuple));
 
