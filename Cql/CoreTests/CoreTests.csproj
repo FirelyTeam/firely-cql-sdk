@@ -44,6 +44,7 @@
 		<LibrarySet>CoreTests.HL7</LibrarySet>
 		<CqlDirectory>$(MSBuildProjectDirectory)/input/elm/hl7</CqlDirectory>
 		<ElmDirectory>$(MSBuildProjectDirectory)/input/elm/hl7</ElmDirectory>
+		<DllDirectory>$(MSBuildProjectDirectory)/Dlls</DllDirectory>
 		<!-- <ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory> -->
 		<!-- <TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory> -->
 	</PropertyGroup>
@@ -65,6 +66,9 @@
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 		<None Update="Input\ValueSets\*.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Include="Dlls\*.dll">
 			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
