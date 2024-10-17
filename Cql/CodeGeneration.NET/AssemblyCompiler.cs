@@ -79,11 +79,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             List<(string libraryName, Stream stream)> items = [];
 
             _cSharpLibrarySetToStreamsWriter.ProcessDefinitions(
+                librarySet,
                 definitions,
-                librarySet, new(
-                    onAfterStep: CSharpSourceCodeStep
-                ));
-
+                callbacks: new(onAfterStep: CSharpSourceCodeStep));
 
             return results;
 
