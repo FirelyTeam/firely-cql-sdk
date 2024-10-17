@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System.IO;
 using System.Runtime.Loader;
+using CoreTests.Tuples;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -10,6 +11,7 @@ namespace CoreTests;
 [TestClass]
 public class AssemblyLoadContextTests
 {
+    /// <seealso cref="CqlTupleTests.ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized"/>
     [TestMethod]
     public void TestAssemblyLoadContext()
     {

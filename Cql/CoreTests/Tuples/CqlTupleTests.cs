@@ -1,18 +1,13 @@
 ﻿#nullable enable
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Runtime.Loader;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Text.Json;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Packaging;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Serialization;
+using System.IO;
+using System.Runtime.Loader;
+using Hl7.Cql.Packaging;
 
 namespace CoreTests.Tuples;
 
@@ -85,12 +80,41 @@ public class CqlTupleTests
             """, serializedJson);
     }
 
-
     [TestMethod]
-    public void ExpressionReturningNestedTuples_ResultCanBeSerialized()
+    public void ExpressionReturningNestedTuplesFromDirectLibraryInstance_ResultCanBeSerialized()
     {
         var ctx = FhirCqlContext.ForBundle();
         var obj = CqlNestedTupleTest_1_0_0.Instance.Result(ctx);
+        Assert.IsNotNull(obj);
+        Assert.IsInstanceOfType(obj, typeof(ITuple));
+
+        var str = JsonSerializer.Serialize(obj, new JsonSerializerOptions() { WriteIndented = true, Converters = { new CqlValueTupleJsonConverterFactory() }});
+        Assert.AreEqual(
+            """
+            {
+              "status": "success",
+              "result": {
+                "result1": "some first result",
+                "result2": "some second result"
+              }
+            }
+            """, str);
+    }
+
+    /// <seealso cref="AssemblyLoadContextTests.TestAssemblyLoadContext"/>
+    [TestMethod]
+    public void ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized()
+    {
+        var file = @"Dlls/CqlNestedTupleTest-1.0.0.dll";
+        var filePath = Path.GetFullPath(file);
+        var asm = new AssemblyLoadContext("CqlNestedTupleTest");
+        asm.LoadFromAssemblyPath(filePath);
+        var ctx = FhirCqlContext.ForBundle();
+
+        // Act
+        var result = asm.Run("CqlNestedTupleTest", "1.0.0", ctx);
+        Assert.IsNotNull(result);
+        result.TryGetValue("Result", out var obj);
         Assert.IsNotNull(obj);
         Assert.IsInstanceOfType(obj, typeof(ITuple));
 
