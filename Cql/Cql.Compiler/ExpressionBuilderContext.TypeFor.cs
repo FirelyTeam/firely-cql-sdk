@@ -177,8 +177,9 @@ partial class ExpressionBuilderContext
                 return null;
             }
 
-            var choiceType = new CqlChoiceType();
-                // CqlChoiceValue.MakeChoiceType(typeSpecifiersByTypes.SelectToArray(g => g.Key!));
+            var choiceType =
+                // new CqlChoiceType();
+                CqlChoiceValue.MakeChoiceType(typeSpecifiersByTypes.SelectToArray(g => g.Key!));
             return choiceType;
         }
 

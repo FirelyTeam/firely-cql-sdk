@@ -21,7 +21,6 @@ public class CqlChoiceType : Type
 
     public override bool IsByRefLike => false;
 
-    
 
     #endregion
 
