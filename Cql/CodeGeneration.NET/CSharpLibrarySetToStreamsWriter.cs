@@ -22,7 +22,6 @@ using System.Text;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Operators;
-using Microsoft.CodeAnalysis.CSharp;
 using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.CodeGeneration.NET
@@ -107,23 +106,48 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// </summary>
         private readonly string _tool;
 
+        private record LibrarySetContext(
+            LibrarySet LibrarySet,
+            DefinitionDictionary<LambdaExpression> Definitions,
+            CSharpSourceCodeWriterCallbacks Callbacks);
+
+        private record LibraryContext(
+            LibrarySetContext LibrarySetContext,
+            Library Library,
+            StreamWriter Writer,
+            int Indent = 0)
+        {
+            public TupleMetadataBuilder TupleMetadataBuilder { get; init; } = new();
+
+            public VersionedIdentifier LibraryVersionedIdentifier =>
+                ((IGetVersionedIdentifier)Library).VersionedIdentifier.Result!;
+
+            public string LibraryName => Library.GetVersionedIdentifier()!;
+        }
+
+        private record MethodContext(
+            LibraryContext LibraryContext,
+            string CqlName,
+            LambdaExpression Overload,
+            ILookup<string, string>? Tags);
 
         /// <summary>
         /// Writes C# source code from inputs.
         /// </summary>
-        /// <param name="definitions">The lambda expressions to write.</param>
         /// <param name="librarySet">A dependency graph containing dependent libraries.</param>
+        /// <param name="definitions">The lambda expressions to write.</param>
         /// <param name="callbacks">Callbacks which is used during the processing of each stream.</param>
         public void ProcessDefinitions(
-            DefinitionDictionary<LambdaExpression> definitions,
             LibrarySet librarySet,
+            DefinitionDictionary<LambdaExpression> definitions,
             CSharpSourceCodeWriterCallbacks? callbacks = default)
         {
             List<Stream> streamsToDispose = new();
             callbacks ??= new();
             try
             {
-                foreach (var (name, stream) in WriteLibraries(definitions, librarySet, callbacks))
+                var librarySetContext = new LibrarySetContext(librarySet, definitions, callbacks);
+                foreach (var (name, stream) in WriteLibraries(librarySetContext))
                 {
                     streamsToDispose.Add(stream);
                     callbacks.Step(name, stream);
@@ -141,71 +165,60 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         private IEnumerable<(string name, Stream stream)> WriteLibraries(
-            DefinitionDictionary<LambdaExpression> definitions,
-            LibrarySet librarySet,
-            CSharpSourceCodeWriterCallbacks callbacks)
+            LibrarySetContext librarySetContext)
         {
-            if (!librarySet.Any())
+            if (!librarySetContext.LibrarySet.Any())
             {
                 _logger.LogInformation($"No libraries detected; skipping.");
                 yield break;
             }
 
-            foreach (Library library in librarySet)
+            foreach (Library library in librarySetContext.LibrarySet)
             {
-                var libraryVersionedIdentifier = ((IGetVersionedIdentifier)library).VersionedIdentifier.Result!;
                 string libraryName = library.GetVersionedIdentifier()!;
-                if (!callbacks.ShouldWriteLibrary(libraryName))
+                if (!librarySetContext.Callbacks.ShouldWriteLibrary(libraryName))
                 {
                     _logger.LogInformation($"Skipping library {libraryName} as per callback.");
                     continue;
                 }
 
-                if (!definitions.Libraries.Contains(libraryName))
+                if (!librarySetContext.Definitions.Libraries.Contains(libraryName))
                 {
                     _logger.LogInformation($"Skipping library {libraryName}, which has no definitions");
                     continue;
                 }
 
-                var stream = callbacks.GetStreamForLibraryName(libraryName);
+                var stream = librarySetContext.Callbacks.GetStreamForLibraryName(libraryName);
                 if (stream == null!)
                     continue;
 
                 using var writer = new StreamWriter(stream, Encoding.UTF8, 1024, leaveOpen: true);
-                int indentLevel = 0;
-                WriteUsings(writer);
-
-                // Namespace
-                if (!string.IsNullOrWhiteSpace(Namespace))
-                {
-                    writer.WriteLine(indentLevel, $"namespace {Namespace}");
-                    writer.WriteLine(indentLevel, "{");
-                    writer.WriteLine();
-                    indentLevel += 1;
-                }
-
-                WriteClass(definitions, librarySet, callbacks.LibraryNameToClassName, libraryName, libraryVersionedIdentifier, writer, indentLevel);
-
-                if (!string.IsNullOrWhiteSpace(Namespace))
-                {
-                    writer.WriteLine(indentLevel, "}");
-                }
-
+                var libraryContext = new LibraryContext(librarySetContext, library, writer);
+                WriteNamespaceBlock(libraryContext);
                 writer.Flush();
                 yield return (libraryName, stream);
             }
         }
 
-        private void WriteClass(
-            DefinitionDictionary<LambdaExpression> definitions,
-            LibrarySet librarySet,
-            Func<string, string?> libraryNameToClassName,
-            string libraryName,
-            VersionedIdentifier libraryVersionedIdentifier,
-            StreamWriter writer,
-            int indentLevel)
+        private void WriteNamespaceBlock(
+            LibraryContext libraryContext)
         {
-            writer.WriteLine(indentLevel, $"[System.CodeDom.Compiler.GeneratedCode({QuoteString(_tool)}, {QuoteString(_version)})]");
+            WriteUsings(libraryContext);
+
+            // Namespace
+            if (!string.IsNullOrWhiteSpace(Namespace))
+                libraryContext.Writer.WriteLine($"namespace {Namespace};");
+
+            libraryContext.Writer.WriteLine();
+            WriteClass(libraryContext);
+        }
+
+        private void WriteClass(
+            LibraryContext libraryContext)
+        {
+            var libraryName = libraryContext.LibraryName;
+            var writer = libraryContext.Writer;
+            writer.WriteLine(libraryContext.Indent, $"[System.CodeDom.Compiler.GeneratedCode({_tool.QuoteString()}, {_version.QuoteString()})]");
 
             var libraryAttribute = libraryName;
             var versionAttribute = string.Empty;
@@ -219,35 +232,56 @@ namespace Hl7.Cql.CodeGeneration.NET
                 }
             }
 
-            writer.WriteLine(indentLevel, $"[CqlLibrary({QuoteString(libraryAttribute)}, {QuoteString(versionAttribute)})]");
+            writer.WriteLine(libraryContext.Indent, $"[CqlLibrary({libraryAttribute.QuoteString()}, {versionAttribute.QuoteString()})]");
             var className = VariableNameGenerator.NormalizeIdentifier(libraryName);
-            writer.WriteLine(indentLevel, $"public partial class {className} : ILibrary, ISingleton<{className}>");
-            writer.WriteLine(indentLevel, "{");
-            indentLevel += 1;
+            writer.WriteLine(libraryContext.Indent, $"public partial class {className} : ILibrary, ISingleton<{className}>");
+            writer.WriteLine(libraryContext.Indent, "{");
             // Class
             {
-                writer.WriteLine(indentLevel, $"private {className}() {{}}");
+                var newLibraryContext = libraryContext with { Indent = libraryContext.Indent + 1 };
+                writer.WriteLine(newLibraryContext.Indent, $"private {className}() {{}}");
                 writer.WriteLine();
-                writer.WriteLine(indentLevel, $"public static {className} Instance {{ get; }} = new();");
+                writer.WriteLine(newLibraryContext.Indent, $"public static {className} Instance {{ get; }} = new();");
                 writer.WriteLine();
-                WriteLibraryMembers(writer, librarySet, libraryName, libraryVersionedIdentifier, libraryNameToClassName!, indentLevel);
-                WriteMethods(definitions, libraryName, writer, indentLevel);
+                WriteLibraryMembers(newLibraryContext);
+                WriteMethods(newLibraryContext);
+                WriteCqlTupleMetadataProperties(newLibraryContext);
             }
-            indentLevel -= 1;
-            writer.WriteLine(indentLevel, "}");
+            writer.WriteLine(libraryContext.Indent, "}");
+        }
+
+        private void WriteCqlTupleMetadataProperties(
+            LibraryContext newLibraryContext)
+        {
+            var writer = newLibraryContext.Writer;
+            var indentLevel = newLibraryContext.Indent;
+            var tupleMetadataBuilder = newLibraryContext.TupleMetadataBuilder;
+
+            // Cql Tuple Metadata
+            foreach (var (propertyName, signature) in tupleMetadataBuilder.GetAllTupleMetadataPropertySignatures())
+            {
+                var types = string.Join(", ", signature.Select(t => $"typeof({_typeToCSharpConverter.ToCSharp(t.Type)})"));
+                var names = string.Join(", ", signature.Select(t => t.Name.QuoteString()));
+                writer.WriteLine(indentLevel, $"private static CqlTupleMetadata {propertyName} = new(");
+                writer.WriteLine(indentLevel+1, $"[{types}],");
+                writer.WriteLine(indentLevel+1, $"[{names}]);");
+                writer.WriteLine();
+            }
         }
 
         private void WriteLibraryMembers(
-            TextWriter writer,
-            LibrarySet librarySet,
-            string libraryName,
-            VersionedIdentifier libraryVersionedIdentifier,
-            Func<string, string> libraryNameToClassName,
-            int indent)
+            LibraryContext libraryContext)
         {
+            var writer = libraryContext.Writer;
+            var librarySet = libraryContext.LibrarySetContext.LibrarySet;
+            var libraryName = libraryContext.LibraryName;
+            var libraryVersionedIdentifier = libraryContext.LibraryVersionedIdentifier;
+            var libraryNameToClassName = libraryContext.LibrarySetContext.Callbacks.LibraryNameToClassName!;
+            var indent = libraryContext.Indent;
+
             writer.WriteLine(indent, "#region Library Members");
-            writer.WriteLine(indent, $"public string Name => {QuoteString(libraryVersionedIdentifier.id)};");
-            writer.WriteLine(indent, $"public string Version => {QuoteString(libraryVersionedIdentifier.version)};");
+            writer.WriteLine(indent, $"public string Name => {libraryVersionedIdentifier.id.QuoteString()};");
+            writer.WriteLine(indent, $"public string Version => {libraryVersionedIdentifier.version.QuoteString()};");
 
             var dependencies =
                 librarySet.GetLibraryDependencies(libraryName, throwError: true)
@@ -260,14 +294,19 @@ namespace Hl7.Cql.CodeGeneration.NET
             writer.WriteLine(indent, "#endregion Library Members");
         }
 
-        private void WriteMethods(DefinitionDictionary<LambdaExpression> definitions, string libraryName, StreamWriter writer, int indentLevel)
+        private void WriteMethods(
+            LibraryContext libraryContext)
         {
+            var definitions = libraryContext.LibrarySetContext.Definitions;
+            var libraryName = libraryContext.LibraryName;
+            var writer = libraryContext.Writer;
+
             foreach (var kvp in definitions.DefinitionsForLibrary(libraryName))
             {
                 foreach (var overload in kvp.Value)
                 {
                     definitions.TryGetTags(libraryName, kvp.Key, overload.Signature, out var tags);
-                    WriteMethod(libraryName, writer, indentLevel, kvp.Key, overload.T, tags);
+                    WriteMethod(new MethodContext(libraryContext, kvp.Key, overload.T, tags));
                     writer.WriteLine();
                 }
             }
@@ -277,20 +316,16 @@ namespace Hl7.Cql.CodeGeneration.NET
             overload.Parameters.Count == 1
                 && overload.Parameters[0].Type == typeof(CqlContext);
 
-        private string DefinitionCacheKeyForMethod(string methodName)
+        private void WriteMethod(
+            MethodContext methodContext)
         {
-            if (methodName[0] == '@')
-                return "__" + methodName[1..];
-            else return "__" + methodName;
-        }
+            string libraryName = methodContext.LibraryContext.LibraryName;
+            TextWriter writer = methodContext.LibraryContext.Writer;
+            int indentLevel = methodContext.LibraryContext.Indent;
+            string cqlName = methodContext.CqlName;
+            LambdaExpression overload = methodContext.Overload;
+            TupleMetadataBuilder tupleMetadataBuilder = methodContext.LibraryContext.TupleMetadataBuilder;
 
-        private string PrivateMethodNameFor(string methodName) => methodName + "_Value";
-
-        private void WriteMethod(string libraryName, TextWriter writer, int indentLevel,
-            string cqlName,
-            LambdaExpression overload,
-            ILookup<string, string>? tags)
-        {
             var methodName = VariableNameGenerator.NormalizeIdentifier(cqlName);
             var isDef = IsDefinition(overload);
 
@@ -314,8 +349,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             if (isDef)
             {
                 writer.WriteLine();
-                writer.WriteLine(indentLevel, $"[CqlDeclaration({QuoteString(cqlName)})]");
-                WriteTags(writer, indentLevel, tags);
+                writer.WriteLine(indentLevel, $"[CqlDeclaration({cqlName.QuoteString()})]");
+                WriteTags(methodContext);
 
                 if (overload.ReturnType == typeof(CqlValueSet))
                 {
@@ -324,41 +359,45 @@ namespace Hl7.Cql.CodeGeneration.NET
                         var arg = @new.Arguments[0];
                         if (arg is ConstantExpression { Value: string valueSetId })
                         {
-                            writer.WriteLine(indentLevel, $"[CqlValueSet({QuoteString(valueSetId)})]");
+                            writer.WriteLine(indentLevel, $"[CqlValueSet({valueSetId.QuoteString()})]");
                         }
                     }
                 }
             }
 
-            writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(indentLevel, overload, methodName!, "public"));
+            writer.Write(expressionConverter.ConvertTopLevelFunctionDefinition(overload, expressionConverter.NewContext(tupleMetadataBuilder, indentLevel), methodName!, "public"));
         }
 
         private ExpressionToCSharpConverter NewExpressionToCSharpConverter(string libraryName) =>
             new(_typeToCSharpConverter, libraryName);
 
-        private void WriteTags(TextWriter writer, int indentLevel, ILookup<string, string>? tags)
+        private void WriteTags(
+            MethodContext methodContext)
         {
-            if (tags != null)
+            if (methodContext.Tags != null)
             {
-                foreach (var group in tags)
+                TextWriter writer = methodContext.LibraryContext.Writer;
+                int indentLevel = methodContext.LibraryContext.Indent;
+
+                foreach (var group in methodContext.Tags)
                 {
                     foreach (var tag in group)
                     {
-                        writer.WriteLine(indentLevel, $"[CqlTag({QuoteString(group.Key)}, {QuoteString(tag)})]");
+                        writer.WriteLine(indentLevel, $"[CqlTag({group.Key.QuoteString()}, {tag.QuoteString()})]");
                     }
                 }
             }
         }
 
-        private void WriteUsings(TextWriter writer)
+        private void WriteUsings(LibraryContext context)
         {
             foreach (var @using in _usings)
             {
-                writer.WriteLine($"using {@using};");
+                context.Writer.WriteLine($"using {@using};");
             }
             foreach (var @using in _aliasedUsings)
             {
-                writer.WriteLine($"using {@using.Item1} = {@using.Item2};");
+                context.Writer.WriteLine($"using {@using.Item1} = {@using.Item2};");
             }
         }
 
@@ -371,8 +410,5 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             return body;
         }
-
-        private string QuoteString(string literal) =>
-            SymbolDisplay.FormatLiteral(literal, true);
     }
 }
