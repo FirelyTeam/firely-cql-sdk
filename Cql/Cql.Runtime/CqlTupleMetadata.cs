@@ -1,4 +1,12 @@
-﻿using System;
+﻿/*
+ * Copyright (c) 2023, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Hl7.Cql.Abstractions;
@@ -9,7 +17,7 @@ namespace Hl7.Cql.Runtime;
 /// <summary>
 /// Represents the metadata for a tuple.
 /// </summary>
-public class CqlTupleMetadata : IEquatable<CqlTupleMetadata>
+public sealed class CqlTupleMetadata : IEquatable<CqlTupleMetadata>
 {
     /// <summary>
     /// Represents the metadata for a tuple.
@@ -61,7 +69,7 @@ public class CqlTupleMetadata : IEquatable<CqlTupleMetadata>
     }
 
     /// <inheritdoc cref="Equals(object?)"/>
-    public virtual bool Equals(CqlTupleMetadata? obj)
+    public bool Equals(CqlTupleMetadata? obj)
     {
         if (obj is null) return false;
         if (ReferenceEquals(this, obj)) return true;

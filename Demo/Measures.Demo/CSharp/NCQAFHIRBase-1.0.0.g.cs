@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.7.0")]
 [CqlLibrary("NCQAFHIRBase", "1.0.0")]
 public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_0>
 {
@@ -58,7 +58,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
             }
             else if (onset is FhirString)
             {
-                CqlInterval<CqlDateTime> j_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute an interval from a String value");
+                CqlInterval<CqlDateTime> j_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null, "1", "Error", "Cannot compute an interval from a String value");
 
                 return j_;
             }
@@ -103,7 +103,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                     }
                     else
                     {
-                        return null as CqlInterval<CqlDate>;
+                        return null;
                     }
                 };
                 CqlDate l_ = (k_())?.low;
@@ -147,7 +147,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                     }
                     else
                     {
-                        return null as CqlInterval<CqlDate>;
+                        return null;
                     }
                 };
                 CqlDate o_ = (n_())?.high;
@@ -191,7 +191,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                     }
                     else
                     {
-                        return null as CqlInterval<CqlDate>;
+                        return null;
                     }
                 };
                 bool? r_ = (q_())?.lowClosed;
@@ -234,7 +234,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                     }
                     else
                     {
-                        return null as CqlInterval<CqlDate>;
+                        return null;
                     }
                 };
                 bool? t_ = (s_())?.highClosed;
@@ -270,7 +270,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
             }
             else if (abatement is FhirString)
             {
-                CqlInterval<CqlDateTime> j_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute an interval from a String value");
+                CqlInterval<CqlDateTime> j_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null, "1", "Error", "Cannot compute an interval from a String value");
 
                 return j_;
             }
@@ -315,7 +315,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                     }
                     else
                     {
-                        return null as CqlInterval<CqlDate>;
+                        return null;
                     }
                 };
                 CqlDate l_ = (k_())?.low;
@@ -359,7 +359,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                     }
                     else
                     {
-                        return null as CqlInterval<CqlDate>;
+                        return null;
                     }
                 };
                 CqlDate o_ = (n_())?.high;
@@ -403,7 +403,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                     }
                     else
                     {
-                        return null as CqlInterval<CqlDate>;
+                        return null;
                     }
                 };
                 bool? r_ = (q_())?.lowClosed;
@@ -446,7 +446,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                     }
                     else
                     {
-                        return null as CqlInterval<CqlDate>;
+                        return null;
                     }
                 };
                 bool? t_ = (s_())?.highClosed;
@@ -614,19 +614,19 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
             }
             else if (choice is Timing)
             {
-                CqlInterval<CqlDateTime> en_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute a single interval from a Timing type");
+                CqlInterval<CqlDateTime> en_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null, "1", "Error", "Cannot compute a single interval from a Timing type");
 
                 return en_;
             }
             else if (choice is FhirString)
             {
-                CqlInterval<CqlDateTime> eo_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null as CqlInterval<CqlDateTime>, "1", "Error", "Cannot compute an interval from a String value");
+                CqlInterval<CqlDateTime> eo_ = context.Operators.Message<CqlInterval<CqlDateTime>>(null, "1", "Error", "Cannot compute an interval from a String value");
 
                 return eo_;
             }
             else
             {
-                return null as CqlInterval<CqlDateTime>;
+                return null;
             }
         };
 

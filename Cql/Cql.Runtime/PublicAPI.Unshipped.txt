@@ -4,6 +4,10 @@ Hl7.Cql.Runtime.BaseTypeResolver.BaseTypeResolver() -> void
 Hl7.Cql.Runtime.ContextEventArgs
 Hl7.Cql.Runtime.ContextEventArgs.ContextEventArgs(object? state = null) -> void
 Hl7.Cql.Runtime.ContextEventArgs.State.get -> object?
+Hl7.Cql.Runtime.CqlChoiceMetadata
+Hl7.Cql.Runtime.CqlChoiceMetadata.ChoiceTypes.get -> System.Collections.Generic.IReadOnlyList<System.Type!>!
+Hl7.Cql.Runtime.CqlChoiceMetadata.CqlChoiceMetadata(System.Type![]? choiceTypes = null) -> void
+Hl7.Cql.Runtime.CqlChoiceMetadata.Equals(Hl7.Cql.Runtime.CqlChoiceMetadata? obj) -> bool
 Hl7.Cql.Runtime.CqlContext
 Hl7.Cql.Runtime.CqlContext.ContextEvent -> System.EventHandler<Hl7.Cql.Runtime.ContextEventArgs!>?
 Hl7.Cql.Runtime.CqlContext.CqlContext(Hl7.Cql.Operators.ICqlOperators! operators, System.Collections.Generic.IDictionary<string!, object!>? parameters = null, Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate!>? delegates = null) -> void
@@ -15,6 +19,7 @@ Hl7.Cql.Runtime.CqlContext.RaiseContextEvent(Hl7.Cql.Runtime.ContextEventArgs! e
 Hl7.Cql.Runtime.CqlContext.ResolveParameter(string! libraryVersionedIdentifier, string! parameterName, object? defaultValue) -> object?
 Hl7.Cql.Runtime.CqlTupleMetadata
 Hl7.Cql.Runtime.CqlTupleMetadata.CqlTupleMetadata(System.Type![]? itemTypes = null, string![]? itemNames = null) -> void
+Hl7.Cql.Runtime.CqlTupleMetadata.Equals(Hl7.Cql.Runtime.CqlTupleMetadata? obj) -> bool
 Hl7.Cql.Runtime.CqlTupleMetadata.ItemNames.get -> System.Collections.Generic.IReadOnlyList<string!>!
 Hl7.Cql.Runtime.CqlTupleMetadata.ItemTypes.get -> System.Collections.Generic.IReadOnlyList<System.Type!>!
 Hl7.Cql.Runtime.DefinitionDictionary<T>
@@ -42,6 +47,9 @@ Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory
 Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CqlValueTupleJsonConverterFactory() -> void
 override Hl7.Cql.Runtime.BaseTypeResolver.GetListElementType(System.Type! type, bool throwError = false) -> System.Type?
 override Hl7.Cql.Runtime.BaseTypeResolver.ResolveType(string! typeSpecifier, bool throwError = true) -> System.Type?
+override Hl7.Cql.Runtime.CqlChoiceMetadata.Equals(object? obj) -> bool
+override Hl7.Cql.Runtime.CqlChoiceMetadata.GetHashCode() -> int
+override Hl7.Cql.Runtime.CqlChoiceMetadata.ToString() -> string!
 override Hl7.Cql.Runtime.CqlTupleMetadata.Equals(object? obj) -> bool
 override Hl7.Cql.Runtime.CqlTupleMetadata.GetHashCode() -> int
 override Hl7.Cql.Runtime.CqlTupleMetadata.ToString() -> string!
@@ -50,8 +58,9 @@ override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Write(System.T
 override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CanConvert(System.Type! typeToConvert) -> bool
 override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CreateConverter(System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Text.Json.Serialization.JsonConverter!
 readonly Hl7.Cql.Runtime.BaseTypeResolver.Types -> System.Collections.Generic.Dictionary<string!, System.Type!>!
+static Hl7.Cql.Runtime.CqlChoiceMetadata.operator !=(Hl7.Cql.Runtime.CqlChoiceMetadata? left, Hl7.Cql.Runtime.CqlChoiceMetadata? right) -> bool
+static Hl7.Cql.Runtime.CqlChoiceMetadata.operator ==(Hl7.Cql.Runtime.CqlChoiceMetadata? left, Hl7.Cql.Runtime.CqlChoiceMetadata? right) -> bool
 static Hl7.Cql.Runtime.CqlTupleMetadata.operator !=(Hl7.Cql.Runtime.CqlTupleMetadata? left, Hl7.Cql.Runtime.CqlTupleMetadata? right) -> bool
 static Hl7.Cql.Runtime.CqlTupleMetadata.operator ==(Hl7.Cql.Runtime.CqlTupleMetadata? left, Hl7.Cql.Runtime.CqlTupleMetadata? right) -> bool
 static Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Default.get -> Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter!
 virtual Hl7.Cql.Runtime.BaseTypeResolver.GetPropertyCore(System.Type! type, string! propertyName) -> System.Reflection.PropertyInfo?
-virtual Hl7.Cql.Runtime.CqlTupleMetadata.Equals(Hl7.Cql.Runtime.CqlTupleMetadata? obj) -> bool

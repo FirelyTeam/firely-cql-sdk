@@ -2083,14 +2083,21 @@ internal partial class ExpressionBuilderContext
 {
     protected Expression As(As @as) //@ TODO: Cast - As
     {
-        if (@as.operand is List list)
+        using var _ = PushElement(@as.operand);
+        // asTypeSpecifier is an expression with its own resulttypespecifier that actually contains the real type
+        var asTypeSpecifier = (@as switch
         {
-            using (PushElement(list))
-            {
-                // create new ListType[0]; instead of new object[0] as IEnumerable<object> as IEnumerable<ListType>;
-                if ((list.element?.Length ?? 0) == 0)
+            { asTypeSpecifier: { } s, asType: null } => s,
+            { asType: { } t } => t.ToNamedType(),
+            _ => null,
+        }) ?? throw this.NewExpressionBuildingException("The 'as' operator has no type name.");
+        var type = TypeFor(asTypeSpecifier!)!;
+
+        switch (@as.operand)
+        {
+            // create new ListType[0]; instead of new object[0] as IEnumerable<object> as IEnumerable<ListType>;
+            case List list when (list.element?.Length ?? 0) == 0:
                 {
-                    var type = TypeFor(@as.asTypeSpecifier!)!;
                     if (_typeResolver.IsListType(type))
                     {
                         var listElementType = _typeResolver.GetListElementType(type) ??
@@ -2110,25 +2117,20 @@ internal partial class ExpressionBuilderContext
                     throw this.NewExpressionBuildingException(
                         "Cannot use as operator on a list if the as type is not also a list type.");
                 }
-            }
-        }
-
-        // asTypeSpecifier is an expression with its own resulttypespecifier that actually contains the real type
-        if (@as.asTypeSpecifier != null)
-        {
-            using (PushElement(@as.asTypeSpecifier))
-            {
-                if (@as.operand is Null)
+            case Null:
                 {
-                    var type = TypeFor(@as.asTypeSpecifier!)!;
                     var defaultExpression = Expression.Default(type);
-                    return new ElmAsExpression(defaultExpression, type, @as.strict);
+                    return defaultExpression;
                 }
-                else
+            // case { } op when op.GetTypeSpecifier() is ChoiceTypeSpecifier operandChoiceTypeSpecifier:
+            //     {
+            //         var operand = TranslateArg(op);
+            //         return ChangeTypeOnChoice(operand, operandChoiceTypeSpecifier, type, @as.strict);
+            //     }
+            case { } op:
                 {
-                    var type = TypeFor(@as.asTypeSpecifier!)!;
-                    var operand = TranslateArg(@as.operand!);
-                    var converted = ChangeType(operand, type, out var typeConversion, considerSafeUpcast:true);
+                    var operand = TranslateArg(op);
+                    var converted = ChangeType(operand, type, out var typeConversion, considerSafeUpcast: true);
                     switch (typeConversion)
                     {
                         case TypeConversion.NoMatch:
@@ -2147,28 +2149,7 @@ internal partial class ExpressionBuilderContext
                             return new ElmAsExpression(operand, type, @as.strict);
                     }
                 }
-            }
-        }
-
-        {
-            if (string.IsNullOrWhiteSpace(@as.asType.Name))
-                throw this.NewExpressionBuildingException("The 'as' operator has no type name.");
-
-            if (@as.operand is null)
-                throw this.NewExpressionBuildingException("Operand cannot be null");
-
-            var type = _typeResolver.ResolveType(@as.asType.Name!)
-                       ?? throw this.NewExpressionBuildingException($"Cannot resolve type {@as.asType.Name}");
-
-            var operand = TranslateArg(@as.operand);
-            if (!type.IsAssignableTo(operand.Type))
-            {
-                _logger.LogWarning(FormatMessage(
-                                       $"Potentially unsafe cast from {operand.Type.ToCSharpString(Defaults.TypeCSharpFormat)} to type {type.ToCSharpString(Defaults.TypeCSharpFormat)}",
-                                       @as.operand));
-            }
-
-            return new ElmAsExpression(operand, type, @as.strict);
+            default: throw new UnreachableException(); // The above switch should cover all cases.
         }
     }
 
