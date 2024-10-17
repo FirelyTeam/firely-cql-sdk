@@ -8,6 +8,26 @@ Hl7.Cql.Runtime.CqlChoiceMetadata
 Hl7.Cql.Runtime.CqlChoiceMetadata.ChoiceTypes.get -> System.Collections.Generic.IReadOnlyList<System.Type!>!
 Hl7.Cql.Runtime.CqlChoiceMetadata.CqlChoiceMetadata(System.Type![]? choiceTypes = null) -> void
 Hl7.Cql.Runtime.CqlChoiceMetadata.Equals(Hl7.Cql.Runtime.CqlChoiceMetadata? obj) -> bool
+Hl7.Cql.Runtime.CqlChoiceValue
+Hl7.Cql.Runtime.CqlChoiceValue.CqlChoiceValue() -> void
+Hl7.Cql.Runtime.CqlChoiceValue.Value.get -> object?
+Hl7.Cql.Runtime.CqlChoiceValue.Value.init -> void
+Hl7.Cql.Runtime.CqlChoiceValue<T1, T2, T3, T4, T5, T6, T7, T8>
+Hl7.Cql.Runtime.CqlChoiceValue<T1, T2, T3, T4, T5, T6, T7, T8>.CqlChoiceValue() -> void
+Hl7.Cql.Runtime.CqlChoiceValue<T1, T2, T3, T4, T5, T6, T7>
+Hl7.Cql.Runtime.CqlChoiceValue<T1, T2, T3, T4, T5, T6, T7>.CqlChoiceValue() -> void
+Hl7.Cql.Runtime.CqlChoiceValue<T1, T2, T3, T4, T5, T6>
+Hl7.Cql.Runtime.CqlChoiceValue<T1, T2, T3, T4, T5, T6>.CqlChoiceValue() -> void
+Hl7.Cql.Runtime.CqlChoiceValue<T1, T2, T3, T4, T5>
+Hl7.Cql.Runtime.CqlChoiceValue<T1, T2, T3, T4, T5>.CqlChoiceValue() -> void
+Hl7.Cql.Runtime.CqlChoiceValue<T1, T2, T3, T4>
+Hl7.Cql.Runtime.CqlChoiceValue<T1, T2, T3, T4>.CqlChoiceValue() -> void
+Hl7.Cql.Runtime.CqlChoiceValue<T1, T2, T3>
+Hl7.Cql.Runtime.CqlChoiceValue<T1, T2, T3>.CqlChoiceValue() -> void
+Hl7.Cql.Runtime.CqlChoiceValue<T1, T2>
+Hl7.Cql.Runtime.CqlChoiceValue<T1, T2>.CqlChoiceValue() -> void
+Hl7.Cql.Runtime.CqlChoiceValue<T1>
+Hl7.Cql.Runtime.CqlChoiceValue<T1>.CqlChoiceValue() -> void
 Hl7.Cql.Runtime.CqlContext
 Hl7.Cql.Runtime.CqlContext.ContextEvent -> System.EventHandler<Hl7.Cql.Runtime.ContextEventArgs!>?
 Hl7.Cql.Runtime.CqlContext.CqlContext(Hl7.Cql.Operators.ICqlOperators! operators, System.Collections.Generic.IDictionary<string!, object!>? parameters = null, Hl7.Cql.Runtime.DefinitionDictionary<System.Delegate!>? delegates = null) -> void
@@ -60,6 +80,7 @@ override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CreateC
 readonly Hl7.Cql.Runtime.BaseTypeResolver.Types -> System.Collections.Generic.Dictionary<string!, System.Type!>!
 static Hl7.Cql.Runtime.CqlChoiceMetadata.operator !=(Hl7.Cql.Runtime.CqlChoiceMetadata? left, Hl7.Cql.Runtime.CqlChoiceMetadata? right) -> bool
 static Hl7.Cql.Runtime.CqlChoiceMetadata.operator ==(Hl7.Cql.Runtime.CqlChoiceMetadata? left, Hl7.Cql.Runtime.CqlChoiceMetadata? right) -> bool
+static Hl7.Cql.Runtime.CqlChoiceValue.MakeChoiceType(System.Type![]! choiceTypes) -> System.Type!
 static Hl7.Cql.Runtime.CqlTupleMetadata.operator !=(Hl7.Cql.Runtime.CqlTupleMetadata? left, Hl7.Cql.Runtime.CqlTupleMetadata? right) -> bool
 static Hl7.Cql.Runtime.CqlTupleMetadata.operator ==(Hl7.Cql.Runtime.CqlTupleMetadata? left, Hl7.Cql.Runtime.CqlTupleMetadata? right) -> bool
 static Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Default.get -> Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter!

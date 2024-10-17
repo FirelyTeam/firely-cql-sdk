@@ -9,7 +9,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using System.Reflection;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -175,7 +177,8 @@ partial class ExpressionBuilderContext
                 return null;
             }
 
-            var choiceType = CqlChoiceType.MakeChoiceType(typeSpecifiersByTypes.SelectToArray(g => g.Key!));
+            var choiceType = new CqlChoiceType();
+                // CqlChoiceValue.MakeChoiceType(typeSpecifiersByTypes.SelectToArray(g => g.Key!));
             return choiceType;
         }
 
@@ -271,31 +274,9 @@ partial class ExpressionBuilderContext
     }
 }
 
-internal class CqlChoiceType
+internal static class PropertyInfos
 {
-    public object? Value { get; init; }
-    public static Type MakeChoiceType(Type[] choiceTypes) =>
-        choiceTypes.Length switch
-        {
-            // This could be better distributed, but it's not worth the effort
-            0 => throw new ArgumentException("At least one choice type must be provided.", nameof(choiceTypes)),
-            1 => typeof(CqlChoiceType<>).MakeGenericType(choiceTypes),
-            2 => typeof(CqlChoiceType<,>).MakeGenericType(choiceTypes),
-            3 => typeof(CqlChoiceType<,,>).MakeGenericType(choiceTypes),
-            4 => typeof(CqlChoiceType<,,,>).MakeGenericType(choiceTypes),
-            5 => typeof(CqlChoiceType<,,,,>).MakeGenericType(choiceTypes),
-            6 => typeof(CqlChoiceType<,,,,,>).MakeGenericType(choiceTypes),
-            7 => typeof(CqlChoiceType<,,,,,,>).MakeGenericType(choiceTypes),
-            8 => typeof(CqlChoiceType<,,,,,,,>).MakeGenericType(choiceTypes),
-            _ => typeof(CqlChoiceType<,,,,,,,>).MakeGenericType([..choiceTypes[0..7], MakeChoiceType(choiceTypes[8..])])
-        };
+    internal static PropertyInfo CqlChoiceValueProperty { get; } =
+        ReflectionUtility.PropertyOf(() => default(CqlChoiceValue)!.Value);
 }
 
-internal class CqlChoiceType<T1> : CqlChoiceType { }
-internal class CqlChoiceType<T1, T2> : CqlChoiceType<T1> { }
-internal class CqlChoiceType<T1, T2, T3> : CqlChoiceType<T1, T2> { }
-internal class CqlChoiceType<T1, T2, T3, T4> : CqlChoiceType<T1, T2, T3> { }
-internal class CqlChoiceType<T1, T2, T3, T4, T5> : CqlChoiceType<T1, T2, T3, T4> { }
-internal class CqlChoiceType<T1, T2, T3, T4, T5, T6> : CqlChoiceType<T1, T2, T3, T4, T5> { }
-internal class CqlChoiceType<T1, T2, T3, T4, T5, T6, T7> : CqlChoiceType<T1, T2, T3, T4, T5, T6> { }
-internal class CqlChoiceType<T1, T2, T3, T4, T5, T6, T7, T8> : CqlChoiceType<T1, T2, T3, T4, T5, T6, T7> { }

@@ -71,23 +71,42 @@ internal static class ExpressionExtensions
             }
         }
 
+        var expressionTypeIsChoiceType = expression.Type.IsChoiceType();
+
         if (safeUpcastAllowed)
         {
             var isAssignableFrom =
-                expression.Type == typeof(object) // Choice?
+                expressionTypeIsChoiceType // Choice?
                 || expression.Type.IsAssignableFrom(type);
             if (isAssignableFrom || throwError)
             {
+                if (expressionTypeIsChoiceType)
+                {
+                    // e.g. T t = choice.Value as T;
+                    expression = Expression.Property(expression, PropertyInfos.CqlChoiceValueProperty);
+                }
+                // e.g. TDerived derived = base as TDerived;
                 Expression cast = Expression.TypeAs(expression, type);
                 return (cast, TypeConversion.ExpressionTypeAs);
             }
         }
 
         var isAssignableTo =
-            expression.Type == typeof(object) // Choice?
+            expressionTypeIsChoiceType // Choice?
             || expression.Type.IsAssignableTo(type);
         if (isAssignableTo || throwError)
         {
+            if (expressionTypeIsChoiceType)
+            {
+                // e.g. CqlChoiceValue<,,> choice = new CqlChoiceValue<,,>() { Value = value; };
+                expression = Expression.MemberInit(
+                    newExpression: Expression.New(type.GetConstructor(Type.EmptyTypes)!),
+                    bindings: [
+                        Expression.Bind(PropertyInfos.CqlChoiceValueProperty, Expression.Convert(expression, typeof(object)))
+                    ]);
+                //Expression.Property(expression, PropertyInfos.CqlChoiceValueProperty);
+            }
+            // e.g. TBase base = (TBase)derived;
             Expression cast = Expression.Convert(expression, type);
             return (cast, TypeConversion.ExpressionCast);
         }
