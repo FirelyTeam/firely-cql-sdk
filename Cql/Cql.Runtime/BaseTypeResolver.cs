@@ -103,8 +103,9 @@ namespace Hl7.Cql.Runtime
         /// <inheritdoc/>
         internal sealed override PropertyInfo? GetProperty(Type type, string propertyName)
         {
-            if (typeof(TupleBaseType).IsAssignableFrom(type))
+            if (type.IsTupleBaseType())
             {
+                // This code only executes during the building of the LINQ expression tree, not at runtime
                 var properties = type.GetProperties();
                 foreach (var prop in properties)
                 {
@@ -112,9 +113,15 @@ namespace Hl7.Cql.Runtime
                     if (cqlDeclaration != null && cqlDeclaration.Name == propertyName)
                         return prop;
                 }
-
             }
+            else if (type.IsCqlValueTuple())
+            {
+                throw new NotSupportedException("It is not expected that the CQL runtime query the properties of a value type.");
 
+                // If it turns out that this is needed, we can implement it, but since the metadata
+                // is only available from the CqlTupleMetadata that is available from the first element
+                // of the tuple, it is not clear how to implement this given only the type.
+            }
             return GetPropertyCore(type, propertyName);
         }
 

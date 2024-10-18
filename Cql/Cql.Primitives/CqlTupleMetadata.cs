@@ -1,16 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 
-namespace Hl7.Cql.Runtime;
+namespace Hl7.Cql.Primitives;
 
 /// <summary>
-/// Represents the metadata for a tuple.
+/// Represents the metadata for a CQL value tuple.
+/// CQL value tuples are represented as <see cref="ITuple"/> instances with the first element being a <see cref="CqlTupleMetadata"/> instance.
 /// </summary>
 public class CqlTupleMetadata : IEquatable<CqlTupleMetadata>
 {
+    internal const string? PropertyPrefix = "CqlTupleMetadata_";
+
     /// <summary>
     /// Represents the metadata for a tuple.
     /// </summary>
@@ -25,15 +30,20 @@ public class CqlTupleMetadata : IEquatable<CqlTupleMetadata>
         if (ItemNames.Count != ItemTypes.Count)
             throw new ArgumentException("Item names and types must have the same number of elements.");
 
-        _signatureHashString = BuildSignatureHashString(ItemNames.Zip(ItemTypes).ToList());
+        _signatureHashString = BuildSignatureHashString(ItemNames.Zip(ItemTypes).ToList(), PropertyPrefix);
         _toString = $"[{string.Join(", ", ItemNames.Select(pn => $"\"{pn}\""))}]";
         _hashCode = _signatureHashString.GetHashCode();
     }
 
-    internal static string BuildSignatureHashString(IReadOnlyCollection<(string ItemName, Type ItemType)> signature)
+    internal static string BuildSignatureHashString(
+        IEnumerable<(string ItemName, Type ItemType)> signature,
+        string? prepend = null)
     {
-        var signatureString = string.Join("+", signature.Select(t => $"{t.ItemName}:{t.ItemType.ToCSharpString()}"));
-        var signatureHashString = $"CqlTupleMetadata_{Hasher.Instance.Hash(signatureString)}";
+        var signatureString = string.Join(
+            "+",
+            signature
+                .Select(t => $"{t.ItemName}:{t.ItemType.ToCSharpString()}"));
+        var signatureHashString = $"{prepend}{Hasher.Instance.Hash(signatureString)}";
         return signatureHashString;
     }
 
