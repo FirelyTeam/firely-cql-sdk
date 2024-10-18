@@ -8,6 +8,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -33,7 +34,7 @@ internal class TupleBuilderCache : IDisposable
         ILogger<TupleBuilderCache> logger)
     {
         _logger = logger;
-        _tupleBuilderCacheName = $"Tuples{Guid.NewGuid():N}";
+        _tupleBuilderCacheName = "TemporaryTupleAssembly";
         _logger.LogInformation("Creating tuple type cache {name}", _tupleBuilderCacheName);
 
         var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(_tupleBuilderCacheName), AssemblyBuilderAccess.RunAndCollect);
@@ -53,18 +54,21 @@ internal class TupleBuilderCache : IDisposable
     /// <returns>Gets the type that matches the properties.</returns>
     public Type CreateOrGetTupleTypeFor(IReadOnlyDictionary<string, Type> propertyNamesAndTypes)
     {
-        var normalizedProperties = propertyNamesAndTypes
-            .SelectToArray(kvp =>
+        var properties = propertyNamesAndTypes
+            .Select(kvp =>
             {
                 var propName = ExpressionBuilderContext.NormalizeIdentifier(kvp.Key);
                 var propType = kvp.Value;
-                return (propName, propType);
-            });
+                var originalName = kvp.Key;
+                return (propName, propType, originalName);
+            })
+            //.OrderBy(t => t.propName)
+            .ToArray();
 
         var matchedTupleType = _tupleTypeList
             .FirstOrDefault(tupleType =>
             {
-                var isMatch = normalizedProperties
+                var isMatch = properties
                     .All(prop =>
                              tupleType.GetProperty(prop.propName) is { PropertyType: { } tuplePropertyType }
                              && tuplePropertyType == prop.propType);
@@ -73,16 +77,15 @@ internal class TupleBuilderCache : IDisposable
         if (matchedTupleType != null)
             return matchedTupleType;
 
-        var typeName = $"Tuples.{TupleTypeNameFor(propertyNamesAndTypes)}";
+        var typeName = $"Tuples.{TupleTypeNameFor(properties.SelectToArray(t => (t.propName, t.propType)))}";
 
-        var myTypeBuilder = _moduleBuilder.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class, typeof(TupleBaseType));
+        var myTypeBuilder = _moduleBuilder.DefineType(typeName, TypeAttributes.NotPublic | TypeAttributes.Class, typeof(TupleBaseType));
 
-        foreach (var kvp in propertyNamesAndTypes)
+        foreach (var t in properties)
         {
-            var name = ExpressionBuilderContext.NormalizeIdentifier(kvp.Key);
-            var type = kvp.Value;
-            DefineProperty(myTypeBuilder, name!, kvp.Key, type);
+            DefineProperty(myTypeBuilder, t.propName, t.originalName, t.propType);
         }
+
         var typeInfo = myTypeBuilder.CreateTypeInfo();
         AddTupleType(typeInfo!);
         return typeInfo!;
@@ -128,19 +131,25 @@ internal class TupleBuilderCache : IDisposable
 
     /// <summary>
     /// Gets a unique tuple name given the elements (members) of the type.
-    /// This method must return the same value for equal values of <paramref name="elementInfo"/>.
+    /// This method must return the same value for equal values of <paramref name="signature"/>.
     /// Equality is determined by comparing <see cref="KeyValuePair{TKey,TValue}.Key"/> using default string equality
     /// and <see cref="KeyValuePair{TKey,TValue}.Value"/> using default equality.
     /// </summary>
-    /// <param name="elementInfo">Key value pairs where key is the name of the element and the value is its type.</param>
+    /// <param name="signature">Key value pairs where key is the name of the element and the value is its type.</param>
     /// <returns>The unique tuple type name.</returns>
-    private static string TupleTypeNameFor(IReadOnlyDictionary<string, Type> elementInfo)
+    private static string TupleTypeNameFor(IReadOnlyCollection<(string ItemName, Type ItemType)> signature)
     {
-        var nameTypes = elementInfo
-                         .OrderBy(k => k.Key)
-                         .Select(kvp => $"{kvp.Key}:{kvp.Value.ToCSharpString()}");
+        var nameTypes = signature
+                        .OrderBy(k => k.ItemName)
+                        .Select(kvp => $"{kvp.ItemName}:{kvp.ItemType.ToCSharpString()}");
         var hashInput = string.Join("+", nameTypes);
         var tupleId = Hasher.Instance.Hash(hashInput);
-        return $"Tuple_{tupleId}";
+
+        var a = CqlTupleMetadata.BuildSignatureHashString(signature.OrderBy(s => s.ItemName), "Tuple_");
+        var b = $"Tuple_{tupleId}";
+
+        Debug.Assert(a == b);
+
+        return b;
     }
 }

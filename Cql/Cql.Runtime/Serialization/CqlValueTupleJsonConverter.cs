@@ -6,11 +6,11 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 #nullable enable
-using Hl7;
 using System;
 using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Runtime.Serialization;
 

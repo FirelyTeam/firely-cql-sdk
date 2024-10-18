@@ -8,7 +8,7 @@
 using System;
 using System.Collections.Generic;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Runtime;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
@@ -19,7 +19,7 @@ internal class TupleMetadataBuilder
     public string GetTupleMetadataPropertyName(
         IReadOnlyCollection<(string Name, Type Type)> tupleItemsSignature)
     {
-        var propName = CqlTupleMetadata.BuildSignatureHashString(tupleItemsSignature);
+        var propName = CqlTupleMetadata.BuildSignatureHashString(tupleItemsSignature, CqlTupleMetadata.PropertyPrefix);
         _signaturesByHash[propName] = tupleItemsSignature;
         return propName;
     }

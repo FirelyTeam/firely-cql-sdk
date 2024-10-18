@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
@@ -46,7 +47,7 @@ internal class TypeToCSharpConverter
     }
 
     public bool ShouldUseTupleType(Type type) =>
-        _useCSharpValueTuples && type.Name.StartsWith("Tuple_"); // REVIEW: This is a heuristic, and may not be correct in all cases.
+        _useCSharpValueTuples && type.IsTupleBaseType();
 
     public string ToCSharp(Type type)
     {
