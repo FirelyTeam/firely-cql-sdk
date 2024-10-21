@@ -179,7 +179,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_2_000 : ILibrary, ISingl
             string ah_ = ag_?.Value;
             FhirDateTime ai_ = ReferralOrder?.AuthoredOnElement;
             CqlDateTime aj_ = context.Operators.Convert<CqlDateTime>(ai_);
-            (CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? ak_ = (CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb, ah_, aj_);
+            (CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? ak_ = (CqlTupleMetadata_BLEMZbHGbhMbZiIgCJaASVTUS, ah_, aj_);
 
             return ak_;
         };
@@ -327,7 +327,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_2_000 : ILibrary, ISingl
         return a_;
     }
 
-    private static CqlTupleMetadata CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb = new(
+    private static CqlTupleMetadata CqlTupleMetadata_BLEMZbHGbhMbZiIgCJaASVTUS = new(
         [typeof(string), typeof(CqlDateTime)],
         ["ID", "AuthorDate"]);
 

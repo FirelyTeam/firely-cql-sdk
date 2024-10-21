@@ -683,7 +683,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? h_((CqlTupleMetadata, IEnumerable<CqlDate> SortedDates)? SortedDates)
         {
             IEnumerable<CqlDate> l_ = SortedDates?.SortedDates;
-            (CqlTupleMetadata, IEnumerable<CqlDate> SortedList, int? AnchorIndex)? m_ = (CqlTupleMetadata_BDeBMdFeZaVSehBSFYjTFdYYD, l_, 0);
+            (CqlTupleMetadata, IEnumerable<CqlDate> SortedList, int? AnchorIndex)? m_ = (CqlTupleMetadata_CWPhjaWHbfdjhVAPZiRhbJcgZ, l_, 0);
             (CqlTupleMetadata, IEnumerable<CqlDate> SortedList, int? AnchorIndex)?[] n_ = [
                 m_,
             ];
@@ -710,7 +710,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                 };
                 IEnumerable<CqlDate> v_ = context.Operators.Where<CqlDate>(DateList, u_);
                 int? x_ = context.Operators.Add(s_, 1);
-                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? y_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, t_ as CqlDate, v_, x_);
+                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? y_ = (CqlTupleMetadata_BGjDKhZUjGDUZgiFYQFiFVWOe, t_ as CqlDate, v_, x_);
                 (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] z_ = [
                     y_,
                 ];
@@ -753,7 +753,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                             };
                             IEnumerable<CqlDate> ba_ = context.Operators.Where<CqlDate>(av_, az_);
                             int? bc_ = context.Operators.Add(aw_, 1);
-                            (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? bd_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, ax_ as CqlDate, ba_, bc_);
+                            (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? bd_ = (CqlTupleMetadata_BGjDKhZUjGDUZgiFYQFiFVWOe, ax_ as CqlDate, ba_, bc_);
                             (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] be_ = [
                                 bd_,
                             ];
@@ -796,7 +796,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                         };
                                         IEnumerable<CqlDate> cf_ = context.Operators.Where<CqlDate>(ca_, ce_);
                                         int? ch_ = context.Operators.Add(cb_, 1);
-                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ci_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, cc_ as CqlDate, cf_, ch_);
+                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ci_ = (CqlTupleMetadata_BGjDKhZUjGDUZgiFYQFiFVWOe, cc_ as CqlDate, cf_, ch_);
                                         (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] cj_ = [
                                             ci_,
                                         ];
@@ -839,7 +839,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                     };
                                                     IEnumerable<CqlDate> dk_ = context.Operators.Where<CqlDate>(df_, dj_);
                                                     int? dm_ = context.Operators.Add(dg_, 1);
-                                                    (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? dn_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, dh_ as CqlDate, dk_, dm_);
+                                                    (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? dn_ = (CqlTupleMetadata_BGjDKhZUjGDUZgiFYQFiFVWOe, dh_ as CqlDate, dk_, dm_);
                                                     (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] do_ = [
                                                         dn_,
                                                     ];
@@ -882,7 +882,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                                 };
                                                                 IEnumerable<CqlDate> ep_ = context.Operators.Where<CqlDate>(ek_, eo_);
                                                                 int? er_ = context.Operators.Add(el_, 1);
-                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? es_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, em_ as CqlDate, ep_, er_);
+                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? es_ = (CqlTupleMetadata_BGjDKhZUjGDUZgiFYQFiFVWOe, em_ as CqlDate, ep_, er_);
                                                                 (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] et_ = [
                                                                     es_,
                                                                 ];
@@ -925,7 +925,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                                             };
                                                                             IEnumerable<CqlDate> fu_ = context.Operators.Where<CqlDate>(fp_, ft_);
                                                                             int? fw_ = context.Operators.Add(fq_, 1);
-                                                                            (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? fx_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, fr_ as CqlDate, fu_, fw_);
+                                                                            (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? fx_ = (CqlTupleMetadata_BGjDKhZUjGDUZgiFYQFiFVWOe, fr_ as CqlDate, fu_, fw_);
                                                                             (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] fy_ = [
                                                                                 fx_,
                                                                             ];
@@ -968,7 +968,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                                                         };
                                                                                         IEnumerable<CqlDate> gz_ = context.Operators.Where<CqlDate>(gu_, gy_);
                                                                                         int? hb_ = context.Operators.Add(gv_, 1);
-                                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? hc_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, gw_ as CqlDate, gz_, hb_);
+                                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? hc_ = (CqlTupleMetadata_BGjDKhZUjGDUZgiFYQFiFVWOe, gw_ as CqlDate, gz_, hb_);
                                                                                         (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] hd_ = [
                                                                                             hc_,
                                                                                         ];
@@ -1011,7 +1011,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                                                                     };
                                                                                                     IEnumerable<CqlDate> ie_ = context.Operators.Where<CqlDate>(hz_, id_);
                                                                                                     int? ig_ = context.Operators.Add(ia_, 1);
-                                                                                                    (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ih_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, ib_ as CqlDate, ie_, ig_);
+                                                                                                    (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? ih_ = (CqlTupleMetadata_BGjDKhZUjGDUZgiFYQFiFVWOe, ib_ as CqlDate, ie_, ig_);
                                                                                                     (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] ii_ = [
                                                                                                         ih_,
                                                                                                     ];
@@ -1054,7 +1054,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                                                                                 };
                                                                                                                 IEnumerable<CqlDate> jj_ = context.Operators.Where<CqlDate>(je_, ji_);
                                                                                                                 int? jl_ = context.Operators.Add(jf_, 1);
-                                                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? jm_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, jg_ as CqlDate, jj_, jl_);
+                                                                                                                (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? jm_ = (CqlTupleMetadata_BGjDKhZUjGDUZgiFYQFiFVWOe, jg_ as CqlDate, jj_, jl_);
                                                                                                                 (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] jn_ = [
                                                                                                                     jm_,
                                                                                                                 ];
@@ -1097,7 +1097,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                                                                                             };
                                                                                                                             IEnumerable<CqlDate> ko_ = context.Operators.Where<CqlDate>(kj_, kn_);
                                                                                                                             int? kq_ = context.Operators.Add(kk_, 1);
-                                                                                                                            (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? kr_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, kl_ as CqlDate, ko_, kq_);
+                                                                                                                            (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? kr_ = (CqlTupleMetadata_BGjDKhZUjGDUZgiFYQFiFVWOe, kl_ as CqlDate, ko_, kq_);
                                                                                                                             (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] ks_ = [
                                                                                                                                 kr_,
                                                                                                                             ];
@@ -1140,7 +1140,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                                                                                                         };
                                                                                                                                         IEnumerable<CqlDate> lt_ = context.Operators.Where<CqlDate>(lo_, ls_);
                                                                                                                                         int? lv_ = context.Operators.Add(lp_, 1);
-                                                                                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? lw_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, lq_ as CqlDate, lt_, lv_);
+                                                                                                                                        (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? lw_ = (CqlTupleMetadata_BGjDKhZUjGDUZgiFYQFiFVWOe, lq_ as CqlDate, lt_, lv_);
                                                                                                                                         (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)?[] lx_ = [
                                                                                                                                             lw_,
                                                                                                                                         ];
@@ -1183,7 +1183,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
                                                                                                                                                     };
                                                                                                                                                     IEnumerable<CqlDate> my_ = context.Operators.Where<CqlDate>(mt_, mx_);
                                                                                                                                                     int? na_ = context.Operators.Add(mu_, 1);
-                                                                                                                                                    (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? nb_ = (CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc, mv_ as CqlDate, my_, na_);
+                                                                                                                                                    (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? nb_ = (CqlTupleMetadata_BGjDKhZUjGDUZgiFYQFiFVWOe, mv_ as CqlDate, my_, na_);
 
                                                                                                                                                     return nb_;
                                                                                                                                                 }
@@ -1301,11 +1301,11 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         [typeof(IEnumerable<CqlDate>)],
         ["SortedDates"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_BDeBMdFeZaVSehBSFYjTFdYYD = new(
+    private static CqlTupleMetadata CqlTupleMetadata_CWPhjaWHbfdjhVAPZiRhbJcgZ = new(
         [typeof(IEnumerable<CqlDate>), typeof(int?)],
         ["SortedList", "AnchorIndex"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc = new(
+    private static CqlTupleMetadata CqlTupleMetadata_BGjDKhZUjGDUZgiFYQFiFVWOe = new(
         [typeof(CqlDate), typeof(IEnumerable<CqlDate>), typeof(int?)],
         ["NextDate", "NewList", "IndexofNewDate"]);
 

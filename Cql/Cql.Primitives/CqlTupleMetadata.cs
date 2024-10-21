@@ -30,19 +30,19 @@ public class CqlTupleMetadata : IEquatable<CqlTupleMetadata>
         if (ItemNames.Count != ItemTypes.Count)
             throw new ArgumentException("Item names and types must have the same number of elements.");
 
-        _signatureHashString = BuildSignatureHashString(ItemNames.Zip(ItemTypes).ToList(), PropertyPrefix);
+        _signatureHashString = BuildSignatureHashString(ItemTypes.Zip(ItemNames).ToList(), PropertyPrefix);
         _toString = $"[{string.Join(", ", ItemNames.Select(pn => $"\"{pn}\""))}]";
         _hashCode = _signatureHashString.GetHashCode();
     }
 
     internal static string BuildSignatureHashString(
-        IEnumerable<(string ItemName, Type ItemType)> signature,
+        IEnumerable<(Type type, string propName)> tupleProps,
         string? prepend = null)
     {
+        var orderedTupleProps = tupleProps.OrderBy(k => k.propName).ToList();
         var signatureString = string.Join(
             "+",
-            signature
-                .Select(t => $"{t.ItemName}:{t.ItemType.ToCSharpString()}"));
+            orderedTupleProps.Select(t => $"{t.propName}:{t.type.ToCSharpString()}"));
         var signatureHashString = $"{prepend}{Hasher.Instance.Hash(signatureString)}";
         return signatureHashString;
     }

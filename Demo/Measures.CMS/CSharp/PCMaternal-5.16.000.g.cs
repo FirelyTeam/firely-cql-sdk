@@ -715,7 +715,7 @@ public partial class PCMaternal_5_16_000 : ILibrary, ISingleton<PCMaternal_5_16_
             Id d_ = DeliveryEncounter?.IdElement;
             string e_ = d_?.Value;
             int? f_ = this.calculatedGestationalAge(context, DeliveryEncounter);
-            (CqlTupleMetadata, string EncounterID, int? CalculatedCGA)? g_ = (CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB, e_, f_);
+            (CqlTupleMetadata, string EncounterID, int? CalculatedCGA)? g_ = (CqlTupleMetadata_QRZgNJCaGQEYIeOSBhjLZNSO, e_, f_);
 
             return g_;
         };
@@ -989,7 +989,7 @@ public partial class PCMaternal_5_16_000 : ILibrary, ISingleton<PCMaternal_5_16_
         return i_ as CqlQuantity;
     }
 
-    private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
+    private static CqlTupleMetadata CqlTupleMetadata_QRZgNJCaGQEYIeOSBhjLZNSO = new(
         [typeof(string), typeof(int?)],
         ["EncounterID", "CalculatedCGA"]);
 

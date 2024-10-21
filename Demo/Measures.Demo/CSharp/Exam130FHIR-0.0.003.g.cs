@@ -552,7 +552,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             };
             IEnumerable<string> al_ = context.Operators.Select<Code, string>(aj_, ak_);
             Code<ObservationStatus> am_ = FecalOccult?.StatusElement;
-            (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? an_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, r_, x_, al_, am_);
+            (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? an_ = (CqlTupleMetadata_DDeEOBQXHDLDYTUSRPAFYZUVL, r_, x_, al_, am_);
 
             return an_;
         };
@@ -907,7 +907,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
             };
             IEnumerable<string> ap_ = context.Operators.Select<Code, string>(an_, ao_);
             Code<ObservationStatus> aq_ = FitDNA?.StatusElement;
-            (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? ar_ = (CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV, v_, ab_, ap_, aq_);
+            (CqlTupleMetadata, CqlDateTime occultDate, IEnumerable<FhirString> occultResult, IEnumerable<string> occultCategoryCode, Code<ObservationStatus> occultStatus)? ar_ = (CqlTupleMetadata_DDeEOBQXHDLDYTUSRPAFYZUVL, v_, ab_, ap_, aq_);
 
             return ar_;
         };
@@ -1563,7 +1563,7 @@ public partial class Exam130FHIR_0_0_003 : ILibrary, ISingleton<Exam130FHIR_0_0_
         return h_;
     }
 
-    private static CqlTupleMetadata CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV = new(
+    private static CqlTupleMetadata CqlTupleMetadata_DDeEOBQXHDLDYTUSRPAFYZUVL = new(
         [typeof(CqlDateTime), typeof(IEnumerable<FhirString>), typeof(IEnumerable<string>), typeof(Code<ObservationStatus>)],
         ["occultDate", "occultResult", "occultCategoryCode", "occultStatus"]);
 

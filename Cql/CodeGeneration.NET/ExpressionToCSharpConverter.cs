@@ -50,7 +50,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             public Context WithDoUseIndent() => WithOverride(useIndentFn: _ => true);
 
-            public string GetTupleMetadataPropertyName(IReadOnlyCollection<(string Name, Type Type)> tupleProperties) =>
+            public string GetTupleMetadataPropertyName(IReadOnlyCollection<(Type Type, string Name)> tupleProperties) =>
                 _tupleMetadataBuilder.GetTupleMetadataPropertyName(tupleProperties);
 
             public void Deconstruct(

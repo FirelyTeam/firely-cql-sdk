@@ -116,7 +116,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
             IEnumerable<CqlInterval<CqlDate>> l_ = this.Collapsed_Coverage_Intervals(context, c_);
             IEnumerable<CqlInterval<CqlDate>> m_ = this.Collapsed_Coverage_Adjacent_Intervals(context, l_);
             IEnumerable<CqlInterval<CqlDate>> n_ = this.Collapsed_Final_Coverage_Intervals(context, j_, m_);
-            (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? o_ = (CqlTupleMetadata_DPLIOBaSciHAAETJOMSIjWgbP, c_, e_, h_, n_);
+            (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)? o_ = (CqlTupleMetadata_CBVceKWDGQcVXVifMgKSFFCNV, c_, e_, h_, n_);
 
             return o_;
         };
@@ -442,7 +442,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
         [typeof(CqlInterval<CqlDate>), typeof(CqlInterval<CqlDate>)],
         ["Coverage1", "Coverage2"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_DPLIOBaSciHAAETJOMSIjWgbP = new(
+    private static CqlTupleMetadata CqlTupleMetadata_CBVceKWDGQcVXVifMgKSFFCNV = new(
         [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
         ["IntervalInfo", "Collapsed", "Adjacent", "CollapsedFinal"]);
 
