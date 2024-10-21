@@ -15,14 +15,16 @@ namespace Hl7.Cql.CqlToElm.Test;
 internal static class Extensions
 {
     private static readonly CqlContext DefaultCqlContext = FhirCqlContext.CreateContext();
+    private static readonly Library DummyLib = new Library { identifier = new() { id = "temp", version = "1.0.0" } };
 
     public static object? RunLambda(
         this AssemblyCompiler assemblyCompiler,
         LambdaExpression expression,
-        Library library,
+        Library? library,
         CqlContext? ctx = null)
     {
         var expressionName = expression.Name ?? "Expression";
+        library ??= DummyLib;
         LibrarySet librarySet = new (expressionName, library);
         DefinitionDictionary<LambdaExpression> definitions = new();
         switch (((IGetVersionedIdentifier)library).VersionedIdentifier)
