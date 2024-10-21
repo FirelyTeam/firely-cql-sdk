@@ -30,7 +30,7 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
     public (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? Result(CqlContext context)
     {
         (CqlTupleMetadata, string result1, string result2)? a_ = (CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ, "some first result", "some second result");
-        (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? b_ = (CqlTupleMetadata_EDCNVAaGTSjJYEdHbFSMjTdAe, "success", a_);
+        (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? b_ = (CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY, "success", a_);
 
         return b_;
     }
@@ -39,7 +39,7 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
         [typeof(string), typeof(string)],
         ["result1", "result2"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_EDCNVAaGTSjJYEdHbFSMjTdAe = new(
+    private static CqlTupleMetadata CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY = new(
         [typeof(string), typeof((CqlTupleMetadata, string result1, string result2)?)],
         ["status", "result"]);
 

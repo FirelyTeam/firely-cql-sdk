@@ -18,7 +18,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var lib = CreateLibraryForExpression("year from DateTime(2003, 10, 29, 20, 50, 33, 955)");
             var cf = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<DateTimeComponentFrom>();
-            var result = Run<int?>(cf);
+            var result = Run<int?>(cf, lib);
             Assert.AreEqual(2003, result);
         }
         [TestMethod]
@@ -26,7 +26,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var lib = CreateLibraryForExpression("year from Date(2003, 10, 29)");
             var cf = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<DateTimeComponentFrom>();
-            var result = Run<int?>(cf);
+            var result = Run<int?>(cf, lib);
             Assert.AreEqual(2003, result);
         }
         [TestMethod]
@@ -34,7 +34,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var lib = CreateLibraryForExpression("hour from Time(20, 40, 20, 123)");
             var cf = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<DateTimeComponentFrom>();
-            var result = Run<int?>(cf);
+            var result = Run<int?>(cf, lib);
             Assert.AreEqual(20, result);
         }
 
@@ -43,7 +43,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var lib = CreateLibraryForExpression("timezoneoffset from DateTime(2003, 10, 29, 20, 50, 33, 955, 5.5)");
             var cf = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<TimezoneOffsetFrom>();
-            var result = Run<decimal?>(cf);
+            var result = Run<decimal?>(cf, lib);
             Assert.AreEqual(5.5m, result);
         }
         [TestMethod]
@@ -51,7 +51,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var lib = CreateLibraryForExpression("date from DateTime(2003, 10, 29, 20, 50, 33, 955, 5.5)");
             var cf = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<DateFrom>();
-            var result = Run<CqlDate>(cf);
+            var result = Run<CqlDate>(cf, lib);
             Assert.IsNotNull(result);
             Assert.AreEqual(2003, result.Value.Year);
             Assert.AreEqual(10, result.Value.Month);

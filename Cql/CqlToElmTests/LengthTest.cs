@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = CreateLibraryForExpression("Length(null as String)");
             var length = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Length>();
-            var result = Run<int?>(length);
+            var result = Run<int?>(length, library);
             result.Should().BeNull();
         }
     }

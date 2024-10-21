@@ -36,13 +36,12 @@ public class CqlTupleMetadata : IEquatable<CqlTupleMetadata>
     }
 
     internal static string BuildSignatureHashString(
-        IEnumerable<(Type type, string propName)> tupleProps,
+        IEnumerable<(Type propType, string propName)> tupleProps,
         string? prepend = null)
     {
-        var orderedTupleProps = tupleProps.OrderBy(k => k.propName).ToList();
         var signatureString = string.Join(
             "+",
-            orderedTupleProps.Select(t => $"{t.propName}:{t.type.ToCSharpString()}"));
+            tupleProps.Select(t => $"{t.propName}:{t.propType.ToCSharpString()}"));
         var signatureHashString = $"{prepend}{Hasher.Instance.Hash(signatureString)}";
         return signatureHashString;
     }

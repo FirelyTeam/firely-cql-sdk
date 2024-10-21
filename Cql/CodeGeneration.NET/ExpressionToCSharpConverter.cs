@@ -52,14 +52,6 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             public string GetTupleMetadataPropertyName(IReadOnlyCollection<(Type Type, string Name)> tupleProperties) =>
                 _tupleMetadataBuilder.GetTupleMetadataPropertyName(tupleProperties);
-
-            public void Deconstruct(
-                out int Indent,
-                out bool UseIndent)
-            {
-                Indent = this.Indent;
-                UseIndent = this.UseIndent;
-            }
         }
 
         public Context NewContext(

@@ -420,7 +420,7 @@ public partial class AppropriateTestingforPharyngitisFHIR_0_1_000 : ILibrary, IS
         IEnumerable<ValueTuple<Encounter, Condition>> c_ = context.Operators.CrossJoin<Encounter, Condition>(a_, b_);
         (CqlTupleMetadata, Encounter VisitWithAntibiotic, Condition AcutePharyngitisTonsillitis)? d_(ValueTuple<Encounter, Condition> _valueTuple)
         {
-            (CqlTupleMetadata, Encounter VisitWithAntibiotic, Condition AcutePharyngitisTonsillitis)? j_ = (CqlTupleMetadata_YPYXEdbbCQBdAVHXVcKUWMfH, _valueTuple.Item1, _valueTuple.Item2);
+            (CqlTupleMetadata, Encounter VisitWithAntibiotic, Condition AcutePharyngitisTonsillitis)? j_ = (CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU, _valueTuple.Item1, _valueTuple.Item2);
 
             return j_;
         };
@@ -549,7 +549,7 @@ public partial class AppropriateTestingforPharyngitisFHIR_0_1_000 : ILibrary, IS
         IEnumerable<ValueTuple<Observation, Encounter>> c_ = context.Operators.CrossJoin<Observation, Encounter>(a_, b_);
         (CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? d_(ValueTuple<Observation, Encounter> _valueTuple)
         {
-            (CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? j_ = (CqlTupleMetadata_FfgUYSNEbcXLLEXFcMJOEHbiJ, _valueTuple.Item1, _valueTuple.Item2);
+            (CqlTupleMetadata, Observation GroupAStreptococcusTest, Encounter EncounterWithPharyngitis)? j_ = (CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV, _valueTuple.Item1, _valueTuple.Item2);
 
             return j_;
         };
@@ -664,11 +664,11 @@ public partial class AppropriateTestingforPharyngitisFHIR_0_1_000 : ILibrary, IS
         return e_;
     }
 
-    private static CqlTupleMetadata CqlTupleMetadata_YPYXEdbbCQBdAVHXVcKUWMfH = new(
+    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
         [typeof(Encounter), typeof(Condition)],
         ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_FfgUYSNEbcXLLEXFcMJOEHbiJ = new(
+    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
         [typeof(Observation), typeof(Encounter)],
         ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
 

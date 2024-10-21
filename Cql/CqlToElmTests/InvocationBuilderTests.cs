@@ -265,7 +265,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var match = InvocationBuilder.MatchSignature(SystemLibrary.IndexOf, arguments);
             Assert.IsTrue(match.Compatible);
             var expression = InvocationBuilder.Invoke(SystemLibrary.IndexOf, arguments);
-            var result = Run(expression);
+            var dummyLib = new Library { identifier = new() { id = "temp", version = "1.0.0" }};
+            var result = Run(expression, dummyLib);
             Assert.IsNull(result);
         }
 
