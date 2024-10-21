@@ -298,7 +298,7 @@ namespace Hl7.Cql.CqlToElm.Test
             query.aggregate.Should().NotBeNull();
             query.aggregate.Should().HaveType(SystemTypes.IntegerType);
             query.Should().HaveType(SystemTypes.IntegerType);
-            var result = Run<int>(query);
+            var result = Run<int>(query, lib);
             result.Should().Be(120);
 
         }
@@ -322,7 +322,7 @@ namespace Hl7.Cql.CqlToElm.Test
             query.aggregate.Should().NotBeNull();
             query.aggregate.Should().HaveType(SystemTypes.IntegerType);
             query.Should().HaveType(SystemTypes.IntegerType);
-            var result = Run<int?>(query);
+            var result = Run<int?>(query, lib);
             result.Should().Be(120);
         }
 
@@ -345,7 +345,7 @@ namespace Hl7.Cql.CqlToElm.Test
             query.aggregate.Should().NotBeNull();
             query.aggregate.Should().HaveType(SystemTypes.IntegerType);
             query.Should().HaveType(SystemTypes.IntegerType);
-            var result = Run<int?>(query);
+            var result = Run<int?>(query, lib);
             result.Should().BeNull();
         }
 

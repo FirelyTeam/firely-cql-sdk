@@ -1696,7 +1696,7 @@ namespace Hl7.Cql.CqlToElm.Test
             equalsOverload.Compatible.Should().BeTrue();
             var invokeEquals = InvocationBuilder.Invoke(equalsOverload, null);
             invokeEquals.GetErrors().Should().BeEmpty();
-            var equalsCall = Run(invokeEquals);
+            var equalsCall = Run(invokeEquals, input);
             Assert.AreEqual(true, equalsCall);
         }
     }
