@@ -22,9 +22,10 @@ namespace Hl7.Cql.CodeGeneration.NET
 {
     internal class ExpressionConverter
     {
-        public ExpressionConverter(string libraryName)
+        public ExpressionConverter(string libraryName, IList<string> contextLibraries)
         {
             LibraryName = libraryName;
+            ContextLibraries = contextLibraries;
         }
 
         public string ConvertExpression(int indent, Expression expression, bool leadingIndent = true)
@@ -60,16 +61,28 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static readonly ObjectIDGenerator gen = new();
 
         public string LibraryName { get; }
+        public IList<string> ContextLibraries { get; }
 
         private string convertDefinitionCallExpression(int indent, string leadingIndentString, DefinitionCallExpression dce)
         {
             var sb = new StringBuilder();
             sb.Append(leadingIndentString);
 
-            var target = dce.LibraryName == LibraryName ? "this" : $"{VariableNameGenerator.NormalizeIdentifier(dce.LibraryName)}.Instance";
+            var target = dce.LibraryName == LibraryName ? "this"
+                : ContextLibraries.Contains(dce.LibraryName)
+                    ? VariableNameGenerator.NormalizeIdentifier(dce.LibraryName)
+                    : $"{VariableNameGenerator.NormalizeIdentifier(dce.LibraryName)}.Instance";
+
             var csFunctionName = VariableNameGenerator.NormalizeIdentifier(dce.DefinitionName);
 
-            sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}(context)");
+            if (ContextLibraries.Contains(dce.LibraryName))
+            {
+                sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}()");
+            }
+            else
+            {
+                sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}(context)");
+            }
 
             return sb.ToString();
         }
@@ -79,11 +92,27 @@ namespace Hl7.Cql.CodeGeneration.NET
             var sb = new StringBuilder();
             sb.Append(leadingIndentString);
 
-            var target = fce.LibraryName == LibraryName ? "this" : $"{VariableNameGenerator.NormalizeIdentifier(fce.LibraryName)}.Instance";
+            var target = fce.LibraryName == LibraryName ? "this"
+                : ContextLibraries.Contains(fce.LibraryName)
+                    ? VariableNameGenerator.NormalizeIdentifier(fce.LibraryName)
+                    : $"{VariableNameGenerator.NormalizeIdentifier(fce.LibraryName)}.Instance";
+
+            //var target = fce.LibraryName == LibraryName ? "this" :
+            //    VariableNameGenerator.NormalizeIdentifier(fce.LibraryName);
+
             var csFunctionName = VariableNameGenerator.NormalizeIdentifier(fce.FunctionName);
 
             sb.Append(CultureInfo.InvariantCulture, $"{target}.{csFunctionName}");
-            sb.Append(convertArguments(indent, fce.Arguments));
+
+            if (ContextLibraries.Contains(fce.LibraryName))
+            {
+                sb.Append(convertArguments(indent, fce.Arguments.Skip(1)));
+            }
+            else
+            {
+                sb.Append(convertArguments(indent, fce.Arguments));
+            }
+            
 
             return sb.ToString();
         }
@@ -410,14 +439,14 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
 
-        private string convertLambdaExpression(int indent, string leadingIndentString, LambdaExpression lambda, bool functionMode = false)
+        private string convertLambdaExpression(int indent, string leadingIndentString, LambdaExpression lambda, bool functionMode = false, bool addContext = false)
         {
             var lambdaSb = new StringBuilder();
             lambdaSb.Append(leadingIndentString);
 
             var parameters = lambda.Parameters.Select(p => $"{PrettyTypeName(p.Type)} {escapeKeywords(p.Name!)}").ToList();
             // inserts the context parameter in the start of the lambda expression
-            if (indent == 1)
+            if (indent == 1 && addContext)
                 parameters.Insert(0, "CqlContext context");
 
             var lambdaParameters = $"({string.Join(", ", parameters)})";
@@ -450,13 +479,13 @@ namespace Hl7.Cql.CodeGeneration.NET
             funcSb.Append(PrettyTypeName(function.ReturnType) + " ");
             funcSb.Append(name);
 
-            var lambda = convertLambdaExpression(indent, "", function, functionMode: true);
+            var lambda = convertLambdaExpression(indent, "", function, functionMode: true, addContext: false);
             funcSb.Append(lambda);
 
             return funcSb.ToString();
         }
 
-        public string ConvertTopLevelFunctionDefinition(int indent, LambdaExpression function, string name, string specifiers)
+        public string ConvertTopLevelFunctionDefinition(int indent, LambdaExpression function, string name, string specifiers, bool addContext)
         {
             var funcSb = new StringBuilder();
 
@@ -464,7 +493,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             funcSb.Append(PrettyTypeName(function.ReturnType) + " ");
             funcSb.Append(name);
 
-            var lambda = convertLambdaExpression(indent, "", function, functionMode: true);
+            var lambda = convertLambdaExpression(indent, "", function, functionMode: true, addContext);
             funcSb.Append(lambda);
 
             if (function.Body is not BlockExpression)
