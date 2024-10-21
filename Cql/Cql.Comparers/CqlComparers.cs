@@ -90,6 +90,9 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(CqlDate), new InterfaceCqlComparer<CqlDate>());
             Comparers.TryAdd(typeof(CqlTime), new InterfaceCqlComparer<CqlTime>());
             Comparers.TryAdd(typeof(CqlDateTime), new InterfaceCqlComparer<CqlDateTime>());
+
+            Comparers.TryAdd(typeof(TupleBaseType), new TupleComparer(this)); // Legacy, will be removed!
+
             _cqlTupleTypeComparer = new CqlTupleTypeComparer(this);
             Comparers.TryAdd(typeof(ITuple), _cqlTupleTypeComparer);
 
@@ -203,8 +206,8 @@ namespace Hl7.Cql.Comparers
             }
 
             bool xySwapped = false;
-            var xType = x!.GetType();
-            var yType = y!.GetType();
+            var xType = GetType(x);
+            var yType = GetType(y);
             if (xType != yType)
             {
                 // if x and y are not the same type, we prioritize them based on the following order:
@@ -261,14 +264,7 @@ namespace Hl7.Cql.Comparers
             if (EquivalentOnNullsOnly(x, y) is { } r)
                 return r;
 
-            //if (x is ITuple xx && y is ITuple yy)
-            //{
-            //    return _cqlTupleTypeComparer.Equivalent(xx, yy, precision);
-            //}
-
-            var xType = x!.GetType();
-            if (x is ITuple)
-                xType = typeof(ITuple);
+            var xType = GetType(x);
 
             if (Comparers.TryGetValue(xType, out ICqlComparer? comparer))
             {
@@ -290,15 +286,24 @@ namespace Hl7.Cql.Comparers
             throw new ArgumentException($"Cannot check equivalence for type {xType.Name}");
         }
 
+        private static Type GetType(object? x)
+        {
+            var type = x switch
+            {
+                ITuple        => typeof(ITuple),
+                TupleBaseType => typeof(TupleBaseType),
+                _             => x!.GetType()
+            };
+            return type;
+        }
+
         /// <inheritdoc />
         public int GetHashCode(object? x)
         {
             if (x == null)
                 return typeof(object).GetHashCode();
 
-            var xType = x.GetType();
-            if (x is ITuple)
-                xType = typeof(ITuple);
+            var xType = GetType(x);
 
             if (Comparers.TryGetValue(xType, out ICqlComparer? comparer))
             {
