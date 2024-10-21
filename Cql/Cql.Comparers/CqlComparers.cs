@@ -12,11 +12,8 @@ using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.Resources;
 using System.Runtime.CompilerServices;
-using System.Xml.Schema;
 using JetBrains.Annotations;
 
 namespace Hl7.Cql.Comparers
@@ -26,8 +23,6 @@ namespace Hl7.Cql.Comparers
     /// </summary>
     internal sealed class CqlComparers : ICqlComparer
     {
-        private readonly CqlTupleTypeComparer _cqlTupleTypeComparer;
-
         /*
          *
          * Equivalence : https://cql.hl7.org/04-logicalspecification.html#equivalent
@@ -92,9 +87,7 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(CqlDateTime), new InterfaceCqlComparer<CqlDateTime>());
 
             Comparers.TryAdd(typeof(TupleBaseType), new TupleBaseTypeComparer(this)); // Legacy, will be removed!
-
-            _cqlTupleTypeComparer = new CqlTupleTypeComparer(this);
-            Comparers.TryAdd(typeof(ITuple), _cqlTupleTypeComparer);
+            Comparers.TryAdd(typeof(ITuple), new CqlTupleTypeComparer(this));
 
             ComparerFactories.TryAdd(typeof(Nullable<>), (type, @this) =>
             {
