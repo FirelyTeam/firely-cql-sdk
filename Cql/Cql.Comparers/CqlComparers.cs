@@ -91,7 +91,7 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(CqlTime), new InterfaceCqlComparer<CqlTime>());
             Comparers.TryAdd(typeof(CqlDateTime), new InterfaceCqlComparer<CqlDateTime>());
 
-            Comparers.TryAdd(typeof(TupleBaseType), new TupleComparer(this)); // Legacy, will be removed!
+            Comparers.TryAdd(typeof(TupleBaseType), new TupleBaseTypeComparer(this)); // Legacy, will be removed!
 
             _cqlTupleTypeComparer = new CqlTupleTypeComparer(this);
             Comparers.TryAdd(typeof(ITuple), _cqlTupleTypeComparer);
@@ -221,10 +221,6 @@ namespace Hl7.Cql.Comparers
             }
 
             ICqlComparer ? comparer = null;
-
-            if (x is ITuple)
-                xType = typeof(ITuple);
-
             if (Comparers.TryGetValue(xType, out ICqlComparer? c))
             {
                 comparer = c;
@@ -290,8 +286,8 @@ namespace Hl7.Cql.Comparers
         {
             var type = x switch
             {
-                ITuple        => typeof(ITuple),
                 TupleBaseType => typeof(TupleBaseType),
+                ITuple        => typeof(ITuple),
                 _             => x!.GetType()
             };
             return type;
