@@ -30,6 +30,8 @@ Hl7.Cql.CqlToElm.CqlToElmOptions.EnableListPromotion.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.EnableListPromotion.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.Input.get -> string?
 Hl7.Cql.CqlToElm.CqlToElmOptions.Input.set -> void
+Hl7.Cql.CqlToElm.CqlToElmOptions.LiteralTypes.get -> Hl7.Cql.CqlToElm.LiteralTypes!
+Hl7.Cql.CqlToElm.CqlToElmOptions.LiteralTypes.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.LongsRequireSuffix.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.LongsRequireSuffix.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelUri.get -> string?
@@ -40,23 +42,37 @@ Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateIntervals.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateIntervals.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateLiterals.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateLiterals.set -> void
-Hl7.Cql.CqlToElm.IModelProvider
-Hl7.Cql.CqlToElm.IModelProvider.Add(Hl7.Cql.Model.ModelInfo! model) -> Hl7.Cql.CqlToElm.IModelProvider!
-Hl7.Cql.CqlToElm.IModelProvider.AllTypes.get -> System.Collections.Generic.IEnumerable<Hl7.Cql.Model.TypeInfo!>!
-Hl7.Cql.CqlToElm.IModelProvider.TryGetConversionFunctionName(string! fromQualifiedTypeName, string! toQualifiedTypeName, out string? conversionFunctionName) -> bool
-Hl7.Cql.CqlToElm.IModelProvider.TryGetConversionFunctions(string! fromQualifiedTypeName, out (string! To, string! Function)[]? conversions) -> bool
-Hl7.Cql.CqlToElm.IModelProvider.TryGetModelFromName(string! name, out Hl7.Cql.Model.ModelInfo? model, string? version = null) -> bool
-Hl7.Cql.CqlToElm.IModelProvider.TryGetModelFromUri(string! uri, out Hl7.Cql.Model.ModelInfo? model, string? version = null) -> bool
-Hl7.Cql.CqlToElm.ModelProvider
-static Hl7.Cql.CqlToElm.ModelProvider.GetBaseType(Hl7.Cql.CqlToElm.IModelProvider! provider, Hl7.Cql.Elm.TypeSpecifier! type) -> Hl7.Cql.Elm.NamedTypeSpecifier?
-static Hl7.Cql.CqlToElm.ModelProvider.GetModelFromName(this Hl7.Cql.CqlToElm.IModelProvider! provider, string! name, string? version = null) -> Hl7.Cql.Model.ModelInfo!
-static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.ChoiceTypeSpecifier! cts, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.ChoiceTypeSpecifier!
-static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.IntervalTypeSpecifier! its, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.IntervalTypeSpecifier!
-static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.ListTypeSpecifier! lts, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.ListTypeSpecifier!
-static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.NamedTypeSpecifier! nts, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.ParameterTypeSpecifier! pts) -> Hl7.Cql.Elm.ParameterTypeSpecifier!
-static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.TupleTypeSpecifier! tts, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.TupleTypeSpecifier!
-static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.TupleTypeSpecifierElement! ttse, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.TupleElementDefinition!
-static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.TypeSpecifier! ts, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.TypeSpecifier!
-static Hl7.Cql.CqlToElm.ModelProvider.TryGetTypeInfoFor(this Hl7.Cql.Model.ModelInfo! model, string! name, out Hl7.Cql.Model.TypeInfo? result) -> bool
+Hl7.Cql.CqlToElm.LiteralTypes
+Hl7.Cql.CqlToElm.LiteralTypes.Boolean.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypes.Boolean.init -> void
+Hl7.Cql.CqlToElm.LiteralTypes.Date.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypes.Date.init -> void
+Hl7.Cql.CqlToElm.LiteralTypes.DateTime.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypes.DateTime.init -> void
+Hl7.Cql.CqlToElm.LiteralTypes.Decimal.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypes.Decimal.init -> void
+Hl7.Cql.CqlToElm.LiteralTypes.Deconstruct(out string! Default, out string! Integer, out string! Long, out string! Decimal, out string! Boolean, out string! Date, out string! DateTime, out string! Time, out string! List, out string! Interval) -> void
+Hl7.Cql.CqlToElm.LiteralTypes.Default.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypes.Default.init -> void
+Hl7.Cql.CqlToElm.LiteralTypes.Integer.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypes.Integer.init -> void
+Hl7.Cql.CqlToElm.LiteralTypes.Interval.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypes.Interval.init -> void
+Hl7.Cql.CqlToElm.LiteralTypes.List.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypes.List.init -> void
+Hl7.Cql.CqlToElm.LiteralTypes.LiteralTypes(Hl7.Cql.CqlToElm.LiteralTypes! original) -> void
+Hl7.Cql.CqlToElm.LiteralTypes.LiteralTypes(string! Default = "{urn:hl7-org:elm-types:r1}Any", string! Integer = "{urn:hl7-org:elm-types:r1}Integer", string! Long = "{urn:hl7-org:elm-types:r1}Long", string! Decimal = "{urn:hl7-org:elm-types:r1}Decimal", string! Boolean = "{urn:hl7-org:elm-types:r1}Boolean", string! Date = "{urn:hl7-org:elm-types:r1}Date", string! DateTime = "{urn:hl7-org:elm-types:r1}DateTime", string! Time = "{urn:hl7-org:elm-types:r1}Time", string! List = "{urn:hl7-org:elm-types:r1}List", string! Interval = "{urn:hl7-org:elm-types:r1}Interval") -> void
+Hl7.Cql.CqlToElm.LiteralTypes.Long.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypes.Long.init -> void
+Hl7.Cql.CqlToElm.LiteralTypes.Time.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypes.Time.init -> void
+override Hl7.Cql.CqlToElm.LiteralTypes.Equals(object? obj) -> bool
+override Hl7.Cql.CqlToElm.LiteralTypes.GetHashCode() -> int
+override Hl7.Cql.CqlToElm.LiteralTypes.ToString() -> string!
+static Hl7.Cql.CqlToElm.LiteralTypes.operator !=(Hl7.Cql.CqlToElm.LiteralTypes? left, Hl7.Cql.CqlToElm.LiteralTypes? right) -> bool
+static Hl7.Cql.CqlToElm.LiteralTypes.operator ==(Hl7.Cql.CqlToElm.LiteralTypes? left, Hl7.Cql.CqlToElm.LiteralTypes? right) -> bool
 static readonly Hl7.Cql.CqlToElm.CqlToElmOptions.Default -> Hl7.Cql.CqlToElm.CqlToElmOptions!
+virtual Hl7.Cql.CqlToElm.LiteralTypes.<Clone>$() -> Hl7.Cql.CqlToElm.LiteralTypes!
+virtual Hl7.Cql.CqlToElm.LiteralTypes.EqualityContract.get -> System.Type!
+virtual Hl7.Cql.CqlToElm.LiteralTypes.Equals(Hl7.Cql.CqlToElm.LiteralTypes? other) -> bool
+virtual Hl7.Cql.CqlToElm.LiteralTypes.PrintMembers(System.Text.StringBuilder! builder) -> bool

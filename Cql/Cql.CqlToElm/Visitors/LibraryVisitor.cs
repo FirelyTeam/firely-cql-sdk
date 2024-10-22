@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public LibraryVisitor(IServiceProvider services)
         {
             Services = services;
-            Configuration = services.GetRequiredService<IOptions<CqlToElmOptions>>().Value;
+            Options = services.GetRequiredService<IOptions<CqlToElmOptions>>().Value!;
         }
 
 
@@ -25,19 +25,19 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public SystemLibrary SystemLibrary => Services.GetRequiredService<SystemLibrary>();
 
 
-        private CqlToElmOptions Configuration { get; }
-        private IModelProvider ModelProvider => Services.GetRequiredService<IModelProvider>();
+        private CqlToElmOptions Options { get; }
+        private Model.IModelProvider ModelProvider => Services.GetRequiredService<Model.IModelProvider>();
 
         private UsingDefSymbol? GetDefaultSystemModel()
         {
-            var systemUri = Configuration.SystemElmModelUri;
-            var systemVersion = Configuration.SystemElmModelVersion ?? SystemTypes.SystemModelVersion;
+            var systemUri = Options.SystemElmModelUri;
+            var systemVersion = Options.SystemElmModelVersion ?? SystemTypes.SystemModelVersion;
 
             if (string.IsNullOrWhiteSpace(systemUri))
                 return null;
 
-            return ModelProvider.TryGetModelFromUri(systemUri, out var model, systemVersion) ?
-                new UsingDefSymbol("System", systemVersion, model)
+            return ModelProvider.TryGetModelFromUri(systemUri, out var model)
+                ? new UsingDefSymbol("System", systemVersion, model)
                 : null;
         }
 
@@ -77,21 +77,24 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 Services = services;
                 ExpressionVisitor = new ExpressionVisitor(services, libraryBuilder);
                 TypeSpecifierVisitor = new TypeSpecifierVisitor(services, libraryBuilder);
+                CoercionProvider = CoercionProvider.Create(services, libraryBuilder);
                 InvocationBuilder = services.GetRequiredService<InvocationBuilder>();
-
+                Options = services.GetRequiredService<IOptions<CqlToElmOptions>>().Value!;
             }
 
             public LibraryBuilder LibraryBuilder { get; }
             public TypeSpecifierVisitor TypeSpecifierVisitor { get; }
+            public CoercionProvider CoercionProvider { get; }
+
 
             #region Services
             public IServiceProvider Services { get; }
 
-            public IModelProvider ModelProvider => Services.GetRequiredService<IModelProvider>();
+            public Model.IModelProvider ModelProvider => Services.GetRequiredService<Model.IModelProvider>();
             public ILibraryProvider LibraryProvider => Services.GetRequiredService<ILibraryProvider>();
-            public CoercionProvider CoercionProvider => Services.GetRequiredService<CoercionProvider>();
             public MessageProvider Messaging => Services.GetRequiredService<MessageProvider>();
             private InvocationBuilder InvocationBuilder { get; }
+            private CqlToElmOptions Options { get; }
 
             #endregion
 
@@ -134,13 +137,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var modelVersion = context.versionSpecifier()?.STRING().ParseString();
                 var localIdentifier = context.localIdentifier()?.identifier().Parse() ?? modelName;
 
-                var success = ModelProvider.TryGetModelFromName(modelName, out var model, modelVersion);
-
+                var success = ModelProvider.TryGetModel(modelName, modelVersion, out var model);
                 if (success)
                     return new UsingDefSymbol(localIdentifier, modelVersion, model!).WithLocator(context.Locator());
                 else
                 {
-                    var emptyModel = new Model.ModelInfo() { name = modelName, version = modelVersion };
+                    var emptyModel = new Model.ModelDefinition(modelName, modelVersion ?? "1.0.0", string.Empty);
                     var error = $"Model {modelName} version {modelVersion ?? "<unspecified>"} is not available.";
                     var usingDef = new UsingDefSymbol(localIdentifier, modelVersion, emptyModel).AddError(error);
                     return usingDef.WithLocator(context.Locator());
@@ -453,11 +455,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 var resultType = cd.resultTypeSpecifier as NamedTypeSpecifier ??
                     throw new InvalidOperationException($"ContextDef {cd.name} has a resultType that is not a named type specifier.");
-
+                var mts = TypeBridge.ToModelSpecifier(resultType, ModelProvider);
                 var retrieve = new Retrieve
                 {
                     dataType = resultType.name,
-                    templateId = ModelProvider.GetDefaultProfileUriForType(resultType),
+                    templateId = mts.GetTypeDefinition()?.Identifier,
                 }.WithLocator(statementContext.Locator()).WithResultType(resultType.ToListType());
 
                 var singleton = InvocationBuilder.Invoke(SystemLibrary.SingletonFrom, retrieve);
@@ -477,69 +479,26 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 var identifier = context.identifier().Parse()!;
                 var modelIdentifier = context.modelIdentifier()?.identifier().Parse();
+                var qualifiedName = $"{modelIdentifier}.{identifier}";
 
                 var cd = new ContextDef
                 {
-                    name = modelIdentifier is null ? identifier : $"{modelIdentifier}.{identifier}"
+                    name = modelIdentifier is null ? identifier : qualifiedName
                 }.WithLocator(context.Locator());
 
-
+                var resultType = new NamedTypeSpecifier(
+                           new System.Xml.XmlQualifiedName(Options.LiteralTypes.Default));
                 if (!cd.IsUnfiltered)
                 {
-                    string? error = null;
-                    TypeSpecifier? resultType = null;
-                    if (modelIdentifier is not null) // two terms
-                    {
-                        if (LibraryBuilder.SymbolTable.TryResolveSymbol(modelIdentifier, out var symbol))
-                        {
-                            if (symbol is UsingDefSymbol ud)
-                            {
-                                var type = TypeSpecifierVisitor.GetModelType(ud, identifier);
-                                if (type is not null)
-                                    resultType = type.ToNamedType();
-                                else
-                                {
-                                    // library UsingTeest version '1.0.0'
-                                    // using FHIR
-                                    // context FHIR.doesnotexist
-                                    error = Messaging.CouldNotResolveContextName(identifier, modelIdentifier);
-                                }
-                            }
-                            else
-                            {
-                                // library UsingTeest version '1.0.0'
-                                // define derp: false
-                                // context derp.herp
-                                error = Messaging.CouldNotResolveModel(modelIdentifier);
-                            }
-
-                        }
-                        else
-                        {
-                            // library UsingTeest version '1.0.0'
-                            // context doesnot.exist
-                            error = Messaging.CouldNotResolveModel(modelIdentifier);
-                        }
-                    }
+                   
+                    if (LibraryBuilder.SymbolTable.TryResolveType(identifier, out var type))
+                        resultType = new NamedTypeSpecifier(type.uri!, type.name!);
                     else
-                    {
-                        var usings = LibraryBuilder.SymbolTable.OfType<UsingDefSymbol>();
-                        if (TypeSpecifierVisitor.TryGetMatchingTypes(usings, identifier, out var modelType, out var _))
-                            resultType = modelType.ToNamedType();
-                        else
-                        {
-                            var models = usings
-                                .Select(ud => ud.localIdentifier)
-                                .Where(li => li != "System")
-                                .ToArray();
-                            error = Messaging.CouldNotResolveContextName(identifier, models);
-                        }
-                    }
-                    cd = cd.WithResultType(resultType);
-                    if (error is not null) cd.AddError(error);
+                        cd.AddError(Messaging.CouldNotResolveContextName(identifier, modelIdentifier!));
                 }
+                return cd
+                    .WithResultType(resultType);
 
-                return cd;
             }
         }
     }

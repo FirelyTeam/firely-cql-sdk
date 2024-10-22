@@ -23,10 +23,6 @@ namespace Hl7.Cql.Compiler;
 
 partial class ExpressionBuilderContext
 {
-    // Yeah, hardwired to FHIR 4.0.1 for now.
-    private static readonly IDictionary<string, ClassInfo> ModelMapping = Models.ClassesById(Models.Fhir401);
-
-
     private static readonly Dictionary<(Type, Type), Type> KnownErrors = new()
     {
         [(typeof(F.ObservationStatus?), typeof(F.Code<F.VerificationResult.StatusCode>))] = typeof(F.ObservationStatus?)

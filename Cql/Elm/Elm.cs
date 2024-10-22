@@ -17,6 +17,75 @@ using System.Xml.Serialization;
 
 namespace Hl7.Cql.Elm;
 
+/// <summary>
+/// Defines a generic type argument
+/// </summary>
+public partial class TypeArgument: Element
+{
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("name")]
+    public string? name { get; set; }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("name")]
+    public int? index { get; set; }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("constraint")]
+    public TypeSpecifier? constraint { get; set; }
+}
+
+/// <summary>
+/// Defines a type
+/// </summary>
+public partial class TypeDef : Element
+{
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("name")]
+    public string? name { get; set; }
+
+    /// <summary>
+    /// This is the canonical URI of the profile.
+    /// </summary>
+    [System.Xml.Serialization.XmlElementAttribute("identifier")]
+    public string? identifier { get; set; }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("name")]
+    public string? uri { get; set; }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("baseType")]
+    public TypeSpecifier? baseType { get; set; }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("element")]
+    public TupleElement[]? element { get; set; }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("typeArgument")]
+    public TypeArgument[]? typeArgument { get; set; }
+
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("accessLevel")]
+    public AccessModifier accessLevel { get; set; }
+}
+
+/// <summary>
+/// References a generic type
+/// </summary>
+public partial class GenericTypeSpecifier : TypeSpecifier
+{
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("type")]
+    public NamedTypeSpecifier? type { get; set; }
+
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("typeArgument")]
+    public TypeSpecifier[]? typeArgument { get; set; }
+}
+
 file static class StringExtensions
 {
     public static string? NullIfEmpty(this string? text) => string.IsNullOrEmpty(text) ? null : text;
@@ -38,9 +107,9 @@ internal static class IGetVersionedIdentifierExtensions
         bool throwError = true) =>
         getVersionedIdentifier.VersionedIdentifier switch
         {
-            ({ } result, _)                => result.GetVersionedIdentifier(throwError),
+            ({ } result, _) => result.GetVersionedIdentifier(throwError),
             (_, { } error) when throwError => throw error,
-            _                              => null
+            _ => null
         };
 }
 
@@ -64,7 +133,7 @@ partial class Library : IGetVersionedIdentifier
         identifier switch
         {
             null => (null, new MissingIdentifierError(this).ToException()),
-            _    => (identifier, null)
+            _ => (identifier, null)
         };
 
     /// <inheritdoc />
@@ -79,7 +148,7 @@ partial class IncludeDef : IGetVersionedIdentifier
         path switch
         {
             { Length: > 0 } => (new() { id = path, version = version is { Length: 0 } ? null : version }, null),
-            _               => (null, new MissingIdentifierError(this).ToException())
+            _ => (null, new MissingIdentifierError(this).ToException())
         };
 
     /// <inheritdoc />
@@ -203,14 +272,14 @@ partial class OperandDef : IGetName
         operandTypeSpecifier ?? operandType?.ToNamedType() ?? base.GetTypeSpecifier();
 }
 partial class OperandRef : IReferenceElement { }
-partial class ParameterDef: IGetName { }
-partial class ParameterRef: IReferenceElement { }
-partial class QueryLetRef: IGetName { }
-partial class Tag: IGetName { }
-partial class TupleElement: IGetName { }
-partial class TupleElementDefinition: IGetName { }
-partial class ValueSetDef: IGetName { }
-partial class ValueSetRef: IReferenceElement { }
+partial class ParameterDef : IGetName { }
+partial class ParameterRef : IReferenceElement { }
+partial class QueryLetRef : IGetName { }
+partial class Tag : IGetName { }
+partial class TupleElement : IGetName { }
+partial class TupleElementDefinition : IGetName { }
+partial class ValueSetDef : IGetName { }
+partial class ValueSetRef : IReferenceElement { }
 
 #endregion
 
@@ -372,19 +441,19 @@ internal interface IGetSource
     Expression source { get; }
 }
 
-partial class Property : IGetSource {}
-partial class AggregateExpression : IGetSource {}
-partial class Repeat : IGetSource {}
-partial class ForEach : IGetSource {}
-partial class Sort : IGetSource {}
-partial class Filter : IGetSource {}
-partial class Message : IGetSource {}
-partial class Descendents : IGetSource {}
-partial class Children : IGetSource {}
-partial class IndexOf : IGetSource {}
-partial class Slice : IGetSource {}
-partial class Last : IGetSource {}
-partial class First : IGetSource {}
-partial class Combine : IGetSource {}
+partial class Property : IGetSource { }
+partial class AggregateExpression : IGetSource { }
+partial class Repeat : IGetSource { }
+partial class ForEach : IGetSource { }
+partial class Sort : IGetSource { }
+partial class Filter : IGetSource { }
+partial class Message : IGetSource { }
+partial class Descendents : IGetSource { }
+partial class Children : IGetSource { }
+partial class IndexOf : IGetSource { }
+partial class Slice : IGetSource { }
+partial class Last : IGetSource { }
+partial class First : IGetSource { }
+partial class Combine : IGetSource { }
 
 #endregion

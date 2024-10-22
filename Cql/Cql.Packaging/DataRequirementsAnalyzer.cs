@@ -49,8 +49,8 @@ public class DataRequirementsAnalyzer(LibrarySet librarySet, Elm.Library library
         var dr = new DataRequirement();
 
         // Get the resource type the requirement is for.
-        var (_, resourceType) = retrieve.dataType;
-        var knownType = Hl7.Fhir.Model.ModelInfo.FhirTypeNameToFhirType(resourceType);
+        var (_, resourceType) = Elm.NamedTypeSpecifier.Split(retrieve.dataType);
+        var knownType = Hl7.Fhir.Model.ModelInfo.FhirTypeNameToFhirType(resourceType ?? string.Empty);
         if (knownType is null)
             return true; // Not a known FHIR type, so we can't do anything with it.
 

@@ -9,7 +9,7 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class TestSubtyping
     {
-        private readonly IModelProvider provider = new BuiltinModelProvider(M.Models.ElmR1, M.Models.Fhir401);
+        private readonly M.IModelProvider provider = new M.ModelProviders.BuiltInModelProvider();
         private readonly NamedTypeSpecifier Patient = forFhir("Patient");
         private readonly NamedTypeSpecifier Observation = forFhir("Observation");
         private readonly NamedTypeSpecifier Resource = forFhir("Resource");
@@ -18,17 +18,17 @@ namespace Hl7.Cql.CqlToElm.Test
         private readonly NamedTypeSpecifier Element = forFhir("Element");
 
         private static NamedTypeSpecifier forFhir(string typeName) =>
-           new() { name = M.QualifiedName.MakeQualifiedTypeName(M.Models.Fhir401, typeName) };
+            new NamedTypeSpecifier("http://hl7.org/fhir", typeName);
 
         private void yes(TypeSpecifier sub, TypeSpecifier super) =>
-            sub.IsSubtypeOf(super, provider).Should().BeTrue();
-        private void properYes(TypeSpecifier sub, TypeSpecifier super) =>
-            sub.IsSubtypeOf(super, provider).Should().BeTrue();
+            TypeBridge.ToModelSpecifier(sub, provider)
+                .IsSubtypeOf(TypeBridge.ToModelSpecifier(super, provider))
+            .Should().BeTrue();
 
         private void no(TypeSpecifier sub, TypeSpecifier super) =>
-            sub.IsSubtypeOf(super, provider).Should().BeFalse();
-        private void properNo(TypeSpecifier sub, TypeSpecifier super) =>
-            sub.IsProperSubtypeOf(super, provider).Should().BeFalse();
+            TypeBridge.ToModelSpecifier(sub, provider)
+                .IsSubtypeOf(TypeBridge.ToModelSpecifier(super, provider))
+            .Should().BeFalse();
 
         [TestMethod]
         public void TypesAreSubtypesOfThemselves()
@@ -42,11 +42,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypesAreNotProperSubtypesOfThemselves()
         {
-            properNo(Patient, Patient);
-            properNo(Resource, Resource);
-            properYes(Patient, Resource);
-            properNo(SystemTypes.BooleanType, SystemTypes.BooleanType);
-            properYes(SystemTypes.AnyType, SystemTypes.AnyType); // Any is a subtype of Any?
+            no(Patient, Patient);
+            no(Resource, Resource);
+            yes(Patient, Resource);
+            no(SystemTypes.BooleanType, SystemTypes.BooleanType);
+            yes(SystemTypes.AnyType, SystemTypes.AnyType); // Any is a subtype of Any?
         }
 
         [TestMethod]

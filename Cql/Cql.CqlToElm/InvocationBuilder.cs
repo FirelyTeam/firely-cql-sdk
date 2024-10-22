@@ -23,12 +23,12 @@ namespace Hl7.Cql.CqlToElm
     /// </summary>
     internal class InvocationBuilder
     {
-        public IModelProvider Provider { get; }
+        public Model.IModelProvider Provider { get; }
         public CoercionProvider CoercionProvider { get; }
         public ElmFactory ElmFactory { get; }
         public MessageProvider Messaging { get; }
 
-        public InvocationBuilder(IModelProvider provider,
+        public InvocationBuilder(Model.IModelProvider provider,
             CoercionProvider coercionProvider,
             ElmFactory elmFactory,
             MessageProvider messaging)

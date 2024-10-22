@@ -11,6 +11,8 @@ using System.Globalization;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.LibraryProviders;
+using Hl7.Cql.Model;
+using Hl7.Cql.Model.ModelProviders;
 
 // ReSharper disable once CheckNamespace
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -67,24 +69,9 @@ internal static class CqlToElmServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddCqlToElmModels(
-        this IServiceCollection services,
-        Action<IModelProvider> builder)
-    {
-        services.AddSingleton<IModelProvider>(isp =>
-        {
-            var provider = new BuiltinModelProvider();
-            builder(provider);
-            return provider;
-        });
-
-        return services;
-    }
-
     public static IServiceCollection AddCqlToElmServices(this IServiceCollection services) =>
         services
             .AddSingleton<CqlToElmConverter>()
-            .AddSingleton<CoercionProvider>()
             .AddSingleton<ElmFactory>()
             .AddSingleton<SystemLibrary>()
             .AddSingleton<StreamInspector>()

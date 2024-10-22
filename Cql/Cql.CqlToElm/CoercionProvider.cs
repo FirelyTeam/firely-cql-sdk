@@ -3,6 +3,7 @@ using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -20,15 +21,26 @@ namespace Hl7.Cql.CqlToElm
     /// <seealso href="https://cql.hl7.org/03-developersguide.html#conversion-precedence"/>
     internal class CoercionProvider
     {
-        public CoercionProvider(IModelProvider modelProvider, IOptions<CqlToElmOptions> options)
+        public static CoercionProvider Create(IServiceProvider services,
+            LibraryBuilder libraryBuilder)
+        {
+            var options = services.GetRequiredService<IOptions<CqlToElmOptions>>();
+            var modelProvider = services.GetRequiredService<Model.IModelProvider>();
+            return new CoercionProvider(libraryBuilder, modelProvider, options);
+        }
+
+        private CoercionProvider(LibraryBuilder libraryBuilder,
+            Model.IModelProvider modelProvider,
+            IOptions<CqlToElmOptions> options)
         {
             ModelProvider = modelProvider;
             Options = options.Value;
+            LibraryBuilder = libraryBuilder;
         }
 
-        private IModelProvider ModelProvider { get; }
+        private Model.IModelProvider ModelProvider { get; }
         private CqlToElmOptions Options { get; }
-
+        private LibraryBuilder LibraryBuilder { get; }
 
         public CoercionResult<Expression> Coerce(Expression expression, TypeSpecifier to)
         {
@@ -274,8 +286,14 @@ namespace Hl7.Cql.CqlToElm
         internal bool IsExactMatch(TypeSpecifier from, TypeSpecifier to) =>
             from == to;
 
-        internal bool IsSubtype(TypeSpecifier from, TypeSpecifier to) =>
-            from.IsSubtypeOf(to, ModelProvider);
+        internal bool IsSubtype(TypeSpecifier from, TypeSpecifier to)
+        {
+            var fromModelTs = TypeBridge.ToModelSpecifier(from, ModelProvider);
+            var toModelTs = TypeBridge.ToModelSpecifier(to, ModelProvider);
+            return fromModelTs.IsSubtypeOf(toModelTs);
+
+
+        }
 
         // The spec language is:
         // If the invocation type is compatible with the declared type of the argument (e.g., the invocation type is Any)
@@ -381,25 +399,11 @@ namespace Hl7.Cql.CqlToElm
 
         internal bool IsSimpleType(TypeSpecifier typeSpecifier)
         {
-            if (typeSpecifier is NamedTypeSpecifier fromNts)
-            {
-                var typeInfo = ModelProvider.FindTypeInfoByNamedType(fromNts);
-                return typeInfo.Type is Model.SimpleTypeInfo;
-            }
-            return false;
+            var modelTs = TypeBridge.ToModelSpecifier(typeSpecifier, ModelProvider);
+            return modelTs.GetTypeDefinition() is Model.SimpleTypeDefinition;
         }
 
-        internal bool IsClassType(TypeSpecifier typeSpecifier)
-        {
-            if (typeSpecifier is IntervalTypeSpecifier || typeSpecifier is ListTypeSpecifier)
-                return true;
-            if (typeSpecifier is NamedTypeSpecifier fromNts)
-            {
-                var typeInfo = ModelProvider.FindTypeInfoByNamedType(fromNts);
-                return typeInfo.Type is Model.ClassInfo;
-            }
-            return false;
-        }
+        internal bool IsClassType(TypeSpecifier typeSpecifier) => !IsSimpleType(typeSpecifier);
 
         // The declared type is an interval and the invocation type can be promoted to an interval of that type
         // Presumably 
@@ -465,27 +469,7 @@ namespace Hl7.Cql.CqlToElm
 
         internal bool HasConversionToIntervalThroughModel(TypeSpecifier type, [NotNullWhen(true)] out TypeSpecifier? intervalPointType)
         {
-            if (type is NamedTypeSpecifier fromNts)
-            {
-                if (ModelProvider.TryMakeQualifiedNameFromType(fromNts, out var fromQualified)
-                    && ModelProvider.TryGetConversionFunctions(fromQualified!, out var tuples))
-                {
-                    for (int i = 0; i < tuples!.Length; i++)
-                    {
-                        var tuple = tuples[i];
-                        var to = tuple.To.Trim();
-                        if (to.StartsWith("Interval<"))
-                        {
-                            var pointTypeName = to[9..^1];
-                            var typeName = ModelProvider.TryGetUrlPrefixedName(pointTypeName);
-                            intervalPointType = new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName(typeName) };
-                            return true;
-                        }
-                    }
-                }
-            }
-            intervalPointType = null;
-            return false;
+            throw new NotImplementedException();
         }
 
         internal bool HasImplicitConversionThroughModel(TypeSpecifier from, TypeSpecifier to) =>
@@ -493,35 +477,32 @@ namespace Hl7.Cql.CqlToElm
 
         private FunctionRef? FunctionRefForModelConversion(TypeSpecifier from, TypeSpecifier to)
         {
-            var fromValue = typeString(from);
-            var toValue = typeString(to);
-            if (fromValue is not null && toValue is not null)
+            var fromModelTs = TypeBridge.ToModelSpecifier(from, ModelProvider);
+            var toModelTs = TypeBridge.ToModelSpecifier(to, ModelProvider);
+
+            // a library must have a using definition in order to take advantage of its conversions.
+            foreach (var @using in LibraryBuilder.SymbolTable.OfType<UsingDef>())
             {
-                if (ModelProvider.TryGetConversionFunctionName(fromValue, toValue, out var qualifiedFunctionName))
+                if (ModelProvider.TryGetModelFromUri(@using.uri, out var model))
                 {
-                    var lastDot = qualifiedFunctionName!.LastIndexOf('.');
-                    if (lastDot >= 0)
+                    if (model.ImplicitConversions.TryGetValue(fromModelTs, out var conversions))
                     {
-                        var libraryName = qualifiedFunctionName[..lastDot];
-                        var functionName = qualifiedFunctionName[(lastDot + 1)..];
-                        var @ref = new FunctionRef
+                        if (conversions.TryGetValue(toModelTs, out var qualifiedFunctionName))
                         {
-                            libraryName = libraryName,
-                            name = functionName,
-                        };
-                        return @ref;
+                            var lastDot = qualifiedFunctionName!.LastIndexOf('.');
+                            var libraryName = qualifiedFunctionName[..lastDot];
+                            var functionName = qualifiedFunctionName[(lastDot + 1)..];
+                            var @ref = new FunctionRef
+                            {
+                                libraryName = libraryName,
+                                name = functionName,
+                            };
+                            return @ref;
+                        }
                     }
                 }
             }
             return null;
-            string? typeString(TypeSpecifier type) =>
-                type switch
-                {
-                    NamedTypeSpecifier nts when ModelProvider.TryMakeQualifiedNameFromType(nts, out var fromQualified) => fromQualified,
-                    IntervalTypeSpecifier interval => $"Interval<{typeString(interval.pointType)}>",
-                    ListTypeSpecifier list => $"List<{typeString(list.elementType)}>",
-                    _ => null
-                };
         }
 
         private int ListDegree(TypeSpecifier type) =>

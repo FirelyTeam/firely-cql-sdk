@@ -1,7 +1,10 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Model;
+using Hl7.Cql.Model.Xml;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ModelLoader = Hl7.Cql.Model.Xml.ModelLoader;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -71,6 +74,29 @@ namespace Hl7.Cql.CqlToElm.Test
             or.resultTypeName.Name.Should().Be("{http://hl7.org/fhir}Quantity");
         }
 
+
+        [TestMethod]
+        public void QICore_Loads()
+        {
+            var qicore = Models.QICore411;
+
+            var lib = MakeLibrary(@"
+                library ModelTest version '1.0.0'
+
+                using QICore version '4.1.1'
+
+                define d: 1
+            ");
+            lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>()
+                .value.Should().Be("1"); 
+        }
+
+        [TestMethod]
+        public void Load_System_Xml()
+        {
+            var modelLoader = new ModelLoader(name => Models.All[name]);
+            modelLoader.Load(Models.ElmR1);
+        }
 
     }
 }

@@ -38,6 +38,15 @@ namespace Hl7.Cql.CqlToElm
         /// </summary>
         bool TryResolveFluentFunction(string identifier, [NotNullWhen(true)] out IFunctionElement? symbol);
 
+
+        /// <summary>
+        /// Looks in scope and referenced models for types.
+        /// </summary>
+        /// <param name="identifier">The name of the type.</param>
+        /// <param name="type">The type, if found.  Otherwise, <see langword="null"/>.</param>
+        /// <returns><see langword="true"/> if found; otherwise, <see langword="false"/>.</returns>
+        bool TryResolveType(string identifier, [NotNullWhen(true)] out TypeDef? type);
+
         /// <summary>
         /// Gets any referenced libraries in this scope, including those in <see cref="Parent"/> if defined.
         /// </summary>

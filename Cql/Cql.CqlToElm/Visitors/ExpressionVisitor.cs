@@ -15,8 +15,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public ExpressionVisitor(IServiceProvider services, LibraryBuilder builder)
         {
             LibraryBuilder = builder;
-            ModelProvider = services.GetRequiredService<IModelProvider>();
-            CoercionProvider = services.GetRequiredService<CoercionProvider>();
+            ModelProvider = services.GetRequiredService<Model.IModelProvider>();
+            CoercionProvider = CoercionProvider.Create(services, builder);
             ElmFactory = services.GetRequiredService<ElmFactory>();
             Messaging = services.GetRequiredService<MessageProvider>(); 
             Options = services.GetRequiredService<IOptions<CqlToElmOptions>>().Value;
@@ -26,7 +26,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
 
         #region Privates
-        private IModelProvider ModelProvider { get; }
+        private Model.IModelProvider ModelProvider { get; }
         private CqlToElmOptions Options { get; }
         private TypeSpecifierVisitor TypeSpecifierVisitor { get; }
         private LibraryBuilder LibraryBuilder { get; }
@@ -184,8 +184,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var codeComparator = context.codeComparator()?.GetText();
             var contextTerm = context.terminology();
             var terminology = contextTerm is null ? null : Visit(contextTerm);
-            var type = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
-
+            var typeSpec = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
+            var modelTypeSpec = TypeBridge.ToModelSpecifier(typeSpec, ModelProvider);
+            var modelType = modelTypeSpec.GetTypeDefinition();
+                
             var contextExpressionRef = contextName switch
             {
                 { } => new ExpressionRef { name = contextName },
@@ -194,13 +196,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var retrieve = new Retrieve
             {
-                dataType = type.name,
-                templateId = ModelProvider.GetDefaultProfileUriForType(type),
+                dataType = typeSpec.name,
+                templateId = modelType?.Identifier!,
                 context = contextExpressionRef,
                 codeComparator = codeComparator,
                 codes = terminology,
                 codeProperty = codePath,
-            }.WithResultType(type.ToListType()).WithLocator(context.Locator());
+            }.WithResultType(typeSpec.ToListType()).WithLocator(context.Locator());
 
             return retrieve;
         }

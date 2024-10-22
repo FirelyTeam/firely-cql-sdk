@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using System.Reflection.Metadata;
 using System.Xml;
 using static Hl7.Cql.Elm.SystemTypes;
 
@@ -71,6 +72,16 @@ namespace Hl7.Cql.CqlToElm.Builtin
             return false;
         }
 
+        public bool TryResolveType(string identifier, [NotNullWhen(true)] out TypeDef? type)
+        {
+            if (TryResolveSymbol(identifier, out var symbol) && symbol is TypeDef td)
+            {
+                type = td;
+                return true;
+            }
+            type = null;
+            return false;
+        }
 
         public ISymbolScope EnterScope(string name) => throw new NotSupportedException($"You cannot enter a scope from the System scope.");
 

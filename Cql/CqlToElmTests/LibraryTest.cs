@@ -1,9 +1,14 @@
 using FluentAssertions;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Model;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
+using M = Hl7.Cql.Model;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -15,6 +20,54 @@ namespace Hl7.Cql.CqlToElm.Test
 #pragma warning disable IDE0060 // Remove unused parameter
         public static void Initialize(TestContext context) => ClassInitialize();
 #pragma warning restore IDE0060 // Remove unused parameter
+
+        private class TestModelProvider : M.IModelProvider
+        {
+            public Dictionary<string, M.ModelDefinition> Models = new();
+
+            public TestModelProvider(params M.ModelDefinition[] models)
+            {
+                foreach (var m in models)
+                    Models.Add(m.Name, m);
+            }
+
+
+            public bool TryGetModel(string modelName, string? version, [NotNullWhen(true)] out M.ModelDefinition? model) =>
+                Models.TryGetValue(modelName, out model);
+
+            public bool TryGetModelFromUri(string uri, [NotNullWhen(true)] out M.ModelDefinition? model)
+            {
+                foreach(var m in Models.Values)
+                    if (m.Url == uri)
+                    {
+                        model = m;
+                        return true;
+                    }
+                model = null;
+                return false;
+            }
+
+            public bool TryGetType(string qualfiedName, [NotNullWhen(true)] out M.TypeDefinition? type)
+            {
+                var dot = qualfiedName.IndexOf('.');
+                if (dot > -1)
+                {
+                    var model = qualfiedName[..dot];
+                    var typeName = qualfiedName[(dot + 1)..];
+                    if (TryGetModel(model, null, out var m))
+                    {
+                        if (m.TryGetType(typeName, out var t))
+                        {
+                            type = t;
+                            return true;
+                        }
+                    }
+                    type = null;
+                    return false;
+                }
+                else throw new ArgumentException($"{qualfiedName} is not qualified.");
+            }
+        }
 
         [TestMethod]
         public void Empty()
@@ -80,13 +133,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_AllTerms()
         {
-            var services = ServiceCollection(models: mp => mp.Add(new Model.ModelInfo
-            {
-                name = "Namespace.Using_AllTerms_WithNamespace",
-                url = "http://test.org",
-                version = "1.0.0"
-            }));
-
+            var services = ServiceCollection()
+                .AddSingleton<IModelProvider>(new TestModelProvider(
+                    new M.ModelDefinition(
+                        "Namespace.Using_AllTerms_WithNamespace",
+                        "1.0.0",
+                        "http://test.org")));
             var x = services.BuildServiceProvider();
             var converter = x.GetRequiredService<CqlToElmConverter>();
             var library = converter.ConvertLibrary(@"
@@ -105,15 +157,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_AllTerms_WithNamespace()
         {
-            var services = ServiceCollection(models: mp =>
-                {
-                    mp.Add(new Model.ModelInfo
-                    {
-                        name = "Namespace.Using_AllTerms_WithNamespace",
-                        url = "http://test.org",
-                        version = "1.0.0"
-                    });
-                });
+            var services = ServiceCollection()
+                .AddSingleton<IModelProvider>(new TestModelProvider(
+                    new M.ModelDefinition(
+                        "Namespace.Using_AllTerms_WithNamespace",
+                        "1.0.0",
+                        "http://test.org")));
 
             var serviceProvider = services.BuildServiceProvider();
             var converter = serviceProvider.GetRequiredService<CqlToElmConverter>();
@@ -134,15 +183,13 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_NoVersion_LocalIdentifier()
         {
-            var services = ServiceCollection(models: mp =>
-            {
-                    mp.Add(new Model.ModelInfo
-                    {
-                        name = "Namespace.Using_NoVersion_LocalIdentifier",
-                        url = "http://test.org",
-                        version = "1.0.0"
-                    });
-                });
+            var services = ServiceCollection()
+                .AddSingleton<IModelProvider>(new TestModelProvider(
+                    new M.ModelDefinition(
+                        "Namespace.Using_NoVersion_LocalIdentifier",
+                        "1.0.0",
+                        "http://test.org")));
+
             var provider = services.BuildServiceProvider();
             var converter = provider.GetRequiredService<CqlToElmConverter>();
             var library = converter.ConvertLibrary(@"
@@ -162,15 +209,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_Version_NoIdentifier()
         {
-            var services = ServiceCollection(models: mp =>
-            {
-                    mp.Add(new Model.ModelInfo
-                    {
-                        name = "Namespace.Using_Version_NoIdentifier",
-                        url = "http://test.org",
-                        version = "1.0.0"
-                    });
-                });
+            var services = ServiceCollection()
+            .AddSingleton<IModelProvider>(new TestModelProvider(
+                new M.ModelDefinition(
+                    "Namespace.Using_Version_NoIdentifier",
+                    "1.0.0",
+                    "http://test.org")));
             var provider = services.BuildServiceProvider();
             var converter = provider.GetRequiredService<CqlToElmConverter>();
             var library = converter.ConvertLibrary(@"
@@ -189,16 +233,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_NoVersion_NoIdentifier()
         {
-            var services = ServiceCollection(models: mp =>
-            {
-                    mp.Add(new Model.ModelInfo
-                    {
-                        name = "Namespace.Using_NoVersion_NoIdentifier",
-                        url = "http://test.org",
-                        version = "1.0.0"
-                    });
-                });
-
+            var services = ServiceCollection()
+                .AddSingleton<IModelProvider>(new TestModelProvider(
+                    new M.ModelDefinition(
+                        "Namespace.Using_NoVersion_NoIdentifier",
+                        "1.0.0",
+                        "http://test.org")));
             var provider = services.BuildServiceProvider();
             var converter = provider.GetRequiredService<CqlToElmConverter>();
             var library = converter.ConvertLibrary(@"
@@ -217,15 +257,13 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_Duplicate_System_NoLocalAlias()
         {
-            var services = ServiceCollection(models: mp =>
-            {
-                    mp.Add(new Model.ModelInfo
-                    {
-                        name = "System",
-                        url = "urn:hl7-org:elm-types:r1",
-                        version = "1.0.0"
-                    });
-                });
+            var services = ServiceCollection()
+                .AddSingleton<IModelProvider>(new TestModelProvider(
+                    new M.ModelDefinition(
+                        "System",
+                        "1.0.0",
+                        "urn:hl7-org:elm-types:r1")));
+
 
             var provider = services.BuildServiceProvider();
             var converter = provider.GetRequiredService<CqlToElmConverter>();

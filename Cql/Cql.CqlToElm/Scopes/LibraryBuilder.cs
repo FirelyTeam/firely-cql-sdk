@@ -91,7 +91,6 @@ namespace Hl7.Cql.CqlToElm
         public ISymbolScope EnterStatementScope(string statement) =>
             new LibraryBuilderSubscope(this, SymbolTable.EnterScope(statement));
 
-     
         public ISymbolScope EnterScope(string reason) => 
             new LibraryBuilderSubscope(this, CurrentScope.EnterScope(reason));
 
@@ -149,6 +148,13 @@ namespace Hl7.Cql.CqlToElm
             public bool TryResolveSymbol(string identifier, [NotNullWhen(true)] out IDefinitionElement? symbol)
             {
                 return CurrentScope.TryResolveSymbol(identifier, out symbol);
+            }
+
+            public bool TryResolveType(string identifier, [NotNullWhen(true)] out TypeDef? type)
+            {
+                if (!CurrentScope.TryResolveType(identifier, out type))
+                    return Parent?.TryResolveType(identifier, out type) ?? false;
+                return true;
             }
 
             IEnumerator IEnumerable.GetEnumerator()

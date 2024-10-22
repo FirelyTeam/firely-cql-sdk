@@ -6,6 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
 using M = Hl7.Fhir.Model;
+using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -165,7 +166,6 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397")]
         public void Function()
         {
             var library = MakeLibrary($@"
@@ -179,7 +179,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var f = shouldDefineExpression(library, nameof(Function));
             var fref = f.expression.Should().BeOfType<FunctionRef>().Subject;
             fref.name.Should().Be("double");
-            fref.operand.Should().ContainSingleOfType<ToDecimal>().operand.Should().BeLiteralInteger(4);
+            fref.operand.OfType<ToDecimal>()
+                .Should().ContainSingle().Subject.operand.Should().BeLiteralInteger(4);
 
             var result = Run<decimal>(library, nameof(Function));
             result.Should().Be(8.0m);
@@ -450,6 +451,10 @@ namespace Hl7.Cql.CqlToElm.Test
             ", "Unable to resolve library: Math version 'latest'*", "Could not resolve identifier Patient in the current library.");
         }
 
+
+        private NamedTypeSpecifier fhir(string type) =>
+            new Elm.NamedTypeSpecifier("http://hl7.org/fhir", "boolean");
+
         [TestMethod]
         public void InvokeProperty()
         {
@@ -466,7 +471,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var prop = getName.expression.Should().BeOfType<Property>().Subject;
             prop.path.Should().Be("active");
             prop.source.Should().BeOfType<ExpressionRef>().Which.name.Should().Be("Patient");
-            prop.resultTypeSpecifier.Should().Be(TestExtensions.ForFhir("boolean"));
+            prop.resultTypeSpecifier.Should().Be(fhir("boolean"));
 
             var result = runWithData<M.FhirBoolean>(library, "getActive");
             result!.Value.Should().BeTrue();
@@ -488,7 +493,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var prop = getName.expression.Should().BeOfType<Property>().Subject;
             prop.path.Should().Be("name");
             prop.source.Should().BeOfType<ExpressionRef>().Which.name.Should().Be("Patient");
-            prop.resultTypeSpecifier.Should().Be(TestExtensions.ForFhir("HumanName").ToListType());
+            prop.resultTypeSpecifier.Should().Be(fhir("HumanName").ToListType());
 
             var result = runWithData<List<M.HumanName>>(library, "getName");
             result.Should().BeEquivalentTo(new[] { new { Given = new[] { "John", "Maria" }, Family = "Doe" } });
@@ -508,7 +513,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
             var getName = shouldDefineExpression(library, "getName");
             var prop = getName.expression.Should().BeOfType<Query>().Subject;
-            prop.resultTypeSpecifier.Should().Be(TestExtensions.ForFhir("string").ToListType());
+            prop.resultTypeSpecifier.Should().Be(fhir("string").ToListType());
 
             var result = runWithData<List<M.FhirString>>(library, "getName");
             result.Should().ContainSingle().Which.Should().BeEquivalentTo(new { Value = "Doe" });
@@ -528,7 +533,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
             var getName = shouldDefineExpression(library, "getName");
             var prop = getName.expression.Should().BeOfType<Flatten>().Subject;
-            prop.resultTypeSpecifier.Should().Be(TestExtensions.ForFhir("string").ToListType());
+            prop.resultTypeSpecifier.Should().Be(fhir("string").ToListType());
 
             var result = runWithData<List<M.FhirString>>(library, "getName");
             result.Should().BeEquivalentTo(new[] { new { Value = "John" }, new { Value = "Maria" } });
@@ -554,12 +559,12 @@ namespace Hl7.Cql.CqlToElm.Test
             var getContactName = library.ShouldDefine<FunctionDef>("getContactName");
             getContactName.operand.Should().ContainSingle().Which
                 .Should().BeOfType<OperandDef>().Which
-                .resultTypeSpecifier.Should().Be(TestExtensions.ForFhir("Patient.Contact").ToListType());
-            getContactName.resultTypeSpecifier.Should().Be(TestExtensions.ForFhir("HumanName").ToListType());
+                .resultTypeSpecifier.Should().Be(fhir("Patient.Contact").ToListType());
+            getContactName.resultTypeSpecifier.Should().Be(fhir("HumanName").ToListType());
 
             var getName = shouldDefineExpression(library, "getName");
             var prop = getName.expression.Should().BeOfType<Flatten>().Subject;
-            prop.resultTypeSpecifier.Should().Be(TestExtensions.ForFhir("string").ToListType());
+            prop.resultTypeSpecifier.Should().Be(fhir("string").ToListType());
 
             var result = runWithData<List<M.FhirString>>(library, "getName");
             result.Should().BeEquivalentTo(new[] { new { Value = "Wouter" }, new { Value = "Gert" }, new { Value = "Marleen" }, new { Value = "Antonia" } });

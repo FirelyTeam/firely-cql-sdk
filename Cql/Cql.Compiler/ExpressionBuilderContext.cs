@@ -57,6 +57,7 @@ partial class ExpressionBuilderContext(
     TypeResolver typeResolver,
     CqlContextBinder cqlContextBinder,
     LibraryExpressionBuilderContext libraryContext,
+    IModelProvider modelProvider,
     Dictionary<string, ParameterExpression>? operands = null // Parameters for function definitions. Used during ProcessExpressionDef.
     )
 {
@@ -69,6 +70,7 @@ partial class ExpressionBuilderContext(
     private readonly LibraryExpressionBuilderContext _libraryContext = libraryContext;
     private readonly Dictionary<string, ParameterExpression>? _operands = operands;
     private readonly IReadOnlyCollection<IExpressionMutator> _expressionMutators = ReadOnlyCollection<IExpressionMutator>.Empty; // Not used yet, since it's always empty
+    private readonly IModelProvider _modelProvider = modelProvider;
     private ImmutableStack<Element> _elementStack = ImmutableStack<Element>.Empty;
 
     /// <summary>
@@ -901,10 +903,17 @@ partial class ExpressionBuilderContext(
         Expression? codeProperty;
 
         var hasCodePropertySpecified = sourceElementType != null && retrieve.codeProperty != null;
-        var isDefaultCodeProperty = retrieve.codeProperty is null ||
-                                    (cqlRetrieveResultType is not null &&
-                                     ModelMapping.TryGetValue(cqlRetrieveResultType, out ClassInfo? classInfo) &&
-                                     classInfo.primaryCodePath == retrieve.codeProperty);
+
+        var isDefaultCodeProperty = false;
+
+        if (retrieve.codeProperty is null
+            && !string.IsNullOrWhiteSpace(cqlRetrieveResultType)
+            && _modelProvider.TryGetType(cqlRetrieveResultType, out var resultTypeDefinition))
+        {
+            if (resultTypeDefinition is ClassTypeDefinition classType
+                && classType.PrimaryCodePath?.Name == retrieve.codeProperty)
+                isDefaultCodeProperty = true;
+        }
 
         if (hasCodePropertySpecified && !isDefaultCodeProperty)
         {

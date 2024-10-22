@@ -21,12 +21,16 @@
 		<EmbeddedResource Include="Models\fhir-modelinfo-4.0.1.xml">
 			<LogicalName>Fhir401</LogicalName>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Models\qicore-modelinfo-4.1.1.xml">
+			<LogicalName>QICore411</LogicalName>
+		</EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.CqlToElm" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 

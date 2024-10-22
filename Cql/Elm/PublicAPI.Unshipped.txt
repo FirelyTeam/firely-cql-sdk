@@ -306,6 +306,12 @@ Hl7.Cql.Elm.FunctionDef.Operands.get -> System.Collections.Generic.IEnumerable<H
 Hl7.Cql.Elm.FunctionDef.ResultTypeSpecifier.get -> Hl7.Cql.Elm.TypeSpecifier?
 Hl7.Cql.Elm.FunctionRef
 Hl7.Cql.Elm.FunctionRef.FunctionRef() -> void
+Hl7.Cql.Elm.GenericTypeSpecifier
+Hl7.Cql.Elm.GenericTypeSpecifier.GenericTypeSpecifier() -> void
+Hl7.Cql.Elm.GenericTypeSpecifier.type.get -> Hl7.Cql.Elm.NamedTypeSpecifier?
+Hl7.Cql.Elm.GenericTypeSpecifier.type.set -> void
+Hl7.Cql.Elm.GenericTypeSpecifier.typeArgument.get -> Hl7.Cql.Elm.TypeSpecifier![]?
+Hl7.Cql.Elm.GenericTypeSpecifier.typeArgument.set -> void
 Hl7.Cql.Elm.GeometricMean
 Hl7.Cql.Elm.GeometricMean.GeometricMean() -> void
 Hl7.Cql.Elm.Greater
@@ -487,6 +493,7 @@ Hl7.Cql.Elm.NamedTypeSpecifier
 Hl7.Cql.Elm.NamedTypeSpecifier.Deconstruct(out string! uri, out string! name) -> void
 Hl7.Cql.Elm.NamedTypeSpecifier.NamedTypeSpecifier() -> void
 Hl7.Cql.Elm.NamedTypeSpecifier.NamedTypeSpecifier(string! uri, string! name) -> void
+Hl7.Cql.Elm.NamedTypeSpecifier.NamedTypeSpecifier(System.Xml.XmlQualifiedName! qualifiedName) -> void
 Hl7.Cql.Elm.Narrative
 Hl7.Cql.Elm.Narrative.Narrative() -> void
 Hl7.Cql.Elm.Narrative.r.get -> string?
@@ -754,6 +761,33 @@ Hl7.Cql.Elm.TupleElementDefinition
 Hl7.Cql.Elm.TupleElementDefinition.TupleElementDefinition() -> void
 Hl7.Cql.Elm.TupleTypeSpecifier
 Hl7.Cql.Elm.TupleTypeSpecifier.TupleTypeSpecifier() -> void
+Hl7.Cql.Elm.TypeArgument
+Hl7.Cql.Elm.TypeArgument.constraint.get -> Hl7.Cql.Elm.TypeSpecifier?
+Hl7.Cql.Elm.TypeArgument.constraint.set -> void
+Hl7.Cql.Elm.TypeArgument.index.get -> int?
+Hl7.Cql.Elm.TypeArgument.index.set -> void
+Hl7.Cql.Elm.TypeArgument.name.get -> string?
+Hl7.Cql.Elm.TypeArgument.name.set -> void
+Hl7.Cql.Elm.TypeArgument.TypeArgument() -> void
+Hl7.Cql.Elm.TypeDef
+Hl7.Cql.Elm.TypeDef.Access.get -> Hl7.Cql.Elm.AccessModifier
+Hl7.Cql.Elm.TypeDef.accessLevel.get -> Hl7.Cql.Elm.AccessModifier
+Hl7.Cql.Elm.TypeDef.accessLevel.set -> void
+Hl7.Cql.Elm.TypeDef.baseType.get -> Hl7.Cql.Elm.TypeSpecifier?
+Hl7.Cql.Elm.TypeDef.baseType.set -> void
+Hl7.Cql.Elm.TypeDef.element.get -> Hl7.Cql.Elm.TupleElement![]?
+Hl7.Cql.Elm.TypeDef.element.set -> void
+Hl7.Cql.Elm.TypeDef.identifier.get -> string?
+Hl7.Cql.Elm.TypeDef.identifier.set -> void
+Hl7.Cql.Elm.TypeDef.Name.get -> string!
+Hl7.Cql.Elm.TypeDef.name.get -> string?
+Hl7.Cql.Elm.TypeDef.name.set -> void
+Hl7.Cql.Elm.TypeDef.ToRef(string? libraryName) -> Hl7.Cql.Elm.Expression!
+Hl7.Cql.Elm.TypeDef.typeArgument.get -> Hl7.Cql.Elm.TypeArgument![]?
+Hl7.Cql.Elm.TypeDef.typeArgument.set -> void
+Hl7.Cql.Elm.TypeDef.TypeDef() -> void
+Hl7.Cql.Elm.TypeDef.uri.get -> string?
+Hl7.Cql.Elm.TypeDef.uri.set -> void
 Hl7.Cql.Elm.TypeSpecifier
 Hl7.Cql.Elm.TypeSpecifier.TypeSpecifier() -> void
 Hl7.Cql.Elm.TypeSpecifierExtensions
@@ -830,6 +864,7 @@ static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.DirectoryInfo! elmDirectory, s
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file, bool validate = true) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream, bool validate = true, string? originalFilePath = null) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.ParseFromJson(string! json, bool validate = true) -> Hl7.Cql.Elm.Library!
+static Hl7.Cql.Elm.NamedTypeSpecifier.Split(System.Xml.XmlQualifiedName? qname) -> (string? uri, string? name)
 static Hl7.Cql.Elm.OverloadedFunctionDef.CanCombine(params Hl7.Cql.Elm.IFunctionElement![]! elements) -> bool
 static Hl7.Cql.Elm.OverloadedFunctionDef.Create(params Hl7.Cql.Elm.IFunctionElement![]! elements) -> Hl7.Cql.Elm.OverloadedFunctionDef!
 static Hl7.Cql.Elm.SystemTypes.AnyType -> Hl7.Cql.Elm.NamedTypeSpecifier!

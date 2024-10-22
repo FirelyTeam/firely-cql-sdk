@@ -10,12 +10,10 @@ namespace Hl7.Cql.CqlToElm
 {
     internal class ElmFactory
     {
-        public ElmFactory(CoercionProvider coercionProvider, MessageProvider messaging)
+        public ElmFactory(MessageProvider messaging)
         {
-            CoercionProvider = coercionProvider;
             Messaging = messaging;
         }
-        public CoercionProvider CoercionProvider { get; }
         public MessageProvider Messaging { get; }
 
         public Expression CreateElmNode(IHasSignature hasSignature, string? library, Expression[] arguments)
@@ -122,54 +120,6 @@ namespace Hl7.Cql.CqlToElm
         internal Expression If(Expression condition, Expression then, Expression @else)
         {
             var @if = new If();
-            var convertCondition = CoercionProvider.Coerce(condition, SystemTypes.BooleanType);
-            if (convertCondition.Success)
-                condition = convertCondition.Result;
-            else @if.AddError(Messaging.TypeFoundIsNotExpected(condition.resultTypeSpecifier, SystemTypes.BooleanType));
-
-            var compatible = true;
-            if (then is Null && then.resultTypeSpecifier == SystemTypes.AnyType)
-            {
-                if (@else.resultTypeSpecifier != SystemTypes.AnyType)
-                {
-                    var thenResult = CoercionProvider.Coerce(then, @else.resultTypeSpecifier);
-                    then = thenResult.Result;
-                }
-            }
-            else if (@else is Null && @else.resultTypeSpecifier == SystemTypes.AnyType)
-            {
-                if (then.resultTypeSpecifier != SystemTypes.AnyType)
-                {
-                    var elseResult = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);
-                    @else = elseResult.Result;
-                }
-            }
-            else
-            {
-                var convertThenToElse = CoercionProvider.Coerce(then, @else.resultTypeSpecifier);
-                var convertElseToThen = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);
-                if (convertThenToElse.Cost < convertElseToThen.Cost)
-                {
-                    if (convertThenToElse.Cost == CoercionCost.Incompatible)
-                        compatible = false;
-                    else
-                        then = convertThenToElse.Result;
-                }
-                else
-                {
-                    if (convertElseToThen.Cost == CoercionCost.Incompatible)
-                        compatible = false;
-                    else
-                        @else = convertElseToThen.Result;
-                }
-            }
-            if (!compatible)
-            {
-                var choiceType = new ChoiceTypeSpecifier(then.resultTypeSpecifier, @else.resultTypeSpecifier);
-                then = CoercionProvider.Coerce(then, choiceType).Result; // it will succeed
-                @else = CoercionProvider.Coerce(@else, choiceType).Result; // it will succeed
-            }
-
             @if.condition = condition;
             @if.then = then;
             @if.@else = @else;

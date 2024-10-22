@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using NotNullWhenAttribute = System.Diagnostics.CodeAnalysis.NotNullWhenAttribute;
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -24,7 +25,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             Options = services.GetRequiredService<IOptions<CqlToElmOptions>>().Value;
         }
 
-        //     : 'Choice' '<' typeSpecifier (',' typeSpecifier)* '>'
+        // : 'Choice' '<' typeSpecifier (',' typeSpecifier)* '>'
         public override TypeSpecifier VisitChoiceTypeSpecifier([NotNull] cqlParser.ChoiceTypeSpecifierContext context)
         {
             var choice = new ChoiceTypeSpecifier
@@ -65,7 +66,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 element = context.tupleElementDefinition()
                     .Select(ted => ted.Parse(this))
-                    .OrderBy(ted=>ted.name)
+                    .OrderBy(ted => ted.name)
                     .ToArray(),
             }.WithLocator(context.Locator());
 
@@ -73,144 +74,75 @@ namespace Hl7.Cql.CqlToElm.Visitors
         //    : (qualifier '.')* referentialOrTypeNameIdentifier
         public override TypeSpecifier VisitNamedTypeSpecifier([NotNull] cqlParser.NamedTypeSpecifierContext context)
         {
-            // Could be FHIR.Patient.Contact, so the first part is the library name, and the last part(s) are the type name.
-            var qualifiers = context.qualifier().Select(q => q.identifier().Parse()!).ToArray();
+            //// Could be FHIR.Patient.Contact, so the first part is the library name, and the last part(s) are the type name.
+            //var qualifiers = context.qualifier().Select(q => q.identifier().Parse()!).ToArray();
 
-            var libraryName = qualifiers.FirstOrDefault();
-            var typeName = string.Join(".", qualifiers.Skip(1).Append(context.referentialOrTypeNameIdentifier().Parse()));
-
-            TryResolveNamedTypeSpecifier(LibraryBuilder.SymbolTable, 
-                libraryName, typeName, out var result, out var error);
-
-            //TODO: Might need ErrorTypeSpecifier here
-            if (result is null)
-                result = SystemTypes.AnyType; //new NamedTypeSpecifier($"urn:cql-unknown-type:{libraryName}", typeName);
-
-            // Create a new instance of this NTS so errors & locators can be attached.
-            result = new NamedTypeSpecifier
+            var text = context.GetText();
+            var firstDot = text.IndexOf('.');
+            if (firstDot > -1)
             {
-                name = new System.Xml.XmlQualifiedName(result.name.Name),
-            };
-
-            if (error is not null)
-                result.AddError(error);
-            
-            return result.WithLocator(context.Locator());
-        }
-
-        private bool TryResolveNamedTypeSpecifier(ISymbolScope scope,
-            string? libraryName,
-            string typeName,
-            out NamedTypeSpecifier? namedType,
-            out string? error)
-        {
-            var success = TryResolveType(scope, libraryName, typeName, out var result, out error);
-            namedType = result?.ToNamedType();
-            return success;
-        }
-
-        internal ModelType? GetModelType(UsingDefSymbol s, string name) =>
-            s.Model.TryGetTypeInfoFor(name, out var typeInfo) 
-            ? new ModelType(s.Model, typeInfo!) 
-            : null;
-
-        private bool TryResolveType(ISymbolScope scope,
-            string? libraryName,
-            string typeName,
-            out ModelType? result,
-            out string? error)
-        {
-            // If the typename is qualified with a library name, only look in the specified model library.
-            if (libraryName is not null)
-            {
-                if (scope.TryResolveSymbol(libraryName, out var model))
+                var libraryName = text[0..firstDot];
+                var typeName = text[(firstDot + 1)..];
+                if (LibraryBuilder.SymbolTable.TryResolveSymbol(libraryName, out var model))
                 {
                     if (model is UsingDefSymbol usingDef)
                     {
-                        if (GetModelType(usingDef, typeName) is { } modelType)
-                            (result, error) = (modelType, null);
-                        else
-                            (result, error) = (null, $"There is no type named '{typeName}' in model library {libraryName}.");
+                        if (usingDef.Symbols.TryResolveSymbol(typeName, out var symbol))
+                        {
+                            if (symbol is TypeDef td)
+                            {
+                                return new NamedTypeSpecifier(td.uri!, td.name!)
+                                    .WithLocator(context.Locator());
+                            }
+                        }
                     }
-                    else
-                    {
-                        (result, error) = (null, $"{libraryName} is not a reference to an model library.");
-                    }
-                }
-                else
-                    (result, error) = (null, Messaging.CouldNotResolveModel(libraryName));
-
-                return error is null;
-            }
-
-            var usings = scope.OfType<UsingDefSymbol>();
-            // Else, go over all used models to find it. This could mean we find an ambiguous match.
-            return TryGetMatchingTypes(usings, typeName, out result, out error);
-        }
-
-        internal bool TryGetMatchingTypes(IEnumerable<UsingDefSymbol> usingDefs, 
-            string typeName, [NotNullWhen(true)] out ModelType? result, out string? error)
-        {
-            var matches = usingDefs.Select(include => (include, modelType: GetModelType(include, typeName)))
-                    .Where(r => r.modelType is not null).ToList();
-            if (matches.Count == 1)
-            {
-                result = matches[0].modelType!;
-                error = null;
-                return true;
-            }
-            else if (matches.Count == 2)
-            {
-                var behavior = Options.AmbiguousTypeBehavior ?? AmbiguousTypeBehavior.Error;
-                if (behavior == AmbiguousTypeBehavior.PreferSystem)
-                {
-                    var systemMatches = matches.Where(m => m.include.Model.name == "System").ToArray();
-                    if (systemMatches.Length == 1)
-                    {
-                        result = systemMatches[0].modelType!;
-                        error = null;
-                        return true;
-                    }
-                }
-                else if (behavior == AmbiguousTypeBehavior.PreferModel)
-                {
-                    var systemMatches = matches.Where(m => m.include.Model.name != "System").ToArray();
-                    if (systemMatches.Length == 1)
-                    {
-                        result = systemMatches[0].modelType!;
-                        error = null;
-                        return true;
-                    }
-                }
-                result = null;
-                error = Messaging.AmbiguousType(typeName, matches.Select(m => $"{m.include.Model.name}.{typeName}").ToArray());
-                return false;
-
-            }
-            if (matches.Count > 1)
-            {
-                // Reference behavior when there is a conflict (e.g. FHIR.Quantity, System.Quantity) is to prefer the System type.
-                // So, an unqualified Quantity type in a library using FHIR will resolve to System.Quantity.
-                var systemMatches = matches.Where(m => m.include.Model.name == "System").ToArray();
-                if (systemMatches.Length == 1)
-                {
-                    result = systemMatches[0].modelType!;
-                    error = null;
-                    return true;
-                }
-                else
-                {
-                    result = null;
-                    error = $"Ambiguous type name '{typeName}', found matches in {string.Join(",", matches.Select(m => m.include.localIdentifier))}.";
-                    return false;
                 }
             }
             else
             {
-                result = null;
-                error = Messaging.NamedTypeRequiredInContext();
-                return false;
+                var typeName = text;
+                var usingDefs = LibraryBuilder.SymbolTable.OfType<UsingDefSymbol>();
+                List<NamedTypeSpecifier> matches = new();
+                foreach (var ud in usingDefs)
+                {
+                    if (ud.Symbols.TryResolveSymbol(typeName, out var symbol))
+                    {
+                        if (symbol is TypeDef td)
+                        {
+                            matches.Add(new NamedTypeSpecifier(td.uri!, td.name!)
+                                .WithLocator(context.Locator()));
+                        }
+                    }
+                }
+                if (matches.Count == 1)
+                    return matches[0];
+                else if (matches.Count > 1)
+                {
+                    // Reference behavior when there is a conflict (e.g. FHIR.Quantity, System.Quantity) is to prefer the System type.
+                    // So, an unqualified Quantity type in a library using FHIR will resolve to System.Quantity.
+                    var behavior = Options.AmbiguousTypeBehavior ?? AmbiguousTypeBehavior.Error;
+                    if (behavior == AmbiguousTypeBehavior.PreferSystem)
+                    {
+                        var systemMatches = matches
+                            .Where(m => m.name.Name.StartsWith("{urn:hl7-org:elm-types:"))
+                            .ToArray();
+                        if (systemMatches.Length == 1)
+                            return systemMatches[0];
+                    }
+                    else if (behavior == AmbiguousTypeBehavior.PreferModel)
+                    {
+                        var notSystemMatches = matches
+                             .Where(m => !m.name.Name.StartsWith("{urn:hl7-org:elm-types:"))
+                             .ToArray();
+                        if (notSystemMatches.Length == 1)
+                            return notSystemMatches[0];
+                    }
+                }
             }
+            return new NamedTypeSpecifier(new System.Xml.XmlQualifiedName(Options.LiteralTypes.Default))
+                    .WithLocator(context.Locator())
+                    .AddError(Messaging.NamedTypeRequiredInContext());
         }
+
     }
 }

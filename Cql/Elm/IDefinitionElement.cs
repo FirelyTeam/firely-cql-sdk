@@ -482,4 +482,15 @@ namespace Hl7.Cql.Elm
         [XmlIgnore]
         public TypeSpecifier? ResultTypeSpecifier => Resolve().ResultTypeSpecifier;
     }
+
+    partial class TypeDef : IDefinitionElement
+    {
+        public AccessModifier Access => accessLevel;
+
+        public string Name => name!;
+
+        IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
+
+        public Expression ToRef(string? libraryName) => throw new NotSupportedException();
+    }
 }

@@ -14,6 +14,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using Expression = Hl7.Cql.Elm.Expression;
+using M = Hl7.Cql.Model;
+
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -31,17 +33,16 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static MessageProvider Messaging => ServiceProvider.GetMessageProvider();
 
-        protected static IServiceCollection ServiceCollection(
+        internal static IServiceCollection ServiceCollection(
             Action<CqlToElmOptions>? options = null,
-            Action<IModelProvider>? models = null,
             Type? libraryProviderType = null) =>
             new ServiceCollection()
                 .AddCqlToElmServices()
-                .AddCqlToElmModels(models ?? (mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401)))
                 .AddCqlToElmOptions(options)
                 .AddCqlToElmMessaging()
                 .AddLogging(builder => builder.AddConsole())
                 .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider))
+                .AddSingleton<M.IModelProvider>(new M.ModelProviders.BuiltInModelProvider())
                 .AddCqlCodeGenerationServices();
 
 

@@ -12,6 +12,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Model;
 using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
@@ -22,7 +23,8 @@ internal class ExpressionBuilder(
     CqlOperatorsBinder cqlOperatorsBinder,
     TupleBuilderCache tupleBuilderCache,
     TypeResolver typeResolver,
-    CqlContextBinder cqlContextBinder)
+    CqlContextBinder cqlContextBinder,
+    IModelProvider modelProvider)
 {
     private readonly ILogger<ExpressionBuilder> _logger = logger;
     private readonly ExpressionBuilderSettings _expressionBuilderSettings = expressionBuilderSettings;
@@ -30,6 +32,7 @@ internal class ExpressionBuilder(
     private readonly TupleBuilderCache _tupleBuilderCache = tupleBuilderCache;
     private readonly TypeResolver _typeResolver = typeResolver;
     private readonly CqlContextBinder _cqlContextBinder = cqlContextBinder;
+    private readonly IModelProvider _modelProvider = modelProvider;
 
     /*
      * The ExpressionBuilderContext is created anew for each of the ProcessXXX methods.
@@ -46,7 +49,7 @@ internal class ExpressionBuilder(
     internal ExpressionBuilderContext NewExpressionBuilderContext(
         LibraryExpressionBuilderContext libCtx,
         Dictionary<string, ParameterExpression>? operands = null) =>
-        new(_logger, _expressionBuilderSettings, _cqlOperatorsBinder, _tupleBuilderCache, _typeResolver, _cqlContextBinder, libCtx, operands);
+        new(_logger, _expressionBuilderSettings, _cqlOperatorsBinder, _tupleBuilderCache, _typeResolver, _cqlContextBinder, libCtx, _modelProvider, operands);
 
     public void ProcessValueSetDef(LibraryExpressionBuilderContext libCtx, ValueSetDef valueSetDef) =>
         NewExpressionBuilderContext(libCtx)

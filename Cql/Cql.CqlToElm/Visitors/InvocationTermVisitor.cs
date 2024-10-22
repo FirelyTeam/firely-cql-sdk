@@ -77,17 +77,17 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var type = TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
             if (type is Elm.NamedTypeSpecifier namedType)
             {
-                var modelType = ModelProvider.FindTypeInfoByNamedType(namedType);
+                var modelType = TypeBridge.ToModelSpecifier(namedType, ModelProvider).GetTypeDefinition();
                 if (modelType != null)
                 {
-                    if (modelType.Type is ClassInfo @class)
+                    if (modelType is ClassTypeDefinition @class)
                     {
                         var instanceElementContexts = context.instanceElementSelector();
                         var instanceElements = new InstanceElement[instanceElementContexts.Length];
                         for (int i = 0; i < instanceElementContexts.Length; i++)
                         {
                             var elementName = instanceElementContexts[i].referentialIdentifier().Parse();
-                            if (!ModelProvider.TryGetElement(@class, elementName, out var classElement) || classElement is null)
+                            if (!@class.TryGetElement(elementName, out var classElement) || classElement is null)
                             {
                                 return new Instance()
                                     .AddError($"Member {elementName} not found for type {namedType.name.Name}.")
@@ -96,51 +96,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             }
                             else
                             {
-                                Elm.TypeSpecifier elementType;
-                                if (classElement.typeSpecifier is not null)
-                                    elementType = classElement.typeSpecifier.ToElm(ModelProvider);
-                                else if (classElement.type is not null)
-                                {
-                                    if (ModelProvider.TryGetTypeSpecifierForQualifiedName(classElement.type, out var ent))
-                                        elementType = ent!;
-                                    else
-                                        return new Instance()
-                                            .AddError($"The named type '{classElement.type}' for element {elementName} could not be resolved to any model type.")
-                                            .WithLocator(context.Locator())
-                                            .WithResultType(type);
-                                }
-                                else if (classElement.elementTypeSpecifier is Model.ListTypeSpecifier { } listTypeSpecifier)
-                                {
-                                    if (ModelProvider.TryGetTypeSpecifierForQualifiedName(listTypeSpecifier.elementType, out var elt))
-                                        elementType = elt.ToListType();
-                                    else
-                                        return new Instance()
-                                            .AddError($"The named type '{listTypeSpecifier.elementType}' for element {elementName} could not be resolved to any model type.")
-                                            .WithLocator(context.Locator())
-                                            .WithResultType(type);
-                                }
-                                else if (classElement.elementTypeSpecifier is Model.ChoiceTypeSpecifier { } choiceTypeSpecifier)
-                                {
-                                    var ct = choiceTypeSpecifier.choice.Select(c => c.ToElm(ModelProvider)).ToArray();
-                                    elementType = new Elm.ChoiceTypeSpecifier { choice = ct };
-                                }
-                                else if (classElement.elementType is not null)
-                                {
-                                    if (ModelProvider.TryGetTypeSpecifierForQualifiedName(classElement.elementType, out var ent))
-                                        elementType = ent!;
-                                    else
-                                        return new Instance()
-                                            .AddError($"The named type '{classElement.elementType}' for element {elementName} could not be resolved to any model type.")
-                                            .WithLocator(context.Locator())
-                                            .WithResultType(type);
-                                }
-                                else
-                                {
-                                    return new Instance()
-                                        .AddError($"Element {elementName} does not have any declared type.")
-                                        .WithLocator(context.Locator())
-                                        .WithResultType(type);
-                                }
+                                var elementType = TypeBridge.ToElmSpecifier(classElement.Type);
                                 var elementExpression = Visit(instanceElementContexts[i]);
                                 var conversionResult = CoercionProvider.Coerce(elementExpression, elementType);
                                 if (conversionResult.Success)
@@ -336,13 +292,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         private Property navigateIntoNamedType(Expression source, Elm.NamedTypeSpecifier nts, string memberName)
         {
-            var (_, type) = ModelProvider.FindTypeInfoByNamedType(nts);
-
+            var type = TypeBridge.ToModelSpecifier(nts, ModelProvider).GetTypeDefinition();
             var prop = makeProp(source, memberName);
-
-            if (type is ClassInfo ci && ModelProvider.TryGetElement(ci, memberName, out var elementInfo))
+            if (type is ClassTypeDefinition ci &&
+                ci.TryGetElement(memberName, out var element))
             {
-                return prop.WithResultType(elementInfo!.GetTypeSpecifierForElement(ModelProvider));
+                var elmType = TypeBridge.ToElmSpecifier(element.Type);
+                return prop.WithResultType(elmType);
             }
             else
             {

@@ -16,6 +16,55 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var then = Visit(context.expression(1));
             var @else = Visit(context.expression(2));
 
+
+            var convertCondition = CoercionProvider.Coerce(condition, SystemTypes.BooleanType);
+            if (convertCondition.Success)
+                condition = convertCondition.Result;
+            else condition.AddError(Messaging.TypeFoundIsNotExpected(condition.resultTypeSpecifier, SystemTypes.BooleanType));
+
+            var compatible = true;
+            if (then is Null && then.resultTypeSpecifier == SystemTypes.AnyType)
+            {
+                if (@else.resultTypeSpecifier != SystemTypes.AnyType)
+                {
+                    var thenResult = CoercionProvider.Coerce(then, @else.resultTypeSpecifier);
+                    then = thenResult.Result;
+                }
+            }
+            else if (@else is Null && @else.resultTypeSpecifier == SystemTypes.AnyType)
+            {
+                if (then.resultTypeSpecifier != SystemTypes.AnyType)
+                {
+                    var elseResult = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);
+                    @else = elseResult.Result;
+                }
+            }
+            else
+            {
+                var convertThenToElse = CoercionProvider.Coerce(then, @else.resultTypeSpecifier);
+                var convertElseToThen = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);
+                if (convertThenToElse.Cost < convertElseToThen.Cost)
+                {
+                    if (convertThenToElse.Cost == CoercionCost.Incompatible)
+                        compatible = false;
+                    else
+                        then = convertThenToElse.Result;
+                }
+                else
+                {
+                    if (convertElseToThen.Cost == CoercionCost.Incompatible)
+                        compatible = false;
+                    else
+                        @else = convertElseToThen.Result;
+                }
+            }
+            if (!compatible)
+            {
+                var choiceType = new ChoiceTypeSpecifier(then.resultTypeSpecifier, @else.resultTypeSpecifier);
+                then = CoercionProvider.Coerce(then, choiceType).Result; // it will succeed
+                @else = CoercionProvider.Coerce(@else, choiceType).Result; // it will succeed
+            }
+
             var @if = ElmFactory.If(condition, then, @else);
             return @if
                 .WithId()

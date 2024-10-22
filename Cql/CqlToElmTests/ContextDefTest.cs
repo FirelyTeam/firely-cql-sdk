@@ -1,6 +1,7 @@
 using FluentAssertions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
+using Hl7.Cql.Model.Xml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
 
@@ -30,17 +31,21 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsNotNull(lib.contexts);
             lib.contexts.Select(c => c.name).Should().BeEquivalentTo("FHIR.Patient", "Observation");
 
+
+            var pts = new Elm.NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}Patient") };
+            var ots = new Elm.NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}Observation") };
+
             lib.statements.Should().ContainEquivalentOf(new
             {
                 name = "Patient",
                 context = "FHIR.Patient",
-                resultTypeSpecifier = Models.Fhir401.MakeQualifiedTypeName("Patient").ToNamedType()
+                resultTypeSpecifier = pts,
             }, p => p.ExcludingMissingMembers());
             lib.statements.Should().ContainEquivalentOf(new
             {
                 name = "Observation",
                 context = "Observation",
-                resultTypeSpecifier = Models.Fhir401.MakeQualifiedTypeName("Observation").ToNamedType()
+                resultTypeSpecifier = ots,
             }, p => p.ExcludingMissingMembers());
         }
 

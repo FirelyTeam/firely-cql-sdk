@@ -240,6 +240,22 @@ namespace Hl7.Cql.CqlToElm.Scopes
             }
         }
 
+        public bool TryResolveType(string identifier, [NotNullWhen(true)] out TypeDef? type)
+        {
+            // all type symbols will be added to this library when a using statement brings
+            // in a model.
+            if (TryResolveSymbol(identifier, out var symbol))
+            {
+                if (symbol is TypeDef td)
+                {
+                    type = td;
+                    return true;
+                }                    
+            }
+            type = null;
+            return false;
+        }
+
         public IEnumerable<ReferencedLibrary> ReferencedLibraries =>
             Parent switch
             {

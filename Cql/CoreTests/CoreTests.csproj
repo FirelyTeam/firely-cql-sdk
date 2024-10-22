@@ -47,8 +47,8 @@
 		<!-- <TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory> -->
 	</PropertyGroup>
 
-	<Import Condition="'$(Configuration)'=='Generate-CQL-to-ELM'" Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\CqlToElm.Targets.xml" />
-	<Import Condition="'$(Configuration)'!='Generate-CQL-to-ELM'" Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\ElmToCSharp.Targets.xml" />
+	<!--<Import Condition="'$(Configuration)'=='Generate-CQL-to-ELM'" Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\CqlToElm.Targets.xml" />
+	<Import Condition="'$(Configuration)'!='Generate-CQL-to-ELM'" Project="$(MSBuildProjectDirectory)..\..\..\Demo\Cql\Build\ElmToCSharp.Targets.xml" />-->
 
 	<ItemGroup>
 		<None Include="Input\ELM\HL7\*.json">

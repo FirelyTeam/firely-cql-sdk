@@ -166,7 +166,42 @@
         /// </para>
         /// </summary>
         public AmbiguousTypeBehavior? AmbiguousTypeBehavior { get; set; } = CqlToElm.AmbiguousTypeBehavior.PreferModel;
+
+        /// <summary>
+        /// Defines the type specifiers used when parsing literals.
+        /// By default, these literal types will reference their corresponding types in the System model.
+        /// </summary>
+        public LiteralTypes LiteralTypes { get; set; } = new();
     }
+
+    /// <summary>
+    /// Defines the qualified type names for literals.
+    /// </summary>
+    /// <remarks>
+    /// Normally, 
+    /// </remarks>
+    /// <param name="Default">The type used when type resolution fails; System.Any by default.</param>
+    /// <param name="Integer">The type used when parsing Integer literals. System.Integer by default.</param>
+    /// <param name="Long">The type used when parsing Long literals. System.Long by default.</param>
+    /// <param name="Decimal">The type used when parsing Decimal literals. System.Decimal by default.</param>
+    /// <param name="Boolean">The type used when parsing Boolean literals. System.Boolean by default.</param>
+    /// <param name="Date">The type used when parsing Date literals. System.Date by default.</param>
+    /// <param name="DateTime">The type used when parsing DateTime literals. System.DateTime by default.</param>
+    /// <param name="Time">The type used when parsing Time literals. System.Time by default.</param>
+    /// <param name="List">The type used when parsing List literals. System.List by default.</param>
+    /// <param name="Interval">The type used when parsing Interval literals. System.Interval by default.</param>
+    public record LiteralTypes(string Default = "{urn:hl7-org:elm-types:r1}Any",
+        string Integer = "{urn:hl7-org:elm-types:r1}Integer",
+        string Long = "{urn:hl7-org:elm-types:r1}Long",
+        string Decimal = "{urn:hl7-org:elm-types:r1}Decimal",
+        string Boolean = "{urn:hl7-org:elm-types:r1}Boolean",
+        string Date = "{urn:hl7-org:elm-types:r1}Date",
+        string DateTime = "{urn:hl7-org:elm-types:r1}DateTime",
+        string Time = "{urn:hl7-org:elm-types:r1}Time",
+        string List = "{urn:hl7-org:elm-types:r1}List",
+        string Interval = "{urn:hl7-org:elm-types:r1}Interval");
+        
+
     /// <summary>
     /// Sets the behavior when two models have the same type name. 
     /// </summary>

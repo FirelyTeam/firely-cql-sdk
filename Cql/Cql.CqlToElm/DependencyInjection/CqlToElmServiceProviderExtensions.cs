@@ -10,6 +10,7 @@ using System;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.LibraryProviders;
+using Hl7.Cql.Model;
 
 // ReSharper disable once CheckNamespace
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -18,8 +19,6 @@ namespace Microsoft.Extensions.DependencyInjection;
 internal static class CqlToElmServiceProviderExtensions
 {
     public static CqlToElmConverter GetCqlToElmConverter(this IServiceProvider sp) => sp.GetRequiredService<CqlToElmConverter>();
-
-    public static CoercionProvider GetCoercionProvider(this IServiceProvider sp) => sp.GetRequiredService<CoercionProvider>();
 
     public static ElmFactory GetElmFactory(this IServiceProvider sp) => sp.GetRequiredService<ElmFactory>();
 

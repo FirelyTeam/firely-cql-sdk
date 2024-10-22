@@ -35,18 +35,12 @@ namespace Hl7.Cql.Elm
         /// </summary>
         public static string SystemModelVersion = "1.0.0";
 
-        private static readonly ModelInfo bootstrapSystemModel = new()
-        {
-            url = SystemModelUri,
-            version = SystemModelVersion,
-            name = SystemModelPrefix
-        };
-
         private static readonly ConcurrentDictionary<string, ParameterTypeSpecifier> gtpTsSingletons = new();
         /// <summary>
         /// Create a new instance of a NamedType, given the name of a system type.
         /// </summary>
-        public static NamedTypeSpecifier CreateNamedType(string name) => bootstrapSystemModel.MakeQualifiedTypeName(name).ToNamedType();
+        public static NamedTypeSpecifier CreateNamedType(string name) =>
+            new NamedTypeSpecifier("urn:hl7-org:elm-types:r1", name);
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public static NamedTypeSpecifier AnyType = CreateNamedType("Any");

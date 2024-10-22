@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Xml;
 
 namespace Hl7.Cql.Elm
 {
@@ -188,29 +189,71 @@ namespace Hl7.Cql.Elm
         }
 
         /// <summary>
+        /// Create a new named type given its qualified name.
+        /// </summary>
+        public NamedTypeSpecifier(XmlQualifiedName qualifiedName)
+        {
+            this.name = qualifiedName;
+        }
+
+        /// <summary>
         /// Create a new named type given its uri and name.
         /// </summary>
         /// <param name="uri"></param>
         /// <param name="name"></param>
         public NamedTypeSpecifier(string uri, string name)
         {
-            this.name = QualifiedName.MakeQualifiedTypeName(uri, name);
+            this.name = new XmlQualifiedName($"{{{uri}}}{name}");
         }
 
+
+        /// <summary>
+        /// Splits an <see cref="XmlQualifiedName"/> into is uri and name components.
+        /// </summary>
+        /// <param name="qname">The qualified name to split.</param>
+        /// <returns>A tuple containing uri and name.</returns>
+        /// <exception cref="ArgumentException">If the name is malformed.</exception>
+        public static (string? uri, string? name) Split(XmlQualifiedName? qname)
+        {
+            var lc = qname?.Name.IndexOf('{');
+            if (lc > -1)
+            {
+                var rc = qname?.Name.IndexOf('}');
+                if (rc > lc)
+                {
+                    var uri = qname!.Name[(lc.Value + 1)..rc.Value];
+                    var name = qname!.Name[(rc.Value + 1)..];
+                    return (uri, name);
+                }
+                else
+                {
+                    throw new ArgumentException("The name does not match the expected pattern.");
+                }
+            }
+            else
+            {
+                return (string.Empty, qname?.Name ?? string.Empty);
+            }
+        }
 
         /// <summary>
         /// Gets the model uri and name for this named type.
         /// </summary>
         /// <returns>The uri and the type parts of the name in the specifier.</returns>
         /// <exception cref="ArgumentException">If the name does not match the expected pattern.</exception>
-        public void Deconstruct(out string uri, out string name) => (uri, name) = this.name;
+        public void Deconstruct(out string uri, out string name)
+        {
+            var tuple = Split(this.name);
+            (uri, name) = (tuple.uri ?? string.Empty, tuple.name ?? string.Empty);
+        }
+
 
         /// <inheritdoc/>
         public override string ToString()
         {
             if (name is null) return "null";
 
-            var (u, n) = name;
+            var (u, n) = this;
             if (u == SystemTypes.SystemModelUri)
                 return n;
             else

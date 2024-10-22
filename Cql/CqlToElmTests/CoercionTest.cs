@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -9,18 +10,27 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class CoercionTest : Base
     {
-        internal static CoercionProvider CoercionProvider => ServiceProvider.GetCoercionProvider();
-        internal static ElmFactory ElmFactory =>  ServiceProvider.GetElmFactory();
 
+        internal static ElmFactory ElmFactory => ServiceProvider.GetElmFactory();
+        internal static CoercionProvider CoercionProvider => _coercionProvider!;
+        private static CoercionProvider? _coercionProvider;
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize(options =>
+
+        public static void Initialize(TestContext context)
         {
-            options.EnableListPromotion = true;
-            options.EnableListDemotion = true;
-            options.EnableIntervalPromotion = true;
-            options.EnableIntervalDemotion = true;
-        });
+            ClassInitialize(options =>
+            {
+                options.EnableListPromotion = true;
+                options.EnableListDemotion = true;
+                options.EnableIntervalPromotion = true;
+                options.EnableIntervalDemotion = true;
+            });
+            var libraryBuilder = new LibraryBuilder(new(),
+                ServiceProvider.GetRequiredService<SystemLibrary>(),
+                ServiceProvider.GetRequiredService<LocalIdentifierProvider>());
+            _coercionProvider = CoercionProvider.Create(ServiceProvider, libraryBuilder);
+        }
 #pragma warning restore IDE0060 // Remove unused parameter
 
         private static Null Null() => new Null().WithResultType(SystemTypes.AnyType);

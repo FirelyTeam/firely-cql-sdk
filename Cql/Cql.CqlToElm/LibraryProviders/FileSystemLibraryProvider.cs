@@ -155,7 +155,7 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
             return false;
         }
 
-        public bool TryResolveLibrary(string libraryName, string? version, [NotNullWhen(true)] out LibraryBuilder? library, out string? error)
+        public bool TryResolveLibrary(string libraryName, string? version, [NotNullWhen(true)] out LibraryBuilder? library, [NotNullWhen(false)] out string? error)
         {
             if (Libraries.TryGet(libraryName, version, out var lib))
             {
@@ -177,7 +177,7 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
             else
             {
                 library = null;
-                error = null;
+                error = $"Could not locate library {libraryName}.";
                 return false;
             }
         }

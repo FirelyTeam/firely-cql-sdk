@@ -1,4 +1,6 @@
-﻿using Hl7.Cql.Elm;
+﻿using Hl7.Cql.CqlToElm.Scopes;
+using Hl7.Cql.Elm;
+using Hl7.Cql.Model;
 using System;
 using System.Xml.Serialization;
 
@@ -12,16 +14,19 @@ namespace Hl7.Cql.CqlToElm
     [XmlType(IncludeInSchema = false, TypeName = nameof(UsingDef), Namespace = "urn:hl7-org:elm:r1")]
     internal class UsingDefSymbol : UsingDef, IDefinitionElement
     {
-        public UsingDefSymbol(string localIdentifier, string? version, Model.ModelInfo model)
+        public UsingDefSymbol(string localIdentifier, string? version, ModelDefinition model)
         {
             Model = model;
 
             this.localIdentifier = localIdentifier;
-            uri = model.url;
+            uri = model.Url;
             this.version = version;
+            Symbols = new(uri, null);
         }
 
-        public Model.ModelInfo Model { get; }
+        public ModelDefinition Model { get; }
+
+        public SymbolTable Symbols { get; }
 
         public Expression ToRef(string? _) => new UsingRef(this);
     }
