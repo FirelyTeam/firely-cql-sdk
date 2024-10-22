@@ -142,9 +142,6 @@ namespace Hl7.Cql.CqlToElm.Test
             var lambda = LibraryExpressionBuilder.Lambda(expression);
             var result = AssemblyCompiler.RunLambda(lambda, library, ctx);
             return result;
-            // var dg = lambda.Compile();
-            // var result = dg.DynamicInvoke(ctx ?? FhirCqlContext.ForBundle());
-            // return result;
         }
         internal static T? Run<T>(
             Expression expression,
