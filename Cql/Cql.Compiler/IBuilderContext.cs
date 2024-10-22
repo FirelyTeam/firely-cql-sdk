@@ -8,6 +8,7 @@
 using System.Globalization;
 using System.Linq;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Compiler;
 
@@ -23,9 +24,9 @@ internal interface IBuilderContext
     /// to break when the hash matches the one from the log file.
     /// </summary>
     string Hash =>
-        $"#{Hasher.Instance.Hash(
+        $"#{CqlTupleMetadata.Instance.Hash(
                 string.Concat(
                     this.SelfAndAncestorBuilders()
-                        .Select((b, i) => Hasher.Instance.Hash(b?.DebuggerInfo.ToString() ?? i.ToString(CultureInfo.InvariantCulture)))))
+                        .Select((b, i) => CqlTupleMetadata.Instance.Hash(b?.DebuggerInfo.ToString() ?? i.ToString(CultureInfo.InvariantCulture)))))
             [..8]}";
 }

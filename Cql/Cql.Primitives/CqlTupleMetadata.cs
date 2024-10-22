@@ -13,7 +13,6 @@ namespace Hl7.Cql.Primitives;
 /// </summary>
 public class CqlTupleMetadata : IEquatable<CqlTupleMetadata>
 {
-    private static Hasher Hasher { get; } = Hasher.Instance;
     internal const string? PropertyPrefix = "CqlTupleMetadata_";
 
     /// <summary>
@@ -34,8 +33,6 @@ public class CqlTupleMetadata : IEquatable<CqlTupleMetadata>
 
         // For some odd reason, if this is not lazy, the hash code is occasionally fails deep inside the Hasher with NullReferenceException, whenever a library is created.
         _signatureHashStringLazy = new Lazy<string>(() => BuildSignatureHashString(ItemTypes.Zip(ItemNames).ToList(), PropertyPrefix, _toString));
-
-        //_hashCode = _signatureHashStringLazy.GetHashCode();
     }
 
     internal static string BuildSignatureHashString(
@@ -43,23 +40,12 @@ public class CqlTupleMetadata : IEquatable<CqlTupleMetadata>
         string? prepend = null,
         string? toString = null)
     {
-        string signatureString = "";
-        var hasher = Hasher;
-        try
-        {
-            signatureString = string.Join(
-                "+",
-                tupleProps.Select(t => $"{t.propName}:{t.propType.ToCSharpString()}"));
-            var signatureHashString = $"{prepend}{hasher.Hash(signatureString)}";
-            return signatureHashString;
-        }
-        catch (Exception e)
-        {
-            _ = e;
-            throw new Exception(
-                $"Could not calculate hash. signatureString:'{signatureString}', toString:{toString}, hasher:{(hasher is null ? "is null" : "exists")}",
-                e);
-        }
+        var hasher = Hasher.Instance;
+        var signatureString = string.Join(
+            "+",
+            tupleProps.Select(t => $"{t.propName}:{t.propType.ToCSharpString()}"));
+        var signatureHashString = $"{prepend}{hasher.Hash(signatureString)}";
+        return signatureHashString;
     }
 
     /// <summary>

@@ -35,11 +35,6 @@ internal class KeyValuePairComparer<TKey,TValue>(ICqlComparer cqlComparer) : ICq
             0     => cqlComparer.Compare(x.Value, y.Value, precision),
             var i => i
         };
-        // Comparer<TKey>.Default.Compare(x.Key, y.Key) switch
-        // {
-        //     0     => Comparer<TValue>.Default.Compare(x.Value, y.Value),
-        //     var i => i
-        // };
 
     /// <inheritdoc />
     public bool? Equals(object? x, object? y, string? precision = null) =>
@@ -55,8 +50,6 @@ internal class KeyValuePairComparer<TKey,TValue>(ICqlComparer cqlComparer) : ICq
             true  => cqlComparer.Equals(x.Value, y.Value, precision),
             var b => b
         };
-        // Comparer<TKey>.Default.Compare(x.Key, y.Key) == 0
-        // && Comparer<TValue>.Default.Compare(x.Value, y.Value) == 0;
 
     /// <inheritdoc />
     public bool Equivalent(object? x, object? y, string? precision = null) =>

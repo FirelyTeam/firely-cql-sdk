@@ -28,7 +28,7 @@ internal class TupleBuilderCache : IDisposable
     private readonly ILogger<TupleBuilderCache> _logger;
     private readonly TupleTypeCache _tupleTypeCache;
     private readonly ModuleBuilder _moduleBuilder;
-    private const string TupleBuilderCacheName = "TemporaryTupleAssembly"; // This is now a const, to allow InternalsVisibleTo to this library.
+    private const string TupleBuilderCacheName = "TemporaryTupleAssembly";
 
     private class TupleTypeCache
     {
@@ -154,16 +154,8 @@ internal class TupleBuilderCache : IDisposable
     /// <returns>The unique tuple type name.</returns>
     private static string TupleTypeNameFor(IEnumerable<(Type propType, string propName)> tupleProps)
     {
-        var orderedTupleProps = tupleProps.OrderBy(k => k.propName).ToList();
-        var nameTypes = orderedTupleProps.Select(kvp => $"{kvp.propName}:{kvp.propType.ToCSharpString()}");
-        var hashInput = string.Join("+", nameTypes);
-        var tupleId = Hasher.Instance.Hash(hashInput);
-
-        var a = CqlTupleMetadata.BuildSignatureHashString(orderedTupleProps, "Tuple_");
-        var b = $"Tuple_{tupleId}";
-
-        Debug.Assert(a == b);
-
-        return $"Tuples.{b}";
+        var orderedTupleProps = tupleProps.OrderBy(k => k.propName);
+        var name = $"Tuples.{CqlTupleMetadata.BuildSignatureHashString(orderedTupleProps, "Tuple_")}";
+        return name;
     }
 }
