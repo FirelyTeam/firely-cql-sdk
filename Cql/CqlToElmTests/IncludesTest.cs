@@ -35,7 +35,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, properContains.operand.Length);
                 Assert.IsInstanceOfType(properContains.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(properContains.operand[1], typeof(Start));
-                var result = Run(properContains);
+                var result = Run(properContains, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -63,7 +63,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, properContains.operand.Length);
                 Assert.IsInstanceOfType(properContains.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(properContains.operand[1], typeof(End));
-                var result = Run(properContains);
+                var result = Run(properContains, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -91,7 +91,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, same.operand.Length);
                 Assert.IsInstanceOfType(same.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(same.operand[1], typeof(Interval));
-                var result = Run(same);
+                var result = Run(same, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(false, result);
             }
@@ -119,7 +119,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, same.operand.Length);
                 Assert.IsInstanceOfType(same.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(same.operand[1], typeof(Interval));
-                var result = Run(same);
+                var result = Run(same, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(false, result);
             }
@@ -147,7 +147,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, contains.operand.Length);
                 Assert.IsInstanceOfType(contains.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(contains.operand[1], typeof(Start));
-                var result = Run(contains);
+                var result = Run(contains, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -175,7 +175,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, contains.operand.Length);
                 Assert.IsInstanceOfType(contains.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(contains.operand[1], typeof(End));
-                var result = Run(contains);
+                var result = Run(contains, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -203,7 +203,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, same.operand.Length);
                 Assert.IsInstanceOfType(same.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(same.operand[1], typeof(Interval));
-                var result = Run(same);
+                var result = Run(same, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -231,7 +231,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, same.operand.Length);
                 Assert.IsInstanceOfType(same.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(same.operand[1], typeof(Interval));
-                var result = Run(same);
+                var result = Run(same, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -255,7 +255,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = CreateLibraryForExpression("Interval[null as Integer, null as Integer] properly includes Interval[1, 10]");
             var intersect = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ProperIncludes>();
-            var result = Run<bool?>(intersect);
+            var result = Run<bool?>(intersect, library);
             result.Should().BeNull();
         }
 

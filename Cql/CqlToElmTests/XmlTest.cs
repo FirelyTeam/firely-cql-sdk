@@ -75,7 +75,9 @@ namespace Hl7.Cql.CqlToElm.Test
 
             Elm.Expression equal = Equals(expression, expectation);
             var equalLambda = LibraryExpressionBuilder.Lambda(equal);
+
             var equalDelegate = equalLambda.Compile();
+            // TODO: These needs to be changed to run through the AssemblyCompiler too
             var equalResult = (bool?)equalDelegate.DynamicInvoke(CqlContext);
             if (equalResult != true)
             {
