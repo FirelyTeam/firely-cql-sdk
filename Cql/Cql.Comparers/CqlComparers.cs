@@ -99,7 +99,7 @@ namespace Hl7.Cql.Comparers
             {
                 var genericArguments = type.GetGenericArguments();
                 var genericType = typeof(KeyValuePairComparer<,>).MakeGenericType(genericArguments);
-                var cqlComparer = (ICqlComparer)Activator.CreateInstance(genericType)!;
+                var cqlComparer = (ICqlComparer)Activator.CreateInstance(genericType, args: [this])!;
                 return cqlComparer;
             });
         }
