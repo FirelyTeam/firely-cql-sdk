@@ -59,9 +59,11 @@ namespace CoreTests.Fhir
             results.Should().AllBeOfType<Patient>().And.AllSatisfy(p => p.Gender.Should().Be(AdministrativeGender.Male));
 
             var activeProp = model.GetProperty(model.ResolveType("{http://hl7.org/fhir}Patient")!, "active");
-            Assert.ThrowsException<NotSupportedException>(() =>
-                dr.Retrieve<Patient>(new RetrieveParameters(activeProp, null,
-                [new CqlCode("male", "http://hl7.org/fhir/administrative-gender")], null)).ToList());
+            var retrieveParams = new RetrieveParameters(activeProp, null,
+            [
+                new CqlCode("male", "http://hl7.org/fhir/administrative-gender")
+            ], null);
+            dr.Retrieve<Patient>(retrieveParams).Should().BeEmpty();
         }
 
         private BundleDataSource buildDataSource()
