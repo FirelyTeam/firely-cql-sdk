@@ -7,7 +7,15 @@
 	<PropertyGroup>
 		<!-- Keep this in sync between cql-base.props and cql-demo.props -->
 		<FirelySdkVersion>5.10.3</FirelySdkVersion>
+
+		<!-- https://hl7.org/fhir/R4/ -->
+		<FhirRelease>R4</FhirRelease>
 	</PropertyGroup>
+
+	<PropertyGroup>
+		<DefineConstants Condition="'$(FhirRelease)'!=''">$(DefineConstants);FhirRelease$(FhirRelease)</DefineConstants>
+	</PropertyGroup>
+
 
 	<!-- Solution-wide properties for NuGet packaging -->
 	<PropertyGroup>
