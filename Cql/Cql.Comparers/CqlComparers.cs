@@ -199,8 +199,8 @@ namespace Hl7.Cql.Comparers
             }
 
             bool xySwapped = false;
-            var xType = GetRegisteredTypeForComparer(x);
-            var yType = GetRegisteredTypeForComparer(y);
+            var xType = GetKeyTypeForComparers(x);
+            var yType = GetKeyTypeForComparers(y);
             if (xType != yType)
             {
                 // if x and y are not the same type, we prioritize them based on the following order:
@@ -253,7 +253,7 @@ namespace Hl7.Cql.Comparers
             if (EquivalentOnNullsOnly(x, y) is { } r)
                 return r;
 
-            var xType = GetRegisteredTypeForComparer(x);
+            var xType = GetKeyTypeForComparers(x);
 
             if (Comparers.TryGetValue(xType, out ICqlComparer? comparer))
             {
@@ -278,7 +278,7 @@ namespace Hl7.Cql.Comparers
         /// <summary>
         /// Collapses derived types to their bases, since this makes it easier to find the comparer by the exact type.
         /// </summary>
-        private static Type GetRegisteredTypeForComparer(object? x)
+        private static Type GetKeyTypeForComparers(object? x)
         {
             var type = x switch
             {
@@ -295,7 +295,7 @@ namespace Hl7.Cql.Comparers
             if (x == null)
                 return typeof(object).GetHashCode();
 
-            var xType = GetRegisteredTypeForComparer(x);
+            var xType = GetKeyTypeForComparers(x);
 
             if (Comparers.TryGetValue(xType, out ICqlComparer? comparer))
             {
