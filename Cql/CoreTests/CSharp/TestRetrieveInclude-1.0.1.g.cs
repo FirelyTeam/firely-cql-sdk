@@ -61,4 +61,13 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
     public CqlValueSet Chlamydia(CqlContext context) => 
         new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1003", default);
 
+
+    [CqlDeclaration("InDemographic")]
+    public IEnumerable<Observation> InDemographic(CqlContext context)
+    {
+        IEnumerable<Observation> a_ = context.Operators.Retrieve<Observation>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Observation"));
+
+        return a_;
+    }
+
 }

@@ -129,4 +129,26 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
         return b_;
     }
 
+
+    [CqlDeclaration("InDemographic")]
+    public IEnumerable<Patient> InDemographic(CqlContext context)
+    {
+        IEnumerable<Patient> a_ = context.Operators.Retrieve<Patient>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Patient"));
+
+        return a_;
+    }
+
+
+    [CqlDeclaration("SexuallyActive")]
+    public bool? SexuallyActive(CqlContext context)
+    {
+        IEnumerable<Condition> a_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+        bool? b_ = context.Operators.Exists<Condition>(a_);
+        IEnumerable<ServiceRequest> c_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
+        bool? d_ = context.Operators.Exists<ServiceRequest>(c_);
+        bool? e_ = context.Operators.Or(b_, d_);
+
+        return e_;
+    }
+
 }
