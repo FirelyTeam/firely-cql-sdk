@@ -51,7 +51,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
             expand.operand.Length.Should().Be(2);
             expand.operand[0].Should().HaveType(SystemTypes.DecimalType.ToIntervalType().ToListType());
-            var result = Run(expand);
+            var result = Run(expand, lib);
             // not implemented correctly
         }
 
@@ -84,7 +84,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var lib = CreateLibraryForExpression("collapse { Interval[DateTime(2012, 1, 1), DateTime(2012, 1, 15)], Interval[DateTime(2012, 1, 10), DateTime(2012, 1, 25)], Interval[DateTime(2012, 5, 10), DateTime(2012, 5, 25)], Interval[DateTime(2012, 5, 20), DateTime(2012, 5, 30)] }");
             var collapse = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Collapse>();
             // expected {Interval [ @2012-01-01T, @2012-01-25T ], Interval [ @2012-05-10T, @2012-05-30T ]}
-            var result = Run(collapse);
+            var result = Run(collapse, lib);
         }
     }
 }
