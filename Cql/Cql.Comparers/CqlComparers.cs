@@ -199,8 +199,8 @@ namespace Hl7.Cql.Comparers
             }
 
             bool xySwapped = false;
-            var xType = GetType(x);
-            var yType = GetType(y);
+            var xType = GetRegisteredTypeForComparer(x);
+            var yType = GetRegisteredTypeForComparer(y);
             if (xType != yType)
             {
                 // if x and y are not the same type, we prioritize them based on the following order:
@@ -253,7 +253,7 @@ namespace Hl7.Cql.Comparers
             if (EquivalentOnNullsOnly(x, y) is { } r)
                 return r;
 
-            var xType = GetType(x);
+            var xType = GetRegisteredTypeForComparer(x);
 
             if (Comparers.TryGetValue(xType, out ICqlComparer? comparer))
             {
@@ -275,12 +275,15 @@ namespace Hl7.Cql.Comparers
             throw new ArgumentException($"Cannot check equivalence for type {xType.Name}");
         }
 
-        private static Type GetType(object? x)
+        /// <summary>
+        /// Collapses derived types to their bases, since this makes it easier to find the comparer by the exact type.
+        /// </summary>
+        private static Type GetRegisteredTypeForComparer(object? x)
         {
             var type = x switch
             {
-                TupleBaseType => typeof(TupleBaseType),
-                ITuple        => typeof(ITuple),
+                TupleBaseType => typeof(TupleBaseType), // Tuple types generated in the LINQ expressions by the TupleBuilderCache
+                ITuple        => typeof(ITuple),        // .NET tuples (e.g. System.ValueTuple<...>) used in generated libraries
                 _             => x!.GetType()
             };
             return type;
@@ -292,7 +295,7 @@ namespace Hl7.Cql.Comparers
             if (x == null)
                 return typeof(object).GetHashCode();
 
-            var xType = GetType(x);
+            var xType = GetRegisteredTypeForComparer(x);
 
             if (Comparers.TryGetValue(xType, out ICqlComparer? comparer))
             {
