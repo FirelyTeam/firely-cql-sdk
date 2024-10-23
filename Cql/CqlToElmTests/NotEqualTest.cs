@@ -1525,7 +1525,6 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        [Ignore("Will be fixed in PR 614")]
         public void Tuple_Equal_Tuple_Null_Equals_Null()
         {
             var lib = CreateLibraryForExpression("{ x: 1, y: null } = { x: 1, y: null }");

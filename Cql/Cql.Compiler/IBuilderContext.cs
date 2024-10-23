@@ -8,6 +8,7 @@
 using System.Globalization;
 using System.Linq;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Compiler;
 

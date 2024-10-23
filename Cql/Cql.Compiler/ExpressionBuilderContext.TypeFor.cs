@@ -235,22 +235,20 @@ partial class ExpressionBuilderContext
 
     private Type TupleTypeFor((string name, TypeSpecifier elementType)[] elements, Func<Type, Type>? changeType)
     {
-        Dictionary<string, Type> elementInfo = elements!
-            .ToDictionary(
-                el => el.name,
-                el =>
-                {
-                    if (el.elementType == null)
-                        throw this.NewExpressionBuildingException(
-                            $"Tuple element {el.name} has a null {nameof(el.elementType)} property.  This property is required.");
+        var tupleFields = elements!
+            .Select(el =>
+            {
+                if (el.elementType == null)
+                    throw this.NewExpressionBuildingException(
+                        $"Tuple element {el.name} has a null {nameof(el.elementType)} property.  This property is required.");
 
-                    var type = TypeFor(el.elementType)!;
-                    if (changeType != null)
-                        type = changeType(type);
+                var type = TypeFor(el.elementType)!;
+                if (changeType != null)
+                    type = changeType(type);
 
-                    return type;
-                });
+                return (type, el.name);
+            });
 
-        return _tupleBuilderCache.CreateOrGetTupleTypeFor(elementInfo);
+        return _tupleBuilderCache.CreateOrGetTupleTypeFor(tupleFields);
     }
 }

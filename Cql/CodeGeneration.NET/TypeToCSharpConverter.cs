@@ -10,6 +10,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
@@ -35,18 +36,14 @@ internal class TypeToCSharpConverter
         return formatTypeNameAsTuple;
     }
 
-    public IEnumerable<(string Name, Type Type)> GetTupleProperties(Type type)
+    public IEnumerable<(Type Type, string Name)> GetTupleProperties(Type type)
     {
-        var length = type.GetProperties().Length;
-        for (var i = 0; i < length; i++)
-        {
-            var prop = type.GetProperties()[i];
-            yield return (prop.Name, prop.PropertyType);
-        }
+        var properties = type.GetProperties();
+        return properties.Select(p => (p.PropertyType, p.Name));
     }
 
     public bool ShouldUseTupleType(Type type) =>
-        _useCSharpValueTuples && type.Name.StartsWith("Tuple_"); // REVIEW: This is a heuristic, and may not be correct in all cases.
+        _useCSharpValueTuples && type.IsTupleBaseType();
 
     public string ToCSharp(Type type)
     {

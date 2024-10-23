@@ -8,6 +8,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
@@ -24,75 +26,93 @@ namespace Hl7.Cql.Compiler;
 internal class TupleBuilderCache : IDisposable
 {
     private readonly ILogger<TupleBuilderCache> _logger;
-    private readonly List<Type> _tupleTypeList;
+    private readonly TupleTypeCache _tupleTypeCache;
     private readonly ModuleBuilder _moduleBuilder;
-    private readonly string _tupleBuilderCacheName;
+    private const string TupleBuilderCacheName = "TemporaryTupleAssembly";
+
+    private class TupleTypeCache
+    {
+        private readonly List<Type> _tupleTypeList = [];
+
+        public void AddTupleType(Type type)
+        {
+            if (_tupleTypeList.Contains(type))
+                throw new ArgumentException($"Type {type.Name} already exists", nameof(type));
+            _tupleTypeList.Add(type);
+        }
+
+        public bool TryFindTupleType(
+            IEnumerable<(Type propType, string propName, string cqlName)> tupleProps3,
+            [NotNullWhen(true)]out Type? type)
+        {
+            type = _tupleTypeList
+                .FirstOrDefault(tupleType =>
+                {
+                    var isMatch = tupleProps3.All(
+                        tf => tupleType.GetProperty(tf.propName) is { PropertyType: { } tuplePropertyType }
+                              && tuplePropertyType == tf.propType);
+                    return isMatch;
+                });
+            return type != null;
+        }
+    }
 
     /// <nodoc/>
     public TupleBuilderCache(
         ILogger<TupleBuilderCache> logger)
     {
         _logger = logger;
-        _tupleBuilderCacheName = $"Tuples{Guid.NewGuid():N}";
-        _logger.LogInformation("Creating tuple type cache {name}", _tupleBuilderCacheName);
+        _logger.LogInformation("Creating scoped tuple builder cache {name}", TupleBuilderCacheName);
 
-        var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(_tupleBuilderCacheName), AssemblyBuilderAccess.RunAndCollect);
-        _tupleTypeList = [];
-        _moduleBuilder = assemblyBuilder.DefineDynamicModule(_tupleBuilderCacheName);
+        var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(TupleBuilderCacheName), AssemblyBuilderAccess.RunAndCollect);
+        _tupleTypeCache = new();
+        _moduleBuilder = assemblyBuilder.DefineDynamicModule(TupleBuilderCacheName);
     }
 
     public void Dispose()
     {
-        _logger.LogInformation("Disposing tuple type cache {name}", _tupleBuilderCacheName);
+        _logger.LogInformation("Disposing scoped tuple builder cache {name}", TupleBuilderCacheName);
     }
 
     /// <summary>
     /// Creates or gets from the cache, a tuple type for the specified property names and types.
     /// </summary>
-    /// <param name="propertyNamesAndTypes">A readonly collection of property names with their corresponding types.</param>
+    /// <param name="tupleProps">A readonly collection of property names with their corresponding types.</param>
     /// <returns>Gets the type that matches the properties.</returns>
-    public Type CreateOrGetTupleTypeFor(IReadOnlyDictionary<string, Type> propertyNamesAndTypes)
+    public Type CreateOrGetTupleTypeFor(IEnumerable<(Type propType, string cqlName)> tupleProps)
     {
-        var normalizedProperties = propertyNamesAndTypes
-            .SelectToArray(kvp =>
+        HashSet<string> propNameDuplicates = new();
+        List<(Type propType, string propName, string cqlName)> tupleProps3 =
+            tupleProps
+            .Select(tupleProp =>
             {
-                var propName = ExpressionBuilderContext.NormalizeIdentifier(kvp.Key);
-                var propType = kvp.Value;
-                return (propName, propType);
-            });
+                var propName = ExpressionBuilderContext.NormalizeIdentifier(tupleProp.cqlName);
+                if (!propNameDuplicates.Add(propName))
+                    throw new ArgumentException($"Duplicate property name {propName} in tuple.", nameof(tupleProps));
+                return (tupleProp.propType, propName, tupleProp.cqlName);
+            })
+            .ToList();
 
-        var matchedTupleType = _tupleTypeList
-            .FirstOrDefault(tupleType =>
-            {
-                var isMatch = normalizedProperties
-                    .All(prop =>
-                             tupleType.GetProperty(prop.propName) is { PropertyType: { } tuplePropertyType }
-                             && tuplePropertyType == prop.propType);
-                return isMatch;
-            });
-        if (matchedTupleType != null)
-            return matchedTupleType;
-
-        var typeName = $"Tuples.{TupleTypeNameFor(propertyNamesAndTypes)}";
-
-        var myTypeBuilder = _moduleBuilder.DefineType(typeName, TypeAttributes.Public | TypeAttributes.Class, typeof(TupleBaseType));
-
-        foreach (var kvp in propertyNamesAndTypes)
+        if (!_tupleTypeCache.TryFindTupleType(tupleProps3, out var tupleType))
         {
-            var name = ExpressionBuilderContext.NormalizeIdentifier(kvp.Key);
-            var type = kvp.Value;
-            DefineProperty(myTypeBuilder, name!, kvp.Key, type);
+            tupleType = DefineType(tupleProps3);
+            _tupleTypeCache.AddTupleType(tupleType);
         }
-        var typeInfo = myTypeBuilder.CreateTypeInfo();
-        AddTupleType(typeInfo!);
-        return typeInfo!;
+
+        return tupleType;
     }
 
-    private void AddTupleType(Type type)
+    private TypeInfo DefineType(IReadOnlyCollection<(Type propType, string propName, string cqlName)> tupleProps3)
     {
-        if (_tupleTypeList.Contains(type))
-            throw new ArgumentException($"Type {type.Name} already exists", nameof(type));
-        _tupleTypeList.Add(type);
+        var typeName = TupleTypeNameFor(tupleProps3.Select(tp => (tp.propType, tp.propName)));
+
+        var myTypeBuilder = _moduleBuilder.DefineType(typeName, TypeAttributes.NotPublic | TypeAttributes.Class, typeof(TupleBaseType));
+
+        foreach (var t in tupleProps3)
+            DefineProperty(myTypeBuilder, t.propName, t.cqlName, t.propType);
+
+        var typeInfo = myTypeBuilder.CreateTypeInfo();
+        return typeInfo;
     }
 
     private static void DefineProperty(TypeBuilder myTypeBuilder, string normalizedName, string cqlName, Type type)
@@ -127,20 +147,15 @@ internal class TupleBuilderCache : IDisposable
     }
 
     /// <summary>
-    /// Gets a unique tuple name given the elements (members) of the type.
-    /// This method must return the same value for equal values of <paramref name="elementInfo"/>.
-    /// Equality is determined by comparing <see cref="KeyValuePair{TKey,TValue}.Key"/> using default string equality
-    /// and <see cref="KeyValuePair{TKey,TValue}.Value"/> using default equality.
+    /// Gets a unique tuple name given the ordered members of the tuple type.
+    /// This method must return the same value for equal values of <paramref name="tupleProps"/>.
     /// </summary>
-    /// <param name="elementInfo">Key value pairs where key is the name of the element and the value is its type.</param>
+    /// <param name="tupleProps">The property names and types in the tuple.</param>
     /// <returns>The unique tuple type name.</returns>
-    private static string TupleTypeNameFor(IReadOnlyDictionary<string, Type> elementInfo)
+    private static string TupleTypeNameFor(IEnumerable<(Type propType, string propName)> tupleProps)
     {
-        var nameTypes = elementInfo
-                         .OrderBy(k => k.Key)
-                         .Select(kvp => $"{kvp.Key}:{kvp.Value.ToCSharpString()}");
-        var hashInput = string.Join("+", nameTypes);
-        var tupleId = Hasher.Instance.Hash(hashInput);
-        return $"Tuple_{tupleId}";
+        var orderedTupleProps = tupleProps.OrderBy(k => k.propName);
+        var name = $"Tuples.{CqlTupleMetadata.BuildSignatureHashString(orderedTupleProps, "Tuple_")}";
+        return name;
     }
 }

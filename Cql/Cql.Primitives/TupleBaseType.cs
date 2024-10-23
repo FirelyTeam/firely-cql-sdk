@@ -6,11 +6,18 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
+using System.Diagnostics.CodeAnalysis;
+
 namespace Hl7.Cql.Primitives
 {
     /// <summary>
-    /// The base type for all generated Tuples.
+    /// The temporary base class for tuple types generated into the LINQ expressions.
+    /// This is not used during CQL runtime, because the C# compiler will replace this with value tuples instead.
     /// </summary>
+    /// <remarks>
+    /// This type is for internal use by the SDK only.
+    /// </remarks>
     [CqlPrimitiveType(CqlPrimitiveType.Tuple)]
     public abstract class TupleBaseType
     {

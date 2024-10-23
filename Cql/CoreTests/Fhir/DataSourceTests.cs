@@ -46,7 +46,6 @@ namespace CoreTests.Fhir
         }
 
         [TestMethod]
-        [Ignore("Will be fixed in PR 614")]
         public void FiltersOnSpecificProp()
         {
             var dr = buildDataSource();

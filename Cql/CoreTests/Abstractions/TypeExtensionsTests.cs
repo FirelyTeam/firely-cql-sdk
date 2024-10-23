@@ -5,7 +5,7 @@ using Hl7.Cql.Abstractions.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #pragma warning disable CS8500 // This takes the address of, gets the size of, or declares a pointer to a managed type
 
-namespace CoreTests.Infrastructure;
+namespace CoreTests.Abstractions;
 
 
 [TestClass]
@@ -329,12 +329,12 @@ public class TypeExtensionsTests
             T1 a,
             T2[] b,
             IEnumerable<T3>[] c)
-            where T1: struct, IComparable
-            where T2: notnull, new()
-            where T3: class, new();
+            where T1 : struct, IComparable
+            where T2 : notnull, new()
+            where T3 : class, new();
     }
 
-    public abstract class MyGenericClassBase<T> :  IGenericInterface<T>
+    public abstract class MyGenericClassBase<T> : IGenericInterface<T>
     {
         public void Method(T value)
         {
@@ -359,9 +359,9 @@ public readonly record struct EmptyStruct
     {
         public readonly record struct Nested2 { }
 
-        public readonly record struct GenericNested2<T1,T2> { }
+        public readonly record struct GenericNested2<T1, T2> { }
 
         public delegate TOut NestedFunc<in TIn, out TOut>(TIn input)
-            where TIn: notnull;
+            where TIn : notnull;
     };
 }
