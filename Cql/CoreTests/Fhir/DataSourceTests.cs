@@ -46,7 +46,6 @@ namespace CoreTests.Fhir
         }
 
         [TestMethod]
-        [Ignore("Will be fixed in PR 614")]
         public void FiltersOnSpecificProp()
         {
             var dr = buildDataSource();
@@ -60,16 +59,11 @@ namespace CoreTests.Fhir
             results.Should().AllBeOfType<Patient>().And.AllSatisfy(p => p.Gender.Should().Be(AdministrativeGender.Male));
 
             var activeProp = model.GetProperty(model.ResolveType("{http://hl7.org/fhir}Patient")!, "active");
-            var retrieveParameters = new RetrieveParameters(
-                CodeProperty: activeProp,
-                ValueSet: null,
-                Codes: [new CqlCode("male", "http://hl7.org/fhir/administrative-gender")],
-                TemplateId: null);
-            Assert.ThrowsException<NotSupportedException>(() =>
-            {
-                var list = dr.Retrieve<Patient>(retrieveParameters).ToList();
-                return list;
-            });
+            var retrieveParams = new RetrieveParameters(activeProp, null,
+            [
+                new CqlCode("male", "http://hl7.org/fhir/administrative-gender")
+            ], null);
+            dr.Retrieve<Patient>(retrieveParams).Should().BeEmpty();
         }
 
         private BundleDataSource buildDataSource()

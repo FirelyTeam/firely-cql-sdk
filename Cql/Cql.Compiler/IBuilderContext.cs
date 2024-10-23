@@ -24,9 +24,9 @@ internal interface IBuilderContext
     /// to break when the hash matches the one from the log file.
     /// </summary>
     string Hash =>
-        $"#{CqlTupleMetadata.Instance.Hash(
+        $"#{Hasher.Instance.Hash(
                 string.Concat(
                     this.SelfAndAncestorBuilders()
-                        .Select((b, i) => CqlTupleMetadata.Instance.Hash(b?.DebuggerInfo.ToString() ?? i.ToString(CultureInfo.InvariantCulture)))))
+                        .Select((b, i) => Hasher.Instance.Hash(b?.DebuggerInfo.ToString() ?? i.ToString(CultureInfo.InvariantCulture)))))
             [..8]}";
 }
