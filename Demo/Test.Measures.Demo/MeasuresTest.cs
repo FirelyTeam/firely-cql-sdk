@@ -108,7 +108,7 @@ namespace Test
             string lib,
             string version)
         {
-            var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}-{version}.json"));
+            var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}.json"));
             using var fs = libFile.OpenRead();
             var library = fs.ParseFhir<Library>();
             var allLibs = library.GetDependenciesAndSelf(dir);
