@@ -8,7 +8,7 @@
 		The latest version number can be found under the releases tab of the CQL to ELM CLI repository
 		see: https://github.com/cqframework/clinical_quality_language/releases
 		-->
-		<CqlToElmCliVersion>3.1.0</CqlToElmCliVersion>
+		<CqlToElmCliVersion>3.14.0</CqlToElmCliVersion>
 		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
 		<PomXmlPath>$(MSBuildThisFileDirectory)pom.xml</PomXmlPath>
 		<Today>$([System.DateTime]::Now.ToString('yyyy-MM-dd-HH-mm-ss-fff'))</Today>
