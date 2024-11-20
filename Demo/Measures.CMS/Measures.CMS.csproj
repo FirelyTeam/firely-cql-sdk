@@ -55,4 +55,8 @@
 		</Content>
 		<Content Remove="input/tests/results" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="CSharp\" />
+	</ItemGroup>
 </Project>

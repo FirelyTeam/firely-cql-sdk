@@ -1,23 +1,21 @@
-library InitiationandEngagementofSubstanceUseDisorderTreatmentFHIR version '0.0.001'
+library InitiationandEngagementofSubstanceUseDisorderTreatmentFHIR version '0.0.002'
 
 using QICore version '4.1.1'
 
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include QICoreCommon version '2.0.000' called QICoreCommon
-include SupplementalDataElements version '3.4.000' called SDE
-include CQMCommon version '2.0.000' called CQMCommon
-include Hospice version '6.9.000' called Hospice
-include Status version '1.6.000' called Status
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include QICoreCommon version '2.1.000' called QICoreCommon
+include SupplementalDataElements version '3.5.000' called SDE
+include CQMCommon version '2.2.000' called CQMCommon
+include Hospice version '6.12.000' called Hospice
+include Status version '1.8.000' called Status
 
 valueset "Detoxification Visit": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1059'
 valueset "Discharge Services Hospital Inpatient": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1007'
 valueset "Discharge Services Hospital Inpatient Same Day Discharge": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1006'
-valueset "Emergency Department Visit": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010'
+valueset "Emergency Department Evaluation and Management Visit": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010'
 valueset "Encounter Inpatient": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307'
 valueset "Initial Hospital Inpatient Visit": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1004'
-valueset "Initial Hospital Observation Care": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1002'
 valueset "Office Visit": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001'
-valueset "Online Assessments": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089'
 valueset "Psych Visit Psychotherapy": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496'
 valueset "Substance Use Disorder": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.106.12.1001'
 valueset "Substance Use Disorder Long Acting Medication": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1149'
@@ -26,14 +24,12 @@ valueset "Substance Use Disorder Short Acting Medication": 'http://cts.nlm.nih.g
 valueset "Substance Use Disorder Short Acting Medication Administration": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1157'
 valueset "Substance Use Disorder Treatment": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.106.12.1005'
 valueset "Telephone Visits": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080'
+valueset "Virtual Encounter": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089'
 
-code "Discharge to healthcare facility for hospice care (procedure)": '428371000124100' from QICoreCommon."SNOMEDCT" display 'Discharge to healthcare facility for hospice care (procedure)'
-code "Discharge to home for hospice care (procedure)": '428361000124107' from QICoreCommon."SNOMEDCT" display 'Discharge to home for hospice care (procedure)'
-code "Hospice care [Minimum Data Set]": '45755-6' from QICoreCommon."LOINC" display 'Hospice care [Minimum Data Set]'
 code "Yes (qualifier value)": '373066001' from QICoreCommon."SNOMEDCT" display 'Yes (qualifier value)'
 
 parameter "Measurement Period" Interval<DateTime>
-  default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)
+  default Interval[@2025-01-01T00:00:00.000Z, @2025-12-31T23:59:59.999Z]
 
 context Patient
 
@@ -58,14 +54,13 @@ define "First SUD Episode During Measurement Period":
 
 define "Qualifying Encounters":
   ( [Encounter: "Office Visit"]
-      union [Encounter: "Emergency Department Visit"]
+      union [Encounter: "Emergency Department Evaluation and Management Visit"]
       union [Encounter: "Detoxification Visit"]
-      union [Encounter: "Initial Hospital Observation Care"]
       union [Encounter: "Initial Hospital Inpatient Visit"]
       union [Encounter: "Discharge Services Hospital Inpatient Same Day Discharge"]
       union [Encounter: "Discharge Services Hospital Inpatient"]
       union [Encounter: "Telephone Visits"]
-      union [Encounter: "Online Assessments"]
+      union [Encounter: "Virtual Encounter"]
   ).isEncounterPerformed ( )
 
 define "History of SUD Diagnosis or Treatment":
@@ -73,7 +68,7 @@ define "History of SUD Diagnosis or Treatment":
         union [Procedure: "Psych Visit Psychotherapy"]
         union [Procedure: "Substance Use Disorder Long Acting Medication Administration"]
         union [Procedure: "Substance Use Disorder Short Acting Medication Administration"]
-    ).isProcedurePerformed ( ) ) Interventions
+    ).isInterventionPerformed ( ) ) Interventions
       with "First SUD Episode During Measurement Period" FirstSUDEpisode
         such that Interventions.performed.toInterval ( ) starts 60 days or less before day of date from start of FirstSUDEpisode.period.toInterval ( )
   )
@@ -86,14 +81,15 @@ define "History of SUD Diagnosis or Treatment":
         with "First SUD Episode During Measurement Period" FirstSUDEpisode
           such that SUDEncounterDx.period.toInterval ( ) starts 60 days or less before day of date from start of FirstSUDEpisode.period.toInterval ( )
     )
-    union ( ( Status."Active or Completed Medication Request" ( ["MedicationRequest": "Substance Use Disorder Long Acting Medication"]
-        union [MedicationRequest: "Substance Use Disorder Short Acting Medication"] ) ) SUDMedication
+    union ( ( ( [MedicationRequest: "Substance Use Disorder Long Acting Medication"]
+          union [MedicationRequest: "Substance Use Disorder Short Acting Medication"]
+      ).isMedicationOrder ( ) ) SUDMedication
         with "First SUD Episode During Measurement Period" FirstSUDEpisode
           such that SUDMedication.authoredOn.toInterval ( ) 60 days or less before day of date from start of FirstSUDEpisode.period.toInterval ( )
     )
 
 define "Emergency Department or Detoxification Visit":
-  ( [Encounter: "Emergency Department Visit"]
+  ( [Encounter: "Emergency Department Evaluation and Management Visit"]
       union [Encounter: "Detoxification Visit"]
   ).isEncounterPerformed ( )
 
@@ -108,28 +104,37 @@ define "Numerator 1":
     or exists "Treatment Initiation With Medication Order Dates"
 
 define "Treatment Initiation With Non Medication Intervention Dates":
-  "Psychosocial Visit" PsychosocialVisit
-    let treatmentDate: date from start of PsychosocialVisit.period.toInterval ( )
-    with "First SUD Episode During Measurement Period" FirstSUDEpisode
-      such that treatmentDate during Interval[date from start of FirstSUDEpisode.period.toInterval ( ), date from start of FirstSUDEpisode.period.toInterval ( ) + 14 days )
-        and PsychosocialVisit.id !~ FirstSUDEpisode.id
-    return all treatmentDate
+  ( "Psychosocial Visit" PsychosocialVisitProcedure
+      let treatmentDate: date from start of PsychosocialVisitProcedure.performed.toInterval ( )
+      with "First SUD Episode During Measurement Period" FirstSUDEpisode
+        such that treatmentDate during Interval[date from start of FirstSUDEpisode.period.toInterval ( ), date from start of FirstSUDEpisode.period.toInterval ( ) + 14 days )
+          and PsychosocialVisitProcedure.id !~ FirstSUDEpisode.id
+      return all treatmentDate
+  )
+    union ( "Psychosocial Visit" PsychosocialVisitEncounter
+        let treatmentDate: date from start of PsychosocialVisitEncounter.period.toInterval ( )
+        with "First SUD Episode During Measurement Period" FirstSUDEpisode
+          such that treatmentDate during Interval[date from start of FirstSUDEpisode.period.toInterval ( ), date from start of FirstSUDEpisode.period.toInterval ( ) + 14 days )
+            and PsychosocialVisitEncounter.id !~ FirstSUDEpisode.id
+        return all treatmentDate
+    )
 
 define "Psychosocial Visit":
-  ( ( ( [Procedure: "Substance Use Disorder Treatment"]
+  ( ( [Procedure: "Substance Use Disorder Treatment"]
         union [Procedure: "Psych Visit Psychotherapy"]
-    ).isProcedurePerformed ( )
+    ).isInterventionPerformed ( )
   )
     union ( ( [Encounter: "Telephone Visits"]
-        union [Encounter: "Online Assessments"]
+        union [Encounter: "Virtual Encounter"]
     ).isEncounterPerformed ( ) ) TelehealthEncounter
       where exists ( ( TelehealthEncounter.encounterDiagnosis ( ) ) SUDDiagnosis
           where SUDDiagnosis.code in "Substance Use Disorder"
-      ) ) SUDEncounterDx
+      )
 
 define "Treatment Initiation With Medication Order Dates":
-  ( ( [MedicationRequest: "Substance Use Disorder Short Acting Medication"]
-      union [MedicationRequest: "Substance Use Disorder Long Acting Medication"] ) SUDMedication
+  ( ( ( [MedicationRequest: "Substance Use Disorder Short Acting Medication"]
+        union [MedicationRequest: "Substance Use Disorder Long Acting Medication"]
+    ).isMedicationOrder ( ) ) SUDMedication
       let treatmentDate: date from start of SUDMedication.authoredOn.toInterval ( )
       with "First SUD Episode During Measurement Period" FirstSUDEpisode
         such that treatmentDate during Interval[date from start of FirstSUDEpisode.period.toInterval ( ), date from start of FirstSUDEpisode.period.toInterval ( ) + 14 days )
@@ -137,7 +142,7 @@ define "Treatment Initiation With Medication Order Dates":
   )
     union ( ( ( [Procedure: "Substance Use Disorder Short Acting Medication Administration"]
           union [Procedure: "Substance Use Disorder Long Acting Medication Administration"]
-      ).isProcedurePerformed ( ) ) SUDMedAdministration
+      ).isInterventionPerformed ( ) ) SUDMedAdministration
         let treatmentDate: date from start of SUDMedAdministration.performed.toInterval ( )
         with "First SUD Episode During Measurement Period" FirstSUDEpisode
           such that treatmentDate during Interval[date from start of FirstSUDEpisode.period.toInterval ( ), date from start of FirstSUDEpisode.period.toInterval ( ) + 14 days )
@@ -146,7 +151,7 @@ define "Treatment Initiation With Medication Order Dates":
 
 define "Has Two or More Treatment Engagements With Short Acting Medication or Non Medication Intervention":
   Count((("Psychosocial Visit"
-        union(([Procedure: "Substance Use Disorder Short Acting Medication Administration"]).isProcedurePerformed())) ShortActingTreatment
+        union(([Procedure: "Substance Use Disorder Short Acting Medication Administration"]).isInterventionPerformed())) ShortActingTreatment
         with(Min("Treatment Initiation With Non Medication Intervention Dates"
             union "Treatment Initiation With Medication Order Dates"
         )) InitiationTreatmentDate
@@ -154,7 +159,7 @@ define "Has Two or More Treatment Engagements With Short Acting Medication or No
             or date from start of ShortActingTreatment.period.toInterval() 34 days or less after InitiationTreatmentDate
         return all ShortActingTreatment
     )
-      union([MedicationRequest: "Substance Use Disorder Short Acting Medication"] ShortActingMedOrder
+      union((([MedicationRequest: "Substance Use Disorder Short Acting Medication"]).isMedicationOrder()) ShortActingMedOrder
           with(Min("Treatment Initiation With Non Medication Intervention Dates"
               union "Treatment Initiation With Medication Order Dates"
           )) InitiationTreatmentDate
@@ -168,13 +173,13 @@ define "Numerator 2":
     or "Has Two or More Treatment Engagements With Short Acting Medication or Non Medication Intervention"
 
 define "Has Treatment Engagement With Long Acting Medication":
-  exists ( ( [MedicationRequest: "Substance Use Disorder Long Acting Medication"] LongActingMedOrder
+  exists ( ( ( ( [MedicationRequest: "Substance Use Disorder Long Acting Medication"] ).isMedicationOrder ( ) ) LongActingMedOrder
         with ( Min("Treatment Initiation With Non Medication Intervention Dates"
             union "Treatment Initiation With Medication Order Dates"
         ) ) InitiationTreatmentDate
           such that date from start of LongActingMedOrder.authoredOn.toInterval ( ) 34 days or less after InitiationTreatmentDate
     )
-      union ( ( ( [Procedure: "Substance Use Disorder Long Acting Medication Administration"] ).isProcedurePerformed ( ) ) LongActingTreatment
+      union ( ( ( [Procedure: "Substance Use Disorder Long Acting Medication Administration"] ).isInterventionPerformed ( ) ) LongActingTreatment
           with ( Min("Treatment Initiation With Non Medication Intervention Dates"
               union "Treatment Initiation With Medication Order Dates"
           ) ) InitiationTreatmentDate

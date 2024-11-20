@@ -2,32 +2,24 @@ library FunctionalStatusAssessmentforTotalHipReplacementFHIR version '0.0.008'
 
 using QICore version '4.1.1'
 
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include QICoreCommon version '2.0.000' called QICoreCommon
-include SupplementalDataElements version '3.4.000' called SDE
-include CQMCommon version '2.0.000' called CQMCommon
-include Hospice version '6.9.000' called Hospice
-include Status version '1.6.000' called Status
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include QICoreCommon version '2.1.000' called QICoreCommon
+include SupplementalDataElements version '3.5.000' called SDE
+include Hospice version '6.12.000' called Hospice
+include Status version '1.8.000' called Status
 
 codesystem "LOINC": 'http://loinc.org'
 codesystem "CPT": 'http://www.ama-assn.org/go/cpt'
-codesystem "ConditionCategoryCodes": 'http://terminology.hl7.org/CodeSystem/condition-category'
 codesystem "SNOMEDCT": 'http://snomed.info/sct'
-codesystem "ObservationCategoryCodes": 'http://terminology.hl7.org/CodeSystem/v3-ObservationCategory'
 
-valueset "Encounter Inpatient": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307'
-valueset "Ethnicity": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837'
 valueset "Lower Body Fractures Excluding Ankle and Foot": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1178'
 valueset "Malignant Neoplasms of Lower and Unspecified Limbs": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1180'
 valueset "Mechanical Complications Excluding Upper Body": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1182'
 valueset "Office Visit": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001'
-valueset "ONC Administrative Sex": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1'
-valueset "Online Assessments": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089'
+valueset "Virtual Encounter": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089'
 valueset "Outpatient Consultation": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008'
 valueset "Partial Arthroplasty of Hip": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1184'
-valueset "Payer": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591'
 valueset "Primary THA Procedure": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1006'
-valueset "Race": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836'
 valueset "Removal, Revision and Supplement Procedures of the Lower Body and Spine": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1189'
 valueset "Telephone Visits": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080'
 
@@ -43,7 +35,6 @@ code "PROMIS-10 Global Physical Health (GPH) score T-score": '71971-6' from "LOI
 code "Quality of life score [HOOS]": '72093-8' from "LOINC" display 'Quality of life score [HOOS]'
 code "Severe cognitive impairment (finding)": '702956004' from "SNOMEDCT" display 'Severe cognitive impairment (finding)'
 code "Sport-recreation score [HOOS]": '72094-6' from "LOINC" display 'Sport-recreation score [HOOS]'
-code "survey": 'survey' from "ObservationCategoryCodes" display 'Survey'
 code "Symptoms score [HOOS]": '72096-1' from "LOINC" display 'Symptoms score [HOOS]'
 code "Total interval score [HOOSJR]": '82323-7' from "LOINC" display 'Total interval score [HOOSJR]'
 code "VR-12 Mental component summary (MCS) score - oblique method T-score": '72026-8' from "LOINC" display 'VR-12 Mental component summary (MCS) score - oblique method T-score'
@@ -53,14 +44,14 @@ code "VR-12 Physical component summary (PCS) score - orthogonal method T-score":
 code "Yes (qualifier value)": '373066001' from "SNOMEDCT" display 'Yes (qualifier value)'
 
 parameter "Measurement Period" Interval<DateTime>
-  default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)
+  default Interval[@2025-01-01T00:00:00.000Z, @2025-12-31T23:59:59.999Z]
 
 context Patient
 
 define "SDE Ethnicity":
   SDE."SDE Ethnicity"
 
-define "SDE Payer":
+define "SDE Payer Type":
   SDE."SDE Payer"
 
 define "SDE Race":
@@ -83,13 +74,13 @@ define "Has Qualifying Encounter":
             )
         )
         union [Encounter: "Telephone Visits"]
-        union [Encounter: "Online Assessments"]
+        union [Encounter: "Virtual Encounter"]
     ).isEncounterPerformed ( ) ) ValidEncounters
-      where ValidEncounters.period.toInterval ( ) during day of Interval["November 1 Year Prior to the Measurement Period", end of "Measurement Period"]
+      where ValidEncounters.period.toInterval ( ) during day of Interval["August 1 Year Prior to the Measurement Period", end of "Measurement Period"]
   )
 
-define "November 1 Year Prior to the Measurement Period":
-  DateTime((year from start of "Measurement Period" - 1), 11, 1, 0, 0, 0, 0, 0)
+define "August 1 Year Prior to the Measurement Period":
+  DateTime((year from start of "Measurement Period" - 1), 8, 1, 0, 0, 0, 0, 0)
 
 define "Total Hip Arthroplasty Procedure":
   ( ( [Procedure: "Primary THA Procedure"] ).isProcedurePerformed ( ) ) THAProcedure
@@ -117,7 +108,7 @@ define "Denominator Exclusions":
 
 define "Has Severe Cognitive Impairment":
   exists [Condition: "Severe cognitive impairment (finding)"] Dementia
-    where Dementia.prevalenceInterval ( ) overlaps "Measurement Period"
+    where Dementia.prevalenceInterval ( ) overlaps day of "Measurement Period"
 
 define "Has Total Hip Arthroplasty with 1 or More Lower Body Fractures":
   exists ( "Total Hip Arthroplasty Procedure" THAProcedure
@@ -140,13 +131,13 @@ define "Has Revision Hip Arthroplasty Procedure or Implanted Device or Prosthesi
 define "Has Malignant Neoplasm of Lower and Unspecified Limbs":
   exists ( [Condition: "Malignant Neoplasms of Lower and Unspecified Limbs"] MalignantNeoplasm
       with "Total Hip Arthroplasty Procedure" THAProcedure
-        such that MalignantNeoplasm.prevalenceInterval ( ) overlaps THAProcedure.performed.toInterval ( )
+        such that MalignantNeoplasm.prevalenceInterval ( ) overlaps day of THAProcedure.performed.toInterval ( )
   )
 
 define "Has Mechanical Complication":
   exists ( [Condition: "Mechanical Complications Excluding Upper Body"] MechanicalComplications
       with "Total Hip Arthroplasty Procedure" THAProcedure
-        such that MechanicalComplications.prevalenceInterval ( ) overlaps THAProcedure.performed.toInterval ( )
+        such that MechanicalComplications.prevalenceInterval ( ) overlaps day of THAProcedure.performed.toInterval ( )
   )
 
 define "Has More Than One Elective Primary Total Hip Arthroplasty Performed":
@@ -209,7 +200,7 @@ define "Has THA with Initial and Follow Up HOOSJr Assessments":
   )
 
 define "Date HOOSJr Total Assessment Completed":
-  ( [Observation: "Total interval score [HOOSJR]"] HOOSJr
+  ( ( ( [Observation: "Total interval score [HOOSJR]"] ).isAssessmentPerformed ( ) ) HOOSJr
     where HOOSJr.value is not null ) DocumentedHOOSJr
     return date from start of DocumentedHOOSJr.effective.toInterval ( )
 
@@ -224,8 +215,8 @@ define "Has THA with Initial and Follow Up PROMIS10 Assessments":
 
 define "Date PROMIS10 Total Assessment Completed":
   from
-    [Observation: "PROMIS-10 Global Mental Health (GMH) score T-score"] PROMIS10MentalScore,
-    [Observation: "PROMIS-10 Global Physical Health (GPH) score T-score"] PROMIS10PhysicalScore
+    ( ( [Observation: "PROMIS-10 Global Mental Health (GMH) score T-score"] ).isAssessmentPerformed ( ) ) PROMIS10MentalScore,
+    ( ( [Observation: "PROMIS-10 Global Physical Health (GPH) score T-score"] ).isAssessmentPerformed ( ) ) PROMIS10PhysicalScore
     let PROMIS10MentalScoreDate: date from start of PROMIS10MentalScore.effective.toInterval ( ),
     PROMIS10PhysicalScoreDate: date from start of PROMIS10PhysicalScore.effective.toInterval ( )
     where PROMIS10MentalScoreDate same day as PROMIS10PhysicalScoreDate
@@ -244,8 +235,8 @@ define "Has THA with Initial and Follow Up VR12 Oblique Assessments":
 
 define "Date VR12 Oblique Total Assessment Completed":
   from
-    [Observation: "VR-12 Mental component summary (MCS) score - oblique method T-score"] VR12MentalAssessment,
-    [Observation: "VR-12 Physical component summary (PCS) score - oblique method T-score"] VR12PhysicalAssessment
+    ( ( [Observation: "VR-12 Mental component summary (MCS) score - oblique method T-score"] ).isAssessmentPerformed ( ) ) VR12MentalAssessment,
+    ( ( [Observation: "VR-12 Physical component summary (PCS) score - oblique method T-score"] ).isAssessmentPerformed ( ) ) VR12PhysicalAssessment
     let VR12MentalAssessmentDate: date from start of VR12MentalAssessment.effective.toInterval ( ),
     VR12PhysicalAssessmentDate: date from start of VR12PhysicalAssessment.effective.toInterval ( )
     where VR12MentalAssessmentDate same day as VR12PhysicalAssessmentDate
@@ -264,8 +255,8 @@ define "Has THA with Initial and Follow Up VR12 Orthogonal Assessments":
 
 define "Date VR12 Orthogonal Total Assessment Completed":
   from
-    [Observation: "VR-12 Mental component summary (MCS) score - orthogonal method T-score"] VR12MentalAssessment,
-    [Observation: "VR-12 Physical component summary (PCS) score - orthogonal method T-score"] VR12PhysicalAssessment
+    ( ( [Observation: "VR-12 Mental component summary (MCS) score - orthogonal method T-score"] ).isAssessmentPerformed ( ) ) VR12MentalAssessment,
+    ( ( [Observation: "VR-12 Physical component summary (PCS) score - orthogonal method T-score"] ).isAssessmentPerformed ( ) ) VR12PhysicalAssessment
     let VR12MentalAssessmentDate: date from start of VR12MentalAssessment.effective.toInterval ( ),
     VR12PhysicalAssessmentDate: date from start of VR12PhysicalAssessment.effective.toInterval ( )
     where VR12MentalAssessmentDate same day as VR12PhysicalAssessmentDate

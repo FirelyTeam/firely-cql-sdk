@@ -1,15 +1,15 @@
 library DischargedonAntithromboticTherapyFHIR version '0.9.000'
 
-/* 2023 AU */
+/* 2024 AU */
 
 
 using QICore version '4.1.1'
 
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include CQMCommon version '2.0.000' called CQMCommon
-include QICoreCommon version '2.0.000' called QICoreCommon
-include SupplementalDataElements version '3.4.000' called SDE
-include TJCOverall version '8.11.000' called TJC
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include CQMCommon version '2.2.000' called CQMCommon
+include QICoreCommon version '2.1.000' called QICoreCommon
+include SupplementalDataElements version '3.5.000' called SDE
+include TJCOverall version '8.14.000' called TJC
 
 valueset "Antithrombotic Therapy for Ischemic Stroke": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.62'
 valueset "Medical Reason For Not Providing Treatment": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473'
@@ -17,15 +17,15 @@ valueset "Patient Refusal": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113
 valueset "Pharmacological Contraindications For Antithrombotic Therapy": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52'
 
 parameter "Measurement Period" Interval<DateTime>
-  default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)
+  default Interval[@2025-01-01T00:00:00.000Z, @2025-12-31T23:59:59.999Z]
 
 context Patient
 
 define "Initial Population":
-  TJC."Encounter with Principal Diagnosis and Age"
+  TJC."Ischemic Stroke Encounter"
 
 define "Denominator":
-  TJC."Ischemic Stroke Encounter"
+  "Initial Population"
 
 define "Denominator Exclusions":
   TJC."Ischemic Stroke Encounters with Discharge Disposition"
@@ -48,9 +48,6 @@ define "Antithrombotic Therapy at Discharge":
     )
       and Antithrombotic.status in { 'active', 'completed' }
       and Antithrombotic.intent in { 'order', 'original-order', 'reflex-order', 'filler-order', 'instance-order' }
-      and Antithrombotic.doNotPerform is not true
-      //BONNIEMAT-1617-Since there is an anticipated resolution for STU 5 for both Medication.Request and Medication.Discharge which leaves two blockers on coverage, will leave the assertion logic as is and update the test cases for coverage.
-
 
 define "Denominator Exceptions":
   "Encounter with Documented Reason for No Antithrombotic At Discharge"
@@ -69,7 +66,8 @@ define "Reason for Not Giving Antithrombotic at Discharge":
       and ( NoAntithromboticDischarge.isCommunity ( )
           or NoAntithromboticDischarge.isDischarge ( )
       )
-      and NoAntithromboticDischarge.intent in { 'order', 'original-order', 'reflex-order', 'filler-order', 'instance-order' }
+      //BONNIEMAT-1617-Since there is an anticipated resolution for STU 5 for Medication.Discharge which leaves one blockers on coverage, will leave the assertion logic as is and update the test cases for coverage.
+
 
 define "Encounter with Pharmacological Contraindications for Antithrombotic Therapy at Discharge":
   TJC."Ischemic Stroke Encounter" IschemicStrokeEncounter
@@ -83,9 +81,6 @@ define "Pharmacological Contraindications for Antithrombotic Therapy at Discharg
     )
       and Pharmacological.status in { 'active', 'completed' }
       and Pharmacological.intent in { 'order', 'original-order', 'reflex-order', 'filler-order', 'instance-order' }
-      and Pharmacological.doNotPerform is not true               
-      //BONNIEMAT-1617-Since there is an anticipated resolution for STU 5 for both Medication.Request and Medication.Discharge which leaves two blockers on coverage, will leave the assertion logic as is and update the test cases for coverage.
-
 
 define "SDE Ethnicity":
   SDE."SDE Ethnicity"

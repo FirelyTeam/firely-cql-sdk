@@ -21,7 +21,7 @@ public class LibrarySetExpressionBuilderTests
         librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.Cms.ElmDir, "CumulativeMedicationDuration");
 
         var definitionDictionary = servicesScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped().ProcessLibrarySet(librarySet);
-        var lambdaExpression = definitionDictionary["CumulativeMedicationDuration-4.0.000", "Every eight hours (qualifier value)"];
+        var lambdaExpression = definitionDictionary["CumulativeMedicationDuration-4.1.000", "Every eight hours (qualifier value)"];
         Assert.IsNotNull(lambdaExpression);
 
         var del = lambdaExpression.Compile(true);
