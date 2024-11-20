@@ -7,7 +7,7 @@
       } ],
       "identifier" : {
          "id" : "Hospice",
-         "version" : "6.9.000"
+         "version" : "6.12.000"
       },
       "schemaIdentifier" : {
          "id" : "urn:hl7-org:elm",
@@ -28,22 +28,22 @@
             "locator" : "5:1-5:56",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.3.000"
+            "version" : "4.4.000"
          }, {
             "locator" : "6:1-6:58",
             "localIdentifier" : "QICoreCommon",
             "path" : "QICoreCommon",
-            "version" : "2.0.000"
+            "version" : "2.1.000"
          }, {
             "locator" : "7:1-7:46",
             "localIdentifier" : "Status",
             "path" : "Status",
-            "version" : "1.6.000"
+            "version" : "1.8.000"
          } ]
       },
       "parameters" : {
          "def" : [ {
-            "locator" : "22:1-23:68",
+            "locator" : "22:1-22:49",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
             "resultTypeSpecifier" : {
@@ -51,99 +51,6 @@
                "pointType" : {
                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "NamedTypeSpecifier"
-               }
-            },
-            "default" : {
-               "locator" : "23:13-23:68",
-               "lowClosed" : true,
-               "highClosed" : false,
-               "type" : "Interval",
-               "resultTypeSpecifier" : {
-                  "type" : "IntervalTypeSpecifier",
-                  "pointType" : {
-                     "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               },
-               "low" : {
-                  "locator" : "23:22-23:43",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
-                  "type" : "DateTime",
-                  "year" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2025",
-                     "type" : "Literal"
-                  },
-                  "month" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
-                     "type" : "Literal"
-                  },
-                  "day" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
-                     "type" : "Literal"
-                  },
-                  "hour" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
-                     "type" : "Literal"
-                  },
-                  "minute" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
-                     "type" : "Literal"
-                  },
-                  "second" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
-                     "type" : "Literal"
-                  },
-                  "millisecond" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
-                     "type" : "Literal"
-                  }
-               },
-               "high" : {
-                  "locator" : "23:46-23:67",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
-                  "type" : "DateTime",
-                  "year" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2026",
-                     "type" : "Literal"
-                  },
-                  "month" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
-                     "type" : "Literal"
-                  },
-                  "day" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
-                     "type" : "Literal"
-                  },
-                  "hour" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
-                     "type" : "Literal"
-                  },
-                  "minute" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
-                     "type" : "Literal"
-                  },
-                  "second" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
-                     "type" : "Literal"
-                  },
-                  "millisecond" : {
-                     "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
-                     "type" : "Literal"
-                  }
                }
             },
             "parameterTypeSpecifier" : {
@@ -260,32 +167,32 @@
       },
       "contexts" : {
          "def" : [ {
-            "locator" : "25:1-25:15",
+            "locator" : "24:1-24:15",
             "name" : "Patient"
          } ]
       },
       "statements" : {
          "def" : [ {
-            "locator" : "25:1-25:15",
+            "locator" : "24:1-24:15",
             "name" : "Patient",
             "context" : "Patient",
             "expression" : {
                "type" : "SingletonFrom",
                "operand" : {
-                  "locator" : "25:1-25:15",
+                  "locator" : "24:1-24:15",
                   "dataType" : "{http://hl7.org/fhir}Patient",
                   "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-patient",
                   "type" : "Retrieve"
                }
             }
          }, {
-            "locator" : "27:1-49:5",
+            "locator" : "26:1-50:5",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Hospice Services",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "28:3-49:5",
+               "locator" : "27:3-50:5",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "signature" : [ {
@@ -296,7 +203,7 @@
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "locator" : "28:3-46:5",
+                  "locator" : "27:3-47:5",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
                   "signature" : [ {
@@ -307,7 +214,7 @@
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : [ {
-                     "locator" : "28:3-43:5",
+                     "locator" : "27:3-44:5",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Or",
                      "signature" : [ {
@@ -318,7 +225,7 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "28:3-40:5",
+                        "locator" : "27:3-39:5",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Or",
                         "signature" : [ {
@@ -329,7 +236,7 @@
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "28:3-36:5",
+                           "locator" : "27:3-35:5",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Or",
                            "signature" : [ {
@@ -340,7 +247,7 @@
                               "type" : "NamedTypeSpecifier"
                            } ],
                            "operand" : [ {
-                              "locator" : "28:3-33:3",
+                              "locator" : "27:3-32:3",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Exists",
                               "signature" : [ {
@@ -351,7 +258,7 @@
                                  }
                               } ],
                               "operand" : {
-                                 "locator" : "28:10-33:3",
+                                 "locator" : "27:10-32:3",
                                  "type" : "Query",
                                  "resultTypeSpecifier" : {
                                     "type" : "ListTypeSpecifier",
@@ -361,7 +268,7 @@
                                     }
                                  },
                                  "source" : [ {
-                                    "locator" : "28:11-28:90",
+                                    "locator" : "27:11-27:90",
                                     "alias" : "InpatientEncounter",
                                     "resultTypeSpecifier" : {
                                        "type" : "ListTypeSpecifier",
@@ -371,7 +278,7 @@
                                        }
                                     },
                                     "expression" : {
-                                       "locator" : "28:11-28:71",
+                                       "locator" : "27:11-27:71",
                                        "name" : "isEncounterPerformed",
                                        "libraryName" : "Status",
                                        "type" : "FunctionRef",
@@ -390,7 +297,7 @@
                                           }
                                        } ],
                                        "operand" : [ {
-                                          "locator" : "28:12-28:47",
+                                          "locator" : "27:12-27:47",
                                           "dataType" : "{http://hl7.org/fhir}Encounter",
                                           "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                                           "codeProperty" : "type",
@@ -404,7 +311,7 @@
                                              }
                                           },
                                           "codes" : {
-                                             "locator" : "28:25-28:45",
+                                             "locator" : "27:25-27:45",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                              "name" : "Encounter Inpatient",
                                              "preserve" : true,
@@ -415,7 +322,7 @@
                                  } ],
                                  "relationship" : [ ],
                                  "where" : {
-                                    "locator" : "29:7-32:90",
+                                    "locator" : "28:7-31:90",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "And",
                                     "signature" : [ {
@@ -426,7 +333,7 @@
                                        "type" : "NamedTypeSpecifier"
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "29:13-31:7",
+                                       "locator" : "28:13-30:7",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "type" : "Or",
                                        "signature" : [ {
@@ -437,7 +344,48 @@
                                           "type" : "NamedTypeSpecifier"
                                        } ],
                                        "operand" : [ {
-                                          "locator" : "29:14-29:119",
+                                          "locator" : "28:14-28:119",
+                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                          "type" : "Equivalent",
+                                          "signature" : [ {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ],
+                                          "operand" : [ {
+                                             "locator" : "28:14-28:68",
+                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
+                                             "name" : "ToConcept",
+                                             "libraryName" : "FHIRHelpers",
+                                             "type" : "FunctionRef",
+                                             "operand" : [ {
+                                                "path" : "dischargeDisposition",
+                                                "type" : "Property",
+                                                "source" : {
+                                                   "locator" : "28:14-28:47",
+                                                   "resultTypeName" : "{http://hl7.org/fhir}Encounter.Hospitalization",
+                                                   "path" : "hospitalization",
+                                                   "scope" : "InpatientEncounter",
+                                                   "type" : "Property"
+                                                }
+                                             } ]
+                                          }, {
+                                             "type" : "ToConcept",
+                                             "signature" : [ {
+                                                "name" : "{urn:hl7-org:elm-types:r1}Code",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
+                                             "operand" : {
+                                                "locator" : "28:72-28:119",
+                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                                                "name" : "Discharge to home for hospice care (procedure)",
+                                                "type" : "CodeRef"
+                                             }
+                                          } ]
+                                       }, {
+                                          "locator" : "29:14-29:134",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                           "type" : "Equivalent",
                                           "signature" : [ {
@@ -471,48 +419,7 @@
                                                 "type" : "NamedTypeSpecifier"
                                              } ],
                                              "operand" : {
-                                                "locator" : "29:72-29:119",
-                                                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-                                                "name" : "Discharge to home for hospice care (procedure)",
-                                                "type" : "CodeRef"
-                                             }
-                                          } ]
-                                       }, {
-                                          "locator" : "30:14-30:134",
-                                          "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                          "type" : "Equivalent",
-                                          "signature" : [ {
-                                             "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                                             "type" : "NamedTypeSpecifier"
-                                          }, {
-                                             "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                                             "type" : "NamedTypeSpecifier"
-                                          } ],
-                                          "operand" : [ {
-                                             "locator" : "30:14-30:68",
-                                             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
-                                             "name" : "ToConcept",
-                                             "libraryName" : "FHIRHelpers",
-                                             "type" : "FunctionRef",
-                                             "operand" : [ {
-                                                "path" : "dischargeDisposition",
-                                                "type" : "Property",
-                                                "source" : {
-                                                   "locator" : "30:14-30:47",
-                                                   "resultTypeName" : "{http://hl7.org/fhir}Encounter.Hospitalization",
-                                                   "path" : "hospitalization",
-                                                   "scope" : "InpatientEncounter",
-                                                   "type" : "Property"
-                                                }
-                                             } ]
-                                          }, {
-                                             "type" : "ToConcept",
-                                             "signature" : [ {
-                                                "name" : "{urn:hl7-org:elm-types:r1}Code",
-                                                "type" : "NamedTypeSpecifier"
-                                             } ],
-                                             "operand" : {
-                                                "locator" : "30:72-30:134",
+                                                "locator" : "29:72-29:134",
                                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                                 "name" : "Discharge to healthcare facility for hospice care (procedure)",
                                                 "type" : "CodeRef"
@@ -520,7 +427,7 @@
                                           } ]
                                        } ]
                                     }, {
-                                       "locator" : "32:13-32:90",
+                                       "locator" : "31:13-31:90",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "precision" : "Day",
                                        "type" : "In",
@@ -535,7 +442,7 @@
                                           }
                                        } ],
                                        "operand" : [ {
-                                          "locator" : "32:52-32:55",
+                                          "locator" : "31:52-31:55",
                                           "type" : "End",
                                           "signature" : [ {
                                              "type" : "IntervalTypeSpecifier",
@@ -545,7 +452,7 @@
                                              }
                                           } ],
                                           "operand" : {
-                                             "locator" : "32:13-32:50",
+                                             "locator" : "31:13-31:50",
                                              "name" : "toInterval",
                                              "libraryName" : "QICoreCommon",
                                              "type" : "FunctionRef",
@@ -584,7 +491,7 @@
                                              "operand" : [ {
                                                 "type" : "As",
                                                 "operand" : {
-                                                   "locator" : "32:13-32:37",
+                                                   "locator" : "31:13-31:37",
                                                    "name" : "ToInterval",
                                                    "libraryName" : "FHIRHelpers",
                                                    "type" : "FunctionRef",
@@ -629,7 +536,7 @@
                                              } ]
                                           }
                                        }, {
-                                          "locator" : "32:71-32:90",
+                                          "locator" : "31:71-31:90",
                                           "name" : "Measurement Period",
                                           "type" : "ParameterRef",
                                           "resultTypeSpecifier" : {
@@ -644,7 +551,7 @@
                                  }
                               }
                            }, {
-                              "locator" : "34:8-36:5",
+                              "locator" : "33:8-35:5",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Exists",
                               "signature" : [ {
@@ -655,7 +562,7 @@
                                  }
                               } ],
                               "operand" : {
-                                 "locator" : "34:15-36:5",
+                                 "locator" : "33:15-35:5",
                                  "type" : "Query",
                                  "resultTypeSpecifier" : {
                                     "type" : "ListTypeSpecifier",
@@ -665,7 +572,7 @@
                                     }
                                  },
                                  "source" : [ {
-                                    "locator" : "34:16-34:91",
+                                    "locator" : "33:16-33:91",
                                     "alias" : "HospiceEncounter",
                                     "resultTypeSpecifier" : {
                                        "type" : "ListTypeSpecifier",
@@ -675,7 +582,7 @@
                                        }
                                     },
                                     "expression" : {
-                                       "locator" : "34:16-34:74",
+                                       "locator" : "33:16-33:74",
                                        "name" : "isEncounterPerformed",
                                        "libraryName" : "Status",
                                        "type" : "FunctionRef",
@@ -694,7 +601,7 @@
                                           }
                                        } ],
                                        "operand" : [ {
-                                          "locator" : "34:17-34:50",
+                                          "locator" : "33:17-33:50",
                                           "dataType" : "{http://hl7.org/fhir}Encounter",
                                           "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                                           "codeProperty" : "type",
@@ -708,7 +615,7 @@
                                              }
                                           },
                                           "codes" : {
-                                             "locator" : "34:30-34:48",
+                                             "locator" : "33:30-33:48",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                              "name" : "Hospice Encounter",
                                              "preserve" : true,
@@ -719,7 +626,7 @@
                                  } ],
                                  "relationship" : [ ],
                                  "where" : {
-                                    "locator" : "35:9-35:87",
+                                    "locator" : "34:9-34:87",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "precision" : "Day",
                                     "type" : "Overlaps",
@@ -737,7 +644,7 @@
                                        }
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "35:15-35:50",
+                                       "locator" : "34:15-34:50",
                                        "name" : "toInterval",
                                        "libraryName" : "QICoreCommon",
                                        "type" : "FunctionRef",
@@ -776,7 +683,7 @@
                                        "operand" : [ {
                                           "type" : "As",
                                           "operand" : {
-                                             "locator" : "35:15-35:37",
+                                             "locator" : "34:15-34:37",
                                              "name" : "ToInterval",
                                              "libraryName" : "FHIRHelpers",
                                              "type" : "FunctionRef",
@@ -820,7 +727,7 @@
                                           }
                                        } ]
                                     }, {
-                                       "locator" : "35:68-35:87",
+                                       "locator" : "34:68-34:87",
                                        "name" : "Measurement Period",
                                        "type" : "ParameterRef",
                                        "resultTypeSpecifier" : {
@@ -835,7 +742,7 @@
                               }
                            } ]
                         }, {
-                           "locator" : "37:8-40:5",
+                           "locator" : "36:8-39:5",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Exists",
                            "signature" : [ {
@@ -846,7 +753,7 @@
                               }
                            } ],
                            "operand" : {
-                              "locator" : "37:15-40:5",
+                              "locator" : "36:15-39:5",
                               "type" : "Query",
                               "resultTypeSpecifier" : {
                                  "type" : "ListTypeSpecifier",
@@ -856,7 +763,7 @@
                                  }
                               },
                               "source" : [ {
-                                 "locator" : "37:16-37:109",
+                                 "locator" : "36:16-36:109",
                                  "alias" : "HospiceAssessment",
                                  "resultTypeSpecifier" : {
                                     "type" : "ListTypeSpecifier",
@@ -866,7 +773,7 @@
                                     }
                                  },
                                  "expression" : {
-                                    "locator" : "37:16-37:91",
+                                    "locator" : "36:16-36:91",
                                     "name" : "isAssessmentPerformed",
                                     "libraryName" : "Status",
                                     "type" : "FunctionRef",
@@ -885,7 +792,7 @@
                                        }
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "37:17-37:66",
+                                       "locator" : "36:17-36:66",
                                        "dataType" : "{http://hl7.org/fhir}Observation",
                                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observation",
                                        "codeProperty" : "code",
@@ -901,7 +808,7 @@
                                        "codes" : {
                                           "type" : "ToList",
                                           "operand" : {
-                                             "locator" : "37:32-37:64",
+                                             "locator" : "36:32-36:64",
                                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                              "name" : "Hospice care [Minimum Data Set]",
                                              "type" : "CodeRef"
@@ -912,7 +819,7 @@
                               } ],
                               "relationship" : [ ],
                               "where" : {
-                                 "locator" : "38:9-39:91",
+                                 "locator" : "37:9-38:91",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "And",
                                  "signature" : [ {
@@ -923,7 +830,7 @@
                                     "type" : "NamedTypeSpecifier"
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "38:15-38:63",
+                                    "locator" : "37:15-37:63",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "type" : "Equivalent",
                                     "signature" : [ {
@@ -937,7 +844,7 @@
                                        "asType" : "{urn:hl7-org:elm-types:r1}Concept",
                                        "type" : "As",
                                        "operand" : {
-                                          "locator" : "38:15-38:37",
+                                          "locator" : "37:15-37:37",
                                           "name" : "ToValue",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
@@ -997,14 +904,14 @@
                                           "type" : "NamedTypeSpecifier"
                                        } ],
                                        "operand" : {
-                                          "locator" : "38:41-38:63",
+                                          "locator" : "37:41-37:63",
                                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                           "name" : "Yes (qualifier value)",
                                           "type" : "CodeRef"
                                        }
                                     } ]
                                  }, {
-                                    "locator" : "39:15-39:91",
+                                    "locator" : "38:15-38:91",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "precision" : "Day",
                                     "type" : "Overlaps",
@@ -1022,7 +929,7 @@
                                        }
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "39:15-39:54",
+                                       "locator" : "38:15-38:54",
                                        "name" : "toInterval",
                                        "libraryName" : "QICoreCommon",
                                        "type" : "FunctionRef",
@@ -1059,7 +966,7 @@
                                           } ]
                                        } ],
                                        "operand" : [ {
-                                          "locator" : "39:15-39:41",
+                                          "locator" : "38:15-38:41",
                                           "name" : "ToValue",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
@@ -1089,7 +996,7 @@
                                           } ]
                                        } ]
                                     }, {
-                                       "locator" : "39:72-39:91",
+                                       "locator" : "38:72-38:91",
                                        "name" : "Measurement Period",
                                        "type" : "ParameterRef",
                                        "resultTypeSpecifier" : {
@@ -1105,7 +1012,7 @@
                            }
                         } ]
                      }, {
-                        "locator" : "41:8-43:5",
+                        "locator" : "40:8-44:5",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Exists",
                         "signature" : [ {
@@ -1116,7 +1023,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "41:15-43:5",
+                           "locator" : "40:15-44:5",
                            "type" : "Query",
                            "resultTypeSpecifier" : {
                               "type" : "ListTypeSpecifier",
@@ -1126,7 +1033,7 @@
                               }
                            },
                            "source" : [ {
-                              "locator" : "41:16-41:97",
+                              "locator" : "40:16-40:97",
                               "alias" : "HospiceOrder",
                               "resultTypeSpecifier" : {
                                  "type" : "ListTypeSpecifier",
@@ -1136,7 +1043,7 @@
                                  }
                               },
                               "expression" : {
-                                 "locator" : "41:16-41:84",
+                                 "locator" : "40:16-40:84",
                                  "name" : "isInterventionOrder",
                                  "libraryName" : "Status",
                                  "type" : "FunctionRef",
@@ -1155,7 +1062,7 @@
                                     }
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "41:17-41:61",
+                                    "locator" : "40:17-40:61",
                                     "dataType" : "{http://hl7.org/fhir}ServiceRequest",
                                     "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest",
                                     "codeProperty" : "code",
@@ -1169,7 +1076,7 @@
                                        }
                                     },
                                     "codes" : {
-                                       "locator" : "41:35-41:59",
+                                       "locator" : "40:35-40:59",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                        "name" : "Hospice Care Ambulatory",
                                        "preserve" : true,
@@ -1180,7 +1087,7 @@
                            } ],
                            "relationship" : [ ],
                            "where" : {
-                              "locator" : "42:9-42:85",
+                              "locator" : "41:9-41:85",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "precision" : "Day",
                               "type" : "IncludedIn",
@@ -1198,7 +1105,7 @@
                                  }
                               } ],
                               "operand" : [ {
-                                 "locator" : "42:15-42:50",
+                                 "locator" : "41:15-41:50",
                                  "name" : "toInterval",
                                  "libraryName" : "QICoreCommon",
                                  "type" : "FunctionRef",
@@ -1237,7 +1144,7 @@
                                  "operand" : [ {
                                     "type" : "As",
                                     "operand" : {
-                                       "locator" : "42:15-42:37",
+                                       "locator" : "41:15-41:37",
                                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                        "path" : "value",
                                        "type" : "Property",
@@ -1274,7 +1181,7 @@
                                     }
                                  } ]
                               }, {
-                                 "locator" : "42:66-42:85",
+                                 "locator" : "41:66-41:85",
                                  "name" : "Measurement Period",
                                  "type" : "ParameterRef",
                                  "resultTypeSpecifier" : {
@@ -1289,7 +1196,7 @@
                         }
                      } ]
                   }, {
-                     "locator" : "44:8-46:5",
+                     "locator" : "45:8-47:5",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
                      "signature" : [ {
@@ -1300,7 +1207,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "44:15-46:5",
+                        "locator" : "45:15-47:5",
                         "type" : "Query",
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
@@ -1310,7 +1217,7 @@
                            }
                         },
                         "source" : [ {
-                           "locator" : "44:16-44:100",
+                           "locator" : "45:16-45:100",
                            "alias" : "HospicePerformed",
                            "resultTypeSpecifier" : {
                               "type" : "ListTypeSpecifier",
@@ -1320,7 +1227,7 @@
                               }
                            },
                            "expression" : {
-                              "locator" : "44:16-44:83",
+                              "locator" : "45:16-45:83",
                               "name" : "isInterventionPerformed",
                               "libraryName" : "Status",
                               "type" : "FunctionRef",
@@ -1339,7 +1246,7 @@
                                  }
                               } ],
                               "operand" : [ {
-                                 "locator" : "44:17-44:56",
+                                 "locator" : "45:17-45:56",
                                  "dataType" : "{http://hl7.org/fhir}Procedure",
                                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure",
                                  "codeProperty" : "code",
@@ -1353,7 +1260,7 @@
                                     }
                                  },
                                  "codes" : {
-                                    "locator" : "44:30-44:54",
+                                    "locator" : "45:30-45:54",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                     "name" : "Hospice Care Ambulatory",
                                     "preserve" : true,
@@ -1364,7 +1271,7 @@
                         } ],
                         "relationship" : [ ],
                         "where" : {
-                           "locator" : "45:9-45:90",
+                           "locator" : "46:9-46:90",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "precision" : "Day",
                            "type" : "Overlaps",
@@ -1382,7 +1289,7 @@
                               }
                            } ],
                            "operand" : [ {
-                              "locator" : "45:15-45:53",
+                              "locator" : "46:15-46:53",
                               "name" : "toInterval",
                               "libraryName" : "QICoreCommon",
                               "type" : "FunctionRef",
@@ -1419,7 +1326,7 @@
                                  } ]
                               } ],
                               "operand" : [ {
-                                 "locator" : "45:15-45:40",
+                                 "locator" : "46:15-46:40",
                                  "name" : "ToValue",
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
@@ -1443,7 +1350,7 @@
                                  } ]
                               } ]
                            }, {
-                              "locator" : "45:71-45:90",
+                              "locator" : "46:71-46:90",
                               "name" : "Measurement Period",
                               "type" : "ParameterRef",
                               "resultTypeSpecifier" : {
@@ -1458,7 +1365,7 @@
                      }
                   } ]
                }, {
-                  "locator" : "47:8-49:5",
+                  "locator" : "48:8-50:5",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Exists",
                   "signature" : [ {
@@ -1469,7 +1376,7 @@
                      }
                   } ],
                   "operand" : {
-                     "locator" : "47:15-49:5",
+                     "locator" : "48:15-50:5",
                      "type" : "Query",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -1479,7 +1386,7 @@
                         }
                      },
                      "source" : [ {
-                        "locator" : "47:16-47:70",
+                        "locator" : "48:16-48:70",
                         "alias" : "HospiceCareDiagnosis",
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
@@ -1489,7 +1396,7 @@
                            }
                         },
                         "expression" : {
-                           "locator" : "47:16-47:49",
+                           "locator" : "48:16-48:49",
                            "dataType" : "{http://hl7.org/fhir}Condition",
                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition",
                            "codeProperty" : "code",
@@ -1503,7 +1410,7 @@
                               }
                            },
                            "codes" : {
-                              "locator" : "47:29-47:47",
+                              "locator" : "48:29-48:47",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                               "name" : "Hospice Diagnosis",
                               "preserve" : true,
@@ -1513,7 +1420,7 @@
                      } ],
                      "relationship" : [ ],
                      "where" : {
-                        "locator" : "48:9-48:92",
+                        "locator" : "49:9-49:92",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "precision" : "Day",
                         "type" : "Overlaps",
@@ -1531,7 +1438,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "48:15-48:55",
+                           "locator" : "49:15-49:55",
                            "name" : "prevalenceInterval",
                            "libraryName" : "QICoreCommon",
                            "type" : "FunctionRef",
@@ -1547,13 +1454,13 @@
                               "type" : "NamedTypeSpecifier"
                            } ],
                            "operand" : [ {
-                              "locator" : "48:15-48:34",
+                              "locator" : "49:15-49:34",
                               "resultTypeName" : "{http://hl7.org/fhir}Condition",
                               "name" : "HospiceCareDiagnosis",
                               "type" : "AliasRef"
                            } ]
                         }, {
-                           "locator" : "48:73-48:92",
+                           "locator" : "49:73-49:92",
                            "name" : "Measurement Period",
                            "type" : "ParameterRef",
                            "resultTypeSpecifier" : {

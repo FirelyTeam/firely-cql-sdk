@@ -1,14 +1,17 @@
 /*
-@update: JKR 2023-10-20 ->
-Increment QICore version
+@update: JKR 2024-04-02 ->
+Increment QICoreCommon and FHIRHelpers version
+Update principalDiagnosis function to correctly reference the 'use' element https://oncprojectracking.healthit.gov/support/browse/CQLIT-416
 */
 
-library CQMCommon version '2.0.000'
+library CQMCommon version '2.2.000'
 
 using QICore version '4.1.1'
 
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include QICoreCommon version '2.0.000' called QICoreCommon
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include QICoreCommon version '2.1.000' called QICoreCommon
+
+codesystem DiagnosisRole: 'http://terminology.hl7.org/CodeSystem/diagnosis-role'
 
 valueset "Emergency Department Visit": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292'
 valueset "Encounter Inpatient": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307'
@@ -16,6 +19,8 @@ valueset "Intensive Care Unit": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1
 valueset "Observation Services": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143'
 valueset "Outpatient Surgery Service": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.38'
 valueset "Present on Admission or Clinically Undetermined": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197'
+
+code "Billing": 'billing' from DiagnosisRole display 'Billing'
 
 parameter "Measurement Period" Interval<DateTime>
   default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)
@@ -362,7 +367,8 @@ define fluent function getCondition(reference Reference):
 @deprecated: This function is deprecated. Use the fluent function `principalDiagnosis()` instead.
 */
 define function "PrincipalDiagnosis"(Encounter Encounter ):
-	singleton from ((Encounter.diagnosis D where D.rank = 1) PD
+	singleton from (
+	(Encounter.diagnosis D where D.rank = 1 and D.use ~ "Billing") PD
       return singleton from ([Condition] C where C.id = PD.condition.reference.getId())
 	)
 
@@ -370,7 +376,7 @@ define function "PrincipalDiagnosis"(Encounter Encounter ):
 @description: Returns the condition that is specified as the principal diagnosis for the encounter
 */
 define fluent function principalDiagnosis(Encounter Encounter ):
-	singleton from ((Encounter.diagnosis D where D.rank = 1) PD
+	singleton from ((Encounter.diagnosis D where D.rank = 1 and D.use ~ "Billing") PD
       return singleton from ([Condition] C where C.id = PD.condition.reference.getId())
 	)
 

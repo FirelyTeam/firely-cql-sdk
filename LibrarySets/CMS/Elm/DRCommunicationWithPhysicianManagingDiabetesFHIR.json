@@ -28,22 +28,22 @@
             "locator" : "14:1-14:56",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.3.000"
+            "version" : "4.4.000"
          }, {
             "locator" : "15:1-15:61",
             "localIdentifier" : "SDE",
             "path" : "SupplementalDataElements",
-            "version" : "3.4.000"
+            "version" : "3.5.000"
          }, {
             "locator" : "16:1-16:58",
             "localIdentifier" : "QICoreCommon",
             "path" : "QICoreCommon",
-            "version" : "2.0.000"
+            "version" : "2.1.000"
          } ]
       },
       "parameters" : {
          "def" : [ {
-            "locator" : "44:1-45:66",
+            "locator" : "44:1-45:72",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
             "resultTypeSpecifier" : {
@@ -54,9 +54,9 @@
                }
             },
             "default" : {
-               "locator" : "45:11-45:66",
+               "locator" : "45:11-45:72",
                "lowClosed" : true,
-               "highClosed" : false,
+               "highClosed" : true,
                "type" : "Interval",
                "resultTypeSpecifier" : {
                   "type" : "IntervalTypeSpecifier",
@@ -66,7 +66,7 @@
                   }
                },
                "low" : {
-                  "locator" : "45:20-45:41",
+                  "locator" : "45:20-45:44",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
                   "year" : {
@@ -103,45 +103,55 @@
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
                      "type" : "Literal"
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal"
                   }
                },
                "high" : {
-                  "locator" : "45:44-45:65",
+                  "locator" : "45:47-45:71",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
                   "year" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2026",
+                     "value" : "2025",
                      "type" : "Literal"
                   },
                   "month" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
+                     "value" : "12",
                      "type" : "Literal"
                   },
                   "day" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
+                     "value" : "31",
                      "type" : "Literal"
                   },
                   "hour" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "23",
                      "type" : "Literal"
                   },
                   "minute" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "59",
                      "type" : "Literal"
                   },
                   "second" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "59",
                      "type" : "Literal"
                   },
                   "millisecond" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "999",
+                     "type" : "Literal"
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
                      "type" : "Literal"
                   }
                }
@@ -2525,7 +2535,7 @@
                   }
                } ],
                "relationship" : [ {
-                  "locator" : "136:5-137:98",
+                  "locator" : "136:5-137:94",
                   "alias" : "EncounterDiabeticRetinopathy",
                   "type" : "With",
                   "resultTypeSpecifier" : {
@@ -2548,7 +2558,7 @@
                      }
                   },
                   "suchThat" : {
-                     "locator" : "137:17-137:98",
+                     "locator" : "137:17-137:94",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
                      "signature" : [ {
@@ -2562,57 +2572,17 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "137:17-137:55",
-                        "resultTypeName" : "{http://hl7.org/fhir}NotDoneRecorded",
-                        "type" : "SingletonFrom",
-                        "operand" : {
-                           "type" : "Query",
-                           "source" : [ {
-                              "alias" : "$this",
-                              "expression" : {
-                                 "path" : "extension",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "name" : "LevelOfSeverityNotCommunicated",
-                                    "type" : "AliasRef"
-                                 }
-                              }
-                           } ],
-                           "where" : {
-                              "type" : "Equal",
-                              "operand" : [ {
-                                 "name" : "ToString",
-                                 "libraryName" : "FHIRHelpers",
-                                 "type" : "FunctionRef",
-                                 "signature" : [ {
-                                    "name" : "{http://hl7.org/fhir}uri",
-                                    "type" : "NamedTypeSpecifier"
-                                 } ],
-                                 "operand" : [ {
-                                    "path" : "url",
-                                    "scope" : "$this",
-                                    "type" : "Property"
-                                 } ]
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded",
-                                 "type" : "Literal"
-                              } ]
-                           },
-                           "return" : {
-                              "distinct" : false,
-                              "expression" : {
-                                 "path" : "value.value",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "name" : "$this",
-                                    "type" : "AliasRef"
-                                 }
-                              }
-                           }
+                        "locator" : "137:17-137:51",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "path" : "sent",
+                           "scope" : "LevelOfSeverityNotCommunicated",
+                           "type" : "Property"
                         }
                      }, {
-                        "locator" : "137:64-137:98",
+                        "locator" : "137:60-137:94",
                         "name" : "ToInterval",
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
@@ -2790,7 +2760,7 @@
                   }
                } ],
                "relationship" : [ {
-                  "locator" : "158:5-159:101",
+                  "locator" : "158:5-159:97",
                   "alias" : "EncounterDiabeticRetinopathy",
                   "type" : "With",
                   "resultTypeSpecifier" : {
@@ -2813,7 +2783,7 @@
                      }
                   },
                   "suchThat" : {
-                     "locator" : "159:17-159:101",
+                     "locator" : "159:17-159:97",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
                      "signature" : [ {
@@ -2827,57 +2797,17 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "159:17-159:58",
-                        "resultTypeName" : "{http://hl7.org/fhir}NotDoneRecorded",
-                        "type" : "SingletonFrom",
-                        "operand" : {
-                           "type" : "Query",
-                           "source" : [ {
-                              "alias" : "$this",
-                              "expression" : {
-                                 "path" : "extension",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "name" : "MacularEdemaAbsentNotCommunicated",
-                                    "type" : "AliasRef"
-                                 }
-                              }
-                           } ],
-                           "where" : {
-                              "type" : "Equal",
-                              "operand" : [ {
-                                 "name" : "ToString",
-                                 "libraryName" : "FHIRHelpers",
-                                 "type" : "FunctionRef",
-                                 "signature" : [ {
-                                    "name" : "{http://hl7.org/fhir}uri",
-                                    "type" : "NamedTypeSpecifier"
-                                 } ],
-                                 "operand" : [ {
-                                    "path" : "url",
-                                    "scope" : "$this",
-                                    "type" : "Property"
-                                 } ]
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded",
-                                 "type" : "Literal"
-                              } ]
-                           },
-                           "return" : {
-                              "distinct" : false,
-                              "expression" : {
-                                 "path" : "value.value",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "name" : "$this",
-                                    "type" : "AliasRef"
-                                 }
-                              }
-                           }
+                        "locator" : "159:17-159:54",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "path" : "sent",
+                           "scope" : "MacularEdemaAbsentNotCommunicated",
+                           "type" : "Property"
                         }
                      }, {
-                        "locator" : "159:67-159:101",
+                        "locator" : "159:63-159:97",
                         "name" : "ToInterval",
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
@@ -3055,7 +2985,7 @@
                   }
                } ],
                "relationship" : [ {
-                  "locator" : "144:5-145:102",
+                  "locator" : "144:5-145:98",
                   "alias" : "EncounterDiabeticRetinopathy",
                   "type" : "With",
                   "resultTypeSpecifier" : {
@@ -3078,7 +3008,7 @@
                      }
                   },
                   "suchThat" : {
-                     "locator" : "145:17-145:102",
+                     "locator" : "145:17-145:98",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
                      "signature" : [ {
@@ -3092,57 +3022,17 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "145:17-145:59",
-                        "resultTypeName" : "{http://hl7.org/fhir}NotDoneRecorded",
-                        "type" : "SingletonFrom",
-                        "operand" : {
-                           "type" : "Query",
-                           "source" : [ {
-                              "alias" : "$this",
-                              "expression" : {
-                                 "path" : "extension",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "name" : "MacularEdemaPresentNotCommunicated",
-                                    "type" : "AliasRef"
-                                 }
-                              }
-                           } ],
-                           "where" : {
-                              "type" : "Equal",
-                              "operand" : [ {
-                                 "name" : "ToString",
-                                 "libraryName" : "FHIRHelpers",
-                                 "type" : "FunctionRef",
-                                 "signature" : [ {
-                                    "name" : "{http://hl7.org/fhir}uri",
-                                    "type" : "NamedTypeSpecifier"
-                                 } ],
-                                 "operand" : [ {
-                                    "path" : "url",
-                                    "scope" : "$this",
-                                    "type" : "Property"
-                                 } ]
-                              }, {
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-recorded",
-                                 "type" : "Literal"
-                              } ]
-                           },
-                           "return" : {
-                              "distinct" : false,
-                              "expression" : {
-                                 "path" : "value.value",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "name" : "$this",
-                                    "type" : "AliasRef"
-                                 }
-                              }
-                           }
+                        "locator" : "145:17-145:55",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                        "path" : "value",
+                        "type" : "Property",
+                        "source" : {
+                           "path" : "sent",
+                           "scope" : "MacularEdemaPresentNotCommunicated",
+                           "type" : "Property"
                         }
                      }, {
-                        "locator" : "145:68-145:102",
+                        "locator" : "145:64-145:98",
                         "name" : "ToInterval",
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",

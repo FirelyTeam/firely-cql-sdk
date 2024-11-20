@@ -2,12 +2,12 @@ library VenousThromboembolismProphylaxisFHIR version '0.2.000'
 
 using QICore version '4.1.1'
 
-include CQMCommon version '2.0.000' called CQMCommon
-include QICoreCommon version '2.0.000' called QICoreCommon
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include SupplementalDataElements version '3.4.000' called SDE
-include TJCOverall version '8.11.000' called TJC
-include VTE version '8.6.000' called VTE
+include CQMCommon version '2.2.000' called CQMCommon
+include QICoreCommon version '2.1.000' called QICoreCommon
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include SupplementalDataElements version '3.5.000' called SDE
+include TJCOverall version '8.14.000' called TJC
+include VTE version '8.8.000' called VTE
 
 codesystem "LOINC": 'http://loinc.org'
 
@@ -54,7 +54,7 @@ valueset "Warfarin": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.1
 code "Risk for venous thromboembolism": '72136-5' from "LOINC" display 'Risk for venous thromboembolism'
 
 parameter "Measurement Period" Interval<DateTime>
- default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)
+  default Interval[@2025-01-01T00:00:00.000Z, @2025-12-31T23:59:59.999Z]
 
 context Patient
 

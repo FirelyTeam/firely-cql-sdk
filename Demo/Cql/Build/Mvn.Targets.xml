@@ -3,7 +3,11 @@
 
 	<!-- Download MVN Dependencies -->
 	<PropertyGroup>
-		<!-- If you change the version here, you also need to update it in the pom.xml file -->
+		<!--
+		If you change the version here, you also need to update it in the pom.xml file
+		The latest version number can be found under the releases tab of the CQL to ELM CLI repository
+		see: https://github.com/cqframework/clinical_quality_language/releases
+		-->
 		<CqlToElmCliVersion>3.1.0</CqlToElmCliVersion>
 		<TargetDependencies>$(MSBuildThisFileDirectory)target/dependency</TargetDependencies>
 		<PomXmlPath>$(MSBuildThisFileDirectory)pom.xml</PomXmlPath>
