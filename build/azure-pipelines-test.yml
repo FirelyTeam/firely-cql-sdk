@@ -55,7 +55,7 @@ stages:
                 # Branch build: compare current commit with previous commit
                 git fetch origin $env:Build_SourceBranch --depth=2
                 $CHANGED_FILES = git diff --name-only HEAD~1 HEAD
-            # }
+            }
 
             $skipBuildStage = $true
 
