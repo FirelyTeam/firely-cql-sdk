@@ -36,7 +36,7 @@ stages:
           fetchDepth: 0 
         - script: |
             echo "##vso[task.setvariable variable=SOURCE_BRANCH]$(Build.SourceBranch)"
-            echo "##vso[task.setvariable variable=TARGET_BRANCH]$(System.PullRequest.TargetBranch)"
+            echo "##vso[task.setvariable variable=TARGET_BRANCH]$(Build.TargetBranch)"
             echo "build source name: $(Build.Repository.Name)"
             echo "build source ref: $(Build.SourceBranch)"
             echo "build source version: $(Build.SourceVersion)"
