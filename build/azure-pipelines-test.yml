@@ -45,11 +45,13 @@ stages:
         - powershell: |
             echo "##[group]Checking for changes outside docs folder"
             # Check if we are in a PR build or normal branch build
-            if ($env:System_PullRequest_SourceBranch -ne "") {
+            if ($(System.PullRequest.SourceBranch) -ne "") {
                 # PR build: compare source branch with target branch (e.g., main)
+                echo "This is a PR build"
                 $CHANGED_FILES = git diff --name-only origin/$env:TARGET_BRANCH
                 echo "Checking changes between $env:TARGET_BRANCH and $env:SOURCE_BRANCH results in the following files: $CHANGED_FILES"
             } else {
+                echo "This is a branch build"
                 # Branch build: compare current commit with previous commit
                 git fetch origin $env:Build_SourceBranch --depth=2
                 $CHANGED_FILES = git diff --name-only HEAD~1 HEAD
