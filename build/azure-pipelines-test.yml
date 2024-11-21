@@ -45,7 +45,7 @@ stages:
         - powershell: |
             echo "##[group]Checking for changes outside docs folder"
             # Check if we are in a PR build or normal branch build
-            if ($env:SYSTEM_PULLREQUEST_SOURCEBRANCH -ne "") {
+            if ($env:BUILD_REASON -ne "PullRequest") {
                 echo "PR build detected"
                 # PR build: compare source branch with target branch (e.g., main)
                 $CHANGED_FILES = git diff --name-only origin/$env:TARGET_BRANCH
