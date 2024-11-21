@@ -63,10 +63,9 @@ stages:
             foreach ($file in $CHANGED_FILES) {
                 if ($file -match '^docs/' -eq $false) {
                     $skipBuildStage = $false
-                    echo "File $file is in /docs/ folder
+                    echo "File $file is in /docs/ folder"
                     break
                 }
-
                 echo "File $file is not in /docs/ folder
             }
 
