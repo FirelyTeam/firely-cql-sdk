@@ -42,27 +42,33 @@ stages:
             echo "build source version: $(Build.SourceVersion)"
             echo "PR source branch: $(System.PullRequest.SourceBranch)"
             echo "PR target branch: $(System.PullRequest.TargetBranch)"
-        - script: |
+        - powershell: |
             echo "##[group]Checking for changes outside docs folder"
             # Check if we are in a PR build or normal branch build
-            if [ "$(System.PullRequest.SourceBranch)" != "" ]; then
-              # PR build: compare source branch with target branch (e.g., main)
-              CHANGED_FILES=(git diff --name-only origin/$(TARGET_BRANCH))
-              echo "Checking changes between $(TARGET_BRANCH) and $(SOURCE_BRANCH) results in the following files: $(CHANGED_FILES)"
-            else
-              # Branch build: compare current commit with previous commit
-              git fetch origin $(Build.SourceBranch) --depth=2
-              CHANGED_FILES=$(git diff --name-only HEAD^1 HEAD)
-            fi
+            if ($env:System_PullRequest_SourceBranch -ne "") {
+                # PR build: compare source branch with target branch (e.g., main)
+                $CHANGED_FILES = git diff --name-only origin/$env:TARGET_BRANCH
+                echo "Checking changes between $env:TARGET_BRANCH and $env:SOURCE_BRANCH results in the following files: $CHANGED_FILES"
+            } else {
+                # Branch build: compare current commit with previous commit
+                git fetch origin $env:Build_SourceBranch --depth=2
+                $CHANGED_FILES = git diff --name-only HEAD~1 HEAD
+            }
 
-            # Check if any files outside the /docs/ folder changed
-            if echo "$CHANGED_FILES" | grep -v '^docs/'; then
-              echo "##[endgroup]"
-              echo "##vso[task.setvariable variable=skipBuildStage]false"
-            else
-              echo "##[endgroup]"
-              echo "##vso[task.setvariable variable=skipBuildStage]true"
-            fi
+            $skipBuildStage = $true
+
+            foreach ($file in $CHANGED_FILES) {
+                if ($file -notmatch '^docs/') {
+                    $skipBuildStage = $false
+                    break
+                }
+            }
+
+            if ($skipBuildStage) {
+                echo "##vso[task.setvariable variable=skipBuildStage]true"
+            } else {
+                echo "##vso[task.setvariable variable=skipBuildStage]false"
+            }
           displayName: 'Check if non-docs files were changed'
         - powershell: |
             if ($(skipBuildStage) -eq 'true') {
