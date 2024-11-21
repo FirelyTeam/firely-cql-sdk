@@ -43,6 +43,10 @@ stages:
             echo "PR source branch: $(System.PullRequest.SourceBranch)"
             echo "PR target branch: $(System.PullRequest.TargetBranch)"
         - powershell: |
+            echo $env:BUILD_REASON
+            echo $env:Build_Reason
+            echo $env:BuildReason
+        - powershell: |
             echo "##[group]Checking for changes outside docs folder"
             # Check if we are in a PR build or normal branch build
             if ($env:BUILD_REASON -ne "PullRequest") {
