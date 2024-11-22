@@ -70,16 +70,15 @@ stages:
             }
 
             if ($skipBuildStage) {
-                $env:SKIP_BUILD_STAGE = $true
-                echo "variable: $env:SKIP_BUILD_STAGE"
+                $env:SKIP_BUILD_STAGE = $$skipBuildStage                
             } 
             else {
-                $env:SKIP_BUILD_STAGE = $false             
+                $env:SKIP_BUILD_STAGE = $$skipBuildStage    
             }
             echo "variable $env:SKIP_BUILD_STAGE"
           displayName: 'Check if non-docs files were changed'
         - powershell: |
-            if ( $env:SKIP_BUILD_STAGE -eq $true) {
+            if ( $env:SKIP_BUILD_STAGE -eq "") {
               Write-Host "Only /docs/ files changed, skipping build."
             } 
             else {
