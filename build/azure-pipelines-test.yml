@@ -82,7 +82,7 @@ stages:
           name: checkForDocChanges            
 - stage: build  
   dependsOn: checkForDocChangesStage
-  condition: and(succeeded(), not(eq(dependencies.checkForDocChangesStage.outputs['CheckDocChangesJob.checkForDockChanges.skipBuild'], 'true')))
+  condition: and(succeeded(), not(eq(dependencies.checkForDocChangesStage.outputs['CheckDocChangesJob.checkForDocChanges.skipBuild'], 'true')))
   jobs:
   - ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build 
     - template: templates/build.yml  # Template reference
