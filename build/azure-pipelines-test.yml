@@ -70,10 +70,10 @@ stages:
             }
 
             if ($skipBuildStage) {
-                echo "##vso[task.setvariable variable=skipBuildStage]true"
+                echo "##vso[task.setvariable variable=skipBuildStage]$true"
             } 
             else {
-                echo "##vso[task.setvariable variable=skipBuildStage]false"
+                echo "##vso[task.setvariable variable=skipBuildStage]$false"
             }
           displayName: 'Check if non-docs files were changed'
         - powershell: |
