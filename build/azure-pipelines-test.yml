@@ -59,11 +59,11 @@ stages:
                 echo "Checking results in the following files: $CHANGED_FILES"
             }
 
-            $skipBuildStage = 'false'
+            $skipBuildStage = 'true'
 
             foreach ($file in $CHANGED_FILES) {
                 if ($file -match '^docs\/.+$' -eq $false) {
-                    $skipBuildStage = 'true'
+                    $skipBuildStage = 'false'
                     echo "File $file is not /docs/ folder"
                     break
                 }
@@ -77,6 +77,8 @@ stages:
             else {
               Write-Host "Changes outside /docs/ detected, proceeding with build."
             }
+
+
             echo "##vso[task.setvariable variable=skipBuild;isOutput=true]$skipBuildStage" 
           displayName: 'Check for changes outside docs folder'
           name: checkForDocChanges            
