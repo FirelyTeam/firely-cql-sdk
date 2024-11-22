@@ -90,7 +90,7 @@ stages:
           displayName: 'Output change detection result'
 
 - stage: build
-  condition: and(succeeded(), ne(variables['SKIP_BUILD_STAGE']))
+  condition: and(succeeded(), not(variables['SKIP_BUILD_STAGE']))
   jobs:
   - ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build 
     - template: templates/build.yml  # Template reference
