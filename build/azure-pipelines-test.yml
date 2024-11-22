@@ -81,7 +81,7 @@ stages:
           displayName: 'Check for changes outside docs folder'
           name: checkForDocChanges            
 - stage: build  
-  condition: and(succeeded(), -eq(variables[skipBuild], 'true'))
+  condition: and(succeeded(), not(eq(variables[skipBuild], 'true')))
   jobs:
   - ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build 
     - template: templates/build.yml  # Template reference
