@@ -69,26 +69,16 @@ stages:
                 echo "File $file is in /docs/ folder"
             }  
 
-            $env:SKIP_BUILD_STAGE = $skipBuildStage
+            echo "##vso[task.setvariable variable=skipBuild;isOutput=true]$skipBuildStage" 
 
-          displayName: 'Check if non-docs files were changed'
-        - powershell: |
-            echo "env variable $($env:SKIP_BUILD_STAGE)"
-
-            if ( $($env:SKIP_BUILD_STAGE) -eq "true") {
+            if ( $($env:skipBuild) -eq "true") {
               Write-Host "Only /docs/ files changed, skipping build."
             } 
             else {
               Write-Host "Changes outside /docs/ detected, proceeding with build."
             }
-            
-            #set global variable to be used in the build stage
-            echo "##vso[task.setvariable variable=skipBuild;isOutput=true]$($env:SKIP_BUILD_STAGE)"            
-            
-            # Explicitly set exit 0 to prevent the script from failing
-            exit 0
-          name: outputVariable
-          displayName: 'Set global variable for build stage'
+            echo "variable skipBuild: $($env:skipBuild)"
+          displayName: 'Check if non-docs files were changed
 
 - stage: build  
   variables:
