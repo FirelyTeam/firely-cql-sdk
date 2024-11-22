@@ -77,7 +77,7 @@ stages:
             }
           displayName: 'Check if non-docs files were changed'
         - powershell: |
-            if ($(skipBuildStage) -eq 'true') {
+            if ($(skipBuildStage) -eq $true) {
               Write-Host "Only /docs/ files changed, skipping build."
             } 
             else {
