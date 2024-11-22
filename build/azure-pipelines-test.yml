@@ -70,11 +70,11 @@ stages:
             }
 
             if ($skipBuildStage) {
-                "$env:SKIP_BUILD_STAGE = $true"
+                $env:SKIP_BUILD_STAGE = $true
                 echo "variable: $env:SKIP_BUILD_STAGE"
             } 
             else {
-                "$env:SKIP_BUILD_STAGE = $false"                
+                $env:SKIP_BUILD_STAGE = $false             
             }
             echo "variable $env:SKIP_BUILD_STAGE"
           displayName: 'Check if non-docs files were changed'
