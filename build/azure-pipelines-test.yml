@@ -63,22 +63,24 @@ stages:
             foreach ($file in $CHANGED_FILES) {
                 if ($file -match '^docs/' -eq $false) {
                     $skipBuildStage = $false
-                    echo "File $file is in /docs/ folder"
+                    echo "File $file is not /docs/ folder"
                     break
                 }
-                echo "File $file is not in /docs/ folder
+                echo "File $file is in /docs/ folder"
             }
 
             if ($skipBuildStage) {
                 echo "##vso[task.setvariable variable=skipBuildStage]true"
-            } else {
+            } 
+            else {
                 echo "##vso[task.setvariable variable=skipBuildStage]false"
             }
           displayName: 'Check if non-docs files were changed'
         - powershell: |
             if ($(skipBuildStage) -eq 'true') {
               Write-Host "Only /docs/ files changed, skipping build."
-            } else {
+            } 
+            else {
               Write-Host "Changes outside /docs/ detected, proceeding with build."
             }
             # Explicitly set exit 0 to prevent the script from failing
