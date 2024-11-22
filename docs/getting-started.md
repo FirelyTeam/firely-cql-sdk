@@ -5,6 +5,7 @@ Another test
 tets again
 final?
 maybe now
+noope
 
 The repository consists of two parts:
 * `Cql/` - the main body of code that produces the CQL engine itself, plus the PackagerCLI
