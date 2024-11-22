@@ -67,29 +67,33 @@ stages:
                     break
                 }
                 echo "File $file is in /docs/ folder"
-            }
+            }  
 
-            if ($skipBuildStage) {
-                $env:SKIP_BUILD_STAGE = $$skipBuildStage                
-            } 
-            else {
-                $env:SKIP_BUILD_STAGE = $$skipBuildStage    
-            }
-            echo "variable $env:SKIP_BUILD_STAGE"
+            $env:SKIP_BUILD_STAGE = $skipBuildStage
+
           displayName: 'Check if non-docs files were changed'
         - powershell: |
-            if ( $env:SKIP_BUILD_STAGE -eq "") {
+            echo "env variable $($env:SKIP_BUILD_STAGE)""
+
+            if ( $($env:SKIP_BUILD_STAGE) -eq "true") {
               Write-Host "Only /docs/ files changed, skipping build."
             } 
             else {
               Write-Host "Changes outside /docs/ detected, proceeding with build."
             }
+            
+            #set global variable to be used in the build stage
+            echo "##vso[task.setvariable variable=skipBuild;isOutput=true]$($env:SKIP_BUILD_STAGE)"            
+            
             # Explicitly set exit 0 to prevent the script from failing
             exit 0
-          displayName: 'Output change detection result'
+          name: outputVariable
+          displayName: 'Set global variable for build stage'
 
-- stage: build
-  condition: and(succeeded(), not(variables['SKIP_BUILD_STAGE']))
+- stage: build  
+  variables:
+    - skipBuild: $[stageDependencies.checkForDocChanges.CheckDocChanges.outputs['ouputVariable.skipBuild']]
+  condition: and(succeeded(), not(variables['skipBuild']))
   jobs:
   - ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build 
     - template: templates/build.yml  # Template reference
