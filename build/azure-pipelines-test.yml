@@ -71,7 +71,7 @@ stages:
 
             if ($skipBuildStage) {
                 echo "##vso[task.setvariable variable=skipBuildStage]$true"
-                echo "variable: $(skipBuildStage)""
+                echo "variable: $(skipBuildStage)"
             } 
             else {
                 echo "##vso[task.setvariable variable=skipBuildStage]$false"
