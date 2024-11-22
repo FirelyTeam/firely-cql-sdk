@@ -3,6 +3,7 @@
 Let's test 
 Another test
 tets again
+final?
 
 The repository consists of two parts:
 * `Cql/` - the main body of code that produces the CQL engine itself, plus the PackagerCLI
