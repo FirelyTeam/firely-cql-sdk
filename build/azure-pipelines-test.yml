@@ -59,7 +59,7 @@ stages:
                 echo "Checking results in the following files: $CHANGED_FILES"
             }
 
-            $skipBuildStage = 'true'
+            $skipBuildStage = 'false'
 
             foreach ($file in $CHANGED_FILES) {
                 if ($file -match '^docs\/.+$' -eq $false) {
