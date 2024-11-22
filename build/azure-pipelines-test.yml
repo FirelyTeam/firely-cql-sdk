@@ -25,10 +25,11 @@ trigger:
     - 'docs/*'
 
 stages:
-- stage: checkForDocChanges
+- stage: checkForDocChangesStage
+  displayName: 'Check for changes in docs folder'
   jobs:
-    - job: CheckDocChanges
-      displayName: 'Check for changes outside docs folder'
+    - job: CheckDocChangesJob
+      displayName: 'Check for changes in docs folder'
       pool: 
         vmImage: ubuntu-latest
       steps:
@@ -78,10 +79,11 @@ stages:
               Write-Host "Changes outside /docs/ detected, proceeding with build."
             }
             echo "variable skipBuild: $($env:skipBuild)"
-          displayName: 'Check for changes outside docs folder'            
+          displayName: 'Check for changes outside docs folder'
+          name: checkForDocChanges            
 - stage: build  
   variables:
-    skipBuild: $[stageDependencies.checkForDocChanges.CheckDocChanges.outputs['ouputVariable.skipBuild']]
+    skipBuild: $[stageDependencies.checkForDocChangesStage.CheckDocChangesJob.outputs['checkForDockChanges.skipBuild']]
   condition: and(succeeded(), not(variables.skipBuild))
   jobs:
   - ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build 
