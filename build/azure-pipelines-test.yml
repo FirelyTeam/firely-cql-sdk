@@ -73,7 +73,7 @@ stages:
 
           displayName: 'Check if non-docs files were changed'
         - powershell: |
-            echo "env variable $($env:SKIP_BUILD_STAGE)""
+            echo "env variable $($env:SKIP_BUILD_STAGE)"
 
             if ( $($env:SKIP_BUILD_STAGE) -eq "true") {
               Write-Host "Only /docs/ files changed, skipping build."
