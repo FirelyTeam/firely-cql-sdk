@@ -92,8 +92,8 @@ stages:
 
 - stage: build  
   variables:
-    - skipBuild: $[stageDependencies.checkForDocChanges.CheckDocChanges.outputs['ouputVariable.skipBuild']]
-  condition: and(succeeded(), not(variables['skipBuild']))
+    skipBuild: $[stageDependencies.checkForDocChanges.CheckDocChanges.outputs['ouputVariable.skipBuild']]
+  condition: and(succeeded(), not(variables.skipBuild))
   jobs:
   - ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build 
     - template: templates/build.yml  # Template reference
