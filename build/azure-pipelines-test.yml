@@ -78,8 +78,7 @@ stages:
               Write-Host "Changes outside /docs/ detected, proceeding with build."
             }
             echo "variable skipBuild: $($env:skipBuild)"
-          displayName: 'Check if non-docs files were changed
-
+          displayname: 'Check for changes outside docs folder'            
 - stage: build  
   variables:
     skipBuild: $[stageDependencies.checkForDocChanges.CheckDocChanges.outputs['ouputVariable.skipBuild']]
