@@ -36,7 +36,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, meets.operand.Length);
                 Assert.IsInstanceOfType(meets.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(meets.operand[1], typeof(Interval));
-                var result = Run(meets);
+                var result = Run(meets, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -65,7 +65,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, meets.operand.Length);
                 Assert.IsInstanceOfType(meets.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(meets.operand[1], typeof(Interval));
-                var result = Run(meets);
+                var result = Run(meets, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -94,7 +94,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, meets.operand.Length);
                 Assert.IsInstanceOfType(meets.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(meets.operand[1], typeof(Interval));
-                var result = Run(meets);
+                var result = Run(meets, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(false, result);
             }
@@ -123,7 +123,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, meets.operand.Length);
                 Assert.IsInstanceOfType(meets.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(meets.operand[1], typeof(As));
-                var result = Run(meets);
+                var result = Run(meets, library);
                 Assert.IsNull(result);
             }
         }
@@ -151,7 +151,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, meets.operand.Length);
                 Assert.IsInstanceOfType(meets.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(meets.operand[1], typeof(Interval));
-                var result = Run(meets);
+                var result = Run(meets, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -180,7 +180,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, meets.operand.Length);
                 Assert.IsInstanceOfType(meets.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(meets.operand[1], typeof(Interval));
-                var result = Run(meets);
+                var result = Run(meets, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -191,7 +191,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = CreateLibraryForExpression("Interval(null, 5] meets after Interval[11, null)");
             var meetsAfter = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<MeetsAfter>();
-            var result = Run<bool?>(meetsAfter);
+            var result = Run<bool?>(meetsAfter, library);
             result.Should().BeFalse();
         }
     }

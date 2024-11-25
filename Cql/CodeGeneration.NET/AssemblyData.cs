@@ -14,27 +14,7 @@ namespace Hl7.Cql.CodeGeneration.NET
     /// <summary>
     /// Stores information about a dynamically generated assembly.
     /// </summary>
-    internal class AssemblyData
-    {
-        /// <summary>
-        /// Creates an instance.
-        /// </summary>
-        /// <param name="binary">This assembly's binary data.</param>
-        /// <param name="sourceCode">The collection of source code files that contributed to this assembly.</param>
-        public AssemblyData(byte[] binary, IDictionary<string, string> sourceCode)
-        {
-            Binary = binary;
-            SourceCode = sourceCode;
-        }
-
-        /// <summary>
-        /// Gets the binary data for the <see cref="Assembly"/>.
-        /// </summary>
-        public byte[] Binary { get; }
-
-        /// <summary>
-        /// Gets the collection of source code files that contributed to this assembly.
-        /// </summary>
-        public IDictionary<string, string> SourceCode { get; }
-    }
+    /// <param name="Binary">This assembly's binary data.</param>
+    /// <param name="SourceCode">The collection of source code files that contributed to this assembly.</param>
+    internal record AssemblyData(byte[] Binary, IDictionary<string, string> SourceCode);
 }

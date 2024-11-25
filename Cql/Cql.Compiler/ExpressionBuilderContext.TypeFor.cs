@@ -33,7 +33,7 @@ partial class ExpressionBuilderContext
         {
             case ExpressionRef expressionRef:
             {
-                var libraryName = expressionRef.libraryName ?? _libraryContext.LibraryKey;
+                var libraryName = expressionRef.libraryName ?? _libraryContext.LibraryVersionedIdentifier;
                 if (!_libraryContext.LibraryDefinitions.TryGetValue(libraryName, expressionRef.name, out var definition))
                 {
                     if (throwIfNotFound)
@@ -229,7 +229,8 @@ partial class ExpressionBuilderContext
             return typeof(object);
 
         var elementTuples = elements!
-            .SelectToArray(e => (e.name, e.value.resultTypeSpecifier ?? throw new InvalidOperationException($"Tuple element value does not have a resultTypeSpecifier")));
+            .SelectToArray(e => (e.name, e.value.resultTypeSpecifier
+                                         ?? throw new InvalidOperationException($"Tuple element value does not have a resultTypeSpecifier").WithContext(this)));
         return TupleTypeFor(elementTuples, changeType);
     }
 

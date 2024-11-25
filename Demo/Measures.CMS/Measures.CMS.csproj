@@ -10,7 +10,6 @@
 		<ProjectReference Include="..\..\Cql\Cql.Primitives\Cql.Primitives.csproj" />
 		<ProjectReference Include="..\..\Cql\Cql.Runtime\Cql.Runtime.csproj" />
 		<ProjectReference Include="..\CLI\CLI.csproj" />
-		<ProjectReference Include="..\Cql\Cql.csproj" />
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />
 	</ItemGroup>
 
@@ -55,5 +54,9 @@
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Content>
 		<Content Remove="input/tests/results" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="CSharp\" />
 	</ItemGroup>
 </Project>

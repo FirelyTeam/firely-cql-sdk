@@ -28,7 +28,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var diff = (DifferenceBetween)library.statements[0].expression;
                 Assert.AreEqual(DateTimePrecision.Day, diff.precision);
 
-                var result = Run(diff);
+                var result = Run(diff, library);
                 Assert.IsInstanceOfType(result, typeof(int?));
                 Assert.AreEqual(30, result);
             }
@@ -50,7 +50,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var diff = (DifferenceBetween)library.statements[0].expression;
                 Assert.AreEqual(DateTimePrecision.Month, diff.precision);
 
-                var result = Run(diff);
+                var result = Run(diff, library);
                 Assert.IsInstanceOfType(result, typeof(int?));
                 Assert.AreEqual(1, result);
             }
@@ -72,7 +72,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var diff = (DifferenceBetween)library.statements[0].expression;
                 Assert.AreEqual(DateTimePrecision.Week, diff.precision);
 
-                var result = Run(diff);
+                var result = Run(diff, library);
                 Assert.IsInstanceOfType(result, typeof(int?));
                 Assert.AreEqual(1, result);
             }
@@ -96,7 +96,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var diff = (DifferenceBetween)library.statements[0].expression;
                 Assert.AreEqual(DateTimePrecision.Year, diff.precision);
 
-                var result = Run(diff);
+                var result = Run(diff, library);
                 Assert.IsInstanceOfType(result, typeof(int?));
                 Assert.AreEqual(1, result);
             }
@@ -127,7 +127,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var diff = (DifferenceBetween)library.statements[0].expression;
                 Assert.AreEqual(DateTimePrecision.Hour, diff.precision);
 
-                var result = Run(diff);
+                var result = Run(diff, library);
                 Assert.IsInstanceOfType(result, typeof(int?));
                 Assert.AreEqual(8, result);
             }
@@ -150,7 +150,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var diff = (DifferenceBetween)library.statements[0].expression;
                 Assert.AreEqual(DateTimePrecision.Minute, diff.precision);
 
-                var result = Run(diff);
+                var result = Run(diff, library);
                 Assert.IsInstanceOfType(result, typeof(int?));
                 Assert.AreEqual(480, result);
             }
@@ -173,7 +173,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var diff = (DifferenceBetween)library.statements[0].expression;
                 Assert.AreEqual(DateTimePrecision.Second, diff.precision);
 
-                var result = Run(diff);
+                var result = Run(diff, library);
                 Assert.IsInstanceOfType(result, typeof(int?));
                 Assert.AreEqual(30, result);
             }
@@ -196,7 +196,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var diff = (DifferenceBetween)library.statements[0].expression;
                 Assert.AreEqual(DateTimePrecision.Millisecond, diff.precision);
 
-                var result = Run(diff);
+                var result = Run(diff, library);
                 Assert.IsInstanceOfType(result, typeof(int?));
                 Assert.AreEqual(200, result);
             }
@@ -244,7 +244,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var diff = (DifferenceBetween)library.statements[0].expression;
                 Assert.AreEqual(DateTimePrecision.Week, diff.precision);
 
-                var result = Run(diff);
+                var result = Run(diff, library);
                 Assert.IsNull(result);
             }
         }

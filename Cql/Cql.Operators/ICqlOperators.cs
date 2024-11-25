@@ -28,8 +28,7 @@ namespace Hl7.Cql.Operators
 
         T? Convert<T>(object? from);
 
-        IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet? valueSet = null, PropertyInfo? codeProperty = null) where T : class;
-        IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? codes = null, PropertyInfo? codeProperty = null) where T : class;
+        IEnumerable<T> Retrieve<T>(RetrieveParameters? parameters) where T : class;
 
         #region Operators
 
@@ -575,4 +574,10 @@ namespace Hl7.Cql.Operators
 
         #endregion
     }
+
+    public record RetrieveParameters(
+        PropertyInfo? CodeProperty,
+        CqlValueSet? ValueSet,
+        IEnumerable<CqlCode?>? Codes,
+        string? TemplateId);
 }

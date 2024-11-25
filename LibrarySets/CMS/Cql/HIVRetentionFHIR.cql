@@ -2,11 +2,11 @@ library HIVRetentionFHIR version '0.1.000'
 
 using QICore version '4.1.1'
 
-include CQMCommon version '2.0.000' called CQMCommon
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include QICoreCommon version '2.0.000' called QICoreCommon
-include SupplementalDataElements version '3.4.000' called SDE
-include CumulativeMedicationDuration version '4.0.000' called CMD
+include CQMCommon version '2.2.000' called CQMCommon
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include QICoreCommon version '2.1.000' called QICoreCommon
+include SupplementalDataElements version '3.5.000' called SDE
+include CumulativeMedicationDuration version '4.1.000' called CMD
 
 codesystem "CPT": 'http://www.ama-assn.org/go/cpt'
 
@@ -25,7 +25,7 @@ valueset "Telephone Visits": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.11
 valueset "Preventive Care Services Other": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.11.1150'
 
 parameter "Measurement Period" Interval<DateTime>
-  default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)
+  default Interval[@2025-01-01T00:00:00.000Z, @2025-12-31T23:59:59.999Z]
 
 context Patient
 
@@ -67,28 +67,23 @@ define "Encounter During Measurement Period With HIV":
       union ["Encounter": "Telephone Visits"]
       union ["Encounter": "Preventive Care Services Other"] ) ValidEncounter
       with ["Condition": "HIV"] HIVDiagnosis
-        such that ValidEncounter.period during "Measurement Period"
+        such that ValidEncounter.period during day of "Measurement Period"
           and HIVDiagnosis.prevalenceInterval ( ) starts on or before day of ValidEncounter.period
           and HIVDiagnosis.isActive ( )
   )
 
 define "Has Active HIV Diagnosis Starts On or Before First 240 Days of Measurement Period":
   exists ( ["Condition": "HIV"] HIVDx
-      where HIVDx.prevalenceInterval ( ) starts on or before date from ( start of "Measurement Period" + 240 days )
+      where HIVDx.prevalenceInterval ( ) starts on or before day of ( start of "Measurement Period" + 240 days )
         and HIVDx.isActive ( )
-  )
-
-define "Has HIV Viral Load Test During Measurement Period":
-  exists ( ["Observation": "HIV Viral Load"] ViralLoadTest
-      where QICoreCommon."ToInterval" ( ViralLoadTest.effective ) during day of "Measurement Period"
   )
 
 define "Has One Encounter With HIV and One Viral Load Test At Least 90 Days Apart":
   exists ( "Encounter During Measurement Period With HIV" ) EncounterWithHIV
     with ["Observation": "HIV Viral Load"] ViralLoadTest
-      such that ( QICoreCommon."ToInterval" ( ViralLoadTest.effective ) during "Measurement Period" )
-        and ( ( QICoreCommon."ToInterval" ( ViralLoadTest.effective ) starts 90 days or more after day of end of EncounterWithHIV.period )
-            or ( EncounterWithHIV.period starts 90 days or more after day of end of QICoreCommon."ToInterval" ( ViralLoadTest.effective ) )
+      such that ViralLoadTest.effective.toInterval ( ) during day of "Measurement Period"
+        and ( ( ViralLoadTest.effective.toInterval ( ) starts 90 days or more after day of end of EncounterWithHIV.period )
+            or ( EncounterWithHIV.period starts 90 days or more after day of end of ViralLoadTest.effective.toInterval ( ) )
         )
 
 define "Has Qualifying Encounter During First 240 Days of Measurement Period":

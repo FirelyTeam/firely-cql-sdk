@@ -57,24 +57,17 @@ namespace CoreTests
             public DateIso8601 birthDate { get; set; }
         }
 
-        private class UnitTestDataSource : IDataSource
+        private class UnitTestDataSource(IEnumerable<object> data) : IDataSource
         {
-            public UnitTestDataSource(IEnumerable<object> data)
-            {
-                Data = data?.ToList() ?? new List<object>();
-            }
-
-            public IList<object> Data { get; }
+            public IList<object> Data { get; } = data?.ToList() ?? new List<object>();
 
 #if VNEXT
             public event EventHandler DataChanged;
 #endif
 
-            public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode> codes = null, PropertyInfo _ = null) where T : class =>
+            public IEnumerable<T> Retrieve<T>(RetrieveParameters _) where T : class =>
                 Data.OfType<T>();
 
-            public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet valueSet = null, PropertyInfo _ = null) where T : class =>
-                Data.OfType<T>();
         }
 
         private class UnitTestTypeResolver : BaseTypeResolver

@@ -61,8 +61,6 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             return DoVisit(node);
         }
 
-        public bool SimplifyNullConditionalMemberExpression { get; init; }
-
         private Expression DoVisit(Expression node)
         {
             // This visit will, by default, call `simplify()` on every
@@ -79,9 +77,6 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
                 MemberExpression or
                 ElmAsExpression or
                 DefaultExpression
-                => base.Visit(node),
-
-                NullConditionalMemberExpression when SimplifyNullConditionalMemberExpression
                 => base.Visit(node),
 
                 // These expressions require special handling
@@ -275,9 +270,6 @@ namespace Hl7.Cql.CodeGeneration.NET.Visitors
             }
         }
 
-        private SimplifyExpressionsVisitor Clone() => new()
-        {
-            SimplifyNullConditionalMemberExpression = SimplifyNullConditionalMemberExpression
-        };
+        private SimplifyExpressionsVisitor Clone() => new();
     }
 }

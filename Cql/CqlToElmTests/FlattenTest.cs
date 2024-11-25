@@ -48,11 +48,11 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var lib = CreateLibraryForExpression("Flatten({{null}, {null}})");
             var flatten = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Flatten>();
-            var result = Run<List<object>>(flatten); // {null, null}
+            var result = Run<List<object>>(flatten, lib); // {null, null}
             result!.Count.Should().Be(2);
             var equal = CreateLibraryForExpression("Flatten({{null}, {null}}) = {null, null}")
                 .Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
-            var eqr = Run<bool?>(equal); // {null, null}
+            var eqr = Run<bool?>(equal, lib); // {null, null}
             eqr.Should().BeTrue();
         }
         [TestMethod]

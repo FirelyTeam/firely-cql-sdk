@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var lib = CreateLibraryForExpression("LastPositionOf('hi', 'Ohio is the place to be!')");
             var lpo = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<LastPositionOf>();
-            var result = Run<int?>(lpo);
+            var result = Run<int?>(lpo, lib);
             result.Should().Be(1);
         }
 

@@ -2,10 +2,10 @@ library HybridHospitalWideReadmissionFHIR version '0.0.001'
 
 using QICore version '4.1.1'
 
-include CQMCommon version '2.0.000' called CQMCommon
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include SupplementalDataElements version '3.4.000' called SDE
-include QICoreCommon version '2.0.000' called QICoreCommon
+include CQMCommon version '2.2.000' called CQMCommon
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include SupplementalDataElements version '3.5.000' called SDE
+include QICoreCommon version '2.1.000' called QICoreCommon
 
 codesystem "LOINC": 'http://loinc.org'
 codesystem "ActCode": 'http://terminology.hl7.org/CodeSystem/v3-ActCode'
@@ -28,7 +28,7 @@ code "Oxygen saturation in Arterial blood by Pulse oximetry": '59408-5' from "LO
 code "Systolic blood pressure": '8480-6' from "LOINC" display 'Systolic BP'
 
 parameter "Measurement Period" Interval<DateTime>
-  default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)
+  default Interval[@2025-01-01T00:00:00.000Z, @2025-12-31T23:59:59.999Z]
 
 context Patient
 

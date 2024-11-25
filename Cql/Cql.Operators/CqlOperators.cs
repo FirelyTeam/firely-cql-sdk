@@ -189,11 +189,8 @@ namespace Hl7.Cql.Runtime
 
         public T? Convert<T>(object? from) => TypeConverter.Convert<T>(from);
 
-        public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? codes = null, PropertyInfo? codeProperty = null) where T : class =>
-            DataSource.RetrieveByCodes<T>(codes, codeProperty);
-
-        public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet? valueSet = null, PropertyInfo? codeProperty = null) where T : class =>
-            DataSource.RetrieveByValueSet<T>(valueSet, codeProperty);
+        public IEnumerable<T> Retrieve<T>(RetrieveParameters? parameters) where T : class =>
+            DataSource.Retrieve<T>(parameters);
     }
 }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

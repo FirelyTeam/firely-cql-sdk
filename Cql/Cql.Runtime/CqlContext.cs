@@ -85,13 +85,13 @@ namespace Hl7.Cql.Runtime
         /// <summary>
         /// Gets the value of the parameter in <see cref="Parameters"/> given the library and parameter name.
         /// </summary>
-        /// <param name="libraryNameAndVersion">The library name and version.</param>
+        /// <param name="libraryVersionedIdentifier">The library name and version.</param>
         /// <param name="parameterName">The name of the parameter.</param>
         /// <param name="defaultValue">The value to returns when the parameter could not be resolved.</param>
         /// <returns>The value of the parameter or <see langword="null"/> if not defined.</returns>
-        public object? ResolveParameter(string libraryNameAndVersion, string parameterName, object? defaultValue)
+        public object? ResolveParameter(string libraryVersionedIdentifier, string parameterName, object? defaultValue)
         {
-            var fullyQualified = $"{libraryNameAndVersion}{ParameterDelimiter}{parameterName}";
+            var fullyQualified = $"{libraryVersionedIdentifier}{ParameterDelimiter}{parameterName}";
             if (Parameters.TryGetValue(fullyQualified, out var parameter))
                 return parameter;
 

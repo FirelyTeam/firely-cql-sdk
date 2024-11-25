@@ -402,7 +402,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsNotNull(library.statements[0].expression.locator);
             Assert.IsInstanceOfType(library.statements[0].expression, typeof(Contains));
             var includes = (Contains)library.statements[0].expression;
-            var result = Run(includes);
+            var result = Run(includes, library);
             Assert.IsNull(result);
 
         }
@@ -411,18 +411,18 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Properly_Included_in_Interval_Null()
         {
-            var library = CreateLibraryForExpression("Interval[1, 10] properly included in Interval[null, null]");
+            var library = CreateLibraryForExpression("Interval[1, 10] properly included in Interval[null as Integer, null as Integer]");
             var pii = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ProperIncludedIn>();
-            var result = Run(pii);
+            var result = Run(pii, library);
             Assert.IsNull(result);
         }
 
         [TestMethod]
         public void Interval_Null_Starts_Interval()
         {
-            var library = CreateLibraryForExpression("Interval[null, null] starts Interval[1, 10]");
+            var library = CreateLibraryForExpression("Interval[null as Integer, null as Integer] starts Interval[1, 10]");
             var pii = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Starts>();
-            var result = Run(pii);
+            var result = Run(pii, library);
             Assert.IsNull(result);
         }
 

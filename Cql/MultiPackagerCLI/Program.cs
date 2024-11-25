@@ -7,7 +7,6 @@ using Microsoft.CodeAnalysis;
 var solutionDir = new DirectoryInfo(Environment.CurrentDirectory)
 	.FindParentDirectoryContaining("*.sln")!;
 
-CSharpCodeWriterTypeFormat csTypeFormat = CSharpCodeWriterTypeFormat.Explicit;
 (string subDir, string measureSubDir)[] iteration = [
 	("Demo", "Measures.Demo"),
 	("CMS", "Measures.CMS")
@@ -27,7 +26,6 @@ foreach ((string librarySetSubDir, string measuresSubDir) in iteration)
 					 --fhir "{solutionDir}/LibrarySets/{librarySetSubDir}/Resources"
 					 --dll "{solutionDir}/LibrarySets/{librarySetSubDir}/Assemblies"
 					 --cs "{solutionDir}/Demo/{measuresSubDir}/CSharp"
-					 --cs-typeformat {csTypeFormat}
 					 --log-debug true
 					 {(first ? "" : "--log-dont-clear true")}
 					 """.Replace("\n", " "),

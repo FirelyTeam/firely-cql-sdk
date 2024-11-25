@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
             and.operand.Should().HaveCount(2);
             var ge = and.operand[0].Should().BeOfType<GreaterOrEqual>().Subject;
             var le = and.operand[1].Should().BeOfType<LessOrEqual>().Subject;
-            var result = Run<bool?>(and);
+            var result = Run<bool?>(and, lib);
             Assert.IsTrue(result);
         }
 
@@ -32,7 +32,7 @@ namespace Hl7.Cql.CqlToElm.Test
             and.operand.Should().HaveCount(2);
             var ge = and.operand[0].Should().BeOfType<Greater>().Subject;
             var le = and.operand[1].Should().BeOfType<Less>().Subject;
-            var result = Run<bool?>(and);
+            var result = Run<bool?>(and, lib);
             Assert.IsFalse(result);
         }
 

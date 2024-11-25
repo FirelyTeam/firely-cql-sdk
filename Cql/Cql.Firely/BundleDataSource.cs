@@ -14,8 +14,6 @@ using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using System.Reflection;
 
-#nullable enable
-
 namespace Hl7.Cql.Fhir
 {
     /// <summary>
@@ -59,42 +57,41 @@ namespace Hl7.Cql.Fhir
         public event EventHandler? DataChanged;
 #endif
 
-        /// <inheritdoc/>
-        public IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?>? allowedCodes = null, PropertyInfo? codeProperty = null) where T : class
+        public IEnumerable<T> Retrieve<T>(RetrieveParameters? parameters) where T : class
         {
-            if (allowedCodes is not null)
+            return parameters switch
             {
-                Predicate<Coding> filter = allowedCodes is IValueSetFacade valueSet ?
-                    c => valueSet.IsCodeInValueSet(c.Code, c.System) == true
-                    : listFilter;
-
-                return executeFilter<T>(filter, codeProperty);
-
-                bool listFilter(Coding l) => allowedCodes.Any(allowed =>
-                    allowed is not null &&
-                    _systemComparer.Equivalent(l.System, allowed.system, null) &&
-                    _codeComparer.Equivalent(l.Code, allowed.code, null));
-            }
-            else
-            {
-                return Bundle.FilterByType<T>();
-            }
+                null => Bundle.FilterByType<T>(),
+                { Codes: { } codes }   => RetrieveByCodes<T>(codes, parameters.CodeProperty),
+                { ValueSet: { } valueSet } => RetrieveByValueSet<T>(valueSet, parameters.CodeProperty),
+                _ => Bundle.FilterByType<T>()
+            };
         }
 
         /// <inheritdoc/>
-        public IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet? valueSet = null, PropertyInfo? codeProperty = null) where T : class
+        private IEnumerable<T> RetrieveByCodes<T>(IEnumerable<CqlCode?> allowedCodes, PropertyInfo? codeProperty = null) where T : class
         {
-            if (valueSet != null && valueSet.id != null)
-            {
-                return executeFilter<T>(c => ValueSets.IsCodeInValueSet(valueSet.id, c.Code, c.System), codeProperty);
-            }
-            else
-            {
-                return Bundle.FilterByType<T>();
-            }
+            Predicate<Coding> filter = allowedCodes is IValueSetFacade valueSet ?
+                c => valueSet.IsCodeInValueSet(c.Code, c.System) == true
+                : listFilter;
+
+            return ExecuteFilter<T>(filter, codeProperty);
+
+            bool listFilter(Coding l) => allowedCodes.Any(allowed =>
+                allowed is not null &&
+                _systemComparer.Equivalent(l.System, allowed.system, null) &&
+                _codeComparer.Equivalent(l.Code, allowed.code, null));
         }
 
-        private IEnumerable<T> executeFilter<T>(Predicate<Coding> filter, PropertyInfo? codeProperty) where T : class
+        /// <inheritdoc/>
+        private IEnumerable<T> RetrieveByValueSet<T>(CqlValueSet valueSet, PropertyInfo? codeProperty = null) where T : class
+        {
+            return valueSet.id != null ?
+                       ExecuteFilter<T>(c => ValueSets.IsCodeInValueSet(valueSet.id, c.Code, c.System), codeProperty) :
+                       Bundle.FilterByType<T>();
+        }
+
+        private IEnumerable<T> ExecuteFilter<T>(Predicate<Coding> filter, PropertyInfo? codeProperty) where T : class
         {
             if (codeProperty is null)
             {
@@ -122,4 +119,3 @@ namespace Hl7.Cql.Fhir
         }
     }
 }
-#nullable disable

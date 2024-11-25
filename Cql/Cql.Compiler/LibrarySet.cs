@@ -33,11 +33,11 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     /// </summary>
     public string Name { get; }
 
-    private readonly Dictionary<string, (Library library, LibraryByNameAndVersionHashSet dependencies)> _libraryInfosByKey; // Key is the NameAndVersion of a Library
+    private readonly Dictionary<string, (Library library, LibraryByVersionedIdentifierHashSet dependencies)> _libraryInfosByVersionedIdentifier; 
 
     private (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries) _calculatedState;
 
-    private readonly LibraryByNameAndVersionHashSet _librariesNotCalculatedYet;
+    private readonly LibraryByVersionedIdentifierHashSet _librariesNotCalculatedYet;
 
     private static readonly (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries)
         EmptyCached = (EmptySet<Library>.Instance, Array.Empty<Library>());
@@ -54,52 +54,52 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
         Name = name;
         _librariesNotCalculatedYet = [];
         _calculatedState = EmptyCached;
-        _libraryInfosByKey = new Dictionary<string, (Library library, LibraryByNameAndVersionHashSet dependencies)>();
+        _libraryInfosByVersionedIdentifier = new Dictionary<string, (Library library, LibraryByVersionedIdentifierHashSet dependencies)>();
         AsReadOnlyDictionary = new ReadOnlyDictionaryAdapter(this);
         AddLibraries(libraries);
 
         _librarySetDefinitionCache = new LibrarySetDefinitionCache(this);
     }
 
-    /// <exception cref="KeyNotFoundError">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
-    private bool TryGetLibraryInfoByKey(
-        string? nameAndVersion,
+    /// <exception cref="KeyNotFoundError">If no library was found by the specified versioned identifier and if throwError is set to <c>true</c>.</exception>
+    private bool TryGetLibraryInfoByVersionedIdentifier(
+        string? versionedIdentifier,
         bool throwError,
-        out (Library library, LibraryByNameAndVersionHashSet dependencies) info)
+        out (Library library, LibraryByVersionedIdentifierHashSet dependencies) info)
     {
         RecalculateStateIfNecessary();
 
         info = default;
-        if (nameAndVersion is not (null or ""))
+        if (versionedIdentifier is not (null or ""))
         {
-            if (_libraryInfosByKey.TryGetValue(nameAndVersion, out info))
+            if (_libraryInfosByVersionedIdentifier.TryGetValue(versionedIdentifier, out info))
                 return true;
         }
 
-        if (throwError) throw new KeyNotFoundError(nameAndVersion ?? "(null)", "Library").ToException();
+        if (throwError) throw new KeyNotFoundError(versionedIdentifier ?? "(null)", "Library").ToException();
         return false;
     }
 
     /// <summary>
     /// Gets the library with the specified key.
     /// </summary>
-    /// <param name="nameAndVersion">The key of the library to retrieve.</param>
+    /// <param name="versionedIdentifier">The versioned identifierName of the library to retrieve.</param>
     /// <param name="throwError">Indicates whether to throw an exception if the library is not found.</param>
     /// <returns>The library with the specified key, or <c>null</c> if the library is not found.</returns>
     /// <exception cref="KeyNotFoundError">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
-    public Library? GetLibrary(string nameAndVersion, bool throwError = true) =>
-        TryGetLibraryInfoByKey(nameAndVersion, throwError, out var info) ? info.library : null;
+    public Library? GetLibrary(string versionedIdentifier, bool throwError = true) =>
+        TryGetLibraryInfoByVersionedIdentifier(versionedIdentifier, throwError, out var info) ? info.library : null;
 
 
     /// <summary>
     /// Gets the dependencies of the library with the specified key.
     /// </summary>
-    /// <param name="nameAndVersion">The key of the library to retrieve the dependencies for.</param>
+    /// <param name="versionedIdentifier">The versioned identifier of the library to retrieve the dependencies for.</param>
     /// <param name="throwError">Indicates whether to throw an exception if the library is not found.</param>
     /// <returns>The dependencies of the library with the specified key, or an empty list if the library is not found.</returns>
     /// <exception cref="KeyNotFoundError">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
-    public IReadOnlySet<Library> GetLibraryDependencies(string? nameAndVersion, bool throwError = true) =>
-        TryGetLibraryInfoByKey(nameAndVersion, throwError, out var info) ? info.dependencies : EmptySet<Library>.Instance;
+    public IReadOnlySet<Library> GetLibraryDependencies(string? versionedIdentifier, bool throwError = true) =>
+        TryGetLibraryInfoByVersionedIdentifier(versionedIdentifier, throwError, out var info) ? info.dependencies : EmptySet<Library>.Instance;
 
     /// <summary>
     /// Loads the libraries from the specified collection of files.
@@ -136,7 +136,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
         {
             try
             {
-                _libraryInfosByKey.Add(library.NameAndVersion()!, (library, []));
+                _libraryInfosByVersionedIdentifier.Add(library.GetVersionedIdentifier()!, (library, []));
                 _librariesNotCalculatedYet.Add(library);
             }
             catch (ArgumentNullException)
@@ -164,13 +164,13 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
 
         foreach (var library in _librariesNotCalculatedYet)
         {
-            var dependencies = _libraryInfosByKey[library.NameAndVersion()!].dependencies;
+            var dependencies = _libraryInfosByVersionedIdentifier[library.GetVersionedIdentifier()!].dependencies;
             if (library.includes is { Length: > 0 } includeDefs)
             {
                 foreach (var includeDef in includeDefs)
                 {
-                    var toKey = includeDef.NameAndVersion(true)!;
-                    var toLib = _libraryInfosByKey.GetValueOrDefault(toKey).library ?? throw new LibraryIncludeDefUnresolvedError(library, includeDef).ToException();
+                    var toKey = includeDef.GetVersionedIdentifier(true)!;
+                    var toLib = _libraryInfosByVersionedIdentifier.GetValueOrDefault(toKey).library ?? throw new LibraryIncludeDefUnresolvedError(library, includeDef).ToException();
                     dependencies.Add(toLib);
                 }
             }
@@ -180,20 +180,20 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
 
         // Determining root libraries i.e. those that are not dependencies for others.
 
-        var allLibraries = _libraryInfosByKey
+        var allLibraries = _libraryInfosByVersionedIdentifier
             .Values
             .Select(v => v.library);
 
-        var rootLibraries = new LibraryByNameAndVersionHashSet(
+        var rootLibraries = new LibraryByVersionedIdentifierHashSet(
             allLibraries
-            .GetRoots(lib => GetLibraryDependencies(lib.NameAndVersion()!)));
+            .GetRoots(lib => GetLibraryDependencies(lib.GetVersionedIdentifier()!)));
 
         // Topological sort libraries so that most dependent libraries are placed before less dependent ones
 
         var topologicallySortedLibraries = allLibraries
-            .TopologicalSort(lib => GetLibraryDependencies(lib.NameAndVersion()!))
+            .TopologicalSort(lib => GetLibraryDependencies(lib.GetVersionedIdentifier()!))
             .ToList();
-        Debug.Assert(topologicallySortedLibraries.Count == _libraryInfosByKey.Count);
+        Debug.Assert(topologicallySortedLibraries.Count == _libraryInfosByVersionedIdentifier.Count);
 
         // Set calculation state
         _calculatedState = (rootLibraries, topologicallySortedLibraries);
@@ -207,7 +207,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     /// <inheritdoc/>
-    public int Count => _libraryInfosByKey.Count;
+    public int Count => _libraryInfosByVersionedIdentifier.Count;
 
     /// <summary>
     /// Loads the specified library and its dependencies from the specified directory.
@@ -241,14 +241,14 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
 
             foreach (var library in librariesLoaded)
             {
-                if (!_libraryInfosByKey.TryAdd(library.NameAndVersion()!, (library, [])))
+                if (!_libraryInfosByVersionedIdentifier.TryAdd(library.GetVersionedIdentifier()!, (library, [])))
                     continue; // Already loaded, skip
 
                 if (library.includes is { Length: > 0 } includeDefs)
                 {
                     foreach (var includeDef in includeDefs)
                     {
-                        if (_libraryInfosByKey.ContainsKey($"{includeDef.path}-{includeDef.version}"))
+                        if (_libraryInfosByVersionedIdentifier.ContainsKey($"{includeDef.path}-{includeDef.version}"))
                             continue; // Already loaded, skip
 
                         librariesToLoad.Add((includeDef.path, includeDef.version));
@@ -264,8 +264,8 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     }
 
     internal string MermaidDiagram => this.BuildMermaidFlowChart(
-        getNextItems: lib => GetLibraryDependencies(lib.NameAndVersion(false)),
-        formatItem: lib => lib.NameAndVersion(false) ?? "???");
+        getNextItems: lib => GetLibraryDependencies(lib.GetVersionedIdentifier(false)),
+        formatItem: lib => lib.GetVersionedIdentifier(false) ?? "???");
 
     /// <summary>
     /// Given a reference that appears in a library, this method will attempt to resolve the definition.
@@ -313,12 +313,12 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
 
         /// <inheritdoc/>
         public bool ContainsKey(string key) =>
-            LibrarySet._libraryInfosByKey.ContainsKey(key);
+            LibrarySet._libraryInfosByVersionedIdentifier.ContainsKey(key);
 
         /// <inheritdoc/>
         public bool TryGetValue(string key, [NotNullWhen(true)] out Library? value)
         {
-            if (LibrarySet._libraryInfosByKey.TryGetValue(key, out var tuple))
+            if (LibrarySet._libraryInfosByVersionedIdentifier.TryGetValue(key, out var tuple))
             {
                 value = tuple.library;
                 return true;
@@ -330,7 +330,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
 
         /// <inheritdoc/>
         public Library this[string key] =>
-            LibrarySet._libraryInfosByKey[key].library;
+            LibrarySet._libraryInfosByVersionedIdentifier[key].library;
 
         /// <inheritdoc/>
         public IEnumerable<Library> Values =>
@@ -338,7 +338,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
 
         /// <inheritdoc/>
         public IEnumerable<string> Keys =>
-            LibrarySet.GetCalculatedState().TopologicallySortedLibraries.Select(lib => lib.NameAndVersion(true)!);
+            LibrarySet.GetCalculatedState().TopologicallySortedLibraries.Select(lib => lib.GetVersionedIdentifier(true)!);
 
         /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -348,7 +348,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
             LibrarySet
                 .GetCalculatedState()
                 .TopologicallySortedLibraries
-                .Select(lib => KeyValuePair.Create(lib.NameAndVersion(true)!, lib))
+                .Select(lib => KeyValuePair.Create(lib.GetVersionedIdentifier(true)!, lib))
                 .GetEnumerator();
     }
 }

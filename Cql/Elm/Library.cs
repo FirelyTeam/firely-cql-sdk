@@ -29,13 +29,13 @@ public partial class Library
         if (IsValidated)
             return;
 
-        _ = NameAndVersion(throwError: true);
+        _ = this.GetVersionedIdentifier(throwError: true);
 
         if (includes is { Length: > 0 } includeDefs)
         {
             foreach (var includeDef in includeDefs)
             {
-                if (includeDef.NameAndVersion(throwError: false) == null)
+                if (includeDef.GetVersionedIdentifier(throwError: false) == null)
                     throw new LibraryMissingIncludeDefPathError(this, includeDef).ToException();
             }
         }
@@ -43,45 +43,23 @@ public partial class Library
         IsValidated = true;
     }
 
-    public static IEqualityComparer<Library> EqualityComparerByNameAndVersion { get; } =
-        EqualityComparerFactory.For<Library>.CreateByKey(lib => lib.NameAndVersion(true)!);
-
-    public static IComparer<Library> ComparerByNameAndVersion { get; } =
-        ComparerFactory.For<Library>.CreateByKey(lib => lib.NameAndVersion(true)!);
+    public static IEqualityComparer<Library> EqualityComparerByVersionedIdentifier { get; } =
+        EqualityComparerFactory.For<Library>.CreateByKey(lib => lib.GetVersionedIdentifier(true)!);
 
     internal string? OriginalFilePath { get; private set; }
 }
 
-internal class LibraryByNameAndVersionHashSet : HashSet<Library>
+internal class LibraryByVersionedIdentifierHashSet : HashSet<Library>
 {
-    public LibraryByNameAndVersionHashSet() : base(Library.EqualityComparerByNameAndVersion)
+    public LibraryByVersionedIdentifierHashSet() : base(Library.EqualityComparerByVersionedIdentifier)
     {
     }
 
-    public LibraryByNameAndVersionHashSet(IEnumerable<Library> collection) : base(collection, Library.EqualityComparerByNameAndVersion)
+    public LibraryByVersionedIdentifierHashSet(IEnumerable<Library> collection) : base(collection, Library.EqualityComparerByVersionedIdentifier)
     {
     }
 
-    public LibraryByNameAndVersionHashSet(int capacity) : base(capacity, Library.EqualityComparerByNameAndVersion)
-    {
-    }
-}
-
-internal class LibraryByNameAndVersionDictionary<TValue> : Dictionary<Library, TValue>
-{
-    public LibraryByNameAndVersionDictionary() : base(Library.EqualityComparerByNameAndVersion)
-    {
-    }
-
-    public LibraryByNameAndVersionDictionary(IDictionary<Library, TValue> dictionary) : base(dictionary, Library.EqualityComparerByNameAndVersion)
-    {
-    }
-
-    public LibraryByNameAndVersionDictionary(IEnumerable<KeyValuePair<Library, TValue>> collection) : base(collection, Library.EqualityComparerByNameAndVersion)
-    {
-    }
-
-    public LibraryByNameAndVersionDictionary(int capacity) : base(capacity, Library.EqualityComparerByNameAndVersion)
+    public LibraryByVersionedIdentifierHashSet(int capacity) : base(capacity, Library.EqualityComparerByVersionedIdentifier)
     {
     }
 }

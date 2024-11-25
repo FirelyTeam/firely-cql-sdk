@@ -3,8 +3,8 @@ Hl7.Cql.Compiler.LibrarySet
 Hl7.Cql.Compiler.LibrarySet.AddLibraries(System.Collections.Generic.IEnumerable<Hl7.Cql.Elm.Library!>! libraries) -> void
 Hl7.Cql.Compiler.LibrarySet.Count.get -> int
 Hl7.Cql.Compiler.LibrarySet.GetEnumerator() -> System.Collections.Generic.IEnumerator<Hl7.Cql.Elm.Library!>!
-Hl7.Cql.Compiler.LibrarySet.GetLibrary(string! nameAndVersion, bool throwError = true) -> Hl7.Cql.Elm.Library?
-Hl7.Cql.Compiler.LibrarySet.GetLibraryDependencies(string? nameAndVersion, bool throwError = true) -> System.Collections.Generic.IReadOnlySet<Hl7.Cql.Elm.Library!>!
+Hl7.Cql.Compiler.LibrarySet.GetLibrary(string! versionedIdentifier, bool throwError = true) -> Hl7.Cql.Elm.Library?
+Hl7.Cql.Compiler.LibrarySet.GetLibraryDependencies(string? versionedIdentifier, bool throwError = true) -> System.Collections.Generic.IReadOnlySet<Hl7.Cql.Elm.Library!>!
 Hl7.Cql.Compiler.LibrarySet.LibrarySet(string! name = "", params Hl7.Cql.Elm.Library![]! libraries) -> void
 Hl7.Cql.Compiler.LibrarySet.LoadLibraries(System.Collections.Generic.IReadOnlyCollection<System.IO.FileInfo!>! files) -> System.Collections.Generic.IReadOnlyCollection<Hl7.Cql.Elm.Library!>!
 Hl7.Cql.Compiler.LibrarySet.LoadLibraryAndDependencies(System.IO.DirectoryInfo! elmDirectory, string! libraryName, string! version = "") -> System.Collections.Generic.IReadOnlyCollection<Hl7.Cql.Elm.Library!>!

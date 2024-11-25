@@ -3417,18 +3417,16 @@ namespace CoreTests
             var definitions = serviceScope.ServiceProvider.GetLibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
             var writer = serviceProvider.GetCSharpLibrarySetToStreamsWriter();
             var isDone = false;
-            writer.ProcessDefinitions(
-                definitions,
-                librarySet,
-                callbacks:new(onAfterStep: step =>
-                {
-                    switch (step)
-                    {
-                        case CSharpSourceCodeStep.OnDone:
-                            isDone = true;
-                            break;
-                    }
-                }));
+            writer.ProcessDefinitions(librarySet,
+                                      definitions, callbacks: new(onAfterStep: step =>
+                                      {
+                                          switch (step)
+                                          {
+                                              case CSharpSourceCodeStep.OnDone:
+                                                  isDone = true;
+                                                  break;
+                                          }
+                                      }));
             Assert.IsTrue(isDone);
         }
 

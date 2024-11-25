@@ -27,9 +27,9 @@ namespace Hl7.Cql.Runtime
             var birthDateProperty = TypeResolver.PatientBirthDateProperty
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientBirthDateProperty)}");
             var method = typeof(IDataSource)
-                .GetMethod(nameof(IDataSource.RetrieveByValueSet))!
+                .GetMethod(nameof(IDataSource.Retrieve))!
                 .MakeGenericMethod(patientType);
-            var patients = method.Invoke(DataSource, [null, null]) as IEnumerable<object>;
+            var patients = method.Invoke(DataSource, [null]) as IEnumerable<object>;
             var patientsArray = patients?.ToArray() ?? Array.Empty<object>();
             if (patientsArray.Length == 1)
             {
@@ -51,9 +51,9 @@ namespace Hl7.Cql.Runtime
             var birthDateProperty = TypeResolver.PatientBirthDateProperty
                 ?? throw new InvalidOperationException($"This type resolver provided a null value for {nameof(TypeResolver.PatientBirthDateProperty)}");
             var method = typeof(IDataSource)
-                .GetMethod(nameof(IDataSource.RetrieveByValueSet))!
+                .GetMethod(nameof(IDataSource.Retrieve))!
                 .MakeGenericMethod(patientType);
-            var patients = method.Invoke(DataSource, [null, null]) as IEnumerable<object>;
+            var patients = method.Invoke(DataSource, [null]) as IEnumerable<object>;
             var patientsArray = patients?.ToArray() ?? Array.Empty<object>();
             if (patientsArray.Length == 1)
             {

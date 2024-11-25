@@ -13,13 +13,7 @@ partial class CSharpCodeWriterOptions
 {
     internal partial class Validator : IValidateOptions<CSharpCodeWriterOptions>
     {
-        public ValidateOptionsResult Validate(string? name, CSharpCodeWriterOptions options)
-        {
-            if (options.TypeFormat == CSharpCodeWriterTypeFormat.Var)
-                return ValidateOptionsResult.Fail(
-                    $"The 'var' type format is not supported until later. Please only use 'explicit' for now until then. CLI argument is '{CSharpCodeWriterOptions.ArgNameTypeFormat}'.");
-
-            return ValidateOptionsResult.Success;
-        }
+        public ValidateOptionsResult Validate(string? name, CSharpCodeWriterOptions options) =>
+            ValidateOptionsResult.Success;
     }
 }

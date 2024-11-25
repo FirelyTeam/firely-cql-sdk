@@ -19,7 +19,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = CreateLibraryForExpression("distinct { 'a', 'b', 'c', 'a', 'b', 'c'}");
             var distinct = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Distinct>();
-            var result = Run<IEnumerable<string>?>(distinct)!.ToArray();
+            var result = Run<IEnumerable<string>?>(distinct, library)!.ToArray();
             result.Length.Should().Be(3);
             result.Contains("a").Should().BeTrue();
             result.Contains("b").Should().BeTrue();

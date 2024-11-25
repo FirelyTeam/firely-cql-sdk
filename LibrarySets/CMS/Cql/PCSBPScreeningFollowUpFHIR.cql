@@ -2,10 +2,10 @@ library PCSBPScreeningFollowUpFHIR version '0.2.000'
 
 using QICore version '4.1.1'
 
-include CQMCommon version '2.0.000' called CQMCommon
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include QICoreCommon version '2.0.000' called QICoreCommon
-include SupplementalDataElements version '3.4.000' called SDE
+include CQMCommon version '2.2.000' called CQMCommon
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include QICoreCommon version '2.1.000' called QICoreCommon
+include SupplementalDataElements version '3.5.000' called SDE
 
 codesystem "ActCode": 'http://terminology.hl7.org/CodeSystem/v3-ActCode'
 codesystem "LOINC": 'http://loinc.org'
@@ -16,6 +16,7 @@ valueset "Dietary Recommendations": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.8
 valueset "Encounter to Screen for Blood Pressure": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1920'
 valueset "Finding of Elevated Blood Pressure or Hypertension": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.514'
 valueset "Follow Up Within 4 Weeks": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1578'
+valueset "Follow Up Within 6 Months": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.125'
 valueset "Laboratory Tests for Hypertension": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1482'
 valueset "Lifestyle Recommendation": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1581'
 valueset "Medical Reason": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007'
@@ -29,13 +30,11 @@ valueset "Weight Reduction Recommended": 'http://cts.nlm.nih.gov/fhir/ValueSet/2
 code "Diastolic blood pressure": '8462-4' from "LOINC" display 'Diastolic blood pressure'
 code "12 lead EKG panel": '34534-8' from "LOINC" display 'EKG 12 channel panel'
 code "EKG study": '11524-6' from "LOINC" display 'EKG study'
-code "Follow-up 2-3 months (finding)": '183624006' from "SNOMEDCT" display 'Follow-up 2-3 months (finding)'
-code "Follow-up 4-6 months (finding)": '183625007' from "SNOMEDCT" display 'Follow-up 4-6 months (finding)'
 code "Systolic blood pressure": '8480-6' from "LOINC" display 'Systolic blood pressure'
 code "virtual": 'VR' from "ActCode" display 'virtual'
 
 parameter "Measurement Period" Interval<DateTime>
-  default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)
+  default Interval[@2025-01-01T00:00:00.000Z, @2025-12-31T23:59:59.999Z]
 
 context Patient
 
@@ -52,7 +51,6 @@ define "Denominator Exclusions":
       such that ( Hypertension.isProblemListItem ( )
           or Hypertension.isHealthConcern ( )
       )
-        and Hypertension.isActive ( )
         and Hypertension.prevalenceInterval ( ) starts before or on day of QualifyingEncounter.period
 
 define "Numerator":
@@ -66,9 +64,8 @@ define "Denominator Exceptions":
   "Encounter with Medical Reason for Not Obtaining or Patient Declined Blood Pressure Measurement"
     union "Encounter with Order for Hypertension Follow Up Declined by Patient"
 
-define "Follow up with Rescreen in 2 to 6 Months":
-  ( [ServiceRequest: "Follow-up 2-3 months (finding)"]
-    union [ServiceRequest: "Follow-up 4-6 months (finding)"] ) FollowUp
+define "Follow up with Rescreen Within 6 Months":
+  [ServiceRequest: "Follow Up Within 6 Months"] FollowUp
     where FollowUp.intent ~ 'order'
 
 define "Laboratory Test or ECG for Hypertension":
@@ -138,7 +135,7 @@ define "Second Hypertensive Reading SBP Greater than or Equal to 140 OR DBP Grea
   )
 
 define "Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89 and Interventions":
-  "Follow up with Rescreen in 2 to 6 Months" Rescreen2to6
+  "Follow up with Rescreen Within 6 Months" Rescreen2to6
     with "Laboratory Test or ECG for Hypertension" LabECGIntervention
       such that Rescreen2to6.authoredOn during day of "Measurement Period"
         and LabECGIntervention.authoredOn during day of "Measurement Period"
@@ -153,7 +150,7 @@ define "Qualifying Encounter during Measurement Period":
 
 define "Encounter with Elevated Blood Pressure Reading SBP 120 to 129 AND DBP less than 80 and Interventions":
   ( "Encounter with Elevated Blood Pressure Reading SBP 120 to 129 AND DBP less than 80" ElevatedEncounter
-      with "Follow up with Rescreen in 2 to 6 Months" Twoto6MonthRescreen
+      with "Follow up with Rescreen Within 6 Months" Twoto6MonthRescreen
         such that Twoto6MonthRescreen.authoredOn during day of ElevatedEncounter.period
       with "NonPharmacological Interventions" NonPharmInterventions
         such that NonPharmInterventions.authoredOn during day of ElevatedEncounter.period
@@ -268,42 +265,41 @@ define "Encounter with Medical Reason for Not Obtaining or Patient Declined Bloo
         and NoBPScreen.status = 'cancelled'
 
 define "Encounter with Order for Hypertension Follow Up Declined by Patient":
-  ( "Encounter with Elevated Blood Pressure Reading SBP 120 to 129 AND DBP less than 80" ElevatedBPEncounter
-      with ( [ServiceNotRequested: "Referral to Primary Care or Alternate Provider"]
-        union [ServiceNotRequested: code = "Follow-up 2-3 months (finding)"]
-        union [ServiceNotRequested: code = "Follow-up 4-6 months (finding)"] ) ElevatedBPDeclinedInterventions
-        such that ElevatedBPDeclinedInterventions.reasonRefused in "Patient Declined"
-          and ElevatedBPDeclinedInterventions.authoredOn during day of ElevatedBPEncounter.period
-          and ElevatedBPDeclinedInterventions.status = 'completed'
+  ( ( "Encounter with Elevated Blood Pressure Reading SBP 120 to 129 AND DBP less than 80" ElevatedBPEncounter
+        with ( [ServiceNotRequested: "Referral to Primary Care or Alternate Provider"]
+          union [ServiceNotRequested: "Follow Up Within 6 Months"] ) ElevatedBPDeclinedInterventions
+          such that ElevatedBPDeclinedInterventions.reasonRefused in "Patient Declined"
+            and ElevatedBPDeclinedInterventions.authoredOn during day of ElevatedBPEncounter.period
+            and ElevatedBPDeclinedInterventions.status = 'completed'
+    )
+      union ( "Encounter with Elevated Blood Pressure Reading SBP 120 to 129 AND DBP less than 80" ElevatedBPEncounter
+          with "NonPharmacological Intervention Not Ordered" NotOrdered
+            such that NotOrdered.authoredOn during day of ElevatedBPEncounter.period
+      )
+      union ( "Encounter with First Hypertensive Reading SBP Greater than or Equal to 130 OR DBP Greater than or Equal to 80" FirstHTNEncounter
+          with ( [ServiceNotRequested: "Follow Up Within 4 Weeks"]
+            union [ServiceNotRequested: "Referral to Primary Care or Alternate Provider"] ) FirstHTNDeclinedInterventions
+            such that FirstHTNDeclinedInterventions.reasonRefused in "Patient Declined"
+              and FirstHTNDeclinedInterventions.authoredOn during day of FirstHTNEncounter.period
+              and FirstHTNDeclinedInterventions.status = 'completed'
+      )
+      union ( "Encounter with First Hypertensive Reading SBP Greater than or Equal to 130 OR DBP Greater than or Equal to 80" FirstHTNEncounter
+          with "NonPharmacological Intervention Not Ordered" NoNonPharm
+            such that NoNonPharm.authoredOn during day of FirstHTNEncounter.period
+      )
+      union ( "Encounter with Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89" SecondHTNEncounter
+          with "Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89 Interventions Declined" SecondHTNDeclinedInterventions
+            such that SecondHTNDeclinedInterventions.authoredOn during day of SecondHTNEncounter.period
+      )
+      union ( "Encounter with Second Hypertensive Reading SBP Greater than or Equal to 140 OR DBP Greater than or Equal to 90" SecondHTN140Over90Encounter
+          with "Second Hypertensive Reading SBP Greater than or Equal to 140 OR DBP Greater than or Equal to 90 Interventions Declined" SecondHTN140Over90DeclinedInterventions
+            such that SecondHTN140Over90DeclinedInterventions.authoredOn during day of SecondHTN140Over90Encounter.period
+      )
   )
-    union ( "Encounter with Elevated Blood Pressure Reading SBP 120 to 129 AND DBP less than 80" ElevatedBPEncounter
-        with "NonPharmacological Intervention Not Ordered" NotOrdered
-          such that NotOrdered.authoredOn during day of ElevatedBPEncounter.period
-    )
-    union ( "Encounter with First Hypertensive Reading SBP Greater than or Equal to 130 OR DBP Greater than or Equal to 80" FirstHTNEncounter
-        with ( [ServiceNotRequested: "Follow Up Within 4 Weeks"]
-          union [ServiceNotRequested: "Referral to Primary Care or Alternate Provider"] ) FirstHTNDeclinedInterventions
-          such that FirstHTNDeclinedInterventions.reasonRefused in "Patient Declined"
-            and FirstHTNDeclinedInterventions.authoredOn during day of FirstHTNEncounter.period
-            and FirstHTNDeclinedInterventions.status = 'completed'
-    )
-    union ( "Encounter with First Hypertensive Reading SBP Greater than or Equal to 130 OR DBP Greater than or Equal to 80" FirstHTNEncounter
-        with "NonPharmacological Intervention Not Ordered" NoNonPharm
-          such that NoNonPharm.authoredOn during day of FirstHTNEncounter.period
-    )
-    union ( "Encounter with Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89" SecondHTNEncounter
-        with "Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89 Interventions Declined" SecondHTNDeclinedInterventions
-          such that SecondHTNDeclinedInterventions.authoredOn during day of SecondHTNEncounter.period
-    )
-    union ( "Encounter with Second Hypertensive Reading SBP Greater than or Equal to 140 OR DBP Greater than or Equal to 90" SecondHTN140Over90Encounter
-        with "Second Hypertensive Reading SBP Greater than or Equal to 140 OR DBP Greater than or Equal to 90 Interventions Declined" SecondHTN140Over90DeclinedInterventions
-          such that SecondHTN140Over90DeclinedInterventions.authoredOn during day of SecondHTN140Over90Encounter.period
-    )
 
 define "Second Hypertensive Reading SBP 130 to 139 OR DBP 80 to 89 Interventions Declined":
   ( ( ( [ServiceNotRequested: "Referral to Primary Care or Alternate Provider"]
-        union [ServiceNotRequested: code = "Follow-up 2-3 months (finding)"]
-        union [ServiceNotRequested: code = "Follow-up 4-6 months (finding)"] ) SecondHTNDeclinedReferralAndFollowUp
+        union [ServiceNotRequested: "Follow Up Within 6 Months"] ) SecondHTNDeclinedReferralAndFollowUp
         where SecondHTNDeclinedReferralAndFollowUp.reasonRefused in "Patient Declined"
           and SecondHTNDeclinedReferralAndFollowUp.status = 'completed'
     )

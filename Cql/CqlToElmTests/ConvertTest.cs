@@ -33,7 +33,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = CreateLibraryForExpression("ToDateTime('2014-01-01T12:05:05.955-01:15')");
             var toDateTime = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToDateTime>();
-            var result = Run(toDateTime);
+            var result = Run(toDateTime, library);
             var dt = result.Should().BeOfType<CqlDateTime>().Subject;
             dt.Value.OffsetHour.Should().Be(-1);
             dt.Value.OffsetMinute.Should().Be(-15);
@@ -45,7 +45,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = CreateLibraryForExpression("ToConcept(Code { code: '8480-6' })");
             var toConcept = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ToConcept>();
-            var result = Run<CqlConcept>(toConcept);
+            var result = Run<CqlConcept>(toConcept, library);
         }
 
         [TestMethod]

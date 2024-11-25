@@ -340,10 +340,8 @@ Hl7.Cql.Elm.In.precision.set -> void
 Hl7.Cql.Elm.In.precisionSpecified.get -> bool
 Hl7.Cql.Elm.In.precisionSpecified.set -> void
 Hl7.Cql.Elm.IncludeDef
-Hl7.Cql.Elm.IncludeDef.GetVersionedIdentifier(bool throwError = true) -> Hl7.Cql.Elm.VersionedIdentifier?
 Hl7.Cql.Elm.IncludeDef.IncludeDef() -> void
 Hl7.Cql.Elm.IncludeDef.libraryName.get -> string?
-Hl7.Cql.Elm.IncludeDef.NameAndVersion(bool throwError = true) -> string?
 Hl7.Cql.Elm.IncludedIn
 Hl7.Cql.Elm.IncludedIn.GetPrecision() -> object?
 Hl7.Cql.Elm.IncludedIn.IncludedIn() -> void
@@ -409,9 +407,7 @@ Hl7.Cql.Elm.LessOrEqual.LessOrEqual() -> void
 Hl7.Cql.Elm.LetClause
 Hl7.Cql.Elm.LetClause.LetClause() -> void
 Hl7.Cql.Elm.Library
-Hl7.Cql.Elm.Library.GetVersionedIdentifier(bool throwError = true) -> Hl7.Cql.Elm.VersionedIdentifier?
 Hl7.Cql.Elm.Library.Library() -> void
-Hl7.Cql.Elm.Library.NameAndVersion(bool throwError = true) -> string?
 Hl7.Cql.Elm.Library.SerializeToJson(bool writeIndented = true) -> string!
 Hl7.Cql.Elm.Library.WriteJson(System.IO.Stream! stream, bool writeIndented = true) -> void
 Hl7.Cql.Elm.List
@@ -784,7 +780,6 @@ Hl7.Cql.Elm.Variance.Variance() -> void
 Hl7.Cql.Elm.VersionedIdentifier
 Hl7.Cql.Elm.VersionedIdentifier.CompareTo(Hl7.Cql.Elm.VersionedIdentifier? other) -> int
 Hl7.Cql.Elm.VersionedIdentifier.Equals(Hl7.Cql.Elm.VersionedIdentifier? other) -> bool
-Hl7.Cql.Elm.VersionedIdentifier.NameAndVersion(bool throwError = true) -> string?
 Hl7.Cql.Elm.VersionedIdentifier.VersionedIdentifier() -> void
 Hl7.Cql.Elm.Width
 Hl7.Cql.Elm.Width.Width() -> void
@@ -830,8 +825,7 @@ override Hl7.Cql.Elm.VersionedIdentifier.ToString() -> string?
 static Hl7.Cql.Elm.ExtensionMethods.AddError<T>(this T! node, Hl7.Cql.Elm.CqlToElmError! error) -> T!
 static Hl7.Cql.Elm.ExtensionMethods.AddError<T>(this T! node, string! errorMessage, Hl7.Cql.Elm.ErrorType errorType = Hl7.Cql.Elm.ErrorType.semantic, Hl7.Cql.Elm.ErrorSeverity severity = Hl7.Cql.Elm.ErrorSeverity.error) -> T!
 static Hl7.Cql.Elm.ExtensionMethods.GetErrors(this Hl7.Cql.Elm.Element! root) -> Hl7.Cql.Elm.CqlToElmError![]!
-static Hl7.Cql.Elm.Library.ComparerByNameAndVersion.get -> System.Collections.Generic.IComparer<Hl7.Cql.Elm.Library!>!
-static Hl7.Cql.Elm.Library.EqualityComparerByNameAndVersion.get -> System.Collections.Generic.IEqualityComparer<Hl7.Cql.Elm.Library!>!
+static Hl7.Cql.Elm.Library.EqualityComparerByVersionedIdentifier.get -> System.Collections.Generic.IEqualityComparer<Hl7.Cql.Elm.Library!>!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.DirectoryInfo! elmDirectory, string! lib, string! version, bool validate = true) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.FileInfo! file, bool validate = true) -> Hl7.Cql.Elm.Library!
 static Hl7.Cql.Elm.Library.LoadFromJson(System.IO.Stream! stream, bool validate = true, string? originalFilePath = null) -> Hl7.Cql.Elm.Library!

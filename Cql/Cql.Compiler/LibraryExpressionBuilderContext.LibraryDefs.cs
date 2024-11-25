@@ -27,13 +27,13 @@ partial class LibraryExpressionBuilderContext
     /// If the library was processed within the context of a library set,
     /// then this dictionary will be merged with the library set's dictionary.
     /// </summary>
-    public DefinitionDictionary<LambdaExpression> LibraryDefinitions  => libraryDefinitions;
+    public DefinitionDictionary<LambdaExpression> LibraryDefinitions  => _libraryDefinitions;
 
     private void AddLibraryDefinitionsFromIncludes()
     {
         if (LibrarySetContext != null)
         {
-            foreach (var libraryDependency in LibrarySetContext.LibrarySet.GetLibraryDependencies(LibraryKey))
+            foreach (var libraryDependency in LibrarySetContext.LibrarySet.GetLibraryDependencies(LibraryVersionedIdentifier))
             {
                 AddDefinitions(libraryDependency);
             }
@@ -41,9 +41,9 @@ partial class LibraryExpressionBuilderContext
 
         void AddDefinitions(Library library)
         {
-            string libraryName = library.NameAndVersion()!;
-            if (!HasAliasForNameAndVersion(libraryName))
-                throw new CouldNotResolveAliasFromTheLibraryNameAndVersionError(library).ToException();
+            string libraryName = library.GetVersionedIdentifier()!;
+            if (!HasAliasForLibraryVersionedIdentifier(libraryName))
+                throw new CouldNotResolveAliasFromTheLibraryVersionedIdentifierError(library).ToException();
 
             if (LibrarySetContext!.LibrarySetDefinitions.TryGetDefinitionsForLibrary(
                     libraryName,
@@ -65,7 +65,7 @@ partial class LibraryExpressionBuilderContext
     /// </summary>
     /// <param name="alias">The alias.</param>
     /// <param name="libraryKey">The library key.</param>
-    public void AddAliasForNameAndVersion(string alias, string libraryKey) =>
+    public void AddAliasLibraryVersionedIdentifier(string alias, string libraryKey) =>
         _libraryIdentifiersByAlias.Add(alias, libraryKey);
 
     /// <summary>
@@ -75,17 +75,17 @@ partial class LibraryExpressionBuilderContext
     /// <param name="alias">The alias.</param>
     /// <param name="throwError">Indicates whether to throw an error if the alias is not found.</param>
     /// <returns>The name and version of the library.</returns>
-    public string? GetNameAndVersionFromAlias(string? alias, bool throwError = true)
+    public string? GetLibraryVersionedIdentifierFromAlias(string? alias, bool throwError = true)
     {
         if (alias == null)
-            return LibraryKey;
+            return LibraryVersionedIdentifier;
         if (throwError)
             return _libraryIdentifiersByAlias[alias];
         _libraryIdentifiersByAlias.TryGetValue(alias, out string? libraryKey);
         return libraryKey;
     }
 
-    public bool HasAliasForNameAndVersion(string libraryKey) =>
+    public bool HasAliasForLibraryVersionedIdentifier(string libraryKey) =>
         _libraryIdentifiersByAlias.ContainsValue(libraryKey);
 
     #endregion
@@ -113,7 +113,7 @@ partial class LibraryExpressionBuilderContext
         return codings;
     }
 
-    public LibrarySetExpressionBuilderContext? LibrarySetContext => libsCtx;
+    public LibrarySetExpressionBuilderContext? LibrarySetContext => _libsCtx;
 
     #endregion
 
@@ -148,13 +148,13 @@ partial class LibraryExpressionBuilderContext
 
     #region Url By CodeSystemRef (cross library)
 
-    private readonly ByLibraryNameAndNameDictionary<string> _codeSystemIdsByCodeSystemRefs = new();
+    private readonly VersionedIdentifierDictionary<string> _codeSystemIdsByCodeSystemRefs = new();
 
     private void AddCodeSystemRefsFromIncludes()
     {
         if (LibrarySetContext != null)
         {
-            foreach (var libraryDependency in LibrarySetContext.LibrarySet.GetLibraryDependencies(LibraryKey))
+            foreach (var libraryDependency in LibrarySetContext.LibrarySet.GetLibraryDependencies(LibraryVersionedIdentifier))
             {
                 AddCodeSystemRefs(libraryDependency);
             }
@@ -169,7 +169,7 @@ partial class LibraryExpressionBuilderContext
         {
             foreach (var codeSystemDef in codeSystemDefs)
             {
-                var libraryNameAndName = new LibraryNameAndName(library.NameAndVersion()!, codeSystemDef.name);
+                var libraryNameAndName = new VersionedIdentifier(library.GetVersionedIdentifier()!, codeSystemDef.name);
                 var newValue = codeSystemDef.id;
                 if (!_codeSystemIdsByCodeSystemRefs.TryAdd(libraryNameAndName, newValue))
                 {
@@ -190,15 +190,15 @@ partial class LibraryExpressionBuilderContext
     /// <returns>True if the code system name is found, false otherwise.</returns>
     public bool TryGetCodeSystemName(CodeSystemRef codeSystemRef, [NotNullWhen(true)] out string? url)
     {
-        var libraryName = GetNameAndVersionFromAlias(codeSystemRef.libraryName);
+        var libraryName = GetLibraryVersionedIdentifierFromAlias(codeSystemRef.libraryName);
         return _codeSystemIdsByCodeSystemRefs.TryGetValue(new(libraryName, codeSystemRef.name), out url);
     }
 
     #endregion
 
-    private readonly record struct LibraryNameAndName(string? LibraryName, string Name);
+    private readonly record struct VersionedIdentifier(string? LibraryName, string Name);
 
-    private class ByLibraryNameAndNameDictionary<TValue> : Dictionary<LibraryNameAndName, TValue>
+    private class VersionedIdentifierDictionary<TValue> : Dictionary<VersionedIdentifier, TValue>
     {
     }
 }

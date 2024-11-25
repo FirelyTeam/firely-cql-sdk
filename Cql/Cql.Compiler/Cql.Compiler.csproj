@@ -20,7 +20,7 @@
 		<ProjectReference Include="..\Cql.Operators\Cql.Operators.csproj" />
 		<ProjectReference Include="..\Cql.ValueSets\Cql.ValueSets.csproj" />
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
-		<ProjectReference Include="..\ELM\ELM.csproj" />
+		<ProjectReference Include="..\Elm\Elm.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

@@ -42,9 +42,10 @@ namespace Hl7.Cql.Packaging
                             && typeLibAttribute.Identifier == library
                             && typeLibAttribute.Version == version)
                         {
-                            var instance = Activator.CreateInstance(type, ctx)
+                            var libraryInstance =
+                                type.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null)
                                 ?? throw new InvalidOperationException($"Unable to create an instance of {type.FullName}");
-                            return run(instance);
+                            return run(libraryInstance, ctx);
                         }
                     }
                 }
@@ -70,19 +71,19 @@ namespace Hl7.Cql.Packaging
             return null;
         }
 
-        private static IDictionary<string, object?> run(object instance)
+        private static IDictionary<string, object?> run(object libraryInstance, CqlContext ctx)
         {
-            var type = instance.GetType();
+            var type = libraryInstance.GetType();
             var values = new Dictionary<string, object?>();
             foreach (var method in type.GetMethods())
             {
-                if (method.GetParameters().Length == 0)
+                if (method.GetParameters().Length == 1)
                 {
                     var declaration = method.GetCustomAttribute<CqlDeclarationAttribute>();
                     var valueset = method.GetCustomAttribute<CqlValueSetAttribute>();
                     if (declaration != null && valueset == null)
                     {
-                        var value = method.Invoke(instance, Array.Empty<object?>());
+                        var value = method.Invoke(libraryInstance, [ctx]);
                         values.Add(declaration.Name, value);
                     }
                 }

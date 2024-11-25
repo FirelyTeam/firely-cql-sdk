@@ -7,10 +7,5 @@ Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.CSharpCodeWriterOptions() -> void
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.OutDirectory.get -> System.IO.DirectoryInfo?
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.OutDirectory.set -> void
-Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.TypeFormat.get -> Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat
-Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.TypeFormat.set -> void
-Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat
-Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat.Explicit = 2 -> Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat
-Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat.Var = 1 -> Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterTypeFormat
 static Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.BindConfig(Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions! opt, Microsoft.Extensions.Configuration.IConfiguration! config) -> void
 static Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.BindConfig(Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions! opt, Microsoft.Extensions.Configuration.IConfiguration! config) -> void

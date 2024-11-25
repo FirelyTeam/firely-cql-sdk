@@ -36,6 +36,7 @@
 			<PackagerCLIArgs Condition="'$(ElmDirectory)'!=''">$(PackagerCLIArgs) --elm "$(ElmDirectory)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(CqlDirectory)'!=''">$(PackagerCLIArgs) --cql "$(CqlDirectory)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(CSharpDirectory)'!=''">$(PackagerCLIArgs) --cs "$(CSharpDirectory)"</PackagerCLIArgs>
+			<PackagerCliArgs Condition="'$(DllDirectory)'!=''">$(PackagerCLIArgs) --dll "$(DllDirectory)"</PackagerCliArgs>
 			<PackagerCLIArgs Condition="'$(ResourcesDirectory)'!=''">$(PackagerCLIArgs) --fhir "$(ResourcesDirectory)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(CSharpTypeFormat)'!=''">$(PackagerCLIArgs) --cs-typeformat "$(CSharpTypeFormat)"</PackagerCLIArgs>
 			<PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs)</PackagerCLICommand>

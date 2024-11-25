@@ -18,6 +18,8 @@ namespace Hl7.Cql.Conversion
     /// </summary>
     internal class UnitConverter : IUnitConverter
     {
+        public static IUnitConverter Default { get; } = new UnitConverter();
+
         private readonly object SyncRoot = new();
         private IDictionary<string, IDictionary<string, Func<decimal, decimal>>> Conversions { get; } = new Dictionary<string, IDictionary<string, Func<decimal, decimal>>>();
         private decimal Self(decimal d) => d;

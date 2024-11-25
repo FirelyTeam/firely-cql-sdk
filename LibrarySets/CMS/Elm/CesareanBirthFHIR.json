@@ -28,32 +28,32 @@
             "locator" : "5:1-5:52",
             "localIdentifier" : "CQMCommon",
             "path" : "CQMCommon",
-            "version" : "2.0.000"
+            "version" : "2.2.000"
          }, {
             "locator" : "6:1-6:56",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.3.000"
+            "version" : "4.4.000"
          }, {
             "locator" : "7:1-7:61",
             "localIdentifier" : "SDE",
             "path" : "SupplementalDataElements",
-            "version" : "3.4.000"
+            "version" : "3.5.000"
          }, {
             "locator" : "8:1-8:55",
             "localIdentifier" : "PCMaternal",
             "path" : "PCMaternal",
-            "version" : "5.16.000"
+            "version" : "5.19.000"
          }, {
             "locator" : "9:1-9:58",
             "localIdentifier" : "QICoreCommon",
             "path" : "QICoreCommon",
-            "version" : "2.0.000"
+            "version" : "2.1.000"
          } ]
       },
       "parameters" : {
          "def" : [ {
-            "locator" : "28:1-29:66",
+            "locator" : "28:1-29:72",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
             "resultTypeSpecifier" : {
@@ -64,9 +64,9 @@
                }
             },
             "default" : {
-               "locator" : "29:11-29:66",
+               "locator" : "29:11-29:72",
                "lowClosed" : true,
-               "highClosed" : false,
+               "highClosed" : true,
                "type" : "Interval",
                "resultTypeSpecifier" : {
                   "type" : "IntervalTypeSpecifier",
@@ -76,7 +76,7 @@
                   }
                },
                "low" : {
-                  "locator" : "29:20-29:41",
+                  "locator" : "29:20-29:44",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
                   "year" : {
@@ -113,45 +113,55 @@
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
                      "type" : "Literal"
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal"
                   }
                },
                "high" : {
-                  "locator" : "29:44-29:65",
+                  "locator" : "29:47-29:71",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
                   "year" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2026",
+                     "value" : "2025",
                      "type" : "Literal"
                   },
                   "month" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
+                     "value" : "12",
                      "type" : "Literal"
                   },
                   "day" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
+                     "value" : "31",
                      "type" : "Literal"
                   },
                   "hour" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "23",
                      "type" : "Literal"
                   },
                   "minute" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "59",
                      "type" : "Literal"
                   },
                   "second" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "59",
                      "type" : "Literal"
                   },
                   "millisecond" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "999",
+                     "type" : "Literal"
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
                      "type" : "Literal"
                   }
                }
@@ -222,9 +232,9 @@
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1049",
             "accessLevel" : "Public"
          }, {
-            "locator" : "19:1-19:136",
+            "locator" : "19:1-19:128",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-            "name" : "Placenta Previa Accreta Increta Percreta or Vasa Previa",
+            "name" : "Placenta Accreta Spectrum Previa or Vasa Previa",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.37",
             "accessLevel" : "Public"
          }, {
@@ -7233,7 +7243,7 @@
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "97:15-97:98",
+                           "locator" : "97:15-97:90",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "InValueSet",
                            "signature" : [ {
@@ -7253,9 +7263,9 @@
                               } ]
                            },
                            "valueset" : {
-                              "locator" : "97:42-97:98",
+                              "locator" : "97:42-97:90",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                              "name" : "Placenta Previa Accreta Increta Percreta or Vasa Previa",
+                              "name" : "Placenta Accreta Spectrum Previa or Vasa Previa",
                               "preserve" : true
                            }
                         }, {
@@ -7835,7 +7845,7 @@
             }
          }, {
             "locator" : "85:1-86:50",
-            "name" : "Variable Calculated Gestational Age",
+            "name" : "SDE Variable Calculated Gestational Age",
             "context" : "Patient",
             "accessLevel" : "Public",
             "resultTypeSpecifier" : {

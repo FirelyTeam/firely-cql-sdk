@@ -1,0 +1,321 @@
+{
+   "library" : {
+      "annotation" : [ {
+         "translatorVersion" : "3.1.0",
+         "translatorOptions" : "EnableLocators,EnableResultTypes",
+         "type" : "CqlToElmInfo"
+      } ],
+      "identifier" : {
+         "id" : "ValueSetExprExample",
+         "version" : "1.0.0"
+      },
+      "schemaIdentifier" : {
+         "id" : "urn:hl7-org:elm",
+         "version" : "r1"
+      },
+      "usings" : {
+         "def" : [ {
+            "localIdentifier" : "System",
+            "uri" : "urn:hl7-org:elm-types:r1"
+         }, {
+            "locator" : "3:1-3:26",
+            "localIdentifier" : "FHIR",
+            "uri" : "http://hl7.org/fhir",
+            "version" : "4.0.1"
+         } ]
+      },
+      "parameters" : {
+         "def" : [ {
+            "locator" : "10:1-10:48",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "name" : "ChosenSubCategory",
+            "accessLevel" : "Public",
+            "default" : {
+               "locator" : "10:46-10:48",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+               "valueType" : "{urn:hl7-org:elm-types:r1}String",
+               "value" : "1",
+               "type" : "Literal"
+            },
+            "parameterTypeSpecifier" : {
+               "locator" : "10:31-10:36",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+               "name" : "{urn:hl7-org:elm-types:r1}String",
+               "type" : "NamedTypeSpecifier"
+            }
+         }, {
+            "locator" : "12:1-15:1",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+            "name" : "ChosenCode",
+            "accessLevel" : "Public",
+            "default" : {
+               "locator" : "12:37-15:1",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+               "classType" : "{urn:hl7-org:elm-types:r1}Code",
+               "type" : "Instance",
+               "element" : [ {
+                  "name" : "code",
+                  "value" : {
+                     "locator" : "13:11-13:17",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "A-1-A",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "name" : "system",
+                  "value" : {
+                     "locator" : "14:13-14:44",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "http://fire.ly/CodeSystem/Test",
+                     "type" : "Literal"
+                  }
+               } ]
+            },
+            "parameterTypeSpecifier" : {
+               "locator" : "12:24-12:27",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+               "name" : "{urn:hl7-org:elm-types:r1}Code",
+               "type" : "NamedTypeSpecifier"
+            }
+         } ]
+      },
+      "valueSets" : {
+         "def" : [ {
+            "locator" : "5:1-5:63",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "ValueSet-A-1",
+            "id" : "http://fire.ly/ValueSet/ValueSet-A-1",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "6:1-6:63",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "ValueSet-A-2",
+            "id" : "http://fire.ly/ValueSet/ValueSet-A-2",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "7:1-7:63",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "ValueSet-B-1",
+            "id" : "http://fire.ly/ValueSet/ValueSet-B-1",
+            "accessLevel" : "Public"
+         }, {
+            "locator" : "8:1-8:63",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "ValueSet-B-2",
+            "id" : "http://fire.ly/ValueSet/ValueSet-B-2",
+            "accessLevel" : "Public"
+         } ]
+      },
+      "statements" : {
+         "def" : [ {
+            "locator" : "17:1-22:3",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "ValueSetA",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "18:5-22:3",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+               "type" : "Case",
+               "comparand" : {
+                  "locator" : "18:10-18:28",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "name" : "ChosenSubCategory",
+                  "type" : "ParameterRef"
+               },
+               "caseItem" : [ {
+                  "locator" : "19:7-19:34",
+                  "when" : {
+                     "locator" : "19:12-19:14",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "then" : {
+                     "locator" : "19:21-19:34",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                     "name" : "ValueSet-A-1",
+                     "preserve" : true,
+                     "type" : "ValueSetRef"
+                  }
+               }, {
+                  "locator" : "20:7-20:34",
+                  "when" : {
+                     "locator" : "20:12-20:14",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "2",
+                     "type" : "Literal"
+                  },
+                  "then" : {
+                     "locator" : "20:21-20:34",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                     "name" : "ValueSet-A-2",
+                     "preserve" : true,
+                     "type" : "ValueSetRef"
+                  }
+               } ],
+               "else" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                  "type" : "As",
+                  "operand" : {
+                     "locator" : "21:10-21:13",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "Null"
+                  }
+               }
+            }
+         }, {
+            "locator" : "24:1-29:3",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+            "name" : "ValueSetB",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "25:5-29:3",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+               "type" : "Case",
+               "comparand" : {
+                  "locator" : "25:10-25:28",
+                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                  "name" : "ChosenSubCategory",
+                  "type" : "ParameterRef"
+               },
+               "caseItem" : [ {
+                  "locator" : "26:9-26:36",
+                  "when" : {
+                     "locator" : "26:14-26:16",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "1",
+                     "type" : "Literal"
+                  },
+                  "then" : {
+                     "locator" : "26:23-26:36",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                     "name" : "ValueSet-B-1",
+                     "preserve" : true,
+                     "type" : "ValueSetRef"
+                  }
+               }, {
+                  "locator" : "27:9-27:36",
+                  "when" : {
+                     "locator" : "27:14-27:16",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "2",
+                     "type" : "Literal"
+                  },
+                  "then" : {
+                     "locator" : "27:23-27:36",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                     "name" : "ValueSet-B-2",
+                     "preserve" : true,
+                     "type" : "ValueSetRef"
+                  }
+               } ],
+               "else" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                  "type" : "As",
+                  "operand" : {
+                     "locator" : "28:10-28:13",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "Null"
+                  }
+               }
+            }
+         }, {
+            "locator" : "31:1-36:3",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+            "name" : "Result",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "32:5-36:3",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+               "type" : "Case",
+               "caseItem" : [ {
+                  "locator" : "33:9-33:49",
+                  "when" : {
+                     "locator" : "33:14-33:40",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "InValueSet",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Code",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "code" : {
+                        "locator" : "33:14-33:25",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                        "name" : "ChosenCode",
+                        "type" : "ParameterRef"
+                     },
+                     "valuesetExpression" : {
+                        "locator" : "33:30-33:40",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                        "name" : "ValueSetA",
+                        "type" : "ExpressionRef"
+                     }
+                  },
+                  "then" : {
+                     "locator" : "33:47-33:49",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "a",
+                     "type" : "Literal"
+                  }
+               }, {
+                  "locator" : "34:9-34:49",
+                  "when" : {
+                     "locator" : "34:14-34:40",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "InValueSet",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Code",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "code" : {
+                        "locator" : "34:14-34:25",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                        "name" : "ChosenCode",
+                        "type" : "ParameterRef"
+                     },
+                     "valuesetExpression" : {
+                        "locator" : "34:30-34:40",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                        "name" : "ValueSetB",
+                        "type" : "ExpressionRef"
+                     }
+                  },
+                  "then" : {
+                     "locator" : "34:47-34:49",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                     "value" : "b",
+                     "type" : "Literal"
+                  }
+               } ],
+               "else" : {
+                  "asType" : "{urn:hl7-org:elm-types:r1}String",
+                  "type" : "As",
+                  "operand" : {
+                     "locator" : "35:10-35:13",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Any",
+                     "type" : "Null"
+                  }
+               }
+            }
+         } ]
+      }
+   }
+}
+

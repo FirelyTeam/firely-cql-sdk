@@ -148,7 +148,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var @as = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
             var lambdas = LibraryExpressionBuilder.ProcessLibrary(lib);
             var delegates = lambdas.CompileAll();
-            var dg = delegates[lib.NameAndVersion(), "f", [typeof(Hl7.Fhir.Model.Id)]];
+            var dg = delegates[lib.GetVersionedIdentifier(), "f", [typeof(Hl7.Fhir.Model.Id)]];
             var ctx = FhirCqlContext.ForBundle();
             var result = dg.DynamicInvoke([ctx, new Hl7.Fhir.Model.Id("id")]);
             var fs = result.Should().BeOfType<Hl7.Fhir.Model.FhirString>().Subject;

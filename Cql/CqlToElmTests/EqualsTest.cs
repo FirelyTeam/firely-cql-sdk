@@ -1595,7 +1595,7 @@ namespace Hl7.Cql.CqlToElm.Test
             equal.operand.Should().HaveCount(2);
             equal.operand[0].Should().HaveType(SystemTypes.DateTimeType.ToListType());
             equal.operand[1].Should().HaveType(SystemTypes.DateTimeType.ToListType());
-            var result = Run<bool?>(equal);
+            var result = Run<bool?>(equal, lib);
             Assert.IsTrue(result);
 
         }
