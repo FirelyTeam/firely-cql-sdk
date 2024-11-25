@@ -15,8 +15,7 @@ namespace Hl7.Cql.Packaging.PostProcessors;
 
 internal class WriteToFileFhirResourcePostProcessor(
     IOptions<FhirResourceWriterOptions> fhirResourceWriterOptions,
-    ILogger<WriteToFileFhirResourcePostProcessor> logger
-    )
+    ILogger<WriteToFileFhirResourcePostProcessor> logger)
     : FhirResourcePostProcessor
 {
     private static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector).Pretty();
@@ -26,7 +25,8 @@ internal class WriteToFileFhirResourcePostProcessor(
 
     public override void ProcessResource(Resource resource)
     {
-        var fileName = $"{Path.Combine(_fhirResourceWriterOptions.OutDirectory!.FullName, $"{resource.Id}")}.{resource.GetType().Name.ToLowerInvariant()}.json";
+        var resourceType = resource.GetType().Name; // e.g. Library or Measure
+        var fileName = $"{Path.Combine(_fhirResourceWriterOptions.OutDirectory!.FullName, $"{resourceType}-{resource.Id}")}{(resource.HasVersionId ? $"-{resource.VersionId}" : "")}.json";
         var file = new FileInfo(fileName);
         _logger.LogInformation("Writing FHIR Resource file: '{file}'", file.FullName);
 

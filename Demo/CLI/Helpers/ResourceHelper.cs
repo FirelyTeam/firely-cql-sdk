@@ -61,31 +61,17 @@ internal class ResourceHelper
         return vsd;
     }
 
-    public static AssemblyLoadContext LoadResources(
+    public static AssemblyLoadContext LoadLibraryResources(
         DirectoryInfo dir,
         string lib,
         string version)
     {
-        var libFile = new FileInfo(Path.Combine(dir.FullName, $"{lib}-{version}.json"));
+        var libFile = new FileInfo(Path.Combine(dir.FullName, $"Library-{lib}-{version}.json"));
         using var fs = libFile.OpenRead();
         var library = fs.ParseFhir<Library>();
-        //var dependencies = library.GetDependencies(dir);
-
         var deps = library.GetDependenciesAndSelf(dir);
-
-        //var allLibs = dependencies.AllLibraries();
         var asmContext = new AssemblyLoadContext($"{lib}-{version}");
-        //allLibs.LoadAssemblies(asmContext);
         deps.LoadAssemblies(asmContext);
-
-        var tupleTypes = new FileInfo(Path.Combine(dir.FullName, "TupleTypes-Binary.json"));
-        using var tupleFs = tupleTypes.OpenRead();
-        var binaries = new[]
-        {
-            tupleFs.ParseFhir<Binary>()
-        };     
-
-        binaries.LoadAssemblies(asmContext);
         return asmContext;
     }
 
@@ -131,7 +117,7 @@ internal class ResourceHelper
             var cqltype = parameter.Value.GetType();
             var typeEntry = crosswalk.TypeEntryFor(cqltype);
             var converted = ConvertParameterToCqlModel(parameter, typeEntry);
-            parametersConverted.Add(parameter.Name, converted!);         
+            parametersConverted.Add(parameter.Name, converted!);
         }
 
         parametersConverted.DumpConsole("Input Parameters");
