@@ -147,18 +147,24 @@ public readonly record struct ResourceFileName : IParsable<ResourceFileName>
         IFormatProvider? provider,
         out ResourceFileName result)
     {
-        var parts = s?.Split('-', 4, StringSplitOptions.TrimEntries);
-        if (parts?.Length is 2 or 3)
+        if (s is not null)
         {
-            string type = parts[0];
-            string identifier = parts[1];
-            string? version = parts.ElementAtOrDefault(2);
-            if (ValidateType(type)
-                && ValidateIdentifier(identifier)
-                && ValidateVersion(version))
+            if (s.EndsWith(".json", StringComparison.OrdinalIgnoreCase))
+                s = s[..^5]; // Remove the extension
+
+            var parts = s.Split('-', 4, StringSplitOptions.TrimEntries);
+            if (parts?.Length is 2 or 3)
             {
-                result = new ResourceFileName(type, identifier, version);
-                return true;
+                string type = parts[0];
+                string identifier = parts[1];
+                string? version = parts.ElementAtOrDefault(2);
+                if (ValidateType(type)
+                    && ValidateIdentifier(identifier)
+                    && ValidateVersion(version))
+                {
+                    result = new ResourceFileName(type, identifier, version);
+                    return true;
+                }
             }
         }
 
@@ -185,7 +191,7 @@ file static class Arg
 
     public static ArgValidator<string?> ShouldNotContain(params char[] chars) =>
         FromPredicateAndFailureMessage<string?>(
-            val => val == null || val.IndexOfAny(chars) == 0 /* !val.Contains('-')*/,
+            val => val == null || val.IndexOfAny(chars) < 0,
             argName => $"'{argName}' should not contain the character(s): {string.Join(", ", chars.Select(c => $"'{c}'"))}.");
 
     private delegate FormattableString FailureMessageBuilder(string argName);
