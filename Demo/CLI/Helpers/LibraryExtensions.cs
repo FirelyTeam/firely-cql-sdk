@@ -13,6 +13,7 @@ using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using System.Reflection;
 using System.Runtime.Loader;
+using Hl7.Cql.Packaging;
 using Hl7.Fhir.Utility;
 
 namespace CLI.Helpers;
@@ -49,25 +50,25 @@ internal static class LibraryExtensions
             var arr = relatedArtifact.Resource.Split('|', 2);
             string name = arr[0];
             const string LibrarySplit = "Library/";
-            switch (name.LastIndexOf(LibrarySplit))
+            switch (name.LastIndexOf(LibrarySplit, StringComparison.Ordinal))
             {
                 case -1:
                     return false;
                 default:
-                    name = name.Substring(name.LastIndexOf(LibrarySplit) + LibrarySplit.Length);
+                    name = name[(name.LastIndexOf(LibrarySplit, StringComparison.Ordinal) + LibrarySplit.Length)..];
                     break;
             }
 
             for (int i = 2; i >= 1; i--)
             {
-                var resource = i switch
+                var resourceFileName = i switch
                 {
-                    2 => $"{name}-{arr[1]}",
-                    1 => name,
+                    2 => ResourceFileName.Create("Library", name, arr[1]),
+                    1 => ResourceFileName.Create("Library", name),
                     _ => throw new UnreachableException()
                 };
 
-                var relatedPath = new FileInfo(Path.Combine(directory.FullName, $"Library-{resource}.json"));
+                var relatedPath = new FileInfo(Path.Combine(directory.FullName, resourceFileName.FileName));
                 if (relatedPath.Exists)
                 {
                     using var fs = relatedPath.OpenRead();
