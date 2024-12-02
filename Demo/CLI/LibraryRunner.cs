@@ -40,7 +40,7 @@ namespace CLI
             var libVersionedIdentifier = $"{_opts.Library}";
             Console.WriteLine($"Loading resources for Library: {libVersionedIdentifier}");
 
-            var resources = ResourceHelper.LoadResources(new(_opts.ResourcesDirectory), _opts.LibraryName, _opts.LibraryVersion);
+            var resources = ResourceHelper.LoadLibraryResources(new(_opts.ResourcesDirectory), _opts.LibraryName, _opts.LibraryVersion);
             var assembly = resources.Assemblies.FirstOrDefault(a =>
             {
                 var asmName = a.GetName().Name;
