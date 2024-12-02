@@ -38,7 +38,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, includedIn.operand.Length);
                 Assert.IsInstanceOfType(includedIn.operand[0], typeof(Start));
                 Assert.IsInstanceOfType(includedIn.operand[1], typeof(Interval));
-                var result = Run(includedIn);
+                var result = Run(includedIn, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(false, result);
             }
@@ -70,9 +70,9 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TestInNullBoundaries()
         {
-            var lib = CreateLibraryForExpression("5 in Interval[null, null]");
+            var lib = CreateLibraryForExpression("5 in Interval[null as Integer, null as Integer]");
             var @in = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
-            var result = Run<bool?>(@in);
+            var result = Run<bool?>(@in, lib);
             Assert.IsFalse(result);
         }
 

@@ -2,12 +2,12 @@ library KidneyHealthEvaluationFHIR version '0.1.000'
 
 using QICore version '4.1.1'
 
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include SupplementalDataElements version '3.4.000' called SDE
-include CQMCommon version '2.0.000' called CQMCommon
-include Hospice version '6.9.000' called Hospice
-include PalliativeCare version '1.9.000' called PalliativeCare
-include QICoreCommon version '2.0.000' called QICoreCommon
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include SupplementalDataElements version '3.5.000' called SDE
+include CQMCommon version '2.2.000' called CQMCommon
+include Hospice version '6.12.000' called Hospice
+include PalliativeCare version '1.11.000' called PalliativeCare
+include QICoreCommon version '2.1.000' called QICoreCommon
 
 codesystem "SNOMEDCT": 'http://snomed.info/sct'
 codesystem "ActCode": 'http://terminology.hl7.org/CodeSystem/v3-ActCode'
@@ -36,7 +36,7 @@ code "AMB": 'AMB' from "ActCode" display 'Ambulatory'
 code "active": 'active' from "ConditionClinicalStatusCodes"
 
 parameter "Measurement Period" Interval<DateTime>
-default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)  
+  default Interval[@2025-01-01T00:00:00.000Z, @2025-12-31T23:59:59.999Z]
 
 context Patient
 
@@ -58,12 +58,12 @@ define "Numerator":
 
 define "Has Kidney Panel Performed During Measurement Period":
   exists ( ["Observation": "Estimated Glomerular Filtration Rate"] eGFRTest
-      where QICoreCommon."ToInterval" ( eGFRTest.effective ) during "Measurement Period"
+      where eGFRTest.effective.toInterval ( ) during day of "Measurement Period"
         and eGFRTest.value is not null
         and eGFRTest.status in { 'final', 'amended', 'corrected' }
   )
     and exists ( ["Observation": "Urine Albumin Creatinine Ratio"] uACRTest
-        where QICoreCommon."ToInterval" ( uACRTest.effective ) during "Measurement Period"
+        where uACRTest.effective.toInterval ( ) during day of "Measurement Period"
           and uACRTest.value is not null
           and uACRTest.status in { 'final', 'amended', 'corrected' }
     )
@@ -82,14 +82,14 @@ define "Has Outpatient Visit During Measurement Period":
 
 define "Has Active Diabetes Overlaps Measurement Period":
   exists ( ["Condition": "Diabetes"] Diabetes
-      where QICoreCommon."ToPrevalenceInterval" ( Diabetes ) overlaps "Measurement Period"
+      where Diabetes.prevalenceInterval ( ) overlaps day of "Measurement Period"
         and Diabetes.clinicalStatus ~ "active"
   )
 
 define "Has CKD Stage 5 or ESRD Diagnosis Overlaps Measurement Period":
   ( ["Condition": "Chronic Kidney Disease, Stage 5"]
     union ["Condition": "End Stage Renal Disease"] ) CKDOrESRD
-    where QICoreCommon."ToPrevalenceInterval" ( CKDOrESRD ) overlaps "Measurement Period"
+    where CKDOrESRD.prevalenceInterval ( ) overlaps day of "Measurement Period"
       and CKDOrESRD.clinicalStatus ~ "active"
 
 define "SDE Ethnicity":

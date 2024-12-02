@@ -2,21 +2,20 @@ library PrimaryCariesPreventionasOfferedbyDentistsFHIR version '0.0.002'
 
 using QICore version '4.1.1'
 
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include SupplementalDataElements version '3.4.000' called SDE
-include QICoreCommon version '2.0.000' called QICoreCommon
-include Hospice version '6.9.000' called Hospice
-include Status version '1.6.000' called Status
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include SupplementalDataElements version '3.5.000' called SDE
+include QICoreCommon version '2.1.000' called QICoreCommon
+include Hospice version '6.12.000' called Hospice
+include Status version '1.8.000' called Status
 
 valueset "Clinical Oral Evaluation": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003'
 valueset "Discharged to Health Care Facility for Hospice Care": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207'
 valueset "Discharged to Home for Hosice Care": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209'
 valueset "Encounter Inpatient": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307'
 valueset "Fluoride Varnish Application for Children": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002'
-valueset "Hospice care ambulatory": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.15'
 
 parameter "Measurement Period" Interval<DateTime>
-  default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)
+  default Interval[@2025-01-01T00:00:00.000Z, @2025-12-31T23:59:59.999Z]
 
 context Patient
 

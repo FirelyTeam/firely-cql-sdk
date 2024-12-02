@@ -28,32 +28,32 @@
             "locator" : "5:1-5:56",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.3.000"
+            "version" : "4.4.000"
          }, {
-            "locator" : "6:1-6:48",
+            "locator" : "6:1-6:49",
             "localIdentifier" : "Hospice",
             "path" : "Hospice",
-            "version" : "6.9.000"
+            "version" : "6.12.000"
          }, {
-            "locator" : "7:1-7:62",
+            "locator" : "7:1-7:63",
             "localIdentifier" : "PalliativeCare",
             "path" : "PalliativeCare",
-            "version" : "1.9.000"
+            "version" : "1.11.000"
          }, {
             "locator" : "8:1-8:58",
             "localIdentifier" : "QICoreCommon",
             "path" : "QICoreCommon",
-            "version" : "2.0.000"
+            "version" : "2.1.000"
          }, {
             "locator" : "9:1-9:61",
             "localIdentifier" : "SDE",
             "path" : "SupplementalDataElements",
-            "version" : "3.4.000"
+            "version" : "3.5.000"
          } ]
       },
       "parameters" : {
          "def" : [ {
-            "locator" : "33:1-34:66",
+            "locator" : "33:1-34:72",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
             "resultTypeSpecifier" : {
@@ -64,9 +64,9 @@
                }
             },
             "default" : {
-               "locator" : "34:11-34:66",
+               "locator" : "34:11-34:72",
                "lowClosed" : true,
-               "highClosed" : false,
+               "highClosed" : true,
                "type" : "Interval",
                "resultTypeSpecifier" : {
                   "type" : "IntervalTypeSpecifier",
@@ -76,7 +76,7 @@
                   }
                },
                "low" : {
-                  "locator" : "34:20-34:41",
+                  "locator" : "34:20-34:44",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
                   "year" : {
@@ -113,45 +113,55 @@
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
                      "type" : "Literal"
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal"
                   }
                },
                "high" : {
-                  "locator" : "34:44-34:65",
+                  "locator" : "34:47-34:71",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
                   "year" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2026",
+                     "value" : "2025",
                      "type" : "Literal"
                   },
                   "month" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
+                     "value" : "12",
                      "type" : "Literal"
                   },
                   "day" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
+                     "value" : "31",
                      "type" : "Literal"
                   },
                   "hour" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "23",
                      "type" : "Literal"
                   },
                   "minute" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "59",
                      "type" : "Literal"
                   },
                   "second" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "59",
                      "type" : "Literal"
                   },
                   "millisecond" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "999",
+                     "type" : "Literal"
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
                      "type" : "Literal"
                   }
                }
@@ -684,7 +694,7 @@
             }
          }, {
             "locator" : "172:1-176:90",
-            "name" : "Pregnancy",
+            "name" : "Is Pregnant during Day of Measurement Period",
             "context" : "Patient",
             "accessLevel" : "Public",
             "resultTypeSpecifier" : {
@@ -864,13 +874,13 @@
                } ]
             }
          }, {
-            "locator" : "45:1-48:25",
+            "locator" : "45:1-48:60",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Denominator Exclusions",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "46:3-48:25",
+               "locator" : "46:3-48:60",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "signature" : [ {
@@ -905,7 +915,7 @@
                      "type" : "ExpressionRef"
                   } ]
                }, {
-                  "locator" : "48:8-48:25",
+                  "locator" : "48:8-48:60",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Exists",
                   "signature" : [ {
@@ -916,8 +926,8 @@
                      }
                   } ],
                   "operand" : {
-                     "locator" : "48:15-48:25",
-                     "name" : "Pregnancy",
+                     "locator" : "48:15-48:60",
+                     "name" : "Is Pregnant during Day of Measurement Period",
                      "type" : "ExpressionRef",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -1357,7 +1367,7 @@
                }
             }
          }, {
-            "locator" : "89:1-101:3",
+            "locator" : "90:1-102:3",
             "name" : "High BMI Interventions Ordered",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1375,7 +1385,7 @@
                }
             },
             "expression" : {
-               "locator" : "90:3-101:3",
+               "locator" : "91:3-102:3",
                "type" : "Query",
                "resultTypeSpecifier" : {
                   "type" : "ListTypeSpecifier",
@@ -1391,7 +1401,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "90:5-92:94",
+                  "locator" : "91:5-93:94",
                   "alias" : "HighInterventionsOrdered",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -1407,7 +1417,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "90:5-92:69",
+                     "locator" : "91:5-93:69",
                      "type" : "Union",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -1450,7 +1460,7 @@
                      "operand" : [ {
                         "type" : "As",
                         "operand" : {
-                           "locator" : "90:7-91:75",
+                           "locator" : "91:7-92:75",
                            "type" : "Union",
                            "resultTypeSpecifier" : {
                               "type" : "ListTypeSpecifier",
@@ -1473,7 +1483,7 @@
                               }
                            } ],
                            "operand" : [ {
-                              "locator" : "90:7-90:56",
+                              "locator" : "91:7-91:56",
                               "dataType" : "{http://hl7.org/fhir}ServiceRequest",
                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest",
                               "codeProperty" : "code",
@@ -1487,14 +1497,14 @@
                                  }
                               },
                               "codes" : {
-                                 "locator" : "90:24-90:55",
+                                 "locator" : "91:24-91:55",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                  "name" : "Follow Up for Above Normal BMI",
                                  "preserve" : true,
                                  "type" : "ValueSetRef"
                               }
                            }, {
-                              "locator" : "91:13-91:75",
+                              "locator" : "92:13-92:75",
                               "dataType" : "{http://hl7.org/fhir}ServiceRequest",
                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest",
                               "codeProperty" : "code",
@@ -1508,7 +1518,7 @@
                                  }
                               },
                               "codes" : {
-                                 "locator" : "91:30-91:74",
+                                 "locator" : "92:30-92:74",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                  "name" : "Referrals Where Weight Assessment May Occur",
                                  "preserve" : true,
@@ -1532,7 +1542,7 @@
                      }, {
                         "type" : "As",
                         "operand" : {
-                           "locator" : "92:13-92:67",
+                           "locator" : "93:13-93:67",
                            "type" : "Union",
                            "resultTypeSpecifier" : {
                               "type" : "ListTypeSpecifier",
@@ -1561,14 +1571,14 @@
                               "codeComparator" : "in",
                               "type" : "Retrieve",
                               "codes" : {
-                                 "locator" : "92:33-92:66",
+                                 "locator" : "93:33-93:66",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                  "name" : "Medications for Above Normal BMI",
                                  "preserve" : true,
                                  "type" : "ValueSetRef"
                               }
                            }, {
-                              "locator" : "92:13-92:67",
+                              "locator" : "93:13-93:67",
                               "dataType" : "{http://hl7.org/fhir}MedicationRequest",
                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
                               "codeProperty" : "medication",
@@ -1582,7 +1592,7 @@
                                  }
                               },
                               "codes" : {
-                                 "locator" : "92:33-92:66",
+                                 "locator" : "93:33-93:66",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                  "name" : "Medications for Above Normal BMI",
                                  "preserve" : true,
@@ -1608,7 +1618,7 @@
                } ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "93:7-100:9",
+                  "locator" : "94:7-101:9",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
                   "signature" : [ {
@@ -1619,7 +1629,7 @@
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : [ {
-                     "locator" : "93:13-93:72",
+                     "locator" : "94:13-94:72",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "AnyInValueSet",
                      "signature" : [ {
@@ -1630,7 +1640,7 @@
                         }
                      } ],
                      "codes" : {
-                        "locator" : "93:13-93:47",
+                        "locator" : "94:13-94:47",
                         "type" : "Query",
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
@@ -1661,13 +1671,13 @@
                         }
                      },
                      "valueset" : {
-                        "locator" : "93:52-93:72",
+                        "locator" : "94:52-94:72",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                         "name" : "Overweight or Obese",
                         "preserve" : true
                      }
                   }, {
-                     "locator" : "94:12-100:9",
+                     "locator" : "95:12-101:9",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
                      "signature" : [ {
@@ -1678,7 +1688,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "94:21-99:119",
+                        "locator" : "95:21-100:119",
                         "type" : "Query",
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
@@ -1688,7 +1698,7 @@
                            }
                         },
                         "source" : [ {
-                           "locator" : "94:21-94:70",
+                           "locator" : "95:21-95:70",
                            "alias" : "OverweightObese",
                            "resultTypeSpecifier" : {
                               "type" : "ListTypeSpecifier",
@@ -1698,7 +1708,7 @@
                               }
                            },
                            "expression" : {
-                              "locator" : "94:21-94:54",
+                              "locator" : "95:21-95:54",
                               "dataType" : "{http://hl7.org/fhir}Condition",
                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition",
                               "codeProperty" : "code",
@@ -1712,7 +1722,7 @@
                                  }
                               },
                               "codes" : {
-                                 "locator" : "94:33-94:53",
+                                 "locator" : "95:33-95:53",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                  "name" : "Overweight or Obese",
                                  "preserve" : true,
@@ -1722,7 +1732,7 @@
                         } ],
                         "relationship" : [ ],
                         "where" : {
-                           "locator" : "95:13-99:119",
+                           "locator" : "96:13-100:119",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "And",
                            "signature" : [ {
@@ -1733,7 +1743,7 @@
                               "type" : "NamedTypeSpecifier"
                            } ],
                            "operand" : [ {
-                              "locator" : "95:19-98:46",
+                              "locator" : "96:19-99:46",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "And",
                               "signature" : [ {
@@ -1744,7 +1754,7 @@
                                  "type" : "NamedTypeSpecifier"
                               } ],
                               "operand" : [ {
-                                 "locator" : "95:19-97:13",
+                                 "locator" : "96:19-98:13",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "Or",
                                  "signature" : [ {
@@ -1755,7 +1765,7 @@
                                     "type" : "NamedTypeSpecifier"
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "95:21-95:57",
+                                    "locator" : "96:21-96:57",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "name" : "isProblemListItem",
                                     "libraryName" : "QICoreCommon",
@@ -1765,13 +1775,13 @@
                                        "type" : "NamedTypeSpecifier"
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "95:21-95:35",
+                                       "locator" : "96:21-96:35",
                                        "resultTypeName" : "{http://hl7.org/fhir}Condition",
                                        "name" : "OverweightObese",
                                        "type" : "AliasRef"
                                     } ]
                                  }, {
-                                    "locator" : "96:20-96:54",
+                                    "locator" : "97:20-97:54",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "name" : "isHealthConcern",
                                     "libraryName" : "QICoreCommon",
@@ -1781,14 +1791,14 @@
                                        "type" : "NamedTypeSpecifier"
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "96:20-96:34",
+                                       "locator" : "97:20-97:34",
                                        "resultTypeName" : "{http://hl7.org/fhir}Condition",
                                        "name" : "OverweightObese",
                                        "type" : "AliasRef"
                                     } ]
                                  } ]
                               }, {
-                                 "locator" : "98:19-98:46",
+                                 "locator" : "99:19-99:46",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "name" : "isActive",
                                  "libraryName" : "QICoreCommon",
@@ -1798,14 +1808,14 @@
                                     "type" : "NamedTypeSpecifier"
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "98:19-98:33",
+                                    "locator" : "99:19-99:33",
                                     "resultTypeName" : "{http://hl7.org/fhir}Condition",
                                     "name" : "OverweightObese",
                                     "type" : "AliasRef"
                                  } ]
                               } ]
                            }, {
-                              "locator" : "99:19-99:119",
+                              "locator" : "100:19-100:119",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "precision" : "Day",
                               "type" : "SameOrBefore",
@@ -1817,7 +1827,7 @@
                                  "type" : "NamedTypeSpecifier"
                               } ],
                               "operand" : [ {
-                                 "locator" : "99:58-99:63",
+                                 "locator" : "100:58-100:63",
                                  "type" : "Start",
                                  "signature" : [ {
                                     "type" : "IntervalTypeSpecifier",
@@ -1827,7 +1837,7 @@
                                     }
                                  } ],
                                  "operand" : {
-                                    "locator" : "99:19-99:56",
+                                    "locator" : "100:19-100:56",
                                     "name" : "prevalenceInterval",
                                     "libraryName" : "QICoreCommon",
                                     "type" : "FunctionRef",
@@ -1843,14 +1853,14 @@
                                        "type" : "NamedTypeSpecifier"
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "99:19-99:33",
+                                       "locator" : "100:19-100:33",
                                        "resultTypeName" : "{http://hl7.org/fhir}Condition",
                                        "name" : "OverweightObese",
                                        "type" : "AliasRef"
                                     } ]
                                  }
                               }, {
-                                 "locator" : "99:85-99:119",
+                                 "locator" : "100:85-100:119",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "path" : "value",
                                  "type" : "Property",
@@ -1867,7 +1877,7 @@
                }
             }
          }, {
-            "locator" : "103:1-112:3",
+            "locator" : "104:1-111:3",
             "name" : "High BMI Interventions Performed",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -1879,7 +1889,7 @@
                }
             },
             "expression" : {
-               "locator" : "104:3-112:3",
+               "locator" : "105:3-111:3",
                "type" : "Query",
                "resultTypeSpecifier" : {
                   "type" : "ListTypeSpecifier",
@@ -1889,7 +1899,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "104:5-104:76",
+                  "locator" : "105:5-105:76",
                   "alias" : "HighInterventionsPerformed",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -1899,7 +1909,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "104:5-104:49",
+                     "locator" : "105:5-105:49",
                      "dataType" : "{http://hl7.org/fhir}Procedure",
                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure",
                      "codeProperty" : "code",
@@ -1913,7 +1923,7 @@
                         }
                      },
                      "codes" : {
-                        "locator" : "104:17-104:48",
+                        "locator" : "105:17-105:48",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                         "name" : "Follow Up for Above Normal BMI",
                         "preserve" : true,
@@ -1923,7 +1933,7 @@
                } ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "105:7-111:9",
+                  "locator" : "106:7-110:9",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
                   "signature" : [ {
@@ -1934,95 +1944,55 @@
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : [ {
-                     "locator" : "105:13-106:59",
+                     "locator" : "106:13-106:74",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "And",
+                     "type" : "AnyInValueSet",
                      "signature" : [ {
-                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "NamedTypeSpecifier"
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "type" : "NamedTypeSpecifier"
+                        }
                      } ],
-                     "operand" : [ {
-                        "locator" : "105:13-105:74",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "AnyInValueSet",
-                        "signature" : [ {
+                     "codes" : {
+                        "locator" : "106:13-106:49",
+                        "type" : "Query",
+                        "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
                            "elementType" : {
                               "name" : "{urn:hl7-org:elm-types:r1}Concept",
                               "type" : "NamedTypeSpecifier"
                            }
-                        } ],
-                        "codes" : {
-                           "locator" : "105:13-105:49",
-                           "type" : "Query",
-                           "resultTypeSpecifier" : {
-                              "type" : "ListTypeSpecifier",
-                              "elementType" : {
-                                 "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           },
-                           "source" : [ {
-                              "alias" : "$this",
-                              "expression" : {
-                                 "path" : "reasonCode",
-                                 "scope" : "HighInterventionsPerformed",
-                                 "type" : "Property"
-                              }
-                           } ],
-                           "return" : {
-                              "distinct" : false,
-                              "expression" : {
-                                 "name" : "ToConcept",
-                                 "libraryName" : "FHIRHelpers",
-                                 "type" : "FunctionRef",
-                                 "operand" : [ {
-                                    "name" : "$this",
-                                    "type" : "AliasRef"
-                                 } ]
-                              }
-                           }
                         },
-                        "valueset" : {
-                           "locator" : "105:54-105:74",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                           "name" : "Overweight or Obese",
-                           "preserve" : true
-                        }
-                     }, {
-                        "locator" : "106:13-106:59",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "Equal",
-                        "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}String",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}String",
-                           "type" : "NamedTypeSpecifier"
-                        } ],
-                        "operand" : [ {
-                           "locator" : "106:13-106:45",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
-                              "path" : "status",
+                        "source" : [ {
+                           "alias" : "$this",
+                           "expression" : {
+                              "path" : "reasonCode",
                               "scope" : "HighInterventionsPerformed",
                               "type" : "Property"
                            }
-                        }, {
-                           "locator" : "106:49-106:59",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                           "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                           "value" : "completed",
-                           "type" : "Literal"
-                        } ]
-                     } ]
+                        } ],
+                        "return" : {
+                           "distinct" : false,
+                           "expression" : {
+                              "name" : "ToConcept",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "name" : "$this",
+                                 "type" : "AliasRef"
+                              } ]
+                           }
+                        }
+                     },
+                     "valueset" : {
+                        "locator" : "106:54-106:74",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                        "name" : "Overweight or Obese",
+                        "preserve" : true
+                     }
                   }, {
-                     "locator" : "107:12-111:9",
+                     "locator" : "107:12-110:9",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
                      "signature" : [ {
@@ -2033,7 +2003,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "107:21-110:135",
+                        "locator" : "107:21-109:120",
                         "type" : "Query",
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
@@ -2043,7 +2013,7 @@
                            }
                         },
                         "source" : [ {
-                           "locator" : "107:21-107:70",
+                           "locator" : "107:21-107:72",
                            "alias" : "OverweightObese",
                            "resultTypeSpecifier" : {
                               "type" : "ListTypeSpecifier",
@@ -2053,7 +2023,7 @@
                               }
                            },
                            "expression" : {
-                              "locator" : "107:21-107:54",
+                              "locator" : "107:21-107:56",
                               "dataType" : "{http://hl7.org/fhir}Condition",
                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition",
                               "codeProperty" : "code",
@@ -2067,7 +2037,7 @@
                                  }
                               },
                               "codes" : {
-                                 "locator" : "107:33-107:53",
+                                 "locator" : "107:35-107:55",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                  "name" : "Overweight or Obese",
                                  "preserve" : true,
@@ -2077,7 +2047,7 @@
                         } ],
                         "relationship" : [ ],
                         "where" : {
-                           "locator" : "108:13-110:135",
+                           "locator" : "108:13-109:120",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "And",
                            "signature" : [ {
@@ -2088,228 +2058,55 @@
                               "type" : "NamedTypeSpecifier"
                            } ],
                            "operand" : [ {
-                              "locator" : "108:19-109:46",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "And",
-                              "signature" : [ {
-                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                 "type" : "NamedTypeSpecifier"
-                              }, {
-                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                 "type" : "NamedTypeSpecifier"
-                              } ],
-                              "operand" : [ {
-                                 "locator" : "108:19-108:53",
-                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                 "name" : "isHealthConcern",
-                                 "libraryName" : "QICoreCommon",
-                                 "type" : "FunctionRef",
-                                 "signature" : [ {
-                                    "name" : "{http://hl7.org/fhir}Condition",
-                                    "type" : "NamedTypeSpecifier"
-                                 } ],
-                                 "operand" : [ {
-                                    "locator" : "108:19-108:33",
-                                    "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                                    "name" : "OverweightObese",
-                                    "type" : "AliasRef"
-                                 } ]
-                              }, {
-                                 "locator" : "109:19-109:46",
-                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                 "name" : "isActive",
-                                 "libraryName" : "QICoreCommon",
-                                 "type" : "FunctionRef",
-                                 "signature" : [ {
-                                    "name" : "{http://hl7.org/fhir}Condition",
-                                    "type" : "NamedTypeSpecifier"
-                                 } ],
-                                 "operand" : [ {
-                                    "locator" : "109:19-109:33",
-                                    "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                                    "name" : "OverweightObese",
-                                    "type" : "AliasRef"
-                                 } ]
-                              } ]
-                           }, {
-                              "locator" : "110:19-110:135",
+                              "locator" : "108:19-108:120",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "precision" : "Day",
                               "type" : "SameOrBefore",
                               "signature" : [ {
-                                 "type" : "IntervalTypeSpecifier",
-                                 "pointType" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
                               }, {
-                                 "type" : "IntervalTypeSpecifier",
-                                 "pointType" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
                               } ],
                               "operand" : [ {
-                                 "type" : "If",
-                                 "condition" : {
-                                    "type" : "IsNull",
-                                    "operand" : {
-                                       "locator" : "110:58-110:63",
-                                       "type" : "Start",
-                                       "signature" : [ {
-                                          "type" : "IntervalTypeSpecifier",
-                                          "pointType" : {
-                                             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                             "type" : "NamedTypeSpecifier"
-                                          }
-                                       } ],
-                                       "operand" : {
-                                          "locator" : "110:19-110:56",
-                                          "name" : "prevalenceInterval",
-                                          "libraryName" : "QICoreCommon",
-                                          "type" : "FunctionRef",
-                                          "resultTypeSpecifier" : {
-                                             "type" : "IntervalTypeSpecifier",
-                                             "pointType" : {
-                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                                "type" : "NamedTypeSpecifier"
-                                             }
-                                          },
-                                          "signature" : [ {
-                                             "name" : "{http://hl7.org/fhir}Condition",
-                                             "type" : "NamedTypeSpecifier"
-                                          } ],
-                                          "operand" : [ {
-                                             "locator" : "110:19-110:33",
-                                             "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                                             "name" : "OverweightObese",
-                                             "type" : "AliasRef"
-                                          } ]
-                                       }
+                                 "locator" : "108:58-108:63",
+                                 "type" : "Start",
+                                 "signature" : [ {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
                                     }
-                                 },
-                                 "then" : {
-                                    "type" : "Null",
+                                 } ],
+                                 "operand" : {
+                                    "locator" : "108:19-108:56",
+                                    "name" : "prevalenceInterval",
+                                    "libraryName" : "QICoreCommon",
+                                    "type" : "FunctionRef",
                                     "resultTypeSpecifier" : {
                                        "type" : "IntervalTypeSpecifier",
                                        "pointType" : {
                                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                                           "type" : "NamedTypeSpecifier"
                                        }
-                                    }
-                                 },
-                                 "else" : {
-                                    "lowClosed" : true,
-                                    "highClosed" : true,
-                                    "type" : "Interval",
-                                    "low" : {
-                                       "locator" : "110:58-110:63",
-                                       "type" : "Start",
-                                       "signature" : [ {
-                                          "type" : "IntervalTypeSpecifier",
-                                          "pointType" : {
-                                             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                             "type" : "NamedTypeSpecifier"
-                                          }
-                                       } ],
-                                       "operand" : {
-                                          "locator" : "110:19-110:56",
-                                          "name" : "prevalenceInterval",
-                                          "libraryName" : "QICoreCommon",
-                                          "type" : "FunctionRef",
-                                          "resultTypeSpecifier" : {
-                                             "type" : "IntervalTypeSpecifier",
-                                             "pointType" : {
-                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                                "type" : "NamedTypeSpecifier"
-                                             }
-                                          },
-                                          "signature" : [ {
-                                             "name" : "{http://hl7.org/fhir}Condition",
-                                             "type" : "NamedTypeSpecifier"
-                                          } ],
-                                          "operand" : [ {
-                                             "locator" : "110:19-110:33",
-                                             "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                                             "name" : "OverweightObese",
-                                             "type" : "AliasRef"
-                                          } ]
-                                       }
                                     },
-                                    "high" : {
-                                       "locator" : "110:58-110:63",
-                                       "type" : "Start",
-                                       "signature" : [ {
-                                          "type" : "IntervalTypeSpecifier",
-                                          "pointType" : {
-                                             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                             "type" : "NamedTypeSpecifier"
-                                          }
-                                       } ],
-                                       "operand" : {
-                                          "locator" : "110:19-110:56",
-                                          "name" : "prevalenceInterval",
-                                          "libraryName" : "QICoreCommon",
-                                          "type" : "FunctionRef",
-                                          "resultTypeSpecifier" : {
-                                             "type" : "IntervalTypeSpecifier",
-                                             "pointType" : {
-                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                                "type" : "NamedTypeSpecifier"
-                                             }
-                                          },
-                                          "signature" : [ {
-                                             "name" : "{http://hl7.org/fhir}Condition",
-                                             "type" : "NamedTypeSpecifier"
-                                          } ],
-                                          "operand" : [ {
-                                             "locator" : "110:19-110:33",
-                                             "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                                             "name" : "OverweightObese",
-                                             "type" : "AliasRef"
-                                          } ]
-                                       }
-                                    }
+                                    "signature" : [ {
+                                       "name" : "{http://hl7.org/fhir}Condition",
+                                       "type" : "NamedTypeSpecifier"
+                                    } ],
+                                    "operand" : [ {
+                                       "locator" : "108:19-108:33",
+                                       "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                                       "name" : "OverweightObese",
+                                       "type" : "AliasRef"
+                                    } ]
                                  }
                               }, {
-                                 "locator" : "110:85-110:135",
-                                 "name" : "toInterval",
-                                 "libraryName" : "QICoreCommon",
-                                 "type" : "FunctionRef",
-                                 "resultTypeSpecifier" : {
-                                    "type" : "IntervalTypeSpecifier",
-                                    "pointType" : {
-                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "type" : "NamedTypeSpecifier"
-                                    }
-                                 },
-                                 "signature" : [ {
-                                    "type" : "ChoiceTypeSpecifier",
-                                    "choice" : [ {
-                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "type" : "NamedTypeSpecifier"
-                                    }, {
-                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                       "type" : "NamedTypeSpecifier"
-                                    }, {
-                                       "type" : "IntervalTypeSpecifier",
-                                       "pointType" : {
-                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                          "type" : "NamedTypeSpecifier"
-                                       }
-                                    }, {
-                                       "type" : "IntervalTypeSpecifier",
-                                       "pointType" : {
-                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                          "type" : "NamedTypeSpecifier"
-                                       }
-                                    }, {
-                                       "name" : "{http://hl7.org/fhir}Timing",
-                                       "type" : "NamedTypeSpecifier"
-                                    } ]
-                                 } ],
-                                 "operand" : [ {
-                                    "locator" : "110:85-110:120",
+                                 "asType" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "As",
+                                 "operand" : {
+                                    "locator" : "108:85-108:120",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -2331,8 +2128,90 @@
                                        "scope" : "HighInterventionsPerformed",
                                        "type" : "Property"
                                     } ]
-                                 } ]
+                                 }
                               } ]
+                           }, {
+                              "locator" : "109:19-109:120",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "Not",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
+                              "operand" : {
+                                 "locator" : "109:23-109:120",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "precision" : "Day",
+                                 "type" : "Before",
+                                 "signature" : [ {
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 }, {
+                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "NamedTypeSpecifier"
+                                 } ],
+                                 "operand" : [ {
+                                    "locator" : "109:64-109:67",
+                                    "type" : "End",
+                                    "signature" : [ {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "pointType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    } ],
+                                    "operand" : {
+                                       "locator" : "109:25-109:62",
+                                       "name" : "prevalenceInterval",
+                                       "libraryName" : "QICoreCommon",
+                                       "type" : "FunctionRef",
+                                       "resultTypeSpecifier" : {
+                                          "type" : "IntervalTypeSpecifier",
+                                          "pointType" : {
+                                             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       },
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}Condition",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
+                                       "operand" : [ {
+                                          "locator" : "109:25-109:39",
+                                          "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                                          "name" : "OverweightObese",
+                                          "type" : "AliasRef"
+                                       } ]
+                                    }
+                                 }, {
+                                    "asType" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                    "type" : "As",
+                                    "operand" : {
+                                       "locator" : "109:83-109:118",
+                                       "name" : "ToValue",
+                                       "libraryName" : "FHIRHelpers",
+                                       "type" : "FunctionRef",
+                                       "resultTypeSpecifier" : {
+                                          "type" : "ChoiceTypeSpecifier",
+                                          "choice" : [ {
+                                             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "type" : "IntervalTypeSpecifier",
+                                             "pointType" : {
+                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          } ]
+                                       },
+                                       "operand" : [ {
+                                          "path" : "performed",
+                                          "scope" : "HighInterventionsPerformed",
+                                          "type" : "Property"
+                                       } ]
+                                    }
+                                 } ]
+                              }
                            } ]
                         }
                      }
@@ -2340,7 +2219,7 @@
                }
             }
          }, {
-            "locator" : "83:1-87:157",
+            "locator" : "84:1-88:157",
             "name" : "High BMI and Follow up Provided",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2352,7 +2231,7 @@
                }
             },
             "expression" : {
-               "locator" : "84:3-87:157",
+               "locator" : "85:3-88:157",
                "type" : "Query",
                "resultTypeSpecifier" : {
                   "type" : "ListTypeSpecifier",
@@ -2362,7 +2241,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "84:3-84:57",
+                  "locator" : "85:3-85:57",
                   "alias" : "HighBMI",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -2372,7 +2251,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "84:3-84:49",
+                     "locator" : "85:3-85:49",
                      "name" : "Documented High BMI during Measurement Period",
                      "type" : "ExpressionRef",
                      "resultTypeSpecifier" : {
@@ -2385,7 +2264,7 @@
                   }
                } ],
                "relationship" : [ {
-                  "locator" : "85:5-87:157",
+                  "locator" : "86:5-88:157",
                   "alias" : "HighBMIInterventions",
                   "type" : "With",
                   "resultTypeSpecifier" : {
@@ -2405,7 +2284,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "85:10-86:48",
+                     "locator" : "86:10-87:48",
                      "type" : "Union",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -2457,7 +2336,7 @@
                      "operand" : [ {
                         "type" : "As",
                         "operand" : {
-                           "locator" : "85:12-85:43",
+                           "locator" : "86:12-86:43",
                            "name" : "High BMI Interventions Ordered",
                            "type" : "ExpressionRef",
                            "resultTypeSpecifier" : {
@@ -2493,7 +2372,7 @@
                      }, {
                         "type" : "As",
                         "operand" : {
-                           "locator" : "86:13-86:46",
+                           "locator" : "87:13-87:46",
                            "name" : "High BMI Interventions Performed",
                            "type" : "ExpressionRef",
                            "resultTypeSpecifier" : {
@@ -2523,7 +2402,7 @@
                      } ]
                   },
                   "suchThat" : {
-                     "locator" : "87:17-87:157",
+                     "locator" : "88:17-88:157",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "precision" : "Day",
                      "type" : "In",
@@ -2538,7 +2417,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "87:117-87:122",
+                        "locator" : "88:117-88:122",
                         "type" : "Start",
                         "signature" : [ {
                            "type" : "IntervalTypeSpecifier",
@@ -2548,7 +2427,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "87:17-87:115",
+                           "locator" : "88:17-88:115",
                            "type" : "Coalesce",
                            "resultTypeSpecifier" : {
                               "type" : "IntervalTypeSpecifier",
@@ -2571,7 +2450,7 @@
                               }
                            } ],
                            "operand" : [ {
-                              "locator" : "87:26-87:68",
+                              "locator" : "88:26-88:68",
                               "name" : "toInterval",
                               "libraryName" : "QICoreCommon",
                               "type" : "FunctionRef",
@@ -2608,7 +2487,7 @@
                                  } ]
                               } ],
                               "operand" : [ {
-                                 "locator" : "87:26-87:55",
+                                 "locator" : "88:26-88:55",
                                  "name" : "ToValue",
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
@@ -2632,7 +2511,7 @@
                                  } ]
                               } ]
                            }, {
-                              "locator" : "87:71-87:114",
+                              "locator" : "88:71-88:114",
                               "name" : "toInterval",
                               "libraryName" : "QICoreCommon",
                               "type" : "FunctionRef",
@@ -2671,7 +2550,7 @@
                               "operand" : [ {
                                  "type" : "As",
                                  "operand" : {
-                                    "locator" : "87:71-87:101",
+                                    "locator" : "88:71-88:101",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "path" : "value",
                                     "type" : "Property",
@@ -2710,7 +2589,7 @@
                            } ]
                         }
                      }, {
-                        "locator" : "87:138-87:157",
+                        "locator" : "88:138-88:157",
                         "name" : "Measurement Period",
                         "type" : "ParameterRef",
                         "resultTypeSpecifier" : {
@@ -2905,7 +2784,7 @@
                }
             }
          }, {
-            "locator" : "123:1-134:3",
+            "locator" : "122:1-133:3",
             "name" : "Low BMI Interventions Ordered",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2923,7 +2802,7 @@
                }
             },
             "expression" : {
-               "locator" : "124:3-134:3",
+               "locator" : "123:3-133:3",
                "type" : "Query",
                "resultTypeSpecifier" : {
                   "type" : "ListTypeSpecifier",
@@ -2939,7 +2818,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "124:5-126:93",
+                  "locator" : "123:5-125:93",
                   "alias" : "LowInterventionsOrdered",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -2955,7 +2834,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "124:5-126:69",
+                     "locator" : "123:5-125:69",
                      "type" : "Union",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -2998,7 +2877,7 @@
                      "operand" : [ {
                         "type" : "As",
                         "operand" : {
-                           "locator" : "124:7-125:75",
+                           "locator" : "123:7-124:75",
                            "type" : "Union",
                            "resultTypeSpecifier" : {
                               "type" : "ListTypeSpecifier",
@@ -3021,7 +2900,7 @@
                               }
                            } ],
                            "operand" : [ {
-                              "locator" : "124:7-124:56",
+                              "locator" : "123:7-123:56",
                               "dataType" : "{http://hl7.org/fhir}ServiceRequest",
                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest",
                               "codeProperty" : "code",
@@ -3035,14 +2914,14 @@
                                  }
                               },
                               "codes" : {
-                                 "locator" : "124:24-124:55",
+                                 "locator" : "123:24-123:55",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                  "name" : "Follow Up for Below Normal BMI",
                                  "preserve" : true,
                                  "type" : "ValueSetRef"
                               }
                            }, {
-                              "locator" : "125:13-125:75",
+                              "locator" : "124:13-124:75",
                               "dataType" : "{http://hl7.org/fhir}ServiceRequest",
                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest",
                               "codeProperty" : "code",
@@ -3056,7 +2935,7 @@
                                  }
                               },
                               "codes" : {
-                                 "locator" : "125:30-125:74",
+                                 "locator" : "124:30-124:74",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                  "name" : "Referrals Where Weight Assessment May Occur",
                                  "preserve" : true,
@@ -3080,7 +2959,7 @@
                      }, {
                         "type" : "As",
                         "operand" : {
-                           "locator" : "126:13-126:67",
+                           "locator" : "125:13-125:67",
                            "type" : "Union",
                            "resultTypeSpecifier" : {
                               "type" : "ListTypeSpecifier",
@@ -3109,14 +2988,14 @@
                               "codeComparator" : "in",
                               "type" : "Retrieve",
                               "codes" : {
-                                 "locator" : "126:33-126:66",
+                                 "locator" : "125:33-125:66",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                  "name" : "Medications for Below Normal BMI",
                                  "preserve" : true,
                                  "type" : "ValueSetRef"
                               }
                            }, {
-                              "locator" : "126:13-126:67",
+                              "locator" : "125:13-125:67",
                               "dataType" : "{http://hl7.org/fhir}MedicationRequest",
                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
                               "codeProperty" : "medication",
@@ -3130,7 +3009,7 @@
                                  }
                               },
                               "codes" : {
-                                 "locator" : "126:33-126:66",
+                                 "locator" : "125:33-125:66",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                  "name" : "Medications for Below Normal BMI",
                                  "preserve" : true,
@@ -3156,7 +3035,7 @@
                } ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "127:7-133:9",
+                  "locator" : "126:7-132:9",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
                   "signature" : [ {
@@ -3167,7 +3046,7 @@
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : [ {
-                     "locator" : "127:13-127:63",
+                     "locator" : "126:13-126:63",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "AnyInValueSet",
                      "signature" : [ {
@@ -3178,7 +3057,7 @@
                         }
                      } ],
                      "codes" : {
-                        "locator" : "127:13-127:46",
+                        "locator" : "126:13-126:46",
                         "type" : "Query",
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
@@ -3209,13 +3088,13 @@
                         }
                      },
                      "valueset" : {
-                        "locator" : "127:51-127:63",
+                        "locator" : "126:51-126:63",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                         "name" : "Underweight",
                         "preserve" : true
                      }
                   }, {
-                     "locator" : "128:12-133:9",
+                     "locator" : "127:12-132:9",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
                      "signature" : [ {
@@ -3226,7 +3105,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "128:21-132:87",
+                        "locator" : "127:21-131:87",
                         "type" : "Query",
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
@@ -3236,7 +3115,7 @@
                            }
                         },
                         "source" : [ {
-                           "locator" : "128:21-128:58",
+                           "locator" : "127:21-127:58",
                            "alias" : "Underweight",
                            "resultTypeSpecifier" : {
                               "type" : "ListTypeSpecifier",
@@ -3246,7 +3125,7 @@
                               }
                            },
                            "expression" : {
-                              "locator" : "128:21-128:46",
+                              "locator" : "127:21-127:46",
                               "dataType" : "{http://hl7.org/fhir}Condition",
                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition",
                               "codeProperty" : "code",
@@ -3260,7 +3139,7 @@
                                  }
                               },
                               "codes" : {
-                                 "locator" : "128:33-128:45",
+                                 "locator" : "127:33-127:45",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                  "name" : "Underweight",
                                  "preserve" : true,
@@ -3270,7 +3149,7 @@
                         } ],
                         "relationship" : [ ],
                         "where" : {
-                           "locator" : "129:13-132:87",
+                           "locator" : "128:13-131:87",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "And",
                            "signature" : [ {
@@ -3281,7 +3160,7 @@
                               "type" : "NamedTypeSpecifier"
                            } ],
                            "operand" : [ {
-                              "locator" : "129:19-131:114",
+                              "locator" : "128:19-130:114",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "And",
                               "signature" : [ {
@@ -3292,7 +3171,7 @@
                                  "type" : "NamedTypeSpecifier"
                               } ],
                               "operand" : [ {
-                                 "locator" : "129:19-130:42",
+                                 "locator" : "128:19-129:42",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "And",
                                  "signature" : [ {
@@ -3303,7 +3182,7 @@
                                     "type" : "NamedTypeSpecifier"
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "129:19-129:53",
+                                    "locator" : "128:19-128:53",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "name" : "isHealthConcern",
                                     "libraryName" : "QICoreCommon",
@@ -3313,13 +3192,13 @@
                                        "type" : "NamedTypeSpecifier"
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "129:21-129:31",
+                                       "locator" : "128:21-128:31",
                                        "resultTypeName" : "{http://hl7.org/fhir}Condition",
                                        "name" : "Underweight",
                                        "type" : "AliasRef"
                                     } ]
                                  }, {
-                                    "locator" : "130:19-130:42",
+                                    "locator" : "129:19-129:42",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                     "name" : "isActive",
                                     "libraryName" : "QICoreCommon",
@@ -3329,14 +3208,14 @@
                                        "type" : "NamedTypeSpecifier"
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "130:19-130:29",
+                                       "locator" : "129:19-129:29",
                                        "resultTypeName" : "{http://hl7.org/fhir}Condition",
                                        "name" : "Underweight",
                                        "type" : "AliasRef"
                                     } ]
                                  } ]
                               }, {
-                                 "locator" : "131:19-131:114",
+                                 "locator" : "130:19-130:114",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "precision" : "Day",
                                  "type" : "SameOrBefore",
@@ -3348,7 +3227,7 @@
                                     "type" : "NamedTypeSpecifier"
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "131:54-131:59",
+                                    "locator" : "130:54-130:59",
                                     "type" : "Start",
                                     "signature" : [ {
                                        "type" : "IntervalTypeSpecifier",
@@ -3358,7 +3237,7 @@
                                        }
                                     } ],
                                     "operand" : {
-                                       "locator" : "131:19-131:52",
+                                       "locator" : "130:19-130:52",
                                        "name" : "prevalenceInterval",
                                        "libraryName" : "QICoreCommon",
                                        "type" : "FunctionRef",
@@ -3374,14 +3253,14 @@
                                           "type" : "NamedTypeSpecifier"
                                        } ],
                                        "operand" : [ {
-                                          "locator" : "131:19-131:29",
+                                          "locator" : "130:19-130:29",
                                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
                                           "name" : "Underweight",
                                           "type" : "AliasRef"
                                        } ]
                                     }
                                  }, {
-                                    "locator" : "131:81-131:114",
+                                    "locator" : "130:81-130:114",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "path" : "value",
                                     "type" : "Property",
@@ -3393,7 +3272,7 @@
                                  } ]
                               } ]
                            }, {
-                              "locator" : "132:19-132:87",
+                              "locator" : "131:19-131:87",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "precision" : "Day",
                               "type" : "In",
@@ -3408,7 +3287,7 @@
                                  }
                               } ],
                               "operand" : [ {
-                                 "locator" : "132:19-132:52",
+                                 "locator" : "131:19-131:52",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "path" : "value",
                                  "type" : "Property",
@@ -3418,7 +3297,7 @@
                                     "type" : "Property"
                                  }
                               }, {
-                                 "locator" : "132:68-132:87",
+                                 "locator" : "131:68-131:87",
                                  "name" : "Measurement Period",
                                  "type" : "ParameterRef",
                                  "resultTypeSpecifier" : {
@@ -3436,7 +3315,7 @@
                }
             }
          }, {
-            "locator" : "136:1-146:3",
+            "locator" : "135:1-146:3",
             "name" : "Low BMI Interventions Performed",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3448,7 +3327,7 @@
                }
             },
             "expression" : {
-               "locator" : "137:3-146:3",
+               "locator" : "136:3-146:3",
                "type" : "Query",
                "resultTypeSpecifier" : {
                   "type" : "ListTypeSpecifier",
@@ -3458,7 +3337,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "137:5-137:75",
+                  "locator" : "136:5-136:75",
                   "alias" : "LowInterventionsPerformed",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -3468,7 +3347,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "137:5-137:49",
+                     "locator" : "136:5-136:49",
                      "dataType" : "{http://hl7.org/fhir}Procedure",
                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure",
                      "codeProperty" : "code",
@@ -3482,7 +3361,7 @@
                         }
                      },
                      "codes" : {
-                        "locator" : "137:17-137:48",
+                        "locator" : "136:17-136:48",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                         "name" : "Follow Up for Below Normal BMI",
                         "preserve" : true,
@@ -3492,7 +3371,7 @@
                } ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "138:7-145:9",
+                  "locator" : "137:7-145:9",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
                   "signature" : [ {
@@ -3503,7 +3382,7 @@
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : [ {
-                     "locator" : "138:13-139:58",
+                     "locator" : "137:13-138:58",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "signature" : [ {
@@ -3514,7 +3393,7 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "138:13-138:65",
+                        "locator" : "137:13-137:65",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "AnyInValueSet",
                         "signature" : [ {
@@ -3525,7 +3404,7 @@
                            }
                         } ],
                         "codes" : {
-                           "locator" : "138:13-138:48",
+                           "locator" : "137:13-137:48",
                            "type" : "Query",
                            "resultTypeSpecifier" : {
                               "type" : "ListTypeSpecifier",
@@ -3556,13 +3435,13 @@
                            }
                         },
                         "valueset" : {
-                           "locator" : "138:53-138:65",
+                           "locator" : "137:53-137:65",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Underweight",
                            "preserve" : true
                         }
                      }, {
-                        "locator" : "139:13-139:58",
+                        "locator" : "138:13-138:58",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Equal",
                         "signature" : [ {
@@ -3573,7 +3452,7 @@
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "139:13-139:44",
+                           "locator" : "138:13-138:44",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "path" : "value",
                            "type" : "Property",
@@ -3583,7 +3462,7 @@
                               "type" : "Property"
                            }
                         }, {
-                           "locator" : "139:48-139:58",
+                           "locator" : "138:48-138:58",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "completed",
@@ -3591,7 +3470,7 @@
                         } ]
                      } ]
                   }, {
-                     "locator" : "140:12-145:9",
+                     "locator" : "139:12-145:9",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Exists",
                      "signature" : [ {
@@ -3602,7 +3481,7 @@
                         }
                      } ],
                      "operand" : {
-                        "locator" : "140:21-144:103",
+                        "locator" : "139:21-144:130",
                         "type" : "Query",
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
@@ -3612,7 +3491,7 @@
                            }
                         },
                         "source" : [ {
-                           "locator" : "140:21-140:58",
+                           "locator" : "139:21-139:58",
                            "alias" : "Underweight",
                            "resultTypeSpecifier" : {
                               "type" : "ListTypeSpecifier",
@@ -3622,7 +3501,7 @@
                               }
                            },
                            "expression" : {
-                              "locator" : "140:21-140:46",
+                              "locator" : "139:21-139:46",
                               "dataType" : "{http://hl7.org/fhir}Condition",
                               "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition",
                               "codeProperty" : "code",
@@ -3636,7 +3515,7 @@
                                  }
                               },
                               "codes" : {
-                                 "locator" : "140:33-140:45",
+                                 "locator" : "139:33-139:45",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                                  "name" : "Underweight",
                                  "preserve" : true,
@@ -3646,7 +3525,7 @@
                         } ],
                         "relationship" : [ ],
                         "where" : {
-                           "locator" : "141:13-144:103",
+                           "locator" : "140:13-144:130",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "And",
                            "signature" : [ {
@@ -3657,7 +3536,7 @@
                               "type" : "NamedTypeSpecifier"
                            } ],
                            "operand" : [ {
-                              "locator" : "141:19-143:130",
+                              "locator" : "140:19-143:103",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "And",
                               "signature" : [ {
@@ -3668,7 +3547,7 @@
                                  "type" : "NamedTypeSpecifier"
                               } ],
                               "operand" : [ {
-                                 "locator" : "141:19-142:42",
+                                 "locator" : "140:19-142:130",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "And",
                                  "signature" : [ {
@@ -3679,43 +3558,257 @@
                                     "type" : "NamedTypeSpecifier"
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "141:19-141:53",
+                                    "locator" : "140:19-141:42",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                    "name" : "isHealthConcern",
-                                    "libraryName" : "QICoreCommon",
-                                    "type" : "FunctionRef",
+                                    "type" : "And",
                                     "signature" : [ {
-                                       "name" : "{http://hl7.org/fhir}Condition",
+                                       "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                       "type" : "NamedTypeSpecifier"
+                                    }, {
+                                       "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                                        "type" : "NamedTypeSpecifier"
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "141:21-141:31",
-                                       "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                                       "name" : "Underweight",
-                                       "type" : "AliasRef"
+                                       "locator" : "140:19-140:53",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                       "name" : "isHealthConcern",
+                                       "libraryName" : "QICoreCommon",
+                                       "type" : "FunctionRef",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}Condition",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
+                                       "operand" : [ {
+                                          "locator" : "140:21-140:31",
+                                          "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                                          "name" : "Underweight",
+                                          "type" : "AliasRef"
+                                       } ]
+                                    }, {
+                                       "locator" : "141:19-141:42",
+                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                       "name" : "isActive",
+                                       "libraryName" : "QICoreCommon",
+                                       "type" : "FunctionRef",
+                                       "signature" : [ {
+                                          "name" : "{http://hl7.org/fhir}Condition",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ],
+                                       "operand" : [ {
+                                          "locator" : "141:19-141:29",
+                                          "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                                          "name" : "Underweight",
+                                          "type" : "AliasRef"
+                                       } ]
                                     } ]
                                  }, {
-                                    "locator" : "142:19-142:42",
+                                    "locator" : "142:19-142:130",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                    "name" : "isActive",
-                                    "libraryName" : "QICoreCommon",
-                                    "type" : "FunctionRef",
+                                    "precision" : "Day",
+                                    "type" : "SameOrBefore",
                                     "signature" : [ {
-                                       "name" : "{http://hl7.org/fhir}Condition",
-                                       "type" : "NamedTypeSpecifier"
+                                       "type" : "IntervalTypeSpecifier",
+                                       "pointType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    }, {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "pointType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "142:19-142:29",
-                                       "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                                       "name" : "Underweight",
-                                       "type" : "AliasRef"
+                                       "type" : "If",
+                                       "condition" : {
+                                          "type" : "IsNull",
+                                          "operand" : {
+                                             "locator" : "142:54-142:59",
+                                             "type" : "Start",
+                                             "signature" : [ {
+                                                "type" : "IntervalTypeSpecifier",
+                                                "pointType" : {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }
+                                             } ],
+                                             "operand" : {
+                                                "locator" : "142:19-142:52",
+                                                "name" : "prevalenceInterval",
+                                                "libraryName" : "QICoreCommon",
+                                                "type" : "FunctionRef",
+                                                "resultTypeSpecifier" : {
+                                                   "type" : "IntervalTypeSpecifier",
+                                                   "pointType" : {
+                                                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                },
+                                                "signature" : [ {
+                                                   "name" : "{http://hl7.org/fhir}Condition",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ],
+                                                "operand" : [ {
+                                                   "locator" : "142:19-142:29",
+                                                   "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                                                   "name" : "Underweight",
+                                                   "type" : "AliasRef"
+                                                } ]
+                                             }
+                                          }
+                                       },
+                                       "then" : {
+                                          "type" : "Null",
+                                          "resultTypeSpecifier" : {
+                                             "type" : "IntervalTypeSpecifier",
+                                             "pointType" : {
+                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          }
+                                       },
+                                       "else" : {
+                                          "lowClosed" : true,
+                                          "highClosed" : true,
+                                          "type" : "Interval",
+                                          "low" : {
+                                             "locator" : "142:54-142:59",
+                                             "type" : "Start",
+                                             "signature" : [ {
+                                                "type" : "IntervalTypeSpecifier",
+                                                "pointType" : {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }
+                                             } ],
+                                             "operand" : {
+                                                "locator" : "142:19-142:52",
+                                                "name" : "prevalenceInterval",
+                                                "libraryName" : "QICoreCommon",
+                                                "type" : "FunctionRef",
+                                                "resultTypeSpecifier" : {
+                                                   "type" : "IntervalTypeSpecifier",
+                                                   "pointType" : {
+                                                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                },
+                                                "signature" : [ {
+                                                   "name" : "{http://hl7.org/fhir}Condition",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ],
+                                                "operand" : [ {
+                                                   "locator" : "142:19-142:29",
+                                                   "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                                                   "name" : "Underweight",
+                                                   "type" : "AliasRef"
+                                                } ]
+                                             }
+                                          },
+                                          "high" : {
+                                             "locator" : "142:54-142:59",
+                                             "type" : "Start",
+                                             "signature" : [ {
+                                                "type" : "IntervalTypeSpecifier",
+                                                "pointType" : {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }
+                                             } ],
+                                             "operand" : {
+                                                "locator" : "142:19-142:52",
+                                                "name" : "prevalenceInterval",
+                                                "libraryName" : "QICoreCommon",
+                                                "type" : "FunctionRef",
+                                                "resultTypeSpecifier" : {
+                                                   "type" : "IntervalTypeSpecifier",
+                                                   "pointType" : {
+                                                      "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                      "type" : "NamedTypeSpecifier"
+                                                   }
+                                                },
+                                                "signature" : [ {
+                                                   "name" : "{http://hl7.org/fhir}Condition",
+                                                   "type" : "NamedTypeSpecifier"
+                                                } ],
+                                                "operand" : [ {
+                                                   "locator" : "142:19-142:29",
+                                                   "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                                                   "name" : "Underweight",
+                                                   "type" : "AliasRef"
+                                                } ]
+                                             }
+                                          }
+                                       }
+                                    }, {
+                                       "locator" : "142:81-142:130",
+                                       "name" : "toInterval",
+                                       "libraryName" : "QICoreCommon",
+                                       "type" : "FunctionRef",
+                                       "resultTypeSpecifier" : {
+                                          "type" : "IntervalTypeSpecifier",
+                                          "pointType" : {
+                                             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       },
+                                       "signature" : [ {
+                                          "type" : "ChoiceTypeSpecifier",
+                                          "choice" : [ {
+                                             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "type" : "IntervalTypeSpecifier",
+                                             "pointType" : {
+                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          }, {
+                                             "type" : "IntervalTypeSpecifier",
+                                             "pointType" : {
+                                                "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          }, {
+                                             "name" : "{http://hl7.org/fhir}Timing",
+                                             "type" : "NamedTypeSpecifier"
+                                          } ]
+                                       } ],
+                                       "operand" : [ {
+                                          "locator" : "142:81-142:115",
+                                          "name" : "ToValue",
+                                          "libraryName" : "FHIRHelpers",
+                                          "type" : "FunctionRef",
+                                          "resultTypeSpecifier" : {
+                                             "type" : "ChoiceTypeSpecifier",
+                                             "choice" : [ {
+                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                "type" : "NamedTypeSpecifier"
+                                             }, {
+                                                "type" : "IntervalTypeSpecifier",
+                                                "pointType" : {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }
+                                             } ]
+                                          },
+                                          "operand" : [ {
+                                             "path" : "performed",
+                                             "scope" : "LowInterventionsPerformed",
+                                             "type" : "Property"
+                                          } ]
+                                       } ]
                                     } ]
                                  } ]
                               }, {
-                                 "locator" : "143:19-143:130",
+                                 "locator" : "143:19-143:103",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "precision" : "Day",
-                                 "type" : "SameOrBefore",
+                                 "type" : "IncludedIn",
                                  "signature" : [ {
                                     "type" : "IntervalTypeSpecifier",
                                     "pointType" : {
@@ -3730,129 +3823,7 @@
                                     }
                                  } ],
                                  "operand" : [ {
-                                    "type" : "If",
-                                    "condition" : {
-                                       "type" : "IsNull",
-                                       "operand" : {
-                                          "locator" : "143:54-143:59",
-                                          "type" : "Start",
-                                          "signature" : [ {
-                                             "type" : "IntervalTypeSpecifier",
-                                             "pointType" : {
-                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                                "type" : "NamedTypeSpecifier"
-                                             }
-                                          } ],
-                                          "operand" : {
-                                             "locator" : "143:19-143:52",
-                                             "name" : "prevalenceInterval",
-                                             "libraryName" : "QICoreCommon",
-                                             "type" : "FunctionRef",
-                                             "resultTypeSpecifier" : {
-                                                "type" : "IntervalTypeSpecifier",
-                                                "pointType" : {
-                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                                   "type" : "NamedTypeSpecifier"
-                                                }
-                                             },
-                                             "signature" : [ {
-                                                "name" : "{http://hl7.org/fhir}Condition",
-                                                "type" : "NamedTypeSpecifier"
-                                             } ],
-                                             "operand" : [ {
-                                                "locator" : "143:19-143:29",
-                                                "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                                                "name" : "Underweight",
-                                                "type" : "AliasRef"
-                                             } ]
-                                          }
-                                       }
-                                    },
-                                    "then" : {
-                                       "type" : "Null",
-                                       "resultTypeSpecifier" : {
-                                          "type" : "IntervalTypeSpecifier",
-                                          "pointType" : {
-                                             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                             "type" : "NamedTypeSpecifier"
-                                          }
-                                       }
-                                    },
-                                    "else" : {
-                                       "lowClosed" : true,
-                                       "highClosed" : true,
-                                       "type" : "Interval",
-                                       "low" : {
-                                          "locator" : "143:54-143:59",
-                                          "type" : "Start",
-                                          "signature" : [ {
-                                             "type" : "IntervalTypeSpecifier",
-                                             "pointType" : {
-                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                                "type" : "NamedTypeSpecifier"
-                                             }
-                                          } ],
-                                          "operand" : {
-                                             "locator" : "143:19-143:52",
-                                             "name" : "prevalenceInterval",
-                                             "libraryName" : "QICoreCommon",
-                                             "type" : "FunctionRef",
-                                             "resultTypeSpecifier" : {
-                                                "type" : "IntervalTypeSpecifier",
-                                                "pointType" : {
-                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                                   "type" : "NamedTypeSpecifier"
-                                                }
-                                             },
-                                             "signature" : [ {
-                                                "name" : "{http://hl7.org/fhir}Condition",
-                                                "type" : "NamedTypeSpecifier"
-                                             } ],
-                                             "operand" : [ {
-                                                "locator" : "143:19-143:29",
-                                                "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                                                "name" : "Underweight",
-                                                "type" : "AliasRef"
-                                             } ]
-                                          }
-                                       },
-                                       "high" : {
-                                          "locator" : "143:54-143:59",
-                                          "type" : "Start",
-                                          "signature" : [ {
-                                             "type" : "IntervalTypeSpecifier",
-                                             "pointType" : {
-                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                                "type" : "NamedTypeSpecifier"
-                                             }
-                                          } ],
-                                          "operand" : {
-                                             "locator" : "143:19-143:52",
-                                             "name" : "prevalenceInterval",
-                                             "libraryName" : "QICoreCommon",
-                                             "type" : "FunctionRef",
-                                             "resultTypeSpecifier" : {
-                                                "type" : "IntervalTypeSpecifier",
-                                                "pointType" : {
-                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                                   "type" : "NamedTypeSpecifier"
-                                                }
-                                             },
-                                             "signature" : [ {
-                                                "name" : "{http://hl7.org/fhir}Condition",
-                                                "type" : "NamedTypeSpecifier"
-                                             } ],
-                                             "operand" : [ {
-                                                "locator" : "143:19-143:29",
-                                                "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                                                "name" : "Underweight",
-                                                "type" : "AliasRef"
-                                             } ]
-                                          }
-                                       }
-                                    }
-                                 }, {
-                                    "locator" : "143:81-143:130",
+                                    "locator" : "143:19-143:68",
                                     "name" : "toInterval",
                                     "libraryName" : "QICoreCommon",
                                     "type" : "FunctionRef",
@@ -3889,7 +3860,229 @@
                                        } ]
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "143:81-143:115",
+                                       "locator" : "143:19-143:53",
+                                       "name" : "ToValue",
+                                       "libraryName" : "FHIRHelpers",
+                                       "type" : "FunctionRef",
+                                       "resultTypeSpecifier" : {
+                                          "type" : "ChoiceTypeSpecifier",
+                                          "choice" : [ {
+                                             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                             "type" : "NamedTypeSpecifier"
+                                          }, {
+                                             "type" : "IntervalTypeSpecifier",
+                                             "pointType" : {
+                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          } ]
+                                       },
+                                       "operand" : [ {
+                                          "path" : "performed",
+                                          "scope" : "LowInterventionsPerformed",
+                                          "type" : "Property"
+                                       } ]
+                                    } ]
+                                 }, {
+                                    "locator" : "143:84-143:103",
+                                    "name" : "Measurement Period",
+                                    "type" : "ParameterRef",
+                                    "resultTypeSpecifier" : {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "pointType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    }
+                                 } ]
+                              } ]
+                           }, {
+                              "locator" : "144:19-144:130",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "type" : "Not",
+                              "signature" : [ {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "type" : "NamedTypeSpecifier"
+                              } ],
+                              "operand" : {
+                                 "locator" : "144:23-144:130",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                 "precision" : "Day",
+                                 "type" : "Before",
+                                 "signature" : [ {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 }, {
+                                    "type" : "IntervalTypeSpecifier",
+                                    "pointType" : {
+                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                       "type" : "NamedTypeSpecifier"
+                                    }
+                                 } ],
+                                 "operand" : [ {
+                                    "type" : "If",
+                                    "condition" : {
+                                       "type" : "IsNull",
+                                       "operand" : {
+                                          "locator" : "144:60-144:63",
+                                          "type" : "End",
+                                          "signature" : [ {
+                                             "type" : "IntervalTypeSpecifier",
+                                             "pointType" : {
+                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          } ],
+                                          "operand" : {
+                                             "locator" : "144:25-144:58",
+                                             "name" : "prevalenceInterval",
+                                             "libraryName" : "QICoreCommon",
+                                             "type" : "FunctionRef",
+                                             "resultTypeSpecifier" : {
+                                                "type" : "IntervalTypeSpecifier",
+                                                "pointType" : {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }
+                                             },
+                                             "signature" : [ {
+                                                "name" : "{http://hl7.org/fhir}Condition",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
+                                             "operand" : [ {
+                                                "locator" : "144:25-144:35",
+                                                "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                                                "name" : "Underweight",
+                                                "type" : "AliasRef"
+                                             } ]
+                                          }
+                                       }
+                                    },
+                                    "then" : {
+                                       "type" : "Null",
+                                       "resultTypeSpecifier" : {
+                                          "type" : "IntervalTypeSpecifier",
+                                          "pointType" : {
+                                             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       }
+                                    },
+                                    "else" : {
+                                       "lowClosed" : true,
+                                       "highClosed" : true,
+                                       "type" : "Interval",
+                                       "low" : {
+                                          "locator" : "144:60-144:63",
+                                          "type" : "End",
+                                          "signature" : [ {
+                                             "type" : "IntervalTypeSpecifier",
+                                             "pointType" : {
+                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          } ],
+                                          "operand" : {
+                                             "locator" : "144:25-144:58",
+                                             "name" : "prevalenceInterval",
+                                             "libraryName" : "QICoreCommon",
+                                             "type" : "FunctionRef",
+                                             "resultTypeSpecifier" : {
+                                                "type" : "IntervalTypeSpecifier",
+                                                "pointType" : {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }
+                                             },
+                                             "signature" : [ {
+                                                "name" : "{http://hl7.org/fhir}Condition",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
+                                             "operand" : [ {
+                                                "locator" : "144:25-144:35",
+                                                "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                                                "name" : "Underweight",
+                                                "type" : "AliasRef"
+                                             } ]
+                                          }
+                                       },
+                                       "high" : {
+                                          "locator" : "144:60-144:63",
+                                          "type" : "End",
+                                          "signature" : [ {
+                                             "type" : "IntervalTypeSpecifier",
+                                             "pointType" : {
+                                                "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                "type" : "NamedTypeSpecifier"
+                                             }
+                                          } ],
+                                          "operand" : {
+                                             "locator" : "144:25-144:58",
+                                             "name" : "prevalenceInterval",
+                                             "libraryName" : "QICoreCommon",
+                                             "type" : "FunctionRef",
+                                             "resultTypeSpecifier" : {
+                                                "type" : "IntervalTypeSpecifier",
+                                                "pointType" : {
+                                                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                                   "type" : "NamedTypeSpecifier"
+                                                }
+                                             },
+                                             "signature" : [ {
+                                                "name" : "{http://hl7.org/fhir}Condition",
+                                                "type" : "NamedTypeSpecifier"
+                                             } ],
+                                             "operand" : [ {
+                                                "locator" : "144:25-144:35",
+                                                "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                                                "name" : "Underweight",
+                                                "type" : "AliasRef"
+                                             } ]
+                                          }
+                                       }
+                                    }
+                                 }, {
+                                    "locator" : "144:79-144:128",
+                                    "name" : "toInterval",
+                                    "libraryName" : "QICoreCommon",
+                                    "type" : "FunctionRef",
+                                    "resultTypeSpecifier" : {
+                                       "type" : "IntervalTypeSpecifier",
+                                       "pointType" : {
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }
+                                    },
+                                    "signature" : [ {
+                                       "type" : "ChoiceTypeSpecifier",
+                                       "choice" : [ {
+                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                          "type" : "NamedTypeSpecifier"
+                                       }, {
+                                          "type" : "IntervalTypeSpecifier",
+                                          "pointType" : {
+                                             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       }, {
+                                          "type" : "IntervalTypeSpecifier",
+                                          "pointType" : {
+                                             "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                                             "type" : "NamedTypeSpecifier"
+                                          }
+                                       }, {
+                                          "name" : "{http://hl7.org/fhir}Timing",
+                                          "type" : "NamedTypeSpecifier"
+                                       } ]
+                                    } ],
+                                    "operand" : [ {
+                                       "locator" : "144:79-144:113",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -3913,98 +4106,7 @@
                                        } ]
                                     } ]
                                  } ]
-                              } ]
-                           }, {
-                              "locator" : "144:19-144:103",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "precision" : "Day",
-                              "type" : "IncludedIn",
-                              "signature" : [ {
-                                 "type" : "IntervalTypeSpecifier",
-                                 "pointType" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              }, {
-                                 "type" : "IntervalTypeSpecifier",
-                                 "pointType" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              } ],
-                              "operand" : [ {
-                                 "locator" : "144:19-144:68",
-                                 "name" : "toInterval",
-                                 "libraryName" : "QICoreCommon",
-                                 "type" : "FunctionRef",
-                                 "resultTypeSpecifier" : {
-                                    "type" : "IntervalTypeSpecifier",
-                                    "pointType" : {
-                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "type" : "NamedTypeSpecifier"
-                                    }
-                                 },
-                                 "signature" : [ {
-                                    "type" : "ChoiceTypeSpecifier",
-                                    "choice" : [ {
-                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "type" : "NamedTypeSpecifier"
-                                    }, {
-                                       "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                       "type" : "NamedTypeSpecifier"
-                                    }, {
-                                       "type" : "IntervalTypeSpecifier",
-                                       "pointType" : {
-                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                          "type" : "NamedTypeSpecifier"
-                                       }
-                                    }, {
-                                       "type" : "IntervalTypeSpecifier",
-                                       "pointType" : {
-                                          "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                          "type" : "NamedTypeSpecifier"
-                                       }
-                                    }, {
-                                       "name" : "{http://hl7.org/fhir}Timing",
-                                       "type" : "NamedTypeSpecifier"
-                                    } ]
-                                 } ],
-                                 "operand" : [ {
-                                    "locator" : "144:19-144:53",
-                                    "name" : "ToValue",
-                                    "libraryName" : "FHIRHelpers",
-                                    "type" : "FunctionRef",
-                                    "resultTypeSpecifier" : {
-                                       "type" : "ChoiceTypeSpecifier",
-                                       "choice" : [ {
-                                          "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                          "type" : "NamedTypeSpecifier"
-                                       }, {
-                                          "type" : "IntervalTypeSpecifier",
-                                          "pointType" : {
-                                             "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                             "type" : "NamedTypeSpecifier"
-                                          }
-                                       } ]
-                                    },
-                                    "operand" : [ {
-                                       "path" : "performed",
-                                       "scope" : "LowInterventionsPerformed",
-                                       "type" : "Property"
-                                    } ]
-                                 } ]
-                              }, {
-                                 "locator" : "144:84-144:103",
-                                 "name" : "Measurement Period",
-                                 "type" : "ParameterRef",
-                                 "resultTypeSpecifier" : {
-                                    "type" : "IntervalTypeSpecifier",
-                                    "pointType" : {
-                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "type" : "NamedTypeSpecifier"
-                                    }
-                                 }
-                              } ]
+                              }
                            } ]
                         }
                      }
@@ -4397,13 +4499,13 @@
                } ]
             }
          }, {
-            "locator" : "75:1-81:5",
+            "locator" : "75:1-82:5",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Normal BMI",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "76:3-81:5",
+               "locator" : "76:3-82:5",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "signature" : [ {
@@ -4414,7 +4516,7 @@
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "locator" : "76:3-78:3",
+                  "locator" : "76:3-79:3",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Exists",
                   "signature" : [ {
@@ -4425,7 +4527,7 @@
                      }
                   } ],
                   "operand" : {
-                     "locator" : "76:10-78:3",
+                     "locator" : "76:10-79:3",
                      "type" : "Query",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -4459,61 +4561,79 @@
                      } ],
                      "relationship" : [ ],
                      "where" : {
-                        "locator" : "77:7-77:61",
+                        "locator" : "77:7-78:34",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "In",
+                        "type" : "And",
                         "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "NamedTypeSpecifier"
                         }, {
-                           "type" : "IntervalTypeSpecifier",
-                           "pointType" : {
-                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                              "type" : "NamedTypeSpecifier"
-                           }
+                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "77:13-77:21",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-                           "name" : "ToQuantity",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
+                           "locator" : "77:13-77:37",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "GreaterOrEqual",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
                            "operand" : [ {
-                              "path" : "value",
-                              "scope" : "BMI",
-                              "type" : "Property"
-                           } ]
-                        }, {
-                           "locator" : "77:26-77:61",
-                           "lowClosed" : true,
-                           "highClosed" : true,
-                           "type" : "Interval",
-                           "resultTypeSpecifier" : {
-                              "type" : "IntervalTypeSpecifier",
-                              "pointType" : {
-                                 "name" : "{urn:hl7-org:elm-types:r1}Quantity",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           },
-                           "low" : {
-                              "locator" : "77:35-77:46",
+                              "locator" : "77:13-77:21",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "name" : "ToQuantity",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "value",
+                                 "scope" : "BMI",
+                                 "type" : "Property"
+                              } ]
+                           }, {
+                              "locator" : "77:26-77:37",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "value" : 18.5,
                               "unit" : "kg/m2",
                               "type" : "Quantity"
-                           },
-                           "high" : {
-                              "locator" : "77:49-77:60",
+                           } ]
+                        }, {
+                           "locator" : "78:13-78:34",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "type" : "Less",
+                           "signature" : [ {
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "type" : "NamedTypeSpecifier"
+                           }, {
+                              "name" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "type" : "NamedTypeSpecifier"
+                           } ],
+                           "operand" : [ {
+                              "locator" : "78:13-78:21",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
-                              "value" : 24.9,
+                              "name" : "ToQuantity",
+                              "libraryName" : "FHIRHelpers",
+                              "type" : "FunctionRef",
+                              "operand" : [ {
+                                 "path" : "value",
+                                 "scope" : "BMI",
+                                 "type" : "Property"
+                              } ]
+                           }, {
+                              "locator" : "78:25-78:34",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
+                              "value" : 25,
                               "unit" : "kg/m2",
                               "type" : "Quantity"
-                           }
+                           } ]
                         } ]
                      }
                   }
                }, {
-                  "locator" : "79:9-81:5",
+                  "locator" : "80:9-82:5",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Not",
                   "signature" : [ {
@@ -4521,7 +4641,7 @@
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : {
-                     "locator" : "79:13-81:5",
+                     "locator" : "80:13-82:5",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Or",
                      "signature" : [ {
@@ -4532,7 +4652,7 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "79:15-79:68",
+                        "locator" : "80:15-80:68",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Exists",
                         "signature" : [ {
@@ -4543,7 +4663,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "79:22-79:68",
+                           "locator" : "80:22-80:68",
                            "name" : "Documented High BMI during Measurement Period",
                            "type" : "ExpressionRef",
                            "resultTypeSpecifier" : {
@@ -4555,7 +4675,7 @@
                            }
                         }
                      }, {
-                        "locator" : "80:12-80:64",
+                        "locator" : "81:12-81:64",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Exists",
                         "signature" : [ {
@@ -4566,7 +4686,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "80:19-80:64",
+                           "locator" : "81:19-81:64",
                            "name" : "Documented Low BMI during Measurement Period",
                            "type" : "ExpressionRef",
                            "resultTypeSpecifier" : {
@@ -5517,7 +5637,7 @@
                } ]
             }
          }, {
-            "locator" : "114:1-121:7",
+            "locator" : "113:1-120:7",
             "name" : "Medical Reason or Patient Reason for Not Performing BMI Exam",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -5529,7 +5649,7 @@
                }
             },
             "expression" : {
-               "locator" : "115:3-121:7",
+               "locator" : "114:3-120:7",
                "type" : "Query",
                "resultTypeSpecifier" : {
                   "type" : "ListTypeSpecifier",
@@ -5539,7 +5659,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "115:3-115:68",
+                  "locator" : "114:3-114:68",
                   "alias" : "NoBMI",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -5549,7 +5669,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "115:3-115:62",
+                     "locator" : "114:3-114:62",
                      "dataType" : "{http://hl7.org/fhir}Observation",
                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-observationnotdone",
                      "codeProperty" : "code",
@@ -5565,7 +5685,7 @@
                      "codes" : {
                         "type" : "ToList",
                         "operand" : {
-                           "locator" : "115:31-115:61",
+                           "locator" : "114:31-114:61",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                            "name" : "Body mass index (BMI) [Ratio]",
                            "type" : "CodeRef"
@@ -5574,7 +5694,7 @@
                   }
                } ],
                "relationship" : [ {
-                  "locator" : "116:5-117:99",
+                  "locator" : "115:5-116:99",
                   "alias" : "QualifyingEncounter",
                   "type" : "With",
                   "resultTypeSpecifier" : {
@@ -5585,7 +5705,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "116:10-116:64",
+                     "locator" : "115:10-115:64",
                      "name" : "Qualifying Encounter during Day of Measurement Period",
                      "type" : "ExpressionRef",
                      "resultTypeSpecifier" : {
@@ -5597,7 +5717,7 @@
                      }
                   },
                   "suchThat" : {
-                     "locator" : "117:17-117:99",
+                     "locator" : "116:17-116:99",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "precision" : "Day",
                      "type" : "SameAs",
@@ -5609,7 +5729,7 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "117:48-117:51",
+                        "locator" : "116:48-116:51",
                         "type" : "End",
                         "signature" : [ {
                            "type" : "IntervalTypeSpecifier",
@@ -5619,7 +5739,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "117:17-117:46",
+                           "locator" : "116:17-116:46",
                            "name" : "toInterval",
                            "libraryName" : "QICoreCommon",
                            "type" : "FunctionRef",
@@ -5656,7 +5776,7 @@
                               } ]
                            } ],
                            "operand" : [ {
-                              "locator" : "117:17-117:31",
+                              "locator" : "116:17-116:31",
                               "name" : "ToValue",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -5687,7 +5807,7 @@
                            } ]
                         }
                      }, {
-                        "locator" : "117:65-117:99",
+                        "locator" : "116:65-116:99",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Start",
                         "signature" : [ {
@@ -5698,7 +5818,7 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "117:74-117:99",
+                           "locator" : "116:74-116:99",
                            "name" : "ToInterval",
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
@@ -5719,7 +5839,7 @@
                   }
                } ],
                "where" : {
-                  "locator" : "118:5-121:7",
+                  "locator" : "117:5-120:7",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "signature" : [ {
@@ -5730,7 +5850,7 @@
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : [ {
-                     "locator" : "118:11-118:36",
+                     "locator" : "117:11-117:36",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
                      "signature" : [ {
@@ -5741,7 +5861,7 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "118:11-118:22",
+                        "locator" : "117:11-117:22",
                         "resultTypeName" : "{http://hl7.org/fhir}ObservationStatus",
                         "path" : "value",
                         "type" : "Property",
@@ -5751,14 +5871,14 @@
                            "type" : "Property"
                         }
                      }, {
-                        "locator" : "118:26-118:36",
+                        "locator" : "117:26-117:36",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "cancelled",
                         "type" : "Literal"
                      } ]
                   }, {
-                     "locator" : "119:11-121:7",
+                     "locator" : "118:11-120:7",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Or",
                      "signature" : [ {
@@ -5769,7 +5889,7 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "119:13-119:53",
+                        "locator" : "118:13-118:53",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "InValueSet",
                         "signature" : [ {
@@ -5777,7 +5897,7 @@
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "code" : {
-                           "locator" : "119:13-119:31",
+                           "locator" : "118:13-118:31",
                            "resultTypeName" : "{http://hl7.org/fhir}NotDoneReason",
                            "name" : "ToConcept",
                            "libraryName" : "FHIRHelpers",
@@ -5833,13 +5953,13 @@
                            } ]
                         },
                         "valueset" : {
-                           "locator" : "119:36-119:53",
+                           "locator" : "118:36-118:53",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Patient Declined",
                            "preserve" : true
                         }
                      }, {
-                        "locator" : "120:14-120:52",
+                        "locator" : "119:14-119:52",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "InValueSet",
                         "signature" : [ {
@@ -5847,7 +5967,7 @@
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "code" : {
-                           "locator" : "120:14-120:32",
+                           "locator" : "119:14-119:32",
                            "resultTypeName" : "{http://hl7.org/fhir}NotDoneReason",
                            "name" : "ToConcept",
                            "libraryName" : "FHIRHelpers",
@@ -5903,7 +6023,7 @@
                            } ]
                         },
                         "valueset" : {
-                           "locator" : "120:37-120:52",
+                           "locator" : "119:37-119:52",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Medical Reason",
                            "preserve" : true

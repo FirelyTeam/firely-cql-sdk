@@ -31,7 +31,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual($"{{{SystemUri}}}Integer", ((NamedTypeSpecifier)start.resultTypeSpecifier).name.Name);
                 Assert.IsNotNull(start.operand);
                 Assert.IsInstanceOfType(start.operand, typeof(Interval));
-                var result = Run(start);
+                var result = Run(start, library);
                 Assert.IsInstanceOfType(result, typeof(int?));
                 Assert.AreEqual(1, result);
             }
@@ -57,7 +57,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual($"{{{SystemUri}}}Integer", ((NamedTypeSpecifier)start.resultTypeSpecifier).name.Name);
                 Assert.IsNotNull(start.operand);
                 Assert.IsInstanceOfType(start.operand, typeof(As));
-                var result = Run(start);
+                var result = Run(start, library);
                 Assert.IsNull(result);
             }
         }
@@ -82,7 +82,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual($"{{{SystemUri}}}Integer", ((NamedTypeSpecifier)start.resultTypeSpecifier).name.Name);
                 Assert.IsNotNull(start.operand);
                 Assert.IsInstanceOfType(start.operand, typeof(Interval));
-                var result = Run(start);
+                var result = Run(start, library);
                 Assert.IsNull(result);
             }
         }
@@ -108,7 +108,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual($"{{{SystemUri}}}Integer", ((NamedTypeSpecifier)end.resultTypeSpecifier).name.Name);
                 Assert.IsNotNull(end.operand);
                 Assert.IsInstanceOfType(end.operand, typeof(Interval));
-                var result = Run(end);
+                var result = Run(end, library);
                 Assert.IsInstanceOfType(result, typeof(int?));
                 Assert.AreEqual(3, result);
             }
@@ -134,7 +134,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual($"{{{SystemUri}}}Integer", ((NamedTypeSpecifier)end.resultTypeSpecifier).name.Name);
                 Assert.IsNotNull(end.operand);
                 Assert.IsInstanceOfType(end.operand, typeof(As));
-                var result = Run(end);
+                var result = Run(end, library);
                 Assert.IsNull(result);
             }
         }
@@ -159,7 +159,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual($"{{{SystemUri}}}Integer", ((NamedTypeSpecifier)end.resultTypeSpecifier).name.Name);
                 Assert.IsNotNull(end.operand);
                 Assert.IsInstanceOfType(end.operand, typeof(Interval));
-                var result = Run(end);
+                var result = Run(end, library);
                 Assert.IsNull(result);
             }
         }

@@ -35,7 +35,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, overlaps.operand.Length);
                 Assert.IsInstanceOfType(overlaps.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(overlaps.operand[1], typeof(Interval));
-                var result = Run(overlaps);
+                var result = Run(overlaps, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -64,7 +64,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, overlaps.operand.Length);
                 Assert.IsInstanceOfType(overlaps.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(overlaps.operand[1], typeof(Interval));
-                var result = Run(overlaps);
+                var result = Run(overlaps, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -93,7 +93,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, overlaps.operand.Length);
                 Assert.IsInstanceOfType(overlaps.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(overlaps.operand[1], typeof(Interval));
-                var result = Run(overlaps);
+                var result = Run(overlaps, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(false, result);
             }
@@ -122,7 +122,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, overlaps.operand.Length);
                 Assert.IsInstanceOfType(overlaps.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(overlaps.operand[1], typeof(As));
-                var result = Run(overlaps);
+                var result = Run(overlaps, library);
                 Assert.IsNull(result);
             }
         }
@@ -150,7 +150,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, overlaps.operand.Length);
                 Assert.IsInstanceOfType(overlaps.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(overlaps.operand[1], typeof(Interval));
-                var result = Run(overlaps);
+                var result = Run(overlaps, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(true, result);
             }
@@ -179,7 +179,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(2, overlaps.operand.Length);
                 Assert.IsInstanceOfType(overlaps.operand[0], typeof(Interval));
                 Assert.IsInstanceOfType(overlaps.operand[1], typeof(Interval));
-                var result = Run(overlaps);
+                var result = Run(overlaps, library);
                 Assert.IsInstanceOfType(result, typeof(bool?));
                 Assert.AreEqual(false, result);
             }

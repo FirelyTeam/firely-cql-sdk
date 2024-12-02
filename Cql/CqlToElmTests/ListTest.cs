@@ -175,7 +175,7 @@ namespace Hl7.Cql.CqlToElm.Test
             coalesce.operand.Should().HaveCount(2);
             coalesce.operand[0].Should().BeLiteralInteger(3);
             coalesce.operand[1].Should().BeLiteralInteger(0);
-            var result = Run(slice);
+            var result = Run(slice, library);
             Assert.IsNull(result);
         }
 

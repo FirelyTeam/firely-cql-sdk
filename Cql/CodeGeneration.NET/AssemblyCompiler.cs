@@ -186,7 +186,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 var ex = new InvalidOperationException($"The following compilation errors were detected when compiling {library.GetVersionedIdentifier()!}:{Environment.NewLine}{sb}");
                 ex.Data["Errors"] = errors;
                 ex.Data["Warnings"] = warnings;
-
+                ex.Data["SourceCode"] = sourceCode;
                 throw ex;
             }
             var bytes = codeStream.ToArray();

@@ -145,7 +145,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     }
                 }
             }
-            var result = Run(and);
+            var result = Run(and, library);
             Assert.AreEqual(true, result);
         }
 
@@ -167,7 +167,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = CreateLibraryForExpression("Interval[@2012-12-01, @2013-12-01] on or after month of @2012-11-15");
             var sameOrAfter = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SameOrAfter>();
-            var result = Run<bool?>(sameOrAfter);
+            var result = Run<bool?>(sameOrAfter, library);
             result.Should().BeTrue();
         }
 
@@ -176,7 +176,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = CreateLibraryForExpression("Interval[@2012-10-01, @2012-11-01] on or before month of @2012-11-15");
             var sameOrBefore = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SameOrBefore>();
-            var result = Run<bool?>(sameOrBefore);
+            var result = Run<bool?>(sameOrBefore, library);
             result.Should().BeTrue();
         }
 

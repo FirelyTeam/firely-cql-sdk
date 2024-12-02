@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.7.0")]
 [CqlLibrary("HIVViralSuppressionFHIR", "0.1.000")]
 public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVViralSuppressionFHIR_0_1_000>
 {
@@ -23,7 +23,7 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
     #region Library Members
     public string Name => "HIVViralSuppressionFHIR";
     public string Version => "0.1.000";
-    public ILibrary[] Dependencies => [CQMCommon_2_0_000.Instance, FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, SupplementalDataElements_3_4_000.Instance];
+    public ILibrary[] Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Annual Wellness Visit")]
@@ -145,9 +145,9 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-        CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+        CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime b_ = context.Operators.DateTime(2025, 12, 31, 23, 59, 59, 999, 0.0m);
+        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
         object d_ = context.ResolveParameter("HIVViralSuppressionFHIR-0.1.000", "Measurement Period", c_);
 
         return (CqlInterval<CqlDateTime>)d_;
@@ -171,7 +171,7 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition HIVDx)
         {
-            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.Instance.ToPrevalenceInterval(context, HIVDx);
+            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, HIVDx);
             CqlDateTime g_ = context.Operators.Start(f_);
             CqlInterval<CqlDateTime> h_ = this.Measurement_Period(context);
             CqlDateTime i_ = context.Operators.Start(h_);
@@ -232,7 +232,7 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
             CqlDateTime ao_ = context.Operators.Add(am_, an_);
             CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(ak_, ao_, true, true);
             Period aq_ = QualifyingEncounter?.Period;
-            CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, aq_);
+            CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aq_);
             bool? as_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ap_, ar_, "day");
 
             return as_;
@@ -267,7 +267,7 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -276,7 +276,7 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -285,7 +285,7 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -294,7 +294,7 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_3_4_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }
@@ -312,7 +312,7 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
                 bool l_()
                 {
                     DataType o_ = ViralLoad?.Effective;
-                    object p_ = FHIRHelpers_4_3_000.Instance.ToValue(context, o_);
+                    object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, o_);
                     bool q_ = p_ is CqlDateTime;
 
                     return q_;
@@ -320,7 +320,7 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
                 bool m_()
                 {
                     DataType r_ = ViralLoad?.Effective;
-                    object s_ = FHIRHelpers_4_3_000.Instance.ToValue(context, r_);
+                    object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
                     bool t_ = s_ is CqlInterval<CqlDateTime>;
 
                     return t_;
@@ -328,7 +328,7 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
                 bool n_()
                 {
                     DataType u_ = ViralLoad?.Effective;
-                    object v_ = FHIRHelpers_4_3_000.Instance.ToValue(context, u_);
+                    object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
                     bool w_ = v_ is CqlDateTime;
 
                     return w_;
@@ -336,21 +336,21 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
                 if (l_())
                 {
                     DataType x_ = ViralLoad?.Effective;
-                    object y_ = FHIRHelpers_4_3_000.Instance.ToValue(context, x_);
+                    object y_ = FHIRHelpers_4_4_000.Instance.ToValue(context, x_);
 
                     return (y_ as CqlDateTime) as object;
                 }
                 else if (m_())
                 {
                     DataType z_ = ViralLoad?.Effective;
-                    object aa_ = FHIRHelpers_4_3_000.Instance.ToValue(context, z_);
+                    object aa_ = FHIRHelpers_4_4_000.Instance.ToValue(context, z_);
 
                     return (aa_ as CqlInterval<CqlDateTime>) as object;
                 }
                 else if (n_())
                 {
                     DataType ab_ = ViralLoad?.Effective;
-                    object ac_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ab_);
+                    object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
 
                     return (ac_ as CqlDateTime) as object;
                 }
@@ -359,7 +359,7 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
                     return null;
                 }
             };
-            CqlDateTime i_ = QICoreCommon_2_0_000.Instance.Latest(context, h_());
+            CqlDateTime i_ = QICoreCommon_2_1_000.Instance.latest(context, h_());
             CqlInterval<CqlDateTime> j_ = this.Measurement_Period(context);
             bool? k_ = context.Operators.In<CqlDateTime>(i_, j_, "day");
 
@@ -369,8 +369,8 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
         object e_(Observation @this)
         {
             DataType ad_ = @this?.Effective;
-            object ae_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ad_);
-            CqlInterval<CqlDateTime> af_ = QICoreCommon_2_0_000.Instance.ToInterval(context, ae_);
+            object ae_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ad_);
+            CqlInterval<CqlDateTime> af_ = QICoreCommon_2_1_000.Instance.toInterval(context, ae_);
             CqlDateTime ag_ = context.Operators.Start(af_);
 
             return ag_;
@@ -387,17 +387,17 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
     {
         Observation a_ = this.Most_Recent_Viral_Load_Test_During_Measurement_Period(context);
         DataType b_ = a_?.Value;
-        object c_ = FHIRHelpers_4_3_000.Instance.ToValue(context, b_);
+        object c_ = FHIRHelpers_4_4_000.Instance.ToValue(context, b_);
         CqlQuantity d_ = context.Operators.Quantity(200m, "{copies}/mL");
         bool? e_ = context.Operators.Less(c_ as CqlQuantity, d_);
         DataType g_ = a_?.Value;
-        object h_ = FHIRHelpers_4_3_000.Instance.ToValue(context, g_);
+        object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
         CqlCode i_ = this.Below_threshold_level__qualifier_value_(context);
         CqlConcept j_ = context.Operators.ConvertCodeToConcept(i_);
         bool? k_ = context.Operators.Equivalent(h_ as CqlConcept, j_);
         bool? l_ = context.Operators.Or(e_, k_);
         DataType n_ = a_?.Value;
-        object o_ = FHIRHelpers_4_3_000.Instance.ToValue(context, n_);
+        object o_ = FHIRHelpers_4_4_000.Instance.ToValue(context, n_);
         CqlCode p_ = this.Not_detected__qualifier_value_(context);
         CqlConcept q_ = context.Operators.ConvertCodeToConcept(p_);
         bool? r_ = context.Operators.Equivalent(o_ as CqlConcept, q_);

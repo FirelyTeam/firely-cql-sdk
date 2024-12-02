@@ -52,14 +52,6 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             public string GetTupleMetadataPropertyName(IReadOnlyCollection<(string Name, Type Type)> tupleProperties) =>
                 _tupleMetadataBuilder.GetTupleMetadataPropertyName(tupleProperties);
-
-            public void Deconstruct(
-                out int Indent,
-                out bool UseIndent)
-            {
-                Indent = this.Indent;
-                UseIndent = this.UseIndent;
-            }
         }
 
         public Context NewContext(
@@ -718,7 +710,14 @@ namespace Hl7.Cql.CodeGeneration.NET
                 var leftCode =  ConvertExpression(left, nextArgs);
                 leftCode = leftCode.ParenthesizeIfNeeded();
                 var rightCode = ConvertExpression(right, nextArgs);
-                var binaryString = $"{context.IndentString}{leftCode} {@operator} {rightCode}";
+                string binaryString = @operator switch
+                {
+                    // (constant value is null) --> false
+                    "is" when rightCode == "null" && left is ConstantExpression { Value: ValueType } => "false",
+                    // (null is null) --> true
+                    "is" when rightCode == "null" && left is ConstantExpression { Value: null } => "true",
+                    _ => $"{context.IndentString}{leftCode} {@operator} {rightCode}"
+                };
                 return binaryString;
             }
         }

@@ -7,7 +7,7 @@
       } ],
       "identifier" : {
          "id" : "HFBetaBlockerTherapyforLVSDFHIR",
-         "version" : "1.3.000"
+         "version" : "1.4.000"
       },
       "schemaIdentifier" : {
          "id" : "urn:hl7-org:elm",
@@ -28,27 +28,27 @@
             "locator" : "5:1-5:56",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.3.000"
+            "version" : "4.4.000"
          }, {
             "locator" : "6:1-6:61",
             "localIdentifier" : "SDE",
             "path" : "SupplementalDataElements",
-            "version" : "3.4.000"
+            "version" : "3.5.000"
          }, {
             "locator" : "7:1-7:58",
             "localIdentifier" : "QICoreCommon",
             "path" : "QICoreCommon",
-            "version" : "2.0.000"
+            "version" : "2.1.000"
          }, {
             "locator" : "8:1-8:47",
             "localIdentifier" : "AHA",
             "path" : "AHAOverall",
-            "version" : "2.6.000"
+            "version" : "2.8.000"
          } ]
       },
       "parameters" : {
          "def" : [ {
-            "locator" : "29:1-29:114",
+            "locator" : "28:1-29:72",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
             "resultTypeSpecifier" : {
@@ -59,9 +59,9 @@
                }
             },
             "default" : {
-               "locator" : "29:58-29:114",
+               "locator" : "29:11-29:72",
                "lowClosed" : true,
-               "highClosed" : false,
+               "highClosed" : true,
                "type" : "Interval",
                "resultTypeSpecifier" : {
                   "type" : "IntervalTypeSpecifier",
@@ -71,7 +71,7 @@
                   }
                },
                "low" : {
-                  "locator" : "29:67-29:88",
+                  "locator" : "29:20-29:44",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
                   "year" : {
@@ -108,51 +108,61 @@
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
                      "type" : "Literal"
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal"
                   }
                },
                "high" : {
-                  "locator" : "29:91-29:112",
+                  "locator" : "29:47-29:71",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
                   "year" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2026",
+                     "value" : "2025",
                      "type" : "Literal"
                   },
                   "month" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
+                     "value" : "12",
                      "type" : "Literal"
                   },
                   "day" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
+                     "value" : "31",
                      "type" : "Literal"
                   },
                   "hour" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "23",
                      "type" : "Literal"
                   },
                   "minute" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "59",
                      "type" : "Literal"
                   },
                   "second" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "59",
                      "type" : "Literal"
                   },
                   "millisecond" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "999",
+                     "type" : "Literal"
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
                      "type" : "Literal"
                   }
                }
             },
             "parameterTypeSpecifier" : {
-               "locator" : "29:32-29:49",
+               "locator" : "28:32-28:49",
                "type" : "IntervalTypeSpecifier",
                "resultTypeSpecifier" : {
                   "type" : "IntervalTypeSpecifier",
@@ -162,7 +172,7 @@
                   }
                },
                "pointType" : {
-                  "locator" : "29:41-29:48",
+                  "locator" : "28:41-28:48",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "name" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "NamedTypeSpecifier"
@@ -247,19 +257,13 @@
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1178",
             "accessLevel" : "Public"
          }, {
-            "locator" : "23:1-23:121",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-            "name" : "Left Ventricular Assist Device Placement",
-            "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.61",
-            "accessLevel" : "Public"
-         }, {
-            "locator" : "24:1-24:96",
+            "locator" : "23:1-23:96",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Medical Reason",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007",
             "accessLevel" : "Public"
          }, {
-            "locator" : "25:1-25:96",
+            "locator" : "24:1-24:96",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
             "name" : "Patient Reason",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008",
@@ -268,14 +272,14 @@
       },
       "codes" : {
          "def" : [ {
-            "locator" : "27:1-27:211",
+            "locator" : "26:1-26:211",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "Substance with beta adrenergic receptor antagonist mechanism of action (substance)",
             "id" : "373254001",
             "display" : "Substance with beta adrenergic receptor antagonist mechanism of action (substance)",
             "accessLevel" : "Public",
             "codeSystem" : {
-               "locator" : "27:109-27:118",
+               "locator" : "26:109-26:118",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}CodeSystem",
                "name" : "SNOMEDCT"
             }
@@ -302,184 +306,26 @@
                }
             }
          }, {
-            "locator" : "33:1-36:55",
+            "locator" : "33:1-34:132",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Initial Population",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "34:3-36:55",
+               "locator" : "34:3-34:132",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-               "type" : "And",
-               "signature" : [ {
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               }, {
-                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "NamedTypeSpecifier"
-               } ],
-               "operand" : [ {
-                  "locator" : "34:3-35:83",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "And",
-                  "signature" : [ {
-                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "NamedTypeSpecifier"
-                  }, {
-                     "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "NamedTypeSpecifier"
-                  } ],
-                  "operand" : [ {
-                     "locator" : "34:3-34:61",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "GreaterOrEqual",
-                     "signature" : [ {
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : [ {
-                        "locator" : "34:3-34:55",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "precision" : "Year",
-                        "type" : "CalculateAgeAt",
-                        "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Date",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Date",
-                           "type" : "NamedTypeSpecifier"
-                        } ],
-                        "operand" : [ {
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
-                              "path" : "birthDate",
-                              "type" : "Property",
-                              "source" : {
-                                 "name" : "Patient",
-                                 "type" : "ExpressionRef"
-                              }
-                           }
-                        }, {
-                           "locator" : "34:16-34:54",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Date",
-                           "type" : "DateFrom",
-                           "signature" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : {
-                              "locator" : "34:26-34:54",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
-                              "type" : "Start",
-                              "signature" : [ {
-                                 "type" : "IntervalTypeSpecifier",
-                                 "pointType" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              } ],
-                              "operand" : {
-                                 "locator" : "34:35-34:54",
-                                 "name" : "Measurement Period",
-                                 "type" : "ParameterRef",
-                                 "resultTypeSpecifier" : {
-                                    "type" : "IntervalTypeSpecifier",
-                                    "pointType" : {
-                                       "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                       "type" : "NamedTypeSpecifier"
-                                    }
-                                 }
-                              }
-                           }
-                        } ]
-                     }, {
-                        "locator" : "34:60-34:61",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "18",
-                        "type" : "Literal"
-                     } ]
-                  }, {
-                     "locator" : "35:9-35:83",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "GreaterOrEqual",
-                     "signature" : [ {
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "name" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : [ {
-                        "locator" : "35:9-35:78",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "type" : "Count",
-                        "signature" : [ {
-                           "type" : "ListTypeSpecifier",
-                           "elementType" : {
-                              "name" : "{http://hl7.org/fhir}Encounter",
-                              "type" : "NamedTypeSpecifier"
-                           }
-                        } ],
-                        "source" : {
-                           "locator" : "35:15-35:77",
-                           "name" : "Qualifying Outpatient Encounter During Measurement Period",
-                           "libraryName" : "AHA",
-                           "type" : "ExpressionRef",
-                           "resultTypeSpecifier" : {
-                              "type" : "ListTypeSpecifier",
-                              "elementType" : {
-                                 "name" : "{http://hl7.org/fhir}Encounter",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           }
-                        }
-                     }, {
-                        "locator" : "35:83",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                        "value" : "2",
-                        "type" : "Literal"
-                     } ]
-                  } ]
-               }, {
-                  "locator" : "36:9-36:55",
-                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                  "type" : "Exists",
-                  "signature" : [ {
-                     "type" : "ListTypeSpecifier",
-                     "elementType" : {
-                        "name" : "{http://hl7.org/fhir}Encounter",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  } ],
-                  "operand" : {
-                     "locator" : "36:16-36:55",
-                     "name" : "Heart Failure Outpatient Encounter",
-                     "libraryName" : "AHA",
-                     "type" : "ExpressionRef",
-                     "resultTypeSpecifier" : {
-                        "type" : "ListTypeSpecifier",
-                        "elementType" : {
-                           "name" : "{http://hl7.org/fhir}Encounter",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     }
-                  }
-               } ]
+               "name" : "Is Adults With Two Qualifying Outpatient Encounters and One Heart Failure Outpatient Encounter During the Measurement Period",
+               "libraryName" : "AHA",
+               "type" : "ExpressionRef"
             }
          }, {
-            "locator" : "38:1-40:95",
+            "locator" : "36:1-38:95",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Denominator",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "39:3-40:95",
+               "locator" : "37:3-38:95",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "signature" : [ {
@@ -490,12 +336,12 @@
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "locator" : "39:3-39:22",
+                  "locator" : "37:3-37:22",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "Initial Population",
                   "type" : "ExpressionRef"
                }, {
-                  "locator" : "40:9-40:95",
+                  "locator" : "38:9-38:95",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Exists",
                   "signature" : [ {
@@ -506,7 +352,7 @@
                      }
                   } ],
                   "operand" : {
-                     "locator" : "40:16-40:95",
+                     "locator" : "38:16-38:95",
                      "name" : "Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD",
                      "libraryName" : "AHA",
                      "type" : "ExpressionRef",
@@ -521,13 +367,13 @@
                } ]
             }
          }, {
-            "locator" : "42:1-46:61",
+            "locator" : "40:1-44:61",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Denominator Exclusions",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "43:3-46:61",
+               "locator" : "41:3-44:61",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "signature" : [ {
@@ -538,7 +384,7 @@
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "locator" : "43:3-45:47",
+                  "locator" : "41:3-43:47",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
                   "signature" : [ {
@@ -549,7 +395,7 @@
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : [ {
-                     "locator" : "43:3-44:47",
+                     "locator" : "41:3-42:47",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Or",
                      "signature" : [ {
@@ -560,27 +406,27 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "43:3-43:28",
+                        "locator" : "41:3-41:28",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "Has Heart Transplant",
                         "libraryName" : "AHA",
                         "type" : "ExpressionRef"
                      }, {
-                        "locator" : "44:8-44:47",
+                        "locator" : "42:8-42:47",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "Has Heart Transplant Complications",
                         "libraryName" : "AHA",
                         "type" : "ExpressionRef"
                      } ]
                   }, {
-                     "locator" : "45:8-45:47",
+                     "locator" : "43:8-43:47",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "Has Left Ventricular Assist Device",
                      "libraryName" : "AHA",
                      "type" : "ExpressionRef"
                   } ]
                }, {
-                  "locator" : "46:8-46:61",
+                  "locator" : "44:8-44:61",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "Has Left Ventricular Assist Device Complications",
                   "libraryName" : "AHA",
@@ -588,13 +434,13 @@
                } ]
             }
          }, {
-            "locator" : "110:1-115:3",
+            "locator" : "174:1-177:3",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Beta Blocker Therapy for LVSD Ordered",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "111:3-115:3",
+               "locator" : "175:3-177:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
@@ -605,7 +451,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "111:10-115:3",
+                  "locator" : "175:10-177:3",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -615,7 +461,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "111:12-111:82",
+                     "locator" : "175:12-175:82",
                      "alias" : "BetaBlockerOrdered",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -625,7 +471,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "111:12-111:63",
+                        "locator" : "175:12-175:63",
                         "type" : "Union",
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
@@ -654,14 +500,14 @@
                            "codeComparator" : "in",
                            "type" : "Retrieve",
                            "codes" : {
-                              "locator" : "111:32-111:62",
+                              "locator" : "175:32-175:62",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                               "name" : "Beta Blocker Therapy for LVSD",
                               "preserve" : true,
                               "type" : "ValueSetRef"
                            }
                         }, {
-                           "locator" : "111:12-111:63",
+                           "locator" : "175:12-175:63",
                            "dataType" : "{http://hl7.org/fhir}MedicationRequest",
                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
                            "codeProperty" : "medication",
@@ -675,7 +521,7 @@
                               }
                            },
                            "codes" : {
-                              "locator" : "111:32-111:62",
+                              "locator" : "175:32-175:62",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                               "name" : "Beta Blocker Therapy for LVSD",
                               "preserve" : true,
@@ -686,170 +532,32 @@
                   } ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "112:7-114:120",
+                     "locator" : "176:7-176:81",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "And",
+                     "name" : "isOrderedDuringHeartFailureOutpatientEncounter",
+                     "libraryName" : "AHA",
+                     "type" : "FunctionRef",
                      "signature" : [ {
-                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "112:13-113:66",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "And",
-                        "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "NamedTypeSpecifier"
-                        } ],
-                        "operand" : [ {
-                           "locator" : "112:13-112:81",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "name" : "isOrderedDuringHeartFailureOutpatientEncounter",
-                           "libraryName" : "AHA",
-                           "type" : "FunctionRef",
-                           "signature" : [ {
-                              "name" : "{http://hl7.org/fhir}MedicationRequest",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : [ {
-                              "locator" : "112:13-112:30",
-                              "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
-                              "name" : "BetaBlockerOrdered",
-                              "type" : "AliasRef"
-                           } ]
-                        }, {
-                           "locator" : "113:13-113:66",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "In",
-                           "signature" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}String",
-                              "type" : "NamedTypeSpecifier"
-                           }, {
-                              "type" : "ListTypeSpecifier",
-                              "elementType" : {
-                                 "name" : "{urn:hl7-org:elm-types:r1}String",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           } ],
-                           "operand" : [ {
-                              "locator" : "113:13-113:37",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                              "path" : "value",
-                              "type" : "Property",
-                              "source" : {
-                                 "path" : "status",
-                                 "scope" : "BetaBlockerOrdered",
-                                 "type" : "Property"
-                              }
-                           }, {
-                              "locator" : "113:42-113:66",
-                              "type" : "List",
-                              "resultTypeSpecifier" : {
-                                 "type" : "ListTypeSpecifier",
-                                 "elementType" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}String",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              },
-                              "element" : [ {
-                                 "locator" : "113:44-113:51",
-                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : "active",
-                                 "type" : "Literal"
-                              }, {
-                                 "locator" : "113:54-113:64",
-                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                 "value" : "completed",
-                                 "type" : "Literal"
-                              } ]
-                           } ]
-                        } ]
-                     }, {
-                        "locator" : "114:13-114:120",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "In",
-                        "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}String",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "type" : "ListTypeSpecifier",
-                           "elementType" : {
-                              "name" : "{urn:hl7-org:elm-types:r1}String",
-                              "type" : "NamedTypeSpecifier"
-                           }
-                        } ],
-                        "operand" : [ {
-                           "locator" : "114:13-114:37",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
-                              "path" : "intent",
-                              "scope" : "BetaBlockerOrdered",
-                              "type" : "Property"
-                           }
-                        }, {
-                           "locator" : "114:42-114:120",
-                           "type" : "List",
-                           "resultTypeSpecifier" : {
-                              "type" : "ListTypeSpecifier",
-                              "elementType" : {
-                                 "name" : "{urn:hl7-org:elm-types:r1}String",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           },
-                           "element" : [ {
-                              "locator" : "114:44-114:50",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : "order",
-                              "type" : "Literal"
-                           }, {
-                              "locator" : "114:53-114:68",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : "original-order",
-                              "type" : "Literal"
-                           }, {
-                              "locator" : "114:71-114:84",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : "reflex-order",
-                              "type" : "Literal"
-                           }, {
-                              "locator" : "114:87-114:100",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : "filler-order",
-                              "type" : "Literal"
-                           }, {
-                              "locator" : "114:103-114:118",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                              "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                              "value" : "instance-order",
-                              "type" : "Literal"
-                           } ]
-                        } ]
+                        "locator" : "176:13-176:30",
+                        "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                        "name" : "BetaBlockerOrdered",
+                        "type" : "AliasRef"
                      } ]
                   }
                }
             }
          }, {
-            "locator" : "179:1-182:3",
+            "locator" : "91:1-94:3",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Is Currently Taking Beta Blocker Therapy for LVSD",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "180:3-182:3",
+               "locator" : "92:3-94:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
@@ -860,7 +568,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "180:10-182:3",
+                  "locator" : "92:10-94:3",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -870,7 +578,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "180:12-180:83",
+                     "locator" : "92:12-92:83",
                      "alias" : "ActiveBetaBlocker",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -880,7 +588,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "180:12-180:65",
+                        "locator" : "92:12-92:65",
                         "type" : "Union",
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
@@ -909,14 +617,14 @@
                            "codeComparator" : "in",
                            "type" : "Retrieve",
                            "codes" : {
-                              "locator" : "180:34-180:64",
+                              "locator" : "92:34-92:64",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                               "name" : "Beta Blocker Therapy for LVSD",
                               "preserve" : true,
                               "type" : "ValueSetRef"
                            }
                         }, {
-                           "locator" : "180:12-180:65",
+                           "locator" : "92:12-92:65",
                            "dataType" : "{http://hl7.org/fhir}MedicationRequest",
                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-medicationrequest",
                            "codeProperty" : "medication",
@@ -930,7 +638,7 @@
                               }
                            },
                            "codes" : {
-                              "locator" : "180:34-180:64",
+                              "locator" : "92:34-92:64",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                               "name" : "Beta Blocker Therapy for LVSD",
                               "preserve" : true,
@@ -941,69 +649,32 @@
                   } ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "181:7-181:78",
+                     "locator" : "93:7-93:78",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "overlapsAfterHeartFailureOutpatientEncounter",
                      "libraryName" : "AHA",
                      "type" : "FunctionRef",
                      "signature" : [ {
-                        "type" : "ChoiceTypeSpecifier",
-                        "choice" : [ {
-                           "name" : "{http://hl7.org/fhir}Condition",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{http://hl7.org/fhir}Procedure",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{http://hl7.org/fhir}AllergyIntolerance",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{http://hl7.org/fhir}MedicationRequest",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{http://hl7.org/fhir}Observation",
-                           "type" : "NamedTypeSpecifier"
-                        } ]
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "type" : "As",
-                        "operand" : {
-                           "locator" : "181:13-181:29",
-                           "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
-                           "name" : "ActiveBetaBlocker",
-                           "type" : "AliasRef"
-                        },
-                        "asTypeSpecifier" : {
-                           "type" : "ChoiceTypeSpecifier",
-                           "choice" : [ {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           }, {
-                              "name" : "{http://hl7.org/fhir}Procedure",
-                              "type" : "NamedTypeSpecifier"
-                           }, {
-                              "name" : "{http://hl7.org/fhir}AllergyIntolerance",
-                              "type" : "NamedTypeSpecifier"
-                           }, {
-                              "name" : "{http://hl7.org/fhir}MedicationRequest",
-                              "type" : "NamedTypeSpecifier"
-                           }, {
-                              "name" : "{http://hl7.org/fhir}Observation",
-                              "type" : "NamedTypeSpecifier"
-                           } ]
-                        }
+                        "locator" : "93:13-93:29",
+                        "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                        "name" : "ActiveBetaBlocker",
+                        "type" : "AliasRef"
                      } ]
                   }
                }
             }
          }, {
-            "locator" : "48:1-50:58",
+            "locator" : "46:1-48:58",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Numerator",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "49:3-50:58",
+               "locator" : "47:3-48:58",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "signature" : [ {
@@ -1014,25 +685,25 @@
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "locator" : "49:3-49:45",
+                  "locator" : "47:3-47:45",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "Has Beta Blocker Therapy for LVSD Ordered",
                   "type" : "ExpressionRef"
                }, {
-                  "locator" : "50:8-50:58",
+                  "locator" : "48:8-48:58",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "Is Currently Taking Beta Blocker Therapy for LVSD",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "locator" : "131:1-145:3",
+            "locator" : "121:1-135:3",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Consecutive Heart Rates Less than 50",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "132:3-145:3",
+               "locator" : "122:3-135:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
@@ -1043,7 +714,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "132:10-145:3",
+                  "locator" : "122:10-135:3",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -1053,7 +724,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "133:7-133:41",
+                     "locator" : "123:7-123:41",
                      "alias" : "HeartRate",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -1063,7 +734,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "133:7-133:31",
+                        "locator" : "123:7-123:31",
                         "dataType" : "{http://hl7.org/fhir}Observation",
                         "templateId" : "http://hl7.org/fhir/StructureDefinition/heartrate",
                         "type" : "Retrieve",
@@ -1076,7 +747,7 @@
                         }
                      }
                   }, {
-                     "locator" : "134:7-134:128",
+                     "locator" : "124:7-124:128",
                      "alias" : "ModerateOrSevereLVSDHFOutpatientEncounter",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -1086,7 +757,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "134:7-134:86",
+                        "locator" : "124:7-124:86",
                         "name" : "Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD",
                         "libraryName" : "AHA",
                         "type" : "ExpressionRef",
@@ -1100,11 +771,11 @@
                      }
                   } ],
                   "let" : [ {
-                     "locator" : "135:11-139:7",
+                     "locator" : "125:11-129:7",
                      "resultTypeName" : "{http://hl7.org/fhir}Observation",
                      "identifier" : "PriorHeartRate",
                      "expression" : {
-                        "locator" : "135:27-139:7",
+                        "locator" : "125:27-129:7",
                         "resultTypeName" : "{http://hl7.org/fhir}Observation",
                         "type" : "Last",
                         "signature" : [ {
@@ -1115,7 +786,7 @@
                            }
                         } ],
                         "source" : {
-                           "locator" : "135:32-138:49",
+                           "locator" : "125:32-128:49",
                            "type" : "Query",
                            "resultTypeSpecifier" : {
                               "type" : "ListTypeSpecifier",
@@ -1125,7 +796,7 @@
                               }
                            },
                            "source" : [ {
-                              "locator" : "135:32-135:81",
+                              "locator" : "125:32-125:81",
                               "alias" : "MostRecentPriorHeartRate",
                               "resultTypeSpecifier" : {
                                  "type" : "ListTypeSpecifier",
@@ -1135,7 +806,7 @@
                                  }
                               },
                               "expression" : {
-                                 "locator" : "135:32-135:56",
+                                 "locator" : "125:32-125:56",
                                  "dataType" : "{http://hl7.org/fhir}Observation",
                                  "templateId" : "http://hl7.org/fhir/StructureDefinition/heartrate",
                                  "type" : "Retrieve",
@@ -1150,7 +821,7 @@
                            } ],
                            "relationship" : [ ],
                            "where" : {
-                              "locator" : "136:11-137:103",
+                              "locator" : "126:11-127:103",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "And",
                               "signature" : [ {
@@ -1161,7 +832,7 @@
                                  "type" : "NamedTypeSpecifier"
                               } ],
                               "operand" : [ {
-                                 "locator" : "136:17-136:119",
+                                 "locator" : "126:17-126:119",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "IncludedIn",
                                  "signature" : [ {
@@ -1178,7 +849,7 @@
                                     }
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "136:17-136:63",
+                                    "locator" : "126:17-126:63",
                                     "name" : "toInterval",
                                     "libraryName" : "QICoreCommon",
                                     "type" : "FunctionRef",
@@ -1215,7 +886,7 @@
                                        } ]
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "136:17-136:50",
+                                       "locator" : "126:17-126:50",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -1239,7 +910,7 @@
                                        } ]
                                     } ]
                                  }, {
-                                    "locator" : "136:72-136:119",
+                                    "locator" : "126:72-126:119",
                                     "name" : "ToInterval",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -1257,7 +928,7 @@
                                     } ]
                                  } ]
                               }, {
-                                 "locator" : "137:17-137:103",
+                                 "locator" : "127:17-127:103",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "Before",
                                  "signature" : [ {
@@ -1274,7 +945,7 @@
                                     }
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "137:17-137:63",
+                                    "locator" : "127:17-127:63",
                                     "name" : "toInterval",
                                     "libraryName" : "QICoreCommon",
                                     "type" : "FunctionRef",
@@ -1311,7 +982,7 @@
                                        } ]
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "137:17-137:50",
+                                       "locator" : "127:17-127:50",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -1335,7 +1006,7 @@
                                        } ]
                                     } ]
                                  }, {
-                                    "locator" : "137:72-137:103",
+                                    "locator" : "127:72-127:103",
                                     "name" : "toInterval",
                                     "libraryName" : "QICoreCommon",
                                     "type" : "FunctionRef",
@@ -1372,7 +1043,7 @@
                                        } ]
                                     } ],
                                     "operand" : [ {
-                                       "locator" : "137:72-137:90",
+                                       "locator" : "127:72-127:90",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -1399,14 +1070,14 @@
                               } ]
                            },
                            "sort" : {
-                              "locator" : "138:11-138:49",
+                              "locator" : "128:11-128:49",
                               "by" : [ {
-                                 "locator" : "138:19-138:49",
+                                 "locator" : "128:19-128:49",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "direction" : "asc",
                                  "type" : "ByExpression",
                                  "expression" : {
-                                    "locator" : "138:19-138:49",
+                                    "locator" : "128:19-128:49",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "type" : "Start",
                                     "signature" : [ {
@@ -1417,7 +1088,7 @@
                                        }
                                     } ],
                                     "operand" : {
-                                       "locator" : "138:28-138:49",
+                                       "locator" : "128:28-128:49",
                                        "name" : "toInterval",
                                        "libraryName" : "QICoreCommon",
                                        "type" : "FunctionRef",
@@ -1454,7 +1125,7 @@
                                           } ]
                                        } ],
                                        "operand" : [ {
-                                          "locator" : "138:28-138:36",
+                                          "locator" : "128:28-128:36",
                                           "name" : "ToValue",
                                           "libraryName" : "FHIRHelpers",
                                           "type" : "FunctionRef",
@@ -1485,7 +1156,7 @@
                   } ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "140:7-143:44",
+                     "locator" : "130:7-133:44",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "signature" : [ {
@@ -1496,7 +1167,7 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "140:13-142:39",
+                        "locator" : "130:13-132:39",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "And",
                         "signature" : [ {
@@ -1507,7 +1178,7 @@
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "140:13-141:67",
+                           "locator" : "130:13-131:67",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "And",
                            "signature" : [ {
@@ -1518,7 +1189,7 @@
                               "type" : "NamedTypeSpecifier"
                            } ],
                            "operand" : [ {
-                              "locator" : "140:13-140:102",
+                              "locator" : "130:13-130:102",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "IncludedIn",
                               "signature" : [ {
@@ -1535,7 +1206,7 @@
                                  }
                               } ],
                               "operand" : [ {
-                                 "locator" : "140:13-140:46",
+                                 "locator" : "130:13-130:46",
                                  "name" : "toInterval",
                                  "libraryName" : "QICoreCommon",
                                  "type" : "FunctionRef",
@@ -1572,7 +1243,7 @@
                                     } ]
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "140:13-140:31",
+                                    "locator" : "130:13-130:31",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -1596,7 +1267,7 @@
                                     } ]
                                  } ]
                               }, {
-                                 "locator" : "140:55-140:102",
+                                 "locator" : "130:55-130:102",
                                  "name" : "ToInterval",
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
@@ -1614,7 +1285,7 @@
                                  } ]
                               } ]
                            }, {
-                              "locator" : "141:13-141:67",
+                              "locator" : "131:13-131:67",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "In",
                               "signature" : [ {
@@ -1628,7 +1299,7 @@
                                  }
                               } ],
                               "operand" : [ {
-                                 "locator" : "141:13-141:28",
+                                 "locator" : "131:13-131:28",
                                  "resultTypeName" : "{http://hl7.org/fhir}Status",
                                  "path" : "value",
                                  "type" : "Property",
@@ -1638,7 +1309,7 @@
                                     "type" : "Property"
                                  }
                               }, {
-                                 "locator" : "141:33-141:67",
+                                 "locator" : "131:33-131:67",
                                  "type" : "List",
                                  "resultTypeSpecifier" : {
                                     "type" : "ListTypeSpecifier",
@@ -1648,19 +1319,19 @@
                                     }
                                  },
                                  "element" : [ {
-                                    "locator" : "141:35-141:41",
+                                    "locator" : "131:35-131:41",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                     "value" : "final",
                                     "type" : "Literal"
                                  }, {
-                                    "locator" : "141:44-141:52",
+                                    "locator" : "131:44-131:52",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                     "value" : "amended",
                                     "type" : "Literal"
                                  }, {
-                                    "locator" : "141:55-141:65",
+                                    "locator" : "131:55-131:65",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
                                     "value" : "corrected",
@@ -1669,7 +1340,7 @@
                               } ]
                            } ]
                         }, {
-                           "locator" : "142:13-142:39",
+                           "locator" : "132:13-132:39",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Less",
                            "signature" : [ {
@@ -1680,7 +1351,7 @@
                               "type" : "NamedTypeSpecifier"
                            } ],
                            "operand" : [ {
-                              "locator" : "142:13-142:27",
+                              "locator" : "132:13-132:27",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "name" : "ToQuantity",
                               "libraryName" : "FHIRHelpers",
@@ -1691,7 +1362,7 @@
                                  "type" : "Property"
                               } ]
                            }, {
-                              "locator" : "142:31-142:39",
+                              "locator" : "132:31-132:39",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                               "value" : 50,
                               "unit" : "/min",
@@ -1699,7 +1370,7 @@
                            } ]
                         } ]
                      }, {
-                        "locator" : "143:13-143:44",
+                        "locator" : "133:13-133:44",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Less",
                         "signature" : [ {
@@ -1710,7 +1381,7 @@
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "143:13-143:32",
+                           "locator" : "133:13-133:32",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                            "name" : "ToQuantity",
                            "libraryName" : "FHIRHelpers",
@@ -1719,14 +1390,14 @@
                               "path" : "value",
                               "type" : "Property",
                               "source" : {
-                                 "locator" : "143:13-143:26",
+                                 "locator" : "133:13-133:26",
                                  "resultTypeName" : "{http://hl7.org/fhir}Observation",
                                  "name" : "PriorHeartRate",
                                  "type" : "QueryLetRef"
                               }
                            } ]
                         }, {
-                           "locator" : "143:36-143:44",
+                           "locator" : "133:36-133:44",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                            "value" : 50,
                            "unit" : "/min",
@@ -1735,7 +1406,7 @@
                      } ]
                   },
                   "return" : {
-                     "locator" : "144:7-144:22",
+                     "locator" : "134:7-134:22",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
                         "elementType" : {
@@ -1744,7 +1415,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "144:14-144:22",
+                        "locator" : "134:14-134:22",
                         "resultTypeName" : "{http://hl7.org/fhir}Observation",
                         "name" : "HeartRate",
                         "type" : "AliasRef"
@@ -1753,435 +1424,13 @@
                }
             }
          }, {
-            "locator" : "169:1-177:3",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-            "name" : "Has Medical or Patient Reason for Not Ordering Beta Blocker for LVSD",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "locator" : "170:3-177:3",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-               "type" : "Exists",
-               "signature" : [ {
-                  "type" : "ListTypeSpecifier",
-                  "elementType" : {
-                     "name" : "{http://hl7.org/fhir}MedicationRequest",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               } ],
-               "operand" : {
-                  "locator" : "170:10-177:3",
-                  "type" : "Query",
-                  "resultTypeSpecifier" : {
-                     "type" : "ListTypeSpecifier",
-                     "elementType" : {
-                        "name" : "{http://hl7.org/fhir}MedicationRequest",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  },
-                  "source" : [ {
-                     "locator" : "170:12-170:58",
-                     "alias" : "NoBetaBlockerOrdered",
-                     "resultTypeSpecifier" : {
-                        "type" : "ListTypeSpecifier",
-                        "elementType" : {
-                           "name" : "{http://hl7.org/fhir}MedicationRequest",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     },
-                     "expression" : {
-                        "locator" : "170:12-170:37",
-                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
-                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-mednotrequested",
-                        "type" : "Retrieve",
-                        "resultTypeSpecifier" : {
-                           "type" : "ListTypeSpecifier",
-                           "elementType" : {
-                              "name" : "{http://hl7.org/fhir}MedicationRequest",
-                              "type" : "NamedTypeSpecifier"
-                           }
-                        }
-                     }
-                  } ],
-                  "relationship" : [ {
-                     "locator" : "171:7-172:105",
-                     "alias" : "ModerateOrSevereLVSDHFOutpatientEncounter",
-                     "type" : "With",
-                     "resultTypeSpecifier" : {
-                        "type" : "ListTypeSpecifier",
-                        "elementType" : {
-                           "name" : "{http://hl7.org/fhir}Encounter",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     },
-                     "expression" : {
-                        "locator" : "171:12-171:91",
-                        "name" : "Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD",
-                        "libraryName" : "AHA",
-                        "type" : "ExpressionRef",
-                        "resultTypeSpecifier" : {
-                           "type" : "ListTypeSpecifier",
-                           "elementType" : {
-                              "name" : "{http://hl7.org/fhir}Encounter",
-                              "type" : "NamedTypeSpecifier"
-                           }
-                        }
-                     },
-                     "suchThat" : {
-                        "locator" : "172:19-172:105",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "In",
-                        "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "type" : "IntervalTypeSpecifier",
-                           "pointType" : {
-                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                              "type" : "NamedTypeSpecifier"
-                           }
-                        } ],
-                        "operand" : [ {
-                           "locator" : "172:19-172:49",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
-                           "path" : "value",
-                           "type" : "Property",
-                           "source" : {
-                              "path" : "authoredOn",
-                              "scope" : "NoBetaBlockerOrdered",
-                              "type" : "Property"
-                           }
-                        }, {
-                           "locator" : "172:58-172:105",
-                           "name" : "ToInterval",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "resultTypeSpecifier" : {
-                              "type" : "IntervalTypeSpecifier",
-                              "pointType" : {
-                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           },
-                           "operand" : [ {
-                              "path" : "period",
-                              "scope" : "ModerateOrSevereLVSDHFOutpatientEncounter",
-                              "type" : "Property"
-                           } ]
-                        } ]
-                     }
-                  } ],
-                  "where" : {
-                     "locator" : "173:7-176:9",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "And",
-                     "signature" : [ {
-                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : [ {
-                        "locator" : "173:13-173:78",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "InValueSet",
-                        "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                           "type" : "NamedTypeSpecifier"
-                        } ],
-                        "code" : {
-                           "name" : "ToConcept",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "medication",
-                              "scope" : "NoBetaBlockerOrdered",
-                              "type" : "Property"
-                           } ]
-                        },
-                        "valueset" : {
-                           "locator" : "173:48-173:78",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                           "name" : "Beta Blocker Therapy for LVSD",
-                           "preserve" : true
-                        }
-                     }, {
-                        "locator" : "174:13-176:9",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "Or",
-                        "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "NamedTypeSpecifier"
-                        } ],
-                        "operand" : [ {
-                           "locator" : "174:15-174:65",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "AnyInValueSet",
-                           "signature" : [ {
-                              "type" : "ListTypeSpecifier",
-                              "elementType" : {
-                                 "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           } ],
-                           "codes" : {
-                              "locator" : "174:15-174:45",
-                              "type" : "Query",
-                              "resultTypeSpecifier" : {
-                                 "type" : "ListTypeSpecifier",
-                                 "elementType" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              },
-                              "source" : [ {
-                                 "alias" : "$this",
-                                 "expression" : {
-                                    "path" : "reasonCode",
-                                    "scope" : "NoBetaBlockerOrdered",
-                                    "type" : "Property"
-                                 }
-                              } ],
-                              "return" : {
-                                 "distinct" : false,
-                                 "expression" : {
-                                    "name" : "ToConcept",
-                                    "libraryName" : "FHIRHelpers",
-                                    "type" : "FunctionRef",
-                                    "operand" : [ {
-                                       "name" : "$this",
-                                       "type" : "AliasRef"
-                                    } ]
-                                 }
-                              }
-                           },
-                           "valueset" : {
-                              "locator" : "174:50-174:65",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                              "name" : "Medical Reason",
-                              "preserve" : true
-                           }
-                        }, {
-                           "locator" : "175:16-175:66",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "AnyInValueSet",
-                           "signature" : [ {
-                              "type" : "ListTypeSpecifier",
-                              "elementType" : {
-                                 "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                                 "type" : "NamedTypeSpecifier"
-                              }
-                           } ],
-                           "codes" : {
-                              "locator" : "175:16-175:46",
-                              "type" : "Query",
-                              "resultTypeSpecifier" : {
-                                 "type" : "ListTypeSpecifier",
-                                 "elementType" : {
-                                    "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                                    "type" : "NamedTypeSpecifier"
-                                 }
-                              },
-                              "source" : [ {
-                                 "alias" : "$this",
-                                 "expression" : {
-                                    "path" : "reasonCode",
-                                    "scope" : "NoBetaBlockerOrdered",
-                                    "type" : "Property"
-                                 }
-                              } ],
-                              "return" : {
-                                 "distinct" : false,
-                                 "expression" : {
-                                    "name" : "ToConcept",
-                                    "libraryName" : "FHIRHelpers",
-                                    "type" : "FunctionRef",
-                                    "operand" : [ {
-                                       "name" : "$this",
-                                       "type" : "AliasRef"
-                                    } ]
-                                 }
-                              }
-                           },
-                           "valueset" : {
-                              "locator" : "175:51-175:66",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                              "name" : "Patient Reason",
-                              "preserve" : true
-                           }
-                        } ]
-                     } ]
-                  }
-               }
-            }
-         }, {
-            "locator" : "89:1-94:3",
-            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-            "name" : "Has Arrhythmia Diagnosis",
-            "context" : "Patient",
-            "accessLevel" : "Public",
-            "expression" : {
-               "locator" : "90:3-94:3",
-               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-               "type" : "Exists",
-               "signature" : [ {
-                  "type" : "ListTypeSpecifier",
-                  "elementType" : {
-                     "name" : "{http://hl7.org/fhir}Condition",
-                     "type" : "NamedTypeSpecifier"
-                  }
-               } ],
-               "operand" : {
-                  "locator" : "90:10-94:3",
-                  "type" : "Query",
-                  "resultTypeSpecifier" : {
-                     "type" : "ListTypeSpecifier",
-                     "elementType" : {
-                        "name" : "{http://hl7.org/fhir}Condition",
-                        "type" : "NamedTypeSpecifier"
-                     }
-                  },
-                  "source" : [ {
-                     "locator" : "90:12-90:47",
-                     "alias" : "Arrhythmia",
-                     "resultTypeSpecifier" : {
-                        "type" : "ListTypeSpecifier",
-                        "elementType" : {
-                           "name" : "{http://hl7.org/fhir}Condition",
-                           "type" : "NamedTypeSpecifier"
-                        }
-                     },
-                     "expression" : {
-                        "locator" : "90:12-90:36",
-                        "dataType" : "{http://hl7.org/fhir}Condition",
-                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition",
-                        "codeProperty" : "code",
-                        "codeComparator" : "in",
-                        "type" : "Retrieve",
-                        "resultTypeSpecifier" : {
-                           "type" : "ListTypeSpecifier",
-                           "elementType" : {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           }
-                        },
-                        "codes" : {
-                           "locator" : "90:24-90:35",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                           "name" : "Arrhythmia",
-                           "preserve" : true,
-                           "type" : "ValueSetRef"
-                        }
-                     }
-                  } ],
-                  "relationship" : [ ],
-                  "where" : {
-                     "locator" : "91:7-93:68",
-                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                     "type" : "And",
-                     "signature" : [ {
-                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "NamedTypeSpecifier"
-                     }, {
-                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "NamedTypeSpecifier"
-                     } ],
-                     "operand" : [ {
-                        "locator" : "91:13-92:35",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "And",
-                        "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "NamedTypeSpecifier"
-                        } ],
-                        "operand" : [ {
-                           "locator" : "91:13-91:66",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "name" : "overlapsHeartFailureOutpatientEncounter",
-                           "libraryName" : "AHA",
-                           "type" : "FunctionRef",
-                           "signature" : [ {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : [ {
-                              "locator" : "91:13-91:22",
-                              "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                              "name" : "Arrhythmia",
-                              "type" : "AliasRef"
-                           } ]
-                        }, {
-                           "locator" : "92:13-92:35",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "name" : "isActive",
-                           "libraryName" : "QICoreCommon",
-                           "type" : "FunctionRef",
-                           "signature" : [ {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : [ {
-                              "locator" : "92:13-92:22",
-                              "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                              "name" : "Arrhythmia",
-                              "type" : "AliasRef"
-                           } ]
-                        } ]
-                     }, {
-                        "locator" : "93:13-93:68",
-                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "Equivalent",
-                        "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                           "type" : "NamedTypeSpecifier"
-                        } ],
-                        "operand" : [ {
-                           "locator" : "93:13-93:41",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
-                           "name" : "ToConcept",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "verificationStatus",
-                              "scope" : "Arrhythmia",
-                              "type" : "Property"
-                           } ]
-                        }, {
-                           "type" : "ToConcept",
-                           "signature" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}Code",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : {
-                              "locator" : "93:45-93:68",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-                              "name" : "confirmed",
-                              "libraryName" : "QICoreCommon",
-                              "type" : "CodeRef"
-                           }
-                        } ]
-                     } ]
-                  }
-               }
-            }
-         }, {
-            "locator" : "162:1-167:3",
+            "locator" : "96:1-100:3",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Hypotension Diagnosis",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "163:3-167:3",
+               "locator" : "97:3-100:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
@@ -2192,7 +1441,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "163:10-167:3",
+                  "locator" : "97:10-100:3",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -2202,7 +1451,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "163:12-163:51",
+                     "locator" : "97:12-97:51",
                      "alias" : "Hypotension",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -2212,7 +1461,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "163:12-163:39",
+                        "locator" : "97:12-97:39",
                         "dataType" : "{http://hl7.org/fhir}Condition",
                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition",
                         "codeProperty" : "code",
@@ -2226,7 +1475,7 @@
                            }
                         },
                         "codes" : {
-                           "locator" : "163:26-163:38",
+                           "locator" : "97:26-97:38",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Hypotension",
                            "preserve" : true,
@@ -2236,7 +1485,7 @@
                   } ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "164:7-166:69",
+                     "locator" : "98:7-99:54",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "signature" : [ {
@@ -2247,97 +1496,49 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "164:13-165:36",
+                        "locator" : "98:13-98:67",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "And",
+                        "name" : "overlapsHeartFailureOutpatientEncounter",
+                        "libraryName" : "AHA",
+                        "type" : "FunctionRef",
                         "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "name" : "{http://hl7.org/fhir}Condition",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "164:13-164:67",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "name" : "overlapsHeartFailureOutpatientEncounter",
-                           "libraryName" : "AHA",
-                           "type" : "FunctionRef",
-                           "signature" : [ {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : [ {
-                              "locator" : "164:13-164:23",
-                              "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                              "name" : "Hypotension",
-                              "type" : "AliasRef"
-                           } ]
-                        }, {
-                           "locator" : "165:13-165:36",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "name" : "isActive",
-                           "libraryName" : "QICoreCommon",
-                           "type" : "FunctionRef",
-                           "signature" : [ {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : [ {
-                              "locator" : "165:13-165:23",
-                              "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                              "name" : "Hypotension",
-                              "type" : "AliasRef"
-                           } ]
+                           "locator" : "98:13-98:23",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "Hypotension",
+                           "type" : "AliasRef"
                         } ]
                      }, {
-                        "locator" : "166:13-166:69",
+                        "locator" : "99:13-99:54",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "Equivalent",
+                        "name" : "isConfirmedActiveDiagnosis",
+                        "libraryName" : "AHA",
+                        "type" : "FunctionRef",
                         "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "name" : "{http://hl7.org/fhir}Condition",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "166:13-166:42",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
-                           "name" : "ToConcept",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "verificationStatus",
-                              "scope" : "Hypotension",
-                              "type" : "Property"
-                           } ]
-                        }, {
-                           "type" : "ToConcept",
-                           "signature" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}Code",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : {
-                              "locator" : "166:46-166:69",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-                              "name" : "confirmed",
-                              "libraryName" : "QICoreCommon",
-                              "type" : "CodeRef"
-                           }
+                           "locator" : "99:13-99:23",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "Hypotension",
+                           "type" : "AliasRef"
                         } ]
                      } ]
                   }
                }
             }
          }, {
-            "locator" : "96:1-101:3",
+            "locator" : "162:1-166:3",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Asthma Diagnosis",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "97:3-101:3",
+               "locator" : "163:3-166:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
@@ -2348,7 +1549,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "97:10-101:3",
+                  "locator" : "163:10-166:3",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -2358,7 +1559,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "97:12-97:39",
+                     "locator" : "163:12-163:39",
                      "alias" : "Asthma",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -2368,7 +1569,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "97:12-97:32",
+                        "locator" : "163:12-163:32",
                         "dataType" : "{http://hl7.org/fhir}Condition",
                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition",
                         "codeProperty" : "code",
@@ -2382,7 +1583,7 @@
                            }
                         },
                         "codes" : {
-                           "locator" : "97:24-97:31",
+                           "locator" : "163:24-163:31",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Asthma",
                            "preserve" : true,
@@ -2392,7 +1593,7 @@
                   } ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "98:7-100:64",
+                     "locator" : "164:7-165:49",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "signature" : [ {
@@ -2403,97 +1604,49 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "98:13-99:31",
+                        "locator" : "164:13-164:62",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "And",
+                        "name" : "overlapsHeartFailureOutpatientEncounter",
+                        "libraryName" : "AHA",
+                        "type" : "FunctionRef",
                         "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "name" : "{http://hl7.org/fhir}Condition",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "98:13-98:62",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "name" : "overlapsHeartFailureOutpatientEncounter",
-                           "libraryName" : "AHA",
-                           "type" : "FunctionRef",
-                           "signature" : [ {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : [ {
-                              "locator" : "98:13-98:18",
-                              "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                              "name" : "Asthma",
-                              "type" : "AliasRef"
-                           } ]
-                        }, {
-                           "locator" : "99:13-99:31",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "name" : "isActive",
-                           "libraryName" : "QICoreCommon",
-                           "type" : "FunctionRef",
-                           "signature" : [ {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : [ {
-                              "locator" : "99:13-99:18",
-                              "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                              "name" : "Asthma",
-                              "type" : "AliasRef"
-                           } ]
+                           "locator" : "164:13-164:18",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "Asthma",
+                           "type" : "AliasRef"
                         } ]
                      }, {
-                        "locator" : "100:13-100:64",
+                        "locator" : "165:13-165:49",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "Equivalent",
+                        "name" : "isConfirmedActiveDiagnosis",
+                        "libraryName" : "AHA",
+                        "type" : "FunctionRef",
                         "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "name" : "{http://hl7.org/fhir}Condition",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "100:13-100:37",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
-                           "name" : "ToConcept",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "verificationStatus",
-                              "scope" : "Asthma",
-                              "type" : "Property"
-                           } ]
-                        }, {
-                           "type" : "ToConcept",
-                           "signature" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}Code",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : {
-                              "locator" : "100:41-100:64",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-                              "name" : "confirmed",
-                              "libraryName" : "QICoreCommon",
-                              "type" : "CodeRef"
-                           }
+                           "locator" : "165:13-165:18",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "Asthma",
+                           "type" : "AliasRef"
                         } ]
                      } ]
                   }
                }
             }
          }, {
-            "locator" : "147:1-153:3",
+            "locator" : "108:1-113:3",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Diagnosis of Allergy or Intolerance to Beta Blocker Therapy",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "148:3-153:3",
+               "locator" : "109:3-113:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
@@ -2504,7 +1657,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "148:10-153:3",
+                  "locator" : "109:10-113:3",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -2514,7 +1667,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "148:12-149:107",
+                     "locator" : "109:12-110:107",
                      "alias" : "BetaBlockerAllergyOrIntoleranceDiagnosis",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -2524,7 +1677,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "148:12-149:66",
+                        "locator" : "109:12-110:66",
                         "type" : "Union",
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
@@ -2547,7 +1700,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "148:14-148:61",
+                           "locator" : "109:14-109:61",
                            "dataType" : "{http://hl7.org/fhir}Condition",
                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition",
                            "codeProperty" : "code",
@@ -2561,14 +1714,14 @@
                               }
                            },
                            "codes" : {
-                              "locator" : "148:28-148:60",
+                              "locator" : "109:28-109:60",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                               "name" : "Allergy to Beta Blocker Therapy",
                               "preserve" : true,
                               "type" : "ValueSetRef"
                            }
                         }, {
-                           "locator" : "149:13-149:64",
+                           "locator" : "110:13-110:64",
                            "dataType" : "{http://hl7.org/fhir}Condition",
                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition",
                            "codeProperty" : "code",
@@ -2582,7 +1735,7 @@
                               }
                            },
                            "codes" : {
-                              "locator" : "149:27-149:63",
+                              "locator" : "110:27-110:63",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                               "name" : "Intolerance to Beta Blocker Therapy",
                               "preserve" : true,
@@ -2593,7 +1746,7 @@
                   } ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "150:7-152:98",
+                     "locator" : "111:7-112:83",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "signature" : [ {
@@ -2604,134 +1757,49 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "150:13-151:65",
+                        "locator" : "111:13-111:101",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "And",
+                        "name" : "overlapsAfterHeartFailureOutpatientEncounter",
+                        "libraryName" : "AHA",
+                        "type" : "FunctionRef",
                         "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "name" : "{http://hl7.org/fhir}Condition",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "150:13-150:101",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "name" : "overlapsAfterHeartFailureOutpatientEncounter",
-                           "libraryName" : "AHA",
-                           "type" : "FunctionRef",
-                           "signature" : [ {
-                              "type" : "ChoiceTypeSpecifier",
-                              "choice" : [ {
-                                 "name" : "{http://hl7.org/fhir}Condition",
-                                 "type" : "NamedTypeSpecifier"
-                              }, {
-                                 "name" : "{http://hl7.org/fhir}Procedure",
-                                 "type" : "NamedTypeSpecifier"
-                              }, {
-                                 "name" : "{http://hl7.org/fhir}AllergyIntolerance",
-                                 "type" : "NamedTypeSpecifier"
-                              }, {
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                 "type" : "NamedTypeSpecifier"
-                              }, {
-                                 "name" : "{http://hl7.org/fhir}Observation",
-                                 "type" : "NamedTypeSpecifier"
-                              } ]
-                           } ],
-                           "operand" : [ {
-                              "type" : "As",
-                              "operand" : {
-                                 "locator" : "150:13-150:52",
-                                 "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                                 "name" : "BetaBlockerAllergyOrIntoleranceDiagnosis",
-                                 "type" : "AliasRef"
-                              },
-                              "asTypeSpecifier" : {
-                                 "type" : "ChoiceTypeSpecifier",
-                                 "choice" : [ {
-                                    "name" : "{http://hl7.org/fhir}Condition",
-                                    "type" : "NamedTypeSpecifier"
-                                 }, {
-                                    "name" : "{http://hl7.org/fhir}Procedure",
-                                    "type" : "NamedTypeSpecifier"
-                                 }, {
-                                    "name" : "{http://hl7.org/fhir}AllergyIntolerance",
-                                    "type" : "NamedTypeSpecifier"
-                                 }, {
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                    "type" : "NamedTypeSpecifier"
-                                 }, {
-                                    "name" : "{http://hl7.org/fhir}Observation",
-                                    "type" : "NamedTypeSpecifier"
-                                 } ]
-                              }
-                           } ]
-                        }, {
-                           "locator" : "151:13-151:65",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "name" : "isActive",
-                           "libraryName" : "QICoreCommon",
-                           "type" : "FunctionRef",
-                           "signature" : [ {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : [ {
-                              "locator" : "151:13-151:52",
-                              "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                              "name" : "BetaBlockerAllergyOrIntoleranceDiagnosis",
-                              "type" : "AliasRef"
-                           } ]
+                           "locator" : "111:13-111:52",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "BetaBlockerAllergyOrIntoleranceDiagnosis",
+                           "type" : "AliasRef"
                         } ]
                      }, {
-                        "locator" : "152:13-152:98",
+                        "locator" : "112:13-112:83",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "Equivalent",
+                        "name" : "isConfirmedActiveDiagnosis",
+                        "libraryName" : "AHA",
+                        "type" : "FunctionRef",
                         "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "name" : "{http://hl7.org/fhir}Condition",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "152:13-152:71",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
-                           "name" : "ToConcept",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "verificationStatus",
-                              "scope" : "BetaBlockerAllergyOrIntoleranceDiagnosis",
-                              "type" : "Property"
-                           } ]
-                        }, {
-                           "type" : "ToConcept",
-                           "signature" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}Code",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : {
-                              "locator" : "152:75-152:98",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-                              "name" : "confirmed",
-                              "libraryName" : "QICoreCommon",
-                              "type" : "CodeRef"
-                           }
+                           "locator" : "112:13-112:52",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "BetaBlockerAllergyOrIntoleranceDiagnosis",
+                           "type" : "AliasRef"
                         } ]
                      } ]
                   }
                }
             }
          }, {
-            "locator" : "117:1-122:3",
+            "locator" : "115:1-119:3",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Bradycardia Diagnosis",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "118:3-122:3",
+               "locator" : "116:3-119:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
@@ -2742,7 +1810,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "118:10-122:3",
+                  "locator" : "116:10-119:3",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -2752,7 +1820,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "118:12-118:49",
+                     "locator" : "116:12-116:49",
                      "alias" : "Bradycardia",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -2762,7 +1830,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "118:12-118:37",
+                        "locator" : "116:12-116:37",
                         "dataType" : "{http://hl7.org/fhir}Condition",
                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition",
                         "codeProperty" : "code",
@@ -2776,7 +1844,7 @@
                            }
                         },
                         "codes" : {
-                           "locator" : "118:24-118:36",
+                           "locator" : "116:24-116:36",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Bradycardia",
                            "preserve" : true,
@@ -2786,7 +1854,7 @@
                   } ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "119:7-121:69",
+                     "locator" : "117:7-118:54",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "signature" : [ {
@@ -2797,97 +1865,59 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "119:13-120:36",
+                        "locator" : "117:13-117:67",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "And",
+                        "name" : "overlapsHeartFailureOutpatientEncounter",
+                        "libraryName" : "AHA",
+                        "type" : "FunctionRef",
                         "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "name" : "{http://hl7.org/fhir}Condition",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "119:13-119:67",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "name" : "overlapsHeartFailureOutpatientEncounter",
-                           "libraryName" : "AHA",
-                           "type" : "FunctionRef",
-                           "signature" : [ {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : [ {
-                              "locator" : "119:13-119:23",
-                              "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                              "name" : "Bradycardia",
-                              "type" : "AliasRef"
-                           } ]
-                        }, {
-                           "locator" : "120:13-120:36",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "name" : "isActive",
-                           "libraryName" : "QICoreCommon",
-                           "type" : "FunctionRef",
-                           "signature" : [ {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : [ {
-                              "locator" : "120:13-120:23",
-                              "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                              "name" : "Bradycardia",
-                              "type" : "AliasRef"
-                           } ]
+                           "locator" : "117:13-117:23",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "Bradycardia",
+                           "type" : "AliasRef"
                         } ]
                      }, {
-                        "locator" : "121:13-121:69",
+                        "locator" : "118:13-118:54",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "Equivalent",
+                        "name" : "isConfirmedActiveDiagnosis",
+                        "libraryName" : "AHA",
+                        "type" : "FunctionRef",
                         "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "name" : "{http://hl7.org/fhir}Condition",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "121:13-121:42",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
-                           "name" : "ToConcept",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "verificationStatus",
-                              "scope" : "Bradycardia",
-                              "type" : "Property"
-                           } ]
-                        }, {
-                           "type" : "ToConcept",
-                           "signature" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}Code",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : {
-                              "locator" : "121:46-121:69",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-                              "name" : "confirmed",
-                              "libraryName" : "QICoreCommon",
-                              "type" : "CodeRef"
-                           }
+                           "locator" : "118:13-118:23",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "Bradycardia",
+                           "type" : "AliasRef"
                         } ]
                      } ]
                   }
                }
             }
          }, {
-            "locator" : "80:1-87:3",
+            "locator" : "143:1-154:3",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Allergy or Intolerance to Beta Blocker Therapy Ingredient",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "commentedOut",
+                  "value" : "implies logic"
+               }, {
+                  "name" : "commentedOutReason",
+                  "value" : "implies not available in cql-execution. Reference https://github.com/cqframework/cql-execution/issues/319."
+               } ]
+            } ],
             "expression" : {
-               "locator" : "81:3-87:3",
+               "locator" : "144:3-154:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
@@ -2898,7 +1928,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "81:10-87:3",
+                  "locator" : "144:10-154:3",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -2908,7 +1938,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "81:12-82:150",
+                     "locator" : "144:12-145:150",
                      "alias" : "BetaBlockerAllergyIntolerance",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -2918,7 +1948,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "81:12-82:120",
+                        "locator" : "144:12-145:120",
                         "type" : "Union",
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
@@ -2941,7 +1971,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "81:14-81:68",
+                           "locator" : "144:14-144:68",
                            "dataType" : "{http://hl7.org/fhir}AllergyIntolerance",
                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-allergyintolerance",
                            "codeProperty" : "code",
@@ -2955,14 +1985,14 @@
                               }
                            },
                            "codes" : {
-                              "locator" : "81:35-81:67",
+                              "locator" : "144:35-144:67",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                               "name" : "Beta Blocker Therapy Ingredient",
                               "preserve" : true,
                               "type" : "ValueSetRef"
                            }
                         }, {
-                           "locator" : "82:13-82:118",
+                           "locator" : "145:13-145:118",
                            "dataType" : "{http://hl7.org/fhir}AllergyIntolerance",
                            "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-allergyintolerance",
                            "codeProperty" : "code",
@@ -2978,7 +2008,7 @@
                            "codes" : {
                               "type" : "ToList",
                               "operand" : {
-                                 "locator" : "82:34-82:117",
+                                 "locator" : "145:34-145:117",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                                  "name" : "Substance with beta adrenergic receptor antagonist mechanism of action (substance)",
                                  "type" : "CodeRef"
@@ -2989,7 +2019,7 @@
                   } ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "83:7-86:9",
+                     "locator" : "146:7-153:9",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "signature" : [ {
@@ -3000,138 +2030,69 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "83:13-83:90",
+                        "locator" : "146:13-146:90",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "overlapsAfterHeartFailureOutpatientEncounter",
                         "libraryName" : "AHA",
                         "type" : "FunctionRef",
                         "signature" : [ {
-                           "type" : "ChoiceTypeSpecifier",
-                           "choice" : [ {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           }, {
-                              "name" : "{http://hl7.org/fhir}Procedure",
-                              "type" : "NamedTypeSpecifier"
-                           }, {
-                              "name" : "{http://hl7.org/fhir}AllergyIntolerance",
-                              "type" : "NamedTypeSpecifier"
-                           }, {
-                              "name" : "{http://hl7.org/fhir}MedicationRequest",
-                              "type" : "NamedTypeSpecifier"
-                           }, {
-                              "name" : "{http://hl7.org/fhir}Observation",
-                              "type" : "NamedTypeSpecifier"
-                           } ]
+                           "name" : "{http://hl7.org/fhir}AllergyIntolerance",
+                           "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "type" : "As",
-                           "operand" : {
-                              "locator" : "83:13-83:41",
-                              "resultTypeName" : "{http://hl7.org/fhir}AllergyIntolerance",
-                              "name" : "BetaBlockerAllergyIntolerance",
-                              "type" : "AliasRef"
-                           },
-                           "asTypeSpecifier" : {
-                              "type" : "ChoiceTypeSpecifier",
-                              "choice" : [ {
-                                 "name" : "{http://hl7.org/fhir}Condition",
-                                 "type" : "NamedTypeSpecifier"
-                              }, {
-                                 "name" : "{http://hl7.org/fhir}Procedure",
-                                 "type" : "NamedTypeSpecifier"
-                              }, {
-                                 "name" : "{http://hl7.org/fhir}AllergyIntolerance",
-                                 "type" : "NamedTypeSpecifier"
-                              }, {
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                 "type" : "NamedTypeSpecifier"
-                              }, {
-                                 "name" : "{http://hl7.org/fhir}Observation",
-                                 "type" : "NamedTypeSpecifier"
-                              } ]
-                           }
+                           "locator" : "146:13-146:41",
+                           "resultTypeName" : "{http://hl7.org/fhir}AllergyIntolerance",
+                           "name" : "BetaBlockerAllergyIntolerance",
+                           "type" : "AliasRef"
                         } ]
                      }, {
-                        "locator" : "84:13-86:9",
+                        "locator" : "147:13-153:9",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "Or",
+                        "type" : "Equivalent",
                         "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
                            "type" : "NamedTypeSpecifier"
                         }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "84:15-84:66",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "IsNull",
+                           "locator" : "152:11-152:54",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "name" : "ToConcept",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "operand" : [ {
+                              "path" : "clinicalStatus",
+                              "scope" : "BetaBlockerAllergyIntolerance",
+                              "type" : "Property"
+                           } ]
+                        }, {
+                           "type" : "ToConcept",
                            "signature" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}Any",
+                              "name" : "{urn:hl7-org:elm-types:r1}Code",
                               "type" : "NamedTypeSpecifier"
                            } ],
                            "operand" : {
-                              "locator" : "84:15-84:58",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
-                              "name" : "ToConcept",
-                              "libraryName" : "FHIRHelpers",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "path" : "clinicalStatus",
-                                 "scope" : "BetaBlockerAllergyIntolerance",
-                                 "type" : "Property"
-                              } ]
+                              "locator" : "152:58-152:86",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
+                              "name" : "allergy-active",
+                              "libraryName" : "QICoreCommon",
+                              "type" : "CodeRef"
                            }
-                        }, {
-                           "locator" : "85:16-85:91",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "Equivalent",
-                           "signature" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                              "type" : "NamedTypeSpecifier"
-                           }, {
-                              "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : [ {
-                              "locator" : "85:16-85:59",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
-                              "name" : "ToConcept",
-                              "libraryName" : "FHIRHelpers",
-                              "type" : "FunctionRef",
-                              "operand" : [ {
-                                 "path" : "clinicalStatus",
-                                 "scope" : "BetaBlockerAllergyIntolerance",
-                                 "type" : "Property"
-                              } ]
-                           }, {
-                              "type" : "ToConcept",
-                              "signature" : [ {
-                                 "name" : "{urn:hl7-org:elm-types:r1}Code",
-                                 "type" : "NamedTypeSpecifier"
-                              } ],
-                              "operand" : {
-                                 "locator" : "85:63-85:91",
-                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-                                 "name" : "allergy-active",
-                                 "libraryName" : "QICoreCommon",
-                                 "type" : "CodeRef"
-                              }
-                           } ]
                         } ]
                      } ]
                   }
                }
             }
          }, {
-            "locator" : "103:1-108:3",
+            "locator" : "168:1-172:3",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Atrioventricular Block Diagnosis",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "104:3-108:3",
+               "locator" : "169:3-172:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
@@ -3142,7 +2103,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "104:10-108:3",
+                  "locator" : "169:10-172:3",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -3152,7 +2113,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "104:12-104:70",
+                     "locator" : "169:12-169:70",
                      "alias" : "AtrioventricularBlock",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -3162,7 +2123,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "104:12-104:48",
+                        "locator" : "169:12-169:48",
                         "dataType" : "{http://hl7.org/fhir}Condition",
                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition",
                         "codeProperty" : "code",
@@ -3176,7 +2137,7 @@
                            }
                         },
                         "codes" : {
-                           "locator" : "104:24-104:47",
+                           "locator" : "169:24-169:47",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Atrioventricular Block",
                            "preserve" : true,
@@ -3186,7 +2147,7 @@
                   } ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "105:7-107:79",
+                     "locator" : "170:7-171:64",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "signature" : [ {
@@ -3197,97 +2158,49 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "105:13-106:46",
+                        "locator" : "170:13-170:77",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "And",
+                        "name" : "overlapsHeartFailureOutpatientEncounter",
+                        "libraryName" : "AHA",
+                        "type" : "FunctionRef",
                         "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "name" : "{http://hl7.org/fhir}Condition",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "105:13-105:77",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "name" : "overlapsHeartFailureOutpatientEncounter",
-                           "libraryName" : "AHA",
-                           "type" : "FunctionRef",
-                           "signature" : [ {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : [ {
-                              "locator" : "105:13-105:33",
-                              "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                              "name" : "AtrioventricularBlock",
-                              "type" : "AliasRef"
-                           } ]
-                        }, {
-                           "locator" : "106:13-106:46",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "name" : "isActive",
-                           "libraryName" : "QICoreCommon",
-                           "type" : "FunctionRef",
-                           "signature" : [ {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : [ {
-                              "locator" : "106:13-106:33",
-                              "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                              "name" : "AtrioventricularBlock",
-                              "type" : "AliasRef"
-                           } ]
+                           "locator" : "170:13-170:33",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "AtrioventricularBlock",
+                           "type" : "AliasRef"
                         } ]
                      }, {
-                        "locator" : "107:13-107:79",
+                        "locator" : "171:13-171:64",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "Equivalent",
+                        "name" : "isConfirmedActiveDiagnosis",
+                        "libraryName" : "AHA",
+                        "type" : "FunctionRef",
                         "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "name" : "{http://hl7.org/fhir}Condition",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "107:13-107:52",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
-                           "name" : "ToConcept",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "verificationStatus",
-                              "scope" : "AtrioventricularBlock",
-                              "type" : "Property"
-                           } ]
-                        }, {
-                           "type" : "ToConcept",
-                           "signature" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}Code",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : {
-                              "locator" : "107:56-107:79",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-                              "name" : "confirmed",
-                              "libraryName" : "QICoreCommon",
-                              "type" : "CodeRef"
-                           }
+                           "locator" : "171:13-171:33",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "AtrioventricularBlock",
+                           "type" : "AliasRef"
                         } ]
                      } ]
                   }
                }
             }
          }, {
-            "locator" : "155:1-160:3",
+            "locator" : "102:1-106:3",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Diagnosis of Cardiac Pacer in Situ",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "156:3-160:3",
+               "locator" : "103:3-106:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
@@ -3298,7 +2211,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "156:10-160:3",
+                  "locator" : "103:10-106:3",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -3308,7 +2221,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "156:12-156:71",
+                     "locator" : "103:12-103:71",
                      "alias" : "CardiacPacerDiagnosis",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -3318,7 +2231,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "156:12-156:49",
+                        "locator" : "103:12-103:49",
                         "dataType" : "{http://hl7.org/fhir}Condition",
                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition",
                         "codeProperty" : "code",
@@ -3332,7 +2245,7 @@
                            }
                         },
                         "codes" : {
-                           "locator" : "156:26-156:48",
+                           "locator" : "103:26-103:48",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Cardiac Pacer in Situ",
                            "preserve" : true,
@@ -3342,7 +2255,7 @@
                   } ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "157:7-159:79",
+                     "locator" : "104:7-105:64",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "signature" : [ {
@@ -3353,134 +2266,49 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "157:13-158:46",
+                        "locator" : "104:13-104:82",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "And",
+                        "name" : "overlapsAfterHeartFailureOutpatientEncounter",
+                        "libraryName" : "AHA",
+                        "type" : "FunctionRef",
                         "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           "name" : "{http://hl7.org/fhir}Condition",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "157:13-157:82",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "name" : "overlapsAfterHeartFailureOutpatientEncounter",
-                           "libraryName" : "AHA",
-                           "type" : "FunctionRef",
-                           "signature" : [ {
-                              "type" : "ChoiceTypeSpecifier",
-                              "choice" : [ {
-                                 "name" : "{http://hl7.org/fhir}Condition",
-                                 "type" : "NamedTypeSpecifier"
-                              }, {
-                                 "name" : "{http://hl7.org/fhir}Procedure",
-                                 "type" : "NamedTypeSpecifier"
-                              }, {
-                                 "name" : "{http://hl7.org/fhir}AllergyIntolerance",
-                                 "type" : "NamedTypeSpecifier"
-                              }, {
-                                 "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                 "type" : "NamedTypeSpecifier"
-                              }, {
-                                 "name" : "{http://hl7.org/fhir}Observation",
-                                 "type" : "NamedTypeSpecifier"
-                              } ]
-                           } ],
-                           "operand" : [ {
-                              "type" : "As",
-                              "operand" : {
-                                 "locator" : "157:13-157:33",
-                                 "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                                 "name" : "CardiacPacerDiagnosis",
-                                 "type" : "AliasRef"
-                              },
-                              "asTypeSpecifier" : {
-                                 "type" : "ChoiceTypeSpecifier",
-                                 "choice" : [ {
-                                    "name" : "{http://hl7.org/fhir}Condition",
-                                    "type" : "NamedTypeSpecifier"
-                                 }, {
-                                    "name" : "{http://hl7.org/fhir}Procedure",
-                                    "type" : "NamedTypeSpecifier"
-                                 }, {
-                                    "name" : "{http://hl7.org/fhir}AllergyIntolerance",
-                                    "type" : "NamedTypeSpecifier"
-                                 }, {
-                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                    "type" : "NamedTypeSpecifier"
-                                 }, {
-                                    "name" : "{http://hl7.org/fhir}Observation",
-                                    "type" : "NamedTypeSpecifier"
-                                 } ]
-                              }
-                           } ]
-                        }, {
-                           "locator" : "158:13-158:46",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "name" : "isActive",
-                           "libraryName" : "QICoreCommon",
-                           "type" : "FunctionRef",
-                           "signature" : [ {
-                              "name" : "{http://hl7.org/fhir}Condition",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : [ {
-                              "locator" : "158:13-158:33",
-                              "resultTypeName" : "{http://hl7.org/fhir}Condition",
-                              "name" : "CardiacPacerDiagnosis",
-                              "type" : "AliasRef"
-                           } ]
+                           "locator" : "104:13-104:33",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "CardiacPacerDiagnosis",
+                           "type" : "AliasRef"
                         } ]
                      }, {
-                        "locator" : "159:13-159:79",
+                        "locator" : "105:13-105:64",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                        "type" : "Equivalent",
+                        "name" : "isConfirmedActiveDiagnosis",
+                        "libraryName" : "AHA",
+                        "type" : "FunctionRef",
                         "signature" : [ {
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
-                           "type" : "NamedTypeSpecifier"
-                        }, {
-                           "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                           "name" : "{http://hl7.org/fhir}Condition",
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "159:13-159:52",
-                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}Concept",
-                           "name" : "ToConcept",
-                           "libraryName" : "FHIRHelpers",
-                           "type" : "FunctionRef",
-                           "operand" : [ {
-                              "path" : "verificationStatus",
-                              "scope" : "CardiacPacerDiagnosis",
-                              "type" : "Property"
-                           } ]
-                        }, {
-                           "type" : "ToConcept",
-                           "signature" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}Code",
-                              "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : {
-                              "locator" : "159:56-159:79",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
-                              "name" : "confirmed",
-                              "libraryName" : "QICoreCommon",
-                              "type" : "CodeRef"
-                           }
+                           "locator" : "105:13-105:33",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "CardiacPacerDiagnosis",
+                           "type" : "AliasRef"
                         } ]
                      } ]
                   }
                }
             }
          }, {
-            "locator" : "124:1-129:3",
+            "locator" : "84:1-89:3",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Cardiac Pacer Device Implanted",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "125:3-129:3",
+               "locator" : "85:3-89:3",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
@@ -3491,7 +2319,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "125:10-129:3",
+                  "locator" : "85:10-89:3",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -3501,7 +2329,7 @@
                      }
                   },
                   "source" : [ {
-                     "locator" : "125:12-125:61",
+                     "locator" : "85:12-85:61",
                      "alias" : "ImplantedCardiacPacer",
                      "resultTypeSpecifier" : {
                         "type" : "ListTypeSpecifier",
@@ -3511,7 +2339,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "125:12-125:39",
+                        "locator" : "85:12-85:39",
                         "dataType" : "{http://hl7.org/fhir}Procedure",
                         "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-procedure",
                         "codeProperty" : "code",
@@ -3525,7 +2353,7 @@
                            }
                         },
                         "codes" : {
-                           "locator" : "125:24-125:38",
+                           "locator" : "85:24-85:38",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                            "name" : "Cardiac Pacer",
                            "preserve" : true,
@@ -3534,7 +2362,7 @@
                      }
                   } ],
                   "relationship" : [ {
-                     "locator" : "126:7-127:134",
+                     "locator" : "86:7-87:134",
                      "alias" : "ModerateOrSevereLVSDHFOutpatientEncounter",
                      "type" : "With",
                      "resultTypeSpecifier" : {
@@ -3545,7 +2373,7 @@
                         }
                      },
                      "expression" : {
-                        "locator" : "126:12-126:91",
+                        "locator" : "86:12-86:91",
                         "name" : "Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD",
                         "libraryName" : "AHA",
                         "type" : "ExpressionRef",
@@ -3558,7 +2386,7 @@
                         }
                      },
                      "suchThat" : {
-                        "locator" : "127:19-127:134",
+                        "locator" : "87:19-87:134",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Before",
                         "signature" : [ {
@@ -3569,7 +2397,7 @@
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "127:66-127:71",
+                           "locator" : "87:66-87:71",
                            "type" : "Start",
                            "signature" : [ {
                               "type" : "IntervalTypeSpecifier",
@@ -3579,7 +2407,7 @@
                               }
                            } ],
                            "operand" : {
-                              "locator" : "127:19-127:64",
+                              "locator" : "87:19-87:64",
                               "name" : "toInterval",
                               "libraryName" : "QICoreCommon",
                               "type" : "FunctionRef",
@@ -3616,7 +2444,7 @@
                                  } ]
                               } ],
                               "operand" : [ {
-                                 "locator" : "127:19-127:49",
+                                 "locator" : "87:19-87:49",
                                  "name" : "ToValue",
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",
@@ -3641,7 +2469,7 @@
                               } ]
                            }
                         }, {
-                           "locator" : "127:80-127:134",
+                           "locator" : "87:80-87:134",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "End",
                            "signature" : [ {
@@ -3652,7 +2480,7 @@
                               }
                            } ],
                            "operand" : {
-                              "locator" : "127:87-127:134",
+                              "locator" : "87:87-87:134",
                               "name" : "ToInterval",
                               "libraryName" : "FHIRHelpers",
                               "type" : "FunctionRef",
@@ -3673,7 +2501,7 @@
                      }
                   } ],
                   "where" : {
-                     "locator" : "128:7-128:54",
+                     "locator" : "88:7-88:54",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Equal",
                      "signature" : [ {
@@ -3684,7 +2512,7 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "128:13-128:40",
+                        "locator" : "88:13-88:40",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "path" : "value",
                         "type" : "Property",
@@ -3694,7 +2522,7 @@
                            "type" : "Property"
                         }
                      }, {
-                        "locator" : "128:44-128:54",
+                        "locator" : "88:44-88:54",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "valueType" : "{urn:hl7-org:elm-types:r1}String",
                         "value" : "completed",
@@ -3704,13 +2532,13 @@
                }
             }
          }, {
-            "locator" : "75:1-78:48",
+            "locator" : "79:1-82:48",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Atrioventricular Block without Cardiac Pacer",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "76:3-78:48",
+               "locator" : "80:3-82:48",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "And",
                "signature" : [ {
@@ -3721,7 +2549,7 @@
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "locator" : "76:3-77:52",
+                  "locator" : "80:3-81:52",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "signature" : [ {
@@ -3732,12 +2560,12 @@
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : [ {
-                     "locator" : "76:3-76:40",
+                     "locator" : "80:3-80:40",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "Has Atrioventricular Block Diagnosis",
                      "type" : "ExpressionRef"
                   }, {
-                     "locator" : "77:9-77:52",
+                     "locator" : "81:9-81:52",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Not",
                      "signature" : [ {
@@ -3745,14 +2573,14 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : {
-                        "locator" : "77:13-77:52",
+                        "locator" : "81:13-81:52",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "Has Diagnosis of Cardiac Pacer in Situ",
                         "type" : "ExpressionRef"
                      }
                   } ]
                }, {
-                  "locator" : "78:9-78:48",
+                  "locator" : "82:9-82:48",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Not",
                   "signature" : [ {
@@ -3760,7 +2588,7 @@
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : {
-                     "locator" : "78:13-78:48",
+                     "locator" : "82:13-82:48",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "Has Cardiac Pacer Device Implanted",
                      "type" : "ExpressionRef"
@@ -3768,13 +2596,23 @@
                } ]
             }
          }, {
-            "locator" : "52:1-61:53",
+            "locator" : "56:1-65:53",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Denominator Exceptions",
             "context" : "Patient",
             "accessLevel" : "Public",
+            "annotation" : [ {
+               "type" : "Annotation",
+               "t" : [ {
+                  "name" : "commentedOuf",
+                  "value" : "\"Has Medical or Patient Reason for Not Ordering Beta Blocker for LVSD\""
+               }, {
+                  "name" : "commentedOufReason",
+                  "value" : "Negation issue noted in https://github.com/cqframework/cql-execution/issues/296, which is tied to https://oncprojectracking.healthit.gov/support/browse/BONNIEMAT-1455"
+               } ]
+            } ],
             "expression" : {
-               "locator" : "53:3-61:53",
+               "locator" : "57:3-65:53",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Or",
                "signature" : [ {
@@ -3785,7 +2623,7 @@
                   "type" : "NamedTypeSpecifier"
                } ],
                "operand" : [ {
-                  "locator" : "53:3-60:70",
+                  "locator" : "57:3-64:70",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "Or",
                   "signature" : [ {
@@ -3796,7 +2634,7 @@
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : [ {
-                     "locator" : "53:3-59:34",
+                     "locator" : "57:3-63:34",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "Or",
                      "signature" : [ {
@@ -3807,7 +2645,7 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "53:3-58:72",
+                        "locator" : "57:3-62:72",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Or",
                         "signature" : [ {
@@ -3818,7 +2656,7 @@
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "53:3-57:29",
+                           "locator" : "57:3-61:29",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "Or",
                            "signature" : [ {
@@ -3829,7 +2667,7 @@
                               "type" : "NamedTypeSpecifier"
                            } ],
                            "operand" : [ {
-                              "locator" : "53:3-56:34",
+                              "locator" : "57:3-60:34",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "Or",
                               "signature" : [ {
@@ -3840,83 +2678,49 @@
                                  "type" : "NamedTypeSpecifier"
                               } ],
                               "operand" : [ {
-                                 "locator" : "53:3-55:33",
+                                 "locator" : "57:3-57:44",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                 "type" : "Or",
-                                 "signature" : [ {
-                                    "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                    "type" : "NamedTypeSpecifier"
-                                 }, {
-                                    "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                    "type" : "NamedTypeSpecifier"
-                                 } ],
-                                 "operand" : [ {
-                                    "locator" : "53:3-54:77",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                    "type" : "Or",
-                                    "signature" : [ {
-                                       "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                       "type" : "NamedTypeSpecifier"
-                                    }, {
-                                       "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                       "type" : "NamedTypeSpecifier"
-                                    } ],
-                                    "operand" : [ {
-                                       "locator" : "53:3-53:44",
-                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                       "name" : "Has Consecutive Heart Rates Less than 50",
-                                       "type" : "ExpressionRef"
-                                    }, {
-                                       "locator" : "54:8-54:77",
-                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                       "name" : "Has Medical or Patient Reason for Not Ordering Beta Blocker for LVSD",
-                                       "type" : "ExpressionRef"
-                                    } ]
-                                 }, {
-                                    "locator" : "55:8-55:33",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                    "name" : "Has Arrhythmia Diagnosis",
-                                    "type" : "ExpressionRef"
-                                 } ]
+                                 "name" : "Has Consecutive Heart Rates Less than 50",
+                                 "type" : "ExpressionRef"
                               }, {
-                                 "locator" : "56:8-56:34",
+                                 "locator" : "60:8-60:34",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "name" : "Has Hypotension Diagnosis",
                                  "type" : "ExpressionRef"
                               } ]
                            }, {
-                              "locator" : "57:8-57:29",
+                              "locator" : "61:8-61:29",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "name" : "Has Asthma Diagnosis",
                               "type" : "ExpressionRef"
                            } ]
                         }, {
-                           "locator" : "58:8-58:72",
+                           "locator" : "62:8-62:72",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "name" : "Has Diagnosis of Allergy or Intolerance to Beta Blocker Therapy",
                            "type" : "ExpressionRef"
                         } ]
                      }, {
-                        "locator" : "59:8-59:34",
+                        "locator" : "63:8-63:34",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "name" : "Has Bradycardia Diagnosis",
                         "type" : "ExpressionRef"
                      } ]
                   }, {
-                     "locator" : "60:8-60:70",
+                     "locator" : "64:8-64:70",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "name" : "Has Allergy or Intolerance to Beta Blocker Therapy Ingredient",
                      "type" : "ExpressionRef"
                   } ]
                }, {
-                  "locator" : "61:8-61:53",
+                  "locator" : "65:8-65:53",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "name" : "Atrioventricular Block without Cardiac Pacer",
                   "type" : "ExpressionRef"
                } ]
             }
          }, {
-            "locator" : "63:1-64:21",
+            "locator" : "67:1-68:21",
             "name" : "SDE Ethnicity",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3940,7 +2744,7 @@
                } ]
             },
             "expression" : {
-               "locator" : "64:3-64:21",
+               "locator" : "68:3-68:21",
                "name" : "SDE Ethnicity",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -3965,7 +2769,7 @@
                }
             }
          }, {
-            "locator" : "66:1-67:17",
+            "locator" : "70:1-71:17",
             "name" : "SDE Payer",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3992,7 +2796,7 @@
                }
             },
             "expression" : {
-               "locator" : "67:3-67:17",
+               "locator" : "71:3-71:17",
                "name" : "SDE Payer",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -4020,7 +2824,7 @@
                }
             }
          }, {
-            "locator" : "69:1-70:16",
+            "locator" : "73:1-74:16",
             "name" : "SDE Race",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -4044,7 +2848,7 @@
                } ]
             },
             "expression" : {
-               "locator" : "70:3-70:16",
+               "locator" : "74:3-74:16",
                "name" : "SDE Race",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -4069,17 +2873,365 @@
                }
             }
          }, {
-            "locator" : "72:1-73:15",
+            "locator" : "76:1-77:15",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "SDE Sex",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "73:3-73:15",
+               "locator" : "77:3-77:15",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "name" : "SDE Sex",
                "libraryName" : "SDE",
                "type" : "ExpressionRef"
+            }
+         }, {
+            "locator" : "156:1-160:3",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "Has Arrhythmia Diagnosis",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "157:3-160:3",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Exists",
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}Condition",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
+               "operand" : {
+                  "locator" : "157:10-160:3",
+                  "type" : "Query",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}Condition",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "source" : [ {
+                     "locator" : "157:12-157:47",
+                     "alias" : "Arrhythmia",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "expression" : {
+                        "locator" : "157:12-157:36",
+                        "dataType" : "{http://hl7.org/fhir}Condition",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition",
+                        "codeProperty" : "code",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Condition",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "codes" : {
+                           "locator" : "157:24-157:35",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Arrhythmia",
+                           "preserve" : true,
+                           "type" : "ValueSetRef"
+                        }
+                     }
+                  } ],
+                  "relationship" : [ ],
+                  "where" : {
+                     "locator" : "158:7-159:53",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "And",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "operand" : [ {
+                        "locator" : "158:13-158:66",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "name" : "overlapsHeartFailureOutpatientEncounter",
+                        "libraryName" : "AHA",
+                        "type" : "FunctionRef",
+                        "signature" : [ {
+                           "name" : "{http://hl7.org/fhir}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "operand" : [ {
+                           "locator" : "158:13-158:22",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "Arrhythmia",
+                           "type" : "AliasRef"
+                        } ]
+                     }, {
+                        "locator" : "159:13-159:53",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "name" : "isConfirmedActiveDiagnosis",
+                        "libraryName" : "AHA",
+                        "type" : "FunctionRef",
+                        "signature" : [ {
+                           "name" : "{http://hl7.org/fhir}Condition",
+                           "type" : "NamedTypeSpecifier"
+                        } ],
+                        "operand" : [ {
+                           "locator" : "159:13-159:22",
+                           "resultTypeName" : "{http://hl7.org/fhir}Condition",
+                           "name" : "Arrhythmia",
+                           "type" : "AliasRef"
+                        } ]
+                     } ]
+                  }
+               }
+            }
+         }, {
+            "locator" : "179:1-186:3",
+            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+            "name" : "Has Medical or Patient Reason for Not Ordering Beta Blocker for LVSD",
+            "context" : "Patient",
+            "accessLevel" : "Public",
+            "expression" : {
+               "locator" : "180:3-186:3",
+               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+               "type" : "Exists",
+               "signature" : [ {
+                  "type" : "ListTypeSpecifier",
+                  "elementType" : {
+                     "name" : "{http://hl7.org/fhir}MedicationRequest",
+                     "type" : "NamedTypeSpecifier"
+                  }
+               } ],
+               "operand" : {
+                  "locator" : "180:10-186:3",
+                  "type" : "Query",
+                  "resultTypeSpecifier" : {
+                     "type" : "ListTypeSpecifier",
+                     "elementType" : {
+                        "name" : "{http://hl7.org/fhir}MedicationRequest",
+                        "type" : "NamedTypeSpecifier"
+                     }
+                  },
+                  "source" : [ {
+                     "locator" : "180:12-180:105",
+                     "alias" : "NoBetaBlockerOrdered",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}MedicationRequest",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "expression" : {
+                        "locator" : "180:12-180:84",
+                        "dataType" : "{http://hl7.org/fhir}MedicationRequest",
+                        "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-mednotrequested",
+                        "codeProperty" : "medication",
+                        "codeComparator" : "in",
+                        "type" : "Retrieve",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}MedicationRequest",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        },
+                        "codes" : {
+                           "locator" : "180:53-180:83",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Beta Blocker Therapy for LVSD",
+                           "preserve" : true,
+                           "type" : "ValueSetRef"
+                        }
+                     }
+                  } ],
+                  "relationship" : [ {
+                     "locator" : "181:7-182:112",
+                     "alias" : "ModerateOrSevereLVSDHFOutpatientEncounter",
+                     "type" : "With",
+                     "resultTypeSpecifier" : {
+                        "type" : "ListTypeSpecifier",
+                        "elementType" : {
+                           "name" : "{http://hl7.org/fhir}Encounter",
+                           "type" : "NamedTypeSpecifier"
+                        }
+                     },
+                     "expression" : {
+                        "locator" : "181:12-181:91",
+                        "name" : "Heart Failure Outpatient Encounter with History of Moderate or Severe LVSD",
+                        "libraryName" : "AHA",
+                        "type" : "ExpressionRef",
+                        "resultTypeSpecifier" : {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{http://hl7.org/fhir}Encounter",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        }
+                     },
+                     "suchThat" : {
+                        "locator" : "182:19-182:112",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "precision" : "Day",
+                        "type" : "In",
+                        "signature" : [ {
+                           "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "type" : "NamedTypeSpecifier"
+                        }, {
+                           "type" : "IntervalTypeSpecifier",
+                           "pointType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
+                        "operand" : [ {
+                           "locator" : "182:19-182:49",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
+                           "path" : "value",
+                           "type" : "Property",
+                           "source" : {
+                              "path" : "authoredOn",
+                              "scope" : "NoBetaBlockerOrdered",
+                              "type" : "Property"
+                           }
+                        }, {
+                           "locator" : "182:65-182:112",
+                           "name" : "ToInterval",
+                           "libraryName" : "FHIRHelpers",
+                           "type" : "FunctionRef",
+                           "resultTypeSpecifier" : {
+                              "type" : "IntervalTypeSpecifier",
+                              "pointType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}DateTime",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "operand" : [ {
+                              "path" : "period",
+                              "scope" : "ModerateOrSevereLVSDHFOutpatientEncounter",
+                              "type" : "Property"
+                           } ]
+                        } ]
+                     }
+                  } ],
+                  "where" : {
+                     "locator" : "183:7-185:7",
+                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                     "type" : "Or",
+                     "signature" : [ {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     }, {
+                        "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "NamedTypeSpecifier"
+                     } ],
+                     "operand" : [ {
+                        "locator" : "183:15-183:65",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "AnyInValueSet",
+                        "signature" : [ {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
+                        "codes" : {
+                           "locator" : "183:15-183:45",
+                           "type" : "Query",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "source" : [ {
+                              "alias" : "$this",
+                              "expression" : {
+                                 "path" : "reasonCode",
+                                 "scope" : "NoBetaBlockerOrdered",
+                                 "type" : "Property"
+                              }
+                           } ],
+                           "return" : {
+                              "distinct" : false,
+                              "expression" : {
+                                 "name" : "ToConcept",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
+                                    "name" : "$this",
+                                    "type" : "AliasRef"
+                                 } ]
+                              }
+                           }
+                        },
+                        "valueset" : {
+                           "locator" : "183:50-183:65",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Medical Reason",
+                           "preserve" : true
+                        }
+                     }, {
+                        "locator" : "184:14-184:64",
+                        "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
+                        "type" : "AnyInValueSet",
+                        "signature" : [ {
+                           "type" : "ListTypeSpecifier",
+                           "elementType" : {
+                              "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                              "type" : "NamedTypeSpecifier"
+                           }
+                        } ],
+                        "codes" : {
+                           "locator" : "184:14-184:44",
+                           "type" : "Query",
+                           "resultTypeSpecifier" : {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}Concept",
+                                 "type" : "NamedTypeSpecifier"
+                              }
+                           },
+                           "source" : [ {
+                              "alias" : "$this",
+                              "expression" : {
+                                 "path" : "reasonCode",
+                                 "scope" : "NoBetaBlockerOrdered",
+                                 "type" : "Property"
+                              }
+                           } ],
+                           "return" : {
+                              "distinct" : false,
+                              "expression" : {
+                                 "name" : "ToConcept",
+                                 "libraryName" : "FHIRHelpers",
+                                 "type" : "FunctionRef",
+                                 "operand" : [ {
+                                    "name" : "$this",
+                                    "type" : "AliasRef"
+                                 } ]
+                              }
+                           }
+                        },
+                        "valueset" : {
+                           "locator" : "184:49-184:64",
+                           "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
+                           "name" : "Patient Reason",
+                           "preserve" : true
+                        }
+                     } ]
+                  }
+               }
             }
          } ]
       }

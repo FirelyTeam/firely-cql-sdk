@@ -7,7 +7,7 @@
       } ],
       "identifier" : {
          "id" : "PalliativeCare",
-         "version" : "1.9.000"
+         "version" : "1.11.000"
       },
       "schemaIdentifier" : {
          "id" : "urn:hl7-org:elm",
@@ -28,17 +28,17 @@
             "locator" : "5:1-5:56",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.3.000"
+            "version" : "4.4.000"
          }, {
             "locator" : "6:1-6:58",
             "localIdentifier" : "QICoreCommon",
             "path" : "QICoreCommon",
-            "version" : "2.0.000"
+            "version" : "2.1.000"
          }, {
             "locator" : "7:1-7:46",
             "localIdentifier" : "Status",
             "path" : "Status",
-            "version" : "1.6.000"
+            "version" : "1.8.000"
          } ]
       },
       "parameters" : {

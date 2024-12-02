@@ -7,7 +7,7 @@
       } ],
       "identifier" : {
          "id" : "AdultOutpatientEncounters",
-         "version" : "4.8.000"
+         "version" : "4.11.000"
       },
       "schemaIdentifier" : {
          "id" : "urn:hl7-org:elm",
@@ -28,17 +28,17 @@
             "locator" : "5:1-5:56",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.3.000"
+            "version" : "4.4.000"
          }, {
             "locator" : "6:1-6:58",
             "localIdentifier" : "QICoreCommon",
             "path" : "QICoreCommon",
-            "version" : "2.0.000"
+            "version" : "2.1.000"
          }, {
             "locator" : "7:1-7:46",
             "localIdentifier" : "Status",
             "path" : "Status",
-            "version" : "1.6.000"
+            "version" : "1.8.000"
          } ]
       },
       "parameters" : {
@@ -92,9 +92,9 @@
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001",
             "accessLevel" : "Public"
          }, {
-            "locator" : "12:1-12:110",
+            "locator" : "12:1-12:109",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-            "name" : "Online Assessments",
+            "name" : "Virtual Encounter",
             "id" : "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089",
             "accessLevel" : "Public"
          }, {
@@ -212,7 +212,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "22:7-27:43",
+                           "locator" : "22:7-27:42",
                            "type" : "Union",
                            "resultTypeSpecifier" : {
                               "type" : "ListTypeSpecifier",
@@ -419,7 +419,7 @@
                                     "type" : "ValueSetRef"
                                  }
                               }, {
-                                 "locator" : "27:11-27:43",
+                                 "locator" : "27:11-27:42",
                                  "dataType" : "{http://hl7.org/fhir}Encounter",
                                  "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter",
                                  "codeProperty" : "type",
@@ -433,9 +433,9 @@
                                     }
                                  },
                                  "codes" : {
-                                    "locator" : "27:23-27:42",
+                                    "locator" : "27:23-27:41",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
-                                    "name" : "Online Assessments",
+                                    "name" : "Virtual Encounter",
                                     "preserve" : true,
                                     "type" : "ValueSetRef"
                                  }

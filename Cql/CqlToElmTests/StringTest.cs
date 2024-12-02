@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = CreateLibraryForExpression("ReplaceMatches('All that glitters is not gold', '\\\\s', '\\$')");
             var replace = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ReplaceMatches>();
-            var result = Run<string?>(replace);
+            var result = Run<string?>(replace, library);
             result.Should().Be("All$that$glitters$is$not$gold");
         }
     }

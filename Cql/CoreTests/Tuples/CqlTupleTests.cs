@@ -103,6 +103,18 @@ public class CqlTupleTests
 
     /// <seealso cref="AssemblyLoadContextTests.TestAssemblyLoadContext"/>
     [TestMethod]
+    [Ignore("When running the pipeline, the file cannot be found")]
+    /*
+     * Failed ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized [32 ms]
+     * Error Message:
+     * Test method CoreTests.Tuples.CqlTupleTests.ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized threw exception:
+     * System.IO.FileNotFoundException: Could not load file or assembly 'D:\a\1\s\Cql\CoreTests\bin\Release\net8.0\Dlls\CqlNestedTupleTest-1.0.0.dll'. The system cannot find the path specified.
+     * Stack Trace:
+     *  at System.Runtime.Loader.AssemblyLoadContext.LoadFromAssemblyPath(String assemblyPath)
+     * at CoreTests.Tuples.CqlTupleTests.ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized() in /_/Cql/CoreTests/Tuples/CqlTupleTests.cs:line 111
+     * at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+     * at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
+     */
     public void ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized()
     {
         var file = @"Dlls/CqlNestedTupleTest-1.0.0.dll";

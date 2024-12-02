@@ -130,6 +130,13 @@ namespace Hl7.Cql.Packaging
                     return new CqlTypeToFhirMapping(FHIRAllTypes.Date, cqlType);
                 case CqlPrimitiveType.DateTime:
                     return new CqlTypeToFhirMapping(FHIRAllTypes.DateTime, cqlType);
+                case CqlPrimitiveType.Long:
+#if FhirReleaseR4
+                    // integer64 only supported in R5. Compare https://hl7.org/fhir/R4/datatypes.html vs https://hl7.org/fhir/R5/datatypes.html
+                    throw new NotSupportedException("No mapping from CQL Long to FHIR in release 4 (see https://hl7.org/fhir/R4/datatypes.html)");
+//#else FhirReleaseR5
+//                    return new CqlTypeToFhirMapping(FHIRAllTypes.Integer64, cqlType);
+#endif
                 case CqlPrimitiveType.Decimal:
                     return new CqlTypeToFhirMapping(FHIRAllTypes.Decimal, cqlType);
                 case CqlPrimitiveType.List:
