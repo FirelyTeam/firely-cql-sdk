@@ -2,11 +2,11 @@ library CesareanBirthFHIR version '0.2.000'
 
 using QICore version '4.1.1'
 
-include CQMCommon version '2.0.000' called CQMCommon
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include SupplementalDataElements version '3.4.000' called SDE
-include PCMaternal version '5.16.000' called PCMaternal
-include QICoreCommon version '2.0.000' called QICoreCommon
+include CQMCommon version '2.2.000' called CQMCommon
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include SupplementalDataElements version '3.5.000' called SDE
+include PCMaternal version '5.19.000' called PCMaternal
+include QICoreCommon version '2.1.000' called QICoreCommon
 
 codesystem "LOINC": 'http://loinc.org'
 
@@ -16,7 +16,7 @@ valueset "Delivery of Singleton": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840
 valueset "Delivery Procedures": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59'
 valueset "Encounter Inpatient": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307'
 valueset "Genital Herpes": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1049'
-valueset "Placenta Previa Accreta Increta Percreta or Vasa Previa": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.37'
+valueset "Placenta Accreta Spectrum Previa or Vasa Previa": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.37'
 valueset "37 to 42 Plus Weeks Gestation": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.68'
 
 code "[#] Births.preterm": '11637-6' from "LOINC" display '[#] Births.preterm'
@@ -26,7 +26,7 @@ code "[#] Pregnancies": '11996-6' from "LOINC" display '[#] Pregnancies'
 code "Date and time of obstetric delivery": '93857-1' from "LOINC" display 'Date and time of obstetric delivery'
 
 parameter "Measurement Period" Interval<DateTime>
-  default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)
+  default Interval[@2025-01-01T00:00:00.000Z, @2025-12-31T23:59:59.999Z]
 
 context Patient
 
@@ -82,7 +82,7 @@ define "SDE Race":
 define "SDE Sex":
   SDE."SDE Sex"
 
-define "Variable Calculated Gestational Age":
+define "SDE Variable Calculated Gestational Age":
   PCMaternal."Variable Calculated Gestational Age"
 
 define "Delivery Encounter with Cesarean Birth":
@@ -94,7 +94,7 @@ define "Delivery Encounter with Cesarean Birth":
 define "Encounter with Genital Herpes, Placenta Previa, Vasa Previa or Placenta Accreta Spectrum":
   "Singleton Delivery Encounters at 37 Plus Weeks Gravida 1 Parity 0, No Previous Births" ThirtysevenWeeksPlusEncounter
     where exists ( ( ThirtysevenWeeksPlusEncounter.encounterDiagnosis ( ) ) EncounterDiagnosis
-        where EncounterDiagnosis.code in "Placenta Previa Accreta Increta Percreta or Vasa Previa"
+        where EncounterDiagnosis.code in "Placenta Accreta Spectrum Previa or Vasa Previa"
           or EncounterDiagnosis.code in "Genital Herpes"
     )
 

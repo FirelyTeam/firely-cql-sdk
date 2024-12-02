@@ -1,14 +1,15 @@
 /*
-@update: JKR 2023-10-20 ->
-Incremented QICoreCommon version
+@update: JKR 2024-04-02 ->
+Incremented QICoreCommon and FHIRHelpers version
+Created Fluent functions for all relevant functions
 */
 
-library CumulativeMedicationDuration version '4.0.000'
+library CumulativeMedicationDuration version '4.1.000'
 
 using QICore version '4.1.1'
 
-include FHIRHelpers version '4.3.000'
-include QICoreCommon version '2.0.000'
+include FHIRHelpers version '4.4.000'
+include QICoreCommon version '2.1.000'
 
 // These code systems are not known to the MAT environment yet, request to have them added submitted
 codesystem "V3TimingEvent": 'http://terminology.hl7.org/CodeSystem/v3-TimingEvent'
@@ -269,6 +270,37 @@ define function MedicationRequestPeriod(Request "MedicationRequest"):
       else
         null
 
+ define fluent function medicationRequestPeriod(Request "MedicationRequest"):
+  Request R
+    let
+      dosage: singleton from R.dosageInstruction,
+      doseAndRate: singleton from dosage.doseAndRate,
+      timing: dosage.timing,
+      frequency: Coalesce(timing.repeat.frequencyMax, timing.repeat.frequency),
+      period: Quantity(timing.repeat.period, timing.repeat.periodUnit),
+      doseRange: doseAndRate.dose,
+      doseQuantity: doseAndRate.dose,
+      dose: Coalesce(end of doseRange, doseQuantity),
+      dosesPerDay: Coalesce(ToDaily(frequency, period), Count(timing.repeat.timeOfDay), 1.0),
+      boundsPeriod: timing.repeat.bounds as Interval<DateTime>,
+      daysSupply: (convert R.dispenseRequest.expectedSupplyDuration to days).value,
+      quantity: R.dispenseRequest.quantity,
+      refills: Coalesce(R.dispenseRequest.numberOfRepeatsAllowed, 0),
+      startDate:
+        Coalesce(
+          date from start of boundsPeriod,
+          date from R.authoredOn,
+          date from start of R.dispenseRequest.validityPeriod
+        ),
+      totalDaysSupplied: Coalesce(daysSupply, quantity.value / (dose.value * dosesPerDay)) * (1 + refills)
+    return
+      if startDate is not null and totalDaysSupplied is not null then
+        Interval[startDate, startDate + Quantity(totalDaysSupplied - 1, 'day') ]
+      else if startDate is not null and boundsPeriod."high" is not null then
+        Interval[startDate, date from end of boundsPeriod]
+      else
+        null
+
 /*
 Next, consider the MedicationDispense case:
 * whenPrepared: When product was prepared
@@ -363,6 +395,57 @@ define function MedicationDispensePeriod(Dispense "MedicationDispense"):
       else
         null
 
+ /*
+Calculates Medication Period for a given MedicationDispense
+MedicationDispense instances provided to this function are expected
+to conform to the [TODO: MMEMedicationDispense](http://build.fhir.org/ig/cqframework/opioid-mme-r4/StructureDefinition-mmemedicationdispense.html)
+profile, which expects:
+* 1 and only 1 dosageInstruction, multiple dosageInstruction elements will result in an error
+* 1 and only 1 doseAndRate, multiple doseAndRate elements will result in an error
+* 1 timing with 1 repeat, missing timing or repeat elements will result in a null
+* frequency, frequencyMax, defaulting to 1
+* period, periodUnit, defaulting to 1 'd'
+* timeOfDay
+* doseQuantity or doseRange, missing doseQuantity and doseRange will result in a null
+* whenHandedOver or whenPrepared, if missing both whenHandedOver and whenPrepared will result in a null
+Note that MedicationDispense status is not considered by this calculation, as the
+list of MedicationDispense instances provided to this function should already have
+considered appropriate statuses, depending on the use case, typically `completed`,
+especially since whenHandedOver would be expected to be present for a completed
+MedicationDispense.
+Note also that the dosage information recorded in a dispense is expected to be a copy of the
+dispense information from the related medication request. As such, the boundsPeriod would be expected
+to cover the entire range, and should _not_ be used for timing of the event.
+There is also active discussion in the Pharmacy WG about what date should be used if whenPrepared/whenHandedOver is not present.
+This may take the form of an "original creation date", but may also be a "status change date" for dispense events that are updating
+status of an existing dispense. That discussion is ongoing, so until that is resolved, this logic will return
+null if whenPrepared/whenHandedOver are not available.
+*/
+define fluent function medicationDispensePeriod(Dispense "MedicationDispense"):
+  Dispense D
+    let
+      dosage: singleton from D.dosageInstruction,
+      doseAndRate: singleton from dosage.doseAndRate,
+      timing: dosage.timing,
+      frequency: Coalesce(timing.repeat.frequencyMax, timing.repeat.frequency),
+      period: Quantity(timing.repeat.period, timing.repeat.periodUnit),
+      doseRange: doseAndRate.dose,
+      doseQuantity: doseAndRate.dose,
+      dose: Coalesce(end of doseRange, doseQuantity),
+      daysSupply: (convert D.daysSupply to days).value,
+      dosesPerDay: Coalesce(ToDaily(frequency, period), Count(timing.repeat.timeOfDay), 1.0),
+      startDate:
+        Coalesce(
+          date from D.whenHandedOver,
+          date from D.whenPrepared
+        ),
+      totalDaysSupplied: Coalesce(daysSupply, D.quantity.value / (dose.value * dosesPerDay))
+    return
+      if startDate is not null and totalDaysSupplied is not null then
+        Interval[startDate, startDate + Quantity(totalDaysSupplied - 1, 'day')]
+      else
+        null
+ 
 /*
 Returns the established therapeutic duration for a given medication.
 This is likely measure specific, though could potentially be established for
@@ -372,7 +455,7 @@ Defaulting to 14 days here for illustration.
 define function TherapeuticDuration(medication Concept):
   14 days
 
-/*
+ /*
 Next we consider MedicationAdministration. This data type is typically used to
 capture specific administration, with the relevantPeriod capturing start and stop
 time of the administration event:
@@ -390,6 +473,34 @@ NOTE: Therapeutic duration needs to be established and until a way is implemente
 do that based on the medication, this logic is incomplete and should not be used.
 */
 define function MedicationAdministrationPeriod(Administration "MedicationAdministration"):
+  Administration M
+    let
+      therapeuticDuration: TherapeuticDuration(Administration.medication),
+      startDate: date from start of Administration.effective
+    return
+      if startDate is not null and therapeuticDuration is not null then
+        Interval[startDate, startDate + therapeuticDuration - 1]
+      else
+        null
+
+ /*
+Next we consider MedicationAdministration. This data type is typically used to
+capture specific administration, with the relevantPeriod capturing start and stop
+time of the administration event:
+* effective[x]: Start and end time of administration
+However, when calculating cumulative medication duration, it is typically the
+therapeutic period of the medication that should be considered. Currently neither
+the Medication nor MedicationKnowledge resources provide this information, so
+we model it here as a function that can potentially be implemented in a variety
+of ways, including measure-specific values, as well as distribution as an RxNorm
+code system supplement.
+However it is obtained, if therapeutic duration can be obtained, and the effective
+period has a start, the result will be
+    Interval[startDate, startDate + therapeuticDuration - 1 day]
+NOTE: Therapeutic duration needs to be established and until a way is implemented to
+do that based on the medication, this logic is incomplete and should not be used.
+*/
+define fluent function medicationAdministrationPeriod(Administration "MedicationAdministration"):
   Administration M
     let
       therapeuticDuration: TherapeuticDuration(Administration.medication),
@@ -419,10 +530,42 @@ define function CumulativeDuration(Intervals List<Interval<Date>>):
   ) 
     else null
 
-/*
+ /*
+Now that we have functions for determining the medication period for individual
+prescriptions, administrations, and dispenses, we can combine those using
+an overall cumulative medication duration calculation.
+There are two broad approaches to calculating cumulative duration, one that _collapses_
+overlapping intervals so that calculations are not duplicated, and one that _rolls out_
+overlapping intervals so that the durations are laid end-to-end.
+First, we define a function that simply calculates CumulativeDuration of a set of
+intervals:
+*/
+define fluent function cumulativeDuration(Intervals List<Interval<Date>>):
+   if Intervals is not null then ( Sum((collapse Intervals per day)X
+        return all(difference in days between start of X and 
+          end of X
+        )+ 1
+    )
+  ) 
+    else null
+
+ /*
 Next, we define a function that rolls out intervals:
 */
 define function RolloutIntervals(intervals List<Interval<Date>>):
+ intervals I aggregate all R starting ( null as List<Interval<Date>>): R
+    union ( { I X
+        let S: Max({ 
+          end of Last(R)+ 1 day, start of X }
+        ),
+        E: S + Quantity(Coalesce(duration in days of X, 0), 'day')
+        return Interval[S, E]}
+    )
+
+  /*
+Next, we define a function that rolls out intervals:
+*/
+define fluent function rolloutIntervals(intervals List<Interval<Date>>):
  intervals I aggregate all R starting ( null as List<Interval<Date>>): R
     union ( { I X
         let S: Max({ 
@@ -444,6 +587,21 @@ define function MedicationPeriod(
   case
     when medication is MedicationRequest then MedicationRequestPeriod(medication)
     when medication is MedicationDispense then MedicationDispensePeriod(medication)
+    else null
+  end
+
+ /*
+Then, we define a function that allows us to calculate based on the various medication
+types:
+*/
+
+define fluent function medicationPeriod(
+  medication Choice<"MedicationRequest",
+    "MedicationDispense"
+  >):
+  case
+    when medication is MedicationRequest then medication.medicationRequestPeriod()
+    when medication is MedicationDispense then medication.medicationDispensePeriod()
     else null
   end
 
@@ -475,7 +633,35 @@ define function CumulativeMedicationDuration(
         )
       )
   )
-  
+
+ /*
+We can then use this function, combined with the MedicationDuration functions above
+to calculate Cumulative Medication Duration:
+Generally speaking, we want to _roll out_ intervals from dispense and administration
+events, and then collapse across that result and intervals from prescriptions.
+Note also that the separation of medications by type should already be done
+by this stage as well.
+Calculations that combine dosages from different types of medications (such as Morphine Milligram Equivalent (MME)
+or Average MME) require further consideration.
+*/
+
+define fluent function cumulativeMedicationDuration(
+Medications List<Choice<"MedicationRequest",
+"MedicationDispense"
+>>):
+((
+Medications M
+where M is MedicationRequest
+return M.medicationRequestPeriod()
+)
+union (
+(
+Medications M
+where M is MedicationDispense
+return M.medicationDispensePeriod()
+).rolloutIntervals()
+)
+).cumulativeDuration()
   /**********************************************************************/
 /* Functions in this region are copied from opioid-mme-r4             */
 /**********************************************************************/

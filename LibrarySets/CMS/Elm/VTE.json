@@ -7,7 +7,7 @@
       } ],
       "identifier" : {
          "id" : "VTE",
-         "version" : "8.6.000"
+         "version" : "8.8.000"
       },
       "schemaIdentifier" : {
          "id" : "urn:hl7-org:elm",
@@ -28,12 +28,12 @@
             "locator" : "6:1-6:56",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.3.000"
+            "version" : "4.4.000"
          }, {
             "locator" : "7:1-7:52",
             "localIdentifier" : "CQMCommon",
             "path" : "CQMCommon",
-            "version" : "2.0.000"
+            "version" : "2.2.000"
          } ]
       },
       "parameters" : {

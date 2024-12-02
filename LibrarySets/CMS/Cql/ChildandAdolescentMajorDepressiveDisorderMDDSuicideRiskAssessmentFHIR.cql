@@ -2,10 +2,10 @@ library ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR ve
 
 using QICore version '4.1.1'
 
-include SupplementalDataElements version '3.4.000' called SDE
-include QICoreCommon version '2.0.000' called QICoreCommon
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include CQMCommon version '2.0.000' called CQMCommon
+include SupplementalDataElements version '3.5.000' called SDE
+include QICoreCommon version '2.1.000' called QICoreCommon
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include CQMCommon version '2.2.000' called CQMCommon
 
 codesystem "LOINC": 'http://loinc.org'
 codesystem "SNOMEDCT": 'http://snomed.info/sct'
@@ -20,15 +20,15 @@ valueset "Psych Visit Diagnostic Evaluation": 'http://cts.nlm.nih.gov/fhir/Value
 valueset "Psych Visit for Family Psychotherapy": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1018'
 valueset "Psych Visit Psychotherapy": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496'
 valueset "Psychoanalysis": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1141'
-valueset "Telehealth Services": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1031'
+valueset "Telephone Visits": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080'
 
 code "Birth date": '21112-8' from "LOINC" display 'Birth date'
 code "Suicide risk assessment (procedure)": '225337009' from "SNOMEDCT" display 'Suicide risk assessment (procedure)'
 code "AMB": 'AMB' from "ActCode" display 'Ambulatory'
 
 parameter "Measurement Period" Interval<DateTime>
-  default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)
-  
+  default Interval[@2025-01-01T00:00:00.000Z, @2025-12-31T23:59:59.999Z]
+
 context Patient
 
 define "SDE Ethnicity":
@@ -56,7 +56,7 @@ define "Numerator":
   "Major Depressive Disorder Encounter" MDDEncounter
     with ["Procedure": "Suicide risk assessment (procedure)"] SuicideRiskAssessment
       such that SuicideRiskAssessment.status = 'completed'
-        and QICoreCommon."ToInterval" ( SuicideRiskAssessment.performed ) during MDDEncounter.period
+        and SuicideRiskAssessment.performed.toInterval ( ) during MDDEncounter.period
 
 define "Major Depressive Disorder Encounter":
   ( ["Encounter": "Office Visit"]
@@ -66,11 +66,11 @@ define "Major Depressive Disorder Encounter":
     union ["Encounter": "Psych Visit Psychotherapy"]
     union ["Encounter": "Psychoanalysis"]
     union ["Encounter": "Group Psychotherapy"]
-    union ["Encounter": "Telehealth Services"] ) ValidEncounter
+    union ["Encounter": "Telephone Visits"] ) ValidEncounter
     where ValidEncounter.status = 'finished'
       and ( ValidEncounter.reasonCode in "Major Depressive Disorder Active"
-          or exists ( ( CQMCommon."EncounterDiagnosis" ( ValidEncounter ) ) EncounterDiagnosis
+          or exists ( ( ValidEncounter.encounterDiagnosis ( ) ) EncounterDiagnosis
               where EncounterDiagnosis.code in "Major Depressive Disorder Active"
           )
       )
-      and ValidEncounter.period during "Measurement Period"
+      and ValidEncounter.period during day of "Measurement Period"

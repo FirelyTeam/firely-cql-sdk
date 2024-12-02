@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.6.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.7.0")]
 [CqlLibrary("KidneyHealthEvaluationFHIR", "0.1.000")]
 public partial class KidneyHealthEvaluationFHIR_0_1_000 : ILibrary, ISingleton<KidneyHealthEvaluationFHIR_0_1_000>
 {
@@ -23,7 +23,7 @@ public partial class KidneyHealthEvaluationFHIR_0_1_000 : ILibrary, ISingleton<K
     #region Library Members
     public string Name => "KidneyHealthEvaluationFHIR";
     public string Version => "0.1.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, SupplementalDataElements_3_4_000.Instance, CQMCommon_2_0_000.Instance, Hospice_6_9_000.Instance, PalliativeCare_1_9_000.Instance, QICoreCommon_2_0_000.Instance];
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, CQMCommon_2_2_000.Instance, Hospice_6_12_000.Instance, PalliativeCare_1_11_000.Instance, QICoreCommon_2_1_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Acute Inpatient")]
@@ -179,9 +179,9 @@ public partial class KidneyHealthEvaluationFHIR_0_1_000 : ILibrary, ISingleton<K
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
-        CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, default);
-        CqlDateTime b_ = context.Operators.DateTime(2026, 1, 1, 0, 0, 0, 0, default);
-        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, false);
+        CqlDateTime a_ = context.Operators.DateTime(2025, 1, 1, 0, 0, 0, 0, 0.0m);
+        CqlDateTime b_ = context.Operators.DateTime(2025, 12, 31, 23, 59, 59, 999, 0.0m);
+        CqlInterval<CqlDateTime> c_ = context.Operators.Interval(a_, b_, true, true);
         object d_ = context.ResolveParameter("KidneyHealthEvaluationFHIR-0.1.000", "Measurement Period", c_);
 
         return (CqlInterval<CqlDateTime>)d_;
@@ -205,11 +205,11 @@ public partial class KidneyHealthEvaluationFHIR_0_1_000 : ILibrary, ISingleton<K
         IEnumerable<Condition> b_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-condition"));
         bool? c_(Condition Diabetes)
         {
-            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_0_000.Instance.ToPrevalenceInterval(context, Diabetes);
+            CqlInterval<CqlDateTime> f_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, Diabetes);
             CqlInterval<CqlDateTime> g_ = this.Measurement_Period(context);
-            bool? h_ = context.Operators.Overlaps(f_, g_, default);
+            bool? h_ = context.Operators.Overlaps(f_, g_, "day");
             CodeableConcept i_ = Diabetes?.ClinicalStatus;
-            CqlConcept j_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, i_);
+            CqlConcept j_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, i_);
             CqlCode k_ = this.active(context);
             CqlConcept l_ = context.Operators.ConvertCodeToConcept(k_);
             bool? m_ = context.Operators.Equivalent(j_, l_);
@@ -251,7 +251,7 @@ public partial class KidneyHealthEvaluationFHIR_0_1_000 : ILibrary, ISingleton<K
         {
             CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
             Period y_ = ValidEncounter?.Period;
-            CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_3_000.Instance.ToInterval(context, y_);
+            CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
             bool? aa_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(x_, z_, default);
             Code<Encounter.EncounterStatus> ab_ = ValidEncounter?.StatusElement;
             Encounter.EncounterStatus? ac_ = ab_?.Value;
@@ -309,11 +309,11 @@ public partial class KidneyHealthEvaluationFHIR_0_1_000 : ILibrary, ISingleton<K
         IEnumerable<Condition> e_ = context.Operators.Union<Condition>(b_, d_);
         bool? f_(Condition CKDOrESRD)
         {
-            CqlInterval<CqlDateTime> h_ = QICoreCommon_2_0_000.Instance.ToPrevalenceInterval(context, CKDOrESRD);
+            CqlInterval<CqlDateTime> h_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, CKDOrESRD);
             CqlInterval<CqlDateTime> i_ = this.Measurement_Period(context);
-            bool? j_ = context.Operators.Overlaps(h_, i_, default);
+            bool? j_ = context.Operators.Overlaps(h_, i_, "day");
             CodeableConcept k_ = CKDOrESRD?.ClinicalStatus;
-            CqlConcept l_ = FHIRHelpers_4_3_000.Instance.ToConcept(context, k_);
+            CqlConcept l_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, k_);
             CqlCode m_ = this.active(context);
             CqlConcept n_ = context.Operators.ConvertCodeToConcept(m_);
             bool? o_ = context.Operators.Equivalent(l_, n_);
@@ -332,9 +332,9 @@ public partial class KidneyHealthEvaluationFHIR_0_1_000 : ILibrary, ISingleton<K
     {
         IEnumerable<Condition> a_ = this.Has_CKD_Stage_5_or_ESRD_Diagnosis_Overlaps_Measurement_Period(context);
         bool? b_ = context.Operators.Exists<Condition>(a_);
-        bool? c_ = Hospice_6_9_000.Instance.Has_Hospice_Services(context);
+        bool? c_ = Hospice_6_12_000.Instance.Has_Hospice_Services(context);
         bool? d_ = context.Operators.Or(b_, c_);
-        bool? e_ = PalliativeCare_1_9_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
+        bool? e_ = PalliativeCare_1_11_000.Instance.Has_Palliative_Care_in_the_Measurement_Period(context);
         bool? f_ = context.Operators.Or(d_, e_);
 
         return f_;
@@ -350,11 +350,11 @@ public partial class KidneyHealthEvaluationFHIR_0_1_000 : ILibrary, ISingleton<K
         {
             CqlInterval<CqlDateTime> l_ = this.Measurement_Period(context);
             DataType m_ = eGFRTest?.Effective;
-            object n_ = FHIRHelpers_4_3_000.Instance.ToValue(context, m_);
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_2_0_000.Instance.ToInterval(context, n_);
-            bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, default);
+            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
+            CqlInterval<CqlDateTime> o_ = QICoreCommon_2_1_000.Instance.toInterval(context, n_);
+            bool? p_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(l_, o_, "day");
             DataType q_ = eGFRTest?.Value;
-            object r_ = FHIRHelpers_4_3_000.Instance.ToValue(context, q_);
+            object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
             bool? s_ = context.Operators.Not((bool?)(r_ is null));
             bool? t_ = context.Operators.And(p_, s_);
             Code<ObservationStatus> u_ = eGFRTest?.StatusElement;
@@ -379,11 +379,11 @@ public partial class KidneyHealthEvaluationFHIR_0_1_000 : ILibrary, ISingleton<K
         {
             CqlInterval<CqlDateTime> ab_ = this.Measurement_Period(context);
             DataType ac_ = uACRTest?.Effective;
-            object ad_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ac_);
-            CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_0_000.Instance.ToInterval(context, ad_);
-            bool? af_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ab_, ae_, default);
+            object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+            CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_1_000.Instance.toInterval(context, ad_);
+            bool? af_ = context.Operators.IntervalIncludesInterval<CqlDateTime>(ab_, ae_, "day");
             DataType ag_ = uACRTest?.Value;
-            object ah_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ag_);
+            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
             bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
             bool? aj_ = context.Operators.And(af_, ai_);
             Code<ObservationStatus> ak_ = uACRTest?.StatusElement;
@@ -420,7 +420,7 @@ public partial class KidneyHealthEvaluationFHIR_0_1_000 : ILibrary, ISingleton<K
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Ethnicity(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Ethnicity(context);
 
         return a_;
     }
@@ -429,7 +429,7 @@ public partial class KidneyHealthEvaluationFHIR_0_1_000 : ILibrary, ISingleton<K
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
-        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_4_000.Instance.SDE_Payer(context);
+        IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> a_ = SupplementalDataElements_3_5_000.Instance.SDE_Payer(context);
 
         return a_;
     }
@@ -438,7 +438,7 @@ public partial class KidneyHealthEvaluationFHIR_0_1_000 : ILibrary, ISingleton<K
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
-        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_4_000.Instance.SDE_Race(context);
+        (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? a_ = SupplementalDataElements_3_5_000.Instance.SDE_Race(context);
 
         return a_;
     }
@@ -447,7 +447,7 @@ public partial class KidneyHealthEvaluationFHIR_0_1_000 : ILibrary, ISingleton<K
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
-        CqlCode a_ = SupplementalDataElements_3_4_000.Instance.SDE_Sex(context);
+        CqlCode a_ = SupplementalDataElements_3_5_000.Instance.SDE_Sex(context);
 
         return a_;
     }

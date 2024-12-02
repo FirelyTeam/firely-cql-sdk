@@ -1,10 +1,10 @@
-library Hospice version '6.9.000'
+library Hospice version '6.12.000'
 
 using QICore version '4.1.1'
 
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include QICoreCommon version '2.0.000' called QICoreCommon
-include Status version '1.6.000' called Status
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include QICoreCommon version '2.1.000' called QICoreCommon
+include Status version '1.8.000' called Status
 
 codesystem "LOINC": 'http://loinc.org'
 codesystem "SNOMEDCT": 'http://snomed.info/sct'
@@ -20,7 +20,6 @@ code "Hospice care [Minimum Data Set]": '45755-6' from "LOINC" display 'Hospice 
 code "Yes (qualifier value)": '373066001' from "SNOMEDCT" display 'Yes (qualifier value)'
 
 parameter "Measurement Period" Interval<DateTime>
-    default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)
 
 context Patient
 
@@ -40,6 +39,8 @@ define "Has Hospice Services":
     )
     or exists ((([ServiceRequest: "Hospice Care Ambulatory"]).isInterventionOrder()) HospiceOrder
         where HospiceOrder.authoredOn.toInterval() during day of "Measurement Period"
+        // and HospiceOrder.doNotPerform is not true
+        // https://oncprojectracking.healthit.gov/support/browse/CQLIT-447
     )
     or exists ((([Procedure: "Hospice Care Ambulatory"]).isInterventionPerformed()) HospicePerformed
         where HospicePerformed.performed.toInterval() overlaps day of "Measurement Period"

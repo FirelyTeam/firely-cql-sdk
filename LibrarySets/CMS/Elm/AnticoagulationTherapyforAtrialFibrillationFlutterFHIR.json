@@ -28,32 +28,32 @@
             "locator" : "8:1-8:56",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.3.000"
+            "version" : "4.4.000"
          }, {
             "locator" : "9:1-9:52",
             "localIdentifier" : "CQMCommon",
             "path" : "CQMCommon",
-            "version" : "2.0.000"
+            "version" : "2.2.000"
          }, {
             "locator" : "10:1-10:58",
             "localIdentifier" : "QICoreCommon",
             "path" : "QICoreCommon",
-            "version" : "2.0.000"
+            "version" : "2.1.000"
          }, {
             "locator" : "11:1-11:61",
             "localIdentifier" : "SDE",
             "path" : "SupplementalDataElements",
-            "version" : "3.4.000"
+            "version" : "3.5.000"
          }, {
             "locator" : "12:1-12:48",
             "localIdentifier" : "TJC",
             "path" : "TJCOverall",
-            "version" : "8.11.000"
+            "version" : "8.14.000"
          } ]
       },
       "parameters" : {
          "def" : [ {
-            "locator" : "26:1-27:66",
+            "locator" : "26:1-27:72",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
             "resultTypeSpecifier" : {
@@ -64,9 +64,9 @@
                }
             },
             "default" : {
-               "locator" : "27:11-27:66",
+               "locator" : "27:11-27:72",
                "lowClosed" : true,
-               "highClosed" : false,
+               "highClosed" : true,
                "type" : "Interval",
                "resultTypeSpecifier" : {
                   "type" : "IntervalTypeSpecifier",
@@ -76,7 +76,7 @@
                   }
                },
                "low" : {
-                  "locator" : "27:20-27:41",
+                  "locator" : "27:20-27:44",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
                   "year" : {
@@ -113,45 +113,55 @@
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
                      "type" : "Literal"
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal"
                   }
                },
                "high" : {
-                  "locator" : "27:44-27:65",
+                  "locator" : "27:47-27:71",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
                   "year" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2026",
+                     "value" : "2025",
                      "type" : "Literal"
                   },
                   "month" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
+                     "value" : "12",
                      "type" : "Literal"
                   },
                   "day" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
+                     "value" : "31",
                      "type" : "Literal"
                   },
                   "hour" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "23",
                      "type" : "Literal"
                   },
                   "minute" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "59",
                      "type" : "Literal"
                   },
                   "second" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "59",
                      "type" : "Literal"
                   },
                   "millisecond" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "999",
+                     "type" : "Literal"
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
                      "type" : "Literal"
                   }
                }
@@ -265,7 +275,7 @@
                }
             }
          }, {
-            "locator" : "31:1-32:50",
+            "locator" : "31:1-32:33",
             "name" : "Initial Population",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -277,8 +287,8 @@
                }
             },
             "expression" : {
-               "locator" : "32:3-32:50",
-               "name" : "Encounter with Principal Diagnosis and Age",
+               "locator" : "32:3-32:33",
+               "name" : "Ischemic Stroke Encounter",
                "libraryName" : "TJC",
                "type" : "ExpressionRef",
                "resultTypeSpecifier" : {
@@ -2447,7 +2457,7 @@
                } ]
             }
          }, {
-            "locator" : "86:1-95:69",
+            "locator" : "86:1-94:69",
             "name" : "Numerator",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2459,7 +2469,7 @@
                }
             },
             "expression" : {
-               "locator" : "87:3-95:69",
+               "locator" : "87:3-94:69",
                "type" : "Query",
                "resultTypeSpecifier" : {
                   "type" : "ListTypeSpecifier",
@@ -2492,7 +2502,7 @@
                   }
                } ],
                "relationship" : [ {
-                  "locator" : "88:5-95:69",
+                  "locator" : "88:5-94:69",
                   "alias" : "DischargeAnticoagulant",
                   "type" : "With",
                   "resultTypeSpecifier" : {
@@ -2562,7 +2572,7 @@
                      } ]
                   },
                   "suchThat" : {
-                     "locator" : "89:17-95:69",
+                     "locator" : "89:17-94:69",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "signature" : [ {
@@ -2573,7 +2583,7 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "89:17-94:59",
+                        "locator" : "89:17-93:124",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "And",
                         "signature" : [ {
@@ -2584,7 +2594,7 @@
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "89:17-93:124",
+                           "locator" : "89:17-92:70",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "And",
                            "signature" : [ {
@@ -2595,9 +2605,9 @@
                               "type" : "NamedTypeSpecifier"
                            } ],
                            "operand" : [ {
-                              "locator" : "89:17-92:70",
+                              "locator" : "89:17-91:7",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "And",
+                              "type" : "Or",
                               "signature" : [ {
                                  "name" : "{urn:hl7-org:elm-types:r1}Boolean",
                                  "type" : "NamedTypeSpecifier"
@@ -2606,100 +2616,40 @@
                                  "type" : "NamedTypeSpecifier"
                               } ],
                               "operand" : [ {
-                                 "locator" : "89:17-91:7",
+                                 "locator" : "89:19-89:56",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                 "type" : "Or",
+                                 "name" : "isCommunity",
+                                 "libraryName" : "QICoreCommon",
+                                 "type" : "FunctionRef",
                                  "signature" : [ {
-                                    "name" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                    "type" : "NamedTypeSpecifier"
-                                 }, {
-                                    "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
                                     "type" : "NamedTypeSpecifier"
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "89:19-89:56",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                    "name" : "isCommunity",
-                                    "libraryName" : "QICoreCommon",
-                                    "type" : "FunctionRef",
-                                    "signature" : [ {
-                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                       "type" : "NamedTypeSpecifier"
-                                    } ],
-                                    "operand" : [ {
-                                       "locator" : "89:19-89:40",
-                                       "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
-                                       "name" : "DischargeAnticoagulant",
-                                       "type" : "AliasRef"
-                                    } ]
-                                 }, {
-                                    "locator" : "90:14-90:51",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                    "name" : "isDischarge",
-                                    "libraryName" : "QICoreCommon",
-                                    "type" : "FunctionRef",
-                                    "signature" : [ {
-                                       "name" : "{http://hl7.org/fhir}MedicationRequest",
-                                       "type" : "NamedTypeSpecifier"
-                                    } ],
-                                    "operand" : [ {
-                                       "locator" : "90:14-90:35",
-                                       "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
-                                       "name" : "DischargeAnticoagulant",
-                                       "type" : "AliasRef"
-                                    } ]
+                                    "locator" : "89:19-89:40",
+                                    "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "name" : "DischargeAnticoagulant",
+                                    "type" : "AliasRef"
                                  } ]
                               }, {
-                                 "locator" : "92:13-92:70",
+                                 "locator" : "90:14-90:51",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                 "type" : "In",
+                                 "name" : "isDischarge",
+                                 "libraryName" : "QICoreCommon",
+                                 "type" : "FunctionRef",
                                  "signature" : [ {
-                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "name" : "{http://hl7.org/fhir}MedicationRequest",
                                     "type" : "NamedTypeSpecifier"
-                                 }, {
-                                    "type" : "ListTypeSpecifier",
-                                    "elementType" : {
-                                       "name" : "{urn:hl7-org:elm-types:r1}String",
-                                       "type" : "NamedTypeSpecifier"
-                                    }
                                  } ],
                                  "operand" : [ {
-                                    "locator" : "92:13-92:41",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                                    "path" : "value",
-                                    "type" : "Property",
-                                    "source" : {
-                                       "path" : "status",
-                                       "scope" : "DischargeAnticoagulant",
-                                       "type" : "Property"
-                                    }
-                                 }, {
-                                    "locator" : "92:46-92:70",
-                                    "type" : "List",
-                                    "resultTypeSpecifier" : {
-                                       "type" : "ListTypeSpecifier",
-                                       "elementType" : {
-                                          "name" : "{urn:hl7-org:elm-types:r1}String",
-                                          "type" : "NamedTypeSpecifier"
-                                       }
-                                    },
-                                    "element" : [ {
-                                       "locator" : "92:48-92:55",
-                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                       "value" : "active",
-                                       "type" : "Literal"
-                                    }, {
-                                       "locator" : "92:58-92:68",
-                                       "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                                       "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                       "value" : "completed",
-                                       "type" : "Literal"
-                                    } ]
+                                    "locator" : "90:14-90:35",
+                                    "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
+                                    "name" : "DischargeAnticoagulant",
+                                    "type" : "AliasRef"
                                  } ]
                               } ]
                            }, {
-                              "locator" : "93:13-93:124",
+                              "locator" : "92:13-92:70",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                               "type" : "In",
                               "signature" : [ {
@@ -2713,17 +2663,17 @@
                                  }
                               } ],
                               "operand" : [ {
-                                 "locator" : "93:13-93:41",
+                                 "locator" : "92:13-92:41",
                                  "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                  "path" : "value",
                                  "type" : "Property",
                                  "source" : {
-                                    "path" : "intent",
+                                    "path" : "status",
                                     "scope" : "DischargeAnticoagulant",
                                     "type" : "Property"
                                  }
                               }, {
-                                 "locator" : "93:46-93:124",
+                                 "locator" : "92:46-92:70",
                                  "type" : "List",
                                  "resultTypeSpecifier" : {
                                     "type" : "ListTypeSpecifier",
@@ -2733,69 +2683,89 @@
                                     }
                                  },
                                  "element" : [ {
-                                    "locator" : "93:48-93:54",
+                                    "locator" : "92:48-92:55",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : "order",
+                                    "value" : "active",
                                     "type" : "Literal"
                                  }, {
-                                    "locator" : "93:57-93:72",
+                                    "locator" : "92:58-92:68",
                                     "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                                     "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : "original-order",
-                                    "type" : "Literal"
-                                 }, {
-                                    "locator" : "93:75-93:88",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : "reflex-order",
-                                    "type" : "Literal"
-                                 }, {
-                                    "locator" : "93:91-93:104",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : "filler-order",
-                                    "type" : "Literal"
-                                 }, {
-                                    "locator" : "93:107-93:122",
-                                    "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
-                                    "valueType" : "{urn:hl7-org:elm-types:r1}String",
-                                    "value" : "instance-order",
+                                    "value" : "completed",
                                     "type" : "Literal"
                                  } ]
                               } ]
                            } ]
                         }, {
-                           "locator" : "94:13-94:59",
+                           "locator" : "93:13-93:124",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                           "type" : "Not",
+                           "type" : "In",
                            "signature" : [ {
-                              "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                              "name" : "{urn:hl7-org:elm-types:r1}String",
                               "type" : "NamedTypeSpecifier"
-                           } ],
-                           "operand" : {
-                              "locator" : "94:13-94:59",
-                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                              "type" : "IsTrue",
-                              "signature" : [ {
-                                 "name" : "{urn:hl7-org:elm-types:r1}Boolean",
+                           }, {
+                              "type" : "ListTypeSpecifier",
+                              "elementType" : {
+                                 "name" : "{urn:hl7-org:elm-types:r1}String",
                                  "type" : "NamedTypeSpecifier"
-                              } ],
-                              "operand" : {
-                                 "locator" : "94:13-94:47",
-                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
-                                 "path" : "value",
-                                 "type" : "Property",
-                                 "source" : {
-                                    "path" : "doNotPerform",
-                                    "scope" : "DischargeAnticoagulant",
-                                    "type" : "Property"
-                                 }
                               }
-                           }
+                           } ],
+                           "operand" : [ {
+                              "locator" : "93:13-93:41",
+                              "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                              "path" : "value",
+                              "type" : "Property",
+                              "source" : {
+                                 "path" : "intent",
+                                 "scope" : "DischargeAnticoagulant",
+                                 "type" : "Property"
+                              }
+                           }, {
+                              "locator" : "93:46-93:124",
+                              "type" : "List",
+                              "resultTypeSpecifier" : {
+                                 "type" : "ListTypeSpecifier",
+                                 "elementType" : {
+                                    "name" : "{urn:hl7-org:elm-types:r1}String",
+                                    "type" : "NamedTypeSpecifier"
+                                 }
+                              },
+                              "element" : [ {
+                                 "locator" : "93:48-93:54",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "order",
+                                 "type" : "Literal"
+                              }, {
+                                 "locator" : "93:57-93:72",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "original-order",
+                                 "type" : "Literal"
+                              }, {
+                                 "locator" : "93:75-93:88",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "reflex-order",
+                                 "type" : "Literal"
+                              }, {
+                                 "locator" : "93:91-93:104",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "filler-order",
+                                 "type" : "Literal"
+                              }, {
+                                 "locator" : "93:107-93:122",
+                                 "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
+                                 "valueType" : "{urn:hl7-org:elm-types:r1}String",
+                                 "value" : "instance-order",
+                                 "type" : "Literal"
+                              } ]
+                           } ]
                         } ]
                      }, {
-                        "locator" : "95:13-95:69",
+                        "locator" : "94:13-94:69",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "In",
                         "signature" : [ {
@@ -2809,7 +2779,7 @@
                            }
                         } ],
                         "operand" : [ {
-                           "locator" : "95:13-95:45",
+                           "locator" : "94:13-94:45",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "path" : "value",
                            "type" : "Property",
@@ -2819,7 +2789,7 @@
                               "type" : "Property"
                            }
                         }, {
-                           "locator" : "95:54-95:69",
+                           "locator" : "94:54-94:69",
                            "name" : "ToInterval",
                            "libraryName" : "FHIRHelpers",
                            "type" : "FunctionRef",
@@ -2841,7 +2811,7 @@
                } ]
             }
          }, {
-            "locator" : "104:1-112:115",
+            "locator" : "103:1-111:115",
             "name" : "Documented Reason for Not Giving Anticoagulant at Discharge",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -2853,7 +2823,7 @@
                }
             },
             "expression" : {
-               "locator" : "105:3-112:115",
+               "locator" : "104:3-111:115",
                "type" : "Query",
                "resultTypeSpecifier" : {
                   "type" : "ListTypeSpecifier",
@@ -2863,7 +2833,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "105:3-105:83",
+                  "locator" : "104:3-104:83",
                   "alias" : "NoAnticoagulant",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -2873,7 +2843,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "105:3-105:67",
+                     "locator" : "104:3-104:67",
                      "dataType" : "{http://hl7.org/fhir}MedicationRequest",
                      "templateId" : "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-mednotrequested",
                      "codeProperty" : "medication",
@@ -2887,7 +2857,7 @@
                         }
                      },
                      "codes" : {
-                        "locator" : "105:44-105:66",
+                        "locator" : "104:44-104:66",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                         "name" : "Anticoagulant Therapy",
                         "preserve" : true,
@@ -2897,7 +2867,7 @@
                } ],
                "relationship" : [ ],
                "where" : {
-                  "locator" : "106:5-112:115",
+                  "locator" : "105:5-111:115",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                   "type" : "And",
                   "signature" : [ {
@@ -2908,7 +2878,7 @@
                      "type" : "NamedTypeSpecifier"
                   } ],
                   "operand" : [ {
-                     "locator" : "106:11-111:7",
+                     "locator" : "105:11-110:7",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "And",
                      "signature" : [ {
@@ -2919,7 +2889,7 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "106:11-108:5",
+                        "locator" : "105:11-107:5",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Or",
                         "signature" : [ {
@@ -2930,7 +2900,7 @@
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "106:13-106:86",
+                           "locator" : "105:13-105:86",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "AnyInValueSet",
                            "signature" : [ {
@@ -2941,7 +2911,7 @@
                               }
                            } ],
                            "codes" : {
-                              "locator" : "106:13-106:38",
+                              "locator" : "105:13-105:38",
                               "type" : "Query",
                               "resultTypeSpecifier" : {
                                  "type" : "ListTypeSpecifier",
@@ -2972,13 +2942,13 @@
                               }
                            },
                            "valueset" : {
-                              "locator" : "106:43-106:86",
+                              "locator" : "105:43-105:86",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                               "name" : "Medical Reason For Not Providing Treatment",
                               "preserve" : true
                            }
                         }, {
-                           "locator" : "107:12-107:58",
+                           "locator" : "106:12-106:58",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "type" : "AnyInValueSet",
                            "signature" : [ {
@@ -2989,7 +2959,7 @@
                               }
                            } ],
                            "codes" : {
-                              "locator" : "107:12-107:37",
+                              "locator" : "106:12-106:37",
                               "type" : "Query",
                               "resultTypeSpecifier" : {
                                  "type" : "ListTypeSpecifier",
@@ -3020,14 +2990,14 @@
                               }
                            },
                            "valueset" : {
-                              "locator" : "107:42-107:58",
+                              "locator" : "106:42-106:58",
                               "resultTypeName" : "{urn:hl7-org:elm-types:r1}ValueSet",
                               "name" : "Patient Refusal",
                               "preserve" : true
                            }
                         } ]
                      }, {
-                        "locator" : "109:11-111:7",
+                        "locator" : "108:11-110:7",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                         "type" : "Or",
                         "signature" : [ {
@@ -3038,7 +3008,7 @@
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "109:13-109:43",
+                           "locator" : "108:13-108:43",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "name" : "isCommunity",
                            "libraryName" : "QICoreCommon",
@@ -3048,13 +3018,13 @@
                               "type" : "NamedTypeSpecifier"
                            } ],
                            "operand" : [ {
-                              "locator" : "109:13-109:27",
+                              "locator" : "108:13-108:27",
                               "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
                               "name" : "NoAnticoagulant",
                               "type" : "AliasRef"
                            } ]
                         }, {
-                           "locator" : "110:14-110:44",
+                           "locator" : "109:14-109:44",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                            "name" : "isDischarge",
                            "libraryName" : "QICoreCommon",
@@ -3064,7 +3034,7 @@
                               "type" : "NamedTypeSpecifier"
                            } ],
                            "operand" : [ {
-                              "locator" : "110:14-110:28",
+                              "locator" : "109:14-109:28",
                               "resultTypeName" : "{http://hl7.org/fhir}MedicationRequest",
                               "name" : "NoAnticoagulant",
                               "type" : "AliasRef"
@@ -3072,7 +3042,7 @@
                         } ]
                      } ]
                   }, {
-                     "locator" : "112:11-112:115",
+                     "locator" : "111:11-111:115",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
                      "signature" : [ {
@@ -3086,7 +3056,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "112:11-112:32",
+                        "locator" : "111:11-111:32",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                         "path" : "value",
                         "type" : "Property",
@@ -3096,7 +3066,7 @@
                            "type" : "Property"
                         }
                      }, {
-                        "locator" : "112:37-112:115",
+                        "locator" : "111:37-111:115",
                         "type" : "List",
                         "resultTypeSpecifier" : {
                            "type" : "ListTypeSpecifier",
@@ -3106,31 +3076,31 @@
                            }
                         },
                         "element" : [ {
-                           "locator" : "112:39-112:45",
+                           "locator" : "111:39-111:45",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "order",
                            "type" : "Literal"
                         }, {
-                           "locator" : "112:48-112:63",
+                           "locator" : "111:48-111:63",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "original-order",
                            "type" : "Literal"
                         }, {
-                           "locator" : "112:66-112:79",
+                           "locator" : "111:66-111:79",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "reflex-order",
                            "type" : "Literal"
                         }, {
-                           "locator" : "112:82-112:95",
+                           "locator" : "111:82-111:95",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "filler-order",
                            "type" : "Literal"
                         }, {
-                           "locator" : "112:98-112:113",
+                           "locator" : "111:98-111:113",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}String",
                            "valueType" : "{urn:hl7-org:elm-types:r1}String",
                            "value" : "instance-order",
@@ -3141,7 +3111,7 @@
                }
             }
          }, {
-            "locator" : "99:1-102:75",
+            "locator" : "98:1-101:75",
             "name" : "Denominator Exceptions",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3153,7 +3123,7 @@
                }
             },
             "expression" : {
-               "locator" : "100:3-102:75",
+               "locator" : "99:3-101:75",
                "type" : "Query",
                "resultTypeSpecifier" : {
                   "type" : "ListTypeSpecifier",
@@ -3163,7 +3133,7 @@
                   }
                },
                "source" : [ {
-                  "locator" : "100:3-100:25",
+                  "locator" : "99:3-99:25",
                   "alias" : "Encounter",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -3173,7 +3143,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "100:3-100:15",
+                     "locator" : "99:3-99:15",
                      "name" : "Denominator",
                      "type" : "ExpressionRef",
                      "resultTypeSpecifier" : {
@@ -3186,7 +3156,7 @@
                   }
                } ],
                "relationship" : [ {
-                  "locator" : "101:5-102:75",
+                  "locator" : "100:5-101:75",
                   "alias" : "NoDischargeAnticoagulant",
                   "type" : "With",
                   "resultTypeSpecifier" : {
@@ -3197,7 +3167,7 @@
                      }
                   },
                   "expression" : {
-                     "locator" : "101:10-101:70",
+                     "locator" : "100:10-100:70",
                      "name" : "Documented Reason for Not Giving Anticoagulant at Discharge",
                      "type" : "ExpressionRef",
                      "resultTypeSpecifier" : {
@@ -3209,7 +3179,7 @@
                      }
                   },
                   "suchThat" : {
-                     "locator" : "102:17-102:75",
+                     "locator" : "101:17-101:75",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "type" : "In",
                      "signature" : [ {
@@ -3223,7 +3193,7 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "102:17-102:51",
+                        "locator" : "101:17-101:51",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "path" : "value",
                         "type" : "Property",
@@ -3233,7 +3203,7 @@
                            "type" : "Property"
                         }
                      }, {
-                        "locator" : "102:60-102:75",
+                        "locator" : "101:60-101:75",
                         "name" : "ToInterval",
                         "libraryName" : "FHIRHelpers",
                         "type" : "FunctionRef",
@@ -3254,7 +3224,7 @@
                } ]
             }
          }, {
-            "locator" : "114:1-115:21",
+            "locator" : "113:1-114:21",
             "name" : "SDE Ethnicity",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3278,7 +3248,7 @@
                } ]
             },
             "expression" : {
-               "locator" : "115:3-115:21",
+               "locator" : "114:3-114:21",
                "name" : "SDE Ethnicity",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -3303,7 +3273,7 @@
                }
             }
          }, {
-            "locator" : "117:1-118:17",
+            "locator" : "116:1-117:17",
             "name" : "SDE Payer",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3330,7 +3300,7 @@
                }
             },
             "expression" : {
-               "locator" : "118:3-118:17",
+               "locator" : "117:3-117:17",
                "name" : "SDE Payer",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -3358,7 +3328,7 @@
                }
             }
          }, {
-            "locator" : "120:1-121:16",
+            "locator" : "119:1-120:16",
             "name" : "SDE Race",
             "context" : "Patient",
             "accessLevel" : "Public",
@@ -3382,7 +3352,7 @@
                } ]
             },
             "expression" : {
-               "locator" : "121:3-121:16",
+               "locator" : "120:3-120:16",
                "name" : "SDE Race",
                "libraryName" : "SDE",
                "type" : "ExpressionRef",
@@ -3407,13 +3377,13 @@
                }
             }
          }, {
-            "locator" : "123:1-124:15",
+            "locator" : "122:1-123:15",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
             "name" : "SDE Sex",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "124:3-124:15",
+               "locator" : "123:3-123:15",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Code",
                "name" : "SDE Sex",
                "libraryName" : "SDE",
