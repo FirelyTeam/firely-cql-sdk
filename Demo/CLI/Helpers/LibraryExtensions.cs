@@ -6,12 +6,15 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Diagnostics;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using System.Reflection;
 using System.Runtime.Loader;
+using Hl7.Cql.Packaging;
+using Hl7.Fhir.Utility;
 
 namespace CLI.Helpers;
 
@@ -34,10 +37,48 @@ internal static class LibraryExtensions
 
         foreach (var relatedArtifact in library.RelatedArtifact ?? Enumerable.Empty<RelatedArtifact>())
         {
-            var relatedPath = new FileInfo(Path.Combine(directory.FullName, $"{relatedArtifact.Resource}.json"));
-            using var fs = relatedPath.OpenRead();
-            var relatedLibrary = fs.ParseFhir<Library>();
-            CollectDependencies(relatedLibrary, directory, libraries);
+            if (!TryLoadArtifactAndDependencies(relatedArtifact))
+                Debug.WriteLine($"Could not load artifact {relatedArtifact.Resource}");
+        }
+
+        bool TryLoadArtifactAndDependencies(RelatedArtifact relatedArtifact)
+        {
+            // Resource example: https://fire.ly/fhir/Library/FHIRHelpers|4.0.001
+            // First split out the version part
+            // Second split out the Name part after Library/
+
+            var arr = relatedArtifact.Resource.Split('|', 2);
+            string name = arr[0];
+            const string LibrarySplit = "Library/";
+            switch (name.LastIndexOf(LibrarySplit, StringComparison.Ordinal))
+            {
+                case -1:
+                    return false;
+                default:
+                    name = name[(name.LastIndexOf(LibrarySplit, StringComparison.Ordinal) + LibrarySplit.Length)..];
+                    break;
+            }
+
+            for (int i = 2; i >= 1; i--)
+            {
+                var resourceFileName = i switch
+                {
+                    2 => ResourceFileName.Create("Library", name, arr[1]),
+                    1 => ResourceFileName.Create("Library", name),
+                    _ => throw new UnreachableException()
+                };
+
+                var relatedPath = new FileInfo(Path.Combine(directory.FullName, resourceFileName.FileName));
+                if (relatedPath.Exists)
+                {
+                    using var fs = relatedPath.OpenRead();
+                    var relatedLibrary = fs.ParseFhir<Library>();
+                    CollectDependencies(relatedLibrary, directory, libraries);
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 
