@@ -1,31 +1,46 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.CodeGeneration.NET;
 using Microsoft.CodeAnalysis;
 
 var solutionDir = new DirectoryInfo(Environment.CurrentDirectory)
 	.FindParentDirectoryContaining("*.sln")!;
 
-(string subDir, string measureSubDir)[] iteration = [
-	("Demo", "Measures.Demo"),
-	("CMS", "Measures.CMS")
+(string librarySetSubDir, string measureSubDir, string? cqlSubDirOverride, string? elmSubDirOverride)[] iteration = [
+	("Demo", "Measures.Demo", null, null),
+	("CMS", "Measures.CMS", null, null),
+	("Authoring", "Measures.Authoring", "/Input/cql", "/Elm"),
 ];
 
 bool first = true;
-foreach ((string librarySetSubDir, string measuresSubDir) in iteration)
+foreach ((string librarySetSubDir, string measuresSubDir, string? cqlSubDirOverride, string? elmSubDirOverride) in iteration)
 {
-	string[] arguments =
+	string librarySetsRootDir = $"{solutionDir}/LibrarySets/{librarySetSubDir}";
+	string demoRootDir = $"{solutionDir}/Demo/{measuresSubDir}";
+
+    string elmDir =
+        elmSubDirOverride is null
+            ? $"{librarySetsRootDir}/Elm"
+            : $"{demoRootDir}{elmSubDirOverride}";
+	string cqlDir =
+		cqlSubDirOverride is null
+            ? $"{librarySetsRootDir}/Cql"
+            : $"{demoRootDir}/{cqlSubDirOverride}";
+	string fhirDir = $"{librarySetsRootDir}/Resources";
+	string dllDir = $"{librarySetsRootDir}/Assemblies";
+    string csharpDir = $"{demoRootDir}/CSharp";
+
+    string[] arguments =
 		CommandLineParser
 			.SplitCommandLineIntoArguments(
 				$"""
 					 --override-utc-date-time "1970-01-01T00:00:00.000Z"
 					 --canonical-root-url "https://fire.ly/fhir/"
-					 --elm "{solutionDir}/LibrarySets/{librarySetSubDir}/Elm"
-					 --cql "{solutionDir}/LibrarySets/{librarySetSubDir}/Cql"
-					 --fhir "{solutionDir}/LibrarySets/{librarySetSubDir}/Resources"
-					 --dll "{solutionDir}/LibrarySets/{librarySetSubDir}/Assemblies"
-					 --cs "{solutionDir}/Demo/{measuresSubDir}/CSharp"
+					 --elm "{elmDir}"
+					 --cql "{cqlDir}"
+					 --fhir "{fhirDir}"
+					 --dll "{dllDir}"
+					 --cs "{csharpDir}"
 					 --log-debug true
 					 {(first ? "" : "--log-dont-clear true")}
 					 """.Replace("\n", " "),
