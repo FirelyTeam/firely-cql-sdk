@@ -25,9 +25,13 @@ internal class WriteToFileFhirResourcePostProcessor(
 
     public override void ProcessResource(Resource resource)
     {
+        var outDirectory = _fhirResourceWriterOptions.OutDirectory;
+        if (outDirectory is null)
+            return;
+
         var resourceType = resource.GetType().Name; // e.g. Library or Measure
         var resourceFileName = ResourceFileName.Create(resourceType, resource.Id, resource.VersionId);
-        var file = new FileInfo(resourceFileName.FileName);
+        var file = new FileInfo(Path.Combine(outDirectory.FullName, resourceFileName.FileName));
         _logger.LogInformation("Writing FHIR Resource file: '{file}'", file.FullName);
 
         if (resource is Library library
