@@ -12,11 +12,13 @@ using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Packaging.PostProcessors;
+using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
 using FhirLibrary = Hl7.Fhir.Model.Library;
 using Annotation = Hl7.Cql.Elm.Annotation;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 using Hl7.Fhir.Utility;
+using String = Hl7.Fhir.ElementModel.Types.String;
 
 namespace Hl7.Cql.Packaging;
 
@@ -351,15 +353,16 @@ internal class ResourcePackager(
         var typeSpecifier = elmParameter.resultTypeSpecifier ?? elmParameter.parameterTypeSpecifier;
         if (typeSpecifier is null)
             throw new ArgumentException($"{typeSpecifier} is missing on parameter: {elmParameter.name}", nameof(elmParameter));
+
         var type = typeCrosswalk.TypeEntryFor(typeSpecifier);
-        if (type is null || type.FhirType is null)
+        if (type?.FhirType is null)
             throw new ArgumentException($"Unable to identify a valid FHIR type for this parameter.", nameof(elmParameter));
 
-        var annotations = (elmParameter.annotation?
-                               .OfType<Elm.Annotation>()
-                               .SelectMany(a => a.t ?? [])
-                           ?? [])
-            .ToArray();
+        // var annotations = (elmParameter.annotation?
+        //                        .OfType<Elm.Annotation>()
+        //                        .SelectMany(a => a.t ?? [])
+        //                    ?? [])
+        //     .ToArray();
 
         var parameterDefinition = new ParameterDefinition
         {
@@ -382,9 +385,11 @@ internal class ResourcePackager(
             {
                 name = definition.resultTypeName
             };
+
         var type = typeCrosswalk.TypeEntryFor(resultTypeSpecifier);
-        if (type is null || type.FhirType is null)
+        if (type?.FhirType is null)
             throw new ArgumentException($"Unable to identify a valid FHIR type for this definition.", nameof(definition));
+
         var parameterDefinition = new ParameterDefinition
         {
             Name = definition.name!,
@@ -393,14 +398,23 @@ internal class ResourcePackager(
             Max = "1",
             Type = type.FhirType!,
         };
-        if (type.ElementType is not null && type.ElementType.FhirType is not null)
+
+        if (
+            type is
+            {
+                CqlType: { } cqlType and CqlPrimitiveType.List,
+                ElementType.FhirType: { } elementFhirType
+            })
         {
+            parameterDefinition.Type = elementFhirType;
+            parameterDefinition.Max = "*";
+
             parameterDefinition.Extension =
             [
                 new Extension
                 {
-                    Value = new Code<FHIRAllTypes>(type.ElementType.FhirType),
-                    Url = Constants.ParameterElementTypeExtensionUri
+                    Url = Constants.Hl7FhirStructureDefinitionCqlType,
+                    Value = new FhirString(cqlType.ToString()),// e.g. List
                 }
             ];
         }
@@ -410,7 +424,7 @@ internal class ResourcePackager(
             parameterDefinition.Extension.Add(new Extension
             {
                 Value = new Hl7.Fhir.Model.Code("private"),
-                Url = Constants.ParameterAccessLevel,
+                Url = Constants.Hl7FhirStructureDefinitionCqlAccessLevel,
             });
         }
 
