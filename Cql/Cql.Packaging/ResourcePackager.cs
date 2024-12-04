@@ -25,6 +25,7 @@ using Library = Hl7.Cql.Elm.Library;
 namespace Hl7.Cql.Packaging;
 
 #pragma warning disable CS1591
+
 internal class ResourcePackager(
     TypeResolver typeResolver,
     FhirResourcePostProcessor? fhirResourcePostProcessor
@@ -125,6 +126,41 @@ internal class ResourcePackager(
         }
 
         return resources;
+    }
+}
+
+file static class MeasurePackager
+{
+    public static Measure CreateMeasureResource(
+        FileInfo elmFile,
+        string? resourceCanonicalRootUrl,
+        Tag measureAnnotation,
+        int measureYear,
+        Dictionary<string, FhirLibrary> librariesByVersionedIdentifier,
+        Library elmLibrary)
+    {
+        var measure = new Measure();
+        measure.Name = measureAnnotation.value;
+        measure.Id = elmLibrary.identifier?.id!;
+        measure.Version = elmLibrary.identifier?.version!;
+        measure.Status = PublicationStatus.Active;
+        measure.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, DateTimePrecision.Millisecond)
+            .ToString();
+        measure.EffectivePeriod = new Period
+        {
+            Start = new DateTimeIso8601(measureYear, 1, 1, 0, 0, 0, 0, 0, 0).ToString(),
+            End = new DateTimeIso8601(measureYear, 12, 31, 23, 59, 59, 999, 0, 0).ToString(),
+        };
+        measure.Group = [];
+        measure.Url = measure.CanonicalUri(resourceCanonicalRootUrl);
+        if (elmLibrary.GetVersionedIdentifier() is null)
+            throw new InvalidOperationException("Library VersionedIdentifier should not be null.");
+
+        if (!librariesByVersionedIdentifier.TryGetValue(elmLibrary.GetVersionedIdentifier()!, out var libForMeasure))
+            throw new InvalidOperationException(
+                $"We didn't create a measure for library {libForMeasure}");
+        measure.Library = new List<string> { libForMeasure!.Url };
+        return measure;
     }
 }
 
@@ -453,40 +489,5 @@ file static class LibraryPackager
         }
 
         return parameterDefinition;
-    }
-}
-
-file static class MeasurePackager
-{
-    public static Measure CreateMeasureResource(
-        FileInfo elmFile,
-        string? resourceCanonicalRootUrl,
-        Tag measureAnnotation,
-        int measureYear,
-        Dictionary<string, FhirLibrary> librariesByVersionedIdentifier,
-        Library elmLibrary)
-    {
-        var measure = new Measure();
-        measure.Name = measureAnnotation.value;
-        measure.Id = elmLibrary.identifier?.id!;
-        measure.Version = elmLibrary.identifier?.version!;
-        measure.Status = PublicationStatus.Active;
-        measure.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, DateTimePrecision.Millisecond)
-            .ToString();
-        measure.EffectivePeriod = new Period
-        {
-            Start = new DateTimeIso8601(measureYear, 1, 1, 0, 0, 0, 0, 0, 0).ToString(),
-            End = new DateTimeIso8601(measureYear, 12, 31, 23, 59, 59, 999, 0, 0).ToString(),
-        };
-        measure.Group = [];
-        measure.Url = measure.CanonicalUri(resourceCanonicalRootUrl);
-        if (elmLibrary.GetVersionedIdentifier() is null)
-            throw new InvalidOperationException("Library VersionedIdentifier should not be null.");
-
-        if (!librariesByVersionedIdentifier.TryGetValue(elmLibrary.GetVersionedIdentifier()!, out var libForMeasure))
-            throw new InvalidOperationException(
-                $"We didn't create a measure for library {libForMeasure}");
-        measure.Library = new List<string> { libForMeasure!.Url };
-        return measure;
     }
 }
