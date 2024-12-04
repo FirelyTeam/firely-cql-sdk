@@ -507,11 +507,17 @@ file static class LibraryPackager
         }
 
         var cqlTypeName =
-            cqlElementType switch
+            (cqlType, cqlElementType) switch
             {
-                null => cqlType.ToString(),
-                CqlPrimitiveType.Fhir => $"{cqlType}<{cqlElementType}.{type.ElementType!.FhirType}>",
-                { } => $"{cqlType}<{cqlElementType}>",
+                // Don't show "generic" for List
+                (CqlPrimitiveType.List, _) => cqlType.ToString(),
+
+                // "Generic" display
+                (_, CqlPrimitiveType.Fhir) => $"{cqlType}<{cqlElementType}.{type.ElementType!.FhirType}>",
+                (_, { })                   => $"{cqlType}<{cqlElementType}>",
+
+                // Non-"Generic" display
+                _ => cqlType.ToString(),
             };
 
         parameterDefinition.Extension =
