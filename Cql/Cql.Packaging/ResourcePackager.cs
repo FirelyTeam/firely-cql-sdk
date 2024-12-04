@@ -5,6 +5,7 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
+
 using System.Text;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
@@ -14,12 +15,12 @@ using Hl7.Cql.Iso8601;
 using Hl7.Cql.Packaging.PostProcessors;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
+using Hl7.Fhir.Utility;
 using FhirLibrary = Hl7.Fhir.Model.Library;
 using Annotation = Hl7.Cql.Elm.Annotation;
+using Code = Hl7.Fhir.Model.Code;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
-using Hl7.Fhir.Utility;
 using Library = Hl7.Cql.Elm.Library;
-using DateTime = System.DateTime;
 
 namespace Hl7.Cql.Packaging;
 
@@ -133,7 +134,7 @@ file static class LibraryPackager
         FileInfo elmFile,
         FileInfo? cqlFile,
         string? resourceCanonicalRootUrl,
-        AssemblyData assembly,
+        AssemblyData assemblyData,
         CqlTypeToFhirTypeMapper typeCrosswalk,
         Library? elmLibrary = null)
     {
@@ -142,65 +143,69 @@ file static class LibraryPackager
 
         if (elmLibrary is null)
         {
-            elmLibrary = Elm.Library.LoadFromJson(elmFile);
+            elmLibrary = Library.LoadFromJson(elmFile);
             if (elmLibrary is null)
                 throw new ArgumentException($"File at {elmFile.FullName} is not valid ELM");
         }
 
-        var fhirLibrary = CreateFhirLibrary(resourceCanonicalRootUrl, elmLibrary, elmFile.LastWriteTimeUtc);
-        AddElmAttachment(elmFile, elmLibrary, fhirLibrary);
+        var fhirLibrary = CreateFhirLibrary(elmLibrary, elmFile, resourceCanonicalRootUrl);
+        AddElmAttachment(elmLibrary, elmFile, fhirLibrary);
         var parameters = new List<ParameterDefinition>();
-        AddInParameters(parameters, typeCrosswalk, elmLibrary);
-        AddOutParameters(parameters, typeCrosswalk, elmLibrary);
+        AddInParameters(elmLibrary, parameters, typeCrosswalk);
+        AddOutParameters(elmLibrary, parameters, typeCrosswalk);
         fhirLibrary.Parameter = parameters.Count > 0 ? parameters : null!;
 
-        AddRelatedArtefacts(resourceCanonicalRootUrl, elmLibrary, fhirLibrary);
+        AddRelatedArtefacts(elmLibrary, fhirLibrary, resourceCanonicalRootUrl);
 
-        var cqlOptions = CqlToElmInfoToFhir(elmLibrary!);
-        if (cqlOptions.Any())
-            AddCQLOptions(cqlOptions, fhirLibrary);
+        var fhirParameters = CreateFhirParameters(elmLibrary);
+        if (fhirParameters.Any())
+            AddCQLOptions(fhirLibrary, fhirParameters);
 
         if (cqlFile!.Exists)
-            AddCqlAttachment(cqlFile, elmLibrary, fhirLibrary);
+            AddCqlAttachment(elmLibrary, fhirLibrary, cqlFile);
 
-        AddDllAttachment(assembly, elmLibrary, fhirLibrary);
-        foreach (var kvp in assembly.SourceCode)
+        AddDllAttachment(elmLibrary, fhirLibrary, assemblyData);
+        foreach (var kvp in assemblyData.SourceCode)
             AddCSharpAttachment(fhirLibrary, kvp);
 
         return fhirLibrary;
     }
 
-    private static void AddElmAttachment(FileInfo elmFile, Library elmLibrary, FhirLibrary fhirLibrary)
+    private static void AddElmAttachment(
+        Library elmLibrary,
+        FileInfo elmFile,
+        FhirLibrary fhirLibrary)
     {
         var bytes = File.ReadAllBytes(elmFile.FullName);
         var attachment = new Attachment
         {
             ElementId = $"{elmLibrary.GetVersionedIdentifier()}+elm",
-            ContentType = Elm.Library.JsonMimeType,
+            ContentType = Library.JsonMimeType,
             Data = bytes,
         };
         fhirLibrary.Content.Add(attachment);
     }
 
     private static FhirLibrary CreateFhirLibrary(
-        string? resourceCanonicalRootUrl,
         Library elmLibrary,
-        DateTime elmFileLastWriteTimeUtc)
+        FileInfo elmFile,
+        string? resourceCanonicalRootUrl)
     {
-        var fhirLibrary = new FhirLibrary
-        {
-            Type = LogicLibraryCodeableConcept,
-            Id = $"{elmLibrary.identifier.id}",
-            Version = elmLibrary.identifier?.version!,
-            Name = elmLibrary.identifier?.id!,
-            Status = PublicationStatus.Active,
-            Date = new DateTimeIso8601(elmFileLastWriteTimeUtc, Iso8601.DateTimePrecision.Millisecond).ToString()
-        };
+        var fhirLibrary = new FhirLibrary();
+        fhirLibrary.Type = LogicLibraryCodeableConcept;
+        fhirLibrary.Id = $"{elmLibrary.identifier.id}";
+        fhirLibrary.Version = elmLibrary.identifier?.version!;
+        fhirLibrary.Name = elmLibrary.identifier?.id!;
+        fhirLibrary.Status = PublicationStatus.Active;
+        fhirLibrary.Date = new DateTimeIso8601(elmFile.LastWriteTimeUtc, DateTimePrecision.Millisecond).ToString();
         fhirLibrary.Url = fhirLibrary.CanonicalUri(resourceCanonicalRootUrl);
         return fhirLibrary;
     }
 
-    private static void AddRelatedArtefacts(string? resourceCanonicalRootUrl, Library elmLibrary, FhirLibrary library)
+    private static void AddRelatedArtefacts(
+        Library elmLibrary,
+        FhirLibrary library,
+        string? resourceCanonicalRootUrl)
     {
         foreach (var include in elmLibrary?.includes ?? [])
         {
@@ -215,9 +220,9 @@ file static class LibraryPackager
     }
 
     private static void AddOutParameters(
+        Library elmLibrary,
         List<ParameterDefinition> parameters,
-        CqlTypeToFhirTypeMapper typeCrosswalk,
-        Library elmLibrary)
+        CqlTypeToFhirTypeMapper typeCrosswalk)
     {
         var outParams = elmLibrary.statements?
                                   .Where(def => def.name != "Patient" && def is not FunctionDef)
@@ -227,9 +232,9 @@ file static class LibraryPackager
     }
 
     private static void AddInParameters(
+        Library elmLibrary,
         List<ParameterDefinition> parameters,
-        CqlTypeToFhirTypeMapper typeCrosswalk,
-        Library elmLibrary)
+        CqlTypeToFhirTypeMapper typeCrosswalk)
     {
         var inParams = elmLibrary.parameters?
             .Select(pd => ElmParameterToFhir(pd, typeCrosswalk));
@@ -253,19 +258,10 @@ file static class LibraryPackager
 
     }
 
-    private static Attachment CreateElmAttachment(FileInfo elmFile, Library elmLibrary)
-    {
-        var bytes = File.ReadAllBytes(elmFile.FullName);
-        var attachment = new Attachment
-        {
-            ElementId = $"{elmLibrary.GetVersionedIdentifier()}+elm",
-            ContentType = Elm.Library.JsonMimeType,
-            Data = bytes,
-        };
-        return attachment;
-    }
-
-    private static void AddCqlAttachment(FileInfo cqlFile, Library? elmLibrary, FhirLibrary library)
+    private static void AddCqlAttachment(
+        Library? elmLibrary,
+        FhirLibrary fhirLibrary,
+        FileInfo cqlFile)
     {
         var cqlBytes = File.ReadAllBytes(cqlFile.FullName);
 
@@ -275,18 +271,18 @@ file static class LibraryPackager
             ContentType = "text/cql",
             Data = cqlBytes,
         };
-        library.Content.Add(attachment);
+        fhirLibrary.Content.Add(attachment);
     }
 
-    private static void AddCQLOptions(IReadOnlyList<Parameters.ParameterComponent> cqlOptions, FhirLibrary library)
+    private static void AddCQLOptions(FhirLibrary fhirLibrary, IReadOnlyList<Parameters.ParameterComponent> fhirParameters)
     {
         // Adding CQL Options as a contained resource
         // See: https://build.fhir.org/domainresource-definitions.html#DomainResource.contained
 
         var p = new Parameters();
         p.Id = "options";
-        p.Parameter.AddRange(cqlOptions);
-        library.Contained = [p];
+        p.Parameter.AddRange(fhirParameters);
+        fhirLibrary.Contained = [p];
 
         // See requirement for Contained resources: https://build.fhir.org/domainresource.html#invs
         // dom-3: If the resource is contained in another resource,
@@ -300,7 +296,7 @@ file static class LibraryPackager
             Url = "http://hl7.org/fhir/StructureDefinition/cqf-cqlOptions",
             Value = new ResourceReference { Reference = "#options" },
         };
-        library.Extension.Add(extension);
+        fhirLibrary.Extension.Add(extension);
     }
 
     private static void AddCSharpAttachment(FhirLibrary library, KeyValuePair<string, string> kvp)
@@ -315,9 +311,12 @@ file static class LibraryPackager
         library.Content.Add(attachment);
     }
 
-    private static void AddDllAttachment(AssemblyData assembly, Library? elmLibrary, FhirLibrary library)
+    private static void AddDllAttachment(
+        Library? elmLibrary,
+        FhirLibrary library,
+        AssemblyData assemblyData)
     {
-        var assemblyBytes = assembly.Binary;
+        var assemblyBytes = assemblyData.Binary;
         var attachment = new Attachment
         {
             ElementId = $"{elmLibrary!.GetVersionedIdentifier()}+dll",
@@ -327,46 +326,44 @@ file static class LibraryPackager
         library.Content.Add(attachment);
     }
 
-    private static void AddParameterIfNotNull(List<Parameters.ParameterComponent> parameters, string name, string? value)
+    private static void AddFhirParameterIfNotNull(List<Parameters.ParameterComponent> parameters, string name, string? value)
     {
         //TODO: use mapper when values in CqlToElmInfo results anything but strings
         if (!string.IsNullOrEmpty(value))
-        {
             parameters.Add(new Parameters.ParameterComponent { Name = name, Value = new FhirString(value) });
-        }
     }
 
-    private static IReadOnlyList<Parameters.ParameterComponent> CqlToElmInfoToFhir(Library elmLibrary)
+    private static IReadOnlyList<Parameters.ParameterComponent> CreateFhirParameters(Library elmLibrary)
     {
-        var parameters = new List<Parameters.ParameterComponent>();
+        var fhirParameters = new List<Parameters.ParameterComponent>();
         foreach (var annotation in elmLibrary?.annotation ?? [])
         {
-            if (annotation is CqlToElmInfo cqlOptions)
+            if (annotation is not CqlToElmInfo cqlOptions)
+                continue;
+
+            // translatorVersion
+            AddFhirParameterIfNotNull(fhirParameters, nameof(cqlOptions.translatorVersion), cqlOptions.translatorVersion);
+
+            // translatorOptions
+            if (!string.IsNullOrEmpty(cqlOptions.translatorOptions))
             {
-                // translatorVersion
-                AddParameterIfNotNull(parameters, nameof(cqlOptions.translatorVersion), cqlOptions.translatorVersion);
-
-                // translatorOptions
-                if (!string.IsNullOrEmpty(cqlOptions.translatorOptions))
+                var optionArray = cqlOptions.translatorOptions.Split(',');
+                foreach (string item in optionArray)
                 {
-                    var optionArray = cqlOptions.translatorOptions.Split(',');
-                    foreach (string item in optionArray)
-                    {
-                        AddParameterIfNotNull(parameters, "option", item);
-                    }
+                    AddFhirParameterIfNotNull(fhirParameters, "option", item);
                 }
-
-                // signatureLevel
-                AddParameterIfNotNull(parameters, nameof(cqlOptions.signatureLevel), cqlOptions.signatureLevel);
-
-                // compatibilityLevel
-                AddParameterIfNotNull(parameters, "compatibilityLevel", "1.5");
-
-                // format
-                AddParameterIfNotNull(parameters, "format", "JSON");
             }
+
+            // signatureLevel
+            AddFhirParameterIfNotNull(fhirParameters, nameof(cqlOptions.signatureLevel), cqlOptions.signatureLevel);
+
+            // compatibilityLevel
+            AddFhirParameterIfNotNull(fhirParameters, "compatibilityLevel", "1.5");
+
+            // format
+            AddFhirParameterIfNotNull(fhirParameters, "format", "JSON");
         }
-        return parameters;
+        return fhirParameters;
     }
 
     private static readonly CodeableConcept LogicLibraryCodeableConcept = new()
@@ -391,13 +388,7 @@ file static class LibraryPackager
 
         var type = typeCrosswalk.TypeEntryFor(typeSpecifier);
         if (type?.FhirType is null)
-            throw new ArgumentException($"Unable to identify a valid FHIR type for this parameter.", nameof(elmParameter));
-
-        // var annotations = (elmParameter.annotation?
-        //                        .OfType<Elm.Annotation>()
-        //                        .SelectMany(a => a.t ?? [])
-        //                    ?? [])
-        //     .ToArray();
+            throw new ArgumentException("Unable to identify a valid FHIR type for this parameter.", nameof(elmParameter));
 
         var parameterDefinition = new ParameterDefinition
         {
@@ -423,7 +414,7 @@ file static class LibraryPackager
 
         var type = typeCrosswalk.TypeEntryFor(resultTypeSpecifier);
         if (type?.FhirType is null)
-            throw new ArgumentException($"Unable to identify a valid FHIR type for this definition.", nameof(definition));
+            throw new ArgumentException("Unable to identify a valid FHIR type for this definition.", nameof(definition));
 
         var parameterDefinition = new ParameterDefinition
         {
@@ -434,8 +425,7 @@ file static class LibraryPackager
             Type = type.FhirType!,
         };
 
-        if (
-            type is
+        if (type is
             {
                 CqlType: { } cqlType and CqlPrimitiveType.List,
                 ElementType.FhirType: { } elementFhirType
@@ -443,7 +433,6 @@ file static class LibraryPackager
         {
             parameterDefinition.Type = elementFhirType;
             parameterDefinition.Max = "*";
-
             parameterDefinition.Extension =
             [
                 new Extension
@@ -454,11 +443,11 @@ file static class LibraryPackager
             ];
         }
 
-        if (definition.accessLevel == Elm.AccessModifier.Private)
+        if (definition.accessLevel == AccessModifier.Private)
         {
             parameterDefinition.Extension.Add(new Extension
             {
-                Value = new Hl7.Fhir.Model.Code("private"),
+                Value = new Code("private"),
                 Url = Constants.Hl7FhirStructureDefinitionCqlAccessLevel,
             });
         }
