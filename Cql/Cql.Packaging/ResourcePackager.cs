@@ -493,6 +493,7 @@ file static class LibraryPackager
     private static void AddParameterCqlTypeExtension(CqlTypeToFhirMapping type, ParameterDefinition parameterDefinition)
     {
         var cqlType = type.CqlType;
+        var cqlElementType = type.ElementType?.CqlType;
         switch (cqlType)
         {
             case null:
@@ -505,12 +506,20 @@ file static class LibraryPackager
                 break;
         }
 
+        var cqlTypeName =
+            cqlElementType switch
+            {
+                null => cqlType.ToString(),
+                CqlPrimitiveType.Fhir => $"{cqlType}<{cqlElementType}.{type.ElementType!.FhirType}>",
+                { } => $"{cqlType}<{cqlElementType}>",
+            };
+
         parameterDefinition.Extension =
         [
             new Extension
             {
                 Url = Constants.Hl7FhirStructureDefinitionCqlType,
-                Value = new FhirString(cqlType.ToString()),
+                Value = new FhirString(cqlTypeName),
             }
         ];
     }
