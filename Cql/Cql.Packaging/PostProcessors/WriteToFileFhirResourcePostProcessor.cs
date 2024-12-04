@@ -5,6 +5,8 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
+
+using System.Diagnostics;
 using System.Text.Json;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
@@ -25,13 +27,14 @@ internal class WriteToFileFhirResourcePostProcessor(
 
     public override void ProcessResource(Resource resource)
     {
-        var outDirectory = _fhirResourceWriterOptions.OutDirectory;
-        if (outDirectory is null)
-            return;
+        ResourceFileName resourceFileName = resource switch
+        {
+            Library l => ResourceFileName.Create(nameof(Library), l.Id, l.Version),
+            Measure m => ResourceFileName.Create(nameof(Measure), m.Id, m.Version),
+            _ => throw new UnreachableException("Only expecting Library or Measure.")
+        };
 
-        var resourceType = resource.GetType().Name; // e.g. Library or Measure
-        var resourceFileName = ResourceFileName.Create(resourceType, resource.Id, resource.VersionId);
-        var file = new FileInfo(Path.Combine(outDirectory.FullName, resourceFileName.FileName));
+        var file = new FileInfo($"{Path.Combine(_fhirResourceWriterOptions.OutDirectory!.FullName, resourceFileName.FileName)}");
         _logger.LogInformation("Writing FHIR Resource file: '{file}'", file.FullName);
 
         if (resource is Library library
