@@ -73,6 +73,9 @@ public class ResourceFileNameTests
     [TestMethod]
     public void Parse_InvalidString_ShouldThrowFormatException()
     {
+        if (ResourceFileName.AllowUnderscores)
+            return;
+
         Action act = () => ResourceFileName.Parse("Invalid-Str_ing", null);
         act.Should().Throw<FormatException>();
     }
@@ -100,6 +103,9 @@ public class ResourceFileNameTests
     [TestMethod]
     public void TryParse_InvalidString_ShouldReturnFalse()
     {
+        if (ResourceFileName.AllowUnderscores)
+            return;
+
         var result = ResourceFileName.TryParse("Invalid-Str_ing", null, out var resourceFileName);
         result.Should().BeFalse();
         resourceFileName.Should().Be(default(ResourceFileName));

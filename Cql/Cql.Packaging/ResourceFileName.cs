@@ -18,9 +18,18 @@ public readonly record struct ResourceFileName : IParsable<ResourceFileName>
     // Should not contain underscores - https://build.fhir.org/ig/HL7/cql-ig/conformance.html#library-name-and-url
     // Should not contain hyphens - Used as delimiter between parts of the file name
 
-    private static readonly ArgValidator<string> ValidateType = Arg.IsRequired().And(Arg.ShouldNotContain('-', '_'));
-    private static readonly ArgValidator<string> ValidateIdentifier = Arg.IsRequired().And(Arg.ShouldNotContain('-', '_'));
-    private static readonly ArgValidator<string?> ValidateVersion = Arg.ShouldNotContain('-', '_');
+    internal const bool AllowUnderscores = true; // Allowed for now, since NCQA cql files use underscores
+
+#pragma warning disable CS0162 // Unreachable code detected
+    private static readonly char[] InvalidChars =
+        AllowUnderscores
+            ? (char[])['-'/*, '_'*/]
+            : (char[])['-', '_'];
+#pragma warning restore CS0162 // Unreachable code detected
+
+    private static readonly ArgValidator<string> ValidateType = Arg.IsRequired().And(Arg.ShouldNotContain(InvalidChars));
+    private static readonly ArgValidator<string> ValidateIdentifier = Arg.IsRequired().And(Arg.ShouldNotContain(InvalidChars));
+    private static readonly ArgValidator<string?> ValidateVersion = Arg.ShouldNotContain(InvalidChars);
 
     private ResourceFileName(
         string type,
