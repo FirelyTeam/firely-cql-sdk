@@ -17,10 +17,10 @@ public readonly record struct ResourceFileName : IParsable<ResourceFileName>
 {
     // Should not contain underscores - https://build.fhir.org/ig/HL7/cql-ig/conformance.html#library-name-and-url
     // Should not contain hyphens - Used as delimiter between parts of the file name
-
-    private static readonly ArgValidator<string> ValidateType = Arg.IsRequired().And(Arg.ShouldNotContain('-', '_'));
-    private static readonly ArgValidator<string> ValidateIdentifier = Arg.IsRequired().And(Arg.ShouldNotContain('-', '_'));
-    private static readonly ArgValidator<string?> ValidateVersion = Arg.ShouldNotContain('-', '_');
+    private static readonly char[] InvalidChars = ['-'/*, '_'*/];
+    private static readonly ArgValidator<string> ValidateType = Arg.IsRequired().And(Arg.ShouldNotContain(InvalidChars));
+    private static readonly ArgValidator<string> ValidateIdentifier = Arg.IsRequired().And(Arg.ShouldNotContain(InvalidChars));
+    private static readonly ArgValidator<string?> ValidateVersion = Arg.ShouldNotContain(InvalidChars);
 
     private ResourceFileName(
         string type,
