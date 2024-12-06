@@ -945,13 +945,15 @@ partial class ExpressionBuilderContext(
         using (PushElement(op))
         {
             if (string.IsNullOrWhiteSpace(op.path))
-                throw this.NewExpressionBuildingException("path cannot be null or empty");
+                throw this.NewExpressionBuildingException("Property expression cannot have null or empty path");
             var path = op.path;
+
+            Type? expectedType;
 
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
                 var scopeExpression = GetScopeExpression(op.scope!);
-                var expectedType = TypeFor(op) ?? typeof(object);
+                expectedType = TypeFor(op) ?? typeof(object);
                 var pathMemberInfo = _typeResolver.GetProperty(scopeExpression.Type, path!) ??
                                      _typeResolver.GetProperty(scopeExpression.Type, op.path);
                 if (pathMemberInfo == null)
@@ -970,41 +972,35 @@ partial class ExpressionBuilderContext(
                 return propogate;
             }
 
-            if (op.source != null)
+            if (op.source == null)
+                throw this.NewExpressionBuildingException("Property expression cannot have an empty source when scope is empty");
+
+            var source = TranslateArg(op.source);
+            var parts = path.Split('.');
+            if (parts.Length > 1)
             {
-                var source = TranslateArg(op.source);
-                var parts = path.Split('.');
-                if (parts.Length > 1)
+                // support paths like birthDate.value on Patient
+                for (int i = 0; i < parts.Length; i++)
                 {
-                    // support paths like birthDate.value on Patient
-                    for (int i = 0; i < parts.Length; i++)
+                    var pathPart = parts[i];
+                    var pathMemberInfo = _typeResolver.GetProperty(source.Type, pathPart);
+                    if (pathMemberInfo != null)
                     {
-                        var pathPart = parts[i];
-                        var pathMemberInfo = _typeResolver.GetProperty(source.Type, pathPart);
-                        if (pathMemberInfo != null)
-                        {
-                            var propertyAccess = PropagateNull(source, pathMemberInfo);
-                            source = propertyAccess;
-                        }
+                        var propertyAccess = PropagateNull(source, pathMemberInfo);
+                        source = propertyAccess;
                     }
-                    return source;
                 }
-
-                var expectedType = TypeFor(op, throwIfNotFound: false);
-
-                // If we cannot determine the type from the ELM, let's try
-                // if the POCO model can help us.
-                if (expectedType == null)
-                {
-                    expectedType = _typeResolver.GetProperty(source.Type, path)?.PropertyType
-                                   ?? throw this.NewExpressionBuildingException("Cannot resolve type for expression");
-                }
-
-                var result = PropertyHelper(source, path, expectedType);
-                return result;
+                return source;
             }
 
-            throw new NotImplementedException().WithContext(this);
+            // If we cannot determine the type from the ELM, let's try
+            // if the POCO model can help us.
+            expectedType = TypeFor(op, throwIfNotFound: false)
+                           ?? _typeResolver.GetProperty(source.Type, path)?.PropertyType
+                           ?? throw this.NewExpressionBuildingException("Cannot resolve type for expression");
+
+            var result = PropertyHelper(source, path, expectedType);
+            return result;
         }
     }
 
