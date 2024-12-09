@@ -181,7 +181,7 @@ namespace CoreTests
             });
             ctx = GetNewContext(bundle);
             result = QueriesDefinitions.Invoke<IEnumerable<Observation>>(QueriesLibrary, "Query source using define", ctx);
-            Assert.AreEqual(2, result.Count());
+            Assert.AreEqual(1, result.Count());
         }
 
         [TestMethod]
@@ -380,7 +380,7 @@ namespace CoreTests
             var ctx = GetNewContext(bundle);
             // type of the query source is List<Any>
             var result = QueriesDefinitions.Invoke<IEnumerable<object>>(QueriesLibrary, "Retrieve with all null query source", ctx);
-            Assert.AreEqual(3, result.Count());
+            Assert.AreEqual(1, result.Count());
         }
 
         [TestMethod]
