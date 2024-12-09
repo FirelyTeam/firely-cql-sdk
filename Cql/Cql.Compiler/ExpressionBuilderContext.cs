@@ -179,15 +179,15 @@ partial class ExpressionBuilderContext(
                     FunctionRef e => FunctionRef(e),
 
                     // InvokeDefinitionThroughRuntimeContext
-                    CodeRef e       => CodeRef(e),
+                    CodeRef e => CodeRef(e),
                     CodeSystemRef e => CodeSystemRef(e),
-                    ConceptRef e    => ConceptRef(e),
+                    ConceptRef e => ConceptRef(e),
                     ExpressionRef e => ExpressionRef(e),
                     AnyInValueSet e => BindValueInValueSet(valueExpr: TranslateArg(e.codes), valueSetExpr: TranslateValueSet(e.valueset, e.valuesetExpression), isList: true),
-                    InValueSet e    => BindValueInValueSet(valueExpr: TranslateArg(e.code), valueSetExpr: TranslateValueSet(e.valueset, e.valuesetExpression), isList: false),
-                    Retrieve e      => Retrieve(e),
-                    ValueSetRef e   => ValueSetRef(e),
-                    ParameterRef e  => ParameterRef(e),
+                    InValueSet e => BindValueInValueSet(valueExpr: TranslateArg(e.code), valueSetExpr: TranslateValueSet(e.valueset, e.valuesetExpression), isList: false),
+                    Retrieve e => Retrieve(e),
+                    ValueSetRef e => ValueSetRef(e),
+                    ParameterRef e => ParameterRef(e),
 
                     // NOTE: Do not rename ICqlOperators.CreateValueSetFacade to ExpandValueSet
                     ExpandValueSet e => _cqlOperatorsBinder.BindToMethod(nameof(ICqlOperators.CreateValueSetFacade), TranslateArgs(GetBindArgs(element)), TranslateTypes(GetTypeArgs(element))),
@@ -211,7 +211,7 @@ partial class ExpressionBuilderContext(
                     var tsType = TypeFor(element.resultTypeSpecifier, false);
                     if (tsType is not null)
                     {
-                        return ChangeType(expression, element.resultTypeSpecifier, throwOnError:true);
+                        return ChangeType(expression, element.resultTypeSpecifier, throwOnError: true);
                     }
 
                     return expression;
@@ -945,15 +945,13 @@ partial class ExpressionBuilderContext(
         using (PushElement(op))
         {
             if (string.IsNullOrWhiteSpace(op.path))
-                throw this.NewExpressionBuildingException("Property expression cannot have null or empty path");
+                throw this.NewExpressionBuildingException("path cannot be null or empty");
             var path = op.path;
-
-            Type? expectedType;
 
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
                 var scopeExpression = GetScopeExpression(op.scope!);
-                expectedType = TypeFor(op) ?? typeof(object);
+                var expectedType = TypeFor(op) ?? typeof(object);
                 var pathMemberInfo = _typeResolver.GetProperty(scopeExpression.Type, path!) ??
                                      _typeResolver.GetProperty(scopeExpression.Type, op.path);
                 if (pathMemberInfo == null)
@@ -972,35 +970,41 @@ partial class ExpressionBuilderContext(
                 return propogate;
             }
 
-            if (op.source == null)
-                throw this.NewExpressionBuildingException("Property expression cannot have an empty source when scope is empty");
-
-            var source = TranslateArg(op.source);
-            var parts = path.Split('.');
-            if (parts.Length > 1)
+            if (op.source != null)
             {
-                // support paths like birthDate.value on Patient
-                for (int i = 0; i < parts.Length; i++)
+                var source = TranslateArg(op.source);
+                var parts = path.Split('.');
+                if (parts.Length > 1)
                 {
-                    var pathPart = parts[i];
-                    var pathMemberInfo = _typeResolver.GetProperty(source.Type, pathPart);
-                    if (pathMemberInfo != null)
+                    // support paths like birthDate.value on Patient
+                    for (int i = 0; i < parts.Length; i++)
                     {
-                        var propertyAccess = PropagateNull(source, pathMemberInfo);
-                        source = propertyAccess;
+                        var pathPart = parts[i];
+                        var pathMemberInfo = _typeResolver.GetProperty(source.Type, pathPart);
+                        if (pathMemberInfo != null)
+                        {
+                            var propertyAccess = PropagateNull(source, pathMemberInfo);
+                            source = propertyAccess;
+                        }
                     }
+                    return source;
                 }
-                return source;
+
+                var expectedType = TypeFor(op, throwIfNotFound: false);
+
+                // If we cannot determine the type from the ELM, let's try
+                // if the POCO model can help us.
+                if (expectedType == null)
+                {
+                    expectedType = _typeResolver.GetProperty(source.Type, path)?.PropertyType
+                                   ?? throw this.NewExpressionBuildingException("Cannot resolve type for expression");
+                }
+
+                var result = PropertyHelper(source, path, expectedType);
+                return result;
             }
 
-            // If we cannot determine the type from the ELM, let's try
-            // if the POCO model can help us.
-            expectedType = TypeFor(op, throwIfNotFound: false)
-                           ?? _typeResolver.GetProperty(source.Type, path)?.PropertyType
-                           ?? throw this.NewExpressionBuildingException("Cannot resolve type for expression");
-
-            var result = PropertyHelper(source, path, expectedType);
-            return result;
+            throw new NotImplementedException().WithContext(this);
         }
     }
 
@@ -1136,7 +1140,7 @@ partial class ExpressionBuilderContext(
 
         var rtt = TypeFor(returnType) ?? throw this.NewExpressionBuildingException($"Unable to resolve type for {returnType}");
         var convertedArguments = arguments
-                                 .Select((a,i) => convertChoice(a, signature?[i]))
+                                 .Select((a, i) => convertChoice(a, signature?[i]))
                                  .Prepend(CqlExpressions.ParameterExpression)
                                  .ToArray();
         var funcType = convertedArguments.Select(a => a.Type).Append(rtt).ToArray();
@@ -1152,7 +1156,7 @@ partial class ExpressionBuilderContext(
         // choice is not compatible with the parameter, so we'll use an As in C#.
         Expression convertChoice(Expression argument, TypeSpecifier? targetTypeSpecifier)
         {
-            if(argument.Type == typeof(object)
+            if (argument.Type == typeof(object)
                && targetTypeSpecifier is not null and not ChoiceTypeSpecifier)
             {
                 var changeType = ChangeType(argument, targetTypeSpecifier, considerSafeUpcast: true);
@@ -1216,9 +1220,9 @@ partial class ExpressionBuilderContext(
         var valueSet =
             (valueSetRef, valueSetExpression) switch
             {
-                ({} r, null) => InvokeDefinitionThroughRuntimeContext(r.name!, r.libraryName, typeof(CqlValueSet)),
-                (null, {} e) => TranslateElement(e),
-                _            => throw this.NewExpressionBuildingException("Expected either a ValueSetRef or a ValueSetExpression")
+                ({ } r, null) => InvokeDefinitionThroughRuntimeContext(r.name!, r.libraryName, typeof(CqlValueSet)),
+                (null, { } e) => TranslateElement(e),
+                _ => throw this.NewExpressionBuildingException("Expected either a ValueSetRef or a ValueSetExpression")
             };
         return valueSet;
     }
@@ -1643,7 +1647,11 @@ internal partial class ExpressionBuilderContext
                     var selectBody = TranslateArg(query.@return.expression!);
                     var selectLambda = Expression.Lambda(selectBody, scopeParameter);
                     var callSelect = BindCqlOperator(nameof(ICqlOperators.Select), @return, selectLambda);
+
                     @return = callSelect;
+
+                    if (query.@return.distinct)
+                        @return = BindCqlOperator(nameof(ICqlOperators.Distinct), @return);
                 }
             }
 
@@ -2136,7 +2144,7 @@ internal partial class ExpressionBuilderContext
                 {
                     var type = TypeFor(@as.asTypeSpecifier!)!;
                     var operand = TranslateArg(@as.operand!);
-                    var converted = ChangeType(operand, type, out var typeConversion, considerSafeUpcast:true);
+                    var converted = ChangeType(operand, type, out var typeConversion, considerSafeUpcast: true);
                     switch (typeConversion)
                     {
                         case TypeConversion.NoMatch:
@@ -2315,7 +2323,7 @@ internal partial class ExpressionBuilderContext
 
         void throwCannotCastIfNoMatch(TypeConversion result)
         {
-            if(result == TypeConversion.NoMatch && throwOnError)
+            if (result == TypeConversion.NoMatch && throwOnError)
                 throw this.NewExpressionBuildingException($"Cannot convert {input.Type} to {outputType}.");
         }
     }
