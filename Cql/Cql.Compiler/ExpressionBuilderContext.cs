@@ -1874,10 +1874,6 @@ internal partial class ExpressionBuilderContext
         Type[] sourceListElementTypes = promotedSourceExpressions
             .SelectToArray(pse => _typeResolver.GetListElementType(pse.Type, true)!);
 
-        var aliasAndElementTypes = aliases
-                                   .Zip(sourceListElementTypes, (alias, elementType) => (alias, elementType))
-                                   .ToDictionary(t => t.alias, t => t.elementType);
-
         // IEnumerable<(A,B,C)
         var funcResultType = crossJoinedValueTupleResultsExpression.Type;
 
@@ -1887,7 +1883,7 @@ internal partial class ExpressionBuilderContext
         Type valueTupleType = _typeResolver.GetListElementType(funcResultType, true)!;
         FieldInfo[] valueTupleFields = valueTupleType.GetFields(bfPublicInstance | BindingFlags.GetField);
 
-        Type cqlTupleType = _tupleBuilderCache.CreateOrGetTupleTypeFor(aliasAndElementTypes);
+        Type cqlTupleType = _tupleBuilderCache.CreateOrGetTupleTypeFor(sourceListElementTypes.Zip(aliases));
         PropertyInfo[] cqlTupleProperties = cqlTupleType.GetProperties(bfPublicInstance | BindingFlags.SetProperty);
 
         Debug.Assert(valueTupleFields.Length > 0);

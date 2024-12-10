@@ -12,7 +12,7 @@ using Hl7.Cql.Abstractions;
 
 namespace Hl7.Cql.Comparers;
 
-internal class KeyValuePairComparer<TKey,TValue> : ICqlComparer, ICqlComparer<KeyValuePair<TKey, TValue>>
+internal class KeyValuePairComparer<TKey,TValue>(ICqlComparer cqlComparer) : ICqlComparer, ICqlComparer<KeyValuePair<TKey, TValue>>
 {
     /// <inheritdoc />
     public int? Compare(object? x, object? y, string? precision = null)
@@ -30,9 +30,9 @@ internal class KeyValuePairComparer<TKey,TValue> : ICqlComparer, ICqlComparer<Ke
         KeyValuePair<TKey, TValue> x,
         KeyValuePair<TKey, TValue> y,
         string? precision = null) =>
-        Comparer<TKey>.Default.Compare(x.Key, y.Key) switch
+        cqlComparer.Compare(x.Key, y.Key, precision) switch
         {
-            0     => Comparer<TValue>.Default.Compare(x.Value, y.Value),
+            0     => cqlComparer.Compare(x.Value, y.Value, precision),
             var i => i
         };
 
@@ -45,8 +45,11 @@ internal class KeyValuePairComparer<TKey,TValue> : ICqlComparer, ICqlComparer<Ke
         KeyValuePair<TKey, TValue> x,
         KeyValuePair<TKey, TValue> y,
         string? precision = null) =>
-        Comparer<TKey>.Default.Compare(x.Key, y.Key) == 0
-        && Comparer<TValue>.Default.Compare(x.Value, y.Value) == 0;
+        cqlComparer.Equals(x.Key, y.Key, precision) switch
+        {
+            true  => cqlComparer.Equals(x.Value, y.Value, precision),
+            var b => b
+        };
 
     /// <inheritdoc />
     public bool Equivalent(object? x, object? y, string? precision = null) =>
@@ -59,7 +62,9 @@ internal class KeyValuePairComparer<TKey,TValue> : ICqlComparer, ICqlComparer<Ke
 
     /// <inheritdoc />
     public int GetHashCode(KeyValuePair<TKey, TValue> x) =>
-        x.GetHashCode();
+        HashCode.Combine(
+            cqlComparer.GetHashCode(x.Key),
+            cqlComparer.GetHashCode(x.Value));
 
     /// <inheritdoc />
     public int GetHashCode(object? x) =>
