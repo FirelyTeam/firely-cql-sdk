@@ -5,9 +5,9 @@ using QICore version '4.1.1'
 /*Note ws 1. 8/09/2023: Negation issue as outlined in BonnieMat-1455 and ticket https://github.com/cqframework/cql-execution/issues/296 */
 
 
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include SupplementalDataElements version '3.4.000' called SDE
-include QICoreCommon version '2.0.000' called QICoreCommon
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include SupplementalDataElements version '3.5.000' called SDE
+include QICoreCommon version '2.1.000' called QICoreCommon
 
 codesystem "ActCode": 'http://terminology.hl7.org/CodeSystem/v3-ActCode'
 
@@ -28,7 +28,7 @@ valueset "Psych Visit Psychotherapy": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16
 valueset "Standardized Tools Score for Assessment of Cognition": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1006'
 
 parameter "Measurement Period" Interval<DateTime>
-  default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)
+  default Interval[@2025-01-01T00:00:00.000Z, @2025-12-31T23:59:59.999Z]
 
 context Patient
 
@@ -56,7 +56,7 @@ define "Assessment of Cognition Using Standardized Tools or Alternate Methods":
 define "Dementia Encounter During Measurement Period":
   "Encounter to Assess Cognition" EncounterAssessCognition
     with [Condition: "Dementia & Mental Degenerations"] Dementia
-      such that EncounterAssessCognition.period during "Measurement Period"
+      such that EncounterAssessCognition.period during day of "Measurement Period"
         and Dementia.prevalenceInterval ( ) overlaps day of EncounterAssessCognition.period
         and Dementia.isActive ( )
         and not ( Dementia.verificationStatus ~ QICoreCommon."unconfirmed"
@@ -87,7 +87,7 @@ define "Patient Reason for Not Performing Assessment of Cognition Using Standard
 define "Qualifying Encounter During Measurement Period":
   ( "Encounter to Assess Cognition"
     union ["Encounter": "Patient Provider Interaction"] ) ValidEncounter
-    where ValidEncounter.period during "Measurement Period"
+    where ValidEncounter.period during day of "Measurement Period"
       and ValidEncounter.status = 'finished'
 
 define "SDE Ethnicity":

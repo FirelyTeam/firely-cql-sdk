@@ -154,6 +154,13 @@ internal class CqlToResourcePackagingPipeline(
             // the arguments is a choice (=object).
             "InitiationandEngagementofSubstanceUseDisorderTreatmentFHIR.json",
             "PCSBMIScreenAndFollowUpFHIR.json",
+
+            // Tuple element value does not have a resultTypeSpecifier
+            "CADBetaBlockerTherapyPriorMIorLVSDFHIR.json",
+            "PCSDepressionScreenAndFollowUpFHIR.json",
+
+            // Multiple sort fields not supported yet
+            "HospitalHarmAcuteKidneyInjuryFHIR.json"
         ];
 
         LibrarySet librarySet = new(_options.ElmDirectory.FullName);

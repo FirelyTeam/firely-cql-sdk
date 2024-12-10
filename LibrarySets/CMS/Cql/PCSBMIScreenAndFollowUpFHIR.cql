@@ -2,11 +2,11 @@ library PCSBMIScreenAndFollowUpFHIR version '0.2.000'
 
 using QICore version '4.1.1'
 
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include Hospice version '6.9.000' called Hospice
-include PalliativeCare version '1.9.000' called PalliativeCare
-include QICoreCommon version '2.0.000' called QICoreCommon
-include SupplementalDataElements version '3.4.000' called SDE
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include Hospice version '6.12.000' called Hospice
+include PalliativeCare version '1.11.000' called PalliativeCare
+include QICoreCommon version '2.1.000' called QICoreCommon
+include SupplementalDataElements version '3.5.000' called SDE
 
 codesystem "ActCode": 'http://terminology.hl7.org/CodeSystem/v3-ActCode'
 codesystem "ICD10CM": 'http://hl7.org/fhir/sid/icd-10-cm'
@@ -31,7 +31,7 @@ code "Functional Assessment of Chronic Illness Therapy - Palliative Care Questio
 code "virtual": 'VR' from "ActCode" display 'virtual'
 
 parameter "Measurement Period" Interval<DateTime>
-  default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)
+  default Interval[@2025-01-01T00:00:00.000Z, @2025-12-31T23:59:59.999Z]
 
 context Patient
 
@@ -45,7 +45,7 @@ define "Denominator":
 define "Denominator Exclusions":
   Hospice."Has Hospice Services"
     or PalliativeCare."Has Palliative Care in the Measurement Period"
-    or exists "Pregnancy"
+    or exists "Is Pregnant during Day of Measurement Period"
 
 define "Numerator":
   exists "High BMI and Follow up Provided"
@@ -74,7 +74,8 @@ define "Documented High BMI during Measurement Period":
 
 define "Has Normal BMI":
   exists ( "BMI during Measurement Period" BMI
-      where BMI.value in Interval[18.5 'kg/m2', 24.9 'kg/m2']
+      where BMI.value >= 18.5 'kg/m2'
+        and BMI.value < 25 'kg/m2'
   )
     and not ( exists "Documented High BMI during Measurement Period"
         or exists "Documented Low BMI during Measurement Period"
@@ -103,11 +104,9 @@ define "High BMI Interventions Ordered":
 define "High BMI Interventions Performed":
   ( [Procedure: "Follow Up for Above Normal BMI"] HighInterventionsPerformed
       where HighInterventionsPerformed.reasonCode in "Overweight or Obese"
-        and HighInterventionsPerformed.status = 'completed'
-        or ( exists [Condition: "Overweight or Obese"] OverweightObese
-            where OverweightObese.isHealthConcern ( )
-              and OverweightObese.isActive ( )
-              and OverweightObese.prevalenceInterval ( ) starts before or on day of HighInterventionsPerformed.performed.toInterval ( )
+        or ( exists ["Condition": "Overweight or Obese"] OverweightObese
+            where OverweightObese.prevalenceInterval ( ) starts before or on day of HighInterventionsPerformed.performed
+              and not ( OverweightObese.prevalenceInterval ( ) ends before day of HighInterventionsPerformed.performed )
         )
   )
 
@@ -142,6 +141,7 @@ define "Low BMI Interventions Performed":
               and Underweight.isActive ( )
               and Underweight.prevalenceInterval ( ) starts before or on day of LowInterventionsPerformed.performed.toInterval ( )
               and LowInterventionsPerformed.performed.toInterval ( ) during day of "Measurement Period"
+              and not ( Underweight.prevalenceInterval ( ) ends before day of LowInterventionsPerformed.performed.toInterval ( ) )
         )
   )
 
@@ -169,7 +169,7 @@ define "Medical Reason for Not Documenting a Follow up Plan for Low or High BMI"
           and NoBMIFollowUp.reasonCode in "Medical Reason"
     )
 
-define "Pregnancy":
+define "Is Pregnant during Day of Measurement Period":
   [Condition: "Pregnancy or Other Related Diagnoses"] PregnancyDiagnosis
     with "Qualifying Encounter during Day of Measurement Period" QualifyingEncounter
       such that PregnancyDiagnosis.clinicalStatus ~ QICoreCommon."active"

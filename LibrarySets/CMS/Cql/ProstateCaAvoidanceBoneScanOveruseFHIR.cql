@@ -1,13 +1,14 @@
-library ProstateCaAvoidanceBoneScanOveruseFHIR version '0.2.000'
+library ProstateCaAvoidanceBoneScanOveruseFHIR version '0.3.000'
 
 using QICore version '4.1.1'
 
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include SupplementalDataElements version '3.4.000' called SDE
-include QICoreCommon version '2.0.000' called QICoreCommon
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include SupplementalDataElements version '3.5.000' called SDE
+include QICoreCommon version '2.1.000' called QICoreCommon
 
 codesystem "LOINC": 'http://loinc.org'
 codesystem "SNOMEDCT": 'http://snomed.info/sct'
+codesystem "UCUM": 'http://unitsofmeasure.org'
 
 valueset "Bone Scan": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.320'
 valueset "Pain Warranting Further Investigation for Prostate Cancer": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.451'
@@ -25,7 +26,7 @@ code "T1b: Prostate tumor incidental histologic finding in greater than 5 percen
 code "Tumor staging (tumor staging)": '254292007' from "SNOMEDCT" display 'Tumor staging (tumor staging)'
 
 parameter "Measurement Period" Interval<DateTime>
-  default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)
+  default Interval[@2025-01-01T00:00:00.000Z, @2025-12-31T23:59:59.999Z]
 
 context Patient
 
@@ -41,10 +42,42 @@ define "SDE Race":
 define "SDE Sex":
   SDE."SDE Sex"
 
+define "Initial Population":
+  exists "Prostate Cancer Diagnosis"
+
+define "Denominator":
+  "Initial Population"
+    and "First Prostate Cancer Treatment during day of Measurement Period" is not null
+    and "Most Recent Prostate Cancer Staging Tumor Size T1a to T2a" is not null
+    and "Most Recent PSA Test Result is Low"
+    and "Most Recent Gleason Score is Low"
+
+define "Numerator":
+  not exists "Bone Scan Study Performed"
+
 define "Denominator Exceptions":
   "Has Diagnosis of Pain related to Prostate Cancer"
     or "Has Salvage Therapy Performed after Prostate Cancer Diagnosis"
     or "Has Bone Scan Study Performed with Documented Reason"
+
+define "Bone Scan Study Performed":
+  [Observation: "Bone Scan"] BoneScan
+    with "Prostate Cancer Diagnosis" ActiveProstateCancer
+      such that BoneScan.effective.toInterval ( ) starts after start of ActiveProstateCancer.prevalenceInterval ( )
+    where BoneScan.effective.toInterval ( ) ends during day of "Measurement Period"
+
+define "Has Bone Scan Study Performed with Documented Reason":
+  exists "Bone Scan Study Performed" BoneScanAfterDiagnosis
+    where BoneScanAfterDiagnosis.value ~ "Procedure reason record (record artifact)"
+
+define "Has Diagnosis of Pain related to Prostate Cancer":
+  exists ( [Condition: "Pain Warranting Further Investigation for Prostate Cancer"] ProstateCancerPain
+      with "Prostate Cancer Diagnosis" ActiveProstateCancer
+        such that ProstateCancerPain.prevalenceInterval ( ) starts after start of ActiveProstateCancer.prevalenceInterval ( )
+          and ( ProstateCancerPain.isProblemListItem ( )
+              or ProstateCancerPain.isHealthConcern ( )
+          )
+  )
 
 define "First Prostate Cancer Treatment during day of Measurement Period":
   First([Procedure: "Prostate Cancer Treatment"] ProstateCancerTreatment
@@ -53,15 +86,21 @@ define "First Prostate Cancer Treatment during day of Measurement Period":
       sort by start of performed.toInterval()
   )
 
+define "Most Recent PSA Test Result is Low":
+  ( Last([Observation: "Prostate Specific Antigen Test"] PSATest
+      with "Most Recent Prostate Cancer Staging Tumor Size T1a to T2a" MostRecentProstateCancerStaging
+        such that PSATest.effective.toInterval() starts before MostRecentProstateCancerStaging.effective.toInterval()
+          and PSATest.status in { 'final', 'amended', 'corrected' }
+      sort by start of effective.toInterval()
+  ) ) LastPSATest
+    return LastPSATest.value as Quantity < 10 'ng/mL'
+
 define "Has Salvage Therapy Performed after Prostate Cancer Diagnosis":
   exists ( [Procedure: "Salvage Therapy"] SalvageTherapy
       with "Prostate Cancer Diagnosis" ActiveProstateCancer
         such that SalvageTherapy.performed.toInterval ( ) starts after start of ActiveProstateCancer.prevalenceInterval ( )
           and SalvageTherapy.status = 'completed'
   )
-
-define "Initial Population":
-  exists "Prostate Cancer Diagnosis"
 
 define "Most Recent Gleason Score is Low":
   ( Last([Observation: "Gleason score in Specimen Qualitative"] GleasonScore
@@ -85,48 +124,9 @@ define "Most Recent Prostate Cancer Staging Tumor Size T1a to T2a":
         or LastProstateCancerStaging.value ~ "Neoplasm of prostate primary tumor staging category T2a: Involves one-half of one lobe or less (finding)"
     )
 
-define "Numerator":
-  not exists "Bone Scan Study Performed"
-
-define "Denominator":
-  "Initial Population"
-    and "First Prostate Cancer Treatment during day of Measurement Period" is not null
-    and "Most Recent Prostate Cancer Staging Tumor Size T1a to T2a" is not null
-    and "Most Recent PSA Test Result is Low"
-    and "Most Recent Gleason Score is Low"
-
-define "Has Bone Scan Study Performed with Documented Reason":
-  exists "Bone Scan Study Performed" BoneScanAfterDiagnosis
-    where BoneScanAfterDiagnosis.value ~ "Procedure reason record (record artifact)"
-
-define "Bone Scan Study Performed":
-  [Observation: "Bone Scan"] BoneScan
-    with "Prostate Cancer Diagnosis" ActiveProstateCancer
-      such that BoneScan.effective.toInterval ( ) starts after start of ActiveProstateCancer.prevalenceInterval ( )
-
 define "Prostate Cancer Diagnosis":
   [Condition: "Prostate Cancer"] ProstateCancer
     where ProstateCancer.prevalenceInterval ( ) overlaps day of "Measurement Period"
       and ( ProstateCancer.isProblemListItem ( )
           or ProstateCancer.isHealthConcern ( )
       )
-      and ProstateCancer.isActive ( )
-
-define "Most Recent PSA Test Result is Low":
-  ( Last([Observation: "Prostate Specific Antigen Test"] PSATest
-      with "Most Recent Prostate Cancer Staging Tumor Size T1a to T2a" MostRecentProstateCancerStaging
-        such that PSATest.effective.toInterval() starts before MostRecentProstateCancerStaging.effective.toInterval()
-          and PSATest.status in { 'final', 'amended', 'corrected' }
-      sort by start of effective.toInterval()
-  ) ) LastPSATest
-    return LastPSATest.value as Quantity < 10 'ng/mL'
-
-define "Has Diagnosis of Pain related to Prostate Cancer":
-  exists ( [Condition: "Pain Warranting Further Investigation for Prostate Cancer"] ProstateCancerPain
-      with "Prostate Cancer Diagnosis" ActiveProstateCancer
-        such that ProstateCancerPain.prevalenceInterval ( ) starts after start of ActiveProstateCancer.prevalenceInterval ( )
-          and ( ProstateCancerPain.isProblemListItem ( )
-              or ProstateCancerPain.isHealthConcern ( )
-          )
-          and ProstateCancerPain.isActive ( )
-  )

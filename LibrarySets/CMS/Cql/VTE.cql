@@ -1,10 +1,10 @@
-library VTE version '8.6.000'
+library VTE version '8.8.000'
 
 
 using QICore version '4.1.1'
 
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include CQMCommon version '2.0.000' called CQMCommon
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include CQMCommon version '2.2.000' called CQMCommon
 
 valueset "Obstetrical or Pregnancy Related Conditions": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.263' 
 valueset "Obstetrics VTE": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.264'

@@ -1,17 +1,16 @@
-library TJCOverall version '8.11.000'
+library TJCOverall version '8.14.000'
 
 
 using QICore version '4.1.1'
 
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include CQMCommon   version '2.0.000' called CQMCommon
-include QICoreCommon version '2.0.000' called QICoreCommon
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include CQMCommon   version '2.2.000' called CQMCommon
+include QICoreCommon version '2.1.000' called QICoreCommon
 
 valueset "Comfort Measures": 'http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45'
 valueset "Discharge To Acute Care Facility": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87'
 valueset "Discharged to Health Care Facility for Hospice Care": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207'
 valueset "Discharged to Home for Hospice Care": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209'
-valueset "Hemorrhagic Stroke": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.212'
 valueset "Ischemic Stroke": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247'
 valueset "Left Against Medical Advice": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308'
 valueset "Nonelective Inpatient Encounter": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424'
@@ -22,19 +21,15 @@ parameter "Measurement Period" Interval<DateTime>
 context Patient
 
 
-define "Non Elective Inpatient Encounter":
+define "Non Elective Inpatient Encounter with Age":
   ["Encounter": "Nonelective Inpatient Encounter"] NonElectiveEncounter
-        where NonElectiveEncounter.period ends during day of "Measurement Period"
+        where AgeInYearsAt(date from start of NonElectiveEncounter.period ) >= 18
+         and NonElectiveEncounter.period ends during day of "Measurement Period"
 
-define "All Stroke Encounter":
-  "Non Elective Inpatient Encounter" NonElectiveEncounter
-  let ConditionCode: NonElectiveEncounter.principalDiagnosis().code
-    where ( ConditionCode in "Hemorrhagic Stroke"
-       or   ConditionCode in "Ischemic Stroke" )  
 
 define "Ischemic Stroke Encounter":
-  "Encounter with Principal Diagnosis and Age" EncounterWithAge
-    where EncounterWithAge.principalDiagnosis().code in "Ischemic Stroke"
+  "Non Elective Inpatient Encounter with Age" NonElectiveEncounterWithAge
+    where NonElectiveEncounterWithAge.principalDiagnosis().code in "Ischemic Stroke"
 
 define "Ischemic Stroke Encounters with Discharge Disposition":
   "Ischemic Stroke Encounter" IschemicStrokeEncounter
@@ -44,10 +39,6 @@ define "Ischemic Stroke Encounters with Discharge Disposition":
 		or DischDisp in "Patient Expired"
 		or DischDisp in "Discharged to Home for Hospice Care"
 		or DischDisp in "Discharged to Health Care Facility for Hospice Care"			
-
-define "Encounter with Principal Diagnosis and Age":
-  "All Stroke Encounter" AllStrokeEncounter
-    where AgeInYearsAt(date from start of AllStrokeEncounter.period ) >= 18
 
 define "Comfort Measures during Hospitalization":
   "Ischemic Stroke Encounter" IschemicStrokeEncounter

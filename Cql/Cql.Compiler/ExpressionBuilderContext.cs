@@ -179,15 +179,15 @@ partial class ExpressionBuilderContext(
                     FunctionRef e => FunctionRef(e),
 
                     // InvokeDefinitionThroughRuntimeContext
-                    CodeRef e => CodeRef(e),
+                    CodeRef e       => CodeRef(e),
                     CodeSystemRef e => CodeSystemRef(e),
-                    ConceptRef e => ConceptRef(e),
+                    ConceptRef e    => ConceptRef(e),
                     ExpressionRef e => ExpressionRef(e),
-                    AnyInValueSet e => ProcessValueSet(e.valueset, e.codes, isList: true),
-                    InValueSet e => ProcessValueSet(e.valueset!, e.code, isList: false),
-                    Retrieve e => Retrieve(e),
-                    ValueSetRef e => ValueSetRef(e),
-                    ParameterRef e => ParameterRef(e),
+                    AnyInValueSet e => BindValueInValueSet(valueExpr: TranslateArg(e.codes), valueSetExpr: TranslateValueSet(e.valueset, e.valuesetExpression), isList: true),
+                    InValueSet e    => BindValueInValueSet(valueExpr: TranslateArg(e.code), valueSetExpr: TranslateValueSet(e.valueset, e.valuesetExpression), isList: false),
+                    Retrieve e      => Retrieve(e),
+                    ValueSetRef e   => ValueSetRef(e),
+                    ParameterRef e  => ParameterRef(e),
 
                     // NOTE: Do not rename ICqlOperators.CreateValueSetFacade to ExpandValueSet
                     ExpandValueSet e => _cqlOperatorsBinder.BindToMethod(nameof(ICqlOperators.CreateValueSetFacade), TranslateArgs(GetBindArgs(element)), TranslateTypes(GetTypeArgs(element))),
@@ -945,13 +945,15 @@ partial class ExpressionBuilderContext(
         using (PushElement(op))
         {
             if (string.IsNullOrWhiteSpace(op.path))
-                throw this.NewExpressionBuildingException("path cannot be null or empty");
+                throw this.NewExpressionBuildingException("Property expression cannot have null or empty path");
             var path = op.path;
+
+            Type? expectedType;
 
             if (!string.IsNullOrWhiteSpace(op.scope))
             {
                 var scopeExpression = GetScopeExpression(op.scope!);
-                var expectedType = TypeFor(op) ?? typeof(object);
+                expectedType = TypeFor(op) ?? typeof(object);
                 var pathMemberInfo = _typeResolver.GetProperty(scopeExpression.Type, path!) ??
                                      _typeResolver.GetProperty(scopeExpression.Type, op.path);
                 if (pathMemberInfo == null)
@@ -970,41 +972,35 @@ partial class ExpressionBuilderContext(
                 return propogate;
             }
 
-            if (op.source != null)
+            if (op.source == null)
+                throw this.NewExpressionBuildingException("Property expression cannot have an empty source when scope is empty");
+
+            var source = TranslateArg(op.source);
+            var parts = path.Split('.');
+            if (parts.Length > 1)
             {
-                var source = TranslateArg(op.source);
-                var parts = path.Split('.');
-                if (parts.Length > 1)
+                // support paths like birthDate.value on Patient
+                for (int i = 0; i < parts.Length; i++)
                 {
-                    // support paths like birthDate.value on Patient
-                    for (int i = 0; i < parts.Length; i++)
+                    var pathPart = parts[i];
+                    var pathMemberInfo = _typeResolver.GetProperty(source.Type, pathPart);
+                    if (pathMemberInfo != null)
                     {
-                        var pathPart = parts[i];
-                        var pathMemberInfo = _typeResolver.GetProperty(source.Type, pathPart);
-                        if (pathMemberInfo != null)
-                        {
-                            var propertyAccess = PropagateNull(source, pathMemberInfo);
-                            source = propertyAccess;
-                        }
+                        var propertyAccess = PropagateNull(source, pathMemberInfo);
+                        source = propertyAccess;
                     }
-                    return source;
                 }
-
-                var expectedType = TypeFor(op, throwIfNotFound: false);
-
-                // If we cannot determine the type from the ELM, let's try
-                // if the POCO model can help us.
-                if (expectedType == null)
-                {
-                    expectedType = _typeResolver.GetProperty(source.Type, path)?.PropertyType
-                                   ?? throw this.NewExpressionBuildingException("Cannot resolve type for expression");
-                }
-
-                var result = PropertyHelper(source, path, expectedType);
-                return result;
+                return source;
             }
 
-            throw new NotImplementedException().WithContext(this);
+            // If we cannot determine the type from the ELM, let's try
+            // if the POCO model can help us.
+            expectedType = TypeFor(op, throwIfNotFound: false)
+                           ?? _typeResolver.GetProperty(source.Type, path)?.PropertyType
+                           ?? throw this.NewExpressionBuildingException("Cannot resolve type for expression");
+
+            var result = PropertyHelper(source, path, expectedType);
+            return result;
         }
     }
 
@@ -1196,23 +1192,35 @@ partial class ExpressionBuilderContext(
         return new DefinitionCallExpression(CqlExpressions.Definitions_PropertyExpression, libraryName, name, CqlExpressions.ParameterExpression, funcType);
     }
 
-    private Expression ProcessValueSet(ValueSetRef valueSetRef, Elm.Expression valueExpr, bool isList)
+    private Expression BindValueInValueSet(
+        Expression valueExpr,
+        Expression valueSetExpr,
+        bool isList)
     {
-        Expression expr = TranslateArg(valueExpr);
+        var codeType = isList ? _typeResolver.GetListElementType(valueExpr.Type, throwError: true)! : valueExpr.Type;
 
-        var codeType = isList ? _typeResolver.GetListElementType(expr.Type, throwError: true)! : expr.Type;
-
-        var valueSet = InvokeDefinitionThroughRuntimeContext(valueSetRef.name!, valueSetRef.libraryName, typeof(CqlValueSet));
         if (codeType == _typeResolver.CodeType)
-            return BindCqlOperator(isList ? nameof(ICqlOperators.CodesInValueSet) : nameof(ICqlOperators.CodeInValueSet), expr, valueSet);
+            return BindCqlOperator(isList ? nameof(ICqlOperators.CodesInValueSet) : nameof(ICqlOperators.CodeInValueSet), valueExpr, valueSetExpr);
 
         if (codeType == _typeResolver.ConceptType)
-            return BindCqlOperator(isList ? nameof(ICqlOperators.ConceptsInValueSet) : nameof(ICqlOperators.ConceptInValueSet), expr, valueSet);
+            return BindCqlOperator(isList ? nameof(ICqlOperators.ConceptsInValueSet) : nameof(ICqlOperators.ConceptInValueSet), valueExpr, valueSetExpr);
 
         if (codeType == typeof(string))
-            return BindCqlOperator(isList ? nameof(ICqlOperators.StringsInValueSet) : nameof(ICqlOperators.StringInValueSet), expr, valueSet);
+            return BindCqlOperator(isList ? nameof(ICqlOperators.StringsInValueSet) : nameof(ICqlOperators.StringInValueSet), valueExpr, valueSetExpr);
 
         throw new NotImplementedException().WithContext(this);
+    }
+
+    private Expression TranslateValueSet(ValueSetRef valueSetRef, Elm.Expression valueSetExpression)
+    {
+        var valueSet =
+            (valueSetRef, valueSetExpression) switch
+            {
+                ({} r, null) => InvokeDefinitionThroughRuntimeContext(r.name!, r.libraryName, typeof(CqlValueSet)),
+                (null, {} e) => TranslateElement(e),
+                _            => throw this.NewExpressionBuildingException("Expected either a ValueSetRef or a ValueSetExpression")
+            };
+        return valueSet;
     }
 }
 

@@ -28,27 +28,27 @@
             "locator" : "5:1-5:52",
             "localIdentifier" : "CQMCommon",
             "path" : "CQMCommon",
-            "version" : "2.0.000"
+            "version" : "2.2.000"
          }, {
             "locator" : "6:1-6:56",
             "localIdentifier" : "FHIRHelpers",
             "path" : "FHIRHelpers",
-            "version" : "4.3.000"
+            "version" : "4.4.000"
          }, {
             "locator" : "7:1-7:58",
             "localIdentifier" : "QICoreCommon",
             "path" : "QICoreCommon",
-            "version" : "2.0.000"
+            "version" : "2.1.000"
          }, {
             "locator" : "8:1-8:61",
             "localIdentifier" : "SDE",
             "path" : "SupplementalDataElements",
-            "version" : "3.4.000"
+            "version" : "3.5.000"
          } ]
       },
       "parameters" : {
          "def" : [ {
-            "locator" : "35:1-36:66",
+            "locator" : "35:1-36:72",
             "name" : "Measurement Period",
             "accessLevel" : "Public",
             "resultTypeSpecifier" : {
@@ -59,9 +59,9 @@
                }
             },
             "default" : {
-               "locator" : "36:11-36:66",
+               "locator" : "36:11-36:72",
                "lowClosed" : true,
-               "highClosed" : false,
+               "highClosed" : true,
                "type" : "Interval",
                "resultTypeSpecifier" : {
                   "type" : "IntervalTypeSpecifier",
@@ -71,7 +71,7 @@
                   }
                },
                "low" : {
-                  "locator" : "36:20-36:41",
+                  "locator" : "36:20-36:44",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
                   "year" : {
@@ -108,45 +108,55 @@
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
                      "value" : "0",
                      "type" : "Literal"
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
+                     "type" : "Literal"
                   }
                },
                "high" : {
-                  "locator" : "36:44-36:65",
+                  "locator" : "36:47-36:71",
                   "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                   "type" : "DateTime",
                   "year" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "2026",
+                     "value" : "2025",
                      "type" : "Literal"
                   },
                   "month" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
+                     "value" : "12",
                      "type" : "Literal"
                   },
                   "day" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "1",
+                     "value" : "31",
                      "type" : "Literal"
                   },
                   "hour" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "23",
                      "type" : "Literal"
                   },
                   "minute" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "59",
                      "type" : "Literal"
                   },
                   "second" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "59",
                      "type" : "Literal"
                   },
                   "millisecond" : {
                      "valueType" : "{urn:hl7-org:elm-types:r1}Integer",
-                     "value" : "0",
+                     "value" : "999",
+                     "type" : "Literal"
+                  },
+                  "timezoneOffset" : {
+                     "valueType" : "{urn:hl7-org:elm-types:r1}Decimal",
+                     "value" : "0.0",
                      "type" : "Literal"
                   }
                }
@@ -320,13 +330,13 @@
                }
             }
          }, {
-            "locator" : "55:1-57:120",
+            "locator" : "55:1-57:103",
             "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
             "name" : "Has Active HIV Diagnosis Before or in First 90 Days of Measurement Period",
             "context" : "Patient",
             "accessLevel" : "Public",
             "expression" : {
-               "locator" : "56:3-57:120",
+               "locator" : "56:3-57:103",
                "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                "type" : "Exists",
                "signature" : [ {
@@ -337,7 +347,7 @@
                   }
                } ],
                "operand" : {
-                  "locator" : "56:10-57:120",
+                  "locator" : "56:10-57:103",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -381,7 +391,7 @@
                   } ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "57:5-57:120",
+                     "locator" : "57:5-57:103",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "precision" : "Day",
                      "type" : "Before",
@@ -393,7 +403,7 @@
                         "type" : "NamedTypeSpecifier"
                      } ],
                      "operand" : [ {
-                        "locator" : "57:57-57:62",
+                        "locator" : "57:40-57:45",
                         "type" : "Start",
                         "signature" : [ {
                            "type" : "IntervalTypeSpecifier",
@@ -403,8 +413,8 @@
                            }
                         } ],
                         "operand" : {
-                           "locator" : "57:11-57:55",
-                           "name" : "ToPrevalenceInterval",
+                           "locator" : "57:11-57:38",
+                           "name" : "prevalenceInterval",
                            "libraryName" : "QICoreCommon",
                            "type" : "FunctionRef",
                            "resultTypeSpecifier" : {
@@ -419,14 +429,14 @@
                               "type" : "NamedTypeSpecifier"
                            } ],
                            "operand" : [ {
-                              "locator" : "57:49-57:53",
+                              "locator" : "57:11-57:15",
                               "resultTypeName" : "{http://hl7.org/fhir}Condition",
                               "name" : "HIVDx",
                               "type" : "AliasRef"
                            } ]
                         }
                      }, {
-                        "locator" : "57:78-57:120",
+                        "locator" : "57:61-57:103",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "type" : "Add",
                         "signature" : [ {
@@ -437,7 +447,7 @@
                            "type" : "NamedTypeSpecifier"
                         } ],
                         "operand" : [ {
-                           "locator" : "57:80-57:108",
+                           "locator" : "57:63-57:91",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
                            "signature" : [ {
@@ -448,7 +458,7 @@
                               }
                            } ],
                            "operand" : {
-                              "locator" : "57:89-57:108",
+                              "locator" : "57:72-57:91",
                               "name" : "Measurement Period",
                               "type" : "ParameterRef",
                               "resultTypeSpecifier" : {
@@ -460,7 +470,7 @@
                               }
                            }
                         }, {
-                           "locator" : "57:112-57:118",
+                           "locator" : "57:95-57:101",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}Quantity",
                            "value" : 90,
                            "unit" : "days",
@@ -1291,7 +1301,7 @@
                   }
                } ],
                "source" : {
-                  "locator" : "64:8-66:59",
+                  "locator" : "64:8-66:45",
                   "type" : "Query",
                   "resultTypeSpecifier" : {
                      "type" : "ListTypeSpecifier",
@@ -1335,7 +1345,7 @@
                   } ],
                   "relationship" : [ ],
                   "where" : {
-                     "locator" : "65:7-65:89",
+                     "locator" : "65:7-65:75",
                      "resultTypeName" : "{urn:hl7-org:elm-types:r1}Boolean",
                      "precision" : "Day",
                      "type" : "In",
@@ -1350,9 +1360,9 @@
                         }
                      } ],
                      "operand" : [ {
-                        "locator" : "65:13-65:54",
+                        "locator" : "65:13-65:40",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
-                        "name" : "Latest",
+                        "name" : "latest",
                         "libraryName" : "QICoreCommon",
                         "type" : "FunctionRef",
                         "signature" : [ {
@@ -1384,7 +1394,7 @@
                                  "isType" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Is",
                                  "operand" : {
-                                    "locator" : "65:35-65:53",
+                                    "locator" : "65:13-65:31",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -1420,7 +1430,7 @@
                                     "asType" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "type" : "As",
                                     "operand" : {
-                                       "locator" : "65:35-65:53",
+                                       "locator" : "65:13-65:31",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -1477,7 +1487,7 @@
                               "when" : {
                                  "type" : "Is",
                                  "operand" : {
-                                    "locator" : "65:35-65:53",
+                                    "locator" : "65:13-65:31",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -1519,7 +1529,7 @@
                                  "operand" : {
                                     "type" : "As",
                                     "operand" : {
-                                       "locator" : "65:35-65:53",
+                                       "locator" : "65:13-65:31",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -1584,7 +1594,7 @@
                                  "isType" : "{urn:hl7-org:elm-types:r1}DateTime",
                                  "type" : "Is",
                                  "operand" : {
-                                    "locator" : "65:35-65:53",
+                                    "locator" : "65:13-65:31",
                                     "name" : "ToValue",
                                     "libraryName" : "FHIRHelpers",
                                     "type" : "FunctionRef",
@@ -1620,7 +1630,7 @@
                                     "asType" : "{urn:hl7-org:elm-types:r1}DateTime",
                                     "type" : "As",
                                     "operand" : {
-                                       "locator" : "65:35-65:53",
+                                       "locator" : "65:13-65:31",
                                        "name" : "ToValue",
                                        "libraryName" : "FHIRHelpers",
                                        "type" : "FunctionRef",
@@ -1701,7 +1711,7 @@
                            }
                         } ]
                      }, {
-                        "locator" : "65:70-65:89",
+                        "locator" : "65:56-65:75",
                         "name" : "Measurement Period",
                         "type" : "ParameterRef",
                         "resultTypeSpecifier" : {
@@ -1714,14 +1724,14 @@
                      } ]
                   },
                   "sort" : {
-                     "locator" : "66:7-66:59",
+                     "locator" : "66:7-66:45",
                      "by" : [ {
-                        "locator" : "66:15-66:59",
+                        "locator" : "66:15-66:45",
                         "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                         "direction" : "asc",
                         "type" : "ByExpression",
                         "expression" : {
-                           "locator" : "66:15-66:59",
+                           "locator" : "66:15-66:45",
                            "resultTypeName" : "{urn:hl7-org:elm-types:r1}DateTime",
                            "type" : "Start",
                            "signature" : [ {
@@ -1732,8 +1742,8 @@
                               }
                            } ],
                            "operand" : {
-                              "locator" : "66:24-66:59",
-                              "name" : "ToInterval",
+                              "locator" : "66:24-66:45",
+                              "name" : "toInterval",
                               "libraryName" : "QICoreCommon",
                               "type" : "FunctionRef",
                               "resultTypeSpecifier" : {
@@ -1769,7 +1779,7 @@
                                  } ]
                               } ],
                               "operand" : [ {
-                                 "locator" : "66:50-66:58",
+                                 "locator" : "66:24-66:32",
                                  "name" : "ToValue",
                                  "libraryName" : "FHIRHelpers",
                                  "type" : "FunctionRef",

@@ -2,10 +2,10 @@ library HospitalHarmSevereHypoglycemiaFHIR version '0.1.000'
 
 using QICore version '4.1.1'
 
-include SupplementalDataElements version '3.4.000' called SDE
-include CQMCommon version '2.0.000' called CQMCommon
-include QICoreCommon version '2.0.000' called QICoreCommon
-include FHIRHelpers version '4.3.000' called FHIRHelpers
+include SupplementalDataElements version '3.5.000' called SDE
+include CQMCommon version '2.2.000' called CQMCommon
+include QICoreCommon version '2.1.000' called QICoreCommon
+include FHIRHelpers version '4.4.000' called FHIRHelpers
 
 valueset "birth date": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4'
 valueset "Emergency Department Visit": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292'
@@ -15,7 +15,7 @@ valueset "Hypoglycemics Severe Hypoglycemia": 'http://cts.nlm.nih.gov/fhir/Value
 valueset "Observation Services": 'http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143'
 
 parameter "Measurement Period" Interval<DateTime>
-  default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)
+  default Interval[@2025-01-01T00:00:00.000Z, @2025-12-31T23:59:59.999Z]
 
 context Patient
 

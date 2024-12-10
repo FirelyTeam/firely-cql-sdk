@@ -111,7 +111,7 @@ public partial class Library
             }
         }
 
-        return container.library;
+        return library;
     }
 
     private static void CorrectLegacyConstructs(JsonNode a)

@@ -2,10 +2,10 @@ library HIVViralSuppressionFHIR version '0.1.000'
 
 using QICore version '4.1.1'
 
-include CQMCommon version '2.0.000' called CQMCommon
-include FHIRHelpers version '4.3.000' called FHIRHelpers
-include QICoreCommon version '2.0.000' called QICoreCommon
-include SupplementalDataElements version '3.4.000' called SDE
+include CQMCommon version '2.2.000' called CQMCommon
+include FHIRHelpers version '4.4.000' called FHIRHelpers
+include QICoreCommon version '2.1.000' called QICoreCommon
+include SupplementalDataElements version '3.5.000' called SDE
 
 codesystem "SNOMEDCT": 'http://snomed.info/sct'
 codesystem "CPT": 'http://www.ama-assn.org/go/cpt'
@@ -33,7 +33,7 @@ code "Not detected (qualifier value)": '260415000' from "SNOMEDCT" display 'Not 
 
 
 parameter "Measurement Period" Interval<DateTime>
-  default Interval[@2025-01-01T00:00:00.0, @2026-01-01T00:00:00.0)
+  default Interval[@2025-01-01T00:00:00.000Z, @2025-12-31T23:59:59.999Z]
 
 context Patient
 
@@ -54,7 +54,7 @@ define "SDE Sex":
 
 define "Has Active HIV Diagnosis Before or in First 90 Days of Measurement Period":
   exists ["Condition": "HIV"] HIVDx
-    where QICoreCommon."ToPrevalenceInterval" ( HIVDx ) starts before day of ( start of "Measurement Period" + 90 days )
+    where HIVDx.prevalenceInterval ( ) starts before day of ( start of "Measurement Period" + 90 days )
 
 define "Initial Population":
   "Has Active HIV Diagnosis Before or in First 90 Days of Measurement Period"
@@ -62,8 +62,8 @@ define "Initial Population":
 
 define "Most Recent Viral Load Test During Measurement Period":
   Last(["Observation": "HIV Viral Load"] ViralLoad
-      where QICoreCommon."Latest"(ViralLoad.effective) during day of "Measurement Period"
-      sort by start of QICoreCommon."ToInterval"(effective)
+      where ViralLoad.effective.latest() during day of "Measurement Period"
+      sort by start of effective.toInterval()
   )
 
 define "Has Qualifying Encounter During First 240 Days of Measurement Period":
