@@ -410,29 +410,30 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
         ];
         CqlInterval<CqlDate> c_(Observation FirstIndexAssessment)
         {
-            DataType f_ = FirstIndexAssessment?.Effective;
-            object g_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-            CqlInterval<CqlDateTime> h_ = QICoreCommon_2_1_000.Instance.toInterval(context, g_);
-            CqlDateTime i_ = context.Operators.Start(h_);
-            CqlDate j_ = context.Operators.DateFrom(i_);
-            CqlQuantity k_ = context.Operators.Quantity(12m, "months");
-            CqlDate l_ = context.Operators.Add(j_, k_);
-            CqlQuantity m_ = context.Operators.Quantity(60m, "days");
-            CqlDate n_ = context.Operators.Subtract(l_, m_);
-            object p_ = FHIRHelpers_4_4_000.Instance.ToValue(context, f_);
-            CqlInterval<CqlDateTime> q_ = QICoreCommon_2_1_000.Instance.toInterval(context, p_);
-            CqlDateTime r_ = context.Operators.Start(q_);
-            CqlDate s_ = context.Operators.DateFrom(r_);
-            CqlDate u_ = context.Operators.Add(s_, k_);
-            CqlDate w_ = context.Operators.Add(u_, m_);
-            CqlInterval<CqlDate> x_ = context.Operators.Interval(n_, w_, true, true);
+            DataType g_ = FirstIndexAssessment?.Effective;
+            object h_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
+            CqlInterval<CqlDateTime> i_ = QICoreCommon_2_1_000.Instance.toInterval(context, h_);
+            CqlDateTime j_ = context.Operators.Start(i_);
+            CqlDate k_ = context.Operators.DateFrom(j_);
+            CqlQuantity l_ = context.Operators.Quantity(12m, "months");
+            CqlDate m_ = context.Operators.Add(k_, l_);
+            CqlQuantity n_ = context.Operators.Quantity(60m, "days");
+            CqlDate o_ = context.Operators.Subtract(m_, n_);
+            object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, g_);
+            CqlInterval<CqlDateTime> r_ = QICoreCommon_2_1_000.Instance.toInterval(context, q_);
+            CqlDateTime s_ = context.Operators.Start(r_);
+            CqlDate t_ = context.Operators.DateFrom(s_);
+            CqlDate v_ = context.Operators.Add(t_, l_);
+            CqlDate x_ = context.Operators.Add(v_, n_);
+            CqlInterval<CqlDate> y_ = context.Operators.Interval(o_, x_, true, true);
 
-            return x_;
+            return y_;
         };
         IEnumerable<CqlInterval<CqlDate>> d_ = context.Operators.Select<Observation, CqlInterval<CqlDate>>((IEnumerable<Observation>)b_, c_);
-        CqlInterval<CqlDate> e_ = context.Operators.SingletonFrom<CqlInterval<CqlDate>>(d_);
+        IEnumerable<CqlInterval<CqlDate>> e_ = context.Operators.Distinct<CqlInterval<CqlDate>>(d_);
+        CqlInterval<CqlDate> f_ = context.Operators.SingletonFrom<CqlInterval<CqlDate>>(e_);
 
-        return e_;
+        return f_;
     }
 
 

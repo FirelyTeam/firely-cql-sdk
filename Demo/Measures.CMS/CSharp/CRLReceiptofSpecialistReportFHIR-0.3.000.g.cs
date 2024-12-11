@@ -334,56 +334,57 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
         IEnumerable<ServiceRequest> b_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, a_, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-servicerequest"));
         bool? c_(ServiceRequest ReferralOrder)
         {
-            Code<RequestStatus> j_ = ReferralOrder?.StatusElement;
-            RequestStatus? k_ = j_?.Value;
-            Code<RequestStatus> l_ = context.Operators.Convert<Code<RequestStatus>>(k_);
-            string m_ = context.Operators.Convert<string>(l_);
-            string[] n_ = [
+            Code<RequestStatus> k_ = ReferralOrder?.StatusElement;
+            RequestStatus? l_ = k_?.Value;
+            Code<RequestStatus> m_ = context.Operators.Convert<Code<RequestStatus>>(l_);
+            string n_ = context.Operators.Convert<string>(m_);
+            string[] o_ = [
                 "active",
                 "completed",
             ];
-            bool? o_ = context.Operators.In<string>(m_, n_ as IEnumerable<string>);
-            Code<RequestIntent> p_ = ReferralOrder?.IntentElement;
-            RequestIntent? q_ = p_?.Value;
-            Code<RequestIntent> r_ = context.Operators.Convert<Code<RequestIntent>>(q_);
-            bool? s_ = context.Operators.Equal(r_, "order");
-            bool? t_ = context.Operators.And(o_, s_);
-            FhirDateTime u_ = ReferralOrder?.AuthoredOnElement;
-            CqlDateTime v_ = context.Operators.Convert<CqlDateTime>(u_);
-            CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
-            CqlDateTime x_ = context.Operators.Start(w_);
-            CqlDateTime z_ = context.Operators.Start(w_);
-            int? aa_ = context.Operators.DateTimeComponentFrom(z_, "year");
-            CqlDate ab_ = context.Operators.Date(aa_, 10, 31);
-            CqlDateTime ac_ = context.Operators.ConvertDateToDateTime(ab_);
-            CqlInterval<CqlDateTime> ad_ = context.Operators.Interval(x_, ac_, true, true);
-            bool? ae_ = context.Operators.In<CqlDateTime>(v_, ad_, "day");
-            bool? af_ = context.Operators.And(t_, ae_);
+            bool? p_ = context.Operators.In<string>(n_, o_ as IEnumerable<string>);
+            Code<RequestIntent> q_ = ReferralOrder?.IntentElement;
+            RequestIntent? r_ = q_?.Value;
+            Code<RequestIntent> s_ = context.Operators.Convert<Code<RequestIntent>>(r_);
+            bool? t_ = context.Operators.Equal(s_, "order");
+            bool? u_ = context.Operators.And(p_, t_);
+            FhirDateTime v_ = ReferralOrder?.AuthoredOnElement;
+            CqlDateTime w_ = context.Operators.Convert<CqlDateTime>(v_);
+            CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
+            CqlDateTime y_ = context.Operators.Start(x_);
+            CqlDateTime aa_ = context.Operators.Start(x_);
+            int? ab_ = context.Operators.DateTimeComponentFrom(aa_, "year");
+            CqlDate ac_ = context.Operators.Date(ab_, 10, 31);
+            CqlDateTime ad_ = context.Operators.ConvertDateToDateTime(ac_);
+            CqlInterval<CqlDateTime> ae_ = context.Operators.Interval(y_, ad_, true, true);
+            bool? af_ = context.Operators.In<CqlDateTime>(w_, ae_, "day");
+            bool? ag_ = context.Operators.And(u_, af_);
 
-            return af_;
+            return ag_;
         };
         IEnumerable<ServiceRequest> d_ = context.Operators.Where<ServiceRequest>(b_, c_);
         (CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? e_(ServiceRequest ReferralOrder)
         {
-            Id ag_ = ReferralOrder?.IdElement;
-            string ah_ = ag_?.Value;
-            FhirDateTime ai_ = ReferralOrder?.AuthoredOnElement;
-            CqlDateTime aj_ = context.Operators.Convert<CqlDateTime>(ai_);
-            (CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? ak_ = (CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb, ah_, aj_);
-
-            return ak_;
-        };
-        IEnumerable<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?> f_ = context.Operators.Select<ServiceRequest, (CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?>(d_, e_);
-        object g_((CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? @this)
-        {
-            CqlDateTime al_ = @this?.AuthorDate;
+            Id ah_ = ReferralOrder?.IdElement;
+            string ai_ = ah_?.Value;
+            FhirDateTime aj_ = ReferralOrder?.AuthoredOnElement;
+            CqlDateTime ak_ = context.Operators.Convert<CqlDateTime>(aj_);
+            (CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? al_ = (CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb, ai_, ak_);
 
             return al_;
         };
-        IEnumerable<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?> h_ = context.Operators.SortBy<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?>(f_, g_, System.ComponentModel.ListSortDirection.Ascending);
-        (CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? i_ = context.Operators.First<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?>(h_);
+        IEnumerable<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?> f_ = context.Operators.Select<ServiceRequest, (CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?>(d_, e_);
+        IEnumerable<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?> g_ = context.Operators.Distinct<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?>(f_);
+        object h_((CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? @this)
+        {
+            CqlDateTime am_ = @this?.AuthorDate;
 
-        return i_;
+            return am_;
+        };
+        IEnumerable<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?> i_ = context.Operators.SortBy<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?>(g_, h_, System.ComponentModel.ListSortDirection.Ascending);
+        (CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? j_ = context.Operators.First<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?>(i_);
+
+        return j_;
     }
 
 
@@ -448,15 +449,16 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
         List<ResourceReference> a_ = task?.BasedOn;
         string b_(ResourceReference Task)
         {
-            FhirString d_ = Task?.ReferenceElement;
-            string e_ = d_?.Value;
-            string f_ = QICoreCommon_2_1_000.Instance.GetId(context, e_);
+            FhirString e_ = Task?.ReferenceElement;
+            string f_ = e_?.Value;
+            string g_ = QICoreCommon_2_1_000.Instance.GetId(context, f_);
 
-            return f_;
+            return g_;
         };
         IEnumerable<string> c_ = context.Operators.Select<ResourceReference, string>((IEnumerable<ResourceReference>)a_, b_);
+        IEnumerable<string> d_ = context.Operators.Distinct<string>(c_);
 
-        return c_;
+        return d_;
     }
 
 

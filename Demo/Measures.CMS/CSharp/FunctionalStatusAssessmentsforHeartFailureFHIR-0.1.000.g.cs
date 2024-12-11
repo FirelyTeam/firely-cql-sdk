@@ -343,33 +343,34 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Encounter, Encounter>> c_ = context.Operators.CrossJoin<Encounter, Encounter>(a_, a_);
         (CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)? d_(ValueTuple<Encounter, Encounter> _valueTuple)
         {
-            (CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)? j_ = (CqlTupleMetadata_DbNMMZBTISSRTNdiShceSFVih, _valueTuple.Item1, _valueTuple.Item2);
+            (CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)? k_ = (CqlTupleMetadata_DbNMMZBTISSRTNdiShceSFVih, _valueTuple.Item1, _valueTuple.Item2);
 
-            return j_;
+            return k_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)?> e_ = context.Operators.Select<ValueTuple<Encounter, Encounter>, (CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)?>(c_, d_);
         bool? f_((CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)? tuple_dbnmmzbtissrtndishcesfvih)
         {
-            Period k_ = tuple_dbnmmzbtissrtndishcesfvih?.OfficeVisit2?.Period;
-            CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-            CqlInterval<CqlDateTime> m_ = QICoreCommon_2_1_000.Instance.toInterval(context, l_ as object);
-            CqlDateTime n_ = context.Operators.Start(m_);
-            Period o_ = tuple_dbnmmzbtissrtndishcesfvih?.OfficeVisit1?.Period;
-            CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, o_);
-            CqlInterval<CqlDateTime> q_ = QICoreCommon_2_1_000.Instance.toInterval(context, p_ as object);
-            CqlDateTime r_ = context.Operators.End(q_);
-            CqlQuantity s_ = context.Operators.Quantity(1m, "day");
-            CqlDateTime t_ = context.Operators.Add(r_, s_);
-            bool? u_ = context.Operators.SameOrAfter(n_, t_, "day");
+            Period l_ = tuple_dbnmmzbtissrtndishcesfvih?.OfficeVisit2?.Period;
+            CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
+            CqlInterval<CqlDateTime> n_ = QICoreCommon_2_1_000.Instance.toInterval(context, m_ as object);
+            CqlDateTime o_ = context.Operators.Start(n_);
+            Period p_ = tuple_dbnmmzbtissrtndishcesfvih?.OfficeVisit1?.Period;
+            CqlInterval<CqlDateTime> q_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, p_);
+            CqlInterval<CqlDateTime> r_ = QICoreCommon_2_1_000.Instance.toInterval(context, q_ as object);
+            CqlDateTime s_ = context.Operators.End(r_);
+            CqlQuantity t_ = context.Operators.Quantity(1m, "day");
+            CqlDateTime u_ = context.Operators.Add(s_, t_);
+            bool? v_ = context.Operators.SameOrAfter(o_, u_, "day");
 
-            return u_;
+            return v_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)?> g_ = context.Operators.Where<(CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)?>(e_, f_);
         Encounter h_((CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)? tuple_dbnmmzbtissrtndishcesfvih) => 
             tuple_dbnmmzbtissrtndishcesfvih?.OfficeVisit1;
         IEnumerable<Encounter> i_ = context.Operators.Select<(CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)?, Encounter>(g_, h_);
+        IEnumerable<Encounter> j_ = context.Operators.Distinct<Encounter>(i_);
 
-        return i_;
+        return j_;
     }
 
 
@@ -452,49 +453,50 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
         (CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? j_(ValueTuple<Observation, Observation> _valueTuple)
         {
-            (CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? p_ = (CqlTupleMetadata_DDTAOdcFieSJbGgRLLZPYbGQb, _valueTuple.Item1, _valueTuple.Item2);
+            (CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? q_ = (CqlTupleMetadata_DDTAOdcFieSJbGgRLLZPYbGQb, _valueTuple.Item1, _valueTuple.Item2);
 
-            return p_;
+            return q_;
         };
         IEnumerable<(CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?>(i_, j_);
         bool? l_((CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? tuple_ddtaodcfiesjbggrllzpybgqb)
         {
-            DataType q_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore?.Effective;
-            object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-            CqlInterval<CqlDateTime> s_ = QICoreCommon_2_1_000.Instance.toInterval(context, r_);
-            CqlDateTime t_ = context.Operators.Start(s_);
-            CqlDate u_ = context.Operators.DateFrom(t_);
-            DataType v_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10PhysicalScore?.Effective;
-            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-            CqlInterval<CqlDateTime> x_ = QICoreCommon_2_1_000.Instance.toInterval(context, w_);
-            CqlDateTime y_ = context.Operators.Start(x_);
-            CqlDate z_ = context.Operators.DateFrom(y_);
-            bool? aa_ = context.Operators.SameAs(u_, z_, "day");
-            DataType ab_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore?.Value;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            bool? ad_ = context.Operators.Not((bool?)(ac_ is null));
-            bool? ae_ = context.Operators.And(aa_, ad_);
-            DataType af_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10PhysicalScore?.Value;
-            object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-            bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
-            bool? ai_ = context.Operators.And(ae_, ah_);
+            DataType r_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore?.Effective;
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+            CqlInterval<CqlDateTime> t_ = QICoreCommon_2_1_000.Instance.toInterval(context, s_);
+            CqlDateTime u_ = context.Operators.Start(t_);
+            CqlDate v_ = context.Operators.DateFrom(u_);
+            DataType w_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10PhysicalScore?.Effective;
+            object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+            CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_);
+            CqlDateTime z_ = context.Operators.Start(y_);
+            CqlDate aa_ = context.Operators.DateFrom(z_);
+            bool? ab_ = context.Operators.SameAs(v_, aa_, "day");
+            DataType ac_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore?.Value;
+            object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+            bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
+            bool? af_ = context.Operators.And(ab_, ae_);
+            DataType ag_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10PhysicalScore?.Value;
+            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+            bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
+            bool? aj_ = context.Operators.And(af_, ai_);
 
-            return ai_;
+            return aj_;
         };
         IEnumerable<(CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?> m_ = context.Operators.Where<(CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?>(k_, l_);
         CqlDate n_((CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)? tuple_ddtaodcfiesjbggrllzpybgqb)
         {
-            DataType aj_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore?.Effective;
-            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_);
-            CqlDateTime am_ = context.Operators.Start(al_);
-            CqlDate an_ = context.Operators.DateFrom(am_);
+            DataType ak_ = tuple_ddtaodcfiesjbggrllzpybgqb?.PROMIS10MentalScore?.Effective;
+            object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+            CqlInterval<CqlDateTime> am_ = QICoreCommon_2_1_000.Instance.toInterval(context, al_);
+            CqlDateTime an_ = context.Operators.Start(am_);
+            CqlDate ao_ = context.Operators.DateFrom(an_);
 
-            return an_;
+            return ao_;
         };
         IEnumerable<CqlDate> o_ = context.Operators.Select<(CqlTupleMetadata, Observation PROMIS10MentalScore, Observation PROMIS10PhysicalScore)?, CqlDate>(m_, n_);
+        IEnumerable<CqlDate> p_ = context.Operators.Distinct<CqlDate>(o_);
 
-        return o_;
+        return p_;
     }
 
 
@@ -506,59 +508,60 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
         (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
         {
-            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? l_ = (CqlTupleMetadata_BGYjYGLNPKWAZTBCVAdLDDTMj, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? m_ = (CqlTupleMetadata_BGYjYGLNPKWAZTBCVAdLDDTMj, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
-            return l_;
+            return m_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?>(d_, e_);
         bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? tuple_dzhwgxhmbfavmzfaszbeksohj)
         {
-            Period m_ = tuple_dzhwgxhmbfavmzfaszbeksohj?.ValidEncounters?.Period;
-            CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_2_1_000.Instance.toInterval(context, n_ as object);
-            CqlDateTime p_ = context.Operators.End(o_);
-            CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-            CqlDateTime r_ = context.Operators.End(q_);
-            CqlQuantity s_ = context.Operators.Quantity(180m, "days");
-            CqlDateTime t_ = context.Operators.Subtract(r_, s_);
-            bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
-            CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_dzhwgxhmbfavmzfaszbeksohj?.InitialPROMIS10Date);
-            CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_ as object);
-            CqlDateTime z_ = context.Operators.End(y_);
-            CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
-            CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
-            CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_1_000.Instance.toInterval(context, ad_ as object);
-            CqlDateTime af_ = context.Operators.End(ae_);
-            CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
-            bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
-            CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_1_000.Instance.toInterval(context, aj_ as object);
-            CqlDateTime al_ = context.Operators.End(ak_);
-            bool? am_ = context.Operators.Not((bool?)(al_ is null));
-            bool? an_ = context.Operators.And(ah_, am_);
-            bool? ao_ = context.Operators.And(u_, an_);
-            CqlDateTime ap_ = context.Operators.ConvertDateToDateTime(tuple_dzhwgxhmbfavmzfaszbeksohj?.FollowupPROMIS10Date);
-            CqlDate aq_ = context.Operators.DateFrom(ap_);
-            CqlDate as_ = context.Operators.DateFrom(v_);
-            CqlQuantity at_ = context.Operators.Quantity(30m, "days");
-            CqlDate au_ = context.Operators.Add(as_, at_);
-            CqlDate aw_ = context.Operators.DateFrom(v_);
-            CqlDate ay_ = context.Operators.Add(aw_, s_);
-            CqlInterval<CqlDate> az_ = context.Operators.Interval(au_, ay_, true, true);
-            bool? ba_ = context.Operators.In<CqlDate>(aq_, az_, "day");
-            bool? bb_ = context.Operators.And(ao_, ba_);
+            Period n_ = tuple_dzhwgxhmbfavmzfaszbeksohj?.ValidEncounters?.Period;
+            CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> p_ = QICoreCommon_2_1_000.Instance.toInterval(context, o_ as object);
+            CqlDateTime q_ = context.Operators.End(p_);
+            CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
+            CqlDateTime s_ = context.Operators.End(r_);
+            CqlQuantity t_ = context.Operators.Quantity(180m, "days");
+            CqlDateTime u_ = context.Operators.Subtract(s_, t_);
+            bool? v_ = context.Operators.SameOrBefore(q_, u_, "day");
+            CqlDateTime w_ = context.Operators.ConvertDateToDateTime(tuple_dzhwgxhmbfavmzfaszbeksohj?.InitialPROMIS10Date);
+            CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> z_ = QICoreCommon_2_1_000.Instance.toInterval(context, y_ as object);
+            CqlDateTime aa_ = context.Operators.End(z_);
+            CqlQuantity ab_ = context.Operators.Quantity(14m, "days");
+            CqlDateTime ac_ = context.Operators.Subtract(aa_, ab_);
+            CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> af_ = QICoreCommon_2_1_000.Instance.toInterval(context, ae_ as object);
+            CqlDateTime ag_ = context.Operators.End(af_);
+            CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ac_, ag_, true, true);
+            bool? ai_ = context.Operators.In<CqlDateTime>(w_, ah_, "day");
+            CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_ as object);
+            CqlDateTime am_ = context.Operators.End(al_);
+            bool? an_ = context.Operators.Not((bool?)(am_ is null));
+            bool? ao_ = context.Operators.And(ai_, an_);
+            bool? ap_ = context.Operators.And(v_, ao_);
+            CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(tuple_dzhwgxhmbfavmzfaszbeksohj?.FollowupPROMIS10Date);
+            CqlDate ar_ = context.Operators.DateFrom(aq_);
+            CqlDate at_ = context.Operators.DateFrom(w_);
+            CqlQuantity au_ = context.Operators.Quantity(30m, "days");
+            CqlDate av_ = context.Operators.Add(at_, au_);
+            CqlDate ax_ = context.Operators.DateFrom(w_);
+            CqlDate az_ = context.Operators.Add(ax_, t_);
+            CqlInterval<CqlDate> ba_ = context.Operators.Interval(av_, az_, true, true);
+            bool? bb_ = context.Operators.In<CqlDate>(ar_, ba_, "day");
+            bool? bc_ = context.Operators.And(ap_, bb_);
 
-            return bb_;
+            return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?>(f_, g_);
         Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? tuple_dzhwgxhmbfavmzfaszbeksohj) => 
             tuple_dzhwgxhmbfavmzfaszbeksohj?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?, Encounter>(h_, i_);
-        bool? k_ = context.Operators.Exists<Encounter>(j_);
+        IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
+        bool? l_ = context.Operators.Exists<Encounter>(k_);
 
-        return k_;
+        return l_;
     }
 
 
@@ -596,124 +599,125 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation, Observation>> ac_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_, x_, ab_);
         (CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? ad_(ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation, Observation> _valueTuple)
         {
-            (CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? aj_ = (CqlTupleMetadata_DBUJFOVGBcbhIQPWARNQHKUaX, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4, _valueTuple.Item5, _valueTuple.Item6, _valueTuple.Item7);
+            (CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? ak_ = (CqlTupleMetadata_DBUJFOVGBcbhIQPWARNQHKUaX, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4, _valueTuple.Item5, _valueTuple.Item6, _valueTuple.Item7);
 
-            return aj_;
+            return ak_;
         };
         IEnumerable<(CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)?> ae_ = context.Operators.Select<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation, Observation>, (CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)?>(ac_, ad_);
         bool? af_((CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? tuple_cbgpsarvwrsewlglehinjanim)
         {
-            DataType ak_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Sleep?.Effective;
-            object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-            CqlInterval<CqlDateTime> am_ = QICoreCommon_2_1_000.Instance.toInterval(context, al_);
-            CqlDateTime an_ = context.Operators.Start(am_);
-            CqlDate ao_ = context.Operators.DateFrom(an_);
-            DataType ap_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29SocialRoles?.Effective;
-            object aq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ap_);
-            CqlInterval<CqlDateTime> ar_ = QICoreCommon_2_1_000.Instance.toInterval(context, aq_);
-            CqlDateTime as_ = context.Operators.Start(ar_);
-            CqlDate at_ = context.Operators.DateFrom(as_);
-            bool? au_ = context.Operators.SameAs(ao_, at_, "day");
-            DataType av_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29SocialRoles?.Value;
-            object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, av_);
-            bool? ax_ = context.Operators.Not((bool?)(aw_ is null));
-            bool? ay_ = context.Operators.And(au_, ax_);
-            object ba_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-            CqlInterval<CqlDateTime> bb_ = QICoreCommon_2_1_000.Instance.toInterval(context, ba_);
-            CqlDateTime bc_ = context.Operators.Start(bb_);
-            CqlDate bd_ = context.Operators.DateFrom(bc_);
-            DataType be_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Physical?.Effective;
-            object bf_ = FHIRHelpers_4_4_000.Instance.ToValue(context, be_);
-            CqlInterval<CqlDateTime> bg_ = QICoreCommon_2_1_000.Instance.toInterval(context, bf_);
-            CqlDateTime bh_ = context.Operators.Start(bg_);
-            CqlDate bi_ = context.Operators.DateFrom(bh_);
-            bool? bj_ = context.Operators.SameAs(bd_, bi_, "day");
-            bool? bk_ = context.Operators.And(ay_, bj_);
-            DataType bl_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Physical?.Value;
-            object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bl_);
-            bool? bn_ = context.Operators.Not((bool?)(bm_ is null));
-            bool? bo_ = context.Operators.And(bk_, bn_);
-            object bq_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-            CqlInterval<CqlDateTime> br_ = QICoreCommon_2_1_000.Instance.toInterval(context, bq_);
-            CqlDateTime bs_ = context.Operators.Start(br_);
-            CqlDate bt_ = context.Operators.DateFrom(bs_);
-            DataType bu_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Pain?.Effective;
-            object bv_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bu_);
-            CqlInterval<CqlDateTime> bw_ = QICoreCommon_2_1_000.Instance.toInterval(context, bv_);
-            CqlDateTime bx_ = context.Operators.Start(bw_);
-            CqlDate by_ = context.Operators.DateFrom(bx_);
-            bool? bz_ = context.Operators.SameAs(bt_, by_, "day");
-            bool? ca_ = context.Operators.And(bo_, bz_);
-            DataType cb_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Pain?.Value;
-            object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cb_);
-            bool? cd_ = context.Operators.Not((bool?)(cc_ is null));
-            bool? ce_ = context.Operators.And(ca_, cd_);
-            object cg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-            CqlInterval<CqlDateTime> ch_ = QICoreCommon_2_1_000.Instance.toInterval(context, cg_);
-            CqlDateTime ci_ = context.Operators.Start(ch_);
-            CqlDate cj_ = context.Operators.DateFrom(ci_);
-            DataType ck_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Fatigue?.Effective;
-            object cl_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ck_);
-            CqlInterval<CqlDateTime> cm_ = QICoreCommon_2_1_000.Instance.toInterval(context, cl_);
-            CqlDateTime cn_ = context.Operators.Start(cm_);
-            CqlDate co_ = context.Operators.DateFrom(cn_);
-            bool? cp_ = context.Operators.SameAs(cj_, co_, "day");
-            bool? cq_ = context.Operators.And(ce_, cp_);
-            DataType cr_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Fatigue?.Value;
-            object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cr_);
-            bool? ct_ = context.Operators.Not((bool?)(cs_ is null));
-            bool? cu_ = context.Operators.And(cq_, ct_);
-            object cw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-            CqlInterval<CqlDateTime> cx_ = QICoreCommon_2_1_000.Instance.toInterval(context, cw_);
-            CqlDateTime cy_ = context.Operators.Start(cx_);
-            CqlDate cz_ = context.Operators.DateFrom(cy_);
-            DataType da_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Depression?.Effective;
-            object db_ = FHIRHelpers_4_4_000.Instance.ToValue(context, da_);
-            CqlInterval<CqlDateTime> dc_ = QICoreCommon_2_1_000.Instance.toInterval(context, db_);
-            CqlDateTime dd_ = context.Operators.Start(dc_);
-            CqlDate de_ = context.Operators.DateFrom(dd_);
-            bool? df_ = context.Operators.SameAs(cz_, de_, "day");
-            bool? dg_ = context.Operators.And(cu_, df_);
-            DataType dh_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Depression?.Value;
-            object di_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dh_);
-            bool? dj_ = context.Operators.Not((bool?)(di_ is null));
-            bool? dk_ = context.Operators.And(dg_, dj_);
-            object dm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
-            CqlInterval<CqlDateTime> dn_ = QICoreCommon_2_1_000.Instance.toInterval(context, dm_);
-            CqlDateTime do_ = context.Operators.Start(dn_);
-            CqlDate dp_ = context.Operators.DateFrom(do_);
-            DataType dq_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Anxiety?.Effective;
-            object dr_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dq_);
-            CqlInterval<CqlDateTime> ds_ = QICoreCommon_2_1_000.Instance.toInterval(context, dr_);
-            CqlDateTime dt_ = context.Operators.Start(ds_);
-            CqlDate du_ = context.Operators.DateFrom(dt_);
-            bool? dv_ = context.Operators.SameAs(dp_, du_, "day");
-            bool? dw_ = context.Operators.And(dk_, dv_);
-            DataType dx_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Anxiety?.Value;
-            object dy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dx_);
-            bool? dz_ = context.Operators.Not((bool?)(dy_ is null));
-            bool? ea_ = context.Operators.And(dw_, dz_);
-            DataType eb_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Sleep?.Value;
-            object ec_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eb_);
-            bool? ed_ = context.Operators.Not((bool?)(ec_ is null));
-            bool? ee_ = context.Operators.And(ea_, ed_);
+            DataType al_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Sleep?.Effective;
+            object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
+            CqlInterval<CqlDateTime> an_ = QICoreCommon_2_1_000.Instance.toInterval(context, am_);
+            CqlDateTime ao_ = context.Operators.Start(an_);
+            CqlDate ap_ = context.Operators.DateFrom(ao_);
+            DataType aq_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29SocialRoles?.Effective;
+            object ar_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aq_);
+            CqlInterval<CqlDateTime> as_ = QICoreCommon_2_1_000.Instance.toInterval(context, ar_);
+            CqlDateTime at_ = context.Operators.Start(as_);
+            CqlDate au_ = context.Operators.DateFrom(at_);
+            bool? av_ = context.Operators.SameAs(ap_, au_, "day");
+            DataType aw_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29SocialRoles?.Value;
+            object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aw_);
+            bool? ay_ = context.Operators.Not((bool?)(ax_ is null));
+            bool? az_ = context.Operators.And(av_, ay_);
+            object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
+            CqlInterval<CqlDateTime> bc_ = QICoreCommon_2_1_000.Instance.toInterval(context, bb_);
+            CqlDateTime bd_ = context.Operators.Start(bc_);
+            CqlDate be_ = context.Operators.DateFrom(bd_);
+            DataType bf_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Physical?.Effective;
+            object bg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bf_);
+            CqlInterval<CqlDateTime> bh_ = QICoreCommon_2_1_000.Instance.toInterval(context, bg_);
+            CqlDateTime bi_ = context.Operators.Start(bh_);
+            CqlDate bj_ = context.Operators.DateFrom(bi_);
+            bool? bk_ = context.Operators.SameAs(be_, bj_, "day");
+            bool? bl_ = context.Operators.And(az_, bk_);
+            DataType bm_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Physical?.Value;
+            object bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bm_);
+            bool? bo_ = context.Operators.Not((bool?)(bn_ is null));
+            bool? bp_ = context.Operators.And(bl_, bo_);
+            object br_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
+            CqlInterval<CqlDateTime> bs_ = QICoreCommon_2_1_000.Instance.toInterval(context, br_);
+            CqlDateTime bt_ = context.Operators.Start(bs_);
+            CqlDate bu_ = context.Operators.DateFrom(bt_);
+            DataType bv_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Pain?.Effective;
+            object bw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bv_);
+            CqlInterval<CqlDateTime> bx_ = QICoreCommon_2_1_000.Instance.toInterval(context, bw_);
+            CqlDateTime by_ = context.Operators.Start(bx_);
+            CqlDate bz_ = context.Operators.DateFrom(by_);
+            bool? ca_ = context.Operators.SameAs(bu_, bz_, "day");
+            bool? cb_ = context.Operators.And(bp_, ca_);
+            DataType cc_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Pain?.Value;
+            object cd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cc_);
+            bool? ce_ = context.Operators.Not((bool?)(cd_ is null));
+            bool? cf_ = context.Operators.And(cb_, ce_);
+            object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
+            CqlInterval<CqlDateTime> ci_ = QICoreCommon_2_1_000.Instance.toInterval(context, ch_);
+            CqlDateTime cj_ = context.Operators.Start(ci_);
+            CqlDate ck_ = context.Operators.DateFrom(cj_);
+            DataType cl_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Fatigue?.Effective;
+            object cm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cl_);
+            CqlInterval<CqlDateTime> cn_ = QICoreCommon_2_1_000.Instance.toInterval(context, cm_);
+            CqlDateTime co_ = context.Operators.Start(cn_);
+            CqlDate cp_ = context.Operators.DateFrom(co_);
+            bool? cq_ = context.Operators.SameAs(ck_, cp_, "day");
+            bool? cr_ = context.Operators.And(cf_, cq_);
+            DataType cs_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Fatigue?.Value;
+            object ct_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cs_);
+            bool? cu_ = context.Operators.Not((bool?)(ct_ is null));
+            bool? cv_ = context.Operators.And(cr_, cu_);
+            object cx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
+            CqlInterval<CqlDateTime> cy_ = QICoreCommon_2_1_000.Instance.toInterval(context, cx_);
+            CqlDateTime cz_ = context.Operators.Start(cy_);
+            CqlDate da_ = context.Operators.DateFrom(cz_);
+            DataType db_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Depression?.Effective;
+            object dc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, db_);
+            CqlInterval<CqlDateTime> dd_ = QICoreCommon_2_1_000.Instance.toInterval(context, dc_);
+            CqlDateTime de_ = context.Operators.Start(dd_);
+            CqlDate df_ = context.Operators.DateFrom(de_);
+            bool? dg_ = context.Operators.SameAs(da_, df_, "day");
+            bool? dh_ = context.Operators.And(cv_, dg_);
+            DataType di_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Depression?.Value;
+            object dj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, di_);
+            bool? dk_ = context.Operators.Not((bool?)(dj_ is null));
+            bool? dl_ = context.Operators.And(dh_, dk_);
+            object dn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
+            CqlInterval<CqlDateTime> do_ = QICoreCommon_2_1_000.Instance.toInterval(context, dn_);
+            CqlDateTime dp_ = context.Operators.Start(do_);
+            CqlDate dq_ = context.Operators.DateFrom(dp_);
+            DataType dr_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Anxiety?.Effective;
+            object ds_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dr_);
+            CqlInterval<CqlDateTime> dt_ = QICoreCommon_2_1_000.Instance.toInterval(context, ds_);
+            CqlDateTime du_ = context.Operators.Start(dt_);
+            CqlDate dv_ = context.Operators.DateFrom(du_);
+            bool? dw_ = context.Operators.SameAs(dq_, dv_, "day");
+            bool? dx_ = context.Operators.And(dl_, dw_);
+            DataType dy_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Anxiety?.Value;
+            object dz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dy_);
+            bool? ea_ = context.Operators.Not((bool?)(dz_ is null));
+            bool? eb_ = context.Operators.And(dx_, ea_);
+            DataType ec_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Sleep?.Value;
+            object ed_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ec_);
+            bool? ee_ = context.Operators.Not((bool?)(ed_ is null));
+            bool? ef_ = context.Operators.And(eb_, ee_);
 
-            return ee_;
+            return ef_;
         };
         IEnumerable<(CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)?> ag_ = context.Operators.Where<(CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)?>(ae_, af_);
         CqlDate ah_((CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)? tuple_cbgpsarvwrsewlglehinjanim)
         {
-            DataType ef_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Sleep?.Effective;
-            object eg_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ef_);
-            CqlInterval<CqlDateTime> eh_ = QICoreCommon_2_1_000.Instance.toInterval(context, eg_);
-            CqlDateTime ei_ = context.Operators.Start(eh_);
-            CqlDate ej_ = context.Operators.DateFrom(ei_);
+            DataType eg_ = tuple_cbgpsarvwrsewlglehinjanim?.Promis29Sleep?.Effective;
+            object eh_ = FHIRHelpers_4_4_000.Instance.ToValue(context, eg_);
+            CqlInterval<CqlDateTime> ei_ = QICoreCommon_2_1_000.Instance.toInterval(context, eh_);
+            CqlDateTime ej_ = context.Operators.Start(ei_);
+            CqlDate ek_ = context.Operators.DateFrom(ej_);
 
-            return ej_;
+            return ek_;
         };
         IEnumerable<CqlDate> ai_ = context.Operators.Select<(CqlTupleMetadata, Observation Promis29Sleep, Observation Promis29SocialRoles, Observation Promis29Physical, Observation Promis29Pain, Observation Promis29Fatigue, Observation Promis29Depression, Observation Promis29Anxiety)?, CqlDate>(ag_, ah_);
+        IEnumerable<CqlDate> aj_ = context.Operators.Distinct<CqlDate>(ai_);
 
-        return ai_;
+        return aj_;
     }
 
 
@@ -725,59 +729,60 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
         (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
         {
-            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? l_ = (CqlTupleMetadata_DSZKEYVbCINNIeAQiZdVaEJhG, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? m_ = (CqlTupleMetadata_DSZKEYVbCINNIeAQiZdVaEJhG, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
-            return l_;
+            return m_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?>(d_, e_);
         bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? tuple_kmpntxjuhkpbcwgftqigieao)
         {
-            Period m_ = tuple_kmpntxjuhkpbcwgftqigieao?.ValidEncounters?.Period;
-            CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_2_1_000.Instance.toInterval(context, n_ as object);
-            CqlDateTime p_ = context.Operators.End(o_);
-            CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-            CqlDateTime r_ = context.Operators.End(q_);
-            CqlQuantity s_ = context.Operators.Quantity(180m, "days");
-            CqlDateTime t_ = context.Operators.Subtract(r_, s_);
-            bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
-            CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_kmpntxjuhkpbcwgftqigieao?.InitialPROMIS29Date);
-            CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_ as object);
-            CqlDateTime z_ = context.Operators.End(y_);
-            CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
-            CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
-            CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_1_000.Instance.toInterval(context, ad_ as object);
-            CqlDateTime af_ = context.Operators.End(ae_);
-            CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
-            bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
-            CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_1_000.Instance.toInterval(context, aj_ as object);
-            CqlDateTime al_ = context.Operators.End(ak_);
-            bool? am_ = context.Operators.Not((bool?)(al_ is null));
-            bool? an_ = context.Operators.And(ah_, am_);
-            bool? ao_ = context.Operators.And(u_, an_);
-            CqlDateTime ap_ = context.Operators.ConvertDateToDateTime(tuple_kmpntxjuhkpbcwgftqigieao?.FollowupPROMIS29Date);
-            CqlDate aq_ = context.Operators.DateFrom(ap_);
-            CqlDate as_ = context.Operators.DateFrom(v_);
-            CqlQuantity at_ = context.Operators.Quantity(30m, "days");
-            CqlDate au_ = context.Operators.Add(as_, at_);
-            CqlDate aw_ = context.Operators.DateFrom(v_);
-            CqlDate ay_ = context.Operators.Add(aw_, s_);
-            CqlInterval<CqlDate> az_ = context.Operators.Interval(au_, ay_, true, true);
-            bool? ba_ = context.Operators.In<CqlDate>(aq_, az_, "day");
-            bool? bb_ = context.Operators.And(ao_, ba_);
+            Period n_ = tuple_kmpntxjuhkpbcwgftqigieao?.ValidEncounters?.Period;
+            CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> p_ = QICoreCommon_2_1_000.Instance.toInterval(context, o_ as object);
+            CqlDateTime q_ = context.Operators.End(p_);
+            CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
+            CqlDateTime s_ = context.Operators.End(r_);
+            CqlQuantity t_ = context.Operators.Quantity(180m, "days");
+            CqlDateTime u_ = context.Operators.Subtract(s_, t_);
+            bool? v_ = context.Operators.SameOrBefore(q_, u_, "day");
+            CqlDateTime w_ = context.Operators.ConvertDateToDateTime(tuple_kmpntxjuhkpbcwgftqigieao?.InitialPROMIS29Date);
+            CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> z_ = QICoreCommon_2_1_000.Instance.toInterval(context, y_ as object);
+            CqlDateTime aa_ = context.Operators.End(z_);
+            CqlQuantity ab_ = context.Operators.Quantity(14m, "days");
+            CqlDateTime ac_ = context.Operators.Subtract(aa_, ab_);
+            CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> af_ = QICoreCommon_2_1_000.Instance.toInterval(context, ae_ as object);
+            CqlDateTime ag_ = context.Operators.End(af_);
+            CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ac_, ag_, true, true);
+            bool? ai_ = context.Operators.In<CqlDateTime>(w_, ah_, "day");
+            CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_ as object);
+            CqlDateTime am_ = context.Operators.End(al_);
+            bool? an_ = context.Operators.Not((bool?)(am_ is null));
+            bool? ao_ = context.Operators.And(ai_, an_);
+            bool? ap_ = context.Operators.And(v_, ao_);
+            CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(tuple_kmpntxjuhkpbcwgftqigieao?.FollowupPROMIS29Date);
+            CqlDate ar_ = context.Operators.DateFrom(aq_);
+            CqlDate at_ = context.Operators.DateFrom(w_);
+            CqlQuantity au_ = context.Operators.Quantity(30m, "days");
+            CqlDate av_ = context.Operators.Add(at_, au_);
+            CqlDate ax_ = context.Operators.DateFrom(w_);
+            CqlDate az_ = context.Operators.Add(ax_, t_);
+            CqlInterval<CqlDate> ba_ = context.Operators.Interval(av_, az_, true, true);
+            bool? bb_ = context.Operators.In<CqlDate>(ar_, ba_, "day");
+            bool? bc_ = context.Operators.And(ap_, bb_);
 
-            return bb_;
+            return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?>(f_, g_);
         Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? tuple_kmpntxjuhkpbcwgftqigieao) => 
             tuple_kmpntxjuhkpbcwgftqigieao?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?, Encounter>(h_, i_);
-        bool? k_ = context.Operators.Exists<Encounter>(j_);
+        IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
+        bool? l_ = context.Operators.Exists<Encounter>(k_);
 
-        return k_;
+        return l_;
     }
 
 
@@ -795,49 +800,50 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
         (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple)
         {
-            (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? p_ = (CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH, _valueTuple.Item1, _valueTuple.Item2);
+            (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? q_ = (CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH, _valueTuple.Item1, _valueTuple.Item2);
 
-            return p_;
+            return q_;
         };
         IEnumerable<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(i_, j_);
         bool? l_((CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh)
         {
-            DataType q_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Effective;
-            object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-            CqlInterval<CqlDateTime> s_ = QICoreCommon_2_1_000.Instance.toInterval(context, r_);
-            CqlDateTime t_ = context.Operators.Start(s_);
-            CqlDate u_ = context.Operators.DateFrom(t_);
-            DataType v_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Effective;
-            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-            CqlInterval<CqlDateTime> x_ = QICoreCommon_2_1_000.Instance.toInterval(context, w_);
-            CqlDateTime y_ = context.Operators.Start(x_);
-            CqlDate z_ = context.Operators.DateFrom(y_);
-            bool? aa_ = context.Operators.SameAs(u_, z_, "day");
-            DataType ab_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Value;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            bool? ad_ = context.Operators.Not((bool?)(ac_ is null));
-            bool? ae_ = context.Operators.And(aa_, ad_);
-            DataType af_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Value;
-            object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-            bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
-            bool? ai_ = context.Operators.And(ae_, ah_);
+            DataType r_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Effective;
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+            CqlInterval<CqlDateTime> t_ = QICoreCommon_2_1_000.Instance.toInterval(context, s_);
+            CqlDateTime u_ = context.Operators.Start(t_);
+            CqlDate v_ = context.Operators.DateFrom(u_);
+            DataType w_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Effective;
+            object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+            CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_);
+            CqlDateTime z_ = context.Operators.Start(y_);
+            CqlDate aa_ = context.Operators.DateFrom(z_);
+            bool? ab_ = context.Operators.SameAs(v_, aa_, "day");
+            DataType ac_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Value;
+            object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+            bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
+            bool? af_ = context.Operators.And(ab_, ae_);
+            DataType ag_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Value;
+            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+            bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
+            bool? aj_ = context.Operators.And(af_, ai_);
 
-            return ai_;
+            return aj_;
         };
         IEnumerable<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> m_ = context.Operators.Where<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(k_, l_);
         CqlDate n_((CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh)
         {
-            DataType aj_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Effective;
-            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_);
-            CqlDateTime am_ = context.Operators.Start(al_);
-            CqlDate an_ = context.Operators.DateFrom(am_);
+            DataType ak_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Effective;
+            object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+            CqlInterval<CqlDateTime> am_ = QICoreCommon_2_1_000.Instance.toInterval(context, al_);
+            CqlDateTime an_ = context.Operators.Start(am_);
+            CqlDate ao_ = context.Operators.DateFrom(an_);
 
-            return an_;
+            return ao_;
         };
         IEnumerable<CqlDate> o_ = context.Operators.Select<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?, CqlDate>(m_, n_);
+        IEnumerable<CqlDate> p_ = context.Operators.Distinct<CqlDate>(o_);
 
-        return o_;
+        return p_;
     }
 
 
@@ -849,59 +855,60 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
         (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
         {
-            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? l_ = (CqlTupleMetadata_FQKGdEYLiDFGMNAUAMETIHUQT, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? m_ = (CqlTupleMetadata_FQKGdEYLiDFGMNAUAMETIHUQT, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
-            return l_;
+            return m_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?>(d_, e_);
         bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? tuple_fppktdiagiekhptnsbacpswh)
         {
-            Period m_ = tuple_fppktdiagiekhptnsbacpswh?.ValidEncounters?.Period;
-            CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_2_1_000.Instance.toInterval(context, n_ as object);
-            CqlDateTime p_ = context.Operators.End(o_);
-            CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-            CqlDateTime r_ = context.Operators.End(q_);
-            CqlQuantity s_ = context.Operators.Quantity(180m, "days");
-            CqlDateTime t_ = context.Operators.Subtract(r_, s_);
-            bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
-            CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_fppktdiagiekhptnsbacpswh?.InitialVR12ObliqueDate);
-            CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_ as object);
-            CqlDateTime z_ = context.Operators.End(y_);
-            CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
-            CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
-            CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_1_000.Instance.toInterval(context, ad_ as object);
-            CqlDateTime af_ = context.Operators.End(ae_);
-            CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
-            bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
-            CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_1_000.Instance.toInterval(context, aj_ as object);
-            CqlDateTime al_ = context.Operators.End(ak_);
-            bool? am_ = context.Operators.Not((bool?)(al_ is null));
-            bool? an_ = context.Operators.And(ah_, am_);
-            bool? ao_ = context.Operators.And(u_, an_);
-            CqlDateTime ap_ = context.Operators.ConvertDateToDateTime(tuple_fppktdiagiekhptnsbacpswh?.FollowupVR12ObliqueDate);
-            CqlDate aq_ = context.Operators.DateFrom(ap_);
-            CqlDate as_ = context.Operators.DateFrom(v_);
-            CqlQuantity at_ = context.Operators.Quantity(30m, "days");
-            CqlDate au_ = context.Operators.Add(as_, at_);
-            CqlDate aw_ = context.Operators.DateFrom(v_);
-            CqlDate ay_ = context.Operators.Add(aw_, s_);
-            CqlInterval<CqlDate> az_ = context.Operators.Interval(au_, ay_, true, true);
-            bool? ba_ = context.Operators.In<CqlDate>(aq_, az_, "day");
-            bool? bb_ = context.Operators.And(ao_, ba_);
+            Period n_ = tuple_fppktdiagiekhptnsbacpswh?.ValidEncounters?.Period;
+            CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> p_ = QICoreCommon_2_1_000.Instance.toInterval(context, o_ as object);
+            CqlDateTime q_ = context.Operators.End(p_);
+            CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
+            CqlDateTime s_ = context.Operators.End(r_);
+            CqlQuantity t_ = context.Operators.Quantity(180m, "days");
+            CqlDateTime u_ = context.Operators.Subtract(s_, t_);
+            bool? v_ = context.Operators.SameOrBefore(q_, u_, "day");
+            CqlDateTime w_ = context.Operators.ConvertDateToDateTime(tuple_fppktdiagiekhptnsbacpswh?.InitialVR12ObliqueDate);
+            CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> z_ = QICoreCommon_2_1_000.Instance.toInterval(context, y_ as object);
+            CqlDateTime aa_ = context.Operators.End(z_);
+            CqlQuantity ab_ = context.Operators.Quantity(14m, "days");
+            CqlDateTime ac_ = context.Operators.Subtract(aa_, ab_);
+            CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> af_ = QICoreCommon_2_1_000.Instance.toInterval(context, ae_ as object);
+            CqlDateTime ag_ = context.Operators.End(af_);
+            CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ac_, ag_, true, true);
+            bool? ai_ = context.Operators.In<CqlDateTime>(w_, ah_, "day");
+            CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_ as object);
+            CqlDateTime am_ = context.Operators.End(al_);
+            bool? an_ = context.Operators.Not((bool?)(am_ is null));
+            bool? ao_ = context.Operators.And(ai_, an_);
+            bool? ap_ = context.Operators.And(v_, ao_);
+            CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(tuple_fppktdiagiekhptnsbacpswh?.FollowupVR12ObliqueDate);
+            CqlDate ar_ = context.Operators.DateFrom(aq_);
+            CqlDate at_ = context.Operators.DateFrom(w_);
+            CqlQuantity au_ = context.Operators.Quantity(30m, "days");
+            CqlDate av_ = context.Operators.Add(at_, au_);
+            CqlDate ax_ = context.Operators.DateFrom(w_);
+            CqlDate az_ = context.Operators.Add(ax_, t_);
+            CqlInterval<CqlDate> ba_ = context.Operators.Interval(av_, az_, true, true);
+            bool? bb_ = context.Operators.In<CqlDate>(ar_, ba_, "day");
+            bool? bc_ = context.Operators.And(ap_, bb_);
 
-            return bb_;
+            return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?>(f_, g_);
         Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? tuple_fppktdiagiekhptnsbacpswh) => 
             tuple_fppktdiagiekhptnsbacpswh?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?, Encounter>(h_, i_);
-        bool? k_ = context.Operators.Exists<Encounter>(j_);
+        IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
+        bool? l_ = context.Operators.Exists<Encounter>(k_);
 
-        return k_;
+        return l_;
     }
 
 
@@ -919,49 +926,50 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
         (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple)
         {
-            (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? p_ = (CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH, _valueTuple.Item1, _valueTuple.Item2);
+            (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? q_ = (CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH, _valueTuple.Item1, _valueTuple.Item2);
 
-            return p_;
+            return q_;
         };
         IEnumerable<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(i_, j_);
         bool? l_((CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh)
         {
-            DataType q_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Effective;
-            object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-            CqlInterval<CqlDateTime> s_ = QICoreCommon_2_1_000.Instance.toInterval(context, r_);
-            CqlDateTime t_ = context.Operators.Start(s_);
-            CqlDate u_ = context.Operators.DateFrom(t_);
-            DataType v_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Effective;
-            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-            CqlInterval<CqlDateTime> x_ = QICoreCommon_2_1_000.Instance.toInterval(context, w_);
-            CqlDateTime y_ = context.Operators.Start(x_);
-            CqlDate z_ = context.Operators.DateFrom(y_);
-            bool? aa_ = context.Operators.SameAs(u_, z_, "day");
-            DataType ab_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Value;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            bool? ad_ = context.Operators.Not((bool?)(ac_ is null));
-            bool? ae_ = context.Operators.And(aa_, ad_);
-            DataType af_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Value;
-            object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-            bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
-            bool? ai_ = context.Operators.And(ae_, ah_);
+            DataType r_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Effective;
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+            CqlInterval<CqlDateTime> t_ = QICoreCommon_2_1_000.Instance.toInterval(context, s_);
+            CqlDateTime u_ = context.Operators.Start(t_);
+            CqlDate v_ = context.Operators.DateFrom(u_);
+            DataType w_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Effective;
+            object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+            CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_);
+            CqlDateTime z_ = context.Operators.Start(y_);
+            CqlDate aa_ = context.Operators.DateFrom(z_);
+            bool? ab_ = context.Operators.SameAs(v_, aa_, "day");
+            DataType ac_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Value;
+            object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+            bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
+            bool? af_ = context.Operators.And(ab_, ae_);
+            DataType ag_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12PhysicalAssessment?.Value;
+            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+            bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
+            bool? aj_ = context.Operators.And(af_, ai_);
 
-            return ai_;
+            return aj_;
         };
         IEnumerable<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?> m_ = context.Operators.Where<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?>(k_, l_);
         CqlDate n_((CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)? tuple_gadrfkrahuugjcvhwqwrujhrh)
         {
-            DataType aj_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Effective;
-            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_);
-            CqlDateTime am_ = context.Operators.Start(al_);
-            CqlDate an_ = context.Operators.DateFrom(am_);
+            DataType ak_ = tuple_gadrfkrahuugjcvhwqwrujhrh?.VR12MentalAssessment?.Effective;
+            object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+            CqlInterval<CqlDateTime> am_ = QICoreCommon_2_1_000.Instance.toInterval(context, al_);
+            CqlDateTime an_ = context.Operators.Start(am_);
+            CqlDate ao_ = context.Operators.DateFrom(an_);
 
-            return an_;
+            return ao_;
         };
         IEnumerable<CqlDate> o_ = context.Operators.Select<(CqlTupleMetadata, Observation VR12MentalAssessment, Observation VR12PhysicalAssessment)?, CqlDate>(m_, n_);
+        IEnumerable<CqlDate> p_ = context.Operators.Distinct<CqlDate>(o_);
 
-        return o_;
+        return p_;
     }
 
 
@@ -973,59 +981,60 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
         (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
         {
-            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? l_ = (CqlTupleMetadata_HSSAQEFQAOXLjUcOKGgicELWB, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? m_ = (CqlTupleMetadata_HSSAQEFQAOXLjUcOKGgicELWB, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
-            return l_;
+            return m_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?>(d_, e_);
         bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? tuple_fansvmjaedmvsdoyrozxdlsai)
         {
-            Period m_ = tuple_fansvmjaedmvsdoyrozxdlsai?.ValidEncounters?.Period;
-            CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_2_1_000.Instance.toInterval(context, n_ as object);
-            CqlDateTime p_ = context.Operators.End(o_);
-            CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-            CqlDateTime r_ = context.Operators.End(q_);
-            CqlQuantity s_ = context.Operators.Quantity(180m, "days");
-            CqlDateTime t_ = context.Operators.Subtract(r_, s_);
-            bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
-            CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_fansvmjaedmvsdoyrozxdlsai?.InitialVR12OrthogonalDate);
-            CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_ as object);
-            CqlDateTime z_ = context.Operators.End(y_);
-            CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
-            CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
-            CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_1_000.Instance.toInterval(context, ad_ as object);
-            CqlDateTime af_ = context.Operators.End(ae_);
-            CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
-            bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
-            CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_1_000.Instance.toInterval(context, aj_ as object);
-            CqlDateTime al_ = context.Operators.End(ak_);
-            bool? am_ = context.Operators.Not((bool?)(al_ is null));
-            bool? an_ = context.Operators.And(ah_, am_);
-            bool? ao_ = context.Operators.And(u_, an_);
-            CqlDateTime ap_ = context.Operators.ConvertDateToDateTime(tuple_fansvmjaedmvsdoyrozxdlsai?.FollowupVR12OrthogonalDate);
-            CqlDate aq_ = context.Operators.DateFrom(ap_);
-            CqlDate as_ = context.Operators.DateFrom(v_);
-            CqlQuantity at_ = context.Operators.Quantity(30m, "days");
-            CqlDate au_ = context.Operators.Add(as_, at_);
-            CqlDate aw_ = context.Operators.DateFrom(v_);
-            CqlDate ay_ = context.Operators.Add(aw_, s_);
-            CqlInterval<CqlDate> az_ = context.Operators.Interval(au_, ay_, true, true);
-            bool? ba_ = context.Operators.In<CqlDate>(aq_, az_, "day");
-            bool? bb_ = context.Operators.And(ao_, ba_);
+            Period n_ = tuple_fansvmjaedmvsdoyrozxdlsai?.ValidEncounters?.Period;
+            CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> p_ = QICoreCommon_2_1_000.Instance.toInterval(context, o_ as object);
+            CqlDateTime q_ = context.Operators.End(p_);
+            CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
+            CqlDateTime s_ = context.Operators.End(r_);
+            CqlQuantity t_ = context.Operators.Quantity(180m, "days");
+            CqlDateTime u_ = context.Operators.Subtract(s_, t_);
+            bool? v_ = context.Operators.SameOrBefore(q_, u_, "day");
+            CqlDateTime w_ = context.Operators.ConvertDateToDateTime(tuple_fansvmjaedmvsdoyrozxdlsai?.InitialVR12OrthogonalDate);
+            CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> z_ = QICoreCommon_2_1_000.Instance.toInterval(context, y_ as object);
+            CqlDateTime aa_ = context.Operators.End(z_);
+            CqlQuantity ab_ = context.Operators.Quantity(14m, "days");
+            CqlDateTime ac_ = context.Operators.Subtract(aa_, ab_);
+            CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> af_ = QICoreCommon_2_1_000.Instance.toInterval(context, ae_ as object);
+            CqlDateTime ag_ = context.Operators.End(af_);
+            CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ac_, ag_, true, true);
+            bool? ai_ = context.Operators.In<CqlDateTime>(w_, ah_, "day");
+            CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_ as object);
+            CqlDateTime am_ = context.Operators.End(al_);
+            bool? an_ = context.Operators.Not((bool?)(am_ is null));
+            bool? ao_ = context.Operators.And(ai_, an_);
+            bool? ap_ = context.Operators.And(v_, ao_);
+            CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(tuple_fansvmjaedmvsdoyrozxdlsai?.FollowupVR12OrthogonalDate);
+            CqlDate ar_ = context.Operators.DateFrom(aq_);
+            CqlDate at_ = context.Operators.DateFrom(w_);
+            CqlQuantity au_ = context.Operators.Quantity(30m, "days");
+            CqlDate av_ = context.Operators.Add(at_, au_);
+            CqlDate ax_ = context.Operators.DateFrom(w_);
+            CqlDate az_ = context.Operators.Add(ax_, t_);
+            CqlInterval<CqlDate> ba_ = context.Operators.Interval(av_, az_, true, true);
+            bool? bb_ = context.Operators.In<CqlDate>(ar_, ba_, "day");
+            bool? bc_ = context.Operators.And(ap_, bb_);
 
-            return bb_;
+            return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?>(f_, g_);
         Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? tuple_fansvmjaedmvsdoyrozxdlsai) => 
             tuple_fansvmjaedmvsdoyrozxdlsai?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?, Encounter>(h_, i_);
-        bool? k_ = context.Operators.Exists<Encounter>(j_);
+        IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
+        bool? l_ = context.Operators.Exists<Encounter>(k_);
 
-        return k_;
+        return l_;
     }
 
 
@@ -1043,49 +1052,50 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
         (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple)
         {
-            (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? p_ = (CqlTupleMetadata_DUcFTCLcQEWDGGQdFCWTHFaUK, _valueTuple.Item1, _valueTuple.Item2);
+            (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? q_ = (CqlTupleMetadata_DUcFTCLcQEWDGGQdFCWTHFaUK, _valueTuple.Item1, _valueTuple.Item2);
 
-            return p_;
+            return q_;
         };
         IEnumerable<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?>(i_, j_);
         bool? l_((CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? tuple_ducftclcqewdggqdfcwthfauk)
         {
-            DataType q_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Effective;
-            object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-            CqlInterval<CqlDateTime> s_ = QICoreCommon_2_1_000.Instance.toInterval(context, r_);
-            CqlDateTime t_ = context.Operators.Start(s_);
-            CqlDate u_ = context.Operators.DateFrom(t_);
-            DataType v_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36PhysicalAssessment?.Effective;
-            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-            CqlInterval<CqlDateTime> x_ = QICoreCommon_2_1_000.Instance.toInterval(context, w_);
-            CqlDateTime y_ = context.Operators.Start(x_);
-            CqlDate z_ = context.Operators.DateFrom(y_);
-            bool? aa_ = context.Operators.SameAs(u_, z_, "day");
-            DataType ab_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Value;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            bool? ad_ = context.Operators.Not((bool?)(ac_ is null));
-            bool? ae_ = context.Operators.And(aa_, ad_);
-            DataType af_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36PhysicalAssessment?.Value;
-            object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-            bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
-            bool? ai_ = context.Operators.And(ae_, ah_);
+            DataType r_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Effective;
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+            CqlInterval<CqlDateTime> t_ = QICoreCommon_2_1_000.Instance.toInterval(context, s_);
+            CqlDateTime u_ = context.Operators.Start(t_);
+            CqlDate v_ = context.Operators.DateFrom(u_);
+            DataType w_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36PhysicalAssessment?.Effective;
+            object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+            CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_);
+            CqlDateTime z_ = context.Operators.Start(y_);
+            CqlDate aa_ = context.Operators.DateFrom(z_);
+            bool? ab_ = context.Operators.SameAs(v_, aa_, "day");
+            DataType ac_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Value;
+            object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+            bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
+            bool? af_ = context.Operators.And(ab_, ae_);
+            DataType ag_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36PhysicalAssessment?.Value;
+            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+            bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
+            bool? aj_ = context.Operators.And(af_, ai_);
 
-            return ai_;
+            return aj_;
         };
         IEnumerable<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?> m_ = context.Operators.Where<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?>(k_, l_);
         CqlDate n_((CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? tuple_ducftclcqewdggqdfcwthfauk)
         {
-            DataType aj_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Effective;
-            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_);
-            CqlDateTime am_ = context.Operators.Start(al_);
-            CqlDate an_ = context.Operators.DateFrom(am_);
+            DataType ak_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Effective;
+            object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+            CqlInterval<CqlDateTime> am_ = QICoreCommon_2_1_000.Instance.toInterval(context, al_);
+            CqlDateTime an_ = context.Operators.Start(am_);
+            CqlDate ao_ = context.Operators.DateFrom(an_);
 
-            return an_;
+            return ao_;
         };
         IEnumerable<CqlDate> o_ = context.Operators.Select<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?, CqlDate>(m_, n_);
+        IEnumerable<CqlDate> p_ = context.Operators.Distinct<CqlDate>(o_);
 
-        return o_;
+        return p_;
     }
 
 
@@ -1097,59 +1107,60 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
         (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
         {
-            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? l_ = (CqlTupleMetadata_HQfcMfhQUSTNYMWSgJHiFeahQ, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? m_ = (CqlTupleMetadata_HQfcMfhQUSTNYMWSgJHiFeahQ, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
-            return l_;
+            return m_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?>(d_, e_);
         bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? tuple_elxicyhrdpyzpqyjphdifbiga)
         {
-            Period m_ = tuple_elxicyhrdpyzpqyjphdifbiga?.ValidEncounters?.Period;
-            CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_2_1_000.Instance.toInterval(context, n_ as object);
-            CqlDateTime p_ = context.Operators.End(o_);
-            CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-            CqlDateTime r_ = context.Operators.End(q_);
-            CqlQuantity s_ = context.Operators.Quantity(180m, "days");
-            CqlDateTime t_ = context.Operators.Subtract(r_, s_);
-            bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
-            CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_elxicyhrdpyzpqyjphdifbiga?.InitialVR36ObliqueDate);
-            CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_ as object);
-            CqlDateTime z_ = context.Operators.End(y_);
-            CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
-            CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
-            CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_1_000.Instance.toInterval(context, ad_ as object);
-            CqlDateTime af_ = context.Operators.End(ae_);
-            CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
-            bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
-            CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_1_000.Instance.toInterval(context, aj_ as object);
-            CqlDateTime al_ = context.Operators.End(ak_);
-            bool? am_ = context.Operators.Not((bool?)(al_ is null));
-            bool? an_ = context.Operators.And(ah_, am_);
-            bool? ao_ = context.Operators.And(u_, an_);
-            CqlDateTime ap_ = context.Operators.ConvertDateToDateTime(tuple_elxicyhrdpyzpqyjphdifbiga?.FollowupVR36ObliqueDate);
-            CqlDate aq_ = context.Operators.DateFrom(ap_);
-            CqlDate as_ = context.Operators.DateFrom(v_);
-            CqlQuantity at_ = context.Operators.Quantity(30m, "days");
-            CqlDate au_ = context.Operators.Add(as_, at_);
-            CqlDate aw_ = context.Operators.DateFrom(v_);
-            CqlDate ay_ = context.Operators.Add(aw_, s_);
-            CqlInterval<CqlDate> az_ = context.Operators.Interval(au_, ay_, true, true);
-            bool? ba_ = context.Operators.In<CqlDate>(aq_, az_, "day");
-            bool? bb_ = context.Operators.And(ao_, ba_);
+            Period n_ = tuple_elxicyhrdpyzpqyjphdifbiga?.ValidEncounters?.Period;
+            CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> p_ = QICoreCommon_2_1_000.Instance.toInterval(context, o_ as object);
+            CqlDateTime q_ = context.Operators.End(p_);
+            CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
+            CqlDateTime s_ = context.Operators.End(r_);
+            CqlQuantity t_ = context.Operators.Quantity(180m, "days");
+            CqlDateTime u_ = context.Operators.Subtract(s_, t_);
+            bool? v_ = context.Operators.SameOrBefore(q_, u_, "day");
+            CqlDateTime w_ = context.Operators.ConvertDateToDateTime(tuple_elxicyhrdpyzpqyjphdifbiga?.InitialVR36ObliqueDate);
+            CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> z_ = QICoreCommon_2_1_000.Instance.toInterval(context, y_ as object);
+            CqlDateTime aa_ = context.Operators.End(z_);
+            CqlQuantity ab_ = context.Operators.Quantity(14m, "days");
+            CqlDateTime ac_ = context.Operators.Subtract(aa_, ab_);
+            CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> af_ = QICoreCommon_2_1_000.Instance.toInterval(context, ae_ as object);
+            CqlDateTime ag_ = context.Operators.End(af_);
+            CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ac_, ag_, true, true);
+            bool? ai_ = context.Operators.In<CqlDateTime>(w_, ah_, "day");
+            CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_ as object);
+            CqlDateTime am_ = context.Operators.End(al_);
+            bool? an_ = context.Operators.Not((bool?)(am_ is null));
+            bool? ao_ = context.Operators.And(ai_, an_);
+            bool? ap_ = context.Operators.And(v_, ao_);
+            CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(tuple_elxicyhrdpyzpqyjphdifbiga?.FollowupVR36ObliqueDate);
+            CqlDate ar_ = context.Operators.DateFrom(aq_);
+            CqlDate at_ = context.Operators.DateFrom(w_);
+            CqlQuantity au_ = context.Operators.Quantity(30m, "days");
+            CqlDate av_ = context.Operators.Add(at_, au_);
+            CqlDate ax_ = context.Operators.DateFrom(w_);
+            CqlDate az_ = context.Operators.Add(ax_, t_);
+            CqlInterval<CqlDate> ba_ = context.Operators.Interval(av_, az_, true, true);
+            bool? bb_ = context.Operators.In<CqlDate>(ar_, ba_, "day");
+            bool? bc_ = context.Operators.And(ap_, bb_);
 
-            return bb_;
+            return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?>(f_, g_);
         Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? tuple_elxicyhrdpyzpqyjphdifbiga) => 
             tuple_elxicyhrdpyzpqyjphdifbiga?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?, Encounter>(h_, i_);
-        bool? k_ = context.Operators.Exists<Encounter>(j_);
+        IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
+        bool? l_ = context.Operators.Exists<Encounter>(k_);
 
-        return k_;
+        return l_;
     }
 
 
@@ -1167,49 +1178,50 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
         (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? j_(ValueTuple<Observation, Observation> _valueTuple)
         {
-            (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? p_ = (CqlTupleMetadata_DUcFTCLcQEWDGGQdFCWTHFaUK, _valueTuple.Item1, _valueTuple.Item2);
+            (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? q_ = (CqlTupleMetadata_DUcFTCLcQEWDGGQdFCWTHFaUK, _valueTuple.Item1, _valueTuple.Item2);
 
-            return p_;
+            return q_;
         };
         IEnumerable<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?>(i_, j_);
         bool? l_((CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? tuple_ducftclcqewdggqdfcwthfauk)
         {
-            DataType q_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Effective;
-            object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-            CqlInterval<CqlDateTime> s_ = QICoreCommon_2_1_000.Instance.toInterval(context, r_);
-            CqlDateTime t_ = context.Operators.Start(s_);
-            CqlDate u_ = context.Operators.DateFrom(t_);
-            DataType v_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36PhysicalAssessment?.Effective;
-            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-            CqlInterval<CqlDateTime> x_ = QICoreCommon_2_1_000.Instance.toInterval(context, w_);
-            CqlDateTime y_ = context.Operators.Start(x_);
-            CqlDate z_ = context.Operators.DateFrom(y_);
-            bool? aa_ = context.Operators.SameAs(u_, z_, "day");
-            DataType ab_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Value;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            bool? ad_ = context.Operators.Not((bool?)(ac_ is null));
-            bool? ae_ = context.Operators.And(aa_, ad_);
-            DataType af_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36PhysicalAssessment?.Value;
-            object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-            bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
-            bool? ai_ = context.Operators.And(ae_, ah_);
+            DataType r_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Effective;
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+            CqlInterval<CqlDateTime> t_ = QICoreCommon_2_1_000.Instance.toInterval(context, s_);
+            CqlDateTime u_ = context.Operators.Start(t_);
+            CqlDate v_ = context.Operators.DateFrom(u_);
+            DataType w_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36PhysicalAssessment?.Effective;
+            object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+            CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_);
+            CqlDateTime z_ = context.Operators.Start(y_);
+            CqlDate aa_ = context.Operators.DateFrom(z_);
+            bool? ab_ = context.Operators.SameAs(v_, aa_, "day");
+            DataType ac_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Value;
+            object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+            bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
+            bool? af_ = context.Operators.And(ab_, ae_);
+            DataType ag_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36PhysicalAssessment?.Value;
+            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+            bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
+            bool? aj_ = context.Operators.And(af_, ai_);
 
-            return ai_;
+            return aj_;
         };
         IEnumerable<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?> m_ = context.Operators.Where<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?>(k_, l_);
         CqlDate n_((CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)? tuple_ducftclcqewdggqdfcwthfauk)
         {
-            DataType aj_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Effective;
-            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_);
-            CqlDateTime am_ = context.Operators.Start(al_);
-            CqlDate an_ = context.Operators.DateFrom(am_);
+            DataType ak_ = tuple_ducftclcqewdggqdfcwthfauk?.VR36MentalAssessment?.Effective;
+            object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+            CqlInterval<CqlDateTime> am_ = QICoreCommon_2_1_000.Instance.toInterval(context, al_);
+            CqlDateTime an_ = context.Operators.Start(am_);
+            CqlDate ao_ = context.Operators.DateFrom(an_);
 
-            return an_;
+            return ao_;
         };
         IEnumerable<CqlDate> o_ = context.Operators.Select<(CqlTupleMetadata, Observation VR36MentalAssessment, Observation VR36PhysicalAssessment)?, CqlDate>(m_, n_);
+        IEnumerable<CqlDate> p_ = context.Operators.Distinct<CqlDate>(o_);
 
-        return o_;
+        return p_;
     }
 
 
@@ -1221,59 +1233,60 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
         (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
         {
-            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? l_ = (CqlTupleMetadata_BFZHWdOOROjSjFSECHcQiaZZZ, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? m_ = (CqlTupleMetadata_BFZHWdOOROjSjFSECHcQiaZZZ, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
-            return l_;
+            return m_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?>(d_, e_);
         bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? tuple_fucqujadjizabihdffformht)
         {
-            Period m_ = tuple_fucqujadjizabihdffformht?.ValidEncounters?.Period;
-            CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_2_1_000.Instance.toInterval(context, n_ as object);
-            CqlDateTime p_ = context.Operators.End(o_);
-            CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-            CqlDateTime r_ = context.Operators.End(q_);
-            CqlQuantity s_ = context.Operators.Quantity(180m, "days");
-            CqlDateTime t_ = context.Operators.Subtract(r_, s_);
-            bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
-            CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_fucqujadjizabihdffformht?.InitialVR36OrthogonalDate);
-            CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_ as object);
-            CqlDateTime z_ = context.Operators.End(y_);
-            CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
-            CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
-            CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_1_000.Instance.toInterval(context, ad_ as object);
-            CqlDateTime af_ = context.Operators.End(ae_);
-            CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
-            bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
-            CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_1_000.Instance.toInterval(context, aj_ as object);
-            CqlDateTime al_ = context.Operators.End(ak_);
-            bool? am_ = context.Operators.Not((bool?)(al_ is null));
-            bool? an_ = context.Operators.And(ah_, am_);
-            bool? ao_ = context.Operators.And(u_, an_);
-            CqlDateTime ap_ = context.Operators.ConvertDateToDateTime(tuple_fucqujadjizabihdffformht?.FollowupVR36OrthogonalDate);
-            CqlDate aq_ = context.Operators.DateFrom(ap_);
-            CqlDate as_ = context.Operators.DateFrom(v_);
-            CqlQuantity at_ = context.Operators.Quantity(30m, "days");
-            CqlDate au_ = context.Operators.Add(as_, at_);
-            CqlDate aw_ = context.Operators.DateFrom(v_);
-            CqlDate ay_ = context.Operators.Add(aw_, s_);
-            CqlInterval<CqlDate> az_ = context.Operators.Interval(au_, ay_, true, true);
-            bool? ba_ = context.Operators.In<CqlDate>(aq_, az_, "day");
-            bool? bb_ = context.Operators.And(ao_, ba_);
+            Period n_ = tuple_fucqujadjizabihdffformht?.ValidEncounters?.Period;
+            CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> p_ = QICoreCommon_2_1_000.Instance.toInterval(context, o_ as object);
+            CqlDateTime q_ = context.Operators.End(p_);
+            CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
+            CqlDateTime s_ = context.Operators.End(r_);
+            CqlQuantity t_ = context.Operators.Quantity(180m, "days");
+            CqlDateTime u_ = context.Operators.Subtract(s_, t_);
+            bool? v_ = context.Operators.SameOrBefore(q_, u_, "day");
+            CqlDateTime w_ = context.Operators.ConvertDateToDateTime(tuple_fucqujadjizabihdffformht?.InitialVR36OrthogonalDate);
+            CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> z_ = QICoreCommon_2_1_000.Instance.toInterval(context, y_ as object);
+            CqlDateTime aa_ = context.Operators.End(z_);
+            CqlQuantity ab_ = context.Operators.Quantity(14m, "days");
+            CqlDateTime ac_ = context.Operators.Subtract(aa_, ab_);
+            CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> af_ = QICoreCommon_2_1_000.Instance.toInterval(context, ae_ as object);
+            CqlDateTime ag_ = context.Operators.End(af_);
+            CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ac_, ag_, true, true);
+            bool? ai_ = context.Operators.In<CqlDateTime>(w_, ah_, "day");
+            CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_ as object);
+            CqlDateTime am_ = context.Operators.End(al_);
+            bool? an_ = context.Operators.Not((bool?)(am_ is null));
+            bool? ao_ = context.Operators.And(ai_, an_);
+            bool? ap_ = context.Operators.And(v_, ao_);
+            CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(tuple_fucqujadjizabihdffformht?.FollowupVR36OrthogonalDate);
+            CqlDate ar_ = context.Operators.DateFrom(aq_);
+            CqlDate at_ = context.Operators.DateFrom(w_);
+            CqlQuantity au_ = context.Operators.Quantity(30m, "days");
+            CqlDate av_ = context.Operators.Add(at_, au_);
+            CqlDate ax_ = context.Operators.DateFrom(w_);
+            CqlDate az_ = context.Operators.Add(ax_, t_);
+            CqlInterval<CqlDate> ba_ = context.Operators.Interval(av_, az_, true, true);
+            bool? bb_ = context.Operators.In<CqlDate>(ar_, ba_, "day");
+            bool? bc_ = context.Operators.And(ap_, bb_);
 
-            return bb_;
+            return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?>(f_, g_);
         Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? tuple_fucqujadjizabihdffformht) => 
             tuple_fucqujadjizabihdffformht?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?, Encounter>(h_, i_);
-        bool? k_ = context.Operators.Exists<Encounter>(j_);
+        IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
+        bool? l_ = context.Operators.Exists<Encounter>(k_);
 
-        return k_;
+        return l_;
     }
 
 
@@ -1291,49 +1304,50 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
         (CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)? j_(ValueTuple<Observation, Observation> _valueTuple)
         {
-            (CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)? p_ = (CqlTupleMetadata_EBLWeAeedHPAfOJXKPZJKSCUf, _valueTuple.Item1, _valueTuple.Item2);
+            (CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)? q_ = (CqlTupleMetadata_EBLWeAeedHPAfOJXKPZJKSCUf, _valueTuple.Item1, _valueTuple.Item2);
 
-            return p_;
+            return q_;
         };
         IEnumerable<(CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)?>(i_, j_);
         bool? l_((CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)? tuple_fnofxckadaeusjerhbdqfoshe)
         {
-            DataType q_ = tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQPhysical?.Effective;
-            object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-            CqlInterval<CqlDateTime> s_ = QICoreCommon_2_1_000.Instance.toInterval(context, r_);
-            CqlDateTime t_ = context.Operators.Start(s_);
-            CqlDate u_ = context.Operators.DateFrom(t_);
-            DataType v_ = tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQEmotional?.Effective;
-            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-            CqlInterval<CqlDateTime> x_ = QICoreCommon_2_1_000.Instance.toInterval(context, w_);
-            CqlDateTime y_ = context.Operators.Start(x_);
-            CqlDate z_ = context.Operators.DateFrom(y_);
-            bool? aa_ = context.Operators.SameAs(u_, z_, "day");
-            DataType ab_ = tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQPhysical?.Value;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            bool? ad_ = context.Operators.Not((bool?)(ac_ is null));
-            bool? ae_ = context.Operators.And(aa_, ad_);
-            DataType af_ = tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQEmotional?.Value;
-            object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-            bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
-            bool? ai_ = context.Operators.And(ae_, ah_);
+            DataType r_ = tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQPhysical?.Effective;
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+            CqlInterval<CqlDateTime> t_ = QICoreCommon_2_1_000.Instance.toInterval(context, s_);
+            CqlDateTime u_ = context.Operators.Start(t_);
+            CqlDate v_ = context.Operators.DateFrom(u_);
+            DataType w_ = tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQEmotional?.Effective;
+            object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+            CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_);
+            CqlDateTime z_ = context.Operators.Start(y_);
+            CqlDate aa_ = context.Operators.DateFrom(z_);
+            bool? ab_ = context.Operators.SameAs(v_, aa_, "day");
+            DataType ac_ = tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQPhysical?.Value;
+            object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+            bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
+            bool? af_ = context.Operators.And(ab_, ae_);
+            DataType ag_ = tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQEmotional?.Value;
+            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+            bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
+            bool? aj_ = context.Operators.And(af_, ai_);
 
-            return ai_;
+            return aj_;
         };
         IEnumerable<(CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)?> m_ = context.Operators.Where<(CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)?>(k_, l_);
         CqlDate n_((CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)? tuple_fnofxckadaeusjerhbdqfoshe)
         {
-            DataType aj_ = tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQPhysical?.Effective;
-            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_);
-            CqlDateTime am_ = context.Operators.Start(al_);
-            CqlDate an_ = context.Operators.DateFrom(am_);
+            DataType ak_ = tuple_fnofxckadaeusjerhbdqfoshe?.MLHFQPhysical?.Effective;
+            object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+            CqlInterval<CqlDateTime> am_ = QICoreCommon_2_1_000.Instance.toInterval(context, al_);
+            CqlDateTime an_ = context.Operators.Start(am_);
+            CqlDate ao_ = context.Operators.DateFrom(an_);
 
-            return an_;
+            return ao_;
         };
         IEnumerable<CqlDate> o_ = context.Operators.Select<(CqlTupleMetadata, Observation MLHFQPhysical, Observation MLHFQEmotional)?, CqlDate>(m_, n_);
+        IEnumerable<CqlDate> p_ = context.Operators.Distinct<CqlDate>(o_);
 
-        return o_;
+        return p_;
     }
 
 
@@ -1345,59 +1359,60 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
         (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
         {
-            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? l_ = (CqlTupleMetadata_CcaWSNDiVeaLebVKKWWWiBcEU, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? m_ = (CqlTupleMetadata_CcaWSNDiVeaLebVKKWWWiBcEU, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
-            return l_;
+            return m_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?>(d_, e_);
         bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? tuple_ncdawctnmbfmtibmihsfbaig)
         {
-            Period m_ = tuple_ncdawctnmbfmtibmihsfbaig?.ValidEncounters?.Period;
-            CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_2_1_000.Instance.toInterval(context, n_ as object);
-            CqlDateTime p_ = context.Operators.End(o_);
-            CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-            CqlDateTime r_ = context.Operators.End(q_);
-            CqlQuantity s_ = context.Operators.Quantity(180m, "days");
-            CqlDateTime t_ = context.Operators.Subtract(r_, s_);
-            bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
-            CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_ncdawctnmbfmtibmihsfbaig?.InitialMLHFQDate);
-            CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_ as object);
-            CqlDateTime z_ = context.Operators.End(y_);
-            CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
-            CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
-            CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_1_000.Instance.toInterval(context, ad_ as object);
-            CqlDateTime af_ = context.Operators.End(ae_);
-            CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
-            bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
-            CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_1_000.Instance.toInterval(context, aj_ as object);
-            CqlDateTime al_ = context.Operators.End(ak_);
-            bool? am_ = context.Operators.Not((bool?)(al_ is null));
-            bool? an_ = context.Operators.And(ah_, am_);
-            bool? ao_ = context.Operators.And(u_, an_);
-            CqlDateTime ap_ = context.Operators.ConvertDateToDateTime(tuple_ncdawctnmbfmtibmihsfbaig?.FollowupMLHFQDate);
-            CqlDate aq_ = context.Operators.DateFrom(ap_);
-            CqlDate as_ = context.Operators.DateFrom(v_);
-            CqlQuantity at_ = context.Operators.Quantity(30m, "days");
-            CqlDate au_ = context.Operators.Add(as_, at_);
-            CqlDate aw_ = context.Operators.DateFrom(v_);
-            CqlDate ay_ = context.Operators.Add(aw_, s_);
-            CqlInterval<CqlDate> az_ = context.Operators.Interval(au_, ay_, true, true);
-            bool? ba_ = context.Operators.In<CqlDate>(aq_, az_, "day");
-            bool? bb_ = context.Operators.And(ao_, ba_);
+            Period n_ = tuple_ncdawctnmbfmtibmihsfbaig?.ValidEncounters?.Period;
+            CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> p_ = QICoreCommon_2_1_000.Instance.toInterval(context, o_ as object);
+            CqlDateTime q_ = context.Operators.End(p_);
+            CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
+            CqlDateTime s_ = context.Operators.End(r_);
+            CqlQuantity t_ = context.Operators.Quantity(180m, "days");
+            CqlDateTime u_ = context.Operators.Subtract(s_, t_);
+            bool? v_ = context.Operators.SameOrBefore(q_, u_, "day");
+            CqlDateTime w_ = context.Operators.ConvertDateToDateTime(tuple_ncdawctnmbfmtibmihsfbaig?.InitialMLHFQDate);
+            CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> z_ = QICoreCommon_2_1_000.Instance.toInterval(context, y_ as object);
+            CqlDateTime aa_ = context.Operators.End(z_);
+            CqlQuantity ab_ = context.Operators.Quantity(14m, "days");
+            CqlDateTime ac_ = context.Operators.Subtract(aa_, ab_);
+            CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> af_ = QICoreCommon_2_1_000.Instance.toInterval(context, ae_ as object);
+            CqlDateTime ag_ = context.Operators.End(af_);
+            CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ac_, ag_, true, true);
+            bool? ai_ = context.Operators.In<CqlDateTime>(w_, ah_, "day");
+            CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_ as object);
+            CqlDateTime am_ = context.Operators.End(al_);
+            bool? an_ = context.Operators.Not((bool?)(am_ is null));
+            bool? ao_ = context.Operators.And(ai_, an_);
+            bool? ap_ = context.Operators.And(v_, ao_);
+            CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(tuple_ncdawctnmbfmtibmihsfbaig?.FollowupMLHFQDate);
+            CqlDate ar_ = context.Operators.DateFrom(aq_);
+            CqlDate at_ = context.Operators.DateFrom(w_);
+            CqlQuantity au_ = context.Operators.Quantity(30m, "days");
+            CqlDate av_ = context.Operators.Add(at_, au_);
+            CqlDate ax_ = context.Operators.DateFrom(w_);
+            CqlDate az_ = context.Operators.Add(ax_, t_);
+            CqlInterval<CqlDate> ba_ = context.Operators.Interval(av_, az_, true, true);
+            bool? bb_ = context.Operators.In<CqlDate>(ar_, ba_, "day");
+            bool? bc_ = context.Operators.And(ap_, bb_);
 
-            return bb_;
+            return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?>(f_, g_);
         Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? tuple_ncdawctnmbfmtibmihsfbaig) => 
             tuple_ncdawctnmbfmtibmihsfbaig?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?, Encounter>(h_, i_);
-        bool? k_ = context.Operators.Exists<Encounter>(j_);
+        IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
+        bool? l_ = context.Operators.Exists<Encounter>(k_);
 
-        return k_;
+        return l_;
     }
 
 
@@ -1415,49 +1430,50 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Observation, Observation>> i_ = context.Operators.CrossJoin<Observation, Observation>(d_, h_);
         (CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)? j_(ValueTuple<Observation, Observation> _valueTuple)
         {
-            (CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)? p_ = (CqlTupleMetadata_DFKXORghhYafccUSbQaMfNTDj, _valueTuple.Item1, _valueTuple.Item2);
+            (CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)? q_ = (CqlTupleMetadata_DFKXORghhYafccUSbQaMfNTDj, _valueTuple.Item1, _valueTuple.Item2);
 
-            return p_;
+            return q_;
         };
         IEnumerable<(CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)?> k_ = context.Operators.Select<ValueTuple<Observation, Observation>, (CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)?>(i_, j_);
         bool? l_((CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)? tuple_dfkxorghhyafccusbqamfntdj)
         {
-            DataType q_ = tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Item?.Effective;
-            object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-            CqlInterval<CqlDateTime> s_ = QICoreCommon_2_1_000.Instance.toInterval(context, r_);
-            CqlDateTime t_ = context.Operators.Start(s_);
-            CqlDate u_ = context.Operators.DateFrom(t_);
-            DataType v_ = tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Summary?.Effective;
-            object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
-            CqlInterval<CqlDateTime> x_ = QICoreCommon_2_1_000.Instance.toInterval(context, w_);
-            CqlDateTime y_ = context.Operators.Start(x_);
-            CqlDate z_ = context.Operators.DateFrom(y_);
-            bool? aa_ = context.Operators.SameAs(u_, z_, "day");
-            DataType ab_ = tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Item?.Value;
-            object ac_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ab_);
-            bool? ad_ = context.Operators.Not((bool?)(ac_ is null));
-            bool? ae_ = context.Operators.And(aa_, ad_);
-            DataType af_ = tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Summary?.Value;
-            object ag_ = FHIRHelpers_4_4_000.Instance.ToValue(context, af_);
-            bool? ah_ = context.Operators.Not((bool?)(ag_ is null));
-            bool? ai_ = context.Operators.And(ae_, ah_);
+            DataType r_ = tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Item?.Effective;
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+            CqlInterval<CqlDateTime> t_ = QICoreCommon_2_1_000.Instance.toInterval(context, s_);
+            CqlDateTime u_ = context.Operators.Start(t_);
+            CqlDate v_ = context.Operators.DateFrom(u_);
+            DataType w_ = tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Summary?.Effective;
+            object x_ = FHIRHelpers_4_4_000.Instance.ToValue(context, w_);
+            CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_);
+            CqlDateTime z_ = context.Operators.Start(y_);
+            CqlDate aa_ = context.Operators.DateFrom(z_);
+            bool? ab_ = context.Operators.SameAs(v_, aa_, "day");
+            DataType ac_ = tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Item?.Value;
+            object ad_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ac_);
+            bool? ae_ = context.Operators.Not((bool?)(ad_ is null));
+            bool? af_ = context.Operators.And(ab_, ae_);
+            DataType ag_ = tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Summary?.Value;
+            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
+            bool? ai_ = context.Operators.Not((bool?)(ah_ is null));
+            bool? aj_ = context.Operators.And(af_, ai_);
 
-            return ai_;
+            return aj_;
         };
         IEnumerable<(CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)?> m_ = context.Operators.Where<(CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)?>(k_, l_);
         CqlDate n_((CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)? tuple_dfkxorghhyafccusbqamfntdj)
         {
-            DataType aj_ = tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Item?.Effective;
-            object ak_ = FHIRHelpers_4_4_000.Instance.ToValue(context, aj_);
-            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_);
-            CqlDateTime am_ = context.Operators.Start(al_);
-            CqlDate an_ = context.Operators.DateFrom(am_);
+            DataType ak_ = tuple_dfkxorghhyafccusbqamfntdj?.KCCQ12Item?.Effective;
+            object al_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ak_);
+            CqlInterval<CqlDateTime> am_ = QICoreCommon_2_1_000.Instance.toInterval(context, al_);
+            CqlDateTime an_ = context.Operators.Start(am_);
+            CqlDate ao_ = context.Operators.DateFrom(an_);
 
-            return an_;
+            return ao_;
         };
         IEnumerable<CqlDate> o_ = context.Operators.Select<(CqlTupleMetadata, Observation KCCQ12Item, Observation KCCQ12Summary)?, CqlDate>(m_, n_);
+        IEnumerable<CqlDate> p_ = context.Operators.Distinct<CqlDate>(o_);
 
-        return o_;
+        return p_;
     }
 
 
@@ -1469,59 +1485,60 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
         (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
         {
-            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? l_ = (CqlTupleMetadata_EQQLFFBVIbLIQLiZDNfeYdMU, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? m_ = (CqlTupleMetadata_EQQLFFBVIbLIQLiZDNfeYdMU, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
-            return l_;
+            return m_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?>(d_, e_);
         bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? tuple_eoahgtwwdfqijhcjzqnvidvuo)
         {
-            Period m_ = tuple_eoahgtwwdfqijhcjzqnvidvuo?.ValidEncounters?.Period;
-            CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_2_1_000.Instance.toInterval(context, n_ as object);
-            CqlDateTime p_ = context.Operators.End(o_);
-            CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-            CqlDateTime r_ = context.Operators.End(q_);
-            CqlQuantity s_ = context.Operators.Quantity(180m, "days");
-            CqlDateTime t_ = context.Operators.Subtract(r_, s_);
-            bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
-            CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_eoahgtwwdfqijhcjzqnvidvuo?.InitialKCCQ12Date);
-            CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_ as object);
-            CqlDateTime z_ = context.Operators.End(y_);
-            CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
-            CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
-            CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_1_000.Instance.toInterval(context, ad_ as object);
-            CqlDateTime af_ = context.Operators.End(ae_);
-            CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
-            bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
-            CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_1_000.Instance.toInterval(context, aj_ as object);
-            CqlDateTime al_ = context.Operators.End(ak_);
-            bool? am_ = context.Operators.Not((bool?)(al_ is null));
-            bool? an_ = context.Operators.And(ah_, am_);
-            bool? ao_ = context.Operators.And(u_, an_);
-            CqlDateTime ap_ = context.Operators.ConvertDateToDateTime(tuple_eoahgtwwdfqijhcjzqnvidvuo?.FollowupKCCQ12Date);
-            CqlDate aq_ = context.Operators.DateFrom(ap_);
-            CqlDate as_ = context.Operators.DateFrom(v_);
-            CqlQuantity at_ = context.Operators.Quantity(30m, "days");
-            CqlDate au_ = context.Operators.Add(as_, at_);
-            CqlDate aw_ = context.Operators.DateFrom(v_);
-            CqlDate ay_ = context.Operators.Add(aw_, s_);
-            CqlInterval<CqlDate> az_ = context.Operators.Interval(au_, ay_, true, true);
-            bool? ba_ = context.Operators.In<CqlDate>(aq_, az_, "day");
-            bool? bb_ = context.Operators.And(ao_, ba_);
+            Period n_ = tuple_eoahgtwwdfqijhcjzqnvidvuo?.ValidEncounters?.Period;
+            CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> p_ = QICoreCommon_2_1_000.Instance.toInterval(context, o_ as object);
+            CqlDateTime q_ = context.Operators.End(p_);
+            CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
+            CqlDateTime s_ = context.Operators.End(r_);
+            CqlQuantity t_ = context.Operators.Quantity(180m, "days");
+            CqlDateTime u_ = context.Operators.Subtract(s_, t_);
+            bool? v_ = context.Operators.SameOrBefore(q_, u_, "day");
+            CqlDateTime w_ = context.Operators.ConvertDateToDateTime(tuple_eoahgtwwdfqijhcjzqnvidvuo?.InitialKCCQ12Date);
+            CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> z_ = QICoreCommon_2_1_000.Instance.toInterval(context, y_ as object);
+            CqlDateTime aa_ = context.Operators.End(z_);
+            CqlQuantity ab_ = context.Operators.Quantity(14m, "days");
+            CqlDateTime ac_ = context.Operators.Subtract(aa_, ab_);
+            CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> af_ = QICoreCommon_2_1_000.Instance.toInterval(context, ae_ as object);
+            CqlDateTime ag_ = context.Operators.End(af_);
+            CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ac_, ag_, true, true);
+            bool? ai_ = context.Operators.In<CqlDateTime>(w_, ah_, "day");
+            CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_ as object);
+            CqlDateTime am_ = context.Operators.End(al_);
+            bool? an_ = context.Operators.Not((bool?)(am_ is null));
+            bool? ao_ = context.Operators.And(ai_, an_);
+            bool? ap_ = context.Operators.And(v_, ao_);
+            CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(tuple_eoahgtwwdfqijhcjzqnvidvuo?.FollowupKCCQ12Date);
+            CqlDate ar_ = context.Operators.DateFrom(aq_);
+            CqlDate at_ = context.Operators.DateFrom(w_);
+            CqlQuantity au_ = context.Operators.Quantity(30m, "days");
+            CqlDate av_ = context.Operators.Add(at_, au_);
+            CqlDate ax_ = context.Operators.DateFrom(w_);
+            CqlDate az_ = context.Operators.Add(ax_, t_);
+            CqlInterval<CqlDate> ba_ = context.Operators.Interval(av_, az_, true, true);
+            bool? bb_ = context.Operators.In<CqlDate>(ar_, ba_, "day");
+            bool? bc_ = context.Operators.And(ap_, bb_);
 
-            return bb_;
+            return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?>(f_, g_);
         Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? tuple_eoahgtwwdfqijhcjzqnvidvuo) => 
             tuple_eoahgtwwdfqijhcjzqnvidvuo?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?, Encounter>(h_, i_);
-        bool? k_ = context.Operators.Exists<Encounter>(j_);
+        IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
+        bool? l_ = context.Operators.Exists<Encounter>(k_);
 
-        return k_;
+        return l_;
     }
 
 
@@ -1555,109 +1572,110 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation>> y_ = context.Operators.CrossJoin<Observation, Observation, Observation, Observation, Observation, Observation>(d_, h_, l_, p_, t_, x_);
         (CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? z_(ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation> _valueTuple)
         {
-            (CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? af_ = (CqlTupleMetadata_BbPMcXSJeOeGdRcaZWGYPhGBL, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4, _valueTuple.Item5, _valueTuple.Item6);
+            (CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? ag_ = (CqlTupleMetadata_BbPMcXSJeOeGdRcaZWGYPhGBL, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3, _valueTuple.Item4, _valueTuple.Item5, _valueTuple.Item6);
 
-            return af_;
+            return ag_;
         };
         IEnumerable<(CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)?> aa_ = context.Operators.Select<ValueTuple<Observation, Observation, Observation, Observation, Observation, Observation>, (CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)?>(y_, z_);
         bool? ab_((CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? tuple_etfcawdpmcqfbnayqdmdqqsdn)
         {
-            DataType ag_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQLifeQuality?.Effective;
-            object ah_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-            CqlInterval<CqlDateTime> ai_ = QICoreCommon_2_1_000.Instance.toInterval(context, ah_);
-            CqlDateTime aj_ = context.Operators.Start(ai_);
-            CqlDate ak_ = context.Operators.DateFrom(aj_);
-            DataType al_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSymptomStability?.Effective;
-            object am_ = FHIRHelpers_4_4_000.Instance.ToValue(context, al_);
-            CqlInterval<CqlDateTime> an_ = QICoreCommon_2_1_000.Instance.toInterval(context, am_);
-            CqlDateTime ao_ = context.Operators.Start(an_);
-            CqlDate ap_ = context.Operators.DateFrom(ao_);
-            bool? aq_ = context.Operators.SameAs(ak_, ap_, "day");
-            DataType ar_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSymptomStability?.Value;
-            object as_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ar_);
-            bool? at_ = context.Operators.Not((bool?)(as_ is null));
-            bool? au_ = context.Operators.And(aq_, at_);
-            object aw_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-            CqlInterval<CqlDateTime> ax_ = QICoreCommon_2_1_000.Instance.toInterval(context, aw_);
-            CqlDateTime ay_ = context.Operators.Start(ax_);
-            CqlDate az_ = context.Operators.DateFrom(ay_);
-            DataType ba_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSelfEfficacy?.Effective;
-            object bb_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ba_);
-            CqlInterval<CqlDateTime> bc_ = QICoreCommon_2_1_000.Instance.toInterval(context, bb_);
-            CqlDateTime bd_ = context.Operators.Start(bc_);
-            CqlDate be_ = context.Operators.DateFrom(bd_);
-            bool? bf_ = context.Operators.SameAs(az_, be_, "day");
-            bool? bg_ = context.Operators.And(au_, bf_);
-            DataType bh_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSelfEfficacy?.Value;
-            object bi_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bh_);
-            bool? bj_ = context.Operators.Not((bool?)(bi_ is null));
-            bool? bk_ = context.Operators.And(bg_, bj_);
-            object bm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-            CqlInterval<CqlDateTime> bn_ = QICoreCommon_2_1_000.Instance.toInterval(context, bm_);
-            CqlDateTime bo_ = context.Operators.Start(bn_);
-            CqlDate bp_ = context.Operators.DateFrom(bo_);
-            DataType bq_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSymptoms?.Effective;
-            object br_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bq_);
-            CqlInterval<CqlDateTime> bs_ = QICoreCommon_2_1_000.Instance.toInterval(context, br_);
-            CqlDateTime bt_ = context.Operators.Start(bs_);
-            CqlDate bu_ = context.Operators.DateFrom(bt_);
-            bool? bv_ = context.Operators.SameAs(bp_, bu_, "day");
-            bool? bw_ = context.Operators.And(bk_, bv_);
-            DataType bx_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSymptoms?.Value;
-            object by_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bx_);
-            bool? bz_ = context.Operators.Not((bool?)(by_ is null));
-            bool? ca_ = context.Operators.And(bw_, bz_);
-            object cc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-            CqlInterval<CqlDateTime> cd_ = QICoreCommon_2_1_000.Instance.toInterval(context, cc_);
-            CqlDateTime ce_ = context.Operators.Start(cd_);
-            CqlDate cf_ = context.Operators.DateFrom(ce_);
-            DataType cg_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQPhysicalLimits?.Effective;
-            object ch_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cg_);
-            CqlInterval<CqlDateTime> ci_ = QICoreCommon_2_1_000.Instance.toInterval(context, ch_);
-            CqlDateTime cj_ = context.Operators.Start(ci_);
-            CqlDate ck_ = context.Operators.DateFrom(cj_);
-            bool? cl_ = context.Operators.SameAs(cf_, ck_, "day");
-            bool? cm_ = context.Operators.And(ca_, cl_);
-            DataType cn_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQPhysicalLimits?.Value;
-            object co_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cn_);
-            bool? cp_ = context.Operators.Not((bool?)(co_ is null));
-            bool? cq_ = context.Operators.And(cm_, cp_);
-            object cs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ag_);
-            CqlInterval<CqlDateTime> ct_ = QICoreCommon_2_1_000.Instance.toInterval(context, cs_);
-            CqlDateTime cu_ = context.Operators.Start(ct_);
-            CqlDate cv_ = context.Operators.DateFrom(cu_);
-            DataType cw_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSocialLimits?.Effective;
-            object cx_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cw_);
-            CqlInterval<CqlDateTime> cy_ = QICoreCommon_2_1_000.Instance.toInterval(context, cx_);
-            CqlDateTime cz_ = context.Operators.Start(cy_);
-            CqlDate da_ = context.Operators.DateFrom(cz_);
-            bool? db_ = context.Operators.SameAs(cv_, da_, "day");
-            bool? dc_ = context.Operators.And(cq_, db_);
-            DataType dd_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSocialLimits?.Value;
-            object de_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dd_);
-            bool? df_ = context.Operators.Not((bool?)(de_ is null));
-            bool? dg_ = context.Operators.And(dc_, df_);
-            DataType dh_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQLifeQuality?.Value;
-            object di_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dh_);
-            bool? dj_ = context.Operators.Not((bool?)(di_ is null));
-            bool? dk_ = context.Operators.And(dg_, dj_);
+            DataType ah_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQLifeQuality?.Effective;
+            object ai_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+            CqlInterval<CqlDateTime> aj_ = QICoreCommon_2_1_000.Instance.toInterval(context, ai_);
+            CqlDateTime ak_ = context.Operators.Start(aj_);
+            CqlDate al_ = context.Operators.DateFrom(ak_);
+            DataType am_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSymptomStability?.Effective;
+            object an_ = FHIRHelpers_4_4_000.Instance.ToValue(context, am_);
+            CqlInterval<CqlDateTime> ao_ = QICoreCommon_2_1_000.Instance.toInterval(context, an_);
+            CqlDateTime ap_ = context.Operators.Start(ao_);
+            CqlDate aq_ = context.Operators.DateFrom(ap_);
+            bool? ar_ = context.Operators.SameAs(al_, aq_, "day");
+            DataType as_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSymptomStability?.Value;
+            object at_ = FHIRHelpers_4_4_000.Instance.ToValue(context, as_);
+            bool? au_ = context.Operators.Not((bool?)(at_ is null));
+            bool? av_ = context.Operators.And(ar_, au_);
+            object ax_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+            CqlInterval<CqlDateTime> ay_ = QICoreCommon_2_1_000.Instance.toInterval(context, ax_);
+            CqlDateTime az_ = context.Operators.Start(ay_);
+            CqlDate ba_ = context.Operators.DateFrom(az_);
+            DataType bb_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSelfEfficacy?.Effective;
+            object bc_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bb_);
+            CqlInterval<CqlDateTime> bd_ = QICoreCommon_2_1_000.Instance.toInterval(context, bc_);
+            CqlDateTime be_ = context.Operators.Start(bd_);
+            CqlDate bf_ = context.Operators.DateFrom(be_);
+            bool? bg_ = context.Operators.SameAs(ba_, bf_, "day");
+            bool? bh_ = context.Operators.And(av_, bg_);
+            DataType bi_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSelfEfficacy?.Value;
+            object bj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, bi_);
+            bool? bk_ = context.Operators.Not((bool?)(bj_ is null));
+            bool? bl_ = context.Operators.And(bh_, bk_);
+            object bn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+            CqlInterval<CqlDateTime> bo_ = QICoreCommon_2_1_000.Instance.toInterval(context, bn_);
+            CqlDateTime bp_ = context.Operators.Start(bo_);
+            CqlDate bq_ = context.Operators.DateFrom(bp_);
+            DataType br_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSymptoms?.Effective;
+            object bs_ = FHIRHelpers_4_4_000.Instance.ToValue(context, br_);
+            CqlInterval<CqlDateTime> bt_ = QICoreCommon_2_1_000.Instance.toInterval(context, bs_);
+            CqlDateTime bu_ = context.Operators.Start(bt_);
+            CqlDate bv_ = context.Operators.DateFrom(bu_);
+            bool? bw_ = context.Operators.SameAs(bq_, bv_, "day");
+            bool? bx_ = context.Operators.And(bl_, bw_);
+            DataType by_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSymptoms?.Value;
+            object bz_ = FHIRHelpers_4_4_000.Instance.ToValue(context, by_);
+            bool? ca_ = context.Operators.Not((bool?)(bz_ is null));
+            bool? cb_ = context.Operators.And(bx_, ca_);
+            object cd_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+            CqlInterval<CqlDateTime> ce_ = QICoreCommon_2_1_000.Instance.toInterval(context, cd_);
+            CqlDateTime cf_ = context.Operators.Start(ce_);
+            CqlDate cg_ = context.Operators.DateFrom(cf_);
+            DataType ch_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQPhysicalLimits?.Effective;
+            object ci_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ch_);
+            CqlInterval<CqlDateTime> cj_ = QICoreCommon_2_1_000.Instance.toInterval(context, ci_);
+            CqlDateTime ck_ = context.Operators.Start(cj_);
+            CqlDate cl_ = context.Operators.DateFrom(ck_);
+            bool? cm_ = context.Operators.SameAs(cg_, cl_, "day");
+            bool? cn_ = context.Operators.And(cb_, cm_);
+            DataType co_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQPhysicalLimits?.Value;
+            object cp_ = FHIRHelpers_4_4_000.Instance.ToValue(context, co_);
+            bool? cq_ = context.Operators.Not((bool?)(cp_ is null));
+            bool? cr_ = context.Operators.And(cn_, cq_);
+            object ct_ = FHIRHelpers_4_4_000.Instance.ToValue(context, ah_);
+            CqlInterval<CqlDateTime> cu_ = QICoreCommon_2_1_000.Instance.toInterval(context, ct_);
+            CqlDateTime cv_ = context.Operators.Start(cu_);
+            CqlDate cw_ = context.Operators.DateFrom(cv_);
+            DataType cx_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSocialLimits?.Effective;
+            object cy_ = FHIRHelpers_4_4_000.Instance.ToValue(context, cx_);
+            CqlInterval<CqlDateTime> cz_ = QICoreCommon_2_1_000.Instance.toInterval(context, cy_);
+            CqlDateTime da_ = context.Operators.Start(cz_);
+            CqlDate db_ = context.Operators.DateFrom(da_);
+            bool? dc_ = context.Operators.SameAs(cw_, db_, "day");
+            bool? dd_ = context.Operators.And(cr_, dc_);
+            DataType de_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQSocialLimits?.Value;
+            object df_ = FHIRHelpers_4_4_000.Instance.ToValue(context, de_);
+            bool? dg_ = context.Operators.Not((bool?)(df_ is null));
+            bool? dh_ = context.Operators.And(dd_, dg_);
+            DataType di_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQLifeQuality?.Value;
+            object dj_ = FHIRHelpers_4_4_000.Instance.ToValue(context, di_);
+            bool? dk_ = context.Operators.Not((bool?)(dj_ is null));
+            bool? dl_ = context.Operators.And(dh_, dk_);
 
-            return dk_;
+            return dl_;
         };
         IEnumerable<(CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)?> ac_ = context.Operators.Where<(CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)?>(aa_, ab_);
         CqlDate ad_((CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)? tuple_etfcawdpmcqfbnayqdmdqqsdn)
         {
-            DataType dl_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQLifeQuality?.Effective;
-            object dm_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dl_);
-            CqlInterval<CqlDateTime> dn_ = QICoreCommon_2_1_000.Instance.toInterval(context, dm_);
-            CqlDateTime do_ = context.Operators.Start(dn_);
-            CqlDate dp_ = context.Operators.DateFrom(do_);
+            DataType dm_ = tuple_etfcawdpmcqfbnayqdmdqqsdn?.KCCQLifeQuality?.Effective;
+            object dn_ = FHIRHelpers_4_4_000.Instance.ToValue(context, dm_);
+            CqlInterval<CqlDateTime> do_ = QICoreCommon_2_1_000.Instance.toInterval(context, dn_);
+            CqlDateTime dp_ = context.Operators.Start(do_);
+            CqlDate dq_ = context.Operators.DateFrom(dp_);
 
-            return dp_;
+            return dq_;
         };
         IEnumerable<CqlDate> ae_ = context.Operators.Select<(CqlTupleMetadata, Observation KCCQLifeQuality, Observation KCCQSymptomStability, Observation KCCQSelfEfficacy, Observation KCCQSymptoms, Observation KCCQPhysicalLimits, Observation KCCQSocialLimits)?, CqlDate>(ac_, ad_);
+        IEnumerable<CqlDate> af_ = context.Operators.Distinct<CqlDate>(ae_);
 
-        return ae_;
+        return af_;
     }
 
 
@@ -1669,59 +1687,60 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
         (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
         {
-            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? l_ = (CqlTupleMetadata_HEFWLcHhCNCOQegEOfjWTXiGN, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? m_ = (CqlTupleMetadata_HEFWLcHhCNCOQegEOfjWTXiGN, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
-            return l_;
+            return m_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?>(d_, e_);
         bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? tuple_hrluhbcfcsvnvrrnjajahdcea)
         {
-            Period m_ = tuple_hrluhbcfcsvnvrrnjajahdcea?.ValidEncounters?.Period;
-            CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_2_1_000.Instance.toInterval(context, n_ as object);
-            CqlDateTime p_ = context.Operators.End(o_);
-            CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-            CqlDateTime r_ = context.Operators.End(q_);
-            CqlQuantity s_ = context.Operators.Quantity(180m, "days");
-            CqlDateTime t_ = context.Operators.Subtract(r_, s_);
-            bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
-            CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_hrluhbcfcsvnvrrnjajahdcea?.InitialKCCQAssessmentDate);
-            CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_ as object);
-            CqlDateTime z_ = context.Operators.End(y_);
-            CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
-            CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
-            CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_1_000.Instance.toInterval(context, ad_ as object);
-            CqlDateTime af_ = context.Operators.End(ae_);
-            CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
-            bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
-            CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_1_000.Instance.toInterval(context, aj_ as object);
-            CqlDateTime al_ = context.Operators.End(ak_);
-            bool? am_ = context.Operators.Not((bool?)(al_ is null));
-            bool? an_ = context.Operators.And(ah_, am_);
-            bool? ao_ = context.Operators.And(u_, an_);
-            CqlDateTime ap_ = context.Operators.ConvertDateToDateTime(tuple_hrluhbcfcsvnvrrnjajahdcea?.FollowupKCCQAssessmentDate);
-            CqlDate aq_ = context.Operators.DateFrom(ap_);
-            CqlDate as_ = context.Operators.DateFrom(v_);
-            CqlQuantity at_ = context.Operators.Quantity(30m, "days");
-            CqlDate au_ = context.Operators.Add(as_, at_);
-            CqlDate aw_ = context.Operators.DateFrom(v_);
-            CqlDate ay_ = context.Operators.Add(aw_, s_);
-            CqlInterval<CqlDate> az_ = context.Operators.Interval(au_, ay_, true, true);
-            bool? ba_ = context.Operators.In<CqlDate>(aq_, az_, "day");
-            bool? bb_ = context.Operators.And(ao_, ba_);
+            Period n_ = tuple_hrluhbcfcsvnvrrnjajahdcea?.ValidEncounters?.Period;
+            CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> p_ = QICoreCommon_2_1_000.Instance.toInterval(context, o_ as object);
+            CqlDateTime q_ = context.Operators.End(p_);
+            CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
+            CqlDateTime s_ = context.Operators.End(r_);
+            CqlQuantity t_ = context.Operators.Quantity(180m, "days");
+            CqlDateTime u_ = context.Operators.Subtract(s_, t_);
+            bool? v_ = context.Operators.SameOrBefore(q_, u_, "day");
+            CqlDateTime w_ = context.Operators.ConvertDateToDateTime(tuple_hrluhbcfcsvnvrrnjajahdcea?.InitialKCCQAssessmentDate);
+            CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> z_ = QICoreCommon_2_1_000.Instance.toInterval(context, y_ as object);
+            CqlDateTime aa_ = context.Operators.End(z_);
+            CqlQuantity ab_ = context.Operators.Quantity(14m, "days");
+            CqlDateTime ac_ = context.Operators.Subtract(aa_, ab_);
+            CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> af_ = QICoreCommon_2_1_000.Instance.toInterval(context, ae_ as object);
+            CqlDateTime ag_ = context.Operators.End(af_);
+            CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ac_, ag_, true, true);
+            bool? ai_ = context.Operators.In<CqlDateTime>(w_, ah_, "day");
+            CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_ as object);
+            CqlDateTime am_ = context.Operators.End(al_);
+            bool? an_ = context.Operators.Not((bool?)(am_ is null));
+            bool? ao_ = context.Operators.And(ai_, an_);
+            bool? ap_ = context.Operators.And(v_, ao_);
+            CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(tuple_hrluhbcfcsvnvrrnjajahdcea?.FollowupKCCQAssessmentDate);
+            CqlDate ar_ = context.Operators.DateFrom(aq_);
+            CqlDate at_ = context.Operators.DateFrom(w_);
+            CqlQuantity au_ = context.Operators.Quantity(30m, "days");
+            CqlDate av_ = context.Operators.Add(at_, au_);
+            CqlDate ax_ = context.Operators.DateFrom(w_);
+            CqlDate az_ = context.Operators.Add(ax_, t_);
+            CqlInterval<CqlDate> ba_ = context.Operators.Interval(av_, az_, true, true);
+            bool? bb_ = context.Operators.In<CqlDate>(ar_, ba_, "day");
+            bool? bc_ = context.Operators.And(ap_, bb_);
 
-            return bb_;
+            return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?>(f_, g_);
         Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? tuple_hrluhbcfcsvnvrrnjajahdcea) => 
             tuple_hrluhbcfcsvnvrrnjajahdcea?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?, Encounter>(h_, i_);
-        bool? k_ = context.Operators.Exists<Encounter>(j_);
+        IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
+        bool? l_ = context.Operators.Exists<Encounter>(k_);
 
-        return k_;
+        return l_;
     }
 
 
@@ -1734,26 +1753,27 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<Observation> d_ = Status_1_8_000.Instance.isAssessmentPerformed(context, c_);
         bool? e_(Observation KCCQSummaryScore)
         {
-            DataType i_ = KCCQSummaryScore?.Value;
-            object j_ = FHIRHelpers_4_4_000.Instance.ToValue(context, i_);
-            bool? k_ = context.Operators.Not((bool?)(j_ is null));
+            DataType j_ = KCCQSummaryScore?.Value;
+            object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
+            bool? l_ = context.Operators.Not((bool?)(k_ is null));
 
-            return k_;
+            return l_;
         };
         IEnumerable<Observation> f_ = context.Operators.Where<Observation>(d_, e_);
         CqlDate g_(Observation KCCQSummaryScore)
         {
-            DataType l_ = KCCQSummaryScore?.Effective;
-            object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
-            CqlInterval<CqlDateTime> n_ = QICoreCommon_2_1_000.Instance.toInterval(context, m_);
-            CqlDateTime o_ = context.Operators.Start(n_);
-            CqlDate p_ = context.Operators.DateFrom(o_);
+            DataType m_ = KCCQSummaryScore?.Effective;
+            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
+            CqlInterval<CqlDateTime> o_ = QICoreCommon_2_1_000.Instance.toInterval(context, n_);
+            CqlDateTime p_ = context.Operators.Start(o_);
+            CqlDate q_ = context.Operators.DateFrom(p_);
 
-            return p_;
+            return q_;
         };
         IEnumerable<CqlDate> h_ = context.Operators.Select<Observation, CqlDate>(f_, g_);
+        IEnumerable<CqlDate> i_ = context.Operators.Distinct<CqlDate>(h_);
 
-        return h_;
+        return i_;
     }
 
 
@@ -1765,59 +1785,60 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         IEnumerable<ValueTuple<Encounter, CqlDate, CqlDate>> d_ = context.Operators.CrossJoin<Encounter, CqlDate, CqlDate>(a_, b_, b_);
         (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? e_(ValueTuple<Encounter, CqlDate, CqlDate> _valueTuple)
         {
-            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? l_ = (CqlTupleMetadata_DggZKjEbQUfLADMDMBeASLDR, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
+            (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? m_ = (CqlTupleMetadata_DggZKjEbQUfLADMDMBeASLDR, _valueTuple.Item1, _valueTuple.Item2, _valueTuple.Item3);
 
-            return l_;
+            return m_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?> f_ = context.Operators.Select<ValueTuple<Encounter, CqlDate, CqlDate>, (CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?>(d_, e_);
         bool? g_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? tuple_dgrojeekdvizsvyisepdjhjgj)
         {
-            Period m_ = tuple_dgrojeekdvizsvyisepdjhjgj?.ValidEncounters?.Period;
-            CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> o_ = QICoreCommon_2_1_000.Instance.toInterval(context, n_ as object);
-            CqlDateTime p_ = context.Operators.End(o_);
-            CqlInterval<CqlDateTime> q_ = this.Measurement_Period(context);
-            CqlDateTime r_ = context.Operators.End(q_);
-            CqlQuantity s_ = context.Operators.Quantity(180m, "days");
-            CqlDateTime t_ = context.Operators.Subtract(r_, s_);
-            bool? u_ = context.Operators.SameOrBefore(p_, t_, "day");
-            CqlDateTime v_ = context.Operators.ConvertDateToDateTime(tuple_dgrojeekdvizsvyisepdjhjgj?.InitialKCCQTotalScore);
-            CqlInterval<CqlDateTime> x_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> y_ = QICoreCommon_2_1_000.Instance.toInterval(context, x_ as object);
-            CqlDateTime z_ = context.Operators.End(y_);
-            CqlQuantity aa_ = context.Operators.Quantity(14m, "days");
-            CqlDateTime ab_ = context.Operators.Subtract(z_, aa_);
-            CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ae_ = QICoreCommon_2_1_000.Instance.toInterval(context, ad_ as object);
-            CqlDateTime af_ = context.Operators.End(ae_);
-            CqlInterval<CqlDateTime> ag_ = context.Operators.Interval(ab_, af_, true, true);
-            bool? ah_ = context.Operators.In<CqlDateTime>(v_, ag_, "day");
-            CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
-            CqlInterval<CqlDateTime> ak_ = QICoreCommon_2_1_000.Instance.toInterval(context, aj_ as object);
-            CqlDateTime al_ = context.Operators.End(ak_);
-            bool? am_ = context.Operators.Not((bool?)(al_ is null));
-            bool? an_ = context.Operators.And(ah_, am_);
-            bool? ao_ = context.Operators.And(u_, an_);
-            CqlDateTime ap_ = context.Operators.ConvertDateToDateTime(tuple_dgrojeekdvizsvyisepdjhjgj?.FollowupKCCQTotalScore);
-            CqlDate aq_ = context.Operators.DateFrom(ap_);
-            CqlDate as_ = context.Operators.DateFrom(v_);
-            CqlQuantity at_ = context.Operators.Quantity(30m, "days");
-            CqlDate au_ = context.Operators.Add(as_, at_);
-            CqlDate aw_ = context.Operators.DateFrom(v_);
-            CqlDate ay_ = context.Operators.Add(aw_, s_);
-            CqlInterval<CqlDate> az_ = context.Operators.Interval(au_, ay_, true, true);
-            bool? ba_ = context.Operators.In<CqlDate>(aq_, az_, "day");
-            bool? bb_ = context.Operators.And(ao_, ba_);
+            Period n_ = tuple_dgrojeekdvizsvyisepdjhjgj?.ValidEncounters?.Period;
+            CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> p_ = QICoreCommon_2_1_000.Instance.toInterval(context, o_ as object);
+            CqlDateTime q_ = context.Operators.End(p_);
+            CqlInterval<CqlDateTime> r_ = this.Measurement_Period(context);
+            CqlDateTime s_ = context.Operators.End(r_);
+            CqlQuantity t_ = context.Operators.Quantity(180m, "days");
+            CqlDateTime u_ = context.Operators.Subtract(s_, t_);
+            bool? v_ = context.Operators.SameOrBefore(q_, u_, "day");
+            CqlDateTime w_ = context.Operators.ConvertDateToDateTime(tuple_dgrojeekdvizsvyisepdjhjgj?.InitialKCCQTotalScore);
+            CqlInterval<CqlDateTime> y_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> z_ = QICoreCommon_2_1_000.Instance.toInterval(context, y_ as object);
+            CqlDateTime aa_ = context.Operators.End(z_);
+            CqlQuantity ab_ = context.Operators.Quantity(14m, "days");
+            CqlDateTime ac_ = context.Operators.Subtract(aa_, ab_);
+            CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> af_ = QICoreCommon_2_1_000.Instance.toInterval(context, ae_ as object);
+            CqlDateTime ag_ = context.Operators.End(af_);
+            CqlInterval<CqlDateTime> ah_ = context.Operators.Interval(ac_, ag_, true, true);
+            bool? ai_ = context.Operators.In<CqlDateTime>(w_, ah_, "day");
+            CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, n_);
+            CqlInterval<CqlDateTime> al_ = QICoreCommon_2_1_000.Instance.toInterval(context, ak_ as object);
+            CqlDateTime am_ = context.Operators.End(al_);
+            bool? an_ = context.Operators.Not((bool?)(am_ is null));
+            bool? ao_ = context.Operators.And(ai_, an_);
+            bool? ap_ = context.Operators.And(v_, ao_);
+            CqlDateTime aq_ = context.Operators.ConvertDateToDateTime(tuple_dgrojeekdvizsvyisepdjhjgj?.FollowupKCCQTotalScore);
+            CqlDate ar_ = context.Operators.DateFrom(aq_);
+            CqlDate at_ = context.Operators.DateFrom(w_);
+            CqlQuantity au_ = context.Operators.Quantity(30m, "days");
+            CqlDate av_ = context.Operators.Add(at_, au_);
+            CqlDate ax_ = context.Operators.DateFrom(w_);
+            CqlDate az_ = context.Operators.Add(ax_, t_);
+            CqlInterval<CqlDate> ba_ = context.Operators.Interval(av_, az_, true, true);
+            bool? bb_ = context.Operators.In<CqlDate>(ar_, ba_, "day");
+            bool? bc_ = context.Operators.And(ap_, bb_);
 
-            return bb_;
+            return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?>(f_, g_);
         Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? tuple_dgrojeekdvizsvyisepdjhjgj) => 
             tuple_dgrojeekdvizsvyisepdjhjgj?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?, Encounter>(h_, i_);
-        bool? k_ = context.Operators.Exists<Encounter>(j_);
+        IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
+        bool? l_ = context.Operators.Exists<Encounter>(k_);
 
-        return k_;
+        return l_;
     }
 
 

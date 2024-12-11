@@ -782,35 +782,36 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         IEnumerable<MedicationRequest> f_ = Status_1_8_000.Instance.isMedicationActive(context, e_);
         bool? g_(MedicationRequest OralGlucocorticoid)
         {
-            CqlInterval<CqlDate> l_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, OralGlucocorticoid);
-            CqlDate m_ = context.Operators.Start(l_);
-            CqlDateTime n_ = context.Operators.ConvertDateToDateTime(m_);
-            CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
-            CqlDateTime p_ = context.Operators.End(o_);
-            bool? q_ = context.Operators.Before(n_, p_, default);
+            CqlInterval<CqlDate> m_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, OralGlucocorticoid);
+            CqlDate n_ = context.Operators.Start(m_);
+            CqlDateTime o_ = context.Operators.ConvertDateToDateTime(n_);
+            CqlInterval<CqlDateTime> p_ = this.Measurement_Period(context);
+            CqlDateTime q_ = context.Operators.End(p_);
+            bool? r_ = context.Operators.Before(o_, q_, default);
 
-            return q_;
+            return r_;
         };
         IEnumerable<MedicationRequest> h_ = context.Operators.Where<MedicationRequest>(f_, g_);
         CqlInterval<CqlDate> i_(MedicationRequest Glucocorticoid)
         {
-            CqlInterval<CqlDate> r_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, Glucocorticoid);
-            Patient s_ = this.Patient(context);
-            Date t_ = s_?.BirthDateElement;
-            string u_ = t_?.Value;
-            CqlDate v_ = context.Operators.ConvertStringToDate(u_);
-            CqlInterval<CqlDateTime> w_ = this.Measurement_Period(context);
-            CqlDateTime x_ = context.Operators.End(w_);
-            CqlDate y_ = context.Operators.DateFrom(x_);
-            CqlInterval<CqlDate> z_ = context.Operators.Interval(v_, y_, true, true);
-            CqlInterval<CqlDate> aa_ = context.Operators.Intersect<CqlDate>(r_, z_);
+            CqlInterval<CqlDate> s_ = CumulativeMedicationDuration_4_1_000.Instance.medicationRequestPeriod(context, Glucocorticoid);
+            Patient t_ = this.Patient(context);
+            Date u_ = t_?.BirthDateElement;
+            string v_ = u_?.Value;
+            CqlDate w_ = context.Operators.ConvertStringToDate(v_);
+            CqlInterval<CqlDateTime> x_ = this.Measurement_Period(context);
+            CqlDateTime y_ = context.Operators.End(x_);
+            CqlDate z_ = context.Operators.DateFrom(y_);
+            CqlInterval<CqlDate> aa_ = context.Operators.Interval(w_, z_, true, true);
+            CqlInterval<CqlDate> ab_ = context.Operators.Intersect<CqlDate>(s_, aa_);
 
-            return aa_;
+            return ab_;
         };
         IEnumerable<CqlInterval<CqlDate>> j_ = context.Operators.Select<MedicationRequest, CqlInterval<CqlDate>>(h_, i_);
-        int? k_ = CumulativeMedicationDuration_4_1_000.Instance.cumulativeDuration(context, j_);
+        IEnumerable<CqlInterval<CqlDate>> k_ = context.Operators.Distinct<CqlInterval<CqlDate>>(j_);
+        int? l_ = CumulativeMedicationDuration_4_1_000.Instance.cumulativeDuration(context, k_);
 
-        return k_;
+        return l_;
     }
 
 
