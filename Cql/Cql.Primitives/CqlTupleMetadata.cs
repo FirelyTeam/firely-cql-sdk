@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 
-namespace Hl7.Cql.Runtime;
+namespace Hl7.Cql.Primitives;
 
 /// <summary>
-/// Represents the metadata for a tuple.
+/// Represents the metadata for a CQL value tuple.
+/// CQL value tuples are represented as <see cref="ITuple"/> instances with the first element being a <see cref="CqlTupleMetadata"/> instance.
 /// </summary>
 public class CqlTupleMetadata : IEquatable<CqlTupleMetadata>
 {
+    internal const string? PropertyPrefix = "CqlTupleMetadata_";
+
     /// <summary>
     /// Represents the metadata for a tuple.
     /// </summary>
@@ -25,15 +29,22 @@ public class CqlTupleMetadata : IEquatable<CqlTupleMetadata>
         if (ItemNames.Count != ItemTypes.Count)
             throw new ArgumentException("Item names and types must have the same number of elements.");
 
-        _signatureHashString = BuildSignatureHashString(ItemNames.Zip(ItemTypes).ToList());
         _toString = $"[{string.Join(", ", ItemNames.Select(pn => $"\"{pn}\""))}]";
-        _hashCode = _signatureHashString.GetHashCode();
+
+        // For some odd reason, if this is not lazy, the hash code is occasionally fails deep inside the Hasher with NullReferenceException, whenever a library is created.
+        _signatureHashStringLazy = new Lazy<string>(() => BuildSignatureHashString(ItemTypes.Zip(ItemNames).ToList(), PropertyPrefix, _toString));
     }
 
-    internal static string BuildSignatureHashString(IReadOnlyCollection<(string ItemName, Type ItemType)> signature)
+    internal static string BuildSignatureHashString(
+        IEnumerable<(Type propType, string propName)> tupleProps,
+        string? prepend = null,
+        string? toString = null)
     {
-        var signatureString = string.Join("+", signature.Select(t => $"{t.ItemName}:{t.ItemType.ToCSharpString()}"));
-        var signatureHashString = $"CqlTupleMetadata_{Hasher.Instance.Hash(signatureString)}";
+        var hasher = Hasher.Instance;
+        var signatureString = string.Join(
+            "+",
+            tupleProps.Select(t => $"{t.propName}:{t.propType.ToCSharpString()}"));
+        var signatureHashString = $"{prepend}{hasher.Hash(signatureString)}";
         return signatureHashString;
     }
 
@@ -47,8 +58,7 @@ public class CqlTupleMetadata : IEquatable<CqlTupleMetadata>
     /// </summary>
     public IReadOnlyList<Type> ItemTypes { get; }
 
-    private readonly string _signatureHashString;
-    private readonly int _hashCode;
+    private readonly Lazy<string> _signatureHashStringLazy;
     private readonly string _toString;
 
     /// <inheritdoc/>
@@ -69,7 +79,7 @@ public class CqlTupleMetadata : IEquatable<CqlTupleMetadata>
     }
 
     private bool EqualsImpl(CqlTupleMetadata other) =>
-        _signatureHashString == other._signatureHashString
+        _signatureHashStringLazy.Value == other._signatureHashStringLazy.Value
         // && ItemNames.SequenceEqual(other.ItemNames) // This is redundant
         && ItemTypes.SequenceEqual(other.ItemTypes);
 
@@ -84,7 +94,7 @@ public class CqlTupleMetadata : IEquatable<CqlTupleMetadata>
     public static bool operator!=(CqlTupleMetadata? left, CqlTupleMetadata? right) => !(left == right);
 
     /// <inheritdoc/>
-    public override int GetHashCode() => _hashCode;
+    public override int GetHashCode() => _signatureHashStringLazy.Value.GetHashCode();
 
     /// <inheritdoc/>
     public override string ToString() => _toString;

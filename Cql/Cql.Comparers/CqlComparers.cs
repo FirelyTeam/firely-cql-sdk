@@ -14,7 +14,6 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-using System.Xml.Schema;
 using JetBrains.Annotations;
 
 namespace Hl7.Cql.Comparers
@@ -24,7 +23,6 @@ namespace Hl7.Cql.Comparers
     /// </summary>
     internal sealed class CqlComparers : ICqlComparer
     {
-
         /*
          *
          * Equivalence : https://cql.hl7.org/04-logicalspecification.html#equivalent
@@ -42,8 +40,8 @@ namespace Hl7.Cql.Comparers
             (left, right) switch
             {
                 (null, null) => true,
-                (null, _)    => false,
-                (_, null)    => false,
+                (null, _)  => false,
+                (_, null)  => false,
                 _            => null
             };
 
@@ -87,8 +85,9 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(CqlDate), new InterfaceCqlComparer<CqlDate>());
             Comparers.TryAdd(typeof(CqlTime), new InterfaceCqlComparer<CqlTime>());
             Comparers.TryAdd(typeof(CqlDateTime), new InterfaceCqlComparer<CqlDateTime>());
-            Comparers.TryAdd(typeof(TupleBaseType), new TupleBaseTypeComparer(this));
-            Comparers.TryAdd(typeof(ITuple), new TupleComparer(this));
+
+            Comparers.TryAdd(typeof(TupleBaseType), new TupleBaseTypeComparer(this)); // Legacy, will be removed!
+            Comparers.TryAdd(typeof(ITuple), new CqlTupleTypeComparer(this));
 
             ComparerFactories.TryAdd(typeof(Nullable<>), (type, @this) =>
             {
@@ -100,7 +99,7 @@ namespace Hl7.Cql.Comparers
             {
                 var genericArguments = type.GetGenericArguments();
                 var genericType = typeof(KeyValuePairComparer<,>).MakeGenericType(genericArguments);
-                var cqlComparer = (ICqlComparer)Activator.CreateInstance(genericType)!;
+                var cqlComparer = (ICqlComparer)Activator.CreateInstance(genericType, args: [this])!;
                 return cqlComparer;
             });
         }
@@ -192,18 +191,16 @@ namespace Hl7.Cql.Comparers
             // if x or y is null it must return null and if both are null then it's a match
             // if we return 1 or -1 when only 1 side is null then we hit a lot of issues with Stratification: Race - Two or More Races on a lot of measures
             // because it expects null/false but gets true because 1 was returned (x null, y = 2) so 2 > null => return 1
-            if (x == null)
+            switch (x, y)
             {
-                if (y == null)
-                    return 0;
-                else return null;
+                case (null, null):         return 0;
+                case (not null, not null): break;
+                default:                        return null;
             }
-            else if (y == null)
-                return null;
 
             bool xySwapped = false;
-            var xType = x.GetType();
-            var yType = y.GetType();
+            var xType = GetKeyTypeForComparers(x);
+            var yType = GetKeyTypeForComparers(y);
             if (xType != yType)
             {
                 // if x and y are not the same type, we prioritize them based on the following order:
@@ -217,10 +214,6 @@ namespace Hl7.Cql.Comparers
             }
 
             ICqlComparer ? comparer = null;
-
-            if (x is ITuple) // Should cover all value types
-                xType = typeof(ITuple);
-
             if (Comparers.TryGetValue(xType, out ICqlComparer? c))
             {
                 comparer = c;
@@ -239,14 +232,11 @@ namespace Hl7.Cql.Comparers
                     comparer = enumerableComparer;
                 }
             }
-            else if (x is TupleBaseType && Comparers.TryGetValue(typeof(TupleBaseType), out ICqlComparer? tupleComparer))
+            else if (x is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer? listComparer))
             {
-                comparer = tupleComparer;
+                comparer = listComparer;
             }
-            else if (x is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer? listComarper))
-            {
-                comparer = listComarper;
-            }
+
             if (comparer != null)
             {
                 var result = comparer.Compare(x, y, precision);
@@ -260,23 +250,14 @@ namespace Hl7.Cql.Comparers
         /// <inheritdoc />
         public bool Equivalent(object? x, object? y, string? precision)
         {
-            if (x == null)
-            {
-                if (y == null)
-                    return true;
-                else return false;
-            }
-            else if (y == null)
-                return false;
+            if (EquivalentOnNullsOnly(x, y) is { } r)
+                return r;
 
-            var xType = x.GetType();
+            var xType = GetKeyTypeForComparers(x);
+
             if (Comparers.TryGetValue(xType, out ICqlComparer? comparer))
             {
                 return comparer.Equivalent(x, y, precision);
-            }
-            else if (x is TupleBaseType tuple && Comparers.TryGetValue(typeof(TupleBaseType), out ICqlComparer? tupleComparer))
-            {
-                return tupleComparer.Equivalent(x, y, precision);
             }
             else
             {
@@ -294,19 +275,31 @@ namespace Hl7.Cql.Comparers
             throw new ArgumentException($"Cannot check equivalence for type {xType.Name}");
         }
 
+        /// <summary>
+        /// Collapses derived types to their bases, since this makes it easier to find the comparer by the exact type.
+        /// </summary>
+        private static Type GetKeyTypeForComparers(object? x)
+        {
+            var type = x switch
+            {
+                TupleBaseType => typeof(TupleBaseType), // Tuple types generated in the LINQ expressions by the TupleBuilderCache
+                ITuple        => typeof(ITuple),        // .NET tuples (e.g. System.ValueTuple<...>) used in generated libraries
+                _             => x!.GetType()
+            };
+            return type;
+        }
+
         /// <inheritdoc />
         public int GetHashCode(object? x)
         {
             if (x == null)
                 return typeof(object).GetHashCode();
-            var xType = x.GetType();
+
+            var xType = GetKeyTypeForComparers(x);
+
             if (Comparers.TryGetValue(xType, out ICqlComparer? comparer))
             {
                 return comparer.GetHashCode(x);
-            }
-            else if (x is TupleBaseType && Comparers.TryGetValue(typeof(TupleBaseType), out ICqlComparer? tupleComparer))
-            {
-                return tupleComparer.GetHashCode(x);
             }
             else if (x is IEnumerable<object> enumerable)
             {

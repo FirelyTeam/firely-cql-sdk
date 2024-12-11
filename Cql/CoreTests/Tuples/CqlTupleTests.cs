@@ -3,11 +3,11 @@ using System.Runtime.CompilerServices;
 using System.Text.Json;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Serialization;
 using System.IO;
 using System.Runtime.Loader;
 using Hl7.Cql.Packaging;
+using Hl7.Cql.Primitives;
 
 namespace CoreTests.Tuples;
 
