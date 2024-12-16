@@ -26,16 +26,28 @@ internal class Program
         // Translate ELM files to C# assembly byte[]
         // Translate ELM files into AssemblyLoadContext
 
-        ElmSdk
-            .NewCompilation()
-            //.LoadElmFile(new FileInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm\ALARACTOQRFHIR.json"))
-            .LoadElmFile(new DirectoryInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm"), ElmVersionedIdentifier.FromNameAndVersion("FHIRHelpers"))
-            .Compile()
-            .LoadElmFilesFromDirectory(new DirectoryInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm"), new EnumerationOptions() { RecurseSubdirectories = false })
-            .LoadElmFileWithDependencies(new DirectoryInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm"), ElmVersionedIdentifier.FromNameAndVersion("ALARACTOQRFHIR", "0.4.000"), new EnumerationOptions() { RecurseSubdirectories = false })
-            .Compile()
-            ;
+        var elmCompilation =
+            ElmSdk
+                 .NewCompilation()
+                 //.LoadElmFile(new FileInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm\ALARACTOQRFHIR.json"))
+                 .LoadElmFile(new DirectoryInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm"), ElmVersionedIdentifier.FromNameAndVersion("FHIRHelpers"))
+                 .Compile()
+                 .LoadElmFilesFromDirectory(new DirectoryInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm"), new EnumerationOptions() { RecurseSubdirectories = false })
+                 //.LoadElmFileWithDependencies(new DirectoryInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm"), ElmVersionedIdentifier.FromNameAndVersion("ALARACTOQRFHIR", "0.4.000"), new EnumerationOptions() { RecurseSubdirectories = false })
+                 .Compile()
+                ;
 
+        Console.WriteLine(
+            $"""
+             First 50 C# lines for {elmCompilation.LibraryNames["FHIRHelpers"]}:
+             {
+                 string.Join(
+                     Environment.NewLine,
+                     elmCompilation.SourceCodeByLibraryName[ElmVersionedIdentifier.FromNameAndVersion("FHIRHelpers")]
+                        .Split([Environment.NewLine], StringSplitOptions.None)
+                        .Take(50))
+             }
+             """);
     }
 }
 
@@ -61,8 +73,12 @@ public class ElmCompilation
     {
         Debug.Assert((source, serviceProvider) is ({ }, null) or (null, { }), "Must set either 'source' or 'serviceProvider'.");
 
-        _serviceProvider = serviceProvider ?? source!._serviceProvider;
-        _libraryCompilations = libraryCompilations ?? source?._libraryCompilations ?? ImmutableDictionary<ElmVersionedIdentifier, LibraryCompilation>.Empty;
+        _serviceProvider = serviceProvider
+                           ?? source!._serviceProvider;
+        _libraryCompilations = libraryCompilations
+                               ?? source?._libraryCompilations
+                               ?? ImmutableDictionary<ElmVersionedIdentifier, LibraryCompilation>.Empty
+                                   .WithComparers(ElmVersionedIdentifier.NameOnlyEqualityComparer, null);
     }
 
     internal static ElmCompilation New => new(serviceProvider: BuildServiceProvider());
@@ -159,6 +175,7 @@ public class ElmCompilation
         AssemblyCompiler assemblyCompiler = servicesScope.ServiceProvider.GetAssemblyCompiler();
         Library[] libraries = _libraryCompilations.Values.Select(v => v.Library).ToArray();
         LibrarySet librarySet = new LibrarySet("", libraries);
+        Console.WriteLine("Compiling Libraries");
         DefinitionDictionary<LambdaExpression> definitionDictionary = librarySetExpressionBuilderScoped.ProcessLibrarySet(librarySet);
         IReadOnlyDictionary<string, AssemblyData> assemblyDatas = assemblyCompiler.Compile(librarySet, definitionDictionary);
 
@@ -196,10 +213,49 @@ public class ElmCompilation
                 .BuildServiceProvider(validateScopes: true);
         return serviceProvider;
     }
+
+    public IReadOnlyDictionary<string, ElmVersionedIdentifier> LibraryNames =>
+        _libraryCompilations
+            .ToDictionary(kv => kv.Key.Name.ToString(), kv => kv.Key);
+
+    public IReadOnlyDictionary<ElmVersionedIdentifier, string> SourceCodeByLibraryName =>
+        _libraryCompilations
+            .Where(kv => kv.Value.CSharpSourceCode is not null)
+            .ToDictionary(kv => kv.Key, kv => kv.Value.CSharpSourceCode!, ElmVersionedIdentifier.NameOnlyEqualityComparer);
+
+    public IReadOnlyDictionary<ElmVersionedIdentifier, byte[]> AssemblyBinariesByLibraryName =>
+        _libraryCompilations
+            .Where(kv => kv.Value.AssemblyBinary is not null)
+            .ToDictionary(kv => kv.Key, kv => kv.Value.AssemblyBinary!, ElmVersionedIdentifier.NameOnlyEqualityComparer);
 }
+
 
 public readonly record struct ElmVersionedIdentifier
 {
+    private sealed class NameOnlyComparerImpl : IComparer<ElmVersionedIdentifier>, IEqualityComparer<ElmVersionedIdentifier>
+    {
+        public static NameOnlyComparerImpl Instance { get;  } = new();
+
+        public int Compare(ElmVersionedIdentifier x, ElmVersionedIdentifier y)
+        {
+            return string.Compare(x.Name, y.Name, StringComparison.Ordinal);
+        }
+
+        public bool Equals(ElmVersionedIdentifier x, ElmVersionedIdentifier y)
+        {
+            return x.Name == y.Name;
+        }
+
+        public int GetHashCode(ElmVersionedIdentifier obj)
+        {
+            return obj.Name.GetHashCode();
+        }
+    }
+
+    public static IComparer<ElmVersionedIdentifier> NameOnlyComparer => NameOnlyComparerImpl.Instance;
+
+    public static IEqualityComparer<ElmVersionedIdentifier> NameOnlyEqualityComparer { get; } = new NameOnlyComparerImpl();
+
     private ElmVersionedIdentifier(string Name, string? Version = null)
     {
         this.Name = Name;
