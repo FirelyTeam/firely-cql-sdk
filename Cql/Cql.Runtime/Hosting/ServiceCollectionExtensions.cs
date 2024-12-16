@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
+using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Runtime.Hosting;
 
@@ -22,4 +23,13 @@ internal static class ServiceCollectionExtensions
             });
         return services;
     }
+
+    public static IServiceCollection AddDebugLogging(
+        this IServiceCollection services) =>
+        services.AddLogging(loggingBuilder =>
+        {
+            loggingBuilder.ClearProviders();
+            loggingBuilder.AddDebug();
+        });
+
 }

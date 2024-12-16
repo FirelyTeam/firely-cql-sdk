@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using FluentAssertions;
+using Hl7.Cql.Runtime.Hosting;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 using Expression = System.Linq.Expressions.Expression;
 using Microsoft.Extensions.DependencyInjection;

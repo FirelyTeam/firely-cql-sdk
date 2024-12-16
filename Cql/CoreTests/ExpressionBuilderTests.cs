@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Linq;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CoreTests

@@ -21,7 +21,7 @@
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<CqlToElmEnabled>false</CqlToElmEnabled>
-		<ElmToCSharpEnabled>false</ElmToCSharpEnabled>
+		<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
 	</PropertyGroup>
 
 	<ItemGroup>

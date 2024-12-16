@@ -1,0 +1,251 @@
+﻿using System.Collections.Immutable;
+using System.Diagnostics;
+using System.Linq.Expressions;
+using System;
+using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Elm;
+using Hl7.Cql.Packaging;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.Runtime.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+#pragma warning disable RS0016
+
+namespace CqlSdkPrototype;
+
+internal class Program
+{
+    static void Main(string[] args)
+    {
+        // Load ELM file(s) from a directory
+        // Load ELM file(s) from a file with all its dependencies, assuming the dependencies are in the same directory
+        // Load ELM file from a single file
+
+        // Translate ELM files to C# source code String
+        // Translate ELM files to C# assembly byte[]
+        // Translate ELM files into AssemblyLoadContext
+
+        ElmSdk
+            .NewCompilation()
+            //.LoadElmFile(new FileInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm\ALARACTOQRFHIR.json"))
+            .LoadElmFile(new DirectoryInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm"), ElmVersionedIdentifier.FromNameAndVersion("FHIRHelpers"))
+            .Compile()
+            .LoadElmFilesFromDirectory(new DirectoryInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm"), new EnumerationOptions() { RecurseSubdirectories = false })
+            .LoadElmFileWithDependencies(new DirectoryInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm"), ElmVersionedIdentifier.FromNameAndVersion("ALARACTOQRFHIR", "0.4.000"), new EnumerationOptions() { RecurseSubdirectories = false })
+            .Compile()
+            ;
+
+    }
+}
+
+
+public static class ElmSdk
+{
+    public static ElmCompilation NewCompilation() => ElmCompilation.New;
+}
+
+public class ElmCompilation
+{
+    private readonly record struct LibraryCompilation(Library Library, string? CSharpSourceCode = null, byte[]? AssemblyBinary = null);
+
+    private static readonly HashSet<string> _hardcodedSkipFileNames = new(HardCodedSkipElmFiles.FileNames, StringComparer.OrdinalIgnoreCase);
+    private readonly ServiceProvider _serviceProvider;
+    private readonly ImmutableDictionary<ElmVersionedIdentifier, LibraryCompilation> _libraryCompilations;
+
+
+    private ElmCompilation(
+        ElmCompilation? source = null,
+        ImmutableDictionary<ElmVersionedIdentifier, LibraryCompilation>? libraryCompilations = null,
+        ServiceProvider? serviceProvider = null)
+    {
+        Debug.Assert((source, serviceProvider) is ({ }, null) or (null, { }), "Must set either 'source' or 'serviceProvider'.");
+
+        _serviceProvider = serviceProvider ?? source!._serviceProvider;
+        _libraryCompilations = libraryCompilations ?? source?._libraryCompilations ?? ImmutableDictionary<ElmVersionedIdentifier, LibraryCompilation>.Empty;
+    }
+
+    internal static ElmCompilation New => new(serviceProvider: BuildServiceProvider());
+
+    internal ElmCompilation AddLibraries(IEnumerable<Library> libraries)
+    {
+        var libraryCompilationsBuilder = _libraryCompilations.ToBuilder();
+        var hasChanged = false;
+        foreach (var library in libraries)
+        {
+            var elmVersionedIdentifier = ElmVersionedIdentifier.FromVersionedIdentifier(library.identifier);
+
+            if (libraryCompilationsBuilder.ContainsKey(elmVersionedIdentifier))
+            {
+                Console.WriteLine($"Skipping adding previous library to compilation: {elmVersionedIdentifier}");
+                continue;
+            }
+
+            var libraryCompilation = new LibraryCompilation(library);
+            libraryCompilationsBuilder.Add(elmVersionedIdentifier, libraryCompilation);
+            Console.WriteLine($"Adding library to compilation: {elmVersionedIdentifier}");
+            hasChanged = true;
+        }
+
+        return hasChanged
+            ? new ElmCompilation(this, libraryCompilations: libraryCompilationsBuilder.ToImmutable())
+            : this;
+    }
+
+    public ElmCompilation LoadElmFilesFromDirectory(DirectoryInfo directory, EnumerationOptions options)
+    {
+        var files = directory.EnumerateFiles("*.json", options);
+        return LoadElmFiles(files);
+    }
+
+    private ElmCompilation LoadElmFiles(IEnumerable<FileInfo> files)
+    {
+        var libraries =
+            files
+                .Where(f =>
+                {
+                    if (_hardcodedSkipFileNames.Contains(f.Name))
+                    {
+                        Console.WriteLine($"Skipping file as from hardcoded names: {f.FullName}");
+                        return false;
+                    }
+                    return true;
+                })                                                 // Log skipped files
+                .Select(f =>
+                {
+                    Console.WriteLine($"Loading library from file: {f}");
+                    var library = Library.LoadFromJson(f);
+                    return library;
+                }); // Log errors
+        return AddLibraries(libraries);
+    }
+
+    public ElmCompilation LoadElmFileWithDependencies(FileInfo file, EnumerationOptions options)
+    {
+        return new ElmCompilation(this);
+    }
+
+    public ElmCompilation LoadElmFileWithDependencies(
+        DirectoryInfo directory,
+        ElmVersionedIdentifier fileName,
+        EnumerationOptions options) => new(this);
+
+    public ElmCompilation LoadElmFile(FileInfo file)
+    {
+        return LoadElmFiles([file]);
+    }
+
+    public ElmCompilation LoadElmFile(DirectoryInfo directory, ElmVersionedIdentifier libraryName)
+    {
+        FileInfo file = new(Path.Combine(directory.FullName, $"{libraryName}.json"));
+        if (file.Exists)
+            return LoadElmFile(file);
+
+        if (libraryName.Version is null)
+            throw new FileNotFoundException($"Could not find file '{file.FullName}'.");
+
+        Console.WriteLine($"Could not load library from file with name and version, trying without version: {file.FullName}");
+        file = new FileInfo(Path.Combine(directory.FullName, $"{libraryName with { Version = null}}.json"));
+        return LoadElmFile(file);
+    }
+
+    internal ElmCompilation Compile()
+    {
+        if (_libraryCompilations.Values.All(lc => lc is { AssemblyBinary: not null }))
+            return this;
+
+        using var servicesScope = _serviceProvider.CreateScope();
+        LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped();
+        AssemblyCompiler assemblyCompiler = servicesScope.ServiceProvider.GetAssemblyCompiler();
+        Library[] libraries = _libraryCompilations.Values.Select(v => v.Library).ToArray();
+        LibrarySet librarySet = new LibrarySet("", libraries);
+        DefinitionDictionary<LambdaExpression> definitionDictionary = librarySetExpressionBuilderScoped.ProcessLibrarySet(librarySet);
+        IReadOnlyDictionary<string, AssemblyData> assemblyDatas = assemblyCompiler.Compile(librarySet, definitionDictionary);
+
+        var libraryCompilationsBuilder = _libraryCompilations.ToBuilder();
+        bool hasChanged = false;
+        foreach (var (name, (assemblyBinary, sourceCodePerName)) in assemblyDatas)
+        {
+            var elmVersionedIdentifier = ElmVersionedIdentifier.ParseString(name);
+            var libraryCompilation = libraryCompilationsBuilder[elmVersionedIdentifier];
+            if (libraryCompilation.CSharpSourceCode is not null
+                || libraryCompilation.AssemblyBinary is not null)
+            {
+                Console.WriteLine($"Library already compiled: {elmVersionedIdentifier}");
+                continue;
+            }
+
+            var cSharpSourceCode = sourceCodePerName.Values.Single(); // We always expect a single source file
+            libraryCompilation = libraryCompilation with { CSharpSourceCode  = cSharpSourceCode, AssemblyBinary = assemblyBinary };
+            libraryCompilationsBuilder[elmVersionedIdentifier] = libraryCompilation;
+            Console.WriteLine($"Library compiled: {elmVersionedIdentifier}");
+            hasChanged = true;
+        }
+
+        return hasChanged
+            ? new ElmCompilation(this, libraryCompilations: libraryCompilationsBuilder.ToImmutable())
+            : this;
+    }
+
+    private static ServiceProvider BuildServiceProvider()
+    {
+        var serviceProvider =
+            new ServiceCollection()
+                .AddDebugLogging()
+                .AddCqlCodeGenerationServices()
+                .BuildServiceProvider(validateScopes: true);
+        return serviceProvider;
+    }
+}
+
+public readonly record struct ElmVersionedIdentifier
+{
+    private ElmVersionedIdentifier(string Name, string? Version = null)
+    {
+        this.Name = Name;
+        this.Version = Version;
+    }
+
+    public static ElmVersionedIdentifier FromNameAndVersion(string name, string? version = null)
+    {
+        ArgumentNullException.ThrowIfNullOrEmpty(name);
+        return new ElmVersionedIdentifier(name, version);
+    }
+
+    public static ElmVersionedIdentifier FromVersionedIdentifier(VersionedIdentifier identifier)
+    {
+        ArgumentNullException.ThrowIfNull(identifier);
+        return FromNameAndVersion(identifier.id, identifier.version);
+    }
+
+    public string Name { get; init; }
+
+    public string? Version { get; init; }
+
+    public void Deconstruct(out string name, out string? version)
+    {
+        name = Name;
+        version = Version;
+    }
+
+    public static ElmVersionedIdentifier ParseString(string text)
+    {
+        var result = text.Split('-', 2) switch
+        {
+            [{ } name]              => FromNameAndVersion(name),
+            [{ } name, { } version] => FromNameAndVersion(name, version),
+            _                       => throw new UnreachableException(),
+        };
+        return result;
+    }
+
+    public override string ToString()
+    {
+        return (Name, Version) switch
+        {
+            ({} name, null)         => name,
+            ({ } name, { } version) => $"{name}-{version}",
+            _                       => throw new UnreachableException(),
+        };
+    }
+}
