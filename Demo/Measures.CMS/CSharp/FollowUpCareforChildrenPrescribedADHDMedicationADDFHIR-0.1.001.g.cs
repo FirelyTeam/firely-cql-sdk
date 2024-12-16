@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR", "0.1.001")]
 public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_001 : ILibrary, ISingleton<FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_001>
 {
@@ -1172,34 +1172,35 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
         IEnumerable<Encounter> b_ = Status_1_8_000.Instance.isEncounterPerformed(context, a_);
         bool? c_(Encounter ValidNumeratorEncounter)
         {
-            Period g_ = ValidNumeratorEncounter?.Period;
-            CqlInterval<CqlDateTime> h_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, g_);
-            CqlInterval<CqlDateTime> i_ = QICoreCommon_2_1_000.Instance.toInterval(context, h_ as object);
-            CqlInterval<CqlDate> j_ = CQMCommon_2_2_000.Instance.ToDateInterval(context, i_);
-            CqlDate k_ = context.Operators.Start(j_);
-            CqlDate l_ = this.IPSD(context);
-            CqlQuantity m_ = context.Operators.Quantity(31m, "days");
-            CqlDate n_ = context.Operators.Add(l_, m_);
-            CqlQuantity p_ = context.Operators.Quantity(300m, "days");
-            CqlDate q_ = context.Operators.Add(l_, p_);
-            CqlInterval<CqlDate> r_ = context.Operators.Interval(n_, q_, true, true);
-            bool? s_ = context.Operators.In<CqlDate>(k_, r_, "day");
+            Period h_ = ValidNumeratorEncounter?.Period;
+            CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
+            CqlInterval<CqlDateTime> j_ = QICoreCommon_2_1_000.Instance.toInterval(context, i_ as object);
+            CqlInterval<CqlDate> k_ = CQMCommon_2_2_000.Instance.ToDateInterval(context, j_);
+            CqlDate l_ = context.Operators.Start(k_);
+            CqlDate m_ = this.IPSD(context);
+            CqlQuantity n_ = context.Operators.Quantity(31m, "days");
+            CqlDate o_ = context.Operators.Add(m_, n_);
+            CqlQuantity q_ = context.Operators.Quantity(300m, "days");
+            CqlDate r_ = context.Operators.Add(m_, q_);
+            CqlInterval<CqlDate> s_ = context.Operators.Interval(o_, r_, true, true);
+            bool? t_ = context.Operators.In<CqlDate>(l_, s_, "day");
 
-            return s_;
+            return t_;
         };
         IEnumerable<Encounter> d_ = context.Operators.Where<Encounter>(b_, c_);
         CqlDate e_(Encounter ValidNumeratorEncounter)
         {
-            Period t_ = ValidNumeratorEncounter?.Period;
-            CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, t_);
-            CqlDateTime v_ = context.Operators.Start(u_);
-            CqlDate w_ = context.Operators.DateFrom(v_);
+            Period u_ = ValidNumeratorEncounter?.Period;
+            CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
+            CqlDateTime w_ = context.Operators.Start(v_);
+            CqlDate x_ = context.Operators.DateFrom(w_);
 
-            return w_;
+            return x_;
         };
         IEnumerable<CqlDate> f_ = context.Operators.Select<Encounter, CqlDate>(d_, e_);
+        IEnumerable<CqlDate> g_ = context.Operators.Distinct<CqlDate>(f_);
 
-        return f_;
+        return g_;
     }
 
 
@@ -1222,34 +1223,35 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
         IEnumerable<Encounter> c_ = Status_1_8_000.Instance.isEncounterPerformed(context, b_);
         bool? d_(Encounter VirtualEnc)
         {
-            Period h_ = VirtualEnc?.Period;
-            CqlInterval<CqlDateTime> i_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, h_);
-            CqlInterval<CqlDateTime> j_ = QICoreCommon_2_1_000.Instance.toInterval(context, i_ as object);
-            CqlInterval<CqlDate> k_ = CQMCommon_2_2_000.Instance.ToDateInterval(context, j_);
-            CqlDate l_ = context.Operators.Start(k_);
-            CqlDate m_ = this.IPSD(context);
-            CqlQuantity n_ = context.Operators.Quantity(31m, "days");
-            CqlDate o_ = context.Operators.Add(m_, n_);
-            CqlQuantity q_ = context.Operators.Quantity(300m, "days");
-            CqlDate r_ = context.Operators.Add(m_, q_);
-            CqlInterval<CqlDate> s_ = context.Operators.Interval(o_, r_, true, true);
-            bool? t_ = context.Operators.In<CqlDate>(l_, s_, "day");
+            Period i_ = VirtualEnc?.Period;
+            CqlInterval<CqlDateTime> j_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, i_);
+            CqlInterval<CqlDateTime> k_ = QICoreCommon_2_1_000.Instance.toInterval(context, j_ as object);
+            CqlInterval<CqlDate> l_ = CQMCommon_2_2_000.Instance.ToDateInterval(context, k_);
+            CqlDate m_ = context.Operators.Start(l_);
+            CqlDate n_ = this.IPSD(context);
+            CqlQuantity o_ = context.Operators.Quantity(31m, "days");
+            CqlDate p_ = context.Operators.Add(n_, o_);
+            CqlQuantity r_ = context.Operators.Quantity(300m, "days");
+            CqlDate s_ = context.Operators.Add(n_, r_);
+            CqlInterval<CqlDate> t_ = context.Operators.Interval(p_, s_, true, true);
+            bool? u_ = context.Operators.In<CqlDate>(m_, t_, "day");
 
-            return t_;
+            return u_;
         };
         IEnumerable<Encounter> e_ = context.Operators.Where<Encounter>(c_, d_);
         CqlDate f_(Encounter VirtualEnc)
         {
-            Period u_ = VirtualEnc?.Period;
-            CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, u_);
-            CqlDateTime w_ = context.Operators.Start(v_);
-            CqlDate x_ = context.Operators.DateFrom(w_);
+            Period v_ = VirtualEnc?.Period;
+            CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, v_);
+            CqlDateTime x_ = context.Operators.Start(w_);
+            CqlDate y_ = context.Operators.DateFrom(x_);
 
-            return x_;
+            return y_;
         };
         IEnumerable<CqlDate> g_ = context.Operators.Select<Encounter, CqlDate>(e_, f_);
+        IEnumerable<CqlDate> h_ = context.Operators.Distinct<CqlDate>(g_);
 
-        return g_;
+        return h_;
     }
 
 

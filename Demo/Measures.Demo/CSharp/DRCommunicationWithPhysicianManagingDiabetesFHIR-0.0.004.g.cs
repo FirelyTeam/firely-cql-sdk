@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("DRCommunicationWithPhysicianManagingDiabetesFHIR", "0.0.004")]
 public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : ILibrary, ISingleton<DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004>
 {
@@ -285,20 +285,21 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
         List<Extension> a_ = domainResource?.ModifierExtension;
         bool? b_(Extension E)
         {
-            string f_ = E?.Url;
-            FhirUri g_ = context.Operators.Convert<FhirUri>(f_);
-            string h_ = FHIRHelpers_4_0_001.Instance.ToString(context, g_);
-            string i_ = context.Operators.Concatenate("http://hl7.org/fhir/us/qicore/StructureDefinition/", url);
-            bool? j_ = context.Operators.Equal(h_, i_);
+            string g_ = E?.Url;
+            FhirUri h_ = context.Operators.Convert<FhirUri>(g_);
+            string i_ = FHIRHelpers_4_0_001.Instance.ToString(context, h_);
+            string j_ = context.Operators.Concatenate("http://hl7.org/fhir/us/qicore/StructureDefinition/", url);
+            bool? k_ = context.Operators.Equal(i_, j_);
 
-            return j_;
+            return k_;
         };
         IEnumerable<Extension> c_ = context.Operators.Where<Extension>((IEnumerable<Extension>)a_, b_);
         Extension d_(Extension E) => 
             E;
         IEnumerable<Extension> e_ = context.Operators.Select<Extension, Extension>(c_, d_);
+        IEnumerable<Extension> f_ = context.Operators.Distinct<Extension>(e_);
 
-        return e_;
+        return f_;
     }
 
     public Extension GetModifierExtension(CqlContext context, DomainResource domainResource, string url)

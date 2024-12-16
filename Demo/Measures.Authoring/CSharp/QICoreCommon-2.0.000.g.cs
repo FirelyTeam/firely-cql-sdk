@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("QICoreCommon", "2.0.000")]
 public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_0_000>
 {
@@ -964,27 +964,28 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     {
         bool? a_(Extension E)
         {
-            string f_ = E?.Url;
-            FhirString g_ = context.Operators.Convert<FhirString>(f_);
-            string h_ = g_?.Value;
-            bool? i_ = context.Operators.Equal(h_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerform");
+            string g_ = E?.Url;
+            FhirString h_ = context.Operators.Convert<FhirString>(g_);
+            string i_ = h_?.Value;
+            bool? j_ = context.Operators.Equal(i_, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-doNotPerform");
 
-            return i_;
+            return j_;
         };
         IEnumerable<Extension> b_ = context.Operators.Where<Extension>((deviceRequest is DomainResource
                 ? (IEnumerable<Extension>)((deviceRequest as DomainResource).ModifierExtension)
                 : default), a_);
         bool? c_(Extension E)
         {
-            DataType j_ = E?.Value;
-            object k_ = FHIRHelpers_4_3_000.Instance.ToValue(context, j_);
+            DataType k_ = E?.Value;
+            object l_ = FHIRHelpers_4_3_000.Instance.ToValue(context, k_);
 
-            return k_ as bool?;
+            return l_ as bool?;
         };
         IEnumerable<bool?> d_ = context.Operators.Select<Extension, bool?>(b_, c_);
-        bool? e_ = context.Operators.SingletonFrom<bool?>(d_);
+        IEnumerable<bool?> e_ = context.Operators.Distinct<bool?>(d_);
+        bool? f_ = context.Operators.SingletonFrom<bool?>(e_);
 
-        return e_;
+        return f_;
     }
 
     public CqlInterval<CqlDateTime> ToInterval(CqlContext context, object choice)
@@ -1708,36 +1709,37 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 ];
                 CqlInterval<CqlDateTime> ad_(CqlDateTime abatementDate)
                 {
-                    CqlInterval<CqlDateTime> ag_()
+                    CqlInterval<CqlDateTime> ah_()
                     {
                         if (abatementDate is null)
                         {
-                            DataType ah_ = condition?.Onset;
-                            object ai_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ah_);
-                            CqlInterval<CqlDateTime> aj_ = this.ToInterval(context, ai_);
-                            CqlDateTime ak_ = context.Operators.Start(aj_);
-                            CqlInterval<CqlDateTime> al_ = context.Operators.Interval(ak_, abatementDate, true, false);
+                            DataType ai_ = condition?.Onset;
+                            object aj_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ai_);
+                            CqlInterval<CqlDateTime> ak_ = this.ToInterval(context, aj_);
+                            CqlDateTime al_ = context.Operators.Start(ak_);
+                            CqlInterval<CqlDateTime> am_ = context.Operators.Interval(al_, abatementDate, true, false);
 
-                            return al_;
+                            return am_;
                         }
                         else
                         {
-                            DataType am_ = condition?.Onset;
-                            object an_ = FHIRHelpers_4_3_000.Instance.ToValue(context, am_);
-                            CqlInterval<CqlDateTime> ao_ = this.ToInterval(context, an_);
-                            CqlDateTime ap_ = context.Operators.Start(ao_);
-                            CqlInterval<CqlDateTime> aq_ = context.Operators.Interval(ap_, abatementDate, true, true);
+                            DataType an_ = condition?.Onset;
+                            object ao_ = FHIRHelpers_4_3_000.Instance.ToValue(context, an_);
+                            CqlInterval<CqlDateTime> ap_ = this.ToInterval(context, ao_);
+                            CqlDateTime aq_ = context.Operators.Start(ap_);
+                            CqlInterval<CqlDateTime> ar_ = context.Operators.Interval(aq_, abatementDate, true, true);
 
-                            return aq_;
+                            return ar_;
                         }
                     };
 
-                    return ag_();
+                    return ah_();
                 };
                 IEnumerable<CqlInterval<CqlDateTime>> ae_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>((IEnumerable<CqlDateTime>)ac_, ad_);
-                CqlInterval<CqlDateTime> af_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(ae_);
+                IEnumerable<CqlInterval<CqlDateTime>> af_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(ae_);
+                CqlInterval<CqlDateTime> ag_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(af_);
 
-                return af_;
+                return ag_;
             }
         };
 
@@ -1789,36 +1791,37 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
                 ];
                 CqlInterval<CqlDateTime> ad_(CqlDateTime abatementDate)
                 {
-                    CqlInterval<CqlDateTime> ag_()
+                    CqlInterval<CqlDateTime> ah_()
                     {
                         if (abatementDate is null)
                         {
-                            DataType ah_ = condition?.Onset;
-                            object ai_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ah_);
-                            CqlInterval<CqlDateTime> aj_ = this.ToInterval(context, ai_);
-                            CqlDateTime ak_ = context.Operators.Start(aj_);
-                            CqlInterval<CqlDateTime> al_ = context.Operators.Interval(ak_, abatementDate, true, false);
+                            DataType ai_ = condition?.Onset;
+                            object aj_ = FHIRHelpers_4_3_000.Instance.ToValue(context, ai_);
+                            CqlInterval<CqlDateTime> ak_ = this.ToInterval(context, aj_);
+                            CqlDateTime al_ = context.Operators.Start(ak_);
+                            CqlInterval<CqlDateTime> am_ = context.Operators.Interval(al_, abatementDate, true, false);
 
-                            return al_;
+                            return am_;
                         }
                         else
                         {
-                            DataType am_ = condition?.Onset;
-                            object an_ = FHIRHelpers_4_3_000.Instance.ToValue(context, am_);
-                            CqlInterval<CqlDateTime> ao_ = this.ToInterval(context, an_);
-                            CqlDateTime ap_ = context.Operators.Start(ao_);
-                            CqlInterval<CqlDateTime> aq_ = context.Operators.Interval(ap_, abatementDate, true, true);
+                            DataType an_ = condition?.Onset;
+                            object ao_ = FHIRHelpers_4_3_000.Instance.ToValue(context, an_);
+                            CqlInterval<CqlDateTime> ap_ = this.ToInterval(context, ao_);
+                            CqlDateTime aq_ = context.Operators.Start(ap_);
+                            CqlInterval<CqlDateTime> ar_ = context.Operators.Interval(aq_, abatementDate, true, true);
 
-                            return aq_;
+                            return ar_;
                         }
                     };
 
-                    return ag_();
+                    return ah_();
                 };
                 IEnumerable<CqlInterval<CqlDateTime>> ae_ = context.Operators.Select<CqlDateTime, CqlInterval<CqlDateTime>>((IEnumerable<CqlDateTime>)ac_, ad_);
-                CqlInterval<CqlDateTime> af_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(ae_);
+                IEnumerable<CqlInterval<CqlDateTime>> af_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(ae_);
+                CqlInterval<CqlDateTime> ag_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(af_);
 
-                return af_;
+                return ag_;
             }
         };
 
@@ -1893,28 +1896,29 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         ];
         CqlDateTime c_(CqlInterval<CqlDateTime> period)
         {
-            CqlDateTime f_()
+            CqlDateTime g_()
             {
                 if ((this.HasEnd(context, period)) ?? false)
                 {
-                    CqlDateTime g_ = context.Operators.End(period);
-
-                    return g_;
-                }
-                else
-                {
-                    CqlDateTime h_ = context.Operators.Start(period);
+                    CqlDateTime h_ = context.Operators.End(period);
 
                     return h_;
                 }
+                else
+                {
+                    CqlDateTime i_ = context.Operators.Start(period);
+
+                    return i_;
+                }
             };
 
-            return f_();
+            return g_();
         };
         IEnumerable<CqlDateTime> d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
-        CqlDateTime e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
+        IEnumerable<CqlDateTime> e_ = context.Operators.Distinct<CqlDateTime>(d_);
+        CqlDateTime f_ = context.Operators.SingletonFrom<CqlDateTime>(e_);
 
-        return e_;
+        return f_;
     }
 
     public CqlDateTime latest(CqlContext context, object choice)
@@ -1925,28 +1929,29 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         ];
         CqlDateTime c_(CqlInterval<CqlDateTime> period)
         {
-            CqlDateTime f_()
+            CqlDateTime g_()
             {
                 if ((this.hasEnd(context, period)) ?? false)
                 {
-                    CqlDateTime g_ = context.Operators.End(period);
-
-                    return g_;
-                }
-                else
-                {
-                    CqlDateTime h_ = context.Operators.Start(period);
+                    CqlDateTime h_ = context.Operators.End(period);
 
                     return h_;
                 }
+                else
+                {
+                    CqlDateTime i_ = context.Operators.Start(period);
+
+                    return i_;
+                }
             };
 
-            return f_();
+            return g_();
         };
         IEnumerable<CqlDateTime> d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
-        CqlDateTime e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
+        IEnumerable<CqlDateTime> e_ = context.Operators.Distinct<CqlDateTime>(d_);
+        CqlDateTime f_ = context.Operators.SingletonFrom<CqlDateTime>(e_);
 
-        return e_;
+        return f_;
     }
 
     public CqlDateTime Earliest(CqlContext context, object choice)
@@ -1957,28 +1962,29 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         ];
         CqlDateTime c_(CqlInterval<CqlDateTime> period)
         {
-            CqlDateTime f_()
+            CqlDateTime g_()
             {
                 if ((this.HasStart(context, period)) ?? false)
                 {
-                    CqlDateTime g_ = context.Operators.Start(period);
-
-                    return g_;
-                }
-                else
-                {
-                    CqlDateTime h_ = context.Operators.End(period);
+                    CqlDateTime h_ = context.Operators.Start(period);
 
                     return h_;
                 }
+                else
+                {
+                    CqlDateTime i_ = context.Operators.End(period);
+
+                    return i_;
+                }
             };
 
-            return f_();
+            return g_();
         };
         IEnumerable<CqlDateTime> d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
-        CqlDateTime e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
+        IEnumerable<CqlDateTime> e_ = context.Operators.Distinct<CqlDateTime>(d_);
+        CqlDateTime f_ = context.Operators.SingletonFrom<CqlDateTime>(e_);
 
-        return e_;
+        return f_;
     }
 
     public CqlDateTime earliest(CqlContext context, object choice)
@@ -1989,28 +1995,29 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         ];
         CqlDateTime c_(CqlInterval<CqlDateTime> period)
         {
-            CqlDateTime f_()
+            CqlDateTime g_()
             {
                 if ((this.hasStart(context, period)) ?? false)
                 {
-                    CqlDateTime g_ = context.Operators.Start(period);
-
-                    return g_;
-                }
-                else
-                {
-                    CqlDateTime h_ = context.Operators.End(period);
+                    CqlDateTime h_ = context.Operators.Start(period);
 
                     return h_;
                 }
+                else
+                {
+                    CqlDateTime i_ = context.Operators.End(period);
+
+                    return i_;
+                }
             };
 
-            return f_();
+            return g_();
         };
         IEnumerable<CqlDateTime> d_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlDateTime>((IEnumerable<CqlInterval<CqlDateTime>>)b_, c_);
-        CqlDateTime e_ = context.Operators.SingletonFrom<CqlDateTime>(d_);
+        IEnumerable<CqlDateTime> e_ = context.Operators.Distinct<CqlDateTime>(d_);
+        CqlDateTime f_ = context.Operators.SingletonFrom<CqlDateTime>(e_);
 
-        return e_;
+        return f_;
     }
 
     public IEnumerable<int?> Interval_To_Day_Numbers(CqlContext context, CqlInterval<CqlDateTime> Period)
@@ -2025,13 +2032,14 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand(e_ as IEnumerable<CqlInterval<int?>>, default);
         int? g_(CqlInterval<int?> DayNumber)
         {
-            int? i_ = context.Operators.End(DayNumber);
+            int? j_ = context.Operators.End(DayNumber);
 
-            return i_;
+            return j_;
         };
         IEnumerable<int?> h_ = context.Operators.Select<CqlInterval<int?>, int?>(f_, g_);
+        IEnumerable<int?> i_ = context.Operators.Distinct<int?>(h_);
 
-        return h_;
+        return i_;
     }
 
     public IEnumerable<int?> toDayNumbers(CqlContext context, CqlInterval<CqlDateTime> Period)
@@ -2046,13 +2054,14 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         IEnumerable<CqlInterval<int?>> f_ = context.Operators.Expand(e_ as IEnumerable<CqlInterval<int?>>, default);
         int? g_(CqlInterval<int?> DayNumber)
         {
-            int? i_ = context.Operators.End(DayNumber);
+            int? j_ = context.Operators.End(DayNumber);
 
-            return i_;
+            return j_;
         };
         IEnumerable<int?> h_ = context.Operators.Select<CqlInterval<int?>, int?>(f_, g_);
+        IEnumerable<int?> i_ = context.Operators.Distinct<int?>(h_);
 
-        return h_;
+        return i_;
     }
 
     public IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> Days_In_Period(CqlContext context, CqlInterval<CqlDateTime> Period)
@@ -2060,58 +2069,59 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         IEnumerable<int?> a_ = this.Interval_To_Day_Numbers(context, Period);
         (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? b_(int? DayIndex)
         {
-            CqlDateTime d_ = context.Operators.Start(Period);
-            CqlQuantity e_ = context.Operators.Quantity(24m, "hours");
-            int? f_ = context.Operators.Subtract(DayIndex, 1);
-            CqlQuantity g_ = context.Operators.ConvertIntegerToQuantity(f_);
-            CqlQuantity h_ = context.Operators.Multiply(e_, g_);
-            CqlDateTime i_ = context.Operators.Add(d_, h_);
-            CqlDateTime j_()
+            CqlDateTime e_ = context.Operators.Start(Period);
+            CqlQuantity f_ = context.Operators.Quantity(24m, "hours");
+            int? g_ = context.Operators.Subtract(DayIndex, 1);
+            CqlQuantity h_ = context.Operators.ConvertIntegerToQuantity(g_);
+            CqlQuantity i_ = context.Operators.Multiply(f_, h_);
+            CqlDateTime j_ = context.Operators.Add(e_, i_);
+            CqlDateTime k_()
             {
-                bool m_()
+                bool n_()
                 {
-                    CqlDateTime n_ = context.Operators.Start(Period);
-                    CqlQuantity o_ = context.Operators.Quantity(24m, "hours");
-                    int? p_ = context.Operators.Subtract(DayIndex, 1);
-                    CqlQuantity q_ = context.Operators.ConvertIntegerToQuantity(p_);
-                    CqlQuantity r_ = context.Operators.Multiply(o_, q_);
-                    CqlDateTime s_ = context.Operators.Add(n_, r_);
-                    CqlDateTime t_ = context.Operators.End(Period);
-                    int? u_ = context.Operators.DurationBetween(s_, t_, "hour");
-                    bool? v_ = context.Operators.Less(u_, 24);
+                    CqlDateTime o_ = context.Operators.Start(Period);
+                    CqlQuantity p_ = context.Operators.Quantity(24m, "hours");
+                    int? q_ = context.Operators.Subtract(DayIndex, 1);
+                    CqlQuantity r_ = context.Operators.ConvertIntegerToQuantity(q_);
+                    CqlQuantity s_ = context.Operators.Multiply(p_, r_);
+                    CqlDateTime t_ = context.Operators.Add(o_, s_);
+                    CqlDateTime u_ = context.Operators.End(Period);
+                    int? v_ = context.Operators.DurationBetween(t_, u_, "hour");
+                    bool? w_ = context.Operators.Less(v_, 24);
 
-                    return v_ ?? false;
+                    return w_ ?? false;
                 };
-                if (m_())
+                if (n_())
                 {
-                    CqlDateTime w_ = context.Operators.Start(Period);
-                    CqlQuantity x_ = context.Operators.Quantity(24m, "hours");
-                    int? y_ = context.Operators.Subtract(DayIndex, 1);
-                    CqlQuantity z_ = context.Operators.ConvertIntegerToQuantity(y_);
-                    CqlQuantity aa_ = context.Operators.Multiply(x_, z_);
-                    CqlDateTime ab_ = context.Operators.Add(w_, aa_);
+                    CqlDateTime x_ = context.Operators.Start(Period);
+                    CqlQuantity y_ = context.Operators.Quantity(24m, "hours");
+                    int? z_ = context.Operators.Subtract(DayIndex, 1);
+                    CqlQuantity aa_ = context.Operators.ConvertIntegerToQuantity(z_);
+                    CqlQuantity ab_ = context.Operators.Multiply(y_, aa_);
+                    CqlDateTime ac_ = context.Operators.Add(x_, ab_);
 
-                    return ab_;
+                    return ac_;
                 }
                 else
                 {
-                    CqlDateTime ac_ = context.Operators.Start(Period);
-                    CqlQuantity ad_ = context.Operators.Quantity(24m, "hours");
-                    CqlQuantity ae_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
-                    CqlQuantity af_ = context.Operators.Multiply(ad_, ae_);
-                    CqlDateTime ag_ = context.Operators.Add(ac_, af_);
+                    CqlDateTime ad_ = context.Operators.Start(Period);
+                    CqlQuantity ae_ = context.Operators.Quantity(24m, "hours");
+                    CqlQuantity af_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
+                    CqlQuantity ag_ = context.Operators.Multiply(ae_, af_);
+                    CqlDateTime ah_ = context.Operators.Add(ad_, ag_);
 
-                    return ag_;
+                    return ah_;
                 }
             };
-            CqlInterval<CqlDateTime> k_ = context.Operators.Interval(i_, j_(), true, false);
-            (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? l_ = (CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie, DayIndex, k_);
+            CqlInterval<CqlDateTime> l_ = context.Operators.Interval(j_, k_(), true, false);
+            (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? m_ = (CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie, DayIndex, l_);
 
-            return l_;
+            return m_;
         };
         IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> c_ = context.Operators.Select<int?, (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> d_ = context.Operators.Distinct<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(c_);
 
-        return c_;
+        return d_;
     }
 
     public IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> daysInPeriod(CqlContext context, CqlInterval<CqlDateTime> Period)
@@ -2119,58 +2129,59 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         IEnumerable<int?> a_ = this.Interval_To_Day_Numbers(context, Period);
         (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? b_(int? DayIndex)
         {
-            CqlDateTime d_ = context.Operators.Start(Period);
-            CqlQuantity e_ = context.Operators.Quantity(24m, "hours");
-            int? f_ = context.Operators.Subtract(DayIndex, 1);
-            CqlQuantity g_ = context.Operators.ConvertIntegerToQuantity(f_);
-            CqlQuantity h_ = context.Operators.Multiply(e_, g_);
-            CqlDateTime i_ = context.Operators.Add(d_, h_);
-            CqlDateTime j_()
+            CqlDateTime e_ = context.Operators.Start(Period);
+            CqlQuantity f_ = context.Operators.Quantity(24m, "hours");
+            int? g_ = context.Operators.Subtract(DayIndex, 1);
+            CqlQuantity h_ = context.Operators.ConvertIntegerToQuantity(g_);
+            CqlQuantity i_ = context.Operators.Multiply(f_, h_);
+            CqlDateTime j_ = context.Operators.Add(e_, i_);
+            CqlDateTime k_()
             {
-                bool m_()
+                bool n_()
                 {
-                    CqlDateTime n_ = context.Operators.Start(Period);
-                    CqlQuantity o_ = context.Operators.Quantity(24m, "hours");
-                    int? p_ = context.Operators.Subtract(DayIndex, 1);
-                    CqlQuantity q_ = context.Operators.ConvertIntegerToQuantity(p_);
-                    CqlQuantity r_ = context.Operators.Multiply(o_, q_);
-                    CqlDateTime s_ = context.Operators.Add(n_, r_);
-                    CqlDateTime t_ = context.Operators.End(Period);
-                    int? u_ = context.Operators.DurationBetween(s_, t_, "hour");
-                    bool? v_ = context.Operators.Less(u_, 24);
+                    CqlDateTime o_ = context.Operators.Start(Period);
+                    CqlQuantity p_ = context.Operators.Quantity(24m, "hours");
+                    int? q_ = context.Operators.Subtract(DayIndex, 1);
+                    CqlQuantity r_ = context.Operators.ConvertIntegerToQuantity(q_);
+                    CqlQuantity s_ = context.Operators.Multiply(p_, r_);
+                    CqlDateTime t_ = context.Operators.Add(o_, s_);
+                    CqlDateTime u_ = context.Operators.End(Period);
+                    int? v_ = context.Operators.DurationBetween(t_, u_, "hour");
+                    bool? w_ = context.Operators.Less(v_, 24);
 
-                    return v_ ?? false;
+                    return w_ ?? false;
                 };
-                if (m_())
+                if (n_())
                 {
-                    CqlDateTime w_ = context.Operators.Start(Period);
-                    CqlQuantity x_ = context.Operators.Quantity(24m, "hours");
-                    int? y_ = context.Operators.Subtract(DayIndex, 1);
-                    CqlQuantity z_ = context.Operators.ConvertIntegerToQuantity(y_);
-                    CqlQuantity aa_ = context.Operators.Multiply(x_, z_);
-                    CqlDateTime ab_ = context.Operators.Add(w_, aa_);
+                    CqlDateTime x_ = context.Operators.Start(Period);
+                    CqlQuantity y_ = context.Operators.Quantity(24m, "hours");
+                    int? z_ = context.Operators.Subtract(DayIndex, 1);
+                    CqlQuantity aa_ = context.Operators.ConvertIntegerToQuantity(z_);
+                    CqlQuantity ab_ = context.Operators.Multiply(y_, aa_);
+                    CqlDateTime ac_ = context.Operators.Add(x_, ab_);
 
-                    return ab_;
+                    return ac_;
                 }
                 else
                 {
-                    CqlDateTime ac_ = context.Operators.Start(Period);
-                    CqlQuantity ad_ = context.Operators.Quantity(24m, "hours");
-                    CqlQuantity ae_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
-                    CqlQuantity af_ = context.Operators.Multiply(ad_, ae_);
-                    CqlDateTime ag_ = context.Operators.Add(ac_, af_);
+                    CqlDateTime ad_ = context.Operators.Start(Period);
+                    CqlQuantity ae_ = context.Operators.Quantity(24m, "hours");
+                    CqlQuantity af_ = context.Operators.ConvertIntegerToQuantity(DayIndex);
+                    CqlQuantity ag_ = context.Operators.Multiply(ae_, af_);
+                    CqlDateTime ah_ = context.Operators.Add(ad_, ag_);
 
-                    return ag_;
+                    return ah_;
                 }
             };
-            CqlInterval<CqlDateTime> k_ = context.Operators.Interval(i_, j_(), true, false);
-            (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? l_ = (CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie, DayIndex, k_);
+            CqlInterval<CqlDateTime> l_ = context.Operators.Interval(j_, k_(), true, false);
+            (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)? m_ = (CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie, DayIndex, l_);
 
-            return l_;
+            return m_;
         };
         IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> c_ = context.Operators.Select<int?, (CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(a_, b_);
+        IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?> d_ = context.Operators.Distinct<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod)?>(c_);
 
-        return c_;
+        return d_;
     }
 
     private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(

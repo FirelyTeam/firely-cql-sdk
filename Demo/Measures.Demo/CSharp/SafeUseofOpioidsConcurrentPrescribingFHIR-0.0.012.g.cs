@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("SafeUseofOpioidsConcurrentPrescribingFHIR", "0.0.012")]
 public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrary, ISingleton<SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012>
 {
@@ -257,70 +257,71 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
             IEnumerable<MedicationRequest> k_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, j_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
             bool? l_(MedicationRequest Opioids)
             {
-                FhirDateTime r_ = Opioids?.AuthoredOnElement;
-                CqlDateTime s_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, r_);
-                Period t_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, t_);
-                bool? v_ = context.Operators.In<CqlDateTime>(s_, u_, default);
+                FhirDateTime s_ = Opioids?.AuthoredOnElement;
+                CqlDateTime t_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, s_);
+                Period u_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, u_);
+                bool? w_ = context.Operators.In<CqlDateTime>(t_, v_, default);
 
-                return v_;
+                return w_;
             };
             IEnumerable<MedicationRequest> m_ = context.Operators.Where<MedicationRequest>(k_, l_);
             object n_(MedicationRequest Opioids)
             {
-                DataType w_ = Opioids?.Medication;
+                DataType x_ = Opioids?.Medication;
 
-                return w_;
+                return x_;
             };
             IEnumerable<object> o_ = context.Operators.Select<MedicationRequest, object>(m_, n_);
-            int? p_ = context.Operators.Count<object>(o_);
-            bool? q_ = context.Operators.GreaterOrEqual(p_, 2);
+            IEnumerable<object> p_ = context.Operators.Distinct<object>(o_);
+            int? q_ = context.Operators.Count<object>(p_);
+            bool? r_ = context.Operators.GreaterOrEqual(q_, 2);
 
-            return q_;
+            return r_;
         };
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         IEnumerable<Encounter> e_(Encounter InpatientEncounter)
         {
-            CqlValueSet x_ = this.Schedule_II_and_III_Opioid_Medications(context);
-            IEnumerable<MedicationRequest> y_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, x_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
-            bool? z_(MedicationRequest OpioidsDischarge)
+            CqlValueSet y_ = this.Schedule_II_and_III_Opioid_Medications(context);
+            IEnumerable<MedicationRequest> z_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, y_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
+            bool? aa_(MedicationRequest OpioidsDischarge)
             {
-                FhirDateTime ad_ = OpioidsDischarge?.AuthoredOnElement;
-                CqlDateTime ae_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ad_);
-                Period af_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> ag_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, af_);
-                bool? ah_ = context.Operators.In<CqlDateTime>(ae_, ag_, default);
+                FhirDateTime ae_ = OpioidsDischarge?.AuthoredOnElement;
+                CqlDateTime af_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ae_);
+                Period ag_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> ah_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ag_);
+                bool? ai_ = context.Operators.In<CqlDateTime>(af_, ah_, default);
 
-                return ah_;
+                return ai_;
             };
-            IEnumerable<MedicationRequest> aa_ = context.Operators.Where<MedicationRequest>(y_, z_);
-            Encounter ab_(MedicationRequest OpioidsDischarge) => 
+            IEnumerable<MedicationRequest> ab_ = context.Operators.Where<MedicationRequest>(z_, aa_);
+            Encounter ac_(MedicationRequest OpioidsDischarge) => 
                 InpatientEncounter;
-            IEnumerable<Encounter> ac_ = context.Operators.Select<MedicationRequest, Encounter>(aa_, ab_);
+            IEnumerable<Encounter> ad_ = context.Operators.Select<MedicationRequest, Encounter>(ab_, ac_);
 
-            return ac_;
+            return ad_;
         };
         IEnumerable<Encounter> f_ = context.Operators.SelectMany<Encounter, Encounter>(a_, e_);
         IEnumerable<Encounter> g_(Encounter InpatientEncounter)
         {
-            CqlValueSet ai_ = this.Schedule_IV_Benzodiazepines(context);
-            IEnumerable<MedicationRequest> aj_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, ai_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
-            bool? ak_(MedicationRequest BenzodiazepinesDischarge)
+            CqlValueSet aj_ = this.Schedule_IV_Benzodiazepines(context);
+            IEnumerable<MedicationRequest> ak_ = context.Operators.Retrieve<MedicationRequest>(new RetrieveParameters(default, aj_, default, "http://hl7.org/fhir/StructureDefinition/MedicationRequest"));
+            bool? al_(MedicationRequest BenzodiazepinesDischarge)
             {
-                FhirDateTime ao_ = BenzodiazepinesDischarge?.AuthoredOnElement;
-                CqlDateTime ap_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ao_);
-                Period aq_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, aq_);
-                bool? as_ = context.Operators.In<CqlDateTime>(ap_, ar_, default);
+                FhirDateTime ap_ = BenzodiazepinesDischarge?.AuthoredOnElement;
+                CqlDateTime aq_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ap_);
+                Period ar_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> as_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ar_);
+                bool? at_ = context.Operators.In<CqlDateTime>(aq_, as_, default);
 
-                return as_;
+                return at_;
             };
-            IEnumerable<MedicationRequest> al_ = context.Operators.Where<MedicationRequest>(aj_, ak_);
-            Encounter am_(MedicationRequest BenzodiazepinesDischarge) => 
+            IEnumerable<MedicationRequest> am_ = context.Operators.Where<MedicationRequest>(ak_, al_);
+            Encounter an_(MedicationRequest BenzodiazepinesDischarge) => 
                 InpatientEncounter;
-            IEnumerable<Encounter> an_ = context.Operators.Select<MedicationRequest, Encounter>(al_, am_);
+            IEnumerable<Encounter> ao_ = context.Operators.Select<MedicationRequest, Encounter>(am_, an_);
 
-            return an_;
+            return ao_;
         };
         IEnumerable<Encounter> h_ = context.Operators.SelectMany<Encounter, Encounter>(f_, g_);
         IEnumerable<Encounter> i_ = context.Operators.Union<Encounter>(c_, h_);
@@ -335,85 +336,86 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
         IEnumerable<Encounter> a_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18(context);
         bool? b_(Encounter InpatientEncounter)
         {
-            CqlValueSet f_ = this.All_Primary_and_Secondary_Cancer(context);
-            IEnumerable<Condition> g_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, f_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
-            bool? h_(Condition Cancer)
+            CqlValueSet g_ = this.All_Primary_and_Secondary_Cancer(context);
+            IEnumerable<Condition> h_ = context.Operators.Retrieve<Condition>(new RetrieveParameters(default, g_, default, "http://hl7.org/fhir/StructureDefinition/Condition"));
+            bool? i_(Condition Cancer)
             {
-                CqlInterval<CqlDateTime> ab_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, Cancer);
-                Period ac_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> ad_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ac_);
-                bool? ae_ = context.Operators.Overlaps(ab_, ad_, default);
+                CqlInterval<CqlDateTime> ac_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Prevalence_Period(context, Cancer);
+                Period ad_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> ae_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ad_);
+                bool? af_ = context.Operators.Overlaps(ac_, ae_, default);
 
-                return ae_;
+                return af_;
             };
-            IEnumerable<Condition> i_ = context.Operators.Where<Condition>(g_, h_);
-            bool? j_ = context.Operators.Exists<Condition>(i_);
-            CqlValueSet k_ = this.Palliative_or_Hospice_Care(context);
-            IEnumerable<ServiceRequest> l_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, k_, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
-            bool? m_(ServiceRequest PalliativeOrHospiceCareOrder)
+            IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
+            bool? k_ = context.Operators.Exists<Condition>(j_);
+            CqlValueSet l_ = this.Palliative_or_Hospice_Care(context);
+            IEnumerable<ServiceRequest> m_ = context.Operators.Retrieve<ServiceRequest>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/StructureDefinition/ServiceRequest"));
+            bool? n_(ServiceRequest PalliativeOrHospiceCareOrder)
             {
-                FhirDateTime af_ = PalliativeOrHospiceCareOrder?.AuthoredOnElement;
-                CqlDateTime ag_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, af_);
-                Period ah_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> ai_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ah_);
-                bool? aj_ = context.Operators.In<CqlDateTime>(ag_, ai_, default);
-                Code<RequestIntent> ak_ = PalliativeOrHospiceCareOrder?.IntentElement;
-                string al_ = FHIRHelpers_4_0_001.Instance.ToString(context, ak_);
-                bool? am_ = context.Operators.Equal(al_, "order");
-                bool? an_ = context.Operators.And(aj_, am_);
+                FhirDateTime ag_ = PalliativeOrHospiceCareOrder?.AuthoredOnElement;
+                CqlDateTime ah_ = FHIRHelpers_4_0_001.Instance.ToDateTime(context, ag_);
+                Period ai_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ai_);
+                bool? ak_ = context.Operators.In<CqlDateTime>(ah_, aj_, default);
+                Code<RequestIntent> al_ = PalliativeOrHospiceCareOrder?.IntentElement;
+                string am_ = FHIRHelpers_4_0_001.Instance.ToString(context, al_);
+                bool? an_ = context.Operators.Equal(am_, "order");
+                bool? ao_ = context.Operators.And(ak_, an_);
 
-                return an_;
+                return ao_;
             };
-            IEnumerable<ServiceRequest> n_ = context.Operators.Where<ServiceRequest>(l_, m_);
-            bool? o_ = context.Operators.Exists<ServiceRequest>(n_);
-            bool? p_ = context.Operators.Or(j_, o_);
-            IEnumerable<Procedure> r_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, k_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
-            bool? s_(Procedure PalliativeOrHospiceCarePerformed)
+            IEnumerable<ServiceRequest> o_ = context.Operators.Where<ServiceRequest>(m_, n_);
+            bool? p_ = context.Operators.Exists<ServiceRequest>(o_);
+            bool? q_ = context.Operators.Or(k_, p_);
+            IEnumerable<Procedure> s_ = context.Operators.Retrieve<Procedure>(new RetrieveParameters(default, l_, default, "http://hl7.org/fhir/StructureDefinition/Procedure"));
+            bool? t_(Procedure PalliativeOrHospiceCarePerformed)
             {
-                DataType ao_ = PalliativeOrHospiceCarePerformed?.Performed;
-                CqlInterval<CqlDateTime> ap_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ao_);
-                Period aq_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> ar_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, aq_);
-                bool? as_ = context.Operators.Overlaps(ap_, ar_, default);
+                DataType ap_ = PalliativeOrHospiceCarePerformed?.Performed;
+                CqlInterval<CqlDateTime> aq_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, ap_);
+                Period ar_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> as_ = FHIRHelpers_4_0_001.Instance.ToInterval(context, ar_);
+                bool? at_ = context.Operators.Overlaps(aq_, as_, default);
 
-                return as_;
+                return at_;
             };
-            IEnumerable<Procedure> t_ = context.Operators.Where<Procedure>(r_, s_);
-            bool? u_ = context.Operators.Exists<Procedure>(t_);
-            bool? v_ = context.Operators.Or(p_, u_);
-            IEnumerable<Encounter> w_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18(context);
-            bool? x_(Encounter InpatientEncounter)
+            IEnumerable<Procedure> u_ = context.Operators.Where<Procedure>(s_, t_);
+            bool? v_ = context.Operators.Exists<Procedure>(u_);
+            bool? w_ = context.Operators.Or(q_, v_);
+            IEnumerable<Encounter> x_ = this.Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18(context);
+            bool? y_(Encounter InpatientEncounter)
             {
-                Encounter.HospitalizationComponent at_ = InpatientEncounter?.Hospitalization;
-                CodeableConcept au_ = at_?.DischargeDisposition;
-                CqlConcept av_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, au_);
-                CqlValueSet aw_ = this.Discharge_To_Acute_Care_Facility(context);
-                bool? ax_ = context.Operators.ConceptInValueSet(av_, aw_);
-                CodeableConcept az_ = at_?.DischargeDisposition;
-                CqlConcept ba_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, az_);
-                CqlValueSet bb_ = this.Hospice_Care_Referral_or_Admission(context);
-                bool? bc_ = context.Operators.ConceptInValueSet(ba_, bb_);
-                bool? bd_ = context.Operators.Or(ax_, bc_);
-                CodeableConcept bf_ = at_?.DischargeDisposition;
-                CqlConcept bg_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, bf_);
-                CqlValueSet bh_ = this.Patient_Expired(context);
-                bool? bi_ = context.Operators.ConceptInValueSet(bg_, bh_);
-                bool? bj_ = context.Operators.Or(bd_, bi_);
+                Encounter.HospitalizationComponent au_ = InpatientEncounter?.Hospitalization;
+                CodeableConcept av_ = au_?.DischargeDisposition;
+                CqlConcept aw_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, av_);
+                CqlValueSet ax_ = this.Discharge_To_Acute_Care_Facility(context);
+                bool? ay_ = context.Operators.ConceptInValueSet(aw_, ax_);
+                CodeableConcept ba_ = au_?.DischargeDisposition;
+                CqlConcept bb_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, ba_);
+                CqlValueSet bc_ = this.Hospice_Care_Referral_or_Admission(context);
+                bool? bd_ = context.Operators.ConceptInValueSet(bb_, bc_);
+                bool? be_ = context.Operators.Or(ay_, bd_);
+                CodeableConcept bg_ = au_?.DischargeDisposition;
+                CqlConcept bh_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, bg_);
+                CqlValueSet bi_ = this.Patient_Expired(context);
+                bool? bj_ = context.Operators.ConceptInValueSet(bh_, bi_);
+                bool? bk_ = context.Operators.Or(be_, bj_);
 
-                return bj_;
+                return bk_;
             };
-            IEnumerable<Encounter> y_ = context.Operators.Where<Encounter>(w_, x_);
-            bool? z_ = context.Operators.Exists<Encounter>(y_);
-            bool? aa_ = context.Operators.Or(v_, z_);
+            IEnumerable<Encounter> z_ = context.Operators.Where<Encounter>(x_, y_);
+            bool? aa_ = context.Operators.Exists<Encounter>(z_);
+            bool? ab_ = context.Operators.Or(w_, aa_);
 
-            return aa_;
+            return ab_;
         };
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
         Encounter d_(Encounter InpatientEncounter) => 
             InpatientEncounter;
         IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
+        IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
 
-        return e_;
+        return f_;
     }
 
 }

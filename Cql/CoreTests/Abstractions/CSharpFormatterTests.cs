@@ -10,7 +10,7 @@ using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Infrastructure;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CoreTests.Infrastructure;
+namespace CoreTests.Abstractions;
 
 [TestClass]
 [TestCategory("UnitTest")]
@@ -83,7 +83,7 @@ public class CSharpFormatterTests
 
         Assert.AreEqual(
             expected: "System.Collections.Generic.IDictionary<, >",
-            actual: typeof(IDictionary<,>).ToCSharpString(typeFormatterOptions: new(NoGenericTypeParameterNames:true)));
+            actual: typeof(IDictionary<,>).ToCSharpString(typeFormatterOptions: new(NoGenericTypeParameterNames: true)));
 
         Assert.AreEqual(
             expected: "IDictionary<TKey, TValue>",
@@ -98,13 +98,13 @@ public class CSharpFormatterTests
                 typeFormatterOptions: new(
                         NoNamespaces: false,
                         UseKeywords: true,
-                        GenericArgumentTokens: CSharpTokens.GenericArguments with { Separator = ","})));
+                        GenericArgumentTokens: CSharpTokens.GenericArguments with { Separator = "," })));
 
         Assert.AreEqual(
-            expected: "CoreTests.Infrastructure.EmptyStruct+Nested1+Nested2",
+            expected: "CoreTests.Abstractions.EmptyStruct+Nested1+Nested2",
             actual: typeof(EmptyStruct.Nested1.Nested2).ToCSharpString(
                 typeFormatterOptions: new(
-                    NestedTypeSeparator:"+")));
+                    NestedTypeSeparator: "+")));
 
         Assert.AreEqual(
             expected: "System.Nullable<int>",
@@ -123,7 +123,7 @@ public class CSharpFormatterTests
     [TestMethod]
     public void MethodToCSharpString_GenericGenericDefinition_ShouldReturnCorrectResults()
     {
-        MethodInfo m = ReflectionUtility.GenericMethodDefinitionOf(fnToMethodCall: () => default(TypeExtensionsTests.INonGenericInterface)!.GenericMethod<decimal,int,TypeExtensionsTests.MyDerivedClass,char>(default!, default!, default!));
+        MethodInfo m = ReflectionUtility.GenericMethodDefinitionOf(fnToMethodCall: () => default(TypeExtensionsTests.INonGenericInterface)!.GenericMethod<decimal, int, TypeExtensionsTests.MyDerivedClass, char>(default!, default!, default!));
 
         Assert.AreEqual(
             expected: "IList<T> GenericMethod<T1, T2, T3, T>(T1 a, T2[] b, IEnumerable<T3>[] c)",
@@ -153,12 +153,12 @@ public class CSharpFormatterTests
         tw = new TestTextWriter(new StringWriter());
         var methodCSharpFormat = new MethodCSharpFormat(
             MethodFormat: method => $"function {method.Name}{method.GenericArguments}{method.Parameters}: {method.ReturnType};",
-            ParameterFormat: new (
+            ParameterFormat: new(
                 ParameterFormat: parameter => $"{parameter.Name}: {parameter.Type}",
                 TypeFormat: new(
-                    UseKeywords:true,
-                    NoNamespaces:true)),
-            ParameterTokens: CSharpTokens.Parameters with { Separator = "; "}
+                    UseKeywords: true,
+                    NoNamespaces: true)),
+            ParameterTokens: CSharpTokens.Parameters with { Separator = "; " }
         );
         methodCSharpFormat.WriteTo(m, tw);
         Assert.AreEqual(

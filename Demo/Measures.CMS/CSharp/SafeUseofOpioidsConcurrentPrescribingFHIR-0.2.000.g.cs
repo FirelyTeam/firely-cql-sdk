@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("SafeUseofOpioidsConcurrentPrescribingFHIR", "0.2.000")]
 public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrary, ISingleton<SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000>
 {
@@ -494,54 +494,55 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
             IEnumerable<MedicationRequest> d_ = this.Opioid_at_Discharge(context);
             bool? e_(MedicationRequest OpioidMedications)
             {
-                FhirDateTime p_ = OpioidMedications?.AuthoredOnElement;
-                CqlDateTime q_ = context.Operators.Convert<CqlDateTime>(p_);
-                Period r_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> s_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, r_);
-                bool? t_ = context.Operators.In<CqlDateTime>(q_, s_, "day");
+                FhirDateTime q_ = OpioidMedications?.AuthoredOnElement;
+                CqlDateTime r_ = context.Operators.Convert<CqlDateTime>(q_);
+                Period s_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, s_);
+                bool? u_ = context.Operators.In<CqlDateTime>(r_, t_, "day");
 
-                return t_;
+                return u_;
             };
             IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
             object g_(MedicationRequest OpioidMedications)
             {
-                DataType u_ = OpioidMedications?.Medication;
-                object v_ = FHIRHelpers_4_4_000.Instance.ToValue(context, u_);
+                DataType v_ = OpioidMedications?.Medication;
+                object w_ = FHIRHelpers_4_4_000.Instance.ToValue(context, v_);
 
-                return v_;
+                return w_;
             };
             IEnumerable<object> h_ = context.Operators.Select<MedicationRequest, object>(f_, g_);
-            int? i_ = context.Operators.Count<object>(h_);
-            bool? j_ = context.Operators.GreaterOrEqual(i_, 2);
-            bool? l_(MedicationRequest OpioidDischargeMedications)
+            IEnumerable<object> i_ = context.Operators.Distinct<object>(h_);
+            int? j_ = context.Operators.Count<object>(i_);
+            bool? k_ = context.Operators.GreaterOrEqual(j_, 2);
+            bool? m_(MedicationRequest OpioidDischargeMedications)
             {
-                FhirDateTime w_ = OpioidDischargeMedications?.AuthoredOnElement;
-                CqlDateTime x_ = context.Operators.Convert<CqlDateTime>(w_);
-                Period y_ = InpatientEncounter?.Period;
-                CqlInterval<CqlDateTime> z_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, y_);
-                bool? aa_ = context.Operators.In<CqlDateTime>(x_, z_, "day");
-                IEnumerable<MedicationRequest> ab_ = this.Benzodiazepine_at_Discharge(context);
-                bool? ac_(MedicationRequest BenzodiazepineDischargeMedication)
+                FhirDateTime x_ = OpioidDischargeMedications?.AuthoredOnElement;
+                CqlDateTime y_ = context.Operators.Convert<CqlDateTime>(x_);
+                Period z_ = InpatientEncounter?.Period;
+                CqlInterval<CqlDateTime> aa_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, z_);
+                bool? ab_ = context.Operators.In<CqlDateTime>(y_, aa_, "day");
+                IEnumerable<MedicationRequest> ac_ = this.Benzodiazepine_at_Discharge(context);
+                bool? ad_(MedicationRequest BenzodiazepineDischargeMedication)
                 {
-                    FhirDateTime ag_ = BenzodiazepineDischargeMedication?.AuthoredOnElement;
-                    CqlDateTime ah_ = context.Operators.Convert<CqlDateTime>(ag_);
-                    Period ai_ = InpatientEncounter?.Period;
-                    CqlInterval<CqlDateTime> aj_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, ai_);
-                    bool? ak_ = context.Operators.In<CqlDateTime>(ah_, aj_, "day");
+                    FhirDateTime ah_ = BenzodiazepineDischargeMedication?.AuthoredOnElement;
+                    CqlDateTime ai_ = context.Operators.Convert<CqlDateTime>(ah_);
+                    Period aj_ = InpatientEncounter?.Period;
+                    CqlInterval<CqlDateTime> ak_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, aj_);
+                    bool? al_ = context.Operators.In<CqlDateTime>(ai_, ak_, "day");
 
-                    return ak_;
+                    return al_;
                 };
-                IEnumerable<MedicationRequest> ad_ = context.Operators.Where<MedicationRequest>(ab_, ac_);
-                bool? ae_ = context.Operators.Exists<MedicationRequest>(ad_);
-                bool? af_ = context.Operators.And(aa_, ae_);
+                IEnumerable<MedicationRequest> ae_ = context.Operators.Where<MedicationRequest>(ac_, ad_);
+                bool? af_ = context.Operators.Exists<MedicationRequest>(ae_);
+                bool? ag_ = context.Operators.And(ab_, af_);
 
-                return af_;
+                return ag_;
             };
-            IEnumerable<MedicationRequest> m_ = context.Operators.Where<MedicationRequest>(d_, l_);
-            bool? n_ = context.Operators.Exists<MedicationRequest>(m_);
-            bool? o_ = context.Operators.Or(j_, n_);
+            IEnumerable<MedicationRequest> n_ = context.Operators.Where<MedicationRequest>(d_, m_);
+            bool? o_ = context.Operators.Exists<MedicationRequest>(n_);
+            bool? p_ = context.Operators.Or(k_, o_);
 
-            return o_;
+            return p_;
         };
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
 

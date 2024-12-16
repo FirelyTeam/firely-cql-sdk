@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("Antibiotic", "1.7.000")]
 public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_000>
 {
@@ -48,79 +48,81 @@ public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_00
     {
         IEnumerable<Encounter> a_(Encounter eDate)
         {
-            bool? e_(Condition comcondition)
+            bool? f_(Condition comcondition)
             {
-                CqlInterval<CqlDateTime> i_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, comcondition);
-                CqlDateTime j_ = context.Operators.Start(i_);
-                CqlDate k_ = context.Operators.DateFrom(j_);
-                Period l_ = eDate?.Period;
-                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
-                CqlInterval<CqlDateTime> n_ = QICoreCommon_2_1_000.Instance.toInterval(context, m_ as object);
-                CqlDateTime o_ = context.Operators.Start(n_);
-                CqlDate p_ = context.Operators.DateFrom(o_);
-                CqlQuantity q_ = context.Operators.Quantity(1m, "year");
-                CqlDate r_ = context.Operators.Subtract(p_, q_);
-                CqlInterval<CqlDateTime> t_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
-                CqlInterval<CqlDateTime> u_ = QICoreCommon_2_1_000.Instance.toInterval(context, t_ as object);
-                CqlDateTime v_ = context.Operators.Start(u_);
-                CqlDate w_ = context.Operators.DateFrom(v_);
-                CqlInterval<CqlDate> x_ = context.Operators.Interval(r_, w_, true, true);
-                bool? y_ = context.Operators.In<CqlDate>(k_, x_, default);
+                CqlInterval<CqlDateTime> j_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, comcondition);
+                CqlDateTime k_ = context.Operators.Start(j_);
+                CqlDate l_ = context.Operators.DateFrom(k_);
+                Period m_ = eDate?.Period;
+                CqlInterval<CqlDateTime> n_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
+                CqlInterval<CqlDateTime> o_ = QICoreCommon_2_1_000.Instance.toInterval(context, n_ as object);
+                CqlDateTime p_ = context.Operators.Start(o_);
+                CqlDate q_ = context.Operators.DateFrom(p_);
+                CqlQuantity r_ = context.Operators.Quantity(1m, "year");
+                CqlDate s_ = context.Operators.Subtract(q_, r_);
+                CqlInterval<CqlDateTime> u_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, m_);
+                CqlInterval<CqlDateTime> v_ = QICoreCommon_2_1_000.Instance.toInterval(context, u_ as object);
+                CqlDateTime w_ = context.Operators.Start(v_);
+                CqlDate x_ = context.Operators.DateFrom(w_);
+                CqlInterval<CqlDate> y_ = context.Operators.Interval(s_, x_, true, true);
+                bool? z_ = context.Operators.In<CqlDate>(l_, y_, default);
 
-                return y_;
+                return z_;
             };
-            IEnumerable<Condition> f_ = context.Operators.Where<Condition>(comorbidConditions, e_);
-            Encounter g_(Condition comcondition) => 
+            IEnumerable<Condition> g_ = context.Operators.Where<Condition>(comorbidConditions, f_);
+            Encounter h_(Condition comcondition) => 
                 eDate;
-            IEnumerable<Encounter> h_ = context.Operators.Select<Condition, Encounter>(f_, g_);
+            IEnumerable<Encounter> i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
-            return h_;
+            return i_;
         };
         IEnumerable<Encounter> b_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, a_);
         Encounter c_(Encounter eDate) => 
             eDate;
         IEnumerable<Encounter> d_ = context.Operators.Select<Encounter, Encounter>(b_, c_);
+        IEnumerable<Encounter> e_ = context.Operators.Distinct<Encounter>(d_);
 
-        return d_;
+        return e_;
     }
 
     public IEnumerable<Encounter> Has_Competing_Diagnosis_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<Condition> competingConditions)
     {
         IEnumerable<Encounter> a_(Encounter eDate)
         {
-            bool? e_(Condition competcondition)
+            bool? f_(Condition competcondition)
             {
-                CqlInterval<CqlDateTime> i_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, competcondition);
-                CqlDateTime j_ = context.Operators.Start(i_);
-                Period k_ = eDate?.Period;
-                CqlInterval<CqlDateTime> l_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                CqlDateTime m_ = context.Operators.Start(l_);
-                CqlInterval<CqlDateTime> o_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                CqlDateTime p_ = context.Operators.Start(o_);
-                CqlQuantity q_ = context.Operators.Quantity(3m, "days");
-                CqlDateTime r_ = context.Operators.Add(p_, q_);
-                CqlInterval<CqlDateTime> s_ = context.Operators.Interval(m_, r_, true, true);
-                bool? t_ = context.Operators.In<CqlDateTime>(j_, s_, "day");
-                CqlInterval<CqlDateTime> v_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, k_);
-                CqlDateTime w_ = context.Operators.Start(v_);
-                bool? x_ = context.Operators.Not((bool?)(w_ is null));
-                bool? y_ = context.Operators.And(t_, x_);
+                CqlInterval<CqlDateTime> j_ = QICoreCommon_2_1_000.Instance.prevalenceInterval(context, competcondition);
+                CqlDateTime k_ = context.Operators.Start(j_);
+                Period l_ = eDate?.Period;
+                CqlInterval<CqlDateTime> m_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
+                CqlDateTime n_ = context.Operators.Start(m_);
+                CqlInterval<CqlDateTime> p_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
+                CqlDateTime q_ = context.Operators.Start(p_);
+                CqlQuantity r_ = context.Operators.Quantity(3m, "days");
+                CqlDateTime s_ = context.Operators.Add(q_, r_);
+                CqlInterval<CqlDateTime> t_ = context.Operators.Interval(n_, s_, true, true);
+                bool? u_ = context.Operators.In<CqlDateTime>(k_, t_, "day");
+                CqlInterval<CqlDateTime> w_ = FHIRHelpers_4_4_000.Instance.ToInterval(context, l_);
+                CqlDateTime x_ = context.Operators.Start(w_);
+                bool? y_ = context.Operators.Not((bool?)(x_ is null));
+                bool? z_ = context.Operators.And(u_, y_);
 
-                return y_;
+                return z_;
             };
-            IEnumerable<Condition> f_ = context.Operators.Where<Condition>(competingConditions, e_);
-            Encounter g_(Condition competcondition) => 
+            IEnumerable<Condition> g_ = context.Operators.Where<Condition>(competingConditions, f_);
+            Encounter h_(Condition competcondition) => 
                 eDate;
-            IEnumerable<Encounter> h_ = context.Operators.Select<Condition, Encounter>(f_, g_);
+            IEnumerable<Encounter> i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
-            return h_;
+            return i_;
         };
         IEnumerable<Encounter> b_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, a_);
         Encounter c_(Encounter eDate) => 
             eDate;
         IEnumerable<Encounter> d_ = context.Operators.Select<Encounter, Encounter>(b_, c_);
+        IEnumerable<Encounter> e_ = context.Operators.Distinct<Encounter>(d_);
 
-        return d_;
+        return e_;
     }
 
     public IEnumerable<Encounter> Has_Antibiotic_Medication_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<MedicationRequest> antibioticMedications)

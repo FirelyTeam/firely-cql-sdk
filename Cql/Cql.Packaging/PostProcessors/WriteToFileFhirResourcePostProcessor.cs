@@ -5,6 +5,8 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
+
+using System.Diagnostics;
 using System.Text.Json;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
@@ -13,24 +15,26 @@ using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packaging.PostProcessors;
 
-internal class WriteToFileFhirResourcePostProcessor : FhirResourcePostProcessor
+internal class WriteToFileFhirResourcePostProcessor(
+    IOptions<FhirResourceWriterOptions> fhirResourceWriterOptions,
+    ILogger<WriteToFileFhirResourcePostProcessor> logger)
+    : FhirResourcePostProcessor
 {
     private static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector).Pretty();
 
-    private readonly FhirResourceWriterOptions _fhirResourceWriterOptions;
-    private readonly ILogger<WriteToFileFhirResourcePostProcessor> _logger;
-
-    public WriteToFileFhirResourcePostProcessor(
-        IOptions<FhirResourceWriterOptions> fhirResourceWriterOptions,
-        ILogger<WriteToFileFhirResourcePostProcessor> logger)
-    {
-        _fhirResourceWriterOptions = fhirResourceWriterOptions.Value;
-        _logger = logger;
-    }
+    private readonly FhirResourceWriterOptions _fhirResourceWriterOptions = fhirResourceWriterOptions.Value;
+    private readonly ILogger<WriteToFileFhirResourcePostProcessor> _logger = logger;
 
     public override void ProcessResource(Resource resource)
     {
-        var file = new FileInfo($"{Path.Combine(_fhirResourceWriterOptions.OutDirectory!.FullName, resource.Id)}.json");
+        ResourceFileName resourceFileName = resource switch
+        {
+            Library l => ResourceFileName.Create(nameof(Library), l.Id, l.Version),
+            Measure m => ResourceFileName.Create(nameof(Measure), m.Id, m.Version),
+            _ => throw new UnreachableException("Only expecting Library or Measure.")
+        };
+
+        var file = new FileInfo($"{Path.Combine(_fhirResourceWriterOptions.OutDirectory!.FullName, resourceFileName.FileName)}");
         _logger.LogInformation("Writing FHIR Resource file: '{file}'", file.FullName);
 
         if (resource is Library library

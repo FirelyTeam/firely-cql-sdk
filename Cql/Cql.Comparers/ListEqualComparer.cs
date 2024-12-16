@@ -10,7 +10,6 @@
 using System;
 using Hl7.Cql.Abstractions;
 using System.Collections;
-using System.Reflection.Metadata.Ecma335;
 
 namespace Hl7.Cql.Comparers
 {

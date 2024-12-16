@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.7.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("AlaraCommonFunctions", "1.5.000")]
 public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCommonFunctions_1_5_000>
 {
@@ -170,32 +170,33 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
         List<Observation.ComponentComponent> a_ = Obs?.Component;
         bool? b_(Observation.ComponentComponent C)
         {
-            CodeableConcept g_ = C?.Code;
-            CqlConcept h_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, g_);
-            CqlCode i_ = this.Calculated_CT_global_noise(context);
-            CqlConcept j_ = context.Operators.ConvertCodeToConcept(i_);
-            bool? k_ = context.Operators.Equivalent(h_, j_);
-            DataType l_ = C?.Value;
-            object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
-            string n_ = (m_ as CqlQuantity)?.unit;
-            bool? o_ = context.Operators.Equal(n_, "[hnsf'U]");
-            bool? p_ = context.Operators.And(k_, o_);
+            CodeableConcept h_ = C?.Code;
+            CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_);
+            CqlCode j_ = this.Calculated_CT_global_noise(context);
+            CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+            bool? l_ = context.Operators.Equivalent(i_, k_);
+            DataType m_ = C?.Value;
+            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
+            string o_ = (n_ as CqlQuantity)?.unit;
+            bool? p_ = context.Operators.Equal(o_, "[hnsf'U]");
+            bool? q_ = context.Operators.And(l_, p_);
 
-            return p_;
+            return q_;
         };
         IEnumerable<Observation.ComponentComponent> c_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)a_, b_);
         decimal? d_(Observation.ComponentComponent C)
         {
-            DataType q_ = C?.Value;
-            object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-            decimal? s_ = (r_ as CqlQuantity)?.value;
+            DataType r_ = C?.Value;
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+            decimal? t_ = (s_ as CqlQuantity)?.value;
 
-            return s_;
+            return t_;
         };
         IEnumerable<decimal?> e_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(c_, d_);
-        decimal? f_ = context.Operators.SingletonFrom<decimal?>(e_);
+        IEnumerable<decimal?> f_ = context.Operators.Distinct<decimal?>(e_);
+        decimal? g_ = context.Operators.SingletonFrom<decimal?>(f_);
 
-        return f_;
+        return g_;
     }
 
     public decimal? Size_Adjusted_Value(CqlContext context, Observation Obs)
@@ -203,32 +204,33 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
         List<Observation.ComponentComponent> a_ = Obs?.Component;
         bool? b_(Observation.ComponentComponent C)
         {
-            CodeableConcept g_ = C?.Code;
-            CqlConcept h_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, g_);
-            CqlCode i_ = this.Calculated_CT_size_adjusted_dose(context);
-            CqlConcept j_ = context.Operators.ConvertCodeToConcept(i_);
-            bool? k_ = context.Operators.Equivalent(h_, j_);
-            DataType l_ = C?.Value;
-            object m_ = FHIRHelpers_4_4_000.Instance.ToValue(context, l_);
-            string n_ = (m_ as CqlQuantity)?.unit;
-            bool? o_ = context.Operators.Equal(n_, "mGy.cm");
-            bool? p_ = context.Operators.And(k_, o_);
+            CodeableConcept h_ = C?.Code;
+            CqlConcept i_ = FHIRHelpers_4_4_000.Instance.ToConcept(context, h_);
+            CqlCode j_ = this.Calculated_CT_size_adjusted_dose(context);
+            CqlConcept k_ = context.Operators.ConvertCodeToConcept(j_);
+            bool? l_ = context.Operators.Equivalent(i_, k_);
+            DataType m_ = C?.Value;
+            object n_ = FHIRHelpers_4_4_000.Instance.ToValue(context, m_);
+            string o_ = (n_ as CqlQuantity)?.unit;
+            bool? p_ = context.Operators.Equal(o_, "mGy.cm");
+            bool? q_ = context.Operators.And(l_, p_);
 
-            return p_;
+            return q_;
         };
         IEnumerable<Observation.ComponentComponent> c_ = context.Operators.Where<Observation.ComponentComponent>((IEnumerable<Observation.ComponentComponent>)a_, b_);
         decimal? d_(Observation.ComponentComponent C)
         {
-            DataType q_ = C?.Value;
-            object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
-            decimal? s_ = (r_ as CqlQuantity)?.value;
+            DataType r_ = C?.Value;
+            object s_ = FHIRHelpers_4_4_000.Instance.ToValue(context, r_);
+            decimal? t_ = (s_ as CqlQuantity)?.value;
 
-            return s_;
+            return t_;
         };
         IEnumerable<decimal?> e_ = context.Operators.Select<Observation.ComponentComponent, decimal?>(c_, d_);
-        decimal? f_ = context.Operators.SingletonFrom<decimal?>(e_);
+        IEnumerable<decimal?> f_ = context.Operators.Distinct<decimal?>(e_);
+        decimal? g_ = context.Operators.SingletonFrom<decimal?>(f_);
 
-        return f_;
+        return g_;
     }
 
     public bool? Qualifies(CqlContext context, Observation Obs, CqlCode code, decimal? noiseThreshold, decimal? sizeDoseThreshold)
