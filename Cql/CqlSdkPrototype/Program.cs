@@ -22,11 +22,12 @@ internal class Program
         // Considerations:
         // - Keeping it very simple
         // - Error handling will be available through an Errors property instead of exceptions
-        // - Single-threaded, non-async
+        // - Single-threaded, synchronous operations
         // - Immutable compilation units
         // - Using files, strings and byte arrays as input and output. No streams (considered advanced)
         // - Only focused on translating, not on introspection of libraries
         // - Split into multiple SDKS: CQL-to-ELM SDK, ELM-to-.NET SDK, ELM-to-FHIR SDK, Runtime SDK
+        // - Advanced features like introspection available through interfaces in a sub-namespace "Advanced". These will be considered alpha features.
         //
         // 1. CQL SDK
         // - Load CQL file(s) from a directory
