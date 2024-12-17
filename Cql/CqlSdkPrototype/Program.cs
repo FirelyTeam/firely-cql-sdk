@@ -18,49 +18,6 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        // NOTE: This is a prototype of the CQL SDK
-        // Considerations:
-        // - Keeping it very simple
-        // - Error handling will be available through an Errors property instead of exceptions
-        // - Single-threaded, synchronous operations
-        // - Choosing specialized types (e.g. DirectoryInfo, ElmVersionedIdentifier) over strings
-        // - Immutable compilation units
-        // - Using files, strings and byte arrays as input and output. No streams (considered advanced)
-        // - Only focused on translating, not on introspection of libraries
-        // - Split into multiple SDKS: CQL-to-ELM SDK, ELM-to-.NET SDK, ELM-to-FHIR SDK, Runtime SDK
-        // - Advanced features available through interfaces and implemented as explicit in derived types
-        //   - Introspection of cql or elm
-        //   - Streams?
-        //   - Internal access to services?
-        //   - These will be considered alpha features.
-        //
-        // 1. CQL SDK
-        // - Load CQL file(s) from a directory
-        // - Translate CQL files to ELM JSON files (or ELM XML files)
-        // - Write ELM files to directory
-        //
-        // 2. ELM SDK
-        // - Load ELM file(s) from a directory
-        // - TO DO: Load ELM file(s) from a file with all its dependencies, assuming the dependencies are in the same directory
-        // - Load ELM file from a single file
-        // - Translate ELM files to C# source code and assembly byte[]
-        // - Writing C# files to directory
-        // - Writing assembly binaries to directory
-        // - TODO: Signing assemblies?
-        // - TODO: Options
-        // - TODO: Output warnings and errors via property
-        //
-        // 3. FHIR SDK
-        // - Input: Elm Compilation
-        // - Translate to FHIR Libraries and Measures
-        // - Write FHIR Libraries and Measures to directory
-        //
-        // 4. Runtime SDK
-        // - Load CQL, ELM files into AssemblyLoadContext
-        // - Load FHIR Libraries and Measures into AssemblyLoadContext
-        // - Load .NET assemblies into AssemblyLoadContext
-        // - Execute libraries
-
         var rootDir = new DirectoryInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS");
         var elmInDir = rootDir.CreateSubdirectory("Elm");
         var csharpOutDir = rootDir.CreateSubdirectory("CSharp2");
@@ -334,7 +291,7 @@ public readonly record struct ElmVersionedIdentifier
 
     public static IComparer<ElmVersionedIdentifier> NameOnlyComparer => NameOnlyComparerImpl.Instance;
 
-    public static IEqualityComparer<ElmVersionedIdentifier> NameOnlyEqualityComparer { get; } = new NameOnlyComparerImpl();
+    public static IEqualityComparer<ElmVersionedIdentifier> NameOnlyEqualityComparer => NameOnlyComparerImpl.Instance;
 
     private ElmVersionedIdentifier(string Name, string? Version = null)
     {
