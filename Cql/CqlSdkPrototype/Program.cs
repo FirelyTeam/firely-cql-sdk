@@ -18,12 +18,32 @@ internal class Program
 {
     static void Main(string[] args)
     {
+        // NOTE: This is a prototype of the CQL SDK
+        // Considerations:
+        // - Keeping it very simple
+        // - Error handling will be available through an Errors property instead of exceptions
+        // - Single-threaded, non-async
+        // - Immutable compilation units
+        // - Using files, strings and byte arrays as input and output. No streams (considered advanced)
+        // - Only focused on translating, not on introspection of libraries
+        //
+        // 1. CQL SDK
+        // Load CQL file(s) from a directory
+        // Translate CQL files to ELM JSON files (or ELM XML files)
+        // Write ELM files to directory
+        //
+        // 2. ELM SDK
         // Load ELM file(s) from a directory
-        // Load ELM file(s) from a file with all its dependencies, assuming the dependencies are in the same directory
+        // TO DO: Load ELM file(s) from a file with all its dependencies, assuming the dependencies are in the same directory
         // Load ELM file from a single file
 
         // Translate ELM files to C# source code String
         // Translate ELM files to C# assembly byte[]
+
+        // Writing C# files to directory
+        // Writing assembly binaries to directory
+
+        // TO DO:
         // Translate ELM files into AssemblyLoadContext
 
         var rootDir = new DirectoryInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS");
@@ -37,15 +57,16 @@ internal class Program
         var elmCompilation =
             ElmSdk
                  .NewCompilation()
-                 //.LoadElmFile(new FileInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm\ALARACTOQRFHIR.json"))
                  .LoadElmFile(elmInDir, ElmVersionedIdentifier.FromNameAndVersion("FHIRHelpers"))
                  .Compile()
                  .LoadElmFilesFromDirectory(elmInDir, new EnumerationOptions() { RecurseSubdirectories = false })
-                 //.LoadElmFileWithDependencies(new DirectoryInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm"), ElmVersionedIdentifier.FromNameAndVersion("ALARACTOQRFHIR", "0.4.000"), new EnumerationOptions() { RecurseSubdirectories = false })
                  .Compile()
                  .SaveCSharpFilesToDirectory(csharpOutDir)
                  .SaveAssemblyBinariesToDirectory(dllOutDir)
                 ;
+
+        //.LoadElmFile(new FileInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm\ALARACTOQRFHIR.json"))
+        //.LoadElmFileWithDependencies(new DirectoryInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm"), ElmVersionedIdentifier.FromNameAndVersion("ALARACTOQRFHIR", "0.4.000"), new EnumerationOptions() { RecurseSubdirectories = false })
 
         Console.WriteLine(
             $"""
