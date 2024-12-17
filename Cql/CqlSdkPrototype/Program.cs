@@ -48,6 +48,7 @@ internal class Program
         // - Writing assembly binaries to directory
         // - TODO: Signing assemblies?
         // - TODO: Options
+        // - TODO: Output warnings and errors via property
         //
         // 3. FHIR SDK
         // - Input: Elm Compilation
@@ -183,13 +184,18 @@ public class ElmCompilation
 
     public ElmCompilation LoadElmFileWithDependencies(FileInfo file, EnumerationOptions options)
     {
+        // TODO
         return new ElmCompilation(this);
     }
 
     public ElmCompilation LoadElmFileWithDependencies(
         DirectoryInfo directory,
         ElmVersionedIdentifier fileName,
-        EnumerationOptions options) => new(this);
+        EnumerationOptions options)
+    {
+        // TODO
+        return new ElmCompilation(this);
+    }
 
     public ElmCompilation LoadElmFile(FileInfo file)
     {
