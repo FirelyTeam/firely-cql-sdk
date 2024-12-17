@@ -26,15 +26,25 @@ internal class Program
         // Translate ELM files to C# assembly byte[]
         // Translate ELM files into AssemblyLoadContext
 
+        var rootDir = new DirectoryInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS");
+        var elmInDir = rootDir.CreateSubdirectory("Elm");
+        var csharpOutDir = rootDir.CreateSubdirectory("CSharp2");
+        var dllOutDir = rootDir.CreateSubdirectory("Dlls2");
+
+        csharpOutDir.Delete(recursive: true);
+        dllOutDir.Delete(recursive: true);
+
         var elmCompilation =
             ElmSdk
                  .NewCompilation()
                  //.LoadElmFile(new FileInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm\ALARACTOQRFHIR.json"))
-                 .LoadElmFile(new DirectoryInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm"), ElmVersionedIdentifier.FromNameAndVersion("FHIRHelpers"))
+                 .LoadElmFile(elmInDir, ElmVersionedIdentifier.FromNameAndVersion("FHIRHelpers"))
                  .Compile()
-                 .LoadElmFilesFromDirectory(new DirectoryInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm"), new EnumerationOptions() { RecurseSubdirectories = false })
+                 .LoadElmFilesFromDirectory(elmInDir, new EnumerationOptions() { RecurseSubdirectories = false })
                  //.LoadElmFileWithDependencies(new DirectoryInfo(@"C:\Dev\firely-cql-sdk\LibrarySets\CMS\Elm"), ElmVersionedIdentifier.FromNameAndVersion("ALARACTOQRFHIR", "0.4.000"), new EnumerationOptions() { RecurseSubdirectories = false })
                  .Compile()
+                 .SaveCSharpFilesToDirectory(csharpOutDir)
+                 .SaveAssemblyBinariesToDirectory(dllOutDir)
                 ;
 
         Console.WriteLine(
@@ -227,6 +237,35 @@ public class ElmCompilation
         _libraryCompilations
             .Where(kv => kv.Value.AssemblyBinary is not null)
             .ToDictionary(kv => kv.Key, kv => kv.Value.AssemblyBinary!, ElmVersionedIdentifier.NameOnlyEqualityComparer);
+
+    public ElmCompilation SaveCSharpFilesToDirectory(DirectoryInfo directory)
+    {
+        if (!directory.Exists)
+            directory.Create();
+
+        foreach (var (libraryName, sourceCode) in SourceCodeByLibraryName)
+        {
+            var fileName = Path.Combine(directory.FullName, $"{libraryName}.cs");
+            File.WriteAllText(fileName, sourceCode);
+            Console.WriteLine($"Saved C# source code to file: {fileName}");
+        }
+
+        return this;
+    }
+
+    public ElmCompilation SaveAssemblyBinariesToDirectory(DirectoryInfo directory)
+    {
+        if (!directory.Exists)
+            directory.Create();
+
+        foreach (var (libraryName, assemblyBinary) in AssemblyBinariesByLibraryName)
+        {
+            var fileName = Path.Combine(directory.FullName, $"{libraryName}.dll");
+            File.WriteAllBytes(fileName, assemblyBinary);
+            Console.WriteLine($"Saved assembly binary to file: {fileName}");
+        }
+        return this;
+    }
 }
 
 
