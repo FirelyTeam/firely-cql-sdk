@@ -23,11 +23,16 @@ internal class Program
         // - Keeping it very simple
         // - Error handling will be available through an Errors property instead of exceptions
         // - Single-threaded, synchronous operations
+        // - Choosing specialized types (e.g. DirectoryInfo, ElmVersionedIdentifier) over strings
         // - Immutable compilation units
         // - Using files, strings and byte arrays as input and output. No streams (considered advanced)
         // - Only focused on translating, not on introspection of libraries
         // - Split into multiple SDKS: CQL-to-ELM SDK, ELM-to-.NET SDK, ELM-to-FHIR SDK, Runtime SDK
-        // - Advanced features like introspection available through interfaces in a sub-namespace "Advanced". These will be considered alpha features.
+        // - Advanced features available through interfaces and implemented as explicit in derived types
+        //   - Introspection of cql or elm
+        //   - Streams?
+        //   - Internal access to services?
+        //   - These will be considered alpha features.
         //
         // 1. CQL SDK
         // - Load CQL file(s) from a directory
@@ -41,6 +46,8 @@ internal class Program
         // - Translate ELM files to C# source code and assembly byte[]
         // - Writing C# files to directory
         // - Writing assembly binaries to directory
+        // - TODO: Signing assemblies?
+        // - TODO: Options
         //
         // 3. FHIR SDK
         // - Input: Elm Compilation
