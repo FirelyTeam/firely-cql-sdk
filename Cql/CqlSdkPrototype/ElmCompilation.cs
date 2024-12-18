@@ -22,6 +22,24 @@ public class ElmCompilation
     private readonly ServiceProvider _serviceProvider;
     private readonly ImmutableDictionary<ElmVersionedLibraryIdentifier, LibraryCompilation> _libraryCompilations;
 
+    public IReadOnlyDictionary<string, ElmVersionedLibraryIdentifier> LibraryNames =>
+        _libraryCompilations
+            .ToDictionary(kv => kv.Key.Identifier.ToString(), kv => kv.Key);
+
+    public IReadOnlyDictionary<ElmVersionedLibraryIdentifier, string> SourceCodeByLibraryName =>
+        _libraryCompilations
+            .Where(kv => kv.Value.CSharpSourceCode is not null)
+            .ToDictionary(kv => kv.Key, kv => kv.Value.CSharpSourceCode!,
+                          ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+
+    public IReadOnlyDictionary<ElmVersionedLibraryIdentifier, byte[]> AssemblyBinariesByLibraryName =>
+        _libraryCompilations
+            .Where(kv => kv.Value.AssemblyBinary is not null)
+            .ToDictionary(kv => kv.Key, kv => kv.Value.AssemblyBinary!,
+                          ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+
+
+    #region Construction
 
     private ElmCompilation(
         ElmCompilation? source = null,
@@ -40,6 +58,20 @@ public class ElmCompilation
     }
 
     internal static ElmCompilation New => new(serviceProvider: BuildServiceProvider());
+
+    private static ServiceProvider BuildServiceProvider()
+    {
+        var serviceProvider =
+            new ServiceCollection()
+                .AddDebugLogging()
+                .AddCqlCodeGenerationServices()
+                .BuildServiceProvider(validateScopes: true);
+        return serviceProvider;
+    }
+
+    #endregion
+
+    #region Loading/Adding ELM Libraries
 
     internal ElmCompilation AddLibraries(IEnumerable<Library> libraries)
     {
@@ -130,6 +162,10 @@ public class ElmCompilation
         return LoadElmFile(file);
     }
 
+    #endregion
+
+    #region Translation
+
     internal ElmCompilation Compile()
     {
         if (_libraryCompilations.Values.All(lc => lc is { AssemblyBinary: not null }))
@@ -175,31 +211,9 @@ public class ElmCompilation
                    : this;
     }
 
-    private static ServiceProvider BuildServiceProvider()
-    {
-        var serviceProvider =
-            new ServiceCollection()
-                .AddDebugLogging()
-                .AddCqlCodeGenerationServices()
-                .BuildServiceProvider(validateScopes: true);
-        return serviceProvider;
-    }
+    #endregion
 
-    public IReadOnlyDictionary<string, ElmVersionedLibraryIdentifier> LibraryNames =>
-        _libraryCompilations
-            .ToDictionary(kv => kv.Key.Identifier.ToString(), kv => kv.Key);
-
-    public IReadOnlyDictionary<ElmVersionedLibraryIdentifier, string> SourceCodeByLibraryName =>
-        _libraryCompilations
-            .Where(kv => kv.Value.CSharpSourceCode is not null)
-            .ToDictionary(kv => kv.Key, kv => kv.Value.CSharpSourceCode!,
-                          ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
-
-    public IReadOnlyDictionary<ElmVersionedLibraryIdentifier, byte[]> AssemblyBinariesByLibraryName =>
-        _libraryCompilations
-            .Where(kv => kv.Value.AssemblyBinary is not null)
-            .ToDictionary(kv => kv.Key, kv => kv.Value.AssemblyBinary!,
-                          ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+    #region Saving Output
 
     public ElmCompilation SaveCSharpFilesToDirectory(DirectoryInfo directory)
     {
@@ -230,4 +244,6 @@ public class ElmCompilation
 
         return this;
     }
+
+    #endregion
 }
