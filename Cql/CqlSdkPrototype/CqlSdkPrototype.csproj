@@ -7,7 +7,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-		<NoWarn>RS0037</NoWarn>
+		<NoWarn>RS0037,RS0016,CS1591</NoWarn>
   </PropertyGroup>
 
 	<ItemGroup>
