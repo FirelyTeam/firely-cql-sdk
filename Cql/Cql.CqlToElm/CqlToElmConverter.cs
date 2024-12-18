@@ -33,7 +33,7 @@ namespace Hl7.Cql.CqlToElm
         /// CQL to Elm Logger
         /// </summary>
         public ILogger<CqlToElmConverter> Logger { get; }
-            
+
         /// <summary>
         /// Converts the CQL contained in <paramref name="cqlLibrary"/> to an ELM <see cref="Library"/>.
         /// </summary>

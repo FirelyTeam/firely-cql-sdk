@@ -1,9 +1,12 @@
 ﻿using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Linq.Expressions;
+using System.Reflection;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Model;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
@@ -11,29 +14,194 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CqlSdkPrototype;
 
-public class ElmCompilation
+public class CqlTranslation
 {
-    private readonly record struct LibraryCompilation
-        (Library Library, string? CSharpSourceCode = null, byte[]? AssemblyBinary = null);
+    private readonly record struct CqlLibrary(ElmVersionedLibraryIdentifier VersionedIdentifier, string Cql);
+    private readonly record struct CqlTranslationEntry(CqlLibrary CqlLibrary, Library? ElmLibrary = null);
 
-    private static readonly HashSet<string> _hardcodedSkipFileNames =
-        new(HardCodedSkipElmFiles.FileNames, StringComparer.OrdinalIgnoreCase);
 
     private readonly ServiceProvider _serviceProvider;
-    private readonly ImmutableDictionary<ElmVersionedLibraryIdentifier, LibraryCompilation> _libraryCompilations;
+    private readonly ImmutableDictionary<ElmVersionedLibraryIdentifier, CqlTranslationEntry> _entries;
 
-    public IReadOnlyDictionary<string, ElmVersionedLibraryIdentifier> LibraryNames =>
-        _libraryCompilations
-            .ToDictionary(kv => kv.Key.Identifier.ToString(), kv => kv.Key);
+    public IReadOnlyDictionary<ElmLibraryIdentifier, ElmVersionedLibraryIdentifier> VersionedIdentifiers =>
+        _entries
+            .ToDictionary(kv => kv.Key.Identifier, kv => kv.Key);
 
-    public IReadOnlyDictionary<ElmVersionedLibraryIdentifier, string> SourceCodeByLibraryName =>
-        _libraryCompilations
+    internal IReadOnlyDictionary<ElmVersionedLibraryIdentifier, Library> ElmLibraries =>
+        _entries
+            .Where(kv => kv.Value.ElmLibrary is not null)
+            .ToDictionary(kv => kv.Key, kv => kv.Value.ElmLibrary!);
+
+    internal IReadOnlyDictionary<ElmVersionedLibraryIdentifier, string> ElmJsonStrings =>
+        ElmLibraries
+            .ToDictionary(kv => kv.Key, kv =>
+            {
+                var json = kv.Value.SerializeToJson(true);
+                return json;
+            });
+
+
+
+    #region Construction
+
+    private CqlTranslation(
+        CqlTranslation? source = null,
+        ImmutableDictionary<ElmVersionedLibraryIdentifier, CqlTranslationEntry>? entries = null,
+        ServiceProvider? serviceProvider = null)
+    {
+        Debug.Assert((source, serviceProvider) is ({ }, null) or (null, { }),
+                     "Must set either 'source' or 'serviceProvider'.");
+
+        _serviceProvider = serviceProvider
+                           ?? source!._serviceProvider;
+
+        _entries =
+            entries
+            ?? source?._entries
+            ?? ImmutableDictionary<ElmVersionedLibraryIdentifier, CqlTranslationEntry>.Empty
+                .WithComparers(ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+    }
+
+    public static CqlTranslation New { get; } = new(serviceProvider: BuildServiceProvider());
+
+    private static ServiceProvider BuildServiceProvider()
+    {
+        var serviceProvider =
+            new ServiceCollection()
+                .AddDebugLogging()
+                .AddCqlToElmServices()
+                .AddCqlToElmModels(
+                    mp => mp
+                        .Add(Models.Fhir401)
+                        .Add(Models.ElmR1)
+                    )
+                .AddCqlToElmOptions(opt =>
+                {
+                    // Options
+                })
+                .BuildServiceProvider(validateScopes: true);
+        return serviceProvider;
+    }
+
+    #endregion
+
+    #region Loading/Adding CQL Libraries
+
+    private CqlTranslation AddCqlLibraries(IEnumerable<CqlLibrary> cqlLibraries)
+    {
+        var libraryCompilationsBuilder = _entries.ToBuilder();
+        var hasChanged = false;
+        foreach (var cqlLibrary in cqlLibraries)
+        {
+            var versionedIdentifier = cqlLibrary.VersionedIdentifier;
+
+            if (libraryCompilationsBuilder.ContainsKey(versionedIdentifier))
+            {
+                Console.WriteLine($"Skipping adding previous cql to translation: {versionedIdentifier}");
+                continue;
+            }
+
+            var libraryCompilation = new CqlTranslationEntry(cqlLibrary);
+            libraryCompilationsBuilder.Add(versionedIdentifier, libraryCompilation);
+            Console.WriteLine($"Adding cql library to translation: {versionedIdentifier}");
+            hasChanged = true;
+        }
+
+        return hasChanged
+                   ? new CqlTranslation(this, entries: libraryCompilationsBuilder.ToImmutable())
+                   : this;
+    }
+
+    public CqlTranslation LoadCqlFilesFromDirectory(DirectoryInfo directory, EnumerationOptions options)
+    {
+        var files = directory.EnumerateFiles("*.cql", options);
+        return LoadCqlFiles(files);
+    }
+
+    private CqlTranslation LoadCqlFiles(IEnumerable<FileInfo> files)
+    {
+        var cqlLibraries =
+            files
+                .Where(f =>
+                {
+                    if (HardcodedSkipFileNames.Names.Contains(f.Name))
+                    {
+                        Console.WriteLine($"Skipping file as from hardcoded names: {f.FullName}");
+                        return false;
+                    }
+
+                    return true;
+                }) // Log skipped files
+                .Select(f =>
+                {
+                    Console.WriteLine($"Loading library from file: {f}");
+                    var cqlLibrary = new CqlLibrary(ElmVersionedLibraryIdentifier.Parse(f.Name.StripExtension(".cql")), File.ReadAllText(f.FullName) );
+                    return cqlLibrary;
+                }); // Log errors
+        return AddCqlLibraries(cqlLibraries);
+    }
+
+    #endregion
+
+    #region Translation
+
+    public CqlTranslation Translate()
+    {
+        CqlToElmConverter cqlToElmConverter = null!;
+        ImmutableDictionary<ElmVersionedLibraryIdentifier, CqlTranslationEntry>.Builder entriesBuilder = _entries.ToBuilder();
+        int changedCount = 0;
+        foreach (var (versionedIdentifier, cqlTranslationEntry) in entriesBuilder
+                     .Where(kv => kv.Value.ElmLibrary is null))
+        {
+            if (changedCount == 0)
+            {
+                Console.WriteLine("Translating CQL into ELM");
+                cqlToElmConverter = _serviceProvider.GetCqlToElmConverter();
+                entriesBuilder = _entries.ToBuilder();
+            }
+
+            var library = cqlToElmConverter.ConvertLibrary(new StringReader(cqlTranslationEntry.CqlLibrary.Cql));
+            entriesBuilder[versionedIdentifier] = cqlTranslationEntry with { ElmLibrary = library };
+            changedCount++;
+        }
+
+        return changedCount > 0
+                   ? new CqlTranslation(this, entries: entriesBuilder.ToImmutable())
+                   : this;
+    }
+
+    #endregion
+
+    #region Saving Output
+
+    public CqlTranslation SaveElmFileToDirectory(DirectoryInfo directory)
+    {
+        return this;
+    }
+
+    #endregion
+}
+
+public class ElmCompilation
+{
+    private readonly record struct ElmCompilationEntry
+        (Library ElmLibrary, string? CSharpSourceCode = null, byte[]? AssemblyBinary = null);
+
+    private readonly ServiceProvider _serviceProvider;
+    private readonly ImmutableDictionary<ElmVersionedLibraryIdentifier, ElmCompilationEntry> _entries;
+
+    public IReadOnlyDictionary<ElmLibraryIdentifier, ElmVersionedLibraryIdentifier> VersionedIdentifiersByIdentifier =>
+        _entries
+            .ToDictionary(kv => kv.Key.Identifier, kv => kv.Key);
+
+    public IReadOnlyDictionary<ElmVersionedLibraryIdentifier, string> SourceCodeByVersionedIdentifier =>
+        _entries
             .Where(kv => kv.Value.CSharpSourceCode is not null)
             .ToDictionary(kv => kv.Key, kv => kv.Value.CSharpSourceCode!,
                           ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
 
-    public IReadOnlyDictionary<ElmVersionedLibraryIdentifier, byte[]> AssemblyBinariesByLibraryName =>
-        _libraryCompilations
+    public IReadOnlyDictionary<ElmVersionedLibraryIdentifier, byte[]> AssemblyBinariesByVersionedIdentifier =>
+        _entries
             .Where(kv => kv.Value.AssemblyBinary is not null)
             .ToDictionary(kv => kv.Key, kv => kv.Value.AssemblyBinary!,
                           ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
@@ -43,7 +211,7 @@ public class ElmCompilation
 
     private ElmCompilation(
         ElmCompilation? source = null,
-        ImmutableDictionary<ElmVersionedLibraryIdentifier, LibraryCompilation>? libraryCompilations = null,
+        ImmutableDictionary<ElmVersionedLibraryIdentifier, ElmCompilationEntry>? entries = null,
         ServiceProvider? serviceProvider = null)
     {
         Debug.Assert((source, serviceProvider) is ({ }, null) or (null, { }),
@@ -51,10 +219,11 @@ public class ElmCompilation
 
         _serviceProvider = serviceProvider
                            ?? source!._serviceProvider;
-        _libraryCompilations = libraryCompilations
-                               ?? source?._libraryCompilations
-                               ?? ImmutableDictionary<ElmVersionedLibraryIdentifier, LibraryCompilation>.Empty
-                                   .WithComparers(ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer, null);
+
+        _entries = entries
+                   ?? source?._entries
+                   ?? ImmutableDictionary<ElmVersionedLibraryIdentifier, ElmCompilationEntry>.Empty
+                       .WithComparers(ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
     }
 
     internal static ElmCompilation New => new(serviceProvider: BuildServiceProvider());
@@ -73,28 +242,28 @@ public class ElmCompilation
 
     #region Loading/Adding ELM Libraries
 
-    internal ElmCompilation AddLibraries(IEnumerable<Library> libraries)
+    private ElmCompilation AddLibraries(IEnumerable<Library> libraries)
     {
-        var libraryCompilationsBuilder = _libraryCompilations.ToBuilder();
+        var libraryCompilationsBuilder = _entries.ToBuilder();
         var hasChanged = false;
         foreach (var library in libraries)
         {
-            var elmVersionedIdentifier = ElmVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier);
+            var versionedIdentifier = ElmVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier);
 
-            if (libraryCompilationsBuilder.ContainsKey(elmVersionedIdentifier))
+            if (libraryCompilationsBuilder.ContainsKey(versionedIdentifier))
             {
-                Console.WriteLine($"Skipping adding previous library to compilation: {elmVersionedIdentifier}");
+                Console.WriteLine($"Skipping adding previous library to compilation: {versionedIdentifier}");
                 continue;
             }
 
-            var libraryCompilation = new LibraryCompilation(library);
-            libraryCompilationsBuilder.Add(elmVersionedIdentifier, libraryCompilation);
-            Console.WriteLine($"Adding library to compilation: {elmVersionedIdentifier}");
+            var libraryCompilation = new ElmCompilationEntry(library);
+            libraryCompilationsBuilder.Add(versionedIdentifier, libraryCompilation);
+            Console.WriteLine($"Adding library to compilation: {versionedIdentifier}");
             hasChanged = true;
         }
 
         return hasChanged
-                   ? new ElmCompilation(this, libraryCompilations: libraryCompilationsBuilder.ToImmutable())
+                   ? new ElmCompilation(this, entries: libraryCompilationsBuilder.ToImmutable())
                    : this;
     }
 
@@ -110,7 +279,7 @@ public class ElmCompilation
             files
                 .Where(f =>
                 {
-                    if (_hardcodedSkipFileNames.Contains(f.Name))
+                    if (HardcodedSkipFileNames.Names.Contains(f.Name))
                     {
                         Console.WriteLine($"Skipping file as from hardcoded names: {f.FullName}");
                         return false;
@@ -164,31 +333,28 @@ public class ElmCompilation
 
     #endregion
 
-    #region Translation
+    #region Compilation
 
     internal ElmCompilation Compile()
     {
-        if (_libraryCompilations.Values.All(lc => lc is { AssemblyBinary: not null }))
+        if (_entries.Values.All(lc => lc is { AssemblyBinary: not null }))
             return this;
 
+        Console.WriteLine("Compiling ELM into C# and .NET Binaries");
         using var servicesScope = _serviceProvider.CreateScope();
-        LibrarySetExpressionBuilder librarySetExpressionBuilderScoped =
-            servicesScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped();
+        LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped();
         AssemblyCompiler assemblyCompiler = servicesScope.ServiceProvider.GetAssemblyCompiler();
-        Library[] libraries = _libraryCompilations.Values.Select(v => v.Library).ToArray();
+        Library[] libraries = _entries.Values.Select(v => v.ElmLibrary).ToArray();
         LibrarySet librarySet = new LibrarySet("", libraries);
-        Console.WriteLine("Compiling Libraries");
-        DefinitionDictionary<LambdaExpression> definitionDictionary =
-            librarySetExpressionBuilderScoped.ProcessLibrarySet(librarySet);
-        IReadOnlyDictionary<string, AssemblyData> assemblyDatas =
-            assemblyCompiler.Compile(librarySet, definitionDictionary);
+        DefinitionDictionary<LambdaExpression> definitionDictionary = librarySetExpressionBuilderScoped.ProcessLibrarySet(librarySet);
+        IReadOnlyDictionary<string, AssemblyData> assemblyDatas = assemblyCompiler.Compile(librarySet, definitionDictionary);
 
-        var libraryCompilationsBuilder = _libraryCompilations.ToBuilder();
+        var entriesBuilder = _entries.ToBuilder();
         bool hasChanged = false;
         foreach (var (name, (assemblyBinary, sourceCodePerName)) in assemblyDatas)
         {
             var elmVersionedIdentifier = ElmVersionedLibraryIdentifier.Parse(name);
-            var libraryCompilation = libraryCompilationsBuilder[elmVersionedIdentifier];
+            var libraryCompilation = entriesBuilder[elmVersionedIdentifier];
             if (libraryCompilation.CSharpSourceCode is not null
                 || libraryCompilation.AssemblyBinary is not null)
             {
@@ -201,13 +367,13 @@ public class ElmCompilation
             {
                 CSharpSourceCode = cSharpSourceCode, AssemblyBinary = assemblyBinary
             };
-            libraryCompilationsBuilder[elmVersionedIdentifier] = libraryCompilation;
+            entriesBuilder[elmVersionedIdentifier] = libraryCompilation;
             Console.WriteLine($"Library compiled: {elmVersionedIdentifier}");
             hasChanged = true;
         }
 
         return hasChanged
-                   ? new ElmCompilation(this, libraryCompilations: libraryCompilationsBuilder.ToImmutable())
+                   ? new ElmCompilation(this, entries: entriesBuilder.ToImmutable())
                    : this;
     }
 
@@ -220,7 +386,7 @@ public class ElmCompilation
         if (!directory.Exists)
             directory.Create();
 
-        foreach (var (libraryName, sourceCode) in SourceCodeByLibraryName)
+        foreach (var (libraryName, sourceCode) in SourceCodeByVersionedIdentifier)
         {
             var fileName = Path.Combine(directory.FullName, $"{libraryName}.cs");
             File.WriteAllText(fileName, sourceCode);
@@ -235,7 +401,7 @@ public class ElmCompilation
         if (!directory.Exists)
             directory.Create();
 
-        foreach (var (libraryName, assemblyBinary) in AssemblyBinariesByLibraryName)
+        foreach (var (libraryName, assemblyBinary) in AssemblyBinariesByVersionedIdentifier)
         {
             var fileName = Path.Combine(directory.FullName, $"{libraryName}.dll");
             File.WriteAllBytes(fileName, assemblyBinary);
@@ -246,4 +412,18 @@ public class ElmCompilation
     }
 
     #endregion
+}
+
+file static class HardcodedSkipFileNames
+{
+    public static readonly HashSet<string> Names =
+        new(HardCodedSkipElmFiles.FileNames, StringComparer.OrdinalIgnoreCase);
+}
+
+file static class Extensions
+{
+    public static string StripExtension(this string filePath, string extension) =>
+        filePath.EndsWith(extension, StringComparison.OrdinalIgnoreCase)
+            ? filePath[..^extension.Length]
+            : filePath;
 }
