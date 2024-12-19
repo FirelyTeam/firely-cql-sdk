@@ -1,7 +1,4 @@
-﻿using Hl7.Cql.CqlToElm;
-using Hl7.Cql.Elm;
-
-namespace CqlSdkPrototype;
+﻿namespace CqlSdkPrototype;
 
 internal class Program
 {
@@ -15,34 +12,24 @@ internal class Program
         var rootDir = new DirectoryInfo(@"C:\Dev");
 
         // Keep these output dirs outside the repo:
-        var cqlDir = rootDir.CreateSubdirectory(@"firely-cql-sdk\LibrarySets\Demo\Cql"); // Input
-        var elmDirOut = rootDir.CreateSubdirectory(@"prototype-output\Elm");             // Output
-        var elmDir = elmDirOut;                                                          // Input
-        //var elmDir = rootDir.CreateSubdirectory(@"firely-cql-sdk\LibrarySets\Demo\Elm");           // Input
-        var csharpDir = rootDir.CreateSubdirectory(@"prototype-output\CSharp");          // Output
-        var dllDir = rootDir.CreateSubdirectory(@"prototype-output\Dlls");               // Output
-        var fhirDir = rootDir.CreateSubdirectory(@"prototype-output\Fhir");              // Output
-        ElmLibraryIdentifier first;
+        var cqlDirIn = rootDir.CreateSubdirectory(@"firely-cql-sdk\LibrarySets\Demo\Cql"); // Input
+        var elmDirOut = rootDir.CreateSubdirectory(@"prototype-output\Elm");               // Output
+        var elmDirIn = elmDirOut;                                                          // Input
+        //var elmDirIn = rootDir.CreateSubdirectory(@"firely-cql-sdk\LibrarySets\Demo\Elm");   // Input
+        var cSharpDirOut = rootDir.CreateSubdirectory(@"prototype-output\CSharp");         // Output
+        var assemblyDirOut = rootDir.CreateSubdirectory(@"prototype-output\Dlls");         // Output
+        var fhirResourceDirOut = rootDir.CreateSubdirectory(@"prototype-output\Fhir");     // Output
+
+        cSharpDirOut.Delete(recursive: true);
+        assemblyDirOut.Delete(recursive: true);
+        fhirResourceDirOut.Delete(recursive: true);
 
         var cqlTranslation =
             CqlTranslation.Create()
-                          .LoadCqlFilesFromDirectory(cqlDir, enumerationOptions)
+                          .LoadCqlFilesFromDirectory(cqlDirIn, enumerationOptions)
                           .Translate()
                           .SaveElmFileToDirectory(elmDirOut)
                           ;
-
-        first = cqlTranslation.VersionedIdentifiers.Keys.First()!;
-        Console.WriteLine(
-            $"""
-             First 50 C# lines for {first}:
-             {cqlTranslation.ElmJsonStrings[first]
-                            .SplitLines()
-                            .Take(50)
-                            .JoinLines()}
-             """);
-
-        csharpDir.Delete(recursive: true);
-        dllDir.Delete(recursive: true);
 
         var elmCompilation =
                 ElmCompilation.Create()
@@ -52,21 +39,21 @@ internal class Program
                               // .Compile()
                               // .LoadElmFilesFromDirectory(elmDir, enumerationOptions)
                               .Compile()
-                              .SaveCSharpFilesToDirectory(csharpDir)
-                              .SaveAssemblyBinariesToDirectory(dllDir)
+                              .SaveCSharpFilesToDirectory(cSharpDirOut)
+                              .SaveAssemblyBinariesToDirectory(assemblyDirOut)
             ;
 
-        first = elmCompilation.VersionedIdentifiers.Keys.First()!;
+        var libraryIdentifier = cqlTranslation.VersionedIdentifiers.Values.First()!;
         Console.WriteLine(
             $"""
-             First 50 C# lines for {first}:
-             {
-                 elmCompilation.CSharpSourceCodes[first]
-                               .SplitLines()
-                               .Take(50)
-                               .JoinLines()}
+             First 50 C# lines for {libraryIdentifier}:
+             {cqlTranslation.ElmJsonStrings[libraryIdentifier].TakeLines(50)}
              """);
 
-        fhirDir.Delete(recursive: true);
+        Console.WriteLine(
+            $"""
+             First 50 C# lines for {libraryIdentifier}:
+             {elmCompilation.CSharpSourceCodes[libraryIdentifier].TakeLines(50)}
+             """);
     }
 }

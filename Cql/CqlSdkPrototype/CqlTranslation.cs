@@ -10,6 +10,12 @@ using DateTime = System.DateTime;
 
 namespace CqlSdkPrototype;
 
+public record CqlTranslationCreateOptions
+{
+    private CqlTranslationCreateOptions() { }
+    public static CqlTranslationCreateOptions Default { get; } = new();
+}
+
 public class CqlTranslation
 {
     private readonly record struct CqlLibrary(ElmVersionedLibraryIdentifier VersionedIdentifier, string Cql);
@@ -23,6 +29,7 @@ public class CqlTranslation
     private readonly ServiceProvider _serviceProvider;
     private readonly ImmutableDictionary<ElmVersionedLibraryIdentifier, CqlTranslationEntry> _entries;
     private readonly ImmutableList<LogEntry> _logEntries;
+    private readonly CqlTranslationCreateOptions _options;
 
     static CqlTranslation()
     {
@@ -52,28 +59,45 @@ public class CqlTranslation
     #region Construction
 
     private CqlTranslation(
-        CqlTranslation? source = null,
-        ImmutableDictionary<ElmVersionedLibraryIdentifier, CqlTranslationEntry>? entries = null,
-        ImmutableList<LogEntry>? logEntries = null,
-        ServiceProvider? serviceProvider = null)
+        ServiceProvider serviceProvider)
     {
-        Debug.Assert((source, serviceProvider) is ({ }, null) or (null, { }),
-                     "Must set either 'source' or 'serviceProvider'.");
-
-        _serviceProvider = serviceProvider
-                           ?? source!._serviceProvider;
-
-        _logEntries = logEntries
-                      ?? source?._logEntries
-                      ?? ImmutableList<LogEntry>.Empty;
-
-        _entries = entries
-                   ?? source?._entries
-                   ?? ImmutableDictionary<ElmVersionedLibraryIdentifier, CqlTranslationEntry>.Empty
+        _serviceProvider = serviceProvider;
+        _entries = ImmutableDictionary<ElmVersionedLibraryIdentifier, CqlTranslationEntry>.Empty
                        .WithComparers(ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+        _logEntries = ImmutableList<LogEntry>.Empty;
+        _options = CqlTranslationCreateOptions.Default;
     }
 
-    public static CqlTranslation Create() => _empty;
+    private CqlTranslation(
+        CqlTranslation source,
+        ImmutableDictionary<ElmVersionedLibraryIdentifier, CqlTranslationEntry>? entries,
+        ImmutableList<LogEntry>? logEntries,
+        CqlTranslationCreateOptions? options)
+    {
+        _serviceProvider = source._serviceProvider;
+        _entries = entries ?? source._entries;
+        _logEntries = logEntries ?? source._logEntries;
+        _options = options ?? source._options;
+    }
+
+    private CqlTranslation Mutate(
+        ImmutableDictionary<ElmVersionedLibraryIdentifier, CqlTranslationEntry>? entries = null,
+        ImmutableList<LogEntry>? logEntries = null,
+        CqlTranslationCreateOptions? options = null)
+    {
+        return new CqlTranslation(this, entries, logEntries, options);
+    }
+
+    internal static CqlTranslation Create(Mutator<CqlTranslationCreateOptions>? buildOptions = null)
+    {
+        if (buildOptions != null)
+        {
+            var opt = buildOptions(CqlTranslationCreateOptions.Default);
+            return _empty.Mutate(options: opt);
+        }
+
+        return _empty;
+    }
 
     private static ServiceProvider BuildServiceProvider()
     {
@@ -134,7 +158,7 @@ public class CqlTranslation
         }
 
         return hasChanged
-                   ? new CqlTranslation(this, entries: libraryCompilationsBuilder.ToImmutable())
+                   ? Mutate(entries: libraryCompilationsBuilder.ToImmutable())
                    : this;
     }
 
@@ -202,7 +226,7 @@ public class CqlTranslation
         }
 
         return changedCount > 0
-                   ? new CqlTranslation(this, entries: entriesBuilder.ToImmutable(), logEntries: logEntriesBuilder.ToImmutable())
+                   ? Mutate(entries: entriesBuilder.ToImmutable(), logEntries: logEntriesBuilder.ToImmutable())
                    : this;
     }
 
