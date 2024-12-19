@@ -6,9 +6,12 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using static CqlSdkPrototype.CqlTranslation;
 using DateTime = System.DateTime;
 
 namespace CqlSdkPrototype;
+
+using CqlTranslationDictionary = ImmutableDictionary<ElmVersionedLibraryIdentifier, CqlTranslationEntry>;
 
 public record CqlTranslationCreateOptions
 {
@@ -18,16 +21,11 @@ public record CqlTranslationCreateOptions
 
 public class CqlTranslation
 {
-    private readonly record struct CqlLibrary(ElmVersionedLibraryIdentifier VersionedIdentifier, string Cql);
-    private readonly record struct CqlTranslationEntry(CqlLibrary CqlLibrary, Library? ElmLibrary = null);
-    private readonly record struct LogEntry(DateTime TimeStamp, ElmVersionedLibraryIdentifier VersionedIdentifier, string Message);
-
-
     private static readonly DateTime _timerStarted;
     private static readonly Stopwatch _timer;
     private static readonly CqlTranslation _empty = new(serviceProvider: BuildServiceProvider());
     private readonly ServiceProvider _serviceProvider;
-    private readonly ImmutableDictionary<ElmVersionedLibraryIdentifier, CqlTranslationEntry> _entries;
+    private readonly CqlTranslationDictionary _entries;
     private readonly ImmutableList<LogEntry> _logEntries;
     private readonly CqlTranslationCreateOptions _options;
 
@@ -54,7 +52,13 @@ public class CqlTranslation
                 return json;
             });
 
+    #region Nested Types
 
+    internal readonly record struct CqlLibrary(ElmVersionedLibraryIdentifier VersionedIdentifier, string Cql);
+    internal readonly record struct CqlTranslationEntry(CqlLibrary CqlLibrary, Library? ElmLibrary = null);
+    private readonly record struct LogEntry(DateTime TimeStamp, ElmVersionedLibraryIdentifier VersionedIdentifier, string Message);
+
+    #endregion
 
     #region Construction
 
@@ -62,15 +66,15 @@ public class CqlTranslation
         ServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
-        _entries = ImmutableDictionary<ElmVersionedLibraryIdentifier, CqlTranslationEntry>.Empty
-                       .WithComparers(ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+        _entries = CqlTranslationDictionary.Empty
+                                           .WithComparers(ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
         _logEntries = ImmutableList<LogEntry>.Empty;
         _options = CqlTranslationCreateOptions.Default;
     }
 
     private CqlTranslation(
         CqlTranslation source,
-        ImmutableDictionary<ElmVersionedLibraryIdentifier, CqlTranslationEntry>? entries,
+        CqlTranslationDictionary? entries,
         ImmutableList<LogEntry>? logEntries,
         CqlTranslationCreateOptions? options)
     {
@@ -78,10 +82,11 @@ public class CqlTranslation
         _entries = entries ?? source._entries;
         _logEntries = logEntries ?? source._logEntries;
         _options = options ?? source._options;
+        // Building of the service provider could possibly move here based on options
     }
 
     private CqlTranslation Mutate(
-        ImmutableDictionary<ElmVersionedLibraryIdentifier, CqlTranslationEntry>? entries = null,
+        CqlTranslationDictionary? entries = null,
         ImmutableList<LogEntry>? logEntries = null,
         CqlTranslationCreateOptions? options = null)
     {

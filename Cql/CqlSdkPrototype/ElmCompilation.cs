@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace CqlSdkPrototype;
 
+using ElmCompilationDictionary = ImmutableDictionary<ElmVersionedLibraryIdentifier, ElmCompilation.ElmCompilationEntry>;
+
 public record ElmCompilationCreateOptions
 {
     private ElmCompilationCreateOptions() { }
@@ -17,12 +19,9 @@ public record ElmCompilationCreateOptions
 
 public class ElmCompilation
 {
-    private readonly record struct ElmCompilationEntry
-        (Library ElmLibrary, string? CSharpSourceCode = null, byte[]? AssemblyBinary = null);
-
     private static readonly ElmCompilation _empty = new(serviceProvider: BuildServiceProvider());
     private readonly ServiceProvider _serviceProvider;
-    private readonly ImmutableDictionary<ElmVersionedLibraryIdentifier, ElmCompilationEntry> _entries;
+    private readonly ElmCompilationDictionary _entries;
     private readonly ElmCompilationCreateOptions _options;
 
     public IReadOnlyDictionary<ElmLibraryIdentifier, ElmVersionedLibraryIdentifier> VersionedIdentifiers =>
@@ -41,6 +40,11 @@ public class ElmCompilation
             .ToDictionary(kv => kv.Key, kv => kv.Value.AssemblyBinary!,
                           ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
 
+    #region Nested Types
+
+    internal readonly record struct ElmCompilationEntry(Library ElmLibrary, string? CSharpSourceCode = null, byte[]? AssemblyBinary = null);
+
+    #endregion
 
     #region Construction
 
@@ -48,14 +52,15 @@ public class ElmCompilation
         ServiceProvider serviceProvider)
     {
         _serviceProvider = serviceProvider;
-        _entries = ImmutableDictionary<ElmVersionedLibraryIdentifier, ElmCompilationEntry>.Empty
-                       .WithComparers(ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+        _entries = ElmCompilationDictionary.Empty
+                                           .WithComparers(ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
         _options = ElmCompilationCreateOptions.Default;
+        // Building of the service provider could possibly move here based on options
     }
 
     private ElmCompilation(
         ElmCompilation source,
-        ImmutableDictionary<ElmVersionedLibraryIdentifier, ElmCompilationEntry>? entries,
+        ElmCompilationDictionary? entries,
         ElmCompilationCreateOptions? options)
     {
         _serviceProvider = source._serviceProvider;
@@ -64,7 +69,7 @@ public class ElmCompilation
     }
 
     private ElmCompilation Mutate(
-        ImmutableDictionary<ElmVersionedLibraryIdentifier, ElmCompilationEntry>? entries = null,
+        ElmCompilationDictionary? entries = null,
         ElmCompilationCreateOptions? options = null)
     {
         return new ElmCompilation(this, entries, options);
