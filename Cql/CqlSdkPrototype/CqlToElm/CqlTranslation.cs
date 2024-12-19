@@ -6,34 +6,42 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using static CqlSdkPrototype.CqlTranslation;
+using static CqlSdkPrototype.CqlToElm.CqlTranslation;
 using DateTime = System.DateTime;
 
-namespace CqlSdkPrototype;
+namespace CqlSdkPrototype.CqlToElm;
 
 using CqlTranslationDictionary = ImmutableDictionary<ElmVersionedLibraryIdentifier, CqlTranslationEntry>;
 
 public record CqlTranslationCreateOptions
 {
+    public static CqlTranslationCreateOptions Default { get; }
+
+    static CqlTranslationCreateOptions()
+    {
+        Default = new CqlTranslationCreateOptions();
+    }
+
     private CqlTranslationCreateOptions() { }
-    public static CqlTranslationCreateOptions Default { get; } = new();
 }
 
 public class CqlTranslation
 {
-    private static readonly DateTime _timerStarted;
-    private static readonly Stopwatch _timer;
-    private static readonly CqlTranslation _empty = new(serviceProvider: BuildServiceProvider());
+    private static readonly CqlTranslation Start;
+    private static readonly DateTime TimerStarted;
+    private static readonly Stopwatch Timer;
+
+    static CqlTranslation()
+    {
+        Start = new CqlTranslation(serviceProvider: BuildServiceProvider());
+        TimerStarted = DateTime.Now;
+        Timer = Stopwatch.StartNew();
+    }
+
     private readonly ServiceProvider _serviceProvider;
     private readonly CqlTranslationDictionary _entries;
     private readonly ImmutableList<LogEntry> _logEntries;
     private readonly CqlTranslationCreateOptions _options;
-
-    static CqlTranslation()
-    {
-        _timerStarted = DateTime.Now;
-        _timer = Stopwatch.StartNew();
-    }
 
     public IReadOnlyDictionary<ElmLibraryIdentifier, ElmVersionedLibraryIdentifier> VersionedIdentifiers =>
         _entries
@@ -98,10 +106,10 @@ public class CqlTranslation
         if (buildOptions != null)
         {
             var opt = buildOptions(CqlTranslationCreateOptions.Default);
-            return _empty.Mutate(options: opt);
+            return Start.Mutate(options: opt);
         }
 
-        return _empty;
+        return Start;
     }
 
     private static ServiceProvider BuildServiceProvider()
@@ -134,7 +142,7 @@ public class CqlTranslation
         ElmVersionedLibraryIdentifier versionedIdentifier,
         string message)
     {
-        var logEntry = new LogEntry(_timerStarted + _timer.Elapsed, versionedIdentifier, message);
+        var logEntry = new LogEntry(TimerStarted + Timer.Elapsed, versionedIdentifier, message);
         logEntriesBuilder.Add(logEntry);
     }
 
@@ -190,7 +198,7 @@ public class CqlTranslation
                 .Select(f =>
                 {
                     Console.WriteLine($"Loading library from file: {f}");
-                    var cqlLibrary = new CqlLibrary(ElmVersionedLibraryIdentifier.Parse(f.Name.TrimFileExtension(".cql")), File.ReadAllText(f.FullName) );
+                    var cqlLibrary = new CqlLibrary(ElmVersionedLibraryIdentifier.Parse(f.Name.TrimFileExtension(".cql")), File.ReadAllText(f.FullName));
                     return cqlLibrary;
                 }); // Log errors
         return AddCqlLibraries(cqlLibraries);

@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
 using System.Linq.Expressions;
 using Hl7.Cql.Runtime;
 
@@ -18,9 +19,10 @@ internal class LibrarySetExpressionBuilder(
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null) =>
+        DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null,
+        Func<LibrarySetExpressionBuilderContext.ProcessLibrarySetError, bool>? shouldThrowException = null) =>
         NewLibrarySetExpressionBuilderContext(librarySet, librarySetDefinitions)
-            .ProcessLibrarySet();
+            .ProcessLibrarySet(shouldThrowException);
 
     private LibrarySetExpressionBuilderContext NewLibrarySetExpressionBuilderContext(
         LibrarySet librarySet,

@@ -22,7 +22,7 @@ internal static class HardcodedIgnores
         "NCQAHospice.json",
         //
         "NCQAHealthPlanEnrollment.json",
-        //
+
         "MATGlobalCommonFunctionsFHIR4.json",
         "HospitalHarmHyperglycemiainHospitalizedPatientsFHIR.json",
         "TJCOverallFHIR.json",
@@ -45,7 +45,7 @@ internal static class HardcodedIgnores
         "HospitalHarmSevereHypoglycemiaFHIR.json",
         //
         "CumulativeMedicationDurationFHIR4.json",
-        //
+
     };
 
     public static readonly HashSet<string> Identifiers =

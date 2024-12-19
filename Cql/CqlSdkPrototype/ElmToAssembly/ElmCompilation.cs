@@ -1,5 +1,6 @@
 ﻿using System.Collections.Immutable;
 using System.Linq.Expressions;
+using CqlSdkPrototype.CqlToElm;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
@@ -7,19 +8,40 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CqlSdkPrototype;
+namespace CqlSdkPrototype.ElmToAssembly;
 
+using static Hl7.Cql.Compiler.LibrarySetExpressionBuilderContext;
 using ElmCompilationDictionary = ImmutableDictionary<ElmVersionedLibraryIdentifier, ElmCompilation.ElmCompilationEntry>;
 
 public record ElmCompilationCreateOptions
 {
+    public static ElmCompilationCreateOptions Default { get; }
+
+    static ElmCompilationCreateOptions()
+    {
+        Default = new ElmCompilationCreateOptions();
+    }
+
     private ElmCompilationCreateOptions() { }
-    public static ElmCompilationCreateOptions Default { get; } = new();
+
+    public Func<ElmCompilationError, bool>? ShouldThrowError { get; init; }
 }
+
+public readonly record struct ElmCompilationError(
+    ElmCompilation ElmCompilation,
+    Exception Exception,
+    string Method,
+    string? Identifier);
 
 public class ElmCompilation
 {
-    private static readonly ElmCompilation _empty = new(serviceProvider: BuildServiceProvider());
+    private static readonly ElmCompilation Start;
+
+    static ElmCompilation()
+    {
+        Start = new ElmCompilation(serviceProvider: BuildServiceProvider());
+    }
+
     private readonly ServiceProvider _serviceProvider;
     private readonly ElmCompilationDictionary _entries;
     private readonly ElmCompilationCreateOptions _options;
@@ -75,15 +97,12 @@ public class ElmCompilation
         return new ElmCompilation(this, entries, options);
     }
 
-    internal static ElmCompilation Create(Mutator<ElmCompilationCreateOptions>? buildOptions = null)
+    internal static ElmCompilation Create(ElmCompilationCreateOptions? options = null)
     {
-        if (buildOptions != null)
-        {
-            var opt = buildOptions(ElmCompilationCreateOptions.Default);
-            return _empty.Mutate(options: opt);
-        }
+        if (options != null)
+            return Start.Mutate(options: options);
 
-        return _empty;
+        return Start;
     }
 
     private static ServiceProvider BuildServiceProvider()
@@ -102,7 +121,7 @@ public class ElmCompilation
 
     public ElmCompilation LoadCqlTranslation(CqlTranslation cqlTranslation)
     {
-        return this.AddLibraries(cqlTranslation.ElmLibraries.Values);
+        return AddLibraries(cqlTranslation.ElmLibraries.Values);
     }
 
     private ElmCompilation AddLibraries(IEnumerable<Library> libraries)
@@ -140,16 +159,6 @@ public class ElmCompilation
     {
         var libraries =
             files
-                .Where(f =>
-                {
-                    if (HardcodedIgnores.Identifiers.Contains(f.Name.TrimFileExtension(".json")))
-                    {
-                        Console.WriteLine($"Skipping file as from hardcoded names: {f.FullName}");
-                        return false;
-                    }
-
-                    return true;
-                }) // Log skipped files
                 .Select(f =>
                 {
                     Console.WriteLine($"Loading library from file: {f}");
@@ -205,15 +214,31 @@ public class ElmCompilation
 
         Console.WriteLine("Compiling ELM into C# and .NET Binaries");
         using var servicesScope = _serviceProvider.CreateScope();
-        LibrarySetExpressionBuilder librarySetExpressionBuilderScoped =
-            servicesScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped();
+        LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped();
         AssemblyCompiler assemblyCompiler = servicesScope.ServiceProvider.GetAssemblyCompiler();
         Library[] libraries = _entries.Values.Select(v => v.ElmLibrary).ToArray();
         LibrarySet librarySet = new LibrarySet("", libraries);
-        DefinitionDictionary<LambdaExpression> definitionDictionary =
-            librarySetExpressionBuilderScoped.ProcessLibrarySet(librarySet);
-        IReadOnlyDictionary<string, AssemblyData> assemblyDatas =
-            assemblyCompiler.Compile(librarySet, definitionDictionary);
+
+        //if (_options.ShouldThrowError)
+        Func<LibrarySetExpressionBuilderContext.ProcessLibrarySetError, bool>? shouldThrowProcessLibraryException = null;
+        Func<AssemblyCompiler.CompileError, bool>? shouldThrowCompileException = null;
+        if (_options.ShouldThrowError is {} fn)
+        {
+            shouldThrowProcessLibraryException = processLibrarySetError =>
+            {
+                var errorData = new ElmCompilationError(this, processLibrarySetError.Exception, "ProcessLibrarySet", processLibrarySetError.Library.GetVersionedIdentifier(false));
+                return fn(errorData);
+            };
+            shouldThrowCompileException = compileError =>
+            {
+                var errorData = new ElmCompilationError(this, compileError.Exception, "CompileLibrary", compileError.Library.GetVersionedIdentifier(false));
+                return fn(errorData);
+            };
+        }
+
+        DefinitionDictionary<LambdaExpression> definitionDictionary = librarySetExpressionBuilderScoped.ProcessLibrarySet(librarySet, shouldThrowException:shouldThrowProcessLibraryException);
+
+        IReadOnlyDictionary<string, AssemblyData> assemblyDatas = assemblyCompiler.Compile(librarySet, definitionDictionary, shouldThrowException:shouldThrowCompileException);
 
         var entriesBuilder = _entries.ToBuilder();
         bool hasChanged = false;
@@ -231,7 +256,8 @@ public class ElmCompilation
             var cSharpSourceCode = sourceCodePerName.Values.Single(); // We always expect a single source file
             libraryCompilation = libraryCompilation with
             {
-                CSharpSourceCode = cSharpSourceCode, AssemblyBinary = assemblyBinary
+                CSharpSourceCode = cSharpSourceCode,
+                AssemblyBinary = assemblyBinary
             };
             entriesBuilder[elmVersionedIdentifier] = libraryCompilation;
             Console.WriteLine($"Library compiled: {elmVersionedIdentifier}");

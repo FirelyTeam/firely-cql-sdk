@@ -1,4 +1,7 @@
-﻿namespace CqlSdkPrototype;
+﻿using CqlSdkPrototype.CqlToElm;
+using CqlSdkPrototype.ElmToAssembly;
+
+namespace CqlSdkPrototype;
 
 internal class Program
 {
@@ -10,46 +13,58 @@ internal class Program
         };
 
         var rootDir = new DirectoryInfo(@"C:\Dev");
+        var librarySetName = "CMS";
 
         // Keep these output dirs outside the repo:
-        var cqlDirIn = rootDir.CreateSubdirectory(@"firely-cql-sdk\LibrarySets\Demo\Cql"); // Input
-        var elmDirOut = rootDir.CreateSubdirectory(@"prototype-output\Elm");               // Output
-        var elmDirIn = elmDirOut;                                                          // Input
-        //var elmDirIn = rootDir.CreateSubdirectory(@"firely-cql-sdk\LibrarySets\Demo\Elm");   // Input
-        var cSharpDirOut = rootDir.CreateSubdirectory(@"prototype-output\CSharp");         // Output
-        var assemblyDirOut = rootDir.CreateSubdirectory(@"prototype-output\Dlls");         // Output
-        var fhirResourceDirOut = rootDir.CreateSubdirectory(@"prototype-output\Fhir");     // Output
+        var cqlDirIn = rootDir.CreateSubdirectory($@"firely-cql-sdk\LibrarySets\{librarySetName}\Cql"); // Input
+        var elmDirOut = rootDir.CreateSubdirectory(@"prototype-output\Elm");                            // Output
+        var elmDirIn = rootDir.CreateSubdirectory($@"firely-cql-sdk\LibrarySets\{librarySetName}\Elm"); // Input
+        var cSharpDirOut = rootDir.CreateSubdirectory(@"prototype-output\CSharp");                      // Output
+        var assemblyDirOut = rootDir.CreateSubdirectory(@"prototype-output\Dlls");                      // Output
+        var fhirResourceDirOut = rootDir.CreateSubdirectory(@"prototype-output\Fhir");                  // Output
 
         cSharpDirOut.Delete(recursive: true);
         assemblyDirOut.Delete(recursive: true);
         fhirResourceDirOut.Delete(recursive: true);
 
-        var cqlTranslation =
-            CqlTranslation.Create()
-                          .LoadCqlFilesFromDirectory(cqlDirIn, enumerationOptions)
-                          .Translate()
-                          .SaveElmFileToDirectory(elmDirOut)
-                          ;
+        // var cqlTranslation =
+        //     CqlTranslation.Create()
+        //                   .LoadCqlFilesFromDirectory(cqlDirIn, enumerationOptions)
+        //                   .Translate()
+        //                   .SaveElmFileToDirectory(elmDirOut)
+        //                   ;
 
         var elmCompilation =
-                ElmCompilation.Create()
-                              .LoadCqlTranslation(cqlTranslation)
-                              //.LoadElmFilesFromDirectory(elmDir, enumerationOptions)
-                              //.LoadElmFile(elmDir, ElmLibraryIdentifier.Parse("FHIRHelpers"))
+                ElmCompilation.Create(
+                                  ElmCompilationCreateOptions.Default with { ShouldThrowError = e =>
+                                      {
+                                          Console.WriteLine($"Ignoring error during '{e.Method}' for '{e.Identifier}' with error type: {e.Exception.GetType().FullName}");
+                                          return false;
+                                      }
+                                  })
+                              // .LoadCqlTranslation(cqlTranslation)
                               // .Compile()
-                              // .LoadElmFilesFromDirectory(elmDir, enumerationOptions)
+                              // .LoadElmFile(elmDirIn, ElmLibraryIdentifier.Parse("FHIRHelpers")) //
+                              // // Check errors?
+                              // .Compile()
+                              // // Check errors?
+                              .LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
                               .Compile()
+                              // .LoadElmFilesFromDirectory(elmDir, enumerationOptions)
+                              // // Check errors?
+                              // Check errors?
                               .SaveCSharpFilesToDirectory(cSharpDirOut)
                               .SaveAssemblyBinariesToDirectory(assemblyDirOut)
             ;
 
-        var libraryIdentifier = cqlTranslation.VersionedIdentifiers.Values.First()!;
-        Console.WriteLine(
-            $"""
-             First 50 C# lines for {libraryIdentifier}:
-             {cqlTranslation.ElmJsonStrings[libraryIdentifier].TakeLines(50)}
-             """);
+        //         var libraryIdentifier = cqlTranslation.VersionedIdentifiers.Values.First()!;
+        //         Console.WriteLine(
+        //             $"""
+        //              First 50 C# lines for {libraryIdentifier}:
+        //              {cqlTranslation.ElmJsonStrings[libraryIdentifier].TakeLines(50)}
+        //              """);
 
+        var libraryIdentifier = elmCompilation.CSharpSourceCodes.Keys.First()!;
         Console.WriteLine(
             $"""
              First 50 C# lines for {libraryIdentifier}:

@@ -68,9 +68,15 @@ namespace Hl7.Cql.CodeGeneration.NET
                 });
         }
 
+        public readonly record struct CompileError(
+            AssemblyCompiler AssemblyCompiler,
+            Exception Exception,
+            Library Library);
+
         public IReadOnlyDictionary<string, AssemblyData> Compile(
             LibrarySet librarySet,
-            DefinitionDictionary<LambdaExpression> definitions)
+            DefinitionDictionary<LambdaExpression> definitions,
+            Func<CompileError, bool>? shouldThrowException = null)
         {
             ArgumentNullException.ThrowIfNull(definitions);
 
@@ -104,9 +110,17 @@ namespace Hl7.Cql.CodeGeneration.NET
                         foreach (var (libraryName, stream) in items)
                         {
                             var library = librarySet.GetLibrary(libraryName)!;
-                            var libraryAssembly = CompileNode(stream, results, librarySet, library, _referencesLazy.Value);
-                            results.Add(library.GetVersionedIdentifier()!, libraryAssembly);
-                            _assemblyDataPostProcessor?.ProcessAssemblyData(library.GetVersionedIdentifier()!, libraryAssembly);
+                            try
+                            {
+                                var libraryAssembly = CompileNode(stream, results, librarySet, library, _referencesLazy.Value);
+                                results.Add(library.GetVersionedIdentifier()!, libraryAssembly);
+                                _assemblyDataPostProcessor?.ProcessAssemblyData(library.GetVersionedIdentifier()!, libraryAssembly);
+                            }
+                            catch (Exception e)
+                            {
+                                if (shouldThrowException?.Invoke(new CompileError(this, e, library)) ?? true)
+                                    throw;
+                            }
                         }
                         break;
                 }
