@@ -1,4 +1,7 @@
-﻿namespace CqlSdkPrototype;
+﻿using Hl7.Cql.CqlToElm;
+using Hl7.Cql.Elm;
+
+namespace CqlSdkPrototype;
 
 internal class Program
 {
@@ -10,24 +13,29 @@ internal class Program
         };
 
         var rootDir = new DirectoryInfo(@"C:\Dev");
-        var cqlDir = rootDir.CreateSubdirectory(@"firely-cql-sdk\LibrarySets\Demo\Cql"); // Input
-        var elmDir = rootDir.CreateSubdirectory(@"firely-cql-sdk\LibrarySets\Demo\Elm"); // Output/Input
 
         // Keep these output dirs outside the repo:
-        var csharpDir = rootDir.CreateSubdirectory(@"prototype-output\CSharp"); // Output
-        var dllDir = rootDir.CreateSubdirectory(@"prototype-output\Dlls");      // Output
-        var fhirDir = rootDir.CreateSubdirectory(@"prototype-output\Fhir");     // Output
+        var cqlDir = rootDir.CreateSubdirectory(@"firely-cql-sdk\LibrarySets\Demo\Cql"); // Input
+        var elmDirOut = rootDir.CreateSubdirectory(@"prototype-output\Elm");             // Output
+        var elmDir = elmDirOut;                                                          // Input
+        //var elmDir = rootDir.CreateSubdirectory(@"firely-cql-sdk\LibrarySets\Demo\Elm");           // Input
+        var csharpDir = rootDir.CreateSubdirectory(@"prototype-output\CSharp");          // Output
+        var dllDir = rootDir.CreateSubdirectory(@"prototype-output\Dlls");               // Output
+        var fhirDir = rootDir.CreateSubdirectory(@"prototype-output\Fhir");              // Output
+        ElmLibraryIdentifier first;
 
         var cqlTranslation =
-            CqlTranslation.New
+            CqlTranslation.Create()
                           .LoadCqlFilesFromDirectory(cqlDir, enumerationOptions)
                           .Translate()
-                          .SaveElmFileToDirectory(elmDir);
+                          .SaveElmFileToDirectory(elmDirOut)
+                          ;
 
+        first = cqlTranslation.VersionedIdentifiers.Keys.First()!;
         Console.WriteLine(
             $"""
-             First 50 C# lines for {cqlTranslation.VersionedIdentifiers[ElmLibraryIdentifier.Parse("FHIRHelpers")]}:
-             {cqlTranslation.ElmJsonStrings[ElmLibraryIdentifier.Parse("FHIRHelpers")]
+             First 50 C# lines for {first}:
+             {cqlTranslation.ElmJsonStrings[first]
                             .SplitLines()
                             .Take(50)
                             .JoinLines()}
@@ -37,20 +45,23 @@ internal class Program
         dllDir.Delete(recursive: true);
 
         var elmCompilation =
-                ElmCompilation.New
-                              .LoadElmFile(elmDir, ElmLibraryIdentifier.Parse("FHIRHelpers"))
-                              .Compile()
-                              .LoadElmFilesFromDirectory(elmDir, enumerationOptions)
+                ElmCompilation.Create()
+                              .LoadCqlTranslation(cqlTranslation)
+                              //.LoadElmFilesFromDirectory(elmDir, enumerationOptions)
+                              //.LoadElmFile(elmDir, ElmLibraryIdentifier.Parse("FHIRHelpers"))
+                              // .Compile()
+                              // .LoadElmFilesFromDirectory(elmDir, enumerationOptions)
                               .Compile()
                               .SaveCSharpFilesToDirectory(csharpDir)
                               .SaveAssemblyBinariesToDirectory(dllDir)
             ;
 
+        first = elmCompilation.VersionedIdentifiers.Keys.First()!;
         Console.WriteLine(
             $"""
-             First 50 C# lines for {elmCompilation.VersionedIdentifiersByIdentifier[ElmLibraryIdentifier.Parse("FHIRHelpers")]}:
+             First 50 C# lines for {first}:
              {
-                 elmCompilation.SourceCodeByVersionedIdentifier[ElmLibraryIdentifier.Parse("FHIRHelpers")]
+                 elmCompilation.CSharpSourceCodes[first]
                                .SplitLines()
                                .Take(50)
                                .JoinLines()}
@@ -58,13 +69,4 @@ internal class Program
 
         fhirDir.Delete(recursive: true);
     }
-}
-
-file static class Extensions
-{
-    public static string[] SplitLines(this string multilineString) =>
-        multilineString.Split([Environment.NewLine], StringSplitOptions.None);
-
-    public static string JoinLines(this IEnumerable<string> lines) =>
-        string.Join(Environment.NewLine, lines);
 }

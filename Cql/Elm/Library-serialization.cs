@@ -261,7 +261,7 @@ public partial class Library
             }
         }
     }
-    
+
     private static void DoNotSerializeDefaultValues(JsonTypeInfo ti)
     {
         foreach (var prop in ti.Properties)
