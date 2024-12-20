@@ -95,19 +95,19 @@ internal class Program
                               .SaveAssemblyBinariesToDirectory(assemblyDirOut)
             ;
 
-        var logger = serviceProvider.GetLogger<Program>();
-        var id1 = cqlTranslation.ElmJsonStrings.Keys.First()!;
-        logger.LogInformation(
-            $"""
-             First 50 C# lines for {id1}:
-             {cqlTranslation.ElmJsonStrings[id1].TakeLines(50)}
-             """);
-
-        var id2 = elmCompilation.CSharpSourceCodes.Keys.First()!;
-        logger.LogInformation(
-            $"""
-             First 50 C# lines for {id2}:
-             {elmCompilation.CSharpSourceCodes[id2].TakeLines(50)}
-             """);
+//         var logger = serviceProvider.GetLogger<Program>();
+//         var id1 = cqlTranslation.ElmJsonStrings.Keys.First()!;
+//         logger.LogInformation(
+//             $"""
+//              First 50 C# lines for {id1}:
+//              {cqlTranslation.ElmJsonStrings[id1].TakeLines(50)}
+//              """);
+//
+//         var id2 = elmCompilation.CSharpSourceCodes.Keys.First()!;
+//         logger.LogInformation(
+//             $"""
+//              First 50 C# lines for {id2}:
+//              {elmCompilation.CSharpSourceCodes[id2].TakeLines(50)}
+//              """);
     }
 }

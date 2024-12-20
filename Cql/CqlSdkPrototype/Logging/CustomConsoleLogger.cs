@@ -42,12 +42,12 @@ public class CustomConsoleLogger(string categoryName, CustomConsoleLoggerProvide
         logLevel switch
         {
             // @formatter: off
-            LogLevel.Trace       => ("""""", ConsoleColor.Cyan), // 
-            LogLevel.Debug       => ("""""", ConsoleColor.DarkCyan), // 
-            LogLevel.Information => ("""""", ConsoleColor.DarkBlue), // 
-            LogLevel.Warning     => ("""""", ConsoleColor.Yellow),   // 
-            LogLevel.Error       => ("""""", ConsoleColor.Red),      // 
-            LogLevel.Critical    => ("""""", ConsoleColor.Magenta),  // 
+            LogLevel.Trace       => ("""""", ConsoleColor.Cyan),
+            LogLevel.Debug       => ("""""", ConsoleColor.DarkCyan),
+            LogLevel.Information => ("""""", ConsoleColor.Gray),
+            LogLevel.Warning     => ("""""", ConsoleColor.Yellow),
+            LogLevel.Error       => ("""""", ConsoleColor.Red),
+            LogLevel.Critical    => ("""""", ConsoleColor.Magenta),
             _                    => throw new ArgumentOutOfRangeException(nameof(logLevel))
             // @formatter: on
         };
