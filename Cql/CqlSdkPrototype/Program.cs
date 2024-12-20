@@ -1,6 +1,7 @@
 ﻿using CqlSdkPrototype.CqlToElm;
 using CqlSdkPrototype.ElmToAssembly;
 using CqlSdkPrototype.Logging;
+using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -94,15 +95,16 @@ internal class Program
                               .SaveAssemblyBinariesToDirectory(assemblyDirOut)
             ;
 
+        var logger = serviceProvider.GetLogger<Program>();
         var id1 = cqlTranslation.ElmJsonStrings.Keys.First()!;
-        Console.WriteLine(
+        logger.LogInformation(
             $"""
              First 50 C# lines for {id1}:
              {cqlTranslation.ElmJsonStrings[id1].TakeLines(50)}
              """);
 
         var id2 = elmCompilation.CSharpSourceCodes.Keys.First()!;
-        Console.WriteLine(
+        logger.LogInformation(
             $"""
              First 50 C# lines for {id2}:
              {elmCompilation.CSharpSourceCodes[id2].TakeLines(50)}
