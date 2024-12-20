@@ -1644,6 +1644,12 @@ internal partial class ExpressionBuilderContext
                     var selectLambda = Expression.Lambda(selectBody, scopeParameter);
                     var callSelect = BindCqlOperator(nameof(ICqlOperators.Select), @return, selectLambda);
                     @return = callSelect;
+                    if (query.@return.distinct)
+                    {
+                        var qt = query.GetTypeSpecifier();
+                        var t = TypeFor(qt, false);
+                        @return = BindCqlOperator(nameof(ICqlOperators.Distinct), [@return]);
+                    }
                 }
             }
 
