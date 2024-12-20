@@ -1,47 +1,19 @@
-﻿using System.Collections.Immutable;
-using System.Linq.Expressions;
-using CqlSdkPrototype.CqlToElm;
+﻿using System.Linq.Expressions;
+using CqlSdkPrototype.Advanced;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.ElmToAssembly;
 
-using static Hl7.Cql.Compiler.LibrarySetExpressionBuilderContext;
-using ElmCompilationDictionary = ImmutableDictionary<ElmVersionedLibraryIdentifier, ElmCompilation.ElmCompilationEntry>;
-
-public record ElmCompilationCreateOptions
+public class ElmCompilation :
+    ILibraryAcceptor<ElmCompilation>,
+    ILogAccessor<ElmCompilation>
 {
-    public static ElmCompilationCreateOptions Default { get; }
-
-    static ElmCompilationCreateOptions()
-    {
-        Default = new ElmCompilationCreateOptions();
-    }
-
-    private ElmCompilationCreateOptions() { }
-
-    public Func<ElmCompilationError, bool>? ShouldThrowError { get; init; }
-}
-
-public readonly record struct ElmCompilationError(
-    ElmCompilation ElmCompilation,
-    Exception Exception,
-    string Method,
-    string? Identifier);
-
-public class ElmCompilation
-{
-    private static readonly ElmCompilation Start;
-
-    static ElmCompilation()
-    {
-        Start = new ElmCompilation(serviceProvider: BuildServiceProvider());
-    }
-
     private readonly ServiceProvider _serviceProvider;
     private readonly ElmCompilationDictionary _entries;
     private readonly ElmCompilationCreateOptions _options;
@@ -64,20 +36,21 @@ public class ElmCompilation
 
     #region Nested Types
 
-    internal readonly record struct ElmCompilationEntry(Library ElmLibrary, string? CSharpSourceCode = null, byte[]? AssemblyBinary = null);
+    internal readonly record struct ElmCompilationEntry
+        (Library ElmLibrary, string? CSharpSourceCode = null, byte[]? AssemblyBinary = null);
 
     #endregion
 
     #region Construction
 
-    private ElmCompilation(
+    internal ElmCompilation(
+        ElmCompilationCreateOptions options,
         ServiceProvider serviceProvider)
     {
+        _options = options;
         _serviceProvider = serviceProvider;
-        _entries = ElmCompilationDictionary.Empty
-                                           .WithComparers(ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
-        _options = ElmCompilationCreateOptions.Default;
-        // Building of the service provider could possibly move here based on options
+        _entries = ElmCompilationDictionary.Empty.WithComparers(
+            ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
     }
 
     private ElmCompilation(
@@ -99,32 +72,19 @@ public class ElmCompilation
 
     internal static ElmCompilation Create(ElmCompilationCreateOptions? options = null)
     {
-        if (options != null)
-            return Start.Mutate(options: options);
-
-        return Start;
-    }
-
-    private static ServiceProvider BuildServiceProvider()
-    {
-        var serviceProvider =
-            new ServiceCollection()
-                .AddDebugLogging()
-                .AddCqlCodeGenerationServices()
-                .BuildServiceProvider(validateScopes: true);
-        return serviceProvider;
+        return (options ?? ElmCompilationCreateOptions.Default).CreateElmCompilation();
     }
 
     #endregion
 
-    #region Loading/Adding ELM Libraries
+    #region Adding ELM Libraries
 
-    public ElmCompilation LoadCqlTranslation(CqlTranslation cqlTranslation)
+    ElmCompilation ILibraryAcceptor<ElmCompilation>.AcceptLibraries(IEnumerable<Library> libraries)
     {
-        return AddLibraries(cqlTranslation.ElmLibraries.Values);
+        return AcceptLibraries(libraries);
     }
 
-    private ElmCompilation AddLibraries(IEnumerable<Library> libraries)
+    private ElmCompilation AcceptLibraries(IEnumerable<Library> libraries)
     {
         var libraryCompilationsBuilder = _entries.ToBuilder();
         var hasChanged = false;
@@ -149,60 +109,6 @@ public class ElmCompilation
                    : this;
     }
 
-    public ElmCompilation LoadElmFilesFromDirectory(DirectoryInfo directory, EnumerationOptions options)
-    {
-        var files = directory.EnumerateFiles("*.json", options);
-        return LoadElmFiles(files);
-    }
-
-    private ElmCompilation LoadElmFiles(IEnumerable<FileInfo> files)
-    {
-        var libraries =
-            files
-                .Select(f =>
-                {
-                    Console.WriteLine($"Loading library from file: {f}");
-                    var library = Library.LoadFromJson(f);
-                    return library;
-                }); // Log errors
-        return AddLibraries(libraries);
-    }
-
-    public ElmCompilation LoadElmFileWithDependencies(FileInfo file, EnumerationOptions options)
-    {
-        // TODO
-        return this;
-    }
-
-    public ElmCompilation LoadElmFileWithDependencies(
-        DirectoryInfo directory,
-        ElmVersionedLibraryIdentifier fileName,
-        EnumerationOptions options)
-    {
-        // TODO
-        return this;
-    }
-
-    public ElmCompilation LoadElmFile(FileInfo file)
-    {
-        return LoadElmFiles([file]);
-    }
-
-    public ElmCompilation LoadElmFile(DirectoryInfo directory, ElmVersionedLibraryIdentifier libraryName)
-    {
-        FileInfo file = new(Path.Combine(directory.FullName, $"{libraryName}.json"));
-        if (file.Exists)
-            return LoadElmFile(file);
-
-        if (libraryName.Version is null)
-            throw new FileNotFoundException($"Could not find file '{file.FullName}'.");
-
-        Console.WriteLine(
-            $"Could not load library from file with name and version, trying without version: {file.FullName}");
-        file = new FileInfo(Path.Combine(directory.FullName, $"{libraryName with { Version = null }}.json"));
-        return LoadElmFile(file);
-    }
-
     #endregion
 
     #region Compilation
@@ -214,31 +120,39 @@ public class ElmCompilation
 
         Console.WriteLine("Compiling ELM into C# and .NET Binaries");
         using var servicesScope = _serviceProvider.CreateScope();
-        LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped();
+        LibrarySetExpressionBuilder librarySetExpressionBuilderScoped =
+            servicesScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped();
         AssemblyCompiler assemblyCompiler = servicesScope.ServiceProvider.GetAssemblyCompiler();
         Library[] libraries = _entries.Values.Select(v => v.ElmLibrary).ToArray();
         LibrarySet librarySet = new LibrarySet("", libraries);
 
         //if (_options.ShouldThrowError)
-        Func<LibrarySetExpressionBuilderContext.ProcessLibrarySetError, bool>? shouldThrowProcessLibraryException = null;
+        Func<LibrarySetExpressionBuilderContext.ProcessLibrarySetError, bool>?
+            shouldThrowProcessLibraryException = null;
         Func<AssemblyCompiler.CompileError, bool>? shouldThrowCompileException = null;
-        if (_options.ShouldThrowError is {} fn)
+        if (_options.ShouldThrowError is { } fn)
         {
             shouldThrowProcessLibraryException = processLibrarySetError =>
             {
-                var errorData = new ElmCompilationError(this, processLibrarySetError.Exception, "ProcessLibrarySet", processLibrarySetError.Library.GetVersionedIdentifier(false));
+                var errorData = new ElmCompilationError(this, processLibrarySetError.Exception, "ProcessLibrarySet",
+                                                        processLibrarySetError.Library.GetVersionedIdentifier(false));
                 return fn(errorData);
             };
             shouldThrowCompileException = compileError =>
             {
-                var errorData = new ElmCompilationError(this, compileError.Exception, "CompileLibrary", compileError.Library.GetVersionedIdentifier(false));
+                var errorData = new ElmCompilationError(this, compileError.Exception, "CompileLibrary",
+                                                        compileError.Library.GetVersionedIdentifier(false));
                 return fn(errorData);
             };
         }
 
-        DefinitionDictionary<LambdaExpression> definitionDictionary = librarySetExpressionBuilderScoped.ProcessLibrarySet(librarySet, shouldThrowException:shouldThrowProcessLibraryException);
+        DefinitionDictionary<LambdaExpression> definitionDictionary =
+            librarySetExpressionBuilderScoped.ProcessLibrarySet(
+                librarySet, shouldThrowException: shouldThrowProcessLibraryException);
 
-        IReadOnlyDictionary<string, AssemblyData> assemblyDatas = assemblyCompiler.Compile(librarySet, definitionDictionary, shouldThrowException:shouldThrowCompileException);
+        IReadOnlyDictionary<string, AssemblyData> assemblyDatas =
+            assemblyCompiler.Compile(librarySet, definitionDictionary,
+                                     shouldThrowException: shouldThrowCompileException);
 
         var entriesBuilder = _entries.ToBuilder();
         bool hasChanged = false;
@@ -304,4 +218,6 @@ public class ElmCompilation
     }
 
     #endregion
+
+    ILogger<ElmCompilation> ILogAccessor<ElmCompilation>.Logger => _serviceProvider.GetLogger<ElmCompilation>();
 }

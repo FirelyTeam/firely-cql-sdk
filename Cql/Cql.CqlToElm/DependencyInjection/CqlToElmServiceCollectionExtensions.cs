@@ -11,6 +11,7 @@ using System.Globalization;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.LibraryProviders;
+using Hl7.Cql.Runtime.Hosting;
 
 // ReSharper disable once CheckNamespace
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -59,11 +60,15 @@ internal static class CqlToElmServiceCollectionExtensions
 
     public static IServiceCollection AddCqlToElmOptions(
         this IServiceCollection services,
-        Action<CqlToElmOptions>? configureOptions)
+        Action<CqlToElmOptions>? configureOptions = null)
     {
-        services.AddOptions<CqlToElmOptions>()
-                .Configure(configureOptions ?? (_ => { }))
-                .ValidateOnStart();
+        services.AddOptions<CqlToElmOptions>(
+                    b =>
+                    {
+                        if (configureOptions is not null)
+                            b.Configure(configureOptions);
+                        b.ValidateOnStart();
+                    });
         return services;
     }
 

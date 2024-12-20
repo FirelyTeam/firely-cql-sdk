@@ -6,34 +6,19 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using static CqlSdkPrototype.CqlToElm.CqlTranslation;
 using DateTime = System.DateTime;
 
 namespace CqlSdkPrototype.CqlToElm;
 
-using CqlTranslationDictionary = ImmutableDictionary<ElmVersionedLibraryIdentifier, CqlTranslationEntry>;
-
-public record CqlTranslationCreateOptions
-{
-    public static CqlTranslationCreateOptions Default { get; }
-
-    static CqlTranslationCreateOptions()
-    {
-        Default = new CqlTranslationCreateOptions();
-    }
-
-    private CqlTranslationCreateOptions() { }
-}
-
 public class CqlTranslation
 {
-    private static readonly CqlTranslation Start;
+    private static readonly CqlTranslation New;
     private static readonly DateTime TimerStarted;
     private static readonly Stopwatch Timer;
 
     static CqlTranslation()
     {
-        Start = new CqlTranslation(serviceProvider: BuildServiceProvider());
+        New = new CqlTranslation(serviceProvider: BuildServiceProvider());
         TimerStarted = DateTime.Now;
         Timer = Stopwatch.StartNew();
     }
@@ -101,15 +86,12 @@ public class CqlTranslation
         return new CqlTranslation(this, entries, logEntries, options);
     }
 
-    internal static CqlTranslation Create(Mutator<CqlTranslationCreateOptions>? buildOptions = null)
+    internal static CqlTranslation Create(CqlTranslationCreateOptions? options = null)
     {
-        if (buildOptions != null)
-        {
-            var opt = buildOptions(CqlTranslationCreateOptions.Default);
-            return Start.Mutate(options: opt);
-        }
+        if (options != null)
+            return New.Mutate(options: options);
 
-        return Start;
+        return New;
     }
 
     private static ServiceProvider BuildServiceProvider()
@@ -227,13 +209,14 @@ public class CqlTranslation
             Console.WriteLine($"Translating CQL: {versionedIdentifier}");
             try
             {
-                var library = cqlToElmConverter.ConvertLibrary(new StringReader(cqlTranslationEntry.CqlLibrary.Cql));
+                var cql = cqlTranslationEntry.CqlLibrary.Cql;
+                var library = cqlToElmConverter.ConvertLibrary(new StringReader(cql));
                 entriesBuilder[versionedIdentifier] = cqlTranslationEntry with { ElmLibrary = library };
             }
             catch (Exception e)
             {
-                Console.WriteLine($"Failed translating CQL: {versionedIdentifier} with error: {e.Message}");
-                AddLog(logEntriesBuilder, versionedIdentifier, e.ToString());
+                if (_options.ShouldThrowError?.Invoke(new CqlTranslationError(this, e, "Translate", versionedIdentifier.ToString())) ?? true)
+                    throw;
             }
             changedCount++;
         }

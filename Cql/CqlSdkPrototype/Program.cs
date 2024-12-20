@@ -1,5 +1,9 @@
-﻿using CqlSdkPrototype.CqlToElm;
-using CqlSdkPrototype.ElmToAssembly;
+﻿using CqlSdkPrototype.ElmToAssembly;
+using Hl7.Cql.Runtime.Hosting;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Console;
 
 namespace CqlSdkPrototype;
 
@@ -7,6 +11,34 @@ internal class Program
 {
     static void Main(string[] args)
     {
+        // Dictionary<string, string?> inMemoryConfiguration = new()
+        // {
+        //     ["ElmCompilationCreateOptions:ShouldThrowError"] = "true"
+        // };
+        //
+        // var configuration = new ConfigurationBuilder()
+        //                     .AddInMemoryCollection(inMemoryConfiguration)
+        //                     .Build();
+        //
+        var serviceProvider = new ServiceCollection()
+            // .AddSingleton<IConfiguration>(configuration)
+            .AddLogging(lb => lb
+                              .ClearProviders()
+                              .AddSimpleConsole(o => o.SingleLine = true)
+                              .AddFilter((string? category, LogLevel l) =>
+                              {
+                                  return false;
+                              })
+                              )
+            // .ConfigureOptions<ElmCompilationCreateOptions>()
+            //  .Configure<ElmCompilationCreateOptions>(configuration)
+            //  .AddOptions<ElmCompilationCreateOptions>(
+            //      b =>
+            //      {
+            //          //
+            //      })
+            .BuildServiceProvider();
+
         var enumerationOptions = new EnumerationOptions()
         {
             /*RecurseSubdirectories = false*/
@@ -34,9 +66,12 @@ internal class Program
         //                   .SaveElmFileToDirectory(elmDirOut)
         //                   ;
 
+        var loggerProvider = serviceProvider.GetRequiredService<IEnumerable<ILoggerProvider>>().Single();
         var elmCompilation =
                 ElmCompilation.Create(
-                                  ElmCompilationCreateOptions.Default with { ShouldThrowError = e =>
+                                  ElmCompilationCreateOptions.Default with {
+                                      LoggerProvider = loggerProvider,
+                                      ShouldThrowError = e =>
                                       {
                                           Console.WriteLine($"Ignoring error during '{e.Method}' for '{e.Identifier}' with error type: {e.Exception.GetType().FullName}");
                                           return false;

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Runtime.Hosting;
 
@@ -32,4 +33,13 @@ internal static class ServiceCollectionExtensions
             loggingBuilder.AddDebug();
         });
 
+    public static IServiceCollection AddOptions<TOptions>(
+        this IServiceCollection services,
+        Action<OptionsBuilder<TOptions>> buildOptions)
+        where TOptions : class
+    {
+        OptionsBuilder<TOptions> optionsBuilder = services.AddOptions<TOptions>();
+        buildOptions(optionsBuilder);
+        return services;
+    }
 }
