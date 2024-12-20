@@ -100,13 +100,13 @@ public class ElmCompilation :
 
             if (libraryCompilationsBuilder.ContainsKey(versionedIdentifier))
             {
-                _state.Logger.LogInformation($"Skipping adding previous library to compilation: {versionedIdentifier}");
+                _state.Logger.LogInformation("Skipping adding previous library to compilation: {versionedIdentifier}", versionedIdentifier);
                 continue;
             }
 
             var libraryCompilation = new ElmCompilationEntry(library);
             libraryCompilationsBuilder.Add(versionedIdentifier, libraryCompilation);
-            _state.Logger.LogInformation($"Adding library to compilation: {versionedIdentifier}");
+            _state.Logger.LogInformation("Adding library to compilation: {versionedIdentifier}", versionedIdentifier);
             hasChanged = true;
         }
 
@@ -134,7 +134,7 @@ public class ElmCompilation :
 
         var removedLibraries = librarySet.RemoveLibrariesWithMissingDependencies();
         foreach (var (id, _) in removedLibraries)
-            _state.Logger.LogWarning($"Removed library with missing dependencies: {id}");
+            _state.Logger.LogWarning("Removed library with missing dependencies: {id}", id);
 
         Func<LibrarySetExpressionBuilderContext.ProcessLibrarySetError, bool>?
             shouldThrowProcessLibraryException = null;
@@ -172,7 +172,7 @@ public class ElmCompilation :
             if (libraryCompilation.CSharpSourceCode is not null
                 || libraryCompilation.AssemblyBinary is not null)
             {
-                _state.Logger.LogInformation($"Library already compiled: {elmVersionedIdentifier}");
+                _state.Logger.LogInformation("Library already compiled: {versionedIdentifier}", elmVersionedIdentifier);
                 continue;
             }
 
@@ -183,7 +183,7 @@ public class ElmCompilation :
                 AssemblyBinary = assemblyBinary
             };
             entriesBuilder[elmVersionedIdentifier] = libraryCompilation;
-            _state.Logger.LogInformation($"Library compiled: {elmVersionedIdentifier}");
+            _state.Logger.LogInformation("Library compiled: {versionedIdentifier}", elmVersionedIdentifier);
             hasChanged = true;
         }
 

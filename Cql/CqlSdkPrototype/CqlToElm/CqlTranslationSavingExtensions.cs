@@ -18,7 +18,7 @@ public static class CqlTranslationSavingExtensions
         {
             var fileName = Path.Combine(directory.FullName, $"{libraryName}.json");
             File.WriteAllText(fileName, sourceCode);
-            logger.LogInformation($"Saved ELM to file: {fileName}");
+            logger.LogInformation("Saved ELM to file: {file}", fileName);
         }
 
         return cqlTranslation;

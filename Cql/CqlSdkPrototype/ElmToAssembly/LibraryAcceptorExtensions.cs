@@ -34,7 +34,7 @@ public static class LibraryAcceptorExtensions
             files
                 .Select(f =>
                 {
-                    self.Logger.LogInformation($"Loading library from file: {f}");
+                    self.Logger.LogInformation("Loading library from file: {file}", f);
                     var library = Library.LoadFromJson(f);
                     return library;
                 }); // Log errors
@@ -83,7 +83,7 @@ public static class LibraryAcceptorExtensions
         if (libraryName.Version is null)
             throw new FileNotFoundException($"Could not find file '{file.FullName}'.");
 
-        self.Logger.LogWarning($"Could not load library from file with name and version, trying without version: {file.FullName}");
+        self.Logger.LogWarning("Could not load library from file with name and version, trying without version: {file}", file.FullName);
         file = new FileInfo(Path.Combine(directory.FullName, $"{libraryName with { Version = null }}.json"));
         return self.LoadElmFile(file);
     }

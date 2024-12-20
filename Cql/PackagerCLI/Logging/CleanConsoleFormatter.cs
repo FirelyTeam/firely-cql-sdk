@@ -79,8 +79,6 @@ internal sealed partial class CleanConsoleFormatter : ConsoleFormatter
     }
 
 
-    private readonly ConcurrentDictionary<string, string> _colorFormatsByOriginalFormat = new();
-
     private string GetOrdinalStringFormat(
         IReadOnlyCollection<KeyValuePair<string, object?>> state,
         string originalFormat) =>
@@ -105,6 +103,8 @@ internal sealed partial class CleanConsoleFormatter : ConsoleFormatter
 
                 return finalFormat;
             });
+
+    private readonly ConcurrentDictionary<string, string> _colorFormatsByOriginalFormat = new();
 
     private static (string logLevelText, ConsoleColor logLevelConsoleColor) GetLogLevelString(LogLevel logLevel) =>
         logLevel switch

@@ -1,8 +1,16 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+using System.Collections.Concurrent;
+using System.Diagnostics;
+using System.Drawing;
+using System.Globalization;
+using System.Text;
+using System.Text.RegularExpressions;
+using EnumerableExtensions = Hl7.Cql.Abstractions.Infrastructure.EnumerableExtensions;
 
 namespace CqlSdkPrototype.Logging;
 
-public class CustomConsoleLogger(string categoryName, CustomConsoleLoggerProvider provider) : ILogger
+public partial class CustomConsoleLogger(string categoryName, CustomConsoleLoggerProvider provider) : ILogger
 {
     private readonly string _categoryName = categoryName.Length == 0 ? "" : $"{categoryName}: ";
     private readonly CustomConsoleLoggerProvider _provider = provider;
@@ -23,7 +31,9 @@ public class CustomConsoleLogger(string categoryName, CustomConsoleLoggerProvide
         if (!IsEnabled(logLevel))
             return;
 
-        string message = formatter(state, exception);
+        var logEntry = new LogEntry<TState>(logLevel, _categoryName, eventId, state, exception, formatter);
+        var message = GetFormatterMessage(logEntry);
+        //string message = formatter(state, exception);
         if (string.IsNullOrEmpty(message))
             return;
 
@@ -35,6 +45,58 @@ public class CustomConsoleLogger(string categoryName, CustomConsoleLoggerProvide
 
         Console.WriteLine(logRecord);
     }
+
+    private string GetFormatterMessage<TState>(LogEntry<TState> logEntry)
+    {
+        // if (NoColor)
+        // {
+        //     var noColorMessage = logEntry.Formatter(logEntry.State, logEntry.Exception);
+        //     return noColorMessage;
+        // }
+
+        var state = (IReadOnlyCollection<KeyValuePair<string, object?>>)logEntry.State!;
+        var last = state.Last();
+        Debug.Assert(last.Key == "{OriginalFormat}");
+        var originalFormat = (string)last.Value!;
+
+        if (state.Count == 1)
+            return originalFormat; // Nothing to format, return as is
+
+        var colorFormat = GetOrdinalStringFormat(state, originalFormat);
+        var colorMessage = string.Format(CultureInfo.InvariantCulture, colorFormat, EnumerableExtensions.SelectToArray(state, s => s.Value));
+        return colorMessage;
+    }
+
+    private readonly ConcurrentDictionary<string, string> _colorFormatsByOriginalFormat = new();
+
+    private string GetOrdinalStringFormat(
+        IReadOnlyCollection<KeyValuePair<string, object?>> state,
+        string originalFormat) =>
+        _colorFormatsByOriginalFormat.GetOrAdd(
+            originalFormat,
+            _ =>
+            {
+                int i = 0;
+                Dictionary<string, (int i, object? val)> dictionary = state.ToDictionary(kv => kv.Key, kv => (i: i++, val: kv.Value));
+                string finalFormat = ExtractTagsRegex().Replace(originalFormat, m =>
+                {
+                    var tagName = m.Groups["tagName"].Value;
+                    var rest = m.Groups["rest"].Value;
+                    if (dictionary.TryGetValue(tagName, out var kv))
+                    {
+                        bool isString = kv.val is string or StringBuilder or StringWriter;
+                        var foregroundColorEscapeCode = GetForegroundColorEscapeCode(isString ? ConsoleColor.Cyan : ConsoleColor.Magenta);
+                        return $"{foregroundColorEscapeCode}{{{kv.i}{rest}}}{DefaultForegroundColor}";
+                    }
+                    return m.Value;
+                });
+
+                return finalFormat;
+            });
+
+    [GeneratedRegex("""\{(?<tagName>[^:,}]+)(?<rest>[^}]*)\}""", RegexOptions.Compiled)]
+    private static partial Regex ExtractTagsRegex();
+
 
     #region Colors
 

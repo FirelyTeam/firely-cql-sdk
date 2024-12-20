@@ -18,7 +18,7 @@ public static class ElmCompilationSavingExtensions
         {
             var fileName = Path.Combine(directory.FullName, $"{libraryName}.cs");
             File.WriteAllText(fileName, sourceCode);
-            logger.LogInformation($"Saved C# source code to file: {fileName}");
+            logger.LogInformation("Saved C# source code to file: {file}", fileName);
         }
 
         return elmCompilation;
@@ -36,7 +36,7 @@ public static class ElmCompilationSavingExtensions
         {
             var fileName = Path.Combine(directory.FullName, $"{libraryName}.dll");
             File.WriteAllBytes(fileName, assemblyBinary);
-            logger.LogInformation($"Saved assembly binary to file: {fileName}");
+            logger.LogInformation("Saved assembly binary to file: {file}", fileName);
         }
 
         return elmCompilation;

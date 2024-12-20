@@ -25,7 +25,8 @@ internal class Program
                               .AddSingleton<IConfiguration>(configuration)
                               .AddLogging(lb => lb
                                                 .ClearProviders()
-                                                .AddProvider(new CustomConsoleLoggerProvider(cat => cat.Split('.').Last()))
+                                                .AddProvider(
+                                                    new CustomConsoleLoggerProvider(cat => cat.Split('.').Last()))
                                                 .AddFilter((string? category, LogLevel l) =>
                                                 {
                                                     var result = category?.Contains(nameof(CqlSdkPrototype)) ?? false;
@@ -57,20 +58,24 @@ internal class Program
         fhirResourceDirOut.Delete(recursive: true);
 
         var cqlTranslation =
-            CqlTranslation.Create(
-                              serviceProvider,
-                              CqlTranslationCreateOptions.Default with
-                              {
-                                  ShouldThrowError = e =>
+                CqlTranslation.Create(
+                                  serviceProvider,
+                                  CqlTranslationCreateOptions.Default with
                                   {
-                                      e.Logger.LogWarning($"Ignoring error during '{e.Method}' for '{e.Identifier}' with error type: {e.Exception.GetType().FullName}");
-                                      return false;
-                                  }
-                              })
-                          .LoadCqlFilesFromDirectory(cqlDirIn, enumerationOptions)
-                          .Translate()
-                          .SaveElmFileToDirectory(elmDirOut)
-                          ;
+                                      ShouldThrowError = e =>
+                                      {
+                                          e.Logger.LogWarning(
+                                              e.Exception,
+                                              "Ignoring error during '{method}' for '{id}'",
+                                              e.Method,
+                                              e.Identifier);
+                                          return false;
+                                      }
+                                  })
+                              .LoadCqlFilesFromDirectory(cqlDirIn, enumerationOptions)
+                              .Translate()
+                              .SaveElmFileToDirectory(elmDirOut)
+            ;
 
         var elmCompilation =
                 ElmCompilation.Create(
@@ -79,35 +84,35 @@ internal class Program
                                   {
                                       ShouldThrowError = e =>
                                       {
-                                          e.Logger.LogWarning($"Ignoring error during '{e.Method}' for '{e.Identifier}' with error type: {e.Exception.GetType().FullName}");
+                                          e.Logger.LogWarning(
+                                              e.Exception,
+                                              "Ignoring error during '{method}' for '{id}'",
+                                              e.Method,
+                                              e.Identifier);
                                           return false;
                                       }
                                   })
-                              .LoadCqlTranslation(cqlTranslation)
-                              // .Compile()
-                              // .LoadElmFile(elmDirIn, ElmLibraryIdentifier.Parse("FHIRHelpers")) //
-                              // // Check errors?
-                              // .Compile()
-                              // // Check errors?
-                              // .LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
+                              //.LoadCqlTranslation(cqlTranslation)
+                              //.LoadElmFile(elmDirIn, ElmLibraryIdentifier.Parse("FHIRHelpers")) //
+                              .LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
                               .Compile()
                               .SaveCSharpFilesToDirectory(cSharpDirOut)
                               .SaveAssemblyBinariesToDirectory(assemblyDirOut)
             ;
 
-//         var logger = serviceProvider.GetLogger<Program>();
-//         var id1 = cqlTranslation.ElmJsonStrings.Keys.First()!;
-//         logger.LogInformation(
-//             $"""
-//              First 50 C# lines for {id1}:
-//              {cqlTranslation.ElmJsonStrings[id1].TakeLines(50)}
-//              """);
-//
-//         var id2 = elmCompilation.CSharpSourceCodes.Keys.First()!;
-//         logger.LogInformation(
-//             $"""
-//              First 50 C# lines for {id2}:
-//              {elmCompilation.CSharpSourceCodes[id2].TakeLines(50)}
-//              """);
+        //         var logger = serviceProvider.GetLogger<Program>();
+        //         var id1 = cqlTranslation.ElmJsonStrings.Keys.First()!;
+        //         logger.LogInformation(
+        //             $"""
+        //              First 50 C# lines for {id1}:
+        //              {cqlTranslation.ElmJsonStrings[id1].TakeLines(50)}
+        //              """);
+        //
+        //         var id2 = elmCompilation.CSharpSourceCodes.Keys.First()!;
+        //         logger.LogInformation(
+        //             $"""
+        //              First 50 C# lines for {id2}:
+        //              {elmCompilation.CSharpSourceCodes[id2].TakeLines(50)}
+        //              """);
     }
 }

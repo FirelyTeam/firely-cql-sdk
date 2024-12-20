@@ -98,13 +98,13 @@ public class CqlTranslation :
 
             if (libraryCompilationsBuilder.ContainsKey(versionedIdentifier))
             {
-                _state.Logger.LogInformation($"Skipping adding previous cql to translation: {versionedIdentifier}");
+                _state.Logger.LogInformation("Skipping adding previous cql to translation: {versionedIdentifier}", versionedIdentifier);
                 continue;
             }
 
             var libraryCompilation = new CqlTranslationEntry(cqlLibrary);
             libraryCompilationsBuilder.Add(versionedIdentifier, libraryCompilation);
-            _state.Logger.LogInformation($"Adding cql library to translation: {versionedIdentifier}");
+            _state.Logger.LogInformation("Adding cql library to translation: {versionedIdentifier}", versionedIdentifier);
             hasChanged = true;
         }
 
@@ -125,7 +125,7 @@ public class CqlTranslation :
             files
                 .Select(f =>
                 {
-                    _state.Logger.LogInformation($"Loading library from file: {f}");
+                    _state.Logger.LogInformation("Loading library from file: {file}", f);
                     var cqlLibrary =
                         new CqlLibrary(ElmVersionedLibraryIdentifier.Parse(f.Name.TrimFileExtension(".cql")),
                                        File.ReadAllText(f.FullName));
