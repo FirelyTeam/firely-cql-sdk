@@ -133,6 +133,8 @@ public class ElmCompilation :
         LibrarySet librarySet = new LibrarySet("", libraries);
 
         var removedLibraries = librarySet.RemoveLibrariesWithMissingDependencies();
+        foreach (var (id, _) in removedLibraries)
+            _state.Logger.LogWarning($"Removed library with missing dependencies: {id}");
 
         Func<LibrarySetExpressionBuilderContext.ProcessLibrarySetError, bool>?
             shouldThrowProcessLibraryException = null;

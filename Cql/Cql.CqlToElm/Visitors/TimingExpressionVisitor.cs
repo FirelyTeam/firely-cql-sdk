@@ -13,6 +13,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal partial class ExpressionVisitor
     {
+        internal static bool EnableDebugAssertions = true;
+
         //     | expression intervalOperatorPhrase expression                                                  #timingExpression
         public override Expression VisitTimingExpression([NotNull] cqlParser.TimingExpressionContext context)
         {
@@ -166,7 +168,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     IntervalTypeSpecifier or ListTypeSpecifier => InvocationBuilder.Invoke(SystemLibrary.ProperIncludedIn, args),
                     _ => InvocationBuilder.Invoke(SystemLibrary.ProperIn, args)
                 };
-                Debug.Assert(expression.GetErrors().Length == 0);
+                Debug.Assert(!EnableDebugAssertions || expression.GetErrors().Length == 0);
                 return expression
                     .WithId()
                     .WithLocator(context.Locator());
@@ -179,7 +181,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     _ => InvocationBuilder.Invoke(SystemLibrary.In, args),
 
                 };
-                Debug.Assert(expression.GetErrors().Length == 0);
+                Debug.Assert(!EnableDebugAssertions || expression.GetErrors().Length == 0);
                 return expression
                     .WithId()
                     .WithLocator(context.Locator());

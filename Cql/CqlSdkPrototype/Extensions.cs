@@ -1,5 +1,7 @@
 ﻿using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.LibraryProviders;
+using Hl7.Cql.CqlToElm.Visitors;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,6 +19,10 @@ public static class Extensions
     public static IServiceCollection AddCqlTranslation(
         this IServiceCollection serviceCollection)
     {
+        // This is really annoying in debug mode
+        ExpressionVisitor.EnableDebugAssertions = false;
+        Library.EnableDebugAssertions = false;
+
         return serviceCollection
             .AddCqlToElmServices()
             .AddCqlToElmModels(

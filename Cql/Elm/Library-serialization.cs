@@ -25,6 +25,8 @@ internal record LibraryContainer(Library library);
 
 public partial class Library
 {
+    internal static bool EnableDebugAssertions = true;
+
     /// <summary>
     /// Loads a library from a JSON string.
     /// </summary>
@@ -241,7 +243,7 @@ public partial class Library
             prop.valueProp.ShouldSerialize = (obj, value) =>
             {
                 var shouldSerialize = (bool?)prop.valuePropSpecified.Get?.Invoke(obj) == true;
-                if (!shouldSerialize && !IsDefaultValue(value))
+                if (EnableDebugAssertions && !shouldSerialize && !IsDefaultValue(value))
                     Debug.Fail($"Property '{prop.valueProp.Name}' is set to '{value}', but " +
                                $"the '{prop.valuePropSpecified.Name}' is false.");
 

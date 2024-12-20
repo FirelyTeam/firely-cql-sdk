@@ -1,5 +1,6 @@
 ﻿using CqlSdkPrototype.CqlToElm;
 using CqlSdkPrototype.ElmToAssembly;
+using CqlSdkPrototype.Logging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -23,7 +24,7 @@ internal class Program
                               .AddSingleton<IConfiguration>(configuration)
                               .AddLogging(lb => lb
                                                 .ClearProviders()
-                                                .AddProvider(new CustomConsoleLoggerProvider())
+                                                .AddProvider(new CustomConsoleLoggerProvider(cat => cat.Split('.').Last()))
                                                 .AddFilter((string? category, LogLevel l) =>
                                                 {
                                                     var result = category?.Contains(nameof(CqlSdkPrototype)) ?? false;
@@ -93,18 +94,18 @@ internal class Program
                               .SaveAssemblyBinariesToDirectory(assemblyDirOut)
             ;
 
-        //         var libraryIdentifier = cqlTranslation.VersionedIdentifiers.Values.First()!;
-        //         Console.WriteLine(
-        //             $"""
-        //              First 50 C# lines for {libraryIdentifier}:
-        //              {cqlTranslation.ElmJsonStrings[libraryIdentifier].TakeLines(50)}
-        //              """);
-
-        var libraryIdentifier = elmCompilation.CSharpSourceCodes.Keys.First()!;
+        var id1 = cqlTranslation.ElmJsonStrings.Keys.First()!;
         Console.WriteLine(
             $"""
-             First 50 C# lines for {libraryIdentifier}:
-             {elmCompilation.CSharpSourceCodes[libraryIdentifier].TakeLines(50)}
+             First 50 C# lines for {id1}:
+             {cqlTranslation.ElmJsonStrings[id1].TakeLines(50)}
+             """);
+
+        var id2 = elmCompilation.CSharpSourceCodes.Keys.First()!;
+        Console.WriteLine(
+            $"""
+             First 50 C# lines for {id2}:
+             {elmCompilation.CSharpSourceCodes[id2].TakeLines(50)}
              """);
     }
 }

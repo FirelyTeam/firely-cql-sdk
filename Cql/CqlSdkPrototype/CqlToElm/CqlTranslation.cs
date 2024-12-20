@@ -123,16 +123,6 @@ public class CqlTranslation :
     {
         var cqlLibraries =
             files
-                .Where(f =>
-                {
-                    if (HardcodedIgnores.Identifiers.Contains(f.Name.TrimFileExtension(".cql")))
-                    {
-                        _state.Logger.LogInformation($"Skipping file as from hardcoded names: {f.FullName}");
-                        return false;
-                    }
-
-                    return true;
-                }) // Log skipped files
                 .Select(f =>
                 {
                     _state.Logger.LogInformation($"Loading library from file: {f}");

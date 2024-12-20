@@ -33,7 +33,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     /// </summary>
     public string Name { get; }
 
-    private readonly Dictionary<string, (Library library, LibraryByVersionedIdentifierHashSet dependencies)> _libraryInfosByVersionedIdentifier; 
+    private readonly Dictionary<string, (Library library, LibraryByVersionedIdentifierHashSet dependencies)> _libraryInfosByVersionedIdentifier;
 
     private (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries) _calculatedState;
 
@@ -354,15 +354,48 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
 
     internal IReadOnlyCollection<KeyValuePair<string, Library>> RemoveLibrariesWithMissingDependencies()
     {
-        RecalculateStateIfNecessary();
-        var librariesToRemove = new List<KeyValuePair<string, Library>>();
-        foreach (var library in _libraryInfosByVersionedIdentifier.Values)
+        var librariesToRemove = new HashSet<KeyValuePair<string, Library>>();
+
+        // Copy
+        var librariesDependencies = _libraryInfosByVersionedIdentifier
+            .ToDictionary(kv => kv.Key, kv => kv.Value with { dependencies = new(kv.Value.dependencies) });
+
+        // Add dependencies for libraries that are not calculated yet
+        foreach (var library in _librariesNotCalculatedYet)
         {
-            if (library.dependencies.Any(dep => !_libraryInfosByVersionedIdentifier.ContainsKey(dep.GetVersionedIdentifier()!)))
-                librariesToRemove.Add(KeyValuePair.Create(library.library.GetVersionedIdentifier()!, library.library));
+            if (library.includes is { Length: > 0 } includeDefs)
+            {
+                var dependencies = librariesDependencies[library.GetVersionedIdentifier()!].dependencies;
+                foreach (var includeDef in includeDefs)
+                {
+                    if (librariesDependencies.GetValueOrDefault(includeDef.GetVersionedIdentifier()!).library is {} dependencyLibrary)
+                        dependencies.Add(dependencyLibrary);
+                }
+            }
         }
-        foreach (var library in librariesToRemove)
-            _libraryInfosByVersionedIdentifier.Remove(library.Key);
+
+        // Remove libraries with missing dependencies, by checking the library includes are present
+        foreach (var library in _librariesNotCalculatedYet)
+        {
+            if (library.includes is { Length: > 0 } includeDefs)
+            {
+                foreach (var includeDef in includeDefs)
+                {
+                    if (!librariesDependencies.ContainsKey(includeDef.GetVersionedIdentifier()!))
+                    {
+                        librariesToRemove.Add(KeyValuePair.Create(library.GetVersionedIdentifier()!, library));
+                        librariesDependencies.Remove(library.GetVersionedIdentifier()!);
+                    }
+                }
+            }
+        }
+
+        foreach (var (id, library) in librariesToRemove)
+        {
+            _libraryInfosByVersionedIdentifier.Remove(id);
+            _librariesNotCalculatedYet.Remove(library);
+        }
+
         return librariesToRemove;
     }
 }

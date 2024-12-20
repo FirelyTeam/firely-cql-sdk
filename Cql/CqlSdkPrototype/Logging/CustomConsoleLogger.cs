@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Logging;
 
-namespace CqlSdkPrototype;
+namespace CqlSdkPrototype.Logging;
 
-public class CustomConsoleLogger(string? name, CustomConsoleLoggerProvider provider) : ILogger
+public class CustomConsoleLogger(string categoryName, CustomConsoleLoggerProvider provider) : ILogger
 {
-    private readonly string _name = name ?? "";
+    private readonly string _categoryName = categoryName.Length == 0 ? "" : $"{categoryName}: ";
     private readonly CustomConsoleLoggerProvider _provider = provider;
 
     public IDisposable BeginScope<TState>(TState state)
@@ -29,11 +29,9 @@ public class CustomConsoleLogger(string? name, CustomConsoleLoggerProvider provi
 
         var (logLevelText, logLevelConsoleColor) = GetLogLevelString(logLevel);
         var foregroundColorEscapeCode = GetForegroundColorEscapeCode(logLevelConsoleColor);
-        var logRecord = $"[{foregroundColorEscapeCode}{logLevelText}{DefaultForegroundColor}] {message}";
+        var logRecord = $"{foregroundColorEscapeCode}{logLevelText}{DefaultForegroundColor} {_categoryName}{message}";
         if (exception != null)
-        {
             logRecord += Environment.NewLine + exception;
-        }
 
         Console.WriteLine(logRecord);
     }
@@ -44,12 +42,12 @@ public class CustomConsoleLogger(string? name, CustomConsoleLoggerProvider provi
         logLevel switch
         {
             // @formatter: off
-            LogLevel.Trace       => ("trce", ConsoleColor.DarkBlue),
-            LogLevel.Debug       => ("dbug", ConsoleColor.DarkCyan),
-            LogLevel.Information => ("info", ConsoleColor.White),
-            LogLevel.Warning     => ("warn", ConsoleColor.Yellow),
-            LogLevel.Error       => ("fail", ConsoleColor.Red),
-            LogLevel.Critical    => ("crit", ConsoleColor.Magenta),
+            LogLevel.Trace       => ("""""", ConsoleColor.Cyan), // 
+            LogLevel.Debug       => ("""""", ConsoleColor.DarkCyan), // 
+            LogLevel.Information => ("""""", ConsoleColor.DarkBlue), // 
+            LogLevel.Warning     => ("""""", ConsoleColor.Yellow),   // 
+            LogLevel.Error       => ("""""", ConsoleColor.Red),      // 
+            LogLevel.Critical    => ("""""", ConsoleColor.Magenta),  // 
             _                    => throw new ArgumentOutOfRangeException(nameof(logLevel))
             // @formatter: on
         };
@@ -58,22 +56,22 @@ public class CustomConsoleLogger(string? name, CustomConsoleLoggerProvider provi
         color switch
         {
             // @formatter: off
-            ConsoleColor.Black       => "\x1B[30m",
-            ConsoleColor.DarkRed     => "\x1B[31m",
-            ConsoleColor.DarkGreen   => "\x1B[32m",
-            ConsoleColor.DarkYellow  => "\x1B[33m",
-            ConsoleColor.DarkBlue    => "\x1B[34m",
+            ConsoleColor.Black => "\x1B[30m",
+            ConsoleColor.DarkRed => "\x1B[31m",
+            ConsoleColor.DarkGreen => "\x1B[32m",
+            ConsoleColor.DarkYellow => "\x1B[33m",
+            ConsoleColor.DarkBlue => "\x1B[34m",
             ConsoleColor.DarkMagenta => "\x1B[35m",
-            ConsoleColor.DarkCyan    => "\x1B[36m",
-            ConsoleColor.Gray        => "\x1B[37m",
-            ConsoleColor.Red         => "\x1B[1m\x1B[31m",
-            ConsoleColor.Green       => "\x1B[1m\x1B[32m",
-            ConsoleColor.Yellow      => "\x1B[1m\x1B[33m",
-            ConsoleColor.Blue        => "\x1B[1m\x1B[34m",
-            ConsoleColor.Magenta     => "\x1B[1m\x1B[35m",
-            ConsoleColor.Cyan        => "\x1B[1m\x1B[36m",
-            ConsoleColor.White       => "\x1B[1m\x1B[37m",
-            _                        => DefaultForegroundColor // default foreground color
+            ConsoleColor.DarkCyan => "\x1B[36m",
+            ConsoleColor.Gray => "\x1B[37m",
+            ConsoleColor.Red => "\x1B[1m\x1B[31m",
+            ConsoleColor.Green => "\x1B[1m\x1B[32m",
+            ConsoleColor.Yellow => "\x1B[1m\x1B[33m",
+            ConsoleColor.Blue => "\x1B[1m\x1B[34m",
+            ConsoleColor.Magenta => "\x1B[1m\x1B[35m",
+            ConsoleColor.Cyan => "\x1B[1m\x1B[36m",
+            ConsoleColor.White => "\x1B[1m\x1B[37m",
+            _ => DefaultForegroundColor // default foreground color
             // @formatter: on
         };
 
