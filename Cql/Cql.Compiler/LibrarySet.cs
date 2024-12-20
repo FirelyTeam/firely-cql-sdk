@@ -351,4 +351,18 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
                 .Select(lib => KeyValuePair.Create(lib.GetVersionedIdentifier(true)!, lib))
                 .GetEnumerator();
     }
+
+    internal IReadOnlyCollection<KeyValuePair<string, Library>> RemoveLibrariesWithMissingDependencies()
+    {
+        RecalculateStateIfNecessary();
+        var librariesToRemove = new List<KeyValuePair<string, Library>>();
+        foreach (var library in _libraryInfosByVersionedIdentifier.Values)
+        {
+            if (library.dependencies.Any(dep => !_libraryInfosByVersionedIdentifier.ContainsKey(dep.GetVersionedIdentifier()!)))
+                librariesToRemove.Add(KeyValuePair.Create(library.library.GetVersionedIdentifier()!, library.library));
+        }
+        foreach (var library in librariesToRemove)
+            _libraryInfosByVersionedIdentifier.Remove(library.Key);
+        return librariesToRemove;
+    }
 }

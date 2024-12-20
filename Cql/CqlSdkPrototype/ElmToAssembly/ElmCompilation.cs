@@ -14,25 +14,30 @@ public class ElmCompilation :
     ILibraryAcceptor<ElmCompilation>,
     ILogAccessor<ElmCompilation>
 {
-    private readonly ServiceProvider _serviceProvider;
-    private readonly ElmCompilationDictionary _entries;
-    private readonly ElmCompilationCreateOptions _options;
+    private readonly record struct State
+    (
+        IServiceProvider ServiceProvider,
+        ILogger<ElmCompilation> Logger,
+        ElmCompilationDictionary Entries,
+        ElmCompilationCreateOptions Options);
+
+    private readonly State _state;
 
     public IReadOnlyDictionary<ElmLibraryIdentifier, ElmVersionedLibraryIdentifier> VersionedIdentifiers =>
-        _entries
-            .ToDictionary(kv => kv.Key.Identifier, kv => kv.Key);
+        _state.Entries
+              .ToDictionary(kv => kv.Key.Identifier, kv => kv.Key);
 
     public IReadOnlyDictionary<ElmVersionedLibraryIdentifier, string> CSharpSourceCodes =>
-        _entries
-            .Where(kv => kv.Value.CSharpSourceCode is not null)
-            .ToDictionary(kv => kv.Key, kv => kv.Value.CSharpSourceCode!,
-                          ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+        _state.Entries
+              .Where(kv => kv.Value.CSharpSourceCode is not null)
+              .ToDictionary(kv => kv.Key, kv => kv.Value.CSharpSourceCode!,
+                            ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
 
     public IReadOnlyDictionary<ElmVersionedLibraryIdentifier, byte[]> AssemblyBinaries =>
-        _entries
-            .Where(kv => kv.Value.AssemblyBinary is not null)
-            .ToDictionary(kv => kv.Key, kv => kv.Value.AssemblyBinary!,
-                          ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+        _state.Entries
+              .Where(kv => kv.Value.AssemblyBinary is not null)
+              .ToDictionary(kv => kv.Key, kv => kv.Value.AssemblyBinary!,
+                            ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
 
     #region Nested Types
 
@@ -44,35 +49,36 @@ public class ElmCompilation :
     #region Construction
 
     internal ElmCompilation(
-        ElmCompilationCreateOptions options,
-        ServiceProvider serviceProvider)
-    {
-        _options = options;
-        _serviceProvider = serviceProvider;
-        _entries = ElmCompilationDictionary.Empty.WithComparers(
-            ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
-    }
+        IServiceProvider serviceProvider,
+        ElmCompilationCreateOptions options)
+        : this(new State(
+                   serviceProvider,
+                   serviceProvider.GetLogger<ElmCompilation>(),
+                   ElmCompilationDictionary.Empty.WithComparers(
+                       ElmVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer),
+                   options)) { }
 
-    private ElmCompilation(
-        ElmCompilation source,
-        ElmCompilationDictionary? entries,
-        ElmCompilationCreateOptions? options)
+    private ElmCompilation(State state)
     {
-        _serviceProvider = source._serviceProvider;
-        _entries = entries ?? source._entries;
-        _options = options ?? source._options;
+        _state = state;
     }
 
     private ElmCompilation Mutate(
-        ElmCompilationDictionary? entries = null,
-        ElmCompilationCreateOptions? options = null)
+        ElmCompilationDictionary? entries = null)
     {
-        return new ElmCompilation(this, entries, options);
+        return new ElmCompilation(_state with
+        {
+            Entries = entries ?? _state.Entries
+        });
     }
 
-    internal static ElmCompilation Create(ElmCompilationCreateOptions? options = null)
+    internal static ElmCompilation Create(
+        IServiceProvider serviceProvider,
+        ElmCompilationCreateOptions? options = null)
     {
-        return (options ?? ElmCompilationCreateOptions.Default).CreateElmCompilation();
+        return new ElmCompilation(
+            serviceProvider,
+            options ?? ElmCompilationCreateOptions.Default);
     }
 
     #endregion
@@ -86,7 +92,7 @@ public class ElmCompilation :
 
     private ElmCompilation AcceptLibraries(IEnumerable<Library> libraries)
     {
-        var libraryCompilationsBuilder = _entries.ToBuilder();
+        var libraryCompilationsBuilder = _state.Entries.ToBuilder();
         var hasChanged = false;
         foreach (var library in libraries)
         {
@@ -94,13 +100,13 @@ public class ElmCompilation :
 
             if (libraryCompilationsBuilder.ContainsKey(versionedIdentifier))
             {
-                Console.WriteLine($"Skipping adding previous library to compilation: {versionedIdentifier}");
+                _state.Logger.LogInformation($"Skipping adding previous library to compilation: {versionedIdentifier}");
                 continue;
             }
 
             var libraryCompilation = new ElmCompilationEntry(library);
             libraryCompilationsBuilder.Add(versionedIdentifier, libraryCompilation);
-            Console.WriteLine($"Adding library to compilation: {versionedIdentifier}");
+            _state.Logger.LogInformation($"Adding library to compilation: {versionedIdentifier}");
             hasChanged = true;
         }
 
@@ -115,22 +121,23 @@ public class ElmCompilation :
 
     internal ElmCompilation Compile()
     {
-        if (_entries.Values.All(lc => lc is { AssemblyBinary: not null }))
+        if (_state.Entries.Values.All(lc => lc is { AssemblyBinary: not null }))
             return this;
 
-        Console.WriteLine("Compiling ELM into C# and .NET Binaries");
-        using var servicesScope = _serviceProvider.CreateScope();
+        _state.Logger.LogInformation("Compiling ELM into C# and .NET Binaries");
+        using var servicesScope = _state.ServiceProvider.CreateScope();
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped =
             servicesScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped();
         AssemblyCompiler assemblyCompiler = servicesScope.ServiceProvider.GetAssemblyCompiler();
-        Library[] libraries = _entries.Values.Select(v => v.ElmLibrary).ToArray();
+        Library[] libraries = _state.Entries.Values.Select(v => v.ElmLibrary).ToArray();
         LibrarySet librarySet = new LibrarySet("", libraries);
 
-        //if (_options.ShouldThrowError)
+        var removedLibraries = librarySet.RemoveLibrariesWithMissingDependencies();
+
         Func<LibrarySetExpressionBuilderContext.ProcessLibrarySetError, bool>?
             shouldThrowProcessLibraryException = null;
         Func<AssemblyCompiler.CompileError, bool>? shouldThrowCompileException = null;
-        if (_options.ShouldThrowError is { } fn)
+        if (_state.Options.ShouldThrowError is { } fn)
         {
             shouldThrowProcessLibraryException = processLibrarySetError =>
             {
@@ -154,7 +161,7 @@ public class ElmCompilation :
             assemblyCompiler.Compile(librarySet, definitionDictionary,
                                      shouldThrowException: shouldThrowCompileException);
 
-        var entriesBuilder = _entries.ToBuilder();
+        var entriesBuilder = _state.Entries.ToBuilder();
         bool hasChanged = false;
         foreach (var (name, (assemblyBinary, sourceCodePerName)) in assemblyDatas)
         {
@@ -163,7 +170,7 @@ public class ElmCompilation :
             if (libraryCompilation.CSharpSourceCode is not null
                 || libraryCompilation.AssemblyBinary is not null)
             {
-                Console.WriteLine($"Library already compiled: {elmVersionedIdentifier}");
+                _state.Logger.LogInformation($"Library already compiled: {elmVersionedIdentifier}");
                 continue;
             }
 
@@ -174,7 +181,7 @@ public class ElmCompilation :
                 AssemblyBinary = assemblyBinary
             };
             entriesBuilder[elmVersionedIdentifier] = libraryCompilation;
-            Console.WriteLine($"Library compiled: {elmVersionedIdentifier}");
+            _state.Logger.LogInformation($"Library compiled: {elmVersionedIdentifier}");
             hasChanged = true;
         }
 
@@ -187,37 +194,7 @@ public class ElmCompilation :
 
     #region Saving Output
 
-    public ElmCompilation SaveCSharpFilesToDirectory(DirectoryInfo directory)
-    {
-        if (!directory.Exists)
-            directory.Create();
-
-        foreach (var (libraryName, sourceCode) in CSharpSourceCodes)
-        {
-            var fileName = Path.Combine(directory.FullName, $"{libraryName}.cs");
-            File.WriteAllText(fileName, sourceCode);
-            Console.WriteLine($"Saved C# source code to file: {fileName}");
-        }
-
-        return this;
-    }
-
-    public ElmCompilation SaveAssemblyBinariesToDirectory(DirectoryInfo directory)
-    {
-        if (!directory.Exists)
-            directory.Create();
-
-        foreach (var (libraryName, assemblyBinary) in AssemblyBinaries)
-        {
-            var fileName = Path.Combine(directory.FullName, $"{libraryName}.dll");
-            File.WriteAllBytes(fileName, assemblyBinary);
-            Console.WriteLine($"Saved assembly binary to file: {fileName}");
-        }
-
-        return this;
-    }
-
     #endregion
 
-    ILogger<ElmCompilation> ILogAccessor<ElmCompilation>.Logger => _serviceProvider.GetLogger<ElmCompilation>();
+    ILogger<ElmCompilation> ILogAccessor<ElmCompilation>.Logger => _state.Logger;
 }

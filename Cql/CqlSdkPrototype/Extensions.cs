@@ -1,20 +1,34 @@
-﻿namespace CqlSdkPrototype;
+﻿using Hl7.Cql.CqlToElm;
+using Hl7.Cql.CqlToElm.LibraryProviders;
+using Hl7.Cql.Model;
+using Microsoft.Extensions.DependencyInjection;
 
-internal static class Extensions
+namespace CqlSdkPrototype;
+
+public static class Extensions
 {
-    public static string[] SplitLines(this string multilineString) =>
-        multilineString.Split([Environment.NewLine], StringSplitOptions.None);
+    public static IServiceCollection AddElmCompilation(
+        this IServiceCollection serviceCollection)
+    {
+        return serviceCollection
+            .AddCqlCodeGenerationServices();
+    }
 
-    public static string JoinLines(this IEnumerable<string> lines) =>
-        string.Join(Environment.NewLine, lines);
-
-    public static string TakeLines(this string multilineString, int count) =>
-        multilineString.SplitLines().Take(count).JoinLines();
-
-    public static string TrimFileExtension(this string filePath, string extension) =>
-        filePath.EndsWith(extension, StringComparison.OrdinalIgnoreCase)
-            ? filePath[..^extension.Length]
-            : filePath;
+    public static IServiceCollection AddCqlTranslation(
+        this IServiceCollection serviceCollection)
+    {
+        return serviceCollection
+            .AddCqlToElmServices()
+            .AddCqlToElmModels(
+                mp => mp
+                      .Add(Models.ElmR1)
+                      .Add(Models.Fhir401)
+            )
+            .AddCqlToElmOptions(opt =>
+            {
+                // Options
+            })
+            .AddSingleton<ILibraryProvider, MemoryLibraryProvider>()
+            .AddCqlToElmMessaging();
+    }
 }
-
-public delegate T Mutator<T>(T input);

@@ -1,9 +1,8 @@
-﻿using CqlSdkPrototype.ElmToAssembly;
-using Hl7.Cql.Runtime.Hosting;
+﻿using CqlSdkPrototype.CqlToElm;
+using CqlSdkPrototype.ElmToAssembly;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
 
 namespace CqlSdkPrototype;
 
@@ -11,33 +10,29 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        // Dictionary<string, string?> inMemoryConfiguration = new()
-        // {
-        //     ["ElmCompilationCreateOptions:ShouldThrowError"] = "true"
-        // };
-        //
-        // var configuration = new ConfigurationBuilder()
-        //                     .AddInMemoryCollection(inMemoryConfiguration)
-        //                     .Build();
-        //
+        Dictionary<string, string?> inMemoryConfiguration = new()
+        {
+            //["ElmCompilationCreateOptions:ShouldThrowError"] = "true"
+        };
+
+        var configuration = new ConfigurationBuilder()
+                            .AddInMemoryCollection(inMemoryConfiguration)
+                            .Build();
+
         var serviceProvider = new ServiceCollection()
-            // .AddSingleton<IConfiguration>(configuration)
-            .AddLogging(lb => lb
-                              .ClearProviders()
-                              .AddSimpleConsole(o => o.SingleLine = true)
-                              .AddFilter((string? category, LogLevel l) =>
-                              {
-                                  return false;
-                              })
+                              .AddSingleton<IConfiguration>(configuration)
+                              .AddLogging(lb => lb
+                                                .ClearProviders()
+                                                .AddProvider(new CustomConsoleLoggerProvider())
+                                                .AddFilter((string? category, LogLevel l) =>
+                                                {
+                                                    var result = category?.Contains(nameof(CqlSdkPrototype)) ?? false;
+                                                    return result;
+                                                })
                               )
-            // .ConfigureOptions<ElmCompilationCreateOptions>()
-            //  .Configure<ElmCompilationCreateOptions>(configuration)
-            //  .AddOptions<ElmCompilationCreateOptions>(
-            //      b =>
-            //      {
-            //          //
-            //      })
-            .BuildServiceProvider();
+                              .AddElmCompilation()
+                              .AddCqlTranslation()
+                              .BuildServiceProvider();
 
         var enumerationOptions = new EnumerationOptions()
         {
@@ -59,35 +54,41 @@ internal class Program
         assemblyDirOut.Delete(recursive: true);
         fhirResourceDirOut.Delete(recursive: true);
 
-        // var cqlTranslation =
-        //     CqlTranslation.Create()
-        //                   .LoadCqlFilesFromDirectory(cqlDirIn, enumerationOptions)
-        //                   .Translate()
-        //                   .SaveElmFileToDirectory(elmDirOut)
-        //                   ;
+        var cqlTranslation =
+            CqlTranslation.Create(
+                              serviceProvider,
+                              CqlTranslationCreateOptions.Default with
+                              {
+                                  ShouldThrowError = e =>
+                                  {
+                                      e.Logger.LogWarning($"Ignoring error during '{e.Method}' for '{e.Identifier}' with error type: {e.Exception.GetType().FullName}");
+                                      return false;
+                                  }
+                              })
+                          .LoadCqlFilesFromDirectory(cqlDirIn, enumerationOptions)
+                          .Translate()
+                          .SaveElmFileToDirectory(elmDirOut)
+                          ;
 
-        var loggerProvider = serviceProvider.GetRequiredService<IEnumerable<ILoggerProvider>>().Single();
         var elmCompilation =
                 ElmCompilation.Create(
-                                  ElmCompilationCreateOptions.Default with {
-                                      LoggerProvider = loggerProvider,
+                                  serviceProvider,
+                                  ElmCompilationCreateOptions.Default with
+                                  {
                                       ShouldThrowError = e =>
                                       {
-                                          Console.WriteLine($"Ignoring error during '{e.Method}' for '{e.Identifier}' with error type: {e.Exception.GetType().FullName}");
+                                          e.Logger.LogWarning($"Ignoring error during '{e.Method}' for '{e.Identifier}' with error type: {e.Exception.GetType().FullName}");
                                           return false;
                                       }
                                   })
-                              // .LoadCqlTranslation(cqlTranslation)
+                              .LoadCqlTranslation(cqlTranslation)
                               // .Compile()
                               // .LoadElmFile(elmDirIn, ElmLibraryIdentifier.Parse("FHIRHelpers")) //
                               // // Check errors?
                               // .Compile()
                               // // Check errors?
-                              .LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
+                              // .LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
                               .Compile()
-                              // .LoadElmFilesFromDirectory(elmDir, enumerationOptions)
-                              // // Check errors?
-                              // Check errors?
                               .SaveCSharpFilesToDirectory(cSharpDirOut)
                               .SaveAssemblyBinariesToDirectory(assemblyDirOut)
             ;
