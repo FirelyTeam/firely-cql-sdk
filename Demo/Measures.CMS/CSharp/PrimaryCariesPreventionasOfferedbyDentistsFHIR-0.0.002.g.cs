@@ -146,31 +146,32 @@ public partial class PrimaryCariesPreventionasOfferedbyDentistsFHIR_0_0_002 : IL
         IEnumerable<Procedure> c_ = Status_1_8_000.Instance.isProcedurePerformed(context, b_);
         bool? d_(Procedure FluorideApplication)
         {
-            DataType j_ = FluorideApplication?.Performed;
-            object k_ = FHIRHelpers_4_4_000.Instance.ToValue(context, j_);
-            CqlInterval<CqlDateTime> l_ = QICoreCommon_2_1_000.Instance.toInterval(context, k_);
-            CqlDateTime m_ = context.Operators.End(l_);
-            CqlInterval<CqlDateTime> n_ = this.Measurement_Period(context);
-            bool? o_ = context.Operators.In<CqlDateTime>(m_, n_, "day");
+            DataType k_ = FluorideApplication?.Performed;
+            object l_ = FHIRHelpers_4_4_000.Instance.ToValue(context, k_);
+            CqlInterval<CqlDateTime> m_ = QICoreCommon_2_1_000.Instance.toInterval(context, l_);
+            CqlDateTime n_ = context.Operators.End(m_);
+            CqlInterval<CqlDateTime> o_ = this.Measurement_Period(context);
+            bool? p_ = context.Operators.In<CqlDateTime>(n_, o_, "day");
 
-            return o_;
+            return p_;
         };
         IEnumerable<Procedure> e_ = context.Operators.Where<Procedure>(c_, d_);
         CqlDate f_(Procedure FluorideApplication)
         {
-            DataType p_ = FluorideApplication?.Performed;
-            object q_ = FHIRHelpers_4_4_000.Instance.ToValue(context, p_);
-            CqlInterval<CqlDateTime> r_ = QICoreCommon_2_1_000.Instance.toInterval(context, q_);
-            CqlDateTime s_ = context.Operators.End(r_);
-            CqlDate t_ = context.Operators.DateFrom(s_);
+            DataType q_ = FluorideApplication?.Performed;
+            object r_ = FHIRHelpers_4_4_000.Instance.ToValue(context, q_);
+            CqlInterval<CqlDateTime> s_ = QICoreCommon_2_1_000.Instance.toInterval(context, r_);
+            CqlDateTime t_ = context.Operators.End(s_);
+            CqlDate u_ = context.Operators.DateFrom(t_);
 
-            return t_;
+            return u_;
         };
         IEnumerable<CqlDate> g_ = context.Operators.Select<Procedure, CqlDate>(e_, f_);
-        int? h_ = context.Operators.Count<CqlDate>(g_);
-        bool? i_ = context.Operators.GreaterOrEqual(h_, 2);
+        IEnumerable<CqlDate> h_ = context.Operators.Distinct<CqlDate>(g_);
+        int? i_ = context.Operators.Count<CqlDate>(h_);
+        bool? j_ = context.Operators.GreaterOrEqual(i_, 2);
 
-        return i_;
+        return j_;
     }
 
 

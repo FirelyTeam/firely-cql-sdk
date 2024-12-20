@@ -168,37 +168,38 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
         IEnumerable<MedicationDispense> f_ = Status_1_8_000.Instance.isMedicationDispensed(context, e_);
         bool? g_(MedicationDispense Antidepressant)
         {
-            CqlInterval<CqlDate> o_ = CumulativeMedicationDuration_4_1_000.Instance.medicationDispensePeriod(context, Antidepressant);
-            CqlDate p_ = context.Operators.Start(o_);
-            CqlDateTime q_ = context.Operators.ConvertDateToDateTime(p_);
-            CqlInterval<CqlDateTime> r_ = this.Intake_Period(context);
-            bool? s_ = context.Operators.In<CqlDateTime>(q_, r_, "day");
+            CqlInterval<CqlDate> p_ = CumulativeMedicationDuration_4_1_000.Instance.medicationDispensePeriod(context, Antidepressant);
+            CqlDate q_ = context.Operators.Start(p_);
+            CqlDateTime r_ = context.Operators.ConvertDateToDateTime(q_);
+            CqlInterval<CqlDateTime> s_ = this.Intake_Period(context);
+            bool? t_ = context.Operators.In<CqlDateTime>(r_, s_, "day");
 
-            return s_;
+            return t_;
         };
         IEnumerable<MedicationDispense> h_ = context.Operators.Where<MedicationDispense>(f_, g_);
         (CqlTupleMetadata, CqlDate AntidepressantDate)? i_(MedicationDispense Antidepressant)
         {
-            CqlInterval<CqlDate> t_ = CumulativeMedicationDuration_4_1_000.Instance.medicationDispensePeriod(context, Antidepressant);
-            CqlDate u_ = context.Operators.Start(t_);
-            CqlDateTime v_ = context.Operators.ConvertDateToDateTime(u_);
-            CqlDate w_ = context.Operators.DateFrom(v_);
-            (CqlTupleMetadata, CqlDate AntidepressantDate)? x_ = (CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL, w_);
-
-            return x_;
-        };
-        IEnumerable<(CqlTupleMetadata, CqlDate AntidepressantDate)?> j_ = context.Operators.Select<MedicationDispense, (CqlTupleMetadata, CqlDate AntidepressantDate)?>(h_, i_);
-        object k_((CqlTupleMetadata, CqlDate AntidepressantDate)? @this)
-        {
-            CqlDate y_ = @this?.AntidepressantDate;
+            CqlInterval<CqlDate> u_ = CumulativeMedicationDuration_4_1_000.Instance.medicationDispensePeriod(context, Antidepressant);
+            CqlDate v_ = context.Operators.Start(u_);
+            CqlDateTime w_ = context.Operators.ConvertDateToDateTime(v_);
+            CqlDate x_ = context.Operators.DateFrom(w_);
+            (CqlTupleMetadata, CqlDate AntidepressantDate)? y_ = (CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL, x_);
 
             return y_;
         };
-        IEnumerable<(CqlTupleMetadata, CqlDate AntidepressantDate)?> l_ = context.Operators.SortBy<(CqlTupleMetadata, CqlDate AntidepressantDate)?>(j_, k_, System.ComponentModel.ListSortDirection.Ascending);
-        (CqlTupleMetadata, CqlDate AntidepressantDate)? m_ = context.Operators.First<(CqlTupleMetadata, CqlDate AntidepressantDate)?>(l_);
-        CqlDate n_ = m_?.AntidepressantDate;
+        IEnumerable<(CqlTupleMetadata, CqlDate AntidepressantDate)?> j_ = context.Operators.Select<MedicationDispense, (CqlTupleMetadata, CqlDate AntidepressantDate)?>(h_, i_);
+        IEnumerable<(CqlTupleMetadata, CqlDate AntidepressantDate)?> k_ = context.Operators.Distinct<(CqlTupleMetadata, CqlDate AntidepressantDate)?>(j_);
+        object l_((CqlTupleMetadata, CqlDate AntidepressantDate)? @this)
+        {
+            CqlDate z_ = @this?.AntidepressantDate;
 
-        return n_;
+            return z_;
+        };
+        IEnumerable<(CqlTupleMetadata, CqlDate AntidepressantDate)?> m_ = context.Operators.SortBy<(CqlTupleMetadata, CqlDate AntidepressantDate)?>(k_, l_, System.ComponentModel.ListSortDirection.Ascending);
+        (CqlTupleMetadata, CqlDate AntidepressantDate)? n_ = context.Operators.First<(CqlTupleMetadata, CqlDate AntidepressantDate)?>(m_);
+        CqlDate o_ = n_?.AntidepressantDate;
+
+        return o_;
     }
 
 
@@ -377,18 +378,19 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
         IEnumerable<MedicationDispense> f_ = Status_1_8_000.Instance.isMedicationDispensed(context, e_);
         CqlInterval<CqlDate> g_(MedicationDispense Antidepressant)
         {
-            CqlInterval<CqlDate> i_ = CumulativeMedicationDuration_4_1_000.Instance.medicationDispensePeriod(context, Antidepressant);
-            CqlDate j_ = this.IPSD(context);
-            CqlQuantity l_ = context.Operators.Quantity(114m, "days");
-            CqlDate m_ = context.Operators.Add(j_, l_);
-            CqlInterval<CqlDate> n_ = context.Operators.Interval(j_, m_, true, true);
-            CqlInterval<CqlDate> o_ = context.Operators.Intersect<CqlDate>(i_, n_);
+            CqlInterval<CqlDate> j_ = CumulativeMedicationDuration_4_1_000.Instance.medicationDispensePeriod(context, Antidepressant);
+            CqlDate k_ = this.IPSD(context);
+            CqlQuantity m_ = context.Operators.Quantity(114m, "days");
+            CqlDate n_ = context.Operators.Add(k_, m_);
+            CqlInterval<CqlDate> o_ = context.Operators.Interval(k_, n_, true, true);
+            CqlInterval<CqlDate> p_ = context.Operators.Intersect<CqlDate>(j_, o_);
 
-            return o_;
+            return p_;
         };
         IEnumerable<CqlInterval<CqlDate>> h_ = context.Operators.Select<MedicationDispense, CqlInterval<CqlDate>>(f_, g_);
+        IEnumerable<CqlInterval<CqlDate>> i_ = context.Operators.Distinct<CqlInterval<CqlDate>>(h_);
 
-        return h_;
+        return i_;
     }
 
 
@@ -422,18 +424,19 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
         IEnumerable<MedicationDispense> f_ = Status_1_8_000.Instance.isMedicationDispensed(context, e_);
         CqlInterval<CqlDate> g_(MedicationDispense Antidepressant)
         {
-            CqlInterval<CqlDate> i_ = CumulativeMedicationDuration_4_1_000.Instance.medicationDispensePeriod(context, Antidepressant);
-            CqlDate j_ = this.IPSD(context);
-            CqlQuantity l_ = context.Operators.Quantity(231m, "days");
-            CqlDate m_ = context.Operators.Add(j_, l_);
-            CqlInterval<CqlDate> n_ = context.Operators.Interval(j_, m_, true, true);
-            CqlInterval<CqlDate> o_ = context.Operators.Intersect<CqlDate>(i_, n_);
+            CqlInterval<CqlDate> j_ = CumulativeMedicationDuration_4_1_000.Instance.medicationDispensePeriod(context, Antidepressant);
+            CqlDate k_ = this.IPSD(context);
+            CqlQuantity m_ = context.Operators.Quantity(231m, "days");
+            CqlDate n_ = context.Operators.Add(k_, m_);
+            CqlInterval<CqlDate> o_ = context.Operators.Interval(k_, n_, true, true);
+            CqlInterval<CqlDate> p_ = context.Operators.Intersect<CqlDate>(j_, o_);
 
-            return o_;
+            return p_;
         };
         IEnumerable<CqlInterval<CqlDate>> h_ = context.Operators.Select<MedicationDispense, CqlInterval<CqlDate>>(f_, g_);
+        IEnumerable<CqlInterval<CqlDate>> i_ = context.Operators.Distinct<CqlInterval<CqlDate>>(h_);
 
-        return h_;
+        return i_;
     }
 
 

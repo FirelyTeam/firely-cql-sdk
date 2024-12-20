@@ -33,6 +33,8 @@ public class TestDataRequirementsAnalyzer
 
         // Assert
         var actual = dataRequirements.Select(dr => dr.Type).Distinct().ToArray();
-        actual.Should().BeEquivalentTo([FHIRAllTypes.Patient]);
+
+        // Condition+Patient+ServiceRequest is from TestRetrieve, Observation is from TestRetrieveInclude
+        actual.Should().BeEquivalentTo([FHIRAllTypes.Patient, FHIRAllTypes.ServiceRequest, FHIRAllTypes.Condition, FHIRAllTypes.Observation]);
     }
 }

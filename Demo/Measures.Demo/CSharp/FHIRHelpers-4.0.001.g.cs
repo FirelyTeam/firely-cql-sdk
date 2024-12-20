@@ -164,15 +164,16 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
                 List<Coding> b_ = concept?.Coding;
                 CqlCode c_(Coding C)
                 {
-                    CqlCode g_ = this.ToCode(context, C);
+                    CqlCode h_ = this.ToCode(context, C);
 
-                    return g_;
+                    return h_;
                 };
                 IEnumerable<CqlCode> d_ = context.Operators.Select<Coding, CqlCode>((IEnumerable<Coding>)b_, c_);
-                FhirString e_ = concept?.TextElement;
-                string f_ = e_?.Value;
+                IEnumerable<CqlCode> e_ = context.Operators.Distinct<CqlCode>(d_);
+                FhirString f_ = concept?.TextElement;
+                string g_ = f_?.Value;
 
-                return new CqlConcept(d_, f_);
+                return new CqlConcept(e_, g_);
             }
         };
 
