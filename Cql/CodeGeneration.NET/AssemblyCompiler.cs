@@ -69,7 +69,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         public readonly record struct CompileError(
-            AssemblyCompiler AssemblyCompiler,
+            object Sender,
             Exception Exception,
             Library Library);
 
@@ -87,7 +87,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             _cSharpLibrarySetToStreamsWriter.ProcessDefinitions(
                 librarySet,
                 definitions,
-                callbacks: new(onAfterStep: CSharpSourceCodeStep));
+                callbacks: new(onAfterStep: CSharpSourceCodeStep),
+                shouldThrowException);
 
             return results;
 

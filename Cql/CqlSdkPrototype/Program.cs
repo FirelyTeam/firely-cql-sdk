@@ -42,7 +42,7 @@ internal class Program
         };
 
         var rootDir = new DirectoryInfo(@"C:\Dev");
-        var librarySetName = "CMS";
+        var librarySetName = "Demo";
 
         // Keep these output dirs outside the repo:
         var cqlDirIn = rootDir.CreateSubdirectory($@"firely-cql-sdk\LibrarySets\{librarySetName}\Cql"); // Input

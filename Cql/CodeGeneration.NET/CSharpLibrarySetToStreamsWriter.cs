@@ -23,6 +23,7 @@ using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Operators;
 using Expression = System.Linq.Expressions.Expression;
+using static Hl7.Cql.CodeGeneration.NET.AssemblyCompiler;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -137,17 +138,19 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// <param name="librarySet">A dependency graph containing dependent libraries.</param>
         /// <param name="definitions">The lambda expressions to write.</param>
         /// <param name="callbacks">Callbacks which is used during the processing of each stream.</param>
+        /// <param name="shouldThrowException"></param>
         public void ProcessDefinitions(
             LibrarySet librarySet,
             DefinitionDictionary<LambdaExpression> definitions,
-            CSharpSourceCodeWriterCallbacks? callbacks = default)
+            CSharpSourceCodeWriterCallbacks? callbacks = default,
+            Func<CompileError, bool>? shouldThrowException = null)
         {
             List<Stream> streamsToDispose = new();
             callbacks ??= new();
             try
             {
                 var librarySetContext = new LibrarySetContext(librarySet, definitions, callbacks);
-                foreach (var (name, stream) in WriteLibraries(librarySetContext))
+                foreach (var (name, stream) in WriteLibraries(librarySetContext, shouldThrowException))
                 {
                     streamsToDispose.Add(stream);
                     callbacks.Step(name, stream);
@@ -165,7 +168,8 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         private IEnumerable<(string name, Stream stream)> WriteLibraries(
-            LibrarySetContext librarySetContext)
+            LibrarySetContext librarySetContext,
+            Func<CompileError, bool>? shouldThrowException)
         {
             if (!librarySetContext.LibrarySet.Any())
             {
@@ -193,10 +197,21 @@ namespace Hl7.Cql.CodeGeneration.NET
                     continue;
 
                 using var writer = new StreamWriter(stream, Encoding.UTF8, 1024, leaveOpen: true);
-                var libraryContext = new LibraryContext(librarySetContext, library, writer);
-                WriteNamespaceBlock(libraryContext);
+                bool errored = false;
+                try
+                {
+                    var libraryContext = new LibraryContext(librarySetContext, library, writer);
+                    WriteNamespaceBlock(libraryContext);
+                }
+                catch (Exception e)
+                {
+                    errored = true;
+                    if (shouldThrowException?.Invoke(new CompileError(this, e, library)) ?? true)
+                        throw;
+                }
                 writer.Flush();
-                yield return (libraryName, stream);
+                if (!errored)
+                    yield return (libraryName, stream);
             }
         }
 
