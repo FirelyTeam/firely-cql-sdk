@@ -102,6 +102,16 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
         TryGetLibraryInfoByVersionedIdentifier(versionedIdentifier, throwError, out var info) ? info.dependencies : EmptySet<Library>.Instance;
 
     /// <summary>
+    /// Gets the dependencies of a library.
+    /// </summary>
+    /// <param name="parent">The library to retrieve the dependencies for.</param>
+    /// <param name="throwError">Indicates whether to throw an exception if the library is not found.</param>
+    /// <returns>The dependencies of the parent library, or an empty list if the library is not part of this <see cref="LibrarySet"/>.</returns>
+    /// <exception cref="KeyNotFoundError">If the library is not part of the LibrarySet and if throwError is set to <c>true</c>.</exception>
+    public IReadOnlySet<Library> GetLibraryDependencies(Library parent, bool throwError = true) =>
+        GetLibraryDependencies(parent.GetVersionedIdentifier(), throwError);
+
+    /// <summary>
     /// Loads the libraries from the specified collection of files.
     /// </summary>
     /// <param name="files">The collection of files to load the libraries from.</param>

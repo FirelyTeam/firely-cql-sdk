@@ -27,21 +27,7 @@ parameter MeasurementPeriod default Interval[DateTime(2013, 1, 1, 0, 0, 0, 0), D
 
 context Patient
 
-define "InDemographic":
-	AgeInYearsAt(start of MeasurementPeriod) >= 16 and AgeInYearsAt(start of MeasurementPeriod) < 24
-		and "Patient"."gender" in test."Female Administrative Sex"
+define "InDemographic": ["Patient"]
 
 define "SexuallyActive":
-exists (["Condition": test."Other Female Reproductive Conditions"] C where Interval[C.onset, C.abatement] overlaps MeasurementPeriod)
-		or exists (["Condition": test."Genital Herpes"] C where Interval[C.onset, C.abatement] overlaps MeasurementPeriod)
-		or exists (["Condition": onset = 'HIV'] C where Interval[C.onset, C.abatement] overlaps MeasurementPeriod)
-		or exists (["ServiceRequest": status in {'a','b'}] O where O.authoredOn  during MeasurementPeriod)
-
-define "InInitialPopulation":
-	"InDemographic" and "SexuallyActive"
-
-define "InDenominator":
-	true
-
-define "InNumerator":
-exists (["DiagnosticReport": "Chlamydia Screening"] R where R.effective during MeasurementPeriod and R."result" is not null)
+    exists (["Condition"]) or exists (["ServiceRequest"])
