@@ -5,10 +5,10 @@ namespace CqlSdkPrototype.CqlToElm;
 
 public readonly record struct CqlTranslationError
 (
-    CqlTranslation CqlTranslation,
+    CqlTranslator CqlTranslator,
     Exception Exception,
     string Method,
     string? Identifier)
 {
-    public ILogger<CqlTranslation> Logger => ((ILogAccessor<CqlTranslation>)CqlTranslation).Logger;
+    public ILogger<CqlTranslator> Logger => ((ILogAccessor<CqlTranslator>)CqlTranslator).Logger;
 }

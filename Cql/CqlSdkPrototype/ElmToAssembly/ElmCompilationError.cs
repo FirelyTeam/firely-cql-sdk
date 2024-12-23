@@ -4,10 +4,10 @@ using Microsoft.Extensions.Logging;
 namespace CqlSdkPrototype.ElmToAssembly;
 
 public readonly record struct ElmCompilationError(
-    ElmCompilation ElmCompilation,
+    ElmCompiler ElmCompiler,
     Exception Exception,
     string Method,
     string? Identifier)
 {
-    public ILogger<ElmCompilation> Logger => ((ILogAccessor<ElmCompilation>)ElmCompilation).Logger;
+    public ILogger<ElmCompiler> Logger => ((ILogAccessor<ElmCompiler>)ElmCompiler).Logger;
 }

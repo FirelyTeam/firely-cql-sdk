@@ -18,5 +18,5 @@ public class CustomConsoleLoggerProvider : ILoggerProvider
         return new CustomConsoleLogger(categoryName, this);
     }
 
-    public void Dispose() { }
+    void IDisposable.Dispose() { }
 }

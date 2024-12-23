@@ -3,41 +3,42 @@
 namespace CqlSdkPrototype;
 
 #pragma warning disable CS1591
-public readonly record struct ElmLibraryVersion :
-    IParsable<ElmLibraryVersion>,
-    IComparable<ElmLibraryVersion>,
+public readonly record struct CqlLibraryVersion :
+    IParsable<CqlLibraryVersion>,
+    IComparable<CqlLibraryVersion>,
     IComparable
 {
+    public static CqlLibraryVersion Empty { get; } = new CqlLibraryVersion("");
+
     private readonly string _value;
 
-    private ElmLibraryVersion(string value) => _value = value;
+    private CqlLibraryVersion(string value) => _value = value;
 
     public override string ToString() => _value;
 
-
     #region Parsing
 
-    static ElmLibraryVersion IParsable<ElmLibraryVersion>.Parse(string s, IFormatProvider? provider)
+    static CqlLibraryVersion IParsable<CqlLibraryVersion>.Parse(string s, IFormatProvider? provider)
     {
         return Parse(s);
     }
 
-    public static ElmLibraryVersion Parse(string s)
+    public static CqlLibraryVersion Parse(string s)
     {
         return TryParse(s, out var result)
                    ? result
                    : throw new FormatException("Not a valid ElmLibraryVersion");
     }
 
-    static bool IParsable<ElmLibraryVersion>.TryParse(
+    static bool IParsable<CqlLibraryVersion>.TryParse(
         [NotNullWhen(true)] string? s,
         IFormatProvider? provider,
-        out ElmLibraryVersion result)
+        out CqlLibraryVersion result)
     {
         return TryParse(s, out result);
     }
 
-    public static bool TryParse(string? s, out ElmLibraryVersion result)
+    public static bool TryParse(string? s, out CqlLibraryVersion result)
     {
         if (s is null)
         {
@@ -45,7 +46,7 @@ public readonly record struct ElmLibraryVersion :
             return false;
         }
 
-        result = new ElmLibraryVersion(s);
+        result = new CqlLibraryVersion(s);
         return true;
     }
 
@@ -53,7 +54,7 @@ public readonly record struct ElmLibraryVersion :
 
     #region Comparison
 
-    public int CompareTo(ElmLibraryVersion other)
+    public int CompareTo(CqlLibraryVersion other)
     {
         return string.Compare(_value, other._value, StringComparison.Ordinal);
     }
@@ -62,8 +63,8 @@ public readonly record struct ElmLibraryVersion :
     {
         return obj switch
         {
-            ElmLibraryVersion other => CompareTo(other),
-            _ => throw new ArgumentException($"Object must be of type {nameof(ElmVersionedLibraryIdentifier)}")
+            CqlLibraryVersion other => CompareTo(other),
+            _ => throw new ArgumentException($"Object must be of type {nameof(CqlVersionedLibraryIdentifier)}")
         };
     }
 

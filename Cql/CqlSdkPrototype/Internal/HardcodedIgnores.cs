@@ -1,6 +1,6 @@
 ﻿using Hl7.Cql.Packaging;
 
-namespace CqlSdkPrototype;
+namespace CqlSdkPrototype.Internal;
 
 internal static class HardcodedIgnores
 {

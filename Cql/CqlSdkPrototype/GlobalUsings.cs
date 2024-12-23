@@ -1,4 +1,4 @@
 // Global using directives
 
-global using CqlTranslationDictionary = System.Collections.Immutable.ImmutableDictionary<CqlSdkPrototype.ElmVersionedLibraryIdentifier, CqlSdkPrototype.CqlToElm.CqlTranslation.CqlTranslationEntry>;
-global using ElmCompilationDictionary = System.Collections.Immutable.ImmutableDictionary<CqlSdkPrototype.ElmVersionedLibraryIdentifier, CqlSdkPrototype.ElmToAssembly.ElmCompilation.ElmCompilationEntry>;
+global using CqlTranslationEntriesMap = System.Collections.Immutable.ImmutableDictionary<CqlSdkPrototype.CqlVersionedLibraryIdentifier, CqlSdkPrototype.CqlToElm.CqlTranslator.CqlTranslationEntry>;
+global using ElmCompilationEntriesMap = System.Collections.Immutable.ImmutableDictionary<CqlSdkPrototype.CqlVersionedLibraryIdentifier, CqlSdkPrototype.ElmToAssembly.ElmCompiler.ElmCompilationEntry>;

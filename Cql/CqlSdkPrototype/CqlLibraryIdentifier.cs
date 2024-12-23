@@ -3,41 +3,43 @@
 namespace CqlSdkPrototype;
 
 #pragma warning disable CS1591
-public readonly record struct ElmLibraryIdentifier :
-    IParsable<ElmLibraryIdentifier>,
-    IComparable<ElmLibraryIdentifier>,
+public readonly record struct CqlLibraryIdentifier :
+    IParsable<CqlLibraryIdentifier>,
+    IComparable<CqlLibraryIdentifier>,
     IComparable
 {
+    public static CqlLibraryIdentifier Empty { get; } = new CqlLibraryIdentifier("");
+
     private readonly string _value;
 
-    private ElmLibraryIdentifier(string value) => _value = value;
+    private CqlLibraryIdentifier(string value) => _value = value;
 
     public override string ToString() => _value;
 
 
     #region Parsing
 
-    static ElmLibraryIdentifier IParsable<ElmLibraryIdentifier>.Parse(string s, IFormatProvider? provider)
+    static CqlLibraryIdentifier IParsable<CqlLibraryIdentifier>.Parse(string s, IFormatProvider? provider)
     {
         return Parse(s);
     }
 
-    public static ElmLibraryIdentifier Parse(string s)
+    public static CqlLibraryIdentifier Parse(string s)
     {
         return TryParse(s, out var result)
                    ? result
                    : throw new FormatException("Not a valid ElmLibraryName");
     }
 
-    static bool IParsable<ElmLibraryIdentifier>.TryParse(
+    static bool IParsable<CqlLibraryIdentifier>.TryParse(
         [NotNullWhen(true)] string? s,
         IFormatProvider? provider,
-        out ElmLibraryIdentifier result)
+        out CqlLibraryIdentifier result)
     {
         return TryParse(s, out result);
     }
 
-    public static bool TryParse(string? s, out ElmLibraryIdentifier result)
+    public static bool TryParse(string? s, out CqlLibraryIdentifier result)
     {
         if (s is null)
         {
@@ -45,7 +47,7 @@ public readonly record struct ElmLibraryIdentifier :
             return false;
         }
 
-        result = new ElmLibraryIdentifier(s);
+        result = new CqlLibraryIdentifier(s);
         return true;
     }
 
@@ -53,7 +55,7 @@ public readonly record struct ElmLibraryIdentifier :
 
     #region Comparison
 
-    public int CompareTo(ElmLibraryIdentifier other)
+    public int CompareTo(CqlLibraryIdentifier other)
     {
         return string.Compare(_value, other._value, StringComparison.Ordinal);
     }
@@ -62,8 +64,8 @@ public readonly record struct ElmLibraryIdentifier :
     {
         return obj switch
         {
-            ElmLibraryIdentifier other => CompareTo(other),
-            _ => throw new ArgumentException($"Object must be of type {nameof(ElmVersionedLibraryIdentifier)}")
+            CqlLibraryIdentifier other => CompareTo(other),
+            _ => throw new ArgumentException($"Object must be of type {nameof(CqlVersionedLibraryIdentifier)}")
         };
     }
 

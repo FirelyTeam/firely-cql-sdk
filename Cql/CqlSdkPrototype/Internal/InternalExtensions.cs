@@ -1,4 +1,4 @@
-﻿namespace CqlSdkPrototype;
+﻿namespace CqlSdkPrototype.Internal;
 
 internal static class InternalExtensions
 {

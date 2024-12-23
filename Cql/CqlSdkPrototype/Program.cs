@@ -1,5 +1,6 @@
 ﻿using CqlSdkPrototype.CqlToElm;
 using CqlSdkPrototype.ElmToAssembly;
+using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Logging;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -12,30 +13,7 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        Dictionary<string, string?> inMemoryConfiguration = new()
-        {
-            //["ElmCompilationCreateOptions:ShouldThrowError"] = "true"
-        };
-
-        var configuration = new ConfigurationBuilder()
-                            .AddInMemoryCollection(inMemoryConfiguration)
-                            .Build();
-
-        var serviceProvider = new ServiceCollection()
-                              .AddSingleton<IConfiguration>(configuration)
-                              .AddLogging(lb => lb
-                                                .ClearProviders()
-                                                .AddProvider(
-                                                    new CustomConsoleLoggerProvider(cat => cat.Split('.').Last()))
-                                                .AddFilter((string? category, LogLevel l) =>
-                                                {
-                                                    var result = category?.Contains(nameof(CqlSdkPrototype)) ?? false;
-                                                    return result;
-                                                })
-                              )
-                              .AddElmCompilation()
-                              .AddCqlTranslation()
-                              .BuildServiceProvider();
+        var serviceProvider = BuildServiceProvider();
 
         var enumerationOptions = new EnumerationOptions()
         {
@@ -58,27 +36,27 @@ internal class Program
         fhirResourceDirOut.Delete(recursive: true);
 
         var cqlTranslation =
-                CqlTranslation.Create(
-                                  serviceProvider,
-                                  CqlTranslationCreateOptions.Default with
-                                  {
-                                      ShouldThrowError = e =>
-                                      {
-                                          e.Logger.LogWarning(
-                                              e.Exception,
-                                              "Ignoring error during '{method}' for '{id}'",
-                                              e.Method,
-                                              e.Identifier);
-                                          return false;
-                                      }
-                                  })
-                              .LoadCqlFilesFromDirectory(cqlDirIn, enumerationOptions)
-                              .Translate()
-                              .SaveElmFileToDirectory(elmDirOut)
+                CqlTranslator.Create(
+                                 serviceProvider,
+                                 CqlTranslationCreateOptions.Default with
+                                 {
+                                     ShouldThrowError = e =>
+                                     {
+                                         e.Logger.LogWarning(
+                                             e.Exception,
+                                             "Ignoring error during '{method}' for '{id}'",
+                                             e.Method,
+                                             e.Identifier);
+                                         return false;
+                                     }
+                                 })
+                             .LoadCqlFilesFromDirectory(cqlDirIn, enumerationOptions)
+                             .Translate()
+                             .SaveElmFileToDirectory(elmDirOut)
             ;
 
         var elmCompilation =
-                ElmCompilation.Create(
+                ElmCompiler.Create(
                                   serviceProvider,
                                   ElmCompilationCreateOptions.Default with
                                   {
@@ -92,27 +70,63 @@ internal class Program
                                           return false;
                                       }
                                   })
-                              //.LoadCqlTranslation(cqlTranslation)
+                              .LoadCqlTranslation(cqlTranslation)
                               //.LoadElmFile(elmDirIn, ElmLibraryIdentifier.Parse("FHIRHelpers")) //
-                              .LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
+                              //.LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
                               .Compile()
                               .SaveCSharpFilesToDirectory(cSharpDirOut)
                               .SaveAssemblyBinariesToDirectory(assemblyDirOut)
             ;
 
-        //         var logger = serviceProvider.GetLogger<Program>();
-        //         var id1 = cqlTranslation.ElmJsonStrings.Keys.First()!;
-        //         logger.LogInformation(
-        //             $"""
-        //              First 50 C# lines for {id1}:
-        //              {cqlTranslation.ElmJsonStrings[id1].TakeLines(50)}
-        //              """);
-        //
-        //         var id2 = elmCompilation.CSharpSourceCodes.Keys.First()!;
-        //         logger.LogInformation(
-        //             $"""
-        //              First 50 C# lines for {id2}:
-        //              {elmCompilation.CSharpSourceCodes[id2].TakeLines(50)}
-        //              """);
+        ExampleOutput(serviceProvider, cqlTranslation, elmCompilation);
+    }
+
+    private static ServiceProvider BuildServiceProvider()
+    {
+        Dictionary<string, string?> inMemoryConfiguration = new()
+        {
+            //["ElmCompilationCreateOptions:ShouldThrowError"] = "true"
+        };
+
+        var configuration = new ConfigurationBuilder()
+                            .AddInMemoryCollection(inMemoryConfiguration)
+                            .Build();
+
+        var serviceProvider = new ServiceCollection()
+                              .AddSingleton<IConfiguration>(configuration)
+                              .AddLogging(lb => lb
+                                                .ClearProviders()
+                                                .AddProvider(new CustomConsoleLoggerProvider(cat => cat.Split('.').Last()))
+                                                .AddFilter((string? category, LogLevel logLevel) =>
+                                                {
+                                                    var result = category?.Contains(nameof(CqlSdkPrototype)) ?? false;
+                                                    return result;
+                                                })
+                              )
+                              .AddElmCompilation()
+                              .AddCqlTranslation()
+                              .BuildServiceProvider();
+        return serviceProvider;
+    }
+
+    private static void ExampleOutput(
+        ServiceProvider serviceProvider,
+        CqlTranslator cqlTranslator,
+        ElmCompiler elmCompiler)
+    {
+        var logger = serviceProvider.GetLogger<Program>();
+        var id1 = cqlTranslator.ElmJsonStrings.Keys.First()!;
+        logger.LogInformation(
+            $"""
+             First 50 C# lines for {id1}:
+             {cqlTranslator.ElmJsonStrings[id1].TakeLines(50)}
+             """);
+
+        var id2 = elmCompiler.CSharpSourceCodes.Keys.First()!;
+        logger.LogInformation(
+            $"""
+             First 50 C# lines for {id2}:
+             {elmCompiler.CSharpSourceCodes[id2].TakeLines(50)}
+             """);
     }
 }
