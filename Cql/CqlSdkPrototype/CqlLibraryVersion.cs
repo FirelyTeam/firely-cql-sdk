@@ -30,6 +30,13 @@ public readonly record struct CqlLibraryVersion :
                    : throw new FormatException("Not a valid ElmLibraryVersion");
     }
 
+    public static CqlLibraryVersion ParseOrEmpty(string s)
+    {
+        return TryParse(s, out var result)
+           ? result
+           : Empty;
+    }
+
     static bool IParsable<CqlLibraryVersion>.TryParse(
         [NotNullWhen(true)] string? s,
         IFormatProvider? provider,

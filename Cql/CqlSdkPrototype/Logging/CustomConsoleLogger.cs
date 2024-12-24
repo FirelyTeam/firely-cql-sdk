@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.Security;
 using System.Text;
 using System.Text.RegularExpressions;
 using EnumerableExtensions = Hl7.Cql.Abstractions.Infrastructure.EnumerableExtensions;
@@ -39,9 +40,9 @@ public partial class CustomConsoleLogger(string categoryName, CustomConsoleLogge
 
         var (logLevelText, logLevelConsoleColor) = GetLogLevelString(logLevel);
         var foregroundColorEscapeCode = GetForegroundColorEscapeCode(logLevelConsoleColor);
-        var logRecord = $"{foregroundColorEscapeCode}{logLevelText}{DefaultForegroundColor} {_categoryName}{message}";
+        var logRecord = $"{foregroundColorEscapeCode}{logLevelText}{DefaultForegroundColorCode} {_categoryName}{message}";
         if (exception != null)
-            logRecord += Environment.NewLine + exception;
+            logRecord += $"{Environment.NewLine}{GetForegroundColorEscapeCode(ConsoleColor.DarkRed)}{exception}{DefaultForegroundColorCode}";
 
         Console.WriteLine(logRecord);
     }
@@ -83,11 +84,8 @@ public partial class CustomConsoleLogger(string categoryName, CustomConsoleLogge
                     var tagName = m.Groups["tagName"].Value;
                     var rest = m.Groups["rest"].Value;
                     if (dictionary.TryGetValue(tagName, out var kv))
-                    {
-                        bool isString = kv.val is string or StringBuilder or StringWriter;
-                        var foregroundColorEscapeCode = GetForegroundColorEscapeCode(isString ? ConsoleColor.Cyan : ConsoleColor.Magenta);
-                        return $"{foregroundColorEscapeCode}{{{kv.i}{rest}}}{DefaultForegroundColor}";
-                    }
+                        return $"{GetForegroundColorEscapeCode(ConsoleColor.Cyan)}{{{kv.i}{rest}}}{DefaultForegroundColorCode}";
+
                     return m.Value;
                 });
 
@@ -133,11 +131,11 @@ public partial class CustomConsoleLogger(string categoryName, CustomConsoleLogge
             ConsoleColor.Magenta => "\x1B[1m\x1B[35m",
             ConsoleColor.Cyan => "\x1B[1m\x1B[36m",
             ConsoleColor.White => "\x1B[1m\x1B[37m",
-            _ => DefaultForegroundColor // default foreground color
+            _ => DefaultForegroundColorCode // default foreground color
             // @formatter: on
         };
 
-    private const string DefaultForegroundColor = "\x1B[39m\x1B[22m"; // reset to default foreground color
+    private const string DefaultForegroundColorCode = "\x1B[39m\x1B[22m"; // reset to default foreground color
 
     #endregion
 }

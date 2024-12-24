@@ -1,7 +1,10 @@
-﻿using CqlSdkPrototype.CqlToElm;
+﻿using System.Runtime.CompilerServices;
+using System.Runtime.Loader;
+using CqlSdkPrototype.CqlToElm;
 using CqlSdkPrototype.ElmToAssembly;
 using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Logging;
+using CqlSdkPrototype.Runtime;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,7 +47,7 @@ internal class Program
                                      {
                                          e.Logger.LogWarning(
                                              e.Exception,
-                                             "Ignoring error during '{method}' for '{id}'",
+                                             "Ignoring error during {method} for {id}",
                                              e.Method,
                                              e.Identifier);
                                          return false;
@@ -64,7 +67,7 @@ internal class Program
                                       {
                                           e.Logger.LogWarning(
                                               e.Exception,
-                                              "Ignoring error during '{method}' for '{id}'",
+                                              "Ignoring error during {method} for {id}",
                                               e.Method,
                                               e.Identifier);
                                           return false;
@@ -78,7 +81,47 @@ internal class Program
                               .SaveAssemblyBinariesToDirectory(assemblyDirOut)
             ;
 
-        ExampleOutput(serviceProvider, cqlTranslation, elmCompilation);
+        DumpOutputFilesToConsole(serviceProvider, cqlTranslation, elmCompilation);
+        ExecuteLibrary(serviceProvider, cqlTranslation, elmCompilation);
+    }
+
+    private static void ExecuteLibrary(
+        ServiceProvider serviceProvider,
+        CqlTranslator cqlTranslation,
+        ElmCompiler elmCompilation)
+    {
+        var logger = serviceProvider.GetLogger<Program>();
+        logger.LogInformation("Executing");
+        var assemblyLoadContexts = AssemblyLoadContext.All.ToArray();
+        var alc = new AssemblyLoadContext("", true);
+        try
+        {
+            foreach (var (cqlVersionedLibraryIdentifier, bytes) in elmCompilation.AssemblyBinaries)
+            {
+                var asm = alc.LoadFromBytes(bytes);
+
+                var libraryTypes =
+                    asm.GetTypes()
+                       .Select(t =>
+                       {
+                           CqlRuntimeLibrary.TryCreateFromType(t, out var cqlRuntimeLibrary, logger);
+                           return cqlRuntimeLibrary;
+                       })
+                       .Where(t => !t.IsDefault())
+                       .ToArray();
+
+                logger.LogInformation(
+                    """
+                      Loaded assembly: {asm} from library {id} with types:
+                      {types}
+                      """, asm.GetName(false).Name, cqlVersionedLibraryIdentifier, libraryTypes.Select(t => $"- {t.LibraryType.FullName}").JoinLines());
+
+            }
+        }
+        finally
+        {
+            alc.Unload();
+        }
     }
 
     private static ServiceProvider BuildServiceProvider()
@@ -109,7 +152,7 @@ internal class Program
         return serviceProvider;
     }
 
-    private static void ExampleOutput(
+    private static void DumpOutputFilesToConsole(
         ServiceProvider serviceProvider,
         CqlTranslator cqlTranslator,
         ElmCompiler elmCompiler)

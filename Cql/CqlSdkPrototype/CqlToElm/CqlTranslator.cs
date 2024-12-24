@@ -8,17 +8,16 @@ using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.CqlToElm;
 
+using CqlTranslationEntriesMap = System.Collections.Immutable.ImmutableDictionary<
+    CqlVersionedLibraryIdentifier,
+    CqlTranslator.CqlTranslationEntry>;
+
 public class CqlTranslator :
     ICqlLibraryStringContentAcceptor<CqlTranslator>,
     ILogAccessor<CqlTranslator>
 {
-    private readonly record struct State(
-        IServiceProvider ServiceProvider,
-        ILogger<CqlTranslator> Logger,
-        CqlTranslationEntriesMap Entries,
-        CqlTranslationCreateOptions Options);
-
     private readonly State _state;
+    ILogger<CqlTranslator> ILogAccessor<CqlTranslator>.Logger => _state.Logger;
 
     public IReadOnlyDictionary<CqlLibraryIdentifier, CqlVersionedLibraryIdentifier> VersionedIdentifiers =>
         _state.Entries
@@ -38,6 +37,11 @@ public class CqlTranslator :
             });
 
     #region Nested Types
+    private readonly record struct State(
+        IServiceProvider ServiceProvider,
+        ILogger<CqlTranslator> Logger,
+        CqlTranslationEntriesMap Entries,
+        CqlTranslationCreateOptions Options);
 
     internal readonly record struct CqlTranslationEntry(CqlLibraryStringContent CqlLibraryStringContent, Library? ElmLibrary = null);
 
@@ -131,7 +135,7 @@ public class CqlTranslator :
                 entriesBuilder = _state.Entries.ToBuilder();
             }
 
-            _state.Logger.LogInformation($"Translating CQL: {versionedIdentifier}");
+            _state.Logger.LogInformation("Translating CQL: {id}", versionedIdentifier);
             try
             {
                 var cql = cqlTranslationEntry.CqlLibraryStringContent.Cql;
@@ -154,6 +158,4 @@ public class CqlTranslator :
     }
 
     #endregion
-
-    ILogger<CqlTranslator> ILogAccessor<CqlTranslator>.Logger => _state.Logger;
 }

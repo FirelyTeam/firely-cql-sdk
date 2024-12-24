@@ -15,13 +15,6 @@ public class ElmCompiler :
     IElmLibraryAcceptor<ElmCompiler>,
     ILogAccessor<ElmCompiler>
 {
-    private readonly record struct State
-    (
-        IServiceProvider ServiceProvider,
-        ILogger<ElmCompiler> Logger,
-        ElmCompilationEntriesMap Entries,
-        ElmCompilationCreateOptions Options);
-
     private readonly State _state;
 
     public IReadOnlyDictionary<CqlLibraryIdentifier, CqlVersionedLibraryIdentifier> VersionedIdentifiers =>
@@ -41,6 +34,12 @@ public class ElmCompiler :
                             CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
 
     #region Nested Types
+
+    private readonly record struct State(
+        IServiceProvider ServiceProvider,
+        ILogger<ElmCompiler> Logger,
+        ElmCompilationEntriesMap Entries,
+        ElmCompilationCreateOptions Options);
 
     internal readonly record struct ElmCompilationEntry
         (Library ElmLibrary, string? CSharpSourceCode = null, byte[]? AssemblyBinary = null);
@@ -196,10 +195,6 @@ public class ElmCompiler :
                    ? Mutate(entries: entriesBuilder.ToImmutable())
                    : this;
     }
-
-    #endregion
-
-    #region Saving Output
 
     #endregion
 
