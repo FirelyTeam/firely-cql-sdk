@@ -114,7 +114,7 @@ internal class Program
                     """
                       Loaded assembly: {asm} from library {id} with types:
                       {types}
-                      """, asm.GetName(false).Name, cqlVersionedLibraryIdentifier, libraryTypes.Select(t => $"- {t.LibraryType.FullName}").JoinLines());
+                      """, asm.GetName(false).Name, cqlVersionedLibraryIdentifier, libraryTypes.Select(t => $"- {t.GetLibraryType().FullName}").JoinLines());
 
             }
         }

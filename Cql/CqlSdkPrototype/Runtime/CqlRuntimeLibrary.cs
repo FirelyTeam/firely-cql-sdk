@@ -1,23 +1,25 @@
 ﻿using System.CodeDom.Compiler;
+using System.Diagnostics;
 using System.Reflection;
 using Hl7.Cql.Abstractions;
 using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Runtime;
 
-public readonly record struct CqlRuntimeLibrary
+internal readonly record struct CqlRuntimeLibrary
 {
     private CqlRuntimeLibrary(
-        Type libraryType,
+        object libraryInstanceOrType,
         string cqlToolVersion,
         CqlVersionedLibraryIdentifier versionedIdentifier)
     {
-        LibraryType = libraryType;
+        Debug.Assert(libraryInstanceOrType is Type || libraryInstanceOrType?.GetType().BaseType == typeof(object));
+        LibraryInstanceOrType = libraryInstanceOrType;
         CqlToolVersion = cqlToolVersion;
         VersionedIdentifier = versionedIdentifier;
     }
 
-    public bool IsDefault() => LibraryType is null; // Quick check for default value
+    public bool IsDefault() => LibraryInstanceOrType is null; // Quick check for default value
 
     public static CqlRuntimeLibrary CreateFromType(
         Type libraryType,
@@ -59,6 +61,12 @@ public readonly record struct CqlRuntimeLibrary
         var cqlLibraryVersion = CqlLibraryVersion.ParseOrEmpty(cqlLibraryAttribute.Version);
         var cqlLibraryVersionedIdentifier = CqlVersionedLibraryIdentifier.FromNameAndVersion(cqlLibraryIdentifier, cqlLibraryVersion);
 
+        // VERSIONING: Depending on the tool version, the way the library is generated may differ.
+        Debug.Assert(cqlToolVersion == "2.0.8.0");
+        var cqlLibraryTypeOrInstance =
+            libraryType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null)
+            ?? throw new InvalidOperationException($"Unable to create an instance of {libraryType.FullName}");
+
         logger?.LogDebug(
             "Found CQL library type {type} with versioned identifier {vid}, generated with tool version {toolVersion}.",
             libraryType.FullName,
@@ -66,22 +74,28 @@ public readonly record struct CqlRuntimeLibrary
             cqlToolVersion);
 
         cqlRuntimeLibrary = new CqlRuntimeLibrary(
-            libraryType,
+            cqlLibraryTypeOrInstance,
             cqlToolVersion,
             cqlLibraryVersionedIdentifier);
         return true;
     }
 
-    public Type LibraryType { get; init; }
+    private object LibraryInstanceOrType { get; }
     public string CqlToolVersion { get; }
-    public CqlVersionedLibraryIdentifier VersionedIdentifier { get; init; }
+    public CqlVersionedLibraryIdentifier VersionedIdentifier { get; }
+
+    internal Type GetLibraryType() => LibraryInstanceOrType switch
+    {
+        Type type => type,
+        object instance => instance.GetType(),
+        _ when IsDefault() => throw new InvalidOperationException("Cannot use members on default instance."),
+        _ => throw new UnreachableException()
+    };
 
     public void Deconstruct(
-        out Type libraryType,
         out string cqlToolVersion,
         out CqlVersionedLibraryIdentifier versionedIdentifier)
     {
-        libraryType = LibraryType;
         cqlToolVersion = CqlToolVersion;
         versionedIdentifier = VersionedIdentifier;
     }
