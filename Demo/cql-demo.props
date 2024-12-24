@@ -9,7 +9,7 @@
 			Keep this in sync between cql-base.props and cql-demo.props
 			The verion must be the same as FhirNetApiVersion in https://github.com/FirelyTeam/Vonk/blob/develop/src/Vonk.props
 			-->
-		<FirelySdkVersion>5.11.0</FirelySdkVersion>
+		<FirelySdkVersion>5.11.1</FirelySdkVersion>
 	</PropertyGroup>
 
 	<!-- Solution-wide properties for NuGet packaging -->
