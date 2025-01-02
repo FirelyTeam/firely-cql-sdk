@@ -142,6 +142,7 @@ internal class CSharpLibrarySetToStreamsWriter
         public TypeToCSharpConverter TypeToCSharpConverter => CSharpLibrarySetToStreamsWriter._typeToCSharpConverter;
         public IList<(string, string)> AliasedUsings => CSharpLibrarySetToStreamsWriter._aliasedUsings;
         public HashSet<string> Usings => CSharpLibrarySetToStreamsWriter._usings;
+        public string? Namespace => null;
         private ILogger Logger => CSharpLibrarySetToStreamsWriter._logger;
 
         public IEnumerable<(string name, Stream stream)> WriteLibraries()
@@ -175,7 +176,7 @@ internal class CSharpLibrarySetToStreamsWriter
                 bool errored = false;
                 try
                 {
-                    new LibraryContext(this, library, new Writer(writer),null).WriteLibraryFile();
+                    new LibraryContext(this, library, new Writer(writer)).WriteLibraryFile();
                 }
                 catch (Exception e)
                 {
@@ -205,15 +206,11 @@ internal class CSharpLibrarySetToStreamsWriter
     private record LibraryContext(
         LibrarySetContext LibrarySetContext,
         Library Library,
-        Writer Writer,
-        string? Namespace) : ICloneIndent<LibraryContext>
+        Writer Writer) : ICloneIndent<LibraryContext>
     {
-        public TupleMetadataBuilder TupleMetadataBuilder => LibrarySetContext.TupleMetadataBuilder;
         private VersionedIdentifier LibraryVersionedIdentifier => ((IGetVersionedIdentifier)Library).VersionedIdentifier.Result!;
         public string LibraryName { get; } = Library.GetVersionedIdentifier()!;
         private string ClassName { get; } = VariableNameGenerator.NormalizeIdentifier(Library.GetVersionedIdentifier()!)!;
-        private IList<(string, string)> AliasedUsings => LibrarySetContext.AliasedUsings;
-        private HashSet<string> Usings => LibrarySetContext.Usings;
 
         public LibraryContext AddIndent(int addIndent = 1)
         {
@@ -230,7 +227,7 @@ internal class CSharpLibrarySetToStreamsWriter
 
         private void WriteCqlTupleMetadataProperties()
         {
-            var tupleMetadataBuilder = TupleMetadataBuilder;
+            var tupleMetadataBuilder = LibrarySetContext.TupleMetadataBuilder;
 
             // Cql Tuple Metadata
             foreach (var (propertyName, signature) in tupleMetadataBuilder.GetAllTupleMetadataPropertySignatures())
@@ -268,14 +265,12 @@ internal class CSharpLibrarySetToStreamsWriter
 
         private void WriteUsings()
         {
-            foreach (var @using in Usings)
-            {
+            foreach (var @using in LibrarySetContext.Usings)
                 Writer.WriteLine($"using {@using};");
-            }
-            foreach (var @using in AliasedUsings)
-            {
+
+            foreach (var @using in LibrarySetContext.AliasedUsings)
                 Writer.WriteLine($"using {@using.Item1} = {@using.Item2};");
-            }
+
             Writer.WriteLine();
         }
 
@@ -291,7 +286,7 @@ internal class CSharpLibrarySetToStreamsWriter
 
         private void WriteNamespaceFileScope()
         {
-            if (Namespace is { Length: > 0 } @namespace)
+            if (LibrarySetContext.Namespace is { Length: > 0 } @namespace)
             {
                 Writer.WriteLine($"namespace {@namespace};");
                 Writer.WriteLine();
@@ -357,7 +352,7 @@ internal class CSharpLibrarySetToStreamsWriter
         {
             string libraryName = LibraryContext.LibraryName;
             LambdaExpression overload = Overload;
-            TupleMetadataBuilder tupleMetadataBuilder = LibraryContext.TupleMetadataBuilder;
+            TupleMetadataBuilder tupleMetadataBuilder = LibraryContext.LibrarySetContext.TupleMetadataBuilder;
             var isDef = IsDefinition(overload);
 
             var vng = new VariableNameGenerator(Enumerable.Empty<string>(), postfix: "_");
