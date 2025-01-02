@@ -22,14 +22,21 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using Hl7.Cql.Elm;
+using Microsoft.CodeAnalysis.Text;
 using Microsoft.Extensions.Options;
+using Microsoft.CodeAnalysis.Emit;
+using Convert = Hl7.Cql.Elm.Convert;
+using DateTime = Hl7.Cql.Elm.DateTime;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
     internal class AssemblyCompiler
     {
+        private static readonly EmitOptions EmitOptionsPortable = new EmitOptions(debugInformationFormat: DebugInformationFormat.PortablePdb);
+        private static readonly CSharpParseOptions CSharpParseOptions = CSharpParseOptions.Default;
         private readonly CSharpLibrarySetToStreamsWriter _cSharpLibrarySetToStreamsWriter;
         private readonly CSharpCodeStreamPostProcessor? _cSharpCodeStreamPostProcessor;
         private readonly Lazy<Assembly[]> _referencesLazy;
@@ -147,42 +154,45 @@ namespace Hl7.Cql.CodeGeneration.NET
             Elm.Library library,
             IEnumerable<Assembly> assemblyReferences)
         {
-            sourceCodeStream.Flush();
-            sourceCodeStream.Seek(0, SeekOrigin.Begin);
-            var reader = new StreamReader(sourceCodeStream);
-            var sourceCode = reader.ReadToEnd().Trim();
-            var tree = SyntaxFactory.ParseSyntaxTree(sourceCode);
+            var libraryVersionedIdentifier = library.GetVersionedIdentifier()!;
+
+            var librarySourceString = GetSourceCodeString(sourceCodeStream);
+            var librarySourcePath = $"{libraryVersionedIdentifier}.cs";
+            if (_assemblyDataWriterOptions.Value.ForDebugging)
+            {
+                var tempDir = Path.Combine(Path.GetTempPath(), "CqlCompiler", $"{libraryVersionedIdentifier}.cs");
+                Directory.CreateDirectory(tempDir!);
+                librarySourcePath = Path.Combine(tempDir, $"{CreateMD5HashString(librarySourceString)}.cs");
+                File.WriteAllText(librarySourcePath, librarySourceString);
+            }
+
+            var librarySyntaxTree = ParseSyntaxTree(librarySourceString, librarySourcePath);
             var metadataReferences = new List<MetadataReference>();
             AddNetCoreReferences(metadataReferences);
             foreach (var asm in assemblyReferences)
-            {
                 metadataReferences.Add(MetadataReference.CreateFromFile(asm.Location));
-            }
-            foreach (var libraryDependency in librarySet.GetLibraryDependencies(library.GetVersionedIdentifier()!))
-            {
-                if (assemblies.TryGetValue(libraryDependency.GetVersionedIdentifier()!, out var referencedDll))
-                {
-                    metadataReferences.Add(MetadataReference.CreateFromImage(referencedDll.Binary));
-                }
-            }
-            var asmInfo = new StringBuilder();
-            var parts = library.GetVersionedIdentifier()!.Split('-');
-            string name = parts[0];
-            string version = string.Empty;
-            if (parts.Length > 1)
-                version = parts[1];
-            asmInfo.AppendLine(CultureInfo.InvariantCulture, $"[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute(\"{name}\", \"{version}\")]");
-            var asmInfoTree = SyntaxFactory.ParseSyntaxTree(asmInfo.ToString());
 
-            var compilation = CSharpCompilation.Create($"{library.GetVersionedIdentifier()!}")
-                .WithOptions(CreateCSharpCompilationOptions())
-                .WithReferences(metadataReferences)
-                .AddSyntaxTrees(tree, asmInfoTree);
+            foreach (var libraryDependency in librarySet.GetLibraryDependencies(libraryVersionedIdentifier!))
+                if (assemblies.TryGetValue(libraryDependency.GetVersionedIdentifier()!, out var referencedDll))
+                    metadataReferences.Add(MetadataReference.CreateFromImage(referencedDll.Binary));
+
+            // var assemblyInfoSourceString = CreateAssemblyInfoSourceString(library);
+            // var assemblyInfoSourcePath = "AssemblyInfo.cs";
+            // var assemblyInfoSyntaxTree = ParseSyntaxTree(assemblyInfoSourceString, assemblyInfoSourcePath);
+
+            var compilation = CSharpCompilation.Create($"{libraryVersionedIdentifier!}")
+                                               .WithOptions(CreateCSharpCompilationOptions())
+                                               .WithReferences(metadataReferences)
+                                               .AddSyntaxTrees(
+                                                   librarySyntaxTree
+                                                   //, assemblyInfoSyntaxTree
+                                                   );
+
             using var codeStream = new MemoryStream();
             MemoryStream? pdbStream = _assemblyDataWriterOptions.Value.ForDebugging ? new MemoryStream() : null;
             using var pdbStreamDisposable = pdbStream as IDisposable ?? new EmptyDisposable();
 
-            var compilationResult = compilation.Emit(codeStream, pdbStream);
+            var compilationResult = compilation.Emit(codeStream, pdbStream, options:EmitOptionsPortable);
             var errors = new List<Diagnostic>();
             var warnings = new List<Diagnostic>();
             if (!compilationResult.Success)
@@ -195,9 +205,11 @@ namespace Hl7.Cql.CodeGeneration.NET
                         case DiagnosticSeverity.Warning:
                             warnings.Add(diag);
                             break;
+
                         case DiagnosticSeverity.Error:
                             errors.Add(diag);
                             break;
+
                         case DiagnosticSeverity.Hidden:
                         case DiagnosticSeverity.Info:
                         default:
@@ -205,16 +217,48 @@ namespace Hl7.Cql.CodeGeneration.NET
                     }
                     sb.AppendLine(diag.ToString());
                 }
-                var ex = new InvalidOperationException($"The following compilation errors were detected when compiling {library.GetVersionedIdentifier()!}:{Environment.NewLine}{sb}");
+                var ex = new InvalidOperationException($"The following compilation errors were detected when compiling {libraryVersionedIdentifier!}:{Environment.NewLine}{sb}");
                 ex.Data["Errors"] = errors;
                 ex.Data["Warnings"] = warnings;
-                ex.Data["SourceCode"] = sourceCode;
+                ex.Data["SourceCode"] = librarySourceString;
                 throw ex;
             }
             var bytes = codeStream.ToArray();
             var debugSymbols = pdbStream?.ToArray();
-            var asmData = new AssemblyData(bytes, new Dictionary<string, string> { { library.GetVersionedIdentifier()!, sourceCode }}, debugSymbols);
+            var asmData = new AssemblyData(bytes, new Dictionary<string, string> { { libraryVersionedIdentifier!, librarySourceString }}, debugSymbols);
             return asmData;
+        }
+
+        private static string CreateMD5HashString(string text)
+        {
+            return System.Convert.ToBase64String(MD5.HashData(Encoding.UTF8.GetBytes(text)));
+        }
+
+        private static string GetSourceCodeString(Stream sourceCodeStream)
+        {
+            sourceCodeStream.Flush();
+            sourceCodeStream.Seek(0, SeekOrigin.Begin);
+            var reader = new StreamReader(sourceCodeStream);
+            var sourceCode = reader.ReadToEnd().Trim();
+            return sourceCode;
+        }
+
+        private static SyntaxTree ParseSyntaxTree(string text, string path)
+        {
+            var sourceText = SourceText.From(text, Encoding.UTF8);
+            var syntaxTree = SyntaxFactory.ParseSyntaxTree(sourceText, CSharpParseOptions, path);
+            return syntaxTree;
+        }
+
+        private static string CreateAssemblyInfoSourceString(Library library)
+        {
+            var parts = library.GetVersionedIdentifier()!.Split('-');
+            string name = parts[0];
+            string version = string.Empty;
+            if (parts.Length > 1)
+                version = parts[1];
+            var text = $"[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute(\"{name}\", \"{version}\")]";
+            return text;
         }
 
 

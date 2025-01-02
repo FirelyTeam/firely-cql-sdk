@@ -20,7 +20,10 @@ public abstract class LibraryDeclarationInvoker(
 
     protected object? InvokeMethod(params object?[] parameters)
     {
-        var result = MethodInfo.Invoke(Library, BindingFlags.DoNotWrapExceptions, null, parameters, CultureInfo.InvariantCulture);
+        MethodInfo methodInfo = MethodInfo;
+        ILibrary library = Library;
+        System.Diagnostics.Debugger.Launch();
+        var result = methodInfo.Invoke(library, BindingFlags.DoNotWrapExceptions, null, parameters, CultureInfo.InvariantCulture);
         return result;
     }
 }

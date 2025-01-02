@@ -237,6 +237,13 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             WriteUsings(libraryContext);
 
+            // Assembly attribute
+            libraryContext.Writer.WriteLine(
+                libraryContext.LibraryVersionedIdentifier.version is { } version && Version.TryParse(version, out _)
+                    ? $"[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute({libraryContext.LibraryVersionedIdentifier.id.QuoteString()}, {version.QuoteString()})]"
+                    : $"[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute({libraryContext.LibraryVersionedIdentifier.id.QuoteString()})]");
+            libraryContext.Writer.WriteLine($"[assembly: AssemblyVersion({_version.QuoteString()})]");
+
             // Namespace
             if (!string.IsNullOrWhiteSpace(Namespace))
                 libraryContext.Writer.WriteLine($"namespace {Namespace};");
@@ -252,19 +259,11 @@ namespace Hl7.Cql.CodeGeneration.NET
             var writer = libraryContext.Writer;
             writer.WriteLine(libraryContext.Indent, $"[System.CodeDom.Compiler.GeneratedCode({_tool.QuoteString()}, {_version.QuoteString()})]");
 
-            var libraryAttribute = libraryName;
-            var versionAttribute = string.Empty;
-            var versionedIdentifier = libraryName.Split('-');
-            if (versionedIdentifier.Length == 2)
-            {
-                if (Version.TryParse(versionedIdentifier[1], out _))
-                {
-                    libraryAttribute = versionedIdentifier[0];
-                    versionAttribute = versionedIdentifier[1];
-                }
-            }
+            libraryContext.Writer.WriteLine(
+                libraryContext.LibraryVersionedIdentifier.version is { } version && Version.TryParse(version, out _)
+                    ? $"[CqlLibrary({libraryContext.LibraryVersionedIdentifier.id.QuoteString()}, {version.QuoteString()})]"
+                    : $"[CqlLibrary({libraryContext.LibraryVersionedIdentifier.id.QuoteString()})]");
 
-            writer.WriteLine(libraryContext.Indent, $"[CqlLibrary({libraryAttribute.QuoteString()}, {versionAttribute.QuoteString()})]");
             var className = VariableNameGenerator.NormalizeIdentifier(libraryName);
             writer.WriteLine(libraryContext.Indent, $"public partial class {className} : ILibrary, ISingleton<{className}>");
             writer.WriteLine(libraryContext.Indent, "{");
@@ -431,6 +430,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             {
                 context.Writer.WriteLine($"using {@using.Item1} = {@using.Item2};");
             }
+            context.Writer.WriteLine();
         }
 
         private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)

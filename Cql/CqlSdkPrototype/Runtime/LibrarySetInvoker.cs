@@ -50,9 +50,7 @@ partial class LibrarySetInvoker
 
         var alc = new AssemblyLoadContext("", true);
         foreach ((byte[] assembly, byte[]? symbols) in elmCompilation.GetAssemblyBinaries().Values)
-        {
             alc.LoadFromBytes(assembly, symbols);
-        }
 
         librarySetInvoker = new LibrarySetInvoker(alc, logger);
         return true;
