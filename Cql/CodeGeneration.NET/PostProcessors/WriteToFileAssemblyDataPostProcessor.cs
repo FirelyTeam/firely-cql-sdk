@@ -43,10 +43,11 @@ internal class WriteToFileAssemblyDataPostProcessor : AssemblyDataPostProcessor
                 var filesWritten = await File.ReadAllLinesAsync(filesWrittenFile);
                 _logger.LogInformation("Deleting {count} previous Assembly files", filesWritten.Length);
 
-                filesWritten.AsParallel().ForAll(path =>
+                filesWritten.AsParallel().ForAll(name =>
                 {
-                    _logger.LogInformation("Deleting previous Assembly file: {path}", path);
-                    File.Delete(path);
+                    _logger.LogInformation("Deleting previous Assembly file: {path}", name);
+                    File.Delete(GetAssemblyDllFileFullName(name, directory));
+                    File.Delete(GetAssemblyPdbFileFullName(name, directory));
                 });
 
                 _logger.LogInformation("Deleting file record of previous Assembly files: {path}", filesWrittenFile);
@@ -65,8 +66,15 @@ internal class WriteToFileAssemblyDataPostProcessor : AssemblyDataPostProcessor
         var filesWrittenFile = GetFilesDataFileFullName(directory);
 
         _logger.LogInformation("Writing Assembly file: '{file}'", assemblyFile);
-
         File.AppendAllLines(filesWrittenFile, [name]);
+
+        if (assemblyData.DebugSymbols is { Length: > 0 } debugSymbols)
+        {
+            var symbolsFile = GetAssemblyPdbFileFullName(name, directory);
+            _logger.LogInformation("Writing Symbols file: '{file}'", symbolsFile);
+            File.WriteAllBytes(symbolsFile, debugSymbols);
+        }
+
         File.WriteAllBytes(assemblyFile, assemblyData.Binary);
     }
 
@@ -78,6 +86,9 @@ internal class WriteToFileAssemblyDataPostProcessor : AssemblyDataPostProcessor
 
     private static string GetAssemblyDllFileFullName(string name, string directory) =>
         Path.Combine(directory, $"{name}.dll");
+
+    private static string GetAssemblyPdbFileFullName(string name, string directory) =>
+        Path.Combine(directory, $"{name}.pdb");
 
     public override void ProcessReferenceAssembly(Assembly referenceAssembly)
     {

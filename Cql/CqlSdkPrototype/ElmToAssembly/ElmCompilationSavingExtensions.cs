@@ -14,7 +14,7 @@ public static class ElmCompilationSavingExtensions
             directory.Create();
 
         var logger = ((ILogAccessor<ElmCompiler>)elmCompiler).Logger;
-        foreach (var (libraryName, sourceCode) in elmCompiler.CSharpSourceCodes)
+        foreach (var (libraryName, sourceCode) in elmCompiler.GetCSharpSourceCodes())
         {
             var fileName = Path.Combine(directory.FullName, $"{libraryName}.cs");
             File.WriteAllText(fileName, sourceCode);
@@ -32,11 +32,18 @@ public static class ElmCompilationSavingExtensions
             directory.Create();
 
         var logger = ((ILogAccessor<ElmCompiler>)elmCompiler).Logger;
-        foreach (var (libraryName, assemblyBinary) in elmCompiler.AssemblyBinaries)
+        foreach (var (libraryName, (assemblyBytes, symbolsBytes)) in elmCompiler.GetAssemblyBinaries())
         {
             var fileName = Path.Combine(directory.FullName, $"{libraryName}.dll");
-            File.WriteAllBytes(fileName, assemblyBinary);
-            logger.LogInformation("Saved assembly binary to file: {file}", fileName);
+            File.WriteAllBytes(fileName, assemblyBytes);
+            logger.LogInformation("Saved assembly to file: {file}", fileName);
+
+            if (symbolsBytes is { Length: > 0 })
+            {
+                fileName = Path.Combine(directory.FullName, $"{libraryName}.pdb");
+                File.WriteAllBytes(fileName, symbolsBytes);
+                logger.LogInformation("Saved debug symbols to file: {file}", fileName);
+            }
         }
 
         return elmCompiler;

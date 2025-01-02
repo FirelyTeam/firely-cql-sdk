@@ -40,7 +40,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
 
             public int Indent { get; }
+
             public bool UseIndent { get; }
+
             public string IndentString => UseIndent ? StringExtensions.IndentString(Indent) : string.Empty;
 
             public Context WithOverride(Func<int, int>? indentFn = null, Func<bool, bool>? useIndentFn = null) =>

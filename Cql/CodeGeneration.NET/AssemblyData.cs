@@ -7,7 +7,6 @@
  */
 
 using System.Collections.Generic;
-using System.Reflection;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -16,5 +15,17 @@ namespace Hl7.Cql.CodeGeneration.NET
     /// </summary>
     /// <param name="Binary">This assembly's binary data.</param>
     /// <param name="SourceCode">The collection of source code files that contributed to this assembly.</param>
-    internal record AssemblyData(byte[] Binary, IDictionary<string, string> SourceCode);
+    /// <param name="DebugSymbols">The assembly's debug symbols in binary data.</param>
+    internal record AssemblyData
+    (
+        byte[] Binary,
+        IDictionary<string, string> SourceCode,
+        byte[]? DebugSymbols = null)
+    {
+        public void Deconstruct(out byte[] binary, out IDictionary<string, string> sourceCode)
+        {
+            binary = Binary;
+            sourceCode = SourceCode;
+        }
+    }
 }

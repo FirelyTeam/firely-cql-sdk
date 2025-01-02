@@ -162,11 +162,11 @@ internal class Program
              {cqlTranslator.ElmJsonStrings[id1].TakeLines(50)}
              """);
 
-        var id2 = elmCompiler.CSharpSourceCodes.Keys.First()!;
+        var id2 = elmCompiler.GetCSharpSourceCodes().Keys.First()!;
         logger.LogInformation(
             $"""
              First 50 C# lines for {id2}:
-             {elmCompiler.CSharpSourceCodes[id2].TakeLines(50)}
+             {elmCompiler.GetCSharpSourceCodes()[id2].TakeLines(50)}
              """);
     }
 }

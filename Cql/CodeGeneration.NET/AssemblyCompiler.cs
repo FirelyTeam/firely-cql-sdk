@@ -24,6 +24,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
 using Hl7.Cql.Elm;
+using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -32,14 +33,17 @@ namespace Hl7.Cql.CodeGeneration.NET
         private readonly CSharpLibrarySetToStreamsWriter _cSharpLibrarySetToStreamsWriter;
         private readonly CSharpCodeStreamPostProcessor? _cSharpCodeStreamPostProcessor;
         private readonly Lazy<Assembly[]> _referencesLazy;
+        private readonly IOptions<AssemblyDataWriterOptions> _assemblyDataWriterOptions;
         private readonly AssemblyDataPostProcessor? _assemblyDataPostProcessor;
 
         public AssemblyCompiler(
+            IOptions<AssemblyDataWriterOptions> assemblyDataWriterOptions,
             CSharpLibrarySetToStreamsWriter cSharpLibrarySetToStreamsWriter,
             TypeResolver typeResolver,
             CSharpCodeStreamPostProcessor? cSharpCodeStreamPostProcessor = null,
             AssemblyDataPostProcessor? assemblyDataPostProcessor = null)
         {
+            _assemblyDataWriterOptions = assemblyDataWriterOptions;
             _assemblyDataPostProcessor = assemblyDataPostProcessor;
             _cSharpLibrarySetToStreamsWriter = cSharpLibrarySetToStreamsWriter;
             _cSharpCodeStreamPostProcessor = cSharpCodeStreamPostProcessor;
@@ -128,15 +132,15 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
-        private static CSharpCompilationOptions CreateCSharpCompilationOptions() =>
+        private CSharpCompilationOptions CreateCSharpCompilationOptions() =>
             new(
                 outputKind: OutputKind.DynamicallyLinkedLibrary,
-                optimizationLevel: OptimizationLevel.Release,
+                optimizationLevel: _assemblyDataWriterOptions.Value.ForDebugging ? OptimizationLevel.Debug : OptimizationLevel.Release,
                 deterministic: true, // see: https://github.com/dotnet/roslyn/blob/main/docs/compilers/Deterministic%20Inputs.md
                 sourceReferenceResolver: new SourceFileResolver(ImmutableArray<string>.Empty, null)
             );
 
-        private static AssemblyData CompileNode(
+        private AssemblyData CompileNode(
             Stream sourceCodeStream,
             Dictionary<string, AssemblyData> assemblies,
             LibrarySet librarySet,
@@ -174,8 +178,11 @@ namespace Hl7.Cql.CodeGeneration.NET
                 .WithOptions(CreateCSharpCompilationOptions())
                 .WithReferences(metadataReferences)
                 .AddSyntaxTrees(tree, asmInfoTree);
-            var codeStream = new MemoryStream();
-            var compilationResult = compilation.Emit(codeStream);
+            using var codeStream = new MemoryStream();
+            MemoryStream? pdbStream = _assemblyDataWriterOptions.Value.ForDebugging ? new MemoryStream() : null;
+            using var pdbStreamDisposable = pdbStream as IDisposable ?? new EmptyDisposable();
+
+            var compilationResult = compilation.Emit(codeStream, pdbStream);
             var errors = new List<Diagnostic>();
             var warnings = new List<Diagnostic>();
             if (!compilationResult.Success)
@@ -205,7 +212,8 @@ namespace Hl7.Cql.CodeGeneration.NET
                 throw ex;
             }
             var bytes = codeStream.ToArray();
-            var asmData = new AssemblyData(bytes, new Dictionary<string, string> { { library.GetVersionedIdentifier()!, sourceCode } });
+            var debugSymbols = pdbStream?.ToArray();
+            var asmData = new AssemblyData(bytes, new Dictionary<string, string> { { library.GetVersionedIdentifier()!, sourceCode }}, debugSymbols);
             return asmData;
         }
 

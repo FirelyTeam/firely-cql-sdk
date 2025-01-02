@@ -57,12 +57,34 @@ internal class CSharpSourceCodeWriterCallbacks
 }
 internal abstract record CSharpSourceCodeStep
 {
-    public record OnStream(string Name, Stream Stream) : CSharpSourceCodeStep;
+    public record OnStream(string Name, Stream Stream) : CSharpSourceCodeStep {
+        private readonly string _name = Name;
+        private readonly Stream _stream = Stream;
+
+        public string Name
+        {
+            get => _name;
+            init => _name = value;
+        }
+
+        public Stream Stream
+        {
+            get => _stream;
+            init => _stream = value;
+        }
+    }
 
     public record OnDone() : CSharpSourceCodeStep;
 }
 
 internal readonly record struct AlreadyCreatedAStreamForLibraryNameError(string LibraryName) : ICqlError
 {
+    private readonly string _libraryName = LibraryName;
     public string GetMessage() => $"Already created a stream for this library name before. Library Name: '{LibraryName}'";
+
+    public string LibraryName
+    {
+        get => _libraryName;
+        init => _libraryName = value;
+    }
 }

@@ -17,6 +17,8 @@ namespace Hl7.Cql.CodeGeneration.NET;
 public partial class CSharpCodeWriterOptions
 
 {
+    private DirectoryInfo? _outDirectory;
+
     /// <summary>
     /// The name of the config setting.
     /// </summary>
@@ -27,7 +29,11 @@ public partial class CSharpCodeWriterOptions
     /// <summary>
     /// Gets or sets the output directory.
     /// </summary>
-    public DirectoryInfo? OutDirectory { get; set; }
+    public DirectoryInfo? OutDirectory
+    {
+        get => _outDirectory;
+        set => _outDirectory = value;
+    }
 
     /// <summary>
     /// Binds the configuration values to the <see cref="CSharpCodeWriterOptions"/> object.

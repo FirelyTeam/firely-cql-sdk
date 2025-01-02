@@ -1,5 +1,6 @@
 ﻿using System.Reflection;
 using System.Runtime.Loader;
+using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Internal;
 
@@ -22,10 +23,12 @@ internal static class InternalExtensions
             ? filePath[..^extension.Length]
             : filePath;
 
-    public static Assembly LoadFromBytes(this AssemblyLoadContext assemblyLoadContext, byte[] bytes)
+    public static Assembly LoadFromBytes(this AssemblyLoadContext assemblyLoadContext, byte[] assembly, byte[]? symbols = null)
     {
-        using var memoryStream = new MemoryStream(bytes);
-        return assemblyLoadContext.LoadFromStream(memoryStream);
+        using var assemblyStream = new MemoryStream(assembly);
+        var symbolsStream = symbols is {Length:>0} ? new MemoryStream(symbols) : null;
+        using var symbolsStreamDisposable = symbolsStream as IDisposable ?? new EmptyDisposable();
+        return assemblyLoadContext.LoadFromStream(assemblyStream, symbolsStream);
     }
 
     public static IEnumerable<TR> SelectWhereNotNull<T, TR>(

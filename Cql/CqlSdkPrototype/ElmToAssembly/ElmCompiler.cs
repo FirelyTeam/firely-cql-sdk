@@ -17,20 +17,21 @@ public class ElmCompiler :
 {
     private readonly State _state;
 
-    public IReadOnlyDictionary<CqlLibraryIdentifier, CqlVersionedLibraryIdentifier> VersionedIdentifiers =>
+    public IReadOnlyDictionary<CqlLibraryIdentifier, CqlVersionedLibraryIdentifier> GetVersionedIdentifiers() =>
         _state.Entries
               .ToDictionary(kv => kv.Key.Identifier, kv => kv.Key);
 
-    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, string> CSharpSourceCodes =>
+    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, string> GetCSharpSourceCodes() =>
         _state.Entries
               .Where(kv => kv.Value.CSharpSourceCode is not null)
               .ToDictionary(kv => kv.Key, kv => kv.Value.CSharpSourceCode!,
                             CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
 
-    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, byte[]> AssemblyBinaries =>
+    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, (byte[] assemblyBytes, byte[]? symbolsBytes)> GetAssemblyBinaries() =>
         _state.Entries
               .Where(kv => kv.Value.AssemblyBinary is not null)
-              .ToDictionary(kv => kv.Key, kv => kv.Value.AssemblyBinary!,
+              .ToDictionary(kv => kv.Key,
+                            kv => (kv.Value.AssemblyBinary!, kv.Value.DebugSymbolsBinary),
                             CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
 
     #region Nested Types
@@ -42,7 +43,7 @@ public class ElmCompiler :
         ElmCompilationCreateOptions Options);
 
     internal readonly record struct ElmCompilationEntry
-        (Library ElmLibrary, string? CSharpSourceCode = null, byte[]? AssemblyBinary = null);
+        (Library ElmLibrary, string? CSharpSourceCode = null, byte[]? AssemblyBinary = null, byte[]? DebugSymbolsBinary = null);
 
     #endregion
 
@@ -169,7 +170,7 @@ public class ElmCompiler :
 
         var entriesBuilder = _state.Entries.ToBuilder();
         bool hasChanged = false;
-        foreach (var (name, (assemblyBinary, sourceCodePerName)) in assemblyDatas)
+        foreach (var (name, (assemblyBinary, sourceCodePerName, debugSymbols)) in assemblyDatas)
         {
             var elmVersionedIdentifier = CqlVersionedLibraryIdentifier.Parse(s: name);
             var libraryCompilation = entriesBuilder[key: elmVersionedIdentifier];
@@ -184,7 +185,8 @@ public class ElmCompiler :
             libraryCompilation = libraryCompilation with
             {
                 CSharpSourceCode = cSharpSourceCode,
-                AssemblyBinary = assemblyBinary
+                AssemblyBinary = assemblyBinary,
+                DebugSymbolsBinary = debugSymbols,
             };
             entriesBuilder[key: elmVersionedIdentifier] = libraryCompilation;
             _state.Logger.LogInformation(message: "Library compiled: {versionedIdentifier}", args: elmVersionedIdentifier);

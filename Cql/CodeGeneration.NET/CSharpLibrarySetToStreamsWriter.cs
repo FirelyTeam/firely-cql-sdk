@@ -107,7 +107,8 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// </summary>
         private readonly string _tool;
 
-        internal record LibrarySetContext(
+        internal record LibrarySetContext
+        (
             LibrarySet LibrarySet,
             DefinitionDictionary<LambdaExpression> Definitions,
             CSharpSourceCodeWriterCallbacks Callbacks);
@@ -124,13 +125,29 @@ namespace Hl7.Cql.CodeGeneration.NET
                 ((IGetVersionedIdentifier)Library).VersionedIdentifier.Result!;
 
             public string LibraryName => Library.GetVersionedIdentifier()!;
+
+            public LibrarySetContext LibrarySetContext { get; init; } = LibrarySetContext;
+
+            public Library Library { get; init; } = Library;
+
+            public StreamWriter Writer { get; init; } = Writer;
+
+            public int Indent { get; init; } = Indent;
         }
 
         internal record MethodContext(
             LibraryContext LibraryContext,
             string CqlName,
             LambdaExpression Overload,
-            ILookup<string, string>? Tags);
+            ILookup<string, string>? Tags) {
+            public LibraryContext LibraryContext { get; init; } = LibraryContext;
+
+            public string CqlName { get; init; } = CqlName;
+
+            public LambdaExpression Overload { get; init; } = Overload;
+
+            public ILookup<string, string>? Tags { get; init; } = Tags;
+        }
 
         /// <summary>
         /// Writes C# source code from inputs.

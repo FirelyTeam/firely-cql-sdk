@@ -49,8 +49,10 @@ partial class LibrarySetInvoker
         logger.LogInformation("Creating LibrarySetInvoker");
 
         var alc = new AssemblyLoadContext("", true);
-        foreach (byte[] bytes in elmCompilation.AssemblyBinaries.Values)
-            alc.LoadFromBytes(bytes);
+        foreach ((byte[] assembly, byte[]? symbols) in elmCompilation.GetAssemblyBinaries().Values)
+        {
+            alc.LoadFromBytes(assembly, symbols);
+        }
 
         librarySetInvoker = new LibrarySetInvoker(alc, logger);
         return true;

@@ -27,7 +27,19 @@ public class AssemblyDataWriterOptions
     /// </summary>
     public DirectoryInfo? OutDirectory { get; set; }
 
+
     internal const string ArgNameOutDirectory = "--dll";
+
+
+    /// <summary>
+    /// Gets or sets a value indicating whether to write the assembly for debugging purposes, which removes optimizations, and includes debug symbols.
+    /// </summary>
+    public bool ForDebugging { get; set; }
+#if DEBUG
+    = true;
+#else
+    = false;
+#endif
 
     /// <summary>
     /// Binds the configuration values to the <see cref="AssemblyDataWriterOptions"/> object.
