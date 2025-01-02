@@ -17,7 +17,6 @@ using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
@@ -28,8 +27,6 @@ using Hl7.Cql.Elm;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.CodeAnalysis.Emit;
-using Convert = Hl7.Cql.Elm.Convert;
-using DateTime = Hl7.Cql.Elm.DateTime;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
