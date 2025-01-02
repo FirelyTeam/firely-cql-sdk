@@ -12,9 +12,6 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("MultipleResourcesExample", "0.0.1")]
-[assembly: AssemblyVersion("2.0.8.0")]
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("MultipleResourcesExample", "0.0.1")]
 public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<MultipleResourcesExample_0_0_1>

@@ -12,9 +12,6 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("TestRetrieveInclude", "1.0.1")]
-[assembly: AssemblyVersion("2.0.8.0")]
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("TestRetrieveInclude", "1.0.1")]
 public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrieveInclude_1_0_1>

@@ -12,9 +12,6 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("HospitalHarmHyperglycemiainHospitalizedPatientsFHIR", "0.0.006")]
-[assembly: AssemblyVersion("2.0.8.0")]
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("HospitalHarmHyperglycemiainHospitalizedPatientsFHIR", "0.0.006")]
 public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006 : ILibrary, ISingleton<HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006>

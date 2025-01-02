@@ -12,9 +12,6 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("DiabetesEyeExamFHIR", "0.0.002")]
-[assembly: AssemblyVersion("2.0.8.0")]
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("DiabetesEyeExamFHIR", "0.0.002")]
 public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<DiabetesEyeExamFHIR_0_0_002>

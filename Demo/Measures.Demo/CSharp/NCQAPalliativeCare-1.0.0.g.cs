@@ -12,9 +12,6 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("NCQAPalliativeCare", "1.0.0")]
-[assembly: AssemblyVersion("2.0.8.0")]
-
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("NCQAPalliativeCare", "1.0.0")]
 public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliativeCare_1_0_0>

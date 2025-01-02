@@ -220,7 +220,6 @@ internal class CSharpLibrarySetToStreamsWriter
         public void WriteLibraryFile()
         {
             WriteUsings();
-            WriteAssemblyAttributes();
             WriteNamespaceFileScope();
             WriteClass();
         }
@@ -271,16 +270,6 @@ internal class CSharpLibrarySetToStreamsWriter
             foreach (var @using in LibrarySetContext.AliasedUsings)
                 Writer.WriteLine($"using {@using.Item1} = {@using.Item2};");
 
-            Writer.WriteLine();
-        }
-
-        private void WriteAssemblyAttributes()
-        {
-            Writer.WriteLine(
-                LibraryVersionedIdentifier.version is { } version && Version.TryParse(version, out _)
-                    ? $"[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute({LibraryVersionedIdentifier.id.QuoteString()}, {version.QuoteString()})]"
-                    : $"[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute({LibraryVersionedIdentifier.id.QuoteString()})]");
-            Writer.WriteLine($"[assembly: AssemblyVersion({LibrarySetContext.GeneratorToolVersion.QuoteString()})]");
             Writer.WriteLine();
         }
 

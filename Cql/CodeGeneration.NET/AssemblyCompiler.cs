@@ -157,8 +157,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             if (_assemblyDataWriterOptions.Value.ForDebugging)
             {
                 var tempDir = Path.Combine(Path.GetTempPath(), "CqlCompiler", $"{libraryVersionedIdentifier}.cs");
-                Directory.CreateDirectory(tempDir!);
-                librarySourcePath = Path.Combine(tempDir, $"{CreateMD5HashString(librarySourceString)}.cs");
+                Directory.CreateDirectory(tempDir);
+                librarySourcePath = Path.Combine(tempDir, $"{CreateMD5HashStringDirectory(librarySourceString)}.cs");
                 File.WriteAllText(librarySourcePath, librarySourceString);
             }
 
@@ -172,16 +172,16 @@ namespace Hl7.Cql.CodeGeneration.NET
                 if (assemblies.TryGetValue(libraryDependency.GetVersionedIdentifier()!, out var referencedDll))
                     metadataReferences.Add(MetadataReference.CreateFromImage(referencedDll.Binary));
 
-            // var assemblyInfoSourceString = CreateAssemblyInfoSourceString(library);
-            // var assemblyInfoSourcePath = "AssemblyInfo.cs";
-            // var assemblyInfoSyntaxTree = ParseSyntaxTree(assemblyInfoSourceString, assemblyInfoSourcePath);
+            var assemblyInfoSourceString = CreateAssemblyInfoSourceString(library);
+            var assemblyInfoSourcePath = "AssemblyInfo.cs";
+            var assemblyInfoSyntaxTree = ParseSyntaxTree(assemblyInfoSourceString, assemblyInfoSourcePath);
 
             var compilation = CSharpCompilation.Create($"{libraryVersionedIdentifier!}")
                                                .WithOptions(CreateCSharpCompilationOptions())
                                                .WithReferences(metadataReferences)
                                                .AddSyntaxTrees(
-                                                   librarySyntaxTree
-                                                   //, assemblyInfoSyntaxTree
+                                                   librarySyntaxTree,
+                                                   assemblyInfoSyntaxTree
                                                    );
 
             using var codeStream = new MemoryStream();
@@ -225,9 +225,10 @@ namespace Hl7.Cql.CodeGeneration.NET
             return asmData;
         }
 
-        private static string CreateMD5HashString(string text)
+        private static string CreateMD5HashStringDirectory(string text)
         {
-            return System.Convert.ToBase64String(MD5.HashData(Encoding.UTF8.GetBytes(text)));
+            text = System.Convert.ToBase64String(MD5.HashData(Encoding.UTF8.GetBytes(text)));
+            return text.Replace('/', '-');
         }
 
         private static string GetSourceCodeString(Stream sourceCodeStream)
@@ -253,7 +254,10 @@ namespace Hl7.Cql.CodeGeneration.NET
             string version = string.Empty;
             if (parts.Length > 1)
                 version = parts[1];
-            var text = $"[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute(\"{name}\", \"{version}\")]";
+            var text = $"""
+                        [assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("{name}", "{version}")]
+                        [assembly: System.Reflection.AssemblyVersion("{version}")]
+                        """;
             return text;
         }
 
