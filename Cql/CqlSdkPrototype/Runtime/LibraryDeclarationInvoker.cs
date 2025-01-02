@@ -22,7 +22,6 @@ public abstract class LibraryDeclarationInvoker(
     {
         MethodInfo methodInfo = MethodInfo;
         ILibrary library = Library;
-        System.Diagnostics.Debugger.Launch();
         var result = methodInfo.Invoke(library, BindingFlags.DoNotWrapExceptions, null, parameters, CultureInfo.InvariantCulture);
         return result;
     }
