@@ -21,9 +21,9 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
     public static SevereObstetricComplicationsFHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "SevereObstetricComplicationsFHIR";
-    public string Version => "0.1.000";
-    public ILibrary[] Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, PCMaternal_5_19_000.Instance, QICoreCommon_2_1_000.Instance];
+    string ILibrary.Name => "SevereObstetricComplicationsFHIR";
+    string ILibrary.Version => "0.1.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, PCMaternal_5_19_000.Instance, QICoreCommon_2_1_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("20 to 42 Plus Weeks Gestation")]

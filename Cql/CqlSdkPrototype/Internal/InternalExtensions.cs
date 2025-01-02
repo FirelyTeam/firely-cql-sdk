@@ -27,4 +27,22 @@ internal static class InternalExtensions
         using var memoryStream = new MemoryStream(bytes);
         return assemblyLoadContext.LoadFromStream(memoryStream);
     }
+
+    public static IEnumerable<TR> SelectWhereNotNull<T, TR>(
+        this IEnumerable<T> enumerable,
+        Func<T, TR?> selectNullable)
+        where TR : class
+    {
+        return enumerable
+               .Select(selectNullable)
+               .WhereNotNull();
+    }
+
+    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> enumerable)
+        where T : class
+    {
+        return enumerable
+               .Where(x => x is not null)
+               .Select(x => x!);
+    }
 }

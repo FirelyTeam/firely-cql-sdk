@@ -21,9 +21,9 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
     public static DepressionRemissionatTwelveMonthsFHIR_0_2_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "DepressionRemissionatTwelveMonthsFHIR";
-    public string Version => "0.2.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
+    string ILibrary.Name => "DepressionRemissionatTwelveMonthsFHIR";
+    string ILibrary.Version => "0.2.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Bipolar Disorder")]

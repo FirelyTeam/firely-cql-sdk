@@ -107,12 +107,12 @@ namespace Hl7.Cql.CodeGeneration.NET
         /// </summary>
         private readonly string _tool;
 
-        private record LibrarySetContext(
+        internal record LibrarySetContext(
             LibrarySet LibrarySet,
             DefinitionDictionary<LambdaExpression> Definitions,
             CSharpSourceCodeWriterCallbacks Callbacks);
 
-        private record LibraryContext(
+        internal record LibraryContext(
             LibrarySetContext LibrarySetContext,
             Library Library,
             StreamWriter Writer,
@@ -126,7 +126,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             public string LibraryName => Library.GetVersionedIdentifier()!;
         }
 
-        private record MethodContext(
+        internal record MethodContext(
             LibraryContext LibraryContext,
             string CqlName,
             LambdaExpression Overload,
@@ -295,15 +295,15 @@ namespace Hl7.Cql.CodeGeneration.NET
             var indent = libraryContext.Indent;
 
             writer.WriteLine(indent, "#region Library Members");
-            writer.WriteLine(indent, $"public string Name => {libraryVersionedIdentifier.id.QuoteString()};");
-            writer.WriteLine(indent, $"public string Version => {libraryVersionedIdentifier.version.QuoteString()};");
+            writer.WriteLine(indent, $"string ILibrary.Name => {libraryVersionedIdentifier.id.QuoteString()};");
+            writer.WriteLine(indent, $"string ILibrary.Version => {libraryVersionedIdentifier.version.QuoteString()};");
 
             var dependencies =
                 librarySet.GetLibraryDependencies(libraryName, throwError: true)
                           .Select(dep => libraryNameToClassName(dep.GetVersionedIdentifier()!))
                           .Select(typeName => $"{typeName}.Instance");
 
-            writer.WriteLine(indent, $"public ILibrary[] Dependencies => [{string.Join(", ", dependencies)}];");
+            writer.WriteLine(indent, $"IReadOnlyList<ILibrary> ILibrary.Dependencies => [{string.Join(", ", dependencies)}];");
 
 
             writer.WriteLine(indent, "#endregion Library Members");

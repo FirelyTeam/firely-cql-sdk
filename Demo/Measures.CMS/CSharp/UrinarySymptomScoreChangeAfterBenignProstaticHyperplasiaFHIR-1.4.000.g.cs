@@ -21,9 +21,9 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     public static UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_4_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR";
-    public string Version => "1.4.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
+    string ILibrary.Name => "UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR";
+    string ILibrary.Version => "1.4.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Hospital Services for Urology")]

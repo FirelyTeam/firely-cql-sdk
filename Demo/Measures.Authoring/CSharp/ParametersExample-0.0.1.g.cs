@@ -21,9 +21,9 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     public static ParametersExample_0_0_1 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "ParametersExample";
-    public string Version => "0.0.1";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
+    string ILibrary.Name => "ParametersExample";
+    string ILibrary.Version => "0.0.1";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Marital Status")]

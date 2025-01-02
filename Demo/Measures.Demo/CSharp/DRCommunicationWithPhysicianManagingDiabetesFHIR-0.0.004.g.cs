@@ -21,9 +21,9 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
     public static DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "DRCommunicationWithPhysicianManagingDiabetesFHIR";
-    public string Version => "0.0.004";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
+    string ILibrary.Name => "DRCommunicationWithPhysicianManagingDiabetesFHIR";
+    string ILibrary.Version => "0.0.004";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Care Services in Long-Term Residential Facility")]

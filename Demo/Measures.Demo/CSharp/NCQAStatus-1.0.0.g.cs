@@ -21,9 +21,9 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
     public static NCQAStatus_1_0_0 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "NCQAStatus";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, NCQATerminology_1_0_0.Instance];
+    string ILibrary.Name => "NCQAStatus";
+    string ILibrary.Version => "1.0.0";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, NCQATerminology_1_0_0.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Patient")]

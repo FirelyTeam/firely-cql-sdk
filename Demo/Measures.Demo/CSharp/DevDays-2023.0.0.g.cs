@@ -21,9 +21,9 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     public static DevDays_2023_0_0 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "DevDays";
-    public string Version => "2023.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance];
+    string ILibrary.Name => "DevDays";
+    string ILibrary.Version => "2023.0.0";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Sucked into jet engine")]

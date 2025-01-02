@@ -12,7 +12,7 @@
 		<FirelySdkVersion>5.11.0</FirelySdkVersion>
 
 		<!-- https://hl7.org/fhir/R4/ -->
-		<FhirRelease>R5</FhirRelease>
+		<FhirRelease>R4</FhirRelease>
 	</PropertyGroup>
 
 	<PropertyGroup>
@@ -36,6 +36,9 @@
 		<Optimize>false</Optimize>
 		<DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
 		<LibraryPKHash></LibraryPKHash>
+		<!-- CqlToElmEnabled and ElmToCSharpEnabled declared in BuildArtifacts.csproj, cql-base.props, cql-demo.props  -->
+		<CqlToElmEnabled>false</CqlToElmEnabled>
+		<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

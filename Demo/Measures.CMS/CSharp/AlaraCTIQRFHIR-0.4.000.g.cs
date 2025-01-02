@@ -21,9 +21,9 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
     public static AlaraCTIQRFHIR_0_4_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "AlaraCTIQRFHIR";
-    public string Version => "0.4.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, AlaraCommonFunctions_1_5_000.Instance];
+    string ILibrary.Name => "AlaraCTIQRFHIR";
+    string ILibrary.Version => "0.4.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, AlaraCommonFunctions_1_5_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Encounter Inpatient")]

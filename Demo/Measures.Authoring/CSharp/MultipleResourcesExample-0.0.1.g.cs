@@ -21,9 +21,9 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
     public static MultipleResourcesExample_0_0_1 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "MultipleResourcesExample";
-    public string Version => "0.0.1";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
+    string ILibrary.Name => "MultipleResourcesExample";
+    string ILibrary.Version => "0.0.1";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Lung Cancer")]

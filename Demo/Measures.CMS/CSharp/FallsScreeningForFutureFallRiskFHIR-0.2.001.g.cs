@@ -21,9 +21,9 @@ public partial class FallsScreeningForFutureFallRiskFHIR_0_2_001 : ILibrary, ISi
     public static FallsScreeningForFutureFallRiskFHIR_0_2_001 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "FallsScreeningForFutureFallRiskFHIR";
-    public string Version => "0.2.001";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance];
+    string ILibrary.Name => "FallsScreeningForFutureFallRiskFHIR";
+    string ILibrary.Version => "0.2.001";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Annual Wellness Visit")]

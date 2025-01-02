@@ -6,8 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
-
 namespace Hl7.Cql.Abstractions.Exceptions;
 
 internal readonly record struct KeyNotFoundError(string Key, string? TypeName = null) : ICqlError

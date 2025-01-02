@@ -21,9 +21,9 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     public static ValueSetExprExample_1_0_0 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "ValueSetExprExample";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [];
+    string ILibrary.Name => "ValueSetExprExample";
+    string ILibrary.Version => "1.0.0";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
     #endregion Library Members
 
     [CqlDeclaration("ValueSet-A-1")]

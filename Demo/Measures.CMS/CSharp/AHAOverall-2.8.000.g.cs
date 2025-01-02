@@ -21,9 +21,9 @@ public partial class AHAOverall_2_8_000 : ILibrary, ISingleton<AHAOverall_2_8_00
     public static AHAOverall_2_8_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "AHAOverall";
-    public string Version => "2.8.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
+    string ILibrary.Name => "AHAOverall";
+    string ILibrary.Version => "2.8.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Care Services in Long Term Residential Facility")]

@@ -21,9 +21,9 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
     public static SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "SafeUseofOpioidsConcurrentPrescribingFHIR";
-    public string Version => "0.0.012";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
+    string ILibrary.Name => "SafeUseofOpioidsConcurrentPrescribingFHIR";
+    string ILibrary.Version => "0.0.012";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("All Primary and Secondary Cancer")]

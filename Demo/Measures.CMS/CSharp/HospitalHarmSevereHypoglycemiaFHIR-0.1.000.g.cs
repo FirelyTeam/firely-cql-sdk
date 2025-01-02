@@ -21,9 +21,9 @@ public partial class HospitalHarmSevereHypoglycemiaFHIR_0_1_000 : ILibrary, ISin
     public static HospitalHarmSevereHypoglycemiaFHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "HospitalHarmSevereHypoglycemiaFHIR";
-    public string Version => "0.1.000";
-    public ILibrary[] Dependencies => [SupplementalDataElements_3_5_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, FHIRHelpers_4_4_000.Instance];
+    string ILibrary.Name => "HospitalHarmSevereHypoglycemiaFHIR";
+    string ILibrary.Version => "0.1.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [SupplementalDataElements_3_5_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, FHIRHelpers_4_4_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("birth date")]

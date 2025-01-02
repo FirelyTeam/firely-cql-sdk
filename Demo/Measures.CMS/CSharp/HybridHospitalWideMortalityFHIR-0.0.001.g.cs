@@ -21,9 +21,9 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
     public static HybridHospitalWideMortalityFHIR_0_0_001 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "HybridHospitalWideMortalityFHIR";
-    public string Version => "0.0.001";
-    public ILibrary[] Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
+    string ILibrary.Name => "HybridHospitalWideMortalityFHIR";
+    string ILibrary.Version => "0.0.001";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Bicarbonate lab test")]

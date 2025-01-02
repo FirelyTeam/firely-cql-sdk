@@ -18,11 +18,6 @@ internal class Program
     {
         var serviceProvider = BuildServiceProvider();
 
-        var enumerationOptions = new EnumerationOptions()
-        {
-            /*RecurseSubdirectories = false*/
-        };
-
         var rootDir = new DirectoryInfo(@"C:\Dev");
         var librarySetName = "Demo";
 
@@ -53,7 +48,17 @@ internal class Program
                                          return false;
                                      }
                                  })
-                             .LoadCqlFilesFromDirectory(cqlDirIn, enumerationOptions)
+                             .LoadCqlFilesFromDirectory(
+                                 cqlDirIn,
+                                 options: new EnumerationOptions()
+                                 {
+                                     /*RecurseSubdirectories = false*/
+                                 }/*,
+                                 filePredicate: fi => fi.Name.TrimFileExtension(".cql") is
+                                     "FHIRHelpers"
+                                     or "NCQATerminology"
+                                     or "NCQAStatus"*/
+                                 )
                              .Translate()
                              .SaveElmFileToDirectory(elmDirOut)
             ;
@@ -90,38 +95,7 @@ internal class Program
         CqlTranslator cqlTranslation,
         ElmCompiler elmCompilation)
     {
-        var logger = serviceProvider.GetLogger<Program>();
-        logger.LogInformation("Executing");
-        var assemblyLoadContexts = AssemblyLoadContext.All.ToArray();
-        var alc = new AssemblyLoadContext("", true);
-        try
-        {
-            foreach (var (cqlVersionedLibraryIdentifier, bytes) in elmCompilation.AssemblyBinaries)
-            {
-                var asm = alc.LoadFromBytes(bytes);
-
-                var libraryTypes =
-                    asm.GetTypes()
-                       .Select(t =>
-                       {
-                           CqlRuntimeLibrary.TryCreateFromType(t, out var cqlRuntimeLibrary, logger);
-                           return cqlRuntimeLibrary;
-                       })
-                       .Where(t => !t.IsDefault())
-                       .ToArray();
-
-                logger.LogInformation(
-                    """
-                      Loaded assembly: {asm} from library {id} with types:
-                      {types}
-                      """, asm.GetName(false).Name, cqlVersionedLibraryIdentifier, libraryTypes.Select(t => $"- {t.GetLibraryType().FullName}").JoinLines());
-
-            }
-        }
-        finally
-        {
-            alc.Unload();
-        }
+        LibrarySetInvoker.Run(serviceProvider, cqlTranslation, elmCompilation);
     }
 
     private static ServiceProvider BuildServiceProvider()

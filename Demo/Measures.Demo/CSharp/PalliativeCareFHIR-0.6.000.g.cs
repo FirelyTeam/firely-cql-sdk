@@ -21,9 +21,9 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
     public static PalliativeCareFHIR_0_6_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "PalliativeCareFHIR";
-    public string Version => "0.6.000";
-    public ILibrary[] Dependencies => [MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, FHIRHelpers_4_0_001.Instance];
+    string ILibrary.Name => "PalliativeCareFHIR";
+    string ILibrary.Version => "0.6.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, FHIRHelpers_4_0_001.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Palliative Care Encounter")]

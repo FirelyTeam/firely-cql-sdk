@@ -132,10 +132,12 @@ internal static class LibraryExtensions
             valueSets[id] = forLib;
         }
 
-        var valueSetAttributes = libraryType.GetMethods()
-            .Select(m => m.GetCustomAttribute<CqlValueSetAttribute>())
-            .Where(attr => attr is not null)
-            .Select(attr => attr!.Id);
+        var methodInfos = libraryType.GetMethods();
+
+        var valueSetAttributes = methodInfos
+                                 .Select(m => m.GetCustomAttribute<CqlValueSetAttribute>())
+                                 .Where(attr => attr is not null)
+                                 .Select(attr => attr!.Id);
 
         forLib.AddRange(valueSetAttributes);
         if (forLib.Count == 0)

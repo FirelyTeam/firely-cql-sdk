@@ -5,6 +5,8 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
+
+using System.Globalization;
 using Microsoft.Extensions.Options;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -40,6 +42,7 @@ internal class OptionsConsoleDumper
 
         WriteLine("PackageCLI");
         WriteLine("- Environment -----------------------------------");
+        WriteLine($"{"Time",-45} : {DateTimeOffset.Now}");
         WriteLine($"{"Current Directory",-45} : {Environment.CurrentDirectory}");
         WriteLine($"{"DOTNET_ENVIRONMENT",-45} : {Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT")}");
         WriteLine("- Arguments Provided ----------------------------");

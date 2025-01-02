@@ -21,9 +21,9 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
     public static AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "AnticoagulationTherapyforAtrialFibrillationFlutterFHIR";
-    public string Version => "0.3.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, TJCOverall_8_14_000.Instance];
+    string ILibrary.Name => "AnticoagulationTherapyforAtrialFibrillationFlutterFHIR";
+    string ILibrary.Version => "0.3.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, TJCOverall_8_14_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Anticoagulant Therapy")]

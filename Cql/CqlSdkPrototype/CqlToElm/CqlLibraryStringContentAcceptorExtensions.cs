@@ -10,10 +10,12 @@ public static class CqlLibraryStringContentAcceptorExtensions
     public static TCqlLibraryAcceptor LoadCqlFilesFromDirectory<TCqlLibraryAcceptor>(
         this TCqlLibraryAcceptor self,
         DirectoryInfo directory,
-        EnumerationOptions? options = null)
+        EnumerationOptions? options = null,
+        Func<FileInfo, bool>? filePredicate = null)
         where TCqlLibraryAcceptor : ICqlLibraryStringContentAcceptor<TCqlLibraryAcceptor>
     {
         var files = directory.EnumerateFiles("*.cql", options ?? InternalConstants.DefaultEnumerationOptions);
+        if (filePredicate is not null) files = files.Where(filePredicate);
         return self.LoadCqlFiles(files);
     }
 

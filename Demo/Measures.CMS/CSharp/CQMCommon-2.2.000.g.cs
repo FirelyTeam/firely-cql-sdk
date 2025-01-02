@@ -21,9 +21,9 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
     public static CQMCommon_2_2_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "CQMCommon";
-    public string Version => "2.2.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
+    string ILibrary.Name => "CQMCommon";
+    string ILibrary.Version => "2.2.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Emergency Department Visit")]

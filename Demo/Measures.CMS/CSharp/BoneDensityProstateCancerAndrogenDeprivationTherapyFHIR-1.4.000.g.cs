@@ -21,9 +21,9 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     public static BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR";
-    public string Version => "1.4.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
+    string ILibrary.Name => "BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR";
+    string ILibrary.Version => "1.4.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Androgen deprivation therapy for Urology Care")]

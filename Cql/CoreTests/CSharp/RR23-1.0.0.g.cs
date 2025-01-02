@@ -21,9 +21,9 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     public static RR23_1_0_0 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "RR23";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
+    string ILibrary.Name => "RR23";
+    string ILibrary.Version => "1.0.0";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_1.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Injury due to falling rock")]

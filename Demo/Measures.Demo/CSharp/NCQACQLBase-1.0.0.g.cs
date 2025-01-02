@@ -21,9 +21,9 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
     public static NCQACQLBase_1_0_0 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "NCQACQLBase";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [];
+    string ILibrary.Name => "NCQACQLBase";
+    string ILibrary.Version => "1.0.0";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
     #endregion Library Members
     public IEnumerable<CqlInterval<CqlDate>> Sort_Date_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> intervals)
     {

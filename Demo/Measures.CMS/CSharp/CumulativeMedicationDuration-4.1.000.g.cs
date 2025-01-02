@@ -21,9 +21,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     public static CumulativeMedicationDuration_4_1_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "CumulativeMedicationDuration";
-    public string Version => "4.1.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
+    string ILibrary.Name => "CumulativeMedicationDuration";
+    string ILibrary.Version => "4.1.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("HS")]
