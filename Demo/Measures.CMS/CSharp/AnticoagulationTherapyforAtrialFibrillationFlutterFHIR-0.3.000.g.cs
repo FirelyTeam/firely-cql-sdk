@@ -31,77 +31,77 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
 
     [CqlDeclaration("Anticoagulant Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.200")]
-    public CqlValueSet Anticoagulant_Therapy(CqlContext context) => 
+    public CqlValueSet Anticoagulant_Therapy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.200", default);
 
 
 
     [CqlDeclaration("Atrial Ablation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.203")]
-    public CqlValueSet Atrial_Ablation(CqlContext context) => 
+    public CqlValueSet Atrial_Ablation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.203", default);
 
 
 
     [CqlDeclaration("Atrial Fibrillation or Flutter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.202")]
-    public CqlValueSet Atrial_Fibrillation_or_Flutter(CqlContext context) => 
+    public CqlValueSet Atrial_Fibrillation_or_Flutter(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.202", default);
 
 
 
     [CqlDeclaration("Discharge To Acute Care Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87")]
-    public CqlValueSet Discharge_To_Acute_Care_Facility(CqlContext context) => 
+    public CqlValueSet Discharge_To_Acute_Care_Facility(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", default);
 
 
 
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207")]
-    public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care(CqlContext context) => 
+    public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", default);
 
 
 
     [CqlDeclaration("Discharged to Home for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
-    public CqlValueSet Discharged_to_Home_for_Hospice_Care(CqlContext context) => 
+    public CqlValueSet Discharged_to_Home_for_Hospice_Care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", default);
 
 
 
     [CqlDeclaration("History of Atrial Ablation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.76")]
-    public CqlValueSet History_of_Atrial_Ablation(CqlContext context) => 
+    public CqlValueSet History_of_Atrial_Ablation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.76", default);
 
 
 
     [CqlDeclaration("Left Against Medical Advice")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308")]
-    public CqlValueSet Left_Against_Medical_Advice(CqlContext context) => 
+    public CqlValueSet Left_Against_Medical_Advice(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", default);
 
 
 
     [CqlDeclaration("Medical Reason For Not Providing Treatment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473")]
-    public CqlValueSet Medical_Reason_For_Not_Providing_Treatment(CqlContext context) => 
+    public CqlValueSet Medical_Reason_For_Not_Providing_Treatment(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473", default);
 
 
 
     [CqlDeclaration("Patient Expired")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309")]
-    public CqlValueSet Patient_Expired(CqlContext context) => 
+    public CqlValueSet Patient_Expired(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", default);
 
 
 
     [CqlDeclaration("Patient Refusal")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93")]
-    public CqlValueSet Patient_Refusal(CqlContext context) => 
+    public CqlValueSet Patient_Refusal(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", default);
 
 
@@ -199,7 +199,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
                 return ba_;
             };
             IEnumerable<Condition> ag_ = context.Operators.Where<Condition>(ae_, af_);
-            Encounter ah_(Condition AtrialAblationDiagnosis) => 
+            Encounter ah_(Condition AtrialAblationDiagnosis) =>
                 IschemicStrokeEncounter;
             IEnumerable<Encounter> ai_ = context.Operators.Select<Condition, Encounter>(ag_, ah_);
 
@@ -285,7 +285,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
                 return bt_;
             };
             IEnumerable<Observation> be_ = context.Operators.Where<Observation>(bc_, bd_);
-            Encounter bf_(Observation AtrialAblationObservation) => 
+            Encounter bf_(Observation AtrialAblationObservation) =>
                 IschemicStrokeEncounter;
             IEnumerable<Encounter> bg_ = context.Operators.Select<Observation, Encounter>(be_, bf_);
 
@@ -330,7 +330,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
                 return ae_;
             };
             IEnumerable<Condition> k_ = context.Operators.Where<Condition>(i_, j_);
-            Encounter l_(Condition AtrialFibrillationFlutter) => 
+            Encounter l_(Condition AtrialFibrillationFlutter) =>
                 IschemicStrokeEncounter;
             IEnumerable<Encounter> m_ = context.Operators.Select<Condition, Encounter>(k_, l_);
 
@@ -395,7 +395,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
                 return p_;
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-            Encounter g_(object ComfortMeasure) => 
+            Encounter g_(object ComfortMeasure) =>
                 Encounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
@@ -502,7 +502,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
                 return ag_;
             };
             IEnumerable<MedicationRequest> j_ = context.Operators.Where<MedicationRequest>(h_, i_);
-            Encounter k_(MedicationRequest DischargeAnticoagulant) => 
+            Encounter k_(MedicationRequest DischargeAnticoagulant) =>
                 Encounter;
             IEnumerable<Encounter> l_ = context.Operators.Select<MedicationRequest, Encounter>(j_, k_);
 
@@ -586,7 +586,7 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
                 return m_;
             };
             IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
-            Encounter g_(MedicationRequest NoDischargeAnticoagulant) => 
+            Encounter g_(MedicationRequest NoDischargeAnticoagulant) =>
                 Encounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
 
@@ -637,5 +637,17 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
         return a_;
     }
 
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
 
 }

@@ -31,60 +31,60 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
 
     [CqlDeclaration("Advanced Illness")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082")]
-    public CqlValueSet Advanced_Illness(CqlContext context) => 
+    public CqlValueSet Advanced_Illness(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", default);
 
 
 
     [CqlDeclaration("Dementia Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510")]
-    public CqlValueSet Dementia_Medications(CqlContext context) => 
+    public CqlValueSet Dementia_Medications(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510", default);
 
 
 
     [CqlDeclaration("Frailty Device")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300")]
-    public CqlValueSet Frailty_Device(CqlContext context) => 
+    public CqlValueSet Frailty_Device(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300", default);
 
 
 
     [CqlDeclaration("Frailty Diagnosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074")]
-    public CqlValueSet Frailty_Diagnosis(CqlContext context) => 
+    public CqlValueSet Frailty_Diagnosis(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074", default);
 
 
 
     [CqlDeclaration("Frailty Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088")]
-    public CqlValueSet Frailty_Encounter(CqlContext context) => 
+    public CqlValueSet Frailty_Encounter(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088", default);
 
 
 
     [CqlDeclaration("Frailty Symptom")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075")]
-    public CqlValueSet Frailty_Symptom(CqlContext context) => 
+    public CqlValueSet Frailty_Symptom(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075", default);
 
 
 
     [CqlDeclaration("Housing status")]
-    public CqlCode Housing_status(CqlContext context) => 
+    public CqlCode Housing_status(CqlContext context) =>
         new CqlCode("71802-3", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Lives in a nursing home (finding)")]
-    public CqlCode Lives_in_a_nursing_home__finding_(CqlContext context) => 
+    public CqlCode Lives_in_a_nursing_home__finding_(CqlContext context) =>
         new CqlCode("160734000", "http://snomed.info/sct", default, default);
 
 
 
     [CqlDeclaration("Medical equipment used")]
-    public CqlCode Medical_equipment_used(CqlContext context) => 
+    public CqlCode Medical_equipment_used(CqlContext context) =>
         new CqlCode("98181-1", "http://loinc.org", default, default);
 
 
@@ -413,5 +413,9 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
         return x_;
     }
 
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
 
 }

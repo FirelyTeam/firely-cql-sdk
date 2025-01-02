@@ -31,47 +31,47 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
 
     [CqlDeclaration("Delivery Procedures")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59")]
-    public CqlValueSet Delivery_Procedures(CqlContext context) => 
+    public CqlValueSet Delivery_Procedures(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59", default);
 
 
 
     [CqlDeclaration("ED Visit and OB Triage")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369")]
-    public CqlValueSet ED_Visit_and_OB_Triage(CqlContext context) => 
+    public CqlValueSet ED_Visit_and_OB_Triage(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.369", default);
 
 
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-    public CqlValueSet Encounter_Inpatient(CqlContext context) => 
+    public CqlValueSet Encounter_Inpatient(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
 
 
     [CqlDeclaration("Estimated Gestational Age at Delivery")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.26")]
-    public CqlValueSet Estimated_Gestational_Age_at_Delivery(CqlContext context) => 
+    public CqlValueSet Estimated_Gestational_Age_at_Delivery(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.26", default);
 
 
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
-    public CqlValueSet Observation_Services(CqlContext context) => 
+    public CqlValueSet Observation_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
 
 
     [CqlDeclaration("Date and time of obstetric delivery")]
-    public CqlCode Date_and_time_of_obstetric_delivery(CqlContext context) => 
+    public CqlCode Date_and_time_of_obstetric_delivery(CqlContext context) =>
         new CqlCode("93857-1", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Delivery date Estimated")]
-    public CqlCode Delivery_date_Estimated(CqlContext context) => 
+    public CqlCode Delivery_date_Estimated(CqlContext context) =>
         new CqlCode("11778-8", "http://loinc.org", default, default);
 
 
@@ -397,7 +397,7 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
                 return t_;
             };
             IEnumerable<Procedure> g_ = context.Operators.Where<Procedure>(e_, f_);
-            Encounter h_(Procedure DeliveryProcedure) => 
+            Encounter h_(Procedure DeliveryProcedure) =>
                 EncounterWithAge;
             IEnumerable<Encounter> i_ = context.Operators.Select<Procedure, Encounter>(g_, h_);
 
@@ -1011,6 +1011,34 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
         return i_ as CqlQuantity;
     }
 
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
+        [typeof(CqlDate)],
+        ["AntidepressantDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
+        [typeof(Observation), typeof(Encounter)],
+        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["QualifyingEncounters", "URI"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
         [typeof(string), typeof(int?)],

@@ -31,48 +31,48 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
-    public CqlValueSet Emergency_Department_Visit(CqlContext context) => 
+    public CqlValueSet Emergency_Department_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
 
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-    public CqlValueSet Encounter_Inpatient(CqlContext context) => 
+    public CqlValueSet Encounter_Inpatient(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
 
 
     [CqlDeclaration("Intensive Care Unit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206")]
-    public CqlValueSet Intensive_Care_Unit(CqlContext context) => 
+    public CqlValueSet Intensive_Care_Unit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1029.206", default);
 
 
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
-    public CqlValueSet Observation_Services(CqlContext context) => 
+    public CqlValueSet Observation_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
 
 
     [CqlDeclaration("Outpatient Surgery Service")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.38")]
-    public CqlValueSet Outpatient_Surgery_Service(CqlContext context) => 
+    public CqlValueSet Outpatient_Surgery_Service(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.38", default);
 
 
 
     [CqlDeclaration("Present on Admission or Clinically Undetermined")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197")]
-    public CqlValueSet Present_on_Admission_or_Clinically_Undetermined(CqlContext context) => 
+    public CqlValueSet Present_on_Admission_or_Clinically_Undetermined(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", default);
 
 
 
     [CqlDeclaration("Billing")]
-    public CqlCode Billing(CqlContext context) => 
+    public CqlCode Billing(CqlContext context) =>
         new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
 
 
@@ -3300,5 +3300,9 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
         return a_();
     }
 
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
 
 }

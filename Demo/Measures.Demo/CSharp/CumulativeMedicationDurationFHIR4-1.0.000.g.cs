@@ -30,157 +30,157 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     #endregion Library Members
 
     [CqlDeclaration("AC")]
-    public CqlCode AC(CqlContext context) => 
+    public CqlCode AC(CqlContext context) =>
         new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
 
     [CqlDeclaration("ACD")]
-    public CqlCode ACD(CqlContext context) => 
+    public CqlCode ACD(CqlContext context) =>
         new CqlCode("ACD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
 
     [CqlDeclaration("ACM")]
-    public CqlCode ACM(CqlContext context) => 
+    public CqlCode ACM(CqlContext context) =>
         new CqlCode("ACM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
 
     [CqlDeclaration("ACV")]
-    public CqlCode ACV(CqlContext context) => 
+    public CqlCode ACV(CqlContext context) =>
         new CqlCode("ACV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
 
     [CqlDeclaration("AFT")]
-    public CqlCode AFT(CqlContext context) => 
+    public CqlCode AFT(CqlContext context) =>
         new CqlCode("AFT", "http://hl7.org/fhir/event-timing", default, default);
 
 
 
     [CqlDeclaration("AFT.early")]
-    public CqlCode AFT_early(CqlContext context) => 
+    public CqlCode AFT_early(CqlContext context) =>
         new CqlCode("AFT.early", "http://hl7.org/fhir/event-timing", default, default);
 
 
 
     [CqlDeclaration("AFT.late")]
-    public CqlCode AFT_late(CqlContext context) => 
+    public CqlCode AFT_late(CqlContext context) =>
         new CqlCode("AFT.late", "http://hl7.org/fhir/event-timing", default, default);
 
 
 
     [CqlDeclaration("C")]
-    public CqlCode C(CqlContext context) => 
+    public CqlCode C(CqlContext context) =>
         new CqlCode("C", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
 
     [CqlDeclaration("CD")]
-    public CqlCode CD(CqlContext context) => 
+    public CqlCode CD(CqlContext context) =>
         new CqlCode("CD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
 
     [CqlDeclaration("CM")]
-    public CqlCode CM(CqlContext context) => 
+    public CqlCode CM(CqlContext context) =>
         new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
 
     [CqlDeclaration("CV")]
-    public CqlCode CV(CqlContext context) => 
+    public CqlCode CV(CqlContext context) =>
         new CqlCode("CV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
 
     [CqlDeclaration("EVE")]
-    public CqlCode EVE(CqlContext context) => 
+    public CqlCode EVE(CqlContext context) =>
         new CqlCode("EVE", "http://hl7.org/fhir/event-timing", default, default);
 
 
 
     [CqlDeclaration("EVE.early")]
-    public CqlCode EVE_early(CqlContext context) => 
+    public CqlCode EVE_early(CqlContext context) =>
         new CqlCode("EVE.early", "http://hl7.org/fhir/event-timing", default, default);
 
 
 
     [CqlDeclaration("EVE.late")]
-    public CqlCode EVE_late(CqlContext context) => 
+    public CqlCode EVE_late(CqlContext context) =>
         new CqlCode("EVE.late", "http://hl7.org/fhir/event-timing", default, default);
 
 
 
     [CqlDeclaration("HS")]
-    public CqlCode HS(CqlContext context) => 
+    public CqlCode HS(CqlContext context) =>
         new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
 
     [CqlDeclaration("MORN")]
-    public CqlCode MORN(CqlContext context) => 
+    public CqlCode MORN(CqlContext context) =>
         new CqlCode("MORN", "http://hl7.org/fhir/event-timing", default, default);
 
 
 
     [CqlDeclaration("MORN.early")]
-    public CqlCode MORN_early(CqlContext context) => 
+    public CqlCode MORN_early(CqlContext context) =>
         new CqlCode("MORN.early", "http://hl7.org/fhir/event-timing", default, default);
 
 
 
     [CqlDeclaration("MORN.late")]
-    public CqlCode MORN_late(CqlContext context) => 
+    public CqlCode MORN_late(CqlContext context) =>
         new CqlCode("MORN.late", "http://hl7.org/fhir/event-timing", default, default);
 
 
 
     [CqlDeclaration("NIGHT")]
-    public CqlCode NIGHT(CqlContext context) => 
+    public CqlCode NIGHT(CqlContext context) =>
         new CqlCode("NIGHT", "http://hl7.org/fhir/event-timing", default, default);
 
 
 
     [CqlDeclaration("NOON")]
-    public CqlCode NOON(CqlContext context) => 
+    public CqlCode NOON(CqlContext context) =>
         new CqlCode("NOON", "http://hl7.org/fhir/event-timing", default, default);
 
 
 
     [CqlDeclaration("PC")]
-    public CqlCode PC(CqlContext context) => 
+    public CqlCode PC(CqlContext context) =>
         new CqlCode("PC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
 
     [CqlDeclaration("PCD")]
-    public CqlCode PCD(CqlContext context) => 
+    public CqlCode PCD(CqlContext context) =>
         new CqlCode("PCD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
 
     [CqlDeclaration("PCM")]
-    public CqlCode PCM(CqlContext context) => 
+    public CqlCode PCM(CqlContext context) =>
         new CqlCode("PCM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
 
     [CqlDeclaration("PCV")]
-    public CqlCode PCV(CqlContext context) => 
+    public CqlCode PCV(CqlContext context) =>
         new CqlCode("PCV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
 
     [CqlDeclaration("PHS")]
-    public CqlCode PHS(CqlContext context) => 
+    public CqlCode PHS(CqlContext context) =>
         new CqlCode("PHS", "http://hl7.org/fhir/event-timing", default, default);
 
 
 
     [CqlDeclaration("WAKE")]
-    public CqlCode WAKE(CqlContext context) => 
+    public CqlCode WAKE(CqlContext context) =>
         new CqlCode("WAKE", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 

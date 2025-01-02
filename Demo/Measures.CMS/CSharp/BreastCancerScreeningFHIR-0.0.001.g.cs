@@ -31,74 +31,74 @@ public partial class BreastCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<Br
 
     [CqlDeclaration("Bilateral Mastectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1005")]
-    public CqlValueSet Bilateral_Mastectomy(CqlContext context) => 
+    public CqlValueSet Bilateral_Mastectomy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1005", default);
 
 
 
     [CqlDeclaration("History of bilateral mastectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1068")]
-    public CqlValueSet History_of_bilateral_mastectomy(CqlContext context) => 
+    public CqlValueSet History_of_bilateral_mastectomy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1068", default);
 
 
 
     [CqlDeclaration("Mammography")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1018")]
-    public CqlValueSet Mammography(CqlContext context) => 
+    public CqlValueSet Mammography(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1018", default);
 
 
 
     [CqlDeclaration("Status Post Left Mastectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1069")]
-    public CqlValueSet Status_Post_Left_Mastectomy(CqlContext context) => 
+    public CqlValueSet Status_Post_Left_Mastectomy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1069", default);
 
 
 
     [CqlDeclaration("Status Post Right Mastectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1070")]
-    public CqlValueSet Status_Post_Right_Mastectomy(CqlContext context) => 
+    public CqlValueSet Status_Post_Right_Mastectomy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1070", default);
 
 
 
     [CqlDeclaration("Unilateral Mastectomy Left")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1133")]
-    public CqlValueSet Unilateral_Mastectomy_Left(CqlContext context) => 
+    public CqlValueSet Unilateral_Mastectomy_Left(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1133", default);
 
 
 
     [CqlDeclaration("Unilateral Mastectomy Right")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1134")]
-    public CqlValueSet Unilateral_Mastectomy_Right(CqlContext context) => 
+    public CqlValueSet Unilateral_Mastectomy_Right(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1134", default);
 
 
 
     [CqlDeclaration("Unilateral Mastectomy, Unspecified Laterality")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1071")]
-    public CqlValueSet Unilateral_Mastectomy__Unspecified_Laterality(CqlContext context) => 
+    public CqlValueSet Unilateral_Mastectomy__Unspecified_Laterality(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1071", default);
 
 
 
     [CqlDeclaration("Female")]
-    public CqlCode Female(CqlContext context) => 
+    public CqlCode Female(CqlContext context) =>
         new CqlCode("F", "http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender", default, default);
 
 
 
     [CqlDeclaration("Left (qualifier value)")]
-    public CqlCode Left__qualifier_value_(CqlContext context) => 
+    public CqlCode Left__qualifier_value_(CqlContext context) =>
         new CqlCode("7771000", "http://snomed.info/sct", default, default);
 
 
 
     [CqlDeclaration("Right (qualifier value)")]
-    public CqlCode Right__qualifier_value_(CqlContext context) => 
+    public CqlCode Right__qualifier_value_(CqlContext context) =>
         new CqlCode("24028007", "http://snomed.info/sct", default, default);
 
 
@@ -510,5 +510,33 @@ public partial class BreastCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<Br
         return a_;
     }
 
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
+        [typeof(CqlDate)],
+        ["AntidepressantDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
+        [typeof(Observation), typeof(Encounter)],
+        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["QualifyingEncounters", "URI"]);
 
 }

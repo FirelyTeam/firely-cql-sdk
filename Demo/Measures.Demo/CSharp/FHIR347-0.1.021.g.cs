@@ -31,251 +31,251 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
 
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
-    public CqlValueSet Annual_Wellness_Visit(CqlContext context) => 
+    public CqlValueSet Annual_Wellness_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default);
 
 
 
     [CqlDeclaration("Atherosclerosis and Peripheral Arterial Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.21")]
-    public CqlValueSet Atherosclerosis_and_Peripheral_Arterial_Disease(CqlContext context) => 
+    public CqlValueSet Atherosclerosis_and_Peripheral_Arterial_Disease(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.21", default);
 
 
 
     [CqlDeclaration("Breastfeeding")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.73")]
-    public CqlValueSet Breastfeeding(CqlContext context) => 
+    public CqlValueSet Breastfeeding(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.73", default);
 
 
 
     [CqlDeclaration("CABG Surgeries")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.694")]
-    public CqlValueSet CABG_Surgeries(CqlContext context) => 
+    public CqlValueSet CABG_Surgeries(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.694", default);
 
 
 
     [CqlDeclaration("CABG, PCI Procedure")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1138.566")]
-    public CqlValueSet CABG__PCI_Procedure(CqlContext context) => 
+    public CqlValueSet CABG__PCI_Procedure(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1138.566", default);
 
 
 
     [CqlDeclaration("Carotid Intervention")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.204")]
-    public CqlValueSet Carotid_Intervention(CqlContext context) => 
+    public CqlValueSet Carotid_Intervention(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.204", default);
 
 
 
     [CqlDeclaration("Cerebrovascular Disease, Stroke, TIA")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.44")]
-    public CqlValueSet Cerebrovascular_Disease__Stroke__TIA(CqlContext context) => 
+    public CqlValueSet Cerebrovascular_Disease__Stroke__TIA(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.44", default);
 
 
 
     [CqlDeclaration("Diabetes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001")]
-    public CqlValueSet Diabetes(CqlContext context) => 
+    public CqlValueSet Diabetes(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", default);
 
 
 
     [CqlDeclaration("End Stage Renal Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353")]
-    public CqlValueSet End_Stage_Renal_Disease(CqlContext context) => 
+    public CqlValueSet End_Stage_Renal_Disease(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353", default);
 
 
 
     [CqlDeclaration("Hepatitis A")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1024")]
-    public CqlValueSet Hepatitis_A(CqlContext context) => 
+    public CqlValueSet Hepatitis_A(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1024", default);
 
 
 
     [CqlDeclaration("Hepatitis B")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.269")]
-    public CqlValueSet Hepatitis_B(CqlContext context) => 
+    public CqlValueSet Hepatitis_B(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.269", default);
 
 
 
     [CqlDeclaration("High Intensity Statin Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1572")]
-    public CqlValueSet High_Intensity_Statin_Therapy(CqlContext context) => 
+    public CqlValueSet High_Intensity_Statin_Therapy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1572", default);
 
 
 
     [CqlDeclaration("Hospice Care Ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584")]
-    public CqlValueSet Hospice_Care_Ambulatory(CqlContext context) => 
+    public CqlValueSet Hospice_Care_Ambulatory(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", default);
 
 
 
     [CqlDeclaration("Hypercholesterolemia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.100")]
-    public CqlValueSet Hypercholesterolemia(CqlContext context) => 
+    public CqlValueSet Hypercholesterolemia(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.100", default);
 
 
 
     [CqlDeclaration("Ischemic Heart Disease or Other Related Diagnoses")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.46")]
-    public CqlValueSet Ischemic_Heart_Disease_or_Other_Related_Diagnoses(CqlContext context) => 
+    public CqlValueSet Ischemic_Heart_Disease_or_Other_Related_Diagnoses(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.46", default);
 
 
 
     [CqlDeclaration("LDL Cholesterol")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1573")]
-    public CqlValueSet LDL_Cholesterol(CqlContext context) => 
+    public CqlValueSet LDL_Cholesterol(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1573", default);
 
 
 
     [CqlDeclaration("Liver Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.42")]
-    public CqlValueSet Liver_Disease(CqlContext context) => 
+    public CqlValueSet Liver_Disease(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.42", default);
 
 
 
     [CqlDeclaration("Low Intensity Statin Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1574")]
-    public CqlValueSet Low_Intensity_Statin_Therapy(CqlContext context) => 
+    public CqlValueSet Low_Intensity_Statin_Therapy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1574", default);
 
 
 
     [CqlDeclaration("Moderate Intensity Statin Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1575")]
-    public CqlValueSet Moderate_Intensity_Statin_Therapy(CqlContext context) => 
+    public CqlValueSet Moderate_Intensity_Statin_Therapy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1575", default);
 
 
 
     [CqlDeclaration("Myocardial Infarction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.403")]
-    public CqlValueSet Myocardial_Infarction(CqlContext context) => 
+    public CqlValueSet Myocardial_Infarction(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.403", default);
 
 
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-    public CqlValueSet Office_Visit(CqlContext context) => 
+    public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
 
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-    public CqlValueSet Outpatient_Consultation(CqlContext context) => 
+    public CqlValueSet Outpatient_Consultation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
 
 
     [CqlDeclaration("Outpatient Encounters for Preventive Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1576")]
-    public CqlValueSet Outpatient_Encounters_for_Preventive_Care(CqlContext context) => 
+    public CqlValueSet Outpatient_Encounters_for_Preventive_Care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1576", default);
 
 
 
     [CqlDeclaration("Palliative Care Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1575")]
-    public CqlValueSet Palliative_Care_Encounter(CqlContext context) => 
+    public CqlValueSet Palliative_Care_Encounter(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1575", default);
 
 
 
     [CqlDeclaration("Palliative or Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579")]
-    public CqlValueSet Palliative_or_Hospice_Care(CqlContext context) => 
+    public CqlValueSet Palliative_or_Hospice_Care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579", default);
 
 
 
     [CqlDeclaration("PCI")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.67")]
-    public CqlValueSet PCI(CqlContext context) => 
+    public CqlValueSet PCI(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.67", default);
 
 
 
     [CqlDeclaration("Pregnancy or Other Related Diagnoses")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1623")]
-    public CqlValueSet Pregnancy_or_Other_Related_Diagnoses(CqlContext context) => 
+    public CqlValueSet Pregnancy_or_Other_Related_Diagnoses(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1623", default);
 
 
 
     [CqlDeclaration("Preventive Care Services - Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-    public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
 
 
     [CqlDeclaration("Preventive Care Services - Other")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1030")]
-    public CqlValueSet Preventive_Care_Services___Other(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services___Other(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1030", default);
 
 
 
     [CqlDeclaration("Preventive Care Services-Individual Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026")]
-    public CqlValueSet Preventive_Care_Services_Individual_Counseling(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services_Individual_Counseling(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", default);
 
 
 
     [CqlDeclaration("Preventive Care Services-Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
 
 
     [CqlDeclaration("Rhabdomyolysis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.102")]
-    public CqlValueSet Rhabdomyolysis(CqlContext context) => 
+    public CqlValueSet Rhabdomyolysis(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.102", default);
 
 
 
     [CqlDeclaration("Stable and Unstable Angina")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.47")]
-    public CqlValueSet Stable_and_Unstable_Angina(CqlContext context) => 
+    public CqlValueSet Stable_and_Unstable_Angina(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.47", default);
 
 
 
     [CqlDeclaration("Statin Allergen")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.42")]
-    public CqlValueSet Statin_Allergen(CqlContext context) => 
+    public CqlValueSet Statin_Allergen(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.42", default);
 
 
 
     [CqlDeclaration("Statin Associated Muscle Symptoms")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.85")]
-    public CqlValueSet Statin_Associated_Muscle_Symptoms(CqlContext context) => 
+    public CqlValueSet Statin_Associated_Muscle_Symptoms(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.85", default);
 
 
 
     [CqlDeclaration("Encounter for palliative care")]
-    public CqlCode Encounter_for_palliative_care(CqlContext context) => 
+    public CqlCode Encounter_for_palliative_care(CqlContext context) =>
         new CqlCode("Z51.5", "http://hl7.org/fhir/sid/icd-10-cm", default, default);
 
 
@@ -1082,5 +1082,265 @@ public partial class FHIR347_0_1_021 : ILibrary, ISingleton<FHIR347_0_1_021>
         return e_;
     }
 
+
+    private static CqlTupleMetadata CqlTupleMetadata_EaLaedgLDgRRYaLbKIIcBTOiA = new(
+        [typeof(Encounter), typeof(Encounter)],
+        ["OutpatientEncounter1", "OutpatientEncounter2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CgaDVOXeQBMgMPCPZOThIIdDb = new(
+        [typeof(CqlInterval<CqlDateTime>), typeof(CqlInterval<CqlDateTime>)],
+        ["LTCPeriod1", "LTCPeriod2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GIMHfXDcFiAjSJBDGYeUeZLhW = new(
+        [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
+        ["interval", "startOfInterval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EQHOUSiiWahbJPOUjJGEhIAOV = new(
+        [typeof(CqlInterval<CqlDateTime>), typeof(CqlDateTime)],
+        ["interval", "startOfInterval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EVRLVXPcBiDTIWfCCfKEWDfKI = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["sortedCoverings"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FKcLSALRMRfDigEFaJgDOPFRK = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["frontgaps", "endgap"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EdgSWaTaCbLYLJceGdIcWOLHd = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["sortedCoverings"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BBLSSiNBQBGUDJaVjMDZMSAXg = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["frontgaps", "endgap"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HEjPGjPEhLgQPGjROeWMgiGfC = new(
+        [typeof(CqlInterval<CqlDate>), typeof(int?)],
+        ["interval", "days"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HRbPDRZiOGGBceePOZWjVbXdP = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(int?), typeof(int?), typeof(CqlInterval<CqlDate>), typeof(int?)],
+        ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DUiZjXRKgCPYVZQJbFVDKNMOi = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["Covering_Intervals"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GQPbYTYABjXFVLRKjXgcDJFSj = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["Gap_Intervals"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FcQREFSfPJSKYAhSEWVJcZVED = new(
+        [typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?)],
+        ["StartYear", "StartMonth", "StartDay", "StartHour", "StartMinute", "StartSecond", "StartMillisecond", "EndYear", "EndMonth", "EndDay", "EndHour", "EndMinute", "EndSecond", "EndMillisecond"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CGHEUIgjaCjJVKEADTSZEbdCL = new(
+        [typeof(CqlInterval<CqlDateTime>), typeof(int?)],
+        ["interval", "days"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HDihbLieYfQbgeSbOWZBAMUIQ = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(int?), typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(int?)],
+        ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GZMPWdGOJiTNjfWAcbZMePdXV = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["Covering_Intervals"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CKbERRbOPGNBBERUOghhaOYSE = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["Gap_Intervals"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CfANiScMYDdVZFgRERKJQEVca = new(
+        [typeof(IEnumerable<CqlDate>)],
+        ["SortedDates"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BDeBMdFeZaVSehBSFYjTFdYYD = new(
+        [typeof(IEnumerable<CqlDate>), typeof(int?)],
+        ["SortedList", "AnchorIndex"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc = new(
+        [typeof(CqlDate), typeof(IEnumerable<CqlDate>), typeof(int?)],
+        ["NextDate", "NewList", "IndexofNewDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BaNHUZXcQBUKLNgEDWdDHjYV = new(
+        [typeof(CqlInterval<CqlDate>), typeof(CqlInterval<CqlDate>)],
+        ["Coverage1", "Coverage2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DPLIOBaSciHAAETJOMSIjWgbP = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["IntervalInfo", "Collapsed", "Adjacent", "CollapsedFinal"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GIgcTXSQJbIXPiNgNbAIdOBXi = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<string>), typeof(IEnumerable<string>)],
+        ["MedicalClaim", "ProceduresAsStrings", "POSAsString"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HSdidNdfHCNCFSUTgBiYLcgXP = new(
+        [typeof(Claim), typeof(IEnumerable<Claim.ItemComponent>)],
+        ["Claim", "LineItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GDUUTAIXZafehWFjcGfNKBcTd = new(
+        [typeof(Claim), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["Claim", "ServicePeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GKQGAFOMQbCPRXAANKASUIHMf = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<string>)],
+        ["MedicalClaim", "DiagnosesAsStrings"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GDVcejYEWXWNHUIODacaMaBhV = new(
+        [typeof(IEnumerable<Claim>)],
+        ["DiagnosisItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CWDDWHRXGADEbdaKXCdKbgEfg = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["Claim", "ServicePeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CZJDcULSYFOUeGSUcDccghjMK = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<string>)],
+        ["PharmacyClaim", "MedicationsAsStrings"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HDUYFgZGRCJCdTeEcMSVCMQNN = new(
+        [typeof(CqlInterval<CqlDateTime>)],
+        ["DaysSupplyInterval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_fQfNOLePNSNdOZROKRAfMQPE = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?>)],
+        ["CoveredDays"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FCdHTREUGBEaiYVQNNGRPZFjf = new(
+        [typeof(Claim), typeof(IEnumerable<Claim.ItemComponent>), typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["Claim", "LineItem", "ServicePeriod", "CoveredDays"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GQFgMiKhOZgECFTScigSABdXb = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<string>), typeof(IEnumerable<string>)],
+        ["MedicalClaim", "DiagnosesAsStrings", "ProceduresAsStrings"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CXESjjTOQIGKICAEMDgcfPdJG = new(
+        [typeof(Claim)],
+        ["ProcedureItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FYaKYiIDIQCIRBfhZCGRDYQLX = new(
+        [typeof(Claim), typeof(Claim)],
+        ["Claim", "ProcedureItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_iYTJVNYRMBhJCKDIUSKFMUHe = new(
+        [typeof(IEnumerable<Claim.ItemComponent>), typeof(Claim)],
+        ["Procedure", "LineItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DBEDLLOihLKGPWLHVWXRKfGdL = new(
+        [typeof(IEnumerable<Claim>)],
+        ["LineItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_ESGibVhJBKTGTjRhHBeNDHASE = new(
+        [typeof(IEnumerable<ClaimResponse>), typeof(IEnumerable<Claim>)],
+        ["MedicalClaimResponse", "MedicalClaim"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DbDPVOODdCjASWRZfBTBPUJKR = new(
+        [typeof(IEnumerable<ClaimResponse>)],
+        ["PaidResponse"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FfbRdLZNBbFHejZXDegUDAhjO = new(
+        [typeof(ClaimResponse), typeof(string), typeof(IEnumerable<ClaimResponse.ItemComponent>)],
+        ["Response", "ResponseID", "LineItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GUCaFdHVHVNcfKfMNEFbbNGUi = new(
+        [typeof(Claim), typeof(Id), typeof(IEnumerable<Claim.ItemComponent>)],
+        ["ClaimofInterest", "ClaimID", "LineItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DiTbeIhUdTbFXAOeUfBeANOcV = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>), typeof(IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>)],
+        ["PaidMedicalClaimResponse", "MedicalClaim"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HANAFPgdEHHITIiaCbHRMCNfZ = new(
+        [typeof((CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?), typeof(IEnumerable<Claim.ItemComponent>)],
+        ["PaidClaim", "ClaimItem"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GUibhjYMgjAQISFDJORUOccJC = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>)],
+        ["AggregateClaim"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FCOUVKRRWVHcKiBDUdGgLciKR = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["originalClaim", "ServicePeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EgMIjgYNSTYejjeaeeSfTCGLV = new(
+        [typeof(IEnumerable<ClaimResponse>), typeof(IEnumerable<Claim>)],
+        ["PharmacyClaimResponse", "PharmacyClaim"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EhcebFbUeFgabTLNPALjRJQCF = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>), typeof(IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>)],
+        ["PaidPharmacyClaimResponse", "MedicalClaim"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BiVTcKEZOfgFCDEReGAXJRAUK = new(
+        [typeof((CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?), typeof(IEnumerable<Claim.ItemComponent>)],
+        ["PaidClaim", "ClaimItem"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EMbbXAAHNDcXYSgLIhAhQCWON = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>)],
+        ["AggregateClaim"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DXGMEVDRBZgHMANCfXfEUYMNW = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>), typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["originalClaim", "ServicePeriod", "CoveredDays"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CZThYJbgajVLdhIZdgZiXBFQK = new(
+        [typeof(IEnumerable<ClaimResponse>), typeof(IEnumerable<Claim>)],
+        ["ClaimResponse", "OriginalClaim"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GFUjSKcYaHagAZIhSUhffHjHP = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<Claim>)],
+        ["InpatientStayLineItems", "NonacuteInpatientLineItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DBGUUNgWTQDYFIeOfMhQJAYTB = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<Claim>), typeof(IEnumerable<Claim>)],
+        ["InpatientDischarge", "NonacuteInpatientDischarge", "AcuteInpatientDischarge"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BWiFKXdFieUciRMVTUCdIFCVO = new(
+        [typeof(Claim), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<string>)],
+        ["SingleCareTeam", "CareTeamsProvider", "CareTeamsProviderID"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HFNJUcNhcbGBLBgHAJMMSPfQH = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?>)],
+        ["CareTeams"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FPVdJEEOUKFVhQPTfKhShUNO = new(
+        [typeof(IEnumerable<Practitioner>)],
+        ["Practitioners"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EheHUARRFfQdCcHKeSEhfYZMj = new(
+        [typeof(IEnumerable<FhirString>), typeof(IEnumerable<Identifier>)],
+        ["AllIdentifiers", "NullIdentifiers"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EZUSISLPSZWTXahaQjXaSAJBE = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?>)],
+        ["IdentifierTuple"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FBUdWLSDMgYFFiVXYhKEiUNQS = new(
+        [typeof(int?)],
+        ["IdentifierCount"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_gFQSaDQdhfIVgTfEbUhWdbBB = new(
+        [typeof(IEnumerable<Claim.ItemComponent>), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<string>)],
+        ["SingleItem", "ItemLocation", "ItemLocationID"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_ESTVjUCCVhLEXJGPZBeEcQDHX = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>)],
+        ["ItemsLocationReferences"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GWYcfjEGjPEdPbTNdfROfTUAf = new(
+        [typeof(IEnumerable<Location>)],
+        ["CorrespondingLocations"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CMSeRgTJgKISKSQUcNZWKegGV = new(
+        [typeof(CqlDate), typeof(CqlDate)],
+        ["OutpatientVisit1", "OutpatientVisit2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CaKghTfWMNOTHSWhifjFZOVYO = new(
+        [typeof(CodeableConcept), typeof(Period)],
+        ["code", "period"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_iQFMKTdMMJMRBOfEdfhTYDJV = new(
+        [typeof(CqlDateTime), typeof(IEnumerable<FhirString>), typeof(IEnumerable<string>), typeof(Code<ObservationStatus>)],
+        ["occultDate", "occultResult", "occultCategoryCode", "occultStatus"]);
 
 }

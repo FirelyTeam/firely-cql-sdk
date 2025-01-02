@@ -2446,4 +2446,12 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
     }
 
 
+    private static CqlTupleMetadata CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ = new(
+        [typeof(string), typeof(string)],
+        ["result1", "result2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY = new(
+        [typeof(string), typeof((CqlTupleMetadata, string result1, string result2)?)],
+        ["status", "result"]);
+
 }

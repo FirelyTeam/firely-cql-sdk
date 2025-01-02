@@ -31,28 +31,28 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     [CqlDeclaration("ValueSet-A-1")]
     [CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-1")]
-    public CqlValueSet ValueSet_A_1(CqlContext context) => 
+    public CqlValueSet ValueSet_A_1(CqlContext context) =>
         new CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-1", default);
 
 
 
     [CqlDeclaration("ValueSet-A-2")]
     [CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-2")]
-    public CqlValueSet ValueSet_A_2(CqlContext context) => 
+    public CqlValueSet ValueSet_A_2(CqlContext context) =>
         new CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-2", default);
 
 
 
     [CqlDeclaration("ValueSet-B-1")]
     [CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-1")]
-    public CqlValueSet ValueSet_B_1(CqlContext context) => 
+    public CqlValueSet ValueSet_B_1(CqlContext context) =>
         new CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-1", default);
 
 
 
     [CqlDeclaration("ValueSet-B-2")]
     [CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-2")]
-    public CqlValueSet ValueSet_B_2(CqlContext context) => 
+    public CqlValueSet ValueSet_B_2(CqlContext context) =>
         new CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-2", default);
 
 
@@ -199,5 +199,13 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
         return a_();
     }
 
+
+    private static CqlTupleMetadata CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ = new(
+        [typeof(string), typeof(string)],
+        ["result1", "result2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY = new(
+        [typeof(string), typeof((CqlTupleMetadata, string result1, string result2)?)],
+        ["status", "result"]);
 
 }

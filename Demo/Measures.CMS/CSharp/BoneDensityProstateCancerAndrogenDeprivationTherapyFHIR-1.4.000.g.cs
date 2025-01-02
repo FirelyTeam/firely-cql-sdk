@@ -31,41 +31,41 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
 
     [CqlDeclaration("Androgen deprivation therapy for Urology Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.48")]
-    public CqlValueSet Androgen_deprivation_therapy_for_Urology_Care(CqlContext context) => 
+    public CqlValueSet Androgen_deprivation_therapy_for_Urology_Care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.48", default);
 
 
 
     [CqlDeclaration("DEXA Dual Energy Xray Absorptiometry, Bone Density for Urology Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.38")]
-    public CqlValueSet DEXA_Dual_Energy_Xray_Absorptiometry__Bone_Density_for_Urology_Care(CqlContext context) => 
+    public CqlValueSet DEXA_Dual_Energy_Xray_Absorptiometry__Bone_Density_for_Urology_Care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.38", default);
 
 
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-    public CqlValueSet Office_Visit(CqlContext context) => 
+    public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
 
 
     [CqlDeclaration("Patient Declined")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1582")]
-    public CqlValueSet Patient_Declined(CqlContext context) => 
+    public CqlValueSet Patient_Declined(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1582", default);
 
 
 
     [CqlDeclaration("Prostate Cancer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.319")]
-    public CqlValueSet Prostate_Cancer(CqlContext context) => 
+    public CqlValueSet Prostate_Cancer(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.319", default);
 
 
 
     [CqlDeclaration("Injection of leuprolide acetate for twelve month period (regime/therapy)")]
-    public CqlCode Injection_of_leuprolide_acetate_for_twelve_month_period__regime_therapy_(CqlContext context) => 
+    public CqlCode Injection_of_leuprolide_acetate_for_twelve_month_period__regime_therapy_(CqlContext context) =>
         new CqlCode("456381000124102", "http://snomed.info/sct", default, default);
 
 
@@ -472,7 +472,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 return y_;
             };
             IEnumerable<Condition> j_ = context.Operators.Where<Condition>(h_, i_);
-            CqlDateTime k_(Condition ProstateCancer) => 
+            CqlDateTime k_(Condition ProstateCancer) =>
                 ADTDateTime;
             IEnumerable<CqlDateTime> l_ = context.Operators.Select<Condition, CqlDateTime>(j_, k_);
 
@@ -539,7 +539,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 return ar_;
             };
             IEnumerable<CqlDateTime> i_ = context.Operators.Where<CqlDateTime>((IEnumerable<CqlDateTime>)g_, h_);
-            ServiceRequest j_(CqlDateTime FirstADTMP) => 
+            ServiceRequest j_(CqlDateTime FirstADTMP) =>
                 OrderTwelveMonthADT;
             IEnumerable<ServiceRequest> k_ = context.Operators.Select<CqlDateTime, ServiceRequest>(i_, j_);
 
@@ -612,7 +612,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 return av_;
             };
             IEnumerable<ServiceRequest> q_ = context.Operators.Where<ServiceRequest>(o_, p_);
-            ServiceRequest r_(ServiceRequest OrderTwelveMonthsADT) => 
+            ServiceRequest r_(ServiceRequest OrderTwelveMonthsADT) =>
                 DEXAOrdered;
             IEnumerable<ServiceRequest> s_ = context.Operators.Select<ServiceRequest, ServiceRequest>(q_, r_);
 
@@ -681,7 +681,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 return cx_;
             };
             IEnumerable<ServiceRequest> bo_ = context.Operators.Where<ServiceRequest>(bm_, bn_);
-            Observation bp_(ServiceRequest OrderTwelveMonthsADT) => 
+            Observation bp_(ServiceRequest OrderTwelveMonthsADT) =>
                 DEXAPerformed;
             IEnumerable<Observation> bq_ = context.Operators.Select<ServiceRequest, Observation>(bo_, bp_);
 
@@ -725,7 +725,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     [CqlDeclaration("Denominator Exception")]
     [CqlTag("commentedOut", "\"No Bone Density Scan Ordered Due to Patient Refusal\" )")]
     [CqlTag("commmentedOutReason", "Negation issue related to https://github.com/cqframework/cql-execution/issues/296, which is tied to https://oncprojectracking.healthit.gov/support/browse/BONNIEMAT-1455. Due to this being the only logic in population, created a 'false' placeholder")]
-    public bool? Denominator_Exception(CqlContext context) => 
+    public bool? Denominator_Exception(CqlContext context) =>
         false;
 
 
@@ -822,7 +822,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 return ai_;
             };
             IEnumerable<ServiceRequest> j_ = context.Operators.Where<ServiceRequest>(h_, i_);
-            ServiceRequest k_(ServiceRequest OrderTwelveMonthsADT) => 
+            ServiceRequest k_(ServiceRequest OrderTwelveMonthsADT) =>
                 DEXANotOrdered;
             IEnumerable<ServiceRequest> l_ = context.Operators.Select<ServiceRequest, ServiceRequest>(j_, k_);
 
@@ -888,7 +888,7 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
                 return aj_;
             };
             IEnumerable<ServiceRequest> j_ = context.Operators.Where<ServiceRequest>(h_, i_);
-            Observation k_(ServiceRequest OrderTwelveMonthsADT) => 
+            Observation k_(ServiceRequest OrderTwelveMonthsADT) =>
                 DEXANotPerformed;
             IEnumerable<Observation> l_ = context.Operators.Select<ServiceRequest, Observation>(j_, k_);
 
@@ -899,5 +899,33 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
         return g_;
     }
 
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
+        [typeof(CqlDate)],
+        ["AntidepressantDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
+        [typeof(Observation), typeof(Encounter)],
+        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["QualifyingEncounters", "URI"]);
 
 }

@@ -30,19 +30,19 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
     #endregion Library Members
 
     [CqlDeclaration("Birth date")]
-    public CqlCode Birth_date(CqlContext context) => 
+    public CqlCode Birth_date(CqlContext context) =>
         new CqlCode("21112-8", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("CT dose and image quality category")]
-    public CqlCode CT_dose_and_image_quality_category(CqlContext context) => 
+    public CqlCode CT_dose_and_image_quality_category(CqlContext context) =>
         new CqlCode("96914-7", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Full Body")]
-    public CqlCode Full_Body(CqlContext context) => 
+    public CqlCode Full_Body(CqlContext context) =>
         new CqlCode("LA31771-1", "http://loinc.org", default, default);
 
 
@@ -242,5 +242,17 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
         return d_;
     }
 
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
 
 }

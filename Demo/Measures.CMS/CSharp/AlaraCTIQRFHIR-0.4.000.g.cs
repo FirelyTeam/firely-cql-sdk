@@ -31,19 +31,19 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-    public CqlValueSet Encounter_Inpatient(CqlContext context) => 
+    public CqlValueSet Encounter_Inpatient(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
 
 
     [CqlDeclaration("CT dose and image quality category")]
-    public CqlCode CT_dose_and_image_quality_category(CqlContext context) => 
+    public CqlCode CT_dose_and_image_quality_category(CqlContext context) =>
         new CqlCode("96914-7", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Full Body")]
-    public CqlCode Full_Body(CqlContext context) => 
+    public CqlCode Full_Body(CqlContext context) =>
         new CqlCode("LA31771-1", "http://loinc.org", default, default);
 
 
@@ -183,7 +183,7 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
                 return x_;
             };
             IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
-            Observation i_(Encounter InpatientEncounters) => 
+            Observation i_(Encounter InpatientEncounters) =>
                 CTScan;
             IEnumerable<Observation> j_ = context.Operators.Select<Encounter, Observation>(h_, i_);
 
@@ -277,5 +277,17 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
         return c_;
     }
 
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
 
 }

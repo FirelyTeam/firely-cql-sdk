@@ -30,19 +30,19 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     #endregion Library Members
 
     [CqlDeclaration("laboratory")]
-    public CqlCode laboratory(CqlContext context) => 
+    public CqlCode laboratory(CqlContext context) =>
         new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
 
 
     [CqlDeclaration("exam")]
-    public CqlCode exam(CqlContext context) => 
+    public CqlCode exam(CqlContext context) =>
         new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
 
 
     [CqlDeclaration("survey")]
-    public CqlCode survey(CqlContext context) => 
+    public CqlCode survey(CqlContext context) =>
         new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
 
@@ -586,5 +586,9 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
         return b_;
     }
 
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
 
 }

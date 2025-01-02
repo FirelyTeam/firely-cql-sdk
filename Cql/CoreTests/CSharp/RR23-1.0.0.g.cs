@@ -31,26 +31,26 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     [CqlDeclaration("Injury due to falling rock")]
     [CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock")]
-    public CqlValueSet Injury_due_to_falling_rock(CqlContext context) => 
+    public CqlValueSet Injury_due_to_falling_rock(CqlContext context) =>
         new CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock", default);
 
 
 
     [CqlDeclaration("Roadrunners Syndrome Indicators")]
     [CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome")]
-    public CqlValueSet Roadrunners_Syndrome_Indicators(CqlContext context) => 
+    public CqlValueSet Roadrunners_Syndrome_Indicators(CqlContext context) =>
         new CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome", default);
 
 
 
     [CqlDeclaration("Tiny Umbrella")]
-    public CqlCode Tiny_Umbrella(CqlContext context) => 
+    public CqlCode Tiny_Umbrella(CqlContext context) =>
         new CqlCode("U707", "http://acme.org/product-catalog", default, default);
 
 
 
     [CqlDeclaration("entered-in-error")]
-    public CqlCode entered_in_error(CqlContext context) => 
+    public CqlCode entered_in_error(CqlContext context) =>
         new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
 
@@ -203,5 +203,13 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
         return c_;
     }
 
+
+    private static CqlTupleMetadata CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ = new(
+        [typeof(string), typeof(string)],
+        ["result1", "result2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY = new(
+        [typeof(string), typeof((CqlTupleMetadata, string result1, string result2)?)],
+        ["status", "result"]);
 
 }

@@ -31,126 +31,126 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
 
     [CqlDeclaration("Care Services in Long-Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
-    public CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) => 
+    public CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
 
 
 
     [CqlDeclaration("Diabetic Retinopathy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327")]
-    public CqlValueSet Diabetic_Retinopathy(CqlContext context) => 
+    public CqlValueSet Diabetic_Retinopathy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327", default);
 
 
 
     [CqlDeclaration("Level of Severity of Retinopathy Findings")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1283")]
-    public CqlValueSet Level_of_Severity_of_Retinopathy_Findings(CqlContext context) => 
+    public CqlValueSet Level_of_Severity_of_Retinopathy_Findings(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1283", default);
 
 
 
     [CqlDeclaration("Macular Edema Findings Present")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1320")]
-    public CqlValueSet Macular_Edema_Findings_Present(CqlContext context) => 
+    public CqlValueSet Macular_Edema_Findings_Present(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1320", default);
 
 
 
     [CqlDeclaration("Macular Exam")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1251")]
-    public CqlValueSet Macular_Exam(CqlContext context) => 
+    public CqlValueSet Macular_Exam(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1251", default);
 
 
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
-    public CqlValueSet Medical_Reason(CqlContext context) => 
+    public CqlValueSet Medical_Reason(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
 
 
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
-    public CqlValueSet Nursing_Facility_Visit(CqlContext context) => 
+    public CqlValueSet Nursing_Facility_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
 
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-    public CqlValueSet Office_Visit(CqlContext context) => 
+    public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
 
 
     [CqlDeclaration("Ophthalmological Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285")]
-    public CqlValueSet Ophthalmological_Services(CqlContext context) => 
+    public CqlValueSet Ophthalmological_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", default);
 
 
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-    public CqlValueSet Outpatient_Consultation(CqlContext context) => 
+    public CqlValueSet Outpatient_Consultation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
 
 
     [CqlDeclaration("Patient Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008")]
-    public CqlValueSet Patient_Reason(CqlContext context) => 
+    public CqlValueSet Patient_Reason(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008", default);
 
 
 
     [CqlDeclaration("Macular edema absent (situation)")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.2.1391")]
-    public CqlValueSet Macular_edema_absent__situation_(CqlContext context) => 
+    public CqlValueSet Macular_edema_absent__situation_(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.2.1391", default);
 
 
 
     [CqlDeclaration("Healthcare professional (occupation)")]
-    public CqlCode Healthcare_professional__occupation_(CqlContext context) => 
+    public CqlCode Healthcare_professional__occupation_(CqlContext context) =>
         new CqlCode("223366009", "http://snomed.info/sct", default, default);
 
 
 
     [CqlDeclaration("Medical practitioner (occupation)")]
-    public CqlCode Medical_practitioner__occupation_(CqlContext context) => 
+    public CqlCode Medical_practitioner__occupation_(CqlContext context) =>
         new CqlCode("158965000", "http://snomed.info/sct", default, default);
 
 
 
     [CqlDeclaration("Ophthalmologist (occupation)")]
-    public CqlCode Ophthalmologist__occupation_(CqlContext context) => 
+    public CqlCode Ophthalmologist__occupation_(CqlContext context) =>
         new CqlCode("422234006", "http://snomed.info/sct", default, default);
 
 
 
     [CqlDeclaration("Optometrist (occupation)")]
-    public CqlCode Optometrist__occupation_(CqlContext context) => 
+    public CqlCode Optometrist__occupation_(CqlContext context) =>
         new CqlCode("28229004", "http://snomed.info/sct", default, default);
 
 
 
     [CqlDeclaration("Physician (occupation)")]
-    public CqlCode Physician__occupation_(CqlContext context) => 
+    public CqlCode Physician__occupation_(CqlContext context) =>
         new CqlCode("309343006", "http://snomed.info/sct", default, default);
 
 
 
     [CqlDeclaration("virtual")]
-    public CqlCode @virtual(CqlContext context) => 
+    public CqlCode @virtual(CqlContext context) =>
         new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
 
 
     [CqlDeclaration("AMB")]
-    public CqlCode AMB(CqlContext context) => 
+    public CqlCode AMB(CqlContext context) =>
         new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
 
@@ -329,7 +329,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
                 return ah_;
             };
             IEnumerable<Condition> g_ = context.Operators.Where<Condition>(e_, f_);
-            Encounter h_(Condition DiabeticRetinopathy) => 
+            Encounter h_(Condition DiabeticRetinopathy) =>
                 ValidQualifyingEncounter;
             IEnumerable<Encounter> i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
@@ -383,7 +383,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
                 return q_;
             };
             IEnumerable<Encounter> i_ = context.Operators.Where<Encounter>(g_, h_);
-            Observation j_(Encounter EncounterDiabeticRetinopathy) => 
+            Observation j_(Encounter EncounterDiabeticRetinopathy) =>
                 MacularExam;
             IEnumerable<Observation> k_ = context.Operators.Select<Encounter, Observation>(i_, j_);
 
@@ -455,7 +455,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
                 return w_;
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
-            Communication k_(Encounter EncounterDiabeticRetinopathy) => 
+            Communication k_(Encounter EncounterDiabeticRetinopathy) =>
                 LevelOfSeverityCommunicated;
             IEnumerable<Communication> l_ = context.Operators.Select<Encounter, Communication>(j_, k_);
 
@@ -503,7 +503,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
                 return w_;
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
-            Communication k_(Encounter EncounterDiabeticRetinopathy) => 
+            Communication k_(Encounter EncounterDiabeticRetinopathy) =>
                 MacularEdemaAbsentCommunicated;
             IEnumerable<Communication> l_ = context.Operators.Select<Encounter, Communication>(j_, k_);
 
@@ -551,7 +551,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
                 return w_;
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
-            Communication k_(Encounter EncounterDiabeticRetinopathy) => 
+            Communication k_(Encounter EncounterDiabeticRetinopathy) =>
                 MacularEdemaPresentCommunicated;
             IEnumerable<Communication> l_ = context.Operators.Select<Encounter, Communication>(j_, k_);
 
@@ -613,7 +613,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
                 return u_;
             };
             IEnumerable<Encounter> n_ = context.Operators.Where<Encounter>(l_, m_);
-            Communication o_(Encounter EncounterDiabeticRetinopathy) => 
+            Communication o_(Encounter EncounterDiabeticRetinopathy) =>
                 LevelOfSeverityNotCommunicated;
             IEnumerable<Communication> p_ = context.Operators.Select<Encounter, Communication>(n_, o_);
 
@@ -662,7 +662,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
                 return u_;
             };
             IEnumerable<Encounter> n_ = context.Operators.Where<Encounter>(l_, m_);
-            Communication o_(Encounter EncounterDiabeticRetinopathy) => 
+            Communication o_(Encounter EncounterDiabeticRetinopathy) =>
                 MacularEdemaAbsentNotCommunicated;
             IEnumerable<Communication> p_ = context.Operators.Select<Encounter, Communication>(n_, o_);
 
@@ -711,7 +711,7 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
                 return u_;
             };
             IEnumerable<Encounter> n_ = context.Operators.Where<Encounter>(l_, m_);
-            Communication o_(Encounter EncounterDiabeticRetinopathy) => 
+            Communication o_(Encounter EncounterDiabeticRetinopathy) =>
                 MacularEdemaPresentNotCommunicated;
             IEnumerable<Communication> p_ = context.Operators.Select<Encounter, Communication>(n_, o_);
 
@@ -770,5 +770,69 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
         return h_;
     }
 
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
+        [typeof(CqlDate)],
+        ["AntidepressantDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
+        [typeof(Observation), typeof(Encounter)],
+        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["QualifyingEncounters", "URI"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
+        [typeof(string), typeof(int?)],
+        ["EncounterID", "CalculatedCGA"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EMDhFLcFhWVERAVVNfLAZYXJi = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["DTaPVaccination1", "DTaPVaccination2", "DTaPVaccination3", "DTaPVaccination4"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CNGHaZROXaJTHPICcbIaJbRXV = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["PolioVaccination1", "PolioVaccination2", "PolioVaccination3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EZTgahAUWGgSdGaDCgQNNIPGW = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["HepatitisBVaccination1", "HepatitisBVaccination2", "HepatitisBVaccination3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HDfaMbZGBWDPFETGQNFbceEeg = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["HepatitisBVaccination1", "HepatitisBVaccination2", "NewBornVaccine3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DdPDeOJhPYESfHGCOcBNOiPPP = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["PneumococcalVaccination1", "PneumococcalVaccination2", "PneumococcalVaccination3", "PneumococcalVaccination4"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZhFLeRDagbPQMNheVJcUNfNQ = new(
+        [typeof(CqlDate), typeof(CqlDate)],
+        ["FluVaccination1", "FluVaccination2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb = new(
+        [typeof(string), typeof(CqlDateTime)],
+        ["ID", "AuthorDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FOBYUiHifSfYFYhEEQajgLbgF = new(
+        [typeof(CqlQuantity), typeof(Observation)],
+        ["QualifyingGlycemicStatusValue", "QualifyingGlycemicStatus"]);
 
 }

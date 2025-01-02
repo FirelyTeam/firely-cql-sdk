@@ -31,208 +31,208 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
     [CqlDeclaration("Heart Failure")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376")]
-    public CqlValueSet Heart_Failure(CqlContext context) => 
+    public CqlValueSet Heart_Failure(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376", default);
 
 
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-    public CqlValueSet Office_Visit(CqlContext context) => 
+    public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
 
 
     [CqlDeclaration("Virtual Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-    public CqlValueSet Virtual_Encounter(CqlContext context) => 
+    public CqlValueSet Virtual_Encounter(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
 
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-    public CqlValueSet Telephone_Visits(CqlContext context) => 
+    public CqlValueSet Telephone_Visits(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
 
 
     [CqlDeclaration("Emotional score [MLHFQ]")]
-    public CqlCode Emotional_score__MLHFQ_(CqlContext context) => 
+    public CqlCode Emotional_score__MLHFQ_(CqlContext context) =>
         new CqlCode("85609-6", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Kansas City Cardiomyopathy Questionnaire - 12 item [KCCQ-12]")]
-    public CqlCode Kansas_City_Cardiomyopathy_Questionnaire___12_item__KCCQ_12_(CqlContext context) => 
+    public CqlCode Kansas_City_Cardiomyopathy_Questionnaire___12_item__KCCQ_12_(CqlContext context) =>
         new CqlCode("86923-0", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Overall summary score [KCCQ-12]")]
-    public CqlCode Overall_summary_score__KCCQ_12_(CqlContext context) => 
+    public CqlCode Overall_summary_score__KCCQ_12_(CqlContext context) =>
         new CqlCode("86924-8", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Overall summary score [KCCQ]")]
-    public CqlCode Overall_summary_score__KCCQ_(CqlContext context) => 
+    public CqlCode Overall_summary_score__KCCQ_(CqlContext context) =>
         new CqlCode("71940-1", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Physical limitation score [KCCQ]")]
-    public CqlCode Physical_limitation_score__KCCQ_(CqlContext context) => 
+    public CqlCode Physical_limitation_score__KCCQ_(CqlContext context) =>
         new CqlCode("72195-1", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Physical score [MLHFQ]")]
-    public CqlCode Physical_score__MLHFQ_(CqlContext context) => 
+    public CqlCode Physical_score__MLHFQ_(CqlContext context) =>
         new CqlCode("85618-7", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("PROMIS-10 Global Mental Health (GMH) score T-score")]
-    public CqlCode PROMIS_10_Global_Mental_Health__GMH__score_T_score(CqlContext context) => 
+    public CqlCode PROMIS_10_Global_Mental_Health__GMH__score_T_score(CqlContext context) =>
         new CqlCode("71969-0", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("PROMIS-10 Global Physical Health (GPH) score T-score")]
-    public CqlCode PROMIS_10_Global_Physical_Health__GPH__score_T_score(CqlContext context) => 
+    public CqlCode PROMIS_10_Global_Physical_Health__GPH__score_T_score(CqlContext context) =>
         new CqlCode("71971-6", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("PROMIS-29 Anxiety score T-score")]
-    public CqlCode PROMIS_29_Anxiety_score_T_score(CqlContext context) => 
+    public CqlCode PROMIS_29_Anxiety_score_T_score(CqlContext context) =>
         new CqlCode("71967-4", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("PROMIS-29 Depression score T-score")]
-    public CqlCode PROMIS_29_Depression_score_T_score(CqlContext context) => 
+    public CqlCode PROMIS_29_Depression_score_T_score(CqlContext context) =>
         new CqlCode("71965-8", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("PROMIS-29 Fatigue score T-score")]
-    public CqlCode PROMIS_29_Fatigue_score_T_score(CqlContext context) => 
+    public CqlCode PROMIS_29_Fatigue_score_T_score(CqlContext context) =>
         new CqlCode("71963-3", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("PROMIS-29 Pain interference score T-score")]
-    public CqlCode PROMIS_29_Pain_interference_score_T_score(CqlContext context) => 
+    public CqlCode PROMIS_29_Pain_interference_score_T_score(CqlContext context) =>
         new CqlCode("71961-7", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("PROMIS-29 Physical function score T-score")]
-    public CqlCode PROMIS_29_Physical_function_score_T_score(CqlContext context) => 
+    public CqlCode PROMIS_29_Physical_function_score_T_score(CqlContext context) =>
         new CqlCode("71959-1", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("PROMIS-29 Satisfaction with participation in social roles score T-score")]
-    public CqlCode PROMIS_29_Satisfaction_with_participation_in_social_roles_score_T_score(CqlContext context) => 
+    public CqlCode PROMIS_29_Satisfaction_with_participation_in_social_roles_score_T_score(CqlContext context) =>
         new CqlCode("71957-5", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("PROMIS-29 Sleep disturbance score T-score")]
-    public CqlCode PROMIS_29_Sleep_disturbance_score_T_score(CqlContext context) => 
+    public CqlCode PROMIS_29_Sleep_disturbance_score_T_score(CqlContext context) =>
         new CqlCode("71955-9", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Quality of life score [KCCQ]")]
-    public CqlCode Quality_of_life_score__KCCQ_(CqlContext context) => 
+    public CqlCode Quality_of_life_score__KCCQ_(CqlContext context) =>
         new CqlCode("72189-4", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Self-efficacy score [KCCQ]")]
-    public CqlCode Self_efficacy_score__KCCQ_(CqlContext context) => 
+    public CqlCode Self_efficacy_score__KCCQ_(CqlContext context) =>
         new CqlCode("72190-2", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Severe cognitive impairment (finding)")]
-    public CqlCode Severe_cognitive_impairment__finding_(CqlContext context) => 
+    public CqlCode Severe_cognitive_impairment__finding_(CqlContext context) =>
         new CqlCode("702956004", "http://snomed.info/sct", default, default);
 
 
 
     [CqlDeclaration("Social limitation score [KCCQ]")]
-    public CqlCode Social_limitation_score__KCCQ_(CqlContext context) => 
+    public CqlCode Social_limitation_score__KCCQ_(CqlContext context) =>
         new CqlCode("72196-9", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Symptom stability score [KCCQ]")]
-    public CqlCode Symptom_stability_score__KCCQ_(CqlContext context) => 
+    public CqlCode Symptom_stability_score__KCCQ_(CqlContext context) =>
         new CqlCode("72194-4", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Total score [MLHFQ]")]
-    public CqlCode Total_score__MLHFQ_(CqlContext context) => 
+    public CqlCode Total_score__MLHFQ_(CqlContext context) =>
         new CqlCode("71938-5", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Total symptom score [KCCQ]")]
-    public CqlCode Total_symptom_score__KCCQ_(CqlContext context) => 
+    public CqlCode Total_symptom_score__KCCQ_(CqlContext context) =>
         new CqlCode("72191-0", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("VR-12 Mental component summary (MCS) score - oblique method T-score")]
-    public CqlCode VR_12_Mental_component_summary__MCS__score___oblique_method_T_score(CqlContext context) => 
+    public CqlCode VR_12_Mental_component_summary__MCS__score___oblique_method_T_score(CqlContext context) =>
         new CqlCode("72026-8", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("VR-12 Mental component summary (MCS) score - orthogonal method T-score")]
-    public CqlCode VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score(CqlContext context) => 
+    public CqlCode VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score(CqlContext context) =>
         new CqlCode("72028-4", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("VR-12 Physical component summary (PCS) score - oblique method T-score")]
-    public CqlCode VR_12_Physical_component_summary__PCS__score___oblique_method_T_score(CqlContext context) => 
+    public CqlCode VR_12_Physical_component_summary__PCS__score___oblique_method_T_score(CqlContext context) =>
         new CqlCode("72025-0", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("VR-12 Physical component summary (PCS) score - orthogonal method T-score")]
-    public CqlCode VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score(CqlContext context) => 
+    public CqlCode VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score(CqlContext context) =>
         new CqlCode("72027-6", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("VR-36 Mental component summary (MCS) score - oblique method T-score")]
-    public CqlCode VR_36_Mental_component_summary__MCS__score___oblique_method_T_score(CqlContext context) => 
+    public CqlCode VR_36_Mental_component_summary__MCS__score___oblique_method_T_score(CqlContext context) =>
         new CqlCode("71990-6", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("VR-36 Mental component summary (MCS) score - orthogonal method T-score")]
-    public CqlCode VR_36_Mental_component_summary__MCS__score___orthogonal_method_T_score(CqlContext context) => 
+    public CqlCode VR_36_Mental_component_summary__MCS__score___orthogonal_method_T_score(CqlContext context) =>
         new CqlCode("72008-6", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("VR-36 Physical component summary (PCS) score - oblique method T-score")]
-    public CqlCode VR_36_Physical_component_summary__PCS__score___oblique_method_T_score(CqlContext context) => 
+    public CqlCode VR_36_Physical_component_summary__PCS__score___oblique_method_T_score(CqlContext context) =>
         new CqlCode("71989-8", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("VR-36 Physical component summary (PCS) score - orthogonal method T-score")]
-    public CqlCode VR_36_Physical_component_summary__PCS__score___orthogonal_method_T_score(CqlContext context) => 
+    public CqlCode VR_36_Physical_component_summary__PCS__score___orthogonal_method_T_score(CqlContext context) =>
         new CqlCode("72007-8", "http://loinc.org", default, default);
 
 
@@ -411,7 +411,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
             return v_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)?> g_ = context.Operators.Where<(CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)?>(e_, f_);
-        Encounter h_((CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)? tuple_dbnmmzbtissrtndishcesfvih) => 
+        Encounter h_((CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)? tuple_dbnmmzbtissrtndishcesfvih) =>
             tuple_dbnmmzbtissrtndishcesfvih?.OfficeVisit1;
         IEnumerable<Encounter> i_ = context.Operators.Select<(CqlTupleMetadata, Encounter OfficeVisit1, Encounter OfficeVisit2)?, Encounter>(g_, h_);
         IEnumerable<Encounter> j_ = context.Operators.Distinct<Encounter>(i_);
@@ -606,7 +606,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
             return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?>(f_, g_);
-        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? tuple_dzhwgxhmbfavmzfaszbeksohj) => 
+        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)? tuple_dzhwgxhmbfavmzfaszbeksohj) =>
             tuple_dzhwgxhmbfavmzfaszbeksohj?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS10Date, CqlDate FollowupPROMIS10Date)?, Encounter>(h_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
@@ -829,7 +829,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
             return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?>(f_, g_);
-        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? tuple_kmpntxjuhkpbcwgftqigieao) => 
+        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)? tuple_kmpntxjuhkpbcwgftqigieao) =>
             tuple_kmpntxjuhkpbcwgftqigieao?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialPROMIS29Date, CqlDate FollowupPROMIS29Date)?, Encounter>(h_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
@@ -957,7 +957,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
             return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?>(f_, g_);
-        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? tuple_fppktdiagiekhptnsbacpswh) => 
+        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)? tuple_fppktdiagiekhptnsbacpswh) =>
             tuple_fppktdiagiekhptnsbacpswh?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12ObliqueDate, CqlDate FollowupVR12ObliqueDate)?, Encounter>(h_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
@@ -1085,7 +1085,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
             return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?>(f_, g_);
-        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? tuple_fansvmjaedmvsdoyrozxdlsai) => 
+        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)? tuple_fansvmjaedmvsdoyrozxdlsai) =>
             tuple_fansvmjaedmvsdoyrozxdlsai?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR12OrthogonalDate, CqlDate FollowupVR12OrthogonalDate)?, Encounter>(h_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
@@ -1213,7 +1213,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
             return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?>(f_, g_);
-        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? tuple_elxicyhrdpyzpqyjphdifbiga) => 
+        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)? tuple_elxicyhrdpyzpqyjphdifbiga) =>
             tuple_elxicyhrdpyzpqyjphdifbiga?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36ObliqueDate, CqlDate FollowupVR36ObliqueDate)?, Encounter>(h_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
@@ -1341,7 +1341,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
             return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?>(f_, g_);
-        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? tuple_fucqujadjizabihdffformht) => 
+        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)? tuple_fucqujadjizabihdffformht) =>
             tuple_fucqujadjizabihdffformht?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialVR36OrthogonalDate, CqlDate FollowupVR36OrthogonalDate)?, Encounter>(h_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
@@ -1469,7 +1469,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
             return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?>(f_, g_);
-        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? tuple_ncdawctnmbfmtibmihsfbaig) => 
+        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)? tuple_ncdawctnmbfmtibmihsfbaig) =>
             tuple_ncdawctnmbfmtibmihsfbaig?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialMLHFQDate, CqlDate FollowupMLHFQDate)?, Encounter>(h_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
@@ -1597,7 +1597,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
             return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?>(f_, g_);
-        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? tuple_eoahgtwwdfqijhcjzqnvidvuo) => 
+        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)? tuple_eoahgtwwdfqijhcjzqnvidvuo) =>
             tuple_eoahgtwwdfqijhcjzqnvidvuo?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQ12Date, CqlDate FollowupKCCQ12Date)?, Encounter>(h_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
@@ -1801,7 +1801,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
             return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?>(f_, g_);
-        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? tuple_hrluhbcfcsvnvrrnjajahdcea) => 
+        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)? tuple_hrluhbcfcsvnvrrnjajahdcea) =>
             tuple_hrluhbcfcsvnvrrnjajahdcea?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQAssessmentDate, CqlDate FollowupKCCQAssessmentDate)?, Encounter>(h_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
@@ -1901,7 +1901,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
             return bc_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?>(f_, g_);
-        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? tuple_dgrojeekdvizsvyisepdjhjgj) => 
+        Encounter i_((CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)? tuple_dgrojeekdvizsvyisepdjhjgj) =>
             tuple_dgrojeekdvizsvyisepdjhjgj?.ValidEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter ValidEncounters, CqlDate InitialKCCQTotalScore, CqlDate FollowupKCCQTotalScore)?, Encounter>(h_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
@@ -1939,13 +1939,93 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_DbNMMZBTISSRTNdiShceSFVih = new(
-        [typeof(Encounter), typeof(Encounter)],
-        ["OfficeVisit1", "OfficeVisit2"]);
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
+        [typeof(CqlDate)],
+        ["AntidepressantDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
+        [typeof(Observation), typeof(Encounter)],
+        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["QualifyingEncounters", "URI"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
+        [typeof(string), typeof(int?)],
+        ["EncounterID", "CalculatedCGA"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EMDhFLcFhWVERAVVNfLAZYXJi = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["DTaPVaccination1", "DTaPVaccination2", "DTaPVaccination3", "DTaPVaccination4"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CNGHaZROXaJTHPICcbIaJbRXV = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["PolioVaccination1", "PolioVaccination2", "PolioVaccination3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EZTgahAUWGgSdGaDCgQNNIPGW = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["HepatitisBVaccination1", "HepatitisBVaccination2", "HepatitisBVaccination3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HDfaMbZGBWDPFETGQNFbceEeg = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["HepatitisBVaccination1", "HepatitisBVaccination2", "NewBornVaccine3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DdPDeOJhPYESfHGCOcBNOiPPP = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["PneumococcalVaccination1", "PneumococcalVaccination2", "PneumococcalVaccination3", "PneumococcalVaccination4"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZhFLeRDagbPQMNheVJcUNfNQ = new(
+        [typeof(CqlDate), typeof(CqlDate)],
+        ["FluVaccination1", "FluVaccination2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb = new(
+        [typeof(string), typeof(CqlDateTime)],
+        ["ID", "AuthorDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FOBYUiHifSfYFYhEEQajgLbgF = new(
+        [typeof(CqlQuantity), typeof(Observation)],
+        ["QualifyingGlycemicStatusValue", "QualifyingGlycemicStatus"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CVELXTjiMTaGQEjMfJXBdUHjW = new(
+        [typeof(CqlDate)],
+        ["startDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD = new(
+        [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
+        ["period", "periodStart"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GVNUVHGXYWXVGgfjdTEahUfhP = new(
+        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
+        ["HOOSLifeQuality", "HOOSSport", "HOOSActivityScore", "HOOSSymptoms", "HOOSPain"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DDTAOdcFieSJbGgRLLZPYbGQb = new(
         [typeof(Observation), typeof(Observation)],
         ["PROMIS10MentalScore", "PROMIS10PhysicalScore"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH = new(
+        [typeof(Observation), typeof(Observation)],
+        ["VR12MentalAssessment", "VR12PhysicalAssessment"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DbNMMZBTISSRTNdiShceSFVih = new(
+        [typeof(Encounter), typeof(Encounter)],
+        ["OfficeVisit1", "OfficeVisit2"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_BGYjYGLNPKWAZTBCVAdLDDTMj = new(
         [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
@@ -1958,10 +2038,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     private static CqlTupleMetadata CqlTupleMetadata_DSZKEYVbCINNIeAQiZdVaEJhG = new(
         [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
         ["ValidEncounters", "InitialPROMIS29Date", "FollowupPROMIS29Date"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH = new(
-        [typeof(Observation), typeof(Observation)],
-        ["VR12MentalAssessment", "VR12PhysicalAssessment"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FQKGdEYLiDFGMNAUAMETIHUQT = new(
         [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],

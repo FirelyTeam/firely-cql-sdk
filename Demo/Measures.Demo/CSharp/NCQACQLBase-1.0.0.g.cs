@@ -1385,6 +1385,14 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
     }
 
 
+    private static CqlTupleMetadata CqlTupleMetadata_EaLaedgLDgRRYaLbKIIcBTOiA = new(
+        [typeof(Encounter), typeof(Encounter)],
+        ["OutpatientEncounter1", "OutpatientEncounter2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CgaDVOXeQBMgMPCPZOThIIdDb = new(
+        [typeof(CqlInterval<CqlDateTime>), typeof(CqlInterval<CqlDateTime>)],
+        ["LTCPeriod1", "LTCPeriod2"]);
+
     private static CqlTupleMetadata CqlTupleMetadata_GIMHfXDcFiAjSJBDGYeUeZLhW = new(
         [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
         ["interval", "startOfInterval"]);

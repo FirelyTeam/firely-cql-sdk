@@ -31,40 +31,40 @@ public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<Sup
 
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
-    public CqlValueSet Ethnicity(CqlContext context) => 
+    public CqlValueSet Ethnicity(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", default);
 
 
 
     [CqlDeclaration("ONC Administrative Sex")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1")]
-    public CqlValueSet ONC_Administrative_Sex(CqlContext context) => 
+    public CqlValueSet ONC_Administrative_Sex(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", default);
 
 
 
     [CqlDeclaration("Payer Type")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591")]
-    public CqlValueSet Payer_Type(CqlContext context) => 
+    public CqlValueSet Payer_Type(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", default);
 
 
 
     [CqlDeclaration("Race")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836")]
-    public CqlValueSet Race(CqlContext context) => 
+    public CqlValueSet Race(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", default);
 
 
 
     [CqlDeclaration("M")]
-    public CqlCode M(CqlContext context) => 
+    public CqlCode M(CqlContext context) =>
         new CqlCode("M", "http://hl7.org/fhir/administrative-gender", default, default);
 
 
 
     [CqlDeclaration("F")]
-    public CqlCode F(CqlContext context) => 
+    public CqlCode F(CqlContext context) =>
         new CqlCode("F", "http://hl7.org/fhir/administrative-gender", default, default);
 
 
@@ -412,6 +412,10 @@ public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<Sup
         return a_();
     }
 
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
         [typeof(IEnumerable<CqlCode>), typeof(string)],

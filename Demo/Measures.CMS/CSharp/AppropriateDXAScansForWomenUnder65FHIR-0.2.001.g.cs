@@ -31,354 +31,354 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
     [CqlDeclaration("Amenorrhea")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1022")]
-    public CqlValueSet Amenorrhea(CqlContext context) => 
+    public CqlValueSet Amenorrhea(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1022", default);
 
 
 
     [CqlDeclaration("Ankylosing Spondylitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1045")]
-    public CqlValueSet Ankylosing_Spondylitis(CqlContext context) => 
+    public CqlValueSet Ankylosing_Spondylitis(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1045", default);
 
 
 
     [CqlDeclaration("Aromatase Inhibitors")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1265")]
-    public CqlValueSet Aromatase_Inhibitors(CqlContext context) => 
+    public CqlValueSet Aromatase_Inhibitors(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1265", default);
 
 
 
     [CqlDeclaration("Bilateral Oophorectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.471")]
-    public CqlValueSet Bilateral_Oophorectomy(CqlContext context) => 
+    public CqlValueSet Bilateral_Oophorectomy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.471", default);
 
 
 
     [CqlDeclaration("Bone Marrow Transplant")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.336")]
-    public CqlValueSet Bone_Marrow_Transplant(CqlContext context) => 
+    public CqlValueSet Bone_Marrow_Transplant(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.336", default);
 
 
 
     [CqlDeclaration("Chemotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.485")]
-    public CqlValueSet Chemotherapy(CqlContext context) => 
+    public CqlValueSet Chemotherapy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.485", default);
 
 
 
     [CqlDeclaration("Chronic Liver Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1035")]
-    public CqlValueSet Chronic_Liver_Disease(CqlContext context) => 
+    public CqlValueSet Chronic_Liver_Disease(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1035", default);
 
 
 
     [CqlDeclaration("Chronic Malnutrition")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1036")]
-    public CqlValueSet Chronic_Malnutrition(CqlContext context) => 
+    public CqlValueSet Chronic_Malnutrition(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1036", default);
 
 
 
     [CqlDeclaration("Cushings Syndrome")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1009")]
-    public CqlValueSet Cushings_Syndrome(CqlContext context) => 
+    public CqlValueSet Cushings_Syndrome(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1009", default);
 
 
 
     [CqlDeclaration("DXA (Dual energy Xray Absorptiometry) Scan")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1051")]
-    public CqlValueSet DXA__Dual_energy_Xray_Absorptiometry__Scan(CqlContext context) => 
+    public CqlValueSet DXA__Dual_energy_Xray_Absorptiometry__Scan(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1051", default);
 
 
 
     [CqlDeclaration("Eating Disorders")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1039")]
-    public CqlValueSet Eating_Disorders(CqlContext context) => 
+    public CqlValueSet Eating_Disorders(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1039", default);
 
 
 
     [CqlDeclaration("Ehlers Danlos Syndrome")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1047")]
-    public CqlValueSet Ehlers_Danlos_Syndrome(CqlContext context) => 
+    public CqlValueSet Ehlers_Danlos_Syndrome(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1047", default);
 
 
 
     [CqlDeclaration("End Stage Renal Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353")]
-    public CqlValueSet End_Stage_Renal_Disease(CqlContext context) => 
+    public CqlValueSet End_Stage_Renal_Disease(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353", default);
 
 
 
     [CqlDeclaration("Evidence of Bilateral Oophorectomy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1048")]
-    public CqlValueSet Evidence_of_Bilateral_Oophorectomy(CqlContext context) => 
+    public CqlValueSet Evidence_of_Bilateral_Oophorectomy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1048", default);
 
 
 
     [CqlDeclaration("Gastric Bypass Surgery")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1050")]
-    public CqlValueSet Gastric_Bypass_Surgery(CqlContext context) => 
+    public CqlValueSet Gastric_Bypass_Surgery(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1050", default);
 
 
 
     [CqlDeclaration("Glucocorticoids (oral only)")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1266")]
-    public CqlValueSet Glucocorticoids__oral_only_(CqlContext context) => 
+    public CqlValueSet Glucocorticoids__oral_only_(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1266", default);
 
 
 
     [CqlDeclaration("History of hip fracture in parent")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1040")]
-    public CqlValueSet History_of_hip_fracture_in_parent(CqlContext context) => 
+    public CqlValueSet History_of_hip_fracture_in_parent(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1040", default);
 
 
 
     [CqlDeclaration("Hyperparathyroidism")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1016")]
-    public CqlValueSet Hyperparathyroidism(CqlContext context) => 
+    public CqlValueSet Hyperparathyroidism(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1016", default);
 
 
 
     [CqlDeclaration("Hyperthyroidism")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1015")]
-    public CqlValueSet Hyperthyroidism(CqlContext context) => 
+    public CqlValueSet Hyperthyroidism(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1015", default);
 
 
 
     [CqlDeclaration("Kidney Transplant")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1012")]
-    public CqlValueSet Kidney_Transplant(CqlContext context) => 
+    public CqlValueSet Kidney_Transplant(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1012", default);
 
 
 
     [CqlDeclaration("Lupus")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1010")]
-    public CqlValueSet Lupus(CqlContext context) => 
+    public CqlValueSet Lupus(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1010", default);
 
 
 
     [CqlDeclaration("Major Transplant")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1075")]
-    public CqlValueSet Major_Transplant(CqlContext context) => 
+    public CqlValueSet Major_Transplant(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1075", default);
 
 
 
     [CqlDeclaration("Malabsorption Syndromes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1050")]
-    public CqlValueSet Malabsorption_Syndromes(CqlContext context) => 
+    public CqlValueSet Malabsorption_Syndromes(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1050", default);
 
 
 
     [CqlDeclaration("Marfan's Syndrome")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1048")]
-    public CqlValueSet Marfans_Syndrome(CqlContext context) => 
+    public CqlValueSet Marfans_Syndrome(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1048", default);
 
 
 
     [CqlDeclaration("Multiple Myeloma")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1011")]
-    public CqlValueSet Multiple_Myeloma(CqlContext context) => 
+    public CqlValueSet Multiple_Myeloma(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1011", default);
 
 
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-    public CqlValueSet Office_Visit(CqlContext context) => 
+    public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
 
 
     [CqlDeclaration("Osteogenesis Imperfecta")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1044")]
-    public CqlValueSet Osteogenesis_Imperfecta(CqlContext context) => 
+    public CqlValueSet Osteogenesis_Imperfecta(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1044", default);
 
 
 
     [CqlDeclaration("Osteopenia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1049")]
-    public CqlValueSet Osteopenia(CqlContext context) => 
+    public CqlValueSet Osteopenia(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1049", default);
 
 
 
     [CqlDeclaration("Osteoporosis Without Current Fracture")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1038")]
-    public CqlValueSet Osteoporosis_Without_Current_Fracture(CqlContext context) => 
+    public CqlValueSet Osteoporosis_Without_Current_Fracture(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1038", default);
 
 
 
     [CqlDeclaration("Osteoporosis With Current Fracture")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1050")]
-    public CqlValueSet Osteoporosis_With_Current_Fracture(CqlContext context) => 
+    public CqlValueSet Osteoporosis_With_Current_Fracture(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1050", default);
 
 
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-    public CqlValueSet Outpatient_Consultation(CqlContext context) => 
+    public CqlValueSet Outpatient_Consultation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
 
 
     [CqlDeclaration("Premature Menopause")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1013")]
-    public CqlValueSet Premature_Menopause(CqlContext context) => 
+    public CqlValueSet Premature_Menopause(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1013", default);
 
 
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-    public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
 
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
 
 
     [CqlDeclaration("Psoriatic Arthritis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1046")]
-    public CqlValueSet Psoriatic_Arthritis(CqlContext context) => 
+    public CqlValueSet Psoriatic_Arthritis(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1046", default);
 
 
 
     [CqlDeclaration("Rheumatoid Arthritis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1005")]
-    public CqlValueSet Rheumatoid_Arthritis(CqlContext context) => 
+    public CqlValueSet Rheumatoid_Arthritis(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1005", default);
 
 
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-    public CqlValueSet Telephone_Visits(CqlContext context) => 
+    public CqlValueSet Telephone_Visits(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
 
 
     [CqlDeclaration("Type 1 Diabetes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1020")]
-    public CqlValueSet Type_1_Diabetes(CqlContext context) => 
+    public CqlValueSet Type_1_Diabetes(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1020", default);
 
 
 
     [CqlDeclaration("Unilateral Oophorectomy Left")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1028")]
-    public CqlValueSet Unilateral_Oophorectomy_Left(CqlContext context) => 
+    public CqlValueSet Unilateral_Oophorectomy_Left(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1028", default);
 
 
 
     [CqlDeclaration("Unilateral Oophorectomy Right")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1032")]
-    public CqlValueSet Unilateral_Oophorectomy_Right(CqlContext context) => 
+    public CqlValueSet Unilateral_Oophorectomy_Right(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1032", default);
 
 
 
     [CqlDeclaration("Unilateral Oophorectomy, Unspecified Laterality")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1035")]
-    public CqlValueSet Unilateral_Oophorectomy__Unspecified_Laterality(CqlContext context) => 
+    public CqlValueSet Unilateral_Oophorectomy__Unspecified_Laterality(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1035", default);
 
 
 
     [CqlDeclaration("Virtual Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-    public CqlValueSet Virtual_Encounter(CqlContext context) => 
+    public CqlValueSet Virtual_Encounter(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
 
 
     [CqlDeclaration("Alcoholic drinks per day")]
-    public CqlCode Alcoholic_drinks_per_day(CqlContext context) => 
+    public CqlCode Alcoholic_drinks_per_day(CqlContext context) =>
         new CqlCode("74013-4", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Body mass index (BMI) [Ratio]")]
-    public CqlCode Body_mass_index__BMI___Ratio_(CqlContext context) => 
+    public CqlCode Body_mass_index__BMI___Ratio_(CqlContext context) =>
         new CqlCode("39156-5", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Female")]
-    public CqlCode Female(CqlContext context) => 
+    public CqlCode Female(CqlContext context) =>
         new CqlCode("F", "http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender", default, default);
 
 
 
     [CqlDeclaration("Left (qualifier value)")]
-    public CqlCode Left__qualifier_value_(CqlContext context) => 
+    public CqlCode Left__qualifier_value_(CqlContext context) =>
         new CqlCode("7771000", "http://snomed.info/sct", default, default);
 
 
 
     [CqlDeclaration("Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment")]
-    public CqlCode Major_osteoporotic_fracture_10_year_probability__Likelihood__Fracture_Risk_Assessment(CqlContext context) => 
+    public CqlCode Major_osteoporotic_fracture_10_year_probability__Likelihood__Fracture_Risk_Assessment(CqlContext context) =>
         new CqlCode("90265-0", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Osteoporosis Index of Risk panel")]
-    public CqlCode Osteoporosis_Index_of_Risk_panel(CqlContext context) => 
+    public CqlCode Osteoporosis_Index_of_Risk_panel(CqlContext context) =>
         new CqlCode("98133-2", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Osteoporosis Risk Assessment Instrument")]
-    public CqlCode Osteoporosis_Risk_Assessment_Instrument(CqlContext context) => 
+    public CqlCode Osteoporosis_Risk_Assessment_Instrument(CqlContext context) =>
         new CqlCode("98139-9", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Osteoporosis Self-Assessment Tool")]
-    public CqlCode Osteoporosis_Self_Assessment_Tool(CqlContext context) => 
+    public CqlCode Osteoporosis_Self_Assessment_Tool(CqlContext context) =>
         new CqlCode("98146-4", "http://loinc.org", default, default);
 
 
 
     [CqlDeclaration("Right (qualifier value)")]
-    public CqlCode Right__qualifier_value_(CqlContext context) => 
+    public CqlCode Right__qualifier_value_(CqlContext context) =>
         new CqlCode("24028007", "http://snomed.info/sct", default, default);
 
 
 
     [CqlDeclaration("Unlisted preventive medicine service")]
-    public CqlCode Unlisted_preventive_medicine_service(CqlContext context) => 
+    public CqlCode Unlisted_preventive_medicine_service(CqlContext context) =>
         new CqlCode("99429", "http://www.ama-assn.org/go/cpt", default, default);
 
 
@@ -1267,5 +1267,21 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         return b_;
     }
 
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
+        [typeof(CqlDate)],
+        ["AntidepressantDate"]);
 
 }

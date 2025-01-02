@@ -31,20 +31,20 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
     [CqlDeclaration("Encounter to Document Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1834")]
-    public CqlValueSet Encounter_to_Document_Medications(CqlContext context) => 
+    public CqlValueSet Encounter_to_Document_Medications(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1834", default);
 
 
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
-    public CqlValueSet Medical_Reason(CqlContext context) => 
+    public CqlValueSet Medical_Reason(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
 
 
 
     [CqlDeclaration("Documentation of current medications (procedure)")]
-    public CqlCode Documentation_of_current_medications__procedure_(CqlContext context) => 
+    public CqlCode Documentation_of_current_medications__procedure_(CqlContext context) =>
         new CqlCode("428191000124101", "http://snomed.info/sct", default, default);
 
 
@@ -198,7 +198,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                 return v_;
             };
             IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
-            Encounter i_(Procedure MedicationsDocumented) => 
+            Encounter i_(Procedure MedicationsDocumented) =>
                 QualifyingEncounter;
             IEnumerable<Encounter> j_ = context.Operators.Select<Procedure, Encounter>(h_, i_);
 
@@ -266,7 +266,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                 return ad_;
             };
             IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
-            Encounter i_(Procedure MedicationsNotDocumented) => 
+            Encounter i_(Procedure MedicationsNotDocumented) =>
                 QualifyingEncounter;
             IEnumerable<Encounter> j_ = context.Operators.Select<Procedure, Encounter>(h_, i_);
 
@@ -277,5 +277,17 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
         return c_;
     }
 
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
 
 }
