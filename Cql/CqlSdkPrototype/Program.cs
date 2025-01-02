@@ -1,14 +1,20 @@
 ﻿using System.Runtime.CompilerServices;
 using System.Runtime.Loader;
+using System.Text;
 using CqlSdkPrototype.CqlToElm;
 using CqlSdkPrototype.ElmToAssembly;
 using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Logging;
 using CqlSdkPrototype.Runtime;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Fhir;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using static System.FormattableString;
 
 namespace CqlSdkPrototype;
 
@@ -95,7 +101,24 @@ internal class Program
         CqlTranslator cqlTranslation,
         ElmCompiler elmCompilation)
     {
-        LibrarySetInvoker.Run(serviceProvider, cqlTranslation, elmCompilation);
+        var logger = serviceProvider.GetLogger<Program>();
+        if (LibrarySetInvoker.TryCreate(out var librarySetInvoker, cqlTranslation, elmCompilation, logger))
+        {
+            StringBuilder sb = new();
+            sb.AppendLine("Libraries and Declarations:");
+            foreach (var (libId, lib) in librarySetInvoker.LibraryInvokers)
+            {
+                sb.AppendLine(Invariant($"- {libId}"));
+                foreach (var (declId, decl) in lib.Declarations)
+                    sb.AppendLine(Invariant($"  - {declId} : {decl.ReturnType.ToCSharpString(TypeCSharpFormat.Default with {UseKeywords = true})}"));
+            }
+            logger.LogInformation("{msg}", sb.ToString());
+
+            CqlContext cqlContext = FhirCqlContext.ForBundle();
+            var devDays = librarySetInvoker.LibraryInvokers[CqlVersionedLibraryIdentifier.Parse("DevDays-2023.0.0")];
+            var patientDeclaration = devDays.Declarations["Patient"];
+            var patient = patientDeclaration.Invoke(cqlContext);
+        }
     }
 
     private static ServiceProvider BuildServiceProvider()

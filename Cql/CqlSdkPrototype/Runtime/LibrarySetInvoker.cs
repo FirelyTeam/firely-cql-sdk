@@ -6,10 +6,6 @@ using CqlSdkPrototype.CqlToElm;
 using CqlSdkPrototype.ElmToAssembly;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Fhir;
-using Hl7.Cql.Runtime;
-using Hl7.Cql.Runtime.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Runtime;
@@ -43,22 +39,6 @@ public partial class LibrarySetInvoker : IDisposable
 
 partial class LibrarySetInvoker
 {
-    public static void Run(
-        ServiceProvider serviceProvider,
-        CqlTranslator cqlTranslation,
-        ElmCompiler elmCompilation)
-    {
-        var logger = serviceProvider.GetLogger<Program>();
-        logger.LogInformation("Executing");
-        if (TryCreate(out var librarySetInvoker, cqlTranslation, elmCompilation, logger))
-        {
-            CqlContext cqlContext = FhirCqlContext.ForBundle();
-            var devDays = librarySetInvoker.LibraryInvokers[CqlVersionedLibraryIdentifier.Parse("DevDays-2023.0.0")];
-            var patientDeclaration = devDays.Declarations["Patient"];
-            var patient = patientDeclaration.Invoke(cqlContext);
-        }
-    }
-
     public static bool TryCreate(
         [NotNullWhen(true)] out LibrarySetInvoker? librarySetInvoker,
         CqlTranslator cqlTranslation,

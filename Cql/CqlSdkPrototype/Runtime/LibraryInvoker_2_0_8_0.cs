@@ -10,17 +10,6 @@ namespace CqlSdkPrototype.Runtime;
 
 public class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
 {
-    private record LibraryDeclarationInvoker_2_0_8_0(
-        string DeclarationName,
-        ILibrary Library,
-        MethodInfo MethodInfo) : LibraryDeclarationInvoker(DeclarationName)
-    {
-        public override object? Invoke(CqlContext cqlContext)
-        {
-            return InvokeMethod(Library, MethodInfo, [cqlContext]);
-        }
-    }
-
     private record LibraryMethodInfo(MethodInfo Method, string? ValueSetId, string? DeclarationName)
     {
         public LibraryMethodInfo(MethodInfo Method) : this(
@@ -38,10 +27,23 @@ public class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
                                  .SelectToArray(m => new LibraryMethodInfo(m));
         Declarations = libraryMethodInfos
                        .SelectWhereNotNull(o => o.DeclarationName is { } declarationName
+                                                && o.Method.GetParameters() is [{ } p0]
+                                                && p0.ParameterType == typeof(CqlContext)
                                                     ? (LibraryDeclarationInvoker)new LibraryDeclarationInvoker_2_0_8_0(declarationName, Library, o.Method)
                                                     : null)
                        .ToImmutableDictionary(o => o.DeclarationName);
     }
 
     public override IReadOnlyDictionary<string, LibraryDeclarationInvoker> Declarations { get; }
+}
+
+public class LibraryDeclarationInvoker_2_0_8_0(
+    string declarationName,
+    ILibrary library,
+    MethodInfo methodInfo) : LibraryDeclarationInvoker(declarationName, library, methodInfo)
+{
+    public override object? Invoke(CqlContext cqlContext)
+    {
+        return InvokeMethod(cqlContext);
+    }
 }

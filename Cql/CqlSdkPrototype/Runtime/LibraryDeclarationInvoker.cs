@@ -5,16 +5,22 @@ using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Runtime;
 
-public abstract record LibraryDeclarationInvoker(string DeclarationName)
+public abstract class LibraryDeclarationInvoker(
+    string declarationName,
+    ILibrary library,
+    MethodInfo methodInfo)
 {
+    public string DeclarationName { get; } = declarationName;
+    public Type ReturnType => MethodInfo.ReturnType;
+
+    protected ILibrary Library { get; } = library;
+    protected MethodInfo MethodInfo { get; } = methodInfo;
+
     public abstract object? Invoke(CqlContext cqlContext);
 
-    protected static object? InvokeMethod(
-        ILibrary library,
-        MethodInfo methodInfo,
-        object?[] parameters)
+    protected object? InvokeMethod(params object?[] parameters)
     {
-        var result = methodInfo.Invoke(library, BindingFlags.DoNotWrapExceptions, null, parameters, CultureInfo.InvariantCulture);
+        var result = MethodInfo.Invoke(Library, BindingFlags.DoNotWrapExceptions, null, parameters, CultureInfo.InvariantCulture);
         return result;
     }
 }
