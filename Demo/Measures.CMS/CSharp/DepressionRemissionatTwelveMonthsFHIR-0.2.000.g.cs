@@ -12,6 +12,9 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
+[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("DepressionRemissionatTwelveMonthsFHIR", "0.2.000")]
+[assembly: AssemblyVersion("2.0.8.0")]
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("DepressionRemissionatTwelveMonthsFHIR", "0.2.000")]
 public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, ISingleton<DepressionRemissionatTwelveMonthsFHIR_0_2_000>
@@ -32,10 +35,12 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.128", default);
 
 
+
     [CqlDeclaration("Contact or Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1080.5")]
     public CqlValueSet Contact_or_Office_Visit(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1080.5", default);
+
 
 
     [CqlDeclaration("Dysthymia")]
@@ -44,10 +49,12 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.254", default);
 
 
+
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
     public CqlValueSet Encounter_Inpatient(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
+
 
 
     [CqlDeclaration("Hospice Care Ambulatory")]
@@ -56,10 +63,12 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", default);
 
 
+
     [CqlDeclaration("Hospice Diagnosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1165")]
     public CqlValueSet Hospice_Diagnosis(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1165", default);
+
 
 
     [CqlDeclaration("Hospice Encounter")]
@@ -68,10 +77,12 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1003", default);
 
 
+
     [CqlDeclaration("Major Depression Including Remission")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.113883.3.67.1.101.3.2444")]
     public CqlValueSet Major_Depression_Including_Remission(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.113883.3.67.1.101.3.2444", default);
+
 
 
     [CqlDeclaration("Palliative Care Diagnosis")]
@@ -80,10 +91,12 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1167", default);
 
 
+
     [CqlDeclaration("Palliative Care Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090")]
     public CqlValueSet Palliative_Care_Encounter(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090", default);
+
 
 
     [CqlDeclaration("Palliative Care Intervention")]
@@ -92,10 +105,12 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1135", default);
 
 
+
     [CqlDeclaration("Palliative or Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579")]
     public CqlValueSet Palliative_or_Hospice_Care(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579", default);
+
 
 
     [CqlDeclaration("Personality Disorder Emotionally Labile")]
@@ -104,10 +119,12 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.246", default);
 
 
+
     [CqlDeclaration("Pervasive Developmental Disorder")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1152")]
     public CqlValueSet Pervasive_Developmental_Disorder(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1152", default);
+
 
 
     [CqlDeclaration("PHQ 9 and PHQ 9M Tools")]
@@ -116,10 +133,12 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.263", default);
 
 
+
     [CqlDeclaration("Schizophrenia or Psychotic Disorder")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1104")]
     public CqlValueSet Schizophrenia_or_Psychotic_Disorder(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1104", default);
+
 
 
     [CqlDeclaration("Discharge to healthcare facility for hospice care (procedure)")]
@@ -127,9 +146,11 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
         new CqlCode("428371000124100", "http://snomed.info/sct", default, default);
 
 
+
     [CqlDeclaration("Discharge to home for hospice care (procedure)")]
     public CqlCode Discharge_to_home_for_hospice_care__procedure_(CqlContext context) => 
         new CqlCode("428361000124107", "http://snomed.info/sct", default, default);
+
 
 
     [CqlDeclaration("Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)")]
@@ -137,14 +158,17 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
         new CqlCode("71007-9", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("Hospice care [Minimum Data Set]")]
     public CqlCode Hospice_care__Minimum_Data_Set_(CqlContext context) => 
         new CqlCode("45755-6", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("Yes (qualifier value)")]
     public CqlCode Yes__qualifier_value_(CqlContext context) => 
         new CqlCode("373066001", "http://snomed.info/sct", default, default);
+
 
 
     [CqlDeclaration("LOINC")]
@@ -157,6 +181,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SNOMEDCT")]
@@ -172,6 +197,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("ConditionVerificationStatusCodes")]
     public CqlCode[] ConditionVerificationStatusCodes(CqlContext context)
     {
@@ -180,6 +206,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -194,6 +221,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -202,6 +230,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
 
         return b_;
     }
+
 
 
     [CqlDeclaration("Depression Assessments Greater than 9")]
@@ -233,6 +262,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
         return d_;
     }
 
+
     public bool? isConfirmedActiveDiagnosis(CqlContext context, Condition condition)
     {
         bool? a_ = QICoreCommon_2_1_000.Instance.isActive(context, condition);
@@ -245,6 +275,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
 
         return g_;
     }
+
 
 
     [CqlDeclaration("Depression Diagnoses")]
@@ -267,6 +298,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("Denominator Identification Period")]
     public CqlInterval<CqlDateTime> Denominator_Identification_Period(CqlContext context)
     {
@@ -281,6 +313,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
 
         return i_;
     }
+
 
 
     [CqlDeclaration("Depression Encounter")]
@@ -321,6 +354,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
 
         return d_;
     }
+
 
 
     [CqlDeclaration("Index Depression Assessment")]
@@ -373,6 +407,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -392,6 +427,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -399,6 +435,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Measure Assessment Period")]
@@ -435,6 +472,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
 
         return f_;
     }
+
 
 
     [CqlDeclaration("Has Hospice Services in the Measure Assessment Period")]
@@ -648,6 +686,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("Has Palliative Care in the Measure Assessment Period")]
     public bool? Has_Palliative_Care_in_the_Measure_Assessment_Period(CqlContext context)
     {
@@ -762,6 +801,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("Patient Expired")]
     public bool? Patient_Expired(CqlContext context)
     {
@@ -775,6 +815,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
 
         return g_;
     }
+
 
 
     [CqlDeclaration("Has Mental Health Disorder Diagnoses")]
@@ -811,6 +852,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
@@ -824,6 +866,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
 
         return g_;
     }
+
 
 
     [CqlDeclaration("Numerator")]
@@ -874,6 +917,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -881,6 +925,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Payer")]
@@ -892,6 +937,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -901,6 +947,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -908,5 +955,6 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
 
         return a_;
     }
+
 
 }

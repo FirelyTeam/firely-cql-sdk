@@ -12,6 +12,9 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
+[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("HFBetaBlockerTherapyforLVSDFHIR", "1.4.000")]
+[assembly: AssemblyVersion("2.0.8.0")]
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("HFBetaBlockerTherapyforLVSDFHIR", "1.4.000")]
 public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingleton<HFBetaBlockerTherapyforLVSDFHIR_1_4_000>
@@ -32,10 +35,12 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1177", default);
 
 
+
     [CqlDeclaration("Arrhythmia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.366")]
     public CqlValueSet Arrhythmia(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.366", default);
+
 
 
     [CqlDeclaration("Asthma")]
@@ -44,10 +49,12 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.362", default);
 
 
+
     [CqlDeclaration("Atrioventricular Block")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.367")]
     public CqlValueSet Atrioventricular_Block(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.367", default);
+
 
 
     [CqlDeclaration("Beta Blocker Therapy for LVSD")]
@@ -56,10 +63,12 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1184", default);
 
 
+
     [CqlDeclaration("Beta Blocker Therapy Ingredient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1493")]
     public CqlValueSet Beta_Blocker_Therapy_Ingredient(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1493", default);
+
 
 
     [CqlDeclaration("Bradycardia")]
@@ -68,10 +77,12 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.412", default);
 
 
+
     [CqlDeclaration("Cardiac Pacer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.53")]
     public CqlValueSet Cardiac_Pacer(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.53", default);
+
 
 
     [CqlDeclaration("Cardiac Pacer in Situ")]
@@ -80,10 +91,12 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.368", default);
 
 
+
     [CqlDeclaration("Hypotension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.370")]
     public CqlValueSet Hypotension(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.370", default);
+
 
 
     [CqlDeclaration("Intolerance to Beta Blocker Therapy")]
@@ -92,10 +105,12 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1178", default);
 
 
+
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
     public CqlValueSet Medical_Reason(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
+
 
 
     [CqlDeclaration("Patient Reason")]
@@ -104,9 +119,11 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008", default);
 
 
+
     [CqlDeclaration("Substance with beta adrenergic receptor antagonist mechanism of action (substance)")]
     public CqlCode Substance_with_beta_adrenergic_receptor_antagonist_mechanism_of_action__substance_(CqlContext context) => 
         new CqlCode("373254001", "http://snomed.info/sct", default, default);
+
 
 
     [CqlDeclaration("SNOMEDCT")]
@@ -118,6 +135,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -132,6 +150,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -142,6 +161,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -149,6 +169,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Denominator")]
@@ -161,6 +182,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return d_;
     }
+
 
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -176,6 +198,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return g_;
     }
+
 
 
     [CqlDeclaration("Has Beta Blocker Therapy for LVSD Ordered")]
@@ -198,6 +221,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Is Currently Taking Beta Blocker Therapy for LVSD")]
     public bool? Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD(CqlContext context)
     {
@@ -218,6 +242,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -227,6 +252,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Has Consecutive Heart Rates Less than 50")]
@@ -314,6 +340,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Has Hypotension Diagnosis")]
     public bool? Has_Hypotension_Diagnosis(CqlContext context)
     {
@@ -334,6 +361,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Has Asthma Diagnosis")]
     public bool? Has_Asthma_Diagnosis(CqlContext context)
     {
@@ -352,6 +380,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return e_;
     }
+
 
 
     [CqlDeclaration("Has Diagnosis of Allergy or Intolerance to Beta Blocker Therapy")]
@@ -377,6 +406,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Has Bradycardia Diagnosis")]
     public bool? Has_Bradycardia_Diagnosis(CqlContext context)
     {
@@ -395,6 +425,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return e_;
     }
+
 
 
     [CqlDeclaration("Has Allergy or Intolerance to Beta Blocker Therapy Ingredient")]
@@ -427,6 +458,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Has Atrioventricular Block Diagnosis")]
     public bool? Has_Atrioventricular_Block_Diagnosis(CqlContext context)
     {
@@ -447,6 +479,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Has Diagnosis of Cardiac Pacer in Situ")]
     public bool? Has_Diagnosis_of_Cardiac_Pacer_in_Situ(CqlContext context)
     {
@@ -465,6 +498,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return e_;
     }
+
 
 
     [CqlDeclaration("Has Cardiac Pacer Device Implanted")]
@@ -512,6 +546,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Atrioventricular Block without Cardiac Pacer")]
     public bool? Atrioventricular_Block_without_Cardiac_Pacer(CqlContext context)
     {
@@ -525,6 +560,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return g_;
     }
+
 
 
     [CqlDeclaration("Denominator Exceptions")]
@@ -550,6 +586,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -557,6 +594,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Payer")]
@@ -568,6 +606,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -577,6 +616,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -584,6 +624,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Has Arrhythmia Diagnosis")]
@@ -604,6 +645,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return e_;
     }
+
 
 
     [CqlDeclaration("Has Medical or Patient Reason for Not Ordering Beta Blocker for LVSD")]
@@ -662,6 +704,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return g_;
     }
+
 
     private static CqlTupleMetadata CqlTupleMetadata_FUFPMQdRaTBgLhghDWfUUBaNF = new(
         [typeof(Observation), typeof(Encounter)],

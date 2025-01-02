@@ -12,6 +12,9 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
+[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("AdvancedIllnessandFrailty", "1.16.000")]
+[assembly: AssemblyVersion("2.0.8.0")]
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("AdvancedIllnessandFrailty", "1.16.000")]
 public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<AdvancedIllnessandFrailty_1_16_000>
@@ -32,10 +35,12 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", default);
 
 
+
     [CqlDeclaration("Dementia Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510")]
     public CqlValueSet Dementia_Medications(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510", default);
+
 
 
     [CqlDeclaration("Frailty Device")]
@@ -44,10 +49,12 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300", default);
 
 
+
     [CqlDeclaration("Frailty Diagnosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074")]
     public CqlValueSet Frailty_Diagnosis(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074", default);
+
 
 
     [CqlDeclaration("Frailty Encounter")]
@@ -56,10 +63,12 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088", default);
 
 
+
     [CqlDeclaration("Frailty Symptom")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075")]
     public CqlValueSet Frailty_Symptom(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075", default);
+
 
 
     [CqlDeclaration("Housing status")]
@@ -67,14 +76,17 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
         new CqlCode("71802-3", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("Lives in a nursing home (finding)")]
     public CqlCode Lives_in_a_nursing_home__finding_(CqlContext context) => 
         new CqlCode("160734000", "http://snomed.info/sct", default, default);
 
 
+
     [CqlDeclaration("Medical equipment used")]
     public CqlCode Medical_equipment_used(CqlContext context) => 
         new CqlCode("98181-1", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("LOINC")]
@@ -89,6 +101,7 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     }
 
 
+
     [CqlDeclaration("SNOMEDCT")]
     public CqlCode[] SNOMEDCT(CqlContext context)
     {
@@ -100,6 +113,7 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     }
 
 
+
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
@@ -107,6 +121,7 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
 
         return (CqlInterval<CqlDateTime>)a_;
     }
+
 
 
     [CqlDeclaration("Patient")]
@@ -117,6 +132,7 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
 
         return b_;
     }
+
 
 
     [CqlDeclaration("Has Criteria Indicating Frailty")]
@@ -216,6 +232,7 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     }
 
 
+
     [CqlDeclaration("Has Advanced Illness in Year Before or During Measurement Period")]
     public bool? Has_Advanced_Illness_in_Year_Before_or_During_Measurement_Period(CqlContext context)
     {
@@ -240,6 +257,7 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
 
         return e_;
     }
+
 
 
     [CqlDeclaration("Has Dementia Medications in Year Before or During Measurement Period")]
@@ -275,6 +293,7 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     }
 
 
+
     [CqlDeclaration("Is Age 66 or Older with Advanced Illness and Frailty")]
     public bool? Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(CqlContext context)
     {
@@ -296,6 +315,7 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
 
         return o_;
     }
+
 
 
     [CqlDeclaration("Is Age 66 to 80 with Advanced Illness and Frailty or Is Age 81 or Older with Frailty")]
@@ -329,6 +349,7 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
 
         return ab_;
     }
+
 
 
     [CqlDeclaration("Is Age 66 or Older Living Long Term in a Nursing Home")]
@@ -391,5 +412,6 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
 
         return x_;
     }
+
 
 }

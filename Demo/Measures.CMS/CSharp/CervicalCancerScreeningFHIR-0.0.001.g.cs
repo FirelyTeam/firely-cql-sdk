@@ -12,6 +12,9 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
+[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("CervicalCancerScreeningFHIR", "0.0.001")]
+[assembly: AssemblyVersion("2.0.8.0")]
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("CervicalCancerScreeningFHIR", "0.0.001")]
 public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<CervicalCancerScreeningFHIR_0_0_001>
@@ -32,10 +35,12 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1016", default);
 
 
+
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
     public CqlValueSet Home_Healthcare_Services(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
+
 
 
     [CqlDeclaration("HPV Test")]
@@ -44,10 +49,12 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1059", default);
 
 
+
     [CqlDeclaration("Hysterectomy with No Residual Cervix")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1014")]
     public CqlValueSet Hysterectomy_with_No_Residual_Cervix(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1014", default);
+
 
 
     [CqlDeclaration("Office Visit")]
@@ -56,10 +63,12 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
 
+
     [CqlDeclaration("Virtual Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
     public CqlValueSet Virtual_Encounter(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
+
 
 
     [CqlDeclaration("Pap Test")]
@@ -68,10 +77,12 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1017", default);
 
 
+
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
     public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
+
 
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
@@ -80,10 +91,12 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
 
+
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
     public CqlValueSet Telephone_Visits(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -98,6 +111,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -106,6 +120,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
         return b_;
     }
+
 
 
     [CqlDeclaration("Qualifying Encounters")]
@@ -145,6 +160,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
     }
 
 
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -171,6 +187,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
     }
 
 
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -178,6 +195,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Absence of Cervix")]
@@ -218,6 +236,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
     }
 
 
+
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
@@ -230,6 +249,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
         return f_;
     }
+
 
 
     [CqlDeclaration("Cervical Cytology Within 3 Years")]
@@ -311,6 +331,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
         return e_;
     }
+
 
 
     [CqlDeclaration("HPV Test Within 5 Years for Women Age 30 and Older")]
@@ -455,6 +476,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
     }
 
 
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -468,6 +490,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
     }
 
 
+
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -475,6 +498,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Payer")]
@@ -486,6 +510,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
     }
 
 
+
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -495,6 +520,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -502,5 +528,6 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
 
         return a_;
     }
+
 
 }

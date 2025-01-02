@@ -12,6 +12,9 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
+[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("VTE", "8.8.000")]
+[assembly: AssemblyVersion("2.0.8.0")]
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("VTE", "8.8.000")]
 public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
@@ -32,16 +35,19 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.263", default);
 
 
+
     [CqlDeclaration("Obstetrics VTE")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.264")]
     public CqlValueSet Obstetrics_VTE(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.264", default);
 
 
+
     [CqlDeclaration("Venous Thromboembolism")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.279")]
     public CqlValueSet Venous_Thromboembolism(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.279", default);
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -53,6 +59,7 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -61,6 +68,7 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
 
         return b_;
     }
+
 
 
     [CqlDeclaration("Admission without VTE or Obstetrical Conditions")]
@@ -99,6 +107,7 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
     }
 
 
+
     [CqlDeclaration("Encounter with Age Range and without VTE Diagnosis or Obstetrical Conditions")]
     public IEnumerable<Encounter> Encounter_with_Age_Range_and_without_VTE_Diagnosis_or_Obstetrical_Conditions(CqlContext context)
     {
@@ -126,6 +135,7 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
     }
 
 
+
     [CqlDeclaration("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context)
     {
@@ -133,6 +143,7 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
 
         return a_;
     }
+
 
     public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterAdmission(CqlContext context, Encounter Encounter)
     {
@@ -150,6 +161,7 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
         return j_;
     }
 
+
     public CqlDateTime StartOfFirstICU(CqlContext context, Encounter Encounter)
     {
         Encounter.LocationComponent a_ = CQMCommon_2_2_000.Instance.firstInpatientIntensiveCareUnit(context, Encounter);
@@ -159,6 +171,7 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
 
         return d_;
     }
+
 
     public CqlInterval<CqlDate> FromDayOfStartOfHospitalizationToDayAfterFirstICU(CqlContext context, Encounter Encounter)
     {
@@ -173,5 +186,6 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
 
         return h_;
     }
+
 
 }

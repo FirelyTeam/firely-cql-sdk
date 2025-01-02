@@ -12,6 +12,9 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
+[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("ParametersExample", "0.0.1")]
+[assembly: AssemblyVersion("2.0.8.0")]
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("ParametersExample", "0.0.1")]
 public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersExample_0_0_1>
@@ -32,6 +35,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
         new CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status", default);
 
 
+
     [CqlDeclaration("AgeThreshold")]
     public int? AgeThreshold(CqlContext context)
     {
@@ -39,6 +43,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
         return (int?)a_;
     }
+
 
 
     [CqlDeclaration("Patient")]
@@ -51,6 +56,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     }
 
 
+
     [CqlDeclaration("CurrentDate")]
     public CqlDate CurrentDate(CqlContext context)
     {
@@ -58,6 +64,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Patient Filter")]
@@ -95,6 +102,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     }
 
 
+
     [CqlDeclaration("Patient Birthdate")]
     public Date Patient_Birthdate(CqlContext context)
     {
@@ -103,6 +111,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
         return b_;
     }
+
 
 
     [CqlDeclaration("Patient Age in Years")]
@@ -117,6 +126,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     }
 
 
+
     [CqlDeclaration("Patient Older Than AgeThreshold")]
     public bool? Patient_Older_Than_AgeThreshold(CqlContext context)
     {
@@ -126,5 +136,6 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
         return c_;
     }
+
 
 }

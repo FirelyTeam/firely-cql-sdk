@@ -12,6 +12,9 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
+[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("DevDays", "2023.0.0")]
+[assembly: AssemblyVersion("2.0.8.0")]
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("DevDays", "2023.0.0")]
 public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
@@ -31,9 +34,11 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
         new CqlCode("V97.33", "http://hl7.org/fhir/sid/icd-10", default, default);
 
 
+
     [CqlDeclaration("Sucked into jet engine, subsequent encounter")]
     public CqlCode Sucked_into_jet_engine__subsequent_encounter(CqlContext context) => 
         new CqlCode("V97.33XD", "http://hl7.org/fhir/sid/icd-10", default, default);
+
 
 
     [CqlDeclaration("ICD10")]
@@ -48,6 +53,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     }
 
 
+
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
@@ -55,6 +61,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
         return (CqlInterval<CqlDateTime>)a_;
     }
+
 
 
     [CqlDeclaration("Patient")]
@@ -65,6 +72,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
         return b_;
     }
+
 
 
     [CqlDeclaration("Jet engine conditions")]
@@ -99,6 +107,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     }
 
 
+
     [CqlDeclaration("Subsequent encounters")]
     public IEnumerable<Condition> Subsequent_encounters(CqlContext context)
     {
@@ -131,6 +140,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     }
 
 
+
     [CqlDeclaration("Initial population")]
     public bool? Initial_population(CqlContext context)
     {
@@ -141,6 +151,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     }
 
 
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -149,5 +160,6 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
         return b_;
     }
+
 
 }

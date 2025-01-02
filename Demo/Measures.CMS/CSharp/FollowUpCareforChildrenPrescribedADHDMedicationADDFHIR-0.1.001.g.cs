@@ -12,6 +12,9 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
+[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR", "0.1.001")]
+[assembly: AssemblyVersion("2.0.8.0")]
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR", "0.1.001")]
 public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_001 : ILibrary, ISingleton<FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_001>
@@ -32,10 +35,12 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1003", default);
 
 
+
     [CqlDeclaration("Atomoxetine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1170")]
     public CqlValueSet Atomoxetine(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1170", default);
+
 
 
     [CqlDeclaration("Behavioral Health Follow up Visit")]
@@ -44,10 +49,12 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1054", default);
 
 
+
     [CqlDeclaration("Clonidine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1171")]
     public CqlValueSet Clonidine(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1171", default);
+
 
 
     [CqlDeclaration("Dexmethylphenidate")]
@@ -56,10 +63,12 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1172", default);
 
 
+
     [CqlDeclaration("Dextroamphetamine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1173")]
     public CqlValueSet Dextroamphetamine(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1173", default);
+
 
 
     [CqlDeclaration("Encounter Inpatient")]
@@ -68,10 +77,12 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
 
+
     [CqlDeclaration("Guanfacine Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.11.1252")]
     public CqlValueSet Guanfacine_Medications(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.11.1252", default);
+
 
 
     [CqlDeclaration("Home Healthcare Services")]
@@ -80,10 +91,12 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
 
+
     [CqlDeclaration("Lisdexamfetamine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1174")]
     public CqlValueSet Lisdexamfetamine(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1174", default);
+
 
 
     [CqlDeclaration("Mental Behavioral and Neurodevelopmental Disorders")]
@@ -92,10 +105,12 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1203", default);
 
 
+
     [CqlDeclaration("Methylphenidate")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1176")]
     public CqlValueSet Methylphenidate(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1176", default);
+
 
 
     [CqlDeclaration("Narcolepsy")]
@@ -104,10 +119,12 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.114.12.1011", default);
 
 
+
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
     public CqlValueSet Office_Visit(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
+
 
 
     [CqlDeclaration("Outpatient Consultation")]
@@ -116,10 +133,12 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
 
+
     [CqlDeclaration("Preventive Care Services Group Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027")]
     public CqlValueSet Preventive_Care_Services_Group_Counseling(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027", default);
+
 
 
     [CqlDeclaration("Preventive Care Services Individual Counseling")]
@@ -128,10 +147,12 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", default);
 
 
+
     [CqlDeclaration("Preventive Care Services, Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
     public CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default);
+
 
 
     [CqlDeclaration("Preventive Care, Established Office Visit, 0 to 17")]
@@ -140,10 +161,12 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default);
 
 
+
     [CqlDeclaration("Psych Visit Diagnostic Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492")]
     public CqlValueSet Psych_Visit_Diagnostic_Evaluation(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", default);
+
 
 
     [CqlDeclaration("Psych Visit Psychotherapy")]
@@ -152,10 +175,12 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", default);
 
 
+
     [CqlDeclaration("Psychotherapy and Pharmacologic Management")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1055")]
     public CqlValueSet Psychotherapy_and_Pharmacologic_Management(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1055", default);
+
 
 
     [CqlDeclaration("Telephone Visits")]
@@ -164,10 +189,12 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
 
+
     [CqlDeclaration("Virtual Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
     public CqlValueSet Virtual_Encounter(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
+
 
 
     [CqlDeclaration("24 HR dexmethylphenidate hydrochloride 40 MG Extended Release Oral Capsule")]
@@ -175,9 +202,11 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
         new CqlCode("1006608", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
 
+
     [CqlDeclaration("methamphetamine hydrochloride 5 MG Oral Tablet")]
     public CqlCode methamphetamine_hydrochloride_5_MG_Oral_Tablet(CqlContext context) => 
         new CqlCode("977860", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
+
 
 
     [CqlDeclaration("RXNORM")]
@@ -192,6 +221,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
@@ -204,6 +234,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -212,6 +243,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
 
         return b_;
     }
+
 
 
     [CqlDeclaration("March 1 of Year Prior to Measurement Period")]
@@ -226,6 +258,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
 
         return f_;
     }
+
 
 
     [CqlDeclaration("Last Calendar Day of February of Measurement Period")]
@@ -243,6 +276,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("Intake Period")]
     public CqlInterval<CqlDateTime> Intake_Period(CqlContext context)
     {
@@ -252,6 +286,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
 
         return c_;
     }
+
 
 
     [CqlDeclaration("ADHD Medication Prescribed During Intake Period and Not Previously on ADHD Medication")]
@@ -446,6 +481,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("First ADHD Medication Prescribed During Intake Period")]
     public CqlDate First_ADHD_Medication_Prescribed_During_Intake_Period(CqlContext context)
     {
@@ -471,6 +507,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("IPSD")]
     public CqlDate IPSD(CqlContext context)
     {
@@ -478,6 +515,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Qualifying Encounter")]
@@ -515,6 +553,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("Inpatient Stay with Qualifying Diagnosis")]
     public IEnumerable<Encounter> Inpatient_Stay_with_Qualifying_Diagnosis(CqlContext context)
     {
@@ -535,6 +574,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
 
         return e_;
     }
+
 
 
     [CqlDeclaration("Inpatient Stay with Qualifying Diagnosis During Initiation Phase")]
@@ -562,6 +602,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Initial Population 1")]
@@ -599,6 +640,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("Denominator 1")]
     public bool? Denominator_1(CqlContext context)
     {
@@ -606,6 +648,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Narcolepsy Exclusion")]
@@ -629,6 +672,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
@@ -639,6 +683,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
 
         return d_;
     }
+
 
 
     [CqlDeclaration("Qualifying Numerator Encounter")]
@@ -710,6 +755,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("Encounter During Initiation Phase")]
     public IEnumerable<Encounter> Encounter_During_Initiation_Phase(CqlContext context)
     {
@@ -738,6 +784,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("Numerator 1")]
     public bool? Numerator_1(CqlContext context)
     {
@@ -746,6 +793,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
 
         return b_;
     }
+
 
 
     [CqlDeclaration("ADHD Medications Taken on IPSD or During Continuation and Maintenance Phase")]
@@ -1072,6 +1120,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("ADHD Cumulative Medication Duration")]
     public int? ADHD_Cumulative_Medication_Duration(CqlContext context)
     {
@@ -1082,6 +1131,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("Has ADHD Cumulative Medication Duration Greater Than or Equal to 210 Days")]
     public bool? Has_ADHD_Cumulative_Medication_Duration_Greater_Than_or_Equal_to_210_Days(CqlContext context)
     {
@@ -1090,6 +1140,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
 
         return b_;
     }
+
 
 
     [CqlDeclaration("Inpatient Stay with Qualifying Diagnosis During Continuation and Maintenance Phase")]
@@ -1117,6 +1168,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Initial Population 2")]
@@ -1156,6 +1208,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("Denominator 2")]
     public bool? Denominator_2(CqlContext context)
     {
@@ -1163,6 +1216,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Encounter 31 to 300 Days into Continuation and Maintenance Phase")]
@@ -1204,6 +1258,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("Two or More Encounters 31 to 300 Days into Continuation and Maintenance Phase")]
     public bool? Two_or_More_Encounters_31_to_300_Days_into_Continuation_and_Maintenance_Phase(CqlContext context)
     {
@@ -1213,6 +1268,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Virtual Encounter 31 to 300 Days into Continuation and Maintenance Phase")]
@@ -1255,6 +1311,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("Numerator 2")]
     public bool? Numerator_2(CqlContext context)
     {
@@ -1292,6 +1349,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -1299,6 +1357,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Payer")]
@@ -1310,6 +1369,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -1319,6 +1379,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -1326,6 +1387,7 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
 
         return a_;
     }
+
 
     private static CqlTupleMetadata CqlTupleMetadata_CVELXTjiMTaGQEjMfJXBdUHjW = new(
         [typeof(CqlDate)],

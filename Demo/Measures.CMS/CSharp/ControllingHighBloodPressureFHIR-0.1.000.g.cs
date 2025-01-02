@@ -12,6 +12,9 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
+[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("ControllingHighBloodPressureFHIR", "0.1.000")]
+[assembly: AssemblyVersion("2.0.8.0")]
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("ControllingHighBloodPressureFHIR", "0.1.000")]
 public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingleton<ControllingHighBloodPressureFHIR_0_1_000>
@@ -32,10 +35,12 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1002", default);
 
 
+
     [CqlDeclaration("Dialysis Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1013")]
     public CqlValueSet Dialysis_Services(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1013", default);
+
 
 
     [CqlDeclaration("Emergency Department Evaluation and Management Visit")]
@@ -44,10 +49,12 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010", default);
 
 
+
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
     public CqlValueSet Encounter_Inpatient(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
+
 
 
     [CqlDeclaration("End Stage Renal Disease")]
@@ -56,10 +63,12 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353", default);
 
 
+
     [CqlDeclaration("ESRD Monthly Outpatient Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1014")]
     public CqlValueSet ESRD_Monthly_Outpatient_Services(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1014", default);
+
 
 
     [CqlDeclaration("Essential Hypertension")]
@@ -68,10 +77,12 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.104.12.1011", default);
 
 
+
     [CqlDeclaration("Kidney Transplant")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1012")]
     public CqlValueSet Kidney_Transplant(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1012", default);
+
 
 
     [CqlDeclaration("Kidney Transplant Recipient")]
@@ -80,10 +91,12 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1029", default);
 
 
+
     [CqlDeclaration("Pregnancy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378")]
     public CqlValueSet Pregnancy(CqlContext context) => 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378", default);
+
 
 
     [CqlDeclaration("Diastolic blood pressure")]
@@ -91,9 +104,11 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
         new CqlCode("8462-4", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("Systolic blood pressure")]
     public CqlCode Systolic_blood_pressure(CqlContext context) => 
         new CqlCode("8480-6", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("LOINC")]
@@ -108,6 +123,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
@@ -120,6 +136,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -128,6 +145,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return b_;
     }
+
 
 
     [CqlDeclaration("Essential Hypertension Diagnosis")]
@@ -154,6 +172,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -178,6 +197,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -185,6 +205,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Pregnancy or Renal Diagnosis")]
@@ -215,6 +236,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("End Stage Renal Disease Procedures")]
     public IEnumerable<Procedure> End_Stage_Renal_Disease_Procedures(CqlContext context)
     {
@@ -242,6 +264,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("End Stage Renal Disease Encounter")]
     public IEnumerable<Encounter> End_Stage_Renal_Disease_Encounter(CqlContext context)
     {
@@ -264,6 +287,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return e_;
     }
+
 
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -289,6 +313,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
         return p_;
     }
 
+
     public Encounter getEncounter(CqlContext context, ResourceReference reference)
     {
         IEnumerable<Encounter> a_ = context.Operators.Retrieve<Encounter>(new RetrieveParameters(default, default, default, "http://hl7.org/fhir/us/qicore/StructureDefinition/qicore-encounter"));
@@ -308,6 +333,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return d_;
     }
+
 
 
     [CqlDeclaration("Qualifying Systolic Blood Pressure Reading")]
@@ -347,6 +373,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Qualifying Diastolic Blood Pressure Reading")]
     public IEnumerable<Observation> Qualifying_Diastolic_Blood_Pressure_Reading(CqlContext context)
     {
@@ -384,6 +411,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Blood Pressure Days")]
     public IEnumerable<CqlDate> Blood_Pressure_Days(CqlContext context)
     {
@@ -417,6 +445,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Most Recent Blood Pressure Day")]
     public CqlDate Most_Recent_Blood_Pressure_Day(CqlContext context)
     {
@@ -426,6 +455,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Lowest Systolic Reading on Most Recent Blood Pressure Day")]
@@ -480,6 +510,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Has Systolic Blood Pressure Less Than 140")]
     public bool? Has_Systolic_Blood_Pressure_Less_Than_140(CqlContext context)
     {
@@ -489,6 +520,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Lowest Diastolic Reading on Most Recent Blood Pressure Day")]
@@ -543,6 +575,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Has Diastolic Blood Pressure Less Than 90")]
     public bool? Has_Diastolic_Blood_Pressure_Less_Than_90(CqlContext context)
     {
@@ -552,6 +585,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Numerator")]
@@ -565,6 +599,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -572,6 +607,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Payer")]
@@ -583,6 +619,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -592,6 +629,7 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -599,5 +637,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return a_;
     }
+
 
 }

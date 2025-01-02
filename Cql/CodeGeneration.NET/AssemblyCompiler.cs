@@ -98,7 +98,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             _cSharpLibrarySetToStreamsWriter.ProcessDefinitions(
                 librarySet,
                 definitions,
-                callbacks: new(onAfterStep: CSharpSourceCodeStep),
+                callbacks: new(onAfterStep: CSharpSourceCodeStep, shouldThrowException:shouldThrowException),
                 shouldThrowException);
 
             return results;

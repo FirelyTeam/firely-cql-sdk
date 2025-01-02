@@ -580,7 +580,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
             else
             {
-                lambdaSb.AppendLine(" => ");
+                lambdaSb.AppendLine(" =>");
                 var lambdaBody = ConvertExpression(lambda.Body, context.WithOverride(indent => indent + 1, _ => true));
                 lambdaSb.Append(lambdaBody);
             }
@@ -612,7 +612,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             var funcSb = new StringBuilder();
 
-            funcSb.Append(context.Indent, specifiers + " ");
+            funcSb.Append(specifiers + " ");
             funcSb.Append(_typeToCSharpConverter.ToCSharp(function.ReturnType) + " ");
             funcSb.Append(name);
 

@@ -12,6 +12,9 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
+[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("MultipleResourcesExample", "0.0.1")]
+[assembly: AssemblyVersion("2.0.8.0")]
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("MultipleResourcesExample", "0.0.1")]
 public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<MultipleResourcesExample_0_0_1>
@@ -32,15 +35,18 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89", default);
 
 
+
     [CqlDeclaration("Condition Clinical Status")]
     [CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical")]
     public CqlValueSet Condition_Clinical_Status(CqlContext context) => 
         new CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical", default);
 
 
+
     [CqlDeclaration("Tobacco Smoking Status")]
     public CqlCode Tobacco_Smoking_Status(CqlContext context) => 
         new CqlCode("72166-2", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("LOINC")]
@@ -54,6 +60,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -62,6 +69,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
         return b_;
     }
+
 
 
     [CqlDeclaration("Smoking status observation")]
@@ -88,6 +96,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
     }
 
 
+
     [CqlDeclaration("Lung cancer diagnosis")]
     public IEnumerable<Condition> Lung_cancer_diagnosis(CqlContext context)
     {
@@ -106,5 +115,6 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
         return d_;
     }
+
 
 }

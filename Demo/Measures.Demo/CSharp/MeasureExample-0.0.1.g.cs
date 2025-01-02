@@ -12,6 +12,9 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
+[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("MeasureExample", "0.0.1")]
+[assembly: AssemblyVersion("2.0.8.0")]
+
 [System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
 [CqlLibrary("MeasureExample", "0.0.1")]
 public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_0_0_1>
@@ -36,6 +39,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     }
 
 
+
     [CqlDeclaration("Initial population")]
     [CqlTag("measure", "Measure Resource Example")]
     [CqlTag("year", "2024")]
@@ -48,12 +52,14 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
         true;
 
 
+
     [CqlDeclaration("Exclusion")]
     [CqlTag("group", "1")]
     [CqlTag("group", "2")]
     [CqlTag("population", "denominator-exclusion")]
     public bool? Exclusion(CqlContext context) => 
         false;
+
 
 
     [CqlDeclaration("Denominator")]
@@ -71,6 +77,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     }
 
 
+
     [CqlDeclaration("Numerator 1")]
     [CqlTag("group", "1")]
     [CqlTag("population", "numerator")]
@@ -78,10 +85,12 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
         true;
 
 
+
     [CqlDeclaration("Numerator 2")]
     [CqlTag("group", "2")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_2(CqlContext context) => 
         false;
+
 
 }
