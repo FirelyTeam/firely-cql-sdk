@@ -34,7 +34,7 @@ public class AssemblyDataWriterOptions
     /// <summary>
     /// Gets or sets a value indicating whether to write the assembly for debugging purposes, which removes optimizations, and includes debug symbols.
     /// </summary>
-    public bool ForDebugging { get; set; }
+    public bool DebugModeAssemblies { get; set; }
 #if DEBUG
     = true;
 #else

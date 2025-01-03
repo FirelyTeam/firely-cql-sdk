@@ -138,7 +138,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         private CSharpCompilationOptions CreateCSharpCompilationOptions() =>
             new(
                 outputKind: OutputKind.DynamicallyLinkedLibrary,
-                optimizationLevel: _assemblyDataWriterOptions.Value.ForDebugging ? OptimizationLevel.Debug : OptimizationLevel.Release,
+                optimizationLevel: _assemblyDataWriterOptions.Value.DebugModeAssemblies ? OptimizationLevel.Debug : OptimizationLevel.Release,
                 deterministic: true, // see: https://github.com/dotnet/roslyn/blob/main/docs/compilers/Deterministic%20Inputs.md
                 sourceReferenceResolver: new SourceFileResolver(ImmutableArray<string>.Empty, null)
             );
@@ -154,7 +154,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             var librarySourceString = GetSourceCodeString(sourceCodeStream);
             var librarySourcePath = $"{libraryVersionedIdentifier}.cs";
-            if (_assemblyDataWriterOptions.Value.ForDebugging)
+            if (_assemblyDataWriterOptions.Value.DebugModeAssemblies)
             {
                 var tempDir = Path.Combine(Path.GetTempPath(), "CqlCompiler", $"{libraryVersionedIdentifier}.cs");
                 Directory.CreateDirectory(tempDir);
@@ -185,7 +185,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                                                    );
 
             using var codeStream = new MemoryStream();
-            MemoryStream? pdbStream = _assemblyDataWriterOptions.Value.ForDebugging ? new MemoryStream() : null;
+            MemoryStream? pdbStream = _assemblyDataWriterOptions.Value.DebugModeAssemblies ? new MemoryStream() : null;
             using var pdbStreamDisposable = pdbStream as IDisposable ?? new EmptyDisposable();
 
             var compilationResult = compilation.Emit(codeStream, pdbStream, options:EmitOptionsPortable);

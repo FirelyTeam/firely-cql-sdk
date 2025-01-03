@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Net.Sockets;
+using System.Runtime.CompilerServices;
 using System.Runtime.Loader;
 using System.Text;
 using CqlSdkPrototype.CqlToElm;
@@ -9,6 +10,7 @@ using CqlSdkPrototype.Runtime;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Model;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -123,6 +125,8 @@ internal class Program
 
     private static ServiceProvider BuildServiceProvider()
     {
+        //Directories.GeneratedDirectory.Delete(true);
+
         Dictionary<string, string?> inMemoryConfiguration = new()
         {
             //["ElmCompilationCreateOptions:ShouldThrowError"] = "true"
@@ -143,8 +147,18 @@ internal class Program
                                                     return result;
                                                 })
                               )
-                              .AddElmCompilation()
-                              .AddCqlTranslation()
+                              .AddElmCompilation(
+                                  opt =>
+                                  {
+                                      opt.CSharpOutDirectory = Directories.CSharpOutDirectory;
+                                      opt.AssembliesDebugMode = true;
+                                      opt.AssembliesOutDirectory = Directories.AssembliesOutDirectory;
+                                  })
+                              .AddCqlTranslation(
+                                  opt =>
+                                  {
+                                      opt.Models = [Models.ElmR1, Models.Fhir401];
+                                  })
                               .BuildServiceProvider();
         return serviceProvider;
     }

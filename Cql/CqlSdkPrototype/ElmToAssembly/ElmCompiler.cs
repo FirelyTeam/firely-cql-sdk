@@ -9,6 +9,8 @@ using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
+using ElmCompilationEntriesMap = System.Collections.Immutable.ImmutableDictionary<CqlSdkPrototype.CqlVersionedLibraryIdentifier, CqlSdkPrototype.ElmToAssembly.ElmCompiler.ElmCompilationEntry>;
+
 namespace CqlSdkPrototype.ElmToAssembly;
 
 public class ElmCompiler :

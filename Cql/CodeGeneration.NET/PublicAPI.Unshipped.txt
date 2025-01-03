@@ -1,8 +1,8 @@
 ﻿#nullable enable
 Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions
 Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.AssemblyDataWriterOptions() -> void
-Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.ForDebugging.get -> bool
-Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.ForDebugging.set -> void
+Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.DebugModeAssemblies.get -> bool
+Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.DebugModeAssemblies.set -> void
 Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.OutDirectory.get -> System.IO.DirectoryInfo?
 Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.OutDirectory.set -> void
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions

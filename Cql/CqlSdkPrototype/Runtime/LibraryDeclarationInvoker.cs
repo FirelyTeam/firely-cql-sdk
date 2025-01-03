@@ -12,7 +12,6 @@ public abstract class LibraryDeclarationInvoker(
 {
     public string DeclarationName { get; } = declarationName;
     public Type ReturnType => MethodInfo.ReturnType;
-
     protected ILibrary Library { get; } = library;
     protected MethodInfo MethodInfo { get; } = methodInfo;
 

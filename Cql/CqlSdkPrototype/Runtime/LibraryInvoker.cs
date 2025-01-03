@@ -1,6 +1,7 @@
 ﻿using System.CodeDom.Compiler;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions;
 using Microsoft.Extensions.Logging;
 
@@ -10,15 +11,12 @@ namespace CqlSdkPrototype.Runtime;
 /// <summary>
 /// Represents an invoker for a CQL library.
 /// </summary>
-public abstract partial class LibraryInvoker
+public abstract class LibraryInvoker
 {
     public abstract CqlVersionedLibraryIdentifier LibraryVersionedIdentifier { get; }
 
     public abstract IReadOnlyDictionary<string, LibraryDeclarationInvoker> Declarations { get; }
-}
 
-partial class LibraryInvoker
-{
     public static bool TryCreateFromType(
         Type libraryType,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker,
@@ -34,12 +32,13 @@ partial class LibraryInvoker
             return false;
         }
 
-        if (
-            libraryType.GetCustomAttribute<GeneratedCodeAttribute>() is not
-                {
-                    Tool: ".NET Code Generation",
-                    Version:{} version
-                }
+        // The current version is set in by 'VersionPrefix' in 'cql-sdk.props',
+        // which is also used to generate the 'CqlLibraryAttribute' in the CQL library.
+        if (libraryType.GetCustomAttribute<GeneratedCodeAttribute>() is not
+            {
+                Tool: ".NET Code Generation",
+                Version:{} version
+            }
             || !Version.TryParse(version, out var cqlToolVersion))
         {
             logger?.LogDebug(
@@ -48,10 +47,9 @@ partial class LibraryInvoker
             return false;
         }
 
-        if (cqlToolVersion >= new Version(2, 0, 8, 0)
-            && cqlToolVersion < new Version(2, 1))
+        if (LibraryInvoker_2_0_8_0.SupportsVersion(cqlToolVersion))
         {
-            return TryCreateFromType_2_0_8_0(libraryType, out libraryInvoker, logger);
+            return LibraryInvoker_2_0_8_0.TryCreateFromType(libraryType, out libraryInvoker, logger);
         }
 
         logger?.LogDebug(
@@ -59,30 +57,5 @@ partial class LibraryInvoker
             libraryType.FullName,
             cqlToolVersion);
         return false;
-
-    }
-
-    private static bool TryCreateFromType_2_0_8_0(
-        Type libraryType,
-        [NotNullWhen(true)] out LibraryInvoker? libraryInvoker,
-        ILogger? logger = null)
-    {
-        libraryInvoker = null;
-        if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
-        {
-            logger?.LogDebug(
-                "Skipping type {type} because it does not implement ILibrary.",
-                libraryType.FullName);
-            return false;
-        }
-
-        libraryInvoker = new LibraryInvoker_2_0_8_0(asILibrary);
-        return true;
-    }
-
-    private static object GetLibraryFromStaticInstanceProperty(Type libraryType)
-    {
-        return libraryType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null)
-               ?? throw new InvalidOperationException($"Unable to create an instance of {libraryType.FullName}");
     }
 }

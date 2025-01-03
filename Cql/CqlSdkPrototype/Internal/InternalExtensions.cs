@@ -48,4 +48,12 @@ internal static class InternalExtensions
                .Where(x => x is not null)
                .Select(x => x!);
     }
+
+    public static bool IsBetween(
+        this Version value,
+        Version lowerIncl,
+        Version upperExcl)
+    {
+        return value >= lowerIncl && value < upperExcl;
+    }
 }

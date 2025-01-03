@@ -1,10 +1,12 @@
 ﻿using System.Collections.Immutable;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reflection;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
+using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Runtime;
 
@@ -29,21 +31,51 @@ public class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
                        .SelectWhereNotNull(o => o.DeclarationName is { } declarationName
                                                 && o.Method.GetParameters() is [{ } p0]
                                                 && p0.ParameterType == typeof(CqlContext)
-                                                    ? (LibraryDeclarationInvoker)new LibraryDeclarationInvoker_2_0_8_0(declarationName, Library, o.Method)
+                                                    ? (LibraryDeclarationInvoker)new DeclarationInvoker(declarationName, Library, o.Method)
                                                     : null)
                        .ToImmutableDictionary(o => o.DeclarationName);
     }
 
     public override IReadOnlyDictionary<string, LibraryDeclarationInvoker> Declarations { get; }
-}
 
-public class LibraryDeclarationInvoker_2_0_8_0(
-    string declarationName,
-    ILibrary library,
-    MethodInfo methodInfo) : LibraryDeclarationInvoker(declarationName, library, methodInfo)
-{
-    public override object? Invoke(CqlContext cqlContext)
+    private static object GetLibraryFromStaticInstanceProperty(Type libraryType)
     {
-        return InvokeMethod(cqlContext);
+        return libraryType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null)
+               ?? throw new InvalidOperationException($"Unable to create an instance of {libraryType.FullName}");
+    }
+
+    public new static bool TryCreateFromType(
+        Type libraryType,
+        [NotNullWhen(true)] out LibraryInvoker? libraryInvoker,
+        ILogger? logger = null)
+    {
+        libraryInvoker = null;
+        if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
+        {
+            logger?.LogDebug(
+                "Skipping type {type} because it does not implement ILibrary.",
+                libraryType.FullName);
+            return false;
+        }
+
+        libraryInvoker = new LibraryInvoker_2_0_8_0(asILibrary);
+        return true;
+    }
+
+    public static bool SupportsVersion(Version cqlToolVersion)
+    {
+        return cqlToolVersion.IsBetween(new Version(2, 0, 8), new Version(2, 1));
+    }
+
+    private class DeclarationInvoker(
+        string declarationName,
+        ILibrary library,
+        MethodInfo methodInfo) : LibraryDeclarationInvoker(declarationName, library, methodInfo)
+    {
+        public override object? Invoke(CqlContext cqlContext)
+        {
+            return InvokeMethod(cqlContext);
+        }
     }
 }
+
