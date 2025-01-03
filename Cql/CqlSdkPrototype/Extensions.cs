@@ -29,12 +29,11 @@ public static class Extensions
 
         Action<CSharpCodeWriterOptions>? ConfigureCSharpCodeWriterOptions()
         {
-            return elmCompilationOptions is { } o
+            return /*elmCompilationOptions is { } o
                        ? cSharpCodeWriterOptions =>
                        {
-                           cSharpCodeWriterOptions.OutDirectory = o.CSharpOutDirectory;
                        }
-                       : null;
+                       : */null;
         }
 
         Action<AssemblyDataWriterOptions>? ConfigureAssemblyDataWriterOptions()
@@ -42,7 +41,6 @@ public static class Extensions
             return elmCompilationOptions is { } o
                        ? assemblyDataWriterOptions =>
                        {
-                           assemblyDataWriterOptions.OutDirectory = o.AssembliesOutDirectory;
                            assemblyDataWriterOptions.DebugModeAssemblies = o.AssembliesDebugMode;
                        }
                        : null;
@@ -96,7 +94,7 @@ public class CqlTranslationOptions
 
 public class ElmCompilationOptions
 {
-    public DirectoryInfo? AssembliesOutDirectory { get; set; }
+    //public DirectoryInfo? AssembliesOutDirectory { get; set; }
     public bool AssembliesDebugMode { get; set; }
-    public DirectoryInfo? CSharpOutDirectory { get; set; }
+    //public DirectoryInfo? CSharpOutDirectory { get; set; }
 }

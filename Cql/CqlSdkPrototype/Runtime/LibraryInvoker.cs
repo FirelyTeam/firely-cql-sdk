@@ -1,7 +1,6 @@
 ﻿using System.CodeDom.Compiler;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions;
 using Microsoft.Extensions.Logging;
 

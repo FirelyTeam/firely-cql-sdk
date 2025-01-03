@@ -16,7 +16,7 @@ public static class ElmCompilationSavingExtensions
         var logger = ((ILogAccessor<ElmCompiler>)elmCompiler).Logger;
         foreach (var (libraryName, sourceCode) in elmCompiler.GetCSharpSourceCodes())
         {
-            var fileName = Path.Combine(directory.FullName, $"{libraryName}.cs");
+            var fileName = Path.Combine(directory.FullName, $"{libraryName}.g.cs");
             File.WriteAllText(fileName, sourceCode);
             logger.LogInformation("Saved C# source code to file: {file}", fileName);
         }

@@ -1,14 +1,10 @@
-﻿using System.Net.Sockets;
-using System.Runtime.CompilerServices;
-using System.Runtime.Loader;
-using System.Text;
+﻿using System.Text;
 using CqlSdkPrototype.CqlToElm;
 using CqlSdkPrototype.ElmToAssembly;
 using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Logging;
 using CqlSdkPrototype.Runtime;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Model;
 using Hl7.Cql.Runtime;
@@ -24,22 +20,9 @@ internal class Program
 {
     static void Main(string[] args)
     {
+        Directories.GeneratedDirectory.Delete(recursive: true);
         var serviceProvider = BuildServiceProvider();
-
-        var rootDir = new DirectoryInfo(@"C:\Dev");
         var librarySetName = "Demo";
-
-        // Keep these output dirs outside the repo:
-        var cqlDirIn = rootDir.CreateSubdirectory($@"firely-cql-sdk\LibrarySets\{librarySetName}\Cql"); // Input
-        var elmDirOut = rootDir.CreateSubdirectory(@"prototype-output\Elm");                            // Output
-        var elmDirIn = rootDir.CreateSubdirectory($@"firely-cql-sdk\LibrarySets\{librarySetName}\Elm"); // Input
-        var cSharpDirOut = rootDir.CreateSubdirectory(@"prototype-output\CSharp");                      // Output
-        var assemblyDirOut = rootDir.CreateSubdirectory(@"prototype-output\Dlls");                      // Output
-        var fhirResourceDirOut = rootDir.CreateSubdirectory(@"prototype-output\Fhir");                  // Output
-
-        cSharpDirOut.Delete(recursive: true);
-        assemblyDirOut.Delete(recursive: true);
-        fhirResourceDirOut.Delete(recursive: true);
 
         var cqlTranslation =
                 CqlTranslator.Create(
@@ -57,7 +40,7 @@ internal class Program
                                      }
                                  })
                              .LoadCqlFilesFromDirectory(
-                                 cqlDirIn,
+                                 Directories.CqlInDirectory(librarySetName),
                                  options: new EnumerationOptions()
                                  {
                                      /*RecurseSubdirectories = false*/
@@ -68,7 +51,7 @@ internal class Program
                                      or "NCQAStatus"*/
                                  )
                              .Translate()
-                             .SaveElmFileToDirectory(elmDirOut)
+                             .SaveElmFileToDirectory(Directories.ElmOutDirectory)
             ;
 
         var elmCompilation =
@@ -90,8 +73,8 @@ internal class Program
                               //.LoadElmFile(elmDirIn, ElmLibraryIdentifier.Parse("FHIRHelpers")) //
                               //.LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
                               .Compile()
-                              .SaveCSharpFilesToDirectory(cSharpDirOut)
-                              .SaveAssemblyBinariesToDirectory(assemblyDirOut)
+                              .SaveCSharpFilesToDirectory(Directories.CSharpOutDirectory)
+                              .SaveAssemblyBinariesToDirectory(Directories.AssembliesOutDirectory)
             ;
 
         DumpOutputFilesToConsole(serviceProvider, cqlTranslation, elmCompilation);
@@ -125,8 +108,6 @@ internal class Program
 
     private static ServiceProvider BuildServiceProvider()
     {
-        //Directories.GeneratedDirectory.Delete(true);
-
         Dictionary<string, string?> inMemoryConfiguration = new()
         {
             //["ElmCompilationCreateOptions:ShouldThrowError"] = "true"
@@ -150,9 +131,7 @@ internal class Program
                               .AddElmCompilation(
                                   opt =>
                                   {
-                                      opt.CSharpOutDirectory = Directories.CSharpOutDirectory;
                                       opt.AssembliesDebugMode = true;
-                                      opt.AssembliesOutDirectory = Directories.AssembliesOutDirectory;
                                   })
                               .AddCqlTranslation(
                                   opt =>

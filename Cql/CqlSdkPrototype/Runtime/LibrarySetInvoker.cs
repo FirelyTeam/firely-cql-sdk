@@ -1,11 +1,9 @@
 ﻿using System.Collections.Immutable;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Loader;
 using CqlSdkPrototype.CqlToElm;
 using CqlSdkPrototype.ElmToAssembly;
 using CqlSdkPrototype.Internal;
-using Hl7.Cql.Abstractions.Infrastructure;
 using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Runtime;

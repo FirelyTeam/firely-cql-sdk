@@ -1,6 +1,5 @@
 ﻿using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Reflection;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions;

@@ -2,10 +2,7 @@
 using Microsoft.Extensions.Logging.Abstractions;
 using System.Collections.Concurrent;
 using System.Diagnostics;
-using System.Drawing;
 using System.Globalization;
-using System.Security;
-using System.Text;
 using System.Text.RegularExpressions;
 using EnumerableExtensions = Hl7.Cql.Abstractions.Infrastructure.EnumerableExtensions;
 
