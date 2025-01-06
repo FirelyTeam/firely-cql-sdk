@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("HFBetaBlockerTherapyforLVSDFHIR", "1.4.000")]
 public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingleton<HFBetaBlockerTherapyforLVSDFHIR_1_4_000>
 {
@@ -21,92 +21,106 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     public static HFBetaBlockerTherapyforLVSDFHIR_1_4_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "HFBetaBlockerTherapyforLVSDFHIR";
-    public string Version => "1.4.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, AHAOverall_2_8_000.Instance];
+    string ILibrary.Name => "HFBetaBlockerTherapyforLVSDFHIR";
+    string ILibrary.Version => "1.4.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, AHAOverall_2_8_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Allergy to Beta Blocker Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1177")]
-    public CqlValueSet Allergy_to_Beta_Blocker_Therapy(CqlContext context) => 
+    public CqlValueSet Allergy_to_Beta_Blocker_Therapy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1177", default);
+
 
 
     [CqlDeclaration("Arrhythmia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.366")]
-    public CqlValueSet Arrhythmia(CqlContext context) => 
+    public CqlValueSet Arrhythmia(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.366", default);
+
 
 
     [CqlDeclaration("Asthma")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.362")]
-    public CqlValueSet Asthma(CqlContext context) => 
+    public CqlValueSet Asthma(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.362", default);
+
 
 
     [CqlDeclaration("Atrioventricular Block")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.367")]
-    public CqlValueSet Atrioventricular_Block(CqlContext context) => 
+    public CqlValueSet Atrioventricular_Block(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.367", default);
+
 
 
     [CqlDeclaration("Beta Blocker Therapy for LVSD")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1184")]
-    public CqlValueSet Beta_Blocker_Therapy_for_LVSD(CqlContext context) => 
+    public CqlValueSet Beta_Blocker_Therapy_for_LVSD(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1184", default);
+
 
 
     [CqlDeclaration("Beta Blocker Therapy Ingredient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1493")]
-    public CqlValueSet Beta_Blocker_Therapy_Ingredient(CqlContext context) => 
+    public CqlValueSet Beta_Blocker_Therapy_Ingredient(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1493", default);
+
 
 
     [CqlDeclaration("Bradycardia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.412")]
-    public CqlValueSet Bradycardia(CqlContext context) => 
+    public CqlValueSet Bradycardia(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.412", default);
+
 
 
     [CqlDeclaration("Cardiac Pacer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.53")]
-    public CqlValueSet Cardiac_Pacer(CqlContext context) => 
+    public CqlValueSet Cardiac_Pacer(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1178.53", default);
+
 
 
     [CqlDeclaration("Cardiac Pacer in Situ")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.368")]
-    public CqlValueSet Cardiac_Pacer_in_Situ(CqlContext context) => 
+    public CqlValueSet Cardiac_Pacer_in_Situ(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.368", default);
+
 
 
     [CqlDeclaration("Hypotension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.370")]
-    public CqlValueSet Hypotension(CqlContext context) => 
+    public CqlValueSet Hypotension(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.370", default);
+
 
 
     [CqlDeclaration("Intolerance to Beta Blocker Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1178")]
-    public CqlValueSet Intolerance_to_Beta_Blocker_Therapy(CqlContext context) => 
+    public CqlValueSet Intolerance_to_Beta_Blocker_Therapy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1178", default);
+
 
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
-    public CqlValueSet Medical_Reason(CqlContext context) => 
+    public CqlValueSet Medical_Reason(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
+
 
 
     [CqlDeclaration("Patient Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008")]
-    public CqlValueSet Patient_Reason(CqlContext context) => 
+    public CqlValueSet Patient_Reason(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008", default);
 
 
+
     [CqlDeclaration("Substance with beta adrenergic receptor antagonist mechanism of action (substance)")]
-    public CqlCode Substance_with_beta_adrenergic_receptor_antagonist_mechanism_of_action__substance_(CqlContext context) => 
+    public CqlCode Substance_with_beta_adrenergic_receptor_antagonist_mechanism_of_action__substance_(CqlContext context) =>
         new CqlCode("373254001", "http://snomed.info/sct", default, default);
+
 
 
     [CqlDeclaration("SNOMEDCT")]
@@ -118,6 +132,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -132,6 +147,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -142,6 +158,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -149,6 +166,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Denominator")]
@@ -161,6 +179,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return d_;
     }
+
 
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -176,6 +195,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return g_;
     }
+
 
 
     [CqlDeclaration("Has Beta Blocker Therapy for LVSD Ordered")]
@@ -198,6 +218,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Is Currently Taking Beta Blocker Therapy for LVSD")]
     public bool? Is_Currently_Taking_Beta_Blocker_Therapy_for_LVSD(CqlContext context)
     {
@@ -218,6 +239,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -227,6 +249,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Has Consecutive Heart Rates Less than 50")]
@@ -304,7 +327,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
             return an_;
         };
         IEnumerable<(CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?> g_ = context.Operators.Where<(CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?>(e_, f_);
-        Observation h_((CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)? tuple_fufpmqdratbglhghdwfuubanf) => 
+        Observation h_((CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)? tuple_fufpmqdratbglhghdwfuubanf) =>
             tuple_fufpmqdratbglhghdwfuubanf?.HeartRate;
         IEnumerable<Observation> i_ = context.Operators.Select<(CqlTupleMetadata, Observation HeartRate, Encounter ModerateOrSevereLVSDHFOutpatientEncounter)?, Observation>(g_, h_);
         IEnumerable<Observation> j_ = context.Operators.Distinct<Observation>(i_);
@@ -312,6 +335,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return k_;
     }
+
 
 
     [CqlDeclaration("Has Hypotension Diagnosis")]
@@ -334,6 +358,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Has Asthma Diagnosis")]
     public bool? Has_Asthma_Diagnosis(CqlContext context)
     {
@@ -352,6 +377,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return e_;
     }
+
 
 
     [CqlDeclaration("Has Diagnosis of Allergy or Intolerance to Beta Blocker Therapy")]
@@ -377,6 +403,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Has Bradycardia Diagnosis")]
     public bool? Has_Bradycardia_Diagnosis(CqlContext context)
     {
@@ -395,6 +422,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return e_;
     }
+
 
 
     [CqlDeclaration("Has Allergy or Intolerance to Beta Blocker Therapy Ingredient")]
@@ -427,6 +455,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Has Atrioventricular Block Diagnosis")]
     public bool? Has_Atrioventricular_Block_Diagnosis(CqlContext context)
     {
@@ -447,6 +476,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Has Diagnosis of Cardiac Pacer in Situ")]
     public bool? Has_Diagnosis_of_Cardiac_Pacer_in_Situ(CqlContext context)
     {
@@ -465,6 +495,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return e_;
     }
+
 
 
     [CqlDeclaration("Has Cardiac Pacer Device Implanted")]
@@ -489,7 +520,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
                 return t_;
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
-            Procedure k_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) => 
+            Procedure k_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) =>
                 ImplantedCardiacPacer;
             IEnumerable<Procedure> l_ = context.Operators.Select<Encounter, Procedure>(j_, k_);
 
@@ -512,6 +543,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Atrioventricular Block without Cardiac Pacer")]
     public bool? Atrioventricular_Block_without_Cardiac_Pacer(CqlContext context)
     {
@@ -525,6 +557,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return g_;
     }
+
 
 
     [CqlDeclaration("Denominator Exceptions")]
@@ -550,6 +583,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -557,6 +591,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Payer")]
@@ -568,6 +603,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -577,6 +613,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -584,6 +621,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Has Arrhythmia Diagnosis")]
@@ -606,6 +644,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Has Medical or Patient Reason for Not Ordering Beta Blocker for LVSD")]
     public bool? Has_Medical_or_Patient_Reason_for_Not_Ordering_Beta_Blocker_for_LVSD(CqlContext context)
     {
@@ -625,7 +664,7 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
                 return q_;
             };
             IEnumerable<Encounter> j_ = context.Operators.Where<Encounter>(h_, i_);
-            MedicationRequest k_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) => 
+            MedicationRequest k_(Encounter ModerateOrSevereLVSDHFOutpatientEncounter) =>
                 NoBetaBlockerOrdered;
             IEnumerable<MedicationRequest> l_ = context.Operators.Select<Encounter, MedicationRequest>(j_, k_);
 
@@ -662,6 +701,175 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
         return g_;
     }
+
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
+        [typeof(CqlDate)],
+        ["AntidepressantDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
+        [typeof(Observation), typeof(Encounter)],
+        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["QualifyingEncounters", "URI"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
+        [typeof(string), typeof(int?)],
+        ["EncounterID", "CalculatedCGA"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EMDhFLcFhWVERAVVNfLAZYXJi = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["DTaPVaccination1", "DTaPVaccination2", "DTaPVaccination3", "DTaPVaccination4"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CNGHaZROXaJTHPICcbIaJbRXV = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["PolioVaccination1", "PolioVaccination2", "PolioVaccination3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EZTgahAUWGgSdGaDCgQNNIPGW = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["HepatitisBVaccination1", "HepatitisBVaccination2", "HepatitisBVaccination3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HDfaMbZGBWDPFETGQNFbceEeg = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["HepatitisBVaccination1", "HepatitisBVaccination2", "NewBornVaccine3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DdPDeOJhPYESfHGCOcBNOiPPP = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["PneumococcalVaccination1", "PneumococcalVaccination2", "PneumococcalVaccination3", "PneumococcalVaccination4"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZhFLeRDagbPQMNheVJcUNfNQ = new(
+        [typeof(CqlDate), typeof(CqlDate)],
+        ["FluVaccination1", "FluVaccination2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb = new(
+        [typeof(string), typeof(CqlDateTime)],
+        ["ID", "AuthorDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FOBYUiHifSfYFYhEEQajgLbgF = new(
+        [typeof(CqlQuantity), typeof(Observation)],
+        ["QualifyingGlycemicStatusValue", "QualifyingGlycemicStatus"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CVELXTjiMTaGQEjMfJXBdUHjW = new(
+        [typeof(CqlDate)],
+        ["startDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD = new(
+        [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
+        ["period", "periodStart"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GVNUVHGXYWXVGgfjdTEahUfhP = new(
+        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
+        ["HOOSLifeQuality", "HOOSSport", "HOOSActivityScore", "HOOSSymptoms", "HOOSPain"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DDTAOdcFieSJbGgRLLZPYbGQb = new(
+        [typeof(Observation), typeof(Observation)],
+        ["PROMIS10MentalScore", "PROMIS10PhysicalScore"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH = new(
+        [typeof(Observation), typeof(Observation)],
+        ["VR12MentalAssessment", "VR12PhysicalAssessment"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DbNMMZBTISSRTNdiShceSFVih = new(
+        [typeof(Encounter), typeof(Encounter)],
+        ["OfficeVisit1", "OfficeVisit2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BGYjYGLNPKWAZTBCVAdLDDTMj = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialPROMIS10Date", "FollowupPROMIS10Date"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DBUJFOVGBcbhIQPWARNQHKUaX = new(
+        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
+        ["Promis29Sleep", "Promis29SocialRoles", "Promis29Physical", "Promis29Pain", "Promis29Fatigue", "Promis29Depression", "Promis29Anxiety"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DSZKEYVbCINNIeAQiZdVaEJhG = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialPROMIS29Date", "FollowupPROMIS29Date"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FQKGdEYLiDFGMNAUAMETIHUQT = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialVR12ObliqueDate", "FollowupVR12ObliqueDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HSSAQEFQAOXLjUcOKGgicELWB = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialVR12OrthogonalDate", "FollowupVR12OrthogonalDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DUcFTCLcQEWDGGQdFCWTHFaUK = new(
+        [typeof(Observation), typeof(Observation)],
+        ["VR36MentalAssessment", "VR36PhysicalAssessment"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HQfcMfhQUSTNYMWSgJHiFeahQ = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialVR36ObliqueDate", "FollowupVR36ObliqueDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BFZHWdOOROjSjFSECHcQiaZZZ = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialVR36OrthogonalDate", "FollowupVR36OrthogonalDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EBLWeAeedHPAfOJXKPZJKSCUf = new(
+        [typeof(Observation), typeof(Observation)],
+        ["MLHFQPhysical", "MLHFQEmotional"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CcaWSNDiVeaLebVKKWWWiBcEU = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialMLHFQDate", "FollowupMLHFQDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DFKXORghhYafccUSbQaMfNTDj = new(
+        [typeof(Observation), typeof(Observation)],
+        ["KCCQ12Item", "KCCQ12Summary"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EQQLFFBVIbLIQLiZDNfeYdMU = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialKCCQ12Date", "FollowupKCCQ12Date"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BbPMcXSJeOeGdRcaZWGYPhGBL = new(
+        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
+        ["KCCQLifeQuality", "KCCQSymptomStability", "KCCQSelfEfficacy", "KCCQSymptoms", "KCCQPhysicalLimits", "KCCQSocialLimits"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HEFWLcHhCNCOQegEOfjWTXiGN = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialKCCQAssessmentDate", "FollowupKCCQAssessmentDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DggZKjEbQUfLADMDMBeASLDR = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialKCCQTotalScore", "FollowupKCCQTotalScore"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GVQcZJVjNdGAcjPedLaYDjEME = new(
+        [typeof(Encounter), typeof(Procedure)],
+        ["QualifyingEncounter", "HospitalDietitianReferral"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_XadcRffdjUdMDMjcTIdSXKKS = new(
+        [typeof(Encounter), typeof(Observation)],
+        ["QualifyingEncounter", "MalnutritionRiskScreening"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GFjZJIRJbJMHZiLMbCVCEiHgh = new(
+        [typeof(Encounter), typeof(Observation)],
+        ["QualifyingEncounter", "NutritionAssessment"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CTGXhDDGNAgcaKfhTDIBGVLYU = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["QualifyingEncounter", "MalnutritionDiagnosis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_TVETjQTNGSKUhAIhIbeKTXMI = new(
+        [typeof(Encounter), typeof(Procedure)],
+        ["QualifyingEncounter", "NutritionCarePlan"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FUFPMQdRaTBgLhghDWfUUBaNF = new(
         [typeof(Observation), typeof(Encounter)],

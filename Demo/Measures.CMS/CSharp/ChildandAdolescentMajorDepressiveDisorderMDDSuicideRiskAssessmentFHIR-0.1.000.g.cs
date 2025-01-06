@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR", "0.1.000")]
 public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR_0_1_000 : ILibrary, ISingleton<ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR_0_1_000>
 {
@@ -21,78 +21,90 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
     public static ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR";
-    public string Version => "0.1.000";
-    public ILibrary[] Dependencies => [SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance];
+    string ILibrary.Name => "ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAssessmentFHIR";
+    string ILibrary.Version => "0.1.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Group Psychotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1187")]
-    public CqlValueSet Group_Psychotherapy(CqlContext context) => 
+    public CqlValueSet Group_Psychotherapy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1187", default);
+
 
 
     [CqlDeclaration("Major Depressive Disorder Active")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1491")]
-    public CqlValueSet Major_Depressive_Disorder_Active(CqlContext context) => 
+    public CqlValueSet Major_Depressive_Disorder_Active(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1491", default);
+
 
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-    public CqlValueSet Office_Visit(CqlContext context) => 
+    public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
+
 
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-    public CqlValueSet Outpatient_Consultation(CqlContext context) => 
+    public CqlValueSet Outpatient_Consultation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
+
 
 
     [CqlDeclaration("Psych Visit Diagnostic Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492")]
-    public CqlValueSet Psych_Visit_Diagnostic_Evaluation(CqlContext context) => 
+    public CqlValueSet Psych_Visit_Diagnostic_Evaluation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", default);
+
 
 
     [CqlDeclaration("Psych Visit for Family Psychotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1018")]
-    public CqlValueSet Psych_Visit_for_Family_Psychotherapy(CqlContext context) => 
+    public CqlValueSet Psych_Visit_for_Family_Psychotherapy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1018", default);
+
 
 
     [CqlDeclaration("Psych Visit Psychotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496")]
-    public CqlValueSet Psych_Visit_Psychotherapy(CqlContext context) => 
+    public CqlValueSet Psych_Visit_Psychotherapy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", default);
+
 
 
     [CqlDeclaration("Psychoanalysis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1141")]
-    public CqlValueSet Psychoanalysis(CqlContext context) => 
+    public CqlValueSet Psychoanalysis(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1141", default);
+
 
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-    public CqlValueSet Telephone_Visits(CqlContext context) => 
+    public CqlValueSet Telephone_Visits(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
 
+
     [CqlDeclaration("Birth date")]
-    public CqlCode Birth_date(CqlContext context) => 
+    public CqlCode Birth_date(CqlContext context) =>
         new CqlCode("21112-8", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("Suicide risk assessment (procedure)")]
-    public CqlCode Suicide_risk_assessment__procedure_(CqlContext context) => 
+    public CqlCode Suicide_risk_assessment__procedure_(CqlContext context) =>
         new CqlCode("225337009", "http://snomed.info/sct", default, default);
 
 
+
     [CqlDeclaration("AMB")]
-    public CqlCode AMB(CqlContext context) => 
+    public CqlCode AMB(CqlContext context) =>
         new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
+
 
 
     [CqlDeclaration("LOINC")]
@@ -106,6 +118,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
     }
 
 
+
     [CqlDeclaration("SNOMEDCT")]
     public CqlCode[] SNOMEDCT(CqlContext context)
     {
@@ -115,6 +128,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 
         return a_;
     }
+
 
 
     [CqlDeclaration("ActCode")]
@@ -128,6 +142,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
     }
 
 
+
     [CqlDeclaration("ICD10CM")]
     public CqlCode[] ICD10CM(CqlContext context)
     {
@@ -136,6 +151,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -150,6 +166,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -158,6 +175,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 
         return b_;
     }
+
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -169,6 +187,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
     }
 
 
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -176,6 +195,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Race")]
@@ -187,6 +207,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -194,6 +215,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Major Depressive Disorder Encounter")]
@@ -266,6 +288,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
     }
 
 
+
     [CqlDeclaration("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context)
     {
@@ -298,6 +321,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
     }
 
 
+
     [CqlDeclaration("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context)
     {
@@ -305,6 +329,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Numerator")]
@@ -333,7 +358,7 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
                 return u_;
             };
             IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
-            Encounter i_(Procedure SuicideRiskAssessment) => 
+            Encounter i_(Procedure SuicideRiskAssessment) =>
                 MDDEncounter;
             IEnumerable<Encounter> j_ = context.Operators.Select<Procedure, Encounter>(h_, i_);
 
@@ -343,5 +368,38 @@ public partial class ChildandAdolescentMajorDepressiveDisorderMDDSuicideRiskAsse
 
         return c_;
     }
+
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
+        [typeof(CqlDate)],
+        ["AntidepressantDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
+        [typeof(Observation), typeof(Encounter)],
+        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["QualifyingEncounters", "URI"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
+        [typeof(string), typeof(int?)],
+        ["EncounterID", "CalculatedCGA"]);
 
 }

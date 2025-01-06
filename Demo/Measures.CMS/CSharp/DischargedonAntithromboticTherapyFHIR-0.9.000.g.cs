@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("DischargedonAntithromboticTherapyFHIR", "0.9.000")]
 public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, ISingleton<DischargedonAntithromboticTherapyFHIR_0_9_000>
 {
@@ -21,33 +21,37 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
     public static DischargedonAntithromboticTherapyFHIR_0_9_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "DischargedonAntithromboticTherapyFHIR";
-    public string Version => "0.9.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, TJCOverall_8_14_000.Instance];
+    string ILibrary.Name => "DischargedonAntithromboticTherapyFHIR";
+    string ILibrary.Version => "0.9.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, TJCOverall_8_14_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Antithrombotic Therapy for Ischemic Stroke")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.62")]
-    public CqlValueSet Antithrombotic_Therapy_for_Ischemic_Stroke(CqlContext context) => 
+    public CqlValueSet Antithrombotic_Therapy_for_Ischemic_Stroke(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.62", default);
+
 
 
     [CqlDeclaration("Medical Reason For Not Providing Treatment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473")]
-    public CqlValueSet Medical_Reason_For_Not_Providing_Treatment(CqlContext context) => 
+    public CqlValueSet Medical_Reason_For_Not_Providing_Treatment(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473", default);
+
 
 
     [CqlDeclaration("Patient Refusal")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93")]
-    public CqlValueSet Patient_Refusal(CqlContext context) => 
+    public CqlValueSet Patient_Refusal(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", default);
+
 
 
     [CqlDeclaration("Pharmacological Contraindications For Antithrombotic Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52")]
-    public CqlValueSet Pharmacological_Contraindications_For_Antithrombotic_Therapy(CqlContext context) => 
+    public CqlValueSet Pharmacological_Contraindications_For_Antithrombotic_Therapy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52", default);
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -62,6 +66,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -70,6 +75,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
 
         return b_;
     }
+
 
 
     [CqlDeclaration("Initial Population")]
@@ -81,6 +87,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context)
     {
@@ -88,6 +95,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Encounter with Comfort Measures during Hospitalization for Patients with Documented Ischemic Stroke")]
@@ -111,7 +119,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
                 return p_;
             };
             IEnumerable<object> f_ = context.Operators.Where<object>(d_, e_);
-            Encounter g_(object ComfortMeasure) => 
+            Encounter g_(object ComfortMeasure) =>
                 Encounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<object, Encounter>(f_, g_);
 
@@ -123,6 +131,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context)
     {
@@ -132,6 +141,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Numerator")]
@@ -155,7 +165,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
                 return q_;
             };
             IEnumerable<MedicationRequest> j_ = context.Operators.Where<MedicationRequest>(h_, i_);
-            Encounter k_(MedicationRequest DischargeAntithrombotic) => 
+            Encounter k_(MedicationRequest DischargeAntithrombotic) =>
                 IschemicStrokeEncounter;
             IEnumerable<Encounter> l_ = context.Operators.Select<MedicationRequest, Encounter>(j_, k_);
 
@@ -165,6 +175,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Antithrombotic Therapy at Discharge")]
@@ -209,6 +220,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("Reason for Not Giving Antithrombotic at Discharge")]
     public IEnumerable<MedicationRequest> Reason_for_Not_Giving_Antithrombotic_at_Discharge(CqlContext context)
     {
@@ -251,6 +263,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("Encounter with Documented Reason for No Antithrombotic At Discharge")]
     public IEnumerable<Encounter> Encounter_with_Documented_Reason_for_No_Antithrombotic_At_Discharge(CqlContext context)
     {
@@ -269,7 +282,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
                 return m_;
             };
             IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
-            Encounter g_(MedicationRequest NoDischargeAntithrombotic) => 
+            Encounter g_(MedicationRequest NoDischargeAntithrombotic) =>
                 IschemicStrokeEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
 
@@ -279,6 +292,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Pharmacological Contraindications for Antithrombotic Therapy at Discharge")]
@@ -323,6 +337,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("Encounter with Pharmacological Contraindications for Antithrombotic Therapy at Discharge")]
     public IEnumerable<Encounter> Encounter_with_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(CqlContext context)
     {
@@ -341,7 +356,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
                 return m_;
             };
             IEnumerable<MedicationRequest> f_ = context.Operators.Where<MedicationRequest>(d_, e_);
-            Encounter g_(MedicationRequest DischargePharmacological) => 
+            Encounter g_(MedicationRequest DischargePharmacological) =>
                 IschemicStrokeEncounter;
             IEnumerable<Encounter> h_ = context.Operators.Select<MedicationRequest, Encounter>(f_, g_);
 
@@ -351,6 +366,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Denominator Exceptions")]
@@ -364,6 +380,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -371,6 +388,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Payer")]
@@ -382,6 +400,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -391,6 +410,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -398,5 +418,70 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
 
         return a_;
     }
+
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
+        [typeof(CqlDate)],
+        ["AntidepressantDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
+        [typeof(Observation), typeof(Encounter)],
+        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["QualifyingEncounters", "URI"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
+        [typeof(string), typeof(int?)],
+        ["EncounterID", "CalculatedCGA"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EMDhFLcFhWVERAVVNfLAZYXJi = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["DTaPVaccination1", "DTaPVaccination2", "DTaPVaccination3", "DTaPVaccination4"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CNGHaZROXaJTHPICcbIaJbRXV = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["PolioVaccination1", "PolioVaccination2", "PolioVaccination3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EZTgahAUWGgSdGaDCgQNNIPGW = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["HepatitisBVaccination1", "HepatitisBVaccination2", "HepatitisBVaccination3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HDfaMbZGBWDPFETGQNFbceEeg = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["HepatitisBVaccination1", "HepatitisBVaccination2", "NewBornVaccine3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DdPDeOJhPYESfHGCOcBNOiPPP = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["PneumococcalVaccination1", "PneumococcalVaccination2", "PneumococcalVaccination3", "PneumococcalVaccination4"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZhFLeRDagbPQMNheVJcUNfNQ = new(
+        [typeof(CqlDate), typeof(CqlDate)],
+        ["FluVaccination1", "FluVaccination2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb = new(
+        [typeof(string), typeof(CqlDateTime)],
+        ["ID", "AuthorDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FOBYUiHifSfYFYhEEQajgLbgF = new(
+        [typeof(CqlQuantity), typeof(Observation)],
+        ["QualifyingGlycemicStatusValue", "QualifyingGlycemicStatus"]);
 
 }

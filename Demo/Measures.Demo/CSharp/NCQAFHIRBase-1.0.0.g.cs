@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("NCQAFHIRBase", "1.0.0")]
 public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_0>
 {
@@ -21,9 +21,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     public static NCQAFHIRBase_1_0_0 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "NCQAFHIRBase";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance];
+    string ILibrary.Name => "NCQAFHIRBase";
+    string ILibrary.Version => "1.0.0";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Patient")]
@@ -34,6 +34,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
 
         return b_;
     }
+
 
     public CqlInterval<CqlDateTime> Normalize_Onset(CqlContext context, object onset)
     {
@@ -247,6 +248,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         return a_();
     }
 
+
     public CqlInterval<CqlDateTime> Normalize_Abatement(CqlContext context, object abatement)
     {
         CqlInterval<CqlDateTime> a_()
@@ -459,6 +461,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         return a_();
     }
 
+
     public CqlInterval<CqlDateTime> Prevalence_Period(CqlContext context, Condition condition)
     {
         DataType a_ = condition?.Onset;
@@ -471,6 +474,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
 
         return g_;
     }
+
 
     public CqlInterval<CqlDateTime> Normalize_Interval(CqlContext context, object choice)
     {
@@ -633,6 +637,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         return a_();
     }
 
+
     public string GetId(CqlContext context, string uri)
     {
         string a_()
@@ -660,12 +665,14 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         return a_();
     }
 
-    public IEnumerable<CqlCode> VS_Cast_Function(CqlContext context, IEnumerable<CqlCode> VSet) => 
+
+    public IEnumerable<CqlCode> VS_Cast_Function(CqlContext context, IEnumerable<CqlCode> VSet) =>
         VSet;
+
 
     public (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? First_Dates_per_31_Day_Periods(CqlContext context, IEnumerable<CqlDate> DateList)
     {
-        CqlDate a_(CqlDate d) => 
+        CqlDate a_(CqlDate d) =>
             d;
         IEnumerable<CqlDate> b_ = context.Operators.Select<CqlDate, CqlDate>(DateList, a_);
         IEnumerable<CqlDate> c_ = context.Operators.Distinct<CqlDate>(b_);
@@ -1310,6 +1317,75 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
 
         return l_;
     }
+
+
+    private static CqlTupleMetadata CqlTupleMetadata_EaLaedgLDgRRYaLbKIIcBTOiA = new(
+        [typeof(Encounter), typeof(Encounter)],
+        ["OutpatientEncounter1", "OutpatientEncounter2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CgaDVOXeQBMgMPCPZOThIIdDb = new(
+        [typeof(CqlInterval<CqlDateTime>), typeof(CqlInterval<CqlDateTime>)],
+        ["LTCPeriod1", "LTCPeriod2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GIMHfXDcFiAjSJBDGYeUeZLhW = new(
+        [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
+        ["interval", "startOfInterval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EQHOUSiiWahbJPOUjJGEhIAOV = new(
+        [typeof(CqlInterval<CqlDateTime>), typeof(CqlDateTime)],
+        ["interval", "startOfInterval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EVRLVXPcBiDTIWfCCfKEWDfKI = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["sortedCoverings"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FKcLSALRMRfDigEFaJgDOPFRK = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["frontgaps", "endgap"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EdgSWaTaCbLYLJceGdIcWOLHd = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["sortedCoverings"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BBLSSiNBQBGUDJaVjMDZMSAXg = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["frontgaps", "endgap"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HEjPGjPEhLgQPGjROeWMgiGfC = new(
+        [typeof(CqlInterval<CqlDate>), typeof(int?)],
+        ["interval", "days"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HRbPDRZiOGGBceePOZWjVbXdP = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(int?), typeof(int?), typeof(CqlInterval<CqlDate>), typeof(int?)],
+        ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DUiZjXRKgCPYVZQJbFVDKNMOi = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["Covering_Intervals"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GQPbYTYABjXFVLRKjXgcDJFSj = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["Gap_Intervals"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FcQREFSfPJSKYAhSEWVJcZVED = new(
+        [typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?)],
+        ["StartYear", "StartMonth", "StartDay", "StartHour", "StartMinute", "StartSecond", "StartMillisecond", "EndYear", "EndMonth", "EndDay", "EndHour", "EndMinute", "EndSecond", "EndMillisecond"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CGHEUIgjaCjJVKEADTSZEbdCL = new(
+        [typeof(CqlInterval<CqlDateTime>), typeof(int?)],
+        ["interval", "days"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HDihbLieYfQbgeSbOWZBAMUIQ = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(int?), typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(int?)],
+        ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GZMPWdGOJiTNjfWAcbZMePdXV = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["Covering_Intervals"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CKbERRbOPGNBBERUOghhaOYSE = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["Gap_Intervals"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_CfANiScMYDdVZFgRERKJQEVca = new(
         [typeof(IEnumerable<CqlDate>)],

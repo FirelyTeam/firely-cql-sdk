@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("ParametersExample", "0.0.1")]
 public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersExample_0_0_1>
 {
@@ -21,15 +21,16 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     public static ParametersExample_0_0_1 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "ParametersExample";
-    public string Version => "0.0.1";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
+    string ILibrary.Name => "ParametersExample";
+    string ILibrary.Version => "0.0.1";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Marital Status")]
     [CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status")]
-    public CqlValueSet Marital_Status(CqlContext context) => 
+    public CqlValueSet Marital_Status(CqlContext context) =>
         new CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status", default);
+
 
 
     [CqlDeclaration("AgeThreshold")]
@@ -39,6 +40,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
         return (int?)a_;
     }
+
 
 
     [CqlDeclaration("Patient")]
@@ -51,6 +53,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     }
 
 
+
     [CqlDeclaration("CurrentDate")]
     public CqlDate CurrentDate(CqlContext context)
     {
@@ -58,6 +61,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Patient Filter")]
@@ -95,6 +99,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     }
 
 
+
     [CqlDeclaration("Patient Birthdate")]
     public Date Patient_Birthdate(CqlContext context)
     {
@@ -103,6 +108,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
         return b_;
     }
+
 
 
     [CqlDeclaration("Patient Age in Years")]
@@ -117,6 +123,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     }
 
 
+
     [CqlDeclaration("Patient Older Than AgeThreshold")]
     public bool? Patient_Older_Than_AgeThreshold(CqlContext context)
     {
@@ -126,5 +133,18 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
         return c_;
     }
+
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
 
 }

@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("CRLReceiptofSpecialistReportFHIR", "0.3.000")]
 public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingleton<CRLReceiptofSpecialistReportFHIR_0_3_000>
 {
@@ -21,94 +21,109 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
     public static CRLReceiptofSpecialistReportFHIR_0_3_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "CRLReceiptofSpecialistReportFHIR";
-    public string Version => "0.3.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
+    string ILibrary.Name => "CRLReceiptofSpecialistReportFHIR";
+    string ILibrary.Version => "0.3.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Behavioral/Neuropsych Assessment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1023")]
-    public CqlValueSet Behavioral_Neuropsych_Assessment(CqlContext context) => 
+    public CqlValueSet Behavioral_Neuropsych_Assessment(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1023", default);
+
 
 
     [CqlDeclaration("Consultant Report")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.121.12.1006")]
-    public CqlValueSet Consultant_Report(CqlContext context) => 
+    public CqlValueSet Consultant_Report(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.121.12.1006", default);
+
 
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-    public CqlValueSet Office_Visit(CqlContext context) => 
+    public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
+
 
 
     [CqlDeclaration("Ophthalmological Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285")]
-    public CqlValueSet Ophthalmological_Services(CqlContext context) => 
+    public CqlValueSet Ophthalmological_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", default);
+
 
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-    public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
+
 
 
     [CqlDeclaration("Preventive Care Services, Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
-    public CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default);
+
 
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
+
 
 
     [CqlDeclaration("Preventive Care, Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
-    public CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17(CqlContext context) => 
+    public CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default);
+
 
 
     [CqlDeclaration("Psych Visit Diagnostic Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492")]
-    public CqlValueSet Psych_Visit_Diagnostic_Evaluation(CqlContext context) => 
+    public CqlValueSet Psych_Visit_Diagnostic_Evaluation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", default);
+
 
 
     [CqlDeclaration("Referral")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1046")]
-    public CqlValueSet Referral(CqlContext context) => 
+    public CqlValueSet Referral(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1046", default);
 
 
+
     [CqlDeclaration("Developmental test administration (including assessment of fine and/or gross motor, language, cognitive level, social, memory and/or executive functions by standardized developmental instruments when performed), by physician or other qualified health care professional, with interpretation and report; first hour")]
-    public CqlCode Developmental_test_administration__including_assessment_of_fine_and_or_gross_motor__language__cognitive_level__social__memory_and_or_executive_functions_by_standardized_developmental_instruments_when_performed___by_physician_or_other_qualified_health_care_professional__with_interpretation_and_report__first_hour(CqlContext context) => 
+    public CqlCode Developmental_test_administration__including_assessment_of_fine_and_or_gross_motor__language__cognitive_level__social__memory_and_or_executive_functions_by_standardized_developmental_instruments_when_performed___by_physician_or_other_qualified_health_care_professional__with_interpretation_and_report__first_hour(CqlContext context) =>
         new CqlCode("96112", "http://www.ama-assn.org/go/cpt", default, default);
 
 
+
     [CqlDeclaration("Health behavior assessment, or re-assessment (ie, health-focused clinical interview, behavioral observations, clinical decision making)")]
-    public CqlCode Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_(CqlContext context) => 
+    public CqlCode Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_(CqlContext context) =>
         new CqlCode("96156", "http://www.ama-assn.org/go/cpt", default, default);
 
 
+
     [CqlDeclaration("Psychological or neuropsychological test administration and scoring by physician or other qualified health care professional, two or more tests, any method; first 30 minutes")]
-    public CqlCode Psychological_or_neuropsychological_test_administration_and_scoring_by_physician_or_other_qualified_health_care_professional__two_or_more_tests__any_method__first_30_minutes(CqlContext context) => 
+    public CqlCode Psychological_or_neuropsychological_test_administration_and_scoring_by_physician_or_other_qualified_health_care_professional__two_or_more_tests__any_method__first_30_minutes(CqlContext context) =>
         new CqlCode("96136", "http://www.ama-assn.org/go/cpt", default, default);
 
 
+
     [CqlDeclaration("Psychological or neuropsychological test administration and scoring by technician, two or more tests, any method; first 30 minutes")]
-    public CqlCode Psychological_or_neuropsychological_test_administration_and_scoring_by_technician__two_or_more_tests__any_method__first_30_minutes(CqlContext context) => 
+    public CqlCode Psychological_or_neuropsychological_test_administration_and_scoring_by_technician__two_or_more_tests__any_method__first_30_minutes(CqlContext context) =>
         new CqlCode("96138", "http://www.ama-assn.org/go/cpt", default, default);
 
 
+
     [CqlDeclaration("Psychotherapy for crisis; first 60 minutes")]
-    public CqlCode Psychotherapy_for_crisis__first_60_minutes(CqlContext context) => 
+    public CqlCode Psychotherapy_for_crisis__first_60_minutes(CqlContext context) =>
         new CqlCode("90839", "http://www.ama-assn.org/go/cpt", default, default);
+
 
 
     [CqlDeclaration("CPT")]
@@ -126,6 +141,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
@@ -138,6 +154,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -146,6 +163,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
 
         return b_;
     }
+
 
 
     [CqlDeclaration("Has Encounter from Valuesets during Measurement Period")]
@@ -193,6 +211,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
 
         return z_;
     }
+
 
 
     [CqlDeclaration("Has Encounter from DRCs during Measurement Period")]
@@ -316,6 +335,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Has Encounter during Measurement Period")]
     public bool? Has_Encounter_during_Measurement_Period(CqlContext context)
     {
@@ -325,6 +345,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
 
         return c_;
     }
+
 
 
     [CqlDeclaration("First Referral during First 10 Months of Measurement Period")]
@@ -388,6 +409,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -400,6 +422,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -407,6 +430,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -418,6 +442,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -425,6 +450,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Race")]
@@ -436,6 +462,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -443,6 +470,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
 
         return a_;
     }
+
 
     public IEnumerable<string> TaskGetRequestID(CqlContext context, Task task)
     {
@@ -460,6 +488,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
 
         return d_;
     }
+
 
 
     [CqlDeclaration("Referring Clinician Receives Consultant Report to Close Referral Loop")]
@@ -498,7 +527,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
                 return ae_;
             };
             IEnumerable<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?> i_ = context.Operators.Where<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?>((IEnumerable<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?>)g_, h_);
-            Task j_((CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? FirstReferral) => 
+            Task j_((CqlTupleMetadata, string ID, CqlDateTime AuthorDate)? FirstReferral) =>
                 ConsultantReportObtained;
             IEnumerable<Task> k_ = context.Operators.Select<(CqlTupleMetadata, string ID, CqlDateTime AuthorDate)?, Task>(i_, j_);
 
@@ -511,6 +540,7 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -518,6 +548,63 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
 
         return a_;
     }
+
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
+        [typeof(CqlDate)],
+        ["AntidepressantDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
+        [typeof(Observation), typeof(Encounter)],
+        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["QualifyingEncounters", "URI"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
+        [typeof(string), typeof(int?)],
+        ["EncounterID", "CalculatedCGA"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EMDhFLcFhWVERAVVNfLAZYXJi = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["DTaPVaccination1", "DTaPVaccination2", "DTaPVaccination3", "DTaPVaccination4"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CNGHaZROXaJTHPICcbIaJbRXV = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["PolioVaccination1", "PolioVaccination2", "PolioVaccination3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EZTgahAUWGgSdGaDCgQNNIPGW = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["HepatitisBVaccination1", "HepatitisBVaccination2", "HepatitisBVaccination3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HDfaMbZGBWDPFETGQNFbceEeg = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["HepatitisBVaccination1", "HepatitisBVaccination2", "NewBornVaccine3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DdPDeOJhPYESfHGCOcBNOiPPP = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["PneumococcalVaccination1", "PneumococcalVaccination2", "PneumococcalVaccination3", "PneumococcalVaccination4"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZhFLeRDagbPQMNheVJcUNfNQ = new(
+        [typeof(CqlDate), typeof(CqlDate)],
+        ["FluVaccination1", "FluVaccination2"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb = new(
         [typeof(string), typeof(CqlDateTime)],

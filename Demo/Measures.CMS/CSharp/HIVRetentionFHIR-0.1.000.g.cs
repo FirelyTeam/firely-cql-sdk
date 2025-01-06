@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("HIVRetentionFHIR", "0.1.000")]
 public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentionFHIR_0_1_000>
 {
@@ -21,87 +21,100 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
     public static HIVRetentionFHIR_0_1_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "HIVRetentionFHIR";
-    public string Version => "0.1.000";
-    public ILibrary[] Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, CumulativeMedicationDuration_4_1_000.Instance];
+    string ILibrary.Name => "HIVRetentionFHIR";
+    string ILibrary.Version => "0.1.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, CumulativeMedicationDuration_4_1_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
-    public CqlValueSet Annual_Wellness_Visit(CqlContext context) => 
+    public CqlValueSet Annual_Wellness_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default);
+
 
 
     [CqlDeclaration("Face-to-Face Interaction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048")]
-    public CqlValueSet Face_to_Face_Interaction(CqlContext context) => 
+    public CqlValueSet Face_to_Face_Interaction(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1048", default);
+
 
 
     [CqlDeclaration("HIV")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1003")]
-    public CqlValueSet HIV(CqlContext context) => 
+    public CqlValueSet HIV(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1003", default);
+
 
 
     [CqlDeclaration("HIV Viral Load")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1002")]
-    public CqlValueSet HIV_Viral_Load(CqlContext context) => 
+    public CqlValueSet HIV_Viral_Load(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1002", default);
+
 
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-    public CqlValueSet Home_Healthcare_Services(CqlContext context) => 
+    public CqlValueSet Home_Healthcare_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
+
 
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-    public CqlValueSet Office_Visit(CqlContext context) => 
+    public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
+
 
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-    public CqlValueSet Outpatient_Consultation(CqlContext context) => 
+    public CqlValueSet Outpatient_Consultation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
+
 
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-    public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
+
 
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
+
 
 
     [CqlDeclaration("Preventive Care Services, Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
-    public CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default);
+
 
 
     [CqlDeclaration("Preventive Care, Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
-    public CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17(CqlContext context) => 
+    public CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default);
+
 
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-    public CqlValueSet Telephone_Visits(CqlContext context) => 
+    public CqlValueSet Telephone_Visits(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
+
 
 
     [CqlDeclaration("Preventive Care Services Other")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.11.1150")]
-    public CqlValueSet Preventive_Care_Services_Other(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services_Other(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.11.1150", default);
+
 
 
     [CqlDeclaration("CPT")]
@@ -112,6 +125,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -126,6 +140,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -136,6 +151,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
     }
 
 
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -143,6 +159,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -266,6 +283,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
 
         return i_;
     }
+
 
 
     [CqlDeclaration("SDE Race")]
@@ -393,6 +411,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -400,6 +419,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Has Active HIV Diagnosis Starts On or Before First 240 Days of Measurement Period")]
@@ -426,6 +446,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
 
         return e_;
     }
+
 
 
     [CqlDeclaration("Has Qualifying Encounter During First 240 Days of Measurement Period")]
@@ -484,6 +505,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
     }
 
 
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -495,6 +517,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
     }
 
 
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -502,6 +525,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Encounter During Measurement Period With HIV")]
@@ -581,7 +605,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
                 return ay_;
             };
             IEnumerable<Condition> al_ = context.Operators.Where<Condition>(aj_, ak_);
-            Encounter am_(Condition HIVDiagnosis) => 
+            Encounter am_(Condition HIVDiagnosis) =>
                 ValidEncounter;
             IEnumerable<Encounter> an_ = context.Operators.Select<Condition, Encounter>(al_, am_);
 
@@ -591,6 +615,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
 
         return ah_;
     }
+
 
 
     [CqlDeclaration("Has One Encounter With HIV and One Viral Load Test At Least 90 Days Apart")]
@@ -630,7 +655,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
                 return ak_;
             };
             IEnumerable<Observation> h_ = context.Operators.Where<Observation>(f_, g_);
-            Encounter i_(Observation ViralLoadTest) => 
+            Encounter i_(Observation ViralLoadTest) =>
                 EncounterWithHIV;
             IEnumerable<Encounter> j_ = context.Operators.Select<Observation, Encounter>(h_, i_);
 
@@ -641,6 +666,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
 
         return d_;
     }
+
 
 
     [CqlDeclaration("Has Two Encounters With HIV At Least 90 Days Apart")]
@@ -668,7 +694,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
                 return u_;
             };
             IEnumerable<Encounter> g_ = context.Operators.Where<Encounter>(e_, f_);
-            Encounter h_(Encounter AnotherEncounterWithHIV) => 
+            Encounter h_(Encounter AnotherEncounterWithHIV) =>
                 EncounterWithHIV;
             IEnumerable<Encounter> i_ = context.Operators.Select<Encounter, Encounter>(g_, h_);
 
@@ -681,6 +707,7 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
     }
 
 
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -691,8 +718,177 @@ public partial class HIVRetentionFHIR_0_1_000 : ILibrary, ISingleton<HIVRetentio
         return c_;
     }
 
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
     private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
         [typeof(IEnumerable<CqlCode>), typeof(string)],
         ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
+        [typeof(CqlDate)],
+        ["AntidepressantDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
+        [typeof(Observation), typeof(Encounter)],
+        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["QualifyingEncounters", "URI"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
+        [typeof(string), typeof(int?)],
+        ["EncounterID", "CalculatedCGA"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EMDhFLcFhWVERAVVNfLAZYXJi = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["DTaPVaccination1", "DTaPVaccination2", "DTaPVaccination3", "DTaPVaccination4"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CNGHaZROXaJTHPICcbIaJbRXV = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["PolioVaccination1", "PolioVaccination2", "PolioVaccination3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EZTgahAUWGgSdGaDCgQNNIPGW = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["HepatitisBVaccination1", "HepatitisBVaccination2", "HepatitisBVaccination3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HDfaMbZGBWDPFETGQNFbceEeg = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["HepatitisBVaccination1", "HepatitisBVaccination2", "NewBornVaccine3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DdPDeOJhPYESfHGCOcBNOiPPP = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["PneumococcalVaccination1", "PneumococcalVaccination2", "PneumococcalVaccination3", "PneumococcalVaccination4"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZhFLeRDagbPQMNheVJcUNfNQ = new(
+        [typeof(CqlDate), typeof(CqlDate)],
+        ["FluVaccination1", "FluVaccination2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb = new(
+        [typeof(string), typeof(CqlDateTime)],
+        ["ID", "AuthorDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FOBYUiHifSfYFYhEEQajgLbgF = new(
+        [typeof(CqlQuantity), typeof(Observation)],
+        ["QualifyingGlycemicStatusValue", "QualifyingGlycemicStatus"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CVELXTjiMTaGQEjMfJXBdUHjW = new(
+        [typeof(CqlDate)],
+        ["startDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD = new(
+        [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
+        ["period", "periodStart"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GVNUVHGXYWXVGgfjdTEahUfhP = new(
+        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
+        ["HOOSLifeQuality", "HOOSSport", "HOOSActivityScore", "HOOSSymptoms", "HOOSPain"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DDTAOdcFieSJbGgRLLZPYbGQb = new(
+        [typeof(Observation), typeof(Observation)],
+        ["PROMIS10MentalScore", "PROMIS10PhysicalScore"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH = new(
+        [typeof(Observation), typeof(Observation)],
+        ["VR12MentalAssessment", "VR12PhysicalAssessment"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DbNMMZBTISSRTNdiShceSFVih = new(
+        [typeof(Encounter), typeof(Encounter)],
+        ["OfficeVisit1", "OfficeVisit2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BGYjYGLNPKWAZTBCVAdLDDTMj = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialPROMIS10Date", "FollowupPROMIS10Date"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DBUJFOVGBcbhIQPWARNQHKUaX = new(
+        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
+        ["Promis29Sleep", "Promis29SocialRoles", "Promis29Physical", "Promis29Pain", "Promis29Fatigue", "Promis29Depression", "Promis29Anxiety"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DSZKEYVbCINNIeAQiZdVaEJhG = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialPROMIS29Date", "FollowupPROMIS29Date"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FQKGdEYLiDFGMNAUAMETIHUQT = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialVR12ObliqueDate", "FollowupVR12ObliqueDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HSSAQEFQAOXLjUcOKGgicELWB = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialVR12OrthogonalDate", "FollowupVR12OrthogonalDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DUcFTCLcQEWDGGQdFCWTHFaUK = new(
+        [typeof(Observation), typeof(Observation)],
+        ["VR36MentalAssessment", "VR36PhysicalAssessment"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HQfcMfhQUSTNYMWSgJHiFeahQ = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialVR36ObliqueDate", "FollowupVR36ObliqueDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BFZHWdOOROjSjFSECHcQiaZZZ = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialVR36OrthogonalDate", "FollowupVR36OrthogonalDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EBLWeAeedHPAfOJXKPZJKSCUf = new(
+        [typeof(Observation), typeof(Observation)],
+        ["MLHFQPhysical", "MLHFQEmotional"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CcaWSNDiVeaLebVKKWWWiBcEU = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialMLHFQDate", "FollowupMLHFQDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DFKXORghhYafccUSbQaMfNTDj = new(
+        [typeof(Observation), typeof(Observation)],
+        ["KCCQ12Item", "KCCQ12Summary"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EQQLFFBVIbLIQLiZDNfeYdMU = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialKCCQ12Date", "FollowupKCCQ12Date"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BbPMcXSJeOeGdRcaZWGYPhGBL = new(
+        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
+        ["KCCQLifeQuality", "KCCQSymptomStability", "KCCQSelfEfficacy", "KCCQSymptoms", "KCCQPhysicalLimits", "KCCQSocialLimits"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HEFWLcHhCNCOQegEOfjWTXiGN = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialKCCQAssessmentDate", "FollowupKCCQAssessmentDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DggZKjEbQUfLADMDMBeASLDR = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialKCCQTotalScore", "FollowupKCCQTotalScore"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GVQcZJVjNdGAcjPedLaYDjEME = new(
+        [typeof(Encounter), typeof(Procedure)],
+        ["QualifyingEncounter", "HospitalDietitianReferral"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_XadcRffdjUdMDMjcTIdSXKKS = new(
+        [typeof(Encounter), typeof(Observation)],
+        ["QualifyingEncounter", "MalnutritionRiskScreening"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GFjZJIRJbJMHZiLMbCVCEiHgh = new(
+        [typeof(Encounter), typeof(Observation)],
+        ["QualifyingEncounter", "NutritionAssessment"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CTGXhDDGNAgcaKfhTDIBGVLYU = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["QualifyingEncounter", "MalnutritionDiagnosis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_TVETjQTNGSKUhAIhIbeKTXMI = new(
+        [typeof(Encounter), typeof(Procedure)],
+        ["QualifyingEncounter", "NutritionCarePlan"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FUFPMQdRaTBgLhghDWfUUBaNF = new(
+        [typeof(Observation), typeof(Encounter)],
+        ["HeartRate", "ModerateOrSevereLVSDHFOutpatientEncounter"]);
 
 }

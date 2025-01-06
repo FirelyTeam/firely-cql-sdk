@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("NCQAHealthPlanEnrollment", "1.0.0")]
 public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAHealthPlanEnrollment_1_0_0>
 {
@@ -21,9 +21,9 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
     public static NCQAHealthPlanEnrollment_1_0_0 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "NCQAHealthPlanEnrollment";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [NCQACQLBase_1_0_0.Instance, FHIRHelpers_4_0_001.Instance, NCQATerminology_1_0_0.Instance, NCQAFHIRBase_1_0_0.Instance];
+    string ILibrary.Name => "NCQAHealthPlanEnrollment";
+    string ILibrary.Version => "1.0.0";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [NCQACQLBase_1_0_0.Instance, FHIRHelpers_4_0_001.Instance, NCQATerminology_1_0_0.Instance, NCQAFHIRBase_1_0_0.Instance];
     #endregion Library Members
     public IEnumerable<CqlInterval<CqlDate>> CoverageIntervals(CqlContext context, IEnumerable<Coverage> Coverage, CqlInterval<CqlDate> participationPeriod)
     {
@@ -50,12 +50,14 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
         return c_;
     }
 
+
     public IEnumerable<CqlInterval<CqlDate>> Collapsed_Coverage_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
     {
         IEnumerable<CqlInterval<CqlDate>> a_ = NCQACQLBase_1_0_0.Instance.Collapse_Date_Interval_Workaround(context, Intervals);
 
         return a_;
     }
+
 
     public IEnumerable<CqlInterval<CqlDate>> Collapsed_Coverage_Adjacent_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> Intervals)
     {
@@ -96,6 +98,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
         return h_;
     }
 
+
     public IEnumerable<CqlInterval<CqlDate>> Collapsed_Final_Coverage_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> collapsedI, IEnumerable<CqlInterval<CqlDate>> adjacentI)
     {
         IEnumerable<CqlInterval<CqlDate>> a_ = this.Collapsed_Coverage_Intervals(context, collapsedI);
@@ -105,6 +108,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
 
         return d_;
     }
+
 
     public IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> IntervalInfo, IEnumerable<CqlInterval<CqlDate>> Collapsed, IEnumerable<CqlInterval<CqlDate>> Adjacent, IEnumerable<CqlInterval<CqlDate>> CollapsedFinal)?> All_Coverage_Info(CqlContext context, IEnumerable<Coverage> Coverage, CqlInterval<CqlDate> participationPeriod)
     {
@@ -127,6 +131,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
 
         return c_;
     }
+
 
     public IEnumerable<Coverage> Health_Plan_Coverage_Resources(CqlContext context, IEnumerable<Coverage> Coverage)
     {
@@ -164,6 +169,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
 
         return d_;
     }
+
 
     public bool? Anchor_Date_Criteria(CqlContext context, IEnumerable<Coverage> Coverage, CqlDate AnchorDate, CqlInterval<CqlDate> participationPeriod)
     {
@@ -253,6 +259,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
         return a_();
     }
 
+
     public bool? Health_Plan_Enrollment_Criteria(CqlContext context, IEnumerable<Coverage> Coverage, CqlDate AnchorDate, CqlInterval<CqlDate> participationPeriod, int? AllowedGapDays)
     {
         IEnumerable<Coverage> a_ = this.Health_Plan_Coverage_Resources(context, Coverage);
@@ -296,6 +303,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
         return m_;
     }
 
+
     public IEnumerable<Coverage> Pharmacy_Benefit_Coverage_Resources(CqlContext context, IEnumerable<Coverage> Coverage)
     {
         bool? a_(Coverage C)
@@ -326,6 +334,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
 
         return d_;
     }
+
 
     public bool? Pharmacy_Benefit_Enrollment_Criteria(CqlContext context, IEnumerable<Coverage> PharmCoverage, CqlDate AnchorDate, CqlInterval<CqlDate> participationPeriod, int? AllowedGapDays)
     {
@@ -370,6 +379,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
         return m_;
     }
 
+
     public IEnumerable<Coverage> Mental_Health_Benefit_Coverage_Resources(CqlContext context, IEnumerable<Coverage> Coverage)
     {
         bool? a_(Coverage C)
@@ -400,6 +410,7 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
 
         return d_;
     }
+
 
     public bool? Mental_Health_Benefit_Enrollment_Criteria(CqlContext context, IEnumerable<Coverage> MHCoverage, CqlDate AnchorDate, CqlInterval<CqlDate> participationPeriod, int? AllowedGapDays)
     {
@@ -443,6 +454,87 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
 
         return m_;
     }
+
+
+    private static CqlTupleMetadata CqlTupleMetadata_EaLaedgLDgRRYaLbKIIcBTOiA = new(
+        [typeof(Encounter), typeof(Encounter)],
+        ["OutpatientEncounter1", "OutpatientEncounter2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CgaDVOXeQBMgMPCPZOThIIdDb = new(
+        [typeof(CqlInterval<CqlDateTime>), typeof(CqlInterval<CqlDateTime>)],
+        ["LTCPeriod1", "LTCPeriod2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GIMHfXDcFiAjSJBDGYeUeZLhW = new(
+        [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
+        ["interval", "startOfInterval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EQHOUSiiWahbJPOUjJGEhIAOV = new(
+        [typeof(CqlInterval<CqlDateTime>), typeof(CqlDateTime)],
+        ["interval", "startOfInterval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EVRLVXPcBiDTIWfCCfKEWDfKI = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["sortedCoverings"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FKcLSALRMRfDigEFaJgDOPFRK = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["frontgaps", "endgap"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EdgSWaTaCbLYLJceGdIcWOLHd = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["sortedCoverings"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BBLSSiNBQBGUDJaVjMDZMSAXg = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["frontgaps", "endgap"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HEjPGjPEhLgQPGjROeWMgiGfC = new(
+        [typeof(CqlInterval<CqlDate>), typeof(int?)],
+        ["interval", "days"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HRbPDRZiOGGBceePOZWjVbXdP = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(int?), typeof(int?), typeof(CqlInterval<CqlDate>), typeof(int?)],
+        ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DUiZjXRKgCPYVZQJbFVDKNMOi = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["Covering_Intervals"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GQPbYTYABjXFVLRKjXgcDJFSj = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["Gap_Intervals"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FcQREFSfPJSKYAhSEWVJcZVED = new(
+        [typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?)],
+        ["StartYear", "StartMonth", "StartDay", "StartHour", "StartMinute", "StartSecond", "StartMillisecond", "EndYear", "EndMonth", "EndDay", "EndHour", "EndMinute", "EndSecond", "EndMillisecond"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CGHEUIgjaCjJVKEADTSZEbdCL = new(
+        [typeof(CqlInterval<CqlDateTime>), typeof(int?)],
+        ["interval", "days"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HDihbLieYfQbgeSbOWZBAMUIQ = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(int?), typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(int?)],
+        ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GZMPWdGOJiTNjfWAcbZMePdXV = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["Covering_Intervals"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CKbERRbOPGNBBERUOghhaOYSE = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["Gap_Intervals"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CfANiScMYDdVZFgRERKJQEVca = new(
+        [typeof(IEnumerable<CqlDate>)],
+        ["SortedDates"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BDeBMdFeZaVSehBSFYjTFdYYD = new(
+        [typeof(IEnumerable<CqlDate>), typeof(int?)],
+        ["SortedList", "AnchorIndex"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc = new(
+        [typeof(CqlDate), typeof(IEnumerable<CqlDate>), typeof(int?)],
+        ["NextDate", "NewList", "IndexofNewDate"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_BaNHUZXcQBUKLNgEDWdDHjYV = new(
         [typeof(CqlInterval<CqlDate>), typeof(CqlInterval<CqlDate>)],

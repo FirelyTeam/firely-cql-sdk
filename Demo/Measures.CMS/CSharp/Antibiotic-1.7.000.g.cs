@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("Antibiotic", "1.7.000")]
 public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_000>
 {
@@ -21,9 +21,9 @@ public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_00
     public static Antibiotic_1_7_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "Antibiotic";
-    public string Version => "1.7.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, CumulativeMedicationDuration_4_1_000.Instance];
+    string ILibrary.Name => "Antibiotic";
+    string ILibrary.Version => "1.7.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, CumulativeMedicationDuration_4_1_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Measurement Period")]
@@ -35,6 +35,7 @@ public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_00
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -43,6 +44,7 @@ public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_00
 
         return b_;
     }
+
 
     public IEnumerable<Encounter> Has_Comorbid_Condition_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<Condition> comorbidConditions)
     {
@@ -70,20 +72,21 @@ public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_00
                 return z_;
             };
             IEnumerable<Condition> g_ = context.Operators.Where<Condition>(comorbidConditions, f_);
-            Encounter h_(Condition comcondition) => 
+            Encounter h_(Condition comcondition) =>
                 eDate;
             IEnumerable<Encounter> i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
             return i_;
         };
         IEnumerable<Encounter> b_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, a_);
-        Encounter c_(Encounter eDate) => 
+        Encounter c_(Encounter eDate) =>
             eDate;
         IEnumerable<Encounter> d_ = context.Operators.Select<Encounter, Encounter>(b_, c_);
         IEnumerable<Encounter> e_ = context.Operators.Distinct<Encounter>(d_);
 
         return e_;
     }
+
 
     public IEnumerable<Encounter> Has_Competing_Diagnosis_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<Condition> competingConditions)
     {
@@ -110,20 +113,21 @@ public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_00
                 return z_;
             };
             IEnumerable<Condition> g_ = context.Operators.Where<Condition>(competingConditions, f_);
-            Encounter h_(Condition competcondition) => 
+            Encounter h_(Condition competcondition) =>
                 eDate;
             IEnumerable<Encounter> i_ = context.Operators.Select<Condition, Encounter>(g_, h_);
 
             return i_;
         };
         IEnumerable<Encounter> b_ = context.Operators.SelectMany<Encounter, Encounter>(episodeDate, a_);
-        Encounter c_(Encounter eDate) => 
+        Encounter c_(Encounter eDate) =>
             eDate;
         IEnumerable<Encounter> d_ = context.Operators.Select<Encounter, Encounter>(b_, c_);
         IEnumerable<Encounter> e_ = context.Operators.Distinct<Encounter>(d_);
 
         return e_;
     }
+
 
     public IEnumerable<Encounter> Has_Antibiotic_Medication_History(CqlContext context, IEnumerable<Encounter> episodeDate, IEnumerable<MedicationRequest> antibioticMedications)
     {
@@ -151,7 +155,7 @@ public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_00
                 return w_;
             };
             IEnumerable<MedicationRequest> d_ = context.Operators.Where<MedicationRequest>(antibioticMedications, c_);
-            Encounter e_(MedicationRequest ActiveMedication) => 
+            Encounter e_(MedicationRequest ActiveMedication) =>
                 DateOfEpisode;
             IEnumerable<Encounter> f_ = context.Operators.Select<MedicationRequest, Encounter>(d_, e_);
 
@@ -161,5 +165,18 @@ public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_00
 
         return b_;
     }
+
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
 
 }

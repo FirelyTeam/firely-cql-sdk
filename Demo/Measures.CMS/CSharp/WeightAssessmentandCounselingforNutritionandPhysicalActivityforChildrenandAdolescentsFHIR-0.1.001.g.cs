@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR", "0.1.001")]
 public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_001 : ILibrary, ISingleton<WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_001>
 {
@@ -21,69 +21,79 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     public static WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR_0_1_001 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR";
-    public string Version => "0.1.001";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance];
+    string ILibrary.Name => "WeightAssessmentandCounselingforNutritionandPhysicalActivityforChildrenandAdolescentsFHIR";
+    string ILibrary.Version => "0.1.001";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Counseling for Nutrition")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.195.12.1003")]
-    public CqlValueSet Counseling_for_Nutrition(CqlContext context) => 
+    public CqlValueSet Counseling_for_Nutrition(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.195.12.1003", default);
+
 
 
     [CqlDeclaration("Counseling for Physical Activity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1035")]
-    public CqlValueSet Counseling_for_Physical_Activity(CqlContext context) => 
+    public CqlValueSet Counseling_for_Physical_Activity(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1035", default);
+
 
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-    public CqlValueSet Home_Healthcare_Services(CqlContext context) => 
+    public CqlValueSet Home_Healthcare_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
+
 
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-    public CqlValueSet Office_Visit(CqlContext context) => 
+    public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
+
 
 
     [CqlDeclaration("Pregnancy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378")]
-    public CqlValueSet Pregnancy(CqlContext context) => 
+    public CqlValueSet Pregnancy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378", default);
+
 
 
     [CqlDeclaration("Preventive Care Services Group Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027")]
-    public CqlValueSet Preventive_Care_Services_Group_Counseling(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services_Group_Counseling(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027", default);
+
 
 
     [CqlDeclaration("Preventive Care Services, Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
-    public CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default);
+
 
 
     [CqlDeclaration("Preventive Care Services Individual Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026")]
-    public CqlValueSet Preventive_Care_Services_Individual_Counseling(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services_Individual_Counseling(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", default);
+
 
 
     [CqlDeclaration("Preventive Care, Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
-    public CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17(CqlContext context) => 
+    public CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default);
+
 
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-    public CqlValueSet Telephone_Visits(CqlContext context) => 
+    public CqlValueSet Telephone_Visits(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
+
 
 
     [CqlDeclaration("UCUM")]
@@ -96,6 +106,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     }
 
 
+
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC(CqlContext context)
     {
@@ -106,6 +117,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     }
 
 
+
     [CqlDeclaration("ObservationCategoryCodes")]
     public CqlCode[] ObservationCategoryCodes(CqlContext context)
     {
@@ -114,6 +126,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -128,6 +141,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -136,6 +150,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
         return b_;
     }
+
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -147,6 +162,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     }
 
 
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -154,6 +170,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Race")]
@@ -165,6 +182,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -172,6 +190,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Qualifying Encounters")]
@@ -214,6 +233,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     }
 
 
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -235,6 +255,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     }
 
 
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -242,6 +263,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Pregnancy Diagnosis Which Overlaps Measurement Period")]
@@ -263,6 +285,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     }
 
 
+
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
@@ -273,6 +296,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
         return d_;
     }
+
 
 
     [CqlDeclaration("BMI Percentile in Measurement Period")]
@@ -300,6 +324,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     }
 
 
+
     [CqlDeclaration("Height in Measurement Period")]
     public IEnumerable<Observation> Height_in_Measurement_Period(CqlContext context)
     {
@@ -323,6 +348,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
         return d_;
     }
+
 
 
     [CqlDeclaration("Weight in Measurement Period")]
@@ -350,6 +376,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     }
 
 
+
     [CqlDeclaration("Numerator 1")]
     public bool? Numerator_1(CqlContext context)
     {
@@ -364,6 +391,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
         return h_;
     }
+
 
 
     [CqlDeclaration("Numerator 2")]
@@ -389,6 +417,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     }
 
 
+
     [CqlDeclaration("Numerator 3")]
     public bool? Numerator_3(CqlContext context)
     {
@@ -412,6 +441,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     }
 
 
+
     [CqlDeclaration("Stratifaction 1")]
     public bool? Stratifaction_1(CqlContext context)
     {
@@ -430,6 +460,7 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
     }
 
 
+
     [CqlDeclaration("Stratifaction 2")]
     public bool? Stratifaction_2(CqlContext context)
     {
@@ -446,5 +477,326 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
         return j_;
     }
+
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
+        [typeof(CqlDate)],
+        ["AntidepressantDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
+        [typeof(Observation), typeof(Encounter)],
+        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["QualifyingEncounters", "URI"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
+        [typeof(string), typeof(int?)],
+        ["EncounterID", "CalculatedCGA"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EMDhFLcFhWVERAVVNfLAZYXJi = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["DTaPVaccination1", "DTaPVaccination2", "DTaPVaccination3", "DTaPVaccination4"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CNGHaZROXaJTHPICcbIaJbRXV = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["PolioVaccination1", "PolioVaccination2", "PolioVaccination3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EZTgahAUWGgSdGaDCgQNNIPGW = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["HepatitisBVaccination1", "HepatitisBVaccination2", "HepatitisBVaccination3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HDfaMbZGBWDPFETGQNFbceEeg = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["HepatitisBVaccination1", "HepatitisBVaccination2", "NewBornVaccine3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DdPDeOJhPYESfHGCOcBNOiPPP = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["PneumococcalVaccination1", "PneumococcalVaccination2", "PneumococcalVaccination3", "PneumococcalVaccination4"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZhFLeRDagbPQMNheVJcUNfNQ = new(
+        [typeof(CqlDate), typeof(CqlDate)],
+        ["FluVaccination1", "FluVaccination2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb = new(
+        [typeof(string), typeof(CqlDateTime)],
+        ["ID", "AuthorDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FOBYUiHifSfYFYhEEQajgLbgF = new(
+        [typeof(CqlQuantity), typeof(Observation)],
+        ["QualifyingGlycemicStatusValue", "QualifyingGlycemicStatus"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CVELXTjiMTaGQEjMfJXBdUHjW = new(
+        [typeof(CqlDate)],
+        ["startDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD = new(
+        [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
+        ["period", "periodStart"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GVNUVHGXYWXVGgfjdTEahUfhP = new(
+        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
+        ["HOOSLifeQuality", "HOOSSport", "HOOSActivityScore", "HOOSSymptoms", "HOOSPain"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DDTAOdcFieSJbGgRLLZPYbGQb = new(
+        [typeof(Observation), typeof(Observation)],
+        ["PROMIS10MentalScore", "PROMIS10PhysicalScore"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH = new(
+        [typeof(Observation), typeof(Observation)],
+        ["VR12MentalAssessment", "VR12PhysicalAssessment"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DbNMMZBTISSRTNdiShceSFVih = new(
+        [typeof(Encounter), typeof(Encounter)],
+        ["OfficeVisit1", "OfficeVisit2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BGYjYGLNPKWAZTBCVAdLDDTMj = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialPROMIS10Date", "FollowupPROMIS10Date"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DBUJFOVGBcbhIQPWARNQHKUaX = new(
+        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
+        ["Promis29Sleep", "Promis29SocialRoles", "Promis29Physical", "Promis29Pain", "Promis29Fatigue", "Promis29Depression", "Promis29Anxiety"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DSZKEYVbCINNIeAQiZdVaEJhG = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialPROMIS29Date", "FollowupPROMIS29Date"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FQKGdEYLiDFGMNAUAMETIHUQT = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialVR12ObliqueDate", "FollowupVR12ObliqueDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HSSAQEFQAOXLjUcOKGgicELWB = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialVR12OrthogonalDate", "FollowupVR12OrthogonalDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DUcFTCLcQEWDGGQdFCWTHFaUK = new(
+        [typeof(Observation), typeof(Observation)],
+        ["VR36MentalAssessment", "VR36PhysicalAssessment"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HQfcMfhQUSTNYMWSgJHiFeahQ = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialVR36ObliqueDate", "FollowupVR36ObliqueDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BFZHWdOOROjSjFSECHcQiaZZZ = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialVR36OrthogonalDate", "FollowupVR36OrthogonalDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EBLWeAeedHPAfOJXKPZJKSCUf = new(
+        [typeof(Observation), typeof(Observation)],
+        ["MLHFQPhysical", "MLHFQEmotional"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CcaWSNDiVeaLebVKKWWWiBcEU = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialMLHFQDate", "FollowupMLHFQDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DFKXORghhYafccUSbQaMfNTDj = new(
+        [typeof(Observation), typeof(Observation)],
+        ["KCCQ12Item", "KCCQ12Summary"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EQQLFFBVIbLIQLiZDNfeYdMU = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialKCCQ12Date", "FollowupKCCQ12Date"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BbPMcXSJeOeGdRcaZWGYPhGBL = new(
+        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
+        ["KCCQLifeQuality", "KCCQSymptomStability", "KCCQSelfEfficacy", "KCCQSymptoms", "KCCQPhysicalLimits", "KCCQSocialLimits"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HEFWLcHhCNCOQegEOfjWTXiGN = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialKCCQAssessmentDate", "FollowupKCCQAssessmentDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DggZKjEbQUfLADMDMBeASLDR = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialKCCQTotalScore", "FollowupKCCQTotalScore"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GVQcZJVjNdGAcjPedLaYDjEME = new(
+        [typeof(Encounter), typeof(Procedure)],
+        ["QualifyingEncounter", "HospitalDietitianReferral"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_XadcRffdjUdMDMjcTIdSXKKS = new(
+        [typeof(Encounter), typeof(Observation)],
+        ["QualifyingEncounter", "MalnutritionRiskScreening"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GFjZJIRJbJMHZiLMbCVCEiHgh = new(
+        [typeof(Encounter), typeof(Observation)],
+        ["QualifyingEncounter", "NutritionAssessment"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CTGXhDDGNAgcaKfhTDIBGVLYU = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["QualifyingEncounter", "MalnutritionDiagnosis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_TVETjQTNGSKUhAIhIbeKTXMI = new(
+        [typeof(Encounter), typeof(Procedure)],
+        ["QualifyingEncounter", "NutritionCarePlan"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FUFPMQdRaTBgLhghDWfUUBaNF = new(
+        [typeof(Observation), typeof(Encounter)],
+        ["HeartRate", "ModerateOrSevereLVSDHFOutpatientEncounter"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CCJaUjRHWSXeUTcFAfVeVeNaD = new(
+        [typeof(string), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<int?>), typeof(IEnumerable<Encounter.DiagnosisComponent>)],
+        ["encounterId", "condition", "rank", "POA"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CajFQjTXAXITWGJPNIjCafPiF = new(
+        [typeof(Encounter), typeof(CqlConcept)],
+        ["encounter", "condition"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPLfQTPONQabPZigKbYFERDVQ = new(
+        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>)],
+        ["encounter", "hospitalizationPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BRDBXSUhdQiXBCfMGdSacWIG = new(
+        [typeof((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?), typeof(MedicationAdministration)],
+        ["Hospitalization", "HypoglycemicMed"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_SMNhCfXhAdRgSFYJNGOMBShE = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayNumber", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HRTAKZQhNDEfbiSbFGHLQTdcR = new(
+        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayNumber, CqlInterval<CqlDateTime> dayPeriod)?>)],
+        ["encounter", "hospitalizationPeriod", "relevantPeriod", "relevantDays"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BbhMZNJZUhELHSIeBfBEVUQGO = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(bool?), typeof(bool?), typeof(bool?)],
+        ["dayNumber", "dayPeriod", "hasSevereResult", "hasElevatedResult", "hasNoGlucoseTest"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FhADCCAGbeXAiadgccRECiPBd = new(
+        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayNumber, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoGlucoseTest)?>)],
+        ["encounter", "relevantPeriod", "relevantDays"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FNeERNKXWKJeEjWXREHDLePdY = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(bool?)],
+        ["dayIndex", "dayPeriod", "hasHyperglycemicEvent"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GJFejXJaZWjRVYgMbQUZgIPjK = new(
+        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?>)],
+        ["encounter", "relevantPeriod", "eligibleEventDays"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CLZgggJGDQVFHPIfbiSZOiXTH = new(
+        [typeof(Encounter), typeof(Observation)],
+        ["InpatientHospitalization", "GlucoseTest"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BBNOZJWbNFIIMKUYJNdXQYNTL = new(
+        [typeof(Encounter), typeof(Observation), typeof(Observation)],
+        ["InpatientHospitalization", "GlucoseResult1000", "EarlierGlucoseTest"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DBJShWTZiKWMABGVHCaJVcMhY = new(
+        [typeof(MedicationAdministration), typeof(MedicationAdministration), typeof(Encounter)],
+        ["OpioidAntagonistGiven", "OpioidGiven", "EncounterWithQualifyingAge"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FSGEiXEbHOWUcRPJgTjPZFYcO = new(
+        [typeof(Encounter), typeof(MedicationAdministration), typeof(Observation)],
+        ["QualifyingEncounter", "HypoglycemicMedication", "GlucoseTest"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BfZBOfPTWgQBddbhgdIFdbKHU = new(
+        [typeof(Encounter), typeof(Observation), typeof(Observation)],
+        ["QualifyingEncounter", "LowGlucoseTest", "FollowupGlucoseTest"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GNOWceaaAJjTLNBBKCiSMeeVD = new(
+        [typeof(Encounter), typeof(Observation)],
+        ["QualifyingEncounter", "HypoglycemicEvent"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GIbILVAdXLLNYBgcQIEiUiKaK = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstTemperatureResult", "Timing"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DhbJAfCiKIAGYKTjJXYGSKECQ = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstHeartRateResult", "Timing"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FdREYEdHOZIcMCNYCRFJYJReA = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstOxygenSatResult", "Timing"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GbUHPXXHScejjXWhcHJFQQifQ = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstBicarbonateResult", "Timing"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FETECNQPQREfGRgPYWhOWgeWA = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstCreatinineResult", "Timing"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DIHdhbAJeJTdiAVUAELUHRNdS = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstHematocritResult", "Timing"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DAUcYHQZcDKbIfORJOEZBDgIh = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstPlateletResult", "Timing"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GKGeLARADLGJcNcZaDhdCREMa = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstSodiumResult", "Timing"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_ChVYCdXDGgVcFTCCUefXMbCHX = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstWhiteBloodCellResult", "Timing"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CYbMQaXdPgTVSLXJSHHNTbhVM = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstRespRateResult", "Timing"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstResult", "Timing"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GEQGUKVdHYQAZdGbSEBAPcHZR = new(
+        [typeof(Encounter), typeof(Procedure), typeof(Procedure), typeof(Condition)],
+        ["FaceToFaceOrTelehealthEncounter", "ChemoBeforeEncounter", "ChemoAfterEncounter", "Cancer"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FRbAiSWEhRfKaLTXPVgFXYZAE = new(
+        [typeof(CqlConcept), typeof(string)],
+        ["code", "SOCDxCategory"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_RBQLXdQIRBbBEHDfOgQjdBMH = new(
+        [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, CqlConcept code, string SOCDxCategory)?>)],
+        ["id", "complications"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FNaSKPNeFZXSNMfSCYPJLLGSR = new(
+        [typeof(Procedure), typeof(string)],
+        ["code", "SOCProcedureCategory"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DbihhAfJfGSKOIcQDBMEMigFK = new(
+        [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?>)],
+        ["id", "procedures"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_ESFBYaBAeYMhOBFMjVCbeLhQA = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstWBCResult", "Timing"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HOiMaDjifIOTXXFShNKiWLBLV = new(
+        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
+        ["EncounterId", "FirstHRResult", "Timing"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FjSKXeIESORPNbRGajibMfUaK = new(
+        [typeof(string), typeof(IEnumerable<CqlQuantity>), typeof(CqlDateTime)],
+        ["EncounterId", "FirstSBPResult", "Timing"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GNNDVIQPcTANSdLebhBKYIdga = new(
+        [typeof(CqlDateTime), typeof(int?)],
+        ["effectiveDatetime", "valueInteger"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FBHNjYWJgMKheadEZUgcdQGXN = new(
+        [typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?), typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?)],
+        ["FirstUSSAssessment", "FollowUpUSSAssessment"]);
 
 }

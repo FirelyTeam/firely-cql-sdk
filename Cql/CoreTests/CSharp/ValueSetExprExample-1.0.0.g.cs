@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("ValueSetExprExample", "1.0.0")]
 public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetExprExample_1_0_0>
 {
@@ -21,33 +21,37 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     public static ValueSetExprExample_1_0_0 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "ValueSetExprExample";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [];
+    string ILibrary.Name => "ValueSetExprExample";
+    string ILibrary.Version => "1.0.0";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
     #endregion Library Members
 
     [CqlDeclaration("ValueSet-A-1")]
     [CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-1")]
-    public CqlValueSet ValueSet_A_1(CqlContext context) => 
+    public CqlValueSet ValueSet_A_1(CqlContext context) =>
         new CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-1", default);
+
 
 
     [CqlDeclaration("ValueSet-A-2")]
     [CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-2")]
-    public CqlValueSet ValueSet_A_2(CqlContext context) => 
+    public CqlValueSet ValueSet_A_2(CqlContext context) =>
         new CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-2", default);
+
 
 
     [CqlDeclaration("ValueSet-B-1")]
     [CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-1")]
-    public CqlValueSet ValueSet_B_1(CqlContext context) => 
+    public CqlValueSet ValueSet_B_1(CqlContext context) =>
         new CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-1", default);
+
 
 
     [CqlDeclaration("ValueSet-B-2")]
     [CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-2")]
-    public CqlValueSet ValueSet_B_2(CqlContext context) => 
+    public CqlValueSet ValueSet_B_2(CqlContext context) =>
         new CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-2", default);
+
 
 
     [CqlDeclaration("ChosenSubCategory")]
@@ -59,6 +63,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     }
 
 
+
     [CqlDeclaration("ChosenCode")]
     public CqlCode ChosenCode(CqlContext context)
     {
@@ -66,6 +71,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
         return (CqlCode)a_;
     }
+
 
 
     [CqlDeclaration("ValueSetA")]
@@ -109,6 +115,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     }
 
 
+
     [CqlDeclaration("ValueSetB")]
     public CqlValueSet ValueSetB(CqlContext context)
     {
@@ -150,6 +157,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     }
 
 
+
     [CqlDeclaration("Result")]
     public string Result(CqlContext context)
     {
@@ -187,5 +195,14 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
         return a_();
     }
+
+
+    private static CqlTupleMetadata CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ = new(
+        [typeof(string), typeof(string)],
+        ["result1", "result2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY = new(
+        [typeof(string), typeof((CqlTupleMetadata, string result1, string result2)?)],
+        ["status", "result"]);
 
 }

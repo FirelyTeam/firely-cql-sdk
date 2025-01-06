@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("AlaraCTClinicalFHIR", "0.4.000")]
 public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTClinicalFHIR_0_4_000>
 {
@@ -21,24 +21,27 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
     public static AlaraCTClinicalFHIR_0_4_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "AlaraCTClinicalFHIR";
-    public string Version => "0.4.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, AlaraCommonFunctions_1_5_000.Instance];
+    string ILibrary.Name => "AlaraCTClinicalFHIR";
+    string ILibrary.Version => "0.4.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, AlaraCommonFunctions_1_5_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Birth date")]
-    public CqlCode Birth_date(CqlContext context) => 
+    public CqlCode Birth_date(CqlContext context) =>
         new CqlCode("21112-8", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("CT dose and image quality category")]
-    public CqlCode CT_dose_and_image_quality_category(CqlContext context) => 
+    public CqlCode CT_dose_and_image_quality_category(CqlContext context) =>
         new CqlCode("96914-7", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("Full Body")]
-    public CqlCode Full_Body(CqlContext context) => 
+    public CqlCode Full_Body(CqlContext context) =>
         new CqlCode("LA31771-1", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("LOINC")]
@@ -54,6 +57,7 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
     }
 
 
+
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
@@ -66,6 +70,7 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -74,6 +79,7 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
 
         return b_;
     }
+
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -85,6 +91,7 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
     }
 
 
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -92,6 +99,7 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Race")]
@@ -103,6 +111,7 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -110,6 +119,7 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Patients with Qualifying CTScan")]
@@ -143,6 +153,7 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
     }
 
 
+
     [CqlDeclaration("Patients with Qualifying CTScan with Values")]
     public IEnumerable<Observation> Patients_with_Qualifying_CTScan_with_Values(CqlContext context)
     {
@@ -167,6 +178,7 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
     }
 
 
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -177,6 +189,7 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
     }
 
 
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -185,6 +198,7 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
 
         return b_;
     }
+
 
 
     [CqlDeclaration("Denominator Exclusion")]
@@ -208,6 +222,7 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
     }
 
 
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -223,5 +238,18 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
 
         return d_;
     }
+
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
 
 }

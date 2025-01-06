@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR", "0.1.001")]
 public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_001 : ILibrary, ISingleton<AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_001>
 {
@@ -21,128 +21,148 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
     public static AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_001 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR";
-    public string Version => "0.1.001";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance, QICoreCommon_2_1_000.Instance, Antibiotic_1_7_000.Instance];
+    string ILibrary.Name => "AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR";
+    string ILibrary.Version => "0.1.001";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance, QICoreCommon_2_1_000.Instance, Antibiotic_1_7_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Acute Pharyngitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1011")]
-    public CqlValueSet Acute_Pharyngitis(CqlContext context) => 
+    public CqlValueSet Acute_Pharyngitis(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1011", default);
+
 
 
     [CqlDeclaration("Acute Tonsillitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1012")]
-    public CqlValueSet Acute_Tonsillitis(CqlContext context) => 
+    public CqlValueSet Acute_Tonsillitis(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1012", default);
+
 
 
     [CqlDeclaration("Antibiotic Medications for Upper Respiratory Infection")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1001")]
-    public CqlValueSet Antibiotic_Medications_for_Upper_Respiratory_Infection(CqlContext context) => 
+    public CqlValueSet Antibiotic_Medications_for_Upper_Respiratory_Infection(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1001", default);
+
 
 
     [CqlDeclaration("Comorbid Conditions for Respiratory Conditions")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1025")]
-    public CqlValueSet Comorbid_Conditions_for_Respiratory_Conditions(CqlContext context) => 
+    public CqlValueSet Comorbid_Conditions_for_Respiratory_Conditions(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1025", default);
+
 
 
     [CqlDeclaration("Competing Conditions for Respiratory Conditions")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1017")]
-    public CqlValueSet Competing_Conditions_for_Respiratory_Conditions(CqlContext context) => 
+    public CqlValueSet Competing_Conditions_for_Respiratory_Conditions(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1017", default);
+
 
 
     [CqlDeclaration("Emergency Department Evaluation and Management Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010")]
-    public CqlValueSet Emergency_Department_Evaluation_and_Management_Visit(CqlContext context) => 
+    public CqlValueSet Emergency_Department_Evaluation_and_Management_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010", default);
+
 
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-    public CqlValueSet Home_Healthcare_Services(CqlContext context) => 
+    public CqlValueSet Home_Healthcare_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
+
 
 
     [CqlDeclaration("Medical Disability Exam")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1073")]
-    public CqlValueSet Medical_Disability_Exam(CqlContext context) => 
+    public CqlValueSet Medical_Disability_Exam(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1073", default);
+
 
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-    public CqlValueSet Office_Visit(CqlContext context) => 
+    public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
+
 
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
-    public CqlValueSet Outpatient_Consultation(CqlContext context) => 
+    public CqlValueSet Outpatient_Consultation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
+
 
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-    public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
+
 
 
     [CqlDeclaration("Preventive Care Services Group Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027")]
-    public CqlValueSet Preventive_Care_Services_Group_Counseling(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services_Group_Counseling(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027", default);
+
 
 
     [CqlDeclaration("Preventive Care Services Individual Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026")]
-    public CqlValueSet Preventive_Care_Services_Individual_Counseling(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services_Individual_Counseling(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", default);
+
 
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
+
 
 
     [CqlDeclaration("Preventive Care Services, Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
-    public CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default);
+
 
 
     [CqlDeclaration("Preventive Care, Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
-    public CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17(CqlContext context) => 
+    public CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default);
+
 
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-    public CqlValueSet Telephone_Visits(CqlContext context) => 
+    public CqlValueSet Telephone_Visits(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
+
 
 
     [CqlDeclaration("Upper Respiratory Infection")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1022")]
-    public CqlValueSet Upper_Respiratory_Infection(CqlContext context) => 
+    public CqlValueSet Upper_Respiratory_Infection(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1022", default);
+
 
 
     [CqlDeclaration("Virtual Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-    public CqlValueSet Virtual_Encounter(CqlContext context) => 
+    public CqlValueSet Virtual_Encounter(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
 
+
     [CqlDeclaration("Unlisted preventive medicine service")]
-    public CqlCode Unlisted_preventive_medicine_service(CqlContext context) => 
+    public CqlCode Unlisted_preventive_medicine_service(CqlContext context) =>
         new CqlCode("99429", "http://www.ama-assn.org/go/cpt", default, default);
+
 
 
     [CqlDeclaration("CPT")]
@@ -154,6 +174,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -168,6 +189,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -176,6 +198,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
 
         return b_;
     }
+
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -187,6 +210,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
     }
 
 
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -194,6 +218,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Race")]
@@ -205,6 +230,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -212,6 +238,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Qualifying Encounters")]
@@ -304,6 +331,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
     }
 
 
+
     [CqlDeclaration("Encounter with Upper Respiratory Infection")]
     public IEnumerable<Encounter> Encounter_with_Upper_Respiratory_Infection(CqlContext context)
     {
@@ -334,13 +362,14 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
             return x_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?> h_ = context.Operators.Where<(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?>(f_, g_);
-        Encounter i_((CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)? tuple_figmirinmncaavfkbmahdktce) => 
+        Encounter i_((CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)? tuple_figmirinmncaavfkbmahdktce) =>
             tuple_figmirinmncaavfkbmahdktce?.QualifyingEncounters;
         IEnumerable<Encounter> j_ = context.Operators.Select<(CqlTupleMetadata, Encounter QualifyingEncounters, Condition URI)?, Encounter>(h_, i_);
         IEnumerable<Encounter> k_ = context.Operators.Distinct<Encounter>(j_);
 
         return k_;
     }
+
 
 
     [CqlDeclaration("Initial Population")]
@@ -362,13 +391,14 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
             return o_;
         };
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-        Encounter d_(Encounter EncounterWithURI) => 
+        Encounter d_(Encounter EncounterWithURI) =>
             EncounterWithURI;
         IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
         IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
 
         return f_;
     }
+
 
 
     [CqlDeclaration("Encounters and Assessments with Hospice Patient")]
@@ -387,6 +417,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
     }
 
 
+
     [CqlDeclaration("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context)
     {
@@ -394,6 +425,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -424,6 +456,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
 
         return y_;
     }
+
 
 
     [CqlDeclaration("Numerator")]
@@ -461,7 +494,7 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
                 return al_;
             };
             IEnumerable<MedicationRequest> p_ = context.Operators.Where<MedicationRequest>(n_, o_);
-            Encounter q_(MedicationRequest OrderedAntibiotic) => 
+            Encounter q_(MedicationRequest OrderedAntibiotic) =>
                 EncounterWithURI;
             IEnumerable<Encounter> r_ = context.Operators.Select<MedicationRequest, Encounter>(p_, q_);
 
@@ -469,13 +502,14 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
         };
         IEnumerable<Encounter> d_ = context.Operators.SelectMany<Encounter, Encounter>(a_, c_);
         IEnumerable<Encounter> e_ = context.Operators.Except<Encounter>(a_, d_);
-        Encounter f_(Encounter EncounterWithURI) => 
+        Encounter f_(Encounter EncounterWithURI) =>
             EncounterWithURI;
         IEnumerable<Encounter> g_ = context.Operators.Select<Encounter, Encounter>(e_, f_);
         IEnumerable<Encounter> h_ = context.Operators.Distinct<Encounter>(g_);
 
         return h_;
     }
+
 
 
     [CqlDeclaration("Stratification 1")]
@@ -505,13 +539,14 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
             return y_;
         };
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-        Encounter d_(Encounter EncounterWithURI) => 
+        Encounter d_(Encounter EncounterWithURI) =>
             EncounterWithURI;
         IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
         IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
 
         return f_;
     }
+
 
 
     [CqlDeclaration("Stratification 2")]
@@ -534,13 +569,14 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
             return p_;
         };
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-        Encounter d_(Encounter EncounterWithURI) => 
+        Encounter d_(Encounter EncounterWithURI) =>
             EncounterWithURI;
         IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
         IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
 
         return f_;
     }
+
 
 
     [CqlDeclaration("Stratification 3")]
@@ -562,13 +598,38 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
             return o_;
         };
         IEnumerable<Encounter> c_ = context.Operators.Where<Encounter>(a_, b_);
-        Encounter d_(Encounter EncounterWithURI) => 
+        Encounter d_(Encounter EncounterWithURI) =>
             EncounterWithURI;
         IEnumerable<Encounter> e_ = context.Operators.Select<Encounter, Encounter>(c_, d_);
         IEnumerable<Encounter> f_ = context.Operators.Distinct<Encounter>(e_);
 
         return f_;
     }
+
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
+        [typeof(CqlDate)],
+        ["AntidepressantDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
+        [typeof(Observation), typeof(Encounter)],
+        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
         [typeof(Encounter), typeof(Condition)],

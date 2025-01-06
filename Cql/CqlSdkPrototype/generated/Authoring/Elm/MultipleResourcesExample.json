@@ -1,0 +1,320 @@
+{
+  "library": {
+    "identifier": {
+      "id": "MultipleResourcesExample",
+      "system": "",
+      "version": "0.0.1"
+    },
+    "schemaIdentifier": {
+      "id": "urn:hl7-org:elm",
+      "version": "r1"
+    },
+    "usings": {
+      "def": [
+        {
+          "localIdentifier": "System",
+          "uri": "urn:hl7-org:elm-types:r1",
+          "version": "1.0.0"
+        },
+        {
+          "localIdentifier": "FHIR",
+          "uri": "http://hl7.org/fhir",
+          "version": "4.0.1",
+          "localId": "2084",
+          "locator": "3:0-3:19"
+        }
+      ]
+    },
+    "includes": {
+      "def": [
+        {
+          "localIdentifier": "FHIRHelpers",
+          "path": "FHIRHelpers",
+          "version": "4.3.000",
+          "annotation": [
+            {
+              "type": "CqlToElmError",
+              "message": "Unable to resolve library: FHIRHelpers version \u00274.3.000\u0027. Are you sure this library version exists and that you have access?",
+              "errorType": "semantic",
+              "errorSeverity": "error"
+            }
+          ],
+          "localId": "2085",
+          "locator": "5:0-5:28"
+        }
+      ]
+    },
+    "parameters": {
+      "def": []
+    },
+    "codeSystems": {
+      "def": [
+        {
+          "name": "LOINC",
+          "id": "http://loinc.org",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}CodeSystem"
+          },
+          "localId": "2086",
+          "locator": "7:0-7:20",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}CodeSystem"
+        }
+      ]
+    },
+    "valueSets": {
+      "def": [
+        {
+          "name": "Lung Cancer",
+          "id": "http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}ValueSet"
+          },
+          "localId": "2087",
+          "locator": "9:0-9:25",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}ValueSet"
+        },
+        {
+          "name": "Condition Clinical Status",
+          "id": "http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}ValueSet"
+          },
+          "localId": "2088",
+          "locator": "10:0-10:38",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}ValueSet"
+        }
+      ]
+    },
+    "codes": {
+      "def": [
+        {
+          "codeSystem": {
+            "name": "LOINC",
+            "localId": "2089",
+            "locator": "12:46-12:46"
+          },
+          "name": "Tobacco Smoking Status",
+          "id": "72166-2",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}Code"
+          },
+          "localId": "2090",
+          "locator": "12:0-12:46",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}Code"
+        }
+      ]
+    },
+    "concepts": {
+      "def": []
+    },
+    "contexts": {
+      "def": [
+        {
+          "name": "Patient",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{http://hl7.org/fhir}Patient"
+          },
+          "localId": "2091",
+          "locator": "14:0-14:8",
+          "resultTypeName": "{http://hl7.org/fhir}Patient"
+        }
+      ]
+    },
+    "statements": {
+      "def": [
+        {
+          "expression": {
+            "type": "SingletonFrom",
+            "operand": {
+              "type": "Retrieve",
+              "dataType": "{http://hl7.org/fhir}Patient",
+              "templateId": "http://hl7.org/fhir/StructureDefinition/Patient",
+              "resultTypeSpecifier": {
+                "type": "ListTypeSpecifier",
+                "elementType": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{http://hl7.org/fhir}Patient"
+                }
+              },
+              "localId": "2092",
+              "locator": "14:0-14:8"
+            },
+            "resultTypeSpecifier": {
+              "type": "NamedTypeSpecifier",
+              "name": "{http://hl7.org/fhir}Patient"
+            },
+            "resultTypeName": "{http://hl7.org/fhir}Patient"
+          },
+          "name": "Patient",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{http://hl7.org/fhir}Patient"
+          },
+          "localId": "2093",
+          "locator": "14:0-14:8",
+          "resultTypeName": "{http://hl7.org/fhir}Patient"
+        },
+        {
+          "expression": {
+            "type": "Query",
+            "source": [
+              {
+                "expression": {
+                  "type": "Retrieve",
+                  "codes": {
+                    "type": "CodeRef",
+                    "name": "Tobacco Smoking Status",
+                    "resultTypeSpecifier": {
+                      "type": "NamedTypeSpecifier",
+                      "name": "{urn:hl7-org:elm-types:r1}Code"
+                    },
+                    "localId": "2094",
+                    "resultTypeName": "{urn:hl7-org:elm-types:r1}Code"
+                  },
+                  "dataType": "{http://hl7.org/fhir}Observation",
+                  "templateId": "http://hl7.org/fhir/StructureDefinition/Observation",
+                  "resultTypeSpecifier": {
+                    "type": "ListTypeSpecifier",
+                    "elementType": {
+                      "type": "NamedTypeSpecifier",
+                      "name": "{http://hl7.org/fhir}Observation",
+                      "localId": "2095",
+                      "locator": "17:3-17:3"
+                    }
+                  },
+                  "localId": "2096",
+                  "locator": "17:2-17:40"
+                },
+                "alias": "O",
+                "resultTypeSpecifier": {
+                  "type": "ListTypeSpecifier",
+                  "elementType": {
+                    "type": "NamedTypeSpecifier",
+                    "name": "{http://hl7.org/fhir}Observation",
+                    "localId": "2095",
+                    "locator": "17:3-17:3"
+                  }
+                },
+                "localId": "2097",
+                "locator": "17:2-17:42"
+              }
+            ],
+            "let": [],
+            "relationship": [],
+            "resultTypeSpecifier": {
+              "type": "ListTypeSpecifier",
+              "elementType": {
+                "type": "NamedTypeSpecifier",
+                "name": "{http://hl7.org/fhir}Observation",
+                "localId": "2095",
+                "locator": "17:3-17:3"
+              }
+            },
+            "localId": "2098",
+            "locator": "17:2-18:43"
+          },
+          "name": "Smoking status observation",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "ListTypeSpecifier",
+            "elementType": {
+              "type": "NamedTypeSpecifier",
+              "name": "{http://hl7.org/fhir}Observation",
+              "localId": "2095",
+              "locator": "17:3-17:3"
+            }
+          },
+          "localId": "2099",
+          "locator": "16:0-18:43"
+        },
+        {
+          "expression": {
+            "type": "Query",
+            "source": [
+              {
+                "expression": {
+                  "type": "Retrieve",
+                  "codes": {
+                    "type": "ValueSetRef",
+                    "name": "Lung Cancer",
+                    "resultTypeSpecifier": {
+                      "type": "NamedTypeSpecifier",
+                      "name": "{urn:hl7-org:elm-types:r1}ValueSet"
+                    },
+                    "localId": "2100",
+                    "resultTypeName": "{urn:hl7-org:elm-types:r1}ValueSet"
+                  },
+                  "dataType": "{http://hl7.org/fhir}Condition",
+                  "templateId": "http://hl7.org/fhir/StructureDefinition/Condition",
+                  "resultTypeSpecifier": {
+                    "type": "ListTypeSpecifier",
+                    "elementType": {
+                      "type": "NamedTypeSpecifier",
+                      "name": "{http://hl7.org/fhir}Condition",
+                      "localId": "2101",
+                      "locator": "21:3-21:3"
+                    }
+                  },
+                  "localId": "2102",
+                  "locator": "21:2-21:27"
+                },
+                "alias": "C",
+                "resultTypeSpecifier": {
+                  "type": "ListTypeSpecifier",
+                  "elementType": {
+                    "type": "NamedTypeSpecifier",
+                    "name": "{http://hl7.org/fhir}Condition",
+                    "localId": "2101",
+                    "locator": "21:3-21:3"
+                  }
+                },
+                "localId": "2103",
+                "locator": "21:2-21:29"
+              }
+            ],
+            "let": [],
+            "relationship": [],
+            "resultTypeSpecifier": {
+              "type": "ListTypeSpecifier",
+              "elementType": {
+                "type": "NamedTypeSpecifier",
+                "name": "{http://hl7.org/fhir}Condition",
+                "localId": "2101",
+                "locator": "21:3-21:3"
+              }
+            },
+            "localId": "2104",
+            "locator": "21:2-22:30"
+          },
+          "name": "Lung cancer diagnosis",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "ListTypeSpecifier",
+            "elementType": {
+              "type": "NamedTypeSpecifier",
+              "name": "{http://hl7.org/fhir}Condition",
+              "localId": "2101",
+              "locator": "21:3-21:3"
+            }
+          },
+          "localId": "2105",
+          "locator": "20:0-22:30"
+        }
+      ]
+    },
+    "annotation": []
+  }
+}
