@@ -139,22 +139,6 @@ internal class DefinitionsToCSharpCodeProcessor
 
     #region Nested Types
 
-    private record IndentedWriter(StreamWriter StreamWriter, int Indent = 0) : IIndentMutator<IndentedWriter>
-    {
-        public void WriteLine(int addIndent, string text = "") => StreamWriter.WriteLine(Indent + addIndent, text);
-
-        public void WriteLine(string text = "") => WriteLine(0, text);
-
-        public IndentedWriter AddIndent(int addIndent = 1)
-        {
-            return this with { Indent = Indent + addIndent };
-        }
-
-        private StreamWriter StreamWriter { get; } = StreamWriter;
-
-        public int Indent { get; private init; } = Indent;
-    }
-
     private record LibrarySetWriter(
         DefinitionsToCSharpCodeProcessor Processor,
         LibrarySet LibrarySet,
@@ -226,7 +210,7 @@ internal class DefinitionsToCSharpCodeProcessor
     private record LibraryWriter(
         LibrarySetWriter LibrarySetWriter,
         Library Library,
-        IndentedWriter IndentedWriter) : IIndentMutator<LibraryWriter>
+        IndentedWriter IndentedWriter) : IAddIndentMutable<LibraryWriter>
     {
         public LibraryWriter(
             LibrarySetWriter librarySetWriter,
@@ -361,7 +345,7 @@ internal class DefinitionsToCSharpCodeProcessor
         LibraryWriter LibraryWriter,
         string CqlName,
         LambdaExpression Overload,
-        ILookup<string, string>? Tags) : IIndentMutator<MethodWriter>
+        ILookup<string, string>? Tags) : IAddIndentMutable<MethodWriter>
     {
         private string MethodName { get; } = VariableNameGenerator.NormalizeIdentifier(CqlName)!;
 
@@ -447,9 +431,4 @@ internal class DefinitionsToCSharpCodeProcessor
     }
 
     #endregion Nested Types
-}
-
-file interface IIndentMutator<out TSelf>
-{
-    TSelf AddIndent(int addIndent = 1);
 }

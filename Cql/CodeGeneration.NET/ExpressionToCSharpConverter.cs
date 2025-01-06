@@ -610,7 +610,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             var funcSb = new StringBuilder();
 
-            funcSb.Append(context.Indent, specifiers + " ");
+            funcSb.Append(specifiers + " ");
             funcSb.Append(_typeToCSharpConverter.ToCSharp(function.ReturnType) + " ");
             funcSb.Append(name);
 
