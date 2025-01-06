@@ -27,7 +27,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static LibraryExpressionBuilder LibraryExpressionBuilder => ServiceProvider.GetLibraryExpressionBuilderScoped();
 
-        internal static DefinitionsToCSharpCodeProcessor DefinitionsToCSharpCodeProcessor => ServiceProvider.GetDefinitionsToCSharpCodeProcessor();
+        internal static LibrarySetDefinitionsToCSharpCodeProcessor LibrarySetDefinitionsToCSharpCodeProcessor => ServiceProvider.GetDefinitionsToCSharpCodeProcessor();
 
         internal static AssemblyCompiler AssemblyCompiler => ServiceProvider.GetAssemblyCompiler();
 
@@ -320,7 +320,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var ls = new LibrarySet("", library);
             var csByNav = new Dictionary<string, string>();
             var callbacks = new CSharpSourceCodeWriterCallbacks(onAfterStep: afterWrite);
-            DefinitionsToCSharpCodeProcessor.ProcessDefinitions(ls, lambdas, callbacks);
+            LibrarySetDefinitionsToCSharpCodeProcessor.ProcessDefinitions(ls, lambdas, callbacks);
             return csByNav[library.GetVersionedIdentifier()!];
 
             void afterWrite(CSharpSourceCodeStep step)

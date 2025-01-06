@@ -29,9 +29,9 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// <summary>
 /// Processes a definition dictionary of <see cref="LambdaExpression"/> into a .NET classes per library.
 /// </summary>
-internal class DefinitionsToCSharpCodeProcessor
+internal class LibrarySetDefinitionsToCSharpCodeProcessor
 {
-    private readonly ILogger<DefinitionsToCSharpCodeProcessor> _logger;
+    private readonly ILogger<LibrarySetDefinitionsToCSharpCodeProcessor> _logger;
 
     private readonly TypeToCSharpConverter _typeToCSharpConverter;
 
@@ -55,17 +55,17 @@ internal class DefinitionsToCSharpCodeProcessor
     private readonly TupleMetadataBuilder _tupleMetadataBuilder;
 
     /// <summary>
-    /// Gets the version of this <see cref="DefinitionsToCSharpCodeProcessor"/> as will appear in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Version"/>.
+    /// Gets the version of this <see cref="LibrarySetDefinitionsToCSharpCodeProcessor"/> as will appear in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Version"/>.
     /// </summary>
     private readonly string _generatorToolVersion;
 
     /// <summary>
-    /// Gets the product of this <see cref="DefinitionsToCSharpCodeProcessor"/> as will appear in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Tool"/>.
+    /// Gets the product of this <see cref="LibrarySetDefinitionsToCSharpCodeProcessor"/> as will appear in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Tool"/>.
     /// </summary>
     private readonly string _generatorToolName;
 
-    public DefinitionsToCSharpCodeProcessor(
-        ILogger<DefinitionsToCSharpCodeProcessor> logger,
+    public LibrarySetDefinitionsToCSharpCodeProcessor(
+        ILogger<LibrarySetDefinitionsToCSharpCodeProcessor> logger,
         TypeResolver typeResolver,
         TypeToCSharpConverter typeToCSharpConverter)
     {
@@ -140,7 +140,7 @@ internal class DefinitionsToCSharpCodeProcessor
     #region Nested Types
 
     private record LibrarySetWriter(
-        DefinitionsToCSharpCodeProcessor Processor,
+        LibrarySetDefinitionsToCSharpCodeProcessor Processor,
         LibrarySet LibrarySet,
         DefinitionDictionary<LambdaExpression> Definitions,
         CSharpSourceCodeWriterCallbacks Callbacks)
@@ -152,7 +152,7 @@ internal class DefinitionsToCSharpCodeProcessor
         public IReadOnlyList<(string alias, string type)> AliasedUsings => Processor._aliasedUsings;
         public HashSet<string> Usings => Processor._usings;
         public string? Namespace => null;
-        public ILogger<DefinitionsToCSharpCodeProcessor> Logger => Processor._logger;
+        public ILogger<LibrarySetDefinitionsToCSharpCodeProcessor> Logger => Processor._logger;
 
         public IEnumerable<(string name, Stream stream)> WriteLibraries()
         {
@@ -373,8 +373,6 @@ internal class DefinitionsToCSharpCodeProcessor
                 new LocalVariableDeduper(LibraryWriter.LibrarySetWriter.TypeToCSharpConverter)
             );
 
-            var expressionConverter = new ExpressionToCSharpConverter(LibraryWriter.LibrarySetWriter.TypeToCSharpConverter, libraryName);
-
             // Skip CqlContext
             var parameters = overload.Parameters.Skip(1);
 
@@ -399,9 +397,9 @@ internal class DefinitionsToCSharpCodeProcessor
                 }
             }
 
-            var topLevelFunctionContext = expressionConverter.NewContext(tupleMetadataBuilder, IndentedWriter.Indent);
-            var topLevelFunction = expressionConverter.ConvertTopLevelFunctionDefinition(overload, topLevelFunctionContext, MethodName, "public");
-            IndentedWriter.WriteLine(topLevelFunction);
+            var definitionToCSharpCodeProcessor = new LibraryDefinitionToCSharpCodeProcessor(tupleMetadataBuilder, libraryName, LibraryWriter.LibrarySetWriter.TypeToCSharpConverter, IndentedWriter.Indent);
+            var definition = definitionToCSharpCodeProcessor.ProcessDefinition(overload, MethodName, "public");
+            IndentedWriter.WriteLine(definition);
             IndentedWriter.WriteLine();
         }
 

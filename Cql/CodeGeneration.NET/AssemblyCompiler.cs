@@ -29,19 +29,19 @@ namespace Hl7.Cql.CodeGeneration.NET
 {
     internal class AssemblyCompiler
     {
-        private readonly DefinitionsToCSharpCodeProcessor _definitionsToCSharpCodeProcessor;
+        private readonly LibrarySetDefinitionsToCSharpCodeProcessor _librarySetDefinitionsToCSharpCodeProcessor;
         private readonly CSharpCodeStreamPostProcessor? _cSharpCodeStreamPostProcessor;
         private readonly Lazy<Assembly[]> _referencesLazy;
         private readonly AssemblyDataPostProcessor? _assemblyDataPostProcessor;
 
         public AssemblyCompiler(
-            DefinitionsToCSharpCodeProcessor definitionsToCSharpCodeProcessor,
+            LibrarySetDefinitionsToCSharpCodeProcessor librarySetDefinitionsToCSharpCodeProcessor,
             TypeResolver typeResolver,
             CSharpCodeStreamPostProcessor? cSharpCodeStreamPostProcessor = null,
             AssemblyDataPostProcessor? assemblyDataPostProcessor = null)
         {
             _assemblyDataPostProcessor = assemblyDataPostProcessor;
-            _definitionsToCSharpCodeProcessor = definitionsToCSharpCodeProcessor;
+            _librarySetDefinitionsToCSharpCodeProcessor = librarySetDefinitionsToCSharpCodeProcessor;
             _cSharpCodeStreamPostProcessor = cSharpCodeStreamPostProcessor;
             _referencesLazy = new Lazy<Assembly[]>(
                 () =>
@@ -78,7 +78,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             List<(string libraryName, Stream stream)> items = [];
 
-            _definitionsToCSharpCodeProcessor.ProcessDefinitions(
+            _librarySetDefinitionsToCSharpCodeProcessor.ProcessDefinitions(
                 librarySet,
                 definitions,
                 callbacks: new(onAfterStep: CSharpSourceCodeStep));
