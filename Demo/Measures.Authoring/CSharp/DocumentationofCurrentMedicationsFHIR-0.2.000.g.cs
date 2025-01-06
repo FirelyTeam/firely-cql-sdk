@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("DocumentationofCurrentMedicationsFHIR", "0.2.000")]
 public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, ISingleton<DocumentationofCurrentMedicationsFHIR_0_2_000>
 {
@@ -21,26 +21,29 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
     public static DocumentationofCurrentMedicationsFHIR_0_2_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "DocumentationofCurrentMedicationsFHIR";
-    public string Version => "0.2.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, SupplementalDataElements_3_4_000.Instance];
+    string ILibrary.Name => "DocumentationofCurrentMedicationsFHIR";
+    string ILibrary.Version => "0.2.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, SupplementalDataElements_3_4_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Encounter to Document Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1834")]
-    public CqlValueSet Encounter_to_Document_Medications(CqlContext context) => 
+    public CqlValueSet Encounter_to_Document_Medications(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1834", default);
+
 
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
-    public CqlValueSet Medical_Reason(CqlContext context) => 
+    public CqlValueSet Medical_Reason(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
 
 
+
     [CqlDeclaration("Documentation of current medications (procedure)")]
-    public CqlCode Documentation_of_current_medications__procedure_(CqlContext context) => 
+    public CqlCode Documentation_of_current_medications__procedure_(CqlContext context) =>
         new CqlCode("428191000124101", "http://snomed.info/sct", default, default);
+
 
 
     [CqlDeclaration("SNOMEDCT")]
@@ -52,6 +55,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -66,6 +70,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -74,6 +79,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
         return b_;
     }
+
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -85,6 +91,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -92,6 +99,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Race")]
@@ -103,6 +111,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -110,6 +119,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Qualifying Encounter during day of Measurement Period")]
@@ -137,6 +147,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context)
     {
@@ -146,6 +157,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
     }
 
 
+
     [CqlDeclaration("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context)
     {
@@ -153,6 +165,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Numerator")]
@@ -182,7 +195,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                 return v_;
             };
             IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
-            Encounter i_(Procedure MedicationsDocumented) => 
+            Encounter i_(Procedure MedicationsDocumented) =>
                 QualifyingEncounter;
             IEnumerable<Encounter> j_ = context.Operators.Select<Procedure, Encounter>(h_, i_);
 
@@ -192,6 +205,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Denominator Exceptions")]
@@ -249,7 +263,7 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
                 return ad_;
             };
             IEnumerable<Procedure> h_ = context.Operators.Where<Procedure>(f_, g_);
-            Encounter i_(Procedure MedicationsNotDocumented) => 
+            Encounter i_(Procedure MedicationsNotDocumented) =>
                 QualifyingEncounter;
             IEnumerable<Encounter> j_ = context.Operators.Select<Procedure, Encounter>(h_, i_);
 
@@ -259,5 +273,18 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
         return c_;
     }
+
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
 
 }

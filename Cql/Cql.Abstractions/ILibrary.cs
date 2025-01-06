@@ -1,4 +1,6 @@
-﻿namespace Hl7.Cql.Abstractions;
+﻿using System.Collections.Generic;
+
+namespace Hl7.Cql.Abstractions;
 
 /// <summary>
 /// The base interface for generated CQL libraries.
@@ -18,5 +20,5 @@ public interface ILibrary
     /// <summary>
     /// Gets the dependencies of the library.
     /// </summary>
-    ILibrary[] Dependencies { get; }
+    IReadOnlyList<ILibrary> Dependencies { get; }
 }

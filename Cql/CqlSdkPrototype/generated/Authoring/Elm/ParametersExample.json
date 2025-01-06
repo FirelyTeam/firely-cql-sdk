@@ -1,0 +1,365 @@
+{
+  "library": {
+    "identifier": {
+      "id": "ParametersExample",
+      "system": "",
+      "version": "0.0.1"
+    },
+    "schemaIdentifier": {
+      "id": "urn:hl7-org:elm",
+      "version": "r1"
+    },
+    "usings": {
+      "def": [
+        {
+          "localIdentifier": "System",
+          "uri": "urn:hl7-org:elm-types:r1",
+          "version": "1.0.0"
+        },
+        {
+          "localIdentifier": "FHIR",
+          "uri": "http://hl7.org/fhir",
+          "version": "4.0.1",
+          "localId": "2489",
+          "locator": "3:0-3:19"
+        }
+      ]
+    },
+    "includes": {
+      "def": [
+        {
+          "localIdentifier": "FHIRHelpers",
+          "path": "FHIRHelpers",
+          "version": "4.3.000",
+          "annotation": [
+            {
+              "type": "CqlToElmError",
+              "message": "Unable to resolve library: FHIRHelpers version \u00274.3.000\u0027. Are you sure this library version exists and that you have access?",
+              "errorType": "semantic",
+              "errorSeverity": "error"
+            }
+          ],
+          "localId": "2490",
+          "locator": "5:0-5:28"
+        }
+      ]
+    },
+    "parameters": {
+      "def": [
+        {
+          "default": {
+            "type": "Literal",
+            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+            "value": "30",
+            "resultTypeSpecifier": {
+              "type": "NamedTypeSpecifier",
+              "name": "{urn:hl7-org:elm-types:r1}Integer"
+            },
+            "localId": "2493",
+            "locator": "9:41-9:41",
+            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+          },
+          "parameterTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}Integer"
+          },
+          "name": "AgeThreshold",
+          "parameterType": "{urn:hl7-org:elm-types:r1}Integer",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}Integer"
+          },
+          "localId": "2492",
+          "locator": "9:0-9:41",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+        }
+      ]
+    },
+    "codeSystems": {
+      "def": []
+    },
+    "valueSets": {
+      "def": [
+        {
+          "name": "Marital Status",
+          "id": "http://hl7.org/fhir/ValueSet/marital-status",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}ValueSet"
+          },
+          "localId": "2491",
+          "locator": "7:0-7:27",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}ValueSet"
+        }
+      ]
+    },
+    "codes": {
+      "def": []
+    },
+    "concepts": {
+      "def": []
+    },
+    "contexts": {
+      "def": [
+        {
+          "name": "Patient",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{http://hl7.org/fhir}Patient"
+          },
+          "localId": "2495",
+          "locator": "11:0-11:8",
+          "resultTypeName": "{http://hl7.org/fhir}Patient"
+        }
+      ]
+    },
+    "statements": {
+      "def": [
+        {
+          "expression": {
+            "type": "SingletonFrom",
+            "operand": {
+              "type": "Retrieve",
+              "dataType": "{http://hl7.org/fhir}Patient",
+              "templateId": "http://hl7.org/fhir/StructureDefinition/Patient",
+              "resultTypeSpecifier": {
+                "type": "ListTypeSpecifier",
+                "elementType": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{http://hl7.org/fhir}Patient"
+                }
+              },
+              "localId": "2496",
+              "locator": "11:0-11:8"
+            },
+            "resultTypeSpecifier": {
+              "type": "NamedTypeSpecifier",
+              "name": "{http://hl7.org/fhir}Patient"
+            },
+            "resultTypeName": "{http://hl7.org/fhir}Patient"
+          },
+          "name": "Patient",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{http://hl7.org/fhir}Patient"
+          },
+          "localId": "2497",
+          "locator": "11:0-11:8",
+          "resultTypeName": "{http://hl7.org/fhir}Patient"
+        },
+        {
+          "expression": {
+            "type": "Today",
+            "resultTypeSpecifier": {
+              "type": "NamedTypeSpecifier",
+              "name": "{urn:hl7-org:elm-types:r1}Date"
+            },
+            "localId": "2498",
+            "locator": "14:2-14:8",
+            "resultTypeName": "{urn:hl7-org:elm-types:r1}Date"
+          },
+          "name": "CurrentDate",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}Date"
+          },
+          "localId": "2499",
+          "locator": "13:0-14:8",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}Date"
+        },
+        {
+          "expression": {
+            "type": "Query",
+            "source": [
+              {
+                "expression": {
+                  "type": "ExpressionRef",
+                  "name": "Patient",
+                  "resultTypeSpecifier": {
+                    "type": "NamedTypeSpecifier",
+                    "name": "{http://hl7.org/fhir}Patient"
+                  },
+                  "localId": "2500",
+                  "resultTypeName": "{http://hl7.org/fhir}Patient"
+                },
+                "alias": "P",
+                "resultTypeSpecifier": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{http://hl7.org/fhir}Patient"
+                },
+                "localId": "2501",
+                "locator": "17:2-17:10",
+                "resultTypeName": "{http://hl7.org/fhir}Patient"
+              }
+            ],
+            "let": [],
+            "relationship": [],
+            "resultTypeSpecifier": {
+              "type": "NamedTypeSpecifier",
+              "name": "{http://hl7.org/fhir}Patient"
+            },
+            "localId": "2502",
+            "locator": "17:2-21:29",
+            "resultTypeName": "{http://hl7.org/fhir}Patient"
+          },
+          "name": "Patient Filter",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{http://hl7.org/fhir}Patient"
+          },
+          "localId": "2503",
+          "locator": "16:0-21:29",
+          "resultTypeName": "{http://hl7.org/fhir}Patient"
+        },
+        {
+          "expression": {
+            "type": "Property",
+            "source": {
+              "type": "ExpressionRef",
+              "name": "Patient Filter",
+              "resultTypeSpecifier": {
+                "type": "NamedTypeSpecifier",
+                "name": "{http://hl7.org/fhir}Patient"
+              },
+              "localId": "2504",
+              "locator": "24:2-24:2",
+              "resultTypeName": "{http://hl7.org/fhir}Patient"
+            },
+            "path": "birthDate",
+            "resultTypeSpecifier": {
+              "type": "NamedTypeSpecifier",
+              "name": "{http://hl7.org/fhir}date"
+            },
+            "localId": "2505",
+            "locator": "24:2-24:19",
+            "resultTypeName": "{http://hl7.org/fhir}date"
+          },
+          "name": "Patient Birthdate",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{http://hl7.org/fhir}date"
+          },
+          "localId": "2506",
+          "locator": "23:0-24:19",
+          "resultTypeName": "{http://hl7.org/fhir}date"
+        },
+        {
+          "expression": {
+            "type": "DurationBetween",
+            "precision": "Year",
+            "operand": [
+              {
+                "type": "FunctionRef",
+                "operand": [
+                  {
+                    "type": "ExpressionRef",
+                    "name": "Patient Birthdate",
+                    "resultTypeSpecifier": {
+                      "type": "NamedTypeSpecifier",
+                      "name": "{http://hl7.org/fhir}date"
+                    },
+                    "localId": "2507",
+                    "locator": "27:16-27:16",
+                    "resultTypeName": "{http://hl7.org/fhir}date"
+                  }
+                ],
+                "name": "ToDate",
+                "libraryName": "FHIRHelpers",
+                "resultTypeSpecifier": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{urn:hl7-org:elm-types:r1}Date"
+                },
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}Date"
+              },
+              {
+                "type": "ExpressionRef",
+                "name": "CurrentDate",
+                "resultTypeSpecifier": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{urn:hl7-org:elm-types:r1}Date"
+                },
+                "localId": "2508",
+                "locator": "27:40-27:40",
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}Date"
+              }
+            ],
+            "resultTypeSpecifier": {
+              "type": "NamedTypeSpecifier",
+              "name": "{urn:hl7-org:elm-types:r1}Integer"
+            },
+            "localId": "2510",
+            "locator": "27:2-27:40",
+            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+          },
+          "name": "Patient Age in Years",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}Integer"
+          },
+          "localId": "2511",
+          "locator": "26:0-27:40",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+        },
+        {
+          "expression": {
+            "type": "Greater",
+            "operand": [
+              {
+                "type": "ExpressionRef",
+                "name": "Patient Age in Years",
+                "resultTypeSpecifier": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{urn:hl7-org:elm-types:r1}Integer"
+                },
+                "localId": "2512",
+                "locator": "30:2-30:2",
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+              },
+              {
+                "type": "ParameterRef",
+                "name": "AgeThreshold",
+                "resultTypeSpecifier": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{urn:hl7-org:elm-types:r1}Integer"
+                },
+                "localId": "2513",
+                "locator": "30:27-30:27",
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+              }
+            ],
+            "resultTypeSpecifier": {
+              "type": "NamedTypeSpecifier",
+              "name": "{urn:hl7-org:elm-types:r1}Boolean"
+            },
+            "localId": "2520",
+            "locator": "30:2-30:27",
+            "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+          },
+          "name": "Patient Older Than AgeThreshold",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}Boolean"
+          },
+          "localId": "2521",
+          "locator": "29:0-30:27",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+        }
+      ]
+    },
+    "annotation": []
+  }
+}

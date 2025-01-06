@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("AdvancedIllnessandFrailtyExclusionECQMFHIR4", "5.17.000")]
 public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILibrary, ISingleton<AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000>
 {
@@ -21,87 +21,100 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
     public static AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "AdvancedIllnessandFrailtyExclusionECQMFHIR4";
-    public string Version => "5.17.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, CumulativeMedicationDurationFHIR4_1_0_000.Instance];
+    string ILibrary.Name => "AdvancedIllnessandFrailtyExclusionECQMFHIR4";
+    string ILibrary.Version => "5.17.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, CumulativeMedicationDurationFHIR4_1_0_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Acute Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083")]
-    public CqlValueSet Acute_Inpatient(CqlContext context) => 
+    public CqlValueSet Acute_Inpatient(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083", default);
+
 
 
     [CqlDeclaration("Advanced Illness")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082")]
-    public CqlValueSet Advanced_Illness(CqlContext context) => 
+    public CqlValueSet Advanced_Illness(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", default);
+
 
 
     [CqlDeclaration("Care Services in Long-Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
-    public CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) => 
+    public CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
+
 
 
     [CqlDeclaration("Dementia Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510")]
-    public CqlValueSet Dementia_Medications(CqlContext context) => 
+    public CqlValueSet Dementia_Medications(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510", default);
+
 
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010")]
-    public CqlValueSet Emergency_Department_Visit(CqlContext context) => 
+    public CqlValueSet Emergency_Department_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010", default);
+
 
 
     [CqlDeclaration("Frailty Device")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300")]
-    public CqlValueSet Frailty_Device(CqlContext context) => 
+    public CqlValueSet Frailty_Device(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300", default);
+
 
 
     [CqlDeclaration("Frailty Diagnosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074")]
-    public CqlValueSet Frailty_Diagnosis(CqlContext context) => 
+    public CqlValueSet Frailty_Diagnosis(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074", default);
+
 
 
     [CqlDeclaration("Frailty Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088")]
-    public CqlValueSet Frailty_Encounter(CqlContext context) => 
+    public CqlValueSet Frailty_Encounter(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088", default);
+
 
 
     [CqlDeclaration("Frailty Symptom")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075")]
-    public CqlValueSet Frailty_Symptom(CqlContext context) => 
+    public CqlValueSet Frailty_Symptom(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075", default);
+
 
 
     [CqlDeclaration("Nonacute Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1084")]
-    public CqlValueSet Nonacute_Inpatient(CqlContext context) => 
+    public CqlValueSet Nonacute_Inpatient(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1084", default);
+
 
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
-    public CqlValueSet Nursing_Facility_Visit(CqlContext context) => 
+    public CqlValueSet Nursing_Facility_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
+
 
 
     [CqlDeclaration("Observation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1086")]
-    public CqlValueSet Observation(CqlContext context) => 
+    public CqlValueSet Observation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1086", default);
+
 
 
     [CqlDeclaration("Outpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1087")]
-    public CqlValueSet Outpatient(CqlContext context) => 
+    public CqlValueSet Outpatient(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1087", default);
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -113,6 +126,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -121,6 +135,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
         return b_;
     }
+
 
 
     [CqlDeclaration("Dementia Medications In Year Before or During Measurement Period")]
@@ -155,6 +170,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
         return g_;
     }
+
 
 
     [CqlDeclaration("Long Term Care Periods During Measurement Period")]
@@ -193,6 +209,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
         return j_;
     }
+
 
 
     [CqlDeclaration("Outpatient Encounters with Advanced Illness")]
@@ -244,7 +261,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 return ap_;
             };
             IEnumerable<Condition> v_ = context.Operators.Where<Condition>(t_, u_);
-            Encounter w_(Condition AdvancedIllnessDiagnosis) => 
+            Encounter w_(Condition AdvancedIllnessDiagnosis) =>
                 OutpatientEncounter;
             IEnumerable<Encounter> x_ = context.Operators.Select<Condition, Encounter>(v_, w_);
 
@@ -254,6 +271,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
         return o_;
     }
+
 
 
     [CqlDeclaration("Two Outpatient Encounters with Advanced Illness on Different Dates of Service")]
@@ -283,13 +301,14 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
             return t_;
         };
         IEnumerable<(CqlTupleMetadata, Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?> g_ = context.Operators.Where<(CqlTupleMetadata, Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?>(e_, f_);
-        Encounter h_((CqlTupleMetadata, Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)? tuple_ealaedgldgrryalbkiicbtoia) => 
+        Encounter h_((CqlTupleMetadata, Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)? tuple_ealaedgldgrryalbkiicbtoia) =>
             tuple_ealaedgldgrryalbkiicbtoia?.OutpatientEncounter1;
         IEnumerable<Encounter> i_ = context.Operators.Select<(CqlTupleMetadata, Encounter OutpatientEncounter1, Encounter OutpatientEncounter2)?, Encounter>(g_, h_);
         IEnumerable<Encounter> j_ = context.Operators.Distinct<Encounter>(i_);
 
         return j_;
     }
+
 
 
     [CqlDeclaration("Long Term Care Overlapping Periods")]
@@ -300,6 +319,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
         return b_;
     }
+
 
 
     [CqlDeclaration("Long Term Care Adjacent Periods")]
@@ -344,6 +364,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
     }
 
 
+
     [CqlDeclaration("Max Long Term Care Period Length")]
     public int? Max_Long_Term_Care_Period_Length(CqlContext context)
     {
@@ -365,6 +386,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
         return h_;
     }
+
 
 
     [CqlDeclaration("Inpatient Encounter with Advanced Illness")]
@@ -407,7 +429,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
                 return ag_;
             };
             IEnumerable<Condition> m_ = context.Operators.Where<Condition>(k_, l_);
-            Encounter n_(Condition AdvancedIllnessDiagnosis) => 
+            Encounter n_(Condition AdvancedIllnessDiagnosis) =>
                 InpatientEncounter;
             IEnumerable<Encounter> o_ = context.Operators.Select<Condition, Encounter>(m_, n_);
 
@@ -417,6 +439,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
         return f_;
     }
+
 
 
     [CqlDeclaration("Has Criteria Indicating Frailty")]
@@ -532,6 +555,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
     }
 
 
+
     [CqlDeclaration("Advanced Illness and Frailty Exclusion Including Over Age 80")]
     public bool? Advanced_Illness_and_Frailty_Exclusion_Including_Over_Age_80(CqlContext context)
     {
@@ -570,6 +594,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
     }
 
 
+
     [CqlDeclaration("Advanced Illness and Frailty Exclusion Not Including Over Age 80")]
     public bool? Advanced_Illness_and_Frailty_Exclusion_Not_Including_Over_Age_80(CqlContext context)
     {
@@ -598,6 +623,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
     }
 
 
+
     [CqlDeclaration("Has Long Term Care Periods Longer Than 90 Consecutive Days")]
     public bool? Has_Long_Term_Care_Periods_Longer_Than_90_Consecutive_Days(CqlContext context)
     {
@@ -606,6 +632,7 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
         return b_;
     }
+
 
     private static CqlTupleMetadata CqlTupleMetadata_EaLaedgLDgRRYaLbKIIcBTOiA = new(
         [typeof(Encounter), typeof(Encounter)],

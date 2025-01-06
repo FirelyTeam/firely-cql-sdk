@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("CervicalCancerScreeningFHIR", "0.0.005")]
 public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<CervicalCancerScreeningFHIR_0_0_005>
 {
@@ -21,74 +21,85 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
     public static CervicalCancerScreeningFHIR_0_0_005 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "CervicalCancerScreeningFHIR";
-    public string Version => "0.0.005";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, HospiceFHIR4_2_3_000.Instance, PalliativeCareFHIR_0_6_000.Instance];
+    string ILibrary.Name => "CervicalCancerScreeningFHIR";
+    string ILibrary.Version => "0.0.005";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, HospiceFHIR4_2_3_000.Instance, PalliativeCareFHIR_0_6_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Congenital or Acquired Absence of Cervix")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1016")]
-    public CqlValueSet Congenital_or_Acquired_Absence_of_Cervix(CqlContext context) => 
+    public CqlValueSet Congenital_or_Acquired_Absence_of_Cervix(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1016", default);
+
 
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
-    public CqlValueSet Home_Healthcare_Services(CqlContext context) => 
+    public CqlValueSet Home_Healthcare_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
+
 
 
     [CqlDeclaration("HPV Test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1059")]
-    public CqlValueSet HPV_Test(CqlContext context) => 
+    public CqlValueSet HPV_Test(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1059", default);
+
 
 
     [CqlDeclaration("Hysterectomy with No Residual Cervix")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1014")]
-    public CqlValueSet Hysterectomy_with_No_Residual_Cervix(CqlContext context) => 
+    public CqlValueSet Hysterectomy_with_No_Residual_Cervix(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1014", default);
+
 
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
-    public CqlValueSet Office_Visit(CqlContext context) => 
+    public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
+
 
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
-    public CqlValueSet Online_Assessments(CqlContext context) => 
+    public CqlValueSet Online_Assessments(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
+
 
 
     [CqlDeclaration("Pap Test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1017")]
-    public CqlValueSet Pap_Test(CqlContext context) => 
+    public CqlValueSet Pap_Test(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.108.12.1017", default);
+
 
 
     [CqlDeclaration("Preventive Care Services - Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
-    public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
+
 
 
     [CqlDeclaration("Preventive Care Services-Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
-    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) => 
+    public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
+
 
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
-    public CqlValueSet Telephone_Visits(CqlContext context) => 
+    public CqlValueSet Telephone_Visits(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
 
+
     [CqlDeclaration("laboratory")]
-    public CqlCode laboratory(CqlContext context) => 
+    public CqlCode laboratory(CqlContext context) =>
         new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
+
 
 
     [CqlDeclaration("ObservationCategoryCodes")]
@@ -100,6 +111,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -114,6 +126,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -122,6 +135,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
         return b_;
     }
+
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -133,6 +147,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
     }
 
 
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context)
     {
@@ -140,6 +155,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Race")]
@@ -151,6 +167,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -158,6 +175,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Qualifying Encounters")]
@@ -199,6 +217,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
     }
 
 
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -224,6 +243,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
     }
 
 
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -231,6 +251,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Absence of Cervix")]
@@ -273,6 +294,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
     }
 
 
+
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
@@ -285,6 +307,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
         return f_;
     }
+
 
 
     [CqlDeclaration("Cervical Cytology Within 3 Years")]
@@ -338,6 +361,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
         return d_;
     }
+
 
 
     [CqlDeclaration("HPV Test Within 5 Years for Women Age 30 and Older")]
@@ -403,6 +427,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
     }
 
 
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -414,6 +439,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
         return e_;
     }
+
 
     public bool? isComplete(CqlContext context, Observation observation)
     {
@@ -428,6 +454,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
         return d_;
     }
+
 
     public bool? isLaboratoryTest(CqlContext context, Observation observation)
     {
@@ -447,12 +474,14 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
         return d_;
     }
 
+
     public CqlDateTime latest(CqlContext context, object choice)
     {
         CqlDateTime a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Latest(context, choice);
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Cervical Cytology Within 3 Years (2)")]
@@ -489,12 +518,14 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
         return d_;
     }
 
+
     public CqlInterval<CqlDateTime> toInterval(CqlContext context, object choice)
     {
         CqlInterval<CqlDateTime> a_ = MATGlobalCommonFunctionsFHIR4_6_1_000.Instance.Normalize_Interval(context, choice);
 
         return a_;
     }
+
 
 
     [CqlDeclaration("HPV Test Within 5 Years for Women Age 30 and Older (2)")]
@@ -540,5 +571,262 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
         return d_;
     }
+
+
+    private static CqlTupleMetadata CqlTupleMetadata_EaLaedgLDgRRYaLbKIIcBTOiA = new(
+        [typeof(Encounter), typeof(Encounter)],
+        ["OutpatientEncounter1", "OutpatientEncounter2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CgaDVOXeQBMgMPCPZOThIIdDb = new(
+        [typeof(CqlInterval<CqlDateTime>), typeof(CqlInterval<CqlDateTime>)],
+        ["LTCPeriod1", "LTCPeriod2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GIMHfXDcFiAjSJBDGYeUeZLhW = new(
+        [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
+        ["interval", "startOfInterval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EQHOUSiiWahbJPOUjJGEhIAOV = new(
+        [typeof(CqlInterval<CqlDateTime>), typeof(CqlDateTime)],
+        ["interval", "startOfInterval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EVRLVXPcBiDTIWfCCfKEWDfKI = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["sortedCoverings"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FKcLSALRMRfDigEFaJgDOPFRK = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["frontgaps", "endgap"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EdgSWaTaCbLYLJceGdIcWOLHd = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["sortedCoverings"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BBLSSiNBQBGUDJaVjMDZMSAXg = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["frontgaps", "endgap"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HEjPGjPEhLgQPGjROeWMgiGfC = new(
+        [typeof(CqlInterval<CqlDate>), typeof(int?)],
+        ["interval", "days"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HRbPDRZiOGGBceePOZWjVbXdP = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(int?), typeof(int?), typeof(CqlInterval<CqlDate>), typeof(int?)],
+        ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DUiZjXRKgCPYVZQJbFVDKNMOi = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["Covering_Intervals"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GQPbYTYABjXFVLRKjXgcDJFSj = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["Gap_Intervals"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FcQREFSfPJSKYAhSEWVJcZVED = new(
+        [typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?)],
+        ["StartYear", "StartMonth", "StartDay", "StartHour", "StartMinute", "StartSecond", "StartMillisecond", "EndYear", "EndMonth", "EndDay", "EndHour", "EndMinute", "EndSecond", "EndMillisecond"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CGHEUIgjaCjJVKEADTSZEbdCL = new(
+        [typeof(CqlInterval<CqlDateTime>), typeof(int?)],
+        ["interval", "days"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HDihbLieYfQbgeSbOWZBAMUIQ = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(int?), typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(int?)],
+        ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GZMPWdGOJiTNjfWAcbZMePdXV = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["Covering_Intervals"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CKbERRbOPGNBBERUOghhaOYSE = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["Gap_Intervals"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CfANiScMYDdVZFgRERKJQEVca = new(
+        [typeof(IEnumerable<CqlDate>)],
+        ["SortedDates"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BDeBMdFeZaVSehBSFYjTFdYYD = new(
+        [typeof(IEnumerable<CqlDate>), typeof(int?)],
+        ["SortedList", "AnchorIndex"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc = new(
+        [typeof(CqlDate), typeof(IEnumerable<CqlDate>), typeof(int?)],
+        ["NextDate", "NewList", "IndexofNewDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BaNHUZXcQBUKLNgEDWdDHjYV = new(
+        [typeof(CqlInterval<CqlDate>), typeof(CqlInterval<CqlDate>)],
+        ["Coverage1", "Coverage2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DPLIOBaSciHAAETJOMSIjWgbP = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["IntervalInfo", "Collapsed", "Adjacent", "CollapsedFinal"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GIgcTXSQJbIXPiNgNbAIdOBXi = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<string>), typeof(IEnumerable<string>)],
+        ["MedicalClaim", "ProceduresAsStrings", "POSAsString"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HSdidNdfHCNCFSUTgBiYLcgXP = new(
+        [typeof(Claim), typeof(IEnumerable<Claim.ItemComponent>)],
+        ["Claim", "LineItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GDUUTAIXZafehWFjcGfNKBcTd = new(
+        [typeof(Claim), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["Claim", "ServicePeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GKQGAFOMQbCPRXAANKASUIHMf = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<string>)],
+        ["MedicalClaim", "DiagnosesAsStrings"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GDVcejYEWXWNHUIODacaMaBhV = new(
+        [typeof(IEnumerable<Claim>)],
+        ["DiagnosisItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CWDDWHRXGADEbdaKXCdKbgEfg = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["Claim", "ServicePeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CZJDcULSYFOUeGSUcDccghjMK = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<string>)],
+        ["PharmacyClaim", "MedicationsAsStrings"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HDUYFgZGRCJCdTeEcMSVCMQNN = new(
+        [typeof(CqlInterval<CqlDateTime>)],
+        ["DaysSupplyInterval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_fQfNOLePNSNdOZROKRAfMQPE = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?>)],
+        ["CoveredDays"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FCdHTREUGBEaiYVQNNGRPZFjf = new(
+        [typeof(Claim), typeof(IEnumerable<Claim.ItemComponent>), typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["Claim", "LineItem", "ServicePeriod", "CoveredDays"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GQFgMiKhOZgECFTScigSABdXb = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<string>), typeof(IEnumerable<string>)],
+        ["MedicalClaim", "DiagnosesAsStrings", "ProceduresAsStrings"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CXESjjTOQIGKICAEMDgcfPdJG = new(
+        [typeof(Claim)],
+        ["ProcedureItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FYaKYiIDIQCIRBfhZCGRDYQLX = new(
+        [typeof(Claim), typeof(Claim)],
+        ["Claim", "ProcedureItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_iYTJVNYRMBhJCKDIUSKFMUHe = new(
+        [typeof(IEnumerable<Claim.ItemComponent>), typeof(Claim)],
+        ["Procedure", "LineItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DBEDLLOihLKGPWLHVWXRKfGdL = new(
+        [typeof(IEnumerable<Claim>)],
+        ["LineItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_ESGibVhJBKTGTjRhHBeNDHASE = new(
+        [typeof(IEnumerable<ClaimResponse>), typeof(IEnumerable<Claim>)],
+        ["MedicalClaimResponse", "MedicalClaim"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DbDPVOODdCjASWRZfBTBPUJKR = new(
+        [typeof(IEnumerable<ClaimResponse>)],
+        ["PaidResponse"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FfbRdLZNBbFHejZXDegUDAhjO = new(
+        [typeof(ClaimResponse), typeof(string), typeof(IEnumerable<ClaimResponse.ItemComponent>)],
+        ["Response", "ResponseID", "LineItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GUCaFdHVHVNcfKfMNEFbbNGUi = new(
+        [typeof(Claim), typeof(Id), typeof(IEnumerable<Claim.ItemComponent>)],
+        ["ClaimofInterest", "ClaimID", "LineItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DiTbeIhUdTbFXAOeUfBeANOcV = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>), typeof(IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>)],
+        ["PaidMedicalClaimResponse", "MedicalClaim"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HANAFPgdEHHITIiaCbHRMCNfZ = new(
+        [typeof((CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?), typeof(IEnumerable<Claim.ItemComponent>)],
+        ["PaidClaim", "ClaimItem"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GUibhjYMgjAQISFDJORUOccJC = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>)],
+        ["AggregateClaim"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FCOUVKRRWVHcKiBDUdGgLciKR = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["originalClaim", "ServicePeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EgMIjgYNSTYejjeaeeSfTCGLV = new(
+        [typeof(IEnumerable<ClaimResponse>), typeof(IEnumerable<Claim>)],
+        ["PharmacyClaimResponse", "PharmacyClaim"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EhcebFbUeFgabTLNPALjRJQCF = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>), typeof(IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>)],
+        ["PaidPharmacyClaimResponse", "MedicalClaim"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BiVTcKEZOfgFCDEReGAXJRAUK = new(
+        [typeof((CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?), typeof(IEnumerable<Claim.ItemComponent>)],
+        ["PaidClaim", "ClaimItem"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EMbbXAAHNDcXYSgLIhAhQCWON = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>)],
+        ["AggregateClaim"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DXGMEVDRBZgHMANCfXfEUYMNW = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>), typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["originalClaim", "ServicePeriod", "CoveredDays"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CZThYJbgajVLdhIZdgZiXBFQK = new(
+        [typeof(IEnumerable<ClaimResponse>), typeof(IEnumerable<Claim>)],
+        ["ClaimResponse", "OriginalClaim"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GFUjSKcYaHagAZIhSUhffHjHP = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<Claim>)],
+        ["InpatientStayLineItems", "NonacuteInpatientLineItems"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DBGUUNgWTQDYFIeOfMhQJAYTB = new(
+        [typeof(IEnumerable<Claim>), typeof(IEnumerable<Claim>), typeof(IEnumerable<Claim>)],
+        ["InpatientDischarge", "NonacuteInpatientDischarge", "AcuteInpatientDischarge"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BWiFKXdFieUciRMVTUCdIFCVO = new(
+        [typeof(Claim), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<string>)],
+        ["SingleCareTeam", "CareTeamsProvider", "CareTeamsProviderID"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HFNJUcNhcbGBLBgHAJMMSPfQH = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?>)],
+        ["CareTeams"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FPVdJEEOUKFVhQPTfKhShUNO = new(
+        [typeof(IEnumerable<Practitioner>)],
+        ["Practitioners"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EheHUARRFfQdCcHKeSEhfYZMj = new(
+        [typeof(IEnumerable<FhirString>), typeof(IEnumerable<Identifier>)],
+        ["AllIdentifiers", "NullIdentifiers"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EZUSISLPSZWTXahaQjXaSAJBE = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?>)],
+        ["IdentifierTuple"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FBUdWLSDMgYFFiVXYhKEiUNQS = new(
+        [typeof(int?)],
+        ["IdentifierCount"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_gFQSaDQdhfIVgTfEbUhWdbBB = new(
+        [typeof(IEnumerable<Claim.ItemComponent>), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<string>)],
+        ["SingleItem", "ItemLocation", "ItemLocationID"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_ESTVjUCCVhLEXJGPZBeEcQDHX = new(
+        [typeof(IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>)],
+        ["ItemsLocationReferences"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GWYcfjEGjPEdPbTNdfROfTUAf = new(
+        [typeof(IEnumerable<Location>)],
+        ["CorrespondingLocations"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CMSeRgTJgKISKSQUcNZWKegGV = new(
+        [typeof(CqlDate), typeof(CqlDate)],
+        ["OutpatientVisit1", "OutpatientVisit2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CaKghTfWMNOTHSWhifjFZOVYO = new(
+        [typeof(CodeableConcept), typeof(Period)],
+        ["code", "period"]);
 
 }

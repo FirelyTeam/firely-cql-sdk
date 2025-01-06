@@ -16,32 +16,29 @@ namespace Hl7.Cql.CodeGeneration.NET
     {
         public const int SpacesPerIndentLevel = 4;
 
-        public static void WriteLine(this TextWriter writer, int indent, string text)
+        public static void WriteLine(this TextWriter writer, int indent, string text = "")
+        {
+            if (text.Length == 0)
+                writer.WriteLine();
+            else
         {
             writer.Write(StringExtensions.IndentString(indent));
             writer.WriteLine(text);
         }
-        public static void Write(this TextWriter writer, int indent, string text)
-        {
-            writer.Write(StringExtensions.IndentString(indent));
-            writer.Write(text);
-        }
 
+    }
         public static void AppendLine(this StringBuilder sb, int indent, string text)
         {
             sb.Append(StringExtensions.IndentString(indent));
             sb.AppendLine(text);
         }
-
         public static void Append(this StringBuilder sb, int indent, string text)
         {
             sb.Append(StringExtensions.IndentString(indent));
             sb.Append(text);
         }
-
         public static bool IsExtensionMethod(this MethodInfo info) =>
             info.IsDefined(typeof(System.Runtime.CompilerServices.ExtensionAttribute), true);
-
-    }
 }
 
+}

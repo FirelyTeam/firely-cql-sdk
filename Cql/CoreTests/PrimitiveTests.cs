@@ -3415,9 +3415,9 @@ namespace CoreTests
             librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"),"Aggregates", "1.0.0");
             var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
             var definitions = serviceScope.ServiceProvider.GetLibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
-            var writer = serviceProvider.GetCSharpLibrarySetToStreamsWriter();
+            var definitionsToCSharpCodeProcessor = serviceProvider.GetDefinitionsToCSharpCodeProcessor();
             var isDone = false;
-            writer.ProcessDefinitions(librarySet,
+            definitionsToCSharpCodeProcessor.ProcessDefinitions(librarySet,
                                       definitions, callbacks: new(onAfterStep: step =>
                                       {
                                           switch (step)

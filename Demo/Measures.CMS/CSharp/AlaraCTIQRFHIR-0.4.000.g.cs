@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("AlaraCTIQRFHIR", "0.4.000")]
 public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHIR_0_4_000>
 {
@@ -21,25 +21,28 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
     public static AlaraCTIQRFHIR_0_4_000 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "AlaraCTIQRFHIR";
-    public string Version => "0.4.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, AlaraCommonFunctions_1_5_000.Instance];
+    string ILibrary.Name => "AlaraCTIQRFHIR";
+    string ILibrary.Version => "0.4.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, AlaraCommonFunctions_1_5_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
-    public CqlValueSet Encounter_Inpatient(CqlContext context) => 
+    public CqlValueSet Encounter_Inpatient(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
 
+
     [CqlDeclaration("CT dose and image quality category")]
-    public CqlCode CT_dose_and_image_quality_category(CqlContext context) => 
+    public CqlCode CT_dose_and_image_quality_category(CqlContext context) =>
         new CqlCode("96914-7", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("Full Body")]
-    public CqlCode Full_Body(CqlContext context) => 
+    public CqlCode Full_Body(CqlContext context) =>
         new CqlCode("LA31771-1", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("LOINC")]
@@ -54,6 +57,7 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
     }
 
 
+
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
@@ -66,6 +70,7 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -74,6 +79,7 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
 
         return b_;
     }
+
 
 
     [CqlDeclaration("Qualifying Inpatient Encounters")]
@@ -105,6 +111,7 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
     }
 
 
+
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -112,6 +119,7 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Payer")]
@@ -123,6 +131,7 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
     }
 
 
+
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -132,6 +141,7 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -139,6 +149,7 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Qualifying Scan During Inpatient Encounter")]
@@ -169,7 +180,7 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
                 return x_;
             };
             IEnumerable<Encounter> h_ = context.Operators.Where<Encounter>(f_, g_);
-            Observation i_(Encounter InpatientEncounters) => 
+            Observation i_(Encounter InpatientEncounters) =>
                 CTScan;
             IEnumerable<Observation> j_ = context.Operators.Select<Encounter, Observation>(h_, i_);
 
@@ -179,6 +190,7 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
 
         return e_;
     }
+
 
 
     [CqlDeclaration("Qualifying Scan with Values")]
@@ -205,6 +217,7 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
     }
 
 
+
     [CqlDeclaration("Numerator")]
     public IEnumerable<Observation> Numerator(CqlContext context)
     {
@@ -221,6 +234,7 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
     }
 
 
+
     [CqlDeclaration("Initial Population")]
     public IEnumerable<Observation> Initial_Population(CqlContext context)
     {
@@ -230,6 +244,7 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
     }
 
 
+
     [CqlDeclaration("Denominator")]
     public IEnumerable<Observation> Denominator(CqlContext context)
     {
@@ -237,6 +252,7 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Denominator Exclusion")]
@@ -257,5 +273,18 @@ public partial class AlaraCTIQRFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTIQRFHI
 
         return c_;
     }
+
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
 
 }

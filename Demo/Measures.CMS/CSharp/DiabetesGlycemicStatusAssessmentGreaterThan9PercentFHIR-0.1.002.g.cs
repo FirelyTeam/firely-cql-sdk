@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.8.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
 [CqlLibrary("DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR", "0.1.002")]
 public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1_002 : ILibrary, ISingleton<DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1_002>
 {
@@ -21,26 +21,29 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
     public static DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1_002 Instance { get; } = new();
 
     #region Library Members
-    public string Name => "DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR";
-    public string Version => "0.1.002";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, Status_1_8_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, AdultOutpatientEncounters_4_11_000.Instance, AdvancedIllnessandFrailty_1_16_000.Instance, Hospice_6_12_000.Instance, PalliativeCare_1_11_000.Instance];
+    string ILibrary.Name => "DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR";
+    string ILibrary.Version => "0.1.002";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, Status_1_8_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, AdultOutpatientEncounters_4_11_000.Instance, AdvancedIllnessandFrailty_1_16_000.Instance, Hospice_6_12_000.Instance, PalliativeCare_1_11_000.Instance];
     #endregion Library Members
 
     [CqlDeclaration("Diabetes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001")]
-    public CqlValueSet Diabetes(CqlContext context) => 
+    public CqlValueSet Diabetes(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", default);
+
 
 
     [CqlDeclaration("HbA1c Laboratory Test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1013")]
-    public CqlValueSet HbA1c_Laboratory_Test(CqlContext context) => 
+    public CqlValueSet HbA1c_Laboratory_Test(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1013", default);
 
 
+
     [CqlDeclaration("Glucose management indicator")]
-    public CqlCode Glucose_management_indicator(CqlContext context) => 
+    public CqlCode Glucose_management_indicator(CqlContext context) =>
         new CqlCode("97506-0", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("LOINC")]
@@ -52,6 +55,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -66,6 +70,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -74,6 +79,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
 
         return b_;
     }
+
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -85,6 +91,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
     }
 
 
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -92,6 +99,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Race")]
@@ -103,6 +111,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -110,6 +119,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Initial Population")]
@@ -146,6 +156,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
     }
 
 
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -153,6 +164,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -168,6 +180,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
 
         return g_;
     }
+
 
 
     [CqlDeclaration("Glycemic Status Assessment")]
@@ -246,6 +259,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
     }
 
 
+
     [CqlDeclaration("Most Recent Glycemic Status Date")]
     public CqlDate Most_Recent_Glycemic_Status_Date(CqlContext context)
     {
@@ -316,6 +330,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
 
         return f_;
     }
+
 
 
     [CqlDeclaration("Lowest Glycemic Status Assessment Reading on Most Recent Day")]
@@ -408,6 +423,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
     }
 
 
+
     [CqlDeclaration("Has Most Recent Glycemic Status Assessment Without Result")]
     public bool? Has_Most_Recent_Glycemic_Status_Assessment_Without_Result(CqlContext context)
     {
@@ -419,6 +435,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
 
         return f_;
     }
+
 
 
     [CqlDeclaration("Has Most Recent Elevated Glycemic Status Assessment")]
@@ -434,6 +451,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
     }
 
 
+
     [CqlDeclaration("Has No Record Of Glycemic Status Assessment")]
     public bool? Has_No_Record_Of_Glycemic_Status_Assessment(CqlContext context)
     {
@@ -443,6 +461,7 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Numerator")]
@@ -456,6 +475,67 @@ public partial class DiabetesGlycemicStatusAssessmentGreaterThan9PercentFHIR_0_1
 
         return e_;
     }
+
+
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
+        [typeof(CqlDate)],
+        ["AntidepressantDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
+        [typeof(Observation), typeof(Encounter)],
+        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
+        [typeof(Encounter), typeof(Condition)],
+        ["QualifyingEncounters", "URI"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
+        [typeof(string), typeof(int?)],
+        ["EncounterID", "CalculatedCGA"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EMDhFLcFhWVERAVVNfLAZYXJi = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["DTaPVaccination1", "DTaPVaccination2", "DTaPVaccination3", "DTaPVaccination4"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CNGHaZROXaJTHPICcbIaJbRXV = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["PolioVaccination1", "PolioVaccination2", "PolioVaccination3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EZTgahAUWGgSdGaDCgQNNIPGW = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["HepatitisBVaccination1", "HepatitisBVaccination2", "HepatitisBVaccination3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HDfaMbZGBWDPFETGQNFbceEeg = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["HepatitisBVaccination1", "HepatitisBVaccination2", "NewBornVaccine3"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DdPDeOJhPYESfHGCOcBNOiPPP = new(
+        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
+        ["PneumococcalVaccination1", "PneumococcalVaccination2", "PneumococcalVaccination3", "PneumococcalVaccination4"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BZhFLeRDagbPQMNheVJcUNfNQ = new(
+        [typeof(CqlDate), typeof(CqlDate)],
+        ["FluVaccination1", "FluVaccination2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb = new(
+        [typeof(string), typeof(CqlDateTime)],
+        ["ID", "AuthorDate"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_FOBYUiHifSfYFYhEEQajgLbgF = new(
         [typeof(CqlQuantity), typeof(Observation)],
