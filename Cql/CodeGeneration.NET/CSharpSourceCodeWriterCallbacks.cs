@@ -8,15 +8,24 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using Hl7.Cql.Abstractions.Exceptions;
-using static Hl7.Cql.CodeGeneration.NET.AssemblyCompiler;
+using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
 internal class CSharpSourceCodeWriterCallbacks
 {
-    public Func<CompileError, bool>? ShouldThrowException { get; }
+    public record ExceptionContext(
+        object Sender,
+        Exception Exception);
 
+    public record WriteLibraryExceptionContext(
+        object Sender,
+        Exception Exception,
+        Library Library) : ExceptionContext(Sender, Exception);
+
+    public Func<ExceptionContext, bool>? ShouldThrowException { get; }
     private readonly Predicate<string>? _shouldWriteLibrary;
     private readonly Func<string, string?> _libraryNameToClassName;
     private readonly Action<CSharpSourceCodeStep>? _onAfterStep;
@@ -30,10 +39,9 @@ internal class CSharpSourceCodeWriterCallbacks
         Func<string, string?>? libraryNameToClassName = null,
         Predicate<string>? shouldWriteLibrary = null,
         Action<CSharpSourceCodeStep>? onAfterStep = null,
-        Func<CompileError, bool>? shouldThrowException = null)
+        Func<ExceptionContext, bool>? shouldThrowException = null)
     {
         ShouldThrowException = shouldThrowException;
-
         _libraryNameToClassName = libraryNameToClassName ?? GetDefaultLibraryNameToClassName;
         _shouldWriteLibrary = shouldWriteLibrary;
         _onAfterStep = onAfterStep;
@@ -62,34 +70,12 @@ internal class CSharpSourceCodeWriterCallbacks
 }
 internal abstract record CSharpSourceCodeStep
 {
-    public record OnStream(string Name, Stream Stream) : CSharpSourceCodeStep {
-        private readonly string _name = Name;
-        private readonly Stream _stream = Stream;
-
-        public string Name
-        {
-            get => _name;
-            init => _name = value;
-        }
-
-        public Stream Stream
-        {
-            get => _stream;
-            init => _stream = value;
-        }
-    }
+    public record OnStream(string Name, Stream Stream) : CSharpSourceCodeStep;
 
     public record OnDone() : CSharpSourceCodeStep;
 }
 
 internal readonly record struct AlreadyCreatedAStreamForLibraryNameError(string LibraryName) : ICqlError
 {
-    private readonly string _libraryName = LibraryName;
     public string GetMessage() => $"Already created a stream for this library name before. Library Name: '{LibraryName}'";
-
-    public string LibraryName
-    {
-        get => _libraryName;
-        init => _libraryName = value;
-    }
 }

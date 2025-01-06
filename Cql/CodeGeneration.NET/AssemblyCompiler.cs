@@ -34,7 +34,7 @@ namespace Hl7.Cql.CodeGeneration.NET
     {
         private static readonly EmitOptions EmitOptionsPortable = new EmitOptions(debugInformationFormat: DebugInformationFormat.PortablePdb);
         private static readonly CSharpParseOptions CSharpParseOptions = CSharpParseOptions.Default;
-        private readonly CSharpLibrarySetToStreamsWriter _cSharpLibrarySetToStreamsWriter;
+        private readonly LibrarySetDefinitionsToCSharpCodeProcessor _librarySetDefinitionsToCSharpCodeProcessor;
         private readonly CSharpCodeStreamPostProcessor? _cSharpCodeStreamPostProcessor;
         private readonly Lazy<Assembly[]> _referencesLazy;
         private readonly IOptions<AssemblyDataWriterOptions> _assemblyDataWriterOptions;
@@ -42,14 +42,14 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         public AssemblyCompiler(
             IOptions<AssemblyDataWriterOptions> assemblyDataWriterOptions,
-            CSharpLibrarySetToStreamsWriter cSharpLibrarySetToStreamsWriter,
+            LibrarySetDefinitionsToCSharpCodeProcessor librarySetDefinitionsToLibrarySetDefinitionsToCSharpCodeProcessor,
             TypeResolver typeResolver,
             CSharpCodeStreamPostProcessor? cSharpCodeStreamPostProcessor = null,
             AssemblyDataPostProcessor? assemblyDataPostProcessor = null)
         {
             _assemblyDataWriterOptions = assemblyDataWriterOptions;
             _assemblyDataPostProcessor = assemblyDataPostProcessor;
-            _cSharpLibrarySetToStreamsWriter = cSharpLibrarySetToStreamsWriter;
+            _librarySetDefinitionsToCSharpCodeProcessor = librarySetDefinitionsToLibrarySetDefinitionsToCSharpCodeProcessor;
             _cSharpCodeStreamPostProcessor = cSharpCodeStreamPostProcessor;
             _referencesLazy = new Lazy<Assembly[]>(
                 () =>
@@ -92,10 +92,13 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             List<(string libraryName, Stream stream)> items = [];
 
-            _cSharpLibrarySetToStreamsWriter.ProcessDefinitions(
+            _librarySetDefinitionsToCSharpCodeProcessor.ProcessDefinitions(
                 librarySet,
                 definitions,
-                callbacks: new(onAfterStep: CSharpSourceCodeStep, shouldThrowException:shouldThrowException));
+                callbacks: new(
+                    onAfterStep: CSharpSourceCodeStep,
+                    shouldThrowException:ec => shouldThrowException?.Invoke(
+                                                   new CompileError(this, ec.Exception, (ec as CSharpSourceCodeWriterCallbacks.WriteLibraryExceptionContext)?.Library!)) ?? true));
 
             return results;
 
