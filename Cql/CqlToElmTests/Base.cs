@@ -27,7 +27,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static LibraryExpressionBuilder LibraryExpressionBuilder => ServiceProvider.GetLibraryExpressionBuilderScoped();
 
-        internal static CSharpLibrarySetToStreamsWriter SourceCodeWriter => ServiceProvider.GetCSharpLibrarySetToStreamsWriter();
+        internal static DefinitionsToCSharpCodeProcessor DefinitionsToCSharpCodeProcessor => ServiceProvider.GetDefinitionsToCSharpCodeProcessor();
 
         internal static AssemblyCompiler AssemblyCompiler => ServiceProvider.GetAssemblyCompiler();
 
@@ -114,10 +114,10 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static LibrarySetCSharp GenerateCSharp(LibrarySetDefinitions librarySetDefinitions)
         {
-            var cSharpLibrarySetToStreamsWriter = ServiceProvider.GetCSharpLibrarySetToStreamsWriter();
+            var definitionsToCSharpCodeProcessor = ServiceProvider.GetDefinitionsToCSharpCodeProcessor();
 
             Dictionary<string, string> cSharpCodeByLibraryName = new();
-            cSharpLibrarySetToStreamsWriter.ProcessDefinitions(
+            definitionsToCSharpCodeProcessor.ProcessDefinitions(
                 librarySetDefinitions.LibrarySet,
                 librarySetDefinitions.Definitions,
                 new CSharpSourceCodeWriterCallbacks(
@@ -320,7 +320,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var ls = new LibrarySet("", library);
             var csByNav = new Dictionary<string, string>();
             var callbacks = new CSharpSourceCodeWriterCallbacks(onAfterStep: afterWrite);
-            SourceCodeWriter.ProcessDefinitions(ls, lambdas, callbacks);
+            DefinitionsToCSharpCodeProcessor.ProcessDefinitions(ls, lambdas, callbacks);
             return csByNav[library.GetVersionedIdentifier()!];
 
             void afterWrite(CSharpSourceCodeStep step)

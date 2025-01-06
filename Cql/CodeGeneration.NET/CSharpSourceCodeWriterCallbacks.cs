@@ -8,13 +8,24 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Reflection;
 using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
 internal class CSharpSourceCodeWriterCallbacks
 {
+    public record ExceptionContext(
+        object Sender,
+        Exception Exception);
 
+    public record WriteLibraryExceptionContext(
+        object Sender,
+        Exception Exception,
+        Library Library) : ExceptionContext(Sender, Exception);
+
+    public Func<ExceptionContext, bool>? ShouldThrowException { get; }
     private readonly Predicate<string>? _shouldWriteLibrary;
     private readonly Func<string, string?> _libraryNameToClassName;
     private readonly Action<CSharpSourceCodeStep>? _onAfterStep;
@@ -23,12 +34,14 @@ internal class CSharpSourceCodeWriterCallbacks
     /// <param name="libraryNameToClassName">Generating a class name for the library name.</param>
     /// <param name="shouldWriteLibrary">A function that determines whether the given library should be generated or not; default is <see langword="null" />.  When <see langword="null" />, all libraries are written.</param>
     /// <param name="onAfterStep">For handling a stream directly after the code was generated.</param>
+    /// <param name="shouldThrowException">Whether exception should be thrown.</param>
     public CSharpSourceCodeWriterCallbacks(
         Func<string, string?>? libraryNameToClassName = null,
         Predicate<string>? shouldWriteLibrary = null,
-        Action<CSharpSourceCodeStep>? onAfterStep = null)
+        Action<CSharpSourceCodeStep>? onAfterStep = null,
+        Func<ExceptionContext, bool>? shouldThrowException = null)
     {
-
+        ShouldThrowException = shouldThrowException;
         _libraryNameToClassName = libraryNameToClassName ?? GetDefaultLibraryNameToClassName;
         _shouldWriteLibrary = shouldWriteLibrary;
         _onAfterStep = onAfterStep;
