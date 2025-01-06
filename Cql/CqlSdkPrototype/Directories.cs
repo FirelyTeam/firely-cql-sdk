@@ -1,6 +1,6 @@
 ﻿namespace CqlSdkPrototype;
 
-public static class Directories
+public class Directories(string librarySetName)
 {
     private static DirectoryInfo FindAncestor(DirectoryInfo start, Func<DirectoryInfo, bool> match)
     {
@@ -17,13 +17,28 @@ public static class Directories
 
     public static DirectoryInfo CurrentDirectory { get; } = new(Directory.GetCurrentDirectory());
     public static DirectoryInfo SolutionDirectory { get; } = FindAncestor(CurrentDirectory, d => d.EnumerateFiles("*.sln?").Any());
+    public static DirectoryInfo ThisProjectDirectory { get; } = FindAncestor(CurrentDirectory, d => d.EnumerateFiles("*.csproj").Any());
+    public static DirectoryInfo AuthoringProjectDirectory => SolutionDirectory.CreateSubdirectory("Demo").CreateSubdirectory("Measures.Authoring");
     public static DirectoryInfo LibrarySetsDirectory { get; } = SolutionDirectory.CreateSubdirectory("LibrarySets");
-    public static DirectoryInfo CqlInDirectory(string librarySetName) => LibrarySetsDirectory.CreateSubdirectory(librarySetName).CreateSubdirectory("Cql");
-    public static DirectoryInfo ElmInDirectory(string librarySetName) => LibrarySetsDirectory.CreateSubdirectory(librarySetName).CreateSubdirectory("Elm");
-    public static DirectoryInfo ProjectDirectory { get; } = FindAncestor(CurrentDirectory, d => d.EnumerateFiles("*.csproj").Any());
-    public static DirectoryInfo GeneratedDirectory { get; } = ProjectDirectory.CreateSubdirectory("generated");
-    public static DirectoryInfo ElmOutDirectory { get; } = GeneratedDirectory.CreateSubdirectory("Elm");
-    public static DirectoryInfo CSharpOutDirectory { get; } = GeneratedDirectory.CreateSubdirectory("CSharp");
-    public static DirectoryInfo AssembliesOutDirectory { get; } = GeneratedDirectory.CreateSubdirectory("Assemblies");
-    public static DirectoryInfo FhirOutDirectory { get; } = GeneratedDirectory.CreateSubdirectory("Fhir");
+
+    public string LibrarySetName { get; } = librarySetName;
+    public DirectoryInfo GeneratedDirectory => ThisProjectDirectory.CreateSubdirectory("generated").CreateSubdirectory(LibrarySetName);
+    public DirectoryInfo CqlInDirectory =>
+        LibrarySetName switch
+        {
+            "Authoring" => AuthoringProjectDirectory.CreateSubdirectory("Input").CreateSubdirectory("cql"),
+            _ => LibrarySetsDirectory.CreateSubdirectory(LibrarySetName).CreateSubdirectory("Cql")
+        };
+
+    //public static DirectoryInfo ElmInDirectory(string librarySetName) => LibrarySetsDirectory.CreateSubdirectory(LibrarySetName).CreateSubdirectory("Elm");
+    public DirectoryInfo ElmOutDirectory => GeneratedDirectory.CreateSubdirectory("Elm");
+    public DirectoryInfo CSharpOutDirectory => GeneratedDirectory.CreateSubdirectory("CSharp");
+    public DirectoryInfo AssembliesOutDirectory => GeneratedDirectory.CreateSubdirectory("Assemblies");
+    public DirectoryInfo FhirOutDirectory => GeneratedDirectory.CreateSubdirectory("Fhir");
+    public DirectoryInfo? ValueSetsInDirectory =>
+        LibrarySetName switch
+        {
+            "Authoring" => AuthoringProjectDirectory.CreateSubdirectory("Input").CreateSubdirectory("cql").CreateSubdirectory("vocabulary").CreateSubdirectory("valueset"),
+            _ => null
+        };
 }

@@ -28,6 +28,7 @@ classDiagram
         class TupleBuilderCache { }
         class CqlContextBinder { }
         class CqlOperatorsBinder { }
+        class FhirJsonSerializer { }
     }
 
     namespace CodeGeneration {
@@ -87,6 +88,9 @@ classDiagram
     StubFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
 
     %% Dependencies
+
+    FhirJsonSerializer ..> ModelInspector : injected
+    FhirJsonSerializer ..> JsonSerializerOptions : injected key=Fhir
 
     LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
 

@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Runtime;
 
-public partial class LibrarySetInvoker : IDisposable
+public class LibrarySetInvoker : IDisposable
 {
 
     private readonly AssemblyLoadContext _asm;
@@ -33,10 +33,7 @@ public partial class LibrarySetInvoker : IDisposable
     }
 
     public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker> LibraryInvokers { get; }
-}
 
-partial class LibrarySetInvoker
-{
     public static bool TryCreate(
         [NotNullWhen(true)] out LibrarySetInvoker? librarySetInvoker,
         CqlTranslator cqlTranslation,

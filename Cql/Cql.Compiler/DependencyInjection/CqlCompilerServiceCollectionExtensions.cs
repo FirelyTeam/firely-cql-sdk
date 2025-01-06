@@ -6,12 +6,14 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Text.Json;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime.Hosting;
 using Hl7.Fhir.Introspection;
+using Hl7.Fhir.Serialization;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 // ReSharper disable once CheckNamespace
@@ -24,6 +26,9 @@ internal static class CqlCompilerServiceCollectionExtensions
     internal static IServiceCollection AddCqlCompilerServices(this IServiceCollection services)
     {
         services.TryAddSingleton<ModelInspector>(_ => Hl7.Fhir.Model.ModelInfo.ModelInspector);
+
+        services.TryAddKeyedSingleton("Fhir", (sp,_) => new JsonSerializerOptions().ForFhir(sp.GetRequiredService<ModelInspector>()));
+        services.TryAddSingleton<FhirJsonSerializer>();
 
         const int cacheSize = 0; // TODO: Must move to configuration
         services.TryAddSingleton<TypeConverter>(sp =>
@@ -55,5 +60,4 @@ internal static class CqlCompilerServiceCollectionExtensions
 
         return services;
     }
-
 }

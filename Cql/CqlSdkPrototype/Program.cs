@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using System.Text.Json;
 using CqlSdkPrototype.CqlToElm;
 using CqlSdkPrototype.ElmToAssembly;
 using CqlSdkPrototype.Internal;
@@ -7,8 +8,13 @@ using CqlSdkPrototype.Runtime;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Model;
+using Hl7.Cql.Operators;
+using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
+using Hl7.Cql.ValueSets;
+using Hl7.Fhir.Model;
+using Hl7.Fhir.Serialization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -20,9 +26,10 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        Directories.GeneratedDirectory.Delete(recursive: true);
+        var librarySetName = "Authoring";
+        Directories dirs = new(librarySetName);
+        dirs.GeneratedDirectory.Delete(recursive: true);
         var serviceProvider = BuildServiceProvider();
-        var librarySetName = "Demo";
 
         var cqlTranslation =
                 CqlTranslator.Create(
@@ -40,7 +47,7 @@ internal class Program
                                      }
                                  })
                              .LoadCqlFilesFromDirectory(
-                                 Directories.CqlInDirectory(librarySetName),
+                                 dirs.CqlInDirectory,
                                  options: new EnumerationOptions()
                                  {
                                      /*RecurseSubdirectories = false*/
@@ -51,7 +58,7 @@ internal class Program
                                      or "NCQAStatus"*/
                                  )
                              .Translate()
-                             .SaveElmFileToDirectory(Directories.ElmOutDirectory)
+                             .SaveElmFileToDirectory(dirs.ElmOutDirectory)
             ;
 
         var elmCompilation =
@@ -73,21 +80,28 @@ internal class Program
                               //.LoadElmFile(elmDirIn, ElmLibraryIdentifier.Parse("FHIRHelpers")) //
                               //.LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
                               .Compile()
-                              .SaveCSharpFilesToDirectory(Directories.CSharpOutDirectory)
-                              .SaveAssemblyBinariesToDirectory(Directories.AssembliesOutDirectory)
+                              .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
+                              .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
             ;
 
+        FhirJsonPocoDeserializer fhirJsonPocoDeserializer = null!;
         DumpOutputFilesToConsole(serviceProvider, cqlTranslation, elmCompilation);
-        ExecuteLibrary(serviceProvider, cqlTranslation, elmCompilation);
+        ExecuteLibrary(serviceProvider, dirs, cqlTranslation, elmCompilation, fhirJsonPocoDeserializer);
     }
 
     private static void ExecuteLibrary(
         ServiceProvider serviceProvider,
+        Directories dirs,
         CqlTranslator cqlTranslation,
-        ElmCompiler elmCompilation)
+        ElmCompiler elmCompilation,
+        FhirJsonPocoDeserializer fhirJsonPocoDeserializer)
     {
         var logger = serviceProvider.GetLogger<Program>();
-        if (LibrarySetInvoker.TryCreate(out var librarySetInvoker, cqlTranslation, elmCompilation, logger))
+        if (LibrarySetInvoker.TryCreate(
+                out var librarySetInvoker,
+                cqlTranslation,
+                elmCompilation,
+                logger))
         {
             StringBuilder sb = new();
             sb.AppendLine("Libraries and Declarations:");
@@ -99,8 +113,36 @@ internal class Program
             }
             logger.LogInformation("{msg}", sb.ToString());
 
-            CqlContext cqlContext = FhirCqlContext.ForBundle();
-            var devDays = librarySetInvoker.LibraryInvokers[CqlVersionedLibraryIdentifier.Parse("DevDays-2023.0.0")];
+            if (dirs.ValueSetsInDirectory is null)
+            {
+                logger.LogWarning("No value sets directory found. Skipping execution.");
+                return;
+            }
+
+            /*dirs.ValueSetsInDirectory.EnumerateFiles("*.json", SearchOption.AllDirectories)
+                .Select(fi =>
+                {
+                    using var stream = fi.OpenRead();
+                    var reader = new Utf8JsonReader();
+                    return fhirJsonPocoDeserializer.DeserializeObject<ValueSet>(reader);
+                });*/
+
+            Bundle? bundle = new Bundle(){};
+            Dictionary<string, object>? parameters = new()
+            {
+                ["Measurement Period"] = new CqlInterval<CqlDate>(
+                    low: new CqlDate(2023, 1, 1),
+                    high: new CqlDate(2023, 12, 31),
+                    lowClosed: true,
+                    highClosed: true)
+            };
+
+            IValueSetDictionary? valueSets = null;
+            FhirCqlContextOptions? options = null;
+            CqlContext cqlContext = FhirCqlContext
+                                    //.WithDataSource(source, parameters, valueSets, options: options);
+                                    .ForBundle(bundle, parameters, valueSets, options:options);
+            var devDays = librarySetInvoker.LibraryInvokers[CqlVersionedLibraryIdentifier.Parse("ParametersExample-0.0.1")];
             var patientDeclaration = devDays.Declarations["Patient"];
             var patient = patientDeclaration.Invoke(cqlContext);
         }
@@ -113,12 +155,12 @@ internal class Program
             //["ElmCompilationCreateOptions:ShouldThrowError"] = "true"
         };
 
-        var configuration = new ConfigurationBuilder()
-                            .AddInMemoryCollection(inMemoryConfiguration)
-                            .Build();
+        // var configuration = new ConfigurationBuilder()
+        //                     .AddInMemoryCollection(inMemoryConfiguration)
+        //                     .Build();
 
         var serviceProvider = new ServiceCollection()
-                              .AddSingleton<IConfiguration>(configuration)
+                              // .AddSingleton<IConfiguration>(configuration)
                               .AddLogging(lb => lb
                                                 .ClearProviders()
                                                 .AddProvider(new CustomConsoleLoggerProvider(cat => cat.Split('.').Last()))
