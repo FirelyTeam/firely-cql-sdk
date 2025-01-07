@@ -138,37 +138,17 @@ public class ElmCompiler :
         foreach (var (id, _) in removedLibraries)
             _state.Logger.LogWarning(message: "Removed library with missing dependencies: {id}", args: id);
 
-        Func<LibrarySetExpressionBuilderContext.ProcessLibrarySetError, bool>? shouldThrowProcessLibraryException = null;
-        Func<AssemblyCompiler.CompileError, bool>? shouldThrowCompileException = null;
-        if (_state.Options.ShouldThrowError is { } fn)
-        {
-            shouldThrowProcessLibraryException = processLibrarySetError =>
-            {
-                var errorData = new ElmCompilationError(
-                    ElmCompiler: this,
-                    Exception: processLibrarySetError.Exception,
-                    Method: "ProcessLibrarySet",
-                    Identifier: processLibrarySetError.Library.GetVersionedIdentifier(throwError: false));
-                return fn(arg: errorData);
-            };
-            shouldThrowCompileException = compileError =>
-            {
-                var errorData = new ElmCompilationError(
-                    ElmCompiler: this,
-                    Exception: compileError.Exception,
-                    Method: "CompileLibrary",
-                    Identifier: compileError.Library.GetVersionedIdentifier(throwError: false));
-                return fn(arg: errorData);
-            };
-        }
-
         DefinitionDictionary<LambdaExpression> definitionDictionary =
             librarySetExpressionBuilderScoped.ProcessLibrarySet(
-                librarySet: librarySet, shouldThrowException: shouldThrowProcessLibraryException);
+                librarySet: librarySet,
+                processLibraryExceptionHandling: _state.Options.ProcessBatchItemExceptionHandling);
 
         IReadOnlyDictionary<string, AssemblyData> assemblyDatas =
-            assemblyCompiler.Compile(librarySet: librarySet, definitions: definitionDictionary,
-                                     shouldThrowException: shouldThrowCompileException);
+            assemblyCompiler.Compile(
+                librarySet: librarySet,
+                definitions: definitionDictionary,
+                libraryCSharpWritingExceptionHandling: _state.Options.ProcessBatchItemExceptionHandling,
+                libraryAssemblyWritingExceptionHandling: _state.Options.ProcessBatchItemExceptionHandling);
 
         var entriesBuilder = _state.Entries.ToBuilder();
         bool hasChanged = false;

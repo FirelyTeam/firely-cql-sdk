@@ -1,21 +1,19 @@
 ﻿using System.Text;
-using System.Text.Json;
 using CqlSdkPrototype.CqlToElm;
 using CqlSdkPrototype.ElmToAssembly;
 using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Logging;
 using CqlSdkPrototype.Runtime;
+using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Model;
-using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using static System.FormattableString;
@@ -36,22 +34,14 @@ internal class Program
                                  serviceProvider,
                                  CqlTranslationCreateOptions.Default with
                                  {
-                                     ShouldThrowError = e =>
-                                     {
-                                         e.Logger.LogWarning(
-                                             e.Exception,
-                                             "Ignoring error during {method} for {id}",
-                                             e.Method,
-                                             e.Identifier);
-                                         return false;
-                                     }
+                                     ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue,
                                  })
                              .LoadCqlFilesFromDirectory(
-                                 dirs.CqlInDirectory,
+                                 dirs.CqlInDirectory/*,
                                  options: new EnumerationOptions()
                                  {
-                                     /*RecurseSubdirectories = false*/
-                                 }/*,
+                                     //RecurseSubdirectories = false
+                                 }*//*,
                                  filePredicate: fi => fi.Name.TrimFileExtension(".cql") is
                                      "FHIRHelpers"
                                      or "NCQATerminology"
@@ -66,15 +56,7 @@ internal class Program
                                   serviceProvider,
                                   ElmCompilationCreateOptions.Default with
                                   {
-                                      ShouldThrowError = e =>
-                                      {
-                                          e.Logger.LogWarning(
-                                              e.Exception,
-                                              "Ignoring error during {method} for {id}",
-                                              e.Method,
-                                              e.Identifier);
-                                          return false;
-                                      }
+                                      ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue,
                                   })
                               .LoadCqlTranslation(cqlTranslation)
                               //.LoadElmFile(elmDirIn, ElmLibraryIdentifier.Parse("FHIRHelpers")) //

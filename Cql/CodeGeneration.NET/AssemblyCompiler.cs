@@ -23,10 +23,15 @@ using System.Linq.Expressions;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
+using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Elm;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.CodeAnalysis.Emit;
+using Microsoft.Extensions.Logging;
+using static Hl7.Cql.CodeGeneration.NET.CSharpSourceCodeStep;
+using Hl7.Fhir.Model;
+using Library = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -38,16 +43,19 @@ namespace Hl7.Cql.CodeGeneration.NET
         private readonly CSharpCodeStreamPostProcessor? _cSharpCodeStreamPostProcessor;
         private readonly Lazy<Assembly[]> _referencesLazy;
         private readonly IOptions<AssemblyDataWriterOptions> _assemblyDataWriterOptions;
+        private readonly ILogger<AssemblyCompiler> _logger;
         private readonly AssemblyDataPostProcessor? _assemblyDataPostProcessor;
 
         public AssemblyCompiler(
             IOptions<AssemblyDataWriterOptions> assemblyDataWriterOptions,
+            ILogger<AssemblyCompiler> logger,
             LibrarySetDefinitionsToCSharpCodeProcessor librarySetDefinitionsToLibrarySetDefinitionsToCSharpCodeProcessor,
             TypeResolver typeResolver,
             CSharpCodeStreamPostProcessor? cSharpCodeStreamPostProcessor = null,
             AssemblyDataPostProcessor? assemblyDataPostProcessor = null)
         {
             _assemblyDataWriterOptions = assemblyDataWriterOptions;
+            _logger = logger;
             _assemblyDataPostProcessor = assemblyDataPostProcessor;
             _librarySetDefinitionsToCSharpCodeProcessor = librarySetDefinitionsToLibrarySetDefinitionsToCSharpCodeProcessor;
             _cSharpCodeStreamPostProcessor = cSharpCodeStreamPostProcessor;
@@ -84,7 +92,8 @@ namespace Hl7.Cql.CodeGeneration.NET
         public IReadOnlyDictionary<string, AssemblyData> Compile(
             LibrarySet librarySet,
             DefinitionDictionary<LambdaExpression> definitions,
-            Func<CompileError, bool>? shouldThrowException = null)
+            ProcessBatchItemExceptionHandling libraryCSharpWritingExceptionHandling = default,
+            ProcessBatchItemExceptionHandling libraryAssemblyWritingExceptionHandling = default)
         {
             ArgumentNullException.ThrowIfNull(definitions);
 
@@ -95,10 +104,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             _librarySetDefinitionsToCSharpCodeProcessor.ProcessDefinitions(
                 librarySet,
                 definitions,
-                callbacks: new(
-                    onAfterStep: CSharpSourceCodeStep,
-                    shouldThrowException:ec => shouldThrowException?.Invoke(
-                                                   new CompileError(this, ec.Exception, (ec as CSharpSourceCodeWriterCallbacks.WriteLibraryExceptionContext)?.Library!)) ?? true));
+                callbacks: new(onAfterStep: CSharpSourceCodeStep),
+                processLibraryToCSharpExceptionHandling: libraryCSharpWritingExceptionHandling);
 
             return results;
 
@@ -117,24 +124,36 @@ namespace Hl7.Cql.CodeGeneration.NET
                             foreach (var referenceAssembly in _referencesLazy.Value)
                                 _assemblyDataPostProcessor.ProcessReferenceAssembly(referenceAssembly);
 
-                        // Compile Libraries
-                        foreach (var (libraryName, stream) in items)
-                        {
-                            var library = librarySet.GetLibrary(libraryName)!;
-                            try
-                            {
-                                var libraryAssembly = CompileNode(stream, results, librarySet, library, _referencesLazy.Value);
-                                results.Add(library.GetVersionedIdentifier()!, libraryAssembly);
-                                _assemblyDataPostProcessor?.ProcessAssemblyData(library.GetVersionedIdentifier()!, libraryAssembly);
-                            }
-                            catch (Exception e)
-                            {
-                                if (shouldThrowException?.Invoke(new CompileError(this, e, library)) ?? true)
-                                    throw;
-                            }
-                        }
+                        CompileAssemblies();
                         break;
                 }
+            }
+
+            void CompileAssemblies()
+            {
+                ExceptionHandlingMethods.ProcessBatchWithExceptionHandlingAndLogging(
+                    items: from item in items
+                           let libraryName = item.libraryName!
+                           let library = librarySet.GetLibrary(libraryName)!
+                           let stream = item.stream!
+                           select (libraryName, library, stream),
+                    process: item => CompileAssembly(item.library, item.stream),
+                    exceptionHandling: libraryAssemblyWritingExceptionHandling,
+                    logger: _logger,
+                    buildLoggerMessage: (exceptionHandling, item, exception) => (exceptionHandling, exception) switch
+                    {
+                        (ProcessBatchItemExceptionHandling.ThrowException, { }) => ("Error writing library '{libraryName}' to .NET assembly.", [item.libraryName]),
+                        (ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue, { }) => ("Error ignored writing library '{libraryName}' to .NET assembly, continuing to next library.", [item.libraryName]),
+                        (ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak, { }) => ("Error ignored writing library '{libraryName}' to .NET assembly, abort processing more libraries.", [item.libraryName]),
+                        _ => null,
+                    });
+            }
+
+            void CompileAssembly(Library library, Stream stream)
+            {
+                var libraryAssembly = CompileNode(stream, results, librarySet, library, _referencesLazy.Value);
+                results.Add(library.GetVersionedIdentifier()!, libraryAssembly);
+                _assemblyDataPostProcessor?.ProcessAssemblyData(library.GetVersionedIdentifier()!, libraryAssembly);
             }
         }
 

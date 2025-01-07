@@ -1,40 +1,10 @@
-﻿namespace CqlSdkPrototype.ElmToAssembly;
+﻿using Hl7.Cql.Abstractions.Exceptions;
 
-public partial record ElmCompilationCreateOptions
+namespace CqlSdkPrototype.ElmToAssembly;
+
+public record ElmCompilationCreateOptions(
+    ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling)
+
 {
-    public static ElmCompilationCreateOptions Default { get; }
-
-    static ElmCompilationCreateOptions()
-    {
-        Default = new ElmCompilationCreateOptions();
-    }
-
-    private ElmCompilationCreateOptions() { }
-
-    public Func<ElmCompilationError, bool>? ShouldThrowError { get; init; }
-
-    // public ILoggerProvider LoggerProvider { get; init; } = NullLoggerProvider.Instance;
+    public static ElmCompilationCreateOptions Default { get; } = new(default(ProcessBatchItemExceptionHandling));
 }
-
-// partial record ElmCompilationCreateOptions
-// {
-//     internal record DefaultElmCompilationCreateOptions : ElmCompilationCreateOptions
-//     {
-//         internal ElmCompilation? DefaultElmCompilation { get; private set; } // Only ever set once. Needs lock?
-//
-//         internal override ElmCompilation CreateElmCompilation()
-//         {
-//             DefaultElmCompilation ??= new ElmCompilation(this, ElmCompilation.BuildServiceProvider());
-//             return DefaultElmCompilation;
-//         }
-//     }
-//
-//     internal virtual ElmCompilation CreateElmCompilation()
-//     {
-//         return Equals(Default) switch
-//         {
-//             true => Default.CreateElmCompilation(),
-//             _    => new ElmCompilation(this, ElmCompilation.BuildServiceProvider())
-//         };
-//     }
-// }

@@ -8,13 +8,11 @@
 
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Primitives;
 using Microsoft.Extensions.Logging;
 

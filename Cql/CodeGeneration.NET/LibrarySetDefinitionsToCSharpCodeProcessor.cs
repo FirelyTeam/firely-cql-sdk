@@ -19,6 +19,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Text;
+using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Operators;
@@ -110,16 +111,18 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
     /// <param name="librarySet">A dependency graph containing dependent libraries.</param>
     /// <param name="definitions">The lambda expressions to write.</param>
     /// <param name="callbacks">Callbacks which is used during the processing of each stream.</param>
+    /// <param name="processLibraryToCSharpExceptionHandling">Selecting the exception handling policy for writing libraries to C#.</param>
     public void ProcessDefinitions(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> definitions,
-        CSharpSourceCodeWriterCallbacks? callbacks = null)
+        CSharpSourceCodeWriterCallbacks? callbacks = null,
+        ProcessBatchItemExceptionHandling processLibraryToCSharpExceptionHandling = default)
     {
         List<Stream> streamsToDispose = new();
         callbacks ??= new();
         try
         {
-            var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions, callbacks);
+            var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions, callbacks, processLibraryToCSharpExceptionHandling);
             foreach (var (name, stream) in librarySetWriter.WriteLibraries())
             {
                 streamsToDispose.Add(stream);
@@ -143,8 +146,10 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
         LibrarySetDefinitionsToCSharpCodeProcessor Processor,
         LibrarySet LibrarySet,
         DefinitionDictionary<LambdaExpression> Definitions,
-        CSharpSourceCodeWriterCallbacks Callbacks)
+        CSharpSourceCodeWriterCallbacks Callbacks,
+        ProcessBatchItemExceptionHandling ProcessLibraryToCSharpExceptionHandling)
     {
+        public ProcessBatchItemExceptionHandling ProcessLibraryToCSharpExceptionHandling { get; } = ProcessLibraryToCSharpExceptionHandling;
         public TupleMetadataBuilder TupleMetadataBuilder => Processor._tupleMetadataBuilder;
         public string GeneratorToolName => Processor._generatorToolName;
         public string GeneratorToolVersion => Processor._generatorToolVersion;
@@ -159,52 +164,59 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
             if (!LibrarySet.Any())
             {
                 Logger.LogInformation($"No libraries detected; skipping.");
-                yield break;
+                return [];
             }
 
-            foreach (Library library in LibrarySet)
+            IEnumerable<(string libraryName, Library library, Stream stream)> GetLibrariesForProcessing()
             {
-                string libraryName = library.GetVersionedIdentifier()!;
-                if (!Callbacks.ShouldWriteLibrary(libraryName))
+                foreach (Library library in LibrarySet)
                 {
-                    Logger.LogInformation($"Skipping library {libraryName} as per callback.");
-                    continue;
+                    string libraryName = library.GetVersionedIdentifier()!;
+                    if (!Callbacks.ShouldWriteLibrary(libraryName))
+                    {
+                        Logger.LogInformation($"Skipping library {libraryName} as per callback.");
+                        continue;
+                    }
+
+                    if (!Definitions.Libraries.Contains(libraryName))
+                    {
+                        Logger.LogInformation($"Skipping library {libraryName}, which has no definitions");
+                        continue;
+                    }
+
+                    var stream = Callbacks.GetStreamForLibraryName(libraryName);
+                    if (stream == null!)
+                        continue;
+
+                    yield return (libraryName, library, stream);
                 }
-
-                if (!Definitions.Libraries.Contains(libraryName))
-                {
-                    Logger.LogInformation($"Skipping library {libraryName}, which has no definitions");
-                    continue;
-                }
-
-                var stream = Callbacks.GetStreamForLibraryName(libraryName);
-                if (stream == null!)
-                    continue;
-
-                if (WriteLibrary(library, stream))
-                    yield return (libraryName, stream);
             }
-        }
 
-        private bool WriteLibrary(Library library, Stream stream)
-        {
-            using var writer = new StreamWriter(stream, Encoding.UTF8, 1024, leaveOpen: true);
-            bool faulted = false;
-            try
+            return ExceptionHandlingMethods.ProcessBatchWithExceptionHandlingAndLogging(
+                items: GetLibrariesForProcessing(),
+                process: item =>
+                {
+                    WriteLibrary(item.library, item.stream);
+                    return (item.libraryName, item.stream);
+                },
+                exceptionHandling: ProcessLibraryToCSharpExceptionHandling,
+                logger: Logger,
+                buildLoggerMessage: (exceptionHandling, item, exception) => (exceptionHandling, exception) switch
+                {
+                    (ProcessBatchItemExceptionHandling.ThrowException, { }) => ("Error writing library '{libraryName}' to C#.", [item.libraryName]),
+                    (ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue, { }) => ("Error ignored writing library '{libraryName}' to C#, continuing to next library.", [item.libraryName]),
+                    (ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak, { }) => ("Error ignored writing library '{libraryName}' to C#, abort processing more libraries.", [item.libraryName]),
+                    _ => null,
+                });
+
+            void WriteLibrary(Library library, Stream stream)
             {
+                using var writer = new StreamWriter(stream, Encoding.UTF8, 1024, leaveOpen: true);
                 var libraryWriter = new LibraryWriter(this, library, writer);
                 libraryWriter.WriteLibraryFile();
+                writer.Flush();
             }
-            catch (Exception e)
-            {
-                faulted = true;
-                if (Callbacks.ShouldThrowException is not { } shouldThrow
-                    || shouldThrow(new CSharpSourceCodeWriterCallbacks.WriteLibraryExceptionContext(this, e, library)))
-                    throw;
-            }
-            writer.Flush();
-            return !faulted;
-        }
+    }
     }
 
     private record LibraryWriter(

@@ -1,7 +1,10 @@
 ﻿using CqlSdkPrototype.Advanced;
 using CqlSdkPrototype.CqlToElm.Advanced;
+using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Compiler;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -125,36 +128,48 @@ public class CqlTranslator :
         CqlToElmConverter cqlToElmConverter = null!;
         var entriesBuilder = _state.Entries.ToBuilder();
         int changedCount = 0;
-        foreach (var (versionedIdentifier, cqlTranslationEntry) in entriesBuilder
-                     .Where(kv => kv.Value.ElmLibrary is null))
+
+        IEnumerable<(CqlVersionedLibraryIdentifier versionedIdentifier, CqlTranslationEntry cqlTranslationEntry)> GetLibrariesForProcessing()
         {
-            if (changedCount == 0)
+            foreach (var (versionedIdentifier, cqlTranslationEntry) in entriesBuilder
+                         .Where(kv => kv.Value.ElmLibrary is null))
             {
-                _state.Logger.LogInformation("Translating CQL into ELM");
-                cqlToElmConverter = _state.ServiceProvider.GetCqlToElmConverter();
-                entriesBuilder = _state.Entries.ToBuilder();
-            }
+                if (changedCount == 0)
+                {
+                    _state.Logger.LogInformation("Translating CQL into ELM");
+                    cqlToElmConverter = _state.ServiceProvider.GetCqlToElmConverter();
+                    entriesBuilder = _state.Entries.ToBuilder();
+                }
 
-            _state.Logger.LogInformation("Translating CQL: {id}", versionedIdentifier);
-            try
-            {
-                var cql = cqlTranslationEntry.CqlLibraryStringContent.Cql;
-                var library = cqlToElmConverter.ConvertLibrary(new StringReader(cql));
-                entriesBuilder[versionedIdentifier] = cqlTranslationEntry with { ElmLibrary = library };
+                _state.Logger.LogInformation("Translating CQL: {id}", versionedIdentifier);
+                yield return (versionedIdentifier, cqlTranslationEntry);
+                changedCount++;
             }
-            catch (Exception e)
-            {
-                if (_state.Options.ShouldThrowError?.Invoke(
-                        new CqlTranslationError(this, e, "Translate", versionedIdentifier.ToString())) ?? true)
-                    throw;
-            }
-
-            changedCount++;
         }
+
+        ExceptionHandlingMethods.ProcessBatchWithExceptionHandlingAndLogging(
+            items: GetLibrariesForProcessing(),
+            process: t => ProcessLibrary(t.versionedIdentifier, t.cqlTranslationEntry),
+            exceptionHandling: _state.Options.ProcessBatchItemExceptionHandling,
+            logger: _state.Logger,
+            buildLoggerMessage: (exceptionHandling, item, exception) => (exceptionHandling, exception) switch
+            {
+                (ProcessBatchItemExceptionHandling.ThrowException, { }) => ("Error translating CQL library '{libraryName}' to ELM.", [item.versionedIdentifier]),
+                (ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue, { }) => ("Error ignored CQL translating library '{libraryName}' to ELM, continuing to next library.", [item.versionedIdentifier]),
+                (ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak, { }) => ("Error ignored CQL translating library '{libraryName}' to ELM, abort processing more libraries.", [item.versionedIdentifier]),
+                _ => null,
+            });
 
         return changedCount > 0
                    ? Mutate(entries: entriesBuilder.ToImmutable())
                    : this;
+
+        void ProcessLibrary(CqlVersionedLibraryIdentifier versionedIdentifier, CqlTranslationEntry cqlTranslationEntry)
+        {
+            var cql = cqlTranslationEntry.CqlLibraryStringContent.Cql;
+            var library = cqlToElmConverter.ConvertLibrary(new StringReader(cql));
+            entriesBuilder[versionedIdentifier] = cqlTranslationEntry with { ElmLibrary = library };
+        }
     }
 
     #endregion
