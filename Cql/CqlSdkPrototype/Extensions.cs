@@ -10,7 +10,7 @@ namespace CqlSdkPrototype;
 
 public static class Extensions
 {
-    public static IServiceCollection AddElmCompilation(
+    public static IServiceCollection AddElmApi(
         this IServiceCollection serviceCollection,
         Action<ElmCompilationOptions>? configureOptions = null)
     {
@@ -47,7 +47,7 @@ public static class Extensions
         }
     }
 
-    public static IServiceCollection AddCqlTranslation(
+    public static IServiceCollection AddCqlApi(
         this IServiceCollection serviceCollection,
         Action<CqlTranslationOptions>? configureOptions = null)
     {

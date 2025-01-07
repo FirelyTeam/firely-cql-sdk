@@ -1,17 +1,17 @@
 ﻿namespace CqlSdkPrototype;
 
-public readonly record struct CqlLibraryStringContent
+public readonly record struct CqlLibraryString
 {
-    public static CqlLibraryStringContent Empty { get; } = new(CqlVersionedLibraryIdentifier.Empty, string.Empty);
+    public static CqlLibraryString Empty { get; } = new(CqlVersionedLibraryIdentifier.Empty, string.Empty);
 
-    public static CqlLibraryStringContent FromIdentifierAndString(
+    public static CqlLibraryString FromIdentifierAndString(
         CqlVersionedLibraryIdentifier versionedLibraryIdentifier,
         string cqlContent)
     {
-        return new CqlLibraryStringContent(versionedLibraryIdentifier, cqlContent);
+        return new CqlLibraryString(versionedLibraryIdentifier, cqlContent);
     }
 
-    private CqlLibraryStringContent(
+    private CqlLibraryString(
         CqlVersionedLibraryIdentifier versionedLibraryIdentifier,
         string cql)
     {

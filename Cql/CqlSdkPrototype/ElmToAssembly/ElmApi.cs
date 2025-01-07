@@ -9,15 +9,17 @@ using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-using ElmCompilationEntriesMap = System.Collections.Immutable.ImmutableDictionary<CqlSdkPrototype.CqlVersionedLibraryIdentifier, CqlSdkPrototype.ElmToAssembly.ElmCompiler.ElmCompilationEntry>;
+using ElmCompilationEntriesMap = System.Collections.Immutable.ImmutableDictionary<CqlSdkPrototype.CqlVersionedLibraryIdentifier, CqlSdkPrototype.ElmToAssembly.ElmApi.ElmCompilationEntry>;
 
 namespace CqlSdkPrototype.ElmToAssembly;
 
-public class ElmCompiler :
-    IElmLibraryAcceptor<ElmCompiler>,
-    ILogAccessor<ElmCompiler>
+public class ElmApi :
+    IElmApiBase<ElmApi>,
+    ILogAccessor<ElmApi>
 {
     private readonly State _state;
+
+    public ElmApiOptions Options => _state.Options;
 
     public IReadOnlyDictionary<CqlLibraryIdentifier, CqlVersionedLibraryIdentifier> GetVersionedIdentifiers() =>
         _state.Entries
@@ -39,10 +41,20 @@ public class ElmCompiler :
     #region Nested Types
 
     private readonly record struct State(
-        IServiceProvider ServiceProvider,
-        ILogger<ElmCompiler> Logger,
-        ElmCompilationEntriesMap Entries,
-        ElmCompilationCreateOptions Options);
+        ElmApiOptions Options,
+        ElmCompilationEntriesMap Entries)
+    {
+        public ILogger<ElmApi> Logger { get; } = Options.ServiceProvider.GetLogger<ElmApi>();
+        public AssemblyCompiler AssemblyCompiler { get; } = Options.ServiceProvider.GetAssemblyCompiler();
+        public Scope CreateScope() => new(Options.ServiceProvider.CreateScope());
+    }
+
+    internal class Scope(IServiceScope scope) : IDisposable
+    {
+        public LibrarySetExpressionBuilder LibrarySetExpressionBuilder { get; } = scope.ServiceProvider.GetLibrarySetExpressionBuilderScoped();
+
+        public void Dispose() => scope.Dispose();
+    }
 
     internal readonly record struct ElmCompilationEntry
         (Library ElmLibrary, string? CSharpSourceCode = null, byte[]? AssemblyBinary = null, byte[]? DebugSymbolsBinary = null);
@@ -51,49 +63,32 @@ public class ElmCompiler :
 
     #region Construction
 
-    internal ElmCompiler(
-        IServiceProvider serviceProvider,
-        ElmCompilationCreateOptions options)
-        : this(new State(
-                   serviceProvider,
-                   serviceProvider.GetLogger<ElmCompiler>(),
-                   ElmCompilationEntriesMap.Empty.WithComparers(
-                       CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer),
-                   options)) { }
+    public static ElmApi Create(ElmApiOptions options)
+    {
+        var entries = ElmCompilationEntriesMap.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+        var state = new State(options, entries);
+        return new ElmApi(state);
+    }
 
-    private ElmCompiler(State state)
+    private ElmApi(State state)
     {
         _state = state;
     }
 
-    private ElmCompiler Mutate(
+    private ElmApi Mutate(
         ElmCompilationEntriesMap? entries = null)
     {
-        return new ElmCompiler(_state with
+        return new ElmApi(_state with
         {
             Entries = entries ?? _state.Entries
         });
-    }
-
-    internal static ElmCompiler Create(
-        IServiceProvider serviceProvider,
-        ElmCompilationCreateOptions? options = null)
-    {
-        return new ElmCompiler(
-            serviceProvider,
-            options ?? ElmCompilationCreateOptions.Default);
     }
 
     #endregion
 
     #region Adding ELM Libraries
 
-    ElmCompiler IElmLibraryAcceptor<ElmCompiler>.AcceptLibraries(IEnumerable<Library> libraries)
-    {
-        return AcceptLibraries(libraries);
-    }
-
-    private ElmCompiler AcceptLibraries(IEnumerable<Library> libraries)
+    public ElmApi AddElmLibraries(IEnumerable<Library> libraries)
     {
         var entries = _state.Entries.ToBuilder();
         var hasChanged = false;
@@ -120,17 +115,17 @@ public class ElmCompiler :
 
     #endregion
 
-    #region Compilation
+    #region Processing
 
-    internal ElmCompiler Compile()
+    internal ElmApi CompileAssemblies()
     {
         if (_state.Entries.Values.All(predicate: lc => lc is { AssemblyBinary: not null }))
             return this;
 
         _state.Logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
-        using var servicesScope = _state.ServiceProvider.CreateScope();
-        LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped();
-        AssemblyCompiler assemblyCompiler = servicesScope.ServiceProvider.GetAssemblyCompiler();
+        AssemblyCompiler assemblyCompiler = _state.AssemblyCompiler;
+        using var servicesScope = _state.CreateScope();
+        LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
         Library[] libraries = _state.Entries.Values.Select(selector: v => v.ElmLibrary).ToArray();
         LibrarySet librarySet = new LibrarySet(name: "", libraries: libraries);
 
@@ -182,5 +177,5 @@ public class ElmCompiler :
 
     #endregion
 
-    ILogger<ElmCompiler> ILogAccessor<ElmCompiler>.Logger => _state.Logger;
+    ILogger<ElmApi> ILogAccessor<ElmApi>.Logger => _state.Logger;
 }

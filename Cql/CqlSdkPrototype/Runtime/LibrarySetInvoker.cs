@@ -1,9 +1,9 @@
 ﻿using System.Collections.Immutable;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.Loader;
-using CqlSdkPrototype.CqlToElm;
 using CqlSdkPrototype.ElmToAssembly;
 using CqlSdkPrototype.Internal;
+using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Runtime;
@@ -36,11 +36,10 @@ public class LibrarySetInvoker : IDisposable
 
     public static bool TryCreate(
         [NotNullWhen(true)] out LibrarySetInvoker? librarySetInvoker,
-        CqlTranslator cqlTranslation,
-        ElmCompiler elmCompilation,
-        ILogger logger)
+        ElmApi elmCompilation)
     {
         librarySetInvoker = null;
+        var logger = elmCompilation.Options.ServiceProvider.GetLogger<LibrarySetInvoker>();
         logger.LogInformation("Creating LibrarySetInvoker");
 
         var alc = new AssemblyLoadContext("", true);

@@ -7,21 +7,32 @@ using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.ElmToAssembly;
 
-public static class LibraryAcceptorExtensions
+public static class ElmApiLoadExtensions
 {
-    public static TLibraryAcceptor LoadCqlTranslation<TLibraryAcceptor>(
-        this TLibraryAcceptor self,
-        CqlTranslator cqlTranslator)
-        where TLibraryAcceptor : IElmLibraryAcceptor<TLibraryAcceptor>
+    public static ElmApi CompileAssemblies(
+        this CqlApi cqlApi)
     {
-        return self.AcceptLibraries(cqlTranslator.ElmLibraries.Values);
+        var elmApiOptions = ElmApiOptions.Create(cqlApi.Options);
+        var convertToElm = cqlApi.ConvertToElm();
+        return ElmApi.Create(elmApiOptions)
+                     .LoadElmFromCqlApi(convertToElm)
+                     .CompileAssemblies();
     }
 
-    public static TLibraryAcceptor LoadElmFile<TLibraryAcceptor>(
-        this TLibraryAcceptor self,
+    public static TElmApi LoadElmFromCqlApi<TElmApi>(
+        this TElmApi self,
+        CqlApi cqlApi)
+        where TElmApi : IElmApiBase<TElmApi>
+    {
+        var libraries = cqlApi.GetElmLibraries().Values.ToArray();
+        return self.AddElmLibraries(libraries);
+    }
+
+    public static TElmApi LoadElmFile<TElmApi>(
+        this TElmApi self,
         DirectoryInfo directory,
         CqlVersionedLibraryIdentifier versionedLibraryIdentifier)
-        where TLibraryAcceptor : IElmLibraryAcceptor<TLibraryAcceptor>
+        where TElmApi : IElmApiBase<TElmApi>
     {
         FileInfo file = new(Path.Combine(directory.FullName, $"{versionedLibraryIdentifier}.json"));
         if (file.Exists)
@@ -35,10 +46,10 @@ public static class LibraryAcceptorExtensions
         return self.LoadElmFile(file);
     }
 
-    public static TLibraryAcceptor LoadElmFiles<TLibraryAcceptor>(
-        this TLibraryAcceptor self,
+    public static TElmApi LoadElmFiles<TElmApi>(
+        this TElmApi self,
         IEnumerable<FileInfo> files)
-        where TLibraryAcceptor : IElmLibraryAcceptor<TLibraryAcceptor>
+        where TElmApi : IElmApiBase<TElmApi>
     {
         var libraries =
             files
@@ -48,44 +59,44 @@ public static class LibraryAcceptorExtensions
                     var library = Library.LoadFromJson(f);
                     return library;
                 }); // Log errors
-        return self.AcceptLibraries(libraries);
+        return self.AddElmLibraries(libraries);
     }
 
-    public static TLibraryAcceptor LoadElmFilesFromDirectory<TLibraryAcceptor>(
-        this TLibraryAcceptor self,
+    public static TElmApi LoadElmFilesFromDirectory<TElmApi>(
+        this TElmApi self,
         DirectoryInfo directory,
         EnumerationOptions? options = null)
-        where TLibraryAcceptor : IElmLibraryAcceptor<TLibraryAcceptor>
+        where TElmApi : IElmApiBase<TElmApi>
     {
         var files = directory.EnumerateFiles("*.json", options ?? InternalConstants.DefaultEnumerationOptions);
         return self.LoadElmFiles(files);
     }
 
-    public static TLibraryAcceptor LoadElmFileWithDependencies<TLibraryAcceptor>(
-        this TLibraryAcceptor self,
+    public static TElmApi LoadElmFileWithDependencies<TElmApi>(
+        this TElmApi self,
         FileInfo file,
         EnumerationOptions? options)
-        where TLibraryAcceptor : IElmLibraryAcceptor<TLibraryAcceptor>
+        where TElmApi : IElmApiBase<TElmApi>
     {
         // TODO
         return self;
     }
 
-    public static TLibraryAcceptor LoadElmFileWithDependencies<TLibraryAcceptor>(
-        this TLibraryAcceptor self,
+    public static TElmApi LoadElmFileWithDependencies<TElmApi>(
+        this TElmApi self,
         DirectoryInfo directory,
         CqlVersionedLibraryIdentifier fileName,
         EnumerationOptions? options)
-        where TLibraryAcceptor : IElmLibraryAcceptor<TLibraryAcceptor>
+        where TElmApi : IElmApiBase<TElmApi>
     {
         // TODO
         return self;
     }
 
-    public static TLibraryAcceptor LoadElmFile<TLibraryAcceptor>(
-        this TLibraryAcceptor self,
+    public static TElmApi LoadElmFile<TElmApi>(
+        this TElmApi self,
         FileInfo file)
-        where TLibraryAcceptor : IElmLibraryAcceptor<TLibraryAcceptor>
+        where TElmApi : IElmApiBase<TElmApi>
     {
         return self.LoadElmFiles([file]);
     }

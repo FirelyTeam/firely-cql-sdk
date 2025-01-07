@@ -3,25 +3,25 @@ using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.CqlToElm;
 
-public static class CqlTranslationSavingExtensions
+public static class CqlApiSaveExtensions
 {
 
-    public static CqlTranslator SaveElmFileToDirectory(
-        this CqlTranslator cqlTranslator,
+    public static CqlApi SaveElmFileToDirectory(
+        this CqlApi cqlApi,
         DirectoryInfo directory)
     {
         if (!directory.Exists)
             directory.Create();
 
-        var logger = ((ILogAccessor<CqlTranslator>)cqlTranslator).Logger;
-        foreach (var (libraryName, sourceCode) in cqlTranslator.ElmJsonStrings)
+        var logger = ((ILogAccessor<CqlApi>)cqlApi).Logger;
+        foreach (var (libraryName, sourceCode) in cqlApi.GetElmJsonStrings())
         {
             var fileName = Path.Combine(directory.FullName, $"{libraryName}.json");
             File.WriteAllText(fileName, sourceCode);
             logger.LogInformation("Saved ELM to file: {file}", fileName);
         }
 
-        return cqlTranslator;
+        return cqlApi;
     }
 
 }

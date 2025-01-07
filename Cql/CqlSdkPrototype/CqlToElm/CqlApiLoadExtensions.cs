@@ -4,25 +4,32 @@ using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.CqlToElm;
 
-public static class CqlLibraryStringContentAcceptorExtensions
+public static class CqlApiLoadExtensions
 {
+    public static TCqlApi AddCqlLibraryString<TCqlApi>(
+        this TCqlApi self,
+        CqlLibraryString cqlLibrary)
+        where TCqlApi : ICqlApiBase<TCqlApi>
+    {
+        return self.AddCqlLibraryStrings([cqlLibrary]);
+    }
 
-    public static TCqlLibraryAcceptor LoadCqlFilesFromDirectory<TCqlLibraryAcceptor>(
-        this TCqlLibraryAcceptor self,
+    public static TCqlApi AddCqlLibrariesFromDirectory<TCqlApi>(
+        this TCqlApi self,
         DirectoryInfo directory,
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
-        where TCqlLibraryAcceptor : ICqlLibraryStringContentAcceptor<TCqlLibraryAcceptor>
+        where TCqlApi : ICqlApiBase<TCqlApi>
     {
         var files = directory.EnumerateFiles("*.cql", options ?? InternalConstants.DefaultEnumerationOptions);
         if (filePredicate is not null) files = files.Where(filePredicate);
-        return self.LoadCqlFiles(files);
+        return self.AddCqlLibraryFiles(files);
     }
 
-    public static TCqlLibraryAcceptor LoadCqlFiles<TCqlLibraryAcceptor>(
-        this TCqlLibraryAcceptor self,
+    public static TCqlApi AddCqlLibraryFiles<TCqlApi>(
+        this TCqlApi self,
         IEnumerable<FileInfo> files)
-        where TCqlLibraryAcceptor : ICqlLibraryStringContentAcceptor<TCqlLibraryAcceptor>
+        where TCqlApi : ICqlApiBase<TCqlApi>
     {
         var cqlLibraries =
             files
@@ -31,10 +38,10 @@ public static class CqlLibraryStringContentAcceptorExtensions
                     self.Logger.LogInformation("Loading library from file: {file}", f);
                     var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(f.Name.TrimFileExtension(".cql"));
                     var cqlContent = File.ReadAllText(f.FullName);
-                    var cqlLibrary = CqlLibraryStringContent.FromIdentifierAndString(versionedLibraryIdentifier, cqlContent);
+                    var cqlLibrary = CqlLibraryString.FromIdentifierAndString(versionedLibraryIdentifier, cqlContent);
                     return cqlLibrary;
                 }); // Log errors
-        return self.AcceptLibraries(cqlLibraries);
+        return self.AddCqlLibraryStrings(cqlLibraries);
     }
 
 }

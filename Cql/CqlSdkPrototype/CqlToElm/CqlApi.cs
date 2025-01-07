@@ -1,7 +1,6 @@
 ﻿using CqlSdkPrototype.Advanced;
 using CqlSdkPrototype.CqlToElm.Advanced;
 using Hl7.Cql.Abstractions.Exceptions;
-using Hl7.Cql.Compiler;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
@@ -13,26 +12,28 @@ namespace CqlSdkPrototype.CqlToElm;
 
 using CqlTranslationEntriesMap = System.Collections.Immutable.ImmutableDictionary<
     CqlVersionedLibraryIdentifier,
-    CqlTranslator.CqlTranslationEntry>;
+    CqlApi.CqlTranslationEntry>;
 
-public class CqlTranslator :
-    ICqlLibraryStringContentAcceptor<CqlTranslator>,
-    ILogAccessor<CqlTranslator>
+public class CqlApi :
+    ICqlApiBase<CqlApi>,
+    ILogAccessor<CqlApi>
 {
     private readonly State _state;
-    ILogger<CqlTranslator> ILogAccessor<CqlTranslator>.Logger => _state.Logger;
+    ILogger<CqlApi> ILogAccessor<CqlApi>.Logger => _state.Logger;
 
-    public IReadOnlyDictionary<CqlLibraryIdentifier, CqlVersionedLibraryIdentifier> VersionedIdentifiers =>
+    public CqlApiOptions Options => _state.Options;
+
+    public IReadOnlyDictionary<CqlLibraryIdentifier, CqlVersionedLibraryIdentifier> GetVersionedIdentifiers() =>
         _state.Entries
               .ToDictionary(kv => kv.Key.Identifier, kv => kv.Key);
 
-    internal IReadOnlyDictionary<CqlVersionedLibraryIdentifier, Library> ElmLibraries =>
+    internal IReadOnlyDictionary<CqlVersionedLibraryIdentifier, Library> GetElmLibraries() =>
         _state.Entries
               .Where(kv => kv.Value.ElmLibrary is not null)
               .ToDictionary(kv => kv.Key, kv => kv.Value.ElmLibrary!);
 
-    internal IReadOnlyDictionary<CqlVersionedLibraryIdentifier, string> ElmJsonStrings =>
-        ElmLibraries
+    internal IReadOnlyDictionary<CqlVersionedLibraryIdentifier, string> GetElmJsonStrings() =>
+        GetElmLibraries()
             .ToDictionary(kv => kv.Key, kv =>
             {
                 var json = kv.Value.SerializeToJson(true);
@@ -40,61 +41,47 @@ public class CqlTranslator :
             });
 
     #region Nested Types
-    private readonly record struct State(
-        IServiceProvider ServiceProvider,
-        ILogger<CqlTranslator> Logger,
-        CqlTranslationEntriesMap Entries,
-        CqlTranslationCreateOptions Options);
 
-    internal readonly record struct CqlTranslationEntry(CqlLibraryStringContent CqlLibraryStringContent, Library? ElmLibrary = null);
+    private readonly record struct State(
+        CqlApiOptions Options,
+        CqlTranslationEntriesMap Entries)
+    {
+        public ILogger<CqlApi> Logger { get; } = Options.ServiceProvider.GetLogger<CqlApi>();
+        public CqlToElmConverter CqlToElmConverter { get; } = Options.ServiceProvider.GetCqlToElmConverter();
+    }
+
+    internal readonly record struct CqlTranslationEntry(CqlLibraryString CqlLibraryString, Library? ElmLibrary = null);
 
     #endregion
 
     #region Construction
 
-    private CqlTranslator(
-        IServiceProvider serviceProvider,
-        CqlTranslationCreateOptions options)
-        : this(new State(
-                   serviceProvider,
-                   serviceProvider.GetLogger<CqlTranslator>(),
-                   CqlTranslationEntriesMap.Empty.WithComparers(
-                       CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer),
-                   options)) { }
+    internal static CqlApi Create(CqlApiOptions options)
+    {
+        var entries = CqlTranslationEntriesMap.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+        var state = new State(options, entries);
+        return new CqlApi(state);
+    }
 
-    private CqlTranslator(State state)
+    private CqlApi(State state)
     {
         _state = state;
     }
 
-    private CqlTranslator Mutate(
+    private CqlApi Mutate(
         CqlTranslationEntriesMap? entries = null)
     {
-        return new CqlTranslator(_state with
+        return new CqlApi(_state with
         {
             Entries = entries ?? _state.Entries,
         });
     }
 
-    internal static CqlTranslator Create(
-        IServiceProvider serviceProvider,
-        CqlTranslationCreateOptions? options = null)
-    {
-        return new CqlTranslator(
-            serviceProvider,
-            options ?? CqlTranslationCreateOptions.Default);
-    }
-
     #endregion
 
-    #region Loading/Adding CQL Libraries
+    #region Adding CQL Libraries
 
-    CqlTranslator ICqlLibraryStringContentAcceptor<CqlTranslator>.AcceptLibraries(IEnumerable<CqlLibraryStringContent> libraries)
-    {
-        return AddCqlLibraries(libraries);
-    }
-
-    private CqlTranslator AddCqlLibraries(IEnumerable<CqlLibraryStringContent> cqlLibraries)
+    public CqlApi AddCqlLibraryStrings(IEnumerable<CqlLibraryString> cqlLibraries)
     {
         var libraryCompilationsBuilder = _state.Entries.ToBuilder();
         var hasChanged = false;
@@ -121,9 +108,9 @@ public class CqlTranslator :
 
     #endregion
 
-    #region Translation
+    #region Processing
 
-    public CqlTranslator Translate()
+    public CqlApi ConvertToElm()
     {
         CqlToElmConverter cqlToElmConverter = null!;
         var entriesBuilder = _state.Entries.ToBuilder();
@@ -137,7 +124,7 @@ public class CqlTranslator :
                 if (changedCount == 0)
                 {
                     _state.Logger.LogInformation("Translating CQL into ELM");
-                    cqlToElmConverter = _state.ServiceProvider.GetCqlToElmConverter();
+                    cqlToElmConverter = _state.CqlToElmConverter;
                     entriesBuilder = _state.Entries.ToBuilder();
                 }
 
@@ -166,7 +153,7 @@ public class CqlTranslator :
 
         void ProcessLibrary(CqlVersionedLibraryIdentifier versionedIdentifier, CqlTranslationEntry cqlTranslationEntry)
         {
-            var cql = cqlTranslationEntry.CqlLibraryStringContent.Cql;
+            var cql = cqlTranslationEntry.CqlLibraryString.Cql;
             var library = cqlToElmConverter.ConvertLibrary(new StringReader(cql));
             entriesBuilder[versionedIdentifier] = cqlTranslationEntry with { ElmLibrary = library };
         }

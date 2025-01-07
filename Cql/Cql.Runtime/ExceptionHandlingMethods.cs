@@ -64,4 +64,10 @@ internal static class ExceptionHandlingMethods
             yield return result;
         }
     }
+
+    // public static IEnumerable<TR> IgnoreExceptionsAndContinue<T, TR>(
+    //     IEnumerable<T> items,
+    //     Func<T, TR> process)
+    // {
+    // }
 }

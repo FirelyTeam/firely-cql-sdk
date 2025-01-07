@@ -3,36 +3,36 @@ using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.ElmToAssembly;
 
-public static class ElmCompilationSavingExtensions
+public static class ElmApiSaveExtensions
 {
 
-    public static ElmCompiler SaveCSharpFilesToDirectory(
-        this ElmCompiler elmCompiler,
+    public static ElmApi SaveCSharpFilesToDirectory(
+        this ElmApi elmApi,
         DirectoryInfo directory)
     {
         if (!directory.Exists)
             directory.Create();
 
-        var logger = ((ILogAccessor<ElmCompiler>)elmCompiler).Logger;
-        foreach (var (libraryName, sourceCode) in elmCompiler.GetCSharpSourceCodes())
+        var logger = ((ILogAccessor<ElmApi>)elmApi).Logger;
+        foreach (var (libraryName, sourceCode) in elmApi.GetCSharpSourceCodes())
         {
             var fileName = Path.Combine(directory.FullName, $"{libraryName}.g.cs");
             File.WriteAllText(fileName, sourceCode);
             logger.LogInformation("Saved C# source code to file: {file}", fileName);
         }
 
-        return elmCompiler;
+        return elmApi;
     }
 
-    public static ElmCompiler SaveAssemblyBinariesToDirectory(
-        this ElmCompiler elmCompiler,
+    public static ElmApi SaveAssemblyBinariesToDirectory(
+        this ElmApi elmApi,
         DirectoryInfo directory)
     {
         if (!directory.Exists)
             directory.Create();
 
-        var logger = ((ILogAccessor<ElmCompiler>)elmCompiler).Logger;
-        foreach (var (libraryName, (assemblyBytes, symbolsBytes)) in elmCompiler.GetAssemblyBinaries())
+        var logger = ((ILogAccessor<ElmApi>)elmApi).Logger;
+        foreach (var (libraryName, (assemblyBytes, symbolsBytes)) in elmApi.GetAssemblyBinaries())
         {
             var fileName = Path.Combine(directory.FullName, $"{libraryName}.dll");
             File.WriteAllBytes(fileName, assemblyBytes);
@@ -46,7 +46,7 @@ public static class ElmCompilationSavingExtensions
             }
         }
 
-        return elmCompiler;
+        return elmApi;
     }
 
 }
