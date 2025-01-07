@@ -5,6 +5,7 @@ using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Runtime;
@@ -44,10 +45,11 @@ public class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
     }
 
     public new static bool TryCreateFromType(
+        CqlRuntimeApi cqlRuntimeApi,
         Type libraryType,
-        [NotNullWhen(true)] out LibraryInvoker? libraryInvoker,
-        ILogger? logger = null)
+        [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
+        var logger = cqlRuntimeApi.Options.ServiceProvider.GetLogger<LibraryInvoker_2_0_8_0>();
         libraryInvoker = null;
         if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
         {
@@ -56,7 +58,6 @@ public class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
                 libraryType.FullName);
             return false;
         }
-
         libraryInvoker = new LibraryInvoker_2_0_8_0(asILibrary);
         return true;
     }

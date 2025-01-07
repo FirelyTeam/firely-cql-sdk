@@ -31,11 +31,11 @@ public class ElmApi :
               .ToDictionary(kv => kv.Key, kv => kv.Value.CSharpSourceCode!,
                             CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
 
-    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, (byte[] assemblyBytes, byte[]? symbolsBytes)> GetAssemblyBinaries() =>
+    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, AssemblyData> GetAssemblyBinaries() =>
         _state.Entries
               .Where(kv => kv.Value.AssemblyBinary is not null)
               .ToDictionary(kv => kv.Key,
-                            kv => (kv.Value.AssemblyBinary!, kv.Value.DebugSymbolsBinary),
+                            kv => new AssemblyData(kv.Value.AssemblyBinary!, kv.Value.DebugSymbolsBinary),
                             CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
 
     #region Nested Types
@@ -138,7 +138,7 @@ public class ElmApi :
                 librarySet: librarySet,
                 processLibraryExceptionHandling: _state.Options.ProcessBatchItemExceptionHandling);
 
-        IReadOnlyDictionary<string, AssemblyData> assemblyDatas =
+        IReadOnlyDictionary<string, AssemblyDataWithSourceCode> assemblyDatas =
             assemblyCompiler.Compile(
                 librarySet: librarySet,
                 definitions: definitionDictionary,

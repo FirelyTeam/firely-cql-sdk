@@ -89,7 +89,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             Exception Exception,
             Library Library);
 
-        public IReadOnlyDictionary<string, AssemblyData> Compile(
+        public IReadOnlyDictionary<string, AssemblyDataWithSourceCode> Compile(
             LibrarySet librarySet,
             DefinitionDictionary<LambdaExpression> definitions,
             ProcessBatchItemExceptionHandling libraryCSharpWritingExceptionHandling = default,
@@ -97,7 +97,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             ArgumentNullException.ThrowIfNull(definitions);
 
-            Dictionary<string, AssemblyData> results = new();
+            Dictionary<string, AssemblyDataWithSourceCode> results = new();
 
             List<(string libraryName, Stream stream)> items = [];
 
@@ -165,9 +165,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                 sourceReferenceResolver: new SourceFileResolver(ImmutableArray<string>.Empty, null)
             );
 
-        private AssemblyData CompileNode(
+        private AssemblyDataWithSourceCode CompileNode(
             Stream sourceCodeStream,
-            Dictionary<string, AssemblyData> assemblies,
+            Dictionary<string, AssemblyDataWithSourceCode> assemblies,
             LibrarySet librarySet,
             Elm.Library library,
             IEnumerable<Assembly> assemblyReferences)
@@ -192,7 +192,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             foreach (var libraryDependency in librarySet.GetLibraryDependencies(libraryVersionedIdentifier!))
                 if (assemblies.TryGetValue(libraryDependency.GetVersionedIdentifier()!, out var referencedDll))
-                    metadataReferences.Add(MetadataReference.CreateFromImage(referencedDll.Binary));
+                    metadataReferences.Add(MetadataReference.CreateFromImage(referencedDll.AssemblyBytes));
 
             var assemblyInfoSourceString = CreateAssemblyInfoSourceString(library);
             var assemblyInfoSourcePath = "AssemblyInfo.cs";
@@ -243,7 +243,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
             var bytes = codeStream.ToArray();
             var debugSymbols = pdbStream?.ToArray();
-            var asmData = new AssemblyData(bytes, new Dictionary<string, string> { { libraryVersionedIdentifier!, librarySourceString }}, debugSymbols);
+            var asmData = new AssemblyDataWithSourceCode(bytes, new Dictionary<string, string> { { libraryVersionedIdentifier!, librarySourceString }}, debugSymbols);
             return asmData;
         }
 

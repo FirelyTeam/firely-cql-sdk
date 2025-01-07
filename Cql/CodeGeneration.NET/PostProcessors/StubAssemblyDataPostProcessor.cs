@@ -12,7 +12,7 @@ namespace Hl7.Cql.CodeGeneration.NET.PostProcessors;
 
 internal class StubAssemblyDataPostProcessor : AssemblyDataPostProcessor
 {
-    public override void ProcessAssemblyData(string name, AssemblyData assemblyData)
+    public override void ProcessAssemblyData(string name, AssemblyDataWithSourceCode assemblyDataWithSourceCode)
     {
     }
 

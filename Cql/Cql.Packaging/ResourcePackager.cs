@@ -42,7 +42,7 @@ internal class ResourcePackager(
         DirectoryInfo cqlDirectory,
         string? resourceCanonicalRootUrl,
         LibrarySet elmLibrarySet,
-        IReadOnlyDictionary<string, AssemblyData> assembliesByLibraryName)
+        IReadOnlyDictionary<string, AssemblyDataWithSourceCode> assembliesByLibraryName)
     {
         var resources = new List<FhirResource>();
         var librariesByVersionedIdentifier = new Dictionary<string, FhirLibrary>();
@@ -173,7 +173,7 @@ file static class LibraryPackager
         FileInfo elmFile,
         FileInfo? cqlFile,
         string? resourceCanonicalRootUrl,
-        AssemblyData assemblyData,
+        AssemblyDataWithSourceCode assemblyDataWithSourceCode,
         CqlTypeToFhirTypeMapper typeCrosswalk,
         ElmLibrary? elmLibrary = null)
     {
@@ -203,8 +203,8 @@ file static class LibraryPackager
         if (cqlFile!.Exists)
             AddCqlAttachment(elmLibrary, fhirLibrary, cqlFile);
 
-        AddDllAttachment(elmLibrary, fhirLibrary, assemblyData);
-        foreach (var kvp in assemblyData.SourceCode)
+        AddDllAttachment(elmLibrary, fhirLibrary, assemblyDataWithSourceCode);
+        foreach (var kvp in assemblyDataWithSourceCode.SourceCode)
             AddCSharpAttachment(fhirLibrary, kvp);
 
         return fhirLibrary;
@@ -356,9 +356,9 @@ file static class LibraryPackager
     private static void AddDllAttachment(
         ElmLibrary? elmLibrary,
         FhirLibrary library,
-        AssemblyData assemblyData)
+        AssemblyDataWithSourceCode assemblyDataWithSourceCode)
     {
-        var assemblyBytes = assemblyData.Binary;
+        var assemblyBytes = assemblyDataWithSourceCode.AssemblyBytes;
         var attachment = new Attachment
         {
             ElementId = $"{elmLibrary!.GetVersionedIdentifier()}+dll",

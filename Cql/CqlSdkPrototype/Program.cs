@@ -28,21 +28,28 @@ internal class Program
 
     private static void SuperSimpleExpressionInvokeExample()
     {
+        // Arrange
         var serviceProvider = BuildServiceProvider(
             configureElmCompilationOptions: opt => opt.AssembliesDebugMode = true,
             configureCqlTranslationOptions: opt => opt.Models = [Models.ElmR1, Models.Fhir401]);
-        var cql = """
-                  library AdditionLib version '0.0.0'
-                  define private Three: 1 + 2
-                  """;
-        var libraryId = CqlVersionedLibraryIdentifier.Parse("AdditionLib-0.0.0");
         var cqlApiOptions = CqlApiOptions.Create(serviceProvider);
         var cqlApi = CqlApi.Create(cqlApiOptions);
-        var cqlLibraryString = CqlLibraryString.FromIdentifierAndString(libraryId, cql);
+        var libraryIdentifier = CqlVersionedLibraryIdentifier.Parse("AdditionLib-0.0.0");
+        var cqlLibraryString = CqlLibraryString.FromIdentifierAndString(
+            libraryIdentifier,
+            """
+            library AdditionLib version '0.0.0'
+
+            define private Three: 1 + 2
+            """);
+
+        // Act
         var result = cqlApi
                      .AddCqlLibraryString(cqlLibraryString)
                      .CompileAssemblies()
-                     .InvokeLibraryDeclaration(libraryId, "Three", FhirCqlContext.ForBundle());
+                     .InvokeLibraryDeclaration(libraryIdentifier, "Three", FhirCqlContext.ForBundle());
+
+        // Assert
         Debug.Assert(result is 3);
     }
 
@@ -83,67 +90,66 @@ internal class Program
                            .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
             ;
 
-        FhirJsonPocoDeserializer fhirJsonPocoDeserializer = null!;
+        // FhirJsonPocoDeserializer fhirJsonPocoDeserializer = null!;
         DumpOutputFilesToConsole(serviceProvider, cqlApi, elmApi);
-        ExecuteLibrary(serviceProvider, dirs, cqlApi, elmApi, fhirJsonPocoDeserializer);
+        // ExecuteLibrary(serviceProvider, dirs, cqlApi, elmApi, fhirJsonPocoDeserializer);
     }
 
-    private static void ExecuteLibrary(
-        ServiceProvider serviceProvider,
-        Directories dirs,
-        CqlApi cqlTranslation,
-        ElmApi elmCompilation,
-        FhirJsonPocoDeserializer fhirJsonPocoDeserializer)
-    {
-        var logger = serviceProvider.GetLogger<Program>();
-        if (LibrarySetInvoker.TryCreate(
-                out var librarySetInvoker,
-                elmCompilation))
-        {
-            // StringBuilder sb = new();
-            // sb.AppendLine("Libraries and Declarations:");
-            // foreach (var (libId, lib) in librarySetInvoker.LibraryInvokers)
-            // {
-            //     sb.AppendLine(Invariant($"- {libId}"));
-            //     foreach (var (declId, decl) in lib.Declarations)
-            //         sb.AppendLine(Invariant($"  - {declId} : {decl.ReturnType.ToCSharpString(TypeCSharpFormat.Default with {UseKeywords = true})}"));
-            // }
-            // logger.LogInformation("{msg}", sb.ToString());
-            //
-            // if (dirs.ValueSetsInDirectory is null)
-            // {
-            //     logger.LogWarning("No value sets directory found. Skipping execution.");
-            //     return;
-            // }
-
-            /*dirs.ValueSetsInDirectory.EnumerateFiles("*.json", SearchOption.AllDirectories)
-                .Select(fi =>
-                {
-                    using var stream = fi.OpenRead();
-                    var reader = new Utf8JsonReader();
-                    return fhirJsonPocoDeserializer.DeserializeObject<ValueSet>(reader);
-                });*/
-
-            Bundle? bundle = new Bundle(){};
-            Dictionary<string, object>? parameters = new()
-            {
-                ["Measurement Period"] = new CqlInterval<CqlDate>(
-                    low: new CqlDate(2023, 1, 1),
-                    high: new CqlDate(2023, 12, 31),
-                    lowClosed: true,
-                    highClosed: true)
-            };
-
-            IValueSetDictionary? valueSets = null;
-            FhirCqlContextOptions? options = null;
-            CqlContext cqlContext = FhirCqlContext
-                                    //.WithDataSource(source, parameters, valueSets, options: options);
-                                    .ForBundle(bundle, parameters, valueSets, options:options);
-            var parametersExample = librarySetInvoker.LibraryInvokers[CqlVersionedLibraryIdentifier.Parse("ParametersExample-0.0.1")];
-            var patientDeclaration = parametersExample.Declarations["Patient"];
-            var patient = patientDeclaration.Invoke(cqlContext);
-        }
-    }
+    // private static void ExecuteLibrary(
+    //     ServiceProvider serviceProvider,
+    //     Directories dirs,
+    //     CqlApi cqlTranslation,
+    //     ElmApi elmCompilation,
+    //     FhirJsonPocoDeserializer fhirJsonPocoDeserializer)
+    // {
+    //     var logger = serviceProvider.GetLogger<Program>();
+    //     if (CqlRuntimeApi.Create(
+    //             out var librarySetInvoker))
+    //     {
+    //         // StringBuilder sb = new();
+    //         // sb.AppendLine("Libraries and Declarations:");
+    //         // foreach (var (libId, lib) in librarySetInvoker.LibraryInvokers)
+    //         // {
+    //         //     sb.AppendLine(Invariant($"- {libId}"));
+    //         //     foreach (var (declId, decl) in lib.Declarations)
+    //         //         sb.AppendLine(Invariant($"  - {declId} : {decl.ReturnType.ToCSharpString(TypeCSharpFormat.Default with {UseKeywords = true})}"));
+    //         // }
+    //         // logger.LogInformation("{msg}", sb.ToString());
+    //         //
+    //         // if (dirs.ValueSetsInDirectory is null)
+    //         // {
+    //         //     logger.LogWarning("No value sets directory found. Skipping execution.");
+    //         //     return;
+    //         // }
+    //
+    //         /*dirs.ValueSetsInDirectory.EnumerateFiles("*.json", SearchOption.AllDirectories)
+    //             .Select(fi =>
+    //             {
+    //                 using var stream = fi.OpenRead();
+    //                 var reader = new Utf8JsonReader();
+    //                 return fhirJsonPocoDeserializer.DeserializeObject<ValueSet>(reader);
+    //             });*/
+    //
+    //         Bundle? bundle = new Bundle(){};
+    //         Dictionary<string, object>? parameters = new()
+    //         {
+    //             ["Measurement Period"] = new CqlInterval<CqlDate>(
+    //                 low: new CqlDate(2023, 1, 1),
+    //                 high: new CqlDate(2023, 12, 31),
+    //                 lowClosed: true,
+    //                 highClosed: true)
+    //         };
+    //
+    //         IValueSetDictionary? valueSets = null;
+    //         FhirCqlContextOptions? options = null;
+    //         CqlContext cqlContext = FhirCqlContext
+    //                                 //.WithDataSource(source, parameters, valueSets, options: options);
+    //                                 .ForBundle(bundle, parameters, valueSets, options:options);
+    //         var parametersExample = librarySetInvoker.LibraryInvokers[CqlVersionedLibraryIdentifier.Parse("ParametersExample-0.0.1")];
+    //         var patientDeclaration = parametersExample.Declarations["Patient"];
+    //         var patient = patientDeclaration.Invoke(cqlContext);
+    //     }
+    // }
 
     private static ServiceProvider BuildServiceProvider(
         Action<ElmCompilationOptions>? configureElmCompilationOptions = null,

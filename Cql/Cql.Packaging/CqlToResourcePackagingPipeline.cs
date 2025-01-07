@@ -80,7 +80,7 @@ internal class CqlToResourcePackagingPipeline(
         // 3. GENERATE C# ASSEMBLIES
         //
 
-        IReadOnlyDictionary<string, AssemblyData> assembliesByLibraryName;
+        IReadOnlyDictionary<string, AssemblyDataWithSourceCode> assembliesByLibraryName;
         try
         {
             assembliesByLibraryName = CompileExpressions(librarySet, definitions);
@@ -123,7 +123,7 @@ internal class CqlToResourcePackagingPipeline(
         }
     }
 
-    protected virtual IReadOnlyCollection<Resource> PackageResources(IReadOnlyDictionary<string, AssemblyData> assembliesByLibraryName, LibrarySet librarySet) =>
+    protected virtual IReadOnlyCollection<Resource> PackageResources(IReadOnlyDictionary<string, AssemblyDataWithSourceCode> assembliesByLibraryName, LibrarySet librarySet) =>
         _resourcePackager.PackageResources(
             _options.ElmDirectory,
             _options.CqlDirectory,
@@ -131,7 +131,7 @@ internal class CqlToResourcePackagingPipeline(
             librarySet,
             assembliesByLibraryName);
 
-    protected virtual IReadOnlyDictionary<string, AssemblyData> CompileExpressions(LibrarySet librarySet, DefinitionDictionary<LambdaExpression> definitions) =>
+    protected virtual IReadOnlyDictionary<string, AssemblyDataWithSourceCode> CompileExpressions(LibrarySet librarySet, DefinitionDictionary<LambdaExpression> definitions) =>
         _assemblyCompiler.Compile(librarySet, definitions);
 
     protected virtual void BuildExpressions(LibrarySet librarySet, DefinitionDictionary<LambdaExpression> definitions) =>

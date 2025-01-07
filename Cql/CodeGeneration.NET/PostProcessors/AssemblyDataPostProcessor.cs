@@ -12,6 +12,6 @@ namespace Hl7.Cql.CodeGeneration.NET.PostProcessors;
 
 internal abstract class AssemblyDataPostProcessor
 {
-    public abstract void ProcessAssemblyData(string name, AssemblyData assemblyData);
+    public abstract void ProcessAssemblyData(string name, AssemblyDataWithSourceCode assemblyDataWithSourceCode);
     public abstract void ProcessReferenceAssembly(Assembly referenceAssembly);
 }

@@ -57,7 +57,7 @@ internal class WriteToFileAssemblyDataPostProcessor : AssemblyDataPostProcessor
         Directory.CreateDirectory(directory);
     }
 
-    public override void ProcessAssemblyData(string name, AssemblyData assemblyData)
+    public override void ProcessAssemblyData(string name, AssemblyDataWithSourceCode assemblyDataWithSourceCode)
     {
         _initTask.Wait();
 
@@ -68,14 +68,14 @@ internal class WriteToFileAssemblyDataPostProcessor : AssemblyDataPostProcessor
         _logger.LogInformation("Writing Assembly file: '{file}'", assemblyFile);
         File.AppendAllLines(filesWrittenFile, [name]);
 
-        if (assemblyData.DebugSymbols is { Length: > 0 } debugSymbols)
+        if (assemblyDataWithSourceCode.DebugSymbolsBytes is { Length: > 0 } debugSymbols)
         {
             var symbolsFile = GetAssemblyPdbFileFullName(name, directory);
             _logger.LogInformation("Writing Symbols file: '{file}'", symbolsFile);
             File.WriteAllBytes(symbolsFile, debugSymbols);
         }
 
-        File.WriteAllBytes(assemblyFile, assemblyData.Binary);
+        File.WriteAllBytes(assemblyFile, assemblyDataWithSourceCode.AssemblyBytes);
     }
 
     private string GetOutDirectory() =>

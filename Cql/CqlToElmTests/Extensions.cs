@@ -35,7 +35,7 @@ internal static class Extensions
             {
                 string versionedIdentifierString = versionedIdentifier.GetVersionedIdentifier()!;
                 definitions.Add(versionedIdentifierString, expressionName, expression);
-                IReadOnlyDictionary<string, AssemblyData> assemblyDatas = assemblyCompiler.Compile(librarySet, definitions);
+                IReadOnlyDictionary<string, AssemblyDataWithSourceCode> assemblyDatas = assemblyCompiler.Compile(librarySet, definitions);
                 (byte[] assemblyBinary, var assemblySources) = assemblyDatas.SingleOrDefault().Value;
                 var source = assemblySources[versionedIdentifierString];
                 AssemblyLoadContext assemblyLoadContext = new(expressionName);

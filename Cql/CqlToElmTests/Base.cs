@@ -346,7 +346,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var lambdas = LibraryExpressionBuilder.ProcessLibrary(library);
             var asm = ServiceProvider.GetAssemblyCompiler();
             var dict = asm.Compile(new LibrarySet("",library), lambdas);
-            return dict.Single().Value.Binary;
+            return dict.Single().Value.AssemblyBytes;
         }
     }
 }

@@ -161,7 +161,7 @@ namespace Test
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
             foreach (var (_, asmData) in assemblyData)
             {
-                var assemblyBytes = asmData.Binary;
+                var assemblyBytes = asmData.AssemblyBytes;
                 using var ms = new MemoryStream(assemblyBytes);
                 asmContext.LoadFromStream(ms);
             }

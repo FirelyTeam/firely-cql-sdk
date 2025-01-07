@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Runtime;
@@ -17,12 +18,12 @@ public abstract class LibraryInvoker
     public abstract IReadOnlyDictionary<string, LibraryDeclarationInvoker> Declarations { get; }
 
     public static bool TryCreateFromType(
+        CqlRuntimeApi cqlRuntimeApi,
         Type libraryType,
-        [NotNullWhen(true)] out LibraryInvoker? libraryInvoker,
-        ILogger? logger = null)
+        [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
+        var logger = cqlRuntimeApi.Options.ServiceProvider.GetLogger<LibraryInvoker>();
         libraryInvoker = null;
-
         if (libraryType.GetCustomAttribute<CqlLibraryAttribute>() is not {})
         {
             logger?.LogDebug(
@@ -48,7 +49,7 @@ public abstract class LibraryInvoker
 
         if (LibraryInvoker_2_0_8_0.SupportsVersion(cqlToolVersion))
         {
-            return LibraryInvoker_2_0_8_0.TryCreateFromType(libraryType, out libraryInvoker, logger);
+            return LibraryInvoker_2_0_8_0.TryCreateFromType(cqlRuntimeApi, libraryType, out libraryInvoker);
         }
 
         logger?.LogDebug(
