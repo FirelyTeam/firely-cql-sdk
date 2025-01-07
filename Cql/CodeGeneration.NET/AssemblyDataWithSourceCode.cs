@@ -18,5 +18,19 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// <param name="DebugSymbolsBytes">The assembly's debug symbols in binary data.</param>
 internal record AssemblyDataWithSourceCode(
     byte[] AssemblyBytes,
-    IDictionary<string, string> SourceCode,
-    byte[]? DebugSymbolsBytes = null) : AssemblyData(AssemblyBytes, DebugSymbolsBytes);
+    IReadOnlyDictionary<string, string> SourceCode,
+    byte[]? DebugSymbolsBytes = null) : AssemblyData(AssemblyBytes, DebugSymbolsBytes)
+{
+    public void Deconstruct(out byte[] assemblyBytes, out IReadOnlyDictionary<string, string> sourceCode)
+    {
+        assemblyBytes = AssemblyBytes;
+        sourceCode = SourceCode;
+    }
+
+    public void Deconstruct(out byte[] assemblyBytes, out IReadOnlyDictionary<string, string> sourceCode, out byte[]? debugSymbolsBytes)
+    {
+        assemblyBytes = AssemblyBytes;
+        sourceCode = SourceCode;
+        debugSymbolsBytes = DebugSymbolsBytes;
+    }
+}
