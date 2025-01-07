@@ -161,31 +161,6 @@ internal static class ExceptionHandlingMethods
         }
     }
 
-    // public delegate (string message, object[] args)? GetLogOutcomeMessage<TInput, TResult>(
-    //     ProcessBatchItemResult<TInput, TResult> outcome);
-    //
-    // public static IEnumerable<ProcessBatchItemResult<TInput, TResult>> LogOutcome<TInput, TResult>(
-    //     this IEnumerable<ProcessBatchItemResult<TInput, TResult>> processBatchItemResults,
-    //     ILogger logger,
-    //     GetLogOutcomeMessage<TInput, TResult> getLogOutcomeMessage)
-    // {
-    //     foreach (var processBatchItemResult in processBatchItemResults)
-    //     {
-    //         if (getLogOutcomeMessage(processBatchItemResult) is ({ } message, { } args))
-    //             switch (processBatchItemResult.Exception)
-    //             {
-    //                 case { } exception:
-    //                     logger.LogWarning(exception.SourceException, message, args);
-    //                     break;
-    //                 default:
-    //                     logger.LogInformation(message, args);
-    //                     break;
-    //             }
-    //
-    //         yield return processBatchItemResult;
-    //     }
-    // }
-
     public readonly record struct ProcessBatchItemResult<TInput>(
         TInput Input,
         ExceptionDispatchInfo? Exception = null);
