@@ -1,73 +1,197 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.ExceptionServices;
 using Hl7.Cql.Abstractions.Exceptions;
-using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Runtime;
 
 internal static class ExceptionHandlingMethods
 {
-    public delegate (string message, object[] args)? ProcessBatchItemExceptionHandlingBuildLoggerMessage<in T>(
-        ProcessBatchItemExceptionHandling exceptionHandling,
-        T item,
-        Exception? exception = null);
-
-    public static void ProcessBatchWithExceptionHandlingAndLogging<T>(
-        IEnumerable<T> items,
-        Action<T> process,
-        ProcessBatchItemExceptionHandling exceptionHandling,
-        ILogger logger,
-        ProcessBatchItemExceptionHandlingBuildLoggerMessage<T> buildLoggerMessage)
+    public static IEnumerable<ProcessBatchItemResult<TInput>> TryProcessEach<TInput>(
+        this IEnumerable<TInput> inputs,
+        Action<TInput> processInput)
     {
-        foreach (var _ in ProcessBatchWithExceptionHandlingAndLogging(
-                     items,
-                     item => {
-                         process(item);
-                         return 0;
-                     },
-                     exceptionHandling,
-                     logger,
-                     buildLoggerMessage)) ;
-    }
-
-    public static IEnumerable<TR> ProcessBatchWithExceptionHandlingAndLogging<T, TR>(
-        IEnumerable<T> items,
-        Func<T, TR> process,
-        ProcessBatchItemExceptionHandling exceptionHandling,
-        ILogger logger,
-        ProcessBatchItemExceptionHandlingBuildLoggerMessage<T> buildLoggerMessage)
-    {
-        Action<Exception?, string?, object?[]> logException =
-            exceptionHandling is ProcessBatchItemExceptionHandling.ThrowException ? logger.LogError : logger.LogWarning;
-
-        foreach (var item in items)
+        foreach (var input in inputs)
         {
-            TR result;
+            ProcessBatchItemResult<TInput> outcome = new(input);
             try
             {
-                result = process(item);
-                if (buildLoggerMessage(exceptionHandling, item) is ({ } message, { } args))
-                    logger.LogInformation(message, args);
+                processInput(input);
             }
             catch (Exception e)
             {
-                if (buildLoggerMessage(exceptionHandling, item, e) is ({ } message, { } args))
-                    logException(e, message, args);
-
-                switch (exceptionHandling)
-                {
-                    default:                                                            throw;
-                    case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue: continue;
-                    case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:    yield break;
-                }
+                outcome = outcome with { Exception = ExceptionDispatchInfo.Capture(e) };
             }
-            yield return result;
+
+            yield return outcome;
         }
     }
 
-    // public static IEnumerable<TR> IgnoreExceptionsAndContinue<T, TR>(
-    //     IEnumerable<T> items,
-    //     Func<T, TR> process)
+    public static IEnumerable<ProcessBatchItemResult<TInput>> ThenForEachOutcome<TInput>(
+        this IEnumerable<ProcessBatchItemResult<TInput>> outcomes,
+        Action<ProcessBatchItemResult<TInput>> processOutcome)
+    {
+        foreach (var outcome in outcomes)
+        {
+            processOutcome(outcome);
+            yield return outcome;
+        }
+    }
+
+    public static void HandleExceptions<TInput>(
+        this IEnumerable<ProcessBatchItemResult<TInput>> processBatchItemResults,
+        ProcessBatchItemExceptionHandling exceptionHandling)
+    {
+        switch (exceptionHandling)
+        {
+            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:
+                processBatchItemResults.BreakAtFirstException();
+                break;
+            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue:
+                processBatchItemResults.ContinueOnExceptions();
+                break;
+            default:
+                processBatchItemResults.ThrowAtFirstException();
+                break;
+        }
+    }
+
+    public static void ThrowAtFirstException<TInput>(
+        this IEnumerable<ProcessBatchItemResult<TInput>> processBatchItemResults)
+    {
+        foreach (var (_, exceptionDispatchInfo) in processBatchItemResults)
+        {
+            if (exceptionDispatchInfo is not null)
+                exceptionDispatchInfo.Throw();
+        }
+    }
+
+    public static void BreakAtFirstException<TInput>(
+        this IEnumerable<ProcessBatchItemResult<TInput>> processBatchItemResults)
+    {
+        foreach (var (_, exceptionDispatchInfo) in processBatchItemResults)
+        {
+            if (exceptionDispatchInfo is not null)
+                return;
+        }
+    }
+
+    public static void ContinueOnExceptions<TInput>(
+        this IEnumerable<ProcessBatchItemResult<TInput>> processBatchItemResults)
+    {
+        foreach (var _ in processBatchItemResults)
+        {
+            ; // Intentionally empty
+        }
+    }
+
+    public static IEnumerable<ProcessBatchItemResult<TInput, TResult>> TryProcessEach<TInput, TResult>(
+        this IEnumerable<TInput> inputs,
+        Func<TInput, TResult> processInput)
+    {
+        foreach (var input in inputs)
+        {
+            ProcessBatchItemResult<TInput, TResult> outcome = new(input);
+            try
+            {
+                outcome = outcome with { Result = processInput(input) };
+            }
+            catch (Exception e)
+            {
+                outcome = outcome with { Exception = ExceptionDispatchInfo.Capture(e) };
+            }
+
+            yield return outcome;
+        }
+    }
+
+    public static IEnumerable<ProcessBatchItemResult<TInput, TResult>> ThenForEachOutcome<TInput, TResult>(
+        this IEnumerable<ProcessBatchItemResult<TInput, TResult>> outcomes,
+        Action<ProcessBatchItemResult<TInput, TResult>> processOutcome)
+    {
+        foreach (var outcome in outcomes)
+        {
+            processOutcome(outcome);
+            yield return outcome;
+        }
+    }
+
+    public static IEnumerable<TResult> HandleExceptions<TInput, TResult>(
+        this IEnumerable<ProcessBatchItemResult<TInput, TResult>> processBatchItemResults,
+        ProcessBatchItemExceptionHandling exceptionHandling)
+    {
+        return exceptionHandling switch
+        {
+            ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak => processBatchItemResults.BreakAtFirstException(),
+            ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue => processBatchItemResults.ContinueOnExceptions(),
+            _ => processBatchItemResults.ThrowAtFirstException()
+        };
+    }
+
+    public static IEnumerable<TResult> ThrowAtFirstException<TInput, TResult>(
+        this IEnumerable<ProcessBatchItemResult<TInput, TResult>> processBatchItemResults)
+    {
+        foreach (var (_, result, exceptionDispatchInfo) in processBatchItemResults)
+        {
+            if (exceptionDispatchInfo is not null)
+                exceptionDispatchInfo.Throw();
+            yield return result!;
+        }
+    }
+
+    public static IEnumerable<TResult> BreakAtFirstException<TInput, TResult>(
+        this IEnumerable<ProcessBatchItemResult<TInput, TResult>> processBatchItemResults)
+    {
+        foreach (var (_, result, exceptionDispatchInfo) in processBatchItemResults)
+        {
+            if (exceptionDispatchInfo is null)
+                yield return result!;
+            else
+                yield break;
+        }
+    }
+
+    public static IEnumerable<TResult> ContinueOnExceptions<TInput, TResult>(
+        this IEnumerable<ProcessBatchItemResult<TInput, TResult>> processBatchItemResults)
+    {
+        foreach (var (_, result, exceptionDispatchInfo) in processBatchItemResults)
+        {
+            if (exceptionDispatchInfo is null)
+                yield return result!;
+        }
+    }
+
+    // public delegate (string message, object[] args)? GetLogOutcomeMessage<TInput, TResult>(
+    //     ProcessBatchItemResult<TInput, TResult> outcome);
+    //
+    // public static IEnumerable<ProcessBatchItemResult<TInput, TResult>> LogOutcome<TInput, TResult>(
+    //     this IEnumerable<ProcessBatchItemResult<TInput, TResult>> processBatchItemResults,
+    //     ILogger logger,
+    //     GetLogOutcomeMessage<TInput, TResult> getLogOutcomeMessage)
     // {
+    //     foreach (var processBatchItemResult in processBatchItemResults)
+    //     {
+    //         if (getLogOutcomeMessage(processBatchItemResult) is ({ } message, { } args))
+    //             switch (processBatchItemResult.Exception)
+    //             {
+    //                 case { } exception:
+    //                     logger.LogWarning(exception.SourceException, message, args);
+    //                     break;
+    //                 default:
+    //                     logger.LogInformation(message, args);
+    //                     break;
+    //             }
+    //
+    //         yield return processBatchItemResult;
+    //     }
     // }
+
+    public readonly record struct ProcessBatchItemResult<TInput>(
+        TInput Input,
+        ExceptionDispatchInfo? Exception = null);
+
+    public readonly record struct ProcessBatchItemResult<TInput, TResult>(
+        TInput Input,
+        TResult? Result = default,
+        ExceptionDispatchInfo? Exception = null);
 }

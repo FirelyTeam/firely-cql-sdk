@@ -22,8 +22,8 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        //Example1();
-        SuperSimpleExpressionInvokeExample();
+        Example1();
+        //SuperSimpleExpressionInvokeExample();
     }
 
     private static void SuperSimpleExpressionInvokeExample()

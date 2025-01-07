@@ -192,22 +192,38 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
                 }
             }
 
-            return ExceptionHandlingMethods.ProcessBatchWithExceptionHandlingAndLogging(
-                items: GetLibrariesForProcessing(),
-                process: item =>
-                {
-                    WriteLibrary(item.library, item.stream);
-                    return (item.libraryName, item.stream);
-                },
-                exceptionHandling: ProcessLibraryToCSharpExceptionHandling,
-                logger: Logger,
-                buildLoggerMessage: (exceptionHandling, item, exception) => (exceptionHandling, exception) switch
-                {
-                    (ProcessBatchItemExceptionHandling.ThrowException, { }) => ("Error writing library '{libraryName}' to C#.", [item.libraryName]),
-                    (ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue, { }) => ("Error ignored writing library '{libraryName}' to C#, continuing to next library.", [item.libraryName]),
-                    (ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak, { }) => ("Error ignored writing library '{libraryName}' to C#, abort processing more libraries.", [item.libraryName]),
-                    _ => null,
-                });
+            return GetLibrariesForProcessing()
+                   .TryProcessEach(t =>
+                   {
+                       WriteLibrary(t.library, t.stream);
+                       return (t.libraryName, t.stream);
+                   })
+                   .ThenForEachOutcome(t =>
+                   {
+                       if (t.Exception?.SourceException is { } exception)
+                       {
+                           var libraryName = t.Input.libraryName;
+                           switch (ProcessLibraryToCSharpExceptionHandling)
+                           {
+                               case ProcessBatchItemExceptionHandling.ThrowException:
+                                   Logger.LogError(exception, "Error writing library '{libraryName}' to C#.",
+                                                   libraryName);
+                                   break;
+                               case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue:
+                                   Logger.LogWarning(
+                                       exception,
+                                       "Error writing library '{libraryName}' to C#, continuing.",
+                                       libraryName);
+                                   break;
+                               case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:
+                                   Logger.LogWarning(
+                                       exception, "Error writing library '{libraryName}' to C#, aborting.",
+                                       libraryName);
+                                   break;
+                           }
+                       }
+                   })
+                   .HandleExceptions(ProcessLibraryToCSharpExceptionHandling);
 
             void WriteLibrary(Library library, Stream stream)
             {

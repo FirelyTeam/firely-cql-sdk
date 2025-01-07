@@ -47,18 +47,29 @@ internal partial class LibrarySetExpressionBuilderContext
         ProcessBatchItemExceptionHandling processLibraryExceptionHandling = default) =>
         this.CatchRethrowExpressionBuildingException(_ =>
         {
-            ExceptionHandlingMethods.ProcessBatchWithExceptionHandlingAndLogging(
-                items: LibrarySet,
-                process: ProcessLibrary,
-                exceptionHandling: processLibraryExceptionHandling,
-                logger: _logger,
-                buildLoggerMessage: (exceptionHandling, library, exception) => (exceptionHandling, exception) switch
+            LibrarySet
+                .TryProcessEach(ProcessLibrary)
+                .ThenForEachOutcome(outcome =>
                 {
-                    (ProcessBatchItemExceptionHandling.ThrowException, { }) => ("Error writing library '{libraryName}' to C#.", [library.GetVersionedIdentifier()!]),
-                    (ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue, { }) => ("Error ignored writing library '{libraryName}' to C#, continuing to next library.", [library.GetVersionedIdentifier()!]),
-                    (ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak, { }) => ("Error ignored writing library '{libraryName}' to C#, abort processing more libraries.", [library.GetVersionedIdentifier()!]),
-                    _ => null,
-                });
+                    if (outcome.Exception?.SourceException is { } exception)
+                    {
+                        var libraryName = outcome.Input.GetVersionedIdentifier()!;
+                        switch (processLibraryExceptionHandling)
+                        {
+                            case ProcessBatchItemExceptionHandling.ThrowException:
+                                _logger.LogError(exception, "Error writing library '{libraryName}' to C#.", libraryName);
+                                break;
+                            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue:
+                                _logger.LogWarning(exception, "Error writing library '{libraryName}' to C#, continuing", libraryName);
+                                break;
+                            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:
+                                _logger.LogWarning(exception, "Error writing library '{libraryName}' to C#, aborting", libraryName);
+                                break;
+                        }
+                    }
+
+                })
+                .HandleExceptions(processLibraryExceptionHandling);
 
             return LibrarySetDefinitions;
 

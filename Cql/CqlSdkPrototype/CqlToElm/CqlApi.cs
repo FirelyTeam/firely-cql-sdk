@@ -114,6 +114,7 @@ public class CqlApi :
     {
         CqlToElmConverter cqlToElmConverter = null!;
         var entriesBuilder = _state.Entries.ToBuilder();
+        var logger = _state.Logger;
         int changedCount = 0;
 
         IEnumerable<(CqlVersionedLibraryIdentifier versionedIdentifier, CqlTranslationEntry cqlTranslationEntry)> GetLibrariesForProcessing()
@@ -123,29 +124,39 @@ public class CqlApi :
             {
                 if (changedCount == 0)
                 {
-                    _state.Logger.LogInformation("Translating CQL into ELM");
+                    logger.LogInformation("Translating CQL into ELM");
                     cqlToElmConverter = _state.CqlToElmConverter;
                     entriesBuilder = _state.Entries.ToBuilder();
                 }
 
-                _state.Logger.LogInformation("Translating CQL: {id}", versionedIdentifier);
+                logger.LogInformation("Translating CQL: {id}", versionedIdentifier);
                 yield return (versionedIdentifier, cqlTranslationEntry);
                 changedCount++;
             }
         }
 
-        ExceptionHandlingMethods.ProcessBatchWithExceptionHandlingAndLogging(
-            items: GetLibrariesForProcessing(),
-            process: t => ProcessLibrary(t.versionedIdentifier, t.cqlTranslationEntry),
-            exceptionHandling: _state.Options.ProcessBatchItemExceptionHandling,
-            logger: _state.Logger,
-            buildLoggerMessage: (exceptionHandling, item, exception) => (exceptionHandling, exception) switch
+        GetLibrariesForProcessing()
+            .TryProcessEach(t => ProcessLibrary(t.versionedIdentifier, t.cqlTranslationEntry))
+            .ThenForEachOutcome(outcome =>
             {
-                (ProcessBatchItemExceptionHandling.ThrowException, { }) => ("Error translating CQL library '{libraryName}' to ELM.", [item.versionedIdentifier]),
-                (ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue, { }) => ("Error ignored CQL translating library '{libraryName}' to ELM, continuing to next library.", [item.versionedIdentifier]),
-                (ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak, { }) => ("Error ignored CQL translating library '{libraryName}' to ELM, abort processing more libraries.", [item.versionedIdentifier]),
-                _ => null,
-            });
+                if (outcome.Exception?.SourceException is { } exception)
+                {
+                    var libraryName = outcome.Input.versionedIdentifier;
+                    switch (_state.Options.ProcessBatchItemExceptionHandling)
+                    {
+                        case ProcessBatchItemExceptionHandling.ThrowException:
+                            logger.LogError(exception, "Error translating CQL library '{libraryName}' to ELM.", libraryName);
+                            break;
+                        case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue:
+                            logger.LogWarning(exception, "Error ignored CQL translating library '{libraryName}' to ELM, continuing to next library.", libraryName);
+                            break;
+                        case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:
+                            logger.LogWarning(exception, "Error ignored CQL translating library '{libraryName}' to ELM, abort processing more libraries.", libraryName);
+                            break;
+                    }
+                }
+            })
+            .HandleExceptions(_state.Options.ProcessBatchItemExceptionHandling);
 
         return changedCount > 0
                    ? Mutate(entries: entriesBuilder.ToImmutable())
