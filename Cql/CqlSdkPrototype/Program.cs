@@ -23,6 +23,10 @@ internal class Program
 {
     static void Main(string[] args)
     {
+        // CONSIDERATIONS:
+        // - Encapsulate the creation of the service provider
+        // - Move any options such as the AssembliesDebugMode and Models to the Cql- or ElmApi instead of via the hosted IOptions<T>
+        // - Should we keep the dependency on Microsoft's ILogger or should we create our own logging abstraction?
         var serviceProvider = BuildServiceProvider(
             configureElmCompilationOptions: opt => opt.AssembliesDebugMode = true,
             configureCqlTranslationOptions: opt => opt.Models = [Models.ElmR1, Models.Fhir401]);
@@ -38,13 +42,22 @@ internal class Program
         ILogger<Program> logger,
         CqlApi cqlApi)
     {
+        // INTRO:
+        // This example demonstrates how to load CQL libraries from a directory and invoke a library declarations directly.
+
+        // "Directories" is not a part of the API, but a helper class for this example
         var dirs = Directories.Create("Examples");
+
+        // We can write extensions to make it even easier to change exception handling
         cqlApi = cqlApi.WithOptions(o => o with
                        {
                            ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
                        })
                        .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory);
+
         var cqlContext = FhirCqlContext.ForBundle();
+
+        // We need a disposable invokation scope, which contains the AssemblyLoadContext and the related library Assemblies.
         using var invokationScope = cqlApi.CreateInvokationScope();
         logger.LogInformation("{dump}", invokationScope.DumpLibraryDeclarations());
         Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
@@ -61,7 +74,10 @@ internal class Program
 
     private static void InvokeCqlExample(CqlApi cqlApi)
     {
-        // Arrange
+        // INTRO:
+        // This example demonstrates how to add a CqlLibraryString to the CqlApi and invoke a library declaration directly.
+
+        // NICE TO HAVE: Would be nice to parse the CqlLibraryString only from the CQL and extract the identifier from the CQL
         var libraryIdentifier = CqlVersionedLibraryIdentifier.Parse("AdditionLib-0.0.0");
         var cqlLibraryString = CqlLibraryString.FromIdentifierAndString(
             libraryIdentifier,
@@ -71,19 +87,18 @@ internal class Program
             define private Three: 1 + 2
             """);
         var cqlContext = FhirCqlContext.ForBundle();
-        using var invokationScope = cqlApi
-                                    .AddCqlLibraryString(cqlLibraryString)
-                                    .CreateInvokationScope();
-
-        // Act
+        using var invokationScope = cqlApi.AddCqlLibraryString(cqlLibraryString).CreateInvokationScope();
         var result = invokationScope.InvokeLibraryDeclaration(libraryIdentifier, "Three", cqlContext);
-
-        // Assert
         Debug.Assert(result is 3);
     }
 
-    private static void Example1()
+    private static void VerboseExample()
     {
+        // INTRO:
+        // This example loads the CQL libraries, translates them to ELM, and compiles them to assemblies.
+        // Each intermediate format is saved to directory (e.g. ELM, C#, and assembly binaries with their debug symbols).
+        // It also demonstrates how to execute a library.
+
         var librarySetName = "Authoring";
         Directories dirs = Directories.Create(librarySetName);
         dirs.GeneratedDirectory.Delete(recursive: true);
