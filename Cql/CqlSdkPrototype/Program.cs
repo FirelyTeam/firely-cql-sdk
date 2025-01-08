@@ -35,7 +35,8 @@ internal class Program
 
         InvokeCqlFromExamplesFolder(logger, cqlApi);
         InvokeCqlExample(cqlApi);
-        //Example1();
+        foreach (var librarySetName in (string[])["Authoring", "CMS", "Demo"])
+            VerboseExample(cqlApi, librarySetName);
     }
 
     private static void InvokeCqlFromExamplesFolder(
@@ -51,7 +52,8 @@ internal class Program
         // We can write extensions to make it even easier to change exception handling
         cqlApi = cqlApi.WithOptions(o => o with
                        {
-                           ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
+                           ProcessBatchItemExceptionHandling =
+                           ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
                        })
                        .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory);
 
@@ -92,49 +94,46 @@ internal class Program
         Debug.Assert(result is 3);
     }
 
-    private static void VerboseExample()
+    private static void VerboseExample(CqlApi cqlApi, string librarySetName)
     {
         // INTRO:
         // This example loads the CQL libraries, translates them to ELM, and compiles them to assemblies.
         // Each intermediate format is saved to directory (e.g. ELM, C#, and assembly binaries with their debug symbols).
         // It also demonstrates how to execute a library.
 
-        var librarySetName = "Authoring";
         Directories dirs = Directories.Create(librarySetName);
         dirs.GeneratedDirectory.Delete(recursive: true);
-        var serviceProvider = BuildServiceProvider(
-            configureElmCompilationOptions: opt => opt.AssembliesDebugMode = true,
-            configureCqlTranslationOptions: opt => opt.Models = [Models.ElmR1, Models.Fhir401]);
-        var cqlApi =
-                CqlApi.Create(serviceProvider)
-                      .WithOptions(o => o with { ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue })
-                      .AddCqlLibrariesFromDirectory(
-                          dirs.CqlInDirectory /*,
-                          options: new EnumerationOptions()
-                          {
-                              //RecurseSubdirectories = false
-                          }*/ /*,
-                          filePredicate: fi => fi.Name.TrimFileExtension(".cql") is
-                              "FHIRHelpers"
-                              or "NCQATerminology"
-                              or "NCQAStatus"*/
-                      )
-                      .ConvertToElm()
-            //.SaveElmFileToDirectory(dirs.ElmOutDirectory)
+        cqlApi = cqlApi
+                 .WithOptions(o => o with
+                 {
+                     ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
+                 })
+                 .AddCqlLibrariesFromDirectory(
+                     dirs.CqlInDirectory /*,
+                     options: new EnumerationOptions()
+                     {
+                         //RecurseSubdirectories = false
+                     }*/ /*,
+                     filePredicate: fi => fi.Name.TrimFileExtension(".cql") is
+                         "FHIRHelpers"
+                         or "NCQATerminology"
+                         or "NCQAStatus"*/
+                 )
+                 .ConvertToElm()
+                 .SaveElmFileToDirectory(dirs.ElmOutDirectory)
+                 ;
+
+        var elmApi = cqlApi
+                     .CreateElmApi()
+                     .LoadElmFromCqlApi(cqlApi)
+                     //.LoadElmFile(elmDirIn, ElmLibraryIdentifier.Parse("FHIRHelpers")) //
+                     //.LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
+                     .CompileAssemblies()
+                     .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
+                     .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
             ;
 
-        var elmApi =
-                cqlApi.CreateElmApi()
-                      .LoadElmFromCqlApi(cqlApi)
-                      //.LoadElmFile(elmDirIn, ElmLibraryIdentifier.Parse("FHIRHelpers")) //
-                      //.LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
-                      .CompileAssemblies()
-                      .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
-                      .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
-            ;
-
-        // FhirJsonPocoDeserializer fhirJsonPocoDeserializer = null!;
-        DumpOutputFilesToConsole(serviceProvider, cqlApi, elmApi);
+        DumpFirstElmAndCSharp(cqlApi, elmApi);
         // ExecuteLibrary(serviceProvider, dirs, cqlApi, elmApi, fhirJsonPocoDeserializer);
     }
 
@@ -217,12 +216,11 @@ internal class Program
         return serviceProvider;
     }
 
-    private static void DumpOutputFilesToConsole(
-        ServiceProvider serviceProvider,
+    private static void DumpFirstElmAndCSharp(
         CqlApi cqlApi,
         ElmApi elmApi)
     {
-        var logger = serviceProvider.GetLogger<Program>();
+        var logger = cqlApi.Options.ServiceProvider.GetLogger<Program>();
         var id1 = cqlApi.GetElmJsonStrings().Keys.First()!;
         logger.LogInformation(
             $"""
