@@ -43,5 +43,4 @@ public static class CqlApiLoadExtensions
                 }); // Log errors
         return self.AddCqlLibraryStrings(cqlLibraries);
     }
-
 }

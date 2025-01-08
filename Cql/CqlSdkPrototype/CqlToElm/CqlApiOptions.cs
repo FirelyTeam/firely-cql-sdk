@@ -6,7 +6,7 @@ public record CqlApiOptions(
     IServiceProvider ServiceProvider,
     ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling)
 {
-    public IServiceProvider ServiceProvider { get; init; } = ServiceProvider ?? throw new ArgumentNullException(nameof(ServiceProvider));
+    public IServiceProvider ServiceProvider { get; } = ServiceProvider ?? throw new ArgumentNullException(nameof(ServiceProvider));
 
     public static CqlApiOptions Create(
         IServiceProvider serviceProvider,

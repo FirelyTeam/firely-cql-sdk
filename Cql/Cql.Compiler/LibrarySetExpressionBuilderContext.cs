@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Linq;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Elm;
@@ -49,7 +50,7 @@ internal partial class LibrarySetExpressionBuilderContext
         {
             LibrarySet
                 .TryProcessEach(ProcessLibrary)
-                .ThenForEachOutcome(outcome =>
+                .HandleEachOutcome(outcome =>
                 {
                     if (outcome.Exception?.SourceException is { } exception)
                     {
@@ -69,7 +70,9 @@ internal partial class LibrarySetExpressionBuilderContext
                     }
 
                 })
-                .HandleExceptions(processLibraryExceptionHandling);
+                .HandleExceptions(processLibraryExceptionHandling)
+                .Count() // We must enumerate all
+                ; ;
 
             return LibrarySetDefinitions;
 

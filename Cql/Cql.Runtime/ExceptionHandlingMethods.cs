@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.ExceptionServices;
 using Hl7.Cql.Abstractions.Exceptions;
@@ -7,13 +8,13 @@ namespace Hl7.Cql.Runtime;
 
 internal static class ExceptionHandlingMethods
 {
-    public static IEnumerable<ProcessBatchItemResult<TInput>> TryProcessEach<TInput>(
+    public static IEnumerable<TryOutcome<TInput>> TryProcessEach<TInput>(
         this IEnumerable<TInput> inputs,
         Action<TInput> processInput)
     {
         foreach (var input in inputs)
         {
-            ProcessBatchItemResult<TInput> outcome = new(input);
+            TryOutcome<TInput> outcome = new(input);
             try
             {
                 processInput(input);
@@ -27,9 +28,9 @@ internal static class ExceptionHandlingMethods
         }
     }
 
-    public static IEnumerable<ProcessBatchItemResult<TInput>> ThenForEachOutcome<TInput>(
-        this IEnumerable<ProcessBatchItemResult<TInput>> outcomes,
-        Action<ProcessBatchItemResult<TInput>> processOutcome)
+    public static IEnumerable<TryOutcome<TInput>> HandleEachOutcome<TInput>(
+        this IEnumerable<TryOutcome<TInput>> outcomes,
+        Action<TryOutcome<TInput>> processOutcome)
     {
         foreach (var outcome in outcomes)
         {
@@ -38,60 +39,57 @@ internal static class ExceptionHandlingMethods
         }
     }
 
-    public static void HandleExceptions<TInput>(
-        this IEnumerable<ProcessBatchItemResult<TInput>> processBatchItemResults,
+    public static IEnumerable<TInput> HandleExceptions<TInput>(
+        this IEnumerable<TryOutcome<TInput>> processBatchItemResults,
         ProcessBatchItemExceptionHandling exceptionHandling)
     {
-        switch (exceptionHandling)
+        return exceptionHandling switch
         {
-            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:
-                processBatchItemResults.BreakAtFirstException();
-                break;
-            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue:
-                processBatchItemResults.ContinueOnExceptions();
-                break;
-            default:
-                processBatchItemResults.ThrowAtFirstException();
-                break;
-        }
+            ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak => processBatchItemResults.HandleAndAbortBeforeFirstException(),
+            ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue => processBatchItemResults.HandleAndIgnoreAllExceptions(),
+            _ => processBatchItemResults.HandleAndThrowAtFirstException()
+        };
     }
 
-    public static void ThrowAtFirstException<TInput>(
-        this IEnumerable<ProcessBatchItemResult<TInput>> processBatchItemResults)
+    public static IEnumerable<TInput> HandleAndThrowAtFirstException<TInput>(
+        this IEnumerable<TryOutcome<TInput>> processBatchItemResults)
     {
-        foreach (var (_, exceptionDispatchInfo) in processBatchItemResults)
+        foreach (var (input, exceptionDispatchInfo) in processBatchItemResults)
         {
             if (exceptionDispatchInfo is not null)
                 exceptionDispatchInfo.Throw();
+            yield return input;
         }
     }
 
-    public static void BreakAtFirstException<TInput>(
-        this IEnumerable<ProcessBatchItemResult<TInput>> processBatchItemResults)
+    public static IEnumerable<TInput> HandleAndAbortBeforeFirstException<TInput>(
+        this IEnumerable<TryOutcome<TInput>> processBatchItemResults)
     {
-        foreach (var (_, exceptionDispatchInfo) in processBatchItemResults)
+        foreach (var (input, exceptionDispatchInfo) in processBatchItemResults)
         {
             if (exceptionDispatchInfo is not null)
-                return;
+                yield break;
+            yield return input;
         }
     }
 
-    public static void ContinueOnExceptions<TInput>(
-        this IEnumerable<ProcessBatchItemResult<TInput>> processBatchItemResults)
+    public static IEnumerable<TInput> HandleAndIgnoreAllExceptions<TInput>(
+        this IEnumerable<TryOutcome<TInput>> processBatchItemResults)
     {
-        foreach (var _ in processBatchItemResults)
+        foreach (var (input, exceptionDispatchInfo) in processBatchItemResults)
         {
-            ; // Intentionally empty
+            if (exceptionDispatchInfo?.SourceException is not null)
+                yield return input;
         }
     }
 
-    public static IEnumerable<ProcessBatchItemResult<TInput, TResult>> TryProcessEach<TInput, TResult>(
+    public static IEnumerable<TryOutcome<TInput, TResult>> TryProcessEach<TInput, TResult>(
         this IEnumerable<TInput> inputs,
         Func<TInput, TResult> processInput)
     {
         foreach (var input in inputs)
         {
-            ProcessBatchItemResult<TInput, TResult> outcome = new(input);
+            TryOutcome<TInput, TResult> outcome = new(input);
             try
             {
                 outcome = outcome with { Result = processInput(input) };
@@ -105,9 +103,9 @@ internal static class ExceptionHandlingMethods
         }
     }
 
-    public static IEnumerable<ProcessBatchItemResult<TInput, TResult>> ThenForEachOutcome<TInput, TResult>(
-        this IEnumerable<ProcessBatchItemResult<TInput, TResult>> outcomes,
-        Action<ProcessBatchItemResult<TInput, TResult>> processOutcome)
+    public static IEnumerable<TryOutcome<TInput, TResult>> HandleEachOutcome<TInput, TResult>(
+        this IEnumerable<TryOutcome<TInput, TResult>> outcomes,
+        Action<TryOutcome<TInput, TResult>> processOutcome)
     {
         foreach (var outcome in outcomes)
         {
@@ -117,19 +115,19 @@ internal static class ExceptionHandlingMethods
     }
 
     public static IEnumerable<TResult> HandleExceptions<TInput, TResult>(
-        this IEnumerable<ProcessBatchItemResult<TInput, TResult>> processBatchItemResults,
+        this IEnumerable<TryOutcome<TInput, TResult>> processBatchItemResults,
         ProcessBatchItemExceptionHandling exceptionHandling)
     {
         return exceptionHandling switch
         {
-            ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak => processBatchItemResults.BreakAtFirstException(),
-            ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue => processBatchItemResults.ContinueOnExceptions(),
-            _ => processBatchItemResults.ThrowAtFirstException()
+            ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak => processBatchItemResults.HandleAndAbortBeforeFirstException(),
+            ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue => processBatchItemResults.HandleAndIgnoreAllExceptions(),
+            _ => processBatchItemResults.HandleAndThrowAtFirstException()
         };
     }
 
-    public static IEnumerable<TResult> ThrowAtFirstException<TInput, TResult>(
-        this IEnumerable<ProcessBatchItemResult<TInput, TResult>> processBatchItemResults)
+    public static IEnumerable<TResult> HandleAndThrowAtFirstException<TInput, TResult>(
+        this IEnumerable<TryOutcome<TInput, TResult>> processBatchItemResults)
     {
         foreach (var (_, result, exceptionDispatchInfo) in processBatchItemResults)
         {
@@ -139,8 +137,8 @@ internal static class ExceptionHandlingMethods
         }
     }
 
-    public static IEnumerable<TResult> BreakAtFirstException<TInput, TResult>(
-        this IEnumerable<ProcessBatchItemResult<TInput, TResult>> processBatchItemResults)
+    public static IEnumerable<TResult> HandleAndAbortBeforeFirstException<TInput, TResult>(
+        this IEnumerable<TryOutcome<TInput, TResult>> processBatchItemResults)
     {
         foreach (var (_, result, exceptionDispatchInfo) in processBatchItemResults)
         {
@@ -151,8 +149,8 @@ internal static class ExceptionHandlingMethods
         }
     }
 
-    public static IEnumerable<TResult> ContinueOnExceptions<TInput, TResult>(
-        this IEnumerable<ProcessBatchItemResult<TInput, TResult>> processBatchItemResults)
+    public static IEnumerable<TResult> HandleAndIgnoreAllExceptions<TInput, TResult>(
+        this IEnumerable<TryOutcome<TInput, TResult>> processBatchItemResults)
     {
         foreach (var (_, result, exceptionDispatchInfo) in processBatchItemResults)
         {
@@ -161,11 +159,11 @@ internal static class ExceptionHandlingMethods
         }
     }
 
-    public readonly record struct ProcessBatchItemResult<TInput>(
+    public readonly record struct TryOutcome<TInput>(
         TInput Input,
         ExceptionDispatchInfo? Exception = null);
 
-    public readonly record struct ProcessBatchItemResult<TInput, TResult>(
+    public readonly record struct TryOutcome<TInput, TResult>(
         TInput Input,
         TResult? Result = default,
         ExceptionDispatchInfo? Exception = null);

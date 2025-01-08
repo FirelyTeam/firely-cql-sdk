@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Text;
 using CqlSdkPrototype.CqlToElm;
 using CqlSdkPrototype.ElmToAssembly;
 using CqlSdkPrototype.Internal;
@@ -22,18 +23,45 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        Example1();
-        //SuperSimpleExpressionInvokeExample();
-    }
-
-    private static void SuperSimpleExpressionInvokeExample()
-    {
-        // Arrange
         var serviceProvider = BuildServiceProvider(
             configureElmCompilationOptions: opt => opt.AssembliesDebugMode = true,
             configureCqlTranslationOptions: opt => opt.Models = [Models.ElmR1, Models.Fhir401]);
-        var cqlApiOptions = CqlApiOptions.Create(serviceProvider);
-        var cqlApi = CqlApi.Create(cqlApiOptions);
+        var logger = serviceProvider.GetLogger<Program>();
+        var cqlApi = CqlApi.Create(serviceProvider);
+
+        InvokeCqlFromExamplesFolder(logger, cqlApi);
+        InvokeCqlExample(cqlApi);
+        //Example1();
+    }
+
+    private static void InvokeCqlFromExamplesFolder(
+        ILogger<Program> logger,
+        CqlApi cqlApi)
+    {
+        var dirs = Directories.Create("Examples");
+        cqlApi = cqlApi.WithOptions(o => o with
+                       {
+                           ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
+                       })
+                       .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory);
+        var cqlContext = FhirCqlContext.ForBundle();
+        using var invokationScope = cqlApi.CreateInvokationScope();
+        logger.LogInformation("{dump}", invokationScope.DumpLibraryDeclarations());
+        Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
+        Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
+        Debug.Assert(Invoke("CqlStringOperatorsTest-1.0.000", "Combine.CombineABCSepDash") is "a-b-c");
+
+        object? Invoke(string libraryName, string declarationName)
+        {
+            var libraryIdentifier = CqlVersionedLibraryIdentifier.Parse(libraryName);
+            var result = invokationScope.InvokeLibraryDeclaration(libraryIdentifier, declarationName, cqlContext);
+            return result;
+        }
+    }
+
+    private static void InvokeCqlExample(CqlApi cqlApi)
+    {
+        // Arrange
         var libraryIdentifier = CqlVersionedLibraryIdentifier.Parse("AdditionLib-0.0.0");
         var cqlLibraryString = CqlLibraryString.FromIdentifierAndString(
             libraryIdentifier,
@@ -42,12 +70,13 @@ internal class Program
 
             define private Three: 1 + 2
             """);
+        var cqlContext = FhirCqlContext.ForBundle();
+        using var invokationScope = cqlApi
+                                    .AddCqlLibraryString(cqlLibraryString)
+                                    .CreateInvokationScope();
 
         // Act
-        var result = cqlApi
-                     .AddCqlLibraryString(cqlLibraryString)
-                     .CompileAssemblies()
-                     .InvokeLibraryDeclaration(libraryIdentifier, "Three", FhirCqlContext.ForBundle());
+        var result = invokationScope.InvokeLibraryDeclaration(libraryIdentifier, "Three", cqlContext);
 
         // Assert
         Debug.Assert(result is 3);
@@ -56,38 +85,37 @@ internal class Program
     private static void Example1()
     {
         var librarySetName = "Authoring";
-        Directories dirs = new(librarySetName);
+        Directories dirs = Directories.Create(librarySetName);
         dirs.GeneratedDirectory.Delete(recursive: true);
         var serviceProvider = BuildServiceProvider(
             configureElmCompilationOptions: opt => opt.AssembliesDebugMode = true,
             configureCqlTranslationOptions: opt => opt.Models = [Models.ElmR1, Models.Fhir401]);
-        var cqlApiOptions = CqlApiOptions.Create(serviceProvider, ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue);
         var cqlApi =
-                CqlApi.Create(cqlApiOptions)
-                             .AddCqlLibrariesFromDirectory(
-                                 dirs.CqlInDirectory/*,
-                                 options: new EnumerationOptions()
-                                 {
-                                     //RecurseSubdirectories = false
-                                 }*//*,
-                                 filePredicate: fi => fi.Name.TrimFileExtension(".cql") is
-                                     "FHIRHelpers"
-                                     or "NCQATerminology"
-                                     or "NCQAStatus"*/
-                             )
-                             .ConvertToElm()
+                CqlApi.Create(serviceProvider)
+                      .WithOptions(o => o with { ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue })
+                      .AddCqlLibrariesFromDirectory(
+                          dirs.CqlInDirectory /*,
+                          options: new EnumerationOptions()
+                          {
+                              //RecurseSubdirectories = false
+                          }*/ /*,
+                          filePredicate: fi => fi.Name.TrimFileExtension(".cql") is
+                              "FHIRHelpers"
+                              or "NCQATerminology"
+                              or "NCQAStatus"*/
+                      )
+                      .ConvertToElm()
             //.SaveElmFileToDirectory(dirs.ElmOutDirectory)
             ;
 
-        ElmApiOptions elmApiOptions = ElmApiOptions.Create(cqlApiOptions);
         var elmApi =
-                ElmApi.Create(elmApiOptions)
-                           .LoadElmFromCqlApi(cqlApi)
-                           //.LoadElmFile(elmDirIn, ElmLibraryIdentifier.Parse("FHIRHelpers")) //
-                           //.LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
-                           .CompileAssemblies()
-                           .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
-                           .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
+                cqlApi.CreateElmApi()
+                      .LoadElmFromCqlApi(cqlApi)
+                      //.LoadElmFile(elmDirIn, ElmLibraryIdentifier.Parse("FHIRHelpers")) //
+                      //.LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
+                      .CompileAssemblies()
+                      .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
+                      .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
             ;
 
         // FhirJsonPocoDeserializer fhirJsonPocoDeserializer = null!;
@@ -106,14 +134,6 @@ internal class Program
     //     if (CqlRuntimeApi.Create(
     //             out var librarySetInvoker))
     //     {
-    //         // StringBuilder sb = new();
-    //         // sb.AppendLine("Libraries and Declarations:");
-    //         // foreach (var (libId, lib) in librarySetInvoker.LibraryInvokers)
-    //         // {
-    //         //     sb.AppendLine(Invariant($"- {libId}"));
-    //         //     foreach (var (declId, decl) in lib.Declarations)
-    //         //         sb.AppendLine(Invariant($"  - {declId} : {decl.ReturnType.ToCSharpString(TypeCSharpFormat.Default with {UseKeywords = true})}"));
-    //         // }
     //         // logger.LogInformation("{msg}", sb.ToString());
     //         //
     //         // if (dirs.ValueSetsInDirectory is null)
@@ -168,7 +188,8 @@ internal class Program
                               // .AddSingleton<IConfiguration>(configuration)
                               .AddLogging(lb => lb
                                                 .ClearProviders()
-                                                .AddProvider(new CustomConsoleLoggerProvider(cat => cat.Split('.').Last()))
+                                                .AddProvider(
+                                                    new CustomConsoleLoggerProvider(cat => cat.Split('.').Last()))
                                                 .AddFilter((string? category, LogLevel logLevel) =>
                                                 {
                                                     var result = category?.Contains(nameof(CqlSdkPrototype)) ?? false;

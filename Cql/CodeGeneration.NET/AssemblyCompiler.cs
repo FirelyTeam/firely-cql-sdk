@@ -31,6 +31,7 @@ using Microsoft.CodeAnalysis.Emit;
 using Microsoft.Extensions.Logging;
 using static Hl7.Cql.CodeGeneration.NET.CSharpSourceCodeStep;
 using Hl7.Fhir.Model;
+using Count = Hl7.Cql.Elm.Count;
 using Library = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.CodeGeneration.NET
@@ -138,7 +139,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                                   select (libraryName, library, stream);
                 inputs
                     .TryProcessEach(item => CompileAssembly(item.library, item.stream))
-                    .ThenForEachOutcome(outcome =>
+                    .HandleEachOutcome(outcome =>
                     {
                         if (outcome.Exception?.SourceException is { } exception)
                         {
@@ -157,7 +158,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                             }
                         }
                     })
-                    .HandleExceptions(libraryAssemblyWritingExceptionHandling);
+                    .HandleExceptions(libraryAssemblyWritingExceptionHandling)
+                    .Count() // We must enumerate all
+                    ;
             }
 
             void CompileAssembly(Library library, Stream stream)

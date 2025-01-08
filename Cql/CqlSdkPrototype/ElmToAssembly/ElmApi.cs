@@ -1,5 +1,6 @@
 ﻿using System.Linq.Expressions;
 using CqlSdkPrototype.Advanced;
+using CqlSdkPrototype.CqlToElm;
 using CqlSdkPrototype.ElmToAssembly.Advanced;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
@@ -75,13 +76,16 @@ public class ElmApi :
         _state = state;
     }
 
-    private ElmApi Mutate(
-        ElmCompilationEntriesMap? entries = null)
+    private ElmApi WithEntries(
+        ElmCompilationEntriesMap entries)
     {
-        return new ElmApi(_state with
-        {
-            Entries = entries ?? _state.Entries
-        });
+        return new ElmApi(_state with { Entries = entries });
+    }
+
+    public ElmApi WithOptions(Func<ElmApiOptions, ElmApiOptions> replaceOptions)
+    {
+        var newOptions = replaceOptions(Options);
+        return ReferenceEquals(Options, newOptions) ? this : new ElmApi(_state with { Options = newOptions });
     }
 
     #endregion
@@ -109,7 +113,7 @@ public class ElmApi :
         }
 
         return hasChanged
-                   ? Mutate(entries: entries.ToImmutable())
+                   ? WithEntries(entries: entries.ToImmutable())
                    : this;
     }
 
@@ -171,7 +175,7 @@ public class ElmApi :
         }
 
         return hasChanged
-                   ? Mutate(entries: entriesBuilder.ToImmutable())
+                   ? WithEntries(entries: entriesBuilder.ToImmutable())
                    : this;
     }
 

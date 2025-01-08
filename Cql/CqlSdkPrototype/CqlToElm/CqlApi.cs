@@ -7,6 +7,7 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace CqlSdkPrototype.CqlToElm;
 
@@ -56,8 +57,9 @@ public class CqlApi :
 
     #region Construction
 
-    internal static CqlApi Create(CqlApiOptions options)
+    public static CqlApi Create(IServiceProvider serviceProvider)
     {
+        var options = CqlApiOptions.Create(serviceProvider);
         var entries = CqlTranslationEntriesMap.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
         var state = new State(options, entries);
         return new CqlApi(state);
@@ -68,13 +70,15 @@ public class CqlApi :
         _state = state;
     }
 
-    private CqlApi Mutate(
-        CqlTranslationEntriesMap? entries = null)
+    private CqlApi WithEntries(CqlTranslationEntriesMap entries)
     {
-        return new CqlApi(_state with
-        {
-            Entries = entries ?? _state.Entries,
-        });
+        return new CqlApi(_state with { Entries = entries });
+    }
+
+    public CqlApi WithOptions(Func<CqlApiOptions, CqlApiOptions> replaceOptions)
+    {
+        var newOptions = replaceOptions(Options);
+        return ReferenceEquals(Options, newOptions) ? this : new CqlApi(_state with { Options = newOptions });
     }
 
     #endregion
@@ -102,7 +106,7 @@ public class CqlApi :
         }
 
         return hasChanged
-                   ? Mutate(entries: libraryCompilationsBuilder.ToImmutable())
+                   ? WithEntries(entries: libraryCompilationsBuilder.ToImmutable())
                    : this;
     }
 
@@ -113,17 +117,18 @@ public class CqlApi :
     public CqlApi ConvertToElm()
     {
         CqlToElmConverter cqlToElmConverter = null!;
-        var entriesBuilder = _state.Entries.ToBuilder();
+        CqlTranslationEntriesMap.Builder entriesBuilder = null!;
         var logger = _state.Logger;
-        int changedCount = 0;
+        bool atFirst = true;
 
         IEnumerable<(CqlVersionedLibraryIdentifier versionedIdentifier, CqlTranslationEntry cqlTranslationEntry)> GetLibrariesForProcessing()
         {
-            foreach (var (versionedIdentifier, cqlTranslationEntry) in entriesBuilder
-                         .Where(kv => kv.Value.ElmLibrary is null))
+            foreach (var (versionedIdentifier, cqlTranslationEntry) in
+                     _state.Entries.Where(kv => kv.Value.ElmLibrary is null))
             {
-                if (changedCount == 0)
+                if (atFirst)
                 {
+                    atFirst = false;
                     logger.LogInformation("Translating CQL into ELM");
                     cqlToElmConverter = _state.CqlToElmConverter;
                     entriesBuilder = _state.Entries.ToBuilder();
@@ -131,13 +136,13 @@ public class CqlApi :
 
                 logger.LogInformation("Translating CQL: {id}", versionedIdentifier);
                 yield return (versionedIdentifier, cqlTranslationEntry);
-                changedCount++;
             }
         }
 
-        GetLibrariesForProcessing()
+        int changedCount =
+            GetLibrariesForProcessing()
             .TryProcessEach(t => ProcessLibrary(t.versionedIdentifier, t.cqlTranslationEntry))
-            .ThenForEachOutcome(outcome =>
+            .HandleEachOutcome(outcome =>
             {
                 if (outcome.Exception?.SourceException is { } exception)
                 {
@@ -156,10 +161,12 @@ public class CqlApi :
                     }
                 }
             })
-            .HandleExceptions(_state.Options.ProcessBatchItemExceptionHandling);
+            .HandleExceptions(_state.Options.ProcessBatchItemExceptionHandling)
+            .Count() // We must enumerate all
+            ; ;
 
         return changedCount > 0
-                   ? Mutate(entries: entriesBuilder.ToImmutable())
+                   ? WithEntries(entries: entriesBuilder.ToImmutable())
                    : this;
 
         void ProcessLibrary(CqlVersionedLibraryIdentifier versionedIdentifier, CqlTranslationEntry cqlTranslationEntry)

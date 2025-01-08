@@ -1,7 +1,20 @@
-﻿namespace CqlSdkPrototype;
+﻿using System.Diagnostics;
+
+namespace CqlSdkPrototype;
 
 public class Directories(string librarySetName)
 {
+    public static Directories Create(string librarySetName)
+    {
+        Debug.Assert(
+            librarySetName is
+               "Demo"
+            or "CMS"
+            or "Authoring"
+            or "Examples");
+        return new Directories(librarySetName);
+    }
+
     private static DirectoryInfo FindAncestor(DirectoryInfo start, Func<DirectoryInfo, bool> match)
     {
         DirectoryInfo? current = start;
@@ -16,16 +29,17 @@ public class Directories(string librarySetName)
     }
 
     public static DirectoryInfo CurrentDirectory { get; } = new(Directory.GetCurrentDirectory());
-    public static DirectoryInfo SolutionDirectory { get; } = FindAncestor(CurrentDirectory, d => d.EnumerateFiles("*.sln?").Any());
-    public static DirectoryInfo ThisProjectDirectory { get; } = FindAncestor(CurrentDirectory, d => d.EnumerateFiles("*.csproj").Any());
-    public static DirectoryInfo AuthoringProjectDirectory => SolutionDirectory.CreateSubdirectory("Demo").CreateSubdirectory("Measures.Authoring");
-    public static DirectoryInfo LibrarySetsDirectory { get; } = SolutionDirectory.CreateSubdirectory("LibrarySets");
+    public static DirectoryInfo CurrentSolutionDirectory { get; } = FindAncestor(CurrentDirectory, d => d.EnumerateFiles("*.sln?").Any());
+    public static DirectoryInfo CurrentProjectDirectory { get; } = FindAncestor(CurrentDirectory, d => d.EnumerateFiles("*.csproj").Any());
+    public static DirectoryInfo AuthoringProjectDirectory => CurrentSolutionDirectory.CreateSubdirectory("Demo").CreateSubdirectory("Measures.Authoring");
+    public static DirectoryInfo LibrarySetsDirectory { get; } = CurrentSolutionDirectory.CreateSubdirectory("LibrarySets");
 
     public string LibrarySetName { get; } = librarySetName;
-    public DirectoryInfo GeneratedDirectory => ThisProjectDirectory.CreateSubdirectory("generated").CreateSubdirectory(LibrarySetName);
+    public DirectoryInfo GeneratedDirectory => CurrentProjectDirectory.CreateSubdirectory("generated").CreateSubdirectory(LibrarySetName);
     public DirectoryInfo CqlInDirectory =>
         LibrarySetName switch
         {
+            "Examples" => CurrentProjectDirectory.CreateSubdirectory("examples"),
             "Authoring" => AuthoringProjectDirectory.CreateSubdirectory("Input").CreateSubdirectory("cql"),
             _ => LibrarySetsDirectory.CreateSubdirectory(LibrarySetName).CreateSubdirectory("Cql")
         };

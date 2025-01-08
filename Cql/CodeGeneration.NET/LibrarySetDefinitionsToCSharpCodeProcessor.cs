@@ -198,7 +198,7 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
                        WriteLibrary(t.library, t.stream);
                        return (t.libraryName, t.stream);
                    })
-                   .ThenForEachOutcome(t =>
+                   .HandleEachOutcome(t =>
                    {
                        if (t.Exception?.SourceException is { } exception)
                        {

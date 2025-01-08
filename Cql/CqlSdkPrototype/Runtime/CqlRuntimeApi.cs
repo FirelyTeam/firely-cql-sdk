@@ -63,21 +63,21 @@ public class CqlRuntimeApi
         return librarySetInvoker;
     }
 
-    public InvokationScope CreateInvokationScope()
+    public CqlInvokationScope CreateInvokationScope()
     {
         var alc = new AssemblyLoadContext("", true);
         foreach (var (assembly, debugSymbols) in _state.AssemblyData)
             alc.LoadFromBytes(assembly, debugSymbols);
-        return new InvokationScope(this, alc);
+        return new CqlInvokationScope(this, alc);
     }
 }
 
-public class InvokationScope : IDisposable
+public class CqlInvokationScope : IDisposable
 {
     private readonly CqlRuntimeApi _cqlRuntimeApi;
     private readonly AssemblyLoadContext _alc;
 
-    public InvokationScope(CqlRuntimeApi cqlRuntimeApi, AssemblyLoadContext alc)
+    public CqlInvokationScope(CqlRuntimeApi cqlRuntimeApi, AssemblyLoadContext alc)
     {
         _cqlRuntimeApi = cqlRuntimeApi;
         _alc = alc;
