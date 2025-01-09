@@ -29,7 +29,7 @@ public class ElmApi :
     {
         public ILogger<ElmApi> Logger { get; } = Options.ServiceProvider.GetLogger<ElmApi>();
         public AssemblyCompiler AssemblyCompiler { get; } = Options.ServiceProvider.GetAssemblyCompiler();
-        public LibrarySetDefinitionsToCSharpCodeProcessor LibrarySetDefinitionsToCSharpCodeProcessor { get; } = Options.ServiceProvider.GetLibrarySetDefinitionsToCSharpCodeProcessor();
+        public CSharpCodeGenerator CSharpCodeGenerator { get; } = Options.ServiceProvider.GetLibrarySetDefinitionsToCSharpCodeProcessor();
         public Scope CreateScope() => new(Options.ServiceProvider.CreateScope());
     }
 
@@ -113,7 +113,7 @@ public class ElmApi :
         logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
         var exceptionHandling = _state.Options.ProcessBatchItemExceptionHandling;
         AssemblyCompiler assemblyCompiler = _state.AssemblyCompiler;
-        LibrarySetDefinitionsToCSharpCodeProcessor cSharpCodeProcessor = _state.LibrarySetDefinitionsToCSharpCodeProcessor;
+        CSharpCodeGenerator cSharpCodeProcessor = _state.CSharpCodeGenerator;
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
         Library[] libraries = entries.Values.Select(selector: v => v.ElmLibrary).ToArray();
         LibrarySet librarySet = new LibrarySet(name: "", libraries: libraries);

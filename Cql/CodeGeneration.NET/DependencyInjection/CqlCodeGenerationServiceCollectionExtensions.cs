@@ -27,7 +27,7 @@ internal static class CqlCodeGenerationServiceCollectionExtensions
 
         services.TryAddSingleton<TypeToCSharpConverter>();
 
-        services.TryAddSingleton<LibrarySetDefinitionsToCSharpCodeProcessor>();
+        services.TryAddSingleton<CSharpCodeGenerator>();
 
         services.TryAddSingleton<AssemblyCompiler>();
 

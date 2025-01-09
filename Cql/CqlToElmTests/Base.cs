@@ -31,7 +31,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static LibraryExpressionBuilder LibraryExpressionBuilder => ServiceProvider.GetLibraryExpressionBuilderScoped();
 
-        internal static LibrarySetDefinitionsToCSharpCodeProcessor LibrarySetDefinitionsToCSharpCodeProcessor => ServiceProvider.GetLibrarySetDefinitionsToCSharpCodeProcessor();
+        internal static CSharpCodeGenerator CSharpCodeGenerator => ServiceProvider.GetLibrarySetDefinitionsToCSharpCodeProcessor();
 
         internal static AssemblyCompiler AssemblyCompiler => ServiceProvider.GetAssemblyCompiler();
 
@@ -118,11 +118,11 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static LibrarySetCSharp GenerateCSharp(LibrarySetDefinitions librarySetDefinitions)
         {
-            var librarySetDefinitionsToCSharpCodeProcessor = ServiceProvider.GetLibrarySetDefinitionsToCSharpCodeProcessor();
+            var cSharpCodeGenerator = ServiceProvider.GetLibrarySetDefinitionsToCSharpCodeProcessor();
 
 
             Dictionary<string, string> cSharpCodeByLibraryName =
-                librarySetDefinitionsToCSharpCodeProcessor
+                cSharpCodeGenerator
                     .GenerateCSharpV2(librarySetDefinitions.LibrarySet, librarySetDefinitions.Definitions)
                     .ToDictionary(o => o.library.GetVersionedIdentifier()!, o => o.generateCSharp());
             return new(librarySetDefinitions, cSharpCodeByLibraryName.AsReadOnly());
@@ -139,7 +139,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var expressionName = "TempExpression";
             definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
             var s1 =
-                LibrarySetDefinitionsToCSharpCodeProcessor
+                CSharpCodeGenerator
                     .GenerateCSharpV2(librarySet, definitions)
                     .Select(o => (o.library, o.generateCSharp()));
             var assemblyBytes =

@@ -30,9 +30,9 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// <summary>
 /// Processes a definition dictionary of <see cref="LambdaExpression"/> into a .NET classes per library.
 /// </summary>
-internal class LibrarySetDefinitionsToCSharpCodeProcessor
+internal class CSharpCodeGenerator
 {
-    private readonly ILogger<LibrarySetDefinitionsToCSharpCodeProcessor> _logger;
+    private readonly ILogger<CSharpCodeGenerator> _logger;
 
     private readonly TypeToCSharpConverter _typeToCSharpConverter;
 
@@ -56,17 +56,17 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
     private readonly TupleMetadataBuilder _tupleMetadataBuilder;
 
     /// <summary>
-    /// Gets the version of this <see cref="LibrarySetDefinitionsToCSharpCodeProcessor"/> as will appear in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Version"/>.
+    /// Gets the version of this <see cref="CSharpCodeGenerator"/> as will appear in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Version"/>.
     /// </summary>
     private readonly string _generatorToolVersion;
 
     /// <summary>
-    /// Gets the product of this <see cref="LibrarySetDefinitionsToCSharpCodeProcessor"/> as will appear in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Tool"/>.
+    /// Gets the product of this <see cref="CSharpCodeGenerator"/> as will appear in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Tool"/>.
     /// </summary>
     private readonly string _generatorToolName;
 
-    public LibrarySetDefinitionsToCSharpCodeProcessor(
-        ILogger<LibrarySetDefinitionsToCSharpCodeProcessor> logger,
+    public CSharpCodeGenerator(
+        ILogger<CSharpCodeGenerator> logger,
         TypeResolver typeResolver,
         TypeToCSharpConverter typeToCSharpConverter)
     {
@@ -153,7 +153,7 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
     #region Nested Types
 
     private record LibrarySetWriter(
-        LibrarySetDefinitionsToCSharpCodeProcessor Processor,
+        CSharpCodeGenerator Processor,
         LibrarySet LibrarySet,
         DefinitionDictionary<LambdaExpression> Definitions,
         CSharpSourceCodeWriterCallbacks Callbacks,
@@ -167,7 +167,7 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
         public IReadOnlyList<(string alias, string type)> AliasedUsings => Processor._aliasedUsings;
         public HashSet<string> Usings => Processor._usings;
         public string? Namespace => null;
-        public ILogger<LibrarySetDefinitionsToCSharpCodeProcessor> Logger => Processor._logger;
+        public ILogger<CSharpCodeGenerator> Logger => Processor._logger;
 
         public IEnumerable<(string name, Stream stream)> WriteLibraries()
         {

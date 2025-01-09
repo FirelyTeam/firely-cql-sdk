@@ -33,7 +33,7 @@ classDiagram
 
     namespace CodeGeneration {
         class TypeToCSharpConverter { }
-        class LibrarySetDefinitionsToCSharpCodeProcessor { }
+        class CSharpCodeGenerator { }
         class AssemblyCompiler { }
     }
 
@@ -90,8 +90,8 @@ classDiagram
 
     ModelInspector ..> TypeConverter : injected  
 
-    TypeToCSharpConverter ..> LibrarySetDefinitionsToCSharpCodeProcessor : injected
-    TypeResolver ..> LibrarySetDefinitionsToCSharpCodeProcessor : injected
+    TypeToCSharpConverter ..> CSharpCodeGenerator : injected
+    TypeResolver ..> CSharpCodeGenerator : injected
 
     TypeResolver ..> AssemblyCompiler : injected
 
