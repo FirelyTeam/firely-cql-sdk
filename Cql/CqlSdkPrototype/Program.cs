@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Reflection;
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Elm;
@@ -7,6 +8,7 @@ using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Logging;
 using CqlSdkPrototype.Runtime;
 using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Model;
 using Hl7.Cql.Runtime.Hosting;
@@ -29,8 +31,8 @@ internal class Program
         var logger = serviceProvider.GetLogger<Program>();
         var cqlApi = CqlApi.Create(serviceProvider);
 
-        // InvokeCqlFromExamplesFolder(logger, cqlApi);
-        // InvokeCqlExample(logger, cqlApi);
+        InvokeCqlFromExamplesFolder(logger, cqlApi);
+        InvokeCqlExample(logger, cqlApi);
         // foreach (var librarySetName in (string[])["Authoring", "CMS", "Demo"])
         //     VerboseExample(logger, cqlApi, librarySetName);
         VerboseExample(logger, cqlApi, "Authoring");
@@ -56,9 +58,9 @@ internal class Program
 
         var cqlContext = FhirCqlContext.ForBundle();
 
-        // We need a disposable invokation scope, which contains the AssemblyLoadContext and the related library Assemblies.
-        using var invokationScope = cqlApi.CreateInvokationScope();
-        logger.LogInformation("{dump}", invokationScope.DumpLibraryDeclarations());
+        // We need a disposable invocation scope, which contains the AssemblyLoadContext and the related library Assemblies.
+        using var invocationScope = cqlApi.CreateInvocationScope();
+        logger.LogInformation("{dump}", invocationScope.DumpLibraryDeclarations());
         Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
         Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
         Debug.Assert(Invoke("CqlStringOperatorsTest-1.0.000", "Combine.CombineABCSepDash") is "a-b-c");
@@ -66,7 +68,7 @@ internal class Program
         object? Invoke(string libraryName, string declarationName)
         {
             var libraryIdentifier = CqlVersionedLibraryIdentifier.Parse(libraryName);
-            var result = invokationScope.InvokeLibraryDeclaration(libraryIdentifier, declarationName, cqlContext);
+            var result = invocationScope.InvokeLibraryDefinition(libraryIdentifier, declarationName, cqlContext);
             return result;
         }
     }
@@ -88,8 +90,8 @@ internal class Program
             define private Three: 1 + 2
             """);
         var cqlContext = FhirCqlContext.ForBundle();
-        using var invokationScope = cqlApi.AddCqlLibraryString(cqlLibraryString).CreateInvokationScope();
-        var result = invokationScope.InvokeLibraryDeclaration(libraryIdentifier, "Three", cqlContext);
+        using var invokationScope = cqlApi.AddCqlLibraryString(cqlLibraryString).CreateInvocationScope();
+        var result = invokationScope.InvokeLibraryDefinition(libraryIdentifier, "Three", cqlContext);
         Debug.Assert(result is 3);
     }
 
@@ -135,8 +137,19 @@ internal class Program
                      .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
             ;
 
-        DumpFirstElmAndCSharp(cqlApi, elmApi, logger);
-        // ExecuteLibrary(serviceProvider, dirs, cqlApi, elmApi, fhirJsonPocoDeserializer);
+        cqlApi.TryGetFirstElmFileLines()
+              .Switch(t => logger.LogInformation(
+                          $"""
+                           First 50 C# lines for {t.id}:
+                           {t.elmJson.TakeLines(50)}
+                           """));
+
+        elmApi.TryGetFirstCSharpFileLines()
+              .Switch(t => logger.LogInformation(
+                          $"""
+                           First 50 C# lines for {t.id}:
+                           {t.cSharpSourceCode.TakeLines(50)}
+                           """));
     }
 
     // private static void ExecuteLibrary(
@@ -217,32 +230,25 @@ internal class Program
                               .BuildServiceProvider();
         return serviceProvider;
     }
+}
 
-    private static void DumpFirstElmAndCSharp<TCqlApi, TElmApi>(
-        TCqlApi cqlApi,
-        TElmApi elmApi,
-        ILogger<Program> logger)
-        where TCqlApi : ICqlApiExtensible<TCqlApi>
+file static class X
+{
+    public static Maybe<(CqlVersionedLibraryIdentifier id, string cSharpSourceCode)> TryGetFirstCSharpFileLines<TElmApi>(
+        this TElmApi elmApi)
         where TElmApi : IElmApiExtensible<TElmApi>
     {
-        if (cqlApi.Entries.TryFirst(kv => kv.Value.ElmLibrary is not null)
-            is {HasValue:true, Value:{Key:{} id1, Value.ElmLibrary:{} lib}})
-        {
-            logger.LogInformation(
-                $"""
-                 First 50 C# lines for {id1}:
-                 {lib.SerializeToJson().TakeLines(50)}
-                 """);
-        }
+        return elmApi.Entries
+              .TryGetFirst(kv => kv.Value.CSharpSourceCode is not null)
+              .TryReturn(kv => (kv.Key, kv.Value.CSharpSourceCode!));
+    }
 
-        if (elmApi.Entries.TryFirst(kv => kv.Value.CSharpSourceCode is not null)
-            is { HasValue: true, Value: { Key:{} id2, Value.CSharpSourceCode:{} csharp } })
-        {
-            logger.LogInformation(
-                $"""
-                 First 50 C# lines for {id2}:
-                 {csharp.TakeLines(50)}
-                 """);
-        }
+    public static Maybe<(CqlVersionedLibraryIdentifier id, string elmJson)> TryGetFirstElmFileLines<TCqlApi>(
+        this TCqlApi cqlApi)
+        where TCqlApi : ICqlApiExtensible<TCqlApi>
+    {
+        return cqlApi.Entries
+              .TryGetFirst(kv => kv.Value.ElmLibrary is not null)
+              .TryReturn(kv => (kv.Key, kv.Value.ElmLibrary!.SerializeToJson()!));
     }
 }

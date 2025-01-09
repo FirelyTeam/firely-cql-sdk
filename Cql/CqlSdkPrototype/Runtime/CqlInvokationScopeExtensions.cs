@@ -7,7 +7,7 @@ namespace CqlSdkPrototype.Runtime;
 
 internal static class CqlInvokationScopeExtensions
 {
-    public static object? InvokeLibraryDeclaration(
+    public static object? InvokeLibraryDefinition(
         this CqlInvokationScope invokationScope,
         CqlVersionedLibraryIdentifier versionedLibraryIdentifier,
         string declaration,

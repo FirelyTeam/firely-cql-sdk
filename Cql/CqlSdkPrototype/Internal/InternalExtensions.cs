@@ -59,17 +59,7 @@ internal static class InternalExtensions
         return value >= lowerIncl && value < upperExcl;
     }
 
-    public static Maybe<T> TryFirst<T>(this IEnumerable<T> source)
-    {
-        return TryFirstImpl(source, out var value) ? value : Maybe.NoValue;
-    }
-
-    public static Maybe<T> TryFirst<T>(this IEnumerable<T> source, Func<T, bool> predicate)
-    {
-        return TryFirstImpl(source, predicate, out var value) ? value : Maybe.NoValue;
-    }
-
-    private static bool TryFirstImpl<TSource>(this IEnumerable<TSource> source, out TSource? found)
+    public static Maybe<TSource> TryGetFirst<TSource>(this IEnumerable<TSource> source)
     {
         if (source == null)
             throw new ArgumentNullException(nameof(source));
@@ -78,8 +68,7 @@ internal static class InternalExtensions
         {
             if (list.Count > 0)
             {
-                found = list[0];
-                return true;
+                return list[0];
             }
         }
         else
@@ -87,34 +76,39 @@ internal static class InternalExtensions
             using IEnumerator<TSource> e = source.GetEnumerator();
             if (e.MoveNext())
             {
-                found = e.Current;
-                return true;
+                return e.Current;
             }
         }
 
-        found = default;
-        return false;
+        return Maybe<TSource>.NoValue;
     }
 
-    private static bool TryFirstImpl<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, out TSource? found)
+    public static Maybe<TSource> TryGetFirst<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
     {
         if (source == null)
             throw new ArgumentNullException(nameof(source));
 
-        if (predicate == null)
-            throw new ArgumentNullException(nameof(predicate));
-
-        foreach (TSource element in source)
+        if (source is IList<TSource> list)
         {
-            if (predicate(element))
+            if (list.Count > 0)
             {
-                found = element;
-                return true;
+                return list[0];
+            }
+        }
+        else
+        {
+            using var e = source.GetEnumerator();
+            if (e.MoveNext())
+            {
+                return e.Current;
             }
         }
 
-        found = default;
-        return false;
+        return Maybe<TSource>.NoValue;
+    }
+
+    private static bool TryFirstImpl<TSource>(this IEnumerable<TSource> source, out TSource? found)
+    {
     }
 
     public static LogExceptionMessageAction GetLogExceptionMessageAction(
@@ -133,24 +127,76 @@ public delegate void LogExceptionMessageAction(
 internal readonly record struct Maybe
 {
     public static Maybe NoValue => default;
+    public static Maybe<T> Of<T>(T value) => new(value);
 }
 
-internal readonly record struct Maybe<T>
+internal readonly record struct Maybe<T>(T Value)
 {
     public static Maybe<T> NoValue => default;
-
-    private readonly T _value;
-
-    private Maybe(T Value)
-    {
-        this._value = Value;
-    }
-
-    public T Value => HasValue ? _value : throw new InvalidOperationException("No value");
-
-    public bool HasValue { get; } = true;
-
     public static implicit operator Maybe<T>(T? value) => value is null ? NoValue : new(value);
     public static implicit operator Maybe<T>(Maybe value) => NoValue;
+
+    private readonly T _value = Value;
+    public T Value => HasValue ? _value : throw new InvalidOperationException("No value");
+
+    public bool HasValue { get; } = true; // Do NOT change this code to: HasValue => true
+
+    public bool TryGetValue(out T value)
+    {
+        value = _value;
+        return HasValue;
+    }
+
+    public void Switch(
+        Action<T>? withValue = null,
+        Action? withoutValue = null)
+    {
+        if (TryGetValue(out var value))
+            withValue?.Invoke(value);
+        else
+            withoutValue?.Invoke();
+    }
+
+    public TR Return<TR>(
+        Func<T, TR>? withValue = null,
+        Func<TR>? withoutValue = null,
+        TR defaultValue = default!)
+    {
+        var result = TryGetValue(out var value) switch
+        {
+            true when withValue is not null     => withValue!(value),
+            false when withoutValue is not null => withoutValue!(),
+            _                                   => defaultValue
+        };
+        return result;
+    }
+
+    public Maybe<TR> TryReturn<TR>(
+        Func<T, TR>? withValue = null,
+        Func<TR>? withoutValue = null,
+        Maybe<TR> defaultValue = default!)
+    {
+        var result = TryGetValue(out var value) switch
+        {
+            true when withValue is not null     => withValue!(value),
+            false when withoutValue is not null => withoutValue!(),
+            _                                   => defaultValue
+        };
+        return result;
+    }
+
+    public Maybe<TR> TryReturn<TR>(
+        Func<T, Maybe<TR>>? withValue = null,
+        Func<Maybe<TR>>? withoutValue = null,
+        Maybe<TR> defaultValue = default!)
+    {
+        var result = TryGetValue(out var value) switch
+        {
+            true when withValue is not null     => withValue!(value),
+            false when withoutValue is not null => withoutValue!(),
+            _                                   => defaultValue
+        };
+        return result;
+    }
 }
 

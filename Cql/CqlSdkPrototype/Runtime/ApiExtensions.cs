@@ -35,7 +35,7 @@ internal static class ApiExtensions
         return cqlRuntimeApi;
     }
 
-    public static CqlInvokationScope CreateInvokationScope<TElmApi>(
+    public static CqlInvokationScope CreateInvocationScope<TElmApi>(
         this TElmApi elmApi)
         where TElmApi : IElmApiExtensible<TElmApi>
     {
@@ -45,12 +45,12 @@ internal static class ApiExtensions
                .CreateInvokationScope();
     }
 
-    public static CqlInvokationScope CreateInvokationScope(
+    public static CqlInvokationScope CreateInvocationScope(
         this CqlApi cqlApi)
     {
         return cqlApi
                .ConvertToElm()
                .CreateElmApi()
-               .CreateInvokationScope();
+               .CreateInvocationScope();
     }
 }
