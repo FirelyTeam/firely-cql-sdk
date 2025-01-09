@@ -1,5 +1,4 @@
 ﻿using CqlSdkPrototype.Advanced;
-using Hl7.Cql.Elm;
 
 namespace CqlSdkPrototype.Cql.Extensibility;
 
@@ -14,6 +13,5 @@ public interface ICqlApiExtensible<out TSelf> :
 {
     CqlApiOptions Options { get; }
     TSelf AddCqlLibraries(IEnumerable<CqlLibraryString> libraries);
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, Library> GetElmLibraries();
     IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlTranslationEntry> Entries { get; }
 }

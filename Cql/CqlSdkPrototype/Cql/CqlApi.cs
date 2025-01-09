@@ -2,7 +2,6 @@
 using CqlSdkPrototype.Cql.Extensibility;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CqlToElm;
-using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +21,7 @@ public class CqlApi :
     private readonly State _state;
     ILogger<CqlApi> ILogAccessor<CqlApi>.Logger => _state.Logger;
     CqlApiOptions ICqlApiExtensible<CqlApi>.Options => _state.Options;
+    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlTranslationEntry> ICqlApiExtensible<CqlApi>.Entries => _state.Entries;
 
     private readonly record struct State(
         CqlApiOptions Options,
@@ -155,17 +155,6 @@ public class CqlApi :
             entriesBuilder[versionedIdentifier] = cqlTranslationEntry with { ElmLibrary = library };
         }
     }
-
-    #endregion
-
-    #region Output (ELM Libraries)
-
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlTranslationEntry> ICqlApiExtensible<CqlApi>.Entries => _state.Entries;
-
-    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, Library> GetElmLibraries() =>
-        _state.Entries
-              .Where(kv => kv.Value.ElmLibrary is not null)
-              .ToDictionary(kv => kv.Key, kv => kv.Value.ElmLibrary!);
 
     #endregion
 }

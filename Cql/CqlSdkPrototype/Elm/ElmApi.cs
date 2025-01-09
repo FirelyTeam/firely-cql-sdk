@@ -22,6 +22,7 @@ public class ElmApi :
     private readonly State _state;
     ILogger<ElmApi> ILogAccessor<ElmApi>.Logger => _state.Logger;
     ElmApiOptions IElmApiExtensible<ElmApi>.Options => _state.Options;
+    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmCompilationEntry> IElmApiExtensible<ElmApi>.Entries => _state.Entries;
 
     private readonly record struct State(
         ElmApiOptions Options,
@@ -157,19 +158,6 @@ public class ElmApi :
                    ? WithEntries(entries: entriesBuilder.ToImmutable())
                    : this;
     }
-
-    #endregion
-
-    #region Output (C#, .NET Assembly Bytes)
-
-    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmCompilationEntry> Entries => _state.Entries;
-
-    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, AssemblyData> GetAssemblyBinaries() =>
-        _state.Entries
-              .Where(kv => kv.Value.AssemblyBinary is not null)
-              .ToDictionary(kv => kv.Key,
-                            kv => new AssemblyData(kv.Value.AssemblyBinary!, kv.Value.DebugSymbolsBinary),
-                            CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
 
     #endregion
 }
