@@ -29,208 +29,149 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
     #region Definition Methods
 
-
     [CqlDeclaration("Abnormal Weight Loss and Malnutrition")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.177")]
     public CqlValueSet Abnormal_Weight_Loss_and_Malnutrition(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.177", default);
-
-
 
     [CqlDeclaration("Anticoagulants for All Indications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.22")]
     public CqlValueSet Anticoagulants_for_All_Indications(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.22", default);
 
-
-
     [CqlDeclaration("Antidepressants")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.163")]
     public CqlValueSet Antidepressants(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.163", default);
-
-
 
     [CqlDeclaration("Antihypertensives")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.164")]
     public CqlValueSet Antihypertensives(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.164", default);
 
-
-
     [CqlDeclaration("Central Nervous System Depressants")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.134")]
     public CqlValueSet Central_Nervous_System_Depressants(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.134", default);
-
-
 
     [CqlDeclaration("Coagulation Disorders")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.23")]
     public CqlValueSet Coagulation_Disorders(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.23", default);
 
-
-
     [CqlDeclaration("Delirium, Dementia, and Other Psychoses")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.168")]
     public CqlValueSet Delirium__Dementia__and_Other_Psychoses(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.168", default);
-
-
 
     [CqlDeclaration("Depression")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.169")]
     public CqlValueSet Depression(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.169", default);
 
-
-
     [CqlDeclaration("Diuretics")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.170")]
     public CqlValueSet Diuretics(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.170", default);
-
-
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
     public CqlValueSet Emergency_Department_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
-
-
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
     public CqlValueSet Encounter_Inpatient(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
-
-
 
     [CqlDeclaration("Epilepsy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.171")]
     public CqlValueSet Epilepsy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.171", default);
 
-
-
     [CqlDeclaration("Inpatient Falls")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.171")]
     public CqlValueSet Inpatient_Falls(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.171", default);
-
-
 
     [CqlDeclaration("Leukemia or Lymphoma")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.136")]
     public CqlValueSet Leukemia_or_Lymphoma(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.136", default);
 
-
-
     [CqlDeclaration("Liver Disease Moderate to Severe")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.137")]
     public CqlValueSet Liver_Disease_Moderate_to_Severe(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.137", default);
-
-
 
     [CqlDeclaration("Major Injuries")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.174")]
     public CqlValueSet Major_Injuries(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.174", default);
 
-
-
     [CqlDeclaration("Malignant Bone Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.24")]
     public CqlValueSet Malignant_Bone_Disease(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.24", default);
-
-
 
     [CqlDeclaration("Moderate Injuries")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.205")]
     public CqlValueSet Moderate_Injuries(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.205", default);
 
-
-
     [CqlDeclaration("Neurologic Movement and Related Disorders")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.174")]
     public CqlValueSet Neurologic_Movement_and_Related_Disorders(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.174", default);
-
-
 
     [CqlDeclaration("Not Present On Admission or Documentation Insufficient to Determine")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.198")]
     public CqlValueSet Not_Present_On_Admission_or_Documentation_Insufficient_to_Determine(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.198", default);
 
-
-
     [CqlDeclaration("Obesity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.162")]
     public CqlValueSet Obesity(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.162", default);
-
-
 
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
     public CqlValueSet Observation_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
 
-
-
     [CqlDeclaration("Opioids")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.120")]
     public CqlValueSet Opioids(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.120", default);
-
-
 
     [CqlDeclaration("Osteoporosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1200.147")]
     public CqlValueSet Osteoporosis(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1200.147", default);
 
-
-
     [CqlDeclaration("Peripheral Neuropathy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.175")]
     public CqlValueSet Peripheral_Neuropathy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.175", default);
-
-
 
     [CqlDeclaration("Present on Admission or Clinically Undetermined")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197")]
     public CqlValueSet Present_on_Admission_or_Clinically_Undetermined(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1147.197", default);
 
-
-
     [CqlDeclaration("Stroke")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.176")]
     public CqlValueSet Stroke(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.176", default);
-
-
 
     [CqlDeclaration("Suicide Attempt")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.130")]
     public CqlValueSet Suicide_Attempt(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.130", default);
 
-
-
     [CqlDeclaration("Body mass index (BMI) [Ratio]")]
     public CqlCode Body_mass_index__BMI___Ratio_(CqlContext context) =>
         new CqlCode("39156-5", "http://loinc.org", default, default);
-
-
 
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC(CqlContext context)
@@ -241,8 +182,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
@@ -255,8 +194,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return (CqlInterval<CqlDateTime>)d_;
     }
 
-
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -265,8 +202,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return b_;
     }
-
-
 
     [CqlDeclaration("Qualifying Encounter")]
     public IEnumerable<Encounter> Qualifying_Encounter(CqlContext context)
@@ -292,8 +227,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context)
     {
@@ -302,8 +235,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return a_;
     }
 
-
-
     [CqlDeclaration("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context)
     {
@@ -311,8 +242,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Encounter with a Fall Not Present on Admission")]
     public IEnumerable<Encounter> Encounter_with_a_Fall_Not_Present_on_Admission(CqlContext context)
@@ -366,8 +295,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Encounter with a Fall Event")]
     public IEnumerable<Encounter> Encounter_with_a_Fall_Event(CqlContext context)
     {
@@ -399,8 +326,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Encounter where a Fall Occurred")]
     public IEnumerable<Encounter> Encounter_where_a_Fall_Occurred(CqlContext context)
     {
@@ -410,8 +335,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return c_;
     }
-
-
 
     [CqlDeclaration("Encounter where a Fall and Major Injury Occurred")]
     public IEnumerable<Encounter> Encounter_where_a_Fall_and_Major_Injury_Occurred(CqlContext context)
@@ -487,8 +410,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Encounter with a Fall Present on Admission")]
     public IEnumerable<Encounter> Encounter_with_a_Fall_Present_on_Admission(CqlContext context)
     {
@@ -540,8 +461,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return c_;
     }
-
-
 
     [CqlDeclaration("Risk Variable All Encounter Diagnoses with Rank and POA Indication")]
     public IEnumerable<(CqlTupleMetadata, string encounterId, IEnumerable<ResourceReference> condition, IEnumerable<int?> rank, IEnumerable<Encounter.DiagnosisComponent> POA)?> Risk_Variable_All_Encounter_Diagnoses_with_Rank_and_POA_Indication(CqlContext context)
@@ -623,8 +542,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return d_;
     }
 
-
-
     [CqlDeclaration("Risk Variable All Encounter Principal Diagnoses")]
     public IEnumerable<(CqlTupleMetadata, Encounter encounter, CqlConcept condition)?> Risk_Variable_All_Encounter_Principal_Diagnoses(CqlContext context)
     {
@@ -643,8 +560,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return d_;
     }
-
-
 
     [CqlDeclaration("Risk Variable Body Mass Index (BMI)")]
     public IEnumerable<CqlQuantity> Risk_Variable_Body_Mass_Index__BMI_(CqlContext context)
@@ -702,8 +617,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return h_;
     }
 
-
-
     [CqlDeclaration("Risk Variable Encounter with Abnormal Weight Loss or Malnutrition Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Abnormal_Weight_Loss_or_Malnutrition_Present_on_Admission(CqlContext context)
     {
@@ -755,8 +668,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return c_;
     }
-
-
 
     [CqlDeclaration("Risk Variable Encounter with Anticoagulant Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Anticoagulant_Active_at_Admission(CqlContext context)
@@ -840,8 +751,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Risk Variable Encounter with Anticoagulant Administration During Encounter")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Anticoagulant_Administration_During_Encounter(CqlContext context)
     {
@@ -884,8 +793,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return c_;
     }
-
-
 
     [CqlDeclaration("Risk Variable Encounter with Antidepressant Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Antidepressant_Active_at_Admission(CqlContext context)
@@ -969,8 +876,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Risk Variable Encounter with Antihypertensive Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Antihypertensive_Active_at_Admission(CqlContext context)
     {
@@ -1052,8 +957,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return c_;
     }
-
-
 
     [CqlDeclaration("Risk Variable Encounter with CNS Depressant Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_CNS_Depressant_Active_at_Admission(CqlContext context)
@@ -1137,8 +1040,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Risk Variable Encounter with Coagulation Disorder Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Coagulation_Disorder_Present_on_Admission(CqlContext context)
     {
@@ -1190,8 +1091,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return c_;
     }
-
-
 
     [CqlDeclaration("Risk Variable Encounter with Delirium, Dementia or Other Psychosis Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Delirium__Dementia_or_Other_Psychosis_Present_on_Admission(CqlContext context)
@@ -1245,8 +1144,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Risk Variable Encounter with Depression Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Depression_Present_on_Admission(CqlContext context)
     {
@@ -1298,8 +1195,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return c_;
     }
-
-
 
     [CqlDeclaration("Risk Variable Encounter with Diuretic Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Diuretic_Active_at_Admission(CqlContext context)
@@ -1383,8 +1278,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Risk Variable Encounter with Epilepsy Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Epilepsy_Present_on_Admission(CqlContext context)
     {
@@ -1437,8 +1330,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Risk Variable Encounter with High BMI by Exam")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_High_BMI_by_Exam(CqlContext context)
     {
@@ -1475,8 +1366,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return c_;
     }
-
-
 
     [CqlDeclaration("Risk Variable Encounter with Leukemia or Lymphoma Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Leukemia_or_Lymphoma_Present_on_Admission(CqlContext context)
@@ -1530,8 +1419,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Risk Variable Encounter with Liver Disease Moderate to Severe Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Liver_Disease_Moderate_to_Severe_Present_on_Admission(CqlContext context)
     {
@@ -1584,8 +1471,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Risk Variable Encounter with Low BMI")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Low_BMI(CqlContext context)
     {
@@ -1622,8 +1507,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return c_;
     }
-
-
 
     [CqlDeclaration("Risk Variable Encounter with Malignant Bone Disease Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Malignant_Bone_Disease_Present_on_Admission(CqlContext context)
@@ -1677,8 +1560,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Risk Variable Encounter with Neurologic Disorder Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Neurologic_Disorder_Present_on_Admission(CqlContext context)
     {
@@ -1731,8 +1612,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Risk Variable Encounter with Obesity Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Obesity_Present_on_Admission(CqlContext context)
     {
@@ -1784,8 +1663,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return c_;
     }
-
-
 
     [CqlDeclaration("Risk Variable Encounter with Opioid Medication Active at Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Opioid_Medication_Active_at_Admission(CqlContext context)
@@ -1869,8 +1746,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Risk Variable Encounter with Osteoporosis Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Osteoporosis_Present_on_Admission(CqlContext context)
     {
@@ -1922,8 +1797,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return c_;
     }
-
-
 
     [CqlDeclaration("Risk Variable Encounter with Peripheral Neuropathy Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Peripheral_Neuropathy_Present_on_Admission(CqlContext context)
@@ -1977,8 +1850,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Risk Variable Encounter with Stroke Present on Admission")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Stroke_Present_on_Admission(CqlContext context)
     {
@@ -2031,8 +1902,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Risk Variable Encounter with Suicide Attempt")]
     public IEnumerable<Encounter> Risk_Variable_Encounter_with_Suicide_Attempt(CqlContext context)
     {
@@ -2067,8 +1936,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -2076,8 +1943,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return a_;
     }
-
-
 
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
@@ -2087,8 +1952,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -2096,8 +1959,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return a_;
     }
-
-
 
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
@@ -2107,8 +1968,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return a_;
     }
 
-
-
     [CqlDeclaration("Denominator Exclusions")]
     public IEnumerable<Encounter> Denominator_Exclusions(CqlContext context)
     {
@@ -2116,8 +1975,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Encounter where a Fall and Moderate Injury Occurred")]
     public IEnumerable<Encounter> Encounter_where_a_Fall_and_Moderate_Injury_Occurred(CqlContext context)
@@ -2193,8 +2050,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
-
     [CqlDeclaration("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context)
     {
@@ -2205,7 +2060,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return c_;
     }
 
-
     public int? Denominator_Observation(CqlContext context, Encounter QualifyingEncounter)
     {
         CqlInterval<CqlDateTime> a_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
@@ -2215,7 +2069,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return e_;
     }
-
 
     public int? Numerator_Observation(CqlContext context, Encounter QualifyingEncounter)
     {
@@ -2235,7 +2088,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return d_;
     }
-
 
     #endregion Definition Methods
 

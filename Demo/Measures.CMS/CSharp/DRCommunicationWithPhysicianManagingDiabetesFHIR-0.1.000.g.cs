@@ -29,132 +29,93 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
 
     #region Definition Methods
 
-
     [CqlDeclaration("Care Services in Long-Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
     public CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
-
-
 
     [CqlDeclaration("Diabetic Retinopathy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327")]
     public CqlValueSet Diabetic_Retinopathy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327", default);
 
-
-
     [CqlDeclaration("Level of Severity of Retinopathy Findings")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1283")]
     public CqlValueSet Level_of_Severity_of_Retinopathy_Findings(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1283", default);
-
-
 
     [CqlDeclaration("Macular Edema Findings Present")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1320")]
     public CqlValueSet Macular_Edema_Findings_Present(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1320", default);
 
-
-
     [CqlDeclaration("Macular Exam")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1251")]
     public CqlValueSet Macular_Exam(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1251", default);
-
-
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
     public CqlValueSet Medical_Reason(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
 
-
-
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
     public CqlValueSet Nursing_Facility_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
-
-
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
     public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
-
-
     [CqlDeclaration("Ophthalmological Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285")]
     public CqlValueSet Ophthalmological_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", default);
-
-
 
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
     public CqlValueSet Outpatient_Consultation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
 
-
-
     [CqlDeclaration("Patient Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008")]
     public CqlValueSet Patient_Reason(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008", default);
-
-
 
     [CqlDeclaration("Macular edema absent (situation)")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.2.1391")]
     public CqlValueSet Macular_edema_absent__situation_(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.2.1391", default);
 
-
-
     [CqlDeclaration("Healthcare professional (occupation)")]
     public CqlCode Healthcare_professional__occupation_(CqlContext context) =>
         new CqlCode("223366009", "http://snomed.info/sct", default, default);
-
-
 
     [CqlDeclaration("Medical practitioner (occupation)")]
     public CqlCode Medical_practitioner__occupation_(CqlContext context) =>
         new CqlCode("158965000", "http://snomed.info/sct", default, default);
 
-
-
     [CqlDeclaration("Ophthalmologist (occupation)")]
     public CqlCode Ophthalmologist__occupation_(CqlContext context) =>
         new CqlCode("422234006", "http://snomed.info/sct", default, default);
-
-
 
     [CqlDeclaration("Optometrist (occupation)")]
     public CqlCode Optometrist__occupation_(CqlContext context) =>
         new CqlCode("28229004", "http://snomed.info/sct", default, default);
 
-
-
     [CqlDeclaration("Physician (occupation)")]
     public CqlCode Physician__occupation_(CqlContext context) =>
         new CqlCode("309343006", "http://snomed.info/sct", default, default);
-
-
 
     [CqlDeclaration("virtual")]
     public CqlCode @virtual(CqlContext context) =>
         new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
-
-
     [CqlDeclaration("AMB")]
     public CqlCode AMB(CqlContext context) =>
         new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-
-
 
     [CqlDeclaration("SNOMEDCT")]
     public CqlCode[] SNOMEDCT(CqlContext context)
@@ -170,8 +131,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
         return a_;
     }
 
-
-
     [CqlDeclaration("ActCode")]
     public CqlCode[] ActCode(CqlContext context)
     {
@@ -182,8 +141,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
@@ -196,8 +153,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
         return (CqlInterval<CqlDateTime>)d_;
     }
 
-
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -207,8 +162,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
         return b_;
     }
 
-
-
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -216,8 +169,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
 
         return a_;
     }
-
-
 
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
@@ -227,8 +178,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -237,8 +186,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -246,8 +193,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Qualifying Encounter During Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_During_Measurement_Period(CqlContext context)
@@ -290,8 +235,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
 
         return p_;
     }
-
-
 
     [CqlDeclaration("Diabetic Retinopathy Encounter")]
     public IEnumerable<Encounter> Diabetic_Retinopathy_Encounter(CqlContext context)
@@ -341,8 +284,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
         return c_;
     }
 
-
-
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -361,8 +302,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
 
         return l_;
     }
-
-
 
     [CqlDeclaration("Macular Exam Performed")]
     public IEnumerable<Observation> Macular_Exam_Performed(CqlContext context)
@@ -416,8 +355,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
         return f_;
     }
 
-
-
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -428,8 +365,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
 
         return d_;
     }
-
-
 
     [CqlDeclaration("Level of Severity of Retinopathy Findings Communicated")]
     public IEnumerable<Communication> Level_of_Severity_of_Retinopathy_Findings_Communicated(CqlContext context)
@@ -477,8 +412,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
         return g_;
     }
 
-
-
     [CqlDeclaration("Macular Edema Absence Communicated")]
     public IEnumerable<Communication> Macular_Edema_Absence_Communicated(CqlContext context)
     {
@@ -524,8 +457,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
 
         return g_;
     }
-
-
 
     [CqlDeclaration("Macular Edema Presence Communicated")]
     public IEnumerable<Communication> Macular_Edema_Presence_Communicated(CqlContext context)
@@ -573,8 +504,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
         return g_;
     }
 
-
-
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -589,8 +518,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
 
         return h_;
     }
-
-
 
     [CqlDeclaration("Medical or Patient Reason for Not Communicating Level of Severity of Retinopathy")]
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Level_of_Severity_of_Retinopathy(CqlContext context)
@@ -639,8 +566,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
         return k_;
     }
 
-
-
     [CqlDeclaration("Medical or Patient Reason for Not Communicating Absence of Macular Edema")]
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Absence_of_Macular_Edema(CqlContext context)
     {
@@ -687,8 +612,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
 
         return k_;
     }
-
-
 
     [CqlDeclaration("Medical or Patient Reason for Not Communicating Presence of Macular Edema")]
     public IEnumerable<Communication> Medical_or_Patient_Reason_for_Not_Communicating_Presence_of_Macular_Edema(CqlContext context)
@@ -737,8 +660,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
         return k_;
     }
 
-
-
     [CqlDeclaration("Denominator Exceptions")]
     public bool? Denominator_Exceptions(CqlContext context)
     {
@@ -754,8 +675,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
         return h_;
     }
 
-
-
     [CqlDeclaration("Results of Dilated Macular or Fundus Exam Communicated")]
     public bool? Results_of_Dilated_Macular_or_Fundus_Exam_Communicated(CqlContext context)
     {
@@ -770,7 +689,6 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
 
         return h_;
     }
-
 
     #endregion Definition Methods
 

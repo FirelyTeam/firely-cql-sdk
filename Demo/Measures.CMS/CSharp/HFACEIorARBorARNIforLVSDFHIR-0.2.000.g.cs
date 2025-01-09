@@ -29,93 +29,66 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
 
     #region Definition Methods
 
-
     [CqlDeclaration("ACE Inhibitor or ARB or ARNI Ingredient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1489")]
     public CqlValueSet ACE_Inhibitor_or_ARB_or_ARNI_Ingredient(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1489", default);
-
-
 
     [CqlDeclaration("ACE Inhibitor or ARB or ARNI")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1139")]
     public CqlValueSet ACE_Inhibitor_or_ARB_or_ARNI(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1139", default);
 
-
-
     [CqlDeclaration("Allergy to ACE Inhibitor or ARB")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1211")]
     public CqlValueSet Allergy_to_ACE_Inhibitor_or_ARB(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1211", default);
-
-
 
     [CqlDeclaration("Intolerance to ACE Inhibitor or ARB")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1212")]
     public CqlValueSet Intolerance_to_ACE_Inhibitor_or_ARB(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1212", default);
 
-
-
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
     public CqlValueSet Medical_Reason(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
-
-
 
     [CqlDeclaration("Patient Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008")]
     public CqlValueSet Patient_Reason(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1008", default);
 
-
-
     [CqlDeclaration("Patient Reason for ACE Inhibitor or ARB Decline")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1140")]
     public CqlValueSet Patient_Reason_for_ACE_Inhibitor_or_ARB_Decline(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1140", default);
-
-
 
     [CqlDeclaration("Pregnancy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378")]
     public CqlValueSet Pregnancy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378", default);
 
-
-
     [CqlDeclaration("Moderate or Severe LVSD")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1090")]
     public CqlValueSet Moderate_or_Severe_LVSD(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1090", default);
 
-
-
     [CqlDeclaration("Acute renal failure caused by angiotensin-converting-enzyme inhibitor (disorder)")]
     public CqlCode Acute_renal_failure_caused_by_angiotensin_converting_enzyme_inhibitor__disorder_(CqlContext context) =>
         new CqlCode("422593004", "http://snomed.info/sct", default, default);
-
-
 
     [CqlDeclaration("Substance with angiotensin II receptor antagonist mechanism of action (substance)")]
     public CqlCode Substance_with_angiotensin_II_receptor_antagonist_mechanism_of_action__substance_(CqlContext context) =>
         new CqlCode("372913009", "http://snomed.info/sct", default, default);
 
-
-
     [CqlDeclaration("Substance with angiotensin-converting enzyme inhibitor mechanism of action (substance)")]
     public CqlCode Substance_with_angiotensin_converting_enzyme_inhibitor_mechanism_of_action__substance_(CqlContext context) =>
         new CqlCode("372733002", "http://snomed.info/sct", default, default);
 
-
-
     [CqlDeclaration("Substance with neprilysin inhibitor mechanism of action (substance)")]
     public CqlCode Substance_with_neprilysin_inhibitor_mechanism_of_action__substance_(CqlContext context) =>
         new CqlCode("786886009", "http://snomed.info/sct", default, default);
-
-
 
     [CqlDeclaration("SNOMEDCT")]
     public CqlCode[] SNOMEDCT(CqlContext context)
@@ -130,8 +103,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
         return a_;
     }
 
-
-
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
@@ -143,8 +114,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
         return (CqlInterval<CqlDateTime>)d_;
     }
 
-
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -154,8 +123,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
         return b_;
     }
 
-
-
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -163,8 +130,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
@@ -176,8 +141,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
 
         return d_;
     }
-
-
 
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
@@ -192,8 +155,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
 
         return g_;
     }
-
-
 
     [CqlDeclaration("Has ACEI or ARB or ARNI Ordered")]
     public bool? Has_ACEI_or_ARB_or_ARNI_Ordered(CqlContext context)
@@ -212,8 +173,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
         return e_;
     }
 
-
-
     [CqlDeclaration("Is Currently Taking ACEI or ARB or ARNI")]
     public bool? Is_Currently_Taking_ACEI_or_ARB_or_ARNI(CqlContext context)
     {
@@ -231,8 +190,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
         return e_;
     }
 
-
-
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -242,8 +199,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
 
         return c_;
     }
-
-
 
     [CqlDeclaration("Has Allergy or Intolerance to ACEI or ARB or ARNI Ingredient")]
     public bool? Has_Allergy_or_Intolerance_to_ACEI_or_ARB_or_ARNI_Ingredient(CqlContext context)
@@ -274,8 +229,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
         return q_;
     }
 
-
-
     [CqlDeclaration("Has Diagnosis of Allergy or Intolerance to ACEI or ARB")]
     public bool? Has_Diagnosis_of_Allergy_or_Intolerance_to_ACEI_or_ARB(CqlContext context)
     {
@@ -295,8 +248,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
 
         return h_;
     }
-
-
 
     [CqlDeclaration("Has Diagnosis of Pregnancy")]
     public bool? Has_Diagnosis_of_Pregnancy(CqlContext context)
@@ -339,8 +290,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
         return e_;
     }
 
-
-
     [CqlDeclaration("Has Diagnosis of Renal Failure Due to ACEI")]
     public bool? Has_Diagnosis_of_Renal_Failure_Due_to_ACEI(CqlContext context)
     {
@@ -359,8 +308,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
         return f_;
     }
 
-
-
     [CqlDeclaration("Denominator Exceptions")]
     [CqlTag("commentedOut", "\"Has Medical or Patient Reason for Not Ordering ACEI or ARB or ARNI\"")]
     [CqlTag("commentedOutReason", "Negation issue noted in https://github.com/cqframework/cql-execution/issues/296, which is tied to https://oncprojectracking.healthit.gov/support/browse/BONNIEMAT-1455")]
@@ -377,8 +324,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
         return g_;
     }
 
-
-
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -386,8 +331,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
 
         return a_;
     }
-
-
 
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
@@ -397,8 +340,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -407,8 +348,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -416,8 +355,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Has Medical or Patient Reason for Not Ordering ACEI or ARB or ARNI")]
     public bool? Has_Medical_or_Patient_Reason_for_Not_Ordering_ACEI_or_ARB_or_ARNI(CqlContext context)
@@ -502,7 +439,6 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
 
         return g_;
     }
-
 
     #endregion Definition Methods
 

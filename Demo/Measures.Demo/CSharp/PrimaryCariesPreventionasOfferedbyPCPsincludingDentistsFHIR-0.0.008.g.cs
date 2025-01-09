@@ -29,75 +29,54 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     #region Definition Methods
 
-
     [CqlDeclaration("Clinical Oral Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003")]
     public CqlValueSet Clinical_Oral_Evaluation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003", default);
-
-
 
     [CqlDeclaration("Fluoride Varnish Application for Children")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002")]
     public CqlValueSet Fluoride_Varnish_Application_for_Children(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1002", default);
 
-
-
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
     public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
-
-
 
     [CqlDeclaration("Online Assessments")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
     public CqlValueSet Online_Assessments(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
-
-
     [CqlDeclaration("Preventive Care - Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
     public CqlValueSet Preventive_Care___Established_Office_Visit__0_to_17(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default);
-
-
 
     [CqlDeclaration("Preventive Care Services - Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
     public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
-
-
     [CqlDeclaration("Preventive Care Services-Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
     public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
-
-
 
     [CqlDeclaration("Preventive Care- Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
     public CqlValueSet Preventive_Care__Initial_Office_Visit__0_to_17(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default);
 
-
-
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
     public CqlValueSet Telephone_Visits(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
-
-
     [CqlDeclaration("Birth date")]
     public CqlCode Birth_date(CqlContext context) =>
         new CqlCode("21112-8", "http://loinc.org", default, default);
-
-
 
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC(CqlContext context)
@@ -109,8 +88,6 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         return a_;
     }
 
-
-
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
@@ -118,8 +95,6 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
         return (CqlInterval<CqlDateTime>)a_;
     }
-
-
 
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
@@ -130,8 +105,6 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         return b_;
     }
 
-
-
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context)
     {
@@ -139,8 +112,6 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
         return a_;
     }
-
-
 
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context)
@@ -150,8 +121,6 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context)
     {
@@ -160,8 +129,6 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -169,8 +136,6 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
@@ -216,8 +181,6 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         return y_;
     }
 
-
-
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -245,8 +208,6 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         return v_;
     }
 
-
-
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -255,8 +216,6 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         return a_;
     }
 
-
-
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
@@ -264,8 +223,6 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Stratification 1")]
     public bool? Stratification_1(CqlContext context)
@@ -291,8 +248,6 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         return s_;
     }
 
-
-
     [CqlDeclaration("Stratification 2")]
     public bool? Stratification_2(CqlContext context)
     {
@@ -310,8 +265,6 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
         return j_;
     }
 
-
-
     [CqlDeclaration("Stratification 3")]
     public bool? Stratification_3(CqlContext context)
     {
@@ -328,8 +281,6 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
         return j_;
     }
-
-
 
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
@@ -354,7 +305,6 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
         return e_;
     }
-
 
     #endregion Definition Methods
 

@@ -29,118 +29,85 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
 
     #region Definition Methods
 
-
     [CqlDeclaration("Cancer Related Pain")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.180")]
     public CqlValueSet Cancer_Related_Pain(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.180", default);
-
-
 
     [CqlDeclaration("Discharge To Acute Care Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87")]
     public CqlValueSet Discharge_To_Acute_Care_Facility(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", default);
 
-
-
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
     public CqlValueSet Ethnicity(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", default);
-
-
 
     [CqlDeclaration("Hospice Care Referral or Admission")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.365")]
     public CqlValueSet Hospice_Care_Referral_or_Admission(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.365", default);
 
-
-
     [CqlDeclaration("Left Against Medical Advice")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308")]
     public CqlValueSet Left_Against_Medical_Advice(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", default);
-
-
 
     [CqlDeclaration("Medications for Opioid Use Disorder (MOUD)")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1046.269")]
     public CqlValueSet Medications_for_Opioid_Use_Disorder__MOUD_(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1046.269", default);
 
-
-
     [CqlDeclaration("ONC Administrative Sex")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1")]
     public CqlValueSet ONC_Administrative_Sex(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", default);
-
-
 
     [CqlDeclaration("Opioid Medication Assisted Treatment (MAT)")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.177")]
     public CqlValueSet Opioid_Medication_Assisted_Treatment__MAT_(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.177", default);
 
-
-
     [CqlDeclaration("Opioid Use Disorder")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.171")]
     public CqlValueSet Opioid_Use_Disorder(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.171", default);
-
-
 
     [CqlDeclaration("Palliative or Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579")]
     public CqlValueSet Palliative_or_Hospice_Care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1579", default);
 
-
-
     [CqlDeclaration("Patient Expired")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309")]
     public CqlValueSet Patient_Expired(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", default);
-
-
 
     [CqlDeclaration("Payer Type")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591")]
     public CqlValueSet Payer_Type(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", default);
 
-
-
     [CqlDeclaration("Race")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836")]
     public CqlValueSet Race(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", default);
-
-
 
     [CqlDeclaration("Schedule II, III and IV Opioid Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1046.241")]
     public CqlValueSet Schedule_II__III_and_IV_Opioid_Medications(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1046.241", default);
 
-
-
     [CqlDeclaration("Schedule IV Benzodiazepines")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1125.1")]
     public CqlValueSet Schedule_IV_Benzodiazepines(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1125.1", default);
 
-
-
     [CqlDeclaration("Sickle Cell Disease with and without Crisis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.175")]
     public CqlValueSet Sickle_Cell_Disease_with_and_without_Crisis(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.175", default);
-
-
 
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC(CqlContext context)
@@ -150,8 +117,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
@@ -164,8 +129,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
         return (CqlInterval<CqlDateTime>)d_;
     }
 
-
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -174,8 +137,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
 
         return b_;
     }
-
-
 
     [CqlDeclaration("Inpatient Encounter with Age Greater than or Equal to 18")]
     public IEnumerable<Encounter> Inpatient_Encounter_with_Age_Greater_than_or_Equal_to_18(CqlContext context)
@@ -200,8 +161,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
 
         return c_;
     }
-
-
 
     [CqlDeclaration("Opioid at Discharge")]
     public IEnumerable<MedicationRequest> Opioid_at_Discharge(CqlContext context)
@@ -242,8 +201,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
         return i_;
     }
 
-
-
     [CqlDeclaration("Benzodiazepine at Discharge")]
     public IEnumerable<MedicationRequest> Benzodiazepine_at_Discharge(CqlContext context)
     {
@@ -281,8 +238,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
         return f_;
     }
 
-
-
     [CqlDeclaration("Inpatient Encounters with an Opioid or Benzodiazepine at Discharge")]
     public IEnumerable<Encounter> Inpatient_Encounters_with_an_Opioid_or_Benzodiazepine_at_Discharge(CqlContext context)
     {
@@ -314,8 +269,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
         return c_;
     }
 
-
-
     [CqlDeclaration("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context)
     {
@@ -324,8 +277,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
         return a_;
     }
 
-
-
     [CqlDeclaration("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context)
     {
@@ -333,8 +284,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Treatment for Opioid Use Disorders")]
     public IEnumerable<MedicationRequest> Treatment_for_Opioid_Use_Disorders(CqlContext context)
@@ -374,8 +323,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
         return g_;
     }
 
-
-
     [CqlDeclaration("Intervention Palliative or Hospice Care")]
     public IEnumerable<object> Intervention_Palliative_or_Hospice_Care(CqlContext context)
     {
@@ -386,8 +333,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
 
         return e_;
     }
-
-
 
     [CqlDeclaration("Denominator Exclusion")]
     public IEnumerable<Encounter> Denominator_Exclusion(CqlContext context)
@@ -515,8 +460,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
         return c_;
     }
 
-
-
     [CqlDeclaration("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context)
     {
@@ -581,8 +524,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
         return c_;
     }
 
-
-
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -590,8 +531,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
 
         return a_;
     }
-
-
 
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
@@ -601,8 +540,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -611,8 +548,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -620,7 +555,6 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
 
         return a_;
     }
-
 
     #endregion Definition Methods
 

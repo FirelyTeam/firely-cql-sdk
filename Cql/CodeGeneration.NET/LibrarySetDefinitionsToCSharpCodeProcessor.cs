@@ -370,7 +370,7 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
                     if (first)
                     {
                         IndentedTextWriter.WriteLine("#region Definition Methods");
-                        //IndentedTextWriter.WriteLine();
+                        IndentedTextWriter.WriteLine();
                         first = false;
                     }
                     definitions.TryGetTags(libraryName, definition, signature, out var tags);
@@ -465,7 +465,6 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
 
             if (isDef)
             {
-                IndentedTextWriter.WriteLine();
                 IndentedTextWriter.WriteLine($"[CqlDeclaration({CqlName.QuoteString()})]");
                 WriteTags();
 
@@ -485,7 +484,6 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
             var definitionToCSharpCodeProcessor = new LibraryDefinitionToCSharpCodeProcessor(tupleMetadataBuilder, libraryName, LibraryWriter.LibrarySetWriter.TypeToCSharpConverter, IndentedTextWriter.Indent);
             var definition = definitionToCSharpCodeProcessor.ProcessDefinition(overload, MethodName, "public");
             IndentedTextWriter.WriteLine(definition);
-            IndentedTextWriter.WriteLine();
         }
 
         private void WriteTags()

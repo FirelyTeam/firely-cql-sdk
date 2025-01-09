@@ -29,7 +29,6 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
 
     #region Definition Methods
 
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -38,7 +37,6 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
 
         return b_;
     }
-
 
     public CqlInterval<CqlDateTime> Normalize_Onset(CqlContext context, object onset)
     {
@@ -252,7 +250,6 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         return a_();
     }
 
-
     public CqlInterval<CqlDateTime> Normalize_Abatement(CqlContext context, object abatement)
     {
         CqlInterval<CqlDateTime> a_()
@@ -465,7 +462,6 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         return a_();
     }
 
-
     public CqlInterval<CqlDateTime> Prevalence_Period(CqlContext context, Condition condition)
     {
         DataType a_ = condition?.Onset;
@@ -478,7 +474,6 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
 
         return g_;
     }
-
 
     public CqlInterval<CqlDateTime> Normalize_Interval(CqlContext context, object choice)
     {
@@ -641,7 +636,6 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         return a_();
     }
 
-
     public string GetId(CqlContext context, string uri)
     {
         string a_()
@@ -669,10 +663,8 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         return a_();
     }
 
-
     public IEnumerable<CqlCode> VS_Cast_Function(CqlContext context, IEnumerable<CqlCode> VSet) =>
         VSet;
-
 
     public (CqlTupleMetadata, CqlDate NextDate, IEnumerable<CqlDate> NewList, int? IndexofNewDate)? First_Dates_per_31_Day_Periods(CqlContext context, IEnumerable<CqlDate> DateList)
     {
@@ -1321,7 +1313,6 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
 
         return l_;
     }
-
 
     #endregion Definition Methods
 

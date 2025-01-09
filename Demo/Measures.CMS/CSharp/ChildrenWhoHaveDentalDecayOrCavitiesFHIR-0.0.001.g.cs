@@ -29,65 +29,46 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary
 
     #region Definition Methods
 
-
     [CqlDeclaration("Clinical Oral Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003")]
     public CqlValueSet Clinical_Oral_Evaluation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003", default);
-
-
 
     [CqlDeclaration("Dental Caries")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1004")]
     public CqlValueSet Dental_Caries(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1004", default);
 
-
-
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207")]
     public CqlValueSet Discharged_to_Health_Care_Facility_for_Hospice_Care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", default);
-
-
 
     [CqlDeclaration("Discharged to Home for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
     public CqlValueSet Discharged_to_Home_for_Hospice_Care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", default);
 
-
-
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
     public CqlValueSet Encounter_Inpatient(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
-
-
     [CqlDeclaration("Discharge to healthcare facility for hospice care (procedure)")]
     public CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure_(CqlContext context) =>
         new CqlCode("428371000124100", "http://snomed.info/sct", default, default);
-
-
 
     [CqlDeclaration("Discharge to home for hospice care (procedure)")]
     public CqlCode Discharge_to_home_for_hospice_care__procedure_(CqlContext context) =>
         new CqlCode("428361000124107", "http://snomed.info/sct", default, default);
 
-
-
     [CqlDeclaration("Hospice care [Minimum Data Set]")]
     public CqlCode Hospice_care__Minimum_Data_Set_(CqlContext context) =>
         new CqlCode("45755-6", "http://loinc.org", default, default);
 
-
-
     [CqlDeclaration("Yes (qualifier value)")]
     public CqlCode Yes__qualifier_value_(CqlContext context) =>
         new CqlCode("373066001", "http://snomed.info/sct", default, default);
-
-
 
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC(CqlContext context)
@@ -98,8 +79,6 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary
 
         return a_;
     }
-
-
 
     [CqlDeclaration("SNOMEDCT")]
     public CqlCode[] SNOMEDCT(CqlContext context)
@@ -113,8 +92,6 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary
         return a_;
     }
 
-
-
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
@@ -126,8 +103,6 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary
         return (CqlInterval<CqlDateTime>)d_;
     }
 
-
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -136,8 +111,6 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary
 
         return b_;
     }
-
-
 
     [CqlDeclaration("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
@@ -160,8 +133,6 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary
         return e_;
     }
 
-
-
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -182,8 +153,6 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary
         return m_;
     }
 
-
-
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -192,8 +161,6 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary
         return a_;
     }
 
-
-
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
@@ -201,8 +168,6 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
@@ -223,8 +188,6 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary
         return e_;
     }
 
-
-
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -232,8 +195,6 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary
 
         return a_;
     }
-
-
 
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
@@ -243,8 +204,6 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -253,8 +212,6 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -262,7 +219,6 @@ public partial class ChildrenWhoHaveDentalDecayOrCavitiesFHIR_0_0_001 : ILibrary
 
         return a_;
     }
-
 
     #endregion Definition Methods
 

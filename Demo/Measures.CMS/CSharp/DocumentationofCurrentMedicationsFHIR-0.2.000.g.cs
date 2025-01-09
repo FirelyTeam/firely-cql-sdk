@@ -29,26 +29,19 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
     #region Definition Methods
 
-
     [CqlDeclaration("Encounter to Document Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1834")]
     public CqlValueSet Encounter_to_Document_Medications(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1834", default);
-
-
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
     public CqlValueSet Medical_Reason(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
 
-
-
     [CqlDeclaration("Documentation of current medications (procedure)")]
     public CqlCode Documentation_of_current_medications__procedure_(CqlContext context) =>
         new CqlCode("428191000124101", "http://snomed.info/sct", default, default);
-
-
 
     [CqlDeclaration("SNOMEDCT")]
     public CqlCode[] SNOMEDCT(CqlContext context)
@@ -59,8 +52,6 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
@@ -73,8 +64,6 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
         return (CqlInterval<CqlDateTime>)d_;
     }
 
-
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -84,8 +73,6 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
         return b_;
     }
 
-
-
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -93,8 +80,6 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
         return a_;
     }
-
-
 
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
@@ -104,8 +89,6 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -114,8 +97,6 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -123,8 +104,6 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Qualifying Encounter during day of Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Encounter_during_day_of_Measurement_Period(CqlContext context)
@@ -150,8 +129,6 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
         return d_;
     }
 
-
-
     [CqlDeclaration("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context)
     {
@@ -160,8 +137,6 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
         return a_;
     }
 
-
-
     [CqlDeclaration("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context)
     {
@@ -169,8 +144,6 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context)
@@ -209,8 +182,6 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
         return c_;
     }
-
-
 
     [CqlDeclaration("Denominator Exceptions")]
     public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context)
@@ -277,7 +248,6 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
         return c_;
     }
-
 
     #endregion Definition Methods
 

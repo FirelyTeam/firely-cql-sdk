@@ -29,91 +29,64 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
 
     #region Definition Methods
 
-
     [CqlDeclaration("HIV")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1003")]
     public CqlValueSet HIV(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1003", default);
-
-
 
     [CqlDeclaration("Human Immunodeficiency Virus (HIV) Laboratory Test Codes (Ab and Ag)")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1056.50")]
     public CqlValueSet Human_Immunodeficiency_Virus__HIV__Laboratory_Test_Codes__Ab_and_Ag_(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1056.50", default);
 
-
-
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
     public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
-
-
 
     [CqlDeclaration("Preventive Care Services - Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
     public CqlValueSet Preventive_Care_Services___Established_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
-
-
     [CqlDeclaration("Preventive Care Services, Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
     public CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default);
-
-
 
     [CqlDeclaration("Preventive Care Services-Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
     public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
-
-
     [CqlDeclaration("Preventive Care, Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
     public CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default);
 
-
-
     [CqlDeclaration("Birth date")]
     public CqlCode Birth_date(CqlContext context) =>
         new CqlCode("21112-8", "http://loinc.org", default, default);
-
-
 
     [CqlDeclaration("HIV 1 and 2 tests - Meaningful Use set")]
     public CqlCode HIV_1_and_2_tests___Meaningful_Use_set(CqlContext context) =>
         new CqlCode("75622-1", "http://loinc.org", default, default);
 
-
-
     [CqlDeclaration("AMB")]
     public CqlCode AMB(CqlContext context) =>
         new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-
-
 
     [CqlDeclaration("active")]
     public CqlCode active(CqlContext context) =>
         new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
-
-
     [CqlDeclaration("refuted")]
     public CqlCode refuted(CqlContext context) =>
         new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
-
-
     [CqlDeclaration("Dead (finding)")]
     public CqlCode Dead__finding_(CqlContext context) =>
         new CqlCode("419099009", "http://snomed.info/sct", default, default);
-
-
 
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC(CqlContext context)
@@ -126,8 +99,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
         return a_;
     }
 
-
-
     [CqlDeclaration("ActCode")]
     public CqlCode[] ActCode(CqlContext context)
     {
@@ -137,8 +108,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
 
         return a_;
     }
-
-
 
     [CqlDeclaration("ConditionClinicalStatusCodes")]
     public CqlCode[] ConditionClinicalStatusCodes(CqlContext context)
@@ -150,8 +119,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
         return a_;
     }
 
-
-
     [CqlDeclaration("ConditionVerificationStatus")]
     public CqlCode[] ConditionVerificationStatus(CqlContext context)
     {
@@ -162,8 +129,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
         return a_;
     }
 
-
-
     [CqlDeclaration("SNOMEDCT")]
     public CqlCode[] SNOMEDCT(CqlContext context)
     {
@@ -173,8 +138,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
@@ -187,8 +150,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
         return (CqlInterval<CqlDateTime>)d_;
     }
 
-
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -197,8 +158,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
 
         return b_;
     }
-
-
 
     [CqlDeclaration("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
@@ -236,8 +195,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
         return p_;
     }
 
-
-
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -258,8 +215,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
         return m_;
     }
 
-
-
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -267,8 +222,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Has HIV Test Performed")]
     public bool? Has_HIV_Test_Performed(CqlContext context)
@@ -326,8 +279,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
         return i_;
     }
 
-
-
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -335,8 +286,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
@@ -366,8 +315,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
         return e_;
     }
 
-
-
     [CqlDeclaration("Patient Expired")]
     public bool? Patient_Expired(CqlContext context)
     {
@@ -381,8 +328,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
         return f_;
     }
 
-
-
     [CqlDeclaration("Denominator Exceptions")]
     public bool? Denominator_Exceptions(CqlContext context)
     {
@@ -390,8 +335,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
 
         return a_;
     }
-
-
 
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
@@ -401,8 +344,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -410,8 +351,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
 
         return a_;
     }
-
-
 
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
@@ -421,8 +360,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -430,7 +367,6 @@ public partial class HIVScreeningFHIR_0_2_000 : ILibrary, ISingleton<HIVScreenin
 
         return a_;
     }
-
 
     #endregion Definition Methods
 

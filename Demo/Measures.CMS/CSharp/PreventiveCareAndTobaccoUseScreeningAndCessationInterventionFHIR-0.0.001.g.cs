@@ -29,218 +29,155 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
 
     #region Definition Methods
 
-
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
     public CqlValueSet Annual_Wellness_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default);
-
-
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
     public CqlValueSet Home_Healthcare_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
-
-
     [CqlDeclaration("Limited Life Expectancy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1259")]
     public CqlValueSet Limited_Life_Expectancy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1259", default);
-
-
 
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
     public CqlValueSet Medical_Reason(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
 
-
-
     [CqlDeclaration("Nutrition Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1006")]
     public CqlValueSet Nutrition_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1006", default);
-
-
 
     [CqlDeclaration("Occupational Therapy Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1011")]
     public CqlValueSet Occupational_Therapy_Evaluation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1011", default);
 
-
-
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
     public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
-
-
 
     [CqlDeclaration("Ophthalmological Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285")]
     public CqlValueSet Ophthalmological_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", default);
 
-
-
     [CqlDeclaration("Physical Therapy Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1022")]
     public CqlValueSet Physical_Therapy_Evaluation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1022", default);
-
-
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
     public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
-
-
     [CqlDeclaration("Preventive Care Services Group Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027")]
     public CqlValueSet Preventive_Care_Services_Group_Counseling(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027", default);
-
-
 
     [CqlDeclaration("Preventive Care Services Individual Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026")]
     public CqlValueSet Preventive_Care_Services_Individual_Counseling(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", default);
 
-
-
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
     public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
-
-
 
     [CqlDeclaration("Preventive Care Services, Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
     public CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default);
 
-
-
     [CqlDeclaration("Preventive Care, Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
     public CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default);
-
-
 
     [CqlDeclaration("Psych Visit Diagnostic Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492")]
     public CqlValueSet Psych_Visit_Diagnostic_Evaluation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", default);
 
-
-
     [CqlDeclaration("Psych Visit Psychotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496")]
     public CqlValueSet Psych_Visit_Psychotherapy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", default);
-
-
 
     [CqlDeclaration("Psychoanalysis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1141")]
     public CqlValueSet Psychoanalysis(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1141", default);
 
-
-
     [CqlDeclaration("Speech and Hearing Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1530")]
     public CqlValueSet Speech_and_Hearing_Evaluation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1530", default);
-
-
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
     public CqlValueSet Telephone_Visits(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
-
-
     [CqlDeclaration("Tobacco Non User")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1189")]
     public CqlValueSet Tobacco_Non_User(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1189", default);
-
-
 
     [CqlDeclaration("Tobacco Use Cessation Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.509")]
     public CqlValueSet Tobacco_Use_Cessation_Counseling(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.509", default);
 
-
-
     [CqlDeclaration("Tobacco Use Cessation Pharmacotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1190")]
     public CqlValueSet Tobacco_Use_Cessation_Pharmacotherapy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1190", default);
-
-
 
     [CqlDeclaration("Tobacco Use Screening")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1278")]
     public CqlValueSet Tobacco_Use_Screening(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1278", default);
 
-
-
     [CqlDeclaration("Tobacco User")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1170")]
     public CqlValueSet Tobacco_User(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1170", default);
-
-
 
     [CqlDeclaration("Virtual Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
     public CqlValueSet Virtual_Encounter(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
-
-
     [CqlDeclaration("Health behavior assessment, or re-assessment (ie, health-focused clinical interview, behavioral observations, clinical decision making)")]
     public CqlCode Health_behavior_assessment__or_re_assessment__ie__health_focused_clinical_interview__behavioral_observations__clinical_decision_making_(CqlContext context) =>
         new CqlCode("96156", "http://www.ama-assn.org/go/cpt", default, default);
-
-
 
     [CqlDeclaration("Health behavior intervention, individual, face-to-face; initial 30 minutes")]
     public CqlCode Health_behavior_intervention__individual__face_to_face__initial_30_minutes(CqlContext context) =>
         new CqlCode("96158", "http://www.ama-assn.org/go/cpt", default, default);
 
-
-
     [CqlDeclaration("Postoperative follow-up visit, normally included in the surgical package, to indicate that an evaluation and management service was performed during a postoperative period for a reason(s) related to the original procedure")]
     public CqlCode Postoperative_follow_up_visit__normally_included_in_the_surgical_package__to_indicate_that_an_evaluation_and_management_service_was_performed_during_a_postoperative_period_for_a_reason_s__related_to_the_original_procedure(CqlContext context) =>
         new CqlCode("99024", "http://www.ama-assn.org/go/cpt", default, default);
-
-
 
     [CqlDeclaration("Tobacco abuse counseling")]
     public CqlCode Tobacco_abuse_counseling(CqlContext context) =>
         new CqlCode("Z71.6", "http://hl7.org/fhir/sid/icd-10-cm", default, default);
 
-
-
     [CqlDeclaration("Unlisted preventive medicine service")]
     public CqlCode Unlisted_preventive_medicine_service(CqlContext context) =>
         new CqlCode("99429", "http://www.ama-assn.org/go/cpt", default, default);
-
-
 
     [CqlDeclaration("CPT")]
     public CqlCode[] CPT(CqlContext context)
@@ -255,8 +192,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         return a_;
     }
 
-
-
     [CqlDeclaration("ICD10CM")]
     public CqlCode[] ICD10CM(CqlContext context)
     {
@@ -266,8 +201,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
@@ -280,8 +213,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         return (CqlInterval<CqlDateTime>)d_;
     }
 
-
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -290,8 +221,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
 
         return b_;
     }
-
-
 
     [CqlDeclaration("Qualifying Visit During Measurement Period")]
     public IEnumerable<Encounter> Qualifying_Visit_During_Measurement_Period(CqlContext context)
@@ -395,8 +324,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         return aq_;
     }
 
-
-
     [CqlDeclaration("Preventive Visit During Measurement Period")]
     public IEnumerable<Encounter> Preventive_Visit_During_Measurement_Period(CqlContext context)
     {
@@ -490,8 +417,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         return ah_;
     }
 
-
-
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -515,8 +440,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         return p_;
     }
 
-
-
     [CqlDeclaration("Denominator 1")]
     public bool? Denominator_1(CqlContext context)
     {
@@ -524,8 +447,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Most Recent Tobacco Use Screening Indicates Tobacco User")]
     public Observation Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_User(CqlContext context)
@@ -573,8 +494,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         return l_;
     }
 
-
-
     [CqlDeclaration("Denominator 2")]
     public bool? Denominator_2(CqlContext context)
     {
@@ -586,8 +505,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         return d_;
     }
 
-
-
     [CqlDeclaration("Denominator 3")]
     public bool? Denominator_3(CqlContext context)
     {
@@ -595,8 +512,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Most Recent Tobacco Use Screening Indicates Tobacco Non User")]
     public Observation Most_Recent_Tobacco_Use_Screening_Indicates_Tobacco_Non_User(CqlContext context)
@@ -644,8 +559,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         return l_;
     }
 
-
-
     [CqlDeclaration("Numerator 1")]
     public bool? Numerator_1(CqlContext context)
     {
@@ -657,8 +570,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
 
         return e_;
     }
-
-
 
     [CqlDeclaration("Tobacco Cessation Counseling Given")]
     public IEnumerable<object> Tobacco_Cessation_Counseling_Given(CqlContext context)
@@ -705,8 +616,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         return k_;
     }
 
-
-
     [CqlDeclaration("Tobacco Cessation Pharmacotherapy Ordered")]
     public IEnumerable<MedicationRequest> Tobacco_Cessation_Pharmacotherapy_Ordered(CqlContext context)
     {
@@ -733,8 +642,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
 
         return h_;
     }
-
-
 
     [CqlDeclaration("Active Pharmacotherapy for Tobacco Cessation")]
     public IEnumerable<MedicationRequest> Active_Pharmacotherapy_for_Tobacco_Cessation(CqlContext context)
@@ -769,8 +676,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         return h_;
     }
 
-
-
     [CqlDeclaration("Numerator 2")]
     public bool? Numerator_2(CqlContext context)
     {
@@ -785,8 +690,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
 
         return h_;
     }
-
-
 
     [CqlDeclaration("Numerator 3")]
     public bool? Numerator_3(CqlContext context)
@@ -809,8 +712,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         return n_;
     }
 
-
-
     [CqlDeclaration("Denominator Exclusion")]
     public bool? Denominator_Exclusion(CqlContext context)
     {
@@ -818,8 +719,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
 
         return a_;
     }
-
-
 
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
@@ -829,8 +728,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -838,8 +735,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
 
         return a_;
     }
-
-
 
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
@@ -849,8 +744,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -858,7 +751,6 @@ public partial class PreventiveCareAndTobaccoUseScreeningAndCessationInterventio
 
         return a_;
     }
-
 
     #endregion Definition Methods
 

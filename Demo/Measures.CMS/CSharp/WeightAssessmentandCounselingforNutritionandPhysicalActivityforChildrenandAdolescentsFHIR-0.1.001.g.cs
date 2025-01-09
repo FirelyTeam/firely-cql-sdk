@@ -29,76 +29,55 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
     #region Definition Methods
 
-
     [CqlDeclaration("Counseling for Nutrition")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.195.12.1003")]
     public CqlValueSet Counseling_for_Nutrition(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.195.12.1003", default);
-
-
 
     [CqlDeclaration("Counseling for Physical Activity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1035")]
     public CqlValueSet Counseling_for_Physical_Activity(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1035", default);
 
-
-
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
     public CqlValueSet Home_Healthcare_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
-
-
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
     public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
-
-
     [CqlDeclaration("Pregnancy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378")]
     public CqlValueSet Pregnancy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378", default);
-
-
 
     [CqlDeclaration("Preventive Care Services Group Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027")]
     public CqlValueSet Preventive_Care_Services_Group_Counseling(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1027", default);
 
-
-
     [CqlDeclaration("Preventive Care Services, Initial Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022")]
     public CqlValueSet Preventive_Care_Services__Initial_Office_Visit__0_to_17(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1022", default);
-
-
 
     [CqlDeclaration("Preventive Care Services Individual Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026")]
     public CqlValueSet Preventive_Care_Services_Individual_Counseling(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", default);
 
-
-
     [CqlDeclaration("Preventive Care, Established Office Visit, 0 to 17")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024")]
     public CqlValueSet Preventive_Care__Established_Office_Visit__0_to_17(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1024", default);
 
-
-
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
     public CqlValueSet Telephone_Visits(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
-
-
 
     [CqlDeclaration("UCUM")]
     public CqlCode[] UCUM(CqlContext context)
@@ -109,8 +88,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
         return a_;
     }
 
-
-
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC(CqlContext context)
     {
@@ -120,8 +97,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
         return a_;
     }
 
-
-
     [CqlDeclaration("ObservationCategoryCodes")]
     public CqlCode[] ObservationCategoryCodes(CqlContext context)
     {
@@ -130,8 +105,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
@@ -144,8 +117,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
         return (CqlInterval<CqlDateTime>)d_;
     }
 
-
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -155,8 +126,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
         return b_;
     }
 
-
-
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -164,8 +133,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
         return a_;
     }
-
-
 
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
@@ -175,8 +142,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -185,8 +150,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
         return a_;
     }
 
-
-
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -194,8 +157,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
@@ -236,8 +197,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
         return w_;
     }
 
-
-
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -258,8 +217,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
         return m_;
     }
 
-
-
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -267,8 +224,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Pregnancy Diagnosis Which Overlaps Measurement Period")]
     public IEnumerable<Condition> Pregnancy_Diagnosis_Which_Overlaps_Measurement_Period(CqlContext context)
@@ -288,8 +243,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
         return d_;
     }
 
-
-
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
@@ -300,8 +253,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
         return d_;
     }
-
-
 
     [CqlDeclaration("BMI Percentile in Measurement Period")]
     public IEnumerable<Observation> BMI_Percentile_in_Measurement_Period(CqlContext context)
@@ -327,8 +278,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
         return d_;
     }
 
-
-
     [CqlDeclaration("Height in Measurement Period")]
     public IEnumerable<Observation> Height_in_Measurement_Period(CqlContext context)
     {
@@ -352,8 +301,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
         return d_;
     }
-
-
 
     [CqlDeclaration("Weight in Measurement Period")]
     public IEnumerable<Observation> Weight_in_Measurement_Period(CqlContext context)
@@ -379,8 +326,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
         return d_;
     }
 
-
-
     [CqlDeclaration("Numerator 1")]
     public bool? Numerator_1(CqlContext context)
     {
@@ -395,8 +340,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
         return h_;
     }
-
-
 
     [CqlDeclaration("Numerator 2")]
     public bool? Numerator_2(CqlContext context)
@@ -420,8 +363,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
         return f_;
     }
 
-
-
     [CqlDeclaration("Numerator 3")]
     public bool? Numerator_3(CqlContext context)
     {
@@ -444,8 +385,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
         return f_;
     }
 
-
-
     [CqlDeclaration("Stratifaction 1")]
     public bool? Stratifaction_1(CqlContext context)
     {
@@ -463,8 +402,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
         return j_;
     }
 
-
-
     [CqlDeclaration("Stratifaction 2")]
     public bool? Stratifaction_2(CqlContext context)
     {
@@ -481,7 +418,6 @@ public partial class WeightAssessmentandCounselingforNutritionandPhysicalActivit
 
         return j_;
     }
-
 
     #endregion Definition Methods
 

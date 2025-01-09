@@ -29,13 +29,10 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     #region Definition Methods
 
-
     [CqlDeclaration("Marital Status")]
     [CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status")]
     public CqlValueSet Marital_Status(CqlContext context) =>
         new CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status", default);
-
-
 
     [CqlDeclaration("AgeThreshold")]
     public int? AgeThreshold(CqlContext context)
@@ -44,8 +41,6 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
         return (int?)a_;
     }
-
-
 
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
@@ -56,8 +51,6 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
         return b_;
     }
 
-
-
     [CqlDeclaration("CurrentDate")]
     public CqlDate CurrentDate(CqlContext context)
     {
@@ -65,8 +58,6 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
         return a_;
     }
-
-
 
     [CqlDeclaration("Patient Filter")]
     public Patient Patient_Filter(CqlContext context)
@@ -102,8 +93,6 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
         return e_;
     }
 
-
-
     [CqlDeclaration("Patient Birthdate")]
     public Date Patient_Birthdate(CqlContext context)
     {
@@ -112,8 +101,6 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
         return b_;
     }
-
-
 
     [CqlDeclaration("Patient Age in Years")]
     public int? Patient_Age_in_Years(CqlContext context)
@@ -126,8 +113,6 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
         return d_;
     }
 
-
-
     [CqlDeclaration("Patient Older Than AgeThreshold")]
     public bool? Patient_Older_Than_AgeThreshold(CqlContext context)
     {
@@ -137,7 +122,6 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
         return c_;
     }
-
 
     #endregion Definition Methods
 
