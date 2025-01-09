@@ -10,7 +10,6 @@
 using System.Globalization;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packaging;
-using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;

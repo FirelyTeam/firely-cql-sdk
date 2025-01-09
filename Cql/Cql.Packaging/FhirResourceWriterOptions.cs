@@ -7,7 +7,7 @@
  */
 using Microsoft.Extensions.Configuration;
 
-namespace Hl7.Cql.Packaging.PostProcessors;
+namespace Hl7.Cql.Packaging;
 
 
 /// <summary>
