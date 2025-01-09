@@ -90,8 +90,8 @@ internal class Program
             define private Three: 1 + 2
             """);
         var cqlContext = FhirCqlContext.ForBundle();
-        using var invokationScope = cqlApi.AddCqlLibraryString(cqlLibraryString).CreateInvocationScope();
-        var result = invokationScope.InvokeLibraryDefinition(libraryIdentifier, "Three", cqlContext);
+        using var invocationScope = cqlApi.AddCqlLibraryString(cqlLibraryString).CreateInvocationScope();
+        var result = invocationScope.InvokeLibraryDefinition(libraryIdentifier, "Three", cqlContext);
         Debug.Assert(result is 3);
     }
 
@@ -123,7 +123,7 @@ internal class Program
                          or "NCQATerminology"
                          or "NCQAStatus"*/
                  )
-                 .ConvertToElm()
+                 .Translate()
                  .SaveElmFileToDirectory(dirs.ElmOutDirectory)
                  ;
 
@@ -132,7 +132,7 @@ internal class Program
                      .LoadElmFromCqlApi(cqlApi)
                      //.LoadElmFile(elmDirIn, ElmLibraryIdentifier.Parse("FHIRHelpers")) //
                      //.LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
-                     .CompileAssemblies()
+                     .Compile()
                      .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
                      .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
             ;
@@ -236,7 +236,7 @@ file static class X
 {
     public static Maybe<(CqlVersionedLibraryIdentifier id, string cSharpSourceCode)> TryGetFirstCSharpFileLines<TElmApi>(
         this TElmApi elmApi)
-        where TElmApi : IElmApiExtensible<TElmApi>
+        where TElmApi : IElmApi<TElmApi>
     {
         return elmApi.Entries
               .TryGetFirst(kv => kv.Value.CSharpSourceCode is not null)
@@ -245,7 +245,7 @@ file static class X
 
     public static Maybe<(CqlVersionedLibraryIdentifier id, string elmJson)> TryGetFirstElmFileLines<TCqlApi>(
         this TCqlApi cqlApi)
-        where TCqlApi : ICqlApiExtensible<TCqlApi>
+        where TCqlApi : ICqlApi<TCqlApi>
     {
         return cqlApi.Entries
               .TryGetFirst(kv => kv.Value.ElmLibrary is not null)

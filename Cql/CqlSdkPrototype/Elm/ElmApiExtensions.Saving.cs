@@ -3,13 +3,13 @@ using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Elm;
 
-public static class ElmApiSaveExtensions
+public static partial class ElmApiExtensions
 {
 
     public static TElmApi SaveCSharpFilesToDirectory<TElmApi>(
         this TElmApi elmApi,
         DirectoryInfo directory)
-        where TElmApi : IElmApiExtensible<TElmApi>
+        where TElmApi : IElmApi<TElmApi>
     {
         if (!directory.Exists)
             directory.Create();
@@ -30,7 +30,7 @@ public static class ElmApiSaveExtensions
     public static TElmApi SaveAssemblyBinariesToDirectory<TElmApi>(
         this TElmApi elmApi,
         DirectoryInfo directory)
-        where TElmApi : IElmApiExtensible<TElmApi>
+        where TElmApi : IElmApi<TElmApi>
     {
         if (!directory.Exists)
             directory.Create();

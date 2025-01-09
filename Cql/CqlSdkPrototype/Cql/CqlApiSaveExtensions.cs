@@ -11,7 +11,7 @@ public static class CqlApiSaveExtensions
         this TCqlApi cqlApi,
         DirectoryInfo directory,
         bool writeIndented = true)
-        where TCqlApi : ICqlApiExtensible<TCqlApi>
+        where TCqlApi : ICqlApi<TCqlApi>
     {
         if (!directory.Exists)
             directory.Create();

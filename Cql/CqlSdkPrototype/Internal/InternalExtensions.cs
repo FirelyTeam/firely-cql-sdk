@@ -107,10 +107,6 @@ internal static class InternalExtensions
         return Maybe<TSource>.NoValue;
     }
 
-    private static bool TryFirstImpl<TSource>(this IEnumerable<TSource> source, out TSource? found)
-    {
-    }
-
     public static LogExceptionMessageAction GetLogExceptionMessageAction(
         this ILogger logger,
         ProcessBatchItemExceptionHandling exceptionHandling) =>

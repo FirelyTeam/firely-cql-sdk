@@ -15,7 +15,7 @@ public abstract class LibraryInvoker
 {
     public abstract CqlVersionedLibraryIdentifier LibraryVersionedIdentifier { get; }
 
-    public abstract IReadOnlyDictionary<string, LibraryDeclarationInvoker> Declarations { get; }
+    public abstract IReadOnlyDictionary<string, LibraryDefinitionInvoker> Definitions { get; }
 
     public static bool TryCreateFromType(
         CqlRuntimeApi cqlRuntimeApi,

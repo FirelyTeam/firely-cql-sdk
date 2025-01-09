@@ -1,7 +1,6 @@
 ﻿using CqlSdkPrototype.Advanced;
 using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Internal;
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
@@ -15,14 +14,14 @@ using CqlTranslationEntriesMap = System.Collections.Immutable.ImmutableDictionar
     CqlTranslationEntry>;
 
 public class CqlApi :
-    ICqlApiExtensible<CqlApi>
+    ICqlApi<CqlApi>
 {
     #region State
 
     private readonly State _state;
     ILogger<CqlApi> ILogAccessor<CqlApi>.Logger => _state.Logger;
-    CqlApiOptions ICqlApiExtensible<CqlApi>.Options => _state.Options;
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlTranslationEntry> ICqlApiExtensible<CqlApi>.Entries => _state.Entries;
+    CqlApiOptions ICqlApi<CqlApi>.Options => _state.Options;
+    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlTranslationEntry> ICqlApi<CqlApi>.Entries => _state.Entries;
 
     private readonly record struct State(
         CqlApiOptions Options,
@@ -94,7 +93,7 @@ public class CqlApi :
 
     #region Processing (CQL-to-ELM)
 
-    public CqlApi ConvertToElm()
+    public CqlApi Translate(Action<CqlTranslateResult>? result = null)
     {
         CqlToElmConverter cqlToElmConverter = null!;
         CqlTranslationEntriesMap.Builder entriesBuilder = null!;

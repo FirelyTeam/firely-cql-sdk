@@ -20,7 +20,7 @@ public class CqlRuntimeApi
         _state = state;
     }
 
-    private CqlRuntimeApi Mutate(
+    private CqlRuntimeApi WithAssemblyData(
         ImmutableHashSet<AssemblyData>? assemblyData = null)
     {
         return new CqlRuntimeApi(_state with
@@ -44,7 +44,7 @@ public class CqlRuntimeApi
         assembliesBuilder.AddRange(assemblyData);
         return oldCount == assembliesBuilder.Count
                    ? this
-                   : Mutate(assemblyData: assembliesBuilder.ToImmutable());
+                   : WithAssemblyData(assemblyData: assembliesBuilder.ToImmutable());
     }
 
     // public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker> LibraryInvokers { get; }
@@ -58,30 +58,28 @@ public class CqlRuntimeApi
         return librarySetInvoker;
     }
 
-    public CqlInvokationScope CreateInvokationScope()
+    public CqlInvocationScope CreateInvocationScope()
     {
         var alc = new AssemblyLoadContext("", true);
         foreach (var (assembly, debugSymbols) in _state.AssemblyData)
             alc.LoadFromBytes(assembly, debugSymbols);
-        return new CqlInvokationScope(this, alc);
+        return new CqlInvocationScope(this, alc);
     }
 }
 
-public class CqlInvokationScope : IDisposable
+public class CqlInvocationScope : IDisposable
 {
-    private readonly CqlRuntimeApi _cqlRuntimeApi;
     private readonly AssemblyLoadContext _alc;
 
-    public CqlInvokationScope(CqlRuntimeApi cqlRuntimeApi, AssemblyLoadContext alc)
+    internal CqlInvocationScope(CqlRuntimeApi cqlRuntimeApi, AssemblyLoadContext alc)
     {
-        _cqlRuntimeApi = cqlRuntimeApi;
         _alc = alc;
-        LibraryInvokers =
+        Libraries =
             _alc.Assemblies
                 .SelectMany(a => a.GetTypes())
                 .SelectWhereNotNull(t =>
                 {
-                    LibraryInvoker.TryCreateFromType(_cqlRuntimeApi, t, out var libraryInvoker);
+                    LibraryInvoker.TryCreateFromType(cqlRuntimeApi, t, out var libraryInvoker);
                     return libraryInvoker;
                 })
                 .ToImmutableDictionary(o => o.LibraryVersionedIdentifier);
@@ -92,5 +90,5 @@ public class CqlInvokationScope : IDisposable
         _alc.Unload();
     }
 
-    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker> LibraryInvokers { get; }
+    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker> Libraries { get; }
 }

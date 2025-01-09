@@ -27,16 +27,16 @@ public class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
         var libraryMethodInfos = libraryType
                                  .GetMethods(BindingFlags.Public | BindingFlags.Instance)
                                  .SelectToArray(m => new LibraryMethodInfo(m));
-        Declarations = libraryMethodInfos
+        Definitions = libraryMethodInfos
                        .SelectWhereNotNull(o => o.DeclarationName is { } declarationName
                                                 && o.Method.GetParameters() is [{ } p0]
                                                 && p0.ParameterType == typeof(CqlContext)
-                                                    ? (LibraryDeclarationInvoker)new DeclarationInvoker(declarationName, Library, o.Method)
+                                                    ? (LibraryDefinitionInvoker)new DefinitionInvoker(declarationName, Library, o.Method)
                                                     : null)
                        .ToImmutableDictionary(o => o.DeclarationName);
     }
 
-    public override IReadOnlyDictionary<string, LibraryDeclarationInvoker> Declarations { get; }
+    public override IReadOnlyDictionary<string, LibraryDefinitionInvoker> Definitions { get; }
 
     private static object GetLibraryFromStaticInstanceProperty(Type libraryType)
     {
@@ -67,10 +67,10 @@ public class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
         return cqlToolVersion.IsBetween(new Version(2, 0, 8), new Version(2, 1));
     }
 
-    private class DeclarationInvoker(
+    private class DefinitionInvoker(
         string declarationName,
         ILibrary library,
-        MethodInfo methodInfo) : LibraryDeclarationInvoker(declarationName, library, methodInfo)
+        MethodInfo methodInfo) : LibraryDefinitionInvoker(declarationName, library, methodInfo)
     {
         public override object? Invoke(CqlContext cqlContext)
         {

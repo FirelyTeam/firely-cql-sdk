@@ -5,7 +5,7 @@ using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Runtime;
 
-public abstract class LibraryDeclarationInvoker(
+public abstract class LibraryDefinitionInvoker(
     string declarationName,
     ILibrary library,
     MethodInfo methodInfo)

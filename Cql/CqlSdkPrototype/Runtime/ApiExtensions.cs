@@ -10,16 +10,16 @@ internal static class ApiExtensions
 {
     public static ElmApi CreateElmApi<TCqlApi>(
         this TCqlApi cqlApi)
-        where TCqlApi : ICqlApiExtensible<TCqlApi>
+        where TCqlApi : ICqlApi<TCqlApi>
     {
-        var elmApiOptions = ElmApiOptions.Create(cqlApi.Options);
         var elmApi = ElmApi
-                     .Create(elmApiOptions)
+                     .Create(cqlApi.Options.ServiceProvider)
+                     .WithOptions(_ => ElmApiOptions.Create(cqlApi.Options))
                      .LoadElmFromCqlApi(cqlApi);
         return elmApi;
     }
     public static CqlRuntimeApi CreateCqlRuntimeApi<TElmApi>(this TElmApi elmApi)
-        where TElmApi : IElmApiExtensible<TElmApi>
+        where TElmApi : IElmApi<TElmApi>
     {
         var cqlRuntimeApiOptions = new CqlRuntimeApiOptions(elmApi.Options.ServiceProvider);
         var cqlRuntimeApi = CqlRuntimeApi
@@ -35,21 +35,21 @@ internal static class ApiExtensions
         return cqlRuntimeApi;
     }
 
-    public static CqlInvokationScope CreateInvocationScope<TElmApi>(
+    public static CqlInvocationScope CreateInvocationScope<TElmApi>(
         this TElmApi elmApi)
-        where TElmApi : IElmApiExtensible<TElmApi>
+        where TElmApi : IElmApi<TElmApi>
     {
         return elmApi
-               .CompileAssemblies()
+               .Compile()
                .CreateCqlRuntimeApi()
-               .CreateInvokationScope();
+               .CreateInvocationScope();
     }
 
-    public static CqlInvokationScope CreateInvocationScope(
+    public static CqlInvocationScope CreateInvocationScope(
         this CqlApi cqlApi)
     {
         return cqlApi
-               .ConvertToElm()
+               .Translate()
                .CreateElmApi()
                .CreateInvocationScope();
     }

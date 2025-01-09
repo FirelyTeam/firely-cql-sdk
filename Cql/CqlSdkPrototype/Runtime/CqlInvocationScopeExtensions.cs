@@ -5,37 +5,33 @@ using static System.FormattableString;
 
 namespace CqlSdkPrototype.Runtime;
 
-internal static class CqlInvokationScopeExtensions
+internal static class CqlInvocationScopeExtensions
 {
     public static object? InvokeLibraryDefinition(
-        this CqlInvokationScope invokationScope,
+        this CqlInvocationScope invocationScope,
         CqlVersionedLibraryIdentifier versionedLibraryIdentifier,
-        string declaration,
+        string definitionName,
         CqlContext cqlContext)
     {
-        var libraryInvoker = invokationScope.LibraryInvokers[versionedLibraryIdentifier];
-        var libraryDeclarationInvoker = libraryInvoker.Declarations[declaration];
+        var libraryInvoker = invocationScope.Libraries[versionedLibraryIdentifier];
+        var libraryDeclarationInvoker = libraryInvoker.Definitions[definitionName];
         var result = libraryDeclarationInvoker.Invoke(cqlContext);
         return result;
     }
 
     public static StringBuilder DumpLibraryDeclarations(
-        this CqlInvokationScope invokationScope,
+        this CqlInvocationScope invocationScope,
         StringBuilder? sb = null)
     {
         sb ??= new();
         sb.AppendLine("Libraries and Declarations:");
-        foreach (var (libId, lib) in invokationScope.LibraryInvokers)
+        foreach (var (libId, lib) in invocationScope.Libraries)
         {
             sb.AppendLine(Invariant($"- {libId}"));
-            foreach (var (declId, decl) in lib.Declarations)
+            foreach (var (declId, decl) in lib.Definitions)
                 sb.AppendLine(Invariant($"  - {declId} : {decl.ReturnType.ToCSharpString(TypeCSharpFormat.Default with {UseKeywords = true})}"));
         }
 
         return sb;
     }
-
-    public static StringBuilder AppendLibraryDeclarations(
-        this StringBuilder sb,
-        CqlInvokationScope invokationScope) => invokationScope.DumpLibraryDeclarations(sb);
 }

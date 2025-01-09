@@ -17,14 +17,14 @@ using ElmCompilationEntriesMap = System.Collections.Immutable.ImmutableDictionar
 namespace CqlSdkPrototype.Elm;
 
 public class ElmApi :
-    IElmApiExtensible<ElmApi>
+    IElmApi<ElmApi>
 {
     #region State
 
     private readonly State _state;
     ILogger<ElmApi> ILogAccessor<ElmApi>.Logger => _state.Logger;
-    ElmApiOptions IElmApiExtensible<ElmApi>.Options => _state.Options;
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmCompilationEntry> IElmApiExtensible<ElmApi>.Entries => _state.Entries;
+    ElmApiOptions IElmApi<ElmApi>.Options => _state.Options;
+    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmCompilationEntry> IElmApi<ElmApi>.Entries => _state.Entries;
 
     private readonly record struct State(
         ElmApiOptions Options,
@@ -47,9 +47,10 @@ public class ElmApi :
 
     #region Construction
 
-    public static ElmApi Create(ElmApiOptions options)
+    public static ElmApi Create(IServiceProvider serviceProvider)
     {
         var entries = ElmCompilationEntriesMap.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+        var options = ElmApiOptions.Create(serviceProvider);
         var state = new State(options, entries);
         return new ElmApi(state);
     }
@@ -104,7 +105,7 @@ public class ElmApi :
 
     #region Processing
 
-    public ElmApi CompileAssemblies()
+    public ElmApi Compile(Action<ElmCompileResult>? result = null)
     {
         var entries = _state.Entries;
         if (entries.Values.All(predicate: lc => lc is { AssemblyBinary: not null }))
