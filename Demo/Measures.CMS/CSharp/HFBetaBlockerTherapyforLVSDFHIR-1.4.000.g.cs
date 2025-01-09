@@ -20,11 +20,15 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
     public static HFBetaBlockerTherapyforLVSDFHIR_1_4_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "HFBetaBlockerTherapyforLVSDFHIR";
     string ILibrary.Version => "1.4.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, AHAOverall_2_8_000.Instance];
     #endregion Library Members
+
+    #region Definition Methods
+
 
     [CqlDeclaration("Allergy to Beta Blocker Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1177")]
@@ -703,8 +707,14 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
     }
 
 
+    #endregion Definition Methods
+
+    #region CqlTupleMetadata Properties
+
     private static CqlTupleMetadata CqlTupleMetadata_FUFPMQdRaTBgLhghDWfUUBaNF = new(
         [typeof(Observation), typeof(Encounter)],
         ["HeartRate", "ModerateOrSevereLVSDHFOutpatientEncounter"]);
+
+    #endregion CqlTupleMetadata Properties
 
 }

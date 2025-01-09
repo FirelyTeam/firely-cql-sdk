@@ -20,11 +20,15 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
     public static TestRetrieveInclude_1_0_1 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "TestRetrieveInclude";
     string ILibrary.Version => "1.0.1";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
     #endregion Library Members
+
+    #region Definition Methods
+
 
     [CqlDeclaration("Female Administrative Sex")]
     [CqlValueSet("2.16.840.1.113883.3.560.100.2")]
@@ -76,5 +80,7 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
         return a_;
     }
 
+
+    #endregion Definition Methods
 
 }

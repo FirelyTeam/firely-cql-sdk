@@ -20,11 +20,15 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
 
     public static MeasureExample_0_0_1 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "MeasureExample";
     string ILibrary.Version => "0.0.1";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
     #endregion Library Members
+
+    #region Definition Methods
+
 
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
@@ -89,5 +93,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     public bool? Numerator_2(CqlContext context) =>
         false;
 
+
+    #endregion Definition Methods
 
 }

@@ -20,11 +20,15 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
 
     public static IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR";
     string ILibrary.Version => "1.4.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance];
     #endregion Library Members
+
+    #region Definition Methods
+
 
     [CqlDeclaration("Active Tuberculosis for Urology Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.56")]
@@ -1235,5 +1239,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         return i_;
     }
 
+
+    #endregion Definition Methods
 
 }

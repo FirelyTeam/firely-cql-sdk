@@ -20,11 +20,15 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 
     public static Status_1_6_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "Status";
     string ILibrary.Version => "1.6.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
     #endregion Library Members
+
+    #region Definition Methods
+
 
     [CqlDeclaration("laboratory")]
     public CqlCode laboratory(CqlContext context) =>
@@ -1089,5 +1093,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
         return b_;
     }
 
+
+    #endregion Definition Methods
 
 }

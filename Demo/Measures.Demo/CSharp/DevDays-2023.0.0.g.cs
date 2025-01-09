@@ -20,11 +20,15 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
     public static DevDays_2023_0_0 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "DevDays";
     string ILibrary.Version => "2023.0.0";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
     #endregion Library Members
+
+    #region Definition Methods
+
 
     [CqlDeclaration("Sucked into jet engine")]
     public CqlCode Sucked_into_jet_engine(CqlContext context) =>
@@ -158,5 +162,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
         return b_;
     }
 
+
+    #endregion Definition Methods
 
 }

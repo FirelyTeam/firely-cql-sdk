@@ -20,11 +20,15 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     public static ParametersExample_0_0_1 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "ParametersExample";
     string ILibrary.Version => "0.0.1";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
     #endregion Library Members
+
+    #region Definition Methods
+
 
     [CqlDeclaration("Marital Status")]
     [CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status")]
@@ -134,5 +138,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
         return c_;
     }
 
+
+    #endregion Definition Methods
 
 }

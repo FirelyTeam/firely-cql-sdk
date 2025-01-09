@@ -20,11 +20,15 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
 
     public static CumulativeMedicationDuration_4_1_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "CumulativeMedicationDuration";
     string ILibrary.Version => "4.1.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
     #endregion Library Members
+
+    #region Definition Methods
+
 
     [CqlDeclaration("HS")]
     public CqlCode HS(CqlContext context) =>
@@ -2644,5 +2648,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         return m_;
     }
 
+
+    #endregion Definition Methods
 
 }

@@ -20,11 +20,15 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
 
     public static SupplementalDataElementsFHIR4_2_0_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "SupplementalDataElementsFHIR4";
     string ILibrary.Version => "2.0.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
     #endregion Library Members
+
+    #region Definition Methods
+
 
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
@@ -267,8 +271,14 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     }
 
 
+    #endregion Definition Methods
+
+    #region CqlTupleMetadata Properties
+
     private static CqlTupleMetadata CqlTupleMetadata_CaKghTfWMNOTHSWhifjFZOVYO = new(
         [typeof(CodeableConcept), typeof(Period)],
         ["code", "period"]);
+
+    #endregion CqlTupleMetadata Properties
 
 }

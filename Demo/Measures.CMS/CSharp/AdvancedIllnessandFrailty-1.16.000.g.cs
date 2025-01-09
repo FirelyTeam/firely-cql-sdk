@@ -20,11 +20,15 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
 
     public static AdvancedIllnessandFrailty_1_16_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "AdvancedIllnessandFrailty";
     string ILibrary.Version => "1.16.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, Status_1_8_000.Instance];
     #endregion Library Members
+
+    #region Definition Methods
+
 
     [CqlDeclaration("Advanced Illness")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082")]
@@ -410,5 +414,7 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
         return x_;
     }
 
+
+    #endregion Definition Methods
 
 }

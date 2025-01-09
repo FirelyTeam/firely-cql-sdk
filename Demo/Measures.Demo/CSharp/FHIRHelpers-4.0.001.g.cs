@@ -20,11 +20,15 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
 
     public static FHIRHelpers_4_0_001 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "FHIRHelpers";
     string ILibrary.Version => "4.0.001";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
     #endregion Library Members
+
+    #region Definition Methods
+
 
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
@@ -2202,5 +2206,7 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
         return b_;
     }
 
+
+    #endregion Definition Methods
 
 }

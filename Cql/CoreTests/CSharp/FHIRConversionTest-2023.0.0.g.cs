@@ -20,11 +20,15 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 
     public static FHIRConversionTest_2023_0_0 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "FHIRConversionTest";
     string ILibrary.Version => "2023.0.0";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_1.Instance];
     #endregion Library Members
+
+    #region Definition Methods
+
     public Account AccountResource(CqlContext context, Account arg)
     {
         Account[] a_ = [
@@ -7195,5 +7199,7 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
         return e_;
     }
 
+
+    #endregion Definition Methods
 
 }

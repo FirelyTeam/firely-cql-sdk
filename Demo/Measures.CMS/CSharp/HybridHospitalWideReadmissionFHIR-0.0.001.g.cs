@@ -20,11 +20,15 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 
     public static HybridHospitalWideReadmissionFHIR_0_0_001 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "HybridHospitalWideReadmissionFHIR";
     string ILibrary.Version => "0.0.001";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
     #endregion Library Members
+
+    #region Definition Methods
+
 
     [CqlDeclaration("Bicarbonate lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.139")]
@@ -2697,6 +2701,10 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
     }
 
 
+    #endregion Definition Methods
+
+    #region CqlTupleMetadata Properties
+
     private static CqlTupleMetadata CqlTupleMetadata_CYbMQaXdPgTVSLXJSHHNTbhVM = new(
         [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
         ["EncounterId", "FirstRespRateResult", "Timing"]);
@@ -2716,5 +2724,7 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
     private static CqlTupleMetadata CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd = new(
         [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
         ["EncounterId", "FirstResult", "Timing"]);
+
+    #endregion CqlTupleMetadata Properties
 
 }

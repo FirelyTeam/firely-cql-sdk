@@ -20,11 +20,15 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
 
     public static NCQATerminology_1_0_0 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "NCQATerminology";
     string ILibrary.Version => "1.0.0";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
     #endregion Library Members
+
+    #region Definition Methods
+
 
     [CqlDeclaration("problem-list-item")]
     public CqlCode problem_list_item(CqlContext context) =>
@@ -547,5 +551,7 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
         return a_;
     }
 
+
+    #endregion Definition Methods
 
 }

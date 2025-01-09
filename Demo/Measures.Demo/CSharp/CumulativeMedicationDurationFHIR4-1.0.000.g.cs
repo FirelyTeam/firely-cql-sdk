@@ -20,11 +20,15 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
 
     public static CumulativeMedicationDurationFHIR4_1_0_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "CumulativeMedicationDurationFHIR4";
     string ILibrary.Version => "1.0.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
     #endregion Library Members
+
+    #region Definition Methods
+
 
     [CqlDeclaration("AC")]
     public CqlCode AC(CqlContext context) =>
@@ -1109,5 +1113,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
         return m_;
     }
 
+
+    #endregion Definition Methods
 
 }

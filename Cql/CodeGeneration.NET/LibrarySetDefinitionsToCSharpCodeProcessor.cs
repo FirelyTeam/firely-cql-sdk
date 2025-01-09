@@ -293,10 +293,18 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
         private void WriteCqlTupleMetadataProperties()
         {
             var tupleMetadataBuilder = LibrarySetWriter.TupleMetadataBuilder;
+            bool first = true;
 
             // Cql Tuple Metadata
             foreach (var (propertyName, signature) in tupleMetadataBuilder.GetLibraryTupleMetadataPropertySignatures(LibraryName))
             {
+                if (first)
+                {
+                    IndentedTextWriter.WriteLine("#region CqlTupleMetadata Properties");
+                    IndentedTextWriter.WriteLine();
+                    first = false;
+                }
+
                 var types = string.Join(", ", signature.Select(t => $"typeof({LibrarySetWriter.TypeToCSharpConverter.ToCSharp(t.Type)})"));
                 var names = string.Join(", ", signature.Select(t => t.PropName.QuoteString()));
                 IndentedTextWriter.WriteLine($"private static CqlTupleMetadata {propertyName} = new(");
@@ -304,12 +312,19 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
                 IndentedTextWriter.WriteLine(1, $"[{names}]);");
                 IndentedTextWriter.WriteLine();
             }
+
+            if (!first)
+            {
+                IndentedTextWriter.WriteLine("#endregion CqlTupleMetadata Properties");
+                IndentedTextWriter.WriteLine();
+            }
         }
 
         private void WriteLibraryInterfaceImplementation()
         {
             var libraryNameToClassName = LibrarySetWriter.Callbacks.LibraryNameToClassName;
-            IndentedTextWriter.WriteLine("#region Library Members");
+            IndentedTextWriter.WriteLine("#region ILibrary Implementation");
+            IndentedTextWriter.WriteLine();
             IndentedTextWriter.WriteLine($"string ILibrary.Name => {LibraryVersionedIdentifier.id.QuoteString()};");
             IndentedTextWriter.WriteLine($"string ILibrary.Version => {LibraryVersionedIdentifier.version.QuoteString()};");
             var dependencies =
@@ -319,6 +334,7 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
                                 .Select(typeName => $"{typeName}.Instance");
             IndentedTextWriter.WriteLine($"IReadOnlyList<ILibrary> ILibrary.Dependencies => [{string.Join(", ", dependencies)}];");
             IndentedTextWriter.WriteLine("#endregion Library Members");
+            IndentedTextWriter.WriteLine();
         }
 
         private void WriteUsings()
@@ -345,15 +361,28 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
         {
             var definitions = LibrarySetWriter.Definitions;
             var libraryName = LibraryName;
+            bool first = true;
 
             foreach (var (definition, overloads) in definitions.DefinitionsForLibrary(libraryName))
             {
                 foreach (var (signature, expression) in overloads)
                 {
+                    if (first)
+                    {
+                        IndentedTextWriter.WriteLine("#region Definition Methods");
+                        //IndentedTextWriter.WriteLine();
+                        first = false;
+                    }
                     definitions.TryGetTags(libraryName, definition, signature, out var tags);
                     var methodWriter = CreateMethodWriter(definition, expression, tags);
                     methodWriter.WriteMethod();
                 }
+            }
+
+            if (!first)
+            {
+                IndentedTextWriter.WriteLine("#endregion Definition Methods");
+                IndentedTextWriter.WriteLine();
             }
         }
 

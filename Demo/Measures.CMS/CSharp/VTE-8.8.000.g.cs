@@ -20,11 +20,15 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
 
     public static VTE_8_8_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "VTE";
     string ILibrary.Version => "8.8.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance];
     #endregion Library Members
+
+    #region Definition Methods
+
 
     [CqlDeclaration("Obstetrical or Pregnancy Related Conditions")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.263")]
@@ -184,5 +188,7 @@ public partial class VTE_8_8_000 : ILibrary, ISingleton<VTE_8_8_000>
         return h_;
     }
 
+
+    #endregion Definition Methods
 
 }

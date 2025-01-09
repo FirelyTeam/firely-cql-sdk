@@ -20,11 +20,15 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
 
     public static FHIRHelpers_4_3_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "FHIRHelpers";
     string ILibrary.Version => "4.3.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
     #endregion Library Members
+
+    #region Definition Methods
+
     public CqlInterval<CqlDateTime> ToInterval(CqlContext context, Period period)
     {
         CqlInterval<CqlDateTime> a_()
@@ -2792,5 +2796,7 @@ public partial class FHIRHelpers_4_3_000 : ILibrary, ISingleton<FHIRHelpers_4_3_
         return b_;
     }
 
+
+    #endregion Definition Methods
 
 }
