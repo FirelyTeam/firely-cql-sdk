@@ -87,7 +87,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         /// <see cref="LibrarySetDefinitionsToCSharpCodeProcessor.GenerateCSharpV2"/>
         /// <see cref="CompileV2"/>
-        [Obsolete("Use CompileV2 instead after generating the C# source with LibrarySetDefinitionsToCSharpCodeProcessor.GenerateCSharpV2")]
+        [Obsolete("Use CompileV2 instead after generating the C# source with LibrarySetDefinitionsToCSharpCodeProcessor.GenerateCSharpV2", error:false)]
         public IReadOnlyDictionary<string, AssemblyDataWithSourceCode> Compile(
             LibrarySet librarySet,
             DefinitionDictionary<LambdaExpression> definitions,

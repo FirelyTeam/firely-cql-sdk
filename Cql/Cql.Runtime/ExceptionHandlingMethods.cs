@@ -108,9 +108,10 @@ internal static class ExceptionHandlingMethods
         this IEnumerable<TryOutcome<TInput, TResult>> outcomes,
         Action<TryOutcome<TInput, TResult>> processOutcome)
     {
-        foreach (var outcome in outcomes.Where(o => o.Exception?.SourceException is not null))
+        foreach (var outcome in outcomes)
         {
-            processOutcome(outcome);
+            if (outcome.Exception?.SourceException is not null)
+                processOutcome(outcome);
             yield return outcome;
         }
     }
