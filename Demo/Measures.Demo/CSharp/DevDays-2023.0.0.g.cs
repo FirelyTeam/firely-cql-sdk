@@ -25,6 +25,7 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     string ILibrary.Name => "DevDays";
     string ILibrary.Version => "2023.0.0";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

@@ -25,6 +25,7 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     string ILibrary.Name => "SupplementalDataElementsFHIR4";
     string ILibrary.Version => "2.0.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

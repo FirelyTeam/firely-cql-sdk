@@ -25,6 +25,7 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
     string ILibrary.Name => "NCQAFHIRBase";
     string ILibrary.Version => "1.0.0";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

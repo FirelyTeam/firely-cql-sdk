@@ -25,6 +25,7 @@ public partial class FunctionalStatusAssessmentforTotalHipReplacementFHIR_0_0_00
     string ILibrary.Name => "FunctionalStatusAssessmentforTotalHipReplacementFHIR";
     string ILibrary.Version => "0.0.008";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

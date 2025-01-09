@@ -25,6 +25,7 @@ public partial class Cataracts2040BCVAwithin90DaysFHIR_0_1_000 : ILibrary, ISing
     string ILibrary.Name => "Cataracts2040BCVAwithin90DaysFHIR";
     string ILibrary.Version => "0.1.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

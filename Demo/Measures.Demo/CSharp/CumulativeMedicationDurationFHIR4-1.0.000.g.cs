@@ -25,6 +25,7 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     string ILibrary.Name => "CumulativeMedicationDurationFHIR4";
     string ILibrary.Version => "1.0.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

@@ -25,6 +25,7 @@ public partial class AHAOverall_2_8_000 : ILibrary, ISingleton<AHAOverall_2_8_00
     string ILibrary.Name => "AHAOverall";
     string ILibrary.Version => "2.8.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

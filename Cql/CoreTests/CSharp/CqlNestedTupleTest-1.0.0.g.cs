@@ -25,6 +25,7 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
     string ILibrary.Name => "CqlNestedTupleTest";
     string ILibrary.Version => "1.0.0";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
+
     #endregion Library Members
 
     #region Definition Methods

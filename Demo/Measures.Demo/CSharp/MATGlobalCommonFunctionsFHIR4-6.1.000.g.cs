@@ -25,6 +25,7 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     string ILibrary.Name => "MATGlobalCommonFunctionsFHIR4";
     string ILibrary.Version => "6.1.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

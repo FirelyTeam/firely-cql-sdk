@@ -25,6 +25,7 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
     string ILibrary.Name => "VTEFHIR4";
     string ILibrary.Version => "4.8.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, FHIRHelpers_4_0_001.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

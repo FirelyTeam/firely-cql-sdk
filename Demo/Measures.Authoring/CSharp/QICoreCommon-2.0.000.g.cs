@@ -25,6 +25,7 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
     string ILibrary.Name => "QICoreCommon";
     string ILibrary.Version => "2.0.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

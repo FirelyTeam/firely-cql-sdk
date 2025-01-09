@@ -25,6 +25,7 @@ public partial class TJCOverall_8_14_000 : ILibrary, ISingleton<TJCOverall_8_14_
     string ILibrary.Name => "TJCOverall";
     string ILibrary.Version => "8.14.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

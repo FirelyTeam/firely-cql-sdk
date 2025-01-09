@@ -25,6 +25,7 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
     string ILibrary.Name => "NCQAAdvancedIllnessandFrailty";
     string ILibrary.Version => "1.0.0";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAFHIRBase_1_0_0.Instance, NCQAStatus_1_0_0.Instance, NCQAEncounter_1_0_0.Instance, NCQAClaims_1_0_0.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

@@ -333,6 +333,7 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
                                 .Select(dep => libraryNameToClassName(dep.GetVersionedIdentifier()!))
                                 .Select(typeName => $"{typeName}.Instance");
             IndentedTextWriter.WriteLine($"IReadOnlyList<ILibrary> ILibrary.Dependencies => [{string.Join(", ", dependencies)}];");
+            IndentedTextWriter.WriteLine();
             IndentedTextWriter.WriteLine("#endregion Library Members");
             IndentedTextWriter.WriteLine();
         }

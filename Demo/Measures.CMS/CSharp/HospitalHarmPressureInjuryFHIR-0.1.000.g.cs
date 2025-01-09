@@ -25,6 +25,7 @@ public partial class HospitalHarmPressureInjuryFHIR_0_1_000 : ILibrary, ISinglet
     string ILibrary.Name => "HospitalHarmPressureInjuryFHIR";
     string ILibrary.Version => "0.1.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

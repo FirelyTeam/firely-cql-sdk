@@ -25,6 +25,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     string ILibrary.Name => "MeasureExample";
     string ILibrary.Version => "0.0.1";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
+
     #endregion Library Members
 
     #region Definition Methods

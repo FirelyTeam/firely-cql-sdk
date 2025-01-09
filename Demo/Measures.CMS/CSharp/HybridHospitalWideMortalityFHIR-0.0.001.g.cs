@@ -25,6 +25,7 @@ public partial class HybridHospitalWideMortalityFHIR_0_0_001 : ILibrary, ISingle
     string ILibrary.Name => "HybridHospitalWideMortalityFHIR";
     string ILibrary.Version => "0.0.001";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

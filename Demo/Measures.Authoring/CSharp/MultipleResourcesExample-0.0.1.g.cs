@@ -25,6 +25,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
     string ILibrary.Name => "MultipleResourcesExample";
     string ILibrary.Version => "0.0.1";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

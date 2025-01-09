@@ -25,6 +25,7 @@ public partial class NCQAEncounter_1_0_0 : ILibrary, ISingleton<NCQAEncounter_1_
     string ILibrary.Name => "NCQAEncounter";
     string ILibrary.Version => "1.0.0";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAFHIRBase_1_0_0.Instance, NCQAStatus_1_0_0.Instance, NCQATerminology_1_0_0.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

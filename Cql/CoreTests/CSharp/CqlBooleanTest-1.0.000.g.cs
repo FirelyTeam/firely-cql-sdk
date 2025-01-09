@@ -25,6 +25,7 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
     string ILibrary.Name => "CqlBooleanTest";
     string ILibrary.Version => "1.0.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
+
     #endregion Library Members
 
     #region Definition Methods

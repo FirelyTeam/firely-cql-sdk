@@ -25,6 +25,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
     string ILibrary.Name => "NCQACQLBase";
     string ILibrary.Version => "1.0.0";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
+
     #endregion Library Members
 
     #region Definition Methods

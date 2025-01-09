@@ -25,6 +25,7 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
     string ILibrary.Name => "NCQATerminology";
     string ILibrary.Version => "1.0.0";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

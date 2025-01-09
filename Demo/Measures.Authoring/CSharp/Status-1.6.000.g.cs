@@ -25,6 +25,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     string ILibrary.Name => "Status";
     string ILibrary.Version => "1.6.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

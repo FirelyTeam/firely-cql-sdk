@@ -25,6 +25,7 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
     string ILibrary.Name => "HFACEIorARBorARNIforLVSDFHIR";
     string ILibrary.Version => "0.2.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, AHAOverall_2_8_000.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

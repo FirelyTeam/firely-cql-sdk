@@ -25,6 +25,7 @@ public partial class PalliativeCareFHIR_0_6_000 : ILibrary, ISingleton<Palliativ
     string ILibrary.Name => "PalliativeCareFHIR";
     string ILibrary.Version => "0.6.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, FHIRHelpers_4_0_001.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

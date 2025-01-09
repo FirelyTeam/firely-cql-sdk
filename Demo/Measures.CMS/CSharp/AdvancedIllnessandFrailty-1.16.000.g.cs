@@ -25,6 +25,7 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     string ILibrary.Name => "AdvancedIllnessandFrailty";
     string ILibrary.Version => "1.16.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, Status_1_8_000.Instance];
+
     #endregion Library Members
 
     #region Definition Methods

@@ -25,6 +25,7 @@ public partial class CervicalCancerScreeningFHIR_0_0_001 : ILibrary, ISingleton<
     string ILibrary.Name => "CervicalCancerScreeningFHIR";
     string ILibrary.Version => "0.0.001";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, Hospice_6_12_000.Instance, PalliativeCare_1_11_000.Instance, Status_1_8_000.Instance];
+
     #endregion Library Members
 
     #region Definition Methods
