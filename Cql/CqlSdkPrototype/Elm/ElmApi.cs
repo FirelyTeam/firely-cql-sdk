@@ -1,8 +1,6 @@
 ﻿using System.Linq.Expressions;
-using CqlSdkPrototype.Advanced;
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Internal;
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;

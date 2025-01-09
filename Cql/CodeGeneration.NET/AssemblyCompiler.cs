@@ -173,7 +173,12 @@ namespace Hl7.Cql.CodeGeneration.NET
             Dictionary<string, AssemblyDataWithSourceCode> results = new();
             Assembly[] assemblyReferences = _referencesLazy.Value;
             foreach (var (library, cSharp) in input)
-                yield return (library, () => CompileNodeV2(cSharp, results, librarySet, library, assemblyReferences));
+                yield return (library, () =>
+                                 {
+                                     var result = CompileNodeV2(cSharp, results, librarySet, library, assemblyReferences);
+                                     results.Add(library.GetVersionedIdentifier()!, result);
+                                     return result;
+                                 });
         }
 
         private CSharpCompilationOptions CreateCSharpCompilationOptions() =>
@@ -192,7 +197,8 @@ namespace Hl7.Cql.CodeGeneration.NET
             IEnumerable<Assembly> assemblyReferences)
         {
             var librarySourceString = GetSourceCodeString(sourceCodeStream);
-            return CompileNodeV2(librarySourceString, assemblies, librarySet, library, assemblyReferences);
+            var assemblyDataWithSourceCode = CompileNodeV2(librarySourceString, assemblies, librarySet, library, assemblyReferences);
+            return assemblyDataWithSourceCode;
         }
 
         private AssemblyDataWithSourceCode CompileNodeV2(

@@ -36,10 +36,11 @@ public partial class CustomConsoleLogger(string categoryName, CustomConsoleLogge
             return;
 
         var (logLevelText, logLevelConsoleColor) = GetLogLevelString(logLevel);
-        var foregroundColorEscapeCode = GetForegroundColorEscapeCode(logLevelConsoleColor);
-        var logRecord = $"{foregroundColorEscapeCode}{logLevelText}{DefaultForegroundColorCode} {_categoryName}{message}";
+        var colorEsc = GetForegroundColorEscapeCode(logLevelConsoleColor);
+        var defaultColorEsc = GetDefaultForegroundColorEscapeCode();
+        var logRecord = $"{colorEsc}{logLevelText}{defaultColorEsc} {_categoryName}{message}";
         if (exception != null)
-            logRecord += $"{Environment.NewLine}{GetForegroundColorEscapeCode(ConsoleColor.DarkRed)}{exception}{DefaultForegroundColorCode}";
+            logRecord += $"{Environment.NewLine}{GetForegroundColorEscapeCode(ConsoleColor.DarkRed)}{exception}{defaultColorEsc}";
 
         Console.WriteLine(logRecord);
     }
@@ -81,7 +82,7 @@ public partial class CustomConsoleLogger(string categoryName, CustomConsoleLogge
                     var tagName = m.Groups["tagName"].Value;
                     var rest = m.Groups["rest"].Value;
                     if (dictionary.TryGetValue(tagName, out var kv))
-                        return $"{GetForegroundColorEscapeCode(ConsoleColor.Cyan)}{{{kv.i}{rest}}}{DefaultForegroundColorCode}";
+                        return $"{GetForegroundColorEscapeCode(ConsoleColor.Cyan)}{{{kv.i}{rest}}}{GetDefaultForegroundColorEscapeCode()}";
 
                     return m.Value;
                 });
@@ -96,7 +97,20 @@ public partial class CustomConsoleLogger(string categoryName, CustomConsoleLogge
     #region Colors
 
     private static (string logLevelText, ConsoleColor logLevelConsoleColor) GetLogLevelString(LogLevel logLevel) =>
-        logLevel switch
+        ConsoleFeatures.NoColor
+        ? logLevel switch
+        {
+            // @formatter: off
+            LogLevel.Trace       => ("""TRC""", default),
+            LogLevel.Debug       => ("""DBG""", default),
+            LogLevel.Information => ("""INF""", default),
+            LogLevel.Warning     => ("""WAR""", default),
+            LogLevel.Error       => ("""ERR""", default),
+            LogLevel.Critical    => ("""CRI""", default),
+            _                    => throw new ArgumentOutOfRangeException(nameof(logLevel))
+            // @formatter: on
+        }
+        : logLevel switch
         {
             // @formatter: off
             LogLevel.Trace       => ("""""", ConsoleColor.Cyan),
@@ -110,7 +124,9 @@ public partial class CustomConsoleLogger(string categoryName, CustomConsoleLogge
         };
 
     private static string GetForegroundColorEscapeCode(ConsoleColor color) =>
-        color switch
+        ConsoleFeatures.NoColor
+        ? ""
+        : color switch
         {
             // @formatter: off
             ConsoleColor.Black => "\x1B[30m",
@@ -128,11 +144,43 @@ public partial class CustomConsoleLogger(string categoryName, CustomConsoleLogge
             ConsoleColor.Magenta => "\x1B[1m\x1B[35m",
             ConsoleColor.Cyan => "\x1B[1m\x1B[36m",
             ConsoleColor.White => "\x1B[1m\x1B[37m",
-            _ => DefaultForegroundColorCode // default foreground color
+            _ => DefaultForegroundColorCodeEscapeCode // default foreground color
             // @formatter: on
         };
 
-    private const string DefaultForegroundColorCode = "\x1B[39m\x1B[22m"; // reset to default foreground color
+    private static string GetDefaultForegroundColorEscapeCode() =>
+        ConsoleFeatures.NoColor
+        ? ""
+        : DefaultForegroundColorCodeEscapeCode;
+
+    private const string DefaultForegroundColorCodeEscapeCode = "\x1B[39m\x1B[22m"; // reset to default foreground color
 
     #endregion
+}
+
+file class ConsoleFeatures
+{
+    public static bool NoColor { get; }
+
+    static ConsoleFeatures()
+    {
+        bool enabled = !Console.IsOutputRedirected;
+
+        if (enabled)
+        {
+            // We subscribe to the informal standard from https://no-color.org/.  If we'd otherwise emit
+            // ANSI color codes but the NO_COLOR environment variable is set, disable emitting them.
+            enabled = Environment.GetEnvironmentVariable("NO_COLOR") is null;
+        }
+        else
+        {
+            // We also support overriding in the other direction.  If we'd otherwise avoid emitting color
+            // codes but the DOTNET_SYSTEM_CONSOLE_ALLOW_ANSI_COLOR_REDIRECTION environment variable is
+            // set to 1 or true, enable color.
+            string? envVar = Environment.GetEnvironmentVariable("DOTNET_SYSTEM_CONSOLE_ALLOW_ANSI_COLOR_REDIRECTION");
+            enabled = envVar is not null && (envVar == "1" || envVar.Equals("true", StringComparison.OrdinalIgnoreCase));
+        }
+
+        NoColor = !enabled;
+    }
 }

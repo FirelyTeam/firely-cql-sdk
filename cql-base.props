@@ -37,7 +37,7 @@
 		<DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
 		<LibraryPKHash></LibraryPKHash>
 		<!-- CqlToElmEnabled and ElmToCSharpEnabled declared in BuildArtifacts.csproj, cql-base.props, cql-demo.props  -->
-		<CqlToElmEnabled>false</CqlToElmEnabled>
+		<CqlToElmEnabled>true</CqlToElmEnabled>
 		<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
 	</PropertyGroup>
 

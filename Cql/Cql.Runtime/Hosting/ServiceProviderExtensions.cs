@@ -28,7 +28,6 @@ internal static class ServiceProviderExtensions
         serviceProvider.GetRequiredService<ILoggerFactory>();
 
     public static ILogger<T> GetLogger<T>(this IServiceProvider serviceProvider)
-        where T : class
     {
         var logger = serviceProvider.GetService<ILogger<T>>();
         if (logger != null)

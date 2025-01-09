@@ -35,11 +35,6 @@ public class AssemblyDataWriterOptions
     /// Gets or sets a value indicating whether to write the assembly for debugging purposes, which removes optimizations, and includes debug symbols.
     /// </summary>
     public bool DebugModeAssemblies { get; set; }
-#if DEBUG
-    = true;
-#else
-    = false;
-#endif
 
     /// <summary>
     /// Binds the configuration values to the <see cref="AssemblyDataWriterOptions"/> object.

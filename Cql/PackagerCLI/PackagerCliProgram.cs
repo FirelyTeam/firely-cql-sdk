@@ -8,11 +8,11 @@
 
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packaging;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using static Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling;
 
 namespace Hl7.Cql.Packager;
 
@@ -34,29 +34,45 @@ internal class PackagerCliProgram
             var cSharpOpt = cSharpOptions.Value;
             var asmOpt = asmOptions.Value;
 
-            ElmApi elmApi = translateCql
-                                ? CqlApi.Create(serviceProvider)
-                                        .WithOptions(o => o with
-                                        {
-                                            ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
-                                        })
-                                        .AddCqlLibrariesFromDirectory(packagingOpt.CqlDirectory)
-                                        .Translate()
-                                        .SaveElmFileToDirectory(packagingOpt.ElmDirectory)
-                                        .Compile()
-                                : ElmApi.Create(serviceProvider)
-                                        .WithOptions(o => o with
-                                        {
-                                            ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
-                                        })
-                                        .AddElmFilesFromDirectory(packagingOpt.ElmDirectory, filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name))
-                                        .Compile();
+            ElmApi elmApi;
+            if (translateCql)
+            {
+                packagingOpt.ElmDirectory.Delete(true);
+                elmApi = CqlApi.Create(serviceProvider)
+                            .WithOptions(o => o with
+                            {
+                                ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
+                            })
+                            .AddCqlLibrariesFromDirectory(packagingOpt.CqlDirectory)
+                            .Translate()
+                            .SaveElmFileToDirectory(packagingOpt.ElmDirectory)
+                            .Compile();
+
+            }
+            else
+            {
+                elmApi = ElmApi.Create(serviceProvider)
+                            .WithOptions(o => o with
+                            {
+                                ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
+                            })
+                            .AddElmFilesFromDirectory(packagingOpt.ElmDirectory,
+                                                      filePredicate: file =>
+                                                          !HardCodedSkipElmFiles.FileNames.Contains(file.Name))
+                            .Compile();
+            }
 
             if (cSharpOpt.OutDirectory != null)
+            {
+                cSharpOpt.OutDirectory.Delete(true);
                 elmApi = elmApi.SaveCSharpFilesToDirectory(cSharpOpt.OutDirectory);
+            }
 
             if (asmOpt.OutDirectory != null)
+            {
+                asmOpt.OutDirectory.Delete(true);
                 elmApi = elmApi.SaveAssemblyBinariesToDirectory(asmOpt.OutDirectory);
+            }
 
             return 0;
         }

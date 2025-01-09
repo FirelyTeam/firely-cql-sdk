@@ -1,5 +1,4 @@
 ﻿using CqlSdkPrototype.Elm.Extensibility;
-using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Elm;
@@ -15,7 +14,7 @@ public static partial class ElmApiExtensions
         if (!directory.Exists)
             directory.Create();
 
-        var logger = elmApi.Options.ServiceProvider.GetLogger<ElmApi>();
+        var logger = elmApi.GetLogger();
         foreach (var (libraryName, (_, cSharpSourceCode, _, _)) in elmApi.Entries)
         {
             if (cSharpSourceCode is null)
@@ -36,7 +35,7 @@ public static partial class ElmApiExtensions
         if (!directory.Exists)
             directory.Create();
 
-        var logger = elmApi.Options.ServiceProvider.GetLogger<ElmApi>();
+        var logger = elmApi.GetLogger();
         foreach (var (libraryName, (_, _, assemblyBytes, symbolsBytes)) in elmApi.Entries)
         {
             if (assemblyBytes is null)

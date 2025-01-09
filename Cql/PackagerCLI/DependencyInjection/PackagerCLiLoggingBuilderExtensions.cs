@@ -8,6 +8,7 @@
 
 using System.Diagnostics;
 using System.Globalization;
+using CqlSdkPrototype.Logging;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Packager.Logging;
 using Hl7.Cql.Packaging;
@@ -36,10 +37,11 @@ internal static class PackagerCLiLoggingBuilderExtensions
 
         logging.AddFilter(level => level >= minLogLevel);
 
-        logging.AddCleanConsole(opt =>
-        {
-            // opt.NoColor = true;
-        });
+        logging.AddProvider(new CustomConsoleLoggerProvider(cat => cat.Split('.').Last()));
+        // logging.AddCleanConsole(opt =>
+        // {
+        //     // opt.NoColor = true;
+        // });
 
         var logFile = Path.Combine(".", "build.log");
 

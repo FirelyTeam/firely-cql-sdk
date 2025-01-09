@@ -1,8 +1,4 @@
-﻿using CqlSdkPrototype.Advanced;
-using CqlSdkPrototype.Elm;
-using CqlSdkPrototype.Elm.Extensibility;
-
-namespace CqlSdkPrototype.Cql.Extensibility;
+﻿namespace CqlSdkPrototype.Cql.Extensibility;
 
 public interface ICqlApi<out TCqlApi>
     where TCqlApi : ICqlApi<TCqlApi>

@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Reflection;
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Elm;
@@ -8,7 +7,6 @@ using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Logging;
 using CqlSdkPrototype.Runtime;
 using Hl7.Cql.Abstractions.Exceptions;
-using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Model;
 using Hl7.Cql.Runtime.Hosting;
@@ -217,8 +215,7 @@ internal class Program
                               // .AddSingleton<IConfiguration>(configuration)
                               .AddLogging(lb => lb
                                                 .ClearProviders()
-                                                .AddProvider(
-                                                    new CustomConsoleLoggerProvider(cat => cat.Split('.').Last()))
+                                                .AddProvider(new CustomConsoleLoggerProvider(cat => cat.Split('.').Last()))
                                                 .AddFilter((string? category, LogLevel logLevel) =>
                                                 {
                                                     var result = category?.Contains(nameof(CqlSdkPrototype)) ?? false;

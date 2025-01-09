@@ -1,6 +1,4 @@
-﻿using CqlSdkPrototype.Advanced;
-using CqlSdkPrototype.Cql.Extensibility;
-using Hl7.Cql.Runtime.Hosting;
+﻿using CqlSdkPrototype.Cql.Extensibility;
 using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Cql;
@@ -17,7 +15,7 @@ public static partial class CqlApiExtensions
         if (!directory.Exists)
             directory.Create();
 
-        var logger = cqlApi.Options.ServiceProvider.GetLogger<CqlApi>()!;
+        var logger = cqlApi.GetLogger();
         foreach (var (libraryName, (_, elmLibrary)) in cqlApi.Entries)
         {
             if (elmLibrary == null)
