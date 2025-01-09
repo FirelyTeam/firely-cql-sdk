@@ -1,7 +1,6 @@
 ﻿using System.Linq.Expressions;
 using CqlSdkPrototype.Advanced;
-using CqlSdkPrototype.CqlToElm;
-using CqlSdkPrototype.ElmToAssembly.Advanced;
+using CqlSdkPrototype.Elm.Extensibility;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
@@ -9,37 +8,20 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using ElmCompilationEntriesMap = System.Collections.Immutable.ImmutableDictionary<
+    CqlSdkPrototype.CqlVersionedLibraryIdentifier,
+    CqlSdkPrototype.Elm.Extensibility.ElmCompilationEntry>;
 
-using ElmCompilationEntriesMap = System.Collections.Immutable.ImmutableDictionary<CqlSdkPrototype.CqlVersionedLibraryIdentifier, CqlSdkPrototype.ElmToAssembly.ElmApi.ElmCompilationEntry>;
-
-namespace CqlSdkPrototype.ElmToAssembly;
+namespace CqlSdkPrototype.Elm;
 
 public class ElmApi :
-    IElmApiBase<ElmApi>,
-    ILogAccessor<ElmApi>
+    IElmApiExtensible<ElmApi>
 {
+    #region State
+
     private readonly State _state;
-
-    public ElmApiOptions Options => _state.Options;
-
-    public IReadOnlyDictionary<CqlLibraryIdentifier, CqlVersionedLibraryIdentifier> GetVersionedIdentifiers() =>
-        _state.Entries
-              .ToDictionary(kv => kv.Key.Identifier, kv => kv.Key);
-
-    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, string> GetCSharpSourceCodes() =>
-        _state.Entries
-              .Where(kv => kv.Value.CSharpSourceCode is not null)
-              .ToDictionary(kv => kv.Key, kv => kv.Value.CSharpSourceCode!,
-                            CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
-
-    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, AssemblyData> GetAssemblyBinaries() =>
-        _state.Entries
-              .Where(kv => kv.Value.AssemblyBinary is not null)
-              .ToDictionary(kv => kv.Key,
-                            kv => new AssemblyData(kv.Value.AssemblyBinary!, kv.Value.DebugSymbolsBinary),
-                            CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
-
-    #region Nested Types
+    ILogger<ElmApi> ILogAccessor<ElmApi>.Logger => _state.Logger;
+    ElmApiOptions IElmApiExtensible<ElmApi>.Options => _state.Options;
 
     private readonly record struct State(
         ElmApiOptions Options,
@@ -56,9 +38,6 @@ public class ElmApi :
 
         public void Dispose() => scope.Dispose();
     }
-
-    internal readonly record struct ElmCompilationEntry
-        (Library ElmLibrary, string? CSharpSourceCode = null, byte[]? AssemblyBinary = null, byte[]? DebugSymbolsBinary = null);
 
     #endregion
 
@@ -84,13 +63,13 @@ public class ElmApi :
 
     public ElmApi WithOptions(Func<ElmApiOptions, ElmApiOptions> replaceOptions)
     {
-        var newOptions = replaceOptions(Options);
-        return ReferenceEquals(Options, newOptions) ? this : new ElmApi(_state with { Options = newOptions });
+        var newOptions = replaceOptions(_state.Options);
+        return ReferenceEquals(_state.Options, newOptions) ? this : new ElmApi(_state with { Options = newOptions });
     }
 
     #endregion
 
-    #region Adding ELM Libraries
+    #region Input (ELM Libraries)
 
     public ElmApi AddElmLibraries(IEnumerable<Library> libraries)
     {
@@ -121,7 +100,7 @@ public class ElmApi :
 
     #region Processing
 
-    internal ElmApi CompileAssemblies()
+    public ElmApi CompileAssemblies()
     {
         if (_state.Entries.Values.All(predicate: lc => lc is { AssemblyBinary: not null }))
             return this;
@@ -181,5 +160,16 @@ public class ElmApi :
 
     #endregion
 
-    ILogger<ElmApi> ILogAccessor<ElmApi>.Logger => _state.Logger;
+    #region Output (C#, .NET Assembly Bytes)
+
+    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmCompilationEntry> Entries => _state.Entries;
+
+    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, AssemblyData> GetAssemblyBinaries() =>
+        _state.Entries
+              .Where(kv => kv.Value.AssemblyBinary is not null)
+              .ToDictionary(kv => kv.Key,
+                            kv => new AssemblyData(kv.Value.AssemblyBinary!, kv.Value.DebugSymbolsBinary),
+                            CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+
+    #endregion
 }

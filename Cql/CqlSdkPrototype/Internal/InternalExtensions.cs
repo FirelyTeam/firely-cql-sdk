@@ -56,4 +56,87 @@ internal static class InternalExtensions
     {
         return value >= lowerIncl && value < upperExcl;
     }
+
+    public static Maybe<T> TryFirst<T>(this IEnumerable<T> source)
+    {
+        return TryFirstImpl(source, out var value) ? value : Maybe.NoValue;
+    }
+
+    public static Maybe<T> TryFirst<T>(this IEnumerable<T> source, Func<T, bool> predicate)
+    {
+        return TryFirstImpl(source, predicate, out var value) ? value : Maybe.NoValue;
+    }
+
+    private static bool TryFirstImpl<TSource>(this IEnumerable<TSource> source, out TSource? found)
+    {
+        if (source == null)
+            throw new ArgumentNullException(nameof(source));
+
+        if (source is IList<TSource> list)
+        {
+            if (list.Count > 0)
+            {
+                found = list[0];
+                return true;
+            }
+        }
+        else
+        {
+            using IEnumerator<TSource> e = source.GetEnumerator();
+            if (e.MoveNext())
+            {
+                found = e.Current;
+                return true;
+            }
+        }
+
+        found = default;
+        return false;
+    }
+
+    private static bool TryFirstImpl<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate, out TSource? found)
+    {
+        if (source == null)
+            throw new ArgumentNullException(nameof(source));
+
+        if (predicate == null)
+            throw new ArgumentNullException(nameof(predicate));
+
+        foreach (TSource element in source)
+        {
+            if (predicate(element))
+            {
+                found = element;
+                return true;
+            }
+        }
+
+        found = default;
+        return false;
+    }
 }
+
+internal readonly record struct Maybe
+{
+    public static Maybe NoValue => default;
+}
+
+internal readonly record struct Maybe<T>
+{
+    public static Maybe<T> NoValue => default;
+
+    private readonly T _value;
+
+    private Maybe(T Value)
+    {
+        this._value = Value;
+    }
+
+    public T Value => HasValue ? _value : throw new InvalidOperationException("No value");
+
+    public bool HasValue { get; } = true;
+
+    public static implicit operator Maybe<T>(T? value) => value is null ? NoValue : new(value);
+    public static implicit operator Maybe<T>(Maybe value) => NoValue;
+}
+

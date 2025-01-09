@@ -1,5 +1,5 @@
 ﻿using CqlSdkPrototype.Advanced;
-using CqlSdkPrototype.CqlToElm.Advanced;
+using CqlSdkPrototype.Cql.Extensibility;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Elm;
@@ -7,41 +7,21 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
-namespace CqlSdkPrototype.CqlToElm;
+namespace CqlSdkPrototype.Cql;
 
 using CqlTranslationEntriesMap = System.Collections.Immutable.ImmutableDictionary<
     CqlVersionedLibraryIdentifier,
-    CqlApi.CqlTranslationEntry>;
+    CqlTranslationEntry>;
 
 public class CqlApi :
-    ICqlApiBase<CqlApi>,
-    ILogAccessor<CqlApi>
+    ICqlApiExtensible<CqlApi>
 {
+    #region State
+
     private readonly State _state;
     ILogger<CqlApi> ILogAccessor<CqlApi>.Logger => _state.Logger;
-
-    public CqlApiOptions Options => _state.Options;
-
-    public IReadOnlyDictionary<CqlLibraryIdentifier, CqlVersionedLibraryIdentifier> GetVersionedIdentifiers() =>
-        _state.Entries
-              .ToDictionary(kv => kv.Key.Identifier, kv => kv.Key);
-
-    internal IReadOnlyDictionary<CqlVersionedLibraryIdentifier, Library> GetElmLibraries() =>
-        _state.Entries
-              .Where(kv => kv.Value.ElmLibrary is not null)
-              .ToDictionary(kv => kv.Key, kv => kv.Value.ElmLibrary!);
-
-    internal IReadOnlyDictionary<CqlVersionedLibraryIdentifier, string> GetElmJsonStrings() =>
-        GetElmLibraries()
-            .ToDictionary(kv => kv.Key, kv =>
-            {
-                var json = kv.Value.SerializeToJson(true);
-                return json;
-            });
-
-    #region Nested Types
+    CqlApiOptions ICqlApiExtensible<CqlApi>.Options => _state.Options;
 
     private readonly record struct State(
         CqlApiOptions Options,
@@ -50,8 +30,6 @@ public class CqlApi :
         public ILogger<CqlApi> Logger { get; } = Options.ServiceProvider.GetLogger<CqlApi>();
         public CqlToElmConverter CqlToElmConverter { get; } = Options.ServiceProvider.GetCqlToElmConverter();
     }
-
-    internal readonly record struct CqlTranslationEntry(CqlLibraryString CqlLibraryString, Library? ElmLibrary = null);
 
     #endregion
 
@@ -77,16 +55,17 @@ public class CqlApi :
 
     public CqlApi WithOptions(Func<CqlApiOptions, CqlApiOptions> replaceOptions)
     {
-        var newOptions = replaceOptions(Options);
-        return ReferenceEquals(Options, newOptions) ? this : new CqlApi(_state with { Options = newOptions });
+        var newOptions = replaceOptions(_state.Options);
+        return ReferenceEquals(_state.Options, newOptions) ? this : new CqlApi(_state with { Options = newOptions });
     }
 
     #endregion
 
-    #region Adding CQL Libraries
+    #region Input (CQL Library Strings)
 
-    public CqlApi AddCqlLibraryStrings(IEnumerable<CqlLibraryString> cqlLibraries)
+    public CqlApi AddCqlLibraries(IEnumerable<CqlLibraryString> cqlLibraries)
     {
+        var logger = _state.Logger;
         var libraryCompilationsBuilder = _state.Entries.ToBuilder();
         var hasChanged = false;
         foreach (var cqlLibrary in cqlLibraries)
@@ -95,13 +74,13 @@ public class CqlApi :
 
             if (libraryCompilationsBuilder.ContainsKey(versionedIdentifier))
             {
-                _state.Logger.LogInformation("Skipping adding previous cql to translation: {versionedIdentifier}", versionedIdentifier);
+                logger.LogInformation("Skipping adding previous cql to translation: {versionedIdentifier}", versionedIdentifier);
                 continue;
             }
 
             var libraryCompilation = new CqlTranslationEntry(cqlLibrary);
             libraryCompilationsBuilder.Add(versionedIdentifier, libraryCompilation);
-            _state.Logger.LogInformation("Adding cql library to translation: {versionedIdentifier}", versionedIdentifier);
+            logger.LogInformation("Adding cql library to translation: {versionedIdentifier}", versionedIdentifier);
             hasChanged = true;
         }
 
@@ -112,7 +91,7 @@ public class CqlApi :
 
     #endregion
 
-    #region Processing
+    #region Processing (CQL-to-ELM)
 
     public CqlApi ConvertToElm()
     {
@@ -140,30 +119,30 @@ public class CqlApi :
         }
 
         int changedCount =
-            GetLibrariesForProcessing()
-            .TryProcessEach(t => ProcessLibrary(t.versionedIdentifier, t.cqlTranslationEntry))
-            .HandleEachOutcome(outcome =>
-            {
-                if (outcome.Exception?.SourceException is { } exception)
-                {
-                    var libraryName = outcome.Input.versionedIdentifier;
-                    switch (_state.Options.ProcessBatchItemExceptionHandling)
+                GetLibrariesForProcessing()
+                    .TryProcessEach(t => ProcessLibrary(t.versionedIdentifier, t.cqlTranslationEntry))
+                    .HandleEachOutcome(outcome =>
                     {
-                        case ProcessBatchItemExceptionHandling.ThrowException:
-                            logger.LogError(exception, "Error translating CQL library '{libraryName}' to ELM.", libraryName);
-                            break;
-                        case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue:
-                            logger.LogWarning(exception, "Error ignored CQL translating library '{libraryName}' to ELM, continuing to next library.", libraryName);
-                            break;
-                        case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:
-                            logger.LogWarning(exception, "Error ignored CQL translating library '{libraryName}' to ELM, abort processing more libraries.", libraryName);
-                            break;
-                    }
-                }
-            })
-            .HandleExceptions(_state.Options.ProcessBatchItemExceptionHandling)
-            .Count() // We must enumerate all
-            ; ;
+                        if (outcome.Exception?.SourceException is { } exception)
+                        {
+                            var libraryName = outcome.Input.versionedIdentifier;
+                            switch (_state.Options.ProcessBatchItemExceptionHandling)
+                            {
+                                case ProcessBatchItemExceptionHandling.ThrowException:
+                                    logger.LogError(exception, "Error translating CQL library '{libraryName}' to ELM.", libraryName);
+                                    break;
+                                case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue:
+                                    logger.LogWarning(exception, "Error ignored CQL translating library '{libraryName}' to ELM, continuing to next library.", libraryName);
+                                    break;
+                                case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:
+                                    logger.LogWarning(exception, "Error ignored CQL translating library '{libraryName}' to ELM, abort processing more libraries.", libraryName);
+                                    break;
+                            }
+                        }
+                    })
+                    .HandleExceptions(_state.Options.ProcessBatchItemExceptionHandling)
+                    .Count() // We must enumerate all
+            ;
 
         return changedCount > 0
                    ? WithEntries(entries: entriesBuilder.ToImmutable())
@@ -176,6 +155,17 @@ public class CqlApi :
             entriesBuilder[versionedIdentifier] = cqlTranslationEntry with { ElmLibrary = library };
         }
     }
+
+    #endregion
+
+    #region Output (ELM Libraries)
+
+    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlTranslationEntry> ICqlApiExtensible<CqlApi>.Entries => _state.Entries;
+
+    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, Library> GetElmLibraries() =>
+        _state.Entries
+              .Where(kv => kv.Value.ElmLibrary is not null)
+              .ToDictionary(kv => kv.Key, kv => kv.Value.ElmLibrary!);
 
     #endregion
 }

@@ -1,17 +1,17 @@
-﻿using CqlSdkPrototype.CqlToElm.Advanced;
+﻿using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Internal;
 using Microsoft.Extensions.Logging;
 
-namespace CqlSdkPrototype.CqlToElm;
+namespace CqlSdkPrototype.Cql;
 
 public static class CqlApiLoadExtensions
 {
     public static TCqlApi AddCqlLibraryString<TCqlApi>(
         this TCqlApi self,
         CqlLibraryString cqlLibrary)
-        where TCqlApi : ICqlApiBase<TCqlApi>
+        where TCqlApi : ICqlApiExtensible<TCqlApi>
     {
-        return self.AddCqlLibraryStrings([cqlLibrary]);
+        return self.AddCqlLibraries([cqlLibrary]);
     }
 
     public static TCqlApi AddCqlLibrariesFromDirectory<TCqlApi>(
@@ -19,7 +19,7 @@ public static class CqlApiLoadExtensions
         DirectoryInfo directory,
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
-        where TCqlApi : ICqlApiBase<TCqlApi>
+        where TCqlApi : ICqlApiExtensible<TCqlApi>
     {
         var files = directory.EnumerateFiles("*.cql", options ?? InternalConstants.DefaultEnumerationOptions);
         if (filePredicate is not null) files = files.Where(filePredicate);
@@ -29,7 +29,7 @@ public static class CqlApiLoadExtensions
     public static TCqlApi AddCqlLibraryFiles<TCqlApi>(
         this TCqlApi self,
         IEnumerable<FileInfo> files)
-        where TCqlApi : ICqlApiBase<TCqlApi>
+        where TCqlApi : ICqlApiExtensible<TCqlApi>
     {
         var cqlLibraries =
             files
@@ -41,6 +41,6 @@ public static class CqlApiLoadExtensions
                     var cqlLibrary = CqlLibraryString.FromIdentifierAndString(versionedLibraryIdentifier, cqlContent);
                     return cqlLibrary;
                 }); // Log errors
-        return self.AddCqlLibraryStrings(cqlLibraries);
+        return self.AddCqlLibraries(cqlLibraries);
     }
 }

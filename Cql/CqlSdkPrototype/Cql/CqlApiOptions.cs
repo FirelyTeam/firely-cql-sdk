@@ -1,12 +1,12 @@
 ﻿using Hl7.Cql.Abstractions.Exceptions;
 
-namespace CqlSdkPrototype.CqlToElm;
+namespace CqlSdkPrototype.Cql;
 
 public record CqlApiOptions(
     IServiceProvider ServiceProvider,
     ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling)
 {
-    public IServiceProvider ServiceProvider { get; } = ServiceProvider ?? throw new ArgumentNullException(nameof(ServiceProvider));
+    internal IServiceProvider ServiceProvider { get; } = ServiceProvider ?? throw new ArgumentNullException(nameof(ServiceProvider));
 
     public static CqlApiOptions Create(
         IServiceProvider serviceProvider,

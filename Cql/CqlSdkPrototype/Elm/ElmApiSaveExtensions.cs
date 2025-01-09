@@ -1,39 +1,47 @@
 ﻿using CqlSdkPrototype.Advanced;
+using CqlSdkPrototype.Elm.Extensibility;
 using Microsoft.Extensions.Logging;
 
-namespace CqlSdkPrototype.ElmToAssembly;
+namespace CqlSdkPrototype.Elm;
 
 public static class ElmApiSaveExtensions
 {
 
-    public static ElmApi SaveCSharpFilesToDirectory(
-        this ElmApi elmApi,
+    public static TElmApi SaveCSharpFilesToDirectory<TElmApi>(
+        this TElmApi elmApi,
         DirectoryInfo directory)
+        where TElmApi : IElmApiExtensible<TElmApi>
     {
         if (!directory.Exists)
             directory.Create();
 
-        var logger = ((ILogAccessor<ElmApi>)elmApi).Logger;
-        foreach (var (libraryName, sourceCode) in elmApi.GetCSharpSourceCodes())
+        var logger = elmApi.Logger;
+        foreach (var (libraryName, (_, cSharpSourceCode, _, _)) in elmApi.Entries)
         {
+            if (cSharpSourceCode is null)
+                continue;
+
             var fileName = Path.Combine(directory.FullName, $"{libraryName}.g.cs");
-            File.WriteAllText(fileName, sourceCode);
+            File.WriteAllText(fileName, cSharpSourceCode);
             logger.LogInformation("Saved C# source code to file: {file}", fileName);
         }
-
         return elmApi;
     }
 
-    public static ElmApi SaveAssemblyBinariesToDirectory(
-        this ElmApi elmApi,
+    public static TElmApi SaveAssemblyBinariesToDirectory<TElmApi>(
+        this TElmApi elmApi,
         DirectoryInfo directory)
+        where TElmApi : IElmApiExtensible<TElmApi>
     {
         if (!directory.Exists)
             directory.Create();
 
-        var logger = ((ILogAccessor<ElmApi>)elmApi).Logger;
-        foreach (var (libraryName, (assemblyBytes, symbolsBytes)) in elmApi.GetAssemblyBinaries())
+        var logger = elmApi.Logger;
+        foreach (var (libraryName, (_, _, assemblyBytes, symbolsBytes)) in elmApi.Entries)
         {
+            if (assemblyBytes is null)
+                continue;
+
             var fileName = Path.Combine(directory.FullName, $"{libraryName}.dll");
             File.WriteAllBytes(fileName, assemblyBytes);
             logger.LogInformation("Saved assembly to file: {file}", fileName);

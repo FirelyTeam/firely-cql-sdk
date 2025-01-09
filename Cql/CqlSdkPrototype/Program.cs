@@ -1,7 +1,10 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Text;
-using CqlSdkPrototype.CqlToElm;
-using CqlSdkPrototype.ElmToAssembly;
+using CqlSdkPrototype.Cql;
+using CqlSdkPrototype.Cql.Extensibility;
+using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Logging;
 using CqlSdkPrototype.Runtime;
@@ -34,9 +37,9 @@ internal class Program
         var cqlApi = CqlApi.Create(serviceProvider);
 
         InvokeCqlFromExamplesFolder(logger, cqlApi);
-        InvokeCqlExample(cqlApi);
+        InvokeCqlExample(logger, cqlApi);
         foreach (var librarySetName in (string[])["Authoring", "CMS", "Demo"])
-            VerboseExample(cqlApi, librarySetName);
+            VerboseExample(logger, cqlApi, librarySetName);
     }
 
     private static void InvokeCqlFromExamplesFolder(
@@ -74,7 +77,9 @@ internal class Program
         }
     }
 
-    private static void InvokeCqlExample(CqlApi cqlApi)
+    private static void InvokeCqlExample(
+        ILogger<Program> logger,
+        CqlApi cqlApi)
     {
         // INTRO:
         // This example demonstrates how to add a CqlLibraryString to the CqlApi and invoke a library declaration directly.
@@ -94,7 +99,10 @@ internal class Program
         Debug.Assert(result is 3);
     }
 
-    private static void VerboseExample(CqlApi cqlApi, string librarySetName)
+    private static void VerboseExample(
+        ILogger<Program> logger,
+        CqlApi cqlApi,
+        string librarySetName)
     {
         // INTRO:
         // This example loads the CQL libraries, translates them to ELM, and compiles them to assemblies.
@@ -133,7 +141,7 @@ internal class Program
                      .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
             ;
 
-        DumpFirstElmAndCSharp(cqlApi, elmApi);
+        DumpFirstElmAndCSharp(cqlApi, elmApi, logger);
         // ExecuteLibrary(serviceProvider, dirs, cqlApi, elmApi, fhirJsonPocoDeserializer);
     }
 
@@ -216,23 +224,31 @@ internal class Program
         return serviceProvider;
     }
 
-    private static void DumpFirstElmAndCSharp(
-        CqlApi cqlApi,
-        ElmApi elmApi)
+    private static void DumpFirstElmAndCSharp<TCqlApi, TElmApi>(
+        TCqlApi cqlApi,
+        TElmApi elmApi,
+        ILogger<Program> logger)
+        where TCqlApi : ICqlApiExtensible<TCqlApi>
+        where TElmApi : IElmApiExtensible<TElmApi>
     {
-        var logger = cqlApi.Options.ServiceProvider.GetLogger<Program>();
-        var id1 = cqlApi.GetElmJsonStrings().Keys.First()!;
-        logger.LogInformation(
-            $"""
-             First 50 C# lines for {id1}:
-             {cqlApi.GetElmJsonStrings()[id1].TakeLines(50)}
-             """);
+        if (cqlApi.Entries.TryFirst(kv => kv.Value.ElmLibrary is not null)
+            is {HasValue:true, Value:{Key:{} id1, Value.ElmLibrary:{} lib}})
+        {
+            logger.LogInformation(
+                $"""
+                 First 50 C# lines for {id1}:
+                 {lib.SerializeToJson().TakeLines(50)}
+                 """);
+        }
 
-        var id2 = elmApi.GetCSharpSourceCodes().Keys.First()!;
-        logger.LogInformation(
-            $"""
-             First 50 C# lines for {id2}:
-             {elmApi.GetCSharpSourceCodes()[id2].TakeLines(50)}
-             """);
+        if (elmApi.Entries.TryFirst(kv => kv.Value.CSharpSourceCode is not null)
+            is { HasValue: true, Value: { Key:{} id2, Value.CSharpSourceCode:{} csharp } })
+        {
+            logger.LogInformation(
+                $"""
+                 First 50 C# lines for {id2}:
+                 {csharp.TakeLines(50)}
+                 """);
+        }
     }
 }

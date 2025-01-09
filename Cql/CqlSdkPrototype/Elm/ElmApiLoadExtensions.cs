@@ -1,38 +1,34 @@
-﻿using CqlSdkPrototype.CqlToElm;
-using CqlSdkPrototype.ElmToAssembly.Advanced;
+﻿using CqlSdkPrototype.Cql;
+using CqlSdkPrototype.Cql.Extensibility;
+using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.Logging;
+
 #pragma warning disable RS0027
 
-namespace CqlSdkPrototype.ElmToAssembly;
+namespace CqlSdkPrototype.Elm;
 
 public static class ElmApiLoadExtensions
 {
-    public static ElmApi CompileAssemblies(
-        this CqlApi cqlApi)
-    {
-        var elmApiOptions = ElmApiOptions.Create(cqlApi.Options);
-        var convertToElm = cqlApi.ConvertToElm();
-        return ElmApi.Create(elmApiOptions)
-                     .LoadElmFromCqlApi(convertToElm)
-                     .CompileAssemblies();
-    }
-
-    public static TElmApi LoadElmFromCqlApi<TElmApi>(
+    public static TElmApi LoadElmFromCqlApi<TElmApi, TCqlApi>(
         this TElmApi self,
-        CqlApi cqlApi)
-        where TElmApi : IElmApiBase<TElmApi>
+        TCqlApi cqlApi)
+        where TElmApi : IElmApiExtensible<TElmApi>
+        where TCqlApi : ICqlApiExtensible<TCqlApi>
     {
-        var libraries = cqlApi.GetElmLibraries().Values.ToArray();
-        return self.AddElmLibraries(libraries);
+        return self.AddElmLibraries(
+            from entry in cqlApi.Entries
+            let elmLibrary = entry.Value.ElmLibrary
+            where elmLibrary is not null
+            select elmLibrary);
     }
 
     public static TElmApi LoadElmFile<TElmApi>(
         this TElmApi self,
         DirectoryInfo directory,
         CqlVersionedLibraryIdentifier versionedLibraryIdentifier)
-        where TElmApi : IElmApiBase<TElmApi>
+        where TElmApi : IElmApiExtensible<TElmApi>
     {
         FileInfo file = new(Path.Combine(directory.FullName, $"{versionedLibraryIdentifier}.json"));
         if (file.Exists)
@@ -49,7 +45,7 @@ public static class ElmApiLoadExtensions
     public static TElmApi LoadElmFiles<TElmApi>(
         this TElmApi self,
         IEnumerable<FileInfo> files)
-        where TElmApi : IElmApiBase<TElmApi>
+        where TElmApi : IElmApiExtensible<TElmApi>
     {
         var libraries =
             files
@@ -66,7 +62,7 @@ public static class ElmApiLoadExtensions
         this TElmApi self,
         DirectoryInfo directory,
         EnumerationOptions? options = null)
-        where TElmApi : IElmApiBase<TElmApi>
+        where TElmApi : IElmApiExtensible<TElmApi>
     {
         var files = directory.EnumerateFiles("*.json", options ?? InternalConstants.DefaultEnumerationOptions);
         return self.LoadElmFiles(files);
@@ -76,7 +72,7 @@ public static class ElmApiLoadExtensions
         this TElmApi self,
         FileInfo file,
         EnumerationOptions? options)
-        where TElmApi : IElmApiBase<TElmApi>
+        where TElmApi : IElmApiExtensible<TElmApi>
     {
         // TODO
         return self;
@@ -87,7 +83,7 @@ public static class ElmApiLoadExtensions
         DirectoryInfo directory,
         CqlVersionedLibraryIdentifier fileName,
         EnumerationOptions? options)
-        where TElmApi : IElmApiBase<TElmApi>
+        where TElmApi : IElmApiExtensible<TElmApi>
     {
         // TODO
         return self;
@@ -96,7 +92,7 @@ public static class ElmApiLoadExtensions
     public static TElmApi LoadElmFile<TElmApi>(
         this TElmApi self,
         FileInfo file)
-        where TElmApi : IElmApiBase<TElmApi>
+        where TElmApi : IElmApiExtensible<TElmApi>
     {
         return self.LoadElmFiles([file]);
     }

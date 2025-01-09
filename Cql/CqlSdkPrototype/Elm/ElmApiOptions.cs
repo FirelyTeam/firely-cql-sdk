@@ -1,13 +1,13 @@
-﻿using CqlSdkPrototype.CqlToElm;
+﻿using CqlSdkPrototype.Cql;
 using Hl7.Cql.Abstractions.Exceptions;
 
-namespace CqlSdkPrototype.ElmToAssembly;
+namespace CqlSdkPrototype.Elm;
 
 public record ElmApiOptions(
     IServiceProvider ServiceProvider,
     ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling)
 {
-    public IServiceProvider ServiceProvider { get; init; } = ServiceProvider ?? throw new ArgumentNullException(nameof(ServiceProvider));
+    internal IServiceProvider ServiceProvider { get; init; } = ServiceProvider ?? throw new ArgumentNullException(nameof(ServiceProvider));
 
     public static ElmApiOptions Create(
         IServiceProvider serviceProvider,

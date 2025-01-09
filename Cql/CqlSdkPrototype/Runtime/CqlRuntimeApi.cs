@@ -2,8 +2,6 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using System.Runtime.Loader;
-using CqlSdkPrototype.CqlToElm;
-using CqlSdkPrototype.ElmToAssembly;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Abstractions.Infrastructure;
