@@ -85,11 +85,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                 });
         }
 
-        public readonly record struct CompileError(
-            object Sender,
-            Exception Exception,
-            Library Library);
-
+        /// <see cref="LibrarySetDefinitionsToCSharpCodeProcessor.GenerateCSharpV2"/>
+        /// <see cref="CompileV2"/>
+        [Obsolete("Use CompileV2 instead after generating the C# source with LibrarySetDefinitionsToCSharpCodeProcessor.GenerateCSharpV2")]
         public IReadOnlyDictionary<string, AssemblyDataWithSourceCode> Compile(
             LibrarySet librarySet,
             DefinitionDictionary<LambdaExpression> definitions,
@@ -171,6 +169,16 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
         }
 
+        public IEnumerable<(Library library, Func<AssemblyDataWithSourceCode> generateAssemblyDataWithSourceCode)> CompileV2(
+            LibrarySet librarySet,
+            IEnumerable<(Library Library, string CSharp)> input)
+        {
+            Dictionary<string, AssemblyDataWithSourceCode> results = new();
+            Assembly[] assemblyReferences = _referencesLazy.Value;
+            foreach (var (library, cSharp) in input)
+                yield return (library, () => CompileNodeV2(cSharp, results, librarySet, library, assemblyReferences));
+        }
+
         private CSharpCompilationOptions CreateCSharpCompilationOptions() =>
             new(
                 outputKind: OutputKind.DynamicallyLinkedLibrary,
@@ -186,9 +194,18 @@ namespace Hl7.Cql.CodeGeneration.NET
             Elm.Library library,
             IEnumerable<Assembly> assemblyReferences)
         {
-            var libraryVersionedIdentifier = library.GetVersionedIdentifier()!;
-
             var librarySourceString = GetSourceCodeString(sourceCodeStream);
+            return CompileNodeV2(librarySourceString, assemblies, librarySet, library, assemblyReferences);
+        }
+
+        private AssemblyDataWithSourceCode CompileNodeV2(
+            string librarySourceString,
+            Dictionary<string, AssemblyDataWithSourceCode> assemblies,
+            LibrarySet librarySet,
+            Library library,
+            IEnumerable<Assembly> assemblyReferences)
+        {
+            var libraryVersionedIdentifier = library.GetVersionedIdentifier()!;
             var librarySourcePath = $"{libraryVersionedIdentifier}.cs";
             if (_assemblyDataWriterOptions.Value.DebugModeAssemblies)
             {
@@ -218,7 +235,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                                                .AddSyntaxTrees(
                                                    librarySyntaxTree,
                                                    assemblyInfoSyntaxTree
-                                                   );
+                                               );
 
             using var codeStream = new MemoryStream();
             MemoryStream? pdbStream = _assemblyDataWriterOptions.Value.DebugModeAssemblies ? new MemoryStream() : null;

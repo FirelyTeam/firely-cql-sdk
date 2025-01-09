@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Hl7.Cql.CodeGeneration.NET;
+﻿using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.CqlToElm.Visitors;

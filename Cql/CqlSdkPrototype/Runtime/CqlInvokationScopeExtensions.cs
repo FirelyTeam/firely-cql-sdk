@@ -1,9 +1,6 @@
-﻿using System.Reflection;
-using System.Text;
+﻿using System.Text;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.Extensions.Logging;
 using static System.FormattableString;
 
 namespace CqlSdkPrototype.Runtime;

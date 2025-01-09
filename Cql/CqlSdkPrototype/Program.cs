@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Text;
+﻿using System.Diagnostics;
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Elm;
@@ -11,12 +9,7 @@ using CqlSdkPrototype.Runtime;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Model;
-using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
-using Hl7.Cql.ValueSets;
-using Hl7.Fhir.Model;
-using Hl7.Fhir.Serialization;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -36,10 +29,11 @@ internal class Program
         var logger = serviceProvider.GetLogger<Program>();
         var cqlApi = CqlApi.Create(serviceProvider);
 
-        InvokeCqlFromExamplesFolder(logger, cqlApi);
-        InvokeCqlExample(logger, cqlApi);
-        foreach (var librarySetName in (string[])["Authoring", "CMS", "Demo"])
-            VerboseExample(logger, cqlApi, librarySetName);
+        // InvokeCqlFromExamplesFolder(logger, cqlApi);
+        // InvokeCqlExample(logger, cqlApi);
+        // foreach (var librarySetName in (string[])["Authoring", "CMS", "Demo"])
+        //     VerboseExample(logger, cqlApi, librarySetName);
+        VerboseExample(logger, cqlApi, "Authoring");
     }
 
     private static void InvokeCqlFromExamplesFolder(

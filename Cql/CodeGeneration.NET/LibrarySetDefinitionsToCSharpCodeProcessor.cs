@@ -105,6 +105,14 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
         return hashSet;
     }
 
+    internal IEnumerable<(Library library, Func<string> generateCSharp)> GenerateCSharpV2(
+        LibrarySet librarySet,
+        DefinitionDictionary<LambdaExpression> definitions)
+    {
+        var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions, CSharpSourceCodeWriterCallbacks.Default, default);
+        return librarySetWriter.GenerateCSharpV2();
+    }
+
     /// <summary>
     /// Writes C# source code from inputs.
     /// </summary>
@@ -112,6 +120,8 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
     /// <param name="definitions">The lambda expressions to write.</param>
     /// <param name="callbacks">Callbacks which is used during the processing of each stream.</param>
     /// <param name="processLibraryToCSharpExceptionHandling">Selecting the exception handling policy for writing libraries to C#.</param>
+    /// <see cref="GenerateCSharpV2"/>
+    [Obsolete("Use GenerateCSharpV2 instead")]
     public void ProcessDefinitions(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> definitions,
@@ -198,29 +208,27 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
                        WriteLibrary(t.library, t.stream);
                        return (t.libraryName, t.stream);
                    })
-                   .HandleEachOutcome(t =>
+                   .HandleEachErroredOutcome(t =>
                    {
-                       if (t.Exception?.SourceException is { } exception)
+                       var exception = t.Exception?.SourceException;
+                       var libraryName = t.Input.libraryName;
+                       switch (ProcessLibraryToCSharpExceptionHandling)
                        {
-                           var libraryName = t.Input.libraryName;
-                           switch (ProcessLibraryToCSharpExceptionHandling)
-                           {
-                               case ProcessBatchItemExceptionHandling.ThrowException:
-                                   Logger.LogError(exception, "Error writing library '{libraryName}' to C#.",
-                                                   libraryName);
-                                   break;
-                               case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue:
-                                   Logger.LogWarning(
-                                       exception,
-                                       "Error writing library '{libraryName}' to C#, continuing.",
-                                       libraryName);
-                                   break;
-                               case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:
-                                   Logger.LogWarning(
-                                       exception, "Error writing library '{libraryName}' to C#, aborting.",
-                                       libraryName);
-                                   break;
-                           }
+                           case ProcessBatchItemExceptionHandling.ThrowException:
+                               Logger.LogError(exception, "Error writing library '{libraryName}' to C#.",
+                                               libraryName);
+                               break;
+                           case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue:
+                               Logger.LogWarning(
+                                   exception,
+                                   "Error writing library '{libraryName}' to C#, continuing.",
+                                   libraryName);
+                               break;
+                           case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:
+                               Logger.LogWarning(
+                                   exception, "Error writing library '{libraryName}' to C#, aborting.",
+                                   libraryName);
+                               break;
                        }
                    })
                    .HandleExceptions(ProcessLibraryToCSharpExceptionHandling);
@@ -232,7 +240,28 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
                 libraryWriter.WriteLibraryFile();
                 writer.Flush();
             }
-    }
+        }
+
+        public IEnumerable<(Library library, Func<string> generateCSharp)> GenerateCSharpV2()
+        {
+            foreach (var library in LibrarySet)
+            {
+                string libraryName = library.GetVersionedIdentifier()!;
+                if (!Definitions.Libraries.Contains(libraryName))
+                    continue;
+
+                yield return (library,GenerateCSharp);
+
+                string GenerateCSharp()
+                {
+                    using var cSharpWriter = new StringWriter();
+                    var libraryWriter = new LibraryWriter(this, library, cSharpWriter);
+                    libraryWriter.WriteLibraryFile();
+                    cSharpWriter.Flush();
+                    return cSharpWriter.ToString();
+                }
+            }
+        }
     }
 
     private record LibraryWriter(
@@ -243,8 +272,8 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
         public LibraryWriter(
             LibrarySetWriter librarySetWriter,
             Library library,
-            StreamWriter streamWriter,
-            int indent = 0) : this(librarySetWriter, library, new IndentedWriter(streamWriter, indent)) {}
+            TextWriter textWriter,
+            int indent = 0) : this(librarySetWriter, library, new IndentedWriter(textWriter, indent)) {}
 
         private VersionedIdentifier LibraryVersionedIdentifier => ((IGetVersionedIdentifier)Library).VersionedIdentifier.Result!;
         public string LibraryName { get; } = Library.GetVersionedIdentifier()!;

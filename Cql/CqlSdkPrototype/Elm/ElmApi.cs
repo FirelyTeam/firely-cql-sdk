@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using CqlSdkPrototype.Advanced;
 using CqlSdkPrototype.Elm.Extensibility;
+using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
@@ -30,6 +31,7 @@ public class ElmApi :
     {
         public ILogger<ElmApi> Logger { get; } = Options.ServiceProvider.GetLogger<ElmApi>();
         public AssemblyCompiler AssemblyCompiler { get; } = Options.ServiceProvider.GetAssemblyCompiler();
+        public LibrarySetDefinitionsToCSharpCodeProcessor LibrarySetDefinitionsToCSharpCodeProcessor { get; } = Options.ServiceProvider.GetLibrarySetDefinitionsToCSharpCodeProcessor();
         public Scope CreateScope() => new(Options.ServiceProvider.CreateScope());
     }
 
@@ -103,42 +105,77 @@ public class ElmApi :
 
     public ElmApi CompileAssemblies()
     {
-        if (_state.Entries.Values.All(predicate: lc => lc is { AssemblyBinary: not null }))
+        var entries = _state.Entries;
+        if (entries.Values.All(predicate: lc => lc is { AssemblyBinary: not null }))
             return this;
 
-        _state.Logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
-        AssemblyCompiler assemblyCompiler = _state.AssemblyCompiler;
         using var servicesScope = _state.CreateScope();
+        var logger = _state.Logger;
+        logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
+        var exceptionHandling = _state.Options.ProcessBatchItemExceptionHandling;
+        AssemblyCompiler assemblyCompiler = _state.AssemblyCompiler;
+        LibrarySetDefinitionsToCSharpCodeProcessor cSharpCodeProcessor = _state.LibrarySetDefinitionsToCSharpCodeProcessor;
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
-        Library[] libraries = _state.Entries.Values.Select(selector: v => v.ElmLibrary).ToArray();
+        Library[] libraries = entries.Values.Select(selector: v => v.ElmLibrary).ToArray();
         LibrarySet librarySet = new LibrarySet(name: "", libraries: libraries);
 
         var removedLibraries = librarySet.RemoveLibrariesWithMissingDependencies();
         foreach (var (id, _) in removedLibraries)
-            _state.Logger.LogWarning(message: "Removed library with missing dependencies: {id}", args: id);
+            logger.LogWarning(message: "Removed library with missing dependencies: {id}", args: id);
 
-        DefinitionDictionary<LambdaExpression> definitionDictionary =
+        DefinitionDictionary<LambdaExpression> definitions =
             librarySetExpressionBuilderScoped.ProcessLibrarySet(
                 librarySet: librarySet,
-                processLibraryExceptionHandling: _state.Options.ProcessBatchItemExceptionHandling);
+                processLibraryExceptionHandling: exceptionHandling);
 
-        IReadOnlyDictionary<string, AssemblyDataWithSourceCode> assemblyDatas =
-            assemblyCompiler.Compile(
-                librarySet: librarySet,
-                definitions: definitionDictionary,
-                libraryCSharpWritingExceptionHandling: _state.Options.ProcessBatchItemExceptionHandling,
-                libraryAssemblyWritingExceptionHandling: _state.Options.ProcessBatchItemExceptionHandling);
+        LogMessageWithException logError = exceptionHandling is ProcessBatchItemExceptionHandling.ThrowException ? logger.LogError : logger.LogWarning;
 
-        var entriesBuilder = _state.Entries.ToBuilder();
+        var cSharps = cSharpCodeProcessor
+                      .GenerateCSharpV2(librarySet, definitions)
+                      .Select(t =>
+                      {
+                          var libraryName = t.library.identifier;
+                          logger.LogInformation("Generating C# for library : {libraryName}", libraryName);
+                          return t;
+                      })
+                      .TryProcessEach(t => (t.library, cSharp:t.generateCSharp()))
+                      .HandleEachErroredOutcome(t =>
+                      {
+                          var exception = t.Exception?.SourceException;
+                          var libraryName = t.Input.library.identifier;
+                          logError(exception, "Error generating C# for library : {libraryName}", libraryName);
+                      })
+                      .HandleExceptions(exceptionHandling);
+
+        var assemblyDatas = assemblyCompiler
+            .CompileV2(librarySet, cSharps)
+            .Select(t =>
+            {
+                var libraryName = t.library.identifier;
+                logger.LogInformation("Compiling assembly for library : {libraryName}", libraryName);
+                return t;
+            })
+            .TryProcessEach(t => (t.library, assemblyDataWithSourceCode:t.generateAssemblyDataWithSourceCode()))
+            .HandleEachErroredOutcome(t =>
+            {
+                var exception = t.Exception?.SourceException;
+                var libraryName = t.Input.library.identifier;
+                logError(exception, "Error compiling assembly for library: {libraryName}", libraryName);
+            })
+            .HandleExceptions(exceptionHandling)
+            //.ToArray()
+            ;
+
+        var entriesBuilder = entries.ToBuilder();
         bool hasChanged = false;
-        foreach (var (name, (assemblyBinary, sourceCodePerName, debugSymbols)) in assemblyDatas)
+        foreach (var (library, (assemblyBinary, sourceCodePerName, debugSymbols)) in assemblyDatas)
         {
-            var elmVersionedIdentifier = CqlVersionedLibraryIdentifier.Parse(s: name);
+            var elmVersionedIdentifier = CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier);
             var libraryCompilation = entriesBuilder[key: elmVersionedIdentifier];
             if (libraryCompilation.CSharpSourceCode is not null
                 || libraryCompilation.AssemblyBinary is not null)
             {
-                _state.Logger.LogInformation(message: "Library already compiled: {versionedIdentifier}", args: elmVersionedIdentifier);
+                logger.LogInformation(message: "Library already compiled: {versionedIdentifier}", args: elmVersionedIdentifier);
                 continue;
             }
 
@@ -150,7 +187,7 @@ public class ElmApi :
                 DebugSymbolsBinary = debugSymbols,
             };
             entriesBuilder[key: elmVersionedIdentifier] = libraryCompilation;
-            _state.Logger.LogInformation(message: "Library compiled: {versionedIdentifier}", args: elmVersionedIdentifier);
+            logger.LogInformation(message: "Library compiled: {versionedIdentifier}", args: elmVersionedIdentifier);
             hasChanged = true;
         }
 
@@ -158,6 +195,11 @@ public class ElmApi :
                    ? WithEntries(entries: entriesBuilder.ToImmutable())
                    : this;
     }
+
+    private delegate void LogMessageWithException(
+        Exception? exception,
+        string? message,
+        params object?[] args);
 
     #endregion
 }

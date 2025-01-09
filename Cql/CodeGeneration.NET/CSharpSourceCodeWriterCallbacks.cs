@@ -16,6 +16,8 @@ namespace Hl7.Cql.CodeGeneration.NET;
 
 internal class CSharpSourceCodeWriterCallbacks
 {
+    public static CSharpSourceCodeWriterCallbacks Default { get; } = new();
+
     private readonly Predicate<string>? _shouldWriteLibrary;
     private readonly Func<string, string?> _libraryNameToClassName;
     private readonly Action<CSharpSourceCodeStep>? _onAfterStep;

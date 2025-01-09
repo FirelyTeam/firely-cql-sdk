@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.ExceptionServices;
 using Hl7.Cql.Abstractions.Exceptions;
 
@@ -99,6 +100,17 @@ internal static class ExceptionHandlingMethods
                 outcome = outcome with { Exception = ExceptionDispatchInfo.Capture(e) };
             }
 
+            yield return outcome;
+        }
+    }
+
+    public static IEnumerable<TryOutcome<TInput, TResult>> HandleEachErroredOutcome<TInput, TResult>(
+        this IEnumerable<TryOutcome<TInput, TResult>> outcomes,
+        Action<TryOutcome<TInput, TResult>> processOutcome)
+    {
+        foreach (var outcome in outcomes.Where(o => o.Exception?.SourceException is not null))
+        {
+            processOutcome(outcome);
             yield return outcome;
         }
     }
