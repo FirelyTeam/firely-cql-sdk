@@ -208,25 +208,24 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
                        WriteLibrary(t.library, t.stream);
                        return (t.libraryName, t.stream);
                    })
-                   .HandleEachErroredOutcome(t =>
+                   .WithEachException(t =>
                    {
-                       var exception = t.Exception?.SourceException;
                        var libraryName = t.Input.libraryName;
                        switch (ProcessLibraryToCSharpExceptionHandling)
                        {
                            case ProcessBatchItemExceptionHandling.ThrowException:
-                               Logger.LogError(exception, "Error writing library '{libraryName}' to C#.",
+                               Logger.LogError(t.Exception, "Error writing library '{libraryName}' to C#.",
                                                libraryName);
                                break;
                            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue:
                                Logger.LogWarning(
-                                   exception,
+                                   t.Exception,
                                    "Error writing library '{libraryName}' to C#, continuing.",
                                    libraryName);
                                break;
                            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:
                                Logger.LogWarning(
-                                   exception, "Error writing library '{libraryName}' to C#, aborting.",
+                                   t.Exception, "Error writing library '{libraryName}' to C#, aborting.",
                                    libraryName);
                                break;
                        }

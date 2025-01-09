@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System;
 using System.Linq;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Exceptions;
@@ -50,25 +51,13 @@ internal partial class LibrarySetExpressionBuilderContext
         {
             LibrarySet
                 .TryProcessEach(ProcessLibrary)
-                .HandleEachOutcome(outcome =>
+                .WithEachException(outcome =>
                 {
-                    if (outcome.Exception?.SourceException is { } exception)
-                    {
-                        var libraryName = outcome.Input.GetVersionedIdentifier()!;
-                        switch (processLibraryExceptionHandling)
-                        {
-                            case ProcessBatchItemExceptionHandling.ThrowException:
-                                _logger.LogError(exception, "Error writing library '{libraryName}' to C#.", libraryName);
-                                break;
-                            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue:
-                                _logger.LogWarning(exception, "Error writing library '{libraryName}' to C#, continuing", libraryName);
-                                break;
-                            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:
-                                _logger.LogWarning(exception, "Error writing library '{libraryName}' to C#, aborting", libraryName);
-                                break;
-                        }
-                    }
-
+                    var libraryName = outcome.Input.GetVersionedIdentifier()!;
+                    if (processLibraryExceptionHandling == ProcessBatchItemExceptionHandling.ThrowException)
+                        _logger.LogError(outcome.Exception, "Error writing library '{libraryName}' to C#.", libraryName);
+                    else
+                        _logger.LogWarning(outcome.Exception, "Error writing library '{libraryName}' to C#.", libraryName);
                 })
                 .HandleExceptions(processLibraryExceptionHandling)
                 .Count() // We must enumerate all

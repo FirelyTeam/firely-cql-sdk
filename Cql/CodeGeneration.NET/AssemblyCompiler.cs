@@ -137,23 +137,20 @@ namespace Hl7.Cql.CodeGeneration.NET
                                   select (libraryName, library, stream);
                 inputs
                     .TryProcessEach(item => CompileAssembly(item.library, item.stream))
-                    .HandleEachOutcome(outcome =>
+                    .WithEachException(outcome =>
                     {
-                        if (outcome.Exception?.SourceException is { } exception)
+                        var libraryName = outcome.Input.libraryName;
+                        switch (libraryAssemblyWritingExceptionHandling)
                         {
-                            var libraryName = outcome.Input.libraryName;
-                            switch (libraryAssemblyWritingExceptionHandling)
-                            {
-                                case ProcessBatchItemExceptionHandling.ThrowException:
-                                    _logger.LogError(exception, "Error writing library '{libraryName}' to .NET assembly.", libraryName);
-                                    break;
-                                case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue:
-                                    _logger.LogWarning(exception, "Error writing library '{libraryName}' to .NET assembly, continuing", libraryName);
-                                    break;
-                                case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:
-                                    _logger.LogWarning(exception, "Error writing library '{libraryName}' to .NET assembly, aborting", libraryName);
-                                    break;
-                            }
+                            case ProcessBatchItemExceptionHandling.ThrowException:
+                                _logger.LogError(outcome.Exception, "Error writing library '{libraryName}' to .NET assembly.", libraryName);
+                                break;
+                            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue:
+                                _logger.LogWarning(outcome.Exception, "Error writing library '{libraryName}' to .NET assembly, continuing", libraryName);
+                                break;
+                            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:
+                                _logger.LogWarning(outcome.Exception, "Error writing library '{libraryName}' to .NET assembly, aborting", libraryName);
+                                break;
                         }
                     })
                     .HandleExceptions(libraryAssemblyWritingExceptionHandling)

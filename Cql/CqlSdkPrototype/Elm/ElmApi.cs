@@ -1,6 +1,7 @@
 ﻿using System.Linq.Expressions;
 using CqlSdkPrototype.Advanced;
 using CqlSdkPrototype.Elm.Extensibility;
+using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
@@ -128,7 +129,7 @@ public class ElmApi :
                 librarySet: librarySet,
                 processLibraryExceptionHandling: exceptionHandling);
 
-        LogMessageWithException logError = exceptionHandling is ProcessBatchItemExceptionHandling.ThrowException ? logger.LogError : logger.LogWarning;
+        LogExceptionMessageAction log = logger.GetLogExceptionMessageAction(exceptionHandling);
 
         var cSharps = cSharpCodeProcessor
                       .GenerateCSharpV2(librarySet, definitions)
@@ -139,11 +140,10 @@ public class ElmApi :
                           return t;
                       })
                       .TryProcessEach(t => (t.library, cSharp:t.generateCSharp()))
-                      .HandleEachErroredOutcome(t =>
+                      .WithEachException(t =>
                       {
-                          var exception = t.Exception?.SourceException;
                           var libraryName = t.Input.library.identifier;
-                          logError(exception, "Error generating C# for library : {libraryName}", libraryName);
+                          log(t.Exception, "Error generating C# for library : {libraryName}", libraryName);
                       })
                       .HandleExceptions(exceptionHandling);
 
@@ -156,11 +156,10 @@ public class ElmApi :
                 return t;
             })
             .TryProcessEach(t => (t.library, assemblyDataWithSourceCode:t.generateAssemblyDataWithSourceCode()))
-            .HandleEachErroredOutcome(t =>
+            .WithEachException(t =>
             {
-                var exception = t.Exception?.SourceException;
                 var libraryName = t.Input.library.identifier;
-                logError(exception, "Error compiling assembly for library: {libraryName}", libraryName);
+                log(t.Exception, "Error compiling assembly for library: {libraryName}", libraryName);
             })
             .HandleExceptions(exceptionHandling)
             //.ToArray()
@@ -195,11 +194,6 @@ public class ElmApi :
                    ? WithEntries(entries: entriesBuilder.ToImmutable())
                    : this;
     }
-
-    private delegate void LogMessageWithException(
-        Exception? exception,
-        string? message,
-        params object?[] args);
 
     #endregion
 }

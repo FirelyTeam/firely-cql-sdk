@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
 using System.Runtime.Loader;
+using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Runtime;
+using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Internal;
 
@@ -114,7 +116,19 @@ internal static class InternalExtensions
         found = default;
         return false;
     }
+
+    public static LogExceptionMessageAction GetLogExceptionMessageAction(
+        this ILogger logger,
+        ProcessBatchItemExceptionHandling exceptionHandling) =>
+        exceptionHandling is ProcessBatchItemExceptionHandling.ThrowException ? logger.LogError : logger.LogWarning;
 }
+
+
+public delegate void LogExceptionMessageAction(
+    Exception? exception,
+    string? message,
+    params object?[] args);
+
 
 internal readonly record struct Maybe
 {
