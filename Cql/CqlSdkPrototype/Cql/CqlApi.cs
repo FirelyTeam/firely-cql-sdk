@@ -19,7 +19,6 @@ public class CqlApi :
     #region State
 
     private readonly State _state;
-    ILogger<CqlApi> ILogAccessor<CqlApi>.Logger => _state.Logger;
     CqlApiOptions ICqlApi<CqlApi>.Options => _state.Options;
     IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlTranslationEntry> ICqlApi<CqlApi>.Entries => _state.Entries;
 

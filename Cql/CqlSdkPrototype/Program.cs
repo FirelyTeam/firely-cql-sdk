@@ -129,7 +129,7 @@ internal class Program
 
         var elmApi = cqlApi
                      .CreateElmApi()
-                     .LoadElmFromCqlApi(cqlApi)
+                     .AddElmFromCqlApi(cqlApi)
                      //.LoadElmFile(elmDirIn, ElmLibraryIdentifier.Parse("FHIRHelpers")) //
                      //.LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
                      .Compile()

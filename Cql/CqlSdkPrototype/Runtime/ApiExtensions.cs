@@ -15,7 +15,7 @@ internal static class ApiExtensions
         var elmApi = ElmApi
                      .Create(cqlApi.Options.ServiceProvider)
                      .WithOptions(_ => ElmApiOptions.Create(cqlApi.Options))
-                     .LoadElmFromCqlApi(cqlApi);
+                     .AddElmFromCqlApi(cqlApi);
         return elmApi;
     }
     public static CqlRuntimeApi CreateCqlRuntimeApi<TElmApi>(this TElmApi elmApi)

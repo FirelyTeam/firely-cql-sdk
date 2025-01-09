@@ -3,8 +3,7 @@ using Hl7.Cql.Elm;
 
 namespace CqlSdkPrototype.Elm.Extensibility;
 
-public interface IElmApi<out TElmApi> :
-    ILogAccessor<TElmApi>
+public interface IElmApi<out TElmApi>
     where TElmApi : IElmApi<TElmApi>
 {
     //static abstract TElmApi Create(ElmApiOptions options);

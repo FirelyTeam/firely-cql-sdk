@@ -47,13 +47,20 @@ public static class Extensions
         }
     }
 
-    public static IServiceCollection AddCqlApi(
-        this IServiceCollection serviceCollection,
-        Action<CqlTranslationOptions>? configureOptions = null)
+    public static IServiceCollection SuppressCqlDebugAssertions(
+        this IServiceCollection serviceCollection)
     {
         // This is really annoying in debug mode
         ExpressionVisitor.EnableDebugAssertions = false;
         Library.EnableDebugAssertions = false;
+        return serviceCollection;
+    }
+
+    public static IServiceCollection AddCqlApi(
+        this IServiceCollection serviceCollection,
+        Action<CqlTranslationOptions>? configureOptions = null)
+    {
+        serviceCollection.SuppressCqlDebugAssertions();
 
         CqlTranslationOptions? cqlTranslationOptions = null;
         if (configureOptions is { } fn)

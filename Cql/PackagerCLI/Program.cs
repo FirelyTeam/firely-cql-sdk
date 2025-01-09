@@ -14,7 +14,7 @@ using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using Serilog;
+using Log = Serilog.Log;
 
 namespace Hl7.Cql.Packager;
 
@@ -53,9 +53,15 @@ public class Program
                                                }))
             .ConfigureAppConfiguration((context, config) => config.AddPackagerCliCommandLineSwitches(args))
             .ConfigureLogging((context, logging) => logging.AddPackagerCLiLogging(context.Configuration))
-            .ConfigureServices((context, services) =>                                   services
-                                       .AddPackagerCliOptions(context.Configuration)
-                                       .AddPackagerCliServices())
+            .ConfigureServices((context, services) =>
+            {
+                services
+                    .AddPackagerCliOptions(context.Configuration)
+                    .AddPackagerCliServices()
+                    //.AddCqlApi()
+                    //.AddElmApi()
+                    ;
+            })
             .UseConsoleLifetime()
             ;
 

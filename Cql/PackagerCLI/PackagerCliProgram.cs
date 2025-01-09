@@ -6,12 +6,72 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using CqlSdkPrototype.Cql;
+using CqlSdkPrototype.Elm;
+using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packaging;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packager;
 
-internal class PackagerCliProgram(
+internal class PackagerCliProgram
+(
+    ILogger<PackagerCliProgram> logger,
+    OptionsConsoleDumper optionsConsoleDumper,
+    IServiceProvider serviceProvider,
+    IOptions<CqlToResourcePackagingOptions> packagingOptions,
+    IOptions<CSharpCodeWriterOptions> cSharpOptions,
+    IOptions<AssemblyDataWriterOptions> asmOptions)
+{
+    public int Run(bool translateCql = false)
+    {
+        try
+        {
+            optionsConsoleDumper.DumpToConsole();
+            var packagingOpt = packagingOptions.Value;
+            var cSharpOpt = cSharpOptions.Value;
+            var asmOpt = asmOptions.Value;
+
+            ElmApi elmApi = translateCql
+                                ? CqlApi.Create(serviceProvider)
+                                        .WithOptions(o => o with
+                                        {
+                                            ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
+                                        })
+                                        .AddCqlLibrariesFromDirectory(packagingOpt.CqlDirectory)
+                                        .Translate()
+                                        .SaveElmFileToDirectory(packagingOpt.ElmDirectory)
+                                        .Compile()
+                                : ElmApi.Create(serviceProvider)
+                                        .WithOptions(o => o with
+                                        {
+                                            ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
+                                        })
+                                        .AddElmFilesFromDirectory(packagingOpt.ElmDirectory, filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name))
+                                        .Compile();
+
+            if (cSharpOpt.OutDirectory != null)
+                elmApi = elmApi.SaveCSharpFilesToDirectory(cSharpOpt.OutDirectory);
+
+            if (asmOpt.OutDirectory != null)
+                elmApi = elmApi.SaveAssemblyBinariesToDirectory(asmOpt.OutDirectory);
+
+            return 0;
+        }
+        catch (Exception e)
+        {
+            logger.LogError(e, "An error occurred while running the packager");
+            Console.Error.WriteLine(
+                "An error occurred while running PackagerCLI. Consult the build.log file for more detail.");
+            return -1;
+        }
+    }
+}
+
+internal class PackagerCliProgramOld
+(
     ILogger<PackagerCliProgram> logger,
     OptionsConsoleDumper optionsConsoleDumper,
     CqlToResourcePackagingPipeline cqlToResourcePackagingPipeline)
@@ -27,7 +87,8 @@ internal class PackagerCliProgram(
         catch (Exception e)
         {
             logger.LogError(e, "An error occurred while running the packager");
-            Console.Error.WriteLine("An error occurred while running PackagerCLI. Consult the build.log file for more detail.");
+            Console.Error.WriteLine(
+                "An error occurred while running PackagerCLI. Consult the build.log file for more detail.");
             return -1;
         }
     }

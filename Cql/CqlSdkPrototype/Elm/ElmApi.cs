@@ -22,7 +22,6 @@ public class ElmApi :
     #region State
 
     private readonly State _state;
-    ILogger<ElmApi> ILogAccessor<ElmApi>.Logger => _state.Logger;
     ElmApiOptions IElmApi<ElmApi>.Options => _state.Options;
     IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmCompilationEntry> IElmApi<ElmApi>.Entries => _state.Entries;
 

@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Globalization;
 using Microsoft.Extensions.Options;
 using System.Runtime.CompilerServices;
 using System.Text;

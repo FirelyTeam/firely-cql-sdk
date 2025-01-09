@@ -4,8 +4,7 @@ using CqlSdkPrototype.Elm.Extensibility;
 
 namespace CqlSdkPrototype.Cql.Extensibility;
 
-public interface ICqlApi<out TCqlApi> :
-    ILogAccessor<TCqlApi>
+public interface ICqlApi<out TCqlApi>
     where TCqlApi : ICqlApi<TCqlApi>
 {
     // static abstract TCqlApi Create(CqlApiOptions options);

@@ -1,10 +1,11 @@
 ﻿using CqlSdkPrototype.Advanced;
 using CqlSdkPrototype.Cql.Extensibility;
+using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Cql;
 
-public static class CqlApiSaveExtensions
+public static partial class CqlApiExtensions
 {
 
     public static TCqlApi SaveElmFileToDirectory<TCqlApi>(
@@ -16,7 +17,7 @@ public static class CqlApiSaveExtensions
         if (!directory.Exists)
             directory.Create();
 
-        var logger = ((ILogAccessor<CqlApi>)cqlApi).Logger;
+        var logger = cqlApi.Options.ServiceProvider.GetLogger<CqlApi>()!;
         foreach (var (libraryName, (_, elmLibrary)) in cqlApi.Entries)
         {
             if (elmLibrary == null)
