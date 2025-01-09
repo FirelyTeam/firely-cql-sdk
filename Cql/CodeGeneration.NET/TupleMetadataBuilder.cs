@@ -14,7 +14,7 @@ namespace Hl7.Cql.CodeGeneration.NET;
 
 internal class TupleMetadataBuilder
 {
-    private readonly Dictionary<string, IReadOnlyCollection<(Type Type, string PropName)>> _signaturesByHash = new();
+    private readonly SortedDictionary<string, IReadOnlyCollection<(Type Type, string PropName)>> _signaturesByHash = new();
 
     public string GetTupleMetadataPropertyName(
         IReadOnlyCollection<(Type Type, string PropName)> tupleProps)

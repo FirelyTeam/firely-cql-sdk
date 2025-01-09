@@ -548,25 +548,17 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
     }
 
 
+    private static CqlTupleMetadata CqlTupleMetadata_BDeBMdFeZaVSehBSFYjTFdYYD = new(
+        [typeof(IEnumerable<CqlDate>), typeof(int?)],
+        ["SortedList", "AnchorIndex"]);
+
     private static CqlTupleMetadata CqlTupleMetadata_CaKghTfWMNOTHSWhifjFZOVYO = new(
         [typeof(CodeableConcept), typeof(Period)],
         ["code", "period"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_EaLaedgLDgRRYaLbKIIcBTOiA = new(
-        [typeof(Encounter), typeof(Encounter)],
-        ["OutpatientEncounter1", "OutpatientEncounter2"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CgaDVOXeQBMgMPCPZOThIIdDb = new(
-        [typeof(CqlInterval<CqlDateTime>), typeof(CqlInterval<CqlDateTime>)],
-        ["LTCPeriod1", "LTCPeriod2"]);
-
     private static CqlTupleMetadata CqlTupleMetadata_CfANiScMYDdVZFgRERKJQEVca = new(
         [typeof(IEnumerable<CqlDate>)],
         ["SortedDates"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BDeBMdFeZaVSehBSFYjTFdYYD = new(
-        [typeof(IEnumerable<CqlDate>), typeof(int?)],
-        ["SortedList", "AnchorIndex"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc = new(
         [typeof(CqlDate), typeof(IEnumerable<CqlDate>), typeof(int?)],

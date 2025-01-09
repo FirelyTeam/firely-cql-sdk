@@ -197,12 +197,4 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ = new(
-        [typeof(string), typeof(string)],
-        ["result1", "result2"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY = new(
-        [typeof(string), typeof((CqlTupleMetadata, string result1, string result2)?)],
-        ["status", "result"]);
-
 }

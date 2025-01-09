@@ -1009,64 +1009,20 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
-        [typeof(IEnumerable<CqlCode>), typeof(string)],
-        ["codes", "display"]);
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
+        [typeof(string), typeof(int?)],
+        ["EncounterID", "CalculatedCGA"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
         [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
         ["code", "period"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-        ["dayIndex", "dayPeriod"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
-        [typeof(CqlDate)],
-        ["AntidepressantDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GIbILVAdXLLNYBgcQIEiUiKaK = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstTemperatureResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DhbJAfCiKIAGYKTjJXYGSKECQ = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHeartRateResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FdREYEdHOZIcMCNYCRFJYJReA = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstOxygenSatResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GbUHPXXHScejjXWhcHJFQQifQ = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstBicarbonateResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FETECNQPQREfGRgPYWhOWgeWA = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstCreatinineResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DIHdhbAJeJTdiAVUAELUHRNdS = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHematocritResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DAUcYHQZcDKbIfORJOEZBDgIh = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstPlateletResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GKGeLARADLGJcNcZaDhdCREMa = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstSodiumResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_ChVYCdXDGgVcFTCCUefXMbCHX = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstWhiteBloodCellResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb = new(
-        [typeof(string), typeof(CqlDateTime)],
-        ["ID", "AuthorDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
-        [typeof(string), typeof(int?)],
-        ["EncounterID", "CalculatedCGA"]);
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
 
 }

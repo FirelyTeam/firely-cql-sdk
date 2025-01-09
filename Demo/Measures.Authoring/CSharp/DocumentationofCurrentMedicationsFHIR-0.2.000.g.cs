@@ -275,16 +275,16 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
-        [typeof(IEnumerable<CqlCode>), typeof(string)],
-        ["codes", "display"]);
+    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayIndex", "dayPeriod"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
         [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
         ["code", "period"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-        ["dayIndex", "dayPeriod"]);
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
 
 }

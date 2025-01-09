@@ -443,12 +443,4 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_0_012 : ILibrar
         [typeof(CodeableConcept), typeof(Period)],
         ["code", "period"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_EaLaedgLDgRRYaLbKIIcBTOiA = new(
-        [typeof(Encounter), typeof(Encounter)],
-        ["OutpatientEncounter1", "OutpatientEncounter2"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CgaDVOXeQBMgMPCPZOThIIdDb = new(
-        [typeof(CqlInterval<CqlDateTime>), typeof(CqlInterval<CqlDateTime>)],
-        ["LTCPeriod1", "LTCPeriod2"]);
-
 }

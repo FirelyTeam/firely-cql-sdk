@@ -768,100 +768,60 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_1_000 : 
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
-        [typeof(IEnumerable<CqlCode>), typeof(string)],
-        ["codes", "display"]);
+    private static CqlTupleMetadata CqlTupleMetadata_BbhMZNJZUhELHSIeBfBEVUQGO = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(bool?), typeof(bool?), typeof(bool?)],
+        ["dayNumber", "dayPeriod", "hasSevereResult", "hasElevatedResult", "hasNoGlucoseTest"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
-        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
-        ["code", "period"]);
+    private static CqlTupleMetadata CqlTupleMetadata_BBNOZJWbNFIIMKUYJNdXQYNTL = new(
+        [typeof(Encounter), typeof(Observation), typeof(Observation)],
+        ["InpatientHospitalization", "GlucoseResult1000", "EarlierGlucoseTest"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BRDBXSUhdQiXBCfMGdSacWIG = new(
+        [typeof((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?), typeof(MedicationAdministration)],
+        ["Hospitalization", "HypoglycemicMed"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CLZgggJGDQVFHPIfbiSZOiXTH = new(
+        [typeof(Encounter), typeof(Observation)],
+        ["InpatientHospitalization", "GlucoseTest"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
         [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
         ["dayIndex", "dayPeriod"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
-        [typeof(CqlDate)],
-        ["AntidepressantDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GIbILVAdXLLNYBgcQIEiUiKaK = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstTemperatureResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DhbJAfCiKIAGYKTjJXYGSKECQ = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHeartRateResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FdREYEdHOZIcMCNYCRFJYJReA = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstOxygenSatResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GbUHPXXHScejjXWhcHJFQQifQ = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstBicarbonateResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FETECNQPQREfGRgPYWhOWgeWA = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstCreatinineResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DIHdhbAJeJTdiAVUAELUHRNdS = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHematocritResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DAUcYHQZcDKbIfORJOEZBDgIh = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstPlateletResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GKGeLARADLGJcNcZaDhdCREMa = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstSodiumResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_ChVYCdXDGgVcFTCCUefXMbCHX = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstWhiteBloodCellResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb = new(
-        [typeof(string), typeof(CqlDateTime)],
-        ["ID", "AuthorDate"]);
-
     private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
         [typeof(string), typeof(int?)],
         ["EncounterID", "CalculatedCGA"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_FRbAiSWEhRfKaLTXPVgFXYZAE = new(
-        [typeof(CqlConcept), typeof(string)],
-        ["code", "SOCDxCategory"]);
+    private static CqlTupleMetadata CqlTupleMetadata_FhADCCAGbeXAiadgccRECiPBd = new(
+        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayNumber, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoGlucoseTest)?>)],
+        ["encounter", "relevantPeriod", "relevantDays"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_RBQLXdQIRBbBEHDfOgQjdBMH = new(
-        [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, CqlConcept code, string SOCDxCategory)?>)],
-        ["id", "complications"]);
+    private static CqlTupleMetadata CqlTupleMetadata_FNeERNKXWKJeEjWXREHDLePdY = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(bool?)],
+        ["dayIndex", "dayPeriod", "hasHyperglycemicEvent"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_FNaSKPNeFZXSNMfSCYPJLLGSR = new(
-        [typeof(Procedure), typeof(string)],
-        ["code", "SOCProcedureCategory"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GJFejXJaZWjRVYgMbQUZgIPjK = new(
+        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?>)],
+        ["encounter", "relevantPeriod", "eligibleEventDays"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_DbihhAfJfGSKOIcQDBMEMigFK = new(
-        [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?>)],
-        ["id", "procedures"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GPLfQTPONQabPZigKbYFERDVQ = new(
+        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>)],
+        ["encounter", "hospitalizationPeriod"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_ESFBYaBAeYMhOBFMjVCbeLhQA = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstWBCResult", "Timing"]);
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_HOiMaDjifIOTXXFShNKiWLBLV = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHRResult", "Timing"]);
+    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
+        [typeof(IEnumerable<CqlCode>), typeof(string)],
+        ["codes", "display"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_FjSKXeIESORPNbRGajibMfUaK = new(
-        [typeof(string), typeof(IEnumerable<CqlQuantity>), typeof(CqlDateTime)],
-        ["EncounterId", "FirstSBPResult", "Timing"]);
+    private static CqlTupleMetadata CqlTupleMetadata_HRTAKZQhNDEfbiSbFGHLQTdcR = new(
+        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayNumber, CqlInterval<CqlDateTime> dayPeriod)?>)],
+        ["encounter", "hospitalizationPeriod", "relevantPeriod", "relevantDays"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_CVELXTjiMTaGQEjMfJXBdUHjW = new(
-        [typeof(CqlDate)],
-        ["startDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD = new(
-        [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
-        ["period", "periodStart"]);
+    private static CqlTupleMetadata CqlTupleMetadata_SMNhCfXhAdRgSFYJNGOMBShE = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["dayNumber", "dayPeriod"]);
 
 }
