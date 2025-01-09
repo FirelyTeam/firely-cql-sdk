@@ -8,7 +8,6 @@
  */
 
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
@@ -19,19 +18,13 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 using System.Security.Cryptography;
 using System.Text;
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Elm;
 using Microsoft.CodeAnalysis.Text;
 using Microsoft.Extensions.Options;
 using Microsoft.CodeAnalysis.Emit;
-using Microsoft.Extensions.Logging;
-using static Hl7.Cql.CodeGeneration.NET.CSharpSourceCodeStep;
-using Hl7.Fhir.Model;
-using Count = Hl7.Cql.Elm.Count;
 using Library = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.CodeGeneration.NET
@@ -40,26 +33,14 @@ namespace Hl7.Cql.CodeGeneration.NET
     {
         private static readonly EmitOptions EmitOptionsPortable = new EmitOptions(debugInformationFormat: DebugInformationFormat.PortablePdb);
         private static readonly CSharpParseOptions CSharpParseOptions = CSharpParseOptions.Default;
-        private readonly LibrarySetDefinitionsToCSharpCodeProcessor _librarySetDefinitionsToCSharpCodeProcessor;
-        private readonly CSharpCodeStreamPostProcessor? _cSharpCodeStreamPostProcessor;
         private readonly Lazy<Assembly[]> _referencesLazy;
         private readonly IOptions<AssemblyDataWriterOptions> _assemblyDataWriterOptions;
-        private readonly ILogger<AssemblyCompiler> _logger;
-        private readonly AssemblyDataPostProcessor? _assemblyDataPostProcessor;
 
         public AssemblyCompiler(
             IOptions<AssemblyDataWriterOptions> assemblyDataWriterOptions,
-            ILogger<AssemblyCompiler> logger,
-            LibrarySetDefinitionsToCSharpCodeProcessor librarySetDefinitionsToLibrarySetDefinitionsToCSharpCodeProcessor,
-            TypeResolver typeResolver,
-            CSharpCodeStreamPostProcessor? cSharpCodeStreamPostProcessor = null,
-            AssemblyDataPostProcessor? assemblyDataPostProcessor = null)
+            TypeResolver typeResolver)
         {
             _assemblyDataWriterOptions = assemblyDataWriterOptions;
-            _logger = logger;
-            _assemblyDataPostProcessor = assemblyDataPostProcessor;
-            _librarySetDefinitionsToCSharpCodeProcessor = librarySetDefinitionsToLibrarySetDefinitionsToCSharpCodeProcessor;
-            _cSharpCodeStreamPostProcessor = cSharpCodeStreamPostProcessor;
             _referencesLazy = new Lazy<Assembly[]>(
                 () =>
                 {
@@ -85,88 +66,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 });
         }
 
-        /// <see cref="LibrarySetDefinitionsToCSharpCodeProcessor.GenerateCSharpV2"/>
-        /// <see cref="CompileV2"/>
-        [Obsolete("Use CompileV2 instead after generating the C# source with LibrarySetDefinitionsToCSharpCodeProcessor.GenerateCSharpV2", error:false)]
-        public IReadOnlyDictionary<string, AssemblyDataWithSourceCode> Compile(
-            LibrarySet librarySet,
-            DefinitionDictionary<LambdaExpression> definitions,
-            ProcessBatchItemExceptionHandling libraryCSharpWritingExceptionHandling = default,
-            ProcessBatchItemExceptionHandling libraryAssemblyWritingExceptionHandling = default)
-        {
-            ArgumentNullException.ThrowIfNull(definitions);
-
-            Dictionary<string, AssemblyDataWithSourceCode> results = new();
-
-            List<(string libraryName, Stream stream)> items = [];
-
-            _librarySetDefinitionsToCSharpCodeProcessor.ProcessDefinitions(
-                librarySet,
-                definitions,
-                callbacks: new(onAfterStep: CSharpSourceCodeStep),
-                processLibraryToCSharpExceptionHandling: libraryCSharpWritingExceptionHandling);
-
-            return results;
-
-            void CSharpSourceCodeStep(CSharpSourceCodeStep next)
-            {
-                switch (next)
-                {
-                    case CSharpSourceCodeStep.OnStream onStream:
-                        // Write out C# File
-                        _cSharpCodeStreamPostProcessor?.ProcessStream(onStream.Name, onStream.Stream);
-                        items.Add((onStream.Name, onStream.Stream));
-                        break;
-
-                    case NET.CSharpSourceCodeStep.OnDone:
-                        if (_assemblyDataPostProcessor != null)
-                            foreach (var referenceAssembly in _referencesLazy.Value)
-                                _assemblyDataPostProcessor.ProcessReferenceAssembly(referenceAssembly);
-
-                        CompileAssemblies();
-                        break;
-                }
-            }
-
-            void CompileAssemblies()
-            {
-                var inputs = from item in items
-                                  let libraryName = item.libraryName!
-                                  let library = librarySet.GetLibrary(libraryName)!
-                                  let stream = item.stream!
-                                  select (libraryName, library, stream);
-                inputs
-                    .TryProcessEach(item => CompileAssembly(item.library, item.stream))
-                    .WithEachException(outcome =>
-                    {
-                        var libraryName = outcome.Input.libraryName;
-                        switch (libraryAssemblyWritingExceptionHandling)
-                        {
-                            case ProcessBatchItemExceptionHandling.ThrowException:
-                                _logger.LogError(outcome.Exception, "Error writing library '{libraryName}' to .NET assembly.", libraryName);
-                                break;
-                            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue:
-                                _logger.LogWarning(outcome.Exception, "Error writing library '{libraryName}' to .NET assembly, continuing", libraryName);
-                                break;
-                            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:
-                                _logger.LogWarning(outcome.Exception, "Error writing library '{libraryName}' to .NET assembly, aborting", libraryName);
-                                break;
-                        }
-                    })
-                    .HandleExceptions(libraryAssemblyWritingExceptionHandling)
-                    .Count() // We must enumerate all
-                    ;
-            }
-
-            void CompileAssembly(Library library, Stream stream)
-            {
-                var libraryAssembly = CompileNode(stream, results, librarySet, library, _referencesLazy.Value);
-                results.Add(library.GetVersionedIdentifier()!, libraryAssembly);
-                _assemblyDataPostProcessor?.ProcessAssemblyData(library.GetVersionedIdentifier()!, libraryAssembly);
-            }
-        }
-
-        public IEnumerable<(Library library, Func<AssemblyDataWithSourceCode> generateAssemblyDataWithSourceCode)> CompileV2(
+        public IEnumerable<(Library library, Func<AssemblyDataWithSourceCode> generateAssemblyDataWithSourceCode)> Compile(
             LibrarySet librarySet,
             IEnumerable<(Library Library, string CSharp)> input)
         {
@@ -175,7 +75,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             foreach (var (library, cSharp) in input)
                 yield return (library, () =>
                                  {
-                                     var result = CompileNodeV2(cSharp, results, librarySet, library, assemblyReferences);
+                                     var result = CompileNode(cSharp, results, librarySet, library, assemblyReferences);
                                      results.Add(library.GetVersionedIdentifier()!, result);
                                      return result;
                                  });
@@ -190,18 +90,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             );
 
         private AssemblyDataWithSourceCode CompileNode(
-            Stream sourceCodeStream,
-            Dictionary<string, AssemblyDataWithSourceCode> assemblies,
-            LibrarySet librarySet,
-            Elm.Library library,
-            IEnumerable<Assembly> assemblyReferences)
-        {
-            var librarySourceString = GetSourceCodeString(sourceCodeStream);
-            var assemblyDataWithSourceCode = CompileNodeV2(librarySourceString, assemblies, librarySet, library, assemblyReferences);
-            return assemblyDataWithSourceCode;
-        }
-
-        private AssemblyDataWithSourceCode CompileNodeV2(
             string librarySourceString,
             Dictionary<string, AssemblyDataWithSourceCode> assemblies,
             LibrarySet librarySet,
@@ -287,15 +175,6 @@ namespace Hl7.Cql.CodeGeneration.NET
             return text.Replace('/', '-');
         }
 
-        private static string GetSourceCodeString(Stream sourceCodeStream)
-        {
-            sourceCodeStream.Flush();
-            sourceCodeStream.Seek(0, SeekOrigin.Begin);
-            var reader = new StreamReader(sourceCodeStream);
-            var sourceCode = reader.ReadToEnd().Trim();
-            return sourceCode;
-        }
-
         private static SyntaxTree ParseSyntaxTree(string text, string path)
         {
             var sourceText = SourceText.From(text, Encoding.UTF8);
@@ -316,7 +195,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                         """;
             return text;
         }
-
 
         private static void AddNetCoreReferences(List<MetadataReference> metadataReferences)
         {

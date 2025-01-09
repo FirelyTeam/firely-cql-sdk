@@ -8,9 +8,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using Hl7.Cql.Abstractions.Exceptions;
-using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 

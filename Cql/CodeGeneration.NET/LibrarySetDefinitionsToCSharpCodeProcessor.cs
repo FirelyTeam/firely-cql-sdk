@@ -113,42 +113,42 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
         return librarySetWriter.GenerateCSharpV2();
     }
 
-    /// <summary>
-    /// Writes C# source code from inputs.
-    /// </summary>
-    /// <param name="librarySet">A dependency graph containing dependent libraries.</param>
-    /// <param name="definitions">The lambda expressions to write.</param>
-    /// <param name="callbacks">Callbacks which is used during the processing of each stream.</param>
-    /// <param name="processLibraryToCSharpExceptionHandling">Selecting the exception handling policy for writing libraries to C#.</param>
-    /// <see cref="GenerateCSharpV2"/>
-    [Obsolete("Use GenerateCSharpV2 instead")]
-    public void ProcessDefinitions(
-        LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression> definitions,
-        CSharpSourceCodeWriterCallbacks? callbacks = null,
-        ProcessBatchItemExceptionHandling processLibraryToCSharpExceptionHandling = default)
-    {
-        List<Stream> streamsToDispose = new();
-        callbacks ??= new();
-        try
-        {
-            var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions, callbacks, processLibraryToCSharpExceptionHandling);
-            foreach (var (name, stream) in librarySetWriter.WriteLibraries())
-            {
-                streamsToDispose.Add(stream);
-                callbacks.Step(name, stream);
-            }
-
-            callbacks.Done();
-        }
-        finally
-        {
-            foreach (var stream in streamsToDispose)
-            {
-                stream.Dispose();
-            }
-        }
-    }
+    // /// <summary>
+    // /// Writes C# source code from inputs.
+    // /// </summary>
+    // /// <param name="librarySet">A dependency graph containing dependent libraries.</param>
+    // /// <param name="definitions">The lambda expressions to write.</param>
+    // /// <param name="callbacks">Callbacks which is used during the processing of each stream.</param>
+    // /// <param name="processLibraryToCSharpExceptionHandling">Selecting the exception handling policy for writing libraries to C#.</param>
+    // /// <see cref="GenerateCSharpV2"/>
+    // [Obsolete("Use GenerateCSharpV2 instead")]
+    // public void ProcessDefinitions(
+    //     LibrarySet librarySet,
+    //     DefinitionDictionary<LambdaExpression> definitions,
+    //     CSharpSourceCodeWriterCallbacks? callbacks = null,
+    //     ProcessBatchItemExceptionHandling processLibraryToCSharpExceptionHandling = default)
+    // {
+    //     List<Stream> streamsToDispose = new();
+    //     callbacks ??= new();
+    //     try
+    //     {
+    //         var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions, callbacks, processLibraryToCSharpExceptionHandling);
+    //         foreach (var (name, stream) in librarySetWriter.WriteLibraries())
+    //         {
+    //             streamsToDispose.Add(stream);
+    //             callbacks.Step(name, stream);
+    //         }
+    //
+    //         callbacks.Done();
+    //     }
+    //     finally
+    //     {
+    //         foreach (var stream in streamsToDispose)
+    //         {
+    //             stream.Dispose();
+    //         }
+    //     }
+    // }
 
     #region Nested Types
 

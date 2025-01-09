@@ -6,14 +6,11 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 using System.IO;
-using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 using Microsoft.Extensions.Configuration;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
-/// <summary>
-/// Represents the options for the <see cref="CSharpCodeStreamPostProcessor"/>.
-/// </summary>
+/// <nodoc/>
 public partial class CSharpCodeWriterOptions
 
 {

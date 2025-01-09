@@ -157,11 +157,19 @@ namespace Test
                                         .BuildServiceProvider(validateScopes: true);
             using var serviceScope = serviceProvider.CreateScope();
             var definitions = serviceScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped().ProcessLibrarySet(librarySet);
-            var assemblyData = serviceProvider.GetAssemblyCompiler().Compile(librarySet, definitions);
+            var s1 =
+                serviceProvider
+                    .GetLibrarySetDefinitionsToCSharpCodeProcessor()
+                    .GenerateCSharpV2(librarySet, definitions)
+                    .Select(o => (o.library, o.generateCSharp()));
+            var assemblyData =
+                serviceProvider
+                    .GetAssemblyCompiler()
+                    .Compile(librarySet, s1)
+                    .Select(o => o.generateAssemblyDataWithSourceCode().AssemblyBytes);
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
-            foreach (var (_, asmData) in assemblyData)
+            foreach (var assemblyBytes in assemblyData)
             {
-                var assemblyBytes = asmData.AssemblyBytes;
                 using var ms = new MemoryStream(assemblyBytes);
                 asmContext.LoadFromStream(ms);
             }

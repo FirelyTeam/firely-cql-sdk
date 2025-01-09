@@ -26,19 +26,11 @@ internal static class CqlPackagingServiceCollectionExtensions
 
         services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
 
-        services.TryAddSingletonSwitch<FhirResourcePostProcessor, WriteToFileFhirResourcePostProcessor, StubFhirResourcePostProcessor>(
-            sp => sp.GetOptionsValue<FhirResourceWriterOptions>().OutDirectory switch
-            {
-                null => 1,
-                _    => 0
-            });
-
-
         services.TryAddSingleton<AssemblyCompiler>();
 
         services.TryAddSingleton<ResourcePackager>();
 
-        services.TryAddScoped<CqlToResourcePackagingPipeline>();
+        // services.TryAddScoped<CqlToResourcePackagingPipeline>();
 
         return services;
     }

@@ -8,7 +8,6 @@
 
 using System;
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
@@ -30,27 +29,10 @@ internal static class CqlCodeGenerationServiceCollectionExtensions
 
         services.TryAddSingleton<LibrarySetDefinitionsToCSharpCodeProcessor>();
 
-        services
-            .TryAddSingletonSwitch<CSharpCodeStreamPostProcessor, WriteToFileCSharpCodeStreamPostProcessor,
-                StubCSharpCodeStreamPostProcessor>(
-                sp => sp.GetOptionsValue<CSharpCodeWriterOptions>().OutDirectory switch
-                {
-                    null => 1,
-                    _    => 0
-                });
-
-        services
-            .TryAddSingletonSwitch<AssemblyDataPostProcessor, WriteToFileAssemblyDataPostProcessor,
-                StubAssemblyDataPostProcessor>(
-                sp => sp.GetOptionsValue<AssemblyDataWriterOptions>().OutDirectory switch
-                {
-                    null => 1,
-                    _    => 0
-                });
-
         services.TryAddSingleton<AssemblyCompiler>();
 
         services.AddOptions(BuildAssemblyDataWriterOptions());
+
         services.AddOptions(BuildCSharpCodeWriterOptions());
 
         Action<OptionsBuilder<CSharpCodeWriterOptions>> BuildCSharpCodeWriterOptions()

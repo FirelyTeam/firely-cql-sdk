@@ -8,7 +8,6 @@
 
 using System;
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 
 // ReSharper disable once CheckNamespace
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -22,12 +21,6 @@ internal static class CqlCodeGenerationServiceProviderExtensions
 
     public static LibrarySetDefinitionsToCSharpCodeProcessor GetLibrarySetDefinitionsToCSharpCodeProcessor(this IServiceProvider serviceProvider) =>
         serviceProvider.GetRequiredService<LibrarySetDefinitionsToCSharpCodeProcessor>();
-
-    public static CSharpCodeStreamPostProcessor GetCSharpCodeStreamPostProcessor(this IServiceProvider serviceProvider) =>
-        serviceProvider.GetRequiredService<CSharpCodeStreamPostProcessor>();
-
-    public static AssemblyDataPostProcessor GetAssemblyDataPostProcessor(this IServiceProvider serviceProvider) =>
-        serviceProvider.GetRequiredService<AssemblyDataPostProcessor>();
 
     public static AssemblyCompiler GetAssemblyCompiler(this IServiceProvider serviceProvider) => serviceProvider.GetRequiredService<AssemblyCompiler>();
 }

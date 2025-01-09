@@ -86,26 +86,26 @@ internal class PackagerCliProgram
     }
 }
 
-internal class PackagerCliProgramOld
-(
-    ILogger<PackagerCliProgram> logger,
-    OptionsConsoleDumper optionsConsoleDumper,
-    CqlToResourcePackagingPipeline cqlToResourcePackagingPipeline)
-{
-    public int Run()
-    {
-        try
-        {
-            optionsConsoleDumper.DumpToConsole();
-            cqlToResourcePackagingPipeline.ProcessCqlToResources();
-            return 0;
-        }
-        catch (Exception e)
-        {
-            logger.LogError(e, "An error occurred while running the packager");
-            Console.Error.WriteLine(
-                "An error occurred while running PackagerCLI. Consult the build.log file for more detail.");
-            return -1;
-        }
-    }
-}
+// internal class PackagerCliProgramOld
+// (
+//     ILogger<PackagerCliProgram> logger,
+//     OptionsConsoleDumper optionsConsoleDumper,
+//     CqlToResourcePackagingPipeline cqlToResourcePackagingPipeline)
+// {
+//     public int Run()
+//     {
+//         try
+//         {
+//             optionsConsoleDumper.DumpToConsole();
+//             cqlToResourcePackagingPipeline.ProcessCqlToResources();
+//             return 0;
+//         }
+//         catch (Exception e)
+//         {
+//             logger.LogError(e, "An error occurred while running the packager");
+//             Console.Error.WriteLine(
+//                 "An error occurred while running PackagerCLI. Consult the build.log file for more detail.");
+//             return -1;
+//         }
+//     }
+// }

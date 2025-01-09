@@ -23,7 +23,4 @@ internal static class CqlPackagingServiceProviderExtensions
 
     public static ResourcePackager GetResourcePackager(this IServiceProvider serviceProvider) =>
         serviceProvider.GetRequiredService<ResourcePackager>();
-
-    public static CqlToResourcePackagingPipeline CqlToResourcePackagingPipelineScoped(this IServiceProvider serviceProvider) =>
-        serviceProvider.GetRequiredService<CqlToResourcePackagingPipeline>();
 }

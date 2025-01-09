@@ -19,173 +19,173 @@ using static System.FormattableString;
 
 namespace Hl7.Cql.Packaging;
 
-internal class CqlToResourcePackagingPipeline(
-    ILogger<CqlToResourcePackagingPipeline> logger,
-    IOptions<CqlToResourcePackagingOptions> options,
-    ResourcePackager resourcePackager,
-    LibrarySetExpressionBuilder librarySetExpressionBuilder,
-    AssemblyCompiler assemblyCompiler)
-{
-    protected readonly ResourcePackager _resourcePackager = resourcePackager;
-    protected readonly LibrarySetExpressionBuilder _LibrarySetExpressionBuilder = librarySetExpressionBuilder;
-    protected readonly AssemblyCompiler _assemblyCompiler = assemblyCompiler;
-    protected readonly CqlToResourcePackagingOptions _options = options.Value;
-    protected readonly ILogger<CqlToResourcePackagingPipeline> _logger = logger;
+// internal class CqlToResourcePackagingPipeline(
+//     ILogger<CqlToResourcePackagingPipeline> logger,
+//     IOptions<CqlToResourcePackagingOptions> options,
+//     ResourcePackager resourcePackager,
+//     LibrarySetExpressionBuilder librarySetExpressionBuilder,
+//     AssemblyCompiler assemblyCompiler)
+// {
+//     protected readonly ResourcePackager _resourcePackager = resourcePackager;
+//     protected readonly LibrarySetExpressionBuilder _LibrarySetExpressionBuilder = librarySetExpressionBuilder;
+//     protected readonly AssemblyCompiler _assemblyCompiler = assemblyCompiler;
+//     protected readonly CqlToResourcePackagingOptions _options = options.Value;
+//     protected readonly ILogger<CqlToResourcePackagingPipeline> _logger = logger;
+//
+//     public IReadOnlyCollection<Resource> ProcessCqlToResources()
+//     {
+//         //
+//         // 1. LOAD ELM FILES
+//         //
+//
+//         LibrarySet librarySet;
+//         try
+//         {
+//             librarySet = LoadElmFiles();
+//         }
+//         catch (Exception e1)
+//         {
+//             throw new CqlToResourcePackagingPipelineErrors(LoadElmFilesException: e1).ToException();
+//         }
+//
+//         //
+//         // 2. BUILD EXPRESSIONS
+//         //      Build the Elm Libraries as far as we can get. Errors are captured to be thrown later,
+//         //      while we try to continue building the rest of the artifacts up until the point of failure.
+//
+//         var definitions = new DefinitionDictionary<LambdaExpression>();
+//         ExceptionDispatchInfo? expressionBuildingExceptionInfo = null;
+//         try
+//         {
+//             BuildExpressions(librarySet, definitions);
+//
+//             // Important: Do not enumerate the libraryset by getting its Count until after processing.
+//             if (librarySet.Count == 0)
+//             {
+//                 _logger.LogWarning("Nothing to do, since no ELM libraries were found.");
+//                 return Array.Empty<Resource>();
+//             }
+//         }
+//         catch (Exception e)
+//         {
+//             _logger.LogWarning(e, "Error while building expressions.");
+//
+//             var librarySetReplacement = new LibrarySet();
+//             librarySetReplacement.AddLibraries(definitions.Libraries.Select(lib => librarySet.GetLibrary(lib, true)!));
+//             librarySet = librarySetReplacement;
+//             expressionBuildingExceptionInfo = ExceptionDispatchInfo.Capture(e);
+//         }
+//
+//         //
+//         // 3. GENERATE C# ASSEMBLIES
+//         //
+//
+//         IReadOnlyDictionary<string, AssemblyDataWithSourceCode> assembliesByLibraryName;
+//         try
+//         {
+//             assembliesByLibraryName = CompileExpressions(librarySet, definitions);
+//         }
+//         catch (Exception e)
+//         {
+//             _logger.LogWarning(e, "Error while compiling expressions.");
+//
+//             throw new CqlToResourcePackagingPipelineErrors(
+//                 ExpressionBuildingException: expressionBuildingExceptionInfo?.SourceException,
+//                 AssemblyCompilingException: e).ToException();
+//         }
+//
+//         //
+//         // 4. GENERATE FHIR RESOURCES
+//         //
+//
+//         try
+//         {
+//             var resources = PackageResources(assembliesByLibraryName, librarySet);
+//
+//             if (expressionBuildingExceptionInfo is not null)
+//             {
+//                 throw new CqlToResourcePackagingPipelineErrors(
+//                         LoadElmFilesException: expressionBuildingExceptionInfo.SourceException)
+//                     .ToException();
+//             }
+//
+//             return resources;
+//         }
+//         catch (CqlException<CqlToResourcePackagingPipelineErrors>)
+//         {
+//             throw;
+//         }
+//         catch (Exception e)
+//         {
+//             throw new CqlToResourcePackagingPipelineErrors(
+//                 LoadElmFilesException: expressionBuildingExceptionInfo?.SourceException,
+//                 ResourceBuildingException: e).ToException();
+//         }
+//     }
+//
+//     protected virtual IReadOnlyCollection<Resource> PackageResources(IReadOnlyDictionary<string, AssemblyDataWithSourceCode> assembliesByLibraryName, LibrarySet librarySet) =>
+//         _resourcePackager.PackageResources(
+//             _options.ElmDirectory,
+//             _options.CqlDirectory,
+//             _options.CanonicalRootUrl?.ToString(),
+//             librarySet,
+//             assembliesByLibraryName);
+//
+//     protected virtual IReadOnlyDictionary<string, AssemblyDataWithSourceCode> CompileExpressions(LibrarySet librarySet, DefinitionDictionary<LambdaExpression> definitions) =>
+//         _assemblyCompiler.Compile(librarySet, definitions);
+//
+//     protected virtual void BuildExpressions(LibrarySet librarySet, DefinitionDictionary<LambdaExpression> definitions) =>
+//         _LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet, definitions);
+//
+//     protected virtual LibrarySet LoadElmFiles()
+//     {
+//         string[] hardcodedSkipFiles = HardCodedSkipElmFiles.FileNames;
+//
+//         LibrarySet librarySet = new(_options.ElmDirectory.FullName);
+//         var files = _options.ElmDirectory
+//             .GetFiles("*.json", SearchOption.AllDirectories)
+//             .Where(fi => !hardcodedSkipFiles.Contains(fi.Name))
+//             .ToArray();
+//         librarySet.LoadLibraries(files);
+//         return librarySet;
+//     }
+// }
 
-    public IReadOnlyCollection<Resource> ProcessCqlToResources()
-    {
-        //
-        // 1. LOAD ELM FILES
-        //
-
-        LibrarySet librarySet;
-        try
-        {
-            librarySet = LoadElmFiles();
-        }
-        catch (Exception e1)
-        {
-            throw new CqlToResourcePackagingPipelineErrors(LoadElmFilesException: e1).ToException();
-        }
-
-        //
-        // 2. BUILD EXPRESSIONS
-        //      Build the Elm Libraries as far as we can get. Errors are captured to be thrown later,
-        //      while we try to continue building the rest of the artifacts up until the point of failure.
-
-        var definitions = new DefinitionDictionary<LambdaExpression>();
-        ExceptionDispatchInfo? expressionBuildingExceptionInfo = null;
-        try
-        {
-            BuildExpressions(librarySet, definitions);
-
-            // Important: Do not enumerate the libraryset by getting its Count until after processing.
-            if (librarySet.Count == 0)
-            {
-                _logger.LogWarning("Nothing to do, since no ELM libraries were found.");
-                return Array.Empty<Resource>();
-            }
-        }
-        catch (Exception e)
-        {
-            _logger.LogWarning(e, "Error while building expressions.");
-
-            var librarySetReplacement = new LibrarySet();
-            librarySetReplacement.AddLibraries(definitions.Libraries.Select(lib => librarySet.GetLibrary(lib, true)!));
-            librarySet = librarySetReplacement;
-            expressionBuildingExceptionInfo = ExceptionDispatchInfo.Capture(e);
-        }
-
-        //
-        // 3. GENERATE C# ASSEMBLIES
-        //
-
-        IReadOnlyDictionary<string, AssemblyDataWithSourceCode> assembliesByLibraryName;
-        try
-        {
-            assembliesByLibraryName = CompileExpressions(librarySet, definitions);
-        }
-        catch (Exception e)
-        {
-            _logger.LogWarning(e, "Error while compiling expressions.");
-
-            throw new CqlToResourcePackagingPipelineErrors(
-                ExpressionBuildingException: expressionBuildingExceptionInfo?.SourceException,
-                AssemblyCompilingException: e).ToException();
-        }
-
-        //
-        // 4. GENERATE FHIR RESOURCES
-        //
-
-        try
-        {
-            var resources = PackageResources(assembliesByLibraryName, librarySet);
-
-            if (expressionBuildingExceptionInfo is not null)
-            {
-                throw new CqlToResourcePackagingPipelineErrors(
-                        LoadElmFilesException: expressionBuildingExceptionInfo.SourceException)
-                    .ToException();
-            }
-
-            return resources;
-        }
-        catch (CqlException<CqlToResourcePackagingPipelineErrors>)
-        {
-            throw;
-        }
-        catch (Exception e)
-        {
-            throw new CqlToResourcePackagingPipelineErrors(
-                LoadElmFilesException: expressionBuildingExceptionInfo?.SourceException,
-                ResourceBuildingException: e).ToException();
-        }
-    }
-
-    protected virtual IReadOnlyCollection<Resource> PackageResources(IReadOnlyDictionary<string, AssemblyDataWithSourceCode> assembliesByLibraryName, LibrarySet librarySet) =>
-        _resourcePackager.PackageResources(
-            _options.ElmDirectory,
-            _options.CqlDirectory,
-            _options.CanonicalRootUrl?.ToString(),
-            librarySet,
-            assembliesByLibraryName);
-
-    protected virtual IReadOnlyDictionary<string, AssemblyDataWithSourceCode> CompileExpressions(LibrarySet librarySet, DefinitionDictionary<LambdaExpression> definitions) =>
-        _assemblyCompiler.Compile(librarySet, definitions);
-
-    protected virtual void BuildExpressions(LibrarySet librarySet, DefinitionDictionary<LambdaExpression> definitions) =>
-        _LibrarySetExpressionBuilder.ProcessLibrarySet(librarySet, definitions);
-
-    protected virtual LibrarySet LoadElmFiles()
-    {
-        string[] hardcodedSkipFiles = HardCodedSkipElmFiles.FileNames;
-
-        LibrarySet librarySet = new(_options.ElmDirectory.FullName);
-        var files = _options.ElmDirectory
-            .GetFiles("*.json", SearchOption.AllDirectories)
-            .Where(fi => !hardcodedSkipFiles.Contains(fi.Name))
-            .ToArray();
-        librarySet.LoadLibraries(files);
-        return librarySet;
-    }
-}
-
-internal readonly record struct CqlToResourcePackagingPipelineErrors(
-    Exception? LoadElmFilesException = null,
-    Exception? ExpressionBuildingException = null,
-    Exception? AssemblyCompilingException = null,
-    Exception? ResourceBuildingException = null) : ICqlError
-{
-    public string GetMessage()
-    {
-        StringBuilder sb = new();
-        int i = 1;
-        sb.Append("The following exceptions occurred during Library Packaging:");
-        if (LoadElmFilesException is { } lefe)
-        {
-            if (sb.Length > 0) sb.AppendLine().AppendLine();
-            sb.AppendLine(Invariant($"{i++}. LoadElmFilesException"));
-            sb.Append(lefe);
-        }
-        if (ExpressionBuildingException is { } ebe)
-        {
-            if (sb.Length > 0) sb.AppendLine().AppendLine();
-            sb.AppendLine(Invariant($"{i++}. ExpressionBuildingException"));
-            sb.Append(ebe);
-        }
-        if (AssemblyCompilingException is { } ace)
-        {
-            if (sb.Length > 0) sb.AppendLine().AppendLine();
-            sb.AppendLine(Invariant($"{i++}. AssemblyCompilingException"));
-            sb.Append(ace);
-        }
-        if (ResourceBuildingException is { } rbe)
-        {
-            if (sb.Length > 0) sb.AppendLine().AppendLine();
-            sb.AppendLine(Invariant($"{i++}. ResourceBuildingException"));
-            sb.Append(rbe);
-        }
-        return sb.ToString();
-    }
-}
+// internal readonly record struct CqlToResourcePackagingPipelineErrors(
+//     Exception? LoadElmFilesException = null,
+//     Exception? ExpressionBuildingException = null,
+//     Exception? AssemblyCompilingException = null,
+//     Exception? ResourceBuildingException = null) : ICqlError
+// {
+//     public string GetMessage()
+//     {
+//         StringBuilder sb = new();
+//         int i = 1;
+//         sb.Append("The following exceptions occurred during Library Packaging:");
+//         if (LoadElmFilesException is { } lefe)
+//         {
+//             if (sb.Length > 0) sb.AppendLine().AppendLine();
+//             sb.AppendLine(Invariant($"{i++}. LoadElmFilesException"));
+//             sb.Append(lefe);
+//         }
+//         if (ExpressionBuildingException is { } ebe)
+//         {
+//             if (sb.Length > 0) sb.AppendLine().AppendLine();
+//             sb.AppendLine(Invariant($"{i++}. ExpressionBuildingException"));
+//             sb.Append(ebe);
+//         }
+//         if (AssemblyCompilingException is { } ace)
+//         {
+//             if (sb.Length > 0) sb.AppendLine().AppendLine();
+//             sb.AppendLine(Invariant($"{i++}. AssemblyCompilingException"));
+//             sb.Append(ace);
+//         }
+//         if (ResourceBuildingException is { } rbe)
+//         {
+//             if (sb.Length > 0) sb.AppendLine().AppendLine();
+//             sb.AppendLine(Invariant($"{i++}. ResourceBuildingException"));
+//             sb.Append(rbe);
+//         }
+//         return sb.ToString();
+//     }
+// }

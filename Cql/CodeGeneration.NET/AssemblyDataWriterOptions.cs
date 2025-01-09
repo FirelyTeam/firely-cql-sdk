@@ -7,14 +7,11 @@
  */
 
 using System.IO;
-using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 using Microsoft.Extensions.Configuration;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 
-/// <summary>
-/// Represents the options for the <see cref="AssemblyDataPostProcessor"/>.
-/// </summary>
+/// <nodoc/>
 public class AssemblyDataWriterOptions
 {
     /// <summary>

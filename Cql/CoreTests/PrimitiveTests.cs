@@ -3416,19 +3416,16 @@ namespace CoreTests
             librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"),"Aggregates", "1.0.0");
             var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
             var definitions = serviceScope.ServiceProvider.GetLibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
-            var definitionsToCSharpCodeProcessor = serviceProvider.GetLibrarySetDefinitionsToCSharpCodeProcessor();
-            var isDone = false;
-            definitionsToCSharpCodeProcessor.ProcessDefinitions(librarySet,
-                                      definitions, callbacks: new(onAfterStep: step =>
-                                      {
-                                          switch (step)
-                                          {
-                                              case CSharpSourceCodeStep.OnDone:
-                                                  isDone = true;
-                                                  break;
-                                          }
-                                      }));
-            Assert.IsTrue(isDone);
+            var librarySetDefinitionsToCSharpCodeProcessor = serviceProvider.GetLibrarySetDefinitionsToCSharpCodeProcessor();
+            var assemblyCompiler = serviceProvider.GetAssemblyCompiler();
+            var s1 = librarySetDefinitionsToCSharpCodeProcessor
+                .GenerateCSharpV2(librarySet, definitions)
+                .Select(o => (o.library, o.generateCSharp()));
+            var s2 = assemblyCompiler
+                     .Compile(librarySet, s1)
+                     .Select(o => (o.library, o.generateAssemblyDataWithSourceCode()));
+            _ = s2.ToList();
+            Assert.IsTrue(true);
         }
 
         [TestMethod]

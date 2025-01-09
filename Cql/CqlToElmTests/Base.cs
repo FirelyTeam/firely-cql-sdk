@@ -13,7 +13,11 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using System.Runtime.Loader;
+using Hl7.Cql.Packaging;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Expression = Hl7.Cql.Elm.Expression;
+using Microsoft.VisualStudio.TestPlatform.PlatformAbstractions.Interfaces;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -114,23 +118,13 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static LibrarySetCSharp GenerateCSharp(LibrarySetDefinitions librarySetDefinitions)
         {
-            var definitionsToCSharpCodeProcessor = ServiceProvider.GetLibrarySetDefinitionsToCSharpCodeProcessor();
+            var librarySetDefinitionsToCSharpCodeProcessor = ServiceProvider.GetLibrarySetDefinitionsToCSharpCodeProcessor();
 
-            Dictionary<string, string> cSharpCodeByLibraryName = new();
-            definitionsToCSharpCodeProcessor.ProcessDefinitions(
-                librarySetDefinitions.LibrarySet,
-                librarySetDefinitions.Definitions,
-                new CSharpSourceCodeWriterCallbacks(
-                    onAfterStep: step =>
-                   {
-                       if (step is CSharpSourceCodeStep.OnStream onStream)
-                       {
-                           onStream.Stream.Seek(0, SeekOrigin.Begin);
-                           using var reader = new StreamReader(onStream.Stream);
-                           var code = reader.ReadToEnd();
-                           cSharpCodeByLibraryName.Add(onStream.Name, code);
-                       }
-                   }));
+
+            Dictionary<string, string> cSharpCodeByLibraryName =
+                librarySetDefinitionsToCSharpCodeProcessor
+                    .GenerateCSharpV2(librarySetDefinitions.LibrarySet, librarySetDefinitions.Definitions)
+                    .ToDictionary(o => o.library.GetVersionedIdentifier()!, o => o.generateCSharp());
             return new(librarySetDefinitions, cSharpCodeByLibraryName.AsReadOnly());
         }
 
@@ -140,9 +134,71 @@ namespace Hl7.Cql.CqlToElm.Test
             CqlContext? ctx = null)
         {
             var lambda = LibraryExpressionBuilder.Lambda(expression);
-            var result = AssemblyCompiler.RunLambda(lambda, library, ctx);
-            return result;
+            LibrarySet librarySet = new("TempLibrarySet", library);
+            DefinitionDictionary<LambdaExpression> definitions = new();
+            var expressionName = "TempExpression";
+            definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
+            var s1 =
+                LibrarySetDefinitionsToCSharpCodeProcessor
+                    .GenerateCSharpV2(librarySet, definitions)
+                    .Select(o => (o.library, o.generateCSharp()));
+            var assemblyBytes =
+                AssemblyCompiler
+                    .Compile(librarySet, s1)
+                    .Select(o => o.generateAssemblyDataWithSourceCode())
+                    .Single()
+                    .AssemblyBytes;
+            var alc = new AssemblyLoadContext("TempAssemblyLoadContext", true);
+            try
+            {
+                using var assemblyStream = new MemoryStream(assemblyBytes);
+                alc.LoadFromStream(assemblyStream);
+                var result = alc.Run(library.identifier.id, library.identifier.version, DefaultCqlContext);
+                return result[expressionName];
+            }
+            finally
+            {
+                alc.Unload();
+            }
         }
+
+        private static readonly CqlContext DefaultCqlContext = FhirCqlContext.CreateContext();
+        // private static readonly Library DummyLib = new Library { identifier = new() { id = "temp", version = "1.0.0" } };
+
+        // public static object? RunLambda(
+        //     this AssemblyCompiler assemblyCompiler,
+        //     LambdaExpression expression,
+        //     Library? library,
+        //     CqlContext? ctx = null)
+        // {
+        //     var expressionName = expression.Name ?? "Expression";
+        //     library ??= DummyLib;
+        //     LibrarySet librarySet = new(expressionName, library);
+        //     DefinitionDictionary<LambdaExpression> definitions = new();
+        //     switch (((IGetVersionedIdentifier)library).VersionedIdentifier)
+        //     {
+        //         case (null, { } error):
+        //             throw new InvalidOperationException("Library does not have valid VersionedIdentifier.", error);
+        //         case ({ } versionedIdentifier, null):
+        //         {
+        //             string versionedIdentifierString = versionedIdentifier.GetVersionedIdentifier()!;
+        //             definitions.Add(versionedIdentifierString, expressionName, expression);
+        //
+        //
+        //             IReadOnlyDictionary<string, AssemblyDataWithSourceCode> assemblyDatas = assemblyCompiler.Compile(librarySet, definitions);
+        //             (byte[] assemblyBinary, var assemblySources) = assemblyDatas.SingleOrDefault().Value;
+        //             var source = assemblySources[versionedIdentifierString];
+        //             AssemblyLoadContext assemblyLoadContext = new(expressionName);
+        //             assemblyLoadContext.LoadFromStream(new MemoryStream(assemblyBinary));
+        //             var result = assemblyLoadContext.Run(versionedIdentifier.id, versionedIdentifier.version, ctx ?? DefaultCqlContext);
+        //             return result[expressionName];
+        //         }
+        //         default:
+        //             throw new InvalidOperationException("VersionedIdentifier is null");
+        //     }
+        // }
+
+
         internal static T? Run<T>(
             Expression expression,
             Library library,
@@ -314,39 +370,18 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
 
-        internal static string WriteCSharp(Library library)
-        {
-            var lambdas = LibraryExpressionBuilder.ProcessLibrary(library);
-            var ls = new LibrarySet("", library);
-            var csByNav = new Dictionary<string, string>();
-            var callbacks = new CSharpSourceCodeWriterCallbacks(onAfterStep: afterWrite);
-            LibrarySetDefinitionsToCSharpCodeProcessor.ProcessDefinitions(ls, lambdas, callbacks);
-            return csByNav[library.GetVersionedIdentifier()!];
-
-            void afterWrite(CSharpSourceCodeStep step)
-            {
-                switch (step)
-                {
-                    case CSharpSourceCodeStep.OnStream onStream:
-                        onStream.Stream.Seek(0, SeekOrigin.Begin);
-                        using (var reader = new StreamReader(onStream.Stream))
-                        {
-                            var code = reader.ReadToEnd();
-                            csByNav.Add(onStream.Name, code);
-                        }
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }
-
         internal static byte[] Compile(Library library)
         {
             var lambdas = LibraryExpressionBuilder.ProcessLibrary(library);
+            var cs = ServiceProvider.GetLibrarySetDefinitionsToCSharpCodeProcessor();
             var asm = ServiceProvider.GetAssemblyCompiler();
-            var dict = asm.Compile(new LibrarySet("",library), lambdas);
-            return dict.Single().Value.AssemblyBytes;
+            var librarySet = new LibrarySet("",library);
+            var s1 = cs.GenerateCSharpV2(librarySet, lambdas).Select(o => (o.library, o.generateCSharp()));
+            return
+                asm.Compile(librarySet, s1)
+                   .Select(o => o.generateAssemblyDataWithSourceCode())
+                   .Single()
+                   .AssemblyBytes;
         }
     }
 }

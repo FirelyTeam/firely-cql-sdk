@@ -146,7 +146,7 @@ public class ElmApi :
                       .HandleExceptions(exceptionHandling);
 
         var assemblyDatas = assemblyCompiler
-            .CompileV2(librarySet, cSharps)
+            .Compile(librarySet, cSharps)
             .Select(t =>
             {
                 var libraryName = t.library.identifier;

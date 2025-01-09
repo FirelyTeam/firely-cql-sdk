@@ -32,22 +32,12 @@ classDiagram
     }
 
     namespace CodeGeneration {
-        class CSharpCodeStreamPostProcessor { }
-        class WriteToFileCSharpCodeStreamPostProcessor { }
-        class StubCSharpCodeStreamPostProcessor { }
-        class AssemblyDataPostProcessor { }
-        class WriteToFileAssemblyDataPostProcessor { }
-        class StubAssemblyDataPostProcessor { }
         class TypeToCSharpConverter { }
-        class LambdaExpressionsToCSharpProcessor { }
+        class LibrarySetDefinitionsToCSharpCodeProcessor { }
         class AssemblyCompiler { }
     }
 
     namespace Packaging {
-        class FhirResourcePostProcessor { }
-        class WriteToFileFhirResourcePostProcessor { }
-        class StubFhirResourcePostProcessor { }
-        class CqlToResourcePackagingPipeline { }
         class ResourcePackager { }
     }
 
@@ -74,19 +64,12 @@ classDiagram
     style LibraryExpressionBuilder fill:#055
     style ExpressionBuilder fill:#055
     style TupleBuilderCache fill:#055
-    style CqlToResourcePackagingPipeline fill:#055
-
+    
     %% Inheritance  
 
     BaseTypeResolver --> TypeResolver : inherits
     FhirTypeResolver --> BaseTypeResolver : inherits
-    WriteToFileCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
-    StubCSharpCodeStreamPostProcessor --> CSharpCodeStreamPostProcessor : inherits
-    WriteToFileAssemblyDataPostProcessor --> AssemblyDataPostProcessor : inherits
-    StubAssemblyDataPostProcessor --> AssemblyDataPostProcessor : inherits
-    WriteToFileFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
-    StubFhirResourcePostProcessor --> FhirResourcePostProcessor : inherits
-
+    
     %% Dependencies
 
     FhirJsonSerializer ..> ModelInspector : injected
@@ -107,19 +90,10 @@ classDiagram
 
     ModelInspector ..> TypeConverter : injected  
 
-    TypeToCSharpConverter ..> LambdaExpressionsToCSharpProcessor : injected
+    TypeToCSharpConverter ..> LibrarySetDefinitionsToCSharpCodeProcessor : injected
+    TypeResolver ..> LibrarySetDefinitionsToCSharpCodeProcessor : injected
 
-    AssemblyDataPostProcessor ..> AssemblyCompiler : injected\n(optional)
-    CSharpCodeStreamPostProcessor ..> AssemblyCompiler : injected\n(optional)
-    LambdaExpressionsToCSharpProcessor ..> AssemblyCompiler : injected
     TypeResolver ..> AssemblyCompiler : injected
 
-    TypeResolver ..> LambdaExpressionsToCSharpProcessor : injected
-
-    AssemblyCompiler ..> CqlToResourcePackagingPipeline : injected
-    ResourcePackager ..> CqlToResourcePackagingPipeline : injected 
-    LibrarySetExpressionBuilder ..> CqlToResourcePackagingPipeline : injected
-
     TypeResolver ..> ResourcePackager : injected
-    FhirResourcePostProcessor ..> ResourcePackager : injected\n(optional) 
 ```
