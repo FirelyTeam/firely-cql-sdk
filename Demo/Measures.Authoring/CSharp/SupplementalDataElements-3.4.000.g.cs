@@ -381,10 +381,6 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-        ["dayIndex", "dayPeriod"]);
-
     private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
         [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
         ["code", "period"]);

@@ -336,8 +336,4 @@ public partial class TJCOverall_8_14_000 : ILibrary, ISingleton<TJCOverall_8_14_
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-        ["dayIndex", "dayPeriod"]);
-
 }

@@ -295,7 +295,7 @@ internal class LibrarySetDefinitionsToCSharpCodeProcessor
             var tupleMetadataBuilder = LibrarySetWriter.TupleMetadataBuilder;
 
             // Cql Tuple Metadata
-            foreach (var (propertyName, signature) in tupleMetadataBuilder.GetAllTupleMetadataPropertySignatures())
+            foreach (var (propertyName, signature) in tupleMetadataBuilder.GetLibraryTupleMetadataPropertySignatures(LibraryName))
             {
                 var types = string.Join(", ", signature.Select(t => $"typeof({LibrarySetWriter.TypeToCSharpConverter.ToCSharp(t.Type)})"));
                 var names = string.Join(", ", signature.Select(t => t.PropName.QuoteString()));

@@ -3941,10 +3941,6 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_BDeBMdFeZaVSehBSFYjTFdYYD = new(
-        [typeof(IEnumerable<CqlDate>), typeof(int?)],
-        ["SortedList", "AnchorIndex"]);
-
     private static CqlTupleMetadata CqlTupleMetadata_BiVTcKEZOfgFCDEReGAXJRAUK = new(
         [typeof((CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?), typeof(IEnumerable<Claim.ItemComponent>)],
         ["PaidClaim", "ClaimItem"]);
@@ -3952,14 +3948,6 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     private static CqlTupleMetadata CqlTupleMetadata_BWiFKXdFieUciRMVTUCdIFCVO = new(
         [typeof(Claim), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<string>)],
         ["SingleCareTeam", "CareTeamsProvider", "CareTeamsProviderID"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CaKghTfWMNOTHSWhifjFZOVYO = new(
-        [typeof(CodeableConcept), typeof(Period)],
-        ["code", "period"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CfANiScMYDdVZFgRERKJQEVca = new(
-        [typeof(IEnumerable<CqlDate>)],
-        ["SortedDates"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_CWDDWHRXGADEbdaKXCdKbgEfg = new(
         [typeof(IEnumerable<Claim>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
@@ -3996,10 +3984,6 @@ public partial class NCQAClaims_1_0_0 : ILibrary, ISingleton<NCQAClaims_1_0_0>
     private static CqlTupleMetadata CqlTupleMetadata_DXGMEVDRBZgHMANCfXfEUYMNW = new(
         [typeof(IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>), typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
         ["originalClaim", "ServicePeriod", "CoveredDays"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc = new(
-        [typeof(CqlDate), typeof(IEnumerable<CqlDate>), typeof(int?)],
-        ["NextDate", "NewList", "IndexofNewDate"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_EgMIjgYNSTYejjeaeeSfTCGLV = new(
         [typeof(IEnumerable<ClaimResponse>), typeof(IEnumerable<Claim>)],

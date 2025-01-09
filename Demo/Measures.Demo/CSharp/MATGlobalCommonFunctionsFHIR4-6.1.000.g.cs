@@ -1579,8 +1579,4 @@ public partial class MATGlobalCommonFunctionsFHIR4_6_1_000 : ILibrary, ISingleto
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_CaKghTfWMNOTHSWhifjFZOVYO = new(
-        [typeof(CodeableConcept), typeof(Period)],
-        ["code", "period"]);
-
 }

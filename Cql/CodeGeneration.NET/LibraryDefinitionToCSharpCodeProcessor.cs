@@ -43,7 +43,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         private LibraryDefinitionToCSharpCodeProcessor WithDoUseIndent() => WithOverride(useIndentFn: _ => true);
 
         private string GetTupleMetadataPropertyName(IReadOnlyCollection<(Type Type, string Name)> tupleProperties) =>
-            TupleMetadataBuilder.GetTupleMetadataPropertyName(tupleProperties);
+            TupleMetadataBuilder.GetTupleMetadataPropertyName(tupleProperties, LibraryName);
 
         private string ConvertExpression(
             Expression expression)
