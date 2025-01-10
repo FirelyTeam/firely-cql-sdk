@@ -44,7 +44,7 @@ internal class Directories(string librarySetName)
             _ => LibrarySetsDirectory.CreateSubdirectory(LibrarySetName).CreateSubdirectory("Cql")
         };
 
-    //public static DirectoryInfo ElmInDirectory(string librarySetName) => LibrarySetsDirectory.CreateSubdirectory(LibrarySetName).CreateSubdirectory("Elm");
+    public DirectoryInfo ElmInDirectory => LibrarySetsDirectory.CreateSubdirectory(LibrarySetName).CreateSubdirectory("Elm");
     public DirectoryInfo ElmOutDirectory => GeneratedDirectory.CreateSubdirectory("Elm");
     public DirectoryInfo CSharpOutDirectory => GeneratedDirectory.CreateSubdirectory("CSharp");
     public DirectoryInfo AssembliesOutDirectory => GeneratedDirectory.CreateSubdirectory("Assemblies");

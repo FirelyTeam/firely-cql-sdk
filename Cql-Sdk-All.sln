@@ -86,7 +86,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "30 Elm to C#", "30 Elm to C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "00 Runtime", "00 Runtime", "{D0F1B9D3-DD8C-4F25-B7AF-0C2EB4E17AC3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "40 Packaging", "40 Packaging", "{97D67019-21A7-4591-A216-1B76BD0E68A4}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "40 FHIR Resource Packaging", "40 FHIR Resource Packaging", "{97D67019-21A7-4591-A216-1B76BD0E68A4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiPackagerCLI", "Cql\MultiPackagerCLI\MultiPackagerCLI.csproj", "{B574B177-48B2-455B-BEF8-B7D6DB5C3015}"
 EndProject
@@ -472,7 +472,7 @@ Global
 		{67D0864B-5682-E701-002E-587BEB5DA60F} = {97D67019-21A7-4591-A216-1B76BD0E68A4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		FileExplorer = |build\|docs\|LibrarySets\|submodules\Firely.Cql.Sdk.Integration.Runner\NodeJsUtils\
 		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
+		FileExplorer = |build\|docs\|LibrarySets\|submodules\Firely.Cql.Sdk.Integration.Runner\NodeJsUtils\
 	EndGlobalSection
 EndGlobal

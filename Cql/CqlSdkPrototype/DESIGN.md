@@ -34,6 +34,7 @@ Split into multiple APIs:
     - save debug symbols to directories
     - save FHIR Resources to directories
     - invoke runtime definitions (via Runtime API)
+- FHIR Package API
 - Runtime API
   - extract assemblies from FHIR Resources (Extension?)
   - add assembly bytes with optional debug symbols bytes
