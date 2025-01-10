@@ -1,26 +1,27 @@
-﻿using CqlSdkPrototype.Cql;
+﻿using CqlSdkPrototype.App;
+using CqlSdkPrototype.Cql;
 using Hl7.Cql.Abstractions.Exceptions;
 
 namespace CqlSdkPrototype.Elm;
 
 public record ElmApiOptions(
-    IServiceProvider ServiceProvider,
-    ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling,
-    bool ShouldEmitPdbStream)
+    LoggingOptions? LoggingOptions = null,
+    ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling = default,
+    bool ShouldEmitPdbStream = false)
 {
-    internal IServiceProvider ServiceProvider { get; init; } = ServiceProvider ?? throw new ArgumentNullException(nameof(ServiceProvider));
+    public static ElmApiOptions Default { get; } = new();
+    public LoggingOptions LoggingOptions { get; init; } = LoggingOptions ?? LoggingOptions.Default;
+}
 
-    public static ElmApiOptions Create(
-        IServiceProvider serviceProvider,
-        ProcessBatchItemExceptionHandling processBatchItemExceptionHandling = default,
-        bool emitPdbStream = false) =>
-        new(
-            serviceProvider,
-            processBatchItemExceptionHandling,
-            emitPdbStream);
-
-    public static ElmApiOptions Create(CqlApiOptions cqlApiOptions)
+public static class CqlApiOptionsExtensions
+{
+    public static ElmApiOptions CreateElmApiOptions(this CqlApiOptions cqlApiOptions)
     {
-        return Create(cqlApiOptions.ServiceProvider, cqlApiOptions.ProcessBatchItemExceptionHandling);
+        return ElmApiOptions.Default with
+        {
+            LoggingOptions = cqlApiOptions.LoggingOptions,
+            ProcessBatchItemExceptionHandling = cqlApiOptions.ProcessBatchItemExceptionHandling,
+            //ShouldEmitPdbStream =
+        };
     }
 }

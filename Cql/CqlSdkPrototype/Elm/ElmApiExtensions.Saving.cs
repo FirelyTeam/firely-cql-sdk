@@ -9,51 +9,59 @@ public static partial class ElmApiExtensions
     public static TElmApi SaveCSharpFilesToDirectory<TElmApi>(
         this TElmApi elmApi,
         DirectoryInfo directory)
-        where TElmApi : IElmApi<TElmApi>
+        where TElmApi : IElmApiExtensible<TElmApi>
     {
         if (!directory.Exists)
             directory.Create();
 
-        var logger = elmApi.GetLogger();
-        foreach (var (libraryName, (_, cSharpSourceCode, _, _)) in elmApi.Entries)
+        return elmApi.UseServices(t =>
         {
-            if (cSharpSourceCode is null)
-                continue;
+            var logger = t.logger;
+            var elmApi = t.elmApi;
+            foreach (var (libraryName, (_, cSharpSourceCode, _, _)) in elmApi.Entries)
+            {
+                if (cSharpSourceCode is null)
+                    continue;
 
-            var fileName = Path.Combine(directory.FullName, $"{libraryName}.g.cs");
-            File.WriteAllText(fileName, cSharpSourceCode);
-            logger.LogInformation("Saved C# source code to file: {file}", fileName);
-        }
-        return elmApi;
+                var fileName = Path.Combine(directory.FullName, $"{libraryName}.g.cs");
+                File.WriteAllText(fileName, cSharpSourceCode);
+                logger.LogInformation("Saved C# source code to file: {file}", fileName);
+            }
+
+            return elmApi;
+        });
     }
 
     public static TElmApi SaveAssemblyBinariesToDirectory<TElmApi>(
         this TElmApi elmApi,
         DirectoryInfo directory)
-        where TElmApi : IElmApi<TElmApi>
+        where TElmApi : IElmApiExtensible<TElmApi>
     {
         if (!directory.Exists)
             directory.Create();
 
-        var logger = elmApi.GetLogger();
-        foreach (var (libraryName, (_, _, assemblyBytes, symbolsBytes)) in elmApi.Entries)
-        {
-            if (assemblyBytes is null)
-                continue;
-
-            var fileName = Path.Combine(directory.FullName, $"{libraryName}.dll");
-            File.WriteAllBytes(fileName, assemblyBytes);
-            logger.LogInformation("Saved assembly to file: {file}", fileName);
-
-            if (symbolsBytes is { Length: > 0 })
+        return elmApi.UseServices(t => {
+            var logger = t.logger;
+            var elmApi = t.elmApi;
+            foreach (var (libraryName, (_, _, assemblyBytes, symbolsBytes)) in elmApi.Entries)
             {
-                fileName = Path.Combine(directory.FullName, $"{libraryName}.pdb");
-                File.WriteAllBytes(fileName, symbolsBytes);
-                logger.LogInformation("Saved debug symbols to file: {file}", fileName);
-            }
-        }
+                if (assemblyBytes is null)
+                    continue;
 
-        return elmApi;
+                var fileName = Path.Combine(directory.FullName, $"{libraryName}.dll");
+                File.WriteAllBytes(fileName, assemblyBytes);
+                logger.LogInformation("Saved assembly to file: {file}", fileName);
+
+                if (symbolsBytes is { Length: > 0 })
+                {
+                    fileName = Path.Combine(directory.FullName, $"{libraryName}.pdb");
+                    File.WriteAllBytes(fileName, symbolsBytes);
+                    logger.LogInformation("Saved debug symbols to file: {file}", fileName);
+                }
+            }
+
+            return elmApi;
+        });
     }
 
 }

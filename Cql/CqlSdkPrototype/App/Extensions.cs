@@ -4,11 +4,21 @@ using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.App;
 
 public static class Extensions
 {
+    public static ILoggingBuilder UseOptions(this ILoggingBuilder builder, LoggingOptions options)
+    {
+        if (options.LoggerProvider is { } provider)
+            builder = builder.AddProvider(provider);
+        if (options.LogFilter is { } filter)
+            builder = builder.AddFilter((provider, category, level) => filter(new (provider, category, level)));
+        return builder;
+    }
+
     public static IServiceCollection AddElmApi(
         this IServiceCollection serviceCollection)
     {

@@ -23,14 +23,26 @@ internal class Program
         // - Encapsulate the creation of the service provider
         // - Move any options such as the AssembliesDebugMode and Models to the Cql- or ElmApi instead of via the hosted IOptions<T>
         // - Should we keep the dependency on Microsoft's ILogger or should we create our own logging abstraction?
-        var serviceProvider = BuildServiceProvider(configureCqlTranslationOptions: opt => opt.Models = [Models.ElmR1, Models.Fhir401]);
-        var logger = serviceProvider.GetLogger<Program>();
-        var cqlApi = CqlApi.Create(serviceProvider);
 
-        InvokeCqlFromExamplesFolder(logger, cqlApi);
-        InvokeCqlExample(logger, cqlApi);
+        var loggingOptions = new LoggingOptions(
+            LoggerProvider: new CustomConsoleLoggerProvider(updateCategoryName: cat => cat.Split(separator: '.').Last()),
+            LogFilter: logFilterArgs => logFilterArgs.Category?.Contains(value: nameof(CqlSdkPrototype)) ?? false);
+
+        var cqlApiOptions = new CqlApiOptions(
+            LoggingOptions: loggingOptions,
+            Models:[Models.ElmR1, Models.Fhir401]);
+
+        var cqlApi = new CqlApi(cqlApiOptions);
+
+        using var serviceProvider = new ServiceCollection()
+                       .AddLogging(configure: lb => lb.ClearProviders().UseOptions(options: loggingOptions))
+                       .BuildServiceProvider();
+        var logger = serviceProvider.GetLogger<Program>();
+
+        // InvokeCqlFromExamplesFolder(logger: logger, cqlApi: cqlApi);
+        //InvokeCqlExample(logger: logger, cqlApi: cqlApi);
         foreach (var librarySetName in (string[])["Authoring", "CMS", "Demo"])
-            VerboseExample(logger, cqlApi, librarySetName);
+            VerboseExample(logger: logger, cqlApi: cqlApi, librarySetName: librarySetName);
         //VerboseExample(logger, cqlApi, "Authoring");
     }
 
@@ -215,7 +227,12 @@ internal class Program
                               .AddLogging(lb => lb
                                                 .ClearProviders()
                                                 .AddProvider(new CustomConsoleLoggerProvider(cat => cat.Split('.').Last()))
-                                                .AddFilter((string? category, LogLevel logLevel) =>
+                                                // .AddFilter((string? category, LogLevel logLevel) =>
+                                                // {
+                                                //     var result = category?.Contains(nameof(CqlSdkPrototype)) ?? false;
+                                                //     return result;
+                                                // })
+                                                .AddFilter((string? loggerProviderName , string? category, LogLevel logLevel) =>
                                                 {
                                                     var result = category?.Contains(nameof(CqlSdkPrototype)) ?? false;
                                                     return result;
@@ -228,11 +245,25 @@ internal class Program
     }
 }
 
+public delegate bool LogFilter(LogFilterArgs args);
+
+public readonly record struct LogFilterArgs(
+    string? LoggerProviderName,
+    string? Category,
+    LogLevel LogLevel);
+
+public record LoggingOptions(
+    ILoggerProvider? LoggerProvider = null,
+    LogFilter? LogFilter = null)
+{
+    public static readonly LoggingOptions Default = new();
+}
+
 file static class X
 {
     public static Maybe<(CqlVersionedLibraryIdentifier id, string cSharpSourceCode)> TryGetFirstCSharpFileLines<TElmApi>(
         this TElmApi elmApi)
-        where TElmApi : IElmApi<TElmApi>
+        where TElmApi : IElmApiExtensible<TElmApi>
     {
         return elmApi.Entries
               .TryGetFirst(kv => kv.Value.CSharpSourceCode is not null)
@@ -241,7 +272,7 @@ file static class X
 
     public static Maybe<(CqlVersionedLibraryIdentifier id, string elmJson)> TryGetFirstElmFileLines<TCqlApi>(
         this TCqlApi cqlApi)
-        where TCqlApi : ICqlApi<TCqlApi>
+        where TCqlApi : ICqlApiExtensible<TCqlApi>
     {
         return cqlApi.Entries
               .TryGetFirst(kv => kv.Value.ElmLibrary is not null)

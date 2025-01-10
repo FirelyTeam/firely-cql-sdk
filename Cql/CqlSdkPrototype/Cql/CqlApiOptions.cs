@@ -1,17 +1,15 @@
-﻿using Hl7.Cql.Abstractions.Exceptions;
+﻿using CqlSdkPrototype.App;
+using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Model;
 
 namespace CqlSdkPrototype.Cql;
 
 public record CqlApiOptions(
-    IServiceProvider ServiceProvider,
-    ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling)
+    LoggingOptions? LoggingOptions = null,
+    ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling = default,
+    ModelInfo[]? Models = null)
 {
-    internal IServiceProvider ServiceProvider { get; } = ServiceProvider ?? throw new ArgumentNullException(nameof(ServiceProvider));
-
-    public static CqlApiOptions Create(
-        IServiceProvider serviceProvider,
-        ProcessBatchItemExceptionHandling processBatchItemExceptionHandling = default) =>
-        new(
-            serviceProvider,
-            processBatchItemExceptionHandling);
+    public static CqlApiOptions Default { get; } = new();
+    public LoggingOptions LoggingOptions { get; init; } = LoggingOptions ?? LoggingOptions.Default;
+    public ModelInfo[] Models { get; init; } = Models ?? [];
 }

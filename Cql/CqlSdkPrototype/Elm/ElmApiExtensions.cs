@@ -8,13 +8,6 @@ namespace CqlSdkPrototype.Elm;
 
 public static partial class ElmApiExtensions
 {
-    internal static ILogger<TElmApi> GetLogger<TElmApi>(
-        this TElmApi self)
-        where TElmApi : IElmApi<TElmApi>
-    {
-        return self.Options.ServiceProvider.GetLogger<TElmApi>()!;
-    }
-
     public static ElmApi Compile(
         this CqlApi cqlApi)
     {

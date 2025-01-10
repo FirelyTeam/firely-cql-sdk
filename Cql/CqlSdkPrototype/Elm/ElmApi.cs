@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Internal;
@@ -6,56 +7,67 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
-using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using ElmCompilationEntriesMap = System.Collections.Immutable.ImmutableDictionary<
     CqlSdkPrototype.CqlVersionedLibraryIdentifier,
     CqlSdkPrototype.Elm.Extensibility.ElmCompilationEntry>;
+using System;
+using CqlSdkPrototype.App;
+using Hl7.Cql.CqlToElm;
+using Hl7.Cql.Runtime.Hosting;
 
 namespace CqlSdkPrototype.Elm;
 
-public class ElmApi :
-    IElmApi<ElmApi>
+public class ElmApi(ElmApiOptions options) :
+    IElmApiExtensible<ElmApi>
 {
+    internal IElmApiExtensible<ElmApi> AsExtensible() => this;
+    ElmApi IElmApiExtensible<ElmApi>.UseServices(Func<(ElmApi elmApi, ILogger<ElmApi> logger), ElmApi> action) => action((this, _state.Logger));
+    public static ElmApi Create(ElmApiOptions options) => new(options);
+
     #region State
 
-    private State _state;
-    ElmApiOptions IElmApi<ElmApi>.Options => _state.Options;
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmCompilationEntry> IElmApi<ElmApi>.Entries => _state.Entries;
+    private State _state = CreateState(options);
+
+    ElmApiOptions IElmApiExtensible<ElmApi>.Options => _state.Options;
+    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmCompilationEntry> IElmApiExtensible<ElmApi>.Entries => _state.Entries;
 
     private readonly record struct State(
         ElmApiOptions Options,
-        ElmCompilationEntriesMap Entries)
+        ElmCompilationEntriesMap Entries,
+        IServiceProvider ServiceProvider,
+        ILogger<ElmApi> Logger,
+        AssemblyCompiler AssemblyCompiler,
+        CSharpCodeGenerator CSharpCodeGenerator)
     {
-        public ILogger<ElmApi> Logger { get; } = Options.ServiceProvider.GetLogger<ElmApi>();
-        public AssemblyCompiler AssemblyCompiler { get; } = Options.ServiceProvider.GetAssemblyCompiler();
-        public CSharpCodeGenerator CSharpCodeGenerator { get; } = Options.ServiceProvider.GetCSharpCodeProcessor();
-        public Scope CreateScope() => new(Options.ServiceProvider.CreateScope());
+        public State(
+            ElmApiOptions Options,
+            ElmCompilationEntriesMap Entries) : this(Options, Entries, null!, null!, null!, null!)
+        {
+            var services = new ServiceCollection();
+            services.AddLogging(build => build.ClearProviders().UseOptions(Options.LoggingOptions));
+            services.AddElmApi();
+            ServiceProvider = services.BuildServiceProvider();
+            Logger = ServiceProvider.GetLogger<ElmApi>();
+            AssemblyCompiler = ServiceProvider.GetAssemblyCompiler();
+            CSharpCodeGenerator = ServiceProvider.GetCSharpCodeProcessor();
+        }
+        public ScopedState CreateScopedState() => new(ServiceProvider.CreateScope());
     }
 
-    internal class Scope(IServiceScope scope) : IDisposable
+    internal class ScopedState(IServiceScope scope) : IDisposable
     {
         public LibrarySetExpressionBuilder LibrarySetExpressionBuilder { get; } = scope.ServiceProvider.GetLibrarySetExpressionBuilderScoped();
 
         public void Dispose() => scope.Dispose();
     }
 
-    #endregion
-
-    #region Construction
-
-    public static ElmApi Create(IServiceProvider serviceProvider)
+    private static State CreateState(ElmApiOptions options)
     {
         var entries = ElmCompilationEntriesMap.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
-        var options = ElmApiOptions.Create(serviceProvider);
         var state = new State(options, entries);
-        return new ElmApi(state);
-    }
-
-    private ElmApi(State state)
-    {
-        _state = state;
+        return state;
     }
 
     private ElmApi WithEntries(
@@ -115,7 +127,7 @@ public class ElmApi :
         if (entries.Values.All(predicate: lc => lc is { AssemblyBinary: not null }))
             return this;
 
-        using var servicesScope = _state.CreateScope();
+        using var servicesScope = _state.CreateScopedState();
         var logger = _state.Logger;
         logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
         var exceptionHandling = _state.Options.ProcessBatchItemExceptionHandling;

@@ -1,27 +1,33 @@
-﻿using CqlSdkPrototype.Cql;
+﻿using CqlSdkPrototype.App;
+using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensibility;
 using Hl7.Cql.CodeGeneration.NET;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Runtime;
 
 internal static class ApiExtensions
 {
     public static ElmApi CreateElmApi<TCqlApi>(
-        this TCqlApi cqlApi)
-        where TCqlApi : ICqlApi<TCqlApi>
+        this TCqlApi cqlApi,
+        Func<ElmApiOptions, ElmApiOptions>? configureOptions = null)
+        where TCqlApi : ICqlApiExtensible<TCqlApi>
     {
-        var elmApi = ElmApi
-                     .Create(cqlApi.Options.ServiceProvider)
-                     .WithOptions(_ => ElmApiOptions.Create(cqlApi.Options))
-                     .AddElmFromCqlApi(cqlApi);
+        var elmApiOptions = cqlApi.Options.CreateElmApiOptions();
+        if (configureOptions is not null) elmApiOptions = configureOptions(elmApiOptions);
+        var elmApi = new ElmApi(elmApiOptions).AddElmFromCqlApi(cqlApi);
         return elmApi;
     }
     public static CqlRuntimeApi CreateCqlRuntimeApi<TElmApi>(this TElmApi elmApi)
-        where TElmApi : IElmApi<TElmApi>
+        where TElmApi : IElmApiExtensible<TElmApi>
     {
-        var cqlRuntimeApiOptions = new CqlRuntimeApiOptions(elmApi.Options.ServiceProvider);
+        var serviceProvider = new ServiceCollection()
+                                    .AddLogging(configure: lb => lb.ClearProviders().UseOptions(options: elmApi.Options.LoggingOptions))
+                                    .BuildServiceProvider();
+        var cqlRuntimeApiOptions = new CqlRuntimeApiOptions(serviceProvider);
         var cqlRuntimeApi = CqlRuntimeApi
                             .Create(cqlRuntimeApiOptions)
                             .AddAssemblies(
@@ -37,7 +43,7 @@ internal static class ApiExtensions
 
     public static CqlInvocationScope CreateInvocationScope<TElmApi>(
         this TElmApi elmApi)
-        where TElmApi : IElmApi<TElmApi>
+        where TElmApi : IElmApiExtensible<TElmApi>
     {
         return elmApi
                .Compile()

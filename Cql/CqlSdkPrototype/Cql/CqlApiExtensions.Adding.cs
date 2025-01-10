@@ -9,7 +9,7 @@ public static partial class CqlApiExtensions
     public static TCqlApi AddCqlLibraryString<TCqlApi>(
         this TCqlApi cqlApi,
         CqlLibraryString cqlLibrary)
-        where TCqlApi : ICqlApi<TCqlApi>
+        where TCqlApi : ICqlApiExtensible<TCqlApi>
     {
         return cqlApi.AddCqlLibraries([cqlLibrary]);
     }
@@ -19,7 +19,7 @@ public static partial class CqlApiExtensions
         DirectoryInfo directory,
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
-        where TCqlApi : ICqlApi<TCqlApi>
+        where TCqlApi : ICqlApiExtensible<TCqlApi>
     {
         var files = directory.EnumerateFiles("*.cql", options ?? InternalConstants.DefaultEnumerationOptions);
         if (filePredicate is not null) files = files.Where(filePredicate);
@@ -29,19 +29,23 @@ public static partial class CqlApiExtensions
     public static TCqlApi AddCqlLibraryFiles<TCqlApi>(
         this TCqlApi cqlApi,
         IEnumerable<FileInfo> files)
-        where TCqlApi : ICqlApi<TCqlApi>
+        where TCqlApi : ICqlApiExtensible<TCqlApi>
     {
-        var logger = cqlApi.GetLogger();
-        var cqlLibraries =
-            files
-                .Select(f =>
-                {
-                    logger.LogInformation("Loading library from file: {file}", f);
-                    var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(f.Name.TrimFileExtension(".cql"));
-                    var cqlContent = File.ReadAllText(f.FullName);
-                    var cqlLibrary = CqlLibraryString.FromIdentifierAndString(versionedLibraryIdentifier, cqlContent);
-                    return cqlLibrary;
-                }); // Log errors
-        return cqlApi.AddCqlLibraries(cqlLibraries);
+        return cqlApi.UseServices(t =>
+        {
+            var logger = t.logger;
+            var cqlApi = t.cqlApi;
+            var cqlLibraries =
+                files
+                    .Select(f =>
+                    {
+                        logger.LogInformation("Loading library from file: {file}", f);
+                        var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(f.Name.TrimFileExtension(".cql"));
+                        var cqlContent = File.ReadAllText(f.FullName);
+                        var cqlLibrary = CqlLibraryString.FromIdentifierAndString(versionedLibraryIdentifier, cqlContent);
+                        return cqlLibrary;
+                    }); // Log errors
+            return cqlApi.AddCqlLibraries(cqlLibraries);
+        });
     }
 }
