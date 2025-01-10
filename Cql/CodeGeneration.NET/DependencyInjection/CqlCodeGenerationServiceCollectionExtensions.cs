@@ -19,8 +19,7 @@ namespace Microsoft.Extensions.DependencyInjection;
 internal static class CqlCodeGenerationServiceCollectionExtensions
 {
     public static IServiceCollection AddCqlCodeGenerationServices(
-        this IServiceCollection services,
-        Action<CSharpCodeWriterOptions>? configureCSharpCodeWriterOptions = null)
+        this IServiceCollection services)
     {
         services.AddCqlCompilerServices();
 
@@ -29,15 +28,6 @@ internal static class CqlCodeGenerationServiceCollectionExtensions
         services.TryAddSingleton<CSharpCodeGenerator>();
 
         services.TryAddSingleton<AssemblyCompiler>();
-
-        services.AddOptions(BuildCSharpCodeWriterOptions());
-
-        Action<OptionsBuilder<CSharpCodeWriterOptions>> BuildCSharpCodeWriterOptions()
-        {
-            return configureCSharpCodeWriterOptions is { } fn
-                       ? builder => builder.Configure(fn)
-                       : _ => { };
-        }
 
         return services;
     }

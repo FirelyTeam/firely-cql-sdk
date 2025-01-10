@@ -23,7 +23,7 @@ internal class Program
         // - Should we keep the dependency on Microsoft's ILogger or should we create our own logging abstraction?
 
         var loggingOptions = new LoggingOptions(
-            LoggerProvider: new ColorConsoleLoggerProvider(),
+            LoggerProviders: [new ColorConsoleLoggerProvider()],
             LogFilter: logFilterArgs => logFilterArgs.Category?.Contains(value: nameof(CqlSdkPrototype)) ?? false);
 
         var cqlApiOptions = new CqlApiOptions(
@@ -233,12 +233,12 @@ public readonly record struct LogFilterArgs
     string? Category,
     LogLevel LogLevel);
 
-public record LoggingOptions
-(
-    ILoggerProvider? LoggerProvider = null,
+public record LoggingOptions(
+    IReadOnlyCollection<ILoggerProvider>? LoggerProviders = null,
     LogFilter? LogFilter = null)
 {
     public static readonly LoggingOptions Default = new();
+    public IReadOnlyCollection<ILoggerProvider> LoggerProviders { get; init; } = LoggerProviders ?? [];
 }
 
 file static class X

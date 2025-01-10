@@ -34,18 +34,31 @@ public class ElmApi(ElmApiOptions options) :
         AssemblyCompiler AssemblyCompiler,
         CSharpCodeGenerator CSharpCodeGenerator)
     {
+        private readonly ElmApiOptions _options = Options;
+
         public State(
             ElmApiOptions Options,
             ElmCompilationEntriesMap Entries) : this(Options, Entries, null!, null!, null!, null!)
         {
-            var services = new ServiceCollection();
-            services.AddLogging(build => build.ClearProviders().UseOptions(Options.LoggingOptions));
-            services.AddElmApi();
-            ServiceProvider = services.BuildServiceProvider();
-            Logger = ServiceProvider.GetLogger<ElmApi>();
-            AssemblyCompiler = ServiceProvider.GetAssemblyCompiler();
-            CSharpCodeGenerator = ServiceProvider.GetCSharpCodeProcessor();
+            this.Options = Options;
         }
+
+        public ElmApiOptions Options
+        {
+            get => _options;
+            init
+            {
+                _options = value;
+                var services = new ServiceCollection();
+                services.AddLogging(build => build.ClearProviders().UseOptions(value.LoggingOptions));
+                services.AddElmApi();
+                ServiceProvider = services.BuildServiceProvider();
+                Logger = ServiceProvider.GetLogger<ElmApi>();
+                AssemblyCompiler = ServiceProvider.GetAssemblyCompiler();
+                CSharpCodeGenerator = ServiceProvider.GetCSharpCodeProcessor();
+            }
+        }
+
         public ScopedState CreateScopedState() => new(ServiceProvider.CreateScope());
     }
 

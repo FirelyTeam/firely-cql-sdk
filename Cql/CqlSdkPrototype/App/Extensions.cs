@@ -10,10 +10,13 @@ public static class Extensions
 {
     public static ILoggingBuilder UseOptions(this ILoggingBuilder builder, LoggingOptions options)
     {
-        if (options.LoggerProvider is { } provider)
-            builder = builder.AddProvider(provider);
+        if (options.LoggerProviders is { } providers)
+            foreach (var provider in providers)
+                builder.AddProvider(provider);
+
         if (options.LogFilter is { } filter)
             builder = builder.AddFilter((provider, category, level) => filter(new (provider, category, level)));
+
         return builder;
     }
 
@@ -21,7 +24,7 @@ public static class Extensions
         this IServiceCollection serviceCollection)
     {
         return serviceCollection
-            .AddCqlCodeGenerationServices(configureCSharpCodeWriterOptions: null);
+            .AddCqlCodeGenerationServices();
     }
 
     public static IServiceCollection SuppressCqlDebugAssertions(

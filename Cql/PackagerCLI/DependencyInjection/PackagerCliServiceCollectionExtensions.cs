@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packager;
 using Hl7.Cql.Packaging;
 using Microsoft.Extensions.Configuration;
@@ -38,7 +37,6 @@ internal static class PackagerCliServiceCollectionExtensions
             return services;
 
         services.AddSingleton<IValidateOptions<CqlToResourcePackagingOptions>, CqlToResourcePackagingOptions.Validator>();
-        services.AddSingleton<IValidateOptions<CSharpCodeWriterOptions>, CSharpCodeWriterOptions.Validator>();
 
         services
             .AddOptions<CqlToResourcePackagingOptions>()
@@ -53,11 +51,6 @@ internal static class PackagerCliServiceCollectionExtensions
         services
             .AddOptions<FhirResourceWriterOptions>()
             .Configure<IConfiguration>(FhirResourceWriterOptions.BindConfig)
-            .ValidateOnStart();
-
-        services
-            .AddOptions<CSharpCodeWriterOptions>()
-            .Configure<IConfiguration>(CSharpCodeWriterOptions.BindConfig)
             .ValidateOnStart();
 
         return services;

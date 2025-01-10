@@ -9,7 +9,6 @@
 using Microsoft.Extensions.Options;
 using System.Runtime.CompilerServices;
 using System.Text;
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packaging;
 using Microsoft.Extensions.Logging;
 
@@ -19,13 +18,11 @@ internal class OptionsConsoleDumper(
     ILogger<OptionsConsoleDumper> logger,
     IOptions<PackagerCliProgramOptions> packagerCliProgramOptions,
     IOptions<CqlToResourcePackagingOptions> cqlToResourcePackagingOptions,
-    IOptions<FhirResourceWriterOptions> fhirResourceWriterOptions,
-    IOptions<CSharpCodeWriterOptions> cSharpCodeWriterOptions)
+    IOptions<FhirResourceWriterOptions> fhirResourceWriterOptions)
 {
     private readonly PackagerCliProgramOptions _packagerCliProgramOptions = packagerCliProgramOptions.Value;
     private readonly CqlToResourcePackagingOptions _cqlToResourcePackagingOptions = cqlToResourcePackagingOptions.Value;
     private readonly FhirResourceWriterOptions _fhirResourceWriterOptions = fhirResourceWriterOptions.Value;
-    private readonly CSharpCodeWriterOptions _cSharpCodeWriterOptions = cSharpCodeWriterOptions.Value;
 
     public void DumpToConsole()
     {
@@ -41,11 +38,11 @@ internal class OptionsConsoleDumper(
         {
             // ArgFor(_options.Force),
             ArgFor(_cqlToResourcePackagingOptions.LogDebugEnabled),
-            ArgFor("InDirectoryCql", _cqlToResourcePackagingOptions.CqlDirectory),
-            ArgFor("InDirectoryElm", _cqlToResourcePackagingOptions.ElmDirectory),
-            ArgFor("OutDirectoryCSharp", _cSharpCodeWriterOptions.OutDirectory),
-            ArgFor("OutDirectoryAssemblies", _packagerCliProgramOptions.OutDirectoryAssemblies),
-            ArgFor("OutDirectoryFhir", _fhirResourceWriterOptions.OutDirectory),
+            ArgFor("InDir, Cql", _cqlToResourcePackagingOptions.CqlDirectory),
+            ArgFor("InDir, Elm", _cqlToResourcePackagingOptions.ElmDirectory),
+            ArgFor("OutDir, CSharp", _packagerCliProgramOptions.OutDirectoryCSharp),
+            ArgFor("OutDir, Assemblies", _packagerCliProgramOptions.OutDirectoryAssemblies),
+            ArgFor("OutDir, Fhir", _fhirResourceWriterOptions.OutDirectory),
             ArgFor("Resource, CanonicalRootUrl", _cqlToResourcePackagingOptions.CanonicalRootUrl),
             ArgFor("Fhir, OverrideDate", _fhirResourceWriterOptions.OverrideDate),
         }.Where(t => t.value is not null)

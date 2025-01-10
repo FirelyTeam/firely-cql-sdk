@@ -7,9 +7,9 @@
  */
 
 using System.Diagnostics;
+using System.IO;
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packaging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -29,6 +29,7 @@ internal class PackagerCliProgramOptions {
 
         // DirectoryInfos cannot be bound directly from IConfiguration, so we do it manually.
         opt.OutDirectoryAssemblies = GetDirectoryInfo(nameof(OutDirectoryAssemblies))!;
+        opt.OutDirectoryCSharp = GetDirectoryInfo(nameof(OutDirectoryCSharp))!;
 
         DirectoryInfo? GetDirectoryInfo(string key)
         {
@@ -37,23 +38,24 @@ internal class PackagerCliProgramOptions {
         }
     }
 
+    public DirectoryInfo? OutDirectoryCSharp { get; set; }
     public DirectoryInfo? OutDirectoryAssemblies { get; set; }
 }
 
 internal class PackagerCliProgram(
+    IEnumerable<ILoggerProvider> loggerProviders,
     ILogger<PackagerCliProgram> logger,
     OptionsConsoleDumper optionsConsoleDumper,
     IOptions<PackagerCliProgramOptions> packagerCliProgramOptions,
-    IOptions<CqlToResourcePackagingOptions> packagingOptions,
-    IOptions<CSharpCodeWriterOptions> cSharpOptions)
+    IOptions<CqlToResourcePackagingOptions> packagingOptions)
 {
     public int Run(bool translateCql = false)
     {
         try
         {
             optionsConsoleDumper.DumpToConsole();
+            var programOpt = packagerCliProgramOptions.Value;
             var packagingOpt = packagingOptions.Value;
-            var cSharpOpt = cSharpOptions.Value;
 
             ElmApi elmApi;
             if (translateCql)
@@ -62,6 +64,7 @@ internal class PackagerCliProgram(
                 elmApi = CqlApi.Create(CqlApiOptions.Default)
                             .WithOptions(o => o with
                             {
+                                LoggingOptions = o.LoggingOptions with { LoggerProviders = [.. loggerProviders] },
                                 ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
                             })
                             .AddCqlLibrariesFromDirectory(packagingOpt.CqlDirectory)
@@ -75,6 +78,7 @@ internal class PackagerCliProgram(
                 elmApi = ElmApi.Create(ElmApiOptions.Default)
                             .WithOptions(o => o with
                             {
+                                LoggingOptions = o.LoggingOptions with { LoggerProviders = [.. loggerProviders] },
                                 ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
                             })
                             .AddElmFilesFromDirectory(packagingOpt.ElmDirectory,
@@ -83,17 +87,16 @@ internal class PackagerCliProgram(
                             .Compile();
             }
 
-            if (cSharpOpt.OutDirectory != null)
+            if (programOpt.OutDirectoryCSharp is {} dirOutCS)
             {
-                cSharpOpt.OutDirectory.Delete(true);
-                /*elmApi = */elmApi.SaveCSharpFilesToDirectory(cSharpOpt.OutDirectory);
+                dirOutCS.Recreate();
+                elmApi.SaveCSharpFilesToDirectory(dirOutCS);
             }
 
-            //Debug.Fail("Need to implement");
-            if (packagerCliProgramOptions.Value.OutDirectoryAssemblies is {} dir)
+            if (programOpt.OutDirectoryAssemblies is {} dirOutDll)
             {
-                dir.Delete(true);
-                /*elmApi = */elmApi.SaveAssemblyBinariesToDirectory(dir);
+                dirOutDll.Recreate();
+                elmApi.SaveAssemblyBinariesToDirectory(dirOutDll);
             }
 
             return 0;
@@ -108,26 +111,11 @@ internal class PackagerCliProgram(
     }
 }
 
-// internal class PackagerCliProgramOld
-// (
-//     ILogger<PackagerCliProgram> logger,
-//     OptionsConsoleDumper optionsConsoleDumper,
-//     CqlToResourcePackagingPipeline cqlToResourcePackagingPipeline)
-// {
-//     public int Run()
-//     {
-//         try
-//         {
-//             optionsConsoleDumper.DumpToConsole();
-//             cqlToResourcePackagingPipeline.ProcessCqlToResources();
-//             return 0;
-//         }
-//         catch (Exception e)
-//         {
-//             logger.LogError(e, "An error occurred while running the packager");
-//             Console.Error.WriteLine(
-//                 "An error occurred while running PackagerCLI. Consult the build.log file for more detail.");
-//             return -1;
-//         }
-//     }
-// }
+file static class X
+{
+    public static void Recreate(this DirectoryInfo dir)
+    {
+        if (dir.Exists) dir.Delete(true);
+        dir.Create();
+    }
+}

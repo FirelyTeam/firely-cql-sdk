@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packager;
 using Hl7.Cql.Packaging;
 using Microsoft.Extensions.Configuration;
@@ -23,7 +22,6 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
     {
         const string PackagerCliSection = PackagerCliProgramOptions.ConfigSection + ":";
         const string PackageSection = CqlToResourcePackagingOptions.ConfigSection + ":";
-        const string CSharpCodeWriterSection = CSharpCodeWriterOptions.ConfigSection + ":";
         const string FhirResourceWriterSection = FhirResourceWriterOptions.ConfigSection + ":";
 
         return new SortedDictionary<string, string>
@@ -35,8 +33,7 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
             ["--log-dont-clear"] = PackageSection + nameof(CqlToResourcePackagingOptions.DontLogClear),
             ["--canonical-root-url"] = PackageSection + nameof(CqlToResourcePackagingOptions.CanonicalRootUrl),
 
-            ["--cs"] = CSharpCodeWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
-
+            ["--cs"] = PackagerCliSection + nameof(PackagerCliProgramOptions.OutDirectoryCSharp),
             ["--dll"] = PackagerCliSection + nameof(PackagerCliProgramOptions.OutDirectoryAssemblies),
 
             ["--fhir"] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
