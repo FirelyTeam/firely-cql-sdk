@@ -15,28 +15,21 @@ using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Packager;
 
-internal class OptionsConsoleDumper
+internal class OptionsConsoleDumper(
+    ILogger<OptionsConsoleDumper> logger,
+    IOptions<PackagerCliProgramOptions> packagerCliProgramOptions,
+    IOptions<CqlToResourcePackagingOptions> cqlToResourcePackagingOptions,
+    IOptions<FhirResourceWriterOptions> fhirResourceWriterOptions,
+    IOptions<CSharpCodeWriterOptions> cSharpCodeWriterOptions)
 {
-    private readonly ILogger<OptionsConsoleDumper> _logger;
-    private readonly CqlToResourcePackagingOptions _options;
-    private readonly FhirResourceWriterOptions _fhirResourceWriterOptions;
-    private readonly CSharpCodeWriterOptions _csharpCodeWriterOptions;
-
-    public OptionsConsoleDumper(
-        ILogger<OptionsConsoleDumper> logger,
-        IOptions<CqlToResourcePackagingOptions> packagerOptions,
-        IOptions<FhirResourceWriterOptions> fhirResourceWriterOptions,
-        IOptions<CSharpCodeWriterOptions> csharpResourceWriterOptions)
-    {
-        _logger = logger;
-        _options = packagerOptions.Value;
-        _fhirResourceWriterOptions = fhirResourceWriterOptions.Value;
-        _csharpCodeWriterOptions = csharpResourceWriterOptions.Value;
-    }
+    private readonly PackagerCliProgramOptions _packagerCliProgramOptions = packagerCliProgramOptions.Value;
+    private readonly CqlToResourcePackagingOptions _cqlToResourcePackagingOptions = cqlToResourcePackagingOptions.Value;
+    private readonly FhirResourceWriterOptions _fhirResourceWriterOptions = fhirResourceWriterOptions.Value;
+    private readonly CSharpCodeWriterOptions _cSharpCodeWriterOptions = cSharpCodeWriterOptions.Value;
 
     public void DumpToConsole()
     {
-        StringBuilder? sb = _logger.IsEnabled(LogLevel.Information) ? new() : null;
+        StringBuilder? sb = logger.IsEnabled(LogLevel.Information) ? new() : null;
 
         WriteLine("PackageCLI");
         WriteLine("- Environment -----------------------------------");
@@ -47,13 +40,14 @@ internal class OptionsConsoleDumper
         (string name, object? value)[] values = new[]
         {
             // ArgFor(_options.Force),
-            ArgFor(_options.LogDebugEnabled),
-            ArgFor("Resource, CanonicalRootUrl", _options.CanonicalRootUrl),
-            ArgFor("Cql, InDirectory", _options.CqlDirectory),
-            ArgFor("Elm, InDirectory", _options.ElmDirectory),
-            ArgFor("Fhir, OutDirectory", _fhirResourceWriterOptions.OutDirectory),
+            ArgFor(_cqlToResourcePackagingOptions.LogDebugEnabled),
+            ArgFor("InDirectoryCql", _cqlToResourcePackagingOptions.CqlDirectory),
+            ArgFor("InDirectoryElm", _cqlToResourcePackagingOptions.ElmDirectory),
+            ArgFor("OutDirectoryCSharp", _cSharpCodeWriterOptions.OutDirectory),
+            ArgFor("OutDirectoryAssemblies", _packagerCliProgramOptions.OutDirectoryAssemblies),
+            ArgFor("OutDirectoryFhir", _fhirResourceWriterOptions.OutDirectory),
+            ArgFor("Resource, CanonicalRootUrl", _cqlToResourcePackagingOptions.CanonicalRootUrl),
             ArgFor("Fhir, OverrideDate", _fhirResourceWriterOptions.OverrideDate),
-            ArgFor("CSharp, OutDirectory", _csharpCodeWriterOptions.OutDirectory),
         }.Where(t => t.value is not null)
         .ToArray();
 
@@ -61,7 +55,7 @@ internal class OptionsConsoleDumper
             WriteLine($"{name,-45} : {value}");
 
         if (sb is not null)
-            _logger.LogInformation("{options}", sb.ToString());
+            logger.LogInformation("{options}", sb.ToString());
 
         void WriteLine(string s)
         {

@@ -11,18 +11,13 @@ internal partial class CqlToResourcePackagingOptions
 {
 	public const string ConfigSection = "Packager";
 
-	public const string ArgNameElmDirectory = "--elm";
-	public DirectoryInfo ElmDirectory { get; set; } = null!;
+    public DirectoryInfo ElmDirectory { get; set; } = null!;
 
-	public const string ArgNameCqlDirectory = "--cql";
-	public DirectoryInfo CqlDirectory { get; set; } = null!;
+    public DirectoryInfo CqlDirectory { get; set; } = null!;
 
-	public const string ArgNameLogDebugEnabled = "--log-debug";
-	public bool LogDebugEnabled { get; set; }
+    public bool LogDebugEnabled { get; set; }
 
-	public const string ArgNameLogDontClear = "--log-dont-clear";
-	internal bool DontLogClear { get; set; }  // Internal use only!
+    internal bool DontLogClear { get; set; }  // Internal use only!
 
-	public const string ArgNameCanonicalRootUrl = "--canonical-root-url";
-	public Uri? CanonicalRootUrl { get; set; }
+    public Uri? CanonicalRootUrl { get; set; }
 }

@@ -26,14 +26,10 @@ public class FhirResourceWriterOptions
     /// </summary>
     public DirectoryInfo? OutDirectory { get; set; }
 
-    internal const string ArgNameOutDirectory = "--fhir";
-
     /// <summary>
     /// Gets or sets the override date.
     /// </summary>
     public DateTime? OverrideDate { get; set; }
-
-    internal const string ArgNameOverrideDate = "--override-utc-date-time";
 
     /// <summary>
     /// Binds the configuration values to the FhirResourceWriterOptions object.

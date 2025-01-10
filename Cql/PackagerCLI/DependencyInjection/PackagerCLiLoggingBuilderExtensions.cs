@@ -30,10 +30,10 @@ internal static class PackagerCLiLoggingBuilderExtensions
         logging.ClearProviders();
 
         bool enableDebugLogging = Debugger.IsAttached;
-        enableDebugLogging = enableDebugLogging || configuration.GetCommandLineSwitchValue<bool>(CqlToResourcePackagingOptions.ArgNameLogDebugEnabled);
+        enableDebugLogging = enableDebugLogging || configuration.GetCommandLineSwitchValue<bool>("--log-debug");
         var minLogLevel = enableDebugLogging ? LogLevel.Trace : LogLevel.Information;
 
-        bool shouldClearLog = !configuration.GetCommandLineSwitchValue<bool>(CqlToResourcePackagingOptions.ArgNameLogDontClear);
+        bool shouldClearLog = !configuration.GetCommandLineSwitchValue<bool>("--log-dont-clear");
 
         logging.AddFilter(level => level >= minLogLevel);
         logging.AddProvider(new ColorConsoleLoggerProvider());

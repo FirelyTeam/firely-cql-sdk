@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Packager;
 using Hl7.Cql.Packaging;
 using Microsoft.Extensions.Configuration;
 
@@ -20,6 +21,7 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
 
     static IDictionary<string, string> BuildCommandLineSwitchMappings()
     {
+        const string PackagerCliSection = PackagerCliProgramOptions.ConfigSection + ":";
         const string PackageSection = CqlToResourcePackagingOptions.ConfigSection + ":";
         const string CSharpCodeWriterSection = CSharpCodeWriterOptions.ConfigSection + ":";
         const string FhirResourceWriterSection = FhirResourceWriterOptions.ConfigSection + ":";
@@ -27,18 +29,18 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
         return new SortedDictionary<string, string>
         {
             // @formatter:off
-            [CqlToResourcePackagingOptions.ArgNameElmDirectory] = PackageSection + nameof(CqlToResourcePackagingOptions.ElmDirectory),
-            [CqlToResourcePackagingOptions.ArgNameCqlDirectory] = PackageSection + nameof(CqlToResourcePackagingOptions.CqlDirectory),
-            [CqlToResourcePackagingOptions.ArgNameLogDebugEnabled] = PackageSection + nameof(CqlToResourcePackagingOptions.LogDebugEnabled),
-            [CqlToResourcePackagingOptions.ArgNameLogDontClear] = PackageSection + nameof(CqlToResourcePackagingOptions.DontLogClear),
-            [CqlToResourcePackagingOptions.ArgNameCanonicalRootUrl] = PackageSection + nameof(CqlToResourcePackagingOptions.CanonicalRootUrl),
+            ["--elm"] = PackageSection + nameof(CqlToResourcePackagingOptions.ElmDirectory),
+            ["--cql"] = PackageSection + nameof(CqlToResourcePackagingOptions.CqlDirectory),
+            ["--log-debug"] = PackageSection + nameof(CqlToResourcePackagingOptions.LogDebugEnabled),
+            ["--log-dont-clear"] = PackageSection + nameof(CqlToResourcePackagingOptions.DontLogClear),
+            ["--canonical-root-url"] = PackageSection + nameof(CqlToResourcePackagingOptions.CanonicalRootUrl),
 
-            [CSharpCodeWriterOptions.ArgNameOutDirectory] = CSharpCodeWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
+            ["--cs"] = CSharpCodeWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
 
-            //[AssemblyDataWriterOptions.ArgNameOutDirectory] = AssemblyDataWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
+            ["--dll"] = PackagerCliSection + nameof(PackagerCliProgramOptions.OutDirectoryAssemblies),
 
-            [FhirResourceWriterOptions.ArgNameOutDirectory] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
-            [FhirResourceWriterOptions.ArgNameOverrideDate] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OverrideDate),
+            ["--fhir"] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
+            ["--override-utc-date-time"] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OverrideDate),
             // @formatter:on
         };
     }

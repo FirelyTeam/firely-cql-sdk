@@ -10,8 +10,8 @@ partial class CqlToResourcePackagingOptions
         {
             ValidateOptionsResultBuilder? builder = null;
 
-            var elm = (ArgNameElmDirectory, options.ElmDirectory);
-            var cql = (ArgNameCqlDirectory, options.CqlDirectory);
+            var elm = (ArgNameElmDirectory: "--elm", options.ElmDirectory);
+            var cql = (ArgNameCqlDirectory: "--cql", options.CqlDirectory);
 
             _ = ValidateRequired(elm) && ValidateDirectoryExists(elm);
 

@@ -46,6 +46,11 @@ internal static class PackagerCliServiceCollectionExtensions
             .ValidateOnStart();
 
         services
+            .AddOptions<PackagerCliProgramOptions>()
+            .Configure<IConfiguration>(PackagerCliProgramOptions.BindConfig)
+            .ValidateOnStart();
+
+        services
             .AddOptions<FhirResourceWriterOptions>()
             .Configure<IConfiguration>(FhirResourceWriterOptions.BindConfig)
             .ValidateOnStart();

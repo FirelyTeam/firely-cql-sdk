@@ -21,8 +21,6 @@ public partial class CSharpCodeWriterOptions
     /// </summary>
     internal const string ConfigSection = "CSharpCodeWriter";
 
-    internal const string ArgNameOutDirectory = "--cs";
-
     /// <summary>
     /// Gets or sets the output directory.
     /// </summary>
