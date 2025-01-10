@@ -49,11 +49,6 @@ internal class CSharpCodeGenerator
     private readonly IReadOnlyList<(string alias, string type)> _aliasedUsings;
 
     /// <summary>
-    /// Gets the <see cref="TupleMetadataBuilder"/> to be used to build tuples in the generated code.
-    /// </summary>
-    private readonly TupleMetadataBuilder _tupleMetadataBuilder;
-
-    /// <summary>
     /// Gets the version of this <see cref="CSharpCodeGenerator"/> as will appear in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Version"/>.
     /// </summary>
     private readonly string _generatorToolVersion;
@@ -72,7 +67,6 @@ internal class CSharpCodeGenerator
         _typeToCSharpConverter = typeToCSharpConverter;
         _usings = BuildUsings(typeResolver);
         var thisAssembly = GetType().Assembly;
-        _tupleMetadataBuilder = new TupleMetadataBuilder();
         _generatorToolVersion = thisAssembly.GetName().Version?.ToString() ?? "1.0.0";
         _generatorToolName = thisAssembly.GetCustomAttributes(false)
                                          .OfType<AssemblyProductAttribute>()
@@ -118,7 +112,7 @@ internal class CSharpCodeGenerator
         LibrarySet LibrarySet,
         DefinitionDictionary<LambdaExpression> Definitions)
     {
-        public TupleMetadataBuilder TupleMetadataBuilder => Processor._tupleMetadataBuilder;
+        public TupleMetadataBuilder TupleMetadataBuilder { get; } = new();
         public string GeneratorToolName => Processor._generatorToolName;
         public string GeneratorToolVersion => Processor._generatorToolVersion;
         public TypeToCSharpConverter TypeToCSharpConverter => Processor._typeToCSharpConverter;
