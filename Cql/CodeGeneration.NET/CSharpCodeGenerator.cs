@@ -18,8 +18,6 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Operators;
@@ -109,8 +107,8 @@ internal class CSharpCodeGenerator
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> definitions)
     {
-        var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions, CSharpSourceCodeWriterCallbacks.Default, default);
-        return librarySetWriter.GenerateCSharpV2();
+        var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions);
+        return librarySetWriter.GenerateCSharpDeferred();
     }
 
     #region Nested Types
@@ -118,93 +116,17 @@ internal class CSharpCodeGenerator
     private record LibrarySetWriter(
         CSharpCodeGenerator Processor,
         LibrarySet LibrarySet,
-        DefinitionDictionary<LambdaExpression> Definitions,
-        CSharpSourceCodeWriterCallbacks Callbacks,
-        ProcessBatchItemExceptionHandling ProcessLibraryToCSharpExceptionHandling)
+        DefinitionDictionary<LambdaExpression> Definitions)
     {
-        public ProcessBatchItemExceptionHandling ProcessLibraryToCSharpExceptionHandling { get; } = ProcessLibraryToCSharpExceptionHandling;
         public TupleMetadataBuilder TupleMetadataBuilder => Processor._tupleMetadataBuilder;
         public string GeneratorToolName => Processor._generatorToolName;
         public string GeneratorToolVersion => Processor._generatorToolVersion;
         public TypeToCSharpConverter TypeToCSharpConverter => Processor._typeToCSharpConverter;
         public IReadOnlyList<(string alias, string type)> AliasedUsings => Processor._aliasedUsings;
         public HashSet<string> Usings => Processor._usings;
-        public string? Namespace => null;
-        public ILogger<CSharpCodeGenerator> Logger => Processor._logger;
+        public string? Namespace { get; } = null; // Not used right now
 
-        public IEnumerable<(string name, Stream stream)> WriteLibraries()
-        {
-            if (!LibrarySet.Any())
-            {
-                Logger.LogInformation($"No libraries detected; skipping.");
-                return [];
-            }
-
-            IEnumerable<(string libraryName, Library library, Stream stream)> GetLibrariesForProcessing()
-            {
-                foreach (Library library in LibrarySet)
-                {
-                    string libraryName = library.GetVersionedIdentifier()!;
-                    if (!Callbacks.ShouldWriteLibrary(libraryName))
-                    {
-                        Logger.LogInformation($"Skipping library {libraryName} as per callback.");
-                        continue;
-                    }
-
-                    if (!Definitions.Libraries.Contains(libraryName))
-                    {
-                        Logger.LogInformation($"Skipping library {libraryName}, which has no definitions");
-                        continue;
-                    }
-
-                    var stream = Callbacks.GetStreamForLibraryName(libraryName);
-                    if (stream == null!)
-                        continue;
-
-                    yield return (libraryName, library, stream);
-                }
-            }
-
-            return GetLibrariesForProcessing()
-                   .TryProcessEach(t =>
-                   {
-                       WriteLibrary(t.library, t.stream);
-                       return (t.libraryName, t.stream);
-                   })
-                   .WithEachException(t =>
-                   {
-                       var libraryName = t.Input.libraryName;
-                       switch (ProcessLibraryToCSharpExceptionHandling)
-                       {
-                           case ProcessBatchItemExceptionHandling.ThrowException:
-                               Logger.LogError(t.Exception, "Error writing library '{libraryName}' to C#.",
-                                               libraryName);
-                               break;
-                           case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue:
-                               Logger.LogWarning(
-                                   t.Exception,
-                                   "Error writing library '{libraryName}' to C#, continuing.",
-                                   libraryName);
-                               break;
-                           case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:
-                               Logger.LogWarning(
-                                   t.Exception, "Error writing library '{libraryName}' to C#, aborting.",
-                                   libraryName);
-                               break;
-                       }
-                   })
-                   .HandleExceptions(ProcessLibraryToCSharpExceptionHandling);
-
-            void WriteLibrary(Library library, Stream stream)
-            {
-                using var writer = new StreamWriter(stream, Encoding.UTF8, 1024, leaveOpen: true);
-                var libraryWriter = new LibraryWriter(this, library, writer);
-                libraryWriter.WriteLibraryFile();
-                writer.Flush();
-            }
-        }
-
-        public IEnumerable<(Library library, Func<string> generateCSharp)> GenerateCSharpV2()
+        public IEnumerable<(Library library, Func<string> generateCSharp)> GenerateCSharpDeferred()
         {
             foreach (var library in LibrarySet)
             {
@@ -285,7 +207,6 @@ internal class CSharpCodeGenerator
 
         private void WriteLibraryInterfaceImplementation()
         {
-            var libraryNameToClassName = LibrarySetWriter.Callbacks.LibraryNameToClassName;
             IndentedTextWriter.WriteLine("#region ILibrary Implementation");
             IndentedTextWriter.WriteLine();
             IndentedTextWriter.WriteLine($"string ILibrary.Name => {LibraryVersionedIdentifier.id.QuoteString()};");
@@ -293,7 +214,7 @@ internal class CSharpCodeGenerator
             var dependencies =
                 LibrarySetWriter.LibrarySet
                                 .GetLibraryDependencies(LibraryName, throwError: true)
-                                .Select(dep => libraryNameToClassName(dep.GetVersionedIdentifier()!))
+                                .Select(dep => VariableNameGenerator.NormalizeIdentifier(dep.GetVersionedIdentifier()!))
                                 .Select(typeName => $"{typeName}.Instance");
             IndentedTextWriter.WriteLine($"IReadOnlyList<ILibrary> ILibrary.Dependencies => [{string.Join(", ", dependencies)}];");
             IndentedTextWriter.WriteLine();

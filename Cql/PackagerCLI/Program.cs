@@ -8,7 +8,6 @@
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 using System.Globalization;
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packaging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

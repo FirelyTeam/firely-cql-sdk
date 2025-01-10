@@ -6,8 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Diagnostics;
-using System.IO;
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
 using Hl7.Cql.Packaging;

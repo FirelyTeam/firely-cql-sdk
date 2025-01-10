@@ -10,8 +10,6 @@ using System.Diagnostics;
 using System.Globalization;
 using CqlSdkPrototype.Logging;
 using Hl7.Cql.Abstractions.Exceptions;
-using Hl7.Cql.Packager.Logging;
-using Hl7.Cql.Packaging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Serilog;
