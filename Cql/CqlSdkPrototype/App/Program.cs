@@ -6,12 +6,12 @@ using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Logging;
 using CqlSdkPrototype.Runtime;
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Model;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using static Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling;
 
 namespace CqlSdkPrototype.App;
 
@@ -60,8 +60,7 @@ internal class Program
         /*cqlApi = */
         cqlApi.WithOptions(o => o with
         {
-            ProcessBatchItemExceptionHandling =
-              ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
+            ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
         })
           .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory);
 
@@ -120,7 +119,7 @@ internal class Program
         cqlApi
     .WithOptions(o => o with
     {
-        ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
+        ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
     })
     .AddCqlLibrariesFromDirectory(
         dirs.CqlInDirectory /*,
@@ -209,40 +208,6 @@ internal class Program
     //         var patient = patientDeclaration.Invoke(cqlContext);
     //     }
     // }
-
-    private static ServiceProvider BuildServiceProvider(
-        Action<CqlServicesOptions>? configureCqlTranslationOptions = null)
-    {
-        // Dictionary<string, string?> inMemoryConfiguration = new()
-        // {
-        //     //["ElmCompilationCreateOptions:ShouldThrowError"] = "true"
-        // };
-
-        // var configuration = new ConfigurationBuilder()
-        //                     .AddInMemoryCollection(inMemoryConfiguration)
-        //                     .Build();
-
-        var serviceProvider = new ServiceCollection()
-                              // .AddSingleton<IConfiguration>(configuration)
-                              .AddLogging(lb => lb
-                                                .ClearProviders()
-                                                .AddProvider(new CustomConsoleLoggerProvider(cat => cat.Split('.').Last()))
-                                                // .AddFilter((string? category, LogLevel logLevel) =>
-                                                // {
-                                                //     var result = category?.Contains(nameof(CqlSdkPrototype)) ?? false;
-                                                //     return result;
-                                                // })
-                                                .AddFilter((string? loggerProviderName , string? category, LogLevel logLevel) =>
-                                                {
-                                                    var result = category?.Contains(nameof(CqlSdkPrototype)) ?? false;
-                                                    return result;
-                                                })
-                              )
-                              .AddElmApi()
-                              .AddCqlApi(configureCqlTranslationOptions)
-                              .BuildServiceProvider();
-        return serviceProvider;
-    }
 }
 
 public delegate bool LogFilter(LogFilterArgs args);
