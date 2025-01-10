@@ -1,17 +1,15 @@
-﻿using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
+﻿using Microsoft.Extensions.Logging.Abstractions;
 using System.Collections.Concurrent;
-using System.Diagnostics;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using EnumerableExtensions = Hl7.Cql.Abstractions.Infrastructure.EnumerableExtensions;
 
 namespace CqlSdkPrototype.Logging;
 
-public partial class CustomConsoleLogger(string categoryName, CustomConsoleLoggerProvider provider) : ILogger
+public sealed partial class ColorConsoleLogger(string categoryName, ColorConsoleLoggerProvider provider) : ILogger
 {
     private readonly string _categoryName = categoryName.Length == 0 ? "" : $"{categoryName}: ";
-    private readonly CustomConsoleLoggerProvider _provider = provider;
+    private readonly ColorConsoleLoggerProvider _provider = provider;
 
     public IDisposable BeginScope<TState>(TState state)
         where TState : notnull =>
@@ -158,7 +156,7 @@ public partial class CustomConsoleLogger(string categoryName, CustomConsoleLogge
     #endregion
 }
 
-file class ConsoleFeatures
+file static class ConsoleFeatures
 {
     public static bool NoColor { get; }
 

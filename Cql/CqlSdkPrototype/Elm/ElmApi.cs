@@ -1,20 +1,13 @@
-﻿using System.Linq.Expressions;
-using CqlSdkPrototype.Cql.Extensibility;
-using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Elm.Extensibility;
+﻿using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using ElmCompilationEntriesMap = System.Collections.Immutable.ImmutableDictionary<
     CqlSdkPrototype.CqlVersionedLibraryIdentifier,
     CqlSdkPrototype.Elm.Extensibility.ElmCompilationEntry>;
-using System;
 using CqlSdkPrototype.App;
-using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Runtime.Hosting;
 
 namespace CqlSdkPrototype.Elm;
@@ -121,7 +114,7 @@ public class ElmApi(ElmApiOptions options) :
 
     #region Processing
 
-    public ElmApi Compile(Action<ElmCompileResult>? result = null)
+    public ElmApi Compile()
     {
         var entries = _state.Entries;
         if (entries.Values.All(predicate: lc => lc is { AssemblyBinary: not null }))
@@ -131,7 +124,7 @@ public class ElmApi(ElmApiOptions options) :
         var logger = _state.Logger;
         logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
         var exceptionHandling = _state.Options.ProcessBatchItemExceptionHandling;
-        var shouldEmitPdbStream = _state.Options.ShouldEmitPdbStream;
+        var debugInformationFormat = _state.Options.AssemblyCompilerDebugInformationFormat;
         AssemblyCompiler assemblyCompiler = _state.AssemblyCompiler;
         CSharpCodeGenerator cSharpCodeProcessor = _state.CSharpCodeGenerator;
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
@@ -166,7 +159,7 @@ public class ElmApi(ElmApiOptions options) :
                       .HandleExceptions(exceptionHandling);
 
         var assemblyDatas = assemblyCompiler
-            .CompileDeferred(librarySet, cSharps, shouldEmitPdbStream)
+            .CompileDeferred(librarySet, cSharps, debugInformationFormat)
             .Select(t =>
             {
                 var libraryName = t.library.identifier;

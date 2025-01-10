@@ -1,4 +1,8 @@
 ﻿#nullable enable
+Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat
+Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat.Embedded = 3 -> Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat
+Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat.None = 0 -> Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat
+Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat.PortablePdb = 2 -> Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat
 Hl7.Cql.CodeGeneration.NET.AssemblyData
 Hl7.Cql.CodeGeneration.NET.AssemblyData.AssemblyBytes.get -> byte[]!
 Hl7.Cql.CodeGeneration.NET.AssemblyData.AssemblyBytes.init -> void

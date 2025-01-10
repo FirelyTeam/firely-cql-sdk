@@ -23,8 +23,8 @@
 	  <Folder Include="examples\" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <None Include="generated\" />
-	</ItemGroup>
+	<!-- <ItemGroup> -->
+	<!--   <None Include="generated\" /> -->
+	<!-- </ItemGroup> -->
 
 </Project>

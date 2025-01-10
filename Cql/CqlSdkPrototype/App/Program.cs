@@ -1,16 +1,14 @@
-﻿using System.Diagnostics;
-using CqlSdkPrototype.Cql;
+﻿using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Logging;
 using CqlSdkPrototype.Runtime;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Model;
 using Hl7.Cql.Runtime.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using static Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling;
 
 namespace CqlSdkPrototype.App;
@@ -25,8 +23,7 @@ internal class Program
         // - Should we keep the dependency on Microsoft's ILogger or should we create our own logging abstraction?
 
         var loggingOptions = new LoggingOptions(
-            LoggerProvider:
-            new CustomConsoleLoggerProvider(updateCategoryName: cat => cat.Split(separator: '.').Last()),
+            LoggerProvider: new ColorConsoleLoggerProvider(),
             LogFilter: logFilterArgs => logFilterArgs.Category?.Contains(value: nameof(CqlSdkPrototype)) ?? false);
 
         var cqlApiOptions = new CqlApiOptions(
@@ -36,17 +33,16 @@ internal class Program
         var cqlApi = new CqlApi(cqlApiOptions);
 
         using var serviceProvider = new ServiceCollection()
-                                    .AddLogging(
-                                        configure: lb => lb.ClearProviders().UseOptions(options: loggingOptions))
+                                    .AddLogging(configure: lb => lb.ClearProviders().UseOptions(options: loggingOptions))
                                     .BuildServiceProvider();
         var logger = serviceProvider.GetLogger<Program>();
 
-        InvokeCqlExample(logger: logger, cqlApi: cqlApi);
+        //InvokeCqlExample(logger: logger, cqlApi: cqlApi);
 
         // InvokeCqlFromExamplesFolder(logger: logger, cqlApi: cqlApi);
         //
-        // foreach (var librarySetName in (string[]) ["Authoring", "CMS", "Demo"])
-        //     VerboseExample(logger: logger, cqlApi: cqlApi, librarySetName: librarySetName);
+        foreach (var librarySetName in (string[]) ["Authoring", "CMS", "Demo"])
+            VerboseExample(logger: logger, cqlApi: cqlApi, librarySetName: librarySetName);
         // VerboseExample(logger, cqlApi, "CMS");
     }
 
@@ -106,7 +102,7 @@ internal class Program
                                     .AddCqlLibraryString(cqlLibraryString)
                                     .Translate()
                                     .CreateElmApi()
-                                    .WithOptions(o => o with {ShouldEmitPdbStream = true})
+                                    .WithOptions(o => o with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded })
                                     .Compile()
                                     .CreateCqlRuntimeApi()
                                     .CreateInvocationScope();
@@ -148,21 +144,21 @@ internal class Program
         //     ;
 
         var elmApi = cqlApi.CreateElmApi()
-              .WithOptions(o => o with
-              {
-                  ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue,
-                  ShouldEmitPdbStream = true,
-              })
-              .AddElmFilesFromDirectory(dirs.ElmInDirectory)
+                           .WithOptions(o => o with
+                           {
+                               ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue,
+                               AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded
+                           })
+                           .AddElmFilesFromDirectory(dirs.ElmInDirectory)
 
-        // var elmApi = cqlApi
-        //              .CreateElmApi()
-        //              .AddElmFromCqlApi(cqlApi)
-        //              //.LoadElmFile(elmDirIn, ElmLibraryIdentifier.Parse("FHIRHelpers")) //
-        //              //.LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
-                     .Compile()
-                     .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
-                     .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
+                           // var elmApi = cqlApi
+                           //              .CreateElmApi()
+                           //              .AddElmFromCqlApi(cqlApi)
+                           //              //.LoadElmFile(elmDirIn, ElmLibraryIdentifier.Parse("FHIRHelpers")) //
+                           //              //.LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
+                           .Compile()
+                           .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
+                           .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
             ;
 
         cqlApi.TryGetFirstElmFileLines()

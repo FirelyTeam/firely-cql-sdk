@@ -1,10 +1,8 @@
 ﻿using CqlSdkPrototype.Cql;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.LibraryProviders;
-using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using ExpressionVisitor = Hl7.Cql.CqlToElm.Visitors.ExpressionVisitor;
 
 namespace CqlSdkPrototype.App;
 

@@ -1,5 +1,4 @@
 ﻿using CqlSdkPrototype.Cql.Extensibility;
-using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Cql;
 

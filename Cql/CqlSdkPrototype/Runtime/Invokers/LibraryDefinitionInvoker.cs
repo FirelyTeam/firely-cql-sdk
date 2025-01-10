@@ -1,5 +1,4 @@
 ﻿using System.Globalization;
-using System.Reflection;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
 
@@ -12,8 +11,8 @@ public abstract class LibraryDefinitionInvoker(
 {
     public string DeclarationName { get; } = declarationName;
     public Type ReturnType => MethodInfo.ReturnType;
-    protected ILibrary Library { get; } = library;
-    protected MethodInfo MethodInfo { get; } = methodInfo;
+    private ILibrary Library { get; } = library;
+    private MethodInfo MethodInfo { get; } = methodInfo;
 
     public abstract object? Invoke(CqlContext cqlContext);
 

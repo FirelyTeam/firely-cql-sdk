@@ -1,8 +1,5 @@
-﻿using System.Reflection;
-using System.Runtime.Loader;
-using Hl7.Cql.Abstractions.Exceptions;
+﻿using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Internal;
 

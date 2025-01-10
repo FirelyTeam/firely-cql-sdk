@@ -1,12 +1,8 @@
-﻿using System.Collections.Immutable;
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
-using CqlSdkPrototype.Internal;
+﻿using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Runtime.Invokers;
 

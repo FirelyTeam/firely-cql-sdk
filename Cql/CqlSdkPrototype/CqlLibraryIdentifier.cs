@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-namespace CqlSdkPrototype;
+﻿namespace CqlSdkPrototype;
 
 #pragma warning disable CS1591
 public readonly record struct CqlLibraryIdentifier :

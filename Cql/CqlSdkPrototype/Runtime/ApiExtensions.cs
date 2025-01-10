@@ -4,8 +4,6 @@ using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensibility;
 using Hl7.Cql.CodeGeneration.NET;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Runtime;
 

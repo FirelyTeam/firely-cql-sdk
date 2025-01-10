@@ -1,9 +1,6 @@
 ﻿using System.CodeDom.Compiler;
-using System.Diagnostics.CodeAnalysis;
-using System.Reflection;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Runtime.Invokers;
 

@@ -1,8 +1,5 @@
 ﻿using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Runtime;
-using Hl7.Cql.Runtime.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Elm;
 

@@ -2,7 +2,6 @@
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.Logging;
 
 #pragma warning disable RS0027
 

@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/*
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -31,7 +30,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 {
     internal class AssemblyCompiler
     {
-        private static readonly EmitOptions EmitOptionsPortable = new EmitOptions(debugInformationFormat: DebugInformationFormat.PortablePdb);
+        private static readonly EmitOptions DefaultEmitOptions = new();
         private static readonly CSharpParseOptions CSharpParseOptions = CSharpParseOptions.Default;
         private readonly Lazy<Assembly[]> _referencesLazy;
         private readonly IOptions<AssemblyDataWriterOptions> _assemblyDataWriterOptions;
@@ -69,23 +68,24 @@ namespace Hl7.Cql.CodeGeneration.NET
         public IEnumerable<(Library library, Func<AssemblyDataWithSourceCode> generateAssemblyDataWithSourceCode)> CompileDeferred(
             LibrarySet librarySet,
             IEnumerable<(Library Library, string CSharp)> input,
-            bool shouldEmitPdbStream = false)
+            AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None)
         {
             Dictionary<string, AssemblyDataWithSourceCode> results = new();
             Assembly[] assemblyReferences = _referencesLazy.Value;
             foreach (var (library, cSharp) in input)
                 yield return (library, () =>
                                  {
-                                     var result = CompileNode(cSharp, results, librarySet, library, assemblyReferences, shouldEmitPdbStream);
+                                     var result = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat);
                                      results.Add(library.GetVersionedIdentifier()!, result);
                                      return result;
                                  });
         }
 
-        private CSharpCompilationOptions CreateCSharpCompilationOptions() =>
+        private static CSharpCompilationOptions CreateCSharpCompilationOptions(
+            AssemblyCompilerDebugInformationFormat debugInformationFormat) =>
             new(
                 outputKind: OutputKind.DynamicallyLinkedLibrary,
-                optimizationLevel: _assemblyDataWriterOptions.Value.DebugModeAssemblies ? OptimizationLevel.Debug : OptimizationLevel.Release,
+                optimizationLevel: debugInformationFormat == AssemblyCompilerDebugInformationFormat.None ? OptimizationLevel.Release : OptimizationLevel.Debug,
                 deterministic: true, // see: https://github.com/dotnet/roslyn/blob/main/docs/compilers/Deterministic%20Inputs.md
                 sourceReferenceResolver: new SourceFileResolver(ImmutableArray<string>.Empty, null)
             );
@@ -96,11 +96,11 @@ namespace Hl7.Cql.CodeGeneration.NET
             LibrarySet librarySet,
             Library library,
             IEnumerable<Assembly> assemblyReferences,
-            bool shouldEmitPdbStream)
+            AssemblyCompilerDebugInformationFormat debugInformationFormat)
         {
             var libraryVersionedIdentifier = library.GetVersionedIdentifier()!;
             var librarySourcePath = $"{libraryVersionedIdentifier}.cs";
-            if (shouldEmitPdbStream)
+            if (debugInformationFormat != AssemblyCompilerDebugInformationFormat.None)
             {
                 var tempDir = Path.Combine(Path.GetTempPath(), "CqlCompiler", $"{libraryVersionedIdentifier}.cs");
                 Directory.CreateDirectory(tempDir);
@@ -123,7 +123,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             var assemblyInfoSyntaxTree = ParseSyntaxTree(assemblyInfoSourceString, assemblyInfoSourcePath);
 
             var compilation = CSharpCompilation.Create($"{libraryVersionedIdentifier!}")
-                                               .WithOptions(CreateCSharpCompilationOptions())
+                                               .WithOptions(CreateCSharpCompilationOptions(debugInformationFormat))
                                                .WithReferences(metadataReferences)
                                                .AddSyntaxTrees(
                                                    librarySyntaxTree,
@@ -131,10 +131,11 @@ namespace Hl7.Cql.CodeGeneration.NET
                                                );
 
             using var codeStream = new MemoryStream();
-            MemoryStream? pdbStream = shouldEmitPdbStream ? new MemoryStream() : null;
+            MemoryStream? pdbStream = debugInformationFormat == AssemblyCompilerDebugInformationFormat.PortablePdb ? new MemoryStream() : null;
             using var pdbStreamDisposable = pdbStream as IDisposable ?? new EmptyDisposable();
 
-            var compilationResult = compilation.Emit(codeStream, pdbStream, options:EmitOptionsPortable);
+            var emitOptions = CreateEmitOptions(debugInformationFormat);
+            var compilationResult = compilation.Emit(codeStream, pdbStream, options:emitOptions);
             var errors = new List<Diagnostic>();
             var warnings = new List<Diagnostic>();
             if (!compilationResult.Success)
@@ -169,6 +170,14 @@ namespace Hl7.Cql.CodeGeneration.NET
             var debugSymbols = pdbStream?.ToArray();
             var asmData = new AssemblyDataWithSourceCode(bytes, new Dictionary<string, string> { { libraryVersionedIdentifier!, librarySourceString }}, debugSymbols);
             return asmData;
+        }
+
+        private static EmitOptions CreateEmitOptions(AssemblyCompilerDebugInformationFormat debugInformationFormat)
+        {
+            var emitOptions = DefaultEmitOptions;
+            if (debugInformationFormat != AssemblyCompilerDebugInformationFormat.None)
+                emitOptions = emitOptions.WithDebugInformationFormat((DebugInformationFormat)debugInformationFormat);
+            return emitOptions;
         }
 
         private static string CreateMD5HashStringDirectory(string text)
@@ -242,10 +251,10 @@ namespace Hl7.Cql.CodeGeneration.NET
             this AssemblyCompiler compiler,
             LibrarySet librarySet,
             IEnumerable<(Library Library, string CSharp)> input,
-            bool shouldEmitPdbStream = false)
+            AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None)
         {
             return compiler
-                   .CompileDeferred(librarySet, input, shouldEmitPdbStream)
+                   .CompileDeferred(librarySet, input, debugInformationFormat)
                    .Select(x => (x.library, x.generateAssemblyDataWithSourceCode()));
         }
 

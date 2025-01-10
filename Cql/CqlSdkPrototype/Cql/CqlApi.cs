@@ -4,8 +4,6 @@ using CqlSdkPrototype.Internal;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Cql;
 
@@ -105,7 +103,7 @@ public class CqlApi(CqlApiOptions options) :
 
     #region Processing (CQL-to-ELM)
 
-    public CqlApi Translate(Action<CqlTranslateResult>? result = null)
+    public CqlApi Translate()
     {
         CqlToElmConverter cqlToElmConverter = null!;
         CqlTranslationEntriesMap.Builder entriesBuilder = null!;

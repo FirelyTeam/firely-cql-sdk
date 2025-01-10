@@ -1,5 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Hl7.Cql.Elm;
+﻿using Hl7.Cql.Elm;
 
 namespace CqlSdkPrototype;
 

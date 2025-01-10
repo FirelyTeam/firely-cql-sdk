@@ -1,10 +1,7 @@
-﻿using System.Collections.Immutable;
-using System.Runtime.Loader;
-using CqlSdkPrototype.Internal;
+﻿using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Runtime.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Runtime;
 

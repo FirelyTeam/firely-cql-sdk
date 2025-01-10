@@ -36,12 +36,7 @@ internal static class PackagerCLiLoggingBuilderExtensions
         bool shouldClearLog = !configuration.GetCommandLineSwitchValue<bool>(CqlToResourcePackagingOptions.ArgNameLogDontClear);
 
         logging.AddFilter(level => level >= minLogLevel);
-
-        logging.AddProvider(new CustomConsoleLoggerProvider(cat => cat.Split('.').Last()));
-        // logging.AddCleanConsole(opt =>
-        // {
-        //     // opt.NoColor = true;
-        // });
+        logging.AddProvider(new ColorConsoleLoggerProvider());
 
         var logFile = Path.Combine(".", "build.log");
 
