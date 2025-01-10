@@ -105,50 +105,13 @@ internal class CSharpCodeGenerator
         return hashSet;
     }
 
-    internal IEnumerable<(Library library, Func<string> generateCSharp)> GenerateCSharpV2(
+    public IEnumerable<(Library library, Func<string> generateCSharp)> GenerateCSharpDeferred(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> definitions)
     {
         var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions, CSharpSourceCodeWriterCallbacks.Default, default);
         return librarySetWriter.GenerateCSharpV2();
     }
-
-    // /// <summary>
-    // /// Writes C# source code from inputs.
-    // /// </summary>
-    // /// <param name="librarySet">A dependency graph containing dependent libraries.</param>
-    // /// <param name="definitions">The lambda expressions to write.</param>
-    // /// <param name="callbacks">Callbacks which is used during the processing of each stream.</param>
-    // /// <param name="processLibraryToCSharpExceptionHandling">Selecting the exception handling policy for writing libraries to C#.</param>
-    // /// <see cref="GenerateCSharpV2"/>
-    // [Obsolete("Use GenerateCSharpV2 instead")]
-    // public void ProcessDefinitions(
-    //     LibrarySet librarySet,
-    //     DefinitionDictionary<LambdaExpression> definitions,
-    //     CSharpSourceCodeWriterCallbacks? callbacks = null,
-    //     ProcessBatchItemExceptionHandling processLibraryToCSharpExceptionHandling = default)
-    // {
-    //     List<Stream> streamsToDispose = new();
-    //     callbacks ??= new();
-    //     try
-    //     {
-    //         var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions, callbacks, processLibraryToCSharpExceptionHandling);
-    //         foreach (var (name, stream) in librarySetWriter.WriteLibraries())
-    //         {
-    //             streamsToDispose.Add(stream);
-    //             callbacks.Step(name, stream);
-    //         }
-    //
-    //         callbacks.Done();
-    //     }
-    //     finally
-    //     {
-    //         foreach (var stream in streamsToDispose)
-    //         {
-    //             stream.Dispose();
-    //         }
-    //     }
-    // }
 
     #region Nested Types
 
@@ -513,4 +476,17 @@ internal class CSharpCodeGenerator
     }
 
     #endregion Nested Types
+}
+
+internal static class CSharpCodeGeneratorExtensions
+{
+    public static IEnumerable<(Library library, string cSharp)> GenerateCSharp(
+        this CSharpCodeGenerator generator,
+        LibrarySet librarySet,
+        DefinitionDictionary<LambdaExpression> definitions)
+    {
+        return generator
+               .GenerateCSharpDeferred(librarySet, definitions)
+               .Select(t => (t.library, t.generateCSharp()));
+    }
 }

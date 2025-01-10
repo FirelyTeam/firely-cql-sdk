@@ -1,5 +1,4 @@
 ﻿using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Elm;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.LibraryProviders;
@@ -12,40 +11,12 @@ namespace CqlSdkPrototype;
 public static class Extensions
 {
     public static IServiceCollection AddElmApi(
-        this IServiceCollection serviceCollection,
-        Action<ElmServicesOptions>? configureOptions = null)
+        this IServiceCollection serviceCollection)
     {
-        ElmServicesOptions? elmCompilationOptions = null;
-        if (configureOptions is { } fn)
-        {
-            elmCompilationOptions = new ElmServicesOptions();
-            fn(elmCompilationOptions);
-        }
-
         return serviceCollection
             .AddCqlCodeGenerationServices(
-                ConfigureAssemblyDataWriterOptions(),
-                ConfigureCSharpCodeWriterOptions());
-
-
-        Action<CSharpCodeWriterOptions>? ConfigureCSharpCodeWriterOptions()
-        {
-            return /*elmCompilationOptions is { } o
-                       ? cSharpCodeWriterOptions =>
-                       {
-                       }
-                       : */null;
-        }
-
-        Action<AssemblyDataWriterOptions>? ConfigureAssemblyDataWriterOptions()
-        {
-            return elmCompilationOptions is { } o
-                       ? assemblyDataWriterOptions =>
-                       {
-                           assemblyDataWriterOptions.DebugModeAssemblies = o.AssembliesDebugMode;
-                       }
-                       : null;
-        }
+                configureAssemblyDataWriterOptions: null,
+                configureCSharpCodeWriterOptions: null);
     }
 
     public static IServiceCollection SuppressCqlDebugAssertions(

@@ -23,9 +23,7 @@ internal class Program
         // - Encapsulate the creation of the service provider
         // - Move any options such as the AssembliesDebugMode and Models to the Cql- or ElmApi instead of via the hosted IOptions<T>
         // - Should we keep the dependency on Microsoft's ILogger or should we create our own logging abstraction?
-        var serviceProvider = BuildServiceProvider(
-            configureElmCompilationOptions: opt => opt.AssembliesDebugMode = true,
-            configureCqlTranslationOptions: opt => opt.Models = [Models.ElmR1, Models.Fhir401]);
+        var serviceProvider = BuildServiceProvider(configureCqlTranslationOptions: opt => opt.Models = [Models.ElmR1, Models.Fhir401]);
         var logger = serviceProvider.GetLogger<Program>();
         var cqlApi = CqlApi.Create(serviceProvider);
 
@@ -199,7 +197,6 @@ internal class Program
     // }
 
     private static ServiceProvider BuildServiceProvider(
-        Action<ElmServicesOptions>? configureElmCompilationOptions = null,
         Action<CqlServicesOptions>? configureCqlTranslationOptions = null)
     {
         // Dictionary<string, string?> inMemoryConfiguration = new()
@@ -222,7 +219,7 @@ internal class Program
                                                     return result;
                                                 })
                               )
-                              .AddElmApi(configureElmCompilationOptions)
+                              .AddElmApi()
                               .AddCqlApi(configureCqlTranslationOptions)
                               .BuildServiceProvider();
         return serviceProvider;

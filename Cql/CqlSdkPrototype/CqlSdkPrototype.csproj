@@ -10,22 +10,6 @@
 		<NoWarn>RS0037,RS0016,CS1591</NoWarn>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="generated\Authoring\CSharp\AdditionLib-0.0.0.g.cs" />
-    <Compile Remove="generated\Authoring\CSharp\CqlAggregateFunctionsTest-1.0.000.g.cs" />
-    <Compile Remove="generated\Authoring\CSharp\CqlArithmeticFunctionsTest-1.0.000.g.cs" />
-    <Compile Remove="generated\Authoring\CSharp\CqlComparisonOperatorsTest-1.0.000.g.cs" />
-    <Compile Remove="generated\Authoring\CSharp\CqlConditionalOperatorsTest-1.0.000.g.cs" />
-    <Compile Remove="generated\Authoring\CSharp\CqlErrorsAndMessagingOperatorsTest-1.0.000.g.cs" />
-    <Compile Remove="generated\Authoring\CSharp\CqlListOperatorsTest-1.0.000.g.cs" />
-    <Compile Remove="generated\Authoring\CSharp\CqlLogicalOperatorsTest-1.0.000.g.cs" />
-    <Compile Remove="generated\Authoring\CSharp\CqlStringOperatorsTest-1.0.000.g.cs" />
-    <Compile Remove="generated\Authoring\CSharp\CqlTypesTest-1.0.000.g.cs" />
-    <Compile Remove="generated\Authoring\CSharp\FHIRHelpers-4.3.000.g.cs" />
-    <Compile Remove="generated\Authoring\CSharp\ParametersExample-0.0.1.g.cs" />
-    <Compile Remove="generated\Authoring\CSharp\Status-1.6.000.g.cs" />
-  </ItemGroup>
-
 	<ItemGroup>
 		<ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
 		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
@@ -40,7 +24,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Include="generated\**\*.*" />
+	  <None Include="generated\" />
 	</ItemGroup>
 
 </Project>

@@ -31,7 +31,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static LibraryExpressionBuilder LibraryExpressionBuilder => ServiceProvider.GetLibraryExpressionBuilderScoped();
 
-        internal static CSharpCodeGenerator CSharpCodeGenerator => ServiceProvider.GetLibrarySetDefinitionsToCSharpCodeProcessor();
+        internal static CSharpCodeGenerator CSharpCodeGenerator => ServiceProvider.GetCSharpCodeProcessor();
 
         internal static AssemblyCompiler AssemblyCompiler => ServiceProvider.GetAssemblyCompiler();
 
@@ -118,13 +118,12 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static LibrarySetCSharp GenerateCSharp(LibrarySetDefinitions librarySetDefinitions)
         {
-            var cSharpCodeGenerator = ServiceProvider.GetLibrarySetDefinitionsToCSharpCodeProcessor();
-
+            var cSharpCodeGenerator = ServiceProvider.GetCSharpCodeProcessor();
 
             Dictionary<string, string> cSharpCodeByLibraryName =
                 cSharpCodeGenerator
-                    .GenerateCSharpV2(librarySetDefinitions.LibrarySet, librarySetDefinitions.Definitions)
-                    .ToDictionary(o => o.library.GetVersionedIdentifier()!, o => o.generateCSharp());
+                    .GenerateCSharp(librarySetDefinitions.LibrarySet, librarySetDefinitions.Definitions)
+                    .ToDictionary(o => o.library.GetVersionedIdentifier()!, o => o.cSharp);
             return new(librarySetDefinitions, cSharpCodeByLibraryName.AsReadOnly());
         }
 
@@ -138,16 +137,14 @@ namespace Hl7.Cql.CqlToElm.Test
             DefinitionDictionary<LambdaExpression> definitions = new();
             var expressionName = "TempExpression";
             definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
-            var s1 =
-                CSharpCodeGenerator
-                    .GenerateCSharpV2(librarySet, definitions)
-                    .Select(o => (o.library, o.generateCSharp()));
             var assemblyBytes =
                 AssemblyCompiler
-                    .Compile(librarySet, s1)
-                    .Select(o => o.generateAssemblyDataWithSourceCode())
+                    .Compile(
+                        librarySet,
+                        CSharpCodeGenerator
+                                 .GenerateCSharp(librarySet, definitions))
                     .Single()
-                    .AssemblyBytes;
+                    .assemblyDataWithSourceCode.AssemblyBytes;
             var alc = new AssemblyLoadContext("TempAssemblyLoadContext", true);
             try
             {
@@ -373,15 +370,15 @@ namespace Hl7.Cql.CqlToElm.Test
         internal static byte[] Compile(Library library)
         {
             var lambdas = LibraryExpressionBuilder.ProcessLibrary(library);
-            var cs = ServiceProvider.GetLibrarySetDefinitionsToCSharpCodeProcessor();
+            var cs = ServiceProvider.GetCSharpCodeProcessor();
             var asm = ServiceProvider.GetAssemblyCompiler();
             var librarySet = new LibrarySet("",library);
-            var s1 = cs.GenerateCSharpV2(librarySet, lambdas).Select(o => (o.library, o.generateCSharp()));
             return
-                asm.Compile(librarySet, s1)
-                   .Select(o => o.generateAssemblyDataWithSourceCode())
+                asm.Compile(
+                       librarySet,
+                       cs.GenerateCSharp(librarySet, lambdas))
                    .Single()
-                   .AssemblyBytes;
+                   .assemblyDataWithSourceCode.AssemblyBytes;
         }
     }
 }

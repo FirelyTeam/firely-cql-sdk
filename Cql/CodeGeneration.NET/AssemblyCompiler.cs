@@ -66,16 +66,17 @@ namespace Hl7.Cql.CodeGeneration.NET
                 });
         }
 
-        public IEnumerable<(Library library, Func<AssemblyDataWithSourceCode> generateAssemblyDataWithSourceCode)> Compile(
+        public IEnumerable<(Library library, Func<AssemblyDataWithSourceCode> generateAssemblyDataWithSourceCode)> CompileDeferred(
             LibrarySet librarySet,
-            IEnumerable<(Library Library, string CSharp)> input)
+            IEnumerable<(Library Library, string CSharp)> input,
+            bool shouldEmitPdbStream = false)
         {
             Dictionary<string, AssemblyDataWithSourceCode> results = new();
             Assembly[] assemblyReferences = _referencesLazy.Value;
             foreach (var (library, cSharp) in input)
                 yield return (library, () =>
                                  {
-                                     var result = CompileNode(cSharp, results, librarySet, library, assemblyReferences);
+                                     var result = CompileNode(cSharp, results, librarySet, library, assemblyReferences, shouldEmitPdbStream);
                                      results.Add(library.GetVersionedIdentifier()!, result);
                                      return result;
                                  });
@@ -94,11 +95,12 @@ namespace Hl7.Cql.CodeGeneration.NET
             Dictionary<string, AssemblyDataWithSourceCode> assemblies,
             LibrarySet librarySet,
             Library library,
-            IEnumerable<Assembly> assemblyReferences)
+            IEnumerable<Assembly> assemblyReferences,
+            bool shouldEmitPdbStream)
         {
             var libraryVersionedIdentifier = library.GetVersionedIdentifier()!;
             var librarySourcePath = $"{libraryVersionedIdentifier}.cs";
-            if (_assemblyDataWriterOptions.Value.DebugModeAssemblies)
+            if (shouldEmitPdbStream)
             {
                 var tempDir = Path.Combine(Path.GetTempPath(), "CqlCompiler", $"{libraryVersionedIdentifier}.cs");
                 Directory.CreateDirectory(tempDir);
@@ -129,7 +131,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                                                );
 
             using var codeStream = new MemoryStream();
-            MemoryStream? pdbStream = _assemblyDataWriterOptions.Value.DebugModeAssemblies ? new MemoryStream() : null;
+            MemoryStream? pdbStream = shouldEmitPdbStream ? new MemoryStream() : null;
             using var pdbStreamDisposable = pdbStream as IDisposable ?? new EmptyDisposable();
 
             var compilationResult = compilation.Emit(codeStream, pdbStream, options:EmitOptionsPortable);
@@ -232,5 +234,20 @@ namespace Hl7.Cql.CodeGeneration.NET
 
 
         }
+    }
+
+    internal static class AssemblyCompilerExtensions
+    {
+        public static IEnumerable<(Library library, AssemblyDataWithSourceCode assemblyDataWithSourceCode)> Compile(
+            this AssemblyCompiler compiler,
+            LibrarySet librarySet,
+            IEnumerable<(Library Library, string CSharp)> input,
+            bool shouldEmitPdbStream = false)
+        {
+            return compiler
+                   .CompileDeferred(librarySet, input, shouldEmitPdbStream)
+                   .Select(x => (x.library, x.generateAssemblyDataWithSourceCode()));
+        }
+
     }
 }

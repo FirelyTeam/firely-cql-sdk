@@ -30,7 +30,7 @@ public class ElmApi :
     {
         public ILogger<ElmApi> Logger { get; } = Options.ServiceProvider.GetLogger<ElmApi>();
         public AssemblyCompiler AssemblyCompiler { get; } = Options.ServiceProvider.GetAssemblyCompiler();
-        public CSharpCodeGenerator CSharpCodeGenerator { get; } = Options.ServiceProvider.GetLibrarySetDefinitionsToCSharpCodeProcessor();
+        public CSharpCodeGenerator CSharpCodeGenerator { get; } = Options.ServiceProvider.GetCSharpCodeProcessor();
         public Scope CreateScope() => new(Options.ServiceProvider.CreateScope());
     }
 
@@ -119,6 +119,7 @@ public class ElmApi :
         var logger = _state.Logger;
         logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
         var exceptionHandling = _state.Options.ProcessBatchItemExceptionHandling;
+        var shouldEmitPdbStream = _state.Options.ShouldEmitPdbStream;
         AssemblyCompiler assemblyCompiler = _state.AssemblyCompiler;
         CSharpCodeGenerator cSharpCodeProcessor = _state.CSharpCodeGenerator;
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
@@ -137,7 +138,7 @@ public class ElmApi :
         LogExceptionMessageAction log = logger.GetLogExceptionMessageAction(exceptionHandling);
 
         var cSharps = cSharpCodeProcessor
-                      .GenerateCSharpV2(librarySet, definitions)
+                      .GenerateCSharpDeferred(librarySet, definitions)
                       .Select(t =>
                       {
                           var libraryName = t.library.identifier;
@@ -153,7 +154,7 @@ public class ElmApi :
                       .HandleExceptions(exceptionHandling);
 
         var assemblyDatas = assemblyCompiler
-            .Compile(librarySet, cSharps)
+            .CompileDeferred(librarySet, cSharps, shouldEmitPdbStream)
             .Select(t =>
             {
                 var libraryName = t.library.identifier;

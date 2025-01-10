@@ -19,7 +19,7 @@ internal static class CqlCodeGenerationServiceProviderExtensions
     public static TypeToCSharpConverter GetTypeToCSharpConverter(this IServiceProvider serviceProvider) =>
         serviceProvider.GetRequiredService<TypeToCSharpConverter>();
 
-    public static CSharpCodeGenerator GetLibrarySetDefinitionsToCSharpCodeProcessor(this IServiceProvider serviceProvider) =>
+    public static CSharpCodeGenerator GetCSharpCodeProcessor(this IServiceProvider serviceProvider) =>
         serviceProvider.GetRequiredService<CSharpCodeGenerator>();
 
     public static AssemblyCompiler GetAssemblyCompiler(this IServiceProvider serviceProvider) => serviceProvider.GetRequiredService<AssemblyCompiler>();

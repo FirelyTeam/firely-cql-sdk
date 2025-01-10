@@ -9,6 +9,7 @@ using Hl7.Cql.Compiler;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using CLI.Helpers;
+using Hl7.Cql.CodeGeneration.NET;
 using Microsoft.Extensions.DependencyInjection;
 using Test.Deck;
 using Test.Measures.Demo;
@@ -157,20 +158,18 @@ namespace Test
                                         .BuildServiceProvider(validateScopes: true);
             using var serviceScope = serviceProvider.CreateScope();
             var definitions = serviceScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped().ProcessLibrarySet(librarySet);
-            var s1 =
-                serviceProvider
-                    .GetLibrarySetDefinitionsToCSharpCodeProcessor()
-                    .GenerateCSharpV2(librarySet, definitions)
-                    .Select(o => (o.library, o.generateCSharp()));
-            var assemblyData =
-                serviceProvider
-                    .GetAssemblyCompiler()
-                    .Compile(librarySet, s1)
-                    .Select(o => o.generateAssemblyDataWithSourceCode().AssemblyBytes);
+            var cSharpCodeProcessor = serviceProvider.GetCSharpCodeProcessor();
+            var assemblyCompiler = serviceProvider.GetAssemblyCompiler();
+            var results =
+                assemblyCompiler
+                    .Compile(
+                        librarySet,
+                        cSharpCodeProcessor
+                                 .GenerateCSharp(librarySet, definitions));
             var asmContext = new AssemblyLoadContext($"{lib}-{version}");
-            foreach (var assemblyBytes in assemblyData)
+            foreach (var result in results)
             {
-                using var ms = new MemoryStream(assemblyBytes);
+                using var ms = new MemoryStream(result.assemblyDataWithSourceCode.AssemblyBytes);
                 asmContext.LoadFromStream(ms);
             }
             return asmContext;

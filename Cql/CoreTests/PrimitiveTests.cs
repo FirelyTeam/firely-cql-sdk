@@ -13,6 +13,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using FluentAssertions;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime.Hosting;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 using Expression = System.Linq.Expressions.Expression;
@@ -3416,15 +3417,14 @@ namespace CoreTests
             librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"),"Aggregates", "1.0.0");
             var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
             var definitions = serviceScope.ServiceProvider.GetLibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
-            var cSharpCodeGenerator = serviceProvider.GetLibrarySetDefinitionsToCSharpCodeProcessor();
+            var cSharpCodeGenerator = serviceProvider.GetCSharpCodeProcessor();
             var assemblyCompiler = serviceProvider.GetAssemblyCompiler();
-            var s1 = cSharpCodeGenerator
-                .GenerateCSharpV2(librarySet, definitions)
-                .Select(o => (o.library, o.generateCSharp()));
-            var s2 = assemblyCompiler
-                     .Compile(librarySet, s1)
-                     .Select(o => (o.library, o.generateAssemblyDataWithSourceCode()));
-            _ = s2.ToList();
+            _ = assemblyCompiler
+                .Compile(
+                    librarySet,
+                    cSharpCodeGenerator
+                        .GenerateCSharp(librarySet, definitions))
+                .ToList();
             Assert.IsTrue(true);
         }
 
