@@ -1,12 +1,11 @@
 ﻿using CqlSdkPrototype.Cql;
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CqlSdkPrototype;
+namespace CqlSdkPrototype.App;
 
 public static class Extensions
 {
@@ -61,7 +60,7 @@ public static class Extensions
                            foreach (var modelInfo in o.Models)
                                modelProvider.Add(modelInfo);
                        }
-                       : _ => { };
+            : _ => { };
         }
     }
 }

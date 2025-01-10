@@ -13,7 +13,7 @@ using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace CqlSdkPrototype;
+namespace CqlSdkPrototype.App;
 
 internal class Program
 {
@@ -45,12 +45,13 @@ internal class Program
         var dirs = Directories.Create("Examples");
 
         // We can write extensions to make it even easier to change exception handling
-        /*cqlApi = */cqlApi.WithOptions(o => o with
-                       {
-                           ProcessBatchItemExceptionHandling =
-                           ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
-                       })
-                       .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory);
+        /*cqlApi = */
+        cqlApi.WithOptions(o => o with
+        {
+            ProcessBatchItemExceptionHandling =
+              ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
+        })
+          .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory);
 
         var cqlContext = FhirCqlContext.ForBundle();
 
@@ -103,13 +104,14 @@ internal class Program
 
         Directories dirs = Directories.Create(librarySetName);
         dirs.GeneratedDirectory.Delete(recursive: true);
-        /*cqlApi = */cqlApi
-                 .WithOptions(o => o with
-                 {
-                     ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
-                 })
-                 .AddCqlLibrariesFromDirectory(
-                     dirs.CqlInDirectory /*,
+        /*cqlApi = */
+        cqlApi
+    .WithOptions(o => o with
+    {
+        ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
+    })
+    .AddCqlLibrariesFromDirectory(
+        dirs.CqlInDirectory /*,
                      options: new EnumerationOptions()
                      {
                          //RecurseSubdirectories = false
@@ -118,10 +120,10 @@ internal class Program
                          "FHIRHelpers"
                          or "NCQATerminology"
                          or "NCQAStatus"*/
-                 )
-                 .Translate()
-                 .SaveElmFileToDirectory(dirs.ElmOutDirectory)
-                 ;
+    )
+    .Translate()
+    .SaveElmFileToDirectory(dirs.ElmOutDirectory)
+    ;
 
         var elmApi = cqlApi
                      .CreateElmApi()

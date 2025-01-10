@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 
-namespace CqlSdkPrototype;
+namespace CqlSdkPrototype.App;
 
-public class Directories(string librarySetName)
+internal class Directories(string librarySetName)
 {
     public static Directories Create(string librarySetName)
     {
