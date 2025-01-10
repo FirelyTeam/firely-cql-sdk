@@ -22,7 +22,6 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
     {
         const string PackageSection = CqlToResourcePackagingOptions.ConfigSection + ":";
         const string CSharpCodeWriterSection = CSharpCodeWriterOptions.ConfigSection + ":";
-        const string AssemblyDataWriterSection = AssemblyDataWriterOptions.ConfigSection + ":";
         const string FhirResourceWriterSection = FhirResourceWriterOptions.ConfigSection + ":";
 
         return new SortedDictionary<string, string>
@@ -36,7 +35,7 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
 
             [CSharpCodeWriterOptions.ArgNameOutDirectory] = CSharpCodeWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
 
-            [AssemblyDataWriterOptions.ArgNameOutDirectory] = AssemblyDataWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
+            //[AssemblyDataWriterOptions.ArgNameOutDirectory] = AssemblyDataWriterSection + nameof(CSharpCodeWriterOptions.OutDirectory),
 
             [FhirResourceWriterOptions.ArgNameOutDirectory] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
             [FhirResourceWriterOptions.ArgNameOverrideDate] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OverrideDate),

@@ -20,7 +20,6 @@ internal static class CqlCodeGenerationServiceCollectionExtensions
 {
     public static IServiceCollection AddCqlCodeGenerationServices(
         this IServiceCollection services,
-        Action<AssemblyDataWriterOptions>? configureAssemblyDataWriterOptions = null,
         Action<CSharpCodeWriterOptions>? configureCSharpCodeWriterOptions = null)
     {
         services.AddCqlCompilerServices();
@@ -31,20 +30,11 @@ internal static class CqlCodeGenerationServiceCollectionExtensions
 
         services.TryAddSingleton<AssemblyCompiler>();
 
-        services.AddOptions(BuildAssemblyDataWriterOptions());
-
         services.AddOptions(BuildCSharpCodeWriterOptions());
 
         Action<OptionsBuilder<CSharpCodeWriterOptions>> BuildCSharpCodeWriterOptions()
         {
             return configureCSharpCodeWriterOptions is { } fn
-                       ? builder => builder.Configure(fn)
-                       : _ => { };
-        }
-
-        Action<OptionsBuilder<AssemblyDataWriterOptions>> BuildAssemblyDataWriterOptions()
-        {
-            return configureAssemblyDataWriterOptions is { } fn
                        ? builder => builder.Configure(fn)
                        : _ => { };
         }

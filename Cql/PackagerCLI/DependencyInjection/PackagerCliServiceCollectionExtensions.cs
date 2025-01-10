@@ -55,11 +55,6 @@ internal static class PackagerCliServiceCollectionExtensions
             .Configure<IConfiguration>(CSharpCodeWriterOptions.BindConfig)
             .ValidateOnStart();
 
-        services
-            .AddOptions<AssemblyDataWriterOptions>()
-            .Configure<IConfiguration>(AssemblyDataWriterOptions.BindConfig)
-            .ValidateOnStart();
-
         return services;
     }
 }

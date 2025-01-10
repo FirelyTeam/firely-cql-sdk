@@ -16,14 +16,11 @@ using static Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling;
 
 namespace Hl7.Cql.Packager;
 
-internal class PackagerCliProgram
-(
+internal class PackagerCliProgram(
     ILogger<PackagerCliProgram> logger,
     OptionsConsoleDumper optionsConsoleDumper,
-    IServiceProvider serviceProvider,
     IOptions<CqlToResourcePackagingOptions> packagingOptions,
-    IOptions<CSharpCodeWriterOptions> cSharpOptions,
-    IOptions<AssemblyDataWriterOptions> asmOptions)
+    IOptions<CSharpCodeWriterOptions> cSharpOptions)
 {
     public int Run(bool translateCql = false)
     {
@@ -32,13 +29,12 @@ internal class PackagerCliProgram
             optionsConsoleDumper.DumpToConsole();
             var packagingOpt = packagingOptions.Value;
             var cSharpOpt = cSharpOptions.Value;
-            var asmOpt = asmOptions.Value;
 
             ElmApi elmApi;
             if (translateCql)
             {
                 packagingOpt.ElmDirectory.Delete(true);
-                elmApi = CqlApi.Create(serviceProvider)
+                elmApi = CqlApi.Create(CqlApiOptions.Default)
                             .WithOptions(o => o with
                             {
                                 ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
@@ -51,7 +47,7 @@ internal class PackagerCliProgram
             }
             else
             {
-                elmApi = ElmApi.Create(serviceProvider)
+                elmApi = ElmApi.Create(ElmApiOptions.Default)
                             .WithOptions(o => o with
                             {
                                 ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
@@ -68,11 +64,11 @@ internal class PackagerCliProgram
                 /*elmApi = */elmApi.SaveCSharpFilesToDirectory(cSharpOpt.OutDirectory);
             }
 
-            if (asmOpt.OutDirectory != null)
-            {
-                asmOpt.OutDirectory.Delete(true);
-                /*elmApi = */elmApi.SaveAssemblyBinariesToDirectory(asmOpt.OutDirectory);
-            }
+            // if (asmOpt.OutDirectory != null)
+            // {
+            //     asmOpt.OutDirectory.Delete(true);
+            //     /*elmApi = */elmApi.SaveAssemblyBinariesToDirectory(asmOpt.OutDirectory);
+            // }
 
             return 0;
         }

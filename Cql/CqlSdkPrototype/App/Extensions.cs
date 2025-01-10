@@ -21,9 +21,7 @@ public static class Extensions
         this IServiceCollection serviceCollection)
     {
         return serviceCollection
-            .AddCqlCodeGenerationServices(
-                configureAssemblyDataWriterOptions: null,
-                configureCSharpCodeWriterOptions: null);
+            .AddCqlCodeGenerationServices(configureCSharpCodeWriterOptions: null);
     }
 
     public static IServiceCollection SuppressCqlDebugAssertions(

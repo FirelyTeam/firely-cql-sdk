@@ -11,12 +11,6 @@ Hl7.Cql.CodeGeneration.NET.AssemblyData.AssemblyData(Hl7.Cql.CodeGeneration.NET.
 Hl7.Cql.CodeGeneration.NET.AssemblyData.DebugSymbolsBytes.get -> byte[]?
 Hl7.Cql.CodeGeneration.NET.AssemblyData.DebugSymbolsBytes.init -> void
 Hl7.Cql.CodeGeneration.NET.AssemblyData.Deconstruct(out byte[]! AssemblyBytes, out byte[]? DebugSymbolsBytes) -> void
-Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions
-Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.AssemblyDataWriterOptions() -> void
-Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.DebugModeAssemblies.get -> bool
-Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.DebugModeAssemblies.set -> void
-Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.OutDirectory.get -> System.IO.DirectoryInfo?
-Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.OutDirectory.set -> void
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.CSharpCodeWriterOptions() -> void
 Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.OutDirectory.get -> System.IO.DirectoryInfo?
@@ -26,7 +20,6 @@ override Hl7.Cql.CodeGeneration.NET.AssemblyData.GetHashCode() -> int
 override Hl7.Cql.CodeGeneration.NET.AssemblyData.ToString() -> string!
 static Hl7.Cql.CodeGeneration.NET.AssemblyData.operator !=(Hl7.Cql.CodeGeneration.NET.AssemblyData? left, Hl7.Cql.CodeGeneration.NET.AssemblyData? right) -> bool
 static Hl7.Cql.CodeGeneration.NET.AssemblyData.operator ==(Hl7.Cql.CodeGeneration.NET.AssemblyData? left, Hl7.Cql.CodeGeneration.NET.AssemblyData? right) -> bool
-static Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.BindConfig(Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions! opt, Microsoft.Extensions.Configuration.IConfiguration! config) -> void
 static Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.BindConfig(Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions! opt, Microsoft.Extensions.Configuration.IConfiguration! config) -> void
 virtual Hl7.Cql.CodeGeneration.NET.AssemblyData.<Clone>$() -> Hl7.Cql.CodeGeneration.NET.AssemblyData!
 virtual Hl7.Cql.CodeGeneration.NET.AssemblyData.EqualityContract.get -> System.Type!

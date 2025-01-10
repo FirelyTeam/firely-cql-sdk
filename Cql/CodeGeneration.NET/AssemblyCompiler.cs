@@ -22,7 +22,6 @@ using System.Security.Cryptography;
 using System.Text;
 using Hl7.Cql.Elm;
 using Microsoft.CodeAnalysis.Text;
-using Microsoft.Extensions.Options;
 using Microsoft.CodeAnalysis.Emit;
 using Library = Hl7.Cql.Elm.Library;
 
@@ -33,13 +32,9 @@ namespace Hl7.Cql.CodeGeneration.NET
         private static readonly EmitOptions DefaultEmitOptions = new();
         private static readonly CSharpParseOptions CSharpParseOptions = CSharpParseOptions.Default;
         private readonly Lazy<Assembly[]> _referencesLazy;
-        private readonly IOptions<AssemblyDataWriterOptions> _assemblyDataWriterOptions;
 
-        public AssemblyCompiler(
-            IOptions<AssemblyDataWriterOptions> assemblyDataWriterOptions,
-            TypeResolver typeResolver)
+        public AssemblyCompiler(TypeResolver typeResolver)
         {
-            _assemblyDataWriterOptions = assemblyDataWriterOptions;
             _referencesLazy = new Lazy<Assembly[]>(
                 () =>
                 {
