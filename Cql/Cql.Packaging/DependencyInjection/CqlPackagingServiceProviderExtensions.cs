@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Packaging;
-using Hl7.Cql.Packaging.PostProcessors;
 
 // ReSharper disable once CheckNamespace
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -17,9 +16,6 @@ internal static class CqlPackagingServiceProviderExtensions
 {
     public static CqlTypeToFhirTypeMapper GetCqlTypeToFhirTypeMapper(this IServiceProvider serviceProvider) =>
         serviceProvider.GetRequiredService<CqlTypeToFhirTypeMapper>();
-
-    public static FhirResourcePostProcessor GetFhirResourcePostProcessor(this IServiceProvider serviceProvider) =>
-        serviceProvider.GetRequiredService<FhirResourcePostProcessor>();
 
     public static ResourcePackager GetResourcePackager(this IServiceProvider serviceProvider) =>
         serviceProvider.GetRequiredService<ResourcePackager>();

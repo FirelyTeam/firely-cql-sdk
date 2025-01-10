@@ -6,13 +6,13 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Diagnostics;
 using System.Text;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Iso8601;
-using Hl7.Cql.Packaging.PostProcessors;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Utility;
@@ -30,12 +30,9 @@ namespace Hl7.Cql.Packaging;
 #pragma warning disable CS1591
 
 internal class ResourcePackager(
-    TypeResolver typeResolver,
-    FhirResourcePostProcessor? fhirResourcePostProcessor
-    )
+    TypeResolver typeResolver)
 {
-    private readonly TypeResolver _typeResolver = typeResolver;
-    private readonly FhirResourcePostProcessor? _fhirResourcePostProcessor = fhirResourcePostProcessor;
+    // private readonly FhirResourcePostProcessor? _fhirResourcePostProcessor = fhirResourcePostProcessor;
 
     public IReadOnlyCollection<FhirResource> PackageResources(
         DirectoryInfo elmDirectory,
@@ -49,11 +46,12 @@ internal class ResourcePackager(
 
         void OnResourceCreated(FhirResource resource)
         {
-            _fhirResourcePostProcessor?.ProcessResource(resource);
+            Debug.Fail("Needs implementation");
+            //_fhirResourcePostProcessor?.ProcessResource(resource);
             resources!.Add(resource);
         }
 
-        var typeCrosswalk = new CqlTypeToFhirTypeMapper(_typeResolver);
+        var typeCrosswalk = new CqlTypeToFhirTypeMapper(typeResolver);
 
         foreach (var (name, asmData) in assembliesByLibraryName)
         {

@@ -7,10 +7,7 @@
  */
 
 using Hl7.Cql.CodeGeneration.NET;
-using Microsoft.Extensions.DependencyInjection;
 using Hl7.Cql.Packaging;
-using Hl7.Cql.Packaging.PostProcessors;
-using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 // ReSharper disable once CheckNamespace

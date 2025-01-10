@@ -6,7 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Diagnostics;
+/*using System.Diagnostics;
 using System.Text.Json;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
@@ -23,7 +23,6 @@ internal class WriteToFileFhirResourcePostProcessor(
     private static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector).Pretty();
 
     private readonly FhirResourceWriterOptions _fhirResourceWriterOptions = fhirResourceWriterOptions.Value;
-    private readonly ILogger<WriteToFileFhirResourcePostProcessor> _logger = logger;
 
     public override void ProcessResource(Resource resource)
     {
@@ -35,7 +34,7 @@ internal class WriteToFileFhirResourcePostProcessor(
         };
 
         var file = new FileInfo($"{Path.Combine(_fhirResourceWriterOptions.OutDirectory!.FullName, resourceFileName.FileName)}");
-        _logger.LogInformation("Writing FHIR Resource file: '{file}'", file.FullName);
+        logger.LogInformation("Writing FHIR Resource file: '{file}'", file.FullName);
 
         if (resource is Library library
             && _fhirResourceWriterOptions.OverrideDate is { } overrideDate)
@@ -53,4 +52,4 @@ internal class WriteToFileFhirResourcePostProcessor(
         streamOut.SetLength(0); // Clears out previous contents
         JsonSerializer.Serialize(streamOut, resource, JsonSerializerOptions);
     }
-}
+}*/
