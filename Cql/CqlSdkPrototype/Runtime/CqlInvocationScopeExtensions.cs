@@ -5,7 +5,7 @@ using static System.FormattableString;
 
 namespace CqlSdkPrototype.Runtime;
 
-internal static class CqlInvocationScopeExtensions
+public static class CqlInvocationScopeExtensions
 {
     public static object? InvokeLibraryDefinition(
         this CqlInvocationScope invocationScope,
@@ -19,7 +19,7 @@ internal static class CqlInvocationScopeExtensions
         return result;
     }
 
-    public static StringBuilder DumpLibraryDeclarations(
+    internal static StringBuilder DumpLibraryDeclarations(
         this CqlInvocationScope invocationScope,
         StringBuilder? sb = null)
     {

@@ -5,7 +5,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace CqlSdkPrototype.Runtime;
+namespace CqlSdkPrototype.Runtime.Invokers;
 
 
 /// <summary>
@@ -24,7 +24,7 @@ public abstract class LibraryInvoker
     {
         var logger = cqlRuntimeApi.Options.ServiceProvider.GetLogger<LibraryInvoker>();
         libraryInvoker = null;
-        if (libraryType.GetCustomAttribute<CqlLibraryAttribute>() is not {})
+        if (libraryType.GetCustomAttribute<CqlLibraryAttribute>() is not { })
         {
             logger?.LogDebug(
                 "Type {type} is not a CQL library because it does not have a CqlLibraryAttribute.",
@@ -37,7 +37,7 @@ public abstract class LibraryInvoker
         if (libraryType.GetCustomAttribute<GeneratedCodeAttribute>() is not
             {
                 Tool: ".NET Code Generation",
-                Version:{} version
+                Version: { } version
             }
             || !Version.TryParse(version, out var cqlToolVersion))
         {

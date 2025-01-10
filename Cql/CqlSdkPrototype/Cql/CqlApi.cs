@@ -5,6 +5,7 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 
 namespace CqlSdkPrototype.Cql;
 
@@ -17,7 +18,7 @@ public class CqlApi :
 {
     #region State
 
-    private readonly State _state;
+    private State _state;
     CqlApiOptions ICqlApi<CqlApi>.Options => _state.Options;
     IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlTranslationEntry> ICqlApi<CqlApi>.Entries => _state.Entries;
 
@@ -46,15 +47,22 @@ public class CqlApi :
         _state = state;
     }
 
-    private CqlApi WithEntries(CqlTranslationEntriesMap entries)
+    private CqlApi WithEntries(
+        CqlTranslationEntriesMap entries)
     {
-        return new CqlApi(_state with { Entries = entries });
+        _state = _state with { Entries = entries };
+        return this;
+        // return new CqlApi(_state with { Entries = entries });
     }
 
-    public CqlApi WithOptions(Func<CqlApiOptions, CqlApiOptions> replaceOptions)
+    public CqlApi WithOptions(
+        Func<CqlApiOptions, CqlApiOptions> replaceOptions)
     {
         var newOptions = replaceOptions(_state.Options);
-        return ReferenceEquals(_state.Options, newOptions) ? this : new CqlApi(_state with { Options = newOptions });
+        if (!ReferenceEquals(_state.Options, newOptions))
+            // return new CqlApi(_state with { Options = newOptions });
+            _state = _state with { Options = newOptions };
+        return this;
     }
 
     #endregion

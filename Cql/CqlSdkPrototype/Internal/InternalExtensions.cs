@@ -88,19 +88,11 @@ internal static class InternalExtensions
         if (source == null)
             throw new ArgumentNullException(nameof(source));
 
-        if (source is IList<TSource> list)
+        foreach (TSource element in source)
         {
-            if (list.Count > 0)
+            if (predicate(element))
             {
-                return list[0];
-            }
-        }
-        else
-        {
-            using var e = source.GetEnumerator();
-            if (e.MoveNext())
-            {
-                return e.Current;
+                return element;
             }
         }
 

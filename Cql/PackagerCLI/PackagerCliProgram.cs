@@ -65,13 +65,13 @@ internal class PackagerCliProgram
             if (cSharpOpt.OutDirectory != null)
             {
                 cSharpOpt.OutDirectory.Delete(true);
-                elmApi = elmApi.SaveCSharpFilesToDirectory(cSharpOpt.OutDirectory);
+                /*elmApi = */elmApi.SaveCSharpFilesToDirectory(cSharpOpt.OutDirectory);
             }
 
             if (asmOpt.OutDirectory != null)
             {
                 asmOpt.OutDirectory.Delete(true);
-                elmApi = elmApi.SaveAssemblyBinariesToDirectory(asmOpt.OutDirectory);
+                /*elmApi = */elmApi.SaveAssemblyBinariesToDirectory(asmOpt.OutDirectory);
             }
 
             return 0;

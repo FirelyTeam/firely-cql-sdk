@@ -3,7 +3,7 @@ using System.Reflection;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Runtime;
+namespace CqlSdkPrototype.Runtime.Invokers;
 
 public abstract class LibraryDefinitionInvoker(
     string declarationName,

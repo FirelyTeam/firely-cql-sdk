@@ -1,9 +1,10 @@
-﻿using Hl7.Cql.CodeGeneration.NET;
+﻿using CqlSdkPrototype.Cql;
+using CqlSdkPrototype.Elm;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Elm;
-using Hl7.Cql.Model;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CqlSdkPrototype;
@@ -12,12 +13,12 @@ public static class Extensions
 {
     public static IServiceCollection AddElmApi(
         this IServiceCollection serviceCollection,
-        Action<ElmCompilationOptions>? configureOptions = null)
+        Action<ElmServicesOptions>? configureOptions = null)
     {
-        ElmCompilationOptions? elmCompilationOptions = null;
+        ElmServicesOptions? elmCompilationOptions = null;
         if (configureOptions is { } fn)
         {
-            elmCompilationOptions = new ElmCompilationOptions();
+            elmCompilationOptions = new ElmServicesOptions();
             fn(elmCompilationOptions);
         }
 
@@ -58,14 +59,14 @@ public static class Extensions
 
     public static IServiceCollection AddCqlApi(
         this IServiceCollection serviceCollection,
-        Action<CqlTranslationOptions>? configureOptions = null)
+        Action<CqlServicesOptions>? configureOptions = null)
     {
         serviceCollection.SuppressCqlDebugAssertions();
 
-        CqlTranslationOptions? cqlTranslationOptions = null;
+        CqlServicesOptions? cqlTranslationOptions = null;
         if (configureOptions is { } fn)
         {
-            cqlTranslationOptions = new CqlTranslationOptions();
+            cqlTranslationOptions = new CqlServicesOptions();
             fn(cqlTranslationOptions);
         }
 
@@ -92,17 +93,4 @@ public static class Extensions
                        : _ => { };
         }
     }
-}
-
-
-public class CqlTranslationOptions
-{
-    public ModelInfo[] Models { get; set; } = [];
-}
-
-public class ElmCompilationOptions
-{
-    //public DirectoryInfo? AssembliesOutDirectory { get; set; }
-    public bool AssembliesDebugMode { get; set; }
-    //public DirectoryInfo? CSharpOutDirectory { get; set; }
 }

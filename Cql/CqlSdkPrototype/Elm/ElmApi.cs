@@ -1,4 +1,5 @@
 ﻿using System.Linq.Expressions;
+using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.CodeGeneration.NET;
@@ -19,7 +20,7 @@ public class ElmApi :
 {
     #region State
 
-    private readonly State _state;
+    private State _state;
     ElmApiOptions IElmApi<ElmApi>.Options => _state.Options;
     IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmCompilationEntry> IElmApi<ElmApi>.Entries => _state.Entries;
 
@@ -60,13 +61,19 @@ public class ElmApi :
     private ElmApi WithEntries(
         ElmCompilationEntriesMap entries)
     {
-        return new ElmApi(_state with { Entries = entries });
+        _state = _state with { Entries = entries };
+        return this;
+        // return new CqlApi(_state with { Entries = entries });
     }
 
-    public ElmApi WithOptions(Func<ElmApiOptions, ElmApiOptions> replaceOptions)
+    public ElmApi WithOptions(
+        Func<ElmApiOptions, ElmApiOptions> replaceOptions)
     {
         var newOptions = replaceOptions(_state.Options);
-        return ReferenceEquals(_state.Options, newOptions) ? this : new ElmApi(_state with { Options = newOptions });
+        if (!ReferenceEquals(_state.Options, newOptions))
+            // return new CqlApi(_state with { Options = newOptions });
+            _state = _state with { Options = newOptions };
+        return this;
     }
 
     #endregion

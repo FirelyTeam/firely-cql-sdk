@@ -31,9 +31,9 @@ internal class Program
 
         InvokeCqlFromExamplesFolder(logger, cqlApi);
         InvokeCqlExample(logger, cqlApi);
-        // foreach (var librarySetName in (string[])["Authoring", "CMS", "Demo"])
-        //     VerboseExample(logger, cqlApi, librarySetName);
-        VerboseExample(logger, cqlApi, "Authoring");
+        foreach (var librarySetName in (string[])["Authoring", "CMS", "Demo"])
+            VerboseExample(logger, cqlApi, librarySetName);
+        //VerboseExample(logger, cqlApi, "Authoring");
     }
 
     private static void InvokeCqlFromExamplesFolder(
@@ -47,7 +47,7 @@ internal class Program
         var dirs = Directories.Create("Examples");
 
         // We can write extensions to make it even easier to change exception handling
-        cqlApi = cqlApi.WithOptions(o => o with
+        /*cqlApi = */cqlApi.WithOptions(o => o with
                        {
                            ProcessBatchItemExceptionHandling =
                            ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
@@ -105,7 +105,7 @@ internal class Program
 
         Directories dirs = Directories.Create(librarySetName);
         dirs.GeneratedDirectory.Delete(recursive: true);
-        cqlApi = cqlApi
+        /*cqlApi = */cqlApi
                  .WithOptions(o => o with
                  {
                      ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
@@ -199,8 +199,8 @@ internal class Program
     // }
 
     private static ServiceProvider BuildServiceProvider(
-        Action<ElmCompilationOptions>? configureElmCompilationOptions = null,
-        Action<CqlTranslationOptions>? configureCqlTranslationOptions = null)
+        Action<ElmServicesOptions>? configureElmCompilationOptions = null,
+        Action<CqlServicesOptions>? configureCqlTranslationOptions = null)
     {
         // Dictionary<string, string?> inMemoryConfiguration = new()
         // {

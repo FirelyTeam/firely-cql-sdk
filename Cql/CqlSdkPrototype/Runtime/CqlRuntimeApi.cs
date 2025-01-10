@@ -10,9 +10,32 @@ namespace CqlSdkPrototype.Runtime;
 
 public class CqlRuntimeApi
 {
-    private readonly State _state;
+    #region State
+
+    private State _state;
 
     public CqlRuntimeApiOptions Options => _state.Options;
+
+    private readonly record struct State(
+        CqlRuntimeApiOptions Options,
+        ImmutableHashSet<AssemblyData>? AssemblyData = null)
+    {
+        public ILogger<CqlRuntimeApi> Logger { get; } = Options.ServiceProvider.GetLogger<CqlRuntimeApi>();
+        public ImmutableHashSet<AssemblyData> AssemblyData { get; init; } = AssemblyData ?? [];
+    }
+
+    #endregion
+
+    #region Construction
+
+    public static CqlRuntimeApi Create(
+        CqlRuntimeApiOptions options)
+    {
+        var state = new State(options, ImmutableHashSet<AssemblyData>.Empty);
+        state.Logger.LogInformation("Creating LibrarySetInvoker");
+        var librarySetInvoker = new CqlRuntimeApi(state);
+        return librarySetInvoker;
+    }
 
     private CqlRuntimeApi(
         State state)
@@ -23,19 +46,17 @@ public class CqlRuntimeApi
     private CqlRuntimeApi WithAssemblyData(
         ImmutableHashSet<AssemblyData>? assemblyData = null)
     {
-        return new CqlRuntimeApi(_state with
+        _state = _state with
         {
             AssemblyData = assemblyData ?? _state.AssemblyData
-        });
+        };
+        return this;
+        //return new CqlRuntimeApi(state);
     }
 
-    private readonly record struct State(
-        CqlRuntimeApiOptions Options,
-        ImmutableHashSet<AssemblyData>? AssemblyData = null)
-    {
-        public ILogger<CqlRuntimeApi> Logger { get; } = Options.ServiceProvider.GetLogger<CqlRuntimeApi>();
-        public ImmutableHashSet<AssemblyData> AssemblyData { get; init; } = AssemblyData ?? [];
-    }
+    #endregion
+
+    #region Input (AssemblyData's)
 
     internal CqlRuntimeApi AddAssemblies(IEnumerable<AssemblyData> assemblyData)
     {
@@ -47,16 +68,9 @@ public class CqlRuntimeApi
                    : WithAssemblyData(assemblyData: assembliesBuilder.ToImmutable());
     }
 
-    // public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker> LibraryInvokers { get; }
+    #endregion
 
-    public static CqlRuntimeApi Create(
-        CqlRuntimeApiOptions options)
-    {
-        var state = new State(options, ImmutableHashSet<AssemblyData>.Empty);
-        state.Logger.LogInformation("Creating LibrarySetInvoker");
-        var librarySetInvoker = new CqlRuntimeApi(state);
-        return librarySetInvoker;
-    }
+    #region Output (InvocationScope)
 
     public CqlInvocationScope CreateInvocationScope()
     {
@@ -65,30 +79,6 @@ public class CqlRuntimeApi
             alc.LoadFromBytes(assembly, debugSymbols);
         return new CqlInvocationScope(this, alc);
     }
-}
 
-public class CqlInvocationScope : IDisposable
-{
-    private readonly AssemblyLoadContext _alc;
-
-    internal CqlInvocationScope(CqlRuntimeApi cqlRuntimeApi, AssemblyLoadContext alc)
-    {
-        _alc = alc;
-        Libraries =
-            _alc.Assemblies
-                .SelectMany(a => a.GetTypes())
-                .SelectWhereNotNull(t =>
-                {
-                    LibraryInvoker.TryCreateFromType(cqlRuntimeApi, t, out var libraryInvoker);
-                    return libraryInvoker;
-                })
-                .ToImmutableDictionary(o => o.LibraryVersionedIdentifier);
-    }
-
-    public void Dispose()
-    {
-        _alc.Unload();
-    }
-
-    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker> Libraries { get; }
+    #endregion
 }

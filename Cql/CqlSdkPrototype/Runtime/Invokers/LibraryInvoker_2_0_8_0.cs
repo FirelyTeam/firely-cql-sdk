@@ -8,7 +8,7 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.Logging;
 
-namespace CqlSdkPrototype.Runtime;
+namespace CqlSdkPrototype.Runtime.Invokers;
 
 public class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
 {
@@ -17,7 +17,8 @@ public class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
         public LibraryMethodInfo(MethodInfo Method) : this(
             Method,
             ValueSetId: Method.GetCustomAttribute<CqlValueSetAttribute>()?.Id,
-            DeclarationName: Method.GetCustomAttribute<CqlDeclarationAttribute>()?.Name) { }
+            DeclarationName: Method.GetCustomAttribute<CqlDeclarationAttribute>()?.Name)
+        { }
     }
 
     public LibraryInvoker_2_0_8_0(
