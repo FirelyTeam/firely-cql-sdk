@@ -20,15 +20,9 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
 
     public static DischargedonAntithromboticTherapyFHIR_0_9_000 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "DischargedonAntithromboticTherapyFHIR";
-    string ILibrary.Version => "0.9.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, TJCOverall_8_14_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "DischargedonAntithromboticTherapyFHIR";
+    public string Version => "0.9.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, TJCOverall_8_14_000.Instance];
 
     [CqlDeclaration("Antithrombotic Therapy for Ischemic Stroke")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.62")]
@@ -382,7 +376,5 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
 
         return a_;
     }
-
-    #endregion Definition Methods
 
 }

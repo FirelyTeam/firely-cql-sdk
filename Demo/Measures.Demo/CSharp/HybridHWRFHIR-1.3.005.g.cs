@@ -20,15 +20,9 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
 
     public static HybridHWRFHIR_1_3_005 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "HybridHWRFHIR";
-    string ILibrary.Version => "1.3.005";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "HybridHWRFHIR";
+    public string Version => "1.3.005";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
 
     [CqlDeclaration("Bicarbonate lab test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.139")]
@@ -930,14 +924,9 @@ public partial class HybridHWRFHIR_1_3_005 : ILibrary, ISingleton<HybridHWRFHIR_
         return b_;
     }
 
-    #endregion Definition Methods
-
-    #region CqlTupleMetadata Properties
-
     private static CqlTupleMetadata CqlTupleMetadata_EFSKhGUTUCLEXZENTURVLjeND = new(
         [typeof(Encounter), typeof(Coverage)],
         ["InpatientEncounter", "Payer"]);
 
-    #endregion CqlTupleMetadata Properties
 
 }

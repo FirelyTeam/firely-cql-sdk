@@ -20,15 +20,9 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     public static PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR_0_0_008 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR";
-    string ILibrary.Version => "0.0.008";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, HospiceFHIR4_2_3_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR";
+    public string Version => "0.0.008";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, HospiceFHIR4_2_3_000.Instance];
 
     [CqlDeclaration("Clinical Oral Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.125.12.1003")]
@@ -306,7 +300,5 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
         return e_;
     }
-
-    #endregion Definition Methods
 
 }

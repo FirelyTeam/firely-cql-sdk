@@ -20,15 +20,9 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 
     public static NCQACQLBase_1_0_0 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "NCQACQLBase";
-    string ILibrary.Version => "1.0.0";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "NCQACQLBase";
+    public string Version => "1.0.0";
+    public ILibrary[] Dependencies => [];
 
     public IEnumerable<CqlInterval<CqlDate>> Sort_Date_Intervals(CqlContext context, IEnumerable<CqlInterval<CqlDate>> intervals)
     {
@@ -1370,10 +1364,6 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
         return e_;
     }
 
-    #endregion Definition Methods
-
-    #region CqlTupleMetadata Properties
-
     private static CqlTupleMetadata CqlTupleMetadata_BBLSSiNBQBGUDJaVjMDZMSAXg = new(
         [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
         ["frontgaps", "endgap"]);
@@ -1434,6 +1424,5 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
         [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(int?), typeof(int?), typeof(CqlInterval<CqlDate>), typeof(int?)],
         ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
 
-    #endregion CqlTupleMetadata Properties
 
 }

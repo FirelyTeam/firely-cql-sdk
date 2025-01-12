@@ -20,15 +20,9 @@ public partial class AHAOverall_2_8_000 : ILibrary, ISingleton<AHAOverall_2_8_00
 
     public static AHAOverall_2_8_000 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "AHAOverall";
-    string ILibrary.Version => "2.8.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "AHAOverall";
+    public string Version => "2.8.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
 
     [CqlDeclaration("Care Services in Long Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
@@ -829,7 +823,5 @@ public partial class AHAOverall_2_8_000 : ILibrary, ISingleton<AHAOverall_2_8_00
 
         return d_;
     }
-
-    #endregion Definition Methods
 
 }

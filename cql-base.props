@@ -38,7 +38,7 @@
 		<LibraryPKHash></LibraryPKHash>
 		<!-- CqlToElmEnabled and ElmToCSharpEnabled declared in BuildArtifacts.csproj, cql-base.props, cql-demo.props  -->
 		<CqlToElmEnabled>false</CqlToElmEnabled>
-		<ElmToCSharpEnabled>false</ElmToCSharpEnabled>
+		<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

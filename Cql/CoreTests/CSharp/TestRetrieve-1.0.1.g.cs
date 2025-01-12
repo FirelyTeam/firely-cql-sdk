@@ -20,15 +20,9 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
     public static TestRetrieve_1_0_1 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "TestRetrieve";
-    string ILibrary.Version => "1.0.1";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_1.Instance, TestRetrieveInclude_1_0_1.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "TestRetrieve";
+    public string Version => "1.0.1";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance, TestRetrieveInclude_1_0_1.Instance];
 
     [CqlDeclaration("HIV")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.120.12.1003")]
@@ -138,7 +132,5 @@ public partial class TestRetrieve_1_0_1 : ILibrary, ISingleton<TestRetrieve_1_0_
 
         return e_;
     }
-
-    #endregion Definition Methods
 
 }

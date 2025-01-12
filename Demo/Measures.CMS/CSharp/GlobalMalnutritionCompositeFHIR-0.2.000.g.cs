@@ -20,15 +20,9 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
 
     public static GlobalMalnutritionCompositeFHIR_0_2_000 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "GlobalMalnutritionCompositeFHIR";
-    string ILibrary.Version => "0.2.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, CQMCommon_2_2_000.Instance, Status_1_8_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "GlobalMalnutritionCompositeFHIR";
+    public string Version => "0.2.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, CQMCommon_2_2_000.Instance, Status_1_8_000.Instance];
 
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
@@ -1084,10 +1078,6 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
         return g_;
     }
 
-    #endregion Definition Methods
-
-    #region CqlTupleMetadata Properties
-
     private static CqlTupleMetadata CqlTupleMetadata_CTGXhDDGNAgcaKfhTDIBGVLYU = new(
         [typeof(Encounter), typeof(Condition)],
         ["QualifyingEncounter", "MalnutritionDiagnosis"]);
@@ -1108,6 +1098,5 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
         [typeof(Encounter), typeof(Observation)],
         ["QualifyingEncounter", "MalnutritionRiskScreening"]);
 
-    #endregion CqlTupleMetadata Properties
 
 }

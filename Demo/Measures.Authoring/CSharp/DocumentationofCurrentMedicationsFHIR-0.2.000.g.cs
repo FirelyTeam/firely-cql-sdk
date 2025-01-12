@@ -20,15 +20,9 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
     public static DocumentationofCurrentMedicationsFHIR_0_2_000 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "DocumentationofCurrentMedicationsFHIR";
-    string ILibrary.Version => "0.2.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, SupplementalDataElements_3_4_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "DocumentationofCurrentMedicationsFHIR";
+    public string Version => "0.2.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, SupplementalDataElements_3_4_000.Instance];
 
     [CqlDeclaration("Encounter to Document Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.600.1.1834")]
@@ -249,7 +243,5 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
         return c_;
     }
-
-    #endregion Definition Methods
 
 }

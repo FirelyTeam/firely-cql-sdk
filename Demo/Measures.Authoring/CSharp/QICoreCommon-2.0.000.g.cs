@@ -20,15 +20,9 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
 
     public static QICoreCommon_2_0_000 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "QICoreCommon";
-    string ILibrary.Version => "2.0.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "QICoreCommon";
+    public string Version => "2.0.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
 
     [CqlDeclaration("Birthdate")]
     public CqlCode Birthdate(CqlContext context) =>
@@ -2115,14 +2109,9 @@ public partial class QICoreCommon_2_0_000 : ILibrary, ISingleton<QICoreCommon_2_
         return d_;
     }
 
-    #endregion Definition Methods
-
-    #region CqlTupleMetadata Properties
-
     private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
         [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
         ["dayIndex", "dayPeriod"]);
 
-    #endregion CqlTupleMetadata Properties
 
 }

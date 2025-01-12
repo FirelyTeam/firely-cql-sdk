@@ -20,15 +20,9 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 
     public static SevereObstetricComplicationsFHIR_0_1_000 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "SevereObstetricComplicationsFHIR";
-    string ILibrary.Version => "0.1.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, PCMaternal_5_19_000.Instance, QICoreCommon_2_1_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "SevereObstetricComplicationsFHIR";
+    public string Version => "0.1.000";
+    public ILibrary[] Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, PCMaternal_5_19_000.Instance, QICoreCommon_2_1_000.Instance];
 
     [CqlDeclaration("20 to 42 Plus Weeks Gestation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.67")]
@@ -2509,10 +2503,6 @@ m_ ?? default(int),
         return d_;
     }
 
-    #endregion Definition Methods
-
-    #region CqlTupleMetadata Properties
-
     private static CqlTupleMetadata CqlTupleMetadata_DbihhAfJfGSKOIcQDBMEMigFK = new(
         [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?>)],
         ["id", "procedures"]);
@@ -2545,6 +2535,5 @@ m_ ?? default(int),
         [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, CqlConcept code, string SOCDxCategory)?>)],
         ["id", "complications"]);
 
-    #endregion CqlTupleMetadata Properties
 
 }

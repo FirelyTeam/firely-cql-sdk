@@ -20,15 +20,9 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
 
     public static NCQAFHIRBase_1_0_0 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "NCQAFHIRBase";
-    string ILibrary.Version => "1.0.0";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "NCQAFHIRBase";
+    public string Version => "1.0.0";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance];
 
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
@@ -1315,10 +1309,6 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         return l_;
     }
 
-    #endregion Definition Methods
-
-    #region CqlTupleMetadata Properties
-
     private static CqlTupleMetadata CqlTupleMetadata_BDeBMdFeZaVSehBSFYjTFdYYD = new(
         [typeof(IEnumerable<CqlDate>), typeof(int?)],
         ["SortedList", "AnchorIndex"]);
@@ -1331,6 +1321,5 @@ public partial class NCQAFHIRBase_1_0_0 : ILibrary, ISingleton<NCQAFHIRBase_1_0_
         [typeof(CqlDate), typeof(IEnumerable<CqlDate>), typeof(int?)],
         ["NextDate", "NewList", "IndexofNewDate"]);
 
-    #endregion CqlTupleMetadata Properties
 
 }

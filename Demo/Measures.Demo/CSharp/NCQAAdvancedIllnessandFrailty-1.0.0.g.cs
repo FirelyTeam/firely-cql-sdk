@@ -20,15 +20,9 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
 
     public static NCQAAdvancedIllnessandFrailty_1_0_0 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "NCQAAdvancedIllnessandFrailty";
-    string ILibrary.Version => "1.0.0";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAFHIRBase_1_0_0.Instance, NCQAStatus_1_0_0.Instance, NCQAEncounter_1_0_0.Instance, NCQAClaims_1_0_0.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "NCQAAdvancedIllnessandFrailty";
+    public string Version => "1.0.0";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAFHIRBase_1_0_0.Instance, NCQAStatus_1_0_0.Instance, NCQAEncounter_1_0_0.Instance, NCQAClaims_1_0_0.Instance];
 
     [CqlDeclaration("Acute Inpatient")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1810")]
@@ -507,14 +501,9 @@ public partial class NCQAAdvancedIllnessandFrailty_1_0_0 : ILibrary, ISingleton<
         return s_;
     }
 
-    #endregion Definition Methods
-
-    #region CqlTupleMetadata Properties
-
     private static CqlTupleMetadata CqlTupleMetadata_CMSeRgTJgKISKSQUcNZWKegGV = new(
         [typeof(CqlDate), typeof(CqlDate)],
         ["OutpatientVisit1", "OutpatientVisit2"]);
 
-    #endregion CqlTupleMetadata Properties
 
 }

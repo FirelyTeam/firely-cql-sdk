@@ -20,15 +20,9 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
     public static MultipleResourcesExample_0_0_1 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "MultipleResourcesExample";
-    string ILibrary.Version => "0.0.1";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "MultipleResourcesExample";
+    public string Version => "0.0.1";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
 
     [CqlDeclaration("Lung Cancer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89")]
@@ -104,7 +98,5 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
         return d_;
     }
-
-    #endregion Definition Methods
 
 }

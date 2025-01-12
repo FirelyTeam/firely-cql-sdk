@@ -20,15 +20,9 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
     public static CervicalCancerScreeningFHIR_0_0_005 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "CervicalCancerScreeningFHIR";
-    string ILibrary.Version => "0.0.005";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, HospiceFHIR4_2_3_000.Instance, PalliativeCareFHIR_0_6_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "CervicalCancerScreeningFHIR";
+    public string Version => "0.0.005";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, HospiceFHIR4_2_3_000.Instance, PalliativeCareFHIR_0_6_000.Instance];
 
     [CqlDeclaration("Congenital or Acquired Absence of Cervix")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.111.12.1016")]
@@ -517,7 +511,5 @@ public partial class CervicalCancerScreeningFHIR_0_0_005 : ILibrary, ISingleton<
 
         return d_;
     }
-
-    #endregion Definition Methods
 
 }

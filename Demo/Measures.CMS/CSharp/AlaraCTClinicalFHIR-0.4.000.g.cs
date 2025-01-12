@@ -20,15 +20,9 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
 
     public static AlaraCTClinicalFHIR_0_4_000 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "AlaraCTClinicalFHIR";
-    string ILibrary.Version => "0.4.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, AlaraCommonFunctions_1_5_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "AlaraCTClinicalFHIR";
+    public string Version => "0.4.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, AlaraCommonFunctions_1_5_000.Instance];
 
     [CqlDeclaration("Birth date")]
     public CqlCode Birth_date(CqlContext context) =>
@@ -212,7 +206,5 @@ public partial class AlaraCTClinicalFHIR_0_4_000 : ILibrary, ISingleton<AlaraCTC
 
         return d_;
     }
-
-    #endregion Definition Methods
 
 }

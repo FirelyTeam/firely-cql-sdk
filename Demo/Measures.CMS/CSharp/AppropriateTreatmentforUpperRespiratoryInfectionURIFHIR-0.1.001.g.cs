@@ -20,15 +20,9 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
 
     public static AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1_001 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR";
-    string ILibrary.Version => "0.1.001";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance, QICoreCommon_2_1_000.Instance, Antibiotic_1_7_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR";
+    public string Version => "0.1.001";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance, QICoreCommon_2_1_000.Instance, Antibiotic_1_7_000.Instance];
 
     [CqlDeclaration("Acute Pharyngitis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.102.12.1011")]
@@ -538,14 +532,9 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
         return f_;
     }
 
-    #endregion Definition Methods
-
-    #region CqlTupleMetadata Properties
-
     private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
         [typeof(Encounter), typeof(Condition)],
         ["QualifyingEncounters", "URI"]);
 
-    #endregion CqlTupleMetadata Properties
 
 }

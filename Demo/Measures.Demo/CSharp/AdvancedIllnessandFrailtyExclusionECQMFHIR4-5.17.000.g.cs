@@ -20,15 +20,9 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
 
     public static AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "AdvancedIllnessandFrailtyExclusionECQMFHIR4";
-    string ILibrary.Version => "5.17.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, CumulativeMedicationDurationFHIR4_1_0_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "AdvancedIllnessandFrailtyExclusionECQMFHIR4";
+    public string Version => "5.17.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, CumulativeMedicationDurationFHIR4_1_0_000.Instance];
 
     [CqlDeclaration("Acute Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1083")]
@@ -585,10 +579,6 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
         return b_;
     }
 
-    #endregion Definition Methods
-
-    #region CqlTupleMetadata Properties
-
     private static CqlTupleMetadata CqlTupleMetadata_CgaDVOXeQBMgMPCPZOThIIdDb = new(
         [typeof(CqlInterval<CqlDateTime>), typeof(CqlInterval<CqlDateTime>)],
         ["LTCPeriod1", "LTCPeriod2"]);
@@ -597,6 +587,5 @@ public partial class AdvancedIllnessandFrailtyExclusionECQMFHIR4_5_17_000 : ILib
         [typeof(Encounter), typeof(Encounter)],
         ["OutpatientEncounter1", "OutpatientEncounter2"]);
 
-    #endregion CqlTupleMetadata Properties
 
 }

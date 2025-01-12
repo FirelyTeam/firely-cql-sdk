@@ -20,15 +20,9 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000
 
     public static HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "HospitalHarmHyperglycemiainHospitalizedPatientsFHIR";
-    string ILibrary.Version => "0.1.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [SupplementalDataElements_3_5_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, FHIRHelpers_4_4_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "HospitalHarmHyperglycemiainHospitalizedPatientsFHIR";
+    public string Version => "0.1.000";
+    public ILibrary[] Dependencies => [SupplementalDataElements_3_5_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, FHIRHelpers_4_4_000.Instance];
 
     [CqlDeclaration("birth date")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4")]
@@ -1502,10 +1496,6 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000
         return a_();
     }
 
-    #endregion Definition Methods
-
-    #region CqlTupleMetadata Properties
-
     private static CqlTupleMetadata CqlTupleMetadata_BbhMZNJZUhELHSIeBfBEVUQGO = new(
         [typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(bool?), typeof(bool?), typeof(bool?)],
         ["dayNumber", "dayPeriod", "hasSevereResult", "hasElevatedResult", "hasNoGlucoseTest"]);
@@ -1546,6 +1536,5 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_1_000
         [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
         ["dayNumber", "dayPeriod"]);
 
-    #endregion CqlTupleMetadata Properties
 
 }

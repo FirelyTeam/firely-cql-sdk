@@ -20,15 +20,9 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
 
     public static CqlBooleanTest_1_0_000 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "CqlBooleanTest";
-    string ILibrary.Version => "1.0.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "CqlBooleanTest";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [];
 
     [CqlDeclaration("SomethingTrueEqualsTrue")]
     public bool? SomethingTrueEqualsTrue(CqlContext context)
@@ -38,7 +32,5 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
 
         return b_;
     }
-
-    #endregion Definition Methods
 
 }

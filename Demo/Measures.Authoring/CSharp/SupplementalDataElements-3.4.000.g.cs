@@ -20,15 +20,9 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
 
     public static SupplementalDataElements_3_4_000 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "SupplementalDataElements";
-    string ILibrary.Version => "3.4.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "SupplementalDataElements";
+    public string Version => "3.4.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
 
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
@@ -368,10 +362,6 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
         return a_();
     }
 
-    #endregion Definition Methods
-
-    #region CqlTupleMetadata Properties
-
     private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
         [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
         ["code", "period"]);
@@ -380,6 +370,5 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
         [typeof(IEnumerable<CqlCode>), typeof(string)],
         ["codes", "display"]);
 
-    #endregion CqlTupleMetadata Properties
 
 }

@@ -20,15 +20,9 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     public static RR23_1_0_0 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "RR23";
-    string ILibrary.Version => "1.0.0";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_1.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "RR23";
+    public string Version => "1.0.0";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
 
     [CqlDeclaration("Injury due to falling rock")]
     [CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock")]
@@ -183,7 +177,5 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
         return c_;
     }
-
-    #endregion Definition Methods
 
 }

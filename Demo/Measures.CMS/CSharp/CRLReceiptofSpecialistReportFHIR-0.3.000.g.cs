@@ -20,15 +20,9 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
 
     public static CRLReceiptofSpecialistReportFHIR_0_3_000 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "CRLReceiptofSpecialistReportFHIR";
-    string ILibrary.Version => "0.3.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "CRLReceiptofSpecialistReportFHIR";
+    public string Version => "0.3.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
 
     [CqlDeclaration("Behavioral/Neuropsych Assessment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1023")]
@@ -494,14 +488,9 @@ public partial class CRLReceiptofSpecialistReportFHIR_0_3_000 : ILibrary, ISingl
         return a_;
     }
 
-    #endregion Definition Methods
-
-    #region CqlTupleMetadata Properties
-
     private static CqlTupleMetadata CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb = new(
         [typeof(string), typeof(CqlDateTime)],
         ["ID", "AuthorDate"]);
 
-    #endregion CqlTupleMetadata Properties
 
 }

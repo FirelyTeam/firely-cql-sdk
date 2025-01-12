@@ -20,15 +20,9 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
     public static AppropriateDXAScansForWomenUnder65FHIR_0_2_001 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "AppropriateDXAScansForWomenUnder65FHIR";
-    string ILibrary.Version => "0.2.001";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, Hospice_6_12_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "AppropriateDXAScansForWomenUnder65FHIR";
+    public string Version => "0.2.001";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, Hospice_6_12_000.Instance];
 
     [CqlDeclaration("Amenorrhea")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1022")]
@@ -1107,7 +1101,5 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
         return b_;
     }
-
-    #endregion Definition Methods
 
 }

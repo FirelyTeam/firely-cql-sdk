@@ -20,15 +20,9 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     public static DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "DRCommunicationWithPhysicianManagingDiabetesFHIR";
-    string ILibrary.Version => "0.0.004";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "DRCommunicationWithPhysicianManagingDiabetesFHIR";
+    public string Version => "0.0.004";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
 
     [CqlDeclaration("Care Services in Long-Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
@@ -697,7 +691,5 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
         return h_;
     }
-
-    #endregion Definition Methods
 
 }

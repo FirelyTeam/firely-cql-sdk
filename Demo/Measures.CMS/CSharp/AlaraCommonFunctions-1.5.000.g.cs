@@ -20,15 +20,9 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
 
     public static AlaraCommonFunctions_1_5_000 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "AlaraCommonFunctions";
-    string ILibrary.Version => "1.5.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "AlaraCommonFunctions";
+    public string Version => "1.5.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance];
 
     [CqlDeclaration("Abdomen and Pelvis High Dose")]
     public CqlCode Abdomen_and_Pelvis_High_Dose(CqlContext context) =>
@@ -313,7 +307,5 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
 
         return ck_;
     }
-
-    #endregion Definition Methods
 
 }

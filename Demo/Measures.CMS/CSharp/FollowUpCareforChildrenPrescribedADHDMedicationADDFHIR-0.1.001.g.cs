@@ -20,15 +20,9 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
 
     public static FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_001 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR";
-    string ILibrary.Version => "0.1.001";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, CQMCommon_2_2_000.Instance, Hospice_6_12_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, Status_1_8_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR";
+    public string Version => "0.1.001";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, CQMCommon_2_2_000.Instance, Hospice_6_12_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, Status_1_8_000.Instance];
 
     [CqlDeclaration("Ambulatory")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.122.12.1003")]
@@ -1273,10 +1267,6 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
         return a_;
     }
 
-    #endregion Definition Methods
-
-    #region CqlTupleMetadata Properties
-
     private static CqlTupleMetadata CqlTupleMetadata_CVELXTjiMTaGQEjMfJXBdUHjW = new(
         [typeof(CqlDate)],
         ["startDate"]);
@@ -1285,6 +1275,5 @@ public partial class FollowUpCareforChildrenPrescribedADHDMedicationADDFHIR_0_1_
         [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
         ["period", "periodStart"]);
 
-    #endregion CqlTupleMetadata Properties
 
 }

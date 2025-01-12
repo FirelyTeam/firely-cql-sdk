@@ -20,15 +20,9 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
     public static HospitalHarmFallsWithInjuryFHIR_0_0_024 Instance { get; } = new();
 
-    #region ILibrary Implementation
-
-    string ILibrary.Name => "HospitalHarmFallsWithInjuryFHIR";
-    string ILibrary.Version => "0.0.024";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, CQMCommon_2_2_000.Instance, CumulativeMedicationDuration_4_1_000.Instance];
-
-    #endregion Library Members
-
-    #region Definition Methods
+    public string Name => "HospitalHarmFallsWithInjuryFHIR";
+    public string Version => "0.0.024";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, CQMCommon_2_2_000.Instance, CumulativeMedicationDuration_4_1_000.Instance];
 
     [CqlDeclaration("Abnormal Weight Loss and Malnutrition")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.177")]
@@ -2090,10 +2084,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         return d_;
     }
 
-    #endregion Definition Methods
-
-    #region CqlTupleMetadata Properties
-
     private static CqlTupleMetadata CqlTupleMetadata_CajFQjTXAXITWGJPNIjCafPiF = new(
         [typeof(Encounter), typeof(CqlConcept)],
         ["encounter", "condition"]);
@@ -2102,6 +2092,5 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
         [typeof(string), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<int?>), typeof(IEnumerable<Encounter.DiagnosisComponent>)],
         ["encounterId", "condition", "rank", "POA"]);
 
-    #endregion CqlTupleMetadata Properties
 
 }
