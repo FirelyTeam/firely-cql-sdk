@@ -26,6 +26,7 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, CQMCommon_2_2_000.Instance, CumulativeMedicationDuration_4_1_000.Instance];
     #endregion Library Members
 
+
     [CqlDeclaration("Abnormal Weight Loss and Malnutrition")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1248.177")]
     public CqlValueSet Abnormal_Weight_Loss_and_Malnutrition(CqlContext context) =>
@@ -2202,7 +2203,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
     }
 
 
-
     public int? Denominator_Observation(CqlContext context, Encounter QualifyingEncounter)
     {
         CqlInterval<CqlDateTime> a_ = CQMCommon_2_2_000.Instance.HospitalizationWithObservation(context, QualifyingEncounter);
@@ -2212,7 +2212,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return e_;
     }
-
 
 
     public int? Numerator_Observation(CqlContext context, Encounter QualifyingEncounter)
@@ -2233,7 +2232,6 @@ public partial class HospitalHarmFallsWithInjuryFHIR_0_0_024 : ILibrary, ISingle
 
         return d_;
     }
-
 
 
     private static CqlTupleMetadata CqlTupleMetadata_CajFQjTXAXITWGJPNIjCafPiF = new(

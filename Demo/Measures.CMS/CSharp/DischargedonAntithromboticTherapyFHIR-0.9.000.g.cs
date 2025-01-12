@@ -26,6 +26,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, TJCOverall_8_14_000.Instance];
     #endregion Library Members
 
+
     [CqlDeclaration("Antithrombotic Therapy for Ischemic Stroke")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.62")]
     public CqlValueSet Antithrombotic_Therapy_for_Ischemic_Stroke(CqlContext context) =>
@@ -418,7 +419,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_9_000 : ILibrary, I
 
         return a_;
     }
-
 
 
 }

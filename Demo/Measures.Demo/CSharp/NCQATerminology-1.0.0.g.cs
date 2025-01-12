@@ -26,6 +26,7 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
     #endregion Library Members
 
+
     [CqlDeclaration("problem-list-item")]
     public CqlCode problem_list_item(CqlContext context) =>
         new CqlCode("problem-list-item", "http://terminology.hl7.org/CodeSystem/condition-category", default, default);
@@ -546,7 +547,6 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
 
         return a_;
     }
-
 
 
 }

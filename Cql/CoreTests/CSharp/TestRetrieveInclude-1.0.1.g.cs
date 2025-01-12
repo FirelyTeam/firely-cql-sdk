@@ -26,6 +26,7 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
     #endregion Library Members
 
+
     [CqlDeclaration("Female Administrative Sex")]
     [CqlValueSet("2.16.840.1.113883.3.560.100.2")]
     public CqlValueSet Female_Administrative_Sex(CqlContext context) =>
@@ -75,7 +76,6 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
         return a_;
     }
-
 
 
 }

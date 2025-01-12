@@ -26,6 +26,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
     #endregion Library Members
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -88,7 +89,6 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     [CqlTag("population", "numerator")]
     public bool? Numerator_2(CqlContext context) =>
         false;
-
 
 
 }

@@ -26,6 +26,7 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
     #endregion Library Members
 
+
     [CqlDeclaration("Bipolar Disorder")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.128")]
     public CqlValueSet Bipolar_Disorder(CqlContext context) =>
@@ -258,7 +259,6 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
 
         return d_;
     }
-
 
 
     public bool? isConfirmedActiveDiagnosis(CqlContext context, Condition condition)
@@ -953,7 +953,6 @@ public partial class DepressionRemissionatTwelveMonthsFHIR_0_2_000 : ILibrary, I
 
         return a_;
     }
-
 
 
 }

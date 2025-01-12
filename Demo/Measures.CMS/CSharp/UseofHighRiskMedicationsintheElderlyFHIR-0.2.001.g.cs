@@ -26,6 +26,7 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, CQMCommon_2_2_000.Instance, Hospice_6_12_000.Instance, PalliativeCare_1_11_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance];
     #endregion Library Members
 
+
     [CqlDeclaration("Alcohol Withdrawal")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1209")]
     public CqlValueSet Alcohol_Withdrawal(CqlContext context) =>
@@ -591,7 +592,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-
     public IEnumerable<MedicationRequest> moreThanOneOrder(CqlContext context, IEnumerable<MedicationRequest> Medication)
     {
         IEnumerable<MedicationRequest> a_ = Status_1_8_000.Instance.isMedicationOrder(context, Medication);
@@ -789,7 +789,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-
     public decimal? MedicationRequestPeriodInDays(CqlContext context, MedicationRequest Request)
     {
         MedicationRequest[] a_ = [
@@ -888,7 +887,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
 
         return k_;
     }
-
 
 
     public CqlQuantity MedicationStrengthPerUnit(CqlContext context, CqlConcept Strength)
@@ -1113,7 +1111,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
 
         return a_();
     }
-
 
 
     public CqlQuantity averageDailyDose(CqlContext context, MedicationRequest MedicationRequest)
@@ -1448,7 +1445,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
 
         return a_;
     }
-
 
 
 }

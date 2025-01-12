@@ -251,8 +251,7 @@ internal class CSharpCodeGenerator
                     definitions.TryGetTags(libraryName, definition, signature, out var tags);
                     var methodWriter = CreateMethodWriter(definition, expression, tags);
                     methodWriter.WriteMethod();
-                    IndentedTextWriter.WriteLine();
-                    if (!IN_NEXT_PR) IndentedTextWriter.WriteLine();
+                    if (IN_NEXT_PR) IndentedTextWriter.WriteLine();
                 }
             }
 
@@ -342,6 +341,7 @@ internal class CSharpCodeGenerator
 
             if (isDef)
             {
+                if (!IN_NEXT_PR) IndentedTextWriter.WriteLine();
                 IndentedTextWriter.WriteLine($"[CqlDeclaration({CqlName.QuoteString()})]");
                 WriteTags();
 
@@ -361,6 +361,7 @@ internal class CSharpCodeGenerator
             var definitionToCSharpCodeProcessor = new LibraryDefinitionToCSharpCodeProcessor(tupleMetadataBuilder, libraryName, LibraryWriter.LibrarySetWriter.TypeToCSharpConverter, IndentedTextWriter.Indent);
             var definition = definitionToCSharpCodeProcessor.ProcessDefinition(overload, MethodName, "public");
             IndentedTextWriter.WriteLine(definition);
+            if (!IN_NEXT_PR) IndentedTextWriter.WriteLine();
         }
 
         private void WriteTags()

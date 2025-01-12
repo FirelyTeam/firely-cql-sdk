@@ -26,6 +26,7 @@ public partial class AdultOutpatientEncounters_4_11_000 : ILibrary, ISingleton<A
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance];
     #endregion Library Members
 
+
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
     public CqlValueSet Annual_Wellness_Visit(CqlContext context) =>
@@ -134,7 +135,6 @@ public partial class AdultOutpatientEncounters_4_11_000 : ILibrary, ISingleton<A
 
         return w_;
     }
-
 
 
 }

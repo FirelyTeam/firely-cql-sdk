@@ -26,6 +26,7 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance];
     #endregion Library Members
 
+
     [CqlDeclaration("Delivery Procedures")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.59")]
     public CqlValueSet Delivery_Procedures(CqlContext context) =>
@@ -134,7 +135,6 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
 
         return c_;
     }
-
 
 
     public CqlInterval<CqlDateTime> hospitalizationWithEDOBTriageObservation(CqlContext context, Encounter TheEncounter)
@@ -407,7 +407,6 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
     }
 
 
-
     public CqlDateTime lastTimeOfDelivery(CqlContext context, Encounter TheEncounter)
     {
         CqlCode a_ = this.Date_and_time_of_obstetric_delivery(context);
@@ -557,7 +556,6 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
 
         return j_ as CqlDateTime;
     }
-
 
 
     public CqlDateTime lastEstimatedDeliveryDate(CqlContext context, Encounter TheEncounter)
@@ -713,7 +711,6 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
     }
 
 
-
     public int? calculatedGestationalAge(CqlContext context, Encounter TheEncounter)
     {
         CqlDateTime a_ = this.lastTimeOfDelivery(context, TheEncounter);
@@ -745,7 +742,6 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
 
         return d_;
     }
-
 
 
     public CqlQuantity lastEstimatedGestationalAge(CqlContext context, Encounter TheEncounter)
@@ -1012,7 +1008,6 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
 
         return i_ as CqlQuantity;
     }
-
 
 
     private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(

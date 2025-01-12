@@ -26,6 +26,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
     #endregion Library Members
 
+
     [CqlDeclaration("Lung Cancer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89")]
     public CqlValueSet Lung_Cancer(CqlContext context) =>
@@ -112,7 +113,6 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
         return d_;
     }
-
 
 
 }
