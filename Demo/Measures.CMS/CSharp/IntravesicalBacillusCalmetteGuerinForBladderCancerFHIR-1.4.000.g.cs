@@ -20,92 +20,112 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
 
     public static IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_000 Instance { get; } = new();
 
-    public string Name => "IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR";
-    public string Version => "1.4.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance];
+    #region ILibrary Members
+    string ILibrary.Name => "IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR";
+    string ILibrary.Version => "1.4.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance];
+    #endregion Library Members
 
     [CqlDeclaration("Active Tuberculosis for Urology Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.56")]
     public CqlValueSet Active_Tuberculosis_for_Urology_Care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.56", default);
 
+
     [CqlDeclaration("BCG Bacillus Calmette Guerin for Urology Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.52")]
     public CqlValueSet BCG_Bacillus_Calmette_Guerin_for_Urology_Care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.52", default);
+
 
     [CqlDeclaration("Bladder Cancer for Urology Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.45")]
     public CqlValueSet Bladder_Cancer_for_Urology_Care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.45", default);
 
+
     [CqlDeclaration("Chemotherapy Agents for Advanced Cancer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.60")]
     public CqlValueSet Chemotherapy_Agents_for_Advanced_Cancer(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.60", default);
+
 
     [CqlDeclaration("Cystectomy for Urology Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.55")]
     public CqlValueSet Cystectomy_for_Urology_Care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.55", default);
 
+
     [CqlDeclaration("HIV")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1003")]
     public CqlValueSet HIV(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.120.12.1003", default);
+
 
     [CqlDeclaration("Immunocompromised Conditions")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.1940")]
     public CqlValueSet Immunocompromised_Conditions(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.1940", default);
 
+
     [CqlDeclaration("Immunosuppressive Drugs for Urology Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.32")]
     public CqlValueSet Immunosuppressive_Drugs_for_Urology_Care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.32", default);
+
 
     [CqlDeclaration("Mixed histology urothelial cell carcinoma for Urology Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.39")]
     public CqlValueSet Mixed_histology_urothelial_cell_carcinoma_for_Urology_Care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.39", default);
 
+
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
     public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
+
 
     [CqlDeclaration("Unavailability of Bacillus Calmette Guerin for urology care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.44")]
     public CqlValueSet Unavailability_of_Bacillus_Calmette_Guerin_for_urology_care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.44", default);
 
+
     [CqlDeclaration("American Joint Committee on Cancer cT1 (qualifier value)")]
     public CqlCode American_Joint_Committee_on_Cancer_cT1__qualifier_value_(CqlContext context) =>
         new CqlCode("1228889001", "http://snomed.info/sct", default, default);
+
 
     [CqlDeclaration("American Joint Committee on Cancer cTa (qualifier value)")]
     public CqlCode American_Joint_Committee_on_Cancer_cTa__qualifier_value_(CqlContext context) =>
         new CqlCode("1228883000", "http://snomed.info/sct", default, default);
 
+
     [CqlDeclaration("American Joint Committee on Cancer cTis (qualifier value)")]
     public CqlCode American_Joint_Committee_on_Cancer_cTis__qualifier_value_(CqlContext context) =>
         new CqlCode("1228884006", "http://snomed.info/sct", default, default);
+
 
     [CqlDeclaration("Carcinoma in situ of bladder")]
     public CqlCode Carcinoma_in_situ_of_bladder(CqlContext context) =>
         new CqlCode("D09.0", "http://hl7.org/fhir/sid/icd-10-cm", default, default);
 
+
     [CqlDeclaration("Combined radiotherapy (procedure)")]
     public CqlCode Combined_radiotherapy__procedure_(CqlContext context) =>
         new CqlCode("169331000", "http://snomed.info/sct", default, default);
+
 
     [CqlDeclaration("Tumor staging (tumor staging)")]
     public CqlCode Tumor_staging__tumor_staging_(CqlContext context) =>
         new CqlCode("254292007", "http://snomed.info/sct", default, default);
 
+
     [CqlDeclaration("virtual")]
     public CqlCode @virtual(CqlContext context) =>
         new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
+
 
     [CqlDeclaration("SNOMEDCT")]
     public CqlCode[] SNOMEDCT(CqlContext context)
@@ -121,6 +141,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         return a_;
     }
 
+
     [CqlDeclaration("ICD10CM")]
     public CqlCode[] ICD10CM(CqlContext context)
     {
@@ -131,6 +152,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         return a_;
     }
 
+
     [CqlDeclaration("ActCode")]
     public CqlCode[] ActCode(CqlContext context)
     {
@@ -140,6 +162,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
 
         return a_;
     }
+
 
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
@@ -152,6 +175,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         return (CqlInterval<CqlDateTime>)d_;
     }
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -160,6 +184,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
 
         return b_;
     }
+
 
     public bool? isConfirmedActiveDiagnosis(CqlContext context, Condition Condition)
     {
@@ -173,6 +198,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
 
         return g_;
     }
+
 
     [CqlDeclaration("Bladder Cancer Diagnosis")]
     public IEnumerable<Condition> Bladder_Cancer_Diagnosis(CqlContext context)
@@ -195,6 +221,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
 
         return d_;
     }
+
 
     [CqlDeclaration("First Bladder Cancer Staging Procedure")]
     public Procedure First_Bladder_Cancer_Staging_Procedure(CqlContext context)
@@ -250,6 +277,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         return j_;
     }
 
+
     [CqlDeclaration("July 1 of Year Prior to the Measurement Period")]
     public CqlDateTime July_1_of_Year_Prior_to_the_Measurement_Period(CqlContext context)
     {
@@ -263,6 +291,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         return f_;
     }
 
+
     [CqlDeclaration("June 30 of the Measurement Period")]
     public CqlDateTime June_30_of_the_Measurement_Period(CqlContext context)
     {
@@ -274,6 +303,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
 
         return e_;
     }
+
 
     [CqlDeclaration("First Bladder Cancer Staging Procedure during 6 Months Prior to Measurement Period through the First 6 Months of Measurement Period")]
     public Procedure First_Bladder_Cancer_Staging_Procedure_during_6_Months_Prior_to_Measurement_Period_through_the_First_6_Months_of_Measurement_Period(CqlContext context)
@@ -299,6 +329,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
 
         return e_;
     }
+
 
     public IEnumerable<Procedure> getStagingProcedure(CqlContext context, Observation StagingObservation)
     {
@@ -330,6 +361,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
 
         return d_;
     }
+
 
     [CqlDeclaration("Has Most Recent Bladder Cancer Tumor Staging is Ta HG, Tis, T1")]
     public bool? Has_Most_Recent_Bladder_Cancer_Tumor_Staging_is_Ta_HG__Tis__T1(CqlContext context)
@@ -380,6 +412,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         return d_;
     }
 
+
     [CqlDeclaration("Has Qualifying Encounter")]
     public bool? Has_Qualifying_Encounter(CqlContext context)
     {
@@ -411,6 +444,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         return e_;
     }
 
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -421,6 +455,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         return c_;
     }
 
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -428,6 +463,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
 
         return a_;
     }
+
 
     [CqlDeclaration("Acute Tuberculosis Diagnosis")]
     public IEnumerable<Condition> Acute_Tuberculosis_Diagnosis(CqlContext context)
@@ -468,6 +504,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
 
         return f_;
     }
+
 
     [CqlDeclaration("Immunosuppressive Drugs")]
     public IEnumerable<MedicationRequest> Immunosuppressive_Drugs(CqlContext context)
@@ -618,6 +655,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         return i_;
     }
 
+
     [CqlDeclaration("Cystectomy Done")]
     public IEnumerable<Procedure> Cystectomy_Done(CqlContext context)
     {
@@ -676,6 +714,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         return f_;
     }
 
+
     [CqlDeclaration("Has Excluding HIV, Immunocompromised Conditions or Mixed Histology Before Staging")]
     public bool? Has_Excluding_HIV__Immunocompromised_Conditions_or_Mixed_Histology_Before_Staging(CqlContext context)
     {
@@ -724,6 +763,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
 
         return m_;
     }
+
 
     [CqlDeclaration("Has Excluding Chemotherapy or Radiotherapy Procedure Before Staging")]
     public bool? Has_Excluding_Chemotherapy_or_Radiotherapy_Procedure_Before_Staging(CqlContext context)
@@ -910,6 +950,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         return r_;
     }
 
+
     [CqlDeclaration("Denominator Exclusion")]
     public bool? Denominator_Exclusion(CqlContext context)
     {
@@ -929,11 +970,13 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         return l_;
     }
 
+
     [CqlDeclaration("Denominator Exception")]
     [CqlTag("commentedOut", "\"BCG Not Available Within 6 Months After Bladder Cancer Staging\"")]
     [CqlTag("commentedOutReason", "Negation issue related to https://github.com/cqframework/cql-execution/issues/296, which is tied to https://oncprojectracking.healthit.gov/support/browse/BONNIEMAT-1455. Due to this being the only logic in this population added 'false' as a placeholder.")]
     public bool? Denominator_Exception(CqlContext context) =>
         false;
+
 
     [CqlDeclaration("First BCG Administered")]
     public MedicationAdministration First_BCG_Administered(CqlContext context)
@@ -1017,6 +1060,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         return l_;
     }
 
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -1026,6 +1070,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         return b_;
     }
 
+
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -1033,6 +1078,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
 
         return a_;
     }
+
 
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
@@ -1042,6 +1088,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         return a_;
     }
 
+
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -1050,6 +1097,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
         return a_;
     }
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -1057,6 +1105,7 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
 
         return a_;
     }
+
 
     [CqlDeclaration("BCG Not Available Within 6 Months After Bladder Cancer Staging")]
     public IEnumerable<MedicationAdministration> BCG_Not_Available_Within_6_Months_After_Bladder_Cancer_Staging(CqlContext context)
@@ -1140,5 +1189,6 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
 
         return i_;
     }
+
 
 }

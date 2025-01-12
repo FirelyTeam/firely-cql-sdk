@@ -20,9 +20,11 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
 
     public static CqlNestedTupleTest_1_0_0 Instance { get; } = new();
 
-    public string Name => "CqlNestedTupleTest";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [];
+    #region ILibrary Members
+    string ILibrary.Name => "CqlNestedTupleTest";
+    string ILibrary.Version => "1.0.0";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
+    #endregion Library Members
 
     [CqlDeclaration("Result")]
     public (CqlTupleMetadata, string status, (CqlTupleMetadata, string result1, string result2)? result)? Result(CqlContext context)
@@ -32,6 +34,7 @@ public partial class CqlNestedTupleTest_1_0_0 : ILibrary, ISingleton<CqlNestedTu
 
         return b_;
     }
+
 
     private static CqlTupleMetadata CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY = new(
         [typeof(string), typeof((CqlTupleMetadata, string result1, string result2)?)],

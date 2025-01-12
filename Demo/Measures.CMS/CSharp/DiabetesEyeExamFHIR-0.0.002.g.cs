@@ -20,59 +20,71 @@ public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<Diabetes
 
     public static DiabetesEyeExamFHIR_0_0_002 Instance { get; } = new();
 
-    public string Name => "DiabetesEyeExamFHIR";
-    public string Version => "0.0.002";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance, PalliativeCare_1_11_000.Instance, AdvancedIllnessandFrailty_1_16_000.Instance];
+    #region ILibrary Members
+    string ILibrary.Name => "DiabetesEyeExamFHIR";
+    string ILibrary.Version => "0.0.002";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance, PalliativeCare_1_11_000.Instance, AdvancedIllnessandFrailty_1_16_000.Instance];
+    #endregion Library Members
 
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
     public CqlValueSet Annual_Wellness_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default);
 
+
     [CqlDeclaration("Diabetes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001")]
     public CqlValueSet Diabetes(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", default);
+
 
     [CqlDeclaration("Diabetic Retinopathy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327")]
     public CqlValueSet Diabetic_Retinopathy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.327", default);
 
+
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
     public CqlValueSet Home_Healthcare_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
+
 
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
     public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
+
     [CqlDeclaration("Ophthalmological Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285")]
     public CqlValueSet Ophthalmological_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", default);
+
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
     public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
+
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
     public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
+
 
     [CqlDeclaration("Retinal or Dilated Eye Exam")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.115.12.1088")]
     public CqlValueSet Retinal_or_Dilated_Eye_Exam(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.115.12.1088", default);
 
+
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
     public CqlValueSet Telephone_Visits(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
+
 
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
@@ -85,6 +97,7 @@ public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<Diabetes
         return (CqlInterval<CqlDateTime>)d_;
     }
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -93,6 +106,7 @@ public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<Diabetes
 
         return b_;
     }
+
 
     [CqlDeclaration("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
@@ -133,6 +147,7 @@ public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<Diabetes
         return w_;
     }
 
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -166,6 +181,7 @@ public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<Diabetes
         return s_;
     }
 
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -173,6 +189,7 @@ public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<Diabetes
 
         return a_;
     }
+
 
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
@@ -187,6 +204,7 @@ public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<Diabetes
 
         return g_;
     }
+
 
     [CqlDeclaration("Diabetic Retinopathy Overlapping Measurement Period")]
     public bool? Diabetic_Retinopathy_Overlapping_Measurement_Period(CqlContext context)
@@ -206,6 +224,7 @@ public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<Diabetes
 
         return e_;
     }
+
 
     [CqlDeclaration("Retinal Exam in Measurement Period")]
     public IEnumerable<Observation> Retinal_Exam_in_Measurement_Period(CqlContext context)
@@ -227,6 +246,7 @@ public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<Diabetes
 
         return e_;
     }
+
 
     [CqlDeclaration("Retinal Exam in Measurement Period or Year Prior")]
     public IEnumerable<Observation> Retinal_Exam_in_Measurement_Period_or_Year_Prior(CqlContext context)
@@ -254,6 +274,7 @@ public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<Diabetes
         return e_;
     }
 
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -270,6 +291,7 @@ public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<Diabetes
         return j_;
     }
 
+
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -277,6 +299,7 @@ public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<Diabetes
 
         return a_;
     }
+
 
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
@@ -286,6 +309,7 @@ public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<Diabetes
         return a_;
     }
 
+
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -294,6 +318,7 @@ public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<Diabetes
         return a_;
     }
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -301,5 +326,6 @@ public partial class DiabetesEyeExamFHIR_0_0_002 : ILibrary, ISingleton<Diabetes
 
         return a_;
     }
+
 
 }

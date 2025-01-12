@@ -197,34 +197,19 @@ internal class CSharpCodeGenerator
 
         private void WriteLibraryInterfaceImplementation()
         {
-            if (IN_NEXT_PR)
-            {
-                IndentedTextWriter.WriteLine("#region ILibrary Implementation");
-                IndentedTextWriter.WriteLine();
-                IndentedTextWriter.WriteLine($"string ILibrary.Name => {LibraryVersionedIdentifier.id.QuoteString()};");
-                IndentedTextWriter.WriteLine($"string ILibrary.Version => {LibraryVersionedIdentifier.version.QuoteString()};");
-                var dependencies =
-                    LibrarySetWriter.LibrarySet
-                                    .GetLibraryDependencies(LibraryName, throwError: true)
-                                    .Select(dep => VariableNameGenerator.NormalizeIdentifier(dep.GetVersionedIdentifier()!))
-                                    .Select(typeName => $"{typeName}.Instance");
-                IndentedTextWriter.WriteLine($"IReadOnlyList<ILibrary> ILibrary.Dependencies => [{string.Join(", ", dependencies)}];");
-                IndentedTextWriter.WriteLine();
-                IndentedTextWriter.WriteLine("#endregion Library Members");
-                IndentedTextWriter.WriteLine();
-            }
-            else
-            {
-                IndentedTextWriter.WriteLine($"public string Name => {LibraryVersionedIdentifier.id.QuoteString()};");
-                IndentedTextWriter.WriteLine($"public string Version => {LibraryVersionedIdentifier.version.QuoteString()};");
-                var dependencies =
-                    LibrarySetWriter.LibrarySet
-                                    .GetLibraryDependencies(LibraryName, throwError: true)
-                                    .Select(dep => VariableNameGenerator.NormalizeIdentifier(dep.GetVersionedIdentifier()!))
-                                    .Select(typeName => $"{typeName}.Instance");
-                IndentedTextWriter.WriteLine($"public ILibrary[] Dependencies => [{string.Join(", ", dependencies)}];");
-                IndentedTextWriter.WriteLine();
-            }
+            IndentedTextWriter.WriteLine(IN_NEXT_PR ? "#region ILibrary Implementation" : "#region ILibrary Members");
+            if (IN_NEXT_PR) IndentedTextWriter.WriteLine();
+            IndentedTextWriter.WriteLine($"string ILibrary.Name => {LibraryVersionedIdentifier.id.QuoteString()};");
+            IndentedTextWriter.WriteLine($"string ILibrary.Version => {LibraryVersionedIdentifier.version.QuoteString()};");
+            var dependencies =
+                LibrarySetWriter.LibrarySet
+                                .GetLibraryDependencies(LibraryName, throwError: true)
+                                .Select(dep => VariableNameGenerator.NormalizeIdentifier(dep.GetVersionedIdentifier()!))
+                                .Select(typeName => $"{typeName}.Instance");
+            IndentedTextWriter.WriteLine($"IReadOnlyList<ILibrary> ILibrary.Dependencies => [{string.Join(", ", dependencies)}];");
+            if (IN_NEXT_PR) IndentedTextWriter.WriteLine();
+            IndentedTextWriter.WriteLine(IN_NEXT_PR ? "#endregion Library Implementation" : "#endregion Library Members");
+            IndentedTextWriter.WriteLine();
         }
 
         private void WriteUsings()
@@ -266,6 +251,7 @@ internal class CSharpCodeGenerator
                     definitions.TryGetTags(libraryName, definition, signature, out var tags);
                     var methodWriter = CreateMethodWriter(definition, expression, tags);
                     methodWriter.WriteMethod();
+                    if (!IN_NEXT_PR) IndentedTextWriter.WriteLine();
                 }
             }
 

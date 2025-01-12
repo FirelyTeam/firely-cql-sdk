@@ -20,69 +20,83 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
 
     public static AntidepressantMedicationManagementFHIR_0_1_001 Instance { get; } = new();
 
-    public string Name => "AntidepressantMedicationManagementFHIR";
-    public string Version => "0.1.001";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, Status_1_8_000.Instance, QICoreCommon_2_1_000.Instance, CQMCommon_2_2_000.Instance];
+    #region ILibrary Members
+    string ILibrary.Name => "AntidepressantMedicationManagementFHIR";
+    string ILibrary.Version => "0.1.001";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, Status_1_8_000.Instance, QICoreCommon_2_1_000.Instance, CQMCommon_2_2_000.Instance];
+    #endregion Library Members
 
     [CqlDeclaration("Annual Wellness Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240")]
     public CqlValueSet Annual_Wellness_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default);
 
+
     [CqlDeclaration("Antidepressant Medication")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1213")]
     public CqlValueSet Antidepressant_Medication(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1213", default);
+
 
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
     public CqlValueSet Home_Healthcare_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
 
+
     [CqlDeclaration("Major Depression")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1007")]
     public CqlValueSet Major_Depression(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1007", default);
+
 
     [CqlDeclaration("Nursing Facility Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012")]
     public CqlValueSet Nursing_Facility_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
+
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
     public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
+
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
     public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
+
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
     public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
+
 
     [CqlDeclaration("Psych Visit Diagnostic Evaluation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492")]
     public CqlValueSet Psych_Visit_Diagnostic_Evaluation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1492", default);
 
+
     [CqlDeclaration("Psych Visit Psychotherapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496")]
     public CqlValueSet Psych_Visit_Psychotherapy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1496", default);
+
 
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
     public CqlValueSet Telephone_Visits(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
+
     [CqlDeclaration("Virtual Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
     public CqlValueSet Virtual_Encounter(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
+
 
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
@@ -95,6 +109,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
         return (CqlInterval<CqlDateTime>)d_;
     }
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -103,6 +118,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
 
         return b_;
     }
+
 
     [CqlDeclaration("May 1 of the Year Prior to the Measurement Period")]
     public CqlDateTime May_1_of_the_Year_Prior_to_the_Measurement_Period(CqlContext context)
@@ -117,6 +133,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
         return f_;
     }
 
+
     [CqlDeclaration("April 30 of the Measurement Period")]
     public CqlDateTime April_30_of_the_Measurement_Period(CqlContext context)
     {
@@ -129,6 +146,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
         return e_;
     }
 
+
     [CqlDeclaration("Intake Period")]
     public CqlInterval<CqlDateTime> Intake_Period(CqlContext context)
     {
@@ -138,6 +156,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
 
         return c_;
     }
+
 
     [CqlDeclaration("Earliest Antidepressant Dispensed During Intake Period")]
     public CqlDate Earliest_Antidepressant_Dispensed_During_Intake_Period(CqlContext context)
@@ -183,6 +202,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
         return o_;
     }
 
+
     [CqlDeclaration("IPSD")]
     public CqlDate IPSD(CqlContext context)
     {
@@ -190,6 +210,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
 
         return a_;
     }
+
 
     [CqlDeclaration("Has IPSD and Major Depression Diagnosis")]
     public bool? Has_IPSD_and_Major_Depression_Diagnosis(CqlContext context)
@@ -219,6 +240,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
 
         return e_;
     }
+
 
     [CqlDeclaration("Qualifying Encounters")]
     public IEnumerable<Encounter> Qualifying_Encounters(CqlContext context)
@@ -276,6 +298,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
         return af_;
     }
 
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -297,6 +320,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
         return n_;
     }
 
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -304,6 +328,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
 
         return a_;
     }
+
 
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
@@ -342,6 +367,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
         return k_;
     }
 
+
     [CqlDeclaration("Antidepressant Medication Period Between IPSD and 114 Days After IPSD")]
     public IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_114_Days_After_IPSD(CqlContext context)
     {
@@ -367,6 +393,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
         return i_;
     }
 
+
     [CqlDeclaration("Cumulative Medication Duration Greater Than or Equal to 84 Days")]
     public bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_84_Days(CqlContext context)
     {
@@ -377,6 +404,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
         return c_;
     }
 
+
     [CqlDeclaration("Numerator 1")]
     public bool? Numerator_1(CqlContext context)
     {
@@ -384,6 +412,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
 
         return a_;
     }
+
 
     [CqlDeclaration("Antidepressant Medication Period Between IPSD and 231 Days After IPSD")]
     public IEnumerable<CqlInterval<CqlDate>> Antidepressant_Medication_Period_Between_IPSD_and_231_Days_After_IPSD(CqlContext context)
@@ -410,6 +439,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
         return i_;
     }
 
+
     [CqlDeclaration("Cumulative Medication Duration Greater Than or Equal to 180 Days")]
     public bool? Cumulative_Medication_Duration_Greater_Than_or_Equal_to_180_Days(CqlContext context)
     {
@@ -420,6 +450,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
         return c_;
     }
 
+
     [CqlDeclaration("Numerator 2")]
     public bool? Numerator_2(CqlContext context)
     {
@@ -427,6 +458,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
 
         return a_;
     }
+
 
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
@@ -436,6 +468,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
         return a_;
     }
 
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -443,6 +476,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
 
         return a_;
     }
+
 
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
@@ -452,6 +486,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
         return a_;
     }
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -459,6 +494,7 @@ public partial class AntidepressantMedicationManagementFHIR_0_1_001 : ILibrary, 
 
         return a_;
     }
+
 
     private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
         [typeof(CqlDate)],

@@ -20,23 +20,28 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
     public static MultipleResourcesExample_0_0_1 Instance { get; } = new();
 
-    public string Name => "MultipleResourcesExample";
-    public string Version => "0.0.1";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
+    #region ILibrary Members
+    string ILibrary.Name => "MultipleResourcesExample";
+    string ILibrary.Version => "0.0.1";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
+    #endregion Library Members
 
     [CqlDeclaration("Lung Cancer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89")]
     public CqlValueSet Lung_Cancer(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1116.89", default);
 
+
     [CqlDeclaration("Condition Clinical Status")]
     [CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical")]
     public CqlValueSet Condition_Clinical_Status(CqlContext context) =>
         new CqlValueSet("http://utah.edu/fhir/lcs-cds/ValueSet/conditionclinical", default);
 
+
     [CqlDeclaration("Tobacco Smoking Status")]
     public CqlCode Tobacco_Smoking_Status(CqlContext context) =>
         new CqlCode("72166-2", "http://loinc.org", default, default);
+
 
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC(CqlContext context)
@@ -48,6 +53,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
         return a_;
     }
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -56,6 +62,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
         return b_;
     }
+
 
     [CqlDeclaration("Smoking status observation")]
     public IEnumerable<Observation> Smoking_status_observation(CqlContext context)
@@ -80,6 +87,7 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
         return e_;
     }
 
+
     [CqlDeclaration("Lung cancer diagnosis")]
     public IEnumerable<Condition> Lung_cancer_diagnosis(CqlContext context)
     {
@@ -98,5 +106,6 @@ public partial class MultipleResourcesExample_0_0_1 : ILibrary, ISingleton<Multi
 
         return d_;
     }
+
 
 }

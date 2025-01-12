@@ -20,5 +20,5 @@ public interface ILibrary
     /// <summary>
     /// Gets the dependencies of the library.
     /// </summary>
-    ILibrary[] Dependencies { get; }
+    IReadOnlyList<ILibrary> Dependencies { get; } // TODO: Must become IReadOnlyCollection<T>
 }

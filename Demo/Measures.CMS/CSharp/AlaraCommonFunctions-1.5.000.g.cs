@@ -20,89 +20,111 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
 
     public static AlaraCommonFunctions_1_5_000 Instance { get; } = new();
 
-    public string Name => "AlaraCommonFunctions";
-    public string Version => "1.5.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance];
+    #region ILibrary Members
+    string ILibrary.Name => "AlaraCommonFunctions";
+    string ILibrary.Version => "1.5.000";
+    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance];
+    #endregion Library Members
 
     [CqlDeclaration("Abdomen and Pelvis High Dose")]
     public CqlCode Abdomen_and_Pelvis_High_Dose(CqlContext context) =>
         new CqlCode("LA31754-7", "http://loinc.org", default, default);
 
+
     [CqlDeclaration("Abdomen and Pelvis Low Dose")]
     public CqlCode Abdomen_and_Pelvis_Low_Dose(CqlContext context) =>
         new CqlCode("LA31752-1", "http://loinc.org", default, default);
+
 
     [CqlDeclaration("Abdomen and Pelvis Routine Dose")]
     public CqlCode Abdomen_and_Pelvis_Routine_Dose(CqlContext context) =>
         new CqlCode("LA31753-9", "http://loinc.org", default, default);
 
+
     [CqlDeclaration("Calculated CT global noise")]
     public CqlCode Calculated_CT_global_noise(CqlContext context) =>
         new CqlCode("96912-1", "http://loinc.org", default, default);
+
 
     [CqlDeclaration("Calculated CT size-adjusted dose")]
     public CqlCode Calculated_CT_size_adjusted_dose(CqlContext context) =>
         new CqlCode("96913-9", "http://loinc.org", default, default);
 
+
     [CqlDeclaration("Cardiac High Dose or Chest High Dose")]
     public CqlCode Cardiac_High_Dose_or_Chest_High_Dose(CqlContext context) =>
         new CqlCode("LA31761-2", "http://loinc.org", default, default);
+
 
     [CqlDeclaration("Cardiac Low Dose")]
     public CqlCode Cardiac_Low_Dose(CqlContext context) =>
         new CqlCode("LA31755-4", "http://loinc.org", default, default);
 
+
     [CqlDeclaration("Cardiac Routine Dose")]
     public CqlCode Cardiac_Routine_Dose(CqlContext context) =>
         new CqlCode("LA31756-2", "http://loinc.org", default, default);
+
 
     [CqlDeclaration("Chest Low Dose")]
     public CqlCode Chest_Low_Dose(CqlContext context) =>
         new CqlCode("LA31758-8", "http://loinc.org", default, default);
 
+
     [CqlDeclaration("Chest Routine Dose")]
     public CqlCode Chest_Routine_Dose(CqlContext context) =>
         new CqlCode("LA31759-6", "http://loinc.org", default, default);
+
 
     [CqlDeclaration("Extremity")]
     public CqlCode Extremity(CqlContext context) =>
         new CqlCode("LA31765-3", "http://loinc.org", default, default);
 
+
     [CqlDeclaration("Head High Dose")]
     public CqlCode Head_High_Dose(CqlContext context) =>
         new CqlCode("LA31764-6", "http://loinc.org", default, default);
+
 
     [CqlDeclaration("Head Low Dose")]
     public CqlCode Head_Low_Dose(CqlContext context) =>
         new CqlCode("LA31762-0", "http://loinc.org", default, default);
 
+
     [CqlDeclaration("Head Routine Dose")]
     public CqlCode Head_Routine_Dose(CqlContext context) =>
         new CqlCode("LA31763-8", "http://loinc.org", default, default);
+
 
     [CqlDeclaration("Neck or Cervical Spine")]
     public CqlCode Neck_or_Cervical_Spine(CqlContext context) =>
         new CqlCode("LA31766-1", "http://loinc.org", default, default);
 
+
     [CqlDeclaration("Simultaneous Chest and Abdomen and Pelvis")]
     public CqlCode Simultaneous_Chest_and_Abdomen_and_Pelvis(CqlContext context) =>
         new CqlCode("LA31768-7", "http://loinc.org", default, default);
+
 
     [CqlDeclaration("Simultaneous Head and Neck High Dose")]
     public CqlCode Simultaneous_Head_and_Neck_High_Dose(CqlContext context) =>
         new CqlCode("LA31770-3", "http://loinc.org", default, default);
 
+
     [CqlDeclaration("Simultaneous Head and Neck Routine Dose")]
     public CqlCode Simultaneous_Head_and_Neck_Routine_Dose(CqlContext context) =>
         new CqlCode("LA31769-5", "http://loinc.org", default, default);
+
 
     [CqlDeclaration("Simultaneous Thoracic and Lumbar Spine")]
     public CqlCode Simultaneous_Thoracic_and_Lumbar_Spine(CqlContext context) =>
         new CqlCode("LA31851-1", "http://loinc.org", default, default);
 
+
     [CqlDeclaration("Thoracic or Lumbar Spine")]
     public CqlCode Thoracic_or_Lumbar_Spine(CqlContext context) =>
         new CqlCode("LA31767-9", "http://loinc.org", default, default);
+
 
     [CqlDeclaration("LOINC")]
     public CqlCode[] LOINC(CqlContext context)
@@ -133,6 +155,7 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
         return a_;
     }
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -141,6 +164,7 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
 
         return b_;
     }
+
 
     public decimal? Global_Noise_Value(CqlContext context, Observation Obs)
     {
@@ -176,6 +200,7 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
         return g_;
     }
 
+
     public decimal? Size_Adjusted_Value(CqlContext context, Observation Obs)
     {
         List<Observation.ComponentComponent> a_ = Obs?.Component;
@@ -210,6 +235,7 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
         return g_;
     }
 
+
     public bool? Qualifies(CqlContext context, Observation Obs, CqlCode code, decimal? noiseThreshold, decimal? sizeDoseThreshold)
     {
         DataType a_ = Obs?.Value;
@@ -225,6 +251,7 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
 
         return j_;
     }
+
 
     public bool? CT_Scan_Qualifies(CqlContext context, Observation Obs)
     {
@@ -307,5 +334,6 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
 
         return ck_;
     }
+
 
 }
