@@ -20,7 +20,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
 
     public static AppropriateTreatmentforSTEMIFHIR_1_2_000 Instance { get; } = new();
 
-    #region ILibrary Members
+    #region Library Members
     string ILibrary.Name => "AppropriateTreatmentforSTEMIFHIR";
     string ILibrary.Version => "1.2.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance];
@@ -32,10 +32,12 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4036", default);
 
 
+
     [CqlDeclaration("Active Peptic Ulcer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4031")]
     public CqlValueSet Active_Peptic_Ulcer(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4031", default);
+
 
 
     [CqlDeclaration("Thrombolytics Adverse Event")]
@@ -44,10 +46,12 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.6", default);
 
 
+
     [CqlDeclaration("Allergy to thrombolytics")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.5")]
     public CqlValueSet Allergy_to_thrombolytics(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.5", default);
+
 
 
     [CqlDeclaration("Oral Anticoagulant Medications")]
@@ -56,10 +60,12 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4045", default);
 
 
+
     [CqlDeclaration("Aortic Dissection or Ruptured Aortic Aneurysm")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4028")]
     public CqlValueSet Aortic_Dissection_or_Ruptured_Aortic_Aneurysm(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4028", default);
+
 
 
     [CqlDeclaration("birth date")]
@@ -68,10 +74,12 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.560.100.4", default);
 
 
+
     [CqlDeclaration("Cardiopulmonary Arrest")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4048")]
     public CqlValueSet Cardiopulmonary_Arrest(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4048", default);
+
 
 
     [CqlDeclaration("Cerebral Vascular Lesion")]
@@ -80,10 +88,12 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4025", default);
 
 
+
     [CqlDeclaration("Closed Head and Facial Trauma")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4026")]
     public CqlValueSet Closed_Head_and_Facial_Trauma(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4026", default);
+
 
 
     [CqlDeclaration("Dementia and Related Intracranial Pathologies")]
@@ -92,10 +102,12 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4043", default);
 
 
+
     [CqlDeclaration("Discharge To Acute Care Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87")]
     public CqlValueSet Discharge_To_Acute_Care_Facility(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", default);
+
 
 
     [CqlDeclaration("Emergency Department Evaluation and Management Visit")]
@@ -104,10 +116,12 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010", default);
 
 
+
     [CqlDeclaration("Emergency Department Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292")]
     public CqlValueSet Emergency_Department_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
+
 
 
     [CqlDeclaration("Endotracheal Intubation")]
@@ -116,10 +130,12 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.69", default);
 
 
+
     [CqlDeclaration("Fibrinolytic Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4020")]
     public CqlValueSet Fibrinolytic_Therapy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4020", default);
+
 
 
     [CqlDeclaration("Intracranial or Intraspinal surgery")]
@@ -128,10 +144,12 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.2", default);
 
 
+
     [CqlDeclaration("Ischemic Stroke")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247")]
     public CqlValueSet Ischemic_Stroke(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247", default);
+
 
 
     [CqlDeclaration("Major Surgical Procedure")]
@@ -140,10 +158,12 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4056", default);
 
 
+
     [CqlDeclaration("Malignant Intracranial Neoplasm Group")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.3")]
     public CqlValueSet Malignant_Intracranial_Neoplasm_Group(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.3", default);
+
 
 
     [CqlDeclaration("Insertion or Replacement of Mechanical Circulatory Assist Device")]
@@ -152,10 +172,12 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4052", default);
 
 
+
     [CqlDeclaration("Neurologic impairment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.114.12.1012")]
     public CqlValueSet Neurologic_impairment(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.114.12.1012", default);
+
 
 
     [CqlDeclaration("Patient Expired")]
@@ -164,10 +186,12 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", default);
 
 
+
     [CqlDeclaration("Percutaneous Coronary Intervention")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.2000.5")]
     public CqlValueSet Percutaneous_Coronary_Intervention(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.2000.5", default);
+
 
 
     [CqlDeclaration("Pregnant State")]
@@ -176,10 +200,12 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4055", default);
 
 
+
     [CqlDeclaration("STEMI")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4017")]
     public CqlValueSet STEMI(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.3157.4017", default);
+
 
 
     [CqlDeclaration("Thrombolytic medications")]
@@ -188,9 +214,11 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1170.4", default);
 
 
+
     [CqlDeclaration("Birthdate")]
     public CqlCode Birthdate(CqlContext context) =>
         new CqlCode("21112-8", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("Emergency Department")]
@@ -198,9 +226,11 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
         new CqlCode("1108-0", "https://www.cdc.gov/nhsn/cdaportal/terminology/codesystem/hsloc.html", default, default);
 
 
+
     [CqlDeclaration("Patient transfer (procedure)")]
     public CqlCode Patient_transfer__procedure_(CqlContext context) =>
         new CqlCode("107724000", "http://snomed.info/sct", default, default);
+
 
 
     [CqlDeclaration("Streptokinase adverse reaction (disorder)")]
@@ -208,14 +238,17 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
         new CqlCode("293571007", "http://snomed.info/sct", default, default);
 
 
+
     [CqlDeclaration("EMER")]
     public CqlCode EMER(CqlContext context) =>
         new CqlCode("EMER", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
 
+
     [CqlDeclaration("Status post administration of tPA (rtPA) in a different facility within the last 24 hours prior to admission to current facility")]
     public CqlCode Status_post_administration_of_tPA__rtPA__in_a_different_facility_within_the_last_24_hours_prior_to_admission_to_current_facility(CqlContext context) =>
         new CqlCode("Z92.82", "http://hl7.org/fhir/sid/icd-10-cm", default, default);
+
 
 
     [CqlDeclaration("LOINC")]
@@ -229,6 +262,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("HSLOC")]
     public CqlCode[] HSLOC(CqlContext context)
     {
@@ -238,6 +272,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SNOMEDCT")]
@@ -252,6 +287,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("ActCode")]
     public CqlCode[] ActCode(CqlContext context)
     {
@@ -263,6 +299,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("ICD10CM")]
     public CqlCode[] ICD10CM(CqlContext context)
     {
@@ -272,6 +309,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -286,6 +324,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -294,6 +333,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
 
         return b_;
     }
+
 
 
     [CqlDeclaration("ED Encounter During MP")]
@@ -325,6 +365,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
 
         return d_;
     }
+
 
 
     [CqlDeclaration("ED Encounter with Encounter Diagnosis of STEMI")]
@@ -365,6 +406,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("ED Encounter with Diagnosis of STEMI")]
     public IEnumerable<Encounter> ED_Encounter_with_Diagnosis_of_STEMI(CqlContext context)
     {
@@ -402,6 +444,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("ED Encounter with STEMI Diagnosis")]
     public IEnumerable<Encounter> ED_Encounter_with_STEMI_Diagnosis(CqlContext context)
     {
@@ -411,6 +454,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Initial Population")]
@@ -438,6 +482,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context)
     {
@@ -445,6 +490,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Allergy or Intolerance to Thrombolytic Medications Overlaps ED Encounter")]
@@ -485,6 +531,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Adverse Effect to Thrombolytic Medications Before End of ED Encounter")]
     public IEnumerable<Encounter> Adverse_Effect_to_Thrombolytic_Medications_Before_End_of_ED_Encounter(CqlContext context)
     {
@@ -520,6 +567,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Active Exclusion Diagnosis at Start of ED Encounter")]
@@ -565,6 +613,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Active Oral Anticoagulant Medication at the Start of ED Encounter")]
@@ -620,6 +669,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Exclusion Diagnosis During ED Encounter or Within 24 Hours of ED Encounter Start")]
     public IEnumerable<Encounter> Exclusion_Diagnosis_During_ED_Encounter_or_Within_24_Hours_of_ED_Encounter_Start(CqlContext context)
     {
@@ -671,6 +721,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Major Surgical Procedure 21 Days or Less Before Start of or Starts During ED Encounter")]
     public IEnumerable<Encounter> Major_Surgical_Procedure_21_Days_or_Less_Before_Start_of_or_Starts_During_ED_Encounter(CqlContext context)
     {
@@ -717,6 +768,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Intubation or Mechanical Circulatory Assist Procedure During ED Encounter or Within 24 Hours of ED Encounter Start")]
@@ -776,6 +828,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Active Exclusion Diagnosis Within 90 Days Before or At the Start of ED Encounter")]
     public IEnumerable<Encounter> Active_Exclusion_Diagnosis_Within_90_Days_Before_or_At_the_Start_of_ED_Encounter(CqlContext context)
     {
@@ -820,6 +873,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Intracranial or Intraspinal Procedure 90 Days or Less Before Start of ED Encounter")]
@@ -870,6 +924,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("ED Encounter with Discharge Disposition as Patient Expired")]
     public IEnumerable<Encounter> ED_Encounter_with_Discharge_Disposition_as_Patient_Expired(CqlContext context)
     {
@@ -888,6 +943,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
 
         return c_;
     }
+
 
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -915,6 +971,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
 
         return s_;
     }
+
 
 
     [CqlDeclaration("Received tPA in Another Facility within 24 hours Prior to Admission")]
@@ -949,6 +1006,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Denominator Exceptions")]
     public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context)
     {
@@ -956,6 +1014,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
 
         return a_;
     }
+
 
 
     public CqlDateTime currentemergencyDepartmentArrivalTime(CqlContext context, Encounter EDEncounter)
@@ -986,6 +1045,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
 
         return g_;
     }
+
 
 
     [CqlDeclaration("Fibrinolytic Therapy within 30 Minutes of Arrival")]
@@ -1032,6 +1092,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("PCI within 90 Minutes of Arrival")]
     public IEnumerable<Encounter> PCI_within_90_Minutes_of_Arrival(CqlContext context)
     {
@@ -1074,6 +1135,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("ED Departure with Transfer to Acute Care Facility Within 45 Minutes of Arrival")]
     public IEnumerable<Encounter> ED_Departure_with_Transfer_to_Acute_Care_Facility_Within_45_Minutes_of_Arrival(CqlContext context)
     {
@@ -1110,6 +1172,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context)
     {
@@ -1123,6 +1186,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -1130,6 +1194,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Payer")]
@@ -1141,6 +1206,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -1150,6 +1216,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -1157,6 +1224,7 @@ public partial class AppropriateTreatmentforSTEMIFHIR_1_2_000 : ILibrary, ISingl
 
         return a_;
     }
+
 
 
 }

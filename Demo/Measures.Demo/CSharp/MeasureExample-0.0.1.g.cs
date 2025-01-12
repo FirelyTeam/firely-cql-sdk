@@ -20,7 +20,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
 
     public static MeasureExample_0_0_1 Instance { get; } = new();
 
-    #region ILibrary Members
+    #region Library Members
     string ILibrary.Name => "MeasureExample";
     string ILibrary.Version => "0.0.1";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
@@ -36,6 +36,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     }
 
 
+
     [CqlDeclaration("Initial population")]
     [CqlTag("measure", "Measure Resource Example")]
     [CqlTag("year", "2024")]
@@ -48,12 +49,14 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
         true;
 
 
+
     [CqlDeclaration("Exclusion")]
     [CqlTag("group", "1")]
     [CqlTag("group", "2")]
     [CqlTag("population", "denominator-exclusion")]
     public bool? Exclusion(CqlContext context) =>
         false;
+
 
 
     [CqlDeclaration("Denominator")]
@@ -71,6 +74,7 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     }
 
 
+
     [CqlDeclaration("Numerator 1")]
     [CqlTag("group", "1")]
     [CqlTag("population", "numerator")]
@@ -78,11 +82,13 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
         true;
 
 
+
     [CqlDeclaration("Numerator 2")]
     [CqlTag("group", "2")]
     [CqlTag("population", "numerator")]
     public bool? Numerator_2(CqlContext context) =>
         false;
+
 
 
 }

@@ -20,7 +20,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
 
     public static GlobalMalnutritionCompositeFHIR_0_2_000 Instance { get; } = new();
 
-    #region ILibrary Members
+    #region Library Members
     string ILibrary.Name => "GlobalMalnutritionCompositeFHIR";
     string ILibrary.Version => "0.2.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, CQMCommon_2_2_000.Instance, Status_1_8_000.Instance];
@@ -32,10 +32,12 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
 
+
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
     public CqlValueSet Encounter_Inpatient(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
+
 
 
     [CqlDeclaration("Ethnicity")]
@@ -44,10 +46,12 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", default);
 
 
+
     [CqlDeclaration("Hospital Dietitian Referral")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.91")]
     public CqlValueSet Hospital_Dietitian_Referral(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.91", default);
+
 
 
     [CqlDeclaration("Malnutrition Diagnosis")]
@@ -56,10 +60,12 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.55", default);
 
 
+
     [CqlDeclaration("Malnutrition Risk Screening")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.92")]
     public CqlValueSet Malnutrition_Risk_Screening(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.92", default);
+
 
 
     [CqlDeclaration("Malnutrition Screening Finding of At Risk Result")]
@@ -68,10 +74,12 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.89", default);
 
 
+
     [CqlDeclaration("Malnutrition Screening Finding of Not At Risk Result")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.34")]
     public CqlValueSet Malnutrition_Screening_Finding_of_Not_At_Risk_Result(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.34", default);
+
 
 
     [CqlDeclaration("Nutrition Assessment")]
@@ -80,10 +88,12 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.21", default);
 
 
+
     [CqlDeclaration("Nutrition Assessment Status Finding of Moderately Malnourished")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.47")]
     public CqlValueSet Nutrition_Assessment_Status_Finding_of_Moderately_Malnourished(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.47", default);
+
 
 
     [CqlDeclaration("Nutrition Assessment Status Finding of Well Nourished or Not Malnourished or Mildly Malnourished")]
@@ -92,10 +102,12 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.96", default);
 
 
+
     [CqlDeclaration("Nutrition Assessment Status Finding of Severely Malnourished")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.43")]
     public CqlValueSet Nutrition_Assessment_Status_Finding_of_Severely_Malnourished(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.43", default);
+
 
 
     [CqlDeclaration("Nutrition Care Plan")]
@@ -104,10 +116,12 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1095.93", default);
 
 
+
     [CqlDeclaration("Observation Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143")]
     public CqlValueSet Observation_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1111.143", default);
+
 
 
     [CqlDeclaration("ONC Administrative Sex")]
@@ -116,10 +130,12 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", default);
 
 
+
     [CqlDeclaration("Payer Type")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591")]
     public CqlValueSet Payer_Type(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", default);
+
 
 
     [CqlDeclaration("Race")]
@@ -128,9 +144,11 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", default);
 
 
+
     [CqlDeclaration("Birth date")]
     public CqlCode Birth_date(CqlContext context) =>
         new CqlCode("21112-8", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("LOINC")]
@@ -144,6 +162,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("SNOMEDCT")]
     public CqlCode[] SNOMEDCT(CqlContext context)
     {
@@ -154,6 +173,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("ICD10CM")]
     public CqlCode[] ICD10CM(CqlContext context)
     {
@@ -162,6 +182,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -176,6 +197,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -184,6 +206,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
 
         return b_;
     }
+
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -195,6 +218,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("SDE Payer Type")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer_Type(CqlContext context)
     {
@@ -202,6 +226,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Race")]
@@ -213,6 +238,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -220,6 +246,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Initial Population")]
@@ -264,6 +291,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Measure Population")]
     public IEnumerable<Encounter> Measure_Population(CqlContext context)
     {
@@ -271,6 +299,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Encounter with Hospital Dietitian Referral")]
@@ -320,6 +349,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
 
         return k_;
     }
+
 
 
     [CqlDeclaration("Encounter with Malnutrition Risk Screening")]
@@ -381,6 +411,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Encounter with Malnutrition Risk Screening or with Hospital Dietitian Referral")]
     public IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral(CqlContext context)
     {
@@ -403,6 +434,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
 
         return f_;
     }
+
 
 
     [CqlDeclaration("Encounter with Malnutrition Risk Screening Not At Risk")]
@@ -460,6 +492,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Encounter with Malnutrition Not At Risk Screening and without Hospital Dietitian Referral")]
     public IEnumerable<Encounter> Encounter_with_Malnutrition_Not_At_Risk_Screening_and_without_Hospital_Dietitian_Referral(CqlContext context)
     {
@@ -483,6 +516,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
 
         return f_;
     }
+
 
 
     [CqlDeclaration("Encounter with Malnutrition Risk Screening At Risk")]
@@ -540,6 +574,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Encounter with Malnutrition Risk Screening At Risk or with Hospital Dietitian Referral")]
     public IEnumerable<Encounter> Encounter_with_Malnutrition_Risk_Screening_At_Risk_or_with_Hospital_Dietitian_Referral(CqlContext context)
     {
@@ -562,6 +597,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
 
         return f_;
     }
+
 
 
     [CqlDeclaration("Encounter with Nutrition Assessment and Identified Status")]
@@ -627,6 +663,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Encounter with Nutrition Assessment Status Moderately Or Severely Malnourished")]
     public IEnumerable<Encounter> Encounter_with_Nutrition_Assessment_Status_Moderately_Or_Severely_Malnourished(CqlContext context)
     {
@@ -686,6 +723,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Encounter with Nutrition Assessment Not or Mildly Malnourished")]
     public IEnumerable<Encounter> Encounter_with_Nutrition_Assessment_Not_or_Mildly_Malnourished(CqlContext context)
     {
@@ -741,6 +779,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
+
     [CqlDeclaration("Encounter with Malnutrition Diagnosis")]
     public IEnumerable<Encounter> Encounter_with_Malnutrition_Diagnosis(CqlContext context)
     {
@@ -776,6 +815,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
 
         return k_;
     }
+
 
 
     [CqlDeclaration("Encounter with Nutrition Care Plan")]
@@ -826,10 +866,12 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
+
     public int? Measure_Observation_1(CqlContext context, Encounter MalnutritionRiskScreening) =>
         ((context.Operators.Contains<Encounter>(this.Encounter_with_Malnutrition_Risk_Screening_or_with_Hospital_Dietitian_Referral(context), MalnutritionRiskScreening)) ?? false
             ? 1
             : 0);
+
 
 
     public int? Measure_Observation_2(CqlContext context, Encounter NutritionAssessment)
@@ -868,6 +910,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
 
         return a_();
     }
+
 
 
     public int? Measure_Observation_3(CqlContext context, Encounter MalnutritionDiagonsis)
@@ -955,6 +998,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
+
     public int? Measure_Observation_4(CqlContext context, Encounter NutritionCarePlan)
     {
         int? a_()
@@ -1040,6 +1084,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
+
     public int? Measure_Observation_Total_Malnutrition_Components_Score(CqlContext context, Encounter QualifyingEncounter)
     {
         int? a_ = this.Measure_Observation_1(context, QualifyingEncounter);
@@ -1056,6 +1101,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
 
         return f_;
     }
+
 
 
     public int? Total_Malnutrition_Composite_Score_Eligible_Occurrences(CqlContext context, Encounter QualifyingEncounter)
@@ -1114,6 +1160,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
     }
 
 
+
     public decimal? Measure_Observation_Total_Malnutrition_Composite_Score_as_Percentage(CqlContext context, Encounter QualifyingEncounter)
     {
         decimal? a_ = context.Operators.ConvertIntegerToDecimal(100);
@@ -1126,6 +1173,7 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
 
         return g_;
     }
+
 
 
     private static CqlTupleMetadata CqlTupleMetadata_CTGXhDDGNAgcaKfhTDIBGVLYU = new(

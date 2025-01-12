@@ -20,7 +20,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
     public static StatinTherapyforthePreventionandTreatmentofCardiovascularDiseaseFHIR_0_2_000 Instance { get; } = new();
 
-    #region ILibrary Members
+    #region Library Members
     string ILibrary.Name => "StatinTherapyforthePreventionandTreatmentofCardiovascularDiseaseFHIR";
     string ILibrary.Version => "0.2.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, Hospice_6_12_000.Instance, PalliativeCare_1_11_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance];
@@ -32,10 +32,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default);
 
 
+
     [CqlDeclaration("Atherosclerosis and Peripheral Arterial Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.21")]
     public CqlValueSet Atherosclerosis_and_Peripheral_Arterial_Disease(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.21", default);
+
 
 
     [CqlDeclaration("Breastfeeding")]
@@ -44,10 +46,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.73", default);
 
 
+
     [CqlDeclaration("CABG Surgeries")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.694")]
     public CqlValueSet CABG_Surgeries(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.694", default);
+
 
 
     [CqlDeclaration("CABG or PCI Procedure")]
@@ -56,10 +60,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1138.566", default);
 
 
+
     [CqlDeclaration("Carotid Intervention")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.204")]
     public CqlValueSet Carotid_Intervention(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.204", default);
+
 
 
     [CqlDeclaration("Cerebrovascular Disease Stroke or TIA")]
@@ -68,10 +74,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.44", default);
 
 
+
     [CqlDeclaration("Diabetes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001")]
     public CqlValueSet Diabetes(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1001", default);
+
 
 
     [CqlDeclaration("End Stage Renal Disease")]
@@ -80,10 +88,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353", default);
 
 
+
     [CqlDeclaration("Familial Hypercholesterolemia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.100")]
     public CqlValueSet Familial_Hypercholesterolemia(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.100", default);
+
 
 
     [CqlDeclaration("Hepatitis A")]
@@ -92,10 +102,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1024", default);
 
 
+
     [CqlDeclaration("Hepatitis B")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.269")]
     public CqlValueSet Hepatitis_B(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.269", default);
+
 
 
     [CqlDeclaration("High Intensity Statin Therapy")]
@@ -104,10 +116,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1572", default);
 
 
+
     [CqlDeclaration("Ischemic Heart Disease or Other Related Diagnoses")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.46")]
     public CqlValueSet Ischemic_Heart_Disease_or_Other_Related_Diagnoses(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.46", default);
+
 
 
     [CqlDeclaration("LDL Cholesterol")]
@@ -116,10 +130,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1573", default);
 
 
+
     [CqlDeclaration("Liver Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.42")]
     public CqlValueSet Liver_Disease(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.42", default);
+
 
 
     [CqlDeclaration("Low Intensity Statin Therapy")]
@@ -128,10 +144,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1574", default);
 
 
+
     [CqlDeclaration("Medical Reason")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007")]
     public CqlValueSet Medical_Reason(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1007", default);
+
 
 
     [CqlDeclaration("Moderate Intensity Statin Therapy")]
@@ -140,10 +158,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1575", default);
 
 
+
     [CqlDeclaration("Myocardial Infarction")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.403")]
     public CqlValueSet Myocardial_Infarction(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.403", default);
+
 
 
     [CqlDeclaration("Office Visit")]
@@ -152,10 +172,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
 
+
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
     public CqlValueSet Outpatient_Consultation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
+
 
 
     [CqlDeclaration("Outpatient Encounters for Preventive Care")]
@@ -164,10 +186,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1576", default);
 
 
+
     [CqlDeclaration("PCI")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.67")]
     public CqlValueSet PCI(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.67", default);
+
 
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
@@ -176,10 +200,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
 
+
     [CqlDeclaration("Preventive Care Services Individual Counseling")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026")]
     public CqlValueSet Preventive_Care_Services_Individual_Counseling(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1026", default);
+
 
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
@@ -188,10 +214,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
 
+
     [CqlDeclaration("Preventive Care Services Other")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.11.1150")]
     public CqlValueSet Preventive_Care_Services_Other(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.11.1150", default);
+
 
 
     [CqlDeclaration("Rhabdomyolysis")]
@@ -200,10 +228,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.102", default);
 
 
+
     [CqlDeclaration("Stable and Unstable Angina")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.47")]
     public CqlValueSet Stable_and_Unstable_Angina(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1047.47", default);
+
 
 
     [CqlDeclaration("Statin Allergen")]
@@ -212,10 +242,12 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.42", default);
 
 
+
     [CqlDeclaration("Statin Associated Muscle Symptoms")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.85")]
     public CqlValueSet Statin_Associated_Muscle_Symptoms(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1108.85", default);
+
 
 
     [CqlDeclaration("Cardiovascular disease 10Y risk [Likelihood]")]
@@ -223,14 +255,17 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
         new CqlCode("99055-6", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("Cardiovascular disease 10Y risk [Likelihood] ACC-AHA Pooled Cohort by Goff 2013")]
     public CqlCode Cardiovascular_disease_10Y_risk__Likelihood__ACC_AHA_Pooled_Cohort_by_Goff_2013(CqlContext context) =>
         new CqlCode("79423-0", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("Subsequent non-ST elevation (NSTEMI) myocardial infarction")]
     public CqlCode Subsequent_non_ST_elevation__NSTEMI__myocardial_infarction(CqlContext context) =>
         new CqlCode("I22.2", "http://hl7.org/fhir/sid/icd-10-cm", default, default);
+
 
 
     [CqlDeclaration("CPT")]
@@ -243,6 +278,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("ICD10CM")]
     public CqlCode[] ICD10CM(CqlContext context)
     {
@@ -252,6 +288,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return a_;
     }
+
 
 
     [CqlDeclaration("LOINC")]
@@ -266,6 +303,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("ObservationCategoryCodes")]
     public CqlCode[] ObservationCategoryCodes(CqlContext context)
     {
@@ -274,6 +312,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return a_;
     }
+
 
 
     [CqlDeclaration("RxNorm")]
@@ -286,6 +325,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("SNOMEDCT")]
     public CqlCode[] SNOMEDCT(CqlContext context)
     {
@@ -294,6 +334,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -308,6 +349,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -316,6 +358,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return b_;
     }
+
 
 
     [CqlDeclaration("ASVCD Diagnosis or Procedure before End of Measurement Period")]
@@ -385,6 +428,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("Myocardial Infarction before End of Measurement Period")]
     public IEnumerable<Condition> Myocardial_Infarction_before_End_of_Measurement_Period(CqlContext context)
     {
@@ -409,6 +453,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return e_;
     }
+
 
 
     [CqlDeclaration("Qualifying Encounter during day of Measurement Period")]
@@ -457,6 +502,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("Initial Population 1")]
     public bool? Initial_Population_1(CqlContext context)
     {
@@ -470,6 +516,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return g_;
     }
+
 
 
     [CqlDeclaration("Patients Aged 20 to 75 at Start of Measurement Period")]
@@ -488,6 +535,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return j_;
     }
+
 
 
     [CqlDeclaration("LDL Result Greater Than or Equal To 190")]
@@ -530,6 +578,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("Hypercholesterolemia Diagnosis")]
     public IEnumerable<Condition> Hypercholesterolemia_Diagnosis(CqlContext context)
     {
@@ -555,6 +604,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("Patients Aged 20 to 75 with LDL Cholesterol Result Greater than or Equal to 190 or Hypercholesterolemia without ASCVD")]
     public bool? Patients_Aged_20_to_75_with_LDL_Cholesterol_Result_Greater_than_or_Equal_to_190_or_Hypercholesterolemia_without_ASCVD(CqlContext context)
     {
@@ -573,6 +623,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("Initial Population 2")]
     public bool? Initial_Population_2(CqlContext context)
     {
@@ -583,6 +634,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return d_;
     }
+
 
 
     [CqlDeclaration("Has Diabetes Diagnosis")]
@@ -607,6 +659,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return e_;
     }
+
 
 
     [CqlDeclaration("Patients Aged 40 to 75 Years with Diabetes without ASCVD or LDL Greater than 190 or Hypercholesterolemia")]
@@ -648,6 +701,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("Initial Population 3")]
     public bool? Initial_Population_3(CqlContext context)
     {
@@ -658,6 +712,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return d_;
     }
+
 
 
     [CqlDeclaration("Ten Year CVD Risk is High")]
@@ -692,6 +747,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("Patients Age 40 to 75 Years and have a 10 Year CVD Risk of High without ASCVD and High LDL and Diabetes")]
     public bool? Patients_Age_40_to_75_Years_and_have_a_10_Year_CVD_Risk_of_High_without_ASCVD_and_High_LDL_and_Diabetes(CqlContext context)
     {
@@ -724,6 +780,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("Initial Population 4")]
     public bool? Initial_Population_4(CqlContext context)
     {
@@ -736,6 +793,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("Denominator 1")]
     public bool? Denominator_1(CqlContext context)
     {
@@ -743,6 +801,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Denominator 2")]
@@ -754,6 +813,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("Denominator 3")]
     public bool? Denominator_3(CqlContext context)
     {
@@ -763,6 +823,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("Denominator 4")]
     public bool? Denominator_4(CqlContext context)
     {
@@ -770,6 +831,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -799,6 +861,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("Has Allergy to Statin")]
     public bool? Has_Allergy_to_Statin(CqlContext context)
     {
@@ -825,6 +888,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return e_;
     }
+
 
 
     [CqlDeclaration("Has Hepatitis or Liver Disease Diagnosis")]
@@ -857,6 +921,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("Has Statin Associated Muscle Symptoms")]
     public bool? Has_Statin_Associated_Muscle_Symptoms(CqlContext context)
     {
@@ -879,6 +944,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return e_;
     }
+
 
 
     [CqlDeclaration("Has ESRD Diagnosis")]
@@ -905,6 +971,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("Has Adverse Reaction to Statin")]
     public bool? Has_Adverse_Reaction_to_Statin(CqlContext context)
     {
@@ -924,6 +991,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return e_;
     }
+
 
 
     [CqlDeclaration("Has Medical Reason for Not Ordering Statin Therapy")]
@@ -986,6 +1054,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("Denominator Exceptions")]
     public bool? Denominator_Exceptions(CqlContext context)
     {
@@ -1007,6 +1076,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return o_;
     }
+
 
 
     [CqlDeclaration("Statin Therapy Prescribed Anytime during day of Measurement Period")]
@@ -1085,6 +1155,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -1093,6 +1164,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return b_;
     }
+
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -1104,6 +1176,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -1111,6 +1184,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Race")]
@@ -1122,6 +1196,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -1129,6 +1204,7 @@ public partial class StatinTherapyforthePreventionandTreatmentofCardiovascularDi
 
         return a_;
     }
+
 
 
 }

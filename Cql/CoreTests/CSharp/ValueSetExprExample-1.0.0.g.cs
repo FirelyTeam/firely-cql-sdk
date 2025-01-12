@@ -20,7 +20,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     public static ValueSetExprExample_1_0_0 Instance { get; } = new();
 
-    #region ILibrary Members
+    #region Library Members
     string ILibrary.Name => "ValueSetExprExample";
     string ILibrary.Version => "1.0.0";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
@@ -32,10 +32,12 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
         new CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-1", default);
 
 
+
     [CqlDeclaration("ValueSet-A-2")]
     [CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-2")]
     public CqlValueSet ValueSet_A_2(CqlContext context) =>
         new CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-2", default);
+
 
 
     [CqlDeclaration("ValueSet-B-1")]
@@ -44,10 +46,12 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
         new CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-1", default);
 
 
+
     [CqlDeclaration("ValueSet-B-2")]
     [CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-2")]
     public CqlValueSet ValueSet_B_2(CqlContext context) =>
         new CqlValueSet("http://fire.ly/ValueSet/ValueSet-B-2", default);
+
 
 
     [CqlDeclaration("ChosenSubCategory")]
@@ -59,6 +63,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     }
 
 
+
     [CqlDeclaration("ChosenCode")]
     public CqlCode ChosenCode(CqlContext context)
     {
@@ -66,6 +71,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
         return (CqlCode)a_;
     }
+
 
 
     [CqlDeclaration("ValueSetA")]
@@ -109,6 +115,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     }
 
 
+
     [CqlDeclaration("ValueSetB")]
     public CqlValueSet ValueSetB(CqlContext context)
     {
@@ -150,6 +157,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     }
 
 
+
     [CqlDeclaration("Result")]
     public string Result(CqlContext context)
     {
@@ -187,6 +195,7 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
         return a_();
     }
+
 
 
 }

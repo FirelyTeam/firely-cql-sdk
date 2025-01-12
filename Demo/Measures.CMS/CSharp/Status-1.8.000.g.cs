@@ -20,7 +20,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
 
     public static Status_1_8_000 Instance { get; } = new();
 
-    #region ILibrary Members
+    #region Library Members
     string ILibrary.Name => "Status";
     string ILibrary.Version => "1.8.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance];
@@ -31,14 +31,17 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
         new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
 
+
     [CqlDeclaration("exam")]
     public CqlCode exam(CqlContext context) =>
         new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
 
+
     [CqlDeclaration("survey")]
     public CqlCode survey(CqlContext context) =>
         new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
+
 
 
     [CqlDeclaration("ObservationCategoryCodes")]
@@ -54,6 +57,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -62,6 +66,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
 
         return b_;
     }
+
 
 
     public IEnumerable<Observation> isAssessmentPerformed(CqlContext context, IEnumerable<Observation> Obs)
@@ -106,6 +111,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+
     public IEnumerable<DeviceRequest> isDeviceOrder(CqlContext context, IEnumerable<DeviceRequest> DeviceRequest)
     {
         bool? a_(DeviceRequest D)
@@ -131,6 +137,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
 
         return b_;
     }
+
 
 
     public IEnumerable<ServiceRequest> isDiagnosticStudyOrder(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
@@ -160,6 +167,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+
     public IEnumerable<ServiceRequest> isInterventionOrder(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
     {
         bool? a_(ServiceRequest S)
@@ -185,6 +193,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
 
         return b_;
     }
+
 
 
     public IEnumerable<ServiceRequest> isLaboratoryTestOrder(CqlContext context, IEnumerable<ServiceRequest> ServiceRequest)
@@ -214,6 +223,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+
     public IEnumerable<Observation> isDiagnosticStudyPerformed(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -235,6 +245,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
 
         return b_;
     }
+
 
 
     public IEnumerable<Encounter> isEncounterPerformed(CqlContext context, IEnumerable<Encounter> Enc)
@@ -262,6 +273,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+
     public IEnumerable<Immunization> isImmunizationAdministered(CqlContext context, IEnumerable<Immunization> Immunization)
     {
         bool? a_(Immunization I)
@@ -277,6 +289,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
 
         return b_;
     }
+
 
 
     public IEnumerable<Procedure> isInterventionPerformed(CqlContext context, IEnumerable<Procedure> Proc)
@@ -296,6 +309,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+
     public IEnumerable<Procedure> isProcedurePerformed(CqlContext context, IEnumerable<Procedure> Proc)
     {
         bool? a_(Procedure P)
@@ -311,6 +325,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
 
         return b_;
     }
+
 
 
     public IEnumerable<Observation> isLaboratoryTestPerformed(CqlContext context, IEnumerable<Observation> Obs)
@@ -355,6 +370,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+
     public IEnumerable<MedicationRequest> isMedicationActive(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
     {
         bool? a_(MedicationRequest M)
@@ -375,6 +391,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
 
         return b_;
     }
+
 
 
     public IEnumerable<MedicationDispense> isMedicationDispensed(CqlContext context, IEnumerable<MedicationDispense> Med)
@@ -398,6 +415,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
 
         return b_;
     }
+
 
 
     public IEnumerable<MedicationRequest> isMedicationOrder(CqlContext context, IEnumerable<MedicationRequest> MedicationRequest)
@@ -424,6 +442,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
 
         return b_;
     }
+
 
 
     public IEnumerable<Observation> isPhysicalExamPerformed(CqlContext context, IEnumerable<Observation> Obs)
@@ -468,6 +487,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+
     public IEnumerable<Observation> isObservationBP(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -488,6 +508,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
 
         return b_;
     }
+
 
 
     public IEnumerable<Observation> isObservationBodyHeight(CqlContext context, IEnumerable<Observation> Obs)
@@ -512,6 +533,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+
     public IEnumerable<Observation> isObservationBodyWeight(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -532,6 +554,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
 
         return b_;
     }
+
 
 
     public IEnumerable<Observation> isObservationBMI(CqlContext context, IEnumerable<Observation> Obs)
@@ -556,6 +579,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
     }
 
 
+
     public IEnumerable<Observation> isSymptom(CqlContext context, IEnumerable<Observation> Obs)
     {
         bool? a_(Observation O)
@@ -578,6 +602,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
 
         return b_;
     }
+
 
 
 }

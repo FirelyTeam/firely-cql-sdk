@@ -20,7 +20,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
     public static FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 Instance { get; } = new();
 
-    #region ILibrary Members
+    #region Library Members
     string ILibrary.Name => "FunctionalStatusAssessmentsforHeartFailureFHIR";
     string ILibrary.Version => "0.1.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance];
@@ -32,10 +32,12 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376", default);
 
 
+
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
     public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
+
 
 
     [CqlDeclaration("Virtual Encounter")]
@@ -44,10 +46,12 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
 
+
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
     public CqlValueSet Telephone_Visits(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
+
 
 
     [CqlDeclaration("Emotional score [MLHFQ]")]
@@ -55,9 +59,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("85609-6", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("Kansas City Cardiomyopathy Questionnaire - 12 item [KCCQ-12]")]
     public CqlCode Kansas_City_Cardiomyopathy_Questionnaire___12_item__KCCQ_12_(CqlContext context) =>
         new CqlCode("86923-0", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("Overall summary score [KCCQ-12]")]
@@ -65,9 +71,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("86924-8", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("Overall summary score [KCCQ]")]
     public CqlCode Overall_summary_score__KCCQ_(CqlContext context) =>
         new CqlCode("71940-1", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("Physical limitation score [KCCQ]")]
@@ -75,9 +83,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("72195-1", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("Physical score [MLHFQ]")]
     public CqlCode Physical_score__MLHFQ_(CqlContext context) =>
         new CqlCode("85618-7", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("PROMIS-10 Global Mental Health (GMH) score T-score")]
@@ -85,9 +95,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("71969-0", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("PROMIS-10 Global Physical Health (GPH) score T-score")]
     public CqlCode PROMIS_10_Global_Physical_Health__GPH__score_T_score(CqlContext context) =>
         new CqlCode("71971-6", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("PROMIS-29 Anxiety score T-score")]
@@ -95,9 +107,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("71967-4", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("PROMIS-29 Depression score T-score")]
     public CqlCode PROMIS_29_Depression_score_T_score(CqlContext context) =>
         new CqlCode("71965-8", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("PROMIS-29 Fatigue score T-score")]
@@ -105,9 +119,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("71963-3", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("PROMIS-29 Pain interference score T-score")]
     public CqlCode PROMIS_29_Pain_interference_score_T_score(CqlContext context) =>
         new CqlCode("71961-7", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("PROMIS-29 Physical function score T-score")]
@@ -115,9 +131,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("71959-1", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("PROMIS-29 Satisfaction with participation in social roles score T-score")]
     public CqlCode PROMIS_29_Satisfaction_with_participation_in_social_roles_score_T_score(CqlContext context) =>
         new CqlCode("71957-5", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("PROMIS-29 Sleep disturbance score T-score")]
@@ -125,9 +143,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("71955-9", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("Quality of life score [KCCQ]")]
     public CqlCode Quality_of_life_score__KCCQ_(CqlContext context) =>
         new CqlCode("72189-4", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("Self-efficacy score [KCCQ]")]
@@ -135,9 +155,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("72190-2", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("Severe cognitive impairment (finding)")]
     public CqlCode Severe_cognitive_impairment__finding_(CqlContext context) =>
         new CqlCode("702956004", "http://snomed.info/sct", default, default);
+
 
 
     [CqlDeclaration("Social limitation score [KCCQ]")]
@@ -145,9 +167,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("72196-9", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("Symptom stability score [KCCQ]")]
     public CqlCode Symptom_stability_score__KCCQ_(CqlContext context) =>
         new CqlCode("72194-4", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("Total score [MLHFQ]")]
@@ -155,9 +179,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("71938-5", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("Total symptom score [KCCQ]")]
     public CqlCode Total_symptom_score__KCCQ_(CqlContext context) =>
         new CqlCode("72191-0", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("VR-12 Mental component summary (MCS) score - oblique method T-score")]
@@ -165,9 +191,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("72026-8", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("VR-12 Mental component summary (MCS) score - orthogonal method T-score")]
     public CqlCode VR_12_Mental_component_summary__MCS__score___orthogonal_method_T_score(CqlContext context) =>
         new CqlCode("72028-4", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("VR-12 Physical component summary (PCS) score - oblique method T-score")]
@@ -175,9 +203,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("72025-0", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("VR-12 Physical component summary (PCS) score - orthogonal method T-score")]
     public CqlCode VR_12_Physical_component_summary__PCS__score___orthogonal_method_T_score(CqlContext context) =>
         new CqlCode("72027-6", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("VR-36 Mental component summary (MCS) score - oblique method T-score")]
@@ -185,9 +215,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("71990-6", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("VR-36 Mental component summary (MCS) score - orthogonal method T-score")]
     public CqlCode VR_36_Mental_component_summary__MCS__score___orthogonal_method_T_score(CqlContext context) =>
         new CqlCode("72008-6", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("VR-36 Physical component summary (PCS) score - oblique method T-score")]
@@ -195,9 +227,11 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("71989-8", "http://loinc.org", default, default);
 
 
+
     [CqlDeclaration("VR-36 Physical component summary (PCS) score - orthogonal method T-score")]
     public CqlCode VR_36_Physical_component_summary__PCS__score___orthogonal_method_T_score(CqlContext context) =>
         new CqlCode("72007-8", "http://loinc.org", default, default);
+
 
 
     [CqlDeclaration("LOINC")]
@@ -239,6 +273,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
+
     [CqlDeclaration("SNOMEDCT")]
     public CqlCode[] SNOMEDCT(CqlContext context)
     {
@@ -248,6 +283,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Measurement Period")]
@@ -262,6 +298,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
+
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -270,6 +307,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return b_;
     }
+
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -281,6 +319,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
+
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -288,6 +327,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return a_;
     }
+
 
 
     [CqlDeclaration("SDE Race")]
@@ -299,6 +339,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
+
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -306,6 +347,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Qualifying Encounters")]
@@ -334,6 +376,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return k_;
     }
+
 
 
     [CqlDeclaration("Two Outpatient Encounters during Measurement Period")]
@@ -374,6 +417,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
+
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -407,6 +451,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
+
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -414,6 +459,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -437,6 +483,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return h_;
     }
+
 
 
     [CqlDeclaration("Date PROMIS10 Total Assessment Completed")]
@@ -498,6 +545,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return p_;
     }
+
 
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up PROMIS10 Assessments")]
@@ -563,6 +611,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return l_;
     }
+
 
 
     [CqlDeclaration("Date PROMIS29 Total Assessment Completed")]
@@ -721,6 +770,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
+
     [CqlDeclaration("Has Encounter with Initial and Follow Up PROMIS29 Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments(CqlContext context)
     {
@@ -786,6 +836,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
+
     [CqlDeclaration("Date VR12 Oblique Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR12_Oblique_Total_Assessment_Completed(CqlContext context)
     {
@@ -845,6 +896,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return p_;
     }
+
 
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up VR12 Oblique Assessments")]
@@ -912,6 +964,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
+
     [CqlDeclaration("Date VR12 Orthogonal Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR12_Orthogonal_Total_Assessment_Completed(CqlContext context)
     {
@@ -971,6 +1024,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return p_;
     }
+
 
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up VR12 Orthogonal Assessments")]
@@ -1038,6 +1092,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
+
     [CqlDeclaration("Date VR36 Oblique Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR36_Oblique_Total_Assessment_Completed(CqlContext context)
     {
@@ -1097,6 +1152,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return p_;
     }
+
 
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up VR36 Oblique Assessments")]
@@ -1164,6 +1220,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
+
     [CqlDeclaration("Date VR36 Orthogonal Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR36_Orthogonal_Total_Assessment_Completed(CqlContext context)
     {
@@ -1223,6 +1280,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return p_;
     }
+
 
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up VR36 Orthogonal Assessments")]
@@ -1290,6 +1348,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
+
     [CqlDeclaration("Date MLHFQ Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_MLHFQ_Total_Assessment_Completed(CqlContext context)
     {
@@ -1349,6 +1408,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return p_;
     }
+
 
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up MLHFQ Assessments")]
@@ -1416,6 +1476,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
+
     [CqlDeclaration("Date KCCQ12 Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_KCCQ12_Total_Assessment_Completed(CqlContext context)
     {
@@ -1475,6 +1536,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return p_;
     }
+
 
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up KCCQ12 Assessments")]
@@ -1540,6 +1602,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return l_;
     }
+
 
 
     [CqlDeclaration("Date KCCQ Domain Assessment Completed")]
@@ -1679,6 +1742,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
+
     [CqlDeclaration("Has Encounter with Initial and Follow Up KCCQ Domain Score Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments(CqlContext context)
     {
@@ -1744,6 +1808,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
+
     [CqlDeclaration("Date KCCQ Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_KCCQ_Total_Assessment_Completed(CqlContext context)
     {
@@ -1775,6 +1840,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return i_;
     }
+
 
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up KCCQ Total Score Assessments")]
@@ -1842,6 +1908,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
+
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -1867,6 +1934,7 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return s_;
     }
+
 
 
     private static CqlTupleMetadata CqlTupleMetadata_BbPMcXSJeOeGdRcaZWGYPhGBL = new(

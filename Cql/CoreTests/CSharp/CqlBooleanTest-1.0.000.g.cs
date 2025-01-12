@@ -20,7 +20,7 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
 
     public static CqlBooleanTest_1_0_000 Instance { get; } = new();
 
-    #region ILibrary Members
+    #region Library Members
     string ILibrary.Name => "CqlBooleanTest";
     string ILibrary.Version => "1.0.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
@@ -34,6 +34,7 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
 
         return b_;
     }
+
 
 
 }

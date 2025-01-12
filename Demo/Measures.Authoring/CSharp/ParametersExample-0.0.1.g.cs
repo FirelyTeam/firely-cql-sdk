@@ -20,7 +20,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     public static ParametersExample_0_0_1 Instance { get; } = new();
 
-    #region ILibrary Members
+    #region Library Members
     string ILibrary.Name => "ParametersExample";
     string ILibrary.Version => "0.0.1";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
@@ -32,6 +32,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
         new CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status", default);
 
 
+
     [CqlDeclaration("AgeThreshold")]
     public int? AgeThreshold(CqlContext context)
     {
@@ -39,6 +40,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
         return (int?)a_;
     }
+
 
 
     [CqlDeclaration("Patient")]
@@ -51,6 +53,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     }
 
 
+
     [CqlDeclaration("CurrentDate")]
     public CqlDate CurrentDate(CqlContext context)
     {
@@ -58,6 +61,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
         return a_;
     }
+
 
 
     [CqlDeclaration("Patient Filter")]
@@ -95,6 +99,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     }
 
 
+
     [CqlDeclaration("Patient Birthdate")]
     public Date Patient_Birthdate(CqlContext context)
     {
@@ -103,6 +108,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
         return b_;
     }
+
 
 
     [CqlDeclaration("Patient Age in Years")]
@@ -117,6 +123,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     }
 
 
+
     [CqlDeclaration("Patient Older Than AgeThreshold")]
     public bool? Patient_Older_Than_AgeThreshold(CqlContext context)
     {
@@ -126,6 +133,7 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
         return c_;
     }
+
 
 
 }
