@@ -38,7 +38,7 @@ classDiagram
         class WriteToFileAssemblyDataPostProcessor { }
         class StubAssemblyDataPostProcessor { }
         class TypeToCSharpConverter { }
-        class LambdaExpressionsToCSharpProcessor { }
+        class CSharpCodeGenerator { }
         class AssemblyCompiler { }
     }
 
@@ -103,14 +103,14 @@ classDiagram
 
     ModelInspector ..> TypeConverter : injected  
 
-    TypeToCSharpConverter ..> LambdaExpressionsToCSharpProcessor : injected
+    TypeToCSharpConverter ..> CSharpCodeGenerator : injected
 
     AssemblyDataPostProcessor ..> AssemblyCompiler : injected\n(optional)
     CSharpCodeStreamPostProcessor ..> AssemblyCompiler : injected\n(optional)
-    LambdaExpressionsToCSharpProcessor ..> AssemblyCompiler : injected
+    CSharpCodeGenerator ..> AssemblyCompiler : injected
     TypeResolver ..> AssemblyCompiler : injected
 
-    TypeResolver ..> LambdaExpressionsToCSharpProcessor : injected
+    TypeResolver ..> CSharpCodeGenerator : injected
 
     AssemblyCompiler ..> CqlToResourcePackagingPipeline : injected
     ResourcePackager ..> CqlToResourcePackagingPipeline : injected 

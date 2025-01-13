@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.10.0")]
 [CqlLibrary("AdvancedIllnessandFrailty", "1.16.000")]
 public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<AdvancedIllnessandFrailty_1_16_000>
 {
@@ -20,17 +20,20 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
 
     public static AdvancedIllnessandFrailty_1_16_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "AdvancedIllnessandFrailty";
     string ILibrary.Version => "1.16.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, Status_1_8_000.Instance];
-    #endregion Library Members
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, Status_1_8_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Advanced Illness")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082")]
     public CqlValueSet Advanced_Illness(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.110.12.1082", default);
-
 
 
     [CqlDeclaration("Dementia Medications")]
@@ -39,12 +42,10 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1510", default);
 
 
-
     [CqlDeclaration("Frailty Device")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300")]
     public CqlValueSet Frailty_Device(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.118.12.1300", default);
-
 
 
     [CqlDeclaration("Frailty Diagnosis")]
@@ -53,12 +54,10 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1074", default);
 
 
-
     [CqlDeclaration("Frailty Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088")]
     public CqlValueSet Frailty_Encounter(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1088", default);
-
 
 
     [CqlDeclaration("Frailty Symptom")]
@@ -67,11 +66,9 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1075", default);
 
 
-
     [CqlDeclaration("Housing status")]
     public CqlCode Housing_status(CqlContext context) =>
         new CqlCode("71802-3", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Lives in a nursing home (finding)")]
@@ -79,11 +76,9 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
         new CqlCode("160734000", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("Medical equipment used")]
     public CqlCode Medical_equipment_used(CqlContext context) =>
         new CqlCode("98181-1", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("LOINC")]
@@ -98,7 +93,6 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     }
 
 
-
     [CqlDeclaration("SNOMEDCT")]
     public CqlCode[] SNOMEDCT(CqlContext context)
     {
@@ -110,7 +104,6 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     }
 
 
-
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
@@ -118,7 +111,6 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
 
         return (CqlInterval<CqlDateTime>)a_;
     }
-
 
 
     [CqlDeclaration("Patient")]
@@ -129,7 +121,6 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
 
         return b_;
     }
-
 
 
     [CqlDeclaration("Has Criteria Indicating Frailty")]
@@ -229,7 +220,6 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     }
 
 
-
     [CqlDeclaration("Has Advanced Illness in Year Before or During Measurement Period")]
     public bool? Has_Advanced_Illness_in_Year_Before_or_During_Measurement_Period(CqlContext context)
     {
@@ -254,7 +244,6 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
 
         return e_;
     }
-
 
 
     [CqlDeclaration("Has Dementia Medications in Year Before or During Measurement Period")]
@@ -290,7 +279,6 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     }
 
 
-
     [CqlDeclaration("Is Age 66 or Older with Advanced Illness and Frailty")]
     public bool? Is_Age_66_or_Older_with_Advanced_Illness_and_Frailty(CqlContext context)
     {
@@ -312,7 +300,6 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
 
         return o_;
     }
-
 
 
     [CqlDeclaration("Is Age 66 to 80 with Advanced Illness and Frailty or Is Age 81 or Older with Frailty")]
@@ -346,7 +333,6 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
 
         return ab_;
     }
-
 
 
     [CqlDeclaration("Is Age 66 or Older Living Long Term in a Nursing Home")]
@@ -411,8 +397,6 @@ public partial class AdvancedIllnessandFrailty_1_16_000 : ILibrary, ISingleton<A
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-        ["dayIndex", "dayPeriod"]);
+    #endregion Definition Methods
 
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.10.0")]
 [CqlLibrary("SupplementalDataElements", "3.5.000")]
 public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<SupplementalDataElements_3_5_000>
 {
@@ -20,17 +20,20 @@ public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<Sup
 
     public static SupplementalDataElements_3_5_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "SupplementalDataElements";
     string ILibrary.Version => "3.5.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance];
-    #endregion Library Members
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
     public CqlValueSet Ethnicity(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", default);
-
 
 
     [CqlDeclaration("ONC Administrative Sex")]
@@ -39,12 +42,10 @@ public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<Sup
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", default);
 
 
-
     [CqlDeclaration("Payer Type")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591")]
     public CqlValueSet Payer_Type(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", default);
-
 
 
     [CqlDeclaration("Race")]
@@ -53,17 +54,14 @@ public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<Sup
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", default);
 
 
-
     [CqlDeclaration("M")]
     public CqlCode M(CqlContext context) =>
         new CqlCode("M", "http://hl7.org/fhir/administrative-gender", default, default);
 
 
-
     [CqlDeclaration("F")]
     public CqlCode F(CqlContext context) =>
         new CqlCode("F", "http://hl7.org/fhir/administrative-gender", default, default);
-
 
 
     [CqlDeclaration("AdministrativeGender")]
@@ -78,7 +76,6 @@ public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<Sup
     }
 
 
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -87,7 +84,6 @@ public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<Sup
 
         return b_;
     }
-
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -213,7 +209,6 @@ public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<Sup
     }
 
 
-
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -234,7 +229,6 @@ public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<Sup
 
         return e_;
     }
-
 
 
     [CqlDeclaration("SDE Race")]
@@ -362,7 +356,6 @@ public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<Sup
     }
 
 
-
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -410,16 +403,18 @@ public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<Sup
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-        ["dayIndex", "dayPeriod"]);
+    #endregion Definition Methods
+
+    #region CqlTupleMetadata Properties
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
+        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
+        ["code", "period"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
         [typeof(IEnumerable<CqlCode>), typeof(string)],
         ["codes", "display"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
-        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
-        ["code", "period"]);
+    #endregion CqlTupleMetadata Properties
 
 }

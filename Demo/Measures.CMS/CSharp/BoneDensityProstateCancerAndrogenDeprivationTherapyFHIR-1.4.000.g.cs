@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.10.0")]
 [CqlLibrary("BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR", "1.4.000")]
 public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4_000 : ILibrary, ISingleton<BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4_000>
 {
@@ -20,17 +20,20 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
 
     public static BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR";
     string ILibrary.Version => "1.4.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
-    #endregion Library Members
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Androgen deprivation therapy for Urology Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.48")]
     public CqlValueSet Androgen_deprivation_therapy_for_Urology_Care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.48", default);
-
 
 
     [CqlDeclaration("DEXA Dual Energy Xray Absorptiometry, Bone Density for Urology Care")]
@@ -39,12 +42,10 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.38", default);
 
 
-
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
     public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
-
 
 
     [CqlDeclaration("Patient Declined")]
@@ -53,18 +54,15 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1582", default);
 
 
-
     [CqlDeclaration("Prostate Cancer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.319")]
     public CqlValueSet Prostate_Cancer(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.319", default);
 
 
-
     [CqlDeclaration("Injection of leuprolide acetate for twelve month period (regime/therapy)")]
     public CqlCode Injection_of_leuprolide_acetate_for_twelve_month_period__regime_therapy_(CqlContext context) =>
         new CqlCode("456381000124102", "http://snomed.info/sct", default, default);
-
 
 
     [CqlDeclaration("SNOMEDCT")]
@@ -76,7 +74,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Measurement Period")]
@@ -91,7 +88,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     }
 
 
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -100,7 +96,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
 
         return b_;
     }
-
 
 
     [CqlDeclaration("Has Qualifying Encounter")]
@@ -151,7 +146,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
 
         return a_();
     }
-
 
 
     [CqlDeclaration("Androgen Deprivation Therapy for Urology Care Medication Active Start Dates")]
@@ -294,7 +288,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     }
 
 
-
     [CqlDeclaration("Androgen Deprivation Therapy for Urology Care Medication Order Start Dates")]
     public IEnumerable<CqlDateTime> Androgen_Deprivation_Therapy_for_Urology_Care_Medication_Order_Start_Dates(CqlContext context)
     {
@@ -409,7 +402,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     }
 
 
-
     [CqlDeclaration("Prostate Cancer Diagnosis")]
     public IEnumerable<Condition> Prostate_Cancer_Diagnosis(CqlContext context)
     {
@@ -439,7 +431,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
 
         return d_;
     }
-
 
 
     [CqlDeclaration("First ADT in 3 Months Before to 9 Months After Start of Measurement Period")]
@@ -481,7 +472,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
 
         return g_;
     }
-
 
 
     [CqlDeclaration("Order for 12 Months of ADT in 3 Months Before to 9 Months After Start of Measurement Period")]
@@ -548,7 +538,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     }
 
 
-
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -561,7 +550,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     }
 
 
-
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -569,7 +557,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Has Baseline DEXA Scan Two Years Prior to the Start of or Less than Three Months After the Start of ADT")]
@@ -708,7 +695,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     }
 
 
-
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -718,13 +704,11 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     }
 
 
-
     [CqlDeclaration("Denominator Exception")]
     [CqlTag("commentedOut", "\"No Bone Density Scan Ordered Due to Patient Refusal\" )")]
     [CqlTag("commmentedOutReason", "Negation issue related to https://github.com/cqframework/cql-execution/issues/296, which is tied to https://oncprojectracking.healthit.gov/support/browse/BONNIEMAT-1455. Due to this being the only logic in population, created a 'false' placeholder")]
     public bool? Denominator_Exception(CqlContext context) =>
         false;
-
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -736,7 +720,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     }
 
 
-
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -744,7 +727,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
 
         return a_;
     }
-
 
 
     [CqlDeclaration("SDE Race")]
@@ -756,7 +738,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     }
 
 
-
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -764,7 +745,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
 
         return a_;
     }
-
 
 
     [CqlDeclaration("No Bone Density Scan Ordered Due to Patient Refusal")]
@@ -829,7 +809,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
 
         return g_;
     }
-
 
 
     [CqlDeclaration("No Bone Density Scan Performed Due to Patient Refusal")]
@@ -897,32 +876,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-        ["dayIndex", "dayPeriod"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
-        [typeof(IEnumerable<CqlCode>), typeof(string)],
-        ["codes", "display"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
-        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
-        ["code", "period"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
-        [typeof(CqlDate)],
-        ["AntidepressantDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
-        [typeof(Encounter), typeof(Condition)],
-        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
-        [typeof(Observation), typeof(Encounter)],
-        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
-        [typeof(Encounter), typeof(Condition)],
-        ["QualifyingEncounters", "URI"]);
+    #endregion Definition Methods
 
 }
