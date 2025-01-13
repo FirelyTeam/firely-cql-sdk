@@ -11,11 +11,12 @@
 		<AssemblyName>Hl7.Cql.Packager</AssemblyName>
 		<Product>dotnet tool for packaging CQL artifacts</Product>
 		<Description>.NET tool that packages CQL, ELM and build outputs into a FHIR Library resource.</Description>
+		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<None Remove="..\..\README.md" />
-		<None Include="README.md" Pack="true" PackagePath=""/>
+		<None Include="README.md" Pack="true" PackagePath="" />
 	</ItemGroup>
 
 	<ItemGroup>

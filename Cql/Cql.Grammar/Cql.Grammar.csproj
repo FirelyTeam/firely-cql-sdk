@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <Import Project="..\..\cql-sdk.props"/>
+    <Import Project="..\..\cql-sdk.props" />
 
     <PropertyGroup>
         <ImplicitUsings>disable</ImplicitUsings>
@@ -8,10 +8,11 @@
         <AssemblyName>Hl7.Cql.CqlToElm.Grammar</AssemblyName>
         <RootNamespace>Hl7.Cql.CqlToElm.Grammar</RootNamespace>
         <NoWarn>RS0016</NoWarn>
+        <Configurations>Debug;Release</Configurations>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1"/>
+        <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
         <AssemblyAttribute Include="System.CLSCompliantAttribute">
             <_Parameter1>true</_Parameter1>
         </AssemblyAttribute>

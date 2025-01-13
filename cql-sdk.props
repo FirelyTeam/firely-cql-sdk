@@ -34,10 +34,10 @@
 	<PropertyGroup>
 		<LangVersion>12</LangVersion>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<Configurations>Debug;Release;FullDebug</Configurations>
+		<Configurations>Debug;Release</Configurations>
 		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<NoWarn>RS0026</NoWarn>  <!-- Too many bogus warnings, see https://github.com/dotnet/roslyn-analyzers/issues/6757 -->
+		<NoWarn>RS0026,CS0618</NoWarn>  <!-- Too many bogus warnings, see https://github.com/dotnet/roslyn-analyzers/issues/6757 -->
 	</PropertyGroup>
 
 	<ItemGroup>

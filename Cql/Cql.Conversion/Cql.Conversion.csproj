@@ -8,6 +8,7 @@
 		<Product>CQL engine unit conversion</Product>
 		<Description>Support package for Hl7.Cql. Unit conversion for CQL.</Description>
 		<NoWarn>CS8601</NoWarn>
+		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
 	<ItemGroup>

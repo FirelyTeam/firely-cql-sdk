@@ -8,6 +8,7 @@
 		<Product>CQL comparers</Product>
 		<Description>Support package for Hl7.Cql. Contains CQL comparers.</Description>
 		<NoWarn>CS8601</NoWarn>
+		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
 	<ItemGroup>

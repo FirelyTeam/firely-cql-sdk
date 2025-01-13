@@ -7,6 +7,7 @@
 		<RootNamespace>Hl7.Cql.ValueSets</RootNamespace>
 		<Product>Terminology support for the CQL engine</Product>
 		<Description>Support package for Hl7.Cql. Assembly for working with CQL terminologies.</Description>
+		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
 	<ItemGroup>
