@@ -20,17 +20,20 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
 
     public static SupplementalDataElementsFHIR4_2_0_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "SupplementalDataElementsFHIR4";
     string ILibrary.Version => "2.0.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
-    #endregion Library Members
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
     public CqlValueSet Ethnicity(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837", default);
-
 
 
     [CqlDeclaration("ONC Administrative Sex")]
@@ -39,19 +42,16 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1", default);
 
 
-
     [CqlDeclaration("Payer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591")]
     public CqlValueSet Payer(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.3591", default);
 
 
-
     [CqlDeclaration("Race")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836")]
     public CqlValueSet Race(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.836", default);
-
 
 
     [CqlDeclaration("Patient")]
@@ -62,7 +62,6 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
 
         return b_;
     }
-
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -134,7 +133,6 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     }
 
 
-
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CodeableConcept code, Period period)?> SDE_Payer(CqlContext context)
     {
@@ -153,7 +151,6 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
 
         return e_;
     }
-
 
 
     [CqlDeclaration("SDE Race")]
@@ -225,7 +222,6 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     }
 
 
-
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -267,9 +263,14 @@ public partial class SupplementalDataElementsFHIR4_2_0_000 : ILibrary, ISingleto
     }
 
 
+    #endregion Definition Methods
+
+    #region CqlTupleMetadata Properties
+
     private static CqlTupleMetadata CqlTupleMetadata_CaKghTfWMNOTHSWhifjFZOVYO = new(
         [typeof(CodeableConcept), typeof(Period)],
         ["code", "period"]);
 
+    #endregion CqlTupleMetadata Properties
 
 }

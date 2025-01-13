@@ -20,16 +20,19 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 
     public static Status_1_6_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "Status";
     string ILibrary.Version => "1.6.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
-    #endregion Library Members
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("laboratory")]
     public CqlCode laboratory(CqlContext context) =>
         new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-
 
 
     [CqlDeclaration("exam")]
@@ -37,11 +40,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
         new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
 
-
     [CqlDeclaration("survey")]
     public CqlCode survey(CqlContext context) =>
         new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-
 
 
     [CqlDeclaration("vital-signs")]
@@ -49,11 +50,9 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
         new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
 
-
     [CqlDeclaration("active")]
     public CqlCode active(CqlContext context) =>
         new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
-
 
 
     [CqlDeclaration("ObservationCategoryCodes")]
@@ -70,7 +69,6 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     }
 
 
-
     [CqlDeclaration("ConditionClinicalStatusCodes")]
     public CqlCode[] ConditionClinicalStatusCodes(CqlContext context)
     {
@@ -80,7 +78,6 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Patient")]
@@ -1089,5 +1086,7 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
         return b_;
     }
 
+
+    #endregion Definition Methods
 
 }

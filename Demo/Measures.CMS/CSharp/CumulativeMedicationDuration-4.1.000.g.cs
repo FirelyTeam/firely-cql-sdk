@@ -20,16 +20,19 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
 
     public static CumulativeMedicationDuration_4_1_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "CumulativeMedicationDuration";
     string ILibrary.Version => "4.1.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
-    #endregion Library Members
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("HS")]
     public CqlCode HS(CqlContext context) =>
         new CqlCode("HS", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
 
 
     [CqlDeclaration("WAKE")]
@@ -37,11 +40,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("WAKE", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
-
     [CqlDeclaration("C")]
     public CqlCode C(CqlContext context) =>
         new CqlCode("C", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
 
 
     [CqlDeclaration("CM")]
@@ -49,11 +50,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
-
     [CqlDeclaration("CD")]
     public CqlCode CD(CqlContext context) =>
         new CqlCode("CD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
 
 
     [CqlDeclaration("CV")]
@@ -61,11 +60,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("CV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
-
     [CqlDeclaration("AC")]
     public CqlCode AC(CqlContext context) =>
         new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
 
 
     [CqlDeclaration("ACM")]
@@ -73,11 +70,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("ACM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
-
     [CqlDeclaration("ACD")]
     public CqlCode ACD(CqlContext context) =>
         new CqlCode("ACD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
 
 
     [CqlDeclaration("ACV")]
@@ -85,11 +80,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("ACV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
-
     [CqlDeclaration("PC")]
     public CqlCode PC(CqlContext context) =>
         new CqlCode("PC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
 
 
     [CqlDeclaration("PCM")]
@@ -97,11 +90,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("PCM", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
-
     [CqlDeclaration("PCD")]
     public CqlCode PCD(CqlContext context) =>
         new CqlCode("PCD", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
-
 
 
     [CqlDeclaration("PCV")]
@@ -109,11 +100,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("PCV", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);
 
 
-
     [CqlDeclaration("MORN")]
     public CqlCode MORN(CqlContext context) =>
         new CqlCode("MORN", "http://hl7.org/fhir/event-timing", default, default);
-
 
 
     [CqlDeclaration("MORN.early")]
@@ -121,11 +110,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("MORN.early", "http://hl7.org/fhir/event-timing", default, default);
 
 
-
     [CqlDeclaration("MORN.late")]
     public CqlCode MORN_late(CqlContext context) =>
         new CqlCode("MORN.late", "http://hl7.org/fhir/event-timing", default, default);
-
 
 
     [CqlDeclaration("NOON")]
@@ -133,11 +120,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("NOON", "http://hl7.org/fhir/event-timing", default, default);
 
 
-
     [CqlDeclaration("AFT")]
     public CqlCode AFT(CqlContext context) =>
         new CqlCode("AFT", "http://hl7.org/fhir/event-timing", default, default);
-
 
 
     [CqlDeclaration("AFT.early")]
@@ -145,11 +130,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("AFT.early", "http://hl7.org/fhir/event-timing", default, default);
 
 
-
     [CqlDeclaration("AFT.late")]
     public CqlCode AFT_late(CqlContext context) =>
         new CqlCode("AFT.late", "http://hl7.org/fhir/event-timing", default, default);
-
 
 
     [CqlDeclaration("EVE")]
@@ -157,11 +140,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("EVE", "http://hl7.org/fhir/event-timing", default, default);
 
 
-
     [CqlDeclaration("EVE.early")]
     public CqlCode EVE_early(CqlContext context) =>
         new CqlCode("EVE.early", "http://hl7.org/fhir/event-timing", default, default);
-
 
 
     [CqlDeclaration("EVE.late")]
@@ -169,11 +150,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("EVE.late", "http://hl7.org/fhir/event-timing", default, default);
 
 
-
     [CqlDeclaration("NIGHT")]
     public CqlCode NIGHT(CqlContext context) =>
         new CqlCode("NIGHT", "http://hl7.org/fhir/event-timing", default, default);
-
 
 
     [CqlDeclaration("PHS")]
@@ -181,11 +160,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("PHS", "http://hl7.org/fhir/event-timing", default, default);
 
 
-
     [CqlDeclaration("Every eight hours (qualifier value)")]
     public CqlCode Every_eight_hours__qualifier_value_(CqlContext context) =>
         new CqlCode("307469008", "http://snomed.info/sct", default, default);
-
 
 
     [CqlDeclaration("Every eight to twelve hours (qualifier value)")]
@@ -193,11 +170,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("396140003", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("Every forty eight hours (qualifier value)")]
     public CqlCode Every_forty_eight_hours__qualifier_value_(CqlContext context) =>
         new CqlCode("396131002", "http://snomed.info/sct", default, default);
-
 
 
     [CqlDeclaration("Every forty hours (qualifier value)")]
@@ -205,11 +180,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("396130001", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("Every four hours (qualifier value)")]
     public CqlCode Every_four_hours__qualifier_value_(CqlContext context) =>
         new CqlCode("225756002", "http://snomed.info/sct", default, default);
-
 
 
     [CqlDeclaration("Every seventy two hours (qualifier value)")]
@@ -217,11 +190,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("396143001", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("Every six hours (qualifier value)")]
     public CqlCode Every_six_hours__qualifier_value_(CqlContext context) =>
         new CqlCode("307468000", "http://snomed.info/sct", default, default);
-
 
 
     [CqlDeclaration("Every six to eight hours (qualifier value)")]
@@ -229,11 +200,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("396139000", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("Every thirty six hours (qualifier value)")]
     public CqlCode Every_thirty_six_hours__qualifier_value_(CqlContext context) =>
         new CqlCode("396126004", "http://snomed.info/sct", default, default);
-
 
 
     [CqlDeclaration("Every three to four hours (qualifier value)")]
@@ -241,11 +210,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("225754004", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("Every three to six hours (qualifier value)")]
     public CqlCode Every_three_to_six_hours__qualifier_value_(CqlContext context) =>
         new CqlCode("396127008", "http://snomed.info/sct", default, default);
-
 
 
     [CqlDeclaration("Every twelve hours (qualifier value)")]
@@ -253,11 +220,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("307470009", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("Every twenty four hours (qualifier value)")]
     public CqlCode Every_twenty_four_hours__qualifier_value_(CqlContext context) =>
         new CqlCode("396125000", "http://snomed.info/sct", default, default);
-
 
 
     [CqlDeclaration("Every two to four hours (qualifier value)")]
@@ -265,11 +230,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("225752000", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("Four times daily (qualifier value)")]
     public CqlCode Four_times_daily__qualifier_value_(CqlContext context) =>
         new CqlCode("307439001", "http://snomed.info/sct", default, default);
-
 
 
     [CqlDeclaration("Once daily (qualifier value)")]
@@ -277,11 +240,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("229797004", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("One to four times a day (qualifier value)")]
     public CqlCode One_to_four_times_a_day__qualifier_value_(CqlContext context) =>
         new CqlCode("396109005", "http://snomed.info/sct", default, default);
-
 
 
     [CqlDeclaration("One to three times a day (qualifier value)")]
@@ -289,11 +250,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("396108002", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("One to two times a day (qualifier value)")]
     public CqlCode One_to_two_times_a_day__qualifier_value_(CqlContext context) =>
         new CqlCode("396107007", "http://snomed.info/sct", default, default);
-
 
 
     [CqlDeclaration("Three times daily (qualifier value)")]
@@ -301,17 +260,14 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         new CqlCode("229798009", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("Twice a day (qualifier value)")]
     public CqlCode Twice_a_day__qualifier_value_(CqlContext context) =>
         new CqlCode("229799001", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("Two to four times a day (qualifier value)")]
     public CqlCode Two_to_four_times_a_day__qualifier_value_(CqlContext context) =>
         new CqlCode("396111001", "http://snomed.info/sct", default, default);
-
 
 
     [CqlDeclaration("V3TimingEvent")]
@@ -338,7 +294,6 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-
     [CqlDeclaration("EventTiming")]
     public CqlCode[] EventTiming(CqlContext context)
     {
@@ -361,7 +316,6 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
     }
 
 
-
     [CqlDeclaration("ErrorLevel")]
     public string ErrorLevel(CqlContext context)
     {
@@ -369,7 +323,6 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
 
         return (string)a_;
     }
-
 
 
     [CqlDeclaration("Patient")]
@@ -2644,5 +2597,7 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
         return m_;
     }
 
+
+    #endregion Definition Methods
 
 }

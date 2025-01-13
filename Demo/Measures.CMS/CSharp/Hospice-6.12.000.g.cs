@@ -20,17 +20,20 @@ public partial class Hospice_6_12_000 : ILibrary, ISingleton<Hospice_6_12_000>
 
     public static Hospice_6_12_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "Hospice";
     string ILibrary.Version => "6.12.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance];
-    #endregion Library Members
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Encounter Inpatient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307")]
     public CqlValueSet Encounter_Inpatient(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
-
 
 
     [CqlDeclaration("Hospice Care Ambulatory")]
@@ -39,12 +42,10 @@ public partial class Hospice_6_12_000 : ILibrary, ISingleton<Hospice_6_12_000>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1584", default);
 
 
-
     [CqlDeclaration("Hospice Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1003")]
     public CqlValueSet Hospice_Encounter(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1003", default);
-
 
 
     [CqlDeclaration("Hospice Diagnosis")]
@@ -53,11 +54,9 @@ public partial class Hospice_6_12_000 : ILibrary, ISingleton<Hospice_6_12_000>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1165", default);
 
 
-
     [CqlDeclaration("Discharge to healthcare facility for hospice care (procedure)")]
     public CqlCode Discharge_to_healthcare_facility_for_hospice_care__procedure_(CqlContext context) =>
         new CqlCode("428371000124100", "http://snomed.info/sct", default, default);
-
 
 
     [CqlDeclaration("Discharge to home for hospice care (procedure)")]
@@ -65,17 +64,14 @@ public partial class Hospice_6_12_000 : ILibrary, ISingleton<Hospice_6_12_000>
         new CqlCode("428361000124107", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("Hospice care [Minimum Data Set]")]
     public CqlCode Hospice_care__Minimum_Data_Set_(CqlContext context) =>
         new CqlCode("45755-6", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Yes (qualifier value)")]
     public CqlCode Yes__qualifier_value_(CqlContext context) =>
         new CqlCode("373066001", "http://snomed.info/sct", default, default);
-
 
 
     [CqlDeclaration("LOINC")]
@@ -87,7 +83,6 @@ public partial class Hospice_6_12_000 : ILibrary, ISingleton<Hospice_6_12_000>
 
         return a_;
     }
-
 
 
     [CqlDeclaration("SNOMEDCT")]
@@ -103,7 +98,6 @@ public partial class Hospice_6_12_000 : ILibrary, ISingleton<Hospice_6_12_000>
     }
 
 
-
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
@@ -111,7 +105,6 @@ public partial class Hospice_6_12_000 : ILibrary, ISingleton<Hospice_6_12_000>
 
         return (CqlInterval<CqlDateTime>)a_;
     }
-
 
 
     [CqlDeclaration("Patient")]
@@ -122,7 +115,6 @@ public partial class Hospice_6_12_000 : ILibrary, ISingleton<Hospice_6_12_000>
 
         return b_;
     }
-
 
 
     [CqlDeclaration("Has Hospice Services")]
@@ -244,5 +236,7 @@ public partial class Hospice_6_12_000 : ILibrary, ISingleton<Hospice_6_12_000>
         return ao_;
     }
 
+
+    #endregion Definition Methods
 
 }

@@ -20,16 +20,19 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
 
     public static QICoreCommon_2_1_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "QICoreCommon";
     string ILibrary.Version => "2.1.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance];
-    #endregion Library Members
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Birthdate")]
     public CqlCode Birthdate(CqlContext context) =>
         new CqlCode("21112-8", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Dead")]
@@ -37,11 +40,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("419099009", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("ER")]
     public CqlCode ER(CqlContext context) =>
         new CqlCode("ER", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default, default);
-
 
 
     [CqlDeclaration("ICU")]
@@ -49,11 +50,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("ICU", "http://terminology.hl7.org/CodeSystem/v3-RoleCode", default, default);
 
 
-
     [CqlDeclaration("Billing")]
     public CqlCode Billing(CqlContext context) =>
         new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
-
 
 
     [CqlDeclaration("ambulatory")]
@@ -61,11 +60,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("AMB", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
 
-
     [CqlDeclaration("emergency")]
     public CqlCode emergency(CqlContext context) =>
         new CqlCode("EMER", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-
 
 
     [CqlDeclaration("field")]
@@ -73,11 +70,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("FLD", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
 
-
     [CqlDeclaration("home health")]
     public CqlCode home_health(CqlContext context) =>
         new CqlCode("HH", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-
 
 
     [CqlDeclaration("inpatient encounter")]
@@ -85,11 +80,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("IMP", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
 
-
     [CqlDeclaration("inpatient acute")]
     public CqlCode inpatient_acute(CqlContext context) =>
         new CqlCode("ACUTE", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-
 
 
     [CqlDeclaration("inpatient non-acute")]
@@ -97,11 +90,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("NONAC", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
 
-
     [CqlDeclaration("observation encounter")]
     public CqlCode observation_encounter(CqlContext context) =>
         new CqlCode("OBSENC", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-
 
 
     [CqlDeclaration("pre-admission")]
@@ -109,11 +100,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("PRENC", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
 
-
     [CqlDeclaration("short stay")]
     public CqlCode short_stay(CqlContext context) =>
         new CqlCode("SS", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-
 
 
     [CqlDeclaration("virtual")]
@@ -121,11 +110,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
 
 
-
     [CqlDeclaration("problem-list-item")]
     public CqlCode problem_list_item(CqlContext context) =>
         new CqlCode("problem-list-item", "http://terminology.hl7.org/CodeSystem/condition-category", default, default);
-
 
 
     [CqlDeclaration("encounter-diagnosis")]
@@ -133,11 +120,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("encounter-diagnosis", "http://terminology.hl7.org/CodeSystem/condition-category", default, default);
 
 
-
     [CqlDeclaration("health-concern")]
     public CqlCode health_concern(CqlContext context) =>
         new CqlCode("health-concern", "http://hl7.org/fhir/us/core/CodeSystem/condition-category", default, default);
-
 
 
     [CqlDeclaration("active")]
@@ -145,11 +130,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("active", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
 
-
     [CqlDeclaration("recurrence")]
     public CqlCode recurrence(CqlContext context) =>
         new CqlCode("recurrence", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
-
 
 
     [CqlDeclaration("relapse")]
@@ -157,11 +140,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("relapse", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
 
-
     [CqlDeclaration("inactive")]
     public CqlCode inactive(CqlContext context) =>
         new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
-
 
 
     [CqlDeclaration("remission")]
@@ -169,11 +150,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("remission", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
 
 
-
     [CqlDeclaration("resolved")]
     public CqlCode resolved(CqlContext context) =>
         new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/condition-clinical", default, default);
-
 
 
     [CqlDeclaration("unconfirmed")]
@@ -181,11 +160,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
 
-
     [CqlDeclaration("provisional")]
     public CqlCode provisional(CqlContext context) =>
         new CqlCode("provisional", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
-
 
 
     [CqlDeclaration("differential")]
@@ -193,11 +170,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("differential", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
 
-
     [CqlDeclaration("confirmed")]
     public CqlCode confirmed(CqlContext context) =>
         new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
-
 
 
     [CqlDeclaration("refuted")]
@@ -205,11 +180,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
 
 
-
     [CqlDeclaration("entered-in-error")]
     public CqlCode entered_in_error(CqlContext context) =>
         new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
-
 
 
     [CqlDeclaration("allergy-active")]
@@ -217,11 +190,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("active", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default);
 
 
-
     [CqlDeclaration("allergy-inactive")]
     public CqlCode allergy_inactive(CqlContext context) =>
         new CqlCode("inactive", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default);
-
 
 
     [CqlDeclaration("allergy-resolved")]
@@ -229,11 +200,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("resolved", "http://terminology.hl7.org/CodeSystem/allergyintolerance-clinical", default, default);
 
 
-
     [CqlDeclaration("allergy-unconfirmed")]
     public CqlCode allergy_unconfirmed(CqlContext context) =>
         new CqlCode("unconfirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
-
 
 
     [CqlDeclaration("allergy-confirmed")]
@@ -241,11 +210,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("confirmed", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
 
 
-
     [CqlDeclaration("allergy-refuted")]
     public CqlCode allergy_refuted(CqlContext context) =>
         new CqlCode("refuted", "http://terminology.hl7.org/CodeSystem/allergyintolerance-verification", default, default);
-
 
 
     [CqlDeclaration("Inpatient")]
@@ -253,11 +220,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("inpatient", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default);
 
 
-
     [CqlDeclaration("Outpatient")]
     public CqlCode Outpatient(CqlContext context) =>
         new CqlCode("outpatient", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default);
-
 
 
     [CqlDeclaration("Community")]
@@ -265,11 +230,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("community", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default);
 
 
-
     [CqlDeclaration("Discharge")]
     public CqlCode Discharge(CqlContext context) =>
         new CqlCode("discharge", "http://terminology.hl7.org/CodeSystem/medicationrequest-category", default, default);
-
 
 
     [CqlDeclaration("AD")]
@@ -277,11 +240,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("AD", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
 
 
-
     [CqlDeclaration("DD")]
     public CqlCode DD(CqlContext context) =>
         new CqlCode("DD", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
-
 
 
     [CqlDeclaration("CC")]
@@ -289,11 +250,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("CC", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
 
 
-
     [CqlDeclaration("CM")]
     public CqlCode CM(CqlContext context) =>
         new CqlCode("CM", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
-
 
 
     [CqlDeclaration("pre-op")]
@@ -301,11 +260,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("pre-op", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
 
 
-
     [CqlDeclaration("post-op")]
     public CqlCode post_op(CqlContext context) =>
         new CqlCode("post-op", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
-
 
 
     [CqlDeclaration("billing")]
@@ -313,11 +270,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("billing", "http://terminology.hl7.org/CodeSystem/diagnosis-role", default, default);
 
 
-
     [CqlDeclaration("social-history")]
     public CqlCode social_history(CqlContext context) =>
         new CqlCode("social-history", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-
 
 
     [CqlDeclaration("vital-signs")]
@@ -325,11 +280,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("vital-signs", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
 
-
     [CqlDeclaration("imaging")]
     public CqlCode imaging(CqlContext context) =>
         new CqlCode("imaging", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-
 
 
     [CqlDeclaration("laboratory")]
@@ -337,11 +290,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
 
-
     [CqlDeclaration("procedure")]
     public CqlCode procedure(CqlContext context) =>
         new CqlCode("procedure", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-
 
 
     [CqlDeclaration("survey")]
@@ -349,11 +300,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
 
-
     [CqlDeclaration("exam")]
     public CqlCode exam(CqlContext context) =>
         new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-
 
 
     [CqlDeclaration("therapy")]
@@ -361,11 +310,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
         new CqlCode("therapy", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
 
-
     [CqlDeclaration("activity")]
     public CqlCode activity(CqlContext context) =>
         new CqlCode("activity", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-
 
 
     [CqlDeclaration("LOINC")]
@@ -379,7 +326,6 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-
     [CqlDeclaration("SNOMEDCT")]
     public CqlCode[] SNOMEDCT(CqlContext context)
     {
@@ -389,7 +335,6 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
 
         return a_;
     }
-
 
 
     [CqlDeclaration("ActCode")]
@@ -413,7 +358,6 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-
     [CqlDeclaration("RoleCode")]
     public CqlCode[] RoleCode(CqlContext context)
     {
@@ -424,7 +368,6 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Diagnosis Role")]
@@ -445,7 +388,6 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-
     [CqlDeclaration("RequestIntent")]
     public CqlCode[] RequestIntent(CqlContext context)
     {
@@ -454,7 +396,6 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
 
         return a_;
     }
-
 
 
     [CqlDeclaration("MedicationRequestCategory")]
@@ -469,7 +410,6 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
 
         return a_;
     }
-
 
 
     [CqlDeclaration("ConditionClinicalStatusCodes")]
@@ -488,7 +428,6 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-
     [CqlDeclaration("ConditionVerificationStatusCodes")]
     public CqlCode[] ConditionVerificationStatusCodes(CqlContext context)
     {
@@ -505,7 +444,6 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-
     [CqlDeclaration("AllergyIntoleranceClinicalStatusCodes")]
     public CqlCode[] AllergyIntoleranceClinicalStatusCodes(CqlContext context)
     {
@@ -519,7 +457,6 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-
     [CqlDeclaration("AllergyIntoleranceVerificationStatusCodes")]
     public CqlCode[] AllergyIntoleranceVerificationStatusCodes(CqlContext context)
     {
@@ -531,7 +468,6 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
 
         return a_;
     }
-
 
 
     [CqlDeclaration("ObservationCategoryCodes")]
@@ -553,7 +489,6 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-
     [CqlDeclaration("USCoreObservationCategoryExtensionCodes")]
     public CqlCode[] USCoreObservationCategoryExtensionCodes(CqlContext context)
     {
@@ -562,7 +497,6 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
 
         return a_;
     }
-
 
 
     [CqlDeclaration("ConditionCategory")]
@@ -577,7 +511,6 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
-
     [CqlDeclaration("USCoreConditionCategoryExtensionCodes")]
     public CqlCode[] USCoreConditionCategoryExtensionCodes(CqlContext context)
     {
@@ -587,7 +520,6 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Patient")]
@@ -2265,9 +2197,14 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     }
 
 
+    #endregion Definition Methods
+
+    #region CqlTupleMetadata Properties
+
     private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
         [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
         ["dayIndex", "dayPeriod"]);
 
+    #endregion CqlTupleMetadata Properties
 
 }

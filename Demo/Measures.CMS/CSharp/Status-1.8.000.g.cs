@@ -20,16 +20,19 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
 
     public static Status_1_8_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "Status";
     string ILibrary.Version => "1.8.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance];
-    #endregion Library Members
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("laboratory")]
     public CqlCode laboratory(CqlContext context) =>
         new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-
 
 
     [CqlDeclaration("exam")]
@@ -37,11 +40,9 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
         new CqlCode("exam", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
 
 
-
     [CqlDeclaration("survey")]
     public CqlCode survey(CqlContext context) =>
         new CqlCode("survey", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);
-
 
 
     [CqlDeclaration("ObservationCategoryCodes")]
@@ -55,7 +56,6 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Patient")]
@@ -583,5 +583,7 @@ public partial class Status_1_8_000 : ILibrary, ISingleton<Status_1_8_000>
         return b_;
     }
 
+
+    #endregion Definition Methods
 
 }

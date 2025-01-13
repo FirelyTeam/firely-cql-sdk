@@ -29,7 +29,6 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// </summary>
 internal class CSharpCodeGenerator
 {
-    private static readonly bool IN_NEXT_PR = false;
     private readonly TypeToCSharpConverter _typeToCSharpConverter;
 
     /// <summary>
@@ -175,8 +174,8 @@ internal class CSharpCodeGenerator
             {
                 if (first)
                 {
-                    if (IN_NEXT_PR) IndentedTextWriter.WriteLine("#region CqlTupleMetadata Properties");
-                    if (IN_NEXT_PR) IndentedTextWriter.WriteLine();
+                    IndentedTextWriter.WriteLine("#region CqlTupleMetadata Properties");
+                    IndentedTextWriter.WriteLine();
                     first = false;
                 }
 
@@ -190,15 +189,15 @@ internal class CSharpCodeGenerator
 
             if (!first)
             {
-                if (IN_NEXT_PR) IndentedTextWriter.WriteLine("#endregion CqlTupleMetadata Properties");
+                IndentedTextWriter.WriteLine("#endregion CqlTupleMetadata Properties");
                 IndentedTextWriter.WriteLine();
             }
         }
 
         private void WriteLibraryInterfaceImplementation()
         {
-            IndentedTextWriter.WriteLine(IN_NEXT_PR ? "#region ILibrary Implementation" : "#region Library Members");
-            if (IN_NEXT_PR) IndentedTextWriter.WriteLine();
+            IndentedTextWriter.WriteLine("#region ILibrary Implementation");
+            IndentedTextWriter.WriteLine();
             IndentedTextWriter.WriteLine($"string ILibrary.Name => {LibraryVersionedIdentifier.id.QuoteString()};");
             IndentedTextWriter.WriteLine($"string ILibrary.Version => {LibraryVersionedIdentifier.version.QuoteString()};");
             var dependencies =
@@ -207,9 +206,9 @@ internal class CSharpCodeGenerator
                                 .Select(dep => VariableNameGenerator.NormalizeIdentifier(dep.GetVersionedIdentifier()!))
                                 .Select(typeName => $"{typeName}.Instance");
             IndentedTextWriter.WriteLine($"IReadOnlyList<ILibrary> ILibrary.Dependencies => [{string.Join(", ", dependencies)}];");
-            if (IN_NEXT_PR) IndentedTextWriter.WriteLine();
-            IndentedTextWriter.WriteLine(IN_NEXT_PR ? "#endregion ILibrary Implementation" : "#endregion Library Members");
-            if (IN_NEXT_PR) IndentedTextWriter.WriteLine();
+            IndentedTextWriter.WriteLine();
+            IndentedTextWriter.WriteLine("#endregion ILibrary Implementation");
+            IndentedTextWriter.WriteLine();
         }
 
         private void WriteUsings()
@@ -244,21 +243,21 @@ internal class CSharpCodeGenerator
                 {
                     if (first)
                     {
-                        if (IN_NEXT_PR) IndentedTextWriter.WriteLine("#region Definition Methods");
-                        if (IN_NEXT_PR) IndentedTextWriter.WriteLine();
+                        IndentedTextWriter.WriteLine("#region Definition Methods");
+                        IndentedTextWriter.WriteLine();
                         first = false;
                     }
                     definitions.TryGetTags(libraryName, definition, signature, out var tags);
                     var methodWriter = CreateMethodWriter(definition, expression, tags);
                     methodWriter.WriteMethod();
-                    if (IN_NEXT_PR) IndentedTextWriter.WriteLine();
+                    IndentedTextWriter.WriteLine();
                 }
             }
 
             if (!first)
             {
-                if (IN_NEXT_PR) IndentedTextWriter.WriteLine("#endregion Definition Methods");
-                if (IN_NEXT_PR) IndentedTextWriter.WriteLine();
+                IndentedTextWriter.WriteLine("#endregion Definition Methods");
+                IndentedTextWriter.WriteLine();
             }
         }
 
@@ -341,7 +340,6 @@ internal class CSharpCodeGenerator
 
             if (isDef)
             {
-                if (!IN_NEXT_PR) IndentedTextWriter.WriteLine();
                 IndentedTextWriter.WriteLine($"[CqlDeclaration({CqlName.QuoteString()})]");
                 WriteTags();
 
@@ -361,7 +359,6 @@ internal class CSharpCodeGenerator
             var definitionToCSharpCodeProcessor = new LibraryDefinitionToCSharpCodeProcessor(tupleMetadataBuilder, libraryName, LibraryWriter.LibrarySetWriter.TypeToCSharpConverter, IndentedTextWriter.Indent);
             var definition = definitionToCSharpCodeProcessor.ProcessDefinition(overload, MethodName, "public");
             IndentedTextWriter.WriteLine(definition);
-            if (!IN_NEXT_PR) IndentedTextWriter.WriteLine();
         }
 
         private void WriteTags()

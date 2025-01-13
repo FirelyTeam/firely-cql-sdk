@@ -20,17 +20,20 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
     public static RR23_1_0_0 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "RR23";
     string ILibrary.Version => "1.0.0";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_1.Instance];
-    #endregion Library Members
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Injury due to falling rock")]
     [CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock")]
     public CqlValueSet Injury_due_to_falling_rock(CqlContext context) =>
         new CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock", default);
-
 
 
     [CqlDeclaration("Roadrunners Syndrome Indicators")]
@@ -39,17 +42,14 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
         new CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome", default);
 
 
-
     [CqlDeclaration("Tiny Umbrella")]
     public CqlCode Tiny_Umbrella(CqlContext context) =>
         new CqlCode("U707", "http://acme.org/product-catalog", default, default);
 
 
-
     [CqlDeclaration("entered-in-error")]
     public CqlCode entered_in_error(CqlContext context) =>
         new CqlCode("entered-in-error", "http://terminology.hl7.org/CodeSystem/condition-ver-status", default, default);
-
 
 
     [CqlDeclaration("ACME Product Catalog")]
@@ -63,7 +63,6 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     }
 
 
-
     [CqlDeclaration("ConditionVerificationStatusCodes")]
     public CqlCode[] ConditionVerificationStatusCodes(CqlContext context)
     {
@@ -73,7 +72,6 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Measurement Period")]
@@ -88,7 +86,6 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     }
 
 
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -97,7 +94,6 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
         return b_;
     }
-
 
 
     [CqlDeclaration("Injury due to falling rock within measurement period")]
@@ -131,7 +127,6 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     }
 
 
-
     [CqlDeclaration("Latest injury due to falling rock")]
     public Condition Latest_injury_due_to_falling_rock(CqlContext context)
     {
@@ -148,7 +143,6 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
 
         return d_;
     }
-
 
 
     [CqlDeclaration("Tiny Umbrella Supply within 7 days after most recent injury due to falling rock")]
@@ -200,5 +194,7 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
         return c_;
     }
 
+
+    #endregion Definition Methods
 
 }

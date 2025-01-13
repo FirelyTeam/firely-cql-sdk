@@ -20,17 +20,20 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
 
     public static ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "ProstateCaAvoidanceBoneScanOveruseFHIR";
     string ILibrary.Version => "0.3.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
-    #endregion Library Members
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Bone Scan")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.320")]
     public CqlValueSet Bone_Scan(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.320", default);
-
 
 
     [CqlDeclaration("Pain Warranting Further Investigation for Prostate Cancer")]
@@ -39,12 +42,10 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.451", default);
 
 
-
     [CqlDeclaration("Prostate Cancer")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.319")]
     public CqlValueSet Prostate_Cancer(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.319", default);
-
 
 
     [CqlDeclaration("Prostate Cancer Treatment")]
@@ -53,12 +54,10 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.398", default);
 
 
-
     [CqlDeclaration("Prostate Specific Antigen Test")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.401")]
     public CqlValueSet Prostate_Specific_Antigen_Test(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.401", default);
-
 
 
     [CqlDeclaration("Salvage Therapy")]
@@ -67,11 +66,9 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.399", default);
 
 
-
     [CqlDeclaration("Gleason score in Specimen Qualitative")]
     public CqlCode Gleason_score_in_Specimen_Qualitative(CqlContext context) =>
         new CqlCode("35266-6", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Neoplasm of prostate primary tumor staging category T1c: Tumor identified by needle biopsy (finding)")]
@@ -79,11 +76,9 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
         new CqlCode("433351000124101", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("Neoplasm of prostate primary tumor staging category T2a: Involves one-half of one lobe or less (finding)")]
     public CqlCode Neoplasm_of_prostate_primary_tumor_staging_category_T2a__Involves_one_half_of_one_lobe_or_less__finding_(CqlContext context) =>
         new CqlCode("433361000124104", "http://snomed.info/sct", default, default);
-
 
 
     [CqlDeclaration("Procedure reason record (record artifact)")]
@@ -91,11 +86,9 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
         new CqlCode("433611000124109", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("T1a: Prostate tumor incidental histologic finding in 5 percent or less of tissue resected (finding)")]
     public CqlCode T1a__Prostate_tumor_incidental_histologic_finding_in_5_percent_or_less_of_tissue_resected__finding_(CqlContext context) =>
         new CqlCode("369833007", "http://snomed.info/sct", default, default);
-
 
 
     [CqlDeclaration("T1b: Prostate tumor incidental histologic finding in greater than 5 percent of tissue resected (finding)")]
@@ -103,11 +96,9 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
         new CqlCode("369834001", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("Tumor staging (tumor staging)")]
     public CqlCode Tumor_staging__tumor_staging_(CqlContext context) =>
         new CqlCode("254292007", "http://snomed.info/sct", default, default);
-
 
 
     [CqlDeclaration("LOINC")]
@@ -119,7 +110,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
 
         return a_;
     }
-
 
 
     [CqlDeclaration("SNOMEDCT")]
@@ -138,7 +128,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("UCUM")]
     public CqlCode[] UCUM(CqlContext context)
     {
@@ -147,7 +136,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Measurement Period")]
@@ -162,7 +150,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -171,7 +158,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
 
         return b_;
     }
-
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -183,7 +169,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -191,7 +176,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
 
         return a_;
     }
-
 
 
     [CqlDeclaration("SDE Race")]
@@ -203,7 +187,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -211,7 +194,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Prostate Cancer Diagnosis")]
@@ -237,7 +219,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -246,7 +227,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
 
         return b_;
     }
-
 
 
     [CqlDeclaration("First Prostate Cancer Treatment during day of Measurement Period")]
@@ -285,7 +265,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
 
         return g_;
     }
-
 
 
     [CqlDeclaration("Most Recent Prostate Cancer Staging Tumor Size T1a to T2a")]
@@ -377,7 +356,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
 
         return l_;
     }
-
 
 
     [CqlDeclaration("Most Recent PSA Test Result is Low")]
@@ -479,7 +457,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("Most Recent Gleason Score is Low")]
     public bool? Most_Recent_Gleason_Score_is_Low(CqlContext context)
     {
@@ -555,7 +532,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -573,7 +549,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
 
         return k_;
     }
-
 
 
     [CqlDeclaration("Bone Scan Study Performed")]
@@ -621,7 +596,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -631,7 +605,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
 
         return c_;
     }
-
 
 
     [CqlDeclaration("Has Diagnosis of Pain related to Prostate Cancer")]
@@ -668,7 +641,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
 
         return e_;
     }
-
 
 
     [CqlDeclaration("Has Salvage Therapy Performed after Prostate Cancer Diagnosis")]
@@ -710,7 +682,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("Has Bone Scan Study Performed with Documented Reason")]
     public bool? Has_Bone_Scan_Study_Performed_with_Documented_Reason(CqlContext context)
     {
@@ -732,7 +703,6 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("Denominator Exceptions")]
     public bool? Denominator_Exceptions(CqlContext context)
     {
@@ -745,5 +715,7 @@ public partial class ProstateCaAvoidanceBoneScanOveruseFHIR_0_3_000 : ILibrary, 
         return e_;
     }
 
+
+    #endregion Definition Methods
 
 }

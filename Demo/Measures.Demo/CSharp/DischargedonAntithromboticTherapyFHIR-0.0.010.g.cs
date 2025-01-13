@@ -20,17 +20,20 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     public static DischargedonAntithromboticTherapyFHIR_0_0_010 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "DischargedonAntithromboticTherapyFHIR";
     string ILibrary.Version => "0.0.010";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, TJCOverallFHIR_1_8_000.Instance];
-    #endregion Library Members
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Antithrombotic Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.201")]
     public CqlValueSet Antithrombotic_Therapy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.201", default);
-
 
 
     [CqlDeclaration("Comfort Measures")]
@@ -39,12 +42,10 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/1.3.6.1.4.1.33895.1.3.0.45", default);
 
 
-
     [CqlDeclaration("Discharge To Acute Care Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87")]
     public CqlValueSet Discharge_To_Acute_Care_Facility(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.87", default);
-
 
 
     [CqlDeclaration("Discharged to Health Care Facility for Hospice Care")]
@@ -53,12 +54,10 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.207", default);
 
 
-
     [CqlDeclaration("Discharged to Home for Hospice Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209")]
     public CqlValueSet Discharged_to_Home_for_Hospice_Care(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.209", default);
-
 
 
     [CqlDeclaration("Emergency Department Visit")]
@@ -67,12 +66,10 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.292", default);
 
 
-
     [CqlDeclaration("Hemorrhagic Stroke")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.212")]
     public CqlValueSet Hemorrhagic_Stroke(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.212", default);
-
 
 
     [CqlDeclaration("Ischemic Stroke")]
@@ -81,12 +78,10 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.247", default);
 
 
-
     [CqlDeclaration("Left Against Medical Advice")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308")]
     public CqlValueSet Left_Against_Medical_Advice(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.308", default);
-
 
 
     [CqlDeclaration("Medical Reason")]
@@ -95,12 +90,10 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.473", default);
 
 
-
     [CqlDeclaration("Non-Elective Inpatient Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424")]
     public CqlValueSet Non_Elective_Inpatient_Encounter(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.424", default);
-
 
 
     [CqlDeclaration("Patient Expired")]
@@ -109,19 +102,16 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.309", default);
 
 
-
     [CqlDeclaration("Patient Refusal")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93")]
     public CqlValueSet Patient_Refusal(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.93", default);
 
 
-
     [CqlDeclaration("Pharmacological Contraindications For Antithrombotic Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52")]
     public CqlValueSet Pharmacological_Contraindications_For_Antithrombotic_Therapy(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1110.52", default);
-
 
 
     [CqlDeclaration("Measurement Period")]
@@ -131,7 +121,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
         return (CqlInterval<CqlDateTime>)a_;
     }
-
 
 
     [CqlDeclaration("Patient")]
@@ -144,7 +133,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     }
 
 
-
     [CqlDeclaration("Denominator")]
     public IEnumerable<Encounter> Denominator(CqlContext context)
     {
@@ -152,7 +140,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Antithrombotic Not Given at Discharge")]
@@ -224,7 +211,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     }
 
 
-
     [CqlDeclaration("Encounter With No Antithrombotic At Discharge")]
     public IEnumerable<Encounter> Encounter_With_No_Antithrombotic_At_Discharge(CqlContext context)
     {
@@ -253,7 +239,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
         return c_;
     }
-
 
 
     [CqlDeclaration("Pharmacological Contraindications for Antithrombotic Therapy at Discharge")]
@@ -305,7 +290,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     }
 
 
-
     [CqlDeclaration("Encounter With Pharmacological Contraindications for Antithrombotic Therapy at Discharge")]
     public IEnumerable<Encounter> Encounter_With_Pharmacological_Contraindications_for_Antithrombotic_Therapy_at_Discharge(CqlContext context)
     {
@@ -336,7 +320,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     }
 
 
-
     [CqlDeclaration("Denominator Exceptions")]
     public IEnumerable<Encounter> Denominator_Exceptions(CqlContext context)
     {
@@ -346,7 +329,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
         return c_;
     }
-
 
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -360,7 +342,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     }
 
 
-
     [CqlDeclaration("Initial Population")]
     public IEnumerable<Encounter> Initial_Population(CqlContext context)
     {
@@ -368,7 +349,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Antithrombotic Therapy at Discharge")]
@@ -420,7 +400,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     }
 
 
-
     [CqlDeclaration("Numerator")]
     public IEnumerable<Encounter> Numerator(CqlContext context)
     {
@@ -451,7 +430,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     }
 
 
-
     [CqlDeclaration("SDE Ethnicity")]
     public IEnumerable<Coding> SDE_Ethnicity(CqlContext context)
     {
@@ -459,7 +437,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
         return a_;
     }
-
 
 
     [CqlDeclaration("SDE Payer")]
@@ -471,7 +448,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     }
 
 
-
     [CqlDeclaration("SDE Race")]
     public IEnumerable<Coding> SDE_Race(CqlContext context)
     {
@@ -479,7 +455,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
         return a_;
     }
-
 
 
     [CqlDeclaration("SDE Sex")]
@@ -490,5 +465,7 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
         return a_;
     }
 
+
+    #endregion Definition Methods
 
 }

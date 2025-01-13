@@ -20,17 +20,20 @@ public partial class PalliativeCare_1_11_000 : ILibrary, ISingleton<PalliativeCa
 
     public static PalliativeCare_1_11_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "PalliativeCare";
     string ILibrary.Version => "1.11.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance];
-    #endregion Library Members
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Palliative Care Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090")]
     public CqlValueSet Palliative_Care_Encounter(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090", default);
-
 
 
     [CqlDeclaration("Palliative Care Intervention")]
@@ -39,18 +42,15 @@ public partial class PalliativeCare_1_11_000 : ILibrary, ISingleton<PalliativeCa
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1135", default);
 
 
-
     [CqlDeclaration("Palliative Care Diagnosis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1167")]
     public CqlValueSet Palliative_Care_Diagnosis(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1167", default);
 
 
-
     [CqlDeclaration("Functional Assessment of Chronic Illness Therapy - Palliative Care Questionnaire (FACIT-Pal)")]
     public CqlCode Functional_Assessment_of_Chronic_Illness_Therapy___Palliative_Care_Questionnaire__FACIT_Pal_(CqlContext context) =>
         new CqlCode("71007-9", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("LOINC")]
@@ -64,7 +64,6 @@ public partial class PalliativeCare_1_11_000 : ILibrary, ISingleton<PalliativeCa
     }
 
 
-
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
@@ -72,7 +71,6 @@ public partial class PalliativeCare_1_11_000 : ILibrary, ISingleton<PalliativeCa
 
         return (CqlInterval<CqlDateTime>)a_;
     }
-
 
 
     [CqlDeclaration("Patient")]
@@ -83,7 +81,6 @@ public partial class PalliativeCare_1_11_000 : ILibrary, ISingleton<PalliativeCa
 
         return b_;
     }
-
 
 
     [CqlDeclaration("Has Palliative Care in the Measurement Period")]
@@ -154,5 +151,7 @@ public partial class PalliativeCare_1_11_000 : ILibrary, ISingleton<PalliativeCa
         return aa_;
     }
 
+
+    #endregion Definition Methods
 
 }
