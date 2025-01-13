@@ -48,7 +48,6 @@
 		<Nullable>enable</Nullable>
 		<LangVersion>12</LangVersion>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<Configurations>Debug;Release;</Configurations>
 		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	</PropertyGroup>
