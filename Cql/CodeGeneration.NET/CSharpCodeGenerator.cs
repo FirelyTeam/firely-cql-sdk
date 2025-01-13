@@ -27,7 +27,7 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// <summary>
 /// Processes a definition dictionary of <see cref="LambdaExpression"/> into a .NET classes per library.
 /// </summary>
-internal class CSharpCodeGenerator
+internal class LibrarySetCSharpCodeGenerator
 {
     private readonly TypeToCSharpConverter _typeToCSharpConverter;
 
@@ -46,16 +46,16 @@ internal class CSharpCodeGenerator
     private readonly IReadOnlyList<(string alias, string type)> _aliasedUsings;
 
     /// <summary>
-    /// Gets the version of this <see cref="CSharpCodeGenerator"/> as will appear in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Version"/>.
+    /// Gets the version of this <see cref="LibrarySetCSharpCodeGenerator"/> as will appear in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Version"/>.
     /// </summary>
     private readonly string _generatorToolVersion;
 
     /// <summary>
-    /// Gets the product of this <see cref="CSharpCodeGenerator"/> as will appear in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Tool"/>.
+    /// Gets the product of this <see cref="LibrarySetCSharpCodeGenerator"/> as will appear in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Tool"/>.
     /// </summary>
     private readonly string _generatorToolName;
 
-    public CSharpCodeGenerator(
+    public LibrarySetCSharpCodeGenerator(
         TypeResolver typeResolver,
         TypeToCSharpConverter typeToCSharpConverter)
     {
@@ -103,7 +103,7 @@ internal class CSharpCodeGenerator
     #region Nested Types
 
     private record LibrarySetWriter(
-        CSharpCodeGenerator Processor,
+        LibrarySetCSharpCodeGenerator Processor,
         LibrarySet LibrarySet,
         DefinitionDictionary<LambdaExpression> Definitions)
     {
@@ -356,7 +356,7 @@ internal class CSharpCodeGenerator
                 }
             }
 
-            var definitionToCSharpCodeProcessor = new LibraryDefinitionToCSharpCodeProcessor(tupleMetadataBuilder, libraryName, LibraryWriter.LibrarySetWriter.TypeToCSharpConverter, IndentedTextWriter.Indent);
+            var definitionToCSharpCodeProcessor = new LibraryDefinitionCSharpCodeGenerator(tupleMetadataBuilder, libraryName, LibraryWriter.LibrarySetWriter.TypeToCSharpConverter, IndentedTextWriter.Indent);
             var definition = definitionToCSharpCodeProcessor.ProcessDefinition(overload, MethodName, "public");
             IndentedTextWriter.WriteLine(definition);
         }
@@ -392,7 +392,7 @@ internal class CSharpCodeGenerator
 internal static class CSharpCodeGeneratorExtensions
 {
     public static IEnumerable<(Library library, string cSharp)> GenerateCSharp(
-        this CSharpCodeGenerator generator,
+        this LibrarySetCSharpCodeGenerator generator,
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> definitions)
     {

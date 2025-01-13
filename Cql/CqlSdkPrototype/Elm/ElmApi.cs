@@ -32,7 +32,7 @@ public class ElmApi(ElmApiOptions options) :
         IServiceProvider ServiceProvider,
         ILogger<ElmApi> Logger,
         AssemblyCompiler AssemblyCompiler,
-        CSharpCodeGenerator CSharpCodeGenerator)
+        LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator)
     {
         private readonly ElmApiOptions _options = Options;
 
@@ -55,7 +55,7 @@ public class ElmApi(ElmApiOptions options) :
                 ServiceProvider = services.BuildServiceProvider();
                 Logger = ServiceProvider.GetLogger<ElmApi>();
                 AssemblyCompiler = ServiceProvider.GetAssemblyCompiler();
-                CSharpCodeGenerator = ServiceProvider.GetCSharpCodeProcessor();
+                LibrarySetCSharpCodeGenerator = ServiceProvider.GetCSharpCodeProcessor();
             }
         }
 
@@ -139,7 +139,7 @@ public class ElmApi(ElmApiOptions options) :
         var exceptionHandling = _state.Options.ProcessBatchItemExceptionHandling;
         var debugInformationFormat = _state.Options.AssemblyCompilerDebugInformationFormat;
         AssemblyCompiler assemblyCompiler = _state.AssemblyCompiler;
-        CSharpCodeGenerator cSharpCodeProcessor = _state.CSharpCodeGenerator;
+        LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _state.LibrarySetCSharpCodeGenerator;
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
         Library[] libraries = entries.Values.Select(selector: v => v.ElmLibrary).ToArray();
         LibrarySet librarySet = new LibrarySet(name: "", libraries: libraries);

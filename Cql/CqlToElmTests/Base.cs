@@ -31,7 +31,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static LibraryExpressionBuilder LibraryExpressionBuilder => ServiceProvider.GetLibraryExpressionBuilderScoped();
 
-        internal static CSharpCodeGenerator CSharpCodeGenerator => ServiceProvider.GetCSharpCodeProcessor();
+        internal static LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator => ServiceProvider.GetCSharpCodeProcessor();
 
         internal static AssemblyCompiler AssemblyCompiler => ServiceProvider.GetAssemblyCompiler();
 
@@ -118,10 +118,10 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static LibrarySetCSharp GenerateCSharp(LibrarySetDefinitions librarySetDefinitions)
         {
-            var cSharpCodeGenerator = ServiceProvider.GetCSharpCodeProcessor();
+            var librarySetCSharpCodeGenerator = ServiceProvider.GetCSharpCodeProcessor();
 
             Dictionary<string, string> cSharpCodeByLibraryName =
-                cSharpCodeGenerator
+                librarySetCSharpCodeGenerator
                     .GenerateCSharp(librarySetDefinitions.LibrarySet, librarySetDefinitions.Definitions)
                     .ToDictionary(o => o.library.GetVersionedIdentifier()!, o => o.cSharp);
             return new(librarySetDefinitions, cSharpCodeByLibraryName.AsReadOnly());
@@ -141,7 +141,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 AssemblyCompiler
                     .Compile(
                         librarySet,
-                        CSharpCodeGenerator
+                        LibrarySetCSharpCodeGenerator
                                  .GenerateCSharp(librarySet, definitions))
                     .Single()
                     .assemblyDataWithSourceCode.AssemblyBytes;

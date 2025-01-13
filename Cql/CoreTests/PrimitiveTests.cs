@@ -3417,12 +3417,12 @@ namespace CoreTests
             librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"),"Aggregates", "1.0.0");
             var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
             var definitions = serviceScope.ServiceProvider.GetLibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
-            var cSharpCodeGenerator = serviceProvider.GetCSharpCodeProcessor();
+            var librarySetCSharpCodeGenerator = serviceProvider.GetCSharpCodeProcessor();
             var assemblyCompiler = serviceProvider.GetAssemblyCompiler();
             _ = assemblyCompiler
                 .Compile(
                     librarySet,
-                    cSharpCodeGenerator
+                    librarySetCSharpCodeGenerator
                         .GenerateCSharp(librarySet, definitions))
                 .ToList();
             Assert.IsTrue(true);
