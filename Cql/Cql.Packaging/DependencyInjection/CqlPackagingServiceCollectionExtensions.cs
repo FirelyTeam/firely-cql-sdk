@@ -19,14 +19,12 @@ internal static class CqlPackagingServiceCollectionExtensions
 {
     public static IServiceCollection AddCqlPackagingServices(this IServiceCollection services)
     {
-        services.AddCqlCodeGenerationServices();
-
-        services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
-
-        services.TryAddSingleton<AssemblyCompiler>();
-
+        //services.AddCqlCodeGenerationServices();
+        //services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
+        // services.TryAddSingleton<AssemblyCompiler>();
+        services.AddTypeResolver();
         services.TryAddSingleton<ResourcePackager>();
-
+        services.TryAddSingleton<FhirResourceFileWriter>();
         // services.TryAddScoped<CqlToResourcePackagingPipeline>();
 
         return services;

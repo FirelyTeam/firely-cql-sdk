@@ -111,7 +111,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             foreach (var libraryDependency in librarySet.GetLibraryDependencies(libraryVersionedIdentifier!))
                 if (assemblies.TryGetValue(libraryDependency.GetVersionedIdentifier()!, out var referencedDll))
-                    metadataReferences.Add(MetadataReference.CreateFromImage(referencedDll.AssemblyBytes));
+                    metadataReferences.Add(MetadataReference.CreateFromImage(referencedDll.AssemblyBytes!));
 
             var assemblyInfoSourceString = CreateAssemblyInfoSourceString(library);
             var assemblyInfoSourcePath = "AssemblyInfo.cs";

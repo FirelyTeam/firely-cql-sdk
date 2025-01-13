@@ -25,10 +25,26 @@ internal static class CqlCompilerServiceCollectionExtensions
 {
     internal static IServiceCollection AddCqlCompilerServices(this IServiceCollection services)
     {
+        services.AddTypeResolver();
+        services.AddTypeConverter();
+
+        services.TryAddSingleton<CqlOperatorsBinder>();
+        services.TryAddSingleton<CqlContextBinder>();
+        services.TryAddSingleton<ExpressionBuilderSettings>(_ => ExpressionBuilderSettings.Default); // TODO: Must move to configuration
+        services.TryAddScoped<TupleBuilderCache>();
+        services.TryAddScoped<LibrarySetExpressionBuilder>();
+        services.TryAddScoped<LibraryExpressionBuilder>();
+        services.TryAddScoped<ExpressionBuilder>();
+
+        return services;
+    }
+
+    private static IServiceCollection AddTypeConverter(this IServiceCollection services)
+    {
         services.TryAddSingleton<ModelInspector>(_ => Hl7.Fhir.Model.ModelInfo.ModelInspector);
 
-        services.TryAddKeyedSingleton("Fhir", (sp,_) => new JsonSerializerOptions().ForFhir(sp.GetRequiredService<ModelInspector>()));
-        services.TryAddSingleton<FhirJsonSerializer>();
+        // services.TryAddKeyedSingleton("Fhir", (sp,_) => new JsonSerializerOptions().ForFhir(sp.GetRequiredService<ModelInspector>()));
+        // services.TryAddSingleton<FhirJsonSerializer>();
 
         const int cacheSize = 0; // TODO: Must move to configuration
         services.TryAddSingleton<TypeConverter>(sp =>
@@ -42,22 +58,13 @@ internal static class CqlCompilerServiceCollectionExtensions
             return converter;
         });
 
+        return services;
+    }
+
+    internal static IServiceCollection AddTypeResolver(this IServiceCollection services)
+    {
+        services.TryAddSingleton<ModelInspector>(_ => Hl7.Fhir.Model.ModelInfo.ModelInspector);
         services.TryAddSingleton<TypeResolver, FhirTypeResolver>();
-
-        services.TryAddSingleton<CqlOperatorsBinder>();
-
-        services.TryAddSingleton<CqlContextBinder>();
-
-        services.TryAddScoped<TupleBuilderCache>();
-
-        services.TryAddScoped<LibrarySetExpressionBuilder>();
-
-        services.TryAddScoped<LibraryExpressionBuilder>();
-
-        services.TryAddSingleton<ExpressionBuilderSettings>(_ => ExpressionBuilderSettings.Default); // TODO: Must move to configuration
-
-        services.TryAddScoped<ExpressionBuilder>();
-
         return services;
     }
 }

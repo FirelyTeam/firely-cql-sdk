@@ -1,5 +1,4 @@
-﻿using CqlSdkPrototype.App;
-using CqlSdkPrototype.Cql.Extensibility;
+﻿using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Cql.Internal;
 using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Logging;
@@ -38,7 +37,7 @@ public class CqlApi(CqlApiOptions options) :
             CqlTranslationEntriesMap Entries) : this(Options, Entries, null!, null!, null!)
         {
             var services = new ServiceCollection();
-            services.AddLogging(Options.LoggingOptions);
+            services.AddLoggingFromOptions(Options.LoggingOptions);
             services.AddCqlApi(o => o.Models = Options.Models);
             ServiceProvider = services.BuildServiceProvider();
             Logger = ServiceProvider.GetLogger<CqlApi>();

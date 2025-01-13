@@ -85,6 +85,8 @@ classDiagram
     TypeConverter ..> CqlOperatorsBinder : injected
 
     ModelInspector ..> TypeConverter : injected  
+    
+    ModelInspector ..> FhirTypeResolver : injected  
 
     TypeToCSharpConverter ..> CSharpCodeGenerator : injected
     TypeResolver ..> CSharpCodeGenerator : injected

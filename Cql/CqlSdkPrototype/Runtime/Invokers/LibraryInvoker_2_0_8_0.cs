@@ -2,7 +2,6 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
-using Hl7.Cql.Runtime.Hosting;
 
 namespace CqlSdkPrototype.Runtime.Invokers;
 
@@ -28,7 +27,7 @@ public class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
                        .SelectWhereNotNull(o => o.DeclarationName is { } declarationName
                                                 && o.Method.GetParameters() is [{ } p0]
                                                 && p0.ParameterType == typeof(CqlContext)
-                                                    ? (LibraryDefinitionInvoker)new DefinitionInvoker(declarationName, Library, o.Method)
+                                                    ? (LibraryDefinitionInvoker)new DefinitionInvoker(declarationName, Library, o.Method, o.ValueSetId)
                                                     : null)
                        .ToImmutableDictionary(o => o.DeclarationName);
     }
@@ -42,21 +41,25 @@ public class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
     }
 
     public new static bool TryCreateFromType(
-        CqlRuntimeApi cqlRuntimeApi,
+        RuntimeApi runtimeApi,
         Type libraryType,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
-        var logger = cqlRuntimeApi.Options.ServiceProvider.GetLogger<LibraryInvoker_2_0_8_0>();
-        libraryInvoker = null;
-        if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
+        libraryInvoker = runtimeApi.AsExtensible().UseServices(t =>
         {
-            logger?.LogDebug(
-                "Skipping type {type} because it does not implement ILibrary.",
-                libraryType.FullName);
-            return false;
-        }
-        libraryInvoker = new LibraryInvoker_2_0_8_0(asILibrary);
-        return true;
+            var logger = t.logger;
+            var runtimeApi = t.runtimeApi;
+            if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
+            {
+                logger?.LogDebug(
+                    "Skipping type {type} because it does not implement ILibrary.",
+                    libraryType.FullName);
+                return null;
+            }
+
+            return new LibraryInvoker_2_0_8_0(asILibrary);
+        });
+        return libraryInvoker != null;
     }
 
     public static bool SupportsVersion(Version cqlToolVersion)
@@ -67,7 +70,8 @@ public class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
     private class DefinitionInvoker(
         string declarationName,
         ILibrary library,
-        MethodInfo methodInfo) : LibraryDefinitionInvoker(declarationName, library, methodInfo)
+        MethodInfo methodInfo,
+        string? valueSetId) : LibraryDefinitionInvoker(declarationName, library, methodInfo, valueSetId)
     {
         public override object? Invoke(CqlContext cqlContext)
         {

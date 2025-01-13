@@ -25,7 +25,8 @@ internal class PackagerCli
     ILogger<PackagerCli> logger,
     OptionsConsoleDumper optionsConsoleDumper,
     IOptions<PackagerCliOptions> packagerCliOptions,
-    ResourcePackager resourcePackager)
+    ResourcePackager resourcePackager,
+    FhirResourceFileWriter fhirResourceFileWriter)
 {
     public int Run(bool translateCql = false)
     {
@@ -45,19 +46,19 @@ internal class PackagerCli
                              LoggingOptions = loggingOptions,
                              ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
                          })
-                         .UseValue(
-                             _ => opt.CqlInDirectory,
-                             withValue: (api, cql) => api.AddCqlLibrariesFromDirectory(cql),
-                             withNoValue: _ => logger.LogWarning("No input directory specified for ELM. Nothing to do."))
+                         .OnValueSelect(
+                             valueSelector: _ => opt.CqlInDirectory,
+                             ifHasValue: (api, cql) => api.AddCqlLibrariesFromDirectory(cql),
+                             ifNoValue: _ => logger.LogWarning("No input directory specified for ELM. Nothing to do."))
                          .Translate()
-                         .UseValue(
-                             _ => opt.ElmOutDirectory,
-                             withValue: (api, elm) =>
+                         .OnValueSelect(
+                             valueSelector: _ => opt.ElmOutDirectory,
+                             ifHasValue: (api, elm) =>
                              {
                                  elm.Recreate();
                                  api.SaveElmFileToDirectory(elm);
                              },
-                             withNoValue: _ => logger.LogInformation("No out directory specified for ELM."))
+                             ifNoValue: _ => logger.LogInformation("No out directory specified for ELM."))
                          .Compile();
             }
             else
@@ -68,43 +69,65 @@ internal class PackagerCli
                              LoggingOptions = loggingOptions,
                              ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
                          })
-                         .UseValue(
+                         .OnValueSelect(
                              _ => opt.ElmInDirectory,
-                             withValue: (api, elm) => api.AddElmFilesFromDirectory(elm, filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name)),
-                             withNoValue: _ => logger.LogWarning("No input directory specified for ELM. Nothing to do."))
+                             ifHasValue: (api, elm) => api.AddElmFilesFromDirectory(elm, filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name)),
+                             ifNoValue: _ => logger.LogWarning("No input directory specified for ELM. Nothing to do."))
                          .Compile();
             }
 
-            if (opt.CSharpOutDirectory is { } dirOutCS)
+            if (opt.CSharpOutDirectory is { } dirOutCS
+                && elmApi.AsExtensible().Entries.Any(e => e.Value.CSharpSourceCode is not null))
             {
                 dirOutCS.Recreate();
                 elmApi.SaveCSharpFilesToDirectory(dirOutCS);
             }
 
-            if (opt.AssemblyOutDirectory is { } dirOutDll)
+            if (opt.AssemblyOutDirectory is { } dirOutDll
+                && elmApi.AsExtensible().Entries.Any(e => e.Value.AssemblyBinary is not null))
             {
                 dirOutDll.Recreate();
                 elmApi.SaveAssemblyBinariesToDirectory(dirOutDll);
             }
 
             if (opt is
+                // Check that we have all the required options
                 {
-                    CqlInDirectory: { } inDirCql,
-                    ElmInDirectory: { } inDirElm,
-                    FhirOutDirectory: { } dirOutFhir,
-                    FhirCanonicalRootUrl: var canonicalRootUrl
-                })
+                    CqlInDirectory: { } cqlInDir,
+                    ElmInDirectory: { } elmInDir,
+                    FhirOutDirectory: { } fhirOutDir,
+                    FhirCanonicalRootUrl: var canonicalRootUrl,
+                    FhirOverrideDate: var overrideDate
+                }
+                // Check that we have the libraries produced by the ElmApi
+                && elmApi.AsExtensible()
+                         .Entries
+                         .Select(e => e.Value.ElmLibrary)
+                         .ToArray() is {Length:>0} libraries
+                // Check that we have the assemblies produced by the ElmApi
+                && elmApi.AsExtensible()
+                         .Entries
+                         .Where(e => e.Value is {AssemblyBinary: { }, CSharpSourceCode: { }})
+                         .ToDictionary(
+                             e => e.Key.ToString(),
+                             e => new AssemblyDataWithSourceCode(
+                                 assemblyBytes: e.Value.AssemblyBinary!,
+                                 sourceCodeFileName: "", // Won't get used
+                                 sourceCode: e.Value.CSharpSourceCode!,
+                                 debugSymbolsBytes: e.Value.DebugSymbolsBinary)) is {} assembliesByLibraryName)
             {
                 _ = resourcePackager;
-                /*dirOutFhir.Recreate();
-                LibrarySet elmLibrarySet = null!;
-                IReadOnlyDictionary<string, AssemblyDataWithSourceCode> assembliesByLibraryName = null!;
+                LibrarySet elmLibrarySet = new LibrarySet("", libraries);
                 IReadOnlyCollection<Resource> resources = resourcePackager.PackageResources(
-                    inDirElm,
-                    inDirCql,
+                    elmInDir,
+                    cqlInDir,
                     canonicalRootUrl?.ToString(),
                     elmLibrarySet,
-                    assembliesByLibraryName);*/
+                    assembliesByLibraryName);
+
+                fhirOutDir.Recreate();
+                foreach (var resource in resources)
+                    fhirResourceFileWriter.SaveResource(resource, fhirOutDir, overrideDate);
             }
 
             return 0;
@@ -121,17 +144,17 @@ internal class PackagerCli
 
 file static class X
 {
-    public static TSelf UseValue<TSelf, TValue>(
+    public static TSelf OnValueSelect<TSelf, TValue>(
         this TSelf self,
-        Func<TSelf, TValue?> maybeSelector,
-        Action<TSelf, TValue>? withValue = null,
-        Action<TSelf>? withNoValue = null)
+        Func<TSelf, TValue?> valueSelector,
+        Action<TSelf, TValue>? ifHasValue = null,
+        Action<TSelf>? ifNoValue = null)
         where TValue : class
     {
-        if (maybeSelector(self) is { } val)
-            withValue?.Invoke(self, val);
+        if (valueSelector(self) is { } val)
+            ifHasValue?.Invoke(self, val);
         else
-            withNoValue?.Invoke(self);
+            ifNoValue?.Invoke(self);
         return self;
     }
 

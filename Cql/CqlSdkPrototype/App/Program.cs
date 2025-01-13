@@ -1,6 +1,5 @@
 ﻿using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensibility;
-using CqlSdkPrototype.Cql.Internal;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Internal;
@@ -34,7 +33,7 @@ internal class Program
         var cqlApi = new CqlApi(cqlApiOptions);
 
         using var serviceProvider = new ServiceCollection()
-                                    .AddLogging(loggingOptions)
+                                    .AddLoggingFromOptions(loggingOptions)
                                     .BuildServiceProvider();
         var logger = serviceProvider.GetLogger<Program>();
 
@@ -78,7 +77,7 @@ internal class Program
         object? Invoke(string libraryName, string declarationName)
         {
             var libraryIdentifier = CqlVersionedLibraryIdentifier.Parse(libraryName);
-            var result = invocationScope.InvokeLibraryDefinition(libraryIdentifier, declarationName, cqlContext);
+            var result = invocationScope.GetLibraryDefinitionResult(cqlContext, libraryIdentifier, declarationName);
             return result;
         }
     }
@@ -106,9 +105,9 @@ internal class Program
                                     .CreateElmApi()
                                     .WithOptions(o => o with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded })
                                     .Compile()
-                                    .CreateCqlRuntimeApi()
+                                    .CreateRuntimeApi()
                                     .CreateInvocationScope();
-        var result = invocationScope.InvokeLibraryDefinition(libraryIdentifier, "Three", cqlContext);
+        var result = invocationScope.GetLibraryDefinitionResult(cqlContext, libraryIdentifier, "Three");
         Debug.Assert(result is 3);
     }
 
@@ -186,7 +185,7 @@ internal class Program
     //     FhirJsonPocoDeserializer fhirJsonPocoDeserializer)
     // {
     //     var logger = serviceProvider.GetLogger<Program>();
-    //     if (CqlRuntimeApi.Create(
+    //     if (RuntimeApi.Create(
     //             out var librarySetInvoker))
     //     {
     //         // logger.LogInformation("{msg}", sb.ToString());

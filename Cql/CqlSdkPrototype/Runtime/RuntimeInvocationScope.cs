@@ -3,11 +3,11 @@ using CqlSdkPrototype.Runtime.Invokers;
 
 namespace CqlSdkPrototype.Runtime;
 
-public class CqlInvocationScope : IDisposable
+public class RuntimeInvocationScope : IDisposable
 {
     private readonly AssemblyLoadContext _alc;
 
-    internal CqlInvocationScope(CqlRuntimeApi cqlRuntimeApi, AssemblyLoadContext alc)
+    internal RuntimeInvocationScope(RuntimeApi runtimeApi, AssemblyLoadContext alc)
     {
         _alc = alc;
         Libraries =
@@ -15,7 +15,7 @@ public class CqlInvocationScope : IDisposable
                 .SelectMany(a => a.GetTypes())
                 .SelectWhereNotNull(t =>
                 {
-                    LibraryInvoker.TryCreateFromType(cqlRuntimeApi, t, out var libraryInvoker);
+                    LibraryInvoker.TryCreateFromType(runtimeApi, t, out var libraryInvoker);
                     return libraryInvoker;
                 })
                 .ToImmutableDictionary(o => o.LibraryVersionedIdentifier);

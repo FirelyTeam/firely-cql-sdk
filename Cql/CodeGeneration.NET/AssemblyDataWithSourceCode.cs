@@ -17,17 +17,37 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// <param name="SourceCode">The collection of source code files that contributed to this assembly.</param>
 /// <param name="DebugSymbolsBytes">The assembly's debug symbols in binary data.</param>
 internal record AssemblyDataWithSourceCode(
-    byte[] AssemblyBytes,
-    IReadOnlyDictionary<string, string> SourceCode,
+    byte[]? AssemblyBytes,
+    IReadOnlyDictionary<string, string>? SourceCode,
     byte[]? DebugSymbolsBytes = null) : AssemblyData(AssemblyBytes, DebugSymbolsBytes)
 {
-    public void Deconstruct(out byte[] assemblyBytes, out IReadOnlyDictionary<string, string> sourceCode)
+    /// <summary>
+    /// An empty instance of <see cref="AssemblyDataWithSourceCode"/>.
+    /// </summary>
+    public new static AssemblyDataWithSourceCode Default { get; } = new(null, null, null);
+
+    public AssemblyDataWithSourceCode(
+        byte[]? assemblyBytes,
+        string? sourceCodeFileName,
+        string? sourceCode,
+        byte[]? debugSymbolsBytes = null) : this(assemblyBytes, ToSingleDictionary(sourceCodeFileName, sourceCode), debugSymbolsBytes)
+    {
+    }
+
+    private static IReadOnlyDictionary<string, string>? ToSingleDictionary(string? sourceCodeFileName, string? sourceCode)
+    {
+        return(sourceCodeFileName, sourceCode) is ({}, {})
+            ? new Dictionary<string, string> { { sourceCodeFileName, sourceCode } }.AsReadOnly()
+            : null;
+    }
+
+    public void Deconstruct(out byte[]? assemblyBytes, out IReadOnlyDictionary<string, string>? sourceCode)
     {
         assemblyBytes = AssemblyBytes;
         sourceCode = SourceCode;
     }
 
-    public void Deconstruct(out byte[] assemblyBytes, out IReadOnlyDictionary<string, string> sourceCode, out byte[]? debugSymbolsBytes)
+    public void Deconstruct(out byte[]? assemblyBytes, out IReadOnlyDictionary<string, string>? sourceCode, out byte[]? debugSymbolsBytes)
     {
         assemblyBytes = AssemblyBytes;
         sourceCode = SourceCode;

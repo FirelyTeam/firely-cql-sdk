@@ -19,9 +19,9 @@ internal static class PackagerCliServiceCollectionExtensions
     internal static IServiceCollection AddPackagerCliServices(
         this IServiceCollection services)
     {
+        services.AddCqlPackagingServices();
         services.TryAddScoped<PackagerCli>();
         services.TryAddSingleton<OptionsConsoleDumper>();
-        services.AddCqlPackagingServices();
         return services;
     }
 

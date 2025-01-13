@@ -1,5 +1,4 @@
-﻿using CqlSdkPrototype.App;
-using Hl7.Cql.CqlToElm;
+﻿using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Elm;
 using ExpressionVisitor = Hl7.Cql.CqlToElm.Visitors.ExpressionVisitor;

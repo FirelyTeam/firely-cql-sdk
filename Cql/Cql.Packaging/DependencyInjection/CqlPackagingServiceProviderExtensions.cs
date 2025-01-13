@@ -19,4 +19,7 @@ internal static class CqlPackagingServiceProviderExtensions
 
     public static ResourcePackager GetResourcePackager(this IServiceProvider serviceProvider) =>
         serviceProvider.GetRequiredService<ResourcePackager>();
+
+    public static FhirResourceFileWriter GetFhirResourceFileWriter(this IServiceProvider serviceProvider) =>
+        serviceProvider.GetRequiredService<FhirResourceFileWriter>();
 }

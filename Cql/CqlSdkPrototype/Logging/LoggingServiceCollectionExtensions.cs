@@ -22,7 +22,7 @@ public static class LoggingServiceCollectionExtensions
         return builder;
     }
 
-    public static IServiceCollection AddLogging(
+    public static IServiceCollection AddLoggingFromOptions(
         this IServiceCollection services,
         LoggingOptions options,
         Action<ILoggingBuilder>? configure = null,

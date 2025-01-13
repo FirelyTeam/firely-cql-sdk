@@ -1,7 +1,5 @@
-﻿using CqlSdkPrototype.App;
-using CqlSdkPrototype.Cql;
+﻿using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensibility;
-using CqlSdkPrototype.Cql.Internal;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Logging;
@@ -21,37 +19,34 @@ internal static class ApiExtensions
         var elmApi = new ElmApi(elmApiOptions).AddElmFromCqlApi(cqlApi);
         return elmApi;
     }
-    public static CqlRuntimeApi CreateCqlRuntimeApi<TElmApi>(this TElmApi elmApi)
+
+    public static RuntimeApi CreateRuntimeApi<TElmApi>(this TElmApi elmApi)
         where TElmApi : IElmApiExtensible<TElmApi>
     {
-        var serviceProvider = new ServiceCollection()
-                                    .AddLogging(elmApi.Options.LoggingOptions)
-                                    .BuildServiceProvider();
-        var cqlRuntimeApiOptions = new CqlRuntimeApiOptions(serviceProvider);
-        var cqlRuntimeApi = CqlRuntimeApi
-                            .Create(cqlRuntimeApiOptions)
-                            .AddAssemblies(
-                                from entry in elmApi.Entries
-                                let assembly = entry.Value.AssemblyBinary
-                                where assembly is not null
-                                let debugSymbols = entry.Value.DebugSymbolsBinary
-                                let assemblyData = new AssemblyData(assembly, debugSymbols)
-                                select assemblyData
-                                );
-        return cqlRuntimeApi;
+        var assemblyDatas =
+            from entry in elmApi.Entries
+            let assembly = entry.Value.AssemblyBinary
+            where assembly is not null
+            let debugSymbols = entry.Value.DebugSymbolsBinary
+            let assemblyData = new AssemblyData(assembly, debugSymbols)
+            select assemblyData;
+        var runtimeApi =
+            elmApi.CreateRuntimeApi()
+                  .AddAssemblies(assemblyDatas);
+        return runtimeApi;
     }
 
-    public static CqlInvocationScope CreateInvocationScope<TElmApi>(
+    public static RuntimeInvocationScope CreateInvocationScope<TElmApi>(
         this TElmApi elmApi)
         where TElmApi : IElmApiExtensible<TElmApi>
     {
         return elmApi
                .Compile()
-               .CreateCqlRuntimeApi()
+               .CreateRuntimeApi()
                .CreateInvocationScope();
     }
 
-    public static CqlInvocationScope CreateInvocationScope(
+    public static RuntimeInvocationScope CreateInvocationScope(
         this CqlApi cqlApi)
     {
         return cqlApi

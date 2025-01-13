@@ -19,6 +19,10 @@ internal class PackagerCliOptions {
         opt.CSharpOutDirectory = GetDirectoryInfo(nameof(CSharpOutDirectory))!;
         opt.FhirOutDirectory = GetDirectoryInfo(nameof(FhirOutDirectory))!;
 
+        // While DateTimes can be bound directly from IConfiguration, we convert to UTC
+        opt.FhirOverrideDate = opt.FhirOverrideDate?.ToUniversalTime();
+
+
         DirectoryInfo? GetDirectoryInfo(string key)
         {
             var path = section[key];

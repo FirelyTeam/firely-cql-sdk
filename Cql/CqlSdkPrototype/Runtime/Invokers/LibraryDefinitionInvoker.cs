@@ -7,12 +7,14 @@ namespace CqlSdkPrototype.Runtime.Invokers;
 public abstract class LibraryDefinitionInvoker(
     string declarationName,
     ILibrary library,
-    MethodInfo methodInfo)
+    MethodInfo methodInfo,
+    string? valueSetId)
 {
     public string DeclarationName { get; } = declarationName;
     public Type ReturnType => MethodInfo.ReturnType;
     private ILibrary Library { get; } = library;
     private MethodInfo MethodInfo { get; } = methodInfo;
+    public string? ValueSetId { get; } = valueSetId;
 
     public abstract object? Invoke(CqlContext cqlContext);
 

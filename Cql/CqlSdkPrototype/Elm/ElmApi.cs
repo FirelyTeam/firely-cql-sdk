@@ -7,8 +7,6 @@ using Hl7.Cql.Runtime;
 using ElmCompilationEntriesMap = System.Collections.Immutable.ImmutableDictionary<
     CqlSdkPrototype.CqlVersionedLibraryIdentifier,
     CqlSdkPrototype.Elm.Extensibility.ElmCompilationEntry>;
-using CqlSdkPrototype.App;
-using CqlSdkPrototype.Cql.Internal;
 using CqlSdkPrototype.Elm.Internal;
 using CqlSdkPrototype.Logging;
 using Hl7.Cql.Runtime.Hosting;
@@ -16,10 +14,13 @@ using Hl7.Cql.Runtime.Hosting;
 namespace CqlSdkPrototype.Elm;
 
 public class ElmApi(ElmApiOptions options) :
-    IElmApiExtensible<ElmApi>
+    IElmApiExtensible<ElmApi>,
+    IElmApiInternal<ElmApi>
 {
     internal IElmApiExtensible<ElmApi> AsExtensible() => this;
-    ElmApi IElmApiExtensible<ElmApi>.UseServices(Func<(ElmApi elmApi, ILogger<ElmApi> logger), ElmApi> action) => action((this, _state.Logger));
+    internal IElmApiInternal<ElmApi> AsInternal() => this;
+    T IElmApiExtensible<ElmApi>.UseServices<T>(Func<(ElmApi elmApi, ILogger<ElmApi> logger), T> action) => action((this, _state.Logger));
+    T IElmApiInternal<ElmApi>.UseServices<T>(Func<(ElmApi elmApi, ILogger<ElmApi> logger, AssemblyCompiler assemblyCompiler, LibrarySetCSharpCodeGenerator librarySetCSharpCodeGenerator), T> action) => action((this, _state.Logger, _state.AssemblyCompiler, _state.LibrarySetCSharpCodeGenerator));
     public static ElmApi Create(ElmApiOptions options) => new(options);
 
     #region State
@@ -53,7 +54,7 @@ public class ElmApi(ElmApiOptions options) :
             {
                 _options = value;
                 var services = new ServiceCollection();
-                services.AddLogging(value.LoggingOptions);
+                services.AddLoggingFromOptions(value.LoggingOptions);
                 services.AddElmApi();
                 ServiceProvider = services.BuildServiceProvider();
                 Logger = ServiceProvider.GetLogger<ElmApi>();
@@ -84,7 +85,6 @@ public class ElmApi(ElmApiOptions options) :
     {
         _state = _state with { Entries = entries };
         return this;
-        // return new CqlApi(_state with { Entries = entries });
     }
 
     public ElmApi WithOptions(
@@ -92,7 +92,6 @@ public class ElmApi(ElmApiOptions options) :
     {
         var newOptions = replaceOptions(_state.Options);
         if (!ReferenceEquals(_state.Options, newOptions))
-            // return new CqlApi(_state with { Options = newOptions });
             _state = _state with { Options = newOptions };
         return this;
     }
@@ -205,7 +204,7 @@ public class ElmApi(ElmApiOptions options) :
                 continue;
             }
 
-            var cSharpSourceCode = sourceCodePerName.Values.Single(); // We always expect a single source file
+            var cSharpSourceCode = sourceCodePerName!.Values.Single(); // We always expect a single source file
             libraryCompilation = libraryCompilation with
             {
                 CSharpSourceCode = cSharpSourceCode,

@@ -9,11 +9,15 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.Loader;
+using CqlSdkPrototype;
+using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Runtime;
 using Hl7.Cql.Packaging;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Expression = Hl7.Cql.Elm.Expression;
@@ -31,10 +35,6 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static LibraryExpressionBuilder LibraryExpressionBuilder => ServiceProvider.GetLibraryExpressionBuilderScoped();
 
-        internal static LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator => ServiceProvider.GetLibrarySetCSharpCodeGenerator();
-
-        internal static AssemblyCompiler AssemblyCompiler => ServiceProvider.GetAssemblyCompiler();
-
         internal static MessageProvider Messaging => ServiceProvider.GetMessageProvider();
 
         protected static IServiceCollection ServiceCollection(
@@ -48,6 +48,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 .AddCqlToElmMessaging()
                 .AddLogging(builder => builder.AddConsole())
                 .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider))
+                .AddCqlCompilerServices()
                 .AddCqlPackagingServices();
 
 
@@ -132,31 +133,35 @@ namespace Hl7.Cql.CqlToElm.Test
             Library library,
             CqlContext? ctx = null)
         {
+            ctx ??= DefaultCqlContext;
             var lambda = LibraryExpressionBuilder.Lambda(expression);
-            LibrarySet librarySet = new("TempLibrarySet", library);
-            DefinitionDictionary<LambdaExpression> definitions = new();
             var expressionName = "TempExpression";
-            definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
-            var assemblyBytes =
-                AssemblyCompiler
-                    .Compile(
-                        librarySet,
-                        LibrarySetCSharpCodeGenerator
-                                 .GenerateCSharp(librarySet, definitions))
-                    .Single()
-                    .assemblyDataWithSourceCode.AssemblyBytes;
-            var alc = new AssemblyLoadContext("TempAssemblyLoadContext", true);
-            try
-            {
-                using var assemblyStream = new MemoryStream(assemblyBytes);
-                alc.LoadFromStream(assemblyStream);
-                var result = alc.Run(library.identifier.id, library.identifier.version, DefaultCqlContext);
-                return result[expressionName];
-            }
-            finally
-            {
-                alc.Unload();
-            }
+            var assemblyBytes = CreateElmApi()
+                                .AsInternal()
+                                .UseServices(t =>
+                                {
+                                    LibrarySet librarySet = new("TempLibrarySet", library);
+                                    DefinitionDictionary<LambdaExpression> definitions = new();
+                                    definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
+                                    var generateCSharp = t.librarySetCSharpCodeGenerator.GenerateCSharp(librarySet, definitions);
+                                    var compile = t.assemblyCompiler.Compile(librarySet, generateCSharp, t.elmApi.AsExtensible().Options.AssemblyCompilerDebugInformationFormat);
+                                    return compile.Single().assemblyDataWithSourceCode.AssemblyBytes;
+                                });
+
+            using var scope = RuntimeApi.Create(RuntimeApiOptions.Default)
+                                        .AddAssemblies([AssemblyData.Default with { AssemblyBytes = assemblyBytes }])
+                                        .CreateInvocationScope();
+            var result = scope.GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);
+            return result;
+        }
+
+        private static ElmApi CreateElmApi()
+        {
+            var elmApiOptions = ElmApiOptions.Default;
+            if (Debugger.IsAttached)
+                elmApiOptions = elmApiOptions with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
+            var elmApi = ElmApi.Create(elmApiOptions);
+            return elmApi;
         }
 
         private static readonly CqlContext DefaultCqlContext = FhirCqlContext.CreateContext();
@@ -333,16 +338,15 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static byte[] Compile(Library library)
         {
-            var lambdas = LibraryExpressionBuilder.ProcessLibrary(library);
-            var cs = ServiceProvider.GetLibrarySetCSharpCodeGenerator();
-            var asm = ServiceProvider.GetAssemblyCompiler();
-            var librarySet = new LibrarySet("",library);
-            return
-                asm.Compile(
-                       librarySet,
-                       cs.GenerateCSharp(librarySet, lambdas))
-                   .Single()
-                   .assemblyDataWithSourceCode.AssemblyBytes;
+            var assembly = CreateElmApi()
+                .AddElmLibraries([library])
+                .Compile()
+                .AsExtensible()
+                .Entries
+                .Values
+                .Single()
+                .AssemblyBinary;
+            return assembly;
         }
     }
 }

@@ -46,8 +46,6 @@ internal class ResourcePackager(
 
         void OnResourceCreated(FhirResource resource)
         {
-            Debug.Fail("Needs implementation");
-            //_fhirResourcePostProcessor?.ProcessResource(resource);
             resources!.Add(resource);
         }
 
@@ -202,7 +200,7 @@ file static class LibraryPackager
             AddCqlAttachment(elmLibrary, fhirLibrary, cqlFile);
 
         AddDllAttachment(elmLibrary, fhirLibrary, assemblyDataWithSourceCode);
-        foreach (var kvp in assemblyDataWithSourceCode.SourceCode)
+        foreach (var kvp in assemblyDataWithSourceCode.SourceCode!)
             AddCSharpAttachment(fhirLibrary, kvp);
 
         return fhirLibrary;
