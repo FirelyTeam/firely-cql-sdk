@@ -28,6 +28,9 @@
 	<!-- Compiler settings -->
 	<PropertyGroup>
 		<Nullable>enable</Nullable>
+		<!-- CqlToElmEnabled and ElmToCSharpEnabled declared in BuildArtifacts.csproj, cql-base.props, cql-demo.props  -->
+		<CqlToElmEnabled>false</CqlToElmEnabled>
+		<ElmToCSharpEnabled>false</ElmToCSharpEnabled>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -36,9 +39,6 @@
 		<Optimize>false</Optimize>
 		<DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
 		<LibraryPKHash></LibraryPKHash>
-		<!-- CqlToElmEnabled and ElmToCSharpEnabled declared in BuildArtifacts.csproj, cql-base.props, cql-demo.props  -->
-		<CqlToElmEnabled>false</CqlToElmEnabled>
-		<ElmToCSharpEnabled>false</ElmToCSharpEnabled>
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

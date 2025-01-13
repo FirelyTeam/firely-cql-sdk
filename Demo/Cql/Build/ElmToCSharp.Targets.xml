@@ -17,9 +17,14 @@
 		<!-- This PackagerCLI reference can remain relative to the is file. -->
 		<PackagerCLI>$(MSBuildThisFileDirectory)../../../Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
 	</PropertyGroup>
+	<!-- <Target -->
+	<!-- 	Name="DumpGenerateCSharp" -->
+	<!-- 	BeforeTargets="PreBuildEvent"> -->
+	<!-- 	<Message Text="###===>&#10;MSBuildProjectName=$(MSBuildProjectName)&#10;ElmToCSharpEnabled=$(ElmToCSharpEnabled)&#10;CqlToElmEnabled=$(CqlToElmEnabled)&#10;PackagerCLI=$(PackagerCLI)" Importance="High" /> -->
+	<!-- </Target> -->
 
 	<Target Name="GenerateCSharp"
-	        Condition="Exists('$(PackagerCLI)')"
+	        Condition="'$(ElmToCSharpEnabled)'=='true' And Exists('$(PackagerCLI)')"
 	        BeforeTargets="PreBuildEvent">
 
 		<PropertyGroup>
@@ -70,7 +75,8 @@
 		<OnError ExecuteTargets="TouchFiles" />
 	</Target>
 
-	<Target Name="TouchFiles">
+	<Target Name="TouchFiles"
+					Condition="'$(ElmToCSharpEnabled)'=='true'">
 		<Touch Files="@(CqlFiles)">
 			<Output
 				TaskParameter="TouchedFiles"
@@ -82,7 +88,9 @@
 		<CSharpFiles Include="CSharp/**/*.cs" />
 	</ItemGroup>
 
-	<Target Name="Delete CSharp" AfterTargets="Clean">
+	<Target Name="Delete CSharp"
+					Condition="'$(ElmToCSharpEnabled)'=='true'"
+					AfterTargets="Clean">
 		<Message Text="$(Box.Replace({Text}, Deleting C# files))" Importance="High" />
 		<Delete Files="@(CSharpFiles)" />
 	</Target>
@@ -91,7 +99,9 @@
 		<ResourceFiles Include="$(ResourcesDirectory)/*.json" />
 	</ItemGroup>
 
-	<Target Name="Delete Resources" AfterTargets="Clean">
+	<Target Name="Delete Resources"
+					Condition="'$(ElmToCSharpEnabled)'=='true'"
+					AfterTargets="Clean">
 		<Message Text="$(Box.Replace({Text}, Deleting Resource files))" Importance="High" />
 		<Delete Files="@(ResourceFiles)" />
 	</Target>
@@ -104,7 +114,9 @@
 		<ResultsFiles Include="$(TestResultsDirectory)/*.*" />
 	</ItemGroup>
 
-	<Target Name="Delete Results" AfterTargets="Clean">
+	<Target Name="Delete Results"
+					Condition="'$(ElmToCSharpEnabled)'=='true'"
+					AfterTargets="Clean">
 		<Message Text="$(Box.Replace({Text}, Deleting Test Results files))" Importance="High" />
 		<RemoveDir Directories="$(TestResultsDirectory)" />
 	</Target>

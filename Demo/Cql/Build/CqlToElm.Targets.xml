@@ -31,7 +31,7 @@
 	<Target Name="GenerateElmFiles"
 	        Inputs="@(CqlFiles)"
 	        Outputs="@(CqlFiles->'$(ElmDirectory)/%(FileName).json')"
-	        Condition="'$(LibrarySet)'!=''"
+	        Condition="'$(CqlToElmEnabled)'=='true' And '$(LibrarySet)'!=''"
 	        BeforeTargets="PreBuildEvent">
 
 		<ItemGroup>
@@ -44,9 +44,12 @@
 		<Delete Files="@(ElmFiles)" />-->
 
 		<!-- Generate ELM files -->
-		<Message Text="$(Box.Replace({Text}, Generating ELM&#10;| $(JavaCLI)))" Importance="High" />
+		<Message
+			Text="$(Box.Replace({Text}, Generating ELM&#10;| $(JavaCLI)))" Importance="High" />
 
-		<Exec Command="$(JavaCLI)" ConsoleToMSBuild="true">
+		<Exec
+			Command="$(JavaCLI)"
+			ConsoleToMSBuild="true">
 			<Output TaskParameter="ConsoleOutput" ItemName="OutputOfExec" />
 		</Exec>
 
@@ -57,13 +60,16 @@
             Encoding="Unicode"/>
 
 		<!-- Set a property to indicate that the task ran -->
-		<CreateProperty Value="true">
+		<CreateProperty
+			Value="true">
 			<Output TaskParameter="ValueSetByTask" PropertyName="CQLtoElmRan" />
 		</CreateProperty>
 
 	</Target>
 
-	<Target Name="CleanElmFiles" AfterTargets="Clean">
+	<Target Name="CleanElmFiles"
+	        Condition="'$(CqlToElmEnabled)'=='true'"
+					AfterTargets="Clean">
 		<ItemGroup>
 			<ElmFiles Include="$(ElmDirectory)/*.json"/>
 		</ItemGroup>

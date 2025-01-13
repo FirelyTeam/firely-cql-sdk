@@ -22,6 +22,7 @@
 	</PropertyGroup>
 
 	<Target Name="DisplayMessages"
+					Condition="'$(CqlToElmEnabled)'=='true'"
 			BeforeTargets="PreBuildEvent">
 		<Message Text="$(Box.Replace(Text, Starting MVN))" Importance="High" />
 	</Target>
@@ -32,6 +33,7 @@
 
 	<Target
 		Name="Download CQL to ELM CLI via Maven"
+		Condition="'$(CqlToElmEnabled)'=='true'"
 		Inputs="$(PomXmlPath)"
 		Outputs="$(TargetDependencies)/cql-to-elm-cli-$(CqlToElmCliVersion).jar"
 		BeforeTargets="PreBuildEvent">
@@ -50,7 +52,10 @@
 		<JarDependencies Include="$(TargetDependencies)/*.jar" />
 	</ItemGroup>
 
-	<Target Name="Delete JAR Dependencies" AfterTargets="Clean">
+	<Target
+		Name="Delete JAR Dependencies"
+		Condition="'$(CqlToElmEnabled)'=='true'"
+		AfterTargets="Clean">
 		<Message Text="$(Box.Replace(Text, Deleting JAR Dependencies...))" Importance="High" />
 		<Exec Command="mvn clean -f $(PomXmlPath)" />
 		<Delete Files="@(JarDependencies)" />
