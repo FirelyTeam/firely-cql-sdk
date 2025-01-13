@@ -26,7 +26,6 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
     #endregion Library Members
 
-
     [CqlDeclaration("Sucked into jet engine")]
     public CqlCode Sucked_into_jet_engine(CqlContext context) =>
         new CqlCode("V97.33", "http://hl7.org/fhir/sid/icd-10", default, default);

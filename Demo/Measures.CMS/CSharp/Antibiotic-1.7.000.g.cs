@@ -26,7 +26,6 @@ public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_00
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, CumulativeMedicationDuration_4_1_000.Instance];
     #endregion Library Members
 
-
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {

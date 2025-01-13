@@ -26,7 +26,6 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
     #endregion Library Members
 
-
     [CqlDeclaration("Marital Status")]
     [CqlValueSet("http://hl7.org/fhir/ValueSet/marital-status")]
     public CqlValueSet Marital_Status(CqlContext context) =>

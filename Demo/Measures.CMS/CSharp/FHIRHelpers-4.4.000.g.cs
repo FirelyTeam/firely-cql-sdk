@@ -25,7 +25,6 @@ public partial class FHIRHelpers_4_4_000 : ILibrary, ISingleton<FHIRHelpers_4_4_
     string ILibrary.Version => "4.4.000";
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
     #endregion Library Members
-
     public CqlInterval<CqlDateTime> ToInterval(CqlContext context, Period period)
     {
         CqlInterval<CqlDateTime> a_()

@@ -26,7 +26,6 @@ public partial class BoneDensityProstateCancerAndrogenDeprivationTherapyFHIR_1_4
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
     #endregion Library Members
 
-
     [CqlDeclaration("Androgen deprivation therapy for Urology Care")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.48")]
     public CqlValueSet Androgen_deprivation_therapy_for_Urology_Care(CqlContext context) =>

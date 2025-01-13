@@ -26,7 +26,6 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance];
     #endregion Library Members
 
-
     [CqlDeclaration("Birthdate")]
     public CqlCode Birthdate(CqlContext context) =>
         new CqlCode("21112-8", "http://loinc.org", default, default);

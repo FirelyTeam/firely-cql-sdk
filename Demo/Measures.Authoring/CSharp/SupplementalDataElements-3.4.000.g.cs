@@ -26,7 +26,6 @@ public partial class SupplementalDataElements_3_4_000 : ILibrary, ISingleton<Sup
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
     #endregion Library Members
 
-
     [CqlDeclaration("Ethnicity")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.114222.4.11.837")]
     public CqlValueSet Ethnicity(CqlContext context) =>

@@ -26,7 +26,6 @@ public partial class CesareanBirthFHIR_0_2_000 : ILibrary, ISingleton<CesareanBi
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, PCMaternal_5_19_000.Instance, QICoreCommon_2_1_000.Instance];
     #endregion Library Members
 
-
     [CqlDeclaration("Abnormal Presentation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1045.105")]
     public CqlValueSet Abnormal_Presentation(CqlContext context) =>

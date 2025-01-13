@@ -26,7 +26,6 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
     #endregion Library Members
 
-
     [CqlDeclaration("SomethingTrueEqualsTrue")]
     public bool? SomethingTrueEqualsTrue(CqlContext context)
     {

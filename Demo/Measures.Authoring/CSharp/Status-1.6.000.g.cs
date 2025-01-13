@@ -26,7 +26,6 @@ public partial class Status_1_6_000 : ILibrary, ISingleton<Status_1_6_000>
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
     #endregion Library Members
 
-
     [CqlDeclaration("laboratory")]
     public CqlCode laboratory(CqlContext context) =>
         new CqlCode("laboratory", "http://terminology.hl7.org/CodeSystem/observation-category", default, default);

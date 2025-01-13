@@ -26,7 +26,6 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, TJCOverallFHIR_1_8_000.Instance];
     #endregion Library Members
 
-
     [CqlDeclaration("Antithrombotic Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.201")]
     public CqlValueSet Antithrombotic_Therapy(CqlContext context) =>

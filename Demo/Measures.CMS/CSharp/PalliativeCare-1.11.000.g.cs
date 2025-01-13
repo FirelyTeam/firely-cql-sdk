@@ -26,7 +26,6 @@ public partial class PalliativeCare_1_11_000 : ILibrary, ISingleton<PalliativeCa
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance];
     #endregion Library Members
 
-
     [CqlDeclaration("Palliative Care Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1090")]
     public CqlValueSet Palliative_Care_Encounter(CqlContext context) =>

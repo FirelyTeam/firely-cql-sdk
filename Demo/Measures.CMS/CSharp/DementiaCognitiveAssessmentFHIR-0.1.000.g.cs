@@ -26,7 +26,6 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000 : ILibrary, ISingle
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
     #endregion Library Members
 
-
     [CqlDeclaration("Behavioral/Neuropsych Assessment")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1023")]
     public CqlValueSet Behavioral_Neuropsych_Assessment(CqlContext context) =>

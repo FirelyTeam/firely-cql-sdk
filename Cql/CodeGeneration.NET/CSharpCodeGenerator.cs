@@ -209,7 +209,7 @@ internal class CSharpCodeGenerator
             IndentedTextWriter.WriteLine($"IReadOnlyList<ILibrary> ILibrary.Dependencies => [{string.Join(", ", dependencies)}];");
             if (IN_NEXT_PR) IndentedTextWriter.WriteLine();
             IndentedTextWriter.WriteLine(IN_NEXT_PR ? "#endregion ILibrary Implementation" : "#endregion Library Members");
-            IndentedTextWriter.WriteLine();
+            if (IN_NEXT_PR) IndentedTextWriter.WriteLine();
         }
 
         private void WriteUsings()

@@ -26,7 +26,6 @@ public partial class CumulativeMedicationDurationFHIR4_1_0_000 : ILibrary, ISing
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
     #endregion Library Members
 
-
     [CqlDeclaration("AC")]
     public CqlCode AC(CqlContext context) =>
         new CqlCode("AC", "http://terminology.hl7.org/CodeSystem/v3-TimingEvent", default, default);

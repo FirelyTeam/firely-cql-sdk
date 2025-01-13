@@ -26,7 +26,6 @@ public partial class AnticoagulationTherapyforAtrialFibrillationFlutterFHIR_0_3_
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, TJCOverall_8_14_000.Instance];
     #endregion Library Members
 
-
     [CqlDeclaration("Anticoagulant Therapy")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.117.1.7.1.200")]
     public CqlValueSet Anticoagulant_Therapy(CqlContext context) =>

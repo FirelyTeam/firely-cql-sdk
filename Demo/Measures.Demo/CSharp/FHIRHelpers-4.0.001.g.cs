@@ -26,7 +26,6 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
     #endregion Library Members
 
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {

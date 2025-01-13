@@ -26,7 +26,6 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
     #endregion Library Members
 
-
     [CqlDeclaration("ValueSet-A-1")]
     [CqlValueSet("http://fire.ly/ValueSet/ValueSet-A-1")]
     public CqlValueSet ValueSet_A_1(CqlContext context) =>

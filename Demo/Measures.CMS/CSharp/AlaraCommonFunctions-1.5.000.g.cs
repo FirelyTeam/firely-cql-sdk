@@ -26,7 +26,6 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance];
     #endregion Library Members
 
-
     [CqlDeclaration("Abdomen and Pelvis High Dose")]
     public CqlCode Abdomen_and_Pelvis_High_Dose(CqlContext context) =>
         new CqlCode("LA31754-7", "http://loinc.org", default, default);

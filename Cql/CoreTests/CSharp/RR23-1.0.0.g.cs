@@ -26,7 +26,6 @@ public partial class RR23_1_0_0 : ILibrary, ISingleton<RR23_1_0_0>
     IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_1.Instance];
     #endregion Library Members
 
-
     [CqlDeclaration("Injury due to falling rock")]
     [CqlValueSet("http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock")]
     public CqlValueSet Injury_due_to_falling_rock(CqlContext context) =>
