@@ -29,9 +29,9 @@
 	</PropertyGroup>
 
 	<Target Name="GenerateElmFiles"
-	        Condition="'$(CqlToElmEnabled)'=='true' And '$(LibrarySet)'!=''"
 	        Inputs="@(CqlFiles)"
 	        Outputs="@(CqlFiles->'$(ElmDirectory)/%(FileName).json')"
+	        Condition="'$(CqlToElmEnabled)'=='true' And '$(LibrarySet)'!=''"
 	        BeforeTargets="PreBuildEvent">
 
 		<ItemGroup>
