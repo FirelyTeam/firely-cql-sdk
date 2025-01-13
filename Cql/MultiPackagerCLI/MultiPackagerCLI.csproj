@@ -13,7 +13,12 @@
     <Configurations>Debug;Release</Configurations>
   </PropertyGroup>
 
-  <ItemGroup>
+  <!-- ignore sdk warnings -->
+  <PropertyGroup>
+	  <NoWarn>$(NoWarn);CS1591</NoWarn>
+  </PropertyGroup>
+
+	<ItemGroup>
     <ProjectReference Include="..\PackagerCLI\PackagerCLI.csproj" />
   </ItemGroup>
 

@@ -9,7 +9,7 @@
 	<PropertyGroup>
 		<IsPackable>false</IsPackable>
 		<Nullable>disable</Nullable>
-		<NoWarn>CS1591</NoWarn>
+		<NoWarn>$(NoWarn);CS1591</NoWarn>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks> <!-- Unsafe needed in order to test CSharpFormatter on pointer types -->
 	</PropertyGroup>
 

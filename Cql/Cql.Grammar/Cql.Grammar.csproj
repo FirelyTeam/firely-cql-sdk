@@ -7,7 +7,7 @@
         <Nullable>enable</Nullable>
         <AssemblyName>Hl7.Cql.CqlToElm.Grammar</AssemblyName>
         <RootNamespace>Hl7.Cql.CqlToElm.Grammar</RootNamespace>
-        <NoWarn>RS0016</NoWarn>
+	      <NoWarn>$(NoWarn);RS0016</NoWarn>
         <Configurations>Debug;Release</Configurations>
     </PropertyGroup>
 

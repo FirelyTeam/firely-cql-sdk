@@ -36,7 +36,7 @@
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-		<NoWarn>RS0026,CS0618</NoWarn>  <!-- Too many bogus warnings, see https://github.com/dotnet/roslyn-analyzers/issues/6757 -->
+		<NoWarn>$(NoWarn);RS0026</NoWarn>  <!-- Too many bogus warnings, see https://github.com/dotnet/roslyn-analyzers/issues/6757 -->
 	</PropertyGroup>
 
 	<ItemGroup>
