@@ -95,6 +95,7 @@ internal class PackagerCli
                     FhirCanonicalRootUrl: var canonicalRootUrl
                 })
             {
+                _ = resourcePackager;
                 /*dirOutFhir.Recreate();
                 LibrarySet elmLibrarySet = null!;
                 IReadOnlyDictionary<string, AssemblyDataWithSourceCode> assembliesByLibraryName = null!;
