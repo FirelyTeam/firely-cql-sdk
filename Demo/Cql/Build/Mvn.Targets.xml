@@ -24,7 +24,7 @@
 
 	<Target Name="DisplayMessages"
 					Condition="'$(CqlToElmEnabled)'=='true'"
-	        BeforeTargets="PreBuildEvent">
+			BeforeTargets="PreBuildEvent">
 		<Message Text="$(Box.Replace(Text, Starting MVN))" Importance="High" />
 	</Target>
 

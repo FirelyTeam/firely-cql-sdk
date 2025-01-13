@@ -178,7 +178,6 @@ internal class LibrarySetCSharpCodeGenerator
                     IndentedTextWriter.WriteLine();
                     first = false;
                 }
-
                 var types = string.Join(", ", signature.Select(t => $"typeof({LibrarySetWriter.TypeToCSharpConverter.ToCSharp(t.Type)})"));
                 var names = string.Join(", ", signature.Select(t => t.PropName.QuoteString()));
                 IndentedTextWriter.WriteLine($"private static CqlTupleMetadata {propertyName} = new(");
@@ -186,7 +185,6 @@ internal class LibrarySetCSharpCodeGenerator
                 IndentedTextWriter.WriteLine(1, $"[{names}]);");
                 IndentedTextWriter.WriteLine();
             }
-
             if (!first)
             {
                 IndentedTextWriter.WriteLine("#endregion CqlTupleMetadata Properties");
@@ -205,7 +203,7 @@ internal class LibrarySetCSharpCodeGenerator
                                 .GetLibraryDependencies(LibraryName, throwError: true)
                                 .Select(dep => VariableNameGenerator.NormalizeIdentifier(dep.GetVersionedIdentifier()!))
                                 .Select(typeName => $"{typeName}.Instance");
-            IndentedTextWriter.WriteLine($"IReadOnlyList<ILibrary> ILibrary.Dependencies => [{string.Join(", ", dependencies)}];");
+            IndentedTextWriter.WriteLine($"IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [{string.Join(", ", dependencies)}];");
             IndentedTextWriter.WriteLine();
             IndentedTextWriter.WriteLine("#endregion ILibrary Implementation");
             IndentedTextWriter.WriteLine();
@@ -253,7 +251,6 @@ internal class LibrarySetCSharpCodeGenerator
                     IndentedTextWriter.WriteLine();
                 }
             }
-
             if (!first)
             {
                 IndentedTextWriter.WriteLine("#endregion Definition Methods");
@@ -294,7 +291,6 @@ internal class LibrarySetCSharpCodeGenerator
             IndentedTextWriter.WriteLine($"private {ClassName}() {{}}");
             IndentedTextWriter.WriteLine();
         }
-
         private MethodWriter CreateMethodWriter(string definition, LambdaExpression expression, ILookup<string, string>? tags)
         {
             return new MethodWriter(this, definition, expression, tags);

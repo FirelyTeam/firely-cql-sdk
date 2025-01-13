@@ -17,6 +17,11 @@
 		<!-- This PackagerCLI reference can remain relative to the is file. -->
 		<PackagerCLI>$(MSBuildThisFileDirectory)../../../Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
 	</PropertyGroup>
+	<!-- <Target -->
+	<!-- 	Name="DumpGenerateCSharp" -->
+	<!-- 	BeforeTargets="PreBuildEvent"> -->
+	<!-- 	<Message Text="###===>&#10;MSBuildProjectName=$(MSBuildProjectName)&#10;ElmToCSharpEnabled=$(ElmToCSharpEnabled)&#10;CqlToElmEnabled=$(CqlToElmEnabled)&#10;PackagerCLI=$(PackagerCLI)" Importance="High" /> -->
+	<!-- </Target> -->
 
 	<!-- <Target -->
 	<!-- 	Name="DumpGenerateCSharp" -->

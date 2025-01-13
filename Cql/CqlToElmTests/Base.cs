@@ -31,7 +31,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static LibraryExpressionBuilder LibraryExpressionBuilder => ServiceProvider.GetLibraryExpressionBuilderScoped();
 
-        internal static LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator => ServiceProvider.GetCSharpCodeProcessor();
+        internal static LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator => ServiceProvider.GetLibrarySetCSharpCodeGenerator();
 
         internal static AssemblyCompiler AssemblyCompiler => ServiceProvider.GetAssemblyCompiler();
 
@@ -118,7 +118,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static LibrarySetCSharp GenerateCSharp(LibrarySetDefinitions librarySetDefinitions)
         {
-            var librarySetCSharpCodeGenerator = ServiceProvider.GetCSharpCodeProcessor();
+            var librarySetCSharpCodeGenerator = ServiceProvider.GetLibrarySetCSharpCodeGenerator();
 
             Dictionary<string, string> cSharpCodeByLibraryName =
                 librarySetCSharpCodeGenerator
@@ -160,41 +160,6 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         private static readonly CqlContext DefaultCqlContext = FhirCqlContext.CreateContext();
-        // private static readonly Library DummyLib = new Library { identifier = new() { id = "temp", version = "1.0.0" } };
-
-        // public static object? RunLambda(
-        //     this AssemblyCompiler assemblyCompiler,
-        //     LambdaExpression expression,
-        //     Library? library,
-        //     CqlContext? ctx = null)
-        // {
-        //     var expressionName = expression.Name ?? "Expression";
-        //     library ??= DummyLib;
-        //     LibrarySet librarySet = new(expressionName, library);
-        //     DefinitionDictionary<LambdaExpression> definitions = new();
-        //     switch (((IGetVersionedIdentifier)library).VersionedIdentifier)
-        //     {
-        //         case (null, { } error):
-        //             throw new InvalidOperationException("Library does not have valid VersionedIdentifier.", error);
-        //         case ({ } versionedIdentifier, null):
-        //         {
-        //             string versionedIdentifierString = versionedIdentifier.GetVersionedIdentifier()!;
-        //             definitions.Add(versionedIdentifierString, expressionName, expression);
-        //
-        //
-        //             IReadOnlyDictionary<string, AssemblyDataWithSourceCode> assemblyDatas = assemblyCompiler.Compile(librarySet, definitions);
-        //             (byte[] assemblyBinary, var assemblySources) = assemblyDatas.SingleOrDefault().Value;
-        //             var source = assemblySources[versionedIdentifierString];
-        //             AssemblyLoadContext assemblyLoadContext = new(expressionName);
-        //             assemblyLoadContext.LoadFromStream(new MemoryStream(assemblyBinary));
-        //             var result = assemblyLoadContext.Run(versionedIdentifier.id, versionedIdentifier.version, ctx ?? DefaultCqlContext);
-        //             return result[expressionName];
-        //         }
-        //         default:
-        //             throw new InvalidOperationException("VersionedIdentifier is null");
-        //     }
-        // }
-
 
         internal static T? Run<T>(
             Expression expression,
@@ -366,11 +331,10 @@ namespace Hl7.Cql.CqlToElm.Test
             provider.Libraries.Add("FHIRHelpers", "4.0.1", builder);
         }
 
-
         internal static byte[] Compile(Library library)
         {
             var lambdas = LibraryExpressionBuilder.ProcessLibrary(library);
-            var cs = ServiceProvider.GetCSharpCodeProcessor();
+            var cs = ServiceProvider.GetLibrarySetCSharpCodeGenerator();
             var asm = ServiceProvider.GetAssemblyCompiler();
             var librarySet = new LibrarySet("",library);
             return

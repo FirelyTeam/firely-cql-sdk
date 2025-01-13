@@ -9,6 +9,7 @@
 
 	<PropertyGroup>
 		<AccelerateBuildsInVisualStudio>false</AccelerateBuildsInVisualStudio>
+		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -42,9 +42,6 @@ namespace Hl7.Cql.CodeGeneration.NET
 
         private LibraryDefinitionCSharpCodeGenerator WithDoUseIndent() => WithOverride(useIndentFn: _ => true);
 
-        private string GetTupleMetadataPropertyName(IReadOnlyCollection<(Type Type, string Name)> tupleProperties) =>
-            TupleMetadataBuilder.GetTupleMetadataPropertyName(tupleProperties, LibraryName);
-
         private string ConvertExpression(
             Expression expression)
         {
@@ -446,7 +443,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     .Select(p => memberAssignmentsByMemberName.GetValueOrDefault(p.Name, "default"))
                     .ToArray();
 
-            var metadataPropertyName = GetTupleMetadataPropertyName(tupleProperties);
+            var metadataPropertyName = TupleMetadataBuilder.GetTupleMetadataPropertyName(tupleProperties, LibraryName);
             var tupleAssignmentCode = $"({metadataPropertyName}, {string.Join(", ", memberValues)})";
             return tupleAssignmentCode;
         }

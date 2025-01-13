@@ -35,7 +35,6 @@
 		<!-- CqlToElmEnabled and ElmToCSharpEnabled declared in BuildArtifacts.csproj, cql-base.props, cql-demo.props  -->
 		<CqlToElmEnabled>false</CqlToElmEnabled>
 		<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
-
 	</PropertyGroup>
 
 	<!-- ignore sdk warnings -->
@@ -49,7 +48,6 @@
 		<Nullable>enable</Nullable>
 		<LangVersion>12</LangVersion>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<Configurations>Debug;Release;</Configurations>
 		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	</PropertyGroup>

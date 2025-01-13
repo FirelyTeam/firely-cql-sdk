@@ -99,12 +99,12 @@ public sealed partial class ColorConsoleLogger(string categoryName, ColorConsole
         ? logLevel switch
         {
             // @formatter: off
-            LogLevel.Trace       => ("""TRC""", default),
-            LogLevel.Debug       => ("""DBG""", default),
-            LogLevel.Information => ("""INF""", default),
-            LogLevel.Warning     => ("""WAR""", default),
-            LogLevel.Error       => ("""ERR""", default),
-            LogLevel.Critical    => ("""CRI""", default),
+            LogLevel.Trace       => ("""(TRC)""", default),
+            LogLevel.Debug       => ("""(DBG)""", default),
+            LogLevel.Information => ("""(INF)""", default),
+            LogLevel.Warning     => ("""(WAR)""", default),
+            LogLevel.Error       => ("""(ERR)""", default),
+            LogLevel.Critical    => ("""(CRI)""", default),
             _                    => throw new ArgumentOutOfRangeException(nameof(logLevel))
             // @formatter: on
         }

@@ -9,6 +9,7 @@
 		<RootNamespace>Hl7.Cql.Packaging</RootNamespace>
 		<Product>FHIR Library export for CQL artifacts.</Product>
 		<Description>Support package for Hl7.Cql. Contains support for packaging CQL artifacts as a FHIR Library resource.</Description>
+		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
 	<ItemGroup>

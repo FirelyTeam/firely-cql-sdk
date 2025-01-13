@@ -55,7 +55,7 @@ public class ElmApi(ElmApiOptions options) :
                 ServiceProvider = services.BuildServiceProvider();
                 Logger = ServiceProvider.GetLogger<ElmApi>();
                 AssemblyCompiler = ServiceProvider.GetAssemblyCompiler();
-                LibrarySetCSharpCodeGenerator = ServiceProvider.GetCSharpCodeProcessor();
+                LibrarySetCSharpCodeGenerator = ServiceProvider.GetLibrarySetCSharpCodeGenerator();
             }
         }
 

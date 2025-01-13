@@ -27,8 +27,7 @@ classDiagram
         class ExpressionBuilderSettings { }    
         class TupleBuilderCache { }
         class CqlContextBinder { }
-        class CqlOperatorsBinder { }
-        class FhirJsonSerializer { }
+        class CqlOperatorsBinder { }       
     }
 
     namespace CodeGeneration {
@@ -70,10 +69,7 @@ classDiagram
     BaseTypeResolver --> TypeResolver : inherits
     FhirTypeResolver --> BaseTypeResolver : inherits
     
-    %% Dependencies
-
-    FhirJsonSerializer ..> ModelInspector : injected
-    FhirJsonSerializer ..> JsonSerializerOptions : injected key=Fhir
+    %% Dependencies                                                 
 
     LibraryExpressionBuilder ..> LibrarySetExpressionBuilder : injected
 

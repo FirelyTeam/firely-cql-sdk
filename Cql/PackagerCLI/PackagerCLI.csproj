@@ -11,6 +11,12 @@
 		<AssemblyName>Hl7.Cql.Packager</AssemblyName>
 		<Product>dotnet tool for packaging CQL artifacts</Product>
 		<Description>.NET tool that packages CQL, ELM and build outputs into a FHIR Library resource.</Description>
+		<Configurations>Debug;Release</Configurations>
+	</PropertyGroup>
+
+	<!-- ignore sdk warnings -->
+	<PropertyGroup>
+		<NoWarn>$(NoWarn);CS1591</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -7,6 +7,7 @@
 		<RootNamespace>Hl7.Cql.Elm</RootNamespace>
 		<Product>CQL ELM abstractions</Product>
 		<Description>Support package for Hl7.Cql. Contains abstractions for the expression logical model (ELM) and utilities to deserialize an ELM library into classes.</Description>
+		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
 	<ItemGroup>

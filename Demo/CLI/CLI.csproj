@@ -5,6 +5,7 @@
 	<PropertyGroup>
 		<OutputType>Exe</OutputType>
 		<Nullable>enable</Nullable>
+		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
 	<ItemGroup>
