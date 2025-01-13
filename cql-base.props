@@ -28,9 +28,12 @@
 	<!-- Compiler settings -->
 	<PropertyGroup>
 		<Nullable>enable</Nullable>
+		<!-- CqlToElmEnabled and ElmToCSharpEnabled declared in BuildArtifacts.csproj, cql-base.props, cql-demo.props  -->
+		<CqlToElmEnabled>false</CqlToElmEnabled>
+		<ElmToCSharpEnabled>false</ElmToCSharpEnabled>
 	</PropertyGroup>
 
-	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' Or '$(Configuration)' == 'FullDebug' ">
+	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
 		<DebugType>portable</DebugType>
 		<DebugSymbols>True</DebugSymbols>
 		<Optimize>false</Optimize>

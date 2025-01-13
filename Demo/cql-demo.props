@@ -18,7 +18,7 @@
 			Instructions when updating VersionPrefix/VersionSuffix : https://github.com/FirelyTeam/firely-cql-sdk/wiki/Creating-Tags-and-Releases
 			Keep this in sync between cql-sdk.props and cql-demo.props
 			-->
-		<VersionPrefix>2.0.9</VersionPrefix>
+		<VersionPrefix>2.0.10</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
 		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
 		<Copyright>Copyright 2013-2024 NCQA, Firely. Contains materials (C) HL7 International</Copyright>
@@ -32,6 +32,9 @@
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
 		<!-- Use CqlSolutionDir instead of SolutionDir, because this file is used in different solutions across repos -->
 		<CqlSolutionDir>$(MSBuildThisFileDirectory)/../</CqlSolutionDir>
+		<!-- CqlToElmEnabled and ElmToCSharpEnabled declared in BuildArtifacts.csproj, cql-base.props, cql-demo.props  -->
+		<CqlToElmEnabled>false</CqlToElmEnabled>
+		<ElmToCSharpEnabled>false</ElmToCSharpEnabled>
 	</PropertyGroup>
 
 	<!-- ignore sdk warnings -->
@@ -45,7 +48,6 @@
 		<Nullable>enable</Nullable>
 		<LangVersion>12</LangVersion>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<Configurations>Debug;Release;</Configurations>
 		<AnalysisLevelGlobalization>latest-recommended</AnalysisLevelGlobalization>
 		<TreatWarningsAsErrors>true</TreatWarningsAsErrors>
 	</PropertyGroup>

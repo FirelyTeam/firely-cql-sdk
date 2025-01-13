@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.10.0")]
 [CqlLibrary("AppropriateDXAScansForWomenUnder65FHIR", "0.2.001")]
 public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, ISingleton<AppropriateDXAScansForWomenUnder65FHIR_0_2_001>
 {
@@ -20,17 +20,20 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
     public static AppropriateDXAScansForWomenUnder65FHIR_0_2_001 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "AppropriateDXAScansForWomenUnder65FHIR";
     string ILibrary.Version => "0.2.001";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, Hospice_6_12_000.Instance];
-    #endregion Library Members
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, Hospice_6_12_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Amenorrhea")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1022")]
     public CqlValueSet Amenorrhea(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1022", default);
-
 
 
     [CqlDeclaration("Ankylosing Spondylitis")]
@@ -39,12 +42,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1045", default);
 
 
-
     [CqlDeclaration("Aromatase Inhibitors")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1265")]
     public CqlValueSet Aromatase_Inhibitors(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1265", default);
-
 
 
     [CqlDeclaration("Bilateral Oophorectomy")]
@@ -53,12 +54,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.471", default);
 
 
-
     [CqlDeclaration("Bone Marrow Transplant")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.336")]
     public CqlValueSet Bone_Marrow_Transplant(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.336", default);
-
 
 
     [CqlDeclaration("Chemotherapy")]
@@ -67,12 +66,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.485", default);
 
 
-
     [CqlDeclaration("Chronic Liver Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1035")]
     public CqlValueSet Chronic_Liver_Disease(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1035", default);
-
 
 
     [CqlDeclaration("Chronic Malnutrition")]
@@ -81,12 +78,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1036", default);
 
 
-
     [CqlDeclaration("Cushings Syndrome")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1009")]
     public CqlValueSet Cushings_Syndrome(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1009", default);
-
 
 
     [CqlDeclaration("DXA (Dual energy Xray Absorptiometry) Scan")]
@@ -95,12 +90,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1051", default);
 
 
-
     [CqlDeclaration("Eating Disorders")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1039")]
     public CqlValueSet Eating_Disorders(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1039", default);
-
 
 
     [CqlDeclaration("Ehlers Danlos Syndrome")]
@@ -109,12 +102,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1047", default);
 
 
-
     [CqlDeclaration("End Stage Renal Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353")]
     public CqlValueSet End_Stage_Renal_Disease(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353", default);
-
 
 
     [CqlDeclaration("Evidence of Bilateral Oophorectomy")]
@@ -123,12 +114,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1048", default);
 
 
-
     [CqlDeclaration("Gastric Bypass Surgery")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1050")]
     public CqlValueSet Gastric_Bypass_Surgery(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1050", default);
-
 
 
     [CqlDeclaration("Glucocorticoids (oral only)")]
@@ -137,12 +126,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1266", default);
 
 
-
     [CqlDeclaration("History of hip fracture in parent")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1040")]
     public CqlValueSet History_of_hip_fracture_in_parent(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1040", default);
-
 
 
     [CqlDeclaration("Hyperparathyroidism")]
@@ -151,12 +138,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1016", default);
 
 
-
     [CqlDeclaration("Hyperthyroidism")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1015")]
     public CqlValueSet Hyperthyroidism(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1015", default);
-
 
 
     [CqlDeclaration("Kidney Transplant")]
@@ -165,12 +150,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1012", default);
 
 
-
     [CqlDeclaration("Lupus")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1010")]
     public CqlValueSet Lupus(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.117.12.1010", default);
-
 
 
     [CqlDeclaration("Major Transplant")]
@@ -179,12 +162,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.198.12.1075", default);
 
 
-
     [CqlDeclaration("Malabsorption Syndromes")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1050")]
     public CqlValueSet Malabsorption_Syndromes(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.199.12.1050", default);
-
 
 
     [CqlDeclaration("Marfan's Syndrome")]
@@ -193,12 +174,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1048", default);
 
 
-
     [CqlDeclaration("Multiple Myeloma")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1011")]
     public CqlValueSet Multiple_Myeloma(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1011", default);
-
 
 
     [CqlDeclaration("Office Visit")]
@@ -207,12 +186,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
 
-
     [CqlDeclaration("Osteogenesis Imperfecta")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1044")]
     public CqlValueSet Osteogenesis_Imperfecta(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1044", default);
-
 
 
     [CqlDeclaration("Osteopenia")]
@@ -221,12 +198,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1049", default);
 
 
-
     [CqlDeclaration("Osteoporosis Without Current Fracture")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1038")]
     public CqlValueSet Osteoporosis_Without_Current_Fracture(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1038", default);
-
 
 
     [CqlDeclaration("Osteoporosis With Current Fracture")]
@@ -235,12 +210,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1050", default);
 
 
-
     [CqlDeclaration("Outpatient Consultation")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008")]
     public CqlValueSet Outpatient_Consultation(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1008", default);
-
 
 
     [CqlDeclaration("Premature Menopause")]
@@ -249,12 +222,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1013", default);
 
 
-
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025")]
     public CqlValueSet Preventive_Care_Services_Established_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
-
 
 
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
@@ -263,12 +234,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
 
 
-
     [CqlDeclaration("Psoriatic Arthritis")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1046")]
     public CqlValueSet Psoriatic_Arthritis(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1046", default);
-
 
 
     [CqlDeclaration("Rheumatoid Arthritis")]
@@ -277,12 +246,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.113.12.1005", default);
 
 
-
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
     public CqlValueSet Telephone_Visits(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
-
 
 
     [CqlDeclaration("Type 1 Diabetes")]
@@ -291,12 +258,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.103.12.1020", default);
 
 
-
     [CqlDeclaration("Unilateral Oophorectomy Left")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1028")]
     public CqlValueSet Unilateral_Oophorectomy_Left(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1028", default);
-
 
 
     [CqlDeclaration("Unilateral Oophorectomy Right")]
@@ -305,12 +270,10 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1032", default);
 
 
-
     [CqlDeclaration("Unilateral Oophorectomy, Unspecified Laterality")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1035")]
     public CqlValueSet Unilateral_Oophorectomy__Unspecified_Laterality(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1035", default);
-
 
 
     [CqlDeclaration("Virtual Encounter")]
@@ -319,11 +282,9 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
 
-
     [CqlDeclaration("Alcoholic drinks per day")]
     public CqlCode Alcoholic_drinks_per_day(CqlContext context) =>
         new CqlCode("74013-4", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Body mass index (BMI) [Ratio]")]
@@ -331,11 +292,9 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlCode("39156-5", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Female")]
     public CqlCode Female(CqlContext context) =>
         new CqlCode("F", "http://terminology.hl7.org/CodeSystem/v3-AdministrativeGender", default, default);
-
 
 
     [CqlDeclaration("Left (qualifier value)")]
@@ -343,11 +302,9 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlCode("7771000", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("Major osteoporotic fracture 10-year probability [Likelihood] Fracture Risk Assessment")]
     public CqlCode Major_osteoporotic_fracture_10_year_probability__Likelihood__Fracture_Risk_Assessment(CqlContext context) =>
         new CqlCode("90265-0", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Osteoporosis Index of Risk panel")]
@@ -355,11 +312,9 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlCode("98133-2", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Osteoporosis Risk Assessment Instrument")]
     public CqlCode Osteoporosis_Risk_Assessment_Instrument(CqlContext context) =>
         new CqlCode("98139-9", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Osteoporosis Self-Assessment Tool")]
@@ -367,17 +322,14 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
         new CqlCode("98146-4", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Right (qualifier value)")]
     public CqlCode Right__qualifier_value_(CqlContext context) =>
         new CqlCode("24028007", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("Unlisted preventive medicine service")]
     public CqlCode Unlisted_preventive_medicine_service(CqlContext context) =>
         new CqlCode("99429", "http://www.ama-assn.org/go/cpt", default, default);
-
 
 
     [CqlDeclaration("LOINC")]
@@ -396,7 +348,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("AdministrativeGender")]
     public CqlCode[] AdministrativeGender(CqlContext context)
     {
@@ -406,7 +357,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
         return a_;
     }
-
 
 
     [CqlDeclaration("SNOMEDCT")]
@@ -421,7 +371,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("CPT")]
     public CqlCode[] CPT(CqlContext context)
     {
@@ -431,7 +380,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Measurement Period")]
@@ -446,7 +394,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -455,7 +402,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
         return b_;
     }
-
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -467,7 +413,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -475,7 +420,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
         return a_;
     }
-
 
 
     [CqlDeclaration("SDE Race")]
@@ -487,7 +431,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -495,7 +438,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Qualifying Encounter")]
@@ -561,7 +503,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -588,7 +529,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -596,7 +536,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
         return a_;
     }
-
 
 
     [CqlDeclaration("First BMI in Measurement Period")]
@@ -635,7 +574,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("First BMI in Measurement Period Less Than or Equal to 20 kg m2")]
     public Observation First_BMI_in_Measurement_Period_Less_Than_or_Equal_to_20_kg_m2(CqlContext context)
     {
@@ -657,7 +595,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
         return e_;
     }
-
 
 
     [CqlDeclaration("First Average Number of Drinks Assessments Indicating More Than Two Per Day")]
@@ -700,7 +637,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("Has Risk Factor Active During the Measurement Period")]
     public bool? Has_Risk_Factor_Active_During_the_Measurement_Period(CqlContext context)
     {
@@ -712,7 +648,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
         return e_;
     }
-
 
 
     [CqlDeclaration("Has Risk Factor Any Time in History Prior to Measurement Period")]
@@ -841,7 +776,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("Glucocorticoid Active Medication Days")]
     public int? Glucocorticoid_Active_Medication_Days(CqlContext context)
     {
@@ -883,7 +817,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
         return l_;
     }
-
 
 
     [CqlDeclaration("Has 90 or More Active Glucocorticoid Medication Days")]
@@ -933,7 +866,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
         return c_;
     }
-
 
 
     [CqlDeclaration("Has Double or Bilateral Oophorectomy")]
@@ -1016,7 +948,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("Has Organ Transplants")]
     public bool? Has_Organ_Transplants(CqlContext context)
     {
@@ -1033,7 +964,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
         return j_;
     }
-
 
 
     [CqlDeclaration("Has Risk Factor Any Time in History or During Measurement Period")]
@@ -1116,7 +1046,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("Denominator Exclusions")]
     public bool? Denominator_Exclusions(CqlContext context)
     {
@@ -1128,7 +1057,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
         return e_;
     }
-
 
 
     [CqlDeclaration("DXA Scan Order During Measurement Period")]
@@ -1161,7 +1089,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -1170,7 +1097,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
 
         return b_;
     }
-
 
 
     [CqlDeclaration("Osteoporosis Fracture Risk Assessment Prior to First DXA Scan")]
@@ -1254,7 +1180,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-
     [CqlDeclaration("Numerator Exclusion")]
     public bool? Numerator_Exclusion(CqlContext context)
     {
@@ -1265,20 +1190,6 @@ public partial class AppropriateDXAScansForWomenUnder65FHIR_0_2_001 : ILibrary, 
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-        ["dayIndex", "dayPeriod"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
-        [typeof(IEnumerable<CqlCode>), typeof(string)],
-        ["codes", "display"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
-        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
-        ["code", "period"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
-        [typeof(CqlDate)],
-        ["AntidepressantDate"]);
+    #endregion Definition Methods
 
 }

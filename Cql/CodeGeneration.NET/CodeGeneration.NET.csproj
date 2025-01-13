@@ -7,6 +7,7 @@
 		<RootNamespace>Hl7.Cql.CodeGeneration.NET</RootNamespace>
 		<Product>.NET Code Generation</Product>
 		<Description>Support package for Hl7.Cql. Converts .NET lambda expressions into C# source code.</Description>
+		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
 	<ItemGroup>

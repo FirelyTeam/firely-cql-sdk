@@ -18,12 +18,12 @@ using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
-    internal record LibraryDefinitionToCSharpCodeProcessor(
+    internal record LibraryDefinitionCSharpCodeGenerator(
         TupleMetadataBuilder TupleMetadataBuilder,
         string LibraryName,
         TypeToCSharpConverter TypeToCSharpConverter,
-        int Indent = LibraryDefinitionToCSharpCodeProcessor.DefaultIndent,
-        bool UseIndent = LibraryDefinitionToCSharpCodeProcessor.DefaultUseIndent)
+        int Indent = LibraryDefinitionCSharpCodeGenerator.DefaultIndent,
+        bool UseIndent = LibraryDefinitionCSharpCodeGenerator.DefaultUseIndent)
     {
         private const int DefaultIndent = 0;
         private const bool DefaultUseIndent = true;
@@ -35,15 +35,12 @@ namespace Hl7.Cql.CodeGeneration.NET
         private int Indent { get; init; } = Indent;
         private bool UseIndent { get; init; } = UseIndent;
 
-        private LibraryDefinitionToCSharpCodeProcessor WithOverride(Func<int, int>? indentFn = null, Func<bool, bool>? useIndentFn = null) =>
+        private LibraryDefinitionCSharpCodeGenerator WithOverride(Func<int, int>? indentFn = null, Func<bool, bool>? useIndentFn = null) =>
             this with { Indent = indentFn?.Invoke(Indent) ?? Indent, UseIndent = useIndentFn?.Invoke(UseIndent) ?? UseIndent };
 
-        private LibraryDefinitionToCSharpCodeProcessor WithDontUseIndent() => WithOverride(useIndentFn: _ => false);
+        private LibraryDefinitionCSharpCodeGenerator WithDontUseIndent() => WithOverride(useIndentFn: _ => false);
 
-        private LibraryDefinitionToCSharpCodeProcessor WithDoUseIndent() => WithOverride(useIndentFn: _ => true);
-
-        private string GetTupleMetadataPropertyName(IReadOnlyCollection<(Type Type, string Name)> tupleProperties) =>
-            TupleMetadataBuilder.GetTupleMetadataPropertyName(tupleProperties);
+        private LibraryDefinitionCSharpCodeGenerator WithDoUseIndent() => WithOverride(useIndentFn: _ => true);
 
         private string ConvertExpression(
             Expression expression)
@@ -446,7 +443,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                     .Select(p => memberAssignmentsByMemberName.GetValueOrDefault(p.Name, "default"))
                     .ToArray();
 
-            var metadataPropertyName = GetTupleMetadataPropertyName(tupleProperties);
+            var metadataPropertyName = TupleMetadataBuilder.GetTupleMetadataPropertyName(tupleProperties, LibraryName);
             var tupleAssignmentCode = $"({metadataPropertyName}, {string.Join(", ", memberValues)})";
             return tupleAssignmentCode;
         }

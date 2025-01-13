@@ -7,6 +7,7 @@
 		<RootNamespace>Hl7.Cql.CqlToElm</RootNamespace>
 		<Product>CQL to ELM converter</Product>
 		<Description>Support package for Hl7.Cql. Unit conversion for CQL. Contains functionality to convert CQL to ELM.</Description>
+		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

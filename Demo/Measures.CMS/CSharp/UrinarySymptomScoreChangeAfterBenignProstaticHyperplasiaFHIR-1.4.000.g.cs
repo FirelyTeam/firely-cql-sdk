@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.10.0")]
 [CqlLibrary("UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR", "1.4.000")]
 public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_4_000 : ILibrary, ISingleton<UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_4_000>
 {
@@ -20,17 +20,20 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 
     public static UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR_1_4_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHIR";
     string ILibrary.Version => "1.4.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
-    #endregion Library Members
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Hospital Services for Urology")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.59")]
     public CqlValueSet Hospital_Services_for_Urology(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1151.59", default);
-
 
 
     [CqlDeclaration("Morbid Obesity")]
@@ -39,12 +42,10 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1164.67", default);
 
 
-
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
     public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
-
 
 
     [CqlDeclaration("Urinary retention")]
@@ -53,11 +54,9 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113762.1.4.1164.52", default);
 
 
-
     [CqlDeclaration("American Urological Association Symptom Index [AUASI]")]
     public CqlCode American_Urological_Association_Symptom_Index__AUASI_(CqlContext context) =>
         new CqlCode("80883-2", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Benign prostatic hyperplasia with lower urinary tract symptoms")]
@@ -65,11 +64,9 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
         new CqlCode("N40.1", "http://hl7.org/fhir/sid/icd-10-cm", default, default);
 
 
-
     [CqlDeclaration("If you were to spend the rest of your life with your urinary condition just the way it is now, how would you feel about that [IPSS]")]
     public CqlCode If_you_were_to_spend_the_rest_of_your_life_with_your_urinary_condition_just_the_way_it_is_now__how_would_you_feel_about_that__IPSS_(CqlContext context) =>
         new CqlCode("81090-3", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("International Prostate Symptom Score [IPSS]")]
@@ -77,11 +74,9 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
         new CqlCode("80976-4", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("virtual")]
     public CqlCode @virtual(CqlContext context) =>
         new CqlCode("VR", "http://terminology.hl7.org/CodeSystem/v3-ActCode", default, default);
-
 
 
     [CqlDeclaration("LOINC")]
@@ -97,7 +92,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-
     [CqlDeclaration("ICD10CM")]
     public CqlCode[] ICD10CM(CqlContext context)
     {
@@ -107,7 +101,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 
         return a_;
     }
-
 
 
     [CqlDeclaration("ObservationCategoryCodes")]
@@ -120,7 +113,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-
     [CqlDeclaration("ActCode")]
     public CqlCode[] ActCode(CqlContext context)
     {
@@ -130,7 +122,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Measurement Period")]
@@ -145,7 +136,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -154,7 +144,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 
         return b_;
     }
-
 
 
     [CqlDeclaration("Patient is Male")]
@@ -168,7 +157,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 
         return e_;
     }
-
 
 
     [CqlDeclaration("Has Qualifying Encounter")]
@@ -217,7 +205,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-
     [CqlDeclaration("Initial BPH Diagnosis Starts Within 6 Months Before the Measurement Period")]
     public Condition Initial_BPH_Diagnosis_Starts_Within_6_Months_Before_the_Measurement_Period(CqlContext context)
     {
@@ -257,7 +244,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-
     [CqlDeclaration("Has Qualifying BPH Diagnosis")]
     public bool? Has_Qualifying_BPH_Diagnosis(CqlContext context)
     {
@@ -266,7 +252,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 
         return b_;
     }
-
 
 
     [CqlDeclaration("Documented IPSS Assessment Result")]
@@ -361,7 +346,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 
         return h_;
     }
-
 
 
     [CqlDeclaration("AUA Symptom Index and Quality of Life Assessment Result")]
@@ -652,7 +636,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-
     [CqlDeclaration("Urinary Symptom Score Assessment")]
     public IEnumerable<(CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?> Urinary_Symptom_Score_Assessment(CqlContext context)
     {
@@ -662,7 +645,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 
         return c_;
     }
-
 
 
     [CqlDeclaration("Urinary Symptom Score Within 1 Month after Initial BPH Diagnosis")]
@@ -712,7 +694,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-
     [CqlDeclaration("Urinary Symptom Score 6 to 12 Months After Initial BPH Diagnosis")]
     public (CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)? Urinary_Symptom_Score_6_to_12_Months_After_Initial_BPH_Diagnosis(CqlContext context)
     {
@@ -755,7 +736,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -775,7 +755,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -783,7 +762,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Urinary Retention Diagnosis Starts Within 1 Year After Initial BPH Diagnosis")]
@@ -834,7 +812,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-
     [CqlDeclaration("Has Initial BPH Diagnosis Starts During or Within 30 Days After End of Hospitalization")]
     public Condition Has_Initial_BPH_Diagnosis_Starts_During_or_Within_30_Days_After_End_of_Hospitalization(CqlContext context)
     {
@@ -881,7 +858,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-
     [CqlDeclaration("Morbid Obesity Diagnosis On or Before Follow Up USS Assessment")]
     public IEnumerable<Condition> Morbid_Obesity_Diagnosis_On_or_Before_Follow_Up_USS_Assessment(CqlContext context)
     {
@@ -923,7 +899,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 
         return f_;
     }
-
 
 
     [CqlDeclaration("BMI Exam Result Greater Than or Equal To 40 During Measurement Period and On or Before Follow Up USS Assessment")]
@@ -992,7 +967,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-
     [CqlDeclaration("Morbid Obesity Diagnosis or BMI Exam Result Greater Than or Equal to 40 Starts On or Before Follow Up USS Assessment")]
     public bool? Morbid_Obesity_Diagnosis_or_BMI_Exam_Result_Greater_Than_or_Equal_to_40_Starts_On_or_Before_Follow_Up_USS_Assessment(CqlContext context)
     {
@@ -1003,7 +977,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 
         return d_;
     }
-
 
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -1019,7 +992,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 
         return g_;
     }
-
 
 
     [CqlDeclaration("Urinary Symptom Score Change")]
@@ -1057,7 +1029,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-
     [CqlDeclaration("Urinary Symptom Score Improvement Greater Than or Equal To 3")]
     public bool? Urinary_Symptom_Score_Improvement_Greater_Than_or_Equal_To_3(CqlContext context)
     {
@@ -1079,7 +1050,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -1087,7 +1057,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 
         return a_;
     }
-
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -1099,7 +1068,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -1107,7 +1075,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
 
         return a_;
     }
-
 
 
     [CqlDeclaration("SDE Race")]
@@ -1119,7 +1086,6 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -1129,324 +1095,18 @@ public partial class UrinarySymptomScoreChangeAfterBenignProstaticHyperplasiaFHI
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-        ["dayIndex", "dayPeriod"]);
+    #endregion Definition Methods
 
-    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
-        [typeof(IEnumerable<CqlCode>), typeof(string)],
-        ["codes", "display"]);
+    #region CqlTupleMetadata Properties
 
-    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
-        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
-        ["code", "period"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
-        [typeof(CqlDate)],
-        ["AntidepressantDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
-        [typeof(Encounter), typeof(Condition)],
-        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
-        [typeof(Observation), typeof(Encounter)],
-        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
-        [typeof(Encounter), typeof(Condition)],
-        ["QualifyingEncounters", "URI"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
-        [typeof(string), typeof(int?)],
-        ["EncounterID", "CalculatedCGA"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EMDhFLcFhWVERAVVNfLAZYXJi = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["DTaPVaccination1", "DTaPVaccination2", "DTaPVaccination3", "DTaPVaccination4"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CNGHaZROXaJTHPICcbIaJbRXV = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["PolioVaccination1", "PolioVaccination2", "PolioVaccination3"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EZTgahAUWGgSdGaDCgQNNIPGW = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["HepatitisBVaccination1", "HepatitisBVaccination2", "HepatitisBVaccination3"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HDfaMbZGBWDPFETGQNFbceEeg = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["HepatitisBVaccination1", "HepatitisBVaccination2", "NewBornVaccine3"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DdPDeOJhPYESfHGCOcBNOiPPP = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["PneumococcalVaccination1", "PneumococcalVaccination2", "PneumococcalVaccination3", "PneumococcalVaccination4"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BZhFLeRDagbPQMNheVJcUNfNQ = new(
-        [typeof(CqlDate), typeof(CqlDate)],
-        ["FluVaccination1", "FluVaccination2"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb = new(
-        [typeof(string), typeof(CqlDateTime)],
-        ["ID", "AuthorDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FOBYUiHifSfYFYhEEQajgLbgF = new(
-        [typeof(CqlQuantity), typeof(Observation)],
-        ["QualifyingGlycemicStatusValue", "QualifyingGlycemicStatus"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CVELXTjiMTaGQEjMfJXBdUHjW = new(
-        [typeof(CqlDate)],
-        ["startDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD = new(
-        [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
-        ["period", "periodStart"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GVNUVHGXYWXVGgfjdTEahUfhP = new(
-        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
-        ["HOOSLifeQuality", "HOOSSport", "HOOSActivityScore", "HOOSSymptoms", "HOOSPain"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DDTAOdcFieSJbGgRLLZPYbGQb = new(
-        [typeof(Observation), typeof(Observation)],
-        ["PROMIS10MentalScore", "PROMIS10PhysicalScore"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH = new(
-        [typeof(Observation), typeof(Observation)],
-        ["VR12MentalAssessment", "VR12PhysicalAssessment"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DbNMMZBTISSRTNdiShceSFVih = new(
-        [typeof(Encounter), typeof(Encounter)],
-        ["OfficeVisit1", "OfficeVisit2"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BGYjYGLNPKWAZTBCVAdLDDTMj = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialPROMIS10Date", "FollowupPROMIS10Date"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DBUJFOVGBcbhIQPWARNQHKUaX = new(
-        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
-        ["Promis29Sleep", "Promis29SocialRoles", "Promis29Physical", "Promis29Pain", "Promis29Fatigue", "Promis29Depression", "Promis29Anxiety"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DSZKEYVbCINNIeAQiZdVaEJhG = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialPROMIS29Date", "FollowupPROMIS29Date"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FQKGdEYLiDFGMNAUAMETIHUQT = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialVR12ObliqueDate", "FollowupVR12ObliqueDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HSSAQEFQAOXLjUcOKGgicELWB = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialVR12OrthogonalDate", "FollowupVR12OrthogonalDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DUcFTCLcQEWDGGQdFCWTHFaUK = new(
-        [typeof(Observation), typeof(Observation)],
-        ["VR36MentalAssessment", "VR36PhysicalAssessment"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HQfcMfhQUSTNYMWSgJHiFeahQ = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialVR36ObliqueDate", "FollowupVR36ObliqueDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BFZHWdOOROjSjFSECHcQiaZZZ = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialVR36OrthogonalDate", "FollowupVR36OrthogonalDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EBLWeAeedHPAfOJXKPZJKSCUf = new(
-        [typeof(Observation), typeof(Observation)],
-        ["MLHFQPhysical", "MLHFQEmotional"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CcaWSNDiVeaLebVKKWWWiBcEU = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialMLHFQDate", "FollowupMLHFQDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DFKXORghhYafccUSbQaMfNTDj = new(
-        [typeof(Observation), typeof(Observation)],
-        ["KCCQ12Item", "KCCQ12Summary"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EQQLFFBVIbLIQLiZDNfeYdMU = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialKCCQ12Date", "FollowupKCCQ12Date"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BbPMcXSJeOeGdRcaZWGYPhGBL = new(
-        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
-        ["KCCQLifeQuality", "KCCQSymptomStability", "KCCQSelfEfficacy", "KCCQSymptoms", "KCCQPhysicalLimits", "KCCQSocialLimits"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HEFWLcHhCNCOQegEOfjWTXiGN = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialKCCQAssessmentDate", "FollowupKCCQAssessmentDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DggZKjEbQUfLADMDMBeASLDR = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialKCCQTotalScore", "FollowupKCCQTotalScore"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GVQcZJVjNdGAcjPedLaYDjEME = new(
-        [typeof(Encounter), typeof(Procedure)],
-        ["QualifyingEncounter", "HospitalDietitianReferral"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_XadcRffdjUdMDMjcTIdSXKKS = new(
-        [typeof(Encounter), typeof(Observation)],
-        ["QualifyingEncounter", "MalnutritionRiskScreening"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GFjZJIRJbJMHZiLMbCVCEiHgh = new(
-        [typeof(Encounter), typeof(Observation)],
-        ["QualifyingEncounter", "NutritionAssessment"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CTGXhDDGNAgcaKfhTDIBGVLYU = new(
-        [typeof(Encounter), typeof(Condition)],
-        ["QualifyingEncounter", "MalnutritionDiagnosis"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_TVETjQTNGSKUhAIhIbeKTXMI = new(
-        [typeof(Encounter), typeof(Procedure)],
-        ["QualifyingEncounter", "NutritionCarePlan"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FUFPMQdRaTBgLhghDWfUUBaNF = new(
-        [typeof(Observation), typeof(Encounter)],
-        ["HeartRate", "ModerateOrSevereLVSDHFOutpatientEncounter"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CCJaUjRHWSXeUTcFAfVeVeNaD = new(
-        [typeof(string), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<int?>), typeof(IEnumerable<Encounter.DiagnosisComponent>)],
-        ["encounterId", "condition", "rank", "POA"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CajFQjTXAXITWGJPNIjCafPiF = new(
-        [typeof(Encounter), typeof(CqlConcept)],
-        ["encounter", "condition"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GPLfQTPONQabPZigKbYFERDVQ = new(
-        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>)],
-        ["encounter", "hospitalizationPeriod"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BRDBXSUhdQiXBCfMGdSacWIG = new(
-        [typeof((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?), typeof(MedicationAdministration)],
-        ["Hospitalization", "HypoglycemicMed"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_SMNhCfXhAdRgSFYJNGOMBShE = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-        ["dayNumber", "dayPeriod"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HRTAKZQhNDEfbiSbFGHLQTdcR = new(
-        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayNumber, CqlInterval<CqlDateTime> dayPeriod)?>)],
-        ["encounter", "hospitalizationPeriod", "relevantPeriod", "relevantDays"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BbhMZNJZUhELHSIeBfBEVUQGO = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(bool?), typeof(bool?), typeof(bool?)],
-        ["dayNumber", "dayPeriod", "hasSevereResult", "hasElevatedResult", "hasNoGlucoseTest"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FhADCCAGbeXAiadgccRECiPBd = new(
-        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayNumber, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoGlucoseTest)?>)],
-        ["encounter", "relevantPeriod", "relevantDays"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FNeERNKXWKJeEjWXREHDLePdY = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(bool?)],
-        ["dayIndex", "dayPeriod", "hasHyperglycemicEvent"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GJFejXJaZWjRVYgMbQUZgIPjK = new(
-        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?>)],
-        ["encounter", "relevantPeriod", "eligibleEventDays"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CLZgggJGDQVFHPIfbiSZOiXTH = new(
-        [typeof(Encounter), typeof(Observation)],
-        ["InpatientHospitalization", "GlucoseTest"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BBNOZJWbNFIIMKUYJNdXQYNTL = new(
-        [typeof(Encounter), typeof(Observation), typeof(Observation)],
-        ["InpatientHospitalization", "GlucoseResult1000", "EarlierGlucoseTest"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DBJShWTZiKWMABGVHCaJVcMhY = new(
-        [typeof(MedicationAdministration), typeof(MedicationAdministration), typeof(Encounter)],
-        ["OpioidAntagonistGiven", "OpioidGiven", "EncounterWithQualifyingAge"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FSGEiXEbHOWUcRPJgTjPZFYcO = new(
-        [typeof(Encounter), typeof(MedicationAdministration), typeof(Observation)],
-        ["QualifyingEncounter", "HypoglycemicMedication", "GlucoseTest"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BfZBOfPTWgQBddbhgdIFdbKHU = new(
-        [typeof(Encounter), typeof(Observation), typeof(Observation)],
-        ["QualifyingEncounter", "LowGlucoseTest", "FollowupGlucoseTest"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GNOWceaaAJjTLNBBKCiSMeeVD = new(
-        [typeof(Encounter), typeof(Observation)],
-        ["QualifyingEncounter", "HypoglycemicEvent"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GIbILVAdXLLNYBgcQIEiUiKaK = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstTemperatureResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DhbJAfCiKIAGYKTjJXYGSKECQ = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHeartRateResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FdREYEdHOZIcMCNYCRFJYJReA = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstOxygenSatResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GbUHPXXHScejjXWhcHJFQQifQ = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstBicarbonateResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FETECNQPQREfGRgPYWhOWgeWA = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstCreatinineResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DIHdhbAJeJTdiAVUAELUHRNdS = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHematocritResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DAUcYHQZcDKbIfORJOEZBDgIh = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstPlateletResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GKGeLARADLGJcNcZaDhdCREMa = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstSodiumResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_ChVYCdXDGgVcFTCCUefXMbCHX = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstWhiteBloodCellResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CYbMQaXdPgTVSLXJSHHNTbhVM = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstRespRateResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GEQGUKVdHYQAZdGbSEBAPcHZR = new(
-        [typeof(Encounter), typeof(Procedure), typeof(Procedure), typeof(Condition)],
-        ["FaceToFaceOrTelehealthEncounter", "ChemoBeforeEncounter", "ChemoAfterEncounter", "Cancer"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FRbAiSWEhRfKaLTXPVgFXYZAE = new(
-        [typeof(CqlConcept), typeof(string)],
-        ["code", "SOCDxCategory"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_RBQLXdQIRBbBEHDfOgQjdBMH = new(
-        [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, CqlConcept code, string SOCDxCategory)?>)],
-        ["id", "complications"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FNaSKPNeFZXSNMfSCYPJLLGSR = new(
-        [typeof(Procedure), typeof(string)],
-        ["code", "SOCProcedureCategory"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DbihhAfJfGSKOIcQDBMEMigFK = new(
-        [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?>)],
-        ["id", "procedures"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_ESFBYaBAeYMhOBFMjVCbeLhQA = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstWBCResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HOiMaDjifIOTXXFShNKiWLBLV = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHRResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FjSKXeIESORPNbRGajibMfUaK = new(
-        [typeof(string), typeof(IEnumerable<CqlQuantity>), typeof(CqlDateTime)],
-        ["EncounterId", "FirstSBPResult", "Timing"]);
+    private static CqlTupleMetadata CqlTupleMetadata_FBHNjYWJgMKheadEZUgcdQGXN = new(
+        [typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?), typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?)],
+        ["FirstUSSAssessment", "FollowUpUSSAssessment"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GNNDVIQPcTANSdLebhBKYIdga = new(
         [typeof(CqlDateTime), typeof(int?)],
         ["effectiveDatetime", "valueInteger"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_FBHNjYWJgMKheadEZUgcdQGXN = new(
-        [typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?), typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?)],
-        ["FirstUSSAssessment", "FollowUpUSSAssessment"]);
+    #endregion CqlTupleMetadata Properties
 
 }

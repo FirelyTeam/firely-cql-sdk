@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.10.0")]
 [CqlLibrary("FHIRConversionTest", "2023.0.0")]
 public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConversionTest_2023_0_0>
 {
@@ -20,11 +20,16 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 
     public static FHIRConversionTest_2023_0_0 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "FHIRConversionTest";
     string ILibrary.Version => "2023.0.0";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_1.Instance];
-    #endregion Library Members
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_1.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
+
     public Account AccountResource(CqlContext context, Account arg)
     {
         Account[] a_ = [
@@ -7196,12 +7201,6 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ = new(
-        [typeof(string), typeof(string)],
-        ["result1", "result2"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY = new(
-        [typeof(string), typeof((CqlTupleMetadata, string result1, string result2)?)],
-        ["status", "result"]);
+    #endregion Definition Methods
 
 }

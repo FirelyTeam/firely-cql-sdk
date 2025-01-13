@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.10.0")]
 [CqlLibrary("UseofHighRiskMedicationsintheElderlyFHIR", "0.2.001")]
 public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary, ISingleton<UseofHighRiskMedicationsintheElderlyFHIR_0_2_001>
 {
@@ -20,17 +20,20 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
 
     public static UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "UseofHighRiskMedicationsintheElderlyFHIR";
     string ILibrary.Version => "0.2.001";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, CQMCommon_2_2_000.Instance, Hospice_6_12_000.Instance, PalliativeCare_1_11_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance];
-    #endregion Library Members
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, CQMCommon_2_2_000.Instance, Hospice_6_12_000.Instance, PalliativeCare_1_11_000.Instance, CumulativeMedicationDuration_4_1_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Alcohol Withdrawal")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1209")]
     public CqlValueSet Alcohol_Withdrawal(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1209", default);
-
 
 
     [CqlDeclaration("Annual Wellness Visit")]
@@ -39,12 +42,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1240", default);
 
 
-
     [CqlDeclaration("Benzodiazepine Withdrawal")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1208")]
     public CqlValueSet Benzodiazepine_Withdrawal(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1208", default);
-
 
 
     [CqlDeclaration("Bipolar Disorder")]
@@ -53,12 +54,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.67.1.101.1.128", default);
 
 
-
     [CqlDeclaration("Care Services in Long Term Residential Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014")]
     public CqlValueSet Care_Services_in_Long_Term_Residential_Facility(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1014", default);
-
 
 
     [CqlDeclaration("Desiccated Thyroid Medications")]
@@ -67,12 +66,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1060", default);
 
 
-
     [CqlDeclaration("Digoxin Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1065")]
     public CqlValueSet Digoxin_Medications(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1065", default);
-
 
 
     [CqlDeclaration("Dipyridamole Medications")]
@@ -81,12 +78,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1051", default);
 
 
-
     [CqlDeclaration("Discharge Services Nursing Facility")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1013")]
     public CqlValueSet Discharge_Services_Nursing_Facility(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1013", default);
-
 
 
     [CqlDeclaration("Doxepin Medications")]
@@ -95,12 +90,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1067", default);
 
 
-
     [CqlDeclaration("Generalized Anxiety Disorder")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1210")]
     public CqlValueSet Generalized_Anxiety_Disorder(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1210", default);
-
 
 
     [CqlDeclaration("Guanfacine Medications")]
@@ -109,12 +102,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.11.1252", default);
 
 
-
     [CqlDeclaration("Home Healthcare Services")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016")]
     public CqlValueSet Home_Healthcare_Services(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1016", default);
-
 
 
     [CqlDeclaration("Megestrol Medications")]
@@ -123,12 +114,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1247", default);
 
 
-
     [CqlDeclaration("Meperidine Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1248")]
     public CqlValueSet Meperidine_Medications(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1248", default);
-
 
 
     [CqlDeclaration("Meprobamate Medications")]
@@ -137,12 +126,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1057", default);
 
 
-
     [CqlDeclaration("Nifedipine Medications")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1053")]
     public CqlValueSet Nifedipine_Medications(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1053", default);
-
 
 
     [CqlDeclaration("Nursing Facility Visit")]
@@ -151,12 +138,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1012", default);
 
 
-
     [CqlDeclaration("Office Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001")]
     public CqlValueSet Office_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
-
 
 
     [CqlDeclaration("Ophthalmological Services")]
@@ -165,12 +150,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1285", default);
 
 
-
     [CqlDeclaration("Potentially Harmful Antidepressants for Older Adults")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1054")]
     public CqlValueSet Potentially_Harmful_Antidepressants_for_Older_Adults(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1054", default);
-
 
 
     [CqlDeclaration("Potentially Harmful Antihistamines for Older Adults")]
@@ -179,12 +162,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1043", default);
 
 
-
     [CqlDeclaration("Potentially Harmful Antiinfectives for Older Adults")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1481")]
     public CqlValueSet Potentially_Harmful_Antiinfectives_for_Older_Adults(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1481", default);
-
 
 
     [CqlDeclaration("Potentially Harmful Antiparkinsonian Agents for Older Adults")]
@@ -193,12 +174,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1049", default);
 
 
-
     [CqlDeclaration("Potentially Harmful Antipsychotics for Older Adults")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1523")]
     public CqlValueSet Potentially_Harmful_Antipsychotics_for_Older_Adults(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1523", default);
-
 
 
     [CqlDeclaration("Potentially Harmful Barbiturates for Older Adults")]
@@ -207,12 +186,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1055", default);
 
 
-
     [CqlDeclaration("Potentially Harmful Benzodiazepines for Older Adults")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1522")]
     public CqlValueSet Potentially_Harmful_Benzodiazepines_for_Older_Adults(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1522", default);
-
 
 
     [CqlDeclaration("Potentially Harmful Estrogens for Older Adults")]
@@ -221,12 +198,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1058", default);
 
 
-
     [CqlDeclaration("Potentially Harmful Gastrointestinal Antispasmodics for Older Adults")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1050")]
     public CqlValueSet Potentially_Harmful_Gastrointestinal_Antispasmodics_for_Older_Adults(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1050", default);
-
 
 
     [CqlDeclaration("Potentially Harmful Nonbenzodiazepine Hypnotics for Older Adults")]
@@ -235,12 +210,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.196.12.1480", default);
 
 
-
     [CqlDeclaration("Potentially Harmful Pain Medications for Older Adults")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1063")]
     public CqlValueSet Potentially_Harmful_Pain_Medications_for_Older_Adults(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1063", default);
-
 
 
     [CqlDeclaration("Potentially Harmful Skeletal Muscle Relaxants for Older Adults")]
@@ -249,12 +222,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1062", default);
 
 
-
     [CqlDeclaration("Potentially Harmful Sulfonylureas for Older Adults")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1059")]
     public CqlValueSet Potentially_Harmful_Sulfonylureas_for_Older_Adults(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.1059", default);
-
 
 
     [CqlDeclaration("Preventive Care Services Established Office Visit, 18 and Up")]
@@ -263,12 +234,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1025", default);
 
 
-
     [CqlDeclaration("Preventive Care Services Initial Office Visit, 18 and Up")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023")]
     public CqlValueSet Preventive_Care_Services_Initial_Office_Visit__18_and_Up(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1023", default);
-
 
 
     [CqlDeclaration("REM Sleep Behavior Disorder")]
@@ -277,12 +246,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1207", default);
 
 
-
     [CqlDeclaration("Schizophrenia")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1205")]
     public CqlValueSet Schizophrenia(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1205", default);
-
 
 
     [CqlDeclaration("Seizure Disorder")]
@@ -291,12 +258,10 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.105.12.1206", default);
 
 
-
     [CqlDeclaration("Telephone Visits")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080")]
     public CqlValueSet Telephone_Visits(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
-
 
 
     [CqlDeclaration("Virtual Encounter")]
@@ -305,11 +270,9 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
 
 
-
     [CqlDeclaration("1 ML digoxin 0.1 MG/ML Injection")]
     public CqlCode _1_ML_digoxin_0_1_MG_ML_Injection(CqlContext context) =>
         new CqlCode("204504", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
-
 
 
     [CqlDeclaration("2 ML digoxin 0.25 MG/ML Injection")]
@@ -317,11 +280,9 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlCode("104208", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
 
-
     [CqlDeclaration("digoxin 0.05 MG/ML Oral Solution")]
     public CqlCode digoxin_0_05_MG_ML_Oral_Solution(CqlContext context) =>
         new CqlCode("393245", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
-
 
 
     [CqlDeclaration("digoxin 0.0625 MG Oral Tablet")]
@@ -329,11 +290,9 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlCode("245273", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
 
-
     [CqlDeclaration("digoxin 0.125 MG Oral Tablet")]
     public CqlCode digoxin_0_125_MG_Oral_Tablet(CqlContext context) =>
         new CqlCode("197604", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
-
 
 
     [CqlDeclaration("digoxin 0.25 MG Oral Tablet")]
@@ -341,11 +300,9 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlCode("197606", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
 
-
     [CqlDeclaration("doxepin 10 MG Oral Capsule")]
     public CqlCode doxepin_10_MG_Oral_Capsule(CqlContext context) =>
         new CqlCode("1000048", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
-
 
 
     [CqlDeclaration("doxepin 10 MG/ML Oral Solution")]
@@ -353,11 +310,9 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlCode("1000054", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
 
-
     [CqlDeclaration("doxepin 100 MG Oral Capsule")]
     public CqlCode doxepin_100_MG_Oral_Capsule(CqlContext context) =>
         new CqlCode("1000058", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
-
 
 
     [CqlDeclaration("doxepin 150 MG Oral Capsule")]
@@ -365,11 +320,9 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlCode("1000064", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
 
-
     [CqlDeclaration("doxepin 25 MG Oral Capsule")]
     public CqlCode doxepin_25_MG_Oral_Capsule(CqlContext context) =>
         new CqlCode("1000070", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
-
 
 
     [CqlDeclaration("doxepin 3 MG Oral Tablet")]
@@ -377,11 +330,9 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlCode("966787", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
 
-
     [CqlDeclaration("doxepin 50 MG Oral Capsule")]
     public CqlCode doxepin_50_MG_Oral_Capsule(CqlContext context) =>
         new CqlCode("1000076", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
-
 
 
     [CqlDeclaration("doxepin 6 MG Oral Tablet")]
@@ -389,11 +340,9 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlCode("966793", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
 
-
     [CqlDeclaration("doxepin 75 MG Oral Capsule")]
     public CqlCode doxepin_75_MG_Oral_Capsule(CqlContext context) =>
         new CqlCode("1000097", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
-
 
 
     [CqlDeclaration("ergoloid mesylates, USP 1 MG Oral Tablet")]
@@ -401,11 +350,9 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
         new CqlCode("318179", "http://www.nlm.nih.gov/research/umls/rxnorm", default, default);
 
 
-
     [CqlDeclaration("Office or other outpatient visit for the evaluation and management of an established patient that may not require the presence of a physician or other qualified health care professional")]
     public CqlCode Office_or_other_outpatient_visit_for_the_evaluation_and_management_of_an_established_patient_that_may_not_require_the_presence_of_a_physician_or_other_qualified_health_care_professional(CqlContext context) =>
         new CqlCode("99211", "http://www.ama-assn.org/go/cpt", default, default);
-
 
 
     [CqlDeclaration("RXNORM")]
@@ -434,7 +381,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-
     [CqlDeclaration("CPT")]
     public CqlCode[] CPT(CqlContext context)
     {
@@ -444,7 +390,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Measurement Period")]
@@ -459,7 +404,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -468,7 +412,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
 
         return b_;
     }
-
 
 
     [CqlDeclaration("Qualifying Encounters")]
@@ -548,7 +491,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -569,7 +511,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -577,7 +518,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -668,7 +608,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
 
         return f_;
     }
-
 
 
     [CqlDeclaration("Same High Risk Medications Ordered on Different Days")]
@@ -862,7 +801,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
 
         return e_;
     }
-
 
 
     [CqlDeclaration("Two High Risk Medications with Prolonged Duration")]
@@ -1172,7 +1110,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-
     [CqlDeclaration("High Risk Medications with Average Daily Dose Criteria")]
     public bool? High_Risk_Medications_with_Average_Daily_Dose_Criteria(CqlContext context)
     {
@@ -1212,7 +1149,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-
     [CqlDeclaration("Numerator 1")]
     public bool? Numerator_1(CqlContext context)
     {
@@ -1227,7 +1163,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-
     [CqlDeclaration("More than One Antipsychotic Order")]
     public bool? More_than_One_Antipsychotic_Order(CqlContext context)
     {
@@ -1240,7 +1175,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
 
         return g_;
     }
-
 
 
     [CqlDeclaration("Antipsychotic Index Prescription Start Date")]
@@ -1277,7 +1211,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-
     [CqlDeclaration("More than One Benzodiazepine Order")]
     public bool? More_than_One_Benzodiazepine_Order(CqlContext context)
     {
@@ -1290,7 +1223,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
 
         return g_;
     }
-
 
 
     [CqlDeclaration("Benzodiazepine Index Prescription Start Date")]
@@ -1325,7 +1257,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
 
         return m_;
     }
-
 
 
     [CqlDeclaration("Numerator 2")]
@@ -1392,7 +1323,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-
     [CqlDeclaration("Numerator 3")]
     public bool? Numerator_3(CqlContext context)
     {
@@ -1406,7 +1336,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -1414,7 +1343,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
 
         return a_;
     }
-
 
 
     [CqlDeclaration("SDE Payer")]
@@ -1426,7 +1354,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -1434,7 +1361,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
 
         return a_;
     }
-
 
 
     [CqlDeclaration("SDE Sex")]
@@ -1446,324 +1372,6 @@ public partial class UseofHighRiskMedicationsintheElderlyFHIR_0_2_001 : ILibrary
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-        ["dayIndex", "dayPeriod"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
-        [typeof(IEnumerable<CqlCode>), typeof(string)],
-        ["codes", "display"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
-        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
-        ["code", "period"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
-        [typeof(CqlDate)],
-        ["AntidepressantDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
-        [typeof(Encounter), typeof(Condition)],
-        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
-        [typeof(Observation), typeof(Encounter)],
-        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
-        [typeof(Encounter), typeof(Condition)],
-        ["QualifyingEncounters", "URI"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
-        [typeof(string), typeof(int?)],
-        ["EncounterID", "CalculatedCGA"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EMDhFLcFhWVERAVVNfLAZYXJi = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["DTaPVaccination1", "DTaPVaccination2", "DTaPVaccination3", "DTaPVaccination4"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CNGHaZROXaJTHPICcbIaJbRXV = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["PolioVaccination1", "PolioVaccination2", "PolioVaccination3"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EZTgahAUWGgSdGaDCgQNNIPGW = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["HepatitisBVaccination1", "HepatitisBVaccination2", "HepatitisBVaccination3"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HDfaMbZGBWDPFETGQNFbceEeg = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["HepatitisBVaccination1", "HepatitisBVaccination2", "NewBornVaccine3"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DdPDeOJhPYESfHGCOcBNOiPPP = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["PneumococcalVaccination1", "PneumococcalVaccination2", "PneumococcalVaccination3", "PneumococcalVaccination4"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BZhFLeRDagbPQMNheVJcUNfNQ = new(
-        [typeof(CqlDate), typeof(CqlDate)],
-        ["FluVaccination1", "FluVaccination2"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb = new(
-        [typeof(string), typeof(CqlDateTime)],
-        ["ID", "AuthorDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FOBYUiHifSfYFYhEEQajgLbgF = new(
-        [typeof(CqlQuantity), typeof(Observation)],
-        ["QualifyingGlycemicStatusValue", "QualifyingGlycemicStatus"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CVELXTjiMTaGQEjMfJXBdUHjW = new(
-        [typeof(CqlDate)],
-        ["startDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD = new(
-        [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
-        ["period", "periodStart"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GVNUVHGXYWXVGgfjdTEahUfhP = new(
-        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
-        ["HOOSLifeQuality", "HOOSSport", "HOOSActivityScore", "HOOSSymptoms", "HOOSPain"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DDTAOdcFieSJbGgRLLZPYbGQb = new(
-        [typeof(Observation), typeof(Observation)],
-        ["PROMIS10MentalScore", "PROMIS10PhysicalScore"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH = new(
-        [typeof(Observation), typeof(Observation)],
-        ["VR12MentalAssessment", "VR12PhysicalAssessment"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DbNMMZBTISSRTNdiShceSFVih = new(
-        [typeof(Encounter), typeof(Encounter)],
-        ["OfficeVisit1", "OfficeVisit2"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BGYjYGLNPKWAZTBCVAdLDDTMj = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialPROMIS10Date", "FollowupPROMIS10Date"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DBUJFOVGBcbhIQPWARNQHKUaX = new(
-        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
-        ["Promis29Sleep", "Promis29SocialRoles", "Promis29Physical", "Promis29Pain", "Promis29Fatigue", "Promis29Depression", "Promis29Anxiety"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DSZKEYVbCINNIeAQiZdVaEJhG = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialPROMIS29Date", "FollowupPROMIS29Date"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FQKGdEYLiDFGMNAUAMETIHUQT = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialVR12ObliqueDate", "FollowupVR12ObliqueDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HSSAQEFQAOXLjUcOKGgicELWB = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialVR12OrthogonalDate", "FollowupVR12OrthogonalDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DUcFTCLcQEWDGGQdFCWTHFaUK = new(
-        [typeof(Observation), typeof(Observation)],
-        ["VR36MentalAssessment", "VR36PhysicalAssessment"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HQfcMfhQUSTNYMWSgJHiFeahQ = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialVR36ObliqueDate", "FollowupVR36ObliqueDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BFZHWdOOROjSjFSECHcQiaZZZ = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialVR36OrthogonalDate", "FollowupVR36OrthogonalDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EBLWeAeedHPAfOJXKPZJKSCUf = new(
-        [typeof(Observation), typeof(Observation)],
-        ["MLHFQPhysical", "MLHFQEmotional"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CcaWSNDiVeaLebVKKWWWiBcEU = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialMLHFQDate", "FollowupMLHFQDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DFKXORghhYafccUSbQaMfNTDj = new(
-        [typeof(Observation), typeof(Observation)],
-        ["KCCQ12Item", "KCCQ12Summary"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EQQLFFBVIbLIQLiZDNfeYdMU = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialKCCQ12Date", "FollowupKCCQ12Date"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BbPMcXSJeOeGdRcaZWGYPhGBL = new(
-        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
-        ["KCCQLifeQuality", "KCCQSymptomStability", "KCCQSelfEfficacy", "KCCQSymptoms", "KCCQPhysicalLimits", "KCCQSocialLimits"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HEFWLcHhCNCOQegEOfjWTXiGN = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialKCCQAssessmentDate", "FollowupKCCQAssessmentDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DggZKjEbQUfLADMDMBeASLDR = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialKCCQTotalScore", "FollowupKCCQTotalScore"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GVQcZJVjNdGAcjPedLaYDjEME = new(
-        [typeof(Encounter), typeof(Procedure)],
-        ["QualifyingEncounter", "HospitalDietitianReferral"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_XadcRffdjUdMDMjcTIdSXKKS = new(
-        [typeof(Encounter), typeof(Observation)],
-        ["QualifyingEncounter", "MalnutritionRiskScreening"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GFjZJIRJbJMHZiLMbCVCEiHgh = new(
-        [typeof(Encounter), typeof(Observation)],
-        ["QualifyingEncounter", "NutritionAssessment"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CTGXhDDGNAgcaKfhTDIBGVLYU = new(
-        [typeof(Encounter), typeof(Condition)],
-        ["QualifyingEncounter", "MalnutritionDiagnosis"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_TVETjQTNGSKUhAIhIbeKTXMI = new(
-        [typeof(Encounter), typeof(Procedure)],
-        ["QualifyingEncounter", "NutritionCarePlan"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FUFPMQdRaTBgLhghDWfUUBaNF = new(
-        [typeof(Observation), typeof(Encounter)],
-        ["HeartRate", "ModerateOrSevereLVSDHFOutpatientEncounter"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CCJaUjRHWSXeUTcFAfVeVeNaD = new(
-        [typeof(string), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<int?>), typeof(IEnumerable<Encounter.DiagnosisComponent>)],
-        ["encounterId", "condition", "rank", "POA"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CajFQjTXAXITWGJPNIjCafPiF = new(
-        [typeof(Encounter), typeof(CqlConcept)],
-        ["encounter", "condition"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GPLfQTPONQabPZigKbYFERDVQ = new(
-        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>)],
-        ["encounter", "hospitalizationPeriod"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BRDBXSUhdQiXBCfMGdSacWIG = new(
-        [typeof((CqlTupleMetadata, Encounter encounter, CqlInterval<CqlDateTime> hospitalizationPeriod)?), typeof(MedicationAdministration)],
-        ["Hospitalization", "HypoglycemicMed"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_SMNhCfXhAdRgSFYJNGOMBShE = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-        ["dayNumber", "dayPeriod"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HRTAKZQhNDEfbiSbFGHLQTdcR = new(
-        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayNumber, CqlInterval<CqlDateTime> dayPeriod)?>)],
-        ["encounter", "hospitalizationPeriod", "relevantPeriod", "relevantDays"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BbhMZNJZUhELHSIeBfBEVUQGO = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(bool?), typeof(bool?), typeof(bool?)],
-        ["dayNumber", "dayPeriod", "hasSevereResult", "hasElevatedResult", "hasNoGlucoseTest"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FhADCCAGbeXAiadgccRECiPBd = new(
-        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayNumber, CqlInterval<CqlDateTime> dayPeriod, bool? hasSevereResult, bool? hasElevatedResult, bool? hasNoGlucoseTest)?>)],
-        ["encounter", "relevantPeriod", "relevantDays"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FNeERNKXWKJeEjWXREHDLePdY = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(bool?)],
-        ["dayIndex", "dayPeriod", "hasHyperglycemicEvent"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GJFejXJaZWjRVYgMbQUZgIPjK = new(
-        [typeof(Encounter), typeof(CqlInterval<CqlDateTime>), typeof(IEnumerable<(CqlTupleMetadata, int? dayIndex, CqlInterval<CqlDateTime> dayPeriod, bool? hasHyperglycemicEvent)?>)],
-        ["encounter", "relevantPeriod", "eligibleEventDays"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CLZgggJGDQVFHPIfbiSZOiXTH = new(
-        [typeof(Encounter), typeof(Observation)],
-        ["InpatientHospitalization", "GlucoseTest"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BBNOZJWbNFIIMKUYJNdXQYNTL = new(
-        [typeof(Encounter), typeof(Observation), typeof(Observation)],
-        ["InpatientHospitalization", "GlucoseResult1000", "EarlierGlucoseTest"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DBJShWTZiKWMABGVHCaJVcMhY = new(
-        [typeof(MedicationAdministration), typeof(MedicationAdministration), typeof(Encounter)],
-        ["OpioidAntagonistGiven", "OpioidGiven", "EncounterWithQualifyingAge"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FSGEiXEbHOWUcRPJgTjPZFYcO = new(
-        [typeof(Encounter), typeof(MedicationAdministration), typeof(Observation)],
-        ["QualifyingEncounter", "HypoglycemicMedication", "GlucoseTest"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BfZBOfPTWgQBddbhgdIFdbKHU = new(
-        [typeof(Encounter), typeof(Observation), typeof(Observation)],
-        ["QualifyingEncounter", "LowGlucoseTest", "FollowupGlucoseTest"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GNOWceaaAJjTLNBBKCiSMeeVD = new(
-        [typeof(Encounter), typeof(Observation)],
-        ["QualifyingEncounter", "HypoglycemicEvent"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GIbILVAdXLLNYBgcQIEiUiKaK = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstTemperatureResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DhbJAfCiKIAGYKTjJXYGSKECQ = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHeartRateResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FdREYEdHOZIcMCNYCRFJYJReA = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstOxygenSatResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GbUHPXXHScejjXWhcHJFQQifQ = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstBicarbonateResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FETECNQPQREfGRgPYWhOWgeWA = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstCreatinineResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DIHdhbAJeJTdiAVUAELUHRNdS = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHematocritResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DAUcYHQZcDKbIfORJOEZBDgIh = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstPlateletResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GKGeLARADLGJcNcZaDhdCREMa = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstSodiumResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_ChVYCdXDGgVcFTCCUefXMbCHX = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstWhiteBloodCellResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CYbMQaXdPgTVSLXJSHHNTbhVM = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstRespRateResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HDVhZFAYAdGHPZJWcDFSNFGPd = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GEQGUKVdHYQAZdGbSEBAPcHZR = new(
-        [typeof(Encounter), typeof(Procedure), typeof(Procedure), typeof(Condition)],
-        ["FaceToFaceOrTelehealthEncounter", "ChemoBeforeEncounter", "ChemoAfterEncounter", "Cancer"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FRbAiSWEhRfKaLTXPVgFXYZAE = new(
-        [typeof(CqlConcept), typeof(string)],
-        ["code", "SOCDxCategory"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_RBQLXdQIRBbBEHDfOgQjdBMH = new(
-        [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, CqlConcept code, string SOCDxCategory)?>)],
-        ["id", "complications"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FNaSKPNeFZXSNMfSCYPJLLGSR = new(
-        [typeof(Procedure), typeof(string)],
-        ["code", "SOCProcedureCategory"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DbihhAfJfGSKOIcQDBMEMigFK = new(
-        [typeof(string), typeof(IEnumerable<(CqlTupleMetadata, Procedure code, string SOCProcedureCategory)?>)],
-        ["id", "procedures"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_ESFBYaBAeYMhOBFMjVCbeLhQA = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstWBCResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HOiMaDjifIOTXXFShNKiWLBLV = new(
-        [typeof(string), typeof(CqlQuantity), typeof(CqlDateTime)],
-        ["EncounterId", "FirstHRResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FjSKXeIESORPNbRGajibMfUaK = new(
-        [typeof(string), typeof(IEnumerable<CqlQuantity>), typeof(CqlDateTime)],
-        ["EncounterId", "FirstSBPResult", "Timing"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GNNDVIQPcTANSdLebhBKYIdga = new(
-        [typeof(CqlDateTime), typeof(int?)],
-        ["effectiveDatetime", "valueInteger"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FBHNjYWJgMKheadEZUgcdQGXN = new(
-        [typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?), typeof((CqlTupleMetadata, CqlDateTime effectiveDatetime, int? valueInteger)?)],
-        ["FirstUSSAssessment", "FollowUpUSSAssessment"]);
+    #endregion Definition Methods
 
 }

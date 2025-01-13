@@ -7,7 +7,8 @@
 		<RootNamespace>Hl7.Cql.Abstractions</RootNamespace>
 		<Product>CQL</Product>
 		<Description>Support package for Hl7.Cql. Contains shared interfaces and abstractions for CQL.</Description>
-		<NoWarn>CS8601</NoWarn>
+		<NoWarn>$(NoWarn);CS8601</NoWarn>
+		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
 	<ItemGroup>

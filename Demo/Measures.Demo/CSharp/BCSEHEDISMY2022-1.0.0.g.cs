@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.10.0")]
 [CqlLibrary("BCSEHEDISMY2022", "1.0.0")]
 public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY2022_1_0_0>
 {
@@ -20,17 +20,20 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 
     public static BCSEHEDISMY2022_1_0_0 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "BCSEHEDISMY2022";
     string ILibrary.Version => "1.0.0";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAHealthPlanEnrollment_1_0_0.Instance, NCQAStatus_1_0_0.Instance, NCQAFHIRBase_1_0_0.Instance, NCQAHospice_1_0_0.Instance, NCQAAdvancedIllnessandFrailty_1_0_0.Instance, NCQAPalliativeCare_1_0_0.Instance];
-    #endregion Library Members
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAHealthPlanEnrollment_1_0_0.Instance, NCQAStatus_1_0_0.Instance, NCQAFHIRBase_1_0_0.Instance, NCQAHospice_1_0_0.Instance, NCQAAdvancedIllnessandFrailty_1_0_0.Instance, NCQAPalliativeCare_1_0_0.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Absence of Left Breast")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1329")]
     public CqlValueSet Absence_of_Left_Breast(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1329", default);
-
 
 
     [CqlDeclaration("Absence of Right Breast")]
@@ -39,12 +42,10 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1330", default);
 
 
-
     [CqlDeclaration("Bilateral Mastectomy")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1042")]
     public CqlValueSet Bilateral_Mastectomy(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1042", default);
-
 
 
     [CqlDeclaration("Bilateral Modifier")]
@@ -53,12 +54,10 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1043", default);
 
 
-
     [CqlDeclaration("Clinical Bilateral Modifier")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1951")]
     public CqlValueSet Clinical_Bilateral_Modifier(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1951", default);
-
 
 
     [CqlDeclaration("Clinical Left Modifier")]
@@ -67,12 +66,10 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1949", default);
 
 
-
     [CqlDeclaration("Clinical Right Modifier")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1950")]
     public CqlValueSet Clinical_Right_Modifier(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1950", default);
-
 
 
     [CqlDeclaration("Clinical Unilateral Mastectomy")]
@@ -81,12 +78,10 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1948", default);
 
 
-
     [CqlDeclaration("History of Bilateral Mastectomy")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1331")]
     public CqlValueSet History_of_Bilateral_Mastectomy(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1331", default);
-
 
 
     [CqlDeclaration("Left Modifier")]
@@ -95,12 +90,10 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1148", default);
 
 
-
     [CqlDeclaration("Mammography")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1168")]
     public CqlValueSet Mammography(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1168", default);
-
 
 
     [CqlDeclaration("Right Modifier")]
@@ -109,12 +102,10 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1230", default);
 
 
-
     [CqlDeclaration("Unilateral Mastectomy")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1256")]
     public CqlValueSet Unilateral_Mastectomy(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1256", default);
-
 
 
     [CqlDeclaration("Unilateral Mastectomy Left")]
@@ -123,12 +114,10 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1334", default);
 
 
-
     [CqlDeclaration("Unilateral Mastectomy Right")]
     [CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1335")]
     public CqlValueSet Unilateral_Mastectomy_Right(CqlContext context) =>
         new CqlValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1335", default);
-
 
 
     [CqlDeclaration("Measurement Period")]
@@ -140,7 +129,6 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     }
 
 
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -149,7 +137,6 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 
         return b_;
     }
-
 
 
     [CqlDeclaration("October 1 Two Years Prior to the Measurement Period")]
@@ -166,7 +153,6 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     }
 
 
-
     [CqlDeclaration("Participation Period")]
     public CqlInterval<CqlDateTime> Participation_Period(CqlContext context)
     {
@@ -177,7 +163,6 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 
         return d_;
     }
-
 
 
     [CqlDeclaration("Member Coverage")]
@@ -197,7 +182,6 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 
         return c_;
     }
-
 
 
     [CqlDeclaration("Enrolled During Participation Period")]
@@ -241,7 +225,6 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     }
 
 
-
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -267,7 +250,6 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     }
 
 
-
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -275,7 +257,6 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Right Mastectomy Diagnosis")]
@@ -298,7 +279,6 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 
         return e_;
     }
-
 
 
     [CqlDeclaration("Right Mastectomy Procedure")]
@@ -364,7 +344,6 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     }
 
 
-
     [CqlDeclaration("Left Mastectomy Diagnosis")]
     public IEnumerable<Condition> Left_Mastectomy_Diagnosis(CqlContext context)
     {
@@ -385,7 +364,6 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 
         return e_;
     }
-
 
 
     [CqlDeclaration("Left Mastectomy Procedure")]
@@ -451,7 +429,6 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     }
 
 
-
     [CqlDeclaration("Bilateral Mastectomy Diagnosis")]
     public IEnumerable<Condition> Bilateral_Mastectomy_Diagnosis(CqlContext context)
     {
@@ -472,7 +449,6 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 
         return e_;
     }
-
 
 
     [CqlDeclaration("Bilateral Mastectomy Procedure")]
@@ -538,7 +514,6 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     }
 
 
-
     [CqlDeclaration("Mastectomy Exclusion")]
     public bool? Mastectomy_Exclusion(CqlContext context)
     {
@@ -564,7 +539,6 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     }
 
 
-
     [CqlDeclaration("Exclusions")]
     public bool? Exclusions(CqlContext context)
     {
@@ -579,7 +553,6 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
 
         return h_;
     }
-
 
 
     [CqlDeclaration("Numerator")]
@@ -604,256 +577,6 @@ public partial class BCSEHEDISMY2022_1_0_0 : ILibrary, ISingleton<BCSEHEDISMY202
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_EaLaedgLDgRRYaLbKIIcBTOiA = new(
-        [typeof(Encounter), typeof(Encounter)],
-        ["OutpatientEncounter1", "OutpatientEncounter2"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CgaDVOXeQBMgMPCPZOThIIdDb = new(
-        [typeof(CqlInterval<CqlDateTime>), typeof(CqlInterval<CqlDateTime>)],
-        ["LTCPeriod1", "LTCPeriod2"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GIMHfXDcFiAjSJBDGYeUeZLhW = new(
-        [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
-        ["interval", "startOfInterval"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EQHOUSiiWahbJPOUjJGEhIAOV = new(
-        [typeof(CqlInterval<CqlDateTime>), typeof(CqlDateTime)],
-        ["interval", "startOfInterval"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EVRLVXPcBiDTIWfCCfKEWDfKI = new(
-        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
-        ["sortedCoverings"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FKcLSALRMRfDigEFaJgDOPFRK = new(
-        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
-        ["frontgaps", "endgap"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EdgSWaTaCbLYLJceGdIcWOLHd = new(
-        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
-        ["sortedCoverings"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BBLSSiNBQBGUDJaVjMDZMSAXg = new(
-        [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
-        ["frontgaps", "endgap"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HEjPGjPEhLgQPGjROeWMgiGfC = new(
-        [typeof(CqlInterval<CqlDate>), typeof(int?)],
-        ["interval", "days"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HRbPDRZiOGGBceePOZWjVbXdP = new(
-        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(int?), typeof(int?), typeof(CqlInterval<CqlDate>), typeof(int?)],
-        ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DUiZjXRKgCPYVZQJbFVDKNMOi = new(
-        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
-        ["Covering_Intervals"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GQPbYTYABjXFVLRKjXgcDJFSj = new(
-        [typeof(IEnumerable<CqlInterval<CqlDate>>)],
-        ["Gap_Intervals"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FcQREFSfPJSKYAhSEWVJcZVED = new(
-        [typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?)],
-        ["StartYear", "StartMonth", "StartDay", "StartHour", "StartMinute", "StartSecond", "StartMillisecond", "EndYear", "EndMonth", "EndDay", "EndHour", "EndMinute", "EndSecond", "EndMillisecond"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CGHEUIgjaCjJVKEADTSZEbdCL = new(
-        [typeof(CqlInterval<CqlDateTime>), typeof(int?)],
-        ["interval", "days"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HDihbLieYfQbgeSbOWZBAMUIQ = new(
-        [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(int?), typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(int?)],
-        ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GZMPWdGOJiTNjfWAcbZMePdXV = new(
-        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
-        ["Covering_Intervals"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CKbERRbOPGNBBERUOghhaOYSE = new(
-        [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
-        ["Gap_Intervals"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CfANiScMYDdVZFgRERKJQEVca = new(
-        [typeof(IEnumerable<CqlDate>)],
-        ["SortedDates"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BDeBMdFeZaVSehBSFYjTFdYYD = new(
-        [typeof(IEnumerable<CqlDate>), typeof(int?)],
-        ["SortedList", "AnchorIndex"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EbRdcKZaDRhaFPaOQUGVhPhBc = new(
-        [typeof(CqlDate), typeof(IEnumerable<CqlDate>), typeof(int?)],
-        ["NextDate", "NewList", "IndexofNewDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BaNHUZXcQBUKLNgEDWdDHjYV = new(
-        [typeof(CqlInterval<CqlDate>), typeof(CqlInterval<CqlDate>)],
-        ["Coverage1", "Coverage2"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DPLIOBaSciHAAETJOMSIjWgbP = new(
-        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
-        ["IntervalInfo", "Collapsed", "Adjacent", "CollapsedFinal"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GIgcTXSQJbIXPiNgNbAIdOBXi = new(
-        [typeof(IEnumerable<Claim>), typeof(IEnumerable<string>), typeof(IEnumerable<string>)],
-        ["MedicalClaim", "ProceduresAsStrings", "POSAsString"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HSdidNdfHCNCFSUTgBiYLcgXP = new(
-        [typeof(Claim), typeof(IEnumerable<Claim.ItemComponent>)],
-        ["Claim", "LineItems"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GDUUTAIXZafehWFjcGfNKBcTd = new(
-        [typeof(Claim), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
-        ["Claim", "ServicePeriod"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GKQGAFOMQbCPRXAANKASUIHMf = new(
-        [typeof(IEnumerable<Claim>), typeof(IEnumerable<string>)],
-        ["MedicalClaim", "DiagnosesAsStrings"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GDVcejYEWXWNHUIODacaMaBhV = new(
-        [typeof(IEnumerable<Claim>)],
-        ["DiagnosisItems"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CWDDWHRXGADEbdaKXCdKbgEfg = new(
-        [typeof(IEnumerable<Claim>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
-        ["Claim", "ServicePeriod"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CZJDcULSYFOUeGSUcDccghjMK = new(
-        [typeof(IEnumerable<Claim>), typeof(IEnumerable<string>)],
-        ["PharmacyClaim", "MedicationsAsStrings"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HDUYFgZGRCJCdTeEcMSVCMQNN = new(
-        [typeof(CqlInterval<CqlDateTime>)],
-        ["DaysSupplyInterval"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_fQfNOLePNSNdOZROKRAfMQPE = new(
-        [typeof(IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> DaysSupplyInterval)?>)],
-        ["CoveredDays"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FCdHTREUGBEaiYVQNNGRPZFjf = new(
-        [typeof(Claim), typeof(IEnumerable<Claim.ItemComponent>), typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
-        ["Claim", "LineItem", "ServicePeriod", "CoveredDays"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GQFgMiKhOZgECFTScigSABdXb = new(
-        [typeof(IEnumerable<Claim>), typeof(IEnumerable<string>), typeof(IEnumerable<string>)],
-        ["MedicalClaim", "DiagnosesAsStrings", "ProceduresAsStrings"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CXESjjTOQIGKICAEMDgcfPdJG = new(
-        [typeof(Claim)],
-        ["ProcedureItems"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FYaKYiIDIQCIRBfhZCGRDYQLX = new(
-        [typeof(Claim), typeof(Claim)],
-        ["Claim", "ProcedureItems"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_iYTJVNYRMBhJCKDIUSKFMUHe = new(
-        [typeof(IEnumerable<Claim.ItemComponent>), typeof(Claim)],
-        ["Procedure", "LineItems"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DBEDLLOihLKGPWLHVWXRKfGdL = new(
-        [typeof(IEnumerable<Claim>)],
-        ["LineItems"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_ESGibVhJBKTGTjRhHBeNDHASE = new(
-        [typeof(IEnumerable<ClaimResponse>), typeof(IEnumerable<Claim>)],
-        ["MedicalClaimResponse", "MedicalClaim"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DbDPVOODdCjASWRZfBTBPUJKR = new(
-        [typeof(IEnumerable<ClaimResponse>)],
-        ["PaidResponse"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FfbRdLZNBbFHejZXDegUDAhjO = new(
-        [typeof(ClaimResponse), typeof(string), typeof(IEnumerable<ClaimResponse.ItemComponent>)],
-        ["Response", "ResponseID", "LineItems"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GUCaFdHVHVNcfKfMNEFbbNGUi = new(
-        [typeof(Claim), typeof(Id), typeof(IEnumerable<Claim.ItemComponent>)],
-        ["ClaimofInterest", "ClaimID", "LineItems"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DiTbeIhUdTbFXAOeUfBeANOcV = new(
-        [typeof(IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>), typeof(IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>)],
-        ["PaidMedicalClaimResponse", "MedicalClaim"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HANAFPgdEHHITIiaCbHRMCNfZ = new(
-        [typeof((CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?), typeof(IEnumerable<Claim.ItemComponent>)],
-        ["PaidClaim", "ClaimItem"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GUibhjYMgjAQISFDJORUOccJC = new(
-        [typeof(IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>)],
-        ["AggregateClaim"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FCOUVKRRWVHcKiBDUdGgLciKR = new(
-        [typeof(IEnumerable<(CqlTupleMetadata, Claim ClaimofInterest, Id ClaimID, IEnumerable<Claim.ItemComponent> LineItems)?>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
-        ["originalClaim", "ServicePeriod"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EgMIjgYNSTYejjeaeeSfTCGLV = new(
-        [typeof(IEnumerable<ClaimResponse>), typeof(IEnumerable<Claim>)],
-        ["PharmacyClaimResponse", "PharmacyClaim"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EhcebFbUeFgabTLNPALjRJQCF = new(
-        [typeof(IEnumerable<(CqlTupleMetadata, ClaimResponse Response, string ResponseID, IEnumerable<ClaimResponse.ItemComponent> LineItems)?>), typeof(IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>)],
-        ["PaidPharmacyClaimResponse", "MedicalClaim"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BiVTcKEZOfgFCDEReGAXJRAUK = new(
-        [typeof((CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?), typeof(IEnumerable<Claim.ItemComponent>)],
-        ["PaidClaim", "ClaimItem"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EMbbXAAHNDcXYSgLIhAhQCWON = new(
-        [typeof(IEnumerable<(CqlTupleMetadata, (CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)? PaidClaim, IEnumerable<Claim.ItemComponent> ClaimItem)?>)],
-        ["AggregateClaim"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DXGMEVDRBZgHMANCfXfEUYMNW = new(
-        [typeof(IEnumerable<(CqlTupleMetadata, Claim Claim, IEnumerable<Claim.ItemComponent> LineItem, IEnumerable<CqlInterval<CqlDateTime>> ServicePeriod, IEnumerable<CqlInterval<CqlDateTime>> CoveredDays)?>), typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
-        ["originalClaim", "ServicePeriod", "CoveredDays"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CZThYJbgajVLdhIZdgZiXBFQK = new(
-        [typeof(IEnumerable<ClaimResponse>), typeof(IEnumerable<Claim>)],
-        ["ClaimResponse", "OriginalClaim"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GFUjSKcYaHagAZIhSUhffHjHP = new(
-        [typeof(IEnumerable<Claim>), typeof(IEnumerable<Claim>)],
-        ["InpatientStayLineItems", "NonacuteInpatientLineItems"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DBGUUNgWTQDYFIeOfMhQJAYTB = new(
-        [typeof(IEnumerable<Claim>), typeof(IEnumerable<Claim>), typeof(IEnumerable<Claim>)],
-        ["InpatientDischarge", "NonacuteInpatientDischarge", "AcuteInpatientDischarge"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BWiFKXdFieUciRMVTUCdIFCVO = new(
-        [typeof(Claim), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<string>)],
-        ["SingleCareTeam", "CareTeamsProvider", "CareTeamsProviderID"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HFNJUcNhcbGBLBgHAJMMSPfQH = new(
-        [typeof(IEnumerable<(CqlTupleMetadata, Claim SingleCareTeam, IEnumerable<ResourceReference> CareTeamsProvider, IEnumerable<string> CareTeamsProviderID)?>)],
-        ["CareTeams"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FPVdJEEOUKFVhQPTfKhShUNO = new(
-        [typeof(IEnumerable<Practitioner>)],
-        ["Practitioners"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EheHUARRFfQdCcHKeSEhfYZMj = new(
-        [typeof(IEnumerable<FhirString>), typeof(IEnumerable<Identifier>)],
-        ["AllIdentifiers", "NullIdentifiers"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EZUSISLPSZWTXahaQjXaSAJBE = new(
-        [typeof(IEnumerable<(CqlTupleMetadata, IEnumerable<FhirString> AllIdentifiers, IEnumerable<Identifier> NullIdentifiers)?>)],
-        ["IdentifierTuple"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FBUdWLSDMgYFFiVXYhKEiUNQS = new(
-        [typeof(int?)],
-        ["IdentifierCount"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_gFQSaDQdhfIVgTfEbUhWdbBB = new(
-        [typeof(IEnumerable<Claim.ItemComponent>), typeof(IEnumerable<ResourceReference>), typeof(IEnumerable<string>)],
-        ["SingleItem", "ItemLocation", "ItemLocationID"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_ESTVjUCCVhLEXJGPZBeEcQDHX = new(
-        [typeof(IEnumerable<(CqlTupleMetadata, IEnumerable<Claim.ItemComponent> SingleItem, IEnumerable<ResourceReference> ItemLocation, IEnumerable<string> ItemLocationID)?>)],
-        ["ItemsLocationReferences"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GWYcfjEGjPEdPbTNdfROfTUAf = new(
-        [typeof(IEnumerable<Location>)],
-        ["CorrespondingLocations"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CMSeRgTJgKISKSQUcNZWKegGV = new(
-        [typeof(CqlDate), typeof(CqlDate)],
-        ["OutpatientVisit1", "OutpatientVisit2"]);
+    #endregion Definition Methods
 
 }

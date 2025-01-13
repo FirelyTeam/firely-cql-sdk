@@ -25,7 +25,7 @@ internal static class CqlCodeGenerationServiceCollectionExtensions
 
         services.TryAddSingleton<TypeToCSharpConverter>();
 
-        services.TryAddSingleton<LibrarySetDefinitionsToCSharpCodeProcessor>();
+        services.TryAddSingleton<LibrarySetCSharpCodeGenerator>();
 
         services.TryAddSingletonSwitch<CSharpCodeStreamPostProcessor, WriteToFileCSharpCodeStreamPostProcessor, StubCSharpCodeStreamPostProcessor>(
             sp => sp.GetOptionsValue<CSharpCodeWriterOptions>().OutDirectory switch

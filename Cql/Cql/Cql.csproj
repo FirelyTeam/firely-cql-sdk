@@ -8,6 +8,7 @@
 		<RootNamespace>Hl7.Cql</RootNamespace>
 		<Product>HL7 CQL Engine</Product>
 		<Description>A platform for evaluating logic in the HL7 CQL language.</Description>
+		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
 
 	<ItemGroup>

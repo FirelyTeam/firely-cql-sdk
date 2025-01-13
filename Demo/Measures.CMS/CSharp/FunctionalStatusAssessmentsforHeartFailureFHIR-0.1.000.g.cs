@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.10.0")]
 [CqlLibrary("FunctionalStatusAssessmentsforHeartFailureFHIR", "0.1.000")]
 public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : ILibrary, ISingleton<FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000>
 {
@@ -20,17 +20,20 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
     public static FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "FunctionalStatusAssessmentsforHeartFailureFHIR";
     string ILibrary.Version => "0.1.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance];
-    #endregion Library Members
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Heart Failure")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376")]
     public CqlValueSet Heart_Failure(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.376", default);
-
 
 
     [CqlDeclaration("Office Visit")]
@@ -39,12 +42,10 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1001", default);
 
 
-
     [CqlDeclaration("Virtual Encounter")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089")]
     public CqlValueSet Virtual_Encounter(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1089", default);
-
 
 
     [CqlDeclaration("Telephone Visits")]
@@ -53,11 +54,9 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1080", default);
 
 
-
     [CqlDeclaration("Emotional score [MLHFQ]")]
     public CqlCode Emotional_score__MLHFQ_(CqlContext context) =>
         new CqlCode("85609-6", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Kansas City Cardiomyopathy Questionnaire - 12 item [KCCQ-12]")]
@@ -65,11 +64,9 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("86923-0", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Overall summary score [KCCQ-12]")]
     public CqlCode Overall_summary_score__KCCQ_12_(CqlContext context) =>
         new CqlCode("86924-8", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Overall summary score [KCCQ]")]
@@ -77,11 +74,9 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("71940-1", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Physical limitation score [KCCQ]")]
     public CqlCode Physical_limitation_score__KCCQ_(CqlContext context) =>
         new CqlCode("72195-1", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Physical score [MLHFQ]")]
@@ -89,11 +84,9 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("85618-7", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("PROMIS-10 Global Mental Health (GMH) score T-score")]
     public CqlCode PROMIS_10_Global_Mental_Health__GMH__score_T_score(CqlContext context) =>
         new CqlCode("71969-0", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("PROMIS-10 Global Physical Health (GPH) score T-score")]
@@ -101,11 +94,9 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("71971-6", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("PROMIS-29 Anxiety score T-score")]
     public CqlCode PROMIS_29_Anxiety_score_T_score(CqlContext context) =>
         new CqlCode("71967-4", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("PROMIS-29 Depression score T-score")]
@@ -113,11 +104,9 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("71965-8", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("PROMIS-29 Fatigue score T-score")]
     public CqlCode PROMIS_29_Fatigue_score_T_score(CqlContext context) =>
         new CqlCode("71963-3", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("PROMIS-29 Pain interference score T-score")]
@@ -125,11 +114,9 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("71961-7", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("PROMIS-29 Physical function score T-score")]
     public CqlCode PROMIS_29_Physical_function_score_T_score(CqlContext context) =>
         new CqlCode("71959-1", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("PROMIS-29 Satisfaction with participation in social roles score T-score")]
@@ -137,11 +124,9 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("71957-5", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("PROMIS-29 Sleep disturbance score T-score")]
     public CqlCode PROMIS_29_Sleep_disturbance_score_T_score(CqlContext context) =>
         new CqlCode("71955-9", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Quality of life score [KCCQ]")]
@@ -149,11 +134,9 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("72189-4", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Self-efficacy score [KCCQ]")]
     public CqlCode Self_efficacy_score__KCCQ_(CqlContext context) =>
         new CqlCode("72190-2", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Severe cognitive impairment (finding)")]
@@ -161,11 +144,9 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("702956004", "http://snomed.info/sct", default, default);
 
 
-
     [CqlDeclaration("Social limitation score [KCCQ]")]
     public CqlCode Social_limitation_score__KCCQ_(CqlContext context) =>
         new CqlCode("72196-9", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Symptom stability score [KCCQ]")]
@@ -173,11 +154,9 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("72194-4", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Total score [MLHFQ]")]
     public CqlCode Total_score__MLHFQ_(CqlContext context) =>
         new CqlCode("71938-5", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Total symptom score [KCCQ]")]
@@ -185,11 +164,9 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("72191-0", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("VR-12 Mental component summary (MCS) score - oblique method T-score")]
     public CqlCode VR_12_Mental_component_summary__MCS__score___oblique_method_T_score(CqlContext context) =>
         new CqlCode("72026-8", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("VR-12 Mental component summary (MCS) score - orthogonal method T-score")]
@@ -197,11 +174,9 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("72028-4", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("VR-12 Physical component summary (PCS) score - oblique method T-score")]
     public CqlCode VR_12_Physical_component_summary__PCS__score___oblique_method_T_score(CqlContext context) =>
         new CqlCode("72025-0", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("VR-12 Physical component summary (PCS) score - orthogonal method T-score")]
@@ -209,11 +184,9 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("72027-6", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("VR-36 Mental component summary (MCS) score - oblique method T-score")]
     public CqlCode VR_36_Mental_component_summary__MCS__score___oblique_method_T_score(CqlContext context) =>
         new CqlCode("71990-6", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("VR-36 Mental component summary (MCS) score - orthogonal method T-score")]
@@ -221,17 +194,14 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
         new CqlCode("72008-6", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("VR-36 Physical component summary (PCS) score - oblique method T-score")]
     public CqlCode VR_36_Physical_component_summary__PCS__score___oblique_method_T_score(CqlContext context) =>
         new CqlCode("71989-8", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("VR-36 Physical component summary (PCS) score - orthogonal method T-score")]
     public CqlCode VR_36_Physical_component_summary__PCS__score___orthogonal_method_T_score(CqlContext context) =>
         new CqlCode("72007-8", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("LOINC")]
@@ -273,7 +243,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-
     [CqlDeclaration("SNOMEDCT")]
     public CqlCode[] SNOMEDCT(CqlContext context)
     {
@@ -283,7 +252,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Measurement Period")]
@@ -298,7 +266,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -307,7 +274,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return b_;
     }
-
 
 
     [CqlDeclaration("SDE Ethnicity")]
@@ -319,7 +285,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-
     [CqlDeclaration("SDE Payer")]
     public IEnumerable<(CqlTupleMetadata, CqlConcept code, CqlInterval<CqlDateTime> period)?> SDE_Payer(CqlContext context)
     {
@@ -327,7 +292,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return a_;
     }
-
 
 
     [CqlDeclaration("SDE Race")]
@@ -339,7 +303,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-
     [CqlDeclaration("SDE Sex")]
     public CqlCode SDE_Sex(CqlContext context)
     {
@@ -347,7 +310,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Qualifying Encounters")]
@@ -376,7 +338,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return k_;
     }
-
 
 
     [CqlDeclaration("Two Outpatient Encounters during Measurement Period")]
@@ -417,7 +378,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -451,7 +411,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -459,7 +418,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -483,7 +441,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return h_;
     }
-
 
 
     [CqlDeclaration("Date PROMIS10 Total Assessment Completed")]
@@ -545,7 +502,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return p_;
     }
-
 
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up PROMIS10 Assessments")]
@@ -611,7 +567,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return l_;
     }
-
 
 
     [CqlDeclaration("Date PROMIS29 Total Assessment Completed")]
@@ -770,7 +725,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-
     [CqlDeclaration("Has Encounter with Initial and Follow Up PROMIS29 Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_PROMIS29_Assessments(CqlContext context)
     {
@@ -836,7 +790,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-
     [CqlDeclaration("Date VR12 Oblique Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR12_Oblique_Total_Assessment_Completed(CqlContext context)
     {
@@ -896,7 +849,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return p_;
     }
-
 
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up VR12 Oblique Assessments")]
@@ -964,7 +916,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-
     [CqlDeclaration("Date VR12 Orthogonal Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR12_Orthogonal_Total_Assessment_Completed(CqlContext context)
     {
@@ -1024,7 +975,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return p_;
     }
-
 
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up VR12 Orthogonal Assessments")]
@@ -1092,7 +1042,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-
     [CqlDeclaration("Date VR36 Oblique Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR36_Oblique_Total_Assessment_Completed(CqlContext context)
     {
@@ -1152,7 +1101,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return p_;
     }
-
 
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up VR36 Oblique Assessments")]
@@ -1220,7 +1168,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-
     [CqlDeclaration("Date VR36 Orthogonal Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_VR36_Orthogonal_Total_Assessment_Completed(CqlContext context)
     {
@@ -1280,7 +1227,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return p_;
     }
-
 
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up VR36 Orthogonal Assessments")]
@@ -1348,7 +1294,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-
     [CqlDeclaration("Date MLHFQ Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_MLHFQ_Total_Assessment_Completed(CqlContext context)
     {
@@ -1408,7 +1353,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return p_;
     }
-
 
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up MLHFQ Assessments")]
@@ -1476,7 +1420,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-
     [CqlDeclaration("Date KCCQ12 Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_KCCQ12_Total_Assessment_Completed(CqlContext context)
     {
@@ -1536,7 +1479,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return p_;
     }
-
 
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up KCCQ12 Assessments")]
@@ -1602,7 +1544,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return l_;
     }
-
 
 
     [CqlDeclaration("Date KCCQ Domain Assessment Completed")]
@@ -1742,7 +1683,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-
     [CqlDeclaration("Has Encounter with Initial and Follow Up KCCQ Domain Score Assessments")]
     public bool? Has_Encounter_with_Initial_and_Follow_Up_KCCQ_Domain_Score_Assessments(CqlContext context)
     {
@@ -1808,7 +1748,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-
     [CqlDeclaration("Date KCCQ Total Assessment Completed")]
     public IEnumerable<CqlDate> Date_KCCQ_Total_Assessment_Completed(CqlContext context)
     {
@@ -1840,7 +1779,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
 
         return i_;
     }
-
 
 
     [CqlDeclaration("Has Encounter with Initial and Follow Up KCCQ Total Score Assessments")]
@@ -1908,7 +1846,6 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-
     [CqlDeclaration("Numerator")]
     public bool? Numerator(CqlContext context)
     {
@@ -1936,152 +1873,82 @@ public partial class FunctionalStatusAssessmentsforHeartFailureFHIR_0_1_000 : IL
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-        ["dayIndex", "dayPeriod"]);
+    #endregion Definition Methods
 
-    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
-        [typeof(IEnumerable<CqlCode>), typeof(string)],
-        ["codes", "display"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
-        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
-        ["code", "period"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
-        [typeof(CqlDate)],
-        ["AntidepressantDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
-        [typeof(Encounter), typeof(Condition)],
-        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
-        [typeof(Observation), typeof(Encounter)],
-        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
-        [typeof(Encounter), typeof(Condition)],
-        ["QualifyingEncounters", "URI"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
-        [typeof(string), typeof(int?)],
-        ["EncounterID", "CalculatedCGA"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EMDhFLcFhWVERAVVNfLAZYXJi = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["DTaPVaccination1", "DTaPVaccination2", "DTaPVaccination3", "DTaPVaccination4"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CNGHaZROXaJTHPICcbIaJbRXV = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["PolioVaccination1", "PolioVaccination2", "PolioVaccination3"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EZTgahAUWGgSdGaDCgQNNIPGW = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["HepatitisBVaccination1", "HepatitisBVaccination2", "HepatitisBVaccination3"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HDfaMbZGBWDPFETGQNFbceEeg = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["HepatitisBVaccination1", "HepatitisBVaccination2", "NewBornVaccine3"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DdPDeOJhPYESfHGCOcBNOiPPP = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["PneumococcalVaccination1", "PneumococcalVaccination2", "PneumococcalVaccination3", "PneumococcalVaccination4"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BZhFLeRDagbPQMNheVJcUNfNQ = new(
-        [typeof(CqlDate), typeof(CqlDate)],
-        ["FluVaccination1", "FluVaccination2"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EDdTRBfWHaSNbiiXJfIVJUXdb = new(
-        [typeof(string), typeof(CqlDateTime)],
-        ["ID", "AuthorDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FOBYUiHifSfYFYhEEQajgLbgF = new(
-        [typeof(CqlQuantity), typeof(Observation)],
-        ["QualifyingGlycemicStatusValue", "QualifyingGlycemicStatus"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CVELXTjiMTaGQEjMfJXBdUHjW = new(
-        [typeof(CqlDate)],
-        ["startDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EhMLLfWeOaeVhYfBZeiQfaefD = new(
-        [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
-        ["period", "periodStart"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GVNUVHGXYWXVGgfjdTEahUfhP = new(
-        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
-        ["HOOSLifeQuality", "HOOSSport", "HOOSActivityScore", "HOOSSymptoms", "HOOSPain"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DDTAOdcFieSJbGgRLLZPYbGQb = new(
-        [typeof(Observation), typeof(Observation)],
-        ["PROMIS10MentalScore", "PROMIS10PhysicalScore"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH = new(
-        [typeof(Observation), typeof(Observation)],
-        ["VR12MentalAssessment", "VR12PhysicalAssessment"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DbNMMZBTISSRTNdiShceSFVih = new(
-        [typeof(Encounter), typeof(Encounter)],
-        ["OfficeVisit1", "OfficeVisit2"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BGYjYGLNPKWAZTBCVAdLDDTMj = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialPROMIS10Date", "FollowupPROMIS10Date"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DBUJFOVGBcbhIQPWARNQHKUaX = new(
-        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
-        ["Promis29Sleep", "Promis29SocialRoles", "Promis29Physical", "Promis29Pain", "Promis29Fatigue", "Promis29Depression", "Promis29Anxiety"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DSZKEYVbCINNIeAQiZdVaEJhG = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialPROMIS29Date", "FollowupPROMIS29Date"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FQKGdEYLiDFGMNAUAMETIHUQT = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialVR12ObliqueDate", "FollowupVR12ObliqueDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HSSAQEFQAOXLjUcOKGgicELWB = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialVR12OrthogonalDate", "FollowupVR12OrthogonalDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DUcFTCLcQEWDGGQdFCWTHFaUK = new(
-        [typeof(Observation), typeof(Observation)],
-        ["VR36MentalAssessment", "VR36PhysicalAssessment"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HQfcMfhQUSTNYMWSgJHiFeahQ = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialVR36ObliqueDate", "FollowupVR36ObliqueDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BFZHWdOOROjSjFSECHcQiaZZZ = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialVR36OrthogonalDate", "FollowupVR36OrthogonalDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EBLWeAeedHPAfOJXKPZJKSCUf = new(
-        [typeof(Observation), typeof(Observation)],
-        ["MLHFQPhysical", "MLHFQEmotional"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CcaWSNDiVeaLebVKKWWWiBcEU = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialMLHFQDate", "FollowupMLHFQDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DFKXORghhYafccUSbQaMfNTDj = new(
-        [typeof(Observation), typeof(Observation)],
-        ["KCCQ12Item", "KCCQ12Summary"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EQQLFFBVIbLIQLiZDNfeYdMU = new(
-        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialKCCQ12Date", "FollowupKCCQ12Date"]);
+    #region CqlTupleMetadata Properties
 
     private static CqlTupleMetadata CqlTupleMetadata_BbPMcXSJeOeGdRcaZWGYPhGBL = new(
         [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
         ["KCCQLifeQuality", "KCCQSymptomStability", "KCCQSelfEfficacy", "KCCQSymptoms", "KCCQPhysicalLimits", "KCCQSocialLimits"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_HEFWLcHhCNCOQegEOfjWTXiGN = new(
+    private static CqlTupleMetadata CqlTupleMetadata_BFZHWdOOROjSjFSECHcQiaZZZ = new(
         [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
-        ["ValidEncounters", "InitialKCCQAssessmentDate", "FollowupKCCQAssessmentDate"]);
+        ["ValidEncounters", "InitialVR36OrthogonalDate", "FollowupVR36OrthogonalDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_BGYjYGLNPKWAZTBCVAdLDDTMj = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialPROMIS10Date", "FollowupPROMIS10Date"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_CcaWSNDiVeaLebVKKWWWiBcEU = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialMLHFQDate", "FollowupMLHFQDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DbNMMZBTISSRTNdiShceSFVih = new(
+        [typeof(Encounter), typeof(Encounter)],
+        ["OfficeVisit1", "OfficeVisit2"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DBUJFOVGBcbhIQPWARNQHKUaX = new(
+        [typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation), typeof(Observation)],
+        ["Promis29Sleep", "Promis29SocialRoles", "Promis29Physical", "Promis29Pain", "Promis29Fatigue", "Promis29Depression", "Promis29Anxiety"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DDTAOdcFieSJbGgRLLZPYbGQb = new(
+        [typeof(Observation), typeof(Observation)],
+        ["PROMIS10MentalScore", "PROMIS10PhysicalScore"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DFKXORghhYafccUSbQaMfNTDj = new(
+        [typeof(Observation), typeof(Observation)],
+        ["KCCQ12Item", "KCCQ12Summary"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DggZKjEbQUfLADMDMBeASLDR = new(
         [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
         ["ValidEncounters", "InitialKCCQTotalScore", "FollowupKCCQTotalScore"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DSZKEYVbCINNIeAQiZdVaEJhG = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialPROMIS29Date", "FollowupPROMIS29Date"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DUcFTCLcQEWDGGQdFCWTHFaUK = new(
+        [typeof(Observation), typeof(Observation)],
+        ["VR36MentalAssessment", "VR36PhysicalAssessment"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EBLWeAeedHPAfOJXKPZJKSCUf = new(
+        [typeof(Observation), typeof(Observation)],
+        ["MLHFQPhysical", "MLHFQEmotional"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_EQQLFFBVIbLIQLiZDNfeYdMU = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialKCCQ12Date", "FollowupKCCQ12Date"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_FQKGdEYLiDFGMNAUAMETIHUQT = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialVR12ObliqueDate", "FollowupVR12ObliqueDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GAdRFKRaHUUGJcVHWQWRUjhRH = new(
+        [typeof(Observation), typeof(Observation)],
+        ["VR12MentalAssessment", "VR12PhysicalAssessment"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HEFWLcHhCNCOQegEOfjWTXiGN = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialKCCQAssessmentDate", "FollowupKCCQAssessmentDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HQfcMfhQUSTNYMWSgJHiFeahQ = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialVR36ObliqueDate", "FollowupVR36ObliqueDate"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_HSSAQEFQAOXLjUcOKGgicELWB = new(
+        [typeof(Encounter), typeof(CqlDate), typeof(CqlDate)],
+        ["ValidEncounters", "InitialVR12OrthogonalDate", "FollowupVR12OrthogonalDate"]);
+
+    #endregion CqlTupleMetadata Properties
 
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.10.0")]
 [CqlLibrary("FHIRHelpers", "4.0.1")]
 public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
 {
@@ -20,11 +20,16 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
 
     public static FHIRHelpers_4_0_1 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "FHIRHelpers";
     string ILibrary.Version => "4.0.1";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
-    #endregion Library Members
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [];
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
+
     public CqlInterval<CqlDateTime> ToInterval(CqlContext context, Period period)
     {
         CqlInterval<CqlDateTime> a_()
@@ -2443,12 +2448,6 @@ public partial class FHIRHelpers_4_0_1 : ILibrary, ISingleton<FHIRHelpers_4_0_1>
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ = new(
-        [typeof(string), typeof(string)],
-        ["result1", "result2"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY = new(
-        [typeof(string), typeof((CqlTupleMetadata, string result1, string result2)?)],
-        ["status", "result"]);
+    #endregion Definition Methods
 
 }

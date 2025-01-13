@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.10.0")]
 [CqlLibrary("TestRetrieveInclude", "1.0.1")]
 public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrieveInclude_1_0_1>
 {
@@ -20,17 +20,20 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
     public static TestRetrieveInclude_1_0_1 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "TestRetrieveInclude";
     string ILibrary.Version => "1.0.1";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [];
-    #endregion Library Members
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [];
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Female Administrative Sex")]
     [CqlValueSet("2.16.840.1.113883.3.560.100.2")]
     public CqlValueSet Female_Administrative_Sex(CqlContext context) =>
         new CqlValueSet("2.16.840.1.113883.3.560.100.2", default);
-
 
 
     [CqlDeclaration("Other Female Reproductive Conditions")]
@@ -39,12 +42,10 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
         new CqlValueSet("2.16.840.1.113883.3.464.1003.111.12.1006", default);
 
 
-
     [CqlDeclaration("Genital Herpes")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1049")]
     public CqlValueSet Genital_Herpes(CqlContext context) =>
         new CqlValueSet("2.16.840.1.113883.3.464.1003.110.12.1049", default);
-
 
 
     [CqlDeclaration("Genococcal Infections and Venereal Diseases")]
@@ -53,19 +54,16 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
         new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1001", default);
 
 
-
     [CqlDeclaration("Inflammatory Diseases of Female Reproductive Organs")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1004")]
     public CqlValueSet Inflammatory_Diseases_of_Female_Reproductive_Organs(CqlContext context) =>
         new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1004", default);
 
 
-
     [CqlDeclaration("Chlamydia")]
     [CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1003")]
     public CqlValueSet Chlamydia(CqlContext context) =>
         new CqlValueSet("2.16.840.1.113883.3.464.1003.112.12.1003", default);
-
 
 
     [CqlDeclaration("InDemographic")]
@@ -77,12 +75,6 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_EPSaUMIUKUKJWbFHLJZKCNGEJ = new(
-        [typeof(string), typeof(string)],
-        ["result1", "result2"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CDcDMaXTJEYjcbRFSXcEbIQKY = new(
-        [typeof(string), typeof((CqlTupleMetadata, string result1, string result2)?)],
-        ["status", "result"]);
+    #endregion Definition Methods
 
 }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.10.0")]
 [CqlLibrary("ControllingHighBloodPressureFHIR", "0.1.000")]
 public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingleton<ControllingHighBloodPressureFHIR_0_1_000>
 {
@@ -20,17 +20,20 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
     public static ControllingHighBloodPressureFHIR_0_1_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "ControllingHighBloodPressureFHIR";
     string ILibrary.Version => "0.1.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, Status_1_8_000.Instance, AdvancedIllnessandFrailty_1_16_000.Instance, AdultOutpatientEncounters_4_11_000.Instance, Hospice_6_12_000.Instance, PalliativeCare_1_11_000.Instance];
-    #endregion Library Members
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance, Status_1_8_000.Instance, AdvancedIllnessandFrailty_1_16_000.Instance, AdultOutpatientEncounters_4_11_000.Instance, Hospice_6_12_000.Instance, PalliativeCare_1_11_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Chronic Kidney Disease, Stage 5")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1002")]
     public CqlValueSet Chronic_Kidney_Disease__Stage_5(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.1002", default);
-
 
 
     [CqlDeclaration("Dialysis Services")]
@@ -39,12 +42,10 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1013", default);
 
 
-
     [CqlDeclaration("Emergency Department Evaluation and Management Visit")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010")]
     public CqlValueSet Emergency_Department_Evaluation_and_Management_Visit(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.101.12.1010", default);
-
 
 
     [CqlDeclaration("Encounter Inpatient")]
@@ -53,12 +54,10 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.666.5.307", default);
 
 
-
     [CqlDeclaration("End Stage Renal Disease")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353")]
     public CqlValueSet End_Stage_Renal_Disease(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.353", default);
-
 
 
     [CqlDeclaration("ESRD Monthly Outpatient Services")]
@@ -67,12 +66,10 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1014", default);
 
 
-
     [CqlDeclaration("Essential Hypertension")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.104.12.1011")]
     public CqlValueSet Essential_Hypertension(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.104.12.1011", default);
-
 
 
     [CqlDeclaration("Kidney Transplant")]
@@ -81,12 +78,10 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1012", default);
 
 
-
     [CqlDeclaration("Kidney Transplant Recipient")]
     [CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1029")]
     public CqlValueSet Kidney_Transplant_Recipient(CqlContext context) =>
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.464.1003.109.12.1029", default);
-
 
 
     [CqlDeclaration("Pregnancy")]
@@ -95,17 +90,14 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
         new CqlValueSet("http://cts.nlm.nih.gov/fhir/ValueSet/2.16.840.1.113883.3.526.3.378", default);
 
 
-
     [CqlDeclaration("Diastolic blood pressure")]
     public CqlCode Diastolic_blood_pressure(CqlContext context) =>
         new CqlCode("8462-4", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Systolic blood pressure")]
     public CqlCode Systolic_blood_pressure(CqlContext context) =>
         new CqlCode("8480-6", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("LOINC")]
@@ -120,7 +112,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-
     [CqlDeclaration("Measurement Period")]
     public CqlInterval<CqlDateTime> Measurement_Period(CqlContext context)
     {
@@ -133,7 +124,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-
     [CqlDeclaration("Patient")]
     public Patient Patient(CqlContext context)
     {
@@ -142,7 +132,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return b_;
     }
-
 
 
     [CqlDeclaration("Essential Hypertension Diagnosis")]
@@ -169,7 +158,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-
     [CqlDeclaration("Initial Population")]
     public bool? Initial_Population(CqlContext context)
     {
@@ -194,7 +182,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-
     [CqlDeclaration("Denominator")]
     public bool? Denominator(CqlContext context)
     {
@@ -202,7 +189,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Pregnancy or Renal Diagnosis")]
@@ -233,7 +219,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-
     [CqlDeclaration("End Stage Renal Disease Procedures")]
     public IEnumerable<Procedure> End_Stage_Renal_Disease_Procedures(CqlContext context)
     {
@@ -261,7 +246,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-
     [CqlDeclaration("End Stage Renal Disease Encounter")]
     public IEnumerable<Encounter> End_Stage_Renal_Disease_Encounter(CqlContext context)
     {
@@ -284,7 +268,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return e_;
     }
-
 
 
     [CqlDeclaration("Denominator Exclusions")]
@@ -332,7 +315,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-
     [CqlDeclaration("Qualifying Systolic Blood Pressure Reading")]
     public IEnumerable<Observation> Qualifying_Systolic_Blood_Pressure_Reading(CqlContext context)
     {
@@ -368,7 +350,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return d_;
     }
-
 
 
     [CqlDeclaration("Qualifying Diastolic Blood Pressure Reading")]
@@ -408,7 +389,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-
     [CqlDeclaration("Blood Pressure Days")]
     public IEnumerable<CqlDate> Blood_Pressure_Days(CqlContext context)
     {
@@ -442,7 +422,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-
     [CqlDeclaration("Most Recent Blood Pressure Day")]
     public CqlDate Most_Recent_Blood_Pressure_Day(CqlContext context)
     {
@@ -452,7 +431,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return c_;
     }
-
 
 
     [CqlDeclaration("Lowest Systolic Reading on Most Recent Blood Pressure Day")]
@@ -507,7 +485,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-
     [CqlDeclaration("Has Systolic Blood Pressure Less Than 140")]
     public bool? Has_Systolic_Blood_Pressure_Less_Than_140(CqlContext context)
     {
@@ -517,7 +494,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return c_;
     }
-
 
 
     [CqlDeclaration("Lowest Diastolic Reading on Most Recent Blood Pressure Day")]
@@ -572,7 +548,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-
     [CqlDeclaration("Has Diastolic Blood Pressure Less Than 90")]
     public bool? Has_Diastolic_Blood_Pressure_Less_Than_90(CqlContext context)
     {
@@ -582,7 +557,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return c_;
     }
-
 
 
     [CqlDeclaration("Numerator")]
@@ -596,7 +570,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-
     [CqlDeclaration("SDE Ethnicity")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Ethnicity(CqlContext context)
     {
@@ -604,7 +577,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return a_;
     }
-
 
 
     [CqlDeclaration("SDE Payer")]
@@ -616,7 +588,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-
     [CqlDeclaration("SDE Race")]
     public (CqlTupleMetadata, IEnumerable<CqlCode> codes, string display)? SDE_Race(CqlContext context)
     {
@@ -624,7 +595,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
 
         return a_;
     }
-
 
 
     [CqlDeclaration("SDE Sex")]
@@ -636,60 +606,6 @@ public partial class ControllingHighBloodPressureFHIR_0_1_000 : ILibrary, ISingl
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-        ["dayIndex", "dayPeriod"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HPcCiDPXQfZTXIORThMLfTQDR = new(
-        [typeof(IEnumerable<CqlCode>), typeof(string)],
-        ["codes", "display"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_GPRWMPNAYaJRiGDFSTLJOPeIJ = new(
-        [typeof(CqlConcept), typeof(CqlInterval<CqlDateTime>)],
-        ["code", "period"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BZDEAYEYEiNadHNdHhSIPXaDL = new(
-        [typeof(CqlDate)],
-        ["AntidepressantDate"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BHcMAQBSeFPCjbDEhaVDLJXQU = new(
-        [typeof(Encounter), typeof(Condition)],
-        ["VisitWithAntibiotic", "AcutePharyngitisTonsillitis"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FeNRUFDKGVUFAMiQLLieSFHIV = new(
-        [typeof(Observation), typeof(Encounter)],
-        ["GroupAStreptococcusTest", "EncounterWithPharyngitis"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FiGMIRiNMNcaAVFKbMahDKTce = new(
-        [typeof(Encounter), typeof(Condition)],
-        ["QualifyingEncounters", "URI"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DjNbNOhJZXGJDNQeiTBabEOBB = new(
-        [typeof(string), typeof(int?)],
-        ["EncounterID", "CalculatedCGA"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EMDhFLcFhWVERAVVNfLAZYXJi = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["DTaPVaccination1", "DTaPVaccination2", "DTaPVaccination3", "DTaPVaccination4"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_CNGHaZROXaJTHPICcbIaJbRXV = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["PolioVaccination1", "PolioVaccination2", "PolioVaccination3"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_EZTgahAUWGgSdGaDCgQNNIPGW = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["HepatitisBVaccination1", "HepatitisBVaccination2", "HepatitisBVaccination3"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HDfaMbZGBWDPFETGQNFbceEeg = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["HepatitisBVaccination1", "HepatitisBVaccination2", "NewBornVaccine3"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_DdPDeOJhPYESfHGCOcBNOiPPP = new(
-        [typeof(CqlDate), typeof(CqlDate), typeof(CqlDate), typeof(CqlDate)],
-        ["PneumococcalVaccination1", "PneumococcalVaccination2", "PneumococcalVaccination3", "PneumococcalVaccination4"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_BZhFLeRDagbPQMNheVJcUNfNQ = new(
-        [typeof(CqlDate), typeof(CqlDate)],
-        ["FluVaccination1", "FluVaccination2"]);
+    #endregion Definition Methods
 
 }

@@ -7,6 +7,7 @@
  */
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Primitives;
 
@@ -14,16 +15,26 @@ namespace Hl7.Cql.CodeGeneration.NET;
 
 internal class TupleMetadataBuilder
 {
-    private readonly Dictionary<string, IReadOnlyCollection<(Type Type, string PropName)>> _signaturesByHash = new();
+    private readonly Dictionary<string, IReadOnlyCollection<(Type Type, string PropName)>> _signaturesByHashedPropertyName = new();
+    private readonly Dictionary<string, SortedSet<string>> _hashedPropertyNamesUsedByLibrary = new();
 
     public string GetTupleMetadataPropertyName(
-        IReadOnlyCollection<(Type Type, string PropName)> tupleProps)
+        IReadOnlyCollection<(Type Type, string PropName)> tupleProps,
+        string libraryName)
     {
-        var propName = CqlTupleMetadata.BuildSignatureHashString(tupleProps, CqlTupleMetadata.PropertyPrefix);
-        _signaturesByHash[propName] = tupleProps;
-        return propName;
+        var hashedPropertyName = CqlTupleMetadata.BuildSignatureHashString(tupleProps, CqlTupleMetadata.PropertyPrefix);
+        _signaturesByHashedPropertyName[hashedPropertyName] = tupleProps;
+        _hashedPropertyNamesUsedByLibrary.GetOrAdd(libraryName, _ => []).Add(hashedPropertyName);
+        return hashedPropertyName;
     }
 
-    public IReadOnlyCollection<(string PropertyName, IReadOnlyCollection<(Type Type, string PropName)> Signature)> GetAllTupleMetadataPropertySignatures() =>
-        _signaturesByHash.SelectToArray(kv => (kv.Key, kv.Value));
+    public IReadOnlyCollection<(string PropertyName, IReadOnlyCollection<(Type Type, string PropName)> Signature)>
+        GetLibraryTupleMetadataPropertySignatures(string libraryName)
+    {
+        return _hashedPropertyNamesUsedByLibrary
+               .GetValueOrDefault(libraryName)
+               ?.Select(hashedPropertyName => (hashedPropertyName, _signaturesByHashedPropertyName[hashedPropertyName]))
+               .ToArray()
+               ?? [];
+    }
 }

@@ -29,19 +29,19 @@ namespace Hl7.Cql.CodeGeneration.NET
 {
     internal class AssemblyCompiler
     {
-        private readonly LibrarySetDefinitionsToCSharpCodeProcessor _librarySetDefinitionsToCSharpCodeProcessor;
+        private readonly LibrarySetCSharpCodeGenerator _librarySetDefinitionsToCSharpCodeProcessor;
         private readonly CSharpCodeStreamPostProcessor? _cSharpCodeStreamPostProcessor;
         private readonly Lazy<Assembly[]> _referencesLazy;
         private readonly AssemblyDataPostProcessor? _assemblyDataPostProcessor;
 
         public AssemblyCompiler(
-            LibrarySetDefinitionsToCSharpCodeProcessor librarySetDefinitionsToCSharpCodeProcessor,
+            LibrarySetCSharpCodeGenerator librarySetCSharpCodeGenerator,
             TypeResolver typeResolver,
             CSharpCodeStreamPostProcessor? cSharpCodeStreamPostProcessor = null,
             AssemblyDataPostProcessor? assemblyDataPostProcessor = null)
         {
             _assemblyDataPostProcessor = assemblyDataPostProcessor;
-            _librarySetDefinitionsToCSharpCodeProcessor = librarySetDefinitionsToCSharpCodeProcessor;
+            _librarySetDefinitionsToCSharpCodeProcessor = librarySetCSharpCodeGenerator;
             _cSharpCodeStreamPostProcessor = cSharpCodeStreamPostProcessor;
             _referencesLazy = new Lazy<Assembly[]>(
                 () =>

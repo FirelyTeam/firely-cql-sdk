@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Collections.Generic;
 using Hl7.Cql.Runtime;
@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.9.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.10.0")]
 [CqlLibrary("AlaraCommonFunctions", "1.5.000")]
 public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCommonFunctions_1_5_000>
 {
@@ -20,16 +20,19 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
 
     public static AlaraCommonFunctions_1_5_000 Instance { get; } = new();
 
-    #region Library Members
+    #region ILibrary Implementation
+
     string ILibrary.Name => "AlaraCommonFunctions";
     string ILibrary.Version => "1.5.000";
-    IReadOnlyList<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance];
-    #endregion Library Members
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance];
+
+    #endregion ILibrary Implementation
+
+    #region Definition Methods
 
     [CqlDeclaration("Abdomen and Pelvis High Dose")]
     public CqlCode Abdomen_and_Pelvis_High_Dose(CqlContext context) =>
         new CqlCode("LA31754-7", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Abdomen and Pelvis Low Dose")]
@@ -37,11 +40,9 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
         new CqlCode("LA31752-1", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Abdomen and Pelvis Routine Dose")]
     public CqlCode Abdomen_and_Pelvis_Routine_Dose(CqlContext context) =>
         new CqlCode("LA31753-9", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Calculated CT global noise")]
@@ -49,11 +50,9 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
         new CqlCode("96912-1", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Calculated CT size-adjusted dose")]
     public CqlCode Calculated_CT_size_adjusted_dose(CqlContext context) =>
         new CqlCode("96913-9", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Cardiac High Dose or Chest High Dose")]
@@ -61,11 +60,9 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
         new CqlCode("LA31761-2", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Cardiac Low Dose")]
     public CqlCode Cardiac_Low_Dose(CqlContext context) =>
         new CqlCode("LA31755-4", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Cardiac Routine Dose")]
@@ -73,11 +70,9 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
         new CqlCode("LA31756-2", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Chest Low Dose")]
     public CqlCode Chest_Low_Dose(CqlContext context) =>
         new CqlCode("LA31758-8", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Chest Routine Dose")]
@@ -85,11 +80,9 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
         new CqlCode("LA31759-6", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Extremity")]
     public CqlCode Extremity(CqlContext context) =>
         new CqlCode("LA31765-3", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Head High Dose")]
@@ -97,11 +90,9 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
         new CqlCode("LA31764-6", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Head Low Dose")]
     public CqlCode Head_Low_Dose(CqlContext context) =>
         new CqlCode("LA31762-0", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Head Routine Dose")]
@@ -109,11 +100,9 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
         new CqlCode("LA31763-8", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Neck or Cervical Spine")]
     public CqlCode Neck_or_Cervical_Spine(CqlContext context) =>
         new CqlCode("LA31766-1", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Simultaneous Chest and Abdomen and Pelvis")]
@@ -121,11 +110,9 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
         new CqlCode("LA31768-7", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Simultaneous Head and Neck High Dose")]
     public CqlCode Simultaneous_Head_and_Neck_High_Dose(CqlContext context) =>
         new CqlCode("LA31770-3", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("Simultaneous Head and Neck Routine Dose")]
@@ -133,17 +120,14 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
         new CqlCode("LA31769-5", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Simultaneous Thoracic and Lumbar Spine")]
     public CqlCode Simultaneous_Thoracic_and_Lumbar_Spine(CqlContext context) =>
         new CqlCode("LA31851-1", "http://loinc.org", default, default);
 
 
-
     [CqlDeclaration("Thoracic or Lumbar Spine")]
     public CqlCode Thoracic_or_Lumbar_Spine(CqlContext context) =>
         new CqlCode("LA31767-9", "http://loinc.org", default, default);
-
 
 
     [CqlDeclaration("LOINC")]
@@ -174,7 +158,6 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
 
         return a_;
     }
-
 
 
     [CqlDeclaration("Patient")]
@@ -357,8 +340,6 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
     }
 
 
-    private static CqlTupleMetadata CqlTupleMetadata_ddJhZGNHefSCOAJJFEIEcXie = new(
-        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
-        ["dayIndex", "dayPeriod"]);
+    #endregion Definition Methods
 
 }
