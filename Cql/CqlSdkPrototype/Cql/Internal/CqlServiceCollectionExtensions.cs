@@ -1,41 +1,13 @@
-﻿using CqlSdkPrototype.Cql;
+﻿using CqlSdkPrototype.App;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Elm;
 using ExpressionVisitor = Hl7.Cql.CqlToElm.Visitors.ExpressionVisitor;
 
-namespace CqlSdkPrototype.App;
+namespace CqlSdkPrototype.Cql.Internal;
 
-public static class Extensions
+internal static class CqlServiceCollectionExtensions
 {
-    public static ILoggingBuilder UseOptions(this ILoggingBuilder builder, LoggingOptions options)
-    {
-        if (options.LoggerProviders is { } providers)
-            foreach (var provider in providers)
-                builder.AddProvider(provider);
-
-        if (options.LogFilter is { } filter)
-            builder = builder.AddFilter((provider, category, level) => filter(new (provider, category, level)));
-
-        return builder;
-    }
-
-    public static IServiceCollection AddElmApi(
-        this IServiceCollection serviceCollection)
-    {
-        return serviceCollection
-            .AddCqlCodeGenerationServices();
-    }
-
-    public static IServiceCollection SuppressCqlDebugAssertions(
-        this IServiceCollection serviceCollection)
-    {
-        // This is really annoying in debug mode
-        ExpressionVisitor.EnableDebugAssertions = false;
-        Library.EnableDebugAssertions = false;
-        return serviceCollection;
-    }
-
     public static IServiceCollection AddCqlApi(
         this IServiceCollection serviceCollection,
         Action<CqlServicesOptions>? configureOptions = null)
@@ -69,7 +41,16 @@ public static class Extensions
                            foreach (var modelInfo in o.Models)
                                modelProvider.Add(modelInfo);
                        }
-            : _ => { };
+                       : _ => { };
         }
+    }
+
+    public static IServiceCollection SuppressCqlDebugAssertions(
+        this IServiceCollection serviceCollection)
+    {
+        // This is really annoying in debug mode
+        ExpressionVisitor.EnableDebugAssertions = false;
+        Library.EnableDebugAssertions = false;
+        return serviceCollection;
     }
 }

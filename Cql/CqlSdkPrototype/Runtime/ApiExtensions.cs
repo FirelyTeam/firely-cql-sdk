@@ -1,8 +1,10 @@
 ﻿using CqlSdkPrototype.App;
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensibility;
+using CqlSdkPrototype.Cql.Internal;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensibility;
+using CqlSdkPrototype.Logging;
 using Hl7.Cql.CodeGeneration.NET;
 
 namespace CqlSdkPrototype.Runtime;
@@ -23,7 +25,7 @@ internal static class ApiExtensions
         where TElmApi : IElmApiExtensible<TElmApi>
     {
         var serviceProvider = new ServiceCollection()
-                                    .AddLogging(configure: lb => lb.ClearProviders().UseOptions(options: elmApi.Options.LoggingOptions))
+                                    .AddLogging(elmApi.Options.LoggingOptions)
                                     .BuildServiceProvider();
         var cqlRuntimeApiOptions = new CqlRuntimeApiOptions(serviceProvider);
         var cqlRuntimeApi = CqlRuntimeApi

@@ -20,6 +20,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <Folder Include="examples\" />
 	</ItemGroup>
 

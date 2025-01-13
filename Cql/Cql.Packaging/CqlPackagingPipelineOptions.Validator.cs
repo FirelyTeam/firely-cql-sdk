@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Options;
+﻿/*using Microsoft.Extensions.Options;
 
 namespace Hl7.Cql.Packaging;
 
@@ -46,4 +46,4 @@ partial class CqlToResourcePackagingOptions
                 (builder ??= new()).AddError(message);
         }
     }
-}
+}*/

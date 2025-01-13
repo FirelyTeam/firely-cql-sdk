@@ -7,10 +7,8 @@
  */
 
 using Hl7.Cql.Packager;
-using Hl7.Cql.Packaging;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Options;
 
 // ReSharper disable once CheckNamespace
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -23,32 +21,23 @@ internal static class PackagerCliServiceCollectionExtensions
     {
         services.TryAddScoped<PackagerCli>();
         services.TryAddSingleton<OptionsConsoleDumper>();
-
+        services.AddCqlPackagingServices();
         return services;
     }
 
     public static IServiceCollection AddPackagerCliOptions(
-        this IServiceCollection services,
-        IConfiguration configuration)
+        this IServiceCollection services)
     {
-        if (services.Any(s => s.ServiceType == typeof(IValidateOptions<CqlToResourcePackagingOptions>)))
+        /*
+        if (services.Any(s => s.ServiceType == typeof(IValidateOptions<PackagerCliOptions>)))
             return services;
 
-        services.AddSingleton<IValidateOptions<CqlToResourcePackagingOptions>, CqlToResourcePackagingOptions.Validator>();
-
-        services
-            .AddOptions<CqlToResourcePackagingOptions>()
-            .Configure<IConfiguration>(CqlToResourcePackagingOptions.BindConfig)
-            .ValidateOnStart();
+        services.AddSingleton<IValidateOptions<PackagerCliOptions>, PackagerCliOptions.Validator>();
+        */
 
         services
             .AddOptions<PackagerCliOptions>()
             .Configure<IConfiguration>(PackagerCliOptions.BindConfig)
-            .ValidateOnStart();
-
-        services
-            .AddOptions<FhirResourceWriterOptions>()
-            .Configure<IConfiguration>(FhirResourceWriterOptions.BindConfig)
             .ValidateOnStart();
 
         return services;

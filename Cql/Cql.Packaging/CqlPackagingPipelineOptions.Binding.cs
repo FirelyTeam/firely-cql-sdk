@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿/*using Microsoft.Extensions.Configuration;
 
 namespace Hl7.Cql.Packaging;
 
@@ -19,4 +19,4 @@ partial class CqlToResourcePackagingOptions
             return string.IsNullOrWhiteSpace(path) ? null : new DirectoryInfo(Path.GetFullPath(path));
         }
     }
-}
+}*/

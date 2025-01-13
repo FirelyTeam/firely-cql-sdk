@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Packager;
-using Hl7.Cql.Packaging;
 using Microsoft.Extensions.Configuration;
 
 // ReSharper disable once CheckNamespace
@@ -21,23 +20,27 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
     static IDictionary<string, string> BuildCommandLineSwitchMappings()
     {
         const string PackagerCliSection = PackagerCliOptions.ConfigSection + ":";
-        const string PackageSection = CqlToResourcePackagingOptions.ConfigSection + ":";
-        const string FhirResourceWriterSection = FhirResourceWriterOptions.ConfigSection + ":";
 
         return new SortedDictionary<string, string>
         {
             // @formatter:off
-            ["--elm"] = PackageSection + nameof(CqlToResourcePackagingOptions.ElmDirectory),
-            ["--cql"] = PackageSection + nameof(CqlToResourcePackagingOptions.CqlDirectory),
-            ["--log-debug"] = PackageSection + nameof(CqlToResourcePackagingOptions.LogDebugEnabled),
-            ["--log-dont-clear"] = PackageSection + nameof(CqlToResourcePackagingOptions.DontLogClear),
-            ["--canonical-root-url"] = PackageSection + nameof(CqlToResourcePackagingOptions.CanonicalRootUrl),
 
-            ["--cs"] = PackagerCliSection + nameof(PackagerCliOptions.OutDirectoryCSharp),
-            ["--dll"] = PackagerCliSection + nameof(PackagerCliOptions.OutDirectoryAssemblies),
+            // Input
+            ["--elm"] = PackagerCliSection + nameof(PackagerCliOptions.ElmInDirectory),
+            ["--cql"] = PackagerCliSection + nameof(PackagerCliOptions.CqlInDirectory),
 
-            ["--fhir"] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
-            ["--override-utc-date-time"] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OverrideDate),
+            // Output
+            ["--cs"] = PackagerCliSection + nameof(PackagerCliOptions.CSharpOutDirectory),
+            ["--dll"] = PackagerCliSection + nameof(PackagerCliOptions.AssemblyOutDirectory),
+
+            // Logging
+            ["--log-debug"] = PackagerCliSection + nameof(PackagerCliOptions.LoggingIncludeDebug),
+            ["--log-dont-clear"] = PackagerCliSection + nameof(PackagerCliOptions.LoggingKeepPrevious),
+
+            // Packaging
+            ["--canonical-root-url"] = PackagerCliSection + nameof(PackagerCliOptions.FhirCanonicalRootUrl),
+            ["--fhir"] = PackagerCliSection + nameof(PackagerCliOptions.FhirOutDirectory),
+            ["--override-utc-date-time"] = PackagerCliSection + nameof(PackagerCliOptions.FhirOverrideDate),
             // @formatter:on
         };
     }

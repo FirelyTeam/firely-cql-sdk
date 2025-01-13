@@ -8,7 +8,6 @@
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 using System.Globalization;
-using Hl7.Cql.Packaging;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
@@ -46,7 +45,7 @@ public abstract class Program
             .ConfigureServices((context, services) =>
             {
                 services
-                    .AddPackagerCliOptions(context.Configuration)
+                    .AddPackagerCliOptions()
                     .AddPackagerCliServices()
                     //.AddCqlApi()
                     //.AddElmApi()
@@ -109,7 +108,7 @@ public abstract class Program
         {
             return hostBuilder.Build();
         }
-        catch (OptionsValidationException e) when (e.OptionsType == typeof(CqlToResourcePackagingOptions))
+        catch (OptionsValidationException e) when (e.OptionsType == typeof(PackagerCliOptions))
         {
             foreach (var failure in e.Failures)
             {

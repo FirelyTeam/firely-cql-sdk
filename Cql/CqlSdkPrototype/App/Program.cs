@@ -1,5 +1,6 @@
 ﻿using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensibility;
+using CqlSdkPrototype.Cql.Internal;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Internal;
@@ -33,16 +34,17 @@ internal class Program
         var cqlApi = new CqlApi(cqlApiOptions);
 
         using var serviceProvider = new ServiceCollection()
-                                    .AddLogging(configure: lb => lb.ClearProviders().UseOptions(options: loggingOptions))
+                                    .AddLogging(loggingOptions)
                                     .BuildServiceProvider();
         var logger = serviceProvider.GetLogger<Program>();
 
         //InvokeCqlExample(logger: logger, cqlApi: cqlApi);
 
         // InvokeCqlFromExamplesFolder(logger: logger, cqlApi: cqlApi);
-        //
+
         foreach (var librarySetName in (string[]) ["Authoring", "CMS", "Demo"])
             VerboseExample(logger: logger, cqlApi: cqlApi, librarySetName: librarySetName);
+
         // VerboseExample(logger, cqlApi, "CMS");
     }
 

@@ -12,8 +12,12 @@ internal class PackagerCliOptions {
         section.Bind(opt);
 
         // DirectoryInfos cannot be bound directly from IConfiguration, so we do it manually.
-        opt.OutDirectoryAssemblies = GetDirectoryInfo(nameof(OutDirectoryAssemblies))!;
-        opt.OutDirectoryCSharp = GetDirectoryInfo(nameof(OutDirectoryCSharp))!;
+        opt.CqlInDirectory = GetDirectoryInfo(nameof(CqlInDirectory))!;
+        opt.ElmInDirectory = GetDirectoryInfo(nameof(ElmInDirectory))!;
+        opt.ElmOutDirectory = GetDirectoryInfo(nameof(ElmOutDirectory))!;
+        opt.AssemblyOutDirectory = GetDirectoryInfo(nameof(AssemblyOutDirectory))!;
+        opt.CSharpOutDirectory = GetDirectoryInfo(nameof(CSharpOutDirectory))!;
+        opt.FhirOutDirectory = GetDirectoryInfo(nameof(FhirOutDirectory))!;
 
         DirectoryInfo? GetDirectoryInfo(string key)
         {
@@ -22,6 +26,14 @@ internal class PackagerCliOptions {
         }
     }
 
-    public DirectoryInfo? OutDirectoryCSharp { get; set; }
-    public DirectoryInfo? OutDirectoryAssemblies { get; set; }
+    public bool LoggingIncludeDebug { get; set; }
+    public bool LoggingKeepPrevious { get; set; }
+    public DirectoryInfo? CqlInDirectory { get; set; }
+    public DirectoryInfo? ElmInDirectory { get; set; }
+    public DirectoryInfo? ElmOutDirectory { get; set; }
+    public DirectoryInfo? CSharpOutDirectory { get; set; }
+    public DirectoryInfo? AssemblyOutDirectory { get; set; }
+    public DirectoryInfo? FhirOutDirectory { get; set; }
+    public Uri? FhirCanonicalRootUrl { get; set; }
+    public DateTime? FhirOverrideDate { get; set; }
 }
