@@ -16,11 +16,11 @@ namespace Hl7.Cql.Packager;
 
 internal class OptionsConsoleDumper(
     ILogger<OptionsConsoleDumper> logger,
-    IOptions<PackagerCliProgramOptions> packagerCliProgramOptions,
+    IOptions<PackagerCliOptions> packagerCliProgramOptions,
     IOptions<CqlToResourcePackagingOptions> cqlToResourcePackagingOptions,
     IOptions<FhirResourceWriterOptions> fhirResourceWriterOptions)
 {
-    private readonly PackagerCliProgramOptions _packagerCliProgramOptions = packagerCliProgramOptions.Value;
+    private readonly PackagerCliOptions _packagerCliOptions = packagerCliProgramOptions.Value;
     private readonly CqlToResourcePackagingOptions _cqlToResourcePackagingOptions = cqlToResourcePackagingOptions.Value;
     private readonly FhirResourceWriterOptions _fhirResourceWriterOptions = fhirResourceWriterOptions.Value;
 
@@ -40,8 +40,8 @@ internal class OptionsConsoleDumper(
             ArgFor(_cqlToResourcePackagingOptions.LogDebugEnabled),
             ArgFor("InDir, Cql", _cqlToResourcePackagingOptions.CqlDirectory),
             ArgFor("InDir, Elm", _cqlToResourcePackagingOptions.ElmDirectory),
-            ArgFor("OutDir, CSharp", _packagerCliProgramOptions.OutDirectoryCSharp),
-            ArgFor("OutDir, Assemblies", _packagerCliProgramOptions.OutDirectoryAssemblies),
+            ArgFor("OutDir, CSharp", _packagerCliOptions.OutDirectoryCSharp),
+            ArgFor("OutDir, Assemblies", _packagerCliOptions.OutDirectoryAssemblies),
             ArgFor("OutDir, Fhir", _fhirResourceWriterOptions.OutDirectory),
             ArgFor("Resource, CanonicalRootUrl", _cqlToResourcePackagingOptions.CanonicalRootUrl),
             ArgFor("Fhir, OverrideDate", _fhirResourceWriterOptions.OverrideDate),

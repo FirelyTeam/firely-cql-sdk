@@ -9,42 +9,17 @@
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
 using Hl7.Cql.Packaging;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using static Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling;
 
 namespace Hl7.Cql.Packager;
 
-internal class PackagerCliProgramOptions {
-    public const string ConfigSection = "PackagerCli";
-
-
-    public static void BindConfig(PackagerCliProgramOptions opt, IConfiguration config)
-    {
-        var section = config.GetRequiredSection(ConfigSection);
-        section.Bind(opt);
-
-        // DirectoryInfos cannot be bound directly from IConfiguration, so we do it manually.
-        opt.OutDirectoryAssemblies = GetDirectoryInfo(nameof(OutDirectoryAssemblies))!;
-        opt.OutDirectoryCSharp = GetDirectoryInfo(nameof(OutDirectoryCSharp))!;
-
-        DirectoryInfo? GetDirectoryInfo(string key)
-        {
-            var path = section[key];
-            return string.IsNullOrWhiteSpace(path) ? null : new DirectoryInfo(Path.GetFullPath(path));
-        }
-    }
-
-    public DirectoryInfo? OutDirectoryCSharp { get; set; }
-    public DirectoryInfo? OutDirectoryAssemblies { get; set; }
-}
-
-internal class PackagerCliProgram(
+internal class PackagerCli(
     IEnumerable<ILoggerProvider> loggerProviders,
-    ILogger<PackagerCliProgram> logger,
+    ILogger<PackagerCli> logger,
     OptionsConsoleDumper optionsConsoleDumper,
-    IOptions<PackagerCliProgramOptions> packagerCliProgramOptions,
+    IOptions<PackagerCliOptions> packagerCliProgramOptions,
     IOptions<CqlToResourcePackagingOptions> packagingOptions)
 {
     public int Run(bool translateCql = false)
@@ -80,8 +55,7 @@ internal class PackagerCliProgram(
                                 ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
                             })
                             .AddElmFilesFromDirectory(packagingOpt.ElmDirectory,
-                                                      filePredicate: file =>
-                                                          !HardCodedSkipElmFiles.FileNames.Contains(file.Name))
+                                                      filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name))
                             .Compile();
             }
 

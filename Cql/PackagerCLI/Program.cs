@@ -16,7 +16,7 @@ using Log = Serilog.Log;
 
 namespace Hl7.Cql.Packager;
 
-public class Program
+public abstract class Program
 {
     public static int Main(string[] args)
     {
@@ -38,17 +38,9 @@ public class Program
         }
     }
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
+    private static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder()
-            .UseServiceProviderFactory(context =>
-                                           new DefaultServiceProviderFactory(
-                                               new ServiceProviderOptions()
-                                               {
-                                                   // Since we are using scopes,
-                                                   // we need to validate that they are never used from the root provider,
-                                                   // nor that they are included into singletons.
-                                                   ValidateScopes = true
-                                               }))
+            //.UseServiceProviderFactory()
             .ConfigureAppConfiguration((context, config) => config.AddPackagerCliCommandLineSwitches(args))
             .ConfigureLogging((context, logging) => logging.AddPackagerCLiLogging(context.Configuration))
             .ConfigureServices((context, services) =>
@@ -101,7 +93,7 @@ public class Program
         try
         {
             using IServiceScope mainScope = host.Services.CreateScope();
-            var packagerCliProgram = mainScope.ServiceProvider.GetRequiredService<PackagerCliProgram>();
+            var packagerCliProgram = mainScope.ServiceProvider.GetRequiredService<PackagerCli>();
             return packagerCliProgram.Run();
         }
         finally

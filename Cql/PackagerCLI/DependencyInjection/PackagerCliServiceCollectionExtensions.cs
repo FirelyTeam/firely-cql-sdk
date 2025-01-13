@@ -21,9 +21,7 @@ internal static class PackagerCliServiceCollectionExtensions
     internal static IServiceCollection AddPackagerCliServices(
         this IServiceCollection services)
     {
-        services.AddCqlPackagingServices();
-
-        services.TryAddScoped<PackagerCliProgram>();
+        services.TryAddScoped<PackagerCli>();
         services.TryAddSingleton<OptionsConsoleDumper>();
 
         return services;
@@ -44,8 +42,8 @@ internal static class PackagerCliServiceCollectionExtensions
             .ValidateOnStart();
 
         services
-            .AddOptions<PackagerCliProgramOptions>()
-            .Configure<IConfiguration>(PackagerCliProgramOptions.BindConfig)
+            .AddOptions<PackagerCliOptions>()
+            .Configure<IConfiguration>(PackagerCliOptions.BindConfig)
             .ValidateOnStart();
 
         services

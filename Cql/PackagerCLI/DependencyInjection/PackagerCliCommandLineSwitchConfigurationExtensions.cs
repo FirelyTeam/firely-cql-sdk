@@ -20,7 +20,7 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
 
     static IDictionary<string, string> BuildCommandLineSwitchMappings()
     {
-        const string PackagerCliSection = PackagerCliProgramOptions.ConfigSection + ":";
+        const string PackagerCliSection = PackagerCliOptions.ConfigSection + ":";
         const string PackageSection = CqlToResourcePackagingOptions.ConfigSection + ":";
         const string FhirResourceWriterSection = FhirResourceWriterOptions.ConfigSection + ":";
 
@@ -33,8 +33,8 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
             ["--log-dont-clear"] = PackageSection + nameof(CqlToResourcePackagingOptions.DontLogClear),
             ["--canonical-root-url"] = PackageSection + nameof(CqlToResourcePackagingOptions.CanonicalRootUrl),
 
-            ["--cs"] = PackagerCliSection + nameof(PackagerCliProgramOptions.OutDirectoryCSharp),
-            ["--dll"] = PackagerCliSection + nameof(PackagerCliProgramOptions.OutDirectoryAssemblies),
+            ["--cs"] = PackagerCliSection + nameof(PackagerCliOptions.OutDirectoryCSharp),
+            ["--dll"] = PackagerCliSection + nameof(PackagerCliOptions.OutDirectoryAssemblies),
 
             ["--fhir"] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OutDirectory),
             ["--override-utc-date-time"] = FhirResourceWriterSection + nameof(FhirResourceWriterOptions.OverrideDate),
