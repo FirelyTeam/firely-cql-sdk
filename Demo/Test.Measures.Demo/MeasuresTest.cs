@@ -121,7 +121,7 @@ namespace Test
             string lib,
             string version)
         {
-            var libFile = new FileInfo(Path.Combine(dir.FullName, $"Library-{lib}.json"));
+            var libFile = new FileInfo(Path.Combine(dir.FullName, $"Library-{lib}-{version}.json")); // Library-BCSEHEDISMY2022-1.0.0
             using var fs = libFile.OpenRead();
             var library = fs.ParseFhir<Library>();
             var allLibs = library.GetDependenciesAndSelf(dir);
