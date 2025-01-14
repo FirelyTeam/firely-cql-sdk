@@ -31,8 +31,9 @@ internal static class ApiExtensions
             let assemblyData = new AssemblyData(assembly, debugSymbols)
             select assemblyData;
         var runtimeApi =
-            elmApi.CreateRuntimeApi()
-                  .AddAssemblies(assemblyDatas);
+            RuntimeApi
+                .Create(elmApi.Options.CreateRuntimeApiOptions())
+                .AddAssemblies(assemblyDatas);
         return runtimeApi;
     }
 

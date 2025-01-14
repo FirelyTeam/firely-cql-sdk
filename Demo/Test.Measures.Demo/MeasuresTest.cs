@@ -165,7 +165,8 @@ namespace Test
                 elmApiOptions = elmApiOptions with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
             var elmApi = ElmApi.Create(elmApiOptions);
 
-            return elmApi.AddElmLibraries(librarySet)
+            return elmApi
+                   .AddElmLibraries(librarySet)
                   .CreateRuntimeScope();
         }
     }
