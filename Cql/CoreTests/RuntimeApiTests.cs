@@ -6,9 +6,9 @@ using System.Runtime.Loader;
 using CoreTests.Tuples;
 using CqlSdkPrototype;
 using CqlSdkPrototype.Runtime;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Packaging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoreTests;
@@ -21,34 +21,25 @@ public class RuntimeApiTests
     public void TestRuntimeScopeAgainstLibraryDefinitionResults()
     {
         // Arrange
-        try
-        {
-            var file = @"Dlls/CqlNestedTupleTest-1.0.0.dll";
-            var filePath = Path.GetFullPath(file);
-            var ctx = FhirCqlContext.ForBundle();
-            using var invocationScope = RuntimeApi
-                                        .Create(RuntimeApiOptions.Default)
-                                        .AddAssemblies([AssemblyData.Default.LoadFromFiles(new FileInfo(filePath))])
-                                        .CreateRuntimeScope();
+        var filePath = new DirectoryInfo(Directory.GetCurrentDirectory())
+                       .SelfAndParents()
+                       .Select(dir => Path.GetFullPath(Path.Combine(dir.FullName, "Dlls", "CqlNestedTupleTest-1.0.0.dll")))
+                       .First(File.Exists);
+        var ctx = FhirCqlContext.ForBundle();
+        using var invocationScope = RuntimeApi
+                                    .Create(RuntimeApiOptions.Default)
+                                    .AddAssemblies([AssemblyData.Default.LoadFromFiles(new FileInfo(filePath))])
+                                    .CreateRuntimeScope();
 
-            // Act
-            var result = invocationScope
-                         .EnumerateLibraryDefinitionsResults(ctx, CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
-                         .Select(t => (t.definition, t.getResult()))
-                         .ToDictionary();
+        // Act
+        var result = invocationScope
+                     .EnumerateLibraryDefinitionsResults(ctx, CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
+                     .Select(t => (t.definition, t.getResult()))
+                     .ToDictionary();
 
-            // Assert
-            Assert.IsNotNull(result);
-            result.TryGetValue("Result", out var obj);
-            Assert.IsNotNull(obj);
-        }
-        catch (Exception e)
-        {
-            throw new Exception(
-                $"""
-                 Current Directory: {Environment.CurrentDirectory}
-                 Files: {string.Concat(Directory.GetFiles(Path.Combine(Environment.CurrentDirectory, "..", "..", "..")).Select(f => $"\n- {f}"))}
-                 """);
-        }
+        // Assert
+        Assert.IsNotNull(result);
+        result.TryGetValue("Result", out var obj);
+        Assert.IsNotNull(obj);
     }
 }
