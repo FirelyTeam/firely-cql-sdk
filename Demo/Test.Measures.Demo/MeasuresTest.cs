@@ -48,7 +48,7 @@ namespace Test
             var lib = "BCSEHEDISMY2022";
             var version = "1.0.0";
             var dir = LibrarySetsDirs.Demo.ResourcesDir;
-            var scope = LoadResources(dir, lib, version);
+            var scope = CreateRuntimeScopeFromFhirResourceFile(dir, lib, version);
 
             var patientEverything = new Bundle();   // Add data
             var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
@@ -82,7 +82,7 @@ namespace Test
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            using var scope = LoadElm(elmDir, lib, version);
+            using var scope = CreateRuntimeScopeFromElmLibraryFile(elmDir, lib, version);
             var results = Run(scope, lib, version, context);
             var elapsed = stopwatch.Elapsed;
             stopwatch.Stop();
@@ -111,12 +111,13 @@ namespace Test
             string version,
             CqlContext context)
         {
-            return scope.EnumerateLibraryDefinitionsResults(context, CqlVersionedLibraryIdentifier.Parse($"{lib}-{version}"))
-                        .ToDictionary(t => t.definition, t => t.getResult());
+            return scope
+                   .EnumerateLibraryDefinitionsResults(context, CqlVersionedLibraryIdentifier.Parse($"{lib}-{version}"))
+                   .ToDictionary(t => t.definition, t => t.getResult());
         }
 
         [UsedImplicitly]
-        public static RuntimeScope LoadResources(
+        public static RuntimeScope CreateRuntimeScopeFromFhirResourceFile(
             DirectoryInfo dir,
             string lib,
             string version)
@@ -130,27 +131,18 @@ namespace Test
         }
 
         [UsedImplicitly]
-        public static RuntimeScope LoadElm(
+        public static RuntimeScope CreateRuntimeScopeFromElmLibraryFile(
             DirectoryInfo elmDirectory,
             string lib,
             string version,
             LogLevel logLevel = LogLevel.Error,
             int cacheSize = 0)
         {
-            return LoadElm(elmDirectory, lib, version, cacheSize);
-        }
-
-        private static void BuildLogging(LogLevel logLevel, ILoggingBuilder logging)
-        {
-            logging.AddFilter(level => level >= logLevel);
-            logging.AddConsole(console =>
-            {
-                console.LogToStandardErrorThreshold = LogLevel.Error;
-            });
+            return CreateRuntimeScopeFromElmLibraryFile(elmDirectory, lib, version, cacheSize);
         }
 
         [UsedImplicitly]
-        public static RuntimeScope LoadElm(
+        public static RuntimeScope CreateRuntimeScopeFromElmLibraryFile(
             DirectoryInfo elmDirectory,
             string lib,
             string version,
