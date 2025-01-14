@@ -47,7 +47,7 @@ public class RuntimeApiTests
             throw new Exception(
                 $"""
                  Current Directory: {Environment.CurrentDirectory}
-                 Files: {string.Join("\n ", Directory.GetFiles(Environment.CurrentDirectory))}
+                 Files: {string.Concat(Directory.GetFiles(Path.Combine(Environment.CurrentDirectory, "..", "..", "..")).Select(f => $"\n- {f}"))}
                  """);
         }
     }
