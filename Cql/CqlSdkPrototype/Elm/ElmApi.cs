@@ -21,7 +21,7 @@ public class ElmApi(ElmApiOptions options) :
     internal IElmApiInternal<ElmApi> AsInternal() => this;
     TResult IElmApiExtensible<ElmApi>.UseLogger<TResult>(Func<ElmApi, ILogger<ElmApi>, TResult> action) => action(this, _state.Logger);
     TResult IElmApiInternal<ElmApi>.UseServices<TResult>(Func<(ElmApi elmApi, ILogger<ElmApi> logger, AssemblyCompiler assemblyCompiler, LibrarySetCSharpCodeGenerator librarySetCSharpCodeGenerator), TResult> action) => action((this, _state.Logger, _state.AssemblyCompiler, _state.LibrarySetCSharpCodeGenerator));
-    public static ElmApi Create(ElmApiOptions options) => new(options);
+    public static ElmApi Create(ElmApiOptions? options = null) => new(options ?? ElmApiOptions.Default);
 
     #region State
 

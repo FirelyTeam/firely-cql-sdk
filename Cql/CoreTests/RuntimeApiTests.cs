@@ -1,4 +1,5 @@
 ﻿#nullable enable
+using System;
 using System.IO;
 using System.Linq;
 using System.Runtime.Loader;
@@ -17,26 +18,37 @@ public class RuntimeApiTests
 {
     /// <seealso cref="CqlTupleTests.ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized"/>
     [TestMethod]
-    public void TestAssemblyLoadContext()
+    public void TestRuntimeScopeAgainstLibraryDefinitionResults()
     {
         // Arrange
-        var file = @"Dlls/CqlNestedTupleTest-1.0.0.dll";
-        var filePath = Path.GetFullPath(file);
-        var ctx = FhirCqlContext.ForBundle();
-        using var invocationScope = RuntimeApi
-                                    .Create(RuntimeApiOptions.Default)
-                                    .AddAssemblies([AssemblyData.Default.LoadFromFiles(new FileInfo(filePath))])
-                                    .CreateRuntimeScope();
+        try
+        {
+            var file = @"Dlls/CqlNestedTupleTest-1.0.0.dll";
+            var filePath = Path.GetFullPath(file);
+            var ctx = FhirCqlContext.ForBundle();
+            using var invocationScope = RuntimeApi
+                                        .Create(RuntimeApiOptions.Default)
+                                        .AddAssemblies([AssemblyData.Default.LoadFromFiles(new FileInfo(filePath))])
+                                        .CreateRuntimeScope();
 
-        // Act
-        var result = invocationScope
-            .EnumerateLibraryDefinitionsResults(ctx, CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
-            .Select(t => (t.definition, t.getResult()))
-            .ToDictionary();
+            // Act
+            var result = invocationScope
+                         .EnumerateLibraryDefinitionsResults(ctx, CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
+                         .Select(t => (t.definition, t.getResult()))
+                         .ToDictionary();
 
-        // Assert
-        Assert.IsNotNull(result);
-        result.TryGetValue("Result", out var obj);
-        Assert.IsNotNull(obj);
+            // Assert
+            Assert.IsNotNull(result);
+            result.TryGetValue("Result", out var obj);
+            Assert.IsNotNull(obj);
+        }
+        catch (Exception e)
+        {
+            throw new Exception(
+                $"""
+                 Current Directory: {Environment.CurrentDirectory}
+                 Files: {string.Join("\n ", Directory.GetFiles(Environment.CurrentDirectory))}
+                 """);
+        }
     }
 }

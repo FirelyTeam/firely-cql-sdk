@@ -105,7 +105,7 @@ public class CqlTupleTests
             """, str);
     }
 
-    /// <seealso cref="RuntimeApiTests.TestAssemblyLoadContext"/>
+    /// <seealso cref="RuntimeApiTests.TestRuntimeScopeAgainstLibraryDefinitionResults"/>
     [TestMethod]
     public void ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized()
     {

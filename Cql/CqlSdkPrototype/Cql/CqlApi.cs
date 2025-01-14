@@ -17,7 +17,7 @@ public class CqlApi(CqlApiOptions options) :
 {
     internal ICqlApiExtensible<CqlApi> AsExtensible() => this;
     TResult ICqlApiExtensible<CqlApi>.UseLogger<TResult>(Func<CqlApi, ILogger<CqlApi>, TResult> action) => action(this, _state.Logger);
-    public static CqlApi Create(CqlApiOptions options) => new(options);
+    public static CqlApi Create(CqlApiOptions? options = null) => new(options ?? CqlApiOptions.Default);
 
     #region State
 

@@ -11,7 +11,7 @@ public class RuntimeApi(RuntimeApiOptions options) : IRuntimeApiExtensible<Runti
 {
     internal IRuntimeApiExtensible<RuntimeApi> AsExtensible() => this;
     T IRuntimeApiExtensible<RuntimeApi>.UseLogger<T>(Func<RuntimeApi, ILogger<RuntimeApi>, T> action) => action(this, _state.Logger);
-    public static RuntimeApi Create(RuntimeApiOptions options) => new(options);
+    public static RuntimeApi Create(RuntimeApiOptions? options = null) => new(options ?? RuntimeApiOptions.Default);
 
     #region State
 
