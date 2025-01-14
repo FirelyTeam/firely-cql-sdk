@@ -12,6 +12,7 @@ using CqlSdkPrototype.Runtime;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace CoreTests.Tuples;
 
@@ -109,8 +110,10 @@ public class CqlTupleTests
     [TestMethod]
     public void ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized()
     {
-        var file = @"Dlls/CqlNestedTupleTest-1.0.0.dll";
-        var filePath = Path.GetFullPath(file);
+        var filePath = new DirectoryInfo(Directory.GetCurrentDirectory())
+                       .SelfAndParents()
+                       .Select(dir => Path.GetFullPath(Path.Combine(dir.FullName, "Dlls", "CqlNestedTupleTest-1.0.0.dll")))
+                       .First(File.Exists);
         var ctx = FhirCqlContext.ForBundle();
         using var invocationScope = RuntimeApi
                                     .Create(RuntimeApiOptions.Default)
