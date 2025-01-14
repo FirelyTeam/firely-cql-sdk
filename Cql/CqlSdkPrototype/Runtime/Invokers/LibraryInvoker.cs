@@ -18,10 +18,8 @@ public abstract class LibraryInvoker
         Type libraryType,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
-        libraryInvoker = runtimeApi.AsExtensible().UseServices(t =>
+        libraryInvoker = runtimeApi.AsExtensible().UseLogger((runtimeApi, logger) =>
         {
-            var logger = t.logger;
-            var runtimeApi = t.runtimeApi;
             if (libraryType.GetCustomAttribute<CqlLibraryAttribute>() is not { })
             {
                 logger?.LogDebug(

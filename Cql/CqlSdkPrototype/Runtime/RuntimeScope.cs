@@ -3,11 +3,11 @@ using CqlSdkPrototype.Runtime.Invokers;
 
 namespace CqlSdkPrototype.Runtime;
 
-public class RuntimeInvocationScope : IDisposable
+public class RuntimeScope : IDisposable
 {
     private readonly AssemblyLoadContext _alc;
 
-    internal RuntimeInvocationScope(RuntimeApi runtimeApi, AssemblyLoadContext alc)
+    internal RuntimeScope(RuntimeApi runtimeApi, AssemblyLoadContext alc)
     {
         _alc = alc;
         Libraries =

@@ -15,8 +15,8 @@ namespace CLI.Helpers
     {
         [Option('l', "library", Required = true, HelpText = "The name of a measure Library resource, which contains name and version.")]
         public string Library { get; set; } = "";
-        public string LibraryName => Library.Split('-')[0];
-        public string LibraryVersion => Library.Split('-')[1];
+        public string LibraryName => Library.Split('-')[1];
+        public string LibraryVersion => Library.Split('-')[2];
 
         [Option('d', "data", HelpText = "The folder for test data.")]
         public string DataDirectory { get; set; } = "";
@@ -45,9 +45,10 @@ namespace CLI.Helpers
         public static void EnsureValidOptions(CommandLineOptions options)
         {
             // Validate the library name format
-            if (options.Library.Count(c => c == '-') != 1)
+            if (options.Library.Count(c => c == '-') != 2
+                && !options.Library.StartsWith("Library-", StringComparison.OrdinalIgnoreCase))
             {
-                throw new InvalidOperationException($"The name of the Library resource '{options.Library}' should be written as '<name>-<version>'.");
+                throw new InvalidOperationException($"The name of the Library resource '{options.Library}' should be written as 'Library-<name>-<version>'.");
             }
 
             // Check if the data directory is set
@@ -101,7 +102,7 @@ namespace CLI.Helpers
 
         private static void ValidateLibraryFiles(CommandLineOptions options)
         {
-            foreach (var file in new[] { options.LibraryFile, Path.Combine(options.ResourcesDirectory, "TupleTypes-Binary.json") })
+            foreach (var file in new[] { options.LibraryFile })
             {
                 if (!File.Exists(file))
                 {

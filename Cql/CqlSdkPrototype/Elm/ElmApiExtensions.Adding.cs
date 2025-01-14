@@ -35,10 +35,8 @@ public static partial class ElmApiExtensions
         if (versionedLibraryIdentifier.Version is null)
             throw new FileNotFoundException($"Could not find file '{file.FullName}'.");
 
-        return elmApi.UseServices(t =>
+        return elmApi.UseLogger((elmApi, logger) =>
         {
-            var logger = t.logger;
-            var elmApi = t.elmApi;
             logger.LogWarning("Could not load library from file with name and version, trying without version: {file}", file.FullName);
             file = new FileInfo(Path.Combine(directory.FullName, $"{versionedLibraryIdentifier with { Version = null }}.json"));
             return elmApi.AddElmFile(file);
@@ -50,10 +48,8 @@ public static partial class ElmApiExtensions
         IEnumerable<FileInfo> files)
         where TElmApi : IElmApiExtensible<TElmApi>
     {
-        return elmApi.UseServices(t =>
+        return elmApi.UseLogger((elmApi, logger) =>
         {
-            var logger = t.logger;
-            var elmApi = t.elmApi;
             var libraries =
                 files
                     .Select(f =>

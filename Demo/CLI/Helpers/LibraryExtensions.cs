@@ -12,9 +12,10 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using System.Reflection;
-using System.Runtime.Loader;
+using CqlSdkPrototype.Runtime;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packaging;
-using Hl7.Fhir.Utility;
+using Library = Hl7.Fhir.Model.Library;
 
 namespace CLI.Helpers;
 
@@ -24,11 +25,11 @@ internal static class LibraryExtensions
     public static IEnumerable<Library> GetDependenciesAndSelf(this Library library, DirectoryInfo directory)
     {
         var libraries = new HashSet<Library>();
-        CollectDependencies(library, directory, libraries);
+        library.LoadDependencies(directory, libraries);
         return libraries;
     }
 
-    private static void CollectDependencies(Library library, DirectoryInfo directory, HashSet<Library> libraries)
+    private static void LoadDependencies(this Library library, DirectoryInfo directory, HashSet<Library> libraries)
     {
         if (!libraries.Add(library))
         {
@@ -73,7 +74,7 @@ internal static class LibraryExtensions
                 {
                     using var fs = relatedPath.OpenRead();
                     var relatedLibrary = fs.ParseFhir<Library>();
-                    CollectDependencies(relatedLibrary, directory, libraries);
+                    relatedLibrary.LoadDependencies(directory, libraries);
                     return true;
                 }
             }
@@ -82,38 +83,23 @@ internal static class LibraryExtensions
         }
     }
 
-
-    public static AssemblyLoadContext LoadAssemblies(this IEnumerable<Library> libraries,
-        AssemblyLoadContext asmContext)
+    public static RuntimeScope CreateRuntimeScope(
+        this IEnumerable<Library> libraries)
     {
-        foreach (var library in libraries)
-        {
-            var dll = library.Content.SingleOrDefault(att => att.ContentType == "application/octet-stream");
-            if (dll != null)
-            {
-                using var ms = new MemoryStream(dll.Data);
-                var assembly = asmContext.LoadFromStream(ms);
-            }
+        var assemblyDatas =
+            libraries
+            .Select(library => library.Content.SingleOrDefault(att => att.ContentType == "application/octet-stream"))
+            .OfType<Attachment>()
+            .Select(dll => dll.Data)
+            .Select(assemblyBytes => AssemblyData.Default with { AssemblyBytes = assemblyBytes})
+            .ToArray();
 
-        }
-        return asmContext;
+        return RuntimeApi.Create(RuntimeApiOptions.Default)
+                         .AddAssemblies(assemblyDatas)
+                         .CreateRuntimeScope();
     }
 
-    public static AssemblyLoadContext LoadAssemblies(this IEnumerable<Binary> binaries,
-        AssemblyLoadContext asmContext)
-    {
-        foreach (var binary in binaries)
-        {
-            if (binary.ContentType == "application/octet-stream")
-            {
-                using var ms = new MemoryStream(binary.Data);
-                var assembly = asmContext.LoadFromStream(ms);
-            }
-        }
-        return asmContext;
-    }
-
-    public static Dictionary<string, List<string>> GetValueSets(Type libraryType)
+    private static Dictionary<string, List<string>> GetValueSets(Type libraryType)
     {
         var valueSets = new Dictionary<string, List<string>>();
         CollectValueSets(libraryType, valueSets);
@@ -154,6 +140,7 @@ internal static class LibraryExtensions
             CollectValueSets(nestedType, valueSets);
         }
     }
+
     private static Dictionary<string, List<string>> MissingValueSets(Type libraryType, IValueSetDictionary loadedValueSets, Dictionary<string, List<string>> libraryValueSets)
     {
         return libraryValueSets

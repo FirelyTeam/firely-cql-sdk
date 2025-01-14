@@ -45,10 +45,8 @@ public class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
         Type libraryType,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
-        libraryInvoker = runtimeApi.AsExtensible().UseServices(t =>
+        libraryInvoker = runtimeApi.AsExtensible().UseLogger((_, logger) =>
         {
-            var logger = t.logger;
-            var runtimeApi = t.runtimeApi;
             if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
             {
                 logger?.LogDebug(

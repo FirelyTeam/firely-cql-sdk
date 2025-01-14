@@ -12,7 +12,7 @@ public interface IElmApiExtensible<TElmApi>
     TElmApi WithOptions(Func<ElmApiOptions, ElmApiOptions> replaceOptions);
     TElmApi AddElmLibraries(IEnumerable<Library> libraries);
     TElmApi Compile();
-    T UseServices<T>(Func<(TElmApi elmApi, ILogger<TElmApi> logger), T> action); // Useful for extensions methods
+    TResult UseLogger<TResult>(Func<TElmApi, ILogger<TElmApi>, TResult> action); // Useful for extensions methods
 }
 
 internal interface IElmApiInternal<TElmApi> : IElmApiExtensible<TElmApi>

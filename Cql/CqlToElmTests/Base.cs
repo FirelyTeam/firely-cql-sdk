@@ -14,14 +14,10 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.Loader;
 using CqlSdkPrototype;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Runtime;
-using Hl7.Cql.Packaging;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Expression = Hl7.Cql.Elm.Expression;
-using Microsoft.VisualStudio.TestPlatform.PlatformAbstractions.Interfaces;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -49,7 +45,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 .AddLogging(builder => builder.AddConsole())
                 .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider))
                 .AddCqlCompilerServices()
-                .AddCqlPackagingServices();
+            //    .AddCqlPackagingServices()
+            ;
 
 
         protected static void ClassInitialize(Action<CqlToElmOptions>? options = null)
@@ -150,7 +147,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
             using var scope = RuntimeApi.Create(RuntimeApiOptions.Default)
                                         .AddAssemblies([AssemblyData.Default with { AssemblyBytes = assemblyBytes }])
-                                        .CreateInvocationScope();
+                                        .CreateRuntimeScope();
             var result = scope.GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);
             return result;
         }

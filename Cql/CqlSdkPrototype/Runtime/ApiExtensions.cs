@@ -36,22 +36,22 @@ internal static class ApiExtensions
         return runtimeApi;
     }
 
-    public static RuntimeInvocationScope CreateInvocationScope<TElmApi>(
+    public static RuntimeScope CreateRuntimeScope<TElmApi>(
         this TElmApi elmApi)
         where TElmApi : IElmApiExtensible<TElmApi>
     {
         return elmApi
                .Compile()
                .CreateRuntimeApi()
-               .CreateInvocationScope();
+               .CreateRuntimeScope();
     }
 
-    public static RuntimeInvocationScope CreateInvocationScope(
+    public static RuntimeScope CreateRuntimeScope(
         this CqlApi cqlApi)
     {
         return cqlApi
                .Translate()
                .CreateElmApi()
-               .CreateInvocationScope();
+               .CreateRuntimeScope();
     }
 }

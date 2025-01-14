@@ -19,8 +19,8 @@ public class ElmApi(ElmApiOptions options) :
 {
     internal IElmApiExtensible<ElmApi> AsExtensible() => this;
     internal IElmApiInternal<ElmApi> AsInternal() => this;
-    T IElmApiExtensible<ElmApi>.UseServices<T>(Func<(ElmApi elmApi, ILogger<ElmApi> logger), T> action) => action((this, _state.Logger));
-    T IElmApiInternal<ElmApi>.UseServices<T>(Func<(ElmApi elmApi, ILogger<ElmApi> logger, AssemblyCompiler assemblyCompiler, LibrarySetCSharpCodeGenerator librarySetCSharpCodeGenerator), T> action) => action((this, _state.Logger, _state.AssemblyCompiler, _state.LibrarySetCSharpCodeGenerator));
+    TResult IElmApiExtensible<ElmApi>.UseLogger<TResult>(Func<ElmApi, ILogger<ElmApi>, TResult> action) => action(this, _state.Logger);
+    TResult IElmApiInternal<ElmApi>.UseServices<TResult>(Func<(ElmApi elmApi, ILogger<ElmApi> logger, AssemblyCompiler assemblyCompiler, LibrarySetCSharpCodeGenerator librarySetCSharpCodeGenerator), TResult> action) => action((this, _state.Logger, _state.AssemblyCompiler, _state.LibrarySetCSharpCodeGenerator));
     public static ElmApi Create(ElmApiOptions options) => new(options);
 
     #region State

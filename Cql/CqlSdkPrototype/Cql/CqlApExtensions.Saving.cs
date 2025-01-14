@@ -13,10 +13,8 @@ public static partial class CqlApiExtensions
         if (!directory.Exists)
             directory.Create();
 
-        return cqlApi.UseServices(t =>
+        return cqlApi.UseLogger((cqlApi, logger) =>
         {
-            var logger = t.logger;
-            var cqlApi = t.cqlApi;
             foreach (var (libraryName, (_, elmLibrary)) in cqlApi.Entries)
             {
                 if (elmLibrary == null)

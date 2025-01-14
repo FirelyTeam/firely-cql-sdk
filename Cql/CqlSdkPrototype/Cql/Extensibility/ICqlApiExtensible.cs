@@ -9,5 +9,5 @@ public interface ICqlApiExtensible<TCqlApi>
     TCqlApi WithOptions(Func<CqlApiOptions, CqlApiOptions> replaceOptions);
     TCqlApi AddCqlLibraries(IEnumerable<CqlLibraryString> libraries);
     TCqlApi Translate();
-    TCqlApi UseServices(Func<(TCqlApi cqlApi, ILogger<TCqlApi> logger), TCqlApi> action); // Useful for extensions methods
+    TResult UseLogger<TResult>(Func<TCqlApi, ILogger<TCqlApi>, TResult> action); // Useful for extensions methods
 }

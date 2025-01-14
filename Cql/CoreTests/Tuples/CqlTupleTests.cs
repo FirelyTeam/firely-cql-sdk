@@ -115,7 +115,7 @@ public class CqlTupleTests
         using var invocationScope = RuntimeApi
                                     .Create(RuntimeApiOptions.Default)
                                     .AddAssemblies([AssemblyData.Default.LoadFromFiles(new FileInfo(filePath))])
-                                    .CreateInvocationScope();
+                                    .CreateRuntimeScope();
 
         // Act
         var result = invocationScope

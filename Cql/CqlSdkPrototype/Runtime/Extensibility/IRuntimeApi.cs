@@ -10,5 +10,5 @@ internal interface IRuntimeApiExtensible<TRuntimeApi>
     IReadOnlySet<AssemblyData> Entries { get; }
     TRuntimeApi WithOptions(Func<RuntimeApiOptions, RuntimeApiOptions> replaceOptions);
     TRuntimeApi AddAssemblies(IEnumerable<AssemblyData> assemblies);
-    TResult UseServices<TResult>(Func<(TRuntimeApi runtimeApi, ILogger<TRuntimeApi> logger), TResult> action); // Useful for extensions methods
+    TResult UseLogger<TResult>(Func<TRuntimeApi, ILogger<TRuntimeApi>, TResult> action); // Useful for extensions methods
 }

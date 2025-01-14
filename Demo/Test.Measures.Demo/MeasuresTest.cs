@@ -1,18 +1,18 @@
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
 using System.Diagnostics;
-using System.Runtime.Loader;
 using CoreTests;
 using Hl7.Cql.Compiler;
 using JetBrains.Annotations;
 using Microsoft.Extensions.Logging;
 using CLI.Helpers;
+using CqlSdkPrototype;
+using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Runtime;
 using Hl7.Cql.CodeGeneration.NET;
-using Microsoft.Extensions.DependencyInjection;
+using Hl7.Cql.Runtime;
 using Test.Deck;
-using Test.Measures.Demo;
 
 namespace Test
 {
@@ -48,13 +48,15 @@ namespace Test
             var lib = "BCSEHEDISMY2022";
             var version = "1.0.0";
             var dir = LibrarySetsDirs.Demo.ResourcesDir;
-            var asmContext = LoadResources(dir, lib, version);
+            var scope = LoadResources(dir, lib, version);
 
             var patientEverything = new Bundle();   // Add data
             var valueSets = Enumerable.Empty<ValueSet>().ToValueSetDictionary();  // Add valuesets
             var ctx = FhirCqlContext.ForBundle(patientEverything, MY2023, valueSets);
 
-            var results = asmContext.Run(lib, version, ctx);
+            var results = scope
+                .EnumerateLibraryDefinitionsResults(ctx, CqlVersionedLibraryIdentifier.FromNameAndVersion(CqlLibraryIdentifier.Parse(lib), CqlLibraryVersion.Parse(version)))
+                .ToDictionary(t => t.definition, t => t.getResult());
 
             Assert.IsTrue(results.TryGetValue("Numerator", out var numerator));
             Assert.IsInstanceOfType(numerator, typeof(bool?));
@@ -80,8 +82,8 @@ namespace Test
 
             var stopwatch = new Stopwatch();
             stopwatch.Start();
-            var asmContext = LoadElm(elmDir, lib, version);
-            var results = asmContext.Run(lib, version, context);
+            using var scope = LoadElm(elmDir, lib, version);
+            var results = Run(scope, lib, version, context);
             var elapsed = stopwatch.Elapsed;
             stopwatch.Stop();
             Console.WriteLine($"Run 1: {elapsed}");
@@ -94,7 +96,7 @@ namespace Test
             var bundle2 = new Bundle();
             context = FhirCqlContext.ForBundle(bundle2, MY2023, valueSets);
             stopwatch.Restart();
-            results = asmContext.Run(lib, version, context);
+            results = Run(scope, lib, version, context);
             elapsed = stopwatch.Elapsed;
             stopwatch.Stop();
             Console.WriteLine($"Run 2: {elapsed}");
@@ -103,8 +105,18 @@ namespace Test
             Assert.IsFalse((bool?)numerator);
         }
 
+        private static IReadOnlyDictionary<string, object?> Run(
+            RuntimeScope scope,
+            string lib,
+            string version,
+            CqlContext context)
+        {
+            return scope.EnumerateLibraryDefinitionsResults(context, CqlVersionedLibraryIdentifier.Parse($"{lib}-{version}"))
+                        .ToDictionary(t => t.definition, t => t.getResult());
+        }
+
         [UsedImplicitly]
-        public static AssemblyLoadContext LoadResources(
+        public static RuntimeScope LoadResources(
             DirectoryInfo dir,
             string lib,
             string version)
@@ -113,22 +125,19 @@ namespace Test
             using var fs = libFile.OpenRead();
             var library = fs.ParseFhir<Library>();
             var allLibs = library.GetDependenciesAndSelf(dir);
-            var asmContext = new AssemblyLoadContext($"{lib}-{version}");
-            allLibs.LoadAssemblies(asmContext);
-            return asmContext;
+            //Runtime
+            return allLibs.CreateRuntimeScope();
         }
 
         [UsedImplicitly]
-        public static AssemblyLoadContext LoadElm(
+        public static RuntimeScope LoadElm(
             DirectoryInfo elmDirectory,
             string lib,
             string version,
             LogLevel logLevel = LogLevel.Error,
             int cacheSize = 0)
         {
-            var logFactory = LoggerFactory
-                .Create(logging => { BuildLogging(logLevel, logging); });
-            return LoadElm(elmDirectory, lib, version, logFactory, cacheSize);
+            return LoadElm(elmDirectory, lib, version, cacheSize);
         }
 
         private static void BuildLogging(LogLevel logLevel, ILoggingBuilder logging)
@@ -141,38 +150,23 @@ namespace Test
         }
 
         [UsedImplicitly]
-        public static AssemblyLoadContext LoadElm(
+        public static RuntimeScope LoadElm(
             DirectoryInfo elmDirectory,
             string lib,
             string version,
-            ILoggerFactory logFactory,
             int cacheSize)
         {
             Trace.Assert(cacheSize == 0, "TODO: CacheSize must still be moved to configuration"); // TODO: CacheSize must still be moved to configuration
             LibrarySet librarySet = new();
             librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
 
-            using var serviceProvider = new ServiceCollection()
-                                        .AddDebugLogging()
-                                        .AddCqlCodeGenerationServices()
-                                        .BuildServiceProvider(validateScopes: true);
-            using var serviceScope = serviceProvider.CreateScope();
-            var definitions = serviceScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped().ProcessLibrarySet(librarySet);
-            var cSharpCodeProcessor = serviceProvider.GetCSharpCodeProcessor();
-            var assemblyCompiler = serviceProvider.GetAssemblyCompiler();
-            var results =
-                assemblyCompiler
-                    .Compile(
-                        librarySet,
-                        cSharpCodeProcessor
-                                 .GenerateCSharp(librarySet, definitions));
-            var asmContext = new AssemblyLoadContext($"{lib}-{version}");
-            foreach (var result in results)
-            {
-                using var ms = new MemoryStream(result.assemblyDataWithSourceCode.AssemblyBytes);
-                asmContext.LoadFromStream(ms);
-            }
-            return asmContext;
+            var elmApiOptions = ElmApiOptions.Default;
+            if (Debugger.IsAttached)
+                elmApiOptions = elmApiOptions with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
+            var elmApi = ElmApi.Create(elmApiOptions);
+
+            return elmApi.AddElmLibraries(librarySet)
+                  .CreateRuntimeScope();
         }
     }
 }

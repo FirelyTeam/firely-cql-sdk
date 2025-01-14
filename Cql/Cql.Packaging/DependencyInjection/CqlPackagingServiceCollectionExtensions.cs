@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packaging;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
@@ -19,13 +18,9 @@ internal static class CqlPackagingServiceCollectionExtensions
 {
     public static IServiceCollection AddCqlPackagingServices(this IServiceCollection services)
     {
-        //services.AddCqlCodeGenerationServices();
-        //services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
-        // services.TryAddSingleton<AssemblyCompiler>();
         services.AddTypeResolver();
         services.TryAddSingleton<ResourcePackager>();
         services.TryAddSingleton<FhirResourceFileWriter>();
-        // services.TryAddScoped<CqlToResourcePackagingPipeline>();
 
         return services;
     }

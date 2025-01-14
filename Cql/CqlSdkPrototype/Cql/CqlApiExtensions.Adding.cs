@@ -30,10 +30,8 @@ public static partial class CqlApiExtensions
         IEnumerable<FileInfo> files)
         where TCqlApi : ICqlApiExtensible<TCqlApi>
     {
-        return cqlApi.UseServices(t =>
+        return cqlApi.UseLogger((cqlApi, logger) =>
         {
-            var logger = t.logger;
-            var cqlApi = t.cqlApi;
             var cqlLibraries =
                 files
                     .Select(f =>
@@ -44,6 +42,7 @@ public static partial class CqlApiExtensions
                         var cqlLibrary = CqlLibraryString.FromIdentifierAndString(versionedLibraryIdentifier, cqlContent);
                         return cqlLibrary;
                     }); // Log errors
+
             return cqlApi.AddCqlLibraries(cqlLibraries);
         });
     }

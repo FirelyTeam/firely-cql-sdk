@@ -10,7 +10,7 @@ namespace CqlSdkPrototype.Runtime;
 public class RuntimeApi(RuntimeApiOptions options) : IRuntimeApiExtensible<RuntimeApi>
 {
     internal IRuntimeApiExtensible<RuntimeApi> AsExtensible() => this;
-    T IRuntimeApiExtensible<RuntimeApi>.UseServices<T>(Func<(RuntimeApi runtimeApi, ILogger<RuntimeApi> logger), T> action) => action((this, _state.Logger));
+    T IRuntimeApiExtensible<RuntimeApi>.UseLogger<T>(Func<RuntimeApi, ILogger<RuntimeApi>, T> action) => action(this, _state.Logger);
     public static RuntimeApi Create(RuntimeApiOptions options) => new(options);
 
     #region State
@@ -97,12 +97,12 @@ public class RuntimeApi(RuntimeApiOptions options) : IRuntimeApiExtensible<Runti
 
     #region Output (InvocationScope)
 
-    public RuntimeInvocationScope CreateInvocationScope()
+    public RuntimeScope CreateRuntimeScope()
     {
         var alc = new AssemblyLoadContext("", true);
         foreach (var (assembly, debugSymbols) in _state.Entries)
             alc.LoadFromBytes(assembly!, debugSymbols);
-        return new RuntimeInvocationScope(this, alc);
+        return new RuntimeScope(this, alc);
     }
 
     #endregion

@@ -13,10 +13,8 @@ public static partial class ElmApiExtensions
         if (!directory.Exists)
             directory.Create();
 
-        return elmApi.UseServices(t =>
+        return elmApi.UseLogger((elmApi, logger) =>
         {
-            var logger = t.logger;
-            var elmApi = t.elmApi;
             foreach (var (libraryName, (_, cSharpSourceCode, _, _)) in elmApi.Entries)
             {
                 if (cSharpSourceCode is null)
@@ -39,9 +37,7 @@ public static partial class ElmApiExtensions
         if (!directory.Exists)
             directory.Create();
 
-        return elmApi.UseServices(t => {
-            var logger = t.logger;
-            var elmApi = t.elmApi;
+        return elmApi.UseLogger((elmApi, logger) => {
             foreach (var (libraryName, (_, _, assemblyBytes, symbolsBytes)) in elmApi.Entries)
             {
                 if (assemblyBytes is null)

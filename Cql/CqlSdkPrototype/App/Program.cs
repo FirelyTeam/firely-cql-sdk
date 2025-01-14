@@ -68,7 +68,7 @@ internal class Program
         var cqlContext = FhirCqlContext.ForBundle();
 
         // We need a disposable invocation scope, which contains the AssemblyLoadContext and the related library Assemblies.
-        using var invocationScope = cqlApi.CreateInvocationScope();
+        using var invocationScope = cqlApi.CreateRuntimeScope();
         logger.LogInformation("{dump}", invocationScope.DumpLibraryDeclarations());
         Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
         Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
@@ -106,7 +106,7 @@ internal class Program
                                     .WithOptions(o => o with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded })
                                     .Compile()
                                     .CreateRuntimeApi()
-                                    .CreateInvocationScope();
+                                    .CreateRuntimeScope();
         var result = invocationScope.GetLibraryDefinitionResult(cqlContext, libraryIdentifier, "Three");
         Debug.Assert(result is 3);
     }
