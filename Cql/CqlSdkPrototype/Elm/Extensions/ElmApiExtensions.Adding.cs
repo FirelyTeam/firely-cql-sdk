@@ -12,8 +12,8 @@ public static partial class ElmApiExtensions
     public static TElmApi AddElmFromCqlApi<TElmApi, TCqlApi>(
         this TElmApi elmApi,
         TCqlApi cqlApi)
-        where TElmApi : IElmApiExtensible<TElmApi>
-        where TCqlApi : ICqlApiExtensible<TCqlApi>
+        where TElmApi : IElmApiExtendable<TElmApi>
+        where TCqlApi : ICqlApiExtendable<TCqlApi>
     {
         return elmApi.AddElmLibraries(
             from entry in cqlApi.Entries
@@ -26,7 +26,7 @@ public static partial class ElmApiExtensions
         this TElmApi elmApi,
         DirectoryInfo directory,
         CqlVersionedLibraryIdentifier versionedLibraryIdentifier)
-        where TElmApi : IElmApiExtensible<TElmApi>
+        where TElmApi : IElmApiExtendable<TElmApi>
     {
         FileInfo file = new(Path.Combine(directory.FullName, $"{versionedLibraryIdentifier}.json"));
         if (file.Exists)
@@ -46,7 +46,7 @@ public static partial class ElmApiExtensions
     public static TElmApi AddElmFiles<TElmApi>(
         this TElmApi elmApi,
         IEnumerable<FileInfo> files)
-        where TElmApi : IElmApiExtensible<TElmApi>
+        where TElmApi : IElmApiExtendable<TElmApi>
     {
         var logger = elmApi.LoggerFactory.CreateLogger(typeof(ElmApiExtensions));
         var libraries = files
@@ -64,7 +64,7 @@ public static partial class ElmApiExtensions
         DirectoryInfo directory,
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
-        where TElmApi : IElmApiExtensible<TElmApi>
+        where TElmApi : IElmApiExtendable<TElmApi>
     {
         var files = directory.EnumerateFiles("*.json", options ?? InternalConstants.DefaultEnumerationOptions);
         if (filePredicate is not null) files = files.Where(filePredicate);
@@ -75,7 +75,7 @@ public static partial class ElmApiExtensions
         this TElmApi elmApi,
         FileInfo file,
         EnumerationOptions? options)
-        where TElmApi : IElmApiExtensible<TElmApi>
+        where TElmApi : IElmApiExtendable<TElmApi>
     {
         // TODO
         return elmApi;
@@ -86,7 +86,7 @@ public static partial class ElmApiExtensions
         DirectoryInfo directory,
         CqlVersionedLibraryIdentifier fileName,
         EnumerationOptions? options)
-        where TElmApi : IElmApiExtensible<TElmApi>
+        where TElmApi : IElmApiExtendable<TElmApi>
     {
         // TODO
         return elmApi;
@@ -95,7 +95,7 @@ public static partial class ElmApiExtensions
     public static TElmApi AddElmFile<TElmApi>(
         this TElmApi elmApi,
         FileInfo file)
-        where TElmApi : IElmApiExtensible<TElmApi>
+        where TElmApi : IElmApiExtendable<TElmApi>
     {
         return elmApi.AddElmFiles([file]);
     }

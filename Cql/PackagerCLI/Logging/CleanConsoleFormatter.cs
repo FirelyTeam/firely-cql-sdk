@@ -74,7 +74,7 @@ internal sealed partial class CleanConsoleFormatter : ConsoleFormatter
             return originalFormat; // Nothing to format, return as is
 
         var colorFormat = GetOrdinalStringFormat(state, originalFormat);
-        var colorMessage = string.Format(CultureInfo.InvariantCulture, colorFormat, state.SelectToArray(s => s.Value));
+        var colorMessage = string.Format(CultureInfo.InvariantCulture, colorFormat, state.Select(s => s.Value).ToArray());
         return colorMessage;
     }
 

@@ -2,8 +2,8 @@
 
 namespace CqlSdkPrototype.Elm.Extensibility;
 
-public interface IElmApiExtensible<TElmApi>
-    where TElmApi : IElmApiExtensible<TElmApi>
+public interface IElmApiExtendable<TElmApi>
+    where TElmApi : IElmApiExtendable<TElmApi>
 {
     ILoggerFactory LoggerFactory { get; }
     ElmApiOptions Options { get; }

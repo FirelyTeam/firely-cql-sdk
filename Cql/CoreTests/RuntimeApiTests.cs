@@ -1,11 +1,10 @@
 ﻿#nullable enable
-using System;
 using System.IO;
 using System.Linq;
-using System.Runtime.Loader;
 using CoreTests.Tuples;
 using CqlSdkPrototype;
 using CqlSdkPrototype.Runtime;
+using CqlSdkPrototype.Runtime.Extensions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;

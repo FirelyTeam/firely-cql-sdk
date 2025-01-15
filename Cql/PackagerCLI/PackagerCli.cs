@@ -9,6 +9,7 @@
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Elm.Extensions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
@@ -67,14 +68,14 @@ internal class PackagerCli(
             }
 
             if (opt.CSharpOutDirectory is { } dirOutCS
-                && elmApi.AsExtensible().Entries.Any(e => e.Value.CSharpSourceCode is not null))
+                && elmApi.AsExtendable().Entries.Any(e => e.Value.CSharpSourceCode is not null))
             {
                 dirOutCS.Recreate();
                 elmApi.SaveCSharpFilesToDirectory(dirOutCS);
             }
 
             if (opt.AssemblyOutDirectory is { } dirOutDll
-                && elmApi.AsExtensible().Entries.Any(e => e.Value.AssemblyBinary is not null))
+                && elmApi.AsExtendable().Entries.Any(e => e.Value.AssemblyBinary is not null))
             {
                 dirOutDll.Recreate();
                 elmApi.SaveAssemblyBinariesToDirectory(dirOutDll);
@@ -90,12 +91,12 @@ internal class PackagerCli(
                     FhirOverrideDate: var overrideDate
                 }
                 // Check that we have the libraries produced by the ElmApi
-                && elmApi.AsExtensible()
+                && elmApi.AsExtendable()
                          .Entries
                          .Select(e => e.Value.ElmLibrary)
                          .ToArray() is {Length:>0} libraries
                 // Check that we have the assemblies produced by the ElmApi
-                && elmApi.AsExtensible()
+                && elmApi.AsExtendable()
                          .Entries
                          .Where(e => e.Value is {AssemblyBinary: { }, CSharpSourceCode: { }})
                          .ToDictionary(

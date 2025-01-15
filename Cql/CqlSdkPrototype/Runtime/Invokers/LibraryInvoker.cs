@@ -1,4 +1,5 @@
 ﻿using System.CodeDom.Compiler;
+using CqlSdkPrototype.Runtime.Extensibility;
 using Hl7.Cql.Abstractions;
 
 namespace CqlSdkPrototype.Runtime.Invokers;
@@ -19,7 +20,7 @@ public abstract class LibraryInvoker
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
         libraryInvoker = null;
-        var logger = runtimeApi.AsExtensible().Options.LoggerFactory.CreateLogger<LibraryInvoker>();
+        var logger = runtimeApi.AsExtendable().LoggerFactory.CreateLogger<LibraryInvoker>();
 
         if (libraryType.GetCustomAttribute<CqlLibraryAttribute>() is not { })
         {

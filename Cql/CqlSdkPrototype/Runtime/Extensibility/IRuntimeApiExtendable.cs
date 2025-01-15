@@ -2,8 +2,8 @@
 
 namespace CqlSdkPrototype.Runtime.Extensibility;
 
-internal interface IRuntimeApiExtensible<TRuntimeApi>
-    where TRuntimeApi : IRuntimeApiExtensible<TRuntimeApi>
+public interface IRuntimeApiExtendable<TRuntimeApi>
+    where TRuntimeApi : IRuntimeApiExtendable<TRuntimeApi>
 {
     ILoggerFactory LoggerFactory { get; }
     RuntimeApiOptions Options { get; }

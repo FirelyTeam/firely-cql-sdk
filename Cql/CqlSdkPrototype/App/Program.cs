@@ -5,7 +5,7 @@ using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Elm.Extensions;
 using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Logging;
-using CqlSdkPrototype.Runtime;
+using CqlSdkPrototype.Runtime.Extensions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Model;
@@ -228,7 +228,7 @@ file static class X
     public static Maybe<(CqlVersionedLibraryIdentifier id, string cSharpSourceCode)>
         TryGetFirstCSharpFileLines<TElmApi>(
             this TElmApi elmApi)
-        where TElmApi : IElmApiExtensible<TElmApi>
+        where TElmApi : IElmApiExtendable<TElmApi>
     {
         return elmApi.Entries
                      .TryGetFirst(kv => kv.Value.CSharpSourceCode is not null)
@@ -237,7 +237,7 @@ file static class X
 
     public static Maybe<(CqlVersionedLibraryIdentifier id, string elmJson)> TryGetFirstElmFileLines<TCqlApi>(
         this TCqlApi cqlApi)
-        where TCqlApi : ICqlApiExtensible<TCqlApi>
+        where TCqlApi : ICqlApiExtendable<TCqlApi>
     {
         return cqlApi.Entries
                      .TryGetFirst(kv => kv.Value.ElmLibrary is not null)

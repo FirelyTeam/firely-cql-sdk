@@ -26,6 +26,13 @@ internal record AssemblyDataWithSourceCode(
     /// </summary>
     public new static AssemblyDataWithSourceCode Default { get; } = new(null, null, null);
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="AssemblyDataWithSourceCode"/> class.
+    /// </summary>
+    /// <param name="assemblyBytes">This assembly's binary data.</param>
+    /// <param name="sourceCodeFileName"></param>
+    /// <param name="sourceCode"></param>
+    /// <param name="debugSymbolsBytes">The assembly's debug symbols in binary data.</param>
     public AssemblyDataWithSourceCode(
         byte[]? assemblyBytes,
         string? sourceCodeFileName,

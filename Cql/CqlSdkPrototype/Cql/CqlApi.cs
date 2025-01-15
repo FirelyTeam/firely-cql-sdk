@@ -13,12 +13,11 @@ using CqlTranslationEntriesMap = System.Collections.Immutable.ImmutableDictionar
 public class CqlApi(
     ILoggerFactory? loggerFactory = null,
     CqlApiOptions ? options = null) :
-    ICqlApiExtensible<CqlApi>
+    ICqlApiExtendable<CqlApi>
 {
-    internal ICqlApiExtensible<CqlApi> AsExtensible() => this;
-    ILoggerFactory ICqlApiExtensible<CqlApi>.LoggerFactory => _state.LoggerFactory;
-    CqlApiOptions ICqlApiExtensible<CqlApi>.Options => _state.Options;
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> ICqlApiExtensible<CqlApi>.Entries => _state.Entries;
+    ILoggerFactory ICqlApiExtendable<CqlApi>.LoggerFactory => _state.LoggerFactory;
+    CqlApiOptions ICqlApiExtendable<CqlApi>.Options => _state.Options;
+    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> ICqlApiExtendable<CqlApi>.Entries => _state.Entries;
 
     #region State
 

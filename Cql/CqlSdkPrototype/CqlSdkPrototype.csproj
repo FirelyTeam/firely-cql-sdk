@@ -26,14 +26,12 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Test.Measures.Demo" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="examples\" />
-	  <Folder Include="Runtime\Extensions\" />
 	</ItemGroup>
 
 </Project>

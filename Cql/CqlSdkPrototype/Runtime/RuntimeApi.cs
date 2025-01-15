@@ -8,17 +8,15 @@ namespace CqlSdkPrototype.Runtime;
 
 public class RuntimeApi(
     ILoggerFactory? loggerFactory = null,
-    RuntimeApiOptions? options = null) : IRuntimeApiExtensible<RuntimeApi>
+    RuntimeApiOptions? options = null) : IRuntimeApiExtendable<RuntimeApi>
 {
-    internal IRuntimeApiExtensible<RuntimeApi> AsExtensible() => this;
-
     #region State
 
     private RuntimeApiState _state = RuntimeApiState.Create(loggerFactory ?? NullLoggerFactory.Instance, options ?? RuntimeApiOptions.Default);
 
-    RuntimeApiOptions IRuntimeApiExtensible<RuntimeApi>.Options => _state.Options;
-    IReadOnlySet<RuntimeApiStateEntry> IRuntimeApiExtensible<RuntimeApi>.Entries => _state.Entries;
-    ILoggerFactory IRuntimeApiExtensible<RuntimeApi>.LoggerFactory => _state.LoggerFactory;
+    RuntimeApiOptions IRuntimeApiExtendable<RuntimeApi>.Options => _state.Options;
+    IReadOnlySet<RuntimeApiStateEntry> IRuntimeApiExtendable<RuntimeApi>.Entries => _state.Entries;
+    ILoggerFactory IRuntimeApiExtendable<RuntimeApi>.LoggerFactory => _state.LoggerFactory;
 
     #endregion
 

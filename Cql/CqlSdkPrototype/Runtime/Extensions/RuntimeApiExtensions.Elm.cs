@@ -1,13 +1,13 @@
 ﻿using CqlSdkPrototype.Elm.Extensibility;
 using Hl7.Cql.CodeGeneration.NET;
 
-namespace CqlSdkPrototype.Runtime;
+namespace CqlSdkPrototype.Runtime.Extensions;
 public static partial class RuntimeApiExtensions
 {
     public static RuntimeApi CreateRuntimeApi<TElmApi>(
         this TElmApi elmApi,
         Func<RuntimeApiOptions, RuntimeApiOptions>? configureOptions = null)
-        where TElmApi : IElmApiExtensible<TElmApi>
+        where TElmApi : IElmApiExtendable<TElmApi>
     {
         var runtimeApiOptions = RuntimeApiOptions.Default;
         if (configureOptions is not null) runtimeApiOptions = configureOptions(runtimeApiOptions);
@@ -29,7 +29,7 @@ public static partial class RuntimeApiExtensions
 #pragma warning restore RS0026
         this TElmApi elmApi,
         Func<RuntimeApiOptions, RuntimeApiOptions>? configureOptions = null)
-        where TElmApi : IElmApiExtensible<TElmApi>
+        where TElmApi : IElmApiExtendable<TElmApi>
     {
         return elmApi
                .Compile()

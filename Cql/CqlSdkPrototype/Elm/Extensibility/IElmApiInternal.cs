@@ -1,7 +1,7 @@
 ﻿namespace CqlSdkPrototype.Elm.Extensibility;
 
-internal interface IElmApiInternal<TElmApi> : IElmApiExtensible<TElmApi>
-    where TElmApi : IElmApiExtensible<TElmApi>
+internal interface IElmApiInternal<TElmApi> : IElmApiExtendable<TElmApi>
+    where TElmApi : IElmApiExtendable<TElmApi>
 {
     ElmApiState State { get;  }
 }

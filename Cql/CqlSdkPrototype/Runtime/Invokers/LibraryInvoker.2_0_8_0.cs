@@ -1,11 +1,12 @@
 ﻿using CqlSdkPrototype.Internal;
+using CqlSdkPrototype.Runtime.Extensibility;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Runtime.Invokers;
 
-public class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
+internal class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
 {
     private record LibraryMethodInfo(MethodInfo Method, string? ValueSetId, string? DeclarationName)
     {
@@ -46,7 +47,7 @@ public class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
         libraryInvoker = null;
-        var logger = runtimeApi.AsExtensible().Options.LoggerFactory.CreateLogger<LibraryInvoker_2_0_8_0>();
+        var logger = runtimeApi.AsExtendable().LoggerFactory.CreateLogger<LibraryInvoker_2_0_8_0>();
 
         if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
         {

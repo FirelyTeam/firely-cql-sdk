@@ -28,7 +28,7 @@ internal readonly record struct RuntimeApiState(
                 return;
 
             _options = value;
-            Logger = value.LoggerFactory.CreateLogger<RuntimeApi>();
+            Logger = LoggerFactory.CreateLogger<RuntimeApi>();
         }
     }
 

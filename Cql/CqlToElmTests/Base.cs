@@ -16,8 +16,10 @@ using System.Linq.Expressions;
 using System.Reflection;
 using CqlSdkPrototype;
 using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Runtime;
 using Expression = Hl7.Cql.Elm.Expression;
+using CqlSdkPrototype.Runtime.Extensions;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -331,13 +333,12 @@ namespace Hl7.Cql.CqlToElm.Test
         internal static byte[] Compile(Library library)
         {
             var assembly = CreateElmApi()
-                .AddElmLibraries([library])
-                .Compile()
-                .AsExtensible()
-                .Entries
-                .Values
-                .Single()
-                .AssemblyBinary;
+                           .AddElmLibraries([library])
+                           .Compile().AsExtendable()
+                                 .Entries
+                                 .Values
+                                 .Single()
+                                 .AssemblyBinary;
             return assembly;
         }
     }

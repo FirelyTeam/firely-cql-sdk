@@ -8,7 +8,7 @@ public static partial class CqlApiExtensions
     public static TCqlApi AddCqlLibraryString<TCqlApi>(
         this TCqlApi cqlApi,
         CqlLibraryString cqlLibrary)
-        where TCqlApi : ICqlApiExtensible<TCqlApi>
+        where TCqlApi : ICqlApiExtendable<TCqlApi>
     {
         return cqlApi.AddCqlLibraries([cqlLibrary]);
     }
@@ -18,7 +18,7 @@ public static partial class CqlApiExtensions
         DirectoryInfo directory,
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
-        where TCqlApi : ICqlApiExtensible<TCqlApi>
+        where TCqlApi : ICqlApiExtendable<TCqlApi>
     {
         var files = directory.EnumerateFiles("*.cql", options ?? InternalConstants.DefaultEnumerationOptions);
         if (filePredicate is not null) files = files.Where(filePredicate);
@@ -28,7 +28,7 @@ public static partial class CqlApiExtensions
     public static TCqlApi AddCqlLibraryFiles<TCqlApi>(
         this TCqlApi cqlApi,
         IEnumerable<FileInfo> files)
-        where TCqlApi : ICqlApiExtensible<TCqlApi>
+        where TCqlApi : ICqlApiExtendable<TCqlApi>
     {
         var logger = cqlApi.LoggerFactory.CreateLogger(typeof(CqlApiExtensions));
         var cqlLibraries = files

@@ -8,7 +8,7 @@ public static partial class ElmApiExtensions
     public static TElmApi SaveCSharpFilesToDirectory<TElmApi>(
         this TElmApi elmApi,
         DirectoryInfo directory)
-        where TElmApi : IElmApiExtensible<TElmApi>
+        where TElmApi : IElmApiExtendable<TElmApi>
     {
         if (!directory.Exists)
             directory.Create();
@@ -31,7 +31,7 @@ public static partial class ElmApiExtensions
     public static TElmApi SaveAssemblyBinariesToDirectory<TElmApi>(
         this TElmApi elmApi,
         DirectoryInfo directory)
-        where TElmApi : IElmApiExtensible<TElmApi>
+        where TElmApi : IElmApiExtendable<TElmApi>
     {
         if (!directory.Exists)
             directory.Create();

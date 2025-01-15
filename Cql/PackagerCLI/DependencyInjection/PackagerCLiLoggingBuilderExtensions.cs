@@ -75,6 +75,6 @@ internal static class PackagerCLiLoggingBuilderExtensions
             /* 6 */
             LogLevel.None => /* n/a */ null,
             // @formatter: on
-            _ => throw new UnsupportedSwitchCaseError(logLevel, typeof(LogLevel).FullName).ToException(),
+            _ => throw new ArgumentOutOfRangeException(nameof(logLevel), logLevel, "Invalid LogLevel."),
         };
 }

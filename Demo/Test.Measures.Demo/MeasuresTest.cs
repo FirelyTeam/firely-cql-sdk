@@ -10,6 +10,7 @@ using CLI.Helpers;
 using CqlSdkPrototype;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Runtime;
+using CqlSdkPrototype.Runtime.Extensions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Runtime;
 using Test.Deck;

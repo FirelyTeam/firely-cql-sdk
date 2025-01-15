@@ -14,21 +14,20 @@ namespace CqlSdkPrototype.Elm;
 public class ElmApi(
     ILoggerFactory? loggerFactory = null,
     ElmApiOptions? options = null) :
-    IElmApiExtensible<ElmApi>,
+    IElmApiExtendable<ElmApi>,
     IElmApiInternal<ElmApi>
 {
-    internal IElmApiExtensible<ElmApi> AsExtensible() => this;
     internal IElmApiInternal<ElmApi> AsInternal() => this;
-    TResult IElmApiExtensible<ElmApi>.UseLogger<TResult>(Func<ElmApi, ILogger<ElmApi>, TResult> action) => action(this, _state.Logger);
+    TResult IElmApiExtendable<ElmApi>.UseLogger<TResult>(Func<ElmApi, ILogger<ElmApi>, TResult> action) => action(this, _state.Logger);
     ElmApiState IElmApiInternal<ElmApi>.State => _state;
-    ILoggerFactory IElmApiExtensible<ElmApi>.LoggerFactory => _state.LoggerFactory;
+    ILoggerFactory IElmApiExtendable<ElmApi>.LoggerFactory => _state.LoggerFactory;
 
     #region State
 
     private ElmApiState _state = ElmApiState.Create(loggerFactory ?? NullLoggerFactory.Instance, options ?? ElmApiOptions.Default);
 
-    ElmApiOptions IElmApiExtensible<ElmApi>.Options => _state.Options;
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry> IElmApiExtensible<ElmApi>.Entries => _state.Entries;
+    ElmApiOptions IElmApiExtendable<ElmApi>.Options => _state.Options;
+    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry> IElmApiExtendable<ElmApi>.Entries => _state.Entries;
 
     private ElmApi WithEntries(
         ElmCompilationEntriesMap entries)

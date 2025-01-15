@@ -1,7 +1,7 @@
 ﻿namespace CqlSdkPrototype.Cql.Extensibility;
 
-public interface ICqlApiExtensible<TCqlApi>
-    where TCqlApi : ICqlApiExtensible<TCqlApi>
+public interface ICqlApiExtendable<TCqlApi>
+    where TCqlApi : ICqlApiExtendable<TCqlApi>
 {
     ILoggerFactory LoggerFactory { get; }
     CqlApiOptions Options { get; }

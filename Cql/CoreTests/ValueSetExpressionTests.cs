@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Diagnostics;
 using FluentAssertions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;

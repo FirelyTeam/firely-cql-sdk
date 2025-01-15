@@ -8,7 +8,7 @@ public static partial class CqlApiExtensions
         this TCqlApi cqlApi,
         DirectoryInfo directory,
         bool writeIndented = true)
-        where TCqlApi : ICqlApiExtensible<TCqlApi>
+        where TCqlApi : ICqlApiExtendable<TCqlApi>
     {
         if (!directory.Exists)
             directory.Create();

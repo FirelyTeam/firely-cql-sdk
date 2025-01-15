@@ -3,14 +3,14 @@ using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensions;
 
-namespace CqlSdkPrototype.Runtime;
+namespace CqlSdkPrototype.Runtime.Extensions;
 
 public static partial class RuntimeApiExtensions
 {
     public static ElmApi CreateElmApi<TCqlApi>(
         this TCqlApi cqlApi,
         Func<ElmApiOptions, ElmApiOptions>? configureOptions = null)
-        where TCqlApi : ICqlApiExtensible<TCqlApi>
+        where TCqlApi : ICqlApiExtendable<TCqlApi>
     {
         var elmApiOptions = new ElmApiOptions(ProcessBatchItemExceptionHandling: cqlApi.Options.ProcessBatchItemExceptionHandling);
         if (configureOptions is not null) elmApiOptions = configureOptions(elmApiOptions);
