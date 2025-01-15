@@ -7,16 +7,17 @@ using Hl7.Cql.Runtime.Hosting;
 namespace CqlSdkPrototype.Cql;
 
 internal readonly record struct CqlApiState(
+    ILoggerFactory LoggerFactory,
     ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> Entries,
     CqlApiOptions Options,
     ServiceProvider ServiceProvider,
     ILogger<CqlApi> Logger,
     CqlToElmConverter CqlToElmConverter)
 {
-    public static CqlApiState Create(CqlApiOptions options)
+    public static CqlApiState Create(ILoggerFactory loggerFactory, CqlApiOptions options)
     {
         var entries = ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry>.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
-        return new CqlApiState(entries, null!, null!, null!, null!)
+        return new CqlApiState(loggerFactory, null!, null!, null!, null!, null!)
         {
             // Must be set through the property initializer, to ensure the services are created
             Options = options,
@@ -37,7 +38,7 @@ internal readonly record struct CqlApiState(
 
             _options = value;
             var services = new ServiceCollection();
-            services.AddExternalLogging(value.LoggerFactory!);
+            services.AddExternalLogging(LoggerFactory);
             services.AddCqlApi(o => o.Models = value.Models);
             ServiceProvider = services.BuildServiceProvider();
             Logger = ServiceProvider.GetLogger<CqlApi>();
@@ -45,4 +46,5 @@ internal readonly record struct CqlApiState(
         }
     }
 
+    public ILoggerFactory LoggerFactory { get; } = LoggerFactory;
 }

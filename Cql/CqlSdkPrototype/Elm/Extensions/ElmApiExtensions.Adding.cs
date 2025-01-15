@@ -48,7 +48,7 @@ public static partial class ElmApiExtensions
         IEnumerable<FileInfo> files)
         where TElmApi : IElmApiExtensible<TElmApi>
     {
-        var logger = elmApi.Options.LoggerFactory.CreateLogger(typeof(ElmApiExtensions));
+        var logger = elmApi.LoggerFactory.CreateLogger(typeof(ElmApiExtensions));
         var libraries = files
             .Select(f =>
             {

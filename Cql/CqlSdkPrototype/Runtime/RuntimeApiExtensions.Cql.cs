@@ -12,13 +12,9 @@ public static partial class RuntimeApiExtensions
         Func<ElmApiOptions, ElmApiOptions>? configureOptions = null)
         where TCqlApi : ICqlApiExtensible<TCqlApi>
     {
-        var elmApiOptions = ElmApiOptions.Default with
-        {
-            LoggerFactory = cqlApi.Options.LoggerFactory,
-            ProcessBatchItemExceptionHandling = cqlApi.Options.ProcessBatchItemExceptionHandling,
-        };
+        var elmApiOptions = new ElmApiOptions(ProcessBatchItemExceptionHandling: cqlApi.Options.ProcessBatchItemExceptionHandling);
         if (configureOptions is not null) elmApiOptions = configureOptions(elmApiOptions);
-        var elmApi = new ElmApi(elmApiOptions).AddElmFromCqlApi(cqlApi);
+        var elmApi = new ElmApi(cqlApi.LoggerFactory, elmApiOptions).AddElmFromCqlApi(cqlApi);
         return elmApi;
     }
 

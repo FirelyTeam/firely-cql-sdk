@@ -9,11 +9,7 @@ public static partial class RuntimeApiExtensions
         Func<RuntimeApiOptions, RuntimeApiOptions>? configureOptions = null)
         where TElmApi : IElmApiExtensible<TElmApi>
     {
-        var runtimeApiOptions = RuntimeApiOptions.Default with
-        {
-            LoggerFactory = elmApi.Options.LoggerFactory,
-        };
-
+        var runtimeApiOptions = RuntimeApiOptions.Default;
         if (configureOptions is not null) runtimeApiOptions = configureOptions(runtimeApiOptions);
 
         var assemblyDatas =
@@ -24,7 +20,7 @@ public static partial class RuntimeApiExtensions
             let assemblyData = new AssemblyData(assembly, debugSymbols)
             select assemblyData;
 
-        var runtimeApi = new RuntimeApi(runtimeApiOptions).AddAssemblies(assemblyDatas);
+        var runtimeApi = new RuntimeApi(elmApi.LoggerFactory, runtimeApiOptions).AddAssemblies(assemblyDatas);
         return runtimeApi;
     }
 

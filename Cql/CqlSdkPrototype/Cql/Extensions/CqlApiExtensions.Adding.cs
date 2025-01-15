@@ -30,7 +30,7 @@ public static partial class CqlApiExtensions
         IEnumerable<FileInfo> files)
         where TCqlApi : ICqlApiExtensible<TCqlApi>
     {
-        var logger = cqlApi.Options.LoggerFactory.CreateLogger(typeof(CqlApiExtensions));
+        var logger = cqlApi.LoggerFactory.CreateLogger(typeof(CqlApiExtensions));
         var cqlLibraries = files
             .Select(f =>
             {

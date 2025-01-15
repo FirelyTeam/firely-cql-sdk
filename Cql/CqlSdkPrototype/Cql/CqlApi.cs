@@ -2,6 +2,7 @@
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Runtime;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace CqlSdkPrototype.Cql;
 
@@ -9,17 +10,19 @@ using CqlTranslationEntriesMap = System.Collections.Immutable.ImmutableDictionar
     CqlVersionedLibraryIdentifier,
     CqlApiStateEntry>;
 
-public class CqlApi(CqlApiOptions? options = null) :
+public class CqlApi(
+    ILoggerFactory? loggerFactory = null,
+    CqlApiOptions ? options = null) :
     ICqlApiExtensible<CqlApi>
 {
     internal ICqlApiExtensible<CqlApi> AsExtensible() => this;
+    ILoggerFactory ICqlApiExtensible<CqlApi>.LoggerFactory => _state.LoggerFactory;
+    CqlApiOptions ICqlApiExtensible<CqlApi>.Options => _state.Options;
+    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> ICqlApiExtensible<CqlApi>.Entries => _state.Entries;
 
     #region State
 
-    private CqlApiState _state = CqlApiState.Create(options ?? CqlApiOptions.Default);
-
-    CqlApiOptions ICqlApiExtensible<CqlApi>.Options => _state.Options;
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> ICqlApiExtensible<CqlApi>.Entries => _state.Entries;
+    private CqlApiState _state = CqlApiState.Create(loggerFactory ?? NullLoggerFactory.Instance, options ?? CqlApiOptions.Default);
 
     private CqlApi WithEntries(
         CqlTranslationEntriesMap entries)

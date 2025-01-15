@@ -10,7 +10,6 @@ using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensions;
-using CqlSdkPrototype.Logging;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging;
@@ -39,11 +38,9 @@ internal class PackagerCli(
             ElmApi elmApi;
             if (translateCql)
             {
-                elmApi = new CqlApi(CqlApiOptions.Default with
-                         {
-                             LoggerFactory = loggerFactory,
-                             ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
-                         })
+                elmApi = new CqlApi(
+                             loggerFactory,
+                             new CqlApiOptions(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue))
                          .OnValueSelect(
                              valueSelector: _ => opt.CqlInDirectory,
                              ifHasValue: (api, cql) => api.AddCqlLibrariesFromDirectory(cql),
@@ -61,11 +58,7 @@ internal class PackagerCli(
             }
             else
             {
-                elmApi = new ElmApi(ElmApiOptions.Default with
-                         {
-                             LoggerFactory = loggerFactory,
-                             ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
-                         })
+                elmApi = new ElmApi(loggerFactory, new ElmApiOptions(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue))
                          .OnValueSelect(
                              _ => opt.ElmInDirectory,
                              ifHasValue: (api, elm) => api.AddElmFilesFromDirectory(elm, filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name)),

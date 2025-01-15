@@ -2,19 +2,23 @@
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using CqlSdkPrototype.Runtime.Extensibility;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace CqlSdkPrototype.Runtime;
 
-public class RuntimeApi(RuntimeApiOptions? options = null) : IRuntimeApiExtensible<RuntimeApi>
+public class RuntimeApi(
+    ILoggerFactory? loggerFactory = null,
+    RuntimeApiOptions? options = null) : IRuntimeApiExtensible<RuntimeApi>
 {
     internal IRuntimeApiExtensible<RuntimeApi> AsExtensible() => this;
 
     #region State
 
-    private RuntimeApiState _state = RuntimeApiState.Create(options ?? RuntimeApiOptions.Default);
+    private RuntimeApiState _state = RuntimeApiState.Create(loggerFactory ?? NullLoggerFactory.Instance, options ?? RuntimeApiOptions.Default);
 
     RuntimeApiOptions IRuntimeApiExtensible<RuntimeApi>.Options => _state.Options;
     IReadOnlySet<RuntimeApiStateEntry> IRuntimeApiExtensible<RuntimeApi>.Entries => _state.Entries;
+    ILoggerFactory IRuntimeApiExtensible<RuntimeApi>.LoggerFactory => _state.LoggerFactory;
 
     #endregion
 

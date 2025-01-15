@@ -147,6 +147,7 @@ namespace Test
             string lib,
             string version,
             int cacheSize,
+            ILoggerFactory? loggerFactory = null,
             Func<RuntimeApiOptions, RuntimeApiOptions>? configureOptions = null)
         {
             Trace.Assert(cacheSize == 0, "TODO: CacheSize must still be moved to configuration"); // TODO: CacheSize must still be moved to configuration
@@ -156,7 +157,7 @@ namespace Test
             var elmApiOptions = ElmApiOptions.Default;
             if (Debugger.IsAttached)
                 elmApiOptions = elmApiOptions with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
-            var elmApi = new ElmApi(elmApiOptions);
+            var elmApi = new ElmApi(loggerFactory, elmApiOptions);
 
             return elmApi
                   .AddElmLibraries(librarySet)

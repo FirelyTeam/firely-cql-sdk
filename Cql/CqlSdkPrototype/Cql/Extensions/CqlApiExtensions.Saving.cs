@@ -13,7 +13,7 @@ public static partial class CqlApiExtensions
         if (!directory.Exists)
             directory.Create();
 
-        var logger = cqlApi.Options.LoggerFactory.CreateLogger(typeof(CqlApiExtensions));
+        var logger = cqlApi.LoggerFactory.CreateLogger(typeof(CqlApiExtensions));
 
         foreach (var (libraryName, (_, elmLibrary)) in cqlApi.Entries)
         {

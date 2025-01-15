@@ -13,7 +13,7 @@ public static partial class ElmApiExtensions
         if (!directory.Exists)
             directory.Create();
 
-        var logger = elmApi.Options.LoggerFactory.CreateLogger(typeof(ElmApiExtensions));
+        var logger = elmApi.LoggerFactory.CreateLogger(typeof(ElmApiExtensions));
 
         foreach (var (libraryName, (_, cSharpSourceCode, _, _)) in elmApi.Entries)
         {
@@ -36,7 +36,7 @@ public static partial class ElmApiExtensions
         if (!directory.Exists)
             directory.Create();
 
-        var logger = elmApi.Options.LoggerFactory.CreateLogger(typeof(ElmApiExtensions));
+        var logger = elmApi.LoggerFactory.CreateLogger(typeof(ElmApiExtensions));
 
         foreach (var (libraryName, (_, _, assemblyBytes, symbolsBytes)) in elmApi.Entries)
         {

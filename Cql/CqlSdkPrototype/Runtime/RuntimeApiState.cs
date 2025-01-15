@@ -3,13 +3,14 @@
 namespace CqlSdkPrototype.Runtime;
 
 internal readonly record struct RuntimeApiState(
+    ILoggerFactory LoggerFactory,
     ImmutableHashSet<RuntimeApiStateEntry> Entries,
     RuntimeApiOptions Options,
     ILogger<RuntimeApi> Logger)
 {
-    public static RuntimeApiState Create(RuntimeApiOptions options)
+    public static RuntimeApiState Create(ILoggerFactory loggerFactory, RuntimeApiOptions options)
     {
-        return new RuntimeApiState([], null!, null!)
+        return new RuntimeApiState(loggerFactory, [], null!, null!)
         {
             // Must be set through the property initializer, to ensure the services are created
             Options = options,
@@ -30,4 +31,6 @@ internal readonly record struct RuntimeApiState(
             Logger = value.LoggerFactory.CreateLogger<RuntimeApi>();
         }
     }
+
+    public ILoggerFactory LoggerFactory { get; } = LoggerFactory;
 }

@@ -4,13 +4,16 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
+using Microsoft.Extensions.Logging.Abstractions;
 using ElmCompilationEntriesMap = System.Collections.Immutable.ImmutableDictionary<
     CqlSdkPrototype.CqlVersionedLibraryIdentifier,
     CqlSdkPrototype.Elm.Extensibility.ElmApiStateEntry>;
 
 namespace CqlSdkPrototype.Elm;
 
-public class ElmApi(ElmApiOptions? options = null) :
+public class ElmApi(
+    ILoggerFactory? loggerFactory = null,
+    ElmApiOptions? options = null) :
     IElmApiExtensible<ElmApi>,
     IElmApiInternal<ElmApi>
 {
@@ -18,10 +21,11 @@ public class ElmApi(ElmApiOptions? options = null) :
     internal IElmApiInternal<ElmApi> AsInternal() => this;
     TResult IElmApiExtensible<ElmApi>.UseLogger<TResult>(Func<ElmApi, ILogger<ElmApi>, TResult> action) => action(this, _state.Logger);
     ElmApiState IElmApiInternal<ElmApi>.State => _state;
+    ILoggerFactory IElmApiExtensible<ElmApi>.LoggerFactory => _state.LoggerFactory;
 
     #region State
 
-    private ElmApiState _state = ElmApiState.Create(options ?? ElmApiOptions.Default);
+    private ElmApiState _state = ElmApiState.Create(loggerFactory ?? NullLoggerFactory.Instance, options ?? ElmApiOptions.Default);
 
     ElmApiOptions IElmApiExtensible<ElmApi>.Options => _state.Options;
     IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry> IElmApiExtensible<ElmApi>.Entries => _state.Entries;

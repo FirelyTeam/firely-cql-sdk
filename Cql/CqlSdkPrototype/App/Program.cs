@@ -30,10 +30,9 @@ internal class Program
         var logger = serviceProvider.GetLogger<Program>();
 
         var cqlApiOptions = new CqlApiOptions(
-            LoggerFactory: loggerFactory,
             Models: [Models.ElmR1, Models.Fhir401]);
 
-        var cqlApi = new CqlApi(cqlApiOptions);
+        var cqlApi = new CqlApi(loggerFactory, cqlApiOptions);
 
         //InvokeCqlExample(logger: logger, cqlApi: cqlApi);
 

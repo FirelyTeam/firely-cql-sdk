@@ -152,7 +152,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var elmApiOptions = ElmApiOptions.Default;
             if (Debugger.IsAttached)
                 elmApiOptions = elmApiOptions with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
-            var elmApi = new ElmApi(elmApiOptions);
+            var elmApi = new ElmApi(options: elmApiOptions);
             return elmApi;
         }
 
