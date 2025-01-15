@@ -1,10 +1,7 @@
 ﻿using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Cql.Internal;
-using CqlSdkPrototype.Elm;
-using CqlSdkPrototype.Elm.Internal;
 using CqlSdkPrototype.Internal;
-using CqlSdkPrototype.Logging;
-using Hl7.Cql.CodeGeneration.NET;
+using CqlSdkPrototype.Logging.Internal;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
@@ -59,7 +56,7 @@ public class CqlApi(CqlApiOptions? options = null) :
 
                 _options = value;
                 var services = new ServiceCollection();
-                services.AddLoggingFromOptions(value.LoggingOptions);
+                services.AddExternalLogging(value.LoggerFactory!);
                 services.AddCqlApi(o => o.Models = value.Models);
                 ServiceProvider = services.BuildServiceProvider();
                 Logger = ServiceProvider.GetLogger<CqlApi>();

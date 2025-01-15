@@ -34,14 +34,12 @@ internal class PackagerCli(
             optionsConsoleDumper.DumpToConsole();
             var opt = packagerCliOptions.Value;
 
-            var loggingOptions = LoggingOptions.Default with { LoggerFactory = loggerFactory };
-
             ElmApi elmApi;
             if (translateCql)
             {
                 elmApi = new CqlApi(CqlApiOptions.Default with
                          {
-                             LoggingOptions = loggingOptions,
+                             LoggerFactory = loggerFactory,
                              ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
                          })
                          .OnValueSelect(
@@ -63,7 +61,7 @@ internal class PackagerCli(
             {
                 elmApi = new ElmApi(ElmApiOptions.Default with
                          {
-                             LoggingOptions = loggingOptions,
+                             LoggerFactory = loggerFactory,
                              ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
                          })
                          .OnValueSelect(

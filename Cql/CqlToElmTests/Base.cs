@@ -104,7 +104,6 @@ namespace Hl7.Cql.CqlToElm.Test
             Library library)
         {
             LibrarySetExpressionBuilder librarySetExpressionBuilder = ServiceProvider.GetLibrarySetExpressionBuilderScoped();
-
             LibrarySet librarySet = new LibrarySet(library.GetVersionedIdentifier()!, library);
             DefinitionDictionary<LambdaExpression> definitions = librarySetExpressionBuilder.ProcessLibrarySet(librarySet);
             return new(librarySet, definitions);

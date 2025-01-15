@@ -8,8 +8,8 @@ using ElmCompilationEntriesMap = System.Collections.Immutable.ImmutableDictionar
     CqlSdkPrototype.CqlVersionedLibraryIdentifier,
     CqlSdkPrototype.Elm.Extensibility.ElmCompilationEntry>;
 using CqlSdkPrototype.Elm.Internal;
-using CqlSdkPrototype.Logging;
 using Hl7.Cql.Runtime.Hosting;
+using CqlSdkPrototype.Logging.Internal;
 
 namespace CqlSdkPrototype.Elm;
 
@@ -62,7 +62,7 @@ public class ElmApi(ElmApiOptions? options = null) :
                 _options = value;
 
                 var services = new ServiceCollection();
-                services.AddLoggingFromOptions(value.LoggingOptions);
+                services.AddExternalLogging(value.LoggerFactory!);
                 services.AddElmApi();
                 ServiceProvider = services.BuildServiceProvider();
                 Logger = ServiceProvider.GetLogger<ElmApi>();

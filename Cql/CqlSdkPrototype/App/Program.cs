@@ -30,26 +30,21 @@ internal class Program
                   .AddFilter((category, _) => category?.Contains(value: nameof(CqlSdkPrototype)) ?? false))
                 .BuildServiceProvider();
 
-        var loggingOptions = new LoggingOptions(
-            LoggerFactory: serviceProvider.GetRequiredService<ILoggerFactory>()
-            // LoggerProviders: [new ColorConsoleLoggerProvider()],
-            // LogFilter: logFilterArgs => logFilterArgs.Category?.Contains(value: nameof(CqlSdkPrototype)) ?? false
-        );
+        var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
+        var logger = serviceProvider.GetLogger<Program>();
 
         var cqlApiOptions = new CqlApiOptions(
-            LoggingOptions: loggingOptions,
+            LoggerFactory: loggerFactory,
             Models: [Models.ElmR1, Models.Fhir401]);
 
         var cqlApi = new CqlApi(cqlApiOptions);
 
-        var logger = serviceProvider.GetLogger<Program>();
-
         //InvokeCqlExample(logger: logger, cqlApi: cqlApi);
 
-        // InvokeCqlFromExamplesFolder(logger: logger, cqlApi: cqlApi);
+        InvokeCqlFromExamplesFolder(logger: logger, cqlApi: cqlApi);
 
-        foreach (var librarySetName in (string[]) ["Authoring", "CMS", "Demo"])
-            VerboseExample(logger: logger, cqlApi: cqlApi, librarySetName: librarySetName);
+        // foreach (var librarySetName in (string[]) ["Authoring", "CMS", "Demo"])
+        //     VerboseExample(logger: logger, cqlApi: cqlApi, librarySetName: librarySetName);
 
         // VerboseExample(logger, cqlApi, "CMS");
     }

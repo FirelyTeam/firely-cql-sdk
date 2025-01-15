@@ -1,27 +1,14 @@
-﻿using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Logging;
-using Hl7.Cql.Abstractions.Exceptions;
+﻿using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
+using Microsoft.Extensions.Logging.Abstractions;
 
 namespace CqlSdkPrototype.Elm;
 
 public record ElmApiOptions(
-    LoggingOptions? LoggingOptions = null,
+    ILoggerFactory? ILoggerFactory = null,
     ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling = default,
     AssemblyCompilerDebugInformationFormat AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.None)
 {
     public static ElmApiOptions Default { get; } = new();
-    public LoggingOptions LoggingOptions { get; init; } = LoggingOptions ?? LoggingOptions.Default;
-}
-
-public static class CqlApiOptionsExtensions
-{
-    public static ElmApiOptions CreateElmApiOptions(this CqlApiOptions cqlApiOptions)
-    {
-        return ElmApiOptions.Default with
-        {
-            LoggingOptions = cqlApiOptions.LoggingOptions,
-            ProcessBatchItemExceptionHandling = cqlApiOptions.ProcessBatchItemExceptionHandling,
-        };
-    }
+    public ILoggerFactory LoggerFactory { get; init; } = ILoggerFactory ?? NullLoggerFactory.Instance;
 }

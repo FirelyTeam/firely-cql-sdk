@@ -2,8 +2,8 @@
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Runtime.Hosting;
-using CqlSdkPrototype.Logging;
 using CqlSdkPrototype.Runtime.Extensibility;
+using CqlSdkPrototype.Logging.Internal;
 
 namespace CqlSdkPrototype.Runtime;
 
@@ -22,12 +22,11 @@ public class RuntimeApi(RuntimeApiOptions? options = null) : IRuntimeApiExtensib
     private readonly record struct State(
         ImmutableHashSet<AssemblyData> Entries,
         RuntimeApiOptions Options,
-        ServiceProvider ServiceProvider,
         ILogger<RuntimeApi> Logger)
     {
         public static State Create(RuntimeApiOptions options)
         {
-            return new State([], null!, null!, null!)
+            return new State([], null!, null!)
             {
                 // Must be set through the property initializer, to ensure the services are created
                 Options = options,
@@ -44,13 +43,8 @@ public class RuntimeApi(RuntimeApiOptions? options = null) : IRuntimeApiExtensib
                 if (ReferenceEquals(_options, value))
                     return;
 
-                ServiceProvider?.Dispose();
-
                 _options = value;
-                var services = new ServiceCollection();
-                services.AddLoggingFromOptions(value.LoggingOptions);
-                ServiceProvider = services.BuildServiceProvider();
-                Logger = ServiceProvider.GetLogger<RuntimeApi>();
+                Logger = value.LoggerFactory.CreateLogger<RuntimeApi>();
             }
         }
     }
