@@ -39,17 +39,13 @@ public abstract class Program
 
     private static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder()
-            //.UseServiceProviderFactory()
             .ConfigureAppConfiguration((context, config) => config.AddPackagerCliCommandLineSwitches(args))
             .ConfigureLogging((context, logging) => logging.AddPackagerCLiLogging(context.Configuration))
             .ConfigureServices((context, services) =>
             {
                 services
                     .AddPackagerCliOptions()
-                    .AddPackagerCliServices()
-                    //.AddCqlApi()
-                    //.AddElmApi()
-                    ;
+                    .AddPackagerCliServices();
             })
             .UseConsoleLifetime()
             ;
