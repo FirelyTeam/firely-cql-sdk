@@ -218,7 +218,7 @@ file static class MeasurePackager
                         group = new Measure.GroupComponent
                         {
                             ElementId = rate,
-                            Code = new CodeableConcept(rate, MeasureGroupCodeSystem),
+                            //Code = new CodeableConcept(rate, MeasureGroupCodeSystem),
                             Description = $"Rate {tuple.Group}",
                         };
                         measure.Group!.Add(group);
