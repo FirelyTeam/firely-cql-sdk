@@ -6,9 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using CqlSdkPrototype.App;
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Logging;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging;
@@ -19,9 +19,8 @@ using static Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling;
 
 namespace Hl7.Cql.Packager;
 
-internal class PackagerCli
-(
-    IEnumerable<ILoggerProvider> loggerProviders,
+internal class PackagerCli(
+    ILoggerFactory loggerFactory,
     ILogger<PackagerCli> logger,
     OptionsConsoleDumper optionsConsoleDumper,
     IOptions<PackagerCliOptions> packagerCliOptions,
@@ -35,7 +34,7 @@ internal class PackagerCli
             optionsConsoleDumper.DumpToConsole();
             var opt = packagerCliOptions.Value;
 
-            var loggingOptions = LoggingOptions.Default with { LoggerProviders = [.. loggerProviders] };
+            var loggingOptions = LoggingOptions.Default with { LoggerFactory = loggerFactory };
 
             ElmApi elmApi;
             if (translateCql)

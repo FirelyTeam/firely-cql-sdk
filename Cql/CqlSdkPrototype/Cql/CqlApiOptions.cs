@@ -1,4 +1,4 @@
-﻿using CqlSdkPrototype.App;
+﻿using CqlSdkPrototype.Logging;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Model;
 

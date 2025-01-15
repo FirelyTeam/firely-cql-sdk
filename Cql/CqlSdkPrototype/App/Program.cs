@@ -22,9 +22,19 @@ internal class Program
         // - Move any options such as the AssembliesDebugMode and Models to the Cql- or ElmApi instead of via the hosted IOptions<T>
         // - Should we keep the dependency on Microsoft's ILogger or should we create our own logging abstraction?
 
+        using var serviceProvider =
+            new ServiceCollection()
+                .AddLogging(lb => lb
+                  .ClearProviders()
+                  .AddProvider(new ColorConsoleLoggerProvider())
+                  .AddFilter((category, _) => category?.Contains(value: nameof(CqlSdkPrototype)) ?? false))
+                .BuildServiceProvider();
+
         var loggingOptions = new LoggingOptions(
-            LoggerProviders: [new ColorConsoleLoggerProvider()],
-            LogFilter: logFilterArgs => logFilterArgs.Category?.Contains(value: nameof(CqlSdkPrototype)) ?? false);
+            LoggerFactory: serviceProvider.GetRequiredService<ILoggerFactory>()
+            // LoggerProviders: [new ColorConsoleLoggerProvider()],
+            // LogFilter: logFilterArgs => logFilterArgs.Category?.Contains(value: nameof(CqlSdkPrototype)) ?? false
+        );
 
         var cqlApiOptions = new CqlApiOptions(
             LoggingOptions: loggingOptions,
@@ -32,9 +42,6 @@ internal class Program
 
         var cqlApi = new CqlApi(cqlApiOptions);
 
-        using var serviceProvider = new ServiceCollection()
-                                    .AddLoggingFromOptions(loggingOptions)
-                                    .BuildServiceProvider();
         var logger = serviceProvider.GetLogger<Program>();
 
         //InvokeCqlExample(logger: logger, cqlApi: cqlApi);
@@ -224,22 +231,6 @@ internal class Program
     //         var patient = patientDeclaration.Invoke(cqlContext);
     //     }
     // }
-}
-
-public delegate bool LogFilter(LogFilterArgs args);
-
-public readonly record struct LogFilterArgs
-(
-    string? LoggerProviderName,
-    string? Category,
-    LogLevel LogLevel);
-
-public record LoggingOptions(
-    IReadOnlyCollection<ILoggerProvider>? LoggerProviders = null,
-    LogFilter? LogFilter = null)
-{
-    public static readonly LoggingOptions Default = new();
-    public IReadOnlyCollection<ILoggerProvider> LoggerProviders { get; init; } = LoggerProviders ?? [];
 }
 
 file static class X

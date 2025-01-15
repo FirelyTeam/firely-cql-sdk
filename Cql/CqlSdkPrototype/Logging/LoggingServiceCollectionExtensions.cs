@@ -1,39 +1,17 @@
-﻿using CqlSdkPrototype.App;
+﻿using Hl7.Fhir.Model.CdsHooks;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace CqlSdkPrototype.Logging;
 
 public static class LoggingServiceCollectionExtensions
 {
-    public static ILoggingBuilder ApplyLoggingOptions(
-        this ILoggingBuilder builder,
-        LoggingOptions options,
-        bool dontClearExistingLoggerProviders = false)
-    {
-        if (!dontClearExistingLoggerProviders)
-            builder.ClearProviders();
-
-        if (options.LoggerProviders is { } providers)
-            foreach (var provider in providers)
-                builder.AddProvider(provider);
-
-        if (options.LogFilter is { } filter)
-            builder = builder.AddFilter((provider, category, level) => filter(new (provider, category, level)));
-
-        return builder;
-    }
-
     public static IServiceCollection AddLoggingFromOptions(
         this IServiceCollection services,
-        LoggingOptions options,
-        Action<ILoggingBuilder>? configure = null,
-        bool dontClearExistingLoggerProviders = false)
+        LoggingOptions options)
     {
-         services.AddLogging(
-            lb =>
-            {
-                lb.ApplyLoggingOptions(options, dontClearExistingLoggerProviders);
-                configure?.Invoke(lb);
-            });
+        services.AddOptions();
+        services.TryAdd(ServiceDescriptor.Singleton<ILoggerFactory>(options.LoggerFactory!));
+        services.TryAdd(ServiceDescriptor.Singleton(typeof(ILogger<>), typeof(Logger<>)));
         return services;
     }
 }

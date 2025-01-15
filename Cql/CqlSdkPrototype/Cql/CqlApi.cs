@@ -60,7 +60,7 @@ public class CqlApi(CqlApiOptions? options = null) :
                 _options = value;
                 var services = new ServiceCollection();
                 services.AddLoggingFromOptions(value.LoggingOptions);
-                services.AddElmApi();
+                services.AddCqlApi(o => o.Models = value.Models);
                 ServiceProvider = services.BuildServiceProvider();
                 Logger = ServiceProvider.GetLogger<CqlApi>();
                 CqlToElmConverter = ServiceProvider.GetCqlToElmConverter();
