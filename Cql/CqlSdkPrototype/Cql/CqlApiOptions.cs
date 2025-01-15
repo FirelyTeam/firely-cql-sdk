@@ -1,12 +1,11 @@
 ﻿using Hl7.Cql.Abstractions.Exceptions;
-using Hl7.Cql.Model;
 
 namespace CqlSdkPrototype.Cql;
 
 public record CqlApiOptions(
     ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling = default,
-    ModelInfo[]? Models = null)
+    ImmutableHashSet<CqlModel>? Models = null)
 {
     public static CqlApiOptions Default { get; } = new();
-    public ModelInfo[] Models { get; init; } = Models ?? [];
+    public ImmutableHashSet<CqlModel> Models { get; init; } = Models ?? [];
 }
