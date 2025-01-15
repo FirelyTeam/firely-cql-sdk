@@ -6,7 +6,6 @@ namespace CqlSdkPrototype.Elm.Extensibility;
 public interface IElmApiExtensible<TElmApi>
     where TElmApi : IElmApiExtensible<TElmApi>
 {
-    static abstract TElmApi Create(ElmApiOptions? options = null);
     ElmApiOptions Options { get; }
     IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmCompilationEntry> Entries { get; }
     TElmApi WithOptions(Func<ElmApiOptions, ElmApiOptions> replaceOptions);

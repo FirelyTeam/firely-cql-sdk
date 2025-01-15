@@ -7,39 +7,45 @@ using CqlSdkPrototype.Runtime.Extensibility;
 
 namespace CqlSdkPrototype.Runtime;
 
-public class RuntimeApi(RuntimeApiOptions options) : IRuntimeApiExtensible<RuntimeApi>
+public class RuntimeApi(RuntimeApiOptions? options = null) : IRuntimeApiExtensible<RuntimeApi>
 {
     internal IRuntimeApiExtensible<RuntimeApi> AsExtensible() => this;
     T IRuntimeApiExtensible<RuntimeApi>.UseLogger<T>(Func<RuntimeApi, ILogger<RuntimeApi>, T> action) => action(this, _state.Logger);
-    public static RuntimeApi Create(RuntimeApiOptions? options = null) => new(options ?? RuntimeApiOptions.Default);
 
     #region State
 
-    private State _state = CreateState(options);
+    private State _state = State.Create(options ?? RuntimeApiOptions.Default);
 
     RuntimeApiOptions IRuntimeApiExtensible<RuntimeApi>.Options => _state.Options;
     IReadOnlySet<AssemblyData> IRuntimeApiExtensible<RuntimeApi>.Entries => _state.Entries;
 
     private readonly record struct State(
-        RuntimeApiOptions Options,
         ImmutableHashSet<AssemblyData> Entries,
-        IServiceProvider ServiceProvider,
+        RuntimeApiOptions Options,
+        ServiceProvider ServiceProvider,
         ILogger<RuntimeApi> Logger)
     {
-        private readonly RuntimeApiOptions _options = Options;
-
-        public State(
-            RuntimeApiOptions Options,
-            ImmutableHashSet<AssemblyData>? Entries = null) : this(Options, Entries ?? [], null!, null!)
+        public static State Create(RuntimeApiOptions options)
         {
-            this.Options = Options;
+            return new State([], null!, null!, null!)
+            {
+                // Must be set through the property initializer, to ensure the services are created
+                Options = options,
+            };
         }
+
+        private readonly RuntimeApiOptions _options = Options;
 
         public RuntimeApiOptions Options
         {
             get => _options;
             init
             {
+                if (ReferenceEquals(_options, value))
+                    return;
+
+                ServiceProvider?.Dispose();
+
                 _options = value;
                 var services = new ServiceCollection();
                 services.AddLoggingFromOptions(value.LoggingOptions);
@@ -52,13 +58,6 @@ public class RuntimeApi(RuntimeApiOptions options) : IRuntimeApiExtensible<Runti
     #endregion
 
     #region Construction
-
-    private static State CreateState(RuntimeApiOptions options)
-    {
-        ImmutableHashSet<AssemblyData> assemblies = [];
-        var state = new State(options, assemblies);
-        return state;
-    }
 
     private RuntimeApi WithAssemblyData(
         ImmutableHashSet<AssemblyData>? assemblyData = null)

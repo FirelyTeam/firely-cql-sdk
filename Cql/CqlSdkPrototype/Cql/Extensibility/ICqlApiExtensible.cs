@@ -3,7 +3,6 @@
 public interface ICqlApiExtensible<TCqlApi>
     where TCqlApi : ICqlApiExtensible<TCqlApi>
 {
-    static abstract TCqlApi Create(CqlApiOptions? options = null);
     CqlApiOptions Options { get; }
     IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlTranslationEntry> Entries { get; }
     TCqlApi WithOptions(Func<CqlApiOptions, CqlApiOptions> replaceOptions);

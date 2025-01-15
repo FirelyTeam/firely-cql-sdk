@@ -155,7 +155,7 @@ namespace Test
             var elmApiOptions = ElmApiOptions.Default;
             if (Debugger.IsAttached)
                 elmApiOptions = elmApiOptions with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
-            var elmApi = ElmApi.Create(elmApiOptions);
+            var elmApi = new ElmApi(elmApiOptions);
 
             return elmApi
                    .AddElmLibraries(librarySet)

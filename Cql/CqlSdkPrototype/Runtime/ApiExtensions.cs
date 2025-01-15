@@ -2,7 +2,6 @@
 using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensibility;
-using CqlSdkPrototype.Logging;
 using Hl7.Cql.CodeGeneration.NET;
 
 namespace CqlSdkPrototype.Runtime;
@@ -31,8 +30,7 @@ internal static class ApiExtensions
             let assemblyData = new AssemblyData(assembly, debugSymbols)
             select assemblyData;
         var runtimeApi =
-            RuntimeApi
-                .Create(elmApi.Options.CreateRuntimeApiOptions())
+            new RuntimeApi(elmApi.Options.CreateRuntimeApiOptions())
                 .AddAssemblies(assemblyDatas);
         return runtimeApi;
     }

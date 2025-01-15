@@ -145,7 +145,7 @@ namespace Hl7.Cql.CqlToElm.Test
                                     return compile.Single().assemblyDataWithSourceCode.AssemblyBytes;
                                 });
 
-            using var scope = RuntimeApi.Create(RuntimeApiOptions.Default)
+            using var scope = new RuntimeApi()
                                         .AddAssemblies([AssemblyData.Default with { AssemblyBytes = assemblyBytes }])
                                         .CreateRuntimeScope();
             var result = scope.GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);
@@ -157,7 +157,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var elmApiOptions = ElmApiOptions.Default;
             if (Debugger.IsAttached)
                 elmApiOptions = elmApiOptions with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
-            var elmApi = ElmApi.Create(elmApiOptions);
+            var elmApi = new ElmApi(elmApiOptions);
             return elmApi;
         }
 

@@ -94,7 +94,7 @@ internal static class LibraryExtensions
             .Select(assemblyBytes => AssemblyData.Default with { AssemblyBytes = assemblyBytes})
             .ToArray();
 
-        return RuntimeApi.Create(RuntimeApiOptions.Default)
+        return new RuntimeApi()
                          .AddAssemblies(assemblyDatas)
                          .CreateRuntimeScope();
     }

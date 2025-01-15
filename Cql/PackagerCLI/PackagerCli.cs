@@ -40,8 +40,7 @@ internal class PackagerCli
             ElmApi elmApi;
             if (translateCql)
             {
-                elmApi = CqlApi
-                         .Create(CqlApiOptions.Default with
+                elmApi = new CqlApi(CqlApiOptions.Default with
                          {
                              LoggingOptions = loggingOptions,
                              ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
@@ -63,8 +62,7 @@ internal class PackagerCli
             }
             else
             {
-                elmApi = ElmApi
-                         .Create(ElmApiOptions.Default with
+                elmApi = new ElmApi(ElmApiOptions.Default with
                          {
                              LoggingOptions = loggingOptions,
                              ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
