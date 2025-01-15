@@ -17,11 +17,6 @@ internal class Program
 {
     static void Main(string[] args)
     {
-        // CONSIDERATIONS:
-        // - Encapsulate the creation of the service provider
-        // - Move any options such as the AssembliesDebugMode and Models to the Cql- or ElmApi instead of via the hosted IOptions<T>
-        // - Should we keep the dependency on Microsoft's ILogger or should we create our own logging abstraction?
-
         using var serviceProvider =
             new ServiceCollection()
                 .AddLogging(lb => lb
@@ -41,10 +36,10 @@ internal class Program
 
         //InvokeCqlExample(logger: logger, cqlApi: cqlApi);
 
-        InvokeCqlFromExamplesFolder(logger: logger, cqlApi: cqlApi);
+        //InvokeCqlFromExamplesFolder(logger: logger, cqlApi: cqlApi);
 
-        // foreach (var librarySetName in (string[]) ["Authoring", "CMS", "Demo"])
-        //     VerboseExample(logger: logger, cqlApi: cqlApi, librarySetName: librarySetName);
+        foreach (var librarySetName in (string[]) ["Authoring", "CMS", "Demo", "Examples"])
+            VerboseExample(logger: logger, cqlApi: cqlApi, librarySetName: librarySetName);
 
         // VerboseExample(logger, cqlApi, "CMS");
     }

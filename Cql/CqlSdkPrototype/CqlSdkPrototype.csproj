@@ -10,6 +10,12 @@
 		<NoWarn>RS0037,RS0016,CS1591</NoWarn>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="generated\**" />
+    <EmbeddedResource Remove="generated\**" />
+    <None Remove="generated\**" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
 		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
@@ -28,9 +34,5 @@
 	<ItemGroup>
 	  <Folder Include="examples\" />
 	</ItemGroup>
-
-	<!-- <ItemGroup> -->
-	<!--   <None Include="generated\" /> -->
-	<!-- </ItemGroup> -->
 
 </Project>
