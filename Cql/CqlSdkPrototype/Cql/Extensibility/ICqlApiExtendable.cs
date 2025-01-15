@@ -1,4 +1,6 @@
-﻿namespace CqlSdkPrototype.Cql.Extensibility;
+﻿using CqlSdkPrototype.Infrastructure;
+
+namespace CqlSdkPrototype.Cql.Extensibility;
 
 public interface ICqlApiExtendable<TCqlApi>
     where TCqlApi : ICqlApiExtendable<TCqlApi>

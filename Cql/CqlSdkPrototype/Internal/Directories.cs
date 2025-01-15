@@ -1,4 +1,4 @@
-﻿namespace CqlSdkPrototype.App;
+﻿namespace CqlSdkPrototype.Internal;
 
 internal class Directories(string librarySetName)
 {

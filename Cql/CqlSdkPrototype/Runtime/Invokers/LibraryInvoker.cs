@@ -1,4 +1,5 @@
 ﻿using System.CodeDom.Compiler;
+using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Runtime.Extensibility;
 using Hl7.Cql.Abstractions;
 

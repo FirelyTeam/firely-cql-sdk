@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 using CoreTests.Tuples;
-using CqlSdkPrototype;
+using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Runtime;
 using CqlSdkPrototype.Runtime.Extensions;
 using Hl7.Cql.Abstractions.Infrastructure;

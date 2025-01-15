@@ -1,4 +1,5 @@
 ﻿using CqlSdkPrototype.Elm.Extensibility;
+using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
@@ -6,7 +7,7 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging.Abstractions;
 using ElmCompilationEntriesMap = System.Collections.Immutable.ImmutableDictionary<
-    CqlSdkPrototype.CqlVersionedLibraryIdentifier,
+    CqlSdkPrototype.Infrastructure.CqlVersionedLibraryIdentifier,
     CqlSdkPrototype.Elm.Extensibility.ElmApiStateEntry>;
 
 namespace CqlSdkPrototype.Elm;

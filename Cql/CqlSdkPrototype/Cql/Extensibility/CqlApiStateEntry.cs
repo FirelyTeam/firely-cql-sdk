@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Elm;
+﻿using CqlSdkPrototype.Infrastructure;
+using Hl7.Cql.Elm;
 
 namespace CqlSdkPrototype.Cql.Extensibility;
 

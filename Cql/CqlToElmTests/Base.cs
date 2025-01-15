@@ -14,12 +14,12 @@ using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using CqlSdkPrototype;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Runtime;
 using Expression = Hl7.Cql.Elm.Expression;
 using CqlSdkPrototype.Runtime.Extensions;
+using CqlSdkPrototype.Infrastructure;
 
 namespace Hl7.Cql.CqlToElm.Test
 {

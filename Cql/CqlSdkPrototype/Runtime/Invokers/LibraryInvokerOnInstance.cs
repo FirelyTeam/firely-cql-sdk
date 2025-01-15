@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Abstractions;
+﻿using CqlSdkPrototype.Infrastructure;
+using Hl7.Cql.Abstractions;
 
 namespace CqlSdkPrototype.Runtime.Invokers;
 

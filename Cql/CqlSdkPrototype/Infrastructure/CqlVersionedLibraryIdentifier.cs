@@ -1,6 +1,6 @@
 ﻿using Hl7.Cql.Elm;
 
-namespace CqlSdkPrototype;
+namespace CqlSdkPrototype.Infrastructure;
 
 public readonly record struct CqlVersionedLibraryIdentifier : IParsable<CqlVersionedLibraryIdentifier>
 {

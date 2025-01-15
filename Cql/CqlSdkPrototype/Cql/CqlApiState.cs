@@ -1,5 +1,6 @@
 ﻿using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Cql.Internal;
+using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Logging.Internal;
 using Hl7.Cql.CqlToElm;

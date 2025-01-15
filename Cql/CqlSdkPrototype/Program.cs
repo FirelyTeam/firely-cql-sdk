@@ -3,16 +3,16 @@ using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Elm.Extensions;
+using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Logging;
 using CqlSdkPrototype.Runtime.Extensions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Model;
 using Hl7.Cql.Runtime.Hosting;
 using static Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling;
 
-namespace CqlSdkPrototype.App;
+namespace CqlSdkPrototype;
 
 internal class Program
 {
@@ -34,9 +34,9 @@ internal class Program
 
         var cqlApi = new CqlApi(loggerFactory, cqlApiOptions);
 
-        //InvokeCqlExample(logger: logger, cqlApi: cqlApi);
+        InvokeCqlExample(logger: logger, cqlApi: cqlApi);
 
-        //InvokeCqlFromExamplesFolder(logger: logger, cqlApi: cqlApi);
+        InvokeCqlFromExamplesFolder(logger: logger, cqlApi: cqlApi);
 
         foreach (var librarySetName in (string[]) ["Authoring", "CMS", "Demo", "Examples"])
             VerboseExample(logger: logger, cqlApi: cqlApi, librarySetName: librarySetName);

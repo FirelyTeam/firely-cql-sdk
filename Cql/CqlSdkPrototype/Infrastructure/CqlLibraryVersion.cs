@@ -1,4 +1,4 @@
-﻿namespace CqlSdkPrototype;
+﻿namespace CqlSdkPrototype.Infrastructure;
 
 #pragma warning disable CS1591
 public readonly record struct CqlLibraryVersion :

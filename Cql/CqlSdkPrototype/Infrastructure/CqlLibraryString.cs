@@ -1,4 +1,4 @@
-﻿namespace CqlSdkPrototype;
+﻿namespace CqlSdkPrototype.Infrastructure;
 
 public readonly record struct CqlLibraryString
 {

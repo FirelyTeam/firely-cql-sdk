@@ -1,4 +1,5 @@
 ﻿using System.Text;
+using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 using static System.FormattableString;

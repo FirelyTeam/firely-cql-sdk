@@ -1,5 +1,6 @@
 ﻿using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Elm.Internal;
+using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Logging.Internal;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Runtime.Hosting;

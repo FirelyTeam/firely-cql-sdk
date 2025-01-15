@@ -6,12 +6,12 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime.Serialization;
 using System.IO;
 using System.Linq;
-using CqlSdkPrototype;
 using CqlSdkPrototype.Runtime;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions.Infrastructure;
 using CqlSdkPrototype.Runtime.Extensions;
+using CqlSdkPrototype.Infrastructure;
 
 namespace CoreTests.Tuples;
 
