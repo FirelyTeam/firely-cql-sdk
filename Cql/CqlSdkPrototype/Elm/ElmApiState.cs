@@ -7,7 +7,7 @@ using Hl7.Cql.Runtime.Hosting;
 namespace CqlSdkPrototype.Elm;
 
 internal readonly record struct ElmApiState(
-    ImmutableDictionary<CqlVersionedLibraryIdentifier, ElmCompilationEntry> Entries,
+    ImmutableDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry> Entries,
     ElmApiOptions Options,
     ServiceProvider ServiceProvider,
     ILogger<ElmApi> Logger,
@@ -16,7 +16,7 @@ internal readonly record struct ElmApiState(
 {
     public static ElmApiState Create(ElmApiOptions options)
     {
-        var entries = ImmutableDictionary<CqlVersionedLibraryIdentifier, ElmCompilationEntry>.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+        var entries = ImmutableDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry>.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
         return new ElmApiState(entries, null!, null!, null!, null!, null!)
         {
             // Must be set through the property initializer, to ensure the services are created

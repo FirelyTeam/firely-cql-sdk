@@ -7,7 +7,7 @@ namespace CqlSdkPrototype.Cql;
 
 using CqlTranslationEntriesMap = System.Collections.Immutable.ImmutableDictionary<
     CqlVersionedLibraryIdentifier,
-    CqlTranslationEntry>;
+    CqlApiStateEntry>;
 
 public class CqlApi(CqlApiOptions? options = null) :
     ICqlApiExtensible<CqlApi>
@@ -19,7 +19,7 @@ public class CqlApi(CqlApiOptions? options = null) :
     private CqlApiState _state = CqlApiState.Create(options ?? CqlApiOptions.Default);
 
     CqlApiOptions ICqlApiExtensible<CqlApi>.Options => _state.Options;
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlTranslationEntry> ICqlApiExtensible<CqlApi>.Entries => _state.Entries;
+    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> ICqlApiExtensible<CqlApi>.Entries => _state.Entries;
 
     private CqlApi WithEntries(
         CqlTranslationEntriesMap entries)
@@ -58,7 +58,7 @@ public class CqlApi(CqlApiOptions? options = null) :
                 continue;
             }
 
-            var libraryCompilation = new CqlTranslationEntry(cqlLibrary);
+            var libraryCompilation = new CqlApiStateEntry(cqlLibrary);
             libraryCompilationsBuilder.Add(versionedIdentifier, libraryCompilation);
             logger.LogInformation("Adding cql library to translation: {versionedIdentifier}", versionedIdentifier);
             hasChanged = true;
@@ -80,7 +80,7 @@ public class CqlApi(CqlApiOptions? options = null) :
         var logger = _state.Logger;
         bool atFirst = true;
 
-        IEnumerable<(CqlVersionedLibraryIdentifier versionedIdentifier, CqlTranslationEntry cqlTranslationEntry)> GetLibrariesForProcessing()
+        IEnumerable<(CqlVersionedLibraryIdentifier versionedIdentifier, CqlApiStateEntry cqlTranslationEntry)> GetLibrariesForProcessing()
         {
             foreach (var (versionedIdentifier, cqlTranslationEntry) in
                      _state.Entries.Where(kv => kv.Value.ElmLibrary is null))
@@ -116,7 +116,7 @@ public class CqlApi(CqlApiOptions? options = null) :
                    ? WithEntries(entries: entriesBuilder.ToImmutable())
                    : this;
 
-        void ProcessLibrary(CqlVersionedLibraryIdentifier versionedIdentifier, CqlTranslationEntry cqlTranslationEntry)
+        void ProcessLibrary(CqlVersionedLibraryIdentifier versionedIdentifier, CqlApiStateEntry cqlTranslationEntry)
         {
             var cql = cqlTranslationEntry.CqlLibraryString.Cql;
             var library = cqlToElmConverter.ConvertLibrary(new StringReader(cql));

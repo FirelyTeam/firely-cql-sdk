@@ -7,7 +7,7 @@ using Hl7.Cql.Runtime.Hosting;
 namespace CqlSdkPrototype.Cql;
 
 internal readonly record struct CqlApiState(
-    ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlTranslationEntry> Entries,
+    ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> Entries,
     CqlApiOptions Options,
     ServiceProvider ServiceProvider,
     ILogger<CqlApi> Logger,
@@ -15,7 +15,7 @@ internal readonly record struct CqlApiState(
 {
     public static CqlApiState Create(CqlApiOptions options)
     {
-        var entries = ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlTranslationEntry>.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+        var entries = ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry>.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
         return new CqlApiState(entries, null!, null!, null!, null!)
         {
             // Must be set through the property initializer, to ensure the services are created

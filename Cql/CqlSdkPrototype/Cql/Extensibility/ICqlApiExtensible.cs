@@ -4,7 +4,7 @@ public interface ICqlApiExtensible<TCqlApi>
     where TCqlApi : ICqlApiExtensible<TCqlApi>
 {
     CqlApiOptions Options { get; }
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlTranslationEntry> Entries { get; }
+    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> Entries { get; }
     TCqlApi WithOptions(Func<CqlApiOptions, CqlApiOptions> replaceOptions);
     TCqlApi AddCqlLibraries(IEnumerable<CqlLibraryString> libraries);
     TCqlApi Translate();

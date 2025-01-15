@@ -1,9 +1,7 @@
 ﻿using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Runtime.Hosting;
 using CqlSdkPrototype.Runtime.Extensibility;
-using CqlSdkPrototype.Logging.Internal;
 
 namespace CqlSdkPrototype.Runtime;
 
@@ -16,14 +14,14 @@ public class RuntimeApi(RuntimeApiOptions? options = null) : IRuntimeApiExtensib
     private RuntimeApiState _state = RuntimeApiState.Create(options ?? RuntimeApiOptions.Default);
 
     RuntimeApiOptions IRuntimeApiExtensible<RuntimeApi>.Options => _state.Options;
-    IReadOnlySet<AssemblyData> IRuntimeApiExtensible<RuntimeApi>.Entries => _state.Entries;
+    IReadOnlySet<RuntimeApiStateEntry> IRuntimeApiExtensible<RuntimeApi>.Entries => _state.Entries;
 
     #endregion
 
     #region Construction
 
-    private RuntimeApi WithAssemblyData(
-        ImmutableHashSet<AssemblyData>? assemblyData = null)
+    private RuntimeApi WithEntries(
+        ImmutableHashSet<RuntimeApiStateEntry>? assemblyData = null)
     {
         _state = _state with
         {
@@ -49,10 +47,9 @@ public class RuntimeApi(RuntimeApiOptions? options = null) : IRuntimeApiExtensib
     {
         var assembliesBuilder = _state.Entries.ToBuilder();
         var oldCount = assembliesBuilder.Count;
-        assembliesBuilder.AddRange(assemblyData);
-        return oldCount == assembliesBuilder.Count
-                   ? this
-                   : WithAssemblyData(assemblyData: assembliesBuilder.ToImmutable());
+        var addEntries = assemblyData.Select(ad => new RuntimeApiStateEntry(ad.AssemblyBytes ?? throw new InvalidOperationException("AssemblyBytes must not be null"), ad.DebugSymbolsBytes));
+        assembliesBuilder.AddRange(addEntries);
+        return oldCount == assembliesBuilder.Count ? this : WithEntries(assemblyData: assembliesBuilder.ToImmutable());
     }
 
     #endregion

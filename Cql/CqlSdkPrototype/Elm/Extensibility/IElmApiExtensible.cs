@@ -6,7 +6,7 @@ public interface IElmApiExtensible<TElmApi>
     where TElmApi : IElmApiExtensible<TElmApi>
 {
     ElmApiOptions Options { get; }
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmCompilationEntry> Entries { get; }
+    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry> Entries { get; }
     TElmApi WithOptions(Func<ElmApiOptions, ElmApiOptions> replaceOptions);
     TElmApi AddElmLibraries(IEnumerable<Library> libraries);
     TElmApi Compile();

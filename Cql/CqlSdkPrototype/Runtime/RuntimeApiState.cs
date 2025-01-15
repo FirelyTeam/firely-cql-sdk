@@ -1,9 +1,9 @@
-﻿using Hl7.Cql.CodeGeneration.NET;
+﻿using CqlSdkPrototype.Runtime.Extensibility;
 
 namespace CqlSdkPrototype.Runtime;
 
 internal readonly record struct RuntimeApiState(
-    ImmutableHashSet<AssemblyData> Entries,
+    ImmutableHashSet<RuntimeApiStateEntry> Entries,
     RuntimeApiOptions Options,
     ILogger<RuntimeApi> Logger)
 {

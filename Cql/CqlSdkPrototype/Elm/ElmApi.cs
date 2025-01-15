@@ -6,7 +6,7 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using ElmCompilationEntriesMap = System.Collections.Immutable.ImmutableDictionary<
     CqlSdkPrototype.CqlVersionedLibraryIdentifier,
-    CqlSdkPrototype.Elm.Extensibility.ElmCompilationEntry>;
+    CqlSdkPrototype.Elm.Extensibility.ElmApiStateEntry>;
 
 namespace CqlSdkPrototype.Elm;
 
@@ -24,7 +24,7 @@ public class ElmApi(ElmApiOptions? options = null) :
     private ElmApiState _state = ElmApiState.Create(options ?? ElmApiOptions.Default);
 
     ElmApiOptions IElmApiExtensible<ElmApi>.Options => _state.Options;
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmCompilationEntry> IElmApiExtensible<ElmApi>.Entries => _state.Entries;
+    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry> IElmApiExtensible<ElmApi>.Entries => _state.Entries;
 
     private ElmApi WithEntries(
         ElmCompilationEntriesMap entries)
@@ -60,7 +60,7 @@ public class ElmApi(ElmApiOptions? options = null) :
                 continue;
             }
 
-            var libraryCompilation = new ElmCompilationEntry(library);
+            var libraryCompilation = new ElmApiStateEntry(library);
             entries.Add(versionedIdentifier, libraryCompilation);
             _state.Logger.LogInformation("Adding library to compiler: {versionedIdentifier}", versionedIdentifier);
             hasChanged = true;

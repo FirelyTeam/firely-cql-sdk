@@ -6,7 +6,7 @@ internal interface IRuntimeApiExtensible<TRuntimeApi>
     where TRuntimeApi : IRuntimeApiExtensible<TRuntimeApi>
 {
     RuntimeApiOptions Options { get; }
-    IReadOnlySet<AssemblyData> Entries { get; }
+    IReadOnlySet<RuntimeApiStateEntry> Entries { get; }
     TRuntimeApi WithOptions(Func<RuntimeApiOptions, RuntimeApiOptions> replaceOptions);
     TRuntimeApi AddAssemblies(IEnumerable<AssemblyData> assemblies);
 }
