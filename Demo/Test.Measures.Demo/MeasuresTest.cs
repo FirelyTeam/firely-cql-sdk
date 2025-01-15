@@ -146,7 +146,8 @@ namespace Test
             DirectoryInfo elmDirectory,
             string lib,
             string version,
-            int cacheSize)
+            int cacheSize,
+            Func<RuntimeApiOptions, RuntimeApiOptions>? configureOptions = null)
         {
             Trace.Assert(cacheSize == 0, "TODO: CacheSize must still be moved to configuration"); // TODO: CacheSize must still be moved to configuration
             LibrarySet librarySet = new();
@@ -158,8 +159,8 @@ namespace Test
             var elmApi = new ElmApi(elmApiOptions);
 
             return elmApi
-                   .AddElmLibraries(librarySet)
-                  .CreateRuntimeScope();
+                  .AddElmLibraries(librarySet)
+                  .CreateRuntimeScope(configureOptions);
         }
     }
 }

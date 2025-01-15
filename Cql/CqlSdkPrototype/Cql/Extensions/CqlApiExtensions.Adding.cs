@@ -1,8 +1,7 @@
 ﻿using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Internal;
-using Microsoft.Extensions.Logging;
 
-namespace CqlSdkPrototype.Cql;
+namespace CqlSdkPrototype.Cql.Extensions;
 
 public static partial class CqlApiExtensions
 {

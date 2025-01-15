@@ -1,7 +1,6 @@
 ﻿using CqlSdkPrototype.Elm.Extensibility;
-using Microsoft.Extensions.Logging;
 
-namespace CqlSdkPrototype.Elm;
+namespace CqlSdkPrototype.Elm.Extensions;
 
 public static partial class ElmApiExtensions
 {

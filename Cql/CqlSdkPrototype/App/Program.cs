@@ -1,7 +1,8 @@
 ﻿using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensibility;
-using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm.Extensibility;
+using CqlSdkPrototype.Elm.Extensions;
 using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Logging;
 using CqlSdkPrototype.Runtime;

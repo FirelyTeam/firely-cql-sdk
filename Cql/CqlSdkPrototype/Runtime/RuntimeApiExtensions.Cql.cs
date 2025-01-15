@@ -1,0 +1,37 @@
+﻿using CqlSdkPrototype.Cql;
+using CqlSdkPrototype.Cql.Extensibility;
+using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Elm.Extensions;
+
+namespace CqlSdkPrototype.Runtime;
+
+public static partial class RuntimeApiExtensions
+{
+    public static ElmApi CreateElmApi<TCqlApi>(
+        this TCqlApi cqlApi,
+        Func<ElmApiOptions, ElmApiOptions>? configureOptions = null)
+        where TCqlApi : ICqlApiExtensible<TCqlApi>
+    {
+        var elmApiOptions = ElmApiOptions.Default with
+        {
+            LoggerFactory = cqlApi.Options.LoggerFactory,
+            ProcessBatchItemExceptionHandling = cqlApi.Options.ProcessBatchItemExceptionHandling,
+        };
+        if (configureOptions is not null) elmApiOptions = configureOptions(elmApiOptions);
+        var elmApi = new ElmApi(elmApiOptions).AddElmFromCqlApi(cqlApi);
+        return elmApi;
+    }
+
+#pragma warning disable RS0026
+    public static RuntimeScope CreateRuntimeScope(
+#pragma warning restore RS0026
+        this CqlApi cqlApi,
+        Func<ElmApiOptions, ElmApiOptions>? configureElmOptions = null,
+        Func<RuntimeApiOptions, RuntimeApiOptions>? configureRuntimeOptions = null)
+    {
+        return cqlApi
+               .Translate()
+               .CreateElmApi(configureElmOptions)
+               .CreateRuntimeScope(configureRuntimeOptions);
+    }
+}

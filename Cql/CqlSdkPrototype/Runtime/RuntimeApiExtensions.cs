@@ -1,23 +1,6 @@
-﻿using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Elm;
+﻿namespace CqlSdkPrototype.Runtime;
 
-namespace CqlSdkPrototype.Runtime;
-
-public static class RuntimeApiExtensions
+public static partial class RuntimeApiExtensions
 {
-    public static RuntimeApiOptions CreateRuntimeApiOptions(this CqlApiOptions cqlApiOptions)
-    {
-        return RuntimeApiOptions.Default with
-        {
-            LoggerFactory = cqlApiOptions.LoggerFactory,
-        };
-    }
-
-    public static RuntimeApiOptions CreateRuntimeApiOptions(this ElmApiOptions cqlApiOptions)
-    {
-        return RuntimeApiOptions.Default with
-        {
-            LoggerFactory = cqlApiOptions.LoggerFactory,
-        };
-    }
+    // This file is intentionally left blank - since it's the parent file for nested RuntimeApiExtensions.* files
 }

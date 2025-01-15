@@ -7,7 +7,9 @@
  */
 
 using CqlSdkPrototype.Cql;
+using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Elm.Extensions;
 using CqlSdkPrototype.Logging;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;

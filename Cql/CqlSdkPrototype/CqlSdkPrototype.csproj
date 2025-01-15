@@ -33,6 +33,7 @@
 
 	<ItemGroup>
 	  <Folder Include="examples\" />
+	  <Folder Include="Runtime\Extensions\" />
 	</ItemGroup>
 
 </Project>

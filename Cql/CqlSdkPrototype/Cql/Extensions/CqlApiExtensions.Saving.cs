@@ -1,6 +1,6 @@
 ﻿using CqlSdkPrototype.Cql.Extensibility;
 
-namespace CqlSdkPrototype.Cql;
+namespace CqlSdkPrototype.Cql.Extensions;
 
 public static partial class CqlApiExtensions
 {

@@ -1,7 +1,7 @@
 ﻿using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Runtime;
 
-namespace CqlSdkPrototype.Elm;
+namespace CqlSdkPrototype.Elm.Extensions;
 
 public static partial class ElmApiExtensions
 {
@@ -9,8 +9,9 @@ public static partial class ElmApiExtensions
         this CqlApi cqlApi)
     {
         return cqlApi
-            .Translate()
-            .CreateElmApi()
-            .Compile();
+               .Translate()
+               .CreateElmApi()
+               .Compile();
     }
+
 }
