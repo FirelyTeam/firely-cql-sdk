@@ -45,19 +45,19 @@ public class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
         Type libraryType,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
-        libraryInvoker = runtimeApi.AsExtensible().UseLogger((_, logger) =>
-        {
-            if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
-            {
-                logger?.LogDebug(
-                    "Skipping type {type} because it does not implement ILibrary.",
-                    libraryType.FullName);
-                return null;
-            }
+        libraryInvoker = null;
+        var logger = runtimeApi.AsExtensible().Options.LoggerFactory.CreateLogger<LibraryInvoker_2_0_8_0>();
 
-            return new LibraryInvoker_2_0_8_0(asILibrary);
-        });
-        return libraryInvoker != null;
+        if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
+        {
+            logger?.LogDebug(
+                "Skipping type {type} because it does not implement ILibrary.",
+                libraryType.FullName);
+            return false;
+        }
+
+        libraryInvoker = new LibraryInvoker_2_0_8_0(asILibrary);
+        return true;
     }
 
     public static bool SupportsVersion(Version cqlToolVersion)

@@ -10,44 +10,13 @@ namespace CqlSdkPrototype.Runtime;
 public class RuntimeApi(RuntimeApiOptions? options = null) : IRuntimeApiExtensible<RuntimeApi>
 {
     internal IRuntimeApiExtensible<RuntimeApi> AsExtensible() => this;
-    T IRuntimeApiExtensible<RuntimeApi>.UseLogger<T>(Func<RuntimeApi, ILogger<RuntimeApi>, T> action) => action(this, _state.Logger);
 
     #region State
 
-    private State _state = State.Create(options ?? RuntimeApiOptions.Default);
+    private RuntimeApiState _state = RuntimeApiState.Create(options ?? RuntimeApiOptions.Default);
 
     RuntimeApiOptions IRuntimeApiExtensible<RuntimeApi>.Options => _state.Options;
     IReadOnlySet<AssemblyData> IRuntimeApiExtensible<RuntimeApi>.Entries => _state.Entries;
-
-    private readonly record struct State(
-        ImmutableHashSet<AssemblyData> Entries,
-        RuntimeApiOptions Options,
-        ILogger<RuntimeApi> Logger)
-    {
-        public static State Create(RuntimeApiOptions options)
-        {
-            return new State([], null!, null!)
-            {
-                // Must be set through the property initializer, to ensure the services are created
-                Options = options,
-            };
-        }
-
-        private readonly RuntimeApiOptions _options = Options;
-
-        public RuntimeApiOptions Options
-        {
-            get => _options;
-            init
-            {
-                if (ReferenceEquals(_options, value))
-                    return;
-
-                _options = value;
-                Logger = value.LoggerFactory.CreateLogger<RuntimeApi>();
-            }
-        }
-    }
 
     #endregion
 

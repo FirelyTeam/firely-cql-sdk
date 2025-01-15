@@ -1,10 +1,7 @@
 ﻿using CqlSdkPrototype.Cql.Extensibility;
-using CqlSdkPrototype.Cql.Internal;
 using CqlSdkPrototype.Internal;
-using CqlSdkPrototype.Logging.Internal;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Runtime;
-using Hl7.Cql.Runtime.Hosting;
 
 namespace CqlSdkPrototype.Cql;
 
@@ -16,55 +13,13 @@ public class CqlApi(CqlApiOptions? options = null) :
     ICqlApiExtensible<CqlApi>
 {
     internal ICqlApiExtensible<CqlApi> AsExtensible() => this;
-    TResult ICqlApiExtensible<CqlApi>.UseLogger<TResult>(Func<CqlApi, ILogger<CqlApi>, TResult> action) => action(this, _state.Logger);
 
     #region State
 
-    private State _state = State.Create(options ?? CqlApiOptions.Default);
+    private CqlApiState _state = CqlApiState.Create(options ?? CqlApiOptions.Default);
 
     CqlApiOptions ICqlApiExtensible<CqlApi>.Options => _state.Options;
     IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlTranslationEntry> ICqlApiExtensible<CqlApi>.Entries => _state.Entries;
-
-    private readonly record struct State(
-        CqlTranslationEntriesMap Entries,
-        CqlApiOptions Options,
-        ServiceProvider ServiceProvider,
-        ILogger<CqlApi> Logger,
-        CqlToElmConverter CqlToElmConverter)
-    {
-        public static State Create(CqlApiOptions options)
-        {
-            var entries = CqlTranslationEntriesMap.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
-            return new State(entries, null!, null!, null!, null!)
-            {
-                // Must be set through the property initializer, to ensure the services are created
-                Options = options,
-            };
-        }
-
-        private readonly CqlApiOptions _options = Options;
-
-        public CqlApiOptions Options
-        {
-            get => _options;
-            init
-            {
-                if (ReferenceEquals(_options, value))
-                    return;
-
-                ServiceProvider?.Dispose();
-
-                _options = value;
-                var services = new ServiceCollection();
-                services.AddExternalLogging(value.LoggerFactory!);
-                services.AddCqlApi(o => o.Models = value.Models);
-                ServiceProvider = services.BuildServiceProvider();
-                Logger = ServiceProvider.GetLogger<CqlApi>();
-                CqlToElmConverter = ServiceProvider.GetCqlToElmConverter();
-            }
-        }
-
-    }
 
     private CqlApi WithEntries(
         CqlTranslationEntriesMap entries)

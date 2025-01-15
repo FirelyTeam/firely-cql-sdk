@@ -7,9 +7,6 @@ using Hl7.Cql.Runtime;
 using ElmCompilationEntriesMap = System.Collections.Immutable.ImmutableDictionary<
     CqlSdkPrototype.CqlVersionedLibraryIdentifier,
     CqlSdkPrototype.Elm.Extensibility.ElmCompilationEntry>;
-using CqlSdkPrototype.Elm.Internal;
-using Hl7.Cql.Runtime.Hosting;
-using CqlSdkPrototype.Logging.Internal;
 
 namespace CqlSdkPrototype.Elm;
 
@@ -20,66 +17,14 @@ public class ElmApi(ElmApiOptions? options = null) :
     internal IElmApiExtensible<ElmApi> AsExtensible() => this;
     internal IElmApiInternal<ElmApi> AsInternal() => this;
     TResult IElmApiExtensible<ElmApi>.UseLogger<TResult>(Func<ElmApi, ILogger<ElmApi>, TResult> action) => action(this, _state.Logger);
-    TResult IElmApiInternal<ElmApi>.UseServices<TResult>(Func<(ElmApi elmApi, ILogger<ElmApi> logger, AssemblyCompiler assemblyCompiler, LibrarySetCSharpCodeGenerator librarySetCSharpCodeGenerator), TResult> action) => action((this, _state.Logger, _state.AssemblyCompiler, _state.LibrarySetCSharpCodeGenerator));
+    ElmApiState IElmApiInternal<ElmApi>.State => _state;
 
     #region State
 
-    private State _state = State.Create(options ?? ElmApiOptions.Default);
+    private ElmApiState _state = ElmApiState.Create(options ?? ElmApiOptions.Default);
 
     ElmApiOptions IElmApiExtensible<ElmApi>.Options => _state.Options;
     IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmCompilationEntry> IElmApiExtensible<ElmApi>.Entries => _state.Entries;
-
-    private readonly record struct State(
-        ElmCompilationEntriesMap Entries,
-        ElmApiOptions Options,
-        ServiceProvider ServiceProvider,
-        ILogger<ElmApi> Logger,
-        AssemblyCompiler AssemblyCompiler,
-        LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator)
-    {
-        public static State Create(ElmApiOptions options)
-        {
-            var entries = ElmCompilationEntriesMap.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
-            return new State(entries, null!, null!, null!, null!, null!)
-            {
-                // Must be set through the property initializer, to ensure the services are created
-                Options = options
-            };
-        }
-
-        private readonly ElmApiOptions _options = Options;
-
-        public ElmApiOptions Options
-        {
-            get => _options;
-            init
-            {
-                if (ReferenceEquals(_options, value))
-                    return;
-
-                ServiceProvider?.Dispose();
-
-                _options = value;
-
-                var services = new ServiceCollection();
-                services.AddExternalLogging(value.LoggerFactory!);
-                services.AddElmApi();
-                ServiceProvider = services.BuildServiceProvider();
-                Logger = ServiceProvider.GetLogger<ElmApi>();
-                AssemblyCompiler = ServiceProvider.GetAssemblyCompiler();
-                LibrarySetCSharpCodeGenerator = ServiceProvider.GetLibrarySetCSharpCodeGenerator();
-            }
-        }
-
-        public ScopedState CreateScopedState() => new(ServiceProvider.CreateScope());
-    }
-
-    private class ScopedState(IServiceScope scope) : IDisposable
-    {
-        public LibrarySetExpressionBuilder LibrarySetExpressionBuilder { get; } = scope.ServiceProvider.GetLibrarySetExpressionBuilderScoped();
-
-        public void Dispose() => scope.Dispose();
-    }
 
     private ElmApi WithEntries(
         ElmCompilationEntriesMap entries)

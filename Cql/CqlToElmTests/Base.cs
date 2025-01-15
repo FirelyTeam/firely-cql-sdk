@@ -132,17 +132,13 @@ namespace Hl7.Cql.CqlToElm.Test
             ctx ??= DefaultCqlContext;
             var lambda = LibraryExpressionBuilder.Lambda(expression);
             var expressionName = "TempExpression";
-            var assemblyBytes = CreateElmApi()
-                                .AsInternal()
-                                .UseServices(t =>
-                                {
-                                    LibrarySet librarySet = new("TempLibrarySet", library);
-                                    DefinitionDictionary<LambdaExpression> definitions = new();
-                                    definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
-                                    var generateCSharp = t.librarySetCSharpCodeGenerator.GenerateCSharp(librarySet, definitions);
-                                    var compile = t.assemblyCompiler.Compile(librarySet, generateCSharp, t.elmApi.AsExtensible().Options.AssemblyCompilerDebugInformationFormat);
-                                    return compile.Single().assemblyDataWithSourceCode.AssemblyBytes;
-                                });
+            var state = CreateElmApi().AsInternal().State;
+            LibrarySet librarySet = new("TempLibrarySet", library);
+            DefinitionDictionary<LambdaExpression> definitions = new();
+            definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
+            var generateCSharp = state.LibrarySetCSharpCodeGenerator.GenerateCSharp(librarySet, definitions);
+            var compile = state.AssemblyCompiler.Compile(librarySet, generateCSharp, state.Options.AssemblyCompilerDebugInformationFormat);
+            var assemblyBytes = compile.Single().assemblyDataWithSourceCode.AssemblyBytes;
 
             using var scope = new RuntimeApi()
                                         .AddAssemblies([AssemblyData.Default with { AssemblyBytes = assemblyBytes }])

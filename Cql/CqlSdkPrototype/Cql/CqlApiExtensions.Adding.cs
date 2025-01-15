@@ -1,5 +1,6 @@
 ﻿using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Internal;
+using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Cql;
 
@@ -30,20 +31,17 @@ public static partial class CqlApiExtensions
         IEnumerable<FileInfo> files)
         where TCqlApi : ICqlApiExtensible<TCqlApi>
     {
-        return cqlApi.UseLogger((cqlApi, logger) =>
-        {
-            var cqlLibraries =
-                files
-                    .Select(f =>
-                    {
-                        logger.LogInformation("Loading library from file: {file}", f);
+        var logger = cqlApi.Options.LoggerFactory.CreateLogger(typeof(CqlApiExtensions));
+        var cqlLibraries = files
+            .Select(f =>
+            {
+                logger.LogInformation("Loading library from file: {file}", f);
                         var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(f.Name.TrimFileExtension(".cql"));
                         var cqlContent = File.ReadAllText(f.FullName);
                         var cqlLibrary = CqlLibraryString.FromIdentifierAndString(versionedLibraryIdentifier, cqlContent);
                         return cqlLibrary;
                     }); // Log errors
 
-            return cqlApi.AddCqlLibraries(cqlLibraries);
-        });
+        return cqlApi.AddCqlLibraries(cqlLibraries);
     }
 }

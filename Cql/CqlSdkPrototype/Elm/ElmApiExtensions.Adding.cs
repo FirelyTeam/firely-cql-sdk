@@ -2,6 +2,7 @@
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.Elm;
+using Microsoft.Extensions.Logging;
 
 #pragma warning disable RS0027
 
@@ -48,18 +49,15 @@ public static partial class ElmApiExtensions
         IEnumerable<FileInfo> files)
         where TElmApi : IElmApiExtensible<TElmApi>
     {
-        return elmApi.UseLogger((elmApi, logger) =>
-        {
-            var libraries =
-                files
-                    .Select(f =>
-                    {
+        var logger = elmApi.Options.LoggerFactory.CreateLogger(typeof(ElmApiExtensions));
+        var libraries = files
+            .Select(f =>
+            {
                         logger.LogInformation("Loading library from file: {file}", f);
                         var library = Library.LoadFromJson(f);
                         return library;
                     }); // Log errors
-            return elmApi.AddElmLibraries(libraries);
-        });
+        return elmApi.AddElmLibraries(libraries);
     }
 
     public static TElmApi AddElmFilesFromDirectory<TElmApi>(

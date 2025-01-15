@@ -13,19 +13,18 @@ public static partial class CqlApiExtensions
         if (!directory.Exists)
             directory.Create();
 
-        return cqlApi.UseLogger((cqlApi, logger) =>
+        var logger = cqlApi.Options.LoggerFactory.CreateLogger(typeof(CqlApiExtensions));
+
+        foreach (var (libraryName, (_, elmLibrary)) in cqlApi.Entries)
         {
-            foreach (var (libraryName, (_, elmLibrary)) in cqlApi.Entries)
-            {
-                if (elmLibrary == null)
-                    continue;
+            if (elmLibrary == null)
+                continue;
 
-                var fileName = Path.Combine(directory.FullName, $"{libraryName}.json");
-                File.WriteAllText(fileName, elmLibrary.SerializeToJson(writeIndented));
-                logger.LogInformation("Saved ELM to file: {file}", fileName);
-            }
+            var fileName = Path.Combine(directory.FullName, $"{libraryName}.json");
+            File.WriteAllText(fileName, elmLibrary.SerializeToJson(writeIndented));
+            logger.LogInformation("Saved ELM to file: {file}", fileName);
+        }
 
-            return cqlApi;
-        });
+        return cqlApi;
     }
 }
