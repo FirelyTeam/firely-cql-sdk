@@ -162,8 +162,109 @@ file static class MeasurePackager
         if (!librariesByVersionedIdentifier.TryGetValue(elmLibrary.GetVersionedIdentifier()!, out var libForMeasure))
             throw new InvalidOperationException(
                 $"We didn't create a measure for library {libForMeasure}");
+        AnnotateMeasurePopulations(measure, elmLibrary);
         measure.Library = new List<string> { libForMeasure!.Url };
         return measure;
+    }
+    private static readonly Dictionary<string, string> Populations = new Dictionary<string, string>
+        {
+            { "initial-population", "Initial Population" },
+            { "numerator", "Numerator" },
+            { "denominator", "Denominator" },
+            { "denominator-exclusion", "Denominator Exclusion" }
+        };
+    private static void AnnotateMeasurePopulations(Measure measure, Elm.Library library)
+    {
+        var defs = library.statements ?? Enumerable.Empty<Hl7.Cql.Elm.ExpressionDef>();
+        foreach (var def in defs)
+        {
+            var annotations = (def.annotation?
+                .OfType<Annotation>()
+                .SelectMany(a => a.t ?? Enumerable.Empty<Tag>())
+                ?? Enumerable.Empty<Tag>())
+                .ToArray();
+            if (annotations.Length > 0)
+            {
+                var groups = annotations
+                    .Where(t => t.name == "group")
+                    .ToArray();
+                var populations = annotations
+                    .Where(t => t.name == "population")
+                    .ToArray();
+                var productLine = annotations
+                    .FirstOrDefault(t => t.name == "productline");
+
+                var tuples = from g in groups
+                             from p in populations
+                             select new { Group = g.value, Population = p.value };
+                foreach (var tuple in tuples)
+                {
+                    if (!int.TryParse(tuple.Group, out var groupNumber))
+                        throw new InvalidOperationException($"Definition {def.name} has a @group annotation whose value is {tuple.Group}.  Groups must be positive integers.");
+                    if (!Populations.ContainsKey(tuple.Population))
+                        throw new InvalidOperationException($"Definition {def.name} has a @population annotation whose value is {tuple.Population}.  @population must be one of: {string.Join(", ", Populations.Keys)}");
+
+                    var rate = $"rate-{tuple.Group}";
+                    var groupsForRate = measure.Group?
+                        .Where(g => g.ElementId == rate)
+                        .ToArray() ?? new Measure.GroupComponent[] { };
+                    Measure.GroupComponent? group;
+                    if (groupsForRate.Length == 1)
+                    {
+                        group = groupsForRate[0];
+                    }
+                    else if (groupsForRate.Length == 0)
+                    {
+                        group = new Measure.GroupComponent
+                        {
+                            ElementId = rate,
+                            //Code = new CodeableConcept(rate, MeasureGroupCodeSystem),
+                            Description = $"Rate {tuple.Group}",
+                        };
+                        measure.Group!.Add(group);
+                    }
+                    else throw new InvalidOperationException($"Rate {rate} is defined twice for this measure.");
+
+                    var populationSuffix = productLine != null ? $"{tuple.Population}-{productLine.value}" : tuple.Population;
+                    var pop = $"{rate}-{populationSuffix}";
+                    var populationsForGroup = group.Population
+                            .Where(p => p.ElementId == pop)
+                            .ToArray();
+                    Measure.PopulationComponent? population;
+                    if (populationsForGroup.Length == 1)
+                    {
+                        population = populationsForGroup[0];
+                    }
+                    else if (populationsForGroup.Length == 0)
+                    {
+                        population = new Measure.PopulationComponent
+                        {
+                            ElementId = pop,
+                            Code = new CodeableConcept
+                            {
+                                Coding = new List<Coding>
+                                {
+                                    new Coding
+                                    {
+                                        System = "http://terminology.hl7.org/CodeSystem/measure-population",
+                                         Code = populationSuffix,
+                                    }
+                                }
+                            },
+                            Description = Populations[tuple.Population],
+                            Criteria = new Hl7.Fhir.Model.Expression
+                            {
+                                Language = "text/cql-identifier"!,
+                                ExpressionElement = new FhirString(def.name)
+                            }
+                        };
+                        group.Population.Add(population);
+                    }
+                    else throw new InvalidOperationException($"Population {pop} is defined twice for this measure.");
+
+                }
+            }
+        }
     }
 }
 
