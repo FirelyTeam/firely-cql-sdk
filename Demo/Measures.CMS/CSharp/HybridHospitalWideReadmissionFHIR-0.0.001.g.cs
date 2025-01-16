@@ -22,9 +22,9 @@ public partial class HybridHospitalWideReadmissionFHIR_0_0_001 : ILibrary, ISing
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "HybridHospitalWideReadmissionFHIR";
-    string ILibrary.Version => "0.0.001";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
+    public string Name => "HybridHospitalWideReadmissionFHIR";
+    public string Version => "0.0.001";
+    public ILibrary[] Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
 
     #endregion ILibrary Implementation
 

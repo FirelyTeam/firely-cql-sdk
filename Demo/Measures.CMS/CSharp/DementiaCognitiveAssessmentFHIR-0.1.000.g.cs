@@ -22,9 +22,9 @@ public partial class DementiaCognitiveAssessmentFHIR_0_1_000 : ILibrary, ISingle
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "DementiaCognitiveAssessmentFHIR";
-    string ILibrary.Version => "0.1.000";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
+    public string Name => "DementiaCognitiveAssessmentFHIR";
+    public string Version => "0.1.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
 
     #endregion ILibrary Implementation
 

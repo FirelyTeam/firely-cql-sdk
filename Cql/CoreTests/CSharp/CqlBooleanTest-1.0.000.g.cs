@@ -22,9 +22,9 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "CqlBooleanTest";
-    string ILibrary.Version => "1.0.000";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [];
+    public string Name => "CqlBooleanTest";
+    public string Version => "1.0.000";
+    public ILibrary[] Dependencies => [];
 
     #endregion ILibrary Implementation
 

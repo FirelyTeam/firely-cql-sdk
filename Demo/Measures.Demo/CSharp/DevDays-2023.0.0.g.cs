@@ -22,9 +22,9 @@ public partial class DevDays_2023_0_0 : ILibrary, ISingleton<DevDays_2023_0_0>
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "DevDays";
-    string ILibrary.Version => "2023.0.0";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
+    public string Name => "DevDays";
+    public string Version => "2023.0.0";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance];
 
     #endregion ILibrary Implementation
 

@@ -22,9 +22,9 @@ public partial class AHAOverall_2_8_000 : ILibrary, ISingleton<AHAOverall_2_8_00
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "AHAOverall";
-    string ILibrary.Version => "2.8.000";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
+    public string Name => "AHAOverall";
+    public string Version => "2.8.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
 
     #endregion ILibrary Implementation
 

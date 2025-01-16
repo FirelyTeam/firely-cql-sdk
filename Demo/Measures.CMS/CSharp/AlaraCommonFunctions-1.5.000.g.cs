@@ -22,9 +22,9 @@ public partial class AlaraCommonFunctions_1_5_000 : ILibrary, ISingleton<AlaraCo
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "AlaraCommonFunctions";
-    string ILibrary.Version => "1.5.000";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance];
+    public string Name => "AlaraCommonFunctions";
+    public string Version => "1.5.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance];
 
     #endregion ILibrary Implementation
 

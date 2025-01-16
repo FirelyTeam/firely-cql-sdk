@@ -22,9 +22,9 @@ public partial class DischargedonAntithromboticTherapyFHIR_0_0_010 : ILibrary, I
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "DischargedonAntithromboticTherapyFHIR";
-    string ILibrary.Version => "0.0.010";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, TJCOverallFHIR_1_8_000.Instance];
+    public string Name => "DischargedonAntithromboticTherapyFHIR";
+    public string Version => "0.0.010";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, TJCOverallFHIR_1_8_000.Instance];
 
     #endregion ILibrary Implementation
 
