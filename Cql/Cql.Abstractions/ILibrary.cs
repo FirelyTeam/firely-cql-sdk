@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Hl7.Cql.Abstractions;
+﻿namespace Hl7.Cql.Abstractions;
 
 /// <summary>
 /// The base interface for generated CQL libraries.

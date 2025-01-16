@@ -34,7 +34,7 @@
 		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CqlSdkPrototype" Key="$(LibraryPKHash)" />
 	</ItemGroup>
-
+                  
 	<ItemGroup>
 		<Compile Update="CqlOperatorsBinder.*.cs">
 			<DependentUpon>CqlOperatorsBinder.cs</DependentUpon>
