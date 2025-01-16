@@ -7,6 +7,7 @@
  */
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Exceptions;
@@ -71,4 +72,15 @@ internal partial class LibrarySetExpressionBuilderContext
                 LibrarySetDefinitions.Merge(librarySetDefinitions);
             }
         });
+
+    public IEnumerable<(Library library, Func<DefinitionDictionary<LambdaExpression>> generateLibraryDefinitions)> ProcessLibrarySetDeferred()
+    {
+        foreach (var library in LibrarySet)
+            yield return (library,
+                             () => this.CatchRethrowExpressionBuildingException(_ =>
+                             {
+                                 var libraryDefinitions = _libraryExpressionBuilder.ProcessLibrary(library, null, this);
+                                 return libraryDefinitions;
+                             }));
+    }
 }
