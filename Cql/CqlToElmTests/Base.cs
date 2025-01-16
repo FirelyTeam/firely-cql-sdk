@@ -16,6 +16,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensibility;
+using CqlSdkPrototype.Elm.Internal;
 using CqlSdkPrototype.Runtime;
 using Expression = Hl7.Cql.Elm.Expression;
 using CqlSdkPrototype.Runtime.Extensions;
@@ -31,7 +32,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static CqlToElmConverter DefaultConverter => ServiceProvider.GetCqlToElmConverter();
 
-        internal static LibraryExpressionBuilder LibraryExpressionBuilder => ServiceProvider.GetLibraryExpressionBuilderScoped();
+        internal static LibraryExpressionBuilder LibraryExpressionBuilder => ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
 
         internal static MessageProvider Messaging => ServiceProvider.GetMessageProvider();
 
@@ -39,15 +40,13 @@ namespace Hl7.Cql.CqlToElm.Test
             Action<CqlToElmOptions>? options = null,
             Action<IModelProvider>? models = null,
             Type? libraryProviderType = null) =>
-            new ServiceCollection()
-                .AddCqlToElmServices()
-                .AddCqlToElmModels(models ?? (mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401)))
-                .AddCqlToElmOptions(options)
-                .AddCqlToElmMessaging()
-                .AddLogging(builder => builder.AddConsole())
-                .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider))
-                .AddCqlCompilerServices()
-            //    .AddCqlPackagingServices()
+            ElmApiState.AddCqlCompilerServices(new ServiceCollection()
+                      .AddCqlToElmServices()
+                      .AddCqlToElmModels(models ?? (mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401)))
+                      .AddCqlToElmOptions(options)
+                      .AddCqlToElmMessaging()
+                      .AddLogging(builder => builder.AddConsole())
+                      .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider)))
             ;
 
 
@@ -105,7 +104,7 @@ namespace Hl7.Cql.CqlToElm.Test
         internal static LibrarySetDefinitions BuildLibrarySetDefinitions(
             Library library)
         {
-            LibrarySetExpressionBuilder librarySetExpressionBuilder = ServiceProvider.GetLibrarySetExpressionBuilderScoped();
+            LibrarySetExpressionBuilder librarySetExpressionBuilder = ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
             LibrarySet librarySet = new LibrarySet(library.GetVersionedIdentifier()!, library);
             DefinitionDictionary<LambdaExpression> definitions = librarySetExpressionBuilder.ProcessLibrarySet(librarySet);
             return new(librarySet, definitions);
@@ -117,7 +116,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static LibrarySetCSharp GenerateCSharp(LibrarySetDefinitions librarySetDefinitions)
         {
-            var librarySetCSharpCodeGenerator = ServiceProvider.GetLibrarySetCSharpCodeGenerator();
+            var librarySetCSharpCodeGenerator = ServiceProvider.GetRequiredService<LibrarySetCSharpCodeGenerator>();
 
             Dictionary<string, string> cSharpCodeByLibraryName =
                 librarySetCSharpCodeGenerator

@@ -8,6 +8,8 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using CqlSdkPrototype.Elm;
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -19,15 +21,12 @@ namespace CoreTests
        [ClassInitialize]
         public static void Initialize(TestContext context)
         {
-            using var serviceProvider = new ServiceCollection()
-                                        .AddDebugLogging()
-                                        .AddCqlCompilerServices()
-                                        .BuildServiceProvider(validateScopes: true);
+            using var serviceProvider = ElmApiState.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
             using var servicesScope = serviceProvider.CreateScope();
 
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var libraryExpressionBuilderScoped = servicesScope.ServiceProvider.GetLibraryExpressionBuilderScoped();
+            var libraryExpressionBuilderScoped = servicesScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
             var definitions = libraryExpressionBuilderScoped.ProcessLibrary(elmPackage);
             QueriesDefinitions = definitions.CompileAll();
             ValueSets = new HashValueSetDictionary();

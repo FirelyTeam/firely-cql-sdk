@@ -1,4 +1,5 @@
 ﻿using CqlSdkPrototype.Cql.Extensibility;
+using CqlSdkPrototype.Cql.Internal;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.CqlToElm;
@@ -11,18 +12,25 @@ using CqlTranslationEntriesMap = System.Collections.Immutable.ImmutableDictionar
     CqlVersionedLibraryIdentifier,
     CqlApiStateEntry>;
 
-public class CqlApi(
-    ILoggerFactory? loggerFactory = null,
-    CqlApiOptions ? options = null) :
-    ICqlApiExtendable<CqlApi>
+public class CqlApi :
+    ICqlApiExtendable<CqlApi>,
+    ICqlApiInternal<CqlApi>
 {
     ILoggerFactory ICqlApiExtendable<CqlApi>.LoggerFactory => _state.LoggerFactory;
     CqlApiOptions ICqlApiExtendable<CqlApi>.Options => _state.Options;
     IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> ICqlApiExtendable<CqlApi>.Entries => _state.Entries;
+    CqlApiState ICqlApiInternal<CqlApi>.State => _state;
+
+    internal CqlApi(CqlApiState state) => _state = state; // Might make this public later. Used for testing now.
+
+    public CqlApi(
+        ILoggerFactory? loggerFactory = null,
+        CqlApiOptions? options = null) : this(CqlApiState.Create(loggerFactory ?? NullLoggerFactory.Instance, options ?? CqlApiOptions.Default))
+    {}
 
     #region State
 
-    private CqlApiState _state = CqlApiState.Create(loggerFactory ?? NullLoggerFactory.Instance, options ?? CqlApiOptions.Default);
+    private CqlApiState _state;
 
     private CqlApi WithEntries(
         CqlTranslationEntriesMap entries)
@@ -36,9 +44,7 @@ public class CqlApi(
         Func<CqlApiOptions, CqlApiOptions> replaceOptions)
     {
         var newOptions = replaceOptions(_state.Options);
-        if (!ReferenceEquals(_state.Options, newOptions))
-            // return new CqlApi(_state with { Options = newOptions });
-            _state = _state with { Options = newOptions };
+        _state = _state with { Options = newOptions };
         return this;
     }
 

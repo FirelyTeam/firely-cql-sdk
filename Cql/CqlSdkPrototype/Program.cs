@@ -21,25 +21,23 @@ internal class Program
         using var serviceProvider =
             new ServiceCollection()
                 .AddLogging(lb => lb
-                  .ClearProviders()
-                  .AddProvider(new ColorConsoleLoggerProvider())
-                  .AddFilter((category, _) => category?.Contains(value: nameof(CqlSdkPrototype)) ?? false))
+                                  .ClearProviders()
+                                  .AddProvider(new ColorConsoleLoggerProvider())
+                                  .AddFilter((category, _) => category?.Contains(value: nameof(CqlSdkPrototype)) ?? false))
                 .BuildServiceProvider();
 
         var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
-        var logger = serviceProvider.GetLogger<Program>();
-
-        var cqlApiOptions = new CqlApiOptions(
-            Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-
+        var cqlApiOptions = new CqlApiOptions(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         var cqlApi = new CqlApi(loggerFactory, cqlApiOptions);
 
-        InvokeCqlExample(logger: logger, cqlApi: cqlApi);
+        var logger = serviceProvider.GetLogger<Program>();
+
+        InvokeCqlExample(cqlApi: cqlApi);
 
         InvokeCqlFromExamplesFolder(logger: logger, cqlApi: cqlApi);
 
         foreach (var librarySetName in (string[]) ["Authoring", "CMS", "Demo", "Examples"])
-            VerboseExample(logger: logger, cqlApi: cqlApi, librarySetName: librarySetName);
+            VerboseExample(logger: logger, cqlApi: cqlApi, librarySetName: librarySetName, shouldBuildCqlToElm:false);
 
         // VerboseExample(logger, cqlApi, "CMS");
     }
@@ -55,17 +53,13 @@ internal class Program
         var dirs = Directories.Create("Examples");
 
         // We can write extensions to make it even easier to change exception handling
-        /*cqlApi = */
-        cqlApi.WithOptions(o => o with
-              {
-                  ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
-              })
-              .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory);
-
         var cqlContext = FhirCqlContext.ForBundle();
 
         // We need a disposable invocation scope, which contains the AssemblyLoadContext and the related library Assemblies.
-        using var invocationScope = cqlApi.CreateRuntimeScope();
+        using var invocationScope = cqlApi
+                                    .WithOptions(o => o with { ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue })
+                                    .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory)
+                                    .CreateRuntimeScope();
         logger.LogInformation("{dump}", invocationScope.DumpLibraryDeclarations());
         Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
         Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
@@ -79,9 +73,7 @@ internal class Program
         }
     }
 
-    private static void InvokeCqlExample(
-        ILogger<Program> logger,
-        CqlApi cqlApi)
+    private static void InvokeCqlExample(CqlApi cqlApi)
     {
         // INTRO:
         // This example demonstrates how to add a CqlLibraryString to the CqlApi and invoke a library declaration directly.
@@ -98,12 +90,7 @@ internal class Program
         var cqlContext = FhirCqlContext.ForBundle();
         using var invocationScope = cqlApi
                                     .AddCqlLibraryString(cqlLibraryString)
-                                    .Translate()
-                                    .CreateElmApi()
-                                    .WithOptions(o => o with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded })
-                                    .Compile()
-                                    .CreateRuntimeApi()
-                                    .CreateRuntimeScope();
+                                    .CreateRuntimeScope(elmOpt => elmOpt with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded });
         var result = invocationScope.GetLibraryDefinitionResult(cqlContext, libraryIdentifier, "Three");
         Debug.Assert(result is 3);
     }
@@ -111,7 +98,8 @@ internal class Program
     private static void VerboseExample(
         ILogger<Program> logger,
         CqlApi cqlApi,
-        string librarySetName)
+        string librarySetName,
+        bool shouldBuildCqlToElm = false)
     {
         // INTRO:
         // This example loads the CQL libraries, translates them to ELM, and compiles them to assemblies.
@@ -120,44 +108,33 @@ internal class Program
 
         Directories dirs = Directories.Create(librarySetName);
         dirs.GeneratedDirectory.Delete(recursive: true);
-        // /*cqlApi = */
-        // cqlApi
-        //     .WithOptions(o => o with
-        //     {
-        //         ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue
-        //     })
-        //     .AddCqlLibrariesFromDirectory(
-        //         dirs.CqlInDirectory /*,
-        //                      options: new EnumerationOptions()
-        //                      {
-        //                          //RecurseSubdirectories = false
-        //                      }*/ /*,
-        //                      filePredicate: fi => fi.Name.TrimFileExtension(".cql") is
-        //                          "FHIRHelpers"
-        //                          or "NCQATerminology"
-        //                          or "NCQAStatus"*/
-        //     )
-        //     .Translate()
-        //     .SaveElmFileToDirectory(dirs.ElmOutDirectory)
-        //     ;
 
-        var elmApi = cqlApi.CreateElmApi()
-                           .WithOptions(o => o with
-                           {
-                               ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue,
-                               AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded
-                           })
+        cqlApi.WithOptions(o => o with { ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue });
+
+        if (shouldBuildCqlToElm)
+        {
+            cqlApi
+                .AddCqlLibrariesFromDirectory(
+                    dirs.CqlInDirectory /*,
+                             options: new EnumerationOptions()
+                             {
+                                 //RecurseSubdirectories = false
+                             }*/ /*,
+                             filePredicate: fi => fi.Name.TrimFileExtension(".cql") is
+                                 "FHIRHelpers"
+                                 or "NCQATerminology"
+                                 or "NCQAStatus"*/
+                )
+                .Translate()
+                .SaveElmFileToDirectory(dirs.ElmOutDirectory)
+                ;
+        }
+
+        var elmApi = cqlApi.CreateElmApi(o => o with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded })
                            .AddElmFilesFromDirectory(dirs.ElmInDirectory)
-
-                           // var elmApi = cqlApi
-                           //              .CreateElmApi()
-                           //              .AddElmFromCqlApi(cqlApi)
-                           //              //.LoadElmFile(elmDirIn, ElmLibraryIdentifier.Parse("FHIRHelpers")) //
-                           //              //.LoadElmFilesFromDirectory(elmDirIn, enumerationOptions)
                            .Compile()
                            .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
-                           .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
-            ;
+                           .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory);
 
         cqlApi.TryGetFirstElmFileLines()
               .Switch(t => logger.LogInformation(

@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging.Abstractions;
-
-namespace CqlSdkPrototype.Runtime;
+﻿namespace CqlSdkPrototype.Runtime;
 
 public record RuntimeApiOptions()
 {

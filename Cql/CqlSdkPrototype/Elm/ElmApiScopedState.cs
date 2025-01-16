@@ -4,7 +4,7 @@ namespace CqlSdkPrototype.Elm;
 
 internal class ElmApiScopedState(IServiceScope scope) : IDisposable
 {
-    public LibrarySetExpressionBuilder LibrarySetExpressionBuilder { get; } = scope.ServiceProvider.GetLibrarySetExpressionBuilderScoped();
+    public LibrarySetExpressionBuilder LibrarySetExpressionBuilder { get; } = scope.ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
 
     public void Dispose() => scope.Dispose();
 }

@@ -1,9 +1,14 @@
 ﻿using CqlSdkPrototype.Elm.Extensibility;
-using CqlSdkPrototype.Elm.Internal;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Logging.Internal;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Conversion;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime.Hosting;
+using Hl7.Fhir.Introspection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 namespace CqlSdkPrototype.Elm;
 
@@ -44,15 +49,52 @@ internal readonly record struct ElmApiState(
 
             var services = new ServiceCollection();
             services.AddExternalLogging(LoggerFactory!);
-            services.AddElmApi();
-            ServiceProvider = services.BuildServiceProvider();
+            AddCqlCodeGenerationServices(services);
+            ServiceProvider = services.BuildServiceProvider(validateScopes:true);
             Logger = ServiceProvider.GetLogger<ElmApi>();
-            AssemblyCompiler = ServiceProvider.GetAssemblyCompiler();
-            LibrarySetCSharpCodeGenerator = ServiceProvider.GetLibrarySetCSharpCodeGenerator();
+            AssemblyCompiler = ServiceProvider.GetRequiredService<AssemblyCompiler>();
+            LibrarySetCSharpCodeGenerator = ServiceProvider.GetRequiredService<LibrarySetCSharpCodeGenerator>();
         }
     }
 
     public ILoggerFactory LoggerFactory { get; } = LoggerFactory;
 
     public ElmApiScopedState CreateScopedState() => new(ServiceProvider.CreateScope());
+
+    private static void AddCqlCodeGenerationServices(IServiceCollection services)
+    {
+        AddCqlCompilerServices(services);
+        services.TryAddSingleton<TypeToCSharpConverter>();
+        services.TryAddSingleton<LibrarySetCSharpCodeGenerator>();
+        services.TryAddSingleton<AssemblyCompiler>();
+    }
+
+    public static IServiceCollection AddCqlCompilerServices(IServiceCollection services)
+    {
+        services.TryAddSingleton<ModelInspector>(_ => Hl7.Fhir.Model.ModelInfo.ModelInspector);
+        services.TryAddSingleton<TypeResolver, FhirTypeResolver>();
+
+        const int cacheSize = 0; // TODO: Must move to configuration
+        services.TryAddSingleton<TypeConverter>(sp =>
+        {
+            var modelInspector = sp.GetRequiredService<ModelInspector>();
+            var logger = sp.GetLogger<TypeConverter>();
+            var converter = FhirTypeConverter
+                            .Create(modelInspector, cacheSize)
+                            .UseLogger(logger);
+            converter.CaptureAvailableConverters();
+            return converter;
+        });
+
+        services.TryAddSingleton<CqlOperatorsBinder>();
+        services.TryAddSingleton<CqlContextBinder>();
+        services.TryAddSingleton<ExpressionBuilderSettings>(_ => ExpressionBuilderSettings.Default); // TODO: Must move to configuration
+        services.TryAddScoped<TupleBuilderCache>();
+        services.TryAddScoped<LibrarySetExpressionBuilder>();
+        services.TryAddScoped<LibraryExpressionBuilder>();
+        services.TryAddScoped<ExpressionBuilder>();
+
+        return services;
+    }
+
 }

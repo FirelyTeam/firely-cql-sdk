@@ -6,7 +6,10 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
+using Hl7.Fhir.Introspection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 
 // ReSharper disable once CheckNamespace
@@ -18,10 +21,10 @@ internal static class CqlPackagingServiceCollectionExtensions
 {
     public static IServiceCollection AddCqlPackagingServices(this IServiceCollection services)
     {
-        services.AddTypeResolver();
+        services.TryAddSingleton<ModelInspector>(_ => Hl7.Fhir.Model.ModelInfo.ModelInspector);
+        services.TryAddSingleton<TypeResolver, FhirTypeResolver>();
         services.TryAddSingleton<ResourcePackager>();
         services.TryAddSingleton<FhirResourceFileWriter>();
-
         return services;
     }
 }
