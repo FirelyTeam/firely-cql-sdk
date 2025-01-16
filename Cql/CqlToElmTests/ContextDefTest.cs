@@ -3,6 +3,7 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using CqlSdkPrototype.Cql;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -18,14 +19,14 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Context_Of_Known_Model()
         {
-            var lib = MakeLibrary(@"
+            var lib = CqlApi.MakeLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using FHIR
 
                 context FHIR.Patient
                 context Observation
-            ");
+            ", new string[0]);
 
             Assert.IsNotNull(lib.contexts);
             lib.contexts.Select(c => c.name).Should().BeEquivalentTo("FHIR.Patient", "Observation");
@@ -47,7 +48,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Context_Of_Unknown_Model()
         {
-            var lib = MakeLibrary(@"
+            var lib = TestExtensions.MakeLibrary(CqlApi, @"
                 library UsingTest version '1.0.0'
 
                 using FHIR
@@ -59,7 +60,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Context_UnknonwType_on_Known_Model()
         {
-            var lib = MakeLibrary(@"
+            var lib = TestExtensions.MakeLibrary(CqlApi, @"
                 library UsingTest version '1.0.0'
 
                 using FHIR
@@ -71,7 +72,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Context_Not_A_Model()
         {
-            var lib = MakeLibrary(@"
+            var lib = TestExtensions.MakeLibrary(CqlApi, @"
                 library UsingTest version '1.0.0'
                 
                 define derp: false
@@ -83,7 +84,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Context_Of_Unknown_Type()
         {
-            var lib = MakeLibrary(@"
+            var lib = TestExtensions.MakeLibrary(CqlApi, @"
                 library UsingTest version '1.0.0'
 
                 using FHIR
@@ -95,13 +96,13 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Context_Unfiltered_Retrieve_Null_Context()
         {
-            var lib = MakeLibrary(@"
+            var lib = CqlApi.MakeLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using FHIR version '4.0.1'
 
                 define patients: [Patient]
-            ");
+            ", new string[0]);
             var retrieve = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Retrieve>();
             retrieve.context.Should().BeNull();
         }

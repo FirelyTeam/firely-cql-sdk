@@ -15,7 +15,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private Library createLibraryForExpression(string expression, params string[] expectedErrors)
         {
-            return MakeLibrary($@"
+            return TestExtensions.MakeLibrary(CqlApi, $@"
                 library IsTest version '1.0.0'
 
                 define private predicate: {expression}", expectedErrors);

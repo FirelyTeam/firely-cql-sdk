@@ -4,6 +4,8 @@ using Hl7.Fhir.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
+using CqlSdkPrototype.Cql;
+using Library = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -18,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Retrieve_AllTerms()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library RetrieveTest version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -28,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 context Patient
 
                 define private Retrieve_AllTerms: [Patient->Condition: code in ""terminology""]
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(2, library.statements.Length);
             Assert.IsNotNull(library.statements[1].expression.localId);

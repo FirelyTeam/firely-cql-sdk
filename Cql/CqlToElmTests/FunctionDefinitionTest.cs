@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using CqlSdkPrototype.Cql;
+using FluentAssertions;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
@@ -22,11 +23,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DefinePrivateFluentFunction()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
                 using FHIR version '4.0.1'
                 context Patient
-                define private fluent function Two(): 2");
+                define private fluent function Two(): 2", new string[0]);
 
             var f = shouldDefineFunction(library, "Two");
             f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
@@ -39,9 +40,9 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DefinePublicNonFluentExternalFunction()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
-                define public function Ext() returns String: external");
+                define public function Ext() returns String: external", new string[0]);
 
             var f = shouldDefineFunction(library, "Ext");
             f.resultTypeSpecifier.Should().Be(SystemTypes.StringType);
@@ -53,18 +54,19 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void UntypedFunctionsAreIllegal()
         {
-            _ = MakeLibrary(@"
+            string[] expectedErrors = new[] { "External functions must specify a return type." };
+            _ = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
-                define public function Ext(): external", "External functions must specify a return type.");
+                define public function Ext(): external", expectedErrors);
         }
 
 
         [TestMethod]
         public void OptionalReturnTypesMayBeTheSame()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
-                define function Two() returns Integer: 2");
+                define function Two() returns Integer: 2", new string[0]);
 
             var f = shouldDefineFunction(library, "Two");
             f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
@@ -73,9 +75,9 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void OptionalReturnTypesMayBeSupertype()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
-                define function Two() returns Any: 2");
+                define function Two() returns Any: 2", new string[0]);
 
             var f = shouldDefineFunction(library, "Two");
             f.resultTypeSpecifier.Should().Be(SystemTypes.AnyType);
@@ -84,9 +86,9 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void MakesParametersVisibleInScope()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
-                define function Double(a Integer): a*2");
+                define function Double(a Integer): a*2", new string[0]);
 
             var f = shouldDefineFunction(library, "Double");
             f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
@@ -97,18 +99,19 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void SignalsUnknownParameters()
         {
-            MakeLibrary(@"
+            string[] expectedErrors = new[] { "Could not resolve identifier b in the current library." };
+            CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
-                define function Double(a Integer): b", "Could not resolve identifier b in the current library.");
+                define function Double(a Integer): b", expectedErrors);
         }
 
         [TestMethod]
         public void ResolvesInParentScope()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
                 define b: 5
-                define function Double(a Integer): b");
+                define function Double(a Integer): b", new string[0]);
 
             var f = shouldDefineFunction(library, "Double");
             f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
@@ -120,10 +123,10 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ResolvesNearestScope()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
                 define a: 5
-                define function Replace(a String): a");
+                define function Replace(a String): a", new string[0]);
 
             var f = shouldDefineFunction(library, "Replace");
             f.resultTypeSpecifier.Should().Be(SystemTypes.StringType);
@@ -133,10 +136,10 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DoesForwardsReference()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
                 define b: a                
-                define a: 5");
+                define a: 5", new string[0]);
 
             var f = library.ShouldDefine<ExpressionDef>("b");
             f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
@@ -146,17 +149,17 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DetectsCycle()
         {
-            _ = MakeLibrary(@"
+            string[] expectedErrors = new[] { "Cannot resolve reference to expression or function a because it results in a circular reference." };
+            _ = CqlApi.MakeLibrary(@"
             library FuncTest version '1.0.0'          
             define a: b                
-            define b: a",
-            "Cannot resolve reference to expression or function a because it results in a circular reference.");
+            define b: a", expectedErrors);
         }
 
         [TestMethod]
         public void CallsFluentOnMember()
         {
-            var lib = MakeLibrary(@"
+            var lib = CqlApi.MakeLibrary(@"
             library FuncTest version '1.0.0'
             
             using FHIR version '4.0.1'
@@ -166,7 +169,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
             define fluent function ""Interval""(coverage FHIR.Coverage):
                 (coverage.period as FHIR.Period).""To date interval""()
-            ");
+            ", new string[0]);
             lib.GetErrors().Should().BeEmpty();
         }
         [TestMethod]
@@ -235,7 +238,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ComplexCaseStatement()
         {
-            var lib = MakeLibrary(@"
+            var lib = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
             
                 using FHIR version '4.0.1'
@@ -255,7 +258,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     else
                         null
                 end
-            ");
+            ", new string[0]);
             var cs = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Case>();
             cs.Should().HaveType(SystemTypes.DateType);
 
@@ -264,11 +267,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void External_Function()
         {
-            var lib = MakeLibrary(@"
+            var lib = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
 
                 define function Add(left Integer, right Integer) returns Integer: external
-            ");
+            ", new string[0]);
             lib.statements.Should().HaveCount(1);
             var fd = lib.statements[0].Should().BeOfType<FunctionDef>().Subject;
             fd.external.Should().BeTrue();
@@ -279,11 +282,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CSharp_Keyword_Parameter_Name()
         {
-            var lib = MakeLibrary(@"
+            var lib = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
 
                 define function ToInteger(decimal System.Decimal) returns System.Integer: external
-            ");
+            ", new string[0]);
             var lambdas = LibraryExpressionBuilder.ProcessLibrary(lib);
             var expr = lambdas["FuncTest-1.0.0", "ToInteger", [typeof(CqlContext), typeof(decimal?)]];
             expr.Parameters.Should().HaveCount(2);

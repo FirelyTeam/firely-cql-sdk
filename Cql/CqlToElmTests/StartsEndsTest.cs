@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Elm;
+﻿using CqlSdkPrototype.Cql;
+using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -15,11 +16,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_False()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library StartsEndsTest version '1.0.0'
 
                 define private Starts_False: Interval[@2023-01-01, @2023-06-30] starts Interval[@2023-04-01, @2023-04-30]
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -44,11 +45,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_True()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library StartsEndsTest version '1.0.0'
 
                 define private Starts_True: Interval[0, 5] starts Interval[0,7]
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -73,11 +74,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Ends_False()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library StartsEndsTest version '1.0.0'
 
                 define private Ends_False: Interval[-1, 7] ends Interval[0,7]
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

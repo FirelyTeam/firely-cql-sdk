@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Elm;
+﻿using CqlSdkPrototype.Cql;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -17,11 +18,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_GreaterThan_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_GreaterThan_Integer: 1 > -1
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -73,11 +74,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_GreaterThan_Integer_False()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_GreaterThan_Integer_False: 1 > 2
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -129,11 +130,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_GreaterThan_Long()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_GreaterThan_Long: 10 > 1L
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -185,11 +186,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_GreaterThan_Decimal_False()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_GreaterThan_Decimal_False: -10 > 1.01
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -242,11 +243,11 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Integer_GreaterThan_Quantity()
         {
             // 1 converts to 1.0 '1' and '1' units are greater to all units
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_GreaterThan_Quantity: 2 > 1.0 'g'
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -298,11 +299,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_GreaterThan_Quantity_False()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_GreaterThan_Quantity_False: 0 > 1.01 '1'
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -354,11 +355,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_GreaterThan_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_GreaterThan_Null: 1 > null
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -409,11 +410,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_GreaterThan_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Null_GreaterThan_Integer: null > 1
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -468,11 +469,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_GreaterThan_Long()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_GreaterThan_Long: 1L > -1L
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -524,11 +525,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_GreaterThan_Long_False()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_GreaterThan_Long_False: 1L > 2L
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -580,11 +581,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_GreaterThan_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_GreaterThan_Long: 1L > 0
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -636,11 +637,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_GreaterThan_Decimal_False()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_NotGreaterThan_Decimal: 1L > 1.01
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -693,11 +694,11 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Long_GreaterThan_Quantity()
         {
             // 1L converts to 1.0 '1' and '1' units are greater to all units
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_GreaterThan_Quantity: 10L > 1.0 'g'
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -749,11 +750,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_NotGreaterThan_Quantity()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_NotGreaterThan_Quantity: 1L > 1.01 '1'
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -805,11 +806,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_GreaterThan_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_GreaterThan_Null: 1L > null
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -860,11 +861,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_GreaterThan_Long()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Null_GreaterThan_Long: null > 1L
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -919,11 +920,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_GreaterThan_Decimal()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_GreaterThan_Decimal: 1.00001 > 1.0
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -975,11 +976,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_GreaterThan_Decimal_False()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_GreaterThan_Decimal_False: 1.0 > 2.0
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1031,11 +1032,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_GreaterThan_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_GreaterThan_Decimal: 1.01 > 1
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1087,11 +1088,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_GreaterThan_Long_False()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_NotGreaterThan_Decimal: 2.0 > 10L
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1144,11 +1145,11 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Decimal_GreaterThan_Quantity()
         {
             // 1.0 converts to 1.0 '1' and '1' units are greater to all units
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_GreaterThan_Quantity: 2.0 > 1.0 'g'
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1200,11 +1201,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_GreaterThan_Quantity_False()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_GreaterThan_Quantity_False: 1.0 > 1.01 '1'
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1256,11 +1257,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_GreaterThan_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_GreaterThan_Null: 1.0 > null
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1311,11 +1312,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_GreaterThan_Decimal()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Null_GreaterThan_Decimal: null > 1.0
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1370,11 +1371,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_GreaterThan_Quantity()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_GreaterThan_Quantity: 1.1 '1' > 1.0 '1'
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1426,11 +1427,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_GreaterThan_Quantity_False()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_GreaterThan_Quantity_False: 1.0 '1' > 2.0 '1'
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1482,11 +1483,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_GreaterThan_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_GreaterThan_Quantity: 1000.0 '1' > 1
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1538,11 +1539,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_GreaterThan_Long_False()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_NotGreaterThan_Quantity: 2.0 '1' > 10L
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1595,11 +1596,11 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Quantity_GreaterThan_Decimal()
         {
             // 1.0 converts to 1.0 '1' and '1' units are greater to all units
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_GreaterThan_Decimal: 1.0 'g' > 0.1
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1651,11 +1652,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_GreaterThan_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_GreaterThan_Null: 1.0 '1' > null
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1706,11 +1707,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_GreaterThan_Quantity()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Null_GreaterThan_Integer: null > 1.0 '1'
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1764,11 +1765,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Date_GreaterThan_Date()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Date_GreaterThan_Date: @2023-12-31 > @2023-01-01
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1820,11 +1821,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Date_GreaterThan_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private String_GreaterThan_String: @2023 > null
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1875,11 +1876,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_GreaterThan_Date()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Null_GreaterThan_Date: null > @2023
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

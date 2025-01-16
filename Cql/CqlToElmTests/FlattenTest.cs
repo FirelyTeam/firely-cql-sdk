@@ -3,6 +3,7 @@ using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using CqlSdkPrototype.Cql;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -18,11 +19,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FlattenEmpty()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library ListTest version '1.0.0'
 
                 define private FlattenEmpty: Flatten({{},{}})
-            ").ShouldSucceed();
+            ", new string[0]).ShouldSucceed();
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -36,11 +37,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FlattenCapitalF()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library ListTest version '1.0.0'
 
                 define private FlattenEmpty: Flatten({{},{}})
-            ");
+            ", new string[0]);
         }
 
         [TestMethod]
@@ -58,14 +59,14 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FlattenListOfValueSet()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library FlattenValueSets version '1.0.0'
 
                 valueset ""One"": 'https://hl7.org/one'
                 valueset ""Two"": 'https://hl7.org/two'
 
                 define f: Flatten({""One"", ""Two""})
-            ");
+            ", new string[0]);
             var flatten = library.Should()
                 .BeACorrectlyInitializedLibraryWithStatementOfType<Flatten>();
             flatten.Should().HaveType(SystemTypes.CodeType.ToListType());
@@ -74,7 +75,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FlattenChoiceType()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library ListTest version '1.0.0'
 
                 define choice:
@@ -83,7 +84,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define private f:
                   flatten ( { { choice }, { choice } } )
-            ");
+            ", new string[0]);
             var choiceType = library.statements[0].expression.resultTypeSpecifier;
             choiceType.Should().BeOfType<ChoiceTypeSpecifier>();
             var flatten = library.statements[1].expression.Should().BeOfType<Flatten>().Subject;
@@ -95,7 +96,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
 
             // requires list promotion
-            var library = MakeLibrary(@"
+            var library = TestExtensions.MakeLibrary(CqlApi, @"
                 library Test version '1.0.0'
 
                 using FHIR version '4.0.1'

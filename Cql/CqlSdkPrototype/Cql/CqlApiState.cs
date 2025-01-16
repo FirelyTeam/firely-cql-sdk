@@ -53,6 +53,7 @@ internal readonly record struct CqlApiState(
             {
                 var modelInfos = AllMappedModelsInOrder
                                  .SelectWhereNotNull(t => value.Models.Contains(t.CqlModel) ? t.ModelInfo : null)
+                                 .Concat(value.ModelInfos)
                                  .ToArray();
                 o.Models = modelInfos;
             });

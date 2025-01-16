@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Elm;
+﻿using CqlSdkPrototype.Cql;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -15,11 +16,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_False()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_False: true implies false
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -71,11 +72,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_True()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_True: true implies true
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -127,11 +128,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void False_Implies_False()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private False_Implies_False: false implies false
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -183,11 +184,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_Null: true implies null
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -238,11 +239,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Implies_False()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private Null_Implies_False: null implies false
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -293,11 +294,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Implies_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private Null_Implies_Null: null implies null
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -348,7 +349,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_1()
         {
-            MakeLibrary(@"
+            TestExtensions.MakeLibrary(CqlApi, @"
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_1: true implies 1

@@ -2,6 +2,7 @@
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
+using CqlSdkPrototype.Cql;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -16,11 +17,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Point_From_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: point from Interval[4,4]
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -50,11 +51,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Point_From_Integer_Closed()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: point from Interval[4,5)
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -85,11 +86,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Point_From_Integers_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers_Null: point from (null as Interval<Integer>)
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -118,11 +119,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Point_From_Integers_Error()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers_Error: point from Interval[1,4]
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

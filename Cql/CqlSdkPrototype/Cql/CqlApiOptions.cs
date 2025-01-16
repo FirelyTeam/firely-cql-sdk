@@ -1,17 +1,21 @@
 ﻿using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CqlToElm;
+using Hl7.Cql.Model;
 
 namespace CqlSdkPrototype.Cql;
 
 public record CqlApiOptions(
     ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling = default,
     ImmutableHashSet<CqlModel>? Models = null,
+    ImmutableHashSet<ModelInfo>? ModelInfos = null,
     AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,
     bool EnableListPromotion = false)
 {
     public static CqlApiOptions Default { get; } = new();
 
     public ImmutableHashSet<CqlModel> Models { get; init; } = Models ?? [];
+
+    public ImmutableHashSet<ModelInfo> ModelInfos { get; init; } = ModelInfos ?? [];
 
     /// <summary>
     /// When <see langword="true"/>, lists of size 1 will automatically be created as necessary from scalar values.

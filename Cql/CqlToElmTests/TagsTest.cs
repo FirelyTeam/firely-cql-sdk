@@ -1,5 +1,7 @@
 ﻿using System;
+using CqlSdkPrototype.Cql;
 using FluentAssertions;
+using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test;
@@ -16,36 +18,36 @@ public class TagsTest : Base
     [Ignore("The C# CQL-to-ELM does not support capturing annotation tags yet. Once that is ready, this test must be completed. It will be moved to CoreTests.AnnotationTagsTest.TestAttributesWithQuotes for the time being.")]
     public void Tags_Containing_Quotes_Must_Be_Escaped_In_CSharp()
     {
-        var lib = MakeLibrary("""
-            library Tags version '1.0.0'
+        var lib = CqlApi.MakeLibrary("""
+                                     library Tags version '1.0.0'
 
-            /*
-            @publisher: MOH Alpha
-            @description: Library used to validate guidance related to Roadrunners Syndrome
-            */
+                                     /*
+                                     @publisher: MOH Alpha
+                                     @description: Library used to validate guidance related to Roadrunners Syndrome
+                                     */
 
-            using FHIR version '4.0.1'
+                                     using FHIR version '4.0.1'
 
-            valueset "Injury due to falling rock": 'http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock'
+                                     valueset "Injury due to falling rock": 'http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock'
 
-            /*
-            @parameter: in
-            */
-            parameter "Measurement Period" default Interval[@2023-01-01, @2023-12-31]
+                                     /*
+                                     @parameter: in
+                                     */
+                                     parameter "Measurement Period" default Interval[@2023-01-01, @2023-12-31]
 
-            context Patient
+                                     context Patient
 
-            /*
-            @description: Conditions of type 'Injury due to falling rock' within the measurement period
-            @fhirquery: akin to Condition?code:in=http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock&onset-date=sa[Period-start]&onset-date=eb[Period-end]
-            @datarequirement: Condition http://hl7.org/fhir/StructureDefinition/Encounter ["code","onset.ofType(DateTime)","subject.ofType(Patient)"]
-            @coderequirement: Condition.code http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock
-            */
-            define "Injury due to falling rock within measurement period":
-                [Condition: "Injury due to falling rock"] C
-                   where (C.onset.value as DateTime) during "Measurement Period"
+                                     /*
+                                     @description: Conditions of type 'Injury due to falling rock' within the measurement period
+                                     @fhirquery: akin to Condition?code:in=http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock&onset-date=sa[Period-start]&onset-date=eb[Period-end]
+                                     @datarequirement: Condition http://hl7.org/fhir/StructureDefinition/Encounter ["code","onset.ofType(DateTime)","subject.ofType(Patient)"]
+                                     @coderequirement: Condition.code http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock
+                                     */
+                                     define "Injury due to falling rock within measurement period":
+                                         [Condition: "Injury due to falling rock"] C
+                                            where (C.onset.value as DateTime) during "Measurement Period"
 
-            """);
+                                     """, new string[0]);
 
         const string tagsLibraryName = "Tags-1.0.0";
 

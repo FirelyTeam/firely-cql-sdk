@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Elm;
+﻿using CqlSdkPrototype.Cql;
+using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -14,11 +15,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Start_of()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library StartEndTest version '1.0.0'
 
                 define private Start_of: start of Interval[1, 3]
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -40,11 +41,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Start_of_null()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library StartEndTest version '1.0.0'
 
                 define private Start_of_null: start of (null as Interval<Integer>)
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -65,11 +66,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Start_of_point_null()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library StartEndTest version '1.0.0'
 
                 define private Start_of_point_null: start of Interval(null, 10]
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -91,11 +92,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void End_of()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EndEndTest version '1.0.0'
 
                 define private End_of: end of Interval[1, 3]
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -117,11 +118,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void End_of_null()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EndEndTest version '1.0.0'
 
                 define private End_of_null: end of (null as Interval<Integer>)
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -142,11 +143,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void End_of_point_null()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library EndEndTest version '1.0.0'
 
                 define private End_of_point_null: end of Interval[10, null)
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

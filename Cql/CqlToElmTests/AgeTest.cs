@@ -2,6 +2,7 @@
 using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using CqlSdkPrototype.Cql;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -16,14 +17,14 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private void TestCalculateAgeAt(string type, DateTimePrecision unit)
         {
-            var lib = MakeLibrary($@"
+            var lib = CqlApi.MakeLibrary($@"
                 library AgeTest version '1.0.0'
 
                 using FHIR version '4.0.1'
 
                 define function CalculateAgeAt(birthDate {type}, at {type}):
                     CalculateAgeIn{Enum.GetName(unit)}sAt(birthDate,at)
-            ");
+            ", new string[0]);
             var caa = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<CalculateAgeAt>();
             caa.precisionSpecified.Should().BeTrue();
             caa.precision.Should().Be(unit);
@@ -31,14 +32,14 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private void TestAgeAt(string type, DateTimePrecision unit)
         {
-            var lib = MakeLibrary($@"
+            var lib = CqlApi.MakeLibrary($@"
                 library AgeTest version '1.0.0'
 
                 using FHIR version '4.0.1'
 
                 define function AgeAt(at {type}):
                     AgeIn{Enum.GetName(unit)}sAt(at)
-            ");
+            ", new string[0]);
             var caa = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<CalculateAgeAt>();
             caa.precisionSpecified.Should().BeTrue();
             caa.precision.Should().Be(unit);
@@ -46,14 +47,14 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private void TestCalculateAge(string type, DateTimePrecision unit)
         {
-            var lib = MakeLibrary($@"
+            var lib = CqlApi.MakeLibrary($@"
                 library AgeTest version '1.0.0'
 
                 using FHIR version '4.0.1'
 
                 define function CalculateAge(birthDate {type}):
                     CalculateAgeIn{Enum.GetName(unit)}s(birthDate)
-            ");
+            ", new string[0]);
             var caa = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<CalculateAge>();
             caa.precisionSpecified.Should().BeTrue();
             caa.precision.Should().Be(unit);
@@ -61,13 +62,13 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private void TestAge(string type, DateTimePrecision unit)
         {
-            var lib = MakeLibrary($@"
+            var lib = CqlApi.MakeLibrary($@"
                 library AgeTest version '1.0.0'
 
                 using FHIR version '4.0.1'
 
                 define value: AgeIn{Enum.GetName(unit)}s()
-            ");
+            ", new string[0]);
             var caa = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<CalculateAge>();
             caa.precisionSpecified.Should().BeTrue();
             caa.precision.Should().Be(unit);

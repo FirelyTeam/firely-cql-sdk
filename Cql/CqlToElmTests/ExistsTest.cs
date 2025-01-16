@@ -3,6 +3,7 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using CqlSdkPrototype.Cql;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -17,11 +18,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Exists_True()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists { 1, 3, 5, 7 }
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -41,11 +42,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Exists_Empty_List()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists { }
-            ");
+            ", new string[0]);
 
             var exists = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Exists>();
             {
@@ -61,11 +62,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Exists_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists null
-            ");
+            ", new string[0]);
 
             var exists = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Exists>();
             {
@@ -82,11 +83,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Exists_List_Nulls()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists { null }
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

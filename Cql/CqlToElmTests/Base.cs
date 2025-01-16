@@ -9,11 +9,15 @@ using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
+using CqlSdkPrototype.Cql;
+using CqlSdkPrototype.Cql.Extensibility;
+using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Elm.Internal;
@@ -21,6 +25,14 @@ using CqlSdkPrototype.Runtime;
 using Expression = Hl7.Cql.Elm.Expression;
 using CqlSdkPrototype.Runtime.Extensions;
 using CqlSdkPrototype.Infrastructure;
+using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Model;
+using ChoiceTypeSpecifier = Hl7.Cql.Elm.ChoiceTypeSpecifier;
+using IntervalTypeSpecifier = Hl7.Cql.Elm.IntervalTypeSpecifier;
+using ListTypeSpecifier = Hl7.Cql.Elm.ListTypeSpecifier;
+using NamedTypeSpecifier = Hl7.Cql.Elm.NamedTypeSpecifier;
+using TupleTypeSpecifier = Hl7.Cql.Elm.TupleTypeSpecifier;
+using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -41,13 +53,12 @@ namespace Hl7.Cql.CqlToElm.Test
             Action<IModelProvider>? models = null,
             Type? libraryProviderType = null) =>
             ElmApiState.AddCqlCompilerServices(new ServiceCollection()
-                      .AddCqlToElmServices()
-                      .AddCqlToElmModels(models ?? (mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401)))
-                      .AddCqlToElmOptions(options)
-                      .AddCqlToElmMessaging()
-                      .AddLogging(builder => builder.AddConsole())
-                      .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider)))
-            ;
+                                               .AddCqlToElmServices()
+                                               .AddCqlToElmModels(models ?? (mp => mp.Add(Model.Models.ElmR1).Add(Model.Models.Fhir401)))
+                                               .AddCqlToElmOptions(options)
+                                               .AddCqlToElmMessaging()
+                                               .AddLogging(builder => builder.AddConsole())
+                                               .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider)));
 
 
         protected static void ClassInitialize(Action<CqlToElmOptions>? options = null)
@@ -56,24 +67,31 @@ namespace Hl7.Cql.CqlToElm.Test
             ServiceProvider = services.BuildServiceProvider();
         }
 
-        protected static Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);
 
-        protected virtual Library ConvertLibrary(IServiceProvider services, string cql) =>
+        internal static byte[] Compile(Library library)
+        {
+            var assembly = CreateElmApi()
+                           .AddElmLibraries([library])
+                           .Compile()
+                           .AsExtendable()
+                           .Entries
+                           .Values
+                           .Single()
+                           .AssemblyBinary;
+            return assembly;
+        }
+
+        private static Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);
+
+        private static Library ConvertLibrary(IServiceProvider services, string cql) =>
             services.GetRequiredService<CqlToElmConverter>().ConvertLibrary(cql);
 
 
-        internal static Library MakeLibrary(string cql, params string[] expectedErrors)
-        {
-            var library = ConvertLibrary(cql);
 
-            if (expectedErrors.Any())
-                library.ShouldReportError(expectedErrors);
-            else
-                library.ShouldSucceed();
-
-            return library;
-        }
-        internal Library MakeLibrary(IServiceProvider services, string cql, params string[] expectedErrors)
+        internal static Library MakeLibrary(
+            IServiceProvider services,
+            string cql,
+            params string[] expectedErrors)
         {
             var library = ConvertLibrary(services, cql);
             if (expectedErrors.Any())
@@ -83,11 +101,15 @@ namespace Hl7.Cql.CqlToElm.Test
 
             return library;
         }
-        internal LibraryBuilder MakeLibraryBuilder(IServiceProvider services, string cql, params string[] expectedErrors)
+
+        internal static LibraryBuilder MakeLibraryBuilder(
+            IServiceProvider services,
+            string cql,
+            params string[] expectedErrors)
         {
             using var scope = services.CreateScope();
             var builder = services.GetRequiredService<CqlToElmConverter>()
-                .GetBuilder(cql, scope);
+                                  .GetBuilder(cql, scope);
             var lib = builder.Build();
             if (expectedErrors.Any())
                 lib.ShouldReportError(expectedErrors);
@@ -97,7 +119,8 @@ namespace Hl7.Cql.CqlToElm.Test
             return builder;
         }
 
-        internal record LibrarySetDefinitions(
+        internal record LibrarySetDefinitions
+        (
             LibrarySet LibrarySet,
             DefinitionDictionary<LambdaExpression> Definitions);
 
@@ -110,7 +133,8 @@ namespace Hl7.Cql.CqlToElm.Test
             return new(librarySet, definitions);
         }
 
-        internal record LibrarySetCSharp(
+        internal record LibrarySetCSharp
+        (
             LibrarySetDefinitions LibrarySetDefinitions,
             IReadOnlyDictionary<string, string> CSharpCodeByLibraryName);
 
@@ -142,19 +166,10 @@ namespace Hl7.Cql.CqlToElm.Test
             var assemblyBytes = compile.Single().assemblyDataWithSourceCode.AssemblyBytes;
 
             using var scope = new RuntimeApi()
-                                        .AddAssemblies([AssemblyData.Default with { AssemblyBytes = assemblyBytes }])
-                                        .CreateRuntimeScope();
+                              .AddAssemblies([AssemblyData.Default with { AssemblyBytes = assemblyBytes }])
+                              .CreateRuntimeScope();
             var result = scope.GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);
             return result;
-        }
-
-        private static ElmApi CreateElmApi()
-        {
-            var elmApiOptions = ElmApiOptions.Default;
-            if (Debugger.IsAttached)
-                elmApiOptions = elmApiOptions with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
-            var elmApi = new ElmApi(options: elmApiOptions);
-            return elmApi;
         }
 
         private static readonly CqlContext DefaultCqlContext = FhirCqlContext.CreateContext();
@@ -180,7 +195,7 @@ namespace Hl7.Cql.CqlToElm.Test
             return result;
         }
 
-        public void AssertResult<T>(Expression be, T expected)
+        protected static void AssertResult<T>(Expression be, T expected)
         {
             var lambda = LibraryExpressionBuilder.Lambda(@be);
             var dg = lambda.Compile();
@@ -198,7 +213,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 throw ex.InnerException!;
             }
         }
-        public void AssertNullResult(Expression be)
+
+        protected static void AssertNullResult(Expression be)
         {
             var lambda = LibraryExpressionBuilder.Lambda(@be);
             var dg = lambda.Compile();
@@ -216,7 +232,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
 
-        protected void AssertIntervalType(TypeSpecifier specifier, string pointTypeName)
+        protected static void AssertIntervalType(TypeSpecifier specifier, string pointTypeName)
         {
             Assert.IsInstanceOfType(specifier, typeof(IntervalTypeSpecifier));
             var lts = (IntervalTypeSpecifier)specifier;
@@ -228,28 +244,27 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(pointTypeName, nts.name.Name);
         }
 
-        protected void AssertIntervalType(TypeSpecifier typeSpecifier, TypeSpecifier pointType)
+        protected static void AssertIntervalType(TypeSpecifier typeSpecifier, TypeSpecifier pointType)
         {
             Assert.IsInstanceOfType(typeSpecifier, typeof(IntervalTypeSpecifier));
             var lts = (IntervalTypeSpecifier)typeSpecifier;
             Assert.IsNotNull(lts.pointType);
             Assert.AreEqual(lts.pointType, pointType);
-
         }
 
-        protected void AssertChoiceType(TypeSpecifier specifier, params string[] namedTypes)
+        protected static void AssertChoiceType(TypeSpecifier specifier, params string[] namedTypes)
         {
             Assert.IsInstanceOfType(specifier, typeof(ChoiceTypeSpecifier));
             var cts = (ChoiceTypeSpecifier)specifier;
             CollectionAssert.AllItemsAreInstancesOfType(cts.choice, typeof(NamedTypeSpecifier));
             var choiceNames = cts.choice
-                .OfType<NamedTypeSpecifier>()
-                .Select(nts => nts.name?.Name)
-                .ToArray();
+                                 .OfType<NamedTypeSpecifier>()
+                                 .Select(nts => nts.name?.Name)
+                                 .ToArray();
             CollectionAssert.AreEqual(namedTypes, choiceNames);
         }
 
-        protected void AssertTupleType(TypeSpecifier specifier, params (string name, string type)[] namedTypes)
+        protected static void AssertTupleType(TypeSpecifier specifier, params (string name, string type)[] namedTypes)
         {
             Assert.IsInstanceOfType(specifier, typeof(TupleTypeSpecifier));
             var tts = (TupleTypeSpecifier)specifier;
@@ -264,7 +279,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
 
-        protected void AssertListType(TypeSpecifier specifier, string elementTypeName)
+        protected static void AssertListType(TypeSpecifier specifier, string elementTypeName)
         {
             Assert.IsInstanceOfType(specifier, typeof(ListTypeSpecifier));
             var lts = (ListTypeSpecifier)specifier;
@@ -276,7 +291,10 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(elementTypeName, nts.name.Name);
         }
 
-        protected void AssertList<T>(List list, T[] expectedValues, string? precision = null)
+        protected static void AssertList<T>(
+            List list,
+            T[] expectedValues,
+            string? precision = null)
         {
             Assert.IsNotNull(list.element);
             Assert.AreEqual(expectedValues.Length, list.element.Length);
@@ -291,18 +309,17 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(expectedValues.Length, array.Length);
             for (int i = 0; i < expectedValues.Length; i++)
                 Assert.AreEqual(true, ctx.Operators.Comparer.Equals(expectedValues[i], array[i], precision));
-
         }
 
-        protected Library CreateLibraryForExpression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
+        protected static Library CreateLibraryForExpression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
         {
-            return MakeLibrary($@"
+            return CqlApi.MakeLibrary($@"
                 library Test version '1.0.0'
 
-                define private ""{memberName}"": {expression}");
+                define private ""{memberName}"": {expression}", new string[0]);
         }
 
-        protected static Expression Expression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
+        protected static Expression Expression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
         {
             var lib = ConvertLibrary($@"
                 library Test version '1.0.0'
@@ -311,7 +328,8 @@ namespace Hl7.Cql.CqlToElm.Test
             return lib.statements[0].expression;
         }
 
-        internal static void AddFHIRHelpers(MemoryLibraryProvider provider,
+        internal static void AddFHIRHelpers(
+            MemoryLibraryProvider provider,
             IServiceScope scope,
             string path = @"Input\FHIRHelpers-4.0.1.cql")
         {
@@ -320,16 +338,58 @@ namespace Hl7.Cql.CqlToElm.Test
             provider.Libraries.Add("FHIRHelpers", "4.0.1", builder);
         }
 
-        internal static byte[] Compile(Library library)
+        protected static CqlLibraryString FHIRHelpers { get; } =
+            CqlLibraryString.FromIdentifierAndString(
+                CqlVersionedLibraryIdentifier.Parse("FHIRHelpers-4.0.1"),
+                File.ReadAllText(@"Input\FHIRHelpers-4.0.1.cql"));
+
+        protected static ILoggerFactory LoggerFactory { get; } =
+            new ServiceCollection()
+                .AddLogging(lb => lb.AddConsole())
+                .BuildServiceProvider()
+                .GetRequiredService<ILoggerFactory>();
+
+        protected static CqlApi CreateCqlApi(
+            ImmutableHashSet<CqlModel>? models = null,
+            ImmutableHashSet<ModelInfo>? modelInfos = null,
+            AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
+            bool enableListPromotion = false) =>
+            new CqlApi(
+                LoggerFactory,
+                new CqlApiOptions(ProcessBatchItemExceptionHandling.ThrowException, models, modelInfos, ambiguousTypeBehavior, enableListPromotion ) );
+
+        protected static CqlApi CqlApi => CreateCqlApi();
+
+        protected static ElmApi CreateElmApi(
+            ImmutableHashSet<CqlModel>? models = null,
+            ImmutableHashSet<ModelInfo>? modelInfos = null,
+            AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
+            bool enableListPromotion = false) =>
+                CreateCqlApi(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
+                .CreateElmApi(_ => new ElmApiOptions(
+                                  ProcessBatchItemExceptionHandling.ThrowException,
+                                  Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));
+    }
+
+    internal static partial class TestExtensions
+    {
+        public static Library MakeLibrary(
+            this CqlApi cqlApi,
+            string cql,
+            params string[] expectedErrors)
         {
-            var assembly = CreateElmApi()
-                           .AddElmLibraries([library])
-                           .Compile().AsExtendable()
-                                 .Entries
-                                 .Values
-                                 .Single()
-                                 .AssemblyBinary;
-            return assembly;
+            var library = cqlApi
+                             .AddCqlLibraryString(CqlLibraryString.FromIdentifierAndString(CqlVersionedLibraryIdentifier.Parse("Test-1.0.0"), cql))
+                             .Translate()
+                             .AsExtendable()
+                             .Entries.Values.Single().ElmLibrary!;
+
+            if (expectedErrors.Any())
+                library.ShouldReportError(expectedErrors);
+            else
+                library.ShouldSucceed();
+
+            return library;
         }
     }
 }

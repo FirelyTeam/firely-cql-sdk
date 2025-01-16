@@ -4,6 +4,7 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using CqlSdkPrototype.Cql;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -20,7 +21,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_As_Decimal()
         {
-            var library = MakeLibrary(@"
+            var library = TestExtensions.MakeLibrary(CqlApi, @"
                 library AsTest version '1.0.0'
 
                 define private Integer_As_Decimal: 1 as System.Decimal
@@ -31,13 +32,13 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_As_Vocabulary()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library AsTest version '1.0.0'
 
                 valueset ""vs"": 'http://xyz.com'
 
                 define private ValueSet_As_Vocabulary: ""vs"" as System.Vocabulary
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -64,11 +65,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_As_Decimal()
         {
-            var library = MakeLibrary(@"
+            var library = CqlApi.MakeLibrary(@"
                 library AsTest version '1.0.0'
 
                 define private Null_As_Decimal: null as System.Decimal
-            ");
+            ", new string[0]);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -138,13 +139,13 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FhirId_As_FhirString()
         {
-            var lib = MakeLibrary(@"
+            var lib = CqlApi.MakeLibrary(@"
                 library AsTest version '1.0.0'
 
                 using FHIR version '4.0.1'
 
                 define private function f(id FHIR.id): id as FHIR.string
-            ");
+            ", new string[0]);
             var @as = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
             var lambdas = LibraryExpressionBuilder.ProcessLibrary(lib);
             var delegates = lambdas.CompileAll();
@@ -159,7 +160,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Choice_As()
         {
             // from MATGlobalCommonFunctionsFHIR4.cql function "Normalize Interval"
-            var lib = MakeLibrary(@"
+            var lib = CqlApi.MakeLibrary(@"
                 library AsTest version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -169,7 +170,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define private function f(choice Choice<FHIR.dateTime, FHIR.Range>):
                     choice as FHIR.Range
-            ");
+            ", new string[0]);
             var lambdas = LibraryExpressionBuilder.ProcessLibrary(lib);
         }
     }

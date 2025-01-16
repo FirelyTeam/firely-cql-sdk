@@ -3,6 +3,7 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using CqlSdkPrototype.Cql;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -51,13 +52,13 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Convert_Quantity_To_Weeks()
         {
-            var lib = MakeLibrary(@"
+            var lib = CqlApi.MakeLibrary(@"
 
                 library Test version '1.0.0'
 
                 define function f(q Quantity):
                     convert q to weeks
-            ");
+            ", new string[0]);
             lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ConvertQuantity>();
 
         }

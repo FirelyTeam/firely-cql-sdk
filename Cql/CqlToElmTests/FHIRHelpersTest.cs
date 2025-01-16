@@ -5,6 +5,7 @@ using Hl7.Cql.Runtime;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
+using CqlSdkPrototype.Cql;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -23,7 +24,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void FHIRHelpers_To_Elm()
         {
             var cql = File.ReadAllText(@"Input\FHIRHelpers-4.0.1.cql");
-            var lib = MakeLibrary(cql);
+            var lib = CqlApi.MakeLibrary(cql, new string[0]);
             lib.GetErrors().Should().BeEmpty();
             using var fs = new FileStream("FHIRHelpers-4.0.1.json", FileMode.Create, FileAccess.Write, FileShare.Read);
             lib.WriteJson(fs, true);
@@ -35,7 +36,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void FHIRHelpers_To_Expressions()
         {
             var cql = File.ReadAllText(@"Input\FHIRHelpers-4.0.1.cql");
-            var lib = MakeLibrary(cql);
+            var lib = CqlApi.MakeLibrary(cql, new string[0]);
             lib.GetErrors().Should().BeEmpty();
             using var fs = new FileStream("FHIRHelpers-4.0.1.json", FileMode.Create, FileAccess.Write, FileShare.Read);
             lib.WriteJson(fs);
@@ -48,7 +49,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FHIRHelpers_ToConcept_Right_Types()
         {
-            var lib = MakeLibrary(@"
+            var lib = CqlApi.MakeLibrary(@"
                 library FHIRHelpers version '4.0.1'
 
                 using FHIR version '4.0.1'
@@ -61,7 +62,7 @@ namespace Hl7.Cql.CqlToElm.Test
                             codes: null,
                             display: concept.text.value
                         }
-            ");
+            ", new string[0]);
             var @if = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
             @if.Should().HaveType(SystemTypes.ConceptType);
         }
@@ -69,7 +70,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FHIRHelpers_ToConcept_Query()
         {
-            var lib = MakeLibrary(@"
+            var lib = CqlApi.MakeLibrary(@"
                 library FHIRHelpers version '4.0.1'
 
                 using FHIR version '4.0.1'
@@ -92,7 +93,7 @@ namespace Hl7.Cql.CqlToElm.Test
                             codes: concept.coding C return ToCode(C),
                             display: concept.text.value
                         }
-            ");
+            ", new string[0]);
 
             lib.statements.Should().HaveCount(2);
             var fd = lib.statements[1].Should().BeOfType<FunctionDef>().Subject;
@@ -104,22 +105,22 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FHIRHelpers_Coding_To_ListCodes()
         {
-            var services = ServiceCollection().BuildServiceProvider();
-            var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
-            using var scope = services.CreateScope();
-            AddFHIRHelpers(libraryProvider, scope);
-            var lib = MakeLibrary(services, @"
-                library Test version '1.0.0'
+            // var services = ServiceCollection().BuildServiceProvider();
+            // var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
+            // using var scope = services.CreateScope();
+            //AddFHIRHelpers(libraryProvider, scope);
+            var lib = CqlApi.MakeLibrary("""
+                                         library Test version '1.0.0'
 
-                using FHIR version '4.0.1'
+                                         using FHIR version '4.0.1'
 
-                valueset ""VS"" : 'http://snomed.info/sct'
+                                         valueset "VS" : 'http://snomed.info/sct'
 
-                include FHIRHelpers version '4.0.1' called FHIRHelpers
+                                         include FHIRHelpers version '4.0.1' called FHIRHelpers
 
-                define function inTest(condition FHIR.Condition, codes List<Code>):
-                    condition.code.coding in ""VS""
-            ");
+                                         define function inTest(condition FHIR.Condition, codes List<Code>):
+                                           condition.code.coding in "VS"
+                                         """, new string[0]);
             lib.statements.Should().HaveCount(1);
             var fd = lib.statements[0].Should().BeOfType<FunctionDef>().Subject;
             var body = fd.expression;

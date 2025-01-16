@@ -2,6 +2,7 @@
 using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using CqlSdkPrototype.Cql;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -19,10 +20,10 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private Library createLibraryForExpression(string expression)
         {
-            return MakeLibrary($@"
+            return CqlApi.MakeLibrary($@"
                 library IsTest version '1.0.0'
 
-                define private predicate: {expression}");
+                define private predicate: {expression}", new string[0]);
         }
 
         [TestMethod]

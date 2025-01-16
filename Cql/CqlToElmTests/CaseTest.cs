@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Elm;
+﻿using CqlSdkPrototype.Cql;
+using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
 
@@ -14,10 +15,10 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private Library createLibraryForExpression(string expression)
         {
-            return MakeLibrary($@"
+            return CqlApi.MakeLibrary($@"
                 library CaseTest version '1.0.0'
 
-                define private predicate: {expression}");
+                define private predicate: {expression}", new string[0]);
         }
 
         [TestMethod]

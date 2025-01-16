@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using M = Hl7.Cql.Model;
 namespace Hl7.Cql.CqlToElm.Test
 {
-    internal static class TestExtensions
+    internal static partial class TestExtensions
     {
         internal static readonly IModelProvider Provider = new BuiltinModelProvider(M.Models.ElmR1, M.Models.Fhir401);
         internal static readonly CoercionProvider CoercionProvider = new CoercionProvider(Provider, new OptionsWrapper<CqlToElmOptions>(CqlToElmOptions.Default));
