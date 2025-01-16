@@ -22,9 +22,9 @@ public partial class SevereObstetricComplicationsFHIR_0_1_000 : ILibrary, ISingl
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "SevereObstetricComplicationsFHIR";
-    string ILibrary.Version => "0.1.000";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, PCMaternal_5_19_000.Instance, QICoreCommon_2_1_000.Instance];
+    public string Name => "SevereObstetricComplicationsFHIR";
+    public string Version => "0.1.000";
+    public ILibrary[] Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, PCMaternal_5_19_000.Instance, QICoreCommon_2_1_000.Instance];
 
     #endregion ILibrary Implementation
 

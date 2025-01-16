@@ -244,14 +244,14 @@ internal class LibrarySetCSharpCodeGenerator
         {
             IndentedTextWriter.WriteLine("#region ILibrary Implementation");
             IndentedTextWriter.WriteLine();
-            IndentedTextWriter.WriteLine($"string ILibrary.Name => {LibraryVersionedIdentifier.id.QuoteString()};");
-            IndentedTextWriter.WriteLine($"string ILibrary.Version => {LibraryVersionedIdentifier.version.QuoteString()};");
+            IndentedTextWriter.WriteLine($"public string Name => {LibraryVersionedIdentifier.id.QuoteString()};");
+            IndentedTextWriter.WriteLine($"public string Version => {LibraryVersionedIdentifier.version.QuoteString()};");
             var dependencies =
                 LibrarySetWriter.LibrarySet
                                 .GetLibraryDependencies(LibraryName, throwError: true)
                                 .Select(dep => VariableNameGenerator.NormalizeIdentifier(dep.GetVersionedIdentifier()!))
                                 .Select(typeName => $"{typeName}.Instance");
-            IndentedTextWriter.WriteLine($"IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [{string.Join(", ", dependencies)}];");
+            IndentedTextWriter.WriteLine($"public ILibrary[] Dependencies => [{string.Join(", ", dependencies)}];");
             IndentedTextWriter.WriteLine();
             IndentedTextWriter.WriteLine("#endregion ILibrary Implementation");
             IndentedTextWriter.WriteLine();

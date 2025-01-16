@@ -22,9 +22,9 @@ public partial class VTEFHIR4_4_8_000 : ILibrary, ISingleton<VTEFHIR4_4_8_000>
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "VTEFHIR4";
-    string ILibrary.Version => "4.8.000";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, FHIRHelpers_4_0_001.Instance];
+    public string Name => "VTEFHIR4";
+    public string Version => "4.8.000";
+    public ILibrary[] Dependencies => [MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, FHIRHelpers_4_0_001.Instance];
 
     #endregion ILibrary Implementation
 

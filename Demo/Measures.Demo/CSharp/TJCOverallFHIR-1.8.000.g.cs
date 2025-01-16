@@ -22,9 +22,9 @@ public partial class TJCOverallFHIR_1_8_000 : ILibrary, ISingleton<TJCOverallFHI
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "TJCOverallFHIR";
-    string ILibrary.Version => "1.8.000";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, FHIRHelpers_4_0_001.Instance];
+    public string Name => "TJCOverallFHIR";
+    public string Version => "1.8.000";
+    public ILibrary[] Dependencies => [MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, FHIRHelpers_4_0_001.Instance];
 
     #endregion ILibrary Implementation
 

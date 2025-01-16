@@ -22,9 +22,9 @@ public partial class NCQAPalliativeCare_1_0_0 : ILibrary, ISingleton<NCQAPalliat
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "NCQAPalliativeCare";
-    string ILibrary.Version => "1.0.0";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAFHIRBase_1_0_0.Instance, NCQAStatus_1_0_0.Instance];
+    public string Name => "NCQAPalliativeCare";
+    public string Version => "1.0.0";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, NCQAFHIRBase_1_0_0.Instance, NCQAStatus_1_0_0.Instance];
 
     #endregion ILibrary Implementation
 

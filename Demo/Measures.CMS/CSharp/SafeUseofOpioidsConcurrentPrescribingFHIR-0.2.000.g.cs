@@ -22,9 +22,9 @@ public partial class SafeUseofOpioidsConcurrentPrescribingFHIR_0_2_000 : ILibrar
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "SafeUseofOpioidsConcurrentPrescribingFHIR";
-    string ILibrary.Version => "0.2.000";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, Hospice_6_12_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance];
+    public string Name => "SafeUseofOpioidsConcurrentPrescribingFHIR";
+    public string Version => "0.2.000";
+    public ILibrary[] Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, Hospice_6_12_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance];
 
     #endregion ILibrary Implementation
 
