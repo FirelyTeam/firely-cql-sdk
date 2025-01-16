@@ -1,5 +1,4 @@
-﻿using CqlSdkPrototype.Cql.Internal;
-using CqlSdkPrototype.Elm.Extensibility;
+﻿using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Elm.Internal;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
@@ -14,19 +13,21 @@ using ElmCompilationEntriesMap = System.Collections.Immutable.ImmutableDictionar
 
 namespace CqlSdkPrototype.Elm;
 
-public class ElmApi(
-    ILoggerFactory? loggerFactory = null,
-    ElmApiOptions? options = null) :
+public class ElmApi :
     IElmApiExtendable<ElmApi>,
     IElmApiInternal<ElmApi>
 {
-    TResult IElmApiExtendable<ElmApi>.UseLogger<TResult>(Func<ElmApi, ILogger<ElmApi>, TResult> action) => action(this, _state.Logger);
-    ElmApiState IElmApiInternal<ElmApi>.State => _state;
-    ILoggerFactory IElmApiExtendable<ElmApi>.LoggerFactory => _state.LoggerFactory;
+    public ElmApi(
+        ILoggerFactory? loggerFactory = null,
+        ElmApiOptions? options = null) : this(ElmApiState.Create(loggerFactory ?? NullLoggerFactory.Instance, options ?? ElmApiOptions.Default))
+    {
+    }
+
+    internal ElmApi(ElmApiState state) => _state = state; // Might make this public later. Used for testing now.
 
     #region State
 
-    private ElmApiState _state = ElmApiState.Create(loggerFactory ?? NullLoggerFactory.Instance, options ?? ElmApiOptions.Default);
+    private ElmApiState _state;
 
     ElmApiOptions IElmApiExtendable<ElmApi>.Options => _state.Options;
     IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry> IElmApiExtendable<ElmApi>.Entries => _state.Entries;
@@ -46,6 +47,10 @@ public class ElmApi(
             _state = _state with { Options = newOptions };
         return this;
     }
+
+    TResult IElmApiExtendable<ElmApi>.UseLogger<TResult>(Func<ElmApi, ILogger<ElmApi>, TResult> action) => action(this, _state.Logger);
+    ElmApiState IElmApiInternal<ElmApi>.State => _state;
+    ILoggerFactory IElmApiExtendable<ElmApi>.LoggerFactory => _state.LoggerFactory;
 
     #endregion
 

@@ -16,11 +16,6 @@ public class CqlApi :
     ICqlApiExtendable<CqlApi>,
     ICqlApiInternal<CqlApi>
 {
-    ILoggerFactory ICqlApiExtendable<CqlApi>.LoggerFactory => _state.LoggerFactory;
-    CqlApiOptions ICqlApiExtendable<CqlApi>.Options => _state.Options;
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> ICqlApiExtendable<CqlApi>.Entries => _state.Entries;
-    CqlApiState ICqlApiInternal<CqlApi>.State => _state;
-
     internal CqlApi(CqlApiState state) => _state = state; // Might make this public later. Used for testing now.
 
     public CqlApi(
@@ -47,6 +42,11 @@ public class CqlApi :
         _state = _state with { Options = newOptions };
         return this;
     }
+
+    ILoggerFactory ICqlApiExtendable<CqlApi>.LoggerFactory => _state.LoggerFactory;
+    CqlApiOptions ICqlApiExtendable<CqlApi>.Options => _state.Options;
+    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> ICqlApiExtendable<CqlApi>.Entries => _state.Entries;
+    CqlApiState ICqlApiInternal<CqlApi>.State => _state;
 
     #endregion
 

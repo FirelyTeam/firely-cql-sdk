@@ -6,21 +6,19 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace CqlSdkPrototype.Runtime;
 
-public class RuntimeApi(
-    ILoggerFactory? loggerFactory = null,
-    RuntimeApiOptions? options = null) : IRuntimeApiExtendable<RuntimeApi>
+public class RuntimeApi : IRuntimeApiExtendable<RuntimeApi>
 {
+    public RuntimeApi(
+        ILoggerFactory? loggerFactory = null,
+        RuntimeApiOptions? options = null)
+        : this (RuntimeApiState.Create(loggerFactory ?? NullLoggerFactory.Instance, options ?? RuntimeApiOptions.Default))
+    { }
+
+    internal RuntimeApi(RuntimeApiState state) => _state = state; // Might make this public later. Used for testing now.
+
     #region State
 
-    private RuntimeApiState _state = RuntimeApiState.Create(loggerFactory ?? NullLoggerFactory.Instance, options ?? RuntimeApiOptions.Default);
-
-    RuntimeApiOptions IRuntimeApiExtendable<RuntimeApi>.Options => _state.Options;
-    IReadOnlySet<RuntimeApiStateEntry> IRuntimeApiExtendable<RuntimeApi>.Entries => _state.Entries;
-    ILoggerFactory IRuntimeApiExtendable<RuntimeApi>.LoggerFactory => _state.LoggerFactory;
-
-    #endregion
-
-    #region Construction
+    private RuntimeApiState _state;
 
     private RuntimeApi WithEntries(
         ImmutableHashSet<RuntimeApiStateEntry>? assemblyData = null)
@@ -40,6 +38,10 @@ public class RuntimeApi(
             _state = _state with { Options = newOptions };
         return this;
     }
+
+    RuntimeApiOptions IRuntimeApiExtendable<RuntimeApi>.Options => _state.Options;
+    IReadOnlySet<RuntimeApiStateEntry> IRuntimeApiExtendable<RuntimeApi>.Entries => _state.Entries;
+    ILoggerFactory IRuntimeApiExtendable<RuntimeApi>.LoggerFactory => _state.LoggerFactory;
 
     #endregion
 

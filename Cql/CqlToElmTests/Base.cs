@@ -302,15 +302,6 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private ""{memberName}"": {expression}");
         }
 
-        protected Library ExpectErrorsForExpression(string expression,
-            params string[] expectedErrors)
-        {
-            return MakeLibrary($@"
-                library Test version '1.0.0'
-
-                define private ""Has Errors"": {expression}", expectedErrors);
-        }
-
         protected static Expression Expression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
         {
             var lib = ConvertLibrary($@"
