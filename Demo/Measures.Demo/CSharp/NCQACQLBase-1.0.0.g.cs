@@ -22,9 +22,9 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 
     #region ILibrary Implementation
 
-    public string Name => "NCQACQLBase";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [];
+    string ILibrary.Name => "NCQACQLBase";
+    string ILibrary.Version => "1.0.0";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [];
 
     #endregion ILibrary Implementation
 

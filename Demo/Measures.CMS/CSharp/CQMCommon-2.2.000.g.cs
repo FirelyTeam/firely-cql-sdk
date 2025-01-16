@@ -22,9 +22,9 @@ public partial class CQMCommon_2_2_000 : ILibrary, ISingleton<CQMCommon_2_2_000>
 
     #region ILibrary Implementation
 
-    public string Name => "CQMCommon";
-    public string Version => "2.2.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
+    string ILibrary.Name => "CQMCommon";
+    string ILibrary.Version => "2.2.000";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
 
     #endregion ILibrary Implementation
 

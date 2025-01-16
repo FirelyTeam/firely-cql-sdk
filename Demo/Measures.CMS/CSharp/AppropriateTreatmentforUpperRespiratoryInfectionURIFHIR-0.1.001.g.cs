@@ -22,9 +22,9 @@ public partial class AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR_0_1
 
     #region ILibrary Implementation
 
-    public string Name => "AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR";
-    public string Version => "0.1.001";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance, QICoreCommon_2_1_000.Instance, Antibiotic_1_7_000.Instance];
+    string ILibrary.Name => "AppropriateTreatmentforUpperRespiratoryInfectionURIFHIR";
+    string ILibrary.Version => "0.1.001";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, Hospice_6_12_000.Instance, Status_1_8_000.Instance, QICoreCommon_2_1_000.Instance, Antibiotic_1_7_000.Instance];
 
     #endregion ILibrary Implementation
 

@@ -22,9 +22,9 @@ public partial class NCQAHealthPlanEnrollment_1_0_0 : ILibrary, ISingleton<NCQAH
 
     #region ILibrary Implementation
 
-    public string Name => "NCQAHealthPlanEnrollment";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [NCQACQLBase_1_0_0.Instance, FHIRHelpers_4_0_001.Instance, NCQATerminology_1_0_0.Instance, NCQAFHIRBase_1_0_0.Instance];
+    string ILibrary.Name => "NCQAHealthPlanEnrollment";
+    string ILibrary.Version => "1.0.0";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [NCQACQLBase_1_0_0.Instance, FHIRHelpers_4_0_001.Instance, NCQATerminology_1_0_0.Instance, NCQAFHIRBase_1_0_0.Instance];
 
     #endregion ILibrary Implementation
 

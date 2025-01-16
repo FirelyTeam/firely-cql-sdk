@@ -22,9 +22,9 @@ public partial class AdultOutpatientEncountersFHIR4_2_2_000 : ILibrary, ISinglet
 
     #region ILibrary Implementation
 
-    public string Name => "AdultOutpatientEncountersFHIR4";
-    public string Version => "2.2.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
+    string ILibrary.Name => "AdultOutpatientEncountersFHIR4";
+    string ILibrary.Version => "2.2.000";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
 
     #endregion ILibrary Implementation
 

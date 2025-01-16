@@ -22,9 +22,9 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
 
     #region ILibrary Implementation
 
-    public string Name => "MeasureExample";
-    public string Version => "0.0.1";
-    public ILibrary[] Dependencies => [];
+    string ILibrary.Name => "MeasureExample";
+    string ILibrary.Version => "0.0.1";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [];
 
     #endregion ILibrary Implementation
 

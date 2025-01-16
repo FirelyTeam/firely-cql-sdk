@@ -22,9 +22,9 @@ public partial class HospiceFHIR4_2_3_000 : ILibrary, ISingleton<HospiceFHIR4_2_
 
     #region ILibrary Implementation
 
-    public string Name => "HospiceFHIR4";
-    public string Version => "2.3.000";
-    public ILibrary[] Dependencies => [MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, FHIRHelpers_4_0_001.Instance];
+    string ILibrary.Name => "HospiceFHIR4";
+    string ILibrary.Version => "2.3.000";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, FHIRHelpers_4_0_001.Instance];
 
     #endregion ILibrary Implementation
 

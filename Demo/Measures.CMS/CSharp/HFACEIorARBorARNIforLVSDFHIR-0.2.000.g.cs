@@ -22,9 +22,9 @@ public partial class HFACEIorARBorARNIforLVSDFHIR_0_2_000 : ILibrary, ISingleton
 
     #region ILibrary Implementation
 
-    public string Name => "HFACEIorARBorARNIforLVSDFHIR";
-    public string Version => "0.2.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, AHAOverall_2_8_000.Instance];
+    string ILibrary.Name => "HFACEIorARBorARNIforLVSDFHIR";
+    string ILibrary.Version => "0.2.000";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, AHAOverall_2_8_000.Instance];
 
     #endregion ILibrary Implementation
 

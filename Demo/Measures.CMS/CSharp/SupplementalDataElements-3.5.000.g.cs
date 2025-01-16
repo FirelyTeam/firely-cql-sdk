@@ -22,9 +22,9 @@ public partial class SupplementalDataElements_3_5_000 : ILibrary, ISingleton<Sup
 
     #region ILibrary Implementation
 
-    public string Name => "SupplementalDataElements";
-    public string Version => "3.5.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance];
+    string ILibrary.Name => "SupplementalDataElements";
+    string ILibrary.Version => "3.5.000";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance];
 
     #endregion ILibrary Implementation
 

@@ -22,9 +22,9 @@ public partial class GlobalMalnutritionCompositeFHIR_0_2_000 : ILibrary, ISingle
 
     #region ILibrary Implementation
 
-    public string Name => "GlobalMalnutritionCompositeFHIR";
-    public string Version => "0.2.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, CQMCommon_2_2_000.Instance, Status_1_8_000.Instance];
+    string ILibrary.Name => "GlobalMalnutritionCompositeFHIR";
+    string ILibrary.Version => "0.2.000";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, CQMCommon_2_2_000.Instance, Status_1_8_000.Instance];
 
     #endregion ILibrary Implementation
 

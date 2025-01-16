@@ -22,9 +22,9 @@ public partial class HFBetaBlockerTherapyforLVSDFHIR_1_4_000 : ILibrary, ISingle
 
     #region ILibrary Implementation
 
-    public string Name => "HFBetaBlockerTherapyforLVSDFHIR";
-    public string Version => "1.4.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, AHAOverall_2_8_000.Instance];
+    string ILibrary.Name => "HFBetaBlockerTherapyforLVSDFHIR";
+    string ILibrary.Version => "1.4.000";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance, AHAOverall_2_8_000.Instance];
 
     #endregion ILibrary Implementation
 

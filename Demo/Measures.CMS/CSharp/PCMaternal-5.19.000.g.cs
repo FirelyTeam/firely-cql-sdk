@@ -22,9 +22,9 @@ public partial class PCMaternal_5_19_000 : ILibrary, ISingleton<PCMaternal_5_19_
 
     #region ILibrary Implementation
 
-    public string Name => "PCMaternal";
-    public string Version => "5.19.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance];
+    string ILibrary.Name => "PCMaternal";
+    string ILibrary.Version => "5.19.000";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance];
 
     #endregion ILibrary Implementation
 

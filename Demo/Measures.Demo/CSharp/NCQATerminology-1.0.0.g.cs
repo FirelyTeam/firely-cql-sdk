@@ -22,9 +22,9 @@ public partial class NCQATerminology_1_0_0 : ILibrary, ISingleton<NCQATerminolog
 
     #region ILibrary Implementation
 
-    public string Name => "NCQATerminology";
-    public string Version => "1.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance];
+    string ILibrary.Name => "NCQATerminology";
+    string ILibrary.Version => "1.0.0";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance];
 
     #endregion ILibrary Implementation
 

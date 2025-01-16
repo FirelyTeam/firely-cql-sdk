@@ -22,9 +22,9 @@ public partial class FHIRConversionTest_2023_0_0 : ILibrary, ISingleton<FHIRConv
 
     #region ILibrary Implementation
 
-    public string Name => "FHIRConversionTest";
-    public string Version => "2023.0.0";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_1.Instance];
+    string ILibrary.Name => "FHIRConversionTest";
+    string ILibrary.Version => "2023.0.0";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_1.Instance];
 
     #endregion ILibrary Implementation
 

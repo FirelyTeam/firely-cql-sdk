@@ -22,9 +22,9 @@ public partial class OncologyPainIntensityQuantifiedFHIR_0_1_000 : ILibrary, ISi
 
     #region ILibrary Implementation
 
-    public string Name => "OncologyPainIntensityQuantifiedFHIR";
-    public string Version => "0.1.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance];
+    string ILibrary.Name => "OncologyPainIntensityQuantifiedFHIR";
+    string ILibrary.Version => "0.1.000";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, CQMCommon_2_2_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance];
 
     #endregion ILibrary Implementation
 

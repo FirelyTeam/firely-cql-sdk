@@ -22,9 +22,9 @@ public partial class ParametersExample_0_0_1 : ILibrary, ISingleton<ParametersEx
 
     #region ILibrary Implementation
 
-    public string Name => "ParametersExample";
-    public string Version => "0.0.1";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance];
+    string ILibrary.Name => "ParametersExample";
+    string ILibrary.Version => "0.0.1";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance];
 
     #endregion ILibrary Implementation
 

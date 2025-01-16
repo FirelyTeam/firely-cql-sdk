@@ -22,9 +22,9 @@ public partial class TestRetrieveInclude_1_0_1 : ILibrary, ISingleton<TestRetrie
 
     #region ILibrary Implementation
 
-    public string Name => "TestRetrieveInclude";
-    public string Version => "1.0.1";
-    public ILibrary[] Dependencies => [];
+    string ILibrary.Name => "TestRetrieveInclude";
+    string ILibrary.Version => "1.0.1";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [];
 
     #endregion ILibrary Implementation
 

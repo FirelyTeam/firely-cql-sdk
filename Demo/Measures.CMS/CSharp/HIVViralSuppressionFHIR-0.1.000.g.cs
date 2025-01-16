@@ -22,9 +22,9 @@ public partial class HIVViralSuppressionFHIR_0_1_000 : ILibrary, ISingleton<HIVV
 
     #region ILibrary Implementation
 
-    public string Name => "HIVViralSuppressionFHIR";
-    public string Version => "0.1.000";
-    public ILibrary[] Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance];
+    string ILibrary.Name => "HIVViralSuppressionFHIR";
+    string ILibrary.Version => "0.1.000";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [CQMCommon_2_2_000.Instance, FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance];
 
     #endregion ILibrary Implementation
 

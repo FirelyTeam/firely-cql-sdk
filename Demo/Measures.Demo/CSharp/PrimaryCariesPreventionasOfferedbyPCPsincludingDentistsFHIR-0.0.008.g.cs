@@ -22,9 +22,9 @@ public partial class PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR
 
     #region ILibrary Implementation
 
-    public string Name => "PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR";
-    public string Version => "0.0.008";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, HospiceFHIR4_2_3_000.Instance];
+    string ILibrary.Name => "PrimaryCariesPreventionasOfferedbyPCPsincludingDentistsFHIR";
+    string ILibrary.Version => "0.0.008";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance, HospiceFHIR4_2_3_000.Instance];
 
     #endregion ILibrary Implementation
 

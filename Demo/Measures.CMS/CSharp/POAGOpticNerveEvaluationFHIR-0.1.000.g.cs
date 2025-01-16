@@ -22,9 +22,9 @@ public partial class POAGOpticNerveEvaluationFHIR_0_1_000 : ILibrary, ISingleton
 
     #region ILibrary Implementation
 
-    public string Name => "POAGOpticNerveEvaluationFHIR";
-    public string Version => "0.1.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
+    string ILibrary.Name => "POAGOpticNerveEvaluationFHIR";
+    string ILibrary.Version => "0.1.000";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, SupplementalDataElements_3_5_000.Instance, QICoreCommon_2_1_000.Instance];
 
     #endregion ILibrary Implementation
 

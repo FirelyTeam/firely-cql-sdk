@@ -22,9 +22,9 @@ public partial class DocumentationofCurrentMedicationsFHIR_0_2_000 : ILibrary, I
 
     #region ILibrary Implementation
 
-    public string Name => "DocumentationofCurrentMedicationsFHIR";
-    public string Version => "0.2.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, SupplementalDataElements_3_4_000.Instance];
+    string ILibrary.Name => "DocumentationofCurrentMedicationsFHIR";
+    string ILibrary.Version => "0.2.000";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_3_000.Instance, QICoreCommon_2_0_000.Instance, SupplementalDataElements_3_4_000.Instance];
 
     #endregion ILibrary Implementation
 

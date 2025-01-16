@@ -22,9 +22,9 @@ public partial class AdultOutpatientEncounters_4_11_000 : ILibrary, ISingleton<A
 
     #region ILibrary Implementation
 
-    public string Name => "AdultOutpatientEncounters";
-    public string Version => "4.11.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance];
+    string ILibrary.Name => "AdultOutpatientEncounters";
+    string ILibrary.Version => "4.11.000";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance];
 
     #endregion ILibrary Implementation
 

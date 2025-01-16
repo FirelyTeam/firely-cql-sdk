@@ -22,9 +22,9 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
 
     #region ILibrary Implementation
 
-    public string Name => "FHIRHelpers";
-    public string Version => "4.0.001";
-    public ILibrary[] Dependencies => [];
+    string ILibrary.Name => "FHIRHelpers";
+    string ILibrary.Version => "4.0.001";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [];
 
     #endregion ILibrary Implementation
 

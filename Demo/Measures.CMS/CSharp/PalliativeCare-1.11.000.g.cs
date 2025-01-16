@@ -22,9 +22,9 @@ public partial class PalliativeCare_1_11_000 : ILibrary, ISingleton<PalliativeCa
 
     #region ILibrary Implementation
 
-    public string Name => "PalliativeCare";
-    public string Version => "1.11.000";
-    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance];
+    string ILibrary.Name => "PalliativeCare";
+    string ILibrary.Version => "1.11.000";
+    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, Status_1_8_000.Instance];
 
     #endregion ILibrary Implementation
 
