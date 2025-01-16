@@ -22,9 +22,9 @@ public partial class CumulativeMedicationDuration_4_1_000 : ILibrary, ISingleton
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "CumulativeMedicationDuration";
-    string ILibrary.Version => "4.1.000";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
+    public string Name => "CumulativeMedicationDuration";
+    public string Version => "4.1.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance];
 
     #endregion ILibrary Implementation
 

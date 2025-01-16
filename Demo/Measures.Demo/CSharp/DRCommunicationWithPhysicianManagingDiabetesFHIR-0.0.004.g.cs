@@ -22,9 +22,9 @@ public partial class DRCommunicationWithPhysicianManagingDiabetesFHIR_0_0_004 : 
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "DRCommunicationWithPhysicianManagingDiabetesFHIR";
-    string ILibrary.Version => "0.0.004";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
+    public string Name => "DRCommunicationWithPhysicianManagingDiabetesFHIR";
+    public string Version => "0.0.004";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
 
     #endregion ILibrary Implementation
 

@@ -22,9 +22,9 @@ public partial class IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR_1_4_
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR";
-    string ILibrary.Version => "1.4.000";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance];
+    public string Name => "IntravesicalBacillusCalmetteGuerinForBladderCancerFHIR";
+    public string Version => "1.4.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance, QICoreCommon_2_1_000.Instance, SupplementalDataElements_3_5_000.Instance];
 
     #endregion ILibrary Implementation
 
