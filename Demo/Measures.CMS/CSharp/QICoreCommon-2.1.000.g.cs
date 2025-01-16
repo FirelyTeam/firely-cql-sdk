@@ -22,9 +22,9 @@ public partial class QICoreCommon_2_1_000 : ILibrary, ISingleton<QICoreCommon_2_
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "QICoreCommon";
-    string ILibrary.Version => "2.1.000";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_4_000.Instance];
+    public string Name => "QICoreCommon";
+    public string Version => "2.1.000";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_4_000.Instance];
 
     #endregion ILibrary Implementation
 

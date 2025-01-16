@@ -22,9 +22,9 @@ public partial class HospitalHarmHyperglycemiainHospitalizedPatientsFHIR_0_0_006
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "HospitalHarmHyperglycemiainHospitalizedPatientsFHIR";
-    string ILibrary.Version => "0.0.006";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
+    public string Name => "HospitalHarmHyperglycemiainHospitalizedPatientsFHIR";
+    public string Version => "0.0.006";
+    public ILibrary[] Dependencies => [FHIRHelpers_4_0_001.Instance, SupplementalDataElementsFHIR4_2_0_000.Instance, MATGlobalCommonFunctionsFHIR4_6_1_000.Instance];
 
     #endregion ILibrary Implementation
 

@@ -22,9 +22,9 @@ public partial class ValueSetExprExample_1_0_0 : ILibrary, ISingleton<ValueSetEx
 
     #region ILibrary Implementation
 
-    string ILibrary.Name => "ValueSetExprExample";
-    string ILibrary.Version => "1.0.0";
-    IReadOnlyCollection<ILibrary> ILibrary.Dependencies => [];
+    public string Name => "ValueSetExprExample";
+    public string Version => "1.0.0";
+    public ILibrary[] Dependencies => [];
 
     #endregion ILibrary Implementation
 
