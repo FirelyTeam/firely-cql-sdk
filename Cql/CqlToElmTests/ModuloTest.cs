@@ -1,5 +1,4 @@
-﻿using CqlSdkPrototype.Cql;
-using Hl7.Cql.Abstractions;
+﻿using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;

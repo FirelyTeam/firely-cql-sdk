@@ -3,7 +3,6 @@ using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using CqlSdkPrototype.Cql;
 
 namespace Hl7.Cql.CqlToElm.Test
 {

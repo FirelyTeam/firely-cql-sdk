@@ -2,7 +2,6 @@
 using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
-using CqlSdkPrototype.Cql;
 
 namespace Hl7.Cql.CqlToElm.Test
 {

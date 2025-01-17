@@ -1,11 +1,5 @@
-﻿using System.Linq;
-using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Cql.Extensibility;
-using CqlSdkPrototype.Infrastructure;
-using FluentAssertions;
-using Hl7.Cql.CqlToElm.LibraryProviders;
+﻿using FluentAssertions;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test

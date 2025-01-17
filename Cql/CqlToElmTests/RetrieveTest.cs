@@ -4,8 +4,6 @@ using Hl7.Fhir.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
-using CqlSdkPrototype.Cql;
-using Library = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.CqlToElm.Test
 {

@@ -4,7 +4,6 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using CqlSdkPrototype.Cql;
 using Hl7.Cql.Runtime;
 using M = Hl7.Fhir.Model;
 

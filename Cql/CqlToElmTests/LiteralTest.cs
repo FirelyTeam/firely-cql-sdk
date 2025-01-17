@@ -1,5 +1,4 @@
-﻿using CqlSdkPrototype.Cql;
-using FluentAssertions;
+﻿using FluentAssertions;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;

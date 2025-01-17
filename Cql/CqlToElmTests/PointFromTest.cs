@@ -2,7 +2,6 @@
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Reflection;
-using CqlSdkPrototype.Cql;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
