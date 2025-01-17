@@ -108,7 +108,7 @@ public class ElmApi :
         LogExceptionMessageAction log = logger.GetLogExceptionMessageAction(exceptionHandling);
 
         var libraryDefinitions = librarySetExpressionBuilderScoped
-            .ProcessLibrarySetDeferred(librarySet: librarySet, processLibraryExceptionHandling: exceptionHandling)
+            .ProcessLibrarySetDeferred(librarySet: librarySet)
             .Select(t =>
             {
                 var libraryName = t.library.identifier;

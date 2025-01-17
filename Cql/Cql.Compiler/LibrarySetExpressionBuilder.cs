@@ -29,8 +29,7 @@ internal class LibrarySetExpressionBuilder(
 
     public IEnumerable<(Library library, Func<DefinitionDictionary<LambdaExpression>> generateLibraryDefinitions)> ProcessLibrarySetDeferred(
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null,
-        ProcessBatchItemExceptionHandling processLibraryExceptionHandling = default) =>
+        DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null) =>
         NewLibrarySetExpressionBuilderContext(librarySet, librarySetDefinitions)
             .ProcessLibrarySetDeferred();
 

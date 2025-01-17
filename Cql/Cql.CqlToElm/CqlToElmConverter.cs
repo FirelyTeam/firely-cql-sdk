@@ -69,7 +69,7 @@ namespace Hl7.Cql.CqlToElm
         internal LibraryBuilder GetBuilder(string cql, IServiceScope scope)
         {
             using var cqlLibrary = new StringReader(cql);
-            var visitor = new LibraryVisitor(scope.ServiceProvider);
+            var visitor = ActivatorUtilities.CreateInstance<LibraryVisitor>(scope.ServiceProvider);
 
             try
             {
