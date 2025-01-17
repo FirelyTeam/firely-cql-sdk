@@ -189,7 +189,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Meets_After_Null()
         {
-            var library = CreateLibraryForExpression("Interval(null, 5] meets after Interval[11, null)");
+            var library = CreateCqlApi().MakeLibraryFromExpression("Interval(null, 5] meets after Interval[11, null)");
             var meetsAfter = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<MeetsAfter>();
             var result = Run<bool?>(meetsAfter, library);
             result.Should().BeFalse();

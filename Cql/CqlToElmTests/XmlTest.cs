@@ -21,10 +21,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize(co =>
-        {
-            co.AllowNullIntervals = true;
-        });
+        public static void Initialize(TestContext context) => ClassInitialize();
 #pragma warning restore IDE0060 // Remove unused parameter
 
         private static CqlContext CqlContext = FhirCqlContext.ForBundle(now: NowValue);
@@ -45,7 +42,8 @@ namespace Hl7.Cql.CqlToElm.Test
             // if (testCase.TestName != "AgeInYearsAt")
             //     Assert.Inconclusive("Skipped!");
 
-            var expression = Expression(testCase.Expression);
+            var cqlApi = CreateCqlApi(AllowNullIntervals:true);
+            var expression = cqlApi.Expression(testCase.Expression);
             var expressionErrors = expression.GetErrors();
             if (expressionErrors.Any())
             {
@@ -59,7 +57,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 return;
             }
 
-            var expectation = Expression(testCase.Expectation);
+            var expectation = cqlApi.Expression(testCase.Expectation);
             var expectationErrors = expectation.GetErrors();
             if (expectationErrors.Any())
             {

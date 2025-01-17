@@ -103,8 +103,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FHIRHelpers_Coding_To_ListCodes()
         {
-            var cqlApi = CreateCqlApi()
-                .AddCqlLibraryString(FHIRHelpers);
+            var cqlApi = CreateCqlApi().AddFHIRHelpers();
             var lib = cqlApi.MakeLibrary("""
                                          library Test version '1.0.0'
 

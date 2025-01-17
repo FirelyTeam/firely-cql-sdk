@@ -1,4 +1,7 @@
-﻿using FluentAssertions.Collections;
+﻿using System.IO;
+using CqlSdkPrototype.Cql;
+using CqlSdkPrototype.Infrastructure;
+using FluentAssertions.Collections;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.Options;
@@ -21,5 +24,14 @@ namespace Hl7.Cql.CqlToElm.Test
 
         public static A ContainSingleOfType<A>(this GenericCollectionAssertions<Expression> assertions) =>
             (A)(object)assertions.AllBeOfType<A>().And.ContainSingle().Subject!;
+
+        public static Expression Expression(
+            this CqlApi cqlApi,
+            string expression,
+            [System.Runtime.CompilerServices.CallerMemberName]
+            string memberName = "")
+        {
+            return cqlApi.MakeLibraryFromExpression(expression, memberName: memberName).statements[0].expression;
+        }
     }
 }

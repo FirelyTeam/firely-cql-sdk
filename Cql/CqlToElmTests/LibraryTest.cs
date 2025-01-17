@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
+using CqlSdkPrototype.Cql.Internal;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -21,7 +22,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             Assert.ThrowsException<ArgumentException>(() => CreateCqlApi().MakeLibrary(string.Empty));
             var ms = new MemoryStream();
-            Assert.ThrowsException<ArgumentException>(() => DefaultConverter.ConvertLibrary(ms));
+            Assert.ThrowsException<ArgumentException>(() => CreateCqlApi().AsInternal().State.CqlToElmConverter.ConvertLibrary(ms));
         }
 
         #region Identifier
@@ -248,11 +249,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_AllTerms()
         {
-            var library = TestExtensions.MakeLibrary(CreateCqlApi(), @"
-                library IncludeTest version '1.0.0'
+            var library = CreateCqlApi().MakeLibrary("""
+                                                     library IncludeTest version '1.0.0'
 
-                include MyLibrary version '1.0.0' called Derp
-            ", "Unable to resolve library: MyLibrary version '1.0.0'*");
+                                                     include MyLibrary version '1.0.0' called Derp
+                                                     """, "Unable to resolve library: MyLibrary version '1.0.0'*");
             Assert.IsNotNull(library.includes);
             Assert.AreEqual(1, library.includes.Length);
             Assert.AreEqual("MyLibrary", library.includes[0].path);
@@ -264,11 +265,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_AllTerms_WithNamespace()
         {
-            var library = TestExtensions.MakeLibrary(CreateCqlApi(), @"
-                library IncludeTest version '1.0.0'
+            var library = CreateCqlApi().MakeLibrary("""
+                                                     library IncludeTest version '1.0.0'
 
-                include Namespace.MyLibrary version '1.0.0' called Derp
-            ", "Unable to resolve library: Namespace.MyLibrary version '1.0.0'*");
+                                                     include Namespace.MyLibrary version '1.0.0' called Derp
+                                                     """, "Unable to resolve library: Namespace.MyLibrary version '1.0.0'*");
             Assert.IsNotNull(library.includes);
             Assert.AreEqual(1, library.includes.Length);
             Assert.AreEqual("Namespace.MyLibrary", library.includes[0].path);
@@ -280,11 +281,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_NoVersion_LocalIdentifier()
         {
-            var library = TestExtensions.MakeLibrary(CreateCqlApi(), @"
-                library IncludeTest version '1.0.0'
+            var library = CreateCqlApi().MakeLibrary("""
+                                                     library IncludeTest version '1.0.0'
 
-                include Namespace.MyLibrary called Derp
-            ", "Unable to resolve library: Namespace.MyLibrary version 'latest'*");
+                                                     include Namespace.MyLibrary called Derp
+                                                     """, "Unable to resolve library: Namespace.MyLibrary version 'latest'*");
             Assert.IsNotNull(library.includes);
             Assert.AreEqual(1, library.includes.Length);
             Assert.AreEqual("Namespace.MyLibrary", library.includes[0].path);
@@ -297,7 +298,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_Version_NoIdentifier()
         {
-            var library = TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 include Namespace.MyLibrary version '1.0.0'
@@ -319,7 +320,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_NoVersion_NoIdentifier()
         {
-            var library = TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 include Namespace.MyLibrary
@@ -811,7 +812,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Parameter_None()
         {
-            var library = TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private parameter Name

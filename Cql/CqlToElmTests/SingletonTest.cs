@@ -10,14 +10,6 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class SingletonTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize(co =>
-        {
-            co.EnableListPromotion = true;
-        });
-#pragma warning restore IDE0060 // Remove unused parameter
-
         [TestMethod]
         public void Singleton_From_Integers()
         {
@@ -155,7 +147,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Singleton_From_Integer_With_List_Promotion()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi(EnableListPromotion:true).MakeLibrary(@"
                 library SingletonTest version '1.0.0'
 
                 define private Singleton_From_Integer_With_List_Promotion: singleton from 1

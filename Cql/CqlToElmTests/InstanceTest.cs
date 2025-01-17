@@ -10,19 +10,18 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize(options =>
-        {
-            options.EnableListPromotion = true;
-            options.EnableListDemotion = true;
-            options.EnableIntervalPromotion = true;
-            options.EnableIntervalDemotion = true;
-        });
+        public static void Initialize(TestContext context) => ClassInitialize();
 #pragma warning restore IDE0060 // Remove unused parameter
 
         [TestMethod]
         public void Concept_Instance()
         {
-            var library = CreateLibraryForExpression("Concept { codes: Code { code: '8480-6' } }");
+            var library = CreateCqlApi(
+                EnableListDemotion:true,
+                EnableListPromotion:true,
+                EnableIntervalDemotion: true,
+                EnableIntervalPromotion: true
+                ).MakeLibraryFromExpression("Concept { codes: Code { code: '8480-6' } }");
             var instance = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Instance>();
             instance.element.Should().HaveCount(1);
             instance.element[0].name.Should().Be("codes");

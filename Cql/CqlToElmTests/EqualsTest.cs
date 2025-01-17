@@ -355,7 +355,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_Equals_Null()
         {
-            var library = CreateLibraryForExpression("1 = null");
+            var library = CreateCqlApi().MakeLibraryFromExpression("1 = null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             AssertNullResult(equal);
         }
@@ -363,7 +363,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Equals_Integer()
         {
-            var library = CreateLibraryForExpression("null = 1");
+            var library = CreateCqlApi().MakeLibraryFromExpression("null = 1");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             AssertNullResult(equal);
         }
@@ -712,7 +712,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_Equals_Null()
         {
-            var library = CreateLibraryForExpression("1L = null");
+            var library = CreateCqlApi().MakeLibraryFromExpression("1L = null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             AssertNullResult(equal);
         }
@@ -720,7 +720,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Equals_Long()
         {
-            var library = CreateLibraryForExpression("null = 1L");
+            var library = CreateCqlApi().MakeLibraryFromExpression("null = 1L");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             AssertNullResult(equal);
         }
@@ -1069,7 +1069,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_Equals_Null()
         {
-            var library = CreateLibraryForExpression("1.0 = null");
+            var library = CreateCqlApi().MakeLibraryFromExpression("1.0 = null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             AssertNullResult(equal);
         }
@@ -1077,7 +1077,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Equals_Decimal()
         {
-            var library = CreateLibraryForExpression("null = 1.0");
+            var library = CreateCqlApi().MakeLibraryFromExpression("null = 1.0");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             AssertNullResult(equal);
         }
@@ -1426,7 +1426,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Equals_Null()
         {
-            var library = CreateLibraryForExpression("1.0 '1' = null");
+            var library = CreateCqlApi().MakeLibraryFromExpression("1.0 '1' = null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             AssertNullResult(equal);
         }
@@ -1434,7 +1434,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Equals_Quantity()
         {
-            var library = CreateLibraryForExpression("null = 1.0 '1'");
+            var library = CreateCqlApi().MakeLibraryFromExpression("null = 1.0 '1'");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             AssertNullResult(equal);
         }
@@ -1501,7 +1501,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void String_Equals_Null()
         {
-            var library = CreateLibraryForExpression("'hello' = null");
+            var library = CreateCqlApi().MakeLibraryFromExpression("'hello' = null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             AssertNullResult(equal);
         }
@@ -1509,7 +1509,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Equals_String()
         {
-            var library = CreateLibraryForExpression("null = 'hello'");
+            var library = CreateCqlApi().MakeLibraryFromExpression("null = 'hello'");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             AssertNullResult(equal);
         }
@@ -1574,7 +1574,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Date_Equals_Null()
         {
-            var library = CreateLibraryForExpression("@2023 = null");
+            var library = CreateCqlApi().MakeLibraryFromExpression("@2023 = null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             AssertNullResult(equal);
         }
@@ -1582,7 +1582,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Equals_Date()
         {
-            var library = CreateLibraryForExpression("null = @2023");
+            var library = CreateCqlApi().MakeLibraryFromExpression("null = @2023");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             AssertNullResult(equal);
         }
@@ -1590,7 +1590,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DateTimeList_Equals_DateTimeList()
         {
-            var lib = CreateLibraryForExpression("{ DateTime(2016), DateTime(2015), DateTime(2010)} = { @2016T, @2015T, @2010T }");
+            var lib = CreateCqlApi().MakeLibraryFromExpression("{ DateTime(2016), DateTime(2015), DateTime(2010)} = { @2016T, @2015T, @2010T }");
             var equal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             equal.operand.Should().HaveCount(2);
             equal.operand[0].Should().HaveType(SystemTypes.DateTimeType.ToListType());

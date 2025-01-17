@@ -165,7 +165,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Take_Null_Integer()
         {
-            var library = CreateLibraryForExpression("Take(null, 3)");
+            var library = CreateCqlApi().MakeLibraryFromExpression("Take(null, 3)");
             var slice = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Slice>();
             var @as = slice.source.Should().BeOfType<As>().Subject;
             @as.Should().HaveType(SystemTypes.AnyType.ToListType());

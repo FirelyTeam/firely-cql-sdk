@@ -104,7 +104,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Difference_Between_Date_In_Hours() =>
-            TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            CreateCqlApi().MakeLibrary(@"
                 library DifferenceTest version '1.0.0'
 
                 define private Difference_Between_Date_In_Hours: difference in hours between @2023-01-01 and @2024-02-01
@@ -204,7 +204,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Difference_Between_Time_In_Days() =>
-            TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            CreateCqlApi().MakeLibrary(@"
                 library DifferenceTest version '1.0.0'
 
                 define private Difference_Between_Milliseconds: difference in days between @T12:00:00.100 and @T12:00:00.300
@@ -251,7 +251,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Difference_Between_Null_Null() =>
-            TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            CreateCqlApi().MakeLibrary(@"
                 library DifferenceTest version '1.0.0'
 
                 define private Difference_Between_Months: difference in weeks between null and null

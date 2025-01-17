@@ -26,7 +26,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_InvalidType()
         {
-            TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            CreateCqlApi().MakeLibrary(@"
                 library IntervalTest version '1.0.0'
 
                 define private Interval_InvalidType: Interval[{},{}]
@@ -36,7 +36,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Quantity_Incompatible_Units()
         {
-            TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            CreateCqlApi().MakeLibrary(@"
                 library IntervalTest version '1.0.0'
 
                 define private Interval_InvalidType: Interval[100 'a', 200 'kg']
@@ -411,7 +411,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Properly_Included_in_Interval_Null()
         {
-            var library = CreateLibraryForExpression("Interval[1, 10] properly included in Interval[null as Integer, null as Integer]");
+            var library = CreateCqlApi().MakeLibraryFromExpression("Interval[1, 10] properly included in Interval[null as Integer, null as Integer]");
             var pii = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ProperIncludedIn>();
             var result = Run(pii, library);
             Assert.IsNull(result);
@@ -420,7 +420,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Null_Starts_Interval()
         {
-            var library = CreateLibraryForExpression("Interval[null as Integer, null as Integer] starts Interval[1, 10]");
+            var library = CreateCqlApi().MakeLibraryFromExpression("Interval[null as Integer, null as Integer] starts Interval[1, 10]");
             var pii = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Starts>();
             var result = Run(pii, library);
             Assert.IsNull(result);

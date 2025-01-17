@@ -15,7 +15,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         public void String_lengths()
         {
-            var lib = CreateLibraryForExpression("from ({'hello', 'world'}) str return Length(str)");
+            var lib = CreateCqlApi().MakeLibraryFromExpression("from ({'hello', 'world'}) str return Length(str)");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             query.Should().HaveType(SystemTypes.IntegerType.ToListType());
         }
@@ -24,7 +24,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Sort_asc()
         {
-            var lib = CreateLibraryForExpression("({4, 5, 1, 6, 2, 1}) sL sort asc");
+            var lib = CreateCqlApi().MakeLibraryFromExpression("({4, 5, 1, 6, 2, 1}) sL sort asc");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             query.Should().HaveType(SystemTypes.IntegerType.ToListType());
 
@@ -33,7 +33,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Scalar_source()
         {
-            var lib = CreateLibraryForExpression("from (true) t return t and false");
+            var lib = CreateCqlApi().MakeLibraryFromExpression("from (true) t return t and false");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             query.Should().HaveType(SystemTypes.BooleanType);
             query.@return.Should().HaveType(SystemTypes.BooleanType);
@@ -41,7 +41,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Vector_source()
         {
-            var lib = CreateLibraryForExpression("from ({ true, false }) t return t and false");
+            var lib = CreateCqlApi().MakeLibraryFromExpression("from ({ true, false }) t return t and false");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             query.Should().HaveType(SystemTypes.BooleanType.ToListType());
             query.@return.Should().HaveType(SystemTypes.BooleanType.ToListType());
@@ -49,7 +49,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Relationship_with_scalar_sources()
         {
-            var lib = CreateLibraryForExpression(@"
+            var lib = CreateCqlApi().MakeLibraryFromExpression(@"
                 from(true) t
                 with(false) f
                 such that t != f
@@ -60,7 +60,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Relationship_with_bad_identifier()
         {
-            TestExtensions.MakeLibrary(CreateCqlApi(), $@"
+            CreateCqlApi().MakeLibrary($@"
                 library Test version '1.0.0'
 
                 define f: from (true) t
@@ -73,7 +73,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multi_scalar_source()
         {
-            var lib = CreateLibraryForExpression(@"
+            var lib = CreateCqlApi().MakeLibraryFromExpression(@"
                 from
                     (1) Num1,
                     (2) Num2
@@ -90,7 +90,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multi_vector_source()
         {
-            var lib = CreateLibraryForExpression(@"
+            var lib = CreateCqlApi().MakeLibraryFromExpression(@"
                 from
                     ( { 1, 2 } ) Num1,
                     ( { 3, 4 } ) Num2

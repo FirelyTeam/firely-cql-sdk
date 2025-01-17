@@ -11,11 +11,6 @@ namespace Hl7.Cql.CqlToElm.Test
 #pragma warning disable IDE0060 // Remove unused parameter
         public static void Initialize(TestContext context) => ClassInitialize(options =>
         {
-            options.EnableListPromotion = true;
-            options.EnableListDemotion = true;
-            options.EnableIntervalPromotion = true;
-            options.EnableIntervalDemotion = true;
-            options.AllowNullIntervals = true;
         });
 #pragma warning restore IDE0060 // Remove unused parameter
 
@@ -25,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void OnOrAfterMonthOf()
         {
             // https://cql.hl7.org/09-b-cqlreference.html#same-or-after-2
-            var library = CreateLibraryForExpression("Interval[@2012-12-01, @2013-12-01] on or after month of @2012-11-15");
+            var library = CreateCqlApi().MakeLibraryFromExpression("Interval[@2012-12-01, @2013-12-01] on or after month of @2012-11-15");
             var sameOrAfter = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SameOrAfter>();
             sameOrAfter.Should().HaveType(SystemTypes.BooleanType);
             sameOrAfter.operand.Should().NotBeNull();
@@ -152,7 +147,13 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Overlaps()
         {
-            var library = CreateLibraryForExpression("Interval[null, null] overlaps Interval[1, 10]");
+            var library = CreateCqlApi(
+                EnableListPromotion: true,
+                EnableListDemotion: true,
+                EnableIntervalPromotion: true,
+                EnableIntervalDemotion: true,
+                AllowNullIntervals: true
+                ).MakeLibraryFromExpression("Interval[null, null] overlaps Interval[1, 10]");
             var overlaps = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Overlaps>();
             overlaps.Should().HaveType(SystemTypes.BooleanType);
             overlaps.operand.Should().NotBeNull();
@@ -165,7 +166,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TestOnOrAfterDateTrue()
         {
-            var library = CreateLibraryForExpression("Interval[@2012-12-01, @2013-12-01] on or after month of @2012-11-15");
+            var library = CreateCqlApi().MakeLibraryFromExpression("Interval[@2012-12-01, @2013-12-01] on or after month of @2012-11-15");
             var sameOrAfter = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SameOrAfter>();
             var result = Run<bool?>(sameOrAfter, library);
             result.Should().BeTrue();
@@ -174,7 +175,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TestOnOrBeforeDateTrue()
         {
-            var library = CreateLibraryForExpression("Interval[@2012-10-01, @2012-11-01] on or before month of @2012-11-15");
+            var library = CreateCqlApi().MakeLibraryFromExpression("Interval[@2012-10-01, @2012-11-01] on or before month of @2012-11-15");
             var sameOrBefore = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SameOrBefore>();
             var result = Run<bool?>(sameOrBefore, library);
             result.Should().BeTrue();

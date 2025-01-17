@@ -18,9 +18,11 @@ public readonly partial record struct CqlLibraryString
                     library           # until "library" is found
                     \s+
                     (?<lib>\S+)       # The name of the library
-                    \s+
-                    version
-                    \s'(?<ver>[^']+)' # The version of the library between single quotes
+                    (
+                      \s+
+                      version
+                      \s'(?<ver>[^']+)' # The version of the library between single quotes
+                    )?                # Version is optional
                     """,
                     RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline)]
     private static partial Regex LibraryNameAndVersionRegex();
@@ -29,10 +31,10 @@ public readonly partial record struct CqlLibraryString
     {
         var match = LibraryNameAndVersionRegex().Match(cqlContent);
         if (!match.Success)
-            throw new FormatException("Could not get library identifier and version from provided cql string/");
+            throw new ArgumentException("Could not get library identifier and version from provided cql string.", nameof(cqlContent));
         var lib = match.Groups["lib"].Value;
-        var ver = match.Groups["ver"].Value;
-        var libVer = CqlVersionedLibraryIdentifier.FromNameAndVersion(CqlLibraryIdentifier.Parse(lib), CqlLibraryVersion.Parse(ver));
+        var ver = match.Groups["ver"]?.Value;
+        var libVer = CqlVersionedLibraryIdentifier.FromNameAndVersion(CqlLibraryIdentifier.Parse(lib), CqlLibraryVersion.ParseOrEmpty(ver));
         return new CqlLibraryString(libVer, cqlContent);
     }
 

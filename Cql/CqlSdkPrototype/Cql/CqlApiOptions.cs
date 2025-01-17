@@ -10,7 +10,10 @@ public record CqlApiOptions(
     ImmutableHashSet<ModelInfo>? ModelInfos = null,
     AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,
     bool EnableListDemotion = false,
-    bool EnableListPromotion = false
+    bool EnableListPromotion = false,
+    bool EnableIntervalPromotion = false,
+    bool EnableIntervalDemotion = false,
+    bool AllowNullInterval = false
     )
 {
     public static CqlApiOptions Default { get; } = new();
@@ -18,6 +21,33 @@ public record CqlApiOptions(
     public ImmutableHashSet<CqlModel> Models { get; init; } = Models ?? [];
 
     public ImmutableHashSet<ModelInfo> ModelInfos { get; init; } = ModelInfos ?? [];
+
+    /// <summary>
+    /// When <see langword="true"/>, Interval(null, null) will be a valid construct.
+    /// When <see langword="false"/>, an error will be generated when an interval's low and high values are both null.
+    /// Note that this setting will only prevent intervals explicitly declared with the null keyword.
+    /// The default value is <see langword="false"/>.
+    /// </summary>
+    /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#predecessor" />
+    public bool AllowNullIntervals { get; set; } = AllowNullInterval;
+
+    /// <summary>
+                                                              /// When <see langword="true"/>, point intervals will automatically be created as necessary from scalar values.
+                                                              /// When <see langword="false"/>, an error will occur; authors will be required to create point intervals explicitly.
+                                                              /// The default value is <see langword="false"/>.
+                                                              /// </summary>
+    public bool EnableIntervalPromotion { get; init; } = EnableIntervalPromotion;
+
+    /// <summary>
+    /// When <see langword="true"/>, point intervals will be automatically demoted to scalar values as necessary.
+    /// When <see langword="false"/>, an error will occur; authors will be required to convert intervals to scalar values explicitly.
+    /// The default value is <see langword="false"/>.
+    /// </summary>
+    /// <remarks>
+    /// Note that whether an interval is a point interval cannot be known at compile time.
+    /// This type of conversion will issue a warning and could fail at runtime.
+    /// </remarks>
+    public bool EnableIntervalDemotion { get; init; } = EnableIntervalDemotion;
 
     /// <summary>
     /// When <see langword="true"/>, lists of size 1 will automatically be created as necessary from scalar values.
@@ -55,8 +85,11 @@ internal static class CqlApiOptionsExtensions
 {
     internal static void ApplyToCqlToElmOptions(this CqlApiOptions options, CqlToElmOptions opt)
     {
+        opt.AmbiguousTypeBehavior = options.AmbiguousTypeBehavior;
         opt.EnableListPromotion = options.EnableListPromotion;
         opt.EnableListDemotion = options.EnableListDemotion;
-        opt.AmbiguousTypeBehavior = options.AmbiguousTypeBehavior;
+        opt.EnableIntervalPromotion = options.EnableIntervalPromotion;
+        opt.EnableIntervalDemotion = options.EnableIntervalDemotion;
+        opt.AllowNullIntervals = options.AllowNullIntervals;
     }
 }

@@ -46,12 +46,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FlattenListNullAndNull()
         {
-            var lib = CreateLibraryForExpression("Flatten({{null}, {null}})");
+            var lib = CreateCqlApi().MakeLibraryFromExpression("Flatten({{null}, {null}})");
             var flatten = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Flatten>();
             var result = Run<List<object>>(flatten, lib); // {null, null}
             result!.Count.Should().Be(2);
-            var equal = CreateLibraryForExpression("Flatten({{null}, {null}}) = {null, null}")
-                .Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
+            var equal = CreateCqlApi().MakeLibraryFromExpression("Flatten({{null}, {null}}) = {null, null}")
+                                      .Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             var eqr = Run<bool?>(equal, lib); // {null, null}
             eqr.Should().BeTrue();
         }
@@ -93,9 +93,9 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FlattenMixedChoiceType()
         {
-
             // requires list promotion
-            var library = TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            var cqlApi = CreateCqlApi();
+            var library = cqlApi.MakeLibrary( @"
                 library Test version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -104,20 +104,16 @@ namespace Hl7.Cql.CqlToElm.Test
                   flatten ( null as List<Choice<System.Boolean, List<FHIR.Claim>>>)
             ", "Could not resolve call to operator Flatten with signature (List<Choice<Boolean, List<{http://hl7.org/fhir}Claim>>>).");
 
-            var services = ServiceCollection(opt =>
-            {
-                opt.EnableListPromotion = true;
-            }).BuildServiceProvider();
-
             // no errors
-            library = MakeLibraryBuilder(services, @"
+            cqlApi = CreateCqlApi(EnableListPromotion:true);
+            library = cqlApi.MakeLibrary(@"
                 library Test version '1.0.0'
 
                 using FHIR version '4.0.1'
 
                 define g:
                   flatten ( null as List<Choice<System.Boolean, List<FHIR.Claim>>>)
-            ").Build();
+            ");
         }
 
     }

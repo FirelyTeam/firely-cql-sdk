@@ -43,11 +43,9 @@ namespace Hl7.Cql.CqlToElm.Test
 
         protected static ServiceProvider ServiceProvider = null!;
 
-        internal static CqlToElmConverter DefaultConverter => ServiceProvider.GetCqlToElmConverter();
+        private static CqlToElmConverter DefaultConverter => ServiceProvider.GetCqlToElmConverter();
 
         internal static LibraryExpressionBuilder LibraryExpressionBuilder => ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
-
-        internal static MessageProvider Messaging => ServiceProvider.GetMessageProvider();
 
         protected static IServiceCollection ServiceCollection(
             Action<CqlToElmOptions>? options = null,
@@ -82,27 +80,6 @@ namespace Hl7.Cql.CqlToElm.Test
             return assembly;
         }
 
-        private static Library ConvertLibrary(string cql) => DefaultConverter.ConvertLibrary(cql);
-
-        private static Library ConvertLibrary(IServiceProvider services, string cql) =>
-            services.GetRequiredService<CqlToElmConverter>().ConvertLibrary(cql);
-
-
-
-        internal static Library MakeLibrary(
-            IServiceProvider services,
-            string cql,
-            params string[] expectedErrors)
-        {
-            var library = ConvertLibrary(services, cql);
-            if (expectedErrors.Any())
-                library.ShouldReportError(expectedErrors);
-            else
-                library.ShouldSucceed();
-
-            return library;
-        }
-
         internal static LibraryBuilder MakeLibraryBuilder(
             IServiceProvider services,
             string cql,
@@ -135,10 +112,7 @@ namespace Hl7.Cql.CqlToElm.Test
             return new(librarySet, definitions);
         }
 
-        internal record LibrarySetCSharp
-        (
-            LibrarySetDefinitions LibrarySetDefinitions,
-            IReadOnlyDictionary<string, string> CSharpCodeByLibraryName);
+        internal record LibrarySetCSharp(LibrarySetDefinitions LibrarySetDefinitions, IReadOnlyDictionary<string, string> CSharpCodeByLibraryName);
 
         internal static LibrarySetCSharp GenerateCSharp(LibrarySetDefinitions librarySetDefinitions)
         {
@@ -313,23 +287,6 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(true, ctx.Operators.Comparer.Equals(expectedValues[i], array[i], precision));
         }
 
-        protected static Library CreateLibraryForExpression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
-        {
-            return CreateCqlApi().MakeLibrary($@"
-                library Test version '1.0.0'
-
-                define private ""{memberName}"": {expression}");
-        }
-
-        protected static Expression Expression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
-        {
-            var lib = ConvertLibrary($@"
-                library Test version '1.0.0'
-
-                define private ""{memberName}"": {expression}");
-            return lib.statements[0].expression;
-        }
-
         internal static void AddFHIRHelpers(
             MemoryLibraryProvider provider,
             IServiceScope scope,
@@ -341,9 +298,6 @@ namespace Hl7.Cql.CqlToElm.Test
             provider.Libraries.Add("FHIRHelpers", "4.0.1", builder);
         }
 
-        protected static CqlLibraryString FHIRHelpers { get; } =
-            CqlLibraryString.FromCql(File.ReadAllText(@"Input\FHIRHelpers-4.0.1.cql"));
-
         protected static ILoggerFactory LoggerFactory { get; } =
             new ServiceCollection()
                 .AddLogging(lb => lb.AddConsole())
@@ -351,20 +305,34 @@ namespace Hl7.Cql.CqlToElm.Test
                 .GetRequiredService<ILoggerFactory>();
 
         protected static CqlApi CreateCqlApi(
-            ImmutableHashSet<CqlModel>? models = null,
-            ImmutableHashSet<ModelInfo>? modelInfos = null,
-            AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
-            bool enableListPromotion = false) =>
+            ImmutableHashSet<CqlModel>? Models = null,
+            ImmutableHashSet<ModelInfo>? ModelInfos = null,
+            AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,
+            bool EnableListPromotion = false,
+            bool EnableListDemotion = false,
+            bool EnableIntervalPromotion = false,
+            bool EnableIntervalDemotion = false,
+            bool AllowNullIntervals = false) =>
             new CqlApi(
                 LoggerFactory,
-                new CqlApiOptions(ProcessBatchItemExceptionHandling.ThrowException, models ?? [CqlModel.ElmR1, CqlModel.Fhir401], modelInfos, ambiguousTypeBehavior, enableListPromotion ) );
+                new CqlApiOptions(
+                    ProcessBatchItemExceptionHandling: ProcessBatchItemExceptionHandling.ThrowException,
+                    Models: Models ?? [CqlModel.ElmR1, CqlModel.Fhir401],
+                    ModelInfos: ModelInfos,
+                    AmbiguousTypeBehavior: AmbiguousTypeBehavior,
+                    EnableListDemotion: EnableListDemotion,
+                    EnableListPromotion: EnableListPromotion,
+                    EnableIntervalDemotion: EnableIntervalDemotion,
+                    EnableIntervalPromotion: EnableIntervalPromotion,
+                    AllowNullInterval: AllowNullIntervals
+                    ));
 
         protected static ElmApi CreateElmApi(
             ImmutableHashSet<CqlModel>? models = null,
             ImmutableHashSet<ModelInfo>? modelInfos = null,
             AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
             bool enableListPromotion = false) =>
-                CreateCqlApi(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
+            CreateCqlApi(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
                 .CreateElmApi(_ => new ElmApiOptions(
                                   ProcessBatchItemExceptionHandling.ThrowException,
                                   Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));
@@ -372,6 +340,11 @@ namespace Hl7.Cql.CqlToElm.Test
 
     internal static partial class TestExtensions
     {
+        private static CqlLibraryString FHIRHelpers { get; } =
+            CqlLibraryString.FromCql(File.ReadAllText(@"Input\FHIRHelpers-4.0.1.cql"));
+
+        public static CqlApi AddFHIRHelpers(this CqlApi cqlApi) => cqlApi.AddCqlLibraryString(FHIRHelpers);
+
         public static Library MakeLibrary(
             this CqlApi cqlApi,
             string cql,
@@ -396,15 +369,16 @@ namespace Hl7.Cql.CqlToElm.Test
 
         public static Library MakeLibraryFromExpression(
             this CqlApi cqlApi,
-            string expression)
+            string expression,
+            string[]? expectedErrors = null,
+            [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
         {
-            var cql = $"""
-                       library IsTest version '1.0.0'
+            string cql = $"""
+                library Test version '1.0.0'
 
-                       define private predicate: {expression}
-                       """;
-
-            var lib = cqlApi.MakeLibrary(cql);
+                define private "{memberName}": {expression}
+                """;
+            var lib = cqlApi.MakeLibrary(cql, expectedErrors ?? []);
             return lib;
         }
     }

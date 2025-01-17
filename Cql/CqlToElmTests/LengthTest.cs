@@ -15,7 +15,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void LengthNullString()
         {
-            var library = CreateLibraryForExpression("Length(null as String)");
+            var library = CreateCqlApi().MakeLibraryFromExpression("Length(null as String)");
             var length = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Length>();
             var result = Run<int?>(length, library);
             result.Should().BeNull();

@@ -1592,7 +1592,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Strings_With_Plus()
         {
-            var library = CreateLibraryForExpression("'hello' + 'world'");
+            var library = CreateCqlApi().MakeLibraryFromExpression("'hello' + 'world'");
             library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Concatenate>();
         }
 

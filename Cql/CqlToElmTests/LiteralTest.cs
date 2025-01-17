@@ -104,7 +104,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_Errors()
         {
-            TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            CreateCqlApi().MakeLibrary(@"
                     library Decimal_Errors_1 version '1.0.0'
 
                     define private Decimal_Literal: 0.123456789
@@ -118,7 +118,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 ").ShouldSucceed();
 
             // 29 digits
-            TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            CreateCqlApi().MakeLibrary(@"
                     library Decimal_Errors_3 version '1.0.0'
 
                     define private Decimal_Literal: -123456789012345678901.12345678
@@ -188,13 +188,13 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Integer_Overflows()
         {
             // minimum long is -9,223,372,036,854,775,808
-            TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            CreateCqlApi().MakeLibrary(@"
                     library Decimal_Errors_1 version '1.0.0'
 
                     define private Overflow_Literal: -9223372036854775809
                 ", "Unparseable numeric literal*.");
 
-            TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            CreateCqlApi().MakeLibrary(@"
                     library Decimal_Errors_1 version '1.0.0'
 
                     define private Overflow_Literal: 9223372036854775808
@@ -264,7 +264,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         public void Long_MinValue()
         {
-            var lib = CreateLibraryForExpression("-9223372036854775808L");
+            var lib = CreateCqlApi().MakeLibraryFromExpression("-9223372036854775808L");
             var literal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>(false);
             literal.Should().HaveType(SystemTypes.LongType);
         }
@@ -1070,7 +1070,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DateTime_Literal_T()
         {
-            var lib = CreateLibraryForExpression("@2016T");
+            var lib = CreateCqlApi().MakeLibraryFromExpression("@2016T");
             var dt = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<DateTime>();
             var yearLiteral = dt.year.Should().BeOfType<Literal>().Subject;
             yearLiteral.value.Should().Be("2016");
@@ -1687,9 +1687,9 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Ceiling_1D()
         {
-            var input = CreateLibraryForExpression("Ceiling(1.0)");
+            var input = CreateCqlApi().MakeLibraryFromExpression("Ceiling(1.0)");
             var ceiling = input.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Ceiling>();
-            var output = CreateLibraryForExpression("1");
+            var output = CreateCqlApi().MakeLibraryFromExpression("1");
             var literal = output.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
             // var context = FhirCqlContext.ForBundle();
             var equalsOverload = InvocationBuilder.MatchSignature(SystemLibrary.Equal, ceiling, literal);

@@ -9,7 +9,7 @@ public readonly record struct CqlVersionedLibraryIdentifier : IParsable<CqlVersi
     private CqlVersionedLibraryIdentifier(CqlLibraryIdentifier Identifier, CqlLibraryVersion? Version = null)
     {
         this.Identifier = Identifier;
-        this.Version = Version;
+        this.Version = Version ?? CqlLibraryVersion.Empty;
     }
 
     public static CqlVersionedLibraryIdentifier FromNameAndVersion(CqlLibraryIdentifier identifier, CqlLibraryVersion? version = null)
@@ -25,7 +25,7 @@ public readonly record struct CqlVersionedLibraryIdentifier : IParsable<CqlVersi
 
     public CqlLibraryIdentifier Identifier { get; init; }
 
-    public CqlLibraryVersion? Version { get; init; }
+    public CqlLibraryVersion Version { get; init; }
 
     public void Deconstruct(out CqlLibraryIdentifier identifier, out CqlLibraryVersion? version)
     {
@@ -37,8 +37,8 @@ public readonly record struct CqlVersionedLibraryIdentifier : IParsable<CqlVersi
     {
         return (Identifier, Version) switch
         {
-            ({ } identifier, null) => identifier.ToString(),
-            ({ } identifier, { } version) => $"{identifier}-{version}",
+            ({ } identifier, { IsEmpty: false } version) => $"{identifier}-{version}",
+            ({ } identifier,_)                     => identifier.ToString(),
         };
     }
 

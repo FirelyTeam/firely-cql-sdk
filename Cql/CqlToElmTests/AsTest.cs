@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_As_Decimal()
         {
-            var library = TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library AsTest version '1.0.0'
 
                 define private Integer_As_Decimal: 1 as System.Decimal
@@ -116,7 +116,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DecimalLiteral_CastAs_Decimal()
         {
-            var library = CreateLibraryForExpression("cast (1.0 as System.Any) as System.Decimal");
+            var library = CreateCqlApi().MakeLibraryFromExpression("cast (1.0 as System.Any) as System.Decimal");
             var castAs = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
 
             castAs.strict.Should().BeTrue();
@@ -127,7 +127,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void BooleanLiteral_CastAs_Decimal()
         {
-            var library = CreateLibraryForExpression("cast (true as System.Any) as System.Decimal");
+            var library = CreateCqlApi().MakeLibraryFromExpression("cast (true as System.Any) as System.Decimal");
             var castAs = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
 
             castAs.strict.Should().BeTrue();

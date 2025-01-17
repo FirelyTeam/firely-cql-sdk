@@ -124,7 +124,7 @@ internal readonly record struct CqlApiState(
 
         var libVer = CqlVersionedLibraryIdentifier.FromNameAndVersion(
             CqlLibraryIdentifier.Parse(libraryName),
-            CqlLibraryVersion.Parse(version ?? throw new ArgumentNullException(nameof(version))));
+            CqlLibraryVersion.ParseOrEmpty(version));
 
         if (EntriesBuilder.TryGetValue(libVer, out var entry))
         {

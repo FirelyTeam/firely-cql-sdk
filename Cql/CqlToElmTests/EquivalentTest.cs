@@ -355,7 +355,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_EquivalentTo_Null()
         {
-            var library = CreateLibraryForExpression("1 ~ null");
+            var library = CreateCqlApi().MakeLibraryFromExpression("1 ~ null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -363,7 +363,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_EquivalentTo_Integer()
         {
-            var library = CreateLibraryForExpression("null ~ 1");
+            var library = CreateCqlApi().MakeLibraryFromExpression("null ~ 1");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -712,7 +712,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_EquivalentTo_Null()
         {
-            var library = CreateLibraryForExpression("1L ~ null");
+            var library = CreateCqlApi().MakeLibraryFromExpression("1L ~ null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -720,7 +720,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_EquivalentTo_Long()
         {
-            var library = CreateLibraryForExpression("null ~ 1L");
+            var library = CreateCqlApi().MakeLibraryFromExpression("null ~ 1L");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -1069,7 +1069,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_EquivalentTo_Null()
         {
-            var library = CreateLibraryForExpression("1.0 ~ null");
+            var library = CreateCqlApi().MakeLibraryFromExpression("1.0 ~ null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -1077,7 +1077,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_EquivalentTo_Decimal()
         {
-            var library = CreateLibraryForExpression("null ~ 1.0");
+            var library = CreateCqlApi().MakeLibraryFromExpression("null ~ 1.0");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -1370,7 +1370,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_EquivalentTo_Null()
         {
-            var library = CreateLibraryForExpression("1.0 '1' ~ null");
+            var library = CreateCqlApi().MakeLibraryFromExpression("1.0 '1' ~ null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -1378,7 +1378,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_EquivalentTo_Quantity()
         {
-            var library = CreateLibraryForExpression("null ~ 1.0 '1'");
+            var library = CreateCqlApi().MakeLibraryFromExpression("null ~ 1.0 '1'");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -1445,7 +1445,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void String_EquivalentTo_Null()
         {
-            var library = CreateLibraryForExpression("'hello' ~ null");
+            var library = CreateCqlApi().MakeLibraryFromExpression("'hello' ~ null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -1453,7 +1453,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_EquivalentTo_String()
         {
-            var library = CreateLibraryForExpression("null ~ 'hello'");
+            var library = CreateCqlApi().MakeLibraryFromExpression("null ~ 'hello'");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }

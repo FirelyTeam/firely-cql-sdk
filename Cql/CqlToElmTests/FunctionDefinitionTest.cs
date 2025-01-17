@@ -7,7 +7,6 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
-
     [TestClass]
     public class FunctionDefinitionTest : Base
     {
@@ -22,12 +21,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DefinePrivateFluentFunction()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
-                library FuncTest version '1.0.0'
-                using FHIR version '4.0.1'
-                context Patient
-                define private fluent function Two(): 2");
-
+            var library = CreateCqlApi().MakeLibrary("""
+                                                     library FuncTest version '1.0.0'
+                                                     using FHIR version '4.0.1'
+                                                     context Patient
+                                                     define private fluent function Two(): 2
+                                                     """);
             var f = shouldDefineFunction(library, "Two");
             f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
             f.expression.Should().BeLiteralInteger(2);
@@ -39,10 +38,10 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DefinePublicNonFluentExternalFunction()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
-                library FuncTest version '1.0.0'
-                define public function Ext() returns String: external");
-
+            var library = CreateCqlApi().MakeLibrary("""
+                                                     library FuncTest version '1.0.0'
+                                                     define public function Ext() returns String: external
+                                                     """);
             var f = shouldDefineFunction(library, "Ext");
             f.resultTypeSpecifier.Should().Be(SystemTypes.StringType);
             f.expression.Should().BeNull();
@@ -53,19 +52,21 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void UntypedFunctionsAreIllegal()
         {
-            string[] expectedErrors = new[] { "External functions must specify a return type." };
-            _ = CreateCqlApi().MakeLibrary(@"
-                library FuncTest version '1.0.0'
-                define public function Ext(): external", expectedErrors);
+            _ = CreateCqlApi().MakeLibrary("""
+                                           library FuncTest version '1.0.0'
+                                           define public function Ext(): external
+                                           """,
+                                           "External functions must specify a return type.");
         }
 
 
         [TestMethod]
         public void OptionalReturnTypesMayBeTheSame()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library FuncTest version '1.0.0'
-                define function Two() returns Integer: 2");
+                define function Two() returns Integer: 2
+                """);
 
             var f = shouldDefineFunction(library, "Two");
             f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
@@ -74,9 +75,10 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void OptionalReturnTypesMayBeSupertype()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library FuncTest version '1.0.0'
-                define function Two() returns Any: 2");
+                define function Two() returns Any: 2
+                """);
 
             var f = shouldDefineFunction(library, "Two");
             f.resultTypeSpecifier.Should().Be(SystemTypes.AnyType);
@@ -85,9 +87,10 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void MakesParametersVisibleInScope()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
-                library FuncTest version '1.0.0'
-                define function Double(a Integer): a*2");
+            var library = CreateCqlApi().MakeLibrary("""
+                                                     library FuncTest version '1.0.0'
+                                                     define function Double(a Integer): a*2
+                                                     """);
 
             var f = shouldDefineFunction(library, "Double");
             f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
@@ -98,19 +101,21 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void SignalsUnknownParameters()
         {
-            string[] expectedErrors = new[] { "Could not resolve identifier b in the current library." };
-            CreateCqlApi().MakeLibrary(@"
-                library FuncTest version '1.0.0'
-                define function Double(a Integer): b", expectedErrors);
+            CreateCqlApi().MakeLibrary("""
+                                       library FuncTest version '1.0.0'
+                                       define function Double(a Integer): b
+                                       """,
+                                       "Could not resolve identifier b in the current library.");
         }
 
         [TestMethod]
         public void ResolvesInParentScope()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
-                library FuncTest version '1.0.0'
-                define b: 5
-                define function Double(a Integer): b");
+            var library = CreateCqlApi().MakeLibrary("""
+                                                     library FuncTest version '1.0.0'
+                                                     define b: 5
+                                                     define function Double(a Integer): b
+                                                     """);
 
             var f = shouldDefineFunction(library, "Double");
             f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
@@ -122,10 +127,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ResolvesNearestScope()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
-                library FuncTest version '1.0.0'
-                define a: 5
-                define function Replace(a String): a");
+            var library = CreateCqlApi().MakeLibrary("""
+                                                     library FuncTest version '1.0.0'
+                                                     define a: 5
+                                                     define function Replace(a String): a
+                                                     """);
 
             var f = shouldDefineFunction(library, "Replace");
             f.resultTypeSpecifier.Should().Be(SystemTypes.StringType);
@@ -135,10 +141,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DoesForwardsReference()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
-                library FuncTest version '1.0.0'
-                define b: a                
-                define a: 5");
+            var library = CreateCqlApi().MakeLibrary("""
+                                                     library FuncTest version '1.0.0'
+                                                     define b: a
+                                                     define a: 5
+                                                     """);
 
             var f = library.ShouldDefine<ExpressionDef>("b");
             f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
@@ -148,78 +155,75 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DetectsCycle()
         {
-            string[] expectedErrors = new[] { "Cannot resolve reference to expression or function a because it results in a circular reference." };
-            _ = CreateCqlApi().MakeLibrary(@"
-            library FuncTest version '1.0.0'          
-            define a: b                
-            define b: a", expectedErrors);
+            _ = CreateCqlApi().MakeLibrary("""
+                                           library FuncTest version '1.0.0'
+                                           define a: b
+                                           define b: a
+                                           """,
+                                           "Cannot resolve reference to expression or function a because it results in a circular reference.");
         }
 
         [TestMethod]
         public void CallsFluentOnMember()
         {
-            var lib = CreateCqlApi().MakeLibrary(@"
-            library FuncTest version '1.0.0'
-            
-            using FHIR version '4.0.1'
+            var lib = CreateCqlApi().MakeLibrary("""
+                                                 library FuncTest version '1.0.0'
 
-            define fluent function ""To date interval""(period FHIR.Period):
-                Interval[date from start of period, date from end of period]
+                                                 using FHIR version '4.0.1'
 
-            define fluent function ""Interval""(coverage FHIR.Coverage):
-                (coverage.period as FHIR.Period).""To date interval""()
-            ");
+                                                 define fluent function "To date interval"(period FHIR.Period):
+                                                     Interval[date from start of period, date from end of period]
+
+                                                 define fluent function "Interval"(coverage FHIR.Coverage):
+                                                     (coverage.period as FHIR.Period)."To date interval"()
+
+                                                 """);
             lib.GetErrors().Should().BeEmpty();
         }
+
         [TestMethod]
         public void CallsFluentOnMember_AcrossLibrary()
         {
-            var services = ServiceCollection().BuildServiceProvider();
-            var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
-            var fluentLib = MakeLibraryBuilder(services, @"
-                library FluentLib version '1.0.0'
-            
-                using FHIR version '4.0.1'
+            var cqlApi = CreateCqlApi();
+            var fluentLib = cqlApi.MakeLibrary("""
+                                                         library FluentLib version '1.0.0'
 
-                define fluent function ""To date interval""(period FHIR.Period):
-                    Interval[date from start of period, date from end of period]
-            ");
-            libraryProvider.Libraries.Add("FluentLib", "1.0.0", fluentLib);
-            var testLib = MakeLibrary(services, @"
-            library FuncTest version '1.0.0'
-            
-            using FHIR version '4.0.1'
-            
-            include FluentLib version '1.0.0'
+                                                         using FHIR version '4.0.1'
 
-            define fluent function ""Interval""(coverage FHIR.Coverage):
-                (coverage.period as FHIR.Period).""To date interval""()
-            ");
+                                                         define fluent function "To date interval"(period FHIR.Period):
+                                                             Interval[date from start of period, date from end of period]
+                                                         """);
+
+            var testLib = cqlApi.MakeLibrary("""
+                                                library FuncTest version '1.0.0'
+
+                                                using FHIR version '4.0.1'
+
+                                                include FluentLib version '1.0.0'
+
+                                                define fluent function "Interval"(coverage FHIR.Coverage):
+                                                    (coverage.period as FHIR.Period)."To date interval"()
+                                                """);
             testLib.GetErrors().Should().BeEmpty();
             testLib.statements.Should().NotBeNull();
             testLib.statements.Should().HaveCount(1);
             var subject = testLib.statements[0].Should().BeOfType<FunctionDef>().Subject;
-
-
         }
 
         [TestMethod]
         public void BirthdatePlusAge()
         {
-            var services = ServiceCollection().BuildServiceProvider();
-            var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
-            using var scope = services.CreateScope();
-            AddFHIRHelpers(libraryProvider, scope);
-            var lib = MakeLibrary(services, @"
-                library Test version '1.0.0'
+            var cqlApi = CreateCqlApi().AddFHIRHelpers();;
+            var lib = cqlApi.MakeLibrary("""
+                                         library Test version '1.0.0'
 
-                using FHIR version '4.0.1'
+                                         using FHIR version '4.0.1'
 
-                include FHIRHelpers version '4.0.1'
+                                         include FHIRHelpers version '4.0.1'
 
-                define function f(patient FHIR.Patient, condition FHIR.Condition):
-                  patient.birthDate + (condition.onset as FHIR.Age)
-            ");
+                                         define function f(patient FHIR.Patient, condition FHIR.Condition):
+                                           patient.birthDate + (condition.onset as FHIR.Age)
+                                         """);
             var add = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Add>();
             add.operand.Should().HaveCount(2);
             var toDate = add.operand[0].Should().BeOfType<FunctionRef>().Subject;
@@ -237,30 +241,29 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ComplexCaseStatement()
         {
-            var lib = CreateCqlApi().MakeLibrary(@"
-                library FuncTest version '1.0.0'
-            
-                using FHIR version '4.0.1'
+            var lib = CreateCqlApi().MakeLibrary("""
+                                                 library FuncTest version '1.0.0'
 
-                define fluent function ""Onset date""(condition FHIR.Condition, birthDate Date):
-                case
-                    when condition is null or condition.onset is null then
-                        null
-                    when condition.onset is FHIR.dateTime then
-                        date from (condition.onset as FHIR.dateTime)
-                    when condition.onset is FHIR.Period then
-                        date from start of (condition.onset as FHIR.Period)
-                    when condition.onset is FHIR.Age and birthDate is not null then
-                        birthDate + (condition.onset as FHIR.Age)
-                    when condition.onset is Range and birthDate is not null then
-                        birthDate + (condition.onset as FHIR.Range).low
-                    else
-                        null
-                end
-            ");
+                                                 using FHIR version '4.0.1'
+
+                                                 define fluent function "Onset date"(condition FHIR.Condition, birthDate Date):
+                                                 case
+                                                     when condition is null or condition.onset is null then
+                                                         null
+                                                     when condition.onset is FHIR.dateTime then
+                                                         date from (condition.onset as FHIR.dateTime)
+                                                     when condition.onset is FHIR.Period then
+                                                         date from start of (condition.onset as FHIR.Period)
+                                                     when condition.onset is FHIR.Age and birthDate is not null then
+                                                         birthDate + (condition.onset as FHIR.Age)
+                                                     when condition.onset is Range and birthDate is not null then
+                                                         birthDate + (condition.onset as FHIR.Range).low
+                                                     else
+                                                         null
+                                                 end
+                                                 """);
             var cs = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Case>();
             cs.Should().HaveType(SystemTypes.DateType);
-
         }
 
         [TestMethod]

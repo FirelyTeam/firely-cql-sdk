@@ -47,7 +47,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Context_Of_Unknown_Model()
         {
-            var lib = TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using FHIR
@@ -59,7 +59,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Context_UnknonwType_on_Known_Model()
         {
-            var lib = TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using FHIR
@@ -71,7 +71,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Context_Not_A_Model()
         {
-            var lib = TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library UsingTest version '1.0.0'
                 
                 define derp: false
@@ -83,7 +83,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Context_Of_Unknown_Type()
         {
-            var lib = TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using FHIR

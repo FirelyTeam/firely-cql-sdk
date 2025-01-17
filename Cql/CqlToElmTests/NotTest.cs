@@ -149,7 +149,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Not_1() =>
-            TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            CreateCqlApi().MakeLibrary(@"
                 library NotTest version '1.0.0'
 
                 define private Not_1: not 1

@@ -130,7 +130,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Duration_Between_Date_In_Hours() =>
-            TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            CreateCqlApi().MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Date_In_Hours: duration in hours between @2023-01-01 and @2024-02-01
@@ -230,7 +230,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Duration_Between_Time_In_Days() =>
-            TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            CreateCqlApi().MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Milliseconds: duration in days between @T12:00:00.100 and @T12:00:00.300
@@ -277,7 +277,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Duration_Between_Null_Null() =>
-            TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            CreateCqlApi().MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Months: duration in weeks between null and null
@@ -337,7 +337,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_In_Days_NonInterval()
         {
-            var lib = TestExtensions.MakeLibrary(CreateCqlApi(), @"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library DurationTest version '1.0.0'
 
                 define d: duration in days of 1
