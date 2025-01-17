@@ -342,8 +342,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         protected static CqlLibraryString FHIRHelpers { get; } =
-            CqlLibraryString.FromCql(
-                File.ReadAllText(@"Input\FHIRHelpers-4.0.1.cql"));
+            CqlLibraryString.FromCql(File.ReadAllText(@"Input\FHIRHelpers-4.0.1.cql"));
 
         protected static ILoggerFactory LoggerFactory { get; } =
             new ServiceCollection()

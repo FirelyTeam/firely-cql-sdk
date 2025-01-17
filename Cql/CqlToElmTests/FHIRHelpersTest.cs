@@ -3,6 +3,7 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
+using CqlSdkPrototype.Cql.Extensions;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -102,22 +103,20 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FHIRHelpers_Coding_To_ListCodes()
         {
-            // var services = ServiceCollection().BuildServiceProvider();
-            // var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
-            // using var scope = services.CreateScope();
-            //AddFHIRHelpers(libraryProvider, scope);
-            var lib = CreateCqlApi().MakeLibrary("""
-                                                 library Test version '1.0.0'
+            var cqlApi = CreateCqlApi()
+                .AddCqlLibraryString(FHIRHelpers);
+            var lib = cqlApi.MakeLibrary("""
+                                         library Test version '1.0.0'
 
-                                                 using FHIR version '4.0.1'
+                                         using FHIR version '4.0.1'
 
-                                                 valueset "VS" : 'http://snomed.info/sct'
+                                         valueset "VS" : 'http://snomed.info/sct'
 
-                                                 include FHIRHelpers version '4.0.1' called FHIRHelpers
+                                         include FHIRHelpers version '4.0.1' called FHIRHelpers
 
-                                                 define function inTest(condition FHIR.Condition, codes List<Code>):
-                                                   condition.code.coding in "VS"
-                                                 """);
+                                         define function inTest(condition FHIR.Condition, codes List<Code>):
+                                           condition.code.coding in "VS"
+                                         """);
             lib.statements.Should().HaveCount(1);
             var fd = lib.statements[0].Should().BeOfType<FunctionDef>().Subject;
             var body = fd.expression;

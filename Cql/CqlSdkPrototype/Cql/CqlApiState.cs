@@ -34,8 +34,19 @@ internal readonly record struct CqlApiState(
     }
 
     private readonly CqlApiOptions _options = Options!;
+    private readonly ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> _entries = Entries;
 
-    internal ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry>.Builder EntriesBuilder { get; } = Entries?.ToBuilder()!; // Not ideal, needed during Translate for TryResolveLibrary
+    internal ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry>.Builder EntriesBuilder { get; private init; } = Entries.ToBuilder()!; // Not ideal, needed during Translate for TryResolveLibrary
+
+    public ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> Entries
+    {
+        get => _entries;
+        init
+        {
+            _entries = value;
+            EntriesBuilder = value?.ToBuilder()!;
+        }
+    }
 
     public CqlApiOptions Options
     {
@@ -115,11 +126,15 @@ internal readonly record struct CqlApiState(
             CqlLibraryIdentifier.Parse(libraryName),
             CqlLibraryVersion.Parse(version ?? throw new ArgumentNullException(nameof(version))));
 
-        if (EntriesBuilder.TryGetValue(libVer, out var entry)
-            && entry.ElmLibraryBuilder is {} lb)
+        if (EntriesBuilder.TryGetValue(libVer, out var entry))
         {
-            libraryBuilder = lb;
-            return true;
+            if (entry.ElmLibraryBuilder is {} lb)
+            {
+                libraryBuilder = lb;
+                return true;
+            }
+
+            ;
         }
 
         return false;
