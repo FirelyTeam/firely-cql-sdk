@@ -8,9 +8,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace CqlSdkPrototype.Cql;
 
-using CqlTranslationEntriesMap = System.Collections.Immutable.ImmutableDictionary<
-    CqlVersionedLibraryIdentifier,
-    CqlApiStateEntry>;
+using CqlApiStateEntryDictionary = ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry>;
 
 public class CqlApi :
     ICqlApiExtendable<CqlApi>,
@@ -28,7 +26,7 @@ public class CqlApi :
     private CqlApiState _state;
 
     private CqlApi WithEntries(
-        CqlTranslationEntriesMap entries)
+        CqlApiStateEntryDictionary entries)
     {
         _state = _state with { Entries = entries };
         return this;
@@ -54,26 +52,30 @@ public class CqlApi :
     public CqlApi AddCqlLibraries(IEnumerable<CqlLibraryString> cqlLibraries)
     {
         var logger = _state.Logger;
-        var libraryCompilationsBuilder = _state.Entries.ToBuilder();
+        var entriesBuilder = _state.EntriesBuilder;
+        var cqlToElmConverter = _state.CqlToElmConverter;
+        using var scope = _state.ServiceProvider.CreateScope()!;
         var hasChanged = false;
         foreach (var cqlLibrary in cqlLibraries)
         {
             var versionedIdentifier = cqlLibrary.VersionedLibraryIdentifier;
 
-            if (libraryCompilationsBuilder.ContainsKey(versionedIdentifier))
+            if (entriesBuilder.ContainsKey(versionedIdentifier))
             {
                 logger.LogInformation("Skipping adding previous cql to translation: {versionedIdentifier}", versionedIdentifier);
                 continue;
             }
 
-            var libraryCompilation = new CqlApiStateEntry(cqlLibrary);
-            libraryCompilationsBuilder.Add(versionedIdentifier, libraryCompilation);
+            var libraryVisitor = CqlToElmConverter.GetLibraryVisitorScoped(scope);
+            var libraryBuilder = cqlToElmConverter.GetBuilder(libraryVisitor, cqlLibrary.Cql);
+            var entry = new CqlApiStateEntry(cqlLibrary) { ElmLibraryBuilder = libraryBuilder };
+            entriesBuilder.Add(versionedIdentifier, entry);
             logger.LogInformation("Adding cql library to translation: {versionedIdentifier}", versionedIdentifier);
             hasChanged = true;
         }
 
         return hasChanged
-                   ? WithEntries(entries: libraryCompilationsBuilder.ToImmutable())
+                   ? WithEntries(entries: entriesBuilder.ToImmutable())
                    : this;
     }
 
@@ -83,9 +85,7 @@ public class CqlApi :
 
     public CqlApi Translate()
     {
-        CqlToElmConverter cqlToElmConverter = _state.CqlToElmConverter;
-        CqlTranslationEntriesMap.Builder entriesBuilder = _state.EntriesBuilder;
-        using var scope = _state.ServiceProvider.CreateScope()!;
+        CqlApiStateEntryDictionary.Builder entriesBuilder = _state.EntriesBuilder;
         var logger = _state.Logger;
         bool atFirst = true;
 
@@ -126,12 +126,8 @@ public class CqlApi :
 
         void ProcessLibrary(CqlVersionedLibraryIdentifier versionedIdentifier, CqlApiStateEntry cqlTranslationEntry)
         {
-            var cql = cqlTranslationEntry.CqlLibraryString.Cql;
-            var libraryVisitor = CqlToElmConverter.GetLibraryVisitorScoped(scope);
-            var libraryBuilder = cqlToElmConverter.GetBuilder(libraryVisitor, cql);
-            var library = libraryBuilder.Build();
-            //var library = cqlToElmConverter.ConvertLibrary(new StringReader(cql));
-            entriesBuilder[versionedIdentifier] = cqlTranslationEntry with { ElmLibrary = library, ElmLibraryBuilder = libraryBuilder };
+            var library = cqlTranslationEntry.ElmLibraryBuilder!.Build();
+            entriesBuilder[versionedIdentifier] = cqlTranslationEntry with { ElmLibrary = library };
         }
     }
 
