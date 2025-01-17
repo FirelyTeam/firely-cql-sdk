@@ -14,8 +14,15 @@ public readonly partial record struct CqlLibraryString
     }
 
     [GeneratedRegex("""
-           (\s+\r?\n?)*library\s+(?<lib>\S+)\s+version\s'(?<ver>[^']+)'
-           """)]
+                    (\s+\r?\n?)*      # Skip whitespace and newlines
+                    library           # until "library" is found
+                    \s+
+                    (?<lib>\S+)       # The name of the library
+                    \s+
+                    version
+                    \s'(?<ver>[^']+)' # The version of the library between single quotes
+                    """,
+                    RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline)]
     private static partial Regex LibraryNameAndVersionRegex();
 
     public static CqlLibraryString FromCql(string cqlContent)

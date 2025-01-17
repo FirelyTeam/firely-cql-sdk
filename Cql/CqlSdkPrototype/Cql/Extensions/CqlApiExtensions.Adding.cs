@@ -36,9 +36,8 @@ public static partial class CqlApiExtensions
             .Select(f =>
             {
                 logger.LogInformation("Loading library from file: {file}", f);
-                        var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(f.Name.TrimFileExtension(".cql"));
                         var cqlContent = File.ReadAllText(f.FullName);
-                        var cqlLibrary = CqlLibraryString.FromIdentifierAndString(versionedLibraryIdentifier, cqlContent);
+                        var cqlLibrary = CqlLibraryString.FromCql(cqlContent);
                         return cqlLibrary;
                     }); // Log errors
 

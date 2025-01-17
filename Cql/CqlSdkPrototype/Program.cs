@@ -79,9 +79,7 @@ internal class Program
         // This example demonstrates how to add a CqlLibraryString to the CqlApi and invoke a library declaration directly.
 
         // NICE TO HAVE: Would be nice to parse the CqlLibraryString only from the CQL and extract the identifier from the CQL
-        var libraryIdentifier = CqlVersionedLibraryIdentifier.Parse("AdditionLib-0.0.0");
-        var cqlLibraryString = CqlLibraryString.FromIdentifierAndString(
-            libraryIdentifier,
+        var cqlLibraryString = CqlLibraryString.FromCql(
             """
             library AdditionLib version '0.0.0'
 
@@ -91,7 +89,7 @@ internal class Program
         using var invocationScope = cqlApi
                                     .AddCqlLibraryString(cqlLibraryString)
                                     .CreateRuntimeScope(elmOpt => elmOpt with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded });
-        var result = invocationScope.GetLibraryDefinitionResult(cqlContext, libraryIdentifier, "Three");
+        var result = invocationScope.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.VersionedLibraryIdentifier, "Three");
         Debug.Assert(result is 3);
     }
 
