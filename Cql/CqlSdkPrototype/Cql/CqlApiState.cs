@@ -105,19 +105,20 @@ internal readonly record struct CqlApiState(
     bool ILibraryProvider.TryResolveLibrary(
         string libraryName,
         string? version,
-        [NotNullWhen(true)] out LibraryBuilder? library,
+        [NotNullWhen(true)] out LibraryBuilder? libraryBuilder,
         out string? error)
     {
         error = null;
-        library = null;
+        libraryBuilder = null;
 
         var libVer = CqlVersionedLibraryIdentifier.FromNameAndVersion(
             CqlLibraryIdentifier.Parse(libraryName),
             CqlLibraryVersion.Parse(version ?? throw new ArgumentNullException(nameof(version))));
+
         if (EntriesBuilder.TryGetValue(libVer, out var entry)
-            && entry.ElmLibraryBuilder is {} libraryBuilder)
+            && entry.ElmLibraryBuilder is {} lb)
         {
-            library = libraryBuilder;
+            libraryBuilder = lb;
             return true;
         }
 

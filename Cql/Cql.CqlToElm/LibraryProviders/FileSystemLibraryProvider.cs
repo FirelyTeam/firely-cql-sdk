@@ -61,7 +61,7 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                         var info = new LibraryInfo(file, li.Library);
                         Libraries.Add(li.VersionedIdentifier.id, li.VersionedIdentifier.version, info);
                         LibrariesByFile.Add(file, info);
-                        
+
                     }
                 }
                 var jsonFiles = RootDirectory.GetFiles("*.json", SearchOption.AllDirectories);
@@ -155,28 +155,28 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
             return false;
         }
 
-        public bool TryResolveLibrary(string libraryName, string? version, [NotNullWhen(true)] out LibraryBuilder? library, out string? error)
+        public bool TryResolveLibrary(string libraryName, string? version, [NotNullWhen(true)] out LibraryBuilder? libraryBuilder, out string? error)
         {
             if (Libraries.TryGet(libraryName, version, out var lib))
             {
                 if (lib.library is not null)
-                    library = lib.library;
+                    libraryBuilder = lib.library;
                 else
                 {
                     System.Diagnostics.Debug.WriteLine($"[{nameof(FileSystemLibraryProvider)}] Converting {lib.file}");
                     using var stream = lib.file.OpenRead();
-                    var sr = new StreamReader(stream);
-                    var cql = sr.ReadToEnd();
+                    using var cqlReader = new StreamReader(stream);
                     using var scope = Services.CreateScope();
-                    library = Converter.GetBuilder(cql, scope);
-                    lib.library = library;
+                    var libraryVisitor = CqlToElmConverter.GetLibraryVisitorScoped(scope);
+                    libraryBuilder = Converter.GetBuilder(libraryVisitor, cqlReader);
+                    lib.library = libraryBuilder;
                 }
                 error = null;
                 return true;
             }
             else
             {
-                library = null;
+                libraryBuilder = null;
                 error = null;
                 return false;
             }
