@@ -61,7 +61,7 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
                         var info = new LibraryInfo(file, li.Library);
                         Libraries.Add(li.VersionedIdentifier.id, li.VersionedIdentifier.version, info);
                         LibrariesByFile.Add(file, info);
-                        
+
                     }
                 }
                 var jsonFiles = RootDirectory.GetFiles("*.json", SearchOption.AllDirectories);

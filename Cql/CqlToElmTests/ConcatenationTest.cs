@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_String_To_String()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library Add_Integer_to_Integer version '1.0.0'
 
                 define private Three: 'hello' & 'world'
@@ -78,7 +78,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Three_Strings()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library Add_Integer_to_Integer version '1.0.0'
 
                 define private Three: 'hello' & (' ' & 'world')

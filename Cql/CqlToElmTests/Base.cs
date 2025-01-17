@@ -313,7 +313,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         protected static Library CreateLibraryForExpression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
         {
-            return CqlApi.MakeLibrary($@"
+            return CreateCqlApi().MakeLibrary($@"
                 library Test version '1.0.0'
 
                 define private ""{memberName}"": {expression}");
@@ -357,14 +357,12 @@ namespace Hl7.Cql.CqlToElm.Test
                 LoggerFactory,
                 new CqlApiOptions(ProcessBatchItemExceptionHandling.ThrowException, models, modelInfos, ambiguousTypeBehavior, enableListPromotion ) );
 
-        protected static CqlApi CqlApi => CreateCqlApi(models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-
         protected static ElmApi CreateElmApi(
             ImmutableHashSet<CqlModel>? models = null,
             ImmutableHashSet<ModelInfo>? modelInfos = null,
             AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
             bool enableListPromotion = false) =>
-                CreateCqlApi(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
+                CreateCqlApi(models ?? [CqlModel.ElmR1, CqlModel.Fhir401], modelInfos, ambiguousTypeBehavior, enableListPromotion)
                 .CreateElmApi(_ => new ElmApiOptions(
                                   ProcessBatchItemExceptionHandling.ThrowException,
                                   Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));

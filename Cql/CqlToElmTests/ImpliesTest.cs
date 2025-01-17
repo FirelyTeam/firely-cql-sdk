@@ -16,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_False: true implies false
@@ -72,7 +72,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_True()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_True: true implies true
@@ -128,7 +128,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void False_Implies_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private False_Implies_False: false implies false
@@ -184,7 +184,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_Null()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_Null: true implies null
@@ -239,7 +239,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Implies_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private Null_Implies_False: null implies false
@@ -294,7 +294,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Implies_Null()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library ImpliesTest version '1.0.0'
 
                 define private Null_Implies_Null: null implies null
@@ -349,7 +349,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_1()
         {
-            TestExtensions.MakeLibrary(CqlApi, @"
+            TestExtensions.MakeLibrary(CreateCqlApi(), @"
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_1: true implies 1

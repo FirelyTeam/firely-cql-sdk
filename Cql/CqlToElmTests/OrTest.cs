@@ -16,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Or_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library OrTest version '1.0.0'
 
                 define private True_Or_False: true or false
@@ -72,7 +72,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Or_True()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library OrTest version '1.0.0'
 
                 define private True_Or_True: true or true
@@ -128,7 +128,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void False_Or_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library OrTest version '1.0.0'
 
                 define private False_Or_False: false or false
@@ -184,7 +184,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Or_Null()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library OrTest version '1.0.0'
 
                 define private True_Or_Null: true or null
@@ -240,7 +240,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Or_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library OrTest version '1.0.0'
 
                 define private Null_Or_False: null or false
@@ -296,7 +296,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Or_Null()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library OrTest version '1.0.0'
 
                 define private Null_Or_Null: null or null
@@ -351,7 +351,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Or_1()
         {
-            TestExtensions.MakeLibrary(CqlApi, @"
+            TestExtensions.MakeLibrary(CreateCqlApi(), @"
                 library OrTest version '1.0.0'
 
                 define private True_Or_1: true or 1

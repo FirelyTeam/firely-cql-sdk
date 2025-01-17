@@ -22,7 +22,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Singleton_From_Integers()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library SingletonTest version '1.0.0'
 
                 define private Singleton_From_Integers: singleton from { 1 }
@@ -57,7 +57,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Singleton_From_Empty()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library SingletonTest version '1.0.0'
 
                 define private Singleton_From_Empty: singleton from ({} as List<Integer>)
@@ -91,7 +91,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Singleton_From_Integers_Null()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library SingletonTest version '1.0.0'
 
                 define private Singleton_From_Integers_Null: singleton from (null as List<Integer>)
@@ -124,7 +124,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Singleton_From_Integers_Error()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library SingletonTest version '1.0.0'
 
                 define private Singleton_From_Integers_Error: singleton from { 1, 2, 3 }
@@ -156,7 +156,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Singleton_From_Integer_With_List_Promotion()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library SingletonTest version '1.0.0'
 
                 define private Singleton_From_Integer_With_List_Promotion: singleton from 1

@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Integer_by_Integer()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Integer_by_Integer version '1.0.0'
 
                 define private TruncatedDivide_Integer_by_Integer: 2 div 4
@@ -76,7 +76,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Integer_by_Long()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Integer_by_Long version '1.0.0'
 
                 define private TruncatedDivide_Integer_by_Long: 2 div 3L
@@ -132,7 +132,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Integer_by_Decimal()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Integer_by_Decimal version '1.0.0'
 
                 define private TruncatedDivide_Integer_by_Decimal: 2 div 3.0
@@ -188,7 +188,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Integer_by_Quantity()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Integer_by_Quantity version '1.0.0'
 
                 define private TruncatedDivide_Integer_by_Quantity: 10 div 2.0 '1'
@@ -248,7 +248,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Integer_by_Null()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Integer_by_Null version '1.0.0'
 
                 define private TruncatedDivide_Integer_by_Null: 1 div null
@@ -302,7 +302,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Null_by_Integer()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Null_by_Integer version '1.0.0'
 
                 define private TruncatedDivide_Null_by_Integer: null div 1
@@ -360,7 +360,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Long_by_Integer()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Long_by_Integer version '1.0.0'
 
                 define private TruncatedDivide_Long_by_Integer: 10L div 2
@@ -416,7 +416,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Long_by_Long()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Long_by_Long version '1.0.0'
 
                 define private TruncatedDivide_Long_by_Long: 100L div 10L
@@ -472,7 +472,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Long_by_Decimal()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Long_by_Decimal version '1.0.0'
 
                 define private TruncatedDivide_Long_by_Decimal: -3L div 2.0
@@ -528,7 +528,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Long_by_Quantity()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Long_by_Quantity version '1.0.0'
 
                 define private TruncatedDivide_Long_by_Quantity: 20L div 5.0 '1'
@@ -587,7 +587,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Long_by_Null()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Long_by_Null version '1.0.0'
 
                 define private TruncatedDivide_Long_by_Null: 1L div null
@@ -641,7 +641,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Null_by_Long()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Null_by_Long version '1.0.0'
 
                 define private TruncatedDivide_Null_by_Long: null div 1L
@@ -699,7 +699,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Decimal_by_Integer()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Decimal_by_Integer version '1.0.0'
 
                 define private TruncatedDivide_Decimal_by_Integer: 0.0 div 3
@@ -755,7 +755,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Decimal_by_Long()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library DefaultConverter version '1.0.0'
 
                 define private DefaultConverter: 5.0 div 5L
@@ -811,7 +811,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Decimal_by_Decimal()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Decimal_by_Decimal version '1.0.0'
 
                 define private TruncatedDivide_Decimal_by_Decimal: -10.0 div 10.0
@@ -867,7 +867,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Decimal_by_Quantity()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Decimal_by_Quantity version '1.0.0'
 
                 define private TruncatedDivide_Decimal_by_Quantity: 3.0 div 2.0 '1'
@@ -926,7 +926,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Decimal_by_Null()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Decimal_by_Null version '1.0.0'
 
                 define private TruncatedDivide_Decimal_by_Null: 1.0 div null
@@ -980,7 +980,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Null_by_Decimal()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Null_by_Decimal version '1.0.0'
 
                 define private TruncatedDivide_Null_by_Decimal: null div 1.0
@@ -1038,7 +1038,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Quantity_by_Quantity()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Quantity_by_Quantity version '1.0.0'
 
                 define private TruncatedDivide_Quantity_by_Quantity: 3.0 '1' div 2.0 '1'
@@ -1097,7 +1097,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Quantity_by_Null()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Quantity_by_Null version '1.0.0'
 
                 define private TruncatedDivide_Quantity_by_Null: 3.0 '1' div null
@@ -1152,7 +1152,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Null_by_Quantity()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TruncatedDivide_Null_by_Quantity version '1.0.0'
 
                 define private TruncatedDivide_Null_by_Quantity: null div 3.0 '1'

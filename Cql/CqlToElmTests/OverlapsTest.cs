@@ -16,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Overlaps()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library OverlapsTest version '1.0.0'
 
                 define private Overlaps: Interval[0, 4] overlaps Interval[1, 4]
@@ -45,7 +45,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Overlaps_Before()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library OverlapsTest version '1.0.0'
 
                 define private Overlaps_Before:  Interval[0, 4] overlaps before Interval[1, 4]
@@ -74,7 +74,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Overlaps_After()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library OverlapsTest version '1.0.0'
 
                 define private Overlaps_After: Interval[0, 4] overlaps after Interval[1, 4]
@@ -103,7 +103,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Overlaps_Is_Null()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library OverlapsTest version '1.0.0'
 
                 define private Overlaps_Is_Null: Interval[6, 10] overlaps (null as Interval<Integer>)
@@ -131,7 +131,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Overlaps_After_Day()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library OverlapsTest version '1.0.0'
 
                 define private Overlaps_After_Day: Interval[@2023-03-01, @2023-06-01] overlaps after month of Interval[@2023-01-01, @2023-03-01]
@@ -160,7 +160,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Overlaps_Day()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library OverlapsTest version '1.0.0'
 
                 define private Overlaps_Day: Interval[@2023-01-01, @2023-06-01] overlaps month of Interval[@2023-07-01, @2023-10-01]

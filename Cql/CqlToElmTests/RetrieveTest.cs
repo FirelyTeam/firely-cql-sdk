@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Retrieve_AllTerms()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library RetrieveTest version '1.0.0'
 
                 using FHIR version '4.0.1'

@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Empty()
         {
-            Assert.ThrowsException<ArgumentException>(() => CqlApi.MakeLibrary(string.Empty));
+            Assert.ThrowsException<ArgumentException>(() => CreateCqlApi().MakeLibrary(string.Empty));
             var ms = new MemoryStream();
             Assert.ThrowsException<ArgumentException>(() => DefaultConverter.ConvertLibrary(ms));
         }
@@ -30,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Identifier_AllTerms_String()
         {
-            var library = CqlApi.MakeLibrary("library String version '4.0.1'");
+            var library = CreateCqlApi().MakeLibrary("library String version '4.0.1'");
             Assert.IsNotNull(library);
             Assert.IsNotNull(library.identifier);
             Assert.AreEqual("String", library.identifier.id);
@@ -42,7 +42,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Identifier_AllTerms_Namespace()
         {
-            var library = CqlApi.MakeLibrary("library Namespace.Lib version '4.0.1'");
+            var library = CreateCqlApi().MakeLibrary("library Namespace.Lib version '4.0.1'");
             Assert.IsNotNull(library);
             Assert.IsNotNull(library.identifier);
             Assert.AreEqual("Lib", library.identifier.id);
@@ -54,7 +54,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Identifier_Id_Only()
         {
-            var library = CqlApi.MakeLibrary("library Lib");
+            var library = CreateCqlApi().MakeLibrary("library Lib");
             Assert.IsNotNull(library);
             Assert.IsNotNull(library.identifier);
             Assert.AreEqual("Lib", library.identifier.id);
@@ -66,7 +66,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Identifier_Id_Namespace()
         {
-            var library = CqlApi.MakeLibrary("library Namespace.Lib");
+            var library = CreateCqlApi().MakeLibrary("library Namespace.Lib");
             Assert.IsNotNull(library);
             Assert.IsNotNull(library.identifier);
             Assert.AreEqual("Lib", library.identifier.id);
@@ -249,7 +249,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_AllTerms()
         {
-            var library = TestExtensions.MakeLibrary(CqlApi, @"
+            var library = TestExtensions.MakeLibrary(CreateCqlApi(), @"
                 library IncludeTest version '1.0.0'
 
                 include MyLibrary version '1.0.0' called Derp
@@ -265,7 +265,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_AllTerms_WithNamespace()
         {
-            var library = TestExtensions.MakeLibrary(CqlApi, @"
+            var library = TestExtensions.MakeLibrary(CreateCqlApi(), @"
                 library IncludeTest version '1.0.0'
 
                 include Namespace.MyLibrary version '1.0.0' called Derp
@@ -281,7 +281,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_NoVersion_LocalIdentifier()
         {
-            var library = TestExtensions.MakeLibrary(CqlApi, @"
+            var library = TestExtensions.MakeLibrary(CreateCqlApi(), @"
                 library IncludeTest version '1.0.0'
 
                 include Namespace.MyLibrary called Derp
@@ -298,7 +298,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_Version_NoIdentifier()
         {
-            var library = TestExtensions.MakeLibrary(CqlApi, @"
+            var library = TestExtensions.MakeLibrary(CreateCqlApi(), @"
                 library IncludeTest version '1.0.0'
 
                 include Namespace.MyLibrary version '1.0.0'
@@ -320,7 +320,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_NoVersion_NoIdentifier()
         {
-            var library = TestExtensions.MakeLibrary(CqlApi, @"
+            var library = TestExtensions.MakeLibrary(CreateCqlApi(), @"
                 library IncludeTest version '1.0.0'
 
                 include Namespace.MyLibrary
@@ -346,7 +346,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CodeSystem_AllTerms()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private codesystem Name: 'id' version 'version string'
@@ -362,7 +362,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CodeSystem_Without_Access_Modifier()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 codesystem Name: 'id' version 'version string'
@@ -378,7 +378,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CodeSystem_Without_Version()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private codesystem Name: 'id'
@@ -394,7 +394,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CodeSystem_Minimal()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 codesystem Name: 'id'
@@ -410,7 +410,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CodeSystems_Two()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private codesystem Name: 'id' version 'version string'
@@ -438,7 +438,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_AllTerms_OneCodeSystems()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id' version 'version string' codesystems { lib.cs1 }
@@ -458,7 +458,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_AllTerms_EvenCodeSystems()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id' version 'version string' codesystems { lib.cs1, cs2 }
@@ -481,7 +481,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_AllTerms_OddCodeSystems()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id' version 'version string' codesystems { lib.cs1, cs2, lib2.cs3 }
@@ -505,7 +505,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_Without_Access_Modifier()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 valueset Name: 'id' version 'version string'
@@ -521,7 +521,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_Without_Version()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id'
@@ -537,7 +537,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_Minimal()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 valueset Name: 'id'
@@ -553,7 +553,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSets_Two()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id' version 'version string'
@@ -576,7 +576,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_CodeSystems_NoVersion()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 valueset Name: 'id' codesystems { lib.cs1, cs2, lib2.cs3 }
@@ -604,7 +604,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Code_WithoutDisplay()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 code Name: 'id' from lib.cs1
@@ -622,7 +622,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Code_AccessModifier_WithoutDisplay()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private code Name: 'id' from lib.cs1
@@ -641,7 +641,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Code_WithDisplay()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 code Name: 'id' from lib.cs1 display 'Code display text'
@@ -660,7 +660,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Code_AllTerms()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private code Name: 'id' from lib.cs1 display 'Code display text'
@@ -683,7 +683,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Concept_AllTerms()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private concept Name: { lib.code1, code2, lib2.code3 } display 'My concept'
@@ -711,7 +711,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Concept_NoDisplay()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 concept Name: { lib.code1 }
@@ -731,7 +731,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Concept_Build()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 codesystem ""SystemA"": 'http://hl7.org'
@@ -753,7 +753,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Paramter_AllTerms()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private parameter Name System.String default 'default value'
@@ -769,7 +769,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Parameter_AllTermsWithCast()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private parameter Name System.Decimal default 1
@@ -784,7 +784,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Parameter_Default()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private parameter Name default 'default value'
@@ -798,7 +798,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Parameter_Type()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludeTest version '1.0.0'
 
                 private parameter Name System.String
@@ -812,7 +812,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Parameter_None()
         {
-            var library = TestExtensions.MakeLibrary(CqlApi, @"
+            var library = TestExtensions.MakeLibrary(CreateCqlApi(), @"
                 library IncludeTest version '1.0.0'
 
                 private parameter Name

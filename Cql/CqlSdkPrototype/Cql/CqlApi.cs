@@ -30,20 +30,6 @@ public class CqlApi :
     private CqlApi WithEntries(
         CqlTranslationEntriesMap entries)
     {
-        if (entries.Count > _state.Entries.Count)
-        {
-            // For now we assume only files can be added, so if the counts are the same, we assume nothing has changed.
-            for (int i = _state.Entries.Count; i < entries.Count; i++)
-            {
-                var entry = entries.ElementAt(i);
-                _state.Logger.LogInformation("Adding cql library to translation: {id}", entry.Key);
-                _state.MemoryLibraryProvider.Libraries.Add(
-                    entry.Key.Identifier.ToString(),
-                    entry.Key.Version.ToString(),
-                    LibraryBuilder.CreateFromExisting(entry.Value.ElmLibrary!));
-            }
-        }
-
         _state = _state with { Entries = entries };
         return this;
     }
@@ -98,7 +84,8 @@ public class CqlApi :
     public CqlApi Translate()
     {
         CqlToElmConverter cqlToElmConverter = _state.CqlToElmConverter;
-        CqlTranslationEntriesMap.Builder entriesBuilder = null!;
+        CqlTranslationEntriesMap.Builder entriesBuilder = _state.EntriesBuilder;
+        using var scope = _state.ServiceProvider.CreateScope();
         var logger = _state.Logger;
         bool atFirst = true;
 
@@ -111,7 +98,6 @@ public class CqlApi :
                 {
                     atFirst = false;
                     logger.LogInformation("Translating CQL into ELM");
-                    entriesBuilder = _state.Entries.ToBuilder();
                 }
 
                 logger.LogInformation("Translating CQL: {id}", versionedIdentifier);
@@ -133,16 +119,18 @@ public class CqlApi :
                     .Count() // We must enumerate all
             ;
 
-        return changedCount > 0
-                   ? WithEntries(entries: entriesBuilder.ToImmutable())
-                   : this;
+        if (changedCount <= 0)
+            return this;
+
+        return WithEntries(entries: entriesBuilder.ToImmutable());
 
         void ProcessLibrary(CqlVersionedLibraryIdentifier versionedIdentifier, CqlApiStateEntry cqlTranslationEntry)
         {
             var cql = cqlTranslationEntry.CqlLibraryString.Cql;
-            cqlToElmConverter.GetBuilder()
-            var library = cqlToElmConverter.ConvertLibrary(new StringReader(cql));
-            entriesBuilder[versionedIdentifier] = cqlTranslationEntry with { ElmLibrary = library };
+            var libraryBuilder = cqlToElmConverter.GetBuilder(cql, scope);
+            var library = libraryBuilder.Build();
+            //var library = cqlToElmConverter.ConvertLibrary(new StringReader(cql));
+            entriesBuilder[versionedIdentifier] = cqlTranslationEntry with { ElmLibrary = library, ElmLibraryBuilder = libraryBuilder };
         }
     }
 

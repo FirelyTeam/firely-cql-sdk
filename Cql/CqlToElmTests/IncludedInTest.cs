@@ -16,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_Properly_During_Year()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludedInTest version '1.0.0'
 
                 define private Starts_Properly_During_Year: Interval[@2023, @2030] starts properly during year of Interval[@2020, @2030]
@@ -44,7 +44,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_Properly_IncludedIn_Year()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludedInTest version '1.0.0'
 
                 define private Starts_Properly_IncludedIn_Year: Interval[@2023, @2030] starts properly included in year of Interval[@2020, @2030]
@@ -73,7 +73,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_During_Year()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludedInTest version '1.0.0'
 
                 define private Starts_During_Year: Interval[@2023, @2030] starts during year of Interval[@2020, @2030]
@@ -102,7 +102,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_IncludedIn_Year()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludedInTest version '1.0.0'
 
                 define private Starts_During_Year: Interval[@2023, @2030] starts included in year of Interval[@2020, @2030]
@@ -131,7 +131,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Properly_During_Year()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludedInTest version '1.0.0'
 
                 define private Starts_Properly_During_Year: Interval[@2023, @2030] properly during year of Interval[@2020, @2030]
@@ -160,7 +160,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Properly_IncludedIn_Year()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludedInTest version '1.0.0'
 
                 define private Properly_IncludedIn_Year: Interval[@2023, @2030] properly included in year of Interval[@2020, @2030]
@@ -189,7 +189,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void During_Year()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludedInTest version '1.0.0'
 
                 define private Starts_During_Year: Interval[@2023, @2030] during year of Interval[@2020, @2030]
@@ -218,7 +218,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void IncludedIn_Year()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludedInTest version '1.0.0'
 
                 define private IncludedIn_Year: Interval[@2023, @2030] included in year of Interval[@2020, @2030]
@@ -247,7 +247,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Properly_During()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludedInTest version '1.0.0'
 
                 define private Properly_During: Interval[@2023, @2030] properly during Interval[@2020, @2031]
@@ -276,7 +276,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Properly_IncludedIn()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludedInTest version '1.0.0'
 
                 define private Properly_IncludedIn: Interval[@2023, @2030] properly included in Interval[@2020, @2031]
@@ -305,7 +305,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_During()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludedInTest version '1.0.0'
 
                 define private Starts_During: Interval[@2023, @2030] starts during Interval[@2020, @2030]
@@ -334,7 +334,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_IncludedIn()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludedInTest version '1.0.0'
 
                 define private Starts_During: Interval[@2023, @2030] starts included in Interval[@2020, @2030]
@@ -363,7 +363,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_Properly_During()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludedInTest version '1.0.0'
 
                 define private Starts_Properly_During_Year: Interval[@2023, @2030] starts properly during Interval[@2020, @2030]
@@ -391,7 +391,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_Properly_IncludedIn()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IncludedInTest version '1.0.0'
 
                 define private Starts_Properly_IncludedIn: Interval[@2023, @2030] starts properly included in Interval[@2020, @2030]

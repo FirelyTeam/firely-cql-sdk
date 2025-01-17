@@ -19,7 +19,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FlattenEmpty()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library ListTest version '1.0.0'
 
                 define private FlattenEmpty: Flatten({{},{}})
@@ -37,7 +37,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FlattenCapitalF()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library ListTest version '1.0.0'
 
                 define private FlattenEmpty: Flatten({{},{}})
@@ -59,7 +59,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FlattenListOfValueSet()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library FlattenValueSets version '1.0.0'
 
                 valueset ""One"": 'https://hl7.org/one'
@@ -75,7 +75,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FlattenChoiceType()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library ListTest version '1.0.0'
 
                 define choice:
@@ -96,7 +96,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
 
             // requires list promotion
-            var library = TestExtensions.MakeLibrary(CqlApi, @"
+            var library = TestExtensions.MakeLibrary(CreateCqlApi(), @"
                 library Test version '1.0.0'
 
                 using FHIR version '4.0.1'

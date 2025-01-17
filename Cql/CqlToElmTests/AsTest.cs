@@ -21,7 +21,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_As_Decimal()
         {
-            var library = TestExtensions.MakeLibrary(CqlApi, @"
+            var library = TestExtensions.MakeLibrary(CreateCqlApi(), @"
                 library AsTest version '1.0.0'
 
                 define private Integer_As_Decimal: 1 as System.Decimal
@@ -32,7 +32,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_As_Vocabulary()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library AsTest version '1.0.0'
 
                 valueset ""vs"": 'http://xyz.com'
@@ -65,7 +65,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_As_Decimal()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library AsTest version '1.0.0'
 
                 define private Null_As_Decimal: null as System.Decimal
@@ -139,7 +139,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FhirId_As_FhirString()
         {
-            var lib = CqlApi.MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library AsTest version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -160,7 +160,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Choice_As()
         {
             // from MATGlobalCommonFunctionsFHIR4.cql function "Normalize Interval"
-            var lib = CqlApi.MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library AsTest version '1.0.0'
 
                 using FHIR version '4.0.1'

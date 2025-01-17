@@ -11,6 +11,7 @@ using System.Globalization;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.LibraryProviders;
+using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Runtime.Hosting;
 
 // ReSharper disable once CheckNamespace
@@ -89,6 +90,7 @@ internal static class CqlToElmServiceCollectionExtensions
     public static IServiceCollection AddCqlToElmServices(this IServiceCollection services) =>
         services
             .AddSingleton<CqlToElmConverter>()
+            .AddSingleton<Func<LibraryBuilder, LibraryVisitor.DefinitionVisitor>>(sp => libraryBuilder => ActivatorUtilities.CreateInstance<LibraryVisitor.DefinitionVisitor>(sp, libraryBuilder))
             .AddSingleton<CoercionProvider>()
             .AddSingleton<ElmFactory>()
             .AddSingleton<SystemLibrary>()

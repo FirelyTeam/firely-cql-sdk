@@ -52,7 +52,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Convert_Quantity_To_Weeks()
         {
-            var lib = CqlApi.MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary(@"
 
                 library Test version '1.0.0'
 

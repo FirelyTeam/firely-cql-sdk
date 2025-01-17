@@ -40,7 +40,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts1DayOrLessOnOrAfter()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IntervalTest version '1.0.0'
 
                 define private Issue32: Interval[@2017-12-20T10:30:00, @2017-12-20T12:00:00] starts 1 day or less on or after day of start of Interval[@2017-12-20T11:00:00, @2017-12-21T21:00:00]

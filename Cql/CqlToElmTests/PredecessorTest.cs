@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Predecessor_Integer()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: predecessor of 2
@@ -50,7 +50,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Predecessor_Null()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: predecessor of (null as Integer)

@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Infrastructure;
 using FluentAssertions;
@@ -15,31 +16,30 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ExpressionRef_Across_Library()
         {
-            string[] cqlFiles = [
-                """
-                library Foo version '1.0.0'
+//             string[] cqlFiles = [
+//                 """
+//                 library Foo version '1.0.0'
+//
+//                 define F: 'foo'
+//                 """,
+//
+//                 """
+//                 library Bar version '1.0.0'
+//
+//                 include Foo version '1.0.0' called foo
+//
+//                 define G: foo.F
+//                 """
+//             ];
 
-                define F: 'foo'
-                """,
+            var cqlApi = CreateCqlApi();
 
-                """
-                library Bar version '1.0.0'
-
-                include Foo version '1.0.0' called foo
-
-                define G: foo.F
-                """
-            ];
-
-            CqlApi
-                .AddCqlLibraries(cqlFiles.Select(c => CqlLibraryString.FromCql(c)))
-                .Translate();
-
-            var libs = CqlApi.AsExtendable().Entries.Values.Select(e => e.ElmLibrary).ToArray();
-
-            var services = ServiceCollection().BuildServiceProvider();
-            var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
-            var foo = CqlApi.MakeLibrary("""
+            // cqlApi
+            //     .AddCqlLibraries(cqlFiles.Select(CqlLibraryString.FromCql))
+            //     .Translate();
+            // var libs = cqlApi.AsExtendable().Entries.Values.Select(e => e.ElmLibrary).ToArray();
+            // var services = ServiceCollection().BuildServiceProvider();
+            var foo = cqlApi.MakeLibrary("""
                                          library Foo version '1.0.0'
 
                                          define F: 'foo'
@@ -47,7 +47,7 @@ namespace Hl7.Cql.CqlToElm.Test
             foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
             //libraryProvider.Libraries.Add(foo.Identifier.id, foo.Identifier.version, foo);
 
-            var bar = CqlApi.MakeLibrary("""
+            var bar = cqlApi.MakeLibrary("""
                                          library Bar version '1.0.0'
 
                                          include Foo version '1.0.0' called foo

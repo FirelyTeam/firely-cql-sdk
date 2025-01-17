@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using CqlSdkPrototype.Cql;
+using FluentAssertions;
 using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -15,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private Library createLibraryForExpression(string expression, params string[] expectedErrors)
         {
-            return TestExtensions.MakeLibrary(CqlApi, $@"
+            return TestExtensions.MakeLibrary(CreateCqlApi(), $@"
                 library IsTest version '1.0.0'
 
                 define private predicate: {expression}", expectedErrors);

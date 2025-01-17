@@ -18,7 +18,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_GreaterThan_Integer()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_GreaterThan_Integer: 1 > -1
@@ -74,7 +74,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_GreaterThan_Integer_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_GreaterThan_Integer_False: 1 > 2
@@ -130,7 +130,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_GreaterThan_Long()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_GreaterThan_Long: 10 > 1L
@@ -186,7 +186,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_GreaterThan_Decimal_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_GreaterThan_Decimal_False: -10 > 1.01
@@ -243,7 +243,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Integer_GreaterThan_Quantity()
         {
             // 1 converts to 1.0 '1' and '1' units are greater to all units
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_GreaterThan_Quantity: 2 > 1.0 'g'
@@ -299,7 +299,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_GreaterThan_Quantity_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_GreaterThan_Quantity_False: 0 > 1.01 '1'
@@ -355,7 +355,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_GreaterThan_Null()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_GreaterThan_Null: 1 > null
@@ -410,7 +410,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_GreaterThan_Integer()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Null_GreaterThan_Integer: null > 1
@@ -469,7 +469,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_GreaterThan_Long()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_GreaterThan_Long: 1L > -1L
@@ -525,7 +525,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_GreaterThan_Long_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_GreaterThan_Long_False: 1L > 2L
@@ -581,7 +581,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_GreaterThan_Integer()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_GreaterThan_Long: 1L > 0
@@ -637,7 +637,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_GreaterThan_Decimal_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_NotGreaterThan_Decimal: 1L > 1.01
@@ -694,7 +694,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Long_GreaterThan_Quantity()
         {
             // 1L converts to 1.0 '1' and '1' units are greater to all units
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_GreaterThan_Quantity: 10L > 1.0 'g'
@@ -750,7 +750,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_NotGreaterThan_Quantity()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_NotGreaterThan_Quantity: 1L > 1.01 '1'
@@ -806,7 +806,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_GreaterThan_Null()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Long_GreaterThan_Null: 1L > null
@@ -861,7 +861,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_GreaterThan_Long()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Null_GreaterThan_Long: null > 1L
@@ -920,7 +920,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_GreaterThan_Decimal()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_GreaterThan_Decimal: 1.00001 > 1.0
@@ -976,7 +976,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_GreaterThan_Decimal_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_GreaterThan_Decimal_False: 1.0 > 2.0
@@ -1032,7 +1032,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_GreaterThan_Integer()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_GreaterThan_Decimal: 1.01 > 1
@@ -1088,7 +1088,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_GreaterThan_Long_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_NotGreaterThan_Decimal: 2.0 > 10L
@@ -1145,7 +1145,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Decimal_GreaterThan_Quantity()
         {
             // 1.0 converts to 1.0 '1' and '1' units are greater to all units
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_GreaterThan_Quantity: 2.0 > 1.0 'g'
@@ -1201,7 +1201,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_GreaterThan_Quantity_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_GreaterThan_Quantity_False: 1.0 > 1.01 '1'
@@ -1257,7 +1257,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_GreaterThan_Null()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_GreaterThan_Null: 1.0 > null
@@ -1312,7 +1312,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_GreaterThan_Decimal()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Null_GreaterThan_Decimal: null > 1.0
@@ -1371,7 +1371,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_GreaterThan_Quantity()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_GreaterThan_Quantity: 1.1 '1' > 1.0 '1'
@@ -1427,7 +1427,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_GreaterThan_Quantity_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_GreaterThan_Quantity_False: 1.0 '1' > 2.0 '1'
@@ -1483,7 +1483,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_GreaterThan_Integer()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_GreaterThan_Quantity: 1000.0 '1' > 1
@@ -1539,7 +1539,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_GreaterThan_Long_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_NotGreaterThan_Quantity: 2.0 '1' > 10L
@@ -1596,7 +1596,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Quantity_GreaterThan_Decimal()
         {
             // 1.0 converts to 1.0 '1' and '1' units are greater to all units
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_GreaterThan_Decimal: 1.0 'g' > 0.1
@@ -1652,7 +1652,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_GreaterThan_Null()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Integer_GreaterThan_Null: 1.0 '1' > null
@@ -1707,7 +1707,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_GreaterThan_Quantity()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Null_GreaterThan_Integer: null > 1.0 '1'
@@ -1765,7 +1765,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Date_GreaterThan_Date()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Date_GreaterThan_Date: @2023-12-31 > @2023-01-01
@@ -1821,7 +1821,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Date_GreaterThan_Null()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private String_GreaterThan_String: @2023 > null
@@ -1876,7 +1876,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_GreaterThan_Date()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library EqualsTest version '1.0.0'
 
                 define private Null_GreaterThan_Date: null > @2023

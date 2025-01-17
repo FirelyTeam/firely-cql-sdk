@@ -18,7 +18,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_Integer()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Integer: minimum Integer
@@ -52,7 +52,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Integer()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Integer: maximum Integer
@@ -86,7 +86,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_Long()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Long: minimum Long
@@ -120,7 +120,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Long()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Long: maximum Long
@@ -154,7 +154,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_Decimal()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Decimal: minimum Decimal
@@ -188,7 +188,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Decimal()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Decimal: maximum Decimal
@@ -221,7 +221,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_Quantity()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Quantity: minimum Quantity
@@ -257,7 +257,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Quantity()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Quantity: maximum Quantity
@@ -293,7 +293,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_Date()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Date: minimum Date
@@ -326,7 +326,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Date()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Date: maximum Date
@@ -359,7 +359,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_DateTime()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_DateTime: minimum DateTime
@@ -392,7 +392,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_DateTime()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_DateTime: maximum DateTime
@@ -425,7 +425,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_Time()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Time: minimum Time
@@ -458,7 +458,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Time()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Time: maximum Time

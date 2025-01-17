@@ -21,7 +21,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_Local()
         {
-            var library = CqlApi.MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($@"
                 library {nameof(RefTest)} version '1.0.0'
 
                 valueset ""vs"": 'http://xyz.com'
@@ -42,7 +42,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/519")]
         public void CodeSystem_Local()
         {
-            var library = CqlApi.MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($@"
                 library {nameof(RefTest)} version '1.0.0'
 
                 private codesystem CS: 'id' version 'version string'
@@ -62,7 +62,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Code_Local()
         {
-            var library = CqlApi.MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($@"
                 library {nameof(RefTest)} version '1.0.0'
 
                 private codesystem CS: 'id' version 'version string'
@@ -83,7 +83,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Concept_Local()
         {
-            var library = CqlApi.MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($@"
                 library {nameof(RefTest)} version '1.0.0'
 
                 private codesystem CS: 'id' version 'version string'
@@ -105,7 +105,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Parameter()
         {
-            var library = CqlApi.MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($@"
                 library {nameof(RefTest)} version '1.0.0'
 
                 private parameter ""Measurement Year"" System.Integer default 2023
@@ -148,7 +148,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Expression()
         {
-            var library = CqlApi.MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($@"
                 library {nameof(RefTest)} version '1.0.0'
 
                 define private four: 4
@@ -169,7 +169,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397")]
         public void Function()
         {
-            var library = CqlApi.MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($@"
                 library {nameof(RefTest)} version '1.0.0'
 
                 define private function double(a Decimal): a*2
@@ -189,7 +189,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FunctionIncorrectNumParam()
         {
-            var library = TestExtensions.MakeLibrary(CqlApi, $@"
+            var library = TestExtensions.MakeLibrary(CreateCqlApi(), $@"
                 library {nameof(RefTest)} version '1.0.0'
 
                 define private function double(a Decimal): a*2
@@ -201,7 +201,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FunctionIncorrectParam()
         {
-            var library = TestExtensions.MakeLibrary(CqlApi, $@"
+            var library = TestExtensions.MakeLibrary(CreateCqlApi(), $@"
                 library {nameof(RefTest)} version '1.0.0'
 
                 define private function double(a Decimal): a*2
@@ -213,23 +213,23 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FunctionVariableParamCount()
         {
-            var library1 = CqlApi.MakeLibrary($@"
+            var library1 = CreateCqlApi().MakeLibrary($@"
                 library {nameof(RefTest)}1 version '1.0.0'
                 define private {nameof(Function)}: Date(1)
             ");
-            var library2 = CqlApi.MakeLibrary($@"
+            var library2 = CreateCqlApi().MakeLibrary($@"
                 library {nameof(RefTest)}2 version '1.0.0'
                 define private {nameof(Function)}: Date(1,2)
             ");
-            var library3 = CqlApi.MakeLibrary($@"
+            var library3 = CreateCqlApi().MakeLibrary($@"
                 library {nameof(RefTest)}3 version '1.0.0'
                 define private {nameof(Function)}: Date(1,2,3)
             ");
-            var library4 = TestExtensions.MakeLibrary(CqlApi, $@"
+            var library4 = TestExtensions.MakeLibrary(CreateCqlApi(), $@"
                 library {nameof(RefTest)}4 version '1.0.0'
                 define private {nameof(Function)}: Date(1,2,3,4)
             ", "Could not resolve *");
-            var library5 = TestExtensions.MakeLibrary(CqlApi, $@"
+            var library5 = TestExtensions.MakeLibrary(CreateCqlApi(), $@"
                 library {nameof(RefTest)}5 version '1.0.0'
                 define private {nameof(Function)}: Date()
             ", "Could not resolve *");
@@ -238,7 +238,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeParameter()
         {
-            var library = TestExtensions.MakeLibrary(CqlApi, $@"
+            var library = TestExtensions.MakeLibrary(CreateCqlApi(), $@"
                library BareMinimum version '0.0.1'
 
                 parameter x default 'bla'
@@ -250,7 +250,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeExpression()
         {
-            var library = TestExtensions.MakeLibrary(CqlApi, $@"
+            var library = TestExtensions.MakeLibrary(CreateCqlApi(), $@"
                library BareMinimum version '0.0.1'
 
                 define pi: 3.14
@@ -262,7 +262,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeNonLocalFunction()
         {
-            var library = TestExtensions.MakeLibrary(CqlApi, $@"
+            var library = TestExtensions.MakeLibrary(CreateCqlApi(), $@"
                library BareMinimum version '0.0.1'
 
                include Math
@@ -274,7 +274,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeLibrary()
         {
-            var library = TestExtensions.MakeLibrary(CqlApi,
+            var library = TestExtensions.MakeLibrary(CreateCqlApi(),
                                          $@"
                library BareMinimum version '0.0.1'
 
@@ -288,7 +288,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeNonLocalExpression()
         {
-            var library = TestExtensions.MakeLibrary(CqlApi, $@"
+            var library = TestExtensions.MakeLibrary(CreateCqlApi(), $@"
                library BareMinimum version '0.0.1'
 
                include Math
@@ -301,7 +301,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeNonexistentFluentFunction()
         {
-            _ = TestExtensions.MakeLibrary(CqlApi, $@"
+            _ = TestExtensions.MakeLibrary(CreateCqlApi(), $@"
              library BareMinimum version '0.0.1'
 
              using FHIR
@@ -315,7 +315,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397")]
         public void InvokeFluentFunction()
         {
-            var library = CqlApi.MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($@"
              library BareMinimum version '0.0.1'
 
              define fluent function double(a Integer): a*2
@@ -334,7 +334,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeIntervalMember()
         {
-            var library = CqlApi.MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($@"
             library BareMinimum version '0.0.1'
 
             define lowI: Interval[1,3].low
@@ -351,7 +351,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeIntervalClosedMember()
         {
-            var library = CqlApi.MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($@"
             library BareMinimum version '0.0.1'
 
             define closed: Interval[1,3].highClosed
@@ -368,7 +368,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeTupleMember()
         {
-            var library = CqlApi.MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($@"
             library BareMinimum version '0.0.1'
 
             define tupleMember: Tuple {{ name: 'Ewout' }}.name
@@ -385,7 +385,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeNonFluentFunctionFluently()
         {
-            _ = TestExtensions.MakeLibrary(CqlApi, $@"
+            _ = TestExtensions.MakeLibrary(CreateCqlApi(), $@"
              library BareMinimum version '0.0.1'
 
              define function double(a Integer): a*2
@@ -396,7 +396,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeModel()
         {
-            _ = TestExtensions.MakeLibrary(CqlApi, $@"
+            _ = TestExtensions.MakeLibrary(CreateCqlApi(), $@"
              library BareMinimum version '0.0.1'
              using FHIR
 
@@ -407,7 +407,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeQualifiedType()
         {
-            _ = TestExtensions.MakeLibrary(CqlApi, $@"
+            _ = TestExtensions.MakeLibrary(CreateCqlApi(), $@"
              library BareMinimum version '0.0.1'
              using FHIR
 
@@ -418,7 +418,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeNoMembers()
         {
-            _ = TestExtensions.MakeLibrary(CqlApi, $@"
+            _ = TestExtensions.MakeLibrary(CreateCqlApi(), $@"
              library BareMinimum version '0.0.1'
              using FHIR
 
@@ -429,7 +429,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeChoiceMembers()
         {
-            _ = TestExtensions.MakeLibrary(CqlApi, $@"
+            _ = TestExtensions.MakeLibrary(CreateCqlApi(), $@"
              library BareMinimum version '0.0.1'
              using FHIR
 
@@ -441,7 +441,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeType()
         {
-            _ = TestExtensions.MakeLibrary(CqlApi, $@"
+            _ = TestExtensions.MakeLibrary(CreateCqlApi(), $@"
              library BareMinimum version '0.0.1'
 
              using FHIR
@@ -454,7 +454,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeProperty()
         {
-            var library = CqlApi.MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($@"
                     library BareMinimum version '0.0.1'
                     using FHIR
 
@@ -476,7 +476,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeListProperty()
         {
-            var library = CqlApi.MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($@"
                     library BareMinimum version '0.0.1'
                     using FHIR
 
@@ -498,7 +498,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeThroughListProperty()
         {
-            var library = CqlApi.MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($@"
                     library BareMinimum version '0.0.1'
                     using FHIR
 
@@ -518,7 +518,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeListPropertyThroughListProperty()
         {
-            var library = CqlApi.MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($@"
                     library BareMinimum version '0.0.1'
                     using FHIR
 
@@ -539,7 +539,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397")]
         public void InvokeListPropertyViaFunction()
         {
-            var library = CqlApi.MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($@"
                     library BareMinimum version '0.0.1'
 
                     using FHIR

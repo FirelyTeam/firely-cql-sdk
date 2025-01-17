@@ -61,7 +61,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Relationship_with_bad_identifier()
         {
-            TestExtensions.MakeLibrary(CqlApi, $@"
+            TestExtensions.MakeLibrary(CreateCqlApi(), $@"
                 library Test version '1.0.0'
 
                 define f: from (true) t
@@ -108,7 +108,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Sort_Calls_Function()
         {
-            var lib = CqlApi.MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library Sort_Calls_Fluent version '1.0.0'
 
                 define function foo(): 1
@@ -136,7 +136,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Sort_Calls_Fluent()
         {
-            var lib = CqlApi.MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library Sort_Calls_Fluent version '1.0.0'
 
                 define fluent function foo(i Integer): i
@@ -166,7 +166,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Sort_Prefers_Fluent()
         {
-            var lib = CqlApi.MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library Sort_Calls_Fluent version '1.0.0'
 
                 define fluent function foo(i Integer): i
@@ -196,7 +196,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Let()
         {
-            var lib = CqlApi.MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library Let version '1.0.0'
                 define q:
                   from
@@ -215,7 +215,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Let_Redefinition()
         {
             // TODO: make this optionally fail w/ config options
-            var lib = CqlApi.MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library Let version '1.0.0'
                 define q:
                   from
@@ -231,7 +231,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             // TODO: make this optionally fail w/ config options
 
-            var lib = CqlApi.MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library Let version '1.0.0'
                 define function q(x Integer):
                   from
@@ -246,7 +246,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Claims_Query()
         {
-            var lib = CqlApi.MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library Claims version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -265,7 +265,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Return_Query()
         {
-            var lib = CqlApi.MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library Claims version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -282,7 +282,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Aggregate_Factorial()
         {
-            var lib = CqlApi.MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library Claims version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -306,7 +306,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Aggregate_Factorial_Distinct()
         {
-            var lib = CqlApi.MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library Claims version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -329,7 +329,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Aggregate_Factorial_No_Starting()
         {
-            var lib = CqlApi.MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library Claims version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -352,7 +352,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Aggregate_List_Accumulator()
         {
-            var lib = CqlApi.MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary(@"
                 library Claims version '1.0.0'
 
                 using FHIR version '4.0.1'

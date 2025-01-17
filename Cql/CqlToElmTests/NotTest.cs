@@ -16,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Not_True()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library NotTest version '1.0.0'
 
                 define private Not_True: not true
@@ -62,7 +62,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Not_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library NotTest version '1.0.0'
 
                 define private Not_False: not false
@@ -107,7 +107,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Not_Null()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library NotTest version '1.0.0'
 
                 define private Not_Null: not null
@@ -150,7 +150,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Not_1() =>
-            TestExtensions.MakeLibrary(CqlApi, @"
+            TestExtensions.MakeLibrary(CreateCqlApi(), @"
                 library NotTest version '1.0.0'
 
                 define private Not_1: not 1

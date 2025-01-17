@@ -1,10 +1,8 @@
 ﻿using CqlSdkPrototype.Cql.Extensibility;
-using CqlSdkPrototype.Cql.Internal;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Logging.Internal;
 using Hl7.Cql.CqlToElm;
-using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Hl7.Cql.Runtime.Hosting;
@@ -18,8 +16,8 @@ internal readonly record struct CqlApiState(
     CqlApiOptions? Options = null,
     ServiceProvider? ServiceProvider = null,
     ILogger<CqlApi>? Logger = null,
-    CqlToElmConverter? CqlToElmConverter = null,
-    MemoryLibraryProvider? MemoryLibraryProvider = null)
+    CqlToElmConverter? CqlToElmConverter = null)
+    : ILibraryProvider
 {
     private static readonly (CqlModel CqlModel, ModelInfo ModelInfo)[] AllMappedModelsInOrder = [
         (CqlModel.ElmR1, Models.ElmR1),
@@ -37,6 +35,8 @@ internal readonly record struct CqlApiState(
 
     private readonly CqlApiOptions _options = Options!;
 
+    internal ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry>.Builder EntriesBuilder { get; } = Entries?.ToBuilder()!; // Not ideal, needed during Translate for TryResolveLibrary
+
     public CqlApiOptions Options
     {
         get => _options;
@@ -50,31 +50,30 @@ internal readonly record struct CqlApiState(
             _options = value;
             var services = new ServiceCollection();
             services.AddExternalLogging(LoggerFactory);
-            AddCqlServices(services, value);
+            AddCqlServices(services, value, this);
             ServiceProvider = services.BuildServiceProvider(validateScopes: true);
             Logger = ServiceProvider.GetLogger<CqlApi>();
             CqlToElmConverter = ServiceProvider.GetCqlToElmConverter();
-            MemoryLibraryProvider = (MemoryLibraryProvider)ServiceProvider.GetRequiredService<ILibraryProvider>();
         }
     }
 
     public ILoggerFactory LoggerFactory { get; } = LoggerFactory;
-    public MemoryLibraryProvider MemoryLibraryProvider { get; private init; } = MemoryLibraryProvider!;
     public ServiceProvider ServiceProvider { get; private init; } = ServiceProvider!;
     public ILogger<CqlApi> Logger { get; private init; } = Logger!;
     public CqlToElmConverter CqlToElmConverter { get; private init; } = CqlToElmConverter!;
 
     private static void AddCqlServices(
         IServiceCollection serviceCollection,
-        CqlApiOptions options)
+        CqlApiOptions options,
+        ILibraryProvider libraryProvider)
     {
-        SuppressCqlDebugAssertions(serviceCollection);
+        SuppressCqlDebugAssertions();
 
         serviceCollection
             .AddCqlToElmServices()
             .AddCqlToElmModels(ConfigureModelProvider())
             .AddCqlToElmOptions(ConfigureCqlToElmOptions())
-            .AddSingleton<ILibraryProvider, MemoryLibraryProvider>()
+            .AddSingleton(libraryProvider)
             .AddCqlToElmMessaging();
         return;
 
@@ -96,12 +95,32 @@ internal readonly record struct CqlApiState(
         }
     }
 
-    private static IServiceCollection SuppressCqlDebugAssertions(
-        IServiceCollection serviceCollection)
+    private static void SuppressCqlDebugAssertions()
     {
         // This is really annoying in debug mode
         ExpressionVisitor.EnableDebugAssertions = false;
         Library.EnableDebugAssertions = false;
-        return serviceCollection;
+    }
+
+    bool ILibraryProvider.TryResolveLibrary(
+        string libraryName,
+        string? version,
+        [NotNullWhen(true)] out LibraryBuilder? library,
+        out string? error)
+    {
+        error = null;
+        library = null;
+
+        var libVer = CqlVersionedLibraryIdentifier.FromNameAndVersion(
+            CqlLibraryIdentifier.Parse(libraryName),
+            CqlLibraryVersion.Parse(version ?? throw new ArgumentNullException(nameof(version))));
+        if (EntriesBuilder.TryGetValue(libVer, out var entry)
+            && entry.ElmLibraryBuilder is {} libraryBuilder)
+        {
+            library = libraryBuilder;
+            return true;
+        }
+
+        return false;
     }
 }

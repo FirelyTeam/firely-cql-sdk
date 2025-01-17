@@ -16,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_Is_Decimal()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IsTest version '1.0.0'
 
                 define private Integer_Is_Decimal: 1 is System.Decimal
@@ -45,7 +45,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Is_Qualified_Boolean()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IsTest version '1.0.0'
 
                 define private True_Is_Qualified_Boolean: true is System.Boolean
@@ -74,7 +74,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Is_Unqualified_Boolean()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IsTest version '1.0.0'
 
                 define private True_Is_Unqualified_Boolean: true is Boolean
@@ -103,7 +103,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Is_Boolean()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IsTest version '1.0.0'
 
                 define private Null_Is_Boolean: null is Boolean
@@ -128,7 +128,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Is_Any()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IsTest version '1.0.0'
 
                 define private Null_Is_Any: null is Any
@@ -152,7 +152,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void List_Is_List_of_Qualified_Integer()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IsTest version '1.0.0'
 
                 define private List_Is_List_of_Qualified_Integer: { 1,2,3 } is List<System.Integer>
@@ -179,7 +179,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Is_Unqualified_Integer_Interval()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IsTest version '1.0.0'
 
                 define private Interval_Is_Unqualified_Integer_Interval: Interval[1, 10] is Interval<Integer>
@@ -205,7 +205,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_Interval_Is_Decimal_Interval_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IsTest version '1.0.0'
 
                 define private Integer_Interval_Is_Decimal_Interval_False: Interval[1, 10] is Interval<Decimal>
@@ -231,7 +231,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_Is_Choice()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IsTest version '1.0.0'
 
                 define private Integer_Is_Choice: 1 is Choice<Integer,Decimal>
@@ -258,7 +258,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void String_Is_Choice_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IsTest version '1.0.0'
 
                 define private String_Is_Choice_False: 'hello' is Choice<Integer,Decimal>
@@ -286,7 +286,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Tuple_Is_Tuple()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IsTest version '1.0.0'
 
                 define private Tuple_Is_Tuple: { x: 1, y: 2 } is Tuple { x Integer, y Integer }
@@ -311,7 +311,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Tuple_Is_Tuple_False()
         {
-            var library = CqlApi.MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(@"
                 library IsTest version '1.0.0'
 
                 define private Tuple_Is_Tuple: Tuple { x: 1, y: 2 } is Tuple { x Decimal, y Integer }
