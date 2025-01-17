@@ -85,7 +85,7 @@ public class CqlApi :
     {
         CqlToElmConverter cqlToElmConverter = _state.CqlToElmConverter;
         CqlTranslationEntriesMap.Builder entriesBuilder = _state.EntriesBuilder;
-        using var scope = _state.ServiceProvider.CreateScope();
+        using var scope = _state.ServiceProvider.CreateScope()!;
         var logger = _state.Logger;
         bool atFirst = true;
 
@@ -127,7 +127,8 @@ public class CqlApi :
         void ProcessLibrary(CqlVersionedLibraryIdentifier versionedIdentifier, CqlApiStateEntry cqlTranslationEntry)
         {
             var cql = cqlTranslationEntry.CqlLibraryString.Cql;
-            var libraryBuilder = cqlToElmConverter.GetBuilder(cql, scope);
+            var libraryVisitor = CqlToElmConverter.GetLibraryVisitorScoped(scope);
+            var libraryBuilder = cqlToElmConverter.GetBuilder(libraryVisitor, cql);
             var library = libraryBuilder.Build();
             //var library = cqlToElmConverter.ConvertLibrary(new StringReader(cql));
             entriesBuilder[versionedIdentifier] = cqlTranslationEntry with { ElmLibrary = library, ElmLibraryBuilder = libraryBuilder };
