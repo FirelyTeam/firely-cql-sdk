@@ -14,10 +14,10 @@ namespace Hl7.Cql.CqlToElm.Test
         public void LoadFHIRModel()
         {
             var provider = new BuiltInModelProvider();
-            provider.TryGetModel("FHIR", null, out var fhir, out var error)
+            provider.TryGetModel("FHIR", null, out var fhir)
                 .Should().BeTrue();
             fhir.Should().NotBeNull();
-            fhir!.Url.Should().Be("http://hl7.org/fhir"); 
+            fhir!.Uri.Should().Be("http://hl7.org/fhir"); 
         }
         [TestMethod]
         public void FHIRQuantityDerivedTypes()

@@ -61,6 +61,15 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The context {0} is ambiguous between {1}..
+        /// </summary>
+        internal static string AmbiguousContextName {
+            get {
+                return ResourceManager.GetString("AmbiguousContextName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The type {0} is ambiguous between {1}..
         /// </summary>
         internal static string AmbiguousTypeName {
@@ -97,11 +106,20 @@ namespace Hl7.Cql.CqlToElm {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Could not resolve context name {0} in model {1}..
+        ///   Looks up a localized string similar to Could not resolve context name {0}..
         /// </summary>
         internal static string CouldNotResolveContextName {
             get {
                 return ResourceManager.GetString("CouldNotResolveContextName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not resolve context name {0} in model {1}..
+        /// </summary>
+        internal static string CouldNotResolveContextNameInModel {
+            get {
+                return ResourceManager.GetString("CouldNotResolveContextNameInModel", resourceCulture);
             }
         }
         

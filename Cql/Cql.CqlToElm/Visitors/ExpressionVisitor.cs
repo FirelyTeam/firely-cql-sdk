@@ -16,12 +16,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
         {
             LibraryBuilder = builder;
             ModelProvider = services.GetRequiredService<Model.IModelProvider>();
-            CoercionProvider = CoercionProvider.Create(services, builder);
             ElmFactory = services.GetRequiredService<ElmFactory>();
             Messaging = services.GetRequiredService<MessageProvider>(); 
             Options = services.GetRequiredService<IOptions<CqlToElmOptions>>().Value;
-            TypeSpecifierVisitor = new TypeSpecifierVisitor(services, builder);
-            InvocationBuilder = services.GetRequiredService<InvocationBuilder>();
+            // library specific services
+            TypeSpecifierVisitor = TypeSpecifierVisitor.Create(services, builder);
+            CoercionProvider = CoercionProvider.Create(services, builder);
+            InvocationBuilder =  InvocationBuilder.Create(services, CoercionProvider, builder);
         }
 
 
@@ -185,7 +186,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var contextTerm = context.terminology();
             var terminology = contextTerm is null ? null : Visit(contextTerm);
             var typeSpec = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
-            var modelTypeSpec = TypeBridge.ToModelSpecifier(typeSpec, ModelProvider);
+            var modelTypeSpec = TypeBridge.ToModelSpecifier(typeSpec, ModelProvider, Options);
             var modelType = modelTypeSpec.GetTypeDefinition();
                 
             var contextExpressionRef = contextName switch

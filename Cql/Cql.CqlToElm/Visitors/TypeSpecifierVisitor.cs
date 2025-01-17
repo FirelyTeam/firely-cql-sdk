@@ -13,11 +13,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal class TypeSpecifierVisitor : Visitor<TypeSpecifier>
     {
+        public static TypeSpecifierVisitor Create(IServiceProvider services, LibraryBuilder libraryBuilder) =>
+            new TypeSpecifierVisitor(services, libraryBuilder);
+
         public LibraryBuilder LibraryBuilder { get; }
         public MessageProvider Messaging { get; }
         public CqlToElmOptions Options { get; }
 
-        public TypeSpecifierVisitor(IServiceProvider services,
+        private TypeSpecifierVisitor(IServiceProvider services,
             LibraryBuilder libraryBuilder)
         {
             LibraryBuilder = libraryBuilder;

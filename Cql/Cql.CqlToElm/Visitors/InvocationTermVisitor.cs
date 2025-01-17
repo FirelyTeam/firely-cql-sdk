@@ -77,7 +77,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var type = TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
             if (type is Elm.NamedTypeSpecifier namedType)
             {
-                var modelType = TypeBridge.ToModelSpecifier(namedType, ModelProvider).GetTypeDefinition();
+                var modelType = TypeBridge.ToModelSpecifier(namedType, ModelProvider, Options)
+                    .GetTypeDefinition();
                 if (modelType != null)
                 {
                     if (modelType is ClassTypeDefinition @class)
@@ -135,7 +136,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     .WithResultType(type);
             }
             else return new Instance()
-                .AddError("A named type is required in this context.")
+                .AddError(Messaging.NamedTypeRequiredInContext())
                 .WithLocator(context.Locator())
                 .WithResultType(type);
         }
@@ -292,7 +293,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         private Property navigateIntoNamedType(Expression source, Elm.NamedTypeSpecifier nts, string memberName)
         {
-            var type = TypeBridge.ToModelSpecifier(nts, ModelProvider).GetTypeDefinition();
+            var type = TypeBridge.ToModelSpecifier(nts, ModelProvider, Options).GetTypeDefinition();
             var prop = makeProp(source, memberName);
             if (type is ClassTypeDefinition ci &&
                 ci.TryGetElement(memberName, out var element))

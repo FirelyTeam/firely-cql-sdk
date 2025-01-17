@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using FluentAssertions.Common;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,9 +27,13 @@ namespace Hl7.Cql.CqlToElm.Test
                 options.EnableIntervalPromotion = true;
                 options.EnableIntervalDemotion = true;
             });
+            var modelProvider = ServiceProvider.GetRequiredService<Model.IModelProvider>() as Model.ModelProviders.BuiltInModelProvider;
+            var systemModel = modelProvider!.Load(Model.Xml.Models.ElmR1);
+
             var libraryBuilder = new LibraryBuilder(new(),
-                ServiceProvider.GetRequiredService<SystemLibrary>(),
-                ServiceProvider.GetRequiredService<LocalIdentifierProvider>());
+                    ServiceProvider.GetRequiredService<SystemLibrary>(),
+                    ServiceProvider.GetRequiredService<LocalIdentifierProvider>())
+                .UseModel(systemModel);
             _coercionProvider = CoercionProvider.Create(ServiceProvider, libraryBuilder);
         }
 #pragma warning restore IDE0060 // Remove unused parameter
@@ -289,6 +294,29 @@ namespace Hl7.Cql.CqlToElm.Test
             // This conversion is defined
             // <conversionInfo functionName="FHIRHelpers.ToQuantity" fromType="FHIR.Quantity" toType="System.Quantity"/>
             // Age is a subtype of FHIR.Quantity
+            var modelProvider = ServiceProvider.GetRequiredService<Model.IModelProvider>() as Model.ModelProviders.BuiltInModelProvider;
+            var systemModel = modelProvider!.Load(Model.Xml.Models.ElmR1);
+            var fhirModel = modelProvider.Load(Model.Xml.Models.Fhir401);
+
+            fhirModel.TryGetType("FHIR.Age", out var fhirAgeType).Should().BeTrue();
+            fhirModel.TryGetType("FHIR.Quantity", out var fhirQuantityType).Should().BeTrue();
+            fhirAgeType!.BaseType.Should().Be(fhirQuantityType);
+
+            fhirModel.ImplicitConversions.TryGetValue(fhirQuantityType!.ToTypeSpecifier(), out var conversionsFromFhirQuantity)
+                .Should().BeTrue();
+            systemModel.TryGetType("System.Quantity", out var systemQuantityType).Should().BeTrue();
+            conversionsFromFhirQuantity!.TryGetValue(systemQuantityType!.ToTypeSpecifier(), out var conversionFunction)
+                .Should().BeTrue();
+            conversionFunction.Should().Be("FHIRHelpers.ToQuantity");
+
+            var libraryBuilder = new LibraryBuilder(new(),
+                ServiceProvider.GetRequiredService<SystemLibrary>(),
+                ServiceProvider.GetRequiredService<LocalIdentifierProvider>())
+            .UseModel(systemModel)
+            .UseModel(fhirModel);
+
+            _coercionProvider = CoercionProvider.Create(ServiceProvider, libraryBuilder);
+
 
             var qnts = new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}Quantity") };
             var result = CoercionProvider.Coerce(Null(qnts), SystemTypes.QuantityType);
@@ -305,10 +333,31 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FhirDateToSystemDate()
         {
+
+            var modelProvider = ServiceProvider.GetRequiredService<Model.IModelProvider>() as Model.ModelProviders.BuiltInModelProvider;
+            var systemModel = modelProvider!.Load(Model.Xml.Models.ElmR1);
+            var fhirModel = modelProvider.Load(Model.Xml.Models.Fhir401);
+
+            fhirModel.TryGetType("FHIR.date", out var fhirDateType).Should().BeTrue();
+            fhirModel.ImplicitConversions.TryGetValue(fhirDateType!.ToTypeSpecifier(), out var conversionsFromFhirDate)
+                .Should().BeTrue();
+            systemModel.TryGetType("System.Date", out var systemDateType).Should().BeTrue();
+            conversionsFromFhirDate!.TryGetValue(systemDateType!.ToTypeSpecifier(), out var conversionFunction)
+                .Should().BeTrue();
+            conversionFunction.Should().Be("FHIRHelpers.ToDate");
+
+            var libraryBuilder = new LibraryBuilder(new(),
+                ServiceProvider.GetRequiredService<SystemLibrary>(),
+                ServiceProvider.GetRequiredService<LocalIdentifierProvider>())
+            .UseModel(systemModel)
+            .UseModel(fhirModel);
+
+            _coercionProvider = CoercionProvider.Create(ServiceProvider, libraryBuilder);
+
             var fdt = new NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}date") };
-            var cost = CoercionProvider.GetCoercionCost(fdt, SystemTypes.DateType);
+            var cost = _coercionProvider.GetCoercionCost(fdt, SystemTypes.DateType);
             Assert.AreEqual(CoercionCost.ImplicitToSimpleType, cost);
-            var result = CoercionProvider.Coerce(Null(fdt), SystemTypes.DateType);
+            var result = _coercionProvider.Coerce(Null(fdt), SystemTypes.DateType);
             Assert.IsInstanceOfType(result.Result, typeof(FunctionRef));
             var fr = (FunctionRef)result.Result;
             Assert.AreEqual("FHIRHelpers", fr.libraryName);

@@ -19,9 +19,10 @@ namespace Hl7.Cql.CqlToElm
             Model = model;
 
             this.localIdentifier = localIdentifier;
-            uri = model.Url;
+            uri = model.Uri;
             this.version = version;
             Symbols = new(uri, null);
+            AddSymbols();
         }
 
         public ModelDefinition Model { get; }
@@ -29,6 +30,37 @@ namespace Hl7.Cql.CqlToElm
         public SymbolTable Symbols { get; }
 
         public Expression ToRef(string? _) => new UsingRef(this);
+
+        // Adds all model declarations to the symbol table
+        private void AddSymbols()
+        {
+            foreach(var kvp in Model.TypeDefinitions)
+            {
+                var typeDef = new TypeDef()
+                {
+                    name = kvp.Value.Name,
+                    uri = Model.Uri,
+                    accessLevel = kvp.Value.Access switch
+                    {
+                        Cql.Model.AccessModifier.Public => Elm.AccessModifier.Public,
+                        _ => Elm.AccessModifier.Private
+                    },
+                    baseType = kvp.Value.BaseType switch
+                    {
+                        { } => TypeBridge.ToElmSpecifier(kvp.Value.BaseType.ToTypeSpecifier()),
+                        _ => null
+                    },
+                };
+                if (!Symbols.TryAdd(typeDef))
+                    throw new InvalidOperationException($"Could not add type {typeDef.Name} to the symbol table.");
+            }
+            foreach(var kvp in Model.Contexts) { 
+                var contextDef = new ContextDefinitionSymbol(kvp.Value);
+                if (!Symbols.TryAdd(contextDef))
+                    throw new InvalidOperationException($"Could not add context {contextDef.Name} to the symbol table.");
+            }
+        }
+
     }
 
     /// <summary>

@@ -20,6 +20,9 @@ namespace Hl7.Cql.CqlToElm
 
         public CultureInfo Culture { get; }
 
+        public string AmbiguousContextName(string name, params string[] modelNames)
+            => string.Format(Culture, Messages.AmbiguousContextName, name, string.Join(", ", modelNames));
+
         public string AmbiguousType(string name, params string[] modelNames)
             => string.Format(Culture, Messages.AmbiguousTypeName, name, string.Join(", ", modelNames));
 
@@ -38,8 +41,14 @@ namespace Hl7.Cql.CqlToElm
 
         public string CannotResolveCircularReference() =>
              Messages.CannotResolveCircularReference;
-        public string CouldNotResolveContextName(string contextName, params string[] modelNames) =>
-            string.Format(Culture, Messages.CouldNotResolveContextName, contextName, string.Join(", ", modelNames));
+        public string CouldNotResolveContextName(string contextName, params string[] modelNames)
+        {
+            if (modelNames.Length > 0)
+                return string.Format(Culture, Messages.CouldNotResolveContextNameInModel, contextName, string.Join(", ", modelNames));
+            else
+                return string.Format(Culture, Messages.CouldNotResolveContextName, contextName);
+
+        }
         public string CouldNotResolveFunction(string functionName, params Expression[] arguments) =>
             string.Format(Culture, Messages.CouldNotResolveFunction, functionName, string.Join(", ", arguments.Select(t => t.resultTypeSpecifier.ToString())));
         public string CouldNotResolveFunction(string functionName, params TypeSpecifier[] types) =>

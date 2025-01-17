@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Scopes;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Model.Xml;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -73,6 +74,13 @@ namespace Hl7.Cql.CqlToElm
 
         public ISymbolScope CurrentScope { get; private set; }
 
+        internal LibraryBuilder UseModel(Model.ModelDefinition model)
+        {
+            var @using = new UsingDefSymbol(model.Name, model.Version, model);
+            if (!CurrentScope.TryAdd(@using))
+                throw new InvalidOperationException($"Could not add model {model.Name} to the symbol table.");
+            return this;
+        }
         public void AddError(string message, ErrorType errorType) =>
             errors.Add(new CqlToElmError()
             {
@@ -112,6 +120,8 @@ namespace Hl7.Cql.CqlToElm
 
             public IEnumerable<ReferencedLibrary> ReferencedLibraries => CurrentScope.ReferencedLibraries;
 
+            public IEnumerable<UsingDefSymbol> ReferencedModels => CurrentScope.ReferencedModels;
+
             public string Name => CurrentScope.Name;
 
             private ISymbolScope CurrentScope => Builder.CurrentScope;
@@ -135,10 +145,11 @@ namespace Hl7.Cql.CqlToElm
                 return CurrentScope.TryAdd(symbol);
             }
 
-            public bool TryResolveFluentFunction(string identifier, [NotNullWhen(true)] out IFunctionElement? symbol)
-            {
-                return CurrentScope.TryResolveFluentFunction(identifier, out symbol);
-            }
+            public bool TryResolveContextDefinition(string identifier, [NotNullWhen(true)] out ContextDefinitionSymbol? context) =>
+                CurrentScope.TryResolveContextDefinition(identifier, out context);
+
+            public bool TryResolveFluentFunction(string identifier, [NotNullWhen(true)] out IFunctionElement? symbol) =>
+                CurrentScope.TryResolveFluentFunction(identifier, out symbol);
 
             public bool TryResolveFunction(string identifier, [NotNullWhen(true)] out IFunctionElement? symbol)
             {

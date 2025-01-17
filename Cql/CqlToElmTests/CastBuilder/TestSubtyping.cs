@@ -10,6 +10,8 @@ namespace Hl7.Cql.CqlToElm.Test
     public class TestSubtyping
     {
         private readonly M.IModelProvider provider = new M.ModelProviders.BuiltInModelProvider();
+        private readonly CqlToElmOptions options = new CqlToElmOptions();
+
         private readonly NamedTypeSpecifier Patient = forFhir("Patient");
         private readonly NamedTypeSpecifier Observation = forFhir("Observation");
         private readonly NamedTypeSpecifier Resource = forFhir("Resource");
@@ -21,13 +23,13 @@ namespace Hl7.Cql.CqlToElm.Test
             new NamedTypeSpecifier("http://hl7.org/fhir", typeName);
 
         private void yes(TypeSpecifier sub, TypeSpecifier super) =>
-            TypeBridge.ToModelSpecifier(sub, provider)
-                .IsSubtypeOf(TypeBridge.ToModelSpecifier(super, provider))
+            TypeBridge.ToModelSpecifier(sub, provider, options)
+                .IsSubtypeOf(TypeBridge.ToModelSpecifier(super, provider, options))
             .Should().BeTrue();
 
         private void no(TypeSpecifier sub, TypeSpecifier super) =>
-            TypeBridge.ToModelSpecifier(sub, provider)
-                .IsSubtypeOf(TypeBridge.ToModelSpecifier(super, provider))
+            TypeBridge.ToModelSpecifier(sub, provider, options)
+                .IsSubtypeOf(TypeBridge.ToModelSpecifier(super, provider, options))
             .Should().BeFalse();
 
         [TestMethod]

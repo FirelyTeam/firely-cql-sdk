@@ -1,9 +1,11 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
+using Hl7.Cql.Model.ModelProviders;
 using Hl7.Cql.Model.Xml;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.IO;
 using ModelLoader = Hl7.Cql.Model.Xml.ModelLoader;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -94,8 +96,48 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Load_System_Xml()
         {
-            var modelLoader = new ModelLoader(name => Models.All[name]);
+            var modelLoader = new BuiltInModelProvider();
             modelLoader.Load(Models.ElmR1);
+            modelLoader.TryGetModel(Models.ElmR1.name, null, out var elm).Should().BeTrue();
+            elm!.TypeDefinitions.Should().HaveCount(18);
+        }
+
+        [TestMethod]
+        public void Load_Fhir_Xml()
+        {
+            var modelLoader = new BuiltInModelProvider();
+            modelLoader.Load(Models.Fhir401);
+            modelLoader.TryGetModel(Models.Fhir401.name, null, out var fhir).Should().BeTrue();
+            fhir!.TypeDefinitions.Should().HaveCount(931);
+        }
+
+        [TestMethod]
+        public void Write_System_Xml_To_Cql()
+        {
+            var modelLoader = new BuiltInModelProvider();
+            modelLoader.Load(Models.ElmR1);
+            modelLoader.TryGetModel(Models.ElmR1.name, null, out var elm).Should().BeTrue();
+            var writer = new ModelWriter();
+            var file = new FileInfo($"{elm!.Name}-{elm.Version}.cql");
+            var fs = new FileStream(file.FullName, FileMode.Create, FileAccess.Write, FileShare.Read);
+            var sw = new StreamWriter(fs);
+            writer.Write(elm, sw);
+            sw.Flush();
+        }
+
+        //[TestMethod]
+        public void Write_Fhir_Xml_To_Cql()
+        {
+            var modelLoader = new BuiltInModelProvider();
+            modelLoader.Load(Models.Fhir401);
+            modelLoader.TryGetModel(Models.Fhir401.name, null, out var fhir).Should().BeTrue();
+            fhir!.TypeDefinitions.Should().HaveCount(931);
+            var writer = new ModelWriter();
+            var file = new FileInfo($"{fhir!.Name}-{fhir.Version}.cql");
+            var fs = new FileStream(file.FullName, FileMode.Create, FileAccess.Write, FileShare.Read);
+            var sw = new StreamWriter(fs);
+            writer.Write(fhir, sw);
+            sw.Flush();
         }
 
     }

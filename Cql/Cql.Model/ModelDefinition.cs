@@ -12,26 +12,22 @@ namespace Hl7.Cql.Model
     {
         public ModelDefinition(string name,
             string version,
-            string url,
-            ClassTypeDefinition? patientType = null,
-            ClassTypeElementDefinition? patientBirthDateElement = null)
+            string url)
         {
             Name = name;
             Version = version;
-            Url = url;
-            PatientType = patientType;
-            PatientBirthDateElement = patientBirthDateElement;
+            Uri = url;
         }
 
         public string Name { get; }
         public string Version { get; }
-        public string Url { get; }
-        //public string TargetQualifier { get; } // not sure what this is used for
-        public ClassTypeDefinition? PatientType { get; internal set; }
-        public ClassTypeElementDefinition? PatientBirthDateElement { get; internal set; }
+        public string Uri { get; }
+
+        internal Dictionary<string, ContextDefinition> Contexts { get; set; } = new();
 
         internal Dictionary<string, TypeDefinition> TypeDefinitions { get; set; } = new();
-        internal Dictionary<TypeSpecifier, Dictionary<TypeSpecifier, string>> ImplicitConversions { get; set; } = new();
+        internal Dictionary<TypeSpecifier, Dictionary<TypeSpecifier, string>> ImplicitConversions { get; set; } =
+            new(EqualityComparer<TypeSpecifier>.Default);
 
         public bool TryGetType(string qualifiedName, [NotNullWhen(true)] out TypeDefinition? type) =>
             TypeDefinitions.TryGetValue(qualifiedName, out type);
@@ -46,17 +42,26 @@ namespace Hl7.Cql.Model
             function = null;
             return false;
         }
+
+        public IEnumerable<KeyValuePair<TypeSpecifier, string>> ImplicitConversionsFrom(TypeSpecifier from) =>
+            ImplicitConversions.TryGetValue(from, out var tos)
+                ? tos.Select(kvp => new KeyValuePair<TypeSpecifier, string>(kvp.Key, kvp.Value))
+                : Enumerable.Empty<KeyValuePair<TypeSpecifier, string>>();
+
     }
 
     internal abstract class TypeDefinition
     {
-        protected TypeDefinition(string name, ModelDefinition model)
+        protected TypeDefinition(string name, ModelDefinition model, AccessModifier access)
         {
             Name = name;
             Model = model;
+            Access = access;
         }
 
         public string Name { get; internal set; }
+
+        public AccessModifier Access { get; internal set; }
 
         /// <summary>
         /// The canonical URI of the profile of this type, if applicable.
@@ -67,23 +72,23 @@ namespace Hl7.Cql.Model
 
         public ModelDefinition Model { get; internal set; }
 
-
+        public abstract TypeSpecifier ToTypeSpecifier();
     }
 
     internal class SimpleTypeDefinition : TypeDefinition
     {
-        internal SimpleTypeDefinition(string name, ModelDefinition model)
-            : base(name, model)
+        internal SimpleTypeDefinition(string name, ModelDefinition model, AccessModifier access)
+            : base(name, model, access)
         {
         }
-        public NamedTypeSpecifier ToTypeSpecifier() => new NamedTypeSpecifier(this);
-
+        public override TypeSpecifier ToTypeSpecifier() => new NamedTypeSpecifier(this);
     }
 
     internal class ClassTypeDefinition : TypeDefinition
     {
         internal ClassTypeDefinition(string name,
-            ModelDefinition model) : base(name, model)
+            ModelDefinition model,
+            AccessModifier access) : base(name, model,access)
         {
             Elements = new ReadOnlyCollection<ClassTypeElementDefinition>([]);
         }
@@ -110,27 +115,74 @@ namespace Hl7.Cql.Model
         /// </summary>
         public ClassTypeElementDefinition? PrimaryCodePath { get; internal set; }
 
-        public NamedTypeSpecifier ToTypeSpecifier() => new NamedTypeSpecifier(this);
+        public override TypeSpecifier ToTypeSpecifier() => new NamedTypeSpecifier(this);
     }
 
     internal class GenericTypeDefinition : ClassTypeDefinition
     {
-        internal GenericTypeDefinition(string name,
+        public static GenericTypeDefinition CreateTemplate(string name,
             ModelDefinition model,
-            IDictionary<string, TypeSpecifier> arguments) : base(name, model)
+            IList<GenericArgumentSpecifier> arguments,
+            IDictionary<GenericArgumentSpecifier, TypeSpecifier> constraints,
+            TypeDefinition baseType,
+            AccessModifier access) =>
+            new(name,
+                model,
+                arguments.Cast<TypeSpecifier>().ToList(),
+                constraints.ToDictionary(kvp=>kvp.Key as TypeSpecifier, kvp=>kvp.Value),
+                baseType,
+                access);
+        public static GenericTypeDefinition Create(GenericTypeDefinition template,
+            IDictionary<GenericArgumentSpecifier, TypeSpecifier> argumentBindings)
+        {
+            var orderedArgs = new TypeSpecifier[argumentBindings.Count];
+            foreach (var kvp in argumentBindings)
+            {
+                int index = -1;
+                for(int i = 0; i < template.Arguments.Count; i++)
+                {
+                    if (template.Arguments[i].Equals(kvp.Key.Argument))
+                    {
+                        index = i;
+                        break;
+                    }
+                }
+                if (index > -1)
+                    orderedArgs[index] = kvp.Value;
+                else throw new ArgumentException($"Argument {kvp.Key.Argument} is not an argument of template {template.Name}");
+            }
+            return new GenericTypeDefinition(template.Name, template.Model, orderedArgs, null, template.BaseType!, AccessModifier.Public);
+        }
+
+        private GenericTypeDefinition(string name,
+            ModelDefinition model,
+            IList<TypeSpecifier> arguments,
+            IDictionary<TypeSpecifier, TypeSpecifier>? constraints,
+            TypeDefinition baseType,
+            AccessModifier access) : base(name, model, access)
         {
             Arguments = arguments.AsReadOnly();
+            BaseType = baseType;
+            Constraints = (constraints ?? new Dictionary<TypeSpecifier,TypeSpecifier>()).AsReadOnly();
+
         }
 
         /// <summary>
         /// Maps the names of arguments to their constraints.
         /// Types without practical constraints should use some base type, such as System.Any.
         /// </summary>
-        public IReadOnlyDictionary<string, TypeSpecifier> Arguments { get; }
+        public IReadOnlyDictionary<TypeSpecifier, TypeSpecifier> Constraints { get; }
+        public IReadOnlyList<TypeSpecifier> Arguments { get; }
+        public override TypeSpecifier ToTypeSpecifier() => new GenericTypeSpecifier(this, Arguments);
 
-        public GenericTypeSpecifier ToTypeSpecifier(IList<TypeSpecifier> arguments) =>
-            new GenericTypeSpecifier(this, arguments);
+        public bool IsTemplate => Arguments.All(arg=>arg is GenericArgumentSpecifier);
 
+        public GenericTypeDefinition MakeGenericType(params TypeSpecifier[] arguments) =>
+            IsTemplate switch
+            {
+                true => new(Name, Model, arguments, null, BaseType!, Access),
+                false => throw new InvalidOperationException("This is not a generic template.")
+            };
     }
 
     internal class ClassTypeElementDefinition
@@ -148,6 +200,7 @@ namespace Hl7.Cql.Model
         public TypeSpecifier Type { get; }
 
         public string? TargetCql { get; }
+
     }
 
 
@@ -191,6 +244,12 @@ namespace Hl7.Cql.Model
             }
             return false;
         }
+
+        public override string ToString() => $"{Type.Model.Name}.{Type.Name}";
+
+        public override int GetHashCode() => typeof(NamedTypeSpecifier).GetHashCode() ^ Type.Name.GetHashCode();
+
+        
     }
 
     internal class ChoiceTypeSpecifier : TypeSpecifier
@@ -230,19 +289,33 @@ namespace Hl7.Cql.Model
         public override bool IsSubtypeOf(TypeSpecifier other) => false;
         // choices don't have a single type definition
         protected internal override TypeDefinition? GetTypeDefinition() => null;
+
+        public override string ToString() =>
+            $"Choice<{string.Join(", ", Choices.Select(c=>c.ToString()))}>";
+
+        public override int GetHashCode()
+        {
+            var code = typeof(ChoiceTypeSpecifier).GetHashCode();
+            foreach(var choice in Choices)
+            {
+                code ^= choice.GetHashCode();
+            }
+            return code;
+        }
+
     }
 
     internal class GenericTypeSpecifier : TypeSpecifier
     {
-        public GenericTypeSpecifier(GenericTypeDefinition type, IList<TypeSpecifier> arguments)
+        public GenericTypeSpecifier(GenericTypeDefinition type, IEnumerable<TypeSpecifier> arguments)
         {
             Type = type;
-            Arguments = new ReadOnlyCollection<TypeSpecifier>(arguments);
+            Arguments = arguments.ToList().AsReadOnly();
         }
 
         public GenericTypeDefinition Type { get; }
 
-        public ReadOnlyCollection<TypeSpecifier> Arguments { get; }
+        public IReadOnlyList<TypeSpecifier> Arguments { get; }
 
         public override bool Equals(TypeSpecifier? other)
         {
@@ -272,6 +345,75 @@ namespace Hl7.Cql.Model
             return false;
         }
 
+        public override string ToString() =>
+            $"{Type.Name}<{string.Join(", ", Arguments.Select(c=>c.ToString()))}>";
+
         protected internal override TypeDefinition? GetTypeDefinition() => Type;
+
+        public override int GetHashCode()
+        {
+            var code = typeof(GenericArgumentSpecifier).GetHashCode() ^ Type.Name.GetHashCode();
+            foreach (var arg in Arguments)
+            {
+                code ^= arg.GetHashCode();
+            }
+            return code;
+        }
+    }
+
+    internal class GenericArgumentSpecifier : TypeSpecifier
+    {
+        public static readonly GenericArgumentSpecifier T = new("T");
+
+        public GenericArgumentSpecifier(string argument)
+        {
+            Argument = argument;
+        }
+        public string Argument { get; }
+
+        public override bool Equals(TypeSpecifier? other)
+        {
+            if (other is GenericArgumentSpecifier otherGas)
+                return Argument == otherGas.Argument;
+            else
+                return false;
+        }
+
+        public override bool IsSubtypeOf(TypeSpecifier other) => false;
+
+        protected internal override TypeDefinition? GetTypeDefinition() => null;
+        public override string ToString() => Argument;
+
+        public override int GetHashCode() =>
+            typeof(GenericArgumentSpecifier).GetHashCode() ^ Argument.GetHashCode();
+    }
+
+    internal class ContextDefinition
+    {
+        public ContextDefinition(string name, ModelDefinition model, TypeDefinition type)
+        {
+            Name = name;
+            Model = model;
+            Type = type;
+        }
+
+        public string Name { get; internal set; }
+        public ModelDefinition Model { get; }
+        public TypeDefinition Type { get; internal set; }
+    }
+
+    /// <summary>
+    /// Public or private.
+    /// </summary>
+    public enum AccessModifier
+    {
+        /// <summary>
+        /// Public
+        /// </summary>
+        Public,
+        /// <summary>
+        /// Private
+        /// </summary>
+        Private,
     }
 }

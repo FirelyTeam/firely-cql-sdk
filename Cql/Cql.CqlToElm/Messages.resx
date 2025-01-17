@@ -117,6 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AmbiguousContextName" xml:space="preserve">
+    <value>The context {0} is ambiguous between {1}.</value>
+    <comment>{0} = unquoted context name, {1} comma separated qualified name e.g. Model.Type</comment>
+  </data>
   <data name="AmbiguousTypeName" xml:space="preserve">
     <value>The type {0} is ambiguous between {1}.</value>
     <comment>{0} = unquoted type name, {1} comma separated qualified name e.g. Model.Type</comment>
@@ -133,6 +137,9 @@
     <comment>{0} = library name, {1} = version</comment>
   </data>
   <data name="CouldNotResolveContextName" xml:space="preserve">
+    <value>Could not resolve context name {0}.</value>
+  </data>
+  <data name="CouldNotResolveContextNameInModel" xml:space="preserve">
     <value>Could not resolve context name {0} in model {1}.</value>
     <comment>{0} = name of context, {1} comma separated list of models declared, excluding System</comment>
   </data>

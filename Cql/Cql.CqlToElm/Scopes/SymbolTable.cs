@@ -1,5 +1,6 @@
 ﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Model;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,6 +21,12 @@ namespace Hl7.Cql.CqlToElm.Scopes
         }
         private Dictionary<string, IDefinitionElement> LocalSymbols { get; } = new();
 
+        /// <summary>
+        /// Context definitions have to be maintained separately because they will have the same name
+        /// as the resulting ContextDefs that get added in scope.  
+        /// </summary>
+        private Dictionary<string, ContextDefinitionSymbol> ContextDefinitions { get; } = new();
+
         public string Name { get; }
 
         public ISymbolScope? Parent { get; }
@@ -29,7 +36,6 @@ namespace Hl7.Cql.CqlToElm.Scopes
             return new SymbolTable(name, this);
         }
         public void Dispose() { } // do nothing
-
 
         public bool TryAdd(IDefinitionElement symbol)
         {
@@ -49,9 +55,18 @@ namespace Hl7.Cql.CqlToElm.Scopes
                 else
                     symbol = OverloadedFunctionDef.Create(function);
             }
+            else if (symbol is ContextDefinitionSymbol cds)
+            {
+                if (ContextDefinitions.ContainsKey(cds.Name))
+                    return false;
+                else
+                {
+                    ContextDefinitions[cds.Name] = cds;
+                    return true;
+                }
+            }
             return LocalSymbols.TryAdd(symbol.Name, symbol);
         }
-
 
         public bool TryResolveSymbol(string identifier, [NotNullWhen(true)] out IDefinitionElement? symbol)
         {
@@ -256,12 +271,29 @@ namespace Hl7.Cql.CqlToElm.Scopes
             return false;
         }
 
+        public bool TryResolveContextDefinition(string identifier, [NotNullWhen(true)] out ContextDefinitionSymbol? context)
+        {
+            if (ContextDefinitions.TryGetValue(identifier, out context))
+                return true;
+            else if (Parent is not null && Parent.TryResolveContextDefinition(identifier, out context))
+                return true;
+            context = null;
+            return false;
+        }   
+
         public IEnumerable<ReferencedLibrary> ReferencedLibraries =>
             Parent switch
             {
                 { } => LocalSymbols.Values.OfType<ReferencedLibrary>().Concat(Parent.ReferencedLibraries),
                 _ => LocalSymbols.Values.OfType<ReferencedLibrary>()
             };
+        public IEnumerable<UsingDefSymbol> ReferencedModels =>
+            Parent switch
+            {
+                { } => LocalSymbols.Values.OfType<UsingDefSymbol>().Concat(Parent.ReferencedModels),
+                _ => LocalSymbols.Values.OfType<UsingDefSymbol>()
+            };
+
 
         public IEnumerator<IDefinitionElement> GetEnumerator() => LocalSymbols.Values.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

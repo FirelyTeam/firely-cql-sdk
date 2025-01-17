@@ -20,7 +20,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
     [System.Xml.Serialization.XmlRootAttribute("modelInfo", Namespace="urn:hl7-org:elm-modelinfo:r1", IsNullable=false)]
-    internal partial class ModelInfo {
+    public partial class ModelInfo {
 
         private ModelSpecifier[] requiredModelInfoField;
 
@@ -276,7 +276,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class ModelSpecifier {
+    public partial class ModelSpecifier {
 
         private string urlField;
 
@@ -324,7 +324,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class ContextInfo {
+    public partial class ContextInfo {
 
         private NamedTypeSpecifier contextTypeField;
 
@@ -384,7 +384,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class NamedTypeSpecifier : TypeSpecifier {
+    public partial class NamedTypeSpecifier : TypeSpecifier {
 
         private string modelNameField;
 
@@ -439,7 +439,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal abstract partial class TypeSpecifier {
+    public abstract partial class TypeSpecifier {
     }
 
     /// <remarks/>
@@ -448,7 +448,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class TupleTypeSpecifier : TypeSpecifier {
+    public partial class TupleTypeSpecifier : TypeSpecifier {
 
         private TupleTypeSpecifierElement[] elementField;
 
@@ -470,7 +470,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class TupleTypeSpecifierElement {
+    public partial class TupleTypeSpecifierElement {
 
         private TypeSpecifier elementTypeField;
 
@@ -504,7 +504,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class BoundParameterTypeSpecifier : TypeSpecifier {
+    public partial class BoundParameterTypeSpecifier : TypeSpecifier {
 
         private TypeSpecifier elementTypeSpecifierField;
 
@@ -551,7 +551,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class ParameterTypeSpecifier : TypeSpecifier {
+    public partial class ParameterTypeSpecifier : TypeSpecifier {
 
         private string parameterNameField;
 
@@ -573,7 +573,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class ChoiceTypeSpecifier : TypeSpecifier {
+    public partial class ChoiceTypeSpecifier : TypeSpecifier {
 
         private TypeSpecifier[] choiceField;
 
@@ -595,7 +595,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class IntervalTypeSpecifier : TypeSpecifier {
+    public partial class IntervalTypeSpecifier : TypeSpecifier {
 
         private TypeSpecifier pointTypeSpecifierField;
 
@@ -629,7 +629,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class ListTypeSpecifier : TypeSpecifier {
+    public partial class ListTypeSpecifier : TypeSpecifier {
 
         private TypeSpecifier elementTypeSpecifierField;
 
@@ -663,7 +663,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class ConversionInfo {
+    public partial class ConversionInfo {
 
         private TypeSpecifier fromTypeSpecifierField;
 
@@ -735,7 +735,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class TupleTypeInfoElement {
+    public partial class TupleTypeInfoElement {
 
         private TypeSpecifier typeSpecifierField;
 
@@ -859,7 +859,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class SearchInfo {
+    public partial class SearchInfo {
 
         private TypeSpecifier typeSpecifierField;
 
@@ -971,7 +971,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class RelationshipInfo {
+    public partial class RelationshipInfo {
 
         private string contextField;
 
@@ -1006,7 +1006,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class ExpressionInfo {
+    public partial class ExpressionInfo {
 
         private string languageField;
 
@@ -1041,7 +1041,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class ConstraintInfo {
+    public partial class ConstraintInfo {
 
         private ExpressionInfo[] expressionField;
 
@@ -1115,7 +1115,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class BindingInfo {
+    public partial class BindingInfo {
 
         private string nameField;
 
@@ -1174,7 +1174,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("xsd", "4.8.3928.0")]
     [System.SerializableAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal enum BindingStrength {
+    public enum BindingStrength {
 
         /// <remarks/>
         Required,
@@ -1195,7 +1195,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class ClassInfoElement {
+    public partial class ClassInfoElement {
 
         private TypeSpecifier typeSpecifierField;
 
@@ -1474,7 +1474,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class TypeParameterInfo {
+    public partial class TypeParameterInfo {
 
         private TypeSpecifier typeSpecifierField;
 
@@ -1541,7 +1541,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal abstract partial class TypeInfo {
+    public abstract partial class TypeInfo {
 
         private TypeSpecifier baseTypeSpecifierField;
 
@@ -1575,7 +1575,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class ChoiceTypeInfo : TypeInfo {
+    public partial class ChoiceTypeInfo : TypeInfo {
 
         private TypeSpecifier[] typeField;
 
@@ -1610,7 +1610,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class TupleTypeInfo : TypeInfo {
+    public partial class TupleTypeInfo : TypeInfo {
 
         private TupleTypeInfoElement[] elementField;
 
@@ -1632,7 +1632,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class ListTypeInfo : TypeInfo {
+    public partial class ListTypeInfo : TypeInfo {
 
         private TypeSpecifier elementTypeSpecifierField;
 
@@ -1666,7 +1666,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class IntervalTypeInfo : TypeInfo {
+    public partial class IntervalTypeInfo : TypeInfo {
 
         private TypeSpecifier pointTypeSpecifierField;
 
@@ -1700,7 +1700,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class SimpleTypeInfo : TypeInfo {
+    public partial class SimpleTypeInfo : TypeInfo {
 
         private string namespaceField;
 
@@ -1749,7 +1749,7 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class ClassInfo : TypeInfo {
+    public partial class ClassInfo : TypeInfo {
 
         private TypeParameterInfo[] parameterField;
 
@@ -1997,6 +1997,6 @@ namespace Hl7.Cql.Model.Xml {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="urn:hl7-org:elm-modelinfo:r1")]
-    internal partial class ProfileInfo : ClassInfo {
+    public partial class ProfileInfo : ClassInfo {
     }
 }

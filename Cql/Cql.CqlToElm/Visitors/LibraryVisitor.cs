@@ -75,11 +75,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 LibraryBuilder = libraryBuilder;
                 Services = services;
-                ExpressionVisitor = new ExpressionVisitor(services, libraryBuilder);
-                TypeSpecifierVisitor = new TypeSpecifierVisitor(services, libraryBuilder);
-                CoercionProvider = CoercionProvider.Create(services, libraryBuilder);
-                InvocationBuilder = services.GetRequiredService<InvocationBuilder>();
                 Options = services.GetRequiredService<IOptions<CqlToElmOptions>>().Value!;
+                ExpressionVisitor = new ExpressionVisitor(services, libraryBuilder);
+                CoercionProvider = CoercionProvider.Create(services, libraryBuilder);
+                TypeSpecifierVisitor = TypeSpecifierVisitor.Create(services, libraryBuilder);
+                InvocationBuilder = InvocationBuilder.Create(services, CoercionProvider, libraryBuilder);
             }
 
             public LibraryBuilder LibraryBuilder { get; }
@@ -455,7 +455,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 var resultType = cd.resultTypeSpecifier as NamedTypeSpecifier ??
                     throw new InvalidOperationException($"ContextDef {cd.name} has a resultType that is not a named type specifier.");
-                var mts = TypeBridge.ToModelSpecifier(resultType, ModelProvider);
+                var mts = TypeBridge.ToModelSpecifier(resultType, ModelProvider, Options);
                 var retrieve = new Retrieve
                 {
                     dataType = resultType.name,
@@ -486,15 +486,47 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     name = modelIdentifier is null ? identifier : qualifiedName
                 }.WithLocator(context.Locator());
 
-                var resultType = new NamedTypeSpecifier(
-                           new System.Xml.XmlQualifiedName(Options.LiteralTypes.Default));
+                TypeSpecifier resultType = new NamedTypeSpecifier(new System.Xml.XmlQualifiedName(Options.LiteralTypes.Default));
                 if (!cd.IsUnfiltered)
                 {
-                   
-                    if (LibraryBuilder.SymbolTable.TryResolveType(identifier, out var type))
-                        resultType = new NamedTypeSpecifier(type.uri!, type.name!);
+                    if (modelIdentifier is not null)
+                    {
+                        if (LibraryBuilder.SymbolTable.TryResolveSymbol(modelIdentifier, out var model)
+                            && model is UsingDefSymbol uds)
+                        {
+                            if (uds.Symbols.TryResolveContextDefinition(identifier, out var cds))
+                            {
+                                var type = cds.Context.Type;
+                                var ts = type.ToTypeSpecifier();
+                                resultType = TypeBridge.ToElmSpecifier(ts);
+                            }
+                            else
+                                cd.AddError(Messaging.CouldNotResolveContextName(identifier, modelIdentifier));
+                        }
+                        else
+                            cd.AddError(Messaging.CouldNotResolveModel(modelIdentifier));
+                    }
                     else
-                        cd.AddError(Messaging.CouldNotResolveContextName(identifier, modelIdentifier!));
+                    {
+                        var contexts = new List<Model.ContextDefinition>();
+                        foreach (var ud in LibraryBuilder.SymbolTable.ReferencedModels)
+                        {
+                            if (ud.Symbols.TryResolveContextDefinition(identifier, out var cds))
+                                contexts.Add(cds.Context);
+                        }
+                        if (contexts.Count == 1)
+                        {
+                            var type = contexts[0].Type;
+                            var ts = type.ToTypeSpecifier();
+                            resultType = TypeBridge.ToElmSpecifier(ts);
+                        }
+                        else if (contexts.Count == 0)
+                            cd.AddError(Messaging.CouldNotResolveContextName(identifier));
+                        else if (contexts.Count > 1) {
+                            cd.AddError(Messaging.AmbiguousContextName(identifier,
+                                contexts.Select(ctx => $"{ctx.Model.Name}.{ctx.Name}").ToArray()));                             
+                        }
+                    }
                 }
                 return cd
                     .WithResultType(resultType);

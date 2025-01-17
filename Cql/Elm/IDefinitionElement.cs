@@ -302,7 +302,7 @@ namespace Hl7.Cql.Elm
             throw new InvalidOperationException("There is no reference type for a using statement.");
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
-
+     
     }
 
     /// <summary>

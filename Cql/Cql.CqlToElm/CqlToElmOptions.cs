@@ -1,4 +1,6 @@
-﻿namespace Hl7.Cql.CqlToElm
+﻿using Hl7.Cql.Elm;
+
+namespace Hl7.Cql.CqlToElm
 {
     /// <summary>
     /// Defines options and their default values used while converting CQL to ELM.

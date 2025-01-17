@@ -25,27 +25,18 @@ namespace Hl7.Cql.CqlToElm.Test
                 using FHIR
 
                 context FHIR.Patient
-                context Observation
             ");
 
             Assert.IsNotNull(lib.contexts);
-            lib.contexts.Select(c => c.name).Should().BeEquivalentTo("FHIR.Patient", "Observation");
-
+            lib.contexts.Select(c => c.name).Should().BeEquivalentTo("FHIR.Patient");
 
             var pts = new Elm.NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}Patient") };
-            var ots = new Elm.NamedTypeSpecifier { name = new System.Xml.XmlQualifiedName("{http://hl7.org/fhir}Observation") };
 
             lib.statements.Should().ContainEquivalentOf(new
             {
                 name = "Patient",
                 context = "FHIR.Patient",
                 resultTypeSpecifier = pts,
-            }, p => p.ExcludingMissingMembers());
-            lib.statements.Should().ContainEquivalentOf(new
-            {
-                name = "Observation",
-                context = "Observation",
-                resultTypeSpecifier = ots,
             }, p => p.ExcludingMissingMembers());
         }
 
@@ -94,7 +85,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 using FHIR
 
                 context ObservationX
-            ", "Could not resolve context name ObservationX in model FHIR.");
+            ", "Could not resolve context name ObservationX.");
         }
 
         [TestMethod]

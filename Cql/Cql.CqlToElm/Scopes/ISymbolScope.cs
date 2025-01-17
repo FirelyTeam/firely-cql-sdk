@@ -48,9 +48,31 @@ namespace Hl7.Cql.CqlToElm
         bool TryResolveType(string identifier, [NotNullWhen(true)] out TypeDef? type);
 
         /// <summary>
+        /// Tries to resolve the context definition for the given name.
+        /// </summary>
+        /// <remarks>
+        /// When in a CQL library we have:
+        /// <code>
+        /// context Patient
+        /// </code>>
+        /// We look up the context definition named Patient (generally defined in the model), which contains
+        /// the information necessary to create the retrieve statement that we can add to the general symbol table
+        /// with the alias Patient.
+        /// </remarks>
+        /// <param name="identifier">The name of the context.</param>
+        /// <param name="context">The context, if found.  Otherwise, <see langword="null"/>.</param>
+        /// <returns><see langword="true"/> if found; otherwise, <see langword="false"/>.</returns>
+        bool TryResolveContextDefinition(string identifier, [NotNullWhen(true)] out ContextDefinitionSymbol? context);
+
+        /// <summary>
         /// Gets any referenced libraries in this scope, including those in <see cref="Parent"/> if defined.
         /// </summary>
         IEnumerable<ReferencedLibrary> ReferencedLibraries { get; }
+
+        /// <summary>
+        /// Gets any referenced models in this scope, including those in <see cref="Parent"/> if defined.
+        /// </summary>
+        IEnumerable<UsingDefSymbol> ReferencedModels { get; }
 
         /// <summary>
         /// Creates a child scope for which this scope is its <see cref="Parent"/>.

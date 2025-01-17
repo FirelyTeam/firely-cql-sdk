@@ -288,8 +288,8 @@ namespace Hl7.Cql.CqlToElm
 
         internal bool IsSubtype(TypeSpecifier from, TypeSpecifier to)
         {
-            var fromModelTs = TypeBridge.ToModelSpecifier(from, ModelProvider);
-            var toModelTs = TypeBridge.ToModelSpecifier(to, ModelProvider);
+            var fromModelTs = TypeBridge.ToModelSpecifier(from, ModelProvider, Options);
+            var toModelTs = TypeBridge.ToModelSpecifier(to, ModelProvider, Options);
             return fromModelTs.IsSubtypeOf(toModelTs);
 
 
@@ -399,7 +399,7 @@ namespace Hl7.Cql.CqlToElm
 
         internal bool IsSimpleType(TypeSpecifier typeSpecifier)
         {
-            var modelTs = TypeBridge.ToModelSpecifier(typeSpecifier, ModelProvider);
+            var modelTs = TypeBridge.ToModelSpecifier(typeSpecifier, ModelProvider, Options);
             return modelTs.GetTypeDefinition() is Model.SimpleTypeDefinition;
         }
 
@@ -469,7 +469,33 @@ namespace Hl7.Cql.CqlToElm
 
         internal bool HasConversionToIntervalThroughModel(TypeSpecifier type, [NotNullWhen(true)] out TypeSpecifier? intervalPointType)
         {
-            throw new NotImplementedException();
+            var modelType = TypeBridge.ToModelSpecifier(type, ModelProvider, Options);
+            var intervalTypeName = Options.LiteralTypes.Interval;
+            if (ModelProvider.TryGetType(intervalTypeName, out var intervalType))
+            {
+                List<TypeSpecifier> intervalPointTypes = new();
+                // Get the models that are included in this library with using statements
+                foreach (var @ref in LibraryBuilder.SymbolTable.ReferencedModels)
+                {
+                    var conversions = @ref.Model.ImplicitConversionsFrom(modelType);
+                    foreach (var to in conversions.Select(kvp => kvp.Key))
+                    {
+                        if (to is Model.GenericTypeSpecifier gts
+                            && gts.Arguments.Count == 1
+                            && gts.Type.Equals(intervalType))
+                        {
+                            intervalPointTypes.Add(TypeBridge.ToElmSpecifier(gts.Arguments[0]));
+                        }
+                    }
+                }
+                if (intervalPointTypes.Count == 1)
+                {
+                    intervalPointType = intervalPointTypes[0];
+                    return true;
+                }
+            }
+            intervalPointType = null;
+            return false;
         }
 
         internal bool HasImplicitConversionThroughModel(TypeSpecifier from, TypeSpecifier to) =>
@@ -477,17 +503,53 @@ namespace Hl7.Cql.CqlToElm
 
         private FunctionRef? FunctionRefForModelConversion(TypeSpecifier from, TypeSpecifier to)
         {
-            var fromModelTs = TypeBridge.ToModelSpecifier(from, ModelProvider);
-            var toModelTs = TypeBridge.ToModelSpecifier(to, ModelProvider);
+            var fromModelTs = TypeBridge.ToModelSpecifier(from, ModelProvider, Options);
+            var toModelTs = TypeBridge.ToModelSpecifier(to, ModelProvider, Options);
 
             // a library must have a using definition in order to take advantage of its conversions.
-            foreach (var @using in LibraryBuilder.SymbolTable.OfType<UsingDef>())
+            foreach (var @using in LibraryBuilder.SymbolTable.OfType<UsingDefSymbol>())
             {
-                if (ModelProvider.TryGetModelFromUri(@using.uri, out var model))
+                var model = @using.Model;
+                if (model.ImplicitConversions.TryGetValue(fromModelTs, out var conversions))
+                    return getConversion(conversions, toModelTs); 
+                else
                 {
-                    if (model.ImplicitConversions.TryGetValue(fromModelTs, out var conversions))
+                    foreach(var kvp in model.ImplicitConversions)
                     {
-                        if (conversions.TryGetValue(toModelTs, out var qualifiedFunctionName))
+                        // e.g., converting FHIR.Age to System.Quantity
+                        // there is only a conversion from FHIR.Quantity to System.Quantity
+                        // FHIR.Age is a subtype of FHIR.Quantity
+                        if (fromModelTs.IsSubtypeOf(kvp.Key))
+                        {
+                            var fr = getConversion(kvp.Value, toModelTs);
+                            if (fr is not null)
+                                return fr;
+                        }
+                    }
+                }
+            }
+            return null;
+
+            FunctionRef? getConversion(Dictionary<Model.TypeSpecifier, string> conversions, Model.TypeSpecifier toModelTs)
+            {
+                if (conversions.TryGetValue(toModelTs, out var qualifiedFunctionName))
+                {
+                    var lastDot = qualifiedFunctionName!.LastIndexOf('.');
+                    var libraryName = qualifiedFunctionName[..lastDot];
+                    var functionName = qualifiedFunctionName[(lastDot + 1)..];
+                    var @ref = new FunctionRef
+                    {
+                        libraryName = libraryName,
+                        name = functionName,
+                    };
+                    return @ref;
+                }
+                else
+                {
+                    // If there isn't an exact match, we need to see if there is a conversion to a base type.
+                    foreach (var conversion in conversions)
+                    {
+                        if (toModelTs.IsSubtypeOf(conversion.Key))
                         {
                             var lastDot = qualifiedFunctionName!.LastIndexOf('.');
                             var libraryName = qualifiedFunctionName[..lastDot];
@@ -501,8 +563,8 @@ namespace Hl7.Cql.CqlToElm
                         }
                     }
                 }
+                return null;
             }
-            return null;
         }
 
         private int ListDegree(TypeSpecifier type) =>

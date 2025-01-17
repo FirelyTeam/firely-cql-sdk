@@ -1,6 +1,7 @@
 ﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Configuration.Assemblies;
@@ -23,20 +24,23 @@ namespace Hl7.Cql.CqlToElm
     /// </summary>
     internal class InvocationBuilder
     {
+        public static InvocationBuilder Create(IServiceProvider services,
+            CoercionProvider coercionProvider, LibraryBuilder libraryBuilder) =>
+            new(services, coercionProvider, libraryBuilder);
+
         public Model.IModelProvider Provider { get; }
         public CoercionProvider CoercionProvider { get; }
         public ElmFactory ElmFactory { get; }
         public MessageProvider Messaging { get; }
 
-        public InvocationBuilder(Model.IModelProvider provider,
+        private InvocationBuilder(IServiceProvider services,
             CoercionProvider coercionProvider,
-            ElmFactory elmFactory,
-            MessageProvider messaging)
+            LibraryBuilder libraryBuilder)
         {
-            Provider = provider;
+            Provider = services.GetRequiredService<Model.IModelProvider>();
             CoercionProvider = coercionProvider;
-            ElmFactory = elmFactory;
-            Messaging = messaging;
+            ElmFactory = services.GetRequiredService<ElmFactory> ();
+            Messaging = services.GetRequiredService<MessageProvider>();
         }
 
         /// <summary>

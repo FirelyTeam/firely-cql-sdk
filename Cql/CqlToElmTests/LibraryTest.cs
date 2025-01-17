@@ -1,6 +1,5 @@
 using FluentAssertions;
 using Hl7.Cql.Elm;
-using Hl7.Cql.Model;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -38,7 +37,7 @@ namespace Hl7.Cql.CqlToElm.Test
             public bool TryGetModelFromUri(string uri, [NotNullWhen(true)] out M.ModelDefinition? model)
             {
                 foreach(var m in Models.Values)
-                    if (m.Url == uri)
+                    if (m.Uri == uri)
                     {
                         model = m;
                         return true;
@@ -134,7 +133,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Using_AllTerms()
         {
             var services = ServiceCollection()
-                .AddSingleton<IModelProvider>(new TestModelProvider(
+                .AddSingleton<M.IModelProvider>(new TestModelProvider(
                     new M.ModelDefinition(
                         "Namespace.Using_AllTerms_WithNamespace",
                         "1.0.0",
@@ -158,7 +157,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Using_AllTerms_WithNamespace()
         {
             var services = ServiceCollection()
-                .AddSingleton<IModelProvider>(new TestModelProvider(
+                .AddSingleton<M.IModelProvider>(new TestModelProvider(
                     new M.ModelDefinition(
                         "Namespace.Using_AllTerms_WithNamespace",
                         "1.0.0",
@@ -184,7 +183,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Using_NoVersion_LocalIdentifier()
         {
             var services = ServiceCollection()
-                .AddSingleton<IModelProvider>(new TestModelProvider(
+                .AddSingleton<M.IModelProvider>(new TestModelProvider(
                     new M.ModelDefinition(
                         "Namespace.Using_NoVersion_LocalIdentifier",
                         "1.0.0",
@@ -210,7 +209,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Using_Version_NoIdentifier()
         {
             var services = ServiceCollection()
-            .AddSingleton<IModelProvider>(new TestModelProvider(
+            .AddSingleton<M.IModelProvider>(new TestModelProvider(
                 new M.ModelDefinition(
                     "Namespace.Using_Version_NoIdentifier",
                     "1.0.0",
@@ -234,7 +233,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Using_NoVersion_NoIdentifier()
         {
             var services = ServiceCollection()
-                .AddSingleton<IModelProvider>(new TestModelProvider(
+                .AddSingleton<M.IModelProvider>(new TestModelProvider(
                     new M.ModelDefinition(
                         "Namespace.Using_NoVersion_NoIdentifier",
                         "1.0.0",
@@ -258,7 +257,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Using_Duplicate_System_NoLocalAlias()
         {
             var services = ServiceCollection()
-                .AddSingleton<IModelProvider>(new TestModelProvider(
+                .AddSingleton<M.IModelProvider>(new TestModelProvider(
                     new M.ModelDefinition(
                         "System",
                         "1.0.0",

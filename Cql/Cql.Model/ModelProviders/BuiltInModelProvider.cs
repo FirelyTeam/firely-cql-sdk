@@ -9,56 +9,41 @@ using System.Threading.Tasks;
 
 namespace Hl7.Cql.Model.ModelProviders
 {
-    internal class BuiltInModelProvider: IModelProvider
+    internal class BuiltInModelProvider: ModelLoader
     {
-        private ModelLoader ModelLoader = new ModelLoader(name => Models.All[name]);
-
-        public bool TryGetModel(string modelName, string? version,
-            [NotNullWhen(true)] out ModelDefinition? model,
-            [NotNullWhen(false)] out string? error)
+        public BuiltInModelProvider(): base(GetByNameAndVersion, GetByUri)
         {
-            if (!ModelLoader.TryGetModel(modelName, out model))
+        }
+
+        private static ModelInfo? GetByNameAndVersion(string name, string? version)
+        {
+            if (version is null)
             {
-                if (Models.All.TryGetValue(modelName, out var info))
+                if (Models.All.TryGetValue(name, out var model))
                 {
-                    ModelLoader.Load(info);
-                    var found = ModelLoader.TryGetModel(modelName, out model);
-                    if (!found)
-                    {
-                        error = $"Model {modelName} failed to load.";
-                        model = null;
-                    }
-                    else
-                        error = null;
-                    return found;
-                }
-                else
-                {
-                    error = $"Model {modelName} was not found.";
-                    model = null;
-                    return false;
+                    if (version is null || model.version == version)
+                        return model;
                 }
             }
             else
             {
-                error = null;
-                return true;
+                var matching = Models.All.Where(kvp => kvp.Key == name)
+                    .Select(kvp => new KeyValuePair<string, Version>(kvp.Key,
+                        Version.Parse(kvp.Value.version ?? "0.0.0.0")))
+                    .OrderByDescending(kvp => kvp.Value);
+                var highest = matching.FirstOrDefault();
+                if (Models.All.TryGetValue(highest.Key, out var mi))
+                    return mi;
             }
+            return null;
         }
 
-        public bool TryGetModel(string modelName, string? version, [NotNullWhen(true)] out ModelDefinition? model)
+        private static ModelInfo? GetByUri(string uri)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool TryGetModelFromUri(string uri, [NotNullWhen(true)] out ModelDefinition? model)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool TryGetType(string qualfiedName, [NotNullWhen(true)] out TypeDefinition? type)
-        {
-            throw new NotImplementedException();
+            foreach(var model in Models.All.Values)
+                if (model.url == uri)
+                    return model;
+            return null;
         }
     }
 }

@@ -83,12 +83,20 @@ namespace Hl7.Cql.CqlToElm.Builtin
             return false;
         }
 
+        public bool TryResolveContextDefinition(string identifier, [NotNullWhen(true)] out ContextDefinitionSymbol? context)
+        {
+            context = null;
+            return false;
+        }
+
+
         public ISymbolScope EnterScope(string name) => throw new NotSupportedException($"You cannot enter a scope from the System scope.");
 
         public IEnumerator<IDefinitionElement> GetEnumerator() => symbols.Values.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public IEnumerable<ReferencedLibrary> ReferencedLibraries => Enumerable.Empty<ReferencedLibrary>();
+        public IEnumerable<UsingDefSymbol> ReferencedModels => Enumerable.Empty<UsingDefSymbol>();
 
         private static SystemFunction<T> nullary<T>(TypeSpecifier result, string? name = null) where T : Expression =>
             new(EmptyOperands, result, name ?? typeof(T).Name);

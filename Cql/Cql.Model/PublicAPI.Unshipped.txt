@@ -1,1 +1,329 @@
 ﻿#nullable enable
+Hl7.Cql.Model.AccessModifier
+Hl7.Cql.Model.AccessModifier.Private = 1 -> Hl7.Cql.Model.AccessModifier
+Hl7.Cql.Model.AccessModifier.Public = 0 -> Hl7.Cql.Model.AccessModifier
+Hl7.Cql.Model.Xml.BindingInfo
+Hl7.Cql.Model.Xml.BindingInfo.BindingInfo() -> void
+Hl7.Cql.Model.Xml.BindingInfo.strength.get -> Hl7.Cql.Model.Xml.BindingStrength
+Hl7.Cql.Model.Xml.BindingInfo.strength.set -> void
+Hl7.Cql.Model.Xml.BindingStrength
+Hl7.Cql.Model.Xml.BindingStrength.Example = 3 -> Hl7.Cql.Model.Xml.BindingStrength
+Hl7.Cql.Model.Xml.BindingStrength.Extensible = 1 -> Hl7.Cql.Model.Xml.BindingStrength
+Hl7.Cql.Model.Xml.BindingStrength.Preferred = 2 -> Hl7.Cql.Model.Xml.BindingStrength
+Hl7.Cql.Model.Xml.BindingStrength.Required = 0 -> Hl7.Cql.Model.Xml.BindingStrength
+Hl7.Cql.Model.Xml.BoundParameterTypeSpecifier
+Hl7.Cql.Model.Xml.BoundParameterTypeSpecifier.BoundParameterTypeSpecifier() -> void
+Hl7.Cql.Model.Xml.ChoiceTypeInfo
+Hl7.Cql.Model.Xml.ChoiceTypeInfo.ChoiceTypeInfo() -> void
+Hl7.Cql.Model.Xml.ChoiceTypeSpecifier
+Hl7.Cql.Model.Xml.ChoiceTypeSpecifier.ChoiceTypeSpecifier() -> void
+Hl7.Cql.Model.Xml.ClassInfo
+Hl7.Cql.Model.Xml.ClassInfo.ClassInfo() -> void
+Hl7.Cql.Model.Xml.ClassInfo.retrievable.get -> bool
+Hl7.Cql.Model.Xml.ClassInfo.retrievable.set -> void
+Hl7.Cql.Model.Xml.ClassInfoElement
+Hl7.Cql.Model.Xml.ClassInfoElement.ClassInfoElement() -> void
+Hl7.Cql.Model.Xml.ClassInfoElement.min.get -> int
+Hl7.Cql.Model.Xml.ClassInfoElement.min.set -> void
+Hl7.Cql.Model.Xml.ClassInfoElement.minSpecified.get -> bool
+Hl7.Cql.Model.Xml.ClassInfoElement.minSpecified.set -> void
+Hl7.Cql.Model.Xml.ClassInfoElement.mustSupport.get -> bool
+Hl7.Cql.Model.Xml.ClassInfoElement.mustSupport.set -> void
+Hl7.Cql.Model.Xml.ClassInfoElement.mustSupportSpecified.get -> bool
+Hl7.Cql.Model.Xml.ClassInfoElement.mustSupportSpecified.set -> void
+Hl7.Cql.Model.Xml.ClassInfoElement.oneBased.get -> bool
+Hl7.Cql.Model.Xml.ClassInfoElement.oneBased.set -> void
+Hl7.Cql.Model.Xml.ClassInfoElement.oneBasedSpecified.get -> bool
+Hl7.Cql.Model.Xml.ClassInfoElement.oneBasedSpecified.set -> void
+Hl7.Cql.Model.Xml.ClassInfoElement.prohibited.get -> bool
+Hl7.Cql.Model.Xml.ClassInfoElement.prohibited.set -> void
+Hl7.Cql.Model.Xml.ClassInfoElement.prohibitedSpecified.get -> bool
+Hl7.Cql.Model.Xml.ClassInfoElement.prohibitedSpecified.set -> void
+Hl7.Cql.Model.Xml.ConstraintInfo
+Hl7.Cql.Model.Xml.ConstraintInfo.ConstraintInfo() -> void
+Hl7.Cql.Model.Xml.ContextInfo
+Hl7.Cql.Model.Xml.ContextInfo.ContextInfo() -> void
+Hl7.Cql.Model.Xml.ConversionInfo
+Hl7.Cql.Model.Xml.ConversionInfo.ConversionInfo() -> void
+Hl7.Cql.Model.Xml.ExpressionInfo
+Hl7.Cql.Model.Xml.ExpressionInfo.ExpressionInfo() -> void
+Hl7.Cql.Model.Xml.IntervalTypeInfo
+Hl7.Cql.Model.Xml.IntervalTypeInfo.IntervalTypeInfo() -> void
+Hl7.Cql.Model.Xml.IntervalTypeSpecifier
+Hl7.Cql.Model.Xml.IntervalTypeSpecifier.IntervalTypeSpecifier() -> void
+Hl7.Cql.Model.Xml.ListTypeInfo
+Hl7.Cql.Model.Xml.ListTypeInfo.ListTypeInfo() -> void
+Hl7.Cql.Model.Xml.ListTypeSpecifier
+Hl7.Cql.Model.Xml.ListTypeSpecifier.ListTypeSpecifier() -> void
+Hl7.Cql.Model.Xml.ModelInfo
+Hl7.Cql.Model.Xml.ModelInfo.caseSensitive.get -> bool
+Hl7.Cql.Model.Xml.ModelInfo.caseSensitive.set -> void
+Hl7.Cql.Model.Xml.ModelInfo.caseSensitiveSpecified.get -> bool
+Hl7.Cql.Model.Xml.ModelInfo.caseSensitiveSpecified.set -> void
+Hl7.Cql.Model.Xml.ModelInfo.ModelInfo() -> void
+Hl7.Cql.Model.Xml.ModelInfo.strictRetrieveTyping.get -> bool
+Hl7.Cql.Model.Xml.ModelInfo.strictRetrieveTyping.set -> void
+Hl7.Cql.Model.Xml.ModelInfo.strictRetrieveTypingSpecified.get -> bool
+Hl7.Cql.Model.Xml.ModelInfo.strictRetrieveTypingSpecified.set -> void
+Hl7.Cql.Model.Xml.ModelSpecifier
+Hl7.Cql.Model.Xml.ModelSpecifier.ModelSpecifier() -> void
+Hl7.Cql.Model.Xml.NamedTypeSpecifier
+Hl7.Cql.Model.Xml.NamedTypeSpecifier.NamedTypeSpecifier() -> void
+Hl7.Cql.Model.Xml.ParameterTypeSpecifier
+Hl7.Cql.Model.Xml.ParameterTypeSpecifier.ParameterTypeSpecifier() -> void
+Hl7.Cql.Model.Xml.ProfileInfo
+Hl7.Cql.Model.Xml.ProfileInfo.ProfileInfo() -> void
+Hl7.Cql.Model.Xml.RelationshipInfo
+Hl7.Cql.Model.Xml.RelationshipInfo.RelationshipInfo() -> void
+Hl7.Cql.Model.Xml.SearchInfo
+Hl7.Cql.Model.Xml.SearchInfo.SearchInfo() -> void
+Hl7.Cql.Model.Xml.SimpleTypeInfo
+Hl7.Cql.Model.Xml.SimpleTypeInfo.SimpleTypeInfo() -> void
+Hl7.Cql.Model.Xml.TupleTypeInfo
+Hl7.Cql.Model.Xml.TupleTypeInfo.TupleTypeInfo() -> void
+Hl7.Cql.Model.Xml.TupleTypeInfoElement
+Hl7.Cql.Model.Xml.TupleTypeInfoElement.oneBased.get -> bool
+Hl7.Cql.Model.Xml.TupleTypeInfoElement.oneBased.set -> void
+Hl7.Cql.Model.Xml.TupleTypeInfoElement.oneBasedSpecified.get -> bool
+Hl7.Cql.Model.Xml.TupleTypeInfoElement.oneBasedSpecified.set -> void
+Hl7.Cql.Model.Xml.TupleTypeInfoElement.prohibited.get -> bool
+Hl7.Cql.Model.Xml.TupleTypeInfoElement.prohibited.set -> void
+Hl7.Cql.Model.Xml.TupleTypeInfoElement.prohibitedSpecified.get -> bool
+Hl7.Cql.Model.Xml.TupleTypeInfoElement.prohibitedSpecified.set -> void
+Hl7.Cql.Model.Xml.TupleTypeInfoElement.TupleTypeInfoElement() -> void
+Hl7.Cql.Model.Xml.TupleTypeSpecifier
+Hl7.Cql.Model.Xml.TupleTypeSpecifier.TupleTypeSpecifier() -> void
+Hl7.Cql.Model.Xml.TupleTypeSpecifierElement
+Hl7.Cql.Model.Xml.TupleTypeSpecifierElement.TupleTypeSpecifierElement() -> void
+Hl7.Cql.Model.Xml.TypeInfo
+Hl7.Cql.Model.Xml.TypeInfo.TypeInfo() -> void
+Hl7.Cql.Model.Xml.TypeParameterInfo
+Hl7.Cql.Model.Xml.TypeParameterInfo.TypeParameterInfo() -> void
+Hl7.Cql.Model.Xml.TypeSpecifier
+Hl7.Cql.Model.Xml.TypeSpecifier.TypeSpecifier() -> void
+~Hl7.Cql.Model.Xml.BindingInfo.description.get -> string
+~Hl7.Cql.Model.Xml.BindingInfo.description.set -> void
+~Hl7.Cql.Model.Xml.BindingInfo.name.get -> string
+~Hl7.Cql.Model.Xml.BindingInfo.name.set -> void
+~Hl7.Cql.Model.Xml.BindingInfo.valueSet.get -> string
+~Hl7.Cql.Model.Xml.BindingInfo.valueSet.set -> void
+~Hl7.Cql.Model.Xml.BoundParameterTypeSpecifier.boundType.get -> string
+~Hl7.Cql.Model.Xml.BoundParameterTypeSpecifier.boundType.set -> void
+~Hl7.Cql.Model.Xml.BoundParameterTypeSpecifier.elementTypeSpecifier.get -> Hl7.Cql.Model.Xml.TypeSpecifier
+~Hl7.Cql.Model.Xml.BoundParameterTypeSpecifier.elementTypeSpecifier.set -> void
+~Hl7.Cql.Model.Xml.BoundParameterTypeSpecifier.parameterName.get -> string
+~Hl7.Cql.Model.Xml.BoundParameterTypeSpecifier.parameterName.set -> void
+~Hl7.Cql.Model.Xml.ChoiceTypeInfo.choice.get -> Hl7.Cql.Model.Xml.TypeSpecifier[]
+~Hl7.Cql.Model.Xml.ChoiceTypeInfo.choice.set -> void
+~Hl7.Cql.Model.Xml.ChoiceTypeInfo.type.get -> Hl7.Cql.Model.Xml.TypeSpecifier[]
+~Hl7.Cql.Model.Xml.ChoiceTypeInfo.type.set -> void
+~Hl7.Cql.Model.Xml.ChoiceTypeSpecifier.choice.get -> Hl7.Cql.Model.Xml.TypeSpecifier[]
+~Hl7.Cql.Model.Xml.ChoiceTypeSpecifier.choice.set -> void
+~Hl7.Cql.Model.Xml.ClassInfo.comment.get -> string
+~Hl7.Cql.Model.Xml.ClassInfo.comment.set -> void
+~Hl7.Cql.Model.Xml.ClassInfo.constraint.get -> Hl7.Cql.Model.Xml.ConstraintInfo[]
+~Hl7.Cql.Model.Xml.ClassInfo.constraint.set -> void
+~Hl7.Cql.Model.Xml.ClassInfo.contextRelationship.get -> Hl7.Cql.Model.Xml.RelationshipInfo[]
+~Hl7.Cql.Model.Xml.ClassInfo.contextRelationship.set -> void
+~Hl7.Cql.Model.Xml.ClassInfo.definition.get -> string
+~Hl7.Cql.Model.Xml.ClassInfo.definition.set -> void
+~Hl7.Cql.Model.Xml.ClassInfo.description.get -> string
+~Hl7.Cql.Model.Xml.ClassInfo.description.set -> void
+~Hl7.Cql.Model.Xml.ClassInfo.element.get -> Hl7.Cql.Model.Xml.ClassInfoElement[]
+~Hl7.Cql.Model.Xml.ClassInfo.element.set -> void
+~Hl7.Cql.Model.Xml.ClassInfo.identifier.get -> string
+~Hl7.Cql.Model.Xml.ClassInfo.identifier.set -> void
+~Hl7.Cql.Model.Xml.ClassInfo.inferenceExpression.get -> Hl7.Cql.Model.Xml.ExpressionInfo[]
+~Hl7.Cql.Model.Xml.ClassInfo.inferenceExpression.set -> void
+~Hl7.Cql.Model.Xml.ClassInfo.label.get -> string
+~Hl7.Cql.Model.Xml.ClassInfo.label.set -> void
+~Hl7.Cql.Model.Xml.ClassInfo.name.get -> string
+~Hl7.Cql.Model.Xml.ClassInfo.name.set -> void
+~Hl7.Cql.Model.Xml.ClassInfo.namespace.get -> string
+~Hl7.Cql.Model.Xml.ClassInfo.namespace.set -> void
+~Hl7.Cql.Model.Xml.ClassInfo.parameter.get -> Hl7.Cql.Model.Xml.TypeParameterInfo[]
+~Hl7.Cql.Model.Xml.ClassInfo.parameter.set -> void
+~Hl7.Cql.Model.Xml.ClassInfo.primaryCodePath.get -> string
+~Hl7.Cql.Model.Xml.ClassInfo.primaryCodePath.set -> void
+~Hl7.Cql.Model.Xml.ClassInfo.primaryValueSetPath.get -> string
+~Hl7.Cql.Model.Xml.ClassInfo.primaryValueSetPath.set -> void
+~Hl7.Cql.Model.Xml.ClassInfo.search.get -> Hl7.Cql.Model.Xml.SearchInfo[]
+~Hl7.Cql.Model.Xml.ClassInfo.search.set -> void
+~Hl7.Cql.Model.Xml.ClassInfo.target.get -> string
+~Hl7.Cql.Model.Xml.ClassInfo.target.set -> void
+~Hl7.Cql.Model.Xml.ClassInfo.targetContextRelationship.get -> Hl7.Cql.Model.Xml.RelationshipInfo[]
+~Hl7.Cql.Model.Xml.ClassInfo.targetContextRelationship.set -> void
+~Hl7.Cql.Model.Xml.ClassInfoElement.binding.get -> Hl7.Cql.Model.Xml.BindingInfo
+~Hl7.Cql.Model.Xml.ClassInfoElement.binding.set -> void
+~Hl7.Cql.Model.Xml.ClassInfoElement.comment.get -> string
+~Hl7.Cql.Model.Xml.ClassInfoElement.comment.set -> void
+~Hl7.Cql.Model.Xml.ClassInfoElement.constraint.get -> Hl7.Cql.Model.Xml.ConstraintInfo[]
+~Hl7.Cql.Model.Xml.ClassInfoElement.constraint.set -> void
+~Hl7.Cql.Model.Xml.ClassInfoElement.definition.get -> string
+~Hl7.Cql.Model.Xml.ClassInfoElement.definition.set -> void
+~Hl7.Cql.Model.Xml.ClassInfoElement.description.get -> string
+~Hl7.Cql.Model.Xml.ClassInfoElement.description.set -> void
+~Hl7.Cql.Model.Xml.ClassInfoElement.elementType.get -> string
+~Hl7.Cql.Model.Xml.ClassInfoElement.elementType.set -> void
+~Hl7.Cql.Model.Xml.ClassInfoElement.elementTypeSpecifier.get -> Hl7.Cql.Model.Xml.TypeSpecifier
+~Hl7.Cql.Model.Xml.ClassInfoElement.elementTypeSpecifier.set -> void
+~Hl7.Cql.Model.Xml.ClassInfoElement.label.get -> string
+~Hl7.Cql.Model.Xml.ClassInfoElement.label.set -> void
+~Hl7.Cql.Model.Xml.ClassInfoElement.max.get -> string
+~Hl7.Cql.Model.Xml.ClassInfoElement.max.set -> void
+~Hl7.Cql.Model.Xml.ClassInfoElement.name.get -> string
+~Hl7.Cql.Model.Xml.ClassInfoElement.name.set -> void
+~Hl7.Cql.Model.Xml.ClassInfoElement.target.get -> string
+~Hl7.Cql.Model.Xml.ClassInfoElement.target.set -> void
+~Hl7.Cql.Model.Xml.ClassInfoElement.type.get -> string
+~Hl7.Cql.Model.Xml.ClassInfoElement.type.set -> void
+~Hl7.Cql.Model.Xml.ClassInfoElement.typeSpecifier.get -> Hl7.Cql.Model.Xml.TypeSpecifier
+~Hl7.Cql.Model.Xml.ClassInfoElement.typeSpecifier.set -> void
+~Hl7.Cql.Model.Xml.ConstraintInfo.description.get -> string
+~Hl7.Cql.Model.Xml.ConstraintInfo.description.set -> void
+~Hl7.Cql.Model.Xml.ConstraintInfo.expression.get -> Hl7.Cql.Model.Xml.ExpressionInfo[]
+~Hl7.Cql.Model.Xml.ConstraintInfo.expression.set -> void
+~Hl7.Cql.Model.Xml.ConstraintInfo.message.get -> string
+~Hl7.Cql.Model.Xml.ConstraintInfo.message.set -> void
+~Hl7.Cql.Model.Xml.ConstraintInfo.name.get -> string
+~Hl7.Cql.Model.Xml.ConstraintInfo.name.set -> void
+~Hl7.Cql.Model.Xml.ConstraintInfo.severity.get -> string
+~Hl7.Cql.Model.Xml.ConstraintInfo.severity.set -> void
+~Hl7.Cql.Model.Xml.ContextInfo.birthDateElement.get -> string
+~Hl7.Cql.Model.Xml.ContextInfo.birthDateElement.set -> void
+~Hl7.Cql.Model.Xml.ContextInfo.contextType.get -> Hl7.Cql.Model.Xml.NamedTypeSpecifier
+~Hl7.Cql.Model.Xml.ContextInfo.contextType.set -> void
+~Hl7.Cql.Model.Xml.ContextInfo.keyElement.get -> string
+~Hl7.Cql.Model.Xml.ContextInfo.keyElement.set -> void
+~Hl7.Cql.Model.Xml.ContextInfo.name.get -> string
+~Hl7.Cql.Model.Xml.ContextInfo.name.set -> void
+~Hl7.Cql.Model.Xml.ConversionInfo.fromType.get -> string
+~Hl7.Cql.Model.Xml.ConversionInfo.fromType.set -> void
+~Hl7.Cql.Model.Xml.ConversionInfo.fromTypeSpecifier.get -> Hl7.Cql.Model.Xml.TypeSpecifier
+~Hl7.Cql.Model.Xml.ConversionInfo.fromTypeSpecifier.set -> void
+~Hl7.Cql.Model.Xml.ConversionInfo.functionName.get -> string
+~Hl7.Cql.Model.Xml.ConversionInfo.functionName.set -> void
+~Hl7.Cql.Model.Xml.ConversionInfo.toType.get -> string
+~Hl7.Cql.Model.Xml.ConversionInfo.toType.set -> void
+~Hl7.Cql.Model.Xml.ConversionInfo.toTypeSpecifier.get -> Hl7.Cql.Model.Xml.TypeSpecifier
+~Hl7.Cql.Model.Xml.ConversionInfo.toTypeSpecifier.set -> void
+~Hl7.Cql.Model.Xml.ExpressionInfo.expression.get -> string
+~Hl7.Cql.Model.Xml.ExpressionInfo.expression.set -> void
+~Hl7.Cql.Model.Xml.ExpressionInfo.language.get -> string
+~Hl7.Cql.Model.Xml.ExpressionInfo.language.set -> void
+~Hl7.Cql.Model.Xml.IntervalTypeInfo.pointType.get -> string
+~Hl7.Cql.Model.Xml.IntervalTypeInfo.pointType.set -> void
+~Hl7.Cql.Model.Xml.IntervalTypeInfo.pointTypeSpecifier.get -> Hl7.Cql.Model.Xml.TypeSpecifier
+~Hl7.Cql.Model.Xml.IntervalTypeInfo.pointTypeSpecifier.set -> void
+~Hl7.Cql.Model.Xml.IntervalTypeSpecifier.pointType.get -> string
+~Hl7.Cql.Model.Xml.IntervalTypeSpecifier.pointType.set -> void
+~Hl7.Cql.Model.Xml.IntervalTypeSpecifier.pointTypeSpecifier.get -> Hl7.Cql.Model.Xml.TypeSpecifier
+~Hl7.Cql.Model.Xml.IntervalTypeSpecifier.pointTypeSpecifier.set -> void
+~Hl7.Cql.Model.Xml.ListTypeInfo.elementType.get -> string
+~Hl7.Cql.Model.Xml.ListTypeInfo.elementType.set -> void
+~Hl7.Cql.Model.Xml.ListTypeInfo.elementTypeSpecifier.get -> Hl7.Cql.Model.Xml.TypeSpecifier
+~Hl7.Cql.Model.Xml.ListTypeInfo.elementTypeSpecifier.set -> void
+~Hl7.Cql.Model.Xml.ListTypeSpecifier.elementType.get -> string
+~Hl7.Cql.Model.Xml.ListTypeSpecifier.elementType.set -> void
+~Hl7.Cql.Model.Xml.ListTypeSpecifier.elementTypeSpecifier.get -> Hl7.Cql.Model.Xml.TypeSpecifier
+~Hl7.Cql.Model.Xml.ListTypeSpecifier.elementTypeSpecifier.set -> void
+~Hl7.Cql.Model.Xml.ModelInfo.contextInfo.get -> Hl7.Cql.Model.Xml.ContextInfo[]
+~Hl7.Cql.Model.Xml.ModelInfo.contextInfo.set -> void
+~Hl7.Cql.Model.Xml.ModelInfo.conversionInfo.get -> Hl7.Cql.Model.Xml.ConversionInfo[]
+~Hl7.Cql.Model.Xml.ModelInfo.conversionInfo.set -> void
+~Hl7.Cql.Model.Xml.ModelInfo.defaultContext.get -> string
+~Hl7.Cql.Model.Xml.ModelInfo.defaultContext.set -> void
+~Hl7.Cql.Model.Xml.ModelInfo.name.get -> string
+~Hl7.Cql.Model.Xml.ModelInfo.name.set -> void
+~Hl7.Cql.Model.Xml.ModelInfo.patientBirthDatePropertyName.get -> string
+~Hl7.Cql.Model.Xml.ModelInfo.patientBirthDatePropertyName.set -> void
+~Hl7.Cql.Model.Xml.ModelInfo.patientClassIdentifier.get -> string
+~Hl7.Cql.Model.Xml.ModelInfo.patientClassIdentifier.set -> void
+~Hl7.Cql.Model.Xml.ModelInfo.patientClassName.get -> string
+~Hl7.Cql.Model.Xml.ModelInfo.patientClassName.set -> void
+~Hl7.Cql.Model.Xml.ModelInfo.requiredModelInfo.get -> Hl7.Cql.Model.Xml.ModelSpecifier[]
+~Hl7.Cql.Model.Xml.ModelInfo.requiredModelInfo.set -> void
+~Hl7.Cql.Model.Xml.ModelInfo.schemaLocation.get -> string
+~Hl7.Cql.Model.Xml.ModelInfo.schemaLocation.set -> void
+~Hl7.Cql.Model.Xml.ModelInfo.targetQualifier.get -> string
+~Hl7.Cql.Model.Xml.ModelInfo.targetQualifier.set -> void
+~Hl7.Cql.Model.Xml.ModelInfo.targetUrl.get -> string
+~Hl7.Cql.Model.Xml.ModelInfo.targetUrl.set -> void
+~Hl7.Cql.Model.Xml.ModelInfo.targetVersion.get -> string
+~Hl7.Cql.Model.Xml.ModelInfo.targetVersion.set -> void
+~Hl7.Cql.Model.Xml.ModelInfo.typeInfo.get -> Hl7.Cql.Model.Xml.TypeInfo[]
+~Hl7.Cql.Model.Xml.ModelInfo.typeInfo.set -> void
+~Hl7.Cql.Model.Xml.ModelInfo.url.get -> string
+~Hl7.Cql.Model.Xml.ModelInfo.url.set -> void
+~Hl7.Cql.Model.Xml.ModelInfo.version.get -> string
+~Hl7.Cql.Model.Xml.ModelInfo.version.set -> void
+~Hl7.Cql.Model.Xml.ModelSpecifier.name.get -> string
+~Hl7.Cql.Model.Xml.ModelSpecifier.name.set -> void
+~Hl7.Cql.Model.Xml.ModelSpecifier.url.get -> string
+~Hl7.Cql.Model.Xml.ModelSpecifier.url.set -> void
+~Hl7.Cql.Model.Xml.ModelSpecifier.version.get -> string
+~Hl7.Cql.Model.Xml.ModelSpecifier.version.set -> void
+~Hl7.Cql.Model.Xml.NamedTypeSpecifier.modelName.get -> string
+~Hl7.Cql.Model.Xml.NamedTypeSpecifier.modelName.set -> void
+~Hl7.Cql.Model.Xml.NamedTypeSpecifier.name.get -> string
+~Hl7.Cql.Model.Xml.NamedTypeSpecifier.name.set -> void
+~Hl7.Cql.Model.Xml.NamedTypeSpecifier.namespace.get -> string
+~Hl7.Cql.Model.Xml.NamedTypeSpecifier.namespace.set -> void
+~Hl7.Cql.Model.Xml.ParameterTypeSpecifier.parameterName.get -> string
+~Hl7.Cql.Model.Xml.ParameterTypeSpecifier.parameterName.set -> void
+~Hl7.Cql.Model.Xml.RelationshipInfo.context.get -> string
+~Hl7.Cql.Model.Xml.RelationshipInfo.context.set -> void
+~Hl7.Cql.Model.Xml.RelationshipInfo.relatedKeyElement.get -> string
+~Hl7.Cql.Model.Xml.RelationshipInfo.relatedKeyElement.set -> void
+~Hl7.Cql.Model.Xml.SearchInfo.comment.get -> string
+~Hl7.Cql.Model.Xml.SearchInfo.comment.set -> void
+~Hl7.Cql.Model.Xml.SearchInfo.definition.get -> string
+~Hl7.Cql.Model.Xml.SearchInfo.definition.set -> void
+~Hl7.Cql.Model.Xml.SearchInfo.description.get -> string
+~Hl7.Cql.Model.Xml.SearchInfo.description.set -> void
+~Hl7.Cql.Model.Xml.SearchInfo.label.get -> string
+~Hl7.Cql.Model.Xml.SearchInfo.label.set -> void
+~Hl7.Cql.Model.Xml.SearchInfo.name.get -> string
+~Hl7.Cql.Model.Xml.SearchInfo.name.set -> void
+~Hl7.Cql.Model.Xml.SearchInfo.path.get -> string
+~Hl7.Cql.Model.Xml.SearchInfo.path.set -> void
+~Hl7.Cql.Model.Xml.SearchInfo.type.get -> string
+~Hl7.Cql.Model.Xml.SearchInfo.type.set -> void
+~Hl7.Cql.Model.Xml.SearchInfo.typeSpecifier.get -> Hl7.Cql.Model.Xml.TypeSpecifier
+~Hl7.Cql.Model.Xml.SearchInfo.typeSpecifier.set -> void
+~Hl7.Cql.Model.Xml.SimpleTypeInfo.name.get -> string
+~Hl7.Cql.Model.Xml.SimpleTypeInfo.name.set -> void
+~Hl7.Cql.Model.Xml.SimpleTypeInfo.namespace.get -> string
+~Hl7.Cql.Model.Xml.SimpleTypeInfo.namespace.set -> void
+~Hl7.Cql.Model.Xml.SimpleTypeInfo.target.get -> string
+~Hl7.Cql.Model.Xml.SimpleTypeInfo.target.set -> void
+~Hl7.Cql.Model.Xml.TupleTypeInfo.element.get -> Hl7.Cql.Model.Xml.TupleTypeInfoElement[]
+~Hl7.Cql.Model.Xml.TupleTypeInfo.element.set -> void
+~Hl7.Cql.Model.Xml.TupleTypeInfoElement.elementType.get -> string
+~Hl7.Cql.Model.Xml.TupleTypeInfoElement.elementType.set -> void
+~Hl7.Cql.Model.Xml.TupleTypeInfoElement.elementTypeSpecifier.get -> Hl7.Cql.Model.Xml.TypeSpecifier
+~Hl7.Cql.Model.Xml.TupleTypeInfoElement.elementTypeSpecifier.set -> void
+~Hl7.Cql.Model.Xml.TupleTypeInfoElement.name.get -> string
+~Hl7.Cql.Model.Xml.TupleTypeInfoElement.name.set -> void
+~Hl7.Cql.Model.Xml.TupleTypeInfoElement.type.get -> string
+~Hl7.Cql.Model.Xml.TupleTypeInfoElement.type.set -> void
+~Hl7.Cql.Model.Xml.TupleTypeInfoElement.typeSpecifier.get -> Hl7.Cql.Model.Xml.TypeSpecifier
+~Hl7.Cql.Model.Xml.TupleTypeInfoElement.typeSpecifier.set -> void
+~Hl7.Cql.Model.Xml.TupleTypeSpecifier.element.get -> Hl7.Cql.Model.Xml.TupleTypeSpecifierElement[]
+~Hl7.Cql.Model.Xml.TupleTypeSpecifier.element.set -> void
+~Hl7.Cql.Model.Xml.TupleTypeSpecifierElement.elementType.get -> Hl7.Cql.Model.Xml.TypeSpecifier
+~Hl7.Cql.Model.Xml.TupleTypeSpecifierElement.elementType.set -> void
+~Hl7.Cql.Model.Xml.TupleTypeSpecifierElement.name.get -> string
+~Hl7.Cql.Model.Xml.TupleTypeSpecifierElement.name.set -> void
+~Hl7.Cql.Model.Xml.TypeInfo.baseType.get -> string
+~Hl7.Cql.Model.Xml.TypeInfo.baseType.set -> void
+~Hl7.Cql.Model.Xml.TypeInfo.baseTypeSpecifier.get -> Hl7.Cql.Model.Xml.TypeSpecifier
+~Hl7.Cql.Model.Xml.TypeInfo.baseTypeSpecifier.set -> void
+~Hl7.Cql.Model.Xml.TypeParameterInfo.constraint.get -> string
+~Hl7.Cql.Model.Xml.TypeParameterInfo.constraint.set -> void
+~Hl7.Cql.Model.Xml.TypeParameterInfo.constraintType.get -> string
+~Hl7.Cql.Model.Xml.TypeParameterInfo.constraintType.set -> void
+~Hl7.Cql.Model.Xml.TypeParameterInfo.name.get -> string
+~Hl7.Cql.Model.Xml.TypeParameterInfo.name.set -> void
+~Hl7.Cql.Model.Xml.TypeParameterInfo.typeSpecifier.get -> Hl7.Cql.Model.Xml.TypeSpecifier
+~Hl7.Cql.Model.Xml.TypeParameterInfo.typeSpecifier.set -> void
