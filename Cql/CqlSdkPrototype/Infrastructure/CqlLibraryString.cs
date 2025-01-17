@@ -1,6 +1,8 @@
-﻿namespace CqlSdkPrototype.Infrastructure;
+﻿using System.Text.RegularExpressions;
 
-public readonly record struct CqlLibraryString
+namespace CqlSdkPrototype.Infrastructure;
+
+public readonly partial record struct CqlLibraryString
 {
     public static CqlLibraryString Empty { get; } = new(CqlVersionedLibraryIdentifier.Empty, string.Empty);
 
@@ -9,6 +11,29 @@ public readonly record struct CqlLibraryString
         string cqlContent)
     {
         return new CqlLibraryString(versionedLibraryIdentifier, cqlContent);
+    }
+
+    [GeneratedRegex("""
+                    (\s+\r?\n?)*      # Skip whitespace and newlines
+                    library           # until "library" is found
+                    \s+
+                    (?<lib>\S+)       # The name of the library
+                    \s+
+                    version
+                    \s'(?<ver>[^']+)' # The version of the library between single quotes
+                    """,
+                    RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline)]
+    private static partial Regex LibraryNameAndVersionRegex();
+
+    public static CqlLibraryString FromCql(string cqlContent)
+    {
+        var match = LibraryNameAndVersionRegex().Match(cqlContent);
+        if (!match.Success)
+            throw new FormatException("Could not get library identifier and version from provided cql string/");
+        var lib = match.Groups["lib"].Value;
+        var ver = match.Groups["ver"].Value;
+        var libVer = CqlVersionedLibraryIdentifier.FromNameAndVersion(CqlLibraryIdentifier.Parse(lib), CqlLibraryVersion.Parse(ver));
+        return new CqlLibraryString(libVer, cqlContent);
     }
 
     private CqlLibraryString(
