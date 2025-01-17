@@ -91,8 +91,8 @@ namespace Hl7.Cql.CqlToElm
         public ISymbolScope EnterStatementScope(string statement) =>
             new LibraryBuilderSubscope(this, SymbolTable.EnterScope(statement));
 
-
-        public ISymbolScope EnterScope(string reason) =>
+     
+        public ISymbolScope EnterScope(string reason) => 
             new LibraryBuilderSubscope(this, CurrentScope.EnterScope(reason));
 
         [DebuggerDisplay("{Name,nq}")]
