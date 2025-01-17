@@ -26,6 +26,7 @@ using Expression = Hl7.Cql.Elm.Expression;
 using CqlSdkPrototype.Runtime.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Model;
 using ChoiceTypeSpecifier = Hl7.Cql.Elm.ChoiceTypeSpecifier;
 using IntervalTypeSpecifier = Hl7.Cql.Elm.IntervalTypeSpecifier;
@@ -108,8 +109,9 @@ namespace Hl7.Cql.CqlToElm.Test
             params string[] expectedErrors)
         {
             using var scope = services.CreateScope();
+            var libraryVisitor = scope.ServiceProvider.GetRequiredService<LibraryVisitor>();
             var builder = services.GetRequiredService<CqlToElmConverter>()
-                                  .GetBuilder(cql, scope);
+                                  .GetBuilder(libraryVisitor, cql);
             var lib = builder.Build();
             if (expectedErrors.Any())
                 lib.ShouldReportError(expectedErrors);
@@ -334,7 +336,8 @@ namespace Hl7.Cql.CqlToElm.Test
             string path = @"Input\FHIRHelpers-4.0.1.cql")
         {
             var text = File.ReadAllText(path);
-            var builder = DefaultConverter.GetBuilder(text, scope);
+            var libraryVisitor = scope.ServiceProvider.GetRequiredService<LibraryVisitor>();
+            var builder = DefaultConverter.GetBuilder(libraryVisitor, text);
             provider.Libraries.Add("FHIRHelpers", "4.0.1", builder);
         }
 
@@ -355,14 +358,14 @@ namespace Hl7.Cql.CqlToElm.Test
             bool enableListPromotion = false) =>
             new CqlApi(
                 LoggerFactory,
-                new CqlApiOptions(ProcessBatchItemExceptionHandling.ThrowException, models, modelInfos, ambiguousTypeBehavior, enableListPromotion ) );
+                new CqlApiOptions(ProcessBatchItemExceptionHandling.ThrowException, models ?? [CqlModel.ElmR1, CqlModel.Fhir401], modelInfos, ambiguousTypeBehavior, enableListPromotion ) );
 
         protected static ElmApi CreateElmApi(
             ImmutableHashSet<CqlModel>? models = null,
             ImmutableHashSet<ModelInfo>? modelInfos = null,
             AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
             bool enableListPromotion = false) =>
-                CreateCqlApi(models ?? [CqlModel.ElmR1, CqlModel.Fhir401], modelInfos, ambiguousTypeBehavior, enableListPromotion)
+                CreateCqlApi(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
                 .CreateElmApi(_ => new ElmApiOptions(
                                   ProcessBatchItemExceptionHandling.ThrowException,
                                   Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));

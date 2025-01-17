@@ -16,36 +16,14 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ExpressionRef_Across_Library()
         {
-//             string[] cqlFiles = [
-//                 """
-//                 library Foo version '1.0.0'
-//
-//                 define F: 'foo'
-//                 """,
-//
-//                 """
-//                 library Bar version '1.0.0'
-//
-//                 include Foo version '1.0.0' called foo
-//
-//                 define G: foo.F
-//                 """
-//             ];
-
             var cqlApi = CreateCqlApi();
 
-            // cqlApi
-            //     .AddCqlLibraries(cqlFiles.Select(CqlLibraryString.FromCql))
-            //     .Translate();
-            // var libs = cqlApi.AsExtendable().Entries.Values.Select(e => e.ElmLibrary).ToArray();
-            // var services = ServiceCollection().BuildServiceProvider();
             var foo = cqlApi.MakeLibrary("""
                                          library Foo version '1.0.0'
 
                                          define F: 'foo'
                                          """);
             foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
-            //libraryProvider.Libraries.Add(foo.Identifier.id, foo.Identifier.version, foo);
 
             var bar = cqlApi.MakeLibrary("""
                                          library Bar version '1.0.0'
@@ -60,46 +38,42 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ExpressionRef_Across_Library_NotFound()
         {
-            var services = ServiceCollection().BuildServiceProvider();
-            var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
+            var cqlApi = CreateCqlApi();
+            var foo = cqlApi.MakeLibrary("""
+                                         library Foo version '1.0.0'
 
-            var foo = MakeLibraryBuilder(services, @"
-                library Foo version '1.0.0'
-
-                define F: 'foo'
-            ");
+                                         define F: 'foo'
+                                         """);
             foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
-            libraryProvider.Libraries.Add(foo.Identifier!.id, foo.Identifier!.version, foo);
 
-            MakeLibrary(services, @"
-                library Bar version '1.0.0'
+            cqlApi.MakeLibrary("""
+                               library Bar version '1.0.0'
 
-                include Foo version '1.0.0' called foo
+                               include Foo version '1.0.0' called foo
 
-                define G: foo.DoesNotExist
-            ", "Could not resolve identifier DoesNotExist in library Foo.");
+                               define G: foo.DoesNotExist
+                               """,
+                               "Could not resolve identifier DoesNotExist in library Foo.");
         }
 
         [TestMethod]
-        public void FuncionRef_Across_Library()
+        public void FunctionRef_Across_Library()
         {
-            var services = ServiceCollection().BuildServiceProvider();
-            var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
-            var foo = MakeLibraryBuilder(services, @"
-                library Foo version '1.0.0'
+            var cqlApi = CreateCqlApi();
+            var foo = cqlApi.MakeLibrary("""
+                                         library Foo version '1.0.0'
 
-                define function Foo(): 'foo'
-            ");
+                                         define function Foo(): 'foo'
+                                         """);
             foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
-            libraryProvider.Libraries.Add(foo.Identifier!.id, foo.Identifier!.version, foo);
 
-            var bar = MakeLibrary(services, @"
-                library Bar version '1.0.0'
+            var bar = cqlApi.MakeLibrary("""
+                                         library Bar version '1.0.0'
 
-                include Foo version '1.0.0' called foo
+                                         include Foo version '1.0.0' called foo
 
-                define G: foo.Foo()
-            ");
+                                         define G: foo.Foo()
+                                         """);
             bar.Should().BeACorrectlyInitializedLibraryWithStatementOfType<FunctionRef>();
         }
 
@@ -107,23 +81,22 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FunctionRef_Across_Library_NotFound()
         {
-            var services = ServiceCollection().BuildServiceProvider();
-            var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
-            var foo = MakeLibraryBuilder(services, @"
-                library Foo version '1.0.0'
+            var cqlApi = CreateCqlApi();
+            var foo = cqlApi.MakeLibrary("""
+                                         library Foo version '1.0.0'
 
-                define function Foo(): 'foo'
-            ");
+                                         define function Foo(): 'foo'
+                                         """);
             foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
-            libraryProvider.Libraries.Add(foo.Identifier!.id, foo.Identifier!.version, foo);
 
-            MakeLibrary(services, @"
-                library Bar version '1.0.0'
+            cqlApi.MakeLibrary("""
+                               library Bar version '1.0.0'
 
-                include Foo version '1.0.0' called foo
+                               include Foo version '1.0.0' called foo
 
-                define G: foo.DoesNotExist()
-            ", "Could not resolve call to operator DoesNotExist with signature ().");
+                               define G: foo.DoesNotExist()
+                               """,
+                               "Could not resolve call to operator DoesNotExist with signature ().");
         }
     }
 }
