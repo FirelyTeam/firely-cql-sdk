@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Days: duration in days between @2023-01-01 and @2023-01-31
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -44,7 +44,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Days: days between @2023-01-01 and @2023-01-31
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -67,7 +67,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Months: duration in months between @2023-01-01 and @2023-02-01
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -89,7 +89,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Months: duration in weeks between @2023-01-01 and @2023-01-08
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -113,7 +113,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Months: duration in years between @2023-01-01 and @2024-02-01
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -144,7 +144,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Hours: duration in hours between @T12:00:00 and @T20:00:00
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -167,7 +167,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Minutes: duration in minutes between @T12:00:00 and @T20:00:00
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -190,7 +190,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Minutes: duration in seconds between @T12:00:00 and @T12:00:30
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -213,7 +213,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Milliseconds: duration in milliseconds between @T12:00:00.100 and @T12:00:00.300
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -251,7 +251,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private Duration_Between_DateTimes_Minutes: duration in minutes between @2023-01-01T12:00:00.100 and @2024-01-01T12:00:00.100
                 define private Duration_Between_DateTimes_Seconds: duration in seconds between @2023-01-01T12:00:00.100 and @2024-01-01T12:00:00.100
                 define private Duration_Between_DateTimes_Milliseconds: duration in milliseconds between @2023-01-01T12:00:00.100 and @2024-01-01T12:00:00.100
-            ", new string[0]);
+            ");
         }
 
         [TestMethod]
@@ -261,7 +261,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Months: duration in weeks between null and @2023-01-08
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -291,7 +291,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DurationTest version '1.0.0'
 
                 define d: duration in days of Interval[@2023-01-01, @2023-01-31]
-            ", new string[0]);
+            ");
             var db = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<DurationBetween>();
             db.operand.Should().HaveCount(2);
             var start = db.operand[0].Should().BeOfType<Start>().Subject;
@@ -324,7 +324,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DurationTest version '1.0.0'
 
                 define d: duration in days of Interval[@2023-01-01, @2023-01-31T12:30:45]
-            ", new string[0]);
+            ");
             var db = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<DurationBetween>();
             db.operand.Should().HaveCount(2);
             var start = db.operand[0].Should().BeOfType<Start>().Subject;
@@ -352,7 +352,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DurationTest version '1.0.0'
 
                 define d: difference in years of Interval[@2023-01-01, @2023-01-31]
-            ", new string[0]);
+            ");
             var db = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<DifferenceBetween>();
             db.operand.Should().HaveCount(2);
             var start = db.operand[0].Should().BeOfType<Start>().Subject;

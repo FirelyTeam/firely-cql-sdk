@@ -58,7 +58,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define function f(q Quantity):
                     convert q to weeks
-            ", new string[0]);
+            ");
             lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ConvertQuantity>();
 
         }

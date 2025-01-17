@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library WidthTest version '1.0.0'
 
                 define private Width_Integers: width of Interval[3,7]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -55,7 +55,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library WidthTest version '1.0.0'
 
                 define private Width_Integers_Null: width of (null as Interval<Integer>)
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -88,7 +88,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library WidthTest version '1.0.0'
 
                 define private Width_Integers_Error: width of Interval[1,null)
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

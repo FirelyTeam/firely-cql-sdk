@@ -44,7 +44,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntervalTest version '1.0.0'
 
                 define private Issue32: Interval[@2017-12-20T10:30:00, @2017-12-20T12:00:00] starts 1 day or less on or after day of start of Interval[@2017-12-20T11:00:00, @2017-12-21T21:00:00]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

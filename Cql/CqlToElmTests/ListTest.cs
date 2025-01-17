@@ -24,7 +24,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ListTest version '1.0.0'
 
                 define private Empty_List: { }
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -44,7 +44,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ListTest version '1.0.0'
 
                 define private List_Integer: { 1, 2, 3 }
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -64,7 +64,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ListTest version '1.0.0'
 
                 define private List_Mixed_ToQuantity: { 1, 2L, 3.0, 4.0 '1' }
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -89,7 +89,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ListTest version '1.0.0'
 
                 define private List_Mixed_ToDecimal: { 1, 2L, 3.0 }
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -109,7 +109,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ListTest version '1.0.0'
 
                 define private List_Mixed_ToLong: { 1, 2L }
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -129,7 +129,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ListTest version '1.0.0'
 
                 define private List_Mixed_Any: { 1, 'string' }
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -150,7 +150,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ListTest version '1.0.0'
 
                 define private List_Nulls: { null, null }
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -188,7 +188,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ListTest version '1.0.0'
 
                 define private l: { Tuple { b: 2, a: 1 }, Tuple { a: 1, b: 2 } }
-            ", new string[0]);
+            ");
             var l = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<List>();
             var lts = l.resultTypeSpecifier.Should().BeOfType<ListTypeSpecifier>().Subject;
             var tts = lts.elementType.Should().BeOfType<TupleTypeSpecifier>().Subject;

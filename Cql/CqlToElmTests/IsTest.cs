@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IsTest version '1.0.0'
 
                 define private Integer_Is_Decimal: 1 is System.Decimal
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -49,7 +49,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IsTest version '1.0.0'
 
                 define private True_Is_Qualified_Boolean: true is System.Boolean
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -78,7 +78,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IsTest version '1.0.0'
 
                 define private True_Is_Unqualified_Boolean: true is Boolean
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -107,7 +107,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IsTest version '1.0.0'
 
                 define private Null_Is_Boolean: null is Boolean
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -132,7 +132,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IsTest version '1.0.0'
 
                 define private Null_Is_Any: null is Any
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -156,7 +156,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IsTest version '1.0.0'
 
                 define private List_Is_List_of_Qualified_Integer: { 1,2,3 } is List<System.Integer>
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -183,7 +183,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IsTest version '1.0.0'
 
                 define private Interval_Is_Unqualified_Integer_Interval: Interval[1, 10] is Interval<Integer>
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -209,7 +209,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IsTest version '1.0.0'
 
                 define private Integer_Interval_Is_Decimal_Interval_False: Interval[1, 10] is Interval<Decimal>
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -235,7 +235,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IsTest version '1.0.0'
 
                 define private Integer_Is_Choice: 1 is Choice<Integer,Decimal>
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -262,7 +262,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IsTest version '1.0.0'
 
                 define private String_Is_Choice_False: 'hello' is Choice<Integer,Decimal>
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -290,7 +290,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IsTest version '1.0.0'
 
                 define private Tuple_Is_Tuple: { x: 1, y: 2 } is Tuple { x Integer, y Integer }
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -315,7 +315,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IsTest version '1.0.0'
 
                 define private Tuple_Is_Tuple: Tuple { x: 1, y: 2 } is Tuple { x Decimal, y Integer }
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

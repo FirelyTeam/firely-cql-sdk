@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library XorTest version '1.0.0'
 
                 define private True_Xor_False: true xor false
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -76,7 +76,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library XorTest version '1.0.0'
 
                 define private True_Xor_True: true xor true
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -132,7 +132,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library XorTest version '1.0.0'
 
                 define private False_Xor_False: false xor false
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -188,7 +188,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library XorTest version '1.0.0'
 
                 define private True_Xor_Null: true xor null
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -243,7 +243,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library XorTest version '1.0.0'
 
                 define private Null_Xor_False: null xor false
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -299,7 +299,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library XorTest version '1.0.0'
 
                 define private Null_Xor_Null: null xor null
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

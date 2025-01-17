@@ -21,7 +21,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: point from Interval[4,4]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -55,7 +55,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: point from Interval[4,5)
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -90,7 +90,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers_Null: point from (null as Interval<Integer>)
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -123,7 +123,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers_Error: point from Interval[1,4]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

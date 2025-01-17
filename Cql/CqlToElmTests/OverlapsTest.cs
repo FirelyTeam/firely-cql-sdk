@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library OverlapsTest version '1.0.0'
 
                 define private Overlaps: Interval[0, 4] overlaps Interval[1, 4]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -49,7 +49,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library OverlapsTest version '1.0.0'
 
                 define private Overlaps_Before:  Interval[0, 4] overlaps before Interval[1, 4]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -78,7 +78,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library OverlapsTest version '1.0.0'
 
                 define private Overlaps_After: Interval[0, 4] overlaps after Interval[1, 4]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -107,7 +107,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library OverlapsTest version '1.0.0'
 
                 define private Overlaps_Is_Null: Interval[6, 10] overlaps (null as Interval<Integer>)
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -135,7 +135,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library OverlapsTest version '1.0.0'
 
                 define private Overlaps_After_Day: Interval[@2023-03-01, @2023-06-01] overlaps after month of Interval[@2023-01-01, @2023-03-01]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -164,7 +164,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library OverlapsTest version '1.0.0'
 
                 define private Overlaps_Day: Interval[@2023-01-01, @2023-06-01] overlaps month of Interval[@2023-07-01, @2023-10-01]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

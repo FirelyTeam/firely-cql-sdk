@@ -316,7 +316,7 @@ namespace Hl7.Cql.CqlToElm.Test
             return CqlApi.MakeLibrary($@"
                 library Test version '1.0.0'
 
-                define private ""{memberName}"": {expression}", new string[0]);
+                define private ""{memberName}"": {expression}");
         }
 
         protected static Expression Expression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
@@ -357,7 +357,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 LoggerFactory,
                 new CqlApiOptions(ProcessBatchItemExceptionHandling.ThrowException, models, modelInfos, ambiguousTypeBehavior, enableListPromotion ) );
 
-        protected static CqlApi CqlApi { get; } = CreateCqlApi();
+        protected static CqlApi CqlApi => CreateCqlApi(models: [CqlModel.ElmR1, CqlModel.Fhir401]);
 
         protected static ElmApi CreateElmApi(
             ImmutableHashSet<CqlModel>? models = null,
@@ -392,6 +392,20 @@ namespace Hl7.Cql.CqlToElm.Test
                 library.ShouldSucceed();
 
             return library;
+        }
+
+        public static Library MakeLibraryFromExpression(
+            this CqlApi cqlApi,
+            string expression)
+        {
+            var cql = $"""
+                       library IsTest version '1.0.0'
+
+                       define private predicate: {expression}
+                       """;
+
+            var lib = cqlApi.MakeLibrary(cql);
+            return lib;
         }
     }
 }

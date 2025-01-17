@@ -24,7 +24,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Integer_by_Integer version '1.0.0'
 
                 define private TruncatedDivide_Integer_by_Integer: 2 div 4
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -80,7 +80,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Integer_by_Long version '1.0.0'
 
                 define private TruncatedDivide_Integer_by_Long: 2 div 3L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -136,7 +136,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Integer_by_Decimal version '1.0.0'
 
                 define private TruncatedDivide_Integer_by_Decimal: 2 div 3.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -192,7 +192,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Integer_by_Quantity version '1.0.0'
 
                 define private TruncatedDivide_Integer_by_Quantity: 10 div 2.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -252,7 +252,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Integer_by_Null version '1.0.0'
 
                 define private TruncatedDivide_Integer_by_Null: 1 div null
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -306,7 +306,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Null_by_Integer version '1.0.0'
 
                 define private TruncatedDivide_Null_by_Integer: null div 1
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -364,7 +364,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Long_by_Integer version '1.0.0'
 
                 define private TruncatedDivide_Long_by_Integer: 10L div 2
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -420,7 +420,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Long_by_Long version '1.0.0'
 
                 define private TruncatedDivide_Long_by_Long: 100L div 10L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -476,7 +476,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Long_by_Decimal version '1.0.0'
 
                 define private TruncatedDivide_Long_by_Decimal: -3L div 2.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -532,7 +532,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Long_by_Quantity version '1.0.0'
 
                 define private TruncatedDivide_Long_by_Quantity: 20L div 5.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -591,7 +591,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Long_by_Null version '1.0.0'
 
                 define private TruncatedDivide_Long_by_Null: 1L div null
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -645,7 +645,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Null_by_Long version '1.0.0'
 
                 define private TruncatedDivide_Null_by_Long: null div 1L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -703,7 +703,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Decimal_by_Integer version '1.0.0'
 
                 define private TruncatedDivide_Decimal_by_Integer: 0.0 div 3
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -759,7 +759,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DefaultConverter version '1.0.0'
 
                 define private DefaultConverter: 5.0 div 5L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -815,7 +815,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Decimal_by_Decimal version '1.0.0'
 
                 define private TruncatedDivide_Decimal_by_Decimal: -10.0 div 10.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -871,7 +871,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Decimal_by_Quantity version '1.0.0'
 
                 define private TruncatedDivide_Decimal_by_Quantity: 3.0 div 2.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -930,7 +930,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Decimal_by_Null version '1.0.0'
 
                 define private TruncatedDivide_Decimal_by_Null: 1.0 div null
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -984,7 +984,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Null_by_Decimal version '1.0.0'
 
                 define private TruncatedDivide_Null_by_Decimal: null div 1.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1042,7 +1042,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Quantity_by_Quantity version '1.0.0'
 
                 define private TruncatedDivide_Quantity_by_Quantity: 3.0 '1' div 2.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1101,7 +1101,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Quantity_by_Null version '1.0.0'
 
                 define private TruncatedDivide_Quantity_by_Null: 3.0 '1' div null
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1156,7 +1156,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TruncatedDivide_Null_by_Quantity version '1.0.0'
 
                 define private TruncatedDivide_Null_by_Quantity: null div 3.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Empty()
         {
-            Assert.ThrowsException<ArgumentException>(() => CqlApi.MakeLibrary(string.Empty, new string[0]));
+            Assert.ThrowsException<ArgumentException>(() => CqlApi.MakeLibrary(string.Empty));
             var ms = new MemoryStream();
             Assert.ThrowsException<ArgumentException>(() => DefaultConverter.ConvertLibrary(ms));
         }
@@ -30,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Identifier_AllTerms_String()
         {
-            var library = CqlApi.MakeLibrary("library String version '4.0.1'", new string[0]);
+            var library = CqlApi.MakeLibrary("library String version '4.0.1'");
             Assert.IsNotNull(library);
             Assert.IsNotNull(library.identifier);
             Assert.AreEqual("String", library.identifier.id);
@@ -42,7 +42,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Identifier_AllTerms_Namespace()
         {
-            var library = CqlApi.MakeLibrary("library Namespace.Lib version '4.0.1'", new string[0]);
+            var library = CqlApi.MakeLibrary("library Namespace.Lib version '4.0.1'");
             Assert.IsNotNull(library);
             Assert.IsNotNull(library.identifier);
             Assert.AreEqual("Lib", library.identifier.id);
@@ -54,7 +54,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Identifier_Id_Only()
         {
-            var library = CqlApi.MakeLibrary("library Lib", new string[0]);
+            var library = CqlApi.MakeLibrary("library Lib");
             Assert.IsNotNull(library);
             Assert.IsNotNull(library.identifier);
             Assert.AreEqual("Lib", library.identifier.id);
@@ -66,7 +66,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Identifier_Id_Namespace()
         {
-            var library = CqlApi.MakeLibrary("library Namespace.Lib", new string[0]);
+            var library = CqlApi.MakeLibrary("library Namespace.Lib");
             Assert.IsNotNull(library);
             Assert.IsNotNull(library.identifier);
             Assert.AreEqual("Lib", library.identifier.id);
@@ -350,7 +350,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 private codesystem Name: 'id' version 'version string'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.codeSystems);
             Assert.AreEqual(1, library.codeSystems.Length);
             Assert.AreEqual(AccessModifier.Private, library.codeSystems[0].accessLevel);
@@ -366,7 +366,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 codesystem Name: 'id' version 'version string'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.codeSystems);
             Assert.AreEqual(1, library.codeSystems.Length);
             Assert.AreEqual(AccessModifier.Public, library.codeSystems[0].accessLevel);
@@ -382,7 +382,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 private codesystem Name: 'id'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.codeSystems);
             Assert.AreEqual(1, library.codeSystems.Length);
             Assert.AreEqual(AccessModifier.Private, library.codeSystems[0].accessLevel);
@@ -398,7 +398,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 codesystem Name: 'id'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.codeSystems);
             Assert.AreEqual(1, library.codeSystems.Length);
             Assert.AreEqual(AccessModifier.Public, library.codeSystems[0].accessLevel);
@@ -416,7 +416,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 private codesystem Name: 'id' version 'version string'
                 private codesystem Name2: 'id2' version 'version2'
 
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.codeSystems);
             Assert.AreEqual(2, library.codeSystems.Length);
 
@@ -442,7 +442,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id' version 'version string' codesystems { lib.cs1 }
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.valueSets);
             Assert.AreEqual(1, library.valueSets.Length);
             Assert.AreEqual(AccessModifier.Private, library.valueSets[0].accessLevel);
@@ -462,7 +462,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id' version 'version string' codesystems { lib.cs1, cs2 }
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.valueSets);
             Assert.AreEqual(1, library.valueSets.Length);
             Assert.AreEqual(AccessModifier.Private, library.valueSets[0].accessLevel);
@@ -485,7 +485,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id' version 'version string' codesystems { lib.cs1, cs2, lib2.cs3 }
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.valueSets);
             Assert.AreEqual(1, library.valueSets.Length);
             Assert.AreEqual(AccessModifier.Private, library.valueSets[0].accessLevel);
@@ -509,7 +509,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 valueset Name: 'id' version 'version string'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.valueSets);
             Assert.AreEqual(1, library.valueSets.Length);
             Assert.AreEqual(AccessModifier.Public, library.valueSets[0].accessLevel);
@@ -525,7 +525,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.valueSets);
             Assert.AreEqual(1, library.valueSets.Length);
             Assert.AreEqual(AccessModifier.Private, library.valueSets[0].accessLevel);
@@ -541,7 +541,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 valueset Name: 'id'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.valueSets);
             Assert.AreEqual(1, library.valueSets.Length);
             Assert.AreEqual(AccessModifier.Public, library.valueSets[0].accessLevel);
@@ -559,7 +559,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 private valueset Name: 'id' version 'version string'
                 private valueset Name2: 'id2' version 'version2'
 
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.valueSets);
             Assert.AreEqual(2, library.valueSets.Length);
 
@@ -580,7 +580,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 valueset Name: 'id' codesystems { lib.cs1, cs2, lib2.cs3 }
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.valueSets);
             Assert.AreEqual(1, library.valueSets.Length);
             Assert.AreEqual(AccessModifier.Public, library.valueSets[0].accessLevel);
@@ -608,7 +608,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 code Name: 'id' from lib.cs1
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.codes);
             Assert.AreEqual(1, library.codes.Length);
             Assert.AreEqual(AccessModifier.Public, library.codes[0].accessLevel);
@@ -626,7 +626,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 private code Name: 'id' from lib.cs1
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.codes);
             Assert.AreEqual(1, library.codes.Length);
             Assert.AreEqual(AccessModifier.Private, library.codes[0].accessLevel);
@@ -645,7 +645,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 code Name: 'id' from lib.cs1 display 'Code display text'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.codes);
             Assert.AreEqual(1, library.codes.Length);
             Assert.AreEqual(AccessModifier.Public, library.codes[0].accessLevel);
@@ -664,7 +664,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 private code Name: 'id' from lib.cs1 display 'Code display text'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.codes);
             Assert.AreEqual(1, library.codes.Length);
             Assert.AreEqual(AccessModifier.Private, library.codes[0].accessLevel);
@@ -687,7 +687,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 private concept Name: { lib.code1, code2, lib2.code3 } display 'My concept'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.concepts);
             Assert.AreEqual(1, library.concepts.Length);
             Assert.AreEqual(AccessModifier.Private, library.concepts[0].accessLevel);
@@ -715,7 +715,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 concept Name: { lib.code1 }
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.concepts);
             Assert.AreEqual(1, library.concepts.Length);
             Assert.AreEqual(AccessModifier.Public, library.concepts[0].accessLevel);
@@ -740,7 +740,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 code ""code3"": 'code3' from ""SystemA""
 
                 private concept Name: { ""code1"", ""code2"", ""code3"" } display 'My concept'
-            ", new string[0]);
+            ");
             var lib = LibraryExpressionBuilder;
             _ = lib.ProcessLibrary(library);
         }
@@ -757,7 +757,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 private parameter Name System.String default 'default value'
-            ", new string[0]);
+            ");
 
             var par0 = library.parameters.Should().ContainSingle().Subject;
             par0.accessLevel.Should().Be(AccessModifier.Private);
@@ -773,7 +773,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 private parameter Name System.Decimal default 1
-            ", new string[0]);
+            ");
 
             var par0 = library.parameters.Should().ContainSingle().Subject;
             par0.parameterTypeSpecifier.Should().Be(SystemTypes.DecimalType);
@@ -788,7 +788,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 private parameter Name default 'default value'
-            ", new string[0]);
+            ");
 
             var par0 = library.parameters.Should().ContainSingle().Subject;
             par0.parameterTypeSpecifier.Should().Be(SystemTypes.StringType);
@@ -802,7 +802,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludeTest version '1.0.0'
 
                 private parameter Name System.String
-            ", new string[0]);
+            ");
 
             var par0 = library.parameters.Should().ContainSingle().Subject;
             par0.parameterTypeSpecifier.Should().Be(SystemTypes.StringType);

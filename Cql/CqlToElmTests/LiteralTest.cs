@@ -26,7 +26,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DecimalTest version '1.0.0'
 
                 define private String_Literal: 'test'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -55,7 +55,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DecimalTest version '1.0.0'
 
                 define private Decimal_Literal: 1.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -82,7 +82,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DecimalTest version '1.0.0'
 
                 define private Decimal_Literal: -123.567
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -116,7 +116,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     library Decimal_Errors_2 version '1.0.0'
 
                     define private Decimal_Literal: -12345678901234567890.12345678
-                ", new string[0]).ShouldSucceed();
+                ").ShouldSucceed();
 
             // 29 digits
             TestExtensions.MakeLibrary(CqlApi, @"
@@ -138,7 +138,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntegerTest version '1.0.0'
 
                 define private Integer_Literal: 1
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -165,7 +165,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntegerTest version '1.0.0'
 
                 define private Integer_Literal: -123456789
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -215,7 +215,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library LongTest version '1.0.0'
 
                 define private Long_Literal: 2147483648L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.locator);
@@ -242,7 +242,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library LongTest version '1.0.0'
 
                 define private Long_Literal:  -2147483649L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.locator);
@@ -281,7 +281,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TrueTest version '1.0.0'
 
                 define private True_Literal: true
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -304,7 +304,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library FalseTest version '1.0.0'
 
                 define private False_Literal: false
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -332,7 +332,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library NullTest version '1.0.0'
 
                 define private Null_Test: null
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -360,7 +360,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DateTest version '1.0.0'
 
                 define private Date_Literal: @2023-01-02
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -428,7 +428,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DateTest version '1.0.0'
 
                 define private Date_Literal: @2023-01
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -483,7 +483,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DateTest version '1.0.0'
 
                 define private Date_Literal: @2023
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -530,7 +530,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DateTest version '1.0.0'
 
                 define private Date_Literal: @2023-01-02T01:23:45.678+01:30
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -663,7 +663,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DateTest version '1.0.0'
 
                 define private Date_Literal: @2023-01-02T01:23:45+01:30
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -784,7 +784,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DateTest version '1.0.0'
 
                 define private Date_Literal: @2023-01-02T01:23+01:30
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -893,7 +893,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DateTest version '1.0.0'
 
                 define private Date_Literal: @2023-01-02T01+01:30
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -990,7 +990,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DateTest version '1.0.0'
 
                 define private Date_Literal: @2023-01-02T01
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1085,7 +1085,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TimeTest version '1.0.0'
 
                 define private Time_Literal: @T01:23:45.678
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1167,7 +1167,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TimeTest version '1.0.0'
 
                 define private Time_Literal: @T01:23:45
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1233,7 +1233,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TimeTest version '1.0.0'
 
                 define private Time_Literal: @T01:23
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1287,7 +1287,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TimeTest version '1.0.0'
 
                 define private Time_Literal: @T01
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1333,7 +1333,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 6.2 'gm/cm3'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1355,7 +1355,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 6 year
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1377,7 +1377,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 6 years
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1399,7 +1399,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 1.245671213 month
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1421,7 +1421,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 1.245671213 months
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1443,7 +1443,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 0 day
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1465,7 +1465,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 0 days
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1487,7 +1487,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 0.0 hour
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1509,7 +1509,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 0.0 hours
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1531,7 +1531,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 0.25 minute
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1553,7 +1553,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 0.25 minutes
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1575,7 +1575,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 1 second
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1598,7 +1598,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 1 seconds
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1620,7 +1620,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 2000000 millisecond
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1642,7 +1642,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library QuantityTest version '1.0.0'
 
                 define private Quantity_Literal: 2000000 milliseconds
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1666,7 +1666,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library RatioTest version '1.0.0'
 
                 define private Ratio_Literal:  6 'gm' : 10 'cm3'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1693,7 +1693,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var output = CreateLibraryForExpression("1");
             var literal = output.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
             // var context = FhirCqlContext.ForBundle();
-            var equalsOverload = InvocationBuilder.MatchSignature(SystemLibrary.Equal, new Expression[] { ceiling, literal });
+            var equalsOverload = InvocationBuilder.MatchSignature(SystemLibrary.Equal, ceiling, literal);
             equalsOverload.Compatible.Should().BeTrue();
             var invokeEquals = InvocationBuilder.Invoke(equalsOverload, null);
             invokeEquals.GetErrors().Should().BeEmpty();

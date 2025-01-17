@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library OrTest version '1.0.0'
 
                 define private True_Or_False: true or false
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -76,7 +76,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library OrTest version '1.0.0'
 
                 define private True_Or_True: true or true
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -132,7 +132,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library OrTest version '1.0.0'
 
                 define private False_Or_False: false or false
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -188,7 +188,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library OrTest version '1.0.0'
 
                 define private True_Or_Null: true or null
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -244,7 +244,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library OrTest version '1.0.0'
 
                 define private Null_Or_False: null or false
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -300,7 +300,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library OrTest version '1.0.0'
 
                 define private Null_Or_Null: null or null
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

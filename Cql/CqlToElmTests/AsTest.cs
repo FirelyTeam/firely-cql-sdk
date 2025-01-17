@@ -38,7 +38,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 valueset ""vs"": 'http://xyz.com'
 
                 define private ValueSet_As_Vocabulary: ""vs"" as System.Vocabulary
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -69,7 +69,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library AsTest version '1.0.0'
 
                 define private Null_As_Decimal: null as System.Decimal
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -145,13 +145,13 @@ namespace Hl7.Cql.CqlToElm.Test
                 using FHIR version '4.0.1'
 
                 define private function f(id FHIR.id): id as FHIR.string
-            ", new string[0]);
+            ");
             var @as = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
             var lambdas = LibraryExpressionBuilder.ProcessLibrary(lib);
             var delegates = lambdas.CompileAll();
-            var dg = delegates[lib.GetVersionedIdentifier(), "f", [typeof(Hl7.Fhir.Model.Id)]];
+            var dg = delegates[lib.GetVersionedIdentifier(), "f", typeof(Hl7.Fhir.Model.Id)];
             var ctx = FhirCqlContext.ForBundle();
-            var result = dg.DynamicInvoke([ctx, new Hl7.Fhir.Model.Id("id")]);
+            var result = dg.DynamicInvoke(ctx, new Hl7.Fhir.Model.Id("id"));
             var fs = result.Should().BeOfType<Hl7.Fhir.Model.FhirString>().Subject;
             fs.Value.Should().Be("id");
         }
@@ -170,7 +170,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define private function f(choice Choice<FHIR.dateTime, FHIR.Range>):
                     choice as FHIR.Range
-            ", new string[0]);
+            ");
             var lambdas = LibraryExpressionBuilder.ProcessLibrary(lib);
         }
     }

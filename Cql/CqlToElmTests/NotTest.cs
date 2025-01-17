@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library NotTest version '1.0.0'
 
                 define private Not_True: not true
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -66,7 +66,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library NotTest version '1.0.0'
 
                 define private Not_False: not false
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -111,7 +111,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library NotTest version '1.0.0'
 
                 define private Not_Null: not null
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

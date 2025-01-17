@@ -26,7 +26,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 context FHIR.Patient
                 context Observation
-            ", new string[0]);
+            ");
 
             Assert.IsNotNull(lib.contexts);
             lib.contexts.Select(c => c.name).Should().BeEquivalentTo("FHIR.Patient", "Observation");
@@ -102,7 +102,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 using FHIR version '4.0.1'
 
                 define patients: [Patient]
-            ", new string[0]);
+            ");
             var retrieve = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Retrieve>();
             retrieve.context.Should().BeNull();
         }

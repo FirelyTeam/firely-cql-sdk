@@ -30,9 +30,22 @@ public class CqlApi :
     private CqlApi WithEntries(
         CqlTranslationEntriesMap entries)
     {
+        if (entries.Count > _state.Entries.Count)
+        {
+            // For now we assume only files can be added, so if the counts are the same, we assume nothing has changed.
+            for (int i = _state.Entries.Count; i < entries.Count; i++)
+            {
+                var entry = entries.ElementAt(i);
+                _state.Logger.LogInformation("Adding cql library to translation: {id}", entry.Key);
+                _state.MemoryLibraryProvider.Libraries.Add(
+                    entry.Key.Identifier.ToString(),
+                    entry.Key.Version.ToString(),
+                    LibraryBuilder.CreateFromExisting(entry.Value.ElmLibrary!));
+            }
+        }
+
         _state = _state with { Entries = entries };
         return this;
-        // return new CqlApi(_state with { Entries = entries });
     }
 
     public CqlApi WithOptions(
@@ -127,6 +140,7 @@ public class CqlApi :
         void ProcessLibrary(CqlVersionedLibraryIdentifier versionedIdentifier, CqlApiStateEntry cqlTranslationEntry)
         {
             var cql = cqlTranslationEntry.CqlLibraryString.Cql;
+            cqlToElmConverter.GetBuilder()
             var library = cqlToElmConverter.ConvertLibrary(new StringReader(cql));
             entriesBuilder[versionedIdentifier] = cqlTranslationEntry with { ElmLibrary = library };
         }

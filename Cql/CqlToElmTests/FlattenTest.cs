@@ -23,7 +23,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ListTest version '1.0.0'
 
                 define private FlattenEmpty: Flatten({{},{}})
-            ", new string[0]).ShouldSucceed();
+            ").ShouldSucceed();
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -41,7 +41,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ListTest version '1.0.0'
 
                 define private FlattenEmpty: Flatten({{},{}})
-            ", new string[0]);
+            ");
         }
 
         [TestMethod]
@@ -66,7 +66,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 valueset ""Two"": 'https://hl7.org/two'
 
                 define f: Flatten({""One"", ""Two""})
-            ", new string[0]);
+            ");
             var flatten = library.Should()
                 .BeACorrectlyInitializedLibraryWithStatementOfType<Flatten>();
             flatten.Should().HaveType(SystemTypes.CodeType.ToListType());
@@ -84,7 +84,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define private f:
                   flatten ( { { choice }, { choice } } )
-            ", new string[0]);
+            ");
             var choiceType = library.statements[0].expression.resultTypeSpecifier;
             choiceType.Should().BeOfType<ChoiceTypeSpecifier>();
             var flatten = library.statements[1].expression.Should().BeOfType<Flatten>().Subject;

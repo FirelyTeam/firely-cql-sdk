@@ -27,7 +27,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library FuncTest version '1.0.0'
                 using FHIR version '4.0.1'
                 context Patient
-                define private fluent function Two(): 2", new string[0]);
+                define private fluent function Two(): 2");
 
             var f = shouldDefineFunction(library, "Two");
             f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
@@ -42,7 +42,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
-                define public function Ext() returns String: external", new string[0]);
+                define public function Ext() returns String: external");
 
             var f = shouldDefineFunction(library, "Ext");
             f.resultTypeSpecifier.Should().Be(SystemTypes.StringType);
@@ -66,7 +66,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
-                define function Two() returns Integer: 2", new string[0]);
+                define function Two() returns Integer: 2");
 
             var f = shouldDefineFunction(library, "Two");
             f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
@@ -77,7 +77,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
-                define function Two() returns Any: 2", new string[0]);
+                define function Two() returns Any: 2");
 
             var f = shouldDefineFunction(library, "Two");
             f.resultTypeSpecifier.Should().Be(SystemTypes.AnyType);
@@ -88,7 +88,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
-                define function Double(a Integer): a*2", new string[0]);
+                define function Double(a Integer): a*2");
 
             var f = shouldDefineFunction(library, "Double");
             f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
@@ -111,7 +111,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var library = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
                 define b: 5
-                define function Double(a Integer): b", new string[0]);
+                define function Double(a Integer): b");
 
             var f = shouldDefineFunction(library, "Double");
             f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
@@ -126,7 +126,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var library = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
                 define a: 5
-                define function Replace(a String): a", new string[0]);
+                define function Replace(a String): a");
 
             var f = shouldDefineFunction(library, "Replace");
             f.resultTypeSpecifier.Should().Be(SystemTypes.StringType);
@@ -139,7 +139,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var library = CqlApi.MakeLibrary(@"
                 library FuncTest version '1.0.0'
                 define b: a                
-                define a: 5", new string[0]);
+                define a: 5");
 
             var f = library.ShouldDefine<ExpressionDef>("b");
             f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
@@ -169,7 +169,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
             define fluent function ""Interval""(coverage FHIR.Coverage):
                 (coverage.period as FHIR.Period).""To date interval""()
-            ", new string[0]);
+            ");
             lib.GetErrors().Should().BeEmpty();
         }
         [TestMethod]
@@ -258,7 +258,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     else
                         null
                 end
-            ", new string[0]);
+            ");
             var cs = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Case>();
             cs.Should().HaveType(SystemTypes.DateType);
 
@@ -271,7 +271,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library FuncTest version '1.0.0'
 
                 define function Add(left Integer, right Integer) returns Integer: external
-            ", new string[0]);
+            ");
             lib.statements.Should().HaveCount(1);
             var fd = lib.statements[0].Should().BeOfType<FunctionDef>().Subject;
             fd.external.Should().BeTrue();
@@ -286,9 +286,9 @@ namespace Hl7.Cql.CqlToElm.Test
                 library FuncTest version '1.0.0'
 
                 define function ToInteger(decimal System.Decimal) returns System.Integer: external
-            ", new string[0]);
+            ");
             var lambdas = LibraryExpressionBuilder.ProcessLibrary(lib);
-            var expr = lambdas["FuncTest-1.0.0", "ToInteger", [typeof(CqlContext), typeof(decimal?)]];
+            var expr = lambdas["FuncTest-1.0.0", "ToInteger", typeof(CqlContext), typeof(decimal?)];
             expr.Parameters.Should().HaveCount(2);
             expr.Parameters[1].Name.Should().Be("decimal");
             _ = Compile(lib);

@@ -23,7 +23,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Integer_NotEquals_Integer: 1 != 2
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -79,7 +79,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Integer_NotEquals_Integer_False: 1 != 1
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -135,7 +135,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Integer_NotEquals_Long: 1 != 2L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -191,7 +191,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Integer_NotEquals_Decimal_False: 1 != 1.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -248,7 +248,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Integer_NotEquals_Quantity: 1 != 2.0 'g'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -304,7 +304,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Integer_NotEquals_Quantity_False: 1 != 1.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -380,7 +380,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Long_NotEquals_Long: 1L != 2L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -436,7 +436,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Long_NotEquals_Long_False: 1L != 1L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -492,7 +492,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Long_NotEquals_Long: 1L != 2
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -548,7 +548,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Long_DoesNotEqual_Decimal: 1L != 1.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -605,7 +605,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Long_NotEquals_Quantity: 1L != 2.0 'g'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -661,7 +661,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Long_DoesNotEqual_Quantity: 1L != 1.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -737,7 +737,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_NotEquals_Decimal: 1.0 != 2.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -793,7 +793,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_NotEquals_Decimal_False: 1.0 != 1.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -849,7 +849,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_NotEquals_Decimal: 1.0 != 2
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -905,7 +905,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_DoesNotEqual_Decimal: 2.0 != 2L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -962,7 +962,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_NotEquals_Quantity: 1.0 != 2.0 'g'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1018,7 +1018,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_DoesNotEqual_Quantity: 1.0 != 1.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1095,7 +1095,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_NotEquals_Quantity: 1.0 '1' != 1.01 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1151,7 +1151,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_NotEquals_Quantity_False: 1.0 '1' != 1.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1207,7 +1207,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_NotEquals_Quantity: 1.0 '1' != 2
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1263,7 +1263,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_DoesNotEqual_Quantity: 2.0 '1' != 2L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1320,7 +1320,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_NotEquals_Decimal: 1.0 'g' != 2.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1376,7 +1376,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_DoesNotEqual_Quantity: 1.0 != 1.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1451,7 +1451,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library EqualsTest version '1.0.0'
 
                 define private String_NotEquals_String: 'hello' != 'world'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

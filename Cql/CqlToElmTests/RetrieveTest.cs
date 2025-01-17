@@ -30,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 context Patient
 
                 define private Retrieve_AllTerms: [Patient->Condition: code in ""terminology""]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(2, library.statements.Length);
             Assert.IsNotNull(library.statements[1].expression.localId);

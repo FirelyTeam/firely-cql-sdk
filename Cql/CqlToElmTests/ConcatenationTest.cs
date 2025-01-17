@@ -21,7 +21,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Integer_to_Integer version '1.0.0'
 
                 define private Three: 'hello' & 'world'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -82,7 +82,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Integer_to_Integer version '1.0.0'
 
                 define private Three: 'hello' & (' ' & 'world')
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

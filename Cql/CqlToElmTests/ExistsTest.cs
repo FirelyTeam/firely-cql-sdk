@@ -22,7 +22,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists { 1, 3, 5, 7 }
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -46,7 +46,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists { }
-            ", new string[0]);
+            ");
 
             var exists = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Exists>();
             {
@@ -66,7 +66,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists null
-            ", new string[0]);
+            ");
 
             var exists = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Exists>();
             {
@@ -87,7 +87,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists { null }
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

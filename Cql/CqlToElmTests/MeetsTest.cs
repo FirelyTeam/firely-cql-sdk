@@ -21,7 +21,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library MeetsTest version '1.0.0'
 
                 define private Meets: Interval[6, 10] meets Interval[0, 5]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -50,7 +50,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library MeetsTest version '1.0.0'
 
                 define private Meets_Before: Interval[-5, -1] meets before Interval[0, 5]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -79,7 +79,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library MeetsTest version '1.0.0'
 
                 define private Meets_After: Interval[6, 10] meets after Interval[0, 7]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -108,7 +108,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library MeetsTest version '1.0.0'
 
                 define private Meets_Is_Null: Interval[6, 10] meets (null as Interval<Integer>)
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -136,7 +136,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library MeetsTest version '1.0.0'
 
                 define private Meets_After_Day: Interval[@2023-03-01, @2023-06-01] meets after month of Interval[@2023-01-01, @2023-03-01]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -165,7 +165,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library MeetsTest version '1.0.0'
 
                 define private Meets_Day: Interval[@2023-01-01, @2023-06-01] meets month of Interval[@2023-07-01, @2023-10-01]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

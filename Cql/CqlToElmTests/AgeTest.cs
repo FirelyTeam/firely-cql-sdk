@@ -24,7 +24,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define function CalculateAgeAt(birthDate {type}, at {type}):
                     CalculateAgeIn{Enum.GetName(unit)}sAt(birthDate,at)
-            ", new string[0]);
+            ");
             var caa = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<CalculateAgeAt>();
             caa.precisionSpecified.Should().BeTrue();
             caa.precision.Should().Be(unit);
@@ -39,7 +39,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define function AgeAt(at {type}):
                     AgeIn{Enum.GetName(unit)}sAt(at)
-            ", new string[0]);
+            ");
             var caa = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<CalculateAgeAt>();
             caa.precisionSpecified.Should().BeTrue();
             caa.precision.Should().Be(unit);
@@ -54,7 +54,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define function CalculateAge(birthDate {type}):
                     CalculateAgeIn{Enum.GetName(unit)}s(birthDate)
-            ", new string[0]);
+            ");
             var caa = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<CalculateAge>();
             caa.precisionSpecified.Should().BeTrue();
             caa.precision.Should().Be(unit);
@@ -68,7 +68,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 using FHIR version '4.0.1'
 
                 define value: AgeIn{Enum.GetName(unit)}s()
-            ", new string[0]);
+            ");
             var caa = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<CalculateAge>();
             caa.precisionSpecified.Should().BeTrue();
             caa.precision.Should().Be(unit);

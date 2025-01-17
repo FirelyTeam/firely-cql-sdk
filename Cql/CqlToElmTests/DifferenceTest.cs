@@ -19,7 +19,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DifferenceTest version '1.0.0'
 
                 define private Difference_Between_Days: difference in days between @2023-01-01 and @2023-01-31
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -41,7 +41,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DifferenceTest version '1.0.0'
 
                 define private Difference_Between_Months: difference in months between @2023-01-01 and @2023-02-01
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -63,7 +63,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DifferenceTest version '1.0.0'
 
                 define private Difference_Between_Months: difference in weeks between @2023-01-01 and @2023-01-08
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -87,7 +87,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DifferenceTest version '1.0.0'
 
                 define private Difference_Between_Months: difference in years between @2023-01-01 and @2024-02-01
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -118,7 +118,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DifferenceTest version '1.0.0'
 
                 define private Difference_Between_Hours: difference in hours between @T12:00:00 and @T20:00:00
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -141,7 +141,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DifferenceTest version '1.0.0'
 
                 define private Difference_Between_Minutes: difference in minutes between @T12:00:00 and @T20:00:00
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -164,7 +164,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DifferenceTest version '1.0.0'
 
                 define private Difference_Between_Minutes: difference in seconds between @T12:00:00 and @T12:00:30
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -187,7 +187,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DifferenceTest version '1.0.0'
 
                 define private Difference_Between_Milliseconds: difference in milliseconds between @T12:00:00.100 and @T12:00:00.300
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -225,7 +225,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private Difference_Between_DateTimes_Minutes: difference in minutes between @2023-01-01T12:00:00.100 and @2024-01-01T12:00:00.100
                 define private Difference_Between_DateTimes_Seconds: difference in seconds between @2023-01-01T12:00:00.100 and @2024-01-01T12:00:00.100
                 define private Difference_Between_DateTimes_Milliseconds: difference in milliseconds between @2023-01-01T12:00:00.100 and @2024-01-01T12:00:00.100
-            ", new string[0]);
+            ");
         }
 
         [TestMethod]
@@ -235,7 +235,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DifferenceTest version '1.0.0'
 
                 define private Difference_Between_Months: difference in weeks between null and @2023-01-08
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

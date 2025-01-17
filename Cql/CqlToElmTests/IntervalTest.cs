@@ -51,7 +51,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Integer: Interval[1,2]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -89,7 +89,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Integer: Interval[1,null)
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -127,7 +127,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Integer: Interval[null, 1)
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -165,7 +165,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Long: Interval(-100L,20L]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -203,7 +203,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Decimal: Interval[-0.00000001, 0.0)
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -241,7 +241,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Decimal: Interval(100 '1', 200 '1')
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -279,7 +279,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Date: Interval[@2023-01-01, @2023-12-31]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -317,7 +317,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntervalTest version '1.0.0'
 
                 define private Interval_DateTime: Interval[@2023-01-01T00:00:00.000Z, @2023-12-31T23:59:59.999Z]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -356,7 +356,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntervalTest version '1.0.0'
 
                 define private Interval_DateTime: Interval[@T00:00:00.000, @T23:59:59.999]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -395,7 +395,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IntervalTest version '1.0.0'
 
                 define private TestIncludesNull: Interval[1, 10] includes null
-            ", new string[0]);
+            ");
 
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);

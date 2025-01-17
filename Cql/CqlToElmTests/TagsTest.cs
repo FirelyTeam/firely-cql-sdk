@@ -47,7 +47,7 @@ public class TagsTest : Base
                                          [Condition: "Injury due to falling rock"] C
                                             where (C.onset.value as DateTime) during "Measurement Period"
 
-                                     """, new string[0]);
+                                     """);
 
         const string tagsLibraryName = "Tags-1.0.0";
 

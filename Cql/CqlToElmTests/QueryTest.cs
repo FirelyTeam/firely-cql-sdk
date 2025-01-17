@@ -114,7 +114,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define function foo(): 1
 
                 define q: ({4, 5, 1, 6, 2, 1}) sL sort by foo() asc
-            ", new string[0]);
+            ");
 
             lib.GetErrors().Should().BeEmpty();
             lib.statements.Should().HaveCount(2);
@@ -142,7 +142,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define fluent function foo(i Integer): i
 
                 define q: ({4, 5, 1, 6, 2, 1}) sL sort by foo() asc
-            ", new string[0]);
+            ");
 
             lib.GetErrors().Should().BeEmpty();
             lib.statements.Should().HaveCount(2);
@@ -173,7 +173,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define function foo(): 1
 
                 define q: ({4, 5, 1, 6, 2, 1}) sL sort by foo() asc
-            ", new string[0]);
+            ");
 
             lib.GetErrors().Should().BeEmpty();
             lib.statements.Should().HaveCount(3);
@@ -204,7 +204,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     let x: i + 1
                     where x > 0
                     return x
-            ", new string[0]);
+            ");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             query.let.Should().NotBeNull();
             query.let.Should().HaveCount(1);
@@ -223,7 +223,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     let x: i + 1, x: i + 2
                     where x > 0
                     return x
-            ", new string[0]);
+            ");
             //", "Identifier x is already in use in this scope.");
         }
         [TestMethod]
@@ -239,7 +239,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     let x: i + 1
                     where x > 0
                     return x
-                ", new string[0]);
+                ");
             //", "Identifier x is already in use in this scope.");
         }
 
@@ -256,7 +256,7 @@ namespace Hl7.Cql.CqlToElm.Test
                         with singleClaim.careTeam careTeam 
                         such that careTeam.provider is FHIR.Reference 
                         and (careTeam.provider as FHIR.Reference).reference is null
-            ", new string[0]);
+            ");
             var q = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             var with = q.relationship[0].Should().BeOfType<With>().Subject;
             var property = with.expression.Should().BeOfType<Property>().Subject;
@@ -272,7 +272,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define q:
                     [ExplanationOfBenefit] eob return eob.careTeam singleClaimCareTeam where true
-            ", new string[0]);
+            ");
             var q = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             q.resultTypeSpecifier.Should().BeOfType<ListTypeSpecifier>();
             ((ListTypeSpecifier)q.resultTypeSpecifier).elementType.Should().BeOfType<ListTypeSpecifier>();
@@ -290,7 +290,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define FactorialOfFive:
                   ({ 1, 2, 3, 4, 5 }) Num
                     aggregate Result starting 1: Result * Num
-            ", new string[0]);
+            ");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             query.aggregate.identifier.Should().Be("Result");
             query.aggregate.expression.Should().NotBeNull();
@@ -314,7 +314,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define FactorialOfFive:
                   ({ 1, 2, 2, 3, 3, 4, 4, 5, 5 }) Num
                     aggregate distinct Result starting 1: Result * Num
-            ", new string[0]);
+            ");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             query.aggregate.identifier.Should().Be("Result");
             query.aggregate.expression.Should().NotBeNull();
@@ -337,7 +337,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define FactorialOfFive:
                   ({ 1, 2, 3, 4, 5 }) Num
                     aggregate Result: Result * Num
-            ", new string[0]);
+            ");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             query.aggregate.identifier.Should().Be("Result");
             query.aggregate.expression.Should().NotBeNull();
@@ -365,7 +365,7 @@ namespace Hl7.Cql.CqlToElm.Test
                                             { Interval[Last(result).low, interval.high] }
                                         })
                             else flatten({result, {interval}})
-                ", new string[0]);
+                ");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             query.Should().HaveType(SystemTypes.DateType.ToIntervalType().ToListType());
         }

@@ -21,7 +21,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: successor of 2
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -54,7 +54,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: successor of (null as Integer)
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

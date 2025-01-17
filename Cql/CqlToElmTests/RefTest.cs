@@ -27,7 +27,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 valueset ""vs"": 'http://xyz.com'
 
                 define private {nameof(ValueSet_Local)}: ""vs""
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -48,7 +48,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 private codesystem CS: 'id' version 'version string'
 
                 define private {nameof(CodeSystem_Local)}: ""CS""
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -69,7 +69,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 private code C: 'id' from CS display 'Code display text'
 
                 define private {nameof(Code_Local)}: ""C""
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -91,7 +91,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 private concept TheConcept: {{ C }} display 'My concept'
 
                 define private {nameof(Concept_Local)}: ""TheConcept""
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -111,7 +111,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 private parameter ""Measurement Year"" System.Integer default 2023
 
                 define private {nameof(Parameter)}: ""Measurement Year""
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -154,7 +154,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private four: 4
 
                 define private {nameof(Expression)}: four
-            ", new string[0]);
+            ");
 
             var f = shouldDefineExpression(library, nameof(Expression));
             var fref = f.expression.Should().BeOfType<ExpressionRef>().Subject;
@@ -175,7 +175,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private function double(a Decimal): a*2
 
                 define private {nameof(Function)}: double(4)
-            ", new string[0]);
+            ");
 
             var f = shouldDefineExpression(library, nameof(Function));
             var fref = f.expression.Should().BeOfType<FunctionRef>().Subject;
@@ -216,15 +216,15 @@ namespace Hl7.Cql.CqlToElm.Test
             var library1 = CqlApi.MakeLibrary($@"
                 library {nameof(RefTest)}1 version '1.0.0'
                 define private {nameof(Function)}: Date(1)
-            ", new string[0]);
+            ");
             var library2 = CqlApi.MakeLibrary($@"
                 library {nameof(RefTest)}2 version '1.0.0'
                 define private {nameof(Function)}: Date(1,2)
-            ", new string[0]);
+            ");
             var library3 = CqlApi.MakeLibrary($@"
                 library {nameof(RefTest)}3 version '1.0.0'
                 define private {nameof(Function)}: Date(1,2,3)
-            ", new string[0]);
+            ");
             var library4 = TestExtensions.MakeLibrary(CqlApi, $@"
                 library {nameof(RefTest)}4 version '1.0.0'
                 define private {nameof(Function)}: Date(1,2,3,4)
@@ -320,7 +320,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
              define fluent function double(a Integer): a*2
              define total: 4.double()
-            ", new string[0]);
+            ");
 
             var f = shouldDefineExpression(library, "total");
             var fref = f.expression.Should().BeOfType<FunctionRef>().Subject;
@@ -338,7 +338,7 @@ namespace Hl7.Cql.CqlToElm.Test
             library BareMinimum version '0.0.1'
 
             define lowI: Interval[1,3].low
-            ", new string[0]);
+            ");
 
             var low = shouldDefineExpression(library, "lowI");
             low.expression.Should().BeOfType<Property>().Which.path.Should().Be("low");
@@ -355,7 +355,7 @@ namespace Hl7.Cql.CqlToElm.Test
             library BareMinimum version '0.0.1'
 
             define closed: Interval[1,3].highClosed
-            ", new string[0]);
+            ");
 
             var low = shouldDefineExpression(library, "closed");
             low.expression.Should().BeOfType<Property>().Which.path.Should().Be("highClosed");
@@ -372,7 +372,7 @@ namespace Hl7.Cql.CqlToElm.Test
             library BareMinimum version '0.0.1'
 
             define tupleMember: Tuple {{ name: 'Ewout' }}.name
-            ", new string[0]);
+            ");
 
             var low = shouldDefineExpression(library, "tupleMember");
             low.expression.Should().BeOfType<Property>().Which.path.Should().Be("name");
@@ -461,7 +461,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     context Patient
 
                     define getActive: Patient.active
-            ", new string[0]);
+            ");
 
             var getName = shouldDefineExpression(library, "getActive");
             var prop = getName.expression.Should().BeOfType<Property>().Subject;
@@ -483,7 +483,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     context Patient
 
                     define getName: Patient.name
-            ", new string[0]);
+            ");
 
             var getName = shouldDefineExpression(library, "getName");
             var prop = getName.expression.Should().BeOfType<Property>().Subject;
@@ -505,7 +505,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     context Patient
 
                     define getName: Patient.name.family
-            ", new string[0]);
+            ");
 
             var getName = shouldDefineExpression(library, "getName");
             var prop = getName.expression.Should().BeOfType<Query>().Subject;
@@ -525,7 +525,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     context Patient
 
                     define getName: Patient.name.given
-            ", new string[0]);
+            ");
 
             var getName = shouldDefineExpression(library, "getName");
             var prop = getName.expression.Should().BeOfType<Flatten>().Subject;
@@ -550,7 +550,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     define fluent function getContactName(contact List<FHIR.Patient.Contact>): contact.name
 
                     define getName: Patient.contact.getContactName().given
-            ", new string[0]);
+            ");
 
             var getContactName = library.ShouldDefine<FunctionDef>("getContactName");
             getContactName.operand.Should().ContainSingle().Which

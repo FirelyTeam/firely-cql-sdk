@@ -21,7 +21,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Proper_Includes_Day_Start: Interval[@2023-01-01, @2023-06-30] properly includes day of start Interval[@2023-04-01, @2023-04-30]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -49,7 +49,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Proper_Includes_Day_End: Interval[@2023-01-01, @2023-06-30] properly includes day of end Interval[@2023-04-01, @2023-04-30]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -77,7 +77,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Proper_Includes_Day_Start: Interval[@2023, @2023] properly includes year of Interval[@2023, @2023]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -105,7 +105,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Proper_Includes: Interval[@2023, @2023] properly includes Interval[@2023, @2023]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -133,7 +133,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Includes_Day_Start: Interval[@2023-01-01, @2023-06-30] includes day of start Interval[@2023-04-01, @2023-04-30]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -161,7 +161,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Includes_Day_End: Interval[@2023-01-01, @2023-06-30] includes day of end Interval[@2023-04-01, @2023-04-30]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -189,7 +189,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Proper_Includes_Day_Start: Interval[@2023, @2023] includes year of Interval[@2023, @2023]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -217,7 +217,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Includes: Interval[@2023, @2023] includes Interval[@2023, @2023]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -247,7 +247,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library IncludesTest version '1.0.0'
 
                 define private EmptyList_Includes_EmptyList: {} includes {}
-            ", new string[0]);
+            ");
         }
 
 

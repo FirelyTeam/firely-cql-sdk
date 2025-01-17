@@ -15,10 +15,11 @@ namespace CqlSdkPrototype.Cql;
 internal readonly record struct CqlApiState(
     ILoggerFactory LoggerFactory,
     ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> Entries,
-    CqlApiOptions Options,
-    ServiceProvider ServiceProvider,
-    ILogger<CqlApi> Logger,
-    CqlToElmConverter CqlToElmConverter)
+    CqlApiOptions? Options = null,
+    ServiceProvider? ServiceProvider = null,
+    ILogger<CqlApi>? Logger = null,
+    CqlToElmConverter? CqlToElmConverter = null,
+    MemoryLibraryProvider? MemoryLibraryProvider = null)
 {
     private static readonly (CqlModel CqlModel, ModelInfo ModelInfo)[] AllMappedModelsInOrder = [
         (CqlModel.ElmR1, Models.ElmR1),
@@ -27,14 +28,14 @@ internal readonly record struct CqlApiState(
     public static CqlApiState Create(ILoggerFactory loggerFactory, CqlApiOptions options)
     {
         var entries = ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry>.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
-        return new CqlApiState(loggerFactory, entries!, null!, null!, null!, null!)
+        return new CqlApiState(loggerFactory, entries)
         {
             // Must be set through the property initializer, to ensure the services are created
             Options = options,
         };
     }
 
-    private readonly CqlApiOptions _options = Options;
+    private readonly CqlApiOptions _options = Options!;
 
     public CqlApiOptions Options
     {
@@ -49,34 +50,25 @@ internal readonly record struct CqlApiState(
             _options = value;
             var services = new ServiceCollection();
             services.AddExternalLogging(LoggerFactory);
-            AddCqlServices(services, o =>
-            {
-                var modelInfos = AllMappedModelsInOrder
-                                 .SelectWhereNotNull(t => value.Models.Contains(t.CqlModel) ? t.ModelInfo : null)
-                                 .Concat(value.ModelInfos)
-                                 .ToArray();
-                o.Models = modelInfos;
-            });
+            AddCqlServices(services, value);
             ServiceProvider = services.BuildServiceProvider(validateScopes: true);
             Logger = ServiceProvider.GetLogger<CqlApi>();
             CqlToElmConverter = ServiceProvider.GetCqlToElmConverter();
+            MemoryLibraryProvider = (MemoryLibraryProvider)ServiceProvider.GetRequiredService<ILibraryProvider>();
         }
     }
 
     public ILoggerFactory LoggerFactory { get; } = LoggerFactory;
+    public MemoryLibraryProvider MemoryLibraryProvider { get; private init; } = MemoryLibraryProvider!;
+    public ServiceProvider ServiceProvider { get; private init; } = ServiceProvider!;
+    public ILogger<CqlApi> Logger { get; private init; } = Logger!;
+    public CqlToElmConverter CqlToElmConverter { get; private init; } = CqlToElmConverter!;
 
     private static void AddCqlServices(
         IServiceCollection serviceCollection,
-        Action<CqlServicesOptions>? configureOptions = null)
+        CqlApiOptions options)
     {
         SuppressCqlDebugAssertions(serviceCollection);
-
-        CqlServicesOptions? cqlTranslationOptions = null;
-        if (configureOptions is { } fn)
-        {
-            cqlTranslationOptions = new CqlServicesOptions();
-            fn(cqlTranslationOptions);
-        }
 
         serviceCollection
             .AddCqlToElmServices()
@@ -86,20 +78,21 @@ internal readonly record struct CqlApiState(
             .AddCqlToElmMessaging();
         return;
 
-        Action<CqlToElmOptions>? ConfigureCqlToElmOptions()
+        Action<CqlToElmOptions> ConfigureCqlToElmOptions()
         {
-            return null;
+            return options.ApplyToCqlToElmOptions;
         }
 
         Action<IModelProvider> ConfigureModelProvider()
         {
-            return cqlTranslationOptions is { } o
-                       ? modelProvider =>
-                       {
-                           foreach (var modelInfo in o.Models)
-                               modelProvider.Add(modelInfo);
-                       }
-                       : _ => { };
+            var modelInfos = AllMappedModelsInOrder
+                             .SelectWhereNotNull(t => options.Models.Contains(t.CqlModel) ? t.ModelInfo : null)
+                             .Concat(options.ModelInfos);
+            return modelProvider =>
+            {
+                foreach (var modelInfo in modelInfos)
+                    modelProvider.Add(modelInfo);
+            };
         }
     }
 

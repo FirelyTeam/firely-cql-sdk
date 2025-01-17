@@ -25,7 +25,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Integer_to_Integer version '1.0.0'
 
                 define private Three: 1 + 2
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -83,7 +83,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Long_to_Long version '1.0.0'
 
                 define private Three: 1L + 2L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -141,7 +141,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Decimal_to_Decimal version '1.0.0'
 
                 define private Three: -1.0 + 2.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -200,7 +200,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Decimal_to_Quantity version '1.0.0'
 
                 define private Three: -1.0 '1' + 2.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -267,7 +267,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Integer_to_Long version '1.0.0'
 
                 define private Three: 1 + 2L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -327,7 +327,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Integer_to_Decimal version '1.0.0'
 
                 define private Three: 1 + 2.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -387,7 +387,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Integer_to_Quantity version '1.0.0'
 
                 define private Three: 1 + 2.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -448,7 +448,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Long_to_Decimal version '1.0.0'
 
                 define private Three: 1L + 2.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -508,7 +508,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Integer_to_Quantity version '1.0.0'
 
                 define private Three: 1L + 2.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -569,7 +569,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Decimal_to_Quantity version '1.0.0'
 
                 define private Three: -1.0 + 2.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -637,7 +637,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Long_to_Integer version '1.0.0'
 
                 define private Three: 1L + 2
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -693,7 +693,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Decimal_to_Integer version '1.0.0'
 
                 define private Three: 5.25 + 2
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -749,7 +749,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Decimal_to_Integer version '1.0.0'
 
                 define private Three: 5.25 '1' + 2
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -808,7 +808,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Decimal_to_Long version '1.0.0'
 
                 define private Three: 5.25 + 2L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -864,7 +864,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Quantity_to_Long version '1.0.0'
 
                 define private Three: 5.25 '1' + 2L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -923,7 +923,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Quantity_to_Decimal version '1.0.0'
 
                 define private Three: 5.25 '1' + 2.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -986,7 +986,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Null_to_Integer version '1.0.0'
 
                 define private AddNull: null + 1
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1041,7 +1041,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Null_to_Integer version '1.0.0'
 
                 define private AddNull: 1 + null
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1099,7 +1099,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Quantity_to_Date version '1.0.0'
 
                 define private Three: @2023-01-01 + 1 month
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1159,7 +1159,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Quantity_to_Date version '1.0.0'
 
                 define private Three: @2023-01-01 + null
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1215,7 +1215,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Quantity_to_DateTime version '1.0.0'
 
                 define private Three: @2023-01-01T01:23:45.300+01:30 + 1 month
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1282,7 +1282,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Null_To_DateTime version '1.0.0'
 
                 define private Three: @2023-01-01T01:23:45.300+01:30 + null
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1338,7 +1338,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library DefaultConverter version '1.0.0'
 
                 define private Three: @T01:23:45 + 1 hour
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1399,7 +1399,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Null_To_DateTime version '1.0.0'
 
                 define private Three: @T01:23:45 + null
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1482,7 +1482,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Decimal_to_Decimal version '1.0.0'
 
                 define private Three: 1.0 + (2.0 + 3.0)
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1538,7 +1538,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Add_Decimal_to_Decimal version '1.0.0'
 
                 define private Three: 1.0 '1' + (2.0 + 3.0)
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

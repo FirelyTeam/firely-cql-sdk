@@ -22,7 +22,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Integer: minimum Integer
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -56,7 +56,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Integer: maximum Integer
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -90,7 +90,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Long: minimum Long
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -124,7 +124,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Long: maximum Long
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -158,7 +158,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Decimal: minimum Decimal
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -192,7 +192,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Decimal: maximum Decimal
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -225,7 +225,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Quantity: minimum Quantity
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -261,7 +261,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Quantity: maximum Quantity
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -297,7 +297,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Date: minimum Date
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -330,7 +330,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Date: maximum Date
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -363,7 +363,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_DateTime: minimum DateTime
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -396,7 +396,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_DateTime: maximum DateTime
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -429,7 +429,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Time: minimum Time
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -462,7 +462,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Time: maximum Time
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

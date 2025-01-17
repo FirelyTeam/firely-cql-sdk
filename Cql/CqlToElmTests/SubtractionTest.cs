@@ -25,7 +25,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Integer_from_Integer version '1.0.0'
 
                 define private Subtract: 2 - 1
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -84,7 +84,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Long_from_Long version '1.0.0'
 
                 define private Subtract: 1L - 2L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -140,7 +140,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Decimal_from_Decimal version '1.0.0'
 
                 define private Subtract: 2.0 - 1.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -197,7 +197,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Decimal_from_Quantity version '1.0.0'
 
                 define private Subtract: -1.0 '1' - 2.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -260,7 +260,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Integer_from_Long version '1.0.0'
 
                 define private Subtract: 2 - 1L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -319,7 +319,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Integer_from_Decimal version '1.0.0'
 
                 define private Subtract: 2 - 1.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -378,7 +378,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Integer_from_Quantity version '1.0.0'
 
                 define private Subtract: 2 - 1.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -437,7 +437,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Long_from_Decimal version '1.0.0'
 
                 define private Subtract: 1L - 2.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -496,7 +496,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Integer_from_Quantity version '1.0.0'
 
                 define private Subtract: 1L - 2.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -555,7 +555,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Decimal_from_Quantity version '1.0.0'
 
                 define private Subtract: -1.0 - 2.0 '1'
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -623,7 +623,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Long_from_Integer version '1.0.0'
 
                 define private Subtract: 1L - 2
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -679,7 +679,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Decimal_from_Integer version '1.0.0'
 
                 define private Subtract: 5.25 - 2
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -735,7 +735,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Decimal_from_Integer version '1.0.0'
 
                 define private Subtract: 5.25 '1' - 2
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -794,7 +794,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Decimal_from_Long version '1.0.0'
 
                 define private Subtract: 5.25 - 2L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -850,7 +850,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Quantity_from_Long version '1.0.0'
 
                 define private Subtract: 5.25 '1' - 2L
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -909,7 +909,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Quantity_from_Decimal version '1.0.0'
 
                 define private Subtract: 5.25 '1' - 2.0
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -970,7 +970,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Decimal_from_Decimal version '1.0.0'
 
                 define private Subtract: 6.0 - (2.0 - 3.0)
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1026,7 +1026,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library Subtract_Decimal_from_Decimal version '1.0.0'
 
                 define private Subtract: 6.0 '1' - (2.0 - 3.0)
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

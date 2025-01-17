@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_False: true implies false
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -76,7 +76,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_True: true implies true
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -132,7 +132,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ImpliesTest version '1.0.0'
 
                 define private False_Implies_False: false implies false
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -188,7 +188,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_Null: true implies null
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -243,7 +243,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ImpliesTest version '1.0.0'
 
                 define private Null_Implies_False: null implies false
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -298,7 +298,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library ImpliesTest version '1.0.0'
 
                 define private Null_Implies_Null: null implies null
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

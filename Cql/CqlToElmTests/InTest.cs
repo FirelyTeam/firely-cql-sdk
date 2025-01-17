@@ -23,7 +23,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library InTest version '1.0.0'
 
                 define private Starts_Properly_Within_Start: Interval[@2023, @2030] starts properly within 1 year of start Interval[@2022, @2030]
-            ", new string[0]);
+            ");
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -52,7 +52,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library InTest version '1.0.0'
 
                 define f: Interval[@2023, @2030] starts within 1 year of start Interval[@2022, @2030]
-            ", new string[0]);
+            ");
             library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
         }
 
@@ -64,7 +64,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 library InTest version '1.0.0'
 
                 define private Properly_Within_Start: Interval[@2023, @2030] properly within 1 year of start Interval[@2022, @2030]
-            ", new string[0]);
+            ");
             var @in = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
         }
 
@@ -91,7 +91,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define f:
                     Interval[@2024-07-23, @2024-07-30] starts within 1 day of end of Interval[@2024-07-17, @2024-07-24]
-            ", new string[0]);
+            ");
             library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
         }
     }
