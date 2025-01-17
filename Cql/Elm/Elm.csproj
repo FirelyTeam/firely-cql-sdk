@@ -11,14 +11,13 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<!-- merge <ProjectReference Include="..\Cql.Model\Cql.Model.csproj" /> -->
 		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
 		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.CodeAnalysis.CSharp" Version="4.12.0" />
-		<PackageReference Include="System.Text.Json" Version="9.0.1" />
+		<PackageReference Include="System.Text.Json" Version="8.0.5" />
 	</ItemGroup>
 
 
