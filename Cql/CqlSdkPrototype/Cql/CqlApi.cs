@@ -84,7 +84,7 @@ public class CqlApi :
 
     public CqlApi Translate()
     {
-        CqlToElmConverter cqlToElmConverter = null!;
+        CqlToElmConverter cqlToElmConverter = _state.CqlToElmConverter;
         CqlTranslationEntriesMap.Builder entriesBuilder = null!;
         var logger = _state.Logger;
         bool atFirst = true;
@@ -98,7 +98,6 @@ public class CqlApi :
                 {
                     atFirst = false;
                     logger.LogInformation("Translating CQL into ELM");
-                    cqlToElmConverter = _state.CqlToElmConverter;
                     entriesBuilder = _state.Entries.ToBuilder();
                 }
 

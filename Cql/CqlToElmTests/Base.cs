@@ -358,7 +358,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 LoggerFactory,
                 new CqlApiOptions(ProcessBatchItemExceptionHandling.ThrowException, models, modelInfos, ambiguousTypeBehavior, enableListPromotion ) );
 
-        protected static CqlApi CqlApi => CreateCqlApi();
+        protected static CqlApi CqlApi { get; } = CreateCqlApi();
 
         protected static ElmApi CreateElmApi(
             ImmutableHashSet<CqlModel>? models = null,
@@ -378,11 +378,14 @@ namespace Hl7.Cql.CqlToElm.Test
             string cql,
             params string[] expectedErrors)
         {
+            var cqlLibraryString = CqlLibraryString.FromCql(cql);
+
             var library = cqlApi
-                             .AddCqlLibraryString(CqlLibraryString.FromIdentifierAndString(CqlVersionedLibraryIdentifier.Parse("Test-1.0.0"), cql))
-                             .Translate()
-                             .AsExtendable()
-                             .Entries.Values.Single().ElmLibrary!;
+                          .AddCqlLibraryString(cqlLibraryString)
+                          .Translate()
+                          .AsExtendable()
+                          .Entries[cqlLibraryString.VersionedLibraryIdentifier]
+                          .ElmLibrary!;
 
             if (expectedErrors.Any())
                 library.ShouldReportError(expectedErrors);
