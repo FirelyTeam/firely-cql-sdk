@@ -133,8 +133,6 @@ internal readonly record struct CqlApiState(
                 libraryBuilder = lb;
                 return true;
             }
-
-            ;
         }
 
         return false;
