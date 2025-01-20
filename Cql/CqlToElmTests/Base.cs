@@ -73,6 +73,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
             return library;
         }
+
         internal Library MakeLibrary(IServiceProvider services, string cql, params string[] expectedErrors)
         {
             var library = ConvertLibrary(services, cql);
@@ -83,18 +84,20 @@ namespace Hl7.Cql.CqlToElm.Test
 
             return library;
         }
+
         internal LibraryBuilder MakeLibraryBuilder(IServiceProvider services, string cql, params string[] expectedErrors)
         {
             using var scope = services.CreateScope();
-            var builder = services.GetRequiredService<CqlToElmConverter>()
-                .GetBuilder(cql, scope);
-            var lib = builder.Build();
+            var libraryVisitor = CqlToElmConverter.GetLibraryVisitorScoped(scope);
+            var cqlToElmConverter = services.GetRequiredService<CqlToElmConverter>();
+            var libraryBuilder = cqlToElmConverter.GetBuilder(libraryVisitor, cql);
+            var lib = libraryBuilder.Build();
             if (expectedErrors.Any())
                 lib.ShouldReportError(expectedErrors);
             else
                 lib.ShouldSucceed();
 
-            return builder;
+            return libraryBuilder;
         }
 
         internal record LibrarySetDefinitions(
@@ -311,12 +314,14 @@ namespace Hl7.Cql.CqlToElm.Test
             return lib.statements[0].expression;
         }
 
-        internal static void AddFHIRHelpers(MemoryLibraryProvider provider,
+        internal static void AddFHIRHelpers(
+            MemoryLibraryProvider provider,
             IServiceScope scope,
             string path = @"Input\FHIRHelpers-4.0.1.cql")
         {
             var text = File.ReadAllText(path);
-            var builder = DefaultConverter.GetBuilder(text, scope);
+            var libraryVisitor = CqlToElmConverter.GetLibraryVisitorScoped(scope);
+            var builder = DefaultConverter.GetBuilder(libraryVisitor, text);
             provider.Libraries.Add("FHIRHelpers", "4.0.1", builder);
         }
 

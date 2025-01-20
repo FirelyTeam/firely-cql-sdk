@@ -1,10 +1,8 @@
 ﻿using CqlSdkPrototype.Cql.Extensibility;
-using CqlSdkPrototype.Cql.Internal;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Logging.Internal;
 using Hl7.Cql.CqlToElm;
-using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Hl7.Cql.Runtime.Hosting;
@@ -15,10 +13,11 @@ namespace CqlSdkPrototype.Cql;
 internal readonly record struct CqlApiState(
     ILoggerFactory LoggerFactory,
     ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> Entries,
-    CqlApiOptions Options,
-    ServiceProvider ServiceProvider,
-    ILogger<CqlApi> Logger,
-    CqlToElmConverter CqlToElmConverter)
+    CqlApiOptions? Options = null,
+    ServiceProvider? ServiceProvider = null,
+    ILogger<CqlApi>? Logger = null,
+    CqlToElmConverter? CqlToElmConverter = null)
+    : ILibraryProvider
 {
     private static readonly (CqlModel CqlModel, ModelInfo ModelInfo)[] AllMappedModelsInOrder = [
         (CqlModel.ElmR1, Models.ElmR1),
@@ -27,14 +26,27 @@ internal readonly record struct CqlApiState(
     public static CqlApiState Create(ILoggerFactory loggerFactory, CqlApiOptions options)
     {
         var entries = ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry>.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
-        return new CqlApiState(loggerFactory, entries!, null!, null!, null!, null!)
+        return new CqlApiState(loggerFactory, entries)
         {
             // Must be set through the property initializer, to ensure the services are created
             Options = options,
         };
     }
 
-    private readonly CqlApiOptions _options = Options;
+    private readonly CqlApiOptions _options = Options!;
+    private readonly ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> _entries = Entries;
+
+    internal ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry>.Builder EntriesBuilder { get; private init; } = Entries.ToBuilder()!; // Not ideal, needed during Translate for TryResolveLibrary
+
+    public ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> Entries
+    {
+        get => _entries;
+        init
+        {
+            _entries = value;
+            EntriesBuilder = value?.ToBuilder()!;
+        }
+    }
 
     public CqlApiOptions Options
     {
@@ -49,13 +61,7 @@ internal readonly record struct CqlApiState(
             _options = value;
             var services = new ServiceCollection();
             services.AddExternalLogging(LoggerFactory);
-            AddCqlServices(services, o =>
-            {
-                var modelInfos = AllMappedModelsInOrder
-                                 .SelectWhereNotNull(t => value.Models.Contains(t.CqlModel) ? t.ModelInfo : null)
-                                 .ToArray();
-                o.Models = modelInfos;
-            });
+            AddCqlServices(services, value, this);
             ServiceProvider = services.BuildServiceProvider(validateScopes: true);
             Logger = ServiceProvider.GetLogger<CqlApi>();
             CqlToElmConverter = ServiceProvider.GetCqlToElmConverter();
@@ -63,51 +69,74 @@ internal readonly record struct CqlApiState(
     }
 
     public ILoggerFactory LoggerFactory { get; } = LoggerFactory;
+    public ServiceProvider ServiceProvider { get; private init; } = ServiceProvider!;
+    public ILogger<CqlApi> Logger { get; private init; } = Logger!;
+    public CqlToElmConverter CqlToElmConverter { get; private init; } = CqlToElmConverter!;
 
     private static void AddCqlServices(
         IServiceCollection serviceCollection,
-        Action<CqlServicesOptions>? configureOptions = null)
+        CqlApiOptions options,
+        ILibraryProvider libraryProvider)
     {
-        SuppressCqlDebugAssertions(serviceCollection);
-
-        CqlServicesOptions? cqlTranslationOptions = null;
-        if (configureOptions is { } fn)
-        {
-            cqlTranslationOptions = new CqlServicesOptions();
-            fn(cqlTranslationOptions);
-        }
+        SuppressCqlDebugAssertions();
 
         serviceCollection
             .AddCqlToElmServices()
             .AddCqlToElmModels(ConfigureModelProvider())
             .AddCqlToElmOptions(ConfigureCqlToElmOptions())
-            .AddSingleton<ILibraryProvider, MemoryLibraryProvider>()
+            .AddSingleton(libraryProvider)
             .AddCqlToElmMessaging();
         return;
 
-        Action<CqlToElmOptions>? ConfigureCqlToElmOptions()
+        Action<CqlToElmOptions> ConfigureCqlToElmOptions()
         {
-            return null;
+            return options.ApplyToCqlToElmOptions;
         }
 
         Action<IModelProvider> ConfigureModelProvider()
         {
-            return cqlTranslationOptions is { } o
-                       ? modelProvider =>
-                       {
-                           foreach (var modelInfo in o.Models)
-                               modelProvider.Add(modelInfo);
-                       }
-                       : _ => { };
+            var modelInfos = AllMappedModelsInOrder
+                             .SelectWhereNotNull(t => options.Models.Contains(t.CqlModel) ? t.ModelInfo : null)
+                             .Concat(options.ModelInfos);
+            return modelProvider =>
+            {
+                foreach (var modelInfo in modelInfos)
+                    modelProvider.Add(modelInfo);
+            };
         }
     }
 
-    private static IServiceCollection SuppressCqlDebugAssertions(
-        IServiceCollection serviceCollection)
+    private static void SuppressCqlDebugAssertions()
     {
         // This is really annoying in debug mode
         ExpressionVisitor.EnableDebugAssertions = false;
         Library.EnableDebugAssertions = false;
-        return serviceCollection;
+    }
+
+    bool ILibraryProvider.TryResolveLibrary(
+        string libraryName,
+        string? version,
+        [NotNullWhen(true)] out LibraryBuilder? libraryBuilder,
+        out string? error)
+    {
+        error = null;
+        libraryBuilder = null;
+
+        var libVer = CqlVersionedLibraryIdentifier.FromNameAndVersion(
+            CqlLibraryIdentifier.Parse(libraryName),
+            CqlLibraryVersion.Parse(version ?? throw new ArgumentNullException(nameof(version))));
+
+        if (EntriesBuilder.TryGetValue(libVer, out var entry))
+        {
+            if (entry.ElmLibraryBuilder is {} lb)
+            {
+                libraryBuilder = lb;
+                return true;
+            }
+
+            ;
+        }
+
+        return false;
     }
 }

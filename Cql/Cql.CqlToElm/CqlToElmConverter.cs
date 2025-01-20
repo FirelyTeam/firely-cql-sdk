@@ -59,28 +59,39 @@ namespace Hl7.Cql.CqlToElm
         public Library ConvertLibrary(string cql)
         {
             using var scope = Services.CreateScope();
-            var builder = GetBuilder(cql, scope);
-            var lib = builder.Build();
+            var libraryVisitorScoped = GetLibraryVisitorScoped(scope);
+            var libraryBuilder = GetBuilder(libraryVisitorScoped, cql);
+            var lib = libraryBuilder.Build();
             if (lib.GetErrors().Any(e => e.errorSeverity == ErrorSeverity.error))
                 Logger.LogWarning("Parsed ELM tree contains errors.");
             return lib;
         }
 
-        internal LibraryBuilder GetBuilder(string cql, IServiceScope scope)
+        internal LibraryBuilder GetBuilder(LibraryVisitor libraryVisitor, string cql)
         {
             using var cqlLibrary = new StringReader(cql);
-            var visitor = new LibraryVisitor(scope.ServiceProvider);
+            return GetBuilder(libraryVisitor, cqlLibrary);
+        }
 
+        internal LibraryBuilder GetBuilder(LibraryVisitor libraryVisitor, TextReader cqlReader)
+        {
             try
             {
-                var builder = visitor.Visit(ParseLibrary(cqlLibrary));
-                return builder;
+                var libraryContext = ParseLibrary(cqlReader);
+                var libraryBuilder = libraryVisitor.Visit(libraryContext);
+                return libraryBuilder;
             }
             catch (Exception e)
             {
                 Logger.LogCritical(e, "Exception while converting CQL to ELM.");
                 throw;
             }
+        }
+
+        internal static LibraryVisitor GetLibraryVisitorScoped(IServiceScope scope)
+        {
+            var visitor = ActivatorUtilities.CreateInstance<LibraryVisitor>(scope.ServiceProvider);
+            return visitor;
         }
 
 

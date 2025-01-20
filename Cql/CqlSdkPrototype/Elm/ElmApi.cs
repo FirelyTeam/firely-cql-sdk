@@ -7,11 +7,10 @@ using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.Logging.Abstractions;
-using ElmCompilationEntriesMap = System.Collections.Immutable.ImmutableDictionary<
-    CqlSdkPrototype.Infrastructure.CqlVersionedLibraryIdentifier,
-    CqlSdkPrototype.Elm.Extensibility.ElmApiStateEntry>;
 
 namespace CqlSdkPrototype.Elm;
+
+using ElmApiStateEntryDictionary = ImmutableDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry>;
 
 public class ElmApi :
     IElmApiExtendable<ElmApi>,
@@ -31,7 +30,7 @@ public class ElmApi :
     IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry> IElmApiExtendable<ElmApi>.Entries => _state.Entries;
 
     private ElmApi WithEntries(
-        ElmCompilationEntriesMap entries)
+        ElmApiStateEntryDictionary entries)
     {
         _state = _state with { Entries = entries };
         return this;
@@ -108,7 +107,7 @@ public class ElmApi :
         LogExceptionMessageAction log = logger.GetLogExceptionMessageAction(exceptionHandling);
 
         var libraryDefinitions = librarySetExpressionBuilderScoped
-            .ProcessLibrarySetDeferred(librarySet: librarySet, processLibraryExceptionHandling: exceptionHandling)
+            .ProcessLibrarySetDeferred(librarySet: librarySet)
             .Select(t =>
             {
                 var libraryName = t.library.identifier;
