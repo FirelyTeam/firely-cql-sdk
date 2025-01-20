@@ -8,6 +8,7 @@
 
 using System.Diagnostics;
 using System.Globalization;
+using System.Runtime.CompilerServices;
 using CqlSdkPrototype.Logging;
 using Hl7.Cql.Abstractions.Exceptions;
 using Microsoft.Extensions.Configuration;
@@ -75,6 +76,6 @@ internal static class PackagerCLiLoggingBuilderExtensions
             /* 6 */
             LogLevel.None => /* n/a */ null,
             // @formatter: on
-            _ => throw new ArgumentOutOfRangeException(nameof(logLevel), logLevel, "Invalid LogLevel."),
+            _ => throw new SwitchExpressionException("Invalid LogLevel."),
         };
 }
