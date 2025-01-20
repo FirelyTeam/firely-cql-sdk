@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Infrastructure;

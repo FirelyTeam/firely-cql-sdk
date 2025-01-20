@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,11 +13,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Singleton_From_Integers()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library SingletonTest version '1.0.0'
 
                 define private Singleton_From_Integers: singleton from { 1 }
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -48,11 +48,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Singleton_From_Empty()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library SingletonTest version '1.0.0'
 
                 define private Singleton_From_Empty: singleton from ({} as List<Integer>)
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -82,11 +82,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Singleton_From_Integers_Null()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library SingletonTest version '1.0.0'
 
                 define private Singleton_From_Integers_Null: singleton from (null as List<Integer>)
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -115,11 +115,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Singleton_From_Integers_Error()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library SingletonTest version '1.0.0'
 
                 define private Singleton_From_Integers_Error: singleton from { 1, 2, 3 }
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -147,11 +147,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Singleton_From_Integer_With_List_Promotion()
         {
-            var library = CreateCqlApi(EnableListPromotion:true).MakeLibrary(@"
+            var library = CreateCqlApi(EnableListPromotion:true).MakeLibrary("""
                 library SingletonTest version '1.0.0'
 
                 define private Singleton_From_Integer_With_List_Promotion: singleton from 1
-            ");
+                """);
 
             var singletonFrom = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SingletonFrom>();
             var toList = singletonFrom.operand.Should().BeOfType<ToList>().Subject;

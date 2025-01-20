@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Elm;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -12,11 +12,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Power_Integer_by_Integer()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Power_Integer_to_Integer version '1.0.0'
 
                 define private Power_Integer_to_Integer: 2 ^ 3
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -68,11 +68,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Power_Integer_by_Long()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Power_Integer_to_Integer version '1.0.0'
 
                 define private Power_Integer_to_Integer: 2 ^ 3L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -124,11 +124,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Power_Integer_by_Decimal()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Power_Integer_to_Integer version '1.0.0'
 
                 define private Power_Integer_to_Integer: 2 ^ 3.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -180,11 +180,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Power_Integer_by_Null()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Power_Integer_by_Null version '1.0.0'
 
                 define private Product: 1 ^ null
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -234,11 +234,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Power_Null_by_Integer()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Power_Integer_by_Null version '1.0.0'
 
                 define private Product: null ^ 1
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -292,11 +292,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Power_Long_by_Integer()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Power_Long_by_Integer version '1.0.0'
 
                 define private Power_Integer_to_Integer: -2L ^ 3
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -348,11 +348,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Power_Long_by_Long()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Power_Long_by_Integer version '1.0.0'
 
                 define private Power_Integer_to_Integer: -2L ^ 3L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -404,11 +404,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Power_Long_by_Decimal()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Power_Long_by_Integer version '1.0.0'
 
                 define private Power_Integer_to_Integer: -2L ^ 3.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -460,11 +460,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Power_Long_by_Null()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Power_Long_by_Null version '1.0.0'
 
                 define private Product: 1L ^ null
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -514,11 +514,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Power_Null_by_Long()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Power_Integer_by_Null version '1.0.0'
 
                 define private Product: null ^ 1L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -572,11 +572,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Power_Decimal_by_Integer()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Power_Decimal_by_Integer version '1.0.0'
 
                 define private Power_Integer_to_Integer: 0.0 ^ 3
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -628,11 +628,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Power_Decimal_by_Long()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Power_Decimal_by_Integer version '1.0.0'
 
                 define private Power_Integer_to_Integer: 5.0 ^ 5L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -684,11 +684,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Power_Decimal_by_Decimal()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Power_Decimal_by_Integer version '1.0.0'
 
                 define private Power_Integer_to_Integer: -10.0 ^ 10.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -740,11 +740,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Power_Decimal_by_Null()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Power_Decimal_by_Null version '1.0.0'
 
                 define private Product: 1.0 ^ null
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -794,11 +794,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Power_Null_by_Decimal()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Power_Integer_by_Null version '1.0.0'
 
                 define private Product: null ^ 1.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

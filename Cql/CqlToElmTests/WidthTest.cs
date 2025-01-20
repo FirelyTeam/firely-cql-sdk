@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Elm;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,11 +10,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Width_Integer()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library WidthTest version '1.0.0'
 
                 define private Width_Integers: width of Interval[3,7]
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -45,11 +45,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Width_Integers_Null()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library WidthTest version '1.0.0'
 
                 define private Width_Integers_Null: width of (null as Interval<Integer>)
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -78,11 +78,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Width_Integers_Null_Interval()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library WidthTest version '1.0.0'
 
                 define private Width_Integers_Error: width of Interval[1,null)
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

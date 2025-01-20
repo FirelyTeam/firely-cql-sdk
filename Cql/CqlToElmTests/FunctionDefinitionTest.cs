@@ -1,4 +1,4 @@
-﻿using CqlSdkPrototype.Infrastructure;
+using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Runtime.Extensions;
 using FluentAssertions;
 using Hl7.Cql.Elm;
@@ -264,11 +264,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void External_Function()
         {
-            var lib = CreateCqlApi().MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary("""
                 library FuncTest version '1.0.0'
 
                 define function Add(left Integer, right Integer) returns Integer: external
-            ");
+                """);
             lib.statements.Should().HaveCount(1);
             var fd = lib.statements[0].Should().BeOfType<FunctionDef>().Subject;
             fd.external.Should().BeTrue();

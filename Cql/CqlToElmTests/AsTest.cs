@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
@@ -10,34 +10,27 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class AsTest : Base
     {
-
-
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         [TestMethod]
         public void Integer_As_Decimal()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AsTest version '1.0.0'
 
                 define private Integer_As_Decimal: 1 as System.Decimal
-            ", "Expression of type*");
+                """, "Expression of type*");
 
         }
 
         [TestMethod]
         public void ValueSet_As_Vocabulary()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AsTest version '1.0.0'
 
-                valueset ""vs"": 'http://xyz.com'
+                valueset "vs": 'http://xyz.com'
 
-                define private ValueSet_As_Vocabulary: ""vs"" as System.Vocabulary
-            ");
+                define private ValueSet_As_Vocabulary: "vs" as System.Vocabulary
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -63,11 +56,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_As_Decimal()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AsTest version '1.0.0'
 
                 define private Null_As_Decimal: null as System.Decimal
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -137,13 +130,13 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FhirId_As_FhirString()
         {
-            var lib = CreateCqlApi().MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary("""
                 library AsTest version '1.0.0'
 
                 using FHIR version '4.0.1'
 
                 define private function f(id FHIR.id): id as FHIR.string
-            ");
+                """);
             lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
             var lambdas = CreateElmApi().ProcessLibrary(lib);
             var delegates = lambdas.CompileAll();
@@ -158,7 +151,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Choice_As()
         {
             // from MATGlobalCommonFunctionsFHIR4.cql function "Normalize Interval"
-            var lib = CreateCqlApi().MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary("""
                 library AsTest version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -168,7 +161,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define private function f(choice Choice<FHIR.dateTime, FHIR.Range>):
                     choice as FHIR.Range
-            ");
+                """);
             _ = CreateElmApi().ProcessLibrary(lib);
         }
     }

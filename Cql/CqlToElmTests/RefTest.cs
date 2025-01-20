@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
@@ -15,13 +15,13 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_Local()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($"""
                 library {nameof(RefTest)} version '1.0.0'
 
-                valueset ""vs"": 'http://xyz.com'
+                valueset "vs": 'http://xyz.com'
 
-                define private {nameof(ValueSet_Local)}: ""vs""
-            ");
+                define private {nameof(ValueSet_Local)}: "vs"
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -36,13 +36,13 @@ namespace Hl7.Cql.CqlToElm.Test
         [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/519")]
         public void CodeSystem_Local()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($"""
                 library {nameof(RefTest)} version '1.0.0'
 
                 private codesystem CS: 'id' version 'version string'
 
-                define private {nameof(CodeSystem_Local)}: ""CS""
-            ");
+                define private {nameof(CodeSystem_Local)}: "CS"
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -56,14 +56,14 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Code_Local()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($"""
                 library {nameof(RefTest)} version '1.0.0'
 
                 private codesystem CS: 'id' version 'version string'
                 private code C: 'id' from CS display 'Code display text'
 
-                define private {nameof(Code_Local)}: ""C""
-            ");
+                define private {nameof(Code_Local)}: "C"
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -77,15 +77,15 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Concept_Local()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
-                library {nameof(RefTest)} version '1.0.0'
+            var library = CreateCqlApi().MakeLibrary($$"""
+                library {{nameof(RefTest)}} version '1.0.0'
 
                 private codesystem CS: 'id' version 'version string'
                 private code C: 'id' from CS display 'Code display text'
-                private concept TheConcept: {{ C }} display 'My concept'
+                private concept TheConcept: { C } display 'My concept'
 
-                define private {nameof(Concept_Local)}: ""TheConcept""
-            ");
+                define private {{nameof(Concept_Local)}}: "TheConcept"
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -99,13 +99,13 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Parameter()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($"""
                 library {nameof(RefTest)} version '1.0.0'
 
-                private parameter ""Measurement Year"" System.Integer default 2023
+                private parameter "Measurement Year" System.Integer default 2023
 
-                define private {nameof(Parameter)}: ""Measurement Year""
-            ");
+                define private {nameof(Parameter)}: "Measurement Year"
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -141,13 +141,13 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Expression()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($"""
                 library {nameof(RefTest)} version '1.0.0'
 
                 define private four: 4
 
                 define private {nameof(Expression)}: four
-            ");
+                """);
 
             var f = shouldDefineExpression(library, nameof(Expression));
             var fref = f.expression.Should().BeOfType<ExpressionRef>().Subject;
@@ -162,13 +162,13 @@ namespace Hl7.Cql.CqlToElm.Test
         [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397")]
         public void Function()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($"""
                 library {nameof(RefTest)} version '1.0.0'
 
                 define private function double(a Decimal): a*2
 
                 define private {nameof(Function)}: double(4)
-            ");
+                """);
 
             var f = shouldDefineExpression(library, nameof(Function));
             var fref = f.expression.Should().BeOfType<FunctionRef>().Subject;
@@ -182,137 +182,137 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FunctionIncorrectNumParam()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($"""
                 library {nameof(RefTest)} version '1.0.0'
 
                 define private function double(a Decimal): a*2
 
                 define private {nameof(Function)}: double(4,5)
-            ", "Could not resolve*");
+                """, "Could not resolve*");
         }
 
         [TestMethod]
         public void FunctionIncorrectParam()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
+            var library = CreateCqlApi().MakeLibrary($"""
                 library {nameof(RefTest)} version '1.0.0'
 
                 define private function double(a Decimal): a*2
 
                 define private {nameof(Function)}: double('hi')
-            ", "Could not resolve*");
+                """, "Could not resolve*");
         }
 
         [TestMethod]
         public void FunctionVariableParamCount()
         {
-            var library1 = CreateCqlApi().MakeLibrary($@"
+            var library1 = CreateCqlApi().MakeLibrary($"""
                 library {nameof(RefTest)}1 version '1.0.0'
                 define private {nameof(Function)}: Date(1)
-            ");
-            var library2 = CreateCqlApi().MakeLibrary($@"
+                """);
+            var library2 = CreateCqlApi().MakeLibrary($"""
                 library {nameof(RefTest)}2 version '1.0.0'
                 define private {nameof(Function)}: Date(1,2)
-            ");
-            var library3 = CreateCqlApi().MakeLibrary($@"
+                """);
+            var library3 = CreateCqlApi().MakeLibrary($"""
                 library {nameof(RefTest)}3 version '1.0.0'
                 define private {nameof(Function)}: Date(1,2,3)
-            ");
-            var library4 = CreateCqlApi().MakeLibrary($@"
+                """);
+            var library4 = CreateCqlApi().MakeLibrary($"""
                 library {nameof(RefTest)}4 version '1.0.0'
                 define private {nameof(Function)}: Date(1,2,3,4)
-            ", "Could not resolve *");
-            var library5 = CreateCqlApi().MakeLibrary($@"
+                """, "Could not resolve *");
+            var library5 = CreateCqlApi().MakeLibrary($"""
                 library {nameof(RefTest)}5 version '1.0.0'
                 define private {nameof(Function)}: Date()
-            ", "Could not resolve *");
+                """, "Could not resolve *");
         }
 
         [TestMethod]
         public void InvokeParameter()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
-               library BareMinimum version '0.0.1'
+            var library = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
 
-                parameter x default 'bla'
+                 parameter x default 'bla'
 
-                define {nameof(InvokeParameter)}: x(4)
-            ", "Could not resolve call to operator x with signature (Integer).");
+                 define {nameof(InvokeParameter)}: x(4)
+                """, "Could not resolve call to operator x with signature (Integer).");
         }
 
         [TestMethod]
         public void InvokeExpression()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
-               library BareMinimum version '0.0.1'
+            var library = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
 
-                define pi: 3.14
+                 define pi: 3.14
 
-                define {nameof(InvokeExpression)}: pi()
-            ", "Could not resolve call to operator pi with signature ().");
+                 define {nameof(InvokeExpression)}: pi()
+                """, "Could not resolve call to operator pi with signature ().");
         }
 
         [TestMethod]
         public void InvokeNonLocalFunction()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
-               library BareMinimum version '0.0.1'
+            var library = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
 
-               include Math
+                include Math
 
-               define {nameof(InvokeExpression)}: Math.Floor(4)
-            ", "Unable to resolve library: Math version 'latest'*", "Could not resolve call to operator*");
+                define {nameof(InvokeExpression)}: Math.Floor(4)
+                """, "Unable to resolve library: Math version 'latest'*", "Could not resolve call to operator*");
         }
 
         [TestMethod]
         public void InvokeLibrary()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
-               library BareMinimum version '0.0.1'
+            var library = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
 
-               include Math
+                include Math
 
-               define {nameof(InvokeExpression)}: Math
-            ",
+                define {nameof(InvokeExpression)}: Math
+                """,
                                                      "Unable to resolve library: Math version 'latest'. Are you sure this library version exists and that you have access?", "Identifier Math is a library and cannot be used as an expression.");
         }
 
         [TestMethod]
         public void InvokeNonLocalExpression()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
-               library BareMinimum version '0.0.1'
+            var library = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
 
-               include Math
+                include Math
 
-               define {nameof(InvokeExpression)}: Math.MaxInt
-            ", "Unable to resolve library: Math version 'latest'*", "Could not resolve identifier MaxInt in library Math.");
+                define {nameof(InvokeExpression)}: Math.MaxInt
+                """, "Unable to resolve library: Math version 'latest'*", "Could not resolve identifier MaxInt in library Math.");
         }
 
 
         [TestMethod]
         public void InvokeNonexistentFluentFunction()
         {
-            _ = CreateCqlApi().MakeLibrary($@"
-             library BareMinimum version '0.0.1'
+            _ = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
 
-             using FHIR
-             context Patient
+                using FHIR
+                context Patient
 
-             define firstName: Patient.name.bad()
-            ", "Could not resolve call to operator*");
+                define firstName: Patient.name.bad()
+                """, "Could not resolve call to operator*");
         }
 
         [TestMethod]
         [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397")]
         public void InvokeFluentFunction()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
-             library BareMinimum version '0.0.1'
+            var library = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
 
-             define fluent function double(a Integer): a*2
-             define total: 4.double()
-            ");
+                define fluent function double(a Integer): a*2
+                define total: 4.double()
+                """);
 
             var f = shouldDefineExpression(library, "total");
             var fref = f.expression.Should().BeOfType<FunctionRef>().Subject;
@@ -326,11 +326,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeIntervalMember()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
-            library BareMinimum version '0.0.1'
+            var library = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
 
-            define lowI: Interval[1,3].low
-            ");
+                define lowI: Interval[1,3].low
+                """);
 
             var low = shouldDefineExpression(library, "lowI");
             low.expression.Should().BeOfType<Property>().Which.path.Should().Be("low");
@@ -343,11 +343,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeIntervalClosedMember()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
-            library BareMinimum version '0.0.1'
+            var library = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
 
-            define closed: Interval[1,3].highClosed
-            ");
+                define closed: Interval[1,3].highClosed
+                """);
 
             var low = shouldDefineExpression(library, "closed");
             low.expression.Should().BeOfType<Property>().Which.path.Should().Be("highClosed");
@@ -360,11 +360,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeTupleMember()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
-            library BareMinimum version '0.0.1'
+            var library = CreateCqlApi().MakeLibrary("""
+                library BareMinimum version '0.0.1'
 
-            define tupleMember: Tuple {{ name: 'Ewout' }}.name
-            ");
+                define tupleMember: Tuple { name: 'Ewout' }.name
+                """);
 
             var low = shouldDefineExpression(library, "tupleMember");
             low.expression.Should().BeOfType<Property>().Which.path.Should().Be("name");
@@ -377,83 +377,83 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeNonFluentFunctionFluently()
         {
-            _ = CreateCqlApi().MakeLibrary($@"
-             library BareMinimum version '0.0.1'
+            _ = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
 
-             define function double(a Integer): a*2
-             define total: 4.double()
-            ", "Function 'double' is called fluently, but its definition is not marked as fluent.");
+                define function double(a Integer): a*2
+                define total: 4.double()
+                """, "Function 'double' is called fluently, but its definition is not marked as fluent.");
         }
 
         [TestMethod]
         public void InvokeModel()
         {
-            _ = CreateCqlApi().MakeLibrary($@"
-             library BareMinimum version '0.0.1'
-             using FHIR
+            _ = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
+                using FHIR
 
-             define error: FHIR
-            ", "A reference to a model library is unexpected at this point.");
+                define error: FHIR
+                """, "A reference to a model library is unexpected at this point.");
         }
 
         [TestMethod]
         public void InvokeQualifiedType()
         {
-            _ = CreateCqlApi().MakeLibrary($@"
-             library BareMinimum version '0.0.1'
-             using FHIR
+            _ = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
+                using FHIR
 
-             define error: FHIR.Patient
-            ", "A reference to a type is unexpected at this point.");
+                define error: FHIR.Patient
+                """, "A reference to a type is unexpected at this point.");
         }
 
         [TestMethod]
         public void InvokeNoMembers()
         {
-            _ = CreateCqlApi().MakeLibrary($@"
-             library BareMinimum version '0.0.1'
-             using FHIR
+            _ = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
+                using FHIR
 
-             define error: 4.max
-            ", "Member 'max' not found for type Integer.");
+                define error: 4.max
+                """, "Member 'max' not found for type Integer.");
         }
 
         [TestMethod]
         public void InvokeChoiceMembers()
         {
-            _ = CreateCqlApi().MakeLibrary($@"
-             library BareMinimum version '0.0.1'
-             using FHIR
+            _ = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
+                using FHIR
 
-             define function choice() returns Choice<String,Integer> : external
-             define error: choice().left
-            ", "Type Choice<String, Integer> has no members.");
+                define function choice() returns Choice<String,Integer> : external
+                define error: choice().left
+                """, "Type Choice<String, Integer> has no members.");
         }
 
         [TestMethod]
         public void InvokeType()
         {
-            _ = CreateCqlApi().MakeLibrary($@"
-             library BareMinimum version '0.0.1'
+            _ = CreateCqlApi().MakeLibrary("""
+                library BareMinimum version '0.0.1'
 
-             using FHIR
-            include Math
+                using FHIR
+                include Math
 
-             define error: Patient
-            ", "Unable to resolve library: Math version 'latest'*", "Could not resolve identifier Patient in the current library.");
+                define error: Patient
+                """, "Unable to resolve library: Math version 'latest'*", "Could not resolve identifier Patient in the current library.");
         }
 
         [TestMethod]
         public void InvokeProperty()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
-                    library BareMinimum version '0.0.1'
-                    using FHIR
+            var library = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
+                using FHIR
 
-                    context Patient
+                context Patient
 
-                    define getActive: Patient.active
-            ");
+                define getActive: Patient.active
+                """);
 
             var getName = shouldDefineExpression(library, "getActive");
             var prop = getName.expression.Should().BeOfType<Property>().Subject;
@@ -468,14 +468,14 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeListProperty()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
-                    library BareMinimum version '0.0.1'
-                    using FHIR
+            var library = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
+                using FHIR
 
-                    context Patient
+                context Patient
 
-                    define getName: Patient.name
-            ");
+                define getName: Patient.name
+                """);
 
             var getName = shouldDefineExpression(library, "getName");
             var prop = getName.expression.Should().BeOfType<Property>().Subject;
@@ -490,14 +490,14 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeThroughListProperty()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
-                    library BareMinimum version '0.0.1'
-                    using FHIR
+            var library = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
+                using FHIR
 
-                    context Patient
+                context Patient
 
-                    define getName: Patient.name.family
-            ");
+                define getName: Patient.name.family
+                """);
 
             var getName = shouldDefineExpression(library, "getName");
             var prop = getName.expression.Should().BeOfType<Query>().Subject;
@@ -510,14 +510,14 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void InvokeListPropertyThroughListProperty()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
-                    library BareMinimum version '0.0.1'
-                    using FHIR
+            var library = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
+                using FHIR
 
-                    context Patient
+                context Patient
 
-                    define getName: Patient.name.given
-            ");
+                define getName: Patient.name.given
+                """);
 
             var getName = shouldDefineExpression(library, "getName");
             var prop = getName.expression.Should().BeOfType<Flatten>().Subject;
@@ -531,18 +531,18 @@ namespace Hl7.Cql.CqlToElm.Test
         [Ignore("Will fix in https://github.com/FirelyTeam/firely-cql-sdk/issues/397")]
         public void InvokeListPropertyViaFunction()
         {
-            var library = CreateCqlApi().MakeLibrary($@"
-                    library BareMinimum version '0.0.1'
+            var library = CreateCqlApi().MakeLibrary($"""
+                library BareMinimum version '0.0.1'
 
-                    using FHIR
+                using FHIR
 
-                    context Patient
+                context Patient
 
-                    // Just here to check that we parse the datatype well.
-                    define fluent function getContactName(contact List<FHIR.Patient.Contact>): contact.name
+                // Just here to check that we parse the datatype well.
+                define fluent function getContactName(contact List<FHIR.Patient.Contact>): contact.name
 
-                    define getName: Patient.contact.getContactName().given
-            ");
+                define getName: Patient.contact.getContactName().given
+                """);
 
             var getContactName = library.ShouldDefine<FunctionDef>("getContactName");
             getContactName.operand.Should().ContainSingle().Which

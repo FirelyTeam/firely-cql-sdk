@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Elm;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,11 +10,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_False: true implies false
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -66,11 +66,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_True()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_True: true implies true
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -122,11 +122,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void False_Implies_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library ImpliesTest version '1.0.0'
 
                 define private False_Implies_False: false implies false
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -178,11 +178,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_Null()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_Null: true implies null
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -233,11 +233,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Implies_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library ImpliesTest version '1.0.0'
 
                 define private Null_Implies_False: null implies false
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -288,11 +288,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Implies_Null()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library ImpliesTest version '1.0.0'
 
                 define private Null_Implies_Null: null implies null
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -343,11 +343,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_1()
         {
-            CreateCqlApi().MakeLibrary(@"
+            CreateCqlApi().MakeLibrary("""
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_1: true implies 1
-            ", "Could not resolve call*");
+                """, "Could not resolve call*");
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -37,7 +37,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FHIRHelpers_ToConcept_Right_Types()
         {
-            var lib = CreateCqlApi().MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary("""
                 library FHIRHelpers version '4.0.1'
 
                 using FHIR version '4.0.1'
@@ -50,7 +50,7 @@ namespace Hl7.Cql.CqlToElm.Test
                             codes: null,
                             display: concept.text.value
                         }
-            ");
+                """);
             var @if = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
             @if.Should().HaveType(SystemTypes.ConceptType);
         }
@@ -58,7 +58,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FHIRHelpers_ToConcept_Query()
         {
-            var lib = CreateCqlApi().MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary("""
                 library FHIRHelpers version '4.0.1'
 
                 using FHIR version '4.0.1'
@@ -81,7 +81,7 @@ namespace Hl7.Cql.CqlToElm.Test
                             codes: concept.coding C return ToCode(C),
                             display: concept.text.value
                         }
-            ");
+                """);
 
             lib.statements.Should().HaveCount(2);
             var fd = lib.statements[1].Should().BeOfType<FunctionDef>().Subject;

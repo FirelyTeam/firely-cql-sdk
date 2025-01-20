@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,11 +12,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Exists_True()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists { 1, 3, 5, 7 }
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -36,11 +36,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Exists_Empty_List()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists { }
-            ");
+                """);
 
             var exists = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Exists>();
             {
@@ -56,11 +56,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Exists_Null()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists null
-            ");
+                """);
 
             var exists = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Exists>();
             {
@@ -77,11 +77,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Exists_List_Nulls()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists { null }
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

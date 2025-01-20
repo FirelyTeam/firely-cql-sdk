@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Elm;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,11 +10,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Not_True()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library NotTest version '1.0.0'
 
                 define private Not_True: not true
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -56,11 +56,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Not_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library NotTest version '1.0.0'
 
                 define private Not_False: not false
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -101,11 +101,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Not_Null()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library NotTest version '1.0.0'
 
                 define private Not_Null: not null
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -144,10 +144,10 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Not_1() =>
-            CreateCqlApi().MakeLibrary(@"
+            CreateCqlApi().MakeLibrary("""
                 library NotTest version '1.0.0'
 
                 define private Not_1: not 1
-            ", "Could not resolve*");
+                """, "Could not resolve*");
     }
 }

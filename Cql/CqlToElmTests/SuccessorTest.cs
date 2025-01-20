@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Elm;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -11,11 +11,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Successor_Integer()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: successor of 2
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -44,11 +44,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Successor_Null()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: successor of (null as Integer)
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

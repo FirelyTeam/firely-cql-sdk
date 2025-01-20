@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -39,13 +39,13 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Convert_Quantity_To_Weeks()
         {
-            var lib = CreateCqlApi().MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary("""
 
-                library Test version '1.0.0'
+                                library Test version '1.0.0'
 
-                define function f(q Quantity):
-                    convert q to weeks
-            ");
+                                define function f(q Quantity):
+                                    convert q to weeks
+                """);
             lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ConvertQuantity>();
 
         }

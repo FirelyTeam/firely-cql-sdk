@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Elm;
+using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using FluentAssertions;
 
@@ -9,22 +9,23 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         private Library createLibraryForExpression(string expression)
         {
-            return CreateCqlApi().MakeLibrary($@"
+            return CreateCqlApi().MakeLibrary($"""
                 library CaseTest version '1.0.0'
 
-                define private predicate: {expression}");
+                define private predicate: {expression}
+                """);
         }
 
         [TestMethod]
         public void Case_Standard()
         {
-            var library = createLibraryForExpression(@"
-	            case
-					when 5 > 10 then 5 + 10
-					when 5 = 10 then 10
-					else 10 - 5
-				end
-            ");
+            var library = createLibraryForExpression("""
+                case
+                    when 5 > 10 then 5 + 10
+                    when 5 = 10 then 10
+                    else 10 - 5
+                end
+                """);
             var @case = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Case>();
             @case.caseItem.Should().NotBeNull();
             @case.caseItem.Should().HaveCount(2);
@@ -43,14 +44,14 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Case_ChoiceTypes()
         {
-            var library = createLibraryForExpression(@"
-	            case
-					when true then 'string'
-					when false then 10
+            var library = createLibraryForExpression("""
+                case
+                    when true then 'string'
+                    when false then 10
                     when null then null
-					else Interval[3.0,5.0]
-				end
-            ");
+                    else Interval[3.0,5.0]
+                end
+                """);
             var @case = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Case>();
             @case.caseItem.Should().NotBeNull();
             @case.caseItem.Should().HaveCount(3);

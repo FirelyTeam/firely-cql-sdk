@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using FluentAssertions.Primitives;
 using Hl7.Cql.Elm;
 using System.Globalization;

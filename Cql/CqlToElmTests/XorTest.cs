@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Elm;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,11 +10,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Xor_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library XorTest version '1.0.0'
 
                 define private True_Xor_False: true xor false
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -66,11 +66,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Xor_True()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library XorTest version '1.0.0'
 
                 define private True_Xor_True: true xor true
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -122,11 +122,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void False_Xor_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library XorTest version '1.0.0'
 
                 define private False_Xor_False: false xor false
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -178,11 +178,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Xor_Null()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library XorTest version '1.0.0'
 
                 define private True_Xor_Null: true xor null
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -233,11 +233,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Xor_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library XorTest version '1.0.0'
 
                 define private Null_Xor_False: null xor false
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -289,11 +289,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Xor_Null()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library XorTest version '1.0.0'
 
                 define private Null_Xor_Null: null xor null
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -344,11 +344,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Xor_1()
         {
-            CreateCqlApi().MakeLibrary(@"
+            CreateCqlApi().MakeLibrary("""
                 library XorTest version '1.0.0'
 
                 define private True_Xor_1: true xor 1
-            ", "Could not resolve*");
+                """, "Could not resolve*");
         }
     }
 }

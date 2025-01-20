@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Scopes;
 using Hl7.Cql.Elm;

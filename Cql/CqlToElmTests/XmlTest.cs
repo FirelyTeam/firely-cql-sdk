@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.CqlToElm.Builtin;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;

@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,11 +10,11 @@ namespace Hl7.Cql.CqlToElm.Test
          [TestMethod]
         public void Starts_Properly_Within_Start()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library InTest version '1.0.0'
 
                 define private Starts_Properly_Within_Start: Interval[@2023, @2030] starts properly within 1 year of start Interval[@2022, @2030]
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -39,11 +39,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_Within_Start()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library InTest version '1.0.0'
 
                 define f: Interval[@2023, @2030] starts within 1 year of start Interval[@2022, @2030]
-            ");
+                """);
             library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
         }
 
@@ -51,11 +51,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Properly_Within_Start()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library InTest version '1.0.0'
 
                 define private Properly_Within_Start: Interval[@2023, @2030] properly within 1 year of start Interval[@2022, @2030]
-            ");
+                """);
             var @in = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
         }
 
@@ -77,12 +77,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_Within_PointInterval()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library InTest version '1.0.0'
 
                 define f:
                     Interval[@2024-07-23, @2024-07-30] starts within 1 day of end of Interval[@2024-07-17, @2024-07-24]
-            ");
+                """);
             library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
         }
     }

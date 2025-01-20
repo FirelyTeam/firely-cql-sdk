@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,11 +10,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_Between_Days()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Days: duration in days between @2023-01-01 and @2023-01-31
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -34,11 +34,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_Between_Days_Shortform()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Days: days between @2023-01-01 and @2023-01-31
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -57,11 +57,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_Between_Months()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Months: duration in months between @2023-01-01 and @2023-02-01
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -79,11 +79,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_Between_Weeks()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Months: duration in weeks between @2023-01-01 and @2023-01-08
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -103,11 +103,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_Between_Years()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Months: duration in years between @2023-01-01 and @2024-02-01
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -125,20 +125,20 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Duration_Between_Date_In_Hours() =>
-            CreateCqlApi().MakeLibrary(@"
+            CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Date_In_Hours: duration in hours between @2023-01-01 and @2024-02-01
-            ", "For Date values, precision must be one of: years, months, weeks, or days.");
+                """, "For Date values, precision must be one of: years, months, weeks, or days.");
 
         [TestMethod]
         public void Duration_Between_Hours()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Hours: duration in hours between @T12:00:00 and @T20:00:00
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -157,11 +157,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_Between_Minutes()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Minutes: duration in minutes between @T12:00:00 and @T20:00:00
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -180,11 +180,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_Between_Seconds()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Minutes: duration in seconds between @T12:00:00 and @T12:00:30
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -203,11 +203,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_Between_Milliseconds()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Milliseconds: duration in milliseconds between @T12:00:00.100 and @T12:00:00.300
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -225,16 +225,16 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Duration_Between_Time_In_Days() =>
-            CreateCqlApi().MakeLibrary(@"
+            CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Milliseconds: duration in days between @T12:00:00.100 and @T12:00:00.300
-            ", "For Time values, precision must be one of: hours, minutes, seconds, or milliseconds.");
+                """, "For Time values, precision must be one of: hours, minutes, seconds, or milliseconds.");
 
         [TestMethod]
         public void Duration_Between_DateTimes()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_DateTimes_Years: duration in years between @2023-01-01T12:00:00.100 and @2024-01-01T12:00:00.100
@@ -245,17 +245,17 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private Duration_Between_DateTimes_Minutes: duration in minutes between @2023-01-01T12:00:00.100 and @2024-01-01T12:00:00.100
                 define private Duration_Between_DateTimes_Seconds: duration in seconds between @2023-01-01T12:00:00.100 and @2024-01-01T12:00:00.100
                 define private Duration_Between_DateTimes_Milliseconds: duration in milliseconds between @2023-01-01T12:00:00.100 and @2024-01-01T12:00:00.100
-            ");
+                """);
         }
 
         [TestMethod]
         public void Duration_Between_Null()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Months: duration in weeks between null and @2023-01-08
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -272,20 +272,20 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Duration_Between_Null_Null() =>
-            CreateCqlApi().MakeLibrary(@"
+            CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define private Duration_Between_Months: duration in weeks between null and null
-            ", "Call to operator DurationBetween(Any, Any, String) is ambiguous with*");
+                """, "Call to operator DurationBetween(Any, Any, String) is ambiguous with*");
 
         [TestMethod]
         public void Duration_In_Days()
         {
-            var lib = CreateCqlApi().MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define d: duration in days of Interval[@2023-01-01, @2023-01-31]
-            ");
+                """);
             var db = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<DurationBetween>();
             db.operand.Should().HaveCount(2);
             var start = db.operand[0].Should().BeOfType<Start>().Subject;
@@ -314,11 +314,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_In_Days_MixedPrecision()
         {
-            var lib = CreateCqlApi().MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define d: duration in days of Interval[@2023-01-01, @2023-01-31T12:30:45]
-            ");
+                """);
             var db = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<DurationBetween>();
             db.operand.Should().HaveCount(2);
             var start = db.operand[0].Should().BeOfType<Start>().Subject;
@@ -332,21 +332,21 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Duration_In_Days_NonInterval()
         {
-            var lib = CreateCqlApi().MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define d: duration in days of 1
-            ", "Could not resolve call to operator DurationBetween with signature (Integer, Integer, String).");
+                """, "Could not resolve call to operator DurationBetween with signature (Integer, Integer, String).");
         }
 
         [TestMethod]
         public void Difference_In_Years()
         {
-            var lib = CreateCqlApi().MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary("""
                 library DurationTest version '1.0.0'
 
                 define d: difference in years of Interval[@2023-01-01, @2023-01-31]
-            ");
+                """);
             var db = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<DifferenceBetween>();
             db.operand.Should().HaveCount(2);
             var start = db.operand[0].Should().BeOfType<Start>().Subject;

@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -13,11 +13,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_EquivalentTo_Integer()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Integer_EquivalentTo_Integer: 1 ~ 1
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -69,11 +69,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_EquivalentTo_Integer_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Integer_EquivalentTo_Integer_False: 1 ~ 2
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -125,11 +125,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_EquivalentTo_Long()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Integer_EquivalentTo_Long: 1 ~ 1L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -181,11 +181,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_EquivalentTo_Decimal_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Integer_EquivalentTo_Decimal_False: 1 ~ 2.01
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -238,11 +238,11 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Integer_EquivalentTo_Quantity()
         {
             // 1 converts to 1.0 '1' and '1' units are equal to all units
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Integer_EquivalentTo_Quantity: 1 ~ 1.0 'g'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -294,11 +294,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_EquivalentTo_Quantity_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Integer_EquivalentTo_Quantity_False: 1 ~ 2.0 '1'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -370,11 +370,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_EquivalentTo_Long()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Long_EquivalentTo_Long: 1L ~ 1L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -426,11 +426,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_EquivalentTo_Long_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Long_EquivalentTo_Long_False: 1L ~ 2L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -482,11 +482,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_EquivalentTo_Integer()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Long_EquivalentTo_Long: 1L ~ 1
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -538,11 +538,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_EquivalentTo_Decimal_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Long_EquivalentTo_Decimal_False: 1L ~ 2.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -595,11 +595,11 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Long_EquivalentTo_Quantity()
         {
             // 1L converts to 1.0 '1' and '1' units are equal to all units
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Long_EquivalentTo_Quantity: 1L ~ 1.0 'g'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -651,11 +651,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_EquivalentTo_Quantity_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Long_EquivalentTo_Quantity_False: 1L ~ 2 '1'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -727,11 +727,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_EquivalentTo_Decimal()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_EquivalentTo_Decimal: 1.0 ~ 1.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -783,11 +783,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_EquivalentTo_Decimal_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_EquivalentTo_Decimal_False: 1.0 ~ 2.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -839,11 +839,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_EquivalentTo_Integer()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_EquivalentTo_Decimal: 1.0 ~ 1
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -895,11 +895,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_EquivalentTo_Long_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_EquivalentTo_Long_False: 2.0 ~ 1L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -952,11 +952,11 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Decimal_EquivalentTo_Quantity()
         {
             // 1.0 converts to 1.0 '1' and '1' units are equal to all units
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_EquivalentTo_Quantity: 1.0 ~ 1.0 'g'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1008,11 +1008,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_EquivalentTo_Quantity_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_EquivalentTo_Quantity_False: 1.0 ~ 2.0 '1'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1084,11 +1084,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_EquivalentTo_Quantity()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_EquivalentTo_Quantity: 1.0 '1' ~ 1.0 '1'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1140,11 +1140,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_EquivalentTo_Quantity_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_EquivalentTo_Quantity_False: 1.0 '1' ~ 2.0 '1'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1196,11 +1196,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_EquivalentTo_Integer()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_EquivalentTo_Quantity: 1.0 '1' ~ 1
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1252,11 +1252,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_EquivalentTo_Long_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_EquivalentTo_Long_False: 2.0 '1' ~ 1L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1309,11 +1309,11 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Quantity_EquivalentTo_Decimal()
         {
             // 1.0 converts to 1.0 '1' and '1' units are equal to all units
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_EquivalentTo_Decimal: 1.0 'g' ~ 1.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1384,11 +1384,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void String_EquivalentTo_String()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private String_EquivalentTo_String: 'hello' ~ 'hello'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);

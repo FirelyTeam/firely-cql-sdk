@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Elm;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,11 +10,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_And_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AndTest version '1.0.0'
 
                 define private True_And_False: true and false
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -66,11 +66,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_And_True()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AndTest version '1.0.0'
 
                 define private True_And_True: true and true
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -122,11 +122,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void False_And_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AndTest version '1.0.0'
 
                 define private False_And_False: false and false
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -178,11 +178,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_And_Null()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AndTest version '1.0.0'
 
                 define private True_And_Null: true and null
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -233,11 +233,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_And_False()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AndTest version '1.0.0'
 
                 define private Null_And_False: null and false
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -289,11 +289,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_And_Null()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AndTest version '1.0.0'
 
                 define private Null_And_Null: null and null
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -344,11 +344,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_And_1()
         {
-            CreateCqlApi().MakeLibrary(@"
+            CreateCqlApi().MakeLibrary("""
                 library AndTest version '1.0.0'
 
                 define private True_And_1: true and 1
-            ", "Could not resolve*");
+                """, "Could not resolve*");
         }
     }
 }
