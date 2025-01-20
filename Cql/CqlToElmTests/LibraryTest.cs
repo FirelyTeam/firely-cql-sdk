@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using CqlSdkPrototype.Cql.Internal;
+using CqlSdkPrototype.Infrastructure;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -81,20 +82,22 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_AllTerms()
         {
-            var services = ServiceCollection(models: mp => mp.Add(new Model.ModelInfo
+            var modelInfo = new Model.ModelInfo
             {
                 name = "Namespace.Using_AllTerms_WithNamespace",
                 url = "http://test.org",
                 version = "1.0.0"
-            }));
+            };
 
-            var x = services.BuildServiceProvider();
-            var converter = x.GetRequiredService<CqlToElmConverter>();
-            var library = converter.ConvertLibrary(@"
+            var cqlLibraryString = CqlLibraryString.FromCql(
+                """
                 library UsingTest version '1.0.0'
 
                 using Namespace.Using_AllTerms_WithNamespace version '1.0.0' called Derp
-            ");
+                """);
+
+            var library = CreateCqlApi(ModelInfos: [modelInfo], Models: []).MakeLibrary(cqlLibraryString.Cql);
+
             Assert.IsNotNull(library.usings);
             Assert.AreEqual(1, library.usings.Length);
             Assert.AreEqual("Derp", library.usings[0].localIdentifier);
@@ -741,8 +744,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 private concept Name: { ""code1"", ""code2"", ""code3"" } display 'My concept'
             ");
-            var lib = LibraryExpressionBuilder;
-            _ = lib.ProcessLibrary(library);
+            _ = CreateElmApi().ProcessLibrary(library);
         }
 
 

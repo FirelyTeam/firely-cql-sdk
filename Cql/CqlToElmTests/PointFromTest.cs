@@ -37,7 +37,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var interval = (Interval)pointFrom.operand;
                 AssertIntervalType(interval.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = LibraryExpressionBuilder.Lambda(pointFrom);
+                var lambda = CreateElmApi().Lambda(pointFrom);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);
@@ -71,7 +71,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var interval = (Interval)pointFrom.operand;
                 AssertIntervalType(interval.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = LibraryExpressionBuilder.Lambda(pointFrom);
+                var lambda = CreateElmApi().Lambda(pointFrom);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);
@@ -107,7 +107,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(@as.operand, typeof(Null));
                 AssertIntervalType(@as.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = LibraryExpressionBuilder.Lambda(pointFrom);
+                var lambda = CreateElmApi().Lambda(pointFrom);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);
@@ -139,7 +139,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var list = (Interval)pointFrom.operand;
                 AssertIntervalType(list.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = LibraryExpressionBuilder.Lambda(pointFrom);
+                var lambda = CreateElmApi().Lambda(pointFrom);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 Assert.ThrowsException<TargetInvocationException>(() => dg.DynamicInvoke(ctx));

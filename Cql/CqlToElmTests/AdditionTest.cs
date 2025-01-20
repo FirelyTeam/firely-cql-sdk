@@ -67,7 +67,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual("2", rhs.value);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(int?));
@@ -125,7 +125,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual("2", rhs.value);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(long?));
@@ -184,7 +184,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual("2.0", rhs.value);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
@@ -244,7 +244,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual(UCUMUnits.Default, rhs.unit);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -308,7 +308,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual("2", rhs.value);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(long?));
@@ -368,7 +368,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual("2.0", rhs.value);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
@@ -429,7 +429,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual(UCUMUnits.Default, rhs.unit);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -489,7 +489,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual("2.0", rhs.value);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
@@ -550,7 +550,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual(UCUMUnits.Default, rhs.unit);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -611,7 +611,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual(UCUMUnits.Default, rhs.unit);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -677,7 +677,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(long?));
@@ -733,7 +733,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
@@ -789,7 +789,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -848,7 +848,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
@@ -904,7 +904,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -963,7 +963,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -1026,7 +1026,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Integer", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.AreEqual(null, result);
@@ -1080,7 +1080,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.IsNotNull(lhsnts.name.Name);
                     Assert.AreEqual($"{{{SystemUri}}}Integer", lhsnts.name.Name);
                 }
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.AreEqual(null, result);
@@ -1139,7 +1139,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -1200,7 +1200,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);
@@ -1233,7 +1233,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(add.operand);
                 Assert.AreEqual(2, add.operand.Length);
                 {
-                    var lhs = add.operand[0] as Elm.DateTime;
+                    var lhs = add.operand[0] as DateTime;
                     Assert.IsNotNull(lhs!.resultTypeName);
                     Assert.AreEqual($"{{{SystemUri}}}DateTime", lhs!.resultTypeName.Name);
                     Assert.IsNotNull(lhs.resultTypeSpecifier);
@@ -1255,7 +1255,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -1300,7 +1300,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(add.operand);
                 Assert.AreEqual(2, add.operand.Length);
                 {
-                    var lhs = add.operand[0] as Elm.DateTime;
+                    var lhs = add.operand[0] as DateTime;
                     Assert.IsNotNull(lhs!.resultTypeName);
                     Assert.AreEqual($"{{{SystemUri}}}DateTime", lhs!.resultTypeName.Name);
                     Assert.IsNotNull(lhs.resultTypeSpecifier);
@@ -1323,7 +1323,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);
@@ -1356,7 +1356,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(add.operand);
                 Assert.AreEqual(2, add.operand.Length);
                 {
-                    var lhs = add.operand[0] as Elm.Time;
+                    var lhs = add.operand[0] as Time;
                     Assert.IsNotNull(lhs!.resultTypeName);
                     Assert.AreEqual($"{{{SystemUri}}}Time", lhs!.resultTypeName.Name);
                     Assert.IsNotNull(lhs.resultTypeSpecifier);
@@ -1378,7 +1378,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -1417,7 +1417,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(add.operand);
                 Assert.AreEqual(2, add.operand.Length);
                 {
-                    var lhs = add.operand[0] as Elm.Time;
+                    var lhs = add.operand[0] as Time;
                     Assert.IsNotNull(lhs!.resultTypeName);
                     Assert.AreEqual($"{{{SystemUri}}}Time", lhs!.resultTypeName.Name);
                     Assert.IsNotNull(lhs.resultTypeSpecifier);
@@ -1440,7 +1440,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);
@@ -1522,7 +1522,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
@@ -1578,7 +1578,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);

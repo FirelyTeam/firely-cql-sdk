@@ -1,8 +1,8 @@
-﻿using FluentAssertions;
-using Hl7.Cql.CqlToElm.LibraryProviders;
+﻿using CqlSdkPrototype.Infrastructure;
+using CqlSdkPrototype.Runtime.Extensions;
+using FluentAssertions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -284,16 +284,22 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CSharp_Keyword_Parameter_Name()
         {
-            var lib = CreateCqlApi().MakeLibrary(@"
+            var cqlApi = CreateCqlApi();
+            var cqlLibraryString = CqlLibraryString.FromCql(
+                """
                 library FuncTest version '1.0.0'
 
                 define function ToInteger(decimal System.Decimal) returns System.Integer: external
-            ");
-            var lambdas = LibraryExpressionBuilder.ProcessLibrary(lib);
+                """);
+
+            var lib = cqlApi.MakeLibrary(cqlLibraryString.Cql);
+            var lambdas = cqlApi.CreateElmApi().ProcessLibrary(lib);
             var expr = lambdas["FuncTest-1.0.0", "ToInteger", typeof(CqlContext), typeof(decimal?)];
             expr.Parameters.Should().HaveCount(2);
             expr.Parameters[1].Name.Should().Be("decimal");
-            _ = Compile(lib);
+
+            using var scope = cqlApi.CreateRuntimeScope();
+            _ = scope;
         }
     }
 }

@@ -33,8 +33,8 @@ namespace Hl7.Cql.CqlToElm.Test
         private static List List(TypeSpecifier elementType, params Expression[] elements) => new List { element = elements }.WithResultType(elementType.ToListType());
         private static ChoiceTypeSpecifier Choice(params TypeSpecifier[] types) => new ChoiceTypeSpecifier(types);
 
-        private static Elm.Tuple Tuple(params (string name, Expression value)[] tuple) =>
-            new Elm.Tuple { element = tuple.Select(t => new TupleElement { name = t.name, value = t.value }).ToArray() }
+        private static Tuple Tuple(params (string name, Expression value)[] tuple) =>
+            new Tuple { element = tuple.Select(t => new TupleElement { name = t.name, value = t.value }).ToArray() }
             .WithResultType(TupleType(tuple.Select(t => (t.name, t.value.resultTypeSpecifier)).ToArray()));
         private static TypeSpecifier TupleType(params (string name, TypeSpecifier type)[] tuple) =>
             new TupleTypeSpecifier { element = tuple.Select(t => new TupleElementDefinition { name = t.name, elementType = t.type }).ToArray() };

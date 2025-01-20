@@ -50,7 +50,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 }
 
 
-                var lambda = LibraryExpressionBuilder.Lambda(not);
+                var lambda = CreateElmApi().Lambda(not);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -95,7 +95,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 }
 
 
-                var lambda = LibraryExpressionBuilder.Lambda(not);
+                var lambda = CreateElmApi().Lambda(not);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -140,7 +140,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 }
 
 
-                var lambda = LibraryExpressionBuilder.Lambda(not);
+                var lambda = CreateElmApi().Lambda(not);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);

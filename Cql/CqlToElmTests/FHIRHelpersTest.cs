@@ -3,7 +3,6 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
-using CqlSdkPrototype.Cql.Extensions;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -39,9 +38,8 @@ namespace Hl7.Cql.CqlToElm.Test
             using var fs = new FileStream("FHIRHelpers-4.0.1.json", FileMode.Create, FileAccess.Write, FileShare.Read);
             lib.WriteJson(fs);
             fs.Close();
-            var eb = LibraryExpressionBuilder;
-            var lambdas = eb.ProcessLibrary(lib);
-            var delegates = lambdas.CompileAll();
+            var lambdas = CreateElmApi().ProcessLibrary(lib);
+            _ = lambdas.CompileAll();
         }
 
         [TestMethod]
@@ -95,9 +93,8 @@ namespace Hl7.Cql.CqlToElm.Test
 
             lib.statements.Should().HaveCount(2);
             var fd = lib.statements[1].Should().BeOfType<FunctionDef>().Subject;
-            var eb = LibraryExpressionBuilder;
-            var lambdas = eb.ProcessLibrary(lib);
-            var delegates = lambdas.CompileAll();
+            var lambdas = CreateElmApi().ProcessLibrary(lib);
+            _ = lambdas.CompileAll();
         }
 
         [TestMethod]

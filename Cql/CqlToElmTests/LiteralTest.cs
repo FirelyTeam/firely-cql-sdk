@@ -534,9 +534,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.DateTime));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(DateTime));
             {
-                var dateTime = (Elm.DateTime)library.statements[0].expression;
+                var dateTime = (DateTime)library.statements[0].expression;
                 Assert.IsNotNull(dateTime.resultTypeName);
                 Assert.AreEqual($"{{{SystemUri}}}DateTime", dateTime.resultTypeName.Name);
                 Assert.IsNotNull(dateTime.resultTypeSpecifier);
@@ -667,9 +667,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.DateTime));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(DateTime));
             {
-                var dateTime = (Elm.DateTime)library.statements[0].expression;
+                var dateTime = (DateTime)library.statements[0].expression;
                 Assert.IsNotNull(dateTime.resultTypeName);
                 Assert.AreEqual($"{{{SystemUri}}}DateTime", dateTime.resultTypeName.Name);
                 Assert.IsNotNull(dateTime.resultTypeSpecifier);
@@ -788,9 +788,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.DateTime));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(DateTime));
             {
-                var dateTime = (Elm.DateTime)library.statements[0].expression;
+                var dateTime = (DateTime)library.statements[0].expression;
                 Assert.IsNotNull(dateTime.resultTypeName);
                 Assert.AreEqual($"{{{SystemUri}}}DateTime", dateTime.resultTypeName.Name);
                 Assert.IsNotNull(dateTime.resultTypeSpecifier);
@@ -897,9 +897,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.DateTime));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(DateTime));
             {
-                var dateTime = (Elm.DateTime)library.statements[0].expression;
+                var dateTime = (DateTime)library.statements[0].expression;
                 Assert.IsNotNull(dateTime.resultTypeName);
                 Assert.AreEqual($"{{{SystemUri}}}DateTime", dateTime.resultTypeName.Name);
                 Assert.IsNotNull(dateTime.resultTypeSpecifier);
@@ -994,9 +994,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.DateTime));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(DateTime));
             {
-                var dateTime = (Elm.DateTime)library.statements[0].expression;
+                var dateTime = (DateTime)library.statements[0].expression;
                 Assert.IsNotNull(dateTime.resultTypeName);
                 Assert.AreEqual($"{{{SystemUri}}}DateTime", dateTime.resultTypeName.Name);
                 Assert.IsNotNull(dateTime.resultTypeSpecifier);
@@ -1089,9 +1089,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Time));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Time));
             {
-                var dateTime = (Elm.Time)library.statements[0].expression;
+                var dateTime = (Time)library.statements[0].expression;
                 Assert.IsNotNull(dateTime.resultTypeName);
                 Assert.AreEqual($"{{{SystemUri}}}Time", dateTime.resultTypeName.Name);
                 Assert.IsNotNull(dateTime.resultTypeSpecifier);
@@ -1171,9 +1171,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Time));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Time));
             {
-                var dateTime = (Elm.Time)library.statements[0].expression;
+                var dateTime = (Time)library.statements[0].expression;
                 Assert.IsNotNull(dateTime.resultTypeName);
                 Assert.AreEqual($"{{{SystemUri}}}Time", dateTime.resultTypeName.Name);
                 Assert.IsNotNull(dateTime.resultTypeSpecifier);
@@ -1237,9 +1237,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Time));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Time));
             {
-                var dateTime = (Elm.Time)library.statements[0].expression;
+                var dateTime = (Time)library.statements[0].expression;
                 Assert.IsNotNull(dateTime.resultTypeName);
                 Assert.AreEqual($"{{{SystemUri}}}Time", dateTime.resultTypeName.Name);
                 Assert.IsNotNull(dateTime.resultTypeSpecifier);
@@ -1291,9 +1291,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Time));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Time));
             {
-                var dateTime = (Elm.Time)library.statements[0].expression;
+                var dateTime = (Time)library.statements[0].expression;
                 Assert.IsNotNull(dateTime.resultTypeName);
                 Assert.AreEqual($"{{{SystemUri}}}Time", dateTime.resultTypeName.Name);
                 Assert.IsNotNull(dateTime.resultTypeSpecifier);
@@ -1337,9 +1337,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Quantity));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Quantity));
             {
-                var quantity = (Elm.Quantity)library.statements[0].expression;
+                var quantity = (Quantity)library.statements[0].expression;
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(6.2m, quantity.value);
@@ -1359,9 +1359,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Quantity));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Quantity));
             {
-                var quantity = (Elm.Quantity)library.statements[0].expression;
+                var quantity = (Quantity)library.statements[0].expression;
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(6m, quantity.value);
@@ -1381,9 +1381,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Quantity));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Quantity));
             {
-                var quantity = (Elm.Quantity)library.statements[0].expression;
+                var quantity = (Quantity)library.statements[0].expression;
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(6m, quantity.value);
@@ -1403,9 +1403,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Quantity));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Quantity));
             {
-                var quantity = (Elm.Quantity)library.statements[0].expression;
+                var quantity = (Quantity)library.statements[0].expression;
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(1.245671213m, quantity.value);
@@ -1425,9 +1425,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Quantity));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Quantity));
             {
-                var quantity = (Elm.Quantity)library.statements[0].expression;
+                var quantity = (Quantity)library.statements[0].expression;
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(1.245671213m, quantity.value);
@@ -1447,9 +1447,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Quantity));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Quantity));
             {
-                var quantity = (Elm.Quantity)library.statements[0].expression;
+                var quantity = (Quantity)library.statements[0].expression;
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(0m, quantity.value);
@@ -1469,9 +1469,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Quantity));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Quantity));
             {
-                var quantity = (Elm.Quantity)library.statements[0].expression;
+                var quantity = (Quantity)library.statements[0].expression;
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(0m, quantity.value);
@@ -1491,9 +1491,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Quantity));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Quantity));
             {
-                var quantity = (Elm.Quantity)library.statements[0].expression;
+                var quantity = (Quantity)library.statements[0].expression;
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(0m, quantity.value);
@@ -1513,9 +1513,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Quantity));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Quantity));
             {
-                var quantity = (Elm.Quantity)library.statements[0].expression;
+                var quantity = (Quantity)library.statements[0].expression;
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(0m, quantity.value);
@@ -1535,9 +1535,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Quantity));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Quantity));
             {
-                var quantity = (Elm.Quantity)library.statements[0].expression;
+                var quantity = (Quantity)library.statements[0].expression;
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(0.25m, quantity.value);
@@ -1557,9 +1557,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Quantity));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Quantity));
             {
-                var quantity = (Elm.Quantity)library.statements[0].expression;
+                var quantity = (Quantity)library.statements[0].expression;
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(0.25m, quantity.value);
@@ -1579,9 +1579,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Quantity));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Quantity));
             {
-                var quantity = (Elm.Quantity)library.statements[0].expression;
+                var quantity = (Quantity)library.statements[0].expression;
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(1m, quantity.value);
@@ -1602,9 +1602,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Quantity));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Quantity));
             {
-                var quantity = (Elm.Quantity)library.statements[0].expression;
+                var quantity = (Quantity)library.statements[0].expression;
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(1m, quantity.value);
@@ -1624,9 +1624,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Quantity));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Quantity));
             {
-                var quantity = (Elm.Quantity)library.statements[0].expression;
+                var quantity = (Quantity)library.statements[0].expression;
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(2000000m, quantity.value);
@@ -1646,9 +1646,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Quantity));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Quantity));
             {
-                var quantity = (Elm.Quantity)library.statements[0].expression;
+                var quantity = (Quantity)library.statements[0].expression;
                 Assert.IsNotNull(quantity.localId);
                 Assert.IsNotNull(quantity.locator);
                 Assert.AreEqual(2000000m, quantity.value);
@@ -1670,9 +1670,9 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
-            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Elm.Ratio));
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Ratio));
             {
-                var ratio = (Elm.Ratio)library.statements[0].expression;
+                var ratio = (Ratio)library.statements[0].expression;
                 Assert.IsNotNull(ratio.localId);
                 Assert.IsNotNull(ratio.locator);
                 Assert.IsNotNull(ratio.numerator);

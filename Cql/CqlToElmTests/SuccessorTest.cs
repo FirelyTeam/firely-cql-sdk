@@ -36,7 +36,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(successor.operand, typeof(Literal));
 
 
-                var lambda = LibraryExpressionBuilder.Lambda(successor);
+                var lambda = CreateElmApi().Lambda(successor);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);
@@ -69,7 +69,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(successor.operand, typeof(As));
 
 
-                var lambda = LibraryExpressionBuilder.Lambda(successor);
+                var lambda = CreateElmApi().Lambda(successor);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);

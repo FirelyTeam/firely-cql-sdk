@@ -298,8 +298,8 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 var @is = (Is)library.statements[0].expression;
                 Assert.IsNotNull(@is.operand);
-                Assert.IsInstanceOfType(@is.operand, typeof(Elm.Tuple));
-                var operand = (Elm.Tuple)@is.operand;
+                Assert.IsInstanceOfType(@is.operand, typeof(Tuple));
+                var operand = (Tuple)@is.operand;
                 
                 AssertTupleType(@is.isTypeSpecifier, ("x", $"{{{SystemUri}}}Integer"), ("y", $"{{{SystemUri}}}Integer"));
 
@@ -323,8 +323,8 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 var @is = (Is)library.statements[0].expression;
                 Assert.IsNotNull(@is.operand);
-                Assert.IsInstanceOfType(@is.operand, typeof(Elm.Tuple));
-                var operand = (Elm.Tuple)@is.operand;
+                Assert.IsInstanceOfType(@is.operand, typeof(Tuple));
+                var operand = (Tuple)@is.operand;
 
                 AssertTupleType(@is.isTypeSpecifier, ("x", $"{{{SystemUri}}}Decimal"), ("y", $"{{{SystemUri}}}Integer"));
 
@@ -335,7 +335,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private void AssertIs(Is @is, bool? expected)
         {
-            var lambda = LibraryExpressionBuilder.Lambda(@is);
+            var lambda = CreateElmApi().Lambda(@is);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
             var result = dg.DynamicInvoke(ctx);

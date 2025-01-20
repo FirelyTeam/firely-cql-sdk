@@ -4,6 +4,8 @@ using Hl7.Fhir.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
+using CqlSdkPrototype.Infrastructure;
+using CqlSdkPrototype.Runtime.Extensions;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -18,17 +20,19 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Retrieve_AllTerms()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
-                library RetrieveTest version '1.0.0'
+            var cqlApi = CreateCqlApi();
+            var cqlLibraryString = CqlLibraryString.FromCql("""
+                                   library RetrieveTest version '1.0.0'
 
-                using FHIR version '4.0.1'
+                                   using FHIR version '4.0.1'
 
-                valueset ""terminology"": 'http://fire.ly/ValueSet/Test'
+                                   valueset "terminology": 'http://fire.ly/ValueSet/Test'
 
-                context Patient
+                                   context Patient
 
-                define private Retrieve_AllTerms: [Patient->Condition: code in ""terminology""]
-            ");
+                                   define private Retrieve_AllTerms: [Patient->Condition: code in "terminology"]
+                                   """);
+            var library = cqlApi.MakeLibrary(cqlLibraryString.Cql);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(2, library.statements.Length);
             Assert.IsNotNull(library.statements[1].expression.localId);
@@ -99,9 +103,10 @@ namespace Hl7.Cql.CqlToElm.Test
                         }
                     }
                 };
-                var result = Run(library,
-                    (delegates) => FhirCqlContext.ForBundle(bundle, valueSets: valueSets, delegates: delegates),
-                    "Retrieve_AllTerms");
+
+                using var scope = cqlApi.CreateRuntimeScope();
+                var result = scope.GetLibraryDefinitionResult(FhirCqlContext.ForBundle(bundle, valueSets: valueSets),
+                                                              cqlLibraryString.VersionedLibraryIdentifier, "Retrieve_AllTerms");
                 var conditions = result as IEnumerable<Condition>;
                 Assert.IsNotNull(conditions);
                 var ids = conditions.Select(c => c.Id).ToArray();

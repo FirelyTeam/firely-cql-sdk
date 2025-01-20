@@ -1,4 +1,5 @@
-﻿using CqlSdkPrototype.Internal;
+﻿using System.Collections.ObjectModel;
+using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Runtime.Extensibility;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
@@ -8,13 +9,21 @@ namespace CqlSdkPrototype.Runtime.Invokers;
 
 internal class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
 {
-    private record LibraryMethodInfo(MethodInfo Method, string? ValueSetId, string? DeclarationName)
+    private record LibraryMethodInfo(
+        MethodInfo Method,
+        IReadOnlyDictionary<string, string> TagValuesByName,
+        string? ValueSetId,
+        string? DeclarationName)
     {
         public LibraryMethodInfo(MethodInfo Method) : this(
             Method,
+            TagValuesByName: Method.GetCustomAttributes<CqlTagAttribute>().ToArray() switch
+                                 {
+                                     { Length: > 0 } tags => tags.ToDictionary(a => a.Name, a => a.Value).AsReadOnly(),
+                                     _ => ReadOnlyDictionary<string, string>.Empty
+                                 },
             ValueSetId: Method.GetCustomAttribute<CqlValueSetAttribute>()?.Id,
-            DeclarationName: Method.GetCustomAttribute<CqlDeclarationAttribute>()?.Name)
-        { }
+            DeclarationName: Method.GetCustomAttribute<CqlDeclarationAttribute>()?.Name) { }
     }
 
     public LibraryInvoker_2_0_8_0(
@@ -28,7 +37,7 @@ internal class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
                        .SelectWhereNotNull(o => o.DeclarationName is { } declarationName
                                                 && o.Method.GetParameters() is [{ } p0]
                                                 && p0.ParameterType == typeof(CqlContext)
-                                                    ? (LibraryDefinitionInvoker)new DefinitionInvoker(declarationName, Library, o.Method, o.ValueSetId)
+                                                    ? (LibraryDefinitionInvoker)new DefinitionInvoker(declarationName, Library, o.Method, o.TagValuesByName, o.ValueSetId)
                                                     : null)
                        .ToImmutableDictionary(o => o.DeclarationName);
     }
@@ -70,7 +79,8 @@ internal class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
         string declarationName,
         ILibrary library,
         MethodInfo methodInfo,
-        string? valueSetId) : LibraryDefinitionInvoker(declarationName, library, methodInfo, valueSetId)
+        IReadOnlyDictionary<string, string> tagValuesByName,
+        string? valueSetId) : LibraryDefinitionInvoker(declarationName, library, methodInfo, tagValuesByName, valueSetId)
     {
         public override object? Invoke(CqlContext cqlContext)
         {

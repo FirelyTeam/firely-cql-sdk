@@ -59,6 +59,17 @@ internal interface IGetVersionedIdentifier
 [DebuggerDisplay("{GetType().Name,nq} {ToString()}")]
 partial class Library : IGetVersionedIdentifier
 {
+    /// <nodoc />
+    public Library()
+    {
+    }
+
+    /// <nodoc />
+    public Library(VersionedIdentifier identifier)
+    {
+        this.identifier = identifier;
+    }
+
     /// <inheritdoc />
     (VersionedIdentifier? Result, Exception? Error) IGetVersionedIdentifier.VersionedIdentifier =>
         identifier switch

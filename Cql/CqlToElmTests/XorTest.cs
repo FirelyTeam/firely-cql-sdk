@@ -60,7 +60,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(xor);
+                var lambda = CreateElmApi().Lambda(xor);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -116,7 +116,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(xor);
+                var lambda = CreateElmApi().Lambda(xor);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -172,7 +172,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(xor);
+                var lambda = CreateElmApi().Lambda(xor);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -228,7 +228,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(xor);
+                var lambda = CreateElmApi().Lambda(xor);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);
@@ -283,7 +283,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(xor);
+                var lambda = CreateElmApi().Lambda(xor);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);
@@ -339,7 +339,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(xor);
+                var lambda = CreateElmApi().Lambda(xor);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);

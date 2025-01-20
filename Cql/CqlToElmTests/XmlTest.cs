@@ -71,21 +71,21 @@ namespace Hl7.Cql.CqlToElm.Test
                 return;
             }
 
-            Elm.Expression equal = Equals(expression, expectation);
-            var equalLambda = LibraryExpressionBuilder.Lambda(equal);
+            Expression equal = Equals(expression, expectation);
+            var equalLambda = CreateElmApi().Lambda(equal);
 
             var equalDelegate = equalLambda.Compile();
             // TODO: These needs to be changed to run through the AssemblyCompiler too
             var equalResult = (bool?)equalDelegate.DynamicInvoke(CqlContext);
             if (equalResult != true)
             {
-                var expressionValue = LibraryExpressionBuilder.Lambda(expression).Compile().DynamicInvoke(CqlContext);
-                var expectationValue = LibraryExpressionBuilder.Lambda(expectation).Compile().DynamicInvoke(CqlContext);
+                var expressionValue = CreateElmApi().Lambda(expression).Compile().DynamicInvoke(CqlContext);
+                var expectationValue = CreateElmApi().Lambda(expectation).Compile().DynamicInvoke(CqlContext);
                 Assert.Fail($"Case {testFullName} assertion failed. Expected '{expectationValue}', but got '{expressionValue}'.");
             }
         }
 
-        private static Elm.Expression Equals(Elm.Expression expression, Elm.Expression expectation)
+        private static Expression Equals(Expression expression, Expression expectation)
         {
             var equal = InvocationBuilder.Invoke(SystemLibrary.Equal, expression, expectation);
             var @if = new If

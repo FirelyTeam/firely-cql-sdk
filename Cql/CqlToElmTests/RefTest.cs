@@ -124,8 +124,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private static T? Run<T>(Library library, string member, Hl7.Fhir.Model.Bundle? bundle = null)
         {
-            var eb = LibraryExpressionBuilder;
-            var lambdas = eb.ProcessLibrary(library);
+            var lambdas = CreateElmApi().ProcessLibrary(library);
             var delegates = lambdas.CompileAll();
             var dg = delegates[library.GetVersionedIdentifier()!, member];
             var ctx = FhirCqlContext.ForBundle(bundle, delegates: delegates);
@@ -564,7 +563,7 @@ namespace Hl7.Cql.CqlToElm.Test
             result.Should().BeEquivalentTo(new[] { new { Value = "Wouter" }, new { Value = "Gert" }, new { Value = "Marleen" }, new { Value = "Antonia" } });
         }
 
-        private T? runWithData<T>(Elm.Library library, string expressionName)
+        private T? runWithData<T>(Library library, string expressionName)
         {
             var bundle = new M.Bundle();
             var contact1 = new M.Patient.ContactComponent()
