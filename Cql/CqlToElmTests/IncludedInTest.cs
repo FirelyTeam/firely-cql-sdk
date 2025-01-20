@@ -6,11 +6,6 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class IncludedInTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         //('starts' | 'ends' | 'occurs')? 'properly'? ('during' | 'included in') dateTimePrecisionSpecifier?
         [TestMethod]
         public void Starts_Properly_During_Year()

@@ -7,11 +7,6 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class CaseTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         private Library createLibraryForExpression(string expression)
         {
             return CreateCqlApi().MakeLibrary($@"

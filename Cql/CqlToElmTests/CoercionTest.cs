@@ -3,25 +3,20 @@ using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using CqlSdkPrototype.Cql.Internal;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
     public class CoercionTest : Base
     {
-        internal static CoercionProvider CoercionProvider => ServiceProvider.GetCoercionProvider();
-        internal static ElmFactory ElmFactory =>  ServiceProvider.GetElmFactory();
+        private static CoercionProvider CoercionProvider => CreateCqlApi(
+            EnableListPromotion:true,
+            EnableListDemotion:true,
+            EnableIntervalPromotion:true,
+            EnableIntervalDemotion:true).AsInternal().State.ServiceProvider.GetRequiredService<CoercionProvider>();
 
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize(options =>
-        {
-            options.EnableListPromotion = true;
-            options.EnableListDemotion = true;
-            options.EnableIntervalPromotion = true;
-            options.EnableIntervalDemotion = true;
-        });
-#pragma warning restore IDE0060 // Remove unused parameter
+        private static ElmFactory ElmFactory => CreateCqlApi().AsInternal().State.ServiceProvider.GetRequiredService<ElmFactory>();
 
         private static Null Null() => new Null().WithResultType(SystemTypes.AnyType);
         private static Null Null(TypeSpecifier type) => new Null().WithResultType(type);

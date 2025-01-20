@@ -10,11 +10,6 @@ namespace Hl7.Cql.CqlToElm.Test
 
     public class SubtractionTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         #region Same type
 
         [TestMethod]

@@ -8,11 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class QueryTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
+        [TestMethod]
         public void String_lengths()
         {
             var lib = CreateCqlApi().MakeLibraryFromExpression("from ({'hello', 'world'}) str return Length(str)");

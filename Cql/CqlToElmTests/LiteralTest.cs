@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using CqlSdkPrototype.Cql.Internal;
+using FluentAssertions;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,13 +11,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
     public class LiteralTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize(co =>
-        {
-        });
-#pragma warning restore IDE0060 // Remove unused parameter
-        internal static InvocationBuilder InvocationBuilder => ServiceProvider.GetInvocationBuilder();
+        private static InvocationBuilder InvocationBuilder => CreateCqlApi().AsInternal().State.ServiceProvider.GetRequiredService<InvocationBuilder>();
 
         [TestMethod]
         public void String_Literal()

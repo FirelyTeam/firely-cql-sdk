@@ -7,21 +7,6 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class AndTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-
-        //private IServiceScope? Scope;
-
-        //[TestInitialize]
-        //public void TestInitialize()
-        //{
-        //    Scope = CqlCompilerServices.CreateScope();
-        //}
-        //[TestCleanup]
-        //public void TestCleanup() => Scope?.Dispose();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         [TestMethod]
         public void True_And_False()
         {

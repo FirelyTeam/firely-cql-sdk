@@ -7,15 +7,7 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class InTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize(co =>
-        {
-            co.AllowNullIntervals = true;
-        });
-#pragma warning restore IDE0060 // Remove unused parameter
-
-        [TestMethod]
+         [TestMethod]
         public void Starts_Properly_Within_Start()
         {
             var library = CreateCqlApi().MakeLibrary(@"

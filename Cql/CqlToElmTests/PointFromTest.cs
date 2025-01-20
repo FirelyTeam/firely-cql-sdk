@@ -8,11 +8,6 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class PointFromTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         [TestMethod]
         public void Point_From_Integer()
         {

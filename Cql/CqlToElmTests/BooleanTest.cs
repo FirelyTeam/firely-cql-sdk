@@ -9,10 +9,6 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class BooleanTest : Base
     {
-        [ClassInitialize]
-        public static void Initialize(TestContext context) => ClassInitialize();
-
-
         [TestMethod]
         public void True_Is_True()
         {

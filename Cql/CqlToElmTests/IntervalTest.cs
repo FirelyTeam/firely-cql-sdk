@@ -9,20 +9,6 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class IntervalTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize(co =>
-        {
-            co.ValidateLiterals = false;
-            co.AllowNullIntervals = true;
-            co.LongsRequireSuffix = false; // promote test values of 2147483648 to longs so ExpressionBuilder doesn't throw
-            co.EnableListPromotion = true;
-            co.EnableListDemotion = true;
-            co.EnableIntervalPromotion = true;
-            co.EnableIntervalDemotion = true;
-        });
-#pragma warning restore IDE0060 // Remove unused parameter
-
         [TestMethod]
         public void Interval_InvalidType()
         {

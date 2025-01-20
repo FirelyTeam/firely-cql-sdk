@@ -10,11 +10,6 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class FunctionDefinitionTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         private FunctionDef shouldDefineFunction(Library l, string name) =>
             l.ShouldDefine<FunctionDef>(name);
 

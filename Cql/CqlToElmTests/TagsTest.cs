@@ -10,11 +10,6 @@ namespace Hl7.Cql.CqlToElm.Test;
 [TestClass]
 public class TagsTest : Base
 {
-    [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-    public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
     [TestMethod]
     [Ignore("The C# CQL-to-ELM does not support capturing annotation tags yet. Once that is ready, this test must be completed. It will be moved to CoreTests.AnnotationTagsTest.TestAttributesWithQuotes for the time being.")]
     public void Tags_Containing_Quotes_Must_Be_Escaped_In_CSharp()

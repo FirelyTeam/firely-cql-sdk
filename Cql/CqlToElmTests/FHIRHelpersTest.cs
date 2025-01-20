@@ -9,14 +9,6 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class FHIRHelpersTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize(co =>
-        {
-            co.EnableListDemotion = true; // FHIRHelpers requires this
-        });
-#pragma warning restore IDE0060 // Remove unused parameter
-
         [TestMethod]
         public void FHIRHelpers_To_Elm()
         {

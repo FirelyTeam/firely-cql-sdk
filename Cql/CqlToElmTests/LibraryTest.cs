@@ -1,23 +1,15 @@
 using FluentAssertions;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.IO;
 using CqlSdkPrototype.Cql.Internal;
-using CqlSdkPrototype.Infrastructure;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
-
     [TestClass]
     public class LibraryTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         [TestMethod]
         public void Empty()
         {
@@ -89,14 +81,12 @@ namespace Hl7.Cql.CqlToElm.Test
                 version = "1.0.0"
             };
 
-            var cqlLibraryString = CqlLibraryString.FromCql(
-                """
-                library UsingTest version '1.0.0'
+            var library = CreateCqlApi(ModelInfos: [modelInfo], Models: [])
+                .MakeLibrary("""
+                             library UsingTest version '1.0.0'
 
-                using Namespace.Using_AllTerms_WithNamespace version '1.0.0' called Derp
-                """);
-
-            var library = CreateCqlApi(ModelInfos: [modelInfo], Models: []).MakeLibrary(cqlLibraryString.Cql);
+                             using Namespace.Using_AllTerms_WithNamespace version '1.0.0' called Derp
+                             """);
 
             Assert.IsNotNull(library.usings);
             Assert.AreEqual(1, library.usings.Length);
@@ -109,19 +99,15 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_AllTerms_WithNamespace()
         {
-            var services = ServiceCollection(models: mp =>
-                {
-                    mp.Add(new Model.ModelInfo
-                    {
-                        name = "Namespace.Using_AllTerms_WithNamespace",
-                        url = "http://test.org",
-                        version = "1.0.0"
-                    });
-                });
+            var modelInfo = new Model.ModelInfo
+            {
+                name = "Namespace.Using_AllTerms_WithNamespace",
+                url = "http://test.org",
+                version = "1.0.0"
+            };
 
-            var serviceProvider = services.BuildServiceProvider();
-            var converter = serviceProvider.GetRequiredService<CqlToElmConverter>();
-            var library = converter.ConvertLibrary(@"
+            var library = CreateCqlApi(ModelInfos: [modelInfo], Models: [])
+                .MakeLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using Namespace.Using_AllTerms_WithNamespace version '1.0.0' called Derp
@@ -132,24 +118,20 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual("Derp", library.usings[0].localIdentifier);
             Assert.AreEqual("1.0.0", library.usings[0].version);
             Assert.IsNotNull(library.usings[0].localId);
-
         }
 
         [TestMethod]
         public void Using_NoVersion_LocalIdentifier()
         {
-            var services = ServiceCollection(models: mp =>
+            var modelInfo = new Model.ModelInfo
             {
-                    mp.Add(new Model.ModelInfo
-                    {
-                        name = "Namespace.Using_NoVersion_LocalIdentifier",
-                        url = "http://test.org",
-                        version = "1.0.0"
-                    });
-                });
-            var provider = services.BuildServiceProvider();
-            var converter = provider.GetRequiredService<CqlToElmConverter>();
-            var library = converter.ConvertLibrary(@"
+                name = "Namespace.Using_NoVersion_LocalIdentifier",
+                url = "http://test.org",
+                version = "1.0.0"
+            };
+
+            var library = CreateCqlApi(ModelInfos: [modelInfo], Models: [])
+                .MakeLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using Namespace.Using_NoVersion_LocalIdentifier called Derp
@@ -160,24 +142,20 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual("http://test.org", library.usings[0].uri);
             Assert.IsTrue(string.IsNullOrWhiteSpace(library.usings[0].version));
             Assert.IsNotNull(library.usings[0].localId);
-
         }
 
         [TestMethod]
         public void Using_Version_NoIdentifier()
         {
-            var services = ServiceCollection(models: mp =>
+            var modelInfo = new Model.ModelInfo
             {
-                    mp.Add(new Model.ModelInfo
-                    {
-                        name = "Namespace.Using_Version_NoIdentifier",
-                        url = "http://test.org",
-                        version = "1.0.0"
-                    });
-                });
-            var provider = services.BuildServiceProvider();
-            var converter = provider.GetRequiredService<CqlToElmConverter>();
-            var library = converter.ConvertLibrary(@"
+                name = "Namespace.Using_Version_NoIdentifier",
+                url = "http://test.org",
+                version = "1.0.0"
+            };
+
+            var library = CreateCqlApi(ModelInfos: [modelInfo], Models: [])
+                .MakeLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using Namespace.Using_Version_NoIdentifier version '1.0.0'
@@ -193,19 +171,15 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_NoVersion_NoIdentifier()
         {
-            var services = ServiceCollection(models: mp =>
+            var modelInfo = new Model.ModelInfo
             {
-                    mp.Add(new Model.ModelInfo
-                    {
-                        name = "Namespace.Using_NoVersion_NoIdentifier",
-                        url = "http://test.org",
-                        version = "1.0.0"
-                    });
-                });
+                name = "Namespace.Using_NoVersion_NoIdentifier",
+                url = "http://test.org",
+                version = "1.0.0"
+            };
 
-            var provider = services.BuildServiceProvider();
-            var converter = provider.GetRequiredService<CqlToElmConverter>();
-            var library = converter.ConvertLibrary(@"
+            var library = CreateCqlApi(ModelInfos: [modelInfo], Models: [])
+                .MakeLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using Namespace.Using_NoVersion_NoIdentifier
@@ -221,23 +195,20 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Using_Duplicate_System_NoLocalAlias()
         {
-            var services = ServiceCollection(models: mp =>
+            var modelInfo = new Model.ModelInfo
             {
-                    mp.Add(new Model.ModelInfo
-                    {
-                        name = "System",
-                        url = "urn:hl7-org:elm-types:r1",
-                        version = "1.0.0"
-                    });
-                });
+                name = "System",
+                url = "urn:hl7-org:elm-types:r1",
+                version = "1.0.0"
+            };
 
-            var provider = services.BuildServiceProvider();
-            var converter = provider.GetRequiredService<CqlToElmConverter>();
-            var library = converter.ConvertLibrary(@"
+            var library = CreateCqlApi(ModelInfos: [modelInfo], Models: [])
+                .MakeLibrary(@"
                 library UsingTest version '1.0.0'
 
                 using System version '1.0.0'
-            ");
+            ", expectedErrors: ["Duplicate identifier System in scope."]);
+
             Assert.IsNotNull(library.usings);
             Assert.AreEqual(1, library.usings.Length);
             Assert.AreEqual("System", library.usings[0].localIdentifier);
@@ -252,11 +223,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_AllTerms()
         {
-            var library = CreateCqlApi().MakeLibrary("""
-                                                     library IncludeTest version '1.0.0'
+            var library = CreateCqlApi()
+                .MakeLibrary("""
+                             library IncludeTest version '1.0.0'
 
-                                                     include MyLibrary version '1.0.0' called Derp
-                                                     """, "Unable to resolve library: MyLibrary version '1.0.0'*");
+                             include MyLibrary version '1.0.0' called Derp
+                             """, "Unable to resolve library: MyLibrary version '1.0.0'*");
             Assert.IsNotNull(library.includes);
             Assert.AreEqual(1, library.includes.Length);
             Assert.AreEqual("MyLibrary", library.includes[0].path);
@@ -268,11 +240,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_AllTerms_WithNamespace()
         {
-            var library = CreateCqlApi().MakeLibrary("""
-                                                     library IncludeTest version '1.0.0'
+            var library = CreateCqlApi()
+                .MakeLibrary("""
+                             library IncludeTest version '1.0.0'
 
-                                                     include Namespace.MyLibrary version '1.0.0' called Derp
-                                                     """, "Unable to resolve library: Namespace.MyLibrary version '1.0.0'*");
+                             include Namespace.MyLibrary version '1.0.0' called Derp
+                             """, "Unable to resolve library: Namespace.MyLibrary version '1.0.0'*");
             Assert.IsNotNull(library.includes);
             Assert.AreEqual(1, library.includes.Length);
             Assert.AreEqual("Namespace.MyLibrary", library.includes[0].path);
@@ -284,28 +257,29 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_NoVersion_LocalIdentifier()
         {
-            var library = CreateCqlApi().MakeLibrary("""
-                                                     library IncludeTest version '1.0.0'
+            var library = CreateCqlApi()
+                .MakeLibrary("""
+                             library IncludeTest version '1.0.0'
 
-                                                     include Namespace.MyLibrary called Derp
-                                                     """, "Unable to resolve library: Namespace.MyLibrary version 'latest'*");
+                             include Namespace.MyLibrary called Derp
+                             """, "Unable to resolve library: Namespace.MyLibrary version 'latest'*");
             Assert.IsNotNull(library.includes);
             Assert.AreEqual(1, library.includes.Length);
             Assert.AreEqual("Namespace.MyLibrary", library.includes[0].path);
             Assert.IsTrue(string.IsNullOrWhiteSpace(library.includes[0].version));
             Assert.AreEqual("Derp", library.includes[0].localIdentifier);
             Assert.IsNotNull(library.includes[0].localId);
-
         }
 
         [TestMethod]
         public void Include_Version_NoIdentifier()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
-                library IncludeTest version '1.0.0'
+            var library = CreateCqlApi()
+                .MakeLibrary("""
+                             library IncludeTest version '1.0.0'
 
-                include Namespace.MyLibrary version '1.0.0'
-            ", "Unable to resolve library: Namespace.MyLibrary version '1.0.0'*");
+                             include Namespace.MyLibrary version '1.0.0'
+                             """, "Unable to resolve library: Namespace.MyLibrary version '1.0.0'*");
             Assert.IsNotNull(library.includes);
             Assert.AreEqual(1, library.includes.Length);
             Assert.AreEqual("Namespace.MyLibrary", library.includes[0].path);
@@ -317,17 +291,17 @@ namespace Hl7.Cql.CqlToElm.Test
             library.includes[0].localIdentifier.Should().Be("MyLibrary");
 
             Assert.IsNotNull(library.includes[0].localId);
-
         }
 
         [TestMethod]
         public void Include_NoVersion_NoIdentifier()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
-                library IncludeTest version '1.0.0'
+            var library = CreateCqlApi()
+                .MakeLibrary("""
+                             library IncludeTest version '1.0.0'
 
-                include Namespace.MyLibrary
-            ", "Unable to resolve library: Namespace.MyLibrary version 'latest'*");
+                             include Namespace.MyLibrary
+                             """, "Unable to resolve library: Namespace.MyLibrary version 'latest'*");
             Assert.IsNotNull(library.includes);
             Assert.AreEqual(1, library.includes.Length);
             Assert.AreEqual("Namespace.MyLibrary", library.includes[0].path);
@@ -339,7 +313,6 @@ namespace Hl7.Cql.CqlToElm.Test
             library.includes[0].localIdentifier.Should().Be("MyLibrary");
 
             Assert.IsNotNull(library.includes[0].localId);
-
         }
 
         #endregion
@@ -576,6 +549,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual("id2", library.valueSets[1].id);
             Assert.AreEqual("version2", library.valueSets[1].version);
         }
+
         [TestMethod]
         public void ValueSet_CodeSystems_NoVersion()
         {
@@ -607,11 +581,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Code_WithoutDisplay()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
-                library IncludeTest version '1.0.0'
+            var library = CreateCqlApi()
+                .MakeLibrary("""
+                             library IncludeTest version '1.0.0'
 
-                code Name: 'id' from lib.cs1
-            ");
+                             code Name: 'id' from lib.cs1
+                             """);
             Assert.IsNotNull(library.codes);
             Assert.AreEqual(1, library.codes.Length);
             Assert.AreEqual(AccessModifier.Public, library.codes[0].accessLevel);
@@ -625,11 +600,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Code_AccessModifier_WithoutDisplay()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
-                library IncludeTest version '1.0.0'
+            var library = CreateCqlApi()
+                .MakeLibrary("""
+                             library IncludeTest version '1.0.0'
 
-                private code Name: 'id' from lib.cs1
-            ");
+                             private code Name: 'id' from lib.cs1
+                             """);
             Assert.IsNotNull(library.codes);
             Assert.AreEqual(1, library.codes.Length);
             Assert.AreEqual(AccessModifier.Private, library.codes[0].accessLevel);
@@ -707,8 +683,6 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual("code3", library.concepts[0].code[2].name);
 
             Assert.AreEqual("My concept", library.concepts[0].display);
-
-
         }
 
         [TestMethod]
@@ -746,7 +720,6 @@ namespace Hl7.Cql.CqlToElm.Test
             ");
             _ = CreateElmApi().ProcessLibrary(library);
         }
-
 
         #endregion
 
@@ -820,6 +793,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 private parameter Name
             ", "Parameter must have either a type or a default value.");
         }
+
         #endregion
     }
 }

@@ -1,13 +1,11 @@
 ﻿using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Diagnostics;
@@ -35,29 +33,7 @@ namespace Hl7.Cql.CqlToElm.Test
     public class Base
     {
         protected const string SystemUri = "urn:hl7-org:elm-types:r1";
-
-        protected static ServiceProvider ServiceProvider = null!;
-
-        protected static IServiceCollection ServiceCollection(
-            Action<CqlToElmOptions>? options = null,
-            Action<IModelProvider>? models = null,
-            Type? libraryProviderType = null) =>
-            ElmApiState.AddCqlCompilerServices(new ServiceCollection()
-                                               .AddCqlToElmServices()
-                                               .AddCqlToElmModels(models ?? (mp => mp.Add(Models.ElmR1).Add(Models.Fhir401)))
-                                               .AddCqlToElmOptions(options)
-                                               .AddCqlToElmMessaging()
-                                               .AddLogging(builder => builder.AddConsole())
-                                               .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider)));
-
-
-        protected static void ClassInitialize(Action<CqlToElmOptions>? options = null)
-        {
-            var services = ServiceCollection(options);
-            ServiceProvider = services.BuildServiceProvider();
-        }
-
-
+        
         internal static object? Run(
             Expression expression,
             Library library,

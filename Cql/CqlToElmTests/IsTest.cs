@@ -7,11 +7,6 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class IsTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         [TestMethod]
         public void Integer_Is_Decimal()
         {

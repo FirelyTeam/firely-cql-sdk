@@ -8,11 +8,6 @@ namespace Hl7.Cql.CqlToElm.Test
     public class InstanceTest : Base
     {
 
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         [TestMethod]
         public void Concept_Instance()
         {

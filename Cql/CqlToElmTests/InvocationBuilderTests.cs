@@ -4,6 +4,7 @@ using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Linq;
+using CqlSdkPrototype.Cql.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -11,21 +12,9 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class InvocationBuilderTest : Base
     {
-        internal static InvocationBuilder InvocationBuilder => ServiceProvider.GetInvocationBuilder();
-        internal static ElmFactory ElmFactory => ServiceProvider.GetElmFactory();
-
-
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize(options =>
-        {
-            options.EnableListPromotion = true;
-            options.EnableListDemotion = true;
-            options.EnableIntervalPromotion = true;
-            options.EnableIntervalDemotion = true;
-        });
-#pragma warning restore IDE0060 // Remove unused parameter
-
+        internal static InvocationBuilder InvocationBuilder => CreateCqlApi().AsInternal().State.ServiceProvider.GetRequiredService<InvocationBuilder>();
+        internal static ElmFactory ElmFactory => CreateCqlApi().AsInternal().State.ServiceProvider.GetRequiredService<ElmFactory>();
+        
         private static ParameterTypeSpecifier Generic(string parameterName = "T") => new ParameterTypeSpecifier { parameterName = parameterName };
 
         private static Literal Boolean(bool value = true) => ElmFactory.Literal(value);

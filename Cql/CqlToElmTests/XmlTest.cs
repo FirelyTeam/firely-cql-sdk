@@ -9,6 +9,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Serialization;
+using CqlSdkPrototype.Cql.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -16,17 +17,9 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class XmlTest : Base
     {
-        private static XmlSerializer Serializer = new(typeof(Xml.Tests));
+        private static readonly XmlSerializer Serializer = new(typeof(Xml.Tests));
         private static readonly DateTimeOffset NowValue = new(2020, 1, 2, 3, 4, 0, TimeSpan.Zero);
-
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
-        private static CqlContext CqlContext = FhirCqlContext.ForBundle(now: NowValue);
-        private static InvocationBuilder InvocationBuilder = ServiceProvider.GetInvocationBuilder();
-        private static ElmFactory ElmFactory = ServiceProvider.GetElmFactory();
+        private static readonly CqlContext CqlContext = FhirCqlContext.ForBundle(now: NowValue);
 
 
         [DynamicData(nameof(GetTests), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(DisplayName))]
@@ -87,7 +80,11 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private static Expression Equals(Expression expression, Expression expectation)
         {
-            var equal = InvocationBuilder.Invoke(SystemLibrary.Equal, expression, expectation);
+            var cqlApi = CreateCqlApi();
+            var serviceProvider = cqlApi.AsInternal().State.ServiceProvider;
+            var invocationBuilder = serviceProvider.GetService<InvocationBuilder>();
+            var elmFactory = serviceProvider.GetService<ElmFactory>();
+            var equal = invocationBuilder.Invoke(SystemLibrary.Equal, expression, expectation);
             var @if = new If
             {
                 condition = new And
@@ -98,7 +95,7 @@ namespace Hl7.Cql.CqlToElm.Test
                         new IsNull { operand = expectation }.WithResultType(SystemTypes.BooleanType),
                     }
                 }.WithResultType(SystemTypes.BooleanType),
-                then = ElmFactory.Literal(true),
+                then = elmFactory.Literal(true),
                 @else = equal,
             }.WithResultType(SystemTypes.BooleanType);
             return @if;
