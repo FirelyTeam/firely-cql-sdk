@@ -11,11 +11,7 @@ namespace CoreTests.Infrastructure
         public void FromCql_ValidCqlContentWithoutVersion_ReturnsCqlLibraryString()
         {
             // Arrange
-            string cqlContent = """
-
-
-                                library TestLibrary
-                                """;
+            string cqlContent = "library TestLibrary";
             var expectedIdentifier = CqlVersionedLibraryIdentifier.FromNameAndVersion(
                 CqlLibraryIdentifier.Parse("TestLibrary"));
 
@@ -31,11 +27,7 @@ namespace CoreTests.Infrastructure
         public void FromCql_ValidCqlContentWithEmptyLines_ReturnsCqlLibraryString()
         {
             // Arrange
-            string cqlContent = """
-
-
-                                library TestLibrary version '1.0.0'
-                                """;
+            string cqlContent = "library TestLibrary version '1.0.0'";
             var expectedIdentifier = CqlVersionedLibraryIdentifier.FromNameAndVersion(
                 CqlLibraryIdentifier.Parse("TestLibrary"),
                 CqlLibraryVersion.Parse("1.0.0"));
