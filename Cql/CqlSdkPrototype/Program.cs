@@ -32,11 +32,11 @@ internal class Program
 
         var logger = serviceProvider.GetLogger<Program>();
 
-        InvokeCqlExample(cqlApi: cqlApi);
+        //InvokeCqlExample(cqlApi: cqlApi);
 
-        InvokeCqlFromExamplesFolder(logger: logger, cqlApi: cqlApi);
-
-        foreach (var librarySetName in (string[]) ["Authoring", "CMS", "Demo", "Examples"])
+        //InvokeCqlFromExamplesFolder(logger: logger, cqlApi: cqlApi);
+        //
+        foreach (var librarySetName in (string[]) ["CMS"])//"Authoring", "CMS", "Demo", "Examples"])
             VerboseExample(logger: logger, cqlApi: cqlApi, librarySetName: librarySetName, shouldBuildCqlToElm:false);
 
         // VerboseExample(logger, cqlApi, "CMS");

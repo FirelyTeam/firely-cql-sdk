@@ -33,7 +33,7 @@ namespace Hl7.Cql.CqlToElm.Test
     public class Base
     {
         protected const string SystemUri = "urn:hl7-org:elm-types:r1";
-        
+
         internal static object? Run(
             Expression expression,
             Library library,

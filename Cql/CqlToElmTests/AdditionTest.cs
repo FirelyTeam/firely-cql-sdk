@@ -15,11 +15,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Integer_to_Integer()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(
+                """
                 library Add_Integer_to_Integer version '1.0.0'
 
                 define private Three: 1 + 2
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -73,11 +74,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Long_to_Long()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(
+                """
                 library Add_Long_to_Long version '1.0.0'
 
                 define private Three: 1L + 2L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -131,11 +133,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Decimal_to_Decimal()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
-                library Add_Decimal_to_Decimal version '1.0.0'
+            var library = CreateCqlApi().MakeLibrary(
+                """
+                 library Add_Decimal_to_Decimal version '1.0.0'
 
-                define private Three: -1.0 + 2.0
-            ");
+                 define private Three: -1.0 + 2.0
+                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -190,11 +193,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Quantity_to_Quantity()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(
+                """
                 library Add_Decimal_to_Quantity version '1.0.0'
 
                 define private Three: -1.0 '1' + 2.0 '1'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -257,11 +261,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Integer_to_Long()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(
+                """
                 library Add_Integer_to_Long version '1.0.0'
 
                 define private Three: 1 + 2L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -317,11 +322,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Integer_to_Decimal()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(
+                """
                 library Add_Integer_to_Decimal version '1.0.0'
 
                 define private Three: 1 + 2.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -377,11 +383,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Integer_to_Quantity()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(
+                """
                 library Add_Integer_to_Quantity version '1.0.0'
 
                 define private Three: 1 + 2.0 '1'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -438,11 +445,12 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Long_to_Decimal()
         {
-            var library = CreateCqlApi().MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary(
+                """
                 library Add_Long_to_Decimal version '1.0.0'
 
                 define private Three: 1L + 2.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1590,7 +1598,5 @@ namespace Hl7.Cql.CqlToElm.Test
             var library = CreateCqlApi().MakeLibraryFromExpression("'hello' + 'world'");
             library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Concatenate>();
         }
-
-
     }
 }
