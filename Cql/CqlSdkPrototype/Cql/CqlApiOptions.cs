@@ -32,10 +32,10 @@ public record CqlApiOptions(
     public bool AllowNullIntervals { get; set; } = AllowNullInterval;
 
     /// <summary>
-                                                              /// When <see langword="true"/>, point intervals will automatically be created as necessary from scalar values.
-                                                              /// When <see langword="false"/>, an error will occur; authors will be required to create point intervals explicitly.
-                                                              /// The default value is <see langword="false"/>.
-                                                              /// </summary>
+    /// When <see langword="true"/>, point intervals will automatically be created as necessary from scalar values.
+    /// When <see langword="false"/>, an error will occur; authors will be required to create point intervals explicitly.
+    /// The default value is <see langword="false"/>.
+    /// </summary>
     public bool EnableIntervalPromotion { get; init; } = EnableIntervalPromotion;
 
     /// <summary>
@@ -70,14 +70,14 @@ public record CqlApiOptions(
     public bool EnableListDemotion { get; set; } = EnableListDemotion;
 
     /// <summary>
-                                                              /// <para>
-                                                              /// Sets the behavior when two models have the same type name.  In this situation, one of three behaviors is possible.
-                                                              /// Note that in the event that three or more matching types are available, the behavior will always be to issue an error.
-                                                              /// </para>
-                                                              /// <para>
-                                                              /// The default behavior is <see cref="AmbiguousTypeBehavior.Error"/>.
-                                                              /// </para>
-                                                              /// </summary>
+    /// <para>
+    /// Sets the behavior when two models have the same type name.  In this situation, one of three behaviors is possible.
+    /// Note that in the event that three or more matching types are available, the behavior will always be to issue an error.
+    /// </para>
+    /// <para>
+    /// The default behavior is <see cref="AmbiguousTypeBehavior.Error"/>.
+    /// </para>
+    /// </summary>
     public AmbiguousTypeBehavior AmbiguousTypeBehavior { get; init; } = AmbiguousTypeBehavior;
 }
 
