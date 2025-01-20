@@ -181,5 +181,44 @@ namespace Hl7.Cql.CqlToElm.Test
             for (int i = 0; i < expectedValues.Length; i++)
                 Assert.AreEqual(true, ctx.Operators.Comparer.Equals(expectedValues[i], array[i], precision));
         }
+
+        protected static ILoggerFactory LoggerFactory { get; } =
+            new ServiceCollection()
+                .AddLogging(lb => lb.AddConsole())
+                .BuildServiceProvider()
+                .GetRequiredService<ILoggerFactory>();
+
+        protected static CqlApi CreateCqlApi(
+            ImmutableHashSet<CqlModel>? Models = null,
+            ImmutableHashSet<ModelInfo>? ModelInfos = null,
+            AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,
+            bool EnableListPromotion = false,
+            bool EnableListDemotion = false,
+            bool EnableIntervalPromotion = false,
+            bool EnableIntervalDemotion = false,
+            bool AllowNullIntervals = false) =>
+            new CqlApi(
+                LoggerFactory,
+                new CqlApiOptions(
+                    ProcessBatchItemExceptionHandling: ProcessBatchItemExceptionHandling.ThrowException,
+                    Models: Models ?? [CqlModel.ElmR1, CqlModel.Fhir401],
+                    ModelInfos: ModelInfos,
+                    AmbiguousTypeBehavior: AmbiguousTypeBehavior,
+                    EnableListDemotion: EnableListDemotion,
+                    EnableListPromotion: EnableListPromotion,
+                    EnableIntervalDemotion: EnableIntervalDemotion,
+                    EnableIntervalPromotion: EnableIntervalPromotion,
+                    AllowNullInterval: AllowNullIntervals
+                    ));
+
+        internal static ElmApi CreateElmApi(
+            ImmutableHashSet<CqlModel>? models = null,
+            ImmutableHashSet<ModelInfo>? modelInfos = null,
+            AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
+            bool enableListPromotion = false) =>
+            CreateCqlApi(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
+                .CreateElmApi(_ => new ElmApiOptions(
+                                  ProcessBatchItemExceptionHandling.ThrowException,
+                                  Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));
     }
 }
