@@ -14,14 +14,3 @@ public interface ISingleton<out TSelf>
     /// </summary>
     static virtual TSelf Instance { get; } = Activator.CreateInstance<TSelf>();
 }
-
-/// <summary>
-/// Represents an interface for a singleton pattern.
-/// </summary>
-public interface ISingleton
-{
-    /// <summary>
-    /// Gets the instance of the implementing class.
-    /// </summary>
-    static abstract object Instance { get; }
-}
