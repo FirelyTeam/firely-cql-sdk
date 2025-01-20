@@ -12,13 +12,12 @@ using CqlSdkPrototype.Runtime;
 using CqlSdkPrototype.Runtime.Extensions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Runtime;
-using Test.Deck;
 using CqlSdkPrototype.Infrastructure;
 
 namespace Test
 {
     [TestClass]
-    public class MeasuresTest : TestBase
+    public class MeasuresTest
     {
         private readonly IDictionary<string, object> MY2023 =
             new Dictionary<string, object>
