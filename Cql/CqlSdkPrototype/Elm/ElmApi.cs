@@ -2,6 +2,7 @@
 using CqlSdkPrototype.Elm.Internal;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
+using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
@@ -106,61 +107,22 @@ public class ElmApi :
 
         LogExceptionMessageAction log = logger.GetLogExceptionMessageAction(exceptionHandling);
 
-        var libraryDefinitions = librarySetExpressionBuilderScoped
-            .ProcessLibrarySetDeferred(librarySet: librarySet)
-            .Select(t =>
-            {
-                var libraryName = t.library.identifier;
-                logger.LogInformation("Generating definitions for library : {libraryName}", libraryName);
-                return t;
-            })
-            .TryProcessEach(t => (t.library, cSharp: t.generateLibraryDefinitions))
-            .WithEachException(t =>
-            {
-                var libraryName = t.Input.library.identifier;
-                log(t.Exception, "Error generating definitions for library : {libraryName}", libraryName);
-            })
-            .HandleExceptions(exceptionHandling);
+        var librarySetDefinitions = BuildLibrarySetDefinitions(librarySetExpressionBuilderScoped, librarySet, logger, log, exceptionHandling);
 
-        DefinitionDictionary<LambdaExpression> librarySetDefinitions = new();
-        foreach (var (_, generateLibraryDefintions) in libraryDefinitions)
-            librarySetDefinitions.Merge(generateLibraryDefintions());
+        var cSharps = GenerateCSharp(cSharpCodeProcessor, librarySet, librarySetDefinitions, logger, log, exceptionHandling);
 
-        var cSharps = cSharpCodeProcessor
-                      .GenerateCSharpDeferred(librarySet, librarySetDefinitions)
-                      .Select(t =>
-                      {
-                          var libraryName = t.library.identifier;
-                          logger.LogInformation("Generating C# for library : {libraryName}", libraryName);
-                          return t;
-                      })
-                      .TryProcessEach(t => (t.library, cSharp: t.generateCSharp()))
-                      .WithEachException(t =>
-                      {
-                          var libraryName = t.Input.library.identifier;
-                          log(t.Exception, "Error generating C# for library : {libraryName}", libraryName);
-                      })
-                      .HandleExceptions(exceptionHandling);
-
-        var assemblyDatas = assemblyCompiler
-                            .CompileDeferred(librarySet, cSharps, debugInformationFormat)
-                            .Select(t =>
-                            {
-                                var libraryName = t.library.identifier;
-                                logger.LogInformation("Compiling assembly for library : {libraryName}", libraryName);
-                                return t;
-                            })
-                            .TryProcessEach(t => (t.library, assemblyDataWithSourceCode: t.generateAssemblyDataWithSourceCode()))
-                            .WithEachException(t =>
-                            {
-                                var libraryName = t.Input.library.identifier;
-                                log(t.Exception, "Error compiling assembly for library: {libraryName}", libraryName);
-                            })
-                            .HandleExceptions(exceptionHandling)
-            //.ToArray()
-            ;
+        var assemblyDatas = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat, logger, log, exceptionHandling);
 
         var entriesBuilder = entries.ToBuilder();
+        var hasChanged = UpdateStateEntries(assemblyDatas, entriesBuilder, logger);
+        return hasChanged ? WithEntries(entries: entriesBuilder.ToImmutable()) : this;
+    }
+
+    private static bool UpdateStateEntries(
+        IEnumerable<(Library library, AssemblyDataWithSourceCode assemblyDataWithSourceCode)> assemblyDatas,
+        ElmApiStateEntryDictionary.Builder entriesBuilder,
+        ILogger<ElmApi> logger)
+    {
         bool hasChanged = false;
         foreach (var (library, (assemblyBinary, sourceCodePerName, debugSymbols)) in assemblyDatas)
         {
@@ -185,9 +147,92 @@ public class ElmApi :
             hasChanged = true;
         }
 
-        return hasChanged
-                   ? WithEntries(entries: entriesBuilder.ToImmutable())
-                   : this;
+        return hasChanged;
+    }
+
+    private static IEnumerable<(Library library, AssemblyDataWithSourceCode assemblyDataWithSourceCode)> CompileAssemblies(
+        AssemblyCompiler assemblyCompiler,
+        LibrarySet librarySet,
+        IEnumerable<(Library library, string cSharp)> cSharps,
+        AssemblyCompilerDebugInformationFormat debugInformationFormat,
+        ILogger<ElmApi> logger,
+        LogExceptionMessageAction log,
+        ProcessBatchItemExceptionHandling exceptionHandling)
+    {
+        var assemblyDatas = assemblyCompiler
+                            .CompileDeferred(librarySet, cSharps, debugInformationFormat)
+                            .Select(t =>
+                            {
+                                var libraryName = t.library.identifier;
+                                logger.LogInformation("Compiling assembly for library : {libraryName}", libraryName);
+                                return t;
+                            })
+                            .TryProcessEach(t => (t.library, assemblyDataWithSourceCode: t.generateAssemblyDataWithSourceCode()))
+                            .WithEachException(t =>
+                            {
+                                var libraryName = t.Input.library.identifier;
+                                log(t.Exception, "Error compiling assembly for library: {libraryName}", libraryName);
+                            })
+                            .HandleExceptions(exceptionHandling)
+            //.ToArray()
+            ;
+        return assemblyDatas;
+    }
+
+    private static IEnumerable<(Library library, string cSharp)> GenerateCSharp(
+        LibrarySetCSharpCodeGenerator cSharpCodeProcessor,
+        LibrarySet librarySet,
+        DefinitionDictionary<LambdaExpression> librarySetDefinitions,
+        ILogger<ElmApi> logger,
+        LogExceptionMessageAction log,
+        ProcessBatchItemExceptionHandling exceptionHandling)
+    {
+        var cSharps = cSharpCodeProcessor
+                      .GenerateCSharpDeferred(librarySet, librarySetDefinitions)
+                      .Select(t =>
+                      {
+                          var libraryName = t.library.identifier;
+                          logger.LogInformation("Generating C# for library : {libraryName}", libraryName);
+                          return t;
+                      })
+                      .TryProcessEach(t => (t.library, cSharp: t.generateCSharp()))
+                      .WithEachException(t =>
+                      {
+                          var libraryName = t.Input.library.identifier;
+                          log(t.Exception, "Error generating C# for library : {libraryName}", libraryName);
+                      })
+                      .HandleExceptions(exceptionHandling);
+        return cSharps;
+    }
+
+    private static DefinitionDictionary<LambdaExpression> BuildLibrarySetDefinitions(
+        LibrarySetExpressionBuilder librarySetExpressionBuilderScoped,
+        LibrarySet librarySet,
+        ILogger<ElmApi> logger,
+        LogExceptionMessageAction log,
+        ProcessBatchItemExceptionHandling exceptionHandling)
+    {
+        var libraryDefinitions = librarySetExpressionBuilderScoped
+                                 .ProcessLibrarySetDeferred(librarySet: librarySet)
+                                 .Select(t =>
+                                 {
+                                     var libraryName = t.library.identifier;
+                                     logger.LogInformation("Generating definitions for library : {libraryName}", libraryName);
+                                     return t;
+                                 })
+                                 .TryProcessEach(t => (t.library, cSharp: t.generateLibraryDefinitions))
+                                 .WithEachException(t =>
+                                 {
+                                     var libraryName = t.Input.library.identifier;
+                                     log(t.Exception, "Error generating definitions for library : {libraryName}", libraryName);
+                                 })
+                                 .HandleExceptions(exceptionHandling);
+
+        DefinitionDictionary<LambdaExpression> librarySetDefinitions = new();
+        foreach (var (_, generateLibraryDefinitions) in libraryDefinitions)
+            librarySetDefinitions.Merge(generateLibraryDefinitions());
+
+        return librarySetDefinitions;
     }
 
     #endregion
