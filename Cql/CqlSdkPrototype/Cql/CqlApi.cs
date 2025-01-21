@@ -9,8 +9,8 @@ namespace CqlSdkPrototype.Cql;
 
 
 public class CqlApi :
-    ICqlApiExtendable<CqlApi>,
-    ICqlApiInternal<CqlApi>
+    ICqlApiExtendable,
+    ICqlApiInternal
 {
     private readonly CqlApiImpl _cqlApi;
 
@@ -25,10 +25,10 @@ public class CqlApi :
         _cqlApi = cqlApi;
     }
 
-    ILoggerFactory ICqlApiExtendable<CqlApi>.LoggerFactory => _cqlApi._services.LoggerFactory;
-    CqlApiOptions ICqlApiExtendable<CqlApi>.Options => _cqlApi._options;
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> ICqlApiExtendable<CqlApi>.Entries => _cqlApi._entries;
-    CqlApiServices ICqlApiInternal<CqlApi>.Services => _cqlApi._services;
+    public ILoggerFactory LoggerFactory => _cqlApi._services.LoggerFactory;
+    public CqlApiOptions Options => _cqlApi._options;
+    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> Entries => _cqlApi._entries;
+    CqlApiServices ICqlApiInternal.Services => _cqlApi._services;
 
     public CqlApi WithOptions(Func<CqlApiOptions, CqlApiOptions> replaceOptions)
     {

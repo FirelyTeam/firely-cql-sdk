@@ -5,12 +5,11 @@ using CqlSdkPrototype.Elm.Extensions;
 
 namespace CqlSdkPrototype.Invocation.Extensions;
 
-public static partial class RuntimeApiExtensions
+public static partial class InvokerApiExtensions
 {
-    public static ElmApi CreateElmApi<TCqlApi>(
-        this TCqlApi cqlApi,
+    public static ElmApi CreateElmApi(
+        this CqlApi cqlApi,
         Func<ElmApiOptions, ElmApiOptions>? configureOptions = null)
-        where TCqlApi : ICqlApiExtendable<TCqlApi>
     {
         var elmApiOptions = new ElmApiOptions(ProcessBatchItemExceptionHandling: cqlApi.Options.ProcessBatchItemExceptionHandling);
         if (configureOptions is not null) elmApiOptions = configureOptions(elmApiOptions);
@@ -23,7 +22,7 @@ public static partial class RuntimeApiExtensions
 #pragma warning restore RS0026
         this CqlApi cqlApi,
         Func<ElmApiOptions, ElmApiOptions>? configureElmOptions = null,
-        Func<InvokerApiOptions, InvokerApiOptions>? configureRuntimeOptions = null)
+        Func<InvocationApiOptions, InvocationApiOptions>? configureRuntimeOptions = null)
     {
         return cqlApi
                .Translate()

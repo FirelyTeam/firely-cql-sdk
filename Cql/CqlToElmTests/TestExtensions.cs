@@ -31,7 +31,6 @@ internal static class TestExtensions
         var library = cqlApi
                       .AddCqlLibraryString(cqlLibraryString)
                       .Translate()
-                      .AsExtendable()
                       .Entries[cqlLibraryString.VersionedLibraryIdentifier]
                       .ElmLibrary!;
 
@@ -62,8 +61,7 @@ internal static class TestExtensions
         this ElmApi elmApi,
         Library library)
     {
-        using var scope = elmApi
-                          .AsInternal()
+        using var scope = ((IElmApiInternal)elmApi)
                           .Services
                           .ServiceProvider
                           .CreateScope();
@@ -75,8 +73,7 @@ internal static class TestExtensions
         this ElmApi elmApi,
         Expression expression)
     {
-        using var scope = elmApi
-                          .AsInternal()
+        using var scope = ((IElmApiInternal)elmApi)
                           .Services
                           .ServiceProvider
                           .CreateScope();

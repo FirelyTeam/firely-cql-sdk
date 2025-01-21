@@ -1,6 +1,7 @@
 ﻿using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Cql.Extensions;
+using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Elm.Extensions;
 using CqlSdkPrototype.Infrastructure;
@@ -200,19 +201,16 @@ internal class Program
 
 file static class X
 {
-    public static Maybe<(CqlVersionedLibraryIdentifier id, string cSharpSourceCode)>
-        TryGetFirstCSharpFileLines<TElmApi>(
-            this TElmApi elmApi)
-        where TElmApi : IElmApiExtendable<TElmApi>
+    public static Maybe<(CqlVersionedLibraryIdentifier id, string cSharpSourceCode)> TryGetFirstCSharpFileLines(
+        this ElmApi elmApi)
     {
         return elmApi.Entries
                      .TryGetFirst(kv => kv.Value.CSharpSourceCode is not null)
                      .TryReturn(kv => (kv.Key, kv.Value.CSharpSourceCode!));
     }
 
-    public static Maybe<(CqlVersionedLibraryIdentifier id, string elmJson)> TryGetFirstElmFileLines<TCqlApi>(
-        this TCqlApi cqlApi)
-        where TCqlApi : ICqlApiExtendable<TCqlApi>
+    public static Maybe<(CqlVersionedLibraryIdentifier id, string elmJson)> TryGetFirstElmFileLines(
+        this CqlApi cqlApi)
     {
         return cqlApi.Entries
                      .TryGetFirst(kv => kv.Value.ElmLibrary is not null)

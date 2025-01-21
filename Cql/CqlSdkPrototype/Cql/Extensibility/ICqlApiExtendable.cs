@@ -2,13 +2,12 @@
 
 namespace CqlSdkPrototype.Cql.Extensibility;
 
-public interface ICqlApiExtendable<TCqlApi>
-    where TCqlApi : ICqlApiExtendable<TCqlApi>
+public interface ICqlApiExtendable
 {
     ILoggerFactory LoggerFactory { get; }
     CqlApiOptions Options { get; }
     IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> Entries { get; }
-    TCqlApi WithOptions(Func<CqlApiOptions, CqlApiOptions> replaceOptions);
-    TCqlApi AddCqlLibraries(IEnumerable<CqlLibraryString> libraries);
-    TCqlApi Translate();
+    CqlApi WithOptions(Func<CqlApiOptions, CqlApiOptions> replaceOptions);
+    CqlApi AddCqlLibraries(IEnumerable<CqlLibraryString> libraries);
+    CqlApi Translate();
 }

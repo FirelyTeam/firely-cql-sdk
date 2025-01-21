@@ -6,7 +6,7 @@ using static System.FormattableString;
 
 namespace CqlSdkPrototype.Invocation.Extensions;
 
-public static partial class RuntimeApiExtensions
+public static partial class InvokerApiExtensions
 {
     public static IEnumerable<(CqlVersionedLibraryIdentifier library, string declarationName, Func<object?> getResult)> EnumerateLibrarySetDefinitionsResults(
         this LibrarySetInvoker scope,

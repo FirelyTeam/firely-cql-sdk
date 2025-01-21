@@ -1,7 +1,7 @@
 ﻿using System.CodeDom.Compiler;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation.Extensibility;
-using CqlSdkPrototype.Invocation.Invokers;
+using CqlSdkPrototype.Invocation.Internal;
 using Hl7.Cql.Abstractions;
 
 namespace CqlSdkPrototype.Invocation;
@@ -17,12 +17,12 @@ public abstract class LibraryInvoker
     public abstract IReadOnlyDictionary<string, DefinitionInvoker> Definitions { get; }
 
     public static bool TryCreateFromType(
-        InvokerApi invokerApi,
+        InvocationApi invocationApi,
         Type libraryType,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
         libraryInvoker = null;
-        var logger = invokerApi.AsExtendable().LoggerFactory.CreateLogger<LibraryInvoker>();
+        var logger = ((IInvocationApi)invocationApi).LoggerFactory.CreateLogger<LibraryInvoker>();
 
         if (libraryType.GetCustomAttribute<CqlLibraryAttribute>() is not { })
         {
@@ -49,7 +49,7 @@ public abstract class LibraryInvoker
 
         if (LibraryInvoker_2_0_8_0.SupportsVersion(cqlToolVersion))
         {
-            if (LibraryInvoker_2_0_8_0.TryCreateFromType(invokerApi, libraryType, out libraryInvoker))
+            if (LibraryInvoker_2_0_8_0.TryCreateFromType(invocationApi, libraryType, out libraryInvoker))
                 return true;
         }
 

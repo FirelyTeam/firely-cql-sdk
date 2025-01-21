@@ -36,8 +36,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var elmApi = CreateElmApi();
             var lambda = elmApi.Lambda(expression);
             var expressionName = "TempExpression";
-            var options = elmApi.AsExtendable().Options;
-            var services = elmApi.AsInternal().Services;
+            var options = elmApi.Options;
+            var services = ((IElmApiInternal)elmApi).Services;
             LibrarySet librarySet = new("TempLibrarySet", library);
             DefinitionDictionary<LambdaExpression> definitions = new();
             definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
@@ -45,7 +45,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var compile = services.AssemblyCompiler.Compile(librarySet, generateCSharp, options.AssemblyCompilerDebugInformationFormat);
             var assemblyBytes = compile.Single().assemblyDataWithSourceCode.AssemblyBytes;
 
-            using var scope = new InvokerApi()
+            using var scope = new InvocationApi()
                               .AddAssemblies([AssemblyData.Default with { AssemblyBytes = assemblyBytes }])
                               .CreateLibrarySetInvoker();
             var result = scope.GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);

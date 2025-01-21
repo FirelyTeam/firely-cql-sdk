@@ -1,7 +1,7 @@
 ﻿using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Abstractions;
 
-namespace CqlSdkPrototype.Invocation.Invokers;
+namespace CqlSdkPrototype.Invocation.Internal;
 
 internal abstract class LibraryInvokerOnInstance(ILibrary library) : LibraryInvoker
 {

@@ -4,11 +4,10 @@ namespace CqlSdkPrototype.Cql.Extensions;
 
 public static partial class CqlApiExtensions
 {
-    public static TCqlApi SaveElmFileToDirectory<TCqlApi>(
-        this TCqlApi cqlApi,
+    public static CqlApi SaveElmFileToDirectory(
+        this CqlApi cqlApi,
         DirectoryInfo directory,
         bool writeIndented = true)
-        where TCqlApi : ICqlApiExtendable<TCqlApi>
     {
         if (!directory.Exists)
             directory.Create();

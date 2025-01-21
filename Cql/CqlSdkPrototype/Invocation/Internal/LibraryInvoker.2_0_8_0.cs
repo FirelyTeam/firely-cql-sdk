@@ -5,7 +5,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Invocation.Invokers;
+namespace CqlSdkPrototype.Invocation.Internal;
 
 internal class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
 {
@@ -18,12 +18,13 @@ internal class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
         public LibraryMethodInfo(MethodInfo Method) : this(
             Method,
             TagValuesByName: Method.GetCustomAttributes<CqlTagAttribute>().ToArray() switch
-                                 {
-                                     { Length: > 0 } tags => tags.ToDictionary(a => a.Name, a => a.Value).AsReadOnly(),
-                                     _ => ReadOnlyDictionary<string, string>.Empty
-                                 },
+            {
+                { Length: > 0 } tags => tags.ToDictionary(a => a.Name, a => a.Value).AsReadOnly(),
+                _ => ReadOnlyDictionary<string, string>.Empty
+            },
             ValueSetId: Method.GetCustomAttribute<CqlValueSetAttribute>()?.Id,
-            DeclarationName: Method.GetCustomAttribute<CqlDeclarationAttribute>()?.Name) { }
+            DeclarationName: Method.GetCustomAttribute<CqlDeclarationAttribute>()?.Name)
+        { }
     }
 
     public LibraryInvoker_2_0_8_0(
@@ -51,12 +52,12 @@ internal class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
     }
 
     public new static bool TryCreateFromType(
-        InvokerApi invokerApi,
+        InvocationApi invocationApi,
         Type libraryType,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
         libraryInvoker = null;
-        var logger = invokerApi.AsExtendable().LoggerFactory.CreateLogger<LibraryInvoker_2_0_8_0>();
+        var logger = ((IInvocationApi)invocationApi).LoggerFactory.CreateLogger<LibraryInvoker_2_0_8_0>();
 
         if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
         {

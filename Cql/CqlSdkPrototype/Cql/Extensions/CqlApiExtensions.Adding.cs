@@ -6,30 +6,27 @@ namespace CqlSdkPrototype.Cql.Extensions;
 
 public static partial class CqlApiExtensions
 {
-    public static TCqlApi AddCqlLibraryString<TCqlApi>(
-        this TCqlApi cqlApi,
+    public static CqlApi AddCqlLibraryString(
+        this CqlApi cqlApi,
         CqlLibraryString cqlLibrary)
-        where TCqlApi : ICqlApiExtendable<TCqlApi>
     {
         return cqlApi.AddCqlLibraries([cqlLibrary]);
     }
 
-    public static TCqlApi AddCqlLibrariesFromDirectory<TCqlApi>(
-        this TCqlApi cqlApi,
+    public static CqlApi AddCqlLibrariesFromDirectory(
+        this CqlApi cqlApi,
         DirectoryInfo directory,
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
-        where TCqlApi : ICqlApiExtendable<TCqlApi>
     {
         var files = directory.EnumerateFiles("*.cql", options ?? InternalConstants.DefaultEnumerationOptions);
         if (filePredicate is not null) files = files.Where(filePredicate);
         return cqlApi.AddCqlLibraryFiles(files);
     }
 
-    public static TCqlApi AddCqlLibraryFiles<TCqlApi>(
-        this TCqlApi cqlApi,
+    public static CqlApi AddCqlLibraryFiles(
+        this CqlApi cqlApi,
         IEnumerable<FileInfo> files)
-        where TCqlApi : ICqlApiExtendable<TCqlApi>
     {
         var logger = cqlApi.LoggerFactory.CreateLogger(typeof(CqlApiExtensions));
         var cqlLibraries = files

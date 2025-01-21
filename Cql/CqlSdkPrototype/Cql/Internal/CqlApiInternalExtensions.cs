@@ -2,6 +2,5 @@
 
 internal static class CqlApiInternalExtensions
 {
-    internal static ICqlApiInternal<TCqlApi> AsInternal<TCqlApi>(this ICqlApiInternal<TCqlApi> self)
-        where TCqlApi : ICqlApiInternal<TCqlApi> => self;
+    internal static ICqlApiInternal AsInternal(this ICqlApiInternal self) => self;
 }

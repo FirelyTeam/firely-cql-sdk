@@ -11,8 +11,8 @@ using Hl7.Cql.Runtime;
 namespace CqlSdkPrototype.Elm;
 
 public sealed class ElmApi :
-    IElmApiExtendable<ElmApi>,
-    IElmApiInternal<ElmApi>
+    IElmApiExtendable,
+    IElmApiInternal
 {
     public ElmApi(
         ILoggerFactory? loggerFactory = null,
@@ -31,8 +31,8 @@ public sealed class ElmApi :
     private ElmApiStateEntryDictionary _entries;
     private ElmApiOptions _options;
 
-    ElmApiOptions IElmApiExtendable<ElmApi>.Options => _options;
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry> IElmApiExtendable<ElmApi>.Entries => _entries;
+    public ElmApiOptions Options => _options;
+    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry> Entries => _entries;
 
     private ElmApi WithEntries(
         ElmApiStateEntryDictionary entries)
@@ -57,9 +57,8 @@ public sealed class ElmApi :
         return this;
     }
 
-    TResult IElmApiExtendable<ElmApi>.UseLogger<TResult>(Func<ElmApi, ILogger<ElmApi>, TResult> action) => action(this, _services.Logger);
-    ElmApiServices IElmApiInternal<ElmApi>.Services => _services;
-    ILoggerFactory IElmApiExtendable<ElmApi>.LoggerFactory => _services.LoggerFactory;
+    ElmApiServices IElmApiInternal.Services => _services;
+    public ILoggerFactory LoggerFactory => _services.LoggerFactory;
 
     #endregion
 

@@ -92,7 +92,7 @@ internal static class LibraryExtensions
             .Select(assemblyBytes => AssemblyData.Default with { AssemblyBytes = assemblyBytes})
             .ToArray();
 
-        return new InvokerApi()
+        return new InvocationApi()
                          .AddAssemblies(assemblyDatas)
                          .CreateLibrarySetInvoker();
     }

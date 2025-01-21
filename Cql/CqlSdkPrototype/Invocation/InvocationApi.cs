@@ -5,25 +5,25 @@ using Hl7.Cql.CodeGeneration.NET;
 
 namespace CqlSdkPrototype.Invocation;
 
-public class InvokerApi : IInvokerApiExtendable<InvokerApi>
+public class InvocationApi : IInvocationApi
 {
-    public InvokerApi(
+    public InvocationApi(
         ILoggerFactory? loggerFactory = null,
-        InvokerApiOptions? options = null)
+        InvocationApiOptions? options = null)
     {
-        options ??= InvokerApiOptions.Default;
+        options ??= InvocationApiOptions.Default;
         _entries = RuntimeApiStateEntryHashSet.Empty;
-        _services = InvokerApiServices.Create(loggerFactory);
+        _services = InvocationApiServices.Create(loggerFactory);
         _options = options;
     }
 
     #region State
 
-    private InvokerApiServices _services;
+    private InvocationApiServices _services;
     private RuntimeApiStateEntryHashSet _entries;
-    private InvokerApiOptions _options;
+    private InvocationApiOptions _options;
 
-    private InvokerApi WithEntries(
+    private InvocationApi WithEntries(
         RuntimeApiStateEntryHashSet entries)
     {
         if (ReferenceEquals(_entries, entries))
@@ -33,27 +33,27 @@ public class InvokerApi : IInvokerApiExtendable<InvokerApi>
         return this;
     }
 
-    public InvokerApi WithOptions(
-        Func<InvokerApiOptions, InvokerApiOptions> replaceOptions)
+    public InvocationApi WithOptions(
+        Func<InvocationApiOptions, InvocationApiOptions> replaceOptions)
     {
         var newOptions = replaceOptions(_options);
         if (ReferenceEquals(_options, newOptions))
             return this;
 
         _options = newOptions;
-        _services = InvokerApiServices.Create(_services.LoggerFactory);
+        _services = InvocationApiServices.Create(_services.LoggerFactory);
         return this;
     }
 
-    InvokerApiOptions IInvokerApiExtendable<InvokerApi>.Options => _options;
-    IReadOnlySet<InvokerApiStateEntry> IInvokerApiExtendable<InvokerApi>.Entries => _entries;
-    ILoggerFactory IInvokerApiExtendable<InvokerApi>.LoggerFactory => _services.LoggerFactory;
+    public InvocationApiOptions Options => _options;
+    public IReadOnlySet<InvokerApiStateEntry> Entries => _entries;
+    public ILoggerFactory LoggerFactory => _services.LoggerFactory;
 
     #endregion
 
     #region Input (AssemblyData's)
 
-    public InvokerApi AddAssemblies(IEnumerable<AssemblyData> assemblyData)
+    public InvocationApi AddAssemblies(IEnumerable<AssemblyData> assemblyData)
     {
         var assembliesBuilder = _entries.ToBuilder();
         var oldCount = assembliesBuilder.Count;

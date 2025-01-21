@@ -1,14 +1,11 @@
-﻿using CqlSdkPrototype.Elm.Extensibility;
-
-namespace CqlSdkPrototype.Elm.Extensions;
+﻿namespace CqlSdkPrototype.Elm.Extensions;
 
 public static partial class ElmApiExtensions
 {
 
-    public static TElmApi SaveCSharpFilesToDirectory<TElmApi>(
-        this TElmApi elmApi,
+    public static ElmApi SaveCSharpFilesToDirectory(
+        this ElmApi elmApi,
         DirectoryInfo directory)
-        where TElmApi : IElmApiExtendable<TElmApi>
     {
         if (!directory.Exists)
             directory.Create();
@@ -28,10 +25,9 @@ public static partial class ElmApiExtensions
         return elmApi;
     }
 
-    public static TElmApi SaveAssemblyBinariesToDirectory<TElmApi>(
-        this TElmApi elmApi,
+    public static ElmApi SaveAssemblyBinariesToDirectory(
+        this ElmApi elmApi,
         DirectoryInfo directory)
-        where TElmApi : IElmApiExtendable<TElmApi>
     {
         if (!directory.Exists)
             directory.Create();

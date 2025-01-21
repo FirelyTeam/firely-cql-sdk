@@ -31,7 +31,7 @@ namespace CLI
             //if used in production scenario compile measures.* dll and reference it below instead, example Assembly.LoadFrom("Measures.Authoring")
             //see launchsettings.json
             var assemblyData = AssemblyData.Default.LoadFromFiles(new FileInfo(_opts.AssemblyPath));
-            using var runtimeScope = new InvokerApi()
+            using var runtimeScope = new InvocationApi()
                       .AddAssemblies([assemblyData])
                       .CreateLibrarySetInvoker();
             RunShared(_opts, runtimeScope);

@@ -1,4 +1,5 @@
-﻿using CqlSdkPrototype.Cql.Extensibility;
+﻿using CqlSdkPrototype.Cql;
+using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
@@ -10,11 +11,9 @@ namespace CqlSdkPrototype.Elm.Extensions;
 
 public static partial class ElmApiExtensions
 {
-    public static TElmApi AddElmFromCqlApi<TElmApi, TCqlApi>(
-        this TElmApi elmApi,
-        TCqlApi cqlApi)
-        where TElmApi : IElmApiExtendable<TElmApi>
-        where TCqlApi : ICqlApiExtendable<TCqlApi>
+    public static ElmApi AddElmFromCqlApi(
+        this ElmApi elmApi,
+        CqlApi cqlApi)
     {
         return elmApi.AddElmLibraries(
             from entry in cqlApi.Entries
@@ -23,11 +22,10 @@ public static partial class ElmApiExtensions
             select elmLibrary);
     }
 
-    public static TElmApi AddElmFile<TElmApi>(
-        this TElmApi elmApi,
+    public static ElmApi AddElmFile(
+        this ElmApi elmApi,
         DirectoryInfo directory,
         CqlVersionedLibraryIdentifier versionedLibraryIdentifier)
-        where TElmApi : IElmApiExtendable<TElmApi>
     {
         FileInfo file = new(Path.Combine(directory.FullName, $"{versionedLibraryIdentifier}.json"));
         if (file.Exists)
@@ -36,67 +34,60 @@ public static partial class ElmApiExtensions
         if (versionedLibraryIdentifier.Version is null)
             throw new FileNotFoundException($"Could not find file '{file.FullName}'.");
 
-        return elmApi.UseLogger((elmApi, logger) =>
-        {
-            logger.LogWarning("Could not load library from file with name and version, trying without version: {file}", file.FullName);
-            file = new FileInfo(Path.Combine(directory.FullName, $"{versionedLibraryIdentifier with { Version = null }}.json"));
-            return elmApi.AddElmFile(file);
-        });
+        var logger = elmApi.LoggerFactory.CreateLogger(typeof(ElmApiExtensions));
+        logger.LogWarning("Could not load library from file with name and version, trying without version: {file}", file.FullName);
+        file = new FileInfo(Path.Combine(directory.FullName, $"{versionedLibraryIdentifier with { Version = null }}.json"));
+        return elmApi.AddElmFile(file);
     }
 
-    public static TElmApi AddElmFiles<TElmApi>(
-        this TElmApi elmApi,
+    public static ElmApi AddElmFiles(
+        this ElmApi elmApi,
         IEnumerable<FileInfo> files)
-        where TElmApi : IElmApiExtendable<TElmApi>
     {
         var logger = elmApi.LoggerFactory.CreateLogger(typeof(ElmApiExtensions));
         var libraries = files
             .Select(f =>
             {
-                        logger.LogInformation("Loading library from file: {file}", f);
-                        var library = Library.LoadFromJson(f);
-                        return library;
-                    }); // Log errors
+                logger.LogInformation("Loading library from file: {file}", f);
+                var library = Library.LoadFromJson(f);
+                return library;
+            }); // Log errors
         return elmApi.AddElmLibraries(libraries);
     }
 
-    public static TElmApi AddElmFilesFromDirectory<TElmApi>(
-        this TElmApi elmApi,
+    public static ElmApi AddElmFilesFromDirectory(
+        this ElmApi elmApi,
         DirectoryInfo directory,
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
-        where TElmApi : IElmApiExtendable<TElmApi>
     {
         var files = directory.EnumerateFiles("*.json", options ?? InternalConstants.DefaultEnumerationOptions);
         if (filePredicate is not null) files = files.Where(filePredicate);
         return elmApi.AddElmFiles(files);
     }
 
-    public static TElmApi AddElmFileWithDependencies<TElmApi>(
-        this TElmApi elmApi,
+    public static ElmApi AddElmFileWithDependencies(
+        this ElmApi elmApi,
         FileInfo file,
         EnumerationOptions? options)
-        where TElmApi : IElmApiExtendable<TElmApi>
     {
         // TODO
         return elmApi;
     }
 
-    public static TElmApi AddElmFileWithDependencies<TElmApi>(
-        this TElmApi elmApi,
+    public static ElmApi AddElmFileWithDependencies(
+        this ElmApi elmApi,
         DirectoryInfo directory,
         CqlVersionedLibraryIdentifier fileName,
         EnumerationOptions? options)
-        where TElmApi : IElmApiExtendable<TElmApi>
     {
         // TODO
         return elmApi;
     }
 
-    public static TElmApi AddElmFile<TElmApi>(
-        this TElmApi elmApi,
+    public static ElmApi AddElmFile(
+        this ElmApi elmApi,
         FileInfo file)
-        where TElmApi : IElmApiExtendable<TElmApi>
     {
         return elmApi.AddElmFiles([file]);
     }

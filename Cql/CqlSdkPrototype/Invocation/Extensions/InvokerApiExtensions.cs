@@ -1,6 +1,6 @@
 ﻿namespace CqlSdkPrototype.Invocation.Extensions;
 
-public static partial class RuntimeApiExtensions
+public static partial class InvokerApiExtensions
 {
     // This file is intentionally left blank - since it's the parent file for nested RuntimeApiExtensions.* files
 }

@@ -145,7 +145,7 @@ namespace Test
             string version,
             int cacheSize,
             ILoggerFactory? loggerFactory = null,
-            Func<InvokerApiOptions, InvokerApiOptions>? configureOptions = null)
+            Func<InvocationApiOptions, InvocationApiOptions>? configureOptions = null)
         {
             Trace.Assert(cacheSize == 0, "TODO: CacheSize must still be moved to configuration"); // TODO: CacheSize must still be moved to configuration
             LibrarySet librarySet = new();
