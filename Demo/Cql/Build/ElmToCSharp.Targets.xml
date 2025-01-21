@@ -50,7 +50,7 @@
 			<PackagerCliArgs Condition="'$(DllDirectory)'!=''">$(PackagerCLIArgs) --dll "$(DllDirectory)"</PackagerCliArgs>
 			<PackagerCLIArgs Condition="'$(ResourcesDirectory)'!=''">$(PackagerCLIArgs) --fhir "$(ResourcesDirectory)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(CSharpTypeFormat)'!=''">$(PackagerCLIArgs) --cs-typeformat "$(CSharpTypeFormat)"</PackagerCLIArgs>
-			<PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs)</PackagerCLICommand>
+			<PackagerCLICommand>"$(PackagerCLI)" $(PackagerClIArgs)</PackagerCLICommand>
 			<!-- <PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs) &gt; NUL 2&gt; NUL</PackagerCLICommand> -->
 		</PropertyGroup>
 

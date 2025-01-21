@@ -12,8 +12,8 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class InvocationBuilderTest : Base
     {
-        internal static InvocationBuilder InvocationBuilder => CreateCqlApi().AsInternal().State.ServiceProvider.GetRequiredService<InvocationBuilder>();
-        internal static ElmFactory ElmFactory => CreateCqlApi().AsInternal().State.ServiceProvider.GetRequiredService<ElmFactory>();
+        internal static InvocationBuilder InvocationBuilder => CreateCqlApi().AsInternal().Services.ServiceProvider.GetRequiredService<InvocationBuilder>();
+        internal static ElmFactory ElmFactory => CreateCqlApi().AsInternal().Services.ServiceProvider.GetRequiredService<ElmFactory>();
         
         private static ParameterTypeSpecifier Generic(string parameterName = "T") => new ParameterTypeSpecifier { parameterName = parameterName };
 

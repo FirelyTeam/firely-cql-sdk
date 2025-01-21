@@ -11,7 +11,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
     public class LiteralTest : Base
     {
-        private static InvocationBuilder InvocationBuilder => CreateCqlApi().AsInternal().State.ServiceProvider.GetRequiredService<InvocationBuilder>();
+        private static InvocationBuilder InvocationBuilder => CreateCqlApi().AsInternal().Services.ServiceProvider.GetRequiredService<InvocationBuilder>();
 
         [TestMethod]
         public void String_Literal()

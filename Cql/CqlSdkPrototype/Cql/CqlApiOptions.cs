@@ -4,7 +4,8 @@ using Hl7.Cql.Model;
 
 namespace CqlSdkPrototype.Cql;
 
-public record CqlApiOptions(
+public record CqlApiOptions
+(
     ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling = default,
     ImmutableHashSet<CqlModel>? Models = null,
     ImmutableHashSet<ModelInfo>? ModelInfos = null,

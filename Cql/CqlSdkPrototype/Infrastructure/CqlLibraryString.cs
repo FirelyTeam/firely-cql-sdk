@@ -13,6 +13,11 @@ public readonly partial record struct CqlLibraryString
         return new CqlLibraryString(versionedLibraryIdentifier, cqlContent);
     }
 
+    /// <summary>
+    /// Regex to extract the library name and optional version from a CQL string.
+    /// The CQL specification for it can be found at https://cql.hl7.org/19-l-cqlsyntaxdiagrams.html#library
+    /// under libraryDefinition.
+    /// </summary>
     [GeneratedRegex("""
                     (\s+\r?\n?)*      # Skip whitespace and newlines
                     library           # until "library" is found

@@ -62,7 +62,7 @@ namespace Hl7.Cql.CqlToElm
             var libraryVisitorScoped = GetLibraryVisitorScoped(scope);
             var libraryBuilder = GetBuilder(libraryVisitorScoped, cql);
             var lib = libraryBuilder.Build();
-            if (lib.GetErrors().Any(e => e.errorSeverity == ErrorSeverity.error))
+           if (lib.GetErrors().Any(e => e.errorSeverity == ErrorSeverity.error))
                 Logger.LogWarning("Parsed ELM tree contains errors.");
             return lib;
         }

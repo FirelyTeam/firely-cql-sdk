@@ -127,7 +127,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
             using var codeStream = new MemoryStream();
             MemoryStream? pdbStream = debugInformationFormat == AssemblyCompilerDebugInformationFormat.PortablePdb ? new MemoryStream() : null;
-            using var pdbStreamDisposable = pdbStream as IDisposable ?? new EmptyDisposable();
+            using var pdbStreamDisposable = pdbStream as IDisposable;
 
             var emitOptions = CreateEmitOptions(debugInformationFormat);
             var compilationResult = compilation.Emit(codeStream, pdbStream, options:emitOptions);

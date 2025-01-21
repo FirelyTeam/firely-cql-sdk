@@ -72,7 +72,7 @@ internal class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
 
     public static bool SupportsVersion(Version cqlToolVersion)
     {
-        return cqlToolVersion.IsBetween(new Version(2, 0, 8), new Version(2, 1));
+        return cqlToolVersion >= new Version(2, 0, 8);
     }
 
     private class DefinitionInvoker(
