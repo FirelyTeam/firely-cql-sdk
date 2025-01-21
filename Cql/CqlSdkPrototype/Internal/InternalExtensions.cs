@@ -26,7 +26,7 @@ internal static class InternalExtensions
     {
         using var assemblyStream = new MemoryStream(assembly);
         var symbolsStream = symbols is {Length:>0} ? new MemoryStream(symbols) : null;
-        using var symbolsStreamDisposable = symbolsStream as IDisposable ?? new EmptyDisposable();
+        using var symbolsStreamDisposable = symbolsStream as IDisposable;
         return assemblyLoadContext.LoadFromStream(assemblyStream, symbolsStream);
     }
 
