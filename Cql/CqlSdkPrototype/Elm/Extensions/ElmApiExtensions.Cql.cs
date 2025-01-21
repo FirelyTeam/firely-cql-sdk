@@ -1,5 +1,5 @@
 ﻿using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Runtime.Extensions;
+using CqlSdkPrototype.Invocation.Extensions;
 
 namespace CqlSdkPrototype.Elm.Extensions;
 

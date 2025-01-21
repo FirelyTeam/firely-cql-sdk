@@ -96,11 +96,6 @@ internal class CqlApiImpl
         return this;
     }
 
-    // ILoggerFactory ICqlApiExtendable<CqlApiImpl>.LoggerFactory => _services.LoggerFactory;
-    // CqlApiOptions ICqlApiExtendable<CqlApiImpl>.Options => _options;
-    // IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> ICqlApiExtendable<CqlApiImpl>.Entries => _entries;
-    // CqlApiServices ICqlApiInternal<CqlApiImpl>.Services => _services;
-
     #endregion
 
     #region Input (CQL Library Strings)

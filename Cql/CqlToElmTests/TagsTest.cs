@@ -1,7 +1,7 @@
 using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Runtime.Extensions;
+using CqlSdkPrototype.Invocation.Extensions;
 
 namespace Hl7.Cql.CqlToElm.Test;
 

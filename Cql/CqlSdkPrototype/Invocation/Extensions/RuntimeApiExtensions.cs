@@ -1,4 +1,4 @@
-﻿namespace CqlSdkPrototype.Runtime.Extensions;
+﻿namespace CqlSdkPrototype.Invocation.Extensions;
 
 public static partial class RuntimeApiExtensions
 {

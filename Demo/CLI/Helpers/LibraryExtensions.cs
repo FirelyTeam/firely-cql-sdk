@@ -6,11 +6,11 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using CqlSdkPrototype.Invocation;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
-using CqlSdkPrototype.Runtime;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packaging;
 using Library = Hl7.Fhir.Model.Library;
@@ -81,7 +81,7 @@ internal static class LibraryExtensions
         }
     }
 
-    public static RuntimeScope CreateRuntimeScope(
+    public static LibrarySetInvoker CreateRuntimeScope(
         this IEnumerable<Library> libraries)
     {
         var assemblyDatas =
@@ -92,9 +92,9 @@ internal static class LibraryExtensions
             .Select(assemblyBytes => AssemblyData.Default with { AssemblyBytes = assemblyBytes})
             .ToArray();
 
-        return new RuntimeApi()
+        return new InvokerApi()
                          .AddAssemblies(assemblyDatas)
-                         .CreateRuntimeScope();
+                         .CreateLibrarySetInvoker();
     }
 
     private static Dictionary<string, List<string>> GetValueSets(Type libraryType)

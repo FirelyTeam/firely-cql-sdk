@@ -1,11 +1,11 @@
 ﻿using System.Collections.ObjectModel;
 using CqlSdkPrototype.Internal;
-using CqlSdkPrototype.Runtime.Extensibility;
+using CqlSdkPrototype.Invocation.Extensibility;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Runtime.Invokers;
+namespace CqlSdkPrototype.Invocation.Invokers;
 
 internal class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
 {
@@ -37,12 +37,12 @@ internal class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
                        .SelectWhereNotNull(o => o.DeclarationName is { } declarationName
                                                 && o.Method.GetParameters() is [{ } p0]
                                                 && p0.ParameterType == typeof(CqlContext)
-                                                    ? (LibraryDefinitionInvoker)new DefinitionInvoker(declarationName, Library, o.Method, o.TagValuesByName, o.ValueSetId)
+                                                    ? (Invocation.DefinitionInvoker)new DefinitionInvoker(declarationName, Library, o.Method, o.TagValuesByName, o.ValueSetId)
                                                     : null)
                        .ToImmutableDictionary(o => o.DeclarationName);
     }
 
-    public override IReadOnlyDictionary<string, LibraryDefinitionInvoker> Definitions { get; }
+    public override IReadOnlyDictionary<string, Invocation.DefinitionInvoker> Definitions { get; }
 
     private static object GetLibraryFromStaticInstanceProperty(Type libraryType)
     {
@@ -51,12 +51,12 @@ internal class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
     }
 
     public new static bool TryCreateFromType(
-        RuntimeApi runtimeApi,
+        InvokerApi invokerApi,
         Type libraryType,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
         libraryInvoker = null;
-        var logger = runtimeApi.AsExtendable().LoggerFactory.CreateLogger<LibraryInvoker_2_0_8_0>();
+        var logger = invokerApi.AsExtendable().LoggerFactory.CreateLogger<LibraryInvoker_2_0_8_0>();
 
         if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
         {
@@ -80,7 +80,7 @@ internal class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
         ILibrary library,
         MethodInfo methodInfo,
         IReadOnlyDictionary<string, string> tagValuesByName,
-        string? valueSetId) : LibraryDefinitionInvoker(declarationName, library, methodInfo, tagValuesByName, valueSetId)
+        string? valueSetId) : Invocation.DefinitionInvoker(declarationName, library, methodInfo, tagValuesByName, valueSetId)
     {
         public override object? Invoke(CqlContext cqlContext)
         {

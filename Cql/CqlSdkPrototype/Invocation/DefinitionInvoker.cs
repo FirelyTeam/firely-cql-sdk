@@ -1,9 +1,9 @@
 ﻿using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Runtime.Invokers;
+namespace CqlSdkPrototype.Invocation;
 
-public abstract class LibraryDefinitionInvoker(
+public abstract class DefinitionInvoker(
     string declarationName,
     ILibrary library,
     MethodInfo methodInfo,

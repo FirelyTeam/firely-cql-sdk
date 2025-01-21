@@ -3,7 +3,7 @@ using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensions;
 
-namespace CqlSdkPrototype.Runtime.Extensions;
+namespace CqlSdkPrototype.Invocation.Extensions;
 
 public static partial class RuntimeApiExtensions
 {
@@ -19,11 +19,11 @@ public static partial class RuntimeApiExtensions
     }
 
 #pragma warning disable RS0026
-    public static RuntimeScope CreateRuntimeScope(
+    public static LibrarySetInvoker CreateRuntimeScope(
 #pragma warning restore RS0026
         this CqlApi cqlApi,
         Func<ElmApiOptions, ElmApiOptions>? configureElmOptions = null,
-        Func<RuntimeApiOptions, RuntimeApiOptions>? configureRuntimeOptions = null)
+        Func<InvokerApiOptions, InvokerApiOptions>? configureRuntimeOptions = null)
     {
         return cqlApi
                .Translate()

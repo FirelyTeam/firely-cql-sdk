@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Runtime;
-using CqlSdkPrototype.Runtime.Extensions;
+using CqlSdkPrototype.Invocation;
+using CqlSdkPrototype.Invocation.Extensions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
@@ -100,7 +100,7 @@ public class CqlTupleTests
             """, str);
     }
 
-    /// <seealso cref="RuntimeApiTests.TestRuntimeScopeAgainstLibraryDefinitionResults"/>
+    /// <seealso cref="InvokerApiTests.TestRuntimeScopeAgainstLibraryDefinitionResults"/>
     [TestMethod]
     public void ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized()
     {
@@ -109,9 +109,9 @@ public class CqlTupleTests
                        .Select(dir => Path.GetFullPath(Path.Combine(dir.FullName, "Dlls", "CqlNestedTupleTest-1.0.0.dll")))
                        .First(File.Exists);
         var ctx = FhirCqlContext.ForBundle();
-        using var invocationScope = new RuntimeApi()
+        using var invocationScope = new InvokerApi()
                                     .AddAssemblies([AssemblyData.Default.LoadFromFiles(new FileInfo(filePath))])
-                                    .CreateRuntimeScope();
+                                    .CreateLibrarySetInvoker();
 
         // Act
         var result = invocationScope

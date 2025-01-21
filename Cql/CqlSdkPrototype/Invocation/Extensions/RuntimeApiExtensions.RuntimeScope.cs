@@ -4,12 +4,12 @@ using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 using static System.FormattableString;
 
-namespace CqlSdkPrototype.Runtime.Extensions;
+namespace CqlSdkPrototype.Invocation.Extensions;
 
 public static partial class RuntimeApiExtensions
 {
     public static IEnumerable<(CqlVersionedLibraryIdentifier library, string declarationName, Func<object?> getResult)> EnumerateLibrarySetDefinitionsResults(
-        this RuntimeScope scope,
+        this LibrarySetInvoker scope,
         CqlContext cqlContext)
     {
         foreach (var (libId, lib) in scope.Libraries)
@@ -30,7 +30,7 @@ public static partial class RuntimeApiExtensions
     }
 
     public static IEnumerable<(string definition, Func<object?> getResult)> EnumerateLibraryDefinitionsResults(
-        this RuntimeScope scope,
+        this LibrarySetInvoker scope,
         CqlContext cqlContext,
         CqlVersionedLibraryIdentifier library)
     {
@@ -50,7 +50,7 @@ public static partial class RuntimeApiExtensions
     }
 
     public static object? GetLibraryDefinitionResult(
-        this RuntimeScope scope,
+        this LibrarySetInvoker scope,
         CqlContext cqlContext,
         CqlVersionedLibraryIdentifier versionedLibraryIdentifier,
         string definitionName)
@@ -62,7 +62,7 @@ public static partial class RuntimeApiExtensions
     }
 
     internal static StringBuilder DumpLibraryDeclarations(
-        this RuntimeScope scope,
+        this LibrarySetInvoker scope,
         StringBuilder? sb = null)
     {
         sb ??= new();

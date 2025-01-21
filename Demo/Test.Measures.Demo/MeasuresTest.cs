@@ -5,11 +5,11 @@ using CoreTests;
 using Hl7.Cql.Compiler;
 using CLI.Helpers;
 using CqlSdkPrototype.Elm;
-using CqlSdkPrototype.Runtime;
-using CqlSdkPrototype.Runtime.Extensions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Runtime;
 using CqlSdkPrototype.Infrastructure;
+using CqlSdkPrototype.Invocation;
+using CqlSdkPrototype.Invocation.Extensions;
 
 namespace Test
 {
@@ -103,7 +103,7 @@ namespace Test
         }
 
         private static IReadOnlyDictionary<string, object?> Run(
-            RuntimeScope scope,
+            LibrarySetInvoker scope,
             string lib,
             string version,
             CqlContext context)
@@ -114,7 +114,7 @@ namespace Test
         }
 
         [UsedImplicitly]
-        public static RuntimeScope CreateRuntimeScopeFromFhirResourceFile(
+        public static LibrarySetInvoker CreateRuntimeScopeFromFhirResourceFile(
             DirectoryInfo dir,
             string lib,
             string version)
@@ -128,7 +128,7 @@ namespace Test
         }
 
         [UsedImplicitly]
-        public static RuntimeScope CreateRuntimeScopeFromElmLibraryFile(
+        public static LibrarySetInvoker CreateRuntimeScopeFromElmLibraryFile(
             DirectoryInfo elmDirectory,
             string lib,
             string version,
@@ -139,13 +139,13 @@ namespace Test
         }
 
         [UsedImplicitly]
-        public static RuntimeScope CreateRuntimeScopeFromElmLibraryFile(
+        public static LibrarySetInvoker CreateRuntimeScopeFromElmLibraryFile(
             DirectoryInfo elmDirectory,
             string lib,
             string version,
             int cacheSize,
             ILoggerFactory? loggerFactory = null,
-            Func<RuntimeApiOptions, RuntimeApiOptions>? configureOptions = null)
+            Func<InvokerApiOptions, InvokerApiOptions>? configureOptions = null)
         {
             Trace.Assert(cacheSize == 0, "TODO: CacheSize must still be moved to configuration"); // TODO: CacheSize must still be moved to configuration
             LibrarySet librarySet = new();

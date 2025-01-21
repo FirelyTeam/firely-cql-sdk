@@ -1,16 +1,16 @@
 ﻿using CqlSdkPrototype.Elm.Extensibility;
 using Hl7.Cql.CodeGeneration.NET;
 
-namespace CqlSdkPrototype.Runtime.Extensions;
+namespace CqlSdkPrototype.Invocation.Extensions;
 
 public static partial class RuntimeApiExtensions
 {
-    public static RuntimeApi CreateRuntimeApi<TElmApi>(
+    public static InvokerApi CreateRuntimeApi<TElmApi>(
         this TElmApi elmApi,
-        Func<RuntimeApiOptions, RuntimeApiOptions>? configureOptions = null)
+        Func<InvokerApiOptions, InvokerApiOptions>? configureOptions = null)
         where TElmApi : IElmApiExtendable<TElmApi>
     {
-        var runtimeApiOptions = RuntimeApiOptions.Default;
+        var runtimeApiOptions = InvokerApiOptions.Default;
         if (configureOptions is not null) runtimeApiOptions = configureOptions(runtimeApiOptions);
 
         var assemblyDatas =
@@ -21,20 +21,20 @@ public static partial class RuntimeApiExtensions
             let assemblyData = new AssemblyData(assembly, debugSymbols)
             select assemblyData;
 
-        var runtimeApi = new RuntimeApi(elmApi.LoggerFactory, runtimeApiOptions).AddAssemblies(assemblyDatas);
+        var runtimeApi = new InvokerApi(elmApi.LoggerFactory, runtimeApiOptions).AddAssemblies(assemblyDatas);
         return runtimeApi;
     }
 
 #pragma warning disable RS0026
-    public static RuntimeScope CreateRuntimeScope<TElmApi>(
+    public static LibrarySetInvoker CreateRuntimeScope<TElmApi>(
 #pragma warning restore RS0026
         this TElmApi elmApi,
-        Func<RuntimeApiOptions, RuntimeApiOptions>? configureOptions = null)
+        Func<InvokerApiOptions, InvokerApiOptions>? configureOptions = null)
         where TElmApi : IElmApiExtendable<TElmApi>
     {
         return elmApi
                .Compile()
                .CreateRuntimeApi(configureOptions)
-               .CreateRuntimeScope();
+               .CreateLibrarySetInvoker();
     }
 }

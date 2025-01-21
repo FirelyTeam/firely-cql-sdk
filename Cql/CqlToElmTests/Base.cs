@@ -7,9 +7,9 @@ using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Elm.Internal;
-using CqlSdkPrototype.Runtime;
-using CqlSdkPrototype.Runtime.Extensions;
 using CqlSdkPrototype.Infrastructure;
+using CqlSdkPrototype.Invocation;
+using CqlSdkPrototype.Invocation.Extensions;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Model;
 
@@ -45,9 +45,9 @@ namespace Hl7.Cql.CqlToElm.Test
             var compile = services.AssemblyCompiler.Compile(librarySet, generateCSharp, options.AssemblyCompilerDebugInformationFormat);
             var assemblyBytes = compile.Single().assemblyDataWithSourceCode.AssemblyBytes;
 
-            using var scope = new RuntimeApi()
+            using var scope = new InvokerApi()
                               .AddAssemblies([AssemblyData.Default with { AssemblyBytes = assemblyBytes }])
-                              .CreateRuntimeScope();
+                              .CreateLibrarySetInvoker();
             var result = scope.GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);
             return result;
         }

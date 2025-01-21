@@ -1,4 +1,5 @@
 ﻿using CLI.Helpers;
+using CqlSdkPrototype.Invocation;
 using Dumpify;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
@@ -6,7 +7,6 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
-using CqlSdkPrototype.Runtime;
 using Hl7.Cql.CodeGeneration.NET;
 
 namespace CLI
@@ -31,9 +31,9 @@ namespace CLI
             //if used in production scenario compile measures.* dll and reference it below instead, example Assembly.LoadFrom("Measures.Authoring")
             //see launchsettings.json
             var assemblyData = AssemblyData.Default.LoadFromFiles(new FileInfo(_opts.AssemblyPath));
-            using var runtimeScope = new RuntimeApi()
+            using var runtimeScope = new InvokerApi()
                       .AddAssemblies([assemblyData])
-                      .CreateRuntimeScope();
+                      .CreateLibrarySetInvoker();
             RunShared(_opts, runtimeScope);
         }
 
@@ -46,7 +46,7 @@ namespace CLI
             RunShared(_opts, scope);
         }
 
-        private void RunShared(CommandLineOptions opt, RuntimeScope runtimeScope)
+        private void RunShared(CommandLineOptions opt, LibrarySetInvoker librarySetInvoker)
         {
             //Type libraryType = ResolveLibraryType(opt, runtimeScope) ?? throw new ArgumentException($"Unknown library: {opt.Library}");
             Console.WriteLine("Loading value sets");
