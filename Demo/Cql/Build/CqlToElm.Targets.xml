@@ -54,10 +54,10 @@
 		</Exec>
 
 		<WriteLinesToFile
-            File="$(JavaOutputFile)"
-            Lines="@(OutputOfExec)"
-            Overwrite="true"
-            Encoding="Unicode"/>
+			File="$(JavaOutputFile)"
+      Lines="@(OutputOfExec)"
+      Overwrite="true"
+      Encoding="Unicode"/>
 
 		<!-- Set a property to indicate that the task ran -->
 		<CreateProperty

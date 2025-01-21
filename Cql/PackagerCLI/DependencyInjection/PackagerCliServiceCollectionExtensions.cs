@@ -6,14 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packager;
-using Hl7.Cql.Packaging;
-using Microsoft.Extensions.DependencyInjection;
-using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Options;
 
 // ReSharper disable once CheckNamespace
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -25,41 +20,24 @@ internal static class PackagerCliServiceCollectionExtensions
         this IServiceCollection services)
     {
         services.AddCqlPackagingServices();
-
-        services.TryAddScoped<PackagerCliProgram>();
+        services.TryAddScoped<PackagerCli>();
         services.TryAddSingleton<OptionsConsoleDumper>();
-
         return services;
     }
 
     public static IServiceCollection AddPackagerCliOptions(
-        this IServiceCollection services,
-        IConfiguration configuration)
+        this IServiceCollection services)
     {
-        if (services.Any(s => s.ServiceType == typeof(IValidateOptions<CqlToResourcePackagingOptions>)))
+        /*
+        if (services.Any(s => s.ServiceType == typeof(IValidateOptions<PackagerCliOptions>)))
             return services;
 
-        services.AddSingleton<IValidateOptions<CqlToResourcePackagingOptions>, CqlToResourcePackagingOptions.Validator>();
-        services.AddSingleton<IValidateOptions<CSharpCodeWriterOptions>, CSharpCodeWriterOptions.Validator>();
+        services.AddSingleton<IValidateOptions<PackagerCliOptions>, PackagerCliOptions.Validator>();
+        */
 
         services
-            .AddOptions<CqlToResourcePackagingOptions>()
-            .Configure<IConfiguration>(CqlToResourcePackagingOptions.BindConfig)
-            .ValidateOnStart();
-
-        services
-            .AddOptions<FhirResourceWriterOptions>()
-            .Configure<IConfiguration>(FhirResourceWriterOptions.BindConfig)
-            .ValidateOnStart();
-
-        services
-            .AddOptions<CSharpCodeWriterOptions>()
-            .Configure<IConfiguration>(CSharpCodeWriterOptions.BindConfig)
-            .ValidateOnStart();
-
-        services
-            .AddOptions<AssemblyDataWriterOptions>()
-            .Configure<IConfiguration>(AssemblyDataWriterOptions.BindConfig)
+            .AddOptions<PackagerCliOptions>()
+            .Configure<IConfiguration>(PackagerCliOptions.BindConfig)
             .ValidateOnStart();
 
         return services;

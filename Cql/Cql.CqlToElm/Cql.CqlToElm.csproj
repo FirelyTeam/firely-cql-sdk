@@ -32,6 +32,7 @@
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
 		<ProjectReference Include="..\Cql.Grammar\Cql.Grammar.csproj" />
 		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CqlSdkPrototype" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 	<ItemGroup>

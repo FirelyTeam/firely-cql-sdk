@@ -23,6 +23,12 @@
 	<!-- 	<Message Text="###===>&#10;MSBuildProjectName=$(MSBuildProjectName)&#10;ElmToCSharpEnabled=$(ElmToCSharpEnabled)&#10;CqlToElmEnabled=$(CqlToElmEnabled)&#10;PackagerCLI=$(PackagerCLI)" Importance="High" /> -->
 	<!-- </Target> -->
 
+	<!-- <Target -->
+	<!-- 	Name="DumpGenerateCSharp" -->
+	<!-- 	BeforeTargets="PreBuildEvent"> -->
+	<!-- 	<Message Text="###===>&#10;MSBuildProjectName=$(MSBuildProjectName)&#10;ElmToCSharpEnabled=$(ElmToCSharpEnabled)&#10;CqlToElmEnabled=$(CqlToElmEnabled)&#10;PackagerCLI=$(PackagerCLI)" Importance="High" /> -->
+	<!-- </Target> -->
+
 	<Target Name="GenerateCSharp"
 	        Condition="'$(ElmToCSharpEnabled)'=='true' And Exists('$(PackagerCLI)')"
 	        BeforeTargets="PreBuildEvent">

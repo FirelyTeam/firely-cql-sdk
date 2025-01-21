@@ -8,17 +8,14 @@
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
 using System.Globalization;
-using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Packaging;
-using Hl7.Cql.Packaging.PostProcessors;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
-using Serilog;
+using Log = Serilog.Log;
 
 namespace Hl7.Cql.Packager;
 
-public class Program
+public abstract class Program
 {
     public static int Main(string[] args)
     {
@@ -40,22 +37,16 @@ public class Program
         }
     }
 
-    public static IHostBuilder CreateHostBuilder(string[] args) =>
+    private static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder()
-            .UseServiceProviderFactory(context =>
-                                           new DefaultServiceProviderFactory(
-                                               new ServiceProviderOptions()
-                                               {
-                                                   // Since we are using scopes,
-                                                   // we need to validate that they are never used from the root provider,
-                                                   // nor that they are included into singletons.
-                                                   ValidateScopes = true
-                                               }))
             .ConfigureAppConfiguration((context, config) => config.AddPackagerCliCommandLineSwitches(args))
             .ConfigureLogging((context, logging) => logging.AddPackagerCLiLogging(context.Configuration))
-            .ConfigureServices((context, services) =>                                   services
-                                       .AddPackagerCliOptions(context.Configuration)
-                                       .AddPackagerCliServices())
+            .ConfigureServices((context, services) =>
+            {
+                services
+                    .AddPackagerCliOptions()
+                    .AddPackagerCliServices();
+            })
             .UseConsoleLifetime()
             ;
 
@@ -69,15 +60,15 @@ public class Program
 
                      {"-?|-h|-help",-26} Show this help
 
-                     {CqlToResourcePackagingOptions.ArgNameElmDirectory,-26} {"<directory>",-19} Required: Library root directory
-                     {CqlToResourcePackagingOptions.ArgNameCqlDirectory,-26} {"<directory>",-19} Required: CQL root directory
-                     {Optional(FhirResourceWriterOptions.ArgNameOutDirectory),-26} {"<directory>",-19} Resource directory
-                     {Optional(CSharpCodeWriterOptions.ArgNameOutDirectory),-26} {"<directory>",-19} C# output directory
-                     {Optional(AssemblyDataWriterOptions.ArgNameOutDirectory),-26}{"<directory>",-19} DLL output directory
-                     {Optional(CqlToResourcePackagingOptions.ArgNameLogDebugEnabled),-26} {"<true|false>",-19} Enable debug logging or not (default)
-                     {Optional(CqlToResourcePackagingOptions.ArgNameCanonicalRootUrl),-26} {"<url>",-19} The root url used for the resource canonical
+                     {"--elm",-26} {"<directory>",-19} Required: Library root directory
+                     {"--cql",-26} {"<directory>",-19} Required: CQL root directory
+                     {Optional("--fhir"),-26} {"<directory>",-19} Resource directory
+                     {Optional("--cs"),-26} {"<directory>",-19} C# output directory
+                     {Optional("--dll"),-26}{"<directory>",-19} DLL output directory
+                     {Optional("--log-debug"),-26} {"<true|false>",-19} Enable debug logging or not (default)
+                     {Optional("--canonical-root-url"),-26} {"<url>",-19} The root url used for the resource canonical
                      {"",-26 - 19 - 1} If omitted a '#' will be used
-                     {Optional(FhirResourceWriterOptions.ArgNameOverrideDate),-26} {"<ISO8601-date-time>",-19} The UTC date to override in the generated FHIR resource libraries
+                     {Optional("--override-utc-date-time"),-26} {"<ISO8601-date-time>",-19} The UTC date to override in the generated FHIR resource libraries
                      {"",-26 - 19 - 1} (example: 2000-12-31T23:59:59.99Z)
                      {"",-26 - 19 - 1} If omitted the current date time will be used
                  """;
@@ -97,7 +88,7 @@ public class Program
         try
         {
             using IServiceScope mainScope = host.Services.CreateScope();
-            var packagerCliProgram = mainScope.ServiceProvider.GetRequiredService<PackagerCliProgram>();
+            var packagerCliProgram = mainScope.ServiceProvider.GetRequiredService<PackagerCli>();
             return packagerCliProgram.Run();
         }
         finally
@@ -113,7 +104,7 @@ public class Program
         {
             return hostBuilder.Build();
         }
-        catch (OptionsValidationException e) when (e.OptionsType == typeof(CqlToResourcePackagingOptions))
+        catch (OptionsValidationException e) when (e.OptionsType == typeof(PackagerCliOptions))
         {
             foreach (var failure in e.Failures)
             {

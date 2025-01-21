@@ -6,15 +6,19 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Collections.Generic;
-using System.Reflection;
+namespace Hl7.Cql.CodeGeneration.NET;
 
-namespace Hl7.Cql.CodeGeneration.NET
+/// <summary>
+/// Stores information about a dynamically generated assembly.
+/// </summary>
+/// <param name="AssemblyBytes">This assembly's binary data.</param>
+/// <param name="DebugSymbolsBytes">The assembly's debug symbols in binary data.</param>
+public record AssemblyData(
+    byte[]? AssemblyBytes,
+    byte[]? DebugSymbolsBytes = null)
 {
     /// <summary>
-    /// Stores information about a dynamically generated assembly.
+    /// An empty instance of <see cref="AssemblyData"/>.
     /// </summary>
-    /// <param name="Binary">This assembly's binary data.</param>
-    /// <param name="SourceCode">The collection of source code files that contributed to this assembly.</param>
-    internal record AssemblyData(byte[] Binary, IDictionary<string, string> SourceCode);
+    public static AssemblyData Default { get; } = new(null!, null!);
 }

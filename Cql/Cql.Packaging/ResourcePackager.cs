@@ -6,13 +6,13 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Diagnostics;
 using System.Text;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Iso8601;
-using Hl7.Cql.Packaging.PostProcessors;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Utility;
@@ -30,30 +30,26 @@ namespace Hl7.Cql.Packaging;
 #pragma warning disable CS1591
 
 internal class ResourcePackager(
-    TypeResolver typeResolver,
-    FhirResourcePostProcessor? fhirResourcePostProcessor
-    )
+    TypeResolver typeResolver)
 {
-    private readonly TypeResolver _typeResolver = typeResolver;
-    private readonly FhirResourcePostProcessor? _fhirResourcePostProcessor = fhirResourcePostProcessor;
+    // private readonly FhirResourcePostProcessor? _fhirResourcePostProcessor = fhirResourcePostProcessor;
 
     public IReadOnlyCollection<FhirResource> PackageResources(
         DirectoryInfo elmDirectory,
         DirectoryInfo cqlDirectory,
         string? resourceCanonicalRootUrl,
         LibrarySet elmLibrarySet,
-        IReadOnlyDictionary<string, AssemblyData> assembliesByLibraryName)
+        IReadOnlyDictionary<string, AssemblyDataWithSourceCode> assembliesByLibraryName)
     {
         var resources = new List<FhirResource>();
         var librariesByVersionedIdentifier = new Dictionary<string, FhirLibrary>();
 
         void OnResourceCreated(FhirResource resource)
         {
-            _fhirResourcePostProcessor?.ProcessResource(resource);
             resources!.Add(resource);
         }
 
-        var typeCrosswalk = new CqlTypeToFhirTypeMapper(_typeResolver);
+        var typeCrosswalk = new CqlTypeToFhirTypeMapper(typeResolver);
 
         foreach (var (name, asmData) in assembliesByLibraryName)
         {
@@ -166,6 +162,7 @@ file static class MeasurePackager
         measure.Library = new List<string> { libForMeasure!.Url };
         return measure;
     }
+
     private static readonly Dictionary<string, string> Populations = new Dictionary<string, string>
         {
             { "initial-population", "Initial Population" },
@@ -173,6 +170,7 @@ file static class MeasurePackager
             { "denominator", "Denominator" },
             { "denominator-exclusion", "Denominator Exclusion" }
         };
+
     private static void AnnotateMeasurePopulations(Measure measure, Elm.Library library)
     {
         var defs = library.statements ?? Enumerable.Empty<Hl7.Cql.Elm.ExpressionDef>();
@@ -274,7 +272,7 @@ file static class LibraryPackager
         FileInfo elmFile,
         FileInfo? cqlFile,
         string? resourceCanonicalRootUrl,
-        AssemblyData assemblyData,
+        AssemblyDataWithSourceCode assemblyDataWithSourceCode,
         CqlTypeToFhirTypeMapper typeCrosswalk,
         ElmLibrary? elmLibrary = null)
     {
@@ -304,8 +302,8 @@ file static class LibraryPackager
         if (cqlFile!.Exists)
             AddCqlAttachment(elmLibrary, fhirLibrary, cqlFile);
 
-        AddDllAttachment(elmLibrary, fhirLibrary, assemblyData);
-        foreach (var kvp in assemblyData.SourceCode)
+        AddDllAttachment(elmLibrary, fhirLibrary, assemblyDataWithSourceCode);
+        foreach (var kvp in assemblyDataWithSourceCode.SourceCode!)
             AddCSharpAttachment(fhirLibrary, kvp);
 
         return fhirLibrary;
@@ -457,9 +455,9 @@ file static class LibraryPackager
     private static void AddDllAttachment(
         ElmLibrary? elmLibrary,
         FhirLibrary library,
-        AssemblyData assemblyData)
+        AssemblyDataWithSourceCode assemblyDataWithSourceCode)
     {
-        var assemblyBytes = assemblyData.Binary;
+        var assemblyBytes = assemblyDataWithSourceCode.AssemblyBytes;
         var attachment = new Attachment
         {
             ElementId = $"{elmLibrary!.GetVersionedIdentifier()}+dll",

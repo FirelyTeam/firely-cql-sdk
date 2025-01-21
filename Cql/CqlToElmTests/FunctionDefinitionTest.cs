@@ -288,7 +288,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var expr = lambdas["FuncTest-1.0.0", "ToInteger", [typeof(CqlContext), typeof(decimal?)]];
             expr.Parameters.Should().HaveCount(2);
             expr.Parameters[1].Name.Should().Be("decimal");
-            var _ = Compile(lib);
+            _ = Compile(lib);
         }
     }
 }

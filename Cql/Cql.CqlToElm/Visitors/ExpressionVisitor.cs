@@ -244,7 +244,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return expression
                 .WithId()
                 .WithLocator(context.Locator());
-            ;
         }
 
         private Literal? Precision(cqlParser.PluralDateTimePrecisionContext context)

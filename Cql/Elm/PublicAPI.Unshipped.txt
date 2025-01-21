@@ -779,6 +779,7 @@ Hl7.Cql.Elm.Variance
 Hl7.Cql.Elm.Variance.Variance() -> void
 Hl7.Cql.Elm.VersionedIdentifier
 Hl7.Cql.Elm.VersionedIdentifier.CompareTo(Hl7.Cql.Elm.VersionedIdentifier? other) -> int
+Hl7.Cql.Elm.VersionedIdentifier.Deconstruct(out string! id, out string? version) -> void
 Hl7.Cql.Elm.VersionedIdentifier.Equals(Hl7.Cql.Elm.VersionedIdentifier? other) -> bool
 Hl7.Cql.Elm.VersionedIdentifier.VersionedIdentifier() -> void
 Hl7.Cql.Elm.Width

@@ -1,5 +1,4 @@
 #nullable enable
-Hl7.Cql.Packaging.AssemblyLoadContextExtensions
 Hl7.Cql.Packaging.CqlTypeToFhirMapping
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlType.get -> Hl7.Cql.Primitives.CqlPrimitiveType?
 Hl7.Cql.Packaging.CqlTypeToFhirMapping.CqlType.init -> void
@@ -19,12 +18,6 @@ Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(Hl7.Cql.Primitives.CqlPri
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(Hl7.Fhir.Model.FHIRAllTypes fhirType) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(string? name) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
 Hl7.Cql.Packaging.CqlTypeToFhirTypeMapper.TypeEntryFor(System.Type! type) -> Hl7.Cql.Packaging.CqlTypeToFhirMapping?
-Hl7.Cql.Packaging.PostProcessors.FhirResourceWriterOptions
-Hl7.Cql.Packaging.PostProcessors.FhirResourceWriterOptions.FhirResourceWriterOptions() -> void
-Hl7.Cql.Packaging.PostProcessors.FhirResourceWriterOptions.OutDirectory.get -> System.IO.DirectoryInfo?
-Hl7.Cql.Packaging.PostProcessors.FhirResourceWriterOptions.OutDirectory.set -> void
-Hl7.Cql.Packaging.PostProcessors.FhirResourceWriterOptions.OverrideDate.get -> System.DateTime?
-Hl7.Cql.Packaging.PostProcessors.FhirResourceWriterOptions.OverrideDate.set -> void
 Hl7.Cql.Packaging.ResourceFileName
 Hl7.Cql.Packaging.ResourceFileName.Deconstruct(out string! type, out string! identifier) -> void
 Hl7.Cql.Packaging.ResourceFileName.Deconstruct(out string! type, out string! identifier, out string? version) -> void
@@ -40,10 +33,8 @@ override Hl7.Cql.Packaging.CqlTypeToFhirMapping.GetHashCode() -> int
 override Hl7.Cql.Packaging.CqlTypeToFhirMapping.ToString() -> string!
 override Hl7.Cql.Packaging.ResourceFileName.GetHashCode() -> int
 override Hl7.Cql.Packaging.ResourceFileName.ToString() -> string!
-static Hl7.Cql.Packaging.AssemblyLoadContextExtensions.Run(this System.Runtime.Loader.AssemblyLoadContext! assemblyContext, string! library, string! version, Hl7.Cql.Runtime.CqlContext! ctx) -> System.Collections.Generic.IDictionary<string!, object?>!
 static Hl7.Cql.Packaging.CqlTypeToFhirMapping.operator !=(Hl7.Cql.Packaging.CqlTypeToFhirMapping? left, Hl7.Cql.Packaging.CqlTypeToFhirMapping? right) -> bool
 static Hl7.Cql.Packaging.CqlTypeToFhirMapping.operator ==(Hl7.Cql.Packaging.CqlTypeToFhirMapping? left, Hl7.Cql.Packaging.CqlTypeToFhirMapping? right) -> bool
-static Hl7.Cql.Packaging.PostProcessors.FhirResourceWriterOptions.BindConfig(Hl7.Cql.Packaging.PostProcessors.FhirResourceWriterOptions! opt, Microsoft.Extensions.Configuration.IConfiguration! config) -> void
 static Hl7.Cql.Packaging.ResourceFileName.Create(string! type, string! identifier, string? version = null) -> Hl7.Cql.Packaging.ResourceFileName
 static Hl7.Cql.Packaging.ResourceFileName.operator !=(Hl7.Cql.Packaging.ResourceFileName left, Hl7.Cql.Packaging.ResourceFileName right) -> bool
 static Hl7.Cql.Packaging.ResourceFileName.operator ==(Hl7.Cql.Packaging.ResourceFileName left, Hl7.Cql.Packaging.ResourceFileName right) -> bool

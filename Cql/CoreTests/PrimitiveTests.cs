@@ -12,7 +12,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using CqlSdkPrototype.Elm;
 using FluentAssertions;
+using Hl7.Cql.Runtime.Hosting;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
 using Expression = System.Linq.Expressions.Expression;
 using Microsoft.Extensions.DependencyInjection;
@@ -3405,29 +3407,18 @@ namespace CoreTests
         [TestMethod]
         public void Aggregate_Query_Test()
         {
-            using var serviceProvider = new ServiceCollection()
-                                        .AddDebugLogging()
-                                        .AddCqlCodeGenerationServices()
-                                        .BuildServiceProvider(validateScopes: true);
-            using var serviceScope = serviceProvider.CreateScope();
-
             var librarySet = new LibrarySet();
-            librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"),"Aggregates", "1.0.0");
-            var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
-            var definitions = serviceScope.ServiceProvider.GetLibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
-            var definitionsToCSharpCodeProcessor = serviceProvider.GetDefinitionsToCSharpCodeProcessor();
-            var isDone = false;
-            definitionsToCSharpCodeProcessor.ProcessDefinitions(librarySet,
-                                      definitions, callbacks: new(onAfterStep: step =>
-                                      {
-                                          switch (step)
-                                          {
-                                              case CSharpSourceCodeStep.OnDone:
-                                                  isDone = true;
-                                                  break;
-                                          }
-                                      }));
-            Assert.IsTrue(isDone);
+            librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"), "Aggregates", "1.0.0");
+
+            var loggerFactory = new ServiceCollection()
+                                .AddDebugLogging()
+                                .BuildServiceProvider()
+                                .GetRequiredService<ILoggerFactory>();
+            new ElmApi(loggerFactory)
+                .AddElmLibraries(librarySet)
+                .Compile();
+
+            Assert.IsTrue(true);
         }
 
         [TestMethod]

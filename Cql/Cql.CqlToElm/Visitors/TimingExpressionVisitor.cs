@@ -13,6 +13,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 {
     internal partial class ExpressionVisitor
     {
+        internal static bool EnableDebugAssertions = true;
+
         //     | expression intervalOperatorPhrase expression                                                  #timingExpression
         public override Expression VisitTimingExpression([NotNull] cqlParser.TimingExpressionContext context)
         {
@@ -23,17 +25,17 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return context.intervalOperatorPhrase() switch
             {
                 cqlParser.ConcurrentWithIntervalOperatorPhraseContext ctx => HandleConcurrentWith(ctx, lhs, rhs),
-                cqlParser.IncludesIntervalOperatorPhraseContext ctx => HandleIncludes(ctx, lhs, rhs),
-                cqlParser.IncludedInIntervalOperatorPhraseContext ctx => HandleIncludedIn(ctx, lhs, rhs),
-                cqlParser.BeforeOrAfterIntervalOperatorPhraseContext ctx => HandleBeforeOrAfter(ctx, lhs, rhs),
-                cqlParser.WithinIntervalOperatorPhraseContext ctx => HandleWithin(ctx, lhs, rhs),
-                cqlParser.MeetsIntervalOperatorPhraseContext ctx => HandleMeets(ctx, lhs, rhs),
-                cqlParser.OverlapsIntervalOperatorPhraseContext ctx => HandleOverlaps(ctx, lhs, rhs),
-                cqlParser.StartsIntervalOperatorPhraseContext ctx => HandleStarts(ctx, lhs, rhs),
-                cqlParser.EndsIntervalOperatorPhraseContext ctx => HandleEnds(ctx, lhs, rhs),
+                cqlParser.IncludesIntervalOperatorPhraseContext ctx       => HandleIncludes(ctx, lhs, rhs),
+                cqlParser.IncludedInIntervalOperatorPhraseContext ctx     => HandleIncludedIn(ctx, lhs, rhs),
+                cqlParser.BeforeOrAfterIntervalOperatorPhraseContext ctx  => HandleBeforeOrAfter(ctx, lhs, rhs),
+                cqlParser.WithinIntervalOperatorPhraseContext ctx         => HandleWithin(ctx, lhs, rhs),
+                cqlParser.MeetsIntervalOperatorPhraseContext ctx          => HandleMeets(ctx, lhs, rhs),
+                cqlParser.OverlapsIntervalOperatorPhraseContext ctx       => HandleOverlaps(ctx, lhs, rhs),
+                cqlParser.StartsIntervalOperatorPhraseContext ctx         => HandleStarts(ctx, lhs, rhs),
+                cqlParser.EndsIntervalOperatorPhraseContext ctx           => HandleEnds(ctx, lhs, rhs),
 
                 _ => throw new NotImplementedException()
-            }; ;
+            };
         }
 
         private Expression HandleWithin(cqlParser.WithinIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)
@@ -166,7 +168,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     IntervalTypeSpecifier or ListTypeSpecifier => InvocationBuilder.Invoke(SystemLibrary.ProperIncludedIn, args),
                     _ => InvocationBuilder.Invoke(SystemLibrary.ProperIn, args)
                 };
-                Debug.Assert(expression.GetErrors().Length == 0);
+                Debug.Assert(!EnableDebugAssertions || expression.GetErrors().Length == 0);
                 return expression
                     .WithId()
                     .WithLocator(context.Locator());
@@ -179,7 +181,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     _ => InvocationBuilder.Invoke(SystemLibrary.In, args),
 
                 };
-                Debug.Assert(expression.GetErrors().Length == 0);
+                Debug.Assert(!EnableDebugAssertions || expression.GetErrors().Length == 0);
                 return expression
                     .WithId()
                     .WithLocator(context.Locator());
@@ -235,7 +237,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     _ => throw new NotImplementedException()
                 };
             }
-            throw new NotImplementedException();
         }
 
         private Expression HandleBefore(cqlParser.BeforeOrAfterIntervalOperatorPhraseContext context, Expression lhs, Expression rhs)

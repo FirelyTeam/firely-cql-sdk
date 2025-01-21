@@ -1,11 +1,26 @@
 ﻿#nullable enable
-Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions
-Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.AssemblyDataWriterOptions() -> void
-Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.OutDirectory.get -> System.IO.DirectoryInfo?
-Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.OutDirectory.set -> void
-Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions
-Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.CSharpCodeWriterOptions() -> void
-Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.OutDirectory.get -> System.IO.DirectoryInfo?
-Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.OutDirectory.set -> void
-static Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions.BindConfig(Hl7.Cql.CodeGeneration.NET.AssemblyDataWriterOptions! opt, Microsoft.Extensions.Configuration.IConfiguration! config) -> void
-static Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions.BindConfig(Hl7.Cql.CodeGeneration.NET.CSharpCodeWriterOptions! opt, Microsoft.Extensions.Configuration.IConfiguration! config) -> void
+Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat
+Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat.Embedded = 3 -> Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat
+Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat.None = 0 -> Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat
+Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat.PortablePdb = 2 -> Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat
+Hl7.Cql.CodeGeneration.NET.AssemblyData
+Hl7.Cql.CodeGeneration.NET.AssemblyData.AssemblyBytes.get -> byte[]?
+Hl7.Cql.CodeGeneration.NET.AssemblyData.AssemblyBytes.init -> void
+Hl7.Cql.CodeGeneration.NET.AssemblyData.AssemblyData(byte[]? AssemblyBytes, byte[]? DebugSymbolsBytes = null) -> void
+Hl7.Cql.CodeGeneration.NET.AssemblyData.AssemblyData(Hl7.Cql.CodeGeneration.NET.AssemblyData! original) -> void
+Hl7.Cql.CodeGeneration.NET.AssemblyData.DebugSymbolsBytes.get -> byte[]?
+Hl7.Cql.CodeGeneration.NET.AssemblyData.DebugSymbolsBytes.init -> void
+Hl7.Cql.CodeGeneration.NET.AssemblyData.Deconstruct(out byte[]? AssemblyBytes, out byte[]? DebugSymbolsBytes) -> void
+Hl7.Cql.CodeGeneration.NET.AssemblyDataExtensions
+override Hl7.Cql.CodeGeneration.NET.AssemblyData.Equals(object? obj) -> bool
+override Hl7.Cql.CodeGeneration.NET.AssemblyData.GetHashCode() -> int
+override Hl7.Cql.CodeGeneration.NET.AssemblyData.ToString() -> string!
+static Hl7.Cql.CodeGeneration.NET.AssemblyData.Default.get -> Hl7.Cql.CodeGeneration.NET.AssemblyData!
+static Hl7.Cql.CodeGeneration.NET.AssemblyData.operator !=(Hl7.Cql.CodeGeneration.NET.AssemblyData? left, Hl7.Cql.CodeGeneration.NET.AssemblyData? right) -> bool
+static Hl7.Cql.CodeGeneration.NET.AssemblyData.operator ==(Hl7.Cql.CodeGeneration.NET.AssemblyData? left, Hl7.Cql.CodeGeneration.NET.AssemblyData? right) -> bool
+static Hl7.Cql.CodeGeneration.NET.AssemblyDataExtensions.LoadFromFiles<TAssemblyData>(this TAssemblyData! self, System.IO.FileInfo? assemblyFile = null, System.IO.FileInfo? debugSymbolsFile = null) -> TAssemblyData!
+static Hl7.Cql.CodeGeneration.NET.AssemblyDataExtensions.SaveToFiles<TAssemblyData>(this TAssemblyData! self, System.IO.FileInfo? assemblyFile = null, System.IO.FileInfo? debugSymbolsFile = null) -> TAssemblyData!
+virtual Hl7.Cql.CodeGeneration.NET.AssemblyData.<Clone>$() -> Hl7.Cql.CodeGeneration.NET.AssemblyData!
+virtual Hl7.Cql.CodeGeneration.NET.AssemblyData.EqualityContract.get -> System.Type!
+virtual Hl7.Cql.CodeGeneration.NET.AssemblyData.Equals(Hl7.Cql.CodeGeneration.NET.AssemblyData? other) -> bool
+virtual Hl7.Cql.CodeGeneration.NET.AssemblyData.PrintMembers(System.Text.StringBuilder! builder) -> bool

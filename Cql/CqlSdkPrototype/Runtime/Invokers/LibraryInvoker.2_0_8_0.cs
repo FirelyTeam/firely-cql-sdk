@@ -1,0 +1,81 @@
+﻿using CqlSdkPrototype.Internal;
+using CqlSdkPrototype.Runtime.Extensibility;
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Runtime;
+
+namespace CqlSdkPrototype.Runtime.Invokers;
+
+internal class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
+{
+    private record LibraryMethodInfo(MethodInfo Method, string? ValueSetId, string? DeclarationName)
+    {
+        public LibraryMethodInfo(MethodInfo Method) : this(
+            Method,
+            ValueSetId: Method.GetCustomAttribute<CqlValueSetAttribute>()?.Id,
+            DeclarationName: Method.GetCustomAttribute<CqlDeclarationAttribute>()?.Name)
+        { }
+    }
+
+    public LibraryInvoker_2_0_8_0(
+        ILibrary library) : base(library)
+    {
+        var libraryType = library.GetType();
+        var libraryMethodInfos = libraryType
+                                 .GetMethods(BindingFlags.Public | BindingFlags.Instance)
+                                 .SelectToArray(m => new LibraryMethodInfo(m));
+        Definitions = libraryMethodInfos
+                       .SelectWhereNotNull(o => o.DeclarationName is { } declarationName
+                                                && o.Method.GetParameters() is [{ } p0]
+                                                && p0.ParameterType == typeof(CqlContext)
+                                                    ? (LibraryDefinitionInvoker)new DefinitionInvoker(declarationName, Library, o.Method, o.ValueSetId)
+                                                    : null)
+                       .ToImmutableDictionary(o => o.DeclarationName);
+    }
+
+    public override IReadOnlyDictionary<string, LibraryDefinitionInvoker> Definitions { get; }
+
+    private static object GetLibraryFromStaticInstanceProperty(Type libraryType)
+    {
+        return libraryType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)?.GetValue(null)
+               ?? throw new InvalidOperationException($"Unable to create an instance of {libraryType.FullName}");
+    }
+
+    public new static bool TryCreateFromType(
+        RuntimeApi runtimeApi,
+        Type libraryType,
+        [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
+    {
+        libraryInvoker = null;
+        var logger = runtimeApi.AsExtendable().LoggerFactory.CreateLogger<LibraryInvoker_2_0_8_0>();
+
+        if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
+        {
+            logger?.LogDebug(
+                "Skipping type {type} because it does not implement ILibrary.",
+                libraryType.FullName);
+            return false;
+        }
+
+        libraryInvoker = new LibraryInvoker_2_0_8_0(asILibrary);
+        return true;
+    }
+
+    public static bool SupportsVersion(Version cqlToolVersion)
+    {
+        return cqlToolVersion >= new Version(2, 0, 8);
+    }
+
+    private class DefinitionInvoker(
+        string declarationName,
+        ILibrary library,
+        MethodInfo methodInfo,
+        string? valueSetId) : LibraryDefinitionInvoker(declarationName, library, methodInfo, valueSetId)
+    {
+        public override object? Invoke(CqlContext cqlContext)
+        {
+            return InvokeMethod(cqlContext);
+        }
+    }
+}
+

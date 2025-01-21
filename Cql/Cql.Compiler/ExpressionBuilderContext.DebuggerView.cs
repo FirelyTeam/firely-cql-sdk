@@ -10,7 +10,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler;
 

@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/*
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -8,7 +7,6 @@
  */
 
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.CodeGeneration.NET.PostProcessors;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
@@ -17,32 +15,26 @@ using Microsoft.CodeAnalysis.CSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
+using System.Security.Cryptography;
 using System.Text;
 using Hl7.Cql.Elm;
+using Microsoft.CodeAnalysis.Text;
+using Microsoft.CodeAnalysis.Emit;
+using Library = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
     internal class AssemblyCompiler
     {
-        private readonly LibrarySetCSharpCodeGenerator _librarySetDefinitionsToCSharpCodeProcessor;
-        private readonly CSharpCodeStreamPostProcessor? _cSharpCodeStreamPostProcessor;
+        private static readonly EmitOptions DefaultEmitOptions = new();
+        private static readonly CSharpParseOptions CSharpParseOptions = CSharpParseOptions.Default;
         private readonly Lazy<Assembly[]> _referencesLazy;
-        private readonly AssemblyDataPostProcessor? _assemblyDataPostProcessor;
 
-        public AssemblyCompiler(
-            LibrarySetCSharpCodeGenerator librarySetCSharpCodeGenerator,
-            TypeResolver typeResolver,
-            CSharpCodeStreamPostProcessor? cSharpCodeStreamPostProcessor = null,
-            AssemblyDataPostProcessor? assemblyDataPostProcessor = null)
+        public AssemblyCompiler(TypeResolver typeResolver)
         {
-            _assemblyDataPostProcessor = assemblyDataPostProcessor;
-            _librarySetDefinitionsToCSharpCodeProcessor = librarySetCSharpCodeGenerator;
-            _cSharpCodeStreamPostProcessor = cSharpCodeStreamPostProcessor;
             _referencesLazy = new Lazy<Assembly[]>(
                 () =>
                 {
@@ -68,99 +60,77 @@ namespace Hl7.Cql.CodeGeneration.NET
                 });
         }
 
-        public IReadOnlyDictionary<string, AssemblyData> Compile(
+        public IEnumerable<(Library library, Func<AssemblyDataWithSourceCode> generateAssemblyDataWithSourceCode)> CompileDeferred(
             LibrarySet librarySet,
-            DefinitionDictionary<LambdaExpression> definitions)
+            IEnumerable<(Library Library, string CSharp)> input,
+            AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None)
         {
-            ArgumentNullException.ThrowIfNull(definitions);
-
-            Dictionary<string, AssemblyData> results = new();
-
-            List<(string libraryName, Stream stream)> items = [];
-
-            _librarySetDefinitionsToCSharpCodeProcessor.ProcessDefinitions(
-                librarySet,
-                definitions,
-                callbacks: new(onAfterStep: CSharpSourceCodeStep));
-
-            return results;
-
-            void CSharpSourceCodeStep(CSharpSourceCodeStep next)
-            {
-                switch (next)
-                {
-                    case CSharpSourceCodeStep.OnStream onStream:
-                        // Write out C# File
-                        _cSharpCodeStreamPostProcessor?.ProcessStream(onStream.Name, onStream.Stream);
-                        items.Add((onStream.Name, onStream.Stream));
-                        break;
-
-                    case NET.CSharpSourceCodeStep.OnDone:
-                        if (_assemblyDataPostProcessor != null)
-                            foreach (var referenceAssembly in _referencesLazy.Value)
-                                _assemblyDataPostProcessor.ProcessReferenceAssembly(referenceAssembly);
-
-                        // Compile Libraries
-                        foreach (var (libraryName, stream) in items)
-                        {
-                            var library = librarySet.GetLibrary(libraryName)!;
-                            var libraryAssembly = CompileNode(stream, results, librarySet, library, _referencesLazy.Value);
-                            results.Add(library.GetVersionedIdentifier()!, libraryAssembly);
-                            _assemblyDataPostProcessor?.ProcessAssemblyData(library.GetVersionedIdentifier()!, libraryAssembly);
-                        }
-                        break;
-                }
-            }
+            Dictionary<string, AssemblyDataWithSourceCode> results = new();
+            Assembly[] assemblyReferences = _referencesLazy.Value;
+            foreach (var (library, cSharp) in input)
+                yield return (library, () =>
+                                 {
+                                     var result = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat);
+                                     results.Add(library.GetVersionedIdentifier()!, result);
+                                     return result;
+                                 });
         }
 
-        private static CSharpCompilationOptions CreateCSharpCompilationOptions() =>
+        private static CSharpCompilationOptions CreateCSharpCompilationOptions(
+            AssemblyCompilerDebugInformationFormat debugInformationFormat) =>
             new(
                 outputKind: OutputKind.DynamicallyLinkedLibrary,
-                optimizationLevel: OptimizationLevel.Release,
+                optimizationLevel: debugInformationFormat == AssemblyCompilerDebugInformationFormat.None ? OptimizationLevel.Release : OptimizationLevel.Debug,
                 deterministic: true, // see: https://github.com/dotnet/roslyn/blob/main/docs/compilers/Deterministic%20Inputs.md
                 sourceReferenceResolver: new SourceFileResolver(ImmutableArray<string>.Empty, null)
             );
 
-        private static AssemblyData CompileNode(
-            Stream sourceCodeStream,
-            Dictionary<string, AssemblyData> assemblies,
+        private AssemblyDataWithSourceCode CompileNode(
+            string librarySourceString,
+            Dictionary<string, AssemblyDataWithSourceCode> assemblies,
             LibrarySet librarySet,
-            Elm.Library library,
-            IEnumerable<Assembly> assemblyReferences)
+            Library library,
+            IEnumerable<Assembly> assemblyReferences,
+            AssemblyCompilerDebugInformationFormat debugInformationFormat)
         {
-            sourceCodeStream.Flush();
-            sourceCodeStream.Seek(0, SeekOrigin.Begin);
-            var reader = new StreamReader(sourceCodeStream);
-            var sourceCode = reader.ReadToEnd().Trim();
-            var tree = SyntaxFactory.ParseSyntaxTree(sourceCode);
+            var libraryVersionedIdentifier = library.GetVersionedIdentifier()!;
+            var librarySourcePath = $"{libraryVersionedIdentifier}.cs";
+            if (debugInformationFormat != AssemblyCompilerDebugInformationFormat.None)
+            {
+                var tempDir = Path.Combine(Path.GetTempPath(), "CqlCompiler", $"{libraryVersionedIdentifier}.cs");
+                Directory.CreateDirectory(tempDir);
+                librarySourcePath = Path.Combine(tempDir, $"{CreateMD5HashStringDirectory(librarySourceString)}.cs");
+                File.WriteAllText(librarySourcePath, librarySourceString);
+            }
+
+            var librarySyntaxTree = ParseSyntaxTree(librarySourceString, librarySourcePath);
             var metadataReferences = new List<MetadataReference>();
             AddNetCoreReferences(metadataReferences);
             foreach (var asm in assemblyReferences)
-            {
                 metadataReferences.Add(MetadataReference.CreateFromFile(asm.Location));
-            }
-            foreach (var libraryDependency in librarySet.GetLibraryDependencies(library.GetVersionedIdentifier()!))
-            {
-                if (assemblies.TryGetValue(libraryDependency.GetVersionedIdentifier()!, out var referencedDll))
-                {
-                    metadataReferences.Add(MetadataReference.CreateFromImage(referencedDll.Binary));
-                }
-            }
-            var asmInfo = new StringBuilder();
-            var parts = library.GetVersionedIdentifier()!.Split('-');
-            string name = parts[0];
-            string version = string.Empty;
-            if (parts.Length > 1)
-                version = parts[1];
-            asmInfo.AppendLine(CultureInfo.InvariantCulture, $"[assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute(\"{name}\", \"{version}\")]");
-            var asmInfoTree = SyntaxFactory.ParseSyntaxTree(asmInfo.ToString());
 
-            var compilation = CSharpCompilation.Create($"{library.GetVersionedIdentifier()!}")
-                .WithOptions(CreateCSharpCompilationOptions())
-                .WithReferences(metadataReferences)
-                .AddSyntaxTrees(tree, asmInfoTree);
-            var codeStream = new MemoryStream();
-            var compilationResult = compilation.Emit(codeStream);
+            foreach (var libraryDependency in librarySet.GetLibraryDependencies(libraryVersionedIdentifier!))
+                if (assemblies.TryGetValue(libraryDependency.GetVersionedIdentifier()!, out var referencedDll))
+                    metadataReferences.Add(MetadataReference.CreateFromImage(referencedDll.AssemblyBytes!));
+
+            var assemblyInfoSourceString = CreateAssemblyInfoSourceString(library);
+            var assemblyInfoSourcePath = "AssemblyInfo.cs";
+            var assemblyInfoSyntaxTree = ParseSyntaxTree(assemblyInfoSourceString, assemblyInfoSourcePath);
+
+            var compilation = CSharpCompilation.Create($"{libraryVersionedIdentifier!}")
+                                               .WithOptions(CreateCSharpCompilationOptions(debugInformationFormat))
+                                               .WithReferences(metadataReferences)
+                                               .AddSyntaxTrees(
+                                                   librarySyntaxTree,
+                                                   assemblyInfoSyntaxTree
+                                               );
+
+            using var codeStream = new MemoryStream();
+            MemoryStream? pdbStream = debugInformationFormat == AssemblyCompilerDebugInformationFormat.PortablePdb ? new MemoryStream() : null;
+            using var pdbStreamDisposable = pdbStream as IDisposable;
+
+            var emitOptions = CreateEmitOptions(debugInformationFormat);
+            var compilationResult = compilation.Emit(codeStream, pdbStream, options:emitOptions);
             var errors = new List<Diagnostic>();
             var warnings = new List<Diagnostic>();
             if (!compilationResult.Success)
@@ -173,9 +143,11 @@ namespace Hl7.Cql.CodeGeneration.NET
                         case DiagnosticSeverity.Warning:
                             warnings.Add(diag);
                             break;
+
                         case DiagnosticSeverity.Error:
                             errors.Add(diag);
                             break;
+
                         case DiagnosticSeverity.Hidden:
                         case DiagnosticSeverity.Info:
                         default:
@@ -183,17 +155,52 @@ namespace Hl7.Cql.CodeGeneration.NET
                     }
                     sb.AppendLine(diag.ToString());
                 }
-                var ex = new InvalidOperationException($"The following compilation errors were detected when compiling {library.GetVersionedIdentifier()!}:{Environment.NewLine}{sb}");
+                var ex = new InvalidOperationException($"The following compilation errors were detected when compiling {libraryVersionedIdentifier!}:{Environment.NewLine}{sb}");
                 ex.Data["Errors"] = errors;
                 ex.Data["Warnings"] = warnings;
-                ex.Data["SourceCode"] = sourceCode;
+                ex.Data["SourceCode"] = librarySourceString;
                 throw ex;
             }
             var bytes = codeStream.ToArray();
-            var asmData = new AssemblyData(bytes, new Dictionary<string, string> { { library.GetVersionedIdentifier()!, sourceCode } });
+            var debugSymbols = pdbStream?.ToArray();
+            var asmData = new AssemblyDataWithSourceCode(bytes, new Dictionary<string, string> { { libraryVersionedIdentifier!, librarySourceString }}, debugSymbols);
             return asmData;
         }
 
+        private static EmitOptions CreateEmitOptions(AssemblyCompilerDebugInformationFormat debugInformationFormat)
+        {
+            var emitOptions = DefaultEmitOptions;
+            if (debugInformationFormat != AssemblyCompilerDebugInformationFormat.None)
+                emitOptions = emitOptions.WithDebugInformationFormat((DebugInformationFormat)debugInformationFormat);
+            return emitOptions;
+        }
+
+        private static string CreateMD5HashStringDirectory(string text)
+        {
+            text = System.Convert.ToBase64String(MD5.HashData(Encoding.UTF8.GetBytes(text)));
+            return text.Replace('/', '-');
+        }
+
+        private static SyntaxTree ParseSyntaxTree(string text, string path)
+        {
+            var sourceText = SourceText.From(text, Encoding.UTF8);
+            var syntaxTree = SyntaxFactory.ParseSyntaxTree(sourceText, CSharpParseOptions, path);
+            return syntaxTree;
+        }
+
+        private static string CreateAssemblyInfoSourceString(Library library)
+        {
+            var parts = library.GetVersionedIdentifier()!.Split('-');
+            string name = parts[0];
+            string version = string.Empty;
+            if (parts.Length > 1)
+                version = parts[1];
+            var text = $"""
+                        [assembly: Hl7.Cql.Abstractions.CqlLibraryAttribute("{name}", "{version}")]
+                        [assembly: System.Reflection.AssemblyVersion("{version}")]
+                        """;
+            return text;
+        }
 
         private static void AddNetCoreReferences(List<MetadataReference> metadataReferences)
         {
@@ -231,5 +238,20 @@ namespace Hl7.Cql.CodeGeneration.NET
 
 
         }
+    }
+
+    internal static class AssemblyCompilerExtensions
+    {
+        public static IEnumerable<(Library library, AssemblyDataWithSourceCode assemblyDataWithSourceCode)> Compile(
+            this AssemblyCompiler compiler,
+            LibrarySet librarySet,
+            IEnumerable<(Library Library, string CSharp)> input,
+            AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None)
+        {
+            return compiler
+                   .CompileDeferred(librarySet, input, debugInformationFormat)
+                   .Select(x => (x.library, x.generateAssemblyDataWithSourceCode()));
+        }
+
     }
 }

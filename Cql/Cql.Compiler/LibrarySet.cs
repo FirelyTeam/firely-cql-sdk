@@ -5,6 +5,7 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ using Hl7.Cql.Compiler.Infrastructure.Diagramming;
 using Hl7.Cql.Compiler.Infrastructure.Graphs;
 using Hl7.Cql.Compiler.Infrastructure.Sets;
 using Hl7.Cql.Elm;
+#pragma warning disable CS8321 // Local function is declared but never used
 
 namespace Hl7.Cql.Compiler;
 
@@ -26,20 +28,23 @@ namespace Hl7.Cql.Compiler;
 /// Contains a set of libraries ordered topologically.
 /// </summary>
 [DebuggerDisplay("LibrarySet {Name}")]
-public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<string, Library>
+internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary<string, Library>
 {
     /// <summary>
     /// The name of this library set. An example could be the directory name containing the libraries.
     /// </summary>
     public string Name { get; }
 
-    private readonly Dictionary<string, (Library library, LibraryByVersionedIdentifierHashSet dependencies)> _libraryInfosByVersionedIdentifier;
+    private readonly Dictionary<string, (Library library, LibraryByVersionedIdentifierHashSet dependencies)>
+        _libraryInfosByVersionedIdentifier;
 
-    private (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries) _calculatedState;
+    private (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries)
+        _calculatedState;
 
     private readonly LibraryByVersionedIdentifierHashSet _librariesNotCalculatedYet;
 
-    private static readonly (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries)
+    private static readonly (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library>
+        TopologicallySortedLibraries)
         EmptyCached = (EmptySet<Library>.Instance, Array.Empty<Library>());
 
     private readonly LibrarySetDefinitionCache _librarySetDefinitionCache;
@@ -54,7 +59,8 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
         Name = name;
         _librariesNotCalculatedYet = [];
         _calculatedState = EmptyCached;
-        _libraryInfosByVersionedIdentifier = new Dictionary<string, (Library library, LibraryByVersionedIdentifierHashSet dependencies)>();
+        _libraryInfosByVersionedIdentifier =
+            new Dictionary<string, (Library library, LibraryByVersionedIdentifierHashSet dependencies)>();
         AsReadOnlyDictionary = new ReadOnlyDictionaryAdapter(this);
         AddLibraries(libraries);
 
@@ -99,7 +105,9 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     /// <returns>The dependencies of the library with the specified key, or an empty list if the library is not found.</returns>
     /// <exception cref="KeyNotFoundError">If no library was found by the specified key and if throwError is set to <c>true</c>.</exception>
     public IReadOnlySet<Library> GetLibraryDependencies(string? versionedIdentifier, bool throwError = true) =>
-        TryGetLibraryInfoByVersionedIdentifier(versionedIdentifier, throwError, out var info) ? info.dependencies : EmptySet<Library>.Instance;
+        TryGetLibraryInfoByVersionedIdentifier(versionedIdentifier, throwError, out var info)
+            ? info.dependencies
+            : EmptySet<Library>.Instance;
 
     /// <summary>
     /// Gets the dependencies of a library.
@@ -161,7 +169,8 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
         }
     }
 
-    private (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries) GetCalculatedState()
+    private (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries)
+        GetCalculatedState()
     {
         RecalculateStateIfNecessary();
         return _calculatedState;
@@ -170,7 +179,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     private void RecalculateStateIfNecessary()
     {
         if (_librariesNotCalculatedYet.Count == 0)
-            return ;
+            return;
 
         foreach (var library in _librariesNotCalculatedYet)
         {
@@ -180,29 +189,32 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
                 foreach (var includeDef in includeDefs)
                 {
                     var toKey = includeDef.GetVersionedIdentifier(true)!;
-                    var toLib = _libraryInfosByVersionedIdentifier.GetValueOrDefault(toKey).library ?? throw new LibraryIncludeDefUnresolvedError(library, includeDef).ToException();
+                    var toLib = _libraryInfosByVersionedIdentifier.GetValueOrDefault(toKey).library ??
+                                throw new LibraryIncludeDefUnresolvedError(library, includeDef).ToException();
                     dependencies.Add(toLib);
                 }
             }
         }
+
         _librariesNotCalculatedYet.Clear();
 
 
         // Determining root libraries i.e. those that are not dependencies for others.
 
         var allLibraries = _libraryInfosByVersionedIdentifier
-            .Values
-            .Select(v => v.library);
+                           .Values
+                           .Select(v => v.library);
 
         var rootLibraries = new LibraryByVersionedIdentifierHashSet(
             allLibraries
-            .GetRoots(lib => GetLibraryDependencies(lib.GetVersionedIdentifier()!)));
+                .GetRoots(lib => GetLibraryDependencies(lib.GetVersionedIdentifier()!)));
 
         // Topological sort libraries so that most dependent libraries are placed before less dependent ones
 
         var topologicallySortedLibraries = allLibraries
-            .TopologicalSort(lib => GetLibraryDependencies(lib.GetVersionedIdentifier()!))
-            .ToList();
+                                           .TopologicalSort(
+                                               lib => GetLibraryDependencies(lib.GetVersionedIdentifier()!))
+                                           .ToList();
         Debug.Assert(topologicallySortedLibraries.Count == _libraryInfosByVersionedIdentifier.Count);
 
         // Set calculation state
@@ -240,7 +252,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
 
         while (librariesToLoad.Any())
         {
-            var librariesToLoadWithOrdinals = librariesToLoad.Select((lib, i) => (lib, ordinal:i)).ToList();
+            var librariesToLoadWithOrdinals = librariesToLoad.Select((lib, i) => (lib, ordinal: i)).ToList();
             Library[] librariesLoaded = new Library[librariesToLoad.Count];
             Parallel.ForEach(librariesToLoadWithOrdinals, t =>
             {
@@ -264,6 +276,7 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
                         librariesToLoad.Add((includeDef.path, includeDef.version));
                     }
                 }
+
                 libraries.Add(library);
             }
         }
@@ -316,7 +329,8 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
     /// </remarks>>
     internal IReadOnlyDictionary<string, Library> AsReadOnlyDictionary { get; }
 
-    private readonly record struct ReadOnlyDictionaryAdapter(LibrarySet LibrarySet) : IReadOnlyDictionary<string, Library>
+    private readonly record struct ReadOnlyDictionaryAdapter
+        (LibrarySet LibrarySet) : IReadOnlyDictionary<string, Library>
     {
         /// <inheritdoc/>
         public int Count => LibrarySet.Count;
@@ -348,7 +362,8 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
 
         /// <inheritdoc/>
         public IEnumerable<string> Keys =>
-            LibrarySet.GetCalculatedState().TopologicallySortedLibraries.Select(lib => lib.GetVersionedIdentifier(true)!);
+            LibrarySet.GetCalculatedState().TopologicallySortedLibraries
+                      .Select(lib => lib.GetVersionedIdentifier(true)!);
 
         /// <inheritdoc/>
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -360,5 +375,54 @@ public class LibrarySet : IReadOnlyCollection<Library>//, IReadOnlyDictionary<st
                 .TopologicallySortedLibraries
                 .Select(lib => KeyValuePair.Create(lib.GetVersionedIdentifier(true)!, lib))
                 .GetEnumerator();
+    }
+
+    internal IReadOnlyCollection<KeyValuePair<string, Library>> RemoveLibrariesWithMissingDependencies()
+    {
+        var librariesToRemove = new HashSet<KeyValuePair<string, Library>>();
+
+        var dependencies =
+            _libraryInfosByVersionedIdentifier
+                .Select(kv => (libId: kv.Key, depLibIds: kv.Value.dependencies.Select(dep => dep.GetVersionedIdentifier()!)))
+                .ToDictionary(t => t.libId, t => new HashSet<string>(t.depLibIds));
+        foreach (var library in _librariesNotCalculatedYet)
+        {
+            var libId = library.GetVersionedIdentifier()!;
+            var depLibIds = library.includes?.Select(i => i.GetVersionedIdentifier()!).ToArray() ?? [];
+            dependencies
+                .GetOrAdd(libId, _ => new HashSet<string>())
+                .AddRange(depLibIds);
+        }
+
+        var libIdsAvail =
+            _libraryInfosByVersionedIdentifier.Keys
+                                              .Concat(_librariesNotCalculatedYet.Select(l => l.GetVersionedIdentifier()!))
+                                              .ToHashSet();
+
+        var mermaid = dependencies.Keys
+                                  .BuildMermaidFlowChart(
+                                      k => dependencies[k],
+                                      k => k);
+
+        var edges = dependencies.Keys
+                                .GetEdges(k => dependencies[k])
+                                .ToArray();
+
+        var brokenToEdges = edges
+            .Where(e => !libIdsAvail.Contains(e.To))
+            .ToArray();
+
+        var brokenFroms = brokenToEdges
+            .Select(e => e.From)
+            .ToHashSet();
+
+        foreach (var library in _librariesNotCalculatedYet)
+        {
+            var libId = library.GetVersionedIdentifier()!;
+            if (brokenFroms.Contains(libId))
+                librariesToRemove.Add(KeyValuePair.Create(libId, library));
+        }
+        _librariesNotCalculatedYet.RemoveWhere(l => brokenFroms.Contains(l.GetVersionedIdentifier()!));
+        return librariesToRemove;
     }
 }

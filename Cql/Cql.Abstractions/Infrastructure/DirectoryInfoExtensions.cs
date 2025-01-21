@@ -30,5 +30,5 @@ internal static class DirectoryInfoExtensions
         string searchPattern,
         SearchOption searchOption = SearchOption.TopDirectoryOnly) =>
         dir.SelfAndParents()
-           .FirstOrDefault(d => d.EnumerateFiles(searchPattern, searchOption).Any());
+           .FirstOrDefault(d => d.EnumerateFileSystemInfos(searchPattern, searchOption).Any());
 }

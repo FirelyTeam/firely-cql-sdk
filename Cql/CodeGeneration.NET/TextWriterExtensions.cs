@@ -19,26 +19,28 @@ namespace Hl7.Cql.CodeGeneration.NET
         public static void WriteLine(this TextWriter writer, int indent, string text = "")
         {
             if (text.Length == 0)
-                writer.WriteLine();
+                writer.WriteLine(); // Blank lines should not contain dangling whitespace
             else
-        {
-            writer.Write(StringExtensions.IndentString(indent));
-            writer.WriteLine(text);
+            {
+                writer.Write(StringExtensions.IndentString(indent));
+                writer.WriteLine(text);
+            }
         }
 
-    }
         public static void AppendLine(this StringBuilder sb, int indent, string text)
         {
             sb.Append(StringExtensions.IndentString(indent));
             sb.AppendLine(text);
         }
+        
         public static void Append(this StringBuilder sb, int indent, string text)
         {
             sb.Append(StringExtensions.IndentString(indent));
             sb.Append(text);
         }
+
         public static bool IsExtensionMethod(this MethodInfo info) =>
             info.IsDefined(typeof(System.Runtime.CompilerServices.ExtensionAttribute), true);
-}
+    }
 
 }

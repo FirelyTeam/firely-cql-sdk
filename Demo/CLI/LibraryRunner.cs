@@ -8,6 +8,9 @@ using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using System.Reflection;
 using System.Text.Json;
+using CqlSdkPrototype;
+using CqlSdkPrototype.Runtime;
+using Hl7.Cql.CodeGeneration.NET;
 
 namespace CLI
 {
@@ -30,41 +33,36 @@ namespace CLI
             //used for debugging with breakpoints in Measures.* project
             //if used in production scenario compile measures.* dll and reference it below instead, example Assembly.LoadFrom("Measures.Authoring")
             //see launchsettings.json
-            var assembly = Assembly.LoadFrom(_opts.AssemblyPath);
-            RunShared(_opts, assembly!);
+            var assemblyData = AssemblyData.Default.LoadFromFiles(new FileInfo(_opts.AssemblyPath));
+            using var runtimeScope = new RuntimeApi()
+                      .AddAssemblies([assemblyData])
+                      .CreateRuntimeScope();
+            RunShared(_opts, runtimeScope);
         }
 
         public void RunWithResources()
         {
             //run using Library Resource files - production scenario, no debugging inline with measures project
-            var libVersionedIdentifier = $"{_opts.Library}";
-            Console.WriteLine($"Loading resources for Library: {libVersionedIdentifier}");
-
-            var resources = ResourceHelper.LoadLibraryResources(new(_opts.ResourcesDirectory), _opts.LibraryName, _opts.LibraryVersion);
-            var assembly = resources.Assemblies.FirstOrDefault(a =>
-            {
-                var asmName = a.GetName().Name;
-                var isMatch = asmName == libVersionedIdentifier;
-                return isMatch;
-            });
-            if (assembly == null)
-                throw new InvalidOperationException($"Cannot find assembly '{libVersionedIdentifier}' in the resources.");
-
-            RunShared(_opts, assembly);
+            Console.WriteLine($"Loading resources for Library: {_opts.Library}");
+            using var scope = ResourceHelper.CreateRuntimeScopeFromFhirLibraryFile(new(_opts.ResourcesDirectory), _opts.LibraryName, _opts.LibraryVersion);
+            //var lib = scope.Libraries[CqlVersionedLibraryIdentifier.Parse(_opts.LibraryName)];
+            RunShared(_opts, scope);
         }
-        private void RunShared(CommandLineOptions opt, Assembly assembly)
-        {
-            Type libraryType = ResolveLibraryType(opt, assembly) ?? throw new ArgumentException($"Unknown library: {opt.Library}");
 
+        private void RunShared(CommandLineOptions opt, RuntimeScope runtimeScope)
+        {
+            //Type libraryType = ResolveLibraryType(opt, runtimeScope) ?? throw new ArgumentException($"Unknown library: {opt.Library}");
             Console.WriteLine("Loading value sets");
             IValueSetDictionary valueSets = ResourceHelper.LoadValueSets(new DirectoryInfo(opt.ValueSetsDirectory));
 
-            ValidateValueSets(libraryType, valueSets, opt.Library);
+            // TODO: Fix this in PR to mature runtime api
+
+            /*ValidateValueSets(libraryType, valueSets, opt.Library);
 
             Console.WriteLine("Loading test case files");
             var testDataDir = Path.Join(opt.DataDirectory, opt.LibraryName);
-            var patientList = ProcessTestPatients(testDataDir, libraryType, valueSets);
-            //optionally use patientList Dictionary
+            var patientList = ProcessTestPatients(testDataDir, runtimeScope, valueSets);
+            //optionally use patientList Dictionary*/
         }
         private Type? ResolveLibraryType(CommandLineOptions opt, Assembly assembly)
         {
@@ -102,7 +100,9 @@ namespace CLI
 
         #region Processing Patients
         private Dictionary<string, Dictionary<string, object>> ProcessTestPatients(
-            string testDataDir, Type libraryType, IValueSetDictionary valueSets)
+            string testDataDir,
+            Type libraryType,
+            IValueSetDictionary valueSets)
         {
             var patientList = new Dictionary<string, Dictionary<string, object>>();
             var testPatients = Directory.EnumerateDirectories(testDataDir);

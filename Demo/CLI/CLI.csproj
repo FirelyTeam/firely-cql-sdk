@@ -11,6 +11,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\Cql\Cql.Firely\Cql.Firely.csproj" />
 		<ProjectReference Include="..\..\Cql\Cql.Packaging\Cql.Packaging.csproj" />
+		<ProjectReference Include="..\..\Cql\CqlSdkPrototype\CqlSdkPrototype.csproj" />
 	</ItemGroup>
 
 

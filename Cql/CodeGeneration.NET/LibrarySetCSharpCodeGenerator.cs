@@ -11,14 +11,12 @@ using Hl7.Cql.CodeGeneration.NET.Visitors;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-using System.Text;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Operators;
@@ -31,8 +29,6 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// </summary>
 internal class LibrarySetCSharpCodeGenerator
 {
-    private readonly ILogger<LibrarySetCSharpCodeGenerator> _logger;
-
     private readonly TypeToCSharpConverter _typeToCSharpConverter;
 
     /// <summary>
@@ -60,11 +56,9 @@ internal class LibrarySetCSharpCodeGenerator
     private readonly string _generatorToolName;
 
     public LibrarySetCSharpCodeGenerator(
-        ILogger<LibrarySetCSharpCodeGenerator> logger,
         TypeResolver typeResolver,
         TypeToCSharpConverter typeToCSharpConverter)
     {
-        _logger = logger;
         _typeToCSharpConverter = typeToCSharpConverter;
         _usings = BuildUsings(typeResolver);
         var thisAssembly = GetType().Assembly;
@@ -98,37 +92,12 @@ internal class LibrarySetCSharpCodeGenerator
         return hashSet;
     }
 
-    /// <summary>
-    /// Writes C# source code from inputs.
-    /// </summary>
-    /// <param name="librarySet">A dependency graph containing dependent libraries.</param>
-    /// <param name="definitions">The lambda expressions to write.</param>
-    /// <param name="callbacks">Callbacks which is used during the processing of each stream.</param>
-    public void ProcessDefinitions(
+    public IEnumerable<(Library library, Func<string> generateCSharp)> GenerateCSharpDeferred(
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression> definitions,
-        CSharpSourceCodeWriterCallbacks? callbacks = null)
+        DefinitionDictionary<LambdaExpression> definitions)
     {
-        List<Stream> streamsToDispose = new();
-        callbacks ??= new();
-        try
-        {
-            var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions, callbacks);
-            foreach (var (name, stream) in librarySetWriter.WriteLibraries())
-            {
-                streamsToDispose.Add(stream);
-                callbacks.Step(name, stream);
-            }
-
-            callbacks.Done();
-        }
-        finally
-        {
-            foreach (var stream in streamsToDispose)
-            {
-                stream.Dispose();
-            }
-        }
+        var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions);
+        return librarySetWriter.GenerateCSharpDeferred();
     }
 
     #region Nested Types
@@ -136,8 +105,7 @@ internal class LibrarySetCSharpCodeGenerator
     private record LibrarySetWriter(
         LibrarySetCSharpCodeGenerator Processor,
         LibrarySet LibrarySet,
-        DefinitionDictionary<LambdaExpression> Definitions,
-        CSharpSourceCodeWriterCallbacks Callbacks)
+        DefinitionDictionary<LambdaExpression> Definitions)
     {
         public TupleMetadataBuilder TupleMetadataBuilder { get; } = new();
         public string GeneratorToolName => Processor._generatorToolName;
@@ -145,43 +113,27 @@ internal class LibrarySetCSharpCodeGenerator
         public TypeToCSharpConverter TypeToCSharpConverter => Processor._typeToCSharpConverter;
         public IReadOnlyList<(string alias, string type)> AliasedUsings => Processor._aliasedUsings;
         public HashSet<string> Usings => Processor._usings;
-        public string? Namespace => null;
-        public ILogger<LibrarySetCSharpCodeGenerator> Logger => Processor._logger;
+        public string? Namespace { get; } = null; // Not used right now
 
-        public IEnumerable<(string name, Stream stream)> WriteLibraries()
+        public IEnumerable<(Library library, Func<string> generateCSharp)> GenerateCSharpDeferred()
         {
-            if (!LibrarySet.Any())
-            {
-                Logger.LogInformation($"No libraries detected; skipping.");
-                yield break;
-            }
-
-            foreach (Library library in LibrarySet)
+            foreach (var library in LibrarySet)
             {
                 string libraryName = library.GetVersionedIdentifier()!;
-
                 if (!Definitions.Libraries.Contains(libraryName))
+                    continue;
+
+                yield return (library,GenerateCSharp);
+
+                string GenerateCSharp()
                 {
-                    Logger.LogInformation($"Skipping library {libraryName}, which has no definitions");
-                    continue;
+                    using var cSharpWriter = new StringWriter();
+                    var libraryWriter = new LibraryWriter(this, library, cSharpWriter);
+                    libraryWriter.WriteLibraryFile();
+                    cSharpWriter.Flush();
+                    return cSharpWriter.ToString();
                 }
-
-                var stream = Callbacks.GetStreamForLibraryName(libraryName);
-                if (stream == null!)
-                    continue;
-
-                if (WriteLibrary(library, stream))
-                    yield return (libraryName, stream);
             }
-        }
-
-        private bool WriteLibrary(Library library, Stream stream)
-        {
-            using var writer = new StreamWriter(stream, Encoding.Default, 1024, leaveOpen: true);
-            var libraryWriter = new LibraryWriter(this, library, writer);
-            libraryWriter.WriteLibraryFile();
-            writer.Flush();
-            return true;
         }
     }
 
@@ -431,4 +383,17 @@ internal class LibrarySetCSharpCodeGenerator
     }
 
     #endregion Nested Types
+}
+
+internal static class CSharpCodeGeneratorExtensions
+{
+    public static IEnumerable<(Library library, string cSharp)> GenerateCSharp(
+        this LibrarySetCSharpCodeGenerator generator,
+        LibrarySet librarySet,
+        DefinitionDictionary<LambdaExpression> definitions)
+    {
+        return generator
+               .GenerateCSharpDeferred(librarySet, definitions)
+               .Select(t => (t.library, t.generateCSharp()));
+    }
 }
