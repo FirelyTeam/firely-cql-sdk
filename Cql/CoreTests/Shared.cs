@@ -2,8 +2,6 @@
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
-using System.Dynamic;
-using Hl7.Cql.Conversion;
 
 namespace CoreTests;
 

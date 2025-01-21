@@ -9,7 +9,6 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Expressions;
-using Hl7.Cql.Conversion;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
