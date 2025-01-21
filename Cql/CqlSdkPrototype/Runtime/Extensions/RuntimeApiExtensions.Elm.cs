@@ -2,6 +2,7 @@
 using Hl7.Cql.CodeGeneration.NET;
 
 namespace CqlSdkPrototype.Runtime.Extensions;
+
 public static partial class RuntimeApiExtensions
 {
     public static RuntimeApi CreateRuntimeApi<TElmApi>(
