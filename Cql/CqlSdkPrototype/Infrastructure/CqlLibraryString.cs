@@ -13,11 +13,16 @@ public readonly partial record struct CqlLibraryString
         return new CqlLibraryString(versionedLibraryIdentifier, cqlContent);
     }
 
+    /// <summary>
+    /// Regex to extract the library name and optional version from a CQL string.
+    /// The CQL specification for it can be found at https://cql.hl7.org/19-l-cqlsyntaxdiagrams.html#library
+    /// under libraryDefinition.
+    /// </summary>
     [GeneratedRegex("""
                     (\s+\r?\n?)*      # Skip whitespace and newlines
                     library           # until "library" is found
                     \s+
-                    (?<lib>\S+)       # The name of the library
+                    (?<id>\S+)       # The identifier of the library
                     \s+
                     version
                     \s'(?<ver>[^']+)' # The version of the library between single quotes
@@ -29,10 +34,10 @@ public readonly partial record struct CqlLibraryString
     {
         var match = LibraryNameAndVersionRegex().Match(cqlContent);
         if (!match.Success)
-            throw new FormatException("Could not get library identifier and version from provided cql string/");
-        var lib = match.Groups["lib"].Value;
+            throw new FormatException("Could not get library identifier and version from provided cql string.");
+        var id = match.Groups["id"].Value;
         var ver = match.Groups["ver"].Value;
-        var libVer = CqlVersionedLibraryIdentifier.FromNameAndVersion(CqlLibraryIdentifier.Parse(lib), CqlLibraryVersion.Parse(ver));
+        var libVer = CqlVersionedLibraryIdentifier.FromNameAndVersion(CqlLibraryIdentifier.Parse(id), CqlLibraryVersion.Parse(ver));
         return new CqlLibraryString(libVer, cqlContent);
     }
 
