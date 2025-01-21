@@ -8,42 +8,51 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace CqlSdkPrototype.Cql;
 
-using CqlApiStateEntryDictionary = ImmutableDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry>;
-
 public class CqlApi :
     ICqlApiExtendable<CqlApi>,
     ICqlApiInternal<CqlApi>
 {
-    internal CqlApi(CqlApiState state) => _state = state; // Might make this public later. Used for testing now.
-
     public CqlApi(
         ILoggerFactory? loggerFactory = null,
-        CqlApiOptions? options = null) : this(CqlApiState.Create(loggerFactory ?? NullLoggerFactory.Instance, options ?? CqlApiOptions.Default))
-    {}
+        CqlApiOptions? options = null)
+    {
+        options ??= CqlApiOptions.Default;
+        var entries = CqlApiStateEntryDictionary.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+        var entriesBuilder = entries.ToBuilder();
+        var libraryProvider = new EntriesBuilderLibraryProvider(entriesBuilder);
+        _entries = entries;
+        _services = CqlApiServices.Create(loggerFactory ?? NullLoggerFactory.Instance, options, libraryProvider);
+        _options = options;
+    }
 
     #region State
 
-    private CqlApiState _state;
+    private CqlApiServices _services;
+    private CqlApiStateEntryDictionary _entries;
+    private CqlApiOptions _options;
 
     private CqlApi WithEntries(
         CqlApiStateEntryDictionary entries)
     {
-        _state = _state with { Entries = entries };
+        _entries = entries;
+        _services.LibraryProvider.EntriesBuilder = entries.ToBuilder();
         return this;
     }
 
     public CqlApi WithOptions(
         Func<CqlApiOptions, CqlApiOptions> replaceOptions)
     {
-        var newOptions = replaceOptions(_state.Options);
-        _state = _state with { Options = newOptions };
+        var libraryProvider = _services.LibraryProvider;
+        _services.ServiceProvider.Dispose();
+        _options = replaceOptions(_options);
+        _services = CqlApiServices.Create(_services.LoggerFactory, _options, libraryProvider);
         return this;
     }
 
-    ILoggerFactory ICqlApiExtendable<CqlApi>.LoggerFactory => _state.LoggerFactory;
-    CqlApiOptions ICqlApiExtendable<CqlApi>.Options => _state.Options;
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> ICqlApiExtendable<CqlApi>.Entries => _state.Entries;
-    CqlApiState ICqlApiInternal<CqlApi>.State => _state;
+    ILoggerFactory ICqlApiExtendable<CqlApi>.LoggerFactory => _services.LoggerFactory;
+    CqlApiOptions ICqlApiExtendable<CqlApi>.Options => _options;
+    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> ICqlApiExtendable<CqlApi>.Entries => _entries;
+    CqlApiServices ICqlApiInternal<CqlApi>.Services => _services;
 
     #endregion
 
@@ -51,10 +60,10 @@ public class CqlApi :
 
     public CqlApi AddCqlLibraries(IEnumerable<CqlLibraryString> cqlLibraries)
     {
-        var logger = _state.Logger;
-        var entriesBuilder = _state.EntriesBuilder;
-        var cqlToElmConverter = _state.CqlToElmConverter;
-        using var scope = _state.ServiceProvider.CreateScope()!;
+        var logger = _services.Logger;
+        var entriesBuilder = _services.LibraryProvider.EntriesBuilder;
+        var cqlToElmConverter = _services.CqlToElmConverter;
+        using var scope = _services.ServiceProvider.CreateScope()!;
         var hasChanged = false;
         foreach (var cqlLibrary in cqlLibraries)
         {
@@ -85,14 +94,14 @@ public class CqlApi :
 
     public CqlApi Translate()
     {
-        CqlApiStateEntryDictionary.Builder entriesBuilder = _state.EntriesBuilder;
-        var logger = _state.Logger;
+        CqlApiStateEntryDictionary.Builder entriesBuilder = _services.LibraryProvider.EntriesBuilder;
+        var logger = _services.Logger;
         bool atFirst = true;
 
         IEnumerable<(CqlVersionedLibraryIdentifier versionedIdentifier, CqlApiStateEntry cqlTranslationEntry)> GetLibrariesForProcessing()
         {
             foreach (var (versionedIdentifier, cqlTranslationEntry) in
-                     _state.Entries.Where(kv => kv.Value.ElmLibrary is null))
+                     _entries.Where(kv => kv.Value.ElmLibrary is null))
             {
                 if (atFirst)
                 {
@@ -105,7 +114,7 @@ public class CqlApi :
             }
         }
 
-        LogExceptionMessageAction log = logger.GetLogExceptionMessageAction(_state.Options.ProcessBatchItemExceptionHandling);
+        LogExceptionMessageAction log = logger.GetLogExceptionMessageAction(_options.ProcessBatchItemExceptionHandling);
 
         int changedCount =
                 GetLibrariesForProcessing()
@@ -115,7 +124,7 @@ public class CqlApi :
                         var libraryName = outcome.Input.versionedIdentifier;
                         log(outcome.Exception, "Error translating CQL library '{libraryName}' to ELM.", libraryName);
                     })
-                    .HandleExceptions(_state.Options.ProcessBatchItemExceptionHandling)
+                    .HandleExceptions(_options.ProcessBatchItemExceptionHandling)
                     .Count() // We must enumerate all
             ;
 

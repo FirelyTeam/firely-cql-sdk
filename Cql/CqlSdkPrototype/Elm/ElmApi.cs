@@ -11,8 +11,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace CqlSdkPrototype.Elm;
 
-using ElmApiStateEntryDictionary = ImmutableDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry>;
-
 public class ElmApi :
     IElmApiExtendable<ElmApi>,
     IElmApiInternal<ElmApi>

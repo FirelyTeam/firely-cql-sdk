@@ -4,14 +4,14 @@ using Hl7.Cql.Model;
 
 namespace CqlSdkPrototype.Cql;
 
-public record CqlApiOptions(
+public record CqlApiOptions
+(
     ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling = default,
     ImmutableHashSet<CqlModel>? Models = null,
     ImmutableHashSet<ModelInfo>? ModelInfos = null,
     AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,
     bool EnableListDemotion = false,
-    bool EnableListPromotion = false
-    )
+    bool EnableListPromotion = false)
 {
     public static CqlApiOptions Default { get; } = new();
 
@@ -40,14 +40,14 @@ public record CqlApiOptions(
     public bool EnableListDemotion { get; set; } = EnableListDemotion;
 
     /// <summary>
-                                                              /// <para>
-                                                              /// Sets the behavior when two models have the same type name.  In this situation, one of three behaviors is possible.
-                                                              /// Note that in the event that three or more matching types are available, the behavior will always be to issue an error.
-                                                              /// </para>
-                                                              /// <para>
-                                                              /// The default behavior is <see cref="AmbiguousTypeBehavior.Error"/>.
-                                                              /// </para>
-                                                              /// </summary>
+    /// <para>
+    /// Sets the behavior when two models have the same type name.  In this situation, one of three behaviors is possible.
+    /// Note that in the event that three or more matching types are available, the behavior will always be to issue an error.
+    /// </para>
+    /// <para>
+    /// The default behavior is <see cref="AmbiguousTypeBehavior.Error"/>.
+    /// </para>
+    /// </summary>
     public AmbiguousTypeBehavior AmbiguousTypeBehavior { get; init; } = AmbiguousTypeBehavior;
 }
 
