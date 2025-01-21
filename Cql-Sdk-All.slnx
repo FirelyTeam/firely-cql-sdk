@@ -1,0 +1,85 @@
+<Solution>
+  <Folder Name="/Cql/">
+    <File Path=".editorconfig" />
+    <File Path="cql-base.props" />
+    <File Path="cql-sdk.props" />
+  </Folder>
+  <Folder Name="/Cql/00 Runtime/">
+    <Project Path="Cql/Cql.Abstractions/Cql.Abstractions.csproj" />
+    <Project Path="Cql/Cql.Comparers/Cql.Comparers.csproj" />
+    <Project Path="Cql/Cql.Conversion/Cql.Conversion.csproj" />
+    <Project Path="Cql/Cql.Logging/Cql.Logging.csproj" />
+    <Project Path="Cql/Cql.Operators/Cql.Operators.csproj" />
+    <Project Path="Cql/Cql.Primitives/Cql.Primitives.csproj" />
+    <Project Path="Cql/Cql.Runtime/Cql.Runtime.csproj" />
+    <Project Path="Cql/Cql.ValueSets/Cql.ValueSets.csproj" />
+    <Project Path="Cql/Iso8601/Iso8601.csproj" />
+  </Folder>
+  <Folder Name="/Cql/10 Model/">
+    <Project Path="Cql/Cql.Firely/Cql.Firely.csproj" />
+    <Project Path="Cql/Cql.Model/Cql.Model.csproj" />
+    <Project Path="Cql/Elm/Elm.csproj" />
+  </Folder>
+  <Folder Name="/Cql/20 Cql to Elm/">
+    <Project Path="Cql/Cql.CqlToElm/Cql.CqlToElm.csproj" />
+    <Project Path="Cql/Cql.Grammar/Cql.Grammar.csproj" />
+  </Folder>
+  <Folder Name="/Cql/30 Elm to C#/">
+    <Project Path="Cql/CodeGeneration.NET/CodeGeneration.NET.csproj" />
+    <Project Path="Cql/Cql.Compiler/Cql.Compiler.csproj" />
+  </Folder>
+  <Folder Name="/Cql/40 FHIR Resource Packaging/">
+    <Project Path="Cql/Cql.Packaging/Cql.Packaging.csproj" />
+  </Folder>
+  <Folder Name="/Cql/50 CLI Packaging Tools/">
+    <Project Path="Cql/CqlSdkPrototype/CqlSdkPrototype.csproj" />
+    <Project Path="Cql/MultiPackagerCLI/MultiPackagerCLI.csproj" />
+    <Project Path="Cql/PackagerCLI/PackagerCLI.csproj" />
+  </Folder>
+  <Folder Name="/Demo/">
+    <File Path="Demo/cql-demo.props" />
+  </Folder>
+  <Folder Name="/Demo/00 MSBuild Tooling/">
+    <Project Path="Demo/Cql/Cql.csproj" />
+  </Folder>
+  <Folder Name="/Demo/10 Demo Projects/">
+    <Project Path="Demo/Measures.Authoring/Measures.Authoring.csproj">
+      <BuildDependency Project="Cql/PackagerCLI/PackagerCLI.csproj" />
+    </Project>
+    <Project Path="Demo/Measures.CMS/Measures.CMS.csproj">
+      <BuildDependency Project="Cql/PackagerCLI/PackagerCLI.csproj" />
+    </Project>
+    <Project Path="Demo/Measures.Demo/Measures.Demo.csproj">
+      <BuildDependency Project="Cql/PackagerCLI/PackagerCLI.csproj" />
+    </Project>
+  </Folder>
+  <Folder Name="/Demo/30 Samples/">
+    <Project Path="Demo/API/API.csproj" />
+    <Project Path="Demo/CLI/CLI.csproj" />
+  </Folder>
+  <Folder Name="/submodules/" />
+  <Folder Name="/submodules/Firely.Cql.Sdk.Integration.Runner/">
+    <Project Path="submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/IntegrationRunner.csproj" />
+  </Folder>
+  <Folder Name="/submodules/Ncqa/">
+    <Project Path="submodules/Ncqa.DQIC/BuildArtifacts/BuildArtifacts.csproj" />
+    <Project Path="submodules/Ncqa.DQIC/Ncqa.HT.DeckTests/Ncqa.HT.DeckTests.csproj" />
+    <Project Path="submodules/Ncqa.DQIC/Ncqa.HT.MeasuresTests/Ncqa.HT.MeasuresTests.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Cql/Benchmarks/Benchmarks.csproj" />
+    <Project Path="Cql/CoreTests/CoreTests.csproj">
+      <BuildDependency Project="Cql/PackagerCLI/PackagerCLI.csproj" />
+    </Project>
+    <Project Path="Cql/CqlToElmTests/CqlToElmTests.csproj">
+      <BuildDependency Project="Cql/PackagerCLI/PackagerCLI.csproj" />
+    </Project>
+    <Project Path="Demo/Test.Measures.Demo/Test.Measures.Demo.csproj">
+      <BuildDependency Project="Cql/PackagerCLI/PackagerCLI.csproj" />
+      <BuildDependency Project="Demo/Measures.Demo/Measures.Demo.csproj" />
+    </Project>
+  </Folder>
+  <Properties Name="ExtensibilityGlobals" Scope="PostLoad">
+    <Property Name="FileExplorer" Value="|build\|docs\|LibrarySets\|submodules\Firely.Cql.Sdk.Integration.Runner\NodeJsUtils\" />
+  </Properties>
+</Solution>
