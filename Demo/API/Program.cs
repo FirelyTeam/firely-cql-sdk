@@ -17,7 +17,7 @@ internal static class Program
         services.AddLogging(builder => builder.AddConsole());
 
         var cqlApiOptions = new CqlApiOptions(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        services.AddSingleton<CqlApi>(provider => new CqlApi(provider.GetService<ILoggerFactory>(), cqlApiOptions));
+        services.AddSingleton<CqlApi>(provider => ActivatorUtilities.CreateInstance<CqlApi>(provider, cqlApiOptions));
 
         // Get CqlApi from DI
         IServiceProvider serviceProvider = services.BuildServiceProvider();
