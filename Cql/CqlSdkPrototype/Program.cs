@@ -32,11 +32,11 @@ internal class Program
 
         var logger = serviceProvider.GetLogger<Program>();
 
-        InvokeCqlExample(cqlApi: cqlApi);
+        //InvokeCqlExample(cqlApi: cqlApi);
 
-        InvokeCqlFromExamplesFolder(logger: logger, cqlApi: cqlApi);
-
-        foreach (var librarySetName in (string[]) ["Authoring", "CMS", "Demo", "Examples"])
+        //InvokeCqlFromExamplesFolder(logger: logger, cqlApi: cqlApi);
+        //
+        foreach (var librarySetName in (string[]) ["CMS"])//"Authoring", "CMS", "Demo", "Examples"])
             VerboseExample(logger: logger, cqlApi: cqlApi, librarySetName: librarySetName, shouldBuildCqlToElm:false);
 
         // VerboseExample(logger, cqlApi, "CMS");
@@ -79,7 +79,7 @@ internal class Program
         // This example demonstrates how to add a CqlLibraryString to the CqlApi and invoke a library declaration directly.
 
         // NICE TO HAVE: Would be nice to parse the CqlLibraryString only from the CQL and extract the identifier from the CQL
-        var cqlLibraryString = CqlLibraryString.FromCql(
+        var cqlLibraryString = CqlLibraryString.Parse(
             """
             library AdditionLib version '0.0.0'
 

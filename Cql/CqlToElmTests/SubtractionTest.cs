@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
@@ -10,21 +10,16 @@ namespace Hl7.Cql.CqlToElm.Test
 
     public class SubtractionTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         #region Same type
 
         [TestMethod]
         public void Subtract_Integer_from_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Integer_from_Integer version '1.0.0'
 
                 define private Subtract: 2 - 1
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -65,7 +60,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Integer", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(int?));
@@ -79,11 +74,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Long_from_Long()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Long_from_Long version '1.0.0'
 
                 define private Subtract: 1L - 2L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -124,7 +119,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(long?));
@@ -135,11 +130,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Decimal_from_Decimal()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Decimal_from_Decimal version '1.0.0'
 
                 define private Subtract: 2.0 - 1.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -181,7 +176,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
@@ -192,11 +187,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Quantity_from_Quantity()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Decimal_from_Quantity version '1.0.0'
 
                 define private Subtract: -1.0 '1' - 2.0 '1'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -237,7 +232,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -255,11 +250,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Integer_from_Long()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Integer_from_Long version '1.0.0'
 
                 define private Subtract: 2 - 1L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -300,7 +295,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(long?));
@@ -314,11 +309,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Integer_from_Decimal()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Integer_from_Decimal version '1.0.0'
 
                 define private Subtract: 2 - 1.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -359,7 +354,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
@@ -373,11 +368,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Integer_from_Quantity()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Integer_from_Quantity version '1.0.0'
 
                 define private Subtract: 2 - 1.0 '1'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -418,7 +413,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -432,11 +427,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Long_from_Decimal()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Long_from_Decimal version '1.0.0'
 
                 define private Subtract: 1L - 2.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -477,7 +472,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
@@ -491,11 +486,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Long_from_Quantity()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Integer_from_Quantity version '1.0.0'
 
                 define private Subtract: 1L - 2.0 '1'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -536,7 +531,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -550,11 +545,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Decimal_from_Quantity()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Decimal_from_Quantity version '1.0.0'
 
                 define private Subtract: -1.0 - 2.0 '1'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -597,7 +592,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual(UCUMUnits.Default, rhs.unit);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -618,11 +613,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Long_from_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Long_from_Integer version '1.0.0'
 
                 define private Subtract: 1L - 2
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -663,7 +658,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(long?));
@@ -674,11 +669,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Decimal_from_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Decimal_from_Integer version '1.0.0'
 
                 define private Subtract: 5.25 - 2
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -719,7 +714,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
@@ -730,11 +725,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Quantity_from_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Decimal_from_Integer version '1.0.0'
 
                 define private Subtract: 5.25 '1' - 2
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -775,7 +770,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -789,11 +784,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Decimal_from_Long()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Decimal_from_Long version '1.0.0'
 
                 define private Subtract: 5.25 - 2L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -834,7 +829,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
@@ -845,11 +840,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Quantity_from_Long()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Quantity_from_Long version '1.0.0'
 
                 define private Subtract: 5.25 '1' - 2L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -890,7 +885,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -904,11 +899,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Quantity_from_Decimal()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Quantity_from_Decimal version '1.0.0'
 
                 define private Subtract: 5.25 '1' - 2.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -949,7 +944,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -965,11 +960,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Three_Decimals()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Decimal_from_Decimal version '1.0.0'
 
                 define private Subtract: 6.0 - (2.0 - 3.0)
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1010,7 +1005,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
@@ -1021,11 +1016,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Subtract_Quantity_from_Two_Decimals()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Subtract_Decimal_from_Decimal version '1.0.0'
 
                 define private Subtract: 6.0 '1' - (2.0 - 3.0)
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1066,7 +1061,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(add);
+                var lambda = CreateElmApi().Lambda(add);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);

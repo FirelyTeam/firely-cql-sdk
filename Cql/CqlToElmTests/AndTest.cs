@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Elm;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -7,29 +7,14 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class AndTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-
-        //private IServiceScope? Scope;
-
-        //[TestInitialize]
-        //public void TestInitialize()
-        //{
-        //    Scope = CqlCompilerServices.CreateScope();
-        //}
-        //[TestCleanup]
-        //public void TestCleanup() => Scope?.Dispose();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         [TestMethod]
         public void True_And_False()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AndTest version '1.0.0'
 
                 define private True_And_False: true and false
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -70,7 +55,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(and);
+                var lambda = CreateElmApi().Lambda(and);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -81,11 +66,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_And_True()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AndTest version '1.0.0'
 
                 define private True_And_True: true and true
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -126,7 +111,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(and);
+                var lambda = CreateElmApi().Lambda(and);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -137,11 +122,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void False_And_False()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AndTest version '1.0.0'
 
                 define private False_And_False: false and false
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -182,7 +167,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(and);
+                var lambda = CreateElmApi().Lambda(and);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -193,11 +178,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_And_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AndTest version '1.0.0'
 
                 define private True_And_Null: true and null
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -238,7 +223,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(and);
+                var lambda = CreateElmApi().Lambda(and);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);
@@ -248,11 +233,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_And_False()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AndTest version '1.0.0'
 
                 define private Null_And_False: null and false
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -293,7 +278,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(and);
+                var lambda = CreateElmApi().Lambda(and);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -304,11 +289,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_And_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AndTest version '1.0.0'
 
                 define private Null_And_Null: null and null
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -349,7 +334,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(and);
+                var lambda = CreateElmApi().Lambda(and);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);
@@ -359,11 +344,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_And_1()
         {
-            MakeLibrary(@"
+            CreateCqlApi().MakeLibrary("""
                 library AndTest version '1.0.0'
 
                 define private True_And_1: true and 1
-            ", "Could not resolve*");
+                """, "Could not resolve*");
         }
     }
 }

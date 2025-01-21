@@ -37,7 +37,7 @@ public static partial class CqlApiExtensions
             {
                 logger.LogInformation("Loading library from file: {file}", f);
                         var cqlContent = File.ReadAllText(f.FullName);
-                        var cqlLibrary = CqlLibraryString.FromCql(cqlContent);
+                        var cqlLibrary = CqlLibraryString.Parse(cqlContent);
                         return cqlLibrary;
                     }); // Log errors
 

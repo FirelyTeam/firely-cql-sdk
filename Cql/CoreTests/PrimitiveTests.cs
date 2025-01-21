@@ -3414,11 +3414,13 @@ namespace CoreTests
                                 .AddDebugLogging()
                                 .BuildServiceProvider()
                                 .GetRequiredService<ILoggerFactory>();
-            new ElmApi(loggerFactory)
-                .AddElmLibraries(librarySet)
-                .Compile();
 
-            Assert.IsTrue(true);
+            Assert.That.DoesNotThrow(() =>
+            {
+                new ElmApi(loggerFactory)
+                    .AddElmLibraries(librarySet)
+                    .Compile();
+            });
         }
 
         [TestMethod]

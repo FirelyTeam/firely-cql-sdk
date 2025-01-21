@@ -34,6 +34,7 @@
 		<CqlSolutionDir>$(MSBuildThisFileDirectory)/../</CqlSolutionDir>
 		<!-- CqlToElmEnabled and ElmToCSharpEnabled declared in BuildArtifacts.csproj, cql-base.props, cql-demo.props  -->
 		<CqlToElmEnabled>false</CqlToElmEnabled>
+		<!-- ElmToCSharpEnabled must be true here for build to pass -->
 		<ElmToCSharpEnabled>true</ElmToCSharpEnabled>
 	</PropertyGroup>
 

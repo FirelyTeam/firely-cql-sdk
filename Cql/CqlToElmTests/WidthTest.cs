@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Elm;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -7,19 +7,14 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class WidthTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         [TestMethod]
         public void Width_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library WidthTest version '1.0.0'
 
                 define private Width_Integers: width of Interval[3,7]
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -36,7 +31,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var interval = (Interval)width.operand;
                 AssertIntervalType(interval.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = LibraryExpressionBuilder.Lambda(width);
+                var lambda = CreateElmApi().Lambda(width);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);
@@ -50,11 +45,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Width_Integers_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library WidthTest version '1.0.0'
 
                 define private Width_Integers_Null: width of (null as Interval<Integer>)
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -72,7 +67,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(@as.operand, typeof(Null));
                 AssertIntervalType(@as.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = LibraryExpressionBuilder.Lambda(width);
+                var lambda = CreateElmApi().Lambda(width);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);
@@ -83,11 +78,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Width_Integers_Null_Interval()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library WidthTest version '1.0.0'
 
                 define private Width_Integers_Error: width of Interval[1,null)
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -104,7 +99,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var list = (Interval)width.operand;
                 AssertIntervalType(list.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = LibraryExpressionBuilder.Lambda(width);
+                var lambda = CreateElmApi().Lambda(width);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);

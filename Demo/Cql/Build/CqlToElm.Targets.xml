@@ -25,7 +25,7 @@
 		<ClassPath>-classpath $(TargetDependencies)/* org.cqframework.cql.cql2elm.cli.Main</ClassPath>
 		<JavaOutputFile>$(MSBuildProjectDirectory)/elm-build.log</JavaOutputFile>
 		<JavaArgs>-input $(CqlDirectory) -f JSON -output $(ElmDirectory) -locators true -result-types true -signatures All</JavaArgs>
-		<JavaCLI>$(JavaCommand) $(ClassPath) $(JavaArgs)</JavaCLI>
+		<JavaCLI>"$(JavaCommand)" $(ClassPath) $(JavaArgs)</JavaCLI>
 	</PropertyGroup>
 
 	<Target Name="GenerateElmFiles"

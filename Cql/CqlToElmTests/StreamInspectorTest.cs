@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;

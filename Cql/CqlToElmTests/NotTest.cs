@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Elm;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -7,19 +7,14 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class NotTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         [TestMethod]
         public void Not_True()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library NotTest version '1.0.0'
 
                 define private Not_True: not true
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -50,7 +45,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 }
 
 
-                var lambda = LibraryExpressionBuilder.Lambda(not);
+                var lambda = CreateElmApi().Lambda(not);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -61,11 +56,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Not_False()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library NotTest version '1.0.0'
 
                 define private Not_False: not false
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -95,7 +90,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 }
 
 
-                var lambda = LibraryExpressionBuilder.Lambda(not);
+                var lambda = CreateElmApi().Lambda(not);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -106,11 +101,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Not_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library NotTest version '1.0.0'
 
                 define private Not_Null: not null
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -140,7 +135,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 }
 
 
-                var lambda = LibraryExpressionBuilder.Lambda(not);
+                var lambda = CreateElmApi().Lambda(not);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);
@@ -149,10 +144,10 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Not_1() =>
-             MakeLibrary(@"
+            CreateCqlApi().MakeLibrary("""
                 library NotTest version '1.0.0'
 
                 define private Not_1: not 1
-            ", "Could not resolve*");
+                """, "Could not resolve*");
     }
 }

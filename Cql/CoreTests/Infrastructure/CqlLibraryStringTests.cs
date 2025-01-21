@@ -1,27 +1,39 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using CqlSdkPrototype.Infrastructure;
 using System;
+using CqlSdkPrototype.Infrastructure;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace CqlSdkPrototype.Tests.Infrastructure
+namespace CoreTests.Infrastructure
 {
     [TestClass]
     public class CqlLibraryStringTests
     {
         [TestMethod]
+        public void FromCql_ValidCqlContentWithoutVersion_ReturnsCqlLibraryString()
+        {
+            // Arrange
+            string cqlContent = "library TestLibrary";
+            var expectedIdentifier = CqlVersionedLibraryIdentifier.FromNameAndVersion(
+                CqlLibraryIdentifier.Parse("TestLibrary"));
+
+            // Act
+            var result = CqlLibraryString.Parse(cqlContent);
+
+            // Assert
+            Assert.AreEqual(expectedIdentifier, result.VersionedLibraryIdentifier);
+            Assert.AreEqual(cqlContent, result.Cql);
+        }
+
+        [TestMethod]
         public void FromCql_ValidCqlContentWithEmptyLines_ReturnsCqlLibraryString()
         {
             // Arrange
-            string cqlContent = """
-
-
-                                library TestLibrary version '1.0.0'
-                                """;
+            string cqlContent = "library TestLibrary version '1.0.0'";
             var expectedIdentifier = CqlVersionedLibraryIdentifier.FromNameAndVersion(
                 CqlLibraryIdentifier.Parse("TestLibrary"),
                 CqlLibraryVersion.Parse("1.0.0"));
 
             // Act
-            var result = CqlLibraryString.FromCql(cqlContent);
+            var result = CqlLibraryString.Parse(cqlContent);
 
             // Assert
             Assert.AreEqual(expectedIdentifier, result.VersionedLibraryIdentifier);
@@ -38,7 +50,7 @@ namespace CqlSdkPrototype.Tests.Infrastructure
                 CqlLibraryVersion.Parse("1.0.0"));
 
             // Act
-            var result = CqlLibraryString.FromCql(cqlContent);
+            var result = CqlLibraryString.Parse(cqlContent);
 
             // Assert
             Assert.AreEqual(expectedIdentifier, result.VersionedLibraryIdentifier);
@@ -53,7 +65,7 @@ namespace CqlSdkPrototype.Tests.Infrastructure
             string cqlContent = "invalid content";
 
             // Act
-            CqlLibraryString.FromCql(cqlContent);
+            CqlLibraryString.Parse(cqlContent);
 
             // Assert is handled by ExpectedException
         }
@@ -65,7 +77,7 @@ namespace CqlSdkPrototype.Tests.Infrastructure
             string cqlContent = "";
 
             // Act & Assert
-            Assert.ThrowsException<FormatException>(() => CqlLibraryString.FromCql(cqlContent));
+            Assert.ThrowsException<FormatException>(() => CqlLibraryString.Parse(cqlContent));
         }
     }
 }

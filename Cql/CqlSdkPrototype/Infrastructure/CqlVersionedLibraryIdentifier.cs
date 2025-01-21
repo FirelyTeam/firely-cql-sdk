@@ -2,14 +2,16 @@
 
 namespace CqlSdkPrototype.Infrastructure;
 
-public readonly record struct CqlVersionedLibraryIdentifier : IParsable<CqlVersionedLibraryIdentifier>
+public readonly record struct CqlVersionedLibraryIdentifier
+(
+    CqlLibraryIdentifier Identifier,
+    CqlLibraryVersion? Version = null) : IParsable<CqlVersionedLibraryIdentifier>
 {
-    public static CqlVersionedLibraryIdentifier Empty { get; } = new CqlVersionedLibraryIdentifier(CqlLibraryIdentifier.Empty, CqlLibraryVersion.Empty);
-
-    private CqlVersionedLibraryIdentifier(CqlLibraryIdentifier Identifier, CqlLibraryVersion? Version = null)
+    public static CqlVersionedLibraryIdentifier ParseFromNameAndVersion(string identifier, string? version = null)
     {
-        this.Identifier = Identifier;
-        this.Version = Version;
+        var cqlLibraryIdentifier = CqlLibraryIdentifier.Parse(identifier);
+        CqlLibraryVersion? cqlLibraryVersion = version is null ? null : CqlLibraryVersion.Parse(version);
+        return FromNameAndVersion(cqlLibraryIdentifier, cqlLibraryVersion);
     }
 
     public static CqlVersionedLibraryIdentifier FromNameAndVersion(CqlLibraryIdentifier identifier, CqlLibraryVersion? version = null)
@@ -17,28 +19,23 @@ public readonly record struct CqlVersionedLibraryIdentifier : IParsable<CqlVersi
         return new CqlVersionedLibraryIdentifier(identifier, version);
     }
 
-    public static CqlVersionedLibraryIdentifier FromVersionedIdentifier(VersionedIdentifier identifier)
+    internal static CqlVersionedLibraryIdentifier FromVersionedIdentifier(VersionedIdentifier identifier)
     {
+        // We have to check for nulls because the generated ELM code does not emit nullability annotations.
         ArgumentNullException.ThrowIfNull(identifier);
-        return FromNameAndVersion(CqlLibraryIdentifier.Parse(identifier.id), CqlLibraryVersion.Parse(identifier.version));
-    }
+        ArgumentNullException.ThrowIfNull(identifier.id);
 
-    public CqlLibraryIdentifier Identifier { get; init; }
-
-    public CqlLibraryVersion? Version { get; init; }
-
-    public void Deconstruct(out CqlLibraryIdentifier identifier, out CqlLibraryVersion? version)
-    {
-        identifier = Identifier;
-        version = Version;
+        var cqlLibraryIdentifier = CqlLibraryIdentifier.Parse(identifier.id);
+        CqlLibraryVersion? cqlLibraryVersion = identifier.version is null ? null : CqlLibraryVersion.Parse(identifier.version);
+        return FromNameAndVersion(cqlLibraryIdentifier, cqlLibraryVersion);
     }
 
     public override string ToString()
     {
         return (Identifier, Version) switch
         {
-            ({ } identifier, null) => identifier.ToString(),
             ({ } identifier, { } version) => $"{identifier}-{version}",
+            ({ } identifier, _)                          => identifier.ToString(),
         };
     }
 

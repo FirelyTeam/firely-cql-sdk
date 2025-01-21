@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Elm;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -8,19 +8,14 @@ namespace Hl7.Cql.CqlToElm.Test
 
     public class ConcatenationTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         [TestMethod]
         public void Add_String_To_String()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Add_Integer_to_Integer version '1.0.0'
 
                 define private Three: 'hello' & 'world'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -63,7 +58,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual("world", rhs.value);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(concatenate);
+                var lambda = CreateElmApi().Lambda(concatenate);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(string));
@@ -77,11 +72,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Three_Strings()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library Add_Integer_to_Integer version '1.0.0'
 
                 define private Three: 'hello' & (' ' & 'world')
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -122,7 +117,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}String", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(concatenate);
+                var lambda = CreateElmApi().Lambda(concatenate);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(string));

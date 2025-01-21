@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
@@ -9,21 +9,16 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class TruncatedDivisionTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         #region Integer
 
         [TestMethod]
         public void TruncatedDivide_Integer_by_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Integer_by_Integer version '1.0.0'
 
                 define private TruncatedDivide_Integer_by_Integer: 2 div 4
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -64,7 +59,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Integer", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(int?));
@@ -75,11 +70,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Integer_by_Long()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Integer_by_Long version '1.0.0'
 
                 define private TruncatedDivide_Integer_by_Long: 2 div 3L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -120,7 +115,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(long?));
@@ -131,11 +126,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Integer_by_Decimal()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Integer_by_Decimal version '1.0.0'
 
                 define private TruncatedDivide_Integer_by_Decimal: 2 div 3.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -176,7 +171,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
@@ -187,11 +182,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Integer_by_Quantity()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Integer_by_Quantity version '1.0.0'
 
                 define private TruncatedDivide_Integer_by_Quantity: 10 div 2.0 '1'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -232,7 +227,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -247,11 +242,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Integer_by_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Integer_by_Null version '1.0.0'
 
                 define private TruncatedDivide_Integer_by_Null: 1 div null
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -291,7 +286,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.IsNotNull(lhsnts.name.Name);
                     Assert.AreEqual($"{{{SystemUri}}}Integer", lhsnts.name.Name);
                 }
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.AreEqual(null, result);
@@ -301,11 +296,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Null_by_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Null_by_Integer version '1.0.0'
 
                 define private TruncatedDivide_Null_by_Integer: null div 1
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -345,7 +340,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.IsNotNull(rhsnts.name.Name);
                     Assert.AreEqual($"{{{SystemUri}}}Integer", rhsnts.name.Name);
                 }
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.AreEqual(null, result);
@@ -359,11 +354,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Long_by_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Long_by_Integer version '1.0.0'
 
                 define private TruncatedDivide_Long_by_Integer: 10L div 2
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -404,7 +399,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(long?));
@@ -415,11 +410,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Long_by_Long()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Long_by_Long version '1.0.0'
 
                 define private TruncatedDivide_Long_by_Long: 100L div 10L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -460,7 +455,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(long?));
@@ -471,11 +466,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Long_by_Decimal()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Long_by_Decimal version '1.0.0'
 
                 define private TruncatedDivide_Long_by_Decimal: -3L div 2.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -516,7 +511,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
@@ -527,11 +522,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Long_by_Quantity()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Long_by_Quantity version '1.0.0'
 
                 define private TruncatedDivide_Long_by_Quantity: 20L div 5.0 '1'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -572,7 +567,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -586,11 +581,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Long_by_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Long_by_Null version '1.0.0'
 
                 define private TruncatedDivide_Long_by_Null: 1L div null
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -630,7 +625,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.IsNotNull(lhsnts.name.Name);
                     Assert.AreEqual($"{{{SystemUri}}}Long", lhsnts.name.Name);
                 }
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.AreEqual(null, result);
@@ -640,11 +635,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Null_by_Long()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Null_by_Long version '1.0.0'
 
                 define private TruncatedDivide_Null_by_Long: null div 1L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -684,7 +679,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.IsNotNull(rhsnts.name.Name);
                     Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
                 }
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.AreEqual(null, result);
@@ -698,11 +693,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Decimal_by_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Decimal_by_Integer version '1.0.0'
 
                 define private TruncatedDivide_Decimal_by_Integer: 0.0 div 3
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -743,7 +738,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
@@ -754,11 +749,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Decimal_by_Long()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library DefaultConverter version '1.0.0'
 
                 define private DefaultConverter: 5.0 div 5L
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -799,7 +794,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
@@ -810,11 +805,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Decimal_by_Decimal()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Decimal_by_Decimal version '1.0.0'
 
                 define private TruncatedDivide_Decimal_by_Decimal: -10.0 div 10.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -855,7 +850,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(decimal?));
@@ -866,11 +861,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Decimal_by_Quantity()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Decimal_by_Quantity version '1.0.0'
 
                 define private TruncatedDivide_Decimal_by_Quantity: 3.0 div 2.0 '1'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -911,7 +906,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -925,11 +920,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Decimal_by_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Decimal_by_Null version '1.0.0'
 
                 define private TruncatedDivide_Decimal_by_Null: 1.0 div null
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -969,7 +964,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.IsNotNull(lhsnts.name.Name);
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", lhsnts.name.Name);
                 }
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.AreEqual(null, result);
@@ -979,11 +974,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Null_by_Decimal()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Null_by_Decimal version '1.0.0'
 
                 define private TruncatedDivide_Null_by_Decimal: null div 1.0
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1023,7 +1018,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.IsNotNull(rhsnts.name.Name);
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.AreEqual(null, result);
@@ -1037,11 +1032,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Quantity_by_Quantity()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Quantity_by_Quantity version '1.0.0'
 
                 define private TruncatedDivide_Quantity_by_Quantity: 3.0 '1' div 2.0 '1'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1082,7 +1077,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -1096,11 +1091,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Quantity_by_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Quantity_by_Null version '1.0.0'
 
                 define private TruncatedDivide_Quantity_by_Null: 3.0 '1' div null
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1141,7 +1136,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);
@@ -1151,11 +1146,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TruncatedDivide_Null_by_Quantity()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TruncatedDivide_Null_by_Quantity version '1.0.0'
 
                 define private TruncatedDivide_Null_by_Quantity: null div 3.0 '1'
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -1196,7 +1191,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = LibraryExpressionBuilder.Lambda(divide);
+                var lambda = CreateElmApi().Lambda(divide);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);

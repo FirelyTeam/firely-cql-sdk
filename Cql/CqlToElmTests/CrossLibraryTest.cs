@@ -1,7 +1,5 @@
-﻿using FluentAssertions;
-using Hl7.Cql.CqlToElm.LibraryProviders;
+using FluentAssertions;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -9,74 +7,67 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class CrossLibraryTest : Base
     {
-
         [TestMethod]
         public void ExpressionRef_Across_Library()
         {
-            var services = ServiceCollection().BuildServiceProvider();
-            var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
-            var foo = MakeLibraryBuilder(services,  @"
-                library Foo version '1.0.0'
+            var cqlApi = CreateCqlApi();
 
-                define F: 'foo'
-            ");
+            var foo = cqlApi.MakeLibrary("""
+                                         library Foo version '1.0.0'
+
+                                         define F: 'foo'
+                                         """);
             foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
-            libraryProvider.Libraries.Add(foo.Identifier.id, foo.Identifier.version, foo);
 
-            var bar = MakeLibrary(services, @"
-                library Bar version '1.0.0'
+            var bar = cqlApi.MakeLibrary("""
+                                         library Bar version '1.0.0'
 
-                include Foo version '1.0.0' called foo
+                                         include Foo version '1.0.0' called foo
 
-                define G: foo.F
-            ");
+                                         define G: foo.F
+                                         """);
             bar.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ExpressionRef>();
-
         }
 
         [TestMethod]
         public void ExpressionRef_Across_Library_NotFound()
         {
-            var services = ServiceCollection().BuildServiceProvider();
-            var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
+            var cqlApi = CreateCqlApi();
+            var foo = cqlApi.MakeLibrary("""
+                                         library Foo version '1.0.0'
 
-            var foo = MakeLibraryBuilder(services, @"
-                library Foo version '1.0.0'
-
-                define F: 'foo'
-            ");
+                                         define F: 'foo'
+                                         """);
             foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
-            libraryProvider.Libraries.Add(foo.Identifier!.id, foo.Identifier!.version, foo);
 
-            MakeLibrary(services, @"
-                library Bar version '1.0.0'
+            cqlApi.MakeLibrary("""
+                               library Bar version '1.0.0'
 
-                include Foo version '1.0.0' called foo
+                               include Foo version '1.0.0' called foo
 
-                define G: foo.DoesNotExist
-            ", "Could not resolve identifier DoesNotExist in library Foo.");
+                               define G: foo.DoesNotExist
+                               """,
+                               "Could not resolve identifier DoesNotExist in library Foo.");
         }
 
         [TestMethod]
-        public void FuncionRef_Across_Library()
+        public void FunctionRef_Across_Library()
         {
-            var services = ServiceCollection().BuildServiceProvider();
-            var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
-            var foo = MakeLibraryBuilder(services, @"
-                library Foo version '1.0.0'
+            var cqlApi = CreateCqlApi();
+            var foo = cqlApi.MakeLibrary("""
+                                         library Foo version '1.0.0'
 
-                define function Foo(): 'foo'
-            ");
+                                         define function Foo(): 'foo'
+                                         """);
             foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
-            libraryProvider.Libraries.Add(foo.Identifier!.id, foo.Identifier!.version, foo);
 
-            var bar = MakeLibrary(services, @"
-                library Bar version '1.0.0'
+            var bar = cqlApi.MakeLibrary("""
+                                         library Bar version '1.0.0'
 
-                include Foo version '1.0.0' called foo
+                                         include Foo version '1.0.0' called foo
 
-                define G: foo.Foo()
-            ");
+                                         define G: foo.Foo()
+                                         """);
             bar.Should().BeACorrectlyInitializedLibraryWithStatementOfType<FunctionRef>();
         }
 
@@ -84,23 +75,22 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FunctionRef_Across_Library_NotFound()
         {
-            var services = ServiceCollection().BuildServiceProvider();
-            var libraryProvider = (MemoryLibraryProvider)services.GetRequiredService<ILibraryProvider>();
-            var foo = MakeLibraryBuilder(services, @"
-                library Foo version '1.0.0'
+            var cqlApi = CreateCqlApi();
+            var foo = cqlApi.MakeLibrary("""
+                                         library Foo version '1.0.0'
 
-                define function Foo(): 'foo'
-            ");
+                                         define function Foo(): 'foo'
+                                         """);
             foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
-            libraryProvider.Libraries.Add(foo.Identifier!.id, foo.Identifier!.version, foo);
 
-            MakeLibrary(services, @"
-                library Bar version '1.0.0'
+            cqlApi.MakeLibrary("""
+                               library Bar version '1.0.0'
 
-                include Foo version '1.0.0' called foo
+                               include Foo version '1.0.0' called foo
 
-                define G: foo.DoesNotExist()
-            ", "Could not resolve call to operator DoesNotExist with signature ().");
+                               define G: foo.DoesNotExist()
+                               """,
+                               "Could not resolve call to operator DoesNotExist with signature ().");
         }
     }
 }

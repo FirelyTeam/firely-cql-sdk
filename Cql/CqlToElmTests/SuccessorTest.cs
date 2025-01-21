@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Elm;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -8,19 +8,14 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class SuccessorTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         [TestMethod]
         public void Successor_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: successor of 2
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -36,7 +31,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(successor.operand, typeof(Literal));
 
 
-                var lambda = LibraryExpressionBuilder.Lambda(successor);
+                var lambda = CreateElmApi().Lambda(successor);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);
@@ -49,11 +44,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Successor_Null()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: successor of (null as Integer)
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -69,7 +64,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(successor.operand, typeof(As));
 
 
-                var lambda = LibraryExpressionBuilder.Lambda(successor);
+                var lambda = CreateElmApi().Lambda(successor);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);

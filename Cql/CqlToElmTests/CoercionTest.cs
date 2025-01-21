@@ -1,27 +1,22 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Linq;
+using CqlSdkPrototype.Cql.Internal;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
     public class CoercionTest : Base
     {
-        internal static CoercionProvider CoercionProvider => ServiceProvider.GetCoercionProvider();
-        internal static ElmFactory ElmFactory =>  ServiceProvider.GetElmFactory();
+        private static CoercionProvider CoercionProvider => CreateCqlApi(
+            EnableListPromotion:true,
+            EnableListDemotion:true,
+            EnableIntervalPromotion:true,
+            EnableIntervalDemotion:true).AsInternal().Services.ServiceProvider.GetRequiredService<CoercionProvider>();
 
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize(options =>
-        {
-            options.EnableListPromotion = true;
-            options.EnableListDemotion = true;
-            options.EnableIntervalPromotion = true;
-            options.EnableIntervalDemotion = true;
-        });
-#pragma warning restore IDE0060 // Remove unused parameter
+        private static ElmFactory ElmFactory => CreateCqlApi().AsInternal().Services.ServiceProvider.GetRequiredService<ElmFactory>();
 
         private static Null Null() => new Null().WithResultType(SystemTypes.AnyType);
         private static Null Null(TypeSpecifier type) => new Null().WithResultType(type);
@@ -33,8 +28,8 @@ namespace Hl7.Cql.CqlToElm.Test
         private static List List(TypeSpecifier elementType, params Expression[] elements) => new List { element = elements }.WithResultType(elementType.ToListType());
         private static ChoiceTypeSpecifier Choice(params TypeSpecifier[] types) => new ChoiceTypeSpecifier(types);
 
-        private static Elm.Tuple Tuple(params (string name, Expression value)[] tuple) =>
-            new Elm.Tuple { element = tuple.Select(t => new TupleElement { name = t.name, value = t.value }).ToArray() }
+        private static Tuple Tuple(params (string name, Expression value)[] tuple) =>
+            new Tuple { element = tuple.Select(t => new TupleElement { name = t.name, value = t.value }).ToArray() }
             .WithResultType(TupleType(tuple.Select(t => (t.name, t.value.resultTypeSpecifier)).ToArray()));
         private static TypeSpecifier TupleType(params (string name, TypeSpecifier type)[] tuple) =>
             new TupleTypeSpecifier { element = tuple.Select(t => new TupleElementDefinition { name = t.name, elementType = t.type }).ToArray() };

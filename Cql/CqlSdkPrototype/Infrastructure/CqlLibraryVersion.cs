@@ -6,8 +6,6 @@ public readonly record struct CqlLibraryVersion :
     IComparable<CqlLibraryVersion>,
     IComparable
 {
-    public static CqlLibraryVersion Empty { get; } = new CqlLibraryVersion("");
-
     private readonly string _value;
 
     private CqlLibraryVersion(string value) => _value = value;
@@ -28,13 +26,6 @@ public readonly record struct CqlLibraryVersion :
                    : throw new FormatException("Not a valid ElmLibraryVersion");
     }
 
-    public static CqlLibraryVersion ParseOrEmpty(string s)
-    {
-        return TryParse(s, out var result)
-           ? result
-           : Empty;
-    }
-
     static bool IParsable<CqlLibraryVersion>.TryParse(
         [NotNullWhen(true)] string? s,
         IFormatProvider? provider,
@@ -45,7 +36,7 @@ public readonly record struct CqlLibraryVersion :
 
     public static bool TryParse(string? s, out CqlLibraryVersion result)
     {
-        if (s is null)
+        if (string.IsNullOrEmpty(s))
         {
             result = default;
             return false;

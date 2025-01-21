@@ -1,5 +1,7 @@
-﻿using FluentAssertions;
+using CqlSdkPrototype.Cql.Internal;
+using FluentAssertions;
 using Hl7.Cql.Elm;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -8,23 +10,10 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class IfThenElseTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
-        private Library createLibraryForExpression(string expression, params string[] expectedErrors)
-        {
-            return MakeLibrary($@"
-                library IsTest version '1.0.0'
-
-                define private predicate: {expression}", expectedErrors);
-        }
-
         [TestMethod]
         public void True_Integer_Integer()
         {
-            var library = createLibraryForExpression("if true then 4 else 5");
+            var library = CreateCqlApi().MakeLibraryFromExpression("if true then 4 else 5");
             var ifThenElse = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
 
             ifThenElse.condition.Should().BeLiteralBool(true);
@@ -37,7 +26,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Integer_Decimal()
         {
-            var library = createLibraryForExpression("if true then 4 else 5.0");
+            var library = CreateCqlApi().MakeLibraryFromExpression("if true then 4 else 5.0");
             var ifThenElse = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
 
             ifThenElse.condition.Should().BeLiteralBool(true);
@@ -52,7 +41,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Decimal_Integer()
         {
-            var library = createLibraryForExpression("if false then 4.0 else 5");
+            var library = CreateCqlApi().MakeLibraryFromExpression("if false then 4.0 else 5");
             var ifThenElse = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
 
             ifThenElse.condition.Should().BeLiteralBool(false);
@@ -67,7 +56,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Decimal_String()
         {
-            var library = createLibraryForExpression("if false then 4.0 else 'hello'");
+            var library = CreateCqlApi().MakeLibraryFromExpression("if false then 4.0 else 'hello'");
             var ifThenElse = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
             var expectedType = new ChoiceTypeSpecifier(SystemTypes.DecimalType, SystemTypes.StringType);
 
@@ -89,8 +78,9 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void String_Integer_Integer()
         {
-            var library = createLibraryForExpression("if 'hello' then 4 else 5",
-                Messaging.TypeFoundIsNotExpected(SystemTypes.StringType, SystemTypes.BooleanType));
+            var messageProvider = CreateCqlApi().AsInternal().Services.ServiceProvider.GetRequiredService<MessageProvider>();
+            string[] expectedErrors = [messageProvider.TypeFoundIsNotExpected(SystemTypes.StringType, SystemTypes.BooleanType)];
+            var library = CreateCqlApi().MakeLibraryFromExpression("if 'hello' then 4 else 5", expectedErrors);
 
             var @if = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
             @if.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);

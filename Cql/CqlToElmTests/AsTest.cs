@@ -1,4 +1,4 @@
-﻿using FluentAssertions;
+using FluentAssertions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
@@ -10,34 +10,27 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class AsTest : Base
     {
-
-
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         [TestMethod]
         public void Integer_As_Decimal()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AsTest version '1.0.0'
 
                 define private Integer_As_Decimal: 1 as System.Decimal
-            ", "Expression of type*");
+                """, "Expression of type*");
 
         }
 
         [TestMethod]
         public void ValueSet_As_Vocabulary()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AsTest version '1.0.0'
 
-                valueset ""vs"": 'http://xyz.com'
+                valueset "vs": 'http://xyz.com'
 
-                define private ValueSet_As_Vocabulary: ""vs"" as System.Vocabulary
-            ");
+                define private ValueSet_As_Vocabulary: "vs" as System.Vocabulary
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -51,8 +44,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var nts = (NamedTypeSpecifier)@as.asTypeSpecifier;
                 Assert.AreEqual($"{{{SystemUri}}}Vocabulary", nts.name?.Name);
 
-                var eb = LibraryExpressionBuilder;
-                var delegates = eb.ProcessLibrary(library).CompileAll();
+                var delegates = CreateElmApi().ProcessLibrary(library).CompileAll();
                 var dg = delegates["AsTest-1.0.0", "ValueSet_As_Vocabulary"];
                 var ctx = FhirCqlContext.ForBundle(delegates: delegates);
                 var result = dg.DynamicInvoke(ctx);
@@ -64,11 +56,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_As_Decimal()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library AsTest version '1.0.0'
 
                 define private Null_As_Decimal: null as System.Decimal
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -106,7 +98,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private void AssertAsNull(As @as)
         {
-            var lambda = LibraryExpressionBuilder.Lambda(@as);
+            var lambda = CreateElmApi().Lambda(@as);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
             var result = dg.DynamicInvoke(ctx);
@@ -116,7 +108,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DecimalLiteral_CastAs_Decimal()
         {
-            var library = CreateLibraryForExpression("cast (1.0 as System.Any) as System.Decimal");
+            var library = CreateCqlApi().MakeLibraryFromExpression("cast (1.0 as System.Any) as System.Decimal");
             var castAs = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
 
             castAs.strict.Should().BeTrue();
@@ -127,7 +119,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void BooleanLiteral_CastAs_Decimal()
         {
-            var library = CreateLibraryForExpression("cast (true as System.Any) as System.Decimal");
+            var library = CreateCqlApi().MakeLibraryFromExpression("cast (true as System.Any) as System.Decimal");
             var castAs = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
 
             castAs.strict.Should().BeTrue();
@@ -138,19 +130,19 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FhirId_As_FhirString()
         {
-            var lib = MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary("""
                 library AsTest version '1.0.0'
 
                 using FHIR version '4.0.1'
 
                 define private function f(id FHIR.id): id as FHIR.string
-            ");
-            var @as = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
-            var lambdas = LibraryExpressionBuilder.ProcessLibrary(lib);
+                """);
+            lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
+            var lambdas = CreateElmApi().ProcessLibrary(lib);
             var delegates = lambdas.CompileAll();
-            var dg = delegates[lib.GetVersionedIdentifier(), "f", [typeof(Hl7.Fhir.Model.Id)]];
+            var dg = delegates[lib.GetVersionedIdentifier(), "f", typeof(Hl7.Fhir.Model.Id)];
             var ctx = FhirCqlContext.ForBundle();
-            var result = dg.DynamicInvoke([ctx, new Hl7.Fhir.Model.Id("id")]);
+            var result = dg.DynamicInvoke(ctx, new Hl7.Fhir.Model.Id("id"));
             var fs = result.Should().BeOfType<Hl7.Fhir.Model.FhirString>().Subject;
             fs.Value.Should().Be("id");
         }
@@ -159,7 +151,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Choice_As()
         {
             // from MATGlobalCommonFunctionsFHIR4.cql function "Normalize Interval"
-            var lib = MakeLibrary(@"
+            var lib = CreateCqlApi().MakeLibrary("""
                 library AsTest version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -169,8 +161,8 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define private function f(choice Choice<FHIR.dateTime, FHIR.Range>):
                     choice as FHIR.Range
-            ");
-            var lambdas = LibraryExpressionBuilder.ProcessLibrary(lib);
+                """);
+            _ = CreateElmApi().ProcessLibrary(lib);
         }
     }
 }

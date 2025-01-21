@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
@@ -9,19 +9,14 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class TypeExtentTest : Base
     {
-        [ClassInitialize]
-#pragma warning disable IDE0060 // Remove unused parameter
-        public static void Initialize(TestContext context) => ClassInitialize();
-#pragma warning restore IDE0060 // Remove unused parameter
-
         [TestMethod]
         public void TypeExtent_Minimum_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Integer: minimum Integer
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -38,7 +33,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Integer", nts.name.Name);
 
-                var lambda = LibraryExpressionBuilder.Lambda(extent);
+                var lambda = CreateElmApi().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -51,11 +46,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Integer()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Integer: maximum Integer
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -72,7 +67,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Integer", nts.name.Name);
 
-                var lambda = LibraryExpressionBuilder.Lambda(extent);
+                var lambda = CreateElmApi().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -85,11 +80,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_Long()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Long: minimum Long
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -106,7 +101,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Long", nts.name.Name);
 
-                var lambda = LibraryExpressionBuilder.Lambda(extent);
+                var lambda = CreateElmApi().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -119,11 +114,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Long()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Long: maximum Long
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -140,7 +135,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Long", nts.name.Name);
 
-                var lambda = LibraryExpressionBuilder.Lambda(extent);
+                var lambda = CreateElmApi().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -153,11 +148,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_Decimal()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Decimal: minimum Decimal
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -174,7 +169,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Decimal", nts.name.Name);
 
-                var lambda = LibraryExpressionBuilder.Lambda(extent);
+                var lambda = CreateElmApi().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -187,11 +182,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Decimal()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Decimal: maximum Decimal
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -208,7 +203,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Decimal", nts.name.Name);
 
-                var lambda = LibraryExpressionBuilder.Lambda(extent);
+                var lambda = CreateElmApi().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -220,11 +215,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_Quantity()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Quantity: minimum Quantity
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -241,7 +236,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Quantity", nts.name.Name);
 
-                var lambda = LibraryExpressionBuilder.Lambda(extent);
+                var lambda = CreateElmApi().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -256,11 +251,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Quantity()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Quantity: maximum Quantity
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -277,7 +272,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Quantity", nts.name.Name);
 
-                var lambda = LibraryExpressionBuilder.Lambda(extent);
+                var lambda = CreateElmApi().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -292,11 +287,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_Date()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Date: minimum Date
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -313,7 +308,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Date", nts.name.Name);
 
-                var lambda = LibraryExpressionBuilder.Lambda(extent);
+                var lambda = CreateElmApi().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -325,11 +320,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Date()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Date: maximum Date
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -346,7 +341,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Date", nts.name.Name);
 
-                var lambda = LibraryExpressionBuilder.Lambda(extent);
+                var lambda = CreateElmApi().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -358,11 +353,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_DateTime()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_DateTime: minimum DateTime
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -379,7 +374,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}DateTime", nts.name.Name);
 
-                var lambda = LibraryExpressionBuilder.Lambda(extent);
+                var lambda = CreateElmApi().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -391,11 +386,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_DateTime()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_DateTime: maximum DateTime
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -412,7 +407,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}DateTime", nts.name.Name);
 
-                var lambda = LibraryExpressionBuilder.Lambda(extent);
+                var lambda = CreateElmApi().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -424,11 +419,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_Time()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Time: minimum Time
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -445,7 +440,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Time", nts.name.Name);
 
-                var lambda = LibraryExpressionBuilder.Lambda(extent);
+                var lambda = CreateElmApi().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -457,11 +452,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Time()
         {
-            var library = MakeLibrary(@"
+            var library = CreateCqlApi().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Time: maximum Time
-            ");
+                """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
             Assert.IsNotNull(library.statements[0].expression.localId);
@@ -478,7 +473,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Time", nts.name.Name);
 
-                var lambda = LibraryExpressionBuilder.Lambda(extent);
+                var lambda = CreateElmApi().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);

@@ -4,8 +4,6 @@ namespace CqlSdkPrototype.Infrastructure;
 
 public readonly partial record struct CqlLibraryString
 {
-    public static CqlLibraryString Empty { get; } = new(CqlVersionedLibraryIdentifier.Empty, string.Empty);
-
     public static CqlLibraryString FromIdentifierAndString(
         CqlVersionedLibraryIdentifier versionedLibraryIdentifier,
         string cqlContent)
@@ -22,22 +20,25 @@ public readonly partial record struct CqlLibraryString
                     (\s+\r?\n?)*      # Skip whitespace and newlines
                     library           # until "library" is found
                     \s+
-                    (?<id>\S+)       # The identifier of the library
-                    \s+
-                    version
-                    \s'(?<ver>[^']+)' # The version of the library between single quotes
+                    (?<lib>\S+)       # The name of the library
+                    (
+                      \s+
+                      version
+                      \s'(?<ver>[^']+)' # The version of the library between single quotes
+                    )?                # Version is optional
                     """,
                     RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline)]
     private static partial Regex LibraryNameAndVersionRegex();
 
-    public static CqlLibraryString FromCql(string cqlContent)
+    public static CqlLibraryString Parse(string cqlContent)
     {
         var match = LibraryNameAndVersionRegex().Match(cqlContent);
         if (!match.Success)
             throw new FormatException("Could not get library identifier and version from provided cql string.");
-        var id = match.Groups["id"].Value;
-        var ver = match.Groups["ver"].Value;
-        var libVer = CqlVersionedLibraryIdentifier.FromNameAndVersion(CqlLibraryIdentifier.Parse(id), CqlLibraryVersion.Parse(ver));
+
+        var lib = match.Groups["lib"].Value;
+        var ver = match.Groups["ver"].Value.NullIfEmpty();
+        var libVer = CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(lib, ver);
         return new CqlLibraryString(libVer, cqlContent);
     }
 
@@ -60,4 +61,9 @@ public readonly partial record struct CqlLibraryString
         versionedLibraryIdentifier = VersionedLibraryIdentifier;
         cql = Cql;
     }
+}
+
+file static class StringExtensions
+{
+    public static string? NullIfEmpty(this string? text) => string.IsNullOrEmpty(text) ? null : text;
 }
