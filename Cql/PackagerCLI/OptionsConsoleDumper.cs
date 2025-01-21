@@ -6,11 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Microsoft.Extensions.Options;
-using System.Runtime.CompilerServices;
-using System.Text;
-using Microsoft.Extensions.Logging;
-
 namespace Hl7.Cql.Packager;
 
 internal class OptionsConsoleDumper(

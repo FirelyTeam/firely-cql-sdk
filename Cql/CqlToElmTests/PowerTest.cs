@@ -1,6 +1,5 @@
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test
 {

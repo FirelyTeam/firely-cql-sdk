@@ -1,9 +1,5 @@
 ﻿using Hl7.Cql.Fhir;
 using Hl7.Fhir.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.IO;
-using System.Linq;
 
 namespace CoreTests
 {

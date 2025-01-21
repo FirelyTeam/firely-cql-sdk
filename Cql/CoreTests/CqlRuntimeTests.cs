@@ -1,7 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Hl7.Cql.Runtime;
-using System.Linq;
+﻿using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
 
 namespace CoreTests

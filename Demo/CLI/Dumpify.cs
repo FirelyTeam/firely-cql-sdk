@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Dumpify;
+﻿namespace Dumpify;
 
 /// <summary>
 /// The Dumpify Nuget package is problematic because it does not have a strong name.

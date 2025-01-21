@@ -6,10 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
 namespace Hl7.Cql.Abstractions.Infrastructure;
 
 internal static class DirectoryInfoExtensions

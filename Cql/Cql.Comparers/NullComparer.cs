@@ -7,9 +7,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Collections;
-using System.Collections.Generic;
-
 namespace Hl7.Cql.Comparers
 {
     internal class NullComparer<T> : IComparer<T>, IComparer

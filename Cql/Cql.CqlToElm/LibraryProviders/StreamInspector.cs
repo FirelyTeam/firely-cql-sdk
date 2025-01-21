@@ -1,14 +1,5 @@
 ﻿using Hl7.Cql.Elm;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Text.Json;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using Hl7.Cql.CqlToElm.Visitors;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Hl7.Cql.CqlToElm.LibraryProviders
 {

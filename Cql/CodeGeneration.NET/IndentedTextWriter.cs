@@ -1,6 +1,4 @@
-﻿using System.IO;
-
-namespace Hl7.Cql.CodeGeneration.NET;
+﻿namespace Hl7.Cql.CodeGeneration.NET;
 
 internal readonly record struct IndentedTextWriter(TextWriter TextWriter, int Indent = 0) : IAddIndentMutable<IndentedTextWriter>
 {

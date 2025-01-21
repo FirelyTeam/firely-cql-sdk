@@ -1,9 +1,5 @@
 ﻿using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Hl7.Cql.CqlToElm
 {

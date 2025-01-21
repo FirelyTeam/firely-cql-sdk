@@ -13,7 +13,6 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
-using System.Text.Json;
 using CqlSdkPrototype.Runtime;
 using static Hl7.Fhir.Model.Parameters;
 using Library = Hl7.Fhir.Model.Library;

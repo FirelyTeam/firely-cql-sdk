@@ -1,6 +1,3 @@
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Cql.Extensions;
@@ -11,7 +8,6 @@ using FluentAssertions.Collections;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.DependencyInjection;
 using Expression = Hl7.Cql.Elm.Expression;
 using M = Hl7.Cql.Model;
 

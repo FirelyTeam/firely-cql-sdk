@@ -1,7 +1,3 @@
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using FluentAssertions;
-using System;
-
 namespace Hl7.Cql.Packaging.Tests;
 
 [TestClass]

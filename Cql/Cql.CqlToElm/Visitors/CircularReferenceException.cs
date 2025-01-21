@@ -1,5 +1,3 @@
-using System;
-
 namespace Hl7.Cql.CqlToElm.Visitors;
 
 /// <summary>

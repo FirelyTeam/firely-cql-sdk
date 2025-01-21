@@ -8,13 +8,6 @@
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json.Serialization;
-using System.Xml;
-using System.Xml.Serialization;
 using Hl7.Cql.Compiler;
 
 namespace Hl7.Cql.Elm

@@ -4,7 +4,6 @@ using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace CqlSdkPrototype.Cql;
 

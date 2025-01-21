@@ -1,7 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace CoreTests;
+﻿namespace CoreTests;
 
 internal static class AssertExtensions
 {

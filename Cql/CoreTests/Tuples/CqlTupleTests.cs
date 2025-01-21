@@ -1,17 +1,12 @@
 ﻿#nullable enable
-using System.Runtime.CompilerServices;
-using System.Text.Json;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Hl7.Cql.Fhir;
-using Hl7.Cql.Runtime.Serialization;
-using System.IO;
-using System.Linq;
-using CqlSdkPrototype.Runtime;
-using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Primitives;
-using Hl7.Cql.Abstractions.Infrastructure;
-using CqlSdkPrototype.Runtime.Extensions;
 using CqlSdkPrototype.Infrastructure;
+using CqlSdkPrototype.Runtime;
+using CqlSdkPrototype.Runtime.Extensions;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Fhir;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime.Serialization;
 
 namespace CoreTests.Tuples;
 

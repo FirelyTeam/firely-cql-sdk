@@ -1,11 +1,8 @@
-using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime.Hosting;
 using Hl7.Fhir.Model;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoreTests;
 

@@ -2,18 +2,12 @@ using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Xml.Serialization;
 using CqlSdkPrototype.Cql.Internal;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
+    using Expression = Hl7.Cql.Elm.Expression;
+
     [TestClass]
     public class XmlTest : Base
     {

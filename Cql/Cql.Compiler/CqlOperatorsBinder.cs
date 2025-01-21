@@ -6,19 +6,17 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
-using System.Linq.Expressions;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Expressions;
-using Hl7.Cql.Conversion;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler
 {
+    using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
+
     /// <summary>
     /// Facilitates binding to <see cref="ICqlOperators"/> methods,
     /// by converting the method name and <see cref="Expression"/> arguments

@@ -1,13 +1,7 @@
-using Antlr4.Runtime.Misc;
 using Antlr4.Runtime.Tree;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System;
-using System.Diagnostics;
-using System.Diagnostics.Tracing;
-using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {

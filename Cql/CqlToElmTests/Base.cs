@@ -3,33 +3,25 @@ using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Diagnostics;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Internal;
 using CqlSdkPrototype.Runtime;
-using Expression = Hl7.Cql.Elm.Expression;
 using CqlSdkPrototype.Runtime.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Model;
-using ChoiceTypeSpecifier = Hl7.Cql.Elm.ChoiceTypeSpecifier;
-using IntervalTypeSpecifier = Hl7.Cql.Elm.IntervalTypeSpecifier;
-using ListTypeSpecifier = Hl7.Cql.Elm.ListTypeSpecifier;
-using NamedTypeSpecifier = Hl7.Cql.Elm.NamedTypeSpecifier;
-using TupleTypeSpecifier = Hl7.Cql.Elm.TupleTypeSpecifier;
-using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
+    using Expression = Hl7.Cql.Elm.Expression;
+    using ChoiceTypeSpecifier = Hl7.Cql.Elm.ChoiceTypeSpecifier;
+    using IntervalTypeSpecifier = Hl7.Cql.Elm.IntervalTypeSpecifier;
+    using ListTypeSpecifier = Hl7.Cql.Elm.ListTypeSpecifier;
+    using NamedTypeSpecifier = Hl7.Cql.Elm.NamedTypeSpecifier;
+    using TupleTypeSpecifier = Hl7.Cql.Elm.TupleTypeSpecifier;
+    using TypeSpecifier = Hl7.Cql.Elm.TypeSpecifier;
+
     public class Base
     {
         protected const string SystemUri = "urn:hl7-org:elm-types:r1";

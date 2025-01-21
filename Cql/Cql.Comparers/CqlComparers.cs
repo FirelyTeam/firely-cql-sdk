@@ -8,13 +8,6 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
-using System;
-using System.Collections;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
 
 namespace Hl7.Cql.Comparers
 {

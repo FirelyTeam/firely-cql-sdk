@@ -6,10 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.IO;
-using System.Reflection;
-using System.Text;
-
 namespace Hl7.Cql.CodeGeneration.NET
 {
     internal static class TextWriterExtensions

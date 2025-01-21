@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using Hl7.Cql.Abstractions;
+﻿using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Primitives;

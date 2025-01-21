@@ -1,6 +1,5 @@
 using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
-using System;
 
 namespace Hl7.Cql.CqlToElm
 {

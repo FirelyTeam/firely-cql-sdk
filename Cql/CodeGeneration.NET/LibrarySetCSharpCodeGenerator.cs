@@ -11,16 +11,9 @@ using Hl7.Cql.CodeGeneration.NET.Visitors;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Operators;
-using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.CodeGeneration.NET;
 

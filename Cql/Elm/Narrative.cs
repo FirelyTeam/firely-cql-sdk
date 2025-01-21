@@ -1,5 +1,3 @@
-using System.Xml.Serialization;
-
 namespace Hl7.Cql.Elm;
 
 #pragma warning disable CS1591

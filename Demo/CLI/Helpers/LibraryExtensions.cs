@@ -6,12 +6,10 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Diagnostics;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
-using System.Reflection;
 using CqlSdkPrototype.Runtime;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packaging;

@@ -10,10 +10,6 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 
 namespace Hl7.Cql.Runtime
 {

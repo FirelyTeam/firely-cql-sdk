@@ -1,6 +1,4 @@
 ﻿#nullable enable
-using System.IO;
-using System.Linq;
 using CoreTests.Tuples;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Runtime;
@@ -8,7 +6,6 @@ using CqlSdkPrototype.Runtime.Extensions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoreTests;
 

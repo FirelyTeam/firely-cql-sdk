@@ -7,10 +7,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
-using System.IO;
-using System.Text;
-
 namespace Hl7.Cql.Logging
 {
     internal class TextWriterLogger : ICqlLogger

@@ -7,11 +7,6 @@
  */
 
 
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Xml;
-
 namespace Hl7.Cql.Elm.Serialization
 {
     internal class XmlQualifiedNameConverter : JsonConverter<XmlQualifiedName>

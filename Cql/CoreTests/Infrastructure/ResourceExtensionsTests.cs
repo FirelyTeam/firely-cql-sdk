@@ -1,7 +1,5 @@
-using System;
 using Hl7.Cql.Packaging;
 using Hl7.Fhir.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoreTests.Infrastructure;
 

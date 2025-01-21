@@ -1,6 +1,4 @@
-using System;
 using Hl7.Cql.Primitives;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoreTests.Primitives;
 
