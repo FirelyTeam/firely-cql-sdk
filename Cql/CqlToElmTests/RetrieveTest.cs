@@ -16,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Retrieve_AllTerms()
         {
             var cqlApi = CreateCqlApi();
-            var cqlLibraryString = CqlLibraryString.FromCql("""
+            var cqlLibraryString = CqlLibraryString.Parse("""
                                    library RetrieveTest version '1.0.0'
 
                                    using FHIR version '4.0.1'

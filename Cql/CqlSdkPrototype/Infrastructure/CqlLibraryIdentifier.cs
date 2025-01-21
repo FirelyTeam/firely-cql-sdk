@@ -6,8 +6,6 @@ public readonly record struct CqlLibraryIdentifier :
     IComparable<CqlLibraryIdentifier>,
     IComparable
 {
-    public static CqlLibraryIdentifier Empty { get; } = new CqlLibraryIdentifier("");
-
     private readonly string _value;
 
     private CqlLibraryIdentifier(string value) => _value = value;

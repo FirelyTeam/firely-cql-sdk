@@ -19,7 +19,7 @@ namespace Hl7.Cql.CqlToElm.Test;
 
 internal static class TestExtensions
 {
-    private static CqlLibraryString FHIRHelpers { get; } = CqlLibraryString.FromCql(File.ReadAllText(@"Input\FHIRHelpers-4.0.1.cql"));
+    private static CqlLibraryString FHIRHelpers { get; } = CqlLibraryString.Parse(File.ReadAllText(@"Input\FHIRHelpers-4.0.1.cql"));
 
     private static Library Library { get; } = new(identifier: new VersionedIdentifier { id = "Lambdas", version = "1.0.0" });
 
@@ -30,7 +30,7 @@ internal static class TestExtensions
         string cql,
         params string[] expectedErrors)
     {
-        var cqlLibraryString = CqlLibraryString.FromCql(cql);
+        var cqlLibraryString = CqlLibraryString.Parse(cql);
 
         var library = cqlApi
                       .AddCqlLibraryString(cqlLibraryString)

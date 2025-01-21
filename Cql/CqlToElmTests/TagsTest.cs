@@ -14,7 +14,7 @@ public class TagsTest : Base
     [Ignore("The C# CQL-to-ELM does not support capturing annotation tags yet. Once that is ready, this test must be completed. It will be moved to CoreTests.AnnotationTagsTest.TestAttributesWithQuotes for the time being.")]
     public void Tags_Containing_Quotes_Must_Be_Escaped_In_CSharp()
     {
-        var cqlLibraryString = CqlLibraryString.FromCql(
+        var cqlLibraryString = CqlLibraryString.Parse(
             """
 
              library Tags version '1.0.0'

@@ -16,7 +16,7 @@ namespace CoreTests.Infrastructure
                 CqlLibraryIdentifier.Parse("TestLibrary"));
 
             // Act
-            var result = CqlLibraryString.FromCql(cqlContent);
+            var result = CqlLibraryString.Parse(cqlContent);
 
             // Assert
             Assert.AreEqual(expectedIdentifier, result.VersionedLibraryIdentifier);
@@ -33,7 +33,7 @@ namespace CoreTests.Infrastructure
                 CqlLibraryVersion.Parse("1.0.0"));
 
             // Act
-            var result = CqlLibraryString.FromCql(cqlContent);
+            var result = CqlLibraryString.Parse(cqlContent);
 
             // Assert
             Assert.AreEqual(expectedIdentifier, result.VersionedLibraryIdentifier);
@@ -50,7 +50,7 @@ namespace CoreTests.Infrastructure
                 CqlLibraryVersion.Parse("1.0.0"));
 
             // Act
-            var result = CqlLibraryString.FromCql(cqlContent);
+            var result = CqlLibraryString.Parse(cqlContent);
 
             // Assert
             Assert.AreEqual(expectedIdentifier, result.VersionedLibraryIdentifier);
@@ -58,26 +58,26 @@ namespace CoreTests.Infrastructure
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void FromCql_InvalidCqlContent_ThrowsArgumentException()
+        [ExpectedException(typeof(FormatException))]
+        public void FromCql_InvalidCqlContent_ThrowsFormatException()
         {
             // Arrange
             string cqlContent = "invalid content";
 
             // Act
-            CqlLibraryString.FromCql(cqlContent);
+            CqlLibraryString.Parse(cqlContent);
 
             // Assert is handled by ExpectedException
         }
 
         [TestMethod]
-        public void FromCql_EmptyCqlContent_ThrowsArgumentException()
+        public void FromCql_EmptyCqlContent_ThrowsFormatException()
         {
             // Arrange
             string cqlContent = "";
 
             // Act & Assert
-            Assert.ThrowsException<ArgumentException>(() => CqlLibraryString.FromCql(cqlContent));
+            Assert.ThrowsException<FormatException>(() => CqlLibraryString.Parse(cqlContent));
         }
     }
 }

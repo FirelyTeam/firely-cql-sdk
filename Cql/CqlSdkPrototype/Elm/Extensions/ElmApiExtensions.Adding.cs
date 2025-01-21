@@ -33,13 +33,13 @@ public static partial class ElmApiExtensions
         if (file.Exists)
             return elmApi.AddElmFile(file);
 
-        if (versionedLibraryIdentifier.Version.IsEmpty)
+        if (versionedLibraryIdentifier.Version is null)
             throw new FileNotFoundException($"Could not find file '{file.FullName}'.");
 
         return elmApi.UseLogger((elmApi, logger) =>
         {
             logger.LogWarning("Could not load library from file with name and version, trying without version: {file}", file.FullName);
-            file = new FileInfo(Path.Combine(directory.FullName, $"{versionedLibraryIdentifier with { Version = CqlLibraryVersion.Empty }}.json"));
+            file = new FileInfo(Path.Combine(directory.FullName, $"{versionedLibraryIdentifier with { Version = null }}.json"));
             return elmApi.AddElmFile(file);
         });
     }

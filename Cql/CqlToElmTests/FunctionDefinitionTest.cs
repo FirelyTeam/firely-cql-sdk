@@ -280,7 +280,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void CSharp_Keyword_Parameter_Name()
         {
             var cqlApi = CreateCqlApi();
-            var cqlLibraryString = CqlLibraryString.FromCql(
+            var cqlLibraryString = CqlLibraryString.Parse(
                 """
                 library FuncTest version '1.0.0'
 
