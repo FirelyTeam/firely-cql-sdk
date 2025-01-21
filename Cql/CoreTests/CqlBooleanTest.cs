@@ -1,6 +1,5 @@
 ﻿using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoreTests;
 

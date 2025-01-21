@@ -6,9 +6,6 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
-using System.Reflection;
-using System.Text.Json;
-using CqlSdkPrototype;
 using CqlSdkPrototype.Runtime;
 using Hl7.Cql.CodeGeneration.NET;
 

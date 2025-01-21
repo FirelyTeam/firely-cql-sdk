@@ -9,13 +9,11 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 
 namespace Hl7.Cql.Runtime
 {
+    using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
+
     internal partial class CqlOperators
     {
         #region Interval

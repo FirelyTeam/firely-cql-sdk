@@ -6,9 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
-using System.Linq.Expressions;
-using System.Reflection;
-
 namespace Hl7.Cql.CodeGeneration.NET
 {
     internal static class DebugViewHelper

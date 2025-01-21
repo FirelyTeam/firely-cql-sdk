@@ -1,8 +1,6 @@
 #nullable enable
-using System;
-using System.Collections.Generic;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 #pragma warning disable CS8500 // This takes the address of, gets the size of, or declares a pointer to a managed type
 
 namespace CoreTests.Abstractions;

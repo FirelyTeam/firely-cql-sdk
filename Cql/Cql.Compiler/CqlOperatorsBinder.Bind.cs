@@ -5,17 +5,9 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Reflection;
-using System.Security;
-using System.Text;
+
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Microsoft.Extensions.Logging;
-using Expression = System.Linq.Expressions.Expression;
 
 
 namespace Hl7.Cql.Compiler;

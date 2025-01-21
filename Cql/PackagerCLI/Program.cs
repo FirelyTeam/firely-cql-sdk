@@ -7,10 +7,6 @@
  */
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-using System.Globalization;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Options;
 using Log = Serilog.Log;
 
 namespace Hl7.Cql.Packager;

@@ -7,9 +7,6 @@
  */
 
 using Hl7.Cql.Elm;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Builtin
 {

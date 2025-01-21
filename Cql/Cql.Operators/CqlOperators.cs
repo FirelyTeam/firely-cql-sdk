@@ -14,13 +14,11 @@ using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 
 namespace Hl7.Cql.Runtime
 {
+    using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
+
     /// <summary>
     /// Impelements <see cref="ICqlOperators"/>.
     /// </summary>

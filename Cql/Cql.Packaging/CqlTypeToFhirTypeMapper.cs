@@ -10,7 +10,6 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Model;
-using System.Reflection;
 using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Packaging

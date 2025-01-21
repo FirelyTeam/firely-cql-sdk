@@ -1,7 +1,4 @@
-﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-
-namespace CoreTests.Elm
+﻿namespace CoreTests.Elm
 {
     [TestClass]
     public class TestToString

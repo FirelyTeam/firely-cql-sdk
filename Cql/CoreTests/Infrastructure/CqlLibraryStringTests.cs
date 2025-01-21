@@ -1,6 +1,4 @@
-using System;
 using CqlSdkPrototype.Infrastructure;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoreTests.Infrastructure
 {

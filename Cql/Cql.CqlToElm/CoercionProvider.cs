@@ -1,16 +1,4 @@
-﻿using Antlr4.Runtime;
-using Hl7.Cql.CqlToElm.Builtin;
-using Hl7.Cql.Elm;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.CqlToElm
 {

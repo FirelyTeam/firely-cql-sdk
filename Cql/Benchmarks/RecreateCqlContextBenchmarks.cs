@@ -1,8 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
-using System;
-using System.Runtime.CompilerServices;
 using BenchmarkDotNet.Jobs;
 
 namespace Benchmarks;

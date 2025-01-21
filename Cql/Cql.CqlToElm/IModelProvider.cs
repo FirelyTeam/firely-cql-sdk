@@ -1,8 +1,4 @@
 ﻿using Hl7.Cql.Model;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 
 namespace Hl7.Cql.CqlToElm
 {

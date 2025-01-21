@@ -1,9 +1,6 @@
-﻿using Antlr4.Runtime.Misc;
-using Hl7.Cql.CqlToElm.Builtin;
+﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using System;
-using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {

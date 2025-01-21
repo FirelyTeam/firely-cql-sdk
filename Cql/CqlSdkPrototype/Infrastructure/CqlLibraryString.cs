@@ -1,6 +1,4 @@
-﻿using System.Text.RegularExpressions;
-
-namespace CqlSdkPrototype.Infrastructure;
+﻿namespace CqlSdkPrototype.Infrastructure;
 
 public readonly partial record struct CqlLibraryString
 {

@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-
-namespace Hl7.Cql.Packager;
+﻿namespace Hl7.Cql.Packager;
 
 internal class PackagerCliOptions {
     public const string ConfigSection = "PackagerCli";

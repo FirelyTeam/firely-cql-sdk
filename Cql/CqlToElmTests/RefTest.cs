@@ -1,14 +1,13 @@
-using FluentAssertions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using Hl7.Cql.Runtime;
 using M = Hl7.Fhir.Model;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
+    using Expression = Hl7.Cql.Elm.Expression;
+
     [TestClass]
     public class RefTest : Base
     {

@@ -6,10 +6,6 @@
 //  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
 //  */
 
-using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Compiler;

@@ -1,7 +1,4 @@
-using System.Collections.Generic;
-using FluentAssertions;
 using Hl7.Cql.Elm;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoreTests.Elm
 {

@@ -1,8 +1,4 @@
-﻿using System.Linq;
-using System.Reflection;
-using FluentAssertions;
-using Hl7.Cql.Abstractions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Hl7.Cql.Abstractions;
 using static System.Reflection.BindingFlags;
 
 namespace CoreTests;

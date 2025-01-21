@@ -9,7 +9,6 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
-using System;
 
 namespace Hl7.Cql.Comparers
 {

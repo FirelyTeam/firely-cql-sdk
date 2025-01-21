@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using Hl7.Cql.Abstractions;
+﻿using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Runtime.Invokers;

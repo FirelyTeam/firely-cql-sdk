@@ -7,9 +7,6 @@
  */
 
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.Primitives;
-using System.Collections.Generic;
-using System.Reflection;
 
 namespace Hl7.Cql.Operators
 {

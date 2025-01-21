@@ -1,12 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using System.Text.Json.Serialization.Metadata;
-using System.Xml.Serialization;
-
 namespace Hl7.Cql.Elm.Serialization;
 
 internal class PolymorphicTypeResolver : DefaultJsonTypeInfoResolver

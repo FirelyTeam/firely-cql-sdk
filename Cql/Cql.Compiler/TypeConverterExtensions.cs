@@ -8,11 +8,12 @@
 
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Elm;
-using System;
 using CM = System.ComponentModel;
 
 namespace Hl7.Cql.Compiler
 {
+    using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
+
     internal static class TypeConverterExtensions
     {
         public static TypeConverter AddElmConversions(this TypeConverter converter)

@@ -9,13 +9,11 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using ListSortDirection = System.ComponentModel.ListSortDirection;
 
 namespace Hl7.Cql.Operators
 {
+    using ListSortDirection = System.ComponentModel.ListSortDirection;
+
     /// <summary>
     /// Defines the operators in the CQL specification.
     /// </summary>

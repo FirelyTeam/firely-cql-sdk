@@ -6,13 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Diagnostics;
-using System.Globalization;
-using System.Runtime.CompilerServices;
 using CqlSdkPrototype.Logging;
-using Hl7.Cql.Abstractions.Exceptions;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
 

@@ -1,18 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Text.Json;
-using System.Text.Json.Nodes;
-using System.Text.Json.Serialization;
 using Hl7.Cql.Elm.Serialization;
-using System.Text.Json.Serialization.Metadata;
-using System.Xml.Serialization;
 using Hl7.Cql.Abstractions.Exceptions;
-using InvalidOperationException = System.InvalidOperationException;
-using PropAndSpecified=(System.Text.Json.Serialization.Metadata.JsonPropertyInfo valueProp, System.Text.Json.Serialization.Metadata.JsonPropertyInfo valuePropSpecified);
 
 namespace Hl7.Cql.Elm;
 

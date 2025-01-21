@@ -10,23 +10,12 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using System.Security.Cryptography;
-using System.Text;
 using Hl7.Cql.Elm;
-using Microsoft.CodeAnalysis.Text;
-using Microsoft.CodeAnalysis.Emit;
-using Library = Hl7.Cql.Elm.Library;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
+    using Library = Hl7.Cql.Elm.Library;
+
     internal class AssemblyCompiler
     {
         private static readonly EmitOptions DefaultEmitOptions = new();

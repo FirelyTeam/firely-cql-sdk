@@ -8,7 +8,6 @@
 
 
 using Hl7.Cql.Abstractions;
-using System.Runtime.CompilerServices;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Comparers

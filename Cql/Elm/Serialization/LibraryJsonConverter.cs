@@ -8,10 +8,6 @@
 
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-using System;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-
 namespace Hl7.Cql.Elm.Serialization
 {
     internal class LibraryJsonConverter : JsonConverter<Library>

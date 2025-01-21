@@ -7,11 +7,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
-using System.Globalization;
-using System.Text;
-using System.Text.RegularExpressions;
-
 namespace Hl7.Cql.Iso8601
 {
     /// <summary>

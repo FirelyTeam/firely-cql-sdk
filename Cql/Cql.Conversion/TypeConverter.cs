@@ -8,11 +8,7 @@
 
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Conversion
 {

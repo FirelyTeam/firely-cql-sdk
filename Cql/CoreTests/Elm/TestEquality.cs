@@ -1,6 +1,4 @@
-﻿using FluentAssertions;
-using Hl7.Cql.Elm;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Hl7.Cql.Elm;
 
 namespace CoreTests.Elm
 {

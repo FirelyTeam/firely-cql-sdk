@@ -8,11 +8,6 @@
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-using System;
-using System.Globalization;
-using System.Runtime.Serialization;
-using System.Xml;
-
 namespace Hl7.Cql.Elm
 {
     internal static class Initializers

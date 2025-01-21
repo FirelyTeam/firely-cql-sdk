@@ -1,8 +1,5 @@
-using FluentAssertions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 
 namespace Hl7.Cql.CqlToElm.Test
 {

@@ -6,12 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Runtime.Serialization;
-using Microsoft.CodeAnalysis.CSharp;
-
 namespace Hl7.Cql.CodeGeneration.NET;
 
 internal static class StringExtensions

@@ -2,12 +2,12 @@
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using static Hl7.Fhir.Model.Parameters;
 
 namespace CoreTests
 {
+    using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
+
     [TestClass]
     [TestCategory("UnitTest")]
     public class FhirTypeConverterTests

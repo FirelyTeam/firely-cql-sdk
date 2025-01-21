@@ -5,9 +5,7 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
+
 using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.Compiler;

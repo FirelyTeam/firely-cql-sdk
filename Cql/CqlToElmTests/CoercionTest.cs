@@ -1,12 +1,11 @@
-using FluentAssertions;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Linq;
 using CqlSdkPrototype.Cql.Internal;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
+    using Tuple = Hl7.Cql.Elm.Tuple;
+    using Expression = Hl7.Cql.Elm.Expression;
+
     [TestClass]
     public class CoercionTest : Base
     {

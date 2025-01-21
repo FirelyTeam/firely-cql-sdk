@@ -7,11 +7,7 @@
  */
 #pragma warning disable IDE1006 // Naming violation suppressed.
 
-using System;
 using Hl7.Cql.Abstractions.Exceptions;
-using System.Diagnostics;
-using System.Text.Json.Serialization;
-using System.Xml.Serialization;
 
 // ReSharper disable InconsistentNaming
 
