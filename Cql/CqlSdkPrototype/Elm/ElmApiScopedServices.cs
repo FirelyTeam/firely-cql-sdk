@@ -2,7 +2,7 @@
 
 namespace CqlSdkPrototype.Elm;
 
-internal class ElmApiScopedState(IServiceScope scope) : IDisposable
+internal class ElmApiScopedServices(IServiceScope scope) : IDisposable
 {
     public LibrarySetExpressionBuilder LibrarySetExpressionBuilder { get; } = scope.ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
 

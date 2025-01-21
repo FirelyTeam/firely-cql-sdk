@@ -4,10 +4,10 @@ internal static class LoggingServiceCollectionExtensions
 {
     public static IServiceCollection AddExternalLogging(
         this IServiceCollection services,
-        ILoggerFactory loggerFactory)
+        ILoggerFactory? loggerFactory)
     {
         services.AddOptions();
-        services.TryAdd(ServiceDescriptor.Singleton(loggerFactory));
+        services.TryAdd(ServiceDescriptor.Singleton(loggerFactory ?? NullLoggerFactory.Instance));
         services.TryAdd(ServiceDescriptor.Singleton(typeof(ILogger<>), typeof(Logger<>)));
         return services;
     }

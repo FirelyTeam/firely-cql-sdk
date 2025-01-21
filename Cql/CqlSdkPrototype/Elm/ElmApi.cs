@@ -10,42 +10,56 @@ using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Elm;
 
-public class ElmApi :
+public sealed class ElmApi :
     IElmApiExtendable<ElmApi>,
     IElmApiInternal<ElmApi>
 {
     public ElmApi(
         ILoggerFactory? loggerFactory = null,
-        ElmApiOptions? options = null) : this(ElmApiState.Create(loggerFactory ?? NullLoggerFactory.Instance, options ?? ElmApiOptions.Default)) { }
-
-    internal ElmApi(ElmApiState state) => _state = state; // Might make this public later. Used for testing now.
+        ElmApiOptions? options = null)
+    {
+        options ??= ElmApiOptions.Default;
+        var entries = ElmApiStateEntryDictionary.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+        _entries = entries;
+        _services = ElmApiServices.Create(loggerFactory);
+        _options = options;
+    }
 
     #region State
 
-    private ElmApiState _state;
+    private ElmApiServices _services;
+    private ElmApiStateEntryDictionary _entries;
+    private ElmApiOptions _options;
 
-    ElmApiOptions IElmApiExtendable<ElmApi>.Options => _state.Options;
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry> IElmApiExtendable<ElmApi>.Entries => _state.Entries;
+    ElmApiOptions IElmApiExtendable<ElmApi>.Options => _options;
+    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry> IElmApiExtendable<ElmApi>.Entries => _entries;
 
     private ElmApi WithEntries(
         ElmApiStateEntryDictionary entries)
     {
-        _state = _state with { Entries = entries };
+        if (ReferenceEquals(_entries, entries))
+            return this;
+
+        _entries = entries;
         return this;
     }
 
     public ElmApi WithOptions(
         Func<ElmApiOptions, ElmApiOptions> replaceOptions)
     {
-        var newOptions = replaceOptions(_state.Options);
-        if (!ReferenceEquals(_state.Options, newOptions))
-            _state = _state with { Options = newOptions };
+        var newOptions = replaceOptions(_options);
+        if (ReferenceEquals(_options, newOptions))
+            return this;
+
+        _options = newOptions;
+        _services.ServiceProvider.Dispose();
+        _services = ElmApiServices.Create(_services.LoggerFactory);
         return this;
     }
 
-    TResult IElmApiExtendable<ElmApi>.UseLogger<TResult>(Func<ElmApi, ILogger<ElmApi>, TResult> action) => action(this, _state.Logger);
-    ElmApiState IElmApiInternal<ElmApi>.State => _state;
-    ILoggerFactory IElmApiExtendable<ElmApi>.LoggerFactory => _state.LoggerFactory;
+    TResult IElmApiExtendable<ElmApi>.UseLogger<TResult>(Func<ElmApi, ILogger<ElmApi>, TResult> action) => action(this, _services.Logger);
+    ElmApiServices IElmApiInternal<ElmApi>.Services => _services;
+    ILoggerFactory IElmApiExtendable<ElmApi>.LoggerFactory => _services.LoggerFactory;
 
     #endregion
 
@@ -53,7 +67,7 @@ public class ElmApi :
 
     public ElmApi AddElmLibraries(IEnumerable<Library> libraries)
     {
-        var entries = _state.Entries.ToBuilder();
+        var entries = _entries.ToBuilder();
         var hasChanged = false;
         foreach (var library in libraries)
         {
@@ -61,14 +75,14 @@ public class ElmApi :
 
             if (entries.TryGetValue(versionedIdentifier, out var existingVersionedIdentifier))
             {
-                _state.Logger.LogInformation("Skipping replacing library {existingVersionedIdentifier} to compiler with new library: {versionedIdentifier}, ",
+                _services.Logger.LogInformation("Skipping replacing library {existingVersionedIdentifier} to compiler with new library: {versionedIdentifier}, ",
                                              existingVersionedIdentifier, versionedIdentifier);
                 continue;
             }
 
             var libraryCompilation = new ElmApiStateEntry(library);
             entries.Add(versionedIdentifier, libraryCompilation);
-            _state.Logger.LogInformation("Adding library to compiler: {versionedIdentifier}", versionedIdentifier);
+            _services.Logger.LogInformation("Adding library to compiler: {versionedIdentifier}", versionedIdentifier);
             hasChanged = true;
         }
 
@@ -83,17 +97,17 @@ public class ElmApi :
 
     public ElmApi Compile()
     {
-        var entries = _state.Entries;
+        var entries = _entries;
         if (entries.Values.All(predicate: lc => lc is { AssemblyBinary: not null }))
             return this;
 
-        using var servicesScope = _state.CreateScopedState();
-        var logger = _state.Logger;
+        using var servicesScope = _services.CreateScopedState();
+        var logger = _services.Logger;
         logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
-        var exceptionHandling = _state.Options.ProcessBatchItemExceptionHandling;
-        var debugInformationFormat = _state.Options.AssemblyCompilerDebugInformationFormat;
-        AssemblyCompiler assemblyCompiler = _state.AssemblyCompiler;
-        LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _state.LibrarySetCSharpCodeGenerator;
+        var exceptionHandling = _options.ProcessBatchItemExceptionHandling;
+        var debugInformationFormat = _options.AssemblyCompilerDebugInformationFormat;
+        AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
+        LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _services.LibrarySetCSharpCodeGenerator;
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
         Library[] libraries = entries.Values.Select(selector: v => v.ElmLibrary).ToArray();
         LibrarySet librarySet = new LibrarySet(name: "", libraries: libraries);

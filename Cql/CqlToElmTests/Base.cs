@@ -5,6 +5,7 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Elm.Internal;
 using CqlSdkPrototype.Runtime;
 using CqlSdkPrototype.Runtime.Extensions;
@@ -35,12 +36,13 @@ namespace Hl7.Cql.CqlToElm.Test
             var elmApi = CreateElmApi();
             var lambda = elmApi.Lambda(expression);
             var expressionName = "TempExpression";
-            var state = elmApi.AsInternal().State;
+            var options = elmApi.AsExtendable().Options;
+            var services = elmApi.AsInternal().Services;
             LibrarySet librarySet = new("TempLibrarySet", library);
             DefinitionDictionary<LambdaExpression> definitions = new();
             definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
-            var generateCSharp = state.LibrarySetCSharpCodeGenerator.GenerateCSharp(librarySet, definitions);
-            var compile = state.AssemblyCompiler.Compile(librarySet, generateCSharp, state.Options.AssemblyCompilerDebugInformationFormat);
+            var generateCSharp = services.LibrarySetCSharpCodeGenerator.GenerateCSharp(librarySet, definitions);
+            var compile = services.AssemblyCompiler.Compile(librarySet, generateCSharp, options.AssemblyCompilerDebugInformationFormat);
             var assemblyBytes = compile.Single().assemblyDataWithSourceCode.AssemblyBytes;
 
             using var scope = new RuntimeApi()

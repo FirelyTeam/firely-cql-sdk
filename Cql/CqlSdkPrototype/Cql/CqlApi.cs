@@ -60,7 +60,7 @@ internal class CqlApiImpl
         var entriesBuilder = entries.ToBuilder();
         var libraryProvider = new EntriesBuilderLibraryProvider(entriesBuilder);
         _entries = entries;
-        _services = CqlApiServices.Create(loggerFactory ?? NullLoggerFactory.Instance, options, libraryProvider);
+        _services = CqlApiServices.Create(loggerFactory, options, libraryProvider);
         _options = options;
     }
 

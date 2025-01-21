@@ -15,3 +15,4 @@ global using Microsoft.Extensions.Logging;
 global using Microsoft.Extensions.Logging.Abstractions;
 global using CqlApiStateEntryDictionary = System.Collections.Immutable.ImmutableDictionary<CqlSdkPrototype.Infrastructure.CqlVersionedLibraryIdentifier, CqlSdkPrototype.Cql.Extensibility.CqlApiStateEntry>;
 global using ElmApiStateEntryDictionary = System.Collections.Immutable.ImmutableDictionary<CqlSdkPrototype.Infrastructure.CqlVersionedLibraryIdentifier, CqlSdkPrototype.Elm.Extensibility.ElmApiStateEntry>;
+global using RuntimeApiStateEntryHashSet = System.Collections.Immutable.ImmutableHashSet<CqlSdkPrototype.Runtime.Extensibility.RuntimeApiStateEntry>;

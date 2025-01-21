@@ -64,7 +64,7 @@ internal static class TestExtensions
     {
         using var scope = elmApi
                           .AsInternal()
-                          .State
+                          .Services
                           .ServiceProvider
                           .CreateScope();
         var libraryExpressionBuilder = scope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
@@ -77,7 +77,7 @@ internal static class TestExtensions
     {
         using var scope = elmApi
                           .AsInternal()
-                          .State
+                          .Services
                           .ServiceProvider
                           .CreateScope();
         var libraryExpressionBuilder = scope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();

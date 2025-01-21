@@ -15,7 +15,7 @@ namespace CoreTests
        [ClassInitialize]
         public static void Initialize(TestContext context)
         {
-            using var serviceProvider = ElmApiState.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
+            using var serviceProvider = ElmApiServices.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
             using var servicesScope = serviceProvider.CreateScope();
 
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");

@@ -14,12 +14,18 @@ internal readonly record struct CqlApiServices(
     CqlToElmConverter CqlToElmConverter,
     EntriesBuilderLibraryProvider LibraryProvider)
 {
-    private static readonly (CqlModel CqlModel, ModelInfo ModelInfo)[] AllMappedModelsInOrder = [
+    private static readonly (CqlModel CqlModel, ModelInfo ModelInfo)[] AllMappedModelsInOrder =
+    [
         (CqlModel.ElmR1, Models.ElmR1),
-        (CqlModel.Fhir401, Models.Fhir401)];
+        (CqlModel.Fhir401, Models.Fhir401)
+    ];
 
-    public static CqlApiServices Create(ILoggerFactory loggerFactory, CqlApiOptions options, EntriesBuilderLibraryProvider libraryProvider)
+    public static CqlApiServices Create(
+        ILoggerFactory? loggerFactory,
+        CqlApiOptions options,
+        EntriesBuilderLibraryProvider libraryProvider)
     {
+        loggerFactory ??= NullLoggerFactory.Instance;
         var services = new ServiceCollection();
         services.AddExternalLogging(loggerFactory);
         AddCqlServices(services, options, libraryProvider);

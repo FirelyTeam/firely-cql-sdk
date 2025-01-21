@@ -1,5 +1,4 @@
-﻿using CqlSdkPrototype.Elm.Extensibility;
-using CqlSdkPrototype.Infrastructure;
+﻿using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Logging.Internal;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
@@ -11,54 +10,29 @@ using Hl7.Fhir.Introspection;
 
 namespace CqlSdkPrototype.Elm;
 
-internal readonly record struct ElmApiState(
+internal readonly record struct ElmApiServices(
     ILoggerFactory LoggerFactory,
-    ImmutableDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry> Entries,
-    ElmApiOptions Options,
     ServiceProvider ServiceProvider,
-    ILogger<ElmApi> Logger,
     AssemblyCompiler AssemblyCompiler,
     LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator)
 {
-    public static ElmApiState Create(
-        ILoggerFactory loggerFactory,
-        ElmApiOptions options)
+    public static ElmApiServices Create(ILoggerFactory? loggerFactory)
     {
-        var entries = ImmutableDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry>.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
-        return new ElmApiState(loggerFactory, entries, null!, null!, null!, null!, null!)
-        {
-            // Must be set through the property initializer, to ensure the services are created
-            Options = options
-        };
+        loggerFactory ??= NullLoggerFactory.Instance;
+        var services = new ServiceCollection();
+        services.AddExternalLogging(loggerFactory);
+        AddCqlCodeGenerationServices(services);
+        var serviceProvider = services.BuildServiceProvider(validateScopes: true);
+        var assemblyCompiler = serviceProvider.GetRequiredService<AssemblyCompiler>();
+        var librarySetCSharpCodeGenerator = serviceProvider.GetRequiredService<LibrarySetCSharpCodeGenerator>();
+
+        var entries = ElmApiStateEntryDictionary.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+        return new ElmApiServices(
+            loggerFactory,
+            serviceProvider,
+            assemblyCompiler,
+            librarySetCSharpCodeGenerator);
     }
-
-    private readonly ElmApiOptions _options = Options;
-
-    public ElmApiOptions Options
-    {
-        get => _options;
-        init
-        {
-            if (ReferenceEquals(_options, value))
-                return;
-
-            ServiceProvider?.Dispose();
-
-            _options = value;
-
-            var services = new ServiceCollection();
-            services.AddExternalLogging(LoggerFactory!);
-            AddCqlCodeGenerationServices(services);
-            ServiceProvider = services.BuildServiceProvider(validateScopes:true);
-            Logger = ServiceProvider.GetLogger<ElmApi>();
-            AssemblyCompiler = ServiceProvider.GetRequiredService<AssemblyCompiler>();
-            LibrarySetCSharpCodeGenerator = ServiceProvider.GetRequiredService<LibrarySetCSharpCodeGenerator>();
-        }
-    }
-
-    public ILoggerFactory LoggerFactory { get; } = LoggerFactory;
-
-    public ElmApiScopedState CreateScopedState() => new(ServiceProvider.CreateScope());
 
     private static void AddCqlCodeGenerationServices(IServiceCollection services)
     {
@@ -96,4 +70,12 @@ internal readonly record struct ElmApiState(
         return services;
     }
 
+
+    public ILoggerFactory LoggerFactory { get; } = LoggerFactory;
+    public ServiceProvider ServiceProvider { get; } = ServiceProvider;
+    public ILogger<ElmApi> Logger { get; } = ServiceProvider.GetLogger<ElmApi>();
+    public AssemblyCompiler AssemblyCompiler { get; } = AssemblyCompiler;
+    public LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator { get; } = LibrarySetCSharpCodeGenerator;
+
+    public ElmApiScopedServices CreateScopedState() => new(ServiceProvider.CreateScope());
 }

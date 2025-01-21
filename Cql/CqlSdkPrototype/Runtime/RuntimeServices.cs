@@ -1,16 +1,18 @@
 ﻿using CqlSdkPrototype.Runtime.Extensibility;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CqlSdkPrototype.Runtime;
 
-internal readonly record struct RuntimeApiState(
+internal readonly record struct RuntimeServices(
     ILoggerFactory LoggerFactory,
-    ImmutableHashSet<RuntimeApiStateEntry> Entries,
+    RuntimeApiStateEntryHashSet Entries,
     RuntimeApiOptions Options,
     ILogger<RuntimeApi> Logger)
 {
-    public static RuntimeApiState Create(ILoggerFactory loggerFactory, RuntimeApiOptions options)
+    public static RuntimeServices Create(ILoggerFactory? loggerFactory, RuntimeApiOptions options)
     {
-        return new RuntimeApiState(loggerFactory, [], null!, null!)
+        loggerFactory ??= NullLoggerFactory.Instance;
+        return new RuntimeServices(loggerFactory, [], null!, null!)
         {
             // Must be set through the property initializer, to ensure the services are created
             Options = options,
