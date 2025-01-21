@@ -210,26 +210,28 @@ public class ElmApi :
         LogExceptionMessageAction log,
         ProcessBatchItemExceptionHandling exceptionHandling)
     {
-        var libraryDefinitions = librarySetExpressionBuilderScoped
-                                 .ProcessLibrarySetDeferred(librarySet: librarySet)
-                                 .Select(t =>
-                                 {
-                                     var libraryName = t.library.identifier;
-                                     logger.LogInformation("Generating definitions for library : {libraryName}", libraryName);
-                                     return t;
-                                 })
-                                 .TryProcessEach(t => (t.library, cSharp: t.generateLibraryDefinitions))
-                                 .WithEachException(t =>
-                                 {
-                                     var libraryName = t.Input.library.identifier;
-                                     log(t.Exception, "Error generating definitions for library : {libraryName}", libraryName);
-                                 })
-                                 .HandleExceptions(exceptionHandling);
-
         DefinitionDictionary<LambdaExpression> librarySetDefinitions = new();
-        foreach (var (_, generateLibraryDefinitions) in libraryDefinitions)
-            librarySetDefinitions.Merge(generateLibraryDefinitions());
-
+        librarySetExpressionBuilderScoped
+            .ProcessLibrarySetDeferred(librarySet: librarySet)
+            .Select(t =>
+            {
+                var libraryName = t.library.identifier;
+                logger.LogInformation("Generating definitions for library : {libraryName}", libraryName);
+                return t;
+            })
+            .TryProcessEach(t =>
+            {
+                librarySetDefinitions.Merge(t.generateLibraryDefinitions());
+                return t.library;
+            })
+            .WithEachException(t =>
+            {
+                var libraryName = t.Input.library.identifier;
+                log(t.Exception, "Error generating definitions for library : {libraryName}", libraryName);
+            })
+            .HandleExceptions(exceptionHandling)
+            .Count() // Must enumerate all
+            ;
         return librarySetDefinitions;
     }
 

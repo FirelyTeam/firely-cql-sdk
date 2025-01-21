@@ -8,11 +8,51 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace CqlSdkPrototype.Cql;
 
+
 public class CqlApi :
     ICqlApiExtendable<CqlApi>,
     ICqlApiInternal<CqlApi>
 {
+    private readonly CqlApiImpl _cqlApi;
+
     public CqlApi(
+        ILoggerFactory? loggerFactory = null,
+        CqlApiOptions? options = null) : this(new CqlApiImpl(loggerFactory, options))
+    {
+    }
+
+    private CqlApi(CqlApiImpl cqlApi)
+    {
+        _cqlApi = cqlApi;
+    }
+
+    ILoggerFactory ICqlApiExtendable<CqlApi>.LoggerFactory => _cqlApi._services.LoggerFactory;
+    CqlApiOptions ICqlApiExtendable<CqlApi>.Options => _cqlApi._options;
+    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> ICqlApiExtendable<CqlApi>.Entries => _cqlApi._entries;
+    CqlApiServices ICqlApiInternal<CqlApi>.Services => _cqlApi._services;
+
+    public CqlApi WithOptions(Func<CqlApiOptions, CqlApiOptions> replaceOptions)
+    {
+        _cqlApi.WithOptions(replaceOptions);
+        return this;
+    }
+
+    public CqlApi AddCqlLibraries(IEnumerable<CqlLibraryString> libraries)
+    {
+        _cqlApi.AddCqlLibraries(libraries);
+        return this;
+    }
+
+    public CqlApi Translate()
+    {
+        _cqlApi.Translate();
+        return this;
+    }
+}
+
+internal class CqlApiImpl
+{
+    public CqlApiImpl(
         ILoggerFactory? loggerFactory = null,
         CqlApiOptions? options = null)
     {
@@ -27,21 +67,29 @@ public class CqlApi :
 
     #region State
 
-    private CqlApiServices _services;
-    private CqlApiStateEntryDictionary _entries;
-    private CqlApiOptions _options;
+    internal CqlApiServices _services;
+    internal CqlApiStateEntryDictionary _entries;
+    internal CqlApiOptions _options;
 
-    private CqlApi WithEntries(
+    private CqlApiImpl WithEntries(
         CqlApiStateEntryDictionary entries)
     {
+        if (ReferenceEquals(_entries, entries))
+            return this;
+
         _entries = entries;
         _services.LibraryProvider.EntriesBuilder = entries.ToBuilder();
         return this;
     }
 
-    public CqlApi WithOptions(
+    public CqlApiImpl WithOptions(
         Func<CqlApiOptions, CqlApiOptions> replaceOptions)
     {
+        var newOptions = replaceOptions(_options);
+        if (ReferenceEquals(_options, newOptions))
+            return this;
+
+        _options = newOptions;
         var libraryProvider = _services.LibraryProvider;
         _services.ServiceProvider.Dispose();
         _options = replaceOptions(_options);
@@ -49,16 +97,16 @@ public class CqlApi :
         return this;
     }
 
-    ILoggerFactory ICqlApiExtendable<CqlApi>.LoggerFactory => _services.LoggerFactory;
-    CqlApiOptions ICqlApiExtendable<CqlApi>.Options => _options;
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> ICqlApiExtendable<CqlApi>.Entries => _entries;
-    CqlApiServices ICqlApiInternal<CqlApi>.Services => _services;
+    // ILoggerFactory ICqlApiExtendable<CqlApiImpl>.LoggerFactory => _services.LoggerFactory;
+    // CqlApiOptions ICqlApiExtendable<CqlApiImpl>.Options => _options;
+    // IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> ICqlApiExtendable<CqlApiImpl>.Entries => _entries;
+    // CqlApiServices ICqlApiInternal<CqlApiImpl>.Services => _services;
 
     #endregion
 
     #region Input (CQL Library Strings)
 
-    public CqlApi AddCqlLibraries(IEnumerable<CqlLibraryString> cqlLibraries)
+    public CqlApiImpl AddCqlLibraries(IEnumerable<CqlLibraryString> cqlLibraries)
     {
         var logger = _services.Logger;
         var entriesBuilder = _services.LibraryProvider.EntriesBuilder;
@@ -92,7 +140,7 @@ public class CqlApi :
 
     #region Processing (CQL-to-ELM)
 
-    public CqlApi Translate()
+    public CqlApiImpl Translate()
     {
         CqlApiStateEntryDictionary.Builder entriesBuilder = _services.LibraryProvider.EntriesBuilder;
         var logger = _services.Logger;
