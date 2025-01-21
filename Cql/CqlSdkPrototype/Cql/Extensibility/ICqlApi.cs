@@ -2,7 +2,7 @@
 
 namespace CqlSdkPrototype.Cql.Extensibility;
 
-public interface ICqlApiExtendable
+public interface ICqlApi
 {
     ILoggerFactory LoggerFactory { get; }
     CqlApiOptions Options { get; }

@@ -3,7 +3,7 @@ using Hl7.Cql.Elm;
 
 namespace CqlSdkPrototype.Elm.Extensibility;
 
-public interface IElmApiExtendable
+public interface IElmApi
 {
     ILoggerFactory LoggerFactory { get; }
     ElmApiOptions Options { get; }

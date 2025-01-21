@@ -9,7 +9,7 @@ namespace CqlSdkPrototype.Cql;
 
 
 public class CqlApi :
-    ICqlApiExtendable,
+    ICqlApi,
     ICqlApiInternal
 {
     private readonly CqlApiImpl _cqlApi;

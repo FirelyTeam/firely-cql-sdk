@@ -11,7 +11,7 @@ using Hl7.Cql.Runtime;
 namespace CqlSdkPrototype.Elm;
 
 public sealed class ElmApi :
-    IElmApiExtendable,
+    IElmApi,
     IElmApiInternal
 {
     public ElmApi(
