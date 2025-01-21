@@ -13,7 +13,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Empty()
         {
-            Assert.ThrowsException<ArgumentException>(() => CreateCqlApi().MakeLibrary(string.Empty));
+            Assert.ThrowsException<FormatException>(() => CreateCqlApi().MakeLibrary(string.Empty));
             var ms = new MemoryStream();
             Assert.ThrowsException<ArgumentException>(() => CreateCqlApi().AsInternal().Services.CqlToElmConverter.ConvertLibrary(ms));
         }

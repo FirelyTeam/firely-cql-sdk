@@ -19,7 +19,7 @@ internal class EntriesBuilderLibraryProvider(CqlApiStateEntryDictionary.Builder 
 
         var libVer = CqlVersionedLibraryIdentifier.FromNameAndVersion(
             CqlLibraryIdentifier.Parse(libraryName),
-            CqlLibraryVersion.Parse(version ?? throw new ArgumentNullException(nameof(version))));
+            version is null ? null : CqlLibraryVersion.Parse(version));
 
         if (EntriesBuilder.TryGetValue(libVer, out var entry) && entry.ElmLibraryBuilder is { } lb)
         {
