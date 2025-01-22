@@ -1,7 +1,10 @@
-﻿using CqlSdkPrototype.Cql;
+﻿using System.Diagnostics;
+using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm.Extensions;
+using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Runtime.Extensions;
+using Hl7.Cql.Fhir;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -16,8 +19,8 @@ internal static class Program
 
         services.AddLogging(builder => builder.AddConsole());
 
-        var cqlApiOptions = new CqlApiOptions(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        services.AddSingleton<CqlApi>(provider => ActivatorUtilities.CreateInstance<CqlApi>(provider, cqlApiOptions));
+        services.AddSingleton<CqlApiOptions>(new CqlApiOptions(Models: [CqlModel.ElmR1, CqlModel.Fhir401]));
+        services.AddSingleton<CqlApi>();
 
         // Get CqlApi from DI
         IServiceProvider serviceProvider = services.BuildServiceProvider();
@@ -33,6 +36,18 @@ internal static class Program
         elmApi.Compile();
         elmApi.SaveCSharpFilesToDirectory(new DirectoryInfo("output/csharp/"));
         elmApi.SaveAssemblyBinariesToDirectory(new DirectoryInfo("output/assemblies/"));
+
+        // Setup RuntimeApi
+        var runtimeApi = elmApi.CreateRuntimeApi();
+        var runtimeScope = runtimeApi.CreateRuntimeScope();
+
+        // Execute CQL
+        var threePlusTwo = runtimeScope.GetLibraryDefinitionResult(
+            FhirCqlContext.ForBundle(),
+            CqlVersionedLibraryIdentifier.ParseFromNameAndVersion("Add3and2", "1.0.0"),
+            "ThreePlusTwo");
+
+        Debug.Assert(threePlusTwo is 5);
     }
 }
 
