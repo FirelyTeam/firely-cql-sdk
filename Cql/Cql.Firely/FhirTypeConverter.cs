@@ -10,11 +10,8 @@ using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Introspection;
 using Hl7.Fhir.Utility;
-using System.Reflection;
-using System.Text;
 using Hl7.Cql.Abstractions.Infrastructure;
 using M = Hl7.Fhir.Model;
-using System.Collections.Concurrent;
 
 namespace Hl7.Cql.Fhir
 {

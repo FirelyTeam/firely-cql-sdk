@@ -1,14 +1,11 @@
-using FluentAssertions;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Linq;
 using CqlSdkPrototype.Cql.Internal;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
+    using Expression = Hl7.Cql.Elm.Expression;
+
     [TestClass]
     public class InvocationBuilderTest : Base
     {

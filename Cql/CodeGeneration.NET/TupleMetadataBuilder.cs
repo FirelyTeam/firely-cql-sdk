@@ -5,9 +5,7 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
+
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Primitives;
 

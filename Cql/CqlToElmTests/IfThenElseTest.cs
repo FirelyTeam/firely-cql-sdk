@@ -1,8 +1,5 @@
 using CqlSdkPrototype.Cql.Internal;
-using FluentAssertions;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test
 {

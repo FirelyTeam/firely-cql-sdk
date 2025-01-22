@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Hl7.Cql.Elm
+﻿namespace Hl7.Cql.Elm
 {
     partial class VersionedIdentifier : IComparable<VersionedIdentifier>, IEquatable<VersionedIdentifier>
     {

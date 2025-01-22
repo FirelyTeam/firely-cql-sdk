@@ -1,7 +1,5 @@
-﻿using FluentAssertions;
-using Hl7.Cql.Conversion;
+﻿using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoreTests
 {

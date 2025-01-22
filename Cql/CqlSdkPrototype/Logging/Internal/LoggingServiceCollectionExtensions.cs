@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection.Extensions;
-
-namespace CqlSdkPrototype.Logging.Internal;
+﻿namespace CqlSdkPrototype.Logging.Internal;
 
 internal static class LoggingServiceCollectionExtensions
 {

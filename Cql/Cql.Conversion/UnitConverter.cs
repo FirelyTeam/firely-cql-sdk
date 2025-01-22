@@ -8,8 +8,6 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
-using System;
-using System.Collections.Generic;
 
 namespace Hl7.Cql.Conversion
 {

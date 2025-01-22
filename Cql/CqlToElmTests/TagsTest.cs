@@ -1,9 +1,7 @@
-using System.Linq;
 using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm.Extensibility;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Runtime.Extensions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test;
 

@@ -6,8 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Diagnostics;
-using System.Text;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
@@ -16,16 +14,16 @@ using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Utility;
+
+namespace Hl7.Cql.Packaging;
+
 using Annotation = Hl7.Cql.Elm.Annotation;
 using Code = Hl7.Fhir.Model.Code;
 using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
-
 using ElmLibrary = Hl7.Cql.Elm.Library;
 using FhirLibrary = Hl7.Fhir.Model.Library;
 using FhirResource = Hl7.Fhir.Model.Resource;
 using FhirMeasure = Hl7.Fhir.Model.Measure;
-
-namespace Hl7.Cql.Packaging;
 
 #pragma warning disable CS1591
 

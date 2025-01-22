@@ -8,7 +8,6 @@
 
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Compiler;
-using Elm = Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Hl7.Fhir.Model;
 

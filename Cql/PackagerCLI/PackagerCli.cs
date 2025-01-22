@@ -15,8 +15,6 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging;
 using Hl7.Fhir.Model;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using static Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling;
 
 namespace Hl7.Cql.Packager;

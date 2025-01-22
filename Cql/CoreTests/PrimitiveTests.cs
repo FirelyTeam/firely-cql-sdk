@@ -1,27 +1,18 @@
 ﻿using Hl7.Cql.Abstractions;
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
 using CqlSdkPrototype.Elm;
-using FluentAssertions;
 using Hl7.Cql.Runtime.Hosting;
-using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
-using Expression = System.Linq.Expressions.Expression;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace CoreTests
 {
+    using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
+    using Expression = System.Linq.Expressions.Expression;
+    
     [TestClass]
     [TestCategory("UnitTest")]
     public class PrimitiveTests

@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace Hl7.Cql.CqlToElm.Test
 {
     internal static class SkippedTests

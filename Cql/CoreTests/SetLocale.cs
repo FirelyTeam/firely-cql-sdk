@@ -1,7 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Globalization;
-
-namespace CoreTests
+﻿namespace CoreTests
 {
     [TestClass]
     public class SetLocale

@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Primitives;
-using System;
 using M = Fhir.Metrics;
 
 namespace Hl7.Cql.Conversion

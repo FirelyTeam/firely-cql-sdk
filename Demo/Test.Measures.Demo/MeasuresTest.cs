@@ -1,11 +1,8 @@
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
-using System.Diagnostics;
 using CoreTests;
 using Hl7.Cql.Compiler;
-using JetBrains.Annotations;
-using Microsoft.Extensions.Logging;
 using CLI.Helpers;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Runtime;

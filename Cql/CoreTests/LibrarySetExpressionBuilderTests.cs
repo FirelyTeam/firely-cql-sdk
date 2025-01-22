@@ -1,14 +1,14 @@
 using CqlSdkPrototype.Elm;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoreTests;
+
+using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
+
 
 [TestClass]
 public class LibrarySetExpressionBuilderTests

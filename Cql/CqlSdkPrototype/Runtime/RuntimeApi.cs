@@ -2,7 +2,6 @@
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using CqlSdkPrototype.Runtime.Extensibility;
-using Microsoft.Extensions.Logging.Abstractions;
 
 namespace CqlSdkPrototype.Runtime;
 

@@ -1,5 +1,4 @@
-﻿using Hl7.Cql.CqlToElm.Builtin;
-using Hl7.Cql.CqlToElm.Grammar;
+﻿using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.CqlToElm.Visitors

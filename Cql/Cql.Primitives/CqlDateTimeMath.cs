@@ -8,9 +8,6 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Iso8601;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
 
 namespace Hl7.Cql.Primitives
 {

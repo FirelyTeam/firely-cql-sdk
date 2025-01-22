@@ -1,12 +1,4 @@
-﻿using Hl7.Cql.Elm;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hl7.Cql.CqlToElm.LibraryProviders
+﻿namespace Hl7.Cql.CqlToElm.LibraryProviders
 {
     /// <summary>
     /// Provides libraries through an in-memory dictionary.  Libraries that are referenced, but not included,

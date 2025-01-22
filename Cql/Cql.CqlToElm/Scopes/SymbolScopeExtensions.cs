@@ -1,9 +1,4 @@
-﻿using Hl7.Cql.CqlToElm.Builtin;
-using Hl7.Cql.Elm;
-using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Runtime.InteropServices;
+﻿using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.CqlToElm
 {

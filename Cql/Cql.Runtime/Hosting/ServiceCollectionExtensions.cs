@@ -1,9 +1,4 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-
-namespace Hl7.Cql.Runtime.Hosting;
+﻿namespace Hl7.Cql.Runtime.Hosting;
 
 internal static class ServiceCollectionExtensions
 {

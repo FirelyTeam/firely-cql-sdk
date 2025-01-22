@@ -2,11 +2,6 @@
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System;
-using System.IO;
-using System.Linq;
 
 namespace Hl7.Cql.CqlToElm
 {

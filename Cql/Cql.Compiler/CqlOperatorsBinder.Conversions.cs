@@ -6,13 +6,10 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
-using System.Linq.Expressions;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Runtime;
-using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler;
 

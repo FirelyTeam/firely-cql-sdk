@@ -1,8 +1,4 @@
-﻿using Microsoft.Extensions.Logging.Abstractions;
-using System.Collections.Concurrent;
-using System.Globalization;
-using System.Text.RegularExpressions;
-using EnumerableExtensions = Hl7.Cql.Abstractions.Infrastructure.EnumerableExtensions;
+﻿using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace CqlSdkPrototype.Logging;
 
@@ -60,7 +56,7 @@ public sealed partial class ColorConsoleLogger(string categoryName, ColorConsole
             return originalFormat; // Nothing to format, return as is
 
         var colorFormat = GetOrdinalStringFormat(state, originalFormat);
-        var colorMessage = string.Format(CultureInfo.InvariantCulture, colorFormat, EnumerableExtensions.SelectToArray(state, s => s.Value));
+        var colorMessage = string.Format(CultureInfo.InvariantCulture, colorFormat, state.SelectToArray(s => s.Value));
         return colorMessage;
     }
 

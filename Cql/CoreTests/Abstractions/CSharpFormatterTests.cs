@@ -1,14 +1,8 @@
 #nullable enable
 #pragma warning disable CS8500 // This takes the address of, gets the size of, or declares a pointer to a managed type
 
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using System.Text;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Infrastructure;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoreTests.Abstractions;
 

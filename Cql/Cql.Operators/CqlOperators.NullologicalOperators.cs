@@ -7,9 +7,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Collections.Generic;
-using System.Linq;
-
 namespace Hl7.Cql.Runtime
 {
     internal partial class CqlOperators

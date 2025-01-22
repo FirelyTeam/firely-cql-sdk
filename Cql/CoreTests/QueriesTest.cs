@@ -1,17 +1,11 @@
-﻿using System;
-using Hl7.Cql.Fhir;
+﻿using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using CqlSdkPrototype.Elm;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime.Hosting;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace CoreTests
 {

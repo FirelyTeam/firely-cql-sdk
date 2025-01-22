@@ -6,11 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Diagnostics;
-using System.Text.Json;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
-using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Packaging;
 

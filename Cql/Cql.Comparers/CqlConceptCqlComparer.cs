@@ -7,10 +7,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Collections.Generic;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
-using System.Linq;
 using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Comparers
