@@ -1,7 +1,10 @@
-﻿using CqlSdkPrototype.Cql;
+﻿using System.Diagnostics;
+using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm.Extensions;
-using CqlSdkPrototype.Invocation.Extensions;
+using CqlSdkPrototype.Infrastructure;
+using CqlSdkPrototype.Runtime.Extensions;
+using Hl7.Cql.Fhir;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -15,9 +18,10 @@ internal static class Program
         var services = new ServiceCollection();
         services.AddLogging(builder => builder.AddConsole());
         services.AddSingleton<CqlApiOptions>(new CqlApiOptions(Models: [CqlModel.ElmR1, CqlModel.Fhir401]));
-        services.AddSingleton<CqlApi>();
-        services.AddSingleton<Example1>();
+        services.AddTransient<CqlApi>();
+        services.AddTransient<Example1>();
 
+        // Get CqlApi from DI
         IServiceProvider serviceProvider = services.BuildServiceProvider();
         var example1 = serviceProvider.GetRequiredService<Example1>();
         example1.Run();
@@ -36,9 +40,20 @@ internal class Example1(CqlApi cqlApi)
 
         // Setup and use ElmApi
         var elmApi = cqlApi.CreateElmApi();
-        elmApi
-            .Compile()
-            .SaveCSharpFilesToDirectory(new DirectoryInfo("output/csharp/"))
-            .SaveAssemblyBinariesToDirectory(new DirectoryInfo("output/assemblies/"));
+        elmApi.Compile()
+              .SaveCSharpFilesToDirectory(new DirectoryInfo("output/csharp/"))
+              .SaveAssemblyBinariesToDirectory(new DirectoryInfo("output/assemblies/"));
+
+        // Setup RuntimeApi
+        var runtimeApi = elmApi.CreateRuntimeApi();
+        using var runtimeScope = runtimeApi.CreateRuntimeScope(); // Disposable, put inside using scope
+
+        // Execute CQL
+        var threePlusTwo = runtimeScope.GetLibraryDefinitionResult(
+            FhirCqlContext.ForBundle(),
+            CqlVersionedLibraryIdentifier.ParseFromNameAndVersion("Add3and2", "1.0.0"),
+            "ThreePlusTwo");
+
+        Debug.Assert(threePlusTwo is 5);
     }
 }
