@@ -24,7 +24,7 @@ internal readonly record struct ElmApiState(
         ILoggerFactory loggerFactory,
         ElmApiOptions options)
     {
-        var entries = ImmutableDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry>.Empty.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer);
+        var entries = ElmApiStateEntryDictionary.Empty/*.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer)*/;
         return new ElmApiState(loggerFactory, entries, null!, null!, null!, null!, null!)
         {
             // Must be set through the property initializer, to ensure the services are created
