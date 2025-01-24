@@ -32,6 +32,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Folder Include="Elm\Internal\" />
 	  <Folder Include="examples\" />
 	</ItemGroup>
 

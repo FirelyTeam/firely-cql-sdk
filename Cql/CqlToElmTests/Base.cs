@@ -5,7 +5,6 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
-using CqlSdkPrototype.Elm.Internal;
 using CqlSdkPrototype.Runtime;
 using CqlSdkPrototype.Runtime.Extensions;
 using CqlSdkPrototype.Infrastructure;
@@ -35,7 +34,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var elmApi = CreateElmApi();
             var lambda = elmApi.Lambda(expression);
             var expressionName = "TempExpression";
-            var state = elmApi.AsInternal().State;
+            var state = elmApi.State;
             LibrarySet librarySet = new("TempLibrarySet", library);
             DefinitionDictionary<LambdaExpression> definitions = new();
             definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);

@@ -2,7 +2,6 @@ using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm;
-using CqlSdkPrototype.Elm.Internal;
 using CqlSdkPrototype.Infrastructure;
 using FluentAssertions.Collections;
 using Hl7.Cql.Compiler;
@@ -63,7 +62,6 @@ internal static class TestExtensions
         Library library)
     {
         using var scope = elmApi
-                          .AsInternal()
                           .State
                           .ServiceProvider
                           .CreateScope();
@@ -76,7 +74,6 @@ internal static class TestExtensions
         Expression expression)
     {
         using var scope = elmApi
-                          .AsInternal()
                           .State
                           .ServiceProvider
                           .CreateScope();

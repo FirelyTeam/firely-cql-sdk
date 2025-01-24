@@ -1,5 +1,4 @@
 ﻿using CqlSdkPrototype.Elm.Extensibility;
-using CqlSdkPrototype.Elm.Internal;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions.Exceptions;
@@ -11,8 +10,7 @@ using Hl7.Cql.Runtime;
 namespace CqlSdkPrototype.Elm;
 
 public class ElmApi :
-    IElmApiExtendable<ElmApi>,
-    IElmApiInternal<ElmApi>
+    IElmApiExtendable<ElmApi>
 {
     public ElmApi(
         ILoggerFactory? loggerFactory = null,
@@ -44,7 +42,6 @@ public class ElmApi :
     }
 
     TResult IElmApiExtendable<ElmApi>.UseLogger<TResult>(Func<ElmApi, ILogger<ElmApi>, TResult> action) => action(this, _state.Logger);
-    ElmApiState IElmApiInternal<ElmApi>.State => _state;
     ILoggerFactory IElmApiExtendable<ElmApi>.LoggerFactory => _state.LoggerFactory;
 
     #endregion
