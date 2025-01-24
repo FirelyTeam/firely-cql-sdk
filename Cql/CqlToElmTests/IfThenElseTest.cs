@@ -1,3 +1,4 @@
+using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Internal;
 using Hl7.Cql.Elm;
 
@@ -75,7 +76,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void String_Integer_Integer()
         {
-            var messageProvider = CreateCqlApi().AsInternal().Services.ServiceProvider.GetRequiredService<MessageProvider>();
+            var messageProvider = CreateCqlApi().Services.ServiceProvider.GetRequiredService<MessageProvider>();
             string[] expectedErrors = [messageProvider.TypeFoundIsNotExpected(SystemTypes.StringType, SystemTypes.BooleanType)];
             var library = CreateCqlApi().MakeLibraryFromExpression("if 'hello' then 4 else 5", expectedErrors);
 

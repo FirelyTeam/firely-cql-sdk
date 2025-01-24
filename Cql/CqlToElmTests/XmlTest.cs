@@ -1,3 +1,4 @@
+using CqlSdkPrototype.Cql;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
@@ -75,7 +76,7 @@ namespace Hl7.Cql.CqlToElm.Test
         private static Expression Equals(Expression expression, Expression expectation)
         {
             var cqlApi = CreateCqlApi();
-            var serviceProvider = cqlApi.AsInternal().Services.ServiceProvider;
+            var serviceProvider = cqlApi.Services.ServiceProvider;
             var invocationBuilder = serviceProvider.GetService<InvocationBuilder>();
             var elmFactory = serviceProvider.GetService<ElmFactory>();
             var equal = invocationBuilder.Invoke(SystemLibrary.Equal, expression, expectation);

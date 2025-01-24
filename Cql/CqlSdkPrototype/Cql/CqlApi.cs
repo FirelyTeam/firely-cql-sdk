@@ -8,8 +8,7 @@ using Hl7.Cql.Runtime;
 namespace CqlSdkPrototype.Cql;
 
 public class CqlApi :
-    ICqlApiExtendable<CqlApi>,
-    ICqlApiInternal<CqlApi>
+    ICqlApiExtendable<CqlApi>
 {
     public CqlApi(
         ILoggerFactory? loggerFactory = null,
@@ -20,13 +19,13 @@ public class CqlApi :
         var entriesBuilder = entries.ToBuilder();
         var libraryProvider = new EntriesBuilderLibraryProvider(entriesBuilder);
         _entries = entries;
-        _services = CqlApiServices.Create(loggerFactory ?? NullLoggerFactory.Instance, options, libraryProvider);
+        Services = CqlApiServices.Create(loggerFactory ?? NullLoggerFactory.Instance, options, libraryProvider);
         _options = options;
     }
 
     #region State
 
-    private CqlApiServices _services;
+    internal CqlApiServices Services { get; private set; }
     private CqlApiStateEntryDictionary _entries;
     private CqlApiOptions _options;
 
@@ -34,24 +33,23 @@ public class CqlApi :
         CqlApiStateEntryDictionary entries)
     {
         _entries = entries;
-        _services.LibraryProvider.EntriesBuilder = entries.ToBuilder();
+        Services.LibraryProvider.EntriesBuilder = entries.ToBuilder();
         return this;
     }
 
     public CqlApi WithOptions(
         Func<CqlApiOptions, CqlApiOptions> replaceOptions)
     {
-        var libraryProvider = _services.LibraryProvider;
-        _services.ServiceProvider.Dispose();
+        var libraryProvider = Services.LibraryProvider;
+        Services.ServiceProvider.Dispose();
         _options = replaceOptions(_options);
-        _services = CqlApiServices.Create(_services.LoggerFactory, _options, libraryProvider);
+        Services = CqlApiServices.Create(Services.LoggerFactory, _options, libraryProvider);
         return this;
     }
 
-    ILoggerFactory ICqlApiExtendable<CqlApi>.LoggerFactory => _services.LoggerFactory;
+    ILoggerFactory ICqlApiExtendable<CqlApi>.LoggerFactory => Services.LoggerFactory;
     CqlApiOptions ICqlApiExtendable<CqlApi>.Options => _options;
     IReadOnlyDictionary<CqlVersionedLibraryIdentifier, CqlApiStateEntry> ICqlApiExtendable<CqlApi>.Entries => _entries;
-    CqlApiServices ICqlApiInternal<CqlApi>.Services => _services;
 
     #endregion
 
@@ -59,10 +57,10 @@ public class CqlApi :
 
     public CqlApi AddCqlLibraries(IEnumerable<CqlLibraryString> cqlLibraries)
     {
-        var logger = _services.Logger;
-        var entriesBuilder = _services.LibraryProvider.EntriesBuilder;
-        var cqlToElmConverter = _services.CqlToElmConverter;
-        using var scope = _services.ServiceProvider.CreateScope()!;
+        var logger = Services.Logger;
+        var entriesBuilder = Services.LibraryProvider.EntriesBuilder;
+        var cqlToElmConverter = Services.CqlToElmConverter;
+        using var scope = Services.ServiceProvider.CreateScope()!;
         var hasChanged = false;
         foreach (var cqlLibrary in cqlLibraries)
         {
@@ -93,8 +91,8 @@ public class CqlApi :
 
     public CqlApi Translate()
     {
-        CqlApiStateEntryDictionary.Builder entriesBuilder = _services.LibraryProvider.EntriesBuilder;
-        var logger = _services.Logger;
+        CqlApiStateEntryDictionary.Builder entriesBuilder = Services.LibraryProvider.EntriesBuilder;
+        var logger = Services.Logger;
         bool atFirst = true;
 
         IEnumerable<(CqlVersionedLibraryIdentifier versionedIdentifier, CqlApiStateEntry cqlTranslationEntry)> GetLibrariesForProcessing()

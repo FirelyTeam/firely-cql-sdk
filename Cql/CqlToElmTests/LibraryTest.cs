@@ -1,3 +1,4 @@
+using CqlSdkPrototype.Cql;
 using Hl7.Cql.Elm;
 using CqlSdkPrototype.Cql.Internal;
 
@@ -11,7 +12,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             Assert.ThrowsException<FormatException>(() => CreateCqlApi().MakeLibrary(string.Empty));
             var ms = new MemoryStream();
-            Assert.ThrowsException<ArgumentException>(() => CreateCqlApi().AsInternal().Services.CqlToElmConverter.ConvertLibrary(ms));
+            Assert.ThrowsException<ArgumentException>(() => CreateCqlApi().Services.CqlToElmConverter.ConvertLibrary(ms));
         }
 
         #region Identifier
