@@ -28,7 +28,6 @@ internal class Program
         var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
         var cqlToElmProcessorSettings = new CqlToElmProcessorSettings(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         var cqlFluentToolkit = new CqlFluentToolkit(loggerFactory, cqlToElmProcessorSettings);
-
         var logger = serviceProvider.GetLogger<Program>();
 
         //InvokeCqlExample(cqlApi: cqlApi);
@@ -43,7 +42,7 @@ internal class Program
 
     private static void InvokeCqlFromExamplesFolder(
         ILogger<Program> logger,
-        ICqlFluentToolkit cqlToolkit)
+        CqlFluentToolkit cqlToolkit)
     {
         // INTRO:
         // This example demonstrates how to load CQL libraries from a directory and invoke a library declarations directly.
@@ -72,7 +71,7 @@ internal class Program
         }
     }
 
-    private static void InvokeCqlExample(ICqlFluentToolkit cqlToolkit)
+    private static void InvokeCqlExample(CqlFluentToolkit cqlToolkit)
     {
         // INTRO:
         // This example demonstrates how to add a CqlLibraryString to the CqlApi and invoke a library declaration directly.
@@ -94,7 +93,7 @@ internal class Program
 
     private static void VerboseExample(
         ILogger<Program> logger,
-        ICqlFluentToolkit cqlToolkit,
+        CqlFluentToolkit cqlToolkit,
         string librarySetName,
         bool shouldBuildCqlToElm = false)
     {
@@ -199,13 +198,13 @@ internal class Program
 
 file static class X
 {
-    public static Maybe<(CqlVersionedLibraryIdentifier id, string cSharpSourceCode)> TryGetFirstCSharpFileLines(this IElmFluentToolkit elmApi) =>
+    public static Maybe<(CqlVersionedLibraryIdentifier id, string cSharpSourceCode)> TryGetFirstCSharpFileLines(this ElmFluentToolkit elmApi) =>
         elmApi.ElmToAssemblyConversions
               .TryGetFirst(kv => kv.Value.CSharpSourceCode is not null)
               .TryReturn(kv => (kv.Key, kv.Value.CSharpSourceCode!));
 
     public static Maybe<(CqlVersionedLibraryIdentifier id, string elmJson)> TryGetFirstElmFileLines(
-        this ICqlFluentToolkit cqlApi) =>
+        this CqlFluentToolkit cqlApi) =>
         cqlApi.CqlToElmConversions
               .TryGetFirst(kv => kv.Value.ElmLibrary is not null)
               .TryReturn(kv => (kv.Key, kv.Value.ElmLibrary!.SerializeToJson()!));

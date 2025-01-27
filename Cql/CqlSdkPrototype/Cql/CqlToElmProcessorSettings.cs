@@ -4,8 +4,10 @@ using Hl7.Cql.Model;
 
 namespace CqlSdkPrototype.Cql;
 
-public record CqlToElmProcessorSettings
-(
+/// <summary>
+/// The settings used to configure the CQL to ELM processor.
+/// </summary>
+public record CqlToElmProcessorSettings(
     ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling = default,
     ImmutableHashSet<CqlModel>? Models = null,
     ImmutableHashSet<ModelInfo>? ModelInfos = null,
@@ -29,7 +31,7 @@ public record CqlToElmProcessorSettings
     /// The default value is <see langword="false"/>.
     /// </summary>
     /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#predecessor" />
-    public bool AllowNullIntervals { get; set; } = AllowNullInterval;
+    public bool AllowNullIntervals { get; init; } = AllowNullInterval;
 
     /// <summary>
     /// When <see langword="true"/>, point intervals will automatically be created as necessary from scalar values.
@@ -67,7 +69,7 @@ public record CqlToElmProcessorSettings
     /// This type of conversion will issue a warning and could fail at runtime.
     /// </remarks>
     /// <seealso href="https://build.fhir.org/ig/HL7/cql/06-translationsemantics.html#disable-list-promotion-and-demotion" />
-    public bool EnableListDemotion { get; set; } = EnableListDemotion;
+    public bool EnableListDemotion { get; init; } = EnableListDemotion;
 
     /// <summary>
     /// <para>
@@ -79,17 +81,14 @@ public record CqlToElmProcessorSettings
     /// </para>
     /// </summary>
     public AmbiguousTypeBehavior AmbiguousTypeBehavior { get; init; } = AmbiguousTypeBehavior;
-}
 
-internal static class CqlApiOptionsExtensions
-{
-    internal static void ApplyToCqlToElmOptions(this CqlToElmProcessorSettings options, CqlToElmOptions opt)
+    internal void ApplyToCqlToElmOptions(CqlToElmOptions opt)
     {
-        opt.AmbiguousTypeBehavior = options.AmbiguousTypeBehavior;
-        opt.EnableListPromotion = options.EnableListPromotion;
-        opt.EnableListDemotion = options.EnableListDemotion;
-        opt.EnableIntervalPromotion = options.EnableIntervalPromotion;
-        opt.EnableIntervalDemotion = options.EnableIntervalDemotion;
-        opt.AllowNullIntervals = options.AllowNullIntervals;
+        opt.AmbiguousTypeBehavior = AmbiguousTypeBehavior;
+        opt.EnableListPromotion = EnableListPromotion;
+        opt.EnableListDemotion = EnableListDemotion;
+        opt.EnableIntervalPromotion = EnableIntervalPromotion;
+        opt.EnableIntervalDemotion = EnableIntervalDemotion;
+        opt.AllowNullIntervals = AllowNullIntervals;
     }
 }

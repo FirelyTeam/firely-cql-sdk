@@ -34,7 +34,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var elmApi = CreateElmFluentToolkit();
             var lambda = elmApi.Lambda(expression);
             var expressionName = "TempExpression";
-            var elmApiServices = elmApi.ForTesting();
+            var elmApiServices = elmApi;
             LibrarySet librarySet = new("TempLibrarySet", library);
             DefinitionDictionary<LambdaExpression> definitions = new();
             definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
@@ -202,13 +202,13 @@ namespace Hl7.Cql.CqlToElm.Test
                     AllowNullInterval: AllowNullIntervals
                 ));
 
-        internal static IElmFluentToolkit CreateElmFluentToolkit(
+        internal static ElmFluentToolkit CreateElmFluentToolkit(
             ImmutableHashSet<CqlModel>? models = null,
             ImmutableHashSet<ModelInfo>? modelInfos = null,
             AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
             bool enableListPromotion = false) =>
             CreateCqlFluentToolkit(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
-                .CreateElmApi(_ => new ElmToolkitSettings(
+                .CreateElmApi(_ => new ElmToAssemblySettings(
                                   ProcessBatchItemExceptionHandling.ThrowException,
                                   Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));
     }

@@ -22,7 +22,7 @@ internal static class Program
 
         // Create CqlApi
         var cqlToolkitSettings = new CqlToElmProcessorSettings(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        ICqlFluentToolkit cqlToolkit = new CqlFluentToolkit(loggerFactory, cqlToolkitSettings);
+        CqlFluentToolkit cqlToolkit = new CqlFluentToolkit(loggerFactory, cqlToolkitSettings);
 
         // Setup and use CqlApi
         cqlToolkit

@@ -1,4 +1,4 @@
-using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Elm.Internal;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Primitives;
@@ -16,7 +16,7 @@ public class LibrarySetExpressionBuilderTests
     [TestMethod]
     public void LoadLibraryAndDependencies_CrossLibraryCodeSystems()
     {
-        var serviceProvider = ElmApiState.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
+        var serviceProvider = ElmToAssemblyServices.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
         using var servicesScope = serviceProvider.CreateScope();
         LibrarySet librarySet = new();
         librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.Cms.ElmDir, "CumulativeMedicationDuration");

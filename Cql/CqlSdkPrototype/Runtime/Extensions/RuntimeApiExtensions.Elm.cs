@@ -6,7 +6,7 @@ namespace CqlSdkPrototype.Runtime.Extensions;
 public static partial class RuntimeApiExtensions
 {
     public static RuntimeApi CreateRuntimeApi(
-        this IElmFluentToolkit elmApi,
+        this ElmFluentToolkit elmApi,
         Func<RuntimeApiOptions, RuntimeApiOptions>? configureOptions = null)
     {
         var runtimeApiOptions = RuntimeApiOptions.Default;
@@ -27,7 +27,7 @@ public static partial class RuntimeApiExtensions
 #pragma warning disable RS0026
     public static RuntimeScope CreateRuntimeScope(
 #pragma warning restore RS0026
-        this IElmFluentToolkit elmApi,
+        this ElmFluentToolkit elmApi,
         Func<RuntimeApiOptions, RuntimeApiOptions>? configureOptions = null)
     {
         return elmApi

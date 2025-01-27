@@ -3,9 +3,9 @@ using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
-using CqlSdkPrototype.Elm;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime.Hosting;
+using CqlSdkPrototype.Elm.Internal;
 
 namespace CoreTests
 {
@@ -15,7 +15,7 @@ namespace CoreTests
        [ClassInitialize]
         public static void Initialize(TestContext context)
         {
-            using var serviceProvider = ElmApiState.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
+            using var serviceProvider = ElmToAssemblyServices.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
             using var servicesScope = serviceProvider.CreateScope();
 
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");

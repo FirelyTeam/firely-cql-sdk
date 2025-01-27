@@ -34,7 +34,7 @@ internal class PackagerCli
             optionsConsoleDumper.DumpToConsole();
             var opt = packagerCliOptions.Value;
 
-            IElmFluentToolkit elmToolkit;
+            ElmFluentToolkit elmToolkit;
             if (translateCql)
             {
                 var cqlToElmProcessorSettings = new CqlToElmProcessorSettings(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
@@ -58,9 +58,8 @@ internal class PackagerCli
             }
             else
             {
-                var elmToolkitSettings = new ElmToolkitSettings(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
-                elmToolkit = new ElmToolkit(loggerFactory, elmToolkitSettings)
-                             .AsFluent()
+                var elmToolkitSettings = new ElmToAssemblySettings(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
+                elmToolkit = new ElmFluentToolkit(loggerFactory, elmToolkitSettings)
                              .WithValueSwitch(
                                  _ => opt.ElmInDirectory,
                                  ifHasValue: (api, elm) =>

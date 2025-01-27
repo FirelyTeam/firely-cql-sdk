@@ -32,13 +32,8 @@ internal readonly record struct CqlToElmProcessorServices(
         services.AddExternalLogging(loggerFactory);
         AddCqlServices(services, settings, libraryProvider);
         var serviceProvider = services.BuildServiceProvider(validateScopes: true);
-        var cqlToElmConverter = serviceProvider.GetRequiredService<CqlToElmConverter>();
 
-        return new CqlToElmProcessorServices(
-            loggerFactory,
-            serviceProvider,
-            cqlToElmConverter,
-            libraryProvider);
+        return ActivatorUtilities.CreateInstance<CqlToElmProcessorServices>(serviceProvider, serviceProvider, libraryProvider);
     }
 
     private static void AddCqlServices(

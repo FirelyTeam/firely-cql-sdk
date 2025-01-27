@@ -1,10 +1,8 @@
 ﻿using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Internal;
 
 namespace CqlSdkPrototype.Cql;
 
-public class CqlFluentToolkit(CqlToElmProcessor cqlToElmProcessor) :
-    ICqlFluentToolkit
+public sealed class CqlFluentToolkit(CqlToElmProcessor cqlToElmProcessor)
 {
     public CqlFluentToolkit(
         ILoggerFactory? loggerFactory = null,
@@ -15,7 +13,7 @@ public class CqlFluentToolkit(CqlToElmProcessor cqlToElmProcessor) :
     /// <summary>
     /// For testing purposes only.
     /// </summary>
-    internal ServiceProvider ServiceProvider => cqlToElmProcessor.ServiceProviderAccessor;
+    internal ServiceProvider ServiceProvider => cqlToElmProcessor.ServiceProvider;
 
     public ILoggerFactory LoggerFactory => ServiceProvider.GetRequiredService<ILoggerFactory>();
 
@@ -23,19 +21,19 @@ public class CqlFluentToolkit(CqlToElmProcessor cqlToElmProcessor) :
 
     public CqlToElmConversionReadOnlyDictionary CqlToElmConversions => cqlToElmProcessor.Conversions;
 
-    public ICqlFluentToolkit ReplaceSettings(Func<CqlToElmProcessorSettings, CqlToElmProcessorSettings> replace)
+    public CqlFluentToolkit ReplaceSettings(Func<CqlToElmProcessorSettings, CqlToElmProcessorSettings> replace)
     {
         cqlToElmProcessor.SetSettings(replace(Settings));
         return this;
     }
 
-    public ICqlFluentToolkit AddCqlLibraries(IEnumerable<CqlLibraryString> libraries)
+    public CqlFluentToolkit AddCqlLibraries(IEnumerable<CqlLibraryString> libraries)
     {
         cqlToElmProcessor.AddCqlLibraries(libraries);
         return this;
     }
 
-    public ICqlFluentToolkit ProcessCqlToElm()
+    public CqlFluentToolkit ProcessCqlToElm()
     {
         cqlToElmProcessor.ProcessCqlToElm();
         return this;

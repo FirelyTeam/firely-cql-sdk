@@ -1,14 +1,14 @@
 using Hl7.Fhir.Model;
-using CqlSdkPrototype.Elm;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime.Hosting;
+using CqlSdkPrototype.Elm.Internal;
 
 namespace CoreTests
 {
     [TestClass]
     public class LibraryExpressionBuilderTests
     {
-        private static ServiceProvider BuildServiceProvider() => ElmApiState.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
+        private static ServiceProvider BuildServiceProvider() => ElmToAssemblyServices.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
 
         [TestMethod]
         public void AggregateQueries_1_0_0()

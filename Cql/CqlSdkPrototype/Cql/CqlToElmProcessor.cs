@@ -26,13 +26,13 @@ public class CqlToElmProcessor
     /// <summary>
     /// For testing purposes only.
     /// </summary>
-    internal ServiceProvider ServiceProviderAccessor => _services.ServiceProvider;
+    internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
     public CqlToElmProcessorSettings Settings => _settings;
 
     public CqlToElmConversionReadOnlyDictionary Conversions => _conversions;
 
-    public void SetConversions(
+    private void SetConversions(
         CqlToElmConversionDictionary conversions)
     {
         _conversions = conversions;
@@ -42,9 +42,12 @@ public class CqlToElmProcessor
     public void SetSettings(
         CqlToElmProcessorSettings settings)
     {
+        if (_settings == settings)
+            return;
+
         _services.ServiceProvider.Dispose();
         _settings = settings;
-        _services = CqlToElmProcessorServices.Create(Settings, _services.LoggerFactory, _conversions);
+        _services = CqlToElmProcessorServices.Create(settings, _services.LoggerFactory, _conversions);
     }
 
     public void AddCqlLibraries(IEnumerable<CqlLibraryString> cqlLibraries)
