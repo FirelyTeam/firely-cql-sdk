@@ -10,7 +10,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Successor_Integer()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: successor of 2
@@ -30,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(successor.operand, typeof(Literal));
 
 
-                var lambda = CreateElmApi().Lambda(successor);
+                var lambda = CreateElmFluentToolkit().Lambda(successor);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);
@@ -43,7 +43,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Successor_Null()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: successor of (null as Integer)
@@ -63,7 +63,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(successor.operand, typeof(As));
 
 
-                var lambda = CreateElmApi().Lambda(successor);
+                var lambda = CreateElmFluentToolkit().Lambda(successor);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);

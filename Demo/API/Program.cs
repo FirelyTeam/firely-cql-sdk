@@ -24,16 +24,16 @@ internal static class Program
 
         // Get CqlApi from DI
         IServiceProvider serviceProvider = services.BuildServiceProvider();
-        var cqlApi = serviceProvider.GetRequiredService<CqlToolkit>();
+        ICqlFluentToolkit cqlApi = serviceProvider.GetRequiredService<CqlToolkit>();
 
         // Setup and use CqlApi
         cqlApi.AddCqlLibrariesFromDirectory(new DirectoryInfo("input/cql/"));
-        cqlApi.Translate();
+        cqlApi.ProcessCqlToElm();
         cqlApi.SaveElmFileToDirectory(new DirectoryInfo("output/elm/"));
 
         // Setup and use ElmApi
         var elmApi = cqlApi.CreateElmApi();
-        elmApi.Compile();
+        elmApi.ProcessElmToAssemblies();
         elmApi.SaveCSharpFilesToDirectory(new DirectoryInfo("output/csharp/"));
         elmApi.SaveAssemblyBinariesToDirectory(new DirectoryInfo("output/assemblies/"));
 

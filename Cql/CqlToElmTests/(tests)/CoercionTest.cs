@@ -10,14 +10,14 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class CoercionTest : Base
     {
-        private static CoercionProvider CoercionProvider => CreateCqlApi(
+        private static CoercionProvider CoercionProvider => CreateCqlFluentToolkit(
             EnableListPromotion:true,
             EnableListDemotion:true,
             EnableIntervalPromotion:true,
             EnableIntervalDemotion:true)
             .GetCoercionProvider();
 
-        private static ElmFactory ElmFactory => CreateCqlApi().GetElmFactory();
+        private static ElmFactory ElmFactory => CreateCqlFluentToolkit().GetElmFactory();
 
         private static Null Null() => new Null().WithResultType(SystemTypes.AnyType);
         private static Null Null(TypeSpecifier type) => new Null().WithResultType(type);

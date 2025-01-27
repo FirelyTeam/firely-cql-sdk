@@ -1,7 +1,6 @@
 ﻿using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Cql.Extensions;
-using CqlSdkPrototype.Elm.Extensibility;
+using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
@@ -44,7 +43,7 @@ internal class Program
 
     private static void InvokeCqlFromExamplesFolder(
         ILogger<Program> logger,
-        CqlToolkit cqlToolkit)
+        ICqlFluentToolkit cqlToolkit)
     {
         // INTRO:
         // This example demonstrates how to load CQL libraries from a directory and invoke a library declarations directly.
@@ -95,7 +94,7 @@ internal class Program
 
     private static void VerboseExample(
         ILogger<Program> logger,
-        CqlToolkit cqlToolkit,
+        ICqlFluentToolkit cqlToolkit,
         string librarySetName,
         bool shouldBuildCqlToElm = false)
     {
@@ -123,14 +122,14 @@ internal class Program
                                  or "NCQATerminology"
                                  or "NCQAStatus"*/
                 )
-                .Translate()
+                .ProcessCqlToElm()
                 .SaveElmFileToDirectory(dirs.ElmOutDirectory)
                 ;
         }
 
         var elmApi = cqlToolkit.CreateElmApi(o => o with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded })
                            .AddElmFilesFromDirectory(dirs.ElmInDirectory)
-                           .Compile()
+                           .ProcessElmToAssemblies()
                            .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
                            .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory);
 
@@ -200,22 +199,14 @@ internal class Program
 
 file static class X
 {
-    public static Maybe<(CqlVersionedLibraryIdentifier id, string cSharpSourceCode)>
-        TryGetFirstCSharpFileLines<TElmApi>(
-            this TElmApi elmApi)
-        where TElmApi : IElmApiExtendable<TElmApi>
-    {
-        return elmApi.Entries
-                     .TryGetFirst(kv => kv.Value.CSharpSourceCode is not null)
-                     .TryReturn(kv => (kv.Key, kv.Value.CSharpSourceCode!));
-    }
+    public static Maybe<(CqlVersionedLibraryIdentifier id, string cSharpSourceCode)> TryGetFirstCSharpFileLines(this IElmFluentToolkit elmApi) =>
+        elmApi.ElmToAssemblyConversions
+              .TryGetFirst(kv => kv.Value.CSharpSourceCode is not null)
+              .TryReturn(kv => (kv.Key, kv.Value.CSharpSourceCode!));
 
-    public static Maybe<(CqlVersionedLibraryIdentifier id, string elmJson)> TryGetFirstElmFileLines<TCqlApi>(
-        this TCqlApi cqlApi)
-        where TCqlApi : ICqlToolkit
-    {
-        return cqlApi.ProcessItems
-                     .TryGetFirst(kv => kv.Value.ElmLibrary is not null)
-                     .TryReturn(kv => (kv.Key, kv.Value.ElmLibrary!.SerializeToJson()!));
-    }
+    public static Maybe<(CqlVersionedLibraryIdentifier id, string elmJson)> TryGetFirstElmFileLines(
+        this ICqlFluentToolkit cqlApi) =>
+        cqlApi.CqlToElmConversions
+              .TryGetFirst(kv => kv.Value.ElmLibrary is not null)
+              .TryReturn(kv => (kv.Key, kv.Value.ElmLibrary!.SerializeToJson()!));
 }

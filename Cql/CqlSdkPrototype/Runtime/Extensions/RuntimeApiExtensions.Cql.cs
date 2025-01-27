@@ -1,5 +1,4 @@
 ﻿using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensions;
 
@@ -7,25 +6,25 @@ namespace CqlSdkPrototype.Runtime.Extensions;
 
 public static partial class RuntimeApiExtensions
 {
-    public static ElmApi CreateElmApi(
-        this ICqlToolkit cqlToolkit,
-        Func<ElmApiOptions, ElmApiOptions>? configureOptions = null)
+    public static IElmFluentToolkit CreateElmApi(
+        this ICqlFluentToolkit cqlToolkit,
+        Func<ElmToolkitSettings, ElmToolkitSettings>? configureOptions = null)
     {
-        var elmApiOptions = new ElmApiOptions(ProcessBatchItemExceptionHandling: cqlToolkit.Settings.ProcessBatchItemExceptionHandling);
+        var elmApiOptions = new ElmToolkitSettings(ProcessBatchItemExceptionHandling: cqlToolkit.Settings.ProcessBatchItemExceptionHandling);
         if (configureOptions is not null) elmApiOptions = configureOptions(elmApiOptions);
-        var elmApi = new ElmApi(cqlToolkit.LoggerFactory, elmApiOptions).AddElmFromCqlApi(cqlToolkit);
+        var elmApi = new ElmToolkit(cqlToolkit.LoggerFactory, elmApiOptions).AddElmFrom(cqlToolkit);
         return elmApi;
     }
 
 #pragma warning disable RS0026
     public static RuntimeScope CreateRuntimeScope(
 #pragma warning restore RS0026
-        this ICqlToolkit cqlToolkit,
-        Func<ElmApiOptions, ElmApiOptions>? configureElmOptions = null,
+        this ICqlFluentToolkit cqlToolkit,
+        Func<ElmToolkitSettings, ElmToolkitSettings>? configureElmOptions = null,
         Func<RuntimeApiOptions, RuntimeApiOptions>? configureRuntimeOptions = null)
     {
         return cqlToolkit
-               .Translate()
+               .ProcessCqlToElm()
                .CreateElmApi(configureElmOptions)
                .CreateRuntimeScope(configureRuntimeOptions);
     }

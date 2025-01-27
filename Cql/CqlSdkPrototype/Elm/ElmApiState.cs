@@ -1,5 +1,4 @@
-﻿using CqlSdkPrototype.Elm.Extensibility;
-using CqlSdkPrototype.Infrastructure;
+﻿using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Logging.Internal;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
@@ -13,28 +12,28 @@ namespace CqlSdkPrototype.Elm;
 
 internal readonly record struct ElmApiState(
     ILoggerFactory LoggerFactory,
-    ImmutableDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry> Entries,
-    ElmApiOptions Options,
+    ImmutableDictionary<CqlVersionedLibraryIdentifier, ElmToAssemblyConversion> ElmToAssemblyItems,
+    ElmToolkitSettings Settings,
     ServiceProvider ServiceProvider,
-    ILogger<ElmApi> Logger,
+    ILogger<ElmToolkit> Logger,
     AssemblyCompiler AssemblyCompiler,
     LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator)
 {
     public static ElmApiState Create(
         ILoggerFactory loggerFactory,
-        ElmApiOptions options)
+        ElmToolkitSettings options)
     {
-        var entries = ElmApiStateEntryDictionary.Empty/*.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer)*/;
+        var entries = ElmToAssemblyConversionDictionary.Empty/*.WithComparers(CqlVersionedLibraryIdentifier.IdentifierOnlyEqualityComparer)*/;
         return new ElmApiState(loggerFactory, entries, null!, null!, null!, null!, null!)
         {
             // Must be set through the property initializer, to ensure the services are created
-            Options = options
+            Settings = options
         };
     }
 
-    private readonly ElmApiOptions _options = Options;
+    private readonly ElmToolkitSettings _options = Settings;
 
-    public ElmApiOptions Options
+    public ElmToolkitSettings Settings
     {
         get => _options;
         init
@@ -50,7 +49,7 @@ internal readonly record struct ElmApiState(
             services.AddExternalLogging(LoggerFactory!);
             AddCqlCodeGenerationServices(services);
             ServiceProvider = services.BuildServiceProvider(validateScopes:true);
-            Logger = ServiceProvider.GetLogger<ElmApi>();
+            Logger = ServiceProvider.GetLogger<ElmToolkit>();
             AssemblyCompiler = ServiceProvider.GetRequiredService<AssemblyCompiler>();
             LibrarySetCSharpCodeGenerator = ServiceProvider.GetRequiredService<LibrarySetCSharpCodeGenerator>();
         }

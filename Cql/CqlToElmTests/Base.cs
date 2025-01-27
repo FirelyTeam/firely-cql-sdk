@@ -31,15 +31,15 @@ namespace Hl7.Cql.CqlToElm.Test
             CqlContext? ctx = null)
         {
             ctx ??= DefaultCqlContext;
-            var elmApi = CreateElmApi();
+            var elmApi = CreateElmFluentToolkit();
             var lambda = elmApi.Lambda(expression);
             var expressionName = "TempExpression";
-            var state = elmApi.State;
+            var elmApiServices = elmApi.ForTesting();
             LibrarySet librarySet = new("TempLibrarySet", library);
             DefinitionDictionary<LambdaExpression> definitions = new();
             definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
-            var generateCSharp = state.LibrarySetCSharpCodeGenerator.GenerateCSharp(librarySet, definitions);
-            var compile = state.AssemblyCompiler.Compile(librarySet, generateCSharp, state.Options.AssemblyCompilerDebugInformationFormat);
+            var generateCSharp = elmApiServices.GetLibrarySetCSharpCodeGenerator().GenerateCSharp(librarySet, definitions);
+            var compile = elmApiServices.GetAssemblyCompiler().Compile(librarySet, generateCSharp, elmApi.Settings.AssemblyCompilerDebugInformationFormat);
             var assemblyBytes = compile.Single().assemblyDataWithSourceCode.AssemblyBytes;
 
             using var scope = new RuntimeApi()
@@ -59,7 +59,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         protected static void AssertResult<T>(Expression be, T expected)
         {
-            var lambda = CreateElmApi().Lambda(@be);
+            var lambda = CreateElmFluentToolkit().Lambda(@be);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
 
@@ -78,7 +78,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         protected static void AssertNullResult(Expression be)
         {
-            var lambda = CreateElmApi().Lambda(@be);
+            var lambda = CreateElmFluentToolkit().Lambda(@be);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
 
@@ -161,7 +161,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsNotNull(list.element);
             Assert.AreEqual(expectedValues.Length, list.element.Length);
 
-            var lambda = CreateElmApi().Lambda(list);
+            var lambda = CreateElmFluentToolkit().Lambda(list);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
             var result = dg.DynamicInvoke(ctx);
@@ -179,7 +179,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerFactory>();
 
-        protected static CqlToolkit CreateCqlApi(
+        protected static CqlToolkit CreateCqlFluentToolkit(
             ImmutableHashSet<CqlModel>? Models = null,
             ImmutableHashSet<ModelInfo>? ModelInfos = null,
             AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,
@@ -202,13 +202,13 @@ namespace Hl7.Cql.CqlToElm.Test
                     AllowNullInterval: AllowNullIntervals
                     ));
 
-        internal static ElmApi CreateElmApi(
+        internal static IElmFluentToolkit CreateElmFluentToolkit(
             ImmutableHashSet<CqlModel>? models = null,
             ImmutableHashSet<ModelInfo>? modelInfos = null,
             AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
             bool enableListPromotion = false) =>
-            CreateCqlApi(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
-                .CreateElmApi(_ => new ElmApiOptions(
+            CreateCqlFluentToolkit(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
+                .CreateElmApi(_ => new ElmToolkitSettings(
                                   ProcessBatchItemExceptionHandling.ThrowException,
                                   Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));
     }

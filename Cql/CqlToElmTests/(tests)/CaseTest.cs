@@ -7,7 +7,7 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         private Library createLibraryForExpression(string expression)
         {
-            return CreateCqlApi().MakeLibrary($"""
+            return CreateCqlFluentToolkit().MakeLibrary($"""
                 library CaseTest version '1.0.0'
 
                 define private predicate: {expression}

@@ -8,7 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         private void TestCalculateAgeAt(string type, DateTimePrecision unit)
         {
-            var lib = CreateCqlApi().MakeLibrary($"""
+            var lib = CreateCqlFluentToolkit().MakeLibrary($"""
                 library AgeTest version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -23,7 +23,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private void TestAgeAt(string type, DateTimePrecision unit)
         {
-            var lib = CreateCqlApi().MakeLibrary($"""
+            var lib = CreateCqlFluentToolkit().MakeLibrary($"""
                 library AgeTest version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -38,7 +38,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private void TestCalculateAge(string type, DateTimePrecision unit)
         {
-            var lib = CreateCqlApi().MakeLibrary($"""
+            var lib = CreateCqlFluentToolkit().MakeLibrary($"""
                 library AgeTest version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -53,7 +53,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private void TestAge(string type, DateTimePrecision unit)
         {
-            var lib = CreateCqlApi().MakeLibrary($"""
+            var lib = CreateCqlFluentToolkit().MakeLibrary($"""
                 library AgeTest version '1.0.0'
 
                 using FHIR version '4.0.1'

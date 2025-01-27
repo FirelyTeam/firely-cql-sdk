@@ -1,6 +1,6 @@
 ﻿using Hl7.Cql.Elm;
 
-namespace CqlSdkPrototype.Elm.Extensibility;
+namespace CqlSdkPrototype.Elm;
 
-public readonly record struct ElmApiStateEntry
+public readonly record struct ElmToAssemblyConversion
     (Library ElmLibrary, string? CSharpSourceCode = null, byte[]? AssemblyBinary = null, byte[]? DebugSymbolsBinary = null);

@@ -9,7 +9,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Exists_True()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists { 1, 3, 5, 7 }
@@ -33,7 +33,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Exists_Empty_List()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists { }
@@ -53,7 +53,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Exists_Null()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists null
@@ -74,7 +74,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Exists_List_Nulls()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library ExistsTest version '1.0.0'
 
                 define private Empty_List: exists { null }
@@ -98,7 +98,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private void AssertExists(Exists exists, bool? expected)
         {
-            var lambda = CreateElmApi().Lambda(exists);
+            var lambda = CreateElmFluentToolkit().Lambda(exists);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
             var result = dg.DynamicInvoke(ctx);

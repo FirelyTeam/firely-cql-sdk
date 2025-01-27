@@ -1,20 +1,19 @@
-﻿using CqlSdkPrototype.Elm.Extensibility;
+﻿using CqlSdkPrototype.Elm;
 using Hl7.Cql.CodeGeneration.NET;
 
 namespace CqlSdkPrototype.Runtime.Extensions;
 
 public static partial class RuntimeApiExtensions
 {
-    public static RuntimeApi CreateRuntimeApi<TElmApi>(
-        this TElmApi elmApi,
+    public static RuntimeApi CreateRuntimeApi(
+        this IElmFluentToolkit elmApi,
         Func<RuntimeApiOptions, RuntimeApiOptions>? configureOptions = null)
-        where TElmApi : IElmApiExtendable<TElmApi>
     {
         var runtimeApiOptions = RuntimeApiOptions.Default;
         if (configureOptions is not null) runtimeApiOptions = configureOptions(runtimeApiOptions);
 
         var assemblyDatas =
-            from entry in elmApi.Entries
+            from entry in elmApi.ElmToAssemblyConversions
             let assembly = entry.Value.AssemblyBinary
             where assembly is not null
             let debugSymbols = entry.Value.DebugSymbolsBinary
@@ -26,14 +25,13 @@ public static partial class RuntimeApiExtensions
     }
 
 #pragma warning disable RS0026
-    public static RuntimeScope CreateRuntimeScope<TElmApi>(
+    public static RuntimeScope CreateRuntimeScope(
 #pragma warning restore RS0026
-        this TElmApi elmApi,
+        this IElmFluentToolkit elmApi,
         Func<RuntimeApiOptions, RuntimeApiOptions>? configureOptions = null)
-        where TElmApi : IElmApiExtendable<TElmApi>
     {
         return elmApi
-               .Compile()
+               .ProcessElmToAssemblies()
                .CreateRuntimeApi(configureOptions)
                .CreateRuntimeScope();
     }

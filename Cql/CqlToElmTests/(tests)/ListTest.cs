@@ -10,7 +10,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Empty_List()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library ListTest version '1.0.0'
 
                 define private Empty_List: { }
@@ -30,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void List_Integer()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library ListTest version '1.0.0'
 
                 define private List_Integer: { 1, 2, 3 }
@@ -50,7 +50,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void List_Mixed_ToQuantity()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library ListTest version '1.0.0'
 
                 define private List_Mixed_ToQuantity: { 1, 2L, 3.0, 4.0 '1' }
@@ -75,7 +75,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void List_Mixed_ToDecimal()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library ListTest version '1.0.0'
 
                 define private List_Mixed_ToDecimal: { 1, 2L, 3.0 }
@@ -95,7 +95,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void List_Mixed_ToLong()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library ListTest version '1.0.0'
 
                 define private List_Mixed_ToLong: { 1, 2L }
@@ -115,7 +115,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void List_Mixed_Any()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library ListTest version '1.0.0'
 
                 define private List_Mixed_Any: { 1, 'string' }
@@ -136,7 +136,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void List_Nulls()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library ListTest version '1.0.0'
 
                 define private List_Nulls: { null, null }
@@ -156,7 +156,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Take_Null_Integer()
         {
-            var library = CreateCqlApi().MakeLibraryFromExpression("Take(null, 3)");
+            var library = CreateCqlFluentToolkit().MakeLibraryFromExpression("Take(null, 3)");
             var slice = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Slice>();
             var @as = slice.source.Should().BeOfType<As>().Subject;
             @as.Should().HaveType(SystemTypes.AnyType.ToListType());
@@ -174,7 +174,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void List_Tuple_Different_Orders()
         {
             // we order tuple types & their elements alphabetically even when not ordered that way in the CQL
-            var lib = CreateCqlApi().MakeLibrary("""
+            var lib = CreateCqlFluentToolkit().MakeLibrary("""
                 library ListTest version '1.0.0'
 
                 define private l: { Tuple { b: 2, a: 1 }, Tuple { a: 1, b: 2 } }

@@ -12,7 +12,7 @@ namespace Hl7.Cql.CqlToElm.Test
     public class SymbolTableTest : Base
     {
         private static VersionedIdentifier TestId => new VersionedIdentifier { id = "Test", version = "1.0.0" };
-        private static SystemLibrary SystemLibrary => CreateCqlApi().GetSystemLibrary();
+        private static SystemLibrary SystemLibrary => CreateCqlFluentToolkit().GetSystemLibrary();
 
         [TestMethod]
         public void Add_Local_Expression()

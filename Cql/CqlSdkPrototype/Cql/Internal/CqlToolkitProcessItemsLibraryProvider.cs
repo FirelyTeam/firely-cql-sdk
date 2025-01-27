@@ -3,10 +3,14 @@ using Hl7.Cql.CqlToElm;
 
 namespace CqlSdkPrototype.Cql.Internal;
 
-internal class CqlToolkitProcessItemsLibraryProvider(CqlToolkitProcessItems.Builder processItemsBuilder)
+/// <summary>
+/// Provides the implementation for <seealso cref="ILibraryProvider"/> which resolves library builders given a library name and version on a <seealso cref="CqlToElmConversionDictionary.Builder"/>.
+/// </summary>00
+/// <param name="processItemsBuilder"></param>
+internal class CqlToolkitProcessItemsLibraryProvider(CqlToElmConversionDictionary.Builder processItemsBuilder)
     : ILibraryProvider
 {
-    public CqlToolkitProcessItems.Builder ProcessItemsBuilder { get; set; } = processItemsBuilder;
+    public CqlToElmConversionDictionary.Builder ProcessItemsBuilder { get; set; } = processItemsBuilder;
 
     public bool TryResolveLibrary(
         string libraryName,

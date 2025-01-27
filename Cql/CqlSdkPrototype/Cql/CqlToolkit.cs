@@ -1,5 +1,4 @@
-﻿using CqlSdkPrototype.Cql.Extensibility;
-using CqlSdkPrototype.Cql.Internal;
+﻿using CqlSdkPrototype.Cql.Internal;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.CqlToElm;
@@ -8,55 +7,72 @@ using Hl7.Cql.Runtime;
 namespace CqlSdkPrototype.Cql;
 
 public class CqlToolkit :
-    ICqlToolkit,
-    ITestingOnlyServiceProviderAccessor<CqlToolkit>
+    ICqlFluentToolkit,
+    IServiceProviderAccessorForTesting<CqlToolkit>
 {
     public CqlToolkit(
         ILoggerFactory? loggerFactory = null,
         CqlToolkitSettings? settings = null)
     {
         settings ??= CqlToolkitSettings.Default;
-        var processItems = CqlToolkitProcessItems.Empty;
+        var processItems = CqlToElmConversionDictionary.Empty;
         var entriesBuilder = processItems.ToBuilder();
         var libraryProvider = new CqlToolkitProcessItemsLibraryProvider(entriesBuilder);
-        _processItems = processItems;
+        _cqlToElmConversions = processItems;
         _services = CqlToolkitServices.Create(loggerFactory ?? NullLoggerFactory.Instance, settings, libraryProvider);
         _settings = settings;
+        SetSettings(settings);
     }
 
-    #region State
+    public ICqlFluentToolkit AsFluent() => this;
 
-    ServiceProvider ITestingOnlyServiceProviderAccessor<CqlToolkit>.ServiceProvider => _services.ServiceProvider;
-
-    private CqlToolkitProcessItems _processItems;
-    internal CqlToolkitSettings _settings;
+    private CqlToElmConversionDictionary _cqlToElmConversions;
     private CqlToolkitServices _services;
+    private CqlToolkitSettings _settings;
 
-    private void WithEntries(CqlToolkitProcessItems entries)
-    {
-        _processItems = entries;
-        _services.LibraryProvider.ProcessItemsBuilder = entries.ToBuilder();
-    }
+    ServiceProvider IServiceProviderAccessorForTesting<CqlToolkit>.ServiceProvider => _services.ServiceProvider;
 
-    internal CqlToolkit SetSettings(
-        CqlToolkitSettings value)
+    ILoggerFactory ICqlFluentToolkit.LoggerFactory => _services.LoggerFactory;
+
+    public CqlToolkitSettings Settings => _settings;
+
+    public CqlToElmConversionReadOnlyDictionary CqlToElmConversions => _cqlToElmConversions;
+
+    ICqlFluentToolkit ICqlFluentToolkit.ReplaceSettings(Func<CqlToolkitSettings, CqlToolkitSettings> replace)
     {
-        var libraryProvider = _services.LibraryProvider;
-        _services.ServiceProvider.Dispose();
-        _settings = value;
-        _services = CqlToolkitServices.Create(_services.LoggerFactory, _settings, libraryProvider);
+        SetSettings(replace(Settings));
         return this;
     }
 
-    ILoggerFactory ICqlToolkit.LoggerFactory => _services.LoggerFactory;
-    CqlToolkitSettings ICqlToolkit.Settings => _settings;
-    CqlToolkitProcessItemsReadOnly ICqlToolkit.ProcessItems => _processItems;
+    ICqlFluentToolkit ICqlFluentToolkit.AddCqlLibraries(IEnumerable<CqlLibraryString> libraries)
+    {
+        AddCqlLibraries(libraries);
+        return this;
+    }
 
-    #endregion
+    ICqlFluentToolkit ICqlFluentToolkit.ProcessCqlToElm()
+    {
+        ProcessCqlToElm();
+        return this;
+    }
 
-    #region Input (CQL Library Strings)
+    private void SetItems(
+        CqlToElmConversionDictionary conversions)
+    {
+        _cqlToElmConversions = conversions;
+        _services.LibraryProvider.ProcessItemsBuilder = conversions.ToBuilder();
+    }
 
-    public CqlToolkit AddCqlLibraries(IEnumerable<CqlLibraryString> cqlLibraries)
+    private void SetSettings(
+        CqlToolkitSettings settings)
+    {
+        var libraryProvider = _services.LibraryProvider;
+        _services.ServiceProvider.Dispose();
+        _settings = settings;
+        _services = CqlToolkitServices.Create(_services.LoggerFactory, Settings, libraryProvider);
+    }
+
+    private void AddCqlLibraries(IEnumerable<CqlLibraryString> cqlLibraries)
     {
         var logger = _services.Logger;
         var entriesBuilder = _services.LibraryProvider.ProcessItemsBuilder;
@@ -75,31 +91,26 @@ public class CqlToolkit :
 
             var libraryVisitor = CqlToElmConverter.GetLibraryVisitorScoped(scope);
             var libraryBuilder = cqlToElmConverter.GetBuilder(libraryVisitor, cqlLibrary.Cql);
-            var entry = new CqlToolkitProcessItem(cqlLibrary) { ElmLibraryBuilder = libraryBuilder };
+            var entry = new CqlToElmConversion(cqlLibrary) { ElmLibraryBuilder = libraryBuilder };
             entriesBuilder.Add(versionedIdentifier, entry);
             logger.LogInformation("Adding cql library to translation: {versionedIdentifier}", versionedIdentifier);
             hasChanged = true;
         }
 
         if (hasChanged)
-            WithEntries(entries: entriesBuilder.ToImmutable());
-        return this;
+            SetItems(conversions: entriesBuilder.ToImmutable());
     }
 
-    #endregion
-
-    #region Processing (CQL-to-ELM)
-
-    public CqlToolkit Translate()
+    private void ProcessCqlToElm()
     {
-        CqlToolkitProcessItems.Builder processItemsBuilder = _services.LibraryProvider.ProcessItemsBuilder;
+        CqlToElmConversionDictionary.Builder processItemsBuilder = _services.LibraryProvider.ProcessItemsBuilder;
         var logger = _services.Logger;
         bool atFirst = true;
 
-        IEnumerable<(CqlVersionedLibraryIdentifier versionedIdentifier, CqlToolkitProcessItem cqlTranslationEntry)> GetLibrariesForProcessing()
+        IEnumerable<(CqlVersionedLibraryIdentifier versionedIdentifier, CqlToElmConversion cqlTranslationEntry)> GetLibrariesForProcessing()
         {
             foreach (var (versionedIdentifier, cqlTranslationEntry) in
-                     _processItems.Where(kv => kv.Value.ElmLibrary is null))
+                     _cqlToElmConversions.Where(kv => kv.Value.ElmLibrary is null))
             {
                 if (atFirst)
                 {
@@ -112,7 +123,7 @@ public class CqlToolkit :
             }
         }
 
-        LogExceptionMessageAction log = logger.GetLogExceptionMessageAction(_settings.ProcessBatchItemExceptionHandling);
+        LogExceptionMessageAction log = logger.GetLogExceptionMessageAction(Settings.ProcessBatchItemExceptionHandling);
 
         int changedCount =
                 GetLibrariesForProcessing()
@@ -122,20 +133,18 @@ public class CqlToolkit :
                         var libraryName = outcome.Input.versionedIdentifier;
                         log(outcome.Exception, "Error translating CQL library '{libraryName}' to ELM.", libraryName);
                     })
-                    .HandleExceptions(_settings.ProcessBatchItemExceptionHandling)
+                    .HandleExceptions(Settings.ProcessBatchItemExceptionHandling)
                     .Count() // We must enumerate all
             ;
 
         if (changedCount > 0)
-            WithEntries(entries: processItemsBuilder.ToImmutable());
-        return this;
+            SetItems(conversions: processItemsBuilder.ToImmutable());
+        return;
 
-        void ProcessLibrary(CqlVersionedLibraryIdentifier versionedIdentifier, CqlToolkitProcessItem cqlTranslationEntry)
+        void ProcessLibrary(CqlVersionedLibraryIdentifier versionedIdentifier, CqlToElmConversion cqlTranslationEntry)
         {
             var library = cqlTranslationEntry.ElmLibraryBuilder!.Build();
             processItemsBuilder[versionedIdentifier] = cqlTranslationEntry with { ElmLibrary = library };
         }
     }
-
-    #endregion
 }

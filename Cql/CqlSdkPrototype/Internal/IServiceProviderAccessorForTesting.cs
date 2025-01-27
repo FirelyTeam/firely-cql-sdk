@@ -1,6 +1,6 @@
 ﻿namespace CqlSdkPrototype.Internal;
 
-internal interface ITestingOnlyServiceProviderAccessor<TApi>
+internal interface IServiceProviderAccessorForTesting<TApi>
 {
     ServiceProvider ServiceProvider { get; }
 }

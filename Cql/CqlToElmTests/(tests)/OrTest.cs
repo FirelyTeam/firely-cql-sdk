@@ -9,7 +9,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Or_False()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library OrTest version '1.0.0'
 
                 define private True_Or_False: true or false
@@ -54,7 +54,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmApi().Lambda(or);
+                var lambda = CreateElmFluentToolkit().Lambda(or);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -65,7 +65,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Or_True()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library OrTest version '1.0.0'
 
                 define private True_Or_True: true or true
@@ -110,7 +110,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmApi().Lambda(or);
+                var lambda = CreateElmFluentToolkit().Lambda(or);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -121,7 +121,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void False_Or_False()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library OrTest version '1.0.0'
 
                 define private False_Or_False: false or false
@@ -166,7 +166,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmApi().Lambda(or);
+                var lambda = CreateElmFluentToolkit().Lambda(or);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -177,7 +177,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Or_Null()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library OrTest version '1.0.0'
 
                 define private True_Or_Null: true or null
@@ -222,7 +222,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmApi().Lambda(or);
+                var lambda = CreateElmFluentToolkit().Lambda(or);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -233,7 +233,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Or_False()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library OrTest version '1.0.0'
 
                 define private Null_Or_False: null or false
@@ -278,7 +278,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmApi().Lambda(or);
+                var lambda = CreateElmFluentToolkit().Lambda(or);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);
@@ -289,7 +289,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Or_Null()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library OrTest version '1.0.0'
 
                 define private Null_Or_Null: null or null
@@ -334,7 +334,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmApi().Lambda(or);
+                var lambda = CreateElmFluentToolkit().Lambda(or);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);
@@ -344,7 +344,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Or_1()
         {
-            CreateCqlApi().MakeLibrary("""
+            CreateCqlFluentToolkit().MakeLibrary("""
                 library OrTest version '1.0.0'
 
                 define private True_Or_1: true or 1

@@ -1,21 +1,18 @@
-﻿using CqlSdkPrototype.Elm.Extensibility;
+﻿namespace CqlSdkPrototype.Elm.Extensions;
 
-namespace CqlSdkPrototype.Elm.Extensions;
-
-public static partial class ElmApiExtensions
+public static partial class ElmToolkitExtensions
 {
 
-    public static TElmApi SaveCSharpFilesToDirectory<TElmApi>(
-        this TElmApi elmApi,
+    public static IElmFluentToolkit SaveCSharpFilesToDirectory(
+        this IElmFluentToolkit elmApi,
         DirectoryInfo directory)
-        where TElmApi : IElmApiExtendable<TElmApi>
     {
         if (!directory.Exists)
             directory.Create();
 
-        var logger = elmApi.LoggerFactory.CreateLogger(typeof(ElmApiExtensions));
+        var logger = elmApi.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
 
-        foreach (var (libraryName, (_, cSharpSourceCode, _, _)) in elmApi.Entries)
+        foreach (var (libraryName, (_, cSharpSourceCode, _, _)) in elmApi.ElmToAssemblyConversions)
         {
             if (cSharpSourceCode is null)
                 continue;
@@ -28,17 +25,16 @@ public static partial class ElmApiExtensions
         return elmApi;
     }
 
-    public static TElmApi SaveAssemblyBinariesToDirectory<TElmApi>(
-        this TElmApi elmApi,
+    public static IElmFluentToolkit SaveAssemblyBinariesToDirectory(
+        this IElmFluentToolkit elmApi,
         DirectoryInfo directory)
-        where TElmApi : IElmApiExtendable<TElmApi>
     {
         if (!directory.Exists)
             directory.Create();
 
-        var logger = elmApi.LoggerFactory.CreateLogger(typeof(ElmApiExtensions));
+        var logger = elmApi.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
 
-        foreach (var (libraryName, (_, _, assemblyBytes, symbolsBytes)) in elmApi.Entries)
+        foreach (var (libraryName, (_, _, assemblyBytes, symbolsBytes)) in elmApi.ElmToAssemblyConversions)
         {
             if (assemblyBytes is null)
                 continue;

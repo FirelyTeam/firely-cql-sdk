@@ -151,12 +151,13 @@ namespace Test
             LibrarySet librarySet = new();
             librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
 
-            var elmApiOptions = ElmApiOptions.Default;
+            var elmApiOptions = ElmToolkitSettings.Default;
             if (Debugger.IsAttached)
                 elmApiOptions = elmApiOptions with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
-            var elmApi = new ElmApi(loggerFactory, elmApiOptions);
+            var elmApi = new ElmToolkit(loggerFactory, elmApiOptions);
 
             return elmApi
+                  .AsFluent()
                   .AddElmLibraries(librarySet)
                   .CreateRuntimeScope(configureOptions);
         }

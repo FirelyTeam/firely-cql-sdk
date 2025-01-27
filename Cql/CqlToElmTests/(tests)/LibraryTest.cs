@@ -10,9 +10,9 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Empty()
         {
-            Assert.ThrowsException<FormatException>(() => CreateCqlApi().MakeLibrary(string.Empty));
+            Assert.ThrowsException<FormatException>(() => CreateCqlFluentToolkit().MakeLibrary(string.Empty));
             var ms = new MemoryStream();
-            Assert.ThrowsException<ArgumentException>(() => CreateCqlApi().GetCqlToElmConverter().ConvertLibrary(ms));
+            Assert.ThrowsException<ArgumentException>(() => CreateCqlFluentToolkit().GetCqlToElmConverter().ConvertLibrary(ms));
         }
 
         #region Identifier
@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Identifier_AllTerms_String()
         {
-            var library = CreateCqlApi().MakeLibrary("library String version '4.0.1'");
+            var library = CreateCqlFluentToolkit().MakeLibrary("library String version '4.0.1'");
             Assert.IsNotNull(library);
             Assert.IsNotNull(library.identifier);
             Assert.AreEqual("String", library.identifier.id);
@@ -32,7 +32,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Identifier_AllTerms_Namespace()
         {
-            var library = CreateCqlApi().MakeLibrary("library Namespace.Lib version '4.0.1'");
+            var library = CreateCqlFluentToolkit().MakeLibrary("library Namespace.Lib version '4.0.1'");
             Assert.IsNotNull(library);
             Assert.IsNotNull(library.identifier);
             Assert.AreEqual("Lib", library.identifier.id);
@@ -44,7 +44,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Identifier_Id_Only()
         {
-            var library = CreateCqlApi().MakeLibrary("library Lib");
+            var library = CreateCqlFluentToolkit().MakeLibrary("library Lib");
             Assert.IsNotNull(library);
             Assert.IsNotNull(library.identifier);
             Assert.AreEqual("Lib", library.identifier.id);
@@ -56,7 +56,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Identifier_Id_Namespace()
         {
-            var library = CreateCqlApi().MakeLibrary("library Namespace.Lib");
+            var library = CreateCqlFluentToolkit().MakeLibrary("library Namespace.Lib");
             Assert.IsNotNull(library);
             Assert.IsNotNull(library.identifier);
             Assert.AreEqual("Lib", library.identifier.id);
@@ -78,7 +78,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 version = "1.0.0"
             };
 
-            var library = CreateCqlApi(ModelInfos: [modelInfo], Models: [])
+            var library = CreateCqlFluentToolkit(ModelInfos: [modelInfo], Models: [])
                 .MakeLibrary("""
                              library UsingTest version '1.0.0'
 
@@ -103,7 +103,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 version = "1.0.0"
             };
 
-            var library = CreateCqlApi(ModelInfos: [modelInfo], Models: [])
+            var library = CreateCqlFluentToolkit(ModelInfos: [modelInfo], Models: [])
                 .MakeLibrary("""
                 library UsingTest version '1.0.0'
 
@@ -127,7 +127,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 version = "1.0.0"
             };
 
-            var library = CreateCqlApi(ModelInfos: [modelInfo], Models: [])
+            var library = CreateCqlFluentToolkit(ModelInfos: [modelInfo], Models: [])
                 .MakeLibrary("""
                 library UsingTest version '1.0.0'
 
@@ -151,7 +151,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 version = "1.0.0"
             };
 
-            var library = CreateCqlApi(ModelInfos: [modelInfo], Models: [])
+            var library = CreateCqlFluentToolkit(ModelInfos: [modelInfo], Models: [])
                 .MakeLibrary("""
                 library UsingTest version '1.0.0'
 
@@ -175,7 +175,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 version = "1.0.0"
             };
 
-            var library = CreateCqlApi(ModelInfos: [modelInfo], Models: [])
+            var library = CreateCqlFluentToolkit(ModelInfos: [modelInfo], Models: [])
                 .MakeLibrary("""
                 library UsingTest version '1.0.0'
 
@@ -199,7 +199,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 version = "1.0.0"
             };
 
-            var library = CreateCqlApi(ModelInfos: [modelInfo], Models: [])
+            var library = CreateCqlFluentToolkit(ModelInfos: [modelInfo], Models: [])
                 .MakeLibrary("""
                 library UsingTest version '1.0.0'
 
@@ -220,7 +220,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_AllTerms()
         {
-            var library = CreateCqlApi()
+            var library = CreateCqlFluentToolkit()
                 .MakeLibrary("""
                              library IncludeTest version '1.0.0'
 
@@ -237,7 +237,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_AllTerms_WithNamespace()
         {
-            var library = CreateCqlApi()
+            var library = CreateCqlFluentToolkit()
                 .MakeLibrary("""
                              library IncludeTest version '1.0.0'
 
@@ -254,7 +254,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_NoVersion_LocalIdentifier()
         {
-            var library = CreateCqlApi()
+            var library = CreateCqlFluentToolkit()
                 .MakeLibrary("""
                              library IncludeTest version '1.0.0'
 
@@ -271,7 +271,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_Version_NoIdentifier()
         {
-            var library = CreateCqlApi()
+            var library = CreateCqlFluentToolkit()
                 .MakeLibrary("""
                              library IncludeTest version '1.0.0'
 
@@ -293,7 +293,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Include_NoVersion_NoIdentifier()
         {
-            var library = CreateCqlApi()
+            var library = CreateCqlFluentToolkit()
                 .MakeLibrary("""
                              library IncludeTest version '1.0.0'
 
@@ -319,7 +319,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CodeSystem_AllTerms()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 private codesystem Name: 'id' version 'version string'
@@ -335,7 +335,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CodeSystem_Without_Access_Modifier()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 codesystem Name: 'id' version 'version string'
@@ -351,7 +351,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CodeSystem_Without_Version()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 private codesystem Name: 'id'
@@ -367,7 +367,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CodeSystem_Minimal()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 codesystem Name: 'id'
@@ -383,7 +383,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CodeSystems_Two()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 private codesystem Name: 'id' version 'version string'
@@ -410,7 +410,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_AllTerms_OneCodeSystems()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id' version 'version string' codesystems { lib.cs1 }
@@ -430,7 +430,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_AllTerms_EvenCodeSystems()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id' version 'version string' codesystems { lib.cs1, cs2 }
@@ -453,7 +453,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_AllTerms_OddCodeSystems()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id' version 'version string' codesystems { lib.cs1, cs2, lib2.cs3 }
@@ -477,7 +477,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_Without_Access_Modifier()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 valueset Name: 'id' version 'version string'
@@ -493,7 +493,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_Without_Version()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id'
@@ -509,7 +509,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_Minimal()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 valueset Name: 'id'
@@ -525,7 +525,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSets_Two()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 private valueset Name: 'id' version 'version string'
@@ -548,7 +548,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_CodeSystems_NoVersion()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 valueset Name: 'id' codesystems { lib.cs1, cs2, lib2.cs3 }
@@ -576,7 +576,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Code_WithoutDisplay()
         {
-            var library = CreateCqlApi()
+            var library = CreateCqlFluentToolkit()
                 .MakeLibrary("""
                              library IncludeTest version '1.0.0'
 
@@ -595,7 +595,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Code_AccessModifier_WithoutDisplay()
         {
-            var library = CreateCqlApi()
+            var library = CreateCqlFluentToolkit()
                 .MakeLibrary("""
                              library IncludeTest version '1.0.0'
 
@@ -615,7 +615,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Code_WithDisplay()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 code Name: 'id' from lib.cs1 display 'Code display text'
@@ -634,7 +634,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Code_AllTerms()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 private code Name: 'id' from lib.cs1 display 'Code display text'
@@ -657,7 +657,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Concept_AllTerms()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 private concept Name: { lib.code1, code2, lib2.code3 } display 'My concept'
@@ -683,7 +683,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Concept_NoDisplay()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 concept Name: { lib.code1 }
@@ -703,7 +703,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Concept_Build()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 codesystem "SystemA": 'http://hl7.org'
@@ -713,7 +713,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 private concept Name: { "code1", "code2", "code3" } display 'My concept'
                 """);
-            _ = CreateElmApi().ProcessLibrary(library);
+            _ = CreateElmFluentToolkit().ProcessLibrary(library);
         }
 
         #endregion
@@ -723,7 +723,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Paramter_AllTerms()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 private parameter Name System.String default 'default value'
@@ -739,7 +739,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Parameter_AllTermsWithCast()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 private parameter Name System.Decimal default 1
@@ -754,7 +754,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Parameter_Default()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 private parameter Name default 'default value'
@@ -768,7 +768,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Parameter_Type()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 private parameter Name System.String
@@ -782,7 +782,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Parameter_None()
         {
-            var library = CreateCqlApi().MakeLibrary("""
+            var library = CreateCqlFluentToolkit().MakeLibrary("""
                 library IncludeTest version '1.0.0'
 
                 private parameter Name

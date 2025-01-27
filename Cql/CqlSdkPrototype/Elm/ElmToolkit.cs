@@ -1,5 +1,4 @@
-﻿using CqlSdkPrototype.Elm.Extensibility;
-using CqlSdkPrototype.Infrastructure;
+﻿using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
@@ -9,48 +8,65 @@ using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Elm;
 
-public class ElmApi :
-    IElmApiExtendable<ElmApi>
+public class ElmToolkit :
+    IElmFluentToolkit,
+    IServiceProviderAccessorForTesting<ElmToolkit>
 {
-    public ElmApi(
+    public ElmToolkit(
         ILoggerFactory? loggerFactory = null,
-        ElmApiOptions? options = null) : this(ElmApiState.Create(loggerFactory ?? NullLoggerFactory.Instance, options ?? ElmApiOptions.Default)) { }
+        ElmToolkitSettings? options = null) : this(ElmApiState.Create(loggerFactory ?? NullLoggerFactory.Instance, options ?? ElmToolkitSettings.Default)) { }
 
-    internal ElmApi(ElmApiState state) => _state = state; // Might make this public later. Used for testing now.
+    public IElmFluentToolkit AsFluent() => this;
 
-    #region State
+    internal ElmToolkit(ElmApiState state) => _state = state; // Might make this public later. Used for testing now.
 
     private ElmApiState _state;
 
-    ElmApiOptions IElmApiExtendable<ElmApi>.Options => _state.Options;
-    IReadOnlyDictionary<CqlVersionedLibraryIdentifier, ElmApiStateEntry> IElmApiExtendable<ElmApi>.Entries => _state.Entries;
+    public ElmToolkitSettings Settings => _state.Settings;
 
-    private ElmApi WithEntries(
-        ElmApiStateEntryDictionary entries)
+    public ElmToAssemblyConversionReadOnlyDictionary ElmToAssemblyConversions => _state.ElmToAssemblyItems;
+
+    public ILoggerFactory LoggerFactory => _state.LoggerFactory;
+
+    ElmToolkit IElmFluentToolkit.ElmToolkit => this;
+
+    ServiceProvider IServiceProviderAccessorForTesting<ElmToolkit>.ServiceProvider => _state.ServiceProvider;
+
+    IElmFluentToolkit IElmFluentToolkit.ReplaceSettings(Func<ElmToolkitSettings, ElmToolkitSettings> replace)
     {
-        _state = _state with { Entries = entries };
+        SetSettings(replace(_state.Settings));
         return this;
     }
 
-    public ElmApi WithOptions(
-        Func<ElmApiOptions, ElmApiOptions> replaceOptions)
+    IElmFluentToolkit IElmFluentToolkit.AddElmLibraries(IEnumerable<Library> libraries)
     {
-        var newOptions = replaceOptions(_state.Options);
-        if (!ReferenceEquals(_state.Options, newOptions))
-            _state = _state with { Options = newOptions };
+        AddElmLibraries(libraries);
         return this;
     }
 
-    TResult IElmApiExtendable<ElmApi>.UseLogger<TResult>(Func<ElmApi, ILogger<ElmApi>, TResult> action) => action(this, _state.Logger);
-    ILoggerFactory IElmApiExtendable<ElmApi>.LoggerFactory => _state.LoggerFactory;
-
-    #endregion
-
-    #region Input (ELM Libraries)
-
-    public ElmApi AddElmLibraries(IEnumerable<Library> libraries)
+    IElmFluentToolkit IElmFluentToolkit.ProcessElmToAssemblies()
     {
-        var entries = _state.Entries.ToBuilder();
+        ProcessElmToAssemblies();
+        return this;
+    }
+
+
+    private void SetEntries(
+        ElmToAssemblyConversionDictionary conversions)
+    {
+        _state = _state with { ElmToAssemblyItems = conversions };
+    }
+
+    private void SetSettings(
+        ElmToolkitSettings settings)
+    {
+        if (!ReferenceEquals(_state.Settings, settings))
+            _state = _state with { Settings = settings };
+    }
+
+    private void AddElmLibraries(IEnumerable<Library> libraries)
+    {
+        var entries = _state.ElmToAssemblyItems.ToBuilder();
         var hasChanged = false;
         foreach (var library in libraries)
         {
@@ -63,32 +79,26 @@ public class ElmApi :
                 continue;
             }
 
-            var libraryCompilation = new ElmApiStateEntry(library);
+            var libraryCompilation = new ElmToAssemblyConversion(library);
             entries.Add(versionedIdentifier, libraryCompilation);
             _state.Logger.LogInformation("Adding library to compiler: {versionedIdentifier}", versionedIdentifier);
             hasChanged = true;
         }
 
-        return hasChanged
-                   ? WithEntries(entries: entries.ToImmutable())
-                   : this;
+        if (hasChanged)
+            SetEntries(conversions: entries.ToImmutable());
     }
 
-    #endregion
-
-    #region Processing
-
-    public ElmApi Compile()
+    private void ProcessElmToAssemblies()
     {
-        var entries = _state.Entries;
-        if (entries.Values.All(predicate: lc => lc is { AssemblyBinary: not null }))
-            return this;
+        var entries = _state.ElmToAssemblyItems;
+        if (entries.Values.All(predicate: lc => lc is { AssemblyBinary: not null })) return;
 
         using var servicesScope = _state.CreateScopedState();
         var logger = _state.Logger;
         logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
-        var exceptionHandling = _state.Options.ProcessBatchItemExceptionHandling;
-        var debugInformationFormat = _state.Options.AssemblyCompilerDebugInformationFormat;
+        var exceptionHandling = _state.Settings.ProcessBatchItemExceptionHandling;
+        var debugInformationFormat = _state.Settings.AssemblyCompilerDebugInformationFormat;
         AssemblyCompiler assemblyCompiler = _state.AssemblyCompiler;
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _state.LibrarySetCSharpCodeGenerator;
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
@@ -109,13 +119,14 @@ public class ElmApi :
 
         var entriesBuilder = entries.ToBuilder();
         var hasChanged = UpdateStateEntries(assemblyDatas, entriesBuilder, logger);
-        return hasChanged ? WithEntries(entries: entriesBuilder.ToImmutable()) : this;
+        if (hasChanged)
+            SetEntries(conversions: entriesBuilder.ToImmutable());
     }
 
     private static bool UpdateStateEntries(
         IEnumerable<(Library library, AssemblyDataWithSourceCode assemblyDataWithSourceCode)> assemblyDatas,
-        ElmApiStateEntryDictionary.Builder entriesBuilder,
-        ILogger<ElmApi> logger)
+        ElmToAssemblyConversionDictionary.Builder entriesBuilder,
+        ILogger<ElmToolkit> logger)
     {
         bool hasChanged = false;
         foreach (var (library, (assemblyBinary, sourceCodePerName, debugSymbols)) in assemblyDatas)
@@ -149,7 +160,7 @@ public class ElmApi :
         LibrarySet librarySet,
         IEnumerable<(Library library, string cSharp)> cSharps,
         AssemblyCompilerDebugInformationFormat debugInformationFormat,
-        ILogger<ElmApi> logger,
+        ILogger<ElmToolkit> logger,
         LogExceptionMessageAction log,
         ProcessBatchItemExceptionHandling exceptionHandling)
     {
@@ -177,7 +188,7 @@ public class ElmApi :
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor,
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> librarySetDefinitions,
-        ILogger<ElmApi> logger,
+        ILogger<ElmToolkit> logger,
         LogExceptionMessageAction log,
         ProcessBatchItemExceptionHandling exceptionHandling)
     {
@@ -202,7 +213,7 @@ public class ElmApi :
     private static DefinitionDictionary<LambdaExpression> BuildLibrarySetDefinitions(
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped,
         LibrarySet librarySet,
-        ILogger<ElmApi> logger,
+        ILogger<ElmToolkit> logger,
         LogExceptionMessageAction log,
         ProcessBatchItemExceptionHandling exceptionHandling)
     {
@@ -228,6 +239,4 @@ public class ElmApi :
 
         return librarySetDefinitions;
     }
-
-    #endregion
 }

@@ -12,7 +12,7 @@ namespace CoreTests
 {
     using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
     using Expression = System.Linq.Expressions.Expression;
-    
+
     [TestClass]
     [TestCategory("UnitTest")]
     public class PrimitiveTests
@@ -3408,9 +3408,10 @@ namespace CoreTests
 
             Assert.That.DoesNotThrow(() =>
             {
-                new ElmApi(loggerFactory)
+                new ElmToolkit(loggerFactory)
+                    .AsFluent()
                     .AddElmLibraries(librarySet)
-                    .Compile();
+                    .ProcessElmToAssemblies();
             });
         }
 

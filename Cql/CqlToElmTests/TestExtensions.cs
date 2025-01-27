@@ -1,8 +1,8 @@
 using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Cql.Extensibility;
 using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Infrastructure;
+using CqlSdkPrototype.Internal;
 using FluentAssertions.Collections;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
@@ -18,10 +18,10 @@ internal static class TestExtensions
 
     private static Library Library { get; } = new(identifier: new VersionedIdentifier { id = "Lambdas", version = "1.0.0" });
 
-    public static ICqlToolkit AddFHIRHelpers(this ICqlToolkit cqlToolkit) => cqlToolkit.AddCqlLibraryString(FHIRHelpers);
+    public static ICqlFluentToolkit AddFHIRHelpers(this ICqlFluentToolkit cqlToolkit) => cqlToolkit.AddCqlLibraryString(FHIRHelpers);
 
     public static Library MakeLibrary(
-        this ICqlToolkit cqlToolkit,
+        this ICqlFluentToolkit cqlToolkit,
         string cql,
         params string[] expectedErrors)
     {
@@ -29,9 +29,8 @@ internal static class TestExtensions
 
         var library = cqlToolkit
                       .AddCqlLibraryString(cqlLibraryString)
-                      .Translate()
-                      .AsExtendable()
-                      .ProcessItems[cqlLibraryString.VersionedLibraryIdentifier]
+                      .ProcessCqlToElm()
+                      .CqlToElmConversions[cqlLibraryString.VersionedLibraryIdentifier]
                       .ElmLibrary!;
 
         if (expectedErrors.Any())
@@ -43,7 +42,7 @@ internal static class TestExtensions
     }
 
     public static Library MakeLibraryFromExpression(
-        this ICqlToolkit cqlToolkit,
+        this ICqlFluentToolkit cqlToolkit,
         string expression,
         string[]? expectedErrors = null,
         [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
@@ -57,27 +56,24 @@ internal static class TestExtensions
         return lib;
     }
 
+    internal static IServiceProviderAccessorForTesting<ElmToolkit> ForTesting(this IElmFluentToolkit elmToolkit) =>
+        elmToolkit.ElmToolkit;
+
     internal static DefinitionDictionary<LambdaExpression> ProcessLibrary(
-        this ElmApi elmApi,
+        this IElmFluentToolkit elmToolkit,
         Library library)
     {
-        using var scope = elmApi
-                          .State
-                          .ServiceProvider
-                          .CreateScope();
-        var libraryExpressionBuilder = scope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
+        using var scope = elmToolkit.ForTesting().CreateScope();
+        var libraryExpressionBuilder = scope.GetLibraryExpressionBuilder();
         return libraryExpressionBuilder.ProcessLibrary(library);
     }
 
     internal static LambdaExpression Lambda(
-        this ElmApi elmApi,
+        this IElmFluentToolkit elmToolkit,
         Expression expression)
     {
-        using var scope = elmApi
-                          .State
-                          .ServiceProvider
-                          .CreateScope();
-        var libraryExpressionBuilder = scope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
+        using var scope = elmToolkit.ForTesting().CreateScope();
+        var libraryExpressionBuilder = scope.GetLibraryExpressionBuilder();
 
         DefinitionDictionary<LambdaExpression> lambdas = new DefinitionDictionary<LambdaExpression>();
         var ctx = libraryExpressionBuilder.NewExpressionBuilderContext(Library, lambdas);
@@ -94,7 +90,7 @@ internal static class TestExtensions
         (A)(object)assertions.AllBeOfType<A>().And.ContainSingle().Subject!;
 
     public static Expression Expression(
-        this ICqlToolkit cqlToolkit,
+        this ICqlFluentToolkit cqlToolkit,
         string expression,
         [System.Runtime.CompilerServices.CallerMemberName]
         string memberName = "")

@@ -30,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Test
             // if (testCase.TestName != "AgeInYearsAt")
             //     Assert.Inconclusive("Skipped!");
 
-            var cqlApi = CreateCqlApi(AllowNullIntervals:true);
+            var cqlApi = CreateCqlFluentToolkit(AllowNullIntervals:true);
             var expression = cqlApi.Expression(testCase.Expression);
             var expressionErrors = expression.GetErrors();
             if (expressionErrors.Any())
@@ -60,22 +60,22 @@ namespace Hl7.Cql.CqlToElm.Test
             }
 
             Expression equal = Equals(expression, expectation);
-            var equalLambda = CreateElmApi().Lambda(equal);
+            var equalLambda = CreateElmFluentToolkit().Lambda(equal);
 
             var equalDelegate = equalLambda.Compile();
             // TODO: These needs to be changed to run through the AssemblyCompiler too
             var equalResult = (bool?)equalDelegate.DynamicInvoke(CqlContext);
             if (equalResult != true)
             {
-                var expressionValue = CreateElmApi().Lambda(expression).Compile().DynamicInvoke(CqlContext);
-                var expectationValue = CreateElmApi().Lambda(expectation).Compile().DynamicInvoke(CqlContext);
+                var expressionValue = CreateElmFluentToolkit().Lambda(expression).Compile().DynamicInvoke(CqlContext);
+                var expectationValue = CreateElmFluentToolkit().Lambda(expectation).Compile().DynamicInvoke(CqlContext);
                 Assert.Fail($"Case {testFullName} assertion failed. Expected '{expectationValue}', but got '{expressionValue}'.");
             }
         }
 
         private static Expression Equals(Expression expression, Expression expectation)
         {
-            var cqlApi = CreateCqlApi();
+            var cqlApi = CreateCqlFluentToolkit();
             var invocationBuilder = cqlApi.GetInvocationBuilder();
             var elmFactory = cqlApi.GetElmFactory();
             var equal = invocationBuilder.Invoke(SystemLibrary.Equal, expression, expectation);
