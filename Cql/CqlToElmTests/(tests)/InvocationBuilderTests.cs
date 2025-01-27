@@ -10,9 +10,16 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class InvocationBuilderTest : Base
     {
-        internal static InvocationBuilder InvocationBuilder => CreateCqlApi().Services.ServiceProvider.GetRequiredService<InvocationBuilder>();
-        internal static ElmFactory ElmFactory => CreateCqlApi().Services.ServiceProvider.GetRequiredService<ElmFactory>();
-        
+        static InvocationBuilderTest()
+        {
+            var cqlApi = CreateCqlApi();
+            InvocationBuilder = cqlApi.GetInvocationBuilder();
+            ElmFactory = cqlApi.GetElmFactory();
+        }
+
+        private static InvocationBuilder InvocationBuilder { get; }
+        private static ElmFactory ElmFactory { get; }
+
         private static ParameterTypeSpecifier Generic(string parameterName = "T") => new ParameterTypeSpecifier { parameterName = parameterName };
 
         private static Literal Boolean(bool value = true) => ElmFactory.Literal(value);
@@ -27,6 +34,7 @@ namespace Hl7.Cql.CqlToElm.Test
         private static readonly Null Null = new Null().WithResultType(SystemTypes.AnyType);
 
         private static readonly ParameterTypeSpecifier T = new ParameterTypeSpecifier { parameterName = "T" };
+
         private static void AssertCompatible(FunctionDef function, Expression[] arguments, CoercionCost mostExpensive, int? totalCost = null)
         {
             var result = InvocationBuilder.MatchSignature(function, arguments);

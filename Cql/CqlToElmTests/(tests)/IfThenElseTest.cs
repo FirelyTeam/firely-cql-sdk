@@ -76,7 +76,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void String_Integer_Integer()
         {
-            var messageProvider = CreateCqlApi().Services.ServiceProvider.GetRequiredService<MessageProvider>();
+            var messageProvider = CreateCqlApi().GetMessageProvider();
             string[] expectedErrors = [messageProvider.TypeFoundIsNotExpected(SystemTypes.StringType, SystemTypes.BooleanType)];
             var library = CreateCqlApi().MakeLibraryFromExpression("if 'hello' then 4 else 5", expectedErrors);
 

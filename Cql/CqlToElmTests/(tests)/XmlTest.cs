@@ -76,9 +76,8 @@ namespace Hl7.Cql.CqlToElm.Test
         private static Expression Equals(Expression expression, Expression expectation)
         {
             var cqlApi = CreateCqlApi();
-            var serviceProvider = cqlApi.Services.ServiceProvider;
-            var invocationBuilder = serviceProvider.GetService<InvocationBuilder>();
-            var elmFactory = serviceProvider.GetService<ElmFactory>();
+            var invocationBuilder = cqlApi.GetInvocationBuilder();
+            var elmFactory = cqlApi.GetElmFactory();
             var equal = invocationBuilder.Invoke(SystemLibrary.Equal, expression, expectation);
             var @if = new If
             {

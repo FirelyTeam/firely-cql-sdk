@@ -14,9 +14,10 @@ namespace Hl7.Cql.CqlToElm.Test
             EnableListPromotion:true,
             EnableListDemotion:true,
             EnableIntervalPromotion:true,
-            EnableIntervalDemotion:true).Services.ServiceProvider.GetRequiredService<CoercionProvider>();
+            EnableIntervalDemotion:true)
+            .GetCoercionProvider();
 
-        private static ElmFactory ElmFactory => CreateCqlApi().Services.ServiceProvider.GetRequiredService<ElmFactory>();
+        private static ElmFactory ElmFactory => CreateCqlApi().GetElmFactory();
 
         private static Null Null() => new Null().WithResultType(SystemTypes.AnyType);
         private static Null Null(TypeSpecifier type) => new Null().WithResultType(type);

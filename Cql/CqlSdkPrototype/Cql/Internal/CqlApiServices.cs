@@ -12,7 +12,8 @@ internal readonly record struct CqlApiServices(
     ILoggerFactory LoggerFactory,
     ServiceProvider ServiceProvider,
     CqlToElmConverter CqlToElmConverter,
-    EntriesBuilderLibraryProvider LibraryProvider)
+    EntriesBuilderLibraryProvider LibraryProvider) :
+    ITestingOnlyServiceProviderAccessor<CqlApiServices>
 {
     private static readonly (CqlModel CqlModel, ModelInfo ModelInfo)[] AllMappedModelsInOrder = [
         (CqlModel.ElmR1, Models.ElmR1),
