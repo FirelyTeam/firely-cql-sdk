@@ -6,11 +6,11 @@ namespace CqlSdkPrototype.Cql.Internal;
 /// <summary>
 /// Provides the implementation for <seealso cref="ILibraryProvider"/> which resolves library builders given a library name and version on a <seealso cref="CqlToElmConversionDictionary.Builder"/>.
 /// </summary>00
-/// <param name="processItemsBuilder"></param>
-internal class CqlToolkitProcessItemsLibraryProvider(CqlToElmConversionDictionary.Builder processItemsBuilder)
+/// <param name="builder"></param>
+internal class CqlToElmConversionsLibraryProvider(CqlToElmConversionDictionary.Builder builder)
     : ILibraryProvider
 {
-    public CqlToElmConversionDictionary.Builder ProcessItemsBuilder { get; set; } = processItemsBuilder;
+    public CqlToElmConversionDictionary.Builder Builder { get; set; } = builder;
 
     public bool TryResolveLibrary(
         string libraryName,
@@ -25,7 +25,7 @@ internal class CqlToolkitProcessItemsLibraryProvider(CqlToElmConversionDictionar
             CqlLibraryIdentifier.Parse(libraryName),
             version is null ? null : CqlLibraryVersion.Parse(version));
 
-        if (ProcessItemsBuilder.TryGetValue(libVer, out var processItem) && processItem.ElmLibraryBuilder is { } lb)
+        if (Builder.TryGetValue(libVer, out var processItem) && processItem.ElmLibraryBuilder is { } lb)
         {
             libraryBuilder = lb;
             return true;

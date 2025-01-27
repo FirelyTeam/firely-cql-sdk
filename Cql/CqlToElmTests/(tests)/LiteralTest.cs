@@ -1,5 +1,3 @@
-using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Cql.Internal;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 

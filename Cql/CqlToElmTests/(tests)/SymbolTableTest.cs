@@ -1,8 +1,6 @@
-using CqlSdkPrototype.Cql;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Scopes;
 using Hl7.Cql.Elm;
-using CqlSdkPrototype.Cql.Internal;
 
 namespace Hl7.Cql.CqlToElm.Test
 {

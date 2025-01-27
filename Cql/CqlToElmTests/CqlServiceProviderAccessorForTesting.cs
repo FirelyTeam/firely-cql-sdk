@@ -1,29 +1,28 @@
 ﻿using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Internal;
 using Hl7.Cql.CqlToElm.Builtin;
 
 namespace Hl7.Cql.CqlToElm.Test;
 
 internal static class CqlServiceProviderAccessorForTesting
 {
-    private static TService GetCqlRequiredService<TService>(this IServiceProviderAccessorForTesting<CqlToolkit> spAccessor) where TService : notnull =>
-        spAccessor.ServiceProvider.GetRequiredService<TService>();
+    private static TService GetCqlRequiredService<TService>(this CqlFluentToolkit cqlFluentToolkit) where TService : notnull =>
+        cqlFluentToolkit.ServiceProvider.GetRequiredService<TService>();
 
-    public static CqlToElmConverter GetCqlToElmConverter(this IServiceProviderAccessorForTesting<CqlToolkit> spAccessor) =>
-        spAccessor.GetCqlRequiredService<CqlToElmConverter>();
+    public static CqlToElmConverter GetCqlToElmConverter(this CqlFluentToolkit cqlFluentToolkit) =>
+        cqlFluentToolkit.GetCqlRequiredService<CqlToElmConverter>();
 
-    public static CoercionProvider GetCoercionProvider(this IServiceProviderAccessorForTesting<CqlToolkit> spAccessor) =>
-        spAccessor.GetCqlRequiredService<CoercionProvider>();
+    public static CoercionProvider GetCoercionProvider(this CqlFluentToolkit cqlFluentToolkit) =>
+        cqlFluentToolkit.GetCqlRequiredService<CoercionProvider>();
 
-    public static ElmFactory GetElmFactory(this IServiceProviderAccessorForTesting<CqlToolkit> spAccessor) =>
-        spAccessor.GetCqlRequiredService<ElmFactory>();
+    public static ElmFactory GetElmFactory(this CqlFluentToolkit cqlFluentToolkit) =>
+        cqlFluentToolkit.GetCqlRequiredService<ElmFactory>();
 
-    public static MessageProvider GetMessageProvider(this IServiceProviderAccessorForTesting<CqlToolkit> spAccessor) =>
-        spAccessor.GetCqlRequiredService<MessageProvider>();
+    public static MessageProvider GetMessageProvider(this CqlFluentToolkit cqlFluentToolkit) =>
+        cqlFluentToolkit.GetCqlRequiredService<MessageProvider>();
 
-    public static InvocationBuilder GetInvocationBuilder(this IServiceProviderAccessorForTesting<CqlToolkit> spAccessor) =>
-        spAccessor.GetCqlRequiredService<InvocationBuilder>();
+    public static InvocationBuilder GetInvocationBuilder(this CqlFluentToolkit cqlFluentToolkit) =>
+        cqlFluentToolkit.GetCqlRequiredService<InvocationBuilder>();
 
-    public static SystemLibrary GetSystemLibrary(this IServiceProviderAccessorForTesting<CqlToolkit> spAccessor) =>
-        spAccessor.GetCqlRequiredService<SystemLibrary>();
+    public static SystemLibrary GetSystemLibrary(this CqlFluentToolkit cqlFluentToolkit) =>
+        cqlFluentToolkit.GetCqlRequiredService<SystemLibrary>();
 }

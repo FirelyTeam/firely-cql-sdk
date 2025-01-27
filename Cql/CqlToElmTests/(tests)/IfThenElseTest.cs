@@ -1,5 +1,3 @@
-using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Cql.Internal;
 using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -76,9 +74,10 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void String_Integer_Integer()
         {
-            var messageProvider = CreateCqlFluentToolkit().GetMessageProvider();
+            var cqlFluentToolkit = CreateCqlFluentToolkit();
+            var messageProvider = cqlFluentToolkit.GetMessageProvider();
             string[] expectedErrors = [messageProvider.TypeFoundIsNotExpected(SystemTypes.StringType, SystemTypes.BooleanType)];
-            var library = CreateCqlFluentToolkit().MakeLibraryFromExpression("if 'hello' then 4 else 5", expectedErrors);
+            var library = cqlFluentToolkit.MakeLibraryFromExpression("if 'hello' then 4 else 5", expectedErrors);
 
             var @if = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
             @if.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);

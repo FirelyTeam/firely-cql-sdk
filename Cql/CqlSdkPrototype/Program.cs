@@ -26,8 +26,8 @@ internal class Program
                 .BuildServiceProvider();
 
         var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
-        var cqlApiOptions = new CqlToolkitSettings(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        var cqlApi = new CqlToolkit(loggerFactory, cqlApiOptions);
+        var cqlToElmProcessorSettings = new CqlToElmProcessorSettings(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
+        var cqlFluentToolkit = new CqlFluentToolkit(loggerFactory, cqlToElmProcessorSettings);
 
         var logger = serviceProvider.GetLogger<Program>();
 
@@ -36,7 +36,7 @@ internal class Program
         //InvokeCqlFromExamplesFolder(logger: logger, cqlApi: cqlApi);
         //
         foreach (var librarySetName in (string[]) ["CMS"])//"Authoring", "CMS", "Demo", "Examples"])
-            VerboseExample(logger: logger, cqlToolkit: cqlApi, librarySetName: librarySetName, shouldBuildCqlToElm:false);
+            VerboseExample(logger: logger, cqlToolkit: cqlFluentToolkit, librarySetName: librarySetName, shouldBuildCqlToElm:false);
 
         // VerboseExample(logger, cqlApi, "CMS");
     }
@@ -72,7 +72,7 @@ internal class Program
         }
     }
 
-    private static void InvokeCqlExample(CqlToolkit cqlToolkit)
+    private static void InvokeCqlExample(ICqlFluentToolkit cqlToolkit)
     {
         // INTRO:
         // This example demonstrates how to add a CqlLibraryString to the CqlApi and invoke a library declaration directly.

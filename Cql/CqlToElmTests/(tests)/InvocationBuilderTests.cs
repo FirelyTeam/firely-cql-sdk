@@ -1,7 +1,5 @@
-using CqlSdkPrototype.Cql;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
-using CqlSdkPrototype.Cql.Internal;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -12,9 +10,9 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         static InvocationBuilderTest()
         {
-            var cqlApi = CreateCqlFluentToolkit();
-            InvocationBuilder = cqlApi.GetInvocationBuilder();
-            ElmFactory = cqlApi.GetElmFactory();
+            var cqlFluentToolkit = CreateCqlFluentToolkit();
+            InvocationBuilder = cqlFluentToolkit.GetInvocationBuilder();
+            ElmFactory = cqlFluentToolkit.GetElmFactory();
         }
 
         private static InvocationBuilder InvocationBuilder { get; }

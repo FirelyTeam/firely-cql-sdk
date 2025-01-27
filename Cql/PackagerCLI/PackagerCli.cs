@@ -37,10 +37,10 @@ internal class PackagerCli
             IElmFluentToolkit elmToolkit;
             if (translateCql)
             {
-                elmToolkit = new CqlToolkit(
+                var cqlToElmProcessorSettings = new CqlToElmProcessorSettings(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
+                elmToolkit = new CqlFluentToolkit(
                                  loggerFactory,
-                                 new CqlToolkitSettings(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue))
-                             .AsFluent()
+                                 cqlToElmProcessorSettings)
                              .WithValueSwitch(
                                  valueSelector: _ => opt.CqlInDirectory,
                                  ifHasValue: (api, cql) => api.AddCqlLibrariesFromDirectory(cql),
@@ -58,7 +58,8 @@ internal class PackagerCli
             }
             else
             {
-                elmToolkit = new ElmToolkit(loggerFactory, new ElmToolkitSettings(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue))
+                var elmToolkitSettings = new ElmToolkitSettings(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
+                elmToolkit = new ElmToolkit(loggerFactory, elmToolkitSettings)
                              .AsFluent()
                              .WithValueSwitch(
                                  _ => opt.ElmInDirectory,

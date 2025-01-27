@@ -1,6 +1,4 @@
-using CqlSdkPrototype.Cql;
 using Hl7.Cql.Elm;
-using CqlSdkPrototype.Cql.Internal;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -10,28 +8,42 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class CoercionTest : Base
     {
-        private static CoercionProvider CoercionProvider => CreateCqlFluentToolkit(
-            EnableListPromotion:true,
-            EnableListDemotion:true,
-            EnableIntervalPromotion:true,
-            EnableIntervalDemotion:true)
-            .GetCoercionProvider();
+        static CoercionTest()
+        {
+            var cqlFluentToolkit = CreateCqlFluentToolkit(
+                EnableListPromotion: true,
+                EnableListDemotion: true,
+                EnableIntervalPromotion: true,
+                EnableIntervalDemotion: true);
+            ElmFactory = cqlFluentToolkit.GetElmFactory();
+            CoercionProvider = cqlFluentToolkit.GetCoercionProvider();
+        }
 
-        private static ElmFactory ElmFactory => CreateCqlFluentToolkit().GetElmFactory();
+        private static readonly CoercionProvider CoercionProvider;
+
+        private static readonly ElmFactory ElmFactory;
 
         private static Null Null() => new Null().WithResultType(SystemTypes.AnyType);
         private static Null Null(TypeSpecifier type) => new Null().WithResultType(type);
 
         private static Literal String(string value = "") => ElmFactory.Literal(value);
-        private static Literal Integer(int value = 1) => ElmFactory.Literal(value); private static Interval Interval(Expression low, Expression high) => new Interval { low = low, high = high }.WithResultType(low.resultTypeSpecifier.ToIntervalType());
+        private static Literal Integer(int value = 1) => ElmFactory.Literal(value);
 
-        private static ValueSetRef ValueSet(string url = "http://hl7.org") => new ValueSetRef { name = "TestValueSet" }.WithResultType(SystemTypes.ValueSetType);
-        private static List List(TypeSpecifier elementType, params Expression[] elements) => new List { element = elements }.WithResultType(elementType.ToListType());
+        private static Interval Interval(Expression low, Expression high) =>
+            new Interval { low = low, high = high }.WithResultType(low.resultTypeSpecifier.ToIntervalType());
+
+        private static ValueSetRef ValueSet(string url = "http://hl7.org") =>
+            new ValueSetRef { name = "TestValueSet" }.WithResultType(SystemTypes.ValueSetType);
+
+        private static List List(TypeSpecifier elementType, params Expression[] elements) =>
+            new List { element = elements }.WithResultType(elementType.ToListType());
+
         private static ChoiceTypeSpecifier Choice(params TypeSpecifier[] types) => new ChoiceTypeSpecifier(types);
 
         private static Tuple Tuple(params (string name, Expression value)[] tuple) =>
             new Tuple { element = tuple.Select(t => new TupleElement { name = t.name, value = t.value }).ToArray() }
-            .WithResultType(TupleType(tuple.Select(t => (t.name, t.value.resultTypeSpecifier)).ToArray()));
+                .WithResultType(TupleType(tuple.Select(t => (t.name, t.value.resultTypeSpecifier)).ToArray()));
+
         private static TypeSpecifier TupleType(params (string name, TypeSpecifier type)[] tuple) =>
             new TupleTypeSpecifier { element = tuple.Select(t => new TupleElementDefinition { name = t.name, elementType = t.type }).ToArray() };
 
@@ -181,6 +193,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsTrue(result.Success);
             Assert.AreEqual(CoercionCost.IntervalDemotion, result.Cost);
         }
+
         [TestMethod]
         public void ListCanBeDemoted()
         {
@@ -189,6 +202,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsTrue(result.Success);
             Assert.AreEqual(CoercionCost.ListDemotion, result.Cost);
         }
+
         [TestMethod]
         public void IntegerPromotedToDecimal()
         {
@@ -198,6 +212,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsInstanceOfType(result.Result, typeof(ToDecimal));
             Assert.AreEqual(CoercionCost.ImplicitToSimpleType, result.Cost);
         }
+
         [TestMethod]
         public void ListAnyCanBeCastToListInteger()
         {
@@ -206,6 +221,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsTrue(result.Success);
             Assert.AreEqual(CoercionCost.MoreCompatible, result.Cost);
         }
+
         [TestMethod]
         public void ListIsSubtypeOfAny()
         {
@@ -218,20 +234,20 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void IntegerCanBeCastAsInteger() =>
             CoercionProvider.CanBeCast(SystemTypes.IntegerType, SystemTypes.IntegerType)
-                .Should().BeTrue();
+                            .Should().BeTrue();
 
         [TestMethod]
         public void AnyCanBeCastAsIntervalAny() =>
             CoercionProvider.CanBeCast(SystemTypes.AnyType, SystemTypes.AnyType.ToIntervalType())
-                .Should().BeTrue();
+                            .Should().BeTrue();
 
         [TestMethod]
         public void ListIntervalIntegerToListIntervalDecimal()
         {
             var expression = List(SystemTypes.IntegerType.ToIntervalType(),
-                Interval(Integer(1), Integer(2)));
+                                  Interval(Integer(1), Integer(2)));
             var result = CoercionProvider.Coerce(expression,
-                SystemTypes.DecimalType.ToIntervalType().ToListType());
+                                                 SystemTypes.DecimalType.ToIntervalType().ToListType());
             result.Success.Should().BeTrue();
             result.Cost.Should().Be(CoercionCost.ImplicitToSimpleType);
             result.Result.Should().BeOfType<Query>();
@@ -243,7 +259,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var expression = Interval(Integer(1), Integer(2));
             var result = CoercionProvider.Coerce(expression,
-                SystemTypes.DecimalType.ToIntervalType());
+                                                 SystemTypes.DecimalType.ToIntervalType());
             Assert.IsTrue(result.Success);
             Assert.AreEqual(CoercionCost.ImplicitToSimpleType, result.Cost);
         }
@@ -253,7 +269,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var expression = ValueSet();
             var result = CoercionProvider.Coerce(expression,
-                SystemTypes.CodeType.ToListType());
+                                                 SystemTypes.CodeType.ToListType());
             Assert.IsTrue(result.Success);
             Assert.AreEqual(CoercionCost.ImplicitToClassType, result.Cost);
         }
@@ -303,6 +319,5 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsInstanceOfType(fr.operand![0], typeof(Null));
             Assert.AreEqual(SystemTypes.DateType, fr.resultTypeSpecifier);
         }
-
     }
 }

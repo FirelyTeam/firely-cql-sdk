@@ -16,26 +16,25 @@ internal static class Program
     {
         //Setup DI
         var services = new ServiceCollection();
-
         services.AddLogging(builder => builder.AddConsole());
-
-        services.AddSingleton<CqlToolkitSettings>(new CqlToolkitSettings(Models: [CqlModel.ElmR1, CqlModel.Fhir401]));
-        services.AddSingleton<CqlToolkit>();
-
-        // Get CqlApi from DI
         IServiceProvider serviceProvider = services.BuildServiceProvider();
-        ICqlFluentToolkit cqlApi = serviceProvider.GetRequiredService<CqlToolkit>();
+        var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
+
+        // Create CqlApi
+        var cqlToolkitSettings = new CqlToElmProcessorSettings(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
+        ICqlFluentToolkit cqlToolkit = new CqlFluentToolkit(loggerFactory, cqlToolkitSettings);
 
         // Setup and use CqlApi
-        cqlApi.AddCqlLibrariesFromDirectory(new DirectoryInfo("input/cql/"));
-        cqlApi.ProcessCqlToElm();
-        cqlApi.SaveElmFileToDirectory(new DirectoryInfo("output/elm/"));
+        cqlToolkit
+            .AddCqlLibrariesFromDirectory(new DirectoryInfo("input/cql/"))
+            .ProcessCqlToElm()
+            .SaveElmFileToDirectory(new DirectoryInfo("output/elm/"));
 
         // Setup and use ElmApi
-        var elmApi = cqlApi.CreateElmApi();
-        elmApi.ProcessElmToAssemblies();
-        elmApi.SaveCSharpFilesToDirectory(new DirectoryInfo("output/csharp/"));
-        elmApi.SaveAssemblyBinariesToDirectory(new DirectoryInfo("output/assemblies/"));
+        var elmApi = cqlToolkit.CreateElmApi();
+        elmApi.ProcessElmToAssemblies()
+              .SaveCSharpFilesToDirectory(new DirectoryInfo("output/csharp/"))
+              .SaveAssemblyBinariesToDirectory(new DirectoryInfo("output/assemblies/"));
 
         // Setup RuntimeApi
         var runtimeApi = elmApi.CreateRuntimeApi();

@@ -4,7 +4,7 @@ using Hl7.Cql.Model;
 
 namespace CqlSdkPrototype.Cql;
 
-public record CqlToolkitSettings
+public record CqlToElmProcessorSettings
 (
     ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling = default,
     ImmutableHashSet<CqlModel>? Models = null,
@@ -14,10 +14,9 @@ public record CqlToolkitSettings
     bool EnableListPromotion = false,
     bool EnableIntervalPromotion = false,
     bool EnableIntervalDemotion = false,
-    bool AllowNullInterval = false
-    )
+    bool AllowNullInterval = false)
 {
-    public static CqlToolkitSettings Default { get; } = new();
+    public static CqlToElmProcessorSettings Default { get; } = new();
 
     public ImmutableHashSet<CqlModel> Models { get; init; } = Models ?? [];
 
@@ -84,7 +83,7 @@ public record CqlToolkitSettings
 
 internal static class CqlApiOptionsExtensions
 {
-    internal static void ApplyToCqlToElmOptions(this CqlToolkitSettings options, CqlToElmOptions opt)
+    internal static void ApplyToCqlToElmOptions(this CqlToElmProcessorSettings options, CqlToElmOptions opt)
     {
         opt.AmbiguousTypeBehavior = options.AmbiguousTypeBehavior;
         opt.EnableListPromotion = options.EnableListPromotion;

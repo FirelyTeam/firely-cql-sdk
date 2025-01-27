@@ -1,6 +1,4 @@
-using CqlSdkPrototype.Cql;
 using Hl7.Cql.Elm;
-using CqlSdkPrototype.Cql.Internal;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -10,9 +8,10 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Empty()
         {
-            Assert.ThrowsException<FormatException>(() => CreateCqlFluentToolkit().MakeLibrary(string.Empty));
+            var cqlFluentToolkit = CreateCqlFluentToolkit();
+            Assert.ThrowsException<FormatException>(() => cqlFluentToolkit.MakeLibrary(string.Empty));
             var ms = new MemoryStream();
-            Assert.ThrowsException<ArgumentException>(() => CreateCqlFluentToolkit().GetCqlToElmConverter().ConvertLibrary(ms));
+            Assert.ThrowsException<ArgumentException>(() => cqlFluentToolkit.GetCqlToElmConverter().ConvertLibrary(ms));
         }
 
         #region Identifier

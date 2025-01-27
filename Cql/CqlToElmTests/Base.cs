@@ -173,13 +173,13 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.AreEqual(true, ctx.Operators.Comparer.Equals(expectedValues[i], array[i], precision));
         }
 
-        protected static ILoggerFactory LoggerFactory { get; } =
+        private static ILoggerFactory LoggerFactory { get; } =
             new ServiceCollection()
                 .AddLogging(lb => lb.AddConsole())
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerFactory>();
 
-        protected static CqlToolkit CreateCqlFluentToolkit(
+        protected static CqlFluentToolkit CreateCqlFluentToolkit(
             ImmutableHashSet<CqlModel>? Models = null,
             ImmutableHashSet<ModelInfo>? ModelInfos = null,
             AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,
@@ -188,9 +188,9 @@ namespace Hl7.Cql.CqlToElm.Test
             bool EnableIntervalPromotion = false,
             bool EnableIntervalDemotion = false,
             bool AllowNullIntervals = false) =>
-            new CqlToolkit(
+            new(
                 LoggerFactory,
-                new CqlToolkitSettings(
+                new CqlToElmProcessorSettings(
                     ProcessBatchItemExceptionHandling: ProcessBatchItemExceptionHandling.ThrowException,
                     Models: Models ?? [CqlModel.ElmR1, CqlModel.Fhir401],
                     ModelInfos: ModelInfos,
@@ -200,7 +200,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     EnableIntervalDemotion: EnableIntervalDemotion,
                     EnableIntervalPromotion: EnableIntervalPromotion,
                     AllowNullInterval: AllowNullIntervals
-                    ));
+                ));
 
         internal static IElmFluentToolkit CreateElmFluentToolkit(
             ImmutableHashSet<CqlModel>? models = null,

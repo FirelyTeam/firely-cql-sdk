@@ -5,9 +5,9 @@ namespace CqlSdkPrototype.Cql;
 public interface ICqlFluentToolkit
 {
     ILoggerFactory LoggerFactory { get; }
-    CqlToolkitSettings Settings { get; }
+    CqlToElmProcessorSettings Settings { get; }
     CqlToElmConversionReadOnlyDictionary CqlToElmConversions { get; }
-    ICqlFluentToolkit ReplaceSettings(Func<CqlToolkitSettings, CqlToolkitSettings> replace);
+    ICqlFluentToolkit ReplaceSettings(Func<CqlToElmProcessorSettings, CqlToElmProcessorSettings> replace);
     ICqlFluentToolkit AddCqlLibraries(IEnumerable<CqlLibraryString> libraries);
     ICqlFluentToolkit ProcessCqlToElm();
 }

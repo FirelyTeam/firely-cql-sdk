@@ -1,9 +1,7 @@
-using CqlSdkPrototype.Cql;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
-using CqlSdkPrototype.Cql.Internal;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -75,9 +73,9 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private static Expression Equals(Expression expression, Expression expectation)
         {
-            var cqlApi = CreateCqlFluentToolkit();
-            var invocationBuilder = cqlApi.GetInvocationBuilder();
-            var elmFactory = cqlApi.GetElmFactory();
+            var cqlFluentToolkit = CreateCqlFluentToolkit();
+            var invocationBuilder = cqlFluentToolkit.GetInvocationBuilder();
+            var elmFactory = cqlFluentToolkit.GetElmFactory();
             var equal = invocationBuilder.Invoke(SystemLibrary.Equal, expression, expectation);
             var @if = new If
             {

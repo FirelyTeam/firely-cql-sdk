@@ -10,7 +10,7 @@ namespace CqlSdkPrototype.Elm;
 
 public class ElmToolkit :
     IElmFluentToolkit,
-    IServiceProviderAccessorForTesting<ElmToolkit>
+    IServiceProviderAccessor<ElmToolkit>
 {
     public ElmToolkit(
         ILoggerFactory? loggerFactory = null,
@@ -30,7 +30,7 @@ public class ElmToolkit :
 
     ElmToolkit IElmFluentToolkit.ElmToolkit => this;
 
-    ServiceProvider IServiceProviderAccessorForTesting<ElmToolkit>.ServiceProvider => _state.ServiceProvider;
+    ServiceProvider IServiceProviderAccessor<ElmToolkit>.ServiceProvider => _state.ServiceProvider;
 
     IElmFluentToolkit IElmFluentToolkit.ReplaceSettings(Func<ElmToolkitSettings, ElmToolkitSettings> replace)
     {

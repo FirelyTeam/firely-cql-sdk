@@ -8,25 +8,33 @@ using ExpressionVisitor = Hl7.Cql.CqlToElm.Visitors.ExpressionVisitor;
 
 namespace CqlSdkPrototype.Cql.Internal;
 
-internal readonly record struct CqlToolkitServices(
+internal readonly record struct CqlToElmProcessorServices(
     ILoggerFactory LoggerFactory,
     ServiceProvider ServiceProvider,
     CqlToElmConverter CqlToElmConverter,
-    CqlToolkitProcessItemsLibraryProvider LibraryProvider)
+    CqlToElmConversionsLibraryProvider LibraryProvider)
 {
     private static readonly (CqlModel CqlModel, ModelInfo ModelInfo)[] AllMappedModelsInOrder = [
         (CqlModel.ElmR1, Models.ElmR1),
         (CqlModel.Fhir401, Models.Fhir401)];
 
-    public static CqlToolkitServices Create(ILoggerFactory loggerFactory, CqlToolkitSettings options, CqlToolkitProcessItemsLibraryProvider libraryProvider)
+    public static CqlToElmProcessorServices Create(
+        CqlToElmProcessorSettings settings,
+        ILoggerFactory? loggerFactory = null,
+        CqlToElmConversionDictionary? conversions = null)
     {
+        loggerFactory ??= NullLoggerFactory.Instance;
+
+        var builder = (conversions ?? CqlToElmConversionDictionary.Empty).ToBuilder();
+        var libraryProvider = new CqlToElmConversionsLibraryProvider(builder);
+
         var services = new ServiceCollection();
         services.AddExternalLogging(loggerFactory);
-        AddCqlServices(services, options, libraryProvider);
+        AddCqlServices(services, settings, libraryProvider);
         var serviceProvider = services.BuildServiceProvider(validateScopes: true);
         var cqlToElmConverter = serviceProvider.GetRequiredService<CqlToElmConverter>();
 
-        return new CqlToolkitServices(
+        return new CqlToElmProcessorServices(
             loggerFactory,
             serviceProvider,
             cqlToElmConverter,
@@ -35,7 +43,7 @@ internal readonly record struct CqlToolkitServices(
 
     private static void AddCqlServices(
         IServiceCollection serviceCollection,
-        CqlToolkitSettings options,
+        CqlToElmProcessorSettings settings,
         ILibraryProvider libraryProvider)
     {
         SuppressCqlDebugAssertions();
@@ -50,14 +58,14 @@ internal readonly record struct CqlToolkitServices(
 
         Action<CqlToElmOptions> ConfigureCqlToElmOptions()
         {
-            return options.ApplyToCqlToElmOptions;
+            return settings.ApplyToCqlToElmOptions;
         }
 
         Action<IModelProvider> ConfigureModelProvider()
         {
             var modelInfos = AllMappedModelsInOrder
-                             .SelectWhereNotNull(t => options.Models.Contains(t.CqlModel) ? t.ModelInfo : null)
-                             .Concat(options.ModelInfos);
+                             .SelectWhereNotNull(t => settings.Models.Contains(t.CqlModel) ? t.ModelInfo : null)
+                             .Concat(settings.ModelInfos);
             return modelProvider =>
             {
                 foreach (var modelInfo in modelInfos)
@@ -75,7 +83,7 @@ internal readonly record struct CqlToolkitServices(
 
     public ILoggerFactory LoggerFactory { get; } = LoggerFactory;
     public ServiceProvider ServiceProvider { get; } = ServiceProvider!;
-    public ILogger<CqlToolkit> Logger { get; } = ServiceProvider.GetLogger<CqlToolkit>();
+    public ILogger<CqlToElmProcessor> Logger { get; } = ServiceProvider.GetLogger<CqlToElmProcessor>();
     public CqlToElmConverter CqlToElmConverter { get; } = CqlToElmConverter!;
-    public CqlToolkitProcessItemsLibraryProvider LibraryProvider { get; } = LibraryProvider!;
+    public CqlToElmConversionsLibraryProvider LibraryProvider { get; } = LibraryProvider!;
 }

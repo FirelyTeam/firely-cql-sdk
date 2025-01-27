@@ -56,7 +56,7 @@ internal static class TestExtensions
         return lib;
     }
 
-    internal static IServiceProviderAccessorForTesting<ElmToolkit> ForTesting(this IElmFluentToolkit elmToolkit) =>
+    internal static IServiceProviderAccessor<ElmToolkit> ForTesting(this IElmFluentToolkit elmToolkit) =>
         elmToolkit.ElmToolkit;
 
     internal static DefinitionDictionary<LambdaExpression> ProcessLibrary(
