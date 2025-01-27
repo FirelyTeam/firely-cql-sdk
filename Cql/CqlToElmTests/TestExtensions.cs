@@ -18,20 +18,20 @@ internal static class TestExtensions
 
     private static Library Library { get; } = new(identifier: new VersionedIdentifier { id = "Lambdas", version = "1.0.0" });
 
-    public static CqlApi AddFHIRHelpers(this CqlApi cqlApi) => cqlApi.AddCqlLibraryString(FHIRHelpers);
+    public static ICqlToolkit AddFHIRHelpers(this ICqlToolkit cqlToolkit) => cqlToolkit.AddCqlLibraryString(FHIRHelpers);
 
     public static Library MakeLibrary(
-        this CqlApi cqlApi,
+        this ICqlToolkit cqlToolkit,
         string cql,
         params string[] expectedErrors)
     {
         var cqlLibraryString = CqlLibraryString.Parse(cql);
 
-        var library = cqlApi
+        var library = cqlToolkit
                       .AddCqlLibraryString(cqlLibraryString)
                       .Translate()
                       .AsExtendable()
-                      .Entries[cqlLibraryString.VersionedLibraryIdentifier]
+                      .ProcessItems[cqlLibraryString.VersionedLibraryIdentifier]
                       .ElmLibrary!;
 
         if (expectedErrors.Any())
@@ -43,7 +43,7 @@ internal static class TestExtensions
     }
 
     public static Library MakeLibraryFromExpression(
-        this CqlApi cqlApi,
+        this ICqlToolkit cqlToolkit,
         string expression,
         string[]? expectedErrors = null,
         [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
@@ -53,7 +53,7 @@ internal static class TestExtensions
 
                       define private "{memberName}": {expression}
                       """;
-        var lib = cqlApi.MakeLibrary(cql, expectedErrors ?? []);
+        var lib = cqlToolkit.MakeLibrary(cql, expectedErrors ?? []);
         return lib;
     }
 
@@ -94,11 +94,11 @@ internal static class TestExtensions
         (A)(object)assertions.AllBeOfType<A>().And.ContainSingle().Subject!;
 
     public static Expression Expression(
-        this CqlApi cqlApi,
+        this ICqlToolkit cqlToolkit,
         string expression,
         [System.Runtime.CompilerServices.CallerMemberName]
         string memberName = "")
     {
-        return cqlApi.MakeLibraryFromExpression(expression, memberName: memberName).statements[0].expression;
+        return cqlToolkit.MakeLibraryFromExpression(expression, memberName: memberName).statements[0].expression;
     }
 }

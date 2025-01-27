@@ -13,5 +13,6 @@ global using Microsoft.Extensions.DependencyInjection;
 global using Microsoft.Extensions.DependencyInjection.Extensions;
 global using Microsoft.Extensions.Logging;
 global using Microsoft.Extensions.Logging.Abstractions;
-global using CqlApiStateEntryDictionary = System.Collections.Immutable.ImmutableDictionary<CqlSdkPrototype.Infrastructure.CqlVersionedLibraryIdentifier, CqlSdkPrototype.Cql.Extensibility.CqlApiStateEntry>;
+global using CqlToolkitProcessItems = System.Collections.Immutable.ImmutableDictionary<CqlSdkPrototype.Infrastructure.CqlVersionedLibraryIdentifier, CqlSdkPrototype.Cql.Extensibility.CqlToolkitProcessItem>;
+global using CqlToolkitProcessItemsReadOnly = System.Collections.Generic.IReadOnlyDictionary<CqlSdkPrototype.Infrastructure.CqlVersionedLibraryIdentifier, CqlSdkPrototype.Cql.Extensibility.CqlToolkitProcessItem>;
 global using ElmApiStateEntryDictionary = System.Collections.Immutable.ImmutableDictionary<CqlSdkPrototype.Infrastructure.CqlVersionedLibraryIdentifier, CqlSdkPrototype.Elm.Extensibility.ElmApiStateEntry>;

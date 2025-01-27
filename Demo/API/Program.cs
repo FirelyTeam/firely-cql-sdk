@@ -19,12 +19,12 @@ internal static class Program
 
         services.AddLogging(builder => builder.AddConsole());
 
-        services.AddSingleton<CqlApiOptions>(new CqlApiOptions(Models: [CqlModel.ElmR1, CqlModel.Fhir401]));
-        services.AddSingleton<CqlApi>();
+        services.AddSingleton<CqlToolkitSettings>(new CqlToolkitSettings(Models: [CqlModel.ElmR1, CqlModel.Fhir401]));
+        services.AddSingleton<CqlToolkit>();
 
         // Get CqlApi from DI
         IServiceProvider serviceProvider = services.BuildServiceProvider();
-        var cqlApi = serviceProvider.GetRequiredService<CqlApi>();
+        var cqlApi = serviceProvider.GetRequiredService<CqlToolkit>();
 
         // Setup and use CqlApi
         cqlApi.AddCqlLibrariesFromDirectory(new DirectoryInfo("input/cql/"));

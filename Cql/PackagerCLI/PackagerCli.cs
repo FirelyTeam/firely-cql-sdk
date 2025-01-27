@@ -37,9 +37,9 @@ internal class PackagerCli(
             ElmApi elmApi;
             if (translateCql)
             {
-                elmApi = new CqlApi(
+                elmApi = new CqlToolkit(
                              loggerFactory,
-                             new CqlApiOptions(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue))
+                             new CqlToolkitSettings(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue))
                          .OnValueSelect(
                              valueSelector: _ => opt.CqlInDirectory,
                              ifHasValue: (api, cql) => api.AddCqlLibrariesFromDirectory(cql),

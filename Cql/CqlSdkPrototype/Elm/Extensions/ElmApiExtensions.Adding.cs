@@ -14,10 +14,10 @@ public static partial class ElmApiExtensions
         this TElmApi elmApi,
         TCqlApi cqlApi)
         where TElmApi : IElmApiExtendable<TElmApi>
-        where TCqlApi : ICqlApiExtendable<TCqlApi>
+        where TCqlApi : ICqlToolkit
     {
         return elmApi.AddElmLibraries(
-            from entry in cqlApi.Entries
+            from entry in cqlApi.ProcessItems
             let elmLibrary = entry.Value.ElmLibrary
             where elmLibrary is not null
             select elmLibrary);

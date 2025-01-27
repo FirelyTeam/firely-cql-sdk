@@ -179,7 +179,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerFactory>();
 
-        protected static CqlApi CreateCqlApi(
+        protected static CqlToolkit CreateCqlApi(
             ImmutableHashSet<CqlModel>? Models = null,
             ImmutableHashSet<ModelInfo>? ModelInfos = null,
             AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,
@@ -188,9 +188,9 @@ namespace Hl7.Cql.CqlToElm.Test
             bool EnableIntervalPromotion = false,
             bool EnableIntervalDemotion = false,
             bool AllowNullIntervals = false) =>
-            new CqlApi(
+            new CqlToolkit(
                 LoggerFactory,
-                new CqlApiOptions(
+                new CqlToolkitSettings(
                     ProcessBatchItemExceptionHandling: ProcessBatchItemExceptionHandling.ThrowException,
                     Models: Models ?? [CqlModel.ElmR1, CqlModel.Fhir401],
                     ModelInfos: ModelInfos,

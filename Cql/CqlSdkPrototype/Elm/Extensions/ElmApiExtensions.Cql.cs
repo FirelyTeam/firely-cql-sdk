@@ -6,9 +6,9 @@ namespace CqlSdkPrototype.Elm.Extensions;
 public static partial class ElmApiExtensions
 {
     public static ElmApi Compile(
-        this CqlApi cqlApi)
+        this CqlToolkit cqlToolkit)
     {
-        return cqlApi
+        return cqlToolkit
                .Translate()
                .CreateElmApi()
                .Compile();

@@ -2,5 +2,5 @@
 
 public static class CqlApiExtendableExtensions
 {
-    public static ICqlApiExtendable<CqlApi> AsExtendable(this CqlApi self) => self;
+    public static ICqlToolkit AsExtendable(this CqlToolkit self) => self;
 }

@@ -3,10 +3,10 @@ using Hl7.Cql.CqlToElm;
 
 namespace CqlSdkPrototype.Cql.Internal;
 
-internal class EntriesBuilderLibraryProvider(CqlApiStateEntryDictionary.Builder entriesBuilder)
+internal class CqlToolkitProcessItemsLibraryProvider(CqlToolkitProcessItems.Builder processItemsBuilder)
     : ILibraryProvider
 {
-    public CqlApiStateEntryDictionary.Builder EntriesBuilder { get; set; } = entriesBuilder;
+    public CqlToolkitProcessItems.Builder ProcessItemsBuilder { get; set; } = processItemsBuilder;
 
     public bool TryResolveLibrary(
         string libraryName,
@@ -21,7 +21,7 @@ internal class EntriesBuilderLibraryProvider(CqlApiStateEntryDictionary.Builder 
             CqlLibraryIdentifier.Parse(libraryName),
             version is null ? null : CqlLibraryVersion.Parse(version));
 
-        if (EntriesBuilder.TryGetValue(libVer, out var entry) && entry.ElmLibraryBuilder is { } lb)
+        if (ProcessItemsBuilder.TryGetValue(libVer, out var processItem) && processItem.ElmLibraryBuilder is { } lb)
         {
             libraryBuilder = lb;
             return true;

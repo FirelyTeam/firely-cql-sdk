@@ -8,26 +8,25 @@ using ExpressionVisitor = Hl7.Cql.CqlToElm.Visitors.ExpressionVisitor;
 
 namespace CqlSdkPrototype.Cql.Internal;
 
-internal readonly record struct CqlApiServices(
+internal readonly record struct CqlToolkitServices(
     ILoggerFactory LoggerFactory,
     ServiceProvider ServiceProvider,
     CqlToElmConverter CqlToElmConverter,
-    EntriesBuilderLibraryProvider LibraryProvider) :
-    ITestingOnlyServiceProviderAccessor<CqlApiServices>
+    CqlToolkitProcessItemsLibraryProvider LibraryProvider)
 {
     private static readonly (CqlModel CqlModel, ModelInfo ModelInfo)[] AllMappedModelsInOrder = [
         (CqlModel.ElmR1, Models.ElmR1),
         (CqlModel.Fhir401, Models.Fhir401)];
 
-    public static CqlApiServices Create(ILoggerFactory loggerFactory, CqlApiOptions options, EntriesBuilderLibraryProvider libraryProvider)
+    public static CqlToolkitServices Create(ILoggerFactory loggerFactory, CqlToolkitSettings options, CqlToolkitProcessItemsLibraryProvider libraryProvider)
     {
         var services = new ServiceCollection();
         services.AddExternalLogging(loggerFactory);
         AddCqlServices(services, options, libraryProvider);
         var serviceProvider = services.BuildServiceProvider(validateScopes: true);
-        var cqlToElmConverter = serviceProvider.GetCqlToElmConverter();
+        var cqlToElmConverter = serviceProvider.GetRequiredService<CqlToElmConverter>();
 
-        return new CqlApiServices(
+        return new CqlToolkitServices(
             loggerFactory,
             serviceProvider,
             cqlToElmConverter,
@@ -36,7 +35,7 @@ internal readonly record struct CqlApiServices(
 
     private static void AddCqlServices(
         IServiceCollection serviceCollection,
-        CqlApiOptions options,
+        CqlToolkitSettings options,
         ILibraryProvider libraryProvider)
     {
         SuppressCqlDebugAssertions();
@@ -76,7 +75,7 @@ internal readonly record struct CqlApiServices(
 
     public ILoggerFactory LoggerFactory { get; } = LoggerFactory;
     public ServiceProvider ServiceProvider { get; } = ServiceProvider!;
-    public ILogger<CqlApi> Logger { get; } = ServiceProvider.GetLogger<CqlApi>();
+    public ILogger<CqlToolkit> Logger { get; } = ServiceProvider.GetLogger<CqlToolkit>();
     public CqlToElmConverter CqlToElmConverter { get; } = CqlToElmConverter!;
-    public EntriesBuilderLibraryProvider LibraryProvider { get; } = LibraryProvider!;
+    public CqlToolkitProcessItemsLibraryProvider LibraryProvider { get; } = LibraryProvider!;
 }
