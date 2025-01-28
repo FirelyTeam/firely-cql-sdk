@@ -1,16 +1,16 @@
 ﻿using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Runtime.Invokers;
+namespace CqlSdkPrototype.Invocation.Invokers;
 
-public abstract class LibraryDefinitionInvoker(
-    string declarationName,
+public abstract class DefinitionInvoker(
+    string definitionName,
     ILibrary library,
     MethodInfo methodInfo,
     IReadOnlyDictionary<string, string> tagValuesByName,
     string? valueSetId)
 {
-    public string DeclarationName { get; } = declarationName;
+    public string DefinitionName { get; } = definitionName;
     public Type ReturnType => MethodInfo.ReturnType;
     public IReadOnlyDictionary<string, string> TagValuesByName { get; } = tagValuesByName;
     public string? ValueSetId { get; } = valueSetId;

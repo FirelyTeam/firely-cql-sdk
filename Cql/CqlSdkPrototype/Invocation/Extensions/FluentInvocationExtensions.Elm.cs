@@ -1,15 +1,16 @@
 ﻿using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Invocation.Invokers;
 using Hl7.Cql.CodeGeneration.NET;
 
-namespace CqlSdkPrototype.Runtime.Extensions;
+namespace CqlSdkPrototype.Invocation.Extensions;
 
-public static partial class RuntimeApiExtensions
+public static partial class FluentInvocationExtensions
 {
-    public static RuntimeApi CreateRuntimeApi(
+    public static LibrarySetInvokerBuilder CreateRuntimeApi(
         this ElmFluentToolkit elmApi,
-        Func<RuntimeApiOptions, RuntimeApiOptions>? configureOptions = null)
+        Func<LibrarySetInvokerBuilderSettings, LibrarySetInvokerBuilderSettings>? configureOptions = null)
     {
-        var runtimeApiOptions = RuntimeApiOptions.Default;
+        var runtimeApiOptions = LibrarySetInvokerBuilderSettings.Default;
         if (configureOptions is not null) runtimeApiOptions = configureOptions(runtimeApiOptions);
 
         var assemblyDatas =
@@ -20,15 +21,15 @@ public static partial class RuntimeApiExtensions
             let assemblyData = new AssemblyData(assembly, debugSymbols)
             select assemblyData;
 
-        var runtimeApi = new RuntimeApi(elmApi.LoggerFactory, runtimeApiOptions).AddAssemblies(assemblyDatas);
+        var runtimeApi = new LibrarySetInvokerBuilder(elmApi.LoggerFactory, runtimeApiOptions).AddAssemblies(assemblyDatas);
         return runtimeApi;
     }
 
 #pragma warning disable RS0026
-    public static RuntimeScope CreateRuntimeScope(
+    public static LibrarySetInvoker CreateRuntimeScope(
 #pragma warning restore RS0026
         this ElmFluentToolkit elmApi,
-        Func<RuntimeApiOptions, RuntimeApiOptions>? configureOptions = null)
+        Func<LibrarySetInvokerBuilderSettings, LibrarySetInvokerBuilderSettings>? configureOptions = null)
     {
         return elmApi
                .ProcessElmToAssemblies()

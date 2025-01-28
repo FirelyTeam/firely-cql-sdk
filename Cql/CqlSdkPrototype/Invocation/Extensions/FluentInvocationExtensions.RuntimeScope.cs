@@ -1,18 +1,19 @@
 ﻿using System.Text;
 using CqlSdkPrototype.Infrastructure;
+using CqlSdkPrototype.Invocation.Invokers;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 using static System.FormattableString;
 
-namespace CqlSdkPrototype.Runtime.Extensions;
+namespace CqlSdkPrototype.Invocation.Extensions;
 
-public static partial class RuntimeApiExtensions
+public static partial class FluentInvocationExtensions
 {
     public static IEnumerable<(CqlVersionedLibraryIdentifier library, string declarationName, Func<object?> getResult)> EnumerateLibrarySetDefinitionsResults(
-        this RuntimeScope scope,
+        this LibrarySetInvoker scope,
         CqlContext cqlContext)
     {
-        foreach (var (libId, lib) in scope.Libraries)
+        foreach (var (libId, lib) in scope.LibraryInvokers)
         {
             foreach (var (declId, decl) in lib.Definitions)
             {
@@ -30,11 +31,11 @@ public static partial class RuntimeApiExtensions
     }
 
     public static IEnumerable<(string definition, Func<object?> getResult)> EnumerateLibraryDefinitionsResults(
-        this RuntimeScope scope,
+        this LibrarySetInvoker scope,
         CqlContext cqlContext,
         CqlVersionedLibraryIdentifier library)
     {
-        var lib = scope.Libraries[library];
+        var lib = scope.LibraryInvokers[library];
         foreach (var (declId, decl) in lib.Definitions)
         {
             if (decl.ValueSetId is not null)
@@ -50,24 +51,24 @@ public static partial class RuntimeApiExtensions
     }
 
     public static object? GetLibraryDefinitionResult(
-        this RuntimeScope scope,
+        this LibrarySetInvoker scope,
         CqlContext cqlContext,
         CqlVersionedLibraryIdentifier versionedLibraryIdentifier,
         string definitionName)
     {
-        var libraryInvoker = scope.Libraries[versionedLibraryIdentifier];
+        var libraryInvoker = scope.LibraryInvokers[versionedLibraryIdentifier];
         var libraryDeclarationInvoker = libraryInvoker.Definitions[definitionName];
         var result = libraryDeclarationInvoker.Invoke(cqlContext);
         return result;
     }
 
     internal static StringBuilder DumpLibraryDeclarations(
-        this RuntimeScope scope,
+        this LibrarySetInvoker scope,
         StringBuilder? sb = null)
     {
         sb ??= new();
         sb.AppendLine("Libraries and Declarations:");
-        foreach (var (libId, lib) in scope.Libraries)
+        foreach (var (libId, lib) in scope.LibraryInvokers)
         {
             sb.AppendLine(Invariant($"- {libId}"));
             foreach (var (declId, decl) in lib.Definitions)

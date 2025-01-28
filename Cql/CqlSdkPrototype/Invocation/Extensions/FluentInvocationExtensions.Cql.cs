@@ -1,10 +1,11 @@
 ﻿using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensions;
+using CqlSdkPrototype.Invocation.Invokers;
 
-namespace CqlSdkPrototype.Runtime.Extensions;
+namespace CqlSdkPrototype.Invocation.Extensions;
 
-public static partial class RuntimeApiExtensions
+public static partial class FluentInvocationExtensions
 {
     public static ElmFluentToolkit CreateElmApi(
         this CqlFluentToolkit cqlToolkit,
@@ -17,11 +18,11 @@ public static partial class RuntimeApiExtensions
     }
 
 #pragma warning disable RS0026
-    public static RuntimeScope CreateRuntimeScope(
+    public static LibrarySetInvoker CreateRuntimeScope(
 #pragma warning restore RS0026
         this CqlFluentToolkit cqlToolkit,
         Func<ElmToAssemblySettings, ElmToAssemblySettings>? configureElmOptions = null,
-        Func<RuntimeApiOptions, RuntimeApiOptions>? configureRuntimeOptions = null)
+        Func<LibrarySetInvokerBuilderSettings, LibrarySetInvokerBuilderSettings>? configureRuntimeOptions = null)
     {
         return cqlToolkit
                .ProcessCqlToElm()

@@ -1,9 +1,10 @@
 ﻿using System.CodeDom.Compiler;
 using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Runtime.Extensibility;
+using CqlSdkPrototype.Invocation.Extensibility;
+using CqlSdkPrototype.Invocation.Internal;
 using Hl7.Cql.Abstractions;
 
-namespace CqlSdkPrototype.Runtime.Invokers;
+namespace CqlSdkPrototype.Invocation.Invokers;
 
 
 /// <summary>
@@ -13,15 +14,15 @@ public abstract class LibraryInvoker
 {
     public abstract CqlVersionedLibraryIdentifier LibraryVersionedIdentifier { get; }
 
-    public abstract IReadOnlyDictionary<string, LibraryDefinitionInvoker> Definitions { get; }
+    public abstract IReadOnlyDictionary<string, DefinitionInvoker> Definitions { get; }
 
     public static bool TryCreateFromType(
-        RuntimeApi runtimeApi,
+        LibrarySetInvokerBuilder librarySetInvokerBuilder,
         Type libraryType,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
         libraryInvoker = null;
-        var logger = runtimeApi.AsExtendable().LoggerFactory.CreateLogger<LibraryInvoker>();
+        var logger = librarySetInvokerBuilder.AsExtendable().LoggerFactory.CreateLogger<LibraryInvoker>();
 
         if (libraryType.GetCustomAttribute<CqlLibraryAttribute>() is not { })
         {
@@ -48,7 +49,7 @@ public abstract class LibraryInvoker
 
         if (LibraryInvoker_2_0_8_0.SupportsVersion(cqlToolVersion))
         {
-            if (LibraryInvoker_2_0_8_0.TryCreateFromType(runtimeApi, libraryType, out libraryInvoker))
+            if (LibraryInvoker_2_0_8_0.TryCreateFromType(librarySetInvokerBuilder, libraryType, out libraryInvoker))
                 return true;
         }
 

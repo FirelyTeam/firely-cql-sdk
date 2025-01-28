@@ -1,3 +1,3 @@
-﻿namespace CqlSdkPrototype.Runtime.Extensibility;
+﻿namespace CqlSdkPrototype.Invocation.Extensibility;
 
 public readonly record struct RuntimeApiStateEntry(byte[] AssemblyBytes, byte[]? DebugSymbolsBytes = null);

@@ -4,8 +4,8 @@ using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
+using CqlSdkPrototype.Invocation.Extensions;
 using CqlSdkPrototype.Logging;
-using CqlSdkPrototype.Runtime.Extensions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime.Hosting;
@@ -26,8 +26,8 @@ internal class Program
                 .BuildServiceProvider();
 
         var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
-        var cqlToElmProcessorSettings = new CqlToElmProcessorSettings(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        var cqlFluentToolkit = new CqlFluentToolkit(loggerFactory, cqlToElmProcessorSettings);
+        var settings = new CqlToElmProcessorSettings(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
+        var cqlFluentToolkit = new CqlFluentToolkit(loggerFactory, settings);
         var logger = serviceProvider.GetLogger<Program>();
 
         //InvokeCqlExample(cqlApi: cqlApi);

@@ -1,22 +1,21 @@
 ﻿using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
-using CqlSdkPrototype.Runtime.Invokers;
 
-namespace CqlSdkPrototype.Runtime;
+namespace CqlSdkPrototype.Invocation.Invokers;
 
-public class RuntimeScope : IDisposable
+public class LibrarySetInvoker : IDisposable
 {
     private readonly AssemblyLoadContext _alc;
 
-    internal RuntimeScope(RuntimeApi runtimeApi, AssemblyLoadContext alc)
+    internal LibrarySetInvoker(LibrarySetInvokerBuilder librarySetInvokerBuilder, AssemblyLoadContext alc)
     {
         _alc = alc;
-        Libraries =
+        LibraryInvokers =
             _alc.Assemblies
                 .SelectMany(a => a.GetTypes())
                 .SelectWhereNotNull(t =>
                 {
-                    LibraryInvoker.TryCreateFromType(runtimeApi, t, out var libraryInvoker);
+                    LibraryInvoker.TryCreateFromType(librarySetInvokerBuilder, t, out var libraryInvoker);
                     return libraryInvoker;
                 })
                 .ToImmutableDictionary(o => o.LibraryVersionedIdentifier);
@@ -27,5 +26,5 @@ public class RuntimeScope : IDisposable
         _alc.Unload();
     }
 
-    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker> Libraries { get; }
+    public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker> LibraryInvokers { get; }
 }
