@@ -5,7 +5,6 @@ using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Fluent;
 using Hl7.Cql.Runtime.Hosting;
 

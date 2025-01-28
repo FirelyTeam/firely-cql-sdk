@@ -1,12 +1,10 @@
-﻿using CqlSdkPrototype.Invocation.Extensibility;
-
-namespace CqlSdkPrototype.Invocation.Internal;
+﻿namespace CqlSdkPrototype.Invocation.Internal;
 
 internal readonly record struct LibrarySetInvokerBuilderServices(
     ILoggerFactory LoggerFactory,
-    ImmutableHashSet<RuntimeApiStateEntry> Entries,
+    ImmutableHashSet<LibraryBinaries> Entries,
     LibrarySetInvokerBuilderSettings Options,
-    ILogger<LibrarySetInvokerBuilder> Logger)
+    ILogger<FluentLibrarySetInvokerBuilder> Logger)
 {
     public static LibrarySetInvokerBuilderServices Create(ILoggerFactory loggerFactory, LibrarySetInvokerBuilderSettings options)
     {
@@ -28,7 +26,7 @@ internal readonly record struct LibrarySetInvokerBuilderServices(
                 return;
 
             _options = value;
-            Logger = LoggerFactory.CreateLogger<LibrarySetInvokerBuilder>();
+            Logger = LoggerFactory.CreateLogger<FluentLibrarySetInvokerBuilder>();
         }
     }
 

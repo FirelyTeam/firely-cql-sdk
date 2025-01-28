@@ -5,6 +5,7 @@ using CqlSdkPrototype.Cql.Fluent.Extensions;
 using CqlSdkPrototype.Elm.Fluent.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation.Extensions;
+using CqlSdkPrototype.Invocation.Fluent.Extensions;
 using Hl7.Cql.Fhir;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -32,7 +33,7 @@ internal static class Program
             .SaveElmFileToDirectory(new DirectoryInfo("output/elm/"));
 
         // Create fluent elm toolkit as a continuation of the cql toolkit
-        var elmToolkit = cqlToolkit.CreateElmApi();
+        var elmToolkit = cqlToolkit.ToFluentElmToolkit();
 
         // Process the ELM files to assemblies, then save the C# files and assembly binaries to directories
         elmToolkit.ProcessElmToAssemblies()
@@ -40,8 +41,8 @@ internal static class Program
               .SaveAssemblyBinariesToDirectory(new DirectoryInfo("output/assemblies/"));
 
         // Setup RuntimeApi
-        var runtimeApi = elmToolkit.CreateRuntimeApi();
-        var runtimeScope = runtimeApi.CreateRuntimeScope();
+        var runtimeApi = elmToolkit.ToFluentLibrarySetInvokerBuilder();
+        var runtimeScope = runtimeApi.CreateLibrarySetInvoker();
 
         // Execute CQL
         var threePlusTwo = runtimeScope.GetLibraryDefinitionResult(

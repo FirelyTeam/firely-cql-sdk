@@ -6,7 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using CqlSdkPrototype.Invocation.Invokers;
+using CqlSdkPrototype.Invocation;
 using Dumpify;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;

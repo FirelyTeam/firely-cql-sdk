@@ -7,11 +7,12 @@ using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation;
-using CqlSdkPrototype.Invocation.Extensions;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Model;
 using CqlSdkPrototype.Cql.Fluent;
 using CqlSdkPrototype.Elm.Fluent;
+using CqlSdkPrototype.Elm.Fluent.Extensions;
+using CqlSdkPrototype.Invocation.Extensions;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -44,9 +45,9 @@ namespace Hl7.Cql.CqlToElm.Test
             var compile = elmApiServices.GetAssemblyCompiler().Compile(librarySet, generateCSharp, elmApi.Settings.AssemblyCompilerDebugInformationFormat);
             var assemblyBytes = compile.Single().assemblyDataWithSourceCode.AssemblyBytes;
 
-            using var scope = new LibrarySetInvokerBuilder()
+            using var scope = new FluentLibrarySetInvokerBuilder()
                               .AddAssemblies([AssemblyData.Default with { AssemblyBytes = assemblyBytes }])
-                              .CreateRuntimeScope();
+                              .CreateLibrarySetInvoker();
             var result = scope.GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);
             return result;
         }
@@ -210,7 +211,7 @@ namespace Hl7.Cql.CqlToElm.Test
             AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
             bool enableListPromotion = false) =>
             CreateFluentCqlToolkit(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
-                .CreateElmApi(_ => new ElmToAssemblySettings(
+                .ToFluentElmToolkit(_ => new ElmToAssemblySettings(
                                   ProcessBatchItemExceptionHandling.ThrowException,
                                   Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));
     }

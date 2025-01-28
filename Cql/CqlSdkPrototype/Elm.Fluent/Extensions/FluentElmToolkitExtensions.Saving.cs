@@ -52,5 +52,4 @@ public static partial class FluentElmToolkitExtensions
 
         return elmApi;
     }
-
 }

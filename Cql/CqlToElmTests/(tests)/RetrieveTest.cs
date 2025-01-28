@@ -3,6 +3,7 @@ using Hl7.Cql.Fhir;
 using Hl7.Fhir.Model;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation.Extensions;
+using CqlSdkPrototype.Invocation.Fluent.Extensions;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -96,7 +97,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     }
                 };
 
-                using var scope = cqlApi.CreateRuntimeScope();
+                using var scope = cqlApi.CreateLibrarySetInvoker();
                 var result = scope.GetLibraryDefinitionResult(FhirCqlContext.ForBundle(bundle, valueSets: valueSets),
                                                               cqlLibraryString.VersionedLibraryIdentifier, "Retrieve_AllTerms");
                 var conditions = result as IEnumerable<Condition>;

@@ -1,13 +1,13 @@
 ﻿using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 
-namespace CqlSdkPrototype.Invocation.Invokers;
+namespace CqlSdkPrototype.Invocation;
 
 public class LibrarySetInvoker : IDisposable
 {
     private readonly AssemblyLoadContext _alc;
 
-    internal LibrarySetInvoker(LibrarySetInvokerBuilder librarySetInvokerBuilder, AssemblyLoadContext alc)
+    internal LibrarySetInvoker(FluentLibrarySetInvokerBuilder fluentLibrarySetInvokerBuilder, AssemblyLoadContext alc)
     {
         _alc = alc;
         LibraryInvokers =
@@ -15,7 +15,7 @@ public class LibrarySetInvoker : IDisposable
                 .SelectMany(a => a.GetTypes())
                 .SelectWhereNotNull(t =>
                 {
-                    LibraryInvoker.TryCreateFromType(librarySetInvokerBuilder, t, out var libraryInvoker);
+                    LibraryInvoker.TryCreateFromType(fluentLibrarySetInvokerBuilder, t, out var libraryInvoker);
                     return libraryInvoker;
                 })
                 .ToImmutableDictionary(o => o.LibraryVersionedIdentifier);

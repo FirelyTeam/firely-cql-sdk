@@ -1,28 +1,24 @@
 ﻿using CqlSdkPrototype.Internal;
-using CqlSdkPrototype.Invocation.Extensibility;
 using CqlSdkPrototype.Invocation.Internal;
-using CqlSdkPrototype.Invocation.Invokers;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 
 namespace CqlSdkPrototype.Invocation;
 
-public class LibrarySetInvokerBuilder : IRuntimeApiExtendable<LibrarySetInvokerBuilder>
+public class FluentLibrarySetInvokerBuilder
 {
-    public LibrarySetInvokerBuilder(
+    public FluentLibrarySetInvokerBuilder(
         ILoggerFactory? loggerFactory = null,
         LibrarySetInvokerBuilderSettings? options = null)
         : this (LibrarySetInvokerBuilderServices.Create(loggerFactory ?? NullLoggerFactory.Instance, options ?? LibrarySetInvokerBuilderSettings.Default))
     { }
 
-    internal LibrarySetInvokerBuilder(LibrarySetInvokerBuilderServices state) => _state = state; // Might make this public later. Used for testing now.
-
-    #region State
+    internal FluentLibrarySetInvokerBuilder(LibrarySetInvokerBuilderServices state) => _state = state; // Might make this public later. Used for testing now.
 
     private LibrarySetInvokerBuilderServices _state;
 
-    private LibrarySetInvokerBuilder WithEntries(
-        ImmutableHashSet<RuntimeApiStateEntry>? assemblyData = null)
+    private FluentLibrarySetInvokerBuilder WithEntries(
+        ImmutableHashSet<LibraryBinaries>? assemblyData = null)
     {
         _state = _state with
         {
@@ -31,7 +27,7 @@ public class LibrarySetInvokerBuilder : IRuntimeApiExtendable<LibrarySetInvokerB
         return this;
     }
 
-    public LibrarySetInvokerBuilder WithOptions(
+    public FluentLibrarySetInvokerBuilder WithOptions(
         Func<LibrarySetInvokerBuilderSettings, LibrarySetInvokerBuilderSettings> replaceOptions)
     {
         var newOptions = replaceOptions(_state.Options);
@@ -40,34 +36,20 @@ public class LibrarySetInvokerBuilder : IRuntimeApiExtendable<LibrarySetInvokerB
         return this;
     }
 
-    LibrarySetInvokerBuilderSettings IRuntimeApiExtendable<LibrarySetInvokerBuilder>.Options => _state.Options;
-    IReadOnlySet<RuntimeApiStateEntry> IRuntimeApiExtendable<LibrarySetInvokerBuilder>.Entries => _state.Entries;
-    ILoggerFactory IRuntimeApiExtendable<LibrarySetInvokerBuilder>.LoggerFactory => _state.LoggerFactory;
-
-    #endregion
-
-    #region Input (AssemblyData's)
-
-    public LibrarySetInvokerBuilder AddAssemblies(IEnumerable<AssemblyData> assemblyData)
+    public FluentLibrarySetInvokerBuilder AddAssemblies(IEnumerable<AssemblyData> assemblyData)
     {
         var assembliesBuilder = _state.Entries.ToBuilder();
         var oldCount = assembliesBuilder.Count;
-        var addEntries = assemblyData.Select(ad => new RuntimeApiStateEntry(ad.AssemblyBytes ?? throw new InvalidOperationException("AssemblyBytes must not be null"), ad.DebugSymbolsBytes));
+        var addEntries = assemblyData.Select(ad => new LibraryBinaries(ad.AssemblyBytes ?? throw new InvalidOperationException("AssemblyBytes must not be null"), ad.DebugSymbolsBytes));
         assembliesBuilder.AddRange(addEntries);
         return oldCount == assembliesBuilder.Count ? this : WithEntries(assemblyData: assembliesBuilder.ToImmutable());
     }
 
-    #endregion
-
-    #region Output (InvocationScope)
-
-    public LibrarySetInvoker CreateRuntimeScope()
+    public LibrarySetInvoker CreateLibrarySetInvoker(string name = "")
     {
-        var alc = new AssemblyLoadContext("", true);
+        var alc = new AssemblyLoadContext(name, true);
         foreach (var (assembly, debugSymbols) in _state.Entries)
             alc.LoadFromBytes(assembly!, debugSymbols);
         return new LibrarySetInvoker(this, alc);
     }
-
-    #endregion
 }

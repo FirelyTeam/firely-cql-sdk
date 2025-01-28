@@ -6,6 +6,7 @@ using CqlSdkPrototype.Elm.Fluent.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Invocation.Extensions;
+using CqlSdkPrototype.Invocation.Fluent.Extensions;
 using CqlSdkPrototype.Logging;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
@@ -58,7 +59,7 @@ internal class Program
         using var invocationScope = cqlToolkit
                                     .ReplaceSettings(o => o with { ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue })
                                     .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory)
-                                    .CreateRuntimeScope();
+                                    .CreateLibrarySetInvoker();
         logger.LogInformation("{dump}", invocationScope.DumpLibraryDeclarations());
         Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
         Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
@@ -87,7 +88,7 @@ internal class Program
         var cqlContext = FhirCqlContext.ForBundle();
         using var invocationScope = cqlToolkit
                                     .AddCqlLibraryString(cqlLibraryString)
-                                    .CreateRuntimeScope(elmOpt => elmOpt with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded });
+                                    .CreateLibrarySetInvoker(elmOpt => elmOpt with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded });
         var result = invocationScope.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.VersionedLibraryIdentifier, "Three");
         Debug.Assert(result is 3);
     }
@@ -127,7 +128,7 @@ internal class Program
                 ;
         }
 
-        var elmApi = cqlToolkit.CreateElmApi(o => o with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded })
+        var elmApi = cqlToolkit.ToFluentElmToolkit(o => o with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded })
                            .AddElmFilesFromDirectory(dirs.ElmInDirectory)
                            .ProcessElmToAssemblies()
                            .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)

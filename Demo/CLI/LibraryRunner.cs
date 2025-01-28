@@ -8,7 +8,6 @@ using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Hl7.Cql.CodeGeneration.NET;
-using CqlSdkPrototype.Invocation.Invokers;
 
 namespace CLI
 {
@@ -32,9 +31,9 @@ namespace CLI
             //if used in production scenario compile measures.* dll and reference it below instead, example Assembly.LoadFrom("Measures.Authoring")
             //see launchsettings.json
             var assemblyData = AssemblyData.Default.LoadFromFiles(new FileInfo(_opts.AssemblyPath));
-            using var runtimeScope = new LibrarySetInvokerBuilder()
+            using var runtimeScope = new FluentLibrarySetInvokerBuilder()
                       .AddAssemblies([assemblyData])
-                      .CreateRuntimeScope();
+                      .CreateLibrarySetInvoker();
             RunShared(_opts, runtimeScope);
         }
 

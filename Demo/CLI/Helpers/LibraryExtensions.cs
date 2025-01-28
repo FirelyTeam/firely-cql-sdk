@@ -14,7 +14,6 @@ using Hl7.Fhir.Model;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packaging;
 using Library = Hl7.Fhir.Model.Library;
-using CqlSdkPrototype.Invocation.Invokers;
 
 namespace CLI.Helpers;
 
@@ -93,9 +92,9 @@ internal static class LibraryExtensions
             .Select(assemblyBytes => AssemblyData.Default with { AssemblyBytes = assemblyBytes})
             .ToArray();
 
-        return new LibrarySetInvokerBuilder()
+        return new FluentLibrarySetInvokerBuilder()
                          .AddAssemblies(assemblyDatas)
-                         .CreateRuntimeScope();
+                         .CreateLibrarySetInvoker();
     }
 
     private static Dictionary<string, List<string>> GetValueSets(Type libraryType)

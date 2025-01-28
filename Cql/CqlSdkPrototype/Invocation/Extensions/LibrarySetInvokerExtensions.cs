@@ -1,13 +1,12 @@
 ﻿using System.Text;
 using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Invocation.Invokers;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 using static System.FormattableString;
 
 namespace CqlSdkPrototype.Invocation.Extensions;
 
-public static partial class FluentInvocationExtensions
+public static class LibrarySetInvokerExtensions
 {
     public static IEnumerable<(CqlVersionedLibraryIdentifier library, string declarationName, Func<object?> getResult)> EnumerateLibrarySetDefinitionsResults(
         this LibrarySetInvoker scope,

@@ -10,7 +10,7 @@ using Hl7.Cql.Fhir;
 namespace CoreTests;
 
 [TestClass]
-public class LibrarySetInvokerBuilderTests
+public class FluentLibrarySetInvokerBuilderTests
 {
     /// <seealso cref="CqlTupleTests.ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized"/>
     [TestMethod]
@@ -22,9 +22,9 @@ public class LibrarySetInvokerBuilderTests
                        .Select(dir => Path.GetFullPath(Path.Combine(dir.FullName, "Dlls", "CqlNestedTupleTest-1.0.0.dll")))
                        .First(File.Exists);
         var ctx = FhirCqlContext.ForBundle();
-        using var invocationScope = new LibrarySetInvokerBuilder()
+        using var invocationScope = new FluentLibrarySetInvokerBuilder()
                                     .AddAssemblies([AssemblyData.Default.LoadFromFiles(new FileInfo(filePath))])
-                                    .CreateRuntimeScope();
+                                    .CreateLibrarySetInvoker();
 
         // Act
         var result = invocationScope

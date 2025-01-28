@@ -1,7 +1,7 @@
 ﻿using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Invocation.Invokers;
+namespace CqlSdkPrototype.Invocation;
 
 public abstract class DefinitionInvoker(
     string definitionName,
