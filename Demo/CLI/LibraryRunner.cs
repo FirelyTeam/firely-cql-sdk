@@ -9,6 +9,7 @@ using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Hl7.Cql.CodeGeneration.NET;
+using CqlSdkPrototype.Invocation.Fluent.Extensions;
 
 namespace CLI
 {

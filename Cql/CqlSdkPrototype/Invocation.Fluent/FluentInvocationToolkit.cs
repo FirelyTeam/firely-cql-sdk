@@ -30,13 +30,3 @@ public class FluentInvocationToolkit(LibrarySetInvokerBuilder librarySetInvokerB
         return librarySetInvokerBuilder.CreateLibrarySetInvoker(name);
     }
 }
-
-public static class FluentInvocationToolkitExtensions
-{
-    public static FluentInvocationToolkit AddAssemblyBinaries(
-        this FluentInvocationToolkit invocationToolkit,
-        params AssemblyBinary[] assemblyBinary)
-    {
-        return invocationToolkit.AddAssemblyBinaries(assemblyBinary.AsEnumerable());
-    }
-}

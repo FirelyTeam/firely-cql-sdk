@@ -14,6 +14,7 @@ using CqlSdkPrototype.Elm.Fluent;
 using CqlSdkPrototype.Elm.Fluent.Extensions;
 using CqlSdkPrototype.Invocation.Extensions;
 using CqlSdkPrototype.Invocation.Fluent;
+using CqlSdkPrototype.Invocation.Fluent.Extensions;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
