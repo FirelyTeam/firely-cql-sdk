@@ -39,7 +39,7 @@ internal class PackagerCli
             FluentElmToolkit elmToolkit;
             if (translateCql)
             {
-                var cqlToElmProcessorSettings = new CqlToElmProcessorConfig(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
+                var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
                 elmToolkit = new FluentCqlToolkit(
                                  loggerFactory,
                                  cqlToElmProcessorSettings)
@@ -47,7 +47,7 @@ internal class PackagerCli
                                  valueSelector: _ => opt.CqlInDirectory,
                                  ifHasValue: (api, cql) => api.AddCqlLibrariesFromDirectory(cql),
                                  ifNoValue: _ => logger.LogWarning("No input directory specified for ELM. Nothing to do."))
-                             .ProcessCqlToElm()
+                             .TranslateCqlToElm()
                              .PickValueAndSwitch(
                                  valueSelector: _ => opt.ElmOutDirectory,
                                  ifHasValue: (api, elm) =>
@@ -56,29 +56,29 @@ internal class PackagerCli
                                      api.SaveElmFilesToDirectory(elm);
                                  },
                                  ifNoValue: _ => logger.LogInformation("No out directory specified for ELM."))
-                             .ProcessCqlToAssemblies();
+                             .CompileCqlToAssemblies();
             }
             else
             {
-                var elmToolkitSettings = new ElmToAssemblyProcessorConfig(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
+                var elmToolkitSettings = new ElmToAssemblyCompilerConfig(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
                 elmToolkit = new FluentElmToolkit(loggerFactory, elmToolkitSettings)
                              .PickValueAndSwitch(
                                  _ => opt.ElmInDirectory,
                                  ifHasValue: (api, elm) =>
                                      api.AddElmFilesFromDirectory(elm, filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name)),
                                  ifNoValue: _ => logger.LogWarning("No input directory specified for ELM. Nothing to do."))
-                             .ProcessElmToAssemblies();
+                             .CompileElmToAssemblies();
             }
 
             if (opt.CSharpOutDirectory is { } dirOutCS
-                && elmToolkit.ElmToAssemblyConversions.Any(e => e.Value.CSharpSourceCode is not null))
+                && elmToolkit.ElmToAssemblyCompilations.Any(e => e.Value.CSharpSourceCode is not null))
             {
                 dirOutCS.Recreate();
                 elmToolkit.SaveCSharpFilesToDirectory(dirOutCS);
             }
 
             if (opt.AssemblyOutDirectory is { } dirOutDll
-                && elmToolkit.ElmToAssemblyConversions.Any(e => e.Value.AssemblyBinary is not null))
+                && elmToolkit.ElmToAssemblyCompilations.Any(e => e.Value.AssemblyBinary is not null))
             {
                 dirOutDll.Recreate();
                 elmToolkit.SaveAssemblyBinariesToDirectory(dirOutDll);
@@ -94,11 +94,11 @@ internal class PackagerCli
                         FhirOverrideDate: var overrideDate
                     }
                 // Check that we have the libraries produced by the ElmToolkit
-                && elmToolkit.ElmToAssemblyConversions
+                && elmToolkit.ElmToAssemblyCompilations
                              .Select(e => e.Value.ElmLibrary)
                              .ToArray() is { Length: > 0 } libraries
                 // Check that we have the assemblies produced by the ElmToolkit
-                && elmToolkit.ElmToAssemblyConversions
+                && elmToolkit.ElmToAssemblyCompilations
                              .Where(e => e.Value is { AssemblyBinary: { }, CSharpSourceCode: { } })
                              .ToDictionary(
                                  e => e.Key.ToString(),

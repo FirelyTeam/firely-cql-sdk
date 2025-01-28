@@ -7,7 +7,7 @@ namespace CqlSdkPrototype.Cql.Internal;
 /// Provides the implementation for <seealso cref="ILibraryProvider"/> which resolves library builders given a library name and version on a <seealso cref="CqlToElmConversionDictionary.Builder"/>.
 /// </summary>00
 /// <param name="builder"></param>
-internal sealed class CqlToElmConversionsLibraryProvider(CqlToElmConversionDictionary.Builder builder)
+internal sealed class LibraryProvider(CqlToElmConversionDictionary.Builder builder)
     : ILibraryProvider
 {
     public CqlToElmConversionDictionary.Builder Builder { get; set; } = builder;

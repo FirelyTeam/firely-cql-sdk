@@ -118,7 +118,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private static T? Run<T>(Library library, string member, Hl7.Fhir.Model.Bundle? bundle = null)
         {
-            var lambdas = CreateFluentElmToolkit().ProcessLibrary(library);
+            var lambdas = ToFluentElmToolkit().ProcessLibrary(library);
             var delegates = lambdas.CompileAll();
             var dg = delegates[library.GetVersionedIdentifier()!, member];
             var ctx = FhirCqlContext.ForBundle(bundle, delegates: delegates);

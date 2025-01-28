@@ -36,7 +36,7 @@ namespace Hl7.Cql.CqlToElm.Test
             CqlContext? ctx = null)
         {
             ctx ??= DefaultCqlContext;
-            var elmToolkit = CreateFluentElmToolkit();
+            var elmToolkit = ToFluentElmToolkit();
             var lambda = elmToolkit.Lambda(expression);
             var expressionName = "TempExpression";
             var elmToolkitServices = elmToolkit;
@@ -49,7 +49,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
             using var librarySetInvoker = new FluentInvocationToolkit()
                               .AddAssemblyBinaries(AssemblyBinary.Default with { AssemblyBytes = assemblyBytes })
-                              .CreateLibrarySetInvoker();
+                              .ToLibrarySetInvoker();
             var result = librarySetInvoker.GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);
             return result;
         }
@@ -64,7 +64,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         protected static void AssertResult<T>(Expression be, T expected)
         {
-            var lambda = CreateFluentElmToolkit().Lambda(@be);
+            var lambda = ToFluentElmToolkit().Lambda(@be);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
 
@@ -83,7 +83,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         protected static void AssertNullResult(Expression be)
         {
-            var lambda = CreateFluentElmToolkit().Lambda(@be);
+            var lambda = ToFluentElmToolkit().Lambda(@be);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
 
@@ -166,7 +166,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsNotNull(list.element);
             Assert.AreEqual(expectedValues.Length, list.element.Length);
 
-            var lambda = CreateFluentElmToolkit().Lambda(list);
+            var lambda = ToFluentElmToolkit().Lambda(list);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
             var result = dg.DynamicInvoke(ctx);
@@ -195,7 +195,7 @@ namespace Hl7.Cql.CqlToElm.Test
             bool AllowNullIntervals = false) =>
             new(
                 LoggerFactory,
-                new CqlToElmProcessorConfig(
+                new CqlToElmTranslatorConfig(
                     ProcessBatchItemExceptionHandling: ProcessBatchItemExceptionHandling.ThrowException,
                     Models: Models ?? [CqlModel.ElmR1, CqlModel.Fhir401],
                     ModelInfos: ModelInfos,
@@ -207,13 +207,13 @@ namespace Hl7.Cql.CqlToElm.Test
                     AllowNullInterval: AllowNullIntervals
                 ));
 
-        internal static FluentElmToolkit CreateFluentElmToolkit(
+        internal static FluentElmToolkit ToFluentElmToolkit(
             ImmutableHashSet<CqlModel>? models = null,
             ImmutableHashSet<ModelInfo>? modelInfos = null,
             AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
             bool enableListPromotion = false) =>
             CreateFluentCqlToolkit(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
-                .CreateFluentElmToolkit(_ => new ElmToAssemblyProcessorConfig(
+                .ToFluentElmToolkit(_ => new ElmToAssemblyCompilerConfig(
                                   ProcessBatchItemExceptionHandling.ThrowException,
                                   Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));
     }

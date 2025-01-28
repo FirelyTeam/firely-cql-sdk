@@ -35,7 +35,7 @@ namespace CLI
             var assemblyBinary = AssemblyBinary.Default.LoadFromFiles(new FileInfo(_opts.AssemblyPath));
             using var librarySetInvoker = new FluentInvocationToolkit()
                       .AddAssemblyBinaries(assemblyBinary)
-                      .CreateLibrarySetInvoker();
+                      .ToLibrarySetInvoker();
             RunShared(_opts, librarySetInvoker);
         }
 

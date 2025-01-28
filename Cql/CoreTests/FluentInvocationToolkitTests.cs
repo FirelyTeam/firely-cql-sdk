@@ -26,7 +26,7 @@ public class FluentInvocationToolkitTests
         var ctx = FhirCqlContext.ForBundle();
         using var librarySetInvoker = new FluentInvocationToolkit()
                                     .AddAssemblyBinaries(AssemblyBinary.Default.LoadFromFiles(new FileInfo(filePath)))
-                                    .CreateLibrarySetInvoker();
+                                    .ToLibrarySetInvoker();
 
         // Act
         var result = librarySetInvoker

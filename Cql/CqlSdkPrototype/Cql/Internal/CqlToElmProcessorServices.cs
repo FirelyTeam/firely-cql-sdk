@@ -11,7 +11,7 @@ internal readonly record struct CqlToElmProcessorServices(
     ILoggerFactory LoggerFactory,
     ServiceProvider ServiceProvider,
     CqlToElmConverter CqlToElmConverter,
-    CqlToElmConversionsLibraryProvider LibraryProvider)
+    LibraryProvider LibraryProvider)
 {
     private static readonly (CqlModel CqlModel, ModelInfo ModelInfo)[] AllMappedModelsInOrder = [
         (CqlModel.ElmR1, Models.ElmR1),
@@ -19,11 +19,11 @@ internal readonly record struct CqlToElmProcessorServices(
 
     public static CqlToElmProcessorServices Create(
         ILoggerFactory loggerFactory,
-        CqlToElmProcessorConfig config,
+        CqlToElmTranslatorConfig config,
         CqlToElmConversionDictionary conversions)
     {
         var builder = conversions.ToBuilder();
-        var libraryProvider = new CqlToElmConversionsLibraryProvider(builder);
+        var libraryProvider = new LibraryProvider(builder);
 
         var services = new ServiceCollection();
         services.AddExternalLogging(loggerFactory);
@@ -35,7 +35,7 @@ internal readonly record struct CqlToElmProcessorServices(
 
     private static void AddCqlServices(
         IServiceCollection serviceCollection,
-        CqlToElmProcessorConfig config,
+        CqlToElmTranslatorConfig config,
         ILibraryProvider libraryProvider)
     {
         SuppressCqlDebugAssertions();
@@ -75,7 +75,7 @@ internal readonly record struct CqlToElmProcessorServices(
 
     public ILoggerFactory LoggerFactory { get; } = LoggerFactory;
     public ServiceProvider ServiceProvider { get; } = ServiceProvider!;
-    public ILogger<CqlToElmProcessor> Logger { get; } = ServiceProvider.GetLogger<CqlToElmProcessor>();
+    public ILogger<CqlToElmTranslator> Logger { get; } = ServiceProvider.GetLogger<CqlToElmTranslator>();
     public CqlToElmConverter CqlToElmConverter { get; } = CqlToElmConverter!;
-    public CqlToElmConversionsLibraryProvider LibraryProvider { get; } = LibraryProvider!;
+    public LibraryProvider LibraryProvider { get; } = LibraryProvider!;
 }

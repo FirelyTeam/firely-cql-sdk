@@ -331,7 +331,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private void AssertIs(Is @is, bool? expected)
         {
-            var lambda = CreateFluentElmToolkit().Lambda(@is);
+            var lambda = ToFluentElmToolkit().Lambda(@is);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
             var result = dg.DynamicInvoke(ctx);

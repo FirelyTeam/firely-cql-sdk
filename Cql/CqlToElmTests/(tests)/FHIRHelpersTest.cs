@@ -27,7 +27,7 @@ namespace Hl7.Cql.CqlToElm.Test
             using var fs = new FileStream("FHIRHelpers-4.0.1.json", FileMode.Create, FileAccess.Write, FileShare.Read);
             lib.WriteJson(fs);
             fs.Close();
-            var lambdas = CreateFluentElmToolkit().ProcessLibrary(lib);
+            var lambdas = ToFluentElmToolkit().ProcessLibrary(lib);
             _ = lambdas.CompileAll();
         }
 
@@ -82,7 +82,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
             lib.statements.Should().HaveCount(2);
             var fd = lib.statements[1].Should().BeOfType<FunctionDef>().Subject;
-            var lambdas = CreateFluentElmToolkit().ProcessLibrary(lib);
+            var lambdas = ToFluentElmToolkit().ProcessLibrary(lib);
             _ = lambdas.CompileAll();
         }
 

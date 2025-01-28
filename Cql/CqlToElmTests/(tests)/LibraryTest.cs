@@ -712,7 +712,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 private concept Name: { "code1", "code2", "code3" } display 'My concept'
                 """);
-            _ = CreateFluentElmToolkit().ProcessLibrary(library);
+            _ = ToFluentElmToolkit().ProcessLibrary(library);
         }
 
         #endregion

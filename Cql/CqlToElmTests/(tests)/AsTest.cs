@@ -41,7 +41,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var nts = (NamedTypeSpecifier)@as.asTypeSpecifier;
                 Assert.AreEqual($"{{{SystemUri}}}Vocabulary", nts.name?.Name);
 
-                var delegates = CreateFluentElmToolkit().ProcessLibrary(library).CompileAll();
+                var delegates = ToFluentElmToolkit().ProcessLibrary(library).CompileAll();
                 var dg = delegates["AsTest-1.0.0", "ValueSet_As_Vocabulary"];
                 var ctx = FhirCqlContext.ForBundle(delegates: delegates);
                 var result = dg.DynamicInvoke(ctx);
@@ -95,7 +95,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private void AssertAsNull(As @as)
         {
-            var lambda = CreateFluentElmToolkit().Lambda(@as);
+            var lambda = ToFluentElmToolkit().Lambda(@as);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
             var result = dg.DynamicInvoke(ctx);
@@ -135,7 +135,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private function f(id FHIR.id): id as FHIR.string
                 """);
             lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
-            var lambdas = CreateFluentElmToolkit().ProcessLibrary(lib);
+            var lambdas = ToFluentElmToolkit().ProcessLibrary(lib);
             var delegates = lambdas.CompileAll();
             var dg = delegates[lib.GetVersionedIdentifier(), "f", typeof(Hl7.Fhir.Model.Id)];
             var ctx = FhirCqlContext.ForBundle();
@@ -159,7 +159,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private function f(choice Choice<FHIR.dateTime, FHIR.Range>):
                     choice as FHIR.Range
                 """);
-            _ = CreateFluentElmToolkit().ProcessLibrary(lib);
+            _ = ToFluentElmToolkit().ProcessLibrary(lib);
         }
     }
 }

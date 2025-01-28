@@ -82,7 +82,7 @@ internal static class LibraryExtensions
         }
     }
 
-    public static LibrarySetInvoker CreateLibrarySetInvoker(
+    public static LibrarySetInvoker ToLibrarySetInvoker(
         this IEnumerable<Library> libraries)
     {
         var assemblyBinaries =
@@ -95,7 +95,7 @@ internal static class LibraryExtensions
 
         return new FluentInvocationToolkit()
                          .AddAssemblyBinaries(assemblyBinaries)
-                         .CreateLibrarySetInvoker();
+                         .ToLibrarySetInvoker();
     }
 
     private static Dictionary<string, List<string>> GetValueSets(Type libraryType)

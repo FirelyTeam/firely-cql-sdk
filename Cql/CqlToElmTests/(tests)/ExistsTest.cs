@@ -98,7 +98,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private void AssertExists(Exists exists, bool? expected)
         {
-            var lambda = CreateFluentElmToolkit().Lambda(exists);
+            var lambda = ToFluentElmToolkit().Lambda(exists);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
             var result = dg.DynamicInvoke(ctx);

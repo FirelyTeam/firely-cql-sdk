@@ -43,7 +43,7 @@ internal static class FluentCqlToolkitExtensions
 
         var library = fluentCqlToolkit
                       .AddCqlLibraryString(cqlLibraryString)
-                      .ProcessCqlToElm()
+                      .TranslateCqlToElm()
                       .CqlToElmConversions[cqlLibraryString.VersionedLibraryIdentifier]
                       .ElmLibrary!;
 

@@ -2,41 +2,44 @@
 
 namespace CqlSdkPrototype.Elm.Fluent;
 
-public sealed class FluentElmToolkit(ElmToAssemblyProcessor elmToAssemblyProcessor)
+public sealed class FluentElmToolkit(ElmToAssemblyCompiler elmToAssemblyCompiler)
 {
     public FluentElmToolkit(
         ILoggerFactory? loggerFactory = null,
-        ElmToAssemblyProcessorConfig? settings = null) : this(new ElmToAssemblyProcessor(loggerFactory, settings))
+        ElmToAssemblyCompilerConfig? settings = null) : this(new ElmToAssemblyCompiler(loggerFactory, settings))
     {
     }
 
     /// <summary>
     /// For testing purposes only.
     /// </summary>
-    internal ServiceProvider ServiceProvider => elmToAssemblyProcessor.ServiceProvider;
+    internal ServiceProvider ServiceProvider => elmToAssemblyCompiler.ServiceProvider;
 
-    public ILoggerFactory LoggerFactory => elmToAssemblyProcessor.LoggerFactory;
+    /// <summary>
+    /// Used by extensions to access the logger factory.
+    /// </summary>
+    public ILoggerFactory LoggerFactory => elmToAssemblyCompiler.LoggerFactory;
 
-    public ElmToAssemblyProcessorConfig ProcessorConfig => elmToAssemblyProcessor.Config;
+    public ElmToAssemblyCompilerConfig ProcessorConfig => elmToAssemblyCompiler.Config;
 
-    public ElmToAssemblyConversionReadOnlyDictionary ElmToAssemblyConversions => elmToAssemblyProcessor.ElmToAssemblyConversions;
+    public ElmToAssemblyCompilationReadOnlyDictionary ElmToAssemblyCompilations => elmToAssemblyCompiler.ElmToAssemblyCompilations;
 
-    public FluentElmToolkit Reconfigure(Func<ElmToAssemblyProcessorConfig, ElmToAssemblyProcessorConfig> replace)
+    public FluentElmToolkit Reconfigure(Func<ElmToAssemblyCompilerConfig, ElmToAssemblyCompilerConfig> configure)
     {
-        elmToAssemblyProcessor.Reconfigure(replace(ProcessorConfig));
+        elmToAssemblyCompiler.Reconfigure(configure(ProcessorConfig));
         return this;
 
     }
 
     public FluentElmToolkit AddElmLibraries(IEnumerable<Library> libraries)
     {
-        elmToAssemblyProcessor.AddElmLibraries(libraries);
+        elmToAssemblyCompiler.AddElmLibraries(libraries);
         return this;
     }
 
-    public FluentElmToolkit ProcessElmToAssemblies()
+    public FluentElmToolkit CompileElmToAssemblies()
     {
-        elmToAssemblyProcessor.ProcessElmToAssemblies();
+        elmToAssemblyCompiler.CompileElmToAssemblies();
         return this;
     }
 }

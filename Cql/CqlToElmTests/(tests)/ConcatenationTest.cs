@@ -57,7 +57,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual("world", rhs.value);
                 }
 
-                var lambda = CreateFluentElmToolkit().Lambda(concatenate);
+                var lambda = ToFluentElmToolkit().Lambda(concatenate);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(string));
@@ -116,7 +116,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}String", rhsnts.name.Name);
                 }
 
-                var lambda = CreateFluentElmToolkit().Lambda(concatenate);
+                var lambda = ToFluentElmToolkit().Lambda(concatenate);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(string));

@@ -10,6 +10,9 @@ public sealed class FluentInvocationToolkit(LibrarySetInvokerBuilder librarySetI
         : this (new LibrarySetInvokerBuilder(loggerFactory, config))
     { }
 
+    /// <summary>
+    /// Used by extensions to access the logger factory.
+    /// </summary>
     public ILoggerFactory LoggerFactory => librarySetInvokerBuilder.LoggerFactory;
 
     public FluentInvocationToolkit AddAssemblyBinaries(IEnumerable<AssemblyBinary> assemblyBinary)
@@ -25,8 +28,8 @@ public sealed class FluentInvocationToolkit(LibrarySetInvokerBuilder librarySetI
         return this;
     }
 
-    public LibrarySetInvoker CreateLibrarySetInvoker(string name = "")
+    public LibrarySetInvoker ToLibrarySetInvoker(string name = "")
     {
-        return librarySetInvokerBuilder.CreateLibrarySetInvoker(name);
+        return librarySetInvokerBuilder.ToLibrarySetInvoker(name);
     }
 }

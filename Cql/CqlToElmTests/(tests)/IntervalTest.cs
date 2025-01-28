@@ -52,7 +52,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Integer", nts.name?.Name);
 
-                var lambda = CreateFluentElmToolkit().Lambda(interval);
+                var lambda = ToFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -90,7 +90,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Integer", nts.name?.Name);
 
-                var lambda = CreateFluentElmToolkit().Lambda(interval);
+                var lambda = ToFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -128,7 +128,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Integer", nts.name?.Name);
 
-                var lambda = CreateFluentElmToolkit().Lambda(interval);
+                var lambda = ToFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -166,7 +166,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Long", nts.name?.Name);
 
-                var lambda = CreateFluentElmToolkit().Lambda(interval);
+                var lambda = ToFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -204,7 +204,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Decimal", nts.name?.Name);
 
-                var lambda = CreateFluentElmToolkit().Lambda(interval);
+                var lambda = ToFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -242,7 +242,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Quantity", nts.name?.Name);
 
-                var lambda = CreateFluentElmToolkit().Lambda(interval);
+                var lambda = ToFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -280,7 +280,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Date", nts.name?.Name);
 
-                var lambda = CreateFluentElmToolkit().Lambda(interval);
+                var lambda = ToFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -318,7 +318,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}DateTime", nts.name?.Name);
 
-                var lambda = CreateFluentElmToolkit().Lambda(interval);
+                var lambda = ToFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -357,7 +357,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Time", nts.name?.Name);
 
-                var lambda = CreateFluentElmToolkit().Lambda(interval);
+                var lambda = ToFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);

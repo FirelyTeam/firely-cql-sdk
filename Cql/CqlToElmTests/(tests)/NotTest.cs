@@ -44,7 +44,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 }
 
 
-                var lambda = CreateFluentElmToolkit().Lambda(not);
+                var lambda = ToFluentElmToolkit().Lambda(not);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -89,7 +89,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 }
 
 
-                var lambda = CreateFluentElmToolkit().Lambda(not);
+                var lambda = ToFluentElmToolkit().Lambda(not);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -134,7 +134,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 }
 
 
-                var lambda = CreateFluentElmToolkit().Lambda(not);
+                var lambda = ToFluentElmToolkit().Lambda(not);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);

@@ -28,7 +28,7 @@ internal class Program
                 .BuildServiceProvider();
 
         var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
-        var settings = new CqlToElmProcessorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
+        var settings = new CqlToElmTranslatorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         var fluentCqlToolkit = new FluentCqlToolkit(loggerFactory, settings);
         var logger = serviceProvider.GetLogger<Program>();
 
@@ -59,7 +59,7 @@ internal class Program
         using var librarySetInvoker = cqlToolkit
                                     .Reconfigure(o => o with { ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue })
                                     .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory)
-                                    .CreateLibrarySetInvoker();
+                                    .ToLibrarySetInvoker();
         logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDeclarations());
         Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
         Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
@@ -88,7 +88,7 @@ internal class Program
         var cqlContext = FhirCqlContext.ForBundle();
         using var librarySetInvoker = cqlToolkit
                                     .AddCqlLibraryString(cqlLibraryString)
-                                    .CreateLibrarySetInvoker(elmOpt => elmOpt with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded });
+                                    .ToLibrarySetInvoker(elmOpt => elmOpt with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded });
         var result = librarySetInvoker.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.VersionedLibraryIdentifier, "Three");
         Debug.Assert(result is 3);
     }
@@ -123,14 +123,14 @@ internal class Program
                                  or "NCQATerminology"
                                  or "NCQAStatus"*/
                 )
-                .ProcessCqlToElm()
+                .TranslateCqlToElm()
                 .SaveElmFilesToDirectory(dirs.ElmOutDirectory)
                 ;
         }
 
-        var elmToolkit = cqlToolkit.CreateFluentElmToolkit(o => o with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded })
+        var elmToolkit = cqlToolkit.ToFluentElmToolkit(o => o with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded })
                            .AddElmFilesFromDirectory(dirs.ElmInDirectory)
-                           .ProcessElmToAssemblies()
+                           .CompileElmToAssemblies()
                            .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
                            .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory);
 
@@ -201,7 +201,7 @@ internal class Program
 file static class X
 {
     public static Maybe<(CqlVersionedLibraryIdentifier id, string cSharpSourceCode)> TryGetFirstCSharpFileLines(this FluentElmToolkit elmToolkit) =>
-        elmToolkit.ElmToAssemblyConversions
+        elmToolkit.ElmToAssemblyCompilations
               .TryGetFirst(kv => kv.Value.CSharpSourceCode is not null)
               .TryReturn(kv => (kv.Key, kv.Value.CSharpSourceCode!));
 

@@ -9,59 +9,57 @@ using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Elm;
 
-public sealed class ElmToAssemblyProcessor
+public sealed class ElmToAssemblyCompiler
 {
-    public ElmToAssemblyProcessor(
+    public ElmToAssemblyCompiler(
         ILoggerFactory? loggerFactory = null,
-        ElmToAssemblyProcessorConfig? config = null)
+        ElmToAssemblyCompilerConfig? config = null)
     {
-        config ??= ElmToAssemblyProcessorConfig.Default;
+        config ??= ElmToAssemblyCompilerConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
-        _loggerFactory = loggerFactory;
-        _conversions = ElmToAssemblyConversionDictionary.Empty;
-        _config = config;
+        LoggerFactory = loggerFactory;
+        _compilations = ElmToAssemblyCompilationDictionary.Empty;
+        Config = config;
         _services = ElmToAssemblyProcessorServices.Create(loggerFactory);
     }
 
-    private ElmToAssemblyConversionDictionary _conversions;
+    private ElmToAssemblyCompilationDictionary _compilations;
     private ElmToAssemblyProcessorServices _services;
-    private ElmToAssemblyProcessorConfig _config;
-    private readonly ILoggerFactory _loggerFactory;
 
     /// <summary>
     /// Access by the FluentInvocationToolkit.
     /// </summary>
-    internal ILoggerFactory LoggerFactory => _loggerFactory;
+    internal ILoggerFactory LoggerFactory { get; }
 
     /// <summary>
     /// For testing purposes only.
     /// </summary>
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
-    public ElmToAssemblyProcessorConfig Config => _config;
+    public ElmToAssemblyCompilerConfig Config { get; private set; }
 
-    public ElmToAssemblyConversionReadOnlyDictionary ElmToAssemblyConversions => _conversions;
+    public ElmToAssemblyCompilationReadOnlyDictionary ElmToAssemblyCompilations => _compilations;
 
     private void SetConversions(
-        ElmToAssemblyConversionDictionary conversions)
+        ElmToAssemblyCompilationDictionary conversions)
     {
-        _conversions = conversions;
+        _compilations = conversions;
     }
 
     public void Reconfigure(
-        ElmToAssemblyProcessorConfig config)
+        ElmToAssemblyCompilerConfig config)
     {
-        if (_config == config)
+        if (Config == config)
             return;
 
         _services.ServiceProvider.Dispose();
-        _config = config;
-        _services = ElmToAssemblyProcessorServices.Create(_loggerFactory);
+        Config = config;
+        _services = ElmToAssemblyProcessorServices.Create(LoggerFactory);
     }
 
     public void AddElmLibraries(IEnumerable<Library> libraries)
     {
-        var entries = _conversions.ToBuilder();
+        var entries = _compilations.ToBuilder();
         var hasChanged = false;
         foreach (var library in libraries)
         {
@@ -75,7 +73,7 @@ public sealed class ElmToAssemblyProcessor
                 continue;
             }
 
-            var libraryCompilation = new ElmToAssemblyConversion(library);
+            var libraryCompilation = new ElmToAssemblyCompilation(library);
             entries.Add(versionedIdentifier, libraryCompilation);
             _services.Logger.LogInformation("Adding library to compiler: {versionedIdentifier}", versionedIdentifier);
             hasChanged = true;
@@ -85,16 +83,16 @@ public sealed class ElmToAssemblyProcessor
             SetConversions(conversions: entries.ToImmutable());
     }
 
-    public void ProcessElmToAssemblies()
+    public void CompileElmToAssemblies()
     {
-        var entries = _conversions;
+        var entries = _compilations;
         if (entries.Values.All(predicate: lc => lc is { AssemblyBinary: not null })) return;
 
         using var servicesScope = _services.CreateScopedState();
         var logger = _services.Logger;
         logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
-        var exceptionHandling = _config.ProcessBatchItemExceptionHandling;
-        var debugInformationFormat = _config.AssemblyCompilerDebugInformationFormat;
+        var exceptionHandling = Config.ProcessBatchItemExceptionHandling;
+        var debugInformationFormat = Config.AssemblyCompilerDebugInformationFormat;
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _services.LibrarySetCSharpCodeGenerator;
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
@@ -121,8 +119,8 @@ public sealed class ElmToAssemblyProcessor
 
     private static bool UpdateStateEntries(
         IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> assemblyBinaries,
-        ElmToAssemblyConversionDictionary.Builder entriesBuilder,
-        ILogger<ElmToAssemblyProcessor> logger)
+        ElmToAssemblyCompilationDictionary.Builder entriesBuilder,
+        ILogger<ElmToAssemblyCompiler> logger)
     {
         bool hasChanged = false;
         foreach (var (library, (assemblyBinary, sourceCodePerName, debugSymbols)) in assemblyBinaries)
@@ -156,7 +154,7 @@ public sealed class ElmToAssemblyProcessor
         LibrarySet librarySet,
         IEnumerable<(Library library, string cSharp)> cSharps,
         AssemblyCompilerDebugInformationFormat debugInformationFormat,
-        ILogger<ElmToAssemblyProcessor> logger,
+        ILogger<ElmToAssemblyCompiler> logger,
         LogExceptionMessageAction log,
         ProcessBatchItemExceptionHandling exceptionHandling)
     {
@@ -184,7 +182,7 @@ public sealed class ElmToAssemblyProcessor
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor,
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> librarySetDefinitions,
-        ILogger<ElmToAssemblyProcessor> logger,
+        ILogger<ElmToAssemblyCompiler> logger,
         LogExceptionMessageAction log,
         ProcessBatchItemExceptionHandling exceptionHandling)
     {
@@ -209,7 +207,7 @@ public sealed class ElmToAssemblyProcessor
     private static DefinitionDictionary<LambdaExpression> BuildLibrarySetDefinitions(
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped,
         LibrarySet librarySet,
-        ILogger<ElmToAssemblyProcessor> logger,
+        ILogger<ElmToAssemblyCompiler> logger,
         LogExceptionMessageAction log,
         ProcessBatchItemExceptionHandling exceptionHandling)
     {

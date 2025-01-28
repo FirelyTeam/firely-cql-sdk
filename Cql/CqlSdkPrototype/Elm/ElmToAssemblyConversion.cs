@@ -2,5 +2,4 @@
 
 namespace CqlSdkPrototype.Elm;
 
-public readonly record struct ElmToAssemblyConversion
-    (Library ElmLibrary, string? CSharpSourceCode = null, byte[]? AssemblyBinary = null, byte[]? DebugSymbolsBinary = null);
+public readonly record struct ElmToAssemblyCompilation(Library ElmLibrary, string? CSharpSourceCode = null, byte[]? AssemblyBinary = null, byte[]? DebugSymbolsBinary = null);

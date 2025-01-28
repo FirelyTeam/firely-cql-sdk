@@ -6,13 +6,13 @@ using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Cql;
 
-public sealed class CqlToElmProcessor
+public sealed class CqlToElmTranslator
 {
-    public CqlToElmProcessor(
+    public CqlToElmTranslator(
         ILoggerFactory? loggerFactory = null,
-        CqlToElmProcessorConfig? config = null)
+        CqlToElmTranslatorConfig? config = null)
     {
-        config ??= CqlToElmProcessorConfig.Default;
+        config ??= CqlToElmTranslatorConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         _loggerFactory = loggerFactory;
         _conversions = CqlToElmConversionDictionary.Empty;
@@ -22,7 +22,7 @@ public sealed class CqlToElmProcessor
 
     private CqlToElmConversionDictionary _conversions;
     private CqlToElmProcessorServices _services;
-    private CqlToElmProcessorConfig _config;
+    private CqlToElmTranslatorConfig _config;
     private readonly ILoggerFactory _loggerFactory;
 
     /// <summary>
@@ -36,7 +36,7 @@ public sealed class CqlToElmProcessor
     /// </summary>
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
-    public CqlToElmProcessorConfig Config => _config;
+    public CqlToElmTranslatorConfig Config => _config;
 
     public CqlToElmConversionReadOnlyDictionary Conversions => _conversions;
 
@@ -48,7 +48,7 @@ public sealed class CqlToElmProcessor
     }
 
     public void Reconfigure(
-        CqlToElmProcessorConfig config)
+        CqlToElmTranslatorConfig config)
     {
         if (_config == config)
             return;
@@ -77,7 +77,7 @@ public sealed class CqlToElmProcessor
 
             var libraryVisitor = CqlToElmConverter.GetLibraryVisitorScoped(scope);
             var libraryBuilder = cqlToElmConverter.GetBuilder(libraryVisitor, cqlLibrary.Cql);
-            var entry = new CqlToElmConversion(cqlLibrary) { ElmLibraryBuilder = libraryBuilder };
+            var entry = new CqlToElmTranslation(cqlLibrary) { ElmLibraryBuilder = libraryBuilder };
             entriesBuilder.Add(versionedIdentifier, entry);
             logger.LogInformation("Adding cql library to translation: {versionedIdentifier}", versionedIdentifier);
             hasChanged = true;
@@ -87,13 +87,13 @@ public sealed class CqlToElmProcessor
             SetConversions(conversions: entriesBuilder.ToImmutable());
     }
 
-    public void ProcessCqlToElm()
+    public void TranslateCqlToElm()
     {
         CqlToElmConversionDictionary.Builder processItemsBuilder = _services.LibraryProvider.Builder;
         var logger = _services.Logger;
         bool atFirst = true;
 
-        IEnumerable<(CqlVersionedLibraryIdentifier versionedIdentifier, CqlToElmConversion cqlTranslationEntry)> GetLibrariesForProcessing()
+        IEnumerable<(CqlVersionedLibraryIdentifier versionedIdentifier, CqlToElmTranslation cqlTranslationEntry)> GetLibrariesForProcessing()
         {
             foreach (var (versionedIdentifier, cqlTranslationEntry) in
                      _conversions.Where(kv => kv.Value.ElmLibrary is null))
@@ -126,7 +126,7 @@ public sealed class CqlToElmProcessor
         if (changedCount > 0)
             SetConversions(conversions: processItemsBuilder.ToImmutable());
 
-        void ProcessLibrary(CqlVersionedLibraryIdentifier versionedIdentifier, CqlToElmConversion cqlTranslationEntry)
+        void ProcessLibrary(CqlVersionedLibraryIdentifier versionedIdentifier, CqlToElmTranslation cqlTranslationEntry)
         {
             var library = cqlTranslationEntry.ElmLibraryBuilder!.Build();
             processItemsBuilder[versionedIdentifier] = cqlTranslationEntry with { ElmLibrary = library };

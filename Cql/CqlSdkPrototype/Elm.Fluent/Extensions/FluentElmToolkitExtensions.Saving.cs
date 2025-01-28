@@ -11,7 +11,7 @@ public static partial class FluentElmToolkitExtensions
 
         var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
 
-        foreach (var (libraryName, (_, cSharpSourceCode, _, _)) in elmToolkit.ElmToAssemblyConversions)
+        foreach (var (libraryName, (_, cSharpSourceCode, _, _)) in elmToolkit.ElmToAssemblyCompilations)
         {
             if (cSharpSourceCode is null)
                 continue;
@@ -33,7 +33,7 @@ public static partial class FluentElmToolkitExtensions
 
         var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
 
-        foreach (var (libraryName, (_, _, assemblyBytes, symbolsBytes)) in elmToolkit.ElmToAssemblyConversions)
+        foreach (var (libraryName, (_, _, assemblyBytes, symbolsBytes)) in elmToolkit.ElmToAssemblyCompilations)
         {
             if (assemblyBytes is null)
                 continue;

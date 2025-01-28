@@ -30,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var interval = (Interval)width.operand;
                 AssertIntervalType(interval.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = CreateFluentElmToolkit().Lambda(width);
+                var lambda = ToFluentElmToolkit().Lambda(width);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);
@@ -66,7 +66,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(@as.operand, typeof(Null));
                 AssertIntervalType(@as.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = CreateFluentElmToolkit().Lambda(width);
+                var lambda = ToFluentElmToolkit().Lambda(width);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);
@@ -98,7 +98,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var list = (Interval)width.operand;
                 AssertIntervalType(list.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = CreateFluentElmToolkit().Lambda(width);
+                var lambda = ToFluentElmToolkit().Lambda(width);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);

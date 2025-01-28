@@ -58,15 +58,15 @@ namespace Hl7.Cql.CqlToElm.Test
             }
 
             Expression equal = Equals(expression, expectation);
-            var equalLambda = CreateFluentElmToolkit().Lambda(equal);
+            var equalLambda = ToFluentElmToolkit().Lambda(equal);
 
             var equalDelegate = equalLambda.Compile();
             // TODO: These needs to be changed to run through the AssemblyCompiler too
             var equalResult = (bool?)equalDelegate.DynamicInvoke(CqlContext);
             if (equalResult != true)
             {
-                var expressionValue = CreateFluentElmToolkit().Lambda(expression).Compile().DynamicInvoke(CqlContext);
-                var expectationValue = CreateFluentElmToolkit().Lambda(expectation).Compile().DynamicInvoke(CqlContext);
+                var expressionValue = ToFluentElmToolkit().Lambda(expression).Compile().DynamicInvoke(CqlContext);
+                var expectationValue = ToFluentElmToolkit().Lambda(expectation).Compile().DynamicInvoke(CqlContext);
                 Assert.Fail($"Case {testFullName} assertion failed. Expected '{expectationValue}', but got '{expressionValue}'.");
             }
         }

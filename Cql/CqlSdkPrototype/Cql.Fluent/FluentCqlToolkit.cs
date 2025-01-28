@@ -2,40 +2,43 @@
 
 namespace CqlSdkPrototype.Cql.Fluent;
 
-public sealed class FluentCqlToolkit(CqlToElmProcessor cqlToElmProcessor)
+public sealed class FluentCqlToolkit(CqlToElmTranslator cqlToElmTranslator)
 {
     public FluentCqlToolkit(
         ILoggerFactory? loggerFactory = null,
-        CqlToElmProcessorConfig? config = null) : this(new CqlToElmProcessor(loggerFactory, config))
+        CqlToElmTranslatorConfig? config = null) : this(new CqlToElmTranslator(loggerFactory, config))
     {
     }
 
     /// <summary>
     /// For testing purposes only.
     /// </summary>
-    internal ServiceProvider ServiceProvider => cqlToElmProcessor.ServiceProvider;
+    internal ServiceProvider ServiceProvider => cqlToElmTranslator.ServiceProvider;
 
-    public ILoggerFactory LoggerFactory => ServiceProvider.GetRequiredService<ILoggerFactory>();
+    /// <summary>
+    /// Used by extensions to access the logger factory.
+    /// </summary>
+    public ILoggerFactory LoggerFactory => cqlToElmTranslator.LoggerFactory;
 
-    public CqlToElmProcessorConfig Config => cqlToElmProcessor.Config;
+    public CqlToElmTranslatorConfig Config => cqlToElmTranslator.Config;
 
-    public CqlToElmConversionReadOnlyDictionary CqlToElmConversions => cqlToElmProcessor.Conversions;
+    public CqlToElmConversionReadOnlyDictionary CqlToElmConversions => cqlToElmTranslator.Conversions;
 
-    public FluentCqlToolkit Reconfigure(Func<CqlToElmProcessorConfig, CqlToElmProcessorConfig> configure)
+    public FluentCqlToolkit Reconfigure(Func<CqlToElmTranslatorConfig, CqlToElmTranslatorConfig> configure)
     {
-        cqlToElmProcessor.Reconfigure(configure(Config));
+        cqlToElmTranslator.Reconfigure(configure(Config));
         return this;
     }
 
     public FluentCqlToolkit AddCqlLibraries(IEnumerable<CqlLibraryString> libraries)
     {
-        cqlToElmProcessor.AddCqlLibraries(libraries);
+        cqlToElmTranslator.AddCqlLibraries(libraries);
         return this;
     }
 
-    public FluentCqlToolkit ProcessCqlToElm()
+    public FluentCqlToolkit TranslateCqlToElm()
     {
-        cqlToElmProcessor.ProcessCqlToElm();
+        cqlToElmTranslator.TranslateCqlToElm();
         return this;
     }
 }

@@ -11,7 +11,7 @@ namespace CqlSdkPrototype.Elm.Internal;
 
 internal readonly record struct ElmToAssemblyProcessorServices(
     ServiceProvider ServiceProvider,
-    ILogger<ElmToAssemblyProcessor> Logger,
+    ILogger<ElmToAssemblyCompiler> Logger,
     AssemblyCompiler AssemblyCompiler,
     LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator)
 {

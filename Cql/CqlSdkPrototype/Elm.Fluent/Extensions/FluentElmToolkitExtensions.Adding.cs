@@ -32,7 +32,7 @@ public static partial class FluentElmToolkitExtensions
         if (versionedLibraryIdentifier.Version is null)
             throw new FileNotFoundException($"Could not find file '{file.FullName}'.");
 
-        var logger = elmToolkit.CreateLogger();
+        var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
         logger.LogWarning("Could not load library from file with name and version, trying without version: {file}", file.FullName);
         file = new FileInfo(Path.Combine(directory.FullName, $"{versionedLibraryIdentifier with { Version = null }}.json"));
         return elmToolkit.AddElmFile(file);
@@ -42,7 +42,7 @@ public static partial class FluentElmToolkitExtensions
         this FluentElmToolkit elmToolkit,
         IEnumerable<FileInfo> files)
     {
-        var logger = elmToolkit.CreateLogger();
+        var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
         var libraries = files
             .Select(f =>
             {

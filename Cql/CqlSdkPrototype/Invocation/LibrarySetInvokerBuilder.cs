@@ -54,7 +54,7 @@ public sealed class LibrarySetInvokerBuilder
             SetAssemblyBinaries(builder.ToImmutable());
     }
 
-    public LibrarySetInvoker CreateLibrarySetInvoker(string name = "")
+    public LibrarySetInvoker ToLibrarySetInvoker(string name = "")
     {
         _services.Logger.LogDebug("Creating LibrarySetInvoker");
         var alc = new AssemblyLoadContext(name, true);
