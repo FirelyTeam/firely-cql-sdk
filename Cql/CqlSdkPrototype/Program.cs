@@ -124,7 +124,7 @@ internal class Program
                                  or "NCQAStatus"*/
                 )
                 .ProcessCqlToElm()
-                .SaveElmFileToDirectory(dirs.ElmOutDirectory)
+                .SaveElmFilesToDirectory(dirs.ElmOutDirectory)
                 ;
         }
 

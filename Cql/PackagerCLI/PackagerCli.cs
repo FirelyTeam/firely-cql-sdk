@@ -53,7 +53,7 @@ internal class PackagerCli
                                  ifHasValue: (api, elm) =>
                                  {
                                      elm.Recreate();
-                                     api.SaveElmFileToDirectory(elm);
+                                     api.SaveElmFilesToDirectory(elm);
                                  },
                                  ifNoValue: _ => logger.LogInformation("No out directory specified for ELM."))
                              .ProcessCqlToAssemblies();

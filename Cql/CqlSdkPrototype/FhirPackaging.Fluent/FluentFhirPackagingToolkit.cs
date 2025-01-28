@@ -1,31 +1,21 @@
 ﻿using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Logging.Internal;
+using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Hl7.Fhir.Introspection;
 
-namespace CqlSdkPrototype.Fhir;
+namespace CqlSdkPrototype.FhirPackaging.Fluent;
 
 using ElmLibrary = Hl7.Cql.Elm.Library;
 using FhirLibrary = Hl7.Fhir.Model.Library;
 using DateTime = System.DateTime;
 
-public class FhirApi(ILoggerFactory? loggerFactory)
+public class FluentFhirPackagingToolkit(
+    ILoggerFactory? loggerFactory)
 {
-    private readonly FhirApiServices _services = CreateServices(loggerFactory ?? NullLoggerFactory.Instance);
-
-    private static FhirApiServices CreateServices(ILoggerFactory loggerFactory)
-    {
-        var services = new ServiceCollection().AddExternalLogging(loggerFactory);
-        services.TryAddSingleton<ModelInspector>(_ => Hl7.Fhir.Model.ModelInfo.ModelInspector);
-        services.TryAddSingleton<TypeResolver, FhirTypeResolver>();
-        services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
-        var serviceProvider = services.BuildServiceProvider();
-        CqlTypeToFhirTypeMapper cqlTypeToFhirTypeMapper = serviceProvider.GetRequiredService<CqlTypeToFhirTypeMapper>();
-        return new FhirApiServices(serviceProvider, cqlTypeToFhirTypeMapper);
-    }
+    private readonly FhirPackagerServices _services = FhirPackagerServices.Create(loggerFactory ?? NullLoggerFactory.Instance);
 
     public FhirLibrary CreateLibraryResource(
         ElmLibrary elmLibrary,
@@ -51,4 +41,24 @@ public class FhirApi(ILoggerFactory? loggerFactory)
     }
 }
 
-internal record FhirApiServices(ServiceProvider ServiceProvider, CqlTypeToFhirTypeMapper CqlTypeToFhirTypeMapper);
+public class FhirPackager(
+    ILoggerFactory? loggerFactory = null)
+{
+    public ILoggerFactory? LoggerFactory { get; } = loggerFactory;
+}
+
+internal record FhirPackagerServices(
+    ServiceProvider ServiceProvider,
+    CqlTypeToFhirTypeMapper CqlTypeToFhirTypeMapper)
+{
+    public static FhirPackagerServices Create(ILoggerFactory loggerFactory)
+    {
+        var services = new ServiceCollection().AddExternalLogging(loggerFactory);
+        services.TryAddSingleton<ModelInspector>(_ => Hl7.Fhir.Model.ModelInfo.ModelInspector);
+        services.TryAddSingleton<TypeResolver, FhirTypeResolver>();
+        services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
+        var serviceProvider = services.BuildServiceProvider();
+        return ActivatorUtilities.CreateInstance<FhirPackagerServices>(serviceProvider, serviceProvider);
+    }
+
+}

@@ -2,7 +2,7 @@
 
 public static partial class FluentCqlToolkitExtensions
 {
-    public static FluentCqlToolkit SaveElmFileToDirectory(
+    public static FluentCqlToolkit SaveElmFilesToDirectory(
         this FluentCqlToolkit cqlToolkit,
         DirectoryInfo directory,
         bool writeIndented = true)

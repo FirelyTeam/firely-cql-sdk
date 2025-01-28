@@ -1,4 +1,4 @@
-﻿namespace CqlSdkPrototype.Logging.Internal;
+﻿namespace CqlSdkPrototype.Internal;
 
 internal static class LoggingServiceCollectionExtensions
 {

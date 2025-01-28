@@ -23,22 +23,23 @@ internal static class Program
         var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
 
         // Create fluent cql toolkit
-        var cqlToElmProcessorSettings = new CqlToElmProcessorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
+        var cqlToElmProcessorSettings = new CqlToElmProcessorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]); // TODO:CqlToElmConversionConfig
         FluentCqlToolkit cqlToolkit = new FluentCqlToolkit(loggerFactory, cqlToElmProcessorSettings);
 
         // Add CQL libraries from a directory and process them to ELM, then save the ELM files to a directory
         cqlToolkit
             .AddCqlLibrariesFromDirectory(new DirectoryInfo("input/cql/"))
-            .ProcessCqlToElm()
-            .SaveElmFileToDirectory(new DirectoryInfo("output/elm/"));
+            .ProcessCqlToElm() // TODO:ConvertCqlToElm
+            .SaveElmFilesToDirectory(new DirectoryInfo("output/elm/"));
 
         // Create fluent elm toolkit as a continuation of the cql toolkit
         var elmToolkit = cqlToolkit.CreateFluentElmToolkit();
 
         // Process the ELM files to assemblies, then save the C# files and assembly binaries to directories
-        elmToolkit.ProcessElmToAssemblies()
-              .SaveCSharpFilesToDirectory(new DirectoryInfo("output/csharp/"))
-              .SaveAssemblyBinariesToDirectory(new DirectoryInfo("output/assemblies/"));
+        elmToolkit
+            .ProcessElmToAssemblies() // TODO:ConvertElmToAssemblies
+            .SaveCSharpFilesToDirectory(new DirectoryInfo("output/csharp/"))
+            .SaveAssemblyBinariesToDirectory(new DirectoryInfo("output/assemblies/"));
 
         // Setup RuntimeApi
         var invocationToolkit = elmToolkit.CreateFluentInvocationToolkit();

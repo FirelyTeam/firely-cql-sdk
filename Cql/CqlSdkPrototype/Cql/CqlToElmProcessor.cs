@@ -6,7 +6,7 @@ using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Cql;
 
-public class CqlToElmProcessor
+public sealed class CqlToElmProcessor
 {
     public CqlToElmProcessor(
         ILoggerFactory? loggerFactory = null,

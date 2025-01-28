@@ -1,5 +1,4 @@
 ﻿using CqlSdkPrototype.Internal;
-using CqlSdkPrototype.Logging.Internal;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
