@@ -1,15 +1,14 @@
 ﻿using CqlSdkPrototype.Elm.Fluent;
-using Hl7.Cql.CodeGeneration.NET;
 
 namespace CqlSdkPrototype.Invocation.Fluent.Extensions;
 
 public static partial class FluentElmToolkitExtensions
 {
-    public static FluentLibrarySetInvokerBuilder ToFluentLibrarySetInvokerBuilder(
+    public static FluentInvocationToolkit CreateFluentLibrarySetInvokerBuilder(
         this FluentElmToolkit elmToolkit,
-        Func<LibrarySetInvokerBuilderSettings, LibrarySetInvokerBuilderSettings>? configureLibrarySetInvokerBuilderSettings = null)
+        Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configureLibrarySetInvokerBuilderSettings = null)
     {
-        var runtimeApiOptions = LibrarySetInvokerBuilderSettings.Default;
+        var runtimeApiOptions = LibrarySetInvokerBuilderConfig.Default;
         if (configureLibrarySetInvokerBuilderSettings is not null) runtimeApiOptions = configureLibrarySetInvokerBuilderSettings(runtimeApiOptions);
 
         var assemblyDatas =
@@ -17,10 +16,10 @@ public static partial class FluentElmToolkitExtensions
             let assembly = entry.Value.AssemblyBinary
             where assembly is not null
             let debugSymbols = entry.Value.DebugSymbolsBinary
-            let assemblyData = new AssemblyData(assembly, debugSymbols)
+            let assemblyData = new Hl7.Cql.CodeGeneration.NET.AssemblyData(assembly, debugSymbols)
             select assemblyData;
 
-        var runtimeApi = new FluentLibrarySetInvokerBuilder(elmToolkit.LoggerFactory, runtimeApiOptions).AddAssemblies(assemblyDatas);
+        var runtimeApi = new FluentInvocationToolkit(elmToolkit.LoggerFactory, runtimeApiOptions).AddAssemblies(assemblyDatas);
         return runtimeApi;
     }
 
@@ -29,11 +28,11 @@ public static partial class FluentElmToolkitExtensions
 #pragma warning restore RS0026
         this FluentElmToolkit elmToolkit,
         string name = "",
-        Func<LibrarySetInvokerBuilderSettings, LibrarySetInvokerBuilderSettings>? configureLibrarySetInvokerBuilderSettings = null)
+        Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configureLibrarySetInvokerBuilderSettings = null)
     {
         return elmToolkit
                .ProcessElmToAssemblies()
-               .ToFluentLibrarySetInvokerBuilder(configureLibrarySetInvokerBuilderSettings)
+               .CreateFluentLibrarySetInvokerBuilder(configureLibrarySetInvokerBuilderSettings)
                .CreateLibrarySetInvoker(name);
     }
 }

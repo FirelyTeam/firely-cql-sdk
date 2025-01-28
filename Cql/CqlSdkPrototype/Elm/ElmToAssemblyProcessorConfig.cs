@@ -3,9 +3,9 @@ using Hl7.Cql.CodeGeneration.NET;
 
 namespace CqlSdkPrototype.Elm;
 
-public record ElmToAssemblySettings(
+public record ElmToAssemblyProcessorConfig(
     ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling = default,
     AssemblyCompilerDebugInformationFormat AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.None)
 {
-    public static ElmToAssemblySettings Default { get; } = new();
+    public static ElmToAssemblyProcessorConfig Default { get; } = new();
 }

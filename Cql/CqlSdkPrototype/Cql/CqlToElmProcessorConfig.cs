@@ -7,7 +7,7 @@ namespace CqlSdkPrototype.Cql;
 /// <summary>
 /// The settings used to configure the CQL to ELM processor.
 /// </summary>
-public record CqlToElmProcessorSettings(
+public record CqlToElmProcessorConfig(
     ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling = default,
     ImmutableHashSet<CqlModel>? Models = null,
     ImmutableHashSet<ModelInfo>? ModelInfos = null,
@@ -18,7 +18,7 @@ public record CqlToElmProcessorSettings(
     bool EnableIntervalDemotion = false,
     bool AllowNullInterval = false)
 {
-    public static CqlToElmProcessorSettings Default { get; } = new();
+    public static CqlToElmProcessorConfig Default { get; } = new();
 
     public ImmutableHashSet<CqlModel> Models { get; init; } = Models ?? [];
 

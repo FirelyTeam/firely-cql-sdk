@@ -1,34 +1,12 @@
 ﻿namespace CqlSdkPrototype.Invocation.Internal;
 
 internal readonly record struct LibrarySetInvokerBuilderServices(
-    ILoggerFactory LoggerFactory,
-    ImmutableHashSet<LibraryBinaries> Entries,
-    LibrarySetInvokerBuilderSettings Options,
-    ILogger<FluentLibrarySetInvokerBuilder> Logger)
+    ILogger<LibrarySetInvokerBuilder> Logger)
 {
-    public static LibrarySetInvokerBuilderServices Create(ILoggerFactory loggerFactory, LibrarySetInvokerBuilderSettings options)
+    public static LibrarySetInvokerBuilderServices Create(
+        ILoggerFactory loggerFactory)
     {
-        return new LibrarySetInvokerBuilderServices(loggerFactory, [], null!, null!)
-        {
-            // Must be set through the property initializer, to ensure the services are created
-            Options = options,
-        };
+        // No other services needed at this time.
+        return new LibrarySetInvokerBuilderServices(loggerFactory.CreateLogger<LibrarySetInvokerBuilder>());
     }
-
-    private readonly LibrarySetInvokerBuilderSettings _options = Options;
-
-    public LibrarySetInvokerBuilderSettings Options
-    {
-        get => _options;
-        init
-        {
-            if (ReferenceEquals(_options, value))
-                return;
-
-            _options = value;
-            Logger = LoggerFactory.CreateLogger<FluentLibrarySetInvokerBuilder>();
-        }
-    }
-
-    public ILoggerFactory LoggerFactory { get; } = LoggerFactory;
 }

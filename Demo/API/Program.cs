@@ -23,7 +23,7 @@ internal static class Program
         var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
 
         // Create fluent cql toolkit
-        var cqlToElmProcessorSettings = new CqlToElmProcessorSettings(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
+        var cqlToElmProcessorSettings = new CqlToElmProcessorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         FluentCqlToolkit cqlToolkit = new FluentCqlToolkit(loggerFactory, cqlToElmProcessorSettings);
 
         // Add CQL libraries from a directory and process them to ELM, then save the ELM files to a directory
@@ -33,7 +33,7 @@ internal static class Program
             .SaveElmFileToDirectory(new DirectoryInfo("output/elm/"));
 
         // Create fluent elm toolkit as a continuation of the cql toolkit
-        var elmToolkit = cqlToolkit.ToFluentElmToolkit();
+        var elmToolkit = cqlToolkit.CreateFluentElmToolkit();
 
         // Process the ELM files to assemblies, then save the C# files and assembly binaries to directories
         elmToolkit.ProcessElmToAssemblies()
@@ -41,7 +41,7 @@ internal static class Program
               .SaveAssemblyBinariesToDirectory(new DirectoryInfo("output/assemblies/"));
 
         // Setup RuntimeApi
-        var runtimeApi = elmToolkit.ToFluentLibrarySetInvokerBuilder();
+        var runtimeApi = elmToolkit.CreateFluentLibrarySetInvokerBuilder();
         var runtimeScope = runtimeApi.CreateLibrarySetInvoker();
 
         // Execute CQL

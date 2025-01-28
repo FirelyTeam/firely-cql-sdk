@@ -6,7 +6,7 @@ public sealed class FluentElmToolkit(ElmToAssemblyProcessor elmToAssemblyProcess
 {
     public FluentElmToolkit(
         ILoggerFactory? loggerFactory = null,
-        ElmToAssemblySettings? settings = null) : this(new ElmToAssemblyProcessor(loggerFactory, settings))
+        ElmToAssemblyProcessorConfig? settings = null) : this(new ElmToAssemblyProcessor(loggerFactory, settings))
     {
     }
 
@@ -15,15 +15,15 @@ public sealed class FluentElmToolkit(ElmToAssemblyProcessor elmToAssemblyProcess
     /// </summary>
     internal ServiceProvider ServiceProvider => elmToAssemblyProcessor.ServiceProvider;
 
-    public ILoggerFactory LoggerFactory => ServiceProvider.GetRequiredService<ILoggerFactory>();
+    public ILoggerFactory LoggerFactory => elmToAssemblyProcessor.LoggerFactory;
 
-    public ElmToAssemblySettings Settings => elmToAssemblyProcessor.Settings;
+    public ElmToAssemblyProcessorConfig ProcessorConfig => elmToAssemblyProcessor.Config;
 
     public ElmToAssemblyConversionReadOnlyDictionary ElmToAssemblyConversions => elmToAssemblyProcessor.ElmToAssemblyConversions;
 
-    public FluentElmToolkit ReplaceSettings(Func<ElmToAssemblySettings, ElmToAssemblySettings> replace)
+    public FluentElmToolkit Reconfigure(Func<ElmToAssemblyProcessorConfig, ElmToAssemblyProcessorConfig> replace)
     {
-        elmToAssemblyProcessor.SetSettings(replace(Settings));
+        elmToAssemblyProcessor.Reconfigure(replace(ProcessorConfig));
         return this;
 
     }

@@ -9,25 +9,21 @@ using Hl7.Fhir.Introspection;
 
 namespace CqlSdkPrototype.Elm.Internal;
 
-internal readonly record struct ElmToAssemblyServices(
-    ILoggerFactory LoggerFactory,
-    ILogger<ElmToAssemblyProcessor> Logger,
+internal readonly record struct ElmToAssemblyProcessorServices(
     ServiceProvider ServiceProvider,
+    ILogger<ElmToAssemblyProcessor> Logger,
     AssemblyCompiler AssemblyCompiler,
     LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator)
 {
-    public static ElmToAssemblyServices Create(
-        ElmToAssemblySettings settings,
-        ILoggerFactory? loggerFactory = null)
+    public static ElmToAssemblyProcessorServices Create(
+        ILoggerFactory loggerFactory)
     {
-        loggerFactory ??= NullLoggerFactory.Instance;
-
         var services = new ServiceCollection();
         services.AddExternalLogging(loggerFactory);
         AddCqlCodeGenerationServices(services);
         var serviceProvider = services.BuildServiceProvider(validateScopes: true);
 
-        return ActivatorUtilities.CreateInstance<ElmToAssemblyServices>(serviceProvider, serviceProvider);
+        return ActivatorUtilities.CreateInstance<ElmToAssemblyProcessorServices>(serviceProvider, serviceProvider);
     }
 
     private static void AddCqlCodeGenerationServices(IServiceCollection services)
@@ -66,7 +62,6 @@ internal readonly record struct ElmToAssemblyServices(
         return services;
     }
 
-    public ILoggerFactory LoggerFactory { get; } = LoggerFactory;
     public ServiceProvider ServiceProvider { get; } = ServiceProvider;
     public AssemblyCompiler AssemblyCompiler { get; } = AssemblyCompiler;
     public LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator { get; } = LibrarySetCSharpCodeGenerator;

@@ -7,7 +7,7 @@ public class LibrarySetInvoker : IDisposable
 {
     private readonly AssemblyLoadContext _alc;
 
-    internal LibrarySetInvoker(FluentLibrarySetInvokerBuilder fluentLibrarySetInvokerBuilder, AssemblyLoadContext alc)
+    internal LibrarySetInvoker(LibrarySetInvokerBuilder librarySetInvokerBuilder, AssemblyLoadContext alc)
     {
         _alc = alc;
         LibraryInvokers =
@@ -15,7 +15,7 @@ public class LibrarySetInvoker : IDisposable
                 .SelectMany(a => a.GetTypes())
                 .SelectWhereNotNull(t =>
                 {
-                    LibraryInvoker.TryCreateFromType(fluentLibrarySetInvokerBuilder, t, out var libraryInvoker);
+                    LibraryInvoker.TryCreateFromType(librarySetInvokerBuilder, t, out var libraryInvoker);
                     return libraryInvoker;
                 })
                 .ToImmutableDictionary(o => o.LibraryVersionedIdentifier);

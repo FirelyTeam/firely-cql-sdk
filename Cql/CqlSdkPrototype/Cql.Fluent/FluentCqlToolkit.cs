@@ -6,7 +6,7 @@ public sealed class FluentCqlToolkit(CqlToElmProcessor cqlToElmProcessor)
 {
     public FluentCqlToolkit(
         ILoggerFactory? loggerFactory = null,
-        CqlToElmProcessorSettings? settings = null) : this(new CqlToElmProcessor(loggerFactory, settings))
+        CqlToElmProcessorConfig? config = null) : this(new CqlToElmProcessor(loggerFactory, config))
     {
     }
 
@@ -17,13 +17,13 @@ public sealed class FluentCqlToolkit(CqlToElmProcessor cqlToElmProcessor)
 
     public ILoggerFactory LoggerFactory => ServiceProvider.GetRequiredService<ILoggerFactory>();
 
-    public CqlToElmProcessorSettings Settings => cqlToElmProcessor.Settings;
+    public CqlToElmProcessorConfig Config => cqlToElmProcessor.Config;
 
     public CqlToElmConversionReadOnlyDictionary CqlToElmConversions => cqlToElmProcessor.Conversions;
 
-    public FluentCqlToolkit ReplaceSettings(Func<CqlToElmProcessorSettings, CqlToElmProcessorSettings> replace)
+    public FluentCqlToolkit Reconfigure(Func<CqlToElmProcessorConfig, CqlToElmProcessorConfig> configure)
     {
-        cqlToElmProcessor.SetSettings(replace(Settings));
+        cqlToElmProcessor.Reconfigure(configure(Config));
         return this;
     }
 

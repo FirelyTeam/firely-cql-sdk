@@ -39,7 +39,7 @@ internal class PackagerCli
             FluentElmToolkit elmToolkit;
             if (translateCql)
             {
-                var cqlToElmProcessorSettings = new CqlToElmProcessorSettings(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
+                var cqlToElmProcessorSettings = new CqlToElmProcessorConfig(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
                 elmToolkit = new FluentCqlToolkit(
                                  loggerFactory,
                                  cqlToElmProcessorSettings)
@@ -60,7 +60,7 @@ internal class PackagerCli
             }
             else
             {
-                var elmToolkitSettings = new ElmToAssemblySettings(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
+                var elmToolkitSettings = new ElmToAssemblyProcessorConfig(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
                 elmToolkit = new FluentElmToolkit(loggerFactory, elmToolkitSettings)
                              .PickValueAndSwitch(
                                  _ => opt.ElmInDirectory,

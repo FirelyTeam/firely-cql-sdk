@@ -3,14 +3,16 @@ using CoreTests.Tuples;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation;
 using CqlSdkPrototype.Invocation.Extensions;
+using CqlSdkPrototype.Invocation.Fluent;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
+using AssemblyData = Hl7.Cql.CodeGeneration.NET.AssemblyData;
 
 namespace CoreTests;
 
 [TestClass]
-public class FluentLibrarySetInvokerBuilderTests
+public class FluentInvocationToolkitTests
 {
     /// <seealso cref="CqlTupleTests.ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized"/>
     [TestMethod]
@@ -22,7 +24,7 @@ public class FluentLibrarySetInvokerBuilderTests
                        .Select(dir => Path.GetFullPath(Path.Combine(dir.FullName, "Dlls", "CqlNestedTupleTest-1.0.0.dll")))
                        .First(File.Exists);
         var ctx = FhirCqlContext.ForBundle();
-        using var invocationScope = new FluentLibrarySetInvokerBuilder()
+        using var invocationScope = new FluentInvocationToolkit()
                                     .AddAssemblies([AssemblyData.Default.LoadFromFiles(new FileInfo(filePath))])
                                     .CreateLibrarySetInvoker();
 

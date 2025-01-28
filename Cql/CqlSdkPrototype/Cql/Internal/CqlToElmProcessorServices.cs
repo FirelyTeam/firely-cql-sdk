@@ -19,18 +19,16 @@ internal readonly record struct CqlToElmProcessorServices(
         (CqlModel.Fhir401, Models.Fhir401)];
 
     public static CqlToElmProcessorServices Create(
-        CqlToElmProcessorSettings settings,
-        ILoggerFactory? loggerFactory = null,
-        CqlToElmConversionDictionary? conversions = null)
+        ILoggerFactory loggerFactory,
+        CqlToElmProcessorConfig config,
+        CqlToElmConversionDictionary conversions)
     {
-        loggerFactory ??= NullLoggerFactory.Instance;
-
-        var builder = (conversions ?? CqlToElmConversionDictionary.Empty).ToBuilder();
+        var builder = conversions.ToBuilder();
         var libraryProvider = new CqlToElmConversionsLibraryProvider(builder);
 
         var services = new ServiceCollection();
         services.AddExternalLogging(loggerFactory);
-        AddCqlServices(services, settings, libraryProvider);
+        AddCqlServices(services, config, libraryProvider);
         var serviceProvider = services.BuildServiceProvider(validateScopes: true);
 
         return ActivatorUtilities.CreateInstance<CqlToElmProcessorServices>(serviceProvider, serviceProvider, libraryProvider);
@@ -38,7 +36,7 @@ internal readonly record struct CqlToElmProcessorServices(
 
     private static void AddCqlServices(
         IServiceCollection serviceCollection,
-        CqlToElmProcessorSettings settings,
+        CqlToElmProcessorConfig config,
         ILibraryProvider libraryProvider)
     {
         SuppressCqlDebugAssertions();
@@ -53,14 +51,14 @@ internal readonly record struct CqlToElmProcessorServices(
 
         Action<CqlToElmOptions> ConfigureCqlToElmOptions()
         {
-            return settings.ApplyToCqlToElmOptions;
+            return config.ApplyToCqlToElmOptions;
         }
 
         Action<IModelProvider> ConfigureModelProvider()
         {
             var modelInfos = AllMappedModelsInOrder
-                             .SelectWhereNotNull(t => settings.Models.Contains(t.CqlModel) ? t.ModelInfo : null)
-                             .Concat(settings.ModelInfos);
+                             .SelectWhereNotNull(t => config.Models.Contains(t.CqlModel) ? t.ModelInfo : null)
+                             .Concat(config.ModelInfos);
             return modelProvider =>
             {
                 foreach (var modelInfo in modelInfos)

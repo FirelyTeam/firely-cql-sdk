@@ -7,12 +7,13 @@
  */
 
 using CqlSdkPrototype.Invocation;
+using CqlSdkPrototype.Invocation.Fluent;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packaging;
+using AssemblyData = Hl7.Cql.CodeGeneration.NET.AssemblyData;
 using Library = Hl7.Fhir.Model.Library;
 
 namespace CLI.Helpers;
@@ -92,7 +93,7 @@ internal static class LibraryExtensions
             .Select(assemblyBytes => AssemblyData.Default with { AssemblyBytes = assemblyBytes})
             .ToArray();
 
-        return new FluentLibrarySetInvokerBuilder()
+        return new FluentInvocationToolkit()
                          .AddAssemblies(assemblyDatas)
                          .CreateLibrarySetInvoker();
     }

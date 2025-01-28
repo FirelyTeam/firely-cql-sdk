@@ -147,16 +147,16 @@ namespace Test
             string version,
             int cacheSize,
             ILoggerFactory? loggerFactory = null,
-            Func<LibrarySetInvokerBuilderSettings, LibrarySetInvokerBuilderSettings>? configureOptions = null)
+            Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configureLibrarySetInvokerBuilder = null)
         {
             Trace.Assert(cacheSize == 0, "TODO: CacheSize must still be moved to configuration"); // TODO: CacheSize must still be moved to configuration
             LibrarySet librarySet = new();
             librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
 
-            var elmToAssemblySettings = ElmToAssemblySettings.Default;
+            var config = ElmToAssemblyProcessorConfig.Default;
             if (Debugger.IsAttached)
-                elmToAssemblySettings = elmToAssemblySettings with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
-            var fluentElmToolkit = new FluentElmToolkit(loggerFactory, elmToAssemblySettings);
+                config = config with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
+            var fluentElmToolkit = new FluentElmToolkit(loggerFactory, config);
 
             return fluentElmToolkit
                    .AddElmLibraries(librarySet)

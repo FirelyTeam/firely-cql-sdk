@@ -28,7 +28,7 @@ internal class Program
                 .BuildServiceProvider();
 
         var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
-        var settings = new CqlToElmProcessorSettings(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
+        var settings = new CqlToElmProcessorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         var fluentCqlToolkit = new FluentCqlToolkit(loggerFactory, settings);
         var logger = serviceProvider.GetLogger<Program>();
 
@@ -57,7 +57,7 @@ internal class Program
 
         // We need a disposable invocation scope, which contains the AssemblyLoadContext and the related library Assemblies.
         using var invocationScope = cqlToolkit
-                                    .ReplaceSettings(o => o with { ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue })
+                                    .Reconfigure(o => o with { ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue })
                                     .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory)
                                     .CreateLibrarySetInvoker();
         logger.LogInformation("{dump}", invocationScope.DumpLibraryDeclarations());
@@ -107,7 +107,7 @@ internal class Program
         Directories dirs = Directories.Create(librarySetName);
         dirs.GeneratedDirectory.Delete(recursive: true);
 
-        cqlToolkit.ReplaceSettings(o => o with { ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue });
+        cqlToolkit.Reconfigure(o => o with { ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue });
 
         if (shouldBuildCqlToElm)
         {
@@ -128,7 +128,7 @@ internal class Program
                 ;
         }
 
-        var elmApi = cqlToolkit.ToFluentElmToolkit(o => o with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded })
+        var elmApi = cqlToolkit.CreateFluentElmToolkit(o => o with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded })
                            .AddElmFilesFromDirectory(dirs.ElmInDirectory)
                            .ProcessElmToAssemblies()
                            .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)

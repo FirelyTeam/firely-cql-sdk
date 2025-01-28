@@ -13,6 +13,7 @@ using CqlSdkPrototype.Cql.Fluent;
 using CqlSdkPrototype.Elm.Fluent;
 using CqlSdkPrototype.Elm.Fluent.Extensions;
 using CqlSdkPrototype.Invocation.Extensions;
+using AssemblyData = Hl7.Cql.CodeGeneration.NET.AssemblyData;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -42,10 +43,10 @@ namespace Hl7.Cql.CqlToElm.Test
             DefinitionDictionary<LambdaExpression> definitions = new();
             definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
             var generateCSharp = elmApiServices.GetLibrarySetCSharpCodeGenerator().GenerateCSharp(librarySet, definitions);
-            var compile = elmApiServices.GetAssemblyCompiler().Compile(librarySet, generateCSharp, elmApi.Settings.AssemblyCompilerDebugInformationFormat);
+            var compile = elmApiServices.GetAssemblyCompiler().Compile(librarySet, generateCSharp, elmApi.ProcessorConfig.AssemblyCompilerDebugInformationFormat);
             var assemblyBytes = compile.Single().assemblyDataWithSourceCode.AssemblyBytes;
 
-            using var scope = new FluentLibrarySetInvokerBuilder()
+            using var scope = new FluentInvocationToolkit()
                               .AddAssemblies([AssemblyData.Default with { AssemblyBytes = assemblyBytes }])
                               .CreateLibrarySetInvoker();
             var result = scope.GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);
@@ -193,7 +194,7 @@ namespace Hl7.Cql.CqlToElm.Test
             bool AllowNullIntervals = false) =>
             new(
                 LoggerFactory,
-                new CqlToElmProcessorSettings(
+                new CqlToElmProcessorConfig(
                     ProcessBatchItemExceptionHandling: ProcessBatchItemExceptionHandling.ThrowException,
                     Models: Models ?? [CqlModel.ElmR1, CqlModel.Fhir401],
                     ModelInfos: ModelInfos,
@@ -211,7 +212,7 @@ namespace Hl7.Cql.CqlToElm.Test
             AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
             bool enableListPromotion = false) =>
             CreateFluentCqlToolkit(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
-                .ToFluentElmToolkit(_ => new ElmToAssemblySettings(
+                .CreateFluentElmToolkit(_ => new ElmToAssemblyProcessorConfig(
                                   ProcessBatchItemExceptionHandling.ThrowException,
                                   Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));
     }

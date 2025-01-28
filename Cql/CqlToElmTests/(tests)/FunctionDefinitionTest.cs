@@ -287,7 +287,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 """);
 
             var lib = cqlApi.MakeLibrary(cqlLibraryString.Cql);
-            var lambdas = cqlApi.ToFluentElmToolkit().ProcessLibrary(lib);
+            var lambdas = cqlApi.CreateFluentElmToolkit().ProcessLibrary(lib);
             var expr = lambdas["FuncTest-1.0.0", "ToInteger", typeof(CqlContext), typeof(decimal?)];
             expr.Parameters.Should().HaveCount(2);
             expr.Parameters[1].Name.Should().Be("decimal");

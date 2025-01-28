@@ -16,7 +16,7 @@ public class LibrarySetExpressionBuilderTests
     [TestMethod]
     public void LoadLibraryAndDependencies_CrossLibraryCodeSystems()
     {
-        var serviceProvider = ElmToAssemblyServices.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
+        var serviceProvider = ElmToAssemblyProcessorServices.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
         using var servicesScope = serviceProvider.CreateScope();
         LibrarySet librarySet = new();
         librarySet.LoadLibraryAndDependencies(LibrarySetsDirs.Cms.ElmDir, "CumulativeMedicationDuration");

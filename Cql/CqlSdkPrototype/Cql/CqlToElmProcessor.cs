@@ -10,25 +10,33 @@ public class CqlToElmProcessor
 {
     public CqlToElmProcessor(
         ILoggerFactory? loggerFactory = null,
-        CqlToElmProcessorSettings? settings = null)
+        CqlToElmProcessorConfig? config = null)
     {
-        settings ??= CqlToElmProcessorSettings.Default;
+        config ??= CqlToElmProcessorConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
+        _loggerFactory = loggerFactory;
         _conversions = CqlToElmConversionDictionary.Empty;
-        _settings = settings;
-        _services = CqlToElmProcessorServices.Create(settings, loggerFactory, _conversions);
+        _config = config;
+        _services = CqlToElmProcessorServices.Create(loggerFactory, config, _conversions);
     }
 
     private CqlToElmConversionDictionary _conversions;
     private CqlToElmProcessorServices _services;
-    private CqlToElmProcessorSettings _settings;
+    private CqlToElmProcessorConfig _config;
+    private readonly ILoggerFactory _loggerFactory;
+
+    /// <summary>
+    /// Access by the FluentInvocationToolkit.
+    /// </summary>
+    internal ILoggerFactory LoggerFactory => _loggerFactory;
+
 
     /// <summary>
     /// For testing purposes only.
     /// </summary>
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
-    public CqlToElmProcessorSettings Settings => _settings;
+    public CqlToElmProcessorConfig Config => _config;
 
     public CqlToElmConversionReadOnlyDictionary Conversions => _conversions;
 
@@ -39,15 +47,15 @@ public class CqlToElmProcessor
         _services.LibraryProvider.Builder = conversions.ToBuilder();
     }
 
-    public void SetSettings(
-        CqlToElmProcessorSettings settings)
+    public void Reconfigure(
+        CqlToElmProcessorConfig config)
     {
-        if (_settings == settings)
+        if (_config == config)
             return;
 
         _services.ServiceProvider.Dispose();
-        _settings = settings;
-        _services = CqlToElmProcessorServices.Create(settings, _services.LoggerFactory, _conversions);
+        _config = config;
+        _services = CqlToElmProcessorServices.Create(_services.LoggerFactory, config, _conversions);
     }
 
     public void AddCqlLibraries(IEnumerable<CqlLibraryString> cqlLibraries)
@@ -101,7 +109,7 @@ public class CqlToElmProcessor
             }
         }
 
-        LogExceptionMessageAction log = logger.GetLogExceptionMessageAction(Settings.ProcessBatchItemExceptionHandling);
+        LogExceptionMessageAction log = logger.GetLogExceptionMessageAction(Config.ProcessBatchItemExceptionHandling);
 
         int changedCount =
                 GetLibrariesForProcessing()
@@ -111,7 +119,7 @@ public class CqlToElmProcessor
                         var libraryName = outcome.Input.versionedIdentifier;
                         log(outcome.Exception, "Error translating CQL library '{libraryName}' to ELM.", libraryName);
                     })
-                    .HandleExceptions(Settings.ProcessBatchItemExceptionHandling)
+                    .HandleExceptions(Config.ProcessBatchItemExceptionHandling)
                     .Count() // We must enumerate all
             ;
 

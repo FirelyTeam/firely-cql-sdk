@@ -9,7 +9,7 @@ namespace CqlSdkPrototype.Elm.Fluent.Extensions;
 
 public static partial class FluentElmToolkitExtensions
 {
-    public static FluentElmToolkit AddElmFrom(
+    public static FluentElmToolkit AddElmFromFluentCqlToolkit(
         this FluentElmToolkit elmToolkit,
         FluentCqlToolkit cqlToolkit) =>
         elmToolkit.AddElmLibraries(
@@ -18,7 +18,7 @@ public static partial class FluentElmToolkitExtensions
             where elmLibrary is not null
             select elmLibrary);
 
-    public static FluentElmToolkit AddElmFile(
+    public static FluentElmToolkit AddElmFileInDirectory(
         this FluentElmToolkit elmToolkit,
         DirectoryInfo directory,
         CqlVersionedLibraryIdentifier versionedLibraryIdentifier)

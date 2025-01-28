@@ -16,12 +16,12 @@ public abstract class LibraryInvoker
     public abstract IReadOnlyDictionary<string, DefinitionInvoker> Definitions { get; }
 
     public static bool TryCreateFromType(
-        FluentLibrarySetInvokerBuilder fluentLibrarySetInvokerBuilder,
+        LibrarySetInvokerBuilder librarySetInvokerBuilder,
         Type libraryType,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
         libraryInvoker = null;
-        var logger = fluentLibrarySetInvokerBuilder.LoggerFactory.CreateLogger<LibraryInvoker>();
+        var logger = librarySetInvokerBuilder.LoggerFactory.CreateLogger<LibraryInvoker>();
 
         if (libraryType.GetCustomAttribute<CqlLibraryAttribute>() is not { })
         {
@@ -48,7 +48,7 @@ public abstract class LibraryInvoker
 
         if (LibraryInvoker_2_0_8_0.SupportsVersion(cqlToolVersion))
         {
-            if (LibraryInvoker_2_0_8_0.TryCreateFromType(fluentLibrarySetInvokerBuilder, libraryType, out libraryInvoker))
+            if (LibraryInvoker_2_0_8_0.TryCreate(librarySetInvokerBuilder, libraryType, out libraryInvoker))
                 return true;
         }
 

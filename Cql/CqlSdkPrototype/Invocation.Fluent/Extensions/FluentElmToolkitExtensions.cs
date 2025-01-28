@@ -11,13 +11,13 @@ public static partial class FluentElmToolkitExtensions
     public static LibrarySetInvoker CreateLibrarySetInvoker(
 #pragma warning restore RS0026
         this FluentCqlToolkit cqlToolkit,
-        Func<ElmToAssemblySettings, ElmToAssemblySettings>? configureElmToAssemblySettings = null,
-        Func<LibrarySetInvokerBuilderSettings, LibrarySetInvokerBuilderSettings>? configureLibrarySetInvokerBuilderSettings = null,
+        Func<ElmToAssemblyProcessorConfig, ElmToAssemblyProcessorConfig>? configureElmToAssemblySettings = null,
+        Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configureLibrarySetInvokerBuilderSettings = null,
         string name = "")
     {
         return cqlToolkit
                .ProcessCqlToElm()
-               .ToFluentElmToolkit(configureElmToAssemblySettings)
+               .CreateFluentElmToolkit(configureElmToAssemblySettings)
                .CreateLibrarySetInvoker(name, configureLibrarySetInvokerBuilderSettings);
     }
 }

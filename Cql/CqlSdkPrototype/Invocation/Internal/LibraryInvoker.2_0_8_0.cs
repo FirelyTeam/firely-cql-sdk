@@ -1,5 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 using CqlSdkPrototype.Internal;
+using CqlSdkPrototype.Invocation.Fluent;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
@@ -49,13 +50,13 @@ internal class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
                ?? throw new InvalidOperationException($"Unable to create an instance of {libraryType.FullName}");
     }
 
-    public new static bool TryCreateFromType(
-        FluentLibrarySetInvokerBuilder fluentLibrarySetInvokerBuilder,
+    public static bool TryCreate(
+        LibrarySetInvokerBuilder builder,
         Type libraryType,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
         libraryInvoker = null;
-        var logger = fluentLibrarySetInvokerBuilder.LoggerFactory.CreateLogger<LibraryInvoker_2_0_8_0>();
+        var logger = builder.LoggerFactory.CreateLogger<LibraryInvoker_2_0_8_0>();
 
         if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
         {

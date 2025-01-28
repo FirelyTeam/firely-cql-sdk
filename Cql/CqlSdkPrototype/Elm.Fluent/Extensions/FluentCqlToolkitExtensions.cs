@@ -4,13 +4,13 @@ namespace CqlSdkPrototype.Elm.Fluent.Extensions;
 
 public static class FluentCqlToolkitExtensions
 {
-    public static FluentElmToolkit ToFluentElmToolkit(
+    public static FluentElmToolkit CreateFluentElmToolkit(
         this FluentCqlToolkit cqlToolkit,
-        Func<ElmToAssemblySettings, ElmToAssemblySettings>? configureOptions = null)
+        Func<ElmToAssemblyProcessorConfig, ElmToAssemblyProcessorConfig>? configure = null)
     {
-        var elmApiOptions = new ElmToAssemblySettings(ProcessBatchItemExceptionHandling: cqlToolkit.Settings.ProcessBatchItemExceptionHandling);
-        if (configureOptions is not null) elmApiOptions = configureOptions(elmApiOptions);
-        var elmApi = new FluentElmToolkit(cqlToolkit.LoggerFactory, elmApiOptions).AddElmFrom(cqlToolkit);
+        var config = new ElmToAssemblyProcessorConfig(ProcessBatchItemExceptionHandling: cqlToolkit.Config.ProcessBatchItemExceptionHandling);
+        if (configure is not null) config = configure(config);
+        var elmApi = new FluentElmToolkit(cqlToolkit.LoggerFactory, config).AddElmFromFluentCqlToolkit(cqlToolkit);
         return elmApi;
     }
 
@@ -18,6 +18,6 @@ public static class FluentCqlToolkitExtensions
         this FluentCqlToolkit cqlToolkit) =>
         cqlToolkit
             .ProcessCqlToElm()
-            .ToFluentElmToolkit()
+            .CreateFluentElmToolkit()
             .ProcessElmToAssemblies();
 }

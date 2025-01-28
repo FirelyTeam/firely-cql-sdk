@@ -13,26 +13,32 @@ public class ElmToAssemblyProcessor
 {
     public ElmToAssemblyProcessor(
         ILoggerFactory? loggerFactory = null,
-        ElmToAssemblySettings? settings = null)
+        ElmToAssemblyProcessorConfig? config = null)
     {
-        settings ??= ElmToAssemblySettings.Default;
+        config ??= ElmToAssemblyProcessorConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
+        _loggerFactory = loggerFactory;
         _conversions = ElmToAssemblyConversionDictionary.Empty;
-        _settings = settings;
-        _services = ElmToAssemblyServices.Create(_settings, loggerFactory);
+        _config = config;
+        _services = ElmToAssemblyProcessorServices.Create(loggerFactory);
     }
 
     private ElmToAssemblyConversionDictionary _conversions;
-    private ElmToAssemblyServices _services;
-    private ElmToAssemblySettings _settings;
+    private ElmToAssemblyProcessorServices _services;
+    private ElmToAssemblyProcessorConfig _config;
+    private readonly ILoggerFactory _loggerFactory;
 
+    /// <summary>
+    /// Access by the FluentInvocationToolkit.
+    /// </summary>
+    internal ILoggerFactory LoggerFactory => _loggerFactory;
 
     /// <summary>
     /// For testing purposes only.
     /// </summary>
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
-    public ElmToAssemblySettings Settings => _settings;
+    public ElmToAssemblyProcessorConfig Config => _config;
 
     public ElmToAssemblyConversionReadOnlyDictionary ElmToAssemblyConversions => _conversions;
 
@@ -42,15 +48,15 @@ public class ElmToAssemblyProcessor
         _conversions = conversions;
     }
 
-    public void SetSettings(
-        ElmToAssemblySettings settings)
+    public void Reconfigure(
+        ElmToAssemblyProcessorConfig config)
     {
-        if (_settings == settings)
+        if (_config == config)
             return;
 
         _services.ServiceProvider.Dispose();
-        _settings = settings;
-        _services = ElmToAssemblyServices.Create(settings, _services.LoggerFactory);
+        _config = config;
+        _services = ElmToAssemblyProcessorServices.Create(_loggerFactory);
     }
 
     public void AddElmLibraries(IEnumerable<Library> libraries)
@@ -87,8 +93,8 @@ public class ElmToAssemblyProcessor
         using var servicesScope = _services.CreateScopedState();
         var logger = _services.Logger;
         logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
-        var exceptionHandling = _settings.ProcessBatchItemExceptionHandling;
-        var debugInformationFormat = _settings.AssemblyCompilerDebugInformationFormat;
+        var exceptionHandling = _config.ProcessBatchItemExceptionHandling;
+        var debugInformationFormat = _config.AssemblyCompilerDebugInformationFormat;
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _services.LibrarySetCSharpCodeGenerator;
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
