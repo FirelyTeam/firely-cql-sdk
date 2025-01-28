@@ -35,15 +35,15 @@ namespace Hl7.Cql.CqlToElm.Test
             CqlContext? ctx = null)
         {
             ctx ??= DefaultCqlContext;
-            var elmApi = CreateFluentElmToolkit();
-            var lambda = elmApi.Lambda(expression);
+            var elmToolkit = CreateFluentElmToolkit();
+            var lambda = elmToolkit.Lambda(expression);
             var expressionName = "TempExpression";
-            var elmApiServices = elmApi;
+            var elmToolkitServices = elmToolkit;
             LibrarySet librarySet = new("TempLibrarySet", library);
             DefinitionDictionary<LambdaExpression> definitions = new();
             definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
-            var generateCSharp = elmApiServices.GetLibrarySetCSharpCodeGenerator().GenerateCSharp(librarySet, definitions);
-            var compile = elmApiServices.GetAssemblyCompiler().Compile(librarySet, generateCSharp, elmApi.ProcessorConfig.AssemblyCompilerDebugInformationFormat);
+            var generateCSharp = elmToolkitServices.GetLibrarySetCSharpCodeGenerator().GenerateCSharp(librarySet, definitions);
+            var compile = elmToolkitServices.GetAssemblyCompiler().Compile(librarySet, generateCSharp, elmToolkit.ProcessorConfig.AssemblyCompilerDebugInformationFormat);
             var assemblyBytes = compile.Single().assemblyBinaryWithSourceCode.AssemblyBytes;
 
             using var librarySetInvoker = new FluentInvocationToolkit()

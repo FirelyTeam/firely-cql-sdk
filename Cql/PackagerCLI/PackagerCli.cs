@@ -93,11 +93,11 @@ internal class PackagerCli
                         FhirCanonicalRootUrl: var canonicalRootUrl,
                         FhirOverrideDate: var overrideDate
                     }
-                // Check that we have the libraries produced by the ElmApi
+                // Check that we have the libraries produced by the ElmToolkit
                 && elmToolkit.ElmToAssemblyConversions
                              .Select(e => e.Value.ElmLibrary)
                              .ToArray() is { Length: > 0 } libraries
-                // Check that we have the assemblies produced by the ElmApi
+                // Check that we have the assemblies produced by the ElmToolkit
                 && elmToolkit.ElmToAssemblyConversions
                              .Where(e => e.Value is { AssemblyBinary: { }, CSharpSourceCode: { } })
                              .ToDictionary(

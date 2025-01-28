@@ -178,8 +178,8 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CallsFluentOnMember_AcrossLibrary()
         {
-            var cqlApi = CreateFluentCqlToolkit();
-            var fluentLib = cqlApi.MakeLibrary("""
+            var cqlToolkit = CreateFluentCqlToolkit();
+            var fluentLib = cqlToolkit.MakeLibrary("""
                                                          library FluentLib version '1.0.0'
 
                                                          using FHIR version '4.0.1'
@@ -188,7 +188,7 @@ namespace Hl7.Cql.CqlToElm.Test
                                                              Interval[date from start of period, date from end of period]
                                                          """);
 
-            var testLib = cqlApi.MakeLibrary("""
+            var testLib = cqlToolkit.MakeLibrary("""
                                                 library FuncTest version '1.0.0'
 
                                                 using FHIR version '4.0.1'
@@ -207,8 +207,8 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void BirthdatePlusAge()
         {
-            var cqlApi = CreateFluentCqlToolkit().AddFHIRHelpers();;
-            var lib = cqlApi.MakeLibrary("""
+            var cqlToolkit = CreateFluentCqlToolkit().AddFHIRHelpers();;
+            var lib = cqlToolkit.MakeLibrary("""
                                          library Test version '1.0.0'
 
                                          using FHIR version '4.0.1'
@@ -278,7 +278,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CSharp_Keyword_Parameter_Name()
         {
-            var cqlApi = CreateFluentCqlToolkit();
+            var cqlToolkit = CreateFluentCqlToolkit();
             var cqlLibraryString = CqlLibraryString.Parse(
                 """
                 library FuncTest version '1.0.0'
@@ -286,15 +286,15 @@ namespace Hl7.Cql.CqlToElm.Test
                 define function ToInteger(decimal System.Decimal) returns System.Integer: external
                 """);
 
-            var lib = cqlApi.MakeLibrary(cqlLibraryString.Cql);
-            var lambdas = cqlApi.CreateFluentElmToolkit().ProcessLibrary(lib);
+            var lib = cqlToolkit.MakeLibrary(cqlLibraryString.Cql);
+            var lambdas = cqlToolkit.CreateFluentElmToolkit().ProcessLibrary(lib);
             var expr = lambdas["FuncTest-1.0.0", "ToInteger", typeof(CqlContext), typeof(decimal?)];
             expr.Parameters.Should().HaveCount(2);
             expr.Parameters[1].Name.Should().Be("decimal");
 
             var act = () =>
             {
-                using var librarySetInvoker = cqlApi.CreateLibrarySetInvoker();
+                using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
                 _ = librarySetInvoker;
             };
             act.Should().NotThrow();

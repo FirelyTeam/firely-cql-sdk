@@ -32,14 +32,14 @@ internal class Program
         var fluentCqlToolkit = new FluentCqlToolkit(loggerFactory, settings);
         var logger = serviceProvider.GetLogger<Program>();
 
-        //InvokeCqlExample(cqlApi: cqlApi);
+        //InvokeCqlExample(cqlToolkit: cqlToolkit);
 
-        //InvokeCqlFromExamplesFolder(logger: logger, cqlApi: cqlApi);
+        //InvokeCqlFromExamplesFolder(logger: logger, cqlToolkit: cqlToolkit);
         //
         foreach (var librarySetName in (string[]) ["CMS"])//"Authoring", "CMS", "Demo", "Examples"])
             VerboseExample(logger: logger, cqlToolkit: fluentCqlToolkit, librarySetName: librarySetName, shouldBuildCqlToElm:false);
 
-        // VerboseExample(logger, cqlApi, "CMS");
+        // VerboseExample(logger, cqlToolkit, "CMS");
     }
 
     private static void InvokeCqlFromExamplesFolder(
@@ -76,7 +76,7 @@ internal class Program
     private static void InvokeCqlExample(FluentCqlToolkit cqlToolkit)
     {
         // INTRO:
-        // This example demonstrates how to add a CqlLibraryString to the CqlApi and invoke a library declaration directly.
+        // This example demonstrates how to add a CqlLibraryString to the CqlToolkit and invoke a library declaration directly.
 
         // NICE TO HAVE: Would be nice to parse the CqlLibraryString only from the CQL and extract the identifier from the CQL
         var cqlLibraryString = CqlLibraryString.Parse(
@@ -128,7 +128,7 @@ internal class Program
                 ;
         }
 
-        var elmApi = cqlToolkit.CreateFluentElmToolkit(o => o with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded })
+        var elmToolkit = cqlToolkit.CreateFluentElmToolkit(o => o with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded })
                            .AddElmFilesFromDirectory(dirs.ElmInDirectory)
                            .ProcessElmToAssemblies()
                            .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
@@ -141,7 +141,7 @@ internal class Program
                            {t.elmJson.TakeLines(50)}
                            """));
 
-        elmApi.TryGetFirstCSharpFileLines()
+        elmToolkit.TryGetFirstCSharpFileLines()
               .Switch(t => logger.LogInformation(
                           $"""
                            First 50 C# lines for {t.id}:
@@ -152,8 +152,8 @@ internal class Program
     // private static void ExecuteLibrary(
     //     ServiceProvider serviceProvider,
     //     Directories dirs,
-    //     CqlApi cqlTranslation,
-    //     ElmApi elmCompilation,
+    //     CqlToolkit cqlTranslation,
+    //     ElmToolkit elmCompilation,
     //     FhirJsonPocoDeserializer fhirJsonPocoDeserializer)
     // {
     //     var logger = serviceProvider.GetLogger<Program>();
@@ -200,14 +200,14 @@ internal class Program
 
 file static class X
 {
-    public static Maybe<(CqlVersionedLibraryIdentifier id, string cSharpSourceCode)> TryGetFirstCSharpFileLines(this FluentElmToolkit elmApi) =>
-        elmApi.ElmToAssemblyConversions
+    public static Maybe<(CqlVersionedLibraryIdentifier id, string cSharpSourceCode)> TryGetFirstCSharpFileLines(this FluentElmToolkit elmToolkit) =>
+        elmToolkit.ElmToAssemblyConversions
               .TryGetFirst(kv => kv.Value.CSharpSourceCode is not null)
               .TryReturn(kv => (kv.Key, kv.Value.CSharpSourceCode!));
 
     public static Maybe<(CqlVersionedLibraryIdentifier id, string elmJson)> TryGetFirstElmFileLines(
-        this FluentCqlToolkit cqlApi) =>
-        cqlApi.CqlToElmConversions
+        this FluentCqlToolkit cqlToolkit) =>
+        cqlToolkit.CqlToElmConversions
               .TryGetFirst(kv => kv.Value.ElmLibrary is not null)
               .TryReturn(kv => (kv.Key, kv.Value.ElmLibrary!.SerializeToJson()!));
 }

@@ -65,5 +65,5 @@ internal readonly record struct ElmToAssemblyProcessorServices(
     public ServiceProvider ServiceProvider { get; } = ServiceProvider;
     public AssemblyCompiler AssemblyCompiler { get; } = AssemblyCompiler;
     public LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator { get; } = LibrarySetCSharpCodeGenerator;
-    public ElmApiScopedState CreateScopedState() => new(ServiceProvider.CreateScope());
+    public ElmToolkitScopedState CreateScopedState() => new(ServiceProvider.CreateScope());
 }

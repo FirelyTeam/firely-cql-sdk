@@ -28,8 +28,8 @@ namespace Hl7.Cql.CqlToElm.Test
             // if (testCase.TestName != "AgeInYearsAt")
             //     Assert.Inconclusive("Skipped!");
 
-            var cqlApi = CreateFluentCqlToolkit(AllowNullIntervals:true);
-            var expression = cqlApi.Expression(testCase.Expression);
+            var cqlToolkit = CreateFluentCqlToolkit(AllowNullIntervals:true);
+            var expression = cqlToolkit.Expression(testCase.Expression);
             var expressionErrors = expression.GetErrors();
             if (expressionErrors.Any())
             {
@@ -43,7 +43,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 return;
             }
 
-            var expectation = cqlApi.Expression(testCase.Expectation);
+            var expectation = cqlToolkit.Expression(testCase.Expectation);
             var expectationErrors = expectation.GetErrors();
             if (expectationErrors.Any())
             {

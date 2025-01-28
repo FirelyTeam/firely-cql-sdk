@@ -84,8 +84,8 @@ namespace Hl7.Cql.CqlToElm.Test
         public void FlattenMixedChoiceType()
         {
             // requires list promotion
-            var cqlApi = CreateFluentCqlToolkit();
-            var library = cqlApi.MakeLibrary( """
+            var cqlToolkit = CreateFluentCqlToolkit();
+            var library = cqlToolkit.MakeLibrary( """
                 library Test version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -95,8 +95,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 """, "Could not resolve call to operator Flatten with signature (List<Choice<Boolean, List<{http://hl7.org/fhir}Claim>>>).");
 
             // no errors
-            cqlApi = CreateFluentCqlToolkit(EnableListPromotion:true);
-            library = cqlApi.MakeLibrary("""
+            cqlToolkit = CreateFluentCqlToolkit(EnableListPromotion:true);
+            library = cqlToolkit.MakeLibrary("""
                 library Test version '1.0.0'
 
                 using FHIR version '4.0.1'

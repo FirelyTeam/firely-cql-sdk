@@ -89,8 +89,8 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FHIRHelpers_Coding_To_ListCodes()
         {
-            var cqlApi = CreateFluentCqlToolkit().AddFHIRHelpers();
-            var lib = cqlApi.MakeLibrary("""
+            var cqlToolkit = CreateFluentCqlToolkit().AddFHIRHelpers();
+            var lib = cqlToolkit.MakeLibrary("""
                                          library Test version '1.0.0'
 
                                          using FHIR version '4.0.1'

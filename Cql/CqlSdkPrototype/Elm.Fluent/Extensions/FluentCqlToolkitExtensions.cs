@@ -10,8 +10,8 @@ public static class FluentCqlToolkitExtensions
     {
         var config = new ElmToAssemblyProcessorConfig(ProcessBatchItemExceptionHandling: cqlToolkit.Config.ProcessBatchItemExceptionHandling);
         if (configure is not null) config = configure(config);
-        var elmApi = new FluentElmToolkit(cqlToolkit.LoggerFactory, config).AddElmFromFluentCqlToolkit(cqlToolkit);
-        return elmApi;
+        var elmToolkit = new FluentElmToolkit(cqlToolkit.LoggerFactory, config).AddElmFromFluentCqlToolkit(cqlToolkit);
+        return elmToolkit;
     }
 
     public static FluentElmToolkit ProcessCqlToAssemblies(

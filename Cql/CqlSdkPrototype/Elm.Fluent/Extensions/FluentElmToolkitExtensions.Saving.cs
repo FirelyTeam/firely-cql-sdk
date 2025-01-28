@@ -3,15 +3,15 @@
 public static partial class FluentElmToolkitExtensions
 {
     public static FluentElmToolkit SaveCSharpFilesToDirectory(
-        this FluentElmToolkit elmApi,
+        this FluentElmToolkit elmToolkit,
         DirectoryInfo directory)
     {
         if (!directory.Exists)
             directory.Create();
 
-        var logger = elmApi.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
+        var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
 
-        foreach (var (libraryName, (_, cSharpSourceCode, _, _)) in elmApi.ElmToAssemblyConversions)
+        foreach (var (libraryName, (_, cSharpSourceCode, _, _)) in elmToolkit.ElmToAssemblyConversions)
         {
             if (cSharpSourceCode is null)
                 continue;
@@ -21,19 +21,19 @@ public static partial class FluentElmToolkitExtensions
             logger.LogInformation("Saved C# source code to file: {file}", fileName);
         }
 
-        return elmApi;
+        return elmToolkit;
     }
 
     public static FluentElmToolkit SaveAssemblyBinariesToDirectory(
-        this FluentElmToolkit elmApi,
+        this FluentElmToolkit elmToolkit,
         DirectoryInfo directory)
     {
         if (!directory.Exists)
             directory.Create();
 
-        var logger = elmApi.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
+        var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
 
-        foreach (var (libraryName, (_, _, assemblyBytes, symbolsBytes)) in elmApi.ElmToAssemblyConversions)
+        foreach (var (libraryName, (_, _, assemblyBytes, symbolsBytes)) in elmToolkit.ElmToAssemblyConversions)
         {
             if (assemblyBytes is null)
                 continue;
@@ -50,6 +50,6 @@ public static partial class FluentElmToolkitExtensions
             }
         }
 
-        return elmApi;
+        return elmToolkit;
     }
 }

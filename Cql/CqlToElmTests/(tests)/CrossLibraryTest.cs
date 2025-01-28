@@ -8,16 +8,16 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ExpressionRef_Across_Library()
         {
-            var cqlApi = CreateFluentCqlToolkit();
+            var cqlToolkit = CreateFluentCqlToolkit();
 
-            var foo = cqlApi.MakeLibrary("""
+            var foo = cqlToolkit.MakeLibrary("""
                                          library Foo version '1.0.0'
 
                                          define F: 'foo'
                                          """);
             foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
 
-            var bar = cqlApi.MakeLibrary("""
+            var bar = cqlToolkit.MakeLibrary("""
                                          library Bar version '1.0.0'
 
                                          include Foo version '1.0.0' called foo
@@ -30,15 +30,15 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ExpressionRef_Across_Library_NotFound()
         {
-            var cqlApi = CreateFluentCqlToolkit();
-            var foo = cqlApi.MakeLibrary("""
+            var cqlToolkit = CreateFluentCqlToolkit();
+            var foo = cqlToolkit.MakeLibrary("""
                                          library Foo version '1.0.0'
 
                                          define F: 'foo'
                                          """);
             foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
 
-            cqlApi.MakeLibrary("""
+            cqlToolkit.MakeLibrary("""
                                library Bar version '1.0.0'
 
                                include Foo version '1.0.0' called foo
@@ -51,15 +51,15 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FunctionRef_Across_Library()
         {
-            var cqlApi = CreateFluentCqlToolkit();
-            var foo = cqlApi.MakeLibrary("""
+            var cqlToolkit = CreateFluentCqlToolkit();
+            var foo = cqlToolkit.MakeLibrary("""
                                          library Foo version '1.0.0'
 
                                          define function Foo(): 'foo'
                                          """);
             foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
 
-            var bar = cqlApi.MakeLibrary("""
+            var bar = cqlToolkit.MakeLibrary("""
                                          library Bar version '1.0.0'
 
                                          include Foo version '1.0.0' called foo
@@ -73,15 +73,15 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FunctionRef_Across_Library_NotFound()
         {
-            var cqlApi = CreateFluentCqlToolkit();
-            var foo = cqlApi.MakeLibrary("""
+            var cqlToolkit = CreateFluentCqlToolkit();
+            var foo = cqlToolkit.MakeLibrary("""
                                          library Foo version '1.0.0'
 
                                          define function Foo(): 'foo'
                                          """);
             foo.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
 
-            cqlApi.MakeLibrary("""
+            cqlToolkit.MakeLibrary("""
                                library Bar version '1.0.0'
 
                                include Foo version '1.0.0' called foo
