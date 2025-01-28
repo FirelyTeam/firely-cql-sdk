@@ -28,11 +28,11 @@ public static class FluentElmToolkitExtensions
 #pragma warning restore RS0026
         this FluentElmToolkit elmToolkit,
         string name = "",
-        Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configureLibrarySetInvokerBuilderSettings = null)
+        Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configure = null)
     {
         return elmToolkit
                .CompileElmToAssemblies()
-               .ToFluentInvocationToolkit(configureLibrarySetInvokerBuilderSettings)
+               .ToFluentInvocationToolkit(configure)
                .ToLibrarySetInvoker(name);
     }
 }

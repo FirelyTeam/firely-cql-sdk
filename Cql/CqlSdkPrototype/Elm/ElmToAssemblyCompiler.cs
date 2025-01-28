@@ -20,7 +20,7 @@ public sealed class ElmToAssemblyCompiler
         LoggerFactory = loggerFactory;
         _compilations = ElmToAssemblyCompilationDictionary.Empty;
         Config = config;
-        _services = ElmToAssemblyProcessorServices.Create(loggerFactory);
+        _services = ElmToAssemblyProcessorServices.Create(loggerFactory, config);
     }
 
     private ElmToAssemblyCompilationDictionary _compilations;
@@ -54,7 +54,7 @@ public sealed class ElmToAssemblyCompiler
 
         _services.ServiceProvider.Dispose();
         Config = config;
-        _services = ElmToAssemblyProcessorServices.Create(LoggerFactory);
+        _services = ElmToAssemblyProcessorServices.Create(LoggerFactory, config);
     }
 
     public void AddElmLibraries(IEnumerable<Library> libraries)

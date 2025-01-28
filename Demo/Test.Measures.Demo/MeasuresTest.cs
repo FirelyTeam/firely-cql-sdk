@@ -115,8 +115,7 @@ namespace Test
                    .ToDictionary(t => t.definition, t => t.getResult());
         }
 
-        [UsedImplicitly]
-        public static LibrarySetInvoker CreateRuntimeScopeFromFhirResourceFile(
+        private static LibrarySetInvoker CreateRuntimeScopeFromFhirResourceFile(
             DirectoryInfo dir,
             string lib,
             string version)
@@ -129,8 +128,7 @@ namespace Test
             return allLibs.ToLibrarySetInvoker();
         }
 
-        [UsedImplicitly]
-        public static LibrarySetInvoker CreateRuntimeScopeFromElmLibraryFile(
+        private static LibrarySetInvoker CreateRuntimeScopeFromElmLibraryFile(
             DirectoryInfo elmDirectory,
             string lib,
             string version,
@@ -140,8 +138,7 @@ namespace Test
             return CreateRuntimeScopeFromElmLibraryFile(elmDirectory, lib, version, cacheSize);
         }
 
-        [UsedImplicitly]
-        public static LibrarySetInvoker CreateRuntimeScopeFromElmLibraryFile(
+        private static LibrarySetInvoker CreateRuntimeScopeFromElmLibraryFile(
             DirectoryInfo elmDirectory,
             string lib,
             string version,
@@ -160,7 +157,7 @@ namespace Test
 
             return elmToolkit
                    .AddElmLibraries(librarySet)
-                   .ToLibrarySetInvoker();
+                   .ToLibrarySetInvoker(configure: configureLibrarySetInvokerBuilder);
         }
     }
 }

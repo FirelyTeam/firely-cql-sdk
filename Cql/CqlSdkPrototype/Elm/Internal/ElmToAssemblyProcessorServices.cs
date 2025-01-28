@@ -16,36 +16,46 @@ internal readonly record struct ElmToAssemblyProcessorServices(
     LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator)
 {
     public static ElmToAssemblyProcessorServices Create(
-        ILoggerFactory loggerFactory)
+        ILoggerFactory loggerFactory,
+        ElmToAssemblyCompilerConfig config)
     {
         var services = new ServiceCollection();
         services.AddExternalLogging(loggerFactory);
-        AddCqlCodeGenerationServices(services);
+        AddCqlCodeGenerationServices(services, config);
         var serviceProvider = services.BuildServiceProvider(validateScopes: true);
 
         return ActivatorUtilities.CreateInstance<ElmToAssemblyProcessorServices>(serviceProvider, serviceProvider);
     }
 
-    private static void AddCqlCodeGenerationServices(IServiceCollection services)
+    private static void AddCqlCodeGenerationServices(
+        IServiceCollection services,
+        ElmToAssemblyCompilerConfig config)
     {
-        AddCqlCompilerServices(services);
+        var expressionBuilderSettings = config.ToExpressionBuilderSettings();
+        AddCqlCompilerServices(services, config.LRUCacheSize, expressionBuilderSettings);
         services.TryAddSingleton<TypeToCSharpConverter>();
         services.TryAddSingleton<LibrarySetCSharpCodeGenerator>();
         services.TryAddSingleton<AssemblyCompiler>();
     }
 
-    public static IServiceCollection AddCqlCompilerServices(IServiceCollection services)
+    /// <remarks>
+    /// Used by <seealso cref="ElmToAssemblyProcessorServices"/> and by many test cases
+    /// </remarks>
+    public static IServiceCollection AddCqlCompilerServices(
+        IServiceCollection services,
+        int lruCacheSize = 0,
+        ExpressionBuilderSettings? expressionBuilderSettings = null)
     {
+        expressionBuilderSettings ??= ExpressionBuilderSettings.Default;
         services.TryAddSingleton(_ => Hl7.Fhir.Model.ModelInfo.ModelInspector);
         services.TryAddSingleton<TypeResolver, FhirTypeResolver>();
 
-        const int cacheSize = 0; // TODO: Must move to configuration
         services.TryAddSingleton(sp =>
         {
             var modelInspector = sp.GetRequiredService<ModelInspector>();
             var logger = sp.GetLogger<TypeConverter>();
             var converter = FhirTypeConverter
-                            .Create(modelInspector, cacheSize)
+                            .Create(modelInspector, lruCacheSize)
                             .UseLogger(logger);
             converter.CaptureAvailableConverters();
             return converter;
@@ -53,7 +63,7 @@ internal readonly record struct ElmToAssemblyProcessorServices(
 
         services.TryAddSingleton<CqlOperatorsBinder>();
         services.TryAddSingleton<CqlContextBinder>();
-        services.TryAddSingleton(_ => ExpressionBuilderSettings.Default); // TODO: Must move to configuration
+        services.TryAddSingleton(_ => expressionBuilderSettings);
         services.TryAddScoped<TupleBuilderCache>();
         services.TryAddScoped<LibrarySetExpressionBuilder>();
         services.TryAddScoped<LibraryExpressionBuilder>();
