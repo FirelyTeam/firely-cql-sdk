@@ -28,7 +28,7 @@ namespace Hl7.Cql.CqlToElm.Test
             // if (testCase.TestName != "AgeInYearsAt")
             //     Assert.Inconclusive("Skipped!");
 
-            var cqlApi = CreateCqlFluentToolkit(AllowNullIntervals:true);
+            var cqlApi = CreateFluentCqlToolkit(AllowNullIntervals:true);
             var expression = cqlApi.Expression(testCase.Expression);
             var expressionErrors = expression.GetErrors();
             if (expressionErrors.Any())
@@ -58,24 +58,24 @@ namespace Hl7.Cql.CqlToElm.Test
             }
 
             Expression equal = Equals(expression, expectation);
-            var equalLambda = CreateElmFluentToolkit().Lambda(equal);
+            var equalLambda = CreateFluentElmToolkit().Lambda(equal);
 
             var equalDelegate = equalLambda.Compile();
             // TODO: These needs to be changed to run through the AssemblyCompiler too
             var equalResult = (bool?)equalDelegate.DynamicInvoke(CqlContext);
             if (equalResult != true)
             {
-                var expressionValue = CreateElmFluentToolkit().Lambda(expression).Compile().DynamicInvoke(CqlContext);
-                var expectationValue = CreateElmFluentToolkit().Lambda(expectation).Compile().DynamicInvoke(CqlContext);
+                var expressionValue = CreateFluentElmToolkit().Lambda(expression).Compile().DynamicInvoke(CqlContext);
+                var expectationValue = CreateFluentElmToolkit().Lambda(expectation).Compile().DynamicInvoke(CqlContext);
                 Assert.Fail($"Case {testFullName} assertion failed. Expected '{expectationValue}', but got '{expressionValue}'.");
             }
         }
 
         private static Expression Equals(Expression expression, Expression expectation)
         {
-            var cqlFluentToolkit = CreateCqlFluentToolkit();
-            var invocationBuilder = cqlFluentToolkit.GetInvocationBuilder();
-            var elmFactory = cqlFluentToolkit.GetElmFactory();
+            var fluentCqlToolkit = CreateFluentCqlToolkit();
+            var invocationBuilder = fluentCqlToolkit.GetInvocationBuilder();
+            var elmFactory = fluentCqlToolkit.GetElmFactory();
             var equal = invocationBuilder.Invoke(SystemLibrary.Equal, expression, expectation);
             var @if = new If
             {

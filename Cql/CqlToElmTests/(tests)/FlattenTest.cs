@@ -8,7 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FlattenEmpty()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library ListTest version '1.0.0'
 
                 define private FlattenEmpty: Flatten({{},{}})
@@ -26,7 +26,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FlattenCapitalF()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library ListTest version '1.0.0'
 
                 define private FlattenEmpty: Flatten({{},{}})
@@ -36,11 +36,11 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FlattenListNullAndNull()
         {
-            var lib = CreateCqlFluentToolkit().MakeLibraryFromExpression("Flatten({{null}, {null}})");
+            var lib = CreateFluentCqlToolkit().MakeLibraryFromExpression("Flatten({{null}, {null}})");
             var flatten = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Flatten>();
             var result = Run<List<object>>(flatten, lib); // {null, null}
             result!.Count.Should().Be(2);
-            var equal = CreateCqlFluentToolkit().MakeLibraryFromExpression("Flatten({{null}, {null}}) = {null, null}")
+            var equal = CreateFluentCqlToolkit().MakeLibraryFromExpression("Flatten({{null}, {null}}) = {null, null}")
                                       .Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             var eqr = Run<bool?>(equal, lib); // {null, null}
             eqr.Should().BeTrue();
@@ -48,7 +48,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FlattenListOfValueSet()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library FlattenValueSets version '1.0.0'
 
                 valueset "One": 'https://hl7.org/one'
@@ -64,7 +64,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FlattenChoiceType()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library ListTest version '1.0.0'
 
                 define choice:
@@ -84,7 +84,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void FlattenMixedChoiceType()
         {
             // requires list promotion
-            var cqlApi = CreateCqlFluentToolkit();
+            var cqlApi = CreateFluentCqlToolkit();
             var library = cqlApi.MakeLibrary( """
                 library Test version '1.0.0'
 
@@ -95,7 +95,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 """, "Could not resolve call to operator Flatten with signature (List<Choice<Boolean, List<{http://hl7.org/fhir}Claim>>>).");
 
             // no errors
-            cqlApi = CreateCqlFluentToolkit(EnableListPromotion:true);
+            cqlApi = CreateFluentCqlToolkit(EnableListPromotion:true);
             library = cqlApi.MakeLibrary("""
                 library Test version '1.0.0'
 

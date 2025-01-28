@@ -10,7 +10,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_InvalidType()
         {
-            CreateCqlFluentToolkit().MakeLibrary("""
+            CreateFluentCqlToolkit().MakeLibrary("""
                 library IntervalTest version '1.0.0'
 
                 define private Interval_InvalidType: Interval[{},{}]
@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Quantity_Incompatible_Units()
         {
-            CreateCqlFluentToolkit().MakeLibrary("""
+            CreateFluentCqlToolkit().MakeLibrary("""
                 library IntervalTest version '1.0.0'
 
                 define private Interval_InvalidType: Interval[100 'a', 200 'kg']
@@ -30,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Integer()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Integer: Interval[1,2]
@@ -52,7 +52,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Integer", nts.name?.Name);
 
-                var lambda = CreateElmFluentToolkit().Lambda(interval);
+                var lambda = CreateFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -68,7 +68,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Integer_Null_High()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Integer: Interval[1,null)
@@ -90,7 +90,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Integer", nts.name?.Name);
 
-                var lambda = CreateElmFluentToolkit().Lambda(interval);
+                var lambda = CreateFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -106,7 +106,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Integer_Null_Low()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Integer: Interval[null, 1)
@@ -128,7 +128,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Integer", nts.name?.Name);
 
-                var lambda = CreateElmFluentToolkit().Lambda(interval);
+                var lambda = CreateFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -144,7 +144,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Long()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Long: Interval(-100L,20L]
@@ -166,7 +166,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Long", nts.name?.Name);
 
-                var lambda = CreateElmFluentToolkit().Lambda(interval);
+                var lambda = CreateFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -182,7 +182,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Decimal()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Decimal: Interval[-0.00000001, 0.0)
@@ -204,7 +204,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Decimal", nts.name?.Name);
 
-                var lambda = CreateElmFluentToolkit().Lambda(interval);
+                var lambda = CreateFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -220,7 +220,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Quantity()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Decimal: Interval(100 '1', 200 '1')
@@ -242,7 +242,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Quantity", nts.name?.Name);
 
-                var lambda = CreateElmFluentToolkit().Lambda(interval);
+                var lambda = CreateFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -258,7 +258,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Date()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library IntervalTest version '1.0.0'
 
                 define private Interval_Date: Interval[@2023-01-01, @2023-12-31]
@@ -280,7 +280,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Date", nts.name?.Name);
 
-                var lambda = CreateElmFluentToolkit().Lambda(interval);
+                var lambda = CreateFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -296,7 +296,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_DateTime()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library IntervalTest version '1.0.0'
 
                 define private Interval_DateTime: Interval[@2023-01-01T00:00:00.000Z, @2023-12-31T23:59:59.999Z]
@@ -318,7 +318,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}DateTime", nts.name?.Name);
 
-                var lambda = CreateElmFluentToolkit().Lambda(interval);
+                var lambda = CreateFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -335,7 +335,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Time()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library IntervalTest version '1.0.0'
 
                 define private Interval_DateTime: Interval[@T00:00:00.000, @T23:59:59.999]
@@ -357,7 +357,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name?.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Time", nts.name?.Name);
 
-                var lambda = CreateElmFluentToolkit().Lambda(interval);
+                var lambda = CreateFluentElmToolkit().Lambda(interval);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -374,7 +374,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Includes_Null()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library IntervalTest version '1.0.0'
 
                 define private TestIncludesNull: Interval[1, 10] includes null
@@ -395,7 +395,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Properly_Included_in_Interval_Null()
         {
-            var library = CreateCqlFluentToolkit().MakeLibraryFromExpression("Interval[1, 10] properly included in Interval[null as Integer, null as Integer]");
+            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("Interval[1, 10] properly included in Interval[null as Integer, null as Integer]");
             var pii = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ProperIncludedIn>();
             var result = Run(pii, library);
             Assert.IsNull(result);
@@ -404,7 +404,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Null_Starts_Interval()
         {
-            var library = CreateCqlFluentToolkit().MakeLibraryFromExpression("Interval[null as Integer, null as Integer] starts Interval[1, 10]");
+            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("Interval[null as Integer, null as Integer] starts Interval[1, 10]");
             var pii = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Starts>();
             var result = Run(pii, library);
             Assert.IsNull(result);

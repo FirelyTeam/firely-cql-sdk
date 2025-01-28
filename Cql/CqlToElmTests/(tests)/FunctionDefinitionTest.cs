@@ -14,7 +14,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DefinePrivateFluentFunction()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                                                      library FuncTest version '1.0.0'
                                                      using FHIR version '4.0.1'
                                                      context Patient
@@ -31,7 +31,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DefinePublicNonFluentExternalFunction()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                                                      library FuncTest version '1.0.0'
                                                      define public function Ext() returns String: external
                                                      """);
@@ -45,7 +45,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void UntypedFunctionsAreIllegal()
         {
-            _ = CreateCqlFluentToolkit().MakeLibrary("""
+            _ = CreateFluentCqlToolkit().MakeLibrary("""
                                            library FuncTest version '1.0.0'
                                            define public function Ext(): external
                                            """,
@@ -56,7 +56,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void OptionalReturnTypesMayBeTheSame()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library FuncTest version '1.0.0'
                 define function Two() returns Integer: 2
                 """);
@@ -68,7 +68,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void OptionalReturnTypesMayBeSupertype()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library FuncTest version '1.0.0'
                 define function Two() returns Any: 2
                 """);
@@ -80,7 +80,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void MakesParametersVisibleInScope()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                                                      library FuncTest version '1.0.0'
                                                      define function Double(a Integer): a*2
                                                      """);
@@ -94,7 +94,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void SignalsUnknownParameters()
         {
-            CreateCqlFluentToolkit().MakeLibrary("""
+            CreateFluentCqlToolkit().MakeLibrary("""
                                        library FuncTest version '1.0.0'
                                        define function Double(a Integer): b
                                        """,
@@ -104,7 +104,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ResolvesInParentScope()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                                                      library FuncTest version '1.0.0'
                                                      define b: 5
                                                      define function Double(a Integer): b
@@ -120,7 +120,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ResolvesNearestScope()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                                                      library FuncTest version '1.0.0'
                                                      define a: 5
                                                      define function Replace(a String): a
@@ -134,7 +134,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DoesForwardsReference()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                                                      library FuncTest version '1.0.0'
                                                      define b: a
                                                      define a: 5
@@ -148,7 +148,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DetectsCycle()
         {
-            _ = CreateCqlFluentToolkit().MakeLibrary("""
+            _ = CreateFluentCqlToolkit().MakeLibrary("""
                                            library FuncTest version '1.0.0'
                                            define a: b
                                            define b: a
@@ -159,7 +159,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CallsFluentOnMember()
         {
-            var lib = CreateCqlFluentToolkit().MakeLibrary("""
+            var lib = CreateFluentCqlToolkit().MakeLibrary("""
                                                  library FuncTest version '1.0.0'
 
                                                  using FHIR version '4.0.1'
@@ -177,7 +177,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CallsFluentOnMember_AcrossLibrary()
         {
-            var cqlApi = CreateCqlFluentToolkit();
+            var cqlApi = CreateFluentCqlToolkit();
             var fluentLib = cqlApi.MakeLibrary("""
                                                          library FluentLib version '1.0.0'
 
@@ -206,7 +206,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void BirthdatePlusAge()
         {
-            var cqlApi = CreateCqlFluentToolkit().AddFHIRHelpers();;
+            var cqlApi = CreateFluentCqlToolkit().AddFHIRHelpers();;
             var lib = cqlApi.MakeLibrary("""
                                          library Test version '1.0.0'
 
@@ -234,7 +234,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ComplexCaseStatement()
         {
-            var lib = CreateCqlFluentToolkit().MakeLibrary("""
+            var lib = CreateFluentCqlToolkit().MakeLibrary("""
                                                  library FuncTest version '1.0.0'
 
                                                  using FHIR version '4.0.1'
@@ -262,7 +262,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void External_Function()
         {
-            var lib = CreateCqlFluentToolkit().MakeLibrary("""
+            var lib = CreateFluentCqlToolkit().MakeLibrary("""
                 library FuncTest version '1.0.0'
 
                 define function Add(left Integer, right Integer) returns Integer: external
@@ -277,7 +277,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void CSharp_Keyword_Parameter_Name()
         {
-            var cqlApi = CreateCqlFluentToolkit();
+            var cqlApi = CreateFluentCqlToolkit();
             var cqlLibraryString = CqlLibraryString.Parse(
                 """
                 library FuncTest version '1.0.0'

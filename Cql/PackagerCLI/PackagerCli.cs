@@ -7,9 +7,11 @@
  */
 
 using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Cql.Extensions;
+using CqlSdkPrototype.Cql.Fluent;
+using CqlSdkPrototype.Cql.Fluent.Extensions;
 using CqlSdkPrototype.Elm;
-using CqlSdkPrototype.Elm.Extensions;
+using CqlSdkPrototype.Elm.Fluent;
+using CqlSdkPrototype.Elm.Fluent.Extensions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging;
@@ -34,19 +36,19 @@ internal class PackagerCli
             optionsConsoleDumper.DumpToConsole();
             var opt = packagerCliOptions.Value;
 
-            ElmFluentToolkit elmToolkit;
+            FluentElmToolkit elmToolkit;
             if (translateCql)
             {
                 var cqlToElmProcessorSettings = new CqlToElmProcessorSettings(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
-                elmToolkit = new CqlFluentToolkit(
+                elmToolkit = new FluentCqlToolkit(
                                  loggerFactory,
                                  cqlToElmProcessorSettings)
-                             .WithValueSwitch(
+                             .PickValueAndSwitch(
                                  valueSelector: _ => opt.CqlInDirectory,
                                  ifHasValue: (api, cql) => api.AddCqlLibrariesFromDirectory(cql),
                                  ifNoValue: _ => logger.LogWarning("No input directory specified for ELM. Nothing to do."))
                              .ProcessCqlToElm()
-                             .WithValueSwitch(
+                             .PickValueAndSwitch(
                                  valueSelector: _ => opt.ElmOutDirectory,
                                  ifHasValue: (api, elm) =>
                                  {
@@ -59,8 +61,8 @@ internal class PackagerCli
             else
             {
                 var elmToolkitSettings = new ElmToAssemblySettings(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
-                elmToolkit = new ElmFluentToolkit(loggerFactory, elmToolkitSettings)
-                             .WithValueSwitch(
+                elmToolkit = new FluentElmToolkit(loggerFactory, elmToolkitSettings)
+                             .PickValueAndSwitch(
                                  _ => opt.ElmInDirectory,
                                  ifHasValue: (api, elm) =>
                                      api.AddElmFilesFromDirectory(elm, filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name)),
@@ -134,7 +136,7 @@ internal class PackagerCli
 
 file static class X
 {
-    public static TSelf WithValueSwitch<TSelf, TValue>(
+    public static TSelf PickValueAndSwitch<TSelf, TValue>(
         this TSelf self,
         Func<TSelf, TValue?> valueSelector,
         Action<TSelf, TValue>? ifHasValue = null,

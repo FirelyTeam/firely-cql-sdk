@@ -9,7 +9,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Integer_Integer()
         {
-            var library = CreateCqlFluentToolkit().MakeLibraryFromExpression("if true then 4 else 5");
+            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("if true then 4 else 5");
             var ifThenElse = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
 
             ifThenElse.condition.Should().BeLiteralBool(true);
@@ -22,7 +22,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Integer_Decimal()
         {
-            var library = CreateCqlFluentToolkit().MakeLibraryFromExpression("if true then 4 else 5.0");
+            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("if true then 4 else 5.0");
             var ifThenElse = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
 
             ifThenElse.condition.Should().BeLiteralBool(true);
@@ -37,7 +37,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Decimal_Integer()
         {
-            var library = CreateCqlFluentToolkit().MakeLibraryFromExpression("if false then 4.0 else 5");
+            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("if false then 4.0 else 5");
             var ifThenElse = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
 
             ifThenElse.condition.Should().BeLiteralBool(false);
@@ -52,7 +52,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Decimal_String()
         {
-            var library = CreateCqlFluentToolkit().MakeLibraryFromExpression("if false then 4.0 else 'hello'");
+            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("if false then 4.0 else 'hello'");
             var ifThenElse = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
             var expectedType = new ChoiceTypeSpecifier(SystemTypes.DecimalType, SystemTypes.StringType);
 
@@ -74,10 +74,10 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void String_Integer_Integer()
         {
-            var cqlFluentToolkit = CreateCqlFluentToolkit();
-            var messageProvider = cqlFluentToolkit.GetMessageProvider();
+            var fluentCqlToolkit = CreateFluentCqlToolkit();
+            var messageProvider = fluentCqlToolkit.GetMessageProvider();
             string[] expectedErrors = [messageProvider.TypeFoundIsNotExpected(SystemTypes.StringType, SystemTypes.BooleanType)];
-            var library = cqlFluentToolkit.MakeLibraryFromExpression("if 'hello' then 4 else 5", expectedErrors);
+            var library = fluentCqlToolkit.MakeLibraryFromExpression("if 'hello' then 4 else 5", expectedErrors);
 
             var @if = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
             @if.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);

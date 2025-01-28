@@ -1,10 +1,10 @@
 ﻿using Hl7.Cql.Elm;
 
-namespace CqlSdkPrototype.Elm;
+namespace CqlSdkPrototype.Elm.Fluent;
 
-public sealed class ElmFluentToolkit(ElmToAssemblyProcessor elmToAssemblyProcessor)
+public sealed class FluentElmToolkit(ElmToAssemblyProcessor elmToAssemblyProcessor)
 {
-    public ElmFluentToolkit(
+    public FluentElmToolkit(
         ILoggerFactory? loggerFactory = null,
         ElmToAssemblySettings? settings = null) : this(new ElmToAssemblyProcessor(loggerFactory, settings))
     {
@@ -21,20 +21,20 @@ public sealed class ElmFluentToolkit(ElmToAssemblyProcessor elmToAssemblyProcess
 
     public ElmToAssemblyConversionReadOnlyDictionary ElmToAssemblyConversions => elmToAssemblyProcessor.ElmToAssemblyConversions;
 
-    public ElmFluentToolkit ReplaceSettings(Func<ElmToAssemblySettings, ElmToAssemblySettings> replace)
+    public FluentElmToolkit ReplaceSettings(Func<ElmToAssemblySettings, ElmToAssemblySettings> replace)
     {
         elmToAssemblyProcessor.SetSettings(replace(Settings));
         return this;
 
     }
 
-    public ElmFluentToolkit AddElmLibraries(IEnumerable<Library> libraries)
+    public FluentElmToolkit AddElmLibraries(IEnumerable<Library> libraries)
     {
         elmToAssemblyProcessor.AddElmLibraries(libraries);
         return this;
     }
 
-    public ElmFluentToolkit ProcessElmToAssemblies()
+    public FluentElmToolkit ProcessElmToAssemblies()
     {
         elmToAssemblyProcessor.ProcessElmToAssemblies();
         return this;

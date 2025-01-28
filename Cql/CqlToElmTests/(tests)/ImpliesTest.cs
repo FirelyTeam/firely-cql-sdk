@@ -9,7 +9,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_False()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_False: true implies false
@@ -54,7 +54,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmFluentToolkit().Lambda(implies);
+                var lambda = CreateFluentElmToolkit().Lambda(implies);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -65,7 +65,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_True()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_True: true implies true
@@ -110,7 +110,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmFluentToolkit().Lambda(implies);
+                var lambda = CreateFluentElmToolkit().Lambda(implies);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -121,7 +121,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void False_Implies_False()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library ImpliesTest version '1.0.0'
 
                 define private False_Implies_False: false implies false
@@ -166,7 +166,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmFluentToolkit().Lambda(implies);
+                var lambda = CreateFluentElmToolkit().Lambda(implies);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -177,7 +177,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_Null()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_Null: true implies null
@@ -222,7 +222,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmFluentToolkit().Lambda(implies);
+                var lambda = CreateFluentElmToolkit().Lambda(implies);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);
@@ -232,7 +232,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Implies_False()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library ImpliesTest version '1.0.0'
 
                 define private Null_Implies_False: null implies false
@@ -277,7 +277,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmFluentToolkit().Lambda(implies);
+                var lambda = CreateFluentElmToolkit().Lambda(implies);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);
@@ -287,7 +287,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_Implies_Null()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library ImpliesTest version '1.0.0'
 
                 define private Null_Implies_Null: null implies null
@@ -332,7 +332,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Boolean", rhsnts.name.Name);
                 }
 
-                var lambda = CreateElmFluentToolkit().Lambda(implies);
+                var lambda = CreateFluentElmToolkit().Lambda(implies);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);
@@ -342,7 +342,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void True_Implies_1()
         {
-            CreateCqlFluentToolkit().MakeLibrary("""
+            CreateFluentCqlToolkit().MakeLibrary("""
                 library ImpliesTest version '1.0.0'
 
                 define private True_Implies_1: true implies 1

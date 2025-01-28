@@ -1,4 +1,4 @@
-﻿using CqlSdkPrototype.Elm;
+﻿using CqlSdkPrototype.Elm.Fluent;
 using CqlSdkPrototype.Invocation.Invokers;
 using Hl7.Cql.CodeGeneration.NET;
 
@@ -7,7 +7,7 @@ namespace CqlSdkPrototype.Invocation.Extensions;
 public static partial class FluentInvocationExtensions
 {
     public static LibrarySetInvokerBuilder CreateRuntimeApi(
-        this ElmFluentToolkit elmApi,
+        this FluentElmToolkit elmApi,
         Func<LibrarySetInvokerBuilderSettings, LibrarySetInvokerBuilderSettings>? configureOptions = null)
     {
         var runtimeApiOptions = LibrarySetInvokerBuilderSettings.Default;
@@ -28,7 +28,7 @@ public static partial class FluentInvocationExtensions
 #pragma warning disable RS0026
     public static LibrarySetInvoker CreateRuntimeScope(
 #pragma warning restore RS0026
-        this ElmFluentToolkit elmApi,
+        this FluentElmToolkit elmApi,
         Func<LibrarySetInvokerBuilderSettings, LibrarySetInvokerBuilderSettings>? configureOptions = null)
     {
         return elmApi

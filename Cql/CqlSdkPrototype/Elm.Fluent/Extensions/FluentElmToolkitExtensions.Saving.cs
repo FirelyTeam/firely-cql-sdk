@@ -1,15 +1,15 @@
-﻿namespace CqlSdkPrototype.Elm.Extensions;
+﻿namespace CqlSdkPrototype.Elm.Fluent.Extensions;
 
-public static partial class ElmFluentToolkitExtensions
+public static partial class FluentElmToolkitExtensions
 {
-    public static ElmFluentToolkit SaveCSharpFilesToDirectory(
-        this ElmFluentToolkit elmApi,
+    public static FluentElmToolkit SaveCSharpFilesToDirectory(
+        this FluentElmToolkit elmApi,
         DirectoryInfo directory)
     {
         if (!directory.Exists)
             directory.Create();
 
-        var logger = elmApi.LoggerFactory.CreateLogger(typeof(ElmFluentToolkitExtensions));
+        var logger = elmApi.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
 
         foreach (var (libraryName, (_, cSharpSourceCode, _, _)) in elmApi.ElmToAssemblyConversions)
         {
@@ -24,14 +24,14 @@ public static partial class ElmFluentToolkitExtensions
         return elmApi;
     }
 
-    public static ElmFluentToolkit SaveAssemblyBinariesToDirectory(
-        this ElmFluentToolkit elmApi,
+    public static FluentElmToolkit SaveAssemblyBinariesToDirectory(
+        this FluentElmToolkit elmApi,
         DirectoryInfo directory)
     {
         if (!directory.Exists)
             directory.Create();
 
-        var logger = elmApi.LoggerFactory.CreateLogger(typeof(ElmFluentToolkitExtensions));
+        var logger = elmApi.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
 
         foreach (var (libraryName, (_, _, assemblyBytes, symbolsBytes)) in elmApi.ElmToAssemblyConversions)
         {

@@ -10,6 +10,8 @@ using CqlSdkPrototype.Invocation;
 using CqlSdkPrototype.Invocation.Extensions;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Model;
+using CqlSdkPrototype.Cql.Fluent;
+using CqlSdkPrototype.Elm.Fluent;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -31,7 +33,7 @@ namespace Hl7.Cql.CqlToElm.Test
             CqlContext? ctx = null)
         {
             ctx ??= DefaultCqlContext;
-            var elmApi = CreateElmFluentToolkit();
+            var elmApi = CreateFluentElmToolkit();
             var lambda = elmApi.Lambda(expression);
             var expressionName = "TempExpression";
             var elmApiServices = elmApi;
@@ -59,7 +61,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         protected static void AssertResult<T>(Expression be, T expected)
         {
-            var lambda = CreateElmFluentToolkit().Lambda(@be);
+            var lambda = CreateFluentElmToolkit().Lambda(@be);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
 
@@ -78,7 +80,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         protected static void AssertNullResult(Expression be)
         {
-            var lambda = CreateElmFluentToolkit().Lambda(@be);
+            var lambda = CreateFluentElmToolkit().Lambda(@be);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
 
@@ -161,7 +163,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsNotNull(list.element);
             Assert.AreEqual(expectedValues.Length, list.element.Length);
 
-            var lambda = CreateElmFluentToolkit().Lambda(list);
+            var lambda = CreateFluentElmToolkit().Lambda(list);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
             var result = dg.DynamicInvoke(ctx);
@@ -179,7 +181,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerFactory>();
 
-        protected static CqlFluentToolkit CreateCqlFluentToolkit(
+        protected static FluentCqlToolkit CreateFluentCqlToolkit(
             ImmutableHashSet<CqlModel>? Models = null,
             ImmutableHashSet<ModelInfo>? ModelInfos = null,
             AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,
@@ -202,12 +204,12 @@ namespace Hl7.Cql.CqlToElm.Test
                     AllowNullInterval: AllowNullIntervals
                 ));
 
-        internal static ElmFluentToolkit CreateElmFluentToolkit(
+        internal static FluentElmToolkit CreateFluentElmToolkit(
             ImmutableHashSet<CqlModel>? models = null,
             ImmutableHashSet<ModelInfo>? modelInfos = null,
             AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
             bool enableListPromotion = false) =>
-            CreateCqlFluentToolkit(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
+            CreateFluentCqlToolkit(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
                 .CreateElmApi(_ => new ElmToAssemblySettings(
                                   ProcessBatchItemExceptionHandling.ThrowException,
                                   Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));

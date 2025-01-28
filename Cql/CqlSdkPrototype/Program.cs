@@ -1,7 +1,8 @@
 ﻿using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Cql.Extensions;
-using CqlSdkPrototype.Elm;
-using CqlSdkPrototype.Elm.Extensions;
+using CqlSdkPrototype.Cql.Fluent;
+using CqlSdkPrototype.Cql.Fluent.Extensions;
+using CqlSdkPrototype.Elm.Fluent;
+using CqlSdkPrototype.Elm.Fluent.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Invocation.Extensions;
@@ -27,7 +28,7 @@ internal class Program
 
         var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
         var settings = new CqlToElmProcessorSettings(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        var cqlFluentToolkit = new CqlFluentToolkit(loggerFactory, settings);
+        var fluentCqlToolkit = new FluentCqlToolkit(loggerFactory, settings);
         var logger = serviceProvider.GetLogger<Program>();
 
         //InvokeCqlExample(cqlApi: cqlApi);
@@ -35,14 +36,14 @@ internal class Program
         //InvokeCqlFromExamplesFolder(logger: logger, cqlApi: cqlApi);
         //
         foreach (var librarySetName in (string[]) ["CMS"])//"Authoring", "CMS", "Demo", "Examples"])
-            VerboseExample(logger: logger, cqlToolkit: cqlFluentToolkit, librarySetName: librarySetName, shouldBuildCqlToElm:false);
+            VerboseExample(logger: logger, cqlToolkit: fluentCqlToolkit, librarySetName: librarySetName, shouldBuildCqlToElm:false);
 
         // VerboseExample(logger, cqlApi, "CMS");
     }
 
     private static void InvokeCqlFromExamplesFolder(
         ILogger<Program> logger,
-        CqlFluentToolkit cqlToolkit)
+        FluentCqlToolkit cqlToolkit)
     {
         // INTRO:
         // This example demonstrates how to load CQL libraries from a directory and invoke a library declarations directly.
@@ -71,7 +72,7 @@ internal class Program
         }
     }
 
-    private static void InvokeCqlExample(CqlFluentToolkit cqlToolkit)
+    private static void InvokeCqlExample(FluentCqlToolkit cqlToolkit)
     {
         // INTRO:
         // This example demonstrates how to add a CqlLibraryString to the CqlApi and invoke a library declaration directly.
@@ -93,7 +94,7 @@ internal class Program
 
     private static void VerboseExample(
         ILogger<Program> logger,
-        CqlFluentToolkit cqlToolkit,
+        FluentCqlToolkit cqlToolkit,
         string librarySetName,
         bool shouldBuildCqlToElm = false)
     {
@@ -198,13 +199,13 @@ internal class Program
 
 file static class X
 {
-    public static Maybe<(CqlVersionedLibraryIdentifier id, string cSharpSourceCode)> TryGetFirstCSharpFileLines(this ElmFluentToolkit elmApi) =>
+    public static Maybe<(CqlVersionedLibraryIdentifier id, string cSharpSourceCode)> TryGetFirstCSharpFileLines(this FluentElmToolkit elmApi) =>
         elmApi.ElmToAssemblyConversions
               .TryGetFirst(kv => kv.Value.CSharpSourceCode is not null)
               .TryReturn(kv => (kv.Key, kv.Value.CSharpSourceCode!));
 
     public static Maybe<(CqlVersionedLibraryIdentifier id, string elmJson)> TryGetFirstElmFileLines(
-        this CqlFluentToolkit cqlApi) =>
+        this FluentCqlToolkit cqlApi) =>
         cqlApi.CqlToElmConversions
               .TryGetFirst(kv => kv.Value.ElmLibrary is not null)
               .TryReturn(kv => (kv.Key, kv.Value.ElmLibrary!.SerializeToJson()!));

@@ -1,25 +1,25 @@
-﻿using CqlSdkPrototype.Cql;
+﻿using CqlSdkPrototype.Cql.Fluent;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.Elm;
 
 #pragma warning disable RS0027
 
-namespace CqlSdkPrototype.Elm.Extensions;
+namespace CqlSdkPrototype.Elm.Fluent.Extensions;
 
-public static partial class ElmFluentToolkitExtensions
+public static partial class FluentElmToolkitExtensions
 {
-    public static ElmFluentToolkit AddElmFrom(
-        this ElmFluentToolkit elmToolkit,
-        CqlFluentToolkit cqlToolkit) =>
+    public static FluentElmToolkit AddElmFrom(
+        this FluentElmToolkit elmToolkit,
+        FluentCqlToolkit cqlToolkit) =>
         elmToolkit.AddElmLibraries(
             from entry in cqlToolkit.CqlToElmConversions
             let elmLibrary = entry.Value.ElmLibrary
             where elmLibrary is not null
             select elmLibrary);
 
-    public static ElmFluentToolkit AddElmFile(
-        this ElmFluentToolkit elmToolkit,
+    public static FluentElmToolkit AddElmFile(
+        this FluentElmToolkit elmToolkit,
         DirectoryInfo directory,
         CqlVersionedLibraryIdentifier versionedLibraryIdentifier)
     {
@@ -38,8 +38,8 @@ public static partial class ElmFluentToolkitExtensions
         return elmToolkit.AddElmFile(file);
     }
 
-    public static ElmFluentToolkit AddElmFiles(
-        this ElmFluentToolkit elmToolkit,
+    public static FluentElmToolkit AddElmFiles(
+        this FluentElmToolkit elmToolkit,
         IEnumerable<FileInfo> files)
     {
         var logger = elmToolkit.CreateLogger();
@@ -53,8 +53,8 @@ public static partial class ElmFluentToolkitExtensions
         return elmToolkit.AddElmLibraries(libraries);
     }
 
-    public static ElmFluentToolkit AddElmFilesFromDirectory(
-        this ElmFluentToolkit elmToolkit,
+    public static FluentElmToolkit AddElmFilesFromDirectory(
+        this FluentElmToolkit elmToolkit,
         DirectoryInfo directory,
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
@@ -64,21 +64,21 @@ public static partial class ElmFluentToolkitExtensions
         return elmToolkit.AddElmFiles(files);
     }
 
-    public static ElmFluentToolkit AddElmFileWithDependencies(
-        this ElmFluentToolkit elmToolkit,
+    public static FluentElmToolkit AddElmFileWithDependencies(
+        this FluentElmToolkit elmToolkit,
         FileInfo file,
         EnumerationOptions? options) =>
         throw new NotImplementedException();
 
-    public static ElmFluentToolkit AddElmFileWithDependencies(
-        this ElmFluentToolkit elmToolkit,
+    public static FluentElmToolkit AddElmFileWithDependencies(
+        this FluentElmToolkit elmToolkit,
         DirectoryInfo directory,
         CqlVersionedLibraryIdentifier fileName,
         EnumerationOptions? options) =>
         throw new NotImplementedException();
 
-    public static ElmFluentToolkit AddElmFile(
-        this ElmFluentToolkit elmToolkit,
+    public static FluentElmToolkit AddElmFile(
+        this FluentElmToolkit elmToolkit,
         FileInfo file) =>
         elmToolkit.AddElmFiles([file]);
 }

@@ -1,4 +1,4 @@
-﻿using CqlSdkPrototype.Elm;
+﻿using CqlSdkPrototype.Elm.Fluent;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
@@ -8,16 +8,16 @@ namespace Hl7.Cql.CqlToElm.Test;
 
 using Expression = Hl7.Cql.Elm.Expression;
 
-internal static class ElmFluentToolkitExtensions
+internal static class FluentElmToolkitExtensions
 {
-    public static LibrarySetCSharpCodeGenerator GetLibrarySetCSharpCodeGenerator(this ElmFluentToolkit elmFluentToolkit) =>
-        elmFluentToolkit.ServiceProvider.GetRequiredService<LibrarySetCSharpCodeGenerator>();
+    public static LibrarySetCSharpCodeGenerator GetLibrarySetCSharpCodeGenerator(this FluentElmToolkit fluentElmToolkit) =>
+        fluentElmToolkit.ServiceProvider.GetRequiredService<LibrarySetCSharpCodeGenerator>();
 
-    public static AssemblyCompiler GetAssemblyCompiler(this ElmFluentToolkit elmFluentToolkit) =>
-        elmFluentToolkit.ServiceProvider.GetRequiredService<AssemblyCompiler>();
+    public static AssemblyCompiler GetAssemblyCompiler(this FluentElmToolkit fluentElmToolkit) =>
+        fluentElmToolkit.ServiceProvider.GetRequiredService<AssemblyCompiler>();
 
-    public static Scope CreateScope(this ElmFluentToolkit elmFluentToolkit) =>
-        new (elmFluentToolkit.ServiceProvider.CreateScope());
+    public static Scope CreateScope(this FluentElmToolkit fluentElmToolkit) =>
+        new (fluentElmToolkit.ServiceProvider.CreateScope());
 
     public static LibraryExpressionBuilder GetLibraryExpressionBuilder(this Scope elmFluentFluentToolkitScope) =>
         elmFluentFluentToolkitScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
@@ -31,7 +31,7 @@ internal static class ElmFluentToolkitExtensions
     private static Library Library { get; } = new(identifier: new VersionedIdentifier { id = "Lambdas", version = "1.0.0" });
 
     internal static DefinitionDictionary<LambdaExpression> ProcessLibrary(
-        this ElmFluentToolkit elmToolkit,
+        this FluentElmToolkit elmToolkit,
         Library library)
     {
         using var scope = elmToolkit.CreateScope();
@@ -40,7 +40,7 @@ internal static class ElmFluentToolkitExtensions
     }
 
     internal static LambdaExpression Lambda(
-        this ElmFluentToolkit elmToolkit,
+        this FluentElmToolkit elmToolkit,
         Expression expression)
     {
         using var scope = elmToolkit.CreateScope();

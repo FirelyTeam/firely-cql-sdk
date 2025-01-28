@@ -1,4 +1,4 @@
-using CqlSdkPrototype.Cql.Extensions;
+using CqlSdkPrototype.Cql.Fluent.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation.Extensions;
 
@@ -42,7 +42,7 @@ public class TagsTest : Base
                  [Condition: "Injury due to falling rock"] C
                     where (C.onset.value as DateTime) during "Measurement Period"
             """);
-        var cql = CreateCqlFluentToolkit().AddCqlLibraryString(cqlLibraryString).ProcessCqlToElm();
+        var cql = CreateFluentCqlToolkit().AddCqlLibraryString(cqlLibraryString).ProcessCqlToElm();
 
         var elm = cql.CreateElmApi().ProcessElmToAssemblies();
 

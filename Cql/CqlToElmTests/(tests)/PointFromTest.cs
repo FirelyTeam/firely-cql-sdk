@@ -9,7 +9,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Point_From_Integer()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: point from Interval[4,4]
@@ -30,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var interval = (Interval)pointFrom.operand;
                 AssertIntervalType(interval.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = CreateElmFluentToolkit().Lambda(pointFrom);
+                var lambda = CreateFluentElmToolkit().Lambda(pointFrom);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);
@@ -43,7 +43,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Point_From_Integer_Closed()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers: point from Interval[4,5)
@@ -64,7 +64,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var interval = (Interval)pointFrom.operand;
                 AssertIntervalType(interval.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = CreateElmFluentToolkit().Lambda(pointFrom);
+                var lambda = CreateFluentElmToolkit().Lambda(pointFrom);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);
@@ -78,7 +78,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Point_From_Integers_Null()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers_Null: point from (null as Interval<Integer>)
@@ -100,7 +100,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(@as.operand, typeof(Null));
                 AssertIntervalType(@as.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = CreateElmFluentToolkit().Lambda(pointFrom);
+                var lambda = CreateFluentElmToolkit().Lambda(pointFrom);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 var result = dg.DynamicInvoke(ctx);
@@ -111,7 +111,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Point_From_Integers_Error()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library PointFromTest version '1.0.0'
 
                 define private Point_From_Integers_Error: point from Interval[1,4]
@@ -132,7 +132,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var list = (Interval)pointFrom.operand;
                 AssertIntervalType(list.resultTypeSpecifier, $"{{{SystemUri}}}Integer");
 
-                var lambda = CreateElmFluentToolkit().Lambda(pointFrom);
+                var lambda = CreateFluentElmToolkit().Lambda(pointFrom);
                 var dg = lambda.Compile();
                 var ctx = FhirCqlContext.ForBundle();
                 Assert.ThrowsException<TargetInvocationException>(() => dg.DynamicInvoke(ctx));

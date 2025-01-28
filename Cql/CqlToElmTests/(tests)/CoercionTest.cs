@@ -10,13 +10,13 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         static CoercionTest()
         {
-            var cqlFluentToolkit = CreateCqlFluentToolkit(
+            var fluentCqlToolkit = CreateFluentCqlToolkit(
                 EnableListPromotion: true,
                 EnableListDemotion: true,
                 EnableIntervalPromotion: true,
                 EnableIntervalDemotion: true);
-            ElmFactory = cqlFluentToolkit.GetElmFactory();
-            CoercionProvider = cqlFluentToolkit.GetCoercionProvider();
+            ElmFactory = fluentCqlToolkit.GetElmFactory();
+            CoercionProvider = fluentCqlToolkit.GetCoercionProvider();
         }
 
         private static readonly CoercionProvider CoercionProvider;

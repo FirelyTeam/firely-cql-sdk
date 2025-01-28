@@ -8,7 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ExpressionRef_Across_Library()
         {
-            var cqlApi = CreateCqlFluentToolkit();
+            var cqlApi = CreateFluentCqlToolkit();
 
             var foo = cqlApi.MakeLibrary("""
                                          library Foo version '1.0.0'
@@ -30,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ExpressionRef_Across_Library_NotFound()
         {
-            var cqlApi = CreateCqlFluentToolkit();
+            var cqlApi = CreateFluentCqlToolkit();
             var foo = cqlApi.MakeLibrary("""
                                          library Foo version '1.0.0'
 
@@ -51,7 +51,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FunctionRef_Across_Library()
         {
-            var cqlApi = CreateCqlFluentToolkit();
+            var cqlApi = CreateFluentCqlToolkit();
             var foo = cqlApi.MakeLibrary("""
                                          library Foo version '1.0.0'
 
@@ -73,7 +73,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FunctionRef_Across_Library_NotFound()
         {
-            var cqlApi = CreateCqlFluentToolkit();
+            var cqlApi = CreateFluentCqlToolkit();
             var foo = cqlApi.MakeLibrary("""
                                          library Foo version '1.0.0'
 

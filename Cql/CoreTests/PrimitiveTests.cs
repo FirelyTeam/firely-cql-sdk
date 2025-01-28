@@ -6,6 +6,7 @@ using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Elm.Fluent;
 using Hl7.Cql.Runtime.Hosting;
 
 namespace CoreTests
@@ -3408,7 +3409,7 @@ namespace CoreTests
 
             Assert.That.DoesNotThrow(() =>
             {
-                new ElmFluentToolkit(loggerFactory)
+                new FluentElmToolkit(loggerFactory)
                     .AddElmLibraries(librarySet)
                     .ProcessElmToAssemblies();
             });

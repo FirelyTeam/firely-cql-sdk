@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics;
 using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Cql.Extensions;
-using CqlSdkPrototype.Elm.Extensions;
+using CqlSdkPrototype.Cql.Fluent;
+using CqlSdkPrototype.Cql.Fluent.Extensions;
+using CqlSdkPrototype.Elm.Fluent.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation.Extensions;
 using Hl7.Cql.Fhir;
@@ -22,7 +23,7 @@ internal static class Program
 
         // Create fluent cql toolkit
         var cqlToElmProcessorSettings = new CqlToElmProcessorSettings(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        CqlFluentToolkit cqlToolkit = new CqlFluentToolkit(loggerFactory, cqlToElmProcessorSettings);
+        FluentCqlToolkit cqlToolkit = new FluentCqlToolkit(loggerFactory, cqlToElmProcessorSettings);
 
         // Add CQL libraries from a directory and process them to ELM, then save the ELM files to a directory
         cqlToolkit

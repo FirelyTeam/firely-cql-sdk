@@ -8,7 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
          [TestMethod]
         public void Starts_Properly_Within_Start()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library InTest version '1.0.0'
 
                 define private Starts_Properly_Within_Start: Interval[@2023, @2030] starts properly within 1 year of start Interval[@2022, @2030]
@@ -37,7 +37,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_Within_Start()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library InTest version '1.0.0'
 
                 define f: Interval[@2023, @2030] starts within 1 year of start Interval[@2022, @2030]
@@ -49,7 +49,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Properly_Within_Start()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library InTest version '1.0.0'
 
                 define private Properly_Within_Start: Interval[@2023, @2030] properly within 1 year of start Interval[@2022, @2030]
@@ -60,7 +60,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TestInNullBoundaries()
         {
-            var lib = CreateCqlFluentToolkit().MakeLibraryFromExpression("5 in Interval[null as Integer, null as Integer]");
+            var lib = CreateFluentCqlToolkit().MakeLibraryFromExpression("5 in Interval[null as Integer, null as Integer]");
             var @in = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<In>();
             var result = Run<bool?>(@in, lib);
             Assert.IsFalse(result);
@@ -68,14 +68,14 @@ namespace Hl7.Cql.CqlToElm.Test
 
         public void NullContains5()
         {
-            var lib = CreateCqlFluentToolkit().MakeLibraryFromExpression("null contains 5");
+            var lib = CreateFluentCqlToolkit().MakeLibraryFromExpression("null contains 5");
             var @in = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Contains>();
         }
 
         [TestMethod]
         public void Starts_Within_PointInterval()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library InTest version '1.0.0'
 
                 define f:

@@ -5,6 +5,7 @@ using CoreTests;
 using Hl7.Cql.Compiler;
 using CLI.Helpers;
 using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Elm.Fluent;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Runtime;
 using CqlSdkPrototype.Infrastructure;
@@ -155,9 +156,9 @@ namespace Test
             var elmToAssemblySettings = ElmToAssemblySettings.Default;
             if (Debugger.IsAttached)
                 elmToAssemblySettings = elmToAssemblySettings with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
-            var elmFluentToolkit = new ElmFluentToolkit(loggerFactory, elmToAssemblySettings);
+            var fluentElmToolkit = new FluentElmToolkit(loggerFactory, elmToAssemblySettings);
 
-            return elmFluentToolkit
+            return fluentElmToolkit
                    .AddElmLibraries(librarySet)
                    .CreateRuntimeScope();
         }

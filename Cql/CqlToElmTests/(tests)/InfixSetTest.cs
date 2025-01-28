@@ -9,7 +9,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Except()
         {
-            var library = CreateCqlFluentToolkit().MakeLibraryFromExpression("Interval[1, 10] except Interval[4, 10]");
+            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("Interval[1, 10] except Interval[4, 10]");
             var except = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Except>();
             var result = Run<CqlInterval<int?>>(except, library);
             result.Should().NotBeNull();
@@ -22,7 +22,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Union()
         {
-            var library = CreateCqlFluentToolkit().MakeLibraryFromExpression("Interval[1, 10] union Interval[4, 15]");
+            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("Interval[1, 10] union Interval[4, 15]");
             var union = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Union>();
             var result = Run<CqlInterval<int?>>(union, library);
             result.Should().NotBeNull();
@@ -34,7 +34,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Union_Pipe_Operator()
         {
-            var library = CreateCqlFluentToolkit().MakeLibraryFromExpression("Interval[1, 10] | Interval[4, 15]");
+            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("Interval[1, 10] | Interval[4, 15]");
             var union = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Union>();
             var result = Run<CqlInterval<int?>>(union, library);
             result.Should().NotBeNull();
@@ -47,7 +47,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Interval_Intersect_Operator()
         {
-            var library = CreateCqlFluentToolkit().MakeLibraryFromExpression("Interval[1, 5] intersect Interval[3, 7]");
+            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("Interval[1, 5] intersect Interval[3, 7]");
             var intersect = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Intersect>();
             var result = Run<CqlInterval<int?>>(intersect, library);
             result.Should().NotBeNull();

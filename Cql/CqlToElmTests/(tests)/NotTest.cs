@@ -9,7 +9,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Not_True()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library NotTest version '1.0.0'
 
                 define private Not_True: not true
@@ -44,7 +44,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 }
 
 
-                var lambda = CreateElmFluentToolkit().Lambda(not);
+                var lambda = CreateFluentElmToolkit().Lambda(not);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -55,7 +55,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Not_False()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library NotTest version '1.0.0'
 
                 define private Not_False: not false
@@ -89,7 +89,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 }
 
 
-                var lambda = CreateElmFluentToolkit().Lambda(not);
+                var lambda = CreateFluentElmToolkit().Lambda(not);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -100,7 +100,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Not_Null()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library NotTest version '1.0.0'
 
                 define private Not_Null: not null
@@ -134,7 +134,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 }
 
 
-                var lambda = CreateElmFluentToolkit().Lambda(not);
+                var lambda = CreateFluentElmToolkit().Lambda(not);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNull(result);
@@ -143,7 +143,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         [TestMethod]
         public void Not_1() =>
-            CreateCqlFluentToolkit().MakeLibrary("""
+            CreateFluentCqlToolkit().MakeLibrary("""
                 library NotTest version '1.0.0'
 
                 define private Not_1: not 1

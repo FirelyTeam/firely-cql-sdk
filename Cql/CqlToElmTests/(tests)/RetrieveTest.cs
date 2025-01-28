@@ -12,7 +12,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Retrieve_AllTerms()
         {
-            var cqlApi = CreateCqlFluentToolkit();
+            var cqlApi = CreateFluentCqlToolkit();
             var cqlLibraryString = CqlLibraryString.Parse("""
                                    library RetrieveTest version '1.0.0'
 

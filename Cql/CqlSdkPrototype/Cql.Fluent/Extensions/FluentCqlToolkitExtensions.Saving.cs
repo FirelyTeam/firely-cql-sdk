@@ -1,9 +1,9 @@
-﻿namespace CqlSdkPrototype.Cql.Extensions;
+﻿namespace CqlSdkPrototype.Cql.Fluent.Extensions;
 
-public static partial class CqlFluentToolkitExtensions
+public static partial class FluentCqlToolkitExtensions
 {
-    public static CqlFluentToolkit SaveElmFileToDirectory(
-        this CqlFluentToolkit cqlToolkit,
+    public static FluentCqlToolkit SaveElmFileToDirectory(
+        this FluentCqlToolkit cqlToolkit,
         DirectoryInfo directory,
         bool writeIndented = true)
     {

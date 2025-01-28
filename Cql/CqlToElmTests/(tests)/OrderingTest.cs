@@ -8,7 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Order_Simple()
         {
-            var lib = CreateCqlFluentToolkit().MakeLibrary("""
+            var lib = CreateFluentCqlToolkit().MakeLibrary("""
                 library Test version '1.0.0'                define a: b
                                 define b: true
                 """);
@@ -20,7 +20,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Order_Indirection_2()
         {
-            var lib = CreateCqlFluentToolkit().MakeLibrary("""
+            var lib = CreateFluentCqlToolkit().MakeLibrary("""
                 library Test version '1.0.0'                define a: b
                                 define b: c
                                 define c: true
@@ -34,7 +34,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Function_Simple()
         {
-            var lib = CreateCqlFluentToolkit().MakeLibrary("""
+            var lib = CreateFluentCqlToolkit().MakeLibrary("""
                 library Test version '1.0.0'                define a: b()
                                 define function b(): true
                 """);
@@ -45,7 +45,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Function_Indirection_2()
         {
-            var lib = CreateCqlFluentToolkit().MakeLibrary("""
+            var lib = CreateFluentCqlToolkit().MakeLibrary("""
                 library Test version '1.0.0'                define a: b()
                                 define function b(): c()
                                 define function c(): true

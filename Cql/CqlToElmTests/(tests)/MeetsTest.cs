@@ -8,7 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Meets()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library MeetsTest version '1.0.0'
 
                 define private Meets: Interval[6, 10] meets Interval[0, 5]
@@ -37,7 +37,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Meets_Before()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library MeetsTest version '1.0.0'
 
                 define private Meets_Before: Interval[-5, -1] meets before Interval[0, 5]
@@ -66,7 +66,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Meets_After()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library MeetsTest version '1.0.0'
 
                 define private Meets_After: Interval[6, 10] meets after Interval[0, 7]
@@ -95,7 +95,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Meets_Is_Null()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library MeetsTest version '1.0.0'
 
                 define private Meets_Is_Null: Interval[6, 10] meets (null as Interval<Integer>)
@@ -123,7 +123,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Meets_After_Day()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library MeetsTest version '1.0.0'
 
                 define private Meets_After_Day: Interval[@2023-03-01, @2023-06-01] meets after month of Interval[@2023-01-01, @2023-03-01]
@@ -152,7 +152,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Meets_Day()
         {
-            var library = CreateCqlFluentToolkit().MakeLibrary("""
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
                 library MeetsTest version '1.0.0'
 
                 define private Meets_Day: Interval[@2023-01-01, @2023-06-01] meets month of Interval[@2023-07-01, @2023-10-01]
@@ -181,7 +181,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Meets_After_Null()
         {
-            var library = CreateCqlFluentToolkit().MakeLibraryFromExpression("Interval(null, 5] meets after Interval[11, null)");
+            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("Interval(null, 5] meets after Interval[11, null)");
             var meetsAfter = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<MeetsAfter>();
             var result = Run<bool?>(meetsAfter, library);
             result.Should().BeFalse();

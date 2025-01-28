@@ -1,10 +1,10 @@
 ﻿using CqlSdkPrototype.Infrastructure;
 
-namespace CqlSdkPrototype.Cql;
+namespace CqlSdkPrototype.Cql.Fluent;
 
-public sealed class CqlFluentToolkit(CqlToElmProcessor cqlToElmProcessor)
+public sealed class FluentCqlToolkit(CqlToElmProcessor cqlToElmProcessor)
 {
-    public CqlFluentToolkit(
+    public FluentCqlToolkit(
         ILoggerFactory? loggerFactory = null,
         CqlToElmProcessorSettings? settings = null) : this(new CqlToElmProcessor(loggerFactory, settings))
     {
@@ -21,19 +21,19 @@ public sealed class CqlFluentToolkit(CqlToElmProcessor cqlToElmProcessor)
 
     public CqlToElmConversionReadOnlyDictionary CqlToElmConversions => cqlToElmProcessor.Conversions;
 
-    public CqlFluentToolkit ReplaceSettings(Func<CqlToElmProcessorSettings, CqlToElmProcessorSettings> replace)
+    public FluentCqlToolkit ReplaceSettings(Func<CqlToElmProcessorSettings, CqlToElmProcessorSettings> replace)
     {
         cqlToElmProcessor.SetSettings(replace(Settings));
         return this;
     }
 
-    public CqlFluentToolkit AddCqlLibraries(IEnumerable<CqlLibraryString> libraries)
+    public FluentCqlToolkit AddCqlLibraries(IEnumerable<CqlLibraryString> libraries)
     {
         cqlToElmProcessor.AddCqlLibraries(libraries);
         return this;
     }
 
-    public CqlFluentToolkit ProcessCqlToElm()
+    public FluentCqlToolkit ProcessCqlToElm()
     {
         cqlToElmProcessor.ProcessCqlToElm();
         return this;
