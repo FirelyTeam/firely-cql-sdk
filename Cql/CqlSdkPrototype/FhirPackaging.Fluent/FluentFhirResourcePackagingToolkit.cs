@@ -12,10 +12,10 @@ using ElmLibrary = Hl7.Cql.Elm.Library;
 using FhirLibrary = Hl7.Fhir.Model.Library;
 using DateTime = System.DateTime;
 
-public class FluentFhirPackagingToolkit(
+public sealed class FluentFhirResourcePackagingToolkit(
     ILoggerFactory? loggerFactory)
 {
-    private readonly FhirPackagerServices _services = FhirPackagerServices.Create(loggerFactory ?? NullLoggerFactory.Instance);
+    private readonly FhirResourcePackagerServices _services = FhirResourcePackagerServices.Create(loggerFactory ?? NullLoggerFactory.Instance);
 
     public FhirLibrary CreateLibraryResource(
         ElmLibrary elmLibrary,
@@ -41,24 +41,32 @@ public class FluentFhirPackagingToolkit(
     }
 }
 
-public class FhirPackager(
-    ILoggerFactory? loggerFactory = null)
+public sealed class FhirResourcePackager
 {
-    public ILoggerFactory? LoggerFactory { get; } = loggerFactory;
+    public FhirResourcePackager(ILoggerFactory? loggerFactory = null)
+    {
+        loggerFactory ??= NullLoggerFactory.Instance;
+        LoggerFactory = loggerFactory;
+        _services = FhirResourcePackagerServices.Create(loggerFactory);
+    }
+
+    public ILoggerFactory? LoggerFactory { get; }
+    private readonly FhirResourcePackagerServices _services;
 }
 
-internal record FhirPackagerServices(
+internal readonly record struct FhirResourcePackagerServices(
     ServiceProvider ServiceProvider,
     CqlTypeToFhirTypeMapper CqlTypeToFhirTypeMapper)
 {
-    public static FhirPackagerServices Create(ILoggerFactory loggerFactory)
+    public static FhirResourcePackagerServices Create(ILoggerFactory loggerFactory)
     {
-        var services = new ServiceCollection().AddExternalLogging(loggerFactory);
+        var services = new ServiceCollection();
+        services.AddExternalLogging(loggerFactory);
         services.TryAddSingleton<ModelInspector>(_ => Hl7.Fhir.Model.ModelInfo.ModelInspector);
         services.TryAddSingleton<TypeResolver, FhirTypeResolver>();
         services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
         var serviceProvider = services.BuildServiceProvider();
-        return ActivatorUtilities.CreateInstance<FhirPackagerServices>(serviceProvider, serviceProvider);
+        return ActivatorUtilities.CreateInstance<FhirResourcePackagerServices>(serviceProvider, serviceProvider);
     }
 
 }

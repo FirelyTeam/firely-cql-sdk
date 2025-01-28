@@ -1,13 +1,12 @@
 ﻿using System.Collections.ObjectModel;
 using CqlSdkPrototype.Internal;
-using CqlSdkPrototype.Invocation.Fluent;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Invocation.Internal;
 
-internal class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
+internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
 {
     private record LibraryMethodInfo(
         MethodInfo Method,
@@ -26,7 +25,7 @@ internal class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
             DeclarationName: Method.GetCustomAttribute<CqlDeclarationAttribute>()?.Name) { }
     }
 
-    public LibraryInvoker_2_0_8_0(
+    private LibraryInvoker_2_0_8_0(
         ILibrary library) : base(library)
     {
         var libraryType = library.GetType();

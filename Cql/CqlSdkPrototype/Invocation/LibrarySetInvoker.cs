@@ -3,7 +3,7 @@ using CqlSdkPrototype.Internal;
 
 namespace CqlSdkPrototype.Invocation;
 
-public class LibrarySetInvoker : IDisposable
+public sealed class LibrarySetInvoker : IDisposable
 {
     private readonly AssemblyLoadContext _alc;
 

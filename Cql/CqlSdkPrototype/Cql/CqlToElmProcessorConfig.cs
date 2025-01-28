@@ -7,7 +7,7 @@ namespace CqlSdkPrototype.Cql;
 /// <summary>
 /// The settings used to configure the CQL to ELM processor.
 /// </summary>
-public record CqlToElmProcessorConfig(
+public sealed record CqlToElmProcessorConfig(
     ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling = default,
     ImmutableHashSet<CqlModel>? Models = null,
     ImmutableHashSet<ModelInfo>? ModelInfos = null,

@@ -9,7 +9,7 @@ using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Elm;
 
-public class ElmToAssemblyProcessor
+public sealed class ElmToAssemblyProcessor
 {
     public ElmToAssemblyProcessor(
         ILoggerFactory? loggerFactory = null,

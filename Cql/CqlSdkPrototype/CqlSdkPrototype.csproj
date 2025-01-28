@@ -31,8 +31,4 @@
 		<InternalsVisibleTo Include="Test.Measures.Demo" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Folder Include="Elm\Fluent\" />
-	</ItemGroup>
-
 </Project>

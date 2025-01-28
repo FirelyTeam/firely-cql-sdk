@@ -2,7 +2,7 @@
 
 namespace CqlSdkPrototype.Invocation.Fluent;
 
-public class FluentInvocationToolkit(LibrarySetInvokerBuilder librarySetInvokerBuilder)
+public sealed class FluentInvocationToolkit(LibrarySetInvokerBuilder librarySetInvokerBuilder)
 {
     public FluentInvocationToolkit(
         ILoggerFactory? loggerFactory = null,

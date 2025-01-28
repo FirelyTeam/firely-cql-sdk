@@ -5,7 +5,7 @@ using Hl7.Cql.CodeGeneration.NET;
 
 namespace CqlSdkPrototype.Invocation;
 
-public class LibrarySetInvokerBuilder
+public sealed class LibrarySetInvokerBuilder
 {
     public LibrarySetInvokerBuilder(
         ILoggerFactory? loggerFactory = null,
