@@ -13,7 +13,7 @@ using CqlSdkPrototype.Cql.Fluent;
 using CqlSdkPrototype.Elm.Fluent;
 using CqlSdkPrototype.Elm.Fluent.Extensions;
 using CqlSdkPrototype.Invocation.Extensions;
-using AssemblyData = Hl7.Cql.CodeGeneration.NET.AssemblyData;
+using CqlSdkPrototype.Invocation.Fluent;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -44,12 +44,12 @@ namespace Hl7.Cql.CqlToElm.Test
             definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
             var generateCSharp = elmApiServices.GetLibrarySetCSharpCodeGenerator().GenerateCSharp(librarySet, definitions);
             var compile = elmApiServices.GetAssemblyCompiler().Compile(librarySet, generateCSharp, elmApi.ProcessorConfig.AssemblyCompilerDebugInformationFormat);
-            var assemblyBytes = compile.Single().assemblyDataWithSourceCode.AssemblyBytes;
+            var assemblyBytes = compile.Single().assemblyBinaryWithSourceCode.AssemblyBytes;
 
-            using var scope = new FluentInvocationToolkit()
-                              .AddAssemblies([AssemblyData.Default with { AssemblyBytes = assemblyBytes }])
+            using var librarySetInvoker = new FluentInvocationToolkit()
+                              .AddAssemblyBinaries(AssemblyBinary.Default with { AssemblyBytes = assemblyBytes })
                               .CreateLibrarySetInvoker();
-            var result = scope.GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);
+            var result = librarySetInvoker.GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);
             return result;
         }
 

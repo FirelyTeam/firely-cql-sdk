@@ -14,24 +14,24 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// <param name="AssemblyBytes">This assembly's binary data.</param>
 /// <param name="SourceCode">The collection of source code files that contributed to this assembly.</param>
 /// <param name="DebugSymbolsBytes">The assembly's debug symbols in binary data.</param>
-internal record AssemblyDataWithSourceCode(
+internal record AssemblyBinaryWithSourceCode(
     byte[]? AssemblyBytes,
     IReadOnlyDictionary<string, string>? SourceCode,
-    byte[]? DebugSymbolsBytes = null) : AssemblyData(AssemblyBytes, DebugSymbolsBytes)
+    byte[]? DebugSymbolsBytes = null) : AssemblyBinary(AssemblyBytes, DebugSymbolsBytes)
 {
     /// <summary>
-    /// An empty instance of <see cref="AssemblyDataWithSourceCode"/>.
+    /// An empty instance of <see cref="AssemblyBinaryWithSourceCode"/>.
     /// </summary>
-    public new static AssemblyDataWithSourceCode Default { get; } = new(null, null, null);
+    public new static AssemblyBinaryWithSourceCode Default { get; } = new(null, null, null);
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="AssemblyDataWithSourceCode"/> class.
+    /// Initializes a new instance of the <see cref="AssemblyBinaryWithSourceCode"/> class.
     /// </summary>
     /// <param name="assemblyBytes">This assembly's binary data.</param>
     /// <param name="sourceCodeFileName"></param>
     /// <param name="sourceCode"></param>
     /// <param name="debugSymbolsBytes">The assembly's debug symbols in binary data.</param>
-    public AssemblyDataWithSourceCode(
+    public AssemblyBinaryWithSourceCode(
         byte[]? assemblyBytes,
         string? sourceCodeFileName,
         string? sourceCode,

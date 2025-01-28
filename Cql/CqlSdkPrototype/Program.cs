@@ -56,11 +56,11 @@ internal class Program
         var cqlContext = FhirCqlContext.ForBundle();
 
         // We need a disposable invocation scope, which contains the AssemblyLoadContext and the related library Assemblies.
-        using var invocationScope = cqlToolkit
+        using var librarySetInvoker = cqlToolkit
                                     .Reconfigure(o => o with { ProcessBatchItemExceptionHandling = IgnoreExceptionAndContinue })
                                     .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory)
                                     .CreateLibrarySetInvoker();
-        logger.LogInformation("{dump}", invocationScope.DumpLibraryDeclarations());
+        logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDeclarations());
         Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
         Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
         Debug.Assert(Invoke("CqlStringOperatorsTest-1.0.000", "Combine.CombineABCSepDash") is "a-b-c");
@@ -68,7 +68,7 @@ internal class Program
         object? Invoke(string libraryName, string declarationName)
         {
             var libraryIdentifier = CqlVersionedLibraryIdentifier.Parse(libraryName);
-            var result = invocationScope.GetLibraryDefinitionResult(cqlContext, libraryIdentifier, declarationName);
+            var result = librarySetInvoker.GetLibraryDefinitionResult(cqlContext, libraryIdentifier, declarationName);
             return result;
         }
     }
@@ -86,10 +86,10 @@ internal class Program
             define private Three: 1 + 2
             """);
         var cqlContext = FhirCqlContext.ForBundle();
-        using var invocationScope = cqlToolkit
+        using var librarySetInvoker = cqlToolkit
                                     .AddCqlLibraryString(cqlLibraryString)
                                     .CreateLibrarySetInvoker(elmOpt => elmOpt with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded });
-        var result = invocationScope.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.VersionedLibraryIdentifier, "Three");
+        var result = librarySetInvoker.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.VersionedLibraryIdentifier, "Three");
         Debug.Assert(result is 3);
     }
 

@@ -41,11 +41,11 @@ internal static class Program
               .SaveAssemblyBinariesToDirectory(new DirectoryInfo("output/assemblies/"));
 
         // Setup RuntimeApi
-        var runtimeApi = elmToolkit.CreateFluentLibrarySetInvokerBuilder();
-        var runtimeScope = runtimeApi.CreateLibrarySetInvoker();
+        var invocationToolkit = elmToolkit.CreateFluentInvocationToolkit();
+        using var librarySetInvoker = invocationToolkit.CreateLibrarySetInvoker(); // NOTE: 'librarySetInvoker' is a disposable object!
 
         // Execute CQL
-        var threePlusTwo = runtimeScope.GetLibraryDefinitionResult(
+        var threePlusTwo = librarySetInvoker.GetLibraryDefinitionResult(
             FhirCqlContext.ForBundle(),
             CqlVersionedLibraryIdentifier.ParseFromNameAndVersion("Add3and2", "1.0.0"),
             "ThreePlusTwo");

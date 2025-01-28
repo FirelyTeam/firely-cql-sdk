@@ -126,7 +126,7 @@ namespace Test
             var library = fs.ParseFhir<Library>();
             var allLibs = library.GetDependenciesAndSelf(dir);
             //Runtime
-            return allLibs.CreateRuntimeScope();
+            return allLibs.CreateLibrarySetInvoker();
         }
 
         [UsedImplicitly]
@@ -156,9 +156,9 @@ namespace Test
             var config = ElmToAssemblyProcessorConfig.Default;
             if (Debugger.IsAttached)
                 config = config with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
-            var fluentElmToolkit = new FluentElmToolkit(loggerFactory, config);
+            var elmToolkit = new FluentElmToolkit(loggerFactory, config);
 
-            return fluentElmToolkit
+            return elmToolkit
                    .AddElmLibraries(librarySet)
                    .CreateLibrarySetInvoker();
         }

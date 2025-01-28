@@ -9,9 +9,9 @@
 namespace Hl7.Cql.CodeGeneration.NET;
 
 /// <summary>
-/// Extension methods for <see cref="AssemblyData"/>.
+/// Extension methods for <see cref="AssemblyBinary"/>.
 /// </summary>
-public static class AssemblyDataExtensions
+public static class AssemblyBinaryExtensions
 {
     /// <summary>
     /// Writes the assembly data to disk.
@@ -19,11 +19,11 @@ public static class AssemblyDataExtensions
     /// <param name="self">The assembly data to write.</param>
     /// <param name="assemblyFile">The path to write the assembly to.</param>
     /// <param name="debugSymbolsFile">The path to write the debug symbols to.</param>
-    public static TAssemblyData SaveToFiles<TAssemblyData>(
-        this TAssemblyData self,
+    public static TAssemblyBinary SaveToFiles<TAssemblyBinary>(
+        this TAssemblyBinary self,
         FileInfo? assemblyFile = null,
         FileInfo? debugSymbolsFile = null)
-        where TAssemblyData : AssemblyData
+        where TAssemblyBinary : AssemblyBinary
     {
         if (assemblyFile is { } asmFile && self.AssemblyBytes is { Length: > 0 } asmBytes)
         {
@@ -43,16 +43,16 @@ public static class AssemblyDataExtensions
     /// <summary>
     /// Loads assembly data from files and returns a new instance.
     /// </summary>
-    /// <typeparam name="TAssemblyData"></typeparam>
+    /// <typeparam name="TAssemblyBinary"></typeparam>
     /// <param name="self">The assembly data to start from</param>
     /// <param name="assemblyFile">The path to read the assembly from.</param>
     /// <param name="debugSymbolsFile">The path to read the debug symbols from.</param>
     /// <returns></returns>
-    public static TAssemblyData LoadFromFiles<TAssemblyData>(
-        this TAssemblyData self,
+    public static TAssemblyBinary LoadFromFiles<TAssemblyBinary>(
+        this TAssemblyBinary self,
         FileInfo? assemblyFile = null,
         FileInfo? debugSymbolsFile = null)
-        where TAssemblyData : AssemblyData
+        where TAssemblyBinary : AssemblyBinary
     {
         var assemblyBytes = assemblyFile is {} f1 ? File.ReadAllBytes(f1.FullName) : self.AssemblyBytes;
         var debugSymbolsBytes = debugSymbolsFile is {} f2 ? File.ReadAllBytes(f2.FullName) : self.DebugSymbolsBytes;

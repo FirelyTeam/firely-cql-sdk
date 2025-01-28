@@ -102,7 +102,7 @@ internal class PackagerCli
                              .Where(e => e.Value is { AssemblyBinary: { }, CSharpSourceCode: { } })
                              .ToDictionary(
                                  e => e.Key.ToString(),
-                                 e => new AssemblyDataWithSourceCode(
+                                 e => new AssemblyBinaryWithSourceCode(
                                      assemblyBytes: e.Value.AssemblyBinary!,
                                      sourceCodeFileName: "", // Won't get used
                                      sourceCode: e.Value.CSharpSourceCode!,

@@ -70,7 +70,7 @@ internal class ResourceHelper
         using var fs = libFile.OpenRead();
         var library = fs.ParseFhir<Library>();
         var deps = library.GetDependenciesAndSelf(dir);
-        return deps.CreateRuntimeScope();
+        return deps.CreateLibrarySetInvoker();
     }
 
 

@@ -9,11 +9,11 @@
 using CqlSdkPrototype.Invocation;
 using CqlSdkPrototype.Invocation.Fluent;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Cql.Packaging;
-using AssemblyData = Hl7.Cql.CodeGeneration.NET.AssemblyData;
 using Library = Hl7.Fhir.Model.Library;
 
 namespace CLI.Helpers;
@@ -82,19 +82,19 @@ internal static class LibraryExtensions
         }
     }
 
-    public static LibrarySetInvoker CreateRuntimeScope(
+    public static LibrarySetInvoker CreateLibrarySetInvoker(
         this IEnumerable<Library> libraries)
     {
-        var assemblyDatas =
+        var assemblyBinaries =
             libraries
             .Select(library => library.Content.SingleOrDefault(att => att.ContentType == "application/octet-stream"))
             .OfType<Attachment>()
             .Select(dll => dll.Data)
-            .Select(assemblyBytes => AssemblyData.Default with { AssemblyBytes = assemblyBytes})
+            .Select(assemblyBytes => AssemblyBinary.Default with { AssemblyBytes = assemblyBytes})
             .ToArray();
 
         return new FluentInvocationToolkit()
-                         .AddAssemblies(assemblyDatas)
+                         .AddAssemblyBinaries(assemblyBinaries)
                          .CreateLibrarySetInvoker();
     }
 

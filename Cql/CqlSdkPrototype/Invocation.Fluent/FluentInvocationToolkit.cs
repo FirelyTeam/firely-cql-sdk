@@ -6,15 +6,15 @@ public class FluentInvocationToolkit(LibrarySetInvokerBuilder librarySetInvokerB
 {
     public FluentInvocationToolkit(
         ILoggerFactory? loggerFactory = null,
-        LibrarySetInvokerBuilderConfig? settings = null)
-        : this (new LibrarySetInvokerBuilder(loggerFactory, settings))
+        LibrarySetInvokerBuilderConfig? config = null)
+        : this (new LibrarySetInvokerBuilder(loggerFactory, config))
     { }
 
     public ILoggerFactory LoggerFactory => librarySetInvokerBuilder.LoggerFactory;
 
-    public FluentInvocationToolkit AddAssemblies(IEnumerable<AssemblyData> assemblyData)
+    public FluentInvocationToolkit AddAssemblyBinaries(IEnumerable<AssemblyBinary> assemblyBinary)
     {
-        librarySetInvokerBuilder.AddAssemblies(assemblyData);
+        librarySetInvokerBuilder.AddAssemblyBinaries(assemblyBinary);
         return this;
     }
 
@@ -28,5 +28,15 @@ public class FluentInvocationToolkit(LibrarySetInvokerBuilder librarySetInvokerB
     public LibrarySetInvoker CreateLibrarySetInvoker(string name = "")
     {
         return librarySetInvokerBuilder.CreateLibrarySetInvoker(name);
+    }
+}
+
+public static class FluentInvocationToolkitExtensions
+{
+    public static FluentInvocationToolkit AddAssemblyBinaries(
+        this FluentInvocationToolkit invocationToolkit,
+        params AssemblyBinary[] assemblyBinary)
+    {
+        return invocationToolkit.AddAssemblyBinaries(assemblyBinary.AsEnumerable());
     }
 }

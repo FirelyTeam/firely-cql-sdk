@@ -111,21 +111,21 @@ public class ElmToAssemblyProcessor
 
         var cSharps = GenerateCSharp(cSharpCodeProcessor, librarySet, librarySetDefinitions, logger, log, exceptionHandling);
 
-        var assemblyDatas = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat, logger, log, exceptionHandling);
+        var assemblyBinaries = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat, logger, log, exceptionHandling);
 
         var entriesBuilder = entries.ToBuilder();
-        var hasChanged = UpdateStateEntries(assemblyDatas, entriesBuilder, logger);
+        var hasChanged = UpdateStateEntries(assemblyBinaries, entriesBuilder, logger);
         if (hasChanged)
             SetConversions(conversions: entriesBuilder.ToImmutable());
     }
 
     private static bool UpdateStateEntries(
-        IEnumerable<(Library library, AssemblyDataWithSourceCode assemblyDataWithSourceCode)> assemblyDatas,
+        IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> assemblyBinaries,
         ElmToAssemblyConversionDictionary.Builder entriesBuilder,
         ILogger<ElmToAssemblyProcessor> logger)
     {
         bool hasChanged = false;
-        foreach (var (library, (assemblyBinary, sourceCodePerName, debugSymbols)) in assemblyDatas)
+        foreach (var (library, (assemblyBinary, sourceCodePerName, debugSymbols)) in assemblyBinaries)
         {
             var elmVersionedIdentifier = CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier);
             var libraryCompilation = entriesBuilder[key: elmVersionedIdentifier];
@@ -151,7 +151,7 @@ public class ElmToAssemblyProcessor
         return hasChanged;
     }
 
-    private static IEnumerable<(Library library, AssemblyDataWithSourceCode assemblyDataWithSourceCode)> CompileAssemblies(
+    private static IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> CompileAssemblies(
         AssemblyCompiler assemblyCompiler,
         LibrarySet librarySet,
         IEnumerable<(Library library, string cSharp)> cSharps,
@@ -160,7 +160,7 @@ public class ElmToAssemblyProcessor
         LogExceptionMessageAction log,
         ProcessBatchItemExceptionHandling exceptionHandling)
     {
-        var assemblyDatas = assemblyCompiler
+        var assemblyBinaries = assemblyCompiler
                             .CompileDeferred(librarySet, cSharps, debugInformationFormat)
                             .Select(t =>
                             {
@@ -168,7 +168,7 @@ public class ElmToAssemblyProcessor
                                 logger.LogInformation("Compiling assembly for library : {libraryName}", libraryName);
                                 return t;
                             })
-                            .TryProcessEach(t => (t.library, assemblyDataWithSourceCode: t.generateAssemblyDataWithSourceCode()))
+                            .TryProcessEach(t => (t.library, assemblyBinaryWithSourceCode: t.generateAssemblyBinaryWithSourceCode()))
                             .WithEachException(t =>
                             {
                                 var libraryName = t.Input.library.identifier;
@@ -177,7 +177,7 @@ public class ElmToAssemblyProcessor
                             .HandleExceptions(exceptionHandling)
             //.ToArray()
             ;
-        return assemblyDatas;
+        return assemblyBinaries;
     }
 
     private static IEnumerable<(Library library, string cSharp)> GenerateCSharp(

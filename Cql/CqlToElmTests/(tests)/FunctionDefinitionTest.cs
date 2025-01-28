@@ -292,8 +292,12 @@ namespace Hl7.Cql.CqlToElm.Test
             expr.Parameters.Should().HaveCount(2);
             expr.Parameters[1].Name.Should().Be("decimal");
 
-            using var scope = cqlApi.CreateLibrarySetInvoker();
-            _ = scope;
+            var act = () =>
+            {
+                using var librarySetInvoker = cqlApi.CreateLibrarySetInvoker();
+                _ = librarySetInvoker;
+            };
+            act.Should().NotThrow();
         }
     }
 }

@@ -38,7 +38,7 @@ internal class ResourcePackager(
         DirectoryInfo cqlDirectory,
         string? resourceCanonicalRootUrl,
         LibrarySet elmLibrarySet,
-        IReadOnlyDictionary<string, AssemblyDataWithSourceCode> assembliesByLibraryName)
+        IReadOnlyDictionary<string, AssemblyBinaryWithSourceCode> assembliesByLibraryName)
     {
         var resources = new List<FhirResource>();
         var librariesByVersionedIdentifier = new Dictionary<string, FhirLibrary>();
@@ -269,7 +269,7 @@ internal static class LibraryPackager
         FileInfo elmFile,
         FileInfo? cqlFile,
         string? resourceCanonicalRootUrl,
-        AssemblyDataWithSourceCode assemblyDataWithSourceCode,
+        AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode,
         CqlTypeToFhirTypeMapper cqlTypeToFhirTypeMapper,
         ElmLibrary? elmLibrary = null)
     {
@@ -289,7 +289,7 @@ internal static class LibraryPackager
         if (cqlFile!.Exists)
             cqlBytes = File.ReadAllBytes(cqlFile.FullName);
 
-        return CreateLibraryResource(cqlTypeToFhirTypeMapper, elmLibrary, elmBytes, cqlBytes, assemblyDataWithSourceCode.AssemblyBytes, assemblyDataWithSourceCode.SourceCode, resourceCanonicalRootUrl, elmFileLastWriteTimeUtc);
+        return CreateLibraryResource(cqlTypeToFhirTypeMapper, elmLibrary, elmBytes, cqlBytes, assemblyBinaryWithSourceCode.AssemblyBytes, assemblyBinaryWithSourceCode.SourceCode, resourceCanonicalRootUrl, elmFileLastWriteTimeUtc);
     }
 
     public static FhirLibrary CreateLibraryResource(

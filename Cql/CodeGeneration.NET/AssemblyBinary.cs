@@ -9,16 +9,16 @@
 namespace Hl7.Cql.CodeGeneration.NET;
 
 /// <summary>
-/// Stores information about a dynamically generated assembly.
+/// Contains the binary data for an assembly, and optionally its debug symbols.
 /// </summary>
 /// <param name="AssemblyBytes">This assembly's binary data.</param>
-/// <param name="DebugSymbolsBytes">The assembly's debug symbols in binary data.</param>
-public record AssemblyData(
+/// <param name="DebugSymbolsBytes">The assembly's debug symbols.</param>
+public record AssemblyBinary(
     byte[]? AssemblyBytes,
     byte[]? DebugSymbolsBytes = null)
 {
     /// <summary>
-    /// An empty instance of <see cref="AssemblyData"/>.
+    /// An empty instance of <see cref="AssemblyBinary"/>.
     /// </summary>
-    public static AssemblyData Default { get; } = new(null!, null!);
+    public static AssemblyBinary Default { get; } = new(null!, null!);
 }

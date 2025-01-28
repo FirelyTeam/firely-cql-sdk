@@ -9,7 +9,6 @@ using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Hl7.Cql.CodeGeneration.NET;
-using AssemblyData = Hl7.Cql.CodeGeneration.NET.AssemblyData;
 
 namespace CLI
 {
@@ -32,11 +31,11 @@ namespace CLI
             //used for debugging with breakpoints in Measures.* project
             //if used in production scenario compile measures.* dll and reference it below instead, example Assembly.LoadFrom("Measures.Authoring")
             //see launchsettings.json
-            var assemblyData = AssemblyData.Default.LoadFromFiles(new FileInfo(_opts.AssemblyPath));
-            using var runtimeScope = new FluentInvocationToolkit()
-                      .AddAssemblies([assemblyData])
+            var assemblyBinary = AssemblyBinary.Default.LoadFromFiles(new FileInfo(_opts.AssemblyPath));
+            using var librarySetInvoker = new FluentInvocationToolkit()
+                      .AddAssemblyBinaries(assemblyBinary)
                       .CreateLibrarySetInvoker();
-            RunShared(_opts, runtimeScope);
+            RunShared(_opts, librarySetInvoker);
         }
 
         public void RunWithResources()

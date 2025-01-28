@@ -7,7 +7,6 @@ using CqlSdkPrototype.Invocation.Fluent;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
-using AssemblyData = Hl7.Cql.CodeGeneration.NET.AssemblyData;
 
 namespace CoreTests;
 
@@ -24,12 +23,12 @@ public class FluentInvocationToolkitTests
                        .Select(dir => Path.GetFullPath(Path.Combine(dir.FullName, "Dlls", "CqlNestedTupleTest-1.0.0.dll")))
                        .First(File.Exists);
         var ctx = FhirCqlContext.ForBundle();
-        using var invocationScope = new FluentInvocationToolkit()
-                                    .AddAssemblies([AssemblyData.Default.LoadFromFiles(new FileInfo(filePath))])
+        using var librarySetInvoker = new FluentInvocationToolkit()
+                                    .AddAssemblyBinaries(AssemblyBinary.Default.LoadFromFiles(new FileInfo(filePath)))
                                     .CreateLibrarySetInvoker();
 
         // Act
-        var result = invocationScope
+        var result = librarySetInvoker
                      .EnumerateLibraryDefinitionsResults(ctx, CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
                      .Select(t => (t.definition, t.getResult()))
                      .ToDictionary();
