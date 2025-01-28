@@ -1,0 +1,93 @@
+{
+  "library": {
+    "identifier": {
+      "id": "ParameterTest",
+      "system": "",
+      "version": "1.0.0"
+    },
+    "schemaIdentifier": {
+      "id": "urn:hl7-org:elm",
+      "version": "r1"
+    },
+    "usings": {
+      "def": [
+        {
+          "localIdentifier": "System",
+          "uri": "urn:hl7-org:elm-types:r1",
+          "version": "1.0.0"
+        }
+      ]
+    },
+    "includes": {
+      "def": []
+    },
+    "parameters": {
+      "def": [
+        {
+          "default": {
+            "type": "Literal",
+            "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+            "value": "5",
+            "resultTypeSpecifier": {
+              "type": "NamedTypeSpecifier",
+              "name": "{urn:hl7-org:elm-types:r1}Integer"
+            },
+            "localId": "2",
+            "locator": "3:24-3:24",
+            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+          },
+          "name": "param",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}Integer"
+          },
+          "localId": "1",
+          "locator": "3:0-3:24"
+        }
+      ]
+    },
+    "codeSystems": {
+      "def": []
+    },
+    "valueSets": {
+      "def": []
+    },
+    "codes": {
+      "def": []
+    },
+    "concepts": {
+      "def": []
+    },
+    "contexts": {
+      "def": []
+    },
+    "statements": {
+      "def": [
+        {
+          "expression": {
+            "type": "ParameterRef",
+            "name": "param",
+            "resultTypeSpecifier": {
+              "type": "NamedTypeSpecifier",
+              "name": "{urn:hl7-org:elm-types:r1}Integer"
+            },
+            "localId": "20",
+            "locator": "5:15-5:15",
+            "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+          },
+          "name": "Output",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}Integer"
+          },
+          "localId": "21",
+          "locator": "5:0-5:15",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+        }
+      ]
+    },
+    "annotation": []
+  }
+}

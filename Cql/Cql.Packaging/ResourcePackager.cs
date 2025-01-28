@@ -268,7 +268,7 @@ file static class MeasurePackager
     }
 }
 
-file static class LibraryPackager
+internal static class LibraryPackager
 {
     public static FhirLibrary CreateLibraryResource(
         FileInfo elmFile,
@@ -301,7 +301,7 @@ file static class LibraryPackager
         if (fhirParameters.Any())
             AddCQLOptions(fhirLibrary, fhirParameters);
 
-        if (cqlFile!.Exists)
+        if (cqlFile?.Exists == true)
             AddCqlAttachment(elmLibrary, fhirLibrary, cqlFile);
 
         AddDllAttachment(elmLibrary, fhirLibrary, assemblyData);
@@ -530,9 +530,13 @@ file static class LibraryPackager
         ParameterDef elmParameter,
         CqlTypeToFhirTypeMapper typeCrosswalk)
     {
-        var typeSpecifier = elmParameter.resultTypeSpecifier ?? elmParameter.parameterTypeSpecifier;
+        var typeSpecifier = elmParameter.resultTypeSpecifier
+                            ?? elmParameter.parameterTypeSpecifier
+                            ?? (elmParameter.resultTypeName is not null ? new NamedTypeSpecifier { name = elmParameter.resultTypeName } : null)
+                            ?? (elmParameter.parameterType is not null ? new NamedTypeSpecifier { name = elmParameter.parameterType } : null);
+
         if (typeSpecifier is null)
-            throw new ArgumentException($"{typeSpecifier} is missing on parameter: {elmParameter.name}",
+            throw new ArgumentException($"TypeSpecifier is missing on parameter: {elmParameter.name}",
                                         nameof(elmParameter));
 
         var type = typeCrosswalk.TypeEntryFor(typeSpecifier);
