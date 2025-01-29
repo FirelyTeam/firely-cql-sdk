@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-namespace API;
+namespace CqlApiExamples;
 
 internal class Directories(string librarySetName)
 {

@@ -1,4 +1,4 @@
-﻿namespace CqlSdkPrototype.Internal;
+﻿namespace CqlApiExamples;
 
 internal readonly record struct Maybe
 {

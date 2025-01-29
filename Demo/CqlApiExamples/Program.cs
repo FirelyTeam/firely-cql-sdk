@@ -6,7 +6,6 @@ using CqlSdkPrototype.Cql.Fluent.Extensions;
 using CqlSdkPrototype.Elm.Fluent;
 using CqlSdkPrototype.Elm.Fluent.Extensions;
 using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Internal;
 using CqlSdkPrototype.Invocation;
 using CqlSdkPrototype.Invocation.Extensions;
 using CqlSdkPrototype.Invocation.Fluent.Extensions;
@@ -16,7 +15,7 @@ using Hl7.Cql.Fhir;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace API;
+namespace CqlApiExamples;
 
 using static FormattableString;
 
