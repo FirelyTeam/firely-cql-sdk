@@ -4,10 +4,12 @@ namespace CqlSdkPrototype.Invocation.Fluent;
 
 public sealed class FluentInvocationToolkit(LibrarySetInvokerBuilder librarySetInvokerBuilder)
 {
+    public FluentInvocationToolkit() : this(default(ILoggerFactory)) { }
+
     public FluentInvocationToolkit(
-        ILoggerFactory? loggerFactory = null,
-        LibrarySetInvokerBuilderConfig? config = null)
-        : this (new LibrarySetInvokerBuilder(loggerFactory, config))
+        ILoggerFactory? loggerFactory/*,
+        LibrarySetInvokerBuilderConfig? config = null*/)
+        : this (new LibrarySetInvokerBuilder(loggerFactory/*, config*/))
     { }
 
     /// <remarks>
@@ -21,12 +23,12 @@ public sealed class FluentInvocationToolkit(LibrarySetInvokerBuilder librarySetI
         return this;
     }
 
-    public FluentInvocationToolkit Reconfigure(
+    /*public FluentInvocationToolkit Reconfigure(
         Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig> configure)
     {
         librarySetInvokerBuilder.Reconfigure(configure(librarySetInvokerBuilder.Config));
         return this;
-    }
+    }*/
 
     public LibrarySetInvoker ToLibrarySetInvoker(string name = "")
     {

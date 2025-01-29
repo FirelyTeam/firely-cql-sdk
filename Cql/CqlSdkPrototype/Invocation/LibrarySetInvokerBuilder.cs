@@ -9,14 +9,14 @@ namespace CqlSdkPrototype.Invocation;
 public sealed class LibrarySetInvokerBuilder
 {
     public LibrarySetInvokerBuilder(
-        ILoggerFactory? loggerFactory = null,
-        LibrarySetInvokerBuilderConfig? config = null)
+        ILoggerFactory? loggerFactory = null/*,
+        LibrarySetInvokerBuilderConfig? config = null*/)
     {
-        config ??= LibrarySetInvokerBuilderConfig.Default;
+        /*config ??= LibrarySetInvokerBuilderConfig.Default;*/
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
         AssemblyBinaries = AssemblyBinaryHashSet.Empty;
-        Config = config;
+        /*Config = config;*/
         _services = LibrarySetInvokerBuilderServices.Create(loggerFactory);
     }
 
@@ -27,7 +27,7 @@ public sealed class LibrarySetInvokerBuilder
 
     public AssemblyBinaryHashSet AssemblyBinaries { get; private set; }
 
-    public LibrarySetInvokerBuilderConfig Config { get; private set; }
+    /*public LibrarySetInvokerBuilderConfig Config { get; private set; }*/
 
     private LibrarySetInvokerBuilderServices _services;
 
@@ -37,12 +37,12 @@ public sealed class LibrarySetInvokerBuilder
         AssemblyBinaries = assemblyBinaries;
     }
 
-    public void Reconfigure(
+    /*public void Reconfigure(
         LibrarySetInvokerBuilderConfig config)
     {
         // No need to recreate services here yet
         Config = config;
-    }
+    }*/
 
     public void AddAssemblyBinaries(IEnumerable<AssemblyBinary> assemblyBinary)
     {

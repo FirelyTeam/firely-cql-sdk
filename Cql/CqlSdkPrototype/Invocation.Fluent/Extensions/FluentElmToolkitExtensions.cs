@@ -5,11 +5,11 @@ namespace CqlSdkPrototype.Invocation.Fluent.Extensions;
 public static class FluentElmToolkitExtensions
 {
     public static FluentInvocationToolkit ToFluentInvocationToolkit(
-        this FluentElmToolkit elmToolkit,
-        Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configureLibrarySetInvokerBuilderSettings = null)
+        this FluentElmToolkit elmToolkit/*,
+        Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configureLibrarySetInvokerBuilderSettings = null*/)
     {
-        var config = LibrarySetInvokerBuilderConfig.Default;
-        if (configureLibrarySetInvokerBuilderSettings is not null) config = configureLibrarySetInvokerBuilderSettings(config);
+        /*var config = LibrarySetInvokerBuilderConfig.Default;
+        if (configureLibrarySetInvokerBuilderSettings is not null) config = configureLibrarySetInvokerBuilderSettings(config);*/
 
         var assemblyBinaries =
             from entry in elmToolkit.ElmToAssemblyCompilations
@@ -19,7 +19,7 @@ public static class FluentElmToolkitExtensions
             let assemblyBinary = new Hl7.Cql.CodeGeneration.NET.AssemblyBinary(assembly, debugSymbols)
             select assemblyBinary;
 
-        var invocationToolkit = new FluentInvocationToolkit(elmToolkit.LoggerFactory, config).AddAssemblyBinaries(assemblyBinaries);
+        var invocationToolkit = new FluentInvocationToolkit(elmToolkit.LoggerFactory/*, config*/).AddAssemblyBinaries(assemblyBinaries);
         return invocationToolkit;
     }
 
@@ -27,12 +27,12 @@ public static class FluentElmToolkitExtensions
     public static LibrarySetInvoker ToLibrarySetInvoker(
 #pragma warning restore RS0026
         this FluentElmToolkit elmToolkit,
-        string name = "",
-        Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configure = null)
+        string name = ""/*,
+        Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configure = null*/)
     {
         return elmToolkit
                .CompileElmToAssemblies()
-               .ToFluentInvocationToolkit(configure)
+               .ToFluentInvocationToolkit(/*configure*/)
                .ToLibrarySetInvoker(name);
     }
 }

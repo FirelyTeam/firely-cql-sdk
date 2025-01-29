@@ -11,13 +11,13 @@ public static class FluentCqlToolkitExtensions
     public static LibrarySetInvoker ToLibrarySetInvoker(
 #pragma warning restore RS0026
         this FluentCqlToolkit cqlToolkit,
-        Func<ElmToAssemblyCompilerConfig, ElmToAssemblyCompilerConfig>? configureElmToAssemblySettings = null,
-        Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configureLibrarySetInvokerBuilderSettings = null,
+        Func<ElmToAssemblyCompilerConfig, ElmToAssemblyCompilerConfig>? configureElmToAssemblySettings = null,/*
+        Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configureLibrarySetInvokerBuilderSettings = null,*/
         string name = "")
     {
         return cqlToolkit
                .TranslateCqlToElm()
                .ToFluentElmToolkit(configureElmToAssemblySettings)
-               .ToLibrarySetInvoker(name, configureLibrarySetInvokerBuilderSettings);
+               .ToLibrarySetInvoker(name/*, configureLibrarySetInvokerBuilderSettings*/);
     }
 }
