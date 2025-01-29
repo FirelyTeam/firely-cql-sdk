@@ -1,60 +1,37 @@
-﻿using System.Text;
-using CqlSdkPrototype.Infrastructure;
-using Hl7.Cql.Abstractions.Infrastructure;
+﻿using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Invocation.Extensions;
 
 public static class LibrarySetInvokerExtensions
 {
-    public static IEnumerable<(CqlVersionedLibraryIdentifier library, string declarationName, Func<object?> getResult)> EnumerateLibrarySetDefinitionsResults(
-        this LibrarySetInvoker scope,
+    public static IEnumerable<(LibraryInvoker libraryInvoker, DefinitionInvoker definitionInvoker, Func<object?> getResult)> EnumerateLibrarySetDefinitionsResults(
+        this LibrarySetInvoker librarySetInvoker,
         CqlContext cqlContext)
     {
-        foreach (var (libId, lib) in scope.LibraryInvokers)
-        {
-            foreach (var (declId, decl) in lib.Definitions)
-            {
-                if (decl.ValueSetId is not null)
-                    continue;
-
-                yield return (libId, declId, () =>
-                                 {
-                                     var result = decl.Invoke(cqlContext);
-                                     return result;
-                                 }
-                );
-            }
-        }
+        foreach (var libraryInvoker in librarySetInvoker.LibraryInvokers.Values)
+            foreach (var (definition, getResult) in libraryInvoker.EnumerateLibraryDefinitionsResults(cqlContext))
+                yield return (libraryInvoker, definition, getResult);
     }
 
-    public static IEnumerable<(string definition, Func<object?> getResult)> EnumerateLibraryDefinitionsResults(
-        this LibrarySetInvoker scope,
+    public static IEnumerable<(LibraryInvoker libraryInvoker, DefinitionInvoker definitionInvoker, Func<object?> getResult)> EnumerateLibraryDefinitionsResults(
+        this LibrarySetInvoker librarySetInvoker,
         CqlContext cqlContext,
-        CqlVersionedLibraryIdentifier library)
+        CqlVersionedLibraryIdentifier cqlVersionedLibraryIdentifier)
     {
-        var lib = scope.LibraryInvokers[library];
-        foreach (var (declId, decl) in lib.Definitions)
-        {
-            if (decl.ValueSetId is not null)
-                continue;
-
-            yield return (declId, () =>
-                             {
-                                 var result = decl.Invoke(cqlContext);
-                                 return result;
-                             }
-            );
-        }
+        var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlVersionedLibraryIdentifier];
+        foreach (var (definitionInvoker, getResult) in libraryInvoker.EnumerateLibraryDefinitionsResults(cqlContext))
+            yield return (libraryInvoker, definitionInvoker, getResult);
     }
+
 
     public static object? GetLibraryDefinitionResult(
-        this LibrarySetInvoker scope,
+        this LibrarySetInvoker librarySetInvoker,
         CqlContext cqlContext,
-        CqlVersionedLibraryIdentifier versionedLibraryIdentifier,
+        CqlVersionedLibraryIdentifier cqlVersionedLibraryIdentifier,
         string definitionName)
     {
-        var libraryInvoker = scope.LibraryInvokers[versionedLibraryIdentifier];
+        var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlVersionedLibraryIdentifier];
         var libraryDeclarationInvoker = libraryInvoker.Definitions[definitionName];
         var result = libraryDeclarationInvoker.Invoke(cqlContext);
         return result;

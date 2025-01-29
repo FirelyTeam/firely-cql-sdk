@@ -19,7 +19,7 @@ public static class AssemblyBinaryExtensions
     /// <param name="self">The assembly data to write.</param>
     /// <param name="assemblyFile">The path to write the assembly to.</param>
     /// <param name="debugSymbolsFile">The path to write the debug symbols to.</param>
-    public static TAssemblyBinary SaveToFiles<TAssemblyBinary>(
+    public static TAssemblyBinary SaveToFile<TAssemblyBinary>(
         this TAssemblyBinary self,
         FileInfo? assemblyFile = null,
         FileInfo? debugSymbolsFile = null)
@@ -48,7 +48,7 @@ public static class AssemblyBinaryExtensions
     /// <param name="assemblyFile">The path to read the assembly from.</param>
     /// <param name="debugSymbolsFile">The path to read the debug symbols from.</param>
     /// <returns></returns>
-    public static TAssemblyBinary LoadFromFiles<TAssemblyBinary>(
+    public static TAssemblyBinary LoadFromFile<TAssemblyBinary>(
         this TAssemblyBinary self,
         FileInfo? assemblyFile = null,
         FileInfo? debugSymbolsFile = null)

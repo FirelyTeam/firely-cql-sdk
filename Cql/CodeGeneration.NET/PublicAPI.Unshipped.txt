@@ -18,8 +18,8 @@ override Hl7.Cql.CodeGeneration.NET.AssemblyBinary.ToString() -> string!
 static Hl7.Cql.CodeGeneration.NET.AssemblyBinary.Default.get -> Hl7.Cql.CodeGeneration.NET.AssemblyBinary!
 static Hl7.Cql.CodeGeneration.NET.AssemblyBinary.operator !=(Hl7.Cql.CodeGeneration.NET.AssemblyBinary? left, Hl7.Cql.CodeGeneration.NET.AssemblyBinary? right) -> bool
 static Hl7.Cql.CodeGeneration.NET.AssemblyBinary.operator ==(Hl7.Cql.CodeGeneration.NET.AssemblyBinary? left, Hl7.Cql.CodeGeneration.NET.AssemblyBinary? right) -> bool
-static Hl7.Cql.CodeGeneration.NET.AssemblyBinaryExtensions.LoadFromFiles<TAssemblyBinary>(this TAssemblyBinary! self, System.IO.FileInfo? assemblyFile = null, System.IO.FileInfo? debugSymbolsFile = null) -> TAssemblyBinary!
-static Hl7.Cql.CodeGeneration.NET.AssemblyBinaryExtensions.SaveToFiles<TAssemblyBinary>(this TAssemblyBinary! self, System.IO.FileInfo? assemblyFile = null, System.IO.FileInfo? debugSymbolsFile = null) -> TAssemblyBinary!
+static Hl7.Cql.CodeGeneration.NET.AssemblyBinaryExtensions.LoadFromFile<TAssemblyBinary>(this TAssemblyBinary! self, System.IO.FileInfo? assemblyFile = null, System.IO.FileInfo? debugSymbolsFile = null) -> TAssemblyBinary!
+static Hl7.Cql.CodeGeneration.NET.AssemblyBinaryExtensions.SaveToFile<TAssemblyBinary>(this TAssemblyBinary! self, System.IO.FileInfo? assemblyFile = null, System.IO.FileInfo? debugSymbolsFile = null) -> TAssemblyBinary!
 virtual Hl7.Cql.CodeGeneration.NET.AssemblyBinary.<Clone>$() -> Hl7.Cql.CodeGeneration.NET.AssemblyBinary!
 virtual Hl7.Cql.CodeGeneration.NET.AssemblyBinary.EqualityContract.get -> System.Type!
 virtual Hl7.Cql.CodeGeneration.NET.AssemblyBinary.Equals(Hl7.Cql.CodeGeneration.NET.AssemblyBinary? other) -> bool

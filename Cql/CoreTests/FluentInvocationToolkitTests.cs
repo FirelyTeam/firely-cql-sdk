@@ -25,13 +25,13 @@ public class FluentInvocationToolkitTests
                        .First(File.Exists);
         var ctx = FhirCqlContext.ForBundle();
         using var librarySetInvoker = new FluentInvocationToolkit()
-                                    .AddAssemblyBinaries(AssemblyBinary.Default.LoadFromFiles(new FileInfo(filePath)))
+                                    .AddAssemblyBinaries(AssemblyBinary.Default.LoadFromFile(new FileInfo(filePath)))
                                     .ToLibrarySetInvoker();
 
         // Act
         var result = librarySetInvoker
                      .EnumerateLibraryDefinitionsResults(ctx, CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
-                     .Select(t => (t.definition, t.getResult()))
+                     .Select(t => (definition: t.definitionInvoker, t.getResult()))
                      .ToDictionary();
 
         // Assert
