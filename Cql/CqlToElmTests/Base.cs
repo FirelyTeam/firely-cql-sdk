@@ -204,7 +204,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     EnableListPromotion: EnableListPromotion,
                     EnableIntervalDemotion: EnableIntervalDemotion,
                     EnableIntervalPromotion: EnableIntervalPromotion,
-                    AllowNullInterval: AllowNullIntervals
+                    AllowNullIntervals: AllowNullIntervals
                 ));
 
         internal static FluentElmToolkit ToFluentElmToolkit(

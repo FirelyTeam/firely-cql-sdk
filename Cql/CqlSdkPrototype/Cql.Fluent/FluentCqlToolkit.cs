@@ -10,19 +10,19 @@ public sealed class FluentCqlToolkit(CqlToElmTranslator cqlToElmTranslator)
     {
     }
 
-    /// <summary>
-    /// For testing purposes only.
-    /// </summary>
+    /// <remarks>
+    /// Used by tests to access the service provider.
+    /// </remarks>>
     internal ServiceProvider ServiceProvider => cqlToElmTranslator.ServiceProvider;
 
-    /// <summary>
+    /// <remarks>
     /// Used by extensions to access the logger factory.
-    /// </summary>
+    /// </remarks>>
     public ILoggerFactory LoggerFactory => cqlToElmTranslator.LoggerFactory;
 
     public CqlToElmTranslatorConfig Config => cqlToElmTranslator.Config;
 
-    public CqlToElmConversionReadOnlyDictionary CqlToElmConversions => cqlToElmTranslator.Conversions;
+    public CqlToElmTranslationReadOnlyDictionary CqlToElmTranslations => cqlToElmTranslator.CqlToElmTranslations;
 
     public FluentCqlToolkit Reconfigure(Func<CqlToElmTranslatorConfig, CqlToElmTranslatorConfig> configure)
     {

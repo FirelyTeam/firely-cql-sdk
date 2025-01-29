@@ -135,7 +135,12 @@ namespace Test
             LogLevel logLevel = LogLevel.Error,
             int cacheSize = 0)
         {
-            return CreateRuntimeScopeFromElmLibraryFile(elmDirectory, lib, version, cacheSize);
+            var loggerFactory = new ServiceCollection()
+                                .AddLogging(builder => builder.AddConsole().SetMinimumLevel(logLevel))
+                                .BuildServiceProvider()
+                                .GetRequiredService<ILoggerFactory>();
+
+            return CreateRuntimeScopeFromElmLibraryFile(elmDirectory, lib, version, cacheSize, loggerFactory);
         }
 
         private static LibrarySetInvoker CreateRuntimeScopeFromElmLibraryFile(

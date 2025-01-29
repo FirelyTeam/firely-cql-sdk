@@ -20,9 +20,9 @@ internal readonly record struct CqlToElmProcessorServices(
     public static CqlToElmProcessorServices Create(
         ILoggerFactory loggerFactory,
         CqlToElmTranslatorConfig config,
-        CqlToElmConversionDictionary conversions)
+        CqlToElmTranslationDictionary translations)
     {
-        var builder = conversions.ToBuilder();
+        var builder = translations.ToBuilder();
         var libraryProvider = new LibraryProvider(builder);
 
         var services = new ServiceCollection();

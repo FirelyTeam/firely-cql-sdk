@@ -13,7 +13,7 @@ public static partial class FluentElmToolkitExtensions
         this FluentElmToolkit elmToolkit,
         FluentCqlToolkit cqlToolkit) =>
         elmToolkit.AddElmLibraries(
-            from entry in cqlToolkit.CqlToElmConversions
+            from entry in cqlToolkit.CqlToElmTranslations
             let elmLibrary = entry.Value.ElmLibrary
             where elmLibrary is not null
             select elmLibrary);

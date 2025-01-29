@@ -16,7 +16,7 @@ public sealed record CqlToElmTranslatorConfig(
     bool EnableListPromotion = false,
     bool EnableIntervalPromotion = false,
     bool EnableIntervalDemotion = false,
-    bool AllowNullInterval = false)
+    bool AllowNullIntervals = false)
 {
     public static CqlToElmTranslatorConfig Default { get; } = new();
 
@@ -31,7 +31,7 @@ public sealed record CqlToElmTranslatorConfig(
     /// The default value is <see langword="false"/>.
     /// </summary>
     /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#predecessor" />
-    public bool AllowNullIntervals { get; init; } = AllowNullInterval;
+    public bool AllowNullIntervals { get; init; } = AllowNullIntervals;
 
     /// <summary>
     /// When <see langword="true"/>, point intervals will automatically be created as necessary from scalar values.

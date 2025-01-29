@@ -4,13 +4,13 @@ using Hl7.Cql.CqlToElm;
 namespace CqlSdkPrototype.Cql.Internal;
 
 /// <summary>
-/// Provides the implementation for <seealso cref="ILibraryProvider"/> which resolves library builders given a library name and version on a <seealso cref="CqlToElmConversionDictionary.Builder"/>.
+/// Provides the implementation for <seealso cref="ILibraryProvider"/> which resolves library builders given a library name and version on a <seealso cref="System.Collections.Immutable.ImmutableDictionary{CqlSdkPrototype.Infrastructure.CqlVersionedLibraryIdentifier,CqlSdkPrototype.Cql.CqlToElmTranslation}.Builder"/>.
 /// </summary>00
 /// <param name="builder"></param>
-internal sealed class LibraryProvider(CqlToElmConversionDictionary.Builder builder)
+internal sealed class LibraryProvider(CqlToElmTranslationDictionary.Builder builder)
     : ILibraryProvider
 {
-    public CqlToElmConversionDictionary.Builder Builder { get; set; } = builder;
+    public CqlToElmTranslationDictionary.Builder Builder { get; set; } = builder;
 
     public bool TryResolveLibrary(
         string libraryName,

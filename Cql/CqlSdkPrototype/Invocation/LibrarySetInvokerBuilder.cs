@@ -1,4 +1,5 @@
 ﻿using CqlSdkPrototype.Internal;
+using CqlSdkPrototype.Invocation.Fluent;
 using CqlSdkPrototype.Invocation.Internal;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
@@ -19,9 +20,9 @@ public sealed class LibrarySetInvokerBuilder
         _services = LibrarySetInvokerBuilderServices.Create(loggerFactory);
     }
 
-    /// <summary>
-    /// Access by the FluentInvocationToolkit.
-    /// </summary>
+    /// <remarks>
+    /// Used by extensions on the <seealso cref="FluentInvocationToolkit"/> to access the logger factory.
+    /// </remarks>>
     internal ILoggerFactory LoggerFactory { get; }
 
     public AssemblyBinaryHashSet AssemblyBinaries { get; private set; }

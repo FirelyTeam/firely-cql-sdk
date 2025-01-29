@@ -12,7 +12,7 @@ public static partial class FluentCqlToolkitExtensions
 
         var logger = cqlToolkit.CreateLogger();
 
-        foreach (var (libraryName, (_, elmLibrary)) in cqlToolkit.CqlToElmConversions)
+        foreach (var (libraryName, (_, elmLibrary)) in cqlToolkit.CqlToElmTranslations)
         {
             if (elmLibrary == null)
                 continue;

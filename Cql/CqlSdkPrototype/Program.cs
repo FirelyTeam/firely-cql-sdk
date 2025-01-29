@@ -207,7 +207,7 @@ file static class X
 
     public static Maybe<(CqlVersionedLibraryIdentifier id, string elmJson)> TryGetFirstElmFileLines(
         this FluentCqlToolkit cqlToolkit) =>
-        cqlToolkit.CqlToElmConversions
+        cqlToolkit.CqlToElmTranslations
               .TryGetFirst(kv => kv.Value.ElmLibrary is not null)
               .TryReturn(kv => (kv.Key, kv.Value.ElmLibrary!.SerializeToJson()!));
 }

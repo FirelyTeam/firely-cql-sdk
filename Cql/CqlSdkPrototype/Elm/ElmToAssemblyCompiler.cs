@@ -1,4 +1,5 @@
-﻿using CqlSdkPrototype.Elm.Internal;
+﻿using CqlSdkPrototype.Elm.Fluent;
+using CqlSdkPrototype.Elm.Internal;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions.Exceptions;
@@ -18,32 +19,32 @@ public sealed class ElmToAssemblyCompiler
         config ??= ElmToAssemblyCompilerConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
-        _compilations = ElmToAssemblyCompilationDictionary.Empty;
+        _elmToAssemblyCompilations = ElmToAssemblyCompilationDictionary.Empty;
         Config = config;
         _services = ElmToAssemblyProcessorServices.Create(loggerFactory, config);
     }
 
-    private ElmToAssemblyCompilationDictionary _compilations;
+    private ElmToAssemblyCompilationDictionary _elmToAssemblyCompilations;
     private ElmToAssemblyProcessorServices _services;
 
-    /// <summary>
-    /// Access by the FluentInvocationToolkit.
-    /// </summary>
+    /// <remarks>
+    /// Used by extensions on the <seealso cref="FluentElmToolkit"/> to access the logger factory.
+    /// </remarks>>
     internal ILoggerFactory LoggerFactory { get; }
 
-    /// <summary>
-    /// For testing purposes only.
-    /// </summary>
+    /// <remarks>
+    /// Used by tests on the <seealso cref="FluentElmToolkit"/> to access the service provider.
+    /// </remarks>>
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
     public ElmToAssemblyCompilerConfig Config { get; private set; }
 
-    public ElmToAssemblyCompilationReadOnlyDictionary ElmToAssemblyCompilations => _compilations;
+    public ElmToAssemblyCompilationReadOnlyDictionary ElmToAssemblyCompilations => _elmToAssemblyCompilations;
 
-    private void SetConversions(
-        ElmToAssemblyCompilationDictionary conversions)
+    private void SetElmToAssemblyCompilations(
+        ElmToAssemblyCompilationDictionary elmToAssemblyCompilations)
     {
-        _compilations = conversions;
+        _elmToAssemblyCompilations = elmToAssemblyCompilations;
     }
 
     public void Reconfigure(
@@ -59,7 +60,7 @@ public sealed class ElmToAssemblyCompiler
 
     public void AddElmLibraries(IEnumerable<Library> libraries)
     {
-        var entries = _compilations.ToBuilder();
+        var entries = _elmToAssemblyCompilations.ToBuilder();
         var hasChanged = false;
         foreach (var library in libraries)
         {
@@ -80,12 +81,12 @@ public sealed class ElmToAssemblyCompiler
         }
 
         if (hasChanged)
-            SetConversions(conversions: entries.ToImmutable());
+            SetElmToAssemblyCompilations(elmToAssemblyCompilations: entries.ToImmutable());
     }
 
     public void CompileElmToAssemblies()
     {
-        var entries = _compilations;
+        var entries = _elmToAssemblyCompilations;
         if (entries.Values.All(predicate: lc => lc is { AssemblyBinary: not null })) return;
 
         using var servicesScope = _services.CreateScopedState();
@@ -114,7 +115,7 @@ public sealed class ElmToAssemblyCompiler
         var entriesBuilder = entries.ToBuilder();
         var hasChanged = UpdateStateEntries(assemblyBinaries, entriesBuilder, logger);
         if (hasChanged)
-            SetConversions(conversions: entriesBuilder.ToImmutable());
+            SetElmToAssemblyCompilations(elmToAssemblyCompilations: entriesBuilder.ToImmutable());
     }
 
     private static bool UpdateStateEntries(

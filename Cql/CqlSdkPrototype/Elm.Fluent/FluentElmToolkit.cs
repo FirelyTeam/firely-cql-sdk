@@ -10,14 +10,14 @@ public sealed class FluentElmToolkit(ElmToAssemblyCompiler elmToAssemblyCompiler
     {
     }
 
-    /// <summary>
-    /// For testing purposes only.
-    /// </summary>
+    /// <remarks>
+    /// Used by tests to access the service provider.
+    /// </remarks>>
     internal ServiceProvider ServiceProvider => elmToAssemblyCompiler.ServiceProvider;
 
-    /// <summary>
+    /// <remarks>
     /// Used by extensions to access the logger factory.
-    /// </summary>
+    /// </remarks>
     public ILoggerFactory LoggerFactory => elmToAssemblyCompiler.LoggerFactory;
 
     public ElmToAssemblyCompilerConfig ProcessorConfig => elmToAssemblyCompiler.Config;
