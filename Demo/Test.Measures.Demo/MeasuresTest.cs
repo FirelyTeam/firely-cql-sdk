@@ -55,7 +55,7 @@ namespace Test
 
             var results = scope
                 .EnumerateLibraryDefinitionsResults(ctx, CqlVersionedLibraryIdentifier.FromNameAndVersion(CqlLibraryIdentifier.Parse(lib), CqlLibraryVersion.Parse(version)))
-                .ToDictionary(t => t.definitionInvoker, t => t.getResult());
+                .ToDictionary(t => t.definitionInvoker.DefinitionName, t => t.getResult());
 
             Assert.IsTrue(results.TryGetValue("Numerator", out var numerator));
             Assert.IsInstanceOfType(numerator, typeof(bool?));
@@ -112,7 +112,7 @@ namespace Test
         {
             return scope
                    .EnumerateLibraryDefinitionsResults(context, CqlVersionedLibraryIdentifier.Parse($"{lib}-{version}"))
-                   .ToDictionary(t => t.definitionInvoker, t => t.getResult());
+                   .ToDictionary(t => t.definitionInvoker.DefinitionName, t => t.getResult());
         }
 
         private static LibrarySetInvoker CreateRuntimeScopeFromFhirResourceFile(

@@ -31,7 +31,7 @@ public class FluentInvocationToolkitTests
         // Act
         var result = librarySetInvoker
                      .EnumerateLibraryDefinitionsResults(ctx, CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
-                     .Select(t => (definition: t.definitionInvoker, t.getResult()))
+                     .Select(t => (definition: t.definitionInvoker.DefinitionName, t.getResult()))
                      .ToDictionary();
 
         // Assert
