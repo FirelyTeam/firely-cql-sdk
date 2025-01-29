@@ -16,68 +16,70 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="input\2\cql\CqlAggregateFunctionsTest-1.0.000.cql" />
-    <None Remove="input\2\cql\CqlAggregateTest-1.0.000.cql" />
-    <None Remove="input\2\cql\CqlArithmeticFunctionsTest-1.0.000.cql" />
-    <None Remove="input\2\cql\CqlComparisonOperatorsTest-1.0.000.cql" />
-    <None Remove="input\2\cql\CqlConditionalOperatorsTest-1.0.000.cql" />
-    <None Remove="input\2\cql\CqlDateTimeOperatorsTest-1.0.000.cql" />
-    <None Remove="input\2\cql\CqlErrorsAndMessagingOperatorsTest-1.0.000.cql" />
-    <None Remove="input\2\cql\CqlIntervalOperatorsTest-1.0.000.cql" />
-    <None Remove="input\2\cql\CqlListOperatorsTest-1.0.000.cql" />
-    <None Remove="input\2\cql\CqlLogicalOperatorsTest-1.0.000.cql" />
-    <None Remove="input\2\cql\CqlNullologicalOperatorsTest-1.0.000.cql" />
-    <None Remove="input\2\cql\CqlStringOperatorsTest-1.0.000.cql" />
-    <None Remove="input\2\cql\CqlTypeOperatorsTest-1.0.000.cql" />
-    <None Remove="input\2\cql\CqlTypesTest-1.0.000.cql" />
-    <None Remove="input\2\cql\ValueLiteralsAndSelectors-1.0.000.cql" />
+    <None Remove="input\Tests\cql\CqlAggregateFunctionsTest-1.0.000.cql" />
+    <None Remove="input\Tests\cql\CqlAggregateTest-1.0.000.cql" />
+    <None Remove="input\Tests\cql\CqlArithmeticFunctionsTest-1.0.000.cql" />
+    <None Remove="input\Tests\cql\CqlComparisonOperatorsTest-1.0.000.cql" />
+    <None Remove="input\Tests\cql\CqlConditionalOperatorsTest-1.0.000.cql" />
+    <None Remove="input\Tests\cql\CqlDateTimeOperatorsTest-1.0.000.cql" />
+    <None Remove="input\Tests\cql\CqlErrorsAndMessagingOperatorsTest-1.0.000.cql" />
+    <None Remove="input\Tests\cql\CqlIntervalOperatorsTest-1.0.000.cql" />
+    <None Remove="input\Tests\cql\CqlListOperatorsTest-1.0.000.cql" />
+    <None Remove="input\Tests\cql\CqlLogicalOperatorsTest-1.0.000.cql" />
+    <None Remove="input\Tests\cql\CqlNullologicalOperatorsTest-1.0.000.cql" />
+    <None Remove="input\Tests\cql\CqlStringOperatorsTest-1.0.000.cql" />
+    <None Remove="input\Tests\cql\CqlTypeOperatorsTest-1.0.000.cql" />
+    <None Remove="input\Tests\cql\CqlTypesTest-1.0.000.cql" />
+    <None Remove="input\Tests\cql\ValueLiteralsAndSelectors-1.0.000.cql" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="input\1\cql\Add3and2.cql" />
-    <Content Include="input\2\cql\CqlAggregateFunctionsTest-1.0.000.cql">
+    <Content Include="input\Add\cql\Add3and2.cql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="input\2\cql\CqlAggregateTest-1.0.000.cql">
+    <Content Include="input\Tests\cql\CqlAggregateFunctionsTest-1.0.000.cql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="input\2\cql\CqlArithmeticFunctionsTest-1.0.000.cql">
+    <Content Include="input\Tests\cql\CqlAggregateTest-1.0.000.cql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="input\2\cql\CqlComparisonOperatorsTest-1.0.000.cql">
+    <Content Include="input\Tests\cql\CqlArithmeticFunctionsTest-1.0.000.cql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="input\2\cql\CqlConditionalOperatorsTest-1.0.000.cql">
+    <Content Include="input\Tests\cql\CqlComparisonOperatorsTest-1.0.000.cql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="input\2\cql\CqlDateTimeOperatorsTest-1.0.000.cql">
+    <Content Include="input\Tests\cql\CqlConditionalOperatorsTest-1.0.000.cql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="input\2\cql\CqlErrorsAndMessagingOperatorsTest-1.0.000.cql">
+    <Content Include="input\Tests\cql\CqlDateTimeOperatorsTest-1.0.000.cql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="input\2\cql\CqlIntervalOperatorsTest-1.0.000.cql">
+    <Content Include="input\Tests\cql\CqlErrorsAndMessagingOperatorsTest-1.0.000.cql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="input\2\cql\CqlListOperatorsTest-1.0.000.cql">
+    <Content Include="input\Tests\cql\CqlIntervalOperatorsTest-1.0.000.cql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="input\2\cql\CqlLogicalOperatorsTest-1.0.000.cql">
+    <Content Include="input\Tests\cql\CqlListOperatorsTest-1.0.000.cql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="input\2\cql\CqlNullologicalOperatorsTest-1.0.000.cql">
+    <Content Include="input\Tests\cql\CqlLogicalOperatorsTest-1.0.000.cql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="input\2\cql\CqlStringOperatorsTest-1.0.000.cql">
+    <Content Include="input\Tests\cql\CqlNullologicalOperatorsTest-1.0.000.cql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="input\2\cql\CqlTypeOperatorsTest-1.0.000.cql">
+    <Content Include="input\Tests\cql\CqlStringOperatorsTest-1.0.000.cql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="input\2\cql\CqlTypesTest-1.0.000.cql">
+    <Content Include="input\Tests\cql\CqlTypeOperatorsTest-1.0.000.cql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="input\2\cql\ValueLiteralsAndSelectors-1.0.000.cql">
+    <Content Include="input\Tests\cql\CqlTypesTest-1.0.000.cql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="input\Tests\cql\ValueLiteralsAndSelectors-1.0.000.cql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

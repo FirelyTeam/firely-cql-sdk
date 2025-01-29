@@ -11,7 +11,7 @@ internal class Directories(string librarySetName)
                "Demo"
             or "CMS"
             or "Authoring"
-            or "Examples");
+            or "Tests");
         return new Directories(librarySetName);
     }
 
@@ -35,13 +35,13 @@ internal class Directories(string librarySetName)
     public static DirectoryInfo LibrarySetsDirectory { get; } = CurrentSolutionDirectory.CreateSubdirectory("LibrarySets");
 
     public string LibrarySetName { get; } = librarySetName;
-    public DirectoryInfo GeneratedDirectory => CurrentProjectDirectory.CreateSubdirectory("generated").CreateSubdirectory(LibrarySetName);
+    public DirectoryInfo GeneratedDirectory => CurrentDirectory.CreateSubdirectory("output").CreateSubdirectory(LibrarySetName);
     public DirectoryInfo CqlInDirectory =>
         LibrarySetName switch
         {
-            "Examples" => CurrentProjectDirectory.CreateSubdirectory("examples"),
+            "Tests"     => CurrentDirectory.CreateSubdirectory("input").CreateSubdirectory(LibrarySetName).CreateSubdirectory("cql"),
             "Authoring" => AuthoringProjectDirectory.CreateSubdirectory("Input").CreateSubdirectory("cql"),
-            _ => LibrarySetsDirectory.CreateSubdirectory(LibrarySetName).CreateSubdirectory("Cql")
+            _           => LibrarySetsDirectory.CreateSubdirectory(LibrarySetName).CreateSubdirectory("Cql")
         };
 
     public DirectoryInfo ElmInDirectory => LibrarySetsDirectory.CreateSubdirectory(LibrarySetName).CreateSubdirectory("Elm");

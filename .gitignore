@@ -407,5 +407,3 @@ VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/results/*.json
 /Demo/**/Resources/*.*
 #remove global.json for testing dotnet sdk updates
 global.json
-#remove all files under generated
-**/generated/*.*

@@ -32,11 +32,12 @@ internal static class Program
         InvokeCqlFromExamplesFolder(loggerFactory);
 
         var shouldBuildCqlToElm = true;
-        string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Examples"];
-        FullExample(loggerFactory, "Examples", shouldBuildCqlToElm: shouldBuildCqlToElm);
+        string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests"];
         foreach (var exampleSetName in exampleSetNames)
-            FullExample(loggerFactory, exampleSetName, shouldBuildCqlToElm);
-
+        {
+            Directories dirs = Directories.Create(exampleSetName);
+            FullExample(loggerFactory, dirs, shouldBuildCqlToElm);
+        }
     }
 
     private static void InvokeCqlExample(
@@ -60,7 +61,10 @@ internal static class Program
         var cqlContext = FhirCqlContext.ForBundle();
         using var librarySetInvoker = cqlToolkit
                                       .AddCqlLibraryString(cqlLibraryString)
-                                      .ToLibrarySetInvoker(elmOpt => elmOpt with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded });
+                                      .ToLibrarySetInvoker(elmOpt => elmOpt with
+                                      {
+                                          AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded
+                                      });
         var result = librarySetInvoker.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.VersionedLibraryIdentifier, "Three");
         Debug.Assert(result is 3);
     }
@@ -74,7 +78,7 @@ internal static class Program
         var logger = loggerFactory.CreateLogger(typeof(Program));
 
         // "Directories" is not a part of the API, but a helper class for this example
-        var dirs = Directories.Create("Examples");
+        var dirs = Directories.Create("Tests");
 
         // Create fluent cql toolkit
         var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
@@ -85,7 +89,10 @@ internal static class Program
 
         // We need a disposable invocation scope, which contains the AssemblyLoadContext and the related library Assemblies.
         using var librarySetInvoker = cqlToolkit
-                                      .Reconfigure(o => o with { ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue })
+                                      .Reconfigure(o => o with
+                                      {
+                                          ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
+                                      })
                                       .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory)
                                       .ToLibrarySetInvoker();
         logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDeclarations());
@@ -103,7 +110,7 @@ internal static class Program
 
     private static void FullExample(
         ILoggerFactory loggerFactory,
-        string exampleSetName,
+        Directories dirs,
         bool shouldBuildCqlToElm = false)
     {
         // INTRO:
@@ -112,15 +119,13 @@ internal static class Program
         // It also demonstrates how to execute a library.
 
         var logger = loggerFactory.CreateLogger(typeof(Program));
-        Directories dirs = Directories.Create(exampleSetName);
         dirs.GeneratedDirectory.Delete(recursive: true);
 
         // Create fluent cql toolkit
         var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        FluentCqlToolkit cqlToolkit = new FluentCqlToolkit(loggerFactory, cqlToElmProcessorSettings);
-
-
-        cqlToolkit.Reconfigure(o => o with { ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue });
+        FluentCqlToolkit cqlToolkit =
+            new FluentCqlToolkit(loggerFactory, cqlToElmProcessorSettings)
+                .ConfigIgnoreExceptions();
 
         if (shouldBuildCqlToElm)
         {
@@ -131,25 +136,27 @@ internal static class Program
                 ;
         }
 
-        var elmToolkit = cqlToolkit.ToFluentElmToolkit(o => o with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded })
-                           .AddElmFilesFromDirectory(dirs.ElmInDirectory)
-                           .CompileElmToAssemblies()
-                           .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
-                           .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory);
+        var elmToolkit = cqlToolkit
+                         .ToFluentElmToolkit()
+                         .ConfigAssemblyDebugInformationToEmbedded()
+                         .AddElmFilesFromDirectory(dirs.ElmInDirectory)
+                         .CompileElmToAssemblies()
+                         .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
+                         .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory);
 
         cqlToolkit.TryGetFirstElmFileLines()
-              .Switch(t => logger.LogInformation(
-                          $"""
-                           First 50 ELM lines for {t.id}:
-                           {t.elmJson.TakeLines(50)}
-                           """));
+                  .Switch(t => logger.LogInformation(
+                              $"""
+                               First 50 ELM lines for {t.id}:
+                               {t.elmJson.TakeLines(50)}
+                               """));
 
         elmToolkit.TryGetFirstCSharpFileLines()
-              .Switch(t => logger.LogInformation(
-                          $"""
-                           First 50 C# lines for {t.id}:
-                           {t.cSharpSourceCode.TakeLines(50)}
-                           """));
+                  .Switch(t => logger.LogInformation(
+                              $"""
+                               First 50 C# lines for {t.id}:
+                               {t.cSharpSourceCode.TakeLines(50)}
+                               """));
     }
 
 
@@ -197,7 +204,6 @@ internal static class Program
         return loggerFactory;
     }
 }
-
 
 file static class Extensions
 {
