@@ -4,13 +4,14 @@ using Hl7.Cql.CqlToElm;
 namespace CqlSdkPrototype.Cql.Internal;
 
 /// <summary>
-/// Provides the implementation for <seealso cref="ILibraryProvider"/> which resolves library builders given a library name and version on a <seealso cref="CqlToElmTranslationDictionary.Builder"/>.
-/// </summary>00
-/// <param name="builder"></param>
-internal sealed class LibraryProvider(CqlToElmTranslationDictionary.Builder builder)
+/// Provides the implementation for <seealso cref="ILibraryProvider"/>
+/// which resolves a <seealso cref="LibraryBuilder"/> given a library name and version on a <seealso cref="CqlToElmTranslationDictionary.Builder"/>.
+/// </summary>
+/// <param name="translationsBuilder"></param>
+internal sealed class LibraryBuilderProvider(CqlToElmTranslationDictionary.Builder translationsBuilder)
     : ILibraryProvider
 {
-    public CqlToElmTranslationDictionary.Builder Builder { get; set; } = builder;
+    public CqlToElmTranslationDictionary.Builder TranslationsBuilder { get; set; } = translationsBuilder;
 
     public bool TryResolveLibrary(
         string libraryName,
@@ -25,7 +26,8 @@ internal sealed class LibraryProvider(CqlToElmTranslationDictionary.Builder buil
             CqlLibraryIdentifier.Parse(libraryName),
             version is null ? null : CqlLibraryVersion.Parse(version));
 
-        if (Builder.TryGetValue(libVer, out var processItem) && processItem.ElmLibraryBuilder is { } lb)
+        if (TranslationsBuilder.TryGetValue(libVer, out var processItem)
+            && processItem.ElmLibraryBuilder is { } lb)
         {
             libraryBuilder = lb;
             return true;

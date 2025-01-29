@@ -20,8 +20,14 @@ public sealed record CqlToElmTranslatorConfig(
 {
     public static CqlToElmTranslatorConfig Default { get; } = new();
 
+    /// <summary>
+    /// The model information to use when translating CQL to ELM.
+    /// </summary>
     public ImmutableHashSet<CqlModel> Models { get; init; } = Models ?? [];
 
+    /// <summary>
+    /// The model information to use when translating CQL to ELM.
+    /// </summary>
     public ImmutableHashSet<ModelInfo> ModelInfos { get; init; } = ModelInfos ?? [];
 
     /// <summary>

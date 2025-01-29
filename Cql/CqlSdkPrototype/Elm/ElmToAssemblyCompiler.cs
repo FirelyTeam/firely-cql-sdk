@@ -10,8 +10,16 @@ using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Elm;
 
+/// <summary>
+/// Compiles ELM (Expression Logical Model) into .NET assemblies.
+/// </summary>
 public sealed class ElmToAssemblyCompiler
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="ElmToAssemblyCompiler"/> class.
+    /// </summary>
+    /// <param name="loggerFactory">The logger factory to use for logging.</param>
+    /// <param name="config">The configuration for the compiler.</param>
     public ElmToAssemblyCompiler(
         ILoggerFactory? loggerFactory = null,
         ElmToAssemblyCompilerConfig? config = null)
@@ -27,26 +35,40 @@ public sealed class ElmToAssemblyCompiler
     private ElmToAssemblyCompilationDictionary _elmToAssemblyCompilations;
     private ElmToAssemblyProcessorServices _services;
 
-    /// <remarks>
-    /// Used by extensions on the <seealso cref="FluentElmToolkit"/> to access the logger factory.
-    /// </remarks>>
+    /// <summary>
+    /// Gets the logger factory used by extensions via <seealso cref="FluentElmToolkit.LoggerFactory"/>.
+    /// </summary>
     internal ILoggerFactory LoggerFactory { get; }
 
-    /// <remarks>
-    /// Used by tests on the <seealso cref="FluentElmToolkit"/> to access the service provider.
-    /// </remarks>>
+    /// <summary>
+    /// Gets the service provider used by tests via <seealso cref="FluentElmToolkit.ServiceProvider"/>.
+    /// </summary>
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
+    /// <summary>
+    /// Gets the configuration for the compiler.
+    /// </summary>
     public ElmToAssemblyCompilerConfig Config { get; private set; }
 
+    /// <summary>
+    /// Gets the dictionary of ELM to assembly compilations.
+    /// </summary>
     public ElmToAssemblyCompilationReadOnlyDictionary ElmToAssemblyCompilations => _elmToAssemblyCompilations;
 
-    private void SetElmToAssemblyCompilations(
+    /// <summary>
+    /// Sets the conversions for the ELM to assembly compilations.
+    /// </summary>
+    /// <param name="elmToAssemblyCompilations">The dictionary of ELM to assembly compilations.</param>
+    private void SetConversions(
         ElmToAssemblyCompilationDictionary elmToAssemblyCompilations)
     {
         _elmToAssemblyCompilations = elmToAssemblyCompilations;
     }
 
+    /// <summary>
+    /// Reconfigures the compiler with the specified configuration.
+    /// </summary>
+    /// <param name="config">The new configuration for the compiler.</param>
     public void Reconfigure(
         ElmToAssemblyCompilerConfig config)
     {
@@ -58,6 +80,10 @@ public sealed class ElmToAssemblyCompiler
         _services = ElmToAssemblyProcessorServices.Create(LoggerFactory, config);
     }
 
+    /// <summary>
+    /// Adds ELM libraries to the compiler.
+    /// </summary>
+    /// <param name="libraries">The libraries to add.</param>
     public void AddElmLibraries(IEnumerable<Library> libraries)
     {
         var entries = _elmToAssemblyCompilations.ToBuilder();
@@ -81,9 +107,12 @@ public sealed class ElmToAssemblyCompiler
         }
 
         if (hasChanged)
-            SetElmToAssemblyCompilations(elmToAssemblyCompilations: entries.ToImmutable());
+            SetConversions(elmToAssemblyCompilations: entries.ToImmutable());
     }
 
+    /// <summary>
+    /// Compiles the ELM libraries into .NET assemblies.
+    /// </summary>
     public void CompileElmToAssemblies()
     {
         var entries = _elmToAssemblyCompilations;
@@ -115,9 +144,16 @@ public sealed class ElmToAssemblyCompiler
         var entriesBuilder = entries.ToBuilder();
         var hasChanged = UpdateStateEntries(assemblyBinaries, entriesBuilder, logger);
         if (hasChanged)
-            SetElmToAssemblyCompilations(elmToAssemblyCompilations: entriesBuilder.ToImmutable());
+            SetConversions(elmToAssemblyCompilations: entriesBuilder.ToImmutable());
     }
 
+    /// <summary>
+    /// Updates the state entries with the compiled assemblies.
+    /// </summary>
+    /// <param name="assemblyBinaries">The compiled assemblies.</param>
+    /// <param name="entriesBuilder">The builder for the entries dictionary.</param>
+    /// <param name="logger">The logger to use for logging.</param>
+    /// <returns><see langword="true"/> if the state entries were updated; otherwise, <see langword="false"/>.</returns>
     private static bool UpdateStateEntries(
         IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> assemblyBinaries,
         ElmToAssemblyCompilationDictionary.Builder entriesBuilder,
@@ -150,6 +186,17 @@ public sealed class ElmToAssemblyCompiler
         return hasChanged;
     }
 
+    /// <summary>
+    /// Compiles the C# code into .NET assemblies.
+    /// </summary>
+    /// <param name="assemblyCompiler">The assembly compiler to use.</param>
+    /// <param name="librarySet">The set of libraries to compile.</param>
+    /// <param name="cSharps">The C# code to compile.</param>
+    /// <param name="debugInformationFormat">The format for debug information.</param>
+    /// <param name="logger">The logger to use for logging.</param>
+    /// <param name="log">The action to log exceptions.</param>
+    /// <param name="exceptionHandling">The exception handling strategy.</param>
+    /// <returns>The compiled assemblies.</returns>
     private static IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> CompileAssemblies(
         AssemblyCompiler assemblyCompiler,
         LibrarySet librarySet,
@@ -173,12 +220,20 @@ public sealed class ElmToAssemblyCompiler
                                 var libraryName = t.Input.library.identifier;
                                 log(t.Exception, "Error compiling assembly for library: {libraryName}", libraryName);
                             })
-                            .HandleExceptions(exceptionHandling)
-            //.ToArray()
-            ;
+                            .HandleExceptions(exceptionHandling);
         return assemblyBinaries;
     }
 
+    /// <summary>
+    /// Generates the C# code for the libraries.
+    /// </summary>
+    /// <param name="cSharpCodeProcessor">The C# code processor to use.</param>
+    /// <param name="librarySet">The set of libraries to generate code for.</param>
+    /// <param name="librarySetDefinitions">The definitions for the library set.</param>
+    /// <param name="logger">The logger to use for logging.</param>
+    /// <param name="log">The action to log exceptions.</param>
+    /// <param name="exceptionHandling">The exception handling strategy.</param>
+    /// <returns>The generated C# code.</returns>
     private static IEnumerable<(Library library, string cSharp)> GenerateCSharp(
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor,
         LibrarySet librarySet,
@@ -205,6 +260,15 @@ public sealed class ElmToAssemblyCompiler
         return cSharps;
     }
 
+    /// <summary>
+    /// Builds the library set definitions.
+    /// </summary>
+    /// <param name="librarySetExpressionBuilderScoped">The library set expression builder to use.</param>
+    /// <param name="librarySet">The set of libraries to build definitions for.</param>
+    /// <param name="logger">The logger to use for logging.</param>
+    /// <param name="log">The action to log exceptions.</param>
+    /// <param name="exceptionHandling">The exception handling strategy.</param>
+    /// <returns>The dictionary of library set definitions.</returns>
     private static DefinitionDictionary<LambdaExpression> BuildLibrarySetDefinitions(
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped,
         LibrarySet librarySet,

@@ -7,8 +7,16 @@ using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Cql;
 
+/// <summary>
+/// Translates CQL libraries to ELM libraries.
+/// </summary>
 public sealed class CqlToElmTranslator
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="CqlToElmTranslator"/> class.
+    /// </summary>
+    /// <param name="loggerFactory">The logger factory to use for logging.</param>
+    /// <param name="config">The configuration settings for the translator.</param>
     public CqlToElmTranslator(
         ILoggerFactory? loggerFactory = null,
         CqlToElmTranslatorConfig? config = null)
@@ -18,33 +26,47 @@ public sealed class CqlToElmTranslator
         LoggerFactory = loggerFactory;
         _cqlToElmTranslations = CqlToElmTranslationDictionary.Empty;
         Config = config;
-        _services = CqlToElmProcessorServices.Create(loggerFactory, config, _cqlToElmTranslations);
+        _services = CqlToElmTranslatorServices.Create(loggerFactory, config, _cqlToElmTranslations);
     }
 
     private CqlToElmTranslationDictionary _cqlToElmTranslations;
-    private CqlToElmProcessorServices _services;
+    private CqlToElmTranslatorServices _services;
 
-    /// <remarks>
-    /// Used by extensions on the <seealso cref="FluentCqlToolkit"/> to access the logger factory.
-    /// </remarks>>
+    /// <summary>
+    /// Gets the logger factory used by extensions via <see cref="FluentCqlToolkit.LoggerFactory"/>.
+    /// </summary>
     internal ILoggerFactory LoggerFactory { get; }
 
-    /// <remarks>
-    /// Used by tests on the <seealso cref="FluentCqlToolkit"/> to access the service provider.
-    /// </remarks>>
+    /// <summary>
+    /// Gets the service provider used by tests via <see cref="FluentCqlToolkit.ServiceProvider"/>.
+    /// </summary>
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
+    /// <summary>
+    /// Gets the configuration settings for the translator.
+    /// </summary>
     public CqlToElmTranslatorConfig Config { get; private set; }
 
+    /// <summary>
+    /// Gets the dictionary of CQL to ELM translations.
+    /// </summary>
     public CqlToElmTranslationReadOnlyDictionary CqlToElmTranslations => _cqlToElmTranslations;
 
-    private void SetCqlToElmConversions(
+    /// <summary>
+    /// Sets the CQL to ELM conversions.
+    /// </summary>
+    /// <param name="translations">The dictionary of translations to set.</param>
+    private void SetCqlToElmTranslations(
         CqlToElmTranslationDictionary translations)
     {
         _cqlToElmTranslations = translations;
-        _services.LibraryProvider.Builder = translations.ToBuilder();
+        _services.LibraryBuilderProvider.TranslationsBuilder = translations.ToBuilder();
     }
 
+    /// <summary>
+    /// Reconfigures the translator with new configuration settings.
+    /// </summary>
+    /// <param name="config">The new configuration settings.</param>
     public void Reconfigure(
         CqlToElmTranslatorConfig config)
     {
@@ -53,17 +75,21 @@ public sealed class CqlToElmTranslator
 
         _services.ServiceProvider.Dispose();
         Config = config;
-        _services = CqlToElmProcessorServices.Create(_services.LoggerFactory, config, _cqlToElmTranslations);
+        _services = CqlToElmTranslatorServices.Create(_services.LoggerFactory, config, _cqlToElmTranslations);
     }
 
+    /// <summary>
+    /// Adds CQL libraries to the translator.
+    /// </summary>
+    /// <param name="cqlLibraries">The CQL libraries to add.</param>
     public void AddCqlLibraries(IEnumerable<CqlLibraryString> cqlLibraries)
     {
         var logger = _services.Logger;
-        var entriesBuilder = _services.LibraryProvider.Builder;
+        var entriesBuilder = _services.LibraryBuilderProvider.TranslationsBuilder;
         LogExceptionMessageAction log = logger.GetLogExceptionMessageAction(Config.ProcessBatchItemExceptionHandling);
 
         int addedCount =
-                AddTranslations(cqlLibraries, entriesBuilder)
+                BuildTranslations(cqlLibraries, entriesBuilder)
                     .TryProcessEach(t => (t.cqlLibraryString, cqlToElmTranslation: t.cqlToElmTranslationFn()))
                     .WithEachException(outcome =>
                     {
@@ -74,12 +100,17 @@ public sealed class CqlToElmTranslator
                     .Count() // We must enumerate all
             ;
 
-
         if (addedCount > 0)
-            SetCqlToElmConversions(translations: entriesBuilder.ToImmutable());
+            SetCqlToElmTranslations(translations: entriesBuilder.ToImmutable());
     }
 
-    private IEnumerable<(CqlLibraryString cqlLibraryString, Func<CqlToElmTranslation> cqlToElmTranslationFn)> AddTranslations(
+    /// <summary>
+    /// Builds the translations for the given CQL libraries.
+    /// </summary>
+    /// <param name="cqlLibraries">The CQL libraries to translate.</param>
+    /// <param name="entriesBuilder">The builder for the translation entries.</param>
+    /// <returns>A collection of CQL library strings and their corresponding translation functions.</returns>
+    private IEnumerable<(CqlLibraryString cqlLibraryString, Func<CqlToElmTranslation> cqlToElmTranslationFn)> BuildTranslations(
         IEnumerable<CqlLibraryString> cqlLibraries,
         CqlToElmTranslationDictionary.Builder entriesBuilder)
     {
@@ -104,13 +135,17 @@ public sealed class CqlToElmTranslator
                                  var translation = new CqlToElmTranslation(cqlLibrary) { ElmLibraryBuilder = libraryBuilder };
                                  entriesBuilder.Add(versionedIdentifier, translation);
                                  return translation;
-                             });
+                             }
+            );
         }
     }
 
+    /// <summary>
+    /// Translates the CQL libraries to ELM libraries.
+    /// </summary>
     public void TranslateCqlToElm()
     {
-        CqlToElmTranslationDictionary.Builder processItemsBuilder = _services.LibraryProvider.Builder;
+        CqlToElmTranslationDictionary.Builder processItemsBuilder = _services.LibraryBuilderProvider.TranslationsBuilder;
         var logger = _services.Logger;
         bool atFirst = true;
 
@@ -145,7 +180,7 @@ public sealed class CqlToElmTranslator
             ;
 
         if (changedCount > 0)
-            SetCqlToElmConversions(translations: processItemsBuilder.ToImmutable());
+            SetCqlToElmTranslations(translations: processItemsBuilder.ToImmutable());
 
         void ProcessLibrary(CqlVersionedLibraryIdentifier versionedIdentifier, CqlToElmTranslation cqlTranslationEntry)
         {
