@@ -96,12 +96,12 @@ internal class ResourcePackager(
         foreach (var elmLibrary in elmLibrarySet)
         {
             var elmFile = new FileInfo(Path.Combine(elmDirectory.FullName, $"{elmLibrary.GetVersionedIdentifier()}.json"));
+            var tags = new List<Tag>();
             foreach (var def in elmLibrary.statements ?? [])
             {
                 if (def.annotation == null)
                     continue;
 
-                var tags = new List<Tag>();
                 foreach (var a in def.annotation.OfType<Annotation>())
                 {
                     if (a.t == null)
@@ -114,18 +114,19 @@ internal class ResourcePackager(
                     }
                 }
 
-                var measureAnnotation = tags.SingleOrDefault(t => t?.name == "measure");
-                var yearAnnotation = tags.SingleOrDefault(t => t?.name == "year");
-                if (measureAnnotation != null
-                    && !string.IsNullOrWhiteSpace(measureAnnotation.value)
-                    && yearAnnotation != null
-                    && !string.IsNullOrWhiteSpace(yearAnnotation.value)
-                    && int.TryParse(yearAnnotation.value, out var measureYear))
-                {
-                    FhirMeasure measure = MeasurePackager.CreateMeasureResource(elmFile, resourceCanonicalRootUrl, measureAnnotation, measureYear, librariesByVersionedIdentifier, elmLibrary);
-                    OnResourceCreated(measure);
-                }
             }
+            var measureAnnotation = tags.SingleOrDefault(t => t?.name == "measure");
+            var yearAnnotation = tags.SingleOrDefault(t => t?.name == "year");
+            if (measureAnnotation != null
+                && !string.IsNullOrWhiteSpace(measureAnnotation.value)
+                && yearAnnotation != null
+                && !string.IsNullOrWhiteSpace(yearAnnotation.value)
+                && int.TryParse(yearAnnotation.value, out var measureYear))
+            {
+                FhirMeasure measure = MeasurePackager.CreateMeasureResource(elmFile, resourceCanonicalRootUrl, measureAnnotation, measureYear, librariesByVersionedIdentifier, elmLibrary);
+                OnResourceCreated(measure);
+            }
+
         }
 
         return resources;
@@ -619,7 +620,7 @@ internal static class LibraryPackager
 
                 // "Generic" display
                 (_, CqlPrimitiveType.Fhir) => $"{cqlType}<{cqlElementType}.{type.ElementType!.FhirType}>",
-                (_, { })                   => $"{cqlType}<{cqlElementType}>",
+                (_, { }) => $"{cqlType}<{cqlElementType}>",
 
                 // Non-"Generic" display
                 _ => cqlType.ToString(),
