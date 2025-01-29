@@ -2,7 +2,6 @@
 using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
-using static System.FormattableString;
 
 namespace CqlSdkPrototype.Invocation.Extensions;
 
@@ -59,21 +58,5 @@ public static class LibrarySetInvokerExtensions
         var libraryDeclarationInvoker = libraryInvoker.Definitions[definitionName];
         var result = libraryDeclarationInvoker.Invoke(cqlContext);
         return result;
-    }
-
-    internal static StringBuilder DumpLibraryDeclarations(
-        this LibrarySetInvoker scope,
-        StringBuilder? sb = null)
-    {
-        sb ??= new();
-        sb.AppendLine("Libraries and Declarations:");
-        foreach (var (libId, lib) in scope.LibraryInvokers)
-        {
-            sb.AppendLine(Invariant($"- {libId}"));
-            foreach (var (declId, decl) in lib.Definitions)
-                sb.AppendLine(Invariant($"  - {declId} : {decl.ReturnType.ToCSharpString(TypeCSharpFormat.Default with { UseKeywords = true })}"));
-        }
-
-        return sb;
     }
 }

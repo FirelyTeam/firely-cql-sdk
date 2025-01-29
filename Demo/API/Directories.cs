@@ -1,4 +1,6 @@
-﻿namespace CqlSdkPrototype.Internal;
+﻿using System.Diagnostics;
+
+namespace API;
 
 internal class Directories(string librarySetName)
 {

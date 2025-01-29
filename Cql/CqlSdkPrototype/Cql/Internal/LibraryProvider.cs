@@ -4,7 +4,7 @@ using Hl7.Cql.CqlToElm;
 namespace CqlSdkPrototype.Cql.Internal;
 
 /// <summary>
-/// Provides the implementation for <seealso cref="ILibraryProvider"/> which resolves library builders given a library name and version on a <seealso cref="System.Collections.Immutable.ImmutableDictionary{CqlSdkPrototype.Infrastructure.CqlVersionedLibraryIdentifier,CqlSdkPrototype.Cql.CqlToElmTranslation}.Builder"/>.
+/// Provides the implementation for <seealso cref="ILibraryProvider"/> which resolves library builders given a library name and version on a <seealso cref="CqlToElmTranslationDictionary.Builder"/>.
 /// </summary>00
 /// <param name="builder"></param>
 internal sealed class LibraryProvider(CqlToElmTranslationDictionary.Builder builder)
