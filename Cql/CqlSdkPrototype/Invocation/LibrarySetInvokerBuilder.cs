@@ -6,8 +6,16 @@ using Hl7.Cql.CodeGeneration.NET;
 
 namespace CqlSdkPrototype.Invocation;
 
+
+/// <summary>
+/// Builder class for creating instances of <see cref="LibrarySetInvoker"/>.
+/// </summary>
 public sealed class LibrarySetInvokerBuilder
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="LibrarySetInvokerBuilder"/> class.
+    /// </summary>
+    /// <param name="loggerFactory">Optional logger factory for logging purposes.</param>
     public LibrarySetInvokerBuilder(
         ILoggerFactory? loggerFactory = null/*,
         LibrarySetInvokerBuilderConfig? config = null*/)
@@ -20,17 +28,24 @@ public sealed class LibrarySetInvokerBuilder
         _services = LibrarySetInvokerBuilderServices.Create(loggerFactory);
     }
 
-    /// <remarks>
-    /// Used by extensions on the <seealso cref="FluentInvocationToolkit"/> to access the logger factory.
-    /// </remarks>>
+    /// <summary>
+    /// Gets the logger factory used by extensions on the <see cref="FluentInvocationToolkit"/>.
+    /// </summary>
     internal ILoggerFactory LoggerFactory { get; }
 
+    /// <summary>
+    /// Gets the set of assembly binaries.
+    /// </summary>
     public AssemblyBinaryHashSet AssemblyBinaries { get; private set; }
 
     /*public LibrarySetInvokerBuilderConfig Config { get; private set; }*/
 
     private LibrarySetInvokerBuilderServices _services;
 
+    /// <summary>
+    /// Sets the assembly binaries.
+    /// </summary>
+    /// <param name="assemblyBinaries">The assembly binaries to set.</param>
     private void SetAssemblyBinaries(
         AssemblyBinaryHashSet assemblyBinaries)
     {
@@ -44,6 +59,11 @@ public sealed class LibrarySetInvokerBuilder
         Config = config;
     }*/
 
+    /// <summary>
+    /// Adds assembly binaries to the current set.
+    /// </summary>
+    /// <param name="assemblyBinary">The assembly binaries to add.</param>
+    /// <exception cref="InvalidOperationException">Thrown when AssemblyBytes is null.</exception>
     public void AddAssemblyBinaries(IEnumerable<AssemblyBinary> assemblyBinary)
     {
         _services.Logger.LogInformation("Adding assemblies");
@@ -55,6 +75,11 @@ public sealed class LibrarySetInvokerBuilder
             SetAssemblyBinaries(builder.ToImmutable());
     }
 
+    /// <summary>
+    /// Creates a new instance of <see cref="LibrarySetInvoker"/>.
+    /// </summary>
+    /// <param name="name">The name of the AssemblyLoadContext.</param>
+    /// <returns>A new instance of <see cref="LibrarySetInvoker"/>.</returns>
     public LibrarySetInvoker ToLibrarySetInvoker(string name = "")
     {
         _services.Logger.LogDebug("Creating LibrarySetInvoker");

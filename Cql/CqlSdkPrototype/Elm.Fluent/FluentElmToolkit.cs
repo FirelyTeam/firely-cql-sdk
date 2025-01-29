@@ -2,41 +2,79 @@
 
 namespace CqlSdkPrototype.Elm.Fluent;
 
-public sealed class FluentElmToolkit(ElmToAssemblyCompiler elmToAssemblyCompiler)
+/// <summary>
+/// Provides a fluent interface for working with the ElmToAssemblyCompiler.
+/// </summary>
+public sealed class FluentElmToolkit
 {
+    private readonly ElmToAssemblyCompiler elmToAssemblyCompiler;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FluentElmToolkit"/> class.
+    /// </summary>
+    /// <param name="loggerFactory">The logger factory to use for logging.</param>
+    /// <param name="settings">The configuration settings for the compiler.</param>
     public FluentElmToolkit(
         ILoggerFactory? loggerFactory = null,
         ElmToAssemblyCompilerConfig? settings = null) : this(new ElmToAssemblyCompiler(loggerFactory, settings))
     {
     }
 
-    /// <remarks>
-    /// Used by tests to access the service provider.
-    /// </remarks>>
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FluentElmToolkit"/> class with the specified compiler.
+    /// </summary>
+    /// <param name="elmToAssemblyCompiler">The compiler to use.</param>
+    public FluentElmToolkit(ElmToAssemblyCompiler elmToAssemblyCompiler)
+    {
+        this.elmToAssemblyCompiler = elmToAssemblyCompiler;
+    }
+
+    /// <summary>
+    /// Gets the service provider used by tests.
+    /// </summary>
     internal ServiceProvider ServiceProvider => elmToAssemblyCompiler.ServiceProvider;
 
-    /// <remarks>
-    /// Used by extensions to access the logger factory.
-    /// </remarks>
+    /// <summary>
+    /// Gets the logger factory used by extensions.
+    /// </summary>
     public ILoggerFactory LoggerFactory => elmToAssemblyCompiler.LoggerFactory;
 
+    /// <summary>
+    /// Gets the configuration for the compiler.
+    /// </summary>
     public ElmToAssemblyCompilerConfig ProcessorConfig => elmToAssemblyCompiler.Config;
 
+    /// <summary>
+    /// Gets the dictionary of ELM to assembly compilations.
+    /// </summary>
     public ElmToAssemblyCompilationReadOnlyDictionary ElmToAssemblyCompilations => elmToAssemblyCompiler.ElmToAssemblyCompilations;
 
+    /// <summary>
+    /// Reconfigures the compiler with the specified configuration.
+    /// </summary>
+    /// <param name="configure">A function that takes the current configuration and returns a new configuration.</param>
+    /// <returns>The current instance of <see cref="FluentElmToolkit"/>.</returns>
     public FluentElmToolkit Reconfigure(Func<ElmToAssemblyCompilerConfig, ElmToAssemblyCompilerConfig> configure)
     {
         elmToAssemblyCompiler.Reconfigure(configure(ProcessorConfig));
         return this;
-
     }
 
+    /// <summary>
+    /// Adds ELM libraries to the compiler.
+    /// </summary>
+    /// <param name="libraries">The libraries to add.</param>
+    /// <returns>The current instance of <see cref="FluentElmToolkit"/>.</returns>
     public FluentElmToolkit AddElmLibraries(IEnumerable<Library> libraries)
     {
         elmToAssemblyCompiler.AddElmLibraries(libraries);
         return this;
     }
 
+    /// <summary>
+    /// Compiles the ELM libraries into .NET assemblies.
+    /// </summary>
+    /// <returns>The current instance of <see cref="FluentElmToolkit"/>.</returns>
     public FluentElmToolkit CompileElmToAssemblies()
     {
         elmToAssemblyCompiler.CompileElmToAssemblies();

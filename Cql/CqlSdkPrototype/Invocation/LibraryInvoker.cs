@@ -7,14 +7,27 @@ namespace CqlSdkPrototype.Invocation;
 
 
 /// <summary>
-/// Represents an invoker for a CQL library.
+/// Abstract base class for invoking CQL libraries.
 /// </summary>
 public abstract class LibraryInvoker
 {
+    /// <summary>
+    /// Gets the versioned identifier of the CQL library.
+    /// </summary>
     public abstract CqlVersionedLibraryIdentifier LibraryVersionedIdentifier { get; }
 
+    /// <summary>
+    /// Gets the dictionary of definition invokers for the CQL library.
+    /// </summary>
     public abstract IReadOnlyDictionary<string, DefinitionInvoker> Definitions { get; }
 
+    /// <summary>
+    /// Tries to create a <see cref="LibraryInvoker"/> instance from the specified type.
+    /// </summary>
+    /// <param name="librarySetInvokerBuilder">The builder for the library set invoker.</param>
+    /// <param name="libraryType">The type of the library.</param>
+    /// <param name="libraryInvoker">When this method returns, contains the created <see cref="LibraryInvoker"/> instance, if the creation succeeded; otherwise, <see langword="null"/>.</param>
+    /// <returns><see langword="true"/> if the creation succeeded; otherwise, <see langword="false"/>.</returns>
     public static bool TryCreateFromType(
         LibrarySetInvokerBuilder librarySetInvokerBuilder,
         Type libraryType,

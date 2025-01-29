@@ -3,10 +3,19 @@ using CqlSdkPrototype.Internal;
 
 namespace CqlSdkPrototype.Invocation;
 
+
+/// <summary>
+/// Represents an invoker for a set of CQL libraries.
+/// </summary>
 public sealed class LibrarySetInvoker : IDisposable
 {
     private readonly AssemblyLoadContext _alc;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="LibrarySetInvoker"/> class.
+    /// </summary>
+    /// <param name="librarySetInvokerBuilder">The builder used to create the library set invoker.</param>
+    /// <param name="alc">The assembly load context.</param>
     internal LibrarySetInvoker(LibrarySetInvokerBuilder librarySetInvokerBuilder, AssemblyLoadContext alc)
     {
         _alc = alc;
@@ -21,10 +30,16 @@ public sealed class LibrarySetInvoker : IDisposable
                 .ToImmutableDictionary(o => o.LibraryVersionedIdentifier);
     }
 
+    /// <summary>
+    /// Releases all resources used by the <see cref="LibrarySetInvoker"/>.
+    /// </summary>
     public void Dispose()
     {
         _alc.Unload();
     }
 
+    /// <summary>
+    /// Gets the dictionary of library invokers.
+    /// </summary>
     public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker> LibraryInvokers { get; }
 }
