@@ -4,14 +4,6 @@ namespace CqlSdkPrototype.Internal;
 
 internal static class InternalExtensions
 {
-    public static string Join(this IEnumerable<string> lines) =>
-        string.Concat(lines);
-
-    public static string TrimFileExtension(this string filePath, string extension) =>
-        filePath.EndsWith(extension, StringComparison.OrdinalIgnoreCase)
-            ? filePath[..^extension.Length]
-            : filePath;
-
     public static Assembly LoadFromBytes(this AssemblyLoadContext assemblyLoadContext, byte[] assembly, byte[]? symbols = null)
     {
         using var assemblyStream = new MemoryStream(assembly);
@@ -36,14 +28,6 @@ internal static class InternalExtensions
         return enumerable
                .Where(x => x is not null)
                .Select(x => x!);
-    }
-
-    public static bool IsBetween(
-        this Version value,
-        Version lowerIncl,
-        Version upperExcl)
-    {
-        return value >= lowerIncl && value < upperExcl;
     }
 
     public static LogExceptionMessageAction GetLogExceptionMessageAction(
