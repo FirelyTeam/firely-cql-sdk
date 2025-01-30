@@ -19,7 +19,8 @@
 		<LibrarySetRoot>$(CqlSolutionDir)LibrarySets/$(LibrarySet)</LibrarySetRoot>
 		<CqlDirectory>$(LibrarySetRoot)/Cql</CqlDirectory>
 		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
-		<DllDirectory>$(LibrarySetRoot)/Dlls2</DllDirectory>
+		<!-- Copy dll's to IntegrationRunner -->
+		<DllDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Assemblies</DllDirectory>
 		<ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory>
 		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
 	</PropertyGroup>
