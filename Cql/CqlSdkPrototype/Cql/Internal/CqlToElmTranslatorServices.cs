@@ -1,6 +1,5 @@
 ﻿using CqlSdkPrototype.Internal;
 using Hl7.Cql.CqlToElm;
-using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using ExpressionVisitor = Hl7.Cql.CqlToElm.Visitors.ExpressionVisitor;
 
@@ -88,7 +87,7 @@ internal readonly record struct CqlToElmTranslatorServices(
     {
         // This is really annoying in debug mode
         ExpressionVisitor.EnableDebugAssertions = false;
-        Library.EnableDebugAssertions = false;
+        ElmLibrary.EnableDebugAssertions = false;
     }
 
     /// <summary>

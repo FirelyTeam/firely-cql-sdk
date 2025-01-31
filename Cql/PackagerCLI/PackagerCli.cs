@@ -70,19 +70,11 @@ internal class PackagerCli
                              .CompileElmToAssemblies();
             }
 
-            if (opt.CSharpOutDirectory is { } dirOutCS
-                && elmToolkit.ElmToAssemblyCompilations.Any(e => e.Value.CSharpSourceCode is not null))
-            {
-                dirOutCS.Recreate();
-                elmToolkit.SaveCSharpFilesToDirectory(dirOutCS);
-            }
+            if (opt.CSharpOutDirectory is { } dirOutCS)
+                elmToolkit.SaveCSharpFilesToDirectory(dirOutCS, recreateDirectory:true);
 
-            if (opt.AssemblyOutDirectory is { } dirOutDll
-                && elmToolkit.ElmToAssemblyCompilations.Any(e => e.Value.AssemblyBinary is not null))
-            {
-                dirOutDll.Recreate();
-                elmToolkit.SaveAssemblyBinariesToDirectory(dirOutDll);
-            }
+            if (opt.AssemblyOutDirectory is { } dirOutDll)
+                elmToolkit.SaveAssemblyBinariesToDirectory(dirOutDll, recreateDirectory:true);
 
             if (opt is
                     // Check that we have all the required options
@@ -94,19 +86,17 @@ internal class PackagerCli
                         FhirOverrideDate: var overrideDate
                     }
                 // Check that we have the libraries produced by the ElmToolkit
-                && elmToolkit.ElmToAssemblyCompilations
-                             .Select(e => e.Value.ElmLibrary)
+                && elmToolkit.GetCompletedElmToAssemblyCompilations(t => t.elmLibrary)
                              .ToArray() is { Length: > 0 } libraries
                 // Check that we have the assemblies produced by the ElmToolkit
-                && elmToolkit.ElmToAssemblyCompilations
-                             .Where(e => e.Value is { AssemblyBinary: { }, CSharpSourceCode: { } })
+                && elmToolkit.GetCompletedElmToAssemblyCompilations()
                              .ToDictionary(
-                                 e => e.Key.ToString(),
-                                 e => new AssemblyBinaryWithSourceCode(
-                                     assemblyBytes: e.Value.AssemblyBinary!,
+                                 t => t.versionedLibraryIdentifier.ToString(),
+                                 t => new AssemblyBinaryWithSourceCode(
+                                     assemblyBytes: t.assemblyBinary,
                                      sourceCodeFileName: "", // Won't get used
-                                     sourceCode: e.Value.CSharpSourceCode!,
-                                     debugSymbolsBytes: e.Value.DebugSymbolsBinary)) is { } assembliesByLibraryName)
+                                     sourceCode: t.csharpSourceCode,
+                                     debugSymbolsBytes: t.debugSymbolsBinary)) is { } assembliesByLibraryName)
             {
                 _ = resourcePackager;
                 LibrarySet elmLibrarySet = new LibrarySet("", libraries);

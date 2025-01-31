@@ -27,4 +27,10 @@ internal static class DirectoryInfoExtensions
         SearchOption searchOption = SearchOption.TopDirectoryOnly) =>
         dir.SelfAndParents()
            .FirstOrDefault(d => d.EnumerateFileSystemInfos(searchPattern, searchOption).Any());
+
+    public static void Recreate(this DirectoryInfo dir)
+    {
+        if (dir.Exists) dir.Delete(true);
+        dir.Create();
+    }
 }

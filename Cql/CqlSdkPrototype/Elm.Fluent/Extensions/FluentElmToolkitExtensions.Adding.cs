@@ -1,7 +1,7 @@
 ﻿using CqlSdkPrototype.Cql.Fluent;
+using CqlSdkPrototype.Cql.Fluent.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
-using Hl7.Cql.Elm;
 
 #pragma warning disable RS0027
 
@@ -12,11 +12,7 @@ public static partial class FluentElmToolkitExtensions
     public static FluentElmToolkit AddElmFromFluentCqlToolkit(
         this FluentElmToolkit elmToolkit,
         FluentCqlToolkit cqlToolkit) =>
-        elmToolkit.AddElmLibraries(
-            from entry in cqlToolkit.CqlToElmTranslations
-            let elmLibrary = entry.Value.ElmLibrary
-            where elmLibrary is not null
-            select elmLibrary);
+        elmToolkit.AddElmLibraries(cqlToolkit.GetCompletedCqlToElmTranslations(t => t.elmLibrary));
 
     public static FluentElmToolkit AddElmFileInDirectory(
         this FluentElmToolkit elmToolkit,
@@ -47,7 +43,7 @@ public static partial class FluentElmToolkitExtensions
             .Select(f =>
             {
                 logger.LogInformation("Loading library from file: {file}", f);
-                var library = Library.LoadFromJson(f);
+                var library = ElmLibrary.LoadFromJson(f);
                 return library;
             }); // Log errors
         return elmToolkit.AddElmLibraries(libraries);

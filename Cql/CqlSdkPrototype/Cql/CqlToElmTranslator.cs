@@ -123,7 +123,7 @@ public sealed class CqlToElmTranslator
 
             if (entriesBuilder.ContainsKey(versionedIdentifier))
             {
-                logger.LogInformation("Skipping adding previous cql to translation: {versionedIdentifier}", versionedIdentifier);
+                logger.LogWarning("Skipping adding previous cql to translation: {versionedIdentifier}", versionedIdentifier);
                 continue;
             }
 

@@ -1,23 +1,25 @@
-﻿namespace CqlSdkPrototype.Cql.Fluent.Extensions;
+﻿using Hl7.Cql.Abstractions.Infrastructure;
+
+namespace CqlSdkPrototype.Cql.Fluent.Extensions;
 
 public static partial class FluentCqlToolkitExtensions
 {
     public static FluentCqlToolkit SaveElmFilesToDirectory(
         this FluentCqlToolkit cqlToolkit,
         DirectoryInfo directory,
-        bool writeIndented = true)
+        bool writeIndented = true,
+        bool recreateDirectory = false)
     {
-        if (!directory.Exists)
+        if (recreateDirectory)
+            directory.Recreate();
+        else
             directory.Create();
 
         var logger = cqlToolkit.CreateLogger();
 
-        foreach (var (libraryName, (_, elmLibrary)) in cqlToolkit.CqlToElmTranslations)
+        foreach (var (versionedLibraryIdentifier, _, elmLibrary) in cqlToolkit.GetCompletedCqlToElmTranslations())
         {
-            if (elmLibrary == null)
-                continue;
-
-            var fileName = Path.Combine(directory.FullName, $"{libraryName}.json");
+            var fileName = Path.Combine(directory.FullName, $"{versionedLibraryIdentifier}.json");
             File.WriteAllText(fileName, elmLibrary.SerializeToJson(writeIndented));
             logger.LogInformation("Saved ELM to file: {file}", fileName);
         }

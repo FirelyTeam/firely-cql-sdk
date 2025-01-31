@@ -1,6 +1,4 @@
-﻿using Hl7.Cql.Elm;
-
-namespace CqlSdkPrototype.Elm.Fluent;
+﻿namespace CqlSdkPrototype.Elm.Fluent;
 
 /// <summary>
 /// Provides a fluent interface for working with the ElmToAssemblyCompiler.
@@ -65,7 +63,7 @@ public sealed class FluentElmToolkit
     /// </summary>
     /// <param name="libraries">The libraries to add.</param>
     /// <returns>The current instance of <see cref="FluentElmToolkit"/>.</returns>
-    public FluentElmToolkit AddElmLibraries(IEnumerable<Library> libraries)
+    public FluentElmToolkit AddElmLibraries(IEnumerable<ElmLibrary> libraries)
     {
         elmToAssemblyCompiler.AddElmLibraries(libraries);
         return this;

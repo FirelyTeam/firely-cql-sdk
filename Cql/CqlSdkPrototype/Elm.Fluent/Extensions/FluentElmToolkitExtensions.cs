@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Abstractions.Exceptions;
+﻿using CqlSdkPrototype.Infrastructure;
+using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
 
 namespace CqlSdkPrototype.Elm.Fluent.Extensions;
@@ -24,4 +25,17 @@ public static partial class FluentElmToolkitExtensions
         {
             AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.PortablePdb
         });
+
+
+    public static IEnumerable<(CqlVersionedLibraryIdentifier versionedLibraryIdentifier, ElmLibrary elmLibrary, string csharpSourceCode, byte[] assemblyBinary, byte[]? debugSymbolsBinary)> GetCompletedElmToAssemblyCompilations(
+        this FluentElmToolkit elmToolkit) =>
+        elmToolkit.GetCompletedElmToAssemblyCompilations(t => t);
+
+    public static IEnumerable<TR> GetCompletedElmToAssemblyCompilations<TR>(
+        this FluentElmToolkit elmToolkit,
+        Func<(CqlVersionedLibraryIdentifier versionedLibraryIdentifier, ElmLibrary elmLibrary, string csharpSourceCode, byte[] assemblyBinary, byte[]? debugSymbolsBinary), TR> selector) =>
+        elmToolkit.ElmToAssemblyCompilations
+                  .Where(kv => kv.Value is { CSharpSourceCode: not null, AssemblyBinary: not null })
+                  .Select(kv => selector((kv.Key, kv.Value.ElmLibrary, kv.Value.CSharpSourceCode!, kv.Value.AssemblyBinary!, kv.Value.DebugSymbolsBinary)));
+
 }

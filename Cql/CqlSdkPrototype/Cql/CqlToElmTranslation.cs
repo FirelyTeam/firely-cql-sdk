@@ -1,6 +1,5 @@
 ﻿using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.CqlToElm;
-using Hl7.Cql.Elm;
 
 namespace CqlSdkPrototype.Cql;
 
@@ -11,7 +10,7 @@ namespace CqlSdkPrototype.Cql;
 /// <param name="ElmLibrary">The output ELM library.</param>
 public readonly record struct CqlToElmTranslation(
     CqlLibraryString CqlLibraryString,
-    Library? ElmLibrary = null) {
+    ElmLibrary? ElmLibrary = null) {
 
     /// <summary>
     /// The builder for the ELM library. This is set during <seealso cref="CqlToElmTranslator.AddCqlLibraries"/>.

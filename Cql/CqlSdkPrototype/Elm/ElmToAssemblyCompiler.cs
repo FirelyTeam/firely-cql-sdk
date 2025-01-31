@@ -5,7 +5,6 @@ using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Elm;
@@ -84,30 +83,30 @@ public sealed class ElmToAssemblyCompiler
     /// Adds ELM libraries to the compiler.
     /// </summary>
     /// <param name="libraries">The libraries to add.</param>
-    public void AddElmLibraries(IEnumerable<Library> libraries)
+    public void AddElmLibraries(IEnumerable<ElmLibrary> libraries)
     {
-        var entries = _elmToAssemblyCompilations.ToBuilder();
+        var builder = _elmToAssemblyCompilations.ToBuilder();
         var hasChanged = false;
         foreach (var library in libraries)
         {
             var versionedIdentifier = CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier);
 
-            if (entries.TryGetValue(versionedIdentifier, out var existingVersionedIdentifier))
+            if (builder.TryGetValue(versionedIdentifier, out var existingVersionedIdentifier))
             {
-                _services.Logger.LogInformation(
+                _services.Logger.LogWarning(
                     "Skipping replacing library {existingVersionedIdentifier} to compiler with new library: {versionedIdentifier}, ",
                     existingVersionedIdentifier, versionedIdentifier);
                 continue;
             }
 
             var libraryCompilation = new ElmToAssemblyCompilation(library);
-            entries.Add(versionedIdentifier, libraryCompilation);
+            builder.Add(versionedIdentifier, libraryCompilation);
             _services.Logger.LogInformation("Adding library to compiler: {versionedIdentifier}", versionedIdentifier);
             hasChanged = true;
         }
 
         if (hasChanged)
-            SetConversions(elmToAssemblyCompilations: entries.ToImmutable());
+            SetConversions(elmToAssemblyCompilations: builder.ToImmutable());
     }
 
     /// <summary>
@@ -126,7 +125,7 @@ public sealed class ElmToAssemblyCompiler
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _services.LibrarySetCSharpCodeGenerator;
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
-        Library[] libraries = entries.Values.Select(selector: v => v.ElmLibrary).ToArray();
+        ElmLibrary[] libraries = entries.Values.Select(selector: v => v.ElmLibrary).ToArray();
         LibrarySet librarySet = new LibrarySet(name: "", libraries: libraries);
 
         var removedLibraries = librarySet.RemoveLibrariesWithMissingDependencies();
@@ -155,7 +154,7 @@ public sealed class ElmToAssemblyCompiler
     /// <param name="logger">The logger to use for logging.</param>
     /// <returns><see langword="true"/> if the state entries were updated; otherwise, <see langword="false"/>.</returns>
     private static bool UpdateStateEntries(
-        IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> assemblyBinaries,
+        IEnumerable<(ElmLibrary library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> assemblyBinaries,
         ElmToAssemblyCompilationDictionary.Builder entriesBuilder,
         ILogger<ElmToAssemblyCompiler> logger)
     {
@@ -197,10 +196,10 @@ public sealed class ElmToAssemblyCompiler
     /// <param name="log">The action to log exceptions.</param>
     /// <param name="exceptionHandling">The exception handling strategy.</param>
     /// <returns>The compiled assemblies.</returns>
-    private static IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> CompileAssemblies(
+    private static IEnumerable<(ElmLibrary library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> CompileAssemblies(
         AssemblyCompiler assemblyCompiler,
         LibrarySet librarySet,
-        IEnumerable<(Library library, string cSharp)> cSharps,
+        IEnumerable<(ElmLibrary library, string cSharp)> cSharps,
         AssemblyCompilerDebugInformationFormat debugInformationFormat,
         ILogger<ElmToAssemblyCompiler> logger,
         LogExceptionMessageAction log,
@@ -234,7 +233,7 @@ public sealed class ElmToAssemblyCompiler
     /// <param name="log">The action to log exceptions.</param>
     /// <param name="exceptionHandling">The exception handling strategy.</param>
     /// <returns>The generated C# code.</returns>
-    private static IEnumerable<(Library library, string cSharp)> GenerateCSharp(
+    private static IEnumerable<(ElmLibrary library, string cSharp)> GenerateCSharp(
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor,
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> librarySetDefinitions,

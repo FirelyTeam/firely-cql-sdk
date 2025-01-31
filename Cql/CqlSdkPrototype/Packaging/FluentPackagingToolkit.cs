@@ -46,6 +46,34 @@ public sealed class FluentPackagingToolkit
     /// </summary>
     public ILoggerFactory LoggerFactory => _fhirResourcePackager.LoggerFactory;
 
+    /// <summary>
+    /// Gets the configuration for the compiler.
+    /// </summary>
+    public FhirResourcePackagerConfig PackagerConfig => _fhirResourcePackager.Config;
+
+    /// <summary>
+    /// Reconfigures the packager with the specified configuration.
+    /// </summary>
+    /// <param name="configure">A function that takes the current configuration and returns a new configuration.</param>
+    /// <returns>The current instance of <see cref="FluentPackagingToolkit"/>.</returns>
+    public FluentPackagingToolkit Reconfigure(Func<FhirResourcePackagerConfig, FhirResourcePackagerConfig> configure)
+    {
+        _fhirResourcePackager.Reconfigure(configure(PackagerConfig));
+        return this;
+    }
+
+    /// <summary>
+    /// Adds FHIR resource packaging inputs to the packager.
+    /// </summary>
+    /// <param name="inputs">The collection of FHIR resource packaging inputs to add.</param>
+    /// <returns>The current instance of <see cref="FluentPackagingToolkit"/>.</returns>
+    public FluentPackagingToolkit AddFhirResourcePackagingInput(IEnumerable<FhirResourcePackagingInput> inputs)
+    {
+        _fhirResourcePackager.AddFhirResourcePackagingInput(inputs);
+        return this;
+    }
+
+
     // private readonly FhirResourcePackagerServices _services = FhirResourcePackagerServices.Create(loggerFactory ?? NullLoggerFactory.Instance);
     //
     // public FhirLibrary CreateLibraryResource(
@@ -109,8 +137,48 @@ public sealed class FhirResourcePackager
     /// Gets the dictionary of FHIR resource packagings.
     /// </summary>
     public FhirResourcePackagingReadOnlyDictionary FhirResourcePackagings => _fhirResourcePackagings;
-}
 
+
+    /// <summary>
+    /// Reconfigures the packager with the specified configuration.
+    /// </summary>
+    /// <param name="config">The new configuration for the packager.</param>
+    public void Reconfigure(
+        FhirResourcePackagerConfig config)
+    {
+        if (Config == config)
+            return;
+
+        //_services.ServiceProvider.Dispose();
+        Config = config;
+        //_services = ElmToAssemblyProcessorServices.Create(LoggerFactory, config);
+    }
+
+    /// <summary>
+    /// Adds FHIR resource packaging inputs to the packager.
+    /// </summary>
+    /// <param name="inputs">The collection of FHIR resource packaging inputs to add.</param>
+    public void AddFhirResourcePackagingInput(IEnumerable<FhirResourcePackagingInput> inputs)
+    {
+        var builder = _fhirResourcePackagings.ToBuilder();
+        var hasChanged = false;
+        foreach (var input in inputs)
+        {
+            if (builder.TryGetValue(input.VersionedLibraryIdentifier, out var existing))
+            {
+                _services.Logger.LogInformation("Skipping replacing library {id} to packager.", input.VersionedLibraryIdentifier);
+                continue;
+            }
+
+            var fhirResourcePackaging = new FhirResourcePackaging(input);
+            builder.Add(input.VersionedLibraryIdentifier, fhirResourcePackaging);
+            hasChanged = true;
+        }
+
+        if (hasChanged)
+            _fhirResourcePackagings = builder.ToImmutable();
+    }
+}
 
 public record FhirResourcePackagerConfig
 {
@@ -120,14 +188,31 @@ public record FhirResourcePackagerConfig
     public static FhirResourcePackagerConfig Default { get; } = new FhirResourcePackagerConfig();
 }
 
-public readonly record struct FhirResourcePackaging(
+public readonly record struct FhirResourcePackagingInput
+(
     CqlLibraryString CqlLibrary,
     ElmLibrary ElmLibrary,
     string CSharpSourceCode,
-    byte[] AssemblyBinary);
+    byte[] AssemblyBinary
+)
+{
+    public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier => CqlLibrary.VersionedLibraryIdentifier;
+}
+
+public readonly record struct FhirResourcePackaging
+(
+    // Inputs
+    FhirResourcePackagingInput Input,
+    // Output
+    string? FhirLibraryResourceJson = null
+ )
+{
+    public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier => Input.VersionedLibraryIdentifier;
+}
 
 internal readonly record struct FhirResourcePackagerServices(
     ServiceProvider ServiceProvider,
+    ILogger<FhirResourcePackager> Logger,
     CqlTypeToFhirTypeMapper CqlTypeToFhirTypeMapper)
 {
     public static FhirResourcePackagerServices Create(ILoggerFactory loggerFactory)
