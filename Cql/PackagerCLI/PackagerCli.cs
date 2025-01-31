@@ -58,6 +58,8 @@ internal class PackagerCli
                 return -1;
             }
 
+            var packagingToolkit = new FluentPackagingToolkit(loggerFactory);
+
             FluentCqlToolkit cqlToolkit = new FluentCqlToolkit(loggerFactory)
                 .SetExceptionHandlingToIgnore()
                 .AddCqlLibrariesFromDirectory(opt.CqlInDirectory);
@@ -104,7 +106,6 @@ internal class PackagerCli
                     FhirOverrideDate: var overrideDate
                 })
             {
-                var packagingToolkit = new FluentPackagingToolkit(loggerFactory);
                 packagingToolkit
                     .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
                     .PackageFhirResources(canonicalRootUrl, overrideDate)

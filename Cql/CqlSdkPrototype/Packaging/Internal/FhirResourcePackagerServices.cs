@@ -8,7 +8,7 @@ namespace CqlSdkPrototype.Packaging.Internal;
 internal readonly record struct FhirResourcePackagerServices(
     ServiceProvider ServiceProvider,
     ILogger<FhirResourcePackager> Logger,
-    CqlTypeToFhirTypeMapper CqlTypeToFhirTypeMapper)
+    ResourcePackager ResourcePackager)
 {
     public static FhirResourcePackagerServices Create(ILoggerFactory loggerFactory)
     {
@@ -17,6 +17,7 @@ internal readonly record struct FhirResourcePackagerServices(
         services.TryAddSingleton(_ => Hl7.Fhir.Model.ModelInfo.ModelInspector);
         services.TryAddSingleton<TypeResolver, FhirTypeResolver>();
         services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
+        services.TryAddSingleton<ResourcePackager>();
         var serviceProvider = services.BuildServiceProvider();
         return ActivatorUtilities.CreateInstance<FhirResourcePackagerServices>(serviceProvider, serviceProvider);
     }

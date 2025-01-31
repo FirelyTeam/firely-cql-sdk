@@ -1,5 +1,8 @@
-﻿using CqlSdkPrototype.Packaging.Fluent;
+﻿using CqlSdkPrototype.Infrastructure;
+using CqlSdkPrototype.Packaging.Fluent;
 using CqlSdkPrototype.Packaging.Internal;
+using Hl7.Cql.Compiler;
+using Hl7.Cql.Packaging;
 
 namespace CqlSdkPrototype.Packaging;
 
@@ -57,6 +60,9 @@ public sealed class FhirResourcePackager
         //_services = ElmToAssemblyProcessorServices.Create(LoggerFactory, config);
     }
 
+    private void SetFhirResourcePackagings(FhirResourcePackagingDictionary packagings) =>
+        _fhirResourcePackagings = packagings;
+
     /// <summary>
     /// Adds FHIR resource packaging inputs to the packager.
     /// </summary>
@@ -84,5 +90,29 @@ public sealed class FhirResourcePackager
 
     public void PackageFhirResources(Uri? canonicalRootUrl, DateTime? overrideDate)
     {
+        var builder = _fhirResourcePackagings.ToBuilder();
+        LibrarySet librarySet = new LibrarySet("", builder.Values.Select(o => o.Input.ElmLibrary).ToArray());
+        var packageResourcesV2 = _services.ResourcePackager.PackageResourcesV2(
+            librarySet,
+            builder.Values.Select(o => new ResourcePackager.Input(o.VersionedLibraryIdentifier.ToString(), o.Input.CqlLibrary.Cql, o.Input.ElmLibrary, o.Input.CSharpSourceCode, o.Input.AssemblyBinary)),
+            canonicalRootUrl?.ToString(),
+            overrideDate);
+        bool hasChanged = false;
+        foreach (var (versionedLibraryIdentifier, getFhirResource) in packageResourcesV2)
+        {
+            var fhirResource = getFhirResource();
+            var cqlVersionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(versionedLibraryIdentifier);
+            var fhirResourcePackaging = builder[cqlVersionedLibraryIdentifier];
+            if (fhirResourcePackaging.FhirResource is not null)
+                _services.Logger.LogWarning("Skipping replacing existing resource for {id}.", versionedLibraryIdentifier);
+            else
+            {
+                builder[cqlVersionedLibraryIdentifier] = fhirResourcePackaging with { FhirResource = fhirResource};
+                hasChanged = true;
+            }
+        }
+
+        if (hasChanged)
+            SetFhirResourcePackagings(builder.ToImmutable());
     }
 }
