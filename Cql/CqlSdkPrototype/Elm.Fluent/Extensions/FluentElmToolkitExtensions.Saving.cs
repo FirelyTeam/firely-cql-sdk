@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Abstractions.Infrastructure;
+﻿using CqlSdkPrototype.Infrastructure;
 
 namespace CqlSdkPrototype.Elm.Fluent.Extensions;
 
@@ -7,12 +7,9 @@ public static partial class FluentElmToolkitExtensions
     public static FluentElmToolkit SaveCSharpFilesToDirectory(
         this FluentElmToolkit elmToolkit,
         DirectoryInfo directory,
-        bool recreateDirectory = false)
+        DirectoryPreparationStrategy? directoryPreparationStrategy = null)
     {
-        if (recreateDirectory)
-            directory.Recreate();
-        else
-            directory.Create();
+        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists).PrepareDirectory(directory);
 
         var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
 
@@ -29,12 +26,9 @@ public static partial class FluentElmToolkitExtensions
     public static FluentElmToolkit SaveAssemblyBinariesToDirectory(
         this FluentElmToolkit elmToolkit,
         DirectoryInfo directory,
-        bool recreateDirectory = false)
+        DirectoryPreparationStrategy? directoryPreparationStrategy = null)
     {
-        if (recreateDirectory)
-            directory.Recreate();
-        else
-            directory.Create();
+        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists).PrepareDirectory(directory);
 
         var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
 

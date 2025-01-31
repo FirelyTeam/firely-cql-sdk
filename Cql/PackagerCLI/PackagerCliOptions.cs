@@ -1,6 +1,7 @@
 ﻿namespace Hl7.Cql.Packager;
 
-internal class PackagerCliOptions {
+internal class PackagerCliOptions
+{
     public const string ConfigSection = "PackagerCli";
 
 
@@ -38,4 +39,18 @@ internal class PackagerCliOptions {
     public DirectoryInfo? FhirOutDirectory { get; set; }
     public Uri? FhirCanonicalRootUrl { get; set; }
     public DateTime? FhirOverrideDate { get; set; }
+
+    public IEnumerable<(string name, DirectoryInfo? dir)> GetInDirectories() =>
+    [
+        (name: nameof(CqlInDirectory), dir: CqlInDirectory),
+        (name: nameof(ElmInDirectory), dir: ElmInDirectory)
+    ];
+
+    public IEnumerable<(string name, DirectoryInfo? dir)> GetOutDirectories() =>
+    [
+        (name: nameof(ElmOutDirectory), dir: ElmOutDirectory),
+        (name: nameof(CSharpOutDirectory), dir: CSharpOutDirectory),
+        (name: nameof(AssemblyOutDirectory), dir: AssemblyOutDirectory),
+        (name: nameof(FhirOutDirectory), dir: FhirOutDirectory)
+    ];
 }

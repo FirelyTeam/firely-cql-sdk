@@ -22,6 +22,10 @@ internal static class PackagerCLiLoggingBuilderExtensions
     {
         logging.ClearProviders();
 
+         // If we debugging, keep the existing console logger
+        if (Debugger.IsAttached)
+            logging.AddDebug();
+
         bool enableDebugLogging = Debugger.IsAttached;
         enableDebugLogging = enableDebugLogging || configuration.GetCommandLineSwitchValue<bool>("--log-debug");
         var minLogLevel = enableDebugLogging ? LogLevel.Trace : LogLevel.Information;

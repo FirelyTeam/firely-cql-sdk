@@ -6,7 +6,7 @@ namespace CqlSdkPrototype.Elm.Fluent.Extensions;
 
 public static partial class FluentElmToolkitExtensions
 {
-    public static FluentElmToolkit ConfigIgnoreExceptions(this FluentElmToolkit cqlToolkit, bool stopAfterFirstException = false) =>
+    public static FluentElmToolkit SetExceptionHandlingToIgnore(this FluentElmToolkit cqlToolkit, bool stopAfterFirstException = false) =>
         cqlToolkit.Reconfigure(o => o with
         {
             ProcessBatchItemExceptionHandling = stopAfterFirstException
@@ -14,13 +14,13 @@ public static partial class FluentElmToolkitExtensions
                                                     : ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
         });
 
-    public static FluentElmToolkit ConfigAssemblyDebugInformationToEmbedded(this FluentElmToolkit cqlToolkit) =>
+    public static FluentElmToolkit SetAssemblyDebugInformationToEmbedded(this FluentElmToolkit cqlToolkit) =>
         cqlToolkit.Reconfigure(o => o with
         {
             AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded
         });
 
-    public static FluentElmToolkit ConfigAssemblyDebugInformationToPortablePdb(this FluentElmToolkit cqlToolkit) =>
+    public static FluentElmToolkit SetAssemblyDebugInformationToPortablePdb(this FluentElmToolkit cqlToolkit) =>
         cqlToolkit.Reconfigure(o => o with
         {
             AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.PortablePdb

@@ -6,17 +6,17 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Fluent;
 using CqlSdkPrototype.Cql.Fluent.Extensions;
-using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Fluent;
 using CqlSdkPrototype.Elm.Fluent.Extensions;
+using CqlSdkPrototype.Infrastructure;
+using CqlSdkPrototype.Packaging.Fluent;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging;
 using Hl7.Fhir.Model;
-using static Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling;
+using System;
 
 namespace Hl7.Cql.Packager;
 
@@ -31,51 +31,87 @@ internal class PackagerCli
 {
     public int Run(bool translateCql = false)
     {
+        // REVIEW: Remove these parameters before merging the PR!
+        _ = resourcePackager;
+        _ = fhirResourceFileWriter;
+
         try
         {
             optionsConsoleDumper.DumpToConsole();
+
             var opt = packagerCliOptions.Value;
+            if (opt.CqlInDirectory is not { Exists:true })
+            {
+                logger.LogWarning("Exiting: Cql input directory must be specified and exist.");
+                return -1;
+            }
+
+            if (!translateCql && opt.ElmInDirectory is not { Exists: true })
+            {
+                logger.LogWarning("Exiting: ELM input directory must be specified and exist.");
+                return -1;
+            }
+
+            if (opt.GetOutDirectories().All(o => o.dir is null))
+            {
+                logger.LogWarning("Exiting: At least one output directory must be specified for a particular type.");
+                return -1;
+            }
+
+            FluentCqlToolkit cqlToolkit = new FluentCqlToolkit(loggerFactory)
+                .SetExceptionHandlingToIgnore()
+                .AddCqlLibrariesFromDirectory(opt.CqlInDirectory);
+
+            if (!cqlToolkit.CqlToElmTranslations.Any())
+                logger.LogWarning("Exiting: No CQL libraries were found in the CQL input directory.");
 
             FluentElmToolkit elmToolkit;
             if (translateCql)
             {
-                var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
-                elmToolkit = new FluentCqlToolkit(
-                                 loggerFactory,
-                                 cqlToElmProcessorSettings)
-                             .PickValueAndSwitch(
-                                 valueSelector: _ => opt.CqlInDirectory,
-                                 ifHasValue: (api, cql) => api.AddCqlLibrariesFromDirectory(cql),
-                                 ifNoValue: _ => logger.LogWarning("No input directory specified for ELM. Nothing to do."))
-                             .TranslateCqlToElm()
-                             .PickValueAndSwitch(
-                                 valueSelector: _ => opt.ElmOutDirectory,
-                                 ifHasValue: (api, elm) =>
-                                 {
-                                     elm.Recreate();
-                                     api.SaveElmFilesToDirectory(elm);
-                                 },
-                                 ifNoValue: _ => logger.LogInformation("No out directory specified for ELM."))
-                             .CompileCqlToAssemblies();
+                cqlToolkit.TranslateCqlToElm();
+
+                if (opt.ElmOutDirectory is { } elmOutDir)
+                    cqlToolkit.SaveElmFilesToDirectory(
+                        elmOutDir,
+                        writeIndented:true,
+                        DirectoryPreparationStrategy.DeleteFiles("*.json"));
+
+                elmToolkit = cqlToolkit.ToFluentElmToolkit();
             }
             else
             {
-                var elmToolkitSettings = new ElmToAssemblyCompilerConfig(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
-                elmToolkit = new FluentElmToolkit(loggerFactory, elmToolkitSettings)
-                             .PickValueAndSwitch(
-                                 _ => opt.ElmInDirectory,
-                                 ifHasValue: (api, elm) =>
-                                     api.AddElmFilesFromDirectory(elm, filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name)),
-                                 ifNoValue: _ => logger.LogWarning("No input directory specified for ELM. Nothing to do."))
-                             .CompileElmToAssemblies();
+                elmToolkit = new FluentElmToolkit(loggerFactory)
+                             .SetExceptionHandlingToIgnore()
+                             .AddElmFilesFromDirectory(
+                                 opt.ElmInDirectory!,
+                                 filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name));
             }
 
             if (opt.CSharpOutDirectory is { } dirOutCS)
-                elmToolkit.SaveCSharpFilesToDirectory(dirOutCS, recreateDirectory:true);
+                elmToolkit
+                    .CompileElmToAssemblies()
+                    .SaveCSharpFilesToDirectory(dirOutCS, DirectoryPreparationStrategy.DeleteFiles("*.g.cs"));
 
             if (opt.AssemblyOutDirectory is { } dirOutDll)
-                elmToolkit.SaveAssemblyBinariesToDirectory(dirOutDll, recreateDirectory:true);
+                elmToolkit
+                    .CompileElmToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
+                    .SaveAssemblyBinariesToDirectory(dirOutDll, DirectoryPreparationStrategy.DeleteFiles("*.dll"));
 
+            if (opt is
+                {
+                    FhirOutDirectory: { } dirOutFhir,
+                    FhirCanonicalRootUrl: var canonicalRootUrl,
+                    FhirOverrideDate: var overrideDate
+                })
+            {
+                var packagingToolkit = new FluentPackagingToolkit(loggerFactory);
+                packagingToolkit
+                    .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
+                    .PackageFhirResources(canonicalRootUrl, overrideDate)
+                    .SaveFhirResources(dirOutFhir, DirectoryPreparationStrategy.DeleteFiles("*.json"));
+            }
+
+            /*
             if (opt is
                     // Check that we have all the required options
                     {
@@ -111,6 +147,7 @@ internal class PackagerCli
                 foreach (var resource in resources)
                     fhirResourceFileWriter.SaveResource(resource, fhirOutDir, overrideDate);
             }
+            */
 
             return 0;
         }

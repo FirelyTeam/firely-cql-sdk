@@ -39,7 +39,7 @@ public sealed partial class ColorConsoleLogger(string categoryName, ColorConsole
         var defaultColorEsc = GetDefaultForegroundColorEscapeCode();
         var logRecord = $"{colorEsc}{logLevelText}{defaultColorEsc} {_categoryName}{message}";
         if (exception != null)
-            logRecord += $"{Environment.NewLine}{GetForegroundColorEscapeCode(ConsoleColor.DarkRed)}{exception}{defaultColorEsc}";
+            logRecord += $"{Environment.NewLine}{colorEsc}{exception}{defaultColorEsc}";
 
         Console.WriteLine(logRecord);
     }

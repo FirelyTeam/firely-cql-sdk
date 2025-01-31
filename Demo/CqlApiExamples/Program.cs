@@ -65,7 +65,7 @@ internal static class Program
                               innerKeySelector:elm => elm.versionedLibraryIdentifier,
                               resultSelector: (cql, elm) =>
                                   new FhirResourcePackagingInput(cql.cqlLibraryString, cql.elmLibrary, elm.csharpSourceCode, elm.assemblyBinary));
-        packagingToolkit.AddFhirResourcePackagingInput(fhirResourcePackagingInputs);
+        packagingToolkit.AddPackagingInputs(fhirResourcePackagingInputs);
     }
 
     /// <summary>
@@ -153,7 +153,7 @@ internal static class Program
         var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         FluentCqlToolkit cqlToolkit =
             new FluentCqlToolkit(loggerFactory, cqlToElmProcessorSettings)
-                .ConfigIgnoreExceptions();
+                .SetExceptionHandlingToIgnore();
 
         if (shouldBuildCqlToElm)
         {
@@ -166,7 +166,7 @@ internal static class Program
 
         var elmToolkit = cqlToolkit
                          .ToFluentElmToolkit()
-                         .ConfigAssemblyDebugInformationToEmbedded()
+                         .SetAssemblyDebugInformationToEmbedded()
                          .AddElmFilesFromDirectory(dirs.ElmInDirectory)
                          .CompileElmToAssemblies()
                          .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)

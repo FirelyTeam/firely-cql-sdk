@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Abstractions.Infrastructure;
+﻿using CqlSdkPrototype.Infrastructure;
 
 namespace CqlSdkPrototype.Cql.Fluent.Extensions;
 
@@ -8,12 +8,9 @@ public static partial class FluentCqlToolkitExtensions
         this FluentCqlToolkit cqlToolkit,
         DirectoryInfo directory,
         bool writeIndented = true,
-        bool recreateDirectory = false)
+        DirectoryPreparationStrategy? directoryPreparationStrategy = null)
     {
-        if (recreateDirectory)
-            directory.Recreate();
-        else
-            directory.Create();
+        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists).PrepareDirectory(directory);
 
         var logger = cqlToolkit.CreateLogger();
 
