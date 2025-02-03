@@ -37,7 +37,7 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
 
     private static readonly (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library>
         TopologicallySortedLibraries)
-        EmptyCached = (EmptySet<Library>.Instance, Array.Empty<Library>());
+        EmptyCached = (EmptySet<Library>.Instance, []);
 
     private readonly LibrarySetDefinitionCache _librarySetDefinitionCache;
 

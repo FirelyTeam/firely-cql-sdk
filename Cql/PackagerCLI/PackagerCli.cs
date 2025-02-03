@@ -58,7 +58,8 @@ internal class PackagerCli
                 return -1;
             }
 
-            var packagingToolkit = new FluentPackagingToolkit(loggerFactory);
+            var packagingToolkit = new FluentPackagingToolkit(loggerFactory)
+                .SetExceptionHandlingToIgnore();
 
             FluentCqlToolkit cqlToolkit = new FluentCqlToolkit(loggerFactory)
                 .SetExceptionHandlingToIgnore()

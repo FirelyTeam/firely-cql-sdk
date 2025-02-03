@@ -1,4 +1,5 @@
 ﻿#nullable enable
+abstract Hl7.Cql.Abstractions.Exceptions.EnumerationExceptionHandlingStrategy<TInput>.HandleException(TInput input, System.Runtime.ExceptionServices.ExceptionDispatchInfo! exceptionDispatchInfo) -> bool
 abstract Hl7.Cql.Abstractions.TypeResolver.GetListElementType(System.Type! type, bool throwError = false) -> System.Type?
 abstract Hl7.Cql.Abstractions.TypeResolver.ResolveType(string! typeSpecifier, bool throwError = true) -> System.Type?
 const Hl7.Cql.Abstractions.UCUMUnits.Centimeter = "cm" -> string!
@@ -30,6 +31,9 @@ Hl7.Cql.Abstractions.CqlTagAttribute.Value.get -> string!
 Hl7.Cql.Abstractions.CqlValueSetAttribute
 Hl7.Cql.Abstractions.CqlValueSetAttribute.CqlValueSetAttribute(string! Id) -> void
 Hl7.Cql.Abstractions.CqlValueSetAttribute.Id.get -> string!
+Hl7.Cql.Abstractions.Exceptions.EnumerationExceptionHandlingStrategy
+Hl7.Cql.Abstractions.Exceptions.EnumerationExceptionHandlingStrategy<TInput>
+Hl7.Cql.Abstractions.Exceptions.EnumerationExceptionHandlingStrategy<TInput>.EnumerationExceptionHandlingStrategy() -> void
 Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling
 Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak = 2 -> Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling
 Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue = 1 -> Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling
@@ -60,6 +64,9 @@ Hl7.Cql.Abstractions.TypeResolver
 Hl7.Cql.Abstractions.TypeResolver.TypeResolver() -> void
 Hl7.Cql.Abstractions.UCUMUnits
 Hl7.Cql.Abstractions.Units
+static Hl7.Cql.Abstractions.Exceptions.EnumerationExceptionHandlingStrategy.Delegated<TInput>(System.Func<TInput, System.Runtime.ExceptionServices.ExceptionDispatchInfo!, bool>! handle) -> Hl7.Cql.Abstractions.Exceptions.EnumerationExceptionHandlingStrategy<TInput>!
+static Hl7.Cql.Abstractions.Exceptions.EnumerationExceptionHandlingStrategy.Throw<TInput>() -> Hl7.Cql.Abstractions.Exceptions.EnumerationExceptionHandlingStrategy<TInput>!
+static Hl7.Cql.Abstractions.Exceptions.EnumerationExceptionHandlingStrategy<TInput>.Throw.get -> Hl7.Cql.Abstractions.Exceptions.EnumerationExceptionHandlingStrategy<TInput>!
 static Hl7.Cql.Abstractions.UCUMUnits.FromDateTimePrecision(Hl7.Cql.Iso8601.DateTimePrecision dtp) -> string?
 static readonly Hl7.Cql.Abstractions.Units.CqlUnitsToUCUM -> System.Collections.Generic.IDictionary<string!, string!>!
 static readonly Hl7.Cql.Abstractions.Units.UCUMUnitsToCql -> System.Collections.Generic.IDictionary<string!, string!>!

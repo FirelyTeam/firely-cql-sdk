@@ -6,7 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Runtime.ExceptionServices;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
@@ -31,22 +33,29 @@ internal class ResourcePackager(
         string CSharpSourceCode,
         byte[] AssemblyBinary);
 
-    public IEnumerable<(string VersionedLibraryIdentifier, Func<FhirResource>)> PackageResourcesV2(
+    public IEnumerable<(string versionedLibraryIdentifier, FhirResource fhirResource)> PackageResourcesV2(
         ElmLibrarySet librarySet,
-        IEnumerable<Input> inputs,
-        string? resourceCanonicalRootUrl,
-        SysDateTime? overrideDate)
+        Func<string, Input> inputsById,
+        EnumerationExceptionHandlingStrategy<ElmLibrary>? exceptionHandlingStrategy = null,
+        string? resourceCanonicalRootUrl = null,
+        SysDateTime? overrideDate = null)
     {
-        var inputsById = inputs.ToDictionary(o => o.VersionedLibraryIdentifier);
+        exceptionHandlingStrategy ??= EnumerationExceptionHandlingStrategy<ElmLibrary>.Throw;
+        resourceCanonicalRootUrl ??= string.Empty;
         foreach (ElmLibrary elmLibrary in librarySet)
         {
             var versionedIdentifier = elmLibrary.GetVersionedIdentifier()!;
 
-            yield return (versionedIdentifier, CreateLibrary);
+            switch (exceptionHandlingStrategy.TryGetNext(elmLibrary, _ => CreateLibrary()))
+            {
+                case {Index:1, Value1:{} next}: yield return (versionedIdentifier,next); break;
+                case {Index:2, Value2: false}: yield break;
+                default: continue;
+            }
 
             FhirResource CreateLibrary()
             {
-                var (_, cqlString, elmLibraryInput, cSharpSourceCode, assemblyBinary) = inputsById[versionedIdentifier];
+                var (_, cqlString, elmLibraryInput, cSharpSourceCode, assemblyBinary) = inputsById(versionedIdentifier);
                 if (versionedIdentifier != elmLibraryInput.GetVersionedIdentifier()!)
                     throw new InvalidOperationException("Versioned identifiers do not match.");
 
@@ -57,7 +66,7 @@ internal class ResourcePackager(
                     Encoding.Default.GetBytes(cqlString),
                     assemblyBinary,
                     GetCSharpSourceCodeByName(),
-                    resourceCanonicalRootUrl ?? string.Empty,
+                    resourceCanonicalRootUrl,
                     overrideDate ?? SysDateTime.Now);
 
                 IEnumerable<KeyValuePair<string, string>>? GetCSharpSourceCodeByName()

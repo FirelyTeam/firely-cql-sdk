@@ -1,11 +1,21 @@
 ﻿using CqlSdkPrototype.Cql.Fluent;
 using CqlSdkPrototype.Elm.Fluent;
 using CqlSdkPrototype.Elm.Fluent.Extensions;
+using Hl7.Cql.Abstractions.Exceptions;
 
 namespace CqlSdkPrototype.Packaging.Fluent;
 
 public static partial class FluentPackagingToolkitExtensions
 {
+    public static FluentPackagingToolkit SetExceptionHandlingToIgnore(this FluentPackagingToolkit packagingToolkit, bool stopAfterFirstException = false) =>
+        packagingToolkit.Reconfigure(o => o with
+        {
+            ProcessBatchItemExceptionHandling = stopAfterFirstException
+                                                    ? ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak
+                                                    : ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
+        });
+
+
     public static FluentPackagingToolkit AddPackagingInputsFromCqlAndElmToolkits(
         this FluentPackagingToolkit packagingToolkit,
         FluentCqlToolkit cqlToolkit,

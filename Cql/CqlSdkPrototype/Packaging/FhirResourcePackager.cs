@@ -1,6 +1,8 @@
-﻿using CqlSdkPrototype.Infrastructure;
+﻿using System.Runtime.ExceptionServices;
+using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Packaging.Fluent;
 using CqlSdkPrototype.Packaging.Internal;
+using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging;
 
@@ -91,28 +93,143 @@ public sealed class FhirResourcePackager
     public void PackageFhirResources(Uri? canonicalRootUrl, DateTime? overrideDate)
     {
         var builder = _fhirResourcePackagings.ToBuilder();
-        LibrarySet librarySet = new LibrarySet("", builder.Values.Select(o => o.Input.ElmLibrary).ToArray());
-        var packageResourcesV2 = _services.ResourcePackager.PackageResourcesV2(
-            librarySet,
-            builder.Values.Select(o => new ResourcePackager.Input(o.VersionedLibraryIdentifier.ToString(), o.Input.CqlLibrary.Cql, o.Input.ElmLibrary, o.Input.CSharpSourceCode, o.Input.AssemblyBinary)),
-            canonicalRootUrl?.ToString(),
-            overrideDate);
-        bool hasChanged = false;
-        foreach (var (versionedLibraryIdentifier, getFhirResource) in packageResourcesV2)
-        {
-            var fhirResource = getFhirResource();
-            var cqlVersionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(versionedLibraryIdentifier);
-            var fhirResourcePackaging = builder[cqlVersionedLibraryIdentifier];
-            if (fhirResourcePackaging.FhirResource is not null)
-                _services.Logger.LogWarning("Skipping replacing existing resource for {id}.", versionedLibraryIdentifier);
-            else
-            {
-                builder[cqlVersionedLibraryIdentifier] = fhirResourcePackaging with { FhirResource = fhirResource};
-                hasChanged = true;
-            }
-        }
 
-        if (hasChanged)
+        LibrarySet librarySet = new LibrarySet("", builder.Values.Select(o => o.Input.ElmLibrary).ToArray());
+
+        IEnumerable<ResourcePackager.Input> resourcePackagerInputs = builder.Values
+                                                                            .SelectResourcePackagerInputs()
+                                                                            .Select(o =>
+                                                                            {
+                                                                                _services.Logger.LogInformation(
+                                                                                    "Packaging resource for {id}.", o.VersionedLibraryIdentifier);
+                                                                                return o;
+                                                                            });
+        var inputsById = resourcePackagerInputs.ToDictionary(o => o.VersionedLibraryIdentifier);
+        var count =
+            librarySet
+                .PackageResources(
+                    inputsById: id => inputsById[id],
+                    resourcePackager: _services.ResourcePackager,
+                    exceptionHandlingStrategy: EnumerationExceptionHandlingStrategy.Delegated<ElmLibrary>((input, e) =>
+                    {
+                        switch (Config.ProcessBatchItemExceptionHandling)
+                        {
+                            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue:
+                                _services.Logger.LogWarning(e.SourceException, "An error occurred while packaging resource for {id}.",
+                                                            input.identifier);
+                                return true;
+                            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:
+                                _services.Logger.LogWarning(e.SourceException, "An error occurred while packaging resource for {id}.",
+                                                            input.identifier);
+                                return false;
+                        }
+
+                        _services.Logger.LogError(e.SourceException, "An error occurred while packaging resource for {id}.",
+                                                  input.identifier);
+                        e.Throw();
+                        throw new UnreachableException();
+                    }), canonicalRootUrl: canonicalRootUrl, overrideDate: overrideDate)
+                .SelectWhere(o =>
+                {
+                    var cqlVersionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(o.versionedLibraryIdentifier);
+                    var fhirResourcePackaging = builder[cqlVersionedLibraryIdentifier];
+                    if (fhirResourcePackaging.FhirResource is null)
+                    {
+                        _services.Logger.LogInformation("Packaged resource for {id}.", o.versionedLibraryIdentifier);
+                        builder[cqlVersionedLibraryIdentifier] = fhirResourcePackaging with { FhirResource = o.fhirResource };
+                        return (true, o);
+                    }
+
+                    _services.Logger.LogWarning("Skipping replacing existing resource for {id}.", o.versionedLibraryIdentifier);
+                    return (false, default);
+                })
+                .Count();
+
+        if (count > 0)
             SetFhirResourcePackagings(builder.ToImmutable());
     }
 }
+
+file static class Extensions
+{
+    public static IEnumerable<TR> SelectWhere<T, TR>(this IEnumerable<T> source, Func<T, (bool include, TR resultOrDefault)> selector) =>
+        source
+            .Select(selector)
+            .Where(o => o.include)
+            .Select(o => o.resultOrDefault);
+
+    public static IEnumerable<(string versionedLibraryIdentifier, FhirResource fhirResource)> PackageResources(
+        this LibrarySet librarySet,
+        Func<string, ResourcePackager.Input> inputsById,
+        ResourcePackager resourcePackager,
+        EnumerationExceptionHandlingStrategy<ElmLibrary>? exceptionHandlingStrategy,
+        Uri? canonicalRootUrl,
+        DateTime? overrideDate) =>
+        resourcePackager.PackageResourcesV2(
+            librarySet,
+            inputsById,
+            exceptionHandlingStrategy,
+            canonicalRootUrl?.ToString(),
+            overrideDate);
+
+    public static IEnumerable<ResourcePackager.Input> SelectResourcePackagerInputs(
+        this IEnumerable<FhirResourcePackaging> resourcePackagings)
+    {
+        foreach (var (((versionedLibraryIdentifier, cql), elmLibrary, cSharpSourceCode, assemblyBinary), _) in resourcePackagings)
+            yield return new ResourcePackager.Input(versionedLibraryIdentifier.ToString(), cql, elmLibrary, cSharpSourceCode, assemblyBinary);
+    }
+
+    public static IEnumerable<TOutput> Select<TInput, TOutput>(
+        this IEnumerable<TInput> source,
+        Func<TInput, TOutput> selector,
+        EnumerationExceptionHandlingStrategy<TInput> exceptionHandlingStrategy)
+    {
+        using var enumerator = source.GetEnumerator();
+        while (true)
+        {
+            try
+            {
+                if (!enumerator.MoveNext())
+                    break;
+            }
+            catch (Exception e)
+            {
+                if (!exceptionHandlingStrategy.HandleException(enumerator.Current, ExceptionDispatchInfo.Capture(e)))
+                    break;
+                continue;
+            }
+
+            TOutput output;
+            try
+            {
+                output = selector(enumerator.Current);
+            }
+            catch (Exception e)
+            {
+                if (!exceptionHandlingStrategy.HandleException(enumerator.Current, ExceptionDispatchInfo.Capture(e)))
+                    break;
+                continue;
+            }
+
+            yield return output;
+        }
+    }
+
+    public static (bool movedNext, T result, ExceptionDispatchInfo? exception) TryMoveNext<T>(this IEnumerator<T> enumerator)
+    {
+        try
+        {
+            if (enumerator.MoveNext())
+                return (true, enumerator.Current, null);
+            return (false, default!, null);
+        }
+        catch (Exception e)
+        {
+            return (true, default!, ExceptionDispatchInfo.Capture(e));
+        }
+    }
+}
+
+file readonly record struct IdentifierValue<TValue>(CqlVersionedLibraryIdentifier versionedLibraryIdentifier, TValue value);
+
+file readonly record struct IdentifierDeferred<TValue>(CqlVersionedLibraryIdentifier versionedLibraryIdentifier, Func<TValue> getNextValue);
