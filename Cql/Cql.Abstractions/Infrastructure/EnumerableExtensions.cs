@@ -106,4 +106,9 @@ internal static class EnumerableExtensions
         value = stack.Peek();
         return true;
     }
+
+    public static IEnumerable<T> EnumerateSingle<T>(this T item)
+    {
+        yield return item;
+    }
 }

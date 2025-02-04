@@ -5,11 +5,13 @@ using CoreTests;
 using Hl7.Cql.Compiler;
 using CLI.Helpers;
 using CqlSdkPrototype.Elm;
-using CqlSdkPrototype.Runtime;
-using CqlSdkPrototype.Runtime.Extensions;
+using CqlSdkPrototype.Elm.Fluent;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Runtime;
 using CqlSdkPrototype.Infrastructure;
+using CqlSdkPrototype.Invocation;
+using CqlSdkPrototype.Invocation.Extensions;
+using CqlSdkPrototype.Invocation.Fluent.Extensions;
 
 namespace Test
 {
@@ -53,7 +55,7 @@ namespace Test
 
             var results = scope
                 .EnumerateLibraryDefinitionsResults(ctx, CqlVersionedLibraryIdentifier.FromNameAndVersion(CqlLibraryIdentifier.Parse(lib), CqlLibraryVersion.Parse(version)))
-                .ToDictionary(t => t.definition, t => t.getResult());
+                .ToDictionary(t => t.definitionInvoker.DefinitionName, t => t.getResult());
 
             Assert.IsTrue(results.TryGetValue("Numerator", out var numerator));
             Assert.IsInstanceOfType(numerator, typeof(bool?));
@@ -103,18 +105,17 @@ namespace Test
         }
 
         private static IReadOnlyDictionary<string, object?> Run(
-            RuntimeScope scope,
+            LibrarySetInvoker scope,
             string lib,
             string version,
             CqlContext context)
         {
             return scope
                    .EnumerateLibraryDefinitionsResults(context, CqlVersionedLibraryIdentifier.Parse($"{lib}-{version}"))
-                   .ToDictionary(t => t.definition, t => t.getResult());
+                   .ToDictionary(t => t.definitionInvoker.DefinitionName, t => t.getResult());
         }
 
-        [UsedImplicitly]
-        public static RuntimeScope CreateRuntimeScopeFromFhirResourceFile(
+        private static LibrarySetInvoker CreateRuntimeScopeFromFhirResourceFile(
             DirectoryInfo dir,
             string lib,
             string version)
@@ -124,41 +125,47 @@ namespace Test
             var library = fs.ParseFhir<Library>();
             var allLibs = library.GetDependenciesAndSelf(dir);
             //Runtime
-            return allLibs.CreateRuntimeScope();
+            return allLibs.ToLibrarySetInvoker();
         }
 
-        [UsedImplicitly]
-        public static RuntimeScope CreateRuntimeScopeFromElmLibraryFile(
+        private static LibrarySetInvoker CreateRuntimeScopeFromElmLibraryFile(
             DirectoryInfo elmDirectory,
             string lib,
             string version,
             LogLevel logLevel = LogLevel.Error,
             int cacheSize = 0)
         {
-            return CreateRuntimeScopeFromElmLibraryFile(elmDirectory, lib, version, cacheSize);
+            var loggerFactory = new ServiceCollection()
+                                .AddLogging(builder => builder.AddConsole().SetMinimumLevel(logLevel))
+                                .BuildServiceProvider()
+                                .GetRequiredService<ILoggerFactory>();
+
+            return CreateRuntimeScopeFromElmLibraryFile(elmDirectory, lib, version, cacheSize, loggerFactory);
         }
 
-        [UsedImplicitly]
-        public static RuntimeScope CreateRuntimeScopeFromElmLibraryFile(
+        private static LibrarySetInvoker CreateRuntimeScopeFromElmLibraryFile(
             DirectoryInfo elmDirectory,
             string lib,
             string version,
             int cacheSize,
-            ILoggerFactory? loggerFactory = null,
-            Func<RuntimeApiOptions, RuntimeApiOptions>? configureOptions = null)
+            ILoggerFactory? loggerFactory = null/*,
+            Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configureLibrarySetInvokerBuilder = null*/)
         {
-            Trace.Assert(cacheSize == 0, "TODO: CacheSize must still be moved to configuration"); // TODO: CacheSize must still be moved to configuration
             LibrarySet librarySet = new();
             librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
 
-            var elmApiOptions = ElmApiOptions.Default;
-            if (Debugger.IsAttached)
-                elmApiOptions = elmApiOptions with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
-            var elmApi = new ElmApi(loggerFactory, elmApiOptions);
+            var config = ElmToAssemblyCompilerConfig.Default;
+            if (cacheSize != 0)
+                config = config with { LRUCacheSize = cacheSize };
 
-            return elmApi
-                  .AddElmLibraries(librarySet)
-                  .CreateRuntimeScope(configureOptions);
+            if (Debugger.IsAttached)
+                config = config with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
+
+            var elmToolkit = new FluentElmToolkit(loggerFactory, config);
+
+            return elmToolkit
+                   .AddElmLibraries(librarySet)
+                   .ToLibrarySetInvoker(/*configure: configureLibrarySetInvokerBuilder*/);
         }
     }
 }

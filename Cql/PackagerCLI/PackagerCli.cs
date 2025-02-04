@@ -7,10 +7,11 @@
  */
 
 using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Cql.Extensions;
+using CqlSdkPrototype.Cql.Fluent;
+using CqlSdkPrototype.Cql.Fluent.Extensions;
 using CqlSdkPrototype.Elm;
-using CqlSdkPrototype.Elm.Extensibility;
-using CqlSdkPrototype.Elm.Extensions;
+using CqlSdkPrototype.Elm.Fluent;
+using CqlSdkPrototype.Elm.Fluent.Extensions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging;
@@ -19,7 +20,8 @@ using static Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling;
 
 namespace Hl7.Cql.Packager;
 
-internal class PackagerCli(
+internal class PackagerCli
+(
     ILoggerFactory loggerFactory,
     ILogger<PackagerCli> logger,
     OptionsConsoleDumper optionsConsoleDumper,
@@ -34,76 +36,77 @@ internal class PackagerCli(
             optionsConsoleDumper.DumpToConsole();
             var opt = packagerCliOptions.Value;
 
-            ElmApi elmApi;
+            FluentElmToolkit elmToolkit;
             if (translateCql)
             {
-                elmApi = new CqlApi(
-                             loggerFactory,
-                             new CqlApiOptions(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue))
-                         .OnValueSelect(
-                             valueSelector: _ => opt.CqlInDirectory,
-                             ifHasValue: (api, cql) => api.AddCqlLibrariesFromDirectory(cql),
-                             ifNoValue: _ => logger.LogWarning("No input directory specified for ELM. Nothing to do."))
-                         .Translate()
-                         .OnValueSelect(
-                             valueSelector: _ => opt.ElmOutDirectory,
-                             ifHasValue: (api, elm) =>
-                             {
-                                 elm.Recreate();
-                                 api.SaveElmFileToDirectory(elm);
-                             },
-                             ifNoValue: _ => logger.LogInformation("No out directory specified for ELM."))
-                         .Compile();
+                var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
+                elmToolkit = new FluentCqlToolkit(
+                                 loggerFactory,
+                                 cqlToElmProcessorSettings)
+                             .PickValueAndSwitch(
+                                 valueSelector: _ => opt.CqlInDirectory,
+                                 ifHasValue: (api, cql) => api.AddCqlLibrariesFromDirectory(cql),
+                                 ifNoValue: _ => logger.LogWarning("No input directory specified for ELM. Nothing to do."))
+                             .TranslateCqlToElm()
+                             .PickValueAndSwitch(
+                                 valueSelector: _ => opt.ElmOutDirectory,
+                                 ifHasValue: (api, elm) =>
+                                 {
+                                     elm.Recreate();
+                                     api.SaveElmFilesToDirectory(elm);
+                                 },
+                                 ifNoValue: _ => logger.LogInformation("No out directory specified for ELM."))
+                             .CompileCqlToAssemblies();
             }
             else
             {
-                elmApi = new ElmApi(loggerFactory, new ElmApiOptions(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue))
-                         .OnValueSelect(
-                             _ => opt.ElmInDirectory,
-                             ifHasValue: (api, elm) => api.AddElmFilesFromDirectory(elm, filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name)),
-                             ifNoValue: _ => logger.LogWarning("No input directory specified for ELM. Nothing to do."))
-                         .Compile();
+                var elmToolkitSettings = new ElmToAssemblyCompilerConfig(ProcessBatchItemExceptionHandling: IgnoreExceptionAndContinue);
+                elmToolkit = new FluentElmToolkit(loggerFactory, elmToolkitSettings)
+                             .PickValueAndSwitch(
+                                 _ => opt.ElmInDirectory,
+                                 ifHasValue: (api, elm) =>
+                                     api.AddElmFilesFromDirectory(elm, filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name)),
+                                 ifNoValue: _ => logger.LogWarning("No input directory specified for ELM. Nothing to do."))
+                             .CompileElmToAssemblies();
             }
 
             if (opt.CSharpOutDirectory is { } dirOutCS
-                && elmApi.AsExtendable().Entries.Any(e => e.Value.CSharpSourceCode is not null))
+                && elmToolkit.ElmToAssemblyCompilations.Any(e => e.Value.CSharpSourceCode is not null))
             {
                 dirOutCS.Recreate();
-                elmApi.SaveCSharpFilesToDirectory(dirOutCS);
+                elmToolkit.SaveCSharpFilesToDirectory(dirOutCS);
             }
 
             if (opt.AssemblyOutDirectory is { } dirOutDll
-                && elmApi.AsExtendable().Entries.Any(e => e.Value.AssemblyBinary is not null))
+                && elmToolkit.ElmToAssemblyCompilations.Any(e => e.Value.AssemblyBinary is not null))
             {
                 dirOutDll.Recreate();
-                elmApi.SaveAssemblyBinariesToDirectory(dirOutDll);
+                elmToolkit.SaveAssemblyBinariesToDirectory(dirOutDll);
             }
 
             if (opt is
-                // Check that we have all the required options
-                {
-                    CqlInDirectory: { } cqlInDir,
-                    ElmInDirectory: { } elmInDir,
-                    FhirOutDirectory: { } fhirOutDir,
-                    FhirCanonicalRootUrl: var canonicalRootUrl,
-                    FhirOverrideDate: var overrideDate
-                }
-                // Check that we have the libraries produced by the ElmApi
-                && elmApi.AsExtendable()
-                         .Entries
-                         .Select(e => e.Value.ElmLibrary)
-                         .ToArray() is {Length:>0} libraries
-                // Check that we have the assemblies produced by the ElmApi
-                && elmApi.AsExtendable()
-                         .Entries
-                         .Where(e => e.Value is {AssemblyBinary: { }, CSharpSourceCode: { }})
-                         .ToDictionary(
-                             e => e.Key.ToString(),
-                             e => new AssemblyDataWithSourceCode(
-                                 assemblyBytes: e.Value.AssemblyBinary!,
-                                 sourceCodeFileName: "", // Won't get used
-                                 sourceCode: e.Value.CSharpSourceCode!,
-                                 debugSymbolsBytes: e.Value.DebugSymbolsBinary)) is {} assembliesByLibraryName)
+                    // Check that we have all the required options
+                    {
+                        CqlInDirectory: { } cqlInDir,
+                        ElmInDirectory: { } elmInDir,
+                        FhirOutDirectory: { } fhirOutDir,
+                        FhirCanonicalRootUrl: var canonicalRootUrl,
+                        FhirOverrideDate: var overrideDate
+                    }
+                // Check that we have the libraries produced by the ElmToolkit
+                && elmToolkit.ElmToAssemblyCompilations
+                             .Select(e => e.Value.ElmLibrary)
+                             .ToArray() is { Length: > 0 } libraries
+                // Check that we have the assemblies produced by the ElmToolkit
+                && elmToolkit.ElmToAssemblyCompilations
+                             .Where(e => e.Value is { AssemblyBinary: { }, CSharpSourceCode: { } })
+                             .ToDictionary(
+                                 e => e.Key.ToString(),
+                                 e => new AssemblyBinaryWithSourceCode(
+                                     assemblyBytes: e.Value.AssemblyBinary!,
+                                     sourceCodeFileName: "", // Won't get used
+                                     sourceCode: e.Value.CSharpSourceCode!,
+                                     debugSymbolsBytes: e.Value.DebugSymbolsBinary)) is { } assembliesByLibraryName)
             {
                 _ = resourcePackager;
                 LibrarySet elmLibrarySet = new LibrarySet("", libraries);
@@ -133,7 +136,7 @@ internal class PackagerCli(
 
 file static class X
 {
-    public static TSelf OnValueSelect<TSelf, TValue>(
+    public static TSelf PickValueAndSwitch<TSelf, TValue>(
         this TSelf self,
         Func<TSelf, TValue?> valueSelector,
         Action<TSelf, TValue>? ifHasValue = null,

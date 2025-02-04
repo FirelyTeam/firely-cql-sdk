@@ -4,23 +4,6 @@ namespace CqlSdkPrototype.Internal;
 
 internal static class InternalExtensions
 {
-    public static string[] SplitLines(this string multilineString) =>
-        multilineString.Split([Environment.NewLine], StringSplitOptions.None);
-
-    public static string Join(this IEnumerable<string> lines) =>
-        string.Concat(lines);
-
-    public static string JoinLines(this IEnumerable<string> lines) =>
-        string.Join(Environment.NewLine, lines);
-
-    public static string TakeLines(this string multilineString, int count) =>
-        multilineString.SplitLines().Take(count).JoinLines();
-
-    public static string TrimFileExtension(this string filePath, string extension) =>
-        filePath.EndsWith(extension, StringComparison.OrdinalIgnoreCase)
-            ? filePath[..^extension.Length]
-            : filePath;
-
     public static Assembly LoadFromBytes(this AssemblyLoadContext assemblyLoadContext, byte[] assembly, byte[]? symbols = null)
     {
         using var assemblyStream = new MemoryStream(assembly);
@@ -45,54 +28,6 @@ internal static class InternalExtensions
         return enumerable
                .Where(x => x is not null)
                .Select(x => x!);
-    }
-
-    public static bool IsBetween(
-        this Version value,
-        Version lowerIncl,
-        Version upperExcl)
-    {
-        return value >= lowerIncl && value < upperExcl;
-    }
-
-    public static Maybe<TSource> TryGetFirst<TSource>(this IEnumerable<TSource> source)
-    {
-        if (source == null)
-            throw new ArgumentNullException(nameof(source));
-
-        if (source is IList<TSource> list)
-        {
-            if (list.Count > 0)
-            {
-                return list[0];
-            }
-        }
-        else
-        {
-            using IEnumerator<TSource> e = source.GetEnumerator();
-            if (e.MoveNext())
-            {
-                return e.Current;
-            }
-        }
-
-        return Maybe<TSource>.NoValue;
-    }
-
-    public static Maybe<TSource> TryGetFirst<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
-    {
-        if (source == null)
-            throw new ArgumentNullException(nameof(source));
-
-        foreach (TSource element in source)
-        {
-            if (predicate(element))
-            {
-                return element;
-            }
-        }
-
-        return Maybe<TSource>.NoValue;
     }
 
     public static LogExceptionMessageAction GetLogExceptionMessageAction(

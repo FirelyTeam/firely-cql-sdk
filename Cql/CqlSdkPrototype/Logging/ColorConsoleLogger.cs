@@ -2,6 +2,11 @@
 
 namespace CqlSdkPrototype.Logging;
 
+/// <remarks>
+/// This class is not part of the API. It is used internally by the prototype and the PackagerCLI.
+/// It will be moved to the PackagerCLI once the prototype is complete,
+/// and then it will move to the PackagerCLI and made internal.
+/// </remarks>
 public sealed partial class ColorConsoleLogger(string categoryName, ColorConsoleLoggerProvider provider) : ILogger
 {
     private readonly string _categoryName = categoryName.Length == 0 ? "" : $"{categoryName}: ";

@@ -3,7 +3,7 @@
 	<Import Project="..\..\cql-sdk.props" />
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -29,10 +29,6 @@
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Test.Measures.Demo" Key="$(LibraryPKHash)" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="examples\" />
 	</ItemGroup>
 
 </Project>

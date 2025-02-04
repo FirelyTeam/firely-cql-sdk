@@ -1,4 +1,6 @@
 ﻿using CLI.Helpers;
+using CqlSdkPrototype.Invocation;
+using CqlSdkPrototype.Invocation.Fluent;
 using Dumpify;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
@@ -6,8 +8,8 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
-using CqlSdkPrototype.Runtime;
 using Hl7.Cql.CodeGeneration.NET;
+using CqlSdkPrototype.Invocation.Fluent.Extensions;
 
 namespace CLI
 {
@@ -30,11 +32,11 @@ namespace CLI
             //used for debugging with breakpoints in Measures.* project
             //if used in production scenario compile measures.* dll and reference it below instead, example Assembly.LoadFrom("Measures.Authoring")
             //see launchsettings.json
-            var assemblyData = AssemblyData.Default.LoadFromFiles(new FileInfo(_opts.AssemblyPath));
-            using var runtimeScope = new RuntimeApi()
-                      .AddAssemblies([assemblyData])
-                      .CreateRuntimeScope();
-            RunShared(_opts, runtimeScope);
+            var assemblyBinary = AssemblyBinary.Default.LoadFromFile(new FileInfo(_opts.AssemblyPath));
+            using var librarySetInvoker = new FluentInvocationToolkit()
+                      .AddAssemblyBinaries(assemblyBinary)
+                      .ToLibrarySetInvoker();
+            RunShared(_opts, librarySetInvoker);
         }
 
         public void RunWithResources()
@@ -46,7 +48,7 @@ namespace CLI
             RunShared(_opts, scope);
         }
 
-        private void RunShared(CommandLineOptions opt, RuntimeScope runtimeScope)
+        private void RunShared(CommandLineOptions opt, LibrarySetInvoker librarySetInvoker)
         {
             //Type libraryType = ResolveLibraryType(opt, runtimeScope) ?? throw new ArgumentException($"Unknown library: {opt.Library}");
             Console.WriteLine("Loading value sets");

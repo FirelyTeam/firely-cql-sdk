@@ -16,7 +16,6 @@ VSWorkspaceState.json
 .idea/
 
 # ReSharper Settings
-*.DotSettings
 *.DotSettings.user
 
 
@@ -408,4 +407,3 @@ VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/results/*.json
 /Demo/**/Resources/*.*
 #remove global.json for testing dotnet sdk updates
 global.json
-/Cql/CqlSdkPrototype/generated

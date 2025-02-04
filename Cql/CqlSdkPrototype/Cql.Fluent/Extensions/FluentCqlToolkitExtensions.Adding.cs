@@ -1,0 +1,42 @@
+﻿using CqlSdkPrototype.Infrastructure;
+using CqlSdkPrototype.Internal;
+
+namespace CqlSdkPrototype.Cql.Fluent.Extensions;
+
+public static partial class FluentCqlToolkitExtensions
+{
+    public static FluentCqlToolkit AddCqlLibraryString(
+        this FluentCqlToolkit cqlToolkit,
+        CqlLibraryString cqlLibrary)
+    {
+        return cqlToolkit.AddCqlLibraries([cqlLibrary]);
+    }
+
+    public static FluentCqlToolkit AddCqlLibrariesFromDirectory(
+        this FluentCqlToolkit cqlToolkit,
+        DirectoryInfo directory,
+        EnumerationOptions? options = null,
+        Func<FileInfo, bool>? filePredicate = null)
+    {
+        var files = directory.EnumerateFiles("*.cql", options ?? InternalConstants.DefaultEnumerationOptions);
+        if (filePredicate is not null) files = files.Where(filePredicate);
+        return cqlToolkit.AddCqlLibraryFiles(files);
+    }
+
+    public static FluentCqlToolkit AddCqlLibraryFiles(
+        this FluentCqlToolkit cqlToolkit,
+        IEnumerable<FileInfo> files)
+    {
+        var logger = cqlToolkit.CreateLogger();
+        var cqlLibraries = files
+            .Select(f =>
+            {
+                logger.LogInformation("Loading library from file: {file}", f);
+                var cqlContent = File.ReadAllText(f.FullName);
+                var cqlLibrary = CqlLibraryString.Parse(cqlContent);
+                return cqlLibrary;
+            }); // Log errors
+
+        return cqlToolkit.AddCqlLibraries(cqlLibraries);
+    }
+}

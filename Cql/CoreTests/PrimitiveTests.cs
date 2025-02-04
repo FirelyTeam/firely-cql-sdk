@@ -5,14 +5,14 @@ using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Elm.Fluent;
 using Hl7.Cql.Runtime.Hosting;
 
 namespace CoreTests
 {
     using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
     using Expression = System.Linq.Expressions.Expression;
-    
+
     [TestClass]
     [TestCategory("UnitTest")]
     public class PrimitiveTests
@@ -3408,9 +3408,9 @@ namespace CoreTests
 
             Assert.That.DoesNotThrow(() =>
             {
-                new ElmApi(loggerFactory)
+                new FluentElmToolkit(loggerFactory)
                     .AddElmLibraries(librarySet)
-                    .Compile();
+                    .CompileElmToAssemblies();
             });
         }
 

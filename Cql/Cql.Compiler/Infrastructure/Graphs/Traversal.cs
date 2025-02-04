@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions.Infrastructure;
+
 namespace Hl7.Cql.Compiler.Infrastructure.Graphs;
 
 internal static class Traversal
@@ -56,7 +58,7 @@ internal static class Traversal
             case 0:
                 return [];
             case 1:
-                return EnumerateSingle(unvisited.First());
+                return unvisited.First().EnumerateSingle();
         }
 
         HashSet<T> visited = [];
@@ -87,10 +89,5 @@ internal static class Traversal
         }
 
         return results;
-    }
-
-    private static IEnumerable<T> EnumerateSingle<T>(T first)
-    {
-        yield return first;
     }
 }

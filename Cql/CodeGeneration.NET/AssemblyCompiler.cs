@@ -49,12 +49,12 @@ namespace Hl7.Cql.CodeGeneration.NET
                 });
         }
 
-        public IEnumerable<(Library library, Func<AssemblyDataWithSourceCode> generateAssemblyDataWithSourceCode)> CompileDeferred(
+        public IEnumerable<(Library library, Func<AssemblyBinaryWithSourceCode> generateAssemblyBinaryWithSourceCode)> CompileDeferred(
             LibrarySet librarySet,
             IEnumerable<(Library Library, string CSharp)> input,
             AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None)
         {
-            Dictionary<string, AssemblyDataWithSourceCode> results = new();
+            Dictionary<string, AssemblyBinaryWithSourceCode> results = new();
             Assembly[] assemblyReferences = _referencesLazy.Value;
             foreach (var (library, cSharp) in input)
                 yield return (library, () =>
@@ -74,9 +74,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                 sourceReferenceResolver: new SourceFileResolver(ImmutableArray<string>.Empty, null)
             );
 
-        private AssemblyDataWithSourceCode CompileNode(
+        private AssemblyBinaryWithSourceCode CompileNode(
             string librarySourceString,
-            Dictionary<string, AssemblyDataWithSourceCode> assemblies,
+            Dictionary<string, AssemblyBinaryWithSourceCode> assemblies,
             LibrarySet librarySet,
             Library library,
             IEnumerable<Assembly> assemblyReferences,
@@ -152,7 +152,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             }
             var bytes = codeStream.ToArray();
             var debugSymbols = pdbStream?.ToArray();
-            var asmData = new AssemblyDataWithSourceCode(bytes, new Dictionary<string, string> { { libraryVersionedIdentifier!, librarySourceString }}, debugSymbols);
+            var asmData = new AssemblyBinaryWithSourceCode(bytes, new Dictionary<string, string> { { libraryVersionedIdentifier!, librarySourceString }}, debugSymbols);
             return asmData;
         }
 
@@ -231,7 +231,7 @@ namespace Hl7.Cql.CodeGeneration.NET
 
     internal static class AssemblyCompilerExtensions
     {
-        public static IEnumerable<(Library library, AssemblyDataWithSourceCode assemblyDataWithSourceCode)> Compile(
+        public static IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> Compile(
             this AssemblyCompiler compiler,
             LibrarySet librarySet,
             IEnumerable<(Library Library, string CSharp)> input,
@@ -239,7 +239,7 @@ namespace Hl7.Cql.CodeGeneration.NET
         {
             return compiler
                    .CompileDeferred(librarySet, input, debugInformationFormat)
-                   .Select(x => (x.library, x.generateAssemblyDataWithSourceCode()));
+                   .Select(x => (x.library, x.generateAssemblyBinaryWithSourceCode()));
         }
 
     }

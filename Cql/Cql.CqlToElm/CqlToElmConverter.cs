@@ -23,11 +23,12 @@ namespace Hl7.Cql.CqlToElm
         /// <summary>
         /// CQL to Elm IServiceProvider
         /// </summary>
-        public IServiceProvider Services { get; }
+        private IServiceProvider Services { get; }
+
         /// <summary>
         /// CQL to Elm Logger
         /// </summary>
-        public ILogger<CqlToElmConverter> Logger { get; }
+        private ILogger<CqlToElmConverter> Logger { get; }
 
         /// <summary>
         /// Converts the CQL contained in <paramref name="cqlLibrary"/> to an ELM <see cref="Library"/>.
@@ -70,17 +71,9 @@ namespace Hl7.Cql.CqlToElm
 
         internal LibraryBuilder GetBuilder(LibraryVisitor libraryVisitor, TextReader cqlReader)
         {
-            try
-            {
-                var libraryContext = ParseLibrary(cqlReader);
-                var libraryBuilder = libraryVisitor.Visit(libraryContext);
-                return libraryBuilder;
-            }
-            catch (Exception e)
-            {
-                Logger.LogCritical(e, "Exception while converting CQL to ELM.");
-                throw;
-            }
+            var libraryContext = ParseLibrary(cqlReader);
+            var libraryBuilder = libraryVisitor.Visit(libraryContext);
+            return libraryBuilder;
         }
 
         internal static LibraryVisitor GetLibraryVisitorScoped(IServiceScope scope)

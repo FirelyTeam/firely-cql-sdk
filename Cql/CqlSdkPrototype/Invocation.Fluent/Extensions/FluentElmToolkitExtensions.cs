@@ -1,0 +1,38 @@
+﻿using CqlSdkPrototype.Elm.Fluent;
+
+namespace CqlSdkPrototype.Invocation.Fluent.Extensions;
+
+public static class FluentElmToolkitExtensions
+{
+    public static FluentInvocationToolkit ToFluentInvocationToolkit(
+        this FluentElmToolkit elmToolkit/*,
+        Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configureLibrarySetInvokerBuilderSettings = null*/)
+    {
+        /*var config = LibrarySetInvokerBuilderConfig.Default;
+        if (configureLibrarySetInvokerBuilderSettings is not null) config = configureLibrarySetInvokerBuilderSettings(config);*/
+
+        var assemblyBinaries =
+            from entry in elmToolkit.ElmToAssemblyCompilations
+            let assembly = entry.Value.AssemblyBinary
+            where assembly is not null
+            let debugSymbols = entry.Value.DebugSymbolsBinary
+            let assemblyBinary = new Hl7.Cql.CodeGeneration.NET.AssemblyBinary(assembly, debugSymbols)
+            select assemblyBinary;
+
+        var invocationToolkit = new FluentInvocationToolkit(elmToolkit.LoggerFactory/*, config*/).AddAssemblyBinaries(assemblyBinaries);
+        return invocationToolkit;
+    }
+
+#pragma warning disable RS0026 // Do not add multiple public overloads with optional parameters
+    public static LibrarySetInvoker ToLibrarySetInvoker(
+#pragma warning restore RS0026
+        this FluentElmToolkit elmToolkit,
+        string name = ""/*,
+        Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configure = null*/)
+    {
+        return elmToolkit
+               .CompileElmToAssemblies()
+               .ToFluentInvocationToolkit(/*configure*/)
+               .ToLibrarySetInvoker(name);
+    }
+}

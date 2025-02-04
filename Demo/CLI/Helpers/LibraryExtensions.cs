@@ -6,12 +6,13 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using CqlSdkPrototype.Invocation;
+using CqlSdkPrototype.Invocation.Fluent;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
-using CqlSdkPrototype.Runtime;
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Packaging;
 using Library = Hl7.Fhir.Model.Library;
 
@@ -81,20 +82,20 @@ internal static class LibraryExtensions
         }
     }
 
-    public static RuntimeScope CreateRuntimeScope(
+    public static LibrarySetInvoker ToLibrarySetInvoker(
         this IEnumerable<Library> libraries)
     {
-        var assemblyDatas =
+        var assemblyBinaries =
             libraries
             .Select(library => library.Content.SingleOrDefault(att => att.ContentType == "application/octet-stream"))
             .OfType<Attachment>()
             .Select(dll => dll.Data)
-            .Select(assemblyBytes => AssemblyData.Default with { AssemblyBytes = assemblyBytes})
+            .Select(assemblyBytes => AssemblyBinary.Default with { AssemblyBytes = assemblyBytes})
             .ToArray();
 
-        return new RuntimeApi()
-                         .AddAssemblies(assemblyDatas)
-                         .CreateRuntimeScope();
+        return new FluentInvocationToolkit()
+                         .AddAssemblyBinaries(assemblyBinaries)
+                         .ToLibrarySetInvoker();
     }
 
     private static Dictionary<string, List<string>> GetValueSets(Type libraryType)
