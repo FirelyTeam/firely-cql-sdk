@@ -11,6 +11,8 @@ using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Elm;
+using Hl7.Fhir.Model;
+using System;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
@@ -49,20 +51,23 @@ namespace Hl7.Cql.CodeGeneration.NET
                 });
         }
 
-        public IEnumerable<(Library library, Func<AssemblyBinaryWithSourceCode> generateAssemblyBinaryWithSourceCode)> CompileDeferred(
+        public IEnumerable<(Library library, Func<AssemblyBinaryWithSourceCode> getAssemblyBinaryWithSourceCode)> CompileDeferred(
             LibrarySet librarySet,
             IEnumerable<(Library Library, string CSharp)> input,
             AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None)
         {
             Dictionary<string, AssemblyBinaryWithSourceCode> results = new();
             Assembly[] assemblyReferences = _referencesLazy.Value;
-            foreach (var (library, cSharp) in input)
-                yield return (library, () =>
-                                 {
-                                     var result = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat);
-                                     results.Add(library.GetVersionedIdentifier()!, result);
-                                     return result;
-                                 });
+            return input
+                .TrySelect(
+                    t =>
+                    {
+                        var (library, cSharp) = t;
+                        var result = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat);
+                        results.Add(library.GetVersionedIdentifier()!, result);
+                        return result;
+                    })
+                .Select(t => (t.Source.Library, t.GetResult));
         }
 
         private static CSharpCompilationOptions CreateCSharpCompilationOptions(
@@ -235,12 +240,9 @@ namespace Hl7.Cql.CodeGeneration.NET
             this AssemblyCompiler compiler,
             LibrarySet librarySet,
             IEnumerable<(Library Library, string CSharp)> input,
-            AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None)
-        {
-            return compiler
-                   .CompileDeferred(librarySet, input, debugInformationFormat)
-                   .Select(x => (x.library, x.generateAssemblyBinaryWithSourceCode()));
-        }
-
+            AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None) =>
+            compiler
+                .CompileDeferred(librarySet, input, debugInformationFormat)
+                .CatchPairwise();
     }
 }

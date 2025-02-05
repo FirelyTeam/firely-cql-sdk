@@ -8,11 +8,9 @@ using CqlSdkPrototype.Elm.Fluent.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation;
 using CqlSdkPrototype.Invocation.Extensions;
-using CqlSdkPrototype.Invocation.Fluent;
 using CqlSdkPrototype.Invocation.Fluent.Extensions;
 using CqlSdkPrototype.Packaging;
 using CqlSdkPrototype.Packaging.Fluent;
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
 using Microsoft.Extensions.DependencyInjection;
@@ -120,7 +118,7 @@ internal static class Program
         using var librarySetInvoker = cqlToolkit
                                       .Reconfigure(o => o with
                                       {
-                                          ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
+                                          EnumerationExceptionHandling = EnumerationExceptionHandling.Continue
                                       })
                                       .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory)
                                       .ToLibrarySetInvoker();

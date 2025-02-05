@@ -1,7 +1,6 @@
 ﻿#nullable enable
 using CoreTests.Tuples;
 using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Invocation;
 using CqlSdkPrototype.Invocation.Extensions;
 using CqlSdkPrototype.Invocation.Fluent;
 using CqlSdkPrototype.Invocation.Fluent.Extensions;

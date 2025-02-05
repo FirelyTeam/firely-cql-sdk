@@ -1,5 +1,4 @@
 ﻿using CqlSdkPrototype.Infrastructure;
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
 
 namespace CqlSdkPrototype.Elm.Fluent.Extensions;
@@ -9,9 +8,9 @@ public static partial class FluentElmToolkitExtensions
     public static FluentElmToolkit SetExceptionHandlingToIgnore(this FluentElmToolkit cqlToolkit, bool stopAfterFirstException = false) =>
         cqlToolkit.Reconfigure(o => o with
         {
-            ProcessBatchItemExceptionHandling = stopAfterFirstException
-                                                    ? ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak
-                                                    : ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
+            EnumerationExceptionHandling = stopAfterFirstException
+                                                    ? EnumerationExceptionHandling.Break
+                                                    : EnumerationExceptionHandling.Continue
         });
 
     public static FluentElmToolkit SetAssemblyDebugInformationToEmbedded(this FluentElmToolkit cqlToolkit) =>

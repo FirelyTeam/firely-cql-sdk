@@ -1,6 +1,3 @@
-using System.Collections.Immutable;
-using Hl7.Cql.Abstractions.Infrastructure;
-
 namespace Hl7.Cql.Elm;
 
 internal static class LibraryExtensions

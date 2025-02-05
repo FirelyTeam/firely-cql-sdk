@@ -1,7 +1,6 @@
 ﻿using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Packaging;
-using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Packaging.Fluent;
 

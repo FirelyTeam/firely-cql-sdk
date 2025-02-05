@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Library = Hl7.Cql.Elm.Library;
@@ -42,22 +41,18 @@ internal partial class LibrarySetExpressionBuilderContext
     public LibrarySet LibrarySet { get; }
 
     public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
-        ProcessBatchItemExceptionHandling processLibraryExceptionHandling = default) =>
+        EnumerationExceptionHandling processLibraryExceptionHandling = default) =>
         this.CatchRethrowExpressionBuildingException(_ =>
         {
+            var catchHandler = _logger.CreateLoggingEnumerateExceptionHandler<Library>(
+                processLibraryExceptionHandling,
+                (lib, log) => log("Error writing library '{libraryName}' to C#.", lib.GetVersionedIdentifier()!));
+
             LibrarySet
-                .TryProcessEach(ProcessLibrary)
-                .WithEachException(outcome =>
-                {
-                    var libraryName = outcome.Input.GetVersionedIdentifier()!;
-                    if (processLibraryExceptionHandling == ProcessBatchItemExceptionHandling.ThrowException)
-                        _logger.LogError(outcome.Exception, "Error writing library '{libraryName}' to C#.", libraryName);
-                    else
-                        _logger.LogWarning(outcome.Exception, "Error writing library '{libraryName}' to C#.", libraryName);
-                })
-                .SelectUndeferred(processLibraryExceptionHandling)
+                .TryDoEach(ProcessLibrary)
+                .Catch(catchHandler)
                 .Count() // We must enumerate all
-                ; ;
+                ;
 
             return LibrarySetDefinitions;
 

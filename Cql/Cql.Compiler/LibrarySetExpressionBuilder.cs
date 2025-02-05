@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 
@@ -19,7 +18,7 @@ internal class LibrarySetExpressionBuilder(
     public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null,
-        ProcessBatchItemExceptionHandling processLibraryExceptionHandling = default) =>
+        EnumerationExceptionHandling processLibraryExceptionHandling = default) =>
         NewLibrarySetExpressionBuilderContext(librarySet, librarySetDefinitions)
             .ProcessLibrarySet(processLibraryExceptionHandling);
 

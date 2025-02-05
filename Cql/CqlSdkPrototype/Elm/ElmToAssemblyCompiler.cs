@@ -2,7 +2,6 @@
 using CqlSdkPrototype.Elm.Internal;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime;
@@ -120,7 +119,7 @@ public sealed class ElmToAssemblyCompiler
         using var servicesScope = _services.CreateScopedState();
         var logger = _services.Logger;
         logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
-        var exceptionHandling = Config.ProcessBatchItemExceptionHandling;
+        var exceptionHandling = Config.EnumerationExceptionHandling;
         var debugInformationFormat = Config.AssemblyCompilerDebugInformationFormat;
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _services.LibrarySetCSharpCodeGenerator;
@@ -203,7 +202,7 @@ public sealed class ElmToAssemblyCompiler
         AssemblyCompilerDebugInformationFormat debugInformationFormat,
         ILogger<ElmToAssemblyCompiler> logger,
         LogExceptionMessageAction log,
-        ProcessBatchItemExceptionHandling exceptionHandling)
+        EnumerationExceptionHandling exceptionHandling)
     {
         var assemblyBinaries = assemblyCompiler
                             .CompileDeferred(librarySet, cSharps, debugInformationFormat)
@@ -239,7 +238,7 @@ public sealed class ElmToAssemblyCompiler
         DefinitionDictionary<LambdaExpression> librarySetDefinitions,
         ILogger<ElmToAssemblyCompiler> logger,
         LogExceptionMessageAction log,
-        ProcessBatchItemExceptionHandling exceptionHandling)
+        EnumerationExceptionHandling exceptionHandling)
     {
         var cSharps = cSharpCodeProcessor
                       .GenerateCSharpDeferred(librarySet, librarySetDefinitions)
@@ -273,7 +272,7 @@ public sealed class ElmToAssemblyCompiler
         LibrarySet librarySet,
         ILogger<ElmToAssemblyCompiler> logger,
         LogExceptionMessageAction log,
-        ProcessBatchItemExceptionHandling exceptionHandling)
+        EnumerationExceptionHandling exceptionHandling)
     {
         DefinitionDictionary<LambdaExpression> librarySetDefinitions = new();
         foreach (var (_, libraryDefinitions) in

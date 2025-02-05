@@ -1,5 +1,5 @@
 ﻿using CqlSdkPrototype.Infrastructure;
-using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Cql.Fluent.Extensions;
 
@@ -11,9 +11,7 @@ public static partial class FluentCqlToolkitExtensions
     public static FluentCqlToolkit SetExceptionHandlingToIgnore(this FluentCqlToolkit cqlToolkit, bool stopAfterFirstException = false) =>
         cqlToolkit.Reconfigure(o => o with
         {
-            ProcessBatchItemExceptionHandling = stopAfterFirstException
-                                                    ? ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak
-                                                    : ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
+            EnumerationExceptionHandling = stopAfterFirstException ? EnumerationExceptionHandling.Break : EnumerationExceptionHandling.Continue
         });
 
     public static IEnumerable<(

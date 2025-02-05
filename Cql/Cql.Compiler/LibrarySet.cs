@@ -12,7 +12,7 @@ using Hl7.Cql.Compiler.Infrastructure.Diagramming;
 using Hl7.Cql.Compiler.Infrastructure.Graphs;
 using Hl7.Cql.Compiler.Infrastructure.Sets;
 using Hl7.Cql.Elm;
-using System.Collections.Generic;
+
 #pragma warning disable CS8321 // Local function is declared but never used
 
 namespace Hl7.Cql.Compiler;

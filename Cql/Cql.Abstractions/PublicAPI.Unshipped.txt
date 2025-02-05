@@ -34,10 +34,6 @@ Hl7.Cql.Abstractions.CqlValueSetAttribute.Id.get -> string!
 Hl7.Cql.Abstractions.Exceptions.EnumerationExceptionHandlingStrategy
 Hl7.Cql.Abstractions.Exceptions.EnumerationExceptionHandlingStrategy<TInput>
 Hl7.Cql.Abstractions.Exceptions.EnumerationExceptionHandlingStrategy<TInput>.EnumerationExceptionHandlingStrategy() -> void
-Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling
-Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak = 2 -> Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling
-Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue = 1 -> Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling
-Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling.ThrowException = 0 -> Hl7.Cql.Abstractions.Exceptions.ProcessBatchItemExceptionHandling
 Hl7.Cql.Abstractions.ICqlComparable<T>
 Hl7.Cql.Abstractions.ICqlComparable<T>.CompareTo(T? other, string? precision = null) -> int?
 Hl7.Cql.Abstractions.ICqlComparer

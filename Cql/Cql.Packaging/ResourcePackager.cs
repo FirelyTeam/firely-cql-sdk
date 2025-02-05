@@ -6,11 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Runtime.ExceptionServices;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;

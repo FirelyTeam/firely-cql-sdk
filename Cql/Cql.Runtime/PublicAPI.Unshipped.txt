@@ -32,11 +32,11 @@ Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetDefinitionsForLibrary(string? libr
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetTags(string! library, string! definition, System.Type![]! signature, out System.Linq.ILookup<string!, string!>? tags) -> bool
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetValue(string? libraryName, string! definition, out T? expression) -> bool
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetValue(string? libraryName, string! definition, System.Type![]! signature, out T? expression) -> bool
-Hl7.Cql.Runtime.EnumerateContinuation
-Hl7.Cql.Runtime.EnumerateContinuation.Break = 2 -> Hl7.Cql.Runtime.EnumerateContinuation
-Hl7.Cql.Runtime.EnumerateContinuation.Continue = 1 -> Hl7.Cql.Runtime.EnumerateContinuation
-Hl7.Cql.Runtime.EnumerateContinuation.Throw = 0 -> Hl7.Cql.Runtime.EnumerateContinuation
 Hl7.Cql.Runtime.EnumerateExceptionHandler<TSource>
+Hl7.Cql.Runtime.EnumerationExceptionHandling
+Hl7.Cql.Runtime.EnumerationExceptionHandling.Break = 2 -> Hl7.Cql.Runtime.EnumerationExceptionHandling
+Hl7.Cql.Runtime.EnumerationExceptionHandling.Continue = 1 -> Hl7.Cql.Runtime.EnumerationExceptionHandling
+Hl7.Cql.Runtime.EnumerationExceptionHandling.Throw = 0 -> Hl7.Cql.Runtime.EnumerationExceptionHandling
 Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter
 Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.CqlValueTupleJsonConverter() -> void
 Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory
@@ -50,4 +50,4 @@ override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CreateC
 readonly Hl7.Cql.Runtime.BaseTypeResolver.Types -> System.Collections.Generic.Dictionary<string!, System.Type!>!
 static Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Default.get -> Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter!
 virtual Hl7.Cql.Runtime.BaseTypeResolver.GetPropertyCore(System.Type! type, string! propertyName) -> System.Reflection.PropertyInfo?
-virtual Hl7.Cql.Runtime.EnumerateExceptionHandler<TSource>.Invoke(TSource source, System.Exception! exception) -> Hl7.Cql.Runtime.EnumerateContinuation
+virtual Hl7.Cql.Runtime.EnumerateExceptionHandler<TSource>.Invoke(TSource source, System.Exception! exception) -> Hl7.Cql.Runtime.EnumerationExceptionHandling

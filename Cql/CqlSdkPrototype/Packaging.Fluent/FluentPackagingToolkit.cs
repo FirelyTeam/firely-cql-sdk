@@ -1,6 +1,4 @@
-﻿using CqlSdkPrototype.Elm;
-
-namespace CqlSdkPrototype.Packaging.Fluent;
+﻿namespace CqlSdkPrototype.Packaging.Fluent;
 
 /// <summary>
 /// Provides a fluent interface for working with the FHIR resource packager.

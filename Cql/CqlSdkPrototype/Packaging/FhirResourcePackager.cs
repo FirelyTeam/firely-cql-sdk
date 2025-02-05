@@ -5,7 +5,6 @@ using CqlSdkPrototype.Packaging.Internal;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Compiler.Infrastructure.Diagramming;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging;
 using DateTime = System.DateTime;
@@ -129,13 +128,13 @@ public sealed class FhirResourcePackager
                     resourcePackager: _services.ResourcePackager,
                     exceptionHandlingStrategy: EnumerationExceptionHandlingStrategy.Delegated<ElmLibrary>((input, e) =>
                     {
-                        switch (Config.ProcessBatchItemExceptionHandling)
+                        switch (Config.EnumerationExceptionHandling)
                         {
-                            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue:
+                            case EnumerationExceptionHandling.Continue:
                                 _services.Logger.LogWarning(e.SourceException, "An error occurred while packaging resource for {id}.",
                                                             input.identifier);
                                 return true;
-                            case ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak:
+                            case EnumerationExceptionHandling.Break:
                                 _services.Logger.LogWarning(e.SourceException, "An error occurred while packaging resource for {id}.",
                                                             input.identifier);
                                 return false;

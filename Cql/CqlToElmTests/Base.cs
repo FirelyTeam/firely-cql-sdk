@@ -6,8 +6,6 @@ using Hl7.Cql.Runtime;
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Invocation;
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Model;
 using CqlSdkPrototype.Cql.Fluent;
 using CqlSdkPrototype.Elm.Fluent;
@@ -196,7 +194,7 @@ namespace Hl7.Cql.CqlToElm.Test
             new(
                 LoggerFactory,
                 new CqlToElmTranslatorConfig(
-                    ProcessBatchItemExceptionHandling: ProcessBatchItemExceptionHandling.ThrowException,
+                    EnumerationExceptionHandling: EnumerationExceptionHandling.Throw,
                     Models: Models ?? [CqlModel.ElmR1, CqlModel.Fhir401],
                     ModelInfos: ModelInfos,
                     AmbiguousTypeBehavior: AmbiguousTypeBehavior,
@@ -214,7 +212,7 @@ namespace Hl7.Cql.CqlToElm.Test
             bool enableListPromotion = false) =>
             CreateFluentCqlToolkit(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
                 .ToFluentElmToolkit(_ => new ElmToAssemblyCompilerConfig(
-                                  ProcessBatchItemExceptionHandling.ThrowException,
+                                  EnumerationExceptionHandling.Throw,
                                   Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));
     }
 }
