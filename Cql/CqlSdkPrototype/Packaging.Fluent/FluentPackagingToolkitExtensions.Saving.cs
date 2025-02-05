@@ -1,4 +1,5 @@
-﻿using CqlSdkPrototype.Infrastructure;
+﻿using System.Text.Json;
+using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Packaging;
 
@@ -14,17 +15,20 @@ public static partial class FluentPackagingToolkitExtensions
         (directoryPreparationStrategy ?? DirectoryPreparationStrategy.Recreate).PrepareDirectory(directory);
 
         var logger = packagingToolkit.LoggerFactory.CreateLogger(typeof(FluentPackagingToolkitExtensions));
+        var jsonSerializerOptions = packagingToolkit.ServiceProvider.GetRequiredService<JsonSerializerOptions>();
 
         foreach (var resource in packagingToolkit.FhirResourcePackagings
-                                          .SelectWhere(kv => kv.Value.FhirResource switch
-                                          {
-                                              null             => (false, default!),
-                                              { } fhirResource => (true, fhirResource)
-                                          }))
+                                                 .SelectWhere(kv => kv.Value.FhirResource switch
+                                                 {
+                                                     null             => (false, default!),
+                                                     { } fhirResource => (true, fhirResource)
+                                                 }))
         {
+            var resourceJson = JsonSerializer.Serialize(resource, jsonSerializerOptions);
             var resourceFileName = resource.GetResourceFileName();
             var fullFilePath = Path.Combine(directory.FullName, resourceFileName.ToString());
-
+            logger.LogInformation("Saving FHIR Library {file}", fullFilePath);
+            File.WriteAllText(fullFilePath, resourceJson);
         }
 
         return packagingToolkit;
