@@ -31,7 +31,7 @@ internal class ResourcePackager(
         string CSharpSourceCode,
         byte[] AssemblyBinary);
 
-    public IEnumerable<(string versionedLibraryIdentifier, FhirResource fhirResource)> PackageResourcesV2(
+    public IEnumerable<(string versionedLibraryIdentifier, FhirResource fhirResource)> TryPackageEach(
         ElmLibrarySet librarySet,
         Func<string, Input> inputsById,
         EnumerationExceptionHandlingStrategy<ElmLibrary>? exceptionHandlingStrategy = null,

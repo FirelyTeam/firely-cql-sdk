@@ -1,4 +1,6 @@
-﻿namespace CqlSdkPrototype.Packaging;
+﻿using Hl7.Cql.Runtime;
+
+namespace CqlSdkPrototype.Packaging;
 
 #pragma warning disable RS0027 
 public record FhirResourcePackagerConfig(

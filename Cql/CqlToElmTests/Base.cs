@@ -42,7 +42,9 @@ namespace Hl7.Cql.CqlToElm.Test
             DefinitionDictionary<LambdaExpression> definitions = new();
             definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
             var generateCSharp = elmToolkitServices.GetLibrarySetCSharpCodeGenerator().GenerateCSharp(librarySet, definitions);
-            var compile = elmToolkitServices.GetAssemblyCompiler().Compile(librarySet, generateCSharp, elmToolkit.ProcessorConfig.AssemblyCompilerDebugInformationFormat);
+            var compile = (IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)>)elmToolkitServices.GetAssemblyCompiler()
+                                                                                                                                       .TryCompileEach(librarySet, generateCSharp, elmToolkit.ProcessorConfig.AssemblyCompilerDebugInformationFormat)
+                                                                                                                                       .CatchEachPair();
             var assemblyBytes = compile.Single().assemblyBinaryWithSourceCode.AssemblyBytes;
 
             using var librarySetInvoker = new FluentInvocationToolkit()

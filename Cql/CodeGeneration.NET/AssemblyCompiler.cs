@@ -51,7 +51,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                 });
         }
 
-        public IEnumerable<(Library library, Func<AssemblyBinaryWithSourceCode> getAssemblyBinaryWithSourceCode)> CompileDeferred(
+        public IEnumerable<(Library library, Func<AssemblyBinaryWithSourceCode> getAssemblyBinaryWithSourceCode)> TryCompileEach(
             LibrarySet librarySet,
             IEnumerable<(Library Library, string CSharp)> input,
             AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None)
@@ -232,17 +232,5 @@ namespace Hl7.Cql.CodeGeneration.NET
 
 
         }
-    }
-
-    internal static class AssemblyCompilerExtensions
-    {
-        public static IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> Compile(
-            this AssemblyCompiler compiler,
-            LibrarySet librarySet,
-            IEnumerable<(Library Library, string CSharp)> input,
-            AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None) =>
-            compiler
-                .CompileDeferred(librarySet, input, debugInformationFormat)
-                .CatchPairwise();
     }
 }

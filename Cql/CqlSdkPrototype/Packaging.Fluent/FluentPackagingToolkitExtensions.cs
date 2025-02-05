@@ -1,6 +1,7 @@
 ﻿using CqlSdkPrototype.Cql.Fluent;
 using CqlSdkPrototype.Elm.Fluent;
 using CqlSdkPrototype.Elm.Fluent.Extensions;
+using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Packaging.Fluent;
 

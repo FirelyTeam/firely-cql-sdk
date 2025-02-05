@@ -1,4 +1,6 @@
-﻿namespace CqlSdkPrototype.Internal;
+﻿using Hl7.Cql.Runtime;
+
+namespace CqlSdkPrototype.Internal;
 
 internal static class InternalExtensions
 {

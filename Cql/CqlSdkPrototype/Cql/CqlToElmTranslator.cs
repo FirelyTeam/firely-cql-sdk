@@ -1,17 +1,13 @@
 ﻿using CqlSdkPrototype.Cql.Fluent;
 using CqlSdkPrototype.Cql.Internal;
 using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Internal;
-using Fhir.Metrics;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CqlToElm;
-using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Cql;
 
 using VersionedIdentifierAndCqlToElmTranslation = (CqlVersionedLibraryIdentifier versionedIdentifier, CqlToElmTranslation cqlTranslationEntry);
-using VersionedIdentifierAndCqlToElmTranslationDeferred = (CqlVersionedLibraryIdentifier versionedIdentifier, Func<CqlToElmTranslation> cqlTranslationEntryFn);
 
 // using VersionedIdentifierAndCqlToElmTranslationEnumerable = IEnumerable<VersionedIdentifierAndCqlToElmTranslation>;
 // using VersionedIdentifierAndCqlToElmTranslationDeferredEnumerable = IEnumerable<(CqlVersionedLibraryIdentifier versionedIdentifier, Func<CqlToElmTranslation> cqlTranslationEntryFn)>;
@@ -95,9 +91,10 @@ public sealed class CqlToElmTranslator
     {
         var entriesBuilder = _services.LibraryBuilderProvider.TranslationsBuilder;
         int addedCount =
-                BuildTranslations(cqlLibraries, entriesBuilder)
-                .Count() // We must enumerate all
-                ;
+                TryBuildTranslations(cqlLibraries, entriesBuilder)
+                    .CatchEach()
+                    .Count() // We must enumerate all
+            ;
 
         if (addedCount > 0)
             SetCqlToElmTranslations(translations: entriesBuilder.ToImmutable());
@@ -109,7 +106,7 @@ public sealed class CqlToElmTranslator
     /// <param name="cqlLibraries">The CQL libraries to translate.</param>
     /// <param name="entriesBuilder">The builder for the translation entries.</param>
     /// <returns>A collection of CQL library strings and their corresponding translation functions.</returns>
-    private IEnumerable<(CqlLibraryString cqlLibraryString, Func<CqlToElmTranslation> cqlToElmTranslationFn)> BuildTranslations(
+    private IEnumerable<(CqlLibraryString cqlLibraryString, Func<CqlToElmTranslation> cqlToElmTranslationFn)> TryBuildTranslations(
         IEnumerable<CqlLibraryString> cqlLibraries,
         CqlToElmTranslationDictionary.Builder entriesBuilder)
     {
@@ -130,8 +127,6 @@ public sealed class CqlToElmTranslator
             yield return (cqlLibrary,
                              () =>
                              {
-                                 // var libraryVisitor = CqlToElmConverter.GetLibraryVisitorScoped(scope);
-                                 // var libraryBuilder = cqlToElmConverter.GetBuilder(libraryVisitor, cqlLibrary.Cql);
                                  //var translation = new CqlToElmTranslation(cqlLibrary) { ElmLibraryBuilder = libraryBuilder };
                                  var translation = new CqlToElmTranslation(cqlLibrary);
                                  entriesBuilder.Add(versionedIdentifier, translation);
@@ -146,85 +141,63 @@ public sealed class CqlToElmTranslator
     /// </summary>
     public void TranslateCqlToElm()
     {
-        CqlToElmTranslationDictionary.Builder processItemsBuilder = _services.LibraryBuilderProvider.TranslationsBuilder;
+        CqlToElmTranslationDictionary.Builder itemsBuilder = _services.LibraryBuilderProvider.TranslationsBuilder;
         var logger = _services.Logger;
-        bool atFirst = true;
 
-//        LogExceptionMessageAction log = logger.GetLogExceptionMessageAction(Config.EnumerationExceptionHandling);
-        logger.CreateLoggingEnumerateExceptionHandler(Config.EnumerationExceptionHandling, ())
+        var exceptionHandling = Config.EnumerationExceptionHandling;
 
-        var preprocessed =
-            TryPreprocessLibraryBuilders()
-                .TrySelect()
-                // .SelectCatch(
-                //     Config.EnumerationExceptionHandling,
-                //     (id,e) => log(e, "Could not preprocess CQL: {id}", id))
-                .ToList() // Complete preprocessing by ToList, before processing
-            ;
+        var logPreprocessFailed =
+            logger.CreateLoggingEnumerateExceptionHandler<VersionedIdentifierAndCqlToElmTranslation>(
+                exceptionHandling,
+                (o, log) => log("Could not parse CQL for {lib}", o.versionedIdentifier));
+        var logTranslateFailed =
+            logger.CreateLoggingEnumerateExceptionHandler<VersionedIdentifierAndCqlToElmTranslation>(
+                exceptionHandling,
+                (o, log) => log("Could not translate CQL to ELM for {lib}", o.versionedIdentifier));
 
-        int changedCount =
-                ProcessLibraries(preprocessed)
-                    .TryProcessEach(t => ProcessLibrary(t.versionedIdentifier, t.cqlTranslationEntry))
-                    .WithEachException(outcome =>
-                    {
-                        var libraryName = outcome.Input.versionedIdentifier;
-                        log(outcome.Exception, "Error translating CQL library '{libraryName}' to ELM.", libraryName);
-                    })
-                    .SelectUndeferred(Config.EnumerationExceptionHandling)
-                    .Count() // We must enumerate all
-            ;
+        var preprocessed = ParseIntoLibraryBuilders(_cqlToElmTranslations.AsValueTuples());
+
+        var changedCount = TranslateCqlToElm(preprocessed).Count(); // Must enumerate all
 
         if (changedCount > 0)
-            SetCqlToElmTranslations(translations: processItemsBuilder.ToImmutable());
-        return;
+            SetCqlToElmTranslations(translations: itemsBuilder.ToImmutable());
 
-        IEnumerable<VersionedIdentifierAndCqlToElmTranslation> ProcessLibraries(IEnumerable<VersionedIdentifierAndCqlToElmTranslation> preprocessed)
-        {
-            foreach (var (versionedIdentifier, cqlTranslationEntry) in preprocessed)
-            {
-                if (cqlTranslationEntry.ElmLibrary is not null)
-                    continue;
-
-                if (atFirst)
-                {
-                    atFirst = false;
-                    logger.LogInformation("Translating CQL into ELM");
-                }
-
-                logger.LogInformation("Translating CQL: {id}", versionedIdentifier);
-                yield return (versionedIdentifier, cqlTranslationEntry);
-            }
-        }
-
-        void ProcessLibrary(CqlVersionedLibraryIdentifier versionedIdentifier, CqlToElmTranslation cqlTranslationEntry)
-        {
-            var library = cqlTranslationEntry.ElmLibraryBuilder!.Build();
-            processItemsBuilder[versionedIdentifier] = cqlTranslationEntry with { ElmLibrary = library };
-        }
-
-        IReadOnlyCollection<VersionedIdentifierAndCqlToElmTranslation> TryPreprocessLibraryBuilders()
+        IReadOnlyCollection<VersionedIdentifierAndCqlToElmTranslation> ParseIntoLibraryBuilders(
+            IEnumerable<VersionedIdentifierAndCqlToElmTranslation> entries)
         {
             var cqlToElmConverter = _services.CqlToElmConverter;
             using var scope = _services.ServiceProvider.CreateScope()!;
             var libraryVisitor = CqlToElmConverter.GetLibraryVisitorScoped(scope);
 
             var results =
-                _cqlToElmTranslations
-                .AsValueTupleEnumeration()
-                .TrySelect(kv =>
-                {
-                    if (kv.Value.ElmLibraryBuilder is {})
-                        return kv;
+                entries
+                    .TrySelect(kv =>
+                    {
+                        if (kv.cqlTranslationEntry.ElmLibraryBuilder is { })
+                            return kv;
 
-                    logger.LogInformation("Preprocessing CQL: {id}", kv.Key);
-                    var libraryBuilder = cqlToElmConverter.GetBuilder(libraryVisitor, kv.Value.CqlLibraryString.Cql);
-                    var cqlToElmTranslation = kv.Value with { ElmLibraryBuilder = libraryBuilder };
-                    return kv with { Value = cqlToElmTranslation};
-                })
-                .Catch()
-                .ToList();
+                        logger.LogInformation("Parsing CQL for {id}", kv.versionedIdentifier);
+                        var libraryBuilder = cqlToElmConverter.GetBuilder(libraryVisitor, kv.cqlTranslationEntry.CqlLibraryString.Cql);
+                        var cqlToElmTranslation = kv.cqlTranslationEntry with { ElmLibraryBuilder = libraryBuilder };
+                        return kv with { cqlTranslationEntry = cqlToElmTranslation };
+                    })
+                    .CatchEach(logPreprocessFailed)
+                    .ToList();
 
             return results;
         }
+
+        IEnumerable<VersionedIdentifierAndCqlToElmTranslation> TranslateCqlToElm(
+            IReadOnlyCollection<VersionedIdentifierAndCqlToElmTranslation> preprocessed) =>
+            preprocessed
+                .Where(kv => kv.cqlTranslationEntry.ElmLibrary is null)
+                .TryWithEach(kv =>
+                {
+                    var (id, entry) = kv;
+                    var lib = entry.ElmLibraryBuilder!.Build();
+                    var newEntry = entry with { ElmLibrary = lib };
+                    itemsBuilder[id] = newEntry;
+                })
+                .CatchEach(logTranslateFailed);
     }
 }

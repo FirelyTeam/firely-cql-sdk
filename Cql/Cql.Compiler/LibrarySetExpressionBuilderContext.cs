@@ -14,16 +14,13 @@ namespace Hl7.Cql.Compiler;
 
 internal partial class LibrarySetExpressionBuilderContext
 {
-    private readonly ILogger<LibrarySetExpressionBuilder> _logger;
     private readonly LibraryExpressionBuilder _libraryExpressionBuilder;
 
     public LibrarySetExpressionBuilderContext(
-        ILogger<LibrarySetExpressionBuilder> logger,
         LibraryExpressionBuilder libraryExpressionBuilder,
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> librarySetDefinitions)
     {
-        _logger = logger;
         _libraryExpressionBuilder = libraryExpressionBuilder;
         LibrarySetDefinitions = librarySetDefinitions;
         LibrarySet = librarySet;
@@ -40,37 +37,18 @@ internal partial class LibrarySetExpressionBuilderContext
     /// </summary>
     public LibrarySet LibrarySet { get; }
 
-    public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
-        EnumerationExceptionHandling processLibraryExceptionHandling = default) =>
-        this.CatchRethrowExpressionBuildingException(_ =>
-        {
-            var catchHandler = _logger.CreateLoggingEnumerateExceptionHandler<Library>(
-                processLibraryExceptionHandling,
-                (lib, log) => log("Error writing library '{libraryName}' to C#.", lib.GetVersionedIdentifier()!));
-
-            LibrarySet
-                .TryDoEach(ProcessLibrary)
-                .Catch(catchHandler)
-                .Count() // We must enumerate all
-                ;
-
-            return LibrarySetDefinitions;
-
-            void ProcessLibrary(Library library)
-            {
-                var librarySetDefinitions = _libraryExpressionBuilder.ProcessLibrary(library, null, this);
-                LibrarySetDefinitions.Merge(librarySetDefinitions);
-            }
-        });
-
-    public IEnumerable<(Library library, Func<DefinitionDictionary<LambdaExpression>> generateLibraryDefinitions)> ProcessLibrarySetDeferred()
+    public IEnumerable<(Library library, Func<DefinitionDictionary<LambdaExpression>> getLibraryDefinitions)> TryBuildEachLibraryDefinitions()
     {
-        foreach (var library in LibrarySet)
-            yield return (library,
-                             () => this.CatchRethrowExpressionBuildingException(_ =>
-                             {
-                                 var libraryDefinitions = _libraryExpressionBuilder.ProcessLibrary(library, null, this);
-                                 return libraryDefinitions;
-                             }));
+        return LibrarySet
+               .TrySelect(library =>
+               {
+                   var libraryDefinitions = _libraryExpressionBuilder.ProcessLibrary(library, null, this);
+                   LibrarySetDefinitions.Merge(libraryDefinitions);
+                   return libraryDefinitions;
+               })
+               .Select(t => t with
+               {
+                   GetResult = () => this.CatchRethrowExpressionBuildingException(_ => t.GetResult())
+               });
     }
 }

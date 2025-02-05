@@ -15,7 +15,7 @@ internal static class ExceptionHandlingMethods
         Func<TSource, TResult> selector) =>
         source.Select(s => (s, (Func<TResult>)(() => selector(s))));
 
-    public static IEnumerable<(TSource Source, TResult Result)> CatchPairwise<TSource, TResult>(
+    public static IEnumerable<(TSource Source, TResult Result)> CatchEachPair<TSource, TResult>(
         this IEnumerable<(TSource Source, Func<TResult> GetResult)> eachGetResults,
         EnumerateExceptionHandler<TSource>? exceptionHandler = null)
     {
@@ -40,17 +40,17 @@ internal static class ExceptionHandlingMethods
         }
     }
 
-    public static IEnumerable<TResult> Catch<TSource, TResult>(
+    public static IEnumerable<TResult> CatchEach<TSource, TResult>(
         this IEnumerable<(TSource Source, Func<TResult> GetResult)> eachGetResults,
         EnumerateExceptionHandler<TSource>? exceptionHandler = null) =>
-        eachGetResults.CatchPairwise(exceptionHandler).Select(pair => pair.Result);
+        eachGetResults.CatchEachPair(exceptionHandler).Select(pair => pair.Result);
 
-    public static IEnumerable<(TSource Source, Action<TSource> WithSource)> TryDoEach<TSource>(
+    public static IEnumerable<(TSource Source, Action<TSource> WithSource)> TryWithEach<TSource>(
         this IEnumerable<TSource> source,
         Action<TSource> withSource) =>
         source.Select(s => (s, withSource));
 
-    public static IEnumerable<TSource> Catch<TSource>(
+    public static IEnumerable<TSource> CatchEach<TSource>(
         this IEnumerable<(TSource Source, Action<TSource> WithSource)> eachWithSources,
         EnumerateExceptionHandler<TSource>? exceptionHandler = null)
     {

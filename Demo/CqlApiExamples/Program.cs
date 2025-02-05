@@ -13,6 +13,7 @@ using CqlSdkPrototype.Packaging;
 using CqlSdkPrototype.Packaging.Fluent;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Runtime;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -28,8 +29,8 @@ internal static class Program
         var loggerFactory = CreateConsoleLoggerFactory();
 
         // Add3And2Example(loggerFactory);
-        InvokeCqlExample(loggerFactory);
-        // InvokeCqlFromExamplesFolder(loggerFactory);
+        // InvokeCqlExample(loggerFactory);
+        InvokeCqlFromExamplesFolder(loggerFactory);
         // PackageFromExamplesFolder(loggerFactory);
 
         // var shouldBuildCqlToElm = true;
@@ -116,10 +117,7 @@ internal static class Program
 
         // We need a disposable invocation scope, which contains the AssemblyLoadContext and the related library Assemblies.
         using var librarySetInvoker = cqlToolkit
-                                      .Reconfigure(o => o with
-                                      {
-                                          EnumerationExceptionHandling = EnumerationExceptionHandling.Continue
-                                      })
+                                      .SetExceptionHandlingToIgnore()
                                       .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory)
                                       .ToLibrarySetInvoker();
         logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDeclarations());

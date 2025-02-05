@@ -12,24 +12,16 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.Compiler;
 
 internal class LibrarySetExpressionBuilder(
-    ILogger<LibrarySetExpressionBuilder> logger,
     LibraryExpressionBuilder libraryExpressionBuilder)
 {
-    public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
-        LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null,
-        EnumerationExceptionHandling processLibraryExceptionHandling = default) =>
-        NewLibrarySetExpressionBuilderContext(librarySet, librarySetDefinitions)
-            .ProcessLibrarySet(processLibraryExceptionHandling);
-
-    public IEnumerable<(Library library, Func<DefinitionDictionary<LambdaExpression>> generateLibraryDefinitions)> ProcessLibrarySetDeferred(
+    public IEnumerable<(Library library, Func<DefinitionDictionary<LambdaExpression>> getLibraryDefinitions)> TryBuildEachLibraryDefinitions(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null) =>
         NewLibrarySetExpressionBuilderContext(librarySet, librarySetDefinitions)
-            .ProcessLibrarySetDeferred();
+            .TryBuildEachLibraryDefinitions();
 
     private LibrarySetExpressionBuilderContext NewLibrarySetExpressionBuilderContext(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null) =>
-        new(logger, libraryExpressionBuilder, librarySet, librarySetDefinitions ?? new());
+        new(libraryExpressionBuilder, librarySet, librarySetDefinitions ?? new());
 }

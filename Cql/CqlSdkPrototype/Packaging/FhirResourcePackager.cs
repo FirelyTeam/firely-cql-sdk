@@ -7,6 +7,7 @@ using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging;
+using Hl7.Cql.Runtime;
 using DateTime = System.DateTime;
 
 namespace CqlSdkPrototype.Packaging;
@@ -175,7 +176,7 @@ file static class Extensions
         EnumerationExceptionHandlingStrategy<ElmLibrary>? exceptionHandlingStrategy,
         Uri? canonicalRootUrl,
         DateTime? overrideDate) =>
-        resourcePackager.PackageResourcesV2(
+        resourcePackager.TryPackageEach(
             librarySet,
             inputsById,
             exceptionHandlingStrategy,
