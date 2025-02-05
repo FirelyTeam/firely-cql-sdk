@@ -42,6 +42,12 @@ internal class ResourcePackager(
     {
         exceptionHandlingStrategy ??= EnumerationExceptionHandlingStrategy<ElmLibrary>.Throw;
         resourceCanonicalRootUrl ??= string.Empty;
+
+        // librarySet = librarySet.RemoveLibrariesWithMissingIncludes(out var removed);
+        // if (removed.Count > 0)
+        // {
+        //     logger.LogWarning("Removed {Count} libraries with missing includes: {Libraries}", removed.Count, removed);
+        // }
         foreach (ElmLibrary elmLibrary in librarySet)
         {
             var versionedIdentifier = elmLibrary.GetVersionedIdentifier()!;

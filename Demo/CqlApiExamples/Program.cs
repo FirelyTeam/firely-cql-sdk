@@ -296,10 +296,10 @@ file static class Extensions
     }
 
     /// <summary>
-    /// This method is similar to FirstOrDefault,
+    /// This method is similar to <see cref="Enumerable.FirstOrDefault{TSource}(System.Collections.Generic.IEnumerable{TSource})"/>
     /// which returns the first element of a sequence of values if it is not empty;
-    /// however it returns a nullable value instead of the default value.
-    /// This is useful for value types.
+    /// however, for value types this might not be the desired behavior as there isn't a way to distinguish between the default value and a value in the sequence.
+    /// Therefore, this method returns null for value types if the sequence is empty.
     /// </summary>
     public static T? FirstOrNull<T>(this IEnumerable<T> source)
         where T : struct

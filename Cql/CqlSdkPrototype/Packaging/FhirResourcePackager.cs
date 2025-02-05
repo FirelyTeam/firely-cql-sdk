@@ -4,7 +4,10 @@ using CqlSdkPrototype.Packaging.Fluent;
 using CqlSdkPrototype.Packaging.Internal;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Compiler;
+using Hl7.Cql.Compiler.Infrastructure.Diagramming;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging;
+using DateTime = System.DateTime;
 
 namespace CqlSdkPrototype.Packaging;
 
@@ -94,7 +97,23 @@ public sealed class FhirResourcePackager
     {
         var builder = _fhirResourcePackagings.ToBuilder();
 
-        LibrarySet librarySet = new LibrarySet("", builder.Values.Select(o => o.Input.ElmLibrary).ToArray());
+        var libraries = builder.Values.Select(o => o.Input.ElmLibrary);
+
+        var libraryNames = libraries.Select(l => l.GetVersionedIdentifier()!).ToList();
+
+        var nodes = libraries.ToUnresolvedLibraryDependencyNodesDictionary();
+
+        var mermaid = nodes.Values.BuildMermaidFlowChart(
+            n => n.Dependencies,
+            node => $"{node.VersionedIdentifier}{(node.Library is null ? "?" : "")}{(node.HasMissingDependenciesRecursive ? "!" : "")}");
+
+        LibrarySet librarySet = new LibrarySet("", libraries.ToArray());
+        // builder.Values
+        //        .Select(o => o.Input.ElmLibrary)
+        //        .Where(l =>
+        //        {
+        //            LibraryExtensions.HasMissingIncludesRecursive(l)
+        //        })
 
         IEnumerable<ResourcePackager.Input> resourcePackagerInputs = builder.Values
                                                                             .SelectResourcePackagerInputs()
