@@ -55,7 +55,7 @@ internal partial class LibrarySetExpressionBuilderContext
                     else
                         _logger.LogWarning(outcome.Exception, "Error writing library '{libraryName}' to C#.", libraryName);
                 })
-                .HandleExceptions(processLibraryExceptionHandling)
+                .SelectUndeferred(processLibraryExceptionHandling)
                 .Count() // We must enumerate all
                 ; ;
 

@@ -32,8 +32,8 @@ public static class LibrarySetInvokerExtensions
         string definitionName)
     {
         var libraryInvoker = librarySetInvoker.LibraryInvokers[cqlVersionedLibraryIdentifier];
-        var libraryDeclarationInvoker = libraryInvoker.Definitions[definitionName];
-        var result = libraryDeclarationInvoker.Invoke(cqlContext);
+        var libraryDefinitionInvoker = libraryInvoker.Definitions[definitionName];
+        var result = libraryDefinitionInvoker.Invoke(cqlContext);
         return result;
     }
 }

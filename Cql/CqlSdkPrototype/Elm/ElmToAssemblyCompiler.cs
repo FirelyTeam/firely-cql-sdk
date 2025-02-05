@@ -219,7 +219,7 @@ public sealed class ElmToAssemblyCompiler
                                 var libraryName = t.Input.library.identifier;
                                 log(t.Exception, "Error compiling assembly for library: {libraryName}", libraryName);
                             })
-                            .HandleExceptions(exceptionHandling);
+                            .SelectUndeferred(exceptionHandling);
         return assemblyBinaries;
     }
 
@@ -255,7 +255,7 @@ public sealed class ElmToAssemblyCompiler
                           var libraryName = t.Input.library.identifier;
                           log(t.Exception, "Error generating C# for library : {libraryName}", libraryName);
                       })
-                      .HandleExceptions(exceptionHandling);
+                      .SelectUndeferred(exceptionHandling);
         return cSharps;
     }
 
@@ -291,7 +291,7 @@ public sealed class ElmToAssemblyCompiler
                          var libraryName = t.Input.library.identifier;
                          log(t.Exception, "Error generating definitions for library : {libraryName}", libraryName);
                      })
-                     .HandleExceptions(exceptionHandling))
+                     .SelectUndeferred(exceptionHandling))
             librarySetDefinitions.Merge(libraryDefinitions);
         return librarySetDefinitions;
     }

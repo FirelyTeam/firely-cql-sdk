@@ -53,7 +53,7 @@ internal class TupleBuilderCache : IDisposable
         ILogger<TupleBuilderCache> logger)
     {
         _logger = logger;
-        _logger.LogInformation("Creating scoped tuple builder cache {name}", TupleBuilderCacheName);
+        _logger.LogDebug("Creating scoped tuple builder cache {name}", TupleBuilderCacheName);
 
         var assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName(TupleBuilderCacheName), AssemblyBuilderAccess.RunAndCollect);
         _tupleTypeCache = new();
@@ -62,7 +62,7 @@ internal class TupleBuilderCache : IDisposable
 
     public void Dispose()
     {
-        _logger.LogInformation("Disposing scoped tuple builder cache {name}", TupleBuilderCacheName);
+        _logger.LogDebug("Disposing scoped tuple builder cache {name}", TupleBuilderCacheName);
     }
 
     /// <summary>

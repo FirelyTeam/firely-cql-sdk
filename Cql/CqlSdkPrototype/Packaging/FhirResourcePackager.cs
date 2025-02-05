@@ -3,6 +3,7 @@ using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Packaging.Fluent;
 using CqlSdkPrototype.Packaging.Internal;
 using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Compiler.Infrastructure.Diagramming;
 using Hl7.Cql.Elm;
@@ -99,21 +100,18 @@ public sealed class FhirResourcePackager
 
         var libraries = builder.Values.Select(o => o.Input.ElmLibrary);
 
-        var libraryNames = libraries.Select(l => l.GetVersionedIdentifier()!).ToList();
-
         var nodes = libraries.ToUnresolvedLibraryDependencyNodesDictionary();
 
-        var mermaid = nodes.Values.BuildMermaidFlowChart(
-            n => n.Dependencies,
-            node => $"{node.VersionedIdentifier}{(node.Library is null ? "?" : "")}{(node.HasMissingDependenciesRecursive ? "!" : "")}");
+        // var mermaid = nodes.Values.BuildMermaidFlowChart(
+        //     n => n.Dependencies,
+        //     node => $"{node.VersionedIdentifier}{(node.Library is null ? "?" : "")}{(node.HasMissingDependenciesRecursive ? "!" : "")}");
 
-        LibrarySet librarySet = new LibrarySet("", libraries.ToArray());
-        // builder.Values
-        //        .Select(o => o.Input.ElmLibrary)
-        //        .Where(l =>
-        //        {
-        //            LibraryExtensions.HasMissingIncludesRecursive(l)
-        //        })
+        var librariesToPackage =
+            nodes.Values
+                 .Where(n => !n.HasMissingDependenciesRecursive)
+                 .Select(n => n.Library!)
+                 .ToArray();
+        LibrarySet librarySet = new LibrarySet("", librariesToPackage);
 
         IEnumerable<ResourcePackager.Input> resourcePackagerInputs = builder.Values
                                                                             .SelectResourcePackagerInputs()
@@ -171,12 +169,6 @@ public sealed class FhirResourcePackager
 
 file static class Extensions
 {
-    public static IEnumerable<TR> SelectWhere<T, TR>(this IEnumerable<T> source, Func<T, (bool include, TR resultOrDefault)> selector) =>
-        source
-            .Select(selector)
-            .Where(o => o.include)
-            .Select(o => o.resultOrDefault);
-
     public static IEnumerable<(string versionedLibraryIdentifier, FhirResource fhirResource)> PackageResources(
         this LibrarySet librarySet,
         Func<string, ResourcePackager.Input> inputsById,

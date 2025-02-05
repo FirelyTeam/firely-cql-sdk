@@ -12,16 +12,11 @@ using CqlSdkPrototype.Elm.Fluent;
 using CqlSdkPrototype.Elm.Fluent.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Packaging.Fluent;
-using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging;
-using Hl7.Fhir.Model;
-using System;
 
 namespace Hl7.Cql.Packager;
 
-internal class PackagerCli
-(
+internal class PackagerCli(
     ILoggerFactory loggerFactory,
     ILogger<PackagerCli> logger,
     OptionsConsoleDumper optionsConsoleDumper,
@@ -77,7 +72,7 @@ internal class PackagerCli
                     cqlToolkit.SaveElmFilesToDirectory(
                         elmOutDir,
                         writeIndented:true,
-                        DirectoryPreparationStrategy.DeleteFiles("*.json"));
+                        DirectoryPreparationStrategy.CreateFileDeletorStragegy("*.json"));
 
                 elmToolkit = cqlToolkit.ToFluentElmToolkit();
             }
@@ -93,12 +88,12 @@ internal class PackagerCli
             if (opt.CSharpOutDirectory is { } dirOutCS)
                 elmToolkit
                     .CompileElmToAssemblies()
-                    .SaveCSharpFilesToDirectory(dirOutCS, DirectoryPreparationStrategy.DeleteFiles("*.g.cs"));
+                    .SaveCSharpFilesToDirectory(dirOutCS, DirectoryPreparationStrategy.CreateFileDeletorStragegy("*.g.cs"));
 
             if (opt.AssemblyOutDirectory is { } dirOutDll)
                 elmToolkit
                     .CompileElmToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
-                    .SaveAssemblyBinariesToDirectory(dirOutDll, DirectoryPreparationStrategy.DeleteFiles("*.dll"));
+                    .SaveAssemblyBinariesToDirectory(dirOutDll, DirectoryPreparationStrategy.CreateFileDeletorStragegy("*.dll"));
 
             if (opt is
                 {
@@ -110,7 +105,7 @@ internal class PackagerCli
                 packagingToolkit
                     .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
                     .PackageFhirResources(canonicalRootUrl, overrideDate)
-                    .SaveFhirResources(dirOutFhir, DirectoryPreparationStrategy.DeleteFiles("*.json"));
+                    .SaveFhirResources(dirOutFhir, DirectoryPreparationStrategy.CreateFileDeletorStragegy("*.json"));
             }
 
             /*

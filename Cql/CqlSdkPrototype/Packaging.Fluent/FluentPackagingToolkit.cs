@@ -1,4 +1,6 @@
-﻿namespace CqlSdkPrototype.Packaging.Fluent;
+﻿using CqlSdkPrototype.Elm;
+
+namespace CqlSdkPrototype.Packaging.Fluent;
 
 /// <summary>
 /// Provides a fluent interface for working with the FHIR resource packager.
@@ -41,6 +43,11 @@ public sealed class FluentPackagingToolkit
     /// Gets the configuration for the compiler.
     /// </summary>
     public FhirResourcePackagerConfig PackagerConfig => _fhirResourcePackager.Config;
+
+    /// <summary>
+    /// Gets the dictionary of ELM to assembly compilations.
+    /// </summary>
+    public FhirResourcePackagingReadOnlyDictionary FhirResourcePackagings => _fhirResourcePackager.FhirResourcePackagings;
 
     /// <summary>
     /// Reconfigures the packager with the specified configuration.

@@ -4,13 +4,13 @@ namespace CqlSdkPrototype.Infrastructure;
 
 public abstract class DirectoryPreparationStrategy
 {
-    public abstract void PrepareDirectory(DirectoryInfo directory);
+    public abstract void PrepareDirectory(DirectoryInfo directory); // Create delegate
 
     public static DirectoryPreparationStrategy CreateIfNotExists { get; } = new CreateIfNotExistsDirectoryPreparationStrategy();
 
     public static DirectoryPreparationStrategy Recreate { get; } = new RecreateDirectoryPreparationStrategy();
 
-    public static DeleteFilesDirectoryPreparationStrategy DeleteFiles(
+    public static DeleteFilesDirectoryPreparationStrategy CreateFileDeletorStragegy(
         string searchPattern = "*",
         EnumerationOptions? enumerationOptions = null,
         Func<FileInfo, bool>? fileSelector = null) =>

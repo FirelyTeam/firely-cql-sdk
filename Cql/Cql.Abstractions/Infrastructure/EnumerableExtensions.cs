@@ -111,4 +111,10 @@ internal static class EnumerableExtensions
     {
         yield return item;
     }
+
+    public static IEnumerable<TR> SelectWhere<T, TR>(this IEnumerable<T> source, Func<T, (bool include, TR resultOrDefault)> selector) =>
+        source
+            .Select(selector)
+            .Where(o => o.include)
+            .Select(o => o.resultOrDefault);
 }

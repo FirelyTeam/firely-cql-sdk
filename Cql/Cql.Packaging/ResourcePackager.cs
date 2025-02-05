@@ -424,6 +424,10 @@ internal static class LibraryPackager
         fhirLibrary.Status = PublicationStatus.Active;
         fhirLibrary.Date = new DateTimeIso8601(date, Iso8601DateTimePrecision.Millisecond).ToString();
         fhirLibrary.Url = fhirLibrary.CanonicalUri(resourceCanonicalRootUrl);
+        if (fhirLibrary.Meta is { } meta)
+        {
+            meta.LastUpdated = date;
+        }
         return fhirLibrary;
     }
 
@@ -548,6 +552,7 @@ internal static class LibraryPackager
             ContentType = "application/octet-stream",
             Data = assemblyBytes,
         };
+        // TODO: Add extension indicating dll includes debug symbols
         library.Content.Add(attachment);
     }
 

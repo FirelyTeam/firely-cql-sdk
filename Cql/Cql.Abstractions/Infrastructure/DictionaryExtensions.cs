@@ -6,21 +6,19 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Runtime.InteropServices;
+
 namespace Hl7.Cql.Abstractions.Infrastructure;
 
 internal static class DictionaryExtensions
 {
     public static TValue GetOrAdd<TKey, TValue>(
-        this IDictionary<TKey, TValue> dictionary,
+        this Dictionary<TKey, TValue> dictionary,
         TKey key,
-        Func<TKey, TValue> valueFactory)
+        Func<TKey, TValue> valueFactory) where TKey : notnull
     {
-        if (dictionary.TryGetValue(key, out var value))
-            return value;
-
-        value = valueFactory(key);
-        dictionary.Add(key, value);
-        return value;
+        ref var valueRef = ref CollectionsMarshal.GetValueRefOrAddDefault(dictionary, key, out bool exists);
+        return exists ? valueRef! : valueRef = valueFactory(key);
     }
 
     /// <summary>
@@ -39,4 +37,7 @@ internal static class DictionaryExtensions
             _ => throw new ArgumentException(
                      "Must be a IReadOnlyDictionary<TKey, TValue> or an IDictionary<TKey, TValue>. Enumerating the key values as a fallback not supported for performance reasons.")
         };
+
+    public static IEnumerable<(TKey Key, TValue Value)> AsValueTupleEnumeration<TKey, TValue>(this IDictionary<TKey, TValue> dictionary) =>
+        dictionary.Select(kvp => (kvp.Key, kvp.Value));
 }
