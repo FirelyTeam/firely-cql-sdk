@@ -20,16 +20,10 @@ internal class PackagerCli(
     ILoggerFactory loggerFactory,
     ILogger<PackagerCli> logger,
     OptionsConsoleDumper optionsConsoleDumper,
-    IOptions<PackagerCliOptions> packagerCliOptions,
-    ResourcePackager resourcePackager,
-    FhirResourceFileWriter fhirResourceFileWriter)
+    IOptions<PackagerCliOptions> packagerCliOptions)
 {
     public int Run(bool translateCql = false)
     {
-        // REVIEW: Remove these parameters before merging the PR!
-        _ = resourcePackager;
-        _ = fhirResourceFileWriter;
-
         try
         {
             optionsConsoleDumper.DumpToConsole();
@@ -108,44 +102,6 @@ internal class PackagerCli(
                     .SaveFhirResources(dirOutFhir, DirectoryPreparationStrategy.CreateFileDeletorStragegy("*.json"));
             }
 
-            /*
-            if (opt is
-                    // Check that we have all the required options
-                    {
-                        CqlInDirectory: { } cqlInDir,
-                        ElmInDirectory: { } elmInDir,
-                        FhirOutDirectory: { } fhirOutDir,
-                        FhirCanonicalRootUrl: var canonicalRootUrl,
-                        FhirOverrideDate: var overrideDate
-                    }
-                // Check that we have the libraries produced by the ElmToolkit
-                && elmToolkit.GetCompletedElmToAssemblyCompilations(t => t.elmLibrary)
-                             .ToArray() is { Length: > 0 } libraries
-                // Check that we have the assemblies produced by the ElmToolkit
-                && elmToolkit.GetCompletedElmToAssemblyCompilations()
-                             .ToDictionary(
-                                 t => t.versionedLibraryIdentifier.ToString(),
-                                 t => new AssemblyBinaryWithSourceCode(
-                                     assemblyBytes: t.assemblyBinary,
-                                     sourceCodeFileName: "", // Won't get used
-                                     sourceCode: t.csharpSourceCode,
-                                     debugSymbolsBytes: t.debugSymbolsBinary)) is { } assembliesByLibraryName)
-            {
-                _ = resourcePackager;
-                LibrarySet elmLibrarySet = new LibrarySet("", libraries);
-                IReadOnlyCollection<Resource> resources = resourcePackager.PackageResources(
-                    elmInDir,
-                    cqlInDir,
-                    canonicalRootUrl?.ToString(),
-                    elmLibrarySet,
-                    assembliesByLibraryName);
-
-                fhirOutDir.Recreate();
-                foreach (var resource in resources)
-                    fhirResourceFileWriter.SaveResource(resource, fhirOutDir, overrideDate);
-            }
-            */
-
             return 0;
         }
         catch (Exception e)
@@ -155,28 +111,5 @@ internal class PackagerCli(
                 "An error occurred while running PackagerCLI. Consult the build.log file for more detail.");
             return -1;
         }
-    }
-}
-
-file static class X
-{
-    public static TSelf PickValueAndSwitch<TSelf, TValue>(
-        this TSelf self,
-        Func<TSelf, TValue?> valueSelector,
-        Action<TSelf, TValue>? ifHasValue = null,
-        Action<TSelf>? ifNoValue = null)
-        where TValue : class
-    {
-        if (valueSelector(self) is { } val)
-            ifHasValue?.Invoke(self, val);
-        else
-            ifNoValue?.Invoke(self);
-        return self;
-    }
-
-    public static void Recreate(this DirectoryInfo dir)
-    {
-        if (dir.Exists) dir.Delete(true);
-        dir.Create();
     }
 }

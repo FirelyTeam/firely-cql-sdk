@@ -12,7 +12,6 @@ using Hl7.Cql.Compiler.Infrastructure.Diagramming;
 using Hl7.Cql.Compiler.Infrastructure.Graphs;
 using Hl7.Cql.Compiler.Infrastructure.Sets;
 using Hl7.Cql.Elm;
-
 #pragma warning disable CS8321 // Local function is declared but never used
 
 namespace Hl7.Cql.Compiler;
@@ -28,15 +27,17 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
     /// </summary>
     public string Name { get; }
 
-    private readonly Dictionary<string, (Library library, LibraryByVersionedIdentifierHashSet dependencies)> _libraryInfosByVersionedIdentifier;
+    private readonly Dictionary<string, (Library library, LibraryByVersionedIdentifierHashSet dependencies)>
+        _libraryInfosByVersionedIdentifier;
 
-    private (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries) _calculatedState;
+    private (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library> TopologicallySortedLibraries)
+        _calculatedState;
 
     private readonly LibraryByVersionedIdentifierHashSet _librariesNotCalculatedYet;
 
     private static readonly (IReadOnlySet<Library> RootLibraries, IReadOnlyCollection<Library>
         TopologicallySortedLibraries)
-        EmptyCached = (EmptySet<Library>.Instance, []);
+        EmptyCached = (EmptySet<Library>.Instance, Array.Empty<Library>());
 
     private readonly LibrarySetDefinitionCache _librarySetDefinitionCache;
 
@@ -179,10 +180,9 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
             {
                 foreach (var includeDef in includeDefs)
                 {
-                    var toKey = includeDef.GetVersionedIdentifier()!;
-                    var toLib =
-                        _libraryInfosByVersionedIdentifier.GetValueOrNull(toKey)?.library ??
-                        throw new LibraryIncludeDefUnresolvedError(library, includeDef).ToException();
+                    var toKey = includeDef.GetVersionedIdentifier(true)!;
+                    var toLib = _libraryInfosByVersionedIdentifier.GetValueOrDefault(toKey).library ??
+                                throw new LibraryIncludeDefUnresolvedError(library, includeDef).ToException();
                     dependencies.Add(toLib);
                 }
             }
@@ -204,7 +204,8 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
         // Topological sort libraries so that most dependent libraries are placed before less dependent ones
 
         var topologicallySortedLibraries = allLibraries
-                                           .TopologicalSort(lib => GetLibraryDependencies(lib.GetVersionedIdentifier()!))
+                                           .TopologicalSort(
+                                               lib => GetLibraryDependencies(lib.GetVersionedIdentifier()!))
                                            .ToList();
         Debug.Assert(topologicallySortedLibraries.Count == _libraryInfosByVersionedIdentifier.Count);
 

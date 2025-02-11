@@ -1,4 +1,3 @@
-using System.Linq.Expressions;
 using CqlSdkPrototype.Elm.Internal;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;

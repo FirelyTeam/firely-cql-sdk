@@ -38,6 +38,13 @@ internal static class DictionaryExtensions
                      "Must be a IReadOnlyDictionary<TKey, TValue> or an IDictionary<TKey, TValue>. Enumerating the key values as a fallback not supported for performance reasons.")
         };
 
-    public static IEnumerable<(TKey Key, TValue Value)> AsValueTuples<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> dictionary) =>
-        dictionary.Select(kvp => (kvp.Key, kvp.Value));
+    /// <summary>
+    /// Transforms a sequence of <see cref="KeyValuePair{TKey, TValue}"/> to a sequence of key-value tuples.
+    /// </summary>
+    /// <typeparam name="TKey">The type of the key.</typeparam>
+    /// <typeparam name="TValue">The type of the value.</typeparam>
+    /// <param name="keyValuePairs">The sequence of <see cref="KeyValuePair{TKey, TValue}"/>.</param>
+    /// <returns>A sequence of key-value tuples.</returns>
+    public static IEnumerable<(TKey Key, TValue Value)> AsValueTuples<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> keyValuePairs) =>
+        keyValuePairs.Select(kvp => (kvp.Key, kvp.Value));
 }

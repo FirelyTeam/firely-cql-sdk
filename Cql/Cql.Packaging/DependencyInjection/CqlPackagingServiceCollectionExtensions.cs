@@ -23,7 +23,6 @@ internal static class CqlPackagingServiceCollectionExtensions
         services.TryAddSingleton<ModelInspector>(_ => Hl7.Fhir.Model.ModelInfo.ModelInspector);
         services.TryAddSingleton<TypeResolver, FhirTypeResolver>();
         services.TryAddSingleton<ResourcePackager>();
-        services.TryAddSingleton<FhirResourceFileWriter>();
         return services;
     }
 }

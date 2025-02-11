@@ -11,13 +11,9 @@ using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Cql.Elm;
-using Hl7.Fhir.Model;
-using System;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
-    using Library = Hl7.Cql.Elm.Library;
-
     internal class AssemblyCompiler
     {
         private static readonly EmitOptions DefaultEmitOptions = new();
