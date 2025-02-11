@@ -9,7 +9,7 @@ namespace CqlSdkPrototype.Cql.Internal;
 /// <summary>
 /// Services for translating CQL to ELM used by the <seealso cref="CqlToElmTranslator"/>.
 /// </summary>
-internal readonly record struct CqlToElmTranslatorServices(
+internal record CqlToElmTranslatorServices(
     ILoggerFactory LoggerFactory,
     ServiceProvider ServiceProvider,
     CqlToElmConverter CqlToElmConverter,
@@ -42,13 +42,17 @@ internal readonly record struct CqlToElmTranslatorServices(
         var serviceProvider = services.BuildServiceProvider(validateScopes: true);
 
         var serviceScope = serviceProvider.CreateScope();
-        return new CqlToElmTranslatorServices(
+        var cqlToElmTranslatorServices = new CqlToElmTranslatorServices(
             loggerFactory,
             serviceProvider,
             Get<CqlToElmConverter>(serviceProvider),
             libraryBuilderProvider,
             serviceScope,
             CqlToElmConverter.GetLibraryVisitorScoped(serviceScope));
+
+        libraryBuilderProvider.CqlToElmTranslatorServices = cqlToElmTranslatorServices;
+
+        return cqlToElmTranslatorServices;
         // return ActivatorUtilities.CreateInstance<CqlToElmTranslatorServices>(
         //     serviceProvider,
         //     serviceProvider,
