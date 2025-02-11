@@ -7,7 +7,8 @@ public readonly record struct FhirResourcePackaging
     // Inputs
     FhirResourcePackagingInput Input,
     // Output
-    FhirResource? FhirResource = null)
+    FhirLibrary? FhirLibrary = null,
+    FhirMeasure? FhirMeasure = null)
 {
     public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier => Input.VersionedLibraryIdentifier;
 }

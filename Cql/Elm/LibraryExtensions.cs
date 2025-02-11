@@ -2,21 +2,11 @@ namespace Hl7.Cql.Elm;
 
 internal static class LibraryExtensions
 {
-    public static bool HasMissingIncludesRecursive(
-        this Library library,
-        Func<string, Library?> getLibraryByVersionedIdentifier) =>
-        library.includes is { Length: > 0 } includeDefs
-        && includeDefs.Any(includeDef => getLibraryByVersionedIdentifier(includeDef.GetVersionedIdentifier()!) switch
-        {
-            null           => true,
-            { } includeLib => includeLib.HasMissingIncludesRecursive(getLibraryByVersionedIdentifier),
-        });
-
-    public static IReadOnlyDictionary<string, UnresolvedLibraryDependencyNode> ToUnresolvedLibraryDependencyNodesDictionary(this IEnumerable<Library> libraries)
+    public static IReadOnlyDictionary<string, LibraryDependencyNode> ToLibraryDependencyNodesByVersionedIdentifiers(this IEnumerable<Library> libraries)
     {
         var nodesById =
             libraries
-                .Select(l => new UnresolvedLibraryDependencyNode(l.GetVersionedIdentifier()!, l, []))
+                .Select(l => new LibraryDependencyNode(l.GetVersionedIdentifier()!, l, []))
                 .ToDictionary(l => l.VersionedIdentifier);
 
         foreach (var node in nodesById.Values)
@@ -27,7 +17,7 @@ internal static class LibraryExtensions
                     .Select(includeId =>
                                 nodesById
                                     .GetValueOrDefault(includeId)
-                                    ?? new UnresolvedLibraryDependencyNode(includeId, null, []));
+                                    ?? new LibraryDependencyNode(includeId, null, []));
             node.Dependencies.AddRange(dependencyNodes);
         }
 
@@ -35,11 +25,10 @@ internal static class LibraryExtensions
     }
 }
 
-internal record UnresolvedLibraryDependencyNode
-(
+internal record LibraryDependencyNode(
     string VersionedIdentifier,
     Library? Library,
-    List<UnresolvedLibraryDependencyNode> Dependencies)
+    List<LibraryDependencyNode> Dependencies)
 {
     public bool HasMissingDependencies => Dependencies.Any(d => d.Library is null);
     public bool HasMissingDependenciesRecursive => Dependencies.Any(d => d.Library is null || d.HasMissingDependenciesRecursive);

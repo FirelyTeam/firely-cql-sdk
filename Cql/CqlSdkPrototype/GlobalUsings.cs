@@ -15,6 +15,8 @@ global using Microsoft.Extensions.Logging;
 global using Microsoft.Extensions.Logging.Abstractions;
 global using ElmLibrary = Hl7.Cql.Elm.Library;
 global using FhirResource = Hl7.Fhir.Model.Resource;
+global using FhirLibrary = Hl7.Fhir.Model.Library;
+global using FhirMeasure = Hl7.Fhir.Model.Measure;
 global using FhirModelInfo = Hl7.Fhir.Model.ModelInfo;
 global using CqlToElmTranslationDictionary = System.Collections.Immutable.ImmutableDictionary<CqlSdkPrototype.Infrastructure.CqlVersionedLibraryIdentifier, CqlSdkPrototype.Cql.CqlToElmTranslation>;
 global using CqlToElmTranslationReadOnlyDictionary = System.Collections.Generic.IReadOnlyDictionary<CqlSdkPrototype.Infrastructure.CqlVersionedLibraryIdentifier, CqlSdkPrototype.Cql.CqlToElmTranslation>;

@@ -100,20 +100,26 @@ public sealed class FhirResourcePackager
 
         var libraries = builder.Values.Select(o => o.Input.ElmLibrary);
 
-        var nodes = libraries.ToUnresolvedLibraryDependencyNodesDictionary();
+        var nodes = libraries.ToLibraryDependencyNodesByVersionedIdentifiers();
 
-        // var mermaid = nodes.Values.BuildMermaidFlowChart(
-        //     n => n.Dependencies,
-        //     node => $"{node.VersionedIdentifier}{(node.Library is null ? "?" : "")}{(node.HasMissingDependenciesRecursive ? "!" : "")}");
+        var logger = _services.Logger;
 
         var librariesToPackage =
             nodes.Values
-                 .Where(n => !n.HasMissingDependenciesRecursive)
+                 .Where(n =>
+                 {
+                     if (n.HasMissingDependenciesRecursive)
+                     {
+                         logger.LogWarning("Skipping packaging resource {id} due to missing dependencies.", n.VersionedIdentifier);
+                         return false;
+                     }
+
+                     return true;
+                 })
                  .Select(n => n.Library!)
                  .ToArray();
         LibrarySet librarySet = new LibrarySet("", librariesToPackage);
 
-        var logger = _services.Logger;
         IEnumerable<ResourcePackager.Input> resourcePackagerInputs =
             builder.Values
                    .Select(o =>
@@ -139,16 +145,16 @@ public sealed class FhirResourcePackager
                      .CatchEachPair(logPackageFailed)
                      .SelectWhere(o =>
                      {
-                         var cqlVersionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(o.Source);
-                         var fhirResourcePackaging = builder[cqlVersionedLibraryIdentifier];
-                         if (fhirResourcePackaging.FhirResource is null)
+                         var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(o.Source);
+                         var fhirResourcePackaging = builder[versionedLibraryIdentifier];
+                         if (fhirResourcePackaging.FhirLibrary is null)
                          {
-                             logger.LogInformation("Packaged resource for {id}.", cqlVersionedLibraryIdentifier);
-                             builder[cqlVersionedLibraryIdentifier] = fhirResourcePackaging with { FhirResource = o.Result };
+                             logger.LogInformation("Packaged resource for {id}.", versionedLibraryIdentifier);
+                             builder[versionedLibraryIdentifier] = fhirResourcePackaging with { FhirLibrary = o.Result.Library, FhirMeasure = o.Result.Measure};
                              return (true, o);
                          }
 
-                         logger.LogWarning("Skipping replacing existing resource for {id}.", cqlVersionedLibraryIdentifier);
+                         logger.LogWarning("Skipping replacing existing resource for {id}.", versionedLibraryIdentifier);
                          return (false, default);
                      })
                      .Count();
