@@ -203,7 +203,7 @@ public sealed class ElmToAssemblyCompiler
         ILogger<ElmToAssemblyCompiler> logger,
         EnumerationExceptionHandling exceptionHandling)
     {
-        var logExceptions = logger.CreateLoggingEnumerateExceptionHandler<ElmLibrary>(
+        var logExceptions = logger.CreateLogExceptionHandler<ElmLibrary>(
             exceptionHandling,
             (lib, log) => log("Could not compile C# to .NET Assembly for {id}", lib.GetVersionedIdentifier()!));
 
@@ -239,7 +239,7 @@ public sealed class ElmToAssemblyCompiler
         LogExceptionMessageAction log,
         EnumerationExceptionHandling exceptionHandling)
     {
-        var logExceptions = logger.CreateLoggingEnumerateExceptionHandler<ElmLibrary>(
+        var logExceptions = logger.CreateLogExceptionHandler<ElmLibrary>(
             exceptionHandling,
             (lib, log) => log("Could not generate definitions into C# for {id}", lib.GetVersionedIdentifier()!));
 
@@ -271,7 +271,7 @@ public sealed class ElmToAssemblyCompiler
         LogExceptionMessageAction log,
         EnumerationExceptionHandling exceptionHandling)
     {
-        var logExceptions = logger.CreateLoggingEnumerateExceptionHandler<ElmLibrary>(
+        var logExceptions = logger.CreateLogExceptionHandler<ElmLibrary>(
             exceptionHandling,
             (lib, log) => log("Could not generate ELM into definitions for {id}", lib.GetVersionedIdentifier()!));
 

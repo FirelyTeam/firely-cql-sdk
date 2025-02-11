@@ -2,7 +2,7 @@
 
 namespace CqlSdkPrototype.Packaging;
 
-#pragma warning disable RS0027 
+#pragma warning disable RS0027
 public record FhirResourcePackagerConfig(
 #pragma warning restore RS0027
     EnumerationExceptionHandling EnumerationExceptionHandling = default)

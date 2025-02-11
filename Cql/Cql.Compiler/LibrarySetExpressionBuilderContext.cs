@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Library = Hl7.Cql.Elm.Library;
 
@@ -48,7 +47,7 @@ internal partial class LibrarySetExpressionBuilderContext
                })
                .Select(t => t with
                {
-                   GetResult = () => this.CatchRethrowExpressionBuildingException(_ => t.GetResult())
+                   GetValue = () => this.CatchRethrowExpressionBuildingException(_ => t.GetValue())
                });
     }
 }

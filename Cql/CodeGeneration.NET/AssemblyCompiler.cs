@@ -67,7 +67,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                         results.Add(library.GetVersionedIdentifier()!, result);
                         return result;
                     })
-                .Select(t => (t.Source.Library, t.GetResult));
+                .Select(t => (t.Input.Library, t.GetValue));
         }
 
         private static CSharpCompilationOptions CreateCSharpCompilationOptions(

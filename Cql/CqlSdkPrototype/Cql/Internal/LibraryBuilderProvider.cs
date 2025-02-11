@@ -1,7 +1,5 @@
 ﻿using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.CqlToElm;
-using Hl7.Cql.CqlToElm.Visitors;
-using Microsoft.Extensions.Logging;
 
 namespace CqlSdkPrototype.Cql.Internal;
 

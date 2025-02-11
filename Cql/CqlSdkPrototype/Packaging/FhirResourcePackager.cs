@@ -2,15 +2,14 @@
 using CqlSdkPrototype.Packaging.Fluent;
 using CqlSdkPrototype.Packaging.Internal;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.Logging;
-using DateTime = System.DateTime;
 
 namespace CqlSdkPrototype.Packaging;
+
+using SysDateTime = System.DateTime;
 
 public sealed class FhirResourcePackager
 {
@@ -61,9 +60,7 @@ public sealed class FhirResourcePackager
         if (Config == config)
             return;
 
-        //_services.ServiceProvider.Dispose();
         Config = config;
-        //_services = ElmToAssemblyProcessorServices.Create(LoggerFactory, config);
     }
 
     private void SetFhirResourcePackagings(FhirResourcePackagingDictionary packagings) =>
@@ -94,7 +91,7 @@ public sealed class FhirResourcePackager
             _fhirResourcePackagings = builder.ToImmutable();
     }
 
-    public void PackageFhirResources(Uri? canonicalRootUrl, DateTime? overrideDate)
+    public void PackageFhirResources(Uri? canonicalRootUrl, SysDateTime? overrideDate)
     {
         var builder = _fhirResourcePackagings.ToBuilder();
 
@@ -110,7 +107,7 @@ public sealed class FhirResourcePackager
                  {
                      if (n.HasMissingDependenciesRecursive)
                      {
-                         logger.LogWarning("Skipping packaging resource {id} due to missing dependencies.", n.VersionedIdentifier);
+                         logger.LogWarning("Skipping packaging FHIR resources for library {id} due to missing dependencies.", n.VersionedIdentifier);
                          return false;
                      }
 
@@ -124,14 +121,14 @@ public sealed class FhirResourcePackager
             builder.Values
                    .Select(o =>
                    {
-                       logger.LogInformation("Packaging resource for {id}.", o.VersionedLibraryIdentifier);
+                       logger.LogInformation("Packaging FHIR resources for library {id}.", o.VersionedLibraryIdentifier);
                        var input = o.Input;
                        return new ResourcePackager.Input(o.VersionedLibraryIdentifier.ToString(), input.CqlLibrary.Cql, input.ElmLibrary, input.CSharpSourceCode, input.AssemblyBinary);
                    });
         var logPackageFailed =
-            logger.CreateLoggingEnumerateExceptionHandler<string>(
+            logger.CreateLogExceptionHandler<string>(
                 Config.EnumerationExceptionHandling,
-                (libId, log) => log("Could not package FHIR library resource for {lib}", libId));
+                (libId, log) => log("Could not package FHIR resources for library {lib}", libId));
 
         var inputsById = resourcePackagerInputs.ToDictionary(o => o.VersionedLibraryIdentifier);
 
@@ -145,16 +142,16 @@ public sealed class FhirResourcePackager
                      .CatchEachPair(logPackageFailed)
                      .SelectWhere(o =>
                      {
-                         var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(o.Source);
+                         var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(o.Input);
                          var fhirResourcePackaging = builder[versionedLibraryIdentifier];
                          if (fhirResourcePackaging.FhirLibrary is null)
                          {
-                             logger.LogInformation("Packaged resource for {id}.", versionedLibraryIdentifier);
-                             builder[versionedLibraryIdentifier] = fhirResourcePackaging with { FhirLibrary = o.Result.Library, FhirMeasure = o.Result.Measure};
+                             logger.LogInformation("Packaged FHIR resources for library {id}.", versionedLibraryIdentifier);
+                             builder[versionedLibraryIdentifier] = fhirResourcePackaging with { FhirLibrary = o.Value.Library, FhirMeasure = o.Value.Measure};
                              return (true, o);
                          }
 
-                         logger.LogWarning("Skipping replacing existing resource for {id}.", versionedLibraryIdentifier);
+                         logger.LogWarning("Skipping replacing existing FHIR resources for library {id}.", versionedLibraryIdentifier);
                          return (false, default);
                      })
                      .Count();
