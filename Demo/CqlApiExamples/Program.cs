@@ -27,18 +27,18 @@ internal static class Program
         // Create a logger factory via the Microsoft.Extensions.Logging API
         var loggerFactory = CreateConsoleLoggerFactory();
 
-        // Add3And2Example(loggerFactory);
-        // InvokeCqlExample(loggerFactory);
+        Add3And2Example(loggerFactory);
+        InvokeCqlExample(loggerFactory);
         InvokeCqlFromExamplesFolder(loggerFactory);
-        // PackageFromExamplesFolder(loggerFactory);
+        PackageFromExamplesFolder(loggerFactory);
 
-        // var shouldBuildCqlToElm = true;
-        // string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests"];
-        // foreach (var exampleSetName in exampleSetNames)
-        // {
-            // Directories dirs = Directories.Create(exampleSetName);
-            // FullExample(loggerFactory, dirs, shouldBuildCqlToElm);
-        // }
+        var shouldBuildCqlToElm = true;
+        string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests"];
+        foreach (var exampleSetName in exampleSetNames)
+        {
+            Directories dirs = Directories.Create(exampleSetName);
+            FullExample(loggerFactory, dirs, shouldBuildCqlToElm);
+        }
     }
 
     private static void PackageFromExamplesFolder(ILoggerFactory loggerFactory)
