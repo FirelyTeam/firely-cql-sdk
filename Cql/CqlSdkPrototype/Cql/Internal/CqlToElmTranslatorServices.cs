@@ -53,13 +53,6 @@ internal record CqlToElmTranslatorServices(
         libraryBuilderProvider.CqlToElmTranslatorServices = cqlToElmTranslatorServices;
 
         return cqlToElmTranslatorServices;
-        // return ActivatorUtilities.CreateInstance<CqlToElmTranslatorServices>(
-        //     serviceProvider,
-        //     serviceProvider,
-        //     libraryBuilderProvider,
-        //     serviceScope,
-        //     serviceScope.ServiceProvider.GetRequiredService<LibraryVisitor>()
-        //     );
         static T Get<T> (IServiceProvider sp) where T : notnull => sp.GetRequiredService<T>();
     }
 

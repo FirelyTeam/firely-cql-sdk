@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Iso8601;
@@ -31,31 +30,18 @@ internal class ResourcePackager(
         string CSharpSourceCode,
         byte[] AssemblyBinary);
 
-    public IEnumerable<(string versionedLibraryIdentifier, FhirResource fhirResource)> TryPackageEach(
+    public IEnumerable<(string versionedLibraryIdentifier, Func<FhirResource> getFhirResource)> TryPackageEach(
         ElmLibrarySet librarySet,
         Func<string, Input> inputsById,
-        EnumerationExceptionHandlingStrategy<ElmLibrary>? exceptionHandlingStrategy = null,
         string? resourceCanonicalRootUrl = null,
         SysDateTime? overrideDate = null)
     {
-        exceptionHandlingStrategy ??= EnumerationExceptionHandlingStrategy<ElmLibrary>.Throw;
         resourceCanonicalRootUrl ??= string.Empty;
 
-        // librarySet = librarySet.RemoveLibrariesWithMissingIncludes(out var removed);
-        // if (removed.Count > 0)
-        // {
-        //     logger.LogWarning("Removed {Count} libraries with missing includes: {Libraries}", removed.Count, removed);
-        // }
         foreach (ElmLibrary elmLibrary in librarySet)
         {
             var versionedIdentifier = elmLibrary.GetVersionedIdentifier()!;
-
-            switch (exceptionHandlingStrategy.TryGetNext(elmLibrary, _ => CreateLibrary()))
-            {
-                case {Index:1, Value1:{} next}: yield return (versionedIdentifier,next); break;
-                case {Index:2, Value2: false}: yield break;
-                default: continue;
-            }
+            yield return (versionedIdentifier, CreateLibrary);
 
             FhirResource CreateLibrary()
             {
