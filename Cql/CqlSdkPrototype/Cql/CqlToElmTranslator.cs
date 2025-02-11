@@ -3,6 +3,7 @@ using CqlSdkPrototype.Cql.Internal;
 using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CqlToElm;
+using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Cql;
@@ -78,7 +79,7 @@ public sealed class CqlToElmTranslator
         if (Config == config)
             return;
 
-        _services.ServiceProvider.Dispose();
+        _services.Dispose();
         Config = config;
         _services = CqlToElmTranslatorServices.Create(_services.LoggerFactory, config, _cqlToElmTranslations);
     }
@@ -166,8 +167,7 @@ public sealed class CqlToElmTranslator
             IEnumerable<VersionedIdentifierAndCqlToElmTranslation> entries)
         {
             var cqlToElmConverter = _services.CqlToElmConverter;
-            using var scope = _services.ServiceProvider.CreateScope()!;
-            var libraryVisitor = CqlToElmConverter.GetLibraryVisitorScoped(scope);
+            LibraryVisitor libraryVisitor = _services.LibraryVisitor;
 
             var results =
                 entries

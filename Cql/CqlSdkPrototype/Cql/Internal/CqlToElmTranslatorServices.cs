@@ -1,5 +1,6 @@
 ﻿using CqlSdkPrototype.Internal;
 using Hl7.Cql.CqlToElm;
+using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Model;
 using ExpressionVisitor = Hl7.Cql.CqlToElm.Visitors.ExpressionVisitor;
 
@@ -12,7 +13,9 @@ internal readonly record struct CqlToElmTranslatorServices(
     ILoggerFactory LoggerFactory,
     ServiceProvider ServiceProvider,
     CqlToElmConverter CqlToElmConverter,
-    LibraryBuilderProvider LibraryBuilderProvider)
+    LibraryBuilderProvider LibraryBuilderProvider,
+    IServiceScope ServiceScope,
+    LibraryVisitor LibraryVisitor) : IDisposable
 {
     private static readonly (CqlModel CqlModel, ModelInfo ModelInfo)[] AllMappedModelsInOrder = [
         (CqlModel.ElmR1, Models.ElmR1),
@@ -38,7 +41,22 @@ internal readonly record struct CqlToElmTranslatorServices(
         AddCqlServices(services, config, libraryBuilderProvider);
         var serviceProvider = services.BuildServiceProvider(validateScopes: true);
 
-        return ActivatorUtilities.CreateInstance<CqlToElmTranslatorServices>(serviceProvider, serviceProvider, libraryBuilderProvider);
+        var serviceScope = serviceProvider.CreateScope();
+        return new CqlToElmTranslatorServices(
+            loggerFactory,
+            serviceProvider,
+            Get<CqlToElmConverter>(serviceProvider),
+            libraryBuilderProvider,
+            serviceScope,
+            CqlToElmConverter.GetLibraryVisitorScoped(serviceScope));
+        // return ActivatorUtilities.CreateInstance<CqlToElmTranslatorServices>(
+        //     serviceProvider,
+        //     serviceProvider,
+        //     libraryBuilderProvider,
+        //     serviceScope,
+        //     serviceScope.ServiceProvider.GetRequiredService<LibraryVisitor>()
+        //     );
+        static T Get<T> (IServiceProvider sp) where T : notnull => sp.GetRequiredService<T>();
     }
 
     /// <summary>
@@ -110,4 +128,10 @@ internal readonly record struct CqlToElmTranslatorServices(
     /// Gets the library builder provider.
     /// </summary>
     public LibraryBuilderProvider LibraryBuilderProvider { get; } = LibraryBuilderProvider!;
+
+    public void Dispose()
+    {
+        ServiceProvider.Dispose();
+        ServiceScope.Dispose();
+    }
 }
