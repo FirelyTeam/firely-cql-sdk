@@ -11,9 +11,9 @@ public static partial class FluentPackagingToolkitExtensions
     public static FluentPackagingToolkit SaveFhirResources(
         this FluentPackagingToolkit packagingToolkit,
         DirectoryInfo directory,
-        DirectoryPreparationStrategy? directoryPreparationStrategy = null)
+        DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
-        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.Recreate).PrepareDirectory(directory);
+        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.Recreate)(directory);
 
         var logger = packagingToolkit.LoggerFactory.CreateLogger(typeof(FluentPackagingToolkitExtensions));
         var jsonSerializerOptions = packagingToolkit.ServiceProvider.GetRequiredService<JsonSerializerOptions>();

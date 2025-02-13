@@ -8,9 +8,9 @@ public static partial class FluentCqlToolkitExtensions
         this FluentCqlToolkit cqlToolkit,
         DirectoryInfo directory,
         bool writeIndented = true,
-        DirectoryPreparationStrategy? directoryPreparationStrategy = null)
+        DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
-        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists).PrepareDirectory(directory);
+        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
 
         var logger = cqlToolkit.CreateLogger();
 

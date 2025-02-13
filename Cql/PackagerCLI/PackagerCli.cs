@@ -66,7 +66,7 @@ internal class PackagerCli(
                     cqlToolkit.SaveElmFilesToDirectory(
                         elmOutDir,
                         writeIndented:true,
-                        DirectoryPreparationStrategy.CreateFileDeletorStragegy("*.json"));
+                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
 
                 elmToolkit = cqlToolkit.ToFluentElmToolkit();
             }
@@ -82,12 +82,12 @@ internal class PackagerCli(
             if (opt.CSharpOutDirectory is { } dirOutCS)
                 elmToolkit
                     .CompileElmToAssemblies()
-                    .SaveCSharpFilesToDirectory(dirOutCS, DirectoryPreparationStrategy.CreateFileDeletorStragegy("*.g.cs"));
+                    .SaveCSharpFilesToDirectory(dirOutCS, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
 
             if (opt.AssemblyOutDirectory is { } dirOutDll)
                 elmToolkit
                     .CompileElmToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
-                    .SaveAssemblyBinariesToDirectory(dirOutDll, DirectoryPreparationStrategy.CreateFileDeletorStragegy("*.dll"));
+                    .SaveAssemblyBinariesToDirectory(dirOutDll, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"));
 
             if (opt is
                 {
@@ -99,7 +99,7 @@ internal class PackagerCli(
                 packagingToolkit
                     .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
                     .PackageFhirResources(canonicalRootUrl, overrideDate)
-                    .SaveFhirResources(dirOutFhir, DirectoryPreparationStrategy.CreateFileDeletorStragegy("*.json"));
+                    .SaveFhirResources(dirOutFhir, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
             }
 
             return 0;

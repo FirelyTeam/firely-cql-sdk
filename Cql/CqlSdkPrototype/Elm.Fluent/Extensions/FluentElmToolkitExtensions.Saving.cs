@@ -7,9 +7,9 @@ public static partial class FluentElmToolkitExtensions
     public static FluentElmToolkit SaveCSharpFilesToDirectory(
         this FluentElmToolkit elmToolkit,
         DirectoryInfo directory,
-        DirectoryPreparationStrategy? directoryPreparationStrategy = null)
+        DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
-        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists).PrepareDirectory(directory);
+        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
 
         var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
 
@@ -26,9 +26,9 @@ public static partial class FluentElmToolkitExtensions
     public static FluentElmToolkit SaveAssemblyBinariesToDirectory(
         this FluentElmToolkit elmToolkit,
         DirectoryInfo directory,
-        DirectoryPreparationStrategy? directoryPreparationStrategy = null)
+        DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
-        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists).PrepareDirectory(directory);
+        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
 
         var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
 
