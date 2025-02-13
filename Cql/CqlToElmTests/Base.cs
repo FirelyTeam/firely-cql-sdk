@@ -41,15 +41,19 @@ namespace Hl7.Cql.CqlToElm.Test
             LibrarySet librarySet = new("TempLibrarySet", library);
             DefinitionDictionary<LambdaExpression> definitions = new();
             definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
+
             var generateCSharp =
                 elmToolkitServices
                     .GetLibrarySetCSharpCodeGenerator()
-                    .GenerateEachLibraryToCSharp(librarySet, definitions);
+                    .GenerateEachLibraryToCSharp(librarySet, definitions)
+                    .ToList();
 
-            IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> compile =
+            var compile =
                 elmToolkitServices
                     .GetAssemblyCompiler()
-                    .CompileEachLibraryToAssemblies(librarySet, generateCSharp, elmToolkit.ProcessorConfig.AssemblyCompilerDebugInformationFormat);
+                    .CompileEachLibraryToAssemblies(librarySet, generateCSharp, elmToolkit.ProcessorConfig.AssemblyCompilerDebugInformationFormat)
+                    .ToList();
+
             var assemblyBytes = compile.Single().assemblyBinaryWithSourceCode.AssemblyBytes;
 
             using var librarySetInvoker =

@@ -115,7 +115,7 @@ internal class LibrarySetCSharpCodeGenerator
             EnumerateExceptionHandler<Library>? exceptionHandler = null,
             Action<Library>? preHandler = null) =>
             LibrarySet
-                .Where(library => !Definitions.Libraries.Contains(library.GetVersionedIdentifier()!))
+                .Where(library => Definitions.Libraries.Contains(library.GetVersionedIdentifier()!))
                 .TrySelect(library =>
                            {
                                using var cSharpWriter = new StringWriter();
