@@ -48,25 +48,23 @@ namespace Hl7.Cql.CodeGeneration.NET
         }
 
         public IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> CompileEachLibraryToAssemblies(
+            IEnumerable<(Library Library, string CSharp)> librariesWithCSharp,
             LibrarySet librarySet,
-            IEnumerable<(Library Library, string CSharp)> input,
             AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None,
-            EnumerateExceptionHandler<(Library library, string cSharp)>? exceptionHandler = null,
-            Action<(Library library, string cSharp)>? preHandler = null)
+            EnumerateExceptionHandler<(Library library, string cSharp)>? exceptionHandler = null)
         {
             Dictionary<string, AssemblyBinaryWithSourceCode> results = new();
             Assembly[] assemblyReferences = _referencesLazy.Value;
-            return input
+            return librariesWithCSharp
                 .TrySelect(
                     t =>
                     {
                         var (library, cSharp) = t;
                         var assemblyBinaryWithSourceCode = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat);
                         results.Add(library.GetVersionedIdentifier()!, assemblyBinaryWithSourceCode);
-                        return (library,assemblyBinaryWithSourceCode);
+                        return (library, assemblyBinaryWithSourceCode);
                     },
-                    exceptionHandler,
-                    preHandler);
+                    exceptionHandler);
         }
 
         private static CSharpCompilationOptions CreateCSharpCompilationOptions(

@@ -17,9 +17,9 @@ internal class LibrarySetExpressionBuilder(LibraryExpressionBuilder libraryExpre
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> librarySetDefinitions,
         EnumerateExceptionHandler<Library>? exceptionHandler = null,
-        Action<Library>? preHandler = null) =>
+        Action<Library>? preBuildLibraryHandler = null) =>
         NewLibrarySetExpressionBuilderContext(librarySet, librarySetDefinitions)
-            .BuildEachLibraryDefinitions(exceptionHandler, preHandler);
+            .BuildEachLibraryDefinitions(exceptionHandler, preBuildLibraryHandler);
 
     private LibrarySetExpressionBuilderContext NewLibrarySetExpressionBuilderContext(
         LibrarySet librarySet,

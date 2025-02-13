@@ -5,25 +5,22 @@ internal static class ExceptionHandlingMethods
     private static (EnumerationContinuation continuation, TNext next) TryGetNext<T, TNext>(
         T input,
         Func<T, TNext> getNext,
-        EnumerateExceptionHandler<T>? exceptionHandler = null,
-        Action<T>? preHandler = null)
+        EnumerateExceptionHandler<T>? exceptionHandler = null)
     {
-        preHandler?.Invoke(input);
-        TNext next = default!;
         try
         {
-            next = getNext(input);
+            TNext next = getNext(input);
+            return (EnumerationContinuation.Yield, next);
         }
         catch (Exception e)
         {
             switch (exceptionHandler?.Invoke(input, e))
             {
-                case EnumerationExceptionHandling.Break:    return (EnumerationContinuation.Break, next);
-                case EnumerationExceptionHandling.Continue: return (EnumerationContinuation.Continue, next);
+                case EnumerationExceptionHandling.Break:    return (EnumerationContinuation.Break, default!);
+                case EnumerationExceptionHandling.Continue: return (EnumerationContinuation.Continue, default!);
             }
             throw;
         }
-        return (EnumerationContinuation.Yield, next);
     }
 
     private enum EnumerationContinuation
@@ -36,12 +33,11 @@ internal static class ExceptionHandlingMethods
     public static IEnumerable<TReturn> TrySelect<T, TReturn>(
         this IEnumerable<T> inputs,
         Func<T, TReturn> getValue,
-        EnumerateExceptionHandler<T>? exceptionHandler = null,
-        Action<T>? preHandler = null)
+        EnumerateExceptionHandler<T>? exceptionHandler = null)
     {
         foreach (var input in inputs)
         {
-            switch (TryGetNext(input, getValue, exceptionHandler, preHandler))
+            switch (TryGetNext(input, getValue, exceptionHandler))
             {
                 case (EnumerationContinuation.Yield, var @return): yield return @return; break;
                 case (EnumerationContinuation.Continue, _):        continue;

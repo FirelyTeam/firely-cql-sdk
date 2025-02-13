@@ -89,10 +89,10 @@ internal class LibrarySetCSharpCodeGenerator
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> definitions,
         EnumerateExceptionHandler<Library>? exceptionHandler = null,
-        Action<Library>? preHandler = null)
+        Action<Library>? preCSharpGenerateHandler = null)
     {
         var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions);
-        return librarySetWriter.GenerateEachLibraryToCSharp(exceptionHandler, preHandler);
+        return librarySetWriter.GenerateEachLibraryToCSharp(exceptionHandler, preCSharpGenerateHandler);
     }
 
     #region Nested Types
@@ -113,20 +113,22 @@ internal class LibrarySetCSharpCodeGenerator
 
         public IEnumerable<(Library library, string cSharp)> GenerateEachLibraryToCSharp(
             EnumerateExceptionHandler<Library>? exceptionHandler = null,
-            Action<Library>? preHandler = null) =>
+            Action<Library>? preCSharpGenerateHandler = null) =>
             LibrarySet
                 .Where(library => Definitions.Libraries.Contains(library.GetVersionedIdentifier()!))
-                .TrySelect(library =>
-                           {
-                               using var cSharpWriter = new StringWriter();
-                               var libraryWriter = new LibraryWriter(this, library, cSharpWriter);
-                               libraryWriter.WriteLibraryFile();
-                               cSharpWriter.Flush();
-                               var cSharp = cSharpWriter.ToString();
-                               return (library, cSharp);
-                           },
-                           exceptionHandler,
-                           preHandler);
+                .TrySelect(
+                    library =>
+                    {
+                        preCSharpGenerateHandler?.Invoke(library);
+
+                        using var cSharpWriter = new StringWriter();
+                        var libraryWriter = new LibraryWriter(this, library, cSharpWriter);
+                        libraryWriter.WriteLibraryFile();
+                        cSharpWriter.Flush();
+                        var cSharp = cSharpWriter.ToString();
+                        return (library, cSharp);
+                    },
+                    exceptionHandler);
     }
 
     private record LibraryWriter

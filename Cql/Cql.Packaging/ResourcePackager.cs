@@ -22,8 +22,7 @@ internal class ResourcePackager(TypeResolver typeResolver)
 {
     private readonly CqlTypeToFhirTypeMapper _cqlTypeToFhirTypeMapper = new(typeResolver);
 
-    public readonly record struct Input
-    (
+    public readonly record struct SourceArtefacts(
         string VersionedLibraryIdentifier,
         string CqlString,
         ElmLibrary ElmLibrary,
@@ -32,48 +31,40 @@ internal class ResourcePackager(TypeResolver typeResolver)
 
     public IEnumerable<(string versionedLibraryIdentifier, FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure)> PackageEachElmLibraryToFhirResources(
         ElmLibrarySet librarySet,
-        Func<string, Input> inputsById,
+        Func<string, SourceArtefacts> inputsById,
         string? resourceCanonicalRootUrl = null,
         SysDateTime? overrideDate = null,
         EnumerateExceptionHandler<ElmLibrary>? exceptionHandler = null,
-        Action<ElmLibrary>? preHandler = null)
+        Action<ElmLibrary>? prepackageLibraryHandler = null)
     {
         resourceCanonicalRootUrl ??= string.Empty;
 
-        return librarySet
-            .TrySelect(elmLibrary =>
-                       {
-                           var versionedIdentifier = elmLibrary.GetVersionedIdentifier()!;
-                           var localOverrideDate = overrideDate ?? SysDateTime.Now;
-                           var (_, cqlString, elmLibraryInput, cSharpSourceCode, assemblyBinary) = inputsById(versionedIdentifier);
-                           if (versionedIdentifier != elmLibraryInput.GetVersionedIdentifier()!)
-                               throw new InvalidOperationException("Versioned identifiers do not match.");
+        return librarySet.TrySelect(PackageResource, exceptionHandler);
 
-                           var fhirLibrary = LibraryPackager.CreateLibraryResource(
-                               _cqlTypeToFhirTypeMapper,
-                               elmLibrary,
-                               null,
-                               Encoding.Default.GetBytes(cqlString),
-                               assemblyBinary,
-                               GetCSharpSourceCodeByName(),
-                               resourceCanonicalRootUrl,
-                               localOverrideDate);
+        (string versionedIdentifier, FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure) PackageResource(ElmLibrary elmLibrary)
+        {
+            prepackageLibraryHandler?.Invoke(elmLibrary);
 
-                           IEnumerable<KeyValuePair<string, string>>? GetCSharpSourceCodeByName()
-                           {
-                               yield return KeyValuePair.Create(versionedIdentifier, cSharpSourceCode);
-                           }
+            var versionedIdentifier = elmLibrary.GetVersionedIdentifier()!;
+            var localOverrideDate = overrideDate ?? SysDateTime.Now;
+            var (_, cqlString, elmLibraryInput, cSharpSourceCode, assemblyBinary) = inputsById(versionedIdentifier);
+            if (versionedIdentifier != elmLibraryInput.GetVersionedIdentifier()!) throw new InvalidOperationException("Versioned identifiers do not match.");
 
-                           // Analyze datarequirements and add to the FHIR Library resource.
-                           var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(librarySet, elmLibrary);
-                           var dataRequirements = dataRequirementsAnalyzer.Analyze();
-                           fhirLibrary.DataRequirement.AddRange(dataRequirements);
+            var fhirLibrary = LibraryPackager.CreateLibraryResource(_cqlTypeToFhirTypeMapper, elmLibrary, null, Encoding.Default.GetBytes(cqlString), assemblyBinary, GetCSharpSourceCodeByName(), resourceCanonicalRootUrl, localOverrideDate);
 
-                           MeasurePackager.TryCreateMeasure(elmLibrary, fhirLibrary, out var fhirMeasure, resourceCanonicalRootUrl, localOverrideDate);
-                           return (versionedIdentifier, fhirLibrary, fhirMeasure);
-                       },
-                       exceptionHandler,
-                       preHandler);
+            IEnumerable<KeyValuePair<string, string>>? GetCSharpSourceCodeByName()
+            {
+                yield return KeyValuePair.Create(versionedIdentifier, cSharpSourceCode);
+            }
+
+            // Analyze datarequirements and add to the FHIR Library resource.
+            var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(librarySet, elmLibrary);
+            var dataRequirements = dataRequirementsAnalyzer.Analyze();
+            fhirLibrary.DataRequirement.AddRange(dataRequirements);
+
+            MeasurePackager.TryCreateMeasure(elmLibrary, fhirLibrary, out var fhirMeasure, resourceCanonicalRootUrl, localOverrideDate);
+            return (versionedIdentifier, fhirLibrary, fhirMeasure);
+        }
     }
 }
 

@@ -160,7 +160,7 @@ public sealed class FhirResourcePackager
             SetFhirResourcePackagings(builder.ToImmutable());
     }
 
-    private static ResourcePackager.Input ToResourcePackagerInput(FhirResourcePackaging o) => new(
+    private static ResourcePackager.SourceArtefacts ToResourcePackagerInput(FhirResourcePackaging o) => new(
         o.VersionedLibraryIdentifier.ToString(),
         o.CqlLibrary.Cql,
         o.ElmLibrary,

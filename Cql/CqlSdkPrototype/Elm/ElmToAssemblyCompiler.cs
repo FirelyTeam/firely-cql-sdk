@@ -205,11 +205,10 @@ public sealed class ElmToAssemblyCompiler
 
         return assemblyCompiler
             .CompileEachLibraryToAssemblies(
+                cSharps.WithEach(t => logger.LogInformation("Compiling assembly for library : {libraryName}", t.library.identifier)),
                 librarySet,
-                cSharps,
                 debugInformationFormat,
-                logExceptions,
-                preHandler: t => logger.LogInformation("Compiling assembly for library : {libraryName}", t.library.identifier));
+                logExceptions);
     }
 
     /// <summary>
@@ -237,7 +236,7 @@ public sealed class ElmToAssemblyCompiler
                 librarySet,
                 librarySetDefinitions,
                 logExceptions,
-                preHandler: library => logger.LogInformation("Generating C# for library : {libraryName}", library.GetVersionedIdentifier()!));
+                preCSharpGenerateHandler: library => logger.LogInformation("Generating C# for library : {libraryName}", library.GetVersionedIdentifier()!));
     }
 
     /// <summary>
@@ -264,7 +263,7 @@ public sealed class ElmToAssemblyCompiler
                 librarySet,
                 librarySetDefinitions,
                 exceptionHandler: logExceptions,
-                preHandler: lib => logger.LogInformation("Generating definitions for library : {id}", lib.GetVersionedIdentifier()!))
+                preBuildLibraryHandler: lib => logger.LogInformation("Generating definitions for library : {id}", lib.GetVersionedIdentifier()!))
             .ForEach(); // Important to enumerate
         return librarySetDefinitions;
     }

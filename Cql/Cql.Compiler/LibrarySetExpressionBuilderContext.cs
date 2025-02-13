@@ -38,17 +38,18 @@ internal partial class LibrarySetExpressionBuilderContext
 
     public IEnumerable<(Library library, DefinitionDictionary<LambdaExpression> libraryDefinitions)> BuildEachLibraryDefinitions(
         EnumerateExceptionHandler<Library>? exceptionHandler = null,
-        Action<Library>? preHandler = null) =>
+        Action<Library>? prebuildLibraryHandler = null) =>
         LibrarySet
-            .TrySelect(library =>
-                       {
-                           return this.CatchRethrowExpressionBuildingException(_ =>
-                           {
-                               var libraryDefinitions = _libraryExpressionBuilder.ProcessLibrary(library, null, this);
-                               LibrarySetDefinitions.Merge(libraryDefinitions);
-                               return (library, libraryDefinitions);
-                           });
-                       },
-                       exceptionHandler, preHandler
-            );
+            .TrySelect(
+                library =>
+                {
+                    prebuildLibraryHandler?.Invoke(library);
+                    return this.CatchRethrowExpressionBuildingException(_ =>
+                    {
+                        var libraryDefinitions = _libraryExpressionBuilder.ProcessLibrary(library, null, this);
+                        LibrarySetDefinitions.Merge(libraryDefinitions);
+                        return (library, libraryDefinitions);
+                    });
+                },
+                exceptionHandler);
 }

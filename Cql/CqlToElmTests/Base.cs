@@ -51,7 +51,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var compile =
                 elmToolkitServices
                     .GetAssemblyCompiler()
-                    .CompileEachLibraryToAssemblies(librarySet, generateCSharp, elmToolkit.ProcessorConfig.AssemblyCompilerDebugInformationFormat)
+                    .CompileEachLibraryToAssemblies(generateCSharp, librarySet, elmToolkit.ProcessorConfig.AssemblyCompilerDebugInformationFormat)
                     .ToList();
 
             var assemblyBytes = compile.Single().assemblyBinaryWithSourceCode.AssemblyBytes;
