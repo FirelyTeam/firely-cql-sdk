@@ -21,7 +21,7 @@ internal static class ExceptionHandlingMethods
             switch (exceptionHandler?.Invoke(input, e))
             {
                 case EnumerationExceptionHandling.Break:    return (EnumerationContinuation.Break, next);
-                case EnumerationExceptionHandling.Continue: return (EnumerationContinuation.Break, next);
+                case EnumerationExceptionHandling.Continue: return (EnumerationContinuation.Continue, next);
             }
             throw;
         }
