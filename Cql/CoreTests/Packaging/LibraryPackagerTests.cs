@@ -1,11 +1,15 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using CqlSdkPrototype.Cql.Fluent;
+using CqlSdkPrototype.Packaging;
+using CqlSdkPrototype.Packaging.Fluent;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Hl7.Fhir.Model;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Library = Hl7.Cql.Elm.Library;
 
 namespace CoreTests.Packaging;
 
@@ -13,7 +17,6 @@ namespace CoreTests.Packaging;
 public class LibraryPackagerTests
 {
     private static readonly FhirTypeResolver TypeResolver = new (ModelInfo.ModelInspector);
-    private readonly AssemblyData _assemblyData = new ([], new Dictionary<string, string>());
     private readonly CqlTypeToFhirTypeMapper _mapper = new (TypeResolver);
 
     [DataTestMethod]
@@ -28,11 +31,12 @@ public class LibraryPackagerTests
 
         // Act
         var library = LibraryPackager.CreateLibraryResource(
-            elmFile,
-            null,
-            null,
-            _assemblyData,
-            _mapper);
+            typeCrosswalk: _mapper,
+            elmLibrary: Library.LoadFromJson(new FileInfo(filename)),
+            elmBytes: File.ReadAllBytes(filename),
+            cqlBytes: [],
+            assemblyBytes: [],
+            cSharpSourceCodeById: []);
 
         // Assert
         Assert.IsNotNull(library);

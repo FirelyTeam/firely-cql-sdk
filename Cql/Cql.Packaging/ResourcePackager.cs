@@ -254,8 +254,8 @@ internal static class LibraryPackager
         byte[]? cqlBytes,
         byte[]? assemblyBytes,
         IEnumerable<KeyValuePair<string, string>>? cSharpSourceCodeById,
-        string? resourceCanonicalRootUrl,
-        SysDateTime? elmFileLastWriteTimeUtc)
+        string? resourceCanonicalRootUrl = null,
+        SysDateTime? elmFileLastWriteTimeUtc = null)
     {
         switch (elmLibrary, elmBytes)
         {
