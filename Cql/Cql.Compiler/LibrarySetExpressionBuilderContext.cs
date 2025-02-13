@@ -36,7 +36,7 @@ internal partial class LibrarySetExpressionBuilderContext
     /// </summary>
     public LibrarySet LibrarySet { get; }
 
-    public IEnumerable<(Library library, DefinitionDictionary<LambdaExpression> libraryDefinitions)> TryBuildEachLibraryDefinitions(
+    public IEnumerable<(Library library, DefinitionDictionary<LambdaExpression> libraryDefinitions)> BuildEachLibraryDefinitions(
         EnumerateExceptionHandler<Library>? exceptionHandler = null,
         Action<Library>? preHandler = null) =>
         LibrarySet

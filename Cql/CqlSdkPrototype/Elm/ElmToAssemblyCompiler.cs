@@ -260,7 +260,7 @@ public sealed class ElmToAssemblyCompiler
 
         DefinitionDictionary<LambdaExpression> librarySetDefinitions = new();
         librarySetExpressionBuilderScoped
-            .TryBuildEachLibraryDefinitions(
+            .BuildEachLibraryDefinitions(
                 librarySet,
                 librarySetDefinitions,
                 exceptionHandler: logExceptions,

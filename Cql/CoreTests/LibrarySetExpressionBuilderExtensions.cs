@@ -12,7 +12,7 @@ internal static class LibrarySetExpressionBuilderExtensions
         LibrarySet librarySet)
     {
         var librarySetDefinitions = new DefinitionDictionary<LambdaExpression>();
-        librarySetExpressionBuilder.TryBuildEachLibraryDefinitions(librarySet, librarySetDefinitions).ForEach();
+        librarySetExpressionBuilder.BuildEachLibraryDefinitions(librarySet, librarySetDefinitions).ForEach();
         return librarySetDefinitions;
     }
 }
