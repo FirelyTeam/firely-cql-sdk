@@ -9,7 +9,6 @@ using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation;
 using CqlSdkPrototype.Invocation.Extensions;
 using CqlSdkPrototype.Invocation.Fluent.Extensions;
-using CqlSdkPrototype.Packaging;
 using CqlSdkPrototype.Packaging.Fluent;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;

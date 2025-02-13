@@ -6,9 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Collections;
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET.Visitors;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -92,7 +90,7 @@ internal class LibrarySetCSharpCodeGenerator
         DefinitionDictionary<LambdaExpression> definitions,
         EnumerateExceptionHandler<Library>? exceptionHandler = null)
     {
-        var librarySetWriter = new LibrarySetWriter(this, librarySetEnumerable.LibrarySet, definitions);
+        var librarySetWriter = new LibrarySetWriter(this, librarySetEnumerable, definitions);
         return librarySetWriter.GenerateEachLibraryToCSharp(exceptionHandler);
     }
 
@@ -100,7 +98,7 @@ internal class LibrarySetCSharpCodeGenerator
 
     private record LibrarySetWriter(
         LibrarySetCSharpCodeGenerator Processor,
-        LibrarySet LibrarySet,
+        LibrarySetEnumerable LibrarySetEnumerable,
         DefinitionDictionary<LambdaExpression> Definitions)
     {
         public TupleMetadataBuilder TupleMetadataBuilder { get; } = new();
@@ -113,7 +111,7 @@ internal class LibrarySetCSharpCodeGenerator
 
         public IEnumerable<(Library library, string cSharp)> GenerateEachLibraryToCSharp(
             EnumerateExceptionHandler<Library>? exceptionHandler = null) =>
-            LibrarySet
+            LibrarySetEnumerable
                 .Where(library => Definitions.Libraries.Contains(library.GetVersionedIdentifier()!))
                 .TrySelect(
                     library =>
@@ -128,8 +126,7 @@ internal class LibrarySetCSharpCodeGenerator
                     exceptionHandler);
     }
 
-    private record LibraryWriter
-    (
+    private record LibraryWriter(
         LibrarySetWriter LibrarySetWriter,
         Library Library,
         IndentedTextWriter IndentedTextWriter) : IAddIndentMutable<LibraryWriter>
@@ -193,7 +190,8 @@ internal class LibrarySetCSharpCodeGenerator
             IndentedTextWriter.WriteLine($"public string Name => {LibraryVersionedIdentifier.id.QuoteString()};");
             IndentedTextWriter.WriteLine($"public string Version => {LibraryVersionedIdentifier.version.QuoteString()};");
             var dependencies =
-                LibrarySetWriter.LibrarySet
+                LibrarySetWriter.LibrarySetEnumerable
+                                .LibrarySet
                                 .GetLibraryDependencies(LibraryName, throwError: true)
                                 .Select(dep => VariableNameGenerator.NormalizeIdentifier(dep.GetVersionedIdentifier()!))
                                 .Select(typeName => $"{typeName}.Instance");

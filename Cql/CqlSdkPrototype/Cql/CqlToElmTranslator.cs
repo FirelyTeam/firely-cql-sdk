@@ -1,7 +1,6 @@
 ﻿using CqlSdkPrototype.Cql.Fluent;
 using CqlSdkPrototype.Cql.Internal;
 using CqlSdkPrototype.Infrastructure;
-using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Cql;

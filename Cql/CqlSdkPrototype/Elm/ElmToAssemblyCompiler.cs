@@ -6,6 +6,7 @@ using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Fhir.Model;
 
 namespace CqlSdkPrototype.Elm;
 
@@ -174,7 +175,6 @@ public sealed class ElmToAssemblyCompiler
                 DebugSymbolsBinary = debugSymbols,
             };
             entriesBuilder[key: elmVersionedIdentifier] = libraryCompilation;
-            logger.LogInformation(message: "Library compiled: {versionedIdentifier}", args: elmVersionedIdentifier);
             hasChanged = true;
         }
 
@@ -208,7 +208,8 @@ public sealed class ElmToAssemblyCompiler
                 cSharps.WithEach(t => logger.LogInformation("Compiling assembly for library : {libraryName}", t.library.identifier)),
                 librarySet,
                 debugInformationFormat,
-                logExceptions);
+                logExceptions)
+            .WithEach(t => logger.LogInformation("Compiled assembly for library : {libraryName}", t.library.identifier));
     }
 
     /// <summary>
@@ -235,7 +236,8 @@ public sealed class ElmToAssemblyCompiler
             .GenerateEachLibraryToCSharp(
                 librarySet.ToLibrarySetEnumerable(onNextLibrary: library => logger.LogInformation("Generating C# for library : {libraryName}", library.GetVersionedIdentifier()!)),
                 librarySetDefinitions,
-                logExceptions);
+                logExceptions)
+            .WithEach(t => logger.LogInformation("Generated C# for library : {libraryName}", t.library.GetVersionedIdentifier()!));
     }
 
     /// <summary>
@@ -262,7 +264,7 @@ public sealed class ElmToAssemblyCompiler
                 librarySet.ToLibrarySetEnumerable(onNextLibrary: library => logger.LogInformation("Generating definitions for library : {id}", library.GetVersionedIdentifier()!)),
                 librarySetDefinitions,
                 exceptionHandler: logExceptions)
-            .ForEach(); // Important to enumerate
+            .ForEach(t => logger.LogInformation("Generated definitions for library: {id}", t.library.GetVersionedIdentifier()!)); // Important to enumerate
         return librarySetDefinitions;
     }
 }
