@@ -85,17 +85,20 @@ internal class LibrarySetCSharpCodeGenerator
         return hashSet;
     }
 
-    public IEnumerable<(Library library, Func<string> generateCSharp)> GenerateCSharpDeferred(
+    public IEnumerable<(Library library, string cSharp)> GenerateEachLibraryToCSharp(
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression> definitions)
+        DefinitionDictionary<LambdaExpression> definitions,
+        EnumerateExceptionHandler<Library>? exceptionHandler = null,
+        Action<Library>? preHandler = null)
     {
         var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions);
-        return librarySetWriter.GenerateCSharpDeferred();
+        return librarySetWriter.GenerateEachLibraryToCSharp(exceptionHandler, preHandler);
     }
 
     #region Nested Types
 
-    private record LibrarySetWriter(
+    private record LibrarySetWriter
+    (
         LibrarySetCSharpCodeGenerator Processor,
         LibrarySet LibrarySet,
         DefinitionDictionary<LambdaExpression> Definitions)
@@ -108,29 +111,26 @@ internal class LibrarySetCSharpCodeGenerator
         public HashSet<string> Usings => Processor._usings;
         public string? Namespace { get; } = null; // Not used right now
 
-        public IEnumerable<(Library library, Func<string> generateCSharp)> GenerateCSharpDeferred()
-        {
-            foreach (var library in LibrarySet)
-            {
-                string libraryName = library.GetVersionedIdentifier()!;
-                if (!Definitions.Libraries.Contains(libraryName))
-                    continue;
-
-                yield return (library,GenerateCSharp);
-
-                string GenerateCSharp()
-                {
-                    using var cSharpWriter = new StringWriter();
-                    var libraryWriter = new LibraryWriter(this, library, cSharpWriter);
-                    libraryWriter.WriteLibraryFile();
-                    cSharpWriter.Flush();
-                    return cSharpWriter.ToString();
-                }
-            }
-        }
+        public IEnumerable<(Library library, string cSharp)> GenerateEachLibraryToCSharp(
+            EnumerateExceptionHandler<Library>? exceptionHandler = null,
+            Action<Library>? preHandler = null) =>
+            LibrarySet
+                .Where(library => !Definitions.Libraries.Contains(library.GetVersionedIdentifier()!))
+                .TrySelect(library =>
+                           {
+                               using var cSharpWriter = new StringWriter();
+                               var libraryWriter = new LibraryWriter(this, library, cSharpWriter);
+                               libraryWriter.WriteLibraryFile();
+                               cSharpWriter.Flush();
+                               var cSharp = cSharpWriter.ToString();
+                               return (library, cSharp);
+                           },
+                           exceptionHandler,
+                           preHandler);
     }
 
-    private record LibraryWriter(
+    private record LibraryWriter
+    (
         LibrarySetWriter LibrarySetWriter,
         Library Library,
         IndentedTextWriter IndentedTextWriter) : IAddIndentMutable<LibraryWriter>
@@ -139,7 +139,7 @@ internal class LibrarySetCSharpCodeGenerator
             LibrarySetWriter librarySetWriter,
             Library library,
             TextWriter textWriter,
-            int indent = 0) : this(librarySetWriter, library, new IndentedTextWriter(textWriter, indent)) {}
+            int indent = 0) : this(librarySetWriter, library, new IndentedTextWriter(textWriter, indent)) { }
 
         private VersionedIdentifier LibraryVersionedIdentifier => ((IGetVersionedIdentifier)Library).VersionedIdentifier.Result!;
         public string LibraryName { get; } = Library.GetVersionedIdentifier()!;
@@ -171,6 +171,7 @@ internal class LibrarySetCSharpCodeGenerator
                     IndentedTextWriter.WriteLine();
                     first = false;
                 }
+
                 var types = string.Join(", ", signature.Select(t => $"typeof({LibrarySetWriter.TypeToCSharpConverter.ToCSharp(t.Type)})"));
                 var names = string.Join(", ", signature.Select(t => t.PropName.QuoteString()));
                 IndentedTextWriter.WriteLine($"private static CqlTupleMetadata {propertyName} = new(");
@@ -178,6 +179,7 @@ internal class LibrarySetCSharpCodeGenerator
                 IndentedTextWriter.WriteLine(1, $"[{names}]);");
                 IndentedTextWriter.WriteLine();
             }
+
             if (!first)
             {
                 IndentedTextWriter.WriteLine("#endregion CqlTupleMetadata Properties");
@@ -238,12 +240,14 @@ internal class LibrarySetCSharpCodeGenerator
                         IndentedTextWriter.WriteLine();
                         first = false;
                     }
+
                     definitions.TryGetTags(libraryName, definition, signature, out var tags);
                     var methodWriter = CreateMethodWriter(definition, expression, tags);
                     methodWriter.WriteMethod();
                     IndentedTextWriter.WriteLine();
                 }
             }
+
             if (!first)
             {
                 IndentedTextWriter.WriteLine("#endregion Definition Methods");
@@ -253,7 +257,8 @@ internal class LibrarySetCSharpCodeGenerator
 
         private void WriteClass()
         {
-            IndentedTextWriter.WriteLine($"[System.CodeDom.Compiler.GeneratedCode({LibrarySetWriter.GeneratorToolName.QuoteString()}, {LibrarySetWriter.GeneratorToolVersion.QuoteString()})]");
+            IndentedTextWriter.WriteLine(
+                $"[System.CodeDom.Compiler.GeneratedCode({LibrarySetWriter.GeneratorToolName.QuoteString()}, {LibrarySetWriter.GeneratorToolVersion.QuoteString()})]");
 
             IndentedTextWriter.WriteLine(
                 LibraryVersionedIdentifier.version is { } version && Version.TryParse(version, out _)
@@ -284,13 +289,18 @@ internal class LibrarySetCSharpCodeGenerator
             IndentedTextWriter.WriteLine($"private {ClassName}() {{}}");
             IndentedTextWriter.WriteLine();
         }
-        private MethodWriter CreateMethodWriter(string definition, LambdaExpression expression, ILookup<string, string>? tags)
+
+        private MethodWriter CreateMethodWriter(
+            string definition,
+            LambdaExpression expression,
+            ILookup<string, string>? tags)
         {
             return new MethodWriter(this, definition, expression, tags);
         }
     }
 
-    private record MethodWriter(
+    private record MethodWriter
+    (
         LibraryWriter LibraryWriter,
         string CqlName,
         LambdaExpression Overload,
@@ -345,7 +355,9 @@ internal class LibrarySetCSharpCodeGenerator
                 }
             }
 
-            var definitionToCSharpCodeProcessor = new LibraryDefinitionCSharpCodeGenerator(tupleMetadataBuilder, libraryName, LibraryWriter.LibrarySetWriter.TypeToCSharpConverter, IndentedTextWriter.Indent);
+            var definitionToCSharpCodeProcessor =
+                new LibraryDefinitionCSharpCodeGenerator(tupleMetadataBuilder, libraryName, LibraryWriter.LibrarySetWriter.TypeToCSharpConverter,
+                                                         IndentedTextWriter.Indent);
             var definition = definitionToCSharpCodeProcessor.ProcessDefinition(overload, MethodName, "public");
             IndentedTextWriter.WriteLine(definition);
         }
@@ -376,17 +388,4 @@ internal class LibrarySetCSharpCodeGenerator
     }
 
     #endregion Nested Types
-}
-
-internal static class CSharpCodeGeneratorExtensions
-{
-    public static IEnumerable<(Library library, string cSharp)> GenerateCSharp(
-        this LibrarySetCSharpCodeGenerator generator,
-        LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression> definitions)
-    {
-        return generator
-               .GenerateCSharpDeferred(librarySet, definitions)
-               .Select(t => (t.library, t.generateCSharp()));
-    }
 }

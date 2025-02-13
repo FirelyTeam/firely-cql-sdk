@@ -41,18 +41,24 @@ namespace Hl7.Cql.CqlToElm.Test
             LibrarySet librarySet = new("TempLibrarySet", library);
             DefinitionDictionary<LambdaExpression> definitions = new();
             definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
-            var generateCSharp = elmToolkitServices.GetLibrarySetCSharpCodeGenerator().GenerateCSharp(librarySet, definitions);
+            var generateCSharp =
+                elmToolkitServices
+                    .GetLibrarySetCSharpCodeGenerator()
+                    .GenerateEachLibraryToCSharp(librarySet, definitions);
+
             IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> compile =
-                elmToolkitServices.GetAssemblyCompiler()
-                                  .TryCompileEach(librarySet, generateCSharp, elmToolkit.ProcessorConfig.AssemblyCompilerDebugInformationFormat)
-                                  .CatchEachPair();
+                elmToolkitServices
+                    .GetAssemblyCompiler()
+                    .CompileEachLibraryToAssemblies(librarySet, generateCSharp, elmToolkit.ProcessorConfig.AssemblyCompilerDebugInformationFormat);
             var assemblyBytes = compile.Single().assemblyBinaryWithSourceCode.AssemblyBytes;
 
-            using var librarySetInvoker = new FluentInvocationToolkit()
-                                          .AddAssemblyBinaries(AssemblyBinary.Default with { AssemblyBytes = assemblyBytes })
-                                          .ToLibrarySetInvoker();
-            var result = librarySetInvoker.GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier),
-                                                                      expressionName);
+            using var librarySetInvoker =
+                new FluentInvocationToolkit()
+                    .AddAssemblyBinaries(AssemblyBinary.Default with { AssemblyBytes = assemblyBytes })
+                    .ToLibrarySetInvoker();
+
+            var result = librarySetInvoker
+                .GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);
             return result;
         }
 

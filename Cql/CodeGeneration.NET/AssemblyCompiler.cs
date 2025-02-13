@@ -47,10 +47,12 @@ namespace Hl7.Cql.CodeGeneration.NET
                 });
         }
 
-        public IEnumerable<(Library library, Func<AssemblyBinaryWithSourceCode> getAssemblyBinaryWithSourceCode)> TryCompileEach(
+        public IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> CompileEachLibraryToAssemblies(
             LibrarySet librarySet,
             IEnumerable<(Library Library, string CSharp)> input,
-            AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None)
+            AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None,
+            EnumerateExceptionHandler<(Library library, string cSharp)>? exceptionHandler = null,
+            Action<(Library library, string cSharp)>? preHandler = null)
         {
             Dictionary<string, AssemblyBinaryWithSourceCode> results = new();
             Assembly[] assemblyReferences = _referencesLazy.Value;
@@ -59,11 +61,12 @@ namespace Hl7.Cql.CodeGeneration.NET
                     t =>
                     {
                         var (library, cSharp) = t;
-                        var result = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat);
-                        results.Add(library.GetVersionedIdentifier()!, result);
-                        return result;
-                    })
-                .Select(t => (t.Input.Library, t.GetValue));
+                        var assemblyBinaryWithSourceCode = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat);
+                        results.Add(library.GetVersionedIdentifier()!, assemblyBinaryWithSourceCode);
+                        return (library,assemblyBinaryWithSourceCode);
+                    },
+                    exceptionHandler,
+                    preHandler);
         }
 
         private static CSharpCompilationOptions CreateCSharpCompilationOptions(

@@ -117,7 +117,7 @@ public sealed class FhirResourcePackager
                  .ToArray();
         LibrarySet librarySet = new LibrarySet("", librariesToPackage);
 
-        IEnumerable<ResourcePackager.Input> resourcePackagerInputs =
+        var resourcePackagerInputs =
             builder.Values
                    .Select(o =>
                    {
@@ -125,29 +125,30 @@ public sealed class FhirResourcePackager
                        var input = o.Input;
                        return new ResourcePackager.Input(o.VersionedLibraryIdentifier.ToString(), input.CqlLibrary.Cql, input.ElmLibrary, input.CSharpSourceCode, input.AssemblyBinary);
                    });
+
         var logPackageFailed =
-            logger.CreateLogExceptionHandler<string>(
+            logger.CreateLogExceptionHandler<ElmLibrary>(
                 Config.EnumerationExceptionHandling,
-                (libId, log) => log("Could not package FHIR resources for library {lib}", libId));
+                (library, log) => log("Could not package FHIR resources for library {lib}", library.GetVersionedIdentifier()!));
 
         var inputsById = resourcePackagerInputs.ToDictionary(o => o.VersionedLibraryIdentifier);
 
         var count =
             _services.ResourcePackager
-                     .TryPackageEach(
+                     .PackageEachElmLibraryToFhirResources(
                          librarySet: librarySet,
                          inputsById: id => inputsById[id],
                          resourceCanonicalRootUrl: canonicalRootUrl?.ToString(),
-                         overrideDate: overrideDate)
-                     .CatchEachPair(logPackageFailed)
+                         overrideDate: overrideDate,
+                         logPackageFailed)
                      .SelectWhere(o =>
                      {
-                         var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(o.Input);
+                         var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(o.versionedLibraryIdentifier);
                          var fhirResourcePackaging = builder[versionedLibraryIdentifier];
                          if (fhirResourcePackaging.FhirLibrary is null)
                          {
                              logger.LogInformation("Packaged FHIR resources for library {id}.", versionedLibraryIdentifier);
-                             builder[versionedLibraryIdentifier] = fhirResourcePackaging with { FhirLibrary = o.Value.Library, FhirMeasure = o.Value.Measure};
+                             builder[versionedLibraryIdentifier] = fhirResourcePackaging with { FhirLibrary = o.fhirLibrary, FhirMeasure = o.fhirMeasure};
                              return (true, o);
                          }
 

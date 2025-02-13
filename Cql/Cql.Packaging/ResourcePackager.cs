@@ -10,6 +10,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Utility;
 
@@ -17,66 +18,62 @@ namespace Hl7.Cql.Packaging;
 
 #pragma warning disable CS1591
 
-internal class ResourcePackager(
-    TypeResolver typeResolver)
+internal class ResourcePackager(TypeResolver typeResolver)
 {
     private readonly CqlTypeToFhirTypeMapper _cqlTypeToFhirTypeMapper = new(typeResolver);
 
-    public readonly record struct Input(
+    public readonly record struct Input
+    (
         string VersionedLibraryIdentifier,
         string CqlString,
         ElmLibrary ElmLibrary,
         string CSharpSourceCode,
         byte[] AssemblyBinary);
 
-    public IEnumerable<(string versionedLibraryIdentifier, Func<(FhirLibrary Library, FhirMeasure? Measure)> getFhirResources)> TryPackageEach(
+    public IEnumerable<(string versionedLibraryIdentifier, FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure)> PackageEachElmLibraryToFhirResources(
         ElmLibrarySet librarySet,
         Func<string, Input> inputsById,
         string? resourceCanonicalRootUrl = null,
-        SysDateTime? overrideDate = null)
+        SysDateTime? overrideDate = null,
+        EnumerateExceptionHandler<ElmLibrary>? exceptionHandler = null,
+        Action<ElmLibrary>? preHandler = null)
     {
         resourceCanonicalRootUrl ??= string.Empty;
 
-        foreach (ElmLibrary elmLibrary in librarySet)
-        {
-            var versionedIdentifier = elmLibrary.GetVersionedIdentifier()!;
-            yield return (versionedIdentifier, () =>
-                             {
-                                 var localOverrideDate = overrideDate ?? SysDateTime.Now;
-                                 var fhirLibrary = CreateLibrary(localOverrideDate);
-                                 MeasurePackager.TryCreateMeasure(elmLibrary, fhirLibrary, out var fhirMeasure, resourceCanonicalRootUrl, localOverrideDate);
-                                 return (fhirLibrary, fhirMeasure);
-                             }
-            );
+        return librarySet
+            .TrySelect(elmLibrary =>
+                       {
+                           var versionedIdentifier = elmLibrary.GetVersionedIdentifier()!;
+                           var localOverrideDate = overrideDate ?? SysDateTime.Now;
+                           var (_, cqlString, elmLibraryInput, cSharpSourceCode, assemblyBinary) = inputsById(versionedIdentifier);
+                           if (versionedIdentifier != elmLibraryInput.GetVersionedIdentifier()!)
+                               throw new InvalidOperationException("Versioned identifiers do not match.");
 
-            FhirLibrary CreateLibrary(SysDateTime localOverrideDate)
-            {
-                var (_, cqlString, elmLibraryInput, cSharpSourceCode, assemblyBinary) = inputsById(versionedIdentifier);
-                if (versionedIdentifier != elmLibraryInput.GetVersionedIdentifier()!)
-                    throw new InvalidOperationException("Versioned identifiers do not match.");
+                           var fhirLibrary = LibraryPackager.CreateLibraryResource(
+                               _cqlTypeToFhirTypeMapper,
+                               elmLibrary,
+                               null,
+                               Encoding.Default.GetBytes(cqlString),
+                               assemblyBinary,
+                               GetCSharpSourceCodeByName(),
+                               resourceCanonicalRootUrl,
+                               localOverrideDate);
 
-                var fhirLibrary = LibraryPackager.CreateLibraryResource(
-                    _cqlTypeToFhirTypeMapper,
-                    elmLibrary,
-                    null,
-                    Encoding.Default.GetBytes(cqlString),
-                    assemblyBinary,
-                    GetCSharpSourceCodeByName(),
-                    resourceCanonicalRootUrl,
-                    localOverrideDate);
+                           IEnumerable<KeyValuePair<string, string>>? GetCSharpSourceCodeByName()
+                           {
+                               yield return KeyValuePair.Create(versionedIdentifier, cSharpSourceCode);
+                           }
 
-                IEnumerable<KeyValuePair<string, string>>? GetCSharpSourceCodeByName()
-                {
-                    yield return KeyValuePair.Create(versionedIdentifier, cSharpSourceCode);
-                }
+                           // Analyze datarequirements and add to the FHIR Library resource.
+                           var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(librarySet, elmLibrary);
+                           var dataRequirements = dataRequirementsAnalyzer.Analyze();
+                           fhirLibrary.DataRequirement.AddRange(dataRequirements);
 
-                // Analyze datarequirements and add to the FHIR Library resource.
-                var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(librarySet, elmLibrary);
-                var dataRequirements = dataRequirementsAnalyzer.Analyze();
-                fhirLibrary.DataRequirement.AddRange(dataRequirements);
-                return fhirLibrary;
-            }
-        }
+                           MeasurePackager.TryCreateMeasure(elmLibrary, fhirLibrary, out var fhirMeasure, resourceCanonicalRootUrl, localOverrideDate);
+                           return (versionedIdentifier, fhirLibrary, fhirMeasure);
+                       },
+                       exceptionHandler,
+                       preHandler);
     }
 }
 
@@ -115,7 +112,8 @@ file static class MeasurePackager
                 && !string.IsNullOrWhiteSpace(yearAnnotation.value)
                 && int.TryParse(yearAnnotation.value, out var measureYear))
             {
-                fhirMeasure = MeasurePackager.CreateMeasureResource(fhirLibrary, measureAnnotation, measureYear, elmLibrary, resourceCanonicalRootUrl, overrideDate);
+                fhirMeasure = MeasurePackager.CreateMeasureResource(fhirLibrary, measureAnnotation, measureYear, elmLibrary, resourceCanonicalRootUrl,
+                                                                    overrideDate);
                 return true;
             }
         }
@@ -152,12 +150,12 @@ file static class MeasurePackager
     }
 
     private static readonly Dictionary<string, string> Populations = new Dictionary<string, string>
-        {
-            { "initial-population", "Initial Population" },
-            { "numerator", "Numerator" },
-            { "denominator", "Denominator" },
-            { "denominator-exclusion", "Denominator Exclusion" }
-        };
+    {
+        { "initial-population", "Initial Population" },
+        { "numerator", "Numerator" },
+        { "denominator", "Denominator" },
+        { "denominator-exclusion", "Denominator Exclusion" }
+    };
 
     private static void AnnotateMeasurePopulations(Measure measure, Elm.Library library)
     {
@@ -165,18 +163,18 @@ file static class MeasurePackager
         foreach (var def in defs)
         {
             var annotations = (def.annotation?
-                .OfType<ElmAnnotation>()
-                .SelectMany(a => a.t ?? Enumerable.Empty<Tag>())
-                ?? Enumerable.Empty<Tag>())
+                                  .OfType<ElmAnnotation>()
+                                  .SelectMany(a => a.t ?? Enumerable.Empty<Tag>())
+                               ?? Enumerable.Empty<Tag>())
                 .ToArray();
             if (annotations.Length > 0)
             {
                 var groups = annotations
-                    .Where(t => t.name == "group")
-                    .ToArray();
+                             .Where(t => t.name == "group")
+                             .ToArray();
                 var populations = annotations
-                    .Where(t => t.name == "population")
-                    .ToArray();
+                                  .Where(t => t.name == "population")
+                                  .ToArray();
                 var productLine = annotations
                     .FirstOrDefault(t => t.name == "productline");
 
@@ -186,14 +184,16 @@ file static class MeasurePackager
                 foreach (var tuple in tuples)
                 {
                     if (!int.TryParse(tuple.Group, out var groupNumber))
-                        throw new InvalidOperationException($"Definition {def.name} has a @group annotation whose value is {tuple.Group}.  Groups must be positive integers.");
+                        throw new InvalidOperationException(
+                            $"Definition {def.name} has a @group annotation whose value is {tuple.Group}.  Groups must be positive integers.");
                     if (!Populations.ContainsKey(tuple.Population))
-                        throw new InvalidOperationException($"Definition {def.name} has a @population annotation whose value is {tuple.Population}.  @population must be one of: {string.Join(", ", Populations.Keys)}");
+                        throw new InvalidOperationException(
+                            $"Definition {def.name} has a @population annotation whose value is {tuple.Population}.  @population must be one of: {string.Join(", ", Populations.Keys)}");
 
                     var rate = $"rate-{tuple.Group}";
                     var groupsForRate = measure.Group?
-                        .Where(g => g.ElementId == rate)
-                        .ToArray() ?? new Measure.GroupComponent[] { };
+                                               .Where(g => g.ElementId == rate)
+                                               .ToArray() ?? new Measure.GroupComponent[] { };
                     Measure.GroupComponent? group;
                     if (groupsForRate.Length == 1)
                     {
@@ -214,8 +214,8 @@ file static class MeasurePackager
                     var populationSuffix = productLine != null ? $"{tuple.Population}-{productLine.value}" : tuple.Population;
                     var pop = $"{rate}-{populationSuffix}";
                     var populationsForGroup = group.Population
-                            .Where(p => p.ElementId == pop)
-                            .ToArray();
+                                                   .Where(p => p.ElementId == pop)
+                                                   .ToArray();
                     Measure.PopulationComponent? population;
                     if (populationsForGroup.Length == 1)
                     {
@@ -233,7 +233,7 @@ file static class MeasurePackager
                                     new Coding
                                     {
                                         System = "http://terminology.hl7.org/CodeSystem/measure-population",
-                                         Code = populationSuffix,
+                                        Code = populationSuffix,
                                     }
                                 }
                             },
@@ -247,7 +247,6 @@ file static class MeasurePackager
                         group.Population.Add(population);
                     }
                     else throw new InvalidOperationException($"Population {pop} is defined twice for this measure.");
-
                 }
             }
         }
@@ -336,6 +335,7 @@ internal static class LibraryPackager
         {
             meta.LastUpdated = date;
         }
+
         return fhirLibrary;
     }
 
@@ -393,7 +393,6 @@ internal static class LibraryPackager
         }
 
         parameters.AddRange(valueSetParameterDefinitions);
-
     }
 
     private static void AddCqlAttachment(

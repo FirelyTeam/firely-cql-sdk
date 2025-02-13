@@ -1,11 +1,11 @@
 ﻿using CqlSdkPrototype.Elm.Fluent;
 using CqlSdkPrototype.Elm.Internal;
 using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Internal;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace CqlSdkPrototype.Elm;
 
@@ -132,12 +132,8 @@ public sealed class ElmToAssemblyCompiler
         foreach (var (id, _) in removedLibraries)
             logger.LogWarning(message: "Removed library with missing dependencies: {id}", args: id);
 
-        LogExceptionMessageAction log = logger.GetLogExceptionMessageAction(exceptionHandling);
-
-        var librarySetDefinitions = BuildLibrarySetDefinitions(librarySetExpressionBuilderScoped, librarySet, logger, log, exceptionHandling);
-
-        var cSharps = GenerateCSharp(cSharpCodeProcessor, librarySet, librarySetDefinitions, logger, log, exceptionHandling);
-
+        var librarySetDefinitions = BuildLibrarySetDefinitions(librarySetExpressionBuilderScoped, librarySet, logger, exceptionHandling);
+        var cSharps = GenerateCSharp(cSharpCodeProcessor, librarySet, librarySetDefinitions, logger, exceptionHandling);
         var assemblyBinaries = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat, logger, exceptionHandling);
 
         var entriesBuilder = entries.ToBuilder();
@@ -203,22 +199,17 @@ public sealed class ElmToAssemblyCompiler
         ILogger<ElmToAssemblyCompiler> logger,
         EnumerationExceptionHandling exceptionHandling)
     {
-        var logExceptions = logger.CreateLogExceptionHandler<ElmLibrary>(
+        var logExceptions = logger.CreateLogExceptionHandler<(ElmLibrary library, string)>(
             exceptionHandling,
-            (lib, log) => log("Could not compile C# to .NET Assembly for {id}", lib.GetVersionedIdentifier()!));
+            (t, log) => log("Could not compile C# to .NET Assembly for {id}", t.library.GetVersionedIdentifier()!));
 
-        var assemblyBinaries =
-            assemblyCompiler
-                .TryCompileEach(librarySet, cSharps, debugInformationFormat)
-                .Select(t =>
-                {
-                    var libraryName = t.library.identifier;
-                    logger.LogInformation("Compiling assembly for library : {libraryName}", libraryName);
-                    return t;
-                })
-                .CatchEachPair(logExceptions);
-
-        return assemblyBinaries;
+        return assemblyCompiler
+            .CompileEachLibraryToAssemblies(
+                librarySet,
+                cSharps,
+                debugInformationFormat,
+                logExceptions,
+                preHandler: t => logger.LogInformation("Compiling assembly for library : {libraryName}", t.library.identifier));
     }
 
     /// <summary>
@@ -228,7 +219,6 @@ public sealed class ElmToAssemblyCompiler
     /// <param name="librarySet">The set of libraries to generate code for.</param>
     /// <param name="librarySetDefinitions">The definitions for the library set.</param>
     /// <param name="logger">The logger to use for logging.</param>
-    /// <param name="log">The action to log exceptions.</param>
     /// <param name="exceptionHandling">The exception handling strategy.</param>
     /// <returns>The generated C# code.</returns>
     private static IEnumerable<(ElmLibrary library, string cSharp)> GenerateCSharp(
@@ -236,23 +226,18 @@ public sealed class ElmToAssemblyCompiler
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> librarySetDefinitions,
         ILogger<ElmToAssemblyCompiler> logger,
-        LogExceptionMessageAction log,
         EnumerationExceptionHandling exceptionHandling)
     {
         var logExceptions = logger.CreateLogExceptionHandler<ElmLibrary>(
             exceptionHandling,
             (lib, log) => log("Could not generate definitions into C# for {id}", lib.GetVersionedIdentifier()!));
 
-        var cSharps = cSharpCodeProcessor
-                      .GenerateCSharpDeferred(librarySet, librarySetDefinitions)
-                      .Select(t =>
-                      {
-                          var libraryName = t.library.identifier;
-                          logger.LogInformation("Generating C# for library : {libraryName}", libraryName);
-                          return t;
-                      })
-                      .CatchEachPair(logExceptions);
-        return cSharps;
+        return cSharpCodeProcessor
+            .GenerateEachLibraryToCSharp(
+                librarySet,
+                librarySetDefinitions,
+                logExceptions,
+                preHandler: library => logger.LogInformation("Generating C# for library : {libraryName}", library.GetVersionedIdentifier()!));
     }
 
     /// <summary>
@@ -261,14 +246,12 @@ public sealed class ElmToAssemblyCompiler
     /// <param name="librarySetExpressionBuilderScoped">The library set expression builder to use.</param>
     /// <param name="librarySet">The set of libraries to build definitions for.</param>
     /// <param name="logger">The logger to use for logging.</param>
-    /// <param name="log">The action to log exceptions.</param>
     /// <param name="exceptionHandling">The exception handling strategy.</param>
     /// <returns>The dictionary of library set definitions.</returns>
     private static DefinitionDictionary<LambdaExpression> BuildLibrarySetDefinitions(
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped,
         LibrarySet librarySet,
         ILogger<ElmToAssemblyCompiler> logger,
-        LogExceptionMessageAction log,
         EnumerationExceptionHandling exceptionHandling)
     {
         var logExceptions = logger.CreateLogExceptionHandler<ElmLibrary>(
@@ -276,23 +259,13 @@ public sealed class ElmToAssemblyCompiler
             (lib, log) => log("Could not generate ELM into definitions for {id}", lib.GetVersionedIdentifier()!));
 
         DefinitionDictionary<LambdaExpression> librarySetDefinitions = new();
-        _ = librarySetExpressionBuilderScoped
-            .TryBuildEachLibraryDefinitions(librarySet: librarySet)
-            .Select(t =>
-            {
-                logger.LogInformation("Generating definitions for library : {id}", t.library.GetVersionedIdentifier()!);
-                return t with
-                {
-                    getLibraryDefinitions = () =>
-                    {
-                        var libraryDefinitions = t.getLibraryDefinitions();
-                        librarySetDefinitions.Merge(libraryDefinitions);
-                        return libraryDefinitions;
-                    }
-                };
-            })
-            .CatchEachPair(logExceptions)
-            .Count(); // Important
+        librarySetExpressionBuilderScoped
+            .TryBuildEachLibraryDefinitions(
+                librarySet,
+                librarySetDefinitions,
+                exceptionHandler: logExceptions,
+                preHandler: lib => logger.LogInformation("Generating definitions for library : {id}", lib.GetVersionedIdentifier()!))
+            .ForEach(); // Important to enumerate
         return librarySetDefinitions;
     }
 }

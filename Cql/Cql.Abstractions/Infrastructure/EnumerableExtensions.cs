@@ -11,6 +11,22 @@ namespace Hl7.Cql.Abstractions.Infrastructure;
 internal static class EnumerableExtensions
 {
     /// <summary>
+    /// Performs the specified action on each element of the collection.
+    /// </summary>
+    /// <typeparam name="T">The type of elements in the collection.</typeparam>
+    /// <param name="source">The source collection of elements to add.</param>
+    /// <param name="action">The action to perform on each element.</param>
+    public static void ForEach<T>(
+        this IEnumerable<T> source,
+        Action<T>? action = null)
+    {
+        if (action is null)
+            foreach (var _ in source) { }
+        else
+            foreach (var item in source) action(item);
+    }
+
+    /// <summary>
     /// Adds a range of elements to the target collection.
     /// </summary>
     /// <typeparam name="T">The type of elements in the collection.</typeparam>

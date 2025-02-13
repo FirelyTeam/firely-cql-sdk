@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime;
 
@@ -11,7 +12,7 @@ internal static class LibrarySetExpressionBuilderExtensions
         LibrarySet librarySet)
     {
         var librarySetDefinitions = new DefinitionDictionary<LambdaExpression>();
-        _ = librarySetExpressionBuilder.TryBuildEachLibraryDefinitions(librarySet, librarySetDefinitions).CatchEach().Count();
+        librarySetExpressionBuilder.TryBuildEachLibraryDefinitions(librarySet, librarySetDefinitions).ForEach();
         return librarySetDefinitions;
     }
 }

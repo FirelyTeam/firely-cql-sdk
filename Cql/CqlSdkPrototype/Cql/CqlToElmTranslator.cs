@@ -92,8 +92,8 @@ public sealed class CqlToElmTranslator
         var entriesBuilder = _services.LibraryBuilderProvider.TranslationsBuilder;
         int addedCount =
                 BuildTranslations(cqlLibraries, entriesBuilder)
-                .Count() // We must enumerate all
-                ;
+                    .Count() // We must enumerate all
+            ;
 
         if (addedCount > 0)
             SetCqlToElmTranslations(translations: entriesBuilder.ToImmutable());
@@ -142,26 +142,25 @@ public sealed class CqlToElmTranslator
                 exceptionHandling,
                 (o, messageBuilder) => messageBuilder("Could not translate CQL to ELM for {lib}", o.versionedIdentifier));
 
-        var changedCount = TranslateCqlToElm(_cqlToElmTranslations.AsValueTuples()).Count(); // Must enumerate all
+        var changedCount =
+            _cqlToElmTranslations
+                .Select(kv => new VersionedIdentifierAndCqlToElmTranslation(kv.Key, kv.Value))
+                .Where(kv => kv.cqlTranslationEntry.ElmLibrary is null)
+                .TrySelect(kv =>
+                           {
+                               var (id, entry) = kv;
+                               if (!_services.LibraryBuilderProvider.TryResolveLibrary(id, out var libBuilder, out var error))
+                                   throw new InvalidOperationException("Could not resolve CQL library " + id);
+
+                               var lib = libBuilder.Build();
+                               var newEntry = entry with { ElmLibrary = lib };
+                               itemsBuilder[id] = newEntry;
+                               return kv with { cqlTranslationEntry = newEntry };
+                           },
+                           logTranslateFailed)
+                .Count(); // Must enumerate all
 
         if (changedCount > 0)
             SetCqlToElmTranslations(translations: itemsBuilder.ToImmutable());
-
-
-        IEnumerable<VersionedIdentifierAndCqlToElmTranslation> TranslateCqlToElm(
-            IEnumerable<VersionedIdentifierAndCqlToElmTranslation> preprocessed) =>
-            preprocessed
-                .Where(kv => kv.cqlTranslationEntry.ElmLibrary is null)
-                .TryWithEach(kv =>
-                {
-                    var (id, entry) = kv;
-                    if (!_services.LibraryBuilderProvider.TryResolveLibrary(id, out var libBuilder, out var error))
-                        throw new InvalidOperationException("Could not resolve CQL library " + id);
-
-                    var lib = libBuilder.Build();
-                    var newEntry = entry with { ElmLibrary = lib };
-                    itemsBuilder[id] = newEntry;
-                })
-                .CatchEach(logTranslateFailed);
     }
 }
