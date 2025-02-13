@@ -107,6 +107,7 @@ file static class MeasurePackager
                                                                     overrideDate);
                 return true;
             }
+
         }
 
         fhirMeasure = null;
@@ -515,9 +516,13 @@ internal static class LibraryPackager
         ParameterDef elmParameter,
         CqlTypeToFhirTypeMapper typeCrosswalk)
     {
-        var typeSpecifier = elmParameter.resultTypeSpecifier ?? elmParameter.parameterTypeSpecifier;
+        var typeSpecifier = elmParameter.resultTypeSpecifier
+                            ?? elmParameter.parameterTypeSpecifier
+                            ?? (elmParameter.resultTypeName is not null ? new NamedTypeSpecifier { name = elmParameter.resultTypeName } : null)
+                            ?? (elmParameter.parameterType is not null ? new NamedTypeSpecifier { name = elmParameter.parameterType } : null);
+
         if (typeSpecifier is null)
-            throw new ArgumentException($"{typeSpecifier} is missing on parameter: {elmParameter.name}",
+            throw new ArgumentException($"TypeSpecifier is missing on parameter: {elmParameter.name}",
                                         nameof(elmParameter));
 
         var type = typeCrosswalk.TypeEntryFor(typeSpecifier);
@@ -600,7 +605,7 @@ internal static class LibraryPackager
 
                 // "Generic" display
                 (_, CqlPrimitiveType.Fhir) => $"{cqlType}<{cqlElementType}.{type.ElementType!.FhirType}>",
-                (_, { })                   => $"{cqlType}<{cqlElementType}>",
+                (_, { }) => $"{cqlType}<{cqlElementType}>",
 
                 // Non-"Generic" display
                 _ => cqlType.ToString(),
