@@ -57,8 +57,8 @@ internal partial class LibraryExpressionBuilderContext
             AmbiguousOverloadCorrector.Fix(Library);
 
             _logger.LogDebug("Preprocessing library '{library}' - ElmPreprocessor", LibraryVersionedIdentifier);
-            var ls = LibrarySetContext?.LibrarySet ?? new LibrarySet(LibraryVersionedIdentifier, Library);
-            var processor = new ElmPreprocessor(ls);
+            var ls = LibrarySetContext?.LibrarySetEnumerable ?? new LibrarySet(LibraryVersionedIdentifier, Library);
+            var processor = new ElmPreprocessor(ls.LibrarySet);
             processor.Preprocess(Library);
 
             _logger.LogDebug("Building expressions for '{library}'", LibraryVersionedIdentifier);

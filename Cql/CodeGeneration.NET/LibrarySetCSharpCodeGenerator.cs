@@ -6,7 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Collections;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET.Visitors;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
@@ -86,19 +88,17 @@ internal class LibrarySetCSharpCodeGenerator
     }
 
     public IEnumerable<(Library library, string cSharp)> GenerateEachLibraryToCSharp(
-        LibrarySet librarySet,
+        LibrarySetEnumerable librarySetEnumerable,
         DefinitionDictionary<LambdaExpression> definitions,
-        EnumerateExceptionHandler<Library>? exceptionHandler = null,
-        Action<Library>? preCSharpGenerateHandler = null)
+        EnumerateExceptionHandler<Library>? exceptionHandler = null)
     {
-        var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions);
-        return librarySetWriter.GenerateEachLibraryToCSharp(exceptionHandler, preCSharpGenerateHandler);
+        var librarySetWriter = new LibrarySetWriter(this, librarySetEnumerable.LibrarySet, definitions);
+        return librarySetWriter.GenerateEachLibraryToCSharp(exceptionHandler);
     }
 
     #region Nested Types
 
-    private record LibrarySetWriter
-    (
+    private record LibrarySetWriter(
         LibrarySetCSharpCodeGenerator Processor,
         LibrarySet LibrarySet,
         DefinitionDictionary<LambdaExpression> Definitions)
@@ -112,15 +112,12 @@ internal class LibrarySetCSharpCodeGenerator
         public string? Namespace { get; } = null; // Not used right now
 
         public IEnumerable<(Library library, string cSharp)> GenerateEachLibraryToCSharp(
-            EnumerateExceptionHandler<Library>? exceptionHandler = null,
-            Action<Library>? preCSharpGenerateHandler = null) =>
+            EnumerateExceptionHandler<Library>? exceptionHandler = null) =>
             LibrarySet
                 .Where(library => Definitions.Libraries.Contains(library.GetVersionedIdentifier()!))
                 .TrySelect(
                     library =>
                     {
-                        preCSharpGenerateHandler?.Invoke(library);
-
                         using var cSharpWriter = new StringWriter();
                         var libraryWriter = new LibraryWriter(this, library, cSharpWriter);
                         libraryWriter.WriteLibraryFile();

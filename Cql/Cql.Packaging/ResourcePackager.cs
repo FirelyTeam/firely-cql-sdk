@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
@@ -30,21 +31,18 @@ internal class ResourcePackager(TypeResolver typeResolver)
         byte[] AssemblyBinary);
 
     public IEnumerable<(string versionedLibraryIdentifier, FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure)> PackageEachElmLibraryToFhirResources(
-        ElmLibrarySet librarySet,
+        LibrarySetEnumerable librarySetEnumerable,
         Func<string, SourceArtefacts> inputsById,
         string? resourceCanonicalRootUrl = null,
         SysDateTime? overrideDate = null,
-        EnumerateExceptionHandler<ElmLibrary>? exceptionHandler = null,
-        Action<ElmLibrary>? prepackageLibraryHandler = null)
+        EnumerateExceptionHandler<ElmLibrary>? exceptionHandler = null)
     {
         resourceCanonicalRootUrl ??= string.Empty;
 
-        return librarySet.TrySelect(PackageResource, exceptionHandler);
+        return librarySetEnumerable.TrySelect(PackageResource, exceptionHandler);
 
         (string versionedIdentifier, FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure) PackageResource(ElmLibrary elmLibrary)
         {
-            prepackageLibraryHandler?.Invoke(elmLibrary);
-
             var versionedIdentifier = elmLibrary.GetVersionedIdentifier()!;
             var localOverrideDate = overrideDate ?? SysDateTime.Now;
             var (_, cqlString, elmLibraryInput, cSharpSourceCode, assemblyBinary) = inputsById(versionedIdentifier);
@@ -58,7 +56,7 @@ internal class ResourcePackager(TypeResolver typeResolver)
             }
 
             // Analyze datarequirements and add to the FHIR Library resource.
-            var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(librarySet, elmLibrary);
+            var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(librarySetEnumerable.LibrarySet, elmLibrary);
             var dataRequirements = dataRequirementsAnalyzer.Analyze();
             fhirLibrary.DataRequirement.AddRange(dataRequirements);
 

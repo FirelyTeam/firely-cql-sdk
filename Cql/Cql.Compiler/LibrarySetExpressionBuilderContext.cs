@@ -17,33 +17,31 @@ internal partial class LibrarySetExpressionBuilderContext
 
     public LibrarySetExpressionBuilderContext(
         LibraryExpressionBuilder libraryExpressionBuilder,
-        LibrarySet librarySet,
+        LibrarySetEnumerable librarySetEnumerable,
         DefinitionDictionary<LambdaExpression> librarySetDefinitions)
     {
         _libraryExpressionBuilder = libraryExpressionBuilder;
         LibrarySetDefinitions = librarySetDefinitions;
-        LibrarySet = librarySet;
-        DebuggerInfo = new BuilderContextDebuggerInfo("LibrarySet", Name: LibrarySet!.Name!);
+        LibrarySetEnumerable = librarySetEnumerable;
+        DebuggerInfo = new BuilderContextDebuggerInfo("LibrarySet", Name: LibrarySetEnumerable.LibrarySet.Name!);
     }
 
     /// <summary>
-    /// Gets the merged definitions of all the libraries processed in the <see cref="LibrarySet"/>.
+    /// Gets the merged definitions of all the libraries processed in the <see cref="LibrarySetEnumerable"/>.
     /// </summary>
     public DefinitionDictionary<LambdaExpression> LibrarySetDefinitions { get; }
 
     /// <summary>
     /// Gets the library set being processed.
     /// </summary>
-    public LibrarySet LibrarySet { get; }
+    public LibrarySetEnumerable LibrarySetEnumerable { get; }
 
     public IEnumerable<(Library library, DefinitionDictionary<LambdaExpression> libraryDefinitions)> BuildEachLibraryDefinitions(
-        EnumerateExceptionHandler<Library>? exceptionHandler = null,
-        Action<Library>? prebuildLibraryHandler = null) =>
-        LibrarySet
+        EnumerateExceptionHandler<Library>? exceptionHandler = null) =>
+        LibrarySetEnumerable
             .TrySelect(
                 library =>
                 {
-                    prebuildLibraryHandler?.Invoke(library);
                     return this.CatchRethrowExpressionBuildingException(_ =>
                     {
                         var libraryDefinitions = _libraryExpressionBuilder.ProcessLibrary(library, null, this);
