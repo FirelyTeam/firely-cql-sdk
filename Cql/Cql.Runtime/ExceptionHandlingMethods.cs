@@ -1,6 +1,4 @@
-﻿using JetBrains.Annotations;
-
-namespace Hl7.Cql.Runtime;
+﻿namespace Hl7.Cql.Runtime;
 
 internal static class ExceptionHandlingMethods
 {
