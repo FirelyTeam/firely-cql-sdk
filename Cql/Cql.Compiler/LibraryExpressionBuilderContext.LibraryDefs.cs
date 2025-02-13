@@ -30,7 +30,7 @@ partial class LibraryExpressionBuilderContext
     {
         if (LibrarySetContext != null)
         {
-            foreach (var libraryDependency in LibrarySetContext.LibrarySetEnumerable.LibrarySet.GetLibraryDependencies(LibraryVersionedIdentifier))
+            foreach (var libraryDependency in LibrarySetContext.LibrarySet.GetLibraryDependencies(LibraryVersionedIdentifier))
             {
                 AddDefinitions(libraryDependency);
             }
@@ -151,7 +151,7 @@ partial class LibraryExpressionBuilderContext
     {
         if (LibrarySetContext != null)
         {
-            foreach (var libraryDependency in LibrarySetContext.LibrarySetEnumerable.LibrarySet.GetLibraryDependencies(LibraryVersionedIdentifier))
+            foreach (var libraryDependency in LibrarySetContext.LibrarySet.GetLibraryDependencies(LibraryVersionedIdentifier))
             {
                 AddCodeSystemRefs(libraryDependency);
             }

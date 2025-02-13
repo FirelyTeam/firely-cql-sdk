@@ -115,20 +115,27 @@ public sealed class FhirResourcePackager
                  })
                  .Select(n => n.Library!)
                  .ToArray();
-
         LibrarySet librarySet = new LibrarySet("", librariesToPackage);
+
+        var resourcePackagerInputs =
+            builder.Values
+                   .Select(o =>
+                   {
+                       logger.LogInformation("Packaging FHIR resources for library {id}.", o.VersionedLibraryIdentifier);
+                       return ToResourcePackagerInput(o);
+                   });
 
         var logPackageFailed =
             logger.CreateLogExceptionHandler<ElmLibrary>(
                 Config.EnumerationExceptionHandling,
                 (library, log) => log("Could not package FHIR resources for library {lib}", library.GetVersionedIdentifier()!));
 
-        var inputsById = builder.Values.ToDictionary(o=> o.VersionedLibraryIdentifier.ToString(), ToResourcePackagerInput);
+        var inputsById = resourcePackagerInputs.ToDictionary(o => o.VersionedLibraryIdentifier);
 
         var count =
             _services.ResourcePackager
                      .PackageEachElmLibraryToFhirResources(
-                         librarySetEnumerable: librarySet.ToLibrarySetEnumerable(onNextLibrary: library => logger.LogInformation("Packaging FHIR resources for library {id}.", library.GetVersionedIdentifier()!)),
+                         librarySet: librarySet,
                          inputsById: id => inputsById[id],
                          resourceCanonicalRootUrl: canonicalRootUrl?.ToString(),
                          overrideDate: overrideDate,

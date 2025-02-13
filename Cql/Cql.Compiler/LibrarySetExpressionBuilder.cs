@@ -14,14 +14,15 @@ namespace Hl7.Cql.Compiler;
 internal class LibrarySetExpressionBuilder(LibraryExpressionBuilder libraryExpressionBuilder)
 {
     public IEnumerable<(Library library, DefinitionDictionary<LambdaExpression> libraryDefinitions)> BuildEachLibraryDefinitions(
-        LibrarySetEnumerable librarySetEnumerable,
+        LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> librarySetDefinitions,
-        EnumerateExceptionHandler<Library>? exceptionHandler = null) =>
-        NewLibrarySetExpressionBuilderContext(librarySetEnumerable, librarySetDefinitions)
-            .BuildEachLibraryDefinitions(exceptionHandler);
+        EnumerateExceptionHandler<Library>? exceptionHandler = null,
+        Action<Library>? preBuildLibraryHandler = null) =>
+        NewLibrarySetExpressionBuilderContext(librarySet, librarySetDefinitions)
+            .BuildEachLibraryDefinitions(exceptionHandler, preBuildLibraryHandler);
 
     private LibrarySetExpressionBuilderContext NewLibrarySetExpressionBuilderContext(
-        LibrarySetEnumerable librarySetEnumerable,
+        LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> librarySetDefinitions) =>
-        new(libraryExpressionBuilder, librarySetEnumerable, librarySetDefinitions);
+        new(libraryExpressionBuilder, librarySet, librarySetDefinitions);
 }

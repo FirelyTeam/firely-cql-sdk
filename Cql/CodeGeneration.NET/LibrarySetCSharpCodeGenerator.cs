@@ -86,19 +86,21 @@ internal class LibrarySetCSharpCodeGenerator
     }
 
     public IEnumerable<(Library library, string cSharp)> GenerateEachLibraryToCSharp(
-        LibrarySetEnumerable librarySetEnumerable,
+        LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> definitions,
-        EnumerateExceptionHandler<Library>? exceptionHandler = null)
+        EnumerateExceptionHandler<Library>? exceptionHandler = null,
+        Action<Library>? preCSharpGenerateHandler = null)
     {
-        var librarySetWriter = new LibrarySetWriter(this, librarySetEnumerable, definitions);
+        var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions);
         return librarySetWriter.GenerateEachLibraryToCSharp(exceptionHandler);
     }
 
     #region Nested Types
 
-    private record LibrarySetWriter(
+    private record LibrarySetWriter
+    (
         LibrarySetCSharpCodeGenerator Processor,
-        LibrarySetEnumerable LibrarySetEnumerable,
+        LibrarySet LibrarySet,
         DefinitionDictionary<LambdaExpression> Definitions)
     {
         public TupleMetadataBuilder TupleMetadataBuilder { get; } = new();
@@ -110,12 +112,15 @@ internal class LibrarySetCSharpCodeGenerator
         public string? Namespace { get; } = null; // Not used right now
 
         public IEnumerable<(Library library, string cSharp)> GenerateEachLibraryToCSharp(
-            EnumerateExceptionHandler<Library>? exceptionHandler = null) =>
-            LibrarySetEnumerable
+            EnumerateExceptionHandler<Library>? exceptionHandler = null,
+            Action<Library>? preCSharpGenerateHandler = null) =>
+            LibrarySet
                 .Where(library => Definitions.Libraries.Contains(library.GetVersionedIdentifier()!))
                 .TrySelect(
                     library =>
                     {
+                        preCSharpGenerateHandler?.Invoke(library);
+
                         using var cSharpWriter = new StringWriter();
                         var libraryWriter = new LibraryWriter(this, library, cSharpWriter);
                         libraryWriter.WriteLibraryFile();
@@ -190,8 +195,7 @@ internal class LibrarySetCSharpCodeGenerator
             IndentedTextWriter.WriteLine($"public string Name => {LibraryVersionedIdentifier.id.QuoteString()};");
             IndentedTextWriter.WriteLine($"public string Version => {LibraryVersionedIdentifier.version.QuoteString()};");
             var dependencies =
-                LibrarySetWriter.LibrarySetEnumerable
-                                .LibrarySet
+                LibrarySetWriter.LibrarySet
                                 .GetLibraryDependencies(LibraryName, throwError: true)
                                 .Select(dep => VariableNameGenerator.NormalizeIdentifier(dep.GetVersionedIdentifier()!))
                                 .Select(typeName => $"{typeName}.Instance");

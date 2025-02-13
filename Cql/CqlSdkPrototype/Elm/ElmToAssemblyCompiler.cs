@@ -234,10 +234,9 @@ public sealed class ElmToAssemblyCompiler
 
         return cSharpCodeProcessor
             .GenerateEachLibraryToCSharp(
-                librarySet.ToLibrarySetEnumerable(onNextLibrary: library => logger.LogInformation("Generating C# for library : {libraryName}", library.GetVersionedIdentifier()!)),
+                librarySet,
                 librarySetDefinitions,
-                logExceptions)
-            .WithEach(t => logger.LogInformation("Generated C# for library : {libraryName}", t.library.GetVersionedIdentifier()!));
+                logExceptions);
     }
 
     /// <summary>
@@ -261,10 +260,10 @@ public sealed class ElmToAssemblyCompiler
         DefinitionDictionary<LambdaExpression> librarySetDefinitions = new();
         librarySetExpressionBuilderScoped
             .BuildEachLibraryDefinitions(
-                librarySet.ToLibrarySetEnumerable(onNextLibrary: library => logger.LogInformation("Generating definitions for library : {id}", library.GetVersionedIdentifier()!)),
+                librarySet,
                 librarySetDefinitions,
                 exceptionHandler: logExceptions)
-            .ForEach(t => logger.LogInformation("Generated definitions for library: {id}", t.library.GetVersionedIdentifier()!)); // Important to enumerate
+            .ForEach(); // Important to enumerate
         return librarySetDefinitions;
     }
 }
