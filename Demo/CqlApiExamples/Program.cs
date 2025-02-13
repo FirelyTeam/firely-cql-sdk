@@ -51,20 +51,10 @@ internal static class Program
         var dirs = Directories.Create("Examples");
 
         // Load CQL libraries from a directory and process them to ELM, C#, and assemblies
-        cqlToolkit.AddCqlLibrariesFromDirectory(dirs.CqlInDirectory)
-                  .TranslateCqlToElm();
-        var elmToolkit = cqlToolkit.ToFluentElmToolkit()
-                                   .CompileElmToAssemblies();
+        cqlToolkit.AddCqlLibrariesFromDirectory(dirs.CqlInDirectory).TranslateCqlToElm();
+        var elmToolkit = cqlToolkit.ToFluentElmToolkit().CompileElmToAssemblies();
         var packagingToolkit = new FluentPackagingToolkit(loggerFactory);
-        var fhirResourcePackagingInputs =
-                cqlToolkit.GetCompletedCqlToElmTranslations()
-                          .Join(
-                              elmToolkit.GetCompletedElmToAssemblyCompilations(),
-                              outerKeySelector:cql => cql.versionedLibraryIdentifier,
-                              innerKeySelector:elm => elm.versionedLibraryIdentifier,
-                              resultSelector: (cql, elm) =>
-                                  new FhirResourcePackagingSources(cql.cqlLibraryString, cql.elmLibrary, elm.csharpSourceCode, elm.assemblyBinary));
-        packagingToolkit.AddPackagingInputs(fhirResourcePackagingInputs);
+        packagingToolkit.AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit);
     }
 
     /// <summary>
