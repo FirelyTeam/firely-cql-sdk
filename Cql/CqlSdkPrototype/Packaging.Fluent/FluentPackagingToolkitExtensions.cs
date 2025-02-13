@@ -27,7 +27,7 @@ public static partial class FluentPackagingToolkitExtensions
             cqlToElmTranslations
                 .Join(completedElmToAssemblyCompilations,
                       l => l.VersionedLibraryIdentifier, r => r.versionedLibraryIdentifier,
-                      (l, r) => new FhirResourcePackagingInput(l, r.elmLibrary, r.csharpSourceCode, r.assemblyBinary));
+                      (l, r) => new FhirResourcePackagingSources(l, r.elmLibrary, r.csharpSourceCode, r.assemblyBinary));
         return packagingToolkit.AddPackagingInputs(inputs);
     }
 }

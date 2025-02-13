@@ -63,7 +63,7 @@ internal static class Program
                               outerKeySelector:cql => cql.versionedLibraryIdentifier,
                               innerKeySelector:elm => elm.versionedLibraryIdentifier,
                               resultSelector: (cql, elm) =>
-                                  new FhirResourcePackagingInput(cql.cqlLibraryString, cql.elmLibrary, elm.csharpSourceCode, elm.assemblyBinary));
+                                  new FhirResourcePackagingSources(cql.cqlLibraryString, cql.elmLibrary, elm.csharpSourceCode, elm.assemblyBinary));
         packagingToolkit.AddPackagingInputs(fhirResourcePackagingInputs);
     }
 

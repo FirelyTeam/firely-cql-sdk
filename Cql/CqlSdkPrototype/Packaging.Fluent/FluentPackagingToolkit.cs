@@ -61,11 +61,11 @@ public sealed class FluentPackagingToolkit
     /// <summary>
     /// Adds FHIR resource packaging inputs to the packager.
     /// </summary>
-    /// <param name="inputs">The collection of FHIR resource packaging inputs to add.</param>
+    /// <param name="sources">The collection of FHIR resource packaging inputs to add.</param>
     /// <returns>The current instance of <see cref="FluentPackagingToolkit"/>.</returns>
-    public FluentPackagingToolkit AddPackagingInputs(IEnumerable<FhirResourcePackagingInput> inputs)
+    public FluentPackagingToolkit AddPackagingInputs(IEnumerable<FhirResourcePackagingSources> sources)
     {
-        _fhirResourcePackager.AddPackagingInputs(inputs);
+        _fhirResourcePackager.AddPackagingInputs(sources);
         return this;
     }
 

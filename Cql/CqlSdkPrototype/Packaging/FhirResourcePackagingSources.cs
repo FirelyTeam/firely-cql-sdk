@@ -2,8 +2,7 @@
 
 namespace CqlSdkPrototype.Packaging;
 
-public readonly record struct FhirResourcePackagingInput
-(
+public readonly record struct FhirResourcePackagingSources(
     CqlLibraryString CqlLibrary,
     ElmLibrary ElmLibrary,
     string CSharpSourceCode,

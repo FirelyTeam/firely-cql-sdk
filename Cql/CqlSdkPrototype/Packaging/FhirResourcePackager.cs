@@ -69,12 +69,12 @@ public sealed class FhirResourcePackager
     /// <summary>
     /// Adds FHIR resource packaging inputs to the packager.
     /// </summary>
-    /// <param name="inputs">The collection of FHIR resource packaging inputs to add.</param>
-    public void AddPackagingInputs(IEnumerable<FhirResourcePackagingInput> inputs)
+    /// <param name="sources">The collection of FHIR resource packaging inputs to add.</param>
+    public void AddPackagingInputs(IEnumerable<FhirResourcePackagingSources> sources)
     {
         var builder = _fhirResourcePackagings.ToBuilder();
         var hasChanged = false;
-        foreach (var input in inputs)
+        foreach (var input in sources)
         {
             if (builder.TryGetValue(input.VersionedLibraryIdentifier, out var existing))
             {
@@ -95,7 +95,7 @@ public sealed class FhirResourcePackager
     {
         var builder = _fhirResourcePackagings.ToBuilder();
 
-        var libraries = builder.Values.Select(o => o.Input.ElmLibrary);
+        var libraries = builder.Values.Select(o => o.ElmLibrary);
 
         var nodes = libraries.ToLibraryDependencyNodesByVersionedIdentifiers();
 
@@ -122,8 +122,7 @@ public sealed class FhirResourcePackager
                    .Select(o =>
                    {
                        logger.LogInformation("Packaging FHIR resources for library {id}.", o.VersionedLibraryIdentifier);
-                       var input = o.Input;
-                       return new ResourcePackager.Input(o.VersionedLibraryIdentifier.ToString(), input.CqlLibrary.Cql, input.ElmLibrary, input.CSharpSourceCode, input.AssemblyBinary);
+                       return ToResourcePackagerInput(o);
                    });
 
         var logPackageFailed =
@@ -160,4 +159,11 @@ public sealed class FhirResourcePackager
         if (count > 0)
             SetFhirResourcePackagings(builder.ToImmutable());
     }
+
+    private static ResourcePackager.Input ToResourcePackagerInput(FhirResourcePackaging o) => new(
+        o.VersionedLibraryIdentifier.ToString(),
+        o.CqlLibrary.Cql,
+        o.ElmLibrary,
+        o.CSharpSourceCode,
+        o.AssemblyBinary);
 }
