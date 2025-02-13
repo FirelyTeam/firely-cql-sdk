@@ -31,7 +31,7 @@ public static partial class FluentCqlToolkitExtensions
         var cqlLibraries = files
             .Select(f =>
             {
-                logger.LogInformation("Loading library from file: {file}", f);
+                logger.LogInformation("Loading CQL from file: {file}", f);
                 var cqlContent = File.ReadAllText(f.FullName);
                 var cqlLibrary = CqlLibraryString.Parse(cqlContent);
                 return cqlLibrary;

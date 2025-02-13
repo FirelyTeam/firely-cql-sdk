@@ -9,7 +9,7 @@ using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation;
 using CqlSdkPrototype.Invocation.Extensions;
 using CqlSdkPrototype.Invocation.Fluent.Extensions;
-using Hl7.Cql.Abstractions.Exceptions;
+using CqlSdkPrototype.Packaging.Fluent;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,6 +29,7 @@ internal static class Program
         Add3And2Example(loggerFactory);
         InvokeCqlExample(loggerFactory);
         InvokeCqlFromExamplesFolder(loggerFactory);
+        PackageFromExamplesFolder(loggerFactory);
 
         var shouldBuildCqlToElm = true;
         string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests"];
@@ -39,12 +40,28 @@ internal static class Program
         }
     }
 
+    private static void PackageFromExamplesFolder(ILoggerFactory loggerFactory)
+    {
+        // Create fluent cql toolkit
+        var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
+        FluentCqlToolkit cqlToolkit = new FluentCqlToolkit(loggerFactory, cqlToElmProcessorSettings);
+
+        // "Directories" is not a part of the API, but a helper class for this example
+        var dirs = Directories.Create("Examples");
+
+        // Load CQL libraries from a directory and process them to ELM, C#, and assemblies
+        cqlToolkit.AddCqlLibrariesFromDirectory(dirs.CqlInDirectory).TranslateCqlToElm();
+        var elmToolkit = cqlToolkit.ToFluentElmToolkit().CompileElmToAssemblies();
+        var packagingToolkit = new FluentPackagingToolkit(loggerFactory);
+        packagingToolkit.AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit);
+    }
+
+    /// <summary>
+    /// This example demonstrates how to add a CqlLibraryString to the CqlToolkit and invoke a library declaration directly.
+    /// </summary>
     private static void InvokeCqlExample(
         ILoggerFactory loggerFactory)
     {
-        // INTRO:
-        // This example demonstrates how to add a CqlLibraryString to the CqlToolkit and invoke a library declaration directly.
-
         // Create fluent cql toolkit
         var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         FluentCqlToolkit cqlToolkit = new FluentCqlToolkit(loggerFactory, cqlToElmProcessorSettings);
@@ -68,12 +85,12 @@ internal static class Program
         Debug.Assert(result is 3);
     }
 
+    /// <summary>
+    /// This example demonstrates how to load CQL libraries from a directory and invoke a library declarations directly.
+    /// </summary>
     private static void InvokeCqlFromExamplesFolder(
         ILoggerFactory loggerFactory)
     {
-        // INTRO:
-        // This example demonstrates how to load CQL libraries from a directory and invoke a library declarations directly.
-
         var logger = loggerFactory.CreateLogger(typeof(Program));
 
         // "Directories" is not a part of the API, but a helper class for this example
@@ -88,10 +105,7 @@ internal static class Program
 
         // We need a disposable invocation scope, which contains the AssemblyLoadContext and the related library Assemblies.
         using var librarySetInvoker = cqlToolkit
-                                      .Reconfigure(o => o with
-                                      {
-                                          ProcessBatchItemExceptionHandling = ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue
-                                      })
+                                      .SetExceptionHandlingToIgnore()
                                       .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory)
                                       .ToLibrarySetInvoker();
         logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDeclarations());
@@ -107,16 +121,16 @@ internal static class Program
         }
     }
 
+    /// <summary>
+    /// This example loads the CQL libraries, translates them to ELM, and compiles them to assemblies.
+    /// Each intermediate format is saved to directory (e.g. ELM, C#, and assembly binaries with their debug symbols).
+    /// It also demonstrates how to execute a library.
+    /// </summary>
     private static void FullExample(
         ILoggerFactory loggerFactory,
         Directories dirs,
         bool shouldBuildCqlToElm = false)
     {
-        // INTRO:
-        // This example loads the CQL libraries, translates them to ELM, and compiles them to assemblies.
-        // Each intermediate format is saved to directory (e.g. ELM, C#, and assembly binaries with their debug symbols).
-        // It also demonstrates how to execute a library.
-
         var logger = loggerFactory.CreateLogger(typeof(Program));
         dirs.GeneratedDirectory.Delete(recursive: true);
 
@@ -124,7 +138,7 @@ internal static class Program
         var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         FluentCqlToolkit cqlToolkit =
             new FluentCqlToolkit(loggerFactory, cqlToElmProcessorSettings)
-                .ConfigIgnoreExceptions();
+                .SetExceptionHandlingToIgnore();
 
         if (shouldBuildCqlToElm)
         {
@@ -137,28 +151,30 @@ internal static class Program
 
         var elmToolkit = cqlToolkit
                          .ToFluentElmToolkit()
-                         .ConfigAssemblyDebugInformationToEmbedded()
+                         .SetAssemblyDebugInformationToEmbedded()
                          .AddElmFilesFromDirectory(dirs.ElmInDirectory)
                          .CompileElmToAssemblies()
                          .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
                          .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory);
 
         cqlToolkit.TryGetFirstElmFileLines()
-                  .Switch(t => logger.LogInformation(
+                  .IfNotNull(t => logger.LogInformation(
                               $"""
                                First 50 ELM lines for {t.id}:
                                {t.elmJson.TakeLines(50)}
                                """));
 
         elmToolkit.TryGetFirstCSharpFileLines()
-                  .Switch(t => logger.LogInformation(
+                  .IfNotNull(t => logger.LogInformation(
                               $"""
                                First 50 C# lines for {t.id}:
                                {t.cSharpSourceCode.TakeLines(50)}
                                """));
     }
 
-
+    /// <summary>
+    /// This example demonstrates how to add a CqlLibraryString to the CqlToolkit and invoke a library declaration directly.
+    /// </summary>
     private static void Add3And2Example(
         ILoggerFactory loggerFactory)
     {
@@ -206,7 +222,7 @@ internal static class Program
 
 file static class Extensions
 {
-    internal static StringBuilder DumpLibraryDeclarations(
+    public static StringBuilder DumpLibraryDeclarations(
         this LibrarySetInvoker scope,
         StringBuilder? sb = null)
     {
@@ -222,45 +238,22 @@ file static class Extensions
         return sb;
     }
 
-    public static string[] SplitLines(this string multilineString) =>
+    private static string[] SplitLines(this string multilineString) =>
         multilineString.Split([Environment.NewLine], StringSplitOptions.None);
 
-    public static string JoinLines(this IEnumerable<string> lines) =>
+    private static string JoinLines(this IEnumerable<string> lines) =>
         string.Join(Environment.NewLine, lines);
 
     public static string TakeLines(this string multilineString, int count) =>
         multilineString.SplitLines().Take(count).JoinLines();
 
-    public static Maybe<TSource> TryGetFirst<TSource>(this IEnumerable<TSource> source)
+    private static T? TryGetFirst<T>(this IEnumerable<T> source, Func<T, bool> predicate)
+        where T : struct
     {
         if (source == null)
             throw new ArgumentNullException(nameof(source));
 
-        if (source is IList<TSource> list)
-        {
-            if (list.Count > 0)
-            {
-                return list[0];
-            }
-        }
-        else
-        {
-            using IEnumerator<TSource> e = source.GetEnumerator();
-            if (e.MoveNext())
-            {
-                return e.Current;
-            }
-        }
-
-        return Maybe<TSource>.NoValue;
-    }
-
-    public static Maybe<TSource> TryGetFirst<TSource>(this IEnumerable<TSource> source, Func<TSource, bool> predicate)
-    {
-        if (source == null)
-            throw new ArgumentNullException(nameof(source));
-
-        foreach (TSource element in source)
+        foreach (T element in source)
         {
             if (predicate(element))
             {
@@ -268,17 +261,36 @@ file static class Extensions
             }
         }
 
-        return Maybe<TSource>.NoValue;
+        return null;
     }
 
-    public static Maybe<(CqlVersionedLibraryIdentifier id, string cSharpSourceCode)> TryGetFirstCSharpFileLines(this FluentElmToolkit elmToolkit) =>
-        elmToolkit.ElmToAssemblyCompilations
-                  .TryGetFirst(kv => kv.Value.CSharpSourceCode is not null)
-                  .TryReturn(kv => (kv.Key, kv.Value.CSharpSourceCode!));
+    public static (CqlVersionedLibraryIdentifier id, string cSharpSourceCode)? TryGetFirstCSharpFileLines(this FluentElmToolkit elmToolkit) =>
+        elmToolkit.GetCompletedElmToAssemblyCompilations(t => (t.versionedLibraryIdentifier, t.csharpSourceCode))
+                  .FirstOrNull();
 
-    public static Maybe<(CqlVersionedLibraryIdentifier id, string elmJson)> TryGetFirstElmFileLines(
+    public static (CqlVersionedLibraryIdentifier id, string elmJson)? TryGetFirstElmFileLines(
         this FluentCqlToolkit cqlToolkit) =>
-        cqlToolkit.CqlToElmTranslations
-                  .TryGetFirst(kv => kv.Value.ElmLibrary is not null)
-                  .TryReturn(kv => (kv.Key, kv.Value.ElmLibrary!.SerializeToJson()!));
+        cqlToolkit.GetCompletedCqlToElmTranslations(t => (t.versionedLibraryIdentifier, t.elmLibrary.SerializeToJson()))
+                  .FirstOrNull();
+
+    public static void IfNotNull<T>(this T? value, Action<T> withNotNullValue)
+        where T : struct
+    {
+        if (value is { } v)
+            withNotNullValue(v);
+    }
+
+    /// <summary>
+    /// This method is similar to <see cref="Enumerable.FirstOrDefault{TSource}(System.Collections.Generic.IEnumerable{TSource})"/>
+    /// which returns the first element of a sequence of values if it is not empty;
+    /// however, for value types this might not be the desired behavior as there isn't a way to distinguish between the default value and a value in the sequence.
+    /// Therefore, this method returns null for value types if the sequence is empty.
+    /// </summary>
+    public static T? FirstOrNull<T>(this IEnumerable<T> source)
+        where T : struct
+    {
+        foreach (var item in source)
+            return item;
+        return null;
+    }
 }

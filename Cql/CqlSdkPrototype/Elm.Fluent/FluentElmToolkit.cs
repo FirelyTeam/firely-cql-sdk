@@ -1,6 +1,4 @@
-﻿using Hl7.Cql.Elm;
-
-namespace CqlSdkPrototype.Elm.Fluent;
+﻿namespace CqlSdkPrototype.Elm.Fluent;
 
 /// <summary>
 /// Provides a fluent interface for working with the ElmToAssemblyCompiler.
@@ -13,10 +11,10 @@ public sealed class FluentElmToolkit
     /// Initializes a new instance of the <see cref="FluentElmToolkit"/> class.
     /// </summary>
     /// <param name="loggerFactory">The logger factory to use for logging.</param>
-    /// <param name="settings">The configuration settings for the compiler.</param>
+    /// <param name="config">The configuration settings for the compiler.</param>
     public FluentElmToolkit(
         ILoggerFactory? loggerFactory = null,
-        ElmToAssemblyCompilerConfig? settings = null) : this(new ElmToAssemblyCompiler(loggerFactory, settings))
+        ElmToAssemblyCompilerConfig? config = null) : this(new ElmToAssemblyCompiler(loggerFactory, config))
     {
     }
 
@@ -65,7 +63,7 @@ public sealed class FluentElmToolkit
     /// </summary>
     /// <param name="libraries">The libraries to add.</param>
     /// <returns>The current instance of <see cref="FluentElmToolkit"/>.</returns>
-    public FluentElmToolkit AddElmLibraries(IEnumerable<Library> libraries)
+    public FluentElmToolkit AddElmLibraries(IEnumerable<ElmLibrary> libraries)
     {
         elmToAssemblyCompiler.AddElmLibraries(libraries);
         return this;

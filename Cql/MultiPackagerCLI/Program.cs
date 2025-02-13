@@ -4,14 +4,14 @@ using Hl7.Cql.Abstractions.Infrastructure;
 
 MeasuresDirSet[] measureDirSets =
 [
-    // new MeasuresDirSet("Demo"),
-    // new MeasuresDirSet("CMS"),
-    // new MeasuresDirSet("Authoring")
-    //     .Mutate(m => m with
-    //     {
-    //         CqlDir = $"{m.MeasuresProjectRootDir}/Input/cql",
-    //         ElmDir = $"{m.MeasuresProjectRootDir}/Elm"
-    //     }),
+    new MeasuresDirSet("Demo"),
+    new MeasuresDirSet("CMS"),
+    new MeasuresDirSet("Authoring")
+        .Mutate(m => m with
+        {
+            CqlDir = $"{m.MeasuresProjectRootDir}/Input/cql",
+            ElmDir = $"{m.MeasuresProjectRootDir}/Elm"
+        }),
     new MeasuresDirSet("CoreTests")
         .Mutate(m => m with
         {

@@ -1,6 +1,6 @@
-﻿using Hl7.Cql.Abstractions.Exceptions;
-using Hl7.Cql.CqlToElm;
+﻿using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Model;
+using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Cql;
 
@@ -8,7 +8,7 @@ namespace CqlSdkPrototype.Cql;
 /// The settings used to configure the CQL to ELM processor.
 /// </summary>
 public sealed record CqlToElmTranslatorConfig(
-    ProcessBatchItemExceptionHandling ProcessBatchItemExceptionHandling = default,
+    EnumerationExceptionHandling EnumerationExceptionHandling = default,
     ImmutableHashSet<CqlModel>? Models = null,
     ImmutableHashSet<ModelInfo>? ModelInfos = null,
     AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,

@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Abstractions.Exceptions;
+﻿using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Internal;
 
@@ -32,8 +32,8 @@ internal static class InternalExtensions
 
     public static LogExceptionMessageAction GetLogExceptionMessageAction(
         this ILogger logger,
-        ProcessBatchItemExceptionHandling exceptionHandling) =>
-        exceptionHandling is ProcessBatchItemExceptionHandling.ThrowException ? logger.LogError : logger.LogWarning;
+        EnumerationExceptionHandling exceptionHandling) =>
+        exceptionHandling is EnumerationExceptionHandling.Throw ? logger.LogError : logger.LogWarning;
 }
 
 internal delegate void LogExceptionMessageAction(

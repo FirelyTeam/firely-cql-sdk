@@ -1,23 +1,22 @@
-﻿namespace CqlSdkPrototype.Elm.Fluent.Extensions;
+﻿using CqlSdkPrototype.Infrastructure;
+
+namespace CqlSdkPrototype.Elm.Fluent.Extensions;
 
 public static partial class FluentElmToolkitExtensions
 {
     public static FluentElmToolkit SaveCSharpFilesToDirectory(
         this FluentElmToolkit elmToolkit,
-        DirectoryInfo directory)
+        DirectoryInfo directory,
+        DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
-        if (!directory.Exists)
-            directory.Create();
+        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
 
         var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
 
-        foreach (var (libraryName, (_, cSharpSourceCode, _, _)) in elmToolkit.ElmToAssemblyCompilations)
+        foreach (var (versionedLibraryIdentifier, _, csharpSourceCode, _, _) in elmToolkit.GetCompletedElmToAssemblyCompilations())
         {
-            if (cSharpSourceCode is null)
-                continue;
-
-            var fileName = Path.Combine(directory.FullName, $"{libraryName}.g.cs");
-            File.WriteAllText(fileName, cSharpSourceCode);
+            var fileName = Path.Combine(directory.FullName, $"{versionedLibraryIdentifier}.g.cs");
+            File.WriteAllText(fileName, csharpSourceCode);
             logger.LogInformation("Saved C# source code to file: {file}", fileName);
         }
 
@@ -26,26 +25,23 @@ public static partial class FluentElmToolkitExtensions
 
     public static FluentElmToolkit SaveAssemblyBinariesToDirectory(
         this FluentElmToolkit elmToolkit,
-        DirectoryInfo directory)
+        DirectoryInfo directory,
+        DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
-        if (!directory.Exists)
-            directory.Create();
+        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
 
         var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
 
-        foreach (var (libraryName, (_, _, assemblyBytes, symbolsBytes)) in elmToolkit.ElmToAssemblyCompilations)
+        foreach (var (versionedLibraryIdentifier, _, _, assemblyBytes, debugSymbolsBytes) in elmToolkit.GetCompletedElmToAssemblyCompilations())
         {
-            if (assemblyBytes is null)
-                continue;
-
-            var fileName = Path.Combine(directory.FullName, $"{libraryName}.dll");
+            var fileName = Path.Combine(directory.FullName, $"{versionedLibraryIdentifier}.dll");
             File.WriteAllBytes(fileName, assemblyBytes);
             logger.LogInformation("Saved assembly to file: {file}", fileName);
 
-            if (symbolsBytes is { Length: > 0 })
+            if (debugSymbolsBytes is { Length: > 0 } dsb)
             {
-                fileName = Path.Combine(directory.FullName, $"{libraryName}.pdb");
-                File.WriteAllBytes(fileName, symbolsBytes);
+                fileName = Path.Combine(directory.FullName, $"{versionedLibraryIdentifier}.pdb");
+                File.WriteAllBytes(fileName, dsb);
                 logger.LogInformation("Saved debug symbols to file: {file}", fileName);
             }
         }

@@ -6,31 +6,23 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;
 
-internal class LibrarySetExpressionBuilder(
-    ILogger<LibrarySetExpressionBuilder> logger,
-    LibraryExpressionBuilder libraryExpressionBuilder)
+internal class LibrarySetExpressionBuilder(LibraryExpressionBuilder libraryExpressionBuilder)
 {
-    public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
+    public IEnumerable<(Library library, DefinitionDictionary<LambdaExpression> libraryDefinitions)> BuildEachLibraryDefinitions(
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null,
-        ProcessBatchItemExceptionHandling processLibraryExceptionHandling = default) =>
+        DefinitionDictionary<LambdaExpression> librarySetDefinitions,
+        EnumerateExceptionHandler<Library>? exceptionHandler = null,
+        Action<Library>? preBuildLibraryHandler = null) =>
         NewLibrarySetExpressionBuilderContext(librarySet, librarySetDefinitions)
-            .ProcessLibrarySet(processLibraryExceptionHandling);
-
-    public IEnumerable<(Library library, Func<DefinitionDictionary<LambdaExpression>> generateLibraryDefinitions)> ProcessLibrarySetDeferred(
-        LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null) =>
-        NewLibrarySetExpressionBuilderContext(librarySet, librarySetDefinitions)
-            .ProcessLibrarySetDeferred();
+            .BuildEachLibraryDefinitions(exceptionHandler, preBuildLibraryHandler);
 
     private LibrarySetExpressionBuilderContext NewLibrarySetExpressionBuilderContext(
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null) =>
-        new(logger, libraryExpressionBuilder, librarySet, librarySetDefinitions ?? new());
+        DefinitionDictionary<LambdaExpression> librarySetDefinitions) =>
+        new(libraryExpressionBuilder, librarySet, librarySetDefinitions);
 }

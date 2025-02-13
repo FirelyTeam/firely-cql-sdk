@@ -1,6 +1,6 @@
 ﻿using CqlSdkPrototype.Internal;
 using Hl7.Cql.CqlToElm;
-using Hl7.Cql.Elm;
+using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Model;
 using ExpressionVisitor = Hl7.Cql.CqlToElm.Visitors.ExpressionVisitor;
 
@@ -9,11 +9,13 @@ namespace CqlSdkPrototype.Cql.Internal;
 /// <summary>
 /// Services for translating CQL to ELM used by the <seealso cref="CqlToElmTranslator"/>.
 /// </summary>
-internal readonly record struct CqlToElmTranslatorServices(
+internal record CqlToElmTranslatorServices(
     ILoggerFactory LoggerFactory,
     ServiceProvider ServiceProvider,
     CqlToElmConverter CqlToElmConverter,
-    LibraryBuilderProvider LibraryBuilderProvider)
+    LibraryBuilderProvider LibraryBuilderProvider,
+    IServiceScope ServiceScope,
+    LibraryVisitor LibraryVisitor) : IDisposable
 {
     private static readonly (CqlModel CqlModel, ModelInfo ModelInfo)[] AllMappedModelsInOrder = [
         (CqlModel.ElmR1, Models.ElmR1),
@@ -39,7 +41,19 @@ internal readonly record struct CqlToElmTranslatorServices(
         AddCqlServices(services, config, libraryBuilderProvider);
         var serviceProvider = services.BuildServiceProvider(validateScopes: true);
 
-        return ActivatorUtilities.CreateInstance<CqlToElmTranslatorServices>(serviceProvider, serviceProvider, libraryBuilderProvider);
+        var serviceScope = serviceProvider.CreateScope();
+        var cqlToElmTranslatorServices = new CqlToElmTranslatorServices(
+            loggerFactory,
+            serviceProvider,
+            Get<CqlToElmConverter>(serviceProvider),
+            libraryBuilderProvider,
+            serviceScope,
+            CqlToElmConverter.GetLibraryVisitorScoped(serviceScope));
+
+        libraryBuilderProvider.CqlToElmTranslatorServices = cqlToElmTranslatorServices;
+
+        return cqlToElmTranslatorServices;
+        static T Get<T> (IServiceProvider sp) where T : notnull => sp.GetRequiredService<T>();
     }
 
     /// <summary>
@@ -88,7 +102,7 @@ internal readonly record struct CqlToElmTranslatorServices(
     {
         // This is really annoying in debug mode
         ExpressionVisitor.EnableDebugAssertions = false;
-        Library.EnableDebugAssertions = false;
+        ElmLibrary.EnableDebugAssertions = false;
     }
 
     /// <summary>
@@ -111,4 +125,10 @@ internal readonly record struct CqlToElmTranslatorServices(
     /// Gets the library builder provider.
     /// </summary>
     public LibraryBuilderProvider LibraryBuilderProvider { get; } = LibraryBuilderProvider!;
+
+    public void Dispose()
+    {
+        ServiceProvider.Dispose();
+        ServiceScope.Dispose();
+    }
 }

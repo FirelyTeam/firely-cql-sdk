@@ -1,4 +1,6 @@
 ﻿using CqlSdkPrototype.Elm.Fluent;
+using CqlSdkPrototype.Elm.Fluent.Extensions;
+using Hl7.Cql.CodeGeneration.NET;
 
 namespace CqlSdkPrototype.Invocation.Fluent.Extensions;
 
@@ -12,12 +14,7 @@ public static class FluentElmToolkitExtensions
         if (configureLibrarySetInvokerBuilderSettings is not null) config = configureLibrarySetInvokerBuilderSettings(config);*/
 
         var assemblyBinaries =
-            from entry in elmToolkit.ElmToAssemblyCompilations
-            let assembly = entry.Value.AssemblyBinary
-            where assembly is not null
-            let debugSymbols = entry.Value.DebugSymbolsBinary
-            let assemblyBinary = new Hl7.Cql.CodeGeneration.NET.AssemblyBinary(assembly, debugSymbols)
-            select assemblyBinary;
+            elmToolkit.GetCompletedElmToAssemblyCompilations(t => new AssemblyBinary(t.assemblyBinary, t.debugSymbolsBinary));
 
         var invocationToolkit = new FluentInvocationToolkit(elmToolkit.LoggerFactory/*, config*/).AddAssemblyBinaries(assemblyBinaries);
         return invocationToolkit;

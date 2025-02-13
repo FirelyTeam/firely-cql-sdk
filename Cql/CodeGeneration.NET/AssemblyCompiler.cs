@@ -14,8 +14,6 @@ using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.CodeGeneration.NET
 {
-    using Library = Hl7.Cql.Elm.Library;
-
     internal class AssemblyCompiler
     {
         private static readonly EmitOptions DefaultEmitOptions = new();
@@ -49,20 +47,24 @@ namespace Hl7.Cql.CodeGeneration.NET
                 });
         }
 
-        public IEnumerable<(Library library, Func<AssemblyBinaryWithSourceCode> generateAssemblyBinaryWithSourceCode)> CompileDeferred(
+        public IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> CompileEachLibraryToAssemblies(
+            IEnumerable<(Library Library, string CSharp)> librariesWithCSharp,
             LibrarySet librarySet,
-            IEnumerable<(Library Library, string CSharp)> input,
-            AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None)
+            AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None,
+            EnumerateExceptionHandler<(Library library, string cSharp)>? exceptionHandler = null)
         {
             Dictionary<string, AssemblyBinaryWithSourceCode> results = new();
             Assembly[] assemblyReferences = _referencesLazy.Value;
-            foreach (var (library, cSharp) in input)
-                yield return (library, () =>
-                                 {
-                                     var result = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat);
-                                     results.Add(library.GetVersionedIdentifier()!, result);
-                                     return result;
-                                 });
+            return librariesWithCSharp
+                .TrySelect(
+                    t =>
+                    {
+                        var (library, cSharp) = t;
+                        var assemblyBinaryWithSourceCode = CompileNode(cSharp, results, librarySet, library, assemblyReferences, debugInformationFormat);
+                        results.Add(library.GetVersionedIdentifier()!, assemblyBinaryWithSourceCode);
+                        return (library, assemblyBinaryWithSourceCode);
+                    },
+                    exceptionHandler);
         }
 
         private static CSharpCompilationOptions CreateCSharpCompilationOptions(
@@ -227,20 +229,5 @@ namespace Hl7.Cql.CodeGeneration.NET
 
 
         }
-    }
-
-    internal static class AssemblyCompilerExtensions
-    {
-        public static IEnumerable<(Library library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> Compile(
-            this AssemblyCompiler compiler,
-            LibrarySet librarySet,
-            IEnumerable<(Library Library, string CSharp)> input,
-            AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None)
-        {
-            return compiler
-                   .CompileDeferred(librarySet, input, debugInformationFormat)
-                   .Select(x => (x.library, x.generateAssemblyBinaryWithSourceCode()));
-        }
-
     }
 }

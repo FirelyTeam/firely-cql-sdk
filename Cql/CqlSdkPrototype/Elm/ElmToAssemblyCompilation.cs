@@ -1,5 +1,4 @@
 ﻿using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Elm;
 
 namespace CqlSdkPrototype.Elm;
 
@@ -15,7 +14,7 @@ namespace CqlSdkPrototype.Elm;
 /// is set to <seealso cref="AssemblyCompilerDebugInformationFormat.PortablePdb"/>.
 /// </param>
 public readonly record struct ElmToAssemblyCompilation(
-    Library ElmLibrary,
+    ElmLibrary ElmLibrary,
     string? CSharpSourceCode = null,
     byte[]? AssemblyBinary = null,
     byte[]? DebugSymbolsBinary = null);

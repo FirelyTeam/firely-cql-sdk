@@ -6,8 +6,6 @@ using Hl7.Cql.Runtime;
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Invocation;
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Model;
 using CqlSdkPrototype.Cql.Fluent;
 using CqlSdkPrototype.Elm.Fluent;
@@ -43,14 +41,28 @@ namespace Hl7.Cql.CqlToElm.Test
             LibrarySet librarySet = new("TempLibrarySet", library);
             DefinitionDictionary<LambdaExpression> definitions = new();
             definitions.Add(library.GetVersionedIdentifier()!, expressionName, lambda);
-            var generateCSharp = elmToolkitServices.GetLibrarySetCSharpCodeGenerator().GenerateCSharp(librarySet, definitions);
-            var compile = elmToolkitServices.GetAssemblyCompiler().Compile(librarySet, generateCSharp, elmToolkit.ProcessorConfig.AssemblyCompilerDebugInformationFormat);
+
+            var generateCSharp =
+                elmToolkitServices
+                    .GetLibrarySetCSharpCodeGenerator()
+                    .GenerateEachLibraryToCSharp(librarySet, definitions)
+                    .ToList();
+
+            var compile =
+                elmToolkitServices
+                    .GetAssemblyCompiler()
+                    .CompileEachLibraryToAssemblies(generateCSharp, librarySet, elmToolkit.ProcessorConfig.AssemblyCompilerDebugInformationFormat)
+                    .ToList();
+
             var assemblyBytes = compile.Single().assemblyBinaryWithSourceCode.AssemblyBytes;
 
-            using var librarySetInvoker = new FluentInvocationToolkit()
-                              .AddAssemblyBinaries(AssemblyBinary.Default with { AssemblyBytes = assemblyBytes })
-                              .ToLibrarySetInvoker();
-            var result = librarySetInvoker.GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);
+            using var librarySetInvoker =
+                new FluentInvocationToolkit()
+                    .AddAssemblyBinaries(AssemblyBinary.Default with { AssemblyBytes = assemblyBytes })
+                    .ToLibrarySetInvoker();
+
+            var result = librarySetInvoker
+                .GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);
             return result;
         }
 
@@ -196,7 +208,7 @@ namespace Hl7.Cql.CqlToElm.Test
             new(
                 LoggerFactory,
                 new CqlToElmTranslatorConfig(
-                    ProcessBatchItemExceptionHandling: ProcessBatchItemExceptionHandling.ThrowException,
+                    EnumerationExceptionHandling: EnumerationExceptionHandling.Throw,
                     Models: Models ?? [CqlModel.ElmR1, CqlModel.Fhir401],
                     ModelInfos: ModelInfos,
                     AmbiguousTypeBehavior: AmbiguousTypeBehavior,
@@ -214,7 +226,7 @@ namespace Hl7.Cql.CqlToElm.Test
             bool enableListPromotion = false) =>
             CreateFluentCqlToolkit(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
                 .ToFluentElmToolkit(_ => new ElmToAssemblyCompilerConfig(
-                                  ProcessBatchItemExceptionHandling.ThrowException,
-                                  Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));
+                                        EnumerationExceptionHandling.Throw,
+                                        Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));
     }
 }

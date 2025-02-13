@@ -1,179 +1,76 @@
-﻿using Hl7.Cql.Abstractions.Exceptions;
-
-namespace Hl7.Cql.Runtime;
+﻿namespace Hl7.Cql.Runtime;
 
 internal static class ExceptionHandlingMethods
 {
-    public static IEnumerable<TriedResult<TInput>> TryProcessEach<TInput>(
-        this IEnumerable<TInput> inputs,
-        Action<TInput> processInput)
+    private static (EnumerationContinuation continuation, TNext next) TryGetNext<T, TNext>(
+        T input,
+        Func<T, TNext> getNext,
+        EnumerateExceptionHandler<T>? exceptionHandler = null)
+    {
+        try
+        {
+            TNext next = getNext(input);
+            return (EnumerationContinuation.Yield, next);
+        }
+        catch (Exception e)
+        {
+            switch (exceptionHandler?.Invoke(input, e))
+            {
+                case EnumerationExceptionHandling.Break:    return (EnumerationContinuation.Break, default!);
+                case EnumerationExceptionHandling.Continue: return (EnumerationContinuation.Continue, default!);
+            }
+            throw;
+        }
+    }
+
+    private enum EnumerationContinuation
+    {
+        Yield,
+        Continue,
+        Break
+    }
+
+    public static IEnumerable<TReturn> TrySelect<T, TReturn>(
+        this IEnumerable<T> inputs,
+        Func<T, TReturn> getValue,
+        EnumerateExceptionHandler<T>? exceptionHandler = null)
     {
         foreach (var input in inputs)
         {
-            TriedResult<TInput> outcome = new(input);
-            try
+            switch (TryGetNext(input, getValue, exceptionHandler))
             {
-                processInput(input);
+                case (EnumerationContinuation.Yield, var @return): yield return @return; break;
+                case (EnumerationContinuation.Continue, _):        continue;
+                case (EnumerationContinuation.Break, _):           yield break;
             }
-            catch (Exception e)
-            {
-                outcome = outcome with { ExceptionDispatchInfo = ExceptionDispatchInfo.Capture(e) };
-            }
-
-            yield return outcome;
         }
     }
+}
 
-    public static IEnumerable<TriedResult<TInput>> WithEachException<TInput>(
-        this IEnumerable<TriedResult<TInput>> outcomes,
-        Action<InputWithException<TInput>> processOutcome)
+internal static class LoggerExtensions
+{
+    public static EnumerateExceptionHandler<TPrev> CreateLogExceptionHandler<TPrev>(
+        this ILogger logger,
+        EnumerationExceptionHandling exceptionHandling,
+        Action<TPrev, LogMessageBuilder> log)
     {
-        foreach (var outcome in outcomes)
-        {
-            if (outcome.Exception is { } e)
-                processOutcome(new(outcome.Input, e));
-            yield return outcome;
-        }
-    }
+        var logLevel = ToLogLevel(exceptionHandling);
+        if (!logger.IsEnabled(logLevel))
+            return NoOpExceptionHandler<TPrev>(exceptionHandling);
 
-    public static IEnumerable<TInput> HandleExceptions<TInput>(
-        this IEnumerable<TriedResult<TInput>> processBatchItemResults,
-        ProcessBatchItemExceptionHandling exceptionHandling)
-    {
-        return exceptionHandling switch
+        return (t, exception) =>
         {
-            ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak => processBatchItemResults.HandleAndAbortBeforeFirstException(),
-            ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue => processBatchItemResults.HandleAndIgnoreAllExceptions(),
-            _ => processBatchItemResults.HandleAndThrowAtFirstException()
+            LogMessageBuilder logMessageBuilder = (message, args) => logger.Log(logLevel, exception, message, args);
+            log(t, logMessageBuilder);
+            return exceptionHandling;
         };
     }
 
-    public static IEnumerable<TInput> HandleAndThrowAtFirstException<TInput>(
-        this IEnumerable<TriedResult<TInput>> processBatchItemResults)
-    {
-        foreach (var (input, exceptionDispatchInfo) in processBatchItemResults)
-        {
-            if (exceptionDispatchInfo is not null)
-                exceptionDispatchInfo.Throw();
-            yield return input;
-        }
-    }
+    private static EnumerateExceptionHandler<TPrev> NoOpExceptionHandler<TPrev>(EnumerationExceptionHandling exceptionHandling) =>
+        (_, _) => exceptionHandling;
 
-    public static IEnumerable<TInput> HandleAndAbortBeforeFirstException<TInput>(
-        this IEnumerable<TriedResult<TInput>> processBatchItemResults)
-    {
-        foreach (var (input, exceptionDispatchInfo) in processBatchItemResults)
-        {
-            if (exceptionDispatchInfo is not null)
-                yield break;
-            yield return input;
-        }
-    }
+    private static LogLevel ToLogLevel(EnumerationExceptionHandling exceptionHandling) =>
+        exceptionHandling is EnumerationExceptionHandling.Throw ? LogLevel.Error : LogLevel.Warning;
 
-    public static IEnumerable<TInput> HandleAndIgnoreAllExceptions<TInput>(
-        this IEnumerable<TriedResult<TInput>> processBatchItemResults)
-    {
-        foreach (var (input, exceptionDispatchInfo) in processBatchItemResults)
-        {
-            if (exceptionDispatchInfo?.SourceException is not null)
-                yield return input;
-        }
-    }
-
-    public static IEnumerable<TriedResult<TInput, TResult>> TryProcessEach<TInput, TResult>(
-        this IEnumerable<TInput> inputs,
-        Func<TInput, TResult> processInput)
-    {
-        foreach (var input in inputs)
-        {
-            TriedResult<TInput, TResult> outcome = new(input);
-            try
-            {
-                outcome = outcome with { Result = processInput(input) };
-            }
-            catch (Exception e)
-            {
-                outcome = outcome with { ExceptionDispatchInfo = ExceptionDispatchInfo.Capture(e) };
-            }
-
-            yield return outcome;
-        }
-    }
-
-    public static IEnumerable<TriedResult<TInput, TResult>> WithEachException<TInput, TResult>(
-        this IEnumerable<TriedResult<TInput, TResult>> outcomes,
-        Action<InputWithException<TInput>> processOutcome)
-    {
-        foreach (var outcome in outcomes)
-        {
-            if (outcome.Exception is {} e)
-                processOutcome(new (outcome.Input, e));
-            yield return outcome;
-        }
-    }
-
-    public static IEnumerable<TResult> HandleExceptions<TInput, TResult>(
-        this IEnumerable<TriedResult<TInput, TResult>> processBatchItemResults,
-        ProcessBatchItemExceptionHandling exceptionHandling)
-    {
-        return exceptionHandling switch
-        {
-            ProcessBatchItemExceptionHandling.IgnoreExceptionAndBreak => processBatchItemResults.HandleAndAbortBeforeFirstException(),
-            ProcessBatchItemExceptionHandling.IgnoreExceptionAndContinue => processBatchItemResults.HandleAndIgnoreAllExceptions(),
-            _ => processBatchItemResults.HandleAndThrowAtFirstException()
-        };
-    }
-
-    public static IEnumerable<TResult> HandleAndThrowAtFirstException<TInput, TResult>(
-        this IEnumerable<TriedResult<TInput, TResult>> processBatchItemResults)
-    {
-        foreach (var (_, result, exceptionDispatchInfo) in processBatchItemResults)
-        {
-            if (exceptionDispatchInfo is not null)
-                exceptionDispatchInfo.Throw();
-            yield return result!;
-        }
-    }
-
-    public static IEnumerable<TResult> HandleAndAbortBeforeFirstException<TInput, TResult>(
-        this IEnumerable<TriedResult<TInput, TResult>> processBatchItemResults)
-    {
-        foreach (var (_, result, exceptionDispatchInfo) in processBatchItemResults)
-        {
-            if (exceptionDispatchInfo is null)
-                yield return result!;
-            else
-                yield break;
-        }
-    }
-
-    public static IEnumerable<TResult> HandleAndIgnoreAllExceptions<TInput, TResult>(
-        this IEnumerable<TriedResult<TInput, TResult>> processBatchItemResults)
-    {
-        foreach (var (_, result, exceptionDispatchInfo) in processBatchItemResults)
-        {
-            if (exceptionDispatchInfo is null)
-                yield return result!;
-        }
-    }
-
-    public readonly record struct TriedResult<TInput>(
-        TInput Input,
-        ExceptionDispatchInfo? ExceptionDispatchInfo = null) {
-        internal ExceptionDispatchInfo? ExceptionDispatchInfo { get; init; } = ExceptionDispatchInfo;
-        public Exception? Exception => ExceptionDispatchInfo?.SourceException;
-    }
-
-    public readonly record struct TriedResult<TInput, TResult>(
-        TInput Input,
-        TResult? Result = default,
-        ExceptionDispatchInfo? ExceptionDispatchInfo = null)
-    {
-        internal ExceptionDispatchInfo? ExceptionDispatchInfo { get; init; } = ExceptionDispatchInfo;
-        public Exception? Exception => ExceptionDispatchInfo?.SourceException;
-    }
-
-    public readonly record struct InputWithException<TInput>(
-        TInput Input,
-        Exception Exception);
+    public delegate void LogMessageBuilder([StructuredMessageTemplate] string message, params object?[] args);
 }
