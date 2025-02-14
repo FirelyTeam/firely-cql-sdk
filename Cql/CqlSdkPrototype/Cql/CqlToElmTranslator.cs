@@ -36,12 +36,12 @@ public sealed class CqlToElmTranslator
     private CqlToElmTranslatorServices _services;
 
     /// <summary>
-    /// Gets the logger factory used by extensions via <see cref="FluentCqlToolkit.LoggerFactory"/>.
+    /// Gets the logger factory used by extensions via <see cref="CqlToolkit.LoggerFactory"/>.
     /// </summary>
     internal ILoggerFactory LoggerFactory { get; }
 
     /// <summary>
-    /// Gets the service provider used by tests via <see cref="FluentCqlToolkit.ServiceProvider"/>.
+    /// Gets the service provider used by tests via <see cref="CqlToolkit.ServiceProvider"/>.
     /// </summary>
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 

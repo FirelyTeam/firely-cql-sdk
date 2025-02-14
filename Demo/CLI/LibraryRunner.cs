@@ -33,7 +33,7 @@ namespace CLI
             //if used in production scenario compile measures.* dll and reference it below instead, example Assembly.LoadFrom("Measures.Authoring")
             //see launchsettings.json
             var assemblyBinary = AssemblyBinary.Default.LoadFromFile(new FileInfo(_opts.AssemblyPath));
-            using var librarySetInvoker = new FluentInvocationToolkit()
+            using var librarySetInvoker = new InvocationToolkit()
                       .AddAssemblyBinaries(assemblyBinary)
                       .ToLibrarySetInvoker();
             RunShared(_opts, librarySetInvoker);

@@ -50,7 +50,7 @@ internal class PackagerCli(
             var packagingToolkit = new PackagingToolkit(loggerFactory)
                 .SetExceptionHandlingToIgnore();
 
-            FluentCqlToolkit cqlToolkit = new FluentCqlToolkit(loggerFactory)
+            CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory)
                 .SetExceptionHandlingToIgnore()
                 .AddCqlLibrariesFromDirectory(opt.CqlInDirectory);
 

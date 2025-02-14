@@ -5,10 +5,10 @@ namespace CqlSdkPrototype.Cql.Fluent.Extensions;
 
 public static partial class CqlToolkitExtensions
 {
-    private static ILogger CreateLogger(this FluentCqlToolkit cqlToolkit) =>
+    private static ILogger CreateLogger(this CqlToolkit cqlToolkit) =>
         cqlToolkit.LoggerFactory.CreateLogger(typeof(CqlToolkitExtensions));
 
-    public static FluentCqlToolkit SetExceptionHandlingToIgnore(this FluentCqlToolkit cqlToolkit, bool stopAfterFirstException = false) =>
+    public static CqlToolkit SetExceptionHandlingToIgnore(this CqlToolkit cqlToolkit, bool stopAfterFirstException = false) =>
         cqlToolkit.Reconfigure(o => o with
         {
             EnumerationExceptionHandling = stopAfterFirstException ? EnumerationExceptionHandling.Break : EnumerationExceptionHandling.Continue
@@ -18,11 +18,11 @@ public static partial class CqlToolkitExtensions
         CqlVersionedLibraryIdentifier versionedLibraryIdentifier,
         CqlLibraryString cqlLibraryString,
         ElmLibrary elmLibrary)> GetCompletedCqlToElmTranslations(
-        this FluentCqlToolkit cqlToolkit) =>
+        this CqlToolkit cqlToolkit) =>
         cqlToolkit.GetCompletedCqlToElmTranslations(t => t);
 
     public static IEnumerable<TR> GetCompletedCqlToElmTranslations<TR>(
-        this FluentCqlToolkit cqlToolkit,
+        this CqlToolkit cqlToolkit,
         Func<(CqlVersionedLibraryIdentifier versionedLibraryIdentifier, CqlLibraryString cqlLibraryString, ElmLibrary elmLibrary), TR> selector) =>
         cqlToolkit.CqlToElmTranslations
             .Where(kv => kv.Value.ElmLibrary is not null)

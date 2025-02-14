@@ -5,7 +5,7 @@ namespace CqlSdkPrototype.Elm.Fluent.Extensions;
 public static class CqlToolkitExtensions
 {
     public static ElmToolkit ToFluentElmToolkit(
-        this FluentCqlToolkit cqlToolkit,
+        this CqlToolkit cqlToolkit,
         Func<ElmToAssemblyCompilerConfig, ElmToAssemblyCompilerConfig>? configure = null)
     {
         var config = new ElmToAssemblyCompilerConfig(EnumerationExceptionHandling: cqlToolkit.Config.EnumerationExceptionHandling);
@@ -15,7 +15,7 @@ public static class CqlToolkitExtensions
     }
 
     public static ElmToolkit CompileCqlToAssemblies(
-        this FluentCqlToolkit cqlToolkit) =>
+        this CqlToolkit cqlToolkit) =>
         cqlToolkit
             .TranslateCqlToElm()
             .ToFluentElmToolkit()

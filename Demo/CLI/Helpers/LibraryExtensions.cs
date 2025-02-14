@@ -93,7 +93,7 @@ internal static class LibraryExtensions
             .Select(assemblyBytes => AssemblyBinary.Default with { AssemblyBytes = assemblyBytes})
             .ToArray();
 
-        return new FluentInvocationToolkit()
+        return new InvocationToolkit()
                          .AddAssemblyBinaries(assemblyBinaries)
                          .ToLibrarySetInvoker();
     }

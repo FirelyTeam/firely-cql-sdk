@@ -44,7 +44,7 @@ internal static class Program
     {
         // Create fluent cql toolkit
         var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        FluentCqlToolkit cqlToolkit = new FluentCqlToolkit(loggerFactory, cqlToElmProcessorSettings);
+        CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
 
         // "Directories" is not a part of the API, but a helper class for this example
         var dirs = Directories.Create("Examples");
@@ -64,7 +64,7 @@ internal static class Program
     {
         // Create fluent cql toolkit
         var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        FluentCqlToolkit cqlToolkit = new FluentCqlToolkit(loggerFactory, cqlToElmProcessorSettings);
+        CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
 
 
         // NICE TO HAVE: Would be nice to parse the CqlLibraryString only from the CQL and extract the identifier from the CQL
@@ -98,7 +98,7 @@ internal static class Program
 
         // Create fluent cql toolkit
         var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        FluentCqlToolkit cqlToolkit = new FluentCqlToolkit(loggerFactory, cqlToElmProcessorSettings);
+        CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
 
         // We can write extensions to make it even easier to change exception handling
         var cqlContext = FhirCqlContext.ForBundle();
@@ -136,8 +136,8 @@ internal static class Program
 
         // Create fluent cql toolkit
         var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        FluentCqlToolkit cqlToolkit =
-            new FluentCqlToolkit(loggerFactory, cqlToElmProcessorSettings)
+        CqlToolkit cqlToolkit =
+            new CqlToolkit(loggerFactory, cqlToElmProcessorSettings)
                 .SetExceptionHandlingToIgnore();
 
         if (shouldBuildCqlToElm)
@@ -180,7 +180,7 @@ internal static class Program
     {
         // Create fluent cql toolkit
         var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        FluentCqlToolkit cqlToolkit = new FluentCqlToolkit(loggerFactory, cqlToElmProcessorSettings);
+        CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
 
         // Add CQL libraries from a directory and process them to ELM, then save the ELM files to a directory
         cqlToolkit
@@ -269,7 +269,7 @@ file static class Extensions
                   .FirstOrNull();
 
     public static (CqlVersionedLibraryIdentifier id, string elmJson)? TryGetFirstElmFileLines(
-        this FluentCqlToolkit cqlToolkit) =>
+        this CqlToolkit cqlToolkit) =>
         cqlToolkit.GetCompletedCqlToElmTranslations(t => (t.versionedLibraryIdentifier, t.elmLibrary.SerializeToJson()))
                   .FirstOrNull();
 

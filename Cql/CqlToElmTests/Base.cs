@@ -57,7 +57,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var assemblyBytes = compile.Single().assemblyBinaryWithSourceCode.AssemblyBytes;
 
             using var librarySetInvoker =
-                new FluentInvocationToolkit()
+                new InvocationToolkit()
                     .AddAssemblyBinaries(AssemblyBinary.Default with { AssemblyBytes = assemblyBytes })
                     .ToLibrarySetInvoker();
 
@@ -196,7 +196,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerFactory>();
 
-        protected static FluentCqlToolkit CreateFluentCqlToolkit(
+        protected static CqlToolkit CreateFluentCqlToolkit(
             ImmutableHashSet<CqlModel>? Models = null,
             ImmutableHashSet<ModelInfo>? ModelInfos = null,
             AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,

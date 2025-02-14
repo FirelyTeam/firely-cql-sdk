@@ -101,7 +101,7 @@ public class CqlTupleTests
             """, str);
     }
 
-    /// <seealso cref="FluentInvocationToolkitTests.TestRuntimeScopeAgainstLibraryDefinitionResults"/>
+    /// <seealso cref="InvocationToolkitTests.TestRuntimeScopeAgainstLibraryDefinitionResults"/>
     [TestMethod]
     public void ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized()
     {
@@ -110,7 +110,7 @@ public class CqlTupleTests
                        .Select(dir => Path.GetFullPath(Path.Combine(dir.FullName, "Dlls", "CqlNestedTupleTest-1.0.0.dll")))
                        .First(File.Exists);
         var ctx = FhirCqlContext.ForBundle();
-        using var librarySetInvoker = new FluentInvocationToolkit()
+        using var librarySetInvoker = new InvocationToolkit()
                                     .AddAssemblyBinaries(AssemblyBinary.Default.LoadFromFile(new FileInfo(filePath)))
                                     .ToLibrarySetInvoker();
 

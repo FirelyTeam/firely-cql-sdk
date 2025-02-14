@@ -29,7 +29,7 @@ public sealed class LibrarySetInvokerBuilder
     }
 
     /// <summary>
-    /// Gets the logger factory used by extensions on the <see cref="FluentInvocationToolkit"/>.
+    /// Gets the logger factory used by extensions on the <see cref="InvocationToolkit"/>.
     /// </summary>
     internal ILoggerFactory LoggerFactory { get; }
 

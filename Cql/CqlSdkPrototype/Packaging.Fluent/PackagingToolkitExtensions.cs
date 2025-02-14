@@ -18,7 +18,7 @@ public static partial class PackagingToolkitExtensions
 
     public static PackagingToolkit AddPackagingInputsFromCqlAndElmToolkits(
         this PackagingToolkit packagingToolkit,
-        FluentCqlToolkit cqlToolkit,
+        CqlToolkit cqlToolkit,
         ElmToolkit elmToolkit)
     {
         var cqlToElmTranslations = cqlToolkit.CqlToElmTranslations.Values.Select(o => o.CqlLibraryString);

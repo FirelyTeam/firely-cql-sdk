@@ -6,7 +6,7 @@ namespace CqlSdkPrototype.Invocation.Fluent.Extensions;
 
 public static class ElmToolkitExtensions
 {
-    public static FluentInvocationToolkit ToFluentInvocationToolkit(
+    public static InvocationToolkit ToFluentInvocationToolkit(
         this ElmToolkit elmToolkit/*,
         Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configureLibrarySetInvokerBuilderSettings = null*/)
     {
@@ -16,7 +16,7 @@ public static class ElmToolkitExtensions
         var assemblyBinaries =
             elmToolkit.GetCompletedElmToAssemblyCompilations(t => new AssemblyBinary(t.assemblyBinary, t.debugSymbolsBinary));
 
-        var invocationToolkit = new FluentInvocationToolkit(elmToolkit.LoggerFactory/*, config*/).AddAssemblyBinaries(assemblyBinaries);
+        var invocationToolkit = new InvocationToolkit(elmToolkit.LoggerFactory/*, config*/).AddAssemblyBinaries(assemblyBinaries);
         return invocationToolkit;
     }
 

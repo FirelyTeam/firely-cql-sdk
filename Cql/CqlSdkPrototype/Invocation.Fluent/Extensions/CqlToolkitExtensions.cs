@@ -10,7 +10,7 @@ public static class CqlToolkitExtensions
 #pragma warning disable RS0026 // Do not add multiple public overloads with optional parameters
     public static LibrarySetInvoker ToLibrarySetInvoker(
 #pragma warning restore RS0026
-        this FluentCqlToolkit cqlToolkit,
+        this CqlToolkit cqlToolkit,
         Func<ElmToAssemblyCompilerConfig, ElmToAssemblyCompilerConfig>? configureElmToAssemblySettings = null,/*
         Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configureLibrarySetInvokerBuilderSettings = null,*/
         string name = "")

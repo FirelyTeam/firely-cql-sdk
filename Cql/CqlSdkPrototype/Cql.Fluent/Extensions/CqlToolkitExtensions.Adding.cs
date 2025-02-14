@@ -5,15 +5,15 @@ namespace CqlSdkPrototype.Cql.Fluent.Extensions;
 
 public static partial class CqlToolkitExtensions
 {
-    public static FluentCqlToolkit AddCqlLibraryString(
-        this FluentCqlToolkit cqlToolkit,
+    public static CqlToolkit AddCqlLibraryString(
+        this CqlToolkit cqlToolkit,
         CqlLibraryString cqlLibrary)
     {
         return cqlToolkit.AddCqlLibraries([cqlLibrary]);
     }
 
-    public static FluentCqlToolkit AddCqlLibrariesFromDirectory(
-        this FluentCqlToolkit cqlToolkit,
+    public static CqlToolkit AddCqlLibrariesFromDirectory(
+        this CqlToolkit cqlToolkit,
         DirectoryInfo directory,
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
@@ -23,8 +23,8 @@ public static partial class CqlToolkitExtensions
         return cqlToolkit.AddCqlLibraryFiles(files);
     }
 
-    public static FluentCqlToolkit AddCqlLibraryFiles(
-        this FluentCqlToolkit cqlToolkit,
+    public static CqlToolkit AddCqlLibraryFiles(
+        this CqlToolkit cqlToolkit,
         IEnumerable<FileInfo> files)
     {
         var logger = cqlToolkit.CreateLogger();

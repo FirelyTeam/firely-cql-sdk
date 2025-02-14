@@ -5,28 +5,28 @@ namespace CqlSdkPrototype.Invocation.Fluent;
 /// <summary>
 /// Provides a fluent interface for building and configuring a <see cref="LibrarySetInvoker"/>.
 /// </summary>
-public sealed class FluentInvocationToolkit
+public sealed class InvocationToolkit
 {
     private readonly LibrarySetInvokerBuilder librarySetInvokerBuilder;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="FluentInvocationToolkit"/> class with a default logger factory.
+    /// Initializes a new instance of the <see cref="InvocationToolkit"/> class with a default logger factory.
     /// </summary>
-    public FluentInvocationToolkit() : this(default(ILoggerFactory)) { }
+    public InvocationToolkit() : this(default(ILoggerFactory)) { }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="FluentInvocationToolkit"/> class with the specified logger factory.
+    /// Initializes a new instance of the <see cref="InvocationToolkit"/> class with the specified logger factory.
     /// </summary>
     /// <param name="loggerFactory">The logger factory to use for logging.</param>
-    public FluentInvocationToolkit(ILoggerFactory? loggerFactory)
+    public InvocationToolkit(ILoggerFactory? loggerFactory)
         : this(new LibrarySetInvokerBuilder(loggerFactory))
     { }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="FluentInvocationToolkit"/> class with the specified library set invoker builder.
+    /// Initializes a new instance of the <see cref="InvocationToolkit"/> class with the specified library set invoker builder.
     /// </summary>
     /// <param name="librarySetInvokerBuilder">The library set invoker builder to use.</param>
-    public FluentInvocationToolkit(LibrarySetInvokerBuilder librarySetInvokerBuilder)
+    public InvocationToolkit(LibrarySetInvokerBuilder librarySetInvokerBuilder)
     {
         this.librarySetInvokerBuilder = librarySetInvokerBuilder;
     }
@@ -40,8 +40,8 @@ public sealed class FluentInvocationToolkit
     /// Adds the specified assembly binaries to the toolkit.
     /// </summary>
     /// <param name="assemblyBinary">The assembly binaries to add.</param>
-    /// <returns>The current instance of <see cref="FluentInvocationToolkit"/>.</returns>
-    public FluentInvocationToolkit AddAssemblyBinaries(IEnumerable<AssemblyBinary> assemblyBinary)
+    /// <returns>The current instance of <see cref="InvocationToolkit"/>.</returns>
+    public InvocationToolkit AddAssemblyBinaries(IEnumerable<AssemblyBinary> assemblyBinary)
     {
         librarySetInvokerBuilder.AddAssemblyBinaries(assemblyBinary);
         return this;
