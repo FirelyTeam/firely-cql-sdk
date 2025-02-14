@@ -73,14 +73,20 @@ public sealed class InvocationToolkit
     /// Creates a new instance of <see cref="LibrarySetInvoker"/>.
     /// </summary>
     /// <param name="name">The name of the AssemblyLoadContext.</param>
-    /// <returns>A new instance of <see cref="LibrarySetInvoker"/>.</returns>
+    /// <returns>A new instance of <see cref="LibrarySetInvoker"/>
+    /// which must be disposed when no longer in use,
+    /// so that the loaded assemblies may unload from the
+    /// application domain.</returns>
     public LibrarySetInvoker CreateLibrarySetInvoker(string name = "")
     {
-        _services.Logger.LogDebug("Creating LibrarySetInvoker");
+        _services.Logger.LogDebug("Creating LibrarySetInvoker {name}", name);
 
         var alc = new AssemblyLoadContext(name, true);
         foreach (var (assembly, debugSymbols) in AssemblyBinaries)
-            alc.LoadFromBytes(assembly!, debugSymbols);
+        {
+            var asm = alc.LoadFromBytes(assembly!, debugSymbols);
+            _services.Logger.LogInformation("Loaded assembly {assemblyName}", asm.FullName);
+        }
 
         return new LibrarySetInvoker(this, alc);
     }
