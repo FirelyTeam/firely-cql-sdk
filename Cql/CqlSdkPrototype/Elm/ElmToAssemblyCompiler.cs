@@ -194,7 +194,7 @@ public sealed class ElmToAssemblyCompiler
         AssemblyCompilerDebugInformationFormat debugInformationFormat) =>
         assemblyCompiler
             .CompileEachLibraryToAssemblies(
-                cSharps.WithEach(t => _services.Logger.LogInformation("Compiling assembly for library : {libraryName}", t.library.identifier)),
+                cSharps.WithEach(t => _services.Logger.LogInformation("Compiling C# into .NET Assembly for {id}", t.library.identifier)),
                 librarySet,
                 debugInformationFormat,
                 errorStrategy => errorStrategy
@@ -222,7 +222,8 @@ public sealed class ElmToAssemblyCompiler
                                  .WithContinuation(Config.ErroredEnumerationContinuation)
                                  .AddLogExceptionHandler(
                                      _services.Logger,
-                                     (library, log) => log("Could not generate definitions into C# for {id}", library.GetVersionedIdentifier()!)));
+                                     (library, log) => log("Could not generate definitions into C# for {id}", library.GetVersionedIdentifier())),
+                library => _services.Logger.LogInformation("Generating definitions into C# for {id} ", library.GetVersionedIdentifier()));
 
     /// <summary>
     /// Builds the library set definitions.
@@ -244,7 +245,8 @@ public sealed class ElmToAssemblyCompiler
                                  .AddLogExceptionHandler(
                                      _services.Logger,
                                      (library, logMessage) =>
-                                         logMessage("Could not generate ELM into definitions for {id}", library.GetVersionedIdentifier()!)))
+                                         logMessage("Could not convert ELM into definitions for {id}", library.GetVersionedIdentifier())),
+                library => _services.Logger.LogInformation("Converting ELM Library into definitions for {id}", library.GetVersionedIdentifier()))
             .ForEach(); // Important to enumerate
         return librarySetDefinitions;
     }

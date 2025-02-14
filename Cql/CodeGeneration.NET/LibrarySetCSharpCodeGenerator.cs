@@ -88,10 +88,11 @@ internal class LibrarySetCSharpCodeGenerator
     public IEnumerable<(Library library, string cSharp)> GenerateEachLibraryToCSharp(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> definitions,
-        EnumerationErrorStrategyBuilder<Library>? buildErrorStrategy = null)
+        EnumerationErrorStrategyBuilder<Library>? buildErrorStrategy = null,
+        Action<Library>? onNextLibrary = null)
     {
         var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions);
-        return librarySetWriter.GenerateEachLibraryToCSharp(buildErrorStrategy);
+        return librarySetWriter.GenerateEachLibraryToCSharp(buildErrorStrategy, onNextLibrary);
     }
 
     #region Nested Types
@@ -112,13 +113,13 @@ internal class LibrarySetCSharpCodeGenerator
 
         public IEnumerable<(Library library, string cSharp)> GenerateEachLibraryToCSharp(
             EnumerationErrorStrategyBuilder<Library>? buildErrorStrategy = null,
-            Action<Library>? preCSharpGenerateHandler = null) =>
+            Action<Library>? onNextLibrary = null) =>
             LibrarySet
                 .Where(library => Definitions.Libraries.Contains(library.GetVersionedIdentifier()!))
                 .TrySelect(
                     library =>
                     {
-                        preCSharpGenerateHandler?.Invoke(library);
+                        onNextLibrary?.Invoke(library);
 
                         using var cSharpWriter = new StringWriter();
                         var libraryWriter = new LibraryWriter(this, library, cSharpWriter);
