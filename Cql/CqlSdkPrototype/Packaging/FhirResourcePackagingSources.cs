@@ -9,5 +9,5 @@ public readonly record struct FhirResourcePackagingSources(
     byte[] AssemblyBinary
 )
 {
-    public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier => CqlLibrary.VersionedLibraryIdentifier;
+    public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier => CqlLibrary.LibraryIdentifier;
 }

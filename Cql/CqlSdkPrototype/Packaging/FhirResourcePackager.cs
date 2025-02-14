@@ -117,20 +117,9 @@ public sealed class FhirResourcePackager
                  .ToArray();
         LibrarySet librarySet = new LibrarySet("", librariesToPackage);
 
-        var resourcePackagerInputs =
-            builder.Values
-                   .Select(o =>
-                   {
-                       logger.LogInformation("Packaging FHIR resources for library {id}.", o.VersionedLibraryIdentifier);
-                       return ToResourcePackagerInput(o);
-                   });
-
-        var logPackageFailed =
-            logger.CreateLogExceptionHandler<ElmLibrary>(
-                Config.EnumerationExceptionHandling,
-                (library, log) => log("Could not package FHIR resources for library {lib}", library.GetVersionedIdentifier()!));
-
-        var inputsById = resourcePackagerInputs.ToDictionary(o => o.VersionedLibraryIdentifier);
+        var inputsById = builder.Values
+                                .Select(ToResourcePackagerInput)
+                                .ToDictionary(o => o.VersionedLibraryIdentifier);
 
         var count =
             _services.ResourcePackager
@@ -139,7 +128,10 @@ public sealed class FhirResourcePackager
                          inputsById: id => inputsById[id],
                          resourceCanonicalRootUrl: canonicalRootUrl?.ToString(),
                          overrideDate: overrideDate,
-                         logPackageFailed)
+                         errorStrategy => errorStrategy
+                             .WithContinuation(Config.ErroredEnumerationContinuation)
+                             .AddLogExceptionHandler(logger, (library, logMessage) => logMessage("Could not package FHIR resources for library {lib}", library.GetVersionedIdentifier()!)),
+                         onNextLibrary: library => logger.LogInformation("Packaging FHIR resources for library {id}.", library.GetVersionedIdentifier()))
                      .SelectWhere(o =>
                      {
                          var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(o.versionedLibraryIdentifier);

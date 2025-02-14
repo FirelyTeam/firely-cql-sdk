@@ -7,7 +7,7 @@ namespace CqlSdkPrototype.Elm;
 /// <summary>
 /// Configuration settings for the Elm to Assembly compiler.
 /// </summary>
-/// <param name="EnumerationExceptionHandling">The exception handling policy to use while processing a batch of items.</param>
+/// <param name="ErroredEnumerationContinuation">The exception handling policy to use while processing a batch of items.</param>
 /// <param name="AssemblyCompilerDebugInformationFormat">The format of the debug information emitted by the compiler.</param>
 /// <param name="AllowScopeRedefinition">Allows a child scope to redefine an existing parent scope. Default is <see langword="true" />.</param>
 /// <param name="AllowUnresolvedExternals">
@@ -18,7 +18,7 @@ namespace CqlSdkPrototype.Elm;
 /// </param>
 /// <param name="LRUCacheSize">The size of the Least Recently Used (LRU) cache.</param>
 public sealed record ElmToAssemblyCompilerConfig(
-    EnumerationExceptionHandling EnumerationExceptionHandling = default,
+    ErroredEnumerationContinuation ErroredEnumerationContinuation = default,
     AssemblyCompilerDebugInformationFormat AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.None,
     bool AllowScopeRedefinition = true,
     bool AllowUnresolvedExternals = true,

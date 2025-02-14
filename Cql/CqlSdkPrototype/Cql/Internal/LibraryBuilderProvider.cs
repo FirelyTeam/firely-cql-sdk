@@ -7,14 +7,14 @@ namespace CqlSdkPrototype.Cql.Internal;
 /// Provides the implementation for <seealso cref="ILibraryProvider"/>
 /// which resolves a <seealso cref="LibraryBuilder"/> given a library name and version on a <seealso cref="CqlToolkitConversionDictionary.Builder"/>.
 /// </summary>
-/// <param name="translationsBuilder"></param>
+/// <param name="conversionsBuilder"></param>
 internal sealed class LibraryBuilderProvider(
-    CqlToolkitConversionDictionary.Builder translationsBuilder)
+    CqlToolkitConversionDictionary.Builder conversionsBuilder)
     : ILibraryProvider
 {
     public CqlToolkitServices? CqlToElmTranslatorServices { get; set; }
 
-    public CqlToolkitConversionDictionary.Builder TranslationsBuilder { get; set; } = translationsBuilder;
+    public CqlToolkitConversionDictionary.Builder ConversionsBuilder { get; set; } = conversionsBuilder;
 
     bool ILibraryProvider.TryResolveLibrary(
         string libraryName,
@@ -30,7 +30,7 @@ internal sealed class LibraryBuilderProvider(
         error = null;
         libraryBuilder = null;
 
-        if (!TranslationsBuilder.TryGetValue(libVer, out var elmTranslation))
+        if (!ConversionsBuilder.TryGetValue(libVer, out var elmTranslation))
             return false;
 
         if (elmTranslation.ElmLibraryBuilder is { } lb)
@@ -45,7 +45,7 @@ internal sealed class LibraryBuilderProvider(
             var logger = CqlToElmTranslatorServices.LoggerFactory.CreateLogger<LibraryBuilderProvider>();
             logger.LogInformation("Parsing CQL for {id}", libVer);
             libraryBuilder = CqlToElmTranslatorServices.CqlToElmConverter.GetBuilder(CqlToElmTranslatorServices.LibraryVisitor, elmTranslation.InCqlLibraryString.Cql);
-            TranslationsBuilder[libVer] = elmTranslation with { ElmLibraryBuilder = libraryBuilder };
+            ConversionsBuilder[libVer] = elmTranslation with { ElmLibraryBuilder = libraryBuilder };
             return true;
         }
 

@@ -9,9 +9,9 @@ public static partial class ElmToolkitExtensions
     public static ElmToolkit SetExceptionHandlingToIgnore(this ElmToolkit cqlToolkit, bool stopAfterFirstException = false) =>
         cqlToolkit.Reconfigure(o => o with
         {
-            EnumerationExceptionHandling = stopAfterFirstException
-                                                    ? EnumerationExceptionHandling.Break
-                                                    : EnumerationExceptionHandling.Continue
+            ErroredEnumerationContinuation = stopAfterFirstException
+                                                    ? ErroredEnumerationContinuation.Break
+                                                    : ErroredEnumerationContinuation.Continue
         });
 
     public static ElmToolkit SetAssemblyDebugInformationToEmbedded(this ElmToolkit cqlToolkit) =>

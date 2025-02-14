@@ -99,7 +99,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 using var librarySetInvoker = cqlToolkit.ToLibrarySetInvoker();
                 var result = librarySetInvoker.GetLibraryDefinitionResult(FhirCqlContext.ForBundle(bundle, valueSets: valueSets),
-                                                              cqlLibraryString.VersionedLibraryIdentifier, "Retrieve_AllTerms");
+                                                              cqlLibraryString.LibraryIdentifier, "Retrieve_AllTerms");
                 var conditions = result as IEnumerable<Condition>;
                 Assert.IsNotNull(conditions);
                 var ids = conditions.Select(c => c.Id).ToArray();

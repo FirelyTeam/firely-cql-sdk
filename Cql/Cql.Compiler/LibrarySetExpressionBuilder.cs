@@ -16,10 +16,10 @@ internal class LibrarySetExpressionBuilder(LibraryExpressionBuilder libraryExpre
     public IEnumerable<(Library library, DefinitionDictionary<LambdaExpression> libraryDefinitions)> BuildEachLibraryDefinitions(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> librarySetDefinitions,
-        EnumerateExceptionHandler<Library>? exceptionHandler = null,
+        EnumerationErrorStrategyBuilder<Library>? errorStrategyBuilder = null,
         Action<Library>? preBuildLibraryHandler = null) =>
         NewLibrarySetExpressionBuilderContext(librarySet, librarySetDefinitions)
-            .BuildEachLibraryDefinitions(exceptionHandler, preBuildLibraryHandler);
+            .BuildEachLibraryDefinitions(errorStrategyBuilder, preBuildLibraryHandler);
 
     private LibrarySetExpressionBuilderContext NewLibrarySetExpressionBuilderContext(
         LibrarySet librarySet,

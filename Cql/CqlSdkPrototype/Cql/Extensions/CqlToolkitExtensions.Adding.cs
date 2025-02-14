@@ -5,11 +5,11 @@ namespace CqlSdkPrototype.Cql.Extensions;
 
 public static partial class CqlToolkitExtensions
 {
-    public static CqlToolkit AddCqlLibraryString(
+    public static CqlToolkit AddCqlLibraries(
         this CqlToolkit cqlToolkit,
-        CqlLibraryString cqlLibrary)
+        params CqlLibraryString[] cqlLibraries)
     {
-        return cqlToolkit.AddCqlLibraries([cqlLibrary]);
+        return cqlToolkit.AddCqlLibraries(cqlLibraries);
     }
 
     public static CqlToolkit AddCqlLibrariesFromDirectory(

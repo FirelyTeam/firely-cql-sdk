@@ -207,7 +207,7 @@ namespace Hl7.Cql.CqlToElm.Test
             new(
                 LoggerFactory,
                 new CqlToolkitConfig(
-                    EnumerationExceptionHandling: EnumerationExceptionHandling.Throw,
+                    ErroredEnumerationContinuation: ErroredEnumerationContinuation.Throw,
                     Models: Models ?? [CqlModel.ElmR1, CqlModel.Fhir401],
                     ModelInfos: ModelInfos,
                     AmbiguousTypeBehavior: AmbiguousTypeBehavior,
@@ -225,7 +225,7 @@ namespace Hl7.Cql.CqlToElm.Test
             bool enableListPromotion = false) =>
             CreateFluentCqlToolkit(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
                 .ToFluentElmToolkit(_ => new ElmToAssemblyCompilerConfig(
-                                        EnumerationExceptionHandling.Throw,
+                                        ErroredEnumerationContinuation.Throw,
                                         Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));
     }
 }

@@ -20,5 +20,5 @@ public readonly record struct FhirResourcePackaging(
             sources.CSharpSourceCode,
             sources.AssemblyBinary) { }
 
-    public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier => CqlLibrary.VersionedLibraryIdentifier;
+    public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier => CqlLibrary.LibraryIdentifier;
 }

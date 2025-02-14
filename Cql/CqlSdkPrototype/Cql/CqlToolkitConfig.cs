@@ -8,7 +8,7 @@ namespace CqlSdkPrototype.Cql;
 /// The settings used to configure the CQL to ELM processor.
 /// </summary>
 public sealed record CqlToolkitConfig(
-    EnumerationExceptionHandling EnumerationExceptionHandling = default,
+    ErroredEnumerationContinuation ErroredEnumerationContinuation = default,
     ImmutableHashSet<CqlModel>? Models = null,
     ImmutableHashSet<ModelInfo>? ModelInfos = null,
     AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,

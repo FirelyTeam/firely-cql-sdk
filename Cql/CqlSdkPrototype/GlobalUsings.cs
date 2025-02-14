@@ -24,6 +24,7 @@ global using ElmToAssemblyCompilationDictionary = System.Collections.Immutable.I
 global using ElmToAssemblyCompilationReadOnlyDictionary = System.Collections.Generic.IReadOnlyDictionary<CqlSdkPrototype.Infrastructure.CqlVersionedLibraryIdentifier, CqlSdkPrototype.Elm.ElmToAssemblyCompilation>;
 global using AssemblyBinaryHashSet = System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CodeGeneration.NET.AssemblyBinary>;
 global using AssemblyBinaryReadOnlyHashSet = System.Collections.Generic.IReadOnlySet<Hl7.Cql.CodeGeneration.NET.AssemblyBinary>;
+global using CqlToolkitIdentifierConversionPair = (CqlSdkPrototype.Infrastructure.CqlVersionedLibraryIdentifier libraryIdentifier, CqlSdkPrototype.Cql.CqlToolkitConversionRecord conversionRecord);
 global using FhirResourcePackagingDictionary = System.Collections.Immutable.ImmutableDictionary<CqlSdkPrototype.Infrastructure.CqlVersionedLibraryIdentifier, CqlSdkPrototype.Packaging.FhirResourcePackaging>;
 global using FhirResourcePackagingReadOnlyDictionary = System.Collections.Generic.IReadOnlyDictionary<CqlSdkPrototype.Infrastructure.CqlVersionedLibraryIdentifier, CqlSdkPrototype.Packaging.FhirResourcePackaging>;
 

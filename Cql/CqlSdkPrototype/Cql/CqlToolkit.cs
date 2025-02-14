@@ -4,11 +4,6 @@ using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Cql;
 
-using VersionedIdentifierAndCqlToElmTranslation = (CqlVersionedLibraryIdentifier versionedIdentifier, CqlToolkitConversionRecord cqlTranslationEntry);
-
-// using VersionedIdentifierAndCqlToElmTranslationEnumerable = IEnumerable<VersionedIdentifierAndCqlToElmTranslation>;
-// using VersionedIdentifierAndCqlToElmTranslationDeferredEnumerable = IEnumerable<(CqlVersionedLibraryIdentifier versionedIdentifier, Func<CqlToElmTranslation> cqlTranslationEntryFn)>;
-
 /// <summary>
 /// Translates CQL libraries to ELM libraries.
 /// </summary>
@@ -26,12 +21,12 @@ public sealed class CqlToolkit
         config ??= CqlToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
-        _cqlToolkitConversions = CqlToolkitConversionDictionary.Empty;
+        _conversions = CqlToolkitConversionDictionary.Empty;
         Config = config;
-        _services = CqlToolkitServices.Create(loggerFactory, config, _cqlToolkitConversions);
+        _services = CqlToolkitServices.Create(loggerFactory, config, _conversions);
     }
 
-    private CqlToolkitConversionDictionary _cqlToolkitConversions;
+    private CqlToolkitConversionDictionary _conversions;
     private CqlToolkitServices _services;
 
     /// <summary>
@@ -52,17 +47,17 @@ public sealed class CqlToolkit
     /// <summary>
     /// Gets the dictionary of CQL to ELM translations.
     /// </summary>
-    public CqlToolkitConversionReadOnlyDictionary CqlToolkitConversions => _cqlToolkitConversions;
+    public CqlToolkitConversionReadOnlyDictionary Conversions => _conversions;
 
     /// <summary>
-    /// Sets the CQL to ELM conversions.
+    /// Replaces the CQL to ELM conversions.
     /// </summary>
-    /// <param name="translations">The dictionary of translations to set.</param>
-    private void SetCqlToElmTranslations(
-        CqlToolkitConversionDictionary translations)
+    /// <param name="conversions">The dictionary of translations to set.</param>
+    private void ReplaceConversions(
+        CqlToolkitConversionDictionary conversions)
     {
-        _cqlToolkitConversions = translations;
-        _services.LibraryBuilderProvider.TranslationsBuilder = translations.ToBuilder();
+        _conversions = conversions;
+        _services.LibraryBuilderProvider.ConversionsBuilder = conversions.ToBuilder();
     }
 
     /// <summary>
@@ -79,7 +74,7 @@ public sealed class CqlToolkit
 
         _services.Dispose();
         Config = config;
-        _services = CqlToolkitServices.Create(_services.LoggerFactory, config, _cqlToolkitConversions);
+        _services = CqlToolkitServices.Create(_services.LoggerFactory, config, _conversions);
         _services.LibraryBuilderProvider.CqlToElmTranslatorServices = _services;
 
         return this;
@@ -91,80 +86,59 @@ public sealed class CqlToolkit
     /// <param name="cqlLibraries">The CQL libraries to add.</param>
     public CqlToolkit AddCqlLibraries(IEnumerable<CqlLibraryString> cqlLibraries)
     {
-        var entriesBuilder = _services.LibraryBuilderProvider.TranslationsBuilder;
-        int addedCount =
-            BuildTranslations(cqlLibraries, entriesBuilder)
-                .Count(); // We must enumerate all
+        var logger = _services.Logger;
+        var conversions = _services.LibraryBuilderProvider.ConversionsBuilder;
 
-        if (addedCount > 0)
-            SetCqlToElmTranslations(translations: entriesBuilder.ToImmutable());
+        var count = cqlLibraries
+            .TryForEach(
+                cqlLibrary =>
+                {
+                    var libId = cqlLibrary.LibraryIdentifier;
+
+                    logger.LogInformation("Adding CQL library: {lib}", libId);
+                    var translation = new CqlToolkitConversionRecord(cqlLibrary);
+                    conversions.Add(libId, translation);
+                },
+                errorStrategy => errorStrategy
+                                 .WithContinuation(Config.ErroredEnumerationContinuation)
+                                 .AddLogExceptionHandler(
+                                     logger,
+                                     (cqlLibraryString, logMessage) => logMessage("Could not add CQL for {lib}.", cqlLibraryString.LibraryIdentifier)));
+
+        if (count > 0)
+            ReplaceConversions(conversions.ToImmutable());
 
         return this;
     }
 
     /// <summary>
-    /// Builds the translations for the given CQL libraries.
-    /// </summary>
-    /// <param name="cqlLibraries">The CQL libraries to translate.</param>
-    /// <param name="entriesBuilder">The builder for the translation entries.</param>
-    /// <returns>A collection of CQL library strings and their corresponding translation functions.</returns>
-    private IEnumerable<(CqlLibraryString cqlLibraryString, CqlToolkitConversionRecord cqlToElmTranslationFn)> BuildTranslations(
-        IEnumerable<CqlLibraryString> cqlLibraries,
-        CqlToolkitConversionDictionary.Builder entriesBuilder)
-    {
-        var logger = _services.Logger;
-        foreach (var cqlLibrary in cqlLibraries)
-        {
-            var versionedIdentifier = cqlLibrary.VersionedLibraryIdentifier;
-
-            if (entriesBuilder.ContainsKey(versionedIdentifier))
-            {
-                logger.LogWarning("Skipping adding previous cql to translation: {versionedIdentifier}", versionedIdentifier);
-                continue;
-            }
-
-            _services.Logger.LogInformation("Adding CQL library to translator: {versionedIdentifier}", versionedIdentifier);
-            var translation = new CqlToolkitConversionRecord(cqlLibrary);
-            entriesBuilder.Add(versionedIdentifier, translation);
-            yield return (cqlLibrary, translation);
-        }
-    }
-
-    /// <summary>
     /// Translates the CQL libraries to ELM libraries.
     /// </summary>
-    public CqlToolkit TranslateCqlToElm()
+    public CqlToolkit ConvertCqlToElm()
     {
-        CqlToolkitConversionDictionary.Builder itemsBuilder = _services.LibraryBuilderProvider.TranslationsBuilder;
-        var logger = _services.Logger;
+        CqlToolkitConversionDictionary.Builder conversions = _services.LibraryBuilderProvider.ConversionsBuilder;
 
-        var exceptionHandling = Config.EnumerationExceptionHandling;
+        var count =
+            _conversions
+                .Select(kv => new CqlToolkitIdentifierConversionPair(kv.Key, kv.Value))
+                .Where(kv => kv.conversionRecord.OutElmLibrary is null)
+                .TryForEach(
+                    kv =>
+                    {
+                        if (!_services.LibraryBuilderProvider.TryResolveLibrary(kv.libraryIdentifier, out var libraryBuilder, out var error))
+                            throw new InvalidOperationException($"Could not resolve CQL library {kv.libraryIdentifier}: {error}.");
 
-        var logTranslateFailed =
-            logger.CreateLogExceptionHandler<VersionedIdentifierAndCqlToElmTranslation>(
-                exceptionHandling,
-                (o, messageBuilder) => messageBuilder("Could not translate CQL to ELM for {lib}", o.versionedIdentifier));
+                        var elmLibrary = libraryBuilder.Build();
+                        var newConversionRecord = kv.conversionRecord with { OutElmLibrary = elmLibrary };
+                        conversions[kv.libraryIdentifier] = newConversionRecord;
+                    },
+                    errorStrategy=> errorStrategy
+                        .WithContinuation(ErroredEnumerationContinuation.Continue)
+                        .AddLogExceptionHandler(_services.Logger, (kv, messageBuilder) => messageBuilder("Could not translate CQL to ELM for {lib}", kv.libraryIdentifier))
+                );
 
-        var changedCount =
-            _cqlToolkitConversions
-                .Select(kv => new VersionedIdentifierAndCqlToElmTranslation(kv.Key, kv.Value))
-                .Where(kv => kv.cqlTranslationEntry.OutElmLibrary is null)
-                .TrySelect(kv =>
-                           {
-                               var (id, entry) = kv;
-                               if (!_services.LibraryBuilderProvider.TryResolveLibrary(id, out var libBuilder, out var error))
-                                   throw new InvalidOperationException("Could not resolve CQL library " + id);
-
-                               var lib = libBuilder.Build();
-                               var newEntry = entry with { OutElmLibrary = lib };
-                               itemsBuilder[id] = newEntry;
-                               return kv with { cqlTranslationEntry = newEntry };
-                           },
-                           logTranslateFailed)
-                .Count(); // Must enumerate all
-
-        if (changedCount > 0)
-            SetCqlToElmTranslations(translations: itemsBuilder.ToImmutable());
+        if (count > 0)
+            ReplaceConversions(conversions: conversions.ToImmutable());
 
         return this;
     }

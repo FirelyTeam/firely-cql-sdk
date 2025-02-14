@@ -32,7 +32,7 @@ internal static class FluentCqlToolkitExtensions
 
     private static CqlLibraryString FHIRHelpers { get; } = CqlLibraryString.Parse(File.ReadAllText(@"Input\FHIRHelpers-4.0.1.cql"));
 
-    public static CqlToolkit AddFHIRHelpers(this CqlToolkit cqlToolkit) => cqlToolkit.AddCqlLibraryString(FHIRHelpers);
+    public static CqlToolkit AddFHIRHelpers(this CqlToolkit cqlToolkit) => cqlToolkit.AddCqlLibraries(FHIRHelpers);
 
     public static Library MakeLibrary(
         this CqlToolkit cqlToolkit,
@@ -42,9 +42,9 @@ internal static class FluentCqlToolkitExtensions
         var cqlLibraryString = CqlLibraryString.Parse(cql);
 
         var library = cqlToolkit
-                      .AddCqlLibraryString(cqlLibraryString)
-                      .TranslateCqlToElm()
-                      .CqlToolkitConversions[cqlLibraryString.VersionedLibraryIdentifier]
+                      .AddCqlLibraries(cqlLibraryString)
+                      .ConvertCqlToElm()
+                      .Conversions[cqlLibraryString.LibraryIdentifier]
                       .OutElmLibrary!;
 
         if (expectedErrors.Any())

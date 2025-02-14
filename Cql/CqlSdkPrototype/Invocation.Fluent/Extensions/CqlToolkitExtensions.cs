@@ -16,7 +16,7 @@ public static class CqlToolkitExtensions
         string name = "")
     {
         return cqlToolkit
-               .TranslateCqlToElm()
+               .ConvertCqlToElm()
                .ToFluentElmToolkit(configureElmToAssemblySettings)
                .ToLibrarySetInvoker(name/*, configureLibrarySetInvokerBuilderSettings*/);
     }

@@ -32,8 +32,8 @@ internal static class InternalExtensions
 
     public static LogExceptionMessageAction GetLogExceptionMessageAction(
         this ILogger logger,
-        EnumerationExceptionHandling exceptionHandling) =>
-        exceptionHandling is EnumerationExceptionHandling.Throw ? logger.LogError : logger.LogWarning;
+        ErroredEnumerationContinuation erroredEnumerationContinuation) =>
+        erroredEnumerationContinuation is ErroredEnumerationContinuation.Throw ? logger.LogError : logger.LogWarning;
 }
 
 internal delegate void LogExceptionMessageAction(

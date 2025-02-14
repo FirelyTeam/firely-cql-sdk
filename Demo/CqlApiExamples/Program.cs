@@ -25,6 +25,7 @@ internal static class Program
         // Create a logger factory via the Microsoft.Extensions.Logging API
         var loggerFactory = CreateConsoleLoggerFactory();
 
+        AddDuplicates(loggerFactory);
         Add3And2Example(loggerFactory);
         InvokeCqlExample(loggerFactory);
         InvokeCqlFromExamplesFolder(loggerFactory);
@@ -39,6 +40,73 @@ internal static class Program
         }
     }
 
+    private static void AddDuplicates(ILoggerFactory loggerFactory)
+    {
+        AddCqlDifferentValuesThrow();
+        AddCqlDifferentValuesContinue();
+        AddCqlDifferentValuesBreak();
+
+
+        void AddCqlDifferentValuesThrow()
+        {
+            CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory);
+            try
+            {
+                cqlToolkit.AddCqlLibraries(
+                    CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:A"),
+                    CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:B"),
+                    CqlLibraryString.Parse("library Lib version '0.0.0' define:B"));
+                Debug.Fail("Expected an exception when adding duplicate cql libraries.");
+            }
+            catch (Exception e)
+            {
+                Debug.Assert(e is not null);
+            }
+
+            Debug.Assert(cqlToolkit.Conversions.Count is 0);
+        }
+
+        void AddCqlDifferentValuesContinue()
+        {
+            CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory);
+            try
+            {
+                cqlToolkit
+                    .SetExceptionHandlingToIgnore()
+                    .AddCqlLibraries(
+                        CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:A"),
+                        CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:B"),
+                        CqlLibraryString.Parse("library Lib version '0.0.0' define:B"));
+            }
+            catch (Exception e)
+            {
+                Debug.Fail("No exception expected");
+            }
+
+            Debug.Assert(cqlToolkit.Conversions.Count is 2);
+        }
+
+        void AddCqlDifferentValuesBreak()
+        {
+            CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory);
+            try
+            {
+                cqlToolkit
+                    .SetExceptionHandlingToIgnore(stopAfterFirstException: true)
+                    .AddCqlLibraries(
+                        CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:A"),
+                        CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:B"),
+                        CqlLibraryString.Parse("library Lib version '0.0.0' define:C"));
+            }
+            catch (Exception e)
+            {
+                Debug.Fail("No exception expected");
+            }
+
+            Debug.Assert(cqlToolkit.Conversions.Count is 1);
+        }
+    }
+
     private static void PackageFromExamplesFolder(ILoggerFactory loggerFactory)
     {
         // Create fluent cql toolkit
@@ -49,7 +117,7 @@ internal static class Program
         var dirs = Directories.Create("Examples");
 
         // Load CQL libraries from a directory and process them to ELM, C#, and assemblies
-        cqlToolkit.AddCqlLibrariesFromDirectory(dirs.CqlInDirectory).TranslateCqlToElm();
+        cqlToolkit.AddCqlLibrariesFromDirectory(dirs.CqlInDirectory).ConvertCqlToElm();
         var elmToolkit = cqlToolkit.ToFluentElmToolkit().CompileElmToAssemblies();
         var packagingToolkit = new PackagingToolkit(loggerFactory);
         packagingToolkit.AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit);
@@ -75,12 +143,12 @@ internal static class Program
             """);
         var cqlContext = FhirCqlContext.ForBundle();
         using var librarySetInvoker = cqlToolkit
-                                      .AddCqlLibraryString(cqlLibraryString)
+                                      .AddCqlLibraries(cqlLibraryString)
                                       .ToLibrarySetInvoker(elmOpt => elmOpt with
                                       {
                                           AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded
                                       });
-        var result = librarySetInvoker.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.VersionedLibraryIdentifier, "Three");
+        var result = librarySetInvoker.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.LibraryIdentifier, "Three");
         Debug.Assert(result is 3);
     }
 
@@ -143,7 +211,7 @@ internal static class Program
         {
             cqlToolkit
                 .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory)
-                .TranslateCqlToElm()
+                .ConvertCqlToElm()
                 .SaveElmFilesToDirectory(dirs.ElmOutDirectory)
                 ;
         }
@@ -158,17 +226,17 @@ internal static class Program
 
         cqlToolkit.TryGetFirstElmFileLines()
                   .IfNotNull(t => logger.LogInformation(
-                              $"""
-                               First 50 ELM lines for {t.id}:
-                               {t.elmJson.TakeLines(50)}
-                               """));
+                                 $"""
+                                  First 50 ELM lines for {t.id}:
+                                  {t.elmJson.TakeLines(50)}
+                                  """));
 
         elmToolkit.TryGetFirstCSharpFileLines()
                   .IfNotNull(t => logger.LogInformation(
-                              $"""
-                               First 50 C# lines for {t.id}:
-                               {t.cSharpSourceCode.TakeLines(50)}
-                               """));
+                                 $"""
+                                  First 50 C# lines for {t.id}:
+                                  {t.cSharpSourceCode.TakeLines(50)}
+                                  """));
     }
 
     /// <summary>
@@ -184,7 +252,7 @@ internal static class Program
         // Add CQL libraries from a directory and process them to ELM, then save the ELM files to a directory
         cqlToolkit
             .AddCqlLibrariesFromDirectory(new DirectoryInfo("input/1/cql"))
-            .TranslateCqlToElm()
+            .ConvertCqlToElm()
             .SaveElmFilesToDirectory(new DirectoryInfo("output/1/elm/"));
 
         // Create fluent elm toolkit as a continuation of the cql toolkit

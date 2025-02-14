@@ -54,13 +54,13 @@ internal class PackagerCli(
                 .SetExceptionHandlingToIgnore()
                 .AddCqlLibrariesFromDirectory(opt.CqlInDirectory);
 
-            if (!cqlToolkit.CqlToolkitConversions.Any())
+            if (!cqlToolkit.Conversions.Any())
                 logger.LogWarning("Exiting: No CQL libraries were found in the CQL input directory.");
 
             ElmToolkit elmToolkit;
             if (translateCql)
             {
-                cqlToolkit.TranslateCqlToElm();
+                cqlToolkit.ConvertCqlToElm();
 
                 if (opt.ElmOutDirectory is { } elmOutDir)
                     cqlToolkit.SaveElmFilesToDirectory(

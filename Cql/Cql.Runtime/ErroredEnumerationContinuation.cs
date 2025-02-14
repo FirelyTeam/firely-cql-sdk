@@ -3,7 +3,7 @@
 /// <summary>
 /// The exception handling to use while processing a batch of items.
 /// </summary>
-public enum EnumerationExceptionHandling
+public enum ErroredEnumerationContinuation
 {
     /// <summary>
     /// Throw an exception when an error occurs.

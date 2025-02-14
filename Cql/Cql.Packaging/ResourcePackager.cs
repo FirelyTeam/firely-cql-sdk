@@ -34,16 +34,16 @@ internal class ResourcePackager(TypeResolver typeResolver)
         Func<string, SourceArtefacts> inputsById,
         string? resourceCanonicalRootUrl = null,
         SysDateTime? overrideDate = null,
-        EnumerateExceptionHandler<ElmLibrary>? exceptionHandler = null,
-        Action<ElmLibrary>? prepackageLibraryHandler = null)
+        EnumerationErrorStrategyBuilder<ElmLibrary>? buildErrorStrategy = null,
+        Action<ElmLibrary>? onNextLibrary = null)
     {
         resourceCanonicalRootUrl ??= string.Empty;
 
-        return librarySet.TrySelect(PackageResource, exceptionHandler);
+        return librarySet.TrySelect(PackageResource, buildErrorStrategy);
 
         (string versionedIdentifier, FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure) PackageResource(ElmLibrary elmLibrary)
         {
-            prepackageLibraryHandler?.Invoke(elmLibrary);
+            onNextLibrary?.Invoke(elmLibrary);
 
             var versionedIdentifier = elmLibrary.GetVersionedIdentifier()!;
             var localOverrideDate = overrideDate ?? SysDateTime.Now;

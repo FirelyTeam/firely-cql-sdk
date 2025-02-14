@@ -11,7 +11,7 @@ public static partial class CqlToolkitExtensions
     public static CqlToolkit SetExceptionHandlingToIgnore(this CqlToolkit cqlToolkit, bool stopAfterFirstException = false) =>
         cqlToolkit.Reconfigure(o => o with
         {
-            EnumerationExceptionHandling = stopAfterFirstException ? EnumerationExceptionHandling.Break : EnumerationExceptionHandling.Continue
+            ErroredEnumerationContinuation = stopAfterFirstException ? ErroredEnumerationContinuation.Break : ErroredEnumerationContinuation.Continue
         });
 
     public static IEnumerable<(
@@ -24,7 +24,7 @@ public static partial class CqlToolkitExtensions
     public static IEnumerable<TR> GetCompletedCqlToElmTranslations<TR>(
         this CqlToolkit cqlToolkit,
         Func<(CqlVersionedLibraryIdentifier versionedLibraryIdentifier, CqlLibraryString cqlLibraryString, ElmLibrary elmLibrary), TR> selector) =>
-        cqlToolkit.CqlToolkitConversions
+        cqlToolkit.Conversions
             .Where(kv => kv.Value.OutElmLibrary is not null)
             .Select(kv => selector((kv.Key, kv.Value.InCqlLibraryString, kv.Value.OutElmLibrary!)));
 }

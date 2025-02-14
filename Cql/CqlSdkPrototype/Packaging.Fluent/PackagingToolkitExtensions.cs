@@ -10,9 +10,9 @@ public static partial class PackagingToolkitExtensions
     public static PackagingToolkit SetExceptionHandlingToIgnore(this PackagingToolkit packagingToolkit, bool stopAfterFirstException = false) =>
         packagingToolkit.Reconfigure(o => o with
         {
-            EnumerationExceptionHandling = stopAfterFirstException
-                                                    ? EnumerationExceptionHandling.Break
-                                                    : EnumerationExceptionHandling.Continue
+            ErroredEnumerationContinuation = stopAfterFirstException
+                                                    ? ErroredEnumerationContinuation.Break
+                                                    : ErroredEnumerationContinuation.Continue
         });
 
 
@@ -21,12 +21,12 @@ public static partial class PackagingToolkitExtensions
         CqlToolkit cqlToolkit,
         ElmToolkit elmToolkit)
     {
-        var cqlToElmTranslations = cqlToolkit.CqlToolkitConversions.Values.Select(o => o.InCqlLibraryString);
+        var cqlToElmTranslations = cqlToolkit.Conversions.Values.Select(o => o.InCqlLibraryString);
         var completedElmToAssemblyCompilations = elmToolkit.GetCompletedElmToAssemblyCompilations();
         var inputs =
             cqlToElmTranslations
                 .Join(completedElmToAssemblyCompilations,
-                      l => l.VersionedLibraryIdentifier, r => r.versionedLibraryIdentifier,
+                      l => l.LibraryIdentifier, r => r.versionedLibraryIdentifier,
                       (l, r) => new FhirResourcePackagingSources(l, r.elmLibrary, r.csharpSourceCode, r.assemblyBinary));
         return packagingToolkit.AddPackagingInputs(inputs);
     }

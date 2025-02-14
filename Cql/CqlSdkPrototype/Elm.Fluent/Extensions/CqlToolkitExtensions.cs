@@ -8,7 +8,7 @@ public static class CqlToolkitExtensions
         this CqlToolkit cqlToolkit,
         Func<ElmToAssemblyCompilerConfig, ElmToAssemblyCompilerConfig>? configure = null)
     {
-        var config = new ElmToAssemblyCompilerConfig(EnumerationExceptionHandling: cqlToolkit.Config.EnumerationExceptionHandling);
+        var config = new ElmToAssemblyCompilerConfig(ErroredEnumerationContinuation: cqlToolkit.Config.ErroredEnumerationContinuation);
         if (configure is not null) config = configure(config);
         var elmToolkit = new ElmToolkit(cqlToolkit.LoggerFactory, config).AddElmFromFluentCqlToolkit(cqlToolkit);
         return elmToolkit;
@@ -17,7 +17,7 @@ public static class CqlToolkitExtensions
     public static ElmToolkit CompileCqlToAssemblies(
         this CqlToolkit cqlToolkit) =>
         cqlToolkit
-            .TranslateCqlToElm()
+            .ConvertCqlToElm()
             .ToFluentElmToolkit()
             .CompileElmToAssemblies();
 }
