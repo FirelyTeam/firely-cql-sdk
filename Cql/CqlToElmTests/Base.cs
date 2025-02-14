@@ -7,7 +7,6 @@ using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Model;
-using CqlSdkPrototype.Cql.Fluent;
 using CqlSdkPrototype.Elm.Fluent;
 using CqlSdkPrototype.Elm.Fluent.Extensions;
 using CqlSdkPrototype.Invocation.Extensions;
@@ -207,7 +206,7 @@ namespace Hl7.Cql.CqlToElm.Test
             bool AllowNullIntervals = false) =>
             new(
                 LoggerFactory,
-                new CqlToElmTranslatorConfig(
+                new CqlToolkitConfig(
                     EnumerationExceptionHandling: EnumerationExceptionHandling.Throw,
                     Models: Models ?? [CqlModel.ElmR1, CqlModel.Fhir401],
                     ModelInfos: ModelInfos,

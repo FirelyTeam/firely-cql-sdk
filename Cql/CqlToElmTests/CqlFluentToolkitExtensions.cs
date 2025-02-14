@@ -1,5 +1,5 @@
-﻿using CqlSdkPrototype.Cql.Fluent;
-using CqlSdkPrototype.Cql.Fluent.Extensions;
+﻿using CqlSdkPrototype.Cql;
+using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
@@ -44,8 +44,8 @@ internal static class FluentCqlToolkitExtensions
         var library = cqlToolkit
                       .AddCqlLibraryString(cqlLibraryString)
                       .TranslateCqlToElm()
-                      .CqlToElmTranslations[cqlLibraryString.VersionedLibraryIdentifier]
-                      .ElmLibrary!;
+                      .CqlToolkitConversions[cqlLibraryString.VersionedLibraryIdentifier]
+                      .OutElmLibrary!;
 
         if (expectedErrors.Any())
             library.ShouldReportError(expectedErrors);

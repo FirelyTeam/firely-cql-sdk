@@ -6,8 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using CqlSdkPrototype.Cql.Fluent;
-using CqlSdkPrototype.Cql.Fluent.Extensions;
+using CqlSdkPrototype.Cql;
+using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm.Fluent;
 using CqlSdkPrototype.Elm.Fluent.Extensions;
 using CqlSdkPrototype.Infrastructure;
@@ -54,7 +54,7 @@ internal class PackagerCli(
                 .SetExceptionHandlingToIgnore()
                 .AddCqlLibrariesFromDirectory(opt.CqlInDirectory);
 
-            if (!cqlToolkit.CqlToElmTranslations.Any())
+            if (!cqlToolkit.CqlToolkitConversions.Any())
                 logger.LogWarning("Exiting: No CQL libraries were found in the CQL input directory.");
 
             ElmToolkit elmToolkit;

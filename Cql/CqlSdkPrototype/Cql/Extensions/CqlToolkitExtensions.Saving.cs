@@ -1,6 +1,6 @@
 ﻿using CqlSdkPrototype.Infrastructure;
 
-namespace CqlSdkPrototype.Cql.Fluent.Extensions;
+namespace CqlSdkPrototype.Cql.Extensions;
 
 public static partial class CqlToolkitExtensions
 {

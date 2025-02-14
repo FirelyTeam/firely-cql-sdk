@@ -7,9 +7,9 @@ using ExpressionVisitor = Hl7.Cql.CqlToElm.Visitors.ExpressionVisitor;
 namespace CqlSdkPrototype.Cql.Internal;
 
 /// <summary>
-/// Services for translating CQL to ELM used by the <seealso cref="CqlToElmTranslator"/>.
+/// Services for translating CQL to ELM used by the <seealso cref="CqlToolkit"/>.
 /// </summary>
-internal record CqlToElmTranslatorServices(
+internal record CqlToolkitServices(
     ILoggerFactory LoggerFactory,
     ServiceProvider ServiceProvider,
     CqlToElmConverter CqlToElmConverter,
@@ -22,16 +22,16 @@ internal record CqlToElmTranslatorServices(
         (CqlModel.Fhir401, Models.Fhir401)];
 
     /// <summary>
-    /// Creates an instance of <see cref="CqlToElmTranslatorServices"/>.
+    /// Creates an instance of <see cref="CqlToolkitServices"/>.
     /// </summary>
     /// <param name="loggerFactory">The logger factory.</param>
     /// <param name="config">The configuration for the translator.</param>
     /// <param name="translations">The translation dictionary.</param>
-    /// <returns>A new instance of <see cref="CqlToElmTranslatorServices"/>.</returns>
-    public static CqlToElmTranslatorServices Create(
+    /// <returns>A new instance of <see cref="CqlToolkitServices"/>.</returns>
+    public static CqlToolkitServices Create(
         ILoggerFactory loggerFactory,
-        CqlToElmTranslatorConfig config,
-        CqlToElmTranslationDictionary translations)
+        CqlToolkitConfig config,
+        CqlToolkitConversionDictionary translations)
     {
         var translationsBuilder = translations.ToBuilder();
         var libraryBuilderProvider = new LibraryBuilderProvider(translationsBuilder);
@@ -42,7 +42,7 @@ internal record CqlToElmTranslatorServices(
         var serviceProvider = services.BuildServiceProvider(validateScopes: true);
 
         var serviceScope = serviceProvider.CreateScope();
-        var cqlToElmTranslatorServices = new CqlToElmTranslatorServices(
+        var cqlToElmTranslatorServices = new CqlToolkitServices(
             loggerFactory,
             serviceProvider,
             Get<CqlToElmConverter>(serviceProvider),
@@ -64,7 +64,7 @@ internal record CqlToElmTranslatorServices(
     /// <param name="libraryProvider">The library provider.</param>
     private static void AddCqlServices(
         IServiceCollection serviceCollection,
-        CqlToElmTranslatorConfig config,
+        CqlToolkitConfig config,
         ILibraryProvider libraryProvider)
     {
         SuppressCqlDebugAssertions();
@@ -116,7 +116,7 @@ internal record CqlToElmTranslatorServices(
     /// <summary>
     /// Gets the logger for the CQL to ELM translator.
     /// </summary>
-    public ILogger<CqlToElmTranslator> Logger { get; } = LoggerFactory.CreateLogger<CqlToElmTranslator>();
+    public ILogger<CqlToolkit> Logger { get; } = LoggerFactory.CreateLogger<CqlToolkit>();
     /// <summary>
     /// Gets the CQL to ELM converter.
     /// </summary>

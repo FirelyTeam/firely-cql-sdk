@@ -1,7 +1,7 @@
 ﻿using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Cql.Fluent.Extensions;
+namespace CqlSdkPrototype.Cql.Extensions;
 
 public static partial class CqlToolkitExtensions
 {
@@ -24,7 +24,7 @@ public static partial class CqlToolkitExtensions
     public static IEnumerable<TR> GetCompletedCqlToElmTranslations<TR>(
         this CqlToolkit cqlToolkit,
         Func<(CqlVersionedLibraryIdentifier versionedLibraryIdentifier, CqlLibraryString cqlLibraryString, ElmLibrary elmLibrary), TR> selector) =>
-        cqlToolkit.CqlToElmTranslations
-            .Where(kv => kv.Value.ElmLibrary is not null)
-            .Select(kv => selector((kv.Key, kv.Value.CqlLibraryString, kv.Value.ElmLibrary!)));
+        cqlToolkit.CqlToolkitConversions
+            .Where(kv => kv.Value.OutElmLibrary is not null)
+            .Select(kv => selector((kv.Key, kv.Value.InCqlLibraryString, kv.Value.OutElmLibrary!)));
 }

@@ -1,4 +1,4 @@
-using CqlSdkPrototype.Cql.Fluent.Extensions;
+using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm.Fluent.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation.Fluent.Extensions;

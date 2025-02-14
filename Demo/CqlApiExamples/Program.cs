@@ -1,8 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text;
 using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Cql.Fluent;
-using CqlSdkPrototype.Cql.Fluent.Extensions;
+using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm.Fluent;
 using CqlSdkPrototype.Elm.Fluent.Extensions;
 using CqlSdkPrototype.Infrastructure;
@@ -43,7 +42,7 @@ internal static class Program
     private static void PackageFromExamplesFolder(ILoggerFactory loggerFactory)
     {
         // Create fluent cql toolkit
-        var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
+        var cqlToElmProcessorSettings = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
 
         // "Directories" is not a part of the API, but a helper class for this example
@@ -63,7 +62,7 @@ internal static class Program
         ILoggerFactory loggerFactory)
     {
         // Create fluent cql toolkit
-        var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
+        var cqlToElmProcessorSettings = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
 
 
@@ -97,7 +96,7 @@ internal static class Program
         var dirs = Directories.Create("Tests");
 
         // Create fluent cql toolkit
-        var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
+        var cqlToElmProcessorSettings = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
 
         // We can write extensions to make it even easier to change exception handling
@@ -135,7 +134,7 @@ internal static class Program
         dirs.GeneratedDirectory.Delete(recursive: true);
 
         // Create fluent cql toolkit
-        var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
+        var cqlToElmProcessorSettings = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         CqlToolkit cqlToolkit =
             new CqlToolkit(loggerFactory, cqlToElmProcessorSettings)
                 .SetExceptionHandlingToIgnore();
@@ -179,7 +178,7 @@ internal static class Program
         ILoggerFactory loggerFactory)
     {
         // Create fluent cql toolkit
-        var cqlToElmProcessorSettings = new CqlToElmTranslatorConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
+        var cqlToElmProcessorSettings = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
 
         // Add CQL libraries from a directory and process them to ELM, then save the ELM files to a directory

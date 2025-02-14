@@ -1,5 +1,5 @@
-﻿using CqlSdkPrototype.Cql.Fluent;
-using CqlSdkPrototype.Cql.Fluent.Extensions;
+﻿using CqlSdkPrototype.Cql;
+using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 

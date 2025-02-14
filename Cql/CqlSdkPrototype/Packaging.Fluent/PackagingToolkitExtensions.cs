@@ -1,4 +1,4 @@
-﻿using CqlSdkPrototype.Cql.Fluent;
+﻿using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm.Fluent;
 using CqlSdkPrototype.Elm.Fluent.Extensions;
 using Hl7.Cql.Runtime;
@@ -21,7 +21,7 @@ public static partial class PackagingToolkitExtensions
         CqlToolkit cqlToolkit,
         ElmToolkit elmToolkit)
     {
-        var cqlToElmTranslations = cqlToolkit.CqlToElmTranslations.Values.Select(o => o.CqlLibraryString);
+        var cqlToElmTranslations = cqlToolkit.CqlToolkitConversions.Values.Select(o => o.InCqlLibraryString);
         var completedElmToAssemblyCompilations = elmToolkit.GetCompletedElmToAssemblyCompilations();
         var inputs =
             cqlToElmTranslations

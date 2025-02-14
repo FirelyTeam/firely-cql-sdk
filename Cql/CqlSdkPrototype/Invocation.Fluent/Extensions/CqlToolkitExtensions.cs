@@ -1,4 +1,4 @@
-﻿using CqlSdkPrototype.Cql.Fluent;
+﻿using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Fluent.Extensions;
 

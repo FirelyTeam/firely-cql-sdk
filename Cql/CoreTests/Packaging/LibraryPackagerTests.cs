@@ -1,14 +1,6 @@
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using CqlSdkPrototype.Cql.Fluent;
-using CqlSdkPrototype.Packaging;
-using CqlSdkPrototype.Packaging.Fluent;
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Hl7.Fhir.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Library = Hl7.Cql.Elm.Library;
 
 namespace CoreTests.Packaging;

@@ -7,7 +7,7 @@ namespace CqlSdkPrototype.Cql;
 /// <summary>
 /// The settings used to configure the CQL to ELM processor.
 /// </summary>
-public sealed record CqlToElmTranslatorConfig(
+public sealed record CqlToolkitConfig(
     EnumerationExceptionHandling EnumerationExceptionHandling = default,
     ImmutableHashSet<CqlModel>? Models = null,
     ImmutableHashSet<ModelInfo>? ModelInfos = null,
@@ -18,7 +18,7 @@ public sealed record CqlToElmTranslatorConfig(
     bool EnableIntervalDemotion = false,
     bool AllowNullIntervals = false)
 {
-    public static CqlToElmTranslatorConfig Default { get; } = new();
+    public static CqlToolkitConfig Default { get; } = new();
 
     /// <summary>
     /// The model information to use when translating CQL to ELM.

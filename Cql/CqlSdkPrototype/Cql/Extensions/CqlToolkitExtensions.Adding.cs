@@ -1,7 +1,7 @@
 ﻿using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 
-namespace CqlSdkPrototype.Cql.Fluent.Extensions;
+namespace CqlSdkPrototype.Cql.Extensions;
 
 public static partial class CqlToolkitExtensions
 {
