@@ -88,8 +88,7 @@ internal class LibrarySetCSharpCodeGenerator
     public IEnumerable<(Library library, string cSharp)> GenerateEachLibraryToCSharp(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> definitions,
-        EnumerateExceptionHandler<Library>? exceptionHandler = null,
-        Action<Library>? preCSharpGenerateHandler = null)
+        EnumerateExceptionHandler<Library>? exceptionHandler = null)
     {
         var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions);
         return librarySetWriter.GenerateEachLibraryToCSharp(exceptionHandler);
