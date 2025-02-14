@@ -1,4 +1,4 @@
-﻿namespace CqlSdkPrototype.Packaging.Fluent;
+﻿namespace CqlSdkPrototype.Packaging;
 
 /// <summary>
 /// Provides a fluent interface for working with the FHIR resource packager.

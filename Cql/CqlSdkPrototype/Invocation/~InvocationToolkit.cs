@@ -1,6 +1,6 @@
 ﻿using Hl7.Cql.CodeGeneration.NET;
 
-namespace CqlSdkPrototype.Invocation.Fluent;
+namespace CqlSdkPrototype.Invocation;
 
 /// <summary>
 /// Provides a fluent interface for building and configuring a <see cref="LibrarySetInvoker"/>.
@@ -32,7 +32,7 @@ public sealed class InvocationToolkit
     }
 
     /// <summary>
-    /// Gets the logger factory used by the exceptions.
+    /// Gets the logger factory used by the extensions.
     /// </summary>
     public ILoggerFactory LoggerFactory => librarySetInvokerBuilder.LoggerFactory;
 

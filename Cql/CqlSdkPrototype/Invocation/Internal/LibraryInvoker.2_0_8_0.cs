@@ -50,7 +50,7 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
     }
 
     public static bool TryCreate(
-        LibrarySetInvokerBuilder builder,
+        InvocationToolkit builder,
         Type libraryType,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {

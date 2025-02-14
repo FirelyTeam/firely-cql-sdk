@@ -1,5 +1,4 @@
 ﻿using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Packaging.Fluent;
 using CqlSdkPrototype.Packaging.Internal;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler;

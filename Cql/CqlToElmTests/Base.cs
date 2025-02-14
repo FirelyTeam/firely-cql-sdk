@@ -7,10 +7,9 @@ using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Model;
-using CqlSdkPrototype.Invocation.Extensions;
-using CqlSdkPrototype.Invocation.Fluent;
-using CqlSdkPrototype.Invocation.Fluent.Extensions;
 using CqlSdkPrototype.Elm.Extensions;
+using CqlSdkPrototype.Invocation;
+using CqlSdkPrototype.Invocation.Extensions;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -57,7 +56,7 @@ namespace Hl7.Cql.CqlToElm.Test
             using var librarySetInvoker =
                 new InvocationToolkit()
                     .AddAssemblyBinaries(AssemblyBinary.Default with { AssemblyBytes = assemblyBytes })
-                    .ToLibrarySetInvoker();
+                    .CreateLibrarySetInvoker();
 
             var result = librarySetInvoker
                 .GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);

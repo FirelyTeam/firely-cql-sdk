@@ -7,8 +7,8 @@ using CqlSdkPrototype.Elm.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation;
 using CqlSdkPrototype.Invocation.Extensions;
-using CqlSdkPrototype.Invocation.Fluent.Extensions;
-using CqlSdkPrototype.Packaging.Fluent;
+using CqlSdkPrototype.Packaging;
+using CqlSdkPrototype.Packaging.Extensions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
 using Microsoft.Extensions.DependencyInjection;
@@ -266,7 +266,7 @@ internal static class Program
 
         // Setup RuntimeApi
         var invocationToolkit = elmToolkit.ToFluentInvocationToolkit();
-        using var librarySetInvoker = invocationToolkit.ToLibrarySetInvoker(); // NOTE: 'librarySetInvoker' is a disposable object!
+        using var librarySetInvoker = invocationToolkit.CreateLibrarySetInvoker(); // NOTE: 'librarySetInvoker' is a disposable object!
 
         // Execute CQL
         var threePlusTwo = librarySetInvoker.GetLibraryDefinitionResult(

@@ -1,6 +1,6 @@
 ﻿using Hl7.Cql.CodeGeneration.NET;
 
-namespace CqlSdkPrototype.Invocation.Fluent.Extensions;
+namespace CqlSdkPrototype.Invocation.Extensions;
 
 public static class InvocationToolkitExtensions
 {

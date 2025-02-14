@@ -2,7 +2,7 @@
 using CqlSdkPrototype.Elm.Extensions;
 using Hl7.Cql.CodeGeneration.NET;
 
-namespace CqlSdkPrototype.Invocation.Fluent.Extensions;
+namespace CqlSdkPrototype.Invocation.Extensions;
 
 public static class ElmToolkitExtensions
 {
@@ -30,6 +30,6 @@ public static class ElmToolkitExtensions
         return elmToolkit
                .ConvertElmToAssemblies()
                .ToFluentInvocationToolkit(/*configure*/)
-               .ToLibrarySetInvoker(name);
+               .CreateLibrarySetInvoker(name);
     }
 }

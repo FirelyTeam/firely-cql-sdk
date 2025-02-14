@@ -7,7 +7,6 @@
  */
 
 using CqlSdkPrototype.Invocation;
-using CqlSdkPrototype.Invocation.Fluent;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
@@ -95,7 +94,7 @@ internal static class LibraryExtensions
 
         return new InvocationToolkit()
                          .AddAssemblyBinaries(assemblyBinaries)
-                         .ToLibrarySetInvoker();
+                         .CreateLibrarySetInvoker();
     }
 
     private static Dictionary<string, List<string>> GetValueSets(Type libraryType)

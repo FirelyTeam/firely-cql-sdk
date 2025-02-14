@@ -1,8 +1,7 @@
 ﻿#nullable enable
 using CqlSdkPrototype.Infrastructure;
+using CqlSdkPrototype.Invocation;
 using CqlSdkPrototype.Invocation.Extensions;
-using CqlSdkPrototype.Invocation.Fluent;
-using CqlSdkPrototype.Invocation.Fluent.Extensions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
@@ -112,7 +111,7 @@ public class CqlTupleTests
         var ctx = FhirCqlContext.ForBundle();
         using var librarySetInvoker = new InvocationToolkit()
                                     .AddAssemblyBinaries(AssemblyBinary.Default.LoadFromFile(new FileInfo(filePath)))
-                                    .ToLibrarySetInvoker();
+                                    .CreateLibrarySetInvoker();
 
         // Act
         var result = librarySetInvoker

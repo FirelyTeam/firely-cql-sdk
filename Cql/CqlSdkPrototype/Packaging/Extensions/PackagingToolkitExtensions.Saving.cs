@@ -4,7 +4,7 @@ using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Packaging;
 
-namespace CqlSdkPrototype.Packaging.Fluent;
+namespace CqlSdkPrototype.Packaging.Extensions;
 
 public static partial class PackagingToolkitExtensions
 {

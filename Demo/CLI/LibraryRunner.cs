@@ -1,6 +1,6 @@
 ﻿using CLI.Helpers;
 using CqlSdkPrototype.Invocation;
-using CqlSdkPrototype.Invocation.Fluent;
+using CqlSdkPrototype.Invocation.Extensions;
 using Dumpify;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
@@ -9,7 +9,6 @@ using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Hl7.Cql.CodeGeneration.NET;
-using CqlSdkPrototype.Invocation.Fluent.Extensions;
 
 namespace CLI
 {
@@ -35,7 +34,7 @@ namespace CLI
             var assemblyBinary = AssemblyBinary.Default.LoadFromFile(new FileInfo(_opts.AssemblyPath));
             using var librarySetInvoker = new InvocationToolkit()
                       .AddAssemblyBinaries(assemblyBinary)
-                      .ToLibrarySetInvoker();
+                      .CreateLibrarySetInvoker();
             RunShared(_opts, librarySetInvoker);
         }
 

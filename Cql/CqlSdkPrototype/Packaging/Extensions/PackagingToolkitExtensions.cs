@@ -3,7 +3,7 @@ using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensions;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Packaging.Fluent;
+namespace CqlSdkPrototype.Packaging.Extensions;
 
 public static partial class PackagingToolkitExtensions
 {

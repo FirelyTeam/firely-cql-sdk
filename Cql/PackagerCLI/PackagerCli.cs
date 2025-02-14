@@ -11,7 +11,8 @@ using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensions;
 using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Packaging.Fluent;
+using CqlSdkPrototype.Packaging;
+using CqlSdkPrototype.Packaging.Extensions;
 using Hl7.Cql.Packaging;
 
 namespace Hl7.Cql.Packager;

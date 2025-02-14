@@ -16,6 +16,10 @@
     <None Remove="generated\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Invocation\~InvocationToolkit.cs" />
+  </ItemGroup>
+
 	<ItemGroup>
 		<ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
 		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />

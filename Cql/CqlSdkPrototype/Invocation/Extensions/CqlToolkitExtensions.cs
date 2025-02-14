@@ -2,7 +2,7 @@
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensions;
 
-namespace CqlSdkPrototype.Invocation.Fluent.Extensions;
+namespace CqlSdkPrototype.Invocation.Extensions;
 
 public static class CqlToolkitExtensions
 {

@@ -3,7 +3,6 @@ using Hl7.Cql.Fhir;
 using Hl7.Fhir.Model;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation.Extensions;
-using CqlSdkPrototype.Invocation.Fluent.Extensions;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
