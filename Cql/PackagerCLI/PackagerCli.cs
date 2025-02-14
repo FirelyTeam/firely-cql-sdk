@@ -81,12 +81,12 @@ internal class PackagerCli(
 
             if (opt.CSharpOutDirectory is { } dirOutCS)
                 elmToolkit
-                    .CompileElmToAssemblies()
+                    .ConvertElmToAssemblies()
                     .SaveCSharpFilesToDirectory(dirOutCS, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
 
             if (opt.AssemblyOutDirectory is { } dirOutDll)
                 elmToolkit
-                    .CompileElmToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
+                    .ConvertElmToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
                     .SaveAssemblyBinariesToDirectory(dirOutDll, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"));
 
             if (opt is

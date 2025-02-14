@@ -116,7 +116,7 @@ public sealed class ElmToolkit
     /// <summary>
     /// Compiles the ELM libraries into .NET assemblies.
     /// </summary>
-    public ElmToolkit CompileElmToAssemblies()
+    public ElmToolkit ConvertElmToAssemblies()
     {
         var entries = _conversions;
         if (entries.Values.All(predicate: lc => lc is { OutAssemblyBinary: not null }))

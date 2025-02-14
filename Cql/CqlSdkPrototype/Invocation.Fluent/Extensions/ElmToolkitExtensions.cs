@@ -28,7 +28,7 @@ public static class ElmToolkitExtensions
         Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configure = null*/)
     {
         return elmToolkit
-               .CompileElmToAssemblies()
+               .ConvertElmToAssemblies()
                .ToFluentInvocationToolkit(/*configure*/)
                .ToLibrarySetInvoker(name);
     }

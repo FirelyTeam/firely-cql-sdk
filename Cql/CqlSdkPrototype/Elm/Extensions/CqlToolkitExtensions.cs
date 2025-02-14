@@ -19,5 +19,5 @@ public static class CqlToolkitExtensions
         cqlToolkit
             .ConvertCqlToElm()
             .ToFluentElmToolkit()
-            .CompileElmToAssemblies();
+            .ConvertElmToAssemblies();
 }
