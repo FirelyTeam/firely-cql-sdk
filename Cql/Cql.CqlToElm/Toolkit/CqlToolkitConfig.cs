@@ -1,8 +1,7 @@
-﻿using Hl7.Cql.CqlToElm;
-using Hl7.Cql.Model;
+﻿using Hl7.Cql.Model;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Cql;
+namespace Hl7.Cql.CqlToElm.Toolkit;
 
 /// <summary>
 /// The settings used to configure the CQL to ELM processor.
@@ -18,6 +17,9 @@ public sealed record CqlToolkitConfig(
     bool EnableIntervalDemotion = false,
     bool AllowNullIntervals = false)
 {
+    /// <summary>
+    /// The default configuration.
+    /// </summary>
     public static CqlToolkitConfig Default { get; } = new();
 
     /// <summary>

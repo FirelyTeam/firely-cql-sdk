@@ -3,13 +3,12 @@ using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
-using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
-using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Model;
 using CqlSdkPrototype.Elm.Extensions;
 using CqlSdkPrototype.Invocation;
 using CqlSdkPrototype.Invocation.Extensions;
+using Hl7.Cql.CqlToElm.Toolkit;
 
 namespace Hl7.Cql.CqlToElm.Test
 {

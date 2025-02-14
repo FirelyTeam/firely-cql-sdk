@@ -1,4 +1,5 @@
-using CqlSdkPrototype.Infrastructure;
+using Hl7.Cql.Runtime;
+using CqlLibraryString = Hl7.Cql.Runtime.CqlLibraryString;
 
 namespace CoreTests.Infrastructure
 {

@@ -1,7 +1,7 @@
 ﻿using System.CodeDom.Compiler;
-using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation.Internal;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Invocation;
 

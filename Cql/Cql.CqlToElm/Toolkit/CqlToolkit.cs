@@ -1,9 +1,9 @@
-﻿using CqlSdkPrototype.Cql.Internal;
-using CqlSdkPrototype.Infrastructure;
-using Hl7.Cql.Abstractions;
+﻿using Hl7.Cql.Abstractions;
+using Hl7.Cql.CqlToElm.Toolkit.Internal;
 using Hl7.Cql.Runtime;
+using CqlLibraryString = Hl7.Cql.Runtime.CqlLibraryString;
 
-namespace CqlSdkPrototype.Cql;
+namespace Hl7.Cql.CqlToElm.Toolkit;
 
 /// <summary>
 /// Translates CQL libraries to ELM libraries.

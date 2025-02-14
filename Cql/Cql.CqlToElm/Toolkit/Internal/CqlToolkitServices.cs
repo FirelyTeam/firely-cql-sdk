@@ -1,11 +1,10 @@
-﻿using CqlSdkPrototype.Internal;
-using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.CqlToElm;
+﻿using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Model;
+using Hl7.Cql.Runtime.Hosting;
 using ExpressionVisitor = Hl7.Cql.CqlToElm.Visitors.ExpressionVisitor;
 
-namespace CqlSdkPrototype.Cql.Internal;
+namespace Hl7.Cql.CqlToElm.Toolkit.Internal;
 
 /// <summary>
 /// Services for translating CQL to ELM used by the <seealso cref="CqlToolkit"/>.
@@ -85,9 +84,9 @@ internal record CqlToolkitServices(
 
         Action<IModelProvider> ConfigureModelProvider()
         {
-            var modelInfos = AllMappedModelsInOrder
-                             .SelectWhereNotNull(t => config.Models.Contains(t.CqlModel) ? t.ModelInfo : null)
-                             .Concat(config.ModelInfos);
+            var modelInfos =
+                AllMappedModelsInOrder.SelectWhereNotNull(t => config.Models.Contains(t.CqlModel) ? t.ModelInfo : null)
+                                      .Concat(config.ModelInfos);
             return modelProvider =>
             {
                 foreach (var modelInfo in modelInfos)

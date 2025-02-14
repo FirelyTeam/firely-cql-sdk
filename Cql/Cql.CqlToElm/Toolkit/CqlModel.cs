@@ -1,6 +1,6 @@
 ﻿using Hl7.Cql.Model;
 
-namespace CqlSdkPrototype.Cql;
+namespace Hl7.Cql.CqlToElm.Toolkit;
 
 /// <summary>
 /// Represents the model of CQL to use.

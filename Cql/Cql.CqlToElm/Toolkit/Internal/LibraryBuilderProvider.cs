@@ -1,7 +1,6 @@
-﻿using CqlSdkPrototype.Infrastructure;
-using Hl7.Cql.CqlToElm;
+﻿using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Cql.Internal;
+namespace Hl7.Cql.CqlToElm.Toolkit.Internal;
 
 /// <summary>
 /// Provides the implementation for <seealso cref="ILibraryProvider"/>

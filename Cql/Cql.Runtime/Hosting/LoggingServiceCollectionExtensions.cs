@@ -1,4 +1,6 @@
-﻿namespace CqlSdkPrototype.Internal;
+﻿using Microsoft.Extensions.DependencyInjection.Extensions;
+
+namespace Hl7.Cql.Runtime.Hosting;
 
 internal static class LoggingServiceCollectionExtensions
 {

@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
-using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Packaging;
+using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Packaging.Extensions;
 
