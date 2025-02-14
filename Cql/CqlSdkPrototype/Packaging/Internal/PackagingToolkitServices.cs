@@ -8,13 +8,13 @@ using Hl7.Fhir.Introspection;
 
 namespace CqlSdkPrototype.Packaging.Internal;
 
-internal readonly record struct FhirResourcePackagerServices(
+internal readonly record struct PackagingToolkitServices(
     ServiceProvider ServiceProvider,
-    ILogger<FhirResourcePackager> Logger,
+    ILogger<PackagingToolkit> Logger,
     ResourcePackager ResourcePackager,
     JsonSerializerOptions JsonSerializerOptions)
 {
-    public static FhirResourcePackagerServices Create(ILoggerFactory loggerFactory)
+    public static PackagingToolkitServices Create(ILoggerFactory loggerFactory)
     {
         var services = new ServiceCollection();
         services.AddExternalLogging(loggerFactory);
@@ -24,12 +24,9 @@ internal readonly record struct FhirResourcePackagerServices(
         services.TryAddSingleton<ResourcePackager>();
         services.TryAddSingleton((IServiceProvider _, ModelInspector modelInspector) => new JsonSerializerOptions().ForFhir(modelInspector));
         var serviceProvider = services.BuildServiceProvider();
-        return ActivatorUtilities.CreateInstance<FhirResourcePackagerServices>(serviceProvider, serviceProvider);
+        return ActivatorUtilities.CreateInstance<PackagingToolkitServices>(serviceProvider, serviceProvider);
 
     }
-
-//    private static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector).Pretty();
-
 }
 
 file static class Extensions

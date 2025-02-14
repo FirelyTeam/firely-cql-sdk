@@ -1,5 +1,6 @@
 ﻿using CqlSdkPrototype.Elm.Internal;
 using CqlSdkPrototype.Infrastructure;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
@@ -68,7 +69,7 @@ public sealed class ElmToolkit
     /// </summary>
     /// <param name="reconfigure">A function that takes the current configuration and returns a new configuration.</param>
     public ElmToolkit Reconfigure(
-        Func<ElmToolkitConfig, ElmToolkitConfig> reconfigure)
+        Transformer<ElmToolkitConfig> reconfigure)
     {
         var config = reconfigure(Config);
 

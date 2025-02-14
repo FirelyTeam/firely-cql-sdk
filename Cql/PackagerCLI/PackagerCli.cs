@@ -99,7 +99,7 @@ internal class PackagerCli(
             {
                 packagingToolkit
                     .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
-                    .PackageFhirResources(canonicalRootUrl, overrideDate)
+                    .ConvertToFhirResources(canonicalRootUrl, overrideDate)
                     .SaveFhirResources(dirOutFhir, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
             }
 

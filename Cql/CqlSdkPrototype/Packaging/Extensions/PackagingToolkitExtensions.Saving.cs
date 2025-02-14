@@ -19,7 +19,7 @@ public static partial class PackagingToolkitExtensions
         var jsonSerializerOptions = packagingToolkit.ServiceProvider.GetRequiredService<JsonSerializerOptions>();
 
         foreach (var resource in packagingToolkit
-                                              .GetCompletedFhirResources(t => (FhirResource?[])[t.fhirLibrary, t.fhirMeasure])
+                                              .GetCompletedConversions(t => (FhirResource?[])[t.fhirLibrary, t.fhirMeasure])
                                               .SelectMany(t => t)
                                               .WhereNotNull())
         {
@@ -36,15 +36,15 @@ public static partial class PackagingToolkitExtensions
     public static IEnumerable<(
         CqlVersionedLibraryIdentifier versionedLibraryIdentifier,
         FhirLibrary fhirLibrary,
-        FhirMeasure? fhirMeasure)> GetCompletedFhirResources(
+        FhirMeasure? fhirMeasure)> GetCompletedConversions(
         this PackagingToolkit packagingToolkit) =>
-        packagingToolkit.GetCompletedFhirResources(t => t);
+        packagingToolkit.GetCompletedConversions(t => t);
 
-    public static IEnumerable<TR> GetCompletedFhirResources<TR>(
+    public static IEnumerable<TR> GetCompletedConversions<TR>(
         this PackagingToolkit packagingToolkit,
         Func<(CqlVersionedLibraryIdentifier versionedLibraryIdentifier, FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure), TR> selector) =>
         packagingToolkit
-            .FhirResourcePackagings
+            .Conversions
             .SelectWhere(kv => kv.Value switch
             {
                 { FhirLibrary:null } => (false, default!),

@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Internal\Maybe.cs" />
     <Compile Remove="Invocation\~InvocationToolkit.cs" />
   </ItemGroup>
 

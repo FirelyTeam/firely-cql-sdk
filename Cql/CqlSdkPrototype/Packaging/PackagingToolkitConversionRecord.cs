@@ -2,7 +2,7 @@
 
 namespace CqlSdkPrototype.Packaging;
 
-public readonly record struct FhirResourcePackaging(
+public readonly record struct PackagingToolkitConversionRecord(
     // Sources
     CqlLibraryString CqlLibrary,
     ElmLibrary ElmLibrary,
@@ -13,12 +13,12 @@ public readonly record struct FhirResourcePackaging(
     FhirMeasure? FhirMeasure = null)
 {
     /// <nodoc/>
-    public FhirResourcePackaging(FhirResourcePackagingSources sources) :
+    public PackagingToolkitConversionRecord(PackagingToolkitSourceRecord sourceRecords) :
         this(
-            sources.CqlLibrary,
-            sources.ElmLibrary,
-            sources.CSharpSourceCode,
-            sources.AssemblyBinary) { }
+            sourceRecords.CqlLibrary,
+            sourceRecords.ElmLibrary,
+            sourceRecords.CSharpSourceCode,
+            sourceRecords.AssemblyBinary) { }
 
     public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier => CqlLibrary.LibraryIdentifier;
 }

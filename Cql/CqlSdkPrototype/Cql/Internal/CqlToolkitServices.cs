@@ -1,4 +1,5 @@
 ﻿using CqlSdkPrototype.Internal;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Model;

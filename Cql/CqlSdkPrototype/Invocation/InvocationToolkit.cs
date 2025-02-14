@@ -20,7 +20,7 @@ public sealed class InvocationToolkit
     {
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
-        AssemblyBinaries = AssemblyBinaryHashSet.Empty;
+        _assemblyBinaries = AssemblyBinaryHashSet.Empty;
         _services = LibrarySetInvokerBuilderServices.Create(loggerFactory);
     }
 
@@ -32,9 +32,10 @@ public sealed class InvocationToolkit
     /// <summary>
     /// Gets the set of assembly binaries.
     /// </summary>
-    public AssemblyBinaryHashSet AssemblyBinaries { get; private set; }
+    public AssemblyBinaryReadOnlyHashSet AssemblyBinaries => _assemblyBinaries;
 
     private readonly LibrarySetInvokerBuilderServices _services;
+    private AssemblyBinaryHashSet _assemblyBinaries;
 
     /// <summary>
     /// Sets the assembly binaries.
@@ -43,7 +44,7 @@ public sealed class InvocationToolkit
     private void ReplaceAssemblyBinaries(
         AssemblyBinaryHashSet assemblyBinaries)
     {
-        AssemblyBinaries = assemblyBinaries;
+        _assemblyBinaries = assemblyBinaries;
     }
 
     /// <summary>
@@ -53,7 +54,7 @@ public sealed class InvocationToolkit
     /// <exception cref="InvalidOperationException">Thrown when AssemblyBytes is null.</exception>
     public InvocationToolkit AddAssemblyBinaries(IEnumerable<AssemblyBinary> assemblyBinary)
     {
-        var builder = AssemblyBinaries.ToBuilder();
+        var builder = _assemblyBinaries.ToBuilder();
         var oldCount = builder.Count;
         builder.AddRange(
             assemblyBinary

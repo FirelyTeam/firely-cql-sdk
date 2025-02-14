@@ -3,14 +3,14 @@
 namespace CqlSdkPrototype.Packaging;
 
 #pragma warning disable RS0027
-public record FhirResourcePackagerConfig(
+public record PackagingToolkitConfig(
 #pragma warning restore RS0027
     ErroredEnumerationContinuation ErroredEnumerationContinuation = default)
 {
     /// <summary>
     /// Gets the default configuration settings.
     /// </summary>
-    public static FhirResourcePackagerConfig Default { get; } = new FhirResourcePackagerConfig();
+    public static PackagingToolkitConfig Default { get; } = new PackagingToolkitConfig();
 
     public ErroredEnumerationContinuation ErroredEnumerationContinuation { get; init; } = ErroredEnumerationContinuation;
 }

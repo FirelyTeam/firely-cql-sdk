@@ -1,5 +1,6 @@
 ﻿using CqlSdkPrototype.Cql.Internal;
 using CqlSdkPrototype.Infrastructure;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Cql;
@@ -65,7 +66,7 @@ public sealed class CqlToolkit
     /// </summary>
     /// <param name="reconfigure">A function that takes the current configuration and returns a new configuration.</param>
     public CqlToolkit Reconfigure(
-        Func<CqlToolkitConfig, CqlToolkitConfig> reconfigure)
+        Transformer<CqlToolkitConfig> reconfigure)
     {
         var config = reconfigure(Config);
 
