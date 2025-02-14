@@ -2,8 +2,8 @@
 using System.Text;
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensions;
-using CqlSdkPrototype.Elm.Fluent;
-using CqlSdkPrototype.Elm.Fluent.Extensions;
+using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Elm.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation;
 using CqlSdkPrototype.Invocation.Extensions;

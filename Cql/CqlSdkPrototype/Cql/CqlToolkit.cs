@@ -40,7 +40,7 @@ public sealed class CqlToolkit
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
     /// <summary>
-    /// Gets the configuration settings for the translator.
+    /// Gets the configuration.
     /// </summary>
     public CqlToolkitConfig Config { get; private set; }
 
@@ -120,21 +120,21 @@ public sealed class CqlToolkit
 
         var count =
             _conversions
-                .Select(kv => new CqlToolkitIdentifierConversionPair(kv.Key, kv.Value))
-                .Where(kv => kv.conversionRecord.OutElmLibrary is null)
+                .Values
+                .Where(conversion => conversion.OutElmLibrary is null)
                 .TryForEach(
-                    kv =>
+                    r =>
                     {
-                        if (!_services.LibraryBuilderProvider.TryResolveLibrary(kv.libraryIdentifier, out var libraryBuilder, out var error))
-                            throw new InvalidOperationException($"Could not resolve CQL library {kv.libraryIdentifier}: {error}.");
+                        if (!_services.LibraryBuilderProvider.TryResolveLibrary(r.LibraryIdentifier, out var libraryBuilder, out var error))
+                            throw new InvalidOperationException($"Could not resolve CQL library {r.LibraryIdentifier}: {error}.");
 
                         var elmLibrary = libraryBuilder.Build();
-                        var newConversionRecord = kv.conversionRecord with { OutElmLibrary = elmLibrary };
-                        conversions[kv.libraryIdentifier] = newConversionRecord;
+                        var newConversionRecord = r with { OutElmLibrary = elmLibrary };
+                        conversions[r.LibraryIdentifier] = newConversionRecord;
                     },
                     errorStrategy=> errorStrategy
                         .SetContinuation(ErroredEnumerationContinuation.Continue)
-                        .AddLoggerExceptionHandler(_services.Logger, (kv, messageBuilder) => messageBuilder("Could not translate CQL to ELM for {lib}", kv.libraryIdentifier))
+                        .AddLoggerExceptionHandler(_services.Logger, (conversion, messageBuilder) => messageBuilder("Could not translate CQL to ELM for {lib}", conversion.LibraryIdentifier))
                 );
 
         if (count > 0)

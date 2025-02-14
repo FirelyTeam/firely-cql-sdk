@@ -2,7 +2,7 @@
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Elm.Fluent.Extensions;
+namespace CqlSdkPrototype.Elm.Extensions;
 
 public static partial class ElmToolkitExtensions
 {
@@ -34,8 +34,8 @@ public static partial class ElmToolkitExtensions
     public static IEnumerable<TR> GetCompletedElmToAssemblyCompilations<TR>(
         this ElmToolkit elmToolkit,
         Func<(CqlVersionedLibraryIdentifier versionedLibraryIdentifier, ElmLibrary elmLibrary, string csharpSourceCode, byte[] assemblyBinary, byte[]? debugSymbolsBinary), TR> selector) =>
-        elmToolkit.ElmToAssemblyCompilations
-                  .Where(kv => kv.Value is { CSharpSourceCode: not null, AssemblyBinary: not null })
-                  .Select(kv => selector((kv.Key, kv.Value.ElmLibrary, kv.Value.CSharpSourceCode!, kv.Value.AssemblyBinary!, kv.Value.DebugSymbolsBinary)));
+        elmToolkit.Conversions
+                  .Where(kv => kv.Value is { OutCSharpSourceCode: not null, OutAssemblyBinary: not null })
+                  .Select(kv => selector((kv.Key, kv.Value.InElmLibrary, kv.Value.OutCSharpSourceCode!, kv.Value.OutAssemblyBinary!, kv.Value.OutDebugSymbolsBinary)));
 
 }

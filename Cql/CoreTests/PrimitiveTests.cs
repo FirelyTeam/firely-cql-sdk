@@ -1,11 +1,11 @@
-﻿using Hl7.Cql.Abstractions;
+﻿using CqlSdkPrototype.Elm;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using CqlSdkPrototype.Elm.Fluent;
 using Hl7.Cql.Runtime.Hosting;
 
 namespace CoreTests

@@ -5,7 +5,7 @@ using CqlSdkPrototype.Internal;
 
 #pragma warning disable RS0027
 
-namespace CqlSdkPrototype.Elm.Fluent.Extensions;
+namespace CqlSdkPrototype.Elm.Extensions;
 
 public static partial class ElmToolkitExtensions
 {

@@ -17,7 +17,7 @@ namespace CqlSdkPrototype.Elm;
 /// The default value is <see langword="true"/>.
 /// </param>
 /// <param name="LRUCacheSize">The size of the Least Recently Used (LRU) cache.</param>
-public sealed record ElmToAssemblyCompilerConfig(
+public sealed record ElmToolkitConfig(
     ErroredEnumerationContinuation ErroredEnumerationContinuation = default,
     AssemblyCompilerDebugInformationFormat AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.None,
     bool AllowScopeRedefinition = true,
@@ -27,7 +27,7 @@ public sealed record ElmToAssemblyCompilerConfig(
     /// <summary>
     /// Gets the default configuration settings.
     /// </summary>
-    public static ElmToAssemblyCompilerConfig Default { get; } = new();
+    public static ElmToolkitConfig Default { get; } = new();
 
     /// <summary>
     /// Allows a child scope to redefine an existing parent scope. Default is <see langword="true" />.

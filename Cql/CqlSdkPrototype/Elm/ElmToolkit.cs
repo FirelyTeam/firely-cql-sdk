@@ -1,91 +1,93 @@
-﻿using CqlSdkPrototype.Elm.Fluent;
-using CqlSdkPrototype.Elm.Internal;
+﻿using CqlSdkPrototype.Elm.Internal;
 using CqlSdkPrototype.Infrastructure;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
-using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace CqlSdkPrototype.Elm;
 
 /// <summary>
 /// Compiles ELM (Expression Logical Model) into .NET assemblies.
 /// </summary>
-public sealed class ElmToAssemblyCompiler
+public sealed class ElmToolkit
 {
     /// <summary>
-    /// Initializes a new instance of the <see cref="ElmToAssemblyCompiler"/> class.
+    /// Initializes a new instance of the <see cref="ElmToolkit"/> class.
     /// </summary>
     /// <param name="loggerFactory">The logger factory to use for logging.</param>
     /// <param name="config">The configuration for the compiler.</param>
-    public ElmToAssemblyCompiler(
+    public ElmToolkit(
         ILoggerFactory? loggerFactory = null,
-        ElmToAssemblyCompilerConfig? config = null)
+        ElmToolkitConfig? config = null)
     {
-        config ??= ElmToAssemblyCompilerConfig.Default;
+        config ??= ElmToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
-        _elmToAssemblyCompilations = ElmToAssemblyCompilationDictionary.Empty;
+        _conversions = ElmToolkitConversionDictionary.Empty;
         Config = config;
-        _services = ElmToAssemblyProcessorServices.Create(loggerFactory, config);
+        _services = ElmToolkitServices.Create(loggerFactory, config);
     }
 
-    private ElmToAssemblyCompilationDictionary _elmToAssemblyCompilations;
-    private ElmToAssemblyProcessorServices _services;
+    private ElmToolkitConversionDictionary _conversions;
+    private ElmToolkitServices _services;
 
     /// <summary>
-    /// Gets the logger factory used by extensions via <seealso cref="ElmToolkit.LoggerFactory"/>.
+    /// Gets the logger factory used by extensions.
     /// </summary>
     internal ILoggerFactory LoggerFactory { get; }
 
     /// <summary>
-    /// Gets the service provider used by tests via <seealso cref="ElmToolkit.ServiceProvider"/>.
+    /// Gets the service provider used by tests.
     /// </summary>
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
     /// <summary>
-    /// Gets the configuration for the compiler.
+    /// Gets the configuration.
     /// </summary>
-    public ElmToAssemblyCompilerConfig Config { get; private set; }
+    public ElmToolkitConfig Config { get; private set; }
 
     /// <summary>
     /// Gets the dictionary of ELM to assembly compilations.
     /// </summary>
-    public ElmToAssemblyCompilationReadOnlyDictionary ElmToAssemblyCompilations => _elmToAssemblyCompilations;
+    public ElmToolkitConversionReadOnlyDictionary Conversions => _conversions;
 
     /// <summary>
     /// Sets the conversions for the ELM to assembly compilations.
     /// </summary>
-    /// <param name="elmToAssemblyCompilations">The dictionary of ELM to assembly compilations.</param>
-    private void SetConversions(
-        ElmToAssemblyCompilationDictionary elmToAssemblyCompilations)
+    /// <param name="conversions">The dictionary of ELM to assembly compilations.</param>
+    private void ReplaceConversions(
+        ElmToolkitConversionDictionary conversions)
     {
-        _elmToAssemblyCompilations = elmToAssemblyCompilations;
+        _conversions = conversions;
     }
 
     /// <summary>
     /// Reconfigures the compiler with the specified configuration.
     /// </summary>
-    /// <param name="config">The new configuration for the compiler.</param>
-    public void Reconfigure(
-        ElmToAssemblyCompilerConfig config)
+    /// <param name="reconfigure">A function that takes the current configuration and returns a new configuration.</param>
+    public ElmToolkit Reconfigure(
+        Func<ElmToolkitConfig, ElmToolkitConfig> reconfigure)
     {
+        var config = reconfigure(Config);
+
         if (Config == config)
-            return;
+            return this;
 
         _services.ServiceProvider.Dispose();
         Config = config;
-        _services = ElmToAssemblyProcessorServices.Create(LoggerFactory, config);
+        _services = ElmToolkitServices.Create(LoggerFactory, config);
+        return this;
     }
 
     /// <summary>
     /// Adds ELM libraries to the compiler.
     /// </summary>
     /// <param name="libraries">The libraries to add.</param>
-    public void AddElmLibraries(IEnumerable<ElmLibrary> libraries)
+    public ElmToolkit AddElmLibraries(IEnumerable<ElmLibrary> libraries)
     {
-        var builder = _elmToAssemblyCompilations.ToBuilder();
+        var builder = _conversions.ToBuilder();
         var hasChanged = false;
         foreach (var library in libraries)
         {
@@ -99,23 +101,26 @@ public sealed class ElmToAssemblyCompiler
                 continue;
             }
 
-            var libraryCompilation = new ElmToAssemblyCompilation(library);
+            var libraryCompilation = new ElmToolkitConversionRecord(library);
             builder.Add(versionedIdentifier, libraryCompilation);
             _services.Logger.LogInformation("Adding library to compiler: {versionedIdentifier}", versionedIdentifier);
             hasChanged = true;
         }
 
         if (hasChanged)
-            SetConversions(elmToAssemblyCompilations: builder.ToImmutable());
+            ReplaceConversions(conversions: builder.ToImmutable());
+
+        return this;
     }
 
     /// <summary>
     /// Compiles the ELM libraries into .NET assemblies.
     /// </summary>
-    public void CompileElmToAssemblies()
+    public ElmToolkit CompileElmToAssemblies()
     {
-        var entries = _elmToAssemblyCompilations;
-        if (entries.Values.All(predicate: lc => lc is { AssemblyBinary: not null })) return;
+        var entries = _conversions;
+        if (entries.Values.All(predicate: lc => lc is { OutAssemblyBinary: not null }))
+            return this;
 
         using var servicesScope = _services.CreateScopedState();
 
@@ -124,7 +129,7 @@ public sealed class ElmToAssemblyCompiler
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _services.LibrarySetCSharpCodeGenerator;
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
-        ElmLibrary[] libraries = entries.Values.Select(selector: v => v.ElmLibrary).ToArray();
+        ElmLibrary[] libraries = entries.Values.Select(selector: v => v.InElmLibrary).ToArray();
         LibrarySet librarySet = new LibrarySet(name: "", libraries: libraries);
 
         var removedLibraries = librarySet.RemoveLibrariesWithMissingDependencies();
@@ -136,30 +141,32 @@ public sealed class ElmToAssemblyCompiler
         var assemblyBinaries = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat);
 
         var entriesBuilder = entries.ToBuilder();
-        var hasChanged = UpdateStateEntries(assemblyBinaries, entriesBuilder, _services.Logger);
+        var hasChanged = UpdateConversions(assemblyBinaries, entriesBuilder, _services.Logger);
         if (hasChanged)
-            SetConversions(elmToAssemblyCompilations: entriesBuilder.ToImmutable());
+            ReplaceConversions(conversions: entriesBuilder.ToImmutable());
+
+        return this;
     }
 
     /// <summary>
     /// Updates the state entries with the compiled assemblies.
     /// </summary>
     /// <param name="assemblyBinaries">The compiled assemblies.</param>
-    /// <param name="entriesBuilder">The builder for the entries dictionary.</param>
+    /// <param name="conversions">The builder for the entries dictionary.</param>
     /// <param name="logger">The logger to use for logging.</param>
     /// <returns><see langword="true"/> if the state entries were updated; otherwise, <see langword="false"/>.</returns>
-    private static bool UpdateStateEntries(
+    private static bool UpdateConversions(
         IEnumerable<(ElmLibrary library, AssemblyBinaryWithSourceCode assemblyBinaryWithSourceCode)> assemblyBinaries,
-        ElmToAssemblyCompilationDictionary.Builder entriesBuilder,
-        ILogger<ElmToAssemblyCompiler> logger)
+        ElmToolkitConversionDictionary.Builder conversions,
+        ILogger<ElmToolkit> logger)
     {
         bool hasChanged = false;
         foreach (var (library, (assemblyBinary, sourceCodePerName, debugSymbols)) in assemblyBinaries)
         {
             var elmVersionedIdentifier = CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier);
-            var libraryCompilation = entriesBuilder[key: elmVersionedIdentifier];
-            if (libraryCompilation.CSharpSourceCode is not null
-                || libraryCompilation.AssemblyBinary is not null)
+            var libraryCompilation = conversions[key: elmVersionedIdentifier];
+            if (libraryCompilation.OutCSharpSourceCode is not null
+                || libraryCompilation.OutAssemblyBinary is not null)
             {
                 logger.LogInformation(message: "Library already compiled: {versionedIdentifier}", args: elmVersionedIdentifier);
                 continue;
@@ -168,11 +175,11 @@ public sealed class ElmToAssemblyCompiler
             var cSharpSourceCode = sourceCodePerName!.Values.Single(); // We always expect a single source file
             libraryCompilation = libraryCompilation with
             {
-                CSharpSourceCode = cSharpSourceCode,
-                AssemblyBinary = assemblyBinary,
-                DebugSymbolsBinary = debugSymbols,
+                OutCSharpSourceCode = cSharpSourceCode,
+                OutAssemblyBinary = assemblyBinary,
+                OutDebugSymbolsBinary = debugSymbols,
             };
-            entriesBuilder[key: elmVersionedIdentifier] = libraryCompilation;
+            conversions[key: elmVersionedIdentifier] = libraryCompilation;
             hasChanged = true;
         }
 

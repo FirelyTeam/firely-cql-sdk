@@ -1,14 +1,14 @@
 ﻿using CqlSdkPrototype.Cql;
 
-namespace CqlSdkPrototype.Elm.Fluent.Extensions;
+namespace CqlSdkPrototype.Elm.Extensions;
 
 public static class CqlToolkitExtensions
 {
     public static ElmToolkit ToFluentElmToolkit(
         this CqlToolkit cqlToolkit,
-        Func<ElmToAssemblyCompilerConfig, ElmToAssemblyCompilerConfig>? configure = null)
+        Func<ElmToolkitConfig, ElmToolkitConfig>? configure = null)
     {
-        var config = new ElmToAssemblyCompilerConfig(ErroredEnumerationContinuation: cqlToolkit.Config.ErroredEnumerationContinuation);
+        var config = new ElmToolkitConfig(ErroredEnumerationContinuation: cqlToolkit.Config.ErroredEnumerationContinuation);
         if (configure is not null) config = configure(config);
         var elmToolkit = new ElmToolkit(cqlToolkit.LoggerFactory, config).AddElmFromFluentCqlToolkit(cqlToolkit);
         return elmToolkit;

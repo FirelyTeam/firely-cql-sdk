@@ -1,6 +1,6 @@
 ﻿using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
-using CqlSdkPrototype.Elm.Fluent.Extensions;
+using CqlSdkPrototype.Elm.Extensions;
 
 namespace CqlSdkPrototype.Invocation.Fluent.Extensions;
 
@@ -11,7 +11,7 @@ public static class CqlToolkitExtensions
     public static LibrarySetInvoker ToLibrarySetInvoker(
 #pragma warning restore RS0026
         this CqlToolkit cqlToolkit,
-        Func<ElmToAssemblyCompilerConfig, ElmToAssemblyCompilerConfig>? configureElmToAssemblySettings = null,/*
+        Func<ElmToolkitConfig, ElmToolkitConfig>? configureElmToAssemblySettings = null,/*
         Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configureLibrarySetInvokerBuilderSettings = null,*/
         string name = "")
     {

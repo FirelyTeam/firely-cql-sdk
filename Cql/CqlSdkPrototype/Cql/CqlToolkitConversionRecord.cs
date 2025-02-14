@@ -15,6 +15,11 @@ public readonly record struct CqlToolkitConversionRecord(
     ElmLibrary? OutElmLibrary = null) {
 
     /// <summary>
+    /// The library identifier of the input CQL library.
+    /// </summary>
+    public CqlVersionedLibraryIdentifier LibraryIdentifier => InCqlLibraryString.LibraryIdentifier;
+
+    /// <summary>
     /// The builder for the ELM library. This is set during <seealso cref="CqlToolkit.AddCqlLibraries"/>.
     /// </summary>
     internal LibraryBuilder? ElmLibraryBuilder { get; init; }

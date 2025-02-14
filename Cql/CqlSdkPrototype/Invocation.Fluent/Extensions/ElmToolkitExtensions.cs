@@ -1,5 +1,5 @@
-﻿using CqlSdkPrototype.Elm.Fluent;
-using CqlSdkPrototype.Elm.Fluent.Extensions;
+﻿using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Elm.Extensions;
 using Hl7.Cql.CodeGeneration.NET;
 
 namespace CqlSdkPrototype.Invocation.Fluent.Extensions;

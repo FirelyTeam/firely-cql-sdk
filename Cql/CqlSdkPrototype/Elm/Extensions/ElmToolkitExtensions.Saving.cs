@@ -1,6 +1,6 @@
 ﻿using CqlSdkPrototype.Infrastructure;
 
-namespace CqlSdkPrototype.Elm.Fluent.Extensions;
+namespace CqlSdkPrototype.Elm.Extensions;
 
 public static partial class ElmToolkitExtensions
 {

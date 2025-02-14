@@ -9,27 +9,27 @@ using Hl7.Fhir.Introspection;
 
 namespace CqlSdkPrototype.Elm.Internal;
 
-internal readonly record struct ElmToAssemblyProcessorServices(
+internal readonly record struct ElmToolkitServices(
     ServiceProvider ServiceProvider,
-    ILogger<ElmToAssemblyCompiler> Logger,
+    ILogger<ElmToolkit> Logger,
     AssemblyCompiler AssemblyCompiler,
     LibrarySetCSharpCodeGenerator LibrarySetCSharpCodeGenerator)
 {
-    public static ElmToAssemblyProcessorServices Create(
+    public static ElmToolkitServices Create(
         ILoggerFactory loggerFactory,
-        ElmToAssemblyCompilerConfig config)
+        ElmToolkitConfig config)
     {
         var services = new ServiceCollection();
         services.AddExternalLogging(loggerFactory);
         AddCqlCodeGenerationServices(services, config);
         var serviceProvider = services.BuildServiceProvider(validateScopes: true);
 
-        return ActivatorUtilities.CreateInstance<ElmToAssemblyProcessorServices>(serviceProvider, serviceProvider);
+        return ActivatorUtilities.CreateInstance<ElmToolkitServices>(serviceProvider, serviceProvider);
     }
 
     private static void AddCqlCodeGenerationServices(
         IServiceCollection services,
-        ElmToAssemblyCompilerConfig config)
+        ElmToolkitConfig config)
     {
         var expressionBuilderSettings = config.ToExpressionBuilderSettings();
         AddCqlCompilerServices(services, config.LRUCacheSize, expressionBuilderSettings);
@@ -39,7 +39,7 @@ internal readonly record struct ElmToAssemblyProcessorServices(
     }
 
     /// <remarks>
-    /// Used by <seealso cref="ElmToAssemblyProcessorServices"/> and by many test cases
+    /// Used by <seealso cref="ElmToolkitServices"/> and by many test cases
     /// </remarks>
     public static IServiceCollection AddCqlCompilerServices(
         IServiceCollection services,
