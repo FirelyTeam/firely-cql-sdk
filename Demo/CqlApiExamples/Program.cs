@@ -52,7 +52,7 @@ internal static class Program
         // Load CQL libraries from a directory and process them to ELM, C#, and assemblies
         cqlToolkit.AddCqlLibrariesFromDirectory(dirs.CqlInDirectory).TranslateCqlToElm();
         var elmToolkit = cqlToolkit.ToFluentElmToolkit().CompileElmToAssemblies();
-        var packagingToolkit = new FluentPackagingToolkit(loggerFactory);
+        var packagingToolkit = new PackagingToolkit(loggerFactory);
         packagingToolkit.AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit);
     }
 
@@ -264,7 +264,7 @@ file static class Extensions
         return null;
     }
 
-    public static (CqlVersionedLibraryIdentifier id, string cSharpSourceCode)? TryGetFirstCSharpFileLines(this FluentElmToolkit elmToolkit) =>
+    public static (CqlVersionedLibraryIdentifier id, string cSharpSourceCode)? TryGetFirstCSharpFileLines(this ElmToolkit elmToolkit) =>
         elmToolkit.GetCompletedElmToAssemblyCompilations(t => (t.versionedLibraryIdentifier, t.csharpSourceCode))
                   .FirstOrNull();
 

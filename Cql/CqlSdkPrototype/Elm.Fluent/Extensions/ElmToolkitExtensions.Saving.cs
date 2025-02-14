@@ -2,16 +2,16 @@
 
 namespace CqlSdkPrototype.Elm.Fluent.Extensions;
 
-public static partial class FluentElmToolkitExtensions
+public static partial class ElmToolkitExtensions
 {
-    public static FluentElmToolkit SaveCSharpFilesToDirectory(
-        this FluentElmToolkit elmToolkit,
+    public static ElmToolkit SaveCSharpFilesToDirectory(
+        this ElmToolkit elmToolkit,
         DirectoryInfo directory,
         DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
         (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
 
-        var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
+        var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
 
         foreach (var (versionedLibraryIdentifier, _, csharpSourceCode, _, _) in elmToolkit.GetCompletedElmToAssemblyCompilations())
         {
@@ -23,14 +23,14 @@ public static partial class FluentElmToolkitExtensions
         return elmToolkit;
     }
 
-    public static FluentElmToolkit SaveAssemblyBinariesToDirectory(
-        this FluentElmToolkit elmToolkit,
+    public static ElmToolkit SaveAssemblyBinariesToDirectory(
+        this ElmToolkit elmToolkit,
         DirectoryInfo directory,
         DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
         (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
 
-        var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(FluentElmToolkitExtensions));
+        var logger = elmToolkit.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
 
         foreach (var (versionedLibraryIdentifier, _, _, assemblyBytes, debugSymbolsBytes) in elmToolkit.GetCompletedElmToAssemblyCompilations())
         {

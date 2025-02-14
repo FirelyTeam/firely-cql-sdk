@@ -29,12 +29,12 @@ public sealed class FhirResourcePackager
     private FhirResourcePackagerServices _services;
 
     /// <summary>
-    /// Gets the logger factory used by extensions via <seealso cref="FluentPackagingToolkit.LoggerFactory"/>.
+    /// Gets the logger factory used by extensions via <seealso cref="PackagingToolkit.LoggerFactory"/>.
     /// </summary>
     internal ILoggerFactory LoggerFactory { get; }
 
     /// <summary>
-    /// Gets the service provider used by tests via <seealso cref="FluentPackagingToolkit.ServiceProvider"/>.
+    /// Gets the service provider used by tests via <seealso cref="PackagingToolkit.ServiceProvider"/>.
     /// </summary>
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 

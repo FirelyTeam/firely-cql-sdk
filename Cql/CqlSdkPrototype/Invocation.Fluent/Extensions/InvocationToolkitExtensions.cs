@@ -2,7 +2,7 @@
 
 namespace CqlSdkPrototype.Invocation.Fluent.Extensions;
 
-public static class FluentInvocationToolkitExtensions
+public static class InvocationToolkitExtensions
 {
     public static FluentInvocationToolkit AddAssemblyBinaries(
         this FluentInvocationToolkit invocationToolkit,

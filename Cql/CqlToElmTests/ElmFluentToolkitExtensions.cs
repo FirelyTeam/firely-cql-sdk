@@ -10,14 +10,14 @@ using Expression = Hl7.Cql.Elm.Expression;
 
 internal static class FluentElmToolkitExtensions
 {
-    public static LibrarySetCSharpCodeGenerator GetLibrarySetCSharpCodeGenerator(this FluentElmToolkit fluentElmToolkit) =>
-        fluentElmToolkit.ServiceProvider.GetRequiredService<LibrarySetCSharpCodeGenerator>();
+    public static LibrarySetCSharpCodeGenerator GetLibrarySetCSharpCodeGenerator(this ElmToolkit elmToolkit) =>
+        elmToolkit.ServiceProvider.GetRequiredService<LibrarySetCSharpCodeGenerator>();
 
-    public static AssemblyCompiler GetAssemblyCompiler(this FluentElmToolkit fluentElmToolkit) =>
-        fluentElmToolkit.ServiceProvider.GetRequiredService<AssemblyCompiler>();
+    public static AssemblyCompiler GetAssemblyCompiler(this ElmToolkit elmToolkit) =>
+        elmToolkit.ServiceProvider.GetRequiredService<AssemblyCompiler>();
 
-    public static Scope CreateScope(this FluentElmToolkit fluentElmToolkit) =>
-        new (fluentElmToolkit.ServiceProvider.CreateScope());
+    public static Scope CreateScope(this ElmToolkit elmToolkit) =>
+        new (elmToolkit.ServiceProvider.CreateScope());
 
     public static LibraryExpressionBuilder GetLibraryExpressionBuilder(this Scope elmFluentFluentToolkitScope) =>
         elmFluentFluentToolkitScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>();
@@ -31,7 +31,7 @@ internal static class FluentElmToolkitExtensions
     private static Library Library { get; } = new(identifier: new VersionedIdentifier { id = "Lambdas", version = "1.0.0" });
 
     internal static DefinitionDictionary<LambdaExpression> ProcessLibrary(
-        this FluentElmToolkit elmToolkit,
+        this ElmToolkit elmToolkit,
         Library library)
     {
         using var scope = elmToolkit.CreateScope();
@@ -40,7 +40,7 @@ internal static class FluentElmToolkitExtensions
     }
 
     internal static LambdaExpression Lambda(
-        this FluentElmToolkit elmToolkit,
+        this ElmToolkit elmToolkit,
         Expression expression)
     {
         using var scope = elmToolkit.CreateScope();

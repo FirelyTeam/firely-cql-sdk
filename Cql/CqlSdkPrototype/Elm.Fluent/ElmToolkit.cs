@@ -3,26 +3,26 @@
 /// <summary>
 /// Provides a fluent interface for working with the ElmToAssemblyCompiler.
 /// </summary>
-public sealed class FluentElmToolkit
+public sealed class ElmToolkit
 {
     private readonly ElmToAssemblyCompiler elmToAssemblyCompiler;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="FluentElmToolkit"/> class.
+    /// Initializes a new instance of the <see cref="ElmToolkit"/> class.
     /// </summary>
     /// <param name="loggerFactory">The logger factory to use for logging.</param>
     /// <param name="config">The configuration settings for the compiler.</param>
-    public FluentElmToolkit(
+    public ElmToolkit(
         ILoggerFactory? loggerFactory = null,
         ElmToAssemblyCompilerConfig? config = null) : this(new ElmToAssemblyCompiler(loggerFactory, config))
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="FluentElmToolkit"/> class with the specified compiler.
+    /// Initializes a new instance of the <see cref="ElmToolkit"/> class with the specified compiler.
     /// </summary>
     /// <param name="elmToAssemblyCompiler">The compiler to use.</param>
-    public FluentElmToolkit(ElmToAssemblyCompiler elmToAssemblyCompiler)
+    public ElmToolkit(ElmToAssemblyCompiler elmToAssemblyCompiler)
     {
         this.elmToAssemblyCompiler = elmToAssemblyCompiler;
     }
@@ -51,8 +51,8 @@ public sealed class FluentElmToolkit
     /// Reconfigures the compiler with the specified configuration.
     /// </summary>
     /// <param name="configure">A function that takes the current configuration and returns a new configuration.</param>
-    /// <returns>The current instance of <see cref="FluentElmToolkit"/>.</returns>
-    public FluentElmToolkit Reconfigure(Func<ElmToAssemblyCompilerConfig, ElmToAssemblyCompilerConfig> configure)
+    /// <returns>The current instance of <see cref="ElmToolkit"/>.</returns>
+    public ElmToolkit Reconfigure(Func<ElmToAssemblyCompilerConfig, ElmToAssemblyCompilerConfig> configure)
     {
         elmToAssemblyCompiler.Reconfigure(configure(ProcessorConfig));
         return this;
@@ -62,8 +62,8 @@ public sealed class FluentElmToolkit
     /// Adds ELM libraries to the compiler.
     /// </summary>
     /// <param name="libraries">The libraries to add.</param>
-    /// <returns>The current instance of <see cref="FluentElmToolkit"/>.</returns>
-    public FluentElmToolkit AddElmLibraries(IEnumerable<ElmLibrary> libraries)
+    /// <returns>The current instance of <see cref="ElmToolkit"/>.</returns>
+    public ElmToolkit AddElmLibraries(IEnumerable<ElmLibrary> libraries)
     {
         elmToAssemblyCompiler.AddElmLibraries(libraries);
         return this;
@@ -72,8 +72,8 @@ public sealed class FluentElmToolkit
     /// <summary>
     /// Compiles the ELM libraries into .NET assemblies.
     /// </summary>
-    /// <returns>The current instance of <see cref="FluentElmToolkit"/>.</returns>
-    public FluentElmToolkit CompileElmToAssemblies()
+    /// <returns>The current instance of <see cref="ElmToolkit"/>.</returns>
+    public ElmToolkit CompileElmToAssemblies()
     {
         elmToAssemblyCompiler.CompileElmToAssemblies();
         return this;

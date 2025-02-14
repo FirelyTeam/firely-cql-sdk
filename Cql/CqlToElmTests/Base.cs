@@ -219,7 +219,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     AllowNullIntervals: AllowNullIntervals
                 ));
 
-        internal static FluentElmToolkit ToFluentElmToolkit(
+        internal static ElmToolkit ToFluentElmToolkit(
             ImmutableHashSet<CqlModel>? models = null,
             ImmutableHashSet<ModelInfo>? modelInfos = null,
             AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,

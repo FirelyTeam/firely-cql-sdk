@@ -3,7 +3,7 @@ using CqlSdkPrototype.Internal;
 
 namespace CqlSdkPrototype.Cql.Fluent.Extensions;
 
-public static partial class FluentCqlToolkitExtensions
+public static partial class CqlToolkitExtensions
 {
     public static FluentCqlToolkit AddCqlLibraryString(
         this FluentCqlToolkit cqlToolkit,

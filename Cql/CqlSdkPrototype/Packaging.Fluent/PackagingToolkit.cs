@@ -3,26 +3,26 @@
 /// <summary>
 /// Provides a fluent interface for working with the FHIR resource packager.
 /// </summary>
-public sealed class FluentPackagingToolkit
+public sealed class PackagingToolkit
 {
     private readonly FhirResourcePackager _fhirResourcePackager;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="FluentPackagingToolkit"/> class.
+    /// Initializes a new instance of the <see cref="PackagingToolkit"/> class.
     /// </summary>
     /// <param name="loggerFactory">The logger factory to use for logging.</param>
     /// <param name="config">The configuration settings for the packager.</param>
-    public FluentPackagingToolkit(
+    public PackagingToolkit(
         ILoggerFactory? loggerFactory = null,
         FhirResourcePackagerConfig? config = null) : this(new FhirResourcePackager(loggerFactory, config))
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="FluentPackagingToolkit"/> class.
+    /// Initializes a new instance of the <see cref="PackagingToolkit"/> class.
     /// </summary>
     /// <param name="fhirResourcePackager">The packager to use.</param>
-    public FluentPackagingToolkit(FhirResourcePackager fhirResourcePackager)
+    public PackagingToolkit(FhirResourcePackager fhirResourcePackager)
     {
         _fhirResourcePackager = fhirResourcePackager;
     }
@@ -51,8 +51,8 @@ public sealed class FluentPackagingToolkit
     /// Reconfigures the packager with the specified configuration.
     /// </summary>
     /// <param name="configure">A function that takes the current configuration and returns a new configuration.</param>
-    /// <returns>The current instance of <see cref="FluentPackagingToolkit"/>.</returns>
-    public FluentPackagingToolkit Reconfigure(Func<FhirResourcePackagerConfig, FhirResourcePackagerConfig> configure)
+    /// <returns>The current instance of <see cref="PackagingToolkit"/>.</returns>
+    public PackagingToolkit Reconfigure(Func<FhirResourcePackagerConfig, FhirResourcePackagerConfig> configure)
     {
         _fhirResourcePackager.Reconfigure(configure(PackagerConfig));
         return this;
@@ -62,8 +62,8 @@ public sealed class FluentPackagingToolkit
     /// Adds FHIR resource packaging inputs to the packager.
     /// </summary>
     /// <param name="sources">The collection of FHIR resource packaging inputs to add.</param>
-    /// <returns>The current instance of <see cref="FluentPackagingToolkit"/>.</returns>
-    public FluentPackagingToolkit AddPackagingInputs(IEnumerable<FhirResourcePackagingSources> sources)
+    /// <returns>The current instance of <see cref="PackagingToolkit"/>.</returns>
+    public PackagingToolkit AddPackagingInputs(IEnumerable<FhirResourcePackagingSources> sources)
     {
         _fhirResourcePackager.AddPackagingInputs(sources);
         return this;
@@ -94,7 +94,7 @@ public sealed class FluentPackagingToolkit
     //         elmFileLastWriteTimeUtc);
     //     return libraryResource;
     // }
-    public FluentPackagingToolkit PackageFhirResources(
+    public PackagingToolkit PackageFhirResources(
         Uri? canonicalRootUrl = null,
         DateTime? overrideDate = null)
     {

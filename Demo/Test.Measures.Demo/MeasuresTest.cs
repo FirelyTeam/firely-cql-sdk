@@ -161,7 +161,7 @@ namespace Test
             if (Debugger.IsAttached)
                 config = config with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
 
-            var elmToolkit = new FluentElmToolkit(loggerFactory, config);
+            var elmToolkit = new ElmToolkit(loggerFactory, config);
 
             return elmToolkit
                    .AddElmLibraries(librarySet)

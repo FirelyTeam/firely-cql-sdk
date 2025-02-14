@@ -3,10 +3,10 @@ using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Cql.Fluent.Extensions;
 
-public static partial class FluentCqlToolkitExtensions
+public static partial class CqlToolkitExtensions
 {
     private static ILogger CreateLogger(this FluentCqlToolkit cqlToolkit) =>
-        cqlToolkit.LoggerFactory.CreateLogger(typeof(FluentCqlToolkitExtensions));
+        cqlToolkit.LoggerFactory.CreateLogger(typeof(CqlToolkitExtensions));
 
     public static FluentCqlToolkit SetExceptionHandlingToIgnore(this FluentCqlToolkit cqlToolkit, bool stopAfterFirstException = false) =>
         cqlToolkit.Reconfigure(o => o with

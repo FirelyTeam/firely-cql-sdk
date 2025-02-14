@@ -6,16 +6,16 @@ using Hl7.Cql.Packaging;
 
 namespace CqlSdkPrototype.Packaging.Fluent;
 
-public static partial class FluentPackagingToolkitExtensions
+public static partial class PackagingToolkitExtensions
 {
-    public static FluentPackagingToolkit SaveFhirResources(
-        this FluentPackagingToolkit packagingToolkit,
+    public static PackagingToolkit SaveFhirResources(
+        this PackagingToolkit packagingToolkit,
         DirectoryInfo directory,
         DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
         (directoryPreparationStrategy ?? DirectoryPreparationStrategy.Recreate)(directory);
 
-        var logger = packagingToolkit.LoggerFactory.CreateLogger(typeof(FluentPackagingToolkitExtensions));
+        var logger = packagingToolkit.LoggerFactory.CreateLogger(typeof(PackagingToolkitExtensions));
         var jsonSerializerOptions = packagingToolkit.ServiceProvider.GetRequiredService<JsonSerializerOptions>();
 
         foreach (var resource in packagingToolkit
@@ -37,11 +37,11 @@ public static partial class FluentPackagingToolkitExtensions
         CqlVersionedLibraryIdentifier versionedLibraryIdentifier,
         FhirLibrary fhirLibrary,
         FhirMeasure? fhirMeasure)> GetCompletedFhirResources(
-        this FluentPackagingToolkit packagingToolkit) =>
+        this PackagingToolkit packagingToolkit) =>
         packagingToolkit.GetCompletedFhirResources(t => t);
 
     public static IEnumerable<TR> GetCompletedFhirResources<TR>(
-        this FluentPackagingToolkit packagingToolkit,
+        this PackagingToolkit packagingToolkit,
         Func<(CqlVersionedLibraryIdentifier versionedLibraryIdentifier, FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure), TR> selector) =>
         packagingToolkit
             .FhirResourcePackagings

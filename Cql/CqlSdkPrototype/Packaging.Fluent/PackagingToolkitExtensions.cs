@@ -5,9 +5,9 @@ using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Packaging.Fluent;
 
-public static partial class FluentPackagingToolkitExtensions
+public static partial class PackagingToolkitExtensions
 {
-    public static FluentPackagingToolkit SetExceptionHandlingToIgnore(this FluentPackagingToolkit packagingToolkit, bool stopAfterFirstException = false) =>
+    public static PackagingToolkit SetExceptionHandlingToIgnore(this PackagingToolkit packagingToolkit, bool stopAfterFirstException = false) =>
         packagingToolkit.Reconfigure(o => o with
         {
             EnumerationExceptionHandling = stopAfterFirstException
@@ -16,10 +16,10 @@ public static partial class FluentPackagingToolkitExtensions
         });
 
 
-    public static FluentPackagingToolkit AddPackagingInputsFromCqlAndElmToolkits(
-        this FluentPackagingToolkit packagingToolkit,
+    public static PackagingToolkit AddPackagingInputsFromCqlAndElmToolkits(
+        this PackagingToolkit packagingToolkit,
         FluentCqlToolkit cqlToolkit,
-        FluentElmToolkit elmToolkit)
+        ElmToolkit elmToolkit)
     {
         var cqlToElmTranslations = cqlToolkit.CqlToElmTranslations.Values.Select(o => o.CqlLibraryString);
         var completedElmToAssemblyCompilations = elmToolkit.GetCompletedElmToAssemblyCompilations();

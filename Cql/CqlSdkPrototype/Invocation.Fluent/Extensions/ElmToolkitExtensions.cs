@@ -4,10 +4,10 @@ using Hl7.Cql.CodeGeneration.NET;
 
 namespace CqlSdkPrototype.Invocation.Fluent.Extensions;
 
-public static class FluentElmToolkitExtensions
+public static class ElmToolkitExtensions
 {
     public static FluentInvocationToolkit ToFluentInvocationToolkit(
-        this FluentElmToolkit elmToolkit/*,
+        this ElmToolkit elmToolkit/*,
         Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configureLibrarySetInvokerBuilderSettings = null*/)
     {
         /*var config = LibrarySetInvokerBuilderConfig.Default;
@@ -23,7 +23,7 @@ public static class FluentElmToolkitExtensions
 #pragma warning disable RS0026 // Do not add multiple public overloads with optional parameters
     public static LibrarySetInvoker ToLibrarySetInvoker(
 #pragma warning restore RS0026
-        this FluentElmToolkit elmToolkit,
+        this ElmToolkit elmToolkit,
         string name = ""/*,
         Func<LibrarySetInvokerBuilderConfig, LibrarySetInvokerBuilderConfig>? configure = null*/)
     {

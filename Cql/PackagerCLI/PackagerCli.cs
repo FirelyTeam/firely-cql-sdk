@@ -47,7 +47,7 @@ internal class PackagerCli(
                 return -1;
             }
 
-            var packagingToolkit = new FluentPackagingToolkit(loggerFactory)
+            var packagingToolkit = new PackagingToolkit(loggerFactory)
                 .SetExceptionHandlingToIgnore();
 
             FluentCqlToolkit cqlToolkit = new FluentCqlToolkit(loggerFactory)
@@ -57,7 +57,7 @@ internal class PackagerCli(
             if (!cqlToolkit.CqlToElmTranslations.Any())
                 logger.LogWarning("Exiting: No CQL libraries were found in the CQL input directory.");
 
-            FluentElmToolkit elmToolkit;
+            ElmToolkit elmToolkit;
             if (translateCql)
             {
                 cqlToolkit.TranslateCqlToElm();
@@ -72,7 +72,7 @@ internal class PackagerCli(
             }
             else
             {
-                elmToolkit = new FluentElmToolkit(loggerFactory)
+                elmToolkit = new ElmToolkit(loggerFactory)
                              .SetExceptionHandlingToIgnore()
                              .AddElmFilesFromDirectory(
                                  opt.ElmInDirectory!,

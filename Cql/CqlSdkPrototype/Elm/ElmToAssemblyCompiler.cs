@@ -36,12 +36,12 @@ public sealed class ElmToAssemblyCompiler
     private ElmToAssemblyProcessorServices _services;
 
     /// <summary>
-    /// Gets the logger factory used by extensions via <seealso cref="FluentElmToolkit.LoggerFactory"/>.
+    /// Gets the logger factory used by extensions via <seealso cref="ElmToolkit.LoggerFactory"/>.
     /// </summary>
     internal ILoggerFactory LoggerFactory { get; }
 
     /// <summary>
-    /// Gets the service provider used by tests via <seealso cref="FluentElmToolkit.ServiceProvider"/>.
+    /// Gets the service provider used by tests via <seealso cref="ElmToolkit.ServiceProvider"/>.
     /// </summary>
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 

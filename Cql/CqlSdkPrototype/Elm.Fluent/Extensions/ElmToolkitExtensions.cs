@@ -4,9 +4,9 @@ using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Elm.Fluent.Extensions;
 
-public static partial class FluentElmToolkitExtensions
+public static partial class ElmToolkitExtensions
 {
-    public static FluentElmToolkit SetExceptionHandlingToIgnore(this FluentElmToolkit cqlToolkit, bool stopAfterFirstException = false) =>
+    public static ElmToolkit SetExceptionHandlingToIgnore(this ElmToolkit cqlToolkit, bool stopAfterFirstException = false) =>
         cqlToolkit.Reconfigure(o => o with
         {
             EnumerationExceptionHandling = stopAfterFirstException
@@ -14,13 +14,13 @@ public static partial class FluentElmToolkitExtensions
                                                     : EnumerationExceptionHandling.Continue
         });
 
-    public static FluentElmToolkit SetAssemblyDebugInformationToEmbedded(this FluentElmToolkit cqlToolkit) =>
+    public static ElmToolkit SetAssemblyDebugInformationToEmbedded(this ElmToolkit cqlToolkit) =>
         cqlToolkit.Reconfigure(o => o with
         {
             AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded
         });
 
-    public static FluentElmToolkit SetAssemblyDebugInformationToPortablePdb(this FluentElmToolkit cqlToolkit) =>
+    public static ElmToolkit SetAssemblyDebugInformationToPortablePdb(this ElmToolkit cqlToolkit) =>
         cqlToolkit.Reconfigure(o => o with
         {
             AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.PortablePdb
@@ -28,11 +28,11 @@ public static partial class FluentElmToolkitExtensions
 
 
     public static IEnumerable<(CqlVersionedLibraryIdentifier versionedLibraryIdentifier, ElmLibrary elmLibrary, string csharpSourceCode, byte[] assemblyBinary, byte[]? debugSymbolsBinary)> GetCompletedElmToAssemblyCompilations(
-        this FluentElmToolkit elmToolkit) =>
+        this ElmToolkit elmToolkit) =>
         elmToolkit.GetCompletedElmToAssemblyCompilations(t => t);
 
     public static IEnumerable<TR> GetCompletedElmToAssemblyCompilations<TR>(
-        this FluentElmToolkit elmToolkit,
+        this ElmToolkit elmToolkit,
         Func<(CqlVersionedLibraryIdentifier versionedLibraryIdentifier, ElmLibrary elmLibrary, string csharpSourceCode, byte[] assemblyBinary, byte[]? debugSymbolsBinary), TR> selector) =>
         elmToolkit.ElmToAssemblyCompilations
                   .Where(kv => kv.Value is { CSharpSourceCode: not null, AssemblyBinary: not null })

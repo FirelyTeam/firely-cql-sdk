@@ -4,7 +4,7 @@ using CqlSdkPrototype.Elm.Fluent.Extensions;
 
 namespace CqlSdkPrototype.Invocation.Fluent.Extensions;
 
-public static class FluentCqlToolkitExtensions
+public static class CqlToolkitExtensions
 {
 
 #pragma warning disable RS0026 // Do not add multiple public overloads with optional parameters

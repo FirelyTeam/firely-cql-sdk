@@ -2,7 +2,7 @@
 
 namespace CqlSdkPrototype.Cql.Fluent.Extensions;
 
-public static partial class FluentCqlToolkitExtensions
+public static partial class CqlToolkitExtensions
 {
     public static FluentCqlToolkit SaveElmFilesToDirectory(
         this FluentCqlToolkit cqlToolkit,

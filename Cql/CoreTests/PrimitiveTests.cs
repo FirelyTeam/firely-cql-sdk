@@ -3408,7 +3408,7 @@ namespace CoreTests
 
             Assert.That.DoesNotThrow(() =>
             {
-                new FluentElmToolkit(loggerFactory)
+                new ElmToolkit(loggerFactory)
                     .AddElmLibraries(librarySet)
                     .CompileElmToAssemblies();
             });
