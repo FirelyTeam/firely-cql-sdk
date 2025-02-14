@@ -198,8 +198,8 @@ public sealed class ElmToAssemblyCompiler
                 librarySet,
                 debugInformationFormat,
                 errorStrategy => errorStrategy
-                                 .WithContinuation(Config.ErroredEnumerationContinuation)
-                                 .AddLogExceptionHandler(
+                                 .SetContinuation(Config.ErroredEnumerationContinuation)
+                                 .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (pair, logMessage) => logMessage("Could not compile C# to .NET Assembly for {id}", pair.Library.GetVersionedIdentifier()!)));
 
@@ -219,8 +219,8 @@ public sealed class ElmToAssemblyCompiler
                 librarySet,
                 librarySetDefinitions,
                 errorStrategy => errorStrategy
-                                 .WithContinuation(Config.ErroredEnumerationContinuation)
-                                 .AddLogExceptionHandler(
+                                 .SetContinuation(Config.ErroredEnumerationContinuation)
+                                 .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (library, log) => log("Could not generate definitions into C# for {id}", library.GetVersionedIdentifier())),
                 library => _services.Logger.LogInformation("Generating definitions into C# for {id} ", library.GetVersionedIdentifier()));
@@ -241,8 +241,8 @@ public sealed class ElmToAssemblyCompiler
                 librarySet,
                 librarySetDefinitions,
                 errorStrategy => errorStrategy
-                                 .WithContinuation(Config.ErroredEnumerationContinuation)
-                                 .AddLogExceptionHandler(
+                                 .SetContinuation(Config.ErroredEnumerationContinuation)
+                                 .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (library, logMessage) =>
                                          logMessage("Could not convert ELM into definitions for {id}", library.GetVersionedIdentifier())),

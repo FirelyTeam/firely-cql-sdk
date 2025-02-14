@@ -95,15 +95,15 @@ public sealed class CqlToolkit
                 {
                     var libId = cqlLibrary.LibraryIdentifier;
 
-                    logger.LogInformation("Adding CQL library: {lib}", libId);
+                    logger.LogInformation("Adding CQL library {lib}", libId);
                     var translation = new CqlToolkitConversionRecord(cqlLibrary);
                     conversions.Add(libId, translation);
                 },
                 errorStrategy => errorStrategy
-                                 .WithContinuation(Config.ErroredEnumerationContinuation)
-                                 .AddLogExceptionHandler(
+                                 .SetContinuation(Config.ErroredEnumerationContinuation)
+                                 .AddLoggerExceptionHandler(
                                      logger,
-                                     (cqlLibraryString, logMessage) => logMessage("Could not add CQL for {lib}.", cqlLibraryString.LibraryIdentifier)));
+                                     (cqlLibraryString, logMessage) => logMessage("Could not add CQL library for {lib}.", cqlLibraryString.LibraryIdentifier)));
 
         if (count > 0)
             ReplaceConversions(conversions.ToImmutable());
@@ -133,8 +133,8 @@ public sealed class CqlToolkit
                         conversions[kv.libraryIdentifier] = newConversionRecord;
                     },
                     errorStrategy=> errorStrategy
-                        .WithContinuation(ErroredEnumerationContinuation.Continue)
-                        .AddLogExceptionHandler(_services.Logger, (kv, messageBuilder) => messageBuilder("Could not translate CQL to ELM for {lib}", kv.libraryIdentifier))
+                        .SetContinuation(ErroredEnumerationContinuation.Continue)
+                        .AddLoggerExceptionHandler(_services.Logger, (kv, messageBuilder) => messageBuilder("Could not translate CQL to ELM for {lib}", kv.libraryIdentifier))
                 );
 
         if (count > 0)

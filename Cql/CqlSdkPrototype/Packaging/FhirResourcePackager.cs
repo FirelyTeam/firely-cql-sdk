@@ -129,8 +129,8 @@ public sealed class FhirResourcePackager
                          resourceCanonicalRootUrl: canonicalRootUrl?.ToString(),
                          overrideDate: overrideDate,
                          errorStrategy => errorStrategy
-                             .WithContinuation(Config.ErroredEnumerationContinuation)
-                             .AddLogExceptionHandler(logger, (library, logMessage) => logMessage("Could not package FHIR resources for library {lib}", library.GetVersionedIdentifier()!)),
+                             .SetContinuation(Config.ErroredEnumerationContinuation)
+                             .AddLoggerExceptionHandler(logger, (library, logMessage) => logMessage("Could not package FHIR resources for library {lib}", library.GetVersionedIdentifier()!)),
                          onNextLibrary: library => logger.LogInformation("Packaging FHIR resources for library {id}.", library.GetVersionedIdentifier()))
                      .SelectWhere(o =>
                      {
@@ -138,7 +138,6 @@ public sealed class FhirResourcePackager
                          var fhirResourcePackaging = builder[versionedLibraryIdentifier];
                          if (fhirResourcePackaging.FhirLibrary is null)
                          {
-                             logger.LogInformation("Packaged FHIR resources for library {id}.", versionedLibraryIdentifier);
                              builder[versionedLibraryIdentifier] = fhirResourcePackaging with { FhirLibrary = o.fhirLibrary, FhirMeasure = o.fhirMeasure};
                              return (true, o);
                          }

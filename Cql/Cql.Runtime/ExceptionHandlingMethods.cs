@@ -1,13 +1,5 @@
 ﻿namespace Hl7.Cql.Runtime;
 
-internal readonly record struct EnumerationErrorStrategy<T>(
-    ErroredEnumerationContinuation Continuation = ErroredEnumerationContinuation.Throw,
-    ValueExceptionHandler<T>? ExceptionHandler = null)
-{
-    public bool NoThrow => Continuation is not ErroredEnumerationContinuation.Throw;
-}
-
-internal delegate EnumerationErrorStrategy<T> EnumerationErrorStrategyBuilder<T>(EnumerationErrorStrategy<T> options);
 
 internal static class ExceptionHandlingMethods
 {
@@ -67,10 +59,18 @@ internal static class ExceptionHandlingMethods
         }
     }
 }
+internal readonly record struct EnumerationErrorStrategy<T>(
+    ErroredEnumerationContinuation Continuation = ErroredEnumerationContinuation.Throw,
+    ValueExceptionHandler<T>? ExceptionHandler = null)
+{
+    public bool NoThrow => Continuation is not ErroredEnumerationContinuation.Throw;
+}
+
+internal delegate EnumerationErrorStrategy<T> EnumerationErrorStrategyBuilder<T>(EnumerationErrorStrategy<T> options);
 
 internal static class LoggerExtensions
 {
-    public static EnumerationErrorStrategy<T> WithContinuation<T>(
+    public static EnumerationErrorStrategy<T> SetContinuation<T>(
         this EnumerationErrorStrategy<T> strategy,
         ErroredEnumerationContinuation continuation) =>
         strategy with
@@ -78,7 +78,7 @@ internal static class LoggerExtensions
             Continuation = continuation
         };
 
-    public static EnumerationErrorStrategy<T> AddLogExceptionHandler<T>(
+    public static EnumerationErrorStrategy<T> AddLoggerExceptionHandler<T>(
         this EnumerationErrorStrategy<T> strategy,
         ILogger logger,
         LogMessageBuilder<T> logMessageBuilder)
@@ -89,19 +89,15 @@ internal static class LoggerExtensions
 
         return strategy with
         {
-            ExceptionHandler = strategy.ExceptionHandler ?? CreateLogExceptionHandler(logger, strategy.Continuation, logMessageBuilder)
+            ExceptionHandler = strategy.ExceptionHandler ?? CreateLogExceptionHandler(logger, logLevel, logMessageBuilder)
         };
     }
 
-    public static ValueExceptionHandler<TCurrent>? CreateLogExceptionHandler<TCurrent>(
+    private static ValueExceptionHandler<TCurrent> CreateLogExceptionHandler<TCurrent>(
         this ILogger logger,
-        ErroredEnumerationContinuation erroredEnumerationContinuation,
+        LogLevel logLevel,
         LogMessageBuilder<TCurrent> logMessageBuilder)
     {
-        var logLevel = ToLogLevel(erroredEnumerationContinuation);
-        if (!logger.IsEnabled(logLevel))
-            return null;
-
         return (current, exception) => logMessageBuilder(current, (message, args) => logger.Log(logLevel, exception, message, args));
     }
 
