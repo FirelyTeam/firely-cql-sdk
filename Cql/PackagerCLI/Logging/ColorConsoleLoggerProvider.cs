@@ -1,4 +1,4 @@
-﻿namespace CqlSdkPrototype.Logging;
+﻿namespace Hl7.Cql.Packager.Logging;
 
 /// <remarks>
 /// This class is not part of the API. It is used internally by the prototype and the PackagerCLI.

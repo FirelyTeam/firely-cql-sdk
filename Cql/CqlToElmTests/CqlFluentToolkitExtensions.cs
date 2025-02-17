@@ -3,7 +3,6 @@ using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
-using DateTime = Hl7.Cql.Elm.DateTime;
 using Expression = Hl7.Cql.Elm.Expression;
 
 namespace Hl7.Cql.CqlToElm.Test;

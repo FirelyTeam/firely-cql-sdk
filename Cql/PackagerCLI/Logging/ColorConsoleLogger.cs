@@ -1,6 +1,8 @@
-﻿using Hl7.Cql.Abstractions.Infrastructure;
+﻿using System.Collections.Concurrent;
+using System.Text.RegularExpressions;
+using Microsoft.Extensions.Logging.Abstractions;
 
-namespace CqlSdkPrototype.Logging;
+namespace Hl7.Cql.Packager.Logging;
 
 /// <remarks>
 /// This class is not part of the API. It is used internally by the prototype and the PackagerCLI.
@@ -61,7 +63,7 @@ public sealed partial class ColorConsoleLogger(string categoryName, ColorConsole
             return originalFormat; // Nothing to format, return as is
 
         var colorFormat = GetOrdinalStringFormat(state, originalFormat);
-        var colorMessage = string.Format(CultureInfo.InvariantCulture, colorFormat, state.SelectToArray(s => s.Value));
+        var colorMessage = string.Format(CultureInfo.InvariantCulture, colorFormat, state.Select(s => s.Value).ToArray());
         return colorMessage;
     }
 

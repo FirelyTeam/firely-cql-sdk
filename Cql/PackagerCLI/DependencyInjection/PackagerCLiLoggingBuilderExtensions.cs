@@ -6,7 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using CqlSdkPrototype.Logging;
+using Hl7.Cql.Packager.Logging;
 using Serilog;
 using Serilog.Events;
 
