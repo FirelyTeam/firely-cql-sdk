@@ -211,17 +211,6 @@ internal static class EnumerableExtensions
     }
 
     /// <summary>
-    /// Returns an enumerable collection that contains a single item.
-    /// </summary>
-    /// <typeparam name="T">The type of the item.</typeparam>
-    /// <param name="item">The item to include in the collection.</param>
-    /// <returns>An enumerable collection that contains a single item.</returns>
-    public static IEnumerable<T> EnumerateSingle<T>(this T item)
-    {
-        yield return item;
-    }
-
-    /// <summary>
     /// Projects each element of a collection into a new form based on a selector function, and filters out elements based on a condition.
     /// </summary>
     /// <typeparam name="T">The type of elements in the source collection.</typeparam>

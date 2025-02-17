@@ -1,9 +1,14 @@
-﻿using Hl7.Cql.CodeGeneration.NET;
+﻿using CqlSdkPrototype.Infrastructure;
+using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Elm;
 
 namespace CqlSdkPrototype.Elm;
 
 /// <summary>
-/// Represents the compilation result of an ELM library to an assembly.
+/// Represents a state record by the <see cref="ElmToolkit"/>
+/// to convert the input <see cref="InElmLibrary"/> to
+/// the output <see cref="OutCSharpSourceCode"/>, <see cref="OutAssemblyBinary"/>
+/// and <see cref="OutDebugSymbolsBinary"/>.
 /// </summary>
 /// <param name="InElmLibrary">The input ELM library being compiled.</param>
 /// <param name="OutCSharpSourceCode">The output generated C# source code from the ELM library.</param>
@@ -17,4 +22,10 @@ public readonly record struct ElmToolkitConversionRecord(
     ElmLibrary InElmLibrary,
     string? OutCSharpSourceCode = null,
     byte[]? OutAssemblyBinary = null,
-    byte[]? OutDebugSymbolsBinary = null);
+    byte[]? OutDebugSymbolsBinary = null)
+{
+    /// <summary>
+    /// The library identifier of the input CQL library.
+    /// </summary>
+    public CqlVersionedLibraryIdentifier LibraryIdentifier { get; } = CqlVersionedLibraryIdentifier.Parse(InElmLibrary.GetVersionedIdentifier()!);
+}

@@ -91,20 +91,20 @@ public sealed class CqlToolkit
         var conversions = _services.LibraryBuilderProvider.ConversionsBuilder;
 
         var count = cqlLibraries
-            .TryForEach(
-                cqlLibrary =>
-                {
-                    var libId = cqlLibrary.LibraryIdentifier;
-
-                    logger.LogInformation("Adding CQL library {lib}", libId);
-                    var translation = new CqlToolkitConversionRecord(cqlLibrary);
-                    conversions.Add(libId, translation);
-                },
-                errorStrategy => errorStrategy
-                                 .SetContinuation(Config.ErroredEnumerationContinuation)
-                                 .AddLoggerExceptionHandler(
-                                     logger,
-                                     (cqlLibraryString, logMessage) => logMessage("Could not add CQL library for {lib}.", cqlLibraryString.LibraryIdentifier)));
+                    .Select(lib => new CqlToolkitConversionRecord(lib))
+                    .TryForEach(
+                        conversionRecord =>
+                        {
+                            var libId = conversionRecord.LibraryIdentifier;
+                            logger.LogInformation("Adding CQL library to CqlToolkit: {lib}", libId);
+                            conversions.Add(libId, conversionRecord); // This fails on duplicate key and value
+                        },
+                        errorStrategy => errorStrategy
+                                         .SetContinuation(Config.ErroredEnumerationContinuation)
+                                         .AddLoggerExceptionHandler(
+                                             logger,
+                                             (conversionRecord, logMessage) =>
+                                                 logMessage("Could not add CQL library to CqlToolkit: {lib}.", conversionRecord.LibraryIdentifier)));
 
         if (count > 0)
             ReplaceConversions(conversions.ToImmutable());
@@ -127,15 +127,17 @@ public sealed class CqlToolkit
                     r =>
                     {
                         if (!_services.LibraryBuilderProvider.TryResolveLibrary(r.LibraryIdentifier, out var libraryBuilder, out var error))
-                            throw new InvalidOperationException($"Could not resolve CQL library {r.LibraryIdentifier}: {error}.");
+                            throw new InvalidOperationException($"Could not resolve CQL library: {r.LibraryIdentifier} with error {error}.");
 
                         var elmLibrary = libraryBuilder.Build();
                         var newConversionRecord = r with { OutElmLibrary = elmLibrary };
                         conversions[r.LibraryIdentifier] = newConversionRecord;
                     },
-                    errorStrategy=> errorStrategy
-                        .SetContinuation(ErroredEnumerationContinuation.Continue)
-                        .AddLoggerExceptionHandler(_services.Logger, (conversion, messageBuilder) => messageBuilder("Could not translate CQL to ELM for {lib}", conversion.LibraryIdentifier))
+                    errorStrategy => errorStrategy
+                                     .SetContinuation(ErroredEnumerationContinuation.Continue)
+                                     .AddLoggerExceptionHandler(_services.Logger,
+                                                                (conversion, messageBuilder) =>
+                                                                    messageBuilder("Could not translate CQL to ELM: {lib}", conversion.LibraryIdentifier))
                 );
 
         if (count > 0)

@@ -1,6 +1,5 @@
 ﻿using System.Text.Json;
 using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Packaging;
 
@@ -47,8 +46,8 @@ public static partial class PackagingToolkitExtensions
             .Conversions
             .SelectWhere(kv => kv.Value switch
             {
-                { FhirLibrary:null } => (false, default!),
-                var val              => (true, selector((kv.Key, val.FhirLibrary, val.FhirMeasure)))
+                { OutFhirLibrary:null } => (false, default!),
+                var val              => (true, selector((kv.Key, val.OutFhirLibrary, val.OutFhirMeasure)))
             });
 
 }

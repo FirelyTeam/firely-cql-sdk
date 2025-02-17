@@ -33,7 +33,7 @@ internal sealed class LibraryBuilderProvider(
         if (!ConversionsBuilder.TryGetValue(libVer, out var elmTranslation))
             return false;
 
-        if (elmTranslation.ElmLibraryBuilder is { } lb)
+        if (elmTranslation.LibraryBuilder is { } lb)
         {
             libraryBuilder = lb;
             return true;
@@ -44,8 +44,8 @@ internal sealed class LibraryBuilderProvider(
         {
             var logger = CqlToElmTranslatorServices.LoggerFactory.CreateLogger<LibraryBuilderProvider>();
             logger.LogInformation("Parsing CQL for {id}", libVer);
-            libraryBuilder = CqlToElmTranslatorServices.CqlToElmConverter.GetBuilder(CqlToElmTranslatorServices.LibraryVisitor, elmTranslation.InCqlLibraryString.Cql);
-            ConversionsBuilder[libVer] = elmTranslation with { ElmLibraryBuilder = libraryBuilder };
+            libraryBuilder = CqlToElmTranslatorServices.CqlToElmConverter.GetBuilder(CqlToElmTranslatorServices.LibraryVisitor, elmTranslation.InCqlLibrary.Cql);
+            ConversionsBuilder[libVer] = elmTranslation with { LibraryBuilder = libraryBuilder };
             return true;
         }
 

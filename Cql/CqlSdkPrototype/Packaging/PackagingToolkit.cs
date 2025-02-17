@@ -68,26 +68,32 @@ public sealed class PackagingToolkit
     /// <summary>
     /// Adds FHIR resource packaging inputs to the packager.
     /// </summary>
-    /// <param name="sources">The collection of FHIR resource packaging inputs to add.</param>
-    public PackagingToolkit AddPackagingSources(IEnumerable<PackagingToolkitSourceRecord> sources)
+    /// <param name="inputRecords">The collection of FHIR resource packaging inputs to add.</param>
+    public PackagingToolkit AddPackagingInputs(IEnumerable<PackagingToolkitInputRecord> inputRecords)
     {
-        var builder = _conversions.ToBuilder();
-        var hasChanged = false;
-        foreach (var input in sources)
-        {
-            if (builder.TryGetValue(input.VersionedLibraryIdentifier, out var existing))
-            {
-                _services.Logger.LogInformation("Skipping replacing library {id} to packager.", input.VersionedLibraryIdentifier);
-                continue;
-            }
+        var conversions = _conversions.ToBuilder();
+        var logger = _services.Logger;
+        var count = inputRecords
+                    .Select(rec => new PackagingToolkitConversionRecord(rec))
+                    .TryForEach(conversionRecord =>
+                    {
+                        var libIdFromCql = conversionRecord.LibraryIdentifier;
+                        var libIdFromElm = CqlVersionedLibraryIdentifier.Parse(conversionRecord.InElmLibrary.GetVersionedIdentifier()!);
+                        if (libIdFromCql != libIdFromElm)
+                            throw new InvalidOperationException($"Library identifier mismatch between CQL and ELM libraries: CQL {libIdFromCql}, ELM: {libIdFromElm}.");
 
-            var fhirResourcePackaging = new PackagingToolkitConversionRecord(input);
-            builder.Add(input.VersionedLibraryIdentifier, fhirResourcePackaging);
-            hasChanged = true;
-        }
+                        logger.LogInformation("Adding CQL, ELM, C# and .NET Assembly Binary to PackagingToolkit: {lib}", libIdFromCql);
+                        conversions.Add(libIdFromCql, conversionRecord);
+                    },
+                    errorStrategy => errorStrategy
+                                     .SetContinuation(Config.ErroredEnumerationContinuation)
+                                     .AddLoggerExceptionHandler(
+                                         logger,
+                                         (conversionRecord, logMessage) =>
+                                             logMessage("Could not add CQL, ELM, C# and .NET Assembly Binary to PackagingToolkit: {lib}.", conversionRecord.LibraryIdentifier)));
 
-        if (hasChanged)
-            _conversions = builder.ToImmutable();
+        if (count > 0)
+            _conversions = conversions.ToImmutable();
 
         return this;
     }
@@ -96,7 +102,7 @@ public sealed class PackagingToolkit
     {
         var builder = _conversions.ToBuilder();
 
-        var libraries = builder.Values.Select(o => o.ElmLibrary);
+        var libraries = builder.Values.Select(o => o.InElmLibrary);
 
         var nodes = libraries.ToLibraryDependencyNodesByVersionedIdentifiers();
 
@@ -108,7 +114,7 @@ public sealed class PackagingToolkit
                  {
                      if (n.HasMissingDependenciesRecursive)
                      {
-                         logger.LogWarning("Skipping packaging FHIR resources for library {id} due to missing dependencies.", n.VersionedIdentifier);
+                         logger.LogWarning("Skipping packaging FHIR resources for library {lib} due to missing dependencies.", n.VersionedIdentifier);
                          return false;
                      }
 
@@ -132,18 +138,18 @@ public sealed class PackagingToolkit
                          errorStrategy => errorStrategy
                              .SetContinuation(Config.ErroredEnumerationContinuation)
                              .AddLoggerExceptionHandler(logger, (library, logMessage) => logMessage("Could not package FHIR resources for library {lib}", library.GetVersionedIdentifier()!)),
-                         onNextLibrary: library => logger.LogInformation("Packaging FHIR resources for library {id}.", library.GetVersionedIdentifier()))
+                         onNextLibrary: library => logger.LogInformation("Packaging FHIR resources for library: {lib}", library.GetVersionedIdentifier()))
                      .SelectWhere(o =>
                      {
                          var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(o.versionedLibraryIdentifier);
                          var fhirResourcePackaging = builder[versionedLibraryIdentifier];
-                         if (fhirResourcePackaging.FhirLibrary is null)
+                         if (fhirResourcePackaging.OutFhirLibrary is null)
                          {
-                             builder[versionedLibraryIdentifier] = fhirResourcePackaging with { FhirLibrary = o.fhirLibrary, FhirMeasure = o.fhirMeasure};
+                             builder[versionedLibraryIdentifier] = fhirResourcePackaging with { OutFhirLibrary = o.fhirLibrary, OutFhirMeasure = o.fhirMeasure};
                              return (true, o);
                          }
 
-                         logger.LogWarning("Skipping replacing existing FHIR resources for library {id}.", versionedLibraryIdentifier);
+                         logger.LogWarning("Skipping replacing existing FHIR resources for library: {lib}.", versionedLibraryIdentifier);
                          return (false, default);
                      })
                      .Count();
@@ -155,9 +161,9 @@ public sealed class PackagingToolkit
     }
 
     private static ResourcePackager.SourceArtefacts ToResourcePackagerInput(PackagingToolkitConversionRecord o) => new(
-        o.VersionedLibraryIdentifier.ToString(),
-        o.CqlLibrary.Cql,
-        o.ElmLibrary,
-        o.CSharpSourceCode,
-        o.AssemblyBinary);
+        o.LibraryIdentifier.ToString(),
+        o.InCqlLibrary.Cql,
+        o.InElmLibrary,
+        o.InCSharpSourceCode,
+        o.InAssemblyBinary);
 }

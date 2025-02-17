@@ -85,31 +85,28 @@ public sealed class ElmToolkit
     /// <summary>
     /// Adds ELM libraries to the compiler.
     /// </summary>
-    /// <param name="libraries">The libraries to add.</param>
-    public ElmToolkit AddElmLibraries(IEnumerable<ElmLibrary> libraries)
+    /// <param name="elmLibraries">The libraries to add.</param>
+    public ElmToolkit AddElmLibraries(IEnumerable<ElmLibrary> elmLibraries)
     {
-        var builder = _conversions.ToBuilder();
-        var hasChanged = false;
-        foreach (var library in libraries)
-        {
-            var versionedIdentifier = CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier);
+        var conversions = _conversions.ToBuilder();
+        var logger = _services.Logger;
+        var count = elmLibraries
+                    .Select(elmLibrary => new ElmToolkitConversionRecord(elmLibrary))
+                    .TryForEach(conversionRecord =>
+                                {
+                                    var libId = conversionRecord.LibraryIdentifier;
+                                    logger.LogInformation("Adding ELM library to ElmToolkit: {lib}", libId);
+                                    conversions.Add(libId, conversionRecord); // This fails on duplicate key and value
+                                },
+                                errorStrategy => errorStrategy
+                                                 .SetContinuation(Config.ErroredEnumerationContinuation)
+                                                 .AddLoggerExceptionHandler(
+                                                     logger,
+                                                     (conversionRecord, logMessage) =>
+                                                         logMessage("Could not add ELM library to ElmToolkit: {lib}", conversionRecord.LibraryIdentifier)));
 
-            if (builder.TryGetValue(versionedIdentifier, out var existingVersionedIdentifier))
-            {
-                _services.Logger.LogWarning(
-                    "Skipping replacing library {existingVersionedIdentifier} to compiler with new library: {versionedIdentifier}, ",
-                    existingVersionedIdentifier, versionedIdentifier);
-                continue;
-            }
-
-            var libraryCompilation = new ElmToolkitConversionRecord(library);
-            builder.Add(versionedIdentifier, libraryCompilation);
-            _services.Logger.LogInformation("Adding library to compiler: {versionedIdentifier}", versionedIdentifier);
-            hasChanged = true;
-        }
-
-        if (hasChanged)
-            ReplaceConversions(conversions: builder.ToImmutable());
+        if (count > 0)
+            ReplaceConversions(conversions: conversions.ToImmutable());
 
         return this;
     }
@@ -123,9 +120,10 @@ public sealed class ElmToolkit
         if (entries.Values.All(predicate: lc => lc is { OutAssemblyBinary: not null }))
             return this;
 
+        var logger = _services.Logger;
         using var servicesScope = _services.CreateScopedState();
 
-        _services.Logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
+        logger.LogInformation(message: "Compiling ELM into C# and .NET Binaries");
         var debugInformationFormat = Config.AssemblyCompilerDebugInformationFormat;
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _services.LibrarySetCSharpCodeGenerator;
@@ -135,14 +133,14 @@ public sealed class ElmToolkit
 
         var removedLibraries = librarySet.RemoveLibrariesWithMissingDependencies();
         foreach (var (id, _) in removedLibraries)
-            _services.Logger.LogWarning(message: "Removed library with missing dependencies: {id}", args: id);
+            logger.LogWarning(message: "Removed library with missing dependencies: {id}", args: id);
 
         var librarySetDefinitions = BuildLibrarySetDefinitions(librarySetExpressionBuilderScoped, librarySet);
         var cSharps = GenerateCSharp(cSharpCodeProcessor, librarySet, librarySetDefinitions);
         var assemblyBinaries = CompileAssemblies(assemblyCompiler, librarySet, cSharps, debugInformationFormat);
 
         var entriesBuilder = entries.ToBuilder();
-        var hasChanged = UpdateConversions(assemblyBinaries, entriesBuilder, _services.Logger);
+        var hasChanged = UpdateConversions(assemblyBinaries, entriesBuilder, logger);
         if (hasChanged)
             ReplaceConversions(conversions: entriesBuilder.ToImmutable());
 
@@ -169,7 +167,7 @@ public sealed class ElmToolkit
             if (libraryCompilation.OutCSharpSourceCode is not null
                 || libraryCompilation.OutAssemblyBinary is not null)
             {
-                logger.LogInformation(message: "Library already compiled: {versionedIdentifier}", args: elmVersionedIdentifier);
+                logger.LogInformation(message: "Library already compiled: {lib}", args: elmVersionedIdentifier);
                 continue;
             }
 
@@ -202,14 +200,15 @@ public sealed class ElmToolkit
         AssemblyCompilerDebugInformationFormat debugInformationFormat) =>
         assemblyCompiler
             .CompileEachLibraryToAssemblies(
-                cSharps.WithEach(t => _services.Logger.LogInformation("Compiling C# into .NET Assembly for {id}", t.library.identifier)),
+                cSharps.WithEach(t => _services.Logger.LogInformation("Compiling C# into .NET Assembly: {lib}", t.library.identifier)),
                 librarySet,
                 debugInformationFormat,
                 errorStrategy => errorStrategy
                                  .SetContinuation(Config.ErroredEnumerationContinuation)
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
-                                     (pair, logMessage) => logMessage("Could not compile C# to .NET Assembly for {id}", pair.Library.GetVersionedIdentifier()!)));
+                                     (pair, logMessage) =>
+                                         logMessage("Could not compile C# to .NET Assembly: {lib}", pair.library.GetVersionedIdentifier()!)));
 
     /// <summary>
     /// Generates the C# code for the libraries.
@@ -230,8 +229,8 @@ public sealed class ElmToolkit
                                  .SetContinuation(Config.ErroredEnumerationContinuation)
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
-                                     (library, log) => log("Could not generate definitions into C# for {id}", library.GetVersionedIdentifier())),
-                library => _services.Logger.LogInformation("Generating definitions into C# for {id} ", library.GetVersionedIdentifier()));
+                                     (library, log) => log("Could not generate definitions into C#: {lib}", library.GetVersionedIdentifier())),
+                library => _services.Logger.LogInformation("Generating definitions into C#: {lib} ", library.GetVersionedIdentifier()));
 
     /// <summary>
     /// Builds the library set definitions.

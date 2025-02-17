@@ -1,26 +1,29 @@
-﻿using CqlSdkPrototype.Infrastructure;
+﻿using CqlSdkPrototype.Cql.Internal;
+using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.CqlToElm;
 
 namespace CqlSdkPrototype.Cql;
 
 /// <summary>
-/// Represents a conversion record used by the <see cref="CqlToolkit"/>
+/// Represents a state record by the <see cref="CqlToolkit"/>
 /// to convert the input <see cref="CqlLibraryString"/> to
-/// output <see cref="ElmLibrary"/>.
+/// the output <see cref="ElmLibrary"/>.
 /// </summary>
-/// <param name="InCqlLibraryString">The input CQL library string.</param>
+/// <param name="InCqlLibrary">The input CQL library string.</param>
 /// <param name="OutElmLibrary">The output ELM library.</param>
 public readonly record struct CqlToolkitConversionRecord(
-    CqlLibraryString InCqlLibraryString,
+    CqlLibraryString InCqlLibrary,
     ElmLibrary? OutElmLibrary = null) {
 
     /// <summary>
     /// The library identifier of the input CQL library.
     /// </summary>
-    public CqlVersionedLibraryIdentifier LibraryIdentifier => InCqlLibraryString.LibraryIdentifier;
+    public CqlVersionedLibraryIdentifier LibraryIdentifier => InCqlLibrary.LibraryIdentifier;
 
     /// <summary>
-    /// The builder for the ELM library. This is set during <seealso cref="CqlToolkit.AddCqlLibraries"/>.
+    /// The library builder service for the ELM library.
+    /// This is set from <seealso cref="LibraryBuilderProvider.TryResolveLibrary"/>
+    /// when the ELM library is resolved in <see cref="CqlToolkit.ConvertCqlToElm"/>.
     /// </summary>
-    internal LibraryBuilder? ElmLibraryBuilder { get; init; }
+    internal LibraryBuilder? LibraryBuilder { get; init; }
 }
