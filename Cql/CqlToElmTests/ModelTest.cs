@@ -54,7 +54,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define function f(q Quantity): q
             ").Build();
             var or = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<OperandRef>();
-            or.Should().HaveType(SystemTypes.QuantityType);
+            or.Should().HaveType(SystemLibrary.QuantityType);
         }
 
         [TestMethod]

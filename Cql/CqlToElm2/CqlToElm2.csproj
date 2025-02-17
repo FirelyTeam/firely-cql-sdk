@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\cql-sdk.props" />
+
+	<PropertyGroup>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<AssemblyName>Hl7.Cql.CqlToElm2</AssemblyName>
+		<RootNamespace>Hl7.Cql.CqlToElm2</RootNamespace>
+		<NoWarn>RS0016</NoWarn>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Cql.Grammar\Cql.Grammar.csproj" />
+		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
+		<InternalsVisibleTo Include="CqlToElm2Tests" />
+	</ItemGroup>
+
+</Project>

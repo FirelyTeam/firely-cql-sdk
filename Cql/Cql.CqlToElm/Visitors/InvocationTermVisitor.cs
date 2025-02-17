@@ -1,6 +1,7 @@
 ﻿using Antlr4.Runtime.Misc;
-using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
+using Hl7.Cql.CqlToElm.System;
+
 using Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using System;
@@ -20,7 +21,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 var term = qualifiers[0].referentialIdentifier().Parse();
                 if (LibraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
-                    expression = symbol.ToRef(null);
+                    expression = LibraryBuilder.ToRef(symbol, null);
                 else return new IdentifierRef
                 {
                     name = term,
@@ -39,7 +40,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 var term = context.referentialIdentifier().Parse();
                 if (LibraryBuilder.CurrentScope.TryResolveSymbol(term, out var symbol))
-                    return symbol.ToRef(null);
+                    return LibraryBuilder.ToRef(symbol, null);
                 else return new IdentifierRef
                 {
                     name = term,
@@ -53,7 +54,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             if (term is UsingRef ur)
                 return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
-                    "A reference to a model library is unexpected at this point.").WithLocator(context.Locator());
+                    "A reference to a model library is unexpected at this point.")
+                    .WithResultType(SystemLibrary.AnyType)
+                    .WithLocator(context.Locator());
             else if (term is IncludeRef ir)
                 return ir.AddError(Messaging.ExpressionCannotBeLibraryRef(ir.IncludeDef.localIdentifier))
                     .WithLocator(context.Locator());
@@ -62,12 +65,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var message = $"Type {context.expressionTerm().GetType()} is not implemented";
                 return new Message()
                 {
-                    source = new Null().WithResultType(SystemTypes.AnyType),
+                    source = new Null().WithResultType(SystemLibrary.AnyType),
                     message = ElmFactory.Literal(message),
                 }
                 .AddError(message)
                 .WithLocator(context.Locator())
-                .WithResultType(SystemTypes.AnyType);
+                .WithResultType(SystemLibrary.AnyType);
             }
             else return term;
         }
@@ -77,7 +80,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var type = TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
             if (type is Elm.NamedTypeSpecifier namedType)
             {
-                var modelType = TypeBridge.ToModelSpecifier(namedType, ModelProvider, Options)
+                var modelType = TypeHelpers.ToModelSpecifier(namedType, ModelProvider)
                     .GetTypeDefinition();
                 if (modelType != null)
                 {
@@ -97,7 +100,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             }
                             else
                             {
-                                var elementType = TypeBridge.ToElmSpecifier(classElement.Type);
+                                var elementType = TypeHelpers.ToElmSpecifier(classElement.Type);
                                 var elementExpression = Visit(instanceElementContexts[i]);
                                 var conversionResult = CoercionProvider.Coerce(elementExpression, elementType);
                                 if (conversionResult.Success)
@@ -151,7 +154,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var left = Visit(context.expressionTerm());
             if (left is UsingRef ur)
                 return SymbolScopeExtensions.MakeErrorReference(null, ur.UsingDef.localIdentifier,
-                    "A reference to a type is unexpected at this point.").WithLocator(context.Locator());
+                    "A reference to a type is unexpected at this point.")
+                    .WithResultType(SystemLibrary.AnyType)
+                    .WithLocator(context.Locator());
 
             var invocation = context.GetChild(2) switch
             {
@@ -168,7 +173,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 {
                     var libraryName = ir.IncludeDef.localIdentifier;
                     return LibraryBuilder.CurrentScope
-                        .Ref(Messaging, libraryName, memberName)
+                        .Ref(LibraryBuilder, Messaging, libraryName, memberName)
                         .WithLocator(context.Locator());
                 }
                 else
@@ -233,14 +238,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     operand = new IsNull
                     {
                         operand = prop
-                    }.WithResultType(SystemTypes.BooleanType)
-                }.WithResultType(SystemTypes.BooleanType),
+                    }.WithResultType(SystemLibrary.BooleanType)
+                }.WithResultType(SystemLibrary.BooleanType),
                 @return = new ReturnClause()
                 {
                     expression = prop,
                     distinct = false
                 }
-            }.WithResultType(prop.resultTypeSpecifier.ToListType());
+            }.WithResultType(prop.resultTypeSpecifier.ToListType(SystemLibrary));
 
             // If the result itself is again a list (as in Patient.name.given), then the FhirPath
             // logic requires us to flatten that list.
@@ -261,7 +266,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return memberName switch
             {
                 "low" or "high" => prop.WithResultType(ivs.pointType),
-                "lowClosed" or "highClosed" => prop.WithResultType(SystemTypes.BooleanType),
+                "lowClosed" or "highClosed" => prop.WithResultType(SystemLibrary.BooleanType),
                 _ => prop.AddError($"Invalid interval property name '{memberName}'.")
             };
         }
@@ -285,7 +290,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             else
             {
                 prop.AddError($"Member '{memberName}' not found in tuple.");
-                prop.WithResultType(SystemTypes.AnyType);
+                prop.WithResultType(SystemLibrary.AnyType);
             }
 
             return prop;
@@ -293,19 +298,19 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         private Property navigateIntoNamedType(Expression source, Elm.NamedTypeSpecifier nts, string memberName)
         {
-            var type = TypeBridge.ToModelSpecifier(nts, ModelProvider, Options).GetTypeDefinition();
+            var type = TypeHelpers.ToModelSpecifier(nts, ModelProvider, Options).GetTypeDefinition();
             var prop = makeProp(source, memberName);
             if (type is ClassTypeDefinition ci &&
                 ci.TryGetElement(memberName, out var element))
             {
-                var elmType = TypeBridge.ToElmSpecifier(element.Type);
+                var elmType = TypeHelpers.ToElmSpecifier(element.Type);
                 return prop.WithResultType(elmType);
             }
             else
             {
                 return prop
                     .AddError($"Member '{memberName}' not found for type {nts}.")
-                    .WithResultType(SystemTypes.AnyType);
+                    .WithResultType(SystemLibrary.AnyType);
             }
         }
 
@@ -319,20 +324,20 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 if (LibraryBuilder.CurrentScope.TryResolveSymbol(null, "$this", out var @this))
                 {
-                    var propertyExpression = navigateIntoType(@this!.ToRef(null), identifier);
+                    var propertyExpression = navigateIntoType(LibraryBuilder.ToRef(@this, null), identifier);
                     // in a query context, when a property doesn't exist on $this, a could not resolve
                     // error is issued instead of a "member not found" error.
                     if (@this.Name == "$this" && propertyExpression.GetErrors()?.Length > 0)
                         return new AliasRef { name = identifier }
                             .AddError(Messaging.CouldNotResolveInCurrent(identifier))
                             .WithLocator(context.Locator())
-                            .WithResultType(SystemTypes.AnyType);
+                            .WithResultType(SystemLibrary.AnyType);
                     else
                         return propertyExpression;
                 }
             }
             var @ref = LibraryBuilder.CurrentScope!
-                .Ref(Messaging, null, identifier)
+                .Ref(LibraryBuilder, Messaging, null, identifier)
                 .WithLocator(context.Locator());
             if (def is Element element)
             {
@@ -367,7 +372,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 if (LibraryBuilder.CurrentScope.TryResolveFluentFunction(funcName, out symbolDef))
                 {
-                    var fluentParams = new Expression[] { @this.ToRef(null) }.Concat(paramList).ToArray();
+                    var fluentParams = new Expression[] { LibraryBuilder.ToRef(@this, null) }.Concat(paramList).ToArray();
                     var result = symbolDef switch
                     {
                         IHasSignature ihs => InvocationBuilder.MatchSignature(ihs, fluentParams),
@@ -404,7 +409,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             }
             return invoke(symbolDef, libraryName, paramList, fluent);
             FunctionRef unresolved() => new FunctionRef { name = funcName, operand = paramList }
-                    .WithResultType(SystemTypes.AnyType)
+                    .WithResultType(SystemLibrary.AnyType)
                     .WithLocator(locator)
                     .AddError(Messaging.CouldNotResolveFunction(funcName, paramList));
             Expression initializeFunctionRef(FunctionDef funcDef, string? libraryName, Expression[] arguments, bool fluent)
@@ -434,7 +439,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         name = function.Name,
                         libraryName = libraryName,
                     }
-                    .WithResultType(SystemTypes.AnyType)
+                    .WithResultType(SystemLibrary.AnyType)
                     .WithLocator(locator)
                     .AddError(result.Error() ?? throw new InvalidOperationException($"No compatible overload was found, but no error message was populated."));
             }
@@ -463,19 +468,19 @@ namespace Hl7.Cql.CqlToElm.Visitors
         // | '$this'                           #thisInvocation
         public override Expression VisitThisInvocation([NotNull] cqlParser.ThisInvocationContext context) =>
             LibraryBuilder.CurrentScope
-                .Ref(Messaging, null, context.GetText())
+                .Ref(LibraryBuilder, Messaging, null, context.GetText())
                 .WithLocator(context.Locator());
 
         // | '$index'                          #indexInvocation
         public override Expression VisitIndexInvocation([NotNull] cqlParser.IndexInvocationContext context) =>
             LibraryBuilder.CurrentScope
-                .Ref(Messaging, null, context.GetText())
+                .Ref(LibraryBuilder, Messaging, null, context.GetText())
                 .WithLocator(context.Locator());
 
         // | '$total'                          #totalInvocation
         public override Expression VisitTotalInvocation([NotNull] cqlParser.TotalInvocationContext context) =>
             LibraryBuilder.CurrentScope
-                .Ref(Messaging, null, context.GetText())
+                .Ref(LibraryBuilder, Messaging, null, context.GetText())
                 .WithLocator(context.Locator());
     }
 

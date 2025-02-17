@@ -14,6 +14,5 @@ namespace Hl7.Cql.Model
 
         bool TryGetModelFromUri(string uri, [NotNullWhen(true)] out ModelDefinition? model);
 
-        bool TryGetType(string qualfiedName, [NotNullWhen(true)] out TypeDefinition? type);
     }
 }

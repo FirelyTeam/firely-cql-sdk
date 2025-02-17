@@ -1,5 +1,5 @@
 ﻿using Antlr4.Runtime.Misc;
-using Hl7.Cql.CqlToElm.Builtin;
+using Hl7.Cql.CqlToElm.System;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(expressions[0]);
             var rhs = Visit(expressions[1]);
 
-            var and = InvocationBuilder.Invoke(SystemLibrary.And, lhs, rhs);
+            var and = InvocationBuilder.Invoke(SystemLibrary.Operators.And, lhs, rhs);
             return and
                 .WithId()
                 .WithLocator(context.Locator());
@@ -33,9 +33,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var invocation = @operator switch
             {
-                "+" => InvocationBuilder.Invoke(SystemLibrary.Add, lhs, rhs),
-                "-" => InvocationBuilder.Invoke(SystemLibrary.Subtract, lhs, rhs),
-                "&" => InvocationBuilder.Invoke(SystemLibrary.Concatenate, lhs, rhs),
+                "+" => InvocationBuilder.Invoke(SystemLibrary.Operators.Add, lhs, rhs),
+                "-" => InvocationBuilder.Invoke(SystemLibrary.Operators.Subtract, lhs, rhs),
+                "&" => InvocationBuilder.Invoke(SystemLibrary.Operators.Concatenate, lhs, rhs),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in addition expression."),
             };
             return invocation
@@ -45,21 +45,21 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
         //    | 'difference' 'in' pluralDateTimePrecision 'between' expressionTerm 'and' expressionTerm       #differenceBetweenExpression
         public override Expression VisitDifferenceBetweenExpression([NotNull] cqlParser.DifferenceBetweenExpressionContext context) =>
-            VisitBinaryWithPrecision(SystemLibrary.DifferenceBetween, context, context.pluralDateTimePrecision(), context.expressionTerm());
+            VisitBinaryWithPrecision(SystemLibrary.Operators.DifferenceBetween, context, context.pluralDateTimePrecision(), context.expressionTerm());
 
         //     | ('duration' 'in')? pluralDateTimePrecision 'between' expressionTerm 'and' expressionTerm      #durationBetweenExpression
         public override Expression VisitDurationBetweenExpression([NotNull] cqlParser.DurationBetweenExpressionContext context) =>
-            VisitBinaryWithPrecision(SystemLibrary.DurationBetween, context, context.pluralDateTimePrecision(), context.expressionTerm());
+            VisitBinaryWithPrecision(SystemLibrary.Operators.DurationBetween, context, context.pluralDateTimePrecision(), context.expressionTerm());
 
 
         // | 'duration' 'in' pluralDateTimePrecision 'of' expressionTerm                   #durationExpressionTerm
         public override Expression VisitDurationExpressionTerm([NotNull] cqlParser.DurationExpressionTermContext context) =>
-             handleDurationDifference(context.pluralDateTimePrecision(), context.expressionTerm(), SystemLibrary.DurationBetween)
+             handleDurationDifference(context.pluralDateTimePrecision(), context.expressionTerm(), SystemLibrary.Operators.DurationBetween)
                 .WithLocator(context.Locator());
 
         // | 'difference' 'in' pluralDateTimePrecision 'of' expressionTerm                   #durationExpressionTerm
         public override Expression VisitDifferenceExpressionTerm([NotNull] cqlParser.DifferenceExpressionTermContext context) =>
-             handleDurationDifference(context.pluralDateTimePrecision(), context.expressionTerm(), SystemLibrary.DifferenceBetween)
+             handleDurationDifference(context.pluralDateTimePrecision(), context.expressionTerm(), SystemLibrary.Operators.DifferenceBetween)
                 .WithLocator(context.Locator());
 
         private Expression handleDurationDifference(cqlParser.PluralDateTimePrecisionContext precisionContext, cqlParser.ExpressionTermContext expressionTerms, OverloadedFunctionDef systemFunction)
@@ -69,8 +69,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
             Expression lhs, rhs;
             if (operand.resultTypeSpecifier is IntervalTypeSpecifier { })
             {
-                lhs = InvocationBuilder.Invoke(SystemLibrary.Start, operand);
-                rhs = InvocationBuilder.Invoke(SystemLibrary.End, operand);
+                lhs = InvocationBuilder.Invoke(SystemLibrary.Operators.Start, operand);
+                rhs = InvocationBuilder.Invoke(SystemLibrary.Operators.End, operand);
             }
             else
             {
@@ -101,9 +101,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var expression = @operator switch
             {
-                "=" => InvocationBuilder.Invoke(SystemLibrary.Equal, lhs, rhs),
-                "!=" => InvocationBuilder.Invoke(SystemLibrary.NotEqual, lhs, rhs),
-                "~" => InvocationBuilder.Invoke(SystemLibrary.Equivalent, lhs, rhs),
+                "=" => InvocationBuilder.Invoke(SystemLibrary.Operators.Equal, lhs, rhs),
+                "!=" => InvocationBuilder.Invoke(SystemLibrary.Operators.NotEqual, lhs, rhs),
+                "~" => InvocationBuilder.Invoke(SystemLibrary.Operators.Equivalent, lhs, rhs),
                 "!~" => NotEquivalent(lhs, rhs),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in equality expression.")
             };
@@ -113,8 +113,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression NotEquivalent(Expression lhs, Expression rhs)
             {
-                var equivalent = InvocationBuilder.Invoke(SystemLibrary.Equivalent, lhs, rhs);
-                var not = InvocationBuilder.Invoke(SystemLibrary.Not, equivalent);
+                var equivalent = InvocationBuilder.Invoke(SystemLibrary.Operators.Equivalent, lhs, rhs);
+                var not = InvocationBuilder.Invoke(SystemLibrary.Operators.Not, equivalent);
                 return not;
             }
         }
@@ -126,7 +126,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(expressions[0]);
             var rhs = Visit(expressions[1]);
 
-            return InvocationBuilder.Invoke(SystemLibrary.Implies, lhs, rhs)
+            return InvocationBuilder.Invoke(SystemLibrary.Operators.Implies, lhs, rhs)
                 .WithId()
                 .WithLocator(context.Locator());
         }
@@ -141,10 +141,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression result = @operator switch
             {
-                ">" => InvocationBuilder.Invoke(SystemLibrary.Greater, lhs, rhs),
-                ">=" => InvocationBuilder.Invoke(SystemLibrary.GreaterOrEqual, lhs, rhs),
-                "<" => InvocationBuilder.Invoke(SystemLibrary.Less, lhs, rhs),
-                "<=" => InvocationBuilder.Invoke(SystemLibrary.LessOrEqual, lhs, rhs),
+                ">" => InvocationBuilder.Invoke(SystemLibrary.Operators.Greater, lhs, rhs),
+                ">=" => InvocationBuilder.Invoke(SystemLibrary.Operators.GreaterOrEqual, lhs, rhs),
+                "<" => InvocationBuilder.Invoke(SystemLibrary.Operators.Less, lhs, rhs),
+                "<=" => InvocationBuilder.Invoke(SystemLibrary.Operators.LessOrEqual, lhs, rhs),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in inequality expression."),
             };
 
@@ -163,10 +163,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var expression = @operator switch
             {
-                "*" => InvocationBuilder.Invoke(SystemLibrary.Multiply, lhs, rhs),
-                "/" => InvocationBuilder.Invoke(SystemLibrary.Divide, lhs, rhs),
-                "div" => InvocationBuilder.Invoke(SystemLibrary.TruncatedDivide, lhs, rhs),
-                "mod" => InvocationBuilder.Invoke(SystemLibrary.Modulo, lhs, rhs),
+                "*" => InvocationBuilder.Invoke(SystemLibrary.Operators.Multiply, lhs, rhs),
+                "/" => InvocationBuilder.Invoke(SystemLibrary.Operators.Divide, lhs, rhs),
+                "div" => InvocationBuilder.Invoke(SystemLibrary.Operators.TruncatedDivide, lhs, rhs),
+                "mod" => InvocationBuilder.Invoke(SystemLibrary.Operators.Modulo, lhs, rhs),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in multiplication expression.")
             };
             return expression
@@ -185,8 +185,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             Expression result = @operator switch
             {
-                "or" => InvocationBuilder.Invoke(SystemLibrary.Or, lhs, rhs),
-                "xor" => InvocationBuilder.Invoke(SystemLibrary.Xor, lhs, rhs),
+                "or" => InvocationBuilder.Invoke(SystemLibrary.Operators.Or, lhs, rhs),
+                "xor" => InvocationBuilder.Invoke(SystemLibrary.Operators.Xor, lhs, rhs),
                 _ => throw new InvalidOperationException($"Parser returned unknown token '{@operator}' in (x)or expression.")
             };
 
@@ -202,7 +202,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var lhs = Visit(terms[0]);
             var rhs = Visit(terms[1]);
 
-            return InvocationBuilder.Invoke(SystemLibrary.Power, lhs, rhs)
+            return InvocationBuilder.Invoke(SystemLibrary.Operators.Power, lhs, rhs)
                 .WithId()
                 .WithLocator(context.Locator());
         }
@@ -220,18 +220,18 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 type = listType.elementType;
             else if (term.resultTypeSpecifier is NamedTypeSpecifier namedType)
             {
-                if (namedType == SystemTypes.StringType)
-                    type = SystemTypes.StringType;
+                if (namedType == SystemLibrary.StringType)
+                    type = SystemLibrary.StringType;
                 else
                 {
                     indexer.AddError($"Unable to index type {namedType.name}");
-                    type = SystemTypes.AnyType;
+                    type = SystemLibrary.AnyType;
                 }
             }
             else
             {
                 indexer.AddError($"Unable to index type {term.resultTypeSpecifier}");
-                type = SystemTypes.AnyType;
+                type = SystemLibrary.AnyType;
             }
             return indexer
                 .WithLocator(context.Locator())
@@ -250,34 +250,38 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 var precision = Precision(context.dateTimePrecisionSpecifier());
                 var args = precision is null ? new Expression[] { lhs, rhs } : new Expression[] { lhs, rhs, precision };
-                if (rhs.resultTypeSpecifier == SystemTypes.ValueSetType)
+                if (rhs.resultTypeSpecifier == SystemLibrary.ValueSetType)
                 {
                     return lhs.resultTypeSpecifier switch
                     {
-                        ListTypeSpecifier => InvocationBuilder.Invoke(SystemLibrary.AnyInValueSet, lhs, rhs),
-                        _ => InvocationBuilder.Invoke(SystemLibrary.InValueSet, lhs, rhs),
+                        ListTypeSpecifier or =>
+                            InvocationBuilder.Invoke(SystemLibrary.Operators.AnyInValueSet, lhs, rhs),
+                        GenericTypeSpecifier gts when gts.type?.name?.Name == Options.LiteralTypeNames.List =>
+                            InvocationBuilder.Invoke(SystemLibrary.Operators.AnyInValueSet, lhs, rhs),
+                        _ =>
+                            InvocationBuilder.Invoke(SystemLibrary.Operators.InValueSet, lhs, rhs),
                     };
                 }
                 else
                 {
-                    var match = InvocationBuilder.MatchSignature(SystemLibrary.In, args);
+                    var match = InvocationBuilder.MatchSignature(SystemLibrary.Operators.In, args);
                     if (match.Compatible)
                         expression = InvocationBuilder.Invoke(match);
                     else
                         expression = new In { operand = new[] { lhs, rhs } }
-                            .AddError(Messaging.CouldNotResolveFunction(SystemLibrary.In.Name, lhs, rhs))
-                            .WithResultType(SystemTypes.BooleanType);
+                            .AddError(Messaging.CouldNotResolveFunction(SystemLibrary.Operators.In.Name, lhs, rhs))
+                            .WithResultType(SystemLibrary.BooleanType);
                 }
             }
             else
             {
-                var match = InvocationBuilder.MatchSignature(SystemLibrary.Contains, new[] { lhs, rhs });
+                var match = InvocationBuilder.MatchSignature(SystemLibrary.Operators.Contains, new[] { lhs, rhs });
                 if (match.Compatible)
                     expression = InvocationBuilder.Invoke(match);
                 else
                     expression = new Contains { operand = new[] { lhs, rhs } }
-                        .AddError(Messaging.CouldNotResolveFunction(SystemLibrary.Contains.Name, lhs, rhs))
-                        .WithResultType(SystemTypes.BooleanType);
+                        .AddError(Messaging.CouldNotResolveFunction(SystemLibrary.Operators.Contains.Name, lhs, rhs))
+                        .WithResultType(SystemLibrary.BooleanType);
             }
             return expression
                 .WithId()
@@ -293,9 +297,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var right = Visit(expressions[1]);
             var function = context.GetChild(1).GetText() switch
             {
-                "|" or "union" => SystemLibrary.Union,
-                "except" => SystemLibrary.Except,
-                "intersect" => SystemLibrary.Intersect,
+                "|" or "union" => SystemLibrary.Operators.Union,
+                "except" => SystemLibrary.Operators.Except,
+                "intersect" => SystemLibrary.Operators.Intersect,
                 _ => throw new InvalidOperationException($"Expectiong an infix set operator; found {context.GetChild(1).GetText()}")
             };
             var result = InvocationBuilder.Invoke(function, left, right);
@@ -312,14 +316,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var expressions = context.expression().Select(Visit).ToArray();
             var function = keyword switch
             {
-                CqlKeyword.Expand => SystemLibrary.Expand,
-                CqlKeyword.Collapse => SystemLibrary.Collapse,
+                CqlKeyword.Expand => SystemLibrary.Operators.Expand,
+                CqlKeyword.Collapse => SystemLibrary.Operators.Collapse,
                 _ => throw new InvalidOperationException($"Expecting collapse or expand, but found {keyword}")
             };
             var arguments = dtp switch
             {
                 { } units => [.. expressions, ElmFactory.Quantity(1, units)],
-                _ when expressions.Length is 1 => [.. expressions, ElmFactory.Null(SystemTypes.QuantityType)],
+                _ when expressions.Length is 1 => [.. expressions, ElmFactory.Null(SystemLibrary.QuantityType)],
                 _ when expressions.Length is 2 => expressions,
                 _ => throw new InvalidOperationException($"Expecting 1 or 2 arguments, but found {expressions.Length}")
             };

@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -328,10 +329,10 @@ namespace Hl7.Cql.CqlToElm.Test
             db.operand.Should().HaveCount(2);
             var start = db.operand[0].Should().BeOfType<Start>().Subject;
             var si = start.operand.Should().BeOfType<Interval>().Subject;
-            si.Should().HaveType(SystemTypes.DateTimeType.ToIntervalType());
+            si.Should().HaveType(SystemLibrary.DateTimeType.ToIntervalType(SystemLibrary));
             var end = db.operand[1].Should().BeOfType<End>().Subject;
             var ei = end.operand.Should().BeOfType<Interval>().Subject;
-            ei.Should().HaveType(SystemTypes.DateTimeType.ToIntervalType());
+            ei.Should().HaveType(SystemLibrary.DateTimeType.ToIntervalType(SystemLibrary));
         }
 
         [TestMethod]

@@ -1,6 +1,6 @@
 ﻿using Antlr4.Runtime.Misc;
-using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
+using Hl7.Cql.CqlToElm.System;
 using Hl7.Cql.Elm;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,16 +22,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
 
         public IServiceProvider Services { get; }
-        public SystemLibrary SystemLibrary => Services.GetRequiredService<SystemLibrary>();
-
-
         private CqlToElmOptions Options { get; }
         private Model.IModelProvider ModelProvider => Services.GetRequiredService<Model.IModelProvider>();
 
         private UsingDefSymbol? GetDefaultSystemModel()
         {
             var systemUri = Options.SystemElmModelUri;
-            var systemVersion = Options.SystemElmModelVersion ?? SystemTypes.SystemModelVersion;
+            var systemVersion = Options.SystemElmModelVersion ?? System100.Version;
 
             if (string.IsNullOrWhiteSpace(systemUri))
                 return null;
@@ -50,7 +47,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var identifier = context.libraryDefinition()?.Parse()
                 ?? throw new InvalidOperationException($"This library does not have an identifier and cannot be processed.");
             var builder = new LibraryBuilder(identifier,
-                SystemLibrary,
                 Services.GetRequiredService<LocalIdentifierProvider>());
             // Add the default model, System
             if (GetDefaultSystemModel() is { } systemModel)
@@ -85,7 +81,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             public LibraryBuilder LibraryBuilder { get; }
             public TypeSpecifierVisitor TypeSpecifierVisitor { get; }
             public CoercionProvider CoercionProvider { get; }
-
+            public LiteralTypes? LiteralTypes { get; set; }
 
             #region Services
             public IServiceProvider Services { get; }
@@ -100,7 +96,29 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             public ExpressionVisitor ExpressionVisitor { get; }
 
+            // 'using' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?
+            public override IDefinitionElement VisitUsingDefinition([NotNull] cqlParser.UsingDefinitionContext context)
+            {
+                // Although the rule allows for multiple qualifiers, it is not clear what a qualified model name would mean.
+                // For now, we take the whole qualified name as the name of the model.
+                var (ns, id) = context.qualifiedIdentifier().Parse();
+                var modelName = string.IsNullOrWhiteSpace(ns) ? $"{id}" : $"{ns}.{id}";
+                var modelVersion = context.versionSpecifier()?.STRING().ParseString();
+                var localIdentifier = context.localIdentifier()?.identifier().Parse() ?? modelName;
 
+                var success = ModelProvider.TryGetModel(modelName, modelVersion, out var model);
+                if (success)
+                {
+                    return new UsingDefSymbol(localIdentifier, modelVersion, model!).WithLocator(context.Locator());
+                }
+                else
+                {
+                    var emptyModel = new Model.ModelDefinition(modelName, modelVersion ?? "1.0.0", string.Empty);
+                    var error = $"Model {modelName} version {modelVersion ?? "<unspecified>"} is not available.";
+                    var usingDef = new UsingDefSymbol(localIdentifier, modelVersion, emptyModel).AddError(error);
+                    return usingDef.WithLocator(context.Locator());
+                }
+            }
 
             //   : 'include' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?
             public override IDefinitionElement VisitIncludeDefinition([NotNull] cqlParser.IncludeDefinitionContext context)
@@ -127,27 +145,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 }
             }
 
-            // 'using' qualifiedIdentifier ('version' versionSpecifier)? ('called' localIdentifier)?
-            public override IDefinitionElement VisitUsingDefinition([NotNull] cqlParser.UsingDefinitionContext context)
-            {
-                // Although the rule allows for multiple qualifiers, it is not clear what a qualified model name would mean.
-                // For now, we take the whole qualified name as the name of the model.
-                var (ns, id) = context.qualifiedIdentifier().Parse();
-                var modelName = string.IsNullOrWhiteSpace(ns) ? $"{id}" : $"{ns}.{id}";
-                var modelVersion = context.versionSpecifier()?.STRING().ParseString();
-                var localIdentifier = context.localIdentifier()?.identifier().Parse() ?? modelName;
 
-                var success = ModelProvider.TryGetModel(modelName, modelVersion, out var model);
-                if (success)
-                    return new UsingDefSymbol(localIdentifier, modelVersion, model!).WithLocator(context.Locator());
-                else
-                {
-                    var emptyModel = new Model.ModelDefinition(modelName, modelVersion ?? "1.0.0", string.Empty);
-                    var error = $"Model {modelName} version {modelVersion ?? "<unspecified>"} is not available.";
-                    var usingDef = new UsingDefSymbol(localIdentifier, modelVersion, emptyModel).AddError(error);
-                    return usingDef.WithLocator(context.Locator());
-                }
-            }
 
             //accessModifier? 'codesystem' identifier ':' codesystemId('version' versionSpecifier)?
             public override IDefinitionElement VisitCodesystemDefinition([NotNull] cqlParser.CodesystemDefinitionContext context)
@@ -158,7 +156,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     name = context.identifier().Parse(),
                     id = context.codesystemId().STRING().ParseString(),
                     version = context.versionSpecifier()?.STRING().ParseString(),
-                }.WithLocator(context.Locator()).WithResultType(SystemTypes.CodeSystemType);
+                }
+                .WithLocator(context.Locator())
+                .WithResultType(LiteralTypes?.CodeSystemType
+                    ?? throw new InvalidOperationException("Library builder is not including a system library."));
 
                 return codeSystemDef;
             }
@@ -174,7 +175,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     version = context.versionSpecifier()?.STRING().ParseString(),
                     codeSystem = context.codesystems()?.codesystemIdentifier().Select(csi =>
                         csi.Parse()).ToArray(),
-                }.WithLocator(context.Locator()).WithResultType(SystemTypes.ValueSetType);
+                }.WithLocator(context.Locator()).WithResultType(LiteralTypes?.ValueSetType
+                    ?? throw new InvalidOperationException("Library builder is not including a system library."));
 
                 return valueSetDef;
             }
@@ -189,7 +191,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     id = context.codeId().STRING().ParseString(),
                     codeSystem = context.codesystemIdentifier().Parse(),
                     display = context.displayClause()?.STRING()?.ParseString(),
-                }.WithLocator(context.Locator()).WithResultType(SystemTypes.CodeType);
+                }.WithLocator(context.Locator()).WithResultType(LiteralTypes?.CodeType
+                    ?? throw new InvalidOperationException("Library builder is not including a system library."));
 
                 return codeDef;
             }
@@ -203,7 +206,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     name = context.identifier().Parse(),
                     code = context.codeIdentifier().Select(ci => ci.Parse()).ToArray(),
                     display = context.displayClause()?.STRING().ParseString(),
-                }.WithLocator(context.Locator()).WithResultType(SystemTypes.ConceptType);
+                }.WithLocator(context.Locator()).WithResultType(LiteralTypes?.ConceptType
+                    ?? throw new InvalidOperationException("Library builder is not including a system library."));
 
                 return conceptDef;
             }
@@ -212,6 +216,9 @@ namespace Hl7.Cql.CqlToElm.Visitors
             //    public override ParameterDef VisitParameterDefinition([NotNull] cqlParser.ParameterDefinitionContext context)
             public override IDefinitionElement VisitParameterDefinition([NotNull] cqlParser.ParameterDefinitionContext context)
             {
+                var anyType = LiteralTypes?.AnyType
+                    ?? throw new InvalidOperationException("Library builder is not including a system library.");
+
                 var paramDef = new ParameterDef
                 {
                     accessLevel = context.accessModifier().Parse(),
@@ -232,7 +239,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 if (coercedDefault is null)
                 {
                     paramDef.AddError("Parameter must have either a type or a default value.");
-                    paramDef.parameterTypeSpecifier = SystemTypes.AnyType;
+                    paramDef.parameterTypeSpecifier = anyType;
                 }
                 else
                 {
@@ -266,12 +273,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     {
                         accessLevel = context.accessModifier().Parse(),
                         name = name,
-                        expression = new Null().WithResultType(SystemTypes.AnyType)
+                        expression = new Null().WithResultType(LiteralTypes?.AnyType
+                            ?? throw new InvalidOperationException("Library builder is not including a system library."))
                     };
                     return errorDef
                         .AddError(msg)
                         .WithLocator(context.Locator())
-                        .WithResultType(SystemTypes.AnyType);
+                        .WithResultType(LiteralTypes?.AnyType
+                            ?? throw new InvalidOperationException("Library builder is not including a system library."));
                 }
                 else
                 {
@@ -432,7 +441,8 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         if (returnType is null)
                         {
                             functionDef.AddError("External functions must specify a return type.");
-                            functionDef.WithResultType(SystemTypes.AnyType);   //TODO: might want to introduce some kind of error type.
+                            functionDef.WithResultType(LiteralTypes?.AnyType
+                                ?? throw new InvalidOperationException("Library builder is not including a system library."));   //TODO: might want to introduce some kind of error type.
                         }
                         else
                             functionDef.WithResultType(returnType);
@@ -455,14 +465,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
             {
                 var resultType = cd.resultTypeSpecifier as NamedTypeSpecifier ??
                     throw new InvalidOperationException($"ContextDef {cd.name} has a resultType that is not a named type specifier.");
-                var mts = TypeBridge.ToModelSpecifier(resultType, ModelProvider, Options);
+                var mts = TypeHelpers.ToModelSpecifier(resultType, ModelProvider);
                 var retrieve = new Retrieve
                 {
                     dataType = resultType.name,
                     templateId = mts.GetTypeDefinition()?.Identifier,
-                }.WithLocator(statementContext.Locator()).WithResultType(resultType.ToListType());
+                }.WithLocator(statementContext.Locator()).WithResultType(resultType.ToListType(LibraryBuilder.SystemLibrary
+                    ?? throw new InvalidOperationException("Library builder is not including a system library.")));
 
-                var singleton = InvocationBuilder.Invoke(SystemLibrary.SingletonFrom, retrieve);
+                var singleton = InvocationBuilder.Invoke(LiteralTypes!.Operators.SingletonFrom,
+                    retrieve);
                 var (_, exprName) = resultType;
                 var exprDef = new ExpressionDef
                 {
@@ -486,7 +498,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     name = modelIdentifier is null ? identifier : qualifiedName
                 }.WithLocator(context.Locator());
 
-                TypeSpecifier resultType = new NamedTypeSpecifier(new System.Xml.XmlQualifiedName(Options.LiteralTypes.Default));
+                TypeSpecifier resultType = new NamedTypeSpecifier(new System.Xml.XmlQualifiedName(Options.LiteralTypeNames.Default));
                 if (!cd.IsUnfiltered)
                 {
                     if (modelIdentifier is not null)
@@ -498,7 +510,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                             {
                                 var type = cds.Context.Type;
                                 var ts = type.ToTypeSpecifier();
-                                resultType = TypeBridge.ToElmSpecifier(ts);
+                                resultType = TypeHelpers.ToElmSpecifier(ts);
                             }
                             else
                                 cd.AddError(Messaging.CouldNotResolveContextName(identifier, modelIdentifier));
@@ -518,7 +530,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         {
                             var type = contexts[0].Type;
                             var ts = type.ToTypeSpecifier();
-                            resultType = TypeBridge.ToElmSpecifier(ts);
+                            resultType = TypeHelpers.ToElmSpecifier(ts);
                         }
                         else if (contexts.Count == 0)
                             cd.AddError(Messaging.CouldNotResolveContextName(identifier));

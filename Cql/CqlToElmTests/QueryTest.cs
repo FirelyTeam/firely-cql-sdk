@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var lib = CreateLibraryForExpression("from ({'hello', 'world'}) str return Length(str)");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
-            query.Should().HaveType(SystemTypes.IntegerType.ToListType());
+            query.Should().HaveType(SystemLibrary.IntegerType.ToListType());
         }
 
 
@@ -26,7 +26,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var lib = CreateLibraryForExpression("({4, 5, 1, 6, 2, 1}) sL sort asc");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
-            query.Should().HaveType(SystemTypes.IntegerType.ToListType());
+            query.Should().HaveType(SystemLibrary.IntegerType.ToListType());
 
         }
 
@@ -35,16 +35,16 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var lib = CreateLibraryForExpression("from (true) t return t and false");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
-            query.Should().HaveType(SystemTypes.BooleanType);
-            query.@return.Should().HaveType(SystemTypes.BooleanType);
+            query.Should().HaveType(SystemLibrary.BooleanType);
+            query.@return.Should().HaveType(SystemLibrary.BooleanType);
         }
         [TestMethod]
         public void Vector_source()
         {
             var lib = CreateLibraryForExpression("from ({ true, false }) t return t and false");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
-            query.Should().HaveType(SystemTypes.BooleanType.ToListType());
-            query.@return.Should().HaveType(SystemTypes.BooleanType.ToListType());
+            query.Should().HaveType(SystemLibrary.BooleanType.ToListType());
+            query.@return.Should().HaveType(SystemLibrary.BooleanType.ToListType());
         }
         [TestMethod]
         public void Relationship_with_scalar_sources()
@@ -81,11 +81,11 @@ namespace Hl7.Cql.CqlToElm.Test
                     return Num1 + Num2
             ");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
-            query.Should().HaveType(SystemTypes.IntegerType);
+            query.Should().HaveType(SystemLibrary.IntegerType);
             query.source.Should().HaveCount(2);
-            query.source[0].Should().HaveType(SystemTypes.IntegerType);
-            query.source[1].Should().HaveType(SystemTypes.IntegerType);
-            query.@return.Should().HaveType(SystemTypes.IntegerType);
+            query.source[0].Should().HaveType(SystemLibrary.IntegerType);
+            query.source[1].Should().HaveType(SystemLibrary.IntegerType);
+            query.@return.Should().HaveType(SystemLibrary.IntegerType);
         }
 
         [TestMethod]
@@ -98,11 +98,11 @@ namespace Hl7.Cql.CqlToElm.Test
                     return Num1 + Num2
             ");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
-            query.Should().HaveType(SystemTypes.IntegerType.ToListType());
+            query.Should().HaveType(SystemLibrary.IntegerType.ToListType());
             query.source.Should().HaveCount(2);
-            query.source[0].Should().HaveType(SystemTypes.IntegerType.ToListType());
-            query.source[1].Should().HaveType(SystemTypes.IntegerType.ToListType());
-            query.@return.Should().HaveType(SystemTypes.IntegerType.ToListType());
+            query.source[0].Should().HaveType(SystemLibrary.IntegerType.ToListType());
+            query.source[1].Should().HaveType(SystemLibrary.IntegerType.ToListType());
+            query.@return.Should().HaveType(SystemLibrary.IntegerType.ToListType());
         }
 
         [TestMethod]
@@ -129,7 +129,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var funcRef = byExpression[0].expression.Should().BeOfType<FunctionRef>().Subject;
             funcRef.name.Should().Be("foo");
             funcRef.signature.Should().NotBeNull().And.HaveCount(0);
-            query.Should().HaveType(SystemTypes.IntegerType.ToListType());
+            query.Should().HaveType(SystemLibrary.IntegerType.ToListType());
         }
 
 
@@ -157,8 +157,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var funcRef = byExpression[0].expression.Should().BeOfType<FunctionRef>().Subject;
             funcRef.name.Should().Be("foo");
             funcRef.signature.Should().NotBeNull().And.HaveCount(1);
-            funcRef.signature[0].Should().Be(SystemTypes.IntegerType);
-            query.Should().HaveType(SystemTypes.IntegerType.ToListType());
+            funcRef.signature[0].Should().Be(SystemLibrary.IntegerType);
+            query.Should().HaveType(SystemLibrary.IntegerType.ToListType());
 
         }
 
@@ -188,8 +188,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var funcRef = byExpression[0].expression.Should().BeOfType<FunctionRef>().Subject;
             funcRef.name.Should().Be("foo");
             funcRef.signature.Should().NotBeNull().And.HaveCount(1);
-            funcRef.signature[0].Should().Be(SystemTypes.IntegerType);
-            query.Should().HaveType(SystemTypes.IntegerType.ToListType());
+            funcRef.signature[0].Should().Be(SystemLibrary.IntegerType);
+            query.Should().HaveType(SystemLibrary.IntegerType.ToListType());
 
         }
 
@@ -296,8 +296,8 @@ namespace Hl7.Cql.CqlToElm.Test
             query.aggregate.expression.Should().NotBeNull();
             query.aggregate.expression.Should().BeOfType<Multiply>();
             query.aggregate.Should().NotBeNull();
-            query.aggregate.Should().HaveType(SystemTypes.IntegerType);
-            query.Should().HaveType(SystemTypes.IntegerType);
+            query.aggregate.Should().HaveType(SystemLibrary.IntegerType);
+            query.Should().HaveType(SystemLibrary.IntegerType);
             var result = Run<int>(query);
             result.Should().Be(120);
 
@@ -320,8 +320,8 @@ namespace Hl7.Cql.CqlToElm.Test
             query.aggregate.expression.Should().NotBeNull();
             query.aggregate.expression.Should().BeOfType<Multiply>();
             query.aggregate.Should().NotBeNull();
-            query.aggregate.Should().HaveType(SystemTypes.IntegerType);
-            query.Should().HaveType(SystemTypes.IntegerType);
+            query.aggregate.Should().HaveType(SystemLibrary.IntegerType);
+            query.Should().HaveType(SystemLibrary.IntegerType);
             var result = Run<int?>(query);
             result.Should().Be(120);
         }
@@ -343,8 +343,8 @@ namespace Hl7.Cql.CqlToElm.Test
             query.aggregate.expression.Should().NotBeNull();
             query.aggregate.expression.Should().BeOfType<Multiply>();
             query.aggregate.Should().NotBeNull();
-            query.aggregate.Should().HaveType(SystemTypes.IntegerType);
-            query.Should().HaveType(SystemTypes.IntegerType);
+            query.aggregate.Should().HaveType(SystemLibrary.IntegerType);
+            query.Should().HaveType(SystemLibrary.IntegerType);
             var result = Run<int?>(query);
             result.Should().BeNull();
         }
@@ -367,7 +367,7 @@ namespace Hl7.Cql.CqlToElm.Test
                             else flatten({result, {interval}})
                 ");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
-            query.Should().HaveType(SystemTypes.DateType.ToIntervalType().ToListType());
+            query.Should().HaveType(SystemLibrary.DateType.ToIntervalType().ToListType());
         }
     }
 }

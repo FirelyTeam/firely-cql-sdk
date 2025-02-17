@@ -34,13 +34,13 @@ namespace Hl7.Cql.CqlToElm.Test
             @case.caseItem.Should().NotBeNull();
             @case.caseItem.Should().HaveCount(2);
 
-            @case.caseItem[0].resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
-            @case.caseItem[0].when.resultTypeSpecifier.Should().Be(SystemTypes.BooleanType);
+            @case.caseItem[0].resultTypeSpecifier.Should().Be(SystemLibrary.IntegerType);
+            @case.caseItem[0].when.resultTypeSpecifier.Should().Be(SystemLibrary.BooleanType);
 
-            @case.caseItem[1].resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
-            @case.caseItem[1].when.resultTypeSpecifier.Should().Be(SystemTypes.BooleanType);
+            @case.caseItem[1].resultTypeSpecifier.Should().Be(SystemLibrary.IntegerType);
+            @case.caseItem[1].when.resultTypeSpecifier.Should().Be(SystemLibrary.BooleanType);
 
-            @case.@else.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
+            @case.@else.resultTypeSpecifier.Should().Be(SystemLibrary.IntegerType);
 
             AssertResult(@case, 5);
         }
@@ -64,25 +64,25 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 choice = new TypeSpecifier[]
                 {
-                    SystemTypes.StringType,
-                    SystemTypes.IntegerType,
+                    SystemLibrary.StringType,
+                    SystemLibrary.IntegerType,
                     new IntervalTypeSpecifier
                     {
-                        pointType = SystemTypes.DecimalType
+                        pointType = SystemLibrary.DecimalType
                     }
                 }
             };
 
             @case.caseItem[0].resultTypeSpecifier.Should().Be(choiceType);
-            @case.caseItem[0].when.resultTypeSpecifier.Should().Be(SystemTypes.BooleanType);
+            @case.caseItem[0].when.resultTypeSpecifier.Should().Be(SystemLibrary.BooleanType);
 
             @case.caseItem[1].then.resultTypeSpecifier.Should().Be(choiceType);
             @case.caseItem[1].resultTypeSpecifier.Should().Be(choiceType);
-            @case.caseItem[1].when.resultTypeSpecifier.Should().Be(SystemTypes.BooleanType);
+            @case.caseItem[1].when.resultTypeSpecifier.Should().Be(SystemLibrary.BooleanType);
 
             @case.caseItem[2].then.resultTypeSpecifier.Should().Be(choiceType);
             @case.caseItem[2].resultTypeSpecifier.Should().Be(choiceType);
-            @case.caseItem[2].when.resultTypeSpecifier.Should().Be(SystemTypes.BooleanType);
+            @case.caseItem[2].when.resultTypeSpecifier.Should().Be(SystemLibrary.BooleanType);
 
             @case.@else.resultTypeSpecifier.Should().Be(choiceType);
 

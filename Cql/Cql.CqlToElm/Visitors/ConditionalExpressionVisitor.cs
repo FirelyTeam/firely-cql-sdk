@@ -1,5 +1,4 @@
-﻿using Hl7.Cql.CqlToElm.Builtin;
-using Hl7.Cql.CqlToElm.Grammar;
+﻿using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
 using System;
 using System.Collections.Generic;
@@ -17,23 +16,23 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var @else = Visit(context.expression(2));
 
 
-            var convertCondition = CoercionProvider.Coerce(condition, SystemTypes.BooleanType);
+            var convertCondition = CoercionProvider.Coerce(condition, SystemLibrary.BooleanType);
             if (convertCondition.Success)
                 condition = convertCondition.Result;
-            else condition.AddError(Messaging.TypeFoundIsNotExpected(condition.resultTypeSpecifier, SystemTypes.BooleanType));
+            else condition.AddError(Messaging.TypeFoundIsNotExpected(condition.resultTypeSpecifier, SystemLibrary.BooleanType));
 
             var compatible = true;
-            if (then is Null && then.resultTypeSpecifier == SystemTypes.AnyType)
+            if (then is Null && then.resultTypeSpecifier == SystemLibrary.AnyType)
             {
-                if (@else.resultTypeSpecifier != SystemTypes.AnyType)
+                if (@else.resultTypeSpecifier != SystemLibrary.AnyType)
                 {
                     var thenResult = CoercionProvider.Coerce(then, @else.resultTypeSpecifier);
                     then = thenResult.Result;
                 }
             }
-            else if (@else is Null && @else.resultTypeSpecifier == SystemTypes.AnyType)
+            else if (@else is Null && @else.resultTypeSpecifier == SystemLibrary.AnyType)
             {
-                if (then.resultTypeSpecifier != SystemTypes.AnyType)
+                if (then.resultTypeSpecifier != SystemLibrary.AnyType)
                 {
                     var elseResult = CoercionProvider.Coerce(@else, then.resultTypeSpecifier);
                     @else = elseResult.Result;
@@ -109,7 +108,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                         var caseItem = new CaseItem();
 
                         var when = Visit(item.expression(0));
-                        var whenExpectedType = comparand?.resultTypeSpecifier ?? SystemTypes.BooleanType;
+                        var whenExpectedType = comparand?.resultTypeSpecifier ?? SystemLibrary.BooleanType;
                         var whenCastResult = CoercionProvider.Coerce(when, whenExpectedType);
                         if (whenCastResult.Success)
                             caseItem.when = whenCastResult.Result;
@@ -128,11 +127,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var resultTypes = new HashSet<TypeSpecifier>(caseItems
                 .Select(item => item.then.resultTypeSpecifier)
                 .Append(@else.resultTypeSpecifier))
-                .Except(new[] { SystemTypes.AnyType })
+                .Except(new[] { SystemLibrary.AnyType })
                 .ToList();
             TypeSpecifier returnType;
             if (resultTypes.Count == 0)
-                returnType = SystemTypes.AnyType;
+                returnType = SystemLibrary.AnyType;
             if (resultTypes.Count == 1)
                 returnType = resultTypes.Single();
             else

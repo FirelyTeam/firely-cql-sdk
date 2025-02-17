@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.Elm;
+using Hl7.Cql.CqlToElm.Builtin;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -50,7 +51,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var lib = CreateLibraryForExpression("expand { Interval[10.0, 10.0] } per 0.1");
             var expand = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Expand>();
             expand.operand.Length.Should().Be(2);
-            expand.operand[0].Should().HaveType(SystemTypes.DecimalType.ToIntervalType().ToListType());
+            expand.operand[0].Should().HaveType(SystemLibrary.DecimalType.ToIntervalType(SystemLibrary).ToListType(SystemLibrary));
             var result = Run(expand);
             // not implemented correctly
         }

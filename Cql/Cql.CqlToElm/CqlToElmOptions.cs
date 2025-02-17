@@ -173,35 +173,52 @@ namespace Hl7.Cql.CqlToElm
         /// Defines the type specifiers used when parsing literals.
         /// By default, these literal types will reference their corresponding types in the System model.
         /// </summary>
-        public LiteralTypes LiteralTypes { get; set; } = new();
+        public LiteralTypeNames LiteralTypeNames { get; set; } = new();
     }
 
     /// <summary>
-    /// Defines the qualified type names for literals.
+    /// Defines the qualified type names for literals, which are parsed directly as part of the language grammar.
     /// </summary>
     /// <remarks>
-    /// Normally, 
+    /// When encountering a literal like <code>'This is a CQL string literal'</code>, the parser needs to know
+    /// what type to assign to the literal.  This record defines the default types used for each literal type.
+    /// When using a model other than System, set these types to the corresponding types in the model.
     /// </remarks>
     /// <param name="Default">The type used when type resolution fails; System.Any by default.</param>
     /// <param name="Integer">The type used when parsing Integer literals. System.Integer by default.</param>
     /// <param name="Long">The type used when parsing Long literals. System.Long by default.</param>
     /// <param name="Decimal">The type used when parsing Decimal literals. System.Decimal by default.</param>
     /// <param name="Boolean">The type used when parsing Boolean literals. System.Boolean by default.</param>
+    /// <param name="Code">The type used when parsing Code literals. System.Code by default.</param>
+    /// <param name="CodeSystem">The type used when parsing CodeSystem literals. System.CodeSystem by default.</param>
+    /// <param name="Concept">The type used when parsing Concept literals. System.Concept by default.</param>
     /// <param name="Date">The type used when parsing Date literals. System.Date by default.</param>
     /// <param name="DateTime">The type used when parsing DateTime literals. System.DateTime by default.</param>
     /// <param name="Time">The type used when parsing Time literals. System.Time by default.</param>
+    /// <param name="ValueSet">The type used when parsing Time literals. System.ValueSet by default.</param>
     /// <param name="List">The type used when parsing List literals. System.List by default.</param>
     /// <param name="Interval">The type used when parsing Interval literals. System.Interval by default.</param>
-    public record LiteralTypes(string Default = "{urn:hl7-org:elm-types:r1}Any",
-        string Integer = "{urn:hl7-org:elm-types:r1}Integer",
-        string Long = "{urn:hl7-org:elm-types:r1}Long",
-        string Decimal = "{urn:hl7-org:elm-types:r1}Decimal",
-        string Boolean = "{urn:hl7-org:elm-types:r1}Boolean",
-        string Date = "{urn:hl7-org:elm-types:r1}Date",
-        string DateTime = "{urn:hl7-org:elm-types:r1}DateTime",
-        string Time = "{urn:hl7-org:elm-types:r1}Time",
-        string List = "{urn:hl7-org:elm-types:r1}List",
-        string Interval = "{urn:hl7-org:elm-types:r1}Interval");
+    /// <param name="String">The type used when parsing String literals.  System.String by default.</param>
+    /// <param name="Quantity">The type used when parsing Quantity literals.  System.Quantity by default.</param>
+    /// <param name="Ratio"></param>
+    public record LiteralTypeNames(string Default = "System.Any",
+        string Integer = "System.Integer",
+        string Decimal = "System.Decimal",
+        string Boolean = "System.Boolean",
+        string Code = "System.Code",
+        string CodeSystem = "System.CodeSystem",
+        string Concept = "System.Concept",
+        string Date = "System.Date",
+        string DateTime = "System.DateTime",
+        string Interval = "System.Interval",
+        string List = "System.List",
+        string Long = "System.Long",
+        string Quantity = "System.Quantity",
+        string Ratio = "System.Ratio",
+        string String = "System.String",
+        string Time = "System.Time",
+        string ValueSet = "System.ValueSet");
+        
         
 
     /// <summary>

@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.Elm;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -33,7 +34,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
             Assert.IsInstanceOfType(library.statements[0].expression, typeof(ValueSetRef));
-            AssertType(library.statements[0].expression, SystemTypes.ValueSetType);
+            AssertType(library.statements[0].expression, SystemLibrary.ValueSetType);
             var result = Run<CqlValueSet>(library, nameof(ValueSet_Local));
             Assert.IsNotNull(result);
         }
@@ -54,7 +55,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
             Assert.IsInstanceOfType(library.statements[0].expression, typeof(CodeSystemRef));
-            AssertType(library.statements[0].expression, SystemTypes.CodeSystemType);
+            AssertType(library.statements[0].expression, SystemLibrary.CodeSystemType);
             var result = Run<CqlCode[]>(library, nameof(CodeSystem_Local));
             Assert.IsNotNull(result);
         }
@@ -75,7 +76,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
             Assert.IsInstanceOfType(library.statements[0].expression, typeof(CodeRef));
-            AssertType(library.statements[0].expression, SystemTypes.CodeType);
+            AssertType(library.statements[0].expression, SystemLibrary.CodeType);
             var result = Run<CqlCode>(library, nameof(Code_Local));
             Assert.IsNotNull(result);
         }
@@ -97,7 +98,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
             Assert.IsInstanceOfType(library.statements[0].expression, typeof(ConceptRef));
-            AssertType(library.statements[0].expression, SystemTypes.ConceptType);
+            AssertType(library.statements[0].expression, SystemLibrary.ConceptType);
             var result = Run<CqlConcept>(library, nameof(Concept_Local));
             Assert.IsNotNull(result);
         }
@@ -117,7 +118,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsNotNull(library.statements[0].expression.localId);
             Assert.IsNotNull(library.statements[0].expression.locator);
             Assert.IsInstanceOfType(library.statements[0].expression, typeof(ParameterRef));
-            AssertType(library.statements[0].expression, SystemTypes.IntegerType);
+            AssertType(library.statements[0].expression, SystemLibrary.IntegerType);
             var result = Run<int?>(library, nameof(Parameter));
             Assert.IsNotNull(result);
             Assert.AreEqual(2023, result);
@@ -136,10 +137,11 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
 
-        private static void AssertType(Expression expression, NamedTypeSpecifier spec)
+        private static void AssertType(Expression expression, TypeSpecifier spec)
         {
-            expression.resultTypeName.Should().Be(spec.name);
             expression.resultTypeSpecifier.Should().Be(spec);
+            if (spec is NamedTypeSpecifier nts)
+                expression.resultTypeName.Should().Be(nts.name);
         }
 
         private ExpressionDef shouldDefineExpression(Library l, string name) =>
@@ -158,7 +160,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
             var f = shouldDefineExpression(library, nameof(Expression));
             var fref = f.expression.Should().BeOfType<ExpressionRef>().Subject;
-            AssertType(fref, SystemTypes.IntegerType);
+            AssertType(fref, SystemLibrary.IntegerType);
             fref.name.Should().Be("four");
 
             var result = Run<int>(library, nameof(Expression));
@@ -342,7 +344,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
             var low = shouldDefineExpression(library, "lowI");
             low.expression.Should().BeOfType<Property>().Which.path.Should().Be("low");
-            low.expression.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
+            low.expression.resultTypeSpecifier.Should().Be(SystemLibrary.IntegerType);
 
             var result = Run<int>(library, "lowI");
             result.Should().Be(1);
@@ -359,7 +361,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
             var low = shouldDefineExpression(library, "closed");
             low.expression.Should().BeOfType<Property>().Which.path.Should().Be("highClosed");
-            low.expression.resultTypeSpecifier.Should().Be(SystemTypes.BooleanType);
+            low.expression.resultTypeSpecifier.Should().Be(SystemLibrary.BooleanType);
 
             var result = Run<bool>(library, "closed");
             result.Should().Be(true);
@@ -376,7 +378,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
             var low = shouldDefineExpression(library, "tupleMember");
             low.expression.Should().BeOfType<Property>().Which.path.Should().Be("name");
-            low.expression.resultTypeSpecifier.Should().Be(SystemTypes.StringType);
+            low.expression.resultTypeSpecifier.Should().Be(SystemLibrary.StringType);
 
             var result = Run<string>(library, "tupleMember");
             result.Should().Be("Ewout");
@@ -493,7 +495,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var prop = getName.expression.Should().BeOfType<Property>().Subject;
             prop.path.Should().Be("name");
             prop.source.Should().BeOfType<ExpressionRef>().Which.name.Should().Be("Patient");
-            prop.resultTypeSpecifier.Should().Be(fhir("HumanName").ToListType());
+            prop.resultTypeSpecifier.Should().Be(fhir("HumanName").ToListType(SystemLibrary));
 
             var result = runWithData<List<M.HumanName>>(library, "getName");
             result.Should().BeEquivalentTo(new[] { new { Given = new[] { "John", "Maria" }, Family = "Doe" } });
@@ -513,7 +515,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
             var getName = shouldDefineExpression(library, "getName");
             var prop = getName.expression.Should().BeOfType<Query>().Subject;
-            prop.resultTypeSpecifier.Should().Be(fhir("string").ToListType());
+            prop.resultTypeSpecifier.Should().Be(fhir("string").ToListType(SystemLibrary));
 
             var result = runWithData<List<M.FhirString>>(library, "getName");
             result.Should().ContainSingle().Which.Should().BeEquivalentTo(new { Value = "Doe" });
@@ -533,7 +535,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
             var getName = shouldDefineExpression(library, "getName");
             var prop = getName.expression.Should().BeOfType<Flatten>().Subject;
-            prop.resultTypeSpecifier.Should().Be(fhir("string").ToListType());
+            prop.resultTypeSpecifier.Should().Be(fhir("string").ToListType(SystemLibrary));
 
             var result = runWithData<List<M.FhirString>>(library, "getName");
             result.Should().BeEquivalentTo(new[] { new { Value = "John" }, new { Value = "Maria" } });
@@ -559,12 +561,12 @@ namespace Hl7.Cql.CqlToElm.Test
             var getContactName = library.ShouldDefine<FunctionDef>("getContactName");
             getContactName.operand.Should().ContainSingle().Which
                 .Should().BeOfType<OperandDef>().Which
-                .resultTypeSpecifier.Should().Be(fhir("Patient.Contact").ToListType());
-            getContactName.resultTypeSpecifier.Should().Be(fhir("HumanName").ToListType());
+                .resultTypeSpecifier.Should().Be(fhir("Patient.Contact").ToListType(SystemLibrary));
+            getContactName.resultTypeSpecifier.Should().Be(fhir("HumanName").ToListType(SystemLibrary));
 
             var getName = shouldDefineExpression(library, "getName");
             var prop = getName.expression.Should().BeOfType<Flatten>().Subject;
-            prop.resultTypeSpecifier.Should().Be(fhir("string").ToListType());
+            prop.resultTypeSpecifier.Should().Be(fhir("string").ToListType(SystemLibrary));
 
             var result = runWithData<List<M.FhirString>>(library, "getName");
             result.Should().BeEquivalentTo(new[] { new { Value = "Wouter" }, new { Value = "Gert" }, new { Value = "Marleen" }, new { Value = "Antonia" } });

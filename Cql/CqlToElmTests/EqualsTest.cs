@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.CqlToElm.Builtin;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -1593,8 +1594,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var lib = CreateLibraryForExpression("{ DateTime(2016), DateTime(2015), DateTime(2010)} = { @2016T, @2015T, @2010T }");
             var equal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equal>();
             equal.operand.Should().HaveCount(2);
-            equal.operand[0].Should().HaveType(SystemTypes.DateTimeType.ToListType());
-            equal.operand[1].Should().HaveType(SystemTypes.DateTimeType.ToListType());
+            equal.operand[0].Should().HaveType(SystemLibrary.DateTimeType.ToListType(SystemLibrary));
+            equal.operand[1].Should().HaveType(SystemLibrary.DateTimeType.ToListType(SystemLibrary));
             var result = Run<bool?>(equal);
             Assert.IsTrue(result);
 

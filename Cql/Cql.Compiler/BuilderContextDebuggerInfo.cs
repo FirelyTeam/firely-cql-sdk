@@ -95,6 +95,7 @@ internal readonly record struct BuilderContextDebuggerInfo(
                 NamedTypeSpecifier t => t.name.ToString(),
                 ParameterTypeSpecifier t => t.parameterName,
                 TupleTypeSpecifier t => $"Tuple {{{string.Join(", ", from c in t.element select $"{c.name}: {GetTypeSpecifierName(c.elementType)}}}")}>",
+                GenericTypeSpecifier gts => $"{GetTypeSpecifierName(gts.type!)}<{string.Join(", ", gts.typeArgument!.Select(GetTypeSpecifierName))}>",
                 _ => throw new SwitchExpressionException("Unexpected switch type: " + type.GetType()),
             };
     }

@@ -27,13 +27,13 @@ namespace Hl7.Cql.CqlToElm.Test
             // https://cql.hl7.org/09-b-cqlreference.html#same-or-after-2
             var library = CreateLibraryForExpression("Interval[@2012-12-01, @2013-12-01] on or after month of @2012-11-15");
             var sameOrAfter = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SameOrAfter>();
-            sameOrAfter.Should().HaveType(SystemTypes.BooleanType);
+            sameOrAfter.Should().HaveType(SystemLibrary.BooleanType);
             sameOrAfter.operand.Should().NotBeNull();
             sameOrAfter.operand.Should().HaveCount(2);
             sameOrAfter.precisionSpecified.Should().BeTrue();
             sameOrAfter.precision.Should().Be(DateTimePrecision.Month);
-            sameOrAfter.operand[0].Should().HaveType(SystemTypes.DateType.ToIntervalType());
-            sameOrAfter.operand[1].Should().HaveType(SystemTypes.DateType.ToIntervalType());
+            sameOrAfter.operand[0].Should().HaveType(SystemLibrary.DateType.ToIntervalType());
+            sameOrAfter.operand[1].Should().HaveType(SystemLibrary.DateType.ToIntervalType());
         }
 
         [TestMethod]
@@ -50,13 +50,13 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsNotNull(library.statements[0].expression.locator);
             Assert.IsInstanceOfType(library.statements[0].expression, typeof(And));
             var and = (And)library.statements[0].expression;
-            Assert.AreEqual(SystemTypes.BooleanType, and.resultTypeSpecifier);
+            Assert.AreEqual(SystemLibrary.BooleanType, and.resultTypeSpecifier);
             Assert.IsNotNull(and.operand);
             Assert.AreEqual(2, and.operand.Length);
             Assert.IsInstanceOfType(and.operand[0], typeof(In));
             {
                 var @in = (In)and.operand[0];
-                Assert.AreEqual(SystemTypes.BooleanType, @in.resultTypeSpecifier);
+                Assert.AreEqual(SystemLibrary.BooleanType, @in.resultTypeSpecifier);
                 Assert.IsTrue(@in.precisionSpecified);
                 Assert.IsNotNull(@in.precision);
                 Assert.AreEqual(DateTimePrecision.Day, @in.precision);
@@ -65,10 +65,10 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsInstanceOfType(@in.operand[0], typeof(Start));
                 {
                     var start = (Start)@in.operand[0];
-                    Assert.AreEqual(SystemTypes.DateTimeType, start.resultTypeSpecifier);
+                    Assert.AreEqual(SystemLibrary.DateTimeType, start.resultTypeSpecifier);
                     Assert.IsNotNull(start.operand);
                     Assert.IsInstanceOfType(start.operand, typeof(Interval));
-                    AssertIntervalType(start.operand.resultTypeSpecifier, SystemTypes.DateTimeType);
+                    AssertIntervalType(start.operand.resultTypeSpecifier, SystemLibrary.DateTimeType);
                     {
                         var interval = (Interval)start.operand;
                         Assert.IsTrue(interval.lowClosed);
@@ -101,7 +101,7 @@ namespace Hl7.Cql.CqlToElm.Test
                         Assert.IsInstanceOfType(add.operand[0], typeof(Start));
                         {
                             var highStart = (Start)add.operand[0];
-                            Assert.AreEqual(SystemTypes.DateTimeType, highStart.resultTypeSpecifier);
+                            Assert.AreEqual(SystemLibrary.DateTimeType, highStart.resultTypeSpecifier);
                             Assert.IsNotNull(highStart.operand);
                             Assert.IsInstanceOfType(highStart.operand, typeof(Interval));
                             {
@@ -154,12 +154,12 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = CreateLibraryForExpression("Interval[null, null] overlaps Interval[1, 10]");
             var overlaps = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Overlaps>();
-            overlaps.Should().HaveType(SystemTypes.BooleanType);
+            overlaps.Should().HaveType(SystemLibrary.BooleanType);
             overlaps.operand.Should().NotBeNull();
             overlaps.operand.Should().HaveCount(2);
             overlaps.precisionSpecified.Should().BeFalse();
-            overlaps.operand[0].Should().HaveType(SystemTypes.IntegerType.ToIntervalType());
-            overlaps.operand[1].Should().HaveType(SystemTypes.IntegerType.ToIntervalType());
+            overlaps.operand[0].Should().HaveType(SystemLibrary.IntegerType.ToIntervalType());
+            overlaps.operand[1].Should().HaveType(SystemLibrary.IntegerType.ToIntervalType());
         }
 
         [TestMethod]

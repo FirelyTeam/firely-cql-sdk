@@ -44,7 +44,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var castLeft = ifThenElse.then.Should().BeOfType<ToDecimal>().Subject;
             castLeft.operand.Should().BeLiteralInteger(4);
             ifThenElse.@else.Should().BeLiteralDecimal(5.0m);
-            ifThenElse.resultTypeSpecifier.Should().Be(SystemTypes.DecimalType);
+            ifThenElse.resultTypeSpecifier.Should().Be(SystemLibrary.DecimalType);
 
             AssertResult(ifThenElse, 4.0m);
         }
@@ -59,7 +59,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var castRight = ifThenElse.@else.Should().BeOfType<ToDecimal>().Subject;
             castRight.operand.Should().BeLiteralInteger(5);
             ifThenElse.then.Should().BeLiteralDecimal(4.0m);
-            ifThenElse.resultTypeSpecifier.Should().Be(SystemTypes.DecimalType);
+            ifThenElse.resultTypeSpecifier.Should().Be(SystemLibrary.DecimalType);
 
             AssertResult(ifThenElse, 5.0m);
         }
@@ -69,7 +69,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var library = createLibraryForExpression("if false then 4.0 else 'hello'");
             var ifThenElse = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
-            var expectedType = new ChoiceTypeSpecifier(SystemTypes.DecimalType, SystemTypes.StringType);
+            var expectedType = new ChoiceTypeSpecifier(SystemLibrary.DecimalType, SystemLibrary.StringType);
 
             ifThenElse.condition.Should().BeLiteralBool(false);
 
@@ -90,10 +90,10 @@ namespace Hl7.Cql.CqlToElm.Test
         public void String_Integer_Integer()
         {
             var library = createLibraryForExpression("if 'hello' then 4 else 5",
-                Messaging.TypeFoundIsNotExpected(SystemTypes.StringType, SystemTypes.BooleanType));
+                Messaging.TypeFoundIsNotExpected(SystemLibrary.StringType, SystemLibrary.BooleanType));
 
             var @if = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
-            @if.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
+            @if.resultTypeSpecifier.Should().Be(SystemLibrary.IntegerType);
         }
     }
 }

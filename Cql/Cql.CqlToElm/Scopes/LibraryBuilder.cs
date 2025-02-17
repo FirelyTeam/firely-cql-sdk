@@ -20,10 +20,10 @@ namespace Hl7.Cql.CqlToElm
         /// </summary>
         public static LibraryBuilder CreateFromExisting(Library library) => throw new NotImplementedException();
 
-        public LibraryBuilder(VersionedIdentifier identifier, SystemLibrary systemLibrary, LocalIdentifierProvider localIdentifierProvider)
+        public LibraryBuilder(VersionedIdentifier identifier, LocalIdentifierProvider localIdentifierProvider)
         {
             Identifier = identifier;
-            SymbolTable = new SymbolTable(Identifier.ToString()!, systemLibrary);
+            SymbolTable = new SymbolTable(Identifier.ToString()!, null);
             CurrentScope = SymbolTable;
             LocalIdentifierProvider = localIdentifierProvider;
         }
@@ -77,8 +77,7 @@ namespace Hl7.Cql.CqlToElm
         internal LibraryBuilder UseModel(Model.ModelDefinition model)
         {
             var @using = new UsingDefSymbol(model.Name, model.Version, model);
-            if (!CurrentScope.TryAdd(@using))
-                throw new InvalidOperationException($"Could not add model {model.Name} to the symbol table.");
+            var _ = CurrentScope.TryAdd(@using); // ignore if already added
             return this;
         }
         public void AddError(string message, ErrorType errorType) =>
@@ -99,8 +98,101 @@ namespace Hl7.Cql.CqlToElm
         public ISymbolScope EnterStatementScope(string statement) =>
             new LibraryBuilderSubscope(this, SymbolTable.EnterScope(statement));
 
-        public ISymbolScope EnterScope(string reason) => 
+        public ISymbolScope EnterScope(string reason) =>
             new LibraryBuilderSubscope(this, CurrentScope.EnterScope(reason));
+
+        public Model.ModelDefinition GetSystemModel()
+        {
+            var systemModels = CurrentScope.ReferencedModels
+                .Where(m => m.Model.Name == "System")
+                .ToArray();
+            if (systemModels.Length == 0)
+                throw new InvalidOperationException($"System model is not in scope for this library.");
+            else if (systemModels.Length > 1)
+                throw new InvalidOperationException($"More than one system model is in scope for this library.");
+            else return systemModels[0].Model;
+
+        }
+
+        public Expression ToRef(IDefinitionElement element, string? libraryName)
+        {
+            return element switch
+            {
+                AliasedQuerySource aqs => aliasQuerySourceRef(aqs),
+                CodeDef cod => new CodeRef
+                {
+                    libraryName = libraryName,
+                    name = cod.name,
+                }.WithId().WithResultType(systemType("System..Code")),
+                CodeSystemDef csd => new CodeSystemRef
+                {
+                    libraryName = libraryName,
+                    name = csd.name,
+                }.WithId().WithResultType(systemType("System..CodeSystem")),
+                ConceptDef cd => new ConceptRef
+                {
+                    libraryName = libraryName,
+                    name = cd.name,
+                }.WithId().WithResultType(systemType("System..Concept")),
+
+                FunctionDef fd => new FunctionRef
+                {
+                    libraryName = libraryName,
+                    name = fd.name,
+                }.WithId().WithResultType(fd.resultTypeSpecifier ?? throw new InvalidOperationException("Missing result type specifier for function ref")),
+                DeferredFunctionDef dfd => ToRef(dfd.Resolve(), libraryName),
+                ExpressionDef ed => new ExpressionRef
+                {
+                    libraryName = libraryName,
+                    name = ed.name,
+                }.WithId().WithResultType(ed.resultTypeSpecifier),
+                DeferredExpressionDef ded => ToRef(ded.Resolve(), libraryName),
+                IdentifierRef ir => ir,
+                LetClause lc => new QueryLetRef
+                {
+                    name = lc.identifier,
+                }.WithId().WithResultType(lc.resultTypeSpecifier),
+                OperandDef od => new OperandRef
+                {
+                    name = od.name,
+                }.WithId().WithResultType(od.operandTypeSpecifier),
+                ParameterDef pd => new ParameterRef
+                {
+                    libraryName = libraryName,
+                    name = pd.name,
+                }.WithId().WithResultType(pd.parameterTypeSpecifier),
+                ValueSetDef vd => new ValueSetRef
+                {
+                    libraryName = libraryName,
+                    name = vd.name,
+                }.WithId().WithResultType(systemType("System.ValueSet")),
+
+                _ => throw new NotSupportedException($"Cannot create a reference to a {element.GetType().Name}")
+            };
+
+            Expression aliasQuerySourceRef(AliasedQuerySource aqs)
+            {
+                Elm.TypeSpecifier aliasType;
+                if (aqs.resultTypeSpecifier is Elm.GenericTypeSpecifier gts && gts.type == systemType("System.List"))
+                    aliasType = gts.typeArgument![0];
+                else
+                    aliasType = aqs.resultTypeSpecifier;
+                if (aliasType is null)
+                    throw new InvalidOperationException($"Alias type is null");
+                var aliasRef = new AliasRef { name = aqs.alias }.WithResultType(aliasType);
+                return aliasRef;
+            }
+
+
+            Elm.TypeSpecifier systemType(string typeName)
+            {
+                var systemModel = GetSystemModel();
+                if (!systemModel.TypeDefinitions.TryGetValue(typeName, out var typeDef))
+                    throw new ArgumentException($"Type {typeName} not found in system model", nameof(typeName));
+                var typeSpecifier = TypeHelpers.ToElmSpecifier(typeDef.ToTypeSpecifier());
+                return typeSpecifier;
+            }
+        }
 
         [DebuggerDisplay("{Name,nq}")]
         private class LibraryBuilderSubscope : ISymbolScope

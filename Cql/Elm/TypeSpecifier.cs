@@ -249,16 +249,7 @@ namespace Hl7.Cql.Elm
 
 
         /// <inheritdoc/>
-        public override string ToString()
-        {
-            if (name is null) return "null";
-
-            var (u, n) = this;
-            if (u == SystemTypes.SystemModelUri)
-                return n;
-            else
-                return name.ToString();
-        }
+        public override string ToString() => name is null ? "null" : name.ToString();
 
         /// <inheritdoc/>
         public override bool Equals([NotNullWhen(true)] object? other)

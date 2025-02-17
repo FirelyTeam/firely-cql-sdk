@@ -21,6 +21,11 @@ namespace Hl7.Cql.CqlToElm.Test
 {
     public class Base
     {
+
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+        internal static LiteralTypeNames SystemLibrary;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+
         protected const string SystemUri = "urn:hl7-org:elm-types:r1";
 
         protected static ServiceProvider ServiceProvider = null!;
@@ -33,12 +38,14 @@ namespace Hl7.Cql.CqlToElm.Test
 
         internal static MessageProvider Messaging => ServiceProvider.GetMessageProvider();
 
+
         internal static IServiceCollection ServiceCollection(
             Action<CqlToElmOptions>? options = null,
             Type? libraryProviderType = null) =>
             new ServiceCollection()
                 .AddCqlToElmServices()
                 .AddCqlToElmOptions(options)
+
                 .AddCqlToElmMessaging()
                 .AddLogging(builder => builder.AddConsole())
                 .AddSingleton(typeof(ILibraryProvider), libraryProviderType ?? typeof(MemoryLibraryProvider))
@@ -271,7 +278,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         }
 
-        protected Library CreateLibraryForExpression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
+        protected Library CreateLibraryForExpression(string expression, [global::System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
         {
             return MakeLibrary($@"
                 library Test version '1.0.0'
@@ -288,7 +295,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private ""Has Errors"": {expression}", expectedErrors);
         }
 
-        protected static Expression Expression(string expression, [System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
+        protected static Expression Expression(string expression, [global::System.Runtime.CompilerServices.CallerMemberName] string memberName = "func")
         {
             var lib = ConvertLibrary($@"
                 library Test version '1.0.0'

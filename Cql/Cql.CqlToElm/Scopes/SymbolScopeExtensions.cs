@@ -1,7 +1,8 @@
-﻿using Hl7.Cql.CqlToElm.Builtin;
+﻿using Hl7.Cql.CqlToElm.System;
 using Hl7.Cql.Elm;
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
 
@@ -11,19 +12,18 @@ namespace Hl7.Cql.CqlToElm
     {
         public static IdentifierRef MakeErrorReference(string? libraryName, string identifier, string error) =>
              new IdentifierRef() { libraryName = libraryName, name = identifier }
-                .WithResultType(SystemTypes.AnyType)
                 .AddError(error);
 
-        public static Expression Ref(this ISymbolScope symbolScope, MessageProvider messaging, string? libraryAlias, string identifier)
+        public static Expression Ref(this ISymbolScope symbolScope, LibraryBuilder library, MessageProvider messaging, string? libraryAlias, string identifier)
         {
             var success = TryResolveSymbol(symbolScope, libraryAlias, identifier, out var result);
             if (success)
             {
                 try
                 {
-                    return result!.ToRef(libraryAlias);
+                    return library.ToRef(result!, libraryAlias);
                 }
-                catch (InvalidOperationException io) 
+                catch (InvalidOperationException io)
                 {
                     if (io.Message == "ValueFactory attempted to access the Value property of this instance.")
                         return MakeErrorReference(libraryAlias, identifier, messaging.CannotResolveCircularReference());
@@ -63,7 +63,7 @@ namespace Hl7.Cql.CqlToElm
         /// <returns>True if the identifier was found, false otherwise. <paramref name="result"/> will contain the reference
         /// to the definition in the <see cref="ISymbolScope"/> on success or an <see cref="IdentifierRef"/> with an error 
         /// annotation otherwise.</returns>
-        public static bool TryResolveSymbol(this ISymbolScope symbolScope, string? libraryName, string identifier, out IDefinitionElement? result)
+        public static bool TryResolveSymbol(this ISymbolScope symbolScope, string? libraryName, string identifier, [NotNullWhen(true)] out IDefinitionElement? result)
         {
             result = null;
             if (libraryName is null)

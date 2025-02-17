@@ -30,7 +30,7 @@ Hl7.Cql.CqlToElm.CqlToElmOptions.EnableListPromotion.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.EnableListPromotion.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.Input.get -> string?
 Hl7.Cql.CqlToElm.CqlToElmOptions.Input.set -> void
-Hl7.Cql.CqlToElm.CqlToElmOptions.LiteralTypes.get -> Hl7.Cql.CqlToElm.LiteralTypes!
+Hl7.Cql.CqlToElm.CqlToElmOptions.LiteralTypes.get -> Hl7.Cql.CqlToElm.LiteralTypeNames!
 Hl7.Cql.CqlToElm.CqlToElmOptions.LiteralTypes.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.LongsRequireSuffix.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.LongsRequireSuffix.set -> void
@@ -42,37 +42,51 @@ Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateIntervals.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateIntervals.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateLiterals.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.ValidateLiterals.set -> void
-Hl7.Cql.CqlToElm.LiteralTypes
-Hl7.Cql.CqlToElm.LiteralTypes.Boolean.get -> string!
-Hl7.Cql.CqlToElm.LiteralTypes.Boolean.init -> void
-Hl7.Cql.CqlToElm.LiteralTypes.Date.get -> string!
-Hl7.Cql.CqlToElm.LiteralTypes.Date.init -> void
-Hl7.Cql.CqlToElm.LiteralTypes.DateTime.get -> string!
-Hl7.Cql.CqlToElm.LiteralTypes.DateTime.init -> void
-Hl7.Cql.CqlToElm.LiteralTypes.Decimal.get -> string!
-Hl7.Cql.CqlToElm.LiteralTypes.Decimal.init -> void
-Hl7.Cql.CqlToElm.LiteralTypes.Deconstruct(out string! Default, out string! Integer, out string! Long, out string! Decimal, out string! Boolean, out string! Date, out string! DateTime, out string! Time, out string! List, out string! Interval) -> void
-Hl7.Cql.CqlToElm.LiteralTypes.Default.get -> string!
-Hl7.Cql.CqlToElm.LiteralTypes.Default.init -> void
-Hl7.Cql.CqlToElm.LiteralTypes.Integer.get -> string!
-Hl7.Cql.CqlToElm.LiteralTypes.Integer.init -> void
-Hl7.Cql.CqlToElm.LiteralTypes.Interval.get -> string!
-Hl7.Cql.CqlToElm.LiteralTypes.Interval.init -> void
-Hl7.Cql.CqlToElm.LiteralTypes.List.get -> string!
-Hl7.Cql.CqlToElm.LiteralTypes.List.init -> void
-Hl7.Cql.CqlToElm.LiteralTypes.LiteralTypes(Hl7.Cql.CqlToElm.LiteralTypes! original) -> void
-Hl7.Cql.CqlToElm.LiteralTypes.LiteralTypes(string! Default = "{urn:hl7-org:elm-types:r1}Any", string! Integer = "{urn:hl7-org:elm-types:r1}Integer", string! Long = "{urn:hl7-org:elm-types:r1}Long", string! Decimal = "{urn:hl7-org:elm-types:r1}Decimal", string! Boolean = "{urn:hl7-org:elm-types:r1}Boolean", string! Date = "{urn:hl7-org:elm-types:r1}Date", string! DateTime = "{urn:hl7-org:elm-types:r1}DateTime", string! Time = "{urn:hl7-org:elm-types:r1}Time", string! List = "{urn:hl7-org:elm-types:r1}List", string! Interval = "{urn:hl7-org:elm-types:r1}Interval") -> void
-Hl7.Cql.CqlToElm.LiteralTypes.Long.get -> string!
-Hl7.Cql.CqlToElm.LiteralTypes.Long.init -> void
-Hl7.Cql.CqlToElm.LiteralTypes.Time.get -> string!
-Hl7.Cql.CqlToElm.LiteralTypes.Time.init -> void
-override Hl7.Cql.CqlToElm.LiteralTypes.Equals(object? obj) -> bool
-override Hl7.Cql.CqlToElm.LiteralTypes.GetHashCode() -> int
-override Hl7.Cql.CqlToElm.LiteralTypes.ToString() -> string!
-static Hl7.Cql.CqlToElm.LiteralTypes.operator !=(Hl7.Cql.CqlToElm.LiteralTypes? left, Hl7.Cql.CqlToElm.LiteralTypes? right) -> bool
-static Hl7.Cql.CqlToElm.LiteralTypes.operator ==(Hl7.Cql.CqlToElm.LiteralTypes? left, Hl7.Cql.CqlToElm.LiteralTypes? right) -> bool
+Hl7.Cql.CqlToElm.LiteralTypeNames
+Hl7.Cql.CqlToElm.LiteralTypeNames.Boolean.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypeNames.Boolean.init -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.Code.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypeNames.Code.init -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.CodeSystem.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypeNames.CodeSystem.init -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.Concept.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypeNames.Concept.init -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.Date.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypeNames.Date.init -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.DateTime.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypeNames.DateTime.init -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.Decimal.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypeNames.Decimal.init -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.Deconstruct(out string! Default, out string! Integer, out string! Decimal, out string! Boolean, out string! Code, out string! CodeSystem, out string! Concept, out string! Date, out string! DateTime, out string! Interval, out string! List, out string! Long, out string! Quantity, out string! Ratio, out string! String, out string! Time, out string! ValueSet) -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.Default.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypeNames.Default.init -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.Integer.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypeNames.Integer.init -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.Interval.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypeNames.Interval.init -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.List.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypeNames.List.init -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.LiteralTypeNames(Hl7.Cql.CqlToElm.LiteralTypeNames! original) -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.LiteralTypeNames(string! Default = "System.Any", string! Integer = "System.Integer", string! Decimal = "System.Decimal", string! Boolean = "System.Boolean", string! Code = "System.Code", string! CodeSystem = "System.CodeSystem", string! Concept = "System.Concept", string! Date = "System.Date", string! DateTime = "System.DateTime", string! Interval = "System.Interval", string! List = "System.List", string! Long = "System.Long", string! Quantity = "System.Quantity", string! Ratio = "System.Ratio", string! String = "System.String", string! Time = "System.Time", string! ValueSet = "System.ValueSet") -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.Long.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypeNames.Long.init -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.Quantity.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypeNames.Quantity.init -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.Ratio.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypeNames.Ratio.init -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.String.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypeNames.String.init -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.Time.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypeNames.Time.init -> void
+Hl7.Cql.CqlToElm.LiteralTypeNames.ValueSet.get -> string!
+Hl7.Cql.CqlToElm.LiteralTypeNames.ValueSet.init -> void
+override Hl7.Cql.CqlToElm.LiteralTypeNames.Equals(object? obj) -> bool
+override Hl7.Cql.CqlToElm.LiteralTypeNames.GetHashCode() -> int
+override Hl7.Cql.CqlToElm.LiteralTypeNames.ToString() -> string!
+static Hl7.Cql.CqlToElm.LiteralTypeNames.operator !=(Hl7.Cql.CqlToElm.LiteralTypeNames? left, Hl7.Cql.CqlToElm.LiteralTypeNames? right) -> bool
+static Hl7.Cql.CqlToElm.LiteralTypeNames.operator ==(Hl7.Cql.CqlToElm.LiteralTypeNames? left, Hl7.Cql.CqlToElm.LiteralTypeNames? right) -> bool
 static readonly Hl7.Cql.CqlToElm.CqlToElmOptions.Default -> Hl7.Cql.CqlToElm.CqlToElmOptions!
-virtual Hl7.Cql.CqlToElm.LiteralTypes.<Clone>$() -> Hl7.Cql.CqlToElm.LiteralTypes!
-virtual Hl7.Cql.CqlToElm.LiteralTypes.EqualityContract.get -> System.Type!
-virtual Hl7.Cql.CqlToElm.LiteralTypes.Equals(Hl7.Cql.CqlToElm.LiteralTypes? other) -> bool
-virtual Hl7.Cql.CqlToElm.LiteralTypes.PrintMembers(System.Text.StringBuilder! builder) -> bool
+virtual Hl7.Cql.CqlToElm.LiteralTypeNames.<Clone>$() -> Hl7.Cql.CqlToElm.LiteralTypeNames!
+virtual Hl7.Cql.CqlToElm.LiteralTypeNames.EqualityContract.get -> System.Type!
+virtual Hl7.Cql.CqlToElm.LiteralTypeNames.Equals(Hl7.Cql.CqlToElm.LiteralTypeNames? other) -> bool
+virtual Hl7.Cql.CqlToElm.LiteralTypeNames.PrintMembers(System.Text.StringBuilder! builder) -> bool

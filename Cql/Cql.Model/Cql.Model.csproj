@@ -24,14 +24,20 @@
 		<EmbeddedResource Include="Models\qicore-modelinfo-4.1.1.xml">
 			<LogicalName>QICore411</LogicalName>
 		</EmbeddedResource>
+		<EmbeddedResource Include="Models\System-2.0.0.cql">
+			<LogicalName>System200</LogicalName>
+		</EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\Cql.Grammar\Cql.Grammar.csproj" />
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.CqlToElm" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.CqlToElm2" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="CqlToElm2Tests" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 </Project>

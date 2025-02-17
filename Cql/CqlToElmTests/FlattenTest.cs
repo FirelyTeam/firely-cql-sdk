@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.Elm;
+using Hl7.Cql.CqlToElm.Builtin;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
@@ -68,7 +69,7 @@ namespace Hl7.Cql.CqlToElm.Test
             ");
             var flatten = library.Should()
                 .BeACorrectlyInitializedLibraryWithStatementOfType<Flatten>();
-            flatten.Should().HaveType(SystemTypes.CodeType.ToListType());
+            flatten.Should().HaveType(SystemLibrary.CodeType.ToListType(SystemLibrary));
         }
 
         [TestMethod]
@@ -87,7 +88,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var choiceType = library.statements[0].expression.resultTypeSpecifier;
             choiceType.Should().BeOfType<ChoiceTypeSpecifier>();
             var flatten = library.statements[1].expression.Should().BeOfType<Flatten>().Subject;
-            flatten.Should().HaveType(choiceType.ToListType());
+            flatten.Should().HaveType(choiceType.ToListType(SystemLibrary));
         }
 
         [TestMethod]

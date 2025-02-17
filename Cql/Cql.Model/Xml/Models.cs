@@ -9,6 +9,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Xml.Serialization;
 
@@ -24,20 +25,28 @@ namespace Hl7.Cql.Model.Xml
         public static ModelInfo Fhir401 => _Fhir401.Value;
         public static ModelInfo ElmR1 => _ElmR1.Value;
         public static ModelInfo QICore411 => _QICore411.Value;
-
+        public static StreamReader System200 => GetStream("System200");
         /// <summary>
         /// Maps models by their names.  Versions are not considered.
         /// </summary>
-        public static IReadOnlyDictionary<string, ModelInfo> All => new Dictionary<string, ModelInfo>
+        public static IReadOnlyDictionary<string, object> All => new Dictionary<string, object>
         {
             { Fhir401.name, Fhir401 },
             { ElmR1.name, ElmR1 },
-            { QICore411.name, QICore411 }
+            { QICore411.name, QICore411 },
+            { "System200", System200  }
         };
         public static ModelInfo LoadFromStream(System.IO.Stream stream)
         {
             return xmlSerializer.Deserialize(stream) as ModelInfo
                 ?? throw new ArgumentException($"This resource is not a valid {nameof(ModelInfo)}");
+        }
+
+        private static StreamReader GetStream(string resourceName)
+        {
+            var stream = typeof(Models).Assembly.GetManifestResourceStream(resourceName)
+                ?? throw new ArgumentException($"Manifest resource stream {resourceName} is not included in this assembly.");
+            return new StreamReader(stream);
         }
 
         private static ModelInfo LoadEmbeddedResource(string resourceName)

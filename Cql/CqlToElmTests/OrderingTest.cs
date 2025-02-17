@@ -20,8 +20,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 define b: true
                 ");
             lib.statements.Should().HaveCount(2);
-            lib.statements[0].Should().HaveType(SystemTypes.BooleanType);
-            lib.statements[1].Should().HaveType(SystemTypes.BooleanType);
+            lib.statements[0].Should().HaveType(SystemLibrary.BooleanType);
+            lib.statements[1].Should().HaveType(SystemLibrary.BooleanType);
         }
 
         [TestMethod]
@@ -33,9 +33,9 @@ namespace Hl7.Cql.CqlToElm.Test
                 define c: true
                 ");
             lib.statements.Should().HaveCount(3);
-            lib.statements[0].Should().HaveType(SystemTypes.BooleanType);
-            lib.statements[1].Should().HaveType(SystemTypes.BooleanType);
-            lib.statements[2].Should().HaveType(SystemTypes.BooleanType);
+            lib.statements[0].Should().HaveType(SystemLibrary.BooleanType);
+            lib.statements[1].Should().HaveType(SystemLibrary.BooleanType);
+            lib.statements[2].Should().HaveType(SystemLibrary.BooleanType);
         }
 
         [TestMethod]
@@ -46,8 +46,8 @@ namespace Hl7.Cql.CqlToElm.Test
                 define function b(): true
                 ");
             lib.statements.Should().HaveCount(2);
-            lib.statements[0].Should().HaveType(SystemTypes.BooleanType);
-            lib.statements[1].Should().HaveType(SystemTypes.BooleanType);
+            lib.statements[0].Should().HaveType(SystemLibrary.BooleanType);
+            lib.statements[1].Should().HaveType(SystemLibrary.BooleanType);
         }
         [TestMethod]
         public void Function_Indirection_2()
@@ -58,9 +58,9 @@ namespace Hl7.Cql.CqlToElm.Test
                 define function c(): true
                 ");
             lib.statements.Should().HaveCount(3);
-            lib.statements[0].Should().HaveType(SystemTypes.BooleanType);
-            lib.statements[1].Should().HaveType(SystemTypes.BooleanType);
-            lib.statements[2].Should().HaveType(SystemTypes.BooleanType);
+            lib.statements[0].Should().HaveType(SystemLibrary.BooleanType);
+            lib.statements[1].Should().HaveType(SystemLibrary.BooleanType);
+            lib.statements[2].Should().HaveType(SystemLibrary.BooleanType);
         }
     }
 }

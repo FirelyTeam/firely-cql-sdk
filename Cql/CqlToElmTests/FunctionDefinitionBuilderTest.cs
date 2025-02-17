@@ -28,18 +28,18 @@ namespace Hl7.Cql.CqlToElm.Test
             var generic = Generic();
             var genericFunction = new SystemFunction<Abs>(new[] { generic }, generic);
             var overload = genericFunction.For(generic,
-                SystemTypes.IntegerType,
-                SystemTypes.DecimalType);
+                SystemLibrary.IntegerType,
+                SystemLibrary.DecimalType);
             var fns = overload.Functions.ToArray();
             Assert.AreEqual(2, fns.Length);
             var first = fns[0];
             var fo = first.Operands.ToArray();
             Assert.AreEqual(1, fo.Length);
-            Assert.AreEqual(SystemTypes.IntegerType, fo[0].operandTypeSpecifier);
+            Assert.AreEqual(SystemLibrary.IntegerType, fo[0].operandTypeSpecifier);
             var second = fns[1];
             var so = second.Operands.ToArray();
             Assert.AreEqual(1, so.Length);
-            Assert.AreEqual(SystemTypes.DecimalType, so[0].operandTypeSpecifier);
+            Assert.AreEqual(SystemLibrary.DecimalType, so[0].operandTypeSpecifier);
         }
     }
 }

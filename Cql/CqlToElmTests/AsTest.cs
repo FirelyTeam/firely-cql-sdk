@@ -120,7 +120,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var castAs = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
 
             castAs.strict.Should().BeTrue();
-            castAs.asTypeSpecifier.Should().Be(SystemTypes.DecimalType);
+            castAs.asTypeSpecifier.Should().Be(SystemLibrary.DecimalType);
             AssertResult(castAs, 1.0m);
         }
 
@@ -131,7 +131,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var castAs = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
 
             castAs.strict.Should().BeTrue();
-            castAs.asTypeSpecifier.Should().Be(SystemTypes.DecimalType);
+            castAs.asTypeSpecifier.Should().Be(SystemLibrary.DecimalType);
             Assert.ThrowsException<InvalidCastException>(() => AssertResult(castAs, 1.0m));
         }
 

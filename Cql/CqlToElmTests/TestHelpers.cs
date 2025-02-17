@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using FluentAssertions.Primitives;
+using Hl7.Cql.CqlToElm.System;
 using Hl7.Cql.Elm;
 using System.Globalization;
 using System.Linq;
@@ -8,6 +9,15 @@ namespace Hl7.Cql.CqlToElm.Test
 {
     public static class TestHelpers
     {
+        static Model.ModelProviders.BuiltInModelProvider CreateProvider()
+        {
+            var provider = new Model.ModelProviders.BuiltInModelProvider();
+            provider.Load(Model.Xml.Models.ElmR1);
+            return provider;
+        }
+
+        static System100 SystemLibrary = new System100(CqlToElmOptions.Default, CreateProvider());
+
         public static T ShouldDefine<T>(this Library l, string name) where T : IDefinitionElement
         {
             var f = l.statements.Should().Contain(s => s.name == name).Which.Should().BeOfType<T>().Subject;
@@ -40,14 +50,14 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var literal = l.Subject.Should().BeOfType<Literal>().Subject;
             literal.value.Should().Be(value);
-            literal.resultTypeSpecifier.Should().Be(SystemTypes.StringType);
+            literal.resultTypeSpecifier.Should().Be(SystemLibrary.StringType);
         }
 
         public static void BeLiteralBool(this ObjectAssertions l, bool b)
         {
             var literal = l.Subject.Should().BeOfType<Literal>().Subject;
             literal.value.Should().Be(b.ToString().ToLower(CultureInfo.InvariantCulture));
-            literal.resultTypeSpecifier.Should().Be(SystemTypes.BooleanType);
+            literal.resultTypeSpecifier.Should().Be(SystemLibrary.BooleanType);
         }
 
         public static void BeNullAs(this ObjectAssertions l, TypeSpecifier type)
@@ -67,20 +77,20 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var literal = l.Subject.Should().BeOfType<Literal>().Subject;
             literal.value.Should().Be(i.ToString(CultureInfo.InvariantCulture));
-            literal.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
+            literal.resultTypeSpecifier.Should().Be(SystemLibrary.IntegerType);
         }
 
         public static void BeLiteralDecimal(this ObjectAssertions l, decimal d)
         {
             var literal = l.Subject.Should().BeOfType<Literal>().Subject;
             literal.value.Should().Be(d.ToString(CultureInfo.InvariantCulture));
-            literal.resultTypeSpecifier.Should().Be(SystemTypes.DecimalType);
+            literal.resultTypeSpecifier.Should().Be(SystemLibrary.DecimalType);
         }
 
         public static void BeNullLiteral(this ObjectAssertions l)
         {
             var literal = l.Subject.Should().BeOfType<Null>().Subject;
-            literal.resultTypeSpecifier.Should().Be(SystemTypes.AnyType);
+            literal.resultTypeSpecifier.Should().Be(SystemLibrary.AnyType);
         }
 
         public static void HaveType(this ObjectAssertions l, TypeSpecifier type)

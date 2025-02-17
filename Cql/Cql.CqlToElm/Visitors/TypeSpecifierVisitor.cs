@@ -43,11 +43,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override TypeSpecifier VisitIntervalTypeSpecifier([NotNull] cqlParser.IntervalTypeSpecifierContext context)
         {
             var pointType = Visit(context.typeSpecifier());
-            var its = new IntervalTypeSpecifier
+            var its = new GenericTypeSpecifier
             {
-                pointType = pointType,
+                type = new NamedTypeSpecifier { name = new(Options.LiteralTypeNames.Interval) },
+                typeArgument = new[] { pointType }
             }.WithLocator(context.Locator());
-
             return its;
         }
 
@@ -55,9 +55,10 @@ namespace Hl7.Cql.CqlToElm.Visitors
         public override TypeSpecifier VisitListTypeSpecifier([NotNull] cqlParser.ListTypeSpecifierContext context)
         {
             var elementType = Visit(context.typeSpecifier());
-            var lts = new ListTypeSpecifier
+            var lts = new GenericTypeSpecifier
             {
-                elementType = elementType,
+                type = new NamedTypeSpecifier {  name = new(Options.LiteralTypeNames.List) },
+                typeArgument = new[] { elementType }
             }.WithLocator(context.Locator());
 
             return lts;
@@ -142,7 +143,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     }
                 }
             }
-            return new NamedTypeSpecifier(new System.Xml.XmlQualifiedName(Options.LiteralTypes.Default))
+            return new NamedTypeSpecifier(new System.Xml.XmlQualifiedName(Options.LiteralTypeNames.Default))
                     .WithLocator(context.Locator())
                     .AddError(Messaging.NamedTypeRequiredInContext());
         }

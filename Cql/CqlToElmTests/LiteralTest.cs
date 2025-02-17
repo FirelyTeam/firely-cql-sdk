@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
-using Hl7.Cql.CqlToElm.Builtin;
+using Hl7.Cql.CqlToElm.System;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Runtime.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -10,10 +11,16 @@ namespace Hl7.Cql.CqlToElm.Test
 
     public class LiteralTest : Base
     {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+        internal static System100 System;
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+
         [ClassInitialize]
 #pragma warning disable IDE0060 // Remove unused parameter
         public static void Initialize(TestContext context) => ClassInitialize(co =>
         {
+            System = new System100(ServiceProvider.GetOptionsValue<CqlToElmOptions>(),
+                ServiceProvider.GetRequiredService<Model.IModelProvider>());
         });
 #pragma warning restore IDE0060 // Remove unused parameter
         internal static InvocationBuilder InvocationBuilder => ServiceProvider.GetInvocationBuilder();
@@ -266,7 +273,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             var lib = CreateLibraryForExpression("-9223372036854775808L");
             var literal = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>(false);
-            literal.Should().HaveType(SystemTypes.LongType);
+            literal.Should().HaveType(System!.LongType);
         }
 
         #endregion
@@ -1692,7 +1699,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var output = CreateLibraryForExpression("1");
             var literal = output.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Literal>();
             // var context = FhirCqlContext.ForBundle();
-            var equalsOverload = InvocationBuilder.MatchSignature(SystemLibrary.Equal, new Expression[] { ceiling, literal });
+            var equalsOverload = InvocationBuilder.MatchSignature(System.Operators.Equal, new Expression[] { ceiling, literal });
             equalsOverload.Compatible.Should().BeTrue();
             var invokeEquals = InvocationBuilder.Invoke(equalsOverload, null);
             invokeEquals.GetErrors().Should().BeEmpty();

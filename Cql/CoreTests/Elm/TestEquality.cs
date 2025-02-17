@@ -1,12 +1,65 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.Elm;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace CoreTests.Elm
 {
     [TestClass]
     public class TestEquality
     {
+
+        [ClassInitialize]
+#pragma warning disable IDE0060 // Remove unused parameter
+        public static void Initialize(TestContext context) {
+            ModelProvider = new Hl7.Cql.Model.ModelProviders.BuiltInModelProvider();
+            SystemTypes = new(ModelProvider);
+        }
+#pragma warning restore IDE0060 // Remove unused parameter
+
+        internal static Hl7.Cql.Model.ModelProviders.BuiltInModelProvider ModelProvider;
+        internal static Types SystemTypes;
+        internal class Types
+        {
+            internal Types(Hl7.Cql.Model.IModelProvider modelProvider)
+            {
+                if (modelProvider.TryGetModel("System", "1.0.0", out var model))
+                {
+                    Hl7.Cql.Model.TypeDefinition type;
+
+                    if (model.TryGetType("System.Boolean", out type))
+                        BooleanType = nts(type);
+                    else Assert.Fail("Boolean type not found in model.");
+
+                    if (model.TryGetType("System.Integer", out type))
+                        IntegerType = nts(type);
+                    else Assert.Fail("Integer type not found in model.");
+
+                    if (model.TryGetType("System.Long", out type))
+                        LongType = nts(type);
+                    else Assert.Fail("Long type not found in model.");
+
+                    if (model.TryGetType("System.String", out type))
+                        StringType = nts(type);
+                    else Assert.Fail("String type not found in model.");
+                }
+
+                NamedTypeSpecifier nts(Hl7.Cql.Model.TypeDefinition type) => new NamedTypeSpecifier
+                {
+                    name = new System.Xml.XmlQualifiedName($"{{{type.Model.Uri}}}{type.Name}")
+                };
+            }
+
+            public TypeSpecifier BooleanType { get; }
+
+            public TypeSpecifier IntegerType { get; }
+            public TypeSpecifier LongType { get; }
+            public TypeSpecifier StringType { get; }
+
+
+
+        }
         internal static readonly TypeSpecifier FullTT = new TupleTypeSpecifier
         {
             element = new[]

@@ -47,7 +47,7 @@ namespace Hl7.Cql.CqlToElm
                     },
                     baseType = kvp.Value.BaseType switch
                     {
-                        { } => TypeBridge.ToElmSpecifier(kvp.Value.BaseType.ToTypeSpecifier()),
+                        { } => TypeHelpers.ToElmSpecifier(kvp.Value.BaseType.ToTypeSpecifier()),
                         _ => null
                     },
                 };

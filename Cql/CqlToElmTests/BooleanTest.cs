@@ -49,7 +49,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var library = createLibraryForExpression("true is null");
             var isNull = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<IsNull>();
             var @as = isNull.operand.Should().BeOfType<As>().Subject;
-            @as.Should().HaveType(SystemTypes.AnyType);
+            @as.Should().HaveType(SystemLibrary.AnyType);
             @as.operand.Should().BeLiteralBool(true);
             AssertResult(isNull, false);
         }
@@ -119,7 +119,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var library = createLibraryForExpression("{true} is true");
             var isTrue = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<IsTrue>();
             var singleton = isTrue.operand.Should().BeOfType<SingletonFrom>().Subject;
-            singleton.resultTypeSpecifier.Should().Be(SystemTypes.BooleanType);
+            singleton.resultTypeSpecifier.Should().Be(SystemLibrary.BooleanType);
             var list = singleton.operand.Should().BeOfType<List>().Subject;
             list.element.Single().Should().BeLiteralBool(true);
             AssertResult(isTrue, true);

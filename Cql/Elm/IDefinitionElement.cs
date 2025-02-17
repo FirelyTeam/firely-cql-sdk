@@ -42,13 +42,6 @@ namespace Hl7.Cql.Elm
         string Name { get; }
 
         /// <summary>
-        /// Converts a definition symbol to its reference counterpart.
-        /// </summary>
-        /// <param name="libraryName">The qualifier part of the identifier found at the point of reference.</param>
-        /// <returns></returns>
-        Expression ToRef(string? libraryName);
-
-        /// <summary>
         /// Adds an error to this element.
         /// </summary>
         /// <param name="error">The error.</param>
@@ -76,12 +69,6 @@ namespace Hl7.Cql.Elm
         [JsonIgnore]
         string IDefinitionElement.Name => name;
 
-        Expression IDefinitionElement.ToRef(string? libraryName) => new ValueSetRef
-        {
-            libraryName = libraryName,
-            name = name,
-        }.WithId().WithResultType(SystemTypes.ValueSetType);
-
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
     }
 
@@ -92,12 +79,6 @@ namespace Hl7.Cql.Elm
 
         [JsonIgnore]
         string IDefinitionElement.Name => name;
-
-        Expression IDefinitionElement.ToRef(string? libraryName) => new CodeSystemRef
-        {
-            libraryName = libraryName,
-            name = name,
-        }.WithId().WithResultType(SystemTypes.CodeSystemType);
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
     }
@@ -110,11 +91,6 @@ namespace Hl7.Cql.Elm
         [JsonIgnore]
         string IDefinitionElement.Name => name;
 
-        Expression IDefinitionElement.ToRef(string? libraryName) => new ConceptRef
-        {
-            libraryName = libraryName,
-            name = name,
-        }.WithId().WithResultType(SystemTypes.ConceptType);
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
 
@@ -128,12 +104,6 @@ namespace Hl7.Cql.Elm
         [JsonIgnore]
         string IDefinitionElement.Name => name;
 
-        Expression IDefinitionElement.ToRef(string? libraryName) => new CodeRef
-        {
-            libraryName = libraryName,
-            name = name,
-        }.WithId().WithResultType(SystemTypes.CodeType);
-
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
 
     }
@@ -145,14 +115,7 @@ namespace Hl7.Cql.Elm
         [JsonIgnore]
         string IDefinitionElement.Name => name;
 
-        Expression IDefinitionElement.ToRef(string? libraryName) => new ParameterRef
-        {
-            libraryName = libraryName,
-            name = name,
-        }.WithId().WithResultType(parameterTypeSpecifier);
-
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
-
     }
 
     public partial class ExpressionDef : IDefinitionElement
@@ -164,12 +127,6 @@ namespace Hl7.Cql.Elm
         [JsonIgnore]
         [XmlIgnore]
         public string Name => name!;
-
-        Expression IDefinitionElement.ToRef(string? libraryName) => new ExpressionRef
-        {
-            libraryName = libraryName,
-            name = name,
-        }.WithId().WithResultType(resultTypeSpecifier);
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
 
@@ -189,14 +146,6 @@ namespace Hl7.Cql.Elm
         [JsonIgnore]
         [XmlIgnore]
         public bool Fluent => fluentSpecified && fluent;
-
-        Expression IDefinitionElement.ToRef(string? libraryName) => ToRef(libraryName);
-
-        internal FunctionRef ToRef(string? libraryName) => new FunctionRef
-        {
-            libraryName = libraryName,
-            name = name,
-        }.WithId().WithResultType(resultTypeSpecifier ?? throw new InvalidOperationException("Missing result type specifier for function ref"));
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
 
@@ -221,11 +170,6 @@ namespace Hl7.Cql.Elm
         [JsonIgnore]
         AccessModifier IDefinitionElement.Access => AccessModifier.Private;
 
-        // Since there is no way to reference a context definition, we will throw an exception
-        // if we ever try to do that.
-        Expression IDefinitionElement.ToRef(string? libraryName) =>
-            throw new InvalidOperationException("There is no reference type for a context definition.");
-
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
 
     }
@@ -237,11 +181,6 @@ namespace Hl7.Cql.Elm
 
         [JsonIgnore]
         string IDefinitionElement.Name => name;
-
-        Expression IDefinitionElement.ToRef(string? libraryName) => new OperandRef
-        {
-            name = name,
-        }.WithId().WithResultType(operandTypeSpecifier);
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
 
@@ -256,19 +195,6 @@ namespace Hl7.Cql.Elm
         [JsonIgnore]
         string IDefinitionElement.Name => alias;
 
-        Expression IDefinitionElement.ToRef(string? libraryName)
-        {
-            TypeSpecifier aliasType;
-            if (resultTypeSpecifier is ListTypeSpecifier list)
-                aliasType = list.elementType;
-            else
-                aliasType = resultTypeSpecifier;
-            if (aliasType is null)
-                throw new InvalidOperationException($"Alias type is null");
-            var aliasRef = new AliasRef { name = alias }.WithResultType(aliasType);
-            return aliasRef;
-        }
-
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
 
     }
@@ -281,11 +207,6 @@ namespace Hl7.Cql.Elm
         [JsonIgnore]
         string IDefinitionElement.Name => identifier;
 
-        Expression IDefinitionElement.ToRef(string? _) => new QueryLetRef
-        {
-            name = identifier,
-        }.WithId().WithResultType(resultTypeSpecifier);
-
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
 
     }
@@ -297,9 +218,6 @@ namespace Hl7.Cql.Elm
 
         [JsonIgnore]
         string IDefinitionElement.Name => localIdentifier;
-
-        Expression IDefinitionElement.ToRef(string? _) =>
-            throw new InvalidOperationException("There is no reference type for a using statement.");
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
      
@@ -319,7 +237,6 @@ namespace Hl7.Cql.Elm
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
 
-        public Expression ToRef(string? libraryName) => this;
     }
 
     public partial class IncludeDef : IDefinitionElement
@@ -329,9 +246,6 @@ namespace Hl7.Cql.Elm
 
         [JsonIgnore]
         string IDefinitionElement.Name => localIdentifier;
-
-        Expression IDefinitionElement.ToRef(string? _) =>
-            throw new InvalidOperationException("There is no reference type for an include statement.");
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
 
@@ -419,10 +333,6 @@ namespace Hl7.Cql.Elm
             return this;
         }
 
-        Expression IDefinitionElement.ToRef(string? libraryName) => ToRef(libraryName);
-
-        internal FunctionRef ToRef(string? libraryName) => throw new NotSupportedException($"Refs cannot be created until the overload is resolved.");
-
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => throw new NotSupportedException("An overloaded def cannot have an error.");
     }
 
@@ -447,10 +357,8 @@ namespace Hl7.Cql.Elm
 
         public T Resolve() => Definition.Value;
 
-
         public IDefinitionElement AddError(CqlToElmError error) => Definition.Value.AddError(error);
 
-        public Expression ToRef(string? libraryName) => Resolve().ToRef(libraryName);
     }
     /// <summary>
     /// Defines a deferred expression (define).
@@ -490,7 +398,5 @@ namespace Hl7.Cql.Elm
         public string Name => name!;
 
         IDefinitionElement IDefinitionElement.AddError(CqlToElmError error) => this.AddError(error);
-
-        public Expression ToRef(string? libraryName) => throw new NotSupportedException();
     }
 }

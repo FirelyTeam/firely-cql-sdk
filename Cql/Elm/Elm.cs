@@ -84,6 +84,7 @@ public partial class GenericTypeSpecifier : TypeSpecifier
     /// <remarks/>
     [System.Xml.Serialization.XmlElementAttribute("typeArgument")]
     public TypeSpecifier[]? typeArgument { get; set; }
+
 }
 
 file static class StringExtensions

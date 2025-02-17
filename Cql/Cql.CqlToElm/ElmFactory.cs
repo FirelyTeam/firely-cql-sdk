@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.CqlToElm.Builtin;
+﻿using Hl7.Cql.CqlToElm.System;
 using Hl7.Cql.Elm;
 using System;
 using System.Globalization;
@@ -10,12 +10,13 @@ namespace Hl7.Cql.CqlToElm
 {
     internal class ElmFactory
     {
-        public ElmFactory(MessageProvider messaging)
+        public ElmFactory(MessageProvider messaging, LibraryBuilder library)
         {
             Messaging = messaging;
+            SystemLibrary = library.SystemLibrary ?? throw new InvalidOperationException("System library not set on this builder");
         }
         public MessageProvider Messaging { get; }
-
+        public System100 SystemLibrary { get; }
         public Expression CreateElmNode(IHasSignature hasSignature, string? library, Expression[] arguments)
         {
             var nodeType = hasSignature switch
@@ -59,26 +60,28 @@ namespace Hl7.Cql.CqlToElm
             return result;
         }
 
-        internal Null Null(TypeSpecifier type) =>
-            new Null().WithResultType(type);
+        internal Null Null(TypeSpecifier? type = null) =>
+            type is null
+            ? new Null().WithResultType(SystemLibrary.AnyType)
+            : new Null().WithResultType(type);
 
         internal Literal Literal(int value) => 
-            Literal(value.ToString(CultureInfo.InvariantCulture), SystemTypes.IntegerType);
+            Literal(value.ToString(CultureInfo.InvariantCulture), SystemLibrary.IntegerType as NamedTypeSpecifier);
         internal Literal Literal(long value) =>
-            Literal(value.ToString(CultureInfo.InvariantCulture), SystemTypes.LongType);
+            Literal(value.ToString(CultureInfo.InvariantCulture), SystemLibrary.LongType as NamedTypeSpecifier);
         internal Literal Literal(bool value) =>
-            Literal(value.ToString(CultureInfo.InvariantCulture).ToLowerInvariant(), SystemTypes.BooleanType);
+            Literal(value.ToString(CultureInfo.InvariantCulture).ToLowerInvariant(), SystemLibrary.BooleanType as NamedTypeSpecifier);
         internal Literal Literal(decimal value) =>
-            Literal(value.ToString(CultureInfo.InvariantCulture), SystemTypes.DecimalType);
+            Literal(value.ToString(CultureInfo.InvariantCulture), SystemLibrary.DecimalType as NamedTypeSpecifier);
         internal Literal Literal(string value) =>
-            Literal(value, SystemTypes.StringType);
+            Literal(value, SystemLibrary.StringType as NamedTypeSpecifier);
         internal Elm.Quantity Quantity(decimal value, string unit) =>
             new Elm.Quantity
             {
                 value = value,
                 valueSpecified = true,
                 unit = unit
-            }.WithResultType(SystemTypes.QuantityType);
+            }.WithResultType(SystemLibrary.QuantityType);
         internal Literal Literal(DateTimePrecision value)
         {
             var ucum = value switch
@@ -94,28 +97,20 @@ namespace Hl7.Cql.CqlToElm
                 _ => null,
             };
             if (ucum is not null)
-                return new Literal
-                {
-                    value = ucum,
-                    valueType = new XmlQualifiedName(SystemTypes.StringType.name.Name),
-                }
-                .WithResultType(SystemTypes.StringType);
+                return Literal(ucum, SystemLibrary.StringType as NamedTypeSpecifier);
             else
-                return new Literal
-                {
-                    value = Enum.GetName(value),
-                    valueType = new XmlQualifiedName(SystemTypes.StringType.name.Name),
-                }
-                .WithResultType(SystemTypes.StringType)
-                .AddError(Messaging.NamedTypeRequiredInContext());
+                return Literal(Enum.GetName(value) ?? "", SystemLibrary.StringType as NamedTypeSpecifier)
+                    .AddError(Messaging.NamedTypeRequiredInContext());
         }
 
-        private Literal Literal(string value, NamedTypeSpecifier namedType) =>
-            new Literal
-            {
-                value = value,
-                valueType = new XmlQualifiedName(namedType.name.Name),
-            }.WithResultType(namedType);
+        private Literal Literal(string value, NamedTypeSpecifier? namedType) =>
+            namedType is null
+            ? throw new ArgumentException($"Literals must have named types", nameof(namedType))
+            : new Literal
+                {
+                    value = value,
+                    valueType = new XmlQualifiedName(namedType.name.Name),
+                }.WithResultType(namedType);
 
         internal Expression If(Expression condition, Expression then, Expression @else)
         {
@@ -173,9 +168,9 @@ namespace Hl7.Cql.CqlToElm
         {
             // we use Between to pattern match this overload, but between returns an And
             var gt = new GreaterOrEqual { operand = new[] { arguments[0], arguments[1] } }
-                .WithResultType(SystemTypes.BooleanType);
+                .WithResultType(SystemLibrary.BooleanType);
             var lt = new LessOrEqual { operand = new[] { arguments[0], arguments[2] } }
-                .WithResultType(SystemTypes.BooleanType);
+                .WithResultType(SystemLibrary.BooleanType);
             var and = new And { operand = new Expression[] { gt, lt } };
             return and;
         }
@@ -206,13 +201,13 @@ namespace Hl7.Cql.CqlToElm
         {
             ca.precision = name switch
             {
-                nameof(SystemLibrary.CalculateAgeInYears) or nameof(SystemLibrary.AgeInYears) => DateTimePrecision.Year,
-                nameof(SystemLibrary.CalculateAgeInMonths) or nameof(SystemLibrary.AgeInMonths) => DateTimePrecision.Month,
-                nameof(SystemLibrary.CalculateAgeInWeeks) or nameof(SystemLibrary.AgeInWeeks) => DateTimePrecision.Week,
-                nameof(SystemLibrary.CalculateAgeInDays) or nameof(SystemLibrary.AgeInDays) => DateTimePrecision.Day,
-                nameof(SystemLibrary.CalculateAgeInHours) or nameof(SystemLibrary.AgeInHours) => DateTimePrecision.Hour,
-                nameof(SystemLibrary.CalculateAgeInMinutes) or nameof(SystemLibrary.AgeInMinutes) => DateTimePrecision.Minute,
-                nameof(SystemLibrary.CalculateAgeInSeconds) or nameof(SystemLibrary.AgeInSeconds) => DateTimePrecision.Second,
+                nameof(System100.Operators.CalculateAgeInYears) or nameof(System100.Operators.AgeInYears) => DateTimePrecision.Year,
+                nameof(System100.Operators.CalculateAgeInMonths) or nameof(System100.Operators.AgeInMonths) => DateTimePrecision.Month,
+                nameof(System100.Operators.CalculateAgeInWeeks) or nameof(System100.Operators.AgeInWeeks) => DateTimePrecision.Week,
+                nameof(System100.Operators.CalculateAgeInDays) or nameof(System100.Operators.AgeInDays) => DateTimePrecision.Day,
+                nameof(System100.Operators.CalculateAgeInHours) or nameof(System100.Operators.AgeInHours) => DateTimePrecision.Hour,
+                nameof(System100.Operators.CalculateAgeInMinutes) or nameof(System100.Operators.AgeInMinutes) => DateTimePrecision.Minute,
+                nameof(System100.Operators.CalculateAgeInSeconds) or nameof(System100.Operators.AgeInSeconds) => DateTimePrecision.Second,
                 _ => throw new ArgumentException($"Could not determine precision for Age function {name}.")
             };
             ca.precisionSpecified = true;
@@ -223,13 +218,13 @@ namespace Hl7.Cql.CqlToElm
         {
             caa.precision = name switch
             {
-                nameof(SystemLibrary.CalculateAgeInYearsAt) or nameof(SystemLibrary.AgeInYearsAt) => DateTimePrecision.Year,
-                nameof(SystemLibrary.CalculateAgeInMonthsAt) or nameof(SystemLibrary.AgeInMonthsAt) => DateTimePrecision.Month,
-                nameof(SystemLibrary.CalculateAgeInWeeksAt) or nameof(SystemLibrary.AgeInWeeksAt) => DateTimePrecision.Week,
-                nameof(SystemLibrary.CalculateAgeInDaysAt) or nameof(SystemLibrary.AgeInDaysAt) => DateTimePrecision.Day,
-                nameof(SystemLibrary.CalculateAgeInHoursAt) or nameof(SystemLibrary.AgeInHoursAt) => DateTimePrecision.Hour,
-                nameof(SystemLibrary.CalculateAgeInMinutesAt) or nameof(SystemLibrary.AgeInMinutesAt) => DateTimePrecision.Minute,
-                nameof(SystemLibrary.CalculateAgeInSecondsAt) or nameof(SystemLibrary.AgeInSecondsAt) => DateTimePrecision.Second,
+                nameof(System100.Operators.CalculateAgeInYearsAt) or nameof(System100.Operators.AgeInYearsAt) => DateTimePrecision.Year,
+                nameof(System100.Operators.CalculateAgeInMonthsAt) or nameof(System100.Operators.AgeInMonthsAt) => DateTimePrecision.Month,
+                nameof(System100.Operators.CalculateAgeInWeeksAt) or nameof(System100.Operators.AgeInWeeksAt) => DateTimePrecision.Week,
+                nameof(System100.Operators.CalculateAgeInDaysAt) or nameof(System100.Operators.AgeInDaysAt) => DateTimePrecision.Day,
+                nameof(System100.Operators.CalculateAgeInHoursAt) or nameof(System100.Operators.AgeInHoursAt) => DateTimePrecision.Hour,
+                nameof(System100.Operators.CalculateAgeInMinutesAt) or nameof(System100.Operators.AgeInMinutesAt) => DateTimePrecision.Minute,
+                nameof(System100.Operators.CalculateAgeInSecondsAt) or nameof(System100.Operators.AgeInSecondsAt) => DateTimePrecision.Second,
                 _ => throw new ArgumentException($"Could not determine precision for Age function {name}.")
             };
             caa.precisionSpecified = true;
@@ -380,9 +375,9 @@ namespace Hl7.Cql.CqlToElm
             // we use ProperBetween to pattern match this overload,
             // but proper between returns an And
             var gt = new Greater { operand = new[] { arguments[0], arguments[1] } }
-                .WithResultType(SystemTypes.BooleanType);
+                .WithResultType(SystemLibrary.BooleanType);
             var lt = new Less { operand = new[] { arguments[0], arguments[2] } }
-                .WithResultType(SystemTypes.BooleanType);
+                .WithResultType(SystemLibrary.BooleanType);
             var and = new And { operand = new Expression[] { gt, lt } };
             return and;
         }
@@ -404,23 +399,23 @@ namespace Hl7.Cql.CqlToElm
         {
             slice.source = arguments[0];
             // slice is used for Skip, Take & Tail functions.  there isn't a function called Slice
-            if (function.Name == nameof(SystemLibrary.Skip))
+            if (function.Name == nameof(System100.Operators.Skip))
             {
                 slice.startIndex = arguments[1];
-                slice.endIndex = new Null().WithResultType(SystemTypes.IntegerType);
+                slice.endIndex = new Null().WithResultType(SystemLibrary.IntegerType);
             }
-            else if (function.Name == nameof(SystemLibrary.Take))
+            else if (function.Name == nameof(System100.Operators.Take))
             {
                 slice.startIndex = Literal(0);
                 slice.endIndex = new Coalesce
                 {
                     operand = new[] { arguments[1], Literal(0) },
-                }.WithResultType(SystemTypes.IntegerType);
+                }.WithResultType(SystemLibrary.IntegerType);
             }
-            if (function.Name == nameof(SystemLibrary.Tail))
+            if (function.Name == nameof(System100.Operators.Tail))
             {
                 slice.startIndex = Literal(1);
-                slice.endIndex = new Null().WithResultType(SystemTypes.IntegerType);
+                slice.endIndex = new Null().WithResultType(SystemLibrary.IntegerType);
             }
             return slice;
         }

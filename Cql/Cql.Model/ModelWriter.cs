@@ -57,7 +57,7 @@ internal class ModelWriter
                             writer.Write(arg.Value);
                         }
                         writer.WriteLine();
-                        if (gtd.Elements.Any())
+                        if (gtd.Elements.Values.Any())
                         {
                             writer.WriteLine("{");
                             writeElements(gtd);
@@ -72,7 +72,7 @@ internal class ModelWriter
                     {
                         writer.Write("type ");
                         writer.Write(type.Name);
-                        if (ctd.Elements.Any())
+                        if (ctd.Elements.Values.Any())
                         {
                             writer.WriteLine(" {");
                             writeElements(ctd);
@@ -102,11 +102,11 @@ internal class ModelWriter
 
             void writeElements(ClassTypeDefinition ctd)
             {
-                var f = ctd.Elements.FirstOrDefault();
+                var f = ctd.Elements.Values.FirstOrDefault();
                 if (f is not null)
                 {
                     writeElement(f);
-                    foreach (var element in ctd.Elements.Skip(1))
+                    foreach (var element in ctd.Elements.Values.Skip(1))
                     {
                         writer.WriteLine(",");
                         writeElement(element);

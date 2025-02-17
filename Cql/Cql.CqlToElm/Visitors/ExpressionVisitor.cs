@@ -1,12 +1,14 @@
-﻿using Hl7.Cql.CqlToElm.Builtin;
-using Hl7.Cql.CqlToElm.Grammar;
+﻿using Hl7.Cql.CqlToElm.Grammar;
+using Hl7.Cql.CqlToElm.System;
 using Hl7.Cql.Elm;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -14,11 +16,19 @@ namespace Hl7.Cql.CqlToElm.Visitors
     {
         public ExpressionVisitor(IServiceProvider services, LibraryBuilder builder)
         {
+
             LibraryBuilder = builder;
             ModelProvider = services.GetRequiredService<Model.IModelProvider>();
             ElmFactory = services.GetRequiredService<ElmFactory>();
             Messaging = services.GetRequiredService<MessageProvider>(); 
             Options = services.GetRequiredService<IOptions<CqlToElmOptions>>().Value;
+            var systemModel = builder.GetSystemModel();
+            if (systemModel.Version == "1.0.0")
+                SystemLibrary = new System100(Options, ModelProvider);
+            else
+                throw new NotSupportedException("Only model version 1.0 is supported.");
+
+
             // library specific services
             TypeSpecifierVisitor = TypeSpecifierVisitor.Create(services, builder);
             CoercionProvider = CoercionProvider.Create(services, builder);
@@ -35,6 +45,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
         private ElmFactory ElmFactory { get; }
         private MessageProvider Messaging { get; }
         private InvocationBuilder InvocationBuilder { get; }
+        private System100 SystemLibrary { get; }
 
         #endregion
 
@@ -68,16 +79,16 @@ namespace Hl7.Cql.CqlToElm.Visitors
             // This is normally disabled.
             if ((Options.AllowNullIntervals ?? false)
                 && low is Null 
-                && low.resultTypeSpecifier == SystemTypes.AnyType
+                && low.resultTypeSpecifier == SystemLibrary.AnyType
                 && high is Null
-                && high.resultTypeSpecifier == SystemTypes.AnyType)
+                && high.resultTypeSpecifier == SystemLibrary.AnyType)
             {
                 return new Interval { low = low, high = high, lowClosed = lowClosed, highClosed = highClosed }
                     .WithLocator(context.Locator())
-                    .WithResultType(SystemTypes.AnyType.ToIntervalType());
+                    .WithResultType(SystemLibrary.AnyType.ToIntervalType(SystemLibrary));
             }
 
-            var intervalSelector = InvocationBuilder.MatchSignature(SystemLibrary.Interval, 
+            var intervalSelector = InvocationBuilder.MatchSignature(SystemLibrary.Operators.Interval, 
                 low, 
                 high, 
                 ElmFactory.Literal(lowClosed), ElmFactory.Literal(highClosed));
@@ -93,7 +104,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     if (intervalSelector.Function.ResultTypeSpecifier is IntervalTypeSpecifier intervalType)
                     {
                         var pointType = intervalType.pointType;
-                        if (pointType.IsOrderedType())
+                        if (SystemLibrary.OrderedTypes.Contains(pointType))
                         {
                             if (low is Quantity lowQuantity && high is Quantity highQuantity
                                 && !UnitsAreCompatible(lowQuantity.unit, highQuantity.unit))
@@ -111,7 +122,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 return new Interval()
                     .AddError(Messaging.CouldNotResolveFunction("Interval", low.resultTypeSpecifier, high.resultTypeSpecifier))
                     .WithLocator(context.Locator())
-                    .WithResultType(low.resultTypeSpecifier.ToIntervalType());
+                    .WithResultType(low.resultTypeSpecifier.ToIntervalType(SystemLibrary));
         }
 
         // : ('List' ('<' typeSpecifier '>')?)? '{' (expression (',' expression)*)? '}'
@@ -125,20 +136,20 @@ namespace Hl7.Cql.CqlToElm.Visitors
             if (elements.Length == 0)
                 return new List() { element = Array.Empty<Expression>(), }
                     .WithLocator(context.Locator())
-                    .WithResultType((typeSpecifier ?? SystemTypes.AnyType).ToListType());
+                    .WithResultType((typeSpecifier ?? SystemLibrary.AnyType).ToListType(SystemLibrary));
             else
             {
                 var nonNullElements = elements
                     .Except(elements
                         .OfType<Null>()
-                        .Where(@null => @null.resultTypeSpecifier == SystemTypes.AnyType))
+                        .Where(@null => @null.resultTypeSpecifier == SystemLibrary.AnyType))
                     .ToArray();
                 var distinctTypes = nonNullElements
                     .Select(ele => ele.resultTypeSpecifier)
                     .Distinct()
                     .ToArray();
                 var typedElements = new Expression[elements.Length];
-                TypeSpecifier elementType = SystemTypes.AnyType;
+                TypeSpecifier elementType = SystemLibrary.AnyType;
                 if (distinctTypes.Length == 1)
                 {
                     elementType = distinctTypes[0];
@@ -172,7 +183,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     element = typedElements,
                 }
                 .WithLocator(context.Locator())
-                .WithResultType(elementType.ToListType());
+                .WithResultType(elementType.ToListType(SystemLibrary));
             }
 
         }
@@ -186,7 +197,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             var contextTerm = context.terminology();
             var terminology = contextTerm is null ? null : Visit(contextTerm);
             var typeSpec = (NamedTypeSpecifier)TypeSpecifierVisitor.Visit(context.namedTypeSpecifier());
-            var modelTypeSpec = TypeBridge.ToModelSpecifier(typeSpec, ModelProvider, Options);
+            var modelTypeSpec = TypeHelpers.ToModelSpecifier(typeSpec, ModelProvider);
             var modelType = modelTypeSpec.GetTypeDefinition();
                 
             var contextExpressionRef = contextName switch
@@ -203,7 +214,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 codeComparator = codeComparator,
                 codes = terminology,
                 codeProperty = codePath,
-            }.WithResultType(typeSpec.ToListType()).WithLocator(context.Locator());
+            }.WithResultType(typeSpec.ToListType(SystemLibrary)).WithLocator(context.Locator());
 
             return retrieve;
         }
@@ -223,11 +234,11 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return new Message()
             {
                 message = ElmFactory.Literal(message),
-                source = new Null().WithResultType(SystemTypes.AnyType)
+                source = new Null().WithResultType(SystemLibrary.AnyType)
             }
             .AddError(message)
             .WithLocator(locator)
-            .WithResultType(SystemTypes.AnyType);
+            .WithResultType(SystemLibrary.AnyType);
         }
 
         private Expression VisitBinaryWithPrecision(OverloadedFunctionDef systemFunction,

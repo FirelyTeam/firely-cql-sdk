@@ -29,7 +29,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private fluent function Two(): 2");
 
             var f = shouldDefineFunction(library, "Two");
-            f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
+            f.resultTypeSpecifier.Should().Be(SystemLibrary.IntegerType);
             f.expression.Should().BeLiteralInteger(2);
             f.fluent.Should().BeTrue();
             f.accessLevel.Should().Be(AccessModifier.Private);
@@ -44,7 +44,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define public function Ext() returns String: external");
 
             var f = shouldDefineFunction(library, "Ext");
-            f.resultTypeSpecifier.Should().Be(SystemTypes.StringType);
+            f.resultTypeSpecifier.Should().Be(SystemLibrary.StringType);
             f.expression.Should().BeNull();
             f.fluent.Should().BeFalse();
             f.accessLevel.Should().Be(AccessModifier.Public);
@@ -67,7 +67,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define function Two() returns Integer: 2");
 
             var f = shouldDefineFunction(library, "Two");
-            f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
+            f.resultTypeSpecifier.Should().Be(SystemLibrary.IntegerType);
         }
 
         [TestMethod]
@@ -78,7 +78,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define function Two() returns Any: 2");
 
             var f = shouldDefineFunction(library, "Two");
-            f.resultTypeSpecifier.Should().Be(SystemTypes.AnyType);
+            f.resultTypeSpecifier.Should().Be(SystemLibrary.AnyType);
         }
 
         [TestMethod]
@@ -89,7 +89,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define function Double(a Integer): a*2");
 
             var f = shouldDefineFunction(library, "Double");
-            f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
+            f.resultTypeSpecifier.Should().Be(SystemLibrary.IntegerType);
             var mul = f.expression.Should().BeOfType<Multiply>().Subject;
             mul.operand[0].Should().BeOfType<OperandRef>().Which.name.Should().Be("a");
         }
@@ -111,7 +111,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define function Double(a Integer): b");
 
             var f = shouldDefineFunction(library, "Double");
-            f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
+            f.resultTypeSpecifier.Should().Be(SystemLibrary.IntegerType);
             var expr = f.expression.Should().BeOfType<ExpressionRef>().Subject;
             expr.name.Should().Be("b");
             expr.libraryName.Should().BeNull();
@@ -126,7 +126,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define function Replace(a String): a");
 
             var f = shouldDefineFunction(library, "Replace");
-            f.resultTypeSpecifier.Should().Be(SystemTypes.StringType);
+            f.resultTypeSpecifier.Should().Be(SystemLibrary.StringType);
             f.expression.Should().BeOfType<OperandRef>().Which.name.Should().Be("a");
         }
 
@@ -139,7 +139,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define a: 5");
 
             var f = library.ShouldDefine<ExpressionDef>("b");
-            f.resultTypeSpecifier.Should().Be(SystemTypes.IntegerType);
+            f.resultTypeSpecifier.Should().Be(SystemLibrary.IntegerType);
             f.expression.Should().BeOfType<ExpressionRef>().Which.name.Should().Be("a");
         }
 
@@ -224,12 +224,12 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.AreEqual("FHIRHelpers", toDate.libraryName);
             Assert.AreEqual("ToDate", toDate.name);
             Assert.AreEqual(1, toDate.operand?.Length);
-            Assert.AreEqual(SystemTypes.DateType, toDate.resultTypeSpecifier);
+            Assert.AreEqual(SystemLibrary.DateType, toDate.resultTypeSpecifier);
             var toQuantity = add.operand[1].Should().BeOfType<FunctionRef>().Subject;
             Assert.AreEqual("FHIRHelpers", toQuantity.libraryName);
             Assert.AreEqual("ToQuantity", toQuantity.name);
             Assert.AreEqual(1, toQuantity.operand?.Length);
-            Assert.AreEqual(SystemTypes.QuantityType, toQuantity.resultTypeSpecifier);
+            Assert.AreEqual(SystemLibrary.QuantityType, toQuantity.resultTypeSpecifier);
         }
 
         [TestMethod]
@@ -257,7 +257,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 end
             ");
             var cs = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Case>();
-            cs.Should().HaveType(SystemTypes.DateType);
+            cs.Should().HaveType(SystemLibrary.DateType);
 
         }
 

@@ -205,7 +205,6 @@ Hl7.Cql.Elm.DeferredDefinition<T>.DeferredDefinition(string! name, Hl7.Cql.Elm.A
 Hl7.Cql.Elm.DeferredDefinition<T>.Definition.get -> System.Lazy<T>!
 Hl7.Cql.Elm.DeferredDefinition<T>.Name.get -> string!
 Hl7.Cql.Elm.DeferredDefinition<T>.Resolve() -> T
-Hl7.Cql.Elm.DeferredDefinition<T>.ToRef(string? libraryName) -> Hl7.Cql.Elm.Expression!
 Hl7.Cql.Elm.DeferredExpressionDef
 Hl7.Cql.Elm.DeferredExpressionDef.DeferredExpressionDef(string! name, Hl7.Cql.Elm.AccessModifier access, System.Func<Hl7.Cql.Elm.ExpressionDef!>! resolve) -> void
 Hl7.Cql.Elm.DeferredFunctionDef
@@ -324,11 +323,9 @@ Hl7.Cql.Elm.IDefinitionElement
 Hl7.Cql.Elm.IDefinitionElement.Access.get -> Hl7.Cql.Elm.AccessModifier
 Hl7.Cql.Elm.IDefinitionElement.AddError(Hl7.Cql.Elm.CqlToElmError! error) -> Hl7.Cql.Elm.IDefinitionElement!
 Hl7.Cql.Elm.IDefinitionElement.Name.get -> string!
-Hl7.Cql.Elm.IDefinitionElement.ToRef(string? libraryName) -> Hl7.Cql.Elm.Expression!
 Hl7.Cql.Elm.IdentifierRef
 Hl7.Cql.Elm.IdentifierRef.IdentifierRef() -> void
 Hl7.Cql.Elm.IdentifierRef.Name.get -> string!
-Hl7.Cql.Elm.IdentifierRef.ToRef(string? libraryName) -> Hl7.Cql.Elm.Expression!
 Hl7.Cql.Elm.If
 Hl7.Cql.Elm.If.If() -> void
 Hl7.Cql.Elm.IFunctionElement
@@ -702,7 +699,6 @@ Hl7.Cql.Elm.Successor
 Hl7.Cql.Elm.Successor.Successor() -> void
 Hl7.Cql.Elm.Sum
 Hl7.Cql.Elm.Sum.Sum() -> void
-Hl7.Cql.Elm.SystemTypes
 Hl7.Cql.Elm.Tag
 Hl7.Cql.Elm.Tag.Tag() -> void
 Hl7.Cql.Elm.TernaryExpression
@@ -782,7 +778,6 @@ Hl7.Cql.Elm.TypeDef.identifier.set -> void
 Hl7.Cql.Elm.TypeDef.Name.get -> string!
 Hl7.Cql.Elm.TypeDef.name.get -> string?
 Hl7.Cql.Elm.TypeDef.name.set -> void
-Hl7.Cql.Elm.TypeDef.ToRef(string? libraryName) -> Hl7.Cql.Elm.Expression!
 Hl7.Cql.Elm.TypeDef.typeArgument.get -> Hl7.Cql.Elm.TypeArgument![]?
 Hl7.Cql.Elm.TypeDef.typeArgument.set -> void
 Hl7.Cql.Elm.TypeDef.TypeDef() -> void
@@ -867,32 +862,8 @@ static Hl7.Cql.Elm.Library.ParseFromJson(string! json, bool validate = true) -> 
 static Hl7.Cql.Elm.NamedTypeSpecifier.Split(System.Xml.XmlQualifiedName? qname) -> (string? uri, string? name)
 static Hl7.Cql.Elm.OverloadedFunctionDef.CanCombine(params Hl7.Cql.Elm.IFunctionElement![]! elements) -> bool
 static Hl7.Cql.Elm.OverloadedFunctionDef.Create(params Hl7.Cql.Elm.IFunctionElement![]! elements) -> Hl7.Cql.Elm.OverloadedFunctionDef!
-static Hl7.Cql.Elm.SystemTypes.AnyType -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static Hl7.Cql.Elm.SystemTypes.BooleanType -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static Hl7.Cql.Elm.SystemTypes.CodeSystemType -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static Hl7.Cql.Elm.SystemTypes.CodeType -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static Hl7.Cql.Elm.SystemTypes.ConceptType -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static Hl7.Cql.Elm.SystemTypes.CreateNamedType(string! name) -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static Hl7.Cql.Elm.SystemTypes.DateTimeType -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static Hl7.Cql.Elm.SystemTypes.DateType -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static Hl7.Cql.Elm.SystemTypes.DecimalType -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static Hl7.Cql.Elm.SystemTypes.IntegerType -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static Hl7.Cql.Elm.SystemTypes.LongType -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static Hl7.Cql.Elm.SystemTypes.QuantityType -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static Hl7.Cql.Elm.SystemTypes.RatioType -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static Hl7.Cql.Elm.SystemTypes.StringType -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static Hl7.Cql.Elm.SystemTypes.SystemModelPrefix -> string!
-static Hl7.Cql.Elm.SystemTypes.SystemModelUri -> string!
-static Hl7.Cql.Elm.SystemTypes.SystemModelVersion -> string!
-static Hl7.Cql.Elm.SystemTypes.TimeType -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static Hl7.Cql.Elm.SystemTypes.ValueSetType -> Hl7.Cql.Elm.NamedTypeSpecifier!
-static Hl7.Cql.Elm.SystemTypes.VocabularyType -> Hl7.Cql.Elm.NamedTypeSpecifier!
 static Hl7.Cql.Elm.TypeSpecifier.operator !=(Hl7.Cql.Elm.TypeSpecifier? a, Hl7.Cql.Elm.TypeSpecifier? b) -> bool
 static Hl7.Cql.Elm.TypeSpecifier.operator ==(Hl7.Cql.Elm.TypeSpecifier? a, Hl7.Cql.Elm.TypeSpecifier? b) -> bool
-static Hl7.Cql.Elm.TypeSpecifierExtensions.IsNumericType(this Hl7.Cql.Elm.TypeSpecifier! type) -> bool
-static Hl7.Cql.Elm.TypeSpecifierExtensions.IsOrderedType(this Hl7.Cql.Elm.TypeSpecifier! type) -> bool
-static Hl7.Cql.Elm.TypeSpecifierExtensions.ToIntervalType(this Hl7.Cql.Elm.TypeSpecifier! name) -> Hl7.Cql.Elm.IntervalTypeSpecifier!
-static Hl7.Cql.Elm.TypeSpecifierExtensions.ToListType(this Hl7.Cql.Elm.TypeSpecifier! name) -> Hl7.Cql.Elm.ListTypeSpecifier!
 static Hl7.Cql.Elm.TypeSpecifierExtensions.ToNamedType(this System.Xml.XmlQualifiedName! qname) -> Hl7.Cql.Elm.NamedTypeSpecifier!
 virtual Hl7.Cql.Elm.Element.GetTypeSpecifier() -> Hl7.Cql.Elm.TypeSpecifier?
 ~Hl7.Cql.Elm.Aggregate.initialValue.get -> Hl7.Cql.Elm.Expression

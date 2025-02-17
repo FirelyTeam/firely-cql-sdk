@@ -17,7 +17,6 @@ namespace Hl7.Cql.CqlToElm.Test
 #pragma warning restore IDE0060 // Remove unused parameter
 
         private static VersionedIdentifier TestId => new VersionedIdentifier { id = "Test", version = "1.0.0" };
-        private static SystemLibrary SystemLibrary => ServiceProvider.GetSystemLibrary();
 
         [TestMethod]
         public void Add_Local_Expression()
@@ -35,7 +34,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             const string name = "simple function";
             var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
-            var f1 = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.IntegerType }, SystemTypes.BooleanType, name);
+            var f1 = new SystemFunction<Expression>(new TypeSpecifier[] { SystemLibrary.IntegerType }, SystemLibrary.BooleanType, name);
             st.TryAdd(f1).Should().BeTrue();
             st.TryResolveSymbol(name, out var resolved).Should().BeTrue();
             resolved.Should().NotBe(null);
@@ -46,7 +45,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             const string name = "fluent function";
             var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
-            var f1 = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.IntegerType }, SystemTypes.BooleanType, name);
+            var f1 = new SystemFunction<Expression>(new TypeSpecifier[] { SystemLibrary.IntegerType }, SystemLibrary.BooleanType, name);
             f1.fluent = true;
             f1.fluentSpecified = true;
             st.TryAdd(f1).Should().BeTrue();
@@ -63,8 +62,8 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             const string name = "f";
             var st = new SymbolTable(TestId.ToString()!, SystemLibrary);
-            var f1 = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.IntegerType }, SystemTypes.BooleanType, name);
-            var f2 = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.DecimalType }, SystemTypes.BooleanType, name);
+            var f1 = new SystemFunction<Expression>(new TypeSpecifier[] { SystemLibrary.IntegerType }, SystemLibrary.BooleanType, name);
+            var f2 = new SystemFunction<Expression>(new TypeSpecifier[] { SystemLibrary.DecimalType }, SystemLibrary.BooleanType, name);
             st.TryAdd(f1).Should().BeTrue();
             st.TryResolveSymbol(name, out var resolved).Should().BeTrue();
             resolved.Should().NotBe(null);
@@ -93,7 +92,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var ed = resolved.Should().BeOfType<ExpressionDef>().Subject;
             ed.name.Should().Be(name);
 
-            var f1 = new SystemFunction<Expression>(new TypeSpecifier[] { SystemTypes.IntegerType }, SystemTypes.BooleanType, name);
+            var f1 = new SystemFunction<Expression>(new TypeSpecifier[] { SystemLibrary.IntegerType }, SystemLibrary.BooleanType, name);
             st.TryAdd(f1).Should().BeFalse();
         }
 
@@ -121,8 +120,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var function = new FunctionDef
             {
                 name = "b",
-                operand = new[] { new OperandDef { name = "a", operandTypeSpecifier = SystemTypes.IntegerType } }
-            }.WithResultType(SystemTypes.IntegerType);
+                operand = new[] { new OperandDef { name = "a", operandTypeSpecifier = SystemLibrary.IntegerType } }
+            }.WithResultType(SystemLibrary.IntegerType);
             st.TryAdd(function).Should().Be(true);
             var bodyScope = st.EnterScope("body");
             bodyScope.TryAdd(function.operand[0]);
@@ -138,8 +137,8 @@ namespace Hl7.Cql.CqlToElm.Test
             var function = new FunctionDef
             {
                 name = "g",
-                operand = new[] { new OperandDef { name = "g", operandTypeSpecifier = SystemTypes.IntegerType } }
-            }.WithResultType(SystemTypes.IntegerType);
+                operand = new[] { new OperandDef { name = "g", operandTypeSpecifier = SystemLibrary.IntegerType } }
+            }.WithResultType(SystemLibrary.IntegerType);
             st.TryAdd(function).Should().Be(true);
             var bodyScope = st.EnterScope("body");
             bodyScope.TryAdd(function.operand[0]);
@@ -166,15 +165,15 @@ namespace Hl7.Cql.CqlToElm.Test
                 name = "Add",
                 operand = new[]
                 {
-                    new OperandDef { name = "a", operandTypeSpecifier = SystemTypes.CodeType },
-                    new OperandDef { name = "b", operandTypeSpecifier = SystemTypes.CodeType },
+                    new OperandDef { name = "a", operandTypeSpecifier = SystemLibrary.CodeType },
+                    new OperandDef { name = "b", operandTypeSpecifier = SystemLibrary.CodeType },
                 }
-            }.WithResultType(SystemTypes.CodeType);
+            }.WithResultType(SystemLibrary.CodeType);
             st.TryAdd(function);
             st.TryResolveSymbol("Add", out var resolved).Should().BeTrue();
             var overload = resolved.Should().BeOfType<OverloadedFunctionDef>().Subject;
             overload.Functions.Should().HaveCount(1);
-            overload.Functions[0].Should().HaveType(SystemTypes.CodeType);
+            overload.Functions[0].Should().HaveType(SystemLibrary.CodeType);
         }
 
         [TestMethod]
@@ -189,15 +188,15 @@ namespace Hl7.Cql.CqlToElm.Test
                 name = "Add",
                 operand = new[]
                 {
-                    new OperandDef { name = "a", operandTypeSpecifier = SystemTypes.IntegerType },
-                    new OperandDef { name = "b", operandTypeSpecifier = SystemTypes.IntegerType },
+                    new OperandDef { name = "a", operandTypeSpecifier = SystemLibrary.IntegerType },
+                    new OperandDef { name = "b", operandTypeSpecifier = SystemLibrary.IntegerType },
                 }
-            }.WithResultType(SystemTypes.IntegerType);
+            }.WithResultType(SystemLibrary.IntegerType);
             st.TryAdd(function);
             st.TryResolveSymbol("Add", out var resolved).Should().BeTrue();
             var overload = resolved.Should().BeOfType<OverloadedFunctionDef>().Subject;
             overload.Functions.Should().HaveCount(1);
-            overload.Functions[0].Should().HaveType(SystemTypes.IntegerType);
+            overload.Functions[0].Should().HaveType(SystemLibrary.IntegerType);
         }
 
         [TestMethod]
@@ -208,19 +207,19 @@ namespace Hl7.Cql.CqlToElm.Test
                 name = "Add",
                 operand = new[]
             {
-                    new OperandDef { name = "a", operandTypeSpecifier = SystemTypes.CodeType },
-                    new OperandDef { name = "b", operandTypeSpecifier = SystemTypes.CodeType },
+                    new OperandDef { name = "a", operandTypeSpecifier = SystemLibrary.CodeType },
+                    new OperandDef { name = "b", operandTypeSpecifier = SystemLibrary.CodeType },
                 }
-            }.WithResultType(SystemTypes.CodeType);
+            }.WithResultType(SystemLibrary.CodeType);
             var f2 = new FunctionDef
             {
                 name = "Add",
                 operand = new[]
             {
-                    new OperandDef { name = "a", operandTypeSpecifier = SystemTypes.IntegerType },
-                    new OperandDef { name = "b", operandTypeSpecifier = SystemTypes.IntegerType },
+                    new OperandDef { name = "a", operandTypeSpecifier = SystemLibrary.IntegerType },
+                    new OperandDef { name = "b", operandTypeSpecifier = SystemLibrary.IntegerType },
                 }
-            }.WithResultType(SystemTypes.IntegerType);
+            }.WithResultType(SystemLibrary.IntegerType);
 
             OverloadedFunctionDef.CanCombine(f1, f2).Should().BeTrue();
             OverloadedFunctionDef.CanCombine(f1, f1).Should().BeFalse();
@@ -243,16 +242,16 @@ namespace Hl7.Cql.CqlToElm.Test
                 name = "Add",
                 operand = new[]
                 {
-                    new OperandDef { name = "a", operandTypeSpecifier = SystemTypes.CodeType },
-                    new OperandDef { name = "b", operandTypeSpecifier = SystemTypes.CodeType },
+                    new OperandDef { name = "a", operandTypeSpecifier = SystemLibrary.CodeType },
+                    new OperandDef { name = "b", operandTypeSpecifier = SystemLibrary.CodeType },
                 }
-            }.WithResultType(SystemTypes.CodeType);
+            }.WithResultType(SystemLibrary.CodeType);
             st.TryAdd(function);
             st.TryResolveFunction("Add", out var resolved).Should().BeTrue();
             var overload = resolved.Should().BeOfType<OverloadedFunctionDef>().Subject;
             overload.Functions.Should().HaveCount(sysAddOverload.Functions.Count + 1);
             var codeOverload = overload.Functions
-                .Any(f => f.ResultTypeSpecifier == SystemTypes.CodeType)
+                .Any(f => f.ResultTypeSpecifier == SystemLibrary.CodeType)
                 .Should().BeTrue();
         }
 
@@ -272,17 +271,17 @@ namespace Hl7.Cql.CqlToElm.Test
                 name = "Add",
                 operand = new[]
                 {
-                    new OperandDef { name = "a", operandTypeSpecifier = SystemTypes.IntegerType },
-                    new OperandDef { name = "b", operandTypeSpecifier = SystemTypes.IntegerType },
+                    new OperandDef { name = "a", operandTypeSpecifier = SystemLibrary.IntegerType },
+                    new OperandDef { name = "b", operandTypeSpecifier = SystemLibrary.IntegerType },
                 },
                 localId = "fixed"
-            }.WithResultType(SystemTypes.IntegerType);
+            }.WithResultType(SystemLibrary.IntegerType);
             st.TryAdd(function);
             st.TryResolveFunction("Add", out var resolved).Should().BeTrue();
             var overload = resolved.Should().BeOfType<OverloadedFunctionDef>().Subject;
             // count should be unchanged.
             overload.Functions.Should().HaveCount(sysAddOverload.Functions.Count);
-            var intOverload = overload.Functions.Where(f => f.ResultTypeSpecifier == SystemTypes.IntegerType).Single();
+            var intOverload = overload.Functions.Where(f => f.ResultTypeSpecifier == SystemLibrary.IntegerType).Single();
             intOverload
                 .Should().BeOfType<FunctionDef>()
                 .Subject.localId.Should().Be("fixed");
@@ -297,12 +296,12 @@ namespace Hl7.Cql.CqlToElm.Test
                 name = "Add",
                 operand = new[]
                      {
-                    new OperandDef { name = "a", operandTypeSpecifier = SystemTypes.CodeType },
-                    new OperandDef { name = "b", operandTypeSpecifier = SystemTypes.CodeType },
+                    new OperandDef { name = "a", operandTypeSpecifier = SystemLibrary.CodeType },
+                    new OperandDef { name = "b", operandTypeSpecifier = SystemLibrary.CodeType },
                 },
                 fluent = true,
                 fluentSpecified = true,
-            }.WithResultType(SystemTypes.CodeType);
+            }.WithResultType(SystemLibrary.CodeType);
             st.TryAdd(function);
             st.TryResolveFunction("Add", out var resolved).Should().BeTrue();
         }

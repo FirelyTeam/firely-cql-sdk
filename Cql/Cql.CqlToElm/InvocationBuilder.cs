@@ -1,7 +1,8 @@
-﻿using Hl7.Cql.CqlToElm.Builtin;
+﻿using Hl7.Cql.CqlToElm.System;
 using Hl7.Cql.Elm;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Configuration.Assemblies;
@@ -30,18 +31,22 @@ namespace Hl7.Cql.CqlToElm
 
         public Model.IModelProvider Provider { get; }
         public CoercionProvider CoercionProvider { get; }
+        public LibraryBuilder LibraryBuilder { get; }
         public ElmFactory ElmFactory { get; }
         public MessageProvider Messaging { get; }
-
+        public LiteralTypes LiteralTypes { get; }
         private InvocationBuilder(IServiceProvider services,
             CoercionProvider coercionProvider,
             LibraryBuilder libraryBuilder)
         {
             Provider = services.GetRequiredService<Model.IModelProvider>();
             CoercionProvider = coercionProvider;
+            LibraryBuilder = libraryBuilder;
             ElmFactory = services.GetRequiredService<ElmFactory> ();
             Messaging = services.GetRequiredService<MessageProvider>();
+            LiteralTypes = services.GetRequiredService<LiteralTypes>();
         }
+
 
         /// <summary>
         /// Invokes a system function.
@@ -60,7 +65,7 @@ namespace Hl7.Cql.CqlToElm
             {
                 return expression
                     .AddError(result.Error() ?? Messaging.CouldNotResolveFunction(result.Function.Name, arguments))
-                    .WithResultType(SystemTypes.AnyType);
+                    .WithResultType(LiteralTypes.AnyType);
             }
             else
             {
@@ -124,7 +129,7 @@ namespace Hl7.Cql.CqlToElm
                 if (result.Function is SystemFunction sysFunc)
                     return Invoke(sysFunc, args);
                 else if (library is null)
-                    throw new System.ArgumentException($"Library must be non-null when invoking a user defined function.", nameof(library));
+                    throw new ArgumentException($"Library must be non-null when invoking a user defined function.", nameof(library));
                 else
                     return Invoke(result.Function, library, args);
             }
@@ -140,7 +145,7 @@ namespace Hl7.Cql.CqlToElm
 
         #region Generic inference
 
-        private static readonly System.Collections.ObjectModel.ReadOnlyDictionary<string, TypeSpecifier> EmptyInferences = new(new Dictionary<string, TypeSpecifier>());
+        private static readonly global::System.Collections.ObjectModel.ReadOnlyDictionary<string, TypeSpecifier> EmptyInferences = new(new Dictionary<string, TypeSpecifier>());
 
         internal SignatureMatchResult MatchSignature(IHasSignature candidate, params Expression[] arguments)
         {
@@ -176,7 +181,7 @@ namespace Hl7.Cql.CqlToElm
                 var inferences = InferGenericArgument(argumentType, operandType);
                 if (inferences.Count > 0)
                 {
-                    if (inferences.All(kvp => kvp.Value == SystemTypes.AnyType))
+                    if (inferences.All(kvp => kvp.Value == LiteralTypes.AnyType))
                         anyInference = inferences;
                     else
                     {
@@ -274,10 +279,11 @@ namespace Hl7.Cql.CqlToElm
                     return resolvedType;
                 else throw new ArgumentException($"Generic type {generic.parameterName} does not have a replacement defined.", nameof(replacements));
             }
-            else if (type is ListTypeSpecifier listType)
-                return ReplaceGenericType(listType.elementType, replacements).ToListType();
-            else if (type is IntervalTypeSpecifier intervalType)
-                return ReplaceGenericType(intervalType.pointType, replacements).ToIntervalType();
+            else if (type is GenericTypeSpecifier gts)
+            {
+                var newArguments = gts.typeArgument!.Select(ta => ReplaceGenericType(ta, replacements));
+                return new GenericTypeSpecifier { type = gts.type, typeArgument = newArguments.ToArray() };
+            }
             else return type;
         }
 

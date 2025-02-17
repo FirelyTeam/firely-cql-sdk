@@ -21,29 +21,5 @@ namespace Hl7.Cql.Elm
         /// </summary>
         public static NamedTypeSpecifier ToNamedType(this XmlQualifiedName qname) =>
             new() { name = qname };
-
-        /// <summary>
-        /// Create list with elements of the specified type.
-        /// </summary>
-        public static ListTypeSpecifier ToListType(this TypeSpecifier name) =>
-            new() { elementType = name };
-
-        /// <summary>
-        /// Create an interval with the specified point type.
-        /// </summary>
-        public static IntervalTypeSpecifier ToIntervalType(this TypeSpecifier name) =>
-            new() { pointType = name };
-
-        /// <summary>
-        /// Determines if a types can be used as the point type for an interval, and has a successor and predecessor.
-        /// </summary>
-        public static bool IsOrderedType(this TypeSpecifier type) => SystemTypes.OrderedTypes.Contains(type);
-
-        /// <summary>
-        /// Determines if a type is numeric.
-        /// </summary>
-        public static bool IsNumericType(this TypeSpecifier type) => SystemTypes.NumericTypes.Contains(type);
-
-
     }
 }

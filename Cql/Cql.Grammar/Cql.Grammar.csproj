@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-    <Import Project="..\..\cql-sdk.props"/>
+    <Import Project="..\..\cql-sdk.props" />
 
     <PropertyGroup>
         <ImplicitUsings>disable</ImplicitUsings>
@@ -11,10 +11,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1"/>
+        <PackageReference Include="Antlr4.Runtime.Standard" Version="4.13.1" />
         <AssemblyAttribute Include="System.CLSCompliantAttribute">
             <_Parameter1>true</_Parameter1>
         </AssemblyAttribute>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="r2\" />
     </ItemGroup>
 
     <!--

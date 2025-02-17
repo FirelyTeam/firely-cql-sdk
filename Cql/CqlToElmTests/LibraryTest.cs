@@ -798,7 +798,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var par0 = library.parameters.Should().ContainSingle().Subject;
             par0.accessLevel.Should().Be(AccessModifier.Private);
             par0.name.Should().Be("Name");
-            par0.parameterTypeSpecifier.Should().Be(SystemTypes.StringType);
+            par0.parameterTypeSpecifier.Should().Be(SystemLibrary.StringType);
             par0.@default.Should().BeLiteralString("default value");
         }
 
@@ -812,7 +812,7 @@ namespace Hl7.Cql.CqlToElm.Test
             ");
 
             var par0 = library.parameters.Should().ContainSingle().Subject;
-            par0.parameterTypeSpecifier.Should().Be(SystemTypes.DecimalType);
+            par0.parameterTypeSpecifier.Should().Be(SystemLibrary.DecimalType);
             var todecimal = par0.@default.Should().BeOfType<ToDecimal>().Subject;
             todecimal.operand.Should().BeLiteralInteger(1);
         }
@@ -827,7 +827,7 @@ namespace Hl7.Cql.CqlToElm.Test
             ");
 
             var par0 = library.parameters.Should().ContainSingle().Subject;
-            par0.parameterTypeSpecifier.Should().Be(SystemTypes.StringType);
+            par0.parameterTypeSpecifier.Should().Be(SystemLibrary.StringType);
             par0.@default.Should().BeLiteralString("default value");
         }
 
@@ -841,7 +841,7 @@ namespace Hl7.Cql.CqlToElm.Test
             ");
 
             var par0 = library.parameters.Should().ContainSingle().Subject;
-            par0.parameterTypeSpecifier.Should().Be(SystemTypes.StringType);
+            par0.parameterTypeSpecifier.Should().Be(SystemLibrary.StringType);
             par0.@default.Should().BeNull();
         }
 

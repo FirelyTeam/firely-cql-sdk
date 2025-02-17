@@ -22,7 +22,7 @@ internal class ProfiledValueSetPropertyCorrector : BaseElmTreeWalker
         // Issue https://github.com/FirelyTeam/firely-cql-sdk/issues/502 should be resolved before we can remove this.
         if (node is Property { path: "value", source: Property { path: "periodUnit" } puProp  } valueProp )
         {
-            valueProp.WithResultType(SystemTypes.StringType);
+            valueProp.WithResultType(new NamedTypeSpecifier("urn:elm:r1", "String"));
             puProp.WithResultType(new NamedTypeSpecifier("http://hl7.org/fhir", "UnitsOfTime"));
         }
 

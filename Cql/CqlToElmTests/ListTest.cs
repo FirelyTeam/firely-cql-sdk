@@ -168,7 +168,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var library = CreateLibraryForExpression("Take(null, 3)");
             var slice = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Slice>();
             var @as = slice.source.Should().BeOfType<As>().Subject;
-            @as.Should().HaveType(SystemTypes.AnyType.ToListType());
+            @as.Should().HaveType(SystemLibrary.AnyType.ToListType());
             @as.operand.Should().BeOfType<Null>();
             slice.startIndex.Should().BeLiteralInteger(0);
             var coalesce = slice.endIndex.Should().BeOfType<Coalesce>().Subject;
@@ -193,9 +193,9 @@ namespace Hl7.Cql.CqlToElm.Test
             var tts = lts.elementType.Should().BeOfType<TupleTypeSpecifier>().Subject;
             tts.element.Should().HaveCount(2);
             tts.element[0].name.Should().Be("a");
-            tts.element[0].elementType.Should().Be(SystemTypes.IntegerType);
+            tts.element[0].elementType.Should().Be(SystemLibrary.IntegerType);
             tts.element[1].name.Should().Be("b");
-            tts.element[1].elementType.Should().Be(SystemTypes.IntegerType);
+            tts.element[1].elementType.Should().Be(SystemLibrary.IntegerType);
         }
 
     }

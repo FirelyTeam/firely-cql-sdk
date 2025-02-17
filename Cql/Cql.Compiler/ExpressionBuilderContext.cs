@@ -213,7 +213,7 @@ partial class ExpressionBuilderContext(
                     var tsType = TypeFor(element.resultTypeSpecifier, false);
                     if (tsType is not null)
                     {
-                        return ChangeType(expression, element.resultTypeSpecifier, throwOnError:true);
+                        return ChangeType(expression, element.resultTypeSpecifier, throwOnError: true);
                     }
 
                     return expression;
@@ -906,13 +906,9 @@ partial class ExpressionBuilderContext(
 
         var isDefaultCodeProperty = false;
 
-        if (retrieve.codeProperty is null
-            && !string.IsNullOrWhiteSpace(cqlRetrieveResultType)
-            && _modelProvider.TryGetType(cqlRetrieveResultType, out var resultTypeDefinition))
+        if (retrieve.codeProperty is null && !string.IsNullOrWhiteSpace(cqlRetrieveResultType))
         {
-            if (resultTypeDefinition is ClassTypeDefinition classType
-                && classType.PrimaryCodePath?.Name == retrieve.codeProperty)
-                isDefaultCodeProperty = true;
+            isDefaultCodeProperty = true;
         }
 
         if (hasCodePropertySpecified && !isDefaultCodeProperty)
@@ -1149,7 +1145,7 @@ partial class ExpressionBuilderContext(
 
         var rtt = TypeFor(returnType) ?? throw this.NewExpressionBuildingException($"Unable to resolve type for {returnType}");
         var convertedArguments = arguments
-                                 .Select((a,i) => convertChoice(a, signature?[i]))
+                                 .Select((a, i) => convertChoice(a, signature?[i]))
                                  .Prepend(CqlExpressions.ParameterExpression)
                                  .ToArray();
         var funcType = convertedArguments.Select(a => a.Type).Append(rtt).ToArray();
@@ -1165,7 +1161,7 @@ partial class ExpressionBuilderContext(
         // choice is not compatible with the parameter, so we'll use an As in C#.
         Expression convertChoice(Expression argument, TypeSpecifier? targetTypeSpecifier)
         {
-            if(argument.Type == typeof(object)
+            if (argument.Type == typeof(object)
                && targetTypeSpecifier is not null and not ChoiceTypeSpecifier)
             {
                 var changeType = ChangeType(argument, targetTypeSpecifier, considerSafeUpcast: true);
@@ -2137,7 +2133,7 @@ internal partial class ExpressionBuilderContext
                 {
                     var type = TypeFor(@as.asTypeSpecifier!)!;
                     var operand = TranslateArg(@as.operand!);
-                    var converted = ChangeType(operand, type, out var typeConversion, considerSafeUpcast:true);
+                    var converted = ChangeType(operand, type, out var typeConversion, considerSafeUpcast: true);
                     switch (typeConversion)
                     {
                         case TypeConversion.NoMatch:
@@ -2316,7 +2312,7 @@ internal partial class ExpressionBuilderContext
 
         void throwCannotCastIfNoMatch(TypeConversion result)
         {
-            if(result == TypeConversion.NoMatch && throwOnError)
+            if (result == TypeConversion.NoMatch && throwOnError)
                 throw this.NewExpressionBuildingException($"Cannot convert {input.Type} to {outputType}.");
         }
     }

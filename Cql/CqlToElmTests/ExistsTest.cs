@@ -1,5 +1,6 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.Elm;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Fhir;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -52,7 +53,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(exists.operand);
                 Assert.IsInstanceOfType(exists.operand, typeof(List));
                 var list = (List)exists.operand;
-                list.resultTypeSpecifier.Should().Be(SystemTypes.AnyType.ToListType());
+                list.resultTypeSpecifier.Should().Be(SystemLibrary.AnyType.ToListType(SystemLibrary));
                 AssertList(list, Array.Empty<object>());
                 AssertExists(exists, false);
             }

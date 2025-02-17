@@ -1,6 +1,7 @@
 ﻿using FluentAssertions;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Elm;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -63,7 +64,7 @@ namespace Hl7.Cql.CqlToElm.Test
                         }
             ");
             var @if = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<If>();
-            @if.Should().HaveType(SystemTypes.ConceptType);
+            @if.Should().HaveType(SystemLibrary.ConceptType);
         }
 
         [TestMethod]
@@ -126,12 +127,12 @@ namespace Hl7.Cql.CqlToElm.Test
             var any = body.Should().BeOfType<AnyInValueSet>().Subject;
             any.codes.Should().NotBeNull();
             any.codes.resultTypeSpecifier.Should().NotBeNull();
-            any.codes.resultTypeSpecifier.Should().Be(SystemTypes.CodeType.ToListType());
+            any.codes.resultTypeSpecifier.Should().Be(SystemLibrary.CodeType.ToListType(SystemLibrary));
             any.codes.Should().BeOfType<Query>();
             any.valueset.Should().NotBeNull();
             any.valueset.name.Should().Be("VS");
             any.resultTypeSpecifier.Should().NotBeNull();
-            any.resultTypeSpecifier.Should().Be(SystemTypes.BooleanType);
+            any.resultTypeSpecifier.Should().Be(SystemLibrary.BooleanType);
         }
     }
 }

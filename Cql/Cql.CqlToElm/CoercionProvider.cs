@@ -1,5 +1,5 @@
 ﻿using Antlr4.Runtime;
-using Hl7.Cql.CqlToElm.Builtin;
+using Hl7.Cql.CqlToElm.System;
 using Hl7.Cql.Elm;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.Extensions.Configuration;
@@ -36,11 +36,13 @@ namespace Hl7.Cql.CqlToElm
             ModelProvider = modelProvider;
             Options = options.Value;
             LibraryBuilder = libraryBuilder;
+            SystemTypes = new(Options, modelProvider, LibraryBuilder.GetSystemModel());
         }
 
-        private Model.IModelProvider ModelProvider { get; }
-        private CqlToElmOptions Options { get; }
-        private LibraryBuilder LibraryBuilder { get; }
+        internal Model.IModelProvider ModelProvider { get; }
+        internal CqlToElmOptions Options { get; }
+        internal LibraryBuilder LibraryBuilder { get; }
+        internal LiteralTypes SystemTypes { get; }
 
         public CoercionResult<Expression> Coerce(Expression expression, TypeSpecifier to)
         {
@@ -150,8 +152,8 @@ namespace Hl7.Cql.CqlToElm
                 else if (to == SystemTypes.RatioType)
                     convert = new ToRatio { operand = expression };
                 // valueset to list<code>; https://cql.hl7.org/04-logicalspecification.html#expandvalueset
-                else if (expression.resultTypeSpecifier == SystemTypes.ValueSetType && to == SystemTypes.CodeType.ToListType())
-                    convert = new ExpandValueSet { operand = expression }.WithResultType(SystemTypes.CodeType.ToListType());
+                else if (expression.resultTypeSpecifier == SystemTypes.ValueSetType && to == SystemTypes.ToListType(SystemTypes.CodeType))
+                    convert = new ExpandValueSet { operand = expression }.WithResultType(SystemTypes.ToListType(SystemTypes.CodeType));
                 else
                 {
                     convert = new As
@@ -241,7 +243,7 @@ namespace Hl7.Cql.CqlToElm
                 return GetCoercionCost(fromInterval.pointType, toInterval.pointType);
             // Do not coerce to an invalid interval type - comes before subtype because every interval type
             // is a subtype of Interval<Any>, which is not a valid interval type.
-            else if (to is IntervalTypeSpecifier toInterval_ && !IsValidIntervalType(toInterval_))
+            else if (IsIntervalType(to) && IsValidIntervalPointType((GenericTypeSpecifier)to))
                 return CoercionCost.Incompatible;
             else if (IsSubtype(from, to))
                 return CoercionCost.Subtype;
@@ -288,8 +290,8 @@ namespace Hl7.Cql.CqlToElm
 
         internal bool IsSubtype(TypeSpecifier from, TypeSpecifier to)
         {
-            var fromModelTs = TypeBridge.ToModelSpecifier(from, ModelProvider, Options);
-            var toModelTs = TypeBridge.ToModelSpecifier(to, ModelProvider, Options);
+            var fromModelTs = TypeHelpers.ToModelSpecifier(from, ModelProvider);
+            var toModelTs = TypeHelpers.ToModelSpecifier(to, ModelProvider);
             return fromModelTs.IsSubtypeOf(toModelTs);
 
 
@@ -390,7 +392,7 @@ namespace Hl7.Cql.CqlToElm
                 && to == SystemTypes.ConceptType)
                 return true;
             else if (from == SystemTypes.ValueSetType
-                && to == SystemTypes.CodeType.ToListType())
+                && to == SystemTypes.ToListType(SystemTypes.CodeType))
                 return true;
             else if (HasImplicitConversionThroughModel(from, to))
                 return true;
@@ -399,7 +401,7 @@ namespace Hl7.Cql.CqlToElm
 
         internal bool IsSimpleType(TypeSpecifier typeSpecifier)
         {
-            var modelTs = TypeBridge.ToModelSpecifier(typeSpecifier, ModelProvider, Options);
+            var modelTs = TypeHelpers.ToModelSpecifier(typeSpecifier, ModelProvider);
             return modelTs.GetTypeDefinition() is Model.SimpleTypeDefinition;
         }
 
@@ -409,7 +411,7 @@ namespace Hl7.Cql.CqlToElm
         // Presumably 
         internal bool CanBePromoted(TypeSpecifier from, IntervalTypeSpecifier to)
         {
-            if (IsValidIntervalType(from.ToIntervalType()))
+            if (IsValidIntervalPointType(SystemTypes.ToIntervalType(from)))
             {
                 return GetCoercionCost(from, to.pointType) switch
                 {
@@ -432,9 +434,6 @@ namespace Hl7.Cql.CqlToElm
                 };
             return false;
         }
-
-
-
 
         // The invocation type of the argument is an interval and can be demoted to the declared type
         // Note that whether an interval is a point interval or not cannot be known at compile time.
@@ -464,13 +463,16 @@ namespace Hl7.Cql.CqlToElm
         internal bool CanBeExplicitlyCast(TypeSpecifier from, TypeSpecifier to) =>
             IsSubtype(from, to) || CanBeCast(from, to);
 
-        internal bool IsValidIntervalType(IntervalTypeSpecifier typeSpecifier) =>
-            SystemTypes.IntervalPointTypes.Contains(typeSpecifier.pointType);
+        internal bool IsIntervalType(TypeSpecifier typeSpecifier) =>
+            throw new NotSupportedException();
+
+        internal bool IsValidIntervalPointType(TypeSpecifier typeSpecifier) =>
+            SystemTypes.IntervalPointTypes.Contains(typeSpecifier);
 
         internal bool HasConversionToIntervalThroughModel(TypeSpecifier type, [NotNullWhen(true)] out TypeSpecifier? intervalPointType)
         {
-            var modelType = TypeBridge.ToModelSpecifier(type, ModelProvider, Options);
-            var intervalTypeName = Options.LiteralTypes.Interval;
+            var modelType = TypeHelpers.ToModelSpecifier(type, ModelProvider);
+            var intervalTypeName = Options.LiteralTypeNames.Interval;
             if (ModelProvider.TryGetType(intervalTypeName, out var intervalType))
             {
                 List<TypeSpecifier> intervalPointTypes = new();
@@ -484,7 +486,7 @@ namespace Hl7.Cql.CqlToElm
                             && gts.Arguments.Count == 1
                             && gts.Type.Equals(intervalType))
                         {
-                            intervalPointTypes.Add(TypeBridge.ToElmSpecifier(gts.Arguments[0]));
+                            intervalPointTypes.Add(TypeHelpers.ToElmSpecifier(gts.Arguments[0]));
                         }
                     }
                 }
@@ -503,8 +505,8 @@ namespace Hl7.Cql.CqlToElm
 
         private FunctionRef? FunctionRefForModelConversion(TypeSpecifier from, TypeSpecifier to)
         {
-            var fromModelTs = TypeBridge.ToModelSpecifier(from, ModelProvider, Options);
-            var toModelTs = TypeBridge.ToModelSpecifier(to, ModelProvider, Options);
+            var fromModelTs = TypeHelpers.ToModelSpecifier(from, ModelProvider);
+            var toModelTs = TypeHelpers.ToModelSpecifier(to, ModelProvider);
 
             // a library must have a using definition in order to take advantage of its conversions.
             foreach (var @using in LibraryBuilder.SymbolTable.OfType<UsingDefSymbol>())
@@ -573,7 +575,6 @@ namespace Hl7.Cql.CqlToElm
                 ListTypeSpecifier list => 1 + ListDegree(list.elementType),
                 _ => 0
             };
-
 
     }
 }

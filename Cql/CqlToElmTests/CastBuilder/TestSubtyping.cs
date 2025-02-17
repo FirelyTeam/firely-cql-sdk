@@ -7,7 +7,7 @@ using M = Hl7.Cql.Model;
 namespace Hl7.Cql.CqlToElm.Test
 {
     [TestClass]
-    public class TestSubtyping
+    public class TestSubtyping : Base
     {
         private readonly M.IModelProvider provider = new M.ModelProviders.BuiltInModelProvider();
         private readonly CqlToElmOptions options = new CqlToElmOptions();
@@ -23,13 +23,13 @@ namespace Hl7.Cql.CqlToElm.Test
             new NamedTypeSpecifier("http://hl7.org/fhir", typeName);
 
         private void yes(TypeSpecifier sub, TypeSpecifier super) =>
-            TypeBridge.ToModelSpecifier(sub, provider, options)
-                .IsSubtypeOf(TypeBridge.ToModelSpecifier(super, provider, options))
+            TypeHelpers.ToModelSpecifier(sub, provider, options)
+                .IsSubtypeOf(TypeHelpers.ToModelSpecifier(super, provider, options))
             .Should().BeTrue();
 
         private void no(TypeSpecifier sub, TypeSpecifier super) =>
-            TypeBridge.ToModelSpecifier(sub, provider, options)
-                .IsSubtypeOf(TypeBridge.ToModelSpecifier(super, provider, options))
+            TypeHelpers.ToModelSpecifier(sub, provider, options)
+                .IsSubtypeOf(TypeHelpers.ToModelSpecifier(super, provider, options))
             .Should().BeFalse();
 
         [TestMethod]
@@ -37,8 +37,8 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             yes(Patient, Patient);
             yes(Resource, Resource);
-            yes(SystemTypes.BooleanType, SystemTypes.BooleanType);
-            yes(SystemTypes.AnyType, SystemTypes.AnyType);
+            yes(SystemLibrary.BooleanType, SystemLibrary.BooleanType);
+            yes(SystemLibrary.AnyType, SystemLibrary.AnyType);
         }
 
         [TestMethod]
@@ -47,8 +47,8 @@ namespace Hl7.Cql.CqlToElm.Test
             no(Patient, Patient);
             no(Resource, Resource);
             yes(Patient, Resource);
-            no(SystemTypes.BooleanType, SystemTypes.BooleanType);
-            yes(SystemTypes.AnyType, SystemTypes.AnyType); // Any is a subtype of Any?
+            no(SystemLibrary.BooleanType, SystemLibrary.BooleanType);
+            yes(SystemLibrary.AnyType, SystemLibrary.AnyType); // Any is a subtype of Any?
         }
 
         [TestMethod]
@@ -56,14 +56,15 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             yes(Patient, Resource);
             yes(Patient, DomainResource);
-            yes(Patient, SystemTypes.AnyType);
+            yes(Patient, SystemLibrary.AnyType);
 
             yes(HumanName, Element);
-            yes(HumanName, SystemTypes.AnyType);
+            yes(HumanName, SystemLibrary.AnyType);
 
-            yes(SystemTypes.BooleanType, SystemTypes.AnyType);
-            yes(SystemTypes.ValueSetType, SystemTypes.VocabularyType);
-            yes(SystemTypes.ValueSetType, SystemTypes.AnyType);
+            yes(SystemLibrary.BooleanType, SystemLibrary.AnyType);
+            SystemLibrary.Model.TryGetType("System.Vocabulary", out var vocabularyType).Should().BeTrue();
+            yes(SystemLibrary.ValueSetType, TypeHelpers.ToElmSpecifier(vocabularyType!.ToTypeSpecifier()));
+            yes(SystemLibrary.ValueSetType, SystemLibrary.AnyType);
         }
 
         [TestMethod]
@@ -71,9 +72,9 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             no(Patient, Observation);
             no(Observation, Patient);
-            no(SystemTypes.BooleanType, SystemTypes.ValueSetType);
-            no(SystemTypes.DecimalType, SystemTypes.IntegerType);
-            no(SystemTypes.IntegerType, SystemTypes.DecimalType);
+            no(SystemLibrary.BooleanType, SystemLibrary.ValueSetType);
+            no(SystemLibrary.DecimalType, SystemLibrary.IntegerType);
+            no(SystemLibrary.IntegerType, SystemLibrary.DecimalType);
             no(Patient, Element);
         }
 

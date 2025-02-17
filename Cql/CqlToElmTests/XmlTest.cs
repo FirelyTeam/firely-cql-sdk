@@ -87,20 +87,20 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private static Elm.Expression Equals(Elm.Expression expression, Elm.Expression expectation)
         {
-            var equal = InvocationBuilder.Invoke(SystemLibrary.Equal, expression, expectation);
+            var equal = InvocationBuilder.Invoke(SystemLibrary.Operators.Equal, expression, expectation);
             var @if = new If
             {
                 condition = new And
                 {
                     operand = new[]
                     {
-                        new IsNull { operand = expression }.WithResultType(SystemTypes.BooleanType),
-                        new IsNull { operand = expectation }.WithResultType(SystemTypes.BooleanType),
+                        new IsNull { operand = expression }.WithResultType(SystemLibrary.BooleanType),
+                        new IsNull { operand = expectation }.WithResultType(SystemLibrary.BooleanType),
                     }
-                }.WithResultType(SystemTypes.BooleanType),
+                }.WithResultType(SystemLibrary.BooleanType),
                 then = ElmFactory.Literal(true),
                 @else = equal,
-            }.WithResultType(SystemTypes.BooleanType);
+            }.WithResultType(SystemLibrary.BooleanType);
             return @if;
         }
 

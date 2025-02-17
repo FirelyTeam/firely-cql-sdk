@@ -1,4 +1,5 @@
 ﻿using Hl7.Cql.Model;
+using Hl7.Cql.Model.Cql;
 using Hl7.Cql.Model.Xml;
 using System;
 using System.Collections.Generic;
@@ -9,41 +10,33 @@ using System.Threading.Tasks;
 
 namespace Hl7.Cql.Model.ModelProviders
 {
-    internal class BuiltInModelProvider: ModelLoader
+    internal class BuiltInModelProvider : IModelProvider
     {
-        public BuiltInModelProvider(): base(GetByNameAndVersion, GetByUri)
+        internal CqlModelLoader CqlModelLoader { get; }
+
+        public BuiltInModelProvider(CqlModelLoader? modelLoader = null)
         {
+            CqlModelLoader = modelLoader ?? new CqlModelLoader(this);
         }
 
-        private static ModelInfo? GetByNameAndVersion(string name, string? version)
+        public bool TryGetModel(string modelName, string? version, [NotNullWhen(true)] out ModelDefinition? model)
         {
-            if (version is null)
+            model = (modelName, version) switch
             {
-                if (Models.All.TryGetValue(name, out var model))
-                {
-                    if (version is null || model.version == version)
-                        return model;
-                }
-            }
-            else
-            {
-                var matching = Models.All.Where(kvp => kvp.Key == name)
-                    .Select(kvp => new KeyValuePair<string, Version>(kvp.Key,
-                        Version.Parse(kvp.Value.version ?? "0.0.0.0")))
-                    .OrderByDescending(kvp => kvp.Value);
-                var highest = matching.FirstOrDefault();
-                if (Models.All.TryGetValue(highest.Key, out var mi))
-                    return mi;
-            }
-            return null;
+                ("System", "2.0.0") => CqlModelLoader.Load(Models.System200),
+                (_, _) => null
+            };
+            return model is not null;
         }
 
-        private static ModelInfo? GetByUri(string uri)
+        public bool TryGetModelFromUri(string uri, [NotNullWhen(true)] out ModelDefinition? model)
         {
-            foreach(var model in Models.All.Values)
-                if (model.url == uri)
-                    return model;
-            return null;
+            model = uri switch
+            {
+                "urn:hl7-org:elm-types:r2" => CqlModelLoader.Load(Models.System200),
+                _ => null
+            };
+            return model is not null;
         }
     }
 }

@@ -9,7 +9,6 @@
 using System;
 using System.Globalization;
 using Hl7.Cql.CqlToElm;
-using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.LibraryProviders;
 using Hl7.Cql.Model;
 using Hl7.Cql.Model.ModelProviders;
@@ -66,17 +65,19 @@ internal static class CqlToElmServiceCollectionExtensions
         services.AddOptions<CqlToElmOptions>()
                 .Configure(configureOptions ?? (_ => { }))
                 .ValidateOnStart();
+        services.AddSingleton<LiteralTypeNames>();
         return services;
     }
+
+
 
     public static IServiceCollection AddCqlToElmServices(this IServiceCollection services) =>
         services
             .AddSingleton<CqlToElmConverter>()
-            .AddSingleton<ElmFactory>()
-            .AddSingleton<SystemLibrary>()
             .AddSingleton<StreamInspector>()
             .AddSingleton<InvocationBuilder>()
             .AddTransient<LocalIdentifierProvider>();
+
 
     public static IServiceCollection AddCqlToElmMessaging(
         this IServiceCollection services,
