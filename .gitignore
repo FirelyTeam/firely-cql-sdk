@@ -408,3 +408,6 @@ VSCodeExtension/ncqa-cql-engine-workspace/test/*/*/results/*.json
 /Demo/**/Resources/*.*
 #remove global.json for testing dotnet sdk updates
 global.json
+*.jar
+/Cql/Cql.Grammar/r2/.antlr
+/Cql/Cql.Grammar/r1/.antlr
