@@ -1,10 +1,6 @@
-﻿using System.IO;
-using Hl7.Cql.Abstractions.Infrastructure;
+﻿using Hl7.Cql.Abstractions.Infrastructure;
 
-namespace Hl7.Cql.Runtime;
-
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-
+namespace CqlSdkPrototype.Infrastructure;
 
 public delegate void DirectoryInfoHandler(DirectoryInfo directory);
 

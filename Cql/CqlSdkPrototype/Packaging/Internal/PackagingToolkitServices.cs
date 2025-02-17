@@ -1,8 +1,8 @@
-﻿using Hl7.Cql.Abstractions;
+﻿using CqlSdkPrototype.Internal;
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using System.Text.Json;
-using Hl7.Cql.Runtime.Hosting;
 using Hl7.Fhir.Serialization;
 using Hl7.Fhir.Introspection;
 

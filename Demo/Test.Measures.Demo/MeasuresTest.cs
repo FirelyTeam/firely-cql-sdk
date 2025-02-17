@@ -7,6 +7,7 @@ using CLI.Helpers;
 using CqlSdkPrototype.Elm;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Runtime;
+using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation;
 using CqlSdkPrototype.Invocation.Extensions;
 

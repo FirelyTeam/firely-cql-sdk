@@ -1,8 +1,9 @@
-﻿namespace Hl7.Cql.Runtime;
+﻿using Hl7.Cql.Elm;
 
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+namespace CqlSdkPrototype.Infrastructure;
 
-public readonly record struct CqlVersionedLibraryIdentifier(
+public readonly record struct CqlVersionedLibraryIdentifier
+(
     CqlLibraryIdentifier Identifier,
     CqlLibraryVersion? Version = null) : IParsable<CqlVersionedLibraryIdentifier>
 {
@@ -16,6 +17,17 @@ public readonly record struct CqlVersionedLibraryIdentifier(
     public static CqlVersionedLibraryIdentifier FromNameAndVersion(CqlLibraryIdentifier identifier, CqlLibraryVersion? version = null)
     {
         return new CqlVersionedLibraryIdentifier(identifier, version);
+    }
+
+    internal static CqlVersionedLibraryIdentifier FromVersionedIdentifier(VersionedIdentifier identifier)
+    {
+        // We have to check for nulls because the generated ELM code does not emit nullability annotations.
+        ArgumentNullException.ThrowIfNull(identifier);
+        ArgumentNullException.ThrowIfNull(identifier.id);
+
+        var cqlLibraryIdentifier = CqlLibraryIdentifier.Parse(identifier.id);
+        CqlLibraryVersion? cqlLibraryVersion = identifier.version is null ? null : CqlLibraryVersion.Parse(identifier.version);
+        return FromNameAndVersion(cqlLibraryIdentifier, cqlLibraryVersion);
     }
 
     public override string ToString()

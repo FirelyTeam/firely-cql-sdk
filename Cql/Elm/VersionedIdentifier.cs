@@ -1,22 +1,7 @@
-﻿using Hl7.Cql.Runtime;
-
-namespace Hl7.Cql.Elm
+﻿namespace Hl7.Cql.Elm
 {
     partial class VersionedIdentifier : IComparable<VersionedIdentifier>, IEquatable<VersionedIdentifier>
     {
-        /// <summary>
-        /// Converts this instance to a <see cref="CqlVersionedLibraryIdentifier"/>.
-        /// </summary>
-        public CqlVersionedLibraryIdentifier ToCqlVersionedLibraryIdentifier()
-        {
-            // We have to check for nulls because the generated ELM code does not emit nullability annotations.
-            ArgumentNullException.ThrowIfNull(id);
-
-            var cqlLibraryIdentifier = CqlLibraryIdentifier.Parse(id);
-            CqlLibraryVersion? cqlLibraryVersion = version is null ? null : CqlLibraryVersion.Parse(version);
-            return CqlVersionedLibraryIdentifier.FromNameAndVersion(cqlLibraryIdentifier, cqlLibraryVersion);
-        }
-
         /// <inheritdoc/>
         public int CompareTo(VersionedIdentifier? other)
         {

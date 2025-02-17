@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Runtime;
+﻿using CqlSdkPrototype.Infrastructure;
+using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Invocation.Extensions;
 

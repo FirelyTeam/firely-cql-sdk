@@ -1,7 +1,6 @@
-﻿namespace Hl7.Cql.Runtime;
+﻿namespace CqlSdkPrototype.Infrastructure;
 
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-
+#pragma warning disable CS1591
 public readonly record struct CqlLibraryIdentifier :
     IParsable<CqlLibraryIdentifier>,
     IComparable<CqlLibraryIdentifier>,
@@ -64,25 +63,6 @@ public readonly record struct CqlLibraryIdentifier :
             CqlLibraryIdentifier other => CompareTo(other),
             _ => throw new ArgumentException($"Object must be of type {nameof(CqlVersionedLibraryIdentifier)}")
         };
-    }
-    public static bool operator <(CqlLibraryIdentifier left, CqlLibraryIdentifier right)
-    {
-        return left.CompareTo(right) < 0;
-    }
-
-    public static bool operator <=(CqlLibraryIdentifier left, CqlLibraryIdentifier right)
-    {
-        return left.CompareTo(right) <= 0;
-    }
-
-    public static bool operator >(CqlLibraryIdentifier left, CqlLibraryIdentifier right)
-    {
-        return left.CompareTo(right) > 0;
-    }
-
-    public static bool operator >=(CqlLibraryIdentifier left, CqlLibraryIdentifier right)
-    {
-        return left.CompareTo(right) >= 0;
     }
 
     #endregion

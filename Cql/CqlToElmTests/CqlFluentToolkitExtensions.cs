@@ -1,8 +1,8 @@
-﻿using Hl7.Cql.CqlToElm.Builtin;
-using Hl7.Cql.CqlToElm.Toolkit;
-using Hl7.Cql.CqlToElm.Toolkit.Extensions;
+﻿using CqlSdkPrototype.Cql;
+using CqlSdkPrototype.Cql.Extensions;
+using CqlSdkPrototype.Infrastructure;
+using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
-using CqlLibraryString = Hl7.Cql.Runtime.CqlLibraryString;
 using Expression = Hl7.Cql.Elm.Expression;
 
 namespace Hl7.Cql.CqlToElm.Test;

@@ -1,7 +1,7 @@
-﻿using Hl7.Cql.Runtime;
-using CqlLibraryString = Hl7.Cql.Runtime.CqlLibraryString;
+﻿using CqlSdkPrototype.Infrastructure;
+using Hl7.Cql.CqlToElm;
 
-namespace Hl7.Cql.CqlToElm.Toolkit;
+namespace CqlSdkPrototype.Cql;
 
 /// <summary>
 /// Represents a conversion record used by the <see cref="CqlToolkit"/>

@@ -1,4 +1,4 @@
-﻿using Hl7.Cql.Runtime;
+﻿using CqlSdkPrototype.Infrastructure;
 
 namespace CqlSdkPrototype.Elm.Extensions;
 
