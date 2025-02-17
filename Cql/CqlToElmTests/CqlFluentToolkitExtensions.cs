@@ -3,6 +3,7 @@ using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
+using DateTime = Hl7.Cql.Elm.DateTime;
 using Expression = Hl7.Cql.Elm.Expression;
 
 namespace Hl7.Cql.CqlToElm.Test;
@@ -61,8 +62,12 @@ internal static class FluentCqlToolkitExtensions
         string[]? expectedErrors = null,
         [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
     {
+        string libName = string.Concat($"{memberName}{Random.Shared.Next()}{Environment.TickCount64}"
+                                       .ToCharArray()
+                                       .Where(Char.IsAsciiLetterOrDigit));
+
         string cql = $"""
-                      library Test version '1.0.0'
+                      library "{libName}" version '1.0.0'
 
                       define private "{memberName}": {expression}
                       """;
