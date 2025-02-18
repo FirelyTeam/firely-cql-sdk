@@ -14,6 +14,7 @@ using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Packaging;
 using CqlSdkPrototype.Packaging.Extensions;
 using Hl7.Cql.Packaging;
+using Hl7.Cql.Runtime.IO;
 
 namespace Hl7.Cql.Packager;
 

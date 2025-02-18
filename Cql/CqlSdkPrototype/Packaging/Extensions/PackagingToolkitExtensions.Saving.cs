@@ -2,6 +2,7 @@
 using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Packaging;
+using Hl7.Cql.Runtime.IO;
 
 namespace CqlSdkPrototype.Packaging.Extensions;
 

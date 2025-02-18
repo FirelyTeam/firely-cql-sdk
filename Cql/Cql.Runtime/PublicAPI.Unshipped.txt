@@ -36,6 +36,8 @@ Hl7.Cql.Runtime.ErroredEnumerationContinuation
 Hl7.Cql.Runtime.ErroredEnumerationContinuation.Break = 2 -> Hl7.Cql.Runtime.ErroredEnumerationContinuation
 Hl7.Cql.Runtime.ErroredEnumerationContinuation.Continue = 1 -> Hl7.Cql.Runtime.ErroredEnumerationContinuation
 Hl7.Cql.Runtime.ErroredEnumerationContinuation.Throw = 0 -> Hl7.Cql.Runtime.ErroredEnumerationContinuation
+Hl7.Cql.Runtime.IO.DirectoryInfoHandler
+Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy
 Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter
 Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.CqlValueTupleJsonConverter() -> void
 Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory
@@ -48,6 +50,10 @@ override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Write(System.T
 override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CanConvert(System.Type! typeToConvert) -> bool
 override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CreateConverter(System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Text.Json.Serialization.JsonConverter!
 readonly Hl7.Cql.Runtime.BaseTypeResolver.Types -> System.Collections.Generic.Dictionary<string!, System.Type!>!
+static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler(string! searchPattern = "*", System.IO.EnumerationOptions? enumerationOptions = null, System.Func<System.IO.FileInfo!, bool>? fileSelector = null) -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
+static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.CreateIfNotExists.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
+static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.Recreate.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
 static Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Default.get -> Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter!
 virtual Hl7.Cql.Runtime.BaseTypeResolver.GetPropertyCore(System.Type! type, string! propertyName) -> System.Reflection.PropertyInfo?
+virtual Hl7.Cql.Runtime.IO.DirectoryInfoHandler.Invoke(System.IO.DirectoryInfo! directory) -> void
 virtual Hl7.Cql.Runtime.ValueExceptionHandler<T>.Invoke(T value, System.Exception! exception) -> void
