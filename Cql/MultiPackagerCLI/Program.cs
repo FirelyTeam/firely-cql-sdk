@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Runtime;
 
 MeasuresDirSet[] measureDirSets =
 [

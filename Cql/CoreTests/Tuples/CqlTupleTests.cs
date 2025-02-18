@@ -6,6 +6,7 @@ using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.Serialization;
 
 namespace CoreTests.Tuples;

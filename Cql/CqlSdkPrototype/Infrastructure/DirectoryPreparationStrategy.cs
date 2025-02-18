@@ -1,4 +1,5 @@
 ﻿using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Infrastructure;
 
