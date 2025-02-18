@@ -126,7 +126,7 @@ public sealed class PackagingToolkit
 
         var inputsById = builder.Values
                                 .Select(ToResourcePackagerInput)
-                                .ToDictionary(o => o.VersionedLibraryIdentifier);
+                                .ToDictionary(o => o.LibraryIdentifier);
 
         var count =
             _services.ResourcePackager
@@ -141,7 +141,7 @@ public sealed class PackagingToolkit
                          onNextLibrary: library => logger.LogInformation("Packaging FHIR resources for library: {lib}", library.GetVersionedIdentifier()))
                      .SelectWhere(o =>
                      {
-                         var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(o.versionedLibraryIdentifier);
+                         var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(o.libraryIdentifier);
                          var fhirResourcePackaging = builder[versionedLibraryIdentifier];
                          if (fhirResourcePackaging.ResultFhirLibrary is null)
                          {
