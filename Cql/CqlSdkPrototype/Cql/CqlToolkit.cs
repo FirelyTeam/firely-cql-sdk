@@ -66,7 +66,7 @@ public sealed class CqlToolkit
     /// </summary>
     /// <param name="reconfigure">A function that takes the current configuration and returns a new configuration.</param>
     public CqlToolkit Reconfigure(
-        Transformer<CqlToolkitConfig> reconfigure)
+        Mutator<CqlToolkitConfig> reconfigure)
     {
         var config = reconfigure(Config);
 

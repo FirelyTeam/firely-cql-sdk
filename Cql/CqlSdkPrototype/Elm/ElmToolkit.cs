@@ -69,7 +69,7 @@ public sealed class ElmToolkit
     /// </summary>
     /// <param name="reconfigure">A function that takes the current configuration and returns a new configuration.</param>
     public ElmToolkit Reconfigure(
-        Transformer<ElmToolkitConfig> reconfigure)
+        Mutator<ElmToolkitConfig> reconfigure)
     {
         var config = reconfigure(Config);
 

@@ -54,7 +54,7 @@ public sealed class PackagingToolkit
     /// </summary>
     /// <param name="reconfigure">The new configuration for the packager.</param>
     public PackagingToolkit Reconfigure(
-        Transformer<PackagingToolkitConfig> reconfigure)
+        Mutator<PackagingToolkitConfig> reconfigure)
     {
         var config = reconfigure(Config);
 
