@@ -3,6 +3,12 @@ Hl7.Cql.CqlToElm.AmbiguousTypeBehavior
 Hl7.Cql.CqlToElm.AmbiguousTypeBehavior.Error = 0 -> Hl7.Cql.CqlToElm.AmbiguousTypeBehavior
 Hl7.Cql.CqlToElm.AmbiguousTypeBehavior.PreferModel = 2 -> Hl7.Cql.CqlToElm.AmbiguousTypeBehavior
 Hl7.Cql.CqlToElm.AmbiguousTypeBehavior.PreferSystem = 1 -> Hl7.Cql.CqlToElm.AmbiguousTypeBehavior
+Hl7.Cql.CqlToElm.CqlLibraryString
+Hl7.Cql.CqlToElm.CqlLibraryString.Cql.get -> string!
+Hl7.Cql.CqlToElm.CqlLibraryString.CqlLibraryString() -> void
+Hl7.Cql.CqlToElm.CqlLibraryString.Deconstruct(out Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryIdentifier, out string! cql) -> void
+Hl7.Cql.CqlToElm.CqlLibraryString.Equals(Hl7.Cql.CqlToElm.CqlLibraryString other) -> bool
+Hl7.Cql.CqlToElm.CqlLibraryString.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 Hl7.Cql.CqlToElm.CqlToElmConverter
 Hl7.Cql.CqlToElm.CqlToElmConverter.ConvertLibrary(string! cql) -> Hl7.Cql.Elm.Library!
 Hl7.Cql.CqlToElm.CqlToElmConverter.ConvertLibrary(System.IO.Stream! cqlLibrary) -> Hl7.Cql.Elm.Library!
@@ -46,6 +52,11 @@ Hl7.Cql.CqlToElm.IModelProvider.TryGetConversionFunctions(string! fromQualifiedT
 Hl7.Cql.CqlToElm.IModelProvider.TryGetModelFromName(string! name, out Hl7.Cql.Model.ModelInfo? model, string? version = null) -> bool
 Hl7.Cql.CqlToElm.IModelProvider.TryGetModelFromUri(string! uri, out Hl7.Cql.Model.ModelInfo? model, string? version = null) -> bool
 Hl7.Cql.CqlToElm.ModelProvider
+override Hl7.Cql.CqlToElm.CqlLibraryString.GetHashCode() -> int
+static Hl7.Cql.CqlToElm.CqlLibraryString.FromIdentifierAndString(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryIdentifier, string! cqlContent) -> Hl7.Cql.CqlToElm.CqlLibraryString
+static Hl7.Cql.CqlToElm.CqlLibraryString.operator !=(Hl7.Cql.CqlToElm.CqlLibraryString left, Hl7.Cql.CqlToElm.CqlLibraryString right) -> bool
+static Hl7.Cql.CqlToElm.CqlLibraryString.operator ==(Hl7.Cql.CqlToElm.CqlLibraryString left, Hl7.Cql.CqlToElm.CqlLibraryString right) -> bool
+static Hl7.Cql.CqlToElm.CqlLibraryString.Parse(string! cqlContent) -> Hl7.Cql.CqlToElm.CqlLibraryString
 static Hl7.Cql.CqlToElm.ModelProvider.GetBaseType(Hl7.Cql.CqlToElm.IModelProvider! provider, Hl7.Cql.Elm.TypeSpecifier! type) -> Hl7.Cql.Elm.NamedTypeSpecifier?
 static Hl7.Cql.CqlToElm.ModelProvider.GetModelFromName(this Hl7.Cql.CqlToElm.IModelProvider! provider, string! name, string? version = null) -> Hl7.Cql.Model.ModelInfo!
 static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.ChoiceTypeSpecifier! cts, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.ChoiceTypeSpecifier!
@@ -58,3 +69,5 @@ static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.TupleTypeSpecifie
 static Hl7.Cql.CqlToElm.ModelProvider.ToElm(this Hl7.Cql.Model.TypeSpecifier! ts, Hl7.Cql.CqlToElm.IModelProvider! provider) -> Hl7.Cql.Elm.TypeSpecifier!
 static Hl7.Cql.CqlToElm.ModelProvider.TryGetTypeInfoFor(this Hl7.Cql.Model.ModelInfo! model, string! name, out Hl7.Cql.Model.TypeInfo? result) -> bool
 static readonly Hl7.Cql.CqlToElm.CqlToElmOptions.Default -> Hl7.Cql.CqlToElm.CqlToElmOptions!
+~override Hl7.Cql.CqlToElm.CqlLibraryString.Equals(object obj) -> bool
+~override Hl7.Cql.CqlToElm.CqlLibraryString.ToString() -> string

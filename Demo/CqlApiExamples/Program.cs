@@ -10,6 +10,7 @@ using CqlSdkPrototype.Invocation.Extensions;
 using CqlSdkPrototype.Packaging;
 using CqlSdkPrototype.Packaging.Extensions;
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.CqlToElm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 using Microsoft.Extensions.DependencyInjection;
