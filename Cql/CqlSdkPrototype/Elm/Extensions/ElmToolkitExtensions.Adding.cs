@@ -2,6 +2,7 @@
 using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
+using Hl7.Cql.Runtime;
 
 #pragma warning disable RS0027
 
@@ -55,7 +56,7 @@ public static partial class ElmToolkitExtensions
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
     {
-        var files = directory.EnumerateFiles("*.json", options ?? Defaults.DefaultEnumerationOptions);
+        var files = directory.EnumerateFiles("*.json", options ?? Defaults.EnumerationOptions);
         if (filePredicate is not null) files = files.Where(filePredicate);
         return elmToolkit.AddElmFiles(files);
     }

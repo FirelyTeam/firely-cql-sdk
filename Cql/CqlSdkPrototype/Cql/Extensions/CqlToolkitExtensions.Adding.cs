@@ -1,5 +1,6 @@
 ﻿using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Internal;
+using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Cql.Extensions;
 
@@ -18,7 +19,7 @@ public static partial class CqlToolkitExtensions
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
     {
-        var files = directory.EnumerateFiles("*.cql", options ?? Defaults.DefaultEnumerationOptions);
+        var files = directory.EnumerateFiles("*.cql", options ?? Defaults.EnumerationOptions);
         if (filePredicate is not null) files = files.Where(filePredicate);
         return cqlToolkit.AddCqlLibraryFiles(files);
     }

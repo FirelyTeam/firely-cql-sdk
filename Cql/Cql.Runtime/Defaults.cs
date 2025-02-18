@@ -1,6 +1,8 @@
-﻿namespace CqlSdkPrototype.Internal;
+﻿using System.IO;
+
+namespace Hl7.Cql.Runtime;
 
 internal static class Defaults
 {
-    public static EnumerationOptions DefaultEnumerationOptions = new();
+    public static EnumerationOptions EnumerationOptions { get; } = new();
 }
