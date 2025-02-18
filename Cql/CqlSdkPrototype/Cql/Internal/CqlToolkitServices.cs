@@ -3,6 +3,7 @@ using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Model;
+using Hl7.Cql.Runtime.Logging;
 using ExpressionVisitor = Hl7.Cql.CqlToElm.Visitors.ExpressionVisitor;
 
 namespace CqlSdkPrototype.Cql.Internal;

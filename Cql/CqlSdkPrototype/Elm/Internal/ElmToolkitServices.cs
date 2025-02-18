@@ -5,6 +5,7 @@ using Hl7.Cql.Compiler;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime.Hosting;
+using Hl7.Cql.Runtime.Logging;
 using Hl7.Fhir.Introspection;
 
 namespace CqlSdkPrototype.Elm.Internal;
