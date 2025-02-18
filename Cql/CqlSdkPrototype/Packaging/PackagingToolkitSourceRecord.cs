@@ -6,8 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Runtime;
+using CqlLibraryString = Hl7.Cql.CqlToElm.CqlLibraryString;
 
 namespace CqlSdkPrototype.Packaging;
 

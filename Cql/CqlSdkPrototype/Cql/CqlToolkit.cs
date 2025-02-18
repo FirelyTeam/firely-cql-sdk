@@ -7,9 +7,9 @@
  */
 
 using CqlSdkPrototype.Cql.Internal;
-using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
+using CqlLibraryString = Hl7.Cql.CqlToElm.CqlLibraryString;
 
 namespace CqlSdkPrototype.Cql;
 

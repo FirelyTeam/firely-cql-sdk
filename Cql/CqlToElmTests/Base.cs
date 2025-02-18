@@ -5,7 +5,6 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
-using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Model;
 using CqlSdkPrototype.Elm.Extensions;
 using CqlSdkPrototype.Invocation;

@@ -10,7 +10,6 @@ using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensions;
-using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Packaging;
 using CqlSdkPrototype.Packaging.Extensions;
 using Hl7.Cql.Packaging;

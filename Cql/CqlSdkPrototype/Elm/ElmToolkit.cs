@@ -7,7 +7,6 @@
  */
 
 using CqlSdkPrototype.Elm.Internal;
-using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;

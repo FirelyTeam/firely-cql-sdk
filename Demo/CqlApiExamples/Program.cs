@@ -4,7 +4,6 @@ using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensions;
-using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation;
 using CqlSdkPrototype.Invocation.Extensions;
 using CqlSdkPrototype.Packaging;

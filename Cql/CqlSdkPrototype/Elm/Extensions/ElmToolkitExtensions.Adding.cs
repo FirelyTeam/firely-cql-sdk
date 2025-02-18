@@ -8,7 +8,6 @@
 
 using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Cql.Extensions;
-using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Runtime;
 
 #pragma warning disable RS0027
