@@ -1,6 +1,4 @@
-﻿using Hl7.Cql.Elm;
-
-namespace CqlSdkPrototype.Infrastructure;
+﻿namespace CqlSdkPrototype.Infrastructure;
 
 public readonly record struct CqlVersionedLibraryIdentifier(
     CqlLibraryIdentifier Identifier,
@@ -18,16 +16,6 @@ public readonly record struct CqlVersionedLibraryIdentifier(
         return new CqlVersionedLibraryIdentifier(identifier, version);
     }
 
-    internal static CqlVersionedLibraryIdentifier FromVersionedIdentifier(VersionedIdentifier identifier)
-    {
-        // We have to check for nulls because the generated ELM code does not emit nullability annotations.
-        ArgumentNullException.ThrowIfNull(identifier);
-        ArgumentNullException.ThrowIfNull(identifier.id);
-
-        var cqlLibraryIdentifier = CqlLibraryIdentifier.Parse(identifier.id);
-        CqlLibraryVersion? cqlLibraryVersion = identifier.version is null ? null : CqlLibraryVersion.Parse(identifier.version);
-        return FromNameAndVersion(cqlLibraryIdentifier, cqlLibraryVersion);
-    }
 
     public override string ToString()
     {

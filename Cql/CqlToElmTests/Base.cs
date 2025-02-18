@@ -59,7 +59,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     .CreateLibrarySetInvoker();
 
             var result = librarySetInvoker
-                .GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);
+                .GetLibraryDefinitionResult(ctx!, library.identifier.ToCqlVersionedLibraryIdentifier(), expressionName);
             return result;
         }
 

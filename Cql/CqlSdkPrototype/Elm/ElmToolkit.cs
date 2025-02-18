@@ -162,7 +162,7 @@ public sealed class ElmToolkit
         bool hasChanged = false;
         foreach (var (library, (assemblyBinary, sourceCodePerName, debugSymbols)) in assemblyBinaries)
         {
-            var elmVersionedIdentifier = CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier);
+            var elmVersionedIdentifier = library.identifier.ToCqlVersionedLibraryIdentifier();
             var libraryCompilation = conversions[key: elmVersionedIdentifier];
             if (libraryCompilation.ResultCSharpSourceCode is not null
                 || libraryCompilation.ResultAssemblyBinary is not null)
