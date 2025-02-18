@@ -1,4 +1,6 @@
-﻿namespace CqlSdkPrototype.Internal;
+﻿using System.Runtime.Loader;
+
+namespace Hl7.Cql.Packaging;
 
 internal static class AssemblyLoadContextExtensions
 {

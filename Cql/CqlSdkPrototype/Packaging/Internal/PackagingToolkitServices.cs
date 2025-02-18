@@ -1,5 +1,4 @@
-﻿using CqlSdkPrototype.Internal;
-using Hl7.Cql.Abstractions;
+﻿using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using System.Text.Json;

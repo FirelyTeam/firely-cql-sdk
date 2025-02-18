@@ -31,4 +31,8 @@
 		<InternalsVisibleTo Include="Test.Measures.Demo" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="Internal\" />
+	</ItemGroup>
+
 </Project>
