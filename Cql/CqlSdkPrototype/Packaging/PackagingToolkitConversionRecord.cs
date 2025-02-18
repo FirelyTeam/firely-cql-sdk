@@ -8,12 +8,12 @@ namespace CqlSdkPrototype.Packaging;
 /// <see cref="SourceCSharpSourceCode"/> and <see cref="SourceAssemblyBinary"/>
 /// to the results <see cref="ResultFhirLibrary"/>, <see cref="ResultFhirMeasure"/>.
 /// </summary>
-/// <param name="SourceCqlLibrary">The input CQL library.</param>
-/// <param name="SourceElmLibrary">The input ELM library.</param>
-/// <param name="SourceCSharpSourceCode">The input C# source code.</param>
-/// <param name="SourceAssemblyBinary">The input .NET assembly bytes.</param>
-/// <param name="ResultFhirLibrary">The output FHIR library.</param>
-/// <param name="ResultFhirMeasure">The output FHIR measure.</param>
+/// <param name="SourceCqlLibrary">The source CQL library.</param>
+/// <param name="SourceElmLibrary">The source ELM library.</param>
+/// <param name="SourceCSharpSourceCode">The source C# source code.</param>
+/// <param name="SourceAssemblyBinary">The source .NET assembly bytes.</param>
+/// <param name="ResultFhirLibrary">The result FHIR library.</param>
+/// <param name="ResultFhirMeasure">The result FHIR measure.</param>
 public readonly record struct PackagingToolkitConversionRecord(
     CqlLibraryString SourceCqlLibrary,
     ElmLibrary SourceElmLibrary,
