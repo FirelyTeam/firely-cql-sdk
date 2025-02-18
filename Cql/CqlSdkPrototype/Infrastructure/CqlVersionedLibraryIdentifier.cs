@@ -2,8 +2,7 @@
 
 namespace CqlSdkPrototype.Infrastructure;
 
-public readonly record struct CqlVersionedLibraryIdentifier
-(
+public readonly record struct CqlVersionedLibraryIdentifier(
     CqlLibraryIdentifier Identifier,
     CqlLibraryVersion? Version = null) : IParsable<CqlVersionedLibraryIdentifier>
 {

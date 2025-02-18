@@ -60,8 +60,3 @@ public readonly partial record struct CqlLibraryString
         cql = Cql;
     }
 }
-
-file static class StringExtensions
-{
-    public static string? NullIfEmpty(this string? text) => string.IsNullOrEmpty(text) ? null : text;
-}
