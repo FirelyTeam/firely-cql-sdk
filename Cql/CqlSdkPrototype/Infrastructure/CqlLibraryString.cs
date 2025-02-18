@@ -1,4 +1,6 @@
-﻿namespace CqlSdkPrototype.Infrastructure;
+﻿using Hl7.Cql.Runtime;
+
+namespace CqlSdkPrototype.Infrastructure;
 
 public readonly partial record struct CqlLibraryString
 {

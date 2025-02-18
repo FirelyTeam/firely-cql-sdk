@@ -5,18 +5,13 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
-#pragma warning disable IDE1006 // Naming violation suppressed.
 
 using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Runtime;
 
 // ReSharper disable InconsistentNaming
 
 namespace Hl7.Cql.Elm;
-
-file static class StringExtensions
-{
-    public static string? NullIfEmpty(this string? text) => string.IsNullOrEmpty(text) ? null : text;
-}
 
 #region GetVersionedIdentifier
 

@@ -1,4 +1,4 @@
-﻿namespace CqlSdkPrototype.Infrastructure;
+﻿namespace Hl7.Cql.Runtime;
 
 internal static class StringExtensions
 {
