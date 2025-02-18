@@ -70,7 +70,7 @@ internal class PackagerCli(
                         writeIndented:true,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
 
-                elmToolkit = cqlToolkit.ToFluentElmToolkit();
+                elmToolkit = cqlToolkit.CreateElmToolkit();
             }
             else
             {

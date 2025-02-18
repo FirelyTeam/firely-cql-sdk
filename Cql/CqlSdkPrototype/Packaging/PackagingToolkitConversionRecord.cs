@@ -4,35 +4,34 @@ namespace CqlSdkPrototype.Packaging;
 
 /// <summary>
 /// Represents a state record by the <see cref="PackagingToolkit"/>
-/// to convert the input <see cref="InCqlLibrary"/>, <see cref="InElmLibrary"/>,
-/// <see cref="InCSharpSourceCode"/> and <see cref="InAssemblyBinary"/>
-/// to the output <see cref="OutFhirLibrary"/>, <see cref="OutFhirMeasure"/>.
+/// to convert the sources <see cref="SourceCqlLibrary"/>, <see cref="SourceElmLibrary"/>,
+/// <see cref="SourceCSharpSourceCode"/> and <see cref="SourceAssemblyBinary"/>
+/// to the results <see cref="ResultFhirLibrary"/>, <see cref="ResultFhirMeasure"/>.
 /// </summary>
-/// <param name="InCqlLibrary">The input CQL library.</param>
-/// <param name="InElmLibrary">The input ELM library.</param>
-/// <param name="InCSharpSourceCode">The input C# source code.</param>
-/// <param name="InAssemblyBinary">The input .NET assembly bytes.</param>
-/// <param name="OutFhirLibrary">The output FHIR library.</param>
-/// <param name="OutFhirMeasure">The output FHIR measure.</param>
+/// <param name="SourceCqlLibrary">The source CQL library.</param>
+/// <param name="SourceElmLibrary">The source ELM library.</param>
+/// <param name="SourceCSharpSourceCode">The source C# source code.</param>
+/// <param name="SourceAssemblyBinary">The source .NET assembly bytes.</param>
+/// <param name="ResultFhirLibrary">The result FHIR library.</param>
+/// <param name="ResultFhirMeasure">The result FHIR measure.</param>
 public readonly record struct PackagingToolkitConversionRecord(
-    CqlLibraryString InCqlLibrary,
-    ElmLibrary InElmLibrary,
-    string InCSharpSourceCode,
-    byte[] InAssemblyBinary,
-    FhirLibrary? OutFhirLibrary = null,
-    FhirMeasure? OutFhirMeasure = null)
+    CqlLibraryString SourceCqlLibrary,
+    ElmLibrary SourceElmLibrary,
+    string SourceCSharpSourceCode,
+    byte[] SourceAssemblyBinary,
+    FhirLibrary? ResultFhirLibrary = null,
+    FhirMeasure? ResultFhirMeasure = null)
 {
     /// <summary>
     /// The library identifier of the input CQL library.
     /// </summary>
-    public CqlVersionedLibraryIdentifier LibraryIdentifier => InCqlLibrary.LibraryIdentifier;
+    public CqlVersionedLibraryIdentifier LibraryIdentifier => SourceCqlLibrary.LibraryIdentifier;
 
     /// <nodoc/>
-    public PackagingToolkitConversionRecord(PackagingToolkitInputRecord inputRecord) :
+    public PackagingToolkitConversionRecord(PackagingToolkitSourceRecord sourceRecord) :
         this(
-            inputRecord.CqlLibrary,
-            inputRecord.ElmLibrary,
-            inputRecord.CSharpSourceCode,
-            inputRecord.AssemblyBinary) { }
-
+            sourceRecord.CqlLibrary,
+            sourceRecord.ElmLibrary,
+            sourceRecord.CSharpSourceCode,
+            sourceRecord.AssemblyBinary) { }
 }

@@ -163,7 +163,7 @@ namespace Test
 
             return elmToolkit
                    .AddElmLibraries(librarySet)
-                   .ToLibrarySetInvoker(/*configure: configureLibrarySetInvokerBuilder*/);
+                   .CreateLibrarySetInvoker(/*configure: configureLibrarySetInvokerBuilder*/);
         }
     }
 }

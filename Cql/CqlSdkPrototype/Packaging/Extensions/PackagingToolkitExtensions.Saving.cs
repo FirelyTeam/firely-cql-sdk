@@ -19,36 +19,26 @@ public static partial class PackagingToolkitExtensions
         var jsonSerializerOptions = packagingToolkit.ServiceProvider.GetRequiredService<JsonSerializerOptions>();
 
         foreach (var resource in packagingToolkit
-                                              .GetCompletedConversions(t => (FhirResource?[])[t.fhirLibrary, t.fhirMeasure])
-                                              .SelectMany(t => t)
-                                              .WhereNotNull())
+                                 .GetPackagingResults()
+                                 .SelectMany(t => t.GetFhirResources()))
         {
             var resourceJson = JsonSerializer.Serialize(resource, jsonSerializerOptions);
             var resourceFileName = resource.GetResourceFileName();
             var fullFilePath = Path.Combine(directory.FullName, resourceFileName.ToString());
-            logger.LogInformation("Saving FHIR "+ resource.GetType().Name +" {file}", fullFilePath);
+            logger.LogInformation("Saving FHIR " + resource.GetType().Name + " {file}", fullFilePath);
             File.WriteAllText(fullFilePath, resourceJson);
         }
 
         return packagingToolkit;
     }
 
-    public static IEnumerable<(
-        CqlVersionedLibraryIdentifier versionedLibraryIdentifier,
-        FhirLibrary fhirLibrary,
-        FhirMeasure? fhirMeasure)> GetCompletedConversions(
+    public static IEnumerable<PackagingToolkitResultRecord> GetPackagingResults(
         this PackagingToolkit packagingToolkit) =>
-        packagingToolkit.GetCompletedConversions(t => t);
-
-    public static IEnumerable<TR> GetCompletedConversions<TR>(
-        this PackagingToolkit packagingToolkit,
-        Func<(CqlVersionedLibraryIdentifier versionedLibraryIdentifier, FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure), TR> selector) =>
         packagingToolkit
             .Conversions
             .SelectWhere(kv => kv.Value switch
             {
-                { OutFhirLibrary:null } => (false, default!),
-                var val              => (true, selector((kv.Key, val.OutFhirLibrary, val.OutFhirMeasure)))
+                { ResultFhirLibrary: null } => (false, default(PackagingToolkitResultRecord)),
+                var val                     => (true, new(kv.Key, val.ResultFhirLibrary, val.ResultFhirMeasure))
             });
-
 }

@@ -43,7 +43,6 @@ namespace CLI
             //run using Library Resource files - production scenario, no debugging inline with measures project
             Console.WriteLine($"Loading resources for Library: {_opts.Library}");
             using var scope = ResourceHelper.CreateRuntimeScopeFromFhirLibraryFile(new(_opts.ResourcesDirectory), _opts.LibraryName, _opts.LibraryVersion);
-            //var lib = scope.Libraries[CqlVersionedLibraryIdentifier.Parse(_opts.LibraryName)];
             RunShared(_opts, scope);
         }
 

@@ -118,7 +118,7 @@ internal static class Program
 
         // Load CQL libraries from a directory and process them to ELM, C#, and assemblies
         cqlToolkit.AddCqlLibrariesFromDirectory(dirs.CqlInDirectory).ConvertCqlToElm();
-        var elmToolkit = cqlToolkit.ToFluentElmToolkit().ConvertElmToAssemblies();
+        var elmToolkit = cqlToolkit.CreateElmToolkit().ConvertElmToAssemblies();
         var packagingToolkit = new PackagingToolkit(loggerFactory);
         packagingToolkit.AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit);
     }
@@ -144,7 +144,7 @@ internal static class Program
         var cqlContext = FhirCqlContext.ForBundle();
         using var librarySetInvoker = cqlToolkit
                                       .AddCqlLibraries(cqlLibraryString)
-                                      .ToLibrarySetInvoker(elmOpt => elmOpt with
+                                      .CreateLibrarySetInvoker(elmOpt => elmOpt with
                                       {
                                           AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded
                                       });
@@ -174,7 +174,7 @@ internal static class Program
         using var librarySetInvoker = cqlToolkit
                                       .SetExceptionHandlingToIgnore()
                                       .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory)
-                                      .ToLibrarySetInvoker();
+                                      .CreateLibrarySetInvoker();
         logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDeclarations());
         Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
         Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
@@ -217,7 +217,7 @@ internal static class Program
         }
 
         var elmToolkit = cqlToolkit
-                         .ToFluentElmToolkit()
+                         .CreateElmToolkit()
                          .SetAssemblyDebugInformationToEmbedded()
                          .AddElmFilesFromDirectory(dirs.ElmInDirectory)
                          .ConvertElmToAssemblies()
@@ -227,15 +227,15 @@ internal static class Program
         cqlToolkit.TryGetFirstElmFileLines()
                   .IfNotNull(t => logger.LogInformation(
                                  $"""
-                                  First 50 ELM lines for {t.id}:
-                                  {t.elmJson.TakeLines(50)}
+                                  First 50 ELM lines for {t.LibraryIdentifier}:
+                                  {t.ElmLibraryJson.TakeLines(50)}
                                   """));
 
         elmToolkit.TryGetFirstCSharpFileLines()
                   .IfNotNull(t => logger.LogInformation(
                                  $"""
-                                  First 50 C# lines for {t.id}:
-                                  {t.cSharpSourceCode.TakeLines(50)}
+                                  First 50 C# lines for {t.LibraryIdentifier}:
+                                  {t.CSharpSourceCode.TakeLines(50)}
                                   """));
     }
 
@@ -256,7 +256,7 @@ internal static class Program
             .SaveElmFilesToDirectory(new DirectoryInfo("output/1/elm/"));
 
         // Create fluent elm toolkit as a continuation of the cql toolkit
-        var elmToolkit = cqlToolkit.ToFluentElmToolkit();
+        var elmToolkit = cqlToolkit.CreateElmToolkit();
 
         // Process the ELM files to assemblies, then save the C# files and assembly binaries to directories
         elmToolkit
@@ -265,7 +265,7 @@ internal static class Program
             .SaveAssemblyBinariesToDirectory(new DirectoryInfo("output/1/assemblies/"));
 
         // Setup RuntimeApi
-        var invocationToolkit = elmToolkit.ToFluentInvocationToolkit();
+        var invocationToolkit = elmToolkit.CreateInvocationToolkit();
         using var librarySetInvoker = invocationToolkit.CreateLibrarySetInvoker(); // NOTE: 'librarySetInvoker' is a disposable object!
 
         // Execute CQL
@@ -314,30 +314,15 @@ file static class Extensions
     public static string TakeLines(this string multilineString, int count) =>
         multilineString.SplitLines().Take(count).JoinLines();
 
-    private static T? TryGetFirst<T>(this IEnumerable<T> source, Func<T, bool> predicate)
-        where T : struct
-    {
-        if (source == null)
-            throw new ArgumentNullException(nameof(source));
-
-        foreach (T element in source)
-        {
-            if (predicate(element))
-            {
-                return element;
-            }
-        }
-
-        return null;
-    }
-
-    public static (CqlVersionedLibraryIdentifier id, string cSharpSourceCode)? TryGetFirstCSharpFileLines(this ElmToolkit elmToolkit) =>
-        elmToolkit.GetCompletedElmToAssemblyCompilations(t => (t.versionedLibraryIdentifier, t.csharpSourceCode))
+    public static (CqlVersionedLibraryIdentifier LibraryIdentifier, string CSharpSourceCode)? TryGetFirstCSharpFileLines(this ElmToolkit elmToolkit) =>
+        elmToolkit.GetElmToAssemblyResults()
+                  .Select(t => (t.LibraryIdentifier, t.CSharpSourceCode))
                   .FirstOrNull();
 
-    public static (CqlVersionedLibraryIdentifier id, string elmJson)? TryGetFirstElmFileLines(
+    public static (CqlVersionedLibraryIdentifier LibraryIdentifier, string ElmLibraryJson)? TryGetFirstElmFileLines(
         this CqlToolkit cqlToolkit) =>
-        cqlToolkit.GetCompletedCqlToElmTranslations(t => (t.versionedLibraryIdentifier, t.elmLibrary.SerializeToJson()))
+        cqlToolkit.GetCqlToolkitResults()
+                  .Select(t => (t.LibraryIdentifier, t.ElmLibrary.SerializeToJson()))
                   .FirstOrNull();
 
     public static void IfNotNull<T>(this T? value, Action<T> withNotNullValue)

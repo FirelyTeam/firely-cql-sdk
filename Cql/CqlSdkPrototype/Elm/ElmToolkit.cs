@@ -69,7 +69,7 @@ public sealed class ElmToolkit
     /// </summary>
     /// <param name="reconfigure">A function that takes the current configuration and returns a new configuration.</param>
     public ElmToolkit Reconfigure(
-        Transformer<ElmToolkitConfig> reconfigure)
+        Mutator<ElmToolkitConfig> reconfigure)
     {
         var config = reconfigure(Config);
 
@@ -117,7 +117,7 @@ public sealed class ElmToolkit
     public ElmToolkit ConvertElmToAssemblies()
     {
         var entries = _conversions;
-        if (entries.Values.All(predicate: lc => lc is { OutAssemblyBinary: not null }))
+        if (entries.Values.All(predicate: lc => lc is { ResultAssemblyBinary: not null }))
             return this;
 
         var logger = _services.Logger;
@@ -128,7 +128,7 @@ public sealed class ElmToolkit
         AssemblyCompiler assemblyCompiler = _services.AssemblyCompiler;
         LibrarySetCSharpCodeGenerator cSharpCodeProcessor = _services.LibrarySetCSharpCodeGenerator;
         LibrarySetExpressionBuilder librarySetExpressionBuilderScoped = servicesScope.LibrarySetExpressionBuilder;
-        ElmLibrary[] libraries = entries.Values.Select(selector: v => v.InElmLibrary).ToArray();
+        ElmLibrary[] libraries = entries.Values.Select(selector: v => v.SourceElmLibrary).ToArray();
         LibrarySet librarySet = new LibrarySet(name: "", libraries: libraries);
 
         var removedLibraries = librarySet.RemoveLibrariesWithMissingDependencies();
@@ -164,8 +164,8 @@ public sealed class ElmToolkit
         {
             var elmVersionedIdentifier = CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier);
             var libraryCompilation = conversions[key: elmVersionedIdentifier];
-            if (libraryCompilation.OutCSharpSourceCode is not null
-                || libraryCompilation.OutAssemblyBinary is not null)
+            if (libraryCompilation.ResultCSharpSourceCode is not null
+                || libraryCompilation.ResultAssemblyBinary is not null)
             {
                 logger.LogInformation(message: "Library already compiled: {lib}", args: elmVersionedIdentifier);
                 continue;
@@ -174,9 +174,9 @@ public sealed class ElmToolkit
             var cSharpSourceCode = sourceCodePerName!.Values.Single(); // We always expect a single source file
             libraryCompilation = libraryCompilation with
             {
-                OutCSharpSourceCode = cSharpSourceCode,
-                OutAssemblyBinary = assemblyBinary,
-                OutDebugSymbolsBinary = debugSymbols,
+                ResultCSharpSourceCode = cSharpSourceCode,
+                ResultAssemblyBinary = assemblyBinary,
+                ResultDebugSymbolsBinary = debugSymbols,
             };
             conversions[key: elmVersionedIdentifier] = libraryCompilation;
             hasChanged = true;

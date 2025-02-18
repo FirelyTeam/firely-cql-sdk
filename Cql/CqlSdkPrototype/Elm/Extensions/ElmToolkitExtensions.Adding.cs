@@ -9,10 +9,10 @@ namespace CqlSdkPrototype.Elm.Extensions;
 
 public static partial class ElmToolkitExtensions
 {
-    public static ElmToolkit AddElmFromFluentCqlToolkit(
+    public static ElmToolkit AddElmFromCqlToolkit(
         this ElmToolkit elmToolkit,
         CqlToolkit cqlToolkit) =>
-        elmToolkit.AddElmLibraries(cqlToolkit.GetCompletedCqlToElmTranslations(t => t.elmLibrary));
+        elmToolkit.AddElmLibraries(cqlToolkit.GetCqlToolkitResults().Select(t => t.ElmLibrary));
 
     public static ElmToolkit AddElmFileInDirectory(
         this ElmToolkit elmToolkit,
@@ -60,13 +60,13 @@ public static partial class ElmToolkitExtensions
         return elmToolkit.AddElmFiles(files);
     }
 
-    public static ElmToolkit AddElmFileWithDependencies(
+    private static ElmToolkit AddElmFileWithDependencies(
         this ElmToolkit elmToolkit,
         FileInfo file,
         EnumerationOptions? options) =>
         throw new NotImplementedException();
 
-    public static ElmToolkit AddElmFileWithDependencies(
+    private static ElmToolkit AddElmFileWithDependencies(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
         CqlVersionedLibraryIdentifier fileName,
