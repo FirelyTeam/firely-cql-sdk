@@ -1,4 +1,12 @@
-﻿using System.Text.Json;
+/*
+ * Copyright (c) 2025, Firely and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+ 
+using System.Text.Json;
 using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Packaging;
