@@ -17,7 +17,7 @@ namespace CoreTests.Infrastructure
             var result = CqlLibraryString.Parse(cqlContent);
 
             // Assert
-            Assert.AreEqual(expectedIdentifier, result.VersionedLibraryIdentifier);
+            Assert.AreEqual(expectedIdentifier, result.LibraryIdentifier);
             Assert.AreEqual(cqlContent, result.Cql);
         }
 
@@ -34,7 +34,7 @@ namespace CoreTests.Infrastructure
             var result = CqlLibraryString.Parse(cqlContent);
 
             // Assert
-            Assert.AreEqual(expectedIdentifier, result.VersionedLibraryIdentifier);
+            Assert.AreEqual(expectedIdentifier, result.LibraryIdentifier);
             Assert.AreEqual(cqlContent, result.Cql);
         }
 
@@ -51,7 +51,7 @@ namespace CoreTests.Infrastructure
             var result = CqlLibraryString.Parse(cqlContent);
 
             // Assert
-            Assert.AreEqual(expectedIdentifier, result.VersionedLibraryIdentifier);
+            Assert.AreEqual(expectedIdentifier, result.LibraryIdentifier);
             Assert.AreEqual(cqlContent, result.Cql);
         }
 

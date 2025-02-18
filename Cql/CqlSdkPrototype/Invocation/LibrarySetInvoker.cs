@@ -1,5 +1,5 @@
 ﻿using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Internal;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace CqlSdkPrototype.Invocation;
 
@@ -14,9 +14,9 @@ public sealed class LibrarySetInvoker : IDisposable
     /// <summary>
     /// Initializes a new instance of the <see cref="LibrarySetInvoker"/> class.
     /// </summary>
-    /// <param name="librarySetInvokerBuilder">The builder used to create the library set invoker.</param>
+    /// <param name="invocationToolkit">The builder used to create the library set invoker.</param>
     /// <param name="alc">The assembly load context.</param>
-    internal LibrarySetInvoker(LibrarySetInvokerBuilder librarySetInvokerBuilder, AssemblyLoadContext alc)
+    internal LibrarySetInvoker(InvocationToolkit invocationToolkit, AssemblyLoadContext alc)
     {
         _alc = alc;
         LibraryInvokers =
@@ -24,7 +24,7 @@ public sealed class LibrarySetInvoker : IDisposable
                 .SelectMany(a => a.GetTypes())
                 .SelectWhereNotNull(t =>
                 {
-                    LibraryInvoker.TryCreateFromType(librarySetInvokerBuilder, t, out var libraryInvoker);
+                    LibraryInvoker.TryCreateFromType(invocationToolkit, t, out var libraryInvoker);
                     return libraryInvoker;
                 })
                 .ToImmutableDictionary(o => o.LibraryVersionedIdentifier);

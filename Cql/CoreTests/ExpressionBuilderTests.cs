@@ -8,7 +8,7 @@ namespace CoreTests
     [TestClass]
     public class LibraryExpressionBuilderTests
     {
-        private static ServiceProvider BuildServiceProvider() => ElmToAssemblyProcessorServices.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
+        private static ServiceProvider BuildServiceProvider() => ElmToolkitServices.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
 
         [TestMethod]
         public void AggregateQueries_1_0_0()

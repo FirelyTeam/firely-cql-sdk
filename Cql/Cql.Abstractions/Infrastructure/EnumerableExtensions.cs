@@ -211,17 +211,6 @@ internal static class EnumerableExtensions
     }
 
     /// <summary>
-    /// Returns an enumerable collection that contains a single item.
-    /// </summary>
-    /// <typeparam name="T">The type of the item.</typeparam>
-    /// <param name="item">The item to include in the collection.</param>
-    /// <returns>An enumerable collection that contains a single item.</returns>
-    public static IEnumerable<T> EnumerateSingle<T>(this T item)
-    {
-        yield return item;
-    }
-
-    /// <summary>
     /// Projects each element of a collection into a new form based on a selector function, and filters out elements based on a condition.
     /// </summary>
     /// <typeparam name="T">The type of elements in the source collection.</typeparam>
@@ -234,5 +223,23 @@ internal static class EnumerableExtensions
         foreach (var item in source)
             if (selector(item) is (include: true, { } resultOrDefault))
                 yield return resultOrDefault;
+    }
+
+    public static IEnumerable<TR> SelectWhereNotNull<T, TR>(
+        this IEnumerable<T> enumerable,
+        Func<T, TR?> selectNullable)
+        where TR : class
+    {
+        return enumerable
+               .Select(selectNullable)
+               .WhereNotNull();
+    }
+
+    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> enumerable)
+        where T : class
+    {
+        return enumerable
+               .Where(x => x is not null)
+               .Select(x => x!);
     }
 }

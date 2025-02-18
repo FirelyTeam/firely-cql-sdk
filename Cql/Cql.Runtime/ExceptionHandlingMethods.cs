@@ -1,76 +1,110 @@
 ﻿namespace Hl7.Cql.Runtime;
 
+
 internal static class ExceptionHandlingMethods
 {
-    private static (EnumerationContinuation continuation, TNext next) TryGetNext<T, TNext>(
-        T input,
-        Func<T, TNext> getNext,
-        EnumerateExceptionHandler<T>? exceptionHandler = null)
+    private static (bool success, TNext next) Try<TCurrent, TNext>(
+        TCurrent current,
+        Func<TCurrent, TNext> getNext,
+        bool noThrow,
+        ValueExceptionHandler<TCurrent>? valueExceptionHandler)
     {
         try
         {
-            TNext next = getNext(input);
-            return (EnumerationContinuation.Yield, next);
+            TNext next = getNext(current);
+            return (true, next);
         }
         catch (Exception e)
         {
-            switch (exceptionHandler?.Invoke(input, e))
-            {
-                case EnumerationExceptionHandling.Break:    return (EnumerationContinuation.Break, default!);
-                case EnumerationExceptionHandling.Continue: return (EnumerationContinuation.Continue, default!);
-            }
+            e.Data["Current"] = current;
+            e.Data["CurrentType"] = typeof(TCurrent);
+            e.Data["NextType"] = typeof(TNext);
+            valueExceptionHandler?.Invoke(current, e);
+            if (noThrow)
+                return (false, default!);
+
             throw;
         }
     }
 
-    private enum EnumerationContinuation
-    {
-        Yield,
-        Continue,
-        Break
-    }
+    public static int TryForEach<T>(
+        this IEnumerable<T> inputs,
+        Action<T> withValue,
+        EnumerationErrorStrategyBuilder<T>? buildErrorStrategy = null) =>
+        inputs.TrySelect(
+                  input =>
+                  {
+                      withValue(input);
+                      return 0;
+                  },
+                  buildErrorStrategy)
+              .Count();
 
     public static IEnumerable<TReturn> TrySelect<T, TReturn>(
         this IEnumerable<T> inputs,
-        Func<T, TReturn> getValue,
-        EnumerateExceptionHandler<T>? exceptionHandler = null)
+        Func<T, TReturn> selector,
+        EnumerationErrorStrategyBuilder<T>? buildErrorStrategy = null)
     {
+        var errorStrategy = buildErrorStrategy?.Invoke(default) ?? default;
         foreach (var input in inputs)
         {
-            switch (TryGetNext(input, getValue, exceptionHandler))
+            var noThrow = errorStrategy.NoThrow;
+            var (success, next) = Try(input, selector, noThrow, errorStrategy.ExceptionHandler);
+            switch (success, next, errorStrategy.Continuation)
             {
-                case (EnumerationContinuation.Yield, var @return): yield return @return; break;
-                case (EnumerationContinuation.Continue, _):        continue;
-                case (EnumerationContinuation.Break, _):           yield break;
+                case (true, var @return, _): yield return @return; break;
+                case (_, _, ErroredEnumerationContinuation.Continue): continue;
+                case (_, _, ErroredEnumerationContinuation.Break): yield break;
             }
         }
     }
 }
+internal readonly record struct EnumerationErrorStrategy<T>(
+    ErroredEnumerationContinuation Continuation = ErroredEnumerationContinuation.Throw,
+    ValueExceptionHandler<T>? ExceptionHandler = null)
+{
+    public bool NoThrow => Continuation is not ErroredEnumerationContinuation.Throw;
+}
+
+internal delegate EnumerationErrorStrategy<T> EnumerationErrorStrategyBuilder<T>(EnumerationErrorStrategy<T> options);
 
 internal static class LoggerExtensions
 {
-    public static EnumerateExceptionHandler<TPrev> CreateLogExceptionHandler<TPrev>(
-        this ILogger logger,
-        EnumerationExceptionHandling exceptionHandling,
-        Action<TPrev, LogMessageBuilder> log)
-    {
-        var logLevel = ToLogLevel(exceptionHandling);
-        if (!logger.IsEnabled(logLevel))
-            return NoOpExceptionHandler<TPrev>(exceptionHandling);
-
-        return (t, exception) =>
+    public static EnumerationErrorStrategy<T> SetContinuation<T>(
+        this EnumerationErrorStrategy<T> strategy,
+        ErroredEnumerationContinuation continuation) =>
+        strategy with
         {
-            LogMessageBuilder logMessageBuilder = (message, args) => logger.Log(logLevel, exception, message, args);
-            log(t, logMessageBuilder);
-            return exceptionHandling;
+            Continuation = continuation
+        };
+
+    public static EnumerationErrorStrategy<T> AddLoggerExceptionHandler<T>(
+        this EnumerationErrorStrategy<T> strategy,
+        ILogger logger,
+        LogMessageBuilder<T> logMessageBuilder)
+    {
+        var logLevel = ToLogLevel(strategy.Continuation);
+        if (!logger.IsEnabled(logLevel))
+            return strategy;
+
+        return strategy with
+        {
+            ExceptionHandler = strategy.ExceptionHandler ?? CreateLogExceptionHandler(logger, logLevel, logMessageBuilder)
         };
     }
 
-    private static EnumerateExceptionHandler<TPrev> NoOpExceptionHandler<TPrev>(EnumerationExceptionHandling exceptionHandling) =>
-        (_, _) => exceptionHandling;
+    private static ValueExceptionHandler<TCurrent> CreateLogExceptionHandler<TCurrent>(
+        this ILogger logger,
+        LogLevel logLevel,
+        LogMessageBuilder<TCurrent> logMessageBuilder)
+    {
+        return (current, exception) => logMessageBuilder(current, (message, args) => logger.Log(logLevel, exception, message, args));
+    }
 
-    private static LogLevel ToLogLevel(EnumerationExceptionHandling exceptionHandling) =>
-        exceptionHandling is EnumerationExceptionHandling.Throw ? LogLevel.Error : LogLevel.Warning;
+    private static LogLevel ToLogLevel(ErroredEnumerationContinuation erroredEnumerationContinuation) =>
+        erroredEnumerationContinuation is ErroredEnumerationContinuation.Throw ? LogLevel.Error : LogLevel.Warning;
 
-    public delegate void LogMessageBuilder([StructuredMessageTemplate] string message, params object?[] args);
+    public delegate void LogMessageBuilder<in TCurrent>(TCurrent current, LogMessage logMessage);
+
+    public delegate void LogMessage([StructuredMessageTemplate] string message, params object?[] args);
 }

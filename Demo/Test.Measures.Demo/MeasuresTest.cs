@@ -5,13 +5,11 @@ using CoreTests;
 using Hl7.Cql.Compiler;
 using CLI.Helpers;
 using CqlSdkPrototype.Elm;
-using CqlSdkPrototype.Elm.Fluent;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Runtime;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation;
 using CqlSdkPrototype.Invocation.Extensions;
-using CqlSdkPrototype.Invocation.Fluent.Extensions;
 
 namespace Test
 {
@@ -154,18 +152,18 @@ namespace Test
             LibrarySet librarySet = new();
             librarySet.LoadLibraryAndDependencies(elmDirectory, lib, version);
 
-            var config = ElmToAssemblyCompilerConfig.Default;
+            var config = ElmToolkitConfig.Default;
             if (cacheSize != 0)
                 config = config with { LRUCacheSize = cacheSize };
 
             if (Debugger.IsAttached)
                 config = config with { AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded };
 
-            var elmToolkit = new FluentElmToolkit(loggerFactory, config);
+            var elmToolkit = new ElmToolkit(loggerFactory, config);
 
             return elmToolkit
                    .AddElmLibraries(librarySet)
-                   .ToLibrarySetInvoker(/*configure: configureLibrarySetInvokerBuilder*/);
+                   .CreateLibrarySetInvoker(/*configure: configureLibrarySetInvokerBuilder*/);
         }
     }
 }

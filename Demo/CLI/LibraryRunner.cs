@@ -1,6 +1,6 @@
 ﻿using CLI.Helpers;
 using CqlSdkPrototype.Invocation;
-using CqlSdkPrototype.Invocation.Fluent;
+using CqlSdkPrototype.Invocation.Extensions;
 using Dumpify;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
@@ -9,7 +9,6 @@ using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Hl7.Cql.CodeGeneration.NET;
-using CqlSdkPrototype.Invocation.Fluent.Extensions;
 
 namespace CLI
 {
@@ -33,9 +32,9 @@ namespace CLI
             //if used in production scenario compile measures.* dll and reference it below instead, example Assembly.LoadFrom("Measures.Authoring")
             //see launchsettings.json
             var assemblyBinary = AssemblyBinary.Default.LoadFromFile(new FileInfo(_opts.AssemblyPath));
-            using var librarySetInvoker = new FluentInvocationToolkit()
+            using var librarySetInvoker = new InvocationToolkit()
                       .AddAssemblyBinaries(assemblyBinary)
-                      .ToLibrarySetInvoker();
+                      .CreateLibrarySetInvoker();
             RunShared(_opts, librarySetInvoker);
         }
 
@@ -44,7 +43,6 @@ namespace CLI
             //run using Library Resource files - production scenario, no debugging inline with measures project
             Console.WriteLine($"Loading resources for Library: {_opts.Library}");
             using var scope = ResourceHelper.CreateRuntimeScopeFromFhirLibraryFile(new(_opts.ResourcesDirectory), _opts.LibraryName, _opts.LibraryVersion);
-            //var lib = scope.Libraries[CqlVersionedLibraryIdentifier.Parse(_opts.LibraryName)];
             RunShared(_opts, scope);
         }
 

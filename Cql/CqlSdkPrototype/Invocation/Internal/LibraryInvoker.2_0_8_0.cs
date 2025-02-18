@@ -1,5 +1,4 @@
 ﻿using System.Collections.ObjectModel;
-using CqlSdkPrototype.Internal;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
@@ -50,7 +49,7 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
     }
 
     public static bool TryCreate(
-        LibrarySetInvokerBuilder builder,
+        InvocationToolkit builder,
         Type libraryType,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {

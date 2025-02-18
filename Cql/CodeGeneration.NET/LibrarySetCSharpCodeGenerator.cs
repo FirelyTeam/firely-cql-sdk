@@ -88,11 +88,11 @@ internal class LibrarySetCSharpCodeGenerator
     public IEnumerable<(Library library, string cSharp)> GenerateEachLibraryToCSharp(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> definitions,
-        EnumerateExceptionHandler<Library>? exceptionHandler = null,
-        Action<Library>? preCSharpGenerateHandler = null)
+        EnumerationErrorStrategyBuilder<Library>? buildErrorStrategy = null,
+        Action<Library>? onBeforeProcessLibrary = null)
     {
         var librarySetWriter = new LibrarySetWriter(this, librarySet, definitions);
-        return librarySetWriter.GenerateEachLibraryToCSharp(exceptionHandler);
+        return librarySetWriter.GenerateEachLibraryToCSharp(buildErrorStrategy, onBeforeProcessLibrary);
     }
 
     #region Nested Types
@@ -112,14 +112,14 @@ internal class LibrarySetCSharpCodeGenerator
         public string? Namespace { get; } = null; // Not used right now
 
         public IEnumerable<(Library library, string cSharp)> GenerateEachLibraryToCSharp(
-            EnumerateExceptionHandler<Library>? exceptionHandler = null,
-            Action<Library>? preCSharpGenerateHandler = null) =>
+            EnumerationErrorStrategyBuilder<Library>? buildErrorStrategy = null,
+            Action<Library>? onBeforeProcessLibrary = null) =>
             LibrarySet
                 .Where(library => Definitions.Libraries.Contains(library.GetVersionedIdentifier()!))
                 .TrySelect(
                     library =>
                     {
-                        preCSharpGenerateHandler?.Invoke(library);
+                        onBeforeProcessLibrary?.Invoke(library);
 
                         using var cSharpWriter = new StringWriter();
                         var libraryWriter = new LibraryWriter(this, library, cSharpWriter);
@@ -128,7 +128,7 @@ internal class LibrarySetCSharpCodeGenerator
                         var cSharp = cSharpWriter.ToString();
                         return (library, cSharp);
                     },
-                    exceptionHandler);
+                    buildErrorStrategy);
     }
 
     private record LibraryWriter(

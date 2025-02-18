@@ -6,12 +6,13 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using CqlSdkPrototype.Cql.Fluent;
-using CqlSdkPrototype.Cql.Fluent.Extensions;
-using CqlSdkPrototype.Elm.Fluent;
-using CqlSdkPrototype.Elm.Fluent.Extensions;
+using CqlSdkPrototype.Cql;
+using CqlSdkPrototype.Cql.Extensions;
+using CqlSdkPrototype.Elm;
+using CqlSdkPrototype.Elm.Extensions;
 using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Packaging.Fluent;
+using CqlSdkPrototype.Packaging;
+using CqlSdkPrototype.Packaging.Extensions;
 using Hl7.Cql.Packaging;
 
 namespace Hl7.Cql.Packager;
@@ -47,20 +48,20 @@ internal class PackagerCli(
                 return -1;
             }
 
-            var packagingToolkit = new FluentPackagingToolkit(loggerFactory)
+            var packagingToolkit = new PackagingToolkit(loggerFactory)
                 .SetExceptionHandlingToIgnore();
 
-            FluentCqlToolkit cqlToolkit = new FluentCqlToolkit(loggerFactory)
+            CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory)
                 .SetExceptionHandlingToIgnore()
                 .AddCqlLibrariesFromDirectory(opt.CqlInDirectory);
 
-            if (!cqlToolkit.CqlToElmTranslations.Any())
+            if (!cqlToolkit.Conversions.Any())
                 logger.LogWarning("Exiting: No CQL libraries were found in the CQL input directory.");
 
-            FluentElmToolkit elmToolkit;
+            ElmToolkit elmToolkit;
             if (translateCql)
             {
-                cqlToolkit.TranslateCqlToElm();
+                cqlToolkit.ConvertCqlToElm();
 
                 if (opt.ElmOutDirectory is { } elmOutDir)
                     cqlToolkit.SaveElmFilesToDirectory(
@@ -68,11 +69,11 @@ internal class PackagerCli(
                         writeIndented:true,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
 
-                elmToolkit = cqlToolkit.ToFluentElmToolkit();
+                elmToolkit = cqlToolkit.CreateElmToolkit();
             }
             else
             {
-                elmToolkit = new FluentElmToolkit(loggerFactory)
+                elmToolkit = new ElmToolkit(loggerFactory)
                              .SetExceptionHandlingToIgnore()
                              .AddElmFilesFromDirectory(
                                  opt.ElmInDirectory!,
@@ -81,12 +82,12 @@ internal class PackagerCli(
 
             if (opt.CSharpOutDirectory is { } dirOutCS)
                 elmToolkit
-                    .CompileElmToAssemblies()
+                    .ConvertElmToAssemblies()
                     .SaveCSharpFilesToDirectory(dirOutCS, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
 
             if (opt.AssemblyOutDirectory is { } dirOutDll)
                 elmToolkit
-                    .CompileElmToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
+                    .ConvertElmToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
                     .SaveAssemblyBinariesToDirectory(dirOutDll, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"));
 
             if (opt is
@@ -98,7 +99,7 @@ internal class PackagerCli(
             {
                 packagingToolkit
                     .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
-                    .PackageFhirResources(canonicalRootUrl, overrideDate)
+                    .ConvertToFhirResources(canonicalRootUrl, overrideDate)
                     .SaveFhirResources(dirOutFhir, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
             }
 

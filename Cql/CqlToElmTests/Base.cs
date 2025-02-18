@@ -7,12 +7,9 @@ using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Model;
-using CqlSdkPrototype.Cql.Fluent;
-using CqlSdkPrototype.Elm.Fluent;
-using CqlSdkPrototype.Elm.Fluent.Extensions;
+using CqlSdkPrototype.Elm.Extensions;
+using CqlSdkPrototype.Invocation;
 using CqlSdkPrototype.Invocation.Extensions;
-using CqlSdkPrototype.Invocation.Fluent;
-using CqlSdkPrototype.Invocation.Fluent.Extensions;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -51,15 +48,15 @@ namespace Hl7.Cql.CqlToElm.Test
             var compile =
                 elmToolkitServices
                     .GetAssemblyCompiler()
-                    .CompileEachLibraryToAssemblies(generateCSharp, librarySet, elmToolkit.ProcessorConfig.AssemblyCompilerDebugInformationFormat)
+                    .CompileEachLibraryToAssemblies(generateCSharp, librarySet, elmToolkit.Config.AssemblyCompilerDebugInformationFormat)
                     .ToList();
 
             var assemblyBytes = compile.Single().assemblyBinaryWithSourceCode.AssemblyBytes;
 
             using var librarySetInvoker =
-                new FluentInvocationToolkit()
+                new InvocationToolkit()
                     .AddAssemblyBinaries(AssemblyBinary.Default with { AssemblyBytes = assemblyBytes })
-                    .ToLibrarySetInvoker();
+                    .CreateLibrarySetInvoker();
 
             var result = librarySetInvoker
                 .GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);
@@ -196,7 +193,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerFactory>();
 
-        protected static FluentCqlToolkit CreateFluentCqlToolkit(
+        protected static CqlToolkit CreateFluentCqlToolkit(
             ImmutableHashSet<CqlModel>? Models = null,
             ImmutableHashSet<ModelInfo>? ModelInfos = null,
             AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,
@@ -207,8 +204,8 @@ namespace Hl7.Cql.CqlToElm.Test
             bool AllowNullIntervals = false) =>
             new(
                 LoggerFactory,
-                new CqlToElmTranslatorConfig(
-                    EnumerationExceptionHandling: EnumerationExceptionHandling.Throw,
+                new CqlToolkitConfig(
+                    ErroredEnumerationContinuation: ErroredEnumerationContinuation.Throw,
                     Models: Models ?? [CqlModel.ElmR1, CqlModel.Fhir401],
                     ModelInfos: ModelInfos,
                     AmbiguousTypeBehavior: AmbiguousTypeBehavior,
@@ -219,14 +216,14 @@ namespace Hl7.Cql.CqlToElm.Test
                     AllowNullIntervals: AllowNullIntervals
                 ));
 
-        internal static FluentElmToolkit ToFluentElmToolkit(
+        internal static ElmToolkit ToFluentElmToolkit(
             ImmutableHashSet<CqlModel>? models = null,
             ImmutableHashSet<ModelInfo>? modelInfos = null,
             AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
             bool enableListPromotion = false) =>
             CreateFluentCqlToolkit(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
-                .ToFluentElmToolkit(_ => new ElmToAssemblyCompilerConfig(
-                                        EnumerationExceptionHandling.Throw,
+                .CreateElmToolkit(_ => new ElmToolkitConfig(
+                                        ErroredEnumerationContinuation.Throw,
                                         Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));
     }
 }

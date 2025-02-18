@@ -1,0 +1,26 @@
+﻿using CqlSdkPrototype.Infrastructure;
+
+namespace CqlSdkPrototype.Cql.Extensions;
+
+public static partial class CqlToolkitExtensions
+{
+    public static CqlToolkit SaveElmFilesToDirectory(
+        this CqlToolkit cqlToolkit,
+        DirectoryInfo directory,
+        bool writeIndented = true,
+        DirectoryInfoHandler? directoryPreparationStrategy = null)
+    {
+        (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);
+
+        var logger = cqlToolkit.CreateLogger();
+
+        foreach (var (libraryIdentifier, elmLibrary) in cqlToolkit.GetCqlToolkitResults())
+        {
+            var fileName = Path.Combine(directory.FullName, $"{libraryIdentifier}.json");
+            File.WriteAllText(fileName, elmLibrary.SerializeToJson(writeIndented));
+            logger.LogInformation("Saved ELM to file: {file}", fileName);
+        }
+
+        return cqlToolkit;
+    }
+}

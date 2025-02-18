@@ -52,6 +52,7 @@ Hl7.Cql.Abstractions.ILibrary.Name.get -> string!
 Hl7.Cql.Abstractions.ILibrary.Version.get -> string!
 Hl7.Cql.Abstractions.ISingleton<TSelf>
 Hl7.Cql.Abstractions.ISingleton<TSelf>.Instance.get -> TSelf
+Hl7.Cql.Abstractions.Mutator<T>
 Hl7.Cql.Abstractions.TypeResolver
 Hl7.Cql.Abstractions.TypeResolver.TypeResolver() -> void
 Hl7.Cql.Abstractions.UCUMUnits
@@ -59,3 +60,4 @@ Hl7.Cql.Abstractions.Units
 static Hl7.Cql.Abstractions.UCUMUnits.FromDateTimePrecision(Hl7.Cql.Iso8601.DateTimePrecision dtp) -> string?
 static readonly Hl7.Cql.Abstractions.Units.CqlUnitsToUCUM -> System.Collections.Generic.IDictionary<string!, string!>!
 static readonly Hl7.Cql.Abstractions.Units.UCUMUnitsToCql -> System.Collections.Generic.IDictionary<string!, string!>!
+virtual Hl7.Cql.Abstractions.Mutator<T>.Invoke(T value) -> T

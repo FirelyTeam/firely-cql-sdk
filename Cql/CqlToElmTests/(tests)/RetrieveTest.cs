@@ -3,7 +3,6 @@ using Hl7.Cql.Fhir;
 using Hl7.Fhir.Model;
 using CqlSdkPrototype.Infrastructure;
 using CqlSdkPrototype.Invocation.Extensions;
-using CqlSdkPrototype.Invocation.Fluent.Extensions;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -97,9 +96,9 @@ namespace Hl7.Cql.CqlToElm.Test
                     }
                 };
 
-                using var librarySetInvoker = cqlToolkit.ToLibrarySetInvoker();
+                using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
                 var result = librarySetInvoker.GetLibraryDefinitionResult(FhirCqlContext.ForBundle(bundle, valueSets: valueSets),
-                                                              cqlLibraryString.VersionedLibraryIdentifier, "Retrieve_AllTerms");
+                                                              cqlLibraryString.LibraryIdentifier, "Retrieve_AllTerms");
                 var conditions = result as IEnumerable<Condition>;
                 Assert.IsNotNull(conditions);
                 var ids = conditions.Select(c => c.Id).ToArray();

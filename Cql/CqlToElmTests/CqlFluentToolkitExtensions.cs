@@ -1,51 +1,52 @@
-﻿using CqlSdkPrototype.Cql.Fluent;
-using CqlSdkPrototype.Cql.Fluent.Extensions;
+﻿using CqlSdkPrototype.Cql;
+using CqlSdkPrototype.Cql.Extensions;
 using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
+using DateTime = Hl7.Cql.Elm.DateTime;
 using Expression = Hl7.Cql.Elm.Expression;
 
 namespace Hl7.Cql.CqlToElm.Test;
 
 internal static class FluentCqlToolkitExtensions
 {
-    private static TService GetCqlRequiredService<TService>(this FluentCqlToolkit fluentCqlToolkit) where TService : notnull =>
-        fluentCqlToolkit.ServiceProvider.GetRequiredService<TService>();
+    private static TService GetCqlRequiredService<TService>(this CqlToolkit cqlToolkit) where TService : notnull =>
+        cqlToolkit.ServiceProvider.GetRequiredService<TService>();
 
-    public static CqlToElmConverter GetCqlToElmConverter(this FluentCqlToolkit fluentCqlToolkit) =>
-        fluentCqlToolkit.GetCqlRequiredService<CqlToElmConverter>();
+    public static CqlToElmConverter GetCqlToElmConverter(this CqlToolkit cqlToolkit) =>
+        cqlToolkit.GetCqlRequiredService<CqlToElmConverter>();
 
-    public static CoercionProvider GetCoercionProvider(this FluentCqlToolkit fluentCqlToolkit) =>
-        fluentCqlToolkit.GetCqlRequiredService<CoercionProvider>();
+    public static CoercionProvider GetCoercionProvider(this CqlToolkit cqlToolkit) =>
+        cqlToolkit.GetCqlRequiredService<CoercionProvider>();
 
-    public static ElmFactory GetElmFactory(this FluentCqlToolkit fluentCqlToolkit) =>
-        fluentCqlToolkit.GetCqlRequiredService<ElmFactory>();
+    public static ElmFactory GetElmFactory(this CqlToolkit cqlToolkit) =>
+        cqlToolkit.GetCqlRequiredService<ElmFactory>();
 
-    public static MessageProvider GetMessageProvider(this FluentCqlToolkit fluentCqlToolkit) =>
-        fluentCqlToolkit.GetCqlRequiredService<MessageProvider>();
+    public static MessageProvider GetMessageProvider(this CqlToolkit cqlToolkit) =>
+        cqlToolkit.GetCqlRequiredService<MessageProvider>();
 
-    public static InvocationBuilder GetInvocationBuilder(this FluentCqlToolkit fluentCqlToolkit) =>
-        fluentCqlToolkit.GetCqlRequiredService<InvocationBuilder>();
+    public static InvocationBuilder GetInvocationBuilder(this CqlToolkit cqlToolkit) =>
+        cqlToolkit.GetCqlRequiredService<InvocationBuilder>();
 
-    public static SystemLibrary GetSystemLibrary(this FluentCqlToolkit fluentCqlToolkit) =>
-        fluentCqlToolkit.GetCqlRequiredService<SystemLibrary>();
+    public static SystemLibrary GetSystemLibrary(this CqlToolkit cqlToolkit) =>
+        cqlToolkit.GetCqlRequiredService<SystemLibrary>();
 
     private static CqlLibraryString FHIRHelpers { get; } = CqlLibraryString.Parse(File.ReadAllText(@"Input\FHIRHelpers-4.0.1.cql"));
 
-    public static FluentCqlToolkit AddFHIRHelpers(this FluentCqlToolkit fluentCqlToolkit) => fluentCqlToolkit.AddCqlLibraryString(FHIRHelpers);
+    public static CqlToolkit AddFHIRHelpers(this CqlToolkit cqlToolkit) => cqlToolkit.AddCqlLibraries(FHIRHelpers);
 
     public static Library MakeLibrary(
-        this FluentCqlToolkit fluentCqlToolkit,
+        this CqlToolkit cqlToolkit,
         string cql,
         params string[] expectedErrors)
     {
         var cqlLibraryString = CqlLibraryString.Parse(cql);
 
-        var library = fluentCqlToolkit
-                      .AddCqlLibraryString(cqlLibraryString)
-                      .TranslateCqlToElm()
-                      .CqlToElmTranslations[cqlLibraryString.VersionedLibraryIdentifier]
-                      .ElmLibrary!;
+        var library = cqlToolkit
+                      .AddCqlLibraries(cqlLibraryString)
+                      .ConvertCqlToElm()
+                      .Conversions[cqlLibraryString.LibraryIdentifier]
+                      .ResultElmLibrary!;
 
         if (expectedErrors.Any())
             library.ShouldReportError(expectedErrors);
@@ -56,26 +57,30 @@ internal static class FluentCqlToolkitExtensions
     }
 
     public static Library MakeLibraryFromExpression(
-        this FluentCqlToolkit fluentCqlToolkit,
+        this CqlToolkit cqlToolkit,
         string expression,
         string[]? expectedErrors = null,
         [System.Runtime.CompilerServices.CallerMemberName] string memberName = "")
     {
+        string libName = string.Concat($"{memberName}{Random.Shared.Next()}{Environment.TickCount64}"
+                                       .ToCharArray()
+                                       .Where(Char.IsAsciiLetterOrDigit));
+
         string cql = $"""
-                      library Test version '1.0.0'
+                      library "{libName}" version '1.0.0'
 
                       define private "{memberName}": {expression}
                       """;
-        var lib = fluentCqlToolkit.MakeLibrary(cql, expectedErrors ?? []);
+        var lib = cqlToolkit.MakeLibrary(cql, expectedErrors ?? []);
         return lib;
     }
 
     public static Expression Expression(
-        this FluentCqlToolkit fluentCqlToolkit,
+        this CqlToolkit cqlToolkit,
         string expression,
         [System.Runtime.CompilerServices.CallerMemberName]
         string memberName = "")
     {
-        return fluentCqlToolkit.MakeLibraryFromExpression(expression, memberName: memberName).statements[0].expression;
+        return cqlToolkit.MakeLibraryFromExpression(expression, memberName: memberName).statements[0].expression;
     }
 }

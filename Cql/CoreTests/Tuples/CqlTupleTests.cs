@@ -1,8 +1,7 @@
 ﻿#nullable enable
 using CqlSdkPrototype.Infrastructure;
+using CqlSdkPrototype.Invocation;
 using CqlSdkPrototype.Invocation.Extensions;
-using CqlSdkPrototype.Invocation.Fluent;
-using CqlSdkPrototype.Invocation.Fluent.Extensions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
@@ -101,7 +100,7 @@ public class CqlTupleTests
             """, str);
     }
 
-    /// <seealso cref="FluentInvocationToolkitTests.TestRuntimeScopeAgainstLibraryDefinitionResults"/>
+    /// <seealso cref="InvocationToolkitTests.TestRuntimeScopeAgainstLibraryDefinitionResults"/>
     [TestMethod]
     public void ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized()
     {
@@ -110,9 +109,9 @@ public class CqlTupleTests
                        .Select(dir => Path.GetFullPath(Path.Combine(dir.FullName, "Dlls", "CqlNestedTupleTest-1.0.0.dll")))
                        .First(File.Exists);
         var ctx = FhirCqlContext.ForBundle();
-        using var librarySetInvoker = new FluentInvocationToolkit()
+        using var librarySetInvoker = new InvocationToolkit()
                                     .AddAssemblyBinaries(AssemblyBinary.Default.LoadFromFile(new FileInfo(filePath)))
-                                    .ToLibrarySetInvoker();
+                                    .CreateLibrarySetInvoker();
 
         // Act
         var result = librarySetInvoker

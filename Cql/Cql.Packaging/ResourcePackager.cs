@@ -23,27 +23,27 @@ internal class ResourcePackager(TypeResolver typeResolver)
     private readonly CqlTypeToFhirTypeMapper _cqlTypeToFhirTypeMapper = new(typeResolver);
 
     public readonly record struct SourceArtefacts(
-        string VersionedLibraryIdentifier,
+        string LibraryIdentifier,
         string CqlString,
         ElmLibrary ElmLibrary,
         string CSharpSourceCode,
         byte[] AssemblyBinary);
 
-    public IEnumerable<(string versionedLibraryIdentifier, FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure)> PackageEachElmLibraryToFhirResources(
+    public IEnumerable<(string libraryIdentifier, FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure)> PackageEachElmLibraryToFhirResources(
         ElmLibrarySet librarySet,
         Func<string, SourceArtefacts> inputsById,
         string? resourceCanonicalRootUrl = null,
         SysDateTime? overrideDate = null,
-        EnumerateExceptionHandler<ElmLibrary>? exceptionHandler = null,
-        Action<ElmLibrary>? prepackageLibraryHandler = null)
+        EnumerationErrorStrategyBuilder<ElmLibrary>? buildErrorStrategy = null,
+        Action<ElmLibrary>? onNextLibrary = null)
     {
         resourceCanonicalRootUrl ??= string.Empty;
 
-        return librarySet.TrySelect(PackageResource, exceptionHandler);
+        return librarySet.TrySelect(PackageResource, buildErrorStrategy);
 
         (string versionedIdentifier, FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure) PackageResource(ElmLibrary elmLibrary)
         {
-            prepackageLibraryHandler?.Invoke(elmLibrary);
+            onNextLibrary?.Invoke(elmLibrary);
 
             var versionedIdentifier = elmLibrary.GetVersionedIdentifier()!;
             var localOverrideDate = overrideDate ?? SysDateTime.Now;

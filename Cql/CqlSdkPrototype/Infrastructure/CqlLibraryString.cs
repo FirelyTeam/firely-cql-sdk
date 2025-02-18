@@ -41,14 +41,14 @@ public readonly partial record struct CqlLibraryString
     }
 
     private CqlLibraryString(
-        CqlVersionedLibraryIdentifier versionedLibraryIdentifier,
+        CqlVersionedLibraryIdentifier libraryIdentifier,
         string cql)
     {
-        VersionedLibraryIdentifier = versionedLibraryIdentifier;
+        LibraryIdentifier = libraryIdentifier;
         Cql = cql;
     }
 
-    public CqlVersionedLibraryIdentifier VersionedLibraryIdentifier { get; init; }
+    public CqlVersionedLibraryIdentifier LibraryIdentifier { get; init; }
 
     public string Cql { get; init; }
 
@@ -56,7 +56,7 @@ public readonly partial record struct CqlLibraryString
         out CqlVersionedLibraryIdentifier versionedLibraryIdentifier,
         out string cql)
     {
-        versionedLibraryIdentifier = VersionedLibraryIdentifier;
+        versionedLibraryIdentifier = LibraryIdentifier;
         cql = Cql;
     }
 }
