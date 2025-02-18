@@ -12,7 +12,7 @@ public static partial class ElmToolkitExtensions
     public static ElmToolkit AddElmFromCqlToolkit(
         this ElmToolkit elmToolkit,
         CqlToolkit cqlToolkit) =>
-        elmToolkit.AddElmLibraries(cqlToolkit.GetCompletedCqlToElmTranslations(t => t.elmLibrary));
+        elmToolkit.AddElmLibraries(cqlToolkit.GetCqlToolkitResults().Select(t => t.ElmLibrary));
 
     public static ElmToolkit AddElmFileInDirectory(
         this ElmToolkit elmToolkit,

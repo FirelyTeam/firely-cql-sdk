@@ -1,6 +1,5 @@
 ﻿using CqlSdkPrototype.Elm;
 using CqlSdkPrototype.Elm.Extensions;
-using Hl7.Cql.CodeGeneration.NET;
 
 namespace CqlSdkPrototype.Invocation.Extensions;
 
@@ -10,7 +9,7 @@ public static class ElmToolkitExtensions
         this ElmToolkit elmToolkit)
     {
         var assemblyBinaries =
-            elmToolkit.GetCompletedElmToAssemblyCompilations(t => new AssemblyBinary(t.assemblyBinary, t.debugSymbolsBinary));
+            elmToolkit.GetElmToAssemblyResults().Select(t => t.GetAssemblyBinary());
 
         var invocationToolkit = new InvocationToolkit(elmToolkit.LoggerFactory).AddAssemblyBinaries(assemblyBinaries);
         return invocationToolkit;

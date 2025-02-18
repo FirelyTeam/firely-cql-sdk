@@ -34,5 +34,4 @@ public readonly record struct PackagingToolkitConversionRecord(
             sourceRecord.ElmLibrary,
             sourceRecord.CSharpSourceCode,
             sourceRecord.AssemblyBinary) { }
-
 }

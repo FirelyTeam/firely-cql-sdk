@@ -227,15 +227,15 @@ internal static class Program
         cqlToolkit.TryGetFirstElmFileLines()
                   .IfNotNull(t => logger.LogInformation(
                                  $"""
-                                  First 50 ELM lines for {t.id}:
-                                  {t.elmJson.TakeLines(50)}
+                                  First 50 ELM lines for {t.LibraryIdentifier}:
+                                  {t.ElmLibraryJson.TakeLines(50)}
                                   """));
 
         elmToolkit.TryGetFirstCSharpFileLines()
                   .IfNotNull(t => logger.LogInformation(
                                  $"""
-                                  First 50 C# lines for {t.id}:
-                                  {t.cSharpSourceCode.TakeLines(50)}
+                                  First 50 C# lines for {t.LibraryIdentifier}:
+                                  {t.CSharpSourceCode.TakeLines(50)}
                                   """));
     }
 
@@ -314,30 +314,15 @@ file static class Extensions
     public static string TakeLines(this string multilineString, int count) =>
         multilineString.SplitLines().Take(count).JoinLines();
 
-    private static T? TryGetFirst<T>(this IEnumerable<T> source, Func<T, bool> predicate)
-        where T : struct
-    {
-        if (source == null)
-            throw new ArgumentNullException(nameof(source));
-
-        foreach (T element in source)
-        {
-            if (predicate(element))
-            {
-                return element;
-            }
-        }
-
-        return null;
-    }
-
-    public static (CqlVersionedLibraryIdentifier id, string cSharpSourceCode)? TryGetFirstCSharpFileLines(this ElmToolkit elmToolkit) =>
-        elmToolkit.GetCompletedElmToAssemblyCompilations(t => (t.versionedLibraryIdentifier, t.csharpSourceCode))
+    public static (CqlVersionedLibraryIdentifier LibraryIdentifier, string CSharpSourceCode)? TryGetFirstCSharpFileLines(this ElmToolkit elmToolkit) =>
+        elmToolkit.GetElmToAssemblyResults()
+                  .Select(t => (t.LibraryIdentifier, t.CSharpSourceCode))
                   .FirstOrNull();
 
-    public static (CqlVersionedLibraryIdentifier id, string elmJson)? TryGetFirstElmFileLines(
+    public static (CqlVersionedLibraryIdentifier LibraryIdentifier, string ElmLibraryJson)? TryGetFirstElmFileLines(
         this CqlToolkit cqlToolkit) =>
-        cqlToolkit.GetCompletedCqlToElmTranslations(t => (t.versionedLibraryIdentifier, t.elmLibrary.SerializeToJson()))
+        cqlToolkit.GetCqlToolkitResults()
+                  .Select(t => (t.LibraryIdentifier, t.ElmLibrary.SerializeToJson()))
                   .FirstOrNull();
 
     public static void IfNotNull<T>(this T? value, Action<T> withNotNullValue)

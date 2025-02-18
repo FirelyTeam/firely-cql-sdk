@@ -1,6 +1,6 @@
 ﻿using CqlSdkPrototype.Cql;
 using CqlSdkPrototype.Elm;
-using CqlSdkPrototype.Elm.Extensions;
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Packaging.Extensions;
@@ -21,13 +21,17 @@ public static partial class PackagingToolkitExtensions
         CqlToolkit cqlToolkit,
         ElmToolkit elmToolkit)
     {
-        var cqlToElmTranslations = cqlToolkit.Conversions.Values.Select(o => o.SourceCqlLibrary);
-        var completedElmToAssemblyCompilations = elmToolkit.GetCompletedElmToAssemblyCompilations();
+        var cqlLibraries = cqlToolkit.Conversions.Values.Select(o => o.SourceCqlLibrary);
+        var compilations = elmToolkit.Conversions.Values.SelectWhere(o => o switch
+        {
+            { ResultCSharpSourceCode:{} ResultCSharpSourceCode, ResultAssemblyBinary: {} ResultAssemblyBinary } => (true, (o.LibraryIdentifier, o.SourceElmLibrary, ResultCSharpSourceCode, ResultAssemblyBinary)),
+            _ => default
+        });
         var inputs =
-            cqlToElmTranslations
-                .Join(completedElmToAssemblyCompilations,
-                      l => l.LibraryIdentifier, r => r.versionedLibraryIdentifier,
-                      (l, r) => new PackagingToolkitSourceRecord(l, r.elmLibrary, r.csharpSourceCode, r.assemblyBinary));
+            cqlLibraries
+                .Join(compilations,
+                      l => l.LibraryIdentifier, r => r.LibraryIdentifier,
+                      (l, r) => new PackagingToolkitSourceRecord(l, r.SourceElmLibrary, r.ResultCSharpSourceCode, r.ResultAssemblyBinary));
         return packagingToolkit.AddPackagingInputs(inputs);
     }
 }

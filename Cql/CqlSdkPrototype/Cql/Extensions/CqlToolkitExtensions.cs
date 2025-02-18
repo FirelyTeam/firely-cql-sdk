@@ -1,4 +1,4 @@
-﻿using CqlSdkPrototype.Infrastructure;
+﻿using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Cql.Extensions;
@@ -14,17 +14,12 @@ public static partial class CqlToolkitExtensions
             ErroredEnumerationContinuation = stopAfterFirstException ? ErroredEnumerationContinuation.Break : ErroredEnumerationContinuation.Continue
         });
 
-    public static IEnumerable<(
-        CqlVersionedLibraryIdentifier versionedLibraryIdentifier,
-        CqlLibraryString cqlLibraryString,
-        ElmLibrary elmLibrary)> GetCompletedCqlToElmTranslations(
+    public static IEnumerable<CqlToolkitResultRecord> GetCqlToolkitResults(
         this CqlToolkit cqlToolkit) =>
-        cqlToolkit.GetCompletedCqlToElmTranslations(t => t);
-
-    public static IEnumerable<TR> GetCompletedCqlToElmTranslations<TR>(
-        this CqlToolkit cqlToolkit,
-        Func<(CqlVersionedLibraryIdentifier versionedLibraryIdentifier, CqlLibraryString cqlLibraryString, ElmLibrary elmLibrary), TR> selector) =>
-        cqlToolkit.Conversions
-            .Where(kv => kv.Value.ResultElmLibrary is not null)
-            .Select(kv => selector((kv.Key, kv.Value.SourceCqlLibrary, kv.Value.ResultElmLibrary!)));
+        cqlToolkit.Conversions.Values
+                  .SelectWhere(conversionRecord => conversionRecord switch
+                  {
+                      { LibraryIdentifier: { } id, ResultElmLibrary: { } elmLib } => (true, new CqlToolkitResultRecord(id, elmLib)),
+                      _                                                           => default
+                  });
 }

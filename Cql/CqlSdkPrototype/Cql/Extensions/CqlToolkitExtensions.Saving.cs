@@ -14,9 +14,9 @@ public static partial class CqlToolkitExtensions
 
         var logger = cqlToolkit.CreateLogger();
 
-        foreach (var (versionedLibraryIdentifier, _, elmLibrary) in cqlToolkit.GetCompletedCqlToElmTranslations())
+        foreach (var (libraryIdentifier, elmLibrary) in cqlToolkit.GetCqlToolkitResults())
         {
-            var fileName = Path.Combine(directory.FullName, $"{versionedLibraryIdentifier}.json");
+            var fileName = Path.Combine(directory.FullName, $"{libraryIdentifier}.json");
             File.WriteAllText(fileName, elmLibrary.SerializeToJson(writeIndented));
             logger.LogInformation("Saved ELM to file: {file}", fileName);
         }
