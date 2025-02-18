@@ -87,35 +87,6 @@ public readonly record struct CqlVersionedLibraryIdentifier
 
     #endregion
 
-    #region Comparison
-
-    private sealed class NameOnlyComparerImpl : IComparer<CqlVersionedLibraryIdentifier>,
-                                                IEqualityComparer<CqlVersionedLibraryIdentifier>
-    {
-        public static NameOnlyComparerImpl Instance { get; } = new();
-
-        public int Compare(CqlVersionedLibraryIdentifier x, CqlVersionedLibraryIdentifier y)
-        {
-            return x.Identifier.CompareTo(y.Identifier);
-        }
-
-        public bool Equals(CqlVersionedLibraryIdentifier x, CqlVersionedLibraryIdentifier y)
-        {
-            return x.Identifier == y.Identifier;
-        }
-
-        public int GetHashCode(CqlVersionedLibraryIdentifier obj)
-        {
-            return obj.Identifier.GetHashCode();
-        }
-    }
-
-    public static IComparer<CqlVersionedLibraryIdentifier> IdentifierOnlyComparer => NameOnlyComparerImpl.Instance;
-
-    public static IEqualityComparer<CqlVersionedLibraryIdentifier> IdentifierOnlyEqualityComparer => NameOnlyComparerImpl.Instance;
-
-    #endregion
-
     #region Cast Operators
 
     public static implicit operator CqlVersionedLibraryIdentifier(CqlLibraryIdentifier identifier) => FromNameAndVersion(identifier);
