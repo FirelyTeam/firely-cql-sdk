@@ -1,6 +1,6 @@
-﻿using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Cql.Extensions;
-using Hl7.Cql.CqlToElm.Builtin;
+﻿using Hl7.Cql.CqlToElm.Builtin;
+using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Elm;
 using Expression = Hl7.Cql.Elm.Expression;
 

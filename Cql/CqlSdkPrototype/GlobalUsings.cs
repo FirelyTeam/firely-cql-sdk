@@ -29,12 +29,6 @@ global using FhirLibrary = Hl7.Fhir.Model.Library;
 global using FhirMeasure = Hl7.Fhir.Model.Measure;
 global using FhirModelInfo = Hl7.Fhir.Model.ModelInfo;
 
-global using CqlToolkitConversionDictionary = System.Collections.Immutable.ImmutableDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, CqlSdkPrototype.Cql.CqlToolkitConversionRecord>;
-global using CqlToolkitConversionReadOnlyDictionary = System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, CqlSdkPrototype.Cql.CqlToolkitConversionRecord>;
-
-global using ElmToolkitConversionDictionary = System.Collections.Immutable.ImmutableDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, CqlSdkPrototype.Elm.ElmToolkitConversionRecord>;
-global using ElmToolkitConversionReadOnlyDictionary = System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, CqlSdkPrototype.Elm.ElmToolkitConversionRecord>;
-
 global using AssemblyBinaryHashSet = System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CodeGeneration.NET.AssemblyBinary>;
 global using AssemblyBinaryReadOnlyHashSet = System.Collections.Generic.IReadOnlySet<Hl7.Cql.CodeGeneration.NET.AssemblyBinary>;
 

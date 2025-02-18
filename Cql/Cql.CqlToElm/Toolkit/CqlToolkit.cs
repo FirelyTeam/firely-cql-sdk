@@ -6,12 +6,12 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using CqlSdkPrototype.Cql.Internal;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.CqlToElm.Toolkit.Internal;
 using Hl7.Cql.Runtime;
-using CqlLibraryString = Hl7.Cql.CqlToElm.CqlLibraryString;
+using Microsoft.Extensions.Logging.Abstractions;
 
-namespace CqlSdkPrototype.Cql;
+namespace Hl7.Cql.CqlToElm.Toolkit;
 
 /// <summary>
 /// Translates CQL libraries to ELM libraries.

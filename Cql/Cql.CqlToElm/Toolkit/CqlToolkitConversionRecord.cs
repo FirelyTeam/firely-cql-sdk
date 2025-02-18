@@ -6,12 +6,10 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using CqlSdkPrototype.Cql.Internal;
-using Hl7.Cql.CqlToElm;
+using Hl7.Cql.CqlToElm.Toolkit.Internal;
 using Hl7.Cql.Runtime;
-using CqlLibraryString = Hl7.Cql.CqlToElm.CqlLibraryString;
 
-namespace CqlSdkPrototype.Cql;
+namespace Hl7.Cql.CqlToElm.Toolkit;
 
 /// <summary>
 /// Represents a state record by the <see cref="CqlToolkit"/>

@@ -8,7 +8,7 @@
 
 using Hl7.Cql.Runtime.IO;
 
-namespace CqlSdkPrototype.Cql.Extensions;
+namespace Hl7.Cql.CqlToElm.Toolkit.Extensions;
 
 public static partial class CqlToolkitExtensions
 {

@@ -7,9 +7,8 @@
  */
 
 using Hl7.Cql.Runtime;
-using CqlLibraryString = Hl7.Cql.CqlToElm.CqlLibraryString;
 
-namespace CqlSdkPrototype.Cql.Extensions;
+namespace Hl7.Cql.CqlToElm.Toolkit.Extensions;
 
 public static partial class CqlToolkitExtensions
 {

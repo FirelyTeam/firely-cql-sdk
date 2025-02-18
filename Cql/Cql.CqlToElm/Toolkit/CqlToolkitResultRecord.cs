@@ -8,7 +8,7 @@
 
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Cql;
+namespace Hl7.Cql.CqlToElm.Toolkit;
 
 /// <summary>
 /// Represents a result record by the <see cref="CqlToolkit"/>.

@@ -6,10 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Cql.Extensions;
+namespace Hl7.Cql.CqlToElm.Toolkit.Extensions;
 
 public static partial class CqlToolkitExtensions
 {
