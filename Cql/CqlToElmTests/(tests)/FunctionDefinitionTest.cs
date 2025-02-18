@@ -287,14 +287,14 @@ namespace Hl7.Cql.CqlToElm.Test
                 """);
 
             var lib = cqlToolkit.MakeLibrary(cqlLibraryString.Cql);
-            var lambdas = cqlToolkit.ToFluentElmToolkit().ProcessLibrary(lib);
+            var lambdas = cqlToolkit.CreateElmToolkit().ProcessLibrary(lib);
             var expr = lambdas["FuncTest-1.0.0", "ToInteger", typeof(CqlContext), typeof(decimal?)];
             expr.Parameters.Should().HaveCount(2);
             expr.Parameters[1].Name.Should().Be("decimal");
 
             var act = () =>
             {
-                using var librarySetInvoker = cqlToolkit.ToLibrarySetInvoker();
+                using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
                 _ = librarySetInvoker;
             };
             act.Should().NotThrow();

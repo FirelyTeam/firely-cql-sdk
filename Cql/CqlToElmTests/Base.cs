@@ -222,7 +222,7 @@ namespace Hl7.Cql.CqlToElm.Test
             AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
             bool enableListPromotion = false) =>
             CreateFluentCqlToolkit(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
-                .ToFluentElmToolkit(_ => new ElmToolkitConfig(
+                .CreateElmToolkit(_ => new ElmToolkitConfig(
                                         ErroredEnumerationContinuation.Throw,
                                         Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));
     }

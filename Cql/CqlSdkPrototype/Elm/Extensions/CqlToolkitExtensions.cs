@@ -1,16 +1,17 @@
 ﻿using CqlSdkPrototype.Cql;
+using Hl7.Cql.Abstractions;
 
 namespace CqlSdkPrototype.Elm.Extensions;
 
 public static class CqlToolkitExtensions
 {
-    public static ElmToolkit ToFluentElmToolkit(
+    public static ElmToolkit CreateElmToolkit(
         this CqlToolkit cqlToolkit,
-        Func<ElmToolkitConfig, ElmToolkitConfig>? configure = null)
+        Mutator<ElmToolkitConfig>? reconfigure = null)
     {
         var config = new ElmToolkitConfig(ErroredEnumerationContinuation: cqlToolkit.Config.ErroredEnumerationContinuation);
-        if (configure is not null) config = configure(config);
-        var elmToolkit = new ElmToolkit(cqlToolkit.LoggerFactory, config).AddElmFromFluentCqlToolkit(cqlToolkit);
+        if (reconfigure is not null) config = reconfigure(config);
+        var elmToolkit = new ElmToolkit(cqlToolkit.LoggerFactory, config).AddElmFromCqlToolkit(cqlToolkit);
         return elmToolkit;
     }
 
@@ -18,6 +19,6 @@ public static class CqlToolkitExtensions
         this CqlToolkit cqlToolkit) =>
         cqlToolkit
             .ConvertCqlToElm()
-            .ToFluentElmToolkit()
+            .CreateElmToolkit()
             .ConvertElmToAssemblies();
 }
