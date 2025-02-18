@@ -6,19 +6,19 @@ namespace CqlSdkPrototype.Cql;
 
 /// <summary>
 /// Represents a state record by the <see cref="CqlToolkit"/>
-/// to convert the input <see cref="CqlLibraryString"/> to
-/// the output <see cref="ElmLibrary"/>.
+/// to convert the source <see cref="CqlLibraryString"/> to
+/// the result <see cref="ElmLibrary"/>.
 /// </summary>
-/// <param name="InCqlLibrary">The input CQL library string.</param>
-/// <param name="OutElmLibrary">The output ELM library.</param>
+/// <param name="SourceCqlLibrary">The source CQL library string.</param>
+/// <param name="ResultElmLibrary">The result ELM library.</param>
 public readonly record struct CqlToolkitConversionRecord(
-    CqlLibraryString InCqlLibrary,
-    ElmLibrary? OutElmLibrary = null) {
+    CqlLibraryString SourceCqlLibrary,
+    ElmLibrary? ResultElmLibrary = null) {
 
     /// <summary>
     /// The library identifier of the input CQL library.
     /// </summary>
-    public CqlVersionedLibraryIdentifier LibraryIdentifier => InCqlLibrary.LibraryIdentifier;
+    public CqlVersionedLibraryIdentifier LibraryIdentifier => SourceCqlLibrary.LibraryIdentifier;
 
     /// <summary>
     /// The library builder service for the ELM library.

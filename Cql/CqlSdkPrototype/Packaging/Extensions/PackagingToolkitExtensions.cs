@@ -21,13 +21,13 @@ public static partial class PackagingToolkitExtensions
         CqlToolkit cqlToolkit,
         ElmToolkit elmToolkit)
     {
-        var cqlToElmTranslations = cqlToolkit.Conversions.Values.Select(o => o.InCqlLibrary);
+        var cqlToElmTranslations = cqlToolkit.Conversions.Values.Select(o => o.SourceCqlLibrary);
         var completedElmToAssemblyCompilations = elmToolkit.GetCompletedElmToAssemblyCompilations();
         var inputs =
             cqlToElmTranslations
                 .Join(completedElmToAssemblyCompilations,
                       l => l.LibraryIdentifier, r => r.versionedLibraryIdentifier,
-                      (l, r) => new PackagingToolkitInputRecord(l, r.elmLibrary, r.csharpSourceCode, r.assemblyBinary));
+                      (l, r) => new PackagingToolkitSourceRecord(l, r.elmLibrary, r.csharpSourceCode, r.assemblyBinary));
         return packagingToolkit.AddPackagingInputs(inputs);
     }
 }

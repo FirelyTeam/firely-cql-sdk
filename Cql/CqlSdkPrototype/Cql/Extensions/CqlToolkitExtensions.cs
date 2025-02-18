@@ -25,6 +25,6 @@ public static partial class CqlToolkitExtensions
         this CqlToolkit cqlToolkit,
         Func<(CqlVersionedLibraryIdentifier versionedLibraryIdentifier, CqlLibraryString cqlLibraryString, ElmLibrary elmLibrary), TR> selector) =>
         cqlToolkit.Conversions
-            .Where(kv => kv.Value.OutElmLibrary is not null)
-            .Select(kv => selector((kv.Key, kv.Value.InCqlLibrary, kv.Value.OutElmLibrary!)));
+            .Where(kv => kv.Value.ResultElmLibrary is not null)
+            .Select(kv => selector((kv.Key, kv.Value.SourceCqlLibrary, kv.Value.ResultElmLibrary!)));
 }

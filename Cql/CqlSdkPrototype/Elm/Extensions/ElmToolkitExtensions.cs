@@ -35,7 +35,7 @@ public static partial class ElmToolkitExtensions
         this ElmToolkit elmToolkit,
         Func<(CqlVersionedLibraryIdentifier versionedLibraryIdentifier, ElmLibrary elmLibrary, string csharpSourceCode, byte[] assemblyBinary, byte[]? debugSymbolsBinary), TR> selector) =>
         elmToolkit.Conversions
-                  .Where(kv => kv.Value is { OutCSharpSourceCode: not null, OutAssemblyBinary: not null })
-                  .Select(kv => selector((kv.Key, kv.Value.InElmLibrary, kv.Value.OutCSharpSourceCode!, kv.Value.OutAssemblyBinary!, kv.Value.OutDebugSymbolsBinary)));
+                  .Where(kv => kv.Value is { ResultCSharpSourceCode: not null, ResultAssemblyBinary: not null })
+                  .Select(kv => selector((kv.Key, kv.Value.SourceElmLibrary, kv.Value.ResultCSharpSourceCode!, kv.Value.ResultAssemblyBinary!, kv.Value.ResultDebugSymbolsBinary)));
 
 }

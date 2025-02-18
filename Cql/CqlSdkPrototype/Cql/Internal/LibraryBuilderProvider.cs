@@ -44,7 +44,7 @@ internal sealed class LibraryBuilderProvider(
         {
             var logger = CqlToElmTranslatorServices.LoggerFactory.CreateLogger<LibraryBuilderProvider>();
             logger.LogInformation("Parsing CQL for {id}", libVer);
-            libraryBuilder = CqlToElmTranslatorServices.CqlToElmConverter.GetBuilder(CqlToElmTranslatorServices.LibraryVisitor, elmTranslation.InCqlLibrary.Cql);
+            libraryBuilder = CqlToElmTranslatorServices.CqlToElmConverter.GetBuilder(CqlToElmTranslatorServices.LibraryVisitor, elmTranslation.SourceCqlLibrary.Cql);
             ConversionsBuilder[libVer] = elmTranslation with { LibraryBuilder = libraryBuilder };
             return true;
         }

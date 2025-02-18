@@ -122,7 +122,7 @@ public sealed class CqlToolkit
         var count =
             _conversions
                 .Values
-                .Where(conversion => conversion.OutElmLibrary is null)
+                .Where(conversion => conversion.ResultElmLibrary is null)
                 .TryForEach(
                     r =>
                     {
@@ -130,7 +130,7 @@ public sealed class CqlToolkit
                             throw new InvalidOperationException($"Could not resolve CQL library: {r.LibraryIdentifier} with error {error}.");
 
                         var elmLibrary = libraryBuilder.Build();
-                        var newConversionRecord = r with { OutElmLibrary = elmLibrary };
+                        var newConversionRecord = r with { ResultElmLibrary = elmLibrary };
                         conversions[r.LibraryIdentifier] = newConversionRecord;
                     },
                     errorStrategy => errorStrategy

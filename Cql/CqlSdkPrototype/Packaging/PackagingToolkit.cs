@@ -69,7 +69,7 @@ public sealed class PackagingToolkit
     /// Adds FHIR resource packaging inputs to the packager.
     /// </summary>
     /// <param name="inputRecords">The collection of FHIR resource packaging inputs to add.</param>
-    public PackagingToolkit AddPackagingInputs(IEnumerable<PackagingToolkitInputRecord> inputRecords)
+    public PackagingToolkit AddPackagingInputs(IEnumerable<PackagingToolkitSourceRecord> inputRecords)
     {
         var conversions = _conversions.ToBuilder();
         var logger = _services.Logger;
@@ -78,7 +78,7 @@ public sealed class PackagingToolkit
                     .TryForEach(conversionRecord =>
                     {
                         var libIdFromCql = conversionRecord.LibraryIdentifier;
-                        var libIdFromElm = CqlVersionedLibraryIdentifier.Parse(conversionRecord.InElmLibrary.GetVersionedIdentifier()!);
+                        var libIdFromElm = CqlVersionedLibraryIdentifier.Parse(conversionRecord.SourceElmLibrary.GetVersionedIdentifier()!);
                         if (libIdFromCql != libIdFromElm)
                             throw new InvalidOperationException($"Library identifier mismatch between CQL and ELM libraries: CQL {libIdFromCql}, ELM: {libIdFromElm}.");
 
@@ -102,7 +102,7 @@ public sealed class PackagingToolkit
     {
         var builder = _conversions.ToBuilder();
 
-        var libraries = builder.Values.Select(o => o.InElmLibrary);
+        var libraries = builder.Values.Select(o => o.SourceElmLibrary);
 
         var nodes = libraries.ToLibraryDependencyNodesByVersionedIdentifiers();
 
@@ -143,9 +143,9 @@ public sealed class PackagingToolkit
                      {
                          var versionedLibraryIdentifier = CqlVersionedLibraryIdentifier.Parse(o.versionedLibraryIdentifier);
                          var fhirResourcePackaging = builder[versionedLibraryIdentifier];
-                         if (fhirResourcePackaging.OutFhirLibrary is null)
+                         if (fhirResourcePackaging.ResultFhirLibrary is null)
                          {
-                             builder[versionedLibraryIdentifier] = fhirResourcePackaging with { OutFhirLibrary = o.fhirLibrary, OutFhirMeasure = o.fhirMeasure};
+                             builder[versionedLibraryIdentifier] = fhirResourcePackaging with { ResultFhirLibrary = o.fhirLibrary, ResultFhirMeasure = o.fhirMeasure};
                              return (true, o);
                          }
 
@@ -162,8 +162,8 @@ public sealed class PackagingToolkit
 
     private static ResourcePackager.SourceArtefacts ToResourcePackagerInput(PackagingToolkitConversionRecord o) => new(
         o.LibraryIdentifier.ToString(),
-        o.InCqlLibrary.Cql,
-        o.InElmLibrary,
-        o.InCSharpSourceCode,
-        o.InAssemblyBinary);
+        o.SourceCqlLibrary.Cql,
+        o.SourceElmLibrary,
+        o.SourceCSharpSourceCode,
+        o.SourceAssemblyBinary);
 }

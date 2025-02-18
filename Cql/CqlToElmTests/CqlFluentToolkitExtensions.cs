@@ -46,7 +46,7 @@ internal static class FluentCqlToolkitExtensions
                       .AddCqlLibraries(cqlLibraryString)
                       .ConvertCqlToElm()
                       .Conversions[cqlLibraryString.LibraryIdentifier]
-                      .OutElmLibrary!;
+                      .ResultElmLibrary!;
 
         if (expectedErrors.Any())
             library.ShouldReportError(expectedErrors);

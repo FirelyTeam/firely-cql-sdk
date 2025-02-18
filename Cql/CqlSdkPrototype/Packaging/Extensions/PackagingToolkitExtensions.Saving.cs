@@ -46,8 +46,8 @@ public static partial class PackagingToolkitExtensions
             .Conversions
             .SelectWhere(kv => kv.Value switch
             {
-                { OutFhirLibrary:null } => (false, default!),
-                var val              => (true, selector((kv.Key, val.OutFhirLibrary, val.OutFhirMeasure)))
+                { ResultFhirLibrary:null } => (false, default!),
+                var val              => (true, selector((kv.Key, val.ResultFhirLibrary, val.ResultFhirMeasure)))
             });
 
 }
