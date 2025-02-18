@@ -55,7 +55,7 @@ public static partial class ElmToolkitExtensions
         EnumerationOptions? options = null,
         Func<FileInfo, bool>? filePredicate = null)
     {
-        var files = directory.EnumerateFiles("*.json", options ?? InternalConstants.DefaultEnumerationOptions);
+        var files = directory.EnumerateFiles("*.json", options ?? Defaults.DefaultEnumerationOptions);
         if (filePredicate is not null) files = files.Where(filePredicate);
         return elmToolkit.AddElmFiles(files);
     }

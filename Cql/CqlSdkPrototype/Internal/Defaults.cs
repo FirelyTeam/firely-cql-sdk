@@ -1,6 +1,6 @@
 ﻿namespace CqlSdkPrototype.Internal;
 
-internal static class InternalConstants
+internal static class Defaults
 {
     public static EnumerationOptions DefaultEnumerationOptions = new();
 }
