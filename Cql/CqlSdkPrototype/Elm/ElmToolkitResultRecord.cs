@@ -1,5 +1,6 @@
 ﻿using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Runtime;
 
 namespace CqlSdkPrototype.Elm;
 

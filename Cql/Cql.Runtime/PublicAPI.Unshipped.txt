@@ -13,6 +13,23 @@ Hl7.Cql.Runtime.CqlContext.Operators.get -> Hl7.Cql.Operators.ICqlOperators!
 Hl7.Cql.Runtime.CqlContext.Parameters.get -> System.Collections.Generic.IDictionary<string!, object!>!
 Hl7.Cql.Runtime.CqlContext.RaiseContextEvent(Hl7.Cql.Runtime.ContextEventArgs! eventData) -> Hl7.Cql.Runtime.CqlContext!
 Hl7.Cql.Runtime.CqlContext.ResolveParameter(string! libraryVersionedIdentifier, string! parameterName, object? defaultValue) -> object?
+Hl7.Cql.Runtime.CqlLibraryIdentifier
+Hl7.Cql.Runtime.CqlLibraryIdentifier.CompareTo(Hl7.Cql.Runtime.CqlLibraryIdentifier other) -> int
+Hl7.Cql.Runtime.CqlLibraryIdentifier.CqlLibraryIdentifier() -> void
+Hl7.Cql.Runtime.CqlLibraryIdentifier.Equals(Hl7.Cql.Runtime.CqlLibraryIdentifier other) -> bool
+Hl7.Cql.Runtime.CqlLibraryVersion
+Hl7.Cql.Runtime.CqlLibraryVersion.CompareTo(Hl7.Cql.Runtime.CqlLibraryVersion other) -> int
+Hl7.Cql.Runtime.CqlLibraryVersion.CqlLibraryVersion() -> void
+Hl7.Cql.Runtime.CqlLibraryVersion.Equals(Hl7.Cql.Runtime.CqlLibraryVersion other) -> bool
+Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
+Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.CqlVersionedLibraryIdentifier() -> void
+Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.CqlVersionedLibraryIdentifier(Hl7.Cql.Runtime.CqlLibraryIdentifier Identifier, Hl7.Cql.Runtime.CqlLibraryVersion? Version = null) -> void
+Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Deconstruct(out Hl7.Cql.Runtime.CqlLibraryIdentifier Identifier, out Hl7.Cql.Runtime.CqlLibraryVersion? Version) -> void
+Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Equals(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier other) -> bool
+Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Identifier.get -> Hl7.Cql.Runtime.CqlLibraryIdentifier
+Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Identifier.init -> void
+Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Version.get -> Hl7.Cql.Runtime.CqlLibraryVersion?
+Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Version.init -> void
 Hl7.Cql.Runtime.DefinitionDictionary<T>
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Add(string! libraryName, string! definition, System.Type![]! signature, T! expression) -> void
 Hl7.Cql.Runtime.DefinitionDictionary<T>.Add(string! libraryName, string! definition, T! expression) -> void
@@ -45,11 +62,32 @@ Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CqlValueTupleJso
 Hl7.Cql.Runtime.ValueExceptionHandler<T>
 override Hl7.Cql.Runtime.BaseTypeResolver.GetListElementType(System.Type! type, bool throwError = false) -> System.Type?
 override Hl7.Cql.Runtime.BaseTypeResolver.ResolveType(string! typeSpecifier, bool throwError = true) -> System.Type?
+override Hl7.Cql.Runtime.CqlLibraryIdentifier.GetHashCode() -> int
+override Hl7.Cql.Runtime.CqlLibraryIdentifier.ToString() -> string!
+override Hl7.Cql.Runtime.CqlLibraryVersion.GetHashCode() -> int
+override Hl7.Cql.Runtime.CqlLibraryVersion.ToString() -> string!
+override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.GetHashCode() -> int
+override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.ToString() -> string!
 override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Read(ref System.Text.Json.Utf8JsonReader reader, System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Runtime.CompilerServices.ITuple!
 override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Write(System.Text.Json.Utf8JsonWriter! writer, System.Runtime.CompilerServices.ITuple! value, System.Text.Json.JsonSerializerOptions! options) -> void
 override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CanConvert(System.Type! typeToConvert) -> bool
 override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CreateConverter(System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Text.Json.Serialization.JsonConverter!
 readonly Hl7.Cql.Runtime.BaseTypeResolver.Types -> System.Collections.Generic.Dictionary<string!, System.Type!>!
+static Hl7.Cql.Runtime.CqlLibraryIdentifier.operator !=(Hl7.Cql.Runtime.CqlLibraryIdentifier left, Hl7.Cql.Runtime.CqlLibraryIdentifier right) -> bool
+static Hl7.Cql.Runtime.CqlLibraryIdentifier.operator ==(Hl7.Cql.Runtime.CqlLibraryIdentifier left, Hl7.Cql.Runtime.CqlLibraryIdentifier right) -> bool
+static Hl7.Cql.Runtime.CqlLibraryIdentifier.Parse(string! s) -> Hl7.Cql.Runtime.CqlLibraryIdentifier
+static Hl7.Cql.Runtime.CqlLibraryIdentifier.TryParse(string? s, out Hl7.Cql.Runtime.CqlLibraryIdentifier result) -> bool
+static Hl7.Cql.Runtime.CqlLibraryVersion.operator !=(Hl7.Cql.Runtime.CqlLibraryVersion left, Hl7.Cql.Runtime.CqlLibraryVersion right) -> bool
+static Hl7.Cql.Runtime.CqlLibraryVersion.operator ==(Hl7.Cql.Runtime.CqlLibraryVersion left, Hl7.Cql.Runtime.CqlLibraryVersion right) -> bool
+static Hl7.Cql.Runtime.CqlLibraryVersion.Parse(string! s) -> Hl7.Cql.Runtime.CqlLibraryVersion
+static Hl7.Cql.Runtime.CqlLibraryVersion.TryParse(string? s, out Hl7.Cql.Runtime.CqlLibraryVersion result) -> bool
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.FromNameAndVersion(Hl7.Cql.Runtime.CqlLibraryIdentifier identifier, Hl7.Cql.Runtime.CqlLibraryVersion? version = null) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.implicit operator Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier(Hl7.Cql.Runtime.CqlLibraryIdentifier identifier) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.operator !=(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier left, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier right) -> bool
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.operator ==(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier left, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier right) -> bool
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Parse(string! s) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(string! identifier, string? version = null) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.TryParse(string? s, out Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier result) -> bool
 static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler(string! searchPattern = "*", System.IO.EnumerationOptions? enumerationOptions = null, System.Func<System.IO.FileInfo!, bool>? fileSelector = null) -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
 static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.CreateIfNotExists.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
 static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.Recreate.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
@@ -57,3 +95,6 @@ static Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Default.get -> H
 virtual Hl7.Cql.Runtime.BaseTypeResolver.GetPropertyCore(System.Type! type, string! propertyName) -> System.Reflection.PropertyInfo?
 virtual Hl7.Cql.Runtime.IO.DirectoryInfoHandler.Invoke(System.IO.DirectoryInfo! directory) -> void
 virtual Hl7.Cql.Runtime.ValueExceptionHandler<T>.Invoke(T value, System.Exception! exception) -> void
+~override Hl7.Cql.Runtime.CqlLibraryIdentifier.Equals(object obj) -> bool
+~override Hl7.Cql.Runtime.CqlLibraryVersion.Equals(object obj) -> bool
+~override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Equals(object obj) -> bool
