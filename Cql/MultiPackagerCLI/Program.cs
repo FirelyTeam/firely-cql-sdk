@@ -1,4 +1,12 @@
-﻿// See https://aka.ms/new-console-template for more information
+/*
+ * Copyright (c) 2025, Firely, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+
+// See https://aka.ms/new-console-template for more information
 
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
