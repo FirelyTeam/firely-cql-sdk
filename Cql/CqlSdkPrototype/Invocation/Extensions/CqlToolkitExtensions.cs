@@ -6,9 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using CqlSdkPrototype.Elm;
-using CqlSdkPrototype.Elm.Extensions;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm.Toolkit;
 
 namespace CqlSdkPrototype.Invocation.Extensions;

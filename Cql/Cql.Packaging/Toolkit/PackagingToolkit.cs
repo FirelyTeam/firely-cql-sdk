@@ -6,20 +6,29 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using CqlSdkPrototype.Packaging.Internal;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
-using Hl7.Cql.Packaging;
+using Hl7.Cql.Packaging.Toolkit.Internal;
 using Hl7.Cql.Runtime;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging.Abstractions;
 
-namespace CqlSdkPrototype.Packaging;
+namespace Hl7.Cql.Packaging.Toolkit;
 
 using SysDateTime = System.DateTime;
 
+/// <summary>
+/// Provides functionality for packaging FHIR resources.
+/// </summary>
 public sealed class PackagingToolkit
 {
+    /// <summary>
+    /// Initializes a new instance of the <see cref="PackagingToolkit"/> class.
+    /// </summary>
+    /// <param name="loggerFactory">The logger factory to use for logging.</param>
+    /// <param name="config">The configuration settings for the toolkit.</param>
     public PackagingToolkit(
         ILoggerFactory? loggerFactory = null,
         PackagingToolkitConfig? config = null)
@@ -55,11 +64,11 @@ public sealed class PackagingToolkit
     /// </summary>
     public PackagingToolkitConversionsReadOnlyDictionary Conversions => _conversions;
 
-
     /// <summary>
     /// Reconfigures the packager with the specified configuration.
     /// </summary>
     /// <param name="reconfigure">The new configuration for the packager.</param>
+    /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
     public PackagingToolkit Reconfigure(
         Mutator<PackagingToolkitConfig> reconfigure)
     {
@@ -76,6 +85,8 @@ public sealed class PackagingToolkit
     /// Adds FHIR resource packaging inputs to the packager.
     /// </summary>
     /// <param name="inputRecords">The collection of FHIR resource packaging inputs to add.</param>
+    /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
+    /// <exception cref="InvalidOperationException">Thrown when there is a library identifier mismatch between CQL and ELM libraries.</exception>
     public PackagingToolkit AddPackagingInputs(IEnumerable<PackagingToolkitSourceRecord> inputRecords)
     {
         var conversions = _conversions.ToBuilder();
@@ -105,6 +116,12 @@ public sealed class PackagingToolkit
         return this;
     }
 
+    /// <summary>
+    /// Converts the added packaging inputs to FHIR resources.
+    /// </summary>
+    /// <param name="canonicalRootUrl">The canonical root URL for the FHIR resources.</param>
+    /// <param name="overrideDate">The date to override in the FHIR resources.</param>
+    /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
     public PackagingToolkit ConvertToFhirResources(Uri? canonicalRootUrl, SysDateTime? overrideDate)
     {
         var builder = _conversions.ToBuilder();
@@ -152,7 +169,7 @@ public sealed class PackagingToolkit
                          var fhirResourcePackaging = builder[versionedLibraryIdentifier];
                          if (fhirResourcePackaging.ResultFhirLibrary is null)
                          {
-                             builder[versionedLibraryIdentifier] = fhirResourcePackaging with { ResultFhirLibrary = o.fhirLibrary, ResultFhirMeasure = o.fhirMeasure};
+                             builder[versionedLibraryIdentifier] = fhirResourcePackaging with { ResultFhirLibrary = o.fhirLibrary, ResultFhirMeasure = o.fhirMeasure };
                              return (true, o);
                          }
 

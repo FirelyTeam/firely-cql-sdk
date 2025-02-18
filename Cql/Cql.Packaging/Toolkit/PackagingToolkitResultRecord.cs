@@ -8,7 +8,7 @@
 
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Packaging;
+namespace Hl7.Cql.Packaging.Toolkit;
 
 /// <summary>
 /// Represents a result record for the <see cref="PackagingToolkit"/>.

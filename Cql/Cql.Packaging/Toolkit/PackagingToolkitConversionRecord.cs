@@ -9,7 +9,7 @@
 using Hl7.Cql.Runtime;
 using CqlLibraryString = Hl7.Cql.CqlToElm.CqlLibraryString;
 
-namespace CqlSdkPrototype.Packaging;
+namespace Hl7.Cql.Packaging.Toolkit;
 
 /// <summary>
 /// Represents a state record by the <see cref="PackagingToolkit"/>

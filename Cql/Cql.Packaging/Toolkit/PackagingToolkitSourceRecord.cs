@@ -9,7 +9,7 @@
 using Hl7.Cql.Runtime;
 using CqlLibraryString = Hl7.Cql.CqlToElm.CqlLibraryString;
 
-namespace CqlSdkPrototype.Packaging;
+namespace Hl7.Cql.Packaging.Toolkit;
 
 /// <summary>
 /// Represents the sources for the <see cref="PackagingToolkit"/>
@@ -25,5 +25,8 @@ public readonly record struct PackagingToolkitSourceRecord(
     byte[] AssemblyBinary
 )
 {
+    /// <summary>
+    /// Gets the library identifier from the CQL library.
+    /// </summary>
     public CqlVersionedLibraryIdentifier LibraryIdentifier => CqlLibrary.LibraryIdentifier;
 }

@@ -8,13 +8,12 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Packaging;
-using System.Text.Json;
 using Hl7.Cql.Runtime.Logging;
-using Hl7.Fhir.Serialization;
 using Hl7.Fhir.Introspection;
+using Hl7.Fhir.Serialization;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace CqlSdkPrototype.Packaging.Internal;
+namespace Hl7.Cql.Packaging.Toolkit.Internal;
 
 internal readonly record struct PackagingToolkitServices(
     ServiceProvider ServiceProvider,

@@ -18,6 +18,7 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
+		<ProjectReference Include="..\Cql.CqlToElm\Cql.CqlToElm.csproj" />
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
 	</ItemGroup>
 

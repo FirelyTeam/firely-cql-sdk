@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Model;
 using Hl7.Cql.Runtime.Logging;

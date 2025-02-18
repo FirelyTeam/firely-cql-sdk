@@ -28,11 +28,76 @@ Hl7.Cql.Packaging.ResourceFileName.Identifier.get -> string!
 Hl7.Cql.Packaging.ResourceFileName.ResourceFileName() -> void
 Hl7.Cql.Packaging.ResourceFileName.Type.get -> string!
 Hl7.Cql.Packaging.ResourceFileName.Version.get -> string?
+Hl7.Cql.Packaging.Toolkit.Extensions.PackagingToolkitExtensions
+Hl7.Cql.Packaging.Toolkit.PackagingToolkit
+Hl7.Cql.Packaging.Toolkit.PackagingToolkit.AddPackagingInputs(System.Collections.Generic.IEnumerable<Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord>! inputRecords) -> Hl7.Cql.Packaging.Toolkit.PackagingToolkit!
+Hl7.Cql.Packaging.Toolkit.PackagingToolkit.Config.get -> Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig!
+Hl7.Cql.Packaging.Toolkit.PackagingToolkit.Conversions.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord>!
+Hl7.Cql.Packaging.Toolkit.PackagingToolkit.ConvertToFhirResources(System.Uri? canonicalRootUrl, System.DateTime? overrideDate) -> Hl7.Cql.Packaging.Toolkit.PackagingToolkit!
+Hl7.Cql.Packaging.Toolkit.PackagingToolkit.PackagingToolkit(Microsoft.Extensions.Logging.ILoggerFactory? loggerFactory = null, Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig? config = null) -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkit.Reconfigure(Hl7.Cql.Abstractions.Mutator<Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig!>! reconfigure) -> Hl7.Cql.Packaging.Toolkit.PackagingToolkit!
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.Deconstruct(out Hl7.Cql.Runtime.ErroredEnumerationContinuation ErroredEnumerationContinuation) -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.ErroredEnumerationContinuation.get -> Hl7.Cql.Runtime.ErroredEnumerationContinuation
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.ErroredEnumerationContinuation.init -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.PackagingToolkitConfig(Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig! original) -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.PackagingToolkitConfig(Hl7.Cql.Runtime.ErroredEnumerationContinuation ErroredEnumerationContinuation = Hl7.Cql.Runtime.ErroredEnumerationContinuation.Throw) -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.Deconstruct(out Hl7.Cql.CqlToElm.CqlLibraryString SourceCqlLibrary, out Hl7.Cql.Elm.Library! SourceElmLibrary, out string! SourceCSharpSourceCode, out byte[]! SourceAssemblyBinary, out Hl7.Fhir.Model.Library? ResultFhirLibrary, out Hl7.Fhir.Model.Measure? ResultFhirMeasure) -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.Equals(Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord other) -> bool
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.PackagingToolkitConversionRecord() -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.PackagingToolkitConversionRecord(Hl7.Cql.CqlToElm.CqlLibraryString SourceCqlLibrary, Hl7.Cql.Elm.Library! SourceElmLibrary, string! SourceCSharpSourceCode, byte[]! SourceAssemblyBinary, Hl7.Fhir.Model.Library? ResultFhirLibrary = null, Hl7.Fhir.Model.Measure? ResultFhirMeasure = null) -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.PackagingToolkitConversionRecord(Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord sourceRecord) -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.ResultFhirLibrary.get -> Hl7.Fhir.Model.Library?
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.ResultFhirLibrary.init -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.ResultFhirMeasure.get -> Hl7.Fhir.Model.Measure?
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.ResultFhirMeasure.init -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.SourceAssemblyBinary.get -> byte[]!
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.SourceAssemblyBinary.init -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.SourceCqlLibrary.get -> Hl7.Cql.CqlToElm.CqlLibraryString
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.SourceCqlLibrary.init -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.SourceCSharpSourceCode.get -> string!
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.SourceCSharpSourceCode.init -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.SourceElmLibrary.get -> Hl7.Cql.Elm.Library!
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.SourceElmLibrary.init -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord.Deconstruct(out Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier LibraryIdentifier, out Hl7.Fhir.Model.Library! FhirLibrary, out Hl7.Fhir.Model.Measure? FhirMeasure) -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord.Equals(Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord other) -> bool
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord.FhirLibrary.get -> Hl7.Fhir.Model.Library!
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord.FhirLibrary.init -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord.FhirMeasure.get -> Hl7.Fhir.Model.Measure?
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord.FhirMeasure.init -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord.GetFhirResources() -> System.Collections.Generic.IReadOnlyCollection<Hl7.Fhir.Model.Resource!>!
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord.LibraryIdentifier.init -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord.PackagingToolkitResultRecord() -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord.PackagingToolkitResultRecord(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier LibraryIdentifier, Hl7.Fhir.Model.Library! FhirLibrary, Hl7.Fhir.Model.Measure? FhirMeasure = null) -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.AssemblyBinary.get -> byte[]!
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.AssemblyBinary.init -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.CqlLibrary.get -> Hl7.Cql.CqlToElm.CqlLibraryString
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.CqlLibrary.init -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.CSharpSourceCode.get -> string!
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.CSharpSourceCode.init -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.Deconstruct(out Hl7.Cql.CqlToElm.CqlLibraryString CqlLibrary, out Hl7.Cql.Elm.Library! ElmLibrary, out string! CSharpSourceCode, out byte[]! AssemblyBinary) -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.ElmLibrary.get -> Hl7.Cql.Elm.Library!
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.ElmLibrary.init -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.Equals(Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord other) -> bool
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.PackagingToolkitSourceRecord() -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.PackagingToolkitSourceRecord(Hl7.Cql.CqlToElm.CqlLibraryString CqlLibrary, Hl7.Cql.Elm.Library! ElmLibrary, string! CSharpSourceCode, byte[]! AssemblyBinary) -> void
 override Hl7.Cql.Packaging.CqlTypeToFhirMapping.Equals(object? obj) -> bool
 override Hl7.Cql.Packaging.CqlTypeToFhirMapping.GetHashCode() -> int
 override Hl7.Cql.Packaging.CqlTypeToFhirMapping.ToString() -> string!
 override Hl7.Cql.Packaging.ResourceFileName.GetHashCode() -> int
 override Hl7.Cql.Packaging.ResourceFileName.ToString() -> string!
+override Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.Equals(object? obj) -> bool
+override Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.GetHashCode() -> int
+override Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.ToString() -> string!
+override Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.GetHashCode() -> int
+override Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord.GetHashCode() -> int
+override Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.GetHashCode() -> int
 static Hl7.Cql.Packaging.CqlTypeToFhirMapping.operator !=(Hl7.Cql.Packaging.CqlTypeToFhirMapping? left, Hl7.Cql.Packaging.CqlTypeToFhirMapping? right) -> bool
 static Hl7.Cql.Packaging.CqlTypeToFhirMapping.operator ==(Hl7.Cql.Packaging.CqlTypeToFhirMapping? left, Hl7.Cql.Packaging.CqlTypeToFhirMapping? right) -> bool
 static Hl7.Cql.Packaging.ResourceFileName.Create(string! type, string! identifier, string? version = null) -> Hl7.Cql.Packaging.ResourceFileName
@@ -40,8 +105,31 @@ static Hl7.Cql.Packaging.ResourceFileName.operator !=(Hl7.Cql.Packaging.Resource
 static Hl7.Cql.Packaging.ResourceFileName.operator ==(Hl7.Cql.Packaging.ResourceFileName left, Hl7.Cql.Packaging.ResourceFileName right) -> bool
 static Hl7.Cql.Packaging.ResourceFileName.Parse(string! s, System.IFormatProvider? provider) -> Hl7.Cql.Packaging.ResourceFileName
 static Hl7.Cql.Packaging.ResourceFileName.TryParse(string? s, System.IFormatProvider? provider, out Hl7.Cql.Packaging.ResourceFileName result) -> bool
+static Hl7.Cql.Packaging.Toolkit.Extensions.PackagingToolkitExtensions.AddPackagingInputsFromCqlAndElmToolkits(this Hl7.Cql.Packaging.Toolkit.PackagingToolkit! packagingToolkit, Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit) -> Hl7.Cql.Packaging.Toolkit.PackagingToolkit!
+static Hl7.Cql.Packaging.Toolkit.Extensions.PackagingToolkitExtensions.GetPackagingResults(this Hl7.Cql.Packaging.Toolkit.PackagingToolkit! packagingToolkit) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord>!
+static Hl7.Cql.Packaging.Toolkit.Extensions.PackagingToolkitExtensions.SaveFhirResources(this Hl7.Cql.Packaging.Toolkit.PackagingToolkit! packagingToolkit, System.IO.DirectoryInfo! directory, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? directoryPreparationStrategy = null) -> Hl7.Cql.Packaging.Toolkit.PackagingToolkit!
+static Hl7.Cql.Packaging.Toolkit.Extensions.PackagingToolkitExtensions.SetExceptionHandlingToIgnore(this Hl7.Cql.Packaging.Toolkit.PackagingToolkit! packagingToolkit, bool stopAfterFirstException = false) -> Hl7.Cql.Packaging.Toolkit.PackagingToolkit!
+static Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.Default.get -> Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig!
+static Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.operator !=(Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig? left, Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig? right) -> bool
+static Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.operator ==(Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig? left, Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig? right) -> bool
+static Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.operator !=(Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord left, Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord right) -> bool
+static Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.operator ==(Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord left, Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord right) -> bool
+static Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord.operator !=(Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord left, Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord right) -> bool
+static Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord.operator ==(Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord left, Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord right) -> bool
+static Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.operator !=(Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord left, Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord right) -> bool
+static Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.operator ==(Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord left, Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord right) -> bool
 virtual Hl7.Cql.Packaging.CqlTypeToFhirMapping.<Clone>$() -> Hl7.Cql.Packaging.CqlTypeToFhirMapping!
 virtual Hl7.Cql.Packaging.CqlTypeToFhirMapping.EqualityContract.get -> System.Type!
 virtual Hl7.Cql.Packaging.CqlTypeToFhirMapping.Equals(Hl7.Cql.Packaging.CqlTypeToFhirMapping? other) -> bool
 virtual Hl7.Cql.Packaging.CqlTypeToFhirMapping.PrintMembers(System.Text.StringBuilder! builder) -> bool
+virtual Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.<Clone>$() -> Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig!
+virtual Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.EqualityContract.get -> System.Type!
+virtual Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.Equals(Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig? other) -> bool
+virtual Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.PrintMembers(System.Text.StringBuilder! builder) -> bool
 ~override Hl7.Cql.Packaging.ResourceFileName.Equals(object obj) -> bool
+~override Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.Equals(object obj) -> bool
+~override Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.ToString() -> string
+~override Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord.Equals(object obj) -> bool
+~override Hl7.Cql.Packaging.Toolkit.PackagingToolkitResultRecord.ToString() -> string
+~override Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.Equals(object obj) -> bool
+~override Hl7.Cql.Packaging.Toolkit.PackagingToolkitSourceRecord.ToString() -> string

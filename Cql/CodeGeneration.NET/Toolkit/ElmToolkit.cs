@@ -6,15 +6,17 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using CqlSdkPrototype.Elm.Internal;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
 
-namespace CqlSdkPrototype.Elm;
+namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 
 /// <summary>
 /// Compiles ELM (Expression Logical Model) into .NET assemblies.

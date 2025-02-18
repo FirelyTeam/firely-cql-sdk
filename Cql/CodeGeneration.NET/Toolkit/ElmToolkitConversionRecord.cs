@@ -6,11 +6,10 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Elm;
+namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 
 /// <summary>
 /// Represents a state record by the <see cref="ElmToolkit"/>

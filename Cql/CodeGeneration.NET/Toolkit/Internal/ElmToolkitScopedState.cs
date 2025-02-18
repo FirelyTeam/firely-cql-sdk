@@ -7,8 +7,9 @@
  */
 
 using Hl7.Cql.Compiler;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace CqlSdkPrototype.Elm.Internal;
+namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 
 internal sealed class ElmToolkitScopedState(IServiceScope scope) : IDisposable
 {

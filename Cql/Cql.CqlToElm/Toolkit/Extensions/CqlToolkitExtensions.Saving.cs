@@ -10,8 +10,19 @@ using Hl7.Cql.Runtime.IO;
 
 namespace Hl7.Cql.CqlToElm.Toolkit.Extensions;
 
+/// <summary>
+/// Provides extension methods for the <see cref="CqlToolkit"/> class.
+/// </summary>
 public static partial class CqlToolkitExtensions
 {
+    /// <summary>
+    /// Saves the ELM files to the specified directory.
+    /// </summary>
+    /// <param name="cqlToolkit">The CQL toolkit instance.</param>
+    /// <param name="directory">The directory to save the ELM files to.</param>
+    /// <param name="writeIndented">if set to <c>true</c> [write indented].</param>
+    /// <param name="directoryPreparationStrategy">The directory preparation strategy.</param>
+    /// <returns>The <see cref="CqlToolkit"/> instance.</returns>
     public static CqlToolkit SaveElmFilesToDirectory(
         this CqlToolkit cqlToolkit,
         DirectoryInfo directory,

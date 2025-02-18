@@ -7,11 +7,22 @@
  */
 
 using Hl7.Cql.Runtime.IO;
+using Microsoft.Extensions.Logging;
 
-namespace CqlSdkPrototype.Elm.Extensions;
+namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 
+/// <summary>
+/// Provides extension methods for saving C# files and assembly binaries to a directory.
+/// </summary>
 public static partial class ElmToolkitExtensions
 {
+    /// <summary>
+    /// Saves the generated C# source files to the specified directory.
+    /// </summary>
+    /// <param name="elmToolkit">The ElmToolkit instance containing the generated C# source files.</param>
+    /// <param name="directory">The directory where the C# source files will be saved.</param>
+    /// <param name="directoryPreparationStrategy">Optional strategy for preparing the directory.</param>
+    /// <returns>The ElmToolkit instance.</returns>
     public static ElmToolkit SaveCSharpFilesToDirectory(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
@@ -31,6 +42,13 @@ public static partial class ElmToolkitExtensions
         return elmToolkit;
     }
 
+    /// <summary>
+    /// Saves the generated assembly binaries and debug symbols to the specified directory.
+    /// </summary>
+    /// <param name="elmToolkit">The ElmToolkit instance containing the generated assembly binaries and debug symbols.</param>
+    /// <param name="directory">The directory where the assembly binaries and debug symbols will be saved.</param>
+    /// <param name="directoryPreparationStrategy">Optional strategy for preparing the directory.</param>
+    /// <returns>The ElmToolkit instance.</returns>
     public static ElmToolkit SaveAssemblyBinariesToDirectory(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,

@@ -6,11 +6,10 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Elm;
+namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 
 /// <summary>
 /// Configuration settings for the Elm to Assembly compiler.
