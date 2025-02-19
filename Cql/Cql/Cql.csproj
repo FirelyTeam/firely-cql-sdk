@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -10,7 +10,6 @@
 		<Description>A platform for evaluating logic in the HL7 CQL language.</Description>
 		<Configurations>Debug;Release</Configurations>
 	</PropertyGroup>
-
 	<ItemGroup>
 		<ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
 		<ProjectReference Include="..\Cql.Abstractions\Cql.Abstractions.csproj" />
@@ -18,6 +17,7 @@
 		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
 		<ProjectReference Include="..\Cql.Conversion\Cql.Conversion.csproj" />
 		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
+		<ProjectReference Include="..\Cql.Invocation\Cql.Invocation.csproj" />
 		<ProjectReference Include="..\Cql.Logging\Cql.Logging.csproj" />
 		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
 		<ProjectReference Include="..\Cql.Operators\Cql.Operators.csproj" />
