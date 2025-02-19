@@ -16,6 +16,7 @@ global using Microsoft.CodeAnalysis;
 global using Microsoft.CodeAnalysis.CSharp;
 global using Microsoft.CodeAnalysis.Emit;
 global using Microsoft.CodeAnalysis.Text;
+global using Microsoft.Extensions.Logging;
 global using BinaryExpression = System.Linq.Expressions.BinaryExpression;
 global using Expression = System.Linq.Expressions.Expression;
 global using UnaryExpression = System.Linq.Expressions.UnaryExpression;

@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Runtime;
-using CqlLibraryString = Hl7.Cql.CqlToElm.CqlLibraryString;
 
 namespace Hl7.Cql.Packaging.Toolkit;
 

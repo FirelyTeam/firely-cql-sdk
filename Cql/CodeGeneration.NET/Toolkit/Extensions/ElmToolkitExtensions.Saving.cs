@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Runtime.IO;
-using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 
