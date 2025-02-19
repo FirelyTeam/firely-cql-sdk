@@ -50,7 +50,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Packaging\Cql.Packaging.csproj" />
 		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
-		<ProjectReference Include="..\CqlSdkPrototype\CqlSdkPrototype.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

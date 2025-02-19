@@ -9,7 +9,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Cql\Cql.Invocation\Cql.Invocation.csproj" />
-    <ProjectReference Include="..\..\Cql\CqlSdkPrototype\CqlSdkPrototype.csproj" />
   </ItemGroup>
 
   <ItemGroup>

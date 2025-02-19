@@ -31,7 +31,6 @@
 		<ProjectReference Include="..\Cql.Operators\Cql.Operators.csproj" />
 		<ProjectReference Include="..\Cql.Packaging\Cql.Packaging.csproj" />
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
-		<ProjectReference Include="..\CqlSdkPrototype\CqlSdkPrototype.csproj" />
 		<ProjectReference Include="..\Elm\Elm.csproj" />
 		<ProjectReference Include="..\Cql.CqlToElm\Cql.CqlToElm.csproj" />
 	</ItemGroup>

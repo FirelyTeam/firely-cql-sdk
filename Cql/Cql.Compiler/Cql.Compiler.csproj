@@ -32,9 +32,8 @@
 		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
-		<InternalsVisibleTo Include="CqlSdkPrototype" Key="$(LibraryPKHash)" />
 	</ItemGroup>
-                  
+
 	<ItemGroup>
 		<Compile Update="CqlOperatorsBinder.*.cs">
 			<DependentUpon>CqlOperatorsBinder.cs</DependentUpon>

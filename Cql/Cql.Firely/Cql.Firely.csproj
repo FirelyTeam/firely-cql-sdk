@@ -24,7 +24,6 @@
 		<InternalsVisibleTo Include="Hl7.Cql.Packaging" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
-		<InternalsVisibleTo Include="CqlSdkPrototype" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 </Project>
