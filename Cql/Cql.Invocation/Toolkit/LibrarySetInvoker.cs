@@ -9,7 +9,7 @@
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Invocation;
+namespace Hl7.Cql.Invocation.Toolkit;
 
 
 /// <summary>
@@ -35,7 +35,7 @@ public sealed class LibrarySetInvoker : IDisposable
                     LibraryInvoker.TryCreateFromType(invocationToolkit, t, out var libraryInvoker);
                     return libraryInvoker;
                 })
-                .ToImmutableDictionary(o => o.LibraryVersionedIdentifier);
+                .ToImmutableDictionary(o => o.LibraryIdentifier);
     }
 
     /// <summary>

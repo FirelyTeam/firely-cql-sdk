@@ -8,10 +8,19 @@
 
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Invocation.Extensions;
+namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 
+/// <summary>
+/// Provides extension methods for <see cref="LibraryInvoker"/>.
+/// </summary>
 public static class LibraryInvokerExtensions
 {
+    /// <summary>
+    /// Enumerates the results of library definitions.
+    /// </summary>
+    /// <param name="libraryInvoker">The library invoker containing the definitions.</param>
+    /// <param name="cqlContext">The CQL context used for invocation.</param>
+    /// <returns>An enumerable of tuples containing the definition invoker and a function to get the result.</returns>
     public static IEnumerable<(DefinitionInvoker definitionInvoker, Func<object?> getResult)> EnumerateLibraryDefinitionsResults(
         this LibraryInvoker libraryInvoker,
         CqlContext cqlContext)
@@ -27,7 +36,7 @@ public static class LibraryInvokerExtensions
                                  var result = definitionInvoker.Invoke(cqlContext);
                                  return result;
                              }
-                         );
+            );
         }
     }
 }

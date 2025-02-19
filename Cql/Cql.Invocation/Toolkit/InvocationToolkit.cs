@@ -6,12 +6,11 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using CqlSdkPrototype.Invocation.Internal;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Packaging;
+using Hl7.Cql.Invocation.Toolkit.Internal;
 
-namespace CqlSdkPrototype.Invocation;
+namespace Hl7.Cql.Invocation.Toolkit;
 
 
 /// <summary>

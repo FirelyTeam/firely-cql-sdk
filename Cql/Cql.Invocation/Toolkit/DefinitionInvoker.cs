@@ -9,7 +9,7 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Invocation;
+namespace Hl7.Cql.Invocation.Toolkit;
 
 
 /// <summary>

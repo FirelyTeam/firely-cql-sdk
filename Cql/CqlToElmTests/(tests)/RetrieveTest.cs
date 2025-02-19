@@ -1,7 +1,7 @@
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Fhir.Model;
-using CqlSdkPrototype.Invocation.Extensions;
 
 namespace Hl7.Cql.CqlToElm.Test
 {

@@ -1,9 +1,9 @@
 ﻿#nullable enable
 using CoreTests.Tuples;
-using CqlSdkPrototype.Invocation;
-using CqlSdkPrototype.Invocation.Extensions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Runtime;
 
 namespace CoreTests;

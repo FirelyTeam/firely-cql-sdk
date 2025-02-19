@@ -9,10 +9,18 @@
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 
-namespace CqlSdkPrototype.Invocation.Extensions;
+namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 
+/// <summary>
+/// Provides extension methods for the <see cref="ElmToolkit"/> class.
+/// </summary>
 public static class ElmToolkitExtensions
 {
+    /// <summary>
+    /// Creates an <see cref="InvocationToolkit"/> from the specified <see cref="ElmToolkit"/>.
+    /// </summary>
+    /// <param name="elmToolkit">The <see cref="ElmToolkit"/> instance to use.</param>
+    /// <returns>An <see cref="InvocationToolkit"/> instance.</returns>
     public static InvocationToolkit CreateInvocationToolkit(
         this ElmToolkit elmToolkit)
     {
@@ -23,6 +31,12 @@ public static class ElmToolkitExtensions
         return invocationToolkit;
     }
 
+    /// <summary>
+    /// Creates a <see cref="LibrarySetInvoker"/> from the specified <see cref="ElmToolkit"/>.
+    /// </summary>
+    /// <param name="elmToolkit">The <see cref="ElmToolkit"/> instance to use.</param>
+    /// <param name="name">The name of the <see cref="LibrarySetInvoker"/>. Default is an empty string.</param>
+    /// <returns>A <see cref="LibrarySetInvoker"/> instance.</returns>
     public static LibrarySetInvoker CreateLibrarySetInvoker(
         this ElmToolkit elmToolkit,
         string name = "") =>

@@ -6,9 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Runtime.Loader;
-
-namespace Hl7.Cql.Packaging;
+namespace Hl7.Cql.Invocation.Toolkit.Internal;
 
 internal static class AssemblyLoadContextExtensions
 {

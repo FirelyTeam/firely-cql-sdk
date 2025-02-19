@@ -9,13 +9,23 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Invocation;
+namespace Hl7.Cql.Invocation.Toolkit;
 
+/// <summary>
+/// Abstract class for invoking a CQL library on an instance.
+/// </summary>
+/// <param name="library">The CQL library instance.</param>
 public abstract class LibraryInvokerOnInstance(ILibrary library) : LibraryInvoker
 {
+    /// <summary>
+    /// Gets the CQL library instance.
+    /// </summary>
     public ILibrary Library { get; } = library;
 
-    public override CqlVersionedLibraryIdentifier LibraryVersionedIdentifier { get; } =
+    /// <summary>
+    /// Gets the versioned identifier of the CQL library.
+    /// </summary>
+    public override CqlVersionedLibraryIdentifier LibraryIdentifier { get; } =
         CqlVersionedLibraryIdentifier.FromNameAndVersion(CqlLibraryIdentifier.Parse(library.Name),
                                                          CqlLibraryVersion.Parse(library.Version));
 }

@@ -1,7 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Text;
-using CqlSdkPrototype.Invocation;
-using CqlSdkPrototype.Invocation.Extensions;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
@@ -9,6 +7,8 @@ using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
 using Hl7.Cql.Runtime;

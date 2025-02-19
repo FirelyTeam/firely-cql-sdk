@@ -7,11 +7,11 @@
  */
 
 using System.CodeDom.Compiler;
-using CqlSdkPrototype.Invocation.Internal;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Invocation.Toolkit.Internal;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Invocation;
+namespace Hl7.Cql.Invocation.Toolkit;
 
 
 /// <summary>
@@ -22,7 +22,7 @@ public abstract class LibraryInvoker
     /// <summary>
     /// Gets the versioned identifier of the CQL library.
     /// </summary>
-    public abstract CqlVersionedLibraryIdentifier LibraryVersionedIdentifier { get; }
+    public abstract CqlVersionedLibraryIdentifier LibraryIdentifier { get; }
 
     /// <summary>
     /// Gets the dictionary of definition invokers for the CQL library.

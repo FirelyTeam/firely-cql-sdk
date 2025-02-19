@@ -1,6 +1,4 @@
 ﻿using CLI.Helpers;
-using CqlSdkPrototype.Invocation;
-using CqlSdkPrototype.Invocation.Extensions;
 using Dumpify;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Fhir;
@@ -9,6 +7,8 @@ using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
 
 namespace CLI
 {

@@ -8,10 +8,19 @@
 
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Invocation.Extensions;
+namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 
+/// <summary>
+/// Provides extension methods for <see cref="LibrarySetInvoker"/>.
+/// </summary>
 public static class LibrarySetInvokerExtensions
 {
+    /// <summary>
+    /// Enumerates the results of all definitions in the library set.
+    /// </summary>
+    /// <param name="librarySetInvoker">The library set invoker.</param>
+    /// <param name="cqlContext">The CQL context.</param>
+    /// <returns>An enumerable of tuples containing the library invoker, definition invoker, and a function to get the result.</returns>
     public static IEnumerable<(LibraryInvoker libraryInvoker, DefinitionInvoker definitionInvoker, Func<object?> getResult)> EnumerateLibrarySetDefinitionsResults(
         this LibrarySetInvoker librarySetInvoker,
         CqlContext cqlContext)
@@ -21,6 +30,13 @@ public static class LibrarySetInvokerExtensions
                 yield return (libraryInvoker, definition, getResult);
     }
 
+    /// <summary>
+    /// Enumerates the results of all definitions in a specific library.
+    /// </summary>
+    /// <param name="librarySetInvoker">The library set invoker.</param>
+    /// <param name="cqlContext">The CQL context.</param>
+    /// <param name="libraryIdentifier">The identifier of the library.</param>
+    /// <returns>An enumerable of tuples containing the library invoker, definition invoker, and a function to get the result.</returns>
     public static IEnumerable<(LibraryInvoker libraryInvoker, DefinitionInvoker definitionInvoker, Func<object?> getResult)> EnumerateLibraryDefinitionsResults(
         this LibrarySetInvoker librarySetInvoker,
         CqlContext cqlContext,
@@ -31,7 +47,14 @@ public static class LibrarySetInvokerExtensions
             yield return (libraryInvoker, definitionInvoker, getResult);
     }
 
-
+    /// <summary>
+    /// Gets the result of a specific definition in a specific library.
+    /// </summary>
+    /// <param name="librarySetInvoker">The library set invoker.</param>
+    /// <param name="cqlContext">The CQL context.</param>
+    /// <param name="libraryIdentifier">The identifier of the library.</param>
+    /// <param name="definitionName">The name of the definition.</param>
+    /// <returns>The result of the definition invocation.</returns>
     public static object? GetLibraryDefinitionResult(
         this LibrarySetInvoker librarySetInvoker,
         CqlContext cqlContext,

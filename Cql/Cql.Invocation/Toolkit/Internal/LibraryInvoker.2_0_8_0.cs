@@ -11,7 +11,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 
-namespace CqlSdkPrototype.Invocation.Internal;
+namespace Hl7.Cql.Invocation.Toolkit.Internal;
 
 internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
 {
@@ -43,12 +43,12 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
                        .SelectWhereNotNull(o => o.DeclarationName is { } declarationName
                                                 && o.Method.GetParameters() is [{ } p0]
                                                 && p0.ParameterType == typeof(CqlContext)
-                                                    ? (Invocation.DefinitionInvoker)new DefinitionInvoker(declarationName, Library, o.Method, o.TagValuesByName, o.ValueSetId)
+                                                    ? (Toolkit.DefinitionInvoker)new DefinitionInvoker(declarationName, Library, o.Method, o.TagValuesByName, o.ValueSetId)
                                                     : null)
                        .ToImmutableDictionary(o => o.DefinitionName);
     }
 
-    public override IReadOnlyDictionary<string, Invocation.DefinitionInvoker> Definitions { get; }
+    public override IReadOnlyDictionary<string, Toolkit.DefinitionInvoker> Definitions { get; }
 
     private static object GetLibraryFromStaticInstanceProperty(Type libraryType)
     {
@@ -86,7 +86,7 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
         ILibrary library,
         MethodInfo methodInfo,
         IReadOnlyDictionary<string, string> tagValuesByName,
-        string? valueSetId) : Invocation.DefinitionInvoker(definitionName, library, methodInfo, tagValuesByName, valueSetId)
+        string? valueSetId) : Toolkit.DefinitionInvoker(definitionName, library, methodInfo, tagValuesByName, valueSetId)
     {
         public override object? Invoke(CqlContext cqlContext)
         {

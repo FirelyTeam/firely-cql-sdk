@@ -6,7 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace CqlSdkPrototype.Invocation.Internal;
+namespace Hl7.Cql.Invocation.Toolkit.Internal;
 
 internal readonly record struct LibrarySetInvokerBuilderServices(
     ILogger<InvocationToolkit> Logger)
