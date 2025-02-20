@@ -33,7 +33,6 @@ namespace Hl7.Cql.CodeGeneration.NET
                             typeof(Comparers.CqlComparers),      // Cql.Comparers
                             typeof(Conversion.IUnitConverter),   // Cql.Conversion
                             typeof(Operators.ICqlOperators),     // Cql.Operators
-                            typeof(Primitives.CqlPrimitiveType), // Cql.Primitives
                             typeof(CqlContext),                  // Cql.Runtime
                             typeof(IValueSetDictionary),         // Cql.ValueSets
                             typeof(Iso8601.DateIso8601),         // Iso8601
