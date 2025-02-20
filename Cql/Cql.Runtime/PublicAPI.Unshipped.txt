@@ -1,4 +1,5 @@
 ﻿#nullable enable
+Hl7.Cql.Logging.LoggingExtensions
 Hl7.Cql.Runtime.BaseTypeResolver
 Hl7.Cql.Runtime.BaseTypeResolver.BaseTypeResolver() -> void
 Hl7.Cql.Runtime.ContextEventArgs
@@ -73,6 +74,7 @@ override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Write(System.T
 override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CanConvert(System.Type! typeToConvert) -> bool
 override Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CreateConverter(System.Type! typeToConvert, System.Text.Json.JsonSerializerOptions! options) -> System.Text.Json.Serialization.JsonConverter!
 readonly Hl7.Cql.Runtime.BaseTypeResolver.Types -> System.Collections.Generic.Dictionary<string!, System.Type!>!
+static Hl7.Cql.Logging.LoggingExtensions.AddMessageLogging(this Hl7.Cql.Runtime.CqlContext! ctx, Microsoft.Extensions.Logging.ILogger! logger) -> Hl7.Cql.Runtime.CqlContext!
 static Hl7.Cql.Runtime.CqlLibraryIdentifier.operator !=(Hl7.Cql.Runtime.CqlLibraryIdentifier left, Hl7.Cql.Runtime.CqlLibraryIdentifier right) -> bool
 static Hl7.Cql.Runtime.CqlLibraryIdentifier.operator ==(Hl7.Cql.Runtime.CqlLibraryIdentifier left, Hl7.Cql.Runtime.CqlLibraryIdentifier right) -> bool
 static Hl7.Cql.Runtime.CqlLibraryIdentifier.Parse(string! s) -> Hl7.Cql.Runtime.CqlLibraryIdentifier

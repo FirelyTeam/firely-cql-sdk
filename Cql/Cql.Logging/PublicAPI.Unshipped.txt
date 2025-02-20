@@ -1,3 +1,0 @@
-﻿#nullable enable
-Hl7.Cql.Logging.LoggingExtensions
-static Hl7.Cql.Logging.LoggingExtensions.AddMessageLogging(this Hl7.Cql.Runtime.CqlContext! ctx, Microsoft.Extensions.Logging.ILogger! logger) -> Hl7.Cql.Runtime.CqlContext!

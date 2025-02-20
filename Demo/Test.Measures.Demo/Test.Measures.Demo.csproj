@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Compile Include="..\..\Cql\CoreTests\LibrarySetsDirs.cs" Link="LibrarySetsDirs.cs" />
-    <Compile Include="..\..\Cql\Cql.Runtime\DirectoryInfoExtensions.cs" Link="DirectoryInfoExtensions.cs" />
     <Compile Include="..\CLI\Helpers\LibraryExtensions.cs" Link="LibraryExtensions.cs" />
   </ItemGroup>
 
@@ -23,6 +22,10 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
+
+	<ItemGroup>
+		<Compile Include="..\..\Cql\Cql.Runtime\Runtime\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
+	</ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\..\Cql\Cql.Firely\Cql.Firely.csproj" />
