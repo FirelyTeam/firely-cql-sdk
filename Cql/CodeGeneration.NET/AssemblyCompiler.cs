@@ -29,13 +29,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                         {                                        // @formatter off
 
                             // Core engine references
-                            typeof(CqlDeclarationAttribute),     // Cql.Abstractions
-                            typeof(Comparers.CqlComparers),      // Cql.Comparers
-                            typeof(Conversion.IUnitConverter),   // Cql.Conversion
-                            typeof(Operators.ICqlOperators),     // Cql.Operators
-                            typeof(CqlContext),                  // Cql.Runtime
-                            typeof(IValueSetDictionary),         // Cql.ValueSets
                             typeof(Iso8601.DateIso8601),         // Iso8601
+                            typeof(CqlDeclarationAttribute),     // Cql.Abstractions
+                            typeof(CqlContext),                  // Cql.Runtime
 
                         }                                        // @formatter on
                         .Select(type => type.Assembly)

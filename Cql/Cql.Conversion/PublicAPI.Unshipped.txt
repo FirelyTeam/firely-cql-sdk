@@ -1,8 +1,0 @@
-﻿#nullable enable
-Hl7.Cql.Conversion.ITypeConverterEntry
-Hl7.Cql.Conversion.ITypeConverterEntry.Convert(object? instance, System.Type! to) -> object?
-Hl7.Cql.Conversion.ITypeConverterEntry.Handles(System.Type! from, System.Type! to) -> bool
-Hl7.Cql.Conversion.TypeConverter
-Hl7.Cql.Conversion.TypeConverter.Convert(object? from, System.Type! to) -> object?
-Hl7.Cql.Conversion.TypeConverter.Convert<T>(object? from) -> T?
-static Hl7.Cql.Conversion.TypeConverter.Create() -> Hl7.Cql.Conversion.TypeConverter!
