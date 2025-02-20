@@ -22,9 +22,7 @@
 
 
 	<ItemGroup>
-		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
         <ProjectReference Include="..\Cql.Comparers\Cql.Comparers.csproj" />
-        <ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
 		
 		<InternalsVisibleTo Include="Hl7.Cql.Fhir" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />

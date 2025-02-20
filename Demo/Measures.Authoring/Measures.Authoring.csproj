@@ -7,7 +7,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\..\Cql\Cql.Abstractions\Cql.Abstractions.csproj" />
-		<ProjectReference Include="..\..\Cql\Cql.Primitives\Cql.Primitives.csproj" />
 		<ProjectReference Include="..\..\Cql\Cql.Runtime\Cql.Runtime.csproj" />
 		<ProjectReference Include="..\CLI\CLI.csproj" />
 		<PackageReference Include="Hl7.Fhir.R4" Version="$(FirelySdkVersion)" />

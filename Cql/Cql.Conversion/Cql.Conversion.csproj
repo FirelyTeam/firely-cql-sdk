@@ -17,10 +17,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<InternalsVisibleTo Include="Hl7.Cql.Comparers" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Operators" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Compiler" Key="$(LibraryPKHash)" />
