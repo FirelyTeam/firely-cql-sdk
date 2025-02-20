@@ -9,7 +9,6 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime;
-using Hl7.Cql.ValueSets;
 using Hl7.Cql.Elm;
 
 namespace Hl7.Cql.CodeGeneration.NET
