@@ -32,7 +32,8 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
     }
 
     private LibraryInvoker_2_0_8_0(
-        ILibrary library) : base(library)
+        LibrarySetInvoker librarySetInvoker,
+        ILibrary library) : base(librarySetInvoker, library)
     {
         var libraryType = library.GetType();
         var libraryMethodInfos = libraryType
@@ -56,12 +57,12 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
     }
 
     public static bool TryCreate(
-        InvocationToolkit builder,
+        LibrarySetInvoker librarySetInvoker,
         Type libraryType,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
         libraryInvoker = null;
-        var logger = builder.LoggerFactory.CreateLogger<LibraryInvoker_2_0_8_0>();
+        var logger = librarySetInvoker.InvocationToolkit.LoggerFactory.CreateLogger<LibraryInvoker_2_0_8_0>();
 
         if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
         {
@@ -71,7 +72,7 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
             return false;
         }
 
-        libraryInvoker = new LibraryInvoker_2_0_8_0(asILibrary);
+        libraryInvoker = new LibraryInvoker_2_0_8_0(librarySetInvoker, asILibrary);
         return true;
     }
 

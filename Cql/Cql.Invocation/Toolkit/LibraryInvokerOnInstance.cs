@@ -14,8 +14,11 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// <summary>
 /// Abstract class for invoking a CQL library on an instance.
 /// </summary>
+/// <param name="librarySetInvoker">The library set invoker that created this instance.</param>
 /// <param name="library">The CQL library instance.</param>
-public abstract class LibraryInvokerOnInstance(ILibrary library) : LibraryInvoker
+public abstract class LibraryInvokerOnInstance(
+    LibrarySetInvoker librarySetInvoker,
+    ILibrary library) : LibraryInvoker(librarySetInvoker)
 {
     /// <summary>
     /// Gets the CQL library instance.

@@ -20,14 +20,14 @@ public static class LibrarySetInvokerExtensions
     /// </summary>
     /// <param name="librarySetInvoker">The library set invoker.</param>
     /// <param name="cqlContext">The CQL context.</param>
-    /// <returns>An enumerable of tuples containing the library invoker, definition invoker, and a function to get the result.</returns>
-    public static IEnumerable<(LibraryInvoker libraryInvoker, DefinitionInvoker definitionInvoker, Func<object?> getResult)> EnumerateLibrarySetDefinitionsResults(
+    /// <returns>An enumeration of tuples containing the library invoker, definition invoker, and the definition result.</returns>
+    public static IEnumerable<(LibraryInvoker libraryInvoker, DefinitionInvoker definition, object? definitionResult)> EnumerateLibrarySetDefinitionsResults(
         this LibrarySetInvoker librarySetInvoker,
         CqlContext cqlContext)
     {
         foreach (var libraryInvoker in librarySetInvoker.LibraryInvokers.Values)
-            foreach (var (definition, getResult) in libraryInvoker.EnumerateLibraryDefinitionsResults(cqlContext))
-                yield return (libraryInvoker, definition, getResult);
+            foreach (var (definition, definitionResult) in libraryInvoker.EnumerateLibraryDefinitionsResults(cqlContext))
+                yield return (libraryInvoker, definition, definitionResult);
     }
 
     /// <summary>
@@ -36,15 +36,15 @@ public static class LibrarySetInvokerExtensions
     /// <param name="librarySetInvoker">The library set invoker.</param>
     /// <param name="cqlContext">The CQL context.</param>
     /// <param name="libraryIdentifier">The identifier of the library.</param>
-    /// <returns>An enumerable of tuples containing the library invoker, definition invoker, and a function to get the result.</returns>
-    public static IEnumerable<(LibraryInvoker libraryInvoker, DefinitionInvoker definitionInvoker, Func<object?> getResult)> EnumerateLibraryDefinitionsResults(
+    /// <returns>An enumeration of tuples containing the library invoker, definition invoker, and a definition result.</returns>
+    public static IEnumerable<(LibraryInvoker libraryInvoker, DefinitionInvoker definitionInvoker, object? definitionResult)> EnumerateLibraryDefinitionsResults(
         this LibrarySetInvoker librarySetInvoker,
         CqlContext cqlContext,
         CqlVersionedLibraryIdentifier libraryIdentifier)
     {
         var libraryInvoker = librarySetInvoker.LibraryInvokers[libraryIdentifier];
-        foreach (var (definitionInvoker, getResult) in libraryInvoker.EnumerateLibraryDefinitionsResults(cqlContext))
-            yield return (libraryInvoker, definitionInvoker, getResult);
+        foreach (var (definitionInvoker, definitionResult) in libraryInvoker.EnumerateLibraryDefinitionsResults(cqlContext))
+            yield return (libraryInvoker, definitionInvoker, definitionResult);
     }
 
     /// <summary>

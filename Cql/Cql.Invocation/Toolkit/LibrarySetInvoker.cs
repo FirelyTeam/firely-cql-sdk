@@ -17,6 +17,11 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// </summary>
 public sealed class LibrarySetInvoker : IDisposable
 {
+    /// <summary>
+    /// Gets the toolkit used to create the library set invoker.
+    /// </summary>
+    public InvocationToolkit InvocationToolkit { get; }
+
     private readonly AssemblyLoadContext _alc;
 
     /// <summary>
@@ -26,13 +31,14 @@ public sealed class LibrarySetInvoker : IDisposable
     /// <param name="alc">The assembly load context.</param>
     internal LibrarySetInvoker(InvocationToolkit invocationToolkit, AssemblyLoadContext alc)
     {
+        InvocationToolkit = invocationToolkit;
         _alc = alc;
         LibraryInvokers =
             _alc.Assemblies
                 .SelectMany(a => a.GetTypes())
                 .SelectWhereNotNull(libraryType =>
                 {
-                    _ = LibraryInvoker.TryCreateFromType(invocationToolkit, libraryType, out var libraryInvoker);
+                    _ = LibraryInvoker.TryCreateFromType(this, libraryType, out var libraryInvoker);
                     return libraryInvoker;
                 })
                 .ToImmutableDictionary(o => o.LibraryIdentifier);

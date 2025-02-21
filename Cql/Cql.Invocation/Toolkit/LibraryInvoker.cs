@@ -19,6 +19,20 @@ namespace Hl7.Cql.Invocation.Toolkit;
 public abstract class LibraryInvoker
 {
     /// <summary>
+    /// Initializes a new instance of the <see cref="LibraryInvoker"/> class.
+    /// </summary>
+    /// <param name="librarySetInvoker">The library set invoker that created this instance.</param>
+    protected LibraryInvoker(LibrarySetInvoker librarySetInvoker)
+    {
+        LibrarySetInvoker = librarySetInvoker;
+    }
+
+    /// <summary>
+    /// Gets the library set invoker that created the <see cref="LibraryInvoker"/>.
+    /// </summary>
+    public LibrarySetInvoker LibrarySetInvoker { get; }
+
+    /// <summary>
     /// Gets the versioned identifier of the CQL library.
     /// </summary>
     public abstract CqlVersionedLibraryIdentifier LibraryIdentifier { get; }
@@ -31,17 +45,17 @@ public abstract class LibraryInvoker
     /// <summary>
     /// Tries to create a <see cref="LibraryInvoker"/> instance from the specified type.
     /// </summary>
-    /// <param name="invocationToolkit">The builder for the library set invoker.</param>
+    /// <param name="librarySetInvoker">The library set invoker that created the <see cref="LibraryInvoker"/>.</param>
     /// <param name="libraryType">The type of the library.</param>
     /// <param name="libraryInvoker">When this method returns, contains the created <see cref="LibraryInvoker"/> instance, if the creation succeeded; otherwise, <see langword="null"/>.</param>
     /// <returns><see langword="true"/> if the creation succeeded; otherwise, <see langword="false"/>.</returns>
     public static bool TryCreateFromType(
-        InvocationToolkit invocationToolkit,
+        LibrarySetInvoker librarySetInvoker,
         Type libraryType,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
         libraryInvoker = null;
-        var logger = invocationToolkit.LoggerFactory.CreateLogger<LibraryInvoker>();
+        var logger = librarySetInvoker.InvocationToolkit.LoggerFactory.CreateLogger<LibraryInvoker>();
 
         if (libraryType.GetCustomAttribute<CqlLibraryAttribute>() is not { })
         {
@@ -68,7 +82,7 @@ public abstract class LibraryInvoker
 
         if (LibraryInvoker_2_0_8_0.SupportsVersion(cqlToolVersion))
         {
-            if (LibraryInvoker_2_0_8_0.TryCreate(invocationToolkit, libraryType, out libraryInvoker))
+            if (LibraryInvoker_2_0_8_0.TryCreate(librarySetInvoker, libraryType, out libraryInvoker))
                 return true;
         }
 
