@@ -25,7 +25,7 @@
 	<Import Project="../Cql/Build/ElmToCSharp.Targets.xml" />
 
 	<ItemGroup>
-		<Compile Include="..\..\Cql\Cql.Abstractions\Infrastructure\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
+		<Compile Include="..\..\Cql\Cql.Runtime\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
 	</ItemGroup>
 
 	<ItemGroup>

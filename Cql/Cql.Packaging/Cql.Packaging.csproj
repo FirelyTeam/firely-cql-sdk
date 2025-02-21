@@ -28,12 +28,5 @@
 		<InternalsVisibleTo Include="Test.Measures.Demo" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
-		<InternalsVisibleTo Include="CqlSdkPrototype" Key="$(LibraryPKHash)" />
-	</ItemGroup>
-
-	<ItemGroup>
-		<Compile Update="CqlPackagingPipelineOptions..*.cs">
-			<DependentUpon>CqlPackagingPipelineOptions..cs</DependentUpon>
-		</Compile>
 	</ItemGroup>
 </Project>

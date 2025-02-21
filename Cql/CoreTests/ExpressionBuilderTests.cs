@@ -1,7 +1,7 @@
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 using Hl7.Fhir.Model;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Runtime.Hosting;
-using CqlSdkPrototype.Elm.Internal;
 
 namespace CoreTests
 {

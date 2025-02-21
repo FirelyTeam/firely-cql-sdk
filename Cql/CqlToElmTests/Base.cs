@@ -3,13 +3,12 @@ using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
-using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Elm;
-using CqlSdkPrototype.Infrastructure;
 using Hl7.Cql.Model;
-using CqlSdkPrototype.Elm.Extensions;
-using CqlSdkPrototype.Invocation;
-using CqlSdkPrototype.Invocation.Extensions;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
+using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -59,7 +58,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     .CreateLibrarySetInvoker();
 
             var result = librarySetInvoker
-                .GetLibraryDefinitionResult(ctx!, CqlVersionedLibraryIdentifier.FromVersionedIdentifier(library.identifier), expressionName);
+                .GetLibraryDefinitionResult(ctx!, library.identifier.ToCqlVersionedLibraryIdentifier(), expressionName);
             return result;
         }
 

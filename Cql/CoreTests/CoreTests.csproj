@@ -33,10 +33,10 @@
 		<ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
 		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
 		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
+		<ProjectReference Include="..\Cql.Invocation\Cql.Invocation.csproj" />
 		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
 		<ProjectReference Include="..\Cql.Packaging\Cql.Packaging.csproj" />
 		<ProjectReference Include="..\Cql.Runtime\Cql.Runtime.csproj" />
-		<ProjectReference Include="..\CqlSdkPrototype\CqlSdkPrototype.csproj" />
 		<ProjectReference Include="..\Elm\Elm.csproj" />
 		<ProjectReference Include="..\Iso8601\Iso8601.csproj" />
 	</ItemGroup>

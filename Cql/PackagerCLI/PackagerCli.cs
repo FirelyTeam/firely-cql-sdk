@@ -6,14 +6,14 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using CqlSdkPrototype.Cql;
-using CqlSdkPrototype.Cql.Extensions;
-using CqlSdkPrototype.Elm;
-using CqlSdkPrototype.Elm.Extensions;
-using CqlSdkPrototype.Infrastructure;
-using CqlSdkPrototype.Packaging;
-using CqlSdkPrototype.Packaging.Extensions;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
+using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Packaging;
+using Hl7.Cql.Packaging.Toolkit;
+using Hl7.Cql.Packaging.Toolkit.Extensions;
+using Hl7.Cql.Runtime.IO;
 
 namespace Hl7.Cql.Packager;
 

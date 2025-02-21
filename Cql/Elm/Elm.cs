@@ -5,18 +5,13 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
-#pragma warning disable IDE1006 // Naming violation suppressed.
 
 using Hl7.Cql.Abstractions.Exceptions;
+using Hl7.Cql.Runtime;
 
 // ReSharper disable InconsistentNaming
 
 namespace Hl7.Cql.Elm;
-
-file static class StringExtensions
-{
-    public static string? NullIfEmpty(this string? text) => string.IsNullOrEmpty(text) ? null : text;
-}
 
 #region GetVersionedIdentifier
 
@@ -38,6 +33,17 @@ internal static class IGetVersionedIdentifierExtensions
             (_, { } error) when throwError => throw error,
             _                              => null
         };
+
+    public static CqlVersionedLibraryIdentifier ToCqlVersionedLibraryIdentifier(this VersionedIdentifier identifier)
+    {
+        // We have to check for nulls because the generated ELM code does not emit nullability annotations.
+        ArgumentNullException.ThrowIfNull(identifier);
+        ArgumentNullException.ThrowIfNull(identifier.id);
+
+        var cqlLibraryIdentifier = CqlLibraryIdentifier.Parse(identifier.id);
+        CqlLibraryVersion? cqlLibraryVersion = identifier.version is null ? null : CqlLibraryVersion.Parse(identifier.version);
+        return CqlVersionedLibraryIdentifier.FromNameAndVersion(cqlLibraryIdentifier, cqlLibraryVersion);
+    }
 }
 
 /// <summary>

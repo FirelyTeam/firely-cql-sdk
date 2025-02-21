@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <Compile Include="..\..\Cql\CoreTests\LibrarySetsDirs.cs" Link="LibrarySetsDirs.cs" />
-    <Compile Include="..\..\Cql\Cql.Abstractions\Infrastructure\DirectoryInfoExtensions.cs" Link="DirectoryInfoExtensions.cs" />
+    <Compile Include="..\..\Cql\Cql.Runtime\DirectoryInfoExtensions.cs" Link="DirectoryInfoExtensions.cs" />
     <Compile Include="..\CLI\Helpers\LibraryExtensions.cs" Link="LibraryExtensions.cs" />
   </ItemGroup>
 
@@ -27,7 +27,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Cql\Cql.Firely\Cql.Firely.csproj" />
     <ProjectReference Include="..\..\Cql\Cql.Packaging\Cql.Packaging.csproj" />
-    <ProjectReference Include="..\..\Cql\CqlSdkPrototype\CqlSdkPrototype.csproj" />
     <ProjectReference Include="..\..\Cql\Cql\Cql.csproj" />
     <ProjectReference Include="..\Measures.Demo\Measures.Demo.csproj" />
   </ItemGroup>

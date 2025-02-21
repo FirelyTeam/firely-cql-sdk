@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<Import Project="..\..\cql-sdk.props" />
+
+	<PropertyGroup>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<AssemblyName>Hl7.Cql.Invocation</AssemblyName>
+		<RootNamespace>Hl7.Cql.Invocation</RootNamespace>
+		<Product>CQL Library Invocation</Product>
+		<Description>Support package for Hl7.Cql. Contains functionality to invoke CQL from libraries.</Description>
+		<Configurations>Debug;Release</Configurations>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+	</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<TreatWarningsAsErrors>True</TreatWarningsAsErrors>
+	</PropertyGroup>
+
+	<ItemGroup>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\CodeGeneration.NET\CodeGeneration.NET.csproj" />
+		<ProjectReference Include="..\Cql.CqlToElm\Cql.CqlToElm.csproj" />
+		<ProjectReference Include="..\Cql.Packaging\Cql.Packaging.csproj" />
+	</ItemGroup>
+
+</Project>
