@@ -26,7 +26,7 @@ public sealed class ElmToolkit
     /// Initializes a new instance of the <see cref="ElmToolkit"/> class.
     /// </summary>
     /// <param name="loggerFactory">The logger factory to use for logging.</param>
-    /// <param name="config">The configuration for the compiler.</param>
+    /// <param name="config">The configuration for the toolkit.</param>
     public ElmToolkit(
         ILoggerFactory? loggerFactory = null,
         ElmToolkitConfig? config = null)
@@ -73,7 +73,7 @@ public sealed class ElmToolkit
     }
 
     /// <summary>
-    /// Reconfigures the compiler with the specified configuration.
+    /// Reconfigures the toolkit with new configuration settings.
     /// </summary>
     /// <param name="reconfigure">A function that takes the current configuration and returns a new configuration.</param>
     public ElmToolkit Reconfigure(

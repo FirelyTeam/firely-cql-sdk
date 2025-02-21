@@ -13,8 +13,45 @@ using Hl7.Cql.Runtime;
 namespace Hl7.Cql.CqlToElm.Toolkit;
 
 /// <summary>
-/// The settings used to configure the CQL to ELM processor.
+/// Configuration settings for the <see cref="CqlToolkit"/>.
 /// </summary>
+/// <param name="ErroredEnumerationContinuation">The exception handling policy to use while processing a batch of items.</param>
+/// <param name="Models">The model information to use when translating CQL to ELM.</param>
+/// <param name="ModelInfos">The model information to use when translating CQL to ELM.</param>
+/// <param name="AmbiguousTypeBehavior">
+/// <para>
+/// Sets the behavior when two models have the same type name.  In this situation, one of three behaviors is possible.
+/// Note that in the event that three or more matching types are available, the behavior will always be to issue an error.
+/// </para>
+/// <para>
+/// The default behavior is <see cref="AmbiguousTypeBehavior.Error"/>.
+/// </para>
+/// </param>
+/// When <see langword="true"/>, lists of size 1 will automatically be converted to scalar values as necessary.
+/// When <see langword="false"/>, an error will occur; authors will be required to access the single list value explicitly.
+/// The default value is <see langword="false"/>.
+/// <param name="EnableListDemotion">
+/// When <see langword="true"/>, lists of size 1 will automatically be created as necessary from scalar values.
+/// When <see langword="false"/>, an error will occur; authors will be required to create lists explicitly.
+/// The default value is <see langword="false"/>.
+/// </param>
+/// <param name="EnableListPromotion">
+/// When <see langword="true"/>, lists of size 1 will automatically be created as necessary from scalar values.
+/// When <see langword="false"/>, an error will occur; authors will be required to create lists explicitly.
+/// The default value is <see langword="false"/>.
+/// </param>
+/// <param name="EnableIntervalPromotion">
+/// When <see langword="true"/>, point intervals will automatically be created as necessary from scalar values.
+/// When <see langword="false"/>, an error will occur; authors will be required to create point intervals explicitly.
+/// The default value is <see langword="false"/>.
+/// </param>
+/// <param name="EnableIntervalDemotion">
+/// When <see langword="true"/>, point intervals will be automatically demoted to scalar values as necessary.
+/// When <see langword="false"/>, an error will occur; authors will be required to convert intervals to scalar values explicitly.
+/// The default value is <see langword="false"/>.
+/// </param>
+/// <param name="AllowNullIntervals">
+/// </param>
 public sealed record CqlToolkitConfig(
     ErroredEnumerationContinuation ErroredEnumerationContinuation = default,
     ImmutableHashSet<CqlModel>? Models = null,

@@ -40,8 +40,9 @@ Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig
 Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.Deconstruct(out Hl7.Cql.Runtime.ErroredEnumerationContinuation ErroredEnumerationContinuation) -> void
 Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.ErroredEnumerationContinuation.get -> Hl7.Cql.Runtime.ErroredEnumerationContinuation
 Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.ErroredEnumerationContinuation.init -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.PackagingToolkitConfig() -> void
 Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.PackagingToolkitConfig(Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig! original) -> void
-Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.PackagingToolkitConfig(Hl7.Cql.Runtime.ErroredEnumerationContinuation ErroredEnumerationContinuation = Hl7.Cql.Runtime.ErroredEnumerationContinuation.Throw) -> void
+Hl7.Cql.Packaging.Toolkit.PackagingToolkitConfig.PackagingToolkitConfig(Hl7.Cql.Runtime.ErroredEnumerationContinuation ErroredEnumerationContinuation) -> void
 Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord
 Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.Deconstruct(out Hl7.Cql.CqlToElm.CqlLibraryString SourceCqlLibrary, out Hl7.Cql.Elm.Library! SourceElmLibrary, out string! SourceCSharpSourceCode, out byte[]! SourceAssemblyBinary, out Hl7.Fhir.Model.Library? ResultFhirLibrary, out Hl7.Fhir.Model.Measure? ResultFhirMeasure) -> void
 Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord.Equals(Hl7.Cql.Packaging.Toolkit.PackagingToolkitConversionRecord other) -> bool

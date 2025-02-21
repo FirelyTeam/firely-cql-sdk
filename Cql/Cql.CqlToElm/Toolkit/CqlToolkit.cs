@@ -22,7 +22,7 @@ public sealed class CqlToolkit
     /// Initializes a new instance of the <see cref="CqlToolkit"/> class.
     /// </summary>
     /// <param name="loggerFactory">The logger factory to use for logging.</param>
-    /// <param name="config">The configuration settings for the translator.</param>
+    /// <param name="config">The configuration settings for the toolkit.</param>
     public CqlToolkit(
         ILoggerFactory? loggerFactory = null,
         CqlToolkitConfig? config = null)
@@ -70,7 +70,7 @@ public sealed class CqlToolkit
     }
 
     /// <summary>
-    /// Reconfigures the translator with new configuration settings.
+    /// Reconfigures the toolkit with new configuration settings.
     /// </summary>
     /// <param name="reconfigure">A function that takes the current configuration and returns a new configuration.</param>
     public CqlToolkit Reconfigure(

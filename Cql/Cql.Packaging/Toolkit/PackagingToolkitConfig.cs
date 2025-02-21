@@ -10,19 +10,22 @@ using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Packaging.Toolkit;
 
-#pragma warning disable RS0027
 /// <summary>
-/// Represents the configuration settings for the packaging toolkit.
+/// Configuration settings for the <see cref="PackagingToolkit"/>.
 /// </summary>
-/// <param name="ErroredEnumerationContinuation">The continuation setting for errored enumerations.</param>
+/// <param name="ErroredEnumerationContinuation">The exception handling policy to use while processing a batch of items.</param>
 public record PackagingToolkitConfig(
-#pragma warning restore RS0027
-    ErroredEnumerationContinuation ErroredEnumerationContinuation = default)
+    ErroredEnumerationContinuation ErroredEnumerationContinuation)
 {
+    /// <summary>
+    /// Creates a new instance of the <see cref="PackagingToolkitConfig"/> class.
+    /// </summary>
+    public PackagingToolkitConfig() : this(ErroredEnumerationContinuation.Throw) { }
+
     /// <summary>
     /// Gets the default configuration settings.
     /// </summary>
-    public static PackagingToolkitConfig Default { get; } = new PackagingToolkitConfig();
+    public static PackagingToolkitConfig Default { get; } = new();
 
     /// <summary>
     /// Gets the continuation setting for errored enumerations.

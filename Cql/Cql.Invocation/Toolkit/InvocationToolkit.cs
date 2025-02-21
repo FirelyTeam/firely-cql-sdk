@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Invocation.Toolkit.Internal;
@@ -22,11 +23,15 @@ public sealed class InvocationToolkit
     /// Initializes a new instance of the <see cref="InvocationToolkit"/> class.
     /// </summary>
     /// <param name="loggerFactory">Optional logger factory for logging purposes.</param>
+    /// <param name="config">The configuration for the toolkit.</param>
     public InvocationToolkit(
-        ILoggerFactory? loggerFactory = null)
+        ILoggerFactory? loggerFactory = null,
+        InvocationToolkitConfig? config = null)
     {
+        config ??= InvocationToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
+        Config = config;
         _assemblyBinaries = AssemblyBinaryHashSet.Empty;
         _services = LibrarySetInvokerBuilderServices.Create(loggerFactory);
     }
@@ -37,6 +42,11 @@ public sealed class InvocationToolkit
     internal ILoggerFactory LoggerFactory { get; }
 
     /// <summary>
+    /// Gets the configuration.
+    /// </summary>
+    public InvocationToolkitConfig Config { get; private set; }
+
+    /// <summary>
     /// Gets the set of assembly binaries.
     /// </summary>
     public AssemblyBinaryReadOnlyHashSet AssemblyBinaries => _assemblyBinaries;
@@ -45,14 +55,26 @@ public sealed class InvocationToolkit
     private AssemblyBinaryHashSet _assemblyBinaries;
 
     /// <summary>
+    /// Reconfigures the toolkit with new configuration settings.
+    /// </summary>
+    /// <param name="reconfigure">A function that takes the current configuration and returns a new configuration.</param>
+    /// <returns>The updated <see cref="InvocationToolkit"/> instance.</returns>
+    public InvocationToolkit Reconfigure(
+        Mutator<InvocationToolkitConfig> reconfigure)
+    {
+        var config = reconfigure(Config);
+
+        Config = config;
+        return this;
+    }
+
+    /// <summary>
     /// Sets the assembly binaries.
     /// </summary>
     /// <param name="assemblyBinaries">The assembly binaries to set.</param>
     private void ReplaceAssemblyBinaries(
-        AssemblyBinaryHashSet assemblyBinaries)
-    {
+        AssemblyBinaryHashSet assemblyBinaries) =>
         _assemblyBinaries = assemblyBinaries;
-    }
 
     /// <summary>
     /// Adds assembly binaries to the current set.

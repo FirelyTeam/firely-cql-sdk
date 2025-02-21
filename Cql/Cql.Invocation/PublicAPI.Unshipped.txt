@@ -17,8 +17,17 @@ Hl7.Cql.Invocation.Toolkit.Extensions.LibrarySetInvokerExtensions
 Hl7.Cql.Invocation.Toolkit.InvocationToolkit
 Hl7.Cql.Invocation.Toolkit.InvocationToolkit.AddAssemblyBinaries(System.Collections.Generic.IEnumerable<Hl7.Cql.CodeGeneration.NET.AssemblyBinary!>! assemblyBinary) -> Hl7.Cql.Invocation.Toolkit.InvocationToolkit!
 Hl7.Cql.Invocation.Toolkit.InvocationToolkit.AssemblyBinaries.get -> System.Collections.Generic.IReadOnlySet<Hl7.Cql.CodeGeneration.NET.AssemblyBinary!>!
+Hl7.Cql.Invocation.Toolkit.InvocationToolkit.Config.get -> Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig!
 Hl7.Cql.Invocation.Toolkit.InvocationToolkit.CreateLibrarySetInvoker(string! name = "") -> Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker!
-Hl7.Cql.Invocation.Toolkit.InvocationToolkit.InvocationToolkit(Microsoft.Extensions.Logging.ILoggerFactory? loggerFactory = null) -> void
+Hl7.Cql.Invocation.Toolkit.InvocationToolkit.InvocationToolkit(Microsoft.Extensions.Logging.ILoggerFactory? loggerFactory = null, Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig? config = null) -> void
+Hl7.Cql.Invocation.Toolkit.InvocationToolkit.Reconfigure(Hl7.Cql.Abstractions.Mutator<Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig!>! reconfigure) -> Hl7.Cql.Invocation.Toolkit.InvocationToolkit!
+Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig
+Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.<Clone>$() -> Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig!
+Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.Deconstruct(out Hl7.Cql.Runtime.ErroredEnumerationContinuation ErroredEnumerationContinuation) -> void
+Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.Equals(Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig? other) -> bool
+Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.ErroredEnumerationContinuation.get -> Hl7.Cql.Runtime.ErroredEnumerationContinuation
+Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.ErroredEnumerationContinuation.init -> void
+Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.InvocationToolkitConfig(Hl7.Cql.Runtime.ErroredEnumerationContinuation ErroredEnumerationContinuation = Hl7.Cql.Runtime.ErroredEnumerationContinuation.Throw) -> void
 Hl7.Cql.Invocation.Toolkit.LibraryInvoker
 Hl7.Cql.Invocation.Toolkit.LibraryInvoker.LibraryInvoker() -> void
 Hl7.Cql.Invocation.Toolkit.LibraryInvokerOnInstance
@@ -27,6 +36,9 @@ Hl7.Cql.Invocation.Toolkit.LibraryInvokerOnInstance.LibraryInvokerOnInstance(Hl7
 Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker
 Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.Dispose() -> void
 Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.LibraryInvokers.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.Invocation.Toolkit.LibraryInvoker!>!
+override Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.Equals(object? obj) -> bool
+override Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.GetHashCode() -> int
+override Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.ToString() -> string!
 override Hl7.Cql.Invocation.Toolkit.LibraryInvokerOnInstance.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Invocation.Toolkit.Extensions.CqlToolkitExtensions.CreateLibrarySetInvoker(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, Hl7.Cql.Abstractions.Mutator<Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig!>? reconfigureElmToolkitConfig = null, string! name = "") -> Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker!
 static Hl7.Cql.Invocation.Toolkit.Extensions.ElmToolkitExtensions.CreateInvocationToolkit(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit) -> Hl7.Cql.Invocation.Toolkit.InvocationToolkit!
@@ -36,4 +48,7 @@ static Hl7.Cql.Invocation.Toolkit.Extensions.LibraryInvokerExtensions.EnumerateL
 static Hl7.Cql.Invocation.Toolkit.Extensions.LibrarySetInvokerExtensions.EnumerateLibraryDefinitionsResults(this Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker! librarySetInvoker, Hl7.Cql.Runtime.CqlContext! cqlContext, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryIdentifier) -> System.Collections.Generic.IEnumerable<(Hl7.Cql.Invocation.Toolkit.LibraryInvoker! libraryInvoker, Hl7.Cql.Invocation.Toolkit.DefinitionInvoker! definitionInvoker, System.Func<object?>! getResult)>!
 static Hl7.Cql.Invocation.Toolkit.Extensions.LibrarySetInvokerExtensions.EnumerateLibrarySetDefinitionsResults(this Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker! librarySetInvoker, Hl7.Cql.Runtime.CqlContext! cqlContext) -> System.Collections.Generic.IEnumerable<(Hl7.Cql.Invocation.Toolkit.LibraryInvoker! libraryInvoker, Hl7.Cql.Invocation.Toolkit.DefinitionInvoker! definitionInvoker, System.Func<object?>! getResult)>!
 static Hl7.Cql.Invocation.Toolkit.Extensions.LibrarySetInvokerExtensions.GetLibraryDefinitionResult(this Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker! librarySetInvoker, Hl7.Cql.Runtime.CqlContext! cqlContext, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier libraryIdentifier, string! definitionName) -> object?
+static Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.Default.get -> Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig!
+static Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.operator !=(Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig? left, Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig? right) -> bool
+static Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.operator ==(Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig? left, Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig? right) -> bool
 static Hl7.Cql.Invocation.Toolkit.LibraryInvoker.TryCreateFromType(Hl7.Cql.Invocation.Toolkit.InvocationToolkit! invocationToolkit, System.Type! libraryType, out Hl7.Cql.Invocation.Toolkit.LibraryInvoker? libraryInvoker) -> bool

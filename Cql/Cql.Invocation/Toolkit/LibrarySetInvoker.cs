@@ -30,9 +30,9 @@ public sealed class LibrarySetInvoker : IDisposable
         LibraryInvokers =
             _alc.Assemblies
                 .SelectMany(a => a.GetTypes())
-                .SelectWhereNotNull(t =>
+                .SelectWhereNotNull(libraryType =>
                 {
-                    LibraryInvoker.TryCreateFromType(invocationToolkit, t, out var libraryInvoker);
+                    _ = LibraryInvoker.TryCreateFromType(invocationToolkit, libraryType, out var libraryInvoker);
                     return libraryInvoker;
                 })
                 .ToImmutableDictionary(o => o.LibraryIdentifier);

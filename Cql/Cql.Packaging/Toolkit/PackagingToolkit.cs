@@ -55,7 +55,7 @@ public sealed class PackagingToolkit
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
     /// <summary>
-    /// Gets the configuration settings for the resource packager.
+    /// Gets the configuration settings for the toolkit.
     /// </summary>
     public PackagingToolkitConfig Config { get; private set; }
 
@@ -65,9 +65,9 @@ public sealed class PackagingToolkit
     public PackagingToolkitConversionsReadOnlyDictionary Conversions => _conversions;
 
     /// <summary>
-    /// Reconfigures the packager with the specified configuration.
+    /// Reconfigures the toolkit with new configuration settings.
     /// </summary>
-    /// <param name="reconfigure">The new configuration for the packager.</param>
+    /// <param name="reconfigure">A function that takes the current configuration and returns a new configuration.</param>
     /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
     public PackagingToolkit Reconfigure(
         Mutator<PackagingToolkitConfig> reconfigure)
