@@ -1,4 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
+
 <Project>
 
 	<!-- Download MVN Dependencies -->
@@ -42,10 +43,10 @@
 			<Output TaskParameter="ConsoleOutput" ItemName="OutputOfExec" />
 		</Exec>
 		<WriteLinesToFile
-            File="$(MvnBuildLog)"
-            Lines="@(OutputOfExec)"
-            Overwrite="true"
-            Encoding="Unicode"/>
+			File="$(MvnBuildLog)"
+			Lines="@(OutputOfExec)"
+			Overwrite="true"
+			Encoding="Unicode" />
 	</Target>
 
 	<ItemGroup>
@@ -60,6 +61,5 @@
 		<Exec Command="mvn clean -f $(PomXmlPath)" />
 		<Delete Files="@(JarDependencies)" />
 	</Target>
-
 
 </Project>

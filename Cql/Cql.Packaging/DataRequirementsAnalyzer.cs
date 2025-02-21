@@ -8,7 +8,6 @@
 
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Compiler;
-using Elm = Hl7.Cql.Elm;
 using Hl7.Cql.Model;
 using Hl7.Fhir.Model;
 
@@ -23,7 +22,7 @@ namespace Hl7.Cql.Packaging;
 /// Resources used by the retrieves. There's much more to it, as can be glanced
 /// from the public Java version here: https://github.com/cqframework/clinical_quality_language/blob/master/Src/java/elm-fhir/src/main/java/org/cqframework/cql/elm/requirements/fhir/DataRequirementsProcessor.java
 /// </remarks>
-internal class DataRequirementsAnalyzer(LibrarySet librarySet, Elm.Library focusLibrary)
+internal class DataRequirementsAnalyzer(ElmLibrarySet librarySet, Elm.Library focusLibrary)
 {
     /// <summary>
     /// Visits the ELM in the LibrarySet and extracts the DataRequirements from it.
@@ -113,7 +112,7 @@ internal class DataRequirementsAnalyzer(LibrarySet librarySet, Elm.Library focus
     //   private static string ToReference(Elm.CodeSystemDef def) => def.id + (def.version is { } v ? $"|{v}" : null);
 
 
-    private class CodeFilterComponentBuilder(LibrarySet librarySet, Elm.Library contextLibrary)
+    private class CodeFilterComponentBuilder(ElmLibrarySet librarySet, Elm.Library contextLibrary)
     {
         public DataRequirement.CodeFilterComponent ToCodeFilterComponent(
             string property,

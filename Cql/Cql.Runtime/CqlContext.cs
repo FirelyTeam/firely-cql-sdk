@@ -7,8 +7,6 @@
  */
 
 using Hl7.Cql.Operators;
-using System;
-using System.Collections.Generic;
 
 namespace Hl7.Cql.Runtime
 {

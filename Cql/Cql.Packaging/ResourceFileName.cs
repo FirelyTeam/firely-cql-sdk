@@ -1,8 +1,3 @@
-using System;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Runtime.CompilerServices;
-
 namespace Hl7.Cql.Packaging;
 
 /// <summary>

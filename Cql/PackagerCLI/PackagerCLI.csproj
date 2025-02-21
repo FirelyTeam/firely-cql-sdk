@@ -25,6 +25,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="bin\Debug\net8.0\build.log" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<None Include="$(OutputPath)\build.log" Link="build.log" />
 	</ItemGroup>
 
@@ -45,7 +49,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Packaging\Cql.Packaging.csproj" />
-		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

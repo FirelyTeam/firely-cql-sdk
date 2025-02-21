@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Hl7.Cql.Elm
+﻿namespace Hl7.Cql.Elm
 {
     partial class VersionedIdentifier : IComparable<VersionedIdentifier>, IEquatable<VersionedIdentifier>
     {
@@ -49,5 +47,11 @@ namespace Hl7.Cql.Elm
         /// <inheritdoc/>
         public override int GetHashCode() => HashCode.Combine(id, version);
 
+        /// <nodoc/>
+        public void Deconstruct(out string id, out string? version)
+        {
+            id = this.id;
+            version = this.version is {Length:>0} v ? v : null;
+        }
     }
 }

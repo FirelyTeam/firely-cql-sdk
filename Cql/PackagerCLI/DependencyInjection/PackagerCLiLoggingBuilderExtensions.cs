@@ -6,13 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Diagnostics;
-using System.Globalization;
-using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Packager.Logging;
-using Hl7.Cql.Packaging;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
 using Serilog;
 using Serilog.Events;
 
@@ -28,18 +22,17 @@ internal static class PackagerCLiLoggingBuilderExtensions
     {
         logging.ClearProviders();
 
-        bool enableDebugLogging = Debugger.IsAttached;
-        enableDebugLogging = enableDebugLogging || configuration.GetCommandLineSwitchValue<bool>(CqlToResourcePackagingOptions.ArgNameLogDebugEnabled);
+         // If we debugging, keep the existing console logger
+         bool enableDebugLogging = false;//Debugger.IsAttached;
+        enableDebugLogging = enableDebugLogging || configuration.GetCommandLineSwitchValue<bool>("--log-debug");
         var minLogLevel = enableDebugLogging ? LogLevel.Trace : LogLevel.Information;
 
-        bool shouldClearLog = !configuration.GetCommandLineSwitchValue<bool>(CqlToResourcePackagingOptions.ArgNameLogDontClear);
+        if (enableDebugLogging) logging.AddDebug();
+
+        bool shouldClearLog = !configuration.GetCommandLineSwitchValue<bool>("--log-dont-clear");
 
         logging.AddFilter(level => level >= minLogLevel);
-
-        logging.AddCleanConsole(opt =>
-        {
-            // opt.NoColor = true;
-        });
+        logging.AddProvider(new ColorConsoleLoggerProvider());
 
         var logFile = Path.Combine(".", "build.log");
 
@@ -80,6 +73,6 @@ internal static class PackagerCLiLoggingBuilderExtensions
             /* 6 */
             LogLevel.None => /* n/a */ null,
             // @formatter: on
-            _ => throw new UnsupportedSwitchCaseError(logLevel, typeof(LogLevel).FullName).ToException(),
+            _ => throw new SwitchExpressionException("Invalid LogLevel."),
         };
 }

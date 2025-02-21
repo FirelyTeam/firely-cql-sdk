@@ -3,6 +3,4 @@
 // Project-level suppressions either have no target or are given
 // a specific target and scoped to a namespace, type, member, etc.
 
-using System.Diagnostics.CodeAnalysis;
-
 [assembly: SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Too many bogus errors")]

@@ -5,11 +5,9 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
-using System.Collections.Generic;
-using System.Linq.Expressions;
+
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
-using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Compiler;
 
@@ -55,15 +53,15 @@ internal partial class LibraryExpressionBuilderContext
             // This is a fix for QICore-based CQL, where the functions only differ by profiles on the same resource.
             // We should remove this when the compiler is fixed.
             // See https://github.com/FirelyTeam/firely-cql-sdk/issues/438.
-            _logger.LogInformation("Preprocessing library '{library}' - AmbiguousOverloadCorrector", LibraryVersionedIdentifier);
+            _logger.LogDebug("Preprocessing library '{library}' - AmbiguousOverloadCorrector", LibraryVersionedIdentifier);
             AmbiguousOverloadCorrector.Fix(Library);
 
-            _logger.LogInformation("Preprocessing library '{library}' - ElmPreprocessor", LibraryVersionedIdentifier);
+            _logger.LogDebug("Preprocessing library '{library}' - ElmPreprocessor", LibraryVersionedIdentifier);
             var ls = LibrarySetContext?.LibrarySet ?? new LibrarySet(LibraryVersionedIdentifier, Library);
             var processor = new ElmPreprocessor(ls);
             processor.Preprocess(Library);
 
-            _logger.LogInformation("Building expressions for '{library}'", LibraryVersionedIdentifier);
+            _logger.LogDebug("Building expressions for '{library}'", LibraryVersionedIdentifier);
 
             if (Library.includes is { Length: > 0 } includeDefs)
             {

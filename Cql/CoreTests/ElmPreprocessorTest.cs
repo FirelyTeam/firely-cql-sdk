@@ -1,13 +1,5 @@
-﻿using FluentAssertions;
-using Hl7.Cql.Compiler;
+﻿using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CoreTests
 {

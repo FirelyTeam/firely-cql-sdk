@@ -6,9 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Operators;
 

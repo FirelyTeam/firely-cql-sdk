@@ -1,21 +1,14 @@
+using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 using Hl7.Fhir.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.IO;
-using System.Linq;
 using Hl7.Cql.Compiler;
-using Microsoft.Extensions.DependencyInjection;
+using Hl7.Cql.Runtime.Hosting;
 
 namespace CoreTests
 {
     [TestClass]
     public class LibraryExpressionBuilderTests
     {
-        private static ServiceProvider BuildServiceProvider() =>
-            new ServiceCollection()
-                .AddDebugLogging()
-                .AddCqlCompilerServices()
-                .BuildServiceProvider(validateScopes: true);
+        private static ServiceProvider BuildServiceProvider() => ElmToolkitServices.AddCqlCompilerServices(new ServiceCollection().AddDebugLogging()).BuildServiceProvider(validateScopes: true);
 
         [TestMethod]
         public void AggregateQueries_1_0_0()
@@ -24,7 +17,7 @@ namespace CoreTests
             using var servicesScope = serviceProvider.CreateScope();
             var elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = servicesScope.ServiceProvider.GetLibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
+            var definitions = servicesScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -36,7 +29,7 @@ namespace CoreTests
             using var servicesScope = serviceProvider.CreateScope();
             var elm = new FileInfo(@"Input\ELM\HL7\FHIRConversionTest.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = servicesScope.ServiceProvider.GetLibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
+            var definitions = servicesScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -48,7 +41,7 @@ namespace CoreTests
             using var servicesScope = serviceProvider.CreateScope();
             var elm = new FileInfo(@"Input\ELM\Test\QueriesTest-1.0.0.json");
             var elmPackage = Hl7.Cql.Elm.Library.LoadFromJson(elm);
-            var definitions = servicesScope.ServiceProvider.GetLibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
+            var definitions = servicesScope.ServiceProvider.GetRequiredService<LibraryExpressionBuilder>().ProcessLibrary(elmPackage);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }
@@ -72,7 +65,8 @@ namespace CoreTests
             var fs = new FhirDateTime(fdts);
             Assert.AreEqual(fdt, fs);
 
-            var definitions = servicesScope.ServiceProvider.GetLibrarySetExpressionBuilderScoped().ProcessLibrarySet(librarySet);
+            var librarySetExpressionBuilder = servicesScope.ServiceProvider.GetRequiredService<LibrarySetExpressionBuilder>();
+            var definitions = librarySetExpressionBuilder.ProcessLibrarySet(librarySet);
             Assert.IsNotNull(definitions);
             Assert.IsTrue(definitions.Libraries.Any());
         }

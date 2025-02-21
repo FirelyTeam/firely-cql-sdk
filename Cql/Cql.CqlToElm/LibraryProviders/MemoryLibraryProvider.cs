@@ -1,12 +1,4 @@
-﻿using Hl7.Cql.Elm;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Hl7.Cql.CqlToElm.LibraryProviders
+﻿namespace Hl7.Cql.CqlToElm.LibraryProviders
 {
     /// <summary>
     /// Provides libraries through an in-memory dictionary.  Libraries that are referenced, but not included,
@@ -17,16 +9,16 @@ namespace Hl7.Cql.CqlToElm.LibraryProviders
     {
         public VersionedIdentifierDictionary<LibraryBuilder> Libraries { get; } = new();
 
-        public bool TryResolveLibrary(string libraryName, string? version, [NotNullWhen(true)] out LibraryBuilder? library, out string? error)
+        public bool TryResolveLibrary(string libraryName, string? version, [NotNullWhen(true)] out LibraryBuilder? libraryBuilder, out string? error)
         {
-            if (Libraries.TryGet(libraryName, version, out library))
+            if (Libraries.TryGet(libraryName, version, out libraryBuilder))
             {
                 error = null;
                 return true;
             }
             else
             {
-                library = null;
+                libraryBuilder = null;
                 error = null;
                 return false;
             }

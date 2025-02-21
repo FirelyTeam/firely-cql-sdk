@@ -1,10 +1,6 @@
-using System.IO;
-using System.Linq;
-using FluentAssertions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Packaging;
 using Hl7.Fhir.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Library = Hl7.Cql.Elm.Library;
 
 namespace CoreTests;

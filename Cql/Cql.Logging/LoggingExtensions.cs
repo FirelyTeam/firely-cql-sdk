@@ -8,8 +8,6 @@
 
 using Hl7.Cql.Operators;
 using Hl7.Cql.Runtime;
-using JetBrains.Annotations;
-using Microsoft.Extensions.Logging;
 
 namespace Hl7.Cql.Logging
 {

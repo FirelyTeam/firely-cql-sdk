@@ -1,6 +1,4 @@
 ﻿using Hl7.Cql.Elm;
-using System;
-using System.Xml.Serialization;
 
 namespace Hl7.Cql.CqlToElm
 {

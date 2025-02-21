@@ -2,14 +2,11 @@
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Fhir.Model;
-using System;
-using System.Collections.Generic;
-using System.Dynamic;
-using System.Linq;
-using System.Reflection;
-using Hl7.Cql.Conversion;
 
 namespace CoreTests;
+
+using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
+
 
 internal static class Extensions
 {

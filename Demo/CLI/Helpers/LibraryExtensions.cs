@@ -6,15 +6,14 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Diagnostics;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
-using System.Reflection;
-using System.Runtime.Loader;
 using Hl7.Cql.Packaging;
-using Hl7.Fhir.Utility;
+using Library = Hl7.Fhir.Model.Library;
 
 namespace CLI.Helpers;
 
@@ -24,11 +23,11 @@ internal static class LibraryExtensions
     public static IEnumerable<Library> GetDependenciesAndSelf(this Library library, DirectoryInfo directory)
     {
         var libraries = new HashSet<Library>();
-        CollectDependencies(library, directory, libraries);
+        library.LoadDependencies(directory, libraries);
         return libraries;
     }
 
-    private static void CollectDependencies(Library library, DirectoryInfo directory, HashSet<Library> libraries)
+    private static void LoadDependencies(this Library library, DirectoryInfo directory, HashSet<Library> libraries)
     {
         if (!libraries.Add(library))
         {
@@ -73,7 +72,7 @@ internal static class LibraryExtensions
                 {
                     using var fs = relatedPath.OpenRead();
                     var relatedLibrary = fs.ParseFhir<Library>();
-                    CollectDependencies(relatedLibrary, directory, libraries);
+                    relatedLibrary.LoadDependencies(directory, libraries);
                     return true;
                 }
             }
@@ -82,38 +81,23 @@ internal static class LibraryExtensions
         }
     }
 
-
-    public static AssemblyLoadContext LoadAssemblies(this IEnumerable<Library> libraries,
-        AssemblyLoadContext asmContext)
+    public static LibrarySetInvoker ToLibrarySetInvoker(
+        this IEnumerable<Library> libraries)
     {
-        foreach (var library in libraries)
-        {
-            var dll = library.Content.SingleOrDefault(att => att.ContentType == "application/octet-stream");
-            if (dll != null)
-            {
-                using var ms = new MemoryStream(dll.Data);
-                var assembly = asmContext.LoadFromStream(ms);
-            }
+        var assemblyBinaries =
+            libraries
+            .Select(library => library.Content.SingleOrDefault(att => att.ContentType == "application/octet-stream"))
+            .OfType<Attachment>()
+            .Select(dll => dll.Data)
+            .Select(assemblyBytes => AssemblyBinary.Default with { AssemblyBytes = assemblyBytes})
+            .ToArray();
 
-        }
-        return asmContext;
+        return new InvocationToolkit()
+                         .AddAssemblyBinaries(assemblyBinaries)
+                         .CreateLibrarySetInvoker();
     }
 
-    public static AssemblyLoadContext LoadAssemblies(this IEnumerable<Binary> binaries,
-        AssemblyLoadContext asmContext)
-    {
-        foreach (var binary in binaries)
-        {
-            if (binary.ContentType == "application/octet-stream")
-            {
-                using var ms = new MemoryStream(binary.Data);
-                var assembly = asmContext.LoadFromStream(ms);
-            }
-        }
-        return asmContext;
-    }
-
-    public static Dictionary<string, List<string>> GetValueSets(Type libraryType)
+    private static Dictionary<string, List<string>> GetValueSets(Type libraryType)
     {
         var valueSets = new Dictionary<string, List<string>>();
         CollectValueSets(libraryType, valueSets);
@@ -132,10 +116,12 @@ internal static class LibraryExtensions
             valueSets[id] = forLib;
         }
 
-        var valueSetAttributes = libraryType.GetMethods()
-            .Select(m => m.GetCustomAttribute<CqlValueSetAttribute>())
-            .Where(attr => attr is not null)
-            .Select(attr => attr!.Id);
+        var methodInfos = libraryType.GetMethods();
+
+        var valueSetAttributes = methodInfos
+                                 .Select(m => m.GetCustomAttribute<CqlValueSetAttribute>())
+                                 .Where(attr => attr is not null)
+                                 .Select(attr => attr!.Id);
 
         forLib.AddRange(valueSetAttributes);
         if (forLib.Count == 0)
@@ -152,6 +138,7 @@ internal static class LibraryExtensions
             CollectValueSets(nestedType, valueSets);
         }
     }
+
     private static Dictionary<string, List<string>> MissingValueSets(Type libraryType, IValueSetDictionary loadedValueSets, Dictionary<string, List<string>> libraryValueSets)
     {
         return libraryValueSets

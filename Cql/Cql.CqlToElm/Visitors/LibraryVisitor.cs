@@ -1,42 +1,28 @@
-﻿using Antlr4.Runtime.Misc;
-using Hl7.Cql.CqlToElm.Builtin;
+﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
-    internal class LibraryVisitor : Visitor<LibraryBuilder>
+    internal class LibraryVisitor(
+        SystemLibrary systemLibrary,
+        IOptions<CqlToElmOptions> configuration,
+        IModelProvider modelProvider,
+        LocalIdentifierProvider localIdentifierProvider,
+        Func<LibraryBuilder, LibraryVisitor.DefinitionVisitor> definitionVisitorFactory)
+        : Visitor<LibraryBuilder>
     {
-        public LibraryVisitor(IServiceProvider services)
-        {
-            Services = services;
-            Configuration = services.GetRequiredService<IOptions<CqlToElmOptions>>().Value;
-        }
-
-
-        public IServiceProvider Services { get; }
-        public SystemLibrary SystemLibrary => Services.GetRequiredService<SystemLibrary>();
-
-
-        private CqlToElmOptions Configuration { get; }
-        private IModelProvider ModelProvider => Services.GetRequiredService<IModelProvider>();
+        private readonly CqlToElmOptions configuration = configuration.Value;
 
         private UsingDefSymbol? GetDefaultSystemModel()
         {
-            var systemUri = Configuration.SystemElmModelUri;
-            var systemVersion = Configuration.SystemElmModelVersion ?? SystemTypes.SystemModelVersion;
+            var systemUri = configuration.SystemElmModelUri;
+            var systemVersion = configuration.SystemElmModelVersion ?? SystemTypes.SystemModelVersion;
 
             if (string.IsNullOrWhiteSpace(systemUri))
                 return null;
 
-            return ModelProvider.TryGetModelFromUri(systemUri, out var model, systemVersion) ?
+            return modelProvider.TryGetModelFromUri(systemUri, out var model, systemVersion) ?
                 new UsingDefSymbol("System", systemVersion, model)
                 : null;
         }
@@ -49,14 +35,12 @@ namespace Hl7.Cql.CqlToElm.Visitors
 
             var identifier = context.libraryDefinition()?.Parse()
                 ?? throw new InvalidOperationException($"This library does not have an identifier and cannot be processed.");
-            var builder = new LibraryBuilder(identifier,
-                SystemLibrary,
-                Services.GetRequiredService<LocalIdentifierProvider>());
+            var builder = new LibraryBuilder(identifier, systemLibrary, localIdentifierProvider);
             // Add the default model, System
             if (GetDefaultSystemModel() is { } systemModel)
                 builder.CurrentScope.TryAdd(systemModel);
 
-            var defVisitor = new DefinitionVisitor(builder, Services);
+            var defVisitor = definitionVisitorFactory(builder);
 
             // Parse the definitions, this function will insert the visited definitions into the current scope.
             defVisitor.VisitDefinitions(context.definition());
@@ -69,7 +53,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return builder;
         }
 
-        private class DefinitionVisitor : Visitor<IDefinitionElement>
+        internal class DefinitionVisitor : Visitor<IDefinitionElement>
         {
             public DefinitionVisitor(LibraryBuilder libraryBuilder, IServiceProvider services)
             {
@@ -140,7 +124,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     return new UsingDefSymbol(localIdentifier, modelVersion, model!).WithLocator(context.Locator());
                 else
                 {
-                    var emptyModel = new Model.ModelInfo() { name = modelName, version = modelVersion };
+                    var emptyModel = new Model.ModelInfo() { name = modelName, version = modelVersion! };
                     var error = $"Model {modelName} version {modelVersion ?? "<unspecified>"} is not available.";
                     var usingDef = new UsingDefSymbol(localIdentifier, modelVersion, emptyModel).AddError(error);
                     return usingDef.WithLocator(context.Locator());

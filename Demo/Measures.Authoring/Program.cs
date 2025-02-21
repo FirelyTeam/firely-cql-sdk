@@ -1,5 +1,4 @@
-﻿using Hl7.Cql.Abstractions.Infrastructure;
-using System.Reflection;
+﻿using Hl7.Cql.Runtime;
 
 namespace Measures.Authoring;
 

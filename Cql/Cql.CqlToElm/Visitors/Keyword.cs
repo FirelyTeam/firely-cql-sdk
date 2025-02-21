@@ -1,5 +1,4 @@
 ﻿using Antlr4.Runtime.Tree;
-using System;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {

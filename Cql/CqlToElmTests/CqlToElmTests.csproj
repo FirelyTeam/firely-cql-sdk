@@ -26,6 +26,7 @@
 		<ProjectReference Include="..\Cql.Comparers\Cql.Comparers.csproj" />
 		<ProjectReference Include="..\Cql.Compiler\Cql.Compiler.csproj" />
 		<ProjectReference Include="..\Cql.Firely\Cql.Firely.csproj" />
+		<ProjectReference Include="..\Cql.Invocation\Cql.Invocation.csproj" />
 		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
 		<ProjectReference Include="..\Cql.Operators\Cql.Operators.csproj" />
 		<ProjectReference Include="..\Cql.Packaging\Cql.Packaging.csproj" />

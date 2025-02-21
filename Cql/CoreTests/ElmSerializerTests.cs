@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Hl7.Cql.Elm;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.IO;
-using System.Text.Json;
-using System.Text.Json.Nodes;
-using System.Xml.Serialization;
-using FluentAssertions;
+﻿using Hl7.Cql.Elm;
 
 namespace CoreTests
 {

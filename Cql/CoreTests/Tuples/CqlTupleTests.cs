@@ -1,13 +1,11 @@
 ﻿#nullable enable
-using System.Runtime.CompilerServices;
-using System.Text.Json;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Runtime.Serialization;
-using System.IO;
-using System.Runtime.Loader;
-using Hl7.Cql.Packaging;
+using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.Runtime.Serialization;
 
 namespace CoreTests.Tuples;
 
@@ -101,30 +99,24 @@ public class CqlTupleTests
             """, str);
     }
 
-    /// <seealso cref="AssemblyLoadContextTests.TestAssemblyLoadContext"/>
+    /// <seealso cref="InvocationToolkitTests.TestRuntimeScopeAgainstLibraryDefinitionResults"/>
     [TestMethod]
-    [Ignore("When running the pipeline, the file cannot be found")]
-    /*
-     * Failed ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized [32 ms]
-     * Error Message:
-     * Test method CoreTests.Tuples.CqlTupleTests.ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized threw exception:
-     * System.IO.FileNotFoundException: Could not load file or assembly 'D:\a\1\s\Cql\CoreTests\bin\Release\net8.0\Dlls\CqlNestedTupleTest-1.0.0.dll'. The system cannot find the path specified.
-     * Stack Trace:
-     *  at System.Runtime.Loader.AssemblyLoadContext.LoadFromAssemblyPath(String assemblyPath)
-     * at CoreTests.Tuples.CqlTupleTests.ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized() in /_/Cql/CoreTests/Tuples/CqlTupleTests.cs:line 111
-     * at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
-     * at System.Reflection.MethodBaseInvoker.InvokeWithNoArgs(Object obj, BindingFlags invokeAttr)
-     */
     public void ExpressionReturningNestedTuplesFromAssemblyLoadedLibraryInstance_ResultCanBeSerialized()
     {
-        var file = @"Dlls/CqlNestedTupleTest-1.0.0.dll";
-        var filePath = Path.GetFullPath(file);
-        var asm = new AssemblyLoadContext("CqlNestedTupleTest");
-        asm.LoadFromAssemblyPath(filePath);
+        var filePath = new DirectoryInfo(Directory.GetCurrentDirectory())
+                       .SelfAndParents()
+                       .Select(dir => Path.GetFullPath(Path.Combine(dir.FullName, "Dlls", "CqlNestedTupleTest-1.0.0.dll")))
+                       .First(File.Exists);
         var ctx = FhirCqlContext.ForBundle();
+        using var librarySetInvoker = new InvocationToolkit()
+                                    .AddAssemblyBinaries(AssemblyBinary.Default.LoadFromFile(new FileInfo(filePath)))
+                                    .CreateLibrarySetInvoker();
 
         // Act
-        var result = asm.Run("CqlNestedTupleTest", "1.0.0", ctx);
+        var result = librarySetInvoker
+                     .EnumerateLibraryDefinitionsResults(ctx, CqlVersionedLibraryIdentifier.Parse("CqlNestedTupleTest-1.0.0"))
+                     .Select(t => (definition: t.definitionInvoker.DefinitionName, t.getResult()))
+                     .ToDictionary();
         Assert.IsNotNull(result);
         result.TryGetValue("Result", out var obj);
         Assert.IsNotNull(obj);

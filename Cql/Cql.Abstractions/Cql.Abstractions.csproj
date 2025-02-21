@@ -17,7 +17,6 @@
 
 	<ItemGroup>
 	  <InternalsVisibleTo Include="Hl7.Cql.Conversion" Key="$(LibraryPKHash)" />
-		<InternalsVisibleTo Include="Hl7.Cql.Packager" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.MultiPackager" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Fhir" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Model" Key="$(LibraryPKHash)" />
@@ -30,8 +29,10 @@
 		<InternalsVisibleTo Include="Hl7.Cql.Runtime" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Elm" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.CqlToElm" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
+		<InternalsVisibleTo Include="Hl7.Cql.Invocation" Key="$(LibraryPKHash)" />
 	</ItemGroup>
 
 	<ItemGroup>

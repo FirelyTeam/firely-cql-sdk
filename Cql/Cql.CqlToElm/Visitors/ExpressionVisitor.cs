@@ -1,12 +1,6 @@
 ﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
-using System;
-using System.Linq;
-using System.Reflection;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {
@@ -244,7 +238,6 @@ namespace Hl7.Cql.CqlToElm.Visitors
             return expression
                 .WithId()
                 .WithLocator(context.Locator());
-            ;
         }
 
         private Literal? Precision(cqlParser.PluralDateTimePrecisionContext context)

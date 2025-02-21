@@ -1,11 +1,7 @@
-﻿using FluentAssertions;
-using Hl7.Cql.Fhir;
+﻿using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Linq;
 using Hl7.Cql.Operators;
 
 namespace CoreTests.Fhir

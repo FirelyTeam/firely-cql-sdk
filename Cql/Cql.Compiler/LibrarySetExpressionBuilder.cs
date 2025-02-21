@@ -6,24 +6,23 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Linq.Expressions;
+using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Compiler;
 
-internal class LibrarySetExpressionBuilder(
-    LibraryExpressionBuilder libraryExpressionBuilder)
+internal class LibrarySetExpressionBuilder(LibraryExpressionBuilder libraryExpressionBuilder)
 {
-    private readonly LibraryExpressionBuilder _libraryExpressionBuilder = libraryExpressionBuilder;
-
-    public DefinitionDictionary<LambdaExpression> ProcessLibrarySet(
+    public IEnumerable<(Library library, DefinitionDictionary<LambdaExpression> libraryDefinitions)> BuildEachLibraryDefinitions(
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null) =>
+        DefinitionDictionary<LambdaExpression> librarySetDefinitions,
+        EnumerationErrorStrategyBuilder<Library>? errorStrategyBuilder = null,
+        Action<Library>? onNextLibrary = null) =>
         NewLibrarySetExpressionBuilderContext(librarySet, librarySetDefinitions)
-            .ProcessLibrarySet();
+            .BuildEachLibraryDefinitions(errorStrategyBuilder, onNextLibrary);
 
     private LibrarySetExpressionBuilderContext NewLibrarySetExpressionBuilderContext(
         LibrarySet librarySet,
-        DefinitionDictionary<LambdaExpression>? librarySetDefinitions = null) =>
-        new(_libraryExpressionBuilder, librarySet, librarySetDefinitions ?? new());
+        DefinitionDictionary<LambdaExpression> librarySetDefinitions) =>
+        new(libraryExpressionBuilder, librarySet, librarySetDefinitions);
 }

@@ -5,12 +5,6 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
-using System;
-using System.Collections.Concurrent;
-using System.Diagnostics;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
-using System.Linq.Expressions;
 
 namespace Hl7.Cql.Abstractions.Infrastructure;
 

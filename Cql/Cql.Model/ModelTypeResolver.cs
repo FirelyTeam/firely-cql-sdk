@@ -8,9 +8,6 @@
  */
 
 using Hl7.Cql.Runtime;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
 
 namespace Hl7.Cql.Model
 {

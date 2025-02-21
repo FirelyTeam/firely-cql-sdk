@@ -6,8 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
-using System.Linq;
 using Hl7.Cql.Abstractions.Exceptions;
 using Hl7.Cql.Elm;
 

@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Hl7.Cql.Fhir;
+﻿using Hl7.Cql.Fhir;
 using Hl7.Cql.Runtime;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoreTests;
 

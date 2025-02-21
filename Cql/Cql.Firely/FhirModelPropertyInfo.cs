@@ -7,8 +7,6 @@
  */
 
 using Hl7.Fhir.Introspection;
-using System.Globalization;
-using System.Reflection;
 
 namespace Hl7.Cql.Fhir
 {

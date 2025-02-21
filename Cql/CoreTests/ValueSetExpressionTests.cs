@@ -1,12 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using FluentAssertions;
-using Hl7.Cql.Fhir;
+﻿using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoreTests;
 

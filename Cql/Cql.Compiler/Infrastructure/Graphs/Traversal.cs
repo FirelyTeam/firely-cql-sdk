@@ -5,9 +5,6 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Hl7.Cql.Compiler.Infrastructure.Graphs;
 
@@ -59,7 +56,7 @@ internal static class Traversal
             case 0:
                 return [];
             case 1:
-                return EnumerateSingle(unvisited.First());
+                return [unvisited.First()];
         }
 
         HashSet<T> visited = [];
@@ -90,10 +87,5 @@ internal static class Traversal
         }
 
         return results;
-    }
-
-    private static IEnumerable<T> EnumerateSingle<T>(T first)
-    {
-        yield return first;
     }
 }

@@ -8,9 +8,6 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Iso8601;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
 
 namespace Hl7.Cql.Primitives
 {
@@ -118,7 +115,7 @@ namespace Hl7.Cql.Primitives
                         else return asInt;
                     }
                 default: throw new ArgumentException($"Unit '{precision}' is not supported.");
-            };
+            }
         }
 
         internal static int? WholeCalendarPeriodsBetween(DateTimeOffset? low, DateTimeOffset? high, string precision)
@@ -213,7 +210,7 @@ namespace Hl7.Cql.Primitives
                 case "s": return (int)secondDto.Subtract(firstDto).TotalSeconds;
                 case "ms": return (int)secondDto.Subtract(firstDto).TotalMilliseconds;
                 default: throw new ArgumentException($"Unit '{precision}' is not supported.");
-            };
+            }
         }
 
         internal static readonly IDictionary<DateTimePrecision, CqlQuantity> UnitDateTimeQuantity = new Dictionary<DateTimePrecision, CqlQuantity>

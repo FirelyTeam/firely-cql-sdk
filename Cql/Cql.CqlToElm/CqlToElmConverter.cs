@@ -2,11 +2,6 @@
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.CqlToElm.Visitors;
 using Hl7.Cql.Elm;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using System;
-using System.IO;
-using System.Linq;
 
 namespace Hl7.Cql.CqlToElm
 {
@@ -28,12 +23,13 @@ namespace Hl7.Cql.CqlToElm
         /// <summary>
         /// CQL to Elm IServiceProvider
         /// </summary>
-        public IServiceProvider Services { get; }
+        private IServiceProvider Services { get; }
+
         /// <summary>
         /// CQL to Elm Logger
         /// </summary>
-        public ILogger<CqlToElmConverter> Logger { get; }
-            
+        private ILogger<CqlToElmConverter> Logger { get; }
+
         /// <summary>
         /// Converts the CQL contained in <paramref name="cqlLibrary"/> to an ELM <see cref="Library"/>.
         /// </summary>
@@ -59,28 +55,31 @@ namespace Hl7.Cql.CqlToElm
         public Library ConvertLibrary(string cql)
         {
             using var scope = Services.CreateScope();
-            var builder = GetBuilder(cql, scope);
-            var lib = builder.Build();
-            if (lib.GetErrors().Any(e => e.errorSeverity == ErrorSeverity.error))
+            var libraryVisitorScoped = GetLibraryVisitorScoped(scope);
+            var libraryBuilder = GetBuilder(libraryVisitorScoped, cql);
+            var lib = libraryBuilder.Build();
+           if (lib.GetErrors().Any(e => e.errorSeverity == ErrorSeverity.error))
                 Logger.LogWarning("Parsed ELM tree contains errors.");
             return lib;
         }
 
-        internal LibraryBuilder GetBuilder(string cql, IServiceScope scope)
+        internal LibraryBuilder GetBuilder(LibraryVisitor libraryVisitor, string cql)
         {
             using var cqlLibrary = new StringReader(cql);
-            var visitor = new LibraryVisitor(scope.ServiceProvider);
+            return GetBuilder(libraryVisitor, cqlLibrary);
+        }
 
-            try
-            {
-                var builder = visitor.Visit(ParseLibrary(cqlLibrary));
-                return builder;
-            }
-            catch (Exception e)
-            {
-                Logger.LogCritical(e, "Exception while converting CQL to ELM.");
-                throw;
-            }
+        internal LibraryBuilder GetBuilder(LibraryVisitor libraryVisitor, TextReader cqlReader)
+        {
+            var libraryContext = ParseLibrary(cqlReader);
+            var libraryBuilder = libraryVisitor.Visit(libraryContext);
+            return libraryBuilder;
+        }
+
+        internal static LibraryVisitor GetLibraryVisitorScoped(IServiceScope scope)
+        {
+            var visitor = ActivatorUtilities.CreateInstance<LibraryVisitor>(scope.ServiceProvider);
+            return visitor;
         }
 
 

@@ -7,10 +7,6 @@
  */
 
 using Hl7.Cql.Model;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Dynamic;
-
 
 namespace Hl7.Cql.Elm
 {

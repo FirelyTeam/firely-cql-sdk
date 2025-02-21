@@ -20,4 +20,15 @@ internal static class ResourceExtensions
         var path = $"{root}{(root.EndsWith('/') ? "" : "/")}{resource.TypeName}/{resource.Id}";
         return path;
     }
+
+    public static ResourceFileName GetResourceFileName(this Resource resource)
+    {
+        ResourceFileName resourceFileName = resource switch
+        {
+            Library l => ResourceFileName.Create(nameof(Library), l.Id, l.Version),
+            Measure m => ResourceFileName.Create(nameof(Measure), m.Id, m.Version),
+            _         => throw new UnreachableException("Only expecting Library or Measure.")
+        };
+        return resourceFileName;
+    }
 }

@@ -1,11 +1,6 @@
 ﻿using Antlr4.Runtime.Tree;
 using Hl7.Cql.CqlToElm.Grammar;
 using Hl7.Cql.Elm;
-using System;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
-using System.Linq;
-using System.Text.RegularExpressions;
 
 namespace Hl7.Cql.CqlToElm.Visitors
 {

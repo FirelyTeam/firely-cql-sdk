@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
 using Hl7.Cql.Abstractions;
 
 namespace Hl7.Cql.Comparers;

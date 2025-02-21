@@ -9,8 +9,6 @@
 
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
-using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace Hl7.Cql.Fhir
 {

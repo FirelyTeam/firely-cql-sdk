@@ -1,10 +1,5 @@
 ﻿using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
-using System;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Xml;
 
 namespace Hl7.Cql.CqlToElm
 {

@@ -10,7 +10,6 @@
 
 
 using Hl7.Cql.Abstractions.Exceptions;
-using System.Collections.Generic;
 using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Elm;

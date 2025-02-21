@@ -1,25 +1,18 @@
 ﻿using Hl7.Cql.Abstractions;
-using Hl7.Cql.CodeGeneration.NET;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.IO;
-using System.Linq;
-using FluentAssertions;
-using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
-using Expression = System.Linq.Expressions.Expression;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
+using Hl7.Cql.Runtime.Hosting;
 
 namespace CoreTests
 {
+    using DateTimePrecision = Hl7.Cql.Iso8601.DateTimePrecision;
+    using Expression = System.Linq.Expressions.Expression;
+
     [TestClass]
     [TestCategory("UnitTest")]
     public class PrimitiveTests
@@ -3405,29 +3398,20 @@ namespace CoreTests
         [TestMethod]
         public void Aggregate_Query_Test()
         {
-            using var serviceProvider = new ServiceCollection()
-                                        .AddDebugLogging()
-                                        .AddCqlCodeGenerationServices()
-                                        .BuildServiceProvider(validateScopes: true);
-            using var serviceScope = serviceProvider.CreateScope();
-
             var librarySet = new LibrarySet();
-            librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"),"Aggregates", "1.0.0");
-            var elmPackage = librarySet.GetLibrary("Aggregates-1.0.0");
-            var definitions = serviceScope.ServiceProvider.GetLibraryExpressionBuilderScoped().ProcessLibrary(elmPackage);
-            var definitionsToCSharpCodeProcessor = serviceProvider.GetDefinitionsToCSharpCodeProcessor();
-            var isDone = false;
-            definitionsToCSharpCodeProcessor.ProcessDefinitions(librarySet,
-                                      definitions, callbacks: new(onAfterStep: step =>
-                                      {
-                                          switch (step)
-                                          {
-                                              case CSharpSourceCodeStep.OnDone:
-                                                  isDone = true;
-                                                  break;
-                                          }
-                                      }));
-            Assert.IsTrue(isDone);
+            librarySet.LoadLibraryAndDependencies(new DirectoryInfo("Input\\ELM\\Test"), "Aggregates", "1.0.0");
+
+            var loggerFactory = new ServiceCollection()
+                                .AddDebugLogging()
+                                .BuildServiceProvider()
+                                .GetRequiredService<ILoggerFactory>();
+
+            Assert.That.DoesNotThrow(() =>
+            {
+                new ElmToolkit(loggerFactory)
+                    .AddElmLibraries(librarySet)
+                    .ConvertElmToAssemblies();
+            });
         }
 
         [TestMethod]

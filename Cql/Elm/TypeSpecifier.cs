@@ -7,10 +7,6 @@
  */
 
 using Hl7.Cql.Model;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 
 namespace Hl7.Cql.Elm
 {

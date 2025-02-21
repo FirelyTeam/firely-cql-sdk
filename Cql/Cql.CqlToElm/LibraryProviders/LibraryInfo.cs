@@ -1,5 +1,4 @@
 ﻿using Hl7.Cql.Elm;
-using System;
 
 namespace Hl7.Cql.CqlToElm.LibraryProviders
 {

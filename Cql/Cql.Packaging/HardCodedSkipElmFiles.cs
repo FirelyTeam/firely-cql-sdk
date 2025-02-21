@@ -1,0 +1,29 @@
+﻿namespace Hl7.Cql.Packaging;
+
+internal static class HardCodedSkipElmFiles
+{
+    public static string[] FileNames =
+    [
+
+        // These contain a union between incompatible tuples,
+        // see https://chat.fhir.org/#narrow/stream/179220-cql/topic/Union.20of.20tuples.20with.20convertible.20types
+        "AntithromboticTherapyByEndofHospitalDay2FHIR.json",
+        "IntensiveCareUnitVenousThromboembolismProphylaxisFHIR.json",
+        "VenousThromboembolismProphylaxisFHIR.json",
+
+        // These uses choice types, move into a property on such a choice, and then calls an
+        // overloaded function, so we cannot find out which overload to call.
+        // A solution is to either a) Introduce choice types in our system instead of object,
+        // b) introduce runtime resolution, based on the runtime types of the arguments when one of
+        // the arguments is a choice (=object).
+        "InitiationandEngagementofSubstanceUseDisorderTreatmentFHIR.json",
+        "PCSBMIScreenAndFollowUpFHIR.json",
+
+        // Tuple element value does not have a resultTypeSpecifier
+        "CADBetaBlockerTherapyPriorMIorLVSDFHIR.json",
+        "PCSDepressionScreenAndFollowUpFHIR.json",
+
+        // Multiple sort fields not supported yet
+        "HospitalHarmAcuteKidneyInjuryFHIR.json"
+    ];
+}

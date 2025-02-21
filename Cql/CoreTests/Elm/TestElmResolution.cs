@@ -1,8 +1,5 @@
-using System.IO;
-using FluentAssertions;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoreTests;
 

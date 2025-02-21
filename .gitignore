@@ -16,7 +16,6 @@ VSWorkspaceState.json
 .idea/
 
 # ReSharper Settings
-*.DotSettings
 *.DotSettings.user
 
 

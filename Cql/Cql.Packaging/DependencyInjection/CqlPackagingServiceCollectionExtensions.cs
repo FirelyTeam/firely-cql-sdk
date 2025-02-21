@@ -6,12 +6,10 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.CodeGeneration.NET;
-using Microsoft.Extensions.DependencyInjection;
+using Hl7.Cql.Abstractions;
+using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
-using Hl7.Cql.Packaging.PostProcessors;
-using Hl7.Cql.Runtime.Hosting;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using Hl7.Fhir.Introspection;
 
 // ReSharper disable once CheckNamespace
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -22,24 +20,9 @@ internal static class CqlPackagingServiceCollectionExtensions
 {
     public static IServiceCollection AddCqlPackagingServices(this IServiceCollection services)
     {
-        services.AddCqlCodeGenerationServices();
-
-        services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
-
-        services.TryAddSingletonSwitch<FhirResourcePostProcessor, WriteToFileFhirResourcePostProcessor, StubFhirResourcePostProcessor>(
-            sp => sp.GetOptionsValue<FhirResourceWriterOptions>().OutDirectory switch
-            {
-                null => 1,
-                _    => 0
-            });
-
-
-        services.TryAddSingleton<AssemblyCompiler>();
-
+        services.TryAddSingleton<ModelInspector>(_ => Hl7.Fhir.Model.ModelInfo.ModelInspector);
+        services.TryAddSingleton<TypeResolver, FhirTypeResolver>();
         services.TryAddSingleton<ResourcePackager>();
-
-        services.TryAddScoped<CqlToResourcePackagingPipeline>();
-
         return services;
     }
 }

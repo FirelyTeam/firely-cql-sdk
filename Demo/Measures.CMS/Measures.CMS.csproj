@@ -19,6 +19,8 @@
 		<LibrarySetRoot>$(CqlSolutionDir)LibrarySets/$(LibrarySet)</LibrarySetRoot>
 		<CqlDirectory>$(LibrarySetRoot)/Cql</CqlDirectory>
 		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
+		<!-- Copy dll's to IntegrationRunner -->
+		<DllDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Assemblies</DllDirectory>
 		<ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory>
 		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
 	</PropertyGroup>
@@ -27,7 +29,7 @@
 	<Import Project="../Cql/Build/ElmToCSharp.Targets.xml" />
 
   <ItemGroup>
-    <Compile Include="..\..\Cql\Cql.Abstractions\Infrastructure\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
+    <Compile Include="..\..\Cql\Cql.Runtime\DirectoryInfoExtensions.cs" Link="Helpers\DirectoryInfoExtensions.cs" />
   </ItemGroup>
 
 	<ItemGroup>

@@ -1,0 +1,190 @@
+using Hl7.Cql.Elm;
+
+namespace Hl7.Cql.CqlToElm.Test
+{
+    [TestClass]
+    public class MeetsTest : Base
+    {
+        [TestMethod]
+        public void Meets()
+        {
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
+                library MeetsTest version '1.0.0'
+
+                define private Meets: Interval[6, 10] meets Interval[0, 5]
+                """);
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Meets));
+            {
+                var meets = (Meets)library.statements[0].expression;
+                Assert.IsFalse(meets.precisionSpecified);
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", meets.resultTypeName.Name);
+                Assert.IsInstanceOfType(meets.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)meets.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(meets.operand);
+                Assert.AreEqual(2, meets.operand.Length);
+                Assert.IsInstanceOfType(meets.operand[0], typeof(Interval));
+                Assert.IsInstanceOfType(meets.operand[1], typeof(Interval));
+                var result = Run(meets, library);
+                Assert.IsInstanceOfType(result, typeof(bool?));
+                Assert.AreEqual(true, result);
+            }
+        }
+
+        [TestMethod]
+        public void Meets_Before()
+        {
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
+                library MeetsTest version '1.0.0'
+
+                define private Meets_Before: Interval[-5, -1] meets before Interval[0, 5]
+                """);
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(MeetsBefore));
+            {
+                var meets = (MeetsBefore)library.statements[0].expression;
+                Assert.IsFalse(meets.precisionSpecified);
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", meets.resultTypeName.Name);
+                Assert.IsInstanceOfType(meets.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)meets.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(meets.operand);
+                Assert.AreEqual(2, meets.operand.Length);
+                Assert.IsInstanceOfType(meets.operand[0], typeof(Interval));
+                Assert.IsInstanceOfType(meets.operand[1], typeof(Interval));
+                var result = Run(meets, library);
+                Assert.IsInstanceOfType(result, typeof(bool?));
+                Assert.AreEqual(true, result);
+            }
+        }
+
+        [TestMethod]
+        public void Meets_After()
+        {
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
+                library MeetsTest version '1.0.0'
+
+                define private Meets_After: Interval[6, 10] meets after Interval[0, 7]
+                """);
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(MeetsAfter));
+            {
+                var meets = (MeetsAfter)library.statements[0].expression;
+                Assert.IsFalse(meets.precisionSpecified);
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", meets.resultTypeName.Name);
+                Assert.IsInstanceOfType(meets.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)meets.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(meets.operand);
+                Assert.AreEqual(2, meets.operand.Length);
+                Assert.IsInstanceOfType(meets.operand[0], typeof(Interval));
+                Assert.IsInstanceOfType(meets.operand[1], typeof(Interval));
+                var result = Run(meets, library);
+                Assert.IsInstanceOfType(result, typeof(bool?));
+                Assert.AreEqual(false, result);
+            }
+        }
+
+        [TestMethod]
+        public void Meets_Is_Null()
+        {
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
+                library MeetsTest version '1.0.0'
+
+                define private Meets_Is_Null: Interval[6, 10] meets (null as Interval<Integer>)
+                """);
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Meets));
+            {
+                var meets = (Meets)library.statements[0].expression;
+                Assert.IsFalse(meets.precisionSpecified);
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", meets.resultTypeName.Name);
+                Assert.IsInstanceOfType(meets.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)meets.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(meets.operand);
+                Assert.AreEqual(2, meets.operand.Length);
+                Assert.IsInstanceOfType(meets.operand[0], typeof(Interval));
+                Assert.IsInstanceOfType(meets.operand[1], typeof(As));
+                var result = Run(meets, library);
+                Assert.IsNull(result);
+            }
+        }
+
+        [TestMethod]
+        public void Meets_After_Day()
+        {
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
+                library MeetsTest version '1.0.0'
+
+                define private Meets_After_Day: Interval[@2023-03-01, @2023-06-01] meets after month of Interval[@2023-01-01, @2023-03-01]
+                """);
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(MeetsAfter));
+            {
+                var meets = (MeetsAfter)library.statements[0].expression;
+                Assert.IsTrue(meets.precisionSpecified);
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", meets.resultTypeName.Name);
+                Assert.IsInstanceOfType(meets.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)meets.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(meets.operand);
+                Assert.AreEqual(2, meets.operand.Length);
+                Assert.IsInstanceOfType(meets.operand[0], typeof(Interval));
+                Assert.IsInstanceOfType(meets.operand[1], typeof(Interval));
+                var result = Run(meets, library);
+                Assert.IsInstanceOfType(result, typeof(bool?));
+                Assert.AreEqual(true, result);
+            }
+        }
+
+        [TestMethod]
+        public void Meets_Day()
+        {
+            var library = CreateFluentCqlToolkit().MakeLibrary("""
+                library MeetsTest version '1.0.0'
+
+                define private Meets_Day: Interval[@2023-01-01, @2023-06-01] meets month of Interval[@2023-07-01, @2023-10-01]
+                """);
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(1, library.statements.Length);
+            Assert.IsNotNull(library.statements[0].expression.localId);
+            Assert.IsNotNull(library.statements[0].expression.locator);
+            Assert.IsInstanceOfType(library.statements[0].expression, typeof(Meets));
+            {
+                var meets = (Meets)library.statements[0].expression;
+                Assert.IsTrue(meets.precisionSpecified);
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", meets.resultTypeName.Name);
+                Assert.IsInstanceOfType(meets.resultTypeSpecifier, typeof(NamedTypeSpecifier));
+                Assert.AreEqual($"{{{SystemUri}}}Boolean", ((NamedTypeSpecifier)meets.resultTypeSpecifier).name.Name);
+                Assert.IsNotNull(meets.operand);
+                Assert.AreEqual(2, meets.operand.Length);
+                Assert.IsInstanceOfType(meets.operand[0], typeof(Interval));
+                Assert.IsInstanceOfType(meets.operand[1], typeof(Interval));
+                var result = Run(meets, library);
+                Assert.IsInstanceOfType(result, typeof(bool?));
+                Assert.AreEqual(true, result);
+            }
+        }
+
+        [TestMethod]
+        public void Meets_After_Null()
+        {
+            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("Interval(null, 5] meets after Interval[11, null)");
+            var meetsAfter = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<MeetsAfter>();
+            var result = Run<bool?>(meetsAfter, library);
+            result.Should().BeFalse();
+        }
+    }
+}

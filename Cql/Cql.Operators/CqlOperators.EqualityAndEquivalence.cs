@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using Hl7.Cql.Comparers;
+﻿using Hl7.Cql.Comparers;
 
 namespace Hl7.Cql.Runtime;
 

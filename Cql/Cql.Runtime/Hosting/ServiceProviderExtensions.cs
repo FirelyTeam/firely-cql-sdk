@@ -6,11 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-
 namespace Hl7.Cql.Runtime.Hosting;
 
 internal static class ServiceProviderExtensions
@@ -27,6 +22,11 @@ internal static class ServiceProviderExtensions
         serviceProvider.GetRequiredService<ILoggerFactory>();
 
     public static ILogger<T> GetLogger<T>(this IServiceProvider serviceProvider)
-        where T : class =>
-        serviceProvider.GetRequiredService<ILogger<T>>();
+    {
+        var logger = serviceProvider.GetService<ILogger<T>>();
+        if (logger != null)
+            return logger;
+
+        return NullLogger<T>.Instance;
+    }
 }

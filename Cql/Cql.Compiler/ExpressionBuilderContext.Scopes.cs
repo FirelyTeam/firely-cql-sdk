@@ -6,14 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Reflection;
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
-using Expression = System.Linq.Expressions.Expression;
 
 namespace Hl7.Cql.Compiler;
 

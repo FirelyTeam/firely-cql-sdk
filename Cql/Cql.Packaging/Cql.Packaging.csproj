@@ -29,19 +29,4 @@
 		<InternalsVisibleTo Include="CoreTests" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="CqlToElmTests" Key="$(LibraryPKHash)" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<Compile Update="CqlPackagingPipelineOptions..*.cs">
-			<DependentUpon>CqlPackagingPipelineOptions..cs</DependentUpon>
-		</Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="CqlPackagingPipelineOptions.Binding.cs">
-	    <DependentUpon>CqlPackagingPipelineOptions.cs</DependentUpon>
-	  </Compile>
-	  <Compile Update="CqlPackagingPipelineOptions.Validator.cs">
-	    <DependentUpon>CqlPackagingPipelineOptions.cs</DependentUpon>
-	  </Compile>
-	</ItemGroup>
 </Project>

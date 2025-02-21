@@ -1,6 +1,4 @@
-using System.Linq;
 using Hl7.Cql.Compiler;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace CoreTests;
 

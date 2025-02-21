@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Hl7.Cql.Abstractions;
+﻿namespace Hl7.Cql.Abstractions;
 
 /// <summary>
 /// Represents an interface for a singleton pattern.

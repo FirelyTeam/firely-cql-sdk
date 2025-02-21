@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Abstractions;
-using System.Globalization;
 
 namespace Hl7.Cql.Primitives
 {

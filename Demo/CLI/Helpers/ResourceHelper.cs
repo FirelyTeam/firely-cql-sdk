@@ -5,16 +5,16 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
+
 using Dumpify;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
-using System.Runtime.Loader;
-using System.Text.Json;
 using static Hl7.Fhir.Model.Parameters;
 using Library = Hl7.Fhir.Model.Library;
 
@@ -61,7 +61,7 @@ internal class ResourceHelper
         return vsd;
     }
 
-    public static AssemblyLoadContext LoadLibraryResources(
+    public static LibrarySetInvoker CreateRuntimeScopeFromFhirLibraryFile(
         DirectoryInfo dir,
         string lib,
         string version)
@@ -70,9 +70,7 @@ internal class ResourceHelper
         using var fs = libFile.OpenRead();
         var library = fs.ParseFhir<Library>();
         var deps = library.GetDependenciesAndSelf(dir);
-        var asmContext = new AssemblyLoadContext($"{lib}-{version}");
-        deps.LoadAssemblies(asmContext);
-        return asmContext;
+        return deps.ToLibrarySetInvoker();
     }
 
 
