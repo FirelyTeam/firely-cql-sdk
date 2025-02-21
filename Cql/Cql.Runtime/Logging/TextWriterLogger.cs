@@ -9,6 +9,7 @@
 
 namespace Hl7.Cql.Logging
 {
+    [Obsolete("No used, will be deleted.")] // 2025-02-20
     internal class TextWriterLogger : ICqlLogger
     {
         public TextWriterLogger(Stream output)

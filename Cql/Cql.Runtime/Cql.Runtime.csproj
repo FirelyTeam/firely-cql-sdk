@@ -4,7 +4,7 @@
 
 	<PropertyGroup>
 		<AssemblyName>Hl7.Cql.Runtime</AssemblyName>
-		<RootNamespace>Hl7.Cql.Runtime</RootNamespace>
+		<RootNamespace>Hl7.Cql</RootNamespace>
 		<Product>CQL engine runtime</Product>
 		<Description>Support package for Hl7.Cql. Contains the required runtime components for CQL execution.</Description>
 		<Configurations>Debug;Release</Configurations>
@@ -12,9 +12,11 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Abstractions\Cql.Abstractions.csproj" />
-		<ProjectReference Include="..\Cql.Operators\Cql.Operators.csproj" />
-		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="Fhir.Metrics" Version="1.3.0" />
+	</ItemGroup>
+	
+	<ItemGroup>
 		<InternalsVisibleTo Include="Hl7.Cql.CodeGeneration.NET" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Logging" Key="$(LibraryPKHash)" />
 		<InternalsVisibleTo Include="Hl7.Cql.Fhir" Key="$(LibraryPKHash)" />
@@ -50,6 +52,45 @@
 	    <DependentUpon>CqlOperators.cs</DependentUpon>
 	  </Compile>
 	  <Compile Update="CqlOperators.TypeOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Operators\CqlOperators.AggregateFunctions.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Operators\CqlOperators.ArithmeticOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Operators\CqlOperators.ClinicalOperators2.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Operators\CqlOperators.ComparisonOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Operators\CqlOperators.CrossJoin.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Operators\CqlOperators.DateTimeOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Operators\CqlOperators.EqualityAndEquivalence.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Operators\CqlOperators.IntervalOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Operators\CqlOperators.ListOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Operators\CqlOperators.LogicalOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Operators\CqlOperators.NullologicalOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Operators\CqlOperators.StringOperators.cs">
+	    <DependentUpon>CqlOperators.cs</DependentUpon>
+	  </Compile>
+	  <Compile Update="Operators\CqlOperators.TypeOperators.cs">
 	    <DependentUpon>CqlOperators.cs</DependentUpon>
 	  </Compile>
 	</ItemGroup>
