@@ -45,7 +45,7 @@ override Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.Equals(object? obj) 
 override Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.GetHashCode() -> int
 override Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.ToString() -> string!
 override Hl7.Cql.Invocation.Toolkit.LibraryInvokerOnInstance.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
-static Hl7.Cql.Invocation.Toolkit.Extensions.CqlToolkitExtensions.CreateLibrarySetInvoker(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, Hl7.Cql.Abstractions.Mutator<Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig!>? reconfigureElmToolkitConfig = null, string! name = "") -> Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker!
+static Hl7.Cql.Invocation.Toolkit.Extensions.CqlToolkitExtensions.CreateLibrarySetInvoker(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig? elmToolkitConfig = null, string! name = "") -> Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker!
 static Hl7.Cql.Invocation.Toolkit.Extensions.ElmToolkitExtensions.CreateInvocationToolkit(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit) -> Hl7.Cql.Invocation.Toolkit.InvocationToolkit!
 static Hl7.Cql.Invocation.Toolkit.Extensions.ElmToolkitExtensions.CreateLibrarySetInvoker(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit, string! name = "") -> Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker!
 static Hl7.Cql.Invocation.Toolkit.Extensions.InvocationToolkitExtensions.AddAssemblyBinaries(this Hl7.Cql.Invocation.Toolkit.InvocationToolkit! invocationToolkit, params Hl7.Cql.CodeGeneration.NET.AssemblyBinary![]! assemblyBinary) -> Hl7.Cql.Invocation.Toolkit.InvocationToolkit!

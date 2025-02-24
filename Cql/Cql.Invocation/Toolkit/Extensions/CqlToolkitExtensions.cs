@@ -22,15 +22,15 @@ public static class CqlToolkitExtensions
     /// Creates a <see cref="LibrarySetInvoker"/> from the specified <see cref="CqlToolkit"/>.
     /// </summary>
     /// <param name="cqlToolkit">The CQL toolkit to use for creating the library set invoker.</param>
-    /// <param name="reconfigureElmToolkitConfig">An optional mutator to reconfigure the ELM toolkit configuration.</param>
+    /// <param name="elmToolkitConfig">The configuration for the ELM toolkit.</param>
     /// <param name="name">The name of the library set invoker.</param>
     /// <returns>A new instance of <see cref="LibrarySetInvoker"/>.</returns>
     public static LibrarySetInvoker CreateLibrarySetInvoker(
         this CqlToolkit cqlToolkit,
-        Mutator<ElmToolkitConfig>? reconfigureElmToolkitConfig = null,
+        ElmToolkitConfig? elmToolkitConfig = null,
         string name = "") =>
         cqlToolkit
             .ConvertCqlToElm()
-            .CreateElmToolkit(reconfigureElmToolkitConfig)
+            .CreateElmToolkit(elmToolkitConfig)
             .CreateLibrarySetInvoker(name);
 }

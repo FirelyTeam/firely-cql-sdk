@@ -144,10 +144,7 @@ internal static class Program
         var cqlContext = FhirCqlContext.ForBundle();
         using var librarySetInvoker = cqlToolkit
                                       .AddCqlLibraries(cqlLibraryString)
-                                      .CreateLibrarySetInvoker(elmOpt => elmOpt with
-                                      {
-                                          AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded
-                                      });
+                                      .CreateLibrarySetInvoker(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded));
         var result = librarySetInvoker.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.LibraryIdentifier, "Three");
         Debug.Assert(result is 3);
     }
