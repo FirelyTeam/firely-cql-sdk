@@ -13,19 +13,23 @@ internal static class EnumerationErrorStrategyExtensions
     public static EnumerationErrorStrategy<T> SetContinuation<T>(
         this EnumerationErrorStrategy<T> strategy,
         EnumerationExceptionContinuation continuation) =>
-        strategy with
-        {
-            ExceptionContinuation = continuation
-        };
+        strategy with { ExceptionContinuation = continuation };
 
     public static EnumerationErrorStrategy<T> AddLoggerExceptionHandler<T>(
         this EnumerationErrorStrategy<T> strategy,
         ILogger logger,
         LogMessageBuilder<T> logMessageBuilder) =>
-        strategy with
-        {
-            ExceptionHandler = strategy.ExceptionHandler + CreateLogExceptionHandler(logger, logMessageBuilder)
-        };
+        AddExceptionHandler(strategy, CreateLogExceptionHandler(logger, logMessageBuilder));
+
+    public static EnumerationErrorStrategy<T> AddExceptionHandler<T>(
+        this EnumerationErrorStrategy<T> strategy,
+        ValueExceptionHandler<T>? exceptionHandler)
+    {
+        return
+            exceptionHandler is null
+            ? strategy
+            : strategy with { ExceptionHandler = strategy.ExceptionHandler + exceptionHandler };
+    }
 
     private static ValueExceptionHandler<TCurrent> CreateLogExceptionHandler<TCurrent>(
         this ILogger logger,

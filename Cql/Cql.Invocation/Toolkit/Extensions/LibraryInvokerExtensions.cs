@@ -20,10 +20,12 @@ public static class LibraryInvokerExtensions
     /// </summary>
     /// <param name="libraryInvoker">The library invoker containing the definitions.</param>
     /// <param name="cqlContext">The CQL context used for invocation.</param>
+    /// <param name="definitionInvokerExceptionHandler">An exception handler for invoking a definition. (optional)</param>
     /// <returns>An enumeration of tuples containing the definition invoker and the result.</returns>
     public static IEnumerable<(DefinitionInvoker definitionInvoker, object? definitionResult)> EnumerateLibraryDefinitionsResults(
         this LibraryInvoker libraryInvoker,
-        CqlContext cqlContext)
+        CqlContext cqlContext,
+        ValueExceptionHandler<DefinitionInvoker>? definitionInvokerExceptionHandler = null)
     {
         var logger = libraryInvoker.LibrarySetInvoker.InvocationToolkit.LoggerFactory.CreateLogger(typeof(LibraryInvokerExtensions));
         var enumerationContinuation = libraryInvoker.LibrarySetInvoker.InvocationToolkit.Config.EnumerationExceptionContinuation;
@@ -38,6 +40,7 @@ public static class LibraryInvokerExtensions
                                                logger,
                                                (definitionInvoker, logMessage) =>
                                                    logMessage("Could not invoke definition {definition} on library {id}", definitionInvoker.DefinitionName, libraryInvoker.LibraryIdentifier))
+                                           .AddExceptionHandler(definitionInvokerExceptionHandler)
                           );
     }
 }
