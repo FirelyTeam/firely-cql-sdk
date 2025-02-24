@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 
@@ -27,15 +28,15 @@ public static class LibraryInvokerExtensions
         CqlContext cqlContext,
         ValueExceptionHandler<DefinitionInvoker>? definitionInvokerExceptionHandler = null)
     {
-        var logger = libraryInvoker.LibrarySetInvoker.InvocationToolkit.LoggerFactory.CreateLogger(typeof(LibraryInvokerExtensions));
-        var enumerationContinuation = libraryInvoker.LibrarySetInvoker.InvocationToolkit.Config.EnumerationExceptionContinuation;
+        var logger = libraryInvoker.LibrarySetInvoker.CreateLogger(typeof(LibraryInvokerExtensions));
+        var continuation = libraryInvoker.LibrarySetInvoker.EnumerationExceptionContinuation;
 
         return libraryInvoker.Definitions.Values
                       .Where(definitionInvoker => definitionInvoker.ValueSetId is not null)
                       .TrySelect(
                           definitionInvoker => (definitionInvoker,definitionInvoker.Invoke(cqlContext)),
                           errorStrategy => errorStrategy
-                                           .SetContinuation(enumerationContinuation)
+                                           .SetContinuation(continuation)
                                            .AddLoggerExceptionHandler(
                                                logger,
                                                (definitionInvoker, logMessage) =>

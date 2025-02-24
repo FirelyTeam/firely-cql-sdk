@@ -28,7 +28,7 @@ namespace Hl7.Cql.CqlToElm.Test
             // if (testCase.TestName != "AgeInYearsAt")
             //     Assert.Inconclusive("Skipped!");
 
-            var cqlToolkit = CreateFluentCqlToolkit(AllowNullIntervals:true);
+            var cqlToolkit = CreateCqlToolkit(AllowNullIntervals:true);
             var expression = cqlToolkit.Expression(testCase.Expression);
             var expressionErrors = expression.GetErrors();
             if (expressionErrors.Any())
@@ -58,22 +58,22 @@ namespace Hl7.Cql.CqlToElm.Test
             }
 
             Expression equal = Equals(expression, expectation);
-            var equalLambda = ToFluentElmToolkit().Lambda(equal);
+            var equalLambda = CreateElmToolkit().Lambda(equal);
 
             var equalDelegate = equalLambda.Compile();
             // TODO: These needs to be changed to run through the AssemblyCompiler too
             var equalResult = (bool?)equalDelegate.DynamicInvoke(CqlContext);
             if (equalResult != true)
             {
-                var expressionValue = ToFluentElmToolkit().Lambda(expression).Compile().DynamicInvoke(CqlContext);
-                var expectationValue = ToFluentElmToolkit().Lambda(expectation).Compile().DynamicInvoke(CqlContext);
+                var expressionValue = CreateElmToolkit().Lambda(expression).Compile().DynamicInvoke(CqlContext);
+                var expectationValue = CreateElmToolkit().Lambda(expectation).Compile().DynamicInvoke(CqlContext);
                 Assert.Fail($"Case {testFullName} assertion failed. Expected '{expectationValue}', but got '{expressionValue}'.");
             }
         }
 
         private static Expression Equals(Expression expression, Expression expectation)
         {
-            var fluentCqlToolkit = CreateFluentCqlToolkit();
+            var fluentCqlToolkit = CreateCqlToolkit();
             var invocationBuilder = fluentCqlToolkit.GetInvocationBuilder();
             var elmFactory = fluentCqlToolkit.GetElmFactory();
             var equal = invocationBuilder.Invoke(SystemLibrary.Equal, expression, expectation);

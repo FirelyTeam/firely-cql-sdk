@@ -9,6 +9,7 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Invocation.Toolkit.Internal;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.Invocation.Toolkit;
 
@@ -55,7 +56,7 @@ public abstract class LibraryInvoker
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
         libraryInvoker = null;
-        var logger = librarySetInvoker.InvocationToolkit.LoggerFactory.CreateLogger<LibraryInvoker>();
+        var logger = librarySetInvoker.CreateLogger<LibraryInvoker>();
 
         if (libraryType.GetCustomAttribute<CqlLibraryAttribute>() is not { })
         {

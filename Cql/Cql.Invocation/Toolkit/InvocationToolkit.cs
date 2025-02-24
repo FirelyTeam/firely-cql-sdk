@@ -6,10 +6,12 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Invocation.Toolkit.Internal;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.Toolkit;
+using System.ComponentModel;
 
 namespace Hl7.Cql.Invocation.Toolkit;
 
@@ -17,34 +19,37 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// <summary>
 /// Builder class for creating instances of <see cref="LibrarySetInvoker"/>.
 /// </summary>
-public sealed class InvocationToolkit
+public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="InvocationToolkit"/> class.
     /// </summary>
     /// <param name="loggerFactory">Optional logger factory for logging purposes.</param>
-    /// <param name="config">The configuration for the toolkit.</param>
+    /// <param name="enumerationExceptionContinuation">The continuation policy to use when an exception occurs during enumeration.</param>
     public InvocationToolkit(
         ILoggerFactory? loggerFactory = null,
-        InvocationToolkitConfig? config = null)
+        EnumerationExceptionContinuation enumerationExceptionContinuation = EnumerationExceptionContinuation.Throw)
     {
-        config ??= InvocationToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
-        Config = config;
+        EnumerationExceptionContinuation = enumerationExceptionContinuation;
         _assemblyBinaries = AssemblyBinaryHashSet.Empty;
         _services = LibrarySetInvokerBuilderServices.Create(loggerFactory);
     }
 
-    /// <summary>
-    /// Gets the logger factory used by extensions on the <see cref="InvocationToolkit"/>.
-    /// </summary>
-    internal ILoggerFactory LoggerFactory { get; }
+    /// <inheritdoc />
+    [EditorBrowsable(EditorBrowsableState.Advanced)]
+    public ILoggerFactory LoggerFactory { get; }
 
-    /// <summary>
-    /// Gets the configuration.
-    /// </summary>
-    public InvocationToolkitConfig Config { get; private set; }
+    /// <inheritdoc />
+    public EnumerationExceptionContinuation EnumerationExceptionContinuation { get; private set; }
+
+    /// <inheritdoc />
+    public InvocationToolkit SetEnumerationExceptionContinuation(EnumerationExceptionContinuation continuation)
+    {
+        EnumerationExceptionContinuation = continuation;
+        return this;
+    }
 
     /// <summary>
     /// Gets the set of assembly binaries.
@@ -53,20 +58,6 @@ public sealed class InvocationToolkit
 
     private readonly LibrarySetInvokerBuilderServices _services;
     private AssemblyBinaryHashSet _assemblyBinaries;
-
-    /// <summary>
-    /// Reconfigures the toolkit with new configuration settings.
-    /// </summary>
-    /// <param name="reconfigure">A function that takes the current configuration and returns a new configuration.</param>
-    /// <returns>The updated <see cref="InvocationToolkit"/> instance.</returns>
-    public InvocationToolkit Reconfigure(
-        Mutator<InvocationToolkitConfig> reconfigure)
-    {
-        var config = reconfigure(Config);
-
-        Config = config;
-        return this;
-    }
 
     /// <summary>
     /// Sets the assembly binaries.
@@ -112,12 +103,23 @@ public sealed class InvocationToolkit
         _services.Logger.LogDebug("Creating LibrarySetInvoker {name}", name);
 
         var alc = new AssemblyLoadContext(name, true);
-        foreach (var (assembly, debugSymbols) in AssemblyBinaries)
-        {
-            var asm = alc.LoadFromBytes(assembly!, debugSymbols);
-            _services.Logger.LogInformation("Loaded assembly {assemblyName}", asm.FullName);
-        }
 
-        return new LibrarySetInvoker(this, alc);
+        AssemblyBinaries
+            .TryForEach(t =>
+                {
+                    var (assembly, debugSymbols) = t;
+                    var asm = alc.LoadFromBytes(assembly!, debugSymbols);
+                    _services.Logger.LogInformation("Loaded assembly {assemblyName}", asm.FullName);
+                },
+                errorStrategy => errorStrategy
+                    .SetContinuation(EnumerationExceptionContinuation)
+                    .AddLoggerExceptionHandler(
+                        _services.Logger,
+                        (assemblyBinary, logMessage) => logMessage("Unable to load an assembly from the binary containing {byteLength} byte(s).", assemblyBinary.AssemblyBytes!.Length)));
+
+        return new LibrarySetInvoker(
+            alc,
+            this.LoggerFactory,
+            this.EnumerationExceptionContinuation);
     }
 }

@@ -12,50 +12,62 @@ using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Toolkit;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
+using System.ComponentModel;
 
 namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 
 /// <summary>
 /// Compiles ELM (Expression Logical Model) into .NET assemblies.
 /// </summary>
-public sealed class ElmToolkit
+public sealed class ElmToolkit : IToolkitWithConfig<ElmToolkit, ElmToolkitConfig>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ElmToolkit"/> class.
     /// </summary>
     /// <param name="loggerFactory">The logger factory to use for logging.</param>
     /// <param name="config">The configuration for the toolkit.</param>
+    /// <param name="enumerationExceptionContinuation">The continuation policy to use when an exception occurs during enumeration.</param>
     public ElmToolkit(
         ILoggerFactory? loggerFactory = null,
-        ElmToolkitConfig? config = null)
+        ElmToolkitConfig? config = null,
+        EnumerationExceptionContinuation enumerationExceptionContinuation = EnumerationExceptionContinuation.Throw)
     {
         config ??= ElmToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
         _conversions = ElmToolkitConversionDictionary.Empty;
         Config = config;
+        EnumerationExceptionContinuation = enumerationExceptionContinuation;
         _services = ElmToolkitServices.Create(loggerFactory, config);
     }
 
     private ElmToolkitConversionDictionary _conversions;
     private ElmToolkitServices _services;
 
-    /// <summary>
-    /// Gets the logger factory used by extensions.
-    /// </summary>
-    internal ILoggerFactory LoggerFactory { get; }
+    /// <inheritdoc />
+    [EditorBrowsable(EditorBrowsableState.Advanced)]
+    public ILoggerFactory LoggerFactory { get; }
 
     /// <summary>
     /// Gets the service provider used by tests.
     /// </summary>
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
-    /// <summary>
-    /// Gets the configuration.
-    /// </summary>
+    /// <inheritdoc />
     public ElmToolkitConfig Config { get; private set; }
+
+    /// <inheritdoc />
+    public EnumerationExceptionContinuation EnumerationExceptionContinuation { get; private set; }
+
+    /// <inheritdoc />
+    public ElmToolkit SetEnumerationExceptionContinuation(EnumerationExceptionContinuation continuation)
+    {
+        EnumerationExceptionContinuation = continuation;
+        return this;
+    }
 
     /// <summary>
     /// Gets the dictionary of ELM to assembly compilations.
@@ -72,15 +84,14 @@ public sealed class ElmToolkit
         _conversions = conversions;
     }
 
-    /// <summary>
-    /// Reconfigures the toolkit with new configuration settings.
-    /// </summary>
-    /// <param name="reconfigure">A function that takes the current configuration and returns a new configuration.</param>
+    /// <inheritdoc />
     public ElmToolkit Reconfigure(
-        Mutator<ElmToolkitConfig> reconfigure)
+        Mutator<ElmToolkitConfig>? reconfigure)
     {
-        var config = reconfigure(Config);
+        if (reconfigure is null)
+            return this;
 
+        var config = reconfigure(Config);
         if (Config == config)
             return this;
 
@@ -107,7 +118,7 @@ public sealed class ElmToolkit
                                     conversions.Add(libId, conversionRecord); // This fails on duplicate key and value
                                 },
                                 errorStrategy => errorStrategy
-                                                 .SetContinuation(Config.EnumerationExceptionContinuation)
+                                                 .SetContinuation(EnumerationExceptionContinuation)
                                                  .AddLoggerExceptionHandler(
                                                      logger,
                                                      (conversionRecord, logMessage) =>
@@ -212,7 +223,7 @@ public sealed class ElmToolkit
                 librarySet,
                 debugInformationFormat,
                 errorStrategy => errorStrategy
-                                 .SetContinuation(Config.EnumerationExceptionContinuation)
+                                 .SetContinuation(EnumerationExceptionContinuation)
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (pair, logMessage) =>
@@ -234,7 +245,7 @@ public sealed class ElmToolkit
                 librarySet,
                 librarySetDefinitions,
                 errorStrategy => errorStrategy
-                                 .SetContinuation(Config.EnumerationExceptionContinuation)
+                                 .SetContinuation(EnumerationExceptionContinuation)
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (library, log) => log("Could not generate definitions into C#: {lib}", library.GetVersionedIdentifier())),
@@ -256,7 +267,7 @@ public sealed class ElmToolkit
                 librarySet,
                 librarySetDefinitions,
                 errorStrategy => errorStrategy
-                                 .SetContinuation(Config.EnumerationExceptionContinuation)
+                                 .SetContinuation(EnumerationExceptionContinuation)
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (library, logMessage) =>

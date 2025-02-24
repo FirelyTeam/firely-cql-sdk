@@ -17,8 +17,11 @@ Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.AddElmLibraries(System.Collections
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.Config.get -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig!
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.Conversions.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConversionRecord>!
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.ConvertElmToAssemblies() -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.ElmToolkit(Microsoft.Extensions.Logging.ILoggerFactory? loggerFactory = null, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig? config = null) -> void
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.Reconfigure(Hl7.Cql.Abstractions.Mutator<Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig!>! reconfigure) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.ElmToolkit(Microsoft.Extensions.Logging.ILoggerFactory? loggerFactory = null, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig? config = null, Hl7.Cql.Runtime.EnumerationExceptionContinuation enumerationExceptionContinuation = Hl7.Cql.Runtime.EnumerationExceptionContinuation.Throw) -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.EnumerationExceptionContinuation.get -> Hl7.Cql.Runtime.EnumerationExceptionContinuation
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.LoggerFactory.get -> Microsoft.Extensions.Logging.ILoggerFactory!
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.Reconfigure(Hl7.Cql.Abstractions.Mutator<Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig!>? reconfigure) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.SetEnumerationExceptionContinuation(Hl7.Cql.Runtime.EnumerationExceptionContinuation continuation) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.<Clone>$() -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig!
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AllowScopeRedefinition.get -> bool
@@ -27,10 +30,8 @@ Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AllowUnresolvedExternals.get
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AllowUnresolvedExternals.init -> void
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AssemblyCompilerDebugInformationFormat.get -> Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AssemblyCompilerDebugInformationFormat.init -> void
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.Deconstruct(out Hl7.Cql.Runtime.EnumerationExceptionContinuation EnumerationExceptionContinuation, out Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat AssemblyCompilerDebugInformationFormat, out bool AllowScopeRedefinition, out bool AllowUnresolvedExternals, out int LRUCacheSize) -> void
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.ElmToolkitConfig(Hl7.Cql.Runtime.EnumerationExceptionContinuation EnumerationExceptionContinuation = Hl7.Cql.Runtime.EnumerationExceptionContinuation.Throw, Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat AssemblyCompilerDebugInformationFormat = Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat.None, bool AllowScopeRedefinition = true, bool AllowUnresolvedExternals = true, int LRUCacheSize = 0) -> void
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.EnumerationExceptionContinuation.get -> Hl7.Cql.Runtime.EnumerationExceptionContinuation
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.EnumerationExceptionContinuation.init -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.Deconstruct(out Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat AssemblyCompilerDebugInformationFormat, out bool AllowScopeRedefinition, out bool AllowUnresolvedExternals, out int LRUCacheSize) -> void
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.ElmToolkitConfig(Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat AssemblyCompilerDebugInformationFormat = Hl7.Cql.CodeGeneration.NET.AssemblyCompilerDebugInformationFormat.None, bool AllowScopeRedefinition = true, bool AllowUnresolvedExternals = true, int LRUCacheSize = 0) -> void
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.Equals(Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig? other) -> bool
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.LRUCacheSize.get -> int
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.LRUCacheSize.init -> void
@@ -96,7 +97,6 @@ static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SaveAs
 static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SaveCSharpFilesToDirectory(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit, System.IO.DirectoryInfo! directory, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? directoryPreparationStrategy = null) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
 static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SetAssemblyDebugInformationToEmbedded(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! cqlToolkit) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
 static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SetAssemblyDebugInformationToPortablePdb(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! cqlToolkit) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
-static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SetExceptionHandlingToIgnore(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! cqlToolkit, bool stopAfterFirstException = false) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
 virtual Hl7.Cql.CodeGeneration.NET.AssemblyBinary.<Clone>$() -> Hl7.Cql.CodeGeneration.NET.AssemblyBinary!
 virtual Hl7.Cql.CodeGeneration.NET.AssemblyBinary.EqualityContract.get -> System.Type!
 virtual Hl7.Cql.CodeGeneration.NET.AssemblyBinary.Equals(Hl7.Cql.CodeGeneration.NET.AssemblyBinary? other) -> bool

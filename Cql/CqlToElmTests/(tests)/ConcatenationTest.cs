@@ -10,7 +10,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_String_To_String()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library Add_Integer_to_Integer version '1.0.0'
 
                 define private Three: 'hello' & 'world'
@@ -57,7 +57,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual("world", rhs.value);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(concatenate);
+                var lambda = CreateElmToolkit().Lambda(concatenate);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(string));
@@ -71,7 +71,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Add_Three_Strings()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library Add_Integer_to_Integer version '1.0.0'
 
                 define private Three: 'hello' & (' ' & 'world')
@@ -116,7 +116,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}String", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(concatenate);
+                var lambda = CreateElmToolkit().Lambda(concatenate);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(string));

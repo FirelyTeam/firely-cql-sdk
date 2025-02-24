@@ -9,6 +9,7 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.Invocation.Toolkit.Internal;
 
@@ -62,7 +63,7 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
         libraryInvoker = null;
-        var logger = librarySetInvoker.InvocationToolkit.LoggerFactory.CreateLogger<LibraryInvoker_2_0_8_0>();
+        var logger = librarySetInvoker.CreateLogger<LibraryInvoker_2_0_8_0>();
 
         if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
         {

@@ -12,6 +12,7 @@ using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Toolkit;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
@@ -72,12 +73,11 @@ internal static class Program
             CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory);
             try
             {
-                cqlToolkit
-                    .SetExceptionHandlingToIgnore()
-                    .AddCqlLibraries(
-                        CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:A"),
-                        CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:B"),
-                        CqlLibraryString.Parse("library Lib version '0.0.0' define:B"));
+                cqlToolkit.SetIgnoreEnumerationExceptions(false)
+                          .AddCqlLibraries(
+                              CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:A"),
+                              CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:B"),
+                              CqlLibraryString.Parse("library Lib version '0.0.0' define:B"));
             }
             catch (Exception e)
             {
@@ -92,12 +92,11 @@ internal static class Program
             CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory);
             try
             {
-                cqlToolkit
-                    .SetExceptionHandlingToIgnore(stopAfterFirstException: true)
-                    .AddCqlLibraries(
-                        CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:A"),
-                        CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:B"),
-                        CqlLibraryString.Parse("library Lib version '0.0.0' define:C"));
+                cqlToolkit.SetIgnoreEnumerationExceptions(true)
+                          .AddCqlLibraries(
+                              CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:A"),
+                              CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:B"),
+                              CqlLibraryString.Parse("library Lib version '0.0.0' define:C"));
             }
             catch (Exception e)
             {
@@ -172,10 +171,9 @@ internal static class Program
         var cqlContext = FhirCqlContext.ForBundle();
 
         // We need a disposable invocation scope, which contains the AssemblyLoadContext and the related library Assemblies.
-        using var librarySetInvoker = cqlToolkit
-                                      .SetExceptionHandlingToIgnore()
-                                      .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory)
-                                      .CreateLibrarySetInvoker();
+        using var librarySetInvoker = cqlToolkit.SetIgnoreEnumerationExceptions(false)
+                                                .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory)
+                                                .CreateLibrarySetInvoker();
         logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDeclarations());
         Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
         Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
@@ -203,10 +201,9 @@ internal static class Program
         dirs.GeneratedDirectory.Delete(recursive: true);
 
         // Create fluent cql toolkit
-        var cqlToElmProcessorSettings = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
+        var config = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         CqlToolkit cqlToolkit =
-            new CqlToolkit(loggerFactory, cqlToElmProcessorSettings)
-                .SetExceptionHandlingToIgnore();
+            new CqlToolkit(loggerFactory, config).SetIgnoreEnumerationExceptions();
 
         if (shouldBuildCqlToElm)
         {

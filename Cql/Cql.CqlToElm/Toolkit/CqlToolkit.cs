@@ -9,38 +9,42 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CqlToElm.Toolkit.Internal;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Toolkit;
 using Microsoft.Extensions.Logging.Abstractions;
+using System.ComponentModel;
 
 namespace Hl7.Cql.CqlToElm.Toolkit;
 
 /// <summary>
 /// Translates CQL libraries to ELM libraries.
 /// </summary>
-public sealed class CqlToolkit
+public sealed class CqlToolkit : IToolkitWithConfig<CqlToolkit, CqlToolkitConfig>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="CqlToolkit"/> class.
     /// </summary>
     /// <param name="loggerFactory">The logger factory to use for logging.</param>
     /// <param name="config">The configuration settings for the toolkit.</param>
+    /// <param name="enumerationExceptionContinuation">The continuation policy to use when an exception occurs during enumeration.</param>
     public CqlToolkit(
         ILoggerFactory? loggerFactory = null,
-        CqlToolkitConfig? config = null)
+        CqlToolkitConfig? config = null,
+        EnumerationExceptionContinuation enumerationExceptionContinuation = EnumerationExceptionContinuation.Throw)
     {
         config ??= CqlToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
         _conversions = CqlToolkitConversionDictionary.Empty;
         Config = config;
+        EnumerationExceptionContinuation = enumerationExceptionContinuation;
         _services = CqlToolkitServices.Create(loggerFactory, config, _conversions);
     }
 
     private CqlToolkitConversionDictionary _conversions;
     private CqlToolkitServices _services;
 
-    /// <summary>
-    /// Gets the logger factory used by extensions.
-    /// </summary>
+    /// <inheritdoc/>
+    [EditorBrowsable(EditorBrowsableState.Advanced)]
     public ILoggerFactory LoggerFactory { get; }
 
     /// <summary>
@@ -48,10 +52,18 @@ public sealed class CqlToolkit
     /// </summary>
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
-    /// <summary>
-    /// Gets the configuration.
-    /// </summary>
+    /// <inheritdoc/>
     public CqlToolkitConfig Config { get; private set; }
+
+    /// <inheritdoc />
+    public EnumerationExceptionContinuation EnumerationExceptionContinuation { get; private set; }
+
+    /// <inheritdoc />
+    public CqlToolkit SetEnumerationExceptionContinuation(EnumerationExceptionContinuation continuation)
+    {
+        EnumerationExceptionContinuation = continuation;
+        return this;
+    }
 
     /// <summary>
     /// Gets the dictionary of CQL to ELM translations.
@@ -69,15 +81,14 @@ public sealed class CqlToolkit
         _services.LibraryBuilderProvider.ConversionsBuilder = conversions.ToBuilder();
     }
 
-    /// <summary>
-    /// Reconfigures the toolkit with new configuration settings.
-    /// </summary>
-    /// <param name="reconfigure">A function that takes the current configuration and returns a new configuration.</param>
+    /// <inheritdoc />
     public CqlToolkit Reconfigure(
-        Mutator<CqlToolkitConfig> reconfigure)
+        Mutator<CqlToolkitConfig>? reconfigure)
     {
-        var config = reconfigure(Config);
+        if (reconfigure is null)
+            return this;
 
+        var config = reconfigure(Config);
         if (Config == config)
             return this;
 
@@ -108,7 +119,7 @@ public sealed class CqlToolkit
                             conversions.Add(libId, conversionRecord); // This fails on duplicate key and value
                         },
                         errorStrategy => errorStrategy
-                                         .SetContinuation(Config.EnumerationExceptionContinuation)
+                                         .SetContinuation(EnumerationExceptionContinuation)
                                          .AddLoggerExceptionHandler(
                                              logger,
                                              (conversionRecord, logMessage) =>

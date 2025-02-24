@@ -10,7 +10,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_As_Decimal()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library AsTest version '1.0.0'
 
                 define private Integer_As_Decimal: 1 as System.Decimal
@@ -21,7 +21,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void ValueSet_As_Vocabulary()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library AsTest version '1.0.0'
 
                 valueset "vs": 'http://xyz.com'
@@ -41,7 +41,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 var nts = (NamedTypeSpecifier)@as.asTypeSpecifier;
                 Assert.AreEqual($"{{{SystemUri}}}Vocabulary", nts.name?.Name);
 
-                var delegates = ToFluentElmToolkit().ProcessLibrary(library).CompileAll();
+                var delegates = CreateElmToolkit().ProcessLibrary(library).CompileAll();
                 var dg = delegates["AsTest-1.0.0", "ValueSet_As_Vocabulary"];
                 var ctx = FhirCqlContext.ForBundle(delegates: delegates);
                 var result = dg.DynamicInvoke(ctx);
@@ -53,7 +53,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_As_Decimal()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library AsTest version '1.0.0'
 
                 define private Null_As_Decimal: null as System.Decimal
@@ -95,7 +95,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private void AssertAsNull(As @as)
         {
-            var lambda = ToFluentElmToolkit().Lambda(@as);
+            var lambda = CreateElmToolkit().Lambda(@as);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
             var result = dg.DynamicInvoke(ctx);
@@ -105,7 +105,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DecimalLiteral_CastAs_Decimal()
         {
-            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("cast (1.0 as System.Any) as System.Decimal");
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("cast (1.0 as System.Any) as System.Decimal");
             var castAs = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
 
             castAs.strict.Should().BeTrue();
@@ -116,7 +116,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void BooleanLiteral_CastAs_Decimal()
         {
-            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("cast (true as System.Any) as System.Decimal");
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("cast (true as System.Any) as System.Decimal");
             var castAs = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
 
             castAs.strict.Should().BeTrue();
@@ -127,7 +127,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void FhirId_As_FhirString()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibrary("""
+            var lib = CreateCqlToolkit().MakeLibrary("""
                 library AsTest version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -135,7 +135,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private function f(id FHIR.id): id as FHIR.string
                 """);
             lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<As>();
-            var lambdas = ToFluentElmToolkit().ProcessLibrary(lib);
+            var lambdas = CreateElmToolkit().ProcessLibrary(lib);
             var delegates = lambdas.CompileAll();
             var dg = delegates[lib.GetVersionedIdentifier(), "f", typeof(Hl7.Fhir.Model.Id)];
             var ctx = FhirCqlContext.ForBundle();
@@ -148,7 +148,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Choice_As()
         {
             // from MATGlobalCommonFunctionsFHIR4.cql function "Normalize Interval"
-            var lib = CreateFluentCqlToolkit().MakeLibrary("""
+            var lib = CreateCqlToolkit().MakeLibrary("""
                 library AsTest version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -159,7 +159,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define private function f(choice Choice<FHIR.dateTime, FHIR.Range>):
                     choice as FHIR.Range
                 """);
-            _ = ToFluentElmToolkit().ProcessLibrary(lib);
+            _ = CreateElmToolkit().ProcessLibrary(lib);
         }
     }
 }

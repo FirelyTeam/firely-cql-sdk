@@ -9,7 +9,6 @@
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit;
-using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Packaging.Toolkit.Extensions;
 
@@ -18,20 +17,6 @@ namespace Hl7.Cql.Packaging.Toolkit.Extensions;
 /// </summary>
 public static partial class PackagingToolkitExtensions
 {
-    /// <summary>
-    /// Configures the <see cref="PackagingToolkit"/> to ignore exceptions.
-    /// </summary>
-    /// <param name="packagingToolkit">The <see cref="PackagingToolkit"/> to configure.</param>
-    /// <param name="stopAfterFirstException">If set to <c>true</c>, stops after the first exception; otherwise, continues.</param>
-    /// <returns>The configured <see cref="PackagingToolkit"/>.</returns>
-    public static PackagingToolkit SetExceptionHandlingToIgnore(this PackagingToolkit packagingToolkit, bool stopAfterFirstException = false) =>
-        packagingToolkit.Reconfigure(o => o with
-        {
-            EnumerationExceptionContinuation = stopAfterFirstException
-                                                    ? EnumerationExceptionContinuation.Break
-                                                    : EnumerationExceptionContinuation.Continue
-        });
-
     /// <summary>
     /// Adds packaging inputs from CQL and ELM toolkits to the <see cref="PackagingToolkit"/>.
     /// </summary>
@@ -47,8 +32,8 @@ public static partial class PackagingToolkitExtensions
         var cqlLibraries = cqlToolkit.Conversions.Values.Select(o => o.SourceCqlLibrary);
         var compilations = elmToolkit.Conversions.Values.SelectWhere(o => o switch
         {
-            { ResultCSharpSourceCode: { } ResultCSharpSourceCode, ResultAssemblyBinary: { } ResultAssemblyBinary } => (true, (o.LibraryIdentifier, o.SourceElmLibrary, ResultCSharpSourceCode, ResultAssemblyBinary)),
-            _ => default
+            { ResultCSharpSourceCode: { } csharpSourceCode, ResultAssemblyBinary: { } assemblyBinary } => (true, (o.LibraryIdentifier, o.SourceElmLibrary, ResultCSharpSourceCode: csharpSourceCode, ResultAssemblyBinary: assemblyBinary)),
+            _                                                                                                      => default
         });
         var inputs =
             cqlLibraries

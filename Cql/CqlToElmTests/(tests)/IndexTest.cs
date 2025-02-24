@@ -8,7 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void LastIndexOf()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibraryFromExpression("LastPositionOf('hi', 'Ohio is the place to be!')");
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("LastPositionOf('hi', 'Ohio is the place to be!')");
             var lpo = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<LastPositionOf>();
             var result = Run<int?>(lpo, lib);
             result.Should().Be(1);

@@ -24,13 +24,10 @@ public static class CqlToolkitExtensions
     /// <returns>An instance of <see cref="ElmToolkit"/>.</returns>
     public static ElmToolkit CreateElmToolkit(
         this CqlToolkit cqlToolkit,
-        Mutator<ElmToolkitConfig>? reconfigure = null)
-    {
-        var config = new ElmToolkitConfig(cqlToolkit.Config.EnumerationExceptionContinuation);
-        if (reconfigure is not null) config = reconfigure(config);
-        var elmToolkit = new ElmToolkit(cqlToolkit.LoggerFactory, config).AddElmFromCqlToolkit(cqlToolkit);
-        return elmToolkit;
-    }
+        Mutator<ElmToolkitConfig>? reconfigure = null) =>
+        new ElmToolkit(cqlToolkit.LoggerFactory, enumerationExceptionContinuation: cqlToolkit.EnumerationExceptionContinuation)
+            .Reconfigure(reconfigure)
+            .AddElmFromCqlToolkit(cqlToolkit);
 
     /// <summary>
     /// Compiles CQL to assemblies using the provided <see cref="CqlToolkit"/>.

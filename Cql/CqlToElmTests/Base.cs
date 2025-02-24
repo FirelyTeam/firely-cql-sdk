@@ -30,7 +30,7 @@ namespace Hl7.Cql.CqlToElm.Test
             CqlContext? ctx = null)
         {
             ctx ??= DefaultCqlContext;
-            var elmToolkit = ToFluentElmToolkit();
+            var elmToolkit = CreateElmToolkit();
             var lambda = elmToolkit.Lambda(expression);
             var expressionName = "TempExpression";
             var elmToolkitServices = elmToolkit;
@@ -64,6 +64,11 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private static readonly CqlContext DefaultCqlContext = FhirCqlContext.CreateContext();
 
+        private static readonly ElmToolkitConfig ElmToolkitConfig =
+            Debugger.IsAttached
+            ? new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat: AssemblyCompilerDebugInformationFormat.Embedded)
+            : ElmToolkitConfig.Default;
+
         internal static T? Run<T>(
             Expression expression,
             Library library,
@@ -72,7 +77,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         protected static void AssertResult<T>(Expression be, T expected)
         {
-            var lambda = ToFluentElmToolkit().Lambda(@be);
+            var lambda = CreateElmToolkit().Lambda(@be);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
 
@@ -91,7 +96,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         protected static void AssertNullResult(Expression be)
         {
-            var lambda = ToFluentElmToolkit().Lambda(@be);
+            var lambda = CreateElmToolkit().Lambda(@be);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
 
@@ -174,7 +179,7 @@ namespace Hl7.Cql.CqlToElm.Test
             Assert.IsNotNull(list.element);
             Assert.AreEqual(expectedValues.Length, list.element.Length);
 
-            var lambda = ToFluentElmToolkit().Lambda(list);
+            var lambda = CreateElmToolkit().Lambda(list);
             var dg = lambda.Compile();
             var ctx = FhirCqlContext.ForBundle();
             var result = dg.DynamicInvoke(ctx);
@@ -192,7 +197,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 .BuildServiceProvider()
                 .GetRequiredService<ILoggerFactory>();
 
-        protected static CqlToolkit CreateFluentCqlToolkit(
+        protected static CqlToolkit CreateCqlToolkit(
             ImmutableHashSet<CqlModel>? Models = null,
             ImmutableHashSet<ModelInfo>? ModelInfos = null,
             AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,
@@ -201,10 +206,8 @@ namespace Hl7.Cql.CqlToElm.Test
             bool EnableIntervalPromotion = false,
             bool EnableIntervalDemotion = false,
             bool AllowNullIntervals = false) =>
-            new(
-                LoggerFactory,
+            new(LoggerFactory,
                 new CqlToolkitConfig(
-                    EnumerationExceptionContinuation: EnumerationExceptionContinuation.Throw,
                     Models: Models ?? [CqlModel.ElmR1, CqlModel.Fhir401],
                     ModelInfos: ModelInfos,
                     AmbiguousTypeBehavior: AmbiguousTypeBehavior,
@@ -215,14 +218,13 @@ namespace Hl7.Cql.CqlToElm.Test
                     AllowNullIntervals: AllowNullIntervals
                 ));
 
-        internal static ElmToolkit ToFluentElmToolkit(
+        internal static ElmToolkit CreateElmToolkit(
             ImmutableHashSet<CqlModel>? models = null,
             ImmutableHashSet<ModelInfo>? modelInfos = null,
             AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
             bool enableListPromotion = false) =>
-            CreateFluentCqlToolkit(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
-                .CreateElmToolkit(_ => new ElmToolkitConfig(
-                                        EnumerationExceptionContinuation.Throw,
-                                        Debugger.IsAttached ? AssemblyCompilerDebugInformationFormat.Embedded : AssemblyCompilerDebugInformationFormat.None));
+            CreateCqlToolkit(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
+                .CreateElmToolkit()
+                .Reconfigure(_ => ElmToolkitConfig);
     }
 }

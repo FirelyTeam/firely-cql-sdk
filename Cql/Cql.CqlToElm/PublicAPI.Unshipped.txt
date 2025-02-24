@@ -60,17 +60,19 @@ Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.AddCqlLibraries(System.Collections.Generic.I
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.Config.get -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.Conversions.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord>!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.ConvertCqlToElm() -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.CqlToolkit(Microsoft.Extensions.Logging.ILoggerFactory? loggerFactory = null, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig? config = null) -> void
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.CqlToolkit(Microsoft.Extensions.Logging.ILoggerFactory? loggerFactory = null, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig? config = null, Hl7.Cql.Runtime.EnumerationExceptionContinuation enumerationExceptionContinuation = Hl7.Cql.Runtime.EnumerationExceptionContinuation.Throw) -> void
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.EnumerationExceptionContinuation.get -> Hl7.Cql.Runtime.EnumerationExceptionContinuation
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.LoggerFactory.get -> Microsoft.Extensions.Logging.ILoggerFactory!
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.Reconfigure(Hl7.Cql.Abstractions.Mutator<Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig!>! reconfigure) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.Reconfigure(Hl7.Cql.Abstractions.Mutator<Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig!>? reconfigure) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.SetEnumerationExceptionContinuation(Hl7.Cql.Runtime.EnumerationExceptionContinuation continuation) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.<Clone>$() -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.AllowNullIntervals.get -> bool
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.AllowNullIntervals.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.AmbiguousTypeBehavior.get -> Hl7.Cql.CqlToElm.AmbiguousTypeBehavior
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.AmbiguousTypeBehavior.init -> void
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.CqlToolkitConfig(Hl7.Cql.Runtime.EnumerationExceptionContinuation EnumerationExceptionContinuation = Hl7.Cql.Runtime.EnumerationExceptionContinuation.Throw, System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CqlToElm.Toolkit.CqlModel>? Models = null, System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.Model.ModelInfo!>? ModelInfos = null, Hl7.Cql.CqlToElm.AmbiguousTypeBehavior AmbiguousTypeBehavior = Hl7.Cql.CqlToElm.AmbiguousTypeBehavior.Error, bool EnableListDemotion = false, bool EnableListPromotion = false, bool EnableIntervalPromotion = false, bool EnableIntervalDemotion = false, bool AllowNullIntervals = false) -> void
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.Deconstruct(out Hl7.Cql.Runtime.EnumerationExceptionContinuation EnumerationExceptionContinuation, out System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CqlToElm.Toolkit.CqlModel>? Models, out System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.Model.ModelInfo!>? ModelInfos, out Hl7.Cql.CqlToElm.AmbiguousTypeBehavior AmbiguousTypeBehavior, out bool EnableListDemotion, out bool EnableListPromotion, out bool EnableIntervalPromotion, out bool EnableIntervalDemotion, out bool AllowNullIntervals) -> void
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.CqlToolkitConfig(System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CqlToElm.Toolkit.CqlModel>? Models = null, System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.Model.ModelInfo!>? ModelInfos = null, Hl7.Cql.CqlToElm.AmbiguousTypeBehavior AmbiguousTypeBehavior = Hl7.Cql.CqlToElm.AmbiguousTypeBehavior.Error, bool EnableListDemotion = false, bool EnableListPromotion = false, bool EnableIntervalPromotion = false, bool EnableIntervalDemotion = false, bool AllowNullIntervals = false) -> void
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.Deconstruct(out System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CqlToElm.Toolkit.CqlModel>? Models, out System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.Model.ModelInfo!>? ModelInfos, out Hl7.Cql.CqlToElm.AmbiguousTypeBehavior AmbiguousTypeBehavior, out bool EnableListDemotion, out bool EnableListPromotion, out bool EnableIntervalPromotion, out bool EnableIntervalDemotion, out bool AllowNullIntervals) -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableIntervalDemotion.get -> bool
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableIntervalDemotion.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableIntervalPromotion.get -> bool
@@ -79,8 +81,6 @@ Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableListDemotion.get -> bool
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableListDemotion.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableListPromotion.get -> bool
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableListPromotion.init -> void
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnumerationExceptionContinuation.get -> Hl7.Cql.Runtime.EnumerationExceptionContinuation
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnumerationExceptionContinuation.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.Equals(Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig? other) -> bool
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.ModelInfos.get -> System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.Model.ModelInfo!>!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.ModelInfos.init -> void
@@ -139,7 +139,6 @@ static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.AddCqlLibrariesF
 static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.AddCqlLibraryFiles(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, System.Collections.Generic.IEnumerable<System.IO.FileInfo!>! files) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
 static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.GetCqlToolkitResults(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit) -> System.Collections.Generic.IEnumerable<Hl7.Cql.CqlToElm.Toolkit.CqlToolkitResultRecord>!
 static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.SaveElmFilesToDirectory(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, System.IO.DirectoryInfo! directory, bool writeIndented = true, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? directoryPreparationStrategy = null) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
-static Hl7.Cql.CqlToElm.Toolkit.Extensions.CqlToolkitExtensions.SetExceptionHandlingToIgnore(this Hl7.Cql.CqlToElm.Toolkit.CqlToolkit! cqlToolkit, bool stopAfterFirstException = false) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
 static readonly Hl7.Cql.CqlToElm.CqlToElmOptions.Default -> Hl7.Cql.CqlToElm.CqlToElmOptions!
 ~override Hl7.Cql.CqlToElm.CqlLibraryString.Equals(object obj) -> bool
 ~override Hl7.Cql.CqlToElm.CqlLibraryString.ToString() -> string

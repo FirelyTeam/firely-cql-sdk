@@ -10,7 +10,7 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         static CoercionTest()
         {
-            var fluentCqlToolkit = CreateFluentCqlToolkit(
+            var fluentCqlToolkit = CreateCqlToolkit(
                 EnableListPromotion: true,
                 EnableListDemotion: true,
                 EnableIntervalPromotion: true,

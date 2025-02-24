@@ -8,7 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void String_lengths()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibraryFromExpression("from ({'hello', 'world'}) str return Length(str)");
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("from ({'hello', 'world'}) str return Length(str)");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             query.Should().HaveType(SystemTypes.IntegerType.ToListType());
         }
@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Sort_asc()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibraryFromExpression("({4, 5, 1, 6, 2, 1}) sL sort asc");
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("({4, 5, 1, 6, 2, 1}) sL sort asc");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             query.Should().HaveType(SystemTypes.IntegerType.ToListType());
 
@@ -26,7 +26,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Scalar_source()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibraryFromExpression("from (true) t return t and false");
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("from (true) t return t and false");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             query.Should().HaveType(SystemTypes.BooleanType);
             query.@return.Should().HaveType(SystemTypes.BooleanType);
@@ -34,7 +34,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Vector_source()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibraryFromExpression("from ({ true, false }) t return t and false");
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("from ({ true, false }) t return t and false");
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
             query.Should().HaveType(SystemTypes.BooleanType.ToListType());
             query.@return.Should().HaveType(SystemTypes.BooleanType.ToListType());
@@ -42,7 +42,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Relationship_with_scalar_sources()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibraryFromExpression("""
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("""
                 from(true) t
                 with(false) f
                 such that t != f
@@ -54,7 +54,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Relationship_with_bad_identifier()
         {
-            CreateFluentCqlToolkit().MakeLibrary($"""
+            CreateCqlToolkit().MakeLibrary($"""
                 library Test version '1.0.0'
 
                 define f: from (true) t
@@ -68,7 +68,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multi_scalar_source()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibraryFromExpression("""
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("""
                 from
                     (1) Num1,
                     (2) Num2
@@ -85,7 +85,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Multi_vector_source()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibraryFromExpression("""
+            var lib = CreateCqlToolkit().MakeLibraryFromExpression("""
                 from
                     ( { 1, 2 } ) Num1,
                     ( { 3, 4 } ) Num2
@@ -102,7 +102,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Sort_Calls_Function()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibrary("""
+            var lib = CreateCqlToolkit().MakeLibrary("""
                 library Sort_Calls_Fluent version '1.0.0'
 
                 define function foo(): 1
@@ -130,7 +130,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Sort_Calls_Fluent()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibrary("""
+            var lib = CreateCqlToolkit().MakeLibrary("""
                 library Sort_Calls_Fluent version '1.0.0'
 
                 define fluent function foo(i Integer): i
@@ -160,7 +160,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Sort_Prefers_Fluent()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibrary("""
+            var lib = CreateCqlToolkit().MakeLibrary("""
                 library Sort_Calls_Fluent version '1.0.0'
 
                 define fluent function foo(i Integer): i
@@ -190,7 +190,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Let()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibrary("""
+            var lib = CreateCqlToolkit().MakeLibrary("""
                 library Let version '1.0.0'
                 define q:
                   from
@@ -209,7 +209,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Let_Redefinition()
         {
             // TODO: make this optionally fail w/ config options
-            var lib = CreateFluentCqlToolkit().MakeLibrary("""
+            var lib = CreateCqlToolkit().MakeLibrary("""
                 library Let version '1.0.0'
                 define q:
                   from
@@ -225,7 +225,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             // TODO: make this optionally fail w/ config options
 
-            var lib = CreateFluentCqlToolkit().MakeLibrary("""
+            var lib = CreateCqlToolkit().MakeLibrary("""
                 library Let version '1.0.0'
                 define function q(x Integer):
                   from
@@ -240,7 +240,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Claims_Query()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibrary("""
+            var lib = CreateCqlToolkit().MakeLibrary("""
                 library Claims version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -259,7 +259,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Return_Query()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibrary("""
+            var lib = CreateCqlToolkit().MakeLibrary("""
                 library Claims version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -276,7 +276,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Aggregate_Factorial()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibrary("""
+            var lib = CreateCqlToolkit().MakeLibrary("""
                 library Claims version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -300,7 +300,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Aggregate_Factorial_Distinct()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibrary("""
+            var lib = CreateCqlToolkit().MakeLibrary("""
                 library Claims version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -323,7 +323,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Aggregate_Factorial_No_Starting()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibrary("""
+            var lib = CreateCqlToolkit().MakeLibrary("""
                 library Claims version '1.0.0'
 
                 using FHIR version '4.0.1'
@@ -346,7 +346,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Aggregate_List_Accumulator()
         {
-            var lib = CreateFluentCqlToolkit().MakeLibrary("""
+            var lib = CreateCqlToolkit().MakeLibrary("""
                 library Claims version '1.0.0'
 
                 using FHIR version '4.0.1'

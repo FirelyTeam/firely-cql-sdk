@@ -8,14 +8,12 @@
 
 using System.Collections.Immutable;
 using Hl7.Cql.Model;
-using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Toolkit;
 
 /// <summary>
 /// Configuration settings for the <see cref="CqlToolkit"/>.
 /// </summary>
-/// <param name="EnumerationExceptionContinuation">The continuation policy to use when an exception occurs during enumeration.</param>
 /// <param name="Models">The model information to use when translating CQL to ELM.</param>
 /// <param name="ModelInfos">The model information to use when translating CQL to ELM.</param>
 /// <param name="AmbiguousTypeBehavior">
@@ -53,7 +51,6 @@ namespace Hl7.Cql.CqlToElm.Toolkit;
 /// <param name="AllowNullIntervals">
 /// </param>
 public sealed record CqlToolkitConfig(
-    EnumerationExceptionContinuation EnumerationExceptionContinuation = default,
     ImmutableHashSet<CqlModel>? Models = null,
     ImmutableHashSet<ModelInfo>? ModelInfos = null,
     AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,
@@ -135,9 +132,6 @@ public sealed record CqlToolkitConfig(
     /// </para>
     /// </summary>
     public AmbiguousTypeBehavior AmbiguousTypeBehavior { get; init; } = AmbiguousTypeBehavior;
-
-    /// Gets the continuation policy to use when an exception occurs during enumeration.
-    public EnumerationExceptionContinuation EnumerationExceptionContinuation { get; init; } = EnumerationExceptionContinuation;
 
     internal void ApplyToCqlToElmOptions(CqlToElmOptions opt)
     {

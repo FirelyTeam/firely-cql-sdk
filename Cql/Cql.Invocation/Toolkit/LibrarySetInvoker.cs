@@ -8,6 +8,8 @@
 
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Toolkit;
+using System.ComponentModel;
 
 namespace Hl7.Cql.Invocation.Toolkit;
 
@@ -15,24 +17,21 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// <summary>
 /// Represents an invoker for a set of CQL libraries.
 /// </summary>
-public sealed class LibrarySetInvoker : IDisposable
+public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
 {
-    /// <summary>
-    /// Gets the toolkit used to create the library set invoker.
-    /// </summary>
-    public InvocationToolkit InvocationToolkit { get; }
-
     private readonly AssemblyLoadContext _alc;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LibrarySetInvoker"/> class.
     /// </summary>
-    /// <param name="invocationToolkit">The builder used to create the library set invoker.</param>
-    /// <param name="alc">The assembly load context.</param>
-    internal LibrarySetInvoker(InvocationToolkit invocationToolkit, AssemblyLoadContext alc)
+    internal LibrarySetInvoker(
+        AssemblyLoadContext alc,
+        ILoggerFactory loggerFactory,
+        EnumerationExceptionContinuation enumerationExceptionContinuation)
     {
-        InvocationToolkit = invocationToolkit;
         _alc = alc;
+        LoggerFactory = loggerFactory;
+        EnumerationExceptionContinuation = enumerationExceptionContinuation;
         LibraryInvokers =
             _alc.Assemblies
                 .SelectMany(a => a.GetTypes())
@@ -56,4 +55,18 @@ public sealed class LibrarySetInvoker : IDisposable
     /// Gets the dictionary of library invokers.
     /// </summary>
     public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker> LibraryInvokers { get; }
+
+    /// <inheritdoc />
+    [EditorBrowsable(EditorBrowsableState.Advanced)]
+    public ILoggerFactory LoggerFactory { get; }
+
+    /// <inheritdoc />
+    public EnumerationExceptionContinuation EnumerationExceptionContinuation { get; private set; }
+
+    /// <inheritdoc />
+    public LibrarySetInvoker SetEnumerationExceptionContinuation(EnumerationExceptionContinuation continuation)
+    {
+        EnumerationExceptionContinuation = continuation;
+        return this;
+    }
 }
