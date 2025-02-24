@@ -23,11 +23,11 @@ Hl7.Cql.Invocation.Toolkit.InvocationToolkit.InvocationToolkit(Microsoft.Extensi
 Hl7.Cql.Invocation.Toolkit.InvocationToolkit.Reconfigure(Hl7.Cql.Abstractions.Mutator<Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig!>! reconfigure) -> Hl7.Cql.Invocation.Toolkit.InvocationToolkit!
 Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig
 Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.<Clone>$() -> Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig!
-Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.Deconstruct(out Hl7.Cql.Runtime.ErroredEnumerationContinuation ErroredEnumerationContinuation) -> void
+Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.Deconstruct(out Hl7.Cql.Runtime.EnumerationExceptionContinuation EnumerationExceptionContinuation) -> void
+Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.EnumerationExceptionContinuation.get -> Hl7.Cql.Runtime.EnumerationExceptionContinuation
+Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.EnumerationExceptionContinuation.init -> void
 Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.Equals(Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig? other) -> bool
-Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.ErroredEnumerationContinuation.get -> Hl7.Cql.Runtime.ErroredEnumerationContinuation
-Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.ErroredEnumerationContinuation.init -> void
-Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.InvocationToolkitConfig(Hl7.Cql.Runtime.ErroredEnumerationContinuation ErroredEnumerationContinuation = Hl7.Cql.Runtime.ErroredEnumerationContinuation.Throw) -> void
+Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.InvocationToolkitConfig(Hl7.Cql.Runtime.EnumerationExceptionContinuation EnumerationExceptionContinuation = Hl7.Cql.Runtime.EnumerationExceptionContinuation.Throw) -> void
 Hl7.Cql.Invocation.Toolkit.LibraryInvoker
 Hl7.Cql.Invocation.Toolkit.LibraryInvoker.LibraryInvoker(Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker! librarySetInvoker) -> void
 Hl7.Cql.Invocation.Toolkit.LibraryInvoker.LibrarySetInvoker.get -> Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker!

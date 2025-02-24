@@ -69,8 +69,8 @@ Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.AllowNullIntervals.get -> bool
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.AllowNullIntervals.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.AmbiguousTypeBehavior.get -> Hl7.Cql.CqlToElm.AmbiguousTypeBehavior
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.AmbiguousTypeBehavior.init -> void
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.CqlToolkitConfig(Hl7.Cql.Runtime.ErroredEnumerationContinuation ErroredEnumerationContinuation = Hl7.Cql.Runtime.ErroredEnumerationContinuation.Throw, System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CqlToElm.Toolkit.CqlModel>? Models = null, System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.Model.ModelInfo!>? ModelInfos = null, Hl7.Cql.CqlToElm.AmbiguousTypeBehavior AmbiguousTypeBehavior = Hl7.Cql.CqlToElm.AmbiguousTypeBehavior.Error, bool EnableListDemotion = false, bool EnableListPromotion = false, bool EnableIntervalPromotion = false, bool EnableIntervalDemotion = false, bool AllowNullIntervals = false) -> void
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.Deconstruct(out Hl7.Cql.Runtime.ErroredEnumerationContinuation ErroredEnumerationContinuation, out System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CqlToElm.Toolkit.CqlModel>? Models, out System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.Model.ModelInfo!>? ModelInfos, out Hl7.Cql.CqlToElm.AmbiguousTypeBehavior AmbiguousTypeBehavior, out bool EnableListDemotion, out bool EnableListPromotion, out bool EnableIntervalPromotion, out bool EnableIntervalDemotion, out bool AllowNullIntervals) -> void
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.CqlToolkitConfig(Hl7.Cql.Runtime.EnumerationExceptionContinuation EnumerationExceptionContinuation = Hl7.Cql.Runtime.EnumerationExceptionContinuation.Throw, System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CqlToElm.Toolkit.CqlModel>? Models = null, System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.Model.ModelInfo!>? ModelInfos = null, Hl7.Cql.CqlToElm.AmbiguousTypeBehavior AmbiguousTypeBehavior = Hl7.Cql.CqlToElm.AmbiguousTypeBehavior.Error, bool EnableListDemotion = false, bool EnableListPromotion = false, bool EnableIntervalPromotion = false, bool EnableIntervalDemotion = false, bool AllowNullIntervals = false) -> void
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.Deconstruct(out Hl7.Cql.Runtime.EnumerationExceptionContinuation EnumerationExceptionContinuation, out System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CqlToElm.Toolkit.CqlModel>? Models, out System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.Model.ModelInfo!>? ModelInfos, out Hl7.Cql.CqlToElm.AmbiguousTypeBehavior AmbiguousTypeBehavior, out bool EnableListDemotion, out bool EnableListPromotion, out bool EnableIntervalPromotion, out bool EnableIntervalDemotion, out bool AllowNullIntervals) -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableIntervalDemotion.get -> bool
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableIntervalDemotion.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableIntervalPromotion.get -> bool
@@ -79,9 +79,9 @@ Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableListDemotion.get -> bool
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableListDemotion.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableListPromotion.get -> bool
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableListPromotion.init -> void
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnumerationExceptionContinuation.get -> Hl7.Cql.Runtime.EnumerationExceptionContinuation
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnumerationExceptionContinuation.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.Equals(Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig? other) -> bool
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.ErroredEnumerationContinuation.get -> Hl7.Cql.Runtime.ErroredEnumerationContinuation
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.ErroredEnumerationContinuation.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.ModelInfos.get -> System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.Model.ModelInfo!>!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.ModelInfos.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.Models.get -> System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CqlToElm.Toolkit.CqlModel>!
