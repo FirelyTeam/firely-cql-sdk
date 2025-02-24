@@ -108,7 +108,7 @@ public sealed class CqlToolkit
                             conversions.Add(libId, conversionRecord); // This fails on duplicate key and value
                         },
                         errorStrategy => errorStrategy
-                                         .SetContinuation(Config.ErroredEnumerationContinuation)
+                                         .SetContinuation(Config.EnumerationExceptionContinuation)
                                          .AddLoggerExceptionHandler(
                                              logger,
                                              (conversionRecord, logMessage) =>
@@ -142,7 +142,7 @@ public sealed class CqlToolkit
                         conversions[r.LibraryIdentifier] = newConversionRecord;
                     },
                     errorStrategy => errorStrategy
-                                     .SetContinuation(ErroredEnumerationContinuation.Continue)
+                                     .SetContinuation(EnumerationExceptionContinuation.Continue)
                                      .AddLoggerExceptionHandler(_services.Logger,
                                                                 (conversion, messageBuilder) =>
                                                                     messageBuilder("Could not translate CQL to ELM: {lib}", conversion.LibraryIdentifier))

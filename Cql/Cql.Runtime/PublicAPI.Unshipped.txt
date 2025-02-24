@@ -96,7 +96,6 @@ static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.Recreate.get -> Hl7.Cql.R
 static Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Default.get -> Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter!
 virtual Hl7.Cql.Runtime.BaseTypeResolver.GetPropertyCore(System.Type! type, string! propertyName) -> System.Reflection.PropertyInfo?
 virtual Hl7.Cql.Runtime.IO.DirectoryInfoHandler.Invoke(System.IO.DirectoryInfo! directory) -> void
-virtual Hl7.Cql.Runtime.ValueExceptionHandler<T>.Invoke(T value, System.Exception! exception) -> void
 ~override Hl7.Cql.Runtime.CqlLibraryIdentifier.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.CqlLibraryVersion.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Equals(object obj) -> bool

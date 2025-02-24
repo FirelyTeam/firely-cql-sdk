@@ -14,7 +14,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// <summary>
 /// Configuration settings for the <see cref="ElmToolkit"/>.
 /// </summary>
-/// <param name="ErroredEnumerationContinuation">The exception handling policy to use while processing a batch of items.</param>
+/// <param name="EnumerationExceptionContinuation">The continuation policy to use when an exception occurs during enumeration.</param>
 /// <param name="AssemblyCompilerDebugInformationFormat">The format of the debug information emitted by the compiler.</param>
 /// <param name="AllowScopeRedefinition">Allows a child scope to redefine an existing parent scope. Default is <see langword="true" />.</param>
 /// <param name="AllowUnresolvedExternals">
@@ -25,7 +25,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// </param>
 /// <param name="LRUCacheSize">The size of the Least Recently Used (LRU) cache.</param>
 public sealed record ElmToolkitConfig(
-    ErroredEnumerationContinuation ErroredEnumerationContinuation = default,
+    EnumerationExceptionContinuation EnumerationExceptionContinuation = default,
     AssemblyCompilerDebugInformationFormat AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.None,
     bool AllowScopeRedefinition = true,
     bool AllowUnresolvedExternals = true,
@@ -72,6 +72,9 @@ public sealed record ElmToolkitConfig(
     /// The default value is <see langword="true"/>.
     /// </summary>
     public bool AllowUnresolvedExternals { get; init; } = AllowUnresolvedExternals;
+
+    /// Gets the continuation policy to use when an exception occurs during enumeration.
+    public EnumerationExceptionContinuation EnumerationExceptionContinuation { get; init; } = EnumerationExceptionContinuation;
 
     /// <summary>
     /// Converts the current configuration settings to <see cref="ExpressionBuilderSettings"/>.

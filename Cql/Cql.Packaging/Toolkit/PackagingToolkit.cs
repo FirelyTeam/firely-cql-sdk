@@ -104,7 +104,7 @@ public sealed class PackagingToolkit
                         conversions.Add(libIdFromCql, conversionRecord);
                     },
                     errorStrategy => errorStrategy
-                                     .SetContinuation(Config.ErroredEnumerationContinuation)
+                                     .SetContinuation(Config.EnumerationExceptionContinuation)
                                      .AddLoggerExceptionHandler(
                                          logger,
                                          (conversionRecord, logMessage) =>
@@ -160,7 +160,7 @@ public sealed class PackagingToolkit
                          resourceCanonicalRootUrl: canonicalRootUrl?.ToString(),
                          overrideDate: overrideDate,
                          errorStrategy => errorStrategy
-                             .SetContinuation(Config.ErroredEnumerationContinuation)
+                             .SetContinuation(Config.EnumerationExceptionContinuation)
                              .AddLoggerExceptionHandler(logger, (library, logMessage) => logMessage("Could not package FHIR resources for library {lib}", library.GetVersionedIdentifier()!)),
                          onNextLibrary: library => logger.LogInformation("Packaging FHIR resources for library: {lib}", library.GetVersionedIdentifier()))
                      .SelectWhere(o =>

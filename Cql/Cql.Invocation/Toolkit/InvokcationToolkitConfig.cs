@@ -5,12 +5,15 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// <summary>
 /// Configuration settings for the <see cref="InvocationToolkit"/>.
 /// </summary>
-/// <param name="ErroredEnumerationContinuation">The exception handling policy to use while processing a batch of items.</param>
+/// <param name="EnumerationExceptionContinuation">The continuation policy to use when an exception occurs during enumeration.</param>
 public sealed record InvocationToolkitConfig(
-    ErroredEnumerationContinuation ErroredEnumerationContinuation = default)
+    EnumerationExceptionContinuation EnumerationExceptionContinuation = default)
 {
     /// <summary>
     /// Gets the default configuration settings.
     /// </summary>
     public static InvocationToolkitConfig Default { get; } = new();
+
+    /// Gets the continuation policy to use when an exception occurs during enumeration.
+    public EnumerationExceptionContinuation EnumerationExceptionContinuation { get; init; } = EnumerationExceptionContinuation;
 }

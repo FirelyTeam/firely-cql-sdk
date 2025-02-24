@@ -25,9 +25,9 @@ public static partial class ElmToolkitExtensions
     public static ElmToolkit SetExceptionHandlingToIgnore(this ElmToolkit cqlToolkit, bool stopAfterFirstException = false) =>
         cqlToolkit.Reconfigure(o => o with
         {
-            ErroredEnumerationContinuation = stopAfterFirstException
-                                                    ? ErroredEnumerationContinuation.Break
-                                                    : ErroredEnumerationContinuation.Continue
+            EnumerationExceptionContinuation = stopAfterFirstException
+                                                    ? EnumerationExceptionContinuation.Break
+                                                    : EnumerationExceptionContinuation.Continue
         });
 
     /// <summary>

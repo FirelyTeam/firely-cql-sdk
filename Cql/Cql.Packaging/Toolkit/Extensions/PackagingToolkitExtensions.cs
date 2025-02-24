@@ -27,9 +27,9 @@ public static partial class PackagingToolkitExtensions
     public static PackagingToolkit SetExceptionHandlingToIgnore(this PackagingToolkit packagingToolkit, bool stopAfterFirstException = false) =>
         packagingToolkit.Reconfigure(o => o with
         {
-            ErroredEnumerationContinuation = stopAfterFirstException
-                                                    ? ErroredEnumerationContinuation.Break
-                                                    : ErroredEnumerationContinuation.Continue
+            EnumerationExceptionContinuation = stopAfterFirstException
+                                                    ? EnumerationExceptionContinuation.Break
+                                                    : EnumerationExceptionContinuation.Continue
         });
 
     /// <summary>

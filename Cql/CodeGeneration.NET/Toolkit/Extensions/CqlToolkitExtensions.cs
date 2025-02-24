@@ -26,7 +26,7 @@ public static class CqlToolkitExtensions
         this CqlToolkit cqlToolkit,
         Mutator<ElmToolkitConfig>? reconfigure = null)
     {
-        var config = new ElmToolkitConfig(ErroredEnumerationContinuation: cqlToolkit.Config.ErroredEnumerationContinuation);
+        var config = new ElmToolkitConfig(cqlToolkit.Config.EnumerationExceptionContinuation);
         if (reconfigure is not null) config = reconfigure(config);
         var elmToolkit = new ElmToolkit(cqlToolkit.LoggerFactory, config).AddElmFromCqlToolkit(cqlToolkit);
         return elmToolkit;

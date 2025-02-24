@@ -12,39 +12,45 @@ internal static class EnumerationErrorStrategyExtensions
 {
     public static EnumerationErrorStrategy<T> SetContinuation<T>(
         this EnumerationErrorStrategy<T> strategy,
-        ErroredEnumerationContinuation continuation) =>
+        EnumerationExceptionContinuation continuation) =>
         strategy with
         {
-            Continuation = continuation
+            ExceptionContinuation = continuation
         };
 
     public static EnumerationErrorStrategy<T> AddLoggerExceptionHandler<T>(
         this EnumerationErrorStrategy<T> strategy,
         ILogger logger,
-        LogMessageBuilder<T> logMessageBuilder)
-    {
-        var logLevel = ToLogLevel(strategy.Continuation);
-        if (!logger.IsEnabled(logLevel))
-            return strategy;
-
-        return strategy with
+        LogMessageBuilder<T> logMessageBuilder) =>
+        strategy with
         {
-            ExceptionHandler = strategy.ExceptionHandler ?? CreateLogExceptionHandler(logger, logLevel, logMessageBuilder)
+            ExceptionHandler = strategy.ExceptionHandler + CreateLogExceptionHandler(logger, logMessageBuilder)
         };
-    }
 
     private static ValueExceptionHandler<TCurrent> CreateLogExceptionHandler<TCurrent>(
         this ILogger logger,
-        LogLevel logLevel,
-        LogMessageBuilder<TCurrent> logMessageBuilder)
-    {
-        return (current, exception) => logMessageBuilder(current, (message, args) => logger.Log(logLevel, exception, message, args));
-    }
+        LogMessageBuilder<TCurrent> logMessageBuilder) =>
+        (current,
+         continuation,
+         exception) =>
+        {
+            var logLevel = ToLogLevel(continuation);
+            if (logger.IsEnabled(logLevel))
+            {
+                logMessageBuilder(
+                    current,
+                    (message, args) => logger.Log(logLevel, exception, message, args));
+            }
+        };
 
-    private static LogLevel ToLogLevel(ErroredEnumerationContinuation erroredEnumerationContinuation) =>
-        erroredEnumerationContinuation is ErroredEnumerationContinuation.Throw ? LogLevel.Error : LogLevel.Warning;
+    private static LogLevel ToLogLevel(EnumerationExceptionContinuation enumerationExceptionContinuation) =>
+        enumerationExceptionContinuation is EnumerationExceptionContinuation.Throw ? LogLevel.Error : LogLevel.Warning;
 
-    public delegate void LogMessageBuilder<in TCurrent>(TCurrent current, LogMessage logMessage);
+    public delegate void LogMessageBuilder<in TCurrent>(
+        TCurrent current,
+        LogMessage logMessage);
 
-    public delegate void LogMessage([StructuredMessageTemplate] string message, params object?[] args);
+    public delegate void LogMessage(
+        [StructuredMessageTemplate] string message,
+        params object?[] args);
 }

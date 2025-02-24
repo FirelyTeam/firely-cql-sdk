@@ -9,9 +9,9 @@
 namespace Hl7.Cql.Runtime;
 
 /// <summary>
-/// The exception handling to use while processing a batch of items.
+/// The continuation policy to use when an exception occurs during enumeration.
 /// </summary>
-public enum ErroredEnumerationContinuation
+public enum EnumerationExceptionContinuation
 {
     /// <summary>
     /// Throw an exception when an error occurs.

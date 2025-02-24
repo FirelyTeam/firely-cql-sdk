@@ -107,7 +107,7 @@ public sealed class ElmToolkit
                                     conversions.Add(libId, conversionRecord); // This fails on duplicate key and value
                                 },
                                 errorStrategy => errorStrategy
-                                                 .SetContinuation(Config.ErroredEnumerationContinuation)
+                                                 .SetContinuation(Config.EnumerationExceptionContinuation)
                                                  .AddLoggerExceptionHandler(
                                                      logger,
                                                      (conversionRecord, logMessage) =>
@@ -212,7 +212,7 @@ public sealed class ElmToolkit
                 librarySet,
                 debugInformationFormat,
                 errorStrategy => errorStrategy
-                                 .SetContinuation(Config.ErroredEnumerationContinuation)
+                                 .SetContinuation(Config.EnumerationExceptionContinuation)
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (pair, logMessage) =>
@@ -234,7 +234,7 @@ public sealed class ElmToolkit
                 librarySet,
                 librarySetDefinitions,
                 errorStrategy => errorStrategy
-                                 .SetContinuation(Config.ErroredEnumerationContinuation)
+                                 .SetContinuation(Config.EnumerationExceptionContinuation)
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (library, log) => log("Could not generate definitions into C#: {lib}", library.GetVersionedIdentifier())),
@@ -256,7 +256,7 @@ public sealed class ElmToolkit
                 librarySet,
                 librarySetDefinitions,
                 errorStrategy => errorStrategy
-                                 .SetContinuation(Config.ErroredEnumerationContinuation)
+                                 .SetContinuation(Config.EnumerationExceptionContinuation)
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (library, logMessage) =>

@@ -26,7 +26,7 @@ public static class LibraryInvokerExtensions
         CqlContext cqlContext)
     {
         var logger = libraryInvoker.LibrarySetInvoker.InvocationToolkit.LoggerFactory.CreateLogger(typeof(LibraryInvokerExtensions));
-        var enumerationContinuation = libraryInvoker.LibrarySetInvoker.InvocationToolkit.Config.ErroredEnumerationContinuation;
+        var enumerationContinuation = libraryInvoker.LibrarySetInvoker.InvocationToolkit.Config.EnumerationExceptionContinuation;
 
         return libraryInvoker.Definitions.Values
                       .Where(definitionInvoker => definitionInvoker.ValueSetId is not null)

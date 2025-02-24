@@ -33,7 +33,7 @@ public static partial class CqlToolkitExtensions
     public static CqlToolkit SetExceptionHandlingToIgnore(this CqlToolkit cqlToolkit, bool stopAfterFirstException = false) =>
         cqlToolkit.Reconfigure(o => o with
         {
-            ErroredEnumerationContinuation = stopAfterFirstException ? ErroredEnumerationContinuation.Break : ErroredEnumerationContinuation.Continue
+            EnumerationExceptionContinuation = stopAfterFirstException ? EnumerationExceptionContinuation.Break : EnumerationExceptionContinuation.Continue
         });
 
     /// <summary>
