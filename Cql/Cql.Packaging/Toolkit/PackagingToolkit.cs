@@ -14,7 +14,6 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
-using System.ComponentModel;
 
 namespace Hl7.Cql.Packaging.Toolkit;
 
