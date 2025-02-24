@@ -15,18 +15,23 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// <summary>
 /// Abstract class representing a definition invoker.
 /// </summary>
+/// <param name="libraryInvoker">The library invoker that created this instance.</param>
 /// <param name="definitionName">The name of the definition.</param>
-/// <param name="library">The library containing the definition.</param>
 /// <param name="methodInfo">The method information for the definition.</param>
 /// <param name="tagValuesByName">The tag values associated with the definition.</param>
 /// <param name="valueSetId">The value set identifier, if any.</param>
 public abstract class DefinitionInvoker(
+    LibraryInvoker libraryInvoker,
     string definitionName,
-    ILibrary library,
     MethodInfo methodInfo,
     IReadOnlyDictionary<string, string> tagValuesByName,
     string? valueSetId)
 {
+    /// <summary>
+    /// The library invoker that created this instance.
+    /// </summary>
+    public LibraryInvoker LibraryInvoker { get; } = libraryInvoker;
+
     /// <summary>
     /// Gets the name of the definition.
     /// </summary>
@@ -48,11 +53,6 @@ public abstract class DefinitionInvoker(
     public string? ValueSetId { get; } = valueSetId;
 
     /// <summary>
-    /// Gets the library containing the definition.
-    /// </summary>
-    private ILibrary Library { get; } = library; // Might decide to make this public later
-
-    /// <summary>
     /// Gets the method information for the definition.
     /// </summary>
     private MethodInfo MethodInfo { get; } = methodInfo;
@@ -67,13 +67,12 @@ public abstract class DefinitionInvoker(
     /// <summary>
     /// Invokes the method with the specified parameters.
     /// </summary>
+    /// <param name="library">The library to invoke on or null if it is a static invokation.</param>
     /// <param name="parameters">The parameters to pass to the method.</param>
     /// <returns>The result of the method invocation.</returns>
-    protected object? InvokeMethod(params object?[] parameters)
+    protected object? InvokeMethod(object? library, params object?[] parameters)
     {
-        MethodInfo methodInfo = MethodInfo;
-        ILibrary library = Library;
-        var result = methodInfo.Invoke(library, BindingFlags.DoNotWrapExceptions, null, parameters, CultureInfo.InvariantCulture);
+        var result = MethodInfo.Invoke(library, BindingFlags.DoNotWrapExceptions, null, parameters, CultureInfo.InvariantCulture);
         return result;
     }
 }

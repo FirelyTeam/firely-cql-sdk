@@ -21,18 +21,21 @@ public static class LibraryInvokerExtensions
     /// </summary>
     /// <param name="libraryInvoker">The library invoker containing the definitions.</param>
     /// <param name="cqlContext">The CQL context used for invocation.</param>
+    /// <param name="includeDefinition">The selector for the definition</param>
     /// <param name="definitionInvokerExceptionHandler">An exception handler for invoking a definition. (optional)</param>
     /// <returns>An enumeration of tuples containing the definition invoker and the result.</returns>
     public static IEnumerable<(DefinitionInvoker definitionInvoker, object? definitionResult)> EnumerateLibraryDefinitionsResults(
         this LibraryInvoker libraryInvoker,
         CqlContext cqlContext,
+        Func<DefinitionInvoker, bool>? includeDefinition = null,
         ValueExceptionHandler<DefinitionInvoker>? definitionInvokerExceptionHandler = null)
     {
         var logger = libraryInvoker.LibrarySetInvoker.CreateLogger(typeof(LibraryInvokerExtensions));
         var continuation = libraryInvoker.LibrarySetInvoker.EnumerationExceptionContinuation;
+        includeDefinition ??= _ => true;
 
         return libraryInvoker.Definitions.Values
-                      .Where(definitionInvoker => definitionInvoker.ValueSetId is not null)
+                      .Where(includeDefinition)
                       .TrySelect(
                           definitionInvoker => (definitionInvoker,definitionInvoker.Invoke(cqlContext)),
                           errorStrategy => errorStrategy

@@ -44,7 +44,7 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
                        .SelectWhereNotNull(o => o.DeclarationName is { } declarationName
                                                 && o.Method.GetParameters() is [{ } p0]
                                                 && p0.ParameterType == typeof(CqlContext)
-                                                    ? (Toolkit.DefinitionInvoker)new DefinitionInvoker(declarationName, Library, o.Method, o.TagValuesByName, o.ValueSetId)
+                                                    ? (DefinitionInvoker)new DefinitionInvoker_2_0_8_0(this, declarationName, Library, o.Method, o.TagValuesByName, o.ValueSetId)
                                                     : null)
                        .ToImmutableDictionary(o => o.DefinitionName);
     }
@@ -81,18 +81,15 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
     {
         return cqlToolVersion >= new Version(2, 0, 8);
     }
-
-    private class DefinitionInvoker(
-        string definitionName,
-        ILibrary library,
-        MethodInfo methodInfo,
-        IReadOnlyDictionary<string, string> tagValuesByName,
-        string? valueSetId) : Toolkit.DefinitionInvoker(definitionName, library, methodInfo, tagValuesByName, valueSetId)
-    {
-        public override object? Invoke(CqlContext cqlContext)
-        {
-            return InvokeMethod(cqlContext);
-        }
-    }
 }
 
+file class DefinitionInvoker_2_0_8_0(
+    LibraryInvoker libraryInvoker,
+    string definitionName,
+    ILibrary library,
+    MethodInfo methodInfo,
+    IReadOnlyDictionary<string, string> tagValuesByName,
+    string? valueSetId) : DefinitionInvoker(libraryInvoker, definitionName, methodInfo, tagValuesByName, valueSetId)
+{
+    public override object? Invoke(CqlContext cqlContext) => InvokeMethod(library, cqlContext);
+}
