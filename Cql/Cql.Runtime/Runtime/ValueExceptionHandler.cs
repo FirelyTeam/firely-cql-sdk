@@ -15,4 +15,8 @@ namespace Hl7.Cql.Runtime;
 /// <param name="value">The item in the enumerations which caused the exception.</param>
 /// <param name="continuation">The continuation of the enumeration after handling the exception.</param>
 /// <param name="exception">The exception that occurred.</param>
-public delegate void ValueExceptionHandler<in T>(T value, EnumerationExceptionContinuation continuation, Exception exception);
+public delegate void ValueExceptionHandler<in T>(
+    T value,
+    Exception exception,
+    EnumerationExceptionContinuation continuation = EnumerationExceptionContinuation.Throw
+    );

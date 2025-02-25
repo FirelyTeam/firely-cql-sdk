@@ -35,8 +35,8 @@ internal static class EnumerationErrorStrategyExtensions
         this ILogger logger,
         LogMessageBuilder<TCurrent> logMessageBuilder) =>
         (current,
-         continuation,
-         exception) =>
+         exception,
+         continuation) =>
         {
             var logLevel = ToLogLevel(continuation);
             if (logger.IsEnabled(logLevel))

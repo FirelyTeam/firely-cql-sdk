@@ -651,7 +651,7 @@ virtual Hl7.Cql.Operators.RetrieveParameters.Equals(Hl7.Cql.Operators.RetrievePa
 virtual Hl7.Cql.Operators.RetrieveParameters.PrintMembers(System.Text.StringBuilder! builder) -> bool
 virtual Hl7.Cql.Runtime.BaseTypeResolver.GetPropertyCore(System.Type! type, string! propertyName) -> System.Reflection.PropertyInfo?
 virtual Hl7.Cql.Runtime.IO.DirectoryInfoHandler.Invoke(System.IO.DirectoryInfo! directory) -> void
-virtual Hl7.Cql.Runtime.ValueExceptionHandler<T>.Invoke(T value, Hl7.Cql.Runtime.EnumerationExceptionContinuation continuation, System.Exception! exception) -> void
+virtual Hl7.Cql.Runtime.ValueExceptionHandler<T>.Invoke(T value, System.Exception! exception, Hl7.Cql.Runtime.EnumerationExceptionContinuation continuation = Hl7.Cql.Runtime.EnumerationExceptionContinuation.Throw) -> void
 ~override Hl7.Cql.Runtime.CqlLibraryIdentifier.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.CqlLibraryVersion.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Equals(object obj) -> bool

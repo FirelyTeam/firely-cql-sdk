@@ -54,7 +54,7 @@ internal static class EnumerableExceptionHandlingExtensions
                     errorStrategy = buildErrorStrategy?.Invoke(default) ?? default;
                 }
 
-                errorStrategy.ExceptionHandler?.Invoke(input, errorStrategy.ExceptionContinuation, e);
+                errorStrategy.ExceptionHandler?.Invoke(input, e, errorStrategy.ExceptionContinuation);
                 switch (errorStrategy.ExceptionContinuation)
                 {
                     case EnumerationExceptionContinuation.Continue: continue;
