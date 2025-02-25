@@ -24,7 +24,7 @@ public sealed class CqlToolkit : IToolkitWithConfig<CqlToolkit, CqlToolkitConfig
     /// </summary>
     /// <param name="loggerFactory">The logger factory to use for logging.</param>
     /// <param name="config">The configuration settings for the toolkit.</param>
-    /// <param name="batchProcessExceptionContinuation">The continuation policy to use when an exception occurs during enumeration.</param>
+    /// <param name="batchProcessExceptionContinuation">The continuation policy to use when an exception occurs during batch processing.</param>
     public CqlToolkit(
         ILoggerFactory? loggerFactory = null,
         CqlToolkitConfig? config = null,

@@ -9,7 +9,7 @@
 namespace Hl7.Cql.Runtime;
 
 /// <summary>
-/// Represents a method that handles exceptions that occur during enumeration.
+/// Represents a method that handles exceptions that occur during batch processing.
 /// </summary>
 /// <typeparam name="T">The type of the source object that caused the exception.</typeparam>
 /// <param name="value">The item in the enumerations which caused the exception.</param>

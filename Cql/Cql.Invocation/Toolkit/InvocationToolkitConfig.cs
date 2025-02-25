@@ -13,7 +13,7 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// <summary>
 /// Configuration settings for the <see cref="InvocationToolkit"/>.
 /// </summary>
-/// <param name="BatchProcessExceptionContinuation">The continuation policy to use when an exception occurs during enumeration.</param>
+/// <param name="BatchProcessExceptionContinuation">The continuation policy to use when an exception occurs during batch processing.</param>
 public sealed record InvocationToolkitConfig(
     BatchProcessExceptionContinuation BatchProcessExceptionContinuation = default)
 {
@@ -22,6 +22,6 @@ public sealed record InvocationToolkitConfig(
     /// </summary>
     public static InvocationToolkitConfig Default { get; } = new();
 
-    /// Gets the continuation policy to use when an exception occurs during enumeration.
+    /// Gets the continuation policy to use when an exception occurs during batch processing.
     public BatchProcessExceptionContinuation BatchProcessExceptionContinuation { get; init; } = BatchProcessExceptionContinuation;
 }

@@ -13,7 +13,7 @@ namespace Hl7.Cql.Packaging.Toolkit;
 /// <summary>
 /// Configuration settings for the <see cref="PackagingToolkit"/>.
 /// </summary>
-/// <param name="BatchProcessExceptionContinuation">The continuation policy to use when an exception occurs during enumeration.</param>
+/// <param name="BatchProcessExceptionContinuation">The continuation policy to use when an exception occurs during batch processing.</param>
 public record PackagingToolkitConfig(
     BatchProcessExceptionContinuation BatchProcessExceptionContinuation)
 {
@@ -28,7 +28,7 @@ public record PackagingToolkitConfig(
     public static PackagingToolkitConfig Default { get; } = new();
 
     /// <summary>
-    /// Gets the continuation policy to use when an exception occurs during enumeration.
+    /// Gets the continuation policy to use when an exception occurs during batch processing.
     /// </summary>
     public BatchProcessExceptionContinuation BatchProcessExceptionContinuation { get; init; } = BatchProcessExceptionContinuation;
 }

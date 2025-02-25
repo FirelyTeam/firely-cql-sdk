@@ -28,7 +28,7 @@ public sealed class ElmToolkit : IToolkitWithConfig<ElmToolkit, ElmToolkitConfig
     /// </summary>
     /// <param name="loggerFactory">The logger factory to use for logging.</param>
     /// <param name="config">The configuration for the toolkit.</param>
-    /// <param name="batchProcessExceptionContinuation">The continuation policy to use when an exception occurs during enumeration.</param>
+    /// <param name="batchProcessExceptionContinuation">The continuation policy to use when an exception occurs during batch processing.</param>
     public ElmToolkit(
         ILoggerFactory? loggerFactory = null,
         ElmToolkitConfig? config = null,

@@ -24,7 +24,7 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// Initializes a new instance of the <see cref="InvocationToolkit"/> class.
     /// </summary>
     /// <param name="loggerFactory">Optional logger factory for logging purposes.</param>
-    /// <param name="batchProcessExceptionContinuation">The continuation policy to use when an exception occurs during enumeration.</param>
+    /// <param name="batchProcessExceptionContinuation">The continuation policy to use when an exception occurs during batch processing.</param>
     public InvocationToolkit(
         ILoggerFactory? loggerFactory = null,
         BatchProcessExceptionContinuation batchProcessExceptionContinuation = BatchProcessExceptionContinuation.Throw)

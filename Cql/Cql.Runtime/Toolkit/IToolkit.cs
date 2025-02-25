@@ -22,7 +22,7 @@ public interface IToolkit
     ILoggerFactory LoggerFactory { get; }
 
     /// <summary>
-    /// Gets the continuation policy to use when an exception occurs during enumeration.
+    /// Gets the continuation policy to use when an exception occurs during batch processing.
     /// </summary>
     BatchProcessExceptionContinuation BatchProcessExceptionContinuation { get; }
 }
@@ -34,8 +34,8 @@ public interface IToolkit
 public interface IToolkit<out TSelf> : IToolkit where TSelf : IToolkit<TSelf>
 {
     /// <summary>
-    /// Sets the continuation policy to use when an exception occurs during enumeration.
+    /// Sets the continuation policy to use when an exception occurs during batch processing.
     /// </summary>
-    /// <param name="continuation">The continuation policy to use when an exception occurs during enumeration.</param>
+    /// <param name="continuation">The continuation policy to use when an exception occurs during batch processing.</param>
     TSelf SetBatchProcessExceptionContinuation(BatchProcessExceptionContinuation continuation);
 }
