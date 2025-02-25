@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 using Hl7.Cql.Compiler;
@@ -21,7 +20,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// <summary>
 /// Compiles ELM (Expression Logical Model) into .NET assemblies.
 /// </summary>
-public sealed class ElmToolkit : IToolkitWithConfig<ElmToolkit, ElmToolkitConfig>
+public sealed class ElmToolkit : IToolkit<ElmToolkit>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ElmToolkit"/> class.
@@ -55,7 +54,9 @@ public sealed class ElmToolkit : IToolkitWithConfig<ElmToolkit, ElmToolkitConfig
     /// </summary>
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
-    /// <inheritdoc />
+    /// <summary>
+    /// Gets the configuration used by the toolkit.
+    /// </summary>
     public ElmToolkitConfig Config { get; }
 
     /// <inheritdoc />

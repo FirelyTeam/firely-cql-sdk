@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.CqlToElm.Toolkit.Internal;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
@@ -17,7 +16,7 @@ namespace Hl7.Cql.CqlToElm.Toolkit;
 /// <summary>
 /// Translates CQL libraries to ELM libraries.
 /// </summary>
-public sealed class CqlToolkit : IToolkitWithConfig<CqlToolkit, CqlToolkitConfig>
+public sealed class CqlToolkit : IToolkit<CqlToolkit>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="CqlToolkit"/> class.
@@ -51,7 +50,9 @@ public sealed class CqlToolkit : IToolkitWithConfig<CqlToolkit, CqlToolkitConfig
     /// </summary>
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
-    /// <inheritdoc/>
+    /// <summary>
+    /// Gets the configuration used by the toolkit.
+    /// </summary>
     public CqlToolkitConfig Config { get; }
 
     /// <inheritdoc />
