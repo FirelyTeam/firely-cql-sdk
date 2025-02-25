@@ -31,7 +31,7 @@ public static class LibraryInvokerExtensions
         ValueExceptionHandler<DefinitionInvoker>? definitionInvokerExceptionHandler = null)
     {
         var logger = libraryInvoker.LibrarySetInvoker.CreateLogger(typeof(LibraryInvokerExtensions));
-        var continuation = libraryInvoker.LibrarySetInvoker.EnumerationExceptionContinuation;
+        var continuation = libraryInvoker.LibrarySetInvoker.BatchProcessExceptionContinuation;
         includeDefinition ??= _ => true;
 
         return libraryInvoker.Definitions.Values

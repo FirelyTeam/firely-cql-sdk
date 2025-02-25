@@ -10,19 +10,19 @@ namespace Hl7.Cql.Runtime;
 
 internal static class EnumerationErrorStrategyExtensions
 {
-    public static EnumerationErrorStrategy<T> SetContinuation<T>(
-        this EnumerationErrorStrategy<T> strategy,
-        EnumerationExceptionContinuation continuation) =>
+    public static BatchProcessExceptionHandlingStrategy<T> SetContinuation<T>(
+        this BatchProcessExceptionHandlingStrategy<T> strategy,
+        BatchProcessExceptionContinuation continuation) =>
         strategy with { ExceptionContinuation = continuation };
 
-    public static EnumerationErrorStrategy<T> AddLoggerExceptionHandler<T>(
-        this EnumerationErrorStrategy<T> strategy,
+    public static BatchProcessExceptionHandlingStrategy<T> AddLoggerExceptionHandler<T>(
+        this BatchProcessExceptionHandlingStrategy<T> strategy,
         ILogger logger,
         LogMessageBuilder<T> logMessageBuilder) =>
         AddExceptionHandler(strategy, CreateLogExceptionHandler(logger, logMessageBuilder));
 
-    public static EnumerationErrorStrategy<T> AddExceptionHandler<T>(
-        this EnumerationErrorStrategy<T> strategy,
+    public static BatchProcessExceptionHandlingStrategy<T> AddExceptionHandler<T>(
+        this BatchProcessExceptionHandlingStrategy<T> strategy,
         ValueExceptionHandler<T>? exceptionHandler)
     {
         return
@@ -47,8 +47,8 @@ internal static class EnumerationErrorStrategyExtensions
             }
         };
 
-    private static LogLevel ToLogLevel(EnumerationExceptionContinuation enumerationExceptionContinuation) =>
-        enumerationExceptionContinuation is EnumerationExceptionContinuation.Throw ? LogLevel.Error : LogLevel.Warning;
+    private static LogLevel ToLogLevel(BatchProcessExceptionContinuation batchProcessExceptionContinuation) =>
+        batchProcessExceptionContinuation is BatchProcessExceptionContinuation.Throw ? LogLevel.Error : LogLevel.Warning;
 
     public delegate void LogMessageBuilder<in TCurrent>(
         TCurrent current,

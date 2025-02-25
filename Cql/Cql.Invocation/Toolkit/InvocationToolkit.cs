@@ -24,14 +24,14 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     /// Initializes a new instance of the <see cref="InvocationToolkit"/> class.
     /// </summary>
     /// <param name="loggerFactory">Optional logger factory for logging purposes.</param>
-    /// <param name="enumerationExceptionContinuation">The continuation policy to use when an exception occurs during enumeration.</param>
+    /// <param name="batchProcessExceptionContinuation">The continuation policy to use when an exception occurs during enumeration.</param>
     public InvocationToolkit(
         ILoggerFactory? loggerFactory = null,
-        EnumerationExceptionContinuation enumerationExceptionContinuation = EnumerationExceptionContinuation.Throw)
+        BatchProcessExceptionContinuation batchProcessExceptionContinuation = BatchProcessExceptionContinuation.Throw)
     {
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
-        EnumerationExceptionContinuation = enumerationExceptionContinuation;
+        BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
         _assemblyBinaries = AssemblyBinaryHashSet.Empty;
         _services = LibrarySetInvokerBuilderServices.Create(loggerFactory);
     }
@@ -41,12 +41,12 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
     public ILoggerFactory LoggerFactory { get; }
 
     /// <inheritdoc />
-    public EnumerationExceptionContinuation EnumerationExceptionContinuation { get; private set; }
+    public BatchProcessExceptionContinuation BatchProcessExceptionContinuation { get; private set; }
 
     /// <inheritdoc />
-    public InvocationToolkit SetEnumerationExceptionContinuation(EnumerationExceptionContinuation continuation)
+    public InvocationToolkit SetBatchProcessExceptionContinuation(BatchProcessExceptionContinuation continuation)
     {
-        EnumerationExceptionContinuation = continuation;
+        BatchProcessExceptionContinuation = continuation;
         return this;
     }
 
@@ -111,7 +111,7 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
                     _services.Logger.LogInformation("Loaded assembly {assemblyName}", asm.FullName);
                 },
                 errorStrategy => errorStrategy
-                    .SetContinuation(EnumerationExceptionContinuation)
+                    .SetContinuation(BatchProcessExceptionContinuation)
                     .AddLoggerExceptionHandler(
                         _services.Logger,
                         (assemblyBinary, logMessage) => logMessage("Unable to load an assembly from the binary containing {byteLength} byte(s).", assemblyBinary.AssemblyBytes!.Length)));
@@ -119,6 +119,6 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
         return new LibrarySetInvoker(
             alc,
             this.LoggerFactory,
-            this.EnumerationExceptionContinuation);
+            this.BatchProcessExceptionContinuation);
     }
 }

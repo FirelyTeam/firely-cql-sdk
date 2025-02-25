@@ -28,18 +28,18 @@ public sealed class ElmToolkit : IToolkitWithConfig<ElmToolkit, ElmToolkitConfig
     /// </summary>
     /// <param name="loggerFactory">The logger factory to use for logging.</param>
     /// <param name="config">The configuration for the toolkit.</param>
-    /// <param name="enumerationExceptionContinuation">The continuation policy to use when an exception occurs during enumeration.</param>
+    /// <param name="batchProcessExceptionContinuation">The continuation policy to use when an exception occurs during enumeration.</param>
     public ElmToolkit(
         ILoggerFactory? loggerFactory = null,
         ElmToolkitConfig? config = null,
-        EnumerationExceptionContinuation enumerationExceptionContinuation = EnumerationExceptionContinuation.Throw)
+        BatchProcessExceptionContinuation batchProcessExceptionContinuation = BatchProcessExceptionContinuation.Throw)
     {
         config ??= ElmToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
         _conversions = ElmToolkitConversionDictionary.Empty;
         Config = config;
-        EnumerationExceptionContinuation = enumerationExceptionContinuation;
+        BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
         _services = ElmToolkitServices.Create(loggerFactory, config);
     }
 
@@ -59,12 +59,12 @@ public sealed class ElmToolkit : IToolkitWithConfig<ElmToolkit, ElmToolkitConfig
     public ElmToolkitConfig Config { get; private set; }
 
     /// <inheritdoc />
-    public EnumerationExceptionContinuation EnumerationExceptionContinuation { get; private set; }
+    public BatchProcessExceptionContinuation BatchProcessExceptionContinuation { get; private set; }
 
     /// <inheritdoc />
-    public ElmToolkit SetEnumerationExceptionContinuation(EnumerationExceptionContinuation continuation)
+    public ElmToolkit SetBatchProcessExceptionContinuation(BatchProcessExceptionContinuation continuation)
     {
-        EnumerationExceptionContinuation = continuation;
+        BatchProcessExceptionContinuation = continuation;
         return this;
     }
 
@@ -117,7 +117,7 @@ public sealed class ElmToolkit : IToolkitWithConfig<ElmToolkit, ElmToolkitConfig
                                     conversions.Add(libId, conversionRecord); // This fails on duplicate key and value
                                 },
                                 errorStrategy => errorStrategy
-                                                 .SetContinuation(EnumerationExceptionContinuation)
+                                                 .SetContinuation(BatchProcessExceptionContinuation)
                                                  .AddLoggerExceptionHandler(
                                                      logger,
                                                      (conversionRecord, logMessage) =>
@@ -222,7 +222,7 @@ public sealed class ElmToolkit : IToolkitWithConfig<ElmToolkit, ElmToolkitConfig
                 librarySet,
                 debugInformationFormat,
                 errorStrategy => errorStrategy
-                                 .SetContinuation(EnumerationExceptionContinuation)
+                                 .SetContinuation(BatchProcessExceptionContinuation)
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (pair, logMessage) =>
@@ -244,7 +244,7 @@ public sealed class ElmToolkit : IToolkitWithConfig<ElmToolkit, ElmToolkitConfig
                 librarySet,
                 librarySetDefinitions,
                 errorStrategy => errorStrategy
-                                 .SetContinuation(EnumerationExceptionContinuation)
+                                 .SetContinuation(BatchProcessExceptionContinuation)
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (library, log) => log("Could not generate definitions into C#: {lib}", library.GetVersionedIdentifier())),
@@ -266,7 +266,7 @@ public sealed class ElmToolkit : IToolkitWithConfig<ElmToolkit, ElmToolkitConfig
                 librarySet,
                 librarySetDefinitions,
                 errorStrategy => errorStrategy
-                                 .SetContinuation(EnumerationExceptionContinuation)
+                                 .SetContinuation(BatchProcessExceptionContinuation)
                                  .AddLoggerExceptionHandler(
                                      _services.Logger,
                                      (library, logMessage) =>

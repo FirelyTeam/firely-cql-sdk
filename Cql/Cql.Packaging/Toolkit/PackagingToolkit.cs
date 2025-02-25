@@ -45,12 +45,12 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     public ILoggerFactory LoggerFactory { get; }
 
     /// <inheritdoc />
-    public EnumerationExceptionContinuation EnumerationExceptionContinuation { get; private set; }
+    public BatchProcessExceptionContinuation BatchProcessExceptionContinuation { get; private set; }
 
     /// <inheritdoc />
-    public PackagingToolkit SetEnumerationExceptionContinuation(EnumerationExceptionContinuation continuation)
+    public PackagingToolkit SetBatchProcessExceptionContinuation(BatchProcessExceptionContinuation continuation)
     {
-        EnumerationExceptionContinuation = continuation;
+        BatchProcessExceptionContinuation = continuation;
         return this;
     }
 
@@ -90,7 +90,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                         conversions.Add(libIdFromCql, conversionRecord);
                     },
                     errorStrategy => errorStrategy
-                                     .SetContinuation(EnumerationExceptionContinuation)
+                                     .SetContinuation(BatchProcessExceptionContinuation)
                                      .AddLoggerExceptionHandler(
                                          logger,
                                          (conversionRecord, logMessage) =>
@@ -146,7 +146,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                          resourceCanonicalRootUrl: canonicalRootUrl?.ToString(),
                          overrideDate: overrideDate,
                          errorStrategy => errorStrategy
-                             .SetContinuation(EnumerationExceptionContinuation)
+                             .SetContinuation(BatchProcessExceptionContinuation)
                              .AddLoggerExceptionHandler(logger, (library, logMessage) => logMessage("Could not package FHIR resources for library {lib}", library.GetVersionedIdentifier()!)),
                          onNextLibrary: library => logger.LogInformation("Packaging FHIR resources for library: {lib}", library.GetVersionedIdentifier()))
                      .SelectWhere(o =>

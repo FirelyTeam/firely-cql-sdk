@@ -34,7 +34,7 @@ internal class ResourcePackager(TypeResolver typeResolver)
         Func<string, SourceArtefacts> inputsById,
         string? resourceCanonicalRootUrl = null,
         SysDateTime? overrideDate = null,
-        EnumerationErrorStrategyBuilder<ElmLibrary>? buildErrorStrategy = null,
+        BatchProcessErrorHandlingStrategyBuilder<ElmLibrary>? buildErrorStrategy = null,
         Action<ElmLibrary>? onNextLibrary = null)
     {
         resourceCanonicalRootUrl ??= string.Empty;

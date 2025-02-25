@@ -45,7 +45,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             IEnumerable<(Library library, string csharp)> librariesWithCSharp,
             LibrarySet librarySet,
             AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None,
-            EnumerationErrorStrategyBuilder<(Library library, string csharp)>? buildErrorStrategy = null)
+            BatchProcessErrorHandlingStrategyBuilder<(Library library, string csharp)>? buildErrorStrategy = null)
         {
             Dictionary<string, AssemblyBinaryWithSourceCode> results = new();
             Assembly[] assemblyReferences = _referencesLazy.Value;

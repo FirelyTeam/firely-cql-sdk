@@ -27,7 +27,7 @@ public static class ElmToolkitExtensions
         var assemblyBinaries =
             elmToolkit.GetElmToAssemblyResults().Select(t => t.GetAssemblyBinary());
 
-        var invocationToolkit = new InvocationToolkit(elmToolkit.LoggerFactory, elmToolkit.EnumerationExceptionContinuation)
+        var invocationToolkit = new InvocationToolkit(elmToolkit.LoggerFactory, elmToolkit.BatchProcessExceptionContinuation)
             .AddAssemblyBinaries(assemblyBinaries);
         return invocationToolkit;
     }

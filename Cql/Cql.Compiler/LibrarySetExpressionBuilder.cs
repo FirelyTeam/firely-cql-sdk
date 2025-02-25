@@ -16,7 +16,7 @@ internal class LibrarySetExpressionBuilder(LibraryExpressionBuilder libraryExpre
     public IEnumerable<(Library library, DefinitionDictionary<LambdaExpression> libraryDefinitions)> BuildEachLibraryDefinitions(
         LibrarySet librarySet,
         DefinitionDictionary<LambdaExpression> librarySetDefinitions,
-        EnumerationErrorStrategyBuilder<Library>? errorStrategyBuilder = null,
+        BatchProcessErrorHandlingStrategyBuilder<Library>? errorStrategyBuilder = null,
         Action<Library>? onNextLibrary = null) =>
         NewLibrarySetExpressionBuilderContext(librarySet, librarySetDefinitions)
             .BuildEachLibraryDefinitions(errorStrategyBuilder, onNextLibrary);

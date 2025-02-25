@@ -23,7 +23,7 @@ public static class ToolkitExtensions
     /// <returns>The toolkit instance.</returns>
     public static TSelf SetIgnoreEnumerationExceptions<TSelf>(this IToolkit<TSelf> toolkit, bool breakAfterFirstException = false)
         where TSelf : IToolkit<TSelf> =>
-        toolkit.SetEnumerationExceptionContinuation(breakAfterFirstException ? EnumerationExceptionContinuation.Break : EnumerationExceptionContinuation.Continue);
+        toolkit.SetBatchProcessExceptionContinuation(breakAfterFirstException ? BatchProcessExceptionContinuation.Break : BatchProcessExceptionContinuation.Continue);
 
     /// <summary>
     /// Configures the toolkit to throw exceptions.
@@ -32,7 +32,7 @@ public static class ToolkitExtensions
     /// <returns>The toolkit instance.</returns>
     public static TSelf SetThrowEnumerationExceptions<TSelf>(this IToolkit<TSelf> toolkit)
         where TSelf : IToolkit<TSelf> =>
-        toolkit.SetEnumerationExceptionContinuation(EnumerationExceptionContinuation.Throw);
+        toolkit.SetBatchProcessExceptionContinuation(BatchProcessExceptionContinuation.Throw);
 
     /// <summary>
     /// Creates a new <see cref="ILogger"/> instance using the full name of the given <paramref name="type"/>.

@@ -24,7 +24,7 @@ public interface IToolkit
     /// <summary>
     /// Gets the continuation policy to use when an exception occurs during enumeration.
     /// </summary>
-    EnumerationExceptionContinuation EnumerationExceptionContinuation { get; }
+    BatchProcessExceptionContinuation BatchProcessExceptionContinuation { get; }
 }
 
 /// <summary>
@@ -37,5 +37,5 @@ public interface IToolkit<out TSelf> : IToolkit where TSelf : IToolkit<TSelf>
     /// Sets the continuation policy to use when an exception occurs during enumeration.
     /// </summary>
     /// <param name="continuation">The continuation policy to use when an exception occurs during enumeration.</param>
-    TSelf SetEnumerationExceptionContinuation(EnumerationExceptionContinuation continuation);
+    TSelf SetBatchProcessExceptionContinuation(BatchProcessExceptionContinuation continuation);
 }

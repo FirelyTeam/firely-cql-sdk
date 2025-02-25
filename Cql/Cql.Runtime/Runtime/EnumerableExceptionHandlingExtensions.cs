@@ -20,7 +20,7 @@ internal static class EnumerableExceptionHandlingExtensions
     public static int TryForEach<T>(
         this IEnumerable<T> inputs,
         Action<T> withValue,
-        EnumerationErrorStrategyBuilder<T>? buildErrorStrategy = null) =>
+        BatchProcessErrorHandlingStrategyBuilder<T>? buildErrorStrategy = null) =>
         inputs.TrySelect(
                   input =>
                   {
@@ -33,10 +33,10 @@ internal static class EnumerableExceptionHandlingExtensions
     public static IEnumerable<TReturn> TrySelect<T, TReturn>(
         this IEnumerable<T> inputs,
         Func<T, TReturn> selector,
-        EnumerationErrorStrategyBuilder<T>? buildErrorStrategy = null)
+        BatchProcessErrorHandlingStrategyBuilder<T>? buildErrorStrategy = null)
     {
         bool firstException = true;
-        EnumerationErrorStrategy<T> errorStrategy = default;
+        BatchProcessExceptionHandlingStrategy<T> strategy = default;
         foreach (var input in inputs)
         {
             TReturn next;
@@ -51,14 +51,14 @@ internal static class EnumerableExceptionHandlingExtensions
                 if (firstException)
                 {
                     firstException = false;
-                    errorStrategy = buildErrorStrategy?.Invoke(default) ?? default;
+                    strategy = buildErrorStrategy?.Invoke(default) ?? default;
                 }
 
-                errorStrategy.ExceptionHandler?.Invoke(input, e, errorStrategy.ExceptionContinuation);
-                switch (errorStrategy.ExceptionContinuation)
+                strategy.ExceptionHandler?.Invoke(input, e, strategy.ExceptionContinuation);
+                switch (strategy.ExceptionContinuation)
                 {
-                    case EnumerationExceptionContinuation.Continue: continue;
-                    case EnumerationExceptionContinuation.Break: yield break;
+                    case BatchProcessExceptionContinuation.Continue: continue;
+                    case BatchProcessExceptionContinuation.Break: yield break;
                 }
                 throw;
             }

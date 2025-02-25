@@ -24,7 +24,7 @@ public static class CqlToolkitExtensions
     public static ElmToolkit CreateElmToolkit(
         this CqlToolkit cqlToolkit,
         ElmToolkitConfig? elmToolkitConfig = null) =>
-        new ElmToolkit(cqlToolkit.LoggerFactory, elmToolkitConfig, cqlToolkit.EnumerationExceptionContinuation)
+        new ElmToolkit(cqlToolkit.LoggerFactory, elmToolkitConfig, cqlToolkit.BatchProcessExceptionContinuation)
             .AddElmFromCqlToolkit(cqlToolkit);
 
     /// <summary>

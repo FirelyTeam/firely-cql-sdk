@@ -37,7 +37,7 @@ internal partial class LibrarySetExpressionBuilderContext
     public LibrarySet LibrarySet { get; }
 
     public IEnumerable<(Library library, DefinitionDictionary<LambdaExpression> libraryDefinitions)> BuildEachLibraryDefinitions(
-        EnumerationErrorStrategyBuilder<Library>? buildErrorStrategy = null,
+        BatchProcessErrorHandlingStrategyBuilder<Library>? buildErrorStrategy = null,
         Action<Library>? prebuildLibraryHandler = null) =>
         LibrarySet
             .TrySelect(

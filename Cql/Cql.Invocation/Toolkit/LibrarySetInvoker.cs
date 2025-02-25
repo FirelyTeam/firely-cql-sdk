@@ -26,11 +26,11 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
     internal LibrarySetInvoker(
         AssemblyLoadContext alc,
         ILoggerFactory loggerFactory,
-        EnumerationExceptionContinuation enumerationExceptionContinuation)
+        BatchProcessExceptionContinuation batchProcessExceptionContinuation)
     {
         _alc = alc;
         LoggerFactory = loggerFactory;
-        EnumerationExceptionContinuation = enumerationExceptionContinuation;
+        BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
         LibraryInvokers =
             _alc.Assemblies
                 .SelectMany(a => a.GetTypes())
@@ -60,12 +60,12 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
     public ILoggerFactory LoggerFactory { get; }
 
     /// <inheritdoc />
-    public EnumerationExceptionContinuation EnumerationExceptionContinuation { get; private set; }
+    public BatchProcessExceptionContinuation BatchProcessExceptionContinuation { get; private set; }
 
     /// <inheritdoc />
-    public LibrarySetInvoker SetEnumerationExceptionContinuation(EnumerationExceptionContinuation continuation)
+    public LibrarySetInvoker SetBatchProcessExceptionContinuation(BatchProcessExceptionContinuation continuation)
     {
-        EnumerationExceptionContinuation = continuation;
+        BatchProcessExceptionContinuation = continuation;
         return this;
     }
 }

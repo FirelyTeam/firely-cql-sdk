@@ -18,5 +18,5 @@ namespace Hl7.Cql.Runtime;
 public delegate void ValueExceptionHandler<in T>(
     T value,
     Exception exception,
-    EnumerationExceptionContinuation continuation = EnumerationExceptionContinuation.Throw
+    BatchProcessExceptionContinuation continuation = BatchProcessExceptionContinuation.Throw
     );

@@ -529,6 +529,10 @@ Hl7.Cql.Operators.RetrieveParameters.ValueSet.get -> Hl7.Cql.Primitives.CqlValue
 Hl7.Cql.Operators.RetrieveParameters.ValueSet.init -> void
 Hl7.Cql.Runtime.BaseTypeResolver
 Hl7.Cql.Runtime.BaseTypeResolver.BaseTypeResolver() -> void
+Hl7.Cql.Runtime.BatchProcessExceptionContinuation
+Hl7.Cql.Runtime.BatchProcessExceptionContinuation.Break = 2 -> Hl7.Cql.Runtime.BatchProcessExceptionContinuation
+Hl7.Cql.Runtime.BatchProcessExceptionContinuation.Continue = 1 -> Hl7.Cql.Runtime.BatchProcessExceptionContinuation
+Hl7.Cql.Runtime.BatchProcessExceptionContinuation.Throw = 0 -> Hl7.Cql.Runtime.BatchProcessExceptionContinuation
 Hl7.Cql.Runtime.ContextEventArgs
 Hl7.Cql.Runtime.ContextEventArgs.ContextEventArgs(object? state = null) -> void
 Hl7.Cql.Runtime.ContextEventArgs.State.get -> object?
@@ -577,10 +581,6 @@ Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetDefinitionsForLibrary(string? libr
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetTags(string! library, string! definition, System.Type![]! signature, out System.Linq.ILookup<string!, string!>? tags) -> bool
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetValue(string? libraryName, string! definition, out T? expression) -> bool
 Hl7.Cql.Runtime.DefinitionDictionary<T>.TryGetValue(string? libraryName, string! definition, System.Type![]! signature, out T? expression) -> bool
-Hl7.Cql.Runtime.EnumerationExceptionContinuation
-Hl7.Cql.Runtime.EnumerationExceptionContinuation.Break = 2 -> Hl7.Cql.Runtime.EnumerationExceptionContinuation
-Hl7.Cql.Runtime.EnumerationExceptionContinuation.Continue = 1 -> Hl7.Cql.Runtime.EnumerationExceptionContinuation
-Hl7.Cql.Runtime.EnumerationExceptionContinuation.Throw = 0 -> Hl7.Cql.Runtime.EnumerationExceptionContinuation
 Hl7.Cql.Runtime.IO.DirectoryInfoHandler
 Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy
 Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter
@@ -589,10 +589,10 @@ Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory
 Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverterFactory.CqlValueTupleJsonConverterFactory() -> void
 Hl7.Cql.Runtime.ValueExceptionHandler<T>
 Hl7.Cql.Toolkit.IToolkit
-Hl7.Cql.Toolkit.IToolkit.EnumerationExceptionContinuation.get -> Hl7.Cql.Runtime.EnumerationExceptionContinuation
+Hl7.Cql.Toolkit.IToolkit.BatchProcessExceptionContinuation.get -> Hl7.Cql.Runtime.BatchProcessExceptionContinuation
 Hl7.Cql.Toolkit.IToolkit.LoggerFactory.get -> Microsoft.Extensions.Logging.ILoggerFactory!
 Hl7.Cql.Toolkit.IToolkit<TSelf>
-Hl7.Cql.Toolkit.IToolkit<TSelf>.SetEnumerationExceptionContinuation(Hl7.Cql.Runtime.EnumerationExceptionContinuation continuation) -> TSelf
+Hl7.Cql.Toolkit.IToolkit<TSelf>.SetEnumerationExceptionContinuation(Hl7.Cql.Runtime.BatchProcessExceptionContinuation continuation) -> TSelf
 Hl7.Cql.Toolkit.IToolkitWithConfig<TSelf, TConfig>
 Hl7.Cql.Toolkit.IToolkitWithConfig<TSelf, TConfig>.Config.get -> TConfig!
 Hl7.Cql.Toolkit.IToolkitWithConfig<TSelf, TConfig>.Reconfigure(Hl7.Cql.Abstractions.Mutator<TConfig!>? reconfigure) -> TSelf
@@ -651,7 +651,7 @@ virtual Hl7.Cql.Operators.RetrieveParameters.Equals(Hl7.Cql.Operators.RetrievePa
 virtual Hl7.Cql.Operators.RetrieveParameters.PrintMembers(System.Text.StringBuilder! builder) -> bool
 virtual Hl7.Cql.Runtime.BaseTypeResolver.GetPropertyCore(System.Type! type, string! propertyName) -> System.Reflection.PropertyInfo?
 virtual Hl7.Cql.Runtime.IO.DirectoryInfoHandler.Invoke(System.IO.DirectoryInfo! directory) -> void
-virtual Hl7.Cql.Runtime.ValueExceptionHandler<T>.Invoke(T value, System.Exception! exception, Hl7.Cql.Runtime.EnumerationExceptionContinuation continuation = Hl7.Cql.Runtime.EnumerationExceptionContinuation.Throw) -> void
+virtual Hl7.Cql.Runtime.ValueExceptionHandler<T>.Invoke(T value, System.Exception! exception, Hl7.Cql.Runtime.BatchProcessExceptionContinuation continuation = Hl7.Cql.Runtime.BatchProcessExceptionContinuation.Throw) -> void
 ~override Hl7.Cql.Runtime.CqlLibraryIdentifier.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.CqlLibraryVersion.Equals(object obj) -> bool
 ~override Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Equals(object obj) -> bool
