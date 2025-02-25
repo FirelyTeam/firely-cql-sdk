@@ -592,10 +592,7 @@ Hl7.Cql.Toolkit.IToolkit
 Hl7.Cql.Toolkit.IToolkit.BatchProcessExceptionContinuation.get -> Hl7.Cql.Runtime.BatchProcessExceptionContinuation
 Hl7.Cql.Toolkit.IToolkit.LoggerFactory.get -> Microsoft.Extensions.Logging.ILoggerFactory!
 Hl7.Cql.Toolkit.IToolkit<TSelf>
-Hl7.Cql.Toolkit.IToolkit<TSelf>.SetEnumerationExceptionContinuation(Hl7.Cql.Runtime.BatchProcessExceptionContinuation continuation) -> TSelf
-Hl7.Cql.Toolkit.IToolkitWithConfig<TSelf, TConfig>
-Hl7.Cql.Toolkit.IToolkitWithConfig<TSelf, TConfig>.Config.get -> TConfig!
-Hl7.Cql.Toolkit.IToolkitWithConfig<TSelf, TConfig>.Reconfigure(Hl7.Cql.Abstractions.Mutator<TConfig!>? reconfigure) -> TSelf
+Hl7.Cql.Toolkit.IToolkit<TSelf>.SetBatchProcessExceptionContinuation(Hl7.Cql.Runtime.BatchProcessExceptionContinuation continuation) -> TSelf
 Hl7.Cql.Toolkit.ToolkitExtensions
 Hl7.Cql.ValueSets.IValueSetDictionary
 Hl7.Cql.ValueSets.IValueSetDictionary.IsCodeInValueSet(string! valueSetUri, string! code) -> bool

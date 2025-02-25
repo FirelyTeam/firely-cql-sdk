@@ -224,7 +224,6 @@ namespace Hl7.Cql.CqlToElm.Test
             AmbiguousTypeBehavior ambiguousTypeBehavior = AmbiguousTypeBehavior.Error,
             bool enableListPromotion = false) =>
             CreateCqlToolkit(models, modelInfos, ambiguousTypeBehavior, enableListPromotion)
-                .CreateElmToolkit()
-                .Reconfigure(_ => ElmToolkitConfig);
+                .CreateElmToolkit(ElmToolkitConfig);
     }
 }

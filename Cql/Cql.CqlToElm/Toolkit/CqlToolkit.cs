@@ -40,7 +40,7 @@ public sealed class CqlToolkit : IToolkitWithConfig<CqlToolkit, CqlToolkitConfig
     }
 
     private CqlToolkitConversionDictionary _conversions;
-    private CqlToolkitServices _services;
+    private readonly CqlToolkitServices _services;
 
     /// <inheritdoc/>
     [EditorBrowsable(EditorBrowsableState.Advanced)]
@@ -52,7 +52,7 @@ public sealed class CqlToolkit : IToolkitWithConfig<CqlToolkit, CqlToolkitConfig
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
     /// <inheritdoc/>
-    public CqlToolkitConfig Config { get; private set; }
+    public CqlToolkitConfig Config { get; }
 
     /// <inheritdoc />
     public BatchProcessExceptionContinuation BatchProcessExceptionContinuation { get; private set; }
@@ -78,25 +78,6 @@ public sealed class CqlToolkit : IToolkitWithConfig<CqlToolkit, CqlToolkitConfig
     {
         _conversions = conversions;
         _services.LibraryBuilderProvider.ConversionsBuilder = conversions.ToBuilder();
-    }
-
-    /// <inheritdoc />
-    public CqlToolkit Reconfigure(
-        Mutator<CqlToolkitConfig>? reconfigure)
-    {
-        if (reconfigure is null)
-            return this;
-
-        var config = reconfigure(Config);
-        if (Config == config)
-            return this;
-
-        _services.Dispose();
-        Config = config;
-        _services = CqlToolkitServices.Create(_services.LoggerFactory, config, _conversions);
-        _services.LibraryBuilderProvider.CqlToElmTranslatorServices = _services;
-
-        return this;
     }
 
     /// <summary>

@@ -16,28 +16,6 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 public static partial class ElmToolkitExtensions
 {
     /// <summary>
-    /// Configures the <see cref="ElmToolkit"/> to use embedded debug information.
-    /// </summary>
-    /// <param name="cqlToolkit">The <see cref="ElmToolkit"/> instance.</param>
-    /// <returns>The configured <see cref="ElmToolkit"/> instance.</returns>
-    public static ElmToolkit SetAssemblyDebugInformationToEmbedded(this ElmToolkit cqlToolkit) =>
-        cqlToolkit.Reconfigure(o => o with
-        {
-            AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded
-        });
-
-    /// <summary>
-    /// Configures the <see cref="ElmToolkit"/> to use portable PDB debug information.
-    /// </summary>
-    /// <param name="cqlToolkit">The <see cref="ElmToolkit"/> instance.</param>
-    /// <returns>The configured <see cref="ElmToolkit"/> instance.</returns>
-    public static ElmToolkit SetAssemblyDebugInformationToPortablePdb(this ElmToolkit cqlToolkit) =>
-        cqlToolkit.Reconfigure(o => o with
-        {
-            AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.PortablePdb
-        });
-
-    /// <summary>
     /// Gets the results of ELM to assembly conversions.
     /// </summary>
     /// <param name="elmToolkit">The <see cref="ElmToolkit"/> instance.</param>

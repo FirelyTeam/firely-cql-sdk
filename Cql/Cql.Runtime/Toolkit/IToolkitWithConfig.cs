@@ -15,7 +15,7 @@ namespace Hl7.Cql.Toolkit;
 /// </summary>
 /// <typeparam name="TSelf">The exact type of the toolkit implementation itself.</typeparam>
 /// <typeparam name="TConfig">The type of the toolkit's config.</typeparam>
-internal interface IToolkitWithConfig<out TSelf, TConfig> : IToolkit<TSelf>
+internal interface IToolkitWithConfig<out TSelf, out TConfig> : IToolkit<TSelf>
     where TSelf : IToolkitWithConfig<TSelf, TConfig>
     where TConfig : class
 {
@@ -23,10 +23,4 @@ internal interface IToolkitWithConfig<out TSelf, TConfig> : IToolkit<TSelf>
     /// Gets the configuration used by the toolkit.
     /// </summary>
     TConfig Config { get; }
-
-    /// <summary>
-    /// Reconfigures the toolkit with new configuration settings.
-    /// </summary>
-    /// <param name="reconfigure">A function that takes the current configuration and returns a new configuration.</param>
-    TSelf Reconfigure(Mutator<TConfig>? reconfigure);
 }

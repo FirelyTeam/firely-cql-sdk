@@ -20,8 +20,7 @@ Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.Conversions.get -> System.Collecti
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.ConvertElmToAssemblies() -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.ElmToolkit(Microsoft.Extensions.Logging.ILoggerFactory? loggerFactory = null, Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig? config = null, Hl7.Cql.Runtime.BatchProcessExceptionContinuation batchProcessExceptionContinuation = Hl7.Cql.Runtime.BatchProcessExceptionContinuation.Throw) -> void
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.LoggerFactory.get -> Microsoft.Extensions.Logging.ILoggerFactory!
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.Reconfigure(Hl7.Cql.Abstractions.Mutator<Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig!>? reconfigure) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
-Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.SetEnumerationExceptionContinuation(Hl7.Cql.Runtime.BatchProcessExceptionContinuation continuation) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
+Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit.SetBatchProcessExceptionContinuation(Hl7.Cql.Runtime.BatchProcessExceptionContinuation continuation) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.<Clone>$() -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig!
 Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitConfig.AllowScopeRedefinition.get -> bool
@@ -95,8 +94,6 @@ static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.AddElm
 static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.GetElmToAssemblyResults(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit) -> System.Collections.Generic.IEnumerable<Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkitResultRecord>!
 static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SaveAssemblyBinariesToDirectory(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit, System.IO.DirectoryInfo! directory, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? directoryPreparationStrategy = null) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
 static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SaveCSharpFilesToDirectory(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! elmToolkit, System.IO.DirectoryInfo! directory, Hl7.Cql.Runtime.IO.DirectoryInfoHandler? directoryPreparationStrategy = null) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
-static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SetAssemblyDebugInformationToEmbedded(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! cqlToolkit) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
-static Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions.ElmToolkitExtensions.SetAssemblyDebugInformationToPortablePdb(this Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit! cqlToolkit) -> Hl7.Cql.CodeGeneration.NET.Toolkit.ElmToolkit!
 virtual Hl7.Cql.CodeGeneration.NET.AssemblyBinary.<Clone>$() -> Hl7.Cql.CodeGeneration.NET.AssemblyBinary!
 virtual Hl7.Cql.CodeGeneration.NET.AssemblyBinary.EqualityContract.get -> System.Type!
 virtual Hl7.Cql.CodeGeneration.NET.AssemblyBinary.Equals(Hl7.Cql.CodeGeneration.NET.AssemblyBinary? other) -> bool

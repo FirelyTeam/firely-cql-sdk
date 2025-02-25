@@ -44,7 +44,7 @@ public sealed class ElmToolkit : IToolkitWithConfig<ElmToolkit, ElmToolkitConfig
     }
 
     private ElmToolkitConversionDictionary _conversions;
-    private ElmToolkitServices _services;
+    private readonly ElmToolkitServices _services;
 
     /// <inheritdoc />
     [EditorBrowsable(EditorBrowsableState.Advanced)]
@@ -56,7 +56,7 @@ public sealed class ElmToolkit : IToolkitWithConfig<ElmToolkit, ElmToolkitConfig
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
     /// <inheritdoc />
-    public ElmToolkitConfig Config { get; private set; }
+    public ElmToolkitConfig Config { get; }
 
     /// <inheritdoc />
     public BatchProcessExceptionContinuation BatchProcessExceptionContinuation { get; private set; }
@@ -81,23 +81,6 @@ public sealed class ElmToolkit : IToolkitWithConfig<ElmToolkit, ElmToolkitConfig
         ElmToolkitConversionDictionary conversions)
     {
         _conversions = conversions;
-    }
-
-    /// <inheritdoc />
-    public ElmToolkit Reconfigure(
-        Mutator<ElmToolkitConfig>? reconfigure)
-    {
-        if (reconfigure is null)
-            return this;
-
-        var config = reconfigure(Config);
-        if (Config == config)
-            return this;
-
-        _services.ServiceProvider.Dispose();
-        Config = config;
-        _services = ElmToolkitServices.Create(LoggerFactory, config);
-        return this;
     }
 
     /// <summary>

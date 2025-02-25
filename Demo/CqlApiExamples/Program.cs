@@ -212,8 +212,7 @@ internal static class Program
         }
 
         var elmToolkit = cqlToolkit
-                         .CreateElmToolkit()
-                         .SetAssemblyDebugInformationToEmbedded()
+                         .CreateElmToolkit(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded))
                          .AddElmFilesFromDirectory(dirs.ElmInDirectory)
                          .ConvertElmToAssemblies()
                          .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)

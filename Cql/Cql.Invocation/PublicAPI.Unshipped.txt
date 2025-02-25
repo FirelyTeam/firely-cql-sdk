@@ -5,7 +5,7 @@ abstract Hl7.Cql.Invocation.Toolkit.LibraryInvoker.LibraryIdentifier.get -> Hl7.
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.DefinitionInvoker(Hl7.Cql.Invocation.Toolkit.LibraryInvoker! libraryInvoker, string! definitionName, System.Reflection.MethodInfo! methodInfo, System.Collections.Generic.IReadOnlyDictionary<string!, string!>! tagValuesByName, string? valueSetId) -> void
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.DefinitionName.get -> string!
-Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.InvokeMethod(object? library, params object?[]! parameters) -> object?
+Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.InvokeDefinition(object? library, params object?[]! parameters) -> object?
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.LibraryInvoker.get -> Hl7.Cql.Invocation.Toolkit.LibraryInvoker!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ReturnType.get -> System.Type!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.TagValuesByName.get -> System.Collections.Generic.IReadOnlyDictionary<string!, string!>!
@@ -18,18 +18,18 @@ Hl7.Cql.Invocation.Toolkit.Extensions.LibrarySetInvokerExtensions
 Hl7.Cql.Invocation.Toolkit.InvocationToolkit
 Hl7.Cql.Invocation.Toolkit.InvocationToolkit.AddAssemblyBinaries(System.Collections.Generic.IEnumerable<Hl7.Cql.CodeGeneration.NET.AssemblyBinary!>! assemblyBinary) -> Hl7.Cql.Invocation.Toolkit.InvocationToolkit!
 Hl7.Cql.Invocation.Toolkit.InvocationToolkit.AssemblyBinaries.get -> System.Collections.Generic.IReadOnlySet<Hl7.Cql.CodeGeneration.NET.AssemblyBinary!>!
+Hl7.Cql.Invocation.Toolkit.InvocationToolkit.BatchProcessExceptionContinuation.get -> Hl7.Cql.Runtime.BatchProcessExceptionContinuation
 Hl7.Cql.Invocation.Toolkit.InvocationToolkit.CreateLibrarySetInvoker(string! name = "") -> Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker!
-Hl7.Cql.Invocation.Toolkit.InvocationToolkit.EnumerationExceptionContinuation.get -> Hl7.Cql.Runtime.EnumerationExceptionContinuation
-Hl7.Cql.Invocation.Toolkit.InvocationToolkit.InvocationToolkit(Microsoft.Extensions.Logging.ILoggerFactory? loggerFactory = null, Hl7.Cql.Runtime.EnumerationExceptionContinuation enumerationExceptionContinuation = Hl7.Cql.Runtime.EnumerationExceptionContinuation.Throw) -> void
+Hl7.Cql.Invocation.Toolkit.InvocationToolkit.InvocationToolkit(Microsoft.Extensions.Logging.ILoggerFactory? loggerFactory = null, Hl7.Cql.Runtime.BatchProcessExceptionContinuation batchProcessExceptionContinuation = Hl7.Cql.Runtime.BatchProcessExceptionContinuation.Throw) -> void
 Hl7.Cql.Invocation.Toolkit.InvocationToolkit.LoggerFactory.get -> Microsoft.Extensions.Logging.ILoggerFactory!
-Hl7.Cql.Invocation.Toolkit.InvocationToolkit.SetEnumerationExceptionContinuation(Hl7.Cql.Runtime.EnumerationExceptionContinuation continuation) -> Hl7.Cql.Invocation.Toolkit.InvocationToolkit!
+Hl7.Cql.Invocation.Toolkit.InvocationToolkit.SetBatchProcessExceptionContinuation(Hl7.Cql.Runtime.BatchProcessExceptionContinuation continuation) -> Hl7.Cql.Invocation.Toolkit.InvocationToolkit!
 Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig
 Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.<Clone>$() -> Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig!
-Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.Deconstruct(out Hl7.Cql.Runtime.EnumerationExceptionContinuation EnumerationExceptionContinuation) -> void
-Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.EnumerationExceptionContinuation.get -> Hl7.Cql.Runtime.EnumerationExceptionContinuation
-Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.EnumerationExceptionContinuation.init -> void
+Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.BatchProcessExceptionContinuation.get -> Hl7.Cql.Runtime.BatchProcessExceptionContinuation
+Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.BatchProcessExceptionContinuation.init -> void
+Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.Deconstruct(out Hl7.Cql.Runtime.BatchProcessExceptionContinuation BatchProcessExceptionContinuation) -> void
 Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.Equals(Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig? other) -> bool
-Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.InvocationToolkitConfig(Hl7.Cql.Runtime.EnumerationExceptionContinuation EnumerationExceptionContinuation = Hl7.Cql.Runtime.EnumerationExceptionContinuation.Throw) -> void
+Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.InvocationToolkitConfig(Hl7.Cql.Runtime.BatchProcessExceptionContinuation BatchProcessExceptionContinuation = Hl7.Cql.Runtime.BatchProcessExceptionContinuation.Throw) -> void
 Hl7.Cql.Invocation.Toolkit.LibraryInvoker
 Hl7.Cql.Invocation.Toolkit.LibraryInvoker.LibraryInvoker(Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker! librarySetInvoker) -> void
 Hl7.Cql.Invocation.Toolkit.LibraryInvoker.LibrarySetInvoker.get -> Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker!
@@ -37,11 +37,11 @@ Hl7.Cql.Invocation.Toolkit.LibraryInvokerOnInstance
 Hl7.Cql.Invocation.Toolkit.LibraryInvokerOnInstance.Library.get -> Hl7.Cql.Abstractions.ILibrary!
 Hl7.Cql.Invocation.Toolkit.LibraryInvokerOnInstance.LibraryInvokerOnInstance(Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker! librarySetInvoker, Hl7.Cql.Abstractions.ILibrary! library) -> void
 Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker
+Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.BatchProcessExceptionContinuation.get -> Hl7.Cql.Runtime.BatchProcessExceptionContinuation
 Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.Dispose() -> void
-Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.EnumerationExceptionContinuation.get -> Hl7.Cql.Runtime.EnumerationExceptionContinuation
 Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.LibraryInvokers.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.Invocation.Toolkit.LibraryInvoker!>!
 Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.LoggerFactory.get -> Microsoft.Extensions.Logging.ILoggerFactory!
-Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.SetEnumerationExceptionContinuation(Hl7.Cql.Runtime.EnumerationExceptionContinuation continuation) -> Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker!
+Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker.SetBatchProcessExceptionContinuation(Hl7.Cql.Runtime.BatchProcessExceptionContinuation continuation) -> Hl7.Cql.Invocation.Toolkit.LibrarySetInvoker!
 override Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.Equals(object? obj) -> bool
 override Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.GetHashCode() -> int
 override Hl7.Cql.Invocation.Toolkit.InvocationToolkitConfig.ToString() -> string!
