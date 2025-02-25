@@ -9,6 +9,8 @@
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Invocation.Toolkit.Internal;
+using Hl7.Cql.Runtime;
+using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.Invocation.Toolkit;
 
@@ -16,25 +18,37 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// <summary>
 /// Builder class for creating instances of <see cref="LibrarySetInvoker"/>.
 /// </summary>
-public sealed class InvocationToolkit
+public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="InvocationToolkit"/> class.
     /// </summary>
     /// <param name="loggerFactory">Optional logger factory for logging purposes.</param>
+    /// <param name="batchProcessExceptionContinuation">The continuation policy to use when an exception occurs during batch processing.</param>
     public InvocationToolkit(
-        ILoggerFactory? loggerFactory = null)
+        ILoggerFactory? loggerFactory = null,
+        BatchProcessExceptionContinuation batchProcessExceptionContinuation = BatchProcessExceptionContinuation.Throw)
     {
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
+        BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
         _assemblyBinaries = AssemblyBinaryHashSet.Empty;
         _services = LibrarySetInvokerBuilderServices.Create(loggerFactory);
     }
 
-    /// <summary>
-    /// Gets the logger factory used by extensions on the <see cref="InvocationToolkit"/>.
-    /// </summary>
-    internal ILoggerFactory LoggerFactory { get; }
+    /// <inheritdoc />
+    [EditorBrowsable(EditorBrowsableState.Advanced)]
+    public ILoggerFactory LoggerFactory { get; }
+
+    /// <inheritdoc />
+    public BatchProcessExceptionContinuation BatchProcessExceptionContinuation { get; private set; }
+
+    /// <inheritdoc />
+    public InvocationToolkit SetBatchProcessExceptionContinuation(BatchProcessExceptionContinuation continuation)
+    {
+        BatchProcessExceptionContinuation = continuation;
+        return this;
+    }
 
     /// <summary>
     /// Gets the set of assembly binaries.
@@ -49,10 +63,8 @@ public sealed class InvocationToolkit
     /// </summary>
     /// <param name="assemblyBinaries">The assembly binaries to set.</param>
     private void ReplaceAssemblyBinaries(
-        AssemblyBinaryHashSet assemblyBinaries)
-    {
+        AssemblyBinaryHashSet assemblyBinaries) =>
         _assemblyBinaries = assemblyBinaries;
-    }
 
     /// <summary>
     /// Adds assembly binaries to the current set.
@@ -90,12 +102,23 @@ public sealed class InvocationToolkit
         _services.Logger.LogDebug("Creating LibrarySetInvoker {name}", name);
 
         var alc = new AssemblyLoadContext(name, true);
-        foreach (var (assembly, debugSymbols) in AssemblyBinaries)
-        {
-            var asm = alc.LoadFromBytes(assembly!, debugSymbols);
-            _services.Logger.LogInformation("Loaded assembly {assemblyName}", asm.FullName);
-        }
 
-        return new LibrarySetInvoker(this, alc);
+        AssemblyBinaries
+            .TryForEach(t =>
+                {
+                    var (assembly, debugSymbols) = t;
+                    var asm = alc.LoadFromBytes(assembly!, debugSymbols);
+                    _services.Logger.LogInformation("Loaded assembly {assemblyName}", asm.FullName);
+                },
+                errorStrategy => errorStrategy
+                    .SetContinuation(BatchProcessExceptionContinuation)
+                    .AddLoggerExceptionHandler(
+                        _services.Logger,
+                        (assemblyBinary, logMessage) => logMessage("Unable to load an assembly from the binary containing {byteLength} byte(s).", assemblyBinary.AssemblyBytes!.Length)));
+
+        return new LibrarySetInvoker(
+            alc,
+            this.LoggerFactory,
+            this.BatchProcessExceptionContinuation);
     }
 }

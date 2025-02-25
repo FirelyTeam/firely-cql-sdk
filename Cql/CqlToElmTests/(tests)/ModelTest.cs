@@ -8,7 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Is_Ambiguous()
         {
-            var cqlToolkit = CreateFluentCqlToolkit(AmbiguousTypeBehavior: AmbiguousTypeBehavior.Error);
+            var cqlToolkit = CreateCqlToolkit(AmbiguousTypeBehavior: AmbiguousTypeBehavior.Error);
             var lib = cqlToolkit.MakeLibrary("""
                                          library Test version '1.0.0'
 
@@ -23,7 +23,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Prefer_System()
         {
-            var cqlToolkit = CreateFluentCqlToolkit(AmbiguousTypeBehavior: AmbiguousTypeBehavior.PreferSystem);
+            var cqlToolkit = CreateCqlToolkit(AmbiguousTypeBehavior: AmbiguousTypeBehavior.PreferSystem);
             var lib = cqlToolkit.MakeLibrary("""
                 library Test version '1.0.0'
 
@@ -38,7 +38,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_Prefer_Model()
         {
-            var cqlToolkit = CreateFluentCqlToolkit(AmbiguousTypeBehavior: AmbiguousTypeBehavior.PreferModel);
+            var cqlToolkit = CreateCqlToolkit(AmbiguousTypeBehavior: AmbiguousTypeBehavior.PreferModel);
             var lib = cqlToolkit.MakeLibrary("""
                 library Test version '1.0.0'
 

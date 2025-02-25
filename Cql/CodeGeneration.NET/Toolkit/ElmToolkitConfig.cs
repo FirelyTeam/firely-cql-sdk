@@ -7,14 +7,12 @@
  */
 
 using Hl7.Cql.Compiler;
-using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 
 /// <summary>
-/// Configuration settings for the Elm to Assembly compiler.
+/// Configuration settings for the <see cref="ElmToolkit"/>.
 /// </summary>
-/// <param name="ErroredEnumerationContinuation">The exception handling policy to use while processing a batch of items.</param>
 /// <param name="AssemblyCompilerDebugInformationFormat">The format of the debug information emitted by the compiler.</param>
 /// <param name="AllowScopeRedefinition">Allows a child scope to redefine an existing parent scope. Default is <see langword="true" />.</param>
 /// <param name="AllowUnresolvedExternals">
@@ -25,7 +23,6 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// </param>
 /// <param name="LRUCacheSize">The size of the Least Recently Used (LRU) cache.</param>
 public sealed record ElmToolkitConfig(
-    ErroredEnumerationContinuation ErroredEnumerationContinuation = default,
     AssemblyCompilerDebugInformationFormat AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.None,
     bool AllowScopeRedefinition = true,
     bool AllowUnresolvedExternals = true,

@@ -6,9 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.CqlToElm.Toolkit.Internal;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Toolkit;
 using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Hl7.Cql.CqlToElm.Toolkit;
@@ -16,31 +16,33 @@ namespace Hl7.Cql.CqlToElm.Toolkit;
 /// <summary>
 /// Translates CQL libraries to ELM libraries.
 /// </summary>
-public sealed class CqlToolkit
+public sealed class CqlToolkit : IToolkit<CqlToolkit>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="CqlToolkit"/> class.
     /// </summary>
     /// <param name="loggerFactory">The logger factory to use for logging.</param>
-    /// <param name="config">The configuration settings for the translator.</param>
+    /// <param name="config">The configuration settings for the toolkit.</param>
+    /// <param name="batchProcessExceptionContinuation">The continuation policy to use when an exception occurs during batch processing.</param>
     public CqlToolkit(
         ILoggerFactory? loggerFactory = null,
-        CqlToolkitConfig? config = null)
+        CqlToolkitConfig? config = null,
+        BatchProcessExceptionContinuation batchProcessExceptionContinuation = BatchProcessExceptionContinuation.Throw)
     {
         config ??= CqlToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
         _conversions = CqlToolkitConversionDictionary.Empty;
         Config = config;
+        BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
         _services = CqlToolkitServices.Create(loggerFactory, config, _conversions);
     }
 
     private CqlToolkitConversionDictionary _conversions;
-    private CqlToolkitServices _services;
+    private readonly CqlToolkitServices _services;
 
-    /// <summary>
-    /// Gets the logger factory used by extensions.
-    /// </summary>
+    /// <inheritdoc/>
+    [EditorBrowsable(EditorBrowsableState.Advanced)]
     public ILoggerFactory LoggerFactory { get; }
 
     /// <summary>
@@ -49,9 +51,19 @@ public sealed class CqlToolkit
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
     /// <summary>
-    /// Gets the configuration.
+    /// Gets the configuration used by the toolkit.
     /// </summary>
-    public CqlToolkitConfig Config { get; private set; }
+    public CqlToolkitConfig Config { get; }
+
+    /// <inheritdoc />
+    public BatchProcessExceptionContinuation BatchProcessExceptionContinuation { get; private set; }
+
+    /// <inheritdoc />
+    public CqlToolkit SetBatchProcessExceptionContinuation(BatchProcessExceptionContinuation continuation)
+    {
+        BatchProcessExceptionContinuation = continuation;
+        return this;
+    }
 
     /// <summary>
     /// Gets the dictionary of CQL to ELM translations.
@@ -67,26 +79,6 @@ public sealed class CqlToolkit
     {
         _conversions = conversions;
         _services.LibraryBuilderProvider.ConversionsBuilder = conversions.ToBuilder();
-    }
-
-    /// <summary>
-    /// Reconfigures the translator with new configuration settings.
-    /// </summary>
-    /// <param name="reconfigure">A function that takes the current configuration and returns a new configuration.</param>
-    public CqlToolkit Reconfigure(
-        Mutator<CqlToolkitConfig> reconfigure)
-    {
-        var config = reconfigure(Config);
-
-        if (Config == config)
-            return this;
-
-        _services.Dispose();
-        Config = config;
-        _services = CqlToolkitServices.Create(_services.LoggerFactory, config, _conversions);
-        _services.LibraryBuilderProvider.CqlToElmTranslatorServices = _services;
-
-        return this;
     }
 
     /// <summary>
@@ -108,7 +100,7 @@ public sealed class CqlToolkit
                             conversions.Add(libId, conversionRecord); // This fails on duplicate key and value
                         },
                         errorStrategy => errorStrategy
-                                         .SetContinuation(Config.ErroredEnumerationContinuation)
+                                         .SetContinuation(BatchProcessExceptionContinuation)
                                          .AddLoggerExceptionHandler(
                                              logger,
                                              (conversionRecord, logMessage) =>
@@ -142,7 +134,7 @@ public sealed class CqlToolkit
                         conversions[r.LibraryIdentifier] = newConversionRecord;
                     },
                     errorStrategy => errorStrategy
-                                     .SetContinuation(ErroredEnumerationContinuation.Continue)
+                                     .SetContinuation(BatchProcessExceptionContinuation.Continue)
                                      .AddLoggerExceptionHandler(_services.Logger,
                                                                 (conversion, messageBuilder) =>
                                                                     messageBuilder("Could not translate CQL to ELM: {lib}", conversion.LibraryIdentifier))

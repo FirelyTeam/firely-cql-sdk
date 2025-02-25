@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 
@@ -20,23 +21,30 @@ public static class LibraryInvokerExtensions
     /// </summary>
     /// <param name="libraryInvoker">The library invoker containing the definitions.</param>
     /// <param name="cqlContext">The CQL context used for invocation.</param>
-    /// <returns>An enumerable of tuples containing the definition invoker and a function to get the result.</returns>
-    public static IEnumerable<(DefinitionInvoker definitionInvoker, Func<object?> getResult)> EnumerateLibraryDefinitionsResults(
+    /// <param name="includeDefinition">The selector for the definition</param>
+    /// <param name="definitionInvokerExceptionHandler">An exception handler for invoking a definition. (optional)</param>
+    /// <returns>An enumeration of tuples containing the definition invoker and the result.</returns>
+    public static IEnumerable<(DefinitionInvoker definitionInvoker, object? definitionResult)> EnumerateLibraryDefinitionsResults(
         this LibraryInvoker libraryInvoker,
-        CqlContext cqlContext)
+        CqlContext cqlContext,
+        Func<DefinitionInvoker, bool>? includeDefinition = null,
+        ValueExceptionHandler<DefinitionInvoker>? definitionInvokerExceptionHandler = null)
     {
-        foreach (var definitionInvoker in libraryInvoker.Definitions.Values)
-        {
-            if (definitionInvoker.ValueSetId is not null)
-                continue;
+        var logger = libraryInvoker.LibrarySetInvoker.CreateLogger(typeof(LibraryInvokerExtensions));
+        var continuation = libraryInvoker.LibrarySetInvoker.BatchProcessExceptionContinuation;
+        includeDefinition ??= _ => true;
 
-            yield return (definitionInvoker,
-                             () =>
-                             {
-                                 var result = definitionInvoker.Invoke(cqlContext);
-                                 return result;
-                             }
-            );
-        }
+        return libraryInvoker.Definitions.Values
+                      .Where(includeDefinition)
+                      .TrySelect(
+                          definitionInvoker => (definitionInvoker,definitionInvoker.Invoke(cqlContext)),
+                          errorStrategy => errorStrategy
+                                           .SetContinuation(continuation)
+                                           .AddLoggerExceptionHandler(
+                                               logger,
+                                               (definitionInvoker, logMessage) =>
+                                                   logMessage("Could not invoke definition {definition} on library {id}", definitionInvoker.DefinitionName, libraryInvoker.LibraryIdentifier))
+                                           .AddExceptionHandler(definitionInvokerExceptionHandler)
+                          );
     }
 }

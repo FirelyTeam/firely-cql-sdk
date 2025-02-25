@@ -43,7 +43,7 @@ public class TagsTest : Base
                     where (C.onset.value as DateTime) during "Measurement Period"
             """);
 
-        var elmToolkit = CreateFluentCqlToolkit()
+        var elmToolkit = CreateCqlToolkit()
                          .AddCqlLibraries(cqlLibraryString)
                          .CompileCqlToAssemblies();
 

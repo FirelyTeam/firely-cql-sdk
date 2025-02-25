@@ -8,7 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void DistinctABCABC()
         {
-            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("distinct { 'a', 'b', 'c', 'a', 'b', 'c'}");
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("distinct { 'a', 'b', 'c', 'a', 'b', 'c'}");
             var distinct = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Distinct>();
             var result = Run<IEnumerable<string>?>(distinct, library)!.ToArray();
             result.Length.Should().Be(3);
