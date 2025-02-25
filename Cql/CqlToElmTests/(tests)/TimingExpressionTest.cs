@@ -9,7 +9,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void OnOrAfterMonthOf()
         {
             // https://cql.hl7.org/09-b-cqlreference.html#same-or-after-2
-            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("Interval[@2012-12-01, @2013-12-01] on or after month of @2012-11-15");
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("Interval[@2012-12-01, @2013-12-01] on or after month of @2012-11-15");
             var sameOrAfter = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SameOrAfter>();
             sameOrAfter.Should().HaveType(SystemTypes.BooleanType);
             sameOrAfter.operand.Should().NotBeNull();
@@ -23,7 +23,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts1DayOrLessOnOrAfter()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library IntervalTest version '1.0.0'
 
                 define private Issue32: Interval[@2017-12-20T10:30:00, @2017-12-20T12:00:00] starts 1 day or less on or after day of start of Interval[@2017-12-20T11:00:00, @2017-12-21T21:00:00]
@@ -136,7 +136,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Overlaps()
         {
-            var library = CreateFluentCqlToolkit(
+            var library = CreateCqlToolkit(
                 EnableListPromotion: true,
                 EnableListDemotion: true,
                 EnableIntervalPromotion: true,
@@ -155,7 +155,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TestOnOrAfterDateTrue()
         {
-            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("Interval[@2012-12-01, @2013-12-01] on or after month of @2012-11-15");
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("Interval[@2012-12-01, @2013-12-01] on or after month of @2012-11-15");
             var sameOrAfter = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SameOrAfter>();
             var result = Run<bool?>(sameOrAfter, library);
             result.Should().BeTrue();
@@ -164,7 +164,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TestOnOrBeforeDateTrue()
         {
-            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("Interval[@2012-10-01, @2012-11-01] on or before month of @2012-11-15");
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("Interval[@2012-10-01, @2012-11-01] on or before month of @2012-11-15");
             var sameOrBefore = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<SameOrBefore>();
             var result = Run<bool?>(sameOrBefore, library);
             result.Should().BeTrue();

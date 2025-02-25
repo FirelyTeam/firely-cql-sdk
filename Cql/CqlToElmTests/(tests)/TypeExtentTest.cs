@@ -11,7 +11,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_Integer()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Integer: minimum Integer
@@ -32,7 +32,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Integer", nts.name.Name);
 
-                var lambda = ToFluentElmToolkit().Lambda(extent);
+                var lambda = CreateElmToolkit().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -45,7 +45,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Integer()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Integer: maximum Integer
@@ -66,7 +66,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Integer", nts.name.Name);
 
-                var lambda = ToFluentElmToolkit().Lambda(extent);
+                var lambda = CreateElmToolkit().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -79,7 +79,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_Long()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Long: minimum Long
@@ -100,7 +100,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Long", nts.name.Name);
 
-                var lambda = ToFluentElmToolkit().Lambda(extent);
+                var lambda = CreateElmToolkit().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -113,7 +113,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Long()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Long: maximum Long
@@ -134,7 +134,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Long", nts.name.Name);
 
-                var lambda = ToFluentElmToolkit().Lambda(extent);
+                var lambda = CreateElmToolkit().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -147,7 +147,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_Decimal()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Decimal: minimum Decimal
@@ -168,7 +168,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Decimal", nts.name.Name);
 
-                var lambda = ToFluentElmToolkit().Lambda(extent);
+                var lambda = CreateElmToolkit().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -181,7 +181,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Decimal()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Decimal: maximum Decimal
@@ -202,7 +202,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Decimal", nts.name.Name);
 
-                var lambda = ToFluentElmToolkit().Lambda(extent);
+                var lambda = CreateElmToolkit().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -214,7 +214,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_Quantity()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Quantity: minimum Quantity
@@ -235,7 +235,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Quantity", nts.name.Name);
 
-                var lambda = ToFluentElmToolkit().Lambda(extent);
+                var lambda = CreateElmToolkit().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -250,7 +250,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Quantity()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Quantity: maximum Quantity
@@ -271,7 +271,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Quantity", nts.name.Name);
 
-                var lambda = ToFluentElmToolkit().Lambda(extent);
+                var lambda = CreateElmToolkit().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -286,7 +286,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_Date()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Date: minimum Date
@@ -307,7 +307,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Date", nts.name.Name);
 
-                var lambda = ToFluentElmToolkit().Lambda(extent);
+                var lambda = CreateElmToolkit().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -319,7 +319,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Date()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Date: maximum Date
@@ -340,7 +340,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Date", nts.name.Name);
 
-                var lambda = ToFluentElmToolkit().Lambda(extent);
+                var lambda = CreateElmToolkit().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -352,7 +352,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_DateTime()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_DateTime: minimum DateTime
@@ -373,7 +373,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}DateTime", nts.name.Name);
 
-                var lambda = ToFluentElmToolkit().Lambda(extent);
+                var lambda = CreateElmToolkit().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -385,7 +385,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_DateTime()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_DateTime: maximum DateTime
@@ -406,7 +406,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}DateTime", nts.name.Name);
 
-                var lambda = ToFluentElmToolkit().Lambda(extent);
+                var lambda = CreateElmToolkit().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -418,7 +418,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Minimum_Time()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Minimum_Time: minimum Time
@@ -439,7 +439,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Time", nts.name.Name);
 
-                var lambda = ToFluentElmToolkit().Lambda(extent);
+                var lambda = CreateElmToolkit().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);
@@ -451,7 +451,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void TypeExtent_Maximum_Time()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library TypeExtentTest version '1.0.0'
 
                 define private TypeExtent_Maximum_Time: maximum Time
@@ -472,7 +472,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.IsNotNull(nts.name.Name);
                 Assert.AreEqual($"{{{SystemUri}}}Time", nts.name.Name);
 
-                var lambda = ToFluentElmToolkit().Lambda(extent);
+                var lambda = CreateElmToolkit().Lambda(extent);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsNotNull(result);

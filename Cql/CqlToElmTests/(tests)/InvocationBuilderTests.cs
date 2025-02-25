@@ -10,7 +10,7 @@ namespace Hl7.Cql.CqlToElm.Test
     {
         static InvocationBuilderTest()
         {
-            var fluentCqlToolkit = CreateFluentCqlToolkit();
+            var fluentCqlToolkit = CreateCqlToolkit();
             InvocationBuilder = fluentCqlToolkit.GetInvocationBuilder();
             ElmFactory = fluentCqlToolkit.GetElmFactory();
         }

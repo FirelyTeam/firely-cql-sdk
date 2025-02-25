@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.Invocation.Toolkit;
 
@@ -15,24 +16,27 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// <summary>
 /// Represents an invoker for a set of CQL libraries.
 /// </summary>
-public sealed class LibrarySetInvoker : IDisposable
+public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
 {
     private readonly AssemblyLoadContext _alc;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="LibrarySetInvoker"/> class.
     /// </summary>
-    /// <param name="invocationToolkit">The builder used to create the library set invoker.</param>
-    /// <param name="alc">The assembly load context.</param>
-    internal LibrarySetInvoker(InvocationToolkit invocationToolkit, AssemblyLoadContext alc)
+    internal LibrarySetInvoker(
+        AssemblyLoadContext alc,
+        ILoggerFactory loggerFactory,
+        BatchProcessExceptionContinuation batchProcessExceptionContinuation)
     {
         _alc = alc;
+        LoggerFactory = loggerFactory;
+        BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
         LibraryInvokers =
             _alc.Assemblies
                 .SelectMany(a => a.GetTypes())
-                .SelectWhereNotNull(t =>
+                .SelectWhereNotNull(libraryType =>
                 {
-                    LibraryInvoker.TryCreateFromType(invocationToolkit, t, out var libraryInvoker);
+                    _ = LibraryInvoker.TryCreateFromType(this, libraryType, out var libraryInvoker);
                     return libraryInvoker;
                 })
                 .ToImmutableDictionary(o => o.LibraryIdentifier);
@@ -50,4 +54,18 @@ public sealed class LibrarySetInvoker : IDisposable
     /// Gets the dictionary of library invokers.
     /// </summary>
     public IReadOnlyDictionary<CqlVersionedLibraryIdentifier, LibraryInvoker> LibraryInvokers { get; }
+
+    /// <inheritdoc />
+    [EditorBrowsable(EditorBrowsableState.Advanced)]
+    public ILoggerFactory LoggerFactory { get; }
+
+    /// <inheritdoc />
+    public BatchProcessExceptionContinuation BatchProcessExceptionContinuation { get; private set; }
+
+    /// <inheritdoc />
+    public LibrarySetInvoker SetBatchProcessExceptionContinuation(BatchProcessExceptionContinuation continuation)
+    {
+        BatchProcessExceptionContinuation = continuation;
+        return this;
+    }
 }

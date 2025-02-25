@@ -20,31 +20,41 @@ public static class LibrarySetInvokerExtensions
     /// </summary>
     /// <param name="librarySetInvoker">The library set invoker.</param>
     /// <param name="cqlContext">The CQL context.</param>
-    /// <returns>An enumerable of tuples containing the library invoker, definition invoker, and a function to get the result.</returns>
-    public static IEnumerable<(LibraryInvoker libraryInvoker, DefinitionInvoker definitionInvoker, Func<object?> getResult)> EnumerateLibrarySetDefinitionsResults(
+    /// <param name="includeDefinition">The selector for the definition</param>
+    /// <param name="definitionInvokerExceptionHandler">An exception handler for invoking a definition. (optional)</param>
+    /// <returns>An enumeration of tuples containing the library invoker, definition invoker, and the definition result.</returns>
+    public static IEnumerable<(DefinitionInvoker definitionInvoker, object? definitionResult)> EnumerateLibrarySetDefinitionsResults(
         this LibrarySetInvoker librarySetInvoker,
-        CqlContext cqlContext)
+        CqlContext cqlContext,
+        Func<DefinitionInvoker, bool>? includeDefinition = null,
+        ValueExceptionHandler<DefinitionInvoker>? definitionInvokerExceptionHandler = null)
     {
         foreach (var libraryInvoker in librarySetInvoker.LibraryInvokers.Values)
-            foreach (var (definition, getResult) in libraryInvoker.EnumerateLibraryDefinitionsResults(cqlContext))
-                yield return (libraryInvoker, definition, getResult);
+            foreach (var (definition, definitionResult) in libraryInvoker.EnumerateLibraryDefinitionsResults(cqlContext, includeDefinition, definitionInvokerExceptionHandler))
+                yield return (definition, definitionResult);
     }
 
     /// <summary>
-    /// Enumerates the results of all definitions in a specific library.
+    /// Enumerates the results of all definitions in the library set.
     /// </summary>
     /// <param name="librarySetInvoker">The library set invoker.</param>
     /// <param name="cqlContext">The CQL context.</param>
-    /// <param name="libraryIdentifier">The identifier of the library.</param>
-    /// <returns>An enumerable of tuples containing the library invoker, definition invoker, and a function to get the result.</returns>
-    public static IEnumerable<(LibraryInvoker libraryInvoker, DefinitionInvoker definitionInvoker, Func<object?> getResult)> EnumerateLibraryDefinitionsResults(
+    /// <param name="libraryIdentifier">The library on which definitions are run on.</param>
+    /// <param name="includeDefinition">The selector for the definition</param>
+    /// <param name="definitionInvokerExceptionHandler">An exception handler for invoking a definition. (optional)</param>
+    /// <returns>An enumeration of tuples containing the library invoker, definition invoker, and the definition result.</returns>
+    public static IEnumerable<(DefinitionInvoker definitionInvoker, object? definitionResult)> EnumerateLibraryDefinitionsResults(
         this LibrarySetInvoker librarySetInvoker,
         CqlContext cqlContext,
-        CqlVersionedLibraryIdentifier libraryIdentifier)
+        CqlVersionedLibraryIdentifier libraryIdentifier,
+        Func<DefinitionInvoker, bool>? includeDefinition = null,
+        ValueExceptionHandler<DefinitionInvoker>? definitionInvokerExceptionHandler = null)
     {
-        var libraryInvoker = librarySetInvoker.LibraryInvokers[libraryIdentifier];
-        foreach (var (definitionInvoker, getResult) in libraryInvoker.EnumerateLibraryDefinitionsResults(cqlContext))
-            yield return (libraryInvoker, definitionInvoker, getResult);
+        if (librarySetInvoker.LibraryInvokers.GetValueOrDefault(libraryIdentifier) is { } libraryInvoker)
+        {
+            foreach (var (definition, definitionResult) in libraryInvoker.EnumerateLibraryDefinitionsResults(cqlContext, includeDefinition, definitionInvokerExceptionHandler))
+                yield return (definition, definitionResult);
+        }
     }
 
     /// <summary>

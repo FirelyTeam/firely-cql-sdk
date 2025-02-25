@@ -9,7 +9,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Concept_Instance()
         {
-            var library = CreateFluentCqlToolkit(
+            var library = CreateCqlToolkit(
                 EnableListDemotion:true,
                 EnableListPromotion:true,
                 EnableIntervalDemotion: true,

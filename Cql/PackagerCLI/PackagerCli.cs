@@ -14,6 +14,7 @@ using Hl7.Cql.Packaging;
 using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
 using Hl7.Cql.Runtime.IO;
+using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.Packager;
 
@@ -49,11 +50,11 @@ internal class PackagerCli(
             }
 
             var packagingToolkit = new PackagingToolkit(loggerFactory)
-                .SetExceptionHandlingToIgnore();
+                .SetIgnoreEnumerationExceptions();
 
             CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory)
-                .SetExceptionHandlingToIgnore()
-                .AddCqlLibrariesFromDirectory(opt.CqlInDirectory);
+                                    .SetIgnoreEnumerationExceptions()
+                                    .AddCqlLibrariesFromDirectory(opt.CqlInDirectory);
 
             if (!cqlToolkit.Conversions.Any())
                 logger.LogWarning("Exiting: No CQL libraries were found in the CQL input directory.");
@@ -73,11 +74,10 @@ internal class PackagerCli(
             }
             else
             {
-                elmToolkit = new ElmToolkit(loggerFactory)
-                             .SetExceptionHandlingToIgnore()
-                             .AddElmFilesFromDirectory(
-                                 opt.ElmInDirectory!,
-                                 filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name));
+                elmToolkit = new ElmToolkit(loggerFactory).SetIgnoreEnumerationExceptions(false)
+                                                          .AddElmFilesFromDirectory(
+                                                              opt.ElmInDirectory!,
+                                                              filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name));
             }
 
             if (opt.CSharpOutDirectory is { } dirOutCS)
