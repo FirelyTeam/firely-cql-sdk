@@ -8,4 +8,4 @@
 
 namespace Hl7.Cql.Runtime;
 
-internal delegate BatchProcessExceptionHandlingStrategy<T> BatchProcessErrorHandlingStrategyBuilder<T>(BatchProcessExceptionHandlingStrategy<T> options);
+internal delegate BatchProcessExceptionHandlingStrategy<T> BatchProcessExceptionHandlingStrategyBuilder<T>(BatchProcessExceptionHandlingStrategy<T> options);

@@ -20,20 +20,20 @@ internal static class EnumerableExceptionHandlingExtensions
     public static int TryForEach<T>(
         this IEnumerable<T> inputs,
         Action<T> withValue,
-        BatchProcessErrorHandlingStrategyBuilder<T>? buildErrorStrategy = null) =>
+        BatchProcessExceptionHandlingStrategyBuilder<T>? buildExceptionHandlingStrategy = null) =>
         inputs.TrySelect(
                   input =>
                   {
                       withValue(input);
                       return 0;
                   },
-                  buildErrorStrategy)
+                  buildExceptionHandlingStrategy)
               .Count();
 
     public static IEnumerable<TReturn> TrySelect<T, TReturn>(
         this IEnumerable<T> inputs,
         Func<T, TReturn> selector,
-        BatchProcessErrorHandlingStrategyBuilder<T>? buildErrorStrategy = null)
+        BatchProcessExceptionHandlingStrategyBuilder<T>? buildExceptionHandlingStrategy = null)
     {
         bool firstException = true;
         BatchProcessExceptionHandlingStrategy<T> strategy = default;
@@ -51,7 +51,7 @@ internal static class EnumerableExceptionHandlingExtensions
                 if (firstException)
                 {
                     firstException = false;
-                    strategy = buildErrorStrategy?.Invoke(default) ?? default;
+                    strategy = buildExceptionHandlingStrategy?.Invoke(default) ?? default;
                 }
 
                 strategy.ExceptionHandler?.Invoke(input, e, strategy.ExceptionContinuation);
