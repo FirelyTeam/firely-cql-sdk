@@ -29,6 +29,5 @@ public abstract class LibraryInvokerOnInstance(
     /// Gets the versioned identifier of the CQL library.
     /// </summary>
     public override CqlVersionedLibraryIdentifier LibraryIdentifier { get; } =
-        CqlVersionedLibraryIdentifier.FromNameAndVersion(CqlLibraryIdentifier.Parse(library.Name),
-                                                         CqlLibraryVersion.Parse(library.Version));
+        CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(library.Name, library.Version);
 }
