@@ -15,7 +15,7 @@ namespace Hl7.Cql.Toolkit;
 /// </summary>
 /// <typeparam name="TSelf">The exact type of the toolkit implementation itself.</typeparam>
 /// <typeparam name="TConfig">The type of the toolkit's config.</typeparam>
-public interface IToolkitWithConfig<out TSelf, TConfig> : IToolkit<TSelf>
+internal interface IToolkitWithConfig<out TSelf, TConfig> : IToolkit<TSelf>
     where TSelf : IToolkitWithConfig<TSelf, TConfig>
     where TConfig : class
 {

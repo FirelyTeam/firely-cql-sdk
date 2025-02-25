@@ -91,5 +91,5 @@ file class DefinitionInvoker_2_0_8_0(
     IReadOnlyDictionary<string, string> tagValuesByName,
     string? valueSetId) : DefinitionInvoker(libraryInvoker, definitionName, methodInfo, tagValuesByName, valueSetId)
 {
-    public override object? Invoke(CqlContext cqlContext) => InvokeMethod(library, cqlContext);
+    public override object? Invoke(CqlContext cqlContext) => InvokeDefinition(library, cqlContext);
 }

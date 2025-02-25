@@ -65,12 +65,12 @@ public abstract class DefinitionInvoker(
     public abstract object? Invoke(CqlContext cqlContext);
 
     /// <summary>
-    /// Invokes the method with the specified parameters.
+    /// Invokes the definition with the specified parameters.
     /// </summary>
-    /// <param name="library">The library to invoke on or null if it is a static invokation.</param>
-    /// <param name="parameters">The parameters to pass to the method.</param>
-    /// <returns>The result of the method invocation.</returns>
-    protected object? InvokeMethod(object? library, params object?[] parameters)
+    /// <param name="library">The library on which to invoke the definition.</param>
+    /// <param name="parameters">The parameters to pass.</param>
+    /// <returns>The result of the invocation.</returns>
+    protected object? InvokeDefinition(object? library, params object?[] parameters)
     {
         var result = MethodInfo.Invoke(library, BindingFlags.DoNotWrapExceptions, null, parameters, CultureInfo.InvariantCulture);
         return result;
