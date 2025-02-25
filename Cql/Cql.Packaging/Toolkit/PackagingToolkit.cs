@@ -6,12 +6,12 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging.Toolkit.Internal;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Toolkit;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging.Abstractions;
 
@@ -22,32 +22,37 @@ using SysDateTime = System.DateTime;
 /// <summary>
 /// Provides functionality for packaging FHIR resources.
 /// </summary>
-public sealed class PackagingToolkit
+public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="PackagingToolkit"/> class.
     /// </summary>
     /// <param name="loggerFactory">The logger factory to use for logging.</param>
-    /// <param name="config">The configuration settings for the toolkit.</param>
     public PackagingToolkit(
-        ILoggerFactory? loggerFactory = null,
-        PackagingToolkitConfig? config = null)
+        ILoggerFactory? loggerFactory = null)
     {
-        config ??= PackagingToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
         _conversions = PackagingToolkitConversionsDictionary.Empty;
-        Config = config;
         _services = PackagingToolkitServices.Create(loggerFactory);
     }
 
     private PackagingToolkitConversionsDictionary _conversions;
     private readonly PackagingToolkitServices _services;
 
-    /// <summary>
-    /// Gets the logger factory used by extensions.
-    /// </summary>
-    internal ILoggerFactory LoggerFactory { get; }
+    /// <inheritdoc />
+    [EditorBrowsable(EditorBrowsableState.Advanced)]
+    public ILoggerFactory LoggerFactory { get; }
+
+    /// <inheritdoc />
+    public BatchProcessExceptionContinuation BatchProcessExceptionContinuation { get; private set; }
+
+    /// <inheritdoc />
+    public PackagingToolkit SetBatchProcessExceptionContinuation(BatchProcessExceptionContinuation continuation)
+    {
+        BatchProcessExceptionContinuation = continuation;
+        return this;
+    }
 
     /// <summary>
     /// Gets the service provider used by tests.
@@ -55,28 +60,9 @@ public sealed class PackagingToolkit
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
 
     /// <summary>
-    /// Gets the configuration settings for the resource packager.
-    /// </summary>
-    public PackagingToolkitConfig Config { get; private set; }
-
-    /// <summary>
     /// Gets the dictionary of conversions.
     /// </summary>
     public PackagingToolkitConversionsReadOnlyDictionary Conversions => _conversions;
-
-    /// <summary>
-    /// Reconfigures the packager with the specified configuration.
-    /// </summary>
-    /// <param name="reconfigure">The new configuration for the packager.</param>
-    /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
-    public PackagingToolkit Reconfigure(
-        Mutator<PackagingToolkitConfig> reconfigure)
-    {
-        var config = reconfigure(Config);
-
-        Config = config;
-        return this;
-    }
 
     private void ReplaceConversions(PackagingToolkitConversionsDictionary conversions) =>
         _conversions = conversions;
@@ -104,7 +90,7 @@ public sealed class PackagingToolkit
                         conversions.Add(libIdFromCql, conversionRecord);
                     },
                     errorStrategy => errorStrategy
-                                     .SetContinuation(Config.ErroredEnumerationContinuation)
+                                     .SetContinuation(BatchProcessExceptionContinuation)
                                      .AddLoggerExceptionHandler(
                                          logger,
                                          (conversionRecord, logMessage) =>
@@ -160,7 +146,7 @@ public sealed class PackagingToolkit
                          resourceCanonicalRootUrl: canonicalRootUrl?.ToString(),
                          overrideDate: overrideDate,
                          errorStrategy => errorStrategy
-                             .SetContinuation(Config.ErroredEnumerationContinuation)
+                             .SetContinuation(BatchProcessExceptionContinuation)
                              .AddLoggerExceptionHandler(logger, (library, logMessage) => logMessage("Could not package FHIR resources for library {lib}", library.GetVersionedIdentifier()!)),
                          onNextLibrary: library => logger.LogInformation("Packaging FHIR resources for library: {lib}", library.GetVersionedIdentifier()))
                      .SelectWhere(o =>

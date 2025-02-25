@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.CqlToElm.Toolkit;
 
 namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
@@ -20,27 +19,25 @@ public static class CqlToolkitExtensions
     /// Creates an instance of <see cref="ElmToolkit"/> using the provided <see cref="CqlToolkit"/>.
     /// </summary>
     /// <param name="cqlToolkit">The <see cref="CqlToolkit"/> instance to use for creating the <see cref="ElmToolkit"/>.</param>
-    /// <param name="reconfigure">An optional mutator function to reconfigure the <see cref="ElmToolkitConfig"/>.</param>
+    /// <param name="elmToolkitConfig">The configuration for the ELM toolkit.</param>
     /// <returns>An instance of <see cref="ElmToolkit"/>.</returns>
     public static ElmToolkit CreateElmToolkit(
         this CqlToolkit cqlToolkit,
-        Mutator<ElmToolkitConfig>? reconfigure = null)
-    {
-        var config = new ElmToolkitConfig(ErroredEnumerationContinuation: cqlToolkit.Config.ErroredEnumerationContinuation);
-        if (reconfigure is not null) config = reconfigure(config);
-        var elmToolkit = new ElmToolkit(cqlToolkit.LoggerFactory, config).AddElmFromCqlToolkit(cqlToolkit);
-        return elmToolkit;
-    }
+        ElmToolkitConfig? elmToolkitConfig = null) =>
+        new ElmToolkit(cqlToolkit.LoggerFactory, elmToolkitConfig, cqlToolkit.BatchProcessExceptionContinuation)
+            .AddElmFromCqlToolkit(cqlToolkit);
 
     /// <summary>
     /// Compiles CQL to assemblies using the provided <see cref="CqlToolkit"/>.
     /// </summary>
     /// <param name="cqlToolkit">The <see cref="CqlToolkit"/> instance to use for compilation.</param>
+    /// <param name="elmToolkitConfig">The configuration for the ELM toolkit.</param>
     /// <returns>An instance of <see cref="ElmToolkit"/> with the compiled assemblies.</returns>
     public static ElmToolkit CompileCqlToAssemblies(
-        this CqlToolkit cqlToolkit) =>
+        this CqlToolkit cqlToolkit,
+        ElmToolkitConfig? elmToolkitConfig = null) =>
         cqlToolkit
             .ConvertCqlToElm()
-            .CreateElmToolkit()
+            .CreateElmToolkit(elmToolkitConfig)
             .ConvertElmToAssemblies();
 }

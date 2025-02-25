@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 
@@ -16,42 +15,6 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 /// </summary>
 public static partial class ElmToolkitExtensions
 {
-    /// <summary>
-    /// Configures the <see cref="ElmToolkit"/> to ignore exceptions.
-    /// </summary>
-    /// <param name="cqlToolkit">The <see cref="ElmToolkit"/> instance.</param>
-    /// <param name="stopAfterFirstException">If set to <c>true</c>, stops after the first exception; otherwise, continues.</param>
-    /// <returns>The configured <see cref="ElmToolkit"/> instance.</returns>
-    public static ElmToolkit SetExceptionHandlingToIgnore(this ElmToolkit cqlToolkit, bool stopAfterFirstException = false) =>
-        cqlToolkit.Reconfigure(o => o with
-        {
-            ErroredEnumerationContinuation = stopAfterFirstException
-                                                    ? ErroredEnumerationContinuation.Break
-                                                    : ErroredEnumerationContinuation.Continue
-        });
-
-    /// <summary>
-    /// Configures the <see cref="ElmToolkit"/> to use embedded debug information.
-    /// </summary>
-    /// <param name="cqlToolkit">The <see cref="ElmToolkit"/> instance.</param>
-    /// <returns>The configured <see cref="ElmToolkit"/> instance.</returns>
-    public static ElmToolkit SetAssemblyDebugInformationToEmbedded(this ElmToolkit cqlToolkit) =>
-        cqlToolkit.Reconfigure(o => o with
-        {
-            AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.Embedded
-        });
-
-    /// <summary>
-    /// Configures the <see cref="ElmToolkit"/> to use portable PDB debug information.
-    /// </summary>
-    /// <param name="cqlToolkit">The <see cref="ElmToolkit"/> instance.</param>
-    /// <returns>The configured <see cref="ElmToolkit"/> instance.</returns>
-    public static ElmToolkit SetAssemblyDebugInformationToPortablePdb(this ElmToolkit cqlToolkit) =>
-        cqlToolkit.Reconfigure(o => o with
-        {
-            AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.PortablePdb
-        });
-
     /// <summary>
     /// Gets the results of ELM to assembly conversions.
     /// </summary>

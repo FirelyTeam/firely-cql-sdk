@@ -11,7 +11,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_EquivalentTo_Integer()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Integer_EquivalentTo_Integer: 1 ~ 1
@@ -56,7 +56,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Integer", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -67,7 +67,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_EquivalentTo_Integer_False()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Integer_EquivalentTo_Integer_False: 1 ~ 2
@@ -112,7 +112,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Integer", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -123,7 +123,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_EquivalentTo_Long()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Integer_EquivalentTo_Long: 1 ~ 1L
@@ -168,7 +168,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -179,7 +179,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_EquivalentTo_Decimal_False()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Integer_EquivalentTo_Decimal_False: 1 ~ 2.01
@@ -224,7 +224,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -236,7 +236,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Integer_EquivalentTo_Quantity()
         {
             // 1 converts to 1.0 '1' and '1' units are equal to all units
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Integer_EquivalentTo_Quantity: 1 ~ 1.0 'g'
@@ -281,7 +281,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -292,7 +292,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_EquivalentTo_Quantity_False()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Integer_EquivalentTo_Quantity_False: 1 ~ 2.0 '1'
@@ -337,7 +337,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -348,7 +348,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Integer_EquivalentTo_Null()
         {
-            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("1 ~ null");
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("1 ~ null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -356,7 +356,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_EquivalentTo_Integer()
         {
-            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("null ~ 1");
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("null ~ 1");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -368,7 +368,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_EquivalentTo_Long()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Long_EquivalentTo_Long: 1L ~ 1L
@@ -413,7 +413,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -424,7 +424,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_EquivalentTo_Long_False()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Long_EquivalentTo_Long_False: 1L ~ 2L
@@ -469,7 +469,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -480,7 +480,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_EquivalentTo_Integer()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Long_EquivalentTo_Long: 1L ~ 1
@@ -525,7 +525,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Long", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -536,7 +536,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_EquivalentTo_Decimal_False()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Long_EquivalentTo_Decimal_False: 1L ~ 2.0
@@ -581,7 +581,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -593,7 +593,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Long_EquivalentTo_Quantity()
         {
             // 1L converts to 1.0 '1' and '1' units are equal to all units
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Long_EquivalentTo_Quantity: 1L ~ 1.0 'g'
@@ -638,7 +638,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -649,7 +649,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_EquivalentTo_Quantity_False()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Long_EquivalentTo_Quantity_False: 1L ~ 2 '1'
@@ -694,7 +694,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -705,7 +705,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Long_EquivalentTo_Null()
         {
-            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("1L ~ null");
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("1L ~ null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -713,7 +713,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_EquivalentTo_Long()
         {
-            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("null ~ 1L");
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("null ~ 1L");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -725,7 +725,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_EquivalentTo_Decimal()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_EquivalentTo_Decimal: 1.0 ~ 1.0
@@ -770,7 +770,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -781,7 +781,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_EquivalentTo_Decimal_False()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_EquivalentTo_Decimal_False: 1.0 ~ 2.0
@@ -826,7 +826,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -837,7 +837,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_EquivalentTo_Integer()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_EquivalentTo_Decimal: 1.0 ~ 1
@@ -882,7 +882,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -893,7 +893,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_EquivalentTo_Long_False()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_EquivalentTo_Long_False: 2.0 ~ 1L
@@ -938,7 +938,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Decimal", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -950,7 +950,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Decimal_EquivalentTo_Quantity()
         {
             // 1.0 converts to 1.0 '1' and '1' units are equal to all units
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_EquivalentTo_Quantity: 1.0 ~ 1.0 'g'
@@ -995,7 +995,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -1006,7 +1006,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_EquivalentTo_Quantity_False()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Decimal_EquivalentTo_Quantity_False: 1.0 ~ 2.0 '1'
@@ -1051,7 +1051,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -1062,7 +1062,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Decimal_EquivalentTo_Null()
         {
-            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("1.0 ~ null");
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("1.0 ~ null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -1070,7 +1070,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_EquivalentTo_Decimal()
         {
-            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("null ~ 1.0");
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("null ~ 1.0");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -1082,7 +1082,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_EquivalentTo_Quantity()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_EquivalentTo_Quantity: 1.0 '1' ~ 1.0 '1'
@@ -1127,7 +1127,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -1138,7 +1138,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_EquivalentTo_Quantity_False()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_EquivalentTo_Quantity_False: 1.0 '1' ~ 2.0 '1'
@@ -1183,7 +1183,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -1194,7 +1194,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_EquivalentTo_Integer()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_EquivalentTo_Quantity: 1.0 '1' ~ 1
@@ -1239,7 +1239,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -1250,7 +1250,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_EquivalentTo_Long_False()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_EquivalentTo_Long_False: 2.0 '1' ~ 1L
@@ -1295,7 +1295,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -1307,7 +1307,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Quantity_EquivalentTo_Decimal()
         {
             // 1.0 converts to 1.0 '1' and '1' units are equal to all units
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private Quantity_EquivalentTo_Decimal: 1.0 'g' ~ 1.0
@@ -1352,7 +1352,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}Quantity", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -1363,7 +1363,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Quantity_EquivalentTo_Null()
         {
-            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("1.0 '1' ~ null");
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("1.0 '1' ~ null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -1371,7 +1371,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_EquivalentTo_Quantity()
         {
-            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("null ~ 1.0 '1'");
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("null ~ 1.0 '1'");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -1382,7 +1382,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void String_EquivalentTo_String()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library EqualsTest version '1.0.0'
 
                 define private String_EquivalentTo_String: 'hello' ~ 'hello'
@@ -1427,7 +1427,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual($"{{{SystemUri}}}String", rhsnts.name.Name);
                 }
 
-                var lambda = ToFluentElmToolkit().Lambda(equal);
+                var lambda = CreateElmToolkit().Lambda(equal);
                 var dg = lambda.Compile();
                 var result = dg.DynamicInvoke(FhirCqlContext.ForBundle());
                 Assert.IsInstanceOfType(result, typeof(bool?));
@@ -1438,7 +1438,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void String_EquivalentTo_Null()
         {
-            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("'hello' ~ null");
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("'hello' ~ null");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
@@ -1446,7 +1446,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Null_EquivalentTo_String()
         {
-            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("null ~ 'hello'");
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("null ~ 'hello'");
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
