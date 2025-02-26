@@ -65,7 +65,7 @@ internal class ResourcePackager(TypeResolver typeResolver)
             IEnumerable<KeyValuePair<string, string>>? GetCSharpSourceCodeByName()
             {
                 yield return KeyValuePair.Create(versionedIdentifier, cSharpSourceCode);
-            }            
+            }
 
             MeasurePackager.TryCreateMeasure(elmLibrary, fhirLibrary, out var fhirMeasure, resourceCanonicalRootUrl, localOverrideDate);
             return (versionedIdentifier, fhirLibrary, fhirMeasure);
@@ -82,25 +82,10 @@ file static class MeasurePackager
         string resourceCanonicalRootUrl,
         SysDateTime overrideDate)
     {
-        var tags = new List<Tag>();
-        foreach (var def in elmLibrary.statements ?? [])
-        {
-            if (def.annotation == null)
-                continue;
+        var tags = elmLibrary.statements?
+            .SelectMany(def => def.annotation?.OfType<ElmAnnotation>()?.SelectMany(a => a.t ?? []) ?? [])
+            .ToList() ?? new();
 
-
-            foreach (var a in def.annotation.OfType<ElmAnnotation>())
-            {
-                if (a.t == null)
-                    continue;
-
-                foreach (var t in a.t)
-                {
-                    if (t != null)
-                        tags.Add(t);
-                }
-            }
-        }
         var measureAnnotation = tags.SingleOrDefault(t => t?.name == "measure");
         var yearAnnotation = tags.SingleOrDefault(t => t?.name == "year");
         if (measureAnnotation != null
@@ -283,7 +268,7 @@ internal static class LibraryPackager
         AddInParameters(elmLibrary, parameters, typeCrosswalk);
         AddOutParameters(elmLibrary, parameters, typeCrosswalk);
         fhirLibrary.Parameter = parameters.Count > 0 ? parameters : null!;
-      
+
         AddRelatedArtefacts(elmLibrary, fhirLibrary, elmLibrarySet, resourceCanonicalRootUrl);
         AddDataRequirements(elmLibrary, fhirLibrary, elmLibrarySet);
 
@@ -347,9 +332,9 @@ internal static class LibraryPackager
         ElmLibrary elmLibrary,
         FhirLibrary library,
         LibrarySet elmLibrarySet,
-        string? resourceCanonicalRootUrl        
+        string? resourceCanonicalRootUrl
         )
-    {        
+    {
         List<RelatedArtifact> result = new List<RelatedArtifact>();
         var dependencies = elmLibrarySet.GetLibraryDependencies(elmLibrary);
         foreach (var dependency in dependencies.Prepend(elmLibrary))
@@ -402,10 +387,10 @@ internal static class LibraryPackager
         .ToList();
     }
 
-        private static void AddOutParameters(
-        ElmLibrary elmLibrary,
-        List<ParameterDefinition> parameters,
-        CqlTypeToFhirTypeMapper typeCrosswalk)
+    private static void AddOutParameters(
+    ElmLibrary elmLibrary,
+    List<ParameterDefinition> parameters,
+    CqlTypeToFhirTypeMapper typeCrosswalk)
     {
         var outParams = elmLibrary.statements?
                                   .Where(def => def.name != "Patient" && def is not FunctionDef)
