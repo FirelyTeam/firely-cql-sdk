@@ -1,3 +1,4 @@
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Hl7.Fhir.Model;
@@ -28,6 +29,7 @@ public class LibraryPackagerTests
             elmBytes: File.ReadAllBytes(filename),
             cqlBytes: [],
             assemblyBytes: [],
+            elmLibrarySet: [],
             cSharpSourceCodeById: []);
 
         // Assert
