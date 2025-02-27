@@ -1,3 +1,4 @@
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Hl7.Fhir.Model;
@@ -20,14 +21,15 @@ public class LibraryPackagerTests
     {
         // Arrange
         var elmFile = new FileInfo(filename);
-
+        var elmLibrary = Library.LoadFromJson(new FileInfo(filename));
         // Act
         var library = LibraryPackager.CreateLibraryResource(
             typeCrosswalk: _mapper,
-            elmLibrary: Library.LoadFromJson(new FileInfo(filename)),
+            elmLibrary: elmLibrary,
             elmBytes: File.ReadAllBytes(filename),
             cqlBytes: [],
             assemblyBytes: [],
+            elmLibrarySet: new LibrarySet("", [elmLibrary] ),
             cSharpSourceCodeById: []);
 
         // Assert
