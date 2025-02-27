@@ -83,8 +83,8 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
     /// The current CQL tool version can be referenced by <see cref="LibrarySetCSharpCodeGenerator.GeneratorToolVersion"/>.
     /// </summary>
     public static bool SupportsVersion(Version cqlToolVersion) =>
-        cqlToolVersion >= new Version(2, 0, 8)
-        && cqlToolVersion <= new Version(2, 1);
+        cqlToolVersion >= new Version(2, 0, 8, 0)
+        && cqlToolVersion <= new Version(2, 1, 0, 0);
 }
 
 file class DefinitionInvoker_2_0_8_0(

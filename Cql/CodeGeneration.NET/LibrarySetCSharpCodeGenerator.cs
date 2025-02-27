@@ -22,6 +22,12 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// </summary>
 internal partial class LibrarySetCSharpCodeGenerator
 {
+    /// <summary>
+    /// Gets the product of this <see cref="LibrarySetCSharpCodeGenerator"/> as will appear
+    /// in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Tool"/>.
+    /// </summary>
+    internal static string GeneratorToolName { get; } = GetGeneratorToolNameFromAssemblyProductName();
+
     private readonly TypeToCSharpConverter _typeToCSharpConverter;
 
     /// <summary>
