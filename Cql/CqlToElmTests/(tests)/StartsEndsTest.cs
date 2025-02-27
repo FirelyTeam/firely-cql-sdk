@@ -8,7 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_False()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library StartsEndsTest version '1.0.0'
 
                 define private Starts_False: Interval[@2023-01-01, @2023-06-30] starts Interval[@2023-04-01, @2023-04-30]
@@ -37,7 +37,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_True()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library StartsEndsTest version '1.0.0'
 
                 define private Starts_True: Interval[0, 5] starts Interval[0,7]
@@ -66,7 +66,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Ends_False()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library StartsEndsTest version '1.0.0'
 
                 define private Ends_False: Interval[-1, 7] ends Interval[0,7]

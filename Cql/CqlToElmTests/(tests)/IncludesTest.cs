@@ -8,7 +8,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Proper_Includes_Day_Start()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Proper_Includes_Day_Start: Interval[@2023-01-01, @2023-06-30] properly includes day of start Interval[@2023-04-01, @2023-04-30]
@@ -36,7 +36,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Proper_Includes_Day_End()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Proper_Includes_Day_End: Interval[@2023-01-01, @2023-06-30] properly includes day of end Interval[@2023-04-01, @2023-04-30]
@@ -64,7 +64,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Proper_Includes_Year()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Proper_Includes_Day_Start: Interval[@2023, @2023] properly includes year of Interval[@2023, @2023]
@@ -92,7 +92,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Proper_Includes()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Proper_Includes: Interval[@2023, @2023] properly includes Interval[@2023, @2023]
@@ -120,7 +120,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Includes_Day_Start()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Includes_Day_Start: Interval[@2023-01-01, @2023-06-30] includes day of start Interval[@2023-04-01, @2023-04-30]
@@ -148,7 +148,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Includes_Day_End()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Includes_Day_End: Interval[@2023-01-01, @2023-06-30] includes day of end Interval[@2023-04-01, @2023-04-30]
@@ -176,7 +176,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Includes_Year()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Proper_Includes_Day_Start: Interval[@2023, @2023] includes year of Interval[@2023, @2023]
@@ -204,7 +204,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Includes()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Includes: Interval[@2023, @2023] includes Interval[@2023, @2023]
@@ -234,7 +234,7 @@ namespace Hl7.Cql.CqlToElm.Test
         {
             // Declare the cost of casting to Any to be higher than an exact match
             // that should make these unambiguous
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library IncludesTest version '1.0.0'
 
                 define private EmptyList_Includes_EmptyList: {} includes {}
@@ -245,7 +245,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void NullBoundariesProperlyIncludesIntegerInterval()
         {
-            var library = CreateFluentCqlToolkit().MakeLibraryFromExpression("Interval[null as Integer, null as Integer] properly includes Interval[1, 10]");
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("Interval[null as Integer, null as Integer] properly includes Interval[1, 10]");
             var intersect = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ProperIncludes>();
             var result = Run<bool?>(intersect, library);
             result.Should().BeNull();

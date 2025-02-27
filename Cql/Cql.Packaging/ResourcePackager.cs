@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Primitives;
@@ -34,12 +35,12 @@ internal class ResourcePackager(TypeResolver typeResolver)
         Func<string, SourceArtefacts> inputsById,
         string? resourceCanonicalRootUrl = null,
         SysDateTime? overrideDate = null,
-        EnumerationErrorStrategyBuilder<ElmLibrary>? buildErrorStrategy = null,
+        BatchProcessExceptionHandlingStrategyBuilder<ElmLibrary>? buildExceptionHandlingStrategy = null,
         Action<ElmLibrary>? onNextLibrary = null)
     {
         resourceCanonicalRootUrl ??= string.Empty;
 
-        return librarySet.TrySelect(PackageResource, buildErrorStrategy);
+        return librarySet.TrySelect(PackageResource, buildExceptionHandlingStrategy);
 
         (string versionedIdentifier, FhirLibrary fhirLibrary, FhirMeasure? fhirMeasure) PackageResource(ElmLibrary elmLibrary)
         {
@@ -50,17 +51,21 @@ internal class ResourcePackager(TypeResolver typeResolver)
             var (_, cqlString, elmLibraryInput, cSharpSourceCode, assemblyBinary) = inputsById(versionedIdentifier);
             if (versionedIdentifier != elmLibraryInput.GetVersionedIdentifier()!) throw new InvalidOperationException("Versioned identifiers do not match.");
 
-            var fhirLibrary = LibraryPackager.CreateLibraryResource(_cqlTypeToFhirTypeMapper, elmLibrary, null, Encoding.Default.GetBytes(cqlString), assemblyBinary, GetCSharpSourceCodeByName(), resourceCanonicalRootUrl, localOverrideDate);
+            var fhirLibrary = LibraryPackager.CreateLibraryResource(
+                _cqlTypeToFhirTypeMapper,
+                elmLibrary,
+                null,
+                Encoding.Default.GetBytes(cqlString),
+                assemblyBinary,
+                GetCSharpSourceCodeByName(),
+                librarySet,
+                resourceCanonicalRootUrl,
+                localOverrideDate);
 
             IEnumerable<KeyValuePair<string, string>>? GetCSharpSourceCodeByName()
             {
                 yield return KeyValuePair.Create(versionedIdentifier, cSharpSourceCode);
             }
-
-            // Analyze datarequirements and add to the FHIR Library resource.
-            var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(librarySet, elmLibrary);
-            var dataRequirements = dataRequirementsAnalyzer.Analyze();
-            fhirLibrary.DataRequirement.AddRange(dataRequirements);
 
             MeasurePackager.TryCreateMeasure(elmLibrary, fhirLibrary, out var fhirMeasure, resourceCanonicalRootUrl, localOverrideDate);
             return (versionedIdentifier, fhirLibrary, fhirMeasure);
@@ -77,37 +82,21 @@ file static class MeasurePackager
         string resourceCanonicalRootUrl,
         SysDateTime overrideDate)
     {
-        foreach (var def in elmLibrary.statements ?? [])
+        var tags = elmLibrary.statements?
+            .SelectMany(def => def.annotation?.OfType<ElmAnnotation>()?.SelectMany(a => a.t ?? []) ?? [])
+            .ToList() ?? new();
+
+        var measureAnnotation = tags.SingleOrDefault(t => t?.name == "measure");
+        var yearAnnotation = tags.SingleOrDefault(t => t?.name == "year");
+        if (measureAnnotation != null
+            && !string.IsNullOrWhiteSpace(measureAnnotation.value)
+            && yearAnnotation != null
+            && !string.IsNullOrWhiteSpace(yearAnnotation.value)
+            && int.TryParse(yearAnnotation.value, out var measureYear))
         {
-            if (def.annotation == null)
-                continue;
-
-            var tags = new List<Tag>();
-            foreach (var a in def.annotation.OfType<ElmAnnotation>())
-            {
-                if (a.t == null)
-                    continue;
-
-                foreach (var t in a.t)
-                {
-                    if (t != null)
-                        tags.Add(t);
-                }
-            }
-
-            var measureAnnotation = tags.SingleOrDefault(t => t?.name == "measure");
-            var yearAnnotation = tags.SingleOrDefault(t => t?.name == "year");
-            if (measureAnnotation != null
-                && !string.IsNullOrWhiteSpace(measureAnnotation.value)
-                && yearAnnotation != null
-                && !string.IsNullOrWhiteSpace(yearAnnotation.value)
-                && int.TryParse(yearAnnotation.value, out var measureYear))
-            {
-                fhirMeasure = MeasurePackager.CreateMeasureResource(fhirLibrary, measureAnnotation, measureYear, elmLibrary, resourceCanonicalRootUrl,
-                                                                    overrideDate);
-                return true;
-            }
-
+            fhirMeasure = MeasurePackager.CreateMeasureResource(fhirLibrary, measureAnnotation, measureYear, elmLibrary, resourceCanonicalRootUrl,
+                                                                overrideDate);
+            return true;
         }
 
         fhirMeasure = null;
@@ -123,9 +112,12 @@ file static class MeasurePackager
         SysDateTime overrideDate)
     {
         var measure = new FhirMeasure();
-        measure.Name = measureAnnotation.value;
         measure.Id = elmLibrary.identifier?.id!;
         measure.Version = elmLibrary.identifier?.version!;
+        measure.Name = elmLibrary.identifier?.id!;
+        measure.Title = measureAnnotation.value;
+        measure.Url = $"{resourceCanonicalRootUrl.EnsureEndsWith("/")}{measure.TypeName}/{elmLibrary.identifier?.id!}";
+
         measure.Status = PublicationStatus.Active;
         measure.Date = new DateTimeIso8601(overrideDate, Iso8601DateTimePrecision.Millisecond).ToString();
         measure.EffectivePeriod = new Period
@@ -134,7 +126,6 @@ file static class MeasurePackager
             End = new DateTimeIso8601(measureYear, 12, 31, 23, 59, 59, 999, 0, 0).ToString(),
         };
         measure.Group = [];
-        measure.Url = measure.CanonicalUri(resourceCanonicalRootUrl);
 
         AnnotateMeasurePopulations(measure, elmLibrary);
         measure.Library = new List<string> { fhirLibrary!.Url };
@@ -226,6 +217,7 @@ file static class MeasurePackager
                                     {
                                         System = "http://terminology.hl7.org/CodeSystem/measure-population",
                                         Code = populationSuffix,
+                                        Display = Populations[populationSuffix]
                                     }
                                 }
                             },
@@ -254,6 +246,7 @@ internal static class LibraryPackager
         byte[]? cqlBytes,
         byte[]? assemblyBytes,
         IEnumerable<KeyValuePair<string, string>>? cSharpSourceCodeById,
+        LibrarySet elmLibrarySet,
         string? resourceCanonicalRootUrl = null,
         SysDateTime? elmFileLastWriteTimeUtc = null)
     {
@@ -276,7 +269,8 @@ internal static class LibraryPackager
         AddOutParameters(elmLibrary, parameters, typeCrosswalk);
         fhirLibrary.Parameter = parameters.Count > 0 ? parameters : null!;
 
-        AddRelatedArtefacts(elmLibrary, fhirLibrary, resourceCanonicalRootUrl);
+        AddRelatedArtefacts(elmLibrary, fhirLibrary, elmLibrarySet, resourceCanonicalRootUrl);
+        AddDataRequirements(elmLibrary, fhirLibrary, elmLibrarySet);
 
         var fhirParameters = CreateFhirParameters(elmLibrary);
         if (fhirParameters.Any())
@@ -317,12 +311,15 @@ internal static class LibraryPackager
     {
         var fhirLibrary = new FhirLibrary();
         fhirLibrary.Type = LogicLibraryCodeableConcept;
-        fhirLibrary.Id = $"{elmLibrary.identifier.id}";
+        fhirLibrary.Id = elmLibrary.GetVersionedIdentifier();
         fhirLibrary.Version = elmLibrary.identifier?.version!;
         fhirLibrary.Name = elmLibrary.identifier?.id!;
+        fhirLibrary.Url = $"{resourceCanonicalRootUrl.EnsureEndsWith("/")}{fhirLibrary.TypeName}/{elmLibrary.identifier?.id!}";
+
+        fhirLibrary.Title = fhirLibrary.Name;
         fhirLibrary.Status = PublicationStatus.Active;
         fhirLibrary.Date = new DateTimeIso8601(date, Iso8601DateTimePrecision.Millisecond).ToString();
-        fhirLibrary.Url = fhirLibrary.CanonicalUri(resourceCanonicalRootUrl);
+
         if (fhirLibrary.Meta is { } meta)
         {
             meta.LastUpdated = date;
@@ -334,25 +331,66 @@ internal static class LibraryPackager
     private static void AddRelatedArtefacts(
         ElmLibrary elmLibrary,
         FhirLibrary library,
-        string? resourceCanonicalRootUrl)
+        LibrarySet elmLibrarySet,
+        string? resourceCanonicalRootUrl
+        )
     {
-        foreach (var include in elmLibrary?.includes ?? [])
+        List<RelatedArtifact> result = new List<RelatedArtifact>();
+        var dependencies = elmLibrarySet.GetLibraryDependencies(elmLibrary);
+        foreach (var dependency in dependencies.Prepend(elmLibrary))
         {
-            string includeVersionString = string.IsNullOrEmpty(include.version) ? string.Empty : $"|{include.version}";
-            string includeIdMaybeVersion =
-                $"{resourceCanonicalRootUrl.EnsureEndsWith("/")}Library/{include.path}{includeVersionString}";
-            library.RelatedArtifact.Add(new RelatedArtifact
+            foreach (IncludeDef include in dependency?.includes ?? [])
             {
-                Type = RelatedArtifact.RelatedArtifactType.DependsOn,
-                Resource = includeIdMaybeVersion,
-            });
+                string includeVersionString = string.IsNullOrEmpty(include.version) ? string.Empty : $"|{include.version}";
+                string includeIdMaybeVersion =
+                    $"{resourceCanonicalRootUrl.EnsureEndsWith("/")}Library/{include.path}{includeVersionString}";
+
+                var ra = new RelatedArtifact
+                {
+                    Display = $"Library {include.localIdentifier}",
+                    Type = RelatedArtifact.RelatedArtifactType.DependsOn,
+                    Resource = includeIdMaybeVersion,
+                };
+                if (!result.Any(r => r.IsExactly(ra)))
+                    result.Add(ra);
+            }
+
+            foreach (ValueSetDef include in dependency?.valueSets ?? [])
+            {
+                var ra = new RelatedArtifact
+                {
+                    Display = $"{include.GetTypeSpecifier()} {include.name}",
+                    Type = RelatedArtifact.RelatedArtifactType.DependsOn,
+                    Resource = include.id,
+                };
+                if (!result.Any(r => r.IsExactly(ra)))
+                    result.Add(ra);
+            }
         }
+        library.RelatedArtifact.AddRange(result);
+        library.RelatedArtifact.Sort((x, y) => x.Display.CompareTo(y.Display));
+    }
+
+    private static void AddDataRequirements(
+        ElmLibrary elmLibrary,
+        FhirLibrary library,
+        LibrarySet elmLibrarySet
+        )
+    {
+        // Analyze datarequirements and add to the FHIR Library resource.
+        var dataRequirementsAnalyzer = new DataRequirementsAnalyzer(elmLibrarySet, elmLibrary);
+        var dataRequirements = dataRequirementsAnalyzer.Analyze();
+        library.DataRequirement.AddRange(dataRequirements);
+        library.DataRequirement = library.DataRequirement
+        .OrderBy(dr => dr.Type)  // Primary sorting by Type
+        .ThenBy(dr => dr.CodeFilter?.FirstOrDefault()?.ValueSet ?? string.Empty) // Secondary sorting by ValueSet
+        .ToList();
     }
 
     private static void AddOutParameters(
-        ElmLibrary elmLibrary,
-        List<ParameterDefinition> parameters,
-        CqlTypeToFhirTypeMapper typeCrosswalk)
+    ElmLibrary elmLibrary,
+    List<ParameterDefinition> parameters,
+    CqlTypeToFhirTypeMapper typeCrosswalk)
     {
         var outParams = elmLibrary.statements?
                                   .Where(def => def.name != "Patient" && def is not FunctionDef)
@@ -372,19 +410,7 @@ internal static class LibraryPackager
         if (inParams is not null)
             parameters.AddRange(inParams);
 
-        var valueSetParameterDefinitions = new List<ParameterDefinition>();
-        foreach (var valueSet in elmLibrary.valueSets ?? [])
-        {
-            var valueSetParameter = new ParameterDefinition
-            {
-                Type = FHIRAllTypes.ValueSet,
-                Name = valueSet.id!,
-                Use = OperationParameterUse.In,
-            };
-            valueSetParameterDefinitions.Add(valueSetParameter);
-        }
 
-        parameters.AddRange(valueSetParameterDefinitions);
     }
 
     private static void AddCqlAttachment(

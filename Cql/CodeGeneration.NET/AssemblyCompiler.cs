@@ -45,7 +45,7 @@ namespace Hl7.Cql.CodeGeneration.NET
             IEnumerable<(Library library, string csharp)> librariesWithCSharp,
             LibrarySet librarySet,
             AssemblyCompilerDebugInformationFormat debugInformationFormat = AssemblyCompilerDebugInformationFormat.None,
-            EnumerationErrorStrategyBuilder<(Library library, string csharp)>? buildErrorStrategy = null)
+            BatchProcessExceptionHandlingStrategyBuilder<(Library library, string csharp)>? buildExceptionHandlingStrategy = null)
         {
             Dictionary<string, AssemblyBinaryWithSourceCode> results = new();
             Assembly[] assemblyReferences = _referencesLazy.Value;
@@ -58,7 +58,7 @@ namespace Hl7.Cql.CodeGeneration.NET
                         results.Add(library.GetVersionedIdentifier()!, assemblyBinaryWithSourceCode);
                         return (library, assemblyBinaryWithSourceCode);
                     },
-                    buildErrorStrategy);
+                    buildExceptionHandlingStrategy);
         }
 
         private static CSharpCompilationOptions CreateCSharpCompilationOptions(

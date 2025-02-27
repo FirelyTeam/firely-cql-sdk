@@ -8,7 +8,9 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Runtime;
+using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.Invocation.Toolkit.Internal;
 
@@ -32,7 +34,8 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
     }
 
     private LibraryInvoker_2_0_8_0(
-        ILibrary library) : base(library)
+        LibrarySetInvoker librarySetInvoker,
+        ILibrary library) : base(librarySetInvoker, library)
     {
         var libraryType = library.GetType();
         var libraryMethodInfos = libraryType
@@ -42,7 +45,7 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
                        .SelectWhereNotNull(o => o.DeclarationName is { } declarationName
                                                 && o.Method.GetParameters() is [{ } p0]
                                                 && p0.ParameterType == typeof(CqlContext)
-                                                    ? (Toolkit.DefinitionInvoker)new DefinitionInvoker(declarationName, Library, o.Method, o.TagValuesByName, o.ValueSetId)
+                                                    ? (DefinitionInvoker)new DefinitionInvoker_2_0_8_0(this, declarationName, Library, o.Method, o.TagValuesByName, o.ValueSetId)
                                                     : null)
                        .ToImmutableDictionary(o => o.DefinitionName);
     }
@@ -56,12 +59,12 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
     }
 
     public static bool TryCreate(
-        InvocationToolkit builder,
+        LibrarySetInvoker librarySetInvoker,
         Type libraryType,
         [NotNullWhen(true)] out LibraryInvoker? libraryInvoker)
     {
         libraryInvoker = null;
-        var logger = builder.LoggerFactory.CreateLogger<LibraryInvoker_2_0_8_0>();
+        var logger = librarySetInvoker.CreateLogger<LibraryInvoker_2_0_8_0>();
 
         if (GetLibraryFromStaticInstanceProperty(libraryType) is not ILibrary asILibrary)
         {
@@ -71,26 +74,26 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
             return false;
         }
 
-        libraryInvoker = new LibraryInvoker_2_0_8_0(asILibrary);
+        libraryInvoker = new LibraryInvoker_2_0_8_0(librarySetInvoker, asILibrary);
         return true;
     }
 
-    public static bool SupportsVersion(Version cqlToolVersion)
-    {
-        return cqlToolVersion >= new Version(2, 0, 8);
-    }
-
-    private class DefinitionInvoker(
-        string definitionName,
-        ILibrary library,
-        MethodInfo methodInfo,
-        IReadOnlyDictionary<string, string> tagValuesByName,
-        string? valueSetId) : Toolkit.DefinitionInvoker(definitionName, library, methodInfo, tagValuesByName, valueSetId)
-    {
-        public override object? Invoke(CqlContext cqlContext)
-        {
-            return InvokeMethod(cqlContext);
-        }
-    }
+    /// <summary>
+    /// Determines whether the specified CQL tool version is supported.
+    /// The current CQL tool version can be referenced by <see cref="LibrarySetCSharpCodeGenerator.GeneratorToolVersion"/>.
+    /// </summary>
+    public static bool SupportsVersion(Version cqlToolVersion) =>
+        cqlToolVersion >= new Version(2, 0, 8, 0)
+        && cqlToolVersion <= new Version(2, 1, 0, 0);
 }
 
+file class DefinitionInvoker_2_0_8_0(
+    LibraryInvoker libraryInvoker,
+    string definitionName,
+    ILibrary library,
+    MethodInfo methodInfo,
+    IReadOnlyDictionary<string, string> tagValuesByName,
+    string? valueSetId) : DefinitionInvoker(libraryInvoker, definitionName, methodInfo, tagValuesByName, valueSetId)
+{
+    public override object? Invoke(CqlContext cqlContext) => InvokeDefinition(library, cqlContext);
+}

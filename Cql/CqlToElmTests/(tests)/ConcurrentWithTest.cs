@@ -17,7 +17,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_Days_Or_Before_Start()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Starts_Days_Or_Before_Start: Interval[@2023-01-01, @2023-03-31] starts same day or before start Interval[@2023-04-01, @2023-04-30]
@@ -45,7 +45,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_Days_Or_Before_End()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Starts_Days_Or_Before_End: Interval[@2023-01-01, @2023-03-31] starts same day or before end Interval[@2023-04-01, @2023-04-30]
@@ -73,7 +73,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_Days_Or_After_Start()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Starts_Days_Or_After_Start: Interval[@2023-01-01, @2023-03-31] starts same day or after start Interval[@2023-04-01, @2023-04-30]
@@ -101,7 +101,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_Days_Or_After_End()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Starts_Days_Or_After_End: Interval[@2023-01-01, @2023-03-31] starts same day or after end Interval[@2023-04-01, @2023-04-30]
@@ -129,7 +129,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Ends_Months_Or_Before_Start()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Ends_Months_Or_Before_Start: Interval[@2023-01, @2023-03] ends same month or before start Interval[@2023-04, @2023-06]
@@ -157,7 +157,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Ends_Months_Or_Before_End()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Ends_Months_Or_Before_End: Interval[@2023-01, @2023-03] ends same month or before end Interval[@2023-04, @2023-06]
@@ -185,7 +185,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Ends_Months_Or_After_Start()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Ends_Months_Or_After_Start: Interval[@2023-01, @2023-03] ends same month or after start Interval[@2023-04, @2023-06]
@@ -213,7 +213,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Ends_Months_Or_After_End()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Ends_Months_Or_After_End: Interval[@2023-01, @2023-03] ends same month or after end Interval[@2023-04, @2023-06]
@@ -245,7 +245,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Days_Or_Before_Start()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Starts_Days_Or_Before_Start: Interval[@2023-01-01, @2023-03-31] same day or before start Interval[@2023-04-01, @2023-04-30]
@@ -273,7 +273,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Days_Or_Before_End()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Days_Or_Before_End: Interval[@2023-01-01, @2023-03-31] same day or before end Interval[@2023-04-01, @2023-04-30]
@@ -301,7 +301,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Days_Or_After_Start()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Days_Or_After_Start: Interval[@2023-01-01, @2023-03-31] same day or after start Interval[@2023-04-01, @2023-04-30]
@@ -329,7 +329,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Days_Or_After_End()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Days_Or_After_End: Interval[@2023-01-01, @2023-03-31] same day or after end Interval[@2023-04-01, @2023-04-30]
@@ -357,7 +357,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Months_Or_Before_Start()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Months_Or_Before_Start: Interval[@2023-01, @2023-03] same month or before start Interval[@2023-04, @2023-06]
@@ -385,7 +385,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Months_Or_Before_End()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Months_Or_Before_End: Interval[@2023-01, @2023-03] same month or before end Interval[@2023-04, @2023-06]
@@ -413,7 +413,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Months_Or_After_Start()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Ends_Months_Or_After_Start: Interval[@2023-01, @2023-03] same month or after start Interval[@2023-04, @2023-06]
@@ -441,7 +441,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Months_Or_After_End()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Months_Or_After_End: Interval[@2023-01, @2023-03] same month or after end Interval[@2023-04, @2023-06]
@@ -473,7 +473,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_Days_Or_Before()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Starts_Days_Or_Before: Interval[@2023-01-01, @2023-03-31] starts same day or before Interval[@2023-04-01, @2023-04-30]
@@ -501,7 +501,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Ends_Days_Or_Before()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Ends_Days_Or_Before: Interval[@2023-01-01, @2023-03-31] ends same day or before Interval[@2023-04-01, @2023-04-30]
@@ -529,7 +529,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Starts_Days_Or_After()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Starts_Days_Or_After_Start: Interval[@2023-01-01, @2023-03-31] starts same day or after Interval[@2023-04-01, @2023-04-30]
@@ -558,7 +558,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Ends_Months_Or_Before()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Ends_Months_Or_Before: Interval[@2023-01, @2023-03] ends same month or before Interval[@2023-04, @2023-06]
@@ -587,7 +587,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Ends_Months_Or_After()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Ends_Months_Or_After: Interval[@2023-01, @2023-03] ends same month or after Interval[@2023-04, @2023-06]
@@ -620,7 +620,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Days_Or_Before()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Starts_Days_Or_Before: Interval[@2023-01-01, @2023-03-31] same day or before Interval[@2023-04-01, @2023-04-30]
@@ -648,7 +648,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Days_Or_After()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Days_Or_After: Interval[@2023-01-01, @2023-03-31] same day or after Interval[@2023-04-01, @2023-04-30]
@@ -677,7 +677,7 @@ namespace Hl7.Cql.CqlToElm.Test
         [TestMethod]
         public void Days_Same()
         {
-            var library = CreateFluentCqlToolkit().MakeLibrary("""
+            var library = CreateCqlToolkit().MakeLibrary("""
                 library ConcurrentWithTest version '1.0.0'
 
                 define private Days_Or_After: Interval[@2023-01-01, @2023-03-31] same day as Interval[@2023-04-01, @2023-04-30]
