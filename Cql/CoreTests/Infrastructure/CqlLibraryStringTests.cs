@@ -23,6 +23,37 @@ namespace CoreTests.Infrastructure
         }
 
         [TestMethod]
+        public void FromCql_ValidCqlContentSkipCommentsAndWithoutVersion_ReturnsCqlLibraryString()
+        {
+            // Arrange
+            string cqlContent = """
+
+                /* ignore block comments */
+
+                /*
+                    ignore
+                    block
+                    comments
+
+                    library WontUseThis
+                */
+
+                // ignore line comments
+
+                library TestLibrary
+                """;
+            var expectedIdentifier = CqlVersionedLibraryIdentifier.FromNameAndVersion(
+                CqlLibraryIdentifier.Parse("TestLibrary"));
+
+            // Act
+            var result = CqlLibraryString.Parse(cqlContent);
+
+            // Assert
+            Assert.AreEqual(expectedIdentifier, result.LibraryIdentifier);
+            Assert.AreEqual(cqlContent, result.Cql);
+        }
+
+        [TestMethod]
         public void FromCql_ValidCqlContentWithEmptyLines_ReturnsCqlLibraryString()
         {
             // Arrange
