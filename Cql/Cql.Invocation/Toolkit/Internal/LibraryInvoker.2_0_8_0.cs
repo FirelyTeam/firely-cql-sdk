@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
 
@@ -77,10 +78,13 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
         return true;
     }
 
-    public static bool SupportsVersion(Version cqlToolVersion)
-    {
-        return cqlToolVersion >= new Version(2, 0, 8);
-    }
+    /// <summary>
+    /// Determines whether the specified CQL tool version is supported.
+    /// The current CQL tool version can be referenced by <see cref="LibrarySetCSharpCodeGenerator.GeneratorToolVersion"/>.
+    /// </summary>
+    public static bool SupportsVersion(Version cqlToolVersion) =>
+        cqlToolVersion >= new Version(2, 0, 8, 0)
+        && cqlToolVersion <= new Version(2, 1, 0, 0);
 }
 
 file class DefinitionInvoker_2_0_8_0(

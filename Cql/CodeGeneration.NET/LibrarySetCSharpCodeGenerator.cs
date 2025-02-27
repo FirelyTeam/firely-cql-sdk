@@ -20,8 +20,14 @@ namespace Hl7.Cql.CodeGeneration.NET;
 /// <summary>
 /// Processes a definition dictionary of <see cref="LambdaExpression"/> into a .NET classes per library.
 /// </summary>
-internal class LibrarySetCSharpCodeGenerator
+internal partial class LibrarySetCSharpCodeGenerator
 {
+    /// <summary>
+    /// Gets the product of this <see cref="LibrarySetCSharpCodeGenerator"/> as will appear
+    /// in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Tool"/>.
+    /// </summary>
+    internal static string GeneratorToolName { get; } = GetGeneratorToolNameFromAssemblyProductName();
+
     private readonly TypeToCSharpConverter _typeToCSharpConverter;
 
     /// <summary>
@@ -38,30 +44,22 @@ internal class LibrarySetCSharpCodeGenerator
     /// </summary>
     private readonly IReadOnlyList<(string alias, string type)> _aliasedUsings;
 
-    /// <summary>
-    /// Gets the version of this <see cref="LibrarySetCSharpCodeGenerator"/> as will appear in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Version"/>.
-    /// </summary>
-    private readonly string _generatorToolVersion;
-
-    /// <summary>
-    /// Gets the product of this <see cref="LibrarySetCSharpCodeGenerator"/> as will appear in the <see cref="System.CodeDom.Compiler.GeneratedCodeAttribute.Tool"/>.
-    /// </summary>
-    private readonly string _generatorToolName;
-
     public LibrarySetCSharpCodeGenerator(
         TypeResolver typeResolver,
         TypeToCSharpConverter typeToCSharpConverter)
     {
         _typeToCSharpConverter = typeToCSharpConverter;
         _usings = BuildUsings(typeResolver);
-        var thisAssembly = GetType().Assembly;
-        _generatorToolVersion = thisAssembly.GetName().Version?.ToString() ?? "1.0.0";
-        _generatorToolName = thisAssembly.GetCustomAttributes(false)
-                                         .OfType<AssemblyProductAttribute>()
-                                         .SingleOrDefault()?
-                                         .Product ?? "ELM-to-CSharp";
         _aliasedUsings = typeResolver.Aliases.ToList();
     }
+
+    private static string GetGeneratorToolNameFromAssemblyProductName() =>
+        typeof(LibrarySetCSharpCodeGenerator)
+            .Assembly
+            .GetCustomAttributes(false)
+            .OfType<AssemblyProductAttribute>()
+            .SingleOrDefault()?
+            .Product ?? "ELM-to-CSharp";
 
     private static HashSet<string> BuildUsings(TypeResolver typeResolver)
     {
@@ -104,8 +102,6 @@ internal class LibrarySetCSharpCodeGenerator
         DefinitionDictionary<LambdaExpression> Definitions)
     {
         public TupleMetadataBuilder TupleMetadataBuilder { get; } = new();
-        public string GeneratorToolName => Processor._generatorToolName;
-        public string GeneratorToolVersion => Processor._generatorToolVersion;
         public TypeToCSharpConverter TypeToCSharpConverter => Processor._typeToCSharpConverter;
         public IReadOnlyList<(string alias, string type)> AliasedUsings => Processor._aliasedUsings;
         public HashSet<string> Usings => Processor._usings;
@@ -259,7 +255,7 @@ internal class LibrarySetCSharpCodeGenerator
         private void WriteClass()
         {
             IndentedTextWriter.WriteLine(
-                $"[System.CodeDom.Compiler.GeneratedCode({LibrarySetWriter.GeneratorToolName.QuoteString()}, {LibrarySetWriter.GeneratorToolVersion.QuoteString()})]");
+                $"[System.CodeDom.Compiler.GeneratedCode({GeneratorToolName.QuoteString()}, {GeneratorToolVersion.QuoteString()})]");
 
             IndentedTextWriter.WriteLine(
                 LibraryVersionedIdentifier.version is { } version && Version.TryParse(version, out _)

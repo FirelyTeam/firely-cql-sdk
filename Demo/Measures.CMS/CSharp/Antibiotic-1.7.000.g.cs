@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 using Range = Hl7.Fhir.Model.Range;
 using Task = Hl7.Fhir.Model.Task;
 
-[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.0.11.0")]
+[System.CodeDom.Compiler.GeneratedCode(".NET Code Generation", "2.1.0.0")]
 [CqlLibrary("Antibiotic", "1.7.000")]
 public partial class Antibiotic_1_7_000 : ILibrary, ISingleton<Antibiotic_1_7_000>
 {
