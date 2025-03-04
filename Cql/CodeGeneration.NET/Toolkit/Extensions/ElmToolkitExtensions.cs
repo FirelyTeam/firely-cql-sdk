@@ -33,4 +33,9 @@ public static partial class ElmToolkitExtensions
                       } => (true, new ElmToolkitResultRecord(libId, csharp, asm, dbg)),
                       _ => default,
                   });
+
+    private static ILogger CreateLogger(ElmToolkit elmToolkit)
+    {
+        return elmToolkit.LoggerFactory.CreateLogger(typeof(ElmToolkitExtensions));
+    }
 }
