@@ -71,7 +71,7 @@ internal static class LibraryExtensions
                 if (relatedPath.Exists)
                 {
                     using var fs = relatedPath.OpenRead();
-                    var relatedLibrary = fs.ParseFhir<Library>();
+                    var relatedLibrary = fs.DeserializeJsonToFhir<Library>();
                     relatedLibrary.LoadDependencies(directory, libraries);
                     return true;
                 }

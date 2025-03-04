@@ -18,7 +18,7 @@ namespace CoreTests
             var valueSets = files.Select(path =>
             {
                 using var fs = File.OpenRead(path);
-                var vs = fs.ParseFhir<ValueSet>();
+                var vs = fs.DeserializeJsonToFhir<ValueSet>();
                 return vs;
             }).ToArray();
 
@@ -46,7 +46,7 @@ namespace CoreTests
             var valueSets = files.Select(path =>
             {
                 using var fs = File.OpenRead(path);
-                var vs = fs.ParseFhir<ValueSet>();
+                var vs = fs.DeserializeJsonToFhir<ValueSet>();
                 return vs;
             }).ToArray();
 
@@ -77,7 +77,7 @@ namespace CoreTests
             var valueSets = files.Select(path =>
             {
                 using var fs = File.OpenRead(path);
-                var vs = fs.ParseFhir<ValueSet>();
+                var vs = fs.DeserializeJsonToFhir<ValueSet>();
                 return vs;
             }).ToArray();
 

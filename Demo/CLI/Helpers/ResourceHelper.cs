@@ -68,7 +68,7 @@ internal class ResourceHelper
     {
         var libFile = new FileInfo(Path.Combine(dir.FullName, $"Library-{lib}-{version}.json"));
         using var fs = libFile.OpenRead();
-        var library = fs.ParseFhir<Library>();
+        var library = fs.DeserializeJsonToFhir<Library>();
         var deps = library.GetDependenciesAndSelf(dir);
         return deps.ToLibrarySetInvoker();
     }

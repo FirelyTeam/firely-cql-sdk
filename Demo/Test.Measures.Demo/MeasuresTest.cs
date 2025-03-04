@@ -119,7 +119,7 @@ namespace Test
         {
             var libFile = new FileInfo(Path.Combine(dir.FullName, $"Library-{lib}-{version}.json")); // Library-BCSEHEDISMY2022-1.0.0
             using var fs = libFile.OpenRead();
-            var library = fs.ParseFhir<Library>();
+            var library = fs.DeserializeJsonToFhir<Library>();
             var allLibs = library.GetDependenciesAndSelf(dir);
             //Runtime
             return allLibs.ToLibrarySetInvoker();
