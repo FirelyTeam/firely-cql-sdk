@@ -132,7 +132,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                  })
                  .Select(n => n.Library!)
                  .ToArray();
-        LibrarySet librarySet = new LibrarySet("", librariesToPackage);
+        ElmLibrarySet librarySet = new ElmLibrarySet("", librariesToPackage);
 
         var inputsById = builder.Values
                                 .Select(ToResourcePackagerInput)

@@ -47,10 +47,19 @@ public readonly record struct CqlVersionedLibraryIdentifier(
     /// <returns>A string representation of the CQL versioned library identifier.</returns>
     public override string ToString()
     {
+        return ToString("-");
+    }
+
+    /// <summary>
+    /// Returns a string representation of the CQL versioned library identifier.
+    /// </summary>
+    /// <returns>A string representation of the CQL versioned library identifier.</returns>
+    internal string ToString(string delimiter)
+    {
         return (Identifier, Version) switch
         {
-            ({ } identifier, { } version) => $"{identifier}-{version}",
-            ({ } identifier, _) => identifier.ToString(),
+            ({ } identifier, { } version) => $"{identifier}{delimiter}{version}",
+            ({ } identifier, _)           => identifier.ToString(),
         };
     }
 
