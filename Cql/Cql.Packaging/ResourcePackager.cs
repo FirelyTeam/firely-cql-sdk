@@ -311,6 +311,7 @@ internal static class LibraryPackager
     {
         var fhirLibrary = new FhirLibrary();
         fhirLibrary.Type = LogicLibraryCodeableConcept;
+        // Remove setting the ID for now until https://github.com/FirelyTeam/firely-cql-sdk/issues/714
         //fhirLibrary.Id = // The only time that a resource does not have an id is when it is being submitted to the server using a create operation. https://hl7.org/fhir/R4/resource-definitions.html#Resource.id
         fhirLibrary.Version = elmLibrary.identifier?.version!;
         fhirLibrary.Name = elmLibrary.identifier?.id!;
