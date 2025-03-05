@@ -550,7 +550,6 @@ Hl7.Cql.Runtime.CqlLibraryIdentifier.CompareTo(Hl7.Cql.Runtime.CqlLibraryIdentif
 Hl7.Cql.Runtime.CqlLibraryIdentifier.CqlLibraryIdentifier() -> void
 Hl7.Cql.Runtime.CqlLibraryIdentifier.Equals(Hl7.Cql.Runtime.CqlLibraryIdentifier other) -> bool
 Hl7.Cql.Runtime.CqlLibraryVersion
-Hl7.Cql.Runtime.CqlLibraryVersion.CompareTo(Hl7.Cql.Runtime.CqlLibraryVersion other) -> int
 Hl7.Cql.Runtime.CqlLibraryVersion.CqlLibraryVersion() -> void
 Hl7.Cql.Runtime.CqlLibraryVersion.Equals(Hl7.Cql.Runtime.CqlLibraryVersion other) -> bool
 Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
@@ -621,20 +620,27 @@ static Hl7.Cql.Conversion.TypeConverter.Create() -> Hl7.Cql.Conversion.TypeConve
 static Hl7.Cql.Logging.LoggingExtensions.AddMessageLogging(this Hl7.Cql.Runtime.CqlContext! ctx, Microsoft.Extensions.Logging.ILogger! logger) -> Hl7.Cql.Runtime.CqlContext!
 static Hl7.Cql.Operators.RetrieveParameters.operator !=(Hl7.Cql.Operators.RetrieveParameters? left, Hl7.Cql.Operators.RetrieveParameters? right) -> bool
 static Hl7.Cql.Operators.RetrieveParameters.operator ==(Hl7.Cql.Operators.RetrieveParameters? left, Hl7.Cql.Operators.RetrieveParameters? right) -> bool
+static Hl7.Cql.Runtime.CqlLibraryIdentifier.explicit operator Hl7.Cql.Runtime.CqlLibraryIdentifier(string! identifier) -> Hl7.Cql.Runtime.CqlLibraryIdentifier
+static Hl7.Cql.Runtime.CqlLibraryIdentifier.implicit operator string!(Hl7.Cql.Runtime.CqlLibraryIdentifier identifier) -> string!
 static Hl7.Cql.Runtime.CqlLibraryIdentifier.operator !=(Hl7.Cql.Runtime.CqlLibraryIdentifier left, Hl7.Cql.Runtime.CqlLibraryIdentifier right) -> bool
 static Hl7.Cql.Runtime.CqlLibraryIdentifier.operator ==(Hl7.Cql.Runtime.CqlLibraryIdentifier left, Hl7.Cql.Runtime.CqlLibraryIdentifier right) -> bool
 static Hl7.Cql.Runtime.CqlLibraryIdentifier.Parse(string! s) -> Hl7.Cql.Runtime.CqlLibraryIdentifier
 static Hl7.Cql.Runtime.CqlLibraryIdentifier.TryParse(string? s, out Hl7.Cql.Runtime.CqlLibraryIdentifier result) -> bool
+static Hl7.Cql.Runtime.CqlLibraryVersion.explicit operator Hl7.Cql.Runtime.CqlLibraryVersion(string! version) -> Hl7.Cql.Runtime.CqlLibraryVersion
+static Hl7.Cql.Runtime.CqlLibraryVersion.implicit operator string!(Hl7.Cql.Runtime.CqlLibraryVersion version) -> string!
 static Hl7.Cql.Runtime.CqlLibraryVersion.operator !=(Hl7.Cql.Runtime.CqlLibraryVersion left, Hl7.Cql.Runtime.CqlLibraryVersion right) -> bool
 static Hl7.Cql.Runtime.CqlLibraryVersion.operator ==(Hl7.Cql.Runtime.CqlLibraryVersion left, Hl7.Cql.Runtime.CqlLibraryVersion right) -> bool
 static Hl7.Cql.Runtime.CqlLibraryVersion.Parse(string! s) -> Hl7.Cql.Runtime.CqlLibraryVersion
 static Hl7.Cql.Runtime.CqlLibraryVersion.TryParse(string? s, out Hl7.Cql.Runtime.CqlLibraryVersion result) -> bool
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.explicit operator Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier(string! versionedIdentifier) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.FromNameAndVersion(Hl7.Cql.Runtime.CqlLibraryIdentifier identifier, Hl7.Cql.Runtime.CqlLibraryVersion? version = null) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.implicit operator Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier(Hl7.Cql.Runtime.CqlLibraryIdentifier identifier) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.implicit operator string!(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier versionedIdentifier) -> string!
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.operator !=(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier left, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier right) -> bool
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.operator ==(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier left, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier right) -> bool
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Parse(string! s) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(string! identifier, string? version = null) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.ToString(string! identifier, string? version = null) -> string!
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.TryParse(string? s, out Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier result) -> bool
 static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler(string! searchPattern = "*", System.IO.EnumerationOptions? enumerationOptions = null, System.Func<System.IO.FileInfo!, bool>? fileSelector = null) -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!
 static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.CreateIfNotExists.get -> Hl7.Cql.Runtime.IO.DirectoryInfoHandler!

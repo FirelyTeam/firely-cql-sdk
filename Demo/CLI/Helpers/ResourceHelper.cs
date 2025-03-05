@@ -9,7 +9,6 @@
 using Dumpify;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Fhir.Extensions;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Packaging;
@@ -19,7 +18,6 @@ using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using static Hl7.Fhir.Model.Parameters;
-using Library = Hl7.Fhir.Model.Library;
 
 namespace CLI.Helpers;
 
@@ -130,7 +128,7 @@ internal class ResourceHelper
     }
 
     internal static readonly TypeConverter FhirTypeConverter = Hl7.Cql.Fhir.FhirTypeConverter.Create(Hl7.Fhir.Model.ModelInfo.ModelInspector);
-    internal static readonly CqlTypeToFhirTypeMapper CqlTypeToFhirTypeMapper = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
+    // internal static readonly CqlTypeToFhirTypeMapper CqlTypeToFhirTypeMapper = new CqlTypeToFhirTypeMapper(FhirTypeResolver.Default);
     public static object? ConvertParameterToCqlModel(ParameterComponent parameter, CqlTypeToFhirMapping? mappedType)
     {
         switch (mappedType!.CqlType)

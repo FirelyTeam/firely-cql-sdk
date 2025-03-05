@@ -18,6 +18,21 @@ public readonly record struct CqlVersionedLibraryIdentifier(
     CqlLibraryVersion? Version = null) : IParsable<CqlVersionedLibraryIdentifier>
 {
     /// <summary>
+    /// Implicitly converts a <see cref="CqlVersionedLibraryIdentifier"/> to a <see cref="string"/>.
+    /// </summary>
+    /// <param name="versionedIdentifier">The <see cref="CqlVersionedLibraryIdentifier"/> to convert.</param>
+    /// <returns>The string representation of the versioned identifier.</returns>
+    public static implicit operator string(CqlVersionedLibraryIdentifier versionedIdentifier) => versionedIdentifier.ToString();
+
+    /// <summary>
+    /// Explicitly converts a <see cref="string"/> to a <see cref="CqlVersionedLibraryIdentifier"/>.
+    /// </summary>
+    /// <param name="versionedIdentifier">The string to convert.</param>
+    /// <returns>The <see cref="CqlVersionedLibraryIdentifier"/> representation of the string.</returns>
+    /// <exception cref="FormatException">Thrown when the string is not a valid versioned identifier.</exception>
+    public static explicit operator CqlVersionedLibraryIdentifier(string versionedIdentifier) => Parse(versionedIdentifier);
+
+    /// <summary>
     /// Parses a CQL versioned library identifier from the given name and version strings.
     /// </summary>
     /// <param name="identifier">The identifier string.</param>
@@ -47,12 +62,21 @@ public readonly record struct CqlVersionedLibraryIdentifier(
     /// <returns>A string representation of the CQL versioned library identifier.</returns>
     public override string ToString()
     {
-        return (Identifier, Version) switch
-        {
-            ({ } identifier, { } version) => $"{identifier}-{version}",
-            ({ } identifier, _) => identifier.ToString(),
-        };
+        return ToString(Identifier, Version);
     }
+
+    /// <summary>
+    /// Returns a string representation of the CQL versioned library identifier.
+    /// </summary>
+    /// <param name="identifier">The identifier string.</param>
+    /// <param name="version">The version string (optional).</param>
+    /// <returns>A string representation of the CQL versioned library identifier.</returns>
+    public static string ToString(string identifier, string? version = null) =>
+        version switch
+        {
+            not null => $"{identifier}-{version}",
+            _ => identifier,
+        };
 
     #region Parsing
 
