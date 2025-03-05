@@ -85,7 +85,7 @@ stages:
   - template: build.yml@templates  # Template reference
     parameters:
       dotNetCoreVersion: $(DOTNET_CORE_SDK)
-      checkoutSubmodules: true
+      checkoutSubmodules: 'true'
       ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build
         useVersionSuffix: true
       ${{ else }}: # release mode
