@@ -15,7 +15,7 @@ partial class InvocationToolkitExtensions
     /// <param name="options">Optional enumeration options for directory enumeration.</param>
     /// <param name="filePredicate">Optional predicate to filter files.</param>
     /// <returns>The updated invocation toolkit with the added FHIR libraries.</returns>
-    public static InvocationToolkit AddAssemblyBinariesFromFhirLibrariesInDirectory(
+    public static InvocationToolkit AddAssemblyBinariesInFhirLibrariesFromDirectory(
         this InvocationToolkit invocationToolkit,
         DirectoryInfo directory,
         EnumerationOptions? options = null,

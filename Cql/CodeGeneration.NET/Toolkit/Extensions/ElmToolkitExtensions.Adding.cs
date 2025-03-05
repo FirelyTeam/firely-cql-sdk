@@ -36,7 +36,7 @@ public static partial class ElmToolkitExtensions
     /// <param name="versionedLibraryIdentifier">The identifier of the library file.</param>
     /// <returns>The updated ELM toolkit.</returns>
     /// <exception cref="FileNotFoundException">Thrown when the specified file is not found.</exception>
-    public static ElmToolkit AddElmFileInDirectory(
+    public static ElmToolkit AddElmFileFromDirectory(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
         CqlVersionedLibraryIdentifier versionedLibraryIdentifier)
@@ -90,7 +90,7 @@ public static partial class ElmToolkitExtensions
     /// <param name="options">Optional enumeration options for file retrieval.</param>
     /// <param name="filePredicate">Optional predicate to filter files.</param>
     /// <returns>The updated ELM toolkit.</returns>
-    public static ElmToolkit AddElmFilesInDirectory(
+    public static ElmToolkit AddElmFilesFromDirectory(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
         EnumerationOptions? options = null,

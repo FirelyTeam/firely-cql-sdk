@@ -28,8 +28,8 @@ internal class OptionsConsoleDumper(
         {
             // ArgFor("Logging, KeepLog", _cqlToResourcePackagingOptions.DontLogClear),
             // ArgFor("Logging, IncludeDebug",_cqlToResourcePackagingOptions.LogDebugEnabled),
-            ArgFor("Cql, InDir", _packagerCliOptions.CqlInDirectory),
-            ArgFor("Elm, InDir", _packagerCliOptions.ElmInDirectory),
+            ArgFor("Cql, InDir", _packagerCliOptions.CqlFromDirectory),
+            ArgFor("Elm, InDir", _packagerCliOptions.ElmFromDirectory),
             ArgFor("CSharp, OutDir", _packagerCliOptions.CSharpOutDirectory),
             ArgFor("Assembly, OutDir", _packagerCliOptions.AssemblyOutDirectory),
             ArgFor("Fhir, OutDir", _packagerCliOptions.FhirOutDirectory),

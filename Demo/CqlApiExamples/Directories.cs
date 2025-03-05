@@ -36,7 +36,7 @@ internal class Directories(string librarySetName)
 
     public string LibrarySetName { get; } = librarySetName;
     public DirectoryInfo GeneratedDirectory => CurrentDirectory.CreateSubdirectory("output").CreateSubdirectory(LibrarySetName);
-    public DirectoryInfo CqlInDirectory =>
+    public DirectoryInfo CqlFromDirectory =>
         LibrarySetName switch
         {
             "Tests"     => CurrentDirectory.CreateSubdirectory("input").CreateSubdirectory(LibrarySetName).CreateSubdirectory("cql"),
@@ -44,12 +44,12 @@ internal class Directories(string librarySetName)
             _           => LibrarySetsDirectory.CreateSubdirectory(LibrarySetName).CreateSubdirectory("Cql")
         };
 
-    public DirectoryInfo ElmInDirectory => LibrarySetsDirectory.CreateSubdirectory(LibrarySetName).CreateSubdirectory("Elm");
+    public DirectoryInfo ElmFromDirectory => LibrarySetsDirectory.CreateSubdirectory(LibrarySetName).CreateSubdirectory("Elm");
     public DirectoryInfo ElmOutDirectory => GeneratedDirectory.CreateSubdirectory("Elm");
     public DirectoryInfo CSharpOutDirectory => GeneratedDirectory.CreateSubdirectory("CSharp");
     public DirectoryInfo AssembliesOutDirectory => GeneratedDirectory.CreateSubdirectory("Assemblies");
     public DirectoryInfo FhirOutDirectory => GeneratedDirectory.CreateSubdirectory("Fhir");
-    public DirectoryInfo? ValueSetsInDirectory =>
+    public DirectoryInfo? ValueSetsFromDirectory =>
         LibrarySetName switch
         {
             "Authoring" => AuthoringProjectDirectory.CreateSubdirectory("Input").CreateSubdirectory("cql").CreateSubdirectory("vocabulary").CreateSubdirectory("valueset"),

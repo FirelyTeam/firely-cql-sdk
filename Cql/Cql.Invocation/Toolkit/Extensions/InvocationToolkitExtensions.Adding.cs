@@ -50,7 +50,7 @@ partial class InvocationToolkitExtensions
     /// <param name="options">Optional enumeration options for file retrieval.</param>
     /// <param name="filePredicate">Optional predicate to filter files.</param>
     /// <returns>The updated Invocation toolkit.</returns>
-    public static InvocationToolkit AddAssemblyBinaryFilesInDirectory(
+    public static InvocationToolkit AddAssemblyBinaryFilesFromDirectory(
         this InvocationToolkit invocationToolkit,
         DirectoryInfo directory,
         EnumerationOptions? options = null,

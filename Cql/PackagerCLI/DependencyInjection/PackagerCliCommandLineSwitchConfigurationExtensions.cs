@@ -25,8 +25,8 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
             // @formatter:off
 
             // Input
-            ["--elm"] = PackagerCliSection + nameof(PackagerCliOptions.ElmInDirectory),
-            ["--cql"] = PackagerCliSection + nameof(PackagerCliOptions.CqlInDirectory),
+            ["--elm"] = PackagerCliSection + nameof(PackagerCliOptions.ElmFromDirectory),
+            ["--cql"] = PackagerCliSection + nameof(PackagerCliOptions.CqlFromDirectory),
 
             // Output
             ["--cs"] = PackagerCliSection + nameof(PackagerCliOptions.CSharpOutDirectory),

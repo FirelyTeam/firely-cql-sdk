@@ -45,7 +45,7 @@ namespace CLI
             Console.WriteLine($"Loading resources for Library: {_opts.Library}");
             var librarySetName = CqlVersionedLibraryIdentifier.FormatString(_opts.LibraryName, _opts.LibraryVersion);
             using var librarySetInvoker = new InvocationToolkit()
-                                          .AddAssemblyBinariesFromFhirLibrariesInDirectory(new (_opts.ResourcesDirectory))
+                                          .AddAssemblyBinariesInFhirLibrariesFromDirectory(new (_opts.ResourcesDirectory))
                                           .CreateLibrarySetInvoker(librarySetName);
             RunShared(_opts, librarySetInvoker);
         }
@@ -157,19 +157,19 @@ namespace CLI
         {
             if (filesInPatientDir.Length == 1)
             {
-                string firstFileInDirectory = filesInPatientDir[0];
+                string firstFileFromDirectory = filesInPatientDir[0];
                 Console.WriteLine("Loading test case bundle");
                 try
                 {
-                    Bundle patientBundle = ResourceHelper.LoadBundle(firstFileInDirectory);
-                    Console.WriteLine($"Checking first file in directory {testPatient}: {firstFileInDirectory}");
+                    Bundle patientBundle = ResourceHelper.LoadBundle(firstFileFromDirectory);
+                    Console.WriteLine($"Checking first file in directory {testPatient}: {firstFileFromDirectory}");
                     var result = ProcessBundle(libraryType, testPatient, patientBundle, inputParameters, valueSets);
                     return result;
                 }
                 catch (ArgumentException ex)
                 {
                     Console.WriteLine($"{ex.Message}");
-                    Console.WriteLine($"Trying to add bundle wrapper to {firstFileInDirectory}");
+                    Console.WriteLine($"Trying to add bundle wrapper to {firstFileFromDirectory}");
                 }
             }
 
