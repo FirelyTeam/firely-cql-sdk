@@ -101,12 +101,12 @@ stages:
       codeSignerCertificate: $(FirelyCodeSignerCertificate)
       codeSignerPassword: $(CodeSigningPassword)
       signingKeyFileName: 'cql-sdk.snk'
-      filesForSigning: >
+      filesForSigning: >-
         $(Build.SourcesDirectory)\Cql\*\bin\Release\*\Hl7.Cql*.dll,
         $(Build.SourcesDirectory)\Cql\*\bin\Release\*\Ncqa.Cql*.dll,
         $(Build.SourcesDirectory)*\bin\Release\*\Cql.*.dll,
         $(Build.SourcesDirectory)*\bin\Release\*\PackagerCLI.dll
-      filesToExcludeForSigning: >
+      filesToExcludeForSigning: >-
         *CodeGeneration*,
         *CoreTests*
       pool:
