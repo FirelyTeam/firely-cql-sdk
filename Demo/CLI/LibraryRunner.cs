@@ -43,7 +43,7 @@ namespace CLI
         {
             //run using Library Resource files - production scenario, no debugging inline with measures project
             Console.WriteLine($"Loading resources for Library: {_opts.Library}");
-            var librarySetName = CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(_opts.LibraryName, _opts.LibraryVersion).ToString();
+            var librarySetName = CqlVersionedLibraryIdentifier.FormatString(_opts.LibraryName, _opts.LibraryVersion);
             using var librarySetInvoker = new InvocationToolkit()
                                           .AddAssemblyBinariesFromFhirLibrariesInDirectory(new (_opts.ResourcesDirectory))
                                           .CreateLibrarySetInvoker(librarySetName);

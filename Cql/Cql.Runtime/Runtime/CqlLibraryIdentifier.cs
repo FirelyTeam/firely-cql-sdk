@@ -37,7 +37,7 @@ public readonly record struct CqlLibraryIdentifier :
     /// Initializes a new instance of the <see cref="CqlLibraryIdentifier"/> struct.
     /// </summary>
     /// <param name="value">The string value of the identifier.</param>
-    private CqlLibraryIdentifier(string value) => _value = value;
+    private CqlLibraryIdentifier(string value) => _value = value ?? throw new ArgumentNullException(nameof(value));
 
     /// <summary>
     /// Returns the string representation of the identifier.

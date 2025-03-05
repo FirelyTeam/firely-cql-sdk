@@ -35,7 +35,7 @@ public readonly record struct CqlLibraryVersion :
     /// Initializes a new instance of the <see cref="CqlLibraryVersion"/> struct.
     /// </summary>
     /// <param name="value">The version string.</param>
-    private CqlLibraryVersion(string value) => _value = value;
+    private CqlLibraryVersion(string value) => _value = value ?? throw new ArgumentNullException(nameof(value));
 
     /// <summary>
     /// Returns the string representation of the version.

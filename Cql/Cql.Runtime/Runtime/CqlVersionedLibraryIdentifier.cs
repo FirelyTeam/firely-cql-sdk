@@ -40,8 +40,8 @@ public readonly record struct CqlVersionedLibraryIdentifier(
     /// <returns>A <see cref="CqlVersionedLibraryIdentifier"/> instance.</returns>
     public static CqlVersionedLibraryIdentifier ParseFromNameAndVersion(string identifier, string? version = null)
     {
-        var cqlLibraryIdentifier = CqlLibraryIdentifier.Parse(identifier);
-        CqlLibraryVersion? cqlLibraryVersion = version is null ? null : CqlLibraryVersion.Parse(version);
+        CqlLibraryIdentifier cqlLibraryIdentifier = (CqlLibraryIdentifier)identifier;
+        CqlLibraryVersion? cqlLibraryVersion = version is null ? null : (CqlLibraryVersion?)version;
         return FromNameAndVersion(cqlLibraryIdentifier, cqlLibraryVersion);
     }
 
@@ -62,7 +62,7 @@ public readonly record struct CqlVersionedLibraryIdentifier(
     /// <returns>A string representation of the CQL versioned library identifier.</returns>
     public override string ToString()
     {
-        return ToString(Identifier, Version);
+        return FormatString(Identifier, Version);
     }
 
     /// <summary>
@@ -71,7 +71,7 @@ public readonly record struct CqlVersionedLibraryIdentifier(
     /// <param name="identifier">The identifier string.</param>
     /// <param name="version">The version string (optional).</param>
     /// <returns>A string representation of the CQL versioned library identifier.</returns>
-    public static string ToString(string identifier, string? version = null) =>
+    public static string FormatString(string identifier, string? version = null) =>
         version switch
         {
             not null => $"{identifier}-{version}",

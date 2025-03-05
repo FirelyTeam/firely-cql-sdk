@@ -11,8 +11,7 @@ namespace CoreTests.Infrastructure
         {
             // Arrange
             string cqlContent = "library TestLibrary";
-            var expectedIdentifier = CqlVersionedLibraryIdentifier.FromNameAndVersion(
-                CqlLibraryIdentifier.Parse("TestLibrary"));
+            var expectedIdentifier = (CqlVersionedLibraryIdentifier)"TestLibrary";
 
             // Act
             var result = CqlLibraryString.Parse(cqlContent);
@@ -58,9 +57,7 @@ namespace CoreTests.Infrastructure
         {
             // Arrange
             string cqlContent = "library TestLibrary version '1.0.0'";
-            var expectedIdentifier = CqlVersionedLibraryIdentifier.FromNameAndVersion(
-                CqlLibraryIdentifier.Parse("TestLibrary"),
-                CqlLibraryVersion.Parse("1.0.0"));
+            var expectedIdentifier = (CqlVersionedLibraryIdentifier)"TestLibrary-1.0.0";
 
             // Act
             var result = CqlLibraryString.Parse(cqlContent);
@@ -75,9 +72,7 @@ namespace CoreTests.Infrastructure
         {
             // Arrange
             string cqlContent = "library TestLibrary version '1.0.0'";
-            var expectedIdentifier = CqlVersionedLibraryIdentifier.FromNameAndVersion(
-                CqlLibraryIdentifier.Parse("TestLibrary"),
-                CqlLibraryVersion.Parse("1.0.0"));
+            var expectedIdentifier = (CqlVersionedLibraryIdentifier)"TestLibrary-1.0.0";
 
             // Act
             var result = CqlLibraryString.Parse(cqlContent);

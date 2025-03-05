@@ -9,11 +9,8 @@
 using Dumpify;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Invocation.Toolkit;
-using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
@@ -23,10 +20,10 @@ namespace CLI.Helpers;
 
 internal class ResourceHelper
 {
-    public static readonly IFhirSerializationEngine FirelySerializer =
+    private static readonly IFhirSerializationEngine FirelySerializer =
         FhirSerializationEngineFactory.Ostrich(ModelInfo.ModelInspector);
 
-    public static readonly JsonSerializerOptions JsonSerializerOptions =
+    private static readonly JsonSerializerOptions JsonSerializerOptions =
         new JsonSerializerOptions()
             .ForFhir(new FhirJsonPocoDeserializerSettings
             {
@@ -62,21 +59,17 @@ internal class ResourceHelper
         return vsd;
     }
 
-    public static LibrarySetInvoker CreateRuntimeScopeFromFhirLibraryFile(
-        DirectoryInfo dir,
-        string lib,
-        string version)
-    {
-        var invokationToolkit = new InvocationToolkit()
-                                .AddAssemblyBinariesFromFhirLibrariesInDirectory(dir)
-                                .CreateLibrarySetInvoker(CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(lib, version).ToString());
-        return invokationToolkit;
-        // var libFile = new FileInfo(Path.Combine(dir.FullName, $"Library-{lib}-{version}.json"));
-        // using var fs = libFile.OpenRead();
-        // var library = fs.DeserializeJsonToFhir<Library>();
-        // var deps = library.GetDependenciesAndSelf(dir);
-        // return deps.ToLibrarySetInvoker();
-    }
+    // public static LibrarySetInvoker CreateRuntimeScopeFromFhirLibraryFile(
+    //     DirectoryInfo dir,
+    //     string lib,
+    //     string version)
+    // {
+    //     var libFile = new FileInfo(Path.Combine(dir.FullName, $"Library-{lib}-{version}.json"));
+    //     using var fs = libFile.OpenRead();
+    //     var library = fs.DeserializeJsonToFhir<Library>();
+    //     var deps = library.GetDependenciesAndSelf(dir);
+    //     return deps.ToLibrarySetInvoker();
+    // }
 
 
     public static Bundle CreateBundle(string[] files)

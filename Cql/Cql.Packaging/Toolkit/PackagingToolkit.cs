@@ -171,7 +171,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     }
 
     private static ResourcePackager.SourceArtefacts ToResourcePackagerInput(PackagingToolkitConversionRecord o) => new(
-        o.LibraryIdentifier.ToString(),
+        o.LibraryIdentifier,
         o.SourceCqlLibrary.Cql,
         o.SourceElmLibrary,
         o.SourceCSharpSourceCode,
