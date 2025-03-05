@@ -21,7 +21,8 @@ internal static partial class FhirIdGenerator
     private static partial Regex SegmentizeRegex();
 
     /// <summary>
-    /// Combines the name and version and a shortened MD5 hash to generate a FHIR ID which fits within the 64 character limit.
+    /// Combines the name and version and a shortened MD5 hash to generate a FHIR ID which fits within the 64 characters limit.
+    /// See the <see href="https://www.hl7.org/fhir/datatypes.html#id">spec</see> for more details.
     /// </summary>
     public static string GenerateFhirId(CqlVersionedLibraryIdentifier identifier)
     {

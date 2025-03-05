@@ -387,9 +387,9 @@ internal static class LibraryPackager
     }
 
     private static void AddOutParameters(
-    ElmLibrary elmLibrary,
-    List<ParameterDefinition> parameters,
-    CqlTypeToFhirTypeMapper typeCrosswalk)
+        ElmLibrary elmLibrary,
+        List<ParameterDefinition> parameters,
+        CqlTypeToFhirTypeMapper typeCrosswalk)
     {
         var outParams = elmLibrary.statements?
                                   .Where(def => def.name != "Patient" && def is not FunctionDef)
