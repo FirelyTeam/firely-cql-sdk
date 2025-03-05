@@ -9,7 +9,7 @@
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 
-namespace Hl7.Cql.Fhir;
+namespace Hl7.Cql.Fhir.Extensions;
 
 /// <summary>
 /// Provides extension methods for deserializing JSON to FHIR domain resources.

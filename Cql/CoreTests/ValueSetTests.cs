@@ -1,4 +1,5 @@
 ﻿using Hl7.Cql.Fhir;
+using Hl7.Cql.Fhir.Extensions;
 using Hl7.Fhir.Model;
 
 namespace CoreTests

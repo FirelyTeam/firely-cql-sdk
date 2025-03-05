@@ -9,6 +9,7 @@
 using Dumpify;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Fhir.Extensions;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;

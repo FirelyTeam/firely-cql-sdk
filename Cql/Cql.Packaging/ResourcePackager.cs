@@ -84,7 +84,7 @@ file static class MeasurePackager
     {
         var tags = elmLibrary.statements?
             .SelectMany(def => def.annotation?.OfType<ElmAnnotation>()?.SelectMany(a => a.t ?? []) ?? [])
-            .ToList() ?? new();
+            .ToList() ?? [];
 
         var measureAnnotation = tags.SingleOrDefault(t => t?.name == "measure");
         var yearAnnotation = tags.SingleOrDefault(t => t?.name == "year");
@@ -132,7 +132,7 @@ file static class MeasurePackager
         return measure;
     }
 
-    private static readonly Dictionary<string, string> Populations = new Dictionary<string, string>
+    private static readonly Dictionary<string, string> Populations = new()
     {
         { "initial-population", "Initial Population" },
         { "numerator", "Numerator" },
@@ -140,7 +140,7 @@ file static class MeasurePackager
         { "denominator-exclusion", "Denominator Exclusion" }
     };
 
-    private static void AnnotateMeasurePopulations(Measure measure, Elm.Library library)
+    private static void AnnotateMeasurePopulations(Measure measure, ElmLibrary library)
     {
         var defs = library.statements ?? Enumerable.Empty<Hl7.Cql.Elm.ExpressionDef>();
         foreach (var def in defs)
@@ -148,7 +148,7 @@ file static class MeasurePackager
             var annotations = (def.annotation?
                                   .OfType<ElmAnnotation>()
                                   .SelectMany(a => a.t ?? Enumerable.Empty<Tag>())
-                               ?? Enumerable.Empty<Tag>())
+                               ?? [])
                 .ToArray();
             if (annotations.Length > 0)
             {
@@ -176,7 +176,7 @@ file static class MeasurePackager
                     var rate = $"rate-{tuple.Group}";
                     var groupsForRate = measure.Group?
                                                .Where(g => g.ElementId == rate)
-                                               .ToArray() ?? new Measure.GroupComponent[] { };
+                                               .ToArray() ?? [];
                     Measure.GroupComponent? group;
                     if (groupsForRate.Length == 1)
                     {
@@ -211,15 +211,15 @@ file static class MeasurePackager
                             ElementId = pop,
                             Code = new CodeableConcept
                             {
-                                Coding = new List<Coding>
-                                {
+                                Coding =
+                                [
                                     new Coding
                                     {
                                         System = "http://terminology.hl7.org/CodeSystem/measure-population",
                                         Code = populationSuffix,
                                         Display = Populations[populationSuffix]
                                     }
-                                }
+                                ]
                             },
                             Description = Populations[tuple.Population],
                             Criteria = new Hl7.Fhir.Model.Expression
@@ -311,7 +311,7 @@ internal static class LibraryPackager
     {
         var fhirLibrary = new FhirLibrary();
         fhirLibrary.Type = LogicLibraryCodeableConcept;
-        fhirLibrary.Id = elmLibrary.GetVersionedIdentifier();
+        //fhirLibrary.Id = // The only time that a resource does not have an id is when it is being submitted to the server using a create operation. https://hl7.org/fhir/R4/resource-definitions.html#Resource.id
         fhirLibrary.Version = elmLibrary.identifier?.version!;
         fhirLibrary.Name = elmLibrary.identifier?.id!;
         fhirLibrary.Url = $"{resourceCanonicalRootUrl.EnsureEndsWith("/")}{fhirLibrary.TypeName}/{elmLibrary.identifier?.id!}";
@@ -335,7 +335,7 @@ internal static class LibraryPackager
         string? resourceCanonicalRootUrl
         )
     {
-        List<RelatedArtifact> result = new List<RelatedArtifact>();
+        List<RelatedArtifact> result = [];
         var dependencies = elmLibrarySet.GetLibraryDependencies(elmLibrary);
         foreach (var dependency in dependencies.Prepend(elmLibrary))
         {

@@ -8,12 +8,12 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Fhir;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Cql.Packaging;
 using Library = Hl7.Fhir.Model.Library;
+using Hl7.Cql.Fhir.Extensions;
 
 namespace CLI.Helpers;
 
