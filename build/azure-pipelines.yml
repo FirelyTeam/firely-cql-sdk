@@ -108,7 +108,7 @@ stages:
         $(Build.SourcesDirectory)\Cql\*\bin\Release\*\Ncqa.Cql*.dll,
         $(Build.SourcesDirectory)*\bin\Release\*\Cql.*.dll,
         $(Build.SourcesDirectory)*\bin\Release\*\PackagerCLI.dll
-      excludeFilesForSigning: >
+      filesToExcludeForSigning: >
         *CodeGeneration*,
         *CoreTests*
       pool:
