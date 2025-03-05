@@ -36,7 +36,7 @@ public static partial class CqlToolkitExtensions
     /// <param name="options">The enumeration options to use when searching for files.</param>
     /// <param name="filePredicate">An optional predicate to filter the files.</param>
     /// <returns>The updated <see cref="CqlToolkit"/>.</returns>
-    public static CqlToolkit AddCqlLibrariesFromDirectory(
+    public static CqlToolkit AddCqlLibrariesInDirectory(
         this CqlToolkit cqlToolkit,
         DirectoryInfo directory,
         EnumerationOptions? options = null,

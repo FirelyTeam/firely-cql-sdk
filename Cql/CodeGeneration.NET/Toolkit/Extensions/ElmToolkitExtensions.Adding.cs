@@ -90,7 +90,7 @@ public static partial class ElmToolkitExtensions
     /// <param name="options">Optional enumeration options for file retrieval.</param>
     /// <param name="filePredicate">Optional predicate to filter files.</param>
     /// <returns>The updated ELM toolkit.</returns>
-    public static ElmToolkit AddElmFilesFromDirectory(
+    public static ElmToolkit AddElmFilesInDirectory(
         this ElmToolkit elmToolkit,
         DirectoryInfo directory,
         EnumerationOptions? options = null,

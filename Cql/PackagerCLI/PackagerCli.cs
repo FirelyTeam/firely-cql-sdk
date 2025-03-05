@@ -54,7 +54,7 @@ internal class PackagerCli(
 
             CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory)
                                     .SetIgnoreEnumerationExceptions()
-                                    .AddCqlLibrariesFromDirectory(opt.CqlInDirectory);
+                                    .AddCqlLibrariesInDirectory(opt.CqlInDirectory);
 
             if (!cqlToolkit.Conversions.Any())
                 logger.LogWarning("Exiting: No CQL libraries were found in the CQL input directory.");
@@ -75,7 +75,7 @@ internal class PackagerCli(
             else
             {
                 elmToolkit = new ElmToolkit(loggerFactory).SetIgnoreEnumerationExceptions(false)
-                                                          .AddElmFilesFromDirectory(
+                                                          .AddElmFilesInDirectory(
                                                               opt.ElmInDirectory!,
                                                               filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name));
             }
@@ -100,7 +100,7 @@ internal class PackagerCli(
                 packagingToolkit
                     .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
                     .ConvertToFhirResources(canonicalRootUrl, overrideDate)
-                    .SaveFhirResources(dirOutFhir, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
+                    .SaveFhirResourcesToDirectory(dirOutFhir, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
             }
 
             return 0;

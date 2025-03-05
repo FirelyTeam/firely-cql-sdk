@@ -11,8 +11,10 @@ using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Fhir.Extensions;
 using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Packaging;
 using Hl7.Cql.Primitives;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
@@ -67,11 +69,15 @@ internal class ResourceHelper
         string lib,
         string version)
     {
-        var libFile = new FileInfo(Path.Combine(dir.FullName, $"Library-{lib}-{version}.json"));
-        using var fs = libFile.OpenRead();
-        var library = fs.DeserializeJsonToFhir<Library>();
-        var deps = library.GetDependenciesAndSelf(dir);
-        return deps.ToLibrarySetInvoker();
+        var invokationToolkit = new InvocationToolkit()
+                                .AddAssemblyBinariesFromFhirLibrariesInDirectory(dir)
+                                .CreateLibrarySetInvoker(CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(lib, version).ToString());
+        return invokationToolkit;
+        // var libFile = new FileInfo(Path.Combine(dir.FullName, $"Library-{lib}-{version}.json"));
+        // using var fs = libFile.OpenRead();
+        // var library = fs.DeserializeJsonToFhir<Library>();
+        // var deps = library.GetDependenciesAndSelf(dir);
+        // return deps.ToLibrarySetInvoker();
     }
 
 
