@@ -93,7 +93,10 @@ stages:
       buildSolutionFile: 'Cql-Sdk-All.sln'
       packageSolutionFile: 'Cql-Sdk.slnf'
       testProjects: |
+        **/*Tests/*Tests.csproj
         **/**/Test.Measures.Demo.csproj
+        !**/Ncqa.HT.DeckTests.csproj
+        submodules\Firely.Cql.Sdk.Integration.Runner\IntegrationRunner\IntegrationRunner.csproj
       packageArtifacts: true
       restoreDependencies: true
       nuGetServiceConnections: GitHubPackageGetFeed
