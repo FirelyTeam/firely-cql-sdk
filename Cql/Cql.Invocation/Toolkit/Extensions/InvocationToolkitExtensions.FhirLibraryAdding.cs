@@ -2,6 +2,10 @@ using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir.Extensions;
 using Hl7.Cql.Runtime;
 using Hl7.Fhir.Model;
+using Hl7.Fhir.Serialization;
+using Hl7.Fhir.Validation;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 
@@ -55,6 +59,21 @@ partial class InvocationToolkitExtensions
 
 file static class FhirLibraryUtilities
 {
+    private static readonly JsonSerializerOptions Options = BuildJsonSerializerOptions();
+
+    /// <summary>
+    /// Builds the JSON serializer options for FHIR serialization.
+    /// </summary>
+    /// <returns>The configured <see cref="JsonSerializerOptions"/>.</returns>
+    private static JsonSerializerOptions BuildJsonSerializerOptions()
+    {
+        var o = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector);
+        o.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+        o.Ignoring([CodedValidationException.ID_LITERAL_INVALID_CODE]); // Ignore ID validation for now
+        return o;
+    }
+
+
     /// <summary>
     /// Loads a FHIR library from the specified file.
     /// </summary>
@@ -63,7 +82,7 @@ file static class FhirLibraryUtilities
     public static FhirLibrary LoadFhirLibrary(FileInfo file)
     {
         using var fs = file.OpenRead();
-        return fs.DeserializeJsonToFhir<FhirLibrary>();
+        return fs.DeserializeJsonToFhir<FhirLibrary>(_ => Options);
     }
 
     /// <summary>

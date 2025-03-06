@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 
@@ -34,31 +35,43 @@ public static class FhirDeserializationExtensions
     /// </summary>
     /// <typeparam name="TDomainResource">The type of the FHIR domain resource.</typeparam>
     /// <param name="jsonStream">The JSON stream to deserialize.</param>
+    /// <param name="configureOptions">The optional callback to mutate the <see cref="JsonSerializerOptions"/>.</param>
     /// <returns>The deserialized FHIR domain resource.</returns>
     /// <exception cref="ArgumentException">Thrown when the stream cannot be deserialized to the specified type.</exception>
-    public static TDomainResource DeserializeJsonToFhir<TDomainResource>(this Stream jsonStream)
+    public static TDomainResource DeserializeJsonToFhir<TDomainResource>(
+        this Stream jsonStream,
+        Mutator<JsonSerializerOptions>? configureOptions = null)
         where TDomainResource : DomainResource =>
-        JsonSerializer.Deserialize<TDomainResource>(jsonStream, Options) ?? throw new ArgumentException($"Unable to deserialize this stream as {typeof(TDomainResource).Name}");
+        JsonSerializer.Deserialize<TDomainResource>(jsonStream, configureOptions == null ? Options : configureOptions(Options))
+        ?? throw new ArgumentException($"Unable to deserialize this stream as {typeof(TDomainResource).Name}");
 
     /// <summary>
     /// Deserializes a JSON string to a FHIR domain resource.
     /// </summary>
     /// <typeparam name="TDomainResource">The type of the FHIR domain resource.</typeparam>
     /// <param name="jsonString">The JSON string to deserialize.</param>
+    /// <param name="configureOptions">The optional callback to mutate the <see cref="JsonSerializerOptions"/>.</param>
     /// <returns>The deserialized FHIR domain resource.</returns>
     /// <exception cref="ArgumentException">Thrown when the string cannot be deserialized to the specified type.</exception>
-    public static TDomainResource DeserializeJsonToFhir<TDomainResource>(this string jsonString)
+    public static TDomainResource DeserializeJsonToFhir<TDomainResource>(
+        this string jsonString,
+        Mutator<JsonSerializerOptions>? configureOptions = null)
         where TDomainResource : DomainResource =>
-        JsonSerializer.Deserialize<TDomainResource>(jsonString, Options) ?? throw new ArgumentException($"Unable to deserialize this string as {typeof(TDomainResource).Name}");
+        JsonSerializer.Deserialize<TDomainResource>(jsonString, configureOptions == null ? Options : configureOptions(Options))
+        ?? throw new ArgumentException($"Unable to deserialize this string as {typeof(TDomainResource).Name}");
 
     /// <summary>
     /// Deserializes a JSON character span to a FHIR domain resource.
     /// </summary>
     /// <typeparam name="TDomainResource">The type of the FHIR domain resource.</typeparam>
     /// <param name="jsonCharSpan">The JSON character span to deserialize.</param>
+    /// <param name="configureOptions">The optional callback to mutate the <see cref="JsonSerializerOptions"/>.</param>
     /// <returns>The deserialized FHIR domain resource.</returns>
     /// <exception cref="ArgumentException">Thrown when the character span cannot be deserialized to the specified type.</exception>
-    public static TDomainResource DeserializeJsonToFhir<TDomainResource>(this ReadOnlySpan<char> jsonCharSpan)
+    public static TDomainResource DeserializeJsonToFhir<TDomainResource>(
+        this ReadOnlySpan<char> jsonCharSpan,
+        Mutator<JsonSerializerOptions>? configureOptions = null)
         where TDomainResource : DomainResource =>
-        JsonSerializer.Deserialize<TDomainResource>(jsonCharSpan, Options) ?? throw new ArgumentException($"Unable to deserialize this character span as {typeof(TDomainResource).Name}");
+        JsonSerializer.Deserialize<TDomainResource>(jsonCharSpan, configureOptions == null ? Options : configureOptions(Options))
+        ?? throw new ArgumentException($"Unable to deserialize this character span as {typeof(TDomainResource).Name}");
 }

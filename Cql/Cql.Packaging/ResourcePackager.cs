@@ -321,7 +321,7 @@ internal static class LibraryPackager
         //fhirLibrary.Id = // The only time that a resource does not have an id is when it is being submitted to the server using a create operation. https://hl7.org/fhir/R4/resource-definitions.html#Resource.id
         fhirLibrary.Id = elmLibrary.GetVersionedIdentifier()!;
         if (fhirLibrary.Id is {Length:>64})
-            logger.LogWarning($"The FHIR Library resource ID '{fhirLibrary.Id}' is longer than the 64 character limit.");
+            logger.LogWarning($"The FHIR Library resource ID '{fhirLibrary.Id}' is longer than the 64 character limit. This may cause problems later during deserializatation.");
 
         fhirLibrary.Version = elmLibrary.identifier?.version!;
         fhirLibrary.Name = elmLibrary.identifier?.id!;
