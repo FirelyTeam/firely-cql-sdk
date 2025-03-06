@@ -19,7 +19,9 @@ namespace Hl7.Cql.Packaging;
 
 #pragma warning disable CS1591
 
-internal class ResourcePackager(TypeResolver typeResolver)
+internal class ResourcePackager(
+    ILoggerFactory loggerFactory,
+    TypeResolver typeResolver)
 {
     private readonly CqlTypeToFhirTypeMapper _cqlTypeToFhirTypeMapper = new(typeResolver);
 
@@ -39,6 +41,7 @@ internal class ResourcePackager(TypeResolver typeResolver)
         Action<ElmLibrary>? onNextLibrary = null)
     {
         resourceCanonicalRootUrl ??= string.Empty;
+        var libraryPackagerLogger = loggerFactory.CreateLogger(typeof(LibraryPackager));
 
         return librarySet.TrySelect(PackageResource, buildExceptionHandlingStrategy);
 
@@ -52,6 +55,7 @@ internal class ResourcePackager(TypeResolver typeResolver)
             if (versionedIdentifier != elmLibraryInput.GetVersionedIdentifier()!) throw new InvalidOperationException("Versioned identifiers do not match.");
 
             var fhirLibrary = LibraryPackager.CreateLibraryResource(
+                libraryPackagerLogger,
                 _cqlTypeToFhirTypeMapper,
                 elmLibrary,
                 null,
@@ -240,13 +244,14 @@ file static class MeasurePackager
 internal static class LibraryPackager
 {
     public static FhirLibrary CreateLibraryResource(
+        ILogger logger,
         CqlTypeToFhirTypeMapper typeCrosswalk,
         ElmLibrary? elmLibrary,
         byte[]? elmBytes,
         byte[]? cqlBytes,
         byte[]? assemblyBytes,
         IEnumerable<KeyValuePair<string, string>>? cSharpSourceCodeById,
-        LibrarySet elmLibrarySet,
+        ElmLibrarySet elmLibrarySet,
         string? resourceCanonicalRootUrl = null,
         SysDateTime? elmFileLastWriteTimeUtc = null)
     {
@@ -262,7 +267,7 @@ internal static class LibraryPackager
                 break;
         }
 
-        var fhirLibrary = CreateFhirLibrary(elmLibrary, resourceCanonicalRootUrl, elmFileLastWriteTimeUtc ?? SysDateTime.Now);
+        var fhirLibrary = CreateFhirLibrary(logger, elmLibrary, resourceCanonicalRootUrl, elmFileLastWriteTimeUtc ?? SysDateTime.Now);
         AddElmAttachment(elmLibrary, fhirLibrary, elmBytes);
         var parameters = new List<ParameterDefinition>();
         AddInParameters(elmLibrary, parameters, typeCrosswalk);
@@ -305,6 +310,7 @@ internal static class LibraryPackager
     }
 
     private static FhirLibrary CreateFhirLibrary(
+        ILogger logger,
         ElmLibrary elmLibrary,
         string? resourceCanonicalRootUrl,
         SysDateTime date)
@@ -313,6 +319,10 @@ internal static class LibraryPackager
         fhirLibrary.Type = LogicLibraryCodeableConcept;
         // Remove setting the ID for now until https://github.com/FirelyTeam/firely-cql-sdk/issues/714
         //fhirLibrary.Id = // The only time that a resource does not have an id is when it is being submitted to the server using a create operation. https://hl7.org/fhir/R4/resource-definitions.html#Resource.id
+        fhirLibrary.Id = elmLibrary.GetVersionedIdentifier()!;
+        if (fhirLibrary.Id is {Length:>64})
+            logger.LogWarning($"The FHIR Library resource ID '{fhirLibrary.Id}' is longer than the 64 character limit.");
+
         fhirLibrary.Version = elmLibrary.identifier?.version!;
         fhirLibrary.Name = elmLibrary.identifier?.id!;
         fhirLibrary.Url = $"{resourceCanonicalRootUrl.EnsureEndsWith("/")}{fhirLibrary.TypeName}/{elmLibrary.identifier?.id!}";
@@ -332,7 +342,7 @@ internal static class LibraryPackager
     private static void AddRelatedArtefacts(
         ElmLibrary elmLibrary,
         FhirLibrary library,
-        LibrarySet elmLibrarySet,
+        ElmLibrarySet elmLibrarySet,
         string? resourceCanonicalRootUrl
         )
     {
@@ -375,7 +385,7 @@ internal static class LibraryPackager
     private static void AddDataRequirements(
         ElmLibrary elmLibrary,
         FhirLibrary library,
-        LibrarySet elmLibrarySet
+        ElmLibrarySet elmLibrarySet
         )
     {
         // Analyze datarequirements and add to the FHIR Library resource.
