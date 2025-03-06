@@ -7,8 +7,8 @@ resources:
       type: github
       name: FirelyTeam/azure-pipeline-templates
       endpoint: FirelyTeam
-      ref: refs/heads/feature/DEVOPS-366-firely-cql-sdk-Switch-to-template
-
+      ref: refs/tags/v1
+      
 variables:
   - group: CodeSigning
   - group: APIKeys
