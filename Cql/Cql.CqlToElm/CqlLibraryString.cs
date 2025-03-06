@@ -37,24 +37,24 @@ public readonly partial record struct CqlLibraryString
     /// <returns>A <see cref="Regex"/> to extract the library name and version.</returns>
     [GeneratedRegex("""
                          \A
-                         (?:                # Non-capturing group for comments and whitespace
+                         (?:                # Non-capturing group for block comments, line comments and whitespace
                            /\*              #   Start of block comment
                            [\s\S]*?         #   Match any characters (including newlines) non-greedily
                            \*/              #   End of block comment
-                         |                  #   OR
+                         |                  # OR
                            //               #   Start of line comment
-                           [^\r\n]*         # Match any characters except newlines
-                         |                  #   OR
-                           \s               # Match any whitespace character
-                         )*                 # Zero or more occurrences of the above                     
+                           [^\r\n]*         #   Match any characters except newlines
+                         |                  # OR
+                           \s               #   Match any whitespace character
+                         )*                 # Zero or more occurrences of the above
                          library            # until "library" is found
                          \s+                # at least one space
                          (?<lib>\S+)        # The name of the library
-                         (
-                         \s+                # at least one space
-                         version            # version keyword
-                         \s+                # at least one space
-                         '(?<ver>[^']+)'    # The version of the library between single quotes
+                         (?:
+                           \s+              # at least one space
+                           version          # version keyword
+                           \s+              # at least one space
+                           '(?<ver>[^']+)'  # The version of the library between single quotes
                          )?                 # Version is optional
                      """,
                     RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline)]

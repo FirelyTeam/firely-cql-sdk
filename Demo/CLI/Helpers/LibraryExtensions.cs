@@ -8,26 +8,26 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Fhir;
+using Hl7.Cql.Fhir.Extensions;
 using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Packaging;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
-using Hl7.Cql.Packaging;
-using Library = Hl7.Fhir.Model.Library;
+using FhirLibrary=Hl7.Fhir.Model.Library;
 
 namespace CLI.Helpers;
 
 internal static class LibraryExtensions
 {
 
-    public static IEnumerable<Library> GetDependenciesAndSelf(this Library library, DirectoryInfo directory)
+    public static IEnumerable<FhirLibrary> GetDependenciesAndSelf(this FhirLibrary library, DirectoryInfo directory)
     {
-        var libraries = new HashSet<Library>();
+        var libraries = new HashSet<FhirLibrary>();
         library.LoadDependencies(directory, libraries);
         return libraries;
     }
 
-    private static void LoadDependencies(this Library library, DirectoryInfo directory, HashSet<Library> libraries)
+    private static void LoadDependencies(this FhirLibrary library, DirectoryInfo directory, HashSet<FhirLibrary> libraries)
     {
         if (!libraries.Add(library))
         {
@@ -71,7 +71,7 @@ internal static class LibraryExtensions
                 if (relatedPath.Exists)
                 {
                     using var fs = relatedPath.OpenRead();
-                    var relatedLibrary = fs.ParseFhir<Library>();
+                    var relatedLibrary = fs.DeserializeJsonToFhir<FhirLibrary>();
                     relatedLibrary.LoadDependencies(directory, libraries);
                     return true;
                 }
@@ -82,7 +82,7 @@ internal static class LibraryExtensions
     }
 
     public static LibrarySetInvoker ToLibrarySetInvoker(
-        this IEnumerable<Library> libraries)
+        this IEnumerable<FhirLibrary> libraries)
     {
         var assemblyBinaries =
             libraries

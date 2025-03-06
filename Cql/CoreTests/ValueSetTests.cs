@@ -1,4 +1,5 @@
 ﻿using Hl7.Cql.Fhir;
+using Hl7.Cql.Fhir.Extensions;
 using Hl7.Fhir.Model;
 
 namespace CoreTests
@@ -18,7 +19,7 @@ namespace CoreTests
             var valueSets = files.Select(path =>
             {
                 using var fs = File.OpenRead(path);
-                var vs = fs.ParseFhir<ValueSet>();
+                var vs = fs.DeserializeJsonToFhir<ValueSet>();
                 return vs;
             }).ToArray();
 
@@ -46,7 +47,7 @@ namespace CoreTests
             var valueSets = files.Select(path =>
             {
                 using var fs = File.OpenRead(path);
-                var vs = fs.ParseFhir<ValueSet>();
+                var vs = fs.DeserializeJsonToFhir<ValueSet>();
                 return vs;
             }).ToArray();
 
@@ -77,7 +78,7 @@ namespace CoreTests
             var valueSets = files.Select(path =>
             {
                 using var fs = File.OpenRead(path);
-                var vs = fs.ParseFhir<ValueSet>();
+                var vs = fs.DeserializeJsonToFhir<ValueSet>();
                 return vs;
             }).ToArray();
 

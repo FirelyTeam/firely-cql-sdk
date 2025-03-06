@@ -12,17 +12,30 @@ namespace Hl7.Cql.Runtime;
 /// Represents the version part of a CQL library identifier.
 /// </summary>
 public readonly record struct CqlLibraryVersion :
-    IParsable<CqlLibraryVersion>,
-    IComparable<CqlLibraryVersion>,
-    IComparable
+    IParsable<CqlLibraryVersion>
 {
+    /// <summary>
+    /// Implicitly converts a <see cref="CqlLibraryVersion"/> to a <see cref="string"/>.
+    /// </summary>
+    /// <param name="version">The <see cref="CqlLibraryVersion"/> to convert.</param>
+    /// <returns>The string representation of the version.</returns>
+    public static implicit operator string(CqlLibraryVersion version) => version._value;
+
+    /// <summary>
+    /// Explicitly converts a <see cref="string"/> to a <see cref="CqlLibraryVersion"/>.
+    /// </summary>
+    /// <param name="version">The string to convert.</param>
+    /// <returns>The <see cref="CqlLibraryVersion"/> representation of the string.</returns>
+    /// <exception cref="FormatException">Thrown when the string is not a valid version.</exception>
+    public static explicit operator CqlLibraryVersion(string version) => Parse(version);
+
     private readonly string _value;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CqlLibraryVersion"/> struct.
     /// </summary>
     /// <param name="value">The version string.</param>
-    private CqlLibraryVersion(string value) => _value = value;
+    private CqlLibraryVersion(string value) => _value = value ?? throw new ArgumentNullException(nameof(value));
 
     /// <summary>
     /// Returns the string representation of the version.
@@ -87,35 +100,6 @@ public readonly record struct CqlLibraryVersion :
 
         result = new CqlLibraryVersion(s);
         return true;
-    }
-
-    #endregion
-
-    #region Comparison
-
-    /// <summary>
-    /// Compares the current instance with another <see cref="CqlLibraryVersion"/> and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other <see cref="CqlLibraryVersion"/>.
-    /// </summary>
-    /// <param name="other">The other <see cref="CqlLibraryVersion"/> to compare to.</param>
-    /// <returns>A value that indicates the relative order of the objects being compared.</returns>
-    public int CompareTo(CqlLibraryVersion other)
-    {
-        return string.Compare(_value, other._value, StringComparison.Ordinal);
-    }
-
-    /// <summary>
-    /// Compares the current instance with another object and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
-    /// </summary>
-    /// <param name="obj">The object to compare to.</param>
-    /// <returns>A value that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">Thrown when the object is not of type <see cref="CqlLibraryVersion"/>.</exception>
-    int IComparable.CompareTo(object? obj)
-    {
-        return obj switch
-        {
-            CqlLibraryVersion other => CompareTo(other),
-            _ => throw new ArgumentException($"Object must be of type {nameof(CqlLibraryVersion)}")
-        };
     }
 
     #endregion
