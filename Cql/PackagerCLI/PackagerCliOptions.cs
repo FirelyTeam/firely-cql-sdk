@@ -11,8 +11,8 @@ internal class PackagerCliOptions
         section.Bind(opt);
 
         // DirectoryInfos cannot be bound directly from IConfiguration, so we do it manually.
-        opt.CqlInDirectory = GetDirectoryInfo(nameof(CqlInDirectory))!;
-        opt.ElmInDirectory = GetDirectoryInfo(nameof(ElmInDirectory))!;
+        opt.CqlFromDirectory = GetDirectoryInfo(nameof(CqlFromDirectory))!;
+        opt.ElmFromDirectory = GetDirectoryInfo(nameof(ElmFromDirectory))!;
         opt.ElmOutDirectory = GetDirectoryInfo(nameof(ElmOutDirectory))!;
         opt.AssemblyOutDirectory = GetDirectoryInfo(nameof(AssemblyOutDirectory))!;
         opt.CSharpOutDirectory = GetDirectoryInfo(nameof(CSharpOutDirectory))!;
@@ -31,8 +31,8 @@ internal class PackagerCliOptions
 
     public bool LoggingIncludeDebug { get; set; }
     public bool LoggingKeepPrevious { get; set; }
-    public DirectoryInfo? CqlInDirectory { get; set; }
-    public DirectoryInfo? ElmInDirectory { get; set; }
+    public DirectoryInfo? CqlFromDirectory { get; set; }
+    public DirectoryInfo? ElmFromDirectory { get; set; }
     public DirectoryInfo? ElmOutDirectory { get; set; }
     public DirectoryInfo? CSharpOutDirectory { get; set; }
     public DirectoryInfo? AssemblyOutDirectory { get; set; }
@@ -42,8 +42,8 @@ internal class PackagerCliOptions
 
     public IEnumerable<(string name, DirectoryInfo? dir)> GetInDirectories() =>
     [
-        (name: nameof(CqlInDirectory), dir: CqlInDirectory),
-        (name: nameof(ElmInDirectory), dir: ElmInDirectory)
+        (name: nameof(CqlFromDirectory), dir: CqlFromDirectory),
+        (name: nameof(ElmFromDirectory), dir: ElmFromDirectory)
     ];
 
     public IEnumerable<(string name, DirectoryInfo? dir)> GetOutDirectories() =>

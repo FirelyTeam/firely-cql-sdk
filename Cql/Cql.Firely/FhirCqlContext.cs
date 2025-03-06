@@ -9,6 +9,7 @@
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Fhir.Comparers;
+using Hl7.Cql.Fhir.Extensions;
 using Hl7.Cql.Iso8601;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;

@@ -31,13 +31,13 @@ internal class PackagerCli(
             optionsConsoleDumper.DumpToConsole();
 
             var opt = packagerCliOptions.Value;
-            if (opt.CqlInDirectory is not { Exists:true })
+            if (opt.CqlFromDirectory is not { Exists:true })
             {
                 logger.LogWarning("Exiting: Cql input directory must be specified and exist.");
                 return -1;
             }
 
-            if (!translateCql && opt.ElmInDirectory is not { Exists: true })
+            if (!translateCql && opt.ElmFromDirectory is not { Exists: true })
             {
                 logger.LogWarning("Exiting: ELM input directory must be specified and exist.");
                 return -1;
@@ -54,7 +54,7 @@ internal class PackagerCli(
 
             CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory)
                                     .SetIgnoreEnumerationExceptions()
-                                    .AddCqlLibrariesFromDirectory(opt.CqlInDirectory);
+                                    .AddCqlLibrariesFromDirectory(opt.CqlFromDirectory);
 
             if (!cqlToolkit.Conversions.Any())
                 logger.LogWarning("Exiting: No CQL libraries were found in the CQL input directory.");
@@ -76,7 +76,7 @@ internal class PackagerCli(
             {
                 elmToolkit = new ElmToolkit(loggerFactory).SetIgnoreEnumerationExceptions(false)
                                                           .AddElmFilesFromDirectory(
-                                                              opt.ElmInDirectory!,
+                                                              opt.ElmFromDirectory!,
                                                               filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name));
             }
 
@@ -100,7 +100,7 @@ internal class PackagerCli(
                 packagingToolkit
                     .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
                     .ConvertToFhirResources(canonicalRootUrl, overrideDate)
-                    .SaveFhirResources(dirOutFhir, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
+                    .SaveFhirResourcesToDirectory(dirOutFhir, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
             }
 
             return 0;

@@ -113,7 +113,7 @@ public sealed partial class ColorConsoleLogger(string categoryName, ColorConsole
             LogLevel.Trace       => ("""(TRC)""", default),
             LogLevel.Debug       => ("""(DBG)""", default),
             LogLevel.Information => ("""(INF)""", default),
-            LogLevel.Warning     => ("""(WAR)""", default),
+            LogLevel.Warning     => ("""(WRN)""", default),
             LogLevel.Error       => ("""(ERR)""", default),
             LogLevel.Critical    => ("""(CRI)""", default),
             _                    => throw new ArgumentOutOfRangeException(nameof(logLevel))

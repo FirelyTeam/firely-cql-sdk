@@ -9,6 +9,7 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
+using Hl7.Cql.Fhir.Extensions;
 
 namespace Test
 {
@@ -51,7 +52,7 @@ namespace Test
             var ctx = FhirCqlContext.ForBundle(patientEverything, MY2023, valueSets);
 
             var results = scope
-                .EnumerateLibraryDefinitionsResults(ctx, CqlVersionedLibraryIdentifier.FromNameAndVersion(CqlLibraryIdentifier.Parse(lib), CqlLibraryVersion.Parse(version)))
+                .EnumerateLibraryDefinitionsResults(ctx, CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(lib, version))
                 .ToDictionary(t => t.definitionInvoker.DefinitionName, t => t.definitionResult);
 
             Assert.IsTrue(results.TryGetValue("Numerator", out var numerator));
@@ -119,7 +120,7 @@ namespace Test
         {
             var libFile = new FileInfo(Path.Combine(dir.FullName, $"Library-{lib}-{version}.json")); // Library-BCSEHEDISMY2022-1.0.0
             using var fs = libFile.OpenRead();
-            var library = fs.ParseFhir<Library>();
+            var library = fs.DeserializeJsonToFhir<Library>();
             var allLibs = library.GetDependenciesAndSelf(dir);
             //Runtime
             return allLibs.ToLibrarySetInvoker();

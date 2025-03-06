@@ -21,7 +21,7 @@ public static partial class PackagingToolkitExtensions
     /// <param name="directory">The directory where the FHIR resources will be saved.</param>
     /// <param name="directoryPreparationStrategy">Optional strategy for preparing the directory.</param>
     /// <returns>The packaging toolkit instance.</returns>
-    public static PackagingToolkit SaveFhirResources(
+    public static PackagingToolkit SaveFhirResourcesToDirectory(
         this PackagingToolkit packagingToolkit,
         DirectoryInfo directory,
         DirectoryInfoHandler? directoryPreparationStrategy = null)

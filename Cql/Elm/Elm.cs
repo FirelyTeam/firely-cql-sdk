@@ -40,9 +40,7 @@ internal static class IGetVersionedIdentifierExtensions
         ArgumentNullException.ThrowIfNull(identifier);
         ArgumentNullException.ThrowIfNull(identifier.id);
 
-        var cqlLibraryIdentifier = CqlLibraryIdentifier.Parse(identifier.id);
-        CqlLibraryVersion? cqlLibraryVersion = identifier.version is null ? null : CqlLibraryVersion.Parse(identifier.version);
-        return CqlVersionedLibraryIdentifier.FromNameAndVersion(cqlLibraryIdentifier, cqlLibraryVersion);
+        return CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(identifier.id, identifier.version);
     }
 }
 
