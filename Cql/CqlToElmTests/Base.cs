@@ -192,10 +192,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         private static ILoggerFactory LoggerFactory { get; } =
-            new ServiceCollection()
-                .AddLogging(lb => lb.AddConsole())
-                .BuildServiceProvider()
-                .GetRequiredService<ILoggerFactory>();
+            Microsoft.Extensions.Logging.LoggerFactory.Create(builder => builder.AddConsole());
 
         protected static CqlToolkit CreateCqlToolkit(
             ImmutableHashSet<CqlModel>? Models = null,
