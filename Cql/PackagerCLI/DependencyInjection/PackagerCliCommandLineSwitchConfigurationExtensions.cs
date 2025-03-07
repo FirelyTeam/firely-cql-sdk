@@ -22,8 +22,6 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
 
         return new SortedDictionary<string, string>
         {
-            // @formatter:off
-
             // Input
             ["--elm"] = PackagerCliSection + nameof(PackagerCliOptions.ElmFromDirectory),
             ["--cql"] = PackagerCliSection + nameof(PackagerCliOptions.CqlFromDirectory),
@@ -40,7 +38,9 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
             ["--canonical-root-url"] = PackagerCliSection + nameof(PackagerCliOptions.FhirCanonicalRootUrl),
             ["--fhir"] = PackagerCliSection + nameof(PackagerCliOptions.FhirOutDirectory),
             ["--override-utc-date-time"] = PackagerCliSection + nameof(PackagerCliOptions.FhirOverrideDate),
-            // @formatter:on
+
+            // Serialization
+            ["--json-should-indent"] = PackagerCliSection + nameof(PackagerCliOptions.JsonShouldIndent),
         };
     }
 
