@@ -96,7 +96,7 @@ internal class PackagerCli(
                     FhirOutDirectory: { } dirOutFhir,
                     FhirCanonicalRootUrl: var canonicalRootUrl,
                     FhirOverrideDate: var overrideDate,
-                    JsonShouldIndent: { } indentJson,
+                    JsonIndentEnable: { } indentJson,
                 })
             {
                 Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null;

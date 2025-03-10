@@ -40,7 +40,7 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
             ["--override-utc-date-time"] = PackagerCliSection + nameof(PackagerCliOptions.FhirOverrideDate),
 
             // Serialization
-            ["--json-should-indent"] = PackagerCliSection + nameof(PackagerCliOptions.JsonShouldIndent),
+            ["--json-indent-enable"] = PackagerCliSection + nameof(PackagerCliOptions.JsonIndentEnable),
         };
     }
 
