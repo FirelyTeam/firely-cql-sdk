@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging.Toolkit.Internal;
 using Hl7.Cql.Runtime;

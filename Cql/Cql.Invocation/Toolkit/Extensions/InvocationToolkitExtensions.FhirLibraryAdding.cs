@@ -5,9 +5,7 @@ using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
 using Hl7.Fhir.Validation;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using Hl7.Cql.Abstractions;
-using Microsoft.CodeAnalysis;
 
 namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 
