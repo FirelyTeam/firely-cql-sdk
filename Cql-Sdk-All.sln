@@ -94,6 +94,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationRunner", "submodules\Firely.Cql.Sdk.Integration.Runner\IntegrationRunner\IntegrationRunner.csproj", "{2929117D-FB33-4BD6-8F20-4B623C114438}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Ncqa", "Ncqa", "{1AF2E4B2-99C5-4678-B926-D224CC83A8F7}"
+	ProjectSection(SolutionItems) = preProject
+		submodules\Ncqa.DQIC\.gitignore = submodules\Ncqa.DQIC\.gitignore
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuildArtifacts", "submodules\Ncqa.DQIC\BuildArtifacts\BuildArtifacts.csproj", "{B5BF0EDC-D95F-4368-A74B-B5794FB34F9E}"
 EndProject
@@ -122,6 +125,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cql.Invocation", "Cql\Cql.Invocation\Cql.Invocation.csproj", "{50C55FF2-5362-454A-85B9-201E96A3C779}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ncqa.HT.Benchmarks", "submodules\Ncqa.DQIC\Ncqa.HT.Benchmarks\Ncqa.HT.Benchmarks.csproj", "{50304DBC-87E2-462B-A457-03F7F9EFF612}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ncqa.HT.Infrastructure", "submodules\Ncqa.DQIC\Ncqa.HT.Infrastructure\Ncqa.HT.Infrastructure.csproj", "{BAEF695A-5581-B3EE-B352-CBF447240E55}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -249,6 +254,10 @@ Global
 		{50304DBC-87E2-462B-A457-03F7F9EFF612}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50304DBC-87E2-462B-A457-03F7F9EFF612}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50304DBC-87E2-462B-A457-03F7F9EFF612}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAEF695A-5581-B3EE-B352-CBF447240E55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAEF695A-5581-B3EE-B352-CBF447240E55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAEF695A-5581-B3EE-B352-CBF447240E55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAEF695A-5581-B3EE-B352-CBF447240E55}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -297,6 +306,7 @@ Global
 		{ACE1D5DB-B8BB-4DC0-B04C-203982E59EC2} = {4B5D75F5-E2FC-4CCB-90EF-6DC4A0193032}
 		{50C55FF2-5362-454A-85B9-201E96A3C779} = {ACE1D5DB-B8BB-4DC0-B04C-203982E59EC2}
 		{50304DBC-87E2-462B-A457-03F7F9EFF612} = {1AF2E4B2-99C5-4678-B926-D224CC83A8F7}
+		{BAEF695A-5581-B3EE-B352-CBF447240E55} = {1AF2E4B2-99C5-4678-B926-D224CC83A8F7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {366252DE-C2FB-4EAC-96EE-22210BD43DE2}
