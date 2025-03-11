@@ -16,7 +16,8 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// </summary>
 /// <param name="librarySetInvoker">The library set invoker that created this instance.</param>
 /// <param name="library">The CQL library instance.</param>
-public abstract class LibraryInvokerOnInstance(
+public abstract class LibraryInvokerOnInstance
+(
     LibrarySetInvoker librarySetInvoker,
     ILibrary library) : LibraryInvoker(librarySetInvoker)
 {
@@ -30,4 +31,10 @@ public abstract class LibraryInvokerOnInstance(
     /// </summary>
     public override CqlVersionedLibraryIdentifier LibraryIdentifier { get; } =
         CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(library.Name, library.Version);
+
+    /// <inheritdoc />
+    public override IReadOnlyCollection<CqlVersionedLibraryIdentifier> DependencyLibraryIdentifiers { get; } =
+        library.Dependencies
+               .Select(dep => CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(dep.Name, dep.Version))
+               .ToList();
 }

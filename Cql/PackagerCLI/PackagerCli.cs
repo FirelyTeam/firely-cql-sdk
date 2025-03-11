@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm.Toolkit;
@@ -94,13 +95,25 @@ internal class PackagerCli(
                 {
                     FhirOutDirectory: { } dirOutFhir,
                     FhirCanonicalRootUrl: var canonicalRootUrl,
-                    FhirOverrideDate: var overrideDate
+                    FhirOverrideDate: var overrideDate,
+                    JsonIndentEnable: { } indentJson,
                 })
             {
+                Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null;
+                if (indentJson)
+                    configureJsonSerializerOptions = options =>
+                    {
+                        options.WriteIndented = true;
+                        return options;
+                    };
+
                 packagingToolkit
                     .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
                     .ConvertToFhirResources(canonicalRootUrl, overrideDate)
-                    .SaveFhirResourcesToDirectory(dirOutFhir, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
+                    .SaveFhirResourcesToDirectory(
+                        dirOutFhir,
+                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"),
+                        configureJsonSerializerOptions);
             }
 
             return 0;

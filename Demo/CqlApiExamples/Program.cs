@@ -25,7 +25,7 @@ internal static class Program
     private static void Main(string[] args)
     {
         // Create a logger factory via the Microsoft.Extensions.Logging API
-        var loggerFactory = CreateConsoleLoggerFactory();
+        var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
         AddDuplicates(loggerFactory);
         Add3And2Example(loggerFactory);
@@ -269,15 +269,6 @@ internal static class Program
             "ThreePlusTwo");
 
         Debug.Assert(threePlusTwo is 5);
-    }
-
-    private static ILoggerFactory CreateConsoleLoggerFactory()
-    {
-        var services = new ServiceCollection();
-        services.AddLogging(builder => builder.AddConsole());
-        IServiceProvider serviceProvider = services.BuildServiceProvider();
-        var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
-        return loggerFactory;
     }
 }
 
