@@ -133,10 +133,7 @@ namespace Test
             LogLevel logLevel = LogLevel.Error,
             int cacheSize = 0)
         {
-            var loggerFactory = new ServiceCollection()
-                                .AddLogging(builder => builder.AddConsole().SetMinimumLevel(logLevel))
-                                .BuildServiceProvider()
-                                .GetRequiredService<ILoggerFactory>();
+            var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole().SetMinimumLevel(logLevel));
 
             return CreateRuntimeScopeFromElmLibraryFile(elmDirectory, lib, version, cacheSize, loggerFactory);
         }

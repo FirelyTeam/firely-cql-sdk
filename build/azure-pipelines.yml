@@ -8,7 +8,7 @@ resources:
       name: FirelyTeam/azure-pipeline-templates
       endpoint: FirelyTeam
       ref: refs/tags/v1
-
+      
 variables:
   - group: CodeSigning
   - group: APIKeys
@@ -82,27 +82,38 @@ stages:
   dependsOn: checkForDocChangesStage
   condition: and(succeeded(), not(eq(dependencies.checkForDocChangesStage.outputs['CheckDocChangesJob.checkForDocChanges.skipBuild'], 'true')))
   jobs:
-  - ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build
-    - template: templates/build.yml  # Template reference
-      parameters:
-        dotNetCoreVersion: $(DOTNET_CORE_SDK)
+  - template: build.yml@templates  # Template reference
+    parameters:
+      dotNetCoreVersion: $(DOTNET_CORE_SDK)
+      checkoutSubmodules: 'true'
+      ${{ if not(startswith(variables['Build.SourceBranch'], 'refs/tags/v')) }}:  # 'normal' build
         useVersionSuffix: true
-        packageArtifacts: true
-        restoreDependencies: true
-        nuGetServiceConnections: GitHubPackageGetFeed
-        nuGetSources: --source https://nuget.pkg.github.com/FirelyTeam/index.json
-        pool:
-          vmImage: $(vmImage)
-
-  - ${{ if startswith(variables['Build.SourceBranch'], 'refs/tags/v') }}:  # release mode
-    - template: templates/build.yml  # Template reference
-      parameters:
-        dotNetCoreVersion: $(DOTNET_CORE_SDK)
+      ${{ else }}: # release mode
         useVersionSuffix: false
-        packageArtifacts: true
-        restoreDependencies: true
-        pool:
-          vmImage: $(vmImage)
+      buildSolutionFile: 'Cql-Sdk-All.sln'
+      packageSolutionFile: 'Cql-Sdk.slnf'
+      testProjects: |
+        **/*Tests/*Tests.csproj
+        **/**/Test.Measures.Demo.csproj
+        !**/Ncqa.HT.DeckTests.csproj
+        submodules\Firely.Cql.Sdk.Integration.Runner\IntegrationRunner\IntegrationRunner.csproj
+      packageArtifacts: true
+      restoreDependencies: true
+      nuGetServiceConnections: GitHubPackageGetFeed
+      nuGetSources: --source https://nuget.pkg.github.com/FirelyTeam/index.json
+      codeSignerCertificate: $(FirelyCodeSignerCertificate)
+      codeSignerPassword: $(CodeSigningPassword)
+      signingKeyFileName: 'cql-sdk.snk'
+      filesForSigning: >-
+        $(Build.SourcesDirectory)\Cql\*\bin\Release\*\Hl7.Cql*.dll,
+        $(Build.SourcesDirectory)\Cql\*\bin\Release\*\Ncqa.Cql*.dll,
+        $(Build.SourcesDirectory)*\bin\Release\*\Cql.*.dll,
+        $(Build.SourcesDirectory)*\bin\Release\*\PackagerCLI.dll
+      filesToExcludeForSigning: >-
+        *CodeGeneration*,
+        *CoreTests*
+      pool:
+        vmImage: $(vmImage)
 
 - stage: deployToGitHub
   dependsOn: build

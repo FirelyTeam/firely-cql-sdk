@@ -42,7 +42,7 @@ public static class FhirDeserializationExtensions
         this Stream jsonStream,
         Mutator<JsonSerializerOptions>? configureOptions = null)
         where TDomainResource : DomainResource =>
-        JsonSerializer.Deserialize<TDomainResource>(jsonStream, configureOptions == null ? Options : configureOptions(Options))
+        JsonSerializer.Deserialize<TDomainResource>(jsonStream, configureOptions == null ? Options : configureOptions(new (Options)))
         ?? throw new ArgumentException($"Unable to deserialize this stream as {typeof(TDomainResource).Name}");
 
     /// <summary>
@@ -57,7 +57,7 @@ public static class FhirDeserializationExtensions
         this string jsonString,
         Mutator<JsonSerializerOptions>? configureOptions = null)
         where TDomainResource : DomainResource =>
-        JsonSerializer.Deserialize<TDomainResource>(jsonString, configureOptions == null ? Options : configureOptions(Options))
+        JsonSerializer.Deserialize<TDomainResource>(jsonString, configureOptions == null ? Options : configureOptions(new(Options)))
         ?? throw new ArgumentException($"Unable to deserialize this string as {typeof(TDomainResource).Name}");
 
     /// <summary>
@@ -72,6 +72,6 @@ public static class FhirDeserializationExtensions
         this ReadOnlySpan<char> jsonCharSpan,
         Mutator<JsonSerializerOptions>? configureOptions = null)
         where TDomainResource : DomainResource =>
-        JsonSerializer.Deserialize<TDomainResource>(jsonCharSpan, configureOptions == null ? Options : configureOptions(Options))
+        JsonSerializer.Deserialize<TDomainResource>(jsonCharSpan, configureOptions == null ? Options : configureOptions(new(Options)))
         ?? throw new ArgumentException($"Unable to deserialize this character span as {typeof(TDomainResource).Name}");
 }
