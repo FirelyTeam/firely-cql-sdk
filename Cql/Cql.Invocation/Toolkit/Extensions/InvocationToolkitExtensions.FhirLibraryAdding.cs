@@ -6,6 +6,8 @@ using Hl7.Fhir.Serialization;
 using Hl7.Fhir.Validation;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using Hl7.Cql.Abstractions;
+using Microsoft.CodeAnalysis;
 
 namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 
@@ -16,6 +18,7 @@ partial class InvocationToolkitExtensions
     /// </summary>
     /// <param name="invocationToolkit">The invocation toolkit to add the FHIR libraries to.</param>
     /// <param name="directory">The directory containing the FHIR library files.</param>
+    /// <param name="configureJsonSerializerOptions">Optional mutator to configure JSON serializer options.</param>
     /// <param name="options">Optional enumeration options for directory enumeration.</param>
     /// <param name="filePredicate">Optional predicate to filter files.</param>
     /// <returns>The updated invocation toolkit with the added FHIR libraries.</returns>
@@ -23,7 +26,8 @@ partial class InvocationToolkitExtensions
         this InvocationToolkit invocationToolkit,
         DirectoryInfo directory,
         EnumerationOptions? options = null,
-        Func<FileInfo, bool>? filePredicate = null)
+        Func<FileInfo, bool>? filePredicate = null,
+        Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
     {
         var logger = invocationToolkit.LoggerFactory.CreateLogger(typeof(InvocationToolkitExtensions));
         var files =
@@ -37,11 +41,11 @@ partial class InvocationToolkitExtensions
                     .ToList();
 
         var assemblyBinaries = files
-                               .TrySelect(FhirLibraryUtilities.LoadFhirLibrary,
-                                   s => s
-                                        .SetContinuation(invocationToolkit.BatchProcessExceptionContinuation)
-                                        .AddLoggerExceptionHandler(
-                                            logger, (fileInfo, logMessage) => logMessage("Could not load FHIR library resource from file: {file}", fileInfo)))
+                               .TrySelect(info => FhirLibraryUtilities.LoadFhirLibrary(info, configureJsonSerializerOptions),
+                                          s => s
+                                               .SetContinuation(invocationToolkit.BatchProcessExceptionContinuation)
+                                               .AddLoggerExceptionHandler(
+                                                   logger, (fileInfo, logMessage) => logMessage("Could not load FHIR library resource from file: {file}", fileInfo)))
                                .TrySelect(FhirLibraryUtilities.ExtractAssemblyBinary,
                                    s => s
                                         .SetContinuation(invocationToolkit.BatchProcessExceptionContinuation)
@@ -59,30 +63,23 @@ partial class InvocationToolkitExtensions
 
 file static class FhirLibraryUtilities
 {
-    private static readonly JsonSerializerOptions Options = BuildJsonSerializerOptions();
-
-    /// <summary>
-    /// Builds the JSON serializer options for FHIR serialization.
-    /// </summary>
-    /// <returns>The configured <see cref="JsonSerializerOptions"/>.</returns>
-    private static JsonSerializerOptions BuildJsonSerializerOptions()
-    {
-        var o = new JsonSerializerOptions().ForFhir(ModelInfo.ModelInspector);
-        o.ReferenceHandler = ReferenceHandler.IgnoreCycles;
-        o.Ignoring([CodedValidationException.ID_LITERAL_INVALID_CODE]); // Ignore ID validation for now
-        return o;
-    }
-
-
     /// <summary>
     /// Loads a FHIR library from the specified file.
     /// </summary>
     /// <param name="file">The file to load the FHIR library from.</param>
+    /// <param name="configureJsonSerializerOptions">Optional mutator to configure JSON serializer options.</param>
     /// <returns>The loaded FHIR library.</returns>
-    public static FhirLibrary LoadFhirLibrary(FileInfo file)
+    public static FhirLibrary LoadFhirLibrary(
+        FileInfo file,
+        Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
     {
+        configureJsonSerializerOptions += opt =>
+        {
+            opt.Ignoring([CodedValidationException.ID_LITERAL_INVALID_CODE]);
+            return opt;
+        };
         using var fs = file.OpenRead();
-        return fs.DeserializeJsonToFhir<FhirLibrary>(_ => Options);
+        return fs.DeserializeJsonToFhir<FhirLibrary>(configureJsonSerializerOptions);
     }
 
     /// <summary>

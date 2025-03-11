@@ -39,6 +39,7 @@ internal class PackagerCliOptions
     public DirectoryInfo? FhirOutDirectory { get; set; }
     public Uri? FhirCanonicalRootUrl { get; set; }
     public DateTime? FhirOverrideDate { get; set; }
+    public bool JsonIndentEnable { get; set; }
 
     public IEnumerable<(string name, DirectoryInfo? dir)> GetInDirectories() =>
     [

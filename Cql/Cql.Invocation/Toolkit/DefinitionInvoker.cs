@@ -54,7 +54,7 @@ public abstract class DefinitionInvoker(
     /// <summary>
     /// Gets the method information for the definition.
     /// </summary>
-    private MethodInfo MethodInfo { get; } = methodInfo;
+    protected MethodInfo MethodInfo { get; } = methodInfo;
 
     /// <summary>
     /// Invokes the definition with the given CQL context.
@@ -62,16 +62,4 @@ public abstract class DefinitionInvoker(
     /// <param name="cqlContext">The CQL context.</param>
     /// <returns>The result of the invocation.</returns>
     public abstract object? Invoke(CqlContext cqlContext);
-
-    /// <summary>
-    /// Invokes the definition with the specified parameters.
-    /// </summary>
-    /// <param name="library">The library on which to invoke the definition.</param>
-    /// <param name="parameters">The parameters to pass.</param>
-    /// <returns>The result of the invocation.</returns>
-    protected object? InvokeDefinition(object? library, params object?[] parameters)
-    {
-        var result = MethodInfo.Invoke(library, BindingFlags.DoNotWrapExceptions, null, parameters, CultureInfo.InvariantCulture);
-        return result;
-    }
 }
