@@ -34,7 +34,7 @@
             return false;
         }
 
-        public override string ToString() => $"{Type.Model.Name}.{Type.Name}";
+        public override string ToString() => Type.Model is not null ? $"{Type.Model.Name}.{Type.Name}" : Type.Name;
 
         public override int GetHashCode() => typeof(NamedTypeSpecifier).GetHashCode() ^ Type.Name.GetHashCode();
 

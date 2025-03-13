@@ -1,5 +1,4 @@
-﻿using Hl7.Cql.Model;
-using Hl7.Cql.Model.Cql;
+﻿using Hl7.Cql.Model.Cql;
 using Hl7.Cql.Model.Xml;
 using System;
 using System.Collections.Generic;
@@ -23,7 +22,7 @@ namespace Hl7.Cql.Model.ModelProviders
         {
             model = (modelName, version) switch
             {
-                ("System", "2.0.0") => CqlModelLoader.Load(Models.System200),
+                ("System", "2.0.0") => CqlModelLoader.Load(Cql.Models.System200),
                 (_, _) => null
             };
             return model is not null;
@@ -33,7 +32,7 @@ namespace Hl7.Cql.Model.ModelProviders
         {
             model = uri switch
             {
-                "urn:hl7-org:elm-types:r2" => CqlModelLoader.Load(Models.System200),
+                "urn:hl7-org:elm-types:r2" => CqlModelLoader.Load(Cql.Models.System200),
                 _ => null
             };
             return model is not null;

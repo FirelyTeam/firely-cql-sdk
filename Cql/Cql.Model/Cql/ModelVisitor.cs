@@ -17,7 +17,7 @@ internal class ModelVisitor(IModelProvider ModelProvider) : cqlBaseVisitor<Model
     public override ModelDefinition VisitModel([NotNull] cqlParser.ModelContext context)
     {
 
-        var def = context.modelDefinition();
+        var def = context.modelIdentifier();
         var id = def.qualifiedIdentifier().GetText();
         var version = def.versionSpecifier().GetText().Detick()!;
         var uri = def.modelUri().GetText().Detick()!;
@@ -25,7 +25,7 @@ internal class ModelVisitor(IModelProvider ModelProvider) : cqlBaseVisitor<Model
         var model = new ModelDefinition(id, version, uri);
 
         // usings first
-        foreach (var defCtx in context.modelDefinitions())
+        foreach (var defCtx in context.modelDefinition())
         {
             var @using = defCtx.usingDefinition();
             if (@using is not null)
@@ -38,7 +38,7 @@ internal class ModelVisitor(IModelProvider ModelProvider) : cqlBaseVisitor<Model
         }
 
         var typeVisitor = new TypeVisitor(model);
-        var typeDefContexts = context.modelDefinitions()
+        var typeDefContexts = context.modelDefinition()
             .Select(def => def.typeDefinition())
             .Where(d => d is not null)
             .ToArray();

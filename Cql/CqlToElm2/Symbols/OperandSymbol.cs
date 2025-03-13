@@ -18,4 +18,5 @@ internal class OperandSymbol : Symbol
     public override AccessModifier AccessModifier => AccessModifier.Public;
 
     public override SymbolType SymbolType => SymbolType.Operand;
+
 }

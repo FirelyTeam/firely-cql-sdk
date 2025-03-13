@@ -1,4 +1,6 @@
-﻿namespace Hl7.Cql.Model
+﻿using System;
+
+namespace Hl7.Cql.Model
 {
     internal class GenericArgumentSpecifier : TypeSpecifier
     {
@@ -20,10 +22,10 @@
 
         public override bool IsSubtypeOf(TypeSpecifier other) => false;
 
-        protected internal override TypeDefinition? GetTypeDefinition() => null;
+        protected internal override TypeDefinition? GetTypeDefinition() => new GenericArgumentType(Argument);
         public override string ToString() => Argument;
 
-        public override int GetHashCode() =>
-            typeof(GenericArgumentSpecifier).GetHashCode() ^ Argument.GetHashCode();
+        public override int GetHashCode() => HashCode.Combine(typeof(GenericArgumentSpecifier), Argument);
+
     }
 }

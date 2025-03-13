@@ -1,15 +1,19 @@
-﻿using System;
+﻿using Hl7.Cql.CqlToElm2.Coercion;
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Metadata;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm2.Symbols;
 
 [DebuggerDisplay("{Name}")]
-internal class SymbolTable
+internal class SymbolTable: IEnumerable<Symbol>
 {
     public SymbolTable? Parent { get; }
 
@@ -29,8 +33,14 @@ internal class SymbolTable
         }
     }
     public string Name { get; }
-
     private Dictionary<string, List<Symbol>> Symbols = new();
+
+    internal CoercionGraph? LocalCoercionGraph { get; set; }
+
+    /// <summary>
+    /// If this symbol table has types, this is the coercion graph for those types.
+    /// </summary>
+    internal CoercionGraph? CoercionGraph => LocalCoercionGraph ?? Parent?.CoercionGraph;
 
     public SymbolTable(string name)
     {
@@ -46,6 +56,9 @@ internal class SymbolTable
 
     public void AddSymbol(Symbol symbol)
     {
+        if (symbol is TypeSymbol ts && ts.Name == "CodeSystem")
+        {
+        }
         if (!Symbols.TryGetValue(symbol.Name, out var symbols))
         {
             symbols = new() { symbol };
@@ -54,50 +67,51 @@ internal class SymbolTable
         else symbols.Add(symbol);
     }
 
+    public IReadOnlyList<Symbol> GetSymbols(string name) =>
+        GetSymbols([name]);
+
     /// <summary>
     /// Gets symbols that do not contain errors.
     /// </summary>
-    public IReadOnlyList<Symbol> GetSymbols(string name)
+    public IReadOnlyList<Symbol> GetSymbols(string[] parts)
     {
         // Direct match
-        if (Symbols.TryGetValue(name, out var symbols))
-        {
-            return symbols.AsReadOnly();
-        }
+        var local = GetLocalSymbols(parts);
+        if (local.Count > 0)
+            return local;
+        else // check parent scope
+            return Parent?.GetSymbols(parts) ?? Array.Empty<Symbol>();
+    }
 
-        // Check for dot-qualified names
-        var parts = name.Split('.');
-        for (int i = 1; i < parts.Length; i++)
+    public IReadOnlyList<Symbol> GetLocalSymbols(string name) => GetLocalSymbols([name]);
+    public IReadOnlyList<Symbol> GetLocalSymbols(string[] parts)
+    {
+        if (parts.Length == 1 && Symbols.TryGetValue(parts[0], out var symbols))
+            return symbols.AsReadOnly();
+        else // Check for dot-qualified names
         {
-            string prefix = string.Join(".", parts.Take(i));
-            if (Symbols.TryGetValue(prefix, out var librarySymbols))
+            for (int i = 0; i < parts.Length; i++)
             {
-                var hasSymbols = librarySymbols.OfType<IHasSymbols>().FirstOrDefault();
-                if (hasSymbols is not null)
+                string prefix = string.Join(".", parts.Take(i));
+                if (Symbols.TryGetValue(prefix, out var librarySymbols))
                 {
-                    string remainder = string.Join(".", parts.Skip(i));
-                    return hasSymbols.Symbols.GetSymbols(remainder);
+                    var hasSymbols = librarySymbols.OfType<SymbolContainer>().FirstOrDefault();
+                    if (hasSymbols is not null)
+                    {
+                        string remainder = string.Join(".", parts.Skip(i));
+                        return hasSymbols.Symbols.GetSymbols(remainder);
+                    }
                 }
             }
         }
-
-        // Check parent scope
-        return Parent?.GetSymbols(name) ?? Array.Empty<Symbol>();
+        return Array.Empty<Symbol>().AsReadOnly();
     }
 
-    public IReadOnlyList<Symbol> GetLocalSymbols(string name)
-    {
-        if (Symbols.TryGetValue(name, out var symbols))
-        {
-            return symbols.AsReadOnly();
-        }
-        else return Array.Empty<Symbol>();
-    }
 
     /// <summary>
     /// Gets the only non-error symbol with this name, or null if there is no such symbol.
     /// </summary>
-    public Symbol? GetUnique(string name)
+    public Symbol? GetUnique(string[] name)
     {
         var symbols = GetSymbols(name);
         var nonErrorSymbols = symbols.Where(s => s.Errors.Count == 0).ToList();
@@ -107,14 +121,19 @@ internal class SymbolTable
             return symbols[0];
         else return null;
     }
-    public T? GetUnique<T>(string name) where T : Symbol =>
+    public Symbol? GetUnique(string name) =>GetUnique([name]);
+
+    public T? GetUnique<T>(string name) where T : Symbol => GetUnique<T>([name]);
+    public T? GetUnique<T>(string[] name) where T : Symbol =>
         GetUnique(name) switch
         {
             T t => t,
             _ => null
         };
 
-    public Symbol? GetLocalUnique(string name)
+    public Symbol? GetLocalUnique(string name)=>GetLocalUnique([name]);
+
+    public Symbol? GetLocalUnique(string[] name)
     {
         var symbols = GetLocalSymbols(name);
         var nonErrorSymbols = symbols.Where(s => s.Errors.Count == 0).ToList();
@@ -132,10 +151,21 @@ internal class SymbolTable
             _ => null
         };
 
-
     public IEnumerable<FluentFunctionSymbol> GetFluentFunctions(string name)
     {
         throw new NotImplementedException();
     }
 
+    public IEnumerable<T> OfType<T>() where T : Symbol
+    {
+        var ofType = Symbols.Values.SelectMany(s => s).OfType<T>();
+        if (Parent is not null)
+            ofType = ofType.Concat(Parent.OfType<T>());
+        return ofType;
+    }
+
+
+    public IEnumerator<Symbol> GetEnumerator() => Symbols.Values.SelectMany(s => s).GetEnumerator();
+
+    IEnumerator IEnumerable.GetEnumerator() => Symbols.Values.SelectMany(s => s).GetEnumerator();
 }

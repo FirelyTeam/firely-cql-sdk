@@ -1,8 +1,11 @@
-﻿namespace Hl7.Cql.Model
+﻿using System.Diagnostics;
+
+namespace Hl7.Cql.Model
 {
+    [DebuggerDisplay("{DebugDisplay()}")]
     internal abstract class TypeDefinition
     {
-        protected TypeDefinition(string name, ModelDefinition model, AccessModifier access)
+        protected TypeDefinition(string name, ModelDefinition? model, AccessModifier access)
         {
             Name = name;
             Model = model;
@@ -20,8 +23,14 @@
 
         public TypeDefinition? BaseType { get; internal set; }
 
-        public ModelDefinition Model { get; internal set; }
+        public ModelDefinition? Model { get; internal set; }
 
         public abstract TypeSpecifier ToTypeSpecifier();
+
+        private string DebugDisplay() => Model switch
+        {
+            { } => $"{Model.Name}.{Name}",
+            _ => Name
+        };
     }
 }

@@ -251,22 +251,6 @@ file class FirstPassTypeVisitor(ModelDefinition model) : cqlBaseVisitor<TypeDefi
         var id = context.identifier().GetText().Dequote()!;
         var accessModifier = context.accessModifier().Parse();
         return new ClassTypeDefinition(id, model, accessModifier);
-
-        //var baseClassCtx = context.baseClass();
-        //if (baseClassCtx is not null)
-        //{
-        //    var baseClassId = baseClassCtx.typeSpecifier();
-        //}
-        //var classElements = context.classElements()?.classElement();
-        //if (classElements is not null)
-        //{
-        //    foreach (var classElement in classElements)
-        //    {
-        //        var elementId = classElement.identifier().GetText().Dequote()!;
-        //        var elementType = classElement.typeSpecifier();
-        //    }
-        //}
-        //return classType;
     }
 
     public override TypeDefinition VisitGenericTypeDefinition([NotNull] cqlParser.GenericTypeDefinitionContext context)

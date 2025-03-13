@@ -33,11 +33,17 @@ using IToken = Antlr4.Runtime.IToken;
 [System.CLSCompliant(false)]
 public interface IcqlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="cqlParser.modelDefinitions"/>.
+	/// Visit a parse tree produced by <see cref="cqlParser.modelDefinition"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitModelDefinitions([NotNull] cqlParser.ModelDefinitionsContext context);
+	Result VisitModelDefinition([NotNull] cqlParser.ModelDefinitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.modelStatement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitModelStatement([NotNull] cqlParser.ModelStatementContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="cqlParser.model"/>.
 	/// </summary>
@@ -45,11 +51,11 @@ public interface IcqlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitModel([NotNull] cqlParser.ModelContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="cqlParser.modelDefinition"/>.
+	/// Visit a parse tree produced by <see cref="cqlParser.modelIdentifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitModelDefinition([NotNull] cqlParser.ModelDefinitionContext context);
+	Result VisitModelIdentifier([NotNull] cqlParser.ModelIdentifierContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="cqlParser.modelUri"/>.
 	/// </summary>
@@ -117,11 +123,83 @@ public interface IcqlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitGenericTypeConstraint([NotNull] cqlParser.GenericTypeConstraintContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="cqlParser.libraryDefinitions"/>.
+	/// Visit a parse tree produced by <see cref="cqlParser.operatorDefinition"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitLibraryDefinitions([NotNull] cqlParser.LibraryDefinitionsContext context);
+	Result VisitOperatorDefinition([NotNull] cqlParser.OperatorDefinitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.genericOperatorDefinition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitGenericOperatorDefinition([NotNull] cqlParser.GenericOperatorDefinitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.functionDefinition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFunctionDefinition([NotNull] cqlParser.FunctionDefinitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.genericFunctionDefinition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitGenericFunctionDefinition([NotNull] cqlParser.GenericFunctionDefinitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.functionBody"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFunctionBody([NotNull] cqlParser.FunctionBodyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.overloadableOperator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOverloadableOperator([NotNull] cqlParser.OverloadableOperatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.operandDefinition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOperandDefinition([NotNull] cqlParser.OperandDefinitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.conversionDefinition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConversionDefinition([NotNull] cqlParser.ConversionDefinitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.fromType"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitFromType([NotNull] cqlParser.FromTypeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.toType"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitToType([NotNull] cqlParser.ToTypeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.conversionType"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitConversionType([NotNull] cqlParser.ConversionTypeContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.libraryDefinition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLibraryDefinition([NotNull] cqlParser.LibraryDefinitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.libraryStatement"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLibraryStatement([NotNull] cqlParser.LibraryStatementContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="cqlParser.library"/>.
 	/// </summary>
@@ -129,11 +207,11 @@ public interface IcqlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitLibrary([NotNull] cqlParser.LibraryContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="cqlParser.libraryDefinition"/>.
+	/// Visit a parse tree produced by <see cref="cqlParser.libraryIdentifier"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitLibraryDefinition([NotNull] cqlParser.LibraryDefinitionContext context);
+	Result VisitLibraryIdentifier([NotNull] cqlParser.LibraryIdentifierContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="cqlParser.usingDefinition"/>.
 	/// </summary>
@@ -183,23 +261,17 @@ public interface IcqlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitCodesystems([NotNull] cqlParser.CodesystemsContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="cqlParser.codesystemIdentifier"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitCodesystemIdentifier([NotNull] cqlParser.CodesystemIdentifierContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="cqlParser.libraryIdentifier"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitLibraryIdentifier([NotNull] cqlParser.LibraryIdentifierContext context);
-	/// <summary>
 	/// Visit a parse tree produced by <see cref="cqlParser.codeDefinition"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitCodeDefinition([NotNull] cqlParser.CodeDefinitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.codeSystemIdentifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitCodeSystemIdentifier([NotNull] cqlParser.CodeSystemIdentifierContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="cqlParser.conceptDefinition"/>.
 	/// </summary>
@@ -224,12 +296,6 @@ public interface IcqlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitKeywordIdentifier([NotNull] cqlParser.KeywordIdentifierContext context);
-	/// <summary>
-	/// Visit a parse tree produced by <see cref="cqlParser.codeIdentifier"/>.
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	/// <return>The visitor result.</return>
-	Result VisitCodeIdentifier([NotNull] cqlParser.CodeIdentifierContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="cqlParser.codesystemId"/>.
 	/// </summary>
@@ -297,6 +363,25 @@ public interface IcqlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitGenericTypeSpecifier([NotNull] cqlParser.GenericTypeSpecifierContext context);
 	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.expressionDefinition"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitExpressionDefinition([NotNull] cqlParser.ExpressionDefinitionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.asClause"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAsClause([NotNull] cqlParser.AsClauseContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>ifThenElseExpression</c>
+	/// labeled alternative in <see cref="cqlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIfThenElseExpression([NotNull] cqlParser.IfThenElseExpressionContext context);
+	/// <summary>
 	/// Visit a parse tree produced by the <c>binaryExpression</c>
 	/// labeled alternative in <see cref="cqlParser.expression"/>.
 	/// </summary>
@@ -317,6 +402,13 @@ public interface IcqlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitIdentifierExpression([NotNull] cqlParser.IdentifierExpressionContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>retrieveExpression</c>
+	/// labeled alternative in <see cref="cqlParser.expression"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitRetrieveExpression([NotNull] cqlParser.RetrieveExpressionContext context);
 	/// <summary>
 	/// Visit a parse tree produced by the <c>functionInvocationExpression</c>
 	/// labeled alternative in <see cref="cqlParser.expression"/>.
@@ -344,17 +436,166 @@ public interface IcqlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <return>The visitor result.</return>
 	Result VisitReturnClause([NotNull] cqlParser.ReturnClauseContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="cqlParser.binaryOperator"/>.
+	/// Visit a parse tree produced by the <c>addOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitBinaryOperator([NotNull] cqlParser.BinaryOperatorContext context);
+	Result VisitAddOperator([NotNull] cqlParser.AddOperatorContext context);
 	/// <summary>
-	/// Visit a parse tree produced by <see cref="cqlParser.literal"/>.
+	/// Visit a parse tree produced by the <c>subtractOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
-	Result VisitLiteral([NotNull] cqlParser.LiteralContext context);
+	Result VisitSubtractOperator([NotNull] cqlParser.SubtractOperatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>multiplyOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitMultiplyOperator([NotNull] cqlParser.MultiplyOperatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>divideOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDivideOperator([NotNull] cqlParser.DivideOperatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>modOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitModOperator([NotNull] cqlParser.ModOperatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>equalOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitEqualOperator([NotNull] cqlParser.EqualOperatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>notEqualOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNotEqualOperator([NotNull] cqlParser.NotEqualOperatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>lessOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLessOperator([NotNull] cqlParser.LessOperatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>lessEqualOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLessEqualOperator([NotNull] cqlParser.LessEqualOperatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>greaterOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitGreaterOperator([NotNull] cqlParser.GreaterOperatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>greaterEqualOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitGreaterEqualOperator([NotNull] cqlParser.GreaterEqualOperatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>andOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitAndOperator([NotNull] cqlParser.AndOperatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>orOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitOrOperator([NotNull] cqlParser.OrOperatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>booleanLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitBooleanLiteral([NotNull] cqlParser.BooleanLiteralContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>nullLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNullLiteral([NotNull] cqlParser.NullLiteralContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>stringLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitStringLiteral([NotNull] cqlParser.StringLiteralContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>numberLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitNumberLiteral([NotNull] cqlParser.NumberLiteralContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>longNumberLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitLongNumberLiteral([NotNull] cqlParser.LongNumberLiteralContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>dateTimeLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDateTimeLiteral([NotNull] cqlParser.DateTimeLiteralContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>dateLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitDateLiteral([NotNull] cqlParser.DateLiteralContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>timeLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitTimeLiteral([NotNull] cqlParser.TimeLiteralContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>quantityLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitQuantityLiteral([NotNull] cqlParser.QuantityLiteralContext context);
+	/// <summary>
+	/// Visit a parse tree produced by the <c>ratioLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitRatioLiteral([NotNull] cqlParser.RatioLiteralContext context);
 	/// <summary>
 	/// Visit a parse tree produced by <see cref="cqlParser.quantity"/>.
 	/// </summary>
@@ -373,5 +614,53 @@ public interface IcqlVisitor<Result> : IParseTreeVisitor<Result> {
 	/// <param name="context">The parse tree.</param>
 	/// <return>The visitor result.</return>
 	Result VisitUnit([NotNull] cqlParser.UnitContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.ratio"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitRatio([NotNull] cqlParser.RatioContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.retrieve"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitRetrieve([NotNull] cqlParser.RetrieveContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.contextIdentifier"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitContextIdentifier([NotNull] cqlParser.ContextIdentifierContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.codePath"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitCodePath([NotNull] cqlParser.CodePathContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.codeComparator"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitCodeComparator([NotNull] cqlParser.CodeComparatorContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.terminology"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitTerminology([NotNull] cqlParser.TerminologyContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.simplePath"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitSimplePath([NotNull] cqlParser.SimplePathContext context);
+	/// <summary>
+	/// Visit a parse tree produced by <see cref="cqlParser.index"/>.
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	/// <return>The visitor result.</return>
+	Result VisitIndex([NotNull] cqlParser.IndexContext context);
 }
 } // namespace Hl7.Cql.CqlToElm.Grammar.r2

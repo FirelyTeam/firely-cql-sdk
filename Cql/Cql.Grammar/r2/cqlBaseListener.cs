@@ -37,17 +37,29 @@ using ParserRuleContext = Antlr4.Runtime.ParserRuleContext;
 [System.CLSCompliant(false)]
 public partial class cqlBaseListener : IcqlListener {
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="cqlParser.modelDefinitions"/>.
+	/// Enter a parse tree produced by <see cref="cqlParser.modelDefinition"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterModelDefinitions([NotNull] cqlParser.ModelDefinitionsContext context) { }
+	public virtual void EnterModelDefinition([NotNull] cqlParser.ModelDefinitionContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="cqlParser.modelDefinitions"/>.
+	/// Exit a parse tree produced by <see cref="cqlParser.modelDefinition"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitModelDefinitions([NotNull] cqlParser.ModelDefinitionsContext context) { }
+	public virtual void ExitModelDefinition([NotNull] cqlParser.ModelDefinitionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.modelStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterModelStatement([NotNull] cqlParser.ModelStatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.modelStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitModelStatement([NotNull] cqlParser.ModelStatementContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="cqlParser.model"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -61,17 +73,17 @@ public partial class cqlBaseListener : IcqlListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitModel([NotNull] cqlParser.ModelContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="cqlParser.modelDefinition"/>.
+	/// Enter a parse tree produced by <see cref="cqlParser.modelIdentifier"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterModelDefinition([NotNull] cqlParser.ModelDefinitionContext context) { }
+	public virtual void EnterModelIdentifier([NotNull] cqlParser.ModelIdentifierContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="cqlParser.modelDefinition"/>.
+	/// Exit a parse tree produced by <see cref="cqlParser.modelIdentifier"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitModelDefinition([NotNull] cqlParser.ModelDefinitionContext context) { }
+	public virtual void ExitModelIdentifier([NotNull] cqlParser.ModelIdentifierContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="cqlParser.modelUri"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -205,17 +217,161 @@ public partial class cqlBaseListener : IcqlListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitGenericTypeConstraint([NotNull] cqlParser.GenericTypeConstraintContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="cqlParser.libraryDefinitions"/>.
+	/// Enter a parse tree produced by <see cref="cqlParser.operatorDefinition"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterLibraryDefinitions([NotNull] cqlParser.LibraryDefinitionsContext context) { }
+	public virtual void EnterOperatorDefinition([NotNull] cqlParser.OperatorDefinitionContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="cqlParser.libraryDefinitions"/>.
+	/// Exit a parse tree produced by <see cref="cqlParser.operatorDefinition"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitLibraryDefinitions([NotNull] cqlParser.LibraryDefinitionsContext context) { }
+	public virtual void ExitOperatorDefinition([NotNull] cqlParser.OperatorDefinitionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.genericOperatorDefinition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterGenericOperatorDefinition([NotNull] cqlParser.GenericOperatorDefinitionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.genericOperatorDefinition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitGenericOperatorDefinition([NotNull] cqlParser.GenericOperatorDefinitionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.functionDefinition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterFunctionDefinition([NotNull] cqlParser.FunctionDefinitionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.functionDefinition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitFunctionDefinition([NotNull] cqlParser.FunctionDefinitionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.genericFunctionDefinition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterGenericFunctionDefinition([NotNull] cqlParser.GenericFunctionDefinitionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.genericFunctionDefinition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitGenericFunctionDefinition([NotNull] cqlParser.GenericFunctionDefinitionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.functionBody"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterFunctionBody([NotNull] cqlParser.FunctionBodyContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.functionBody"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitFunctionBody([NotNull] cqlParser.FunctionBodyContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.overloadableOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterOverloadableOperator([NotNull] cqlParser.OverloadableOperatorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.overloadableOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitOverloadableOperator([NotNull] cqlParser.OverloadableOperatorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.operandDefinition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterOperandDefinition([NotNull] cqlParser.OperandDefinitionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.operandDefinition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitOperandDefinition([NotNull] cqlParser.OperandDefinitionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.conversionDefinition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterConversionDefinition([NotNull] cqlParser.ConversionDefinitionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.conversionDefinition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitConversionDefinition([NotNull] cqlParser.ConversionDefinitionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.fromType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterFromType([NotNull] cqlParser.FromTypeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.fromType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitFromType([NotNull] cqlParser.FromTypeContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.toType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterToType([NotNull] cqlParser.ToTypeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.toType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitToType([NotNull] cqlParser.ToTypeContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.conversionType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterConversionType([NotNull] cqlParser.ConversionTypeContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.conversionType"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitConversionType([NotNull] cqlParser.ConversionTypeContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.libraryDefinition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterLibraryDefinition([NotNull] cqlParser.LibraryDefinitionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.libraryDefinition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitLibraryDefinition([NotNull] cqlParser.LibraryDefinitionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.libraryStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterLibraryStatement([NotNull] cqlParser.LibraryStatementContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.libraryStatement"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitLibraryStatement([NotNull] cqlParser.LibraryStatementContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="cqlParser.library"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -229,17 +385,17 @@ public partial class cqlBaseListener : IcqlListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitLibrary([NotNull] cqlParser.LibraryContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="cqlParser.libraryDefinition"/>.
+	/// Enter a parse tree produced by <see cref="cqlParser.libraryIdentifier"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterLibraryDefinition([NotNull] cqlParser.LibraryDefinitionContext context) { }
+	public virtual void EnterLibraryIdentifier([NotNull] cqlParser.LibraryIdentifierContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="cqlParser.libraryDefinition"/>.
+	/// Exit a parse tree produced by <see cref="cqlParser.libraryIdentifier"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitLibraryDefinition([NotNull] cqlParser.LibraryDefinitionContext context) { }
+	public virtual void ExitLibraryIdentifier([NotNull] cqlParser.LibraryIdentifierContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="cqlParser.usingDefinition"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -337,30 +493,6 @@ public partial class cqlBaseListener : IcqlListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitCodesystems([NotNull] cqlParser.CodesystemsContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="cqlParser.codesystemIdentifier"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterCodesystemIdentifier([NotNull] cqlParser.CodesystemIdentifierContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="cqlParser.codesystemIdentifier"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitCodesystemIdentifier([NotNull] cqlParser.CodesystemIdentifierContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="cqlParser.libraryIdentifier"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterLibraryIdentifier([NotNull] cqlParser.LibraryIdentifierContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="cqlParser.libraryIdentifier"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitLibraryIdentifier([NotNull] cqlParser.LibraryIdentifierContext context) { }
-	/// <summary>
 	/// Enter a parse tree produced by <see cref="cqlParser.codeDefinition"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -372,6 +504,18 @@ public partial class cqlBaseListener : IcqlListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitCodeDefinition([NotNull] cqlParser.CodeDefinitionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.codeSystemIdentifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterCodeSystemIdentifier([NotNull] cqlParser.CodeSystemIdentifierContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.codeSystemIdentifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitCodeSystemIdentifier([NotNull] cqlParser.CodeSystemIdentifierContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="cqlParser.conceptDefinition"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -420,18 +564,6 @@ public partial class cqlBaseListener : IcqlListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitKeywordIdentifier([NotNull] cqlParser.KeywordIdentifierContext context) { }
-	/// <summary>
-	/// Enter a parse tree produced by <see cref="cqlParser.codeIdentifier"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void EnterCodeIdentifier([NotNull] cqlParser.CodeIdentifierContext context) { }
-	/// <summary>
-	/// Exit a parse tree produced by <see cref="cqlParser.codeIdentifier"/>.
-	/// <para>The default implementation does nothing.</para>
-	/// </summary>
-	/// <param name="context">The parse tree.</param>
-	public virtual void ExitCodeIdentifier([NotNull] cqlParser.CodeIdentifierContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="cqlParser.codesystemId"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -565,6 +697,44 @@ public partial class cqlBaseListener : IcqlListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitGenericTypeSpecifier([NotNull] cqlParser.GenericTypeSpecifierContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.expressionDefinition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterExpressionDefinition([NotNull] cqlParser.ExpressionDefinitionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.expressionDefinition"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitExpressionDefinition([NotNull] cqlParser.ExpressionDefinitionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.asClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAsClause([NotNull] cqlParser.AsClauseContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.asClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAsClause([NotNull] cqlParser.AsClauseContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>ifThenElseExpression</c>
+	/// labeled alternative in <see cref="cqlParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterIfThenElseExpression([NotNull] cqlParser.IfThenElseExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>ifThenElseExpression</c>
+	/// labeled alternative in <see cref="cqlParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitIfThenElseExpression([NotNull] cqlParser.IfThenElseExpressionContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by the <c>binaryExpression</c>
 	/// labeled alternative in <see cref="cqlParser.expression"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -606,6 +776,20 @@ public partial class cqlBaseListener : IcqlListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitIdentifierExpression([NotNull] cqlParser.IdentifierExpressionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>retrieveExpression</c>
+	/// labeled alternative in <see cref="cqlParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterRetrieveExpression([NotNull] cqlParser.RetrieveExpressionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>retrieveExpression</c>
+	/// labeled alternative in <see cref="cqlParser.expression"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitRetrieveExpression([NotNull] cqlParser.RetrieveExpressionContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by the <c>functionInvocationExpression</c>
 	/// labeled alternative in <see cref="cqlParser.expression"/>.
@@ -659,29 +843,327 @@ public partial class cqlBaseListener : IcqlListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitReturnClause([NotNull] cqlParser.ReturnClauseContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="cqlParser.binaryOperator"/>.
+	/// Enter a parse tree produced by the <c>addOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterBinaryOperator([NotNull] cqlParser.BinaryOperatorContext context) { }
+	public virtual void EnterAddOperator([NotNull] cqlParser.AddOperatorContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="cqlParser.binaryOperator"/>.
+	/// Exit a parse tree produced by the <c>addOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitBinaryOperator([NotNull] cqlParser.BinaryOperatorContext context) { }
+	public virtual void ExitAddOperator([NotNull] cqlParser.AddOperatorContext context) { }
 	/// <summary>
-	/// Enter a parse tree produced by <see cref="cqlParser.literal"/>.
+	/// Enter a parse tree produced by the <c>subtractOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void EnterLiteral([NotNull] cqlParser.LiteralContext context) { }
+	public virtual void EnterSubtractOperator([NotNull] cqlParser.SubtractOperatorContext context) { }
 	/// <summary>
-	/// Exit a parse tree produced by <see cref="cqlParser.literal"/>.
+	/// Exit a parse tree produced by the <c>subtractOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
-	public virtual void ExitLiteral([NotNull] cqlParser.LiteralContext context) { }
+	public virtual void ExitSubtractOperator([NotNull] cqlParser.SubtractOperatorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>multiplyOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterMultiplyOperator([NotNull] cqlParser.MultiplyOperatorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>multiplyOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitMultiplyOperator([NotNull] cqlParser.MultiplyOperatorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>divideOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDivideOperator([NotNull] cqlParser.DivideOperatorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>divideOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDivideOperator([NotNull] cqlParser.DivideOperatorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>modOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterModOperator([NotNull] cqlParser.ModOperatorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>modOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitModOperator([NotNull] cqlParser.ModOperatorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>equalOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterEqualOperator([NotNull] cqlParser.EqualOperatorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>equalOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitEqualOperator([NotNull] cqlParser.EqualOperatorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>notEqualOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNotEqualOperator([NotNull] cqlParser.NotEqualOperatorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>notEqualOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNotEqualOperator([NotNull] cqlParser.NotEqualOperatorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>lessOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterLessOperator([NotNull] cqlParser.LessOperatorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>lessOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitLessOperator([NotNull] cqlParser.LessOperatorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>lessEqualOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterLessEqualOperator([NotNull] cqlParser.LessEqualOperatorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>lessEqualOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitLessEqualOperator([NotNull] cqlParser.LessEqualOperatorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>greaterOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterGreaterOperator([NotNull] cqlParser.GreaterOperatorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>greaterOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitGreaterOperator([NotNull] cqlParser.GreaterOperatorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>greaterEqualOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterGreaterEqualOperator([NotNull] cqlParser.GreaterEqualOperatorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>greaterEqualOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitGreaterEqualOperator([NotNull] cqlParser.GreaterEqualOperatorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>andOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAndOperator([NotNull] cqlParser.AndOperatorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>andOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAndOperator([NotNull] cqlParser.AndOperatorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>orOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterOrOperator([NotNull] cqlParser.OrOperatorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>orOperator</c>
+	/// labeled alternative in <see cref="cqlParser.binaryOperator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitOrOperator([NotNull] cqlParser.OrOperatorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>booleanLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterBooleanLiteral([NotNull] cqlParser.BooleanLiteralContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>booleanLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitBooleanLiteral([NotNull] cqlParser.BooleanLiteralContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>nullLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNullLiteral([NotNull] cqlParser.NullLiteralContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>nullLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNullLiteral([NotNull] cqlParser.NullLiteralContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>stringLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterStringLiteral([NotNull] cqlParser.StringLiteralContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>stringLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitStringLiteral([NotNull] cqlParser.StringLiteralContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>numberLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterNumberLiteral([NotNull] cqlParser.NumberLiteralContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>numberLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitNumberLiteral([NotNull] cqlParser.NumberLiteralContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>longNumberLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterLongNumberLiteral([NotNull] cqlParser.LongNumberLiteralContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>longNumberLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitLongNumberLiteral([NotNull] cqlParser.LongNumberLiteralContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>dateTimeLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDateTimeLiteral([NotNull] cqlParser.DateTimeLiteralContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>dateTimeLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDateTimeLiteral([NotNull] cqlParser.DateTimeLiteralContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>dateLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterDateLiteral([NotNull] cqlParser.DateLiteralContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>dateLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitDateLiteral([NotNull] cqlParser.DateLiteralContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>timeLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterTimeLiteral([NotNull] cqlParser.TimeLiteralContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>timeLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitTimeLiteral([NotNull] cqlParser.TimeLiteralContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>quantityLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterQuantityLiteral([NotNull] cqlParser.QuantityLiteralContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>quantityLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitQuantityLiteral([NotNull] cqlParser.QuantityLiteralContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by the <c>ratioLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterRatioLiteral([NotNull] cqlParser.RatioLiteralContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by the <c>ratioLiteral</c>
+	/// labeled alternative in <see cref="cqlParser.literal"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitRatioLiteral([NotNull] cqlParser.RatioLiteralContext context) { }
 	/// <summary>
 	/// Enter a parse tree produced by <see cref="cqlParser.quantity"/>.
 	/// <para>The default implementation does nothing.</para>
@@ -718,6 +1200,102 @@ public partial class cqlBaseListener : IcqlListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitUnit([NotNull] cqlParser.UnitContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.ratio"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterRatio([NotNull] cqlParser.RatioContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.ratio"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitRatio([NotNull] cqlParser.RatioContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.retrieve"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterRetrieve([NotNull] cqlParser.RetrieveContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.retrieve"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitRetrieve([NotNull] cqlParser.RetrieveContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.contextIdentifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterContextIdentifier([NotNull] cqlParser.ContextIdentifierContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.contextIdentifier"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitContextIdentifier([NotNull] cqlParser.ContextIdentifierContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.codePath"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterCodePath([NotNull] cqlParser.CodePathContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.codePath"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitCodePath([NotNull] cqlParser.CodePathContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.codeComparator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterCodeComparator([NotNull] cqlParser.CodeComparatorContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.codeComparator"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitCodeComparator([NotNull] cqlParser.CodeComparatorContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.terminology"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterTerminology([NotNull] cqlParser.TerminologyContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.terminology"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitTerminology([NotNull] cqlParser.TerminologyContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.simplePath"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterSimplePath([NotNull] cqlParser.SimplePathContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.simplePath"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitSimplePath([NotNull] cqlParser.SimplePathContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.index"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterIndex([NotNull] cqlParser.IndexContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.index"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitIndex([NotNull] cqlParser.IndexContext context) { }
 
 	/// <inheritdoc/>
 	/// <remarks>The default implementation does nothing.</remarks>

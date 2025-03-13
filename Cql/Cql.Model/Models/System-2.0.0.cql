@@ -60,3 +60,13 @@ define type Vocabulary extends Any {
 	id String,
 	version String
  }
+
+ 
+ // Type operators
+
+
+ define public function ToInteger(argument Boolean) returns Integer: if argument = true then 1 else 0
+ define public explicit conversion from Boolean b to Integer: ToInteger(b)
+ 
+ define public function Add(left Decimal, right Decimal) returns Integer: external
+ define public operator+(left Decimal, right Decimal) returns Integer: Add(left,right)

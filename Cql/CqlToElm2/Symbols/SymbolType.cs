@@ -58,5 +58,6 @@ internal enum SymbolType
     /// Represents a reference to another symbol.
     /// </summary>
     Reference,
-
+    Expression,
+    Argument,
 }

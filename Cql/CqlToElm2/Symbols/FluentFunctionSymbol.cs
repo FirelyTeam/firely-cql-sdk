@@ -1,4 +1,5 @@
-﻿using Hl7.Cql.Model;
+﻿using Hl7.Cql.CqlToElm2.Expressions;
+using Hl7.Cql.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,8 @@ internal class FluentFunctionSymbol : FunctionSymbol
     public FluentFunctionSymbol(string name,
         AccessModifier accessModifier,
         TypeSymbol returnType,
-        params OperandSymbol[] operands) : base(name, accessModifier, returnType, operands)
+        OperandSymbol[] operands,
+        Expression? body) : base(name, accessModifier, returnType, operands, body)
     {
     }
 

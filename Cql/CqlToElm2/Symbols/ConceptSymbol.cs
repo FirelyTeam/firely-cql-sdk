@@ -1,4 +1,5 @@
 ﻿using Hl7.Cql.Model;
+using Hl7.Cql.Primitives;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,4 +24,5 @@ internal class ConceptSymbol: Symbol
     public override TypeSymbol Type { get; }
 
     public override SymbolType SymbolType => SymbolType.Concept;
+
 }

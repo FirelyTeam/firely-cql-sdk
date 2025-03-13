@@ -57,7 +57,7 @@
 
 		<!-- Generate C# and Resource files -->
 		<Message Text="$(Box.Replace({Text}, Generating C# and Resource files&#10;| $(PackagerCLICommand)))" Importance="High" />
-		<Exec Command='$(PackagerCLICommand)' />
+		<!--<Exec Command='$(PackagerCLICommand)' />-->
 
 		<ItemGroup>
 			<!-- Keep relative path else complains about duplicates-->

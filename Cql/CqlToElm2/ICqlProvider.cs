@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm2;
-internal interface ILibraryProvider
+internal interface ICqlProvider
 {
-    public TextReader? GetLibraryCql(string libraryName, Version? version);
+    public TextReader? GetCql(string libraryName, Version? version);
 }

@@ -6,16 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Hl7.Cql.CqlToElm2.Symbols;
-internal class LibrarySymbol : Symbol, IHasSymbols
+internal class LibrarySymbol : SymbolContainer
 {
-    public LibrarySymbol(string name, Version version, SymbolTable symbols) : base(name)
+    public LibrarySymbol(string name, Version version, SymbolTable symbols) : base(name, symbols)
     {
         Version = version;
-        Symbols = symbols;
     }
 
     public Version Version { get; }
-    public SymbolTable Symbols { get; }
+
 
     public override AccessModifier AccessModifier => AccessModifier.Public;
 
@@ -24,4 +23,5 @@ internal class LibrarySymbol : Symbol, IHasSymbols
     public override TypeSymbol Type => throw new NotImplementedException();
 
     public LibrarySymbol Alias(string name) => new LibrarySymbol(name, Version, Symbols);
+
 }

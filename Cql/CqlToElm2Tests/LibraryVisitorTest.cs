@@ -3,7 +3,6 @@ using Antlr4.Runtime;
 using Hl7.Cql.CqlToElm2.Symbols;
 using Hl7.Cql.CqlToElm2.Visitors;
 using Hl7.Cql.CqlToElm.Grammar.r2;
-using Hl7.Cql.Model;
 using System.Diagnostics.CodeAnalysis;
 using Hl7.Cql.CqlToElm2;
 using System.Runtime.CompilerServices;
@@ -18,13 +17,7 @@ public sealed class LibraryVisitorTest
     [ClassInitialize]
     public static void ClassInitialize(TestContext context)
     {
-        ModelProvider = new CachingModelProvider(new BuiltInModelProvider());
     }
-
-
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
-    private static IModelProvider ModelProvider;
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 
     internal static cqlParser.LibraryContext parse(string cql)
     {
@@ -39,7 +32,7 @@ public sealed class LibraryVisitorTest
     {
         var parser = parse(@"library Test version '1.0.0'");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, ModelProvider, new MockLibraryProvider());
+        var visitor = new SymbolVisitor(globalScope, new MockLibraryProvider());
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
         library.Name.Should().Be("Test");
         library.Version.Should().Be(new Version(1, 0, 0));
@@ -51,7 +44,7 @@ public sealed class LibraryVisitorTest
     {
         var parser = parse(@"library Test");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, ModelProvider, new MockLibraryProvider());
+        var visitor = new SymbolVisitor(globalScope, new MockLibraryProvider());
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
         library.Name.Should().Be("Test");
         library.Version.Should().Be(new Version(1, 0, 0));
@@ -61,14 +54,14 @@ public sealed class LibraryVisitorTest
     [TestMethod]
     public void Using_System()
     {
-        var parser = parse(@"
+        var libCtx = parse(@"
             library Test version '1.0.0'
 
             using System version '2.0.0'
         ");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, ModelProvider, new MockLibraryProvider());
-        var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
+        var visitor = new SymbolVisitor(globalScope, new MockLibraryProvider());
+        var library = visitor.Visit(libCtx).Should().BeOfType<LibrarySymbol>().Subject;
         var systemSymbols = library.Symbols.GetSymbols("System");
         systemSymbols.Should().HaveCount(1);
         var system = systemSymbols[0].Should().BeOfType<ModelSymbol>().Subject;
@@ -89,7 +82,7 @@ public sealed class LibraryVisitorTest
             using System version '2.0.0' called System100
         ");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, ModelProvider, new MockLibraryProvider());
+        var visitor = new SymbolVisitor(globalScope, new MockLibraryProvider());
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
         var systemSymbols = library.Symbols.GetSymbols("System100");
         systemSymbols.Should().HaveCount(1);
@@ -114,7 +107,7 @@ public sealed class LibraryVisitorTest
 
         ");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, new MockModelProvider(), new MockLibraryProvider());
+        var visitor = new SymbolVisitor(globalScope, new MockLibraryProvider());
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
 
         var systemSymbols = library.Symbols.GetSymbols("System");
@@ -146,7 +139,7 @@ public sealed class LibraryVisitorTest
 
         ");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, new MockModelProvider(), new MockLibraryProvider());
+        var visitor = new SymbolVisitor(globalScope, new MockLibraryProvider());
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
 
         var systemSymbols = library.Symbols.GetSymbols("System");
@@ -182,7 +175,7 @@ public sealed class LibraryVisitorTest
            include FHIRHelpers version '4.0.0'
         ");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, new MockModelProvider(), lp);
+        var visitor = new SymbolVisitor(globalScope, lp);
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
         var test = globalScope.GetLocalUnique("Test").Should().NotBeNull().And.BeOfType<LibrarySymbol>().Subject;
         test.Symbols.GetLocalUnique("FHIRHelpers").Should().NotBeNull();
@@ -203,7 +196,7 @@ public sealed class LibraryVisitorTest
            include FHIRHelpers version '4.0.0' called FH
         ");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, new MockModelProvider(), lp);
+        var visitor = new SymbolVisitor(globalScope, lp);
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
         var test = globalScope.GetLocalUnique("Test").Should().NotBeNull().And.BeOfType<LibrarySymbol>().Subject;
         test.Symbols.GetLocalUnique("FH").Should().NotBeNull();
@@ -225,7 +218,7 @@ public sealed class LibraryVisitorTest
            include FHIRHelpers version '4.0.0'
         ");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, new MockModelProvider(), lp);
+        var visitor = new SymbolVisitor(globalScope, lp);
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
         var test = globalScope.GetLocalUnique("Test").Should().NotBeNull().And.BeOfType<LibrarySymbol>().Subject;
         test.Symbols.GetLocalUnique("FHIRHelpers").Should().NotBeNull();
@@ -249,7 +242,7 @@ public sealed class LibraryVisitorTest
            include FHIRHelpers version '4.0.0' called FH 
         ");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, new MockModelProvider(), lp);
+        var visitor = new SymbolVisitor(globalScope, lp);
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
         var test = globalScope.GetLocalUnique("Test").Should().NotBeNull().And.BeOfType<LibrarySymbol>().Subject;
         test.Symbols.GetLocalUnique("FHIRHelpers").Should().NotBeNull();
@@ -270,12 +263,12 @@ public sealed class LibraryVisitorTest
             include FHIRHelpers version '4.0.0'
         ");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, new MockModelProvider(), lp);
+        var visitor = new SymbolVisitor(globalScope, lp);
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
         var test = globalScope.GetLocalUnique("Test").Should().NotBeNull().And.BeOfType<LibrarySymbol>().Subject;
         var fh = test.Symbols.GetLocalUnique("FHIRHelpers");
         fh.Should().NotBeNull();
-        fh.Errors.Should().HaveError(ErrorType.LibraryNotFound);
+        fh!.Errors.Should().HaveError(ErrorType.LibraryNotFound);
         globalScope.GetLocalUnique("FHIRHelpers").Should().BeNull();
     }
 
@@ -291,12 +284,12 @@ public sealed class LibraryVisitorTest
             codesystem ""ICD-10"": 'http://hl7.org/fhir/sid/icd-10' version '10.0.0'
         ");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, ModelProvider, lp);
+        var visitor = new SymbolVisitor(globalScope, lp);
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
         var test = globalScope.GetLocalUnique("Test").Should().NotBeNull().And.BeOfType<LibrarySymbol>().Subject;
         var css = test.Symbols.GetLocalUnique<CodeSystemSymbol>("ICD-10");
         css.Should().NotBeNull();
-        css.Name.Should().Be("ICD-10");
+        css!.Name.Should().Be("ICD-10");
         css.Version.Should().Be(new Version(10, 0, 0));
         css.Uri.Should().Be("http://hl7.org/fhir/sid/icd-10");
         css.Errors.Should().BeEmpty();
@@ -317,12 +310,12 @@ public sealed class LibraryVisitorTest
             codesystem ""ICD-10"": 'http://hl7.org/fhir/sid/icd-10' version '10.0.0'
         ");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, ModelProvider, lp);
+        var visitor = new SymbolVisitor(globalScope, lp);
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
         var test = globalScope.GetLocalUnique("Test").Should().NotBeNull().And.BeOfType<LibrarySymbol>().Subject;
         var css = test.Symbols.GetLocalUnique<CodeSystemSymbol>("ICD-10");
         css.Should().NotBeNull();
-        css.Name.Should().Be("ICD-10");
+        css!.Name.Should().Be("ICD-10");
         css.Version.Should().Be(new Version(10, 0, 0));
         css.Uri.Should().Be("http://hl7.org/fhir/sid/icd-10");
         css.Errors.Should().BeEmpty();
@@ -345,7 +338,7 @@ public sealed class LibraryVisitorTest
 
         ");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, ModelProvider, lp);
+        var visitor = new SymbolVisitor(globalScope, lp);
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
         var test = globalScope.GetLocalUnique("Test").Should().NotBeNull().And.BeOfType<LibrarySymbol>().Subject;
         var css = test.Symbols.GetLocalUnique<CodeSystemSymbol>("ICD-10");
@@ -373,14 +366,14 @@ public sealed class LibraryVisitorTest
 
         ");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, ModelProvider, lp);
+        var visitor = new SymbolVisitor(globalScope, lp);
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
         var test = globalScope.GetLocalUnique("Test").Should().NotBeNull().And.BeOfType<LibrarySymbol>().Subject;
         var css = test.Symbols.GetLocalUnique<CodeSystemSymbol>("ICD-10");
         css.Should().NotBeNull();
         var code = test.Symbols.GetLocalUnique<CodeSymbol>("Bizarre personal appearance");
         code.Should().NotBeNull();
-        code.CodeSystem.Should().Be(css);
+        code!.CodeSystem.Should().Be(css);
         code.Code.Should().Be("R46.1");
         code.Name.Should().Be("Bizarre personal appearance");
         code.Display.Should().Be("Display Clause");
@@ -401,14 +394,14 @@ public sealed class LibraryVisitorTest
 
         ");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, ModelProvider, lp);
+        var visitor = new SymbolVisitor(globalScope, lp);
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
         var test = globalScope.GetLocalUnique("Test").Should().NotBeNull().And.BeOfType<LibrarySymbol>().Subject;
         var css = test.Symbols.GetLocalUnique<CodeSystemSymbol>("ICD-10");
         css.Should().BeNull();
         var code = test.Symbols.GetLocalUnique<CodeSymbol>("Bizarre personal appearance"); ;
         code.Should().NotBeNull();
-        code.CodeSystem.Should().NotBeNull();
+        code!.CodeSystem.Should().NotBeNull();
         code.Code.Should().Be("R46.1");
         code.Name.Should().Be("Bizarre personal appearance");
         code.Display.Should().Be("Display Clause");
@@ -429,7 +422,7 @@ public sealed class LibraryVisitorTest
 
         ");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, ModelProvider, lp);
+        var visitor = new SymbolVisitor(globalScope, lp);
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
         var test = globalScope.GetLocalUnique("Test").Should().NotBeNull().And.BeOfType<LibrarySymbol>().Subject;
         var css = test.Symbols.GetLocalUnique<CodeSystemSymbol>("ICD-10");
@@ -456,7 +449,7 @@ public sealed class LibraryVisitorTest
 
         ");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, ModelProvider, lp);
+        var visitor = new SymbolVisitor(globalScope, lp);
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
         var test = globalScope.GetLocalUnique("Test").Should().NotBeNull().And.BeOfType<LibrarySymbol>().Subject;
         var css = test.Symbols.GetLocalUnique<CodeSystemSymbol>("ICD-10");
@@ -485,7 +478,7 @@ public sealed class LibraryVisitorTest
 
         ");
         var globalScope = new SymbolTable(".global");
-        var visitor = new SymbolVisitor(globalScope, ModelProvider, lp);
+        var visitor = new SymbolVisitor(globalScope, lp);
         var library = visitor.Visit(parser).Should().BeOfType<LibrarySymbol>().Subject;
         var test = globalScope.GetLocalUnique("Test").Should().NotBeNull().And.BeOfType<LibrarySymbol>().Subject;
         var css = test.Symbols.GetLocalUnique<CodeSystemSymbol>("ICD-10");
@@ -521,28 +514,26 @@ file static class Extenisons
         assertions.Subject.Should().BeAssignableTo<Symbol>().Subject.Errors.Should().BeEmpty();
 }
 
-file class MockLibraryProvider : ILibraryProvider
+file class MockLibraryProvider : ICqlProvider
 {
     public Dictionary<(string Id, Version? Version), string> Libraries = new();
 
-    public TextReader? GetLibraryCql(string libraryName, Version? version)
+    public TextReader? GetCql(string libraryName, Version? version)
     {
         if (Libraries.TryGetValue((libraryName, version), out var cql))
             return new StringReader(cql);
+
+        var cqlReader = (libraryName, version?.ToString()) switch
+        {
+            ("System", "2.0.0") => Hl7.Cql.Model.Cql.Models.System200,
+            (_, _) => null
+        };
+        if (cqlReader is not null)
+        {
+            var text = cqlReader.ReadToEnd();
+            Libraries.Add((libraryName, version), text);
+            return new StringReader(text);
+        }
         else return null;
-    }
-}
-
-file class MockModelProvider : IModelProvider
-{
-    public bool TryGetModel(string modelName, string? version, [NotNullWhen(true)] out ModelDefinition? model)
-    {
-        model = new ModelDefinition(modelName, version ?? "1.0.0", $"http://{modelName}/{version}");
-        return true;
-    }
-
-    public bool TryGetModelFromUri(string uri, [NotNullWhen(true)] out ModelDefinition? model)
-    {
-        throw new NotImplementedException();
     }
 }

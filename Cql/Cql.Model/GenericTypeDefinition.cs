@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 
 namespace Hl7.Cql.Model
 {
@@ -9,7 +10,7 @@ namespace Hl7.Cql.Model
         public static GenericTypeDefinition CreateTemplate(string name,
             ModelDefinition model,
             IList<GenericArgumentSpecifier> arguments,
-            IDictionary<GenericArgumentSpecifier, TypeSpecifier> constraints,
+            Dictionary<GenericArgumentSpecifier, TypeSpecifier> constraints,
             TypeDefinition baseType,
             AccessModifier access) =>
             new(name,
@@ -19,7 +20,7 @@ namespace Hl7.Cql.Model
                 baseType,
                 access);
         public static GenericTypeDefinition Create(GenericTypeDefinition template,
-            IDictionary<GenericArgumentSpecifier, TypeSpecifier> argumentBindings)
+            Dictionary<GenericArgumentSpecifier, TypeSpecifier> argumentBindings)
         {
             var orderedArgs = new TypeSpecifier[argumentBindings.Count];
             foreach (var kvp in argumentBindings)
@@ -27,7 +28,7 @@ namespace Hl7.Cql.Model
                 int index = -1;
                 for(int i = 0; i < template.Arguments.Count; i++)
                 {
-                    if (template.Arguments[i].Equals(kvp.Key.Argument))
+                    if (template.Arguments[i].Equals(kvp.Key))
                     {
                         index = i;
                         break;
@@ -37,7 +38,7 @@ namespace Hl7.Cql.Model
                     orderedArgs[index] = kvp.Value;
                 else throw new ArgumentException($"Argument {kvp.Key.Argument} is not an argument of template {template.Name}");
             }
-            return new GenericTypeDefinition(template.Name, template.Model, orderedArgs, null, template.BaseType!, AccessModifier.Public);
+            return new GenericTypeDefinition(template.Name, template.Model!, orderedArgs, null, template.BaseType!, AccessModifier.Public);
         }
 
         private GenericTypeDefinition(string name,
@@ -69,8 +70,10 @@ namespace Hl7.Cql.Model
         public GenericTypeDefinition MakeGenericType(params TypeSpecifier[] arguments) =>
             IsTemplate switch
             {
-                true => new(Name, Model, arguments, null, BaseType!, Access),
+                true => new(Name, Model!, arguments, null, BaseType!, Access),
                 false => throw new InvalidOperationException("This is not a generic template.")
             };
+
+        public override string ToString() => $"{Name}<{string.Join(", ", Arguments)}>";
     }
 }

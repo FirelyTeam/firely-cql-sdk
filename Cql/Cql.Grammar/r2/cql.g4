@@ -5,11 +5,18 @@ grammar cql;
  Version 2.0 - Trial Use
  */
 
-modelDefinitions: usingDefinition | typeDefinition;
+modelDefinition: usingDefinition | typeDefinition;
 
-model: modelDefinition modelDefinitions* EOF;
+modelStatement:
+	functionDefinition
+	| genericFunctionDefinition
+	| operatorDefinition
+	| genericOperatorDefinition
+	| conversionDefinition;
 
-modelDefinition:
+model: modelIdentifier modelDefinition* modelStatement* EOF;
+
+modelIdentifier:
 	'model' qualifiedIdentifier 'version' versionSpecifier ':' modelUri;
 
 modelUri: STRING;
@@ -41,10 +48,44 @@ genericArguments: identifier (',' identifier)*;
 
 genericTypeConstraint: 'where' identifier 'is' typeSpecifier;
 
+operatorDefinition:
+	'define' accessModifier? 'operator' overloadableOperator '(' operandDefinition (
+		',' operandDefinition
+	)* ')' returnClause? ':' functionBody;
+
+genericOperatorDefinition:
+	'define' accessModifier? 'generic' 'operator' overloadableOperator '<' genericArguments '>' '('
+		operandDefinition (',' operandDefinition)* ')' returnClause? ':' functionBody;
+
+functionDefinition:
+	'define' accessModifier? 'function' identifier '(' operandDefinition (
+		',' operandDefinition
+	)* ')' returnClause? ':' functionBody;
+
+genericFunctionDefinition:
+	'define' accessModifier? 'generic' 'function' identifier '<' genericArguments '>' '('
+		operandDefinition (',' operandDefinition)* ')' returnClause? ':' functionBody;
+
+functionBody: expression | 'external';
+
+overloadableOperator: binaryOperator;
+
+operandDefinition: identifier typeSpecifier;
+
+conversionDefinition:
+	'define' accessModifier? conversionType 'conversion' 'from' fromType identifier 'to' toType ':'
+		functionBody;
+
+fromType: typeSpecifier;
+toType: typeSpecifier;
+
+conversionType: 'implicit' | 'explicit';
+
 /*
  * Library
  */
-libraryDefinitions:
+
+libraryDefinition:
 	usingDefinition
 	| includeDefinition
 	| codesystemDefinition
@@ -53,9 +94,18 @@ libraryDefinitions:
 	| conceptDefinition
 	| parameterDefinition;
 
-library: libraryDefinition libraryDefinitions* EOF;
+libraryStatement:
+	expressionDefinition
+	| functionDefinition
+	| genericFunctionDefinition
+	| operatorDefinition
+	| genericOperatorDefinition
+	| conversionDefinition;
 
-libraryDefinition:
+library:
+	libraryIdentifier libraryDefinition* libraryStatement* EOF;
+
+libraryIdentifier:
 	'library' qualifiedIdentifier ('version' versionSpecifier)?;
 
 usingDefinition:
@@ -88,20 +138,18 @@ valuesetDefinition:
 	)? codesystems?;
 
 codesystems:
-	'codesystems' '{' codesystemIdentifier (
-		',' codesystemIdentifier
+	'codesystems' '{' qualifiedIdentifier (
+		',' qualifiedIdentifier
 	)* '}';
 
-codesystemIdentifier: (libraryIdentifier '.')? identifier;
-
-libraryIdentifier: identifier;
-
 codeDefinition:
-	accessModifier? 'code' identifier ':' codeId 'from' codesystemIdentifier displayClause?;
+	accessModifier? 'code' identifier ':' codeId 'from' codeSystemIdentifier displayClause?;
+
+codeSystemIdentifier: qualifiedIdentifier;
 
 conceptDefinition:
-	accessModifier? 'concept' identifier ':' '{' codeIdentifier (
-		',' codeIdentifier
+	accessModifier? 'concept' identifier ':' '{' codeSystemIdentifier (
+		',' codeSystemIdentifier
 	)* '}' displayClause?;
 
 qualifiedIdentifier: identifier ('.' identifier)*;
@@ -113,8 +161,6 @@ identifier:
 	| keywordIdentifier;
 
 keywordIdentifier: 'code' | 'version' | 'display';
-
-codeIdentifier: (libraryIdentifier '.')? identifier;
 
 codesystemId: STRING;
 
@@ -147,14 +193,21 @@ namedTypeSpecifier: qualifiedIdentifier;
 genericTypeSpecifier:
 	qualifiedIdentifier '<' typeSpecifier (',' typeSpecifier)* '>';
 
+expressionDefinition:
+	'define' accessModifier? identifier asClause? ':' expression;
+
+asClause: 'as' typeSpecifier;
+
 // expressions
 
 expression:
-	functionInvocation						# functionInvocationExpression
-	| qualifiedIdentifier					# identifierExpression
-	| '(' expression ')'					# parentheticalExpression
-	| expression binaryOperator expression	# binaryExpression
-	| literal								# literalExpression;
+	functionInvocation										# functionInvocationExpression
+	| qualifiedIdentifier									# identifierExpression
+	| '(' expression ')'									# parentheticalExpression
+	| 'if' expression 'then' expression 'else' expression	# ifThenElseExpression
+	| expression binaryOperator expression					# binaryExpression
+	| retrieve												# retrieveExpression
+	| literal												# literalExpression;
 
 functionInvocation:
 	qualifiedIdentifier '(' expression (',' expression)* ')' returnClause?;
@@ -162,30 +215,30 @@ functionInvocation:
 returnClause: 'returns' typeSpecifier;
 
 binaryOperator:
-	'+'
-	| '-'
-	| '*'
-	| '/'
-	| '%'
-	| '='
-	| '!='
-	| '<'
-	| '<='
-	| '>'
-	| '>='
-	| 'and'
-	| 'or';
+	'+'		# addOperator
+	| '-'	# subtractOperator
+	| '*'	# multiplyOperator
+	| '/'	# divideOperator
+	| '%'	# modOperator
+	| '='	# equalOperator
+	| '!='	# notEqualOperator
+	| '<'	# lessOperator
+	| '<='	# lessEqualOperator
+	| '>'	# greaterOperator
+	| '>='	# greaterEqualOperator
+	| 'and'	# andOperator
+	| 'or'	# orOperator;
 
-literal:
-	'null'
-	| 'true'
-	| 'false'
-	| STRING
-	| NUMBER
-	| DATE
-	| DATETIME
-	| TIME
-	| quantity;
+literal: ('true' | 'false')	# booleanLiteral
+	| 'null'				# nullLiteral
+	| STRING				# stringLiteral
+	| NUMBER				# numberLiteral
+	| LONGNUMBER			# longNumberLiteral
+	| DATETIME				# dateTimeLiteral
+	| DATE					# dateLiteral
+	| TIME					# timeLiteral
+	| quantity				# quantityLiteral
+	| ratio					# ratioLiteral;
 
 quantity: quantityValue unit;
 
@@ -193,12 +246,33 @@ quantityValue: NUMBER;
 
 unit: STRING;
 
+ratio: quantity ':' quantity;
+
+retrieve:
+	'[' (contextIdentifier '->')? namedTypeSpecifier (
+		':' (codePath codeComparator)? terminology
+	)? ']';
+
+contextIdentifier: qualifiedIdentifier;
+codePath: simplePath;
+codeComparator: 'in' | '=' | '~';
+terminology: expression;
+
+simplePath:
+	identifier
+	| simplePath '.' identifier
+	| simplePath '[' index ']';
+
+index: STRING | NUMBER;
+
 // lexicals
 
 DATE: '@' DATEFORMAT;
 
 DATETIME:
 	'@' DATEFORMAT 'T' (TIMEFORMAT TIMEZONEOFFSETFORMAT?)?;
+
+LONGNUMBER: [0-9]+ 'L';
 
 TIME: '@' 'T' TIMEFORMAT;
 

@@ -13,6 +13,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Cql.Grammar\Cql.Grammar.csproj" />
 		<ProjectReference Include="..\Cql.Model\Cql.Model.csproj" />
+		<ProjectReference Include="..\Cql.Primitives\Cql.Primitives.csproj" />
 		<InternalsVisibleTo Include="CqlToElm2Tests" />
 	</ItemGroup>
 
