@@ -6,11 +6,14 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Runtime.Serialization;
+
 namespace Hl7.Cql.Runtime;
 
 /// <summary>
 /// Represents an identifier for a CQL library.
 /// </summary>
+[JsonConverter(typeof(StringEncapsulatedValueJsonConverter<CqlLibraryIdentifier>))]
 public readonly record struct CqlLibraryIdentifier :
     IParsable<CqlLibraryIdentifier>,
     IComparable<CqlLibraryIdentifier>,
