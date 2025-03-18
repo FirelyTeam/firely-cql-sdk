@@ -55,7 +55,7 @@ internal class ResourceHelper
                 valueSets.Add(valueSet);
         }
 
-        var vsd = valueSets.ToValueSetDictionary(false);
+        var vsd = valueSets.ToValueSetDictionary();
         return vsd;
     }
 

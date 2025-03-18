@@ -43,7 +43,7 @@ Hl7.Cql.Abstractions.ICqlComparer<T>.GetHashCode(T x) -> int
 Hl7.Cql.Abstractions.IEquivalenceComparer
 Hl7.Cql.Abstractions.IEquivalenceComparer.Equivalent(object? x, object? y, string? precision) -> bool
 Hl7.Cql.Abstractions.IEquivalenceComparer<T>
-Hl7.Cql.Abstractions.IEquivalenceComparer<T>.Equivalent(T x, T y, string? precision) -> bool
+Hl7.Cql.Abstractions.IEquivalenceComparer<T>.Equivalent(T? x, T? y, string? precision) -> bool
 Hl7.Cql.Abstractions.IEquivalentable<T>
 Hl7.Cql.Abstractions.IEquivalentable<T>.Equivalent(T? other, string? precision) -> bool
 Hl7.Cql.Abstractions.ILibrary

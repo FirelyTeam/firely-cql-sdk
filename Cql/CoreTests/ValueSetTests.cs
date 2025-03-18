@@ -1,90 +1,129 @@
-﻿using Hl7.Cql.Fhir;
-using Hl7.Cql.Fhir.Extensions;
-using Hl7.Fhir.Model;
+﻿#nullable enable
 
-namespace CoreTests
+using Hl7.Cql.Fhir;
+using Hl7.Cql.Primitives;
+using Hl7.Cql.ValueSets;
+using Hl7.Fhir.Specification.Source;
+
+namespace CoreTests;
+
+[TestClass]
+public class ValueSetTests
 {
-    [TestClass]
-    public class ValueSetTests
+    private static readonly CqlCode[] TestCodesA = new[] {
+        new CqlCode("a", "http://nu.nl"),
+        new CqlCode("b", "http://nu.nl"),
+        new CqlCode("c", "HTTP://nu.nl"),
+        new CqlCode("d", null) };
+
+    private static readonly CqlCode[] TestCodesB = new[] {
+        new CqlCode("e", "http://nu.nl", display: "Letters"),
+        new CqlCode("f", "http://nu.nl", display: "LETTERS"),
+        new CqlCode("g", null, display: "Letters"),
+        new CqlCode("h", "http://nu.nl"),
+        new CqlCode("h", "http://nu.nl", display: "Letters"),
+    };
+
+
+    [TestMethod]
+    public void CanReturnAllCodeInValueSet()
     {
-        [TestMethod]
-        public void Intensional_Value_Set()
-        {
-            string[] files =
-            [
-                @"Input\ValueSets\intensional-value-set.json",
-                @"Input\ValueSets\2.16.840.1.113883.3.464.1004.1009.json",
-                @"Input\ValueSets\2.16.840.1.113883.3.464.1004.1013.json"
-            ];
-            var valueSets = files.Select(path =>
-            {
-                using var fs = File.OpenRead(path);
-                var vs = fs.DeserializeJsonToFhir<ValueSet>();
-                return vs;
-            }).ToArray();
+        var dict = buildDict();
+        dict.TryGetCodesInValueSet("http://valuesetA", out var vsA).Should().BeTrue();
+        allCodesInA(vsA!);
 
-            var loader = new ValueSetLoader(valueSets, false);
-            var vsd = loader.Load();
+        dict.TryGetCodesInValueSet("http://valuesetB", out var vsB).Should().BeTrue();
+        allCodesInB(vsB!);
+    }
 
-            Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1009", out var codes1009));
-            Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1013", out var codes1013));
-            Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/intensional-value-set", out var intensional));
+    private void allCodesInA(IEnumerable<CqlCode> vs)
+    {
+        TestCodesA.All(c => vs.Contains(c)).Should().BeTrue();
+        vs.All(c => TestCodesA.Contains(c)).Should().BeTrue();
+    }
 
-            Assert.IsTrue(codes1009.All(c => intensional.Contains(c)));
-            Assert.IsTrue(codes1013.All(c => intensional.Contains(c)));
-        }
+    private void allCodesInB(IEnumerable<CqlCode> vs)
+    {
+        TestCodesB.All(c => vs.Contains(c)).Should().BeTrue();
+        vs.All(c => TestCodesB.Contains(c)).Should().BeTrue();
+    }
 
-        [TestMethod]
-        public void Intensional_Value_Set_2_Levels()
-        {
-            string[] files =
-            [
-                @"Input\ValueSets\intensional-value-set-2.json",
-                @"Input\ValueSets\intensional-value-set.json",
-                @"Input\ValueSets\2.16.840.1.113883.3.464.1004.1009.json",
-                @"Input\ValueSets\2.16.840.1.113883.3.464.1004.1013.json"
-            ];
-            var valueSets = files.Select(path =>
-            {
-                using var fs = File.OpenRead(path);
-                var vs = fs.DeserializeJsonToFhir<ValueSet>();
-                return vs;
-            }).ToArray();
+    [TestMethod]
+    public void CanGetFacade()
+    {
+        var dict = buildDict();
+        var f = dict.GetValueSet("http://valuesetA");
+        allCodesInA(f!);
+    }
 
-            var loader = new ValueSetLoader(valueSets, false);
-            var vsd = loader.Load();
+    private HashValueSetDictionary buildDict()
+    {
+        var dict = new HashValueSetDictionary();
 
-            Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1009", out var codes1009));
-            Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1013", out var codes1013));
-            Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/intensional-value-set", out var intensional));
-            Assert.IsTrue(codes1009.All(c => intensional.Contains(c)));
-            Assert.IsTrue(codes1013.All(c => intensional.Contains(c)));
+        dict.Add("http://valuesetA", TestCodesA);
+        dict.Add("http://valuesetB", TestCodesB);
 
-            Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/intensional-value-set-2", out var intensional2));
-            Assert.IsTrue(codes1009.All(c => intensional2.Contains(c)));
-            Assert.IsTrue(codes1013.All(c => intensional2.Contains(c)));
+        return dict;
+    }
 
-        }
+    [TestMethod]
+    public void HashDictonaryInternsCodes()
+    {
+        var dict = new HashValueSetDictionary();
 
-        [TestMethod]
-        public void Intensional_Value_Set_Cycle()
-        {
-            string[] files =
-            [
-                @"Input\ValueSets\intensional-value-set-3.json",
-                @"Input\ValueSets\intensional-value-set-4.json"
+        dict.Add("http://valuesetA", [new CqlCode("x", "http://nu.nl", "1.0"), new CqlCode("y", "http://nu.nl")]);
+        dict.Add("http://valuesetB", [new CqlCode("x", "http://nu.nl"), new CqlCode("y", "http://nu.nl")]);
 
-            ];
-            var valueSets = files.Select(path =>
-            {
-                using var fs = File.OpenRead(path);
-                var vs = fs.DeserializeJsonToFhir<ValueSet>();
-                return vs;
-            }).ToArray();
+        _ = dict.TryGetCodesInValueSet("http://valuesetA", out var vsA);
+        _ = dict.TryGetCodesInValueSet("http://valuesetB", out var vsB);
 
-            var loader = new ValueSetLoader(valueSets, false);
+        ReferenceEquals(vsA!.Single(c => c.code == "y"), vsB!.Single(c => c.code == "y")).Should().BeTrue();
+        ReferenceEquals(vsA!.Single(c => c.code == "x"), vsB!.Single(c => c.code == "x")).Should().BeFalse();
+    }
 
-            Assert.ThrowsException<InvalidOperationException>(() => loader.Load());
-        }
+    [TestMethod]
+    public void Intensional_Value_Set()
+    {
+        var resolver = new DirectorySource(@"Input\ValueSets");
+        var vsd = new ValueSetSource(resolver);
+
+        Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1009", out var codes1009));
+        Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1013", out var codes1013));
+        Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/intensional-value-set", out var intensional));
+
+        // Note that this tests uses *reference equality* to test membership, which only works because we're storing
+        // all codes into the HashValueSetDictionary, which interns all codes.
+        Assert.IsTrue(codes1009!.All(c => intensional!.Contains(c)));
+        Assert.IsTrue(codes1013!.All(c => intensional!.Contains(c)));
+    }
+
+    [TestMethod]
+    public void Intensional_Value_Set_2_Levels()
+    {
+        var resolver = new DirectorySource(@"Input\ValueSets");
+        var vsd = new ValueSetSource(resolver);
+
+        Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1009", out var codes1009));
+        Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1013", out var codes1013));
+        Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/intensional-value-set", out var intensional));
+
+        // Note that this tests uses *reference equality* to test membership, which only works because we're storing
+        // all codes into the HashValueSetDictionary, which interns all codes.
+        Assert.IsTrue(codes1009!.All(c => intensional!.Contains(c)));
+        Assert.IsTrue(codes1013!.All(c => intensional!.Contains(c)));
+
+        Assert.IsTrue(vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/intensional-value-set-2", out var intensional2));
+        Assert.IsTrue(codes1009!.All(c => intensional2!.Contains(c)));
+        Assert.IsTrue(codes1013!.All(c => intensional2!.Contains(c)));
+
+    }
+
+    [TestMethod, Ignore("Until we have SDK 5.4, which will detect cycles.")]
+    public void Intensional_Value_Set_Cycle()
+    {
+        var resolver = new DirectorySource(@"Input\ValueSets");
+        var vsd = new ValueSetSource(resolver);
+
+        Assert.ThrowsException<InvalidOperationException>(() => vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/intensional-value-set-3", out var _));
     }
 }

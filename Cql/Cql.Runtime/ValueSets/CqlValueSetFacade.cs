@@ -13,7 +13,6 @@ namespace Hl7.Cql.ValueSets
     /// <summary>
     /// Implements <see cref="IValueSetFacade"/>.
     /// </summary>
-    [DebuggerDisplay("{Uri}")]
     internal class CqlValueSetFacade : IValueSetFacade
     {
         /// <summary>
@@ -46,39 +45,14 @@ namespace Hl7.Cql.ValueSets
         private readonly string _canonical;
         private readonly IValueSetDictionary _valuesets;
 
-        /// <summary>
-        /// Returns <see langword="true"/> if <paramref name="code"/> is in this value set.
-        /// </summary>
-        /// <param name="code">The code to check.</param>
-        /// <returns><see langword="true"/> if <paramref name="code"/> is in this value set.</returns>
-        public bool? IsCodeInValueSet(CqlCode? code)
-        {
-            if (code == null || code.code == null)
-                return null;
-            if (code.system != null)
-            {
-                var @in = _valuesets.IsCodeInValueSet(_canonical, code.code, code.system);
-                return @in;
-            }
-            else
-            {
-                var @in = _valuesets.IsCodeInValueSet(_canonical, code.code);
-                return @in;
-            }
-        }
+        /// <inheritdoc/>
+        public bool IsCodeInValueSet(CqlCode code) => _valuesets.IsCodeInValueSet(_canonical, code);
 
-        /// <summary>
-        /// Returns <see langword="true"/> if <paramref name="code"/> is in this value set.
-        /// </summary>
-        /// <param name="code">The code to check.</param>
-        /// <param name="system">The code system to check.</param>
-        /// <returns><see langword="true"/> if the code is in this value set.</returns>
-        public bool? IsCodeInValueSet(string? code, string? system)
-        {
-            if (code == null || system == null)
-                return null;
-            else return _valuesets.IsCodeInValueSet(_canonical, code, system);
-        }
+        /// <inheritdoc/>
+        public bool IsCodeInValueSet(string code, string? system) => _valuesets.IsCodeInValueSet(_canonical, code, system);
+
+        /// <inheritdoc/>
+        public bool IsCodeInValueSet(string code) => _valuesets.IsCodeInValueSet(_canonical, code);
 
         /// <summary>
         /// Enumerates the code in this value set facade.
