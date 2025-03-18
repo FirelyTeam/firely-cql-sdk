@@ -16,21 +16,6 @@ namespace Hl7.Cql.ValueSets
     internal class CqlValueSetFacade : IValueSetFacade
     {
         /// <summary>
-        /// Creates an interface for a <paramref name="valueSet"/> from a <see cref="IValueSetDictionary"/>.
-        /// </summary>
-        /// <param name="valueSet">The value set for this facade.</param>
-        /// <param name="valueSets">The  <see cref="IValueSetDictionary"/> with all valuesets.</param>
-        /// <exception cref="ArgumentNullException">If any argument is <see langword="null" />.</exception>
-        /// <exception cref="ArgumentException">If <paramref name="valueSet"/> has a <see langword="null" /> <see cref="CqlVocabulary.id"/> property.</exception>
-        public CqlValueSetFacade(CqlValueSet valueSet, IValueSetDictionary valueSets)
-        {
-            if (valueSet is null)
-                throw new ArgumentNullException(nameof(valueSet));
-            _canonical = valueSet.id ?? throw new ArgumentException("Value set is missing an ID", nameof(valueSet));
-            _valuesets = valueSets ?? throw new ArgumentNullException(nameof(valueSets));
-        }
-
-        /// <summary>
         /// Creates an interface for a <paramref name="id"/> from a <see cref="IValueSetDictionary"/>.
         /// </summary>
         /// <param name="id">The canonica of the value set for this facade.</param>

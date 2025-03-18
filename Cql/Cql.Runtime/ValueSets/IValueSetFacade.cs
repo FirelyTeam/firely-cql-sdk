@@ -37,7 +37,7 @@ namespace Hl7.Cql.ValueSets
         /// Returns <see langword="true"/> if <paramref name="code"/> is in this value set.
         /// </summary>
         /// <param name="code">The code to check.</param>
-        /// <returns><see langword="true"/> if <paramref name="code"/> is in this value set, or <see langword="null"/> if <paramref name="code"/> is <see langword="null"/>.</returns>
+        /// <returns><see langword="true"/> if <paramref name="code"/> is in this value set.</returns>
         bool IsCodeInValueSet(CqlCode code);
     }
 }

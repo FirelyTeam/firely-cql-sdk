@@ -4,6 +4,7 @@ using Hl7.Cql.Fhir;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Specification.Source;
+using Hl7.Fhir.Specification.Terminology;
 
 namespace CoreTests;
 
@@ -118,12 +119,12 @@ public class ValueSetTests
 
     }
 
-    [TestMethod, Ignore("Until we have SDK 5.4, which will detect cycles.")]
+    [TestMethod]
     public void Intensional_Value_Set_Cycle()
     {
         var resolver = new DirectorySource(@"Input\ValueSets");
         var vsd = new ValueSetSource(resolver);
 
-        Assert.ThrowsException<InvalidOperationException>(() => vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/intensional-value-set-3", out var _));
+        Assert.ThrowsException<TerminologyServiceException>(() => vsd.TryGetCodesInValueSet("https://www.ncqa.org/fhir/valueset/intensional-value-set-3", out _));
     }
 }
