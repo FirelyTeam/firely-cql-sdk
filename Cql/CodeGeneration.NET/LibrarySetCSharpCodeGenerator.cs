@@ -318,6 +318,7 @@ internal partial class LibrarySetCSharpCodeGenerator
             string libraryName = LibraryWriter.LibraryName;
             LambdaExpression overload = Overload;
             TupleMetadataBuilder tupleMetadataBuilder = LibraryWriter.LibrarySetWriter.TupleMetadataBuilder;
+            var isDef = IsDefinition(overload);
 
             var vng = new VariableNameGenerator(Enumerable.Empty<string>(), postfix: "_");
 
@@ -334,48 +335,30 @@ internal partial class LibrarySetCSharpCodeGenerator
 
             overload = Expression.Lambda(visitedBody, parameters);
 
-            var isDef = IsDefinition(overload);
-
-            string? valueSetId =
-                overload.ReturnType == typeof(CqlValueSet)
-                && overload.Body is NewExpression @new
-                && @new.Arguments[0] is ConstantExpression { Value: string s }
-                    ? s
-                    : null;
-
-            var definitionToCSharpCodeProcessor =
-                new LibraryDefinitionCSharpCodeGenerator(
-                    tupleMetadataBuilder,
-                    libraryName,
-                    LibraryWriter.LibrarySetWriter.TypeToCSharpConverter,
-                    IndentedTextWriter.Indent);
-
-            if (valueSetId is not null)
-            {
-                IndentedTextWriter.Write($"private readonly CqlValueSet _{MethodName} = ");
-                definitionToCSharpCodeProcessor.WriteMethodBody(IndentedTextWriter.TextWriter, overload);
-                IndentedTextWriter.WriteLineNoIndent(";");
-            }
-
             if (isDef)
             {
                 IndentedTextWriter.WriteLine($"[CqlDeclaration({CqlName.QuoteString()})]");
                 WriteTags();
+
+                if (overload.ReturnType == typeof(CqlValueSet))
+                {
+                    if (overload.Body is NewExpression @new)
+                    {
+                        var arg = @new.Arguments[0];
+                        if (arg is ConstantExpression { Value: string valueSetId })
+                        {
+                            IndentedTextWriter.WriteLine($"[CqlValueSet({valueSetId.QuoteString()})]");
+                        }
+                    }
+                }
             }
 
-            if (valueSetId is not null)
-            {
-                IndentedTextWriter.WriteLine($"[CqlValueSet({valueSetId.QuoteString()})]");
-                IndentedTextWriter.WriteIndent();
-                definitionToCSharpCodeProcessor.WriteMethodSignature(IndentedTextWriter.TextWriter, overload, MethodName, "public");
-                IndentedTextWriter.WriteLineNoIndent($"(CqlContext _) => _{MethodName};");
-            }
-            else
-            {
-                IndentedTextWriter.WriteIndent();
-                definitionToCSharpCodeProcessor.WriteMethod(IndentedTextWriter.TextWriter, overload, MethodName, "public");
-                IndentedTextWriter.TextWriter.WriteLine();
-            }
+            var definitionToCSharpCodeProcessor = new LibraryDefinitionCSharpCodeGenerator(
+                tupleMetadataBuilder,
+                libraryName,
+                LibraryWriter.LibrarySetWriter.TypeToCSharpConverter,
+                IndentedTextWriter.Indent);
+            definitionToCSharpCodeProcessor.WriteMethod(IndentedTextWriter.TextWriter, overload, MethodName, "public");
         }
 
         private void WriteTags()
