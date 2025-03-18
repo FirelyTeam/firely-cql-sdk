@@ -9,7 +9,6 @@ using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
-using System;
 
 namespace CLI
 {

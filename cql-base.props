@@ -31,6 +31,7 @@
 		<!-- CqlToElmEnabled and ElmToCSharpEnabled declared in BuildArtifacts.csproj, cql-base.props, cql-demo.props  -->
 		<!-- ElmToCSharpEnabled must be true here for build to pass -->
 		<CqlToElmEnabled>false</CqlToElmEnabled>
+		<!-- <ElmToCSharpEnabled>false</ElmToCSharpEnabled> -->
 		<ElmToCSharpEnabled Condition="'$(Configuration)' != 'Release'">false</ElmToCSharpEnabled>
 		<ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release'">true</ElmToCSharpEnabled>
 	</PropertyGroup>
