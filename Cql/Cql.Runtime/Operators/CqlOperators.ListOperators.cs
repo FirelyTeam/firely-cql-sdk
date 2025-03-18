@@ -816,30 +816,23 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region In
-        public bool? In<T>(T element, IEnumerable<T> argument)
-        {
-            if ((object)element! == null)
-                return null;
-            if (argument == null)
-                return false;
-            else
+        public bool? In<T>(T element, IEnumerable<T>? argument) =>
+            (element, argument) switch
             {
-                return argument.Any(t => Compare(element, t!, null) == 0);
-            }
-
-        }
-
-        public bool? CodeInList(CqlCode? element, IEnumerable<CqlCode>? argument)
-        {
-            if (element is null) return null;
-
-            return argument switch
-            {
-                null => false,
-                IValueSetFacade facade => facade.IsCodeInValueSet(element),
-                _ => argument.Any(t => Compare(element, t, null) == 0)
+                (null, _)                              => null,
+                (_, null)                              => false,
+                (CqlCode code, IValueSetFacade facade) => facade.IsCodeInValueSet(code),
+                _                                      => argument.Any(t => Compare(element, t!, null) == 0)
             };
-        }
+
+        public bool? CodeInList(CqlCode? element, IEnumerable<CqlCode>? argument) =>
+            (element, argument) switch
+            {
+                (null, _)                              => null,
+                (_, null)                              => false,
+                (CqlCode code, IValueSetFacade facade) => facade.IsCodeInValueSet(code),
+                _                                      => argument.Any(t => Compare(element, t!, null) == 0)
+            };
 
         #endregion
 
