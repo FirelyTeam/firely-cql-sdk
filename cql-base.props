@@ -62,7 +62,7 @@
 
 		All usages of JetBrains.Annotations attributes are erased from metadata by default, which means no actual binary
 		reference to 'JetBrains.Annotations.dll' assembly is produced. If you need to preserve these attributes in
-		metadata, just define 'JETBRAINS_ANNOTATIONS' conditional compilation symbol in your projects.
+		metadata, just define  'JETBRAINS_ANNOTATIONS' conditional compilation symbol in your projects.
 		see more: https://www.nuget.org/packages/JetBrains.Annotations/
 		-->
 		<PackageReference Include="JetBrains.Annotations" Version="2024.3.0" />

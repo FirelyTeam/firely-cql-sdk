@@ -10,7 +10,7 @@ using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
-using Hl7.Cql.ValueSets;
+using Hl7.Cql.ValueSets;                                      
 
 namespace Hl7.Cql.Compiler;
 partial class CqlOperatorsBinder
