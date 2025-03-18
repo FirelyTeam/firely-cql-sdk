@@ -552,26 +552,50 @@ namespace Hl7.Cql.CodeGeneration.NET
             return funcSb.ToString();
         }
 
-        public string ProcessDefinition(
-            LambdaExpression function,
-            string name,
-            string specifiers)
+        public void WriteMethodParametersAndBody(
+            TextWriter sw,
+            LambdaExpression function)
         {
-            var funcSb = new StringBuilder();
-
-            funcSb.Append(specifiers + " ");
-            funcSb.Append(TypeToCSharpConverter.ToCSharp(function.ReturnType) + " ");
-            funcSb.Append(name);
-
-            var lambda = ConvertLambdaExpression(function, functionMode: true);
-            funcSb.Append(lambda);
+            sw.Write(ConvertLambdaExpression(function, functionMode: true));
 
             if (function.Body is not BlockExpression)
-                funcSb.AppendLine(";");
+                sw.WriteLine(";");
             else
-                funcSb.AppendLine();
+                sw.WriteLine();
+        }
 
-            return funcSb.ToString();
+        public void WriteMethodBody(
+            TextWriter sw,
+            LambdaExpression function)
+        {
+            sw.Write(ConvertExpression(function.Body));
+            // if (function.Body is not BlockExpression)
+            //     sw.WriteLine(";");
+            // else
+            //     sw.WriteLine();
+        }
+
+        public void WriteMethod(
+            TextWriter sw,
+            LambdaExpression function,
+            string name,
+            string modifiers)
+        {
+            WriteMethodSignature(sw, function, name, modifiers);
+            WriteMethodParametersAndBody(sw, function);
+        }
+
+        public void WriteMethodSignature(
+            TextWriter sw,
+            LambdaExpression function,
+            string name,
+            string modifiers)
+        {
+            sw.Write(modifiers);
+            sw.Write(' ');
+            sw.Write(TypeToCSharpConverter.ToCSharp(function.ReturnType));
+            sw.Write(' ');
+            sw.Write(name);
         }
 
         private string ConvertUnaryExpression(

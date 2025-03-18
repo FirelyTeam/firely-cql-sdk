@@ -58,7 +58,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                         results.Add(library.GetVersionedIdentifier()!, assemblyBinaryWithSourceCode);
                         return (library, assemblyBinaryWithSourceCode);
                     },
-                    buildExceptionHandlingStrategy);
+                    buildExceptionHandlingStrategy,
+                    // When exceptions are thrown, we just return the library and the source code
+                    t => (t.library, new AssemblyBinaryWithSourceCode(null, $"{t.library.GetVersionedIdentifier()}.cs",t.csharp)));
         }
 
         private static CSharpCompilationOptions CreateCSharpCompilationOptions(

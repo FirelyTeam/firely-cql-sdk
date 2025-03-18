@@ -33,13 +33,14 @@ internal static class EnumerableExceptionHandlingExtensions
     public static IEnumerable<TReturn> TrySelect<T, TReturn>(
         this IEnumerable<T> inputs,
         Func<T, TReturn> selector,
-        BatchProcessExceptionHandlingStrategyBuilder<T>? buildExceptionHandlingStrategy = null)
+        BatchProcessExceptionHandlingStrategyBuilder<T>? buildExceptionHandlingStrategy = null,
+        Func<T, TReturn>? selectOnException = null)
     {
-        bool firstException = true;
+        bool firstException = true, breakLoop = false;
         BatchProcessExceptionHandlingStrategy<T> strategy = default;
         foreach (var input in inputs)
         {
-            TReturn next;
+            TReturn next = default!;
             try
             {
                 next = selector(input);
@@ -55,15 +56,30 @@ internal static class EnumerableExceptionHandlingExtensions
                 }
 
                 strategy.ExceptionHandler?.Invoke(input, e, strategy.ExceptionContinuation);
-                switch (strategy.ExceptionContinuation)
+
+                if (strategy.ExceptionContinuation is BatchProcessExceptionContinuation.Throw)
+                    throw;
+
+                if (selectOnException is not null)
                 {
-                    case BatchProcessExceptionContinuation.Continue: continue;
-                    case BatchProcessExceptionContinuation.Break: yield break;
+                    next = selectOnException(input);
+                    breakLoop = strategy.ExceptionContinuation is BatchProcessExceptionContinuation.Break;
                 }
-                throw;
+                else
+                {
+                    switch (strategy.ExceptionContinuation)
+                    {
+                        case BatchProcessExceptionContinuation.Continue: continue;
+                        case BatchProcessExceptionContinuation.Break: yield break;
+                        default: throw new UnreachableException(); // Should never happen
+                    }
+                }
             }
 
             yield return next;
+
+            if (breakLoop)
+                break;
         }
     }
 }

@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 
@@ -15,6 +16,24 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 /// </summary>
 public static partial class ElmToolkitExtensions
 {
+    /// <summary>
+    /// Gets the C# results of ELM to assembly conversions, ignores the assembly binaries and debug symbols.
+    /// </summary>
+    /// <param name="elmToolkit">The <see cref="ElmToolkit"/> instance.</param>
+    /// <returns>An enumerable of the library identifiers and the associated C#.</returns>
+    internal static IEnumerable<(CqlVersionedLibraryIdentifier libraryIdentifier, string csharpSourceCode)> GetElmToCSharpSourceCodeResults(
+        this ElmToolkit elmToolkit) =>
+        elmToolkit.Conversions.Values
+                  .SelectWhere(t => t switch
+                  {
+                      {
+                              LibraryIdentifier: { } libId,
+                              ResultCSharpSourceCode: { } csharp,
+                          } => (true, (libId, csharp)),
+                      _ => default,
+                  });
+
+
     /// <summary>
     /// Gets the results of ELM to assembly conversions.
     /// </summary>
