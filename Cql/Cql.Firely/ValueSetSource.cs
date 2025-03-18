@@ -88,9 +88,6 @@ public class ValueSetSource : IValueSetDictionary
         {
             if (!vs.HasExpansion)
             {
-                if (_resourceResolver is null)
-                    throw new InvalidOperationException($"ValueSet {vs.Url} has no expansion, and there is no resource resolver configured to generate one.");
-
                 var expander = BuildExpander();
                 await expander.ExpandAsync(vs);
             }
@@ -199,7 +196,10 @@ public static class ValueSetSourceExtensions
     /// </summary>
     public static IValueSetDictionary ToValueSetDictionary(this IEnumerable<ValueSet> values)
     {
-        var result = new ValueSetSource();
+        // Also make sure the valuesets are available via a resource resolver, so the ValueSetSource
+        // can expand the valuesets by reaching out to this set.
+        var valueSetResolver = new InMemoryResourceResolver(values);
+        var result = new ValueSetSource(resourceResolver: valueSetResolver);
         _ = TaskHelper.Await(() => result.Add(values));
 
         return result;
