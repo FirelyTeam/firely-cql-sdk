@@ -24,8 +24,7 @@ namespace CoreTests
             var definitions = libraryExpressionBuilderScoped.ProcessLibrary(elmPackage);
             QueriesDefinitions = definitions.CompileAll();
             ValueSets = new HashValueSetDictionary();
-            ValueSets.Add("http://hl7.org/fhir/ValueSet/example-expansion",
-                new CqlCode("code", "system", null, null));
+            ValueSets.Add("http://hl7.org/fhir/ValueSet/example-expansion", [new CqlCode("code", "system")]);
 
 
             elm = new FileInfo(@"Input\ELM\Test\Aggregates-1.0.0.json");

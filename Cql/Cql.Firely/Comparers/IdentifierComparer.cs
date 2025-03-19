@@ -40,11 +40,9 @@ namespace Hl7.Cql.Fhir.Comparers
         protected override bool EquivalentImpl(Identifier x, Identifier y, string? precision) =>
             (Compare(x, y, precision) ?? -1) == 0;
 
-        public override int GetHashCode(Identifier? x)
-        {
-            if (x == null || x.Value == null)
-                return typeof(Identifier).GetHashCode();
-            else return $"{x.Value}{x.System}".GetHashCode();
-        }
+        public override int GetHashCode(Identifier? x) =>
+            x?.Value == null
+                ? typeof(Identifier).GetHashCode()
+                : HashCode.Combine(x.Value, x.System);
     }
 }

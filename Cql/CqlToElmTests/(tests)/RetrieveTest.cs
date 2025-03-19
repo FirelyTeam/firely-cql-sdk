@@ -2,6 +2,7 @@ using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Fhir.Model;
+using Task=System.Threading.Tasks.Task;
 
 namespace Hl7.Cql.CqlToElm.Test
 {
@@ -9,7 +10,7 @@ namespace Hl7.Cql.CqlToElm.Test
     public class RetrieveTest : Base
     {
         [TestMethod]
-        public void Retrieve_AllTerms()
+        public async Task Retrieve_AllTerms()
         {
             var cqlToolkit = CreateCqlToolkit();
             var cqlLibraryString = CqlLibraryString.Parse("""
@@ -48,7 +49,7 @@ namespace Hl7.Cql.CqlToElm.Test
                     Assert.AreEqual("terminology", valueSetRef.name);
                 }
 
-                var valueSets = new[] {
+                var valueSets = await (new[] {
                     new ValueSet
                     {
                         Id = "http://fire.ly/ValueSet/Test",
@@ -65,7 +66,7 @@ namespace Hl7.Cql.CqlToElm.Test
                             }
                         }
                     }
-                }.ToValueSetDictionary();
+                }.ToValueSetDictionaryAsync());
 
                 var bundle = new Bundle
                 {
@@ -96,8 +97,9 @@ namespace Hl7.Cql.CqlToElm.Test
                 };
 
                 using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
-                var result = librarySetInvoker.GetLibraryDefinitionResult(FhirCqlContext.ForBundle(bundle, valueSets: valueSets),
-                                                              cqlLibraryString.LibraryIdentifier, "Retrieve_AllTerms");
+                var result = librarySetInvoker.GetLibraryDefinitionResult(
+                    FhirCqlContext.ForBundle(bundle, valueSets: valueSets),
+                                              cqlLibraryString.LibraryIdentifier, "Retrieve_AllTerms");
                 var conditions = result as IEnumerable<Condition>;
                 Assert.IsNotNull(conditions);
                 var ids = conditions.Select(c => c.Id).ToArray();

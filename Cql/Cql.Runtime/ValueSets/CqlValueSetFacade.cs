@@ -13,24 +13,8 @@ namespace Hl7.Cql.ValueSets
     /// <summary>
     /// Implements <see cref="IValueSetFacade"/>.
     /// </summary>
-    [DebuggerDisplay("{Uri}")]
     internal class CqlValueSetFacade : IValueSetFacade
     {
-        /// <summary>
-        /// Creates an interface for a <paramref name="valueSet"/> from a <see cref="IValueSetDictionary"/>.
-        /// </summary>
-        /// <param name="valueSet">The value set for this facade.</param>
-        /// <param name="valueSets">The  <see cref="IValueSetDictionary"/> with all valuesets.</param>
-        /// <exception cref="ArgumentNullException">If any argument is <see langword="null" />.</exception>
-        /// <exception cref="ArgumentException">If <paramref name="valueSet"/> has a <see langword="null" /> <see cref="CqlVocabulary.id"/> property.</exception>
-        public CqlValueSetFacade(CqlValueSet valueSet, IValueSetDictionary valueSets)
-        {
-            if (valueSet is null)
-                throw new ArgumentNullException(nameof(valueSet));
-            _canonical = valueSet.id ?? throw new ArgumentException("Value set is missing an ID", nameof(valueSet));
-            _valuesets = valueSets ?? throw new ArgumentNullException(nameof(valueSets));
-        }
-
         /// <summary>
         /// Creates an interface for a <paramref name="id"/> from a <see cref="IValueSetDictionary"/>.
         /// </summary>
@@ -46,39 +30,14 @@ namespace Hl7.Cql.ValueSets
         private readonly string _canonical;
         private readonly IValueSetDictionary _valuesets;
 
-        /// <summary>
-        /// Returns <see langword="true"/> if <paramref name="code"/> is in this value set.
-        /// </summary>
-        /// <param name="code">The code to check.</param>
-        /// <returns><see langword="true"/> if <paramref name="code"/> is in this value set.</returns>
-        public bool? IsCodeInValueSet(CqlCode? code)
-        {
-            if (code == null || code.code == null)
-                return null;
-            if (code.system != null)
-            {
-                var @in = _valuesets.IsCodeInValueSet(_canonical, code.code, code.system);
-                return @in;
-            }
-            else
-            {
-                var @in = _valuesets.IsCodeInValueSet(_canonical, code.code);
-                return @in;
-            }
-        }
+        /// <inheritdoc/>
+        public bool IsCodeInValueSet(CqlCode code) => _valuesets.IsCodeInValueSet(_canonical, code);
 
-        /// <summary>
-        /// Returns <see langword="true"/> if <paramref name="code"/> is in this value set.
-        /// </summary>
-        /// <param name="code">The code to check.</param>
-        /// <param name="system">The code system to check.</param>
-        /// <returns><see langword="true"/> if the code is in this value set.</returns>
-        public bool? IsCodeInValueSet(string? code, string? system)
-        {
-            if (code == null || system == null)
-                return null;
-            else return _valuesets.IsCodeInValueSet(_canonical, code, system);
-        }
+        /// <inheritdoc/>
+        public bool IsCodeInValueSet(string code, string? system) => _valuesets.IsCodeInValueSet(_canonical, code, system);
+
+        /// <inheritdoc/>
+        public bool IsCodeInValueSet(string code) => _valuesets.IsCodeInValueSet(_canonical, code);
 
         /// <summary>
         /// Enumerates the code in this value set facade.
