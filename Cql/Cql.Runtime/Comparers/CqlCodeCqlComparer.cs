@@ -1,6 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-
-/*
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -13,15 +11,39 @@ using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Comparers
 {
+    /// <summary>
+    /// An <see cref="ICqlComparer"/> that compares two <see cref="CqlCode"/> instances.
+    /// </summary>
     internal class CqlCodeCqlComparer : ICqlComparer<CqlCode>, ICqlComparer
     {
+        /// <summary>
+        /// The default comparer, which uses <see cref="StringComparer.OrdinalIgnoreCase"/>.
+        /// </summary>
+        public static readonly CqlCodeCqlComparer DefaultCqlComparer = new();
+
+        /// <summary>
+        /// Create a comparer that uses a given <see cref="IComparer{T}"/> to compare the code part of the CqlCode.
+        /// </summary>
         public CqlCodeCqlComparer(IComparer<string> codeComparer)
         {
             CodeComparer = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
         }
 
+        /// <summary>
+        /// Create a comparer that uses the default <see cref="IComparer{T}"/> to compare the code part of the CqlCode.
+        /// </summary>
+        /// <remarks>The default comparer uses <see cref="StringComparer.OrdinalIgnoreCase"/></remarks> to compare the code.
+        public CqlCodeCqlComparer() : this(StringComparer.OrdinalIgnoreCase)
+        {
+            // Nothing
+        }
+
+        /// <summary>
+        /// The comparer used by this instance.
+        /// </summary>
         public IComparer<string> CodeComparer { get; }
 
+        /// <inheritdoc/>
         public int? Compare(CqlCode? x, CqlCode? y, string? precision)
         {
             if (x == null || y == null)
@@ -56,8 +78,10 @@ namespace Hl7.Cql.Comparers
             }
         }
 
+        /// <inheritdoc/>
         public int? Compare(object? x, object? y, string? precision) => Compare(x as CqlCode, y as CqlCode, precision);
 
+        /// <inheritdoc/>
         public bool? Equals(CqlCode? x, CqlCode? y, string? precision)
         {
             if (x == null || y == null)
@@ -68,9 +92,11 @@ namespace Hl7.Cql.Comparers
             else return compare == 0;
         }
 
+        /// <inheritdoc/>
         public bool? Equals(object? x, object? y, string? precision) => Equals(x as CqlCode, y as CqlCode, precision);
 
-        public bool Equivalent(CqlCode x, CqlCode y, string? precision)
+        /// <inheritdoc/>
+        public bool Equivalent(CqlCode? x, CqlCode? y, string? precision)
         {
             if (CqlComparers.EquivalentOnNullsOnly(x?.code, y?.code) is { } r)
                 return r;
@@ -86,16 +112,17 @@ namespace Hl7.Cql.Comparers
             return sc == 0;
         }
 
+        /// <inheritdoc/>
         public bool Equivalent(object? x, object? y, string? precision) => Equivalent((x as CqlCode)!, (y as CqlCode)!, precision);
 
+        /// <inheritdoc/>
         public int GetHashCode(CqlCode? x) =>
             x == null
             ? typeof(CqlCode).GetHashCode()
-            : $"{x.code ?? "null"}\0{x.system}\0".GetHashCode();
+            : StringComparer.OrdinalIgnoreCase.GetHashCode(x.code ?? string.Empty) ^
+              StringComparer.OrdinalIgnoreCase.GetHashCode(x.system ?? string.Empty);
 
-        public int GetHashCode(object? x) =>
-            GetHashCode(x as CqlCode);
+        /// <inheritdoc/>
+        public int GetHashCode(object? x) => GetHashCode(x as CqlCode);
     }
 }
-
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

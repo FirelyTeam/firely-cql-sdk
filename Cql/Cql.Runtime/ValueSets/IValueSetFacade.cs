@@ -19,11 +19,11 @@ namespace Hl7.Cql.ValueSets
     public interface IValueSetFacade : IEnumerable<CqlCode>
     {
         /// <summary>
-        /// Returns <see langword="true"/> if <paramref name="code"/> is in this value set.
+        /// Returns <see langword="true"/> if <paramref name="code"/> is in this value set, regardless of system.
         /// </summary>
         /// <param name="code">The code to check.</param>
-        /// <returns><see langword="true"/> if <paramref name="code"/> is in this value set, or <see langword="null"/> if <paramref name="code"/> is <see langword="null"/>.</returns>
-        bool? IsCodeInValueSet(CqlCode? code);
+        /// <returns><see langword="true"/> if the code is in this value set.</returns>
+        bool IsCodeInValueSet(string code);
 
         /// <summary>
         /// Returns <see langword="true"/> if <paramref name="code"/> is in this value set.
@@ -31,6 +31,13 @@ namespace Hl7.Cql.ValueSets
         /// <param name="code">The code to check.</param>
         /// <param name="system">The code system to check.</param>
         /// <returns><see langword="true"/> if the code is in this value set.</returns>
-        bool? IsCodeInValueSet(string? code, string? system);
+        bool IsCodeInValueSet(string code, string? system);
+
+        /// <summary>
+        /// Returns <see langword="true"/> if <paramref name="code"/> is in this value set.
+        /// </summary>
+        /// <param name="code">The code to check.</param>
+        /// <returns><see langword="true"/> if <paramref name="code"/> is in this value set.</returns>
+        bool IsCodeInValueSet(CqlCode code);
     }
 }

@@ -176,7 +176,6 @@ namespace Hl7.Cql.Runtime
 
         public IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet) => ValueSets.GetValueSet(valueSet);
 
-
         public object NotSupported() => throw new NotSupportedException();
 
         public int? Compare(object? x, object? y, string? precision) =>

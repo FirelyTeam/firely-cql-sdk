@@ -58,7 +58,7 @@ namespace Hl7.Cql.Comparers
 
         public bool? Equals(object? x, object? y, string? precision) => Equals(x as CqlCode, y as CqlCode, precision);
 
-        public bool Equivalent(CqlCode x, CqlCode y, string? precision)
+        public bool Equivalent(CqlCode? x, CqlCode? y, string? precision)
         {
             if (CqlComparers.EquivalentOnNullsOnly(x?.code, y?.code) is { } r)
                 return r;
@@ -79,7 +79,8 @@ namespace Hl7.Cql.Comparers
         public int GetHashCode(CqlCode? x) =>
             x == null
             ? typeof(CqlCode).GetHashCode()
-            : $"{x.code ?? "null"}\0{x.system}\0".GetHashCode();
+            : StringComparer.OrdinalIgnoreCase.GetHashCode(x.code ?? string.Empty) ^
+              StringComparer.OrdinalIgnoreCase.GetHashCode(x.system ?? string.Empty);
 
         public int GetHashCode(object? x) =>
             GetHashCode(x as CqlCode);
