@@ -63,11 +63,11 @@ public class ValueSetSource : IValueSetDictionary
     /// <summary>
     /// Adds a list of <see cref="ValueSet"/>s to the cache, so they will not be retrieved using the resolver.
     /// </summary>
-    public async Task<IReadOnlyCollection<IValueSetFacade>> Add(IEnumerable<ValueSet> vslist)
+    public async Task<IReadOnlyCollection<IValueSetFacade>> Add(IEnumerable<ValueSet> vsList)
     {
-        var tasks = vslist.Select(Add);
-        await Task.WhenAll(tasks);
-        return tasks.Select(t => t.Result).ToList();
+        var result = new ConcurrentBag<IValueSetFacade>();
+        await Parallel.ForEachAsync(vsList, async (v,_) => result.Add(await Add(v))).ConfigureAwait(false);
+        return result;
     }
 
     /// <summary>
@@ -78,7 +78,7 @@ public class ValueSetSource : IValueSetDictionary
         if (_valueSets.TryGetValue(vs.Url, out var valueSet)) return valueSet;
 
         // Not cached yet, build it first.
-        var newVs = await build(vs);
+        var newVs = await build(vs).ConfigureAwait(false);
 
         // Add it, or return whatever was in the cache by now. If we were pre-empted, this might be
         // another instance than ours.
@@ -89,7 +89,7 @@ public class ValueSetSource : IValueSetDictionary
             if (!vs.HasExpansion)
             {
                 var expander = BuildExpander();
-                await expander.ExpandAsync(vs);
+                await expander.ExpandAsync(vs).ConfigureAwait(false);
             }
 
             var codes = ToCodes(vs.Expansion.Contains);
@@ -107,7 +107,7 @@ public class ValueSetSource : IValueSetDictionary
 
         if(_resourceResolver is null) return null;
 
-        var vs = await _resourceResolver.FindValueSetAsync(canonical);
+        var vs = await _resourceResolver.FindValueSetAsync(canonical).ConfigureAwait(false);
         return vs is null ? null : await Add(vs);
     }
 
@@ -189,19 +189,25 @@ public class ValueSetSource : IValueSetDictionary
 /// <summary>
 /// Helper methods for constructing an <see cref="IValueSetDictionary"/> from a collection of <see cref="ValueSet"/>s.
 /// </summary>
-public static class ValueSetSourceExtensions
+public static class ValueSetExtensions
 {
     /// <summary>
     /// Construct a new <see cref="IValueSetDictionary"/> from the given <paramref name="values"/>.
     /// </summary>
-    public static IValueSetDictionary ToValueSetDictionary(this IEnumerable<ValueSet> values)
+    public static async Task<IValueSetDictionary> ToValueSetDictionaryAsync(this IEnumerable<ValueSet> values)
     {
         // Also make sure the valuesets are available via a resource resolver, so the ValueSetSource
         // can expand the valuesets by reaching out to this set.
         var valueSetResolver = new InMemoryResourceResolver(values);
         var result = new ValueSetSource(resourceResolver: valueSetResolver);
-        _ = TaskHelper.Await(() => result.Add(values));
+        _ = await result.Add(values).ConfigureAwait(false);
 
         return result;
+    }
+
+    /// <inheritdoc cref="ToValueSetDictionaryAsync"/>
+    public static IValueSetDictionary ToValueSetDictionary(this IEnumerable<ValueSet> values)
+    {
+       return TaskHelper.Await(() => ToValueSetDictionaryAsync(values));
     }
 }

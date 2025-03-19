@@ -119,10 +119,10 @@ namespace Hl7.Cql.Comparers
         public int GetHashCode(CqlCode? x) =>
             x == null
             ? typeof(CqlCode).GetHashCode()
-            : $"{x.code?.ToLowerInvariant() ?? "null"}\0{x.system?.ToLowerInvariant()}\0".GetHashCode();
+            : StringComparer.OrdinalIgnoreCase.GetHashCode(x.code ?? string.Empty) ^
+              StringComparer.OrdinalIgnoreCase.GetHashCode(x.system ?? string.Empty);
 
         /// <inheritdoc/>
-        public int GetHashCode(object? x) =>
-            GetHashCode(x as CqlCode);
+        public int GetHashCode(object? x) => GetHashCode(x as CqlCode);
     }
 }

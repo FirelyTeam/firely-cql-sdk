@@ -60,7 +60,7 @@ public static class CqlCodeExtensions
 
         public bool Equals(T? x, T? y) =>
             ReferenceEquals(x, y) ||
-            useEquivalence ? Comparer.Equivalent(x, y, precision) == true : Comparer.Equals(x, y, precision) == true;
+            useEquivalence ? Comparer.Equivalent(x, y, precision) : Comparer.Equals(x, y, precision) == true;
 
         public int GetHashCode(T obj) => Comparer.GetHashCode(obj);
     }
