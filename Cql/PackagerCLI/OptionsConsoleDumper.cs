@@ -26,15 +26,15 @@ internal class OptionsConsoleDumper(
         WriteLine("- Arguments Provided ----------------------------");
         (string name, object? value)[] values = new[]
         {
-            // ArgFor("Logging, KeepLog", _cqlToResourcePackagingOptions.DontLogClear),
-            // ArgFor("Logging, IncludeDebug",_cqlToResourcePackagingOptions.LogDebugEnabled),
-            ArgFor("Cql, InDir", _packagerCliOptions.CqlFromDirectory),
-            ArgFor("Elm, InDir", _packagerCliOptions.ElmFromDirectory),
-            ArgFor("CSharp, OutDir", _packagerCliOptions.CSharpOutDirectory),
-            ArgFor("Assembly, OutDir", _packagerCliOptions.AssemblyOutDirectory),
-            ArgFor("Fhir, OutDir", _packagerCliOptions.FhirOutDirectory),
-            ArgFor("Fhir, CanonicalRootUrl", _packagerCliOptions.FhirCanonicalRootUrl),
-            ArgFor("Fhir, OverrideDate", _packagerCliOptions.FhirOverrideDate),
+            ArgFor(_packagerCliOptions.CqlFromDirectory),
+            ArgFor(_packagerCliOptions.ElmFromDirectory),
+            ArgFor(_packagerCliOptions.CSharpOutDirectory),
+            ArgFor(_packagerCliOptions.AssemblyOutDirectory),
+            ArgFor(_packagerCliOptions.FhirOutDirectory),
+            ArgFor(_packagerCliOptions.FhirCanonicalRootUrl),
+            ArgFor(_packagerCliOptions.FhirOverrideDate),
+            ArgFor(_packagerCliOptions.JsonIndentEnable),
+            ArgFor(_packagerCliOptions.AssemblyDebugSymbolsEnable),
         }.Where(t => t.value is not null)
         .ToArray();
 

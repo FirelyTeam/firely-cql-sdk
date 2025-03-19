@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm.Toolkit;
@@ -19,7 +20,8 @@ using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.Packager;
 
-internal class PackagerCli(
+internal class PackagerCli
+(
     ILoggerFactory loggerFactory,
     ILogger<PackagerCli> logger,
     OptionsConsoleDumper optionsConsoleDumper,
@@ -32,7 +34,7 @@ internal class PackagerCli(
             optionsConsoleDumper.DumpToConsole();
 
             var opt = packagerCliOptions.Value;
-            if (opt.CqlFromDirectory is not { Exists:true })
+            if (opt.CqlFromDirectory is not { Exists: true })
             {
                 logger.LogWarning("Exiting: Cql input directory must be specified and exist.");
                 return -1;
@@ -60,6 +62,12 @@ internal class PackagerCli(
             if (!cqlToolkit.Conversions.Any())
                 logger.LogWarning("Exiting: No CQL libraries were found in the CQL input directory.");
 
+            var assemblyCompilerDebugInformationFormat =
+                opt.AssemblyDebugSymbolsEnable
+                    ? AssemblyCompilerDebugInformationFormat.Embedded
+                    : AssemblyCompilerDebugInformationFormat.None;
+            var elmToolkitConfig = new ElmToolkitConfig(assemblyCompilerDebugInformationFormat);
+
             ElmToolkit elmToolkit;
             if (translateCql)
             {
@@ -68,17 +76,18 @@ internal class PackagerCli(
                 if (opt.ElmOutDirectory is { } elmOutDir)
                     cqlToolkit.SaveElmFilesToDirectory(
                         elmOutDir,
-                        writeIndented:true,
+                        writeIndented: true,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
 
-                elmToolkit = cqlToolkit.CreateElmToolkit();
+                elmToolkit = cqlToolkit.CreateElmToolkit(elmToolkitConfig);
             }
             else
             {
-                elmToolkit = new ElmToolkit(loggerFactory).SetIgnoreEnumerationExceptions(false)
-                                                          .AddElmFilesFromDirectory(
-                                                              opt.ElmFromDirectory!,
-                                                              filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name));
+                elmToolkit = new ElmToolkit(loggerFactory, elmToolkitConfig)
+                             .SetIgnoreEnumerationExceptions(false)
+                             .AddElmFilesFromDirectory(
+                                 opt.ElmFromDirectory!,
+                                 filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name));
             }
 
             if (opt.CSharpOutDirectory is { } dirOutCS)

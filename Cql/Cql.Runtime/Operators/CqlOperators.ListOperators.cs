@@ -821,10 +821,11 @@ namespace Hl7.Cql.Runtime
             {
                 (null, _)                              => null,
                 (_, null)                              => false,
-                (CqlCode code, IValueSetFacade facade) => facade.IsCodeInValueSet(code),
+                // (CqlCode code, IValueSetFacade facade) => facade.IsCodeInValueSet(code),
                 _                                      => argument.Any(t => Compare(element, t!, null) == 0)
             };
 
+        [Obsolete("Use In<T> instead")]
         public bool? CodeInList(CqlCode? element, IEnumerable<CqlCode>? argument) =>
             (element, argument) switch
             {

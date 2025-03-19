@@ -14,7 +14,8 @@
 
 	<!-- ELM to CSharp -->
 	<PropertyGroup>
-		<JsonIndentEnable>true</JsonIndentEnable>
+		<!-- <JsonIndentEnable>true</JsonIndentEnable> -->
+		<!-- <AssemblyDebugSymbolsEnable>true</AssemblyDebugSymbolsEnable> -->
 		<!-- This PackagerCLI reference can remain relative to the is file. -->
 		<PackagerCLI>$(MSBuildThisFileDirectory)../../../Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
 	</PropertyGroup>
@@ -42,6 +43,7 @@
 			<PackagerCLIArgs Condition="'$(ResourcesDirectory)'!=''">$(PackagerCLIArgs) --fhir "$(ResourcesDirectory)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(CSharpTypeFormat)'!=''">$(PackagerCLIArgs) --cs-typeformat "$(CSharpTypeFormat)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(JsonIndentEnable)'!=''">$(PackagerCLIArgs) --json-indent-enable "$(JsonIndentEnable)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(AssemblyDebugSymbolsEnable)'!=''">$(PackagerCLIArgs) --assemblies-debug-symbols-enable "$(AssemblyDebugSymbolsEnable)"</PackagerCLIArgs>
 			<PackagerCLICommand>"$(PackagerCLI)" $(PackagerClIArgs)</PackagerCLICommand>
 			<!-- <PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs) &gt; NUL 2&gt; NUL</PackagerCLICommand> -->
 		</PropertyGroup>
