@@ -40,7 +40,6 @@ namespace Hl7.Cql.ValueSets
             // nothing
         }
 
-
         /// <summary>
         /// Creates a new <see cref="InMemoryValueSet"/> with the given <paramref name="contents"/>, which
         /// will use a specific <paramref name="comparer"/>.
@@ -79,5 +78,10 @@ namespace Hl7.Cql.ValueSets
 
         /// <inheritdoc/>
         public bool IsCodeInValueSet(CqlCode code) => Contents.Contains(code);
+
+#pragma warning disable RS0016
+#pragma warning disable CS1591
+#pragma warning disable CS1503
+        public InMemoryValueSet Add(CqlCode code, ICqlComparer<CqlCode> comparer) => new(Contents.Append(code), comparer);
     }
 }

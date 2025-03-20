@@ -19,6 +19,18 @@ internal static class DictionaryExtensions
         return exists ? valueRef! : valueRef = valueFactory(key);
     }
 
+    public delegate TValue UpdateValueFactory<in TKey, TValue>(TKey key, ref TValue previousValue);
+
+    public static TValue AddOrUpdate<TKey, TValue>(
+        this Dictionary<TKey, TValue> dictionary,
+        TKey key,
+        Func<TKey, TValue> addValueFactory,
+        UpdateValueFactory<TKey, TValue> updateValueFactory) where TKey : notnull
+    {
+        ref var valueRef = ref CollectionsMarshal.GetValueRefOrAddDefault(dictionary, key, out bool exists);
+        return exists ? valueRef = updateValueFactory(key, ref valueRef) : valueRef = addValueFactory(key);
+    }
+
     /// <summary>
     /// This method is similar to <see cref="CollectionExtensions.GetValueOrDefault{TKey,TValue}(System.Collections.Generic.IReadOnlyDictionary{TKey,TValue},TKey)"/>
     /// which returns the first element of a sequence of values if it is not empty;

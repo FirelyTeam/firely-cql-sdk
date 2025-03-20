@@ -13,6 +13,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.ValueSets
 {
@@ -48,6 +49,18 @@ namespace Hl7.Cql.ValueSets
             // nothing
         }
 
+#pragma warning disable RS0016
+#pragma warning disable CS1591
+#pragma warning disable CS1503
+
+        public void Add(string valueSetUri, CqlCode code)
+        {
+            _codesInValueSet.AddOrUpdate(
+                valueSetUri,
+                _ => new InMemoryValueSet([code], _comparer),
+                (string _, ref IValueSetFacade p) => ((InMemoryValueSet)p).Add(code, _comparer));
+        }
+
         /// <summary>
         /// Adds the code to the given value set by its canonical URI.
         /// </summary>
@@ -58,9 +71,11 @@ namespace Hl7.Cql.ValueSets
         {
             if (_codesInValueSet.ContainsKey(valueSetUri))
                 throw new ArgumentException($"Valueset {valueSetUri} already exists in dictionary.");
-
+#pragma warning disable RS0016
+#pragma warning disable CS1591
+#pragma warning disable CS1503
             var internedCodes = codes.Select(Intern);
-            _codesInValueSet.Add(valueSetUri, new InMemoryValueSet(internedCodes));
+            _codesInValueSet.Add(valueSetUri, new InMemoryValueSet(internedCodes, _comparer));
         }
 
         /// <inheritdoc/>
