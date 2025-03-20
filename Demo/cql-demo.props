@@ -9,7 +9,7 @@
 			Keep this in sync between cql-base.props and cql-demo.props
 			The verion must be the same as FhirNetApiVersion in https://github.com/FirelyTeam/Vonk/blob/develop/src/Vonk.props
 			-->
-		<FirelySdkVersion>5.11.2</FirelySdkVersion>
+		<FirelySdkVersion>5.11.4</FirelySdkVersion>
 	</PropertyGroup>
 
 	<!-- Solution-wide properties for NuGet packaging -->
@@ -18,7 +18,7 @@
 			Instructions when updating VersionPrefix/VersionSuffix : https://github.com/FirelyTeam/firely-cql-sdk/wiki/Creating-Tags-and-Releases
 			Keep this in sync between cql-sdk.props and cql-demo.props
 			-->
-		<VersionPrefix>2.0.12</VersionPrefix>
+		<VersionPrefix>2.0.13</VersionPrefix>
 		<VersionSuffix>alpha</VersionSuffix>
 		<Authors>NCQA, Firely (info@fire.ly) and contributors</Authors>
 		<Copyright>Copyright 2013-2024 NCQA, Firely. Contains materials (C) HL7 International</Copyright>
