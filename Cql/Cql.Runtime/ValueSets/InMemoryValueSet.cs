@@ -32,9 +32,9 @@ namespace Hl7.Cql.ValueSets
 
         /// <summary>
         /// Creates a new <see cref="InMemoryValueSet"/> with the given <paramref name="contents"/>.
-        /// If will use the default <see cref="CqlCodeCqlComparer.Default"/>.
+        /// If will use the default <see cref="CqlCodeCqlComparer.CodeAndSystem"/>.
         /// </summary>
-        public InMemoryValueSet(IEnumerable<CqlCode> contents) : this(contents, CqlCodeCqlComparer.Default)
+        public InMemoryValueSet(IEnumerable<CqlCode> contents) : this(contents, CqlCodeCqlComparer.CodeAndSystem)
         {
             // nothing
         }
@@ -58,8 +58,12 @@ namespace Hl7.Cql.ValueSets
                 var equalityComparer = comparer?.ToEqualityComparer() ?? throw new ArgumentNullException(nameof(comparer));
                 _lazyContents = new Lazy<IReadOnlySet<CqlCode>>(() => new HashSet<CqlCode>(contents, equalityComparer));
 
-                _lazyContentsByCode = new Lazy<IReadOnlySet<CqlCode>>(
-                    () => new HashSet<CqlCode>(contents, EqualityComparerFactory.For<CqlCode>.CreateByKey(cqlCode => cqlCode.code ?? "\0")));
+                // _lazyContentsByCode = new Lazy<IReadOnlySet<CqlCode>>(
+                // () => new HashSet<CqlCode>(contents, EqualityComparerFactory.For<CqlCode>.CreateByKey(cqlCode => cqlCode.code ?? "\0")));
+                var equivalenceComparer = comparer.ToEqualityComparer(useEquivalence: true);
+                _lazyContentsByCode = new Lazy<IReadOnlySet<CqlCode>>(() => new HashSet<CqlCode>(contents.Concat(makeContentsWithNullSystem()), equivalenceComparer));
+
+                IEnumerable<CqlCode> makeContentsWithNullSystem() => contents.Select(c => new CqlCode(c.code, NullCodeSystem));
             }
         }
 

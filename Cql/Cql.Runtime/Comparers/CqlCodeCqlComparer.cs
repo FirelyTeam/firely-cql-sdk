@@ -11,45 +11,59 @@ using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Comparers
 {
-    /** CQL CODE COMPARER **/
-
-    internal class CqlCodeCqlComparer(
-        IComparer<string>? codeComparer = null) :
-        ICqlComparer<CqlCode>,
-        ICqlComparer
+    internal interface ICqlCodeComparer : ICqlComparer
     {
-        public static CqlCodeCqlComparer Default { get; } = new(StringComparer.OrdinalIgnoreCase);
+        CqlCodePrecision Precision { get; }
+    }
 
-        private static readonly StringComparer CqlCodeSystemComparer = StringComparer.OrdinalIgnoreCase;
-        private static readonly StringComparer CqlCodeVersionComparer = StringComparer.OrdinalIgnoreCase;
-        private static readonly StringComparer CqlCodeDisplayComparer = StringComparer.OrdinalIgnoreCase;
+    internal class CqlCodeCqlComparer :
+        ICqlComparer<CqlCode>,
+        ICqlComparer,
+        ICqlCodeComparer
+    {
+        private CqlCodeCqlComparer(
+            CqlCodePrecision precision = CqlCodePrecision.CodeAndSystem)
+        {
+            Precision = precision;
+        }
 
-        private IComparer<string> CqlCodeCodeComparer { get; } = codeComparer ?? StringComparer.OrdinalIgnoreCase;
+        public static CqlCodeCqlComparer ForPrecision(CqlCodePrecision precision) =>
+            precision switch
+            {
+                CqlCodePrecision.Code => Code,
+                CqlCodePrecision.CodeAndSystem => CodeAndSystem,
+                CqlCodePrecision.CodeSystemAndVersion => CodeSystemAndVersion,
+                _ => throw new ArgumentOutOfRangeException(nameof(precision), precision, null)
+            };
+
+        public static CqlCodeCqlComparer Code { get; } = new(CqlCodePrecision.Code);
+        public static CqlCodeCqlComparer CodeAndSystem { get; } = new(CqlCodePrecision.CodeAndSystem);
+        public static CqlCodeCqlComparer CodeSystemAndVersion { get; } = new(CqlCodePrecision.CodeSystemAndVersion);
+
+        public CqlCodePrecision Precision { get; }
 
         public int? Compare(CqlCode? x, CqlCode? y, string? precision) =>
-            CqlComparerMethods.CqlCodeCompare(x, y, CqlCodeCodeComparer, CqlCodeSystemComparer, CqlCodeVersionComparer, CqlCodeDisplayComparer);
+            CqlComparerMethods.CqlCodeCompare(x, y, Precision);
 
         public int? Compare(object? x, object? y, string? precision) =>
-            CqlComparerMethods.CqlCodeCompare(x as CqlCode, y as CqlCode, CqlCodeCodeComparer, CqlCodeSystemComparer, CqlCodeVersionComparer, CqlCodeDisplayComparer);
+            CqlComparerMethods.CqlCodeCompare(x as CqlCode, y as CqlCode, Precision);
 
         public bool? Equals(CqlCode? x, CqlCode? y, string? precision) =>
-            CqlComparerMethods.CqlCodeCompare(x, y, CqlCodeCodeComparer, CqlCodeSystemComparer, CqlCodeVersionComparer, CqlCodeDisplayComparer) == 0;
+            CqlComparerMethods.CqlCodeCompare(x, y, Precision) == 0;
 
         public bool? Equals(object? x, object? y, string? precision) =>
-            CqlComparerMethods.CqlCodeCompare(x as CqlCode, y as CqlCode, CqlCodeCodeComparer, CqlCodeSystemComparer, CqlCodeVersionComparer, CqlCodeDisplayComparer) == 0;
+            CqlComparerMethods.CqlCodeCompare(x as CqlCode, y as CqlCode, Precision) == 0;
 
         public bool Equivalent(CqlCode? x, CqlCode? y, string? precision) =>
-            CqlComparerMethods.CqlCodeCompare(x, y, CqlCodeCodeComparer, CqlCodeSystemComparer) == 0;
+            CqlComparerMethods.CqlCodeCompare(x, y, Precision) == 0;
 
         public bool Equivalent(object? x, object? y, string? precision) =>
-            CqlComparerMethods.CqlCodeCompare(x as CqlCode, y as CqlCode, CqlCodeCodeComparer, CqlCodeSystemComparer) == 0;
+            CqlComparerMethods.CqlCodeCompare(x as CqlCode, y as CqlCode, Precision) == 0;
 
         public int GetHashCode(CqlCode? x) =>
-            CqlComparerMethods.CqlCodeGetHashCode(x, true);
+            CqlComparerMethods.CqlCodeGetHashCode(x, Precision);
 
         public int GetHashCode(object? x) =>
-            CqlComparerMethods.CqlCodeGetHashCode(x as CqlCode, true);
-
-        private readonly ConcurrentDictionary<(string? precision, bool useEquivalence), IEqualityComparer<CqlCode>> _equalityComparerCache = new();
+            CqlComparerMethods.CqlCodeGetHashCode(x as CqlCode, Precision);
     }
 }

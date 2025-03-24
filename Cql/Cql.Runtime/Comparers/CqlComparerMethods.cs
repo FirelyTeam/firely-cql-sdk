@@ -1,6 +1,7 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Primitives;
+using static System.StringComparer;
 
 namespace Hl7.Cql.Comparers;
 
@@ -48,73 +49,101 @@ internal static class CqlComparerMethods
     public static int? CqlCodeCompare(
         CqlCode? x,
         CqlCode? y,
-        IComparer<string> codeComparer,
-        IComparer<string>? systemComparer = null,
-        IComparer<string>? versionComparer = null,
-        IComparer<string>? displayComparer = null)
+        CqlCodePrecision precision)
     {
-        Debug.Assert(versionComparer is null);
-        versionComparer = null;
-        displayComparer = null;
-
         if (x == null || y == null)
             return null;
 
         if (x.code == null || y.code == null)
             return null;
 
-        var res = codeComparer.Compare(x.code, y.code);
+        return CqlCodeComparerImpl(x, y, precision);
+    }
+
+    private static int? CqlCodeComparerImpl(
+        CqlCode x,
+        CqlCode y,
+        CqlCodePrecision precision)
+    {
+        if (precision > CqlCodePrecision.CodeAndSystem)
+        {
+            Debug.Assert(false, "Precision too high");
+            precision = CqlCodePrecision.CodeAndSystem;
+        }
+
+        var res = CodeComparer.Compare(x.code, y.code);
         if (res != 0)
             return res;
 
-        if (systemComparer is not null)
+        if (precision >= CqlCodePrecision.CodeAndSystem)
         {
             if ((x.system == null) ^ (y.system == null))
                 return null;
 
-            res = systemComparer.Compare(x.system, y.system);
+            res = OtherComparer.Compare(x.system, y.system);
             if (res != 0)
                 return res;
         }
 
-        if (versionComparer is not null)
+        if (precision == CqlCodePrecision.CodeSystemAndVersion)
         {
             if ((x.version == null) ^ (y.version == null))
                 return null;
 
-            res = versionComparer.Compare(x.version, y.version);
+            res = OtherComparer.Compare(x.version, y.version);
             if (res != 0)
                 return res;
         }
 
-        if (displayComparer is not null)
-        {
-            if ((x.display == null) ^ (y.display == null))
-                return null;
-
-            res = displayComparer.Compare(x.display, y.display);
-            return res;
-        }
+        // if (displayComparer is not null)
+        // {
+        //     if ((x.display == null) ^ (y.display == null))
+        //         return null;
+        //
+        //     res = displayComparer.Compare(x.display, y.display);
+        //     return res;
+        // }
 
         return res;
     }
 
     public static int CqlCodeGetHashCode(
         CqlCode? x,
-        bool includeVersion = false,
-        bool includeDisplay = false)
+        CqlCodePrecision precision = CqlCodePrecision.CodeAndSystem)
     {
-        includeVersion = false;
-        // includeDisplay = false;
-
         if (x == null)
             return typeof(CqlCode).GetHashCode();
 
-        var res = HashCode.Combine(x.code, x.system, includeVersion ? x.version : null, includeDisplay ? x.display : null);
+        var res = CqlCodeGetHashCodeImpl(x, precision);
         return res;
     }
 
+    private static int CqlCodeGetHashCodeImpl(
+        CqlCode x,
+        CqlCodePrecision precision = CqlCodePrecision.CodeAndSystem)
+    {
+        if (precision > CqlCodePrecision.CodeAndSystem)
+        {
+            Debug.Assert(false, "Precision too high");
+            precision = CqlCodePrecision.CodeAndSystem;
+        }
+
+        return precision switch
+        {
+            CqlCodePrecision.Code                 => HashCode.Combine(ForCode(x.code)),
+            CqlCodePrecision.CodeAndSystem        => HashCode.Combine(ForCode(x.code), ForOther(x.system)),
+            CqlCodePrecision.CodeSystemAndVersion => HashCode.Combine(ForCode(x.code), ForOther(x.system), ForOther(x.version)),
+            _                                     => throw new ArgumentOutOfRangeException(nameof(precision), precision, "Invalid precision")
+        };
+
+        static int ForOther(string? other) => OtherComparer.GetHashCode(other ?? "\0");
+
+        static int ForCode(string? code) => CodeComparer.GetHashCode(code ?? "\0");
+    }
+
     private static readonly ConcurrentDictionary<(Type typeArg, string? precision, bool useEquivalance), object> EqualityComparers = new();
+    private static readonly StringComparer CodeComparer = Ordinal;
+    private static readonly StringComparer OtherComparer = OrdinalIgnoreCase;
 
     public static IEqualityComparer<T> ToEqualityComparer<T>(
         this ICqlComparer<T> cqlComparer,

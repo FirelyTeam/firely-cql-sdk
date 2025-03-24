@@ -42,7 +42,7 @@ public class ValueSetSource : IValueSetDictionary
     /// </summary>
     public ValueSetSource(IAsyncResourceResolver? resourceResolver = null, ICodeValidationTerminologyService? termService = null)
     {
-        _internHash = new ConcurrentDictionary<CqlCode, CqlCode>(CqlCodeCqlComparer.Default.ToEqualityComparer());
+        _internHash = new ConcurrentDictionary<CqlCode, CqlCode>(CqlCodeCqlComparer.CodeAndSystem.ToEqualityComparer());
         _resourceResolver = resourceResolver;
         _termService = termService;
     }

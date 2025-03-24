@@ -1,4 +1,8 @@
 ﻿#nullable enable
+Hl7.Cql.Comparers.CqlCodePrecision
+Hl7.Cql.Comparers.CqlCodePrecision.Code = 1 -> Hl7.Cql.Comparers.CqlCodePrecision
+Hl7.Cql.Comparers.CqlCodePrecision.CodeAndSystem = 3 -> Hl7.Cql.Comparers.CqlCodePrecision
+Hl7.Cql.Comparers.CqlCodePrecision.CodeSystemAndVersion = 7 -> Hl7.Cql.Comparers.CqlCodePrecision
 Hl7.Cql.Conversion.ITypeConverterEntry
 Hl7.Cql.Conversion.ITypeConverterEntry.Convert(object? instance, System.Type! to) -> object?
 Hl7.Cql.Conversion.ITypeConverterEntry.Handles(System.Type! from, System.Type! to) -> bool

@@ -52,7 +52,7 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(IEnumerable), new ListEqualComparer(this));
             Comparers.TryAdd(typeof(CqlQuantity), new CqlQuantityCqlComparer(this, this));
             Comparers.TryAdd(typeof(CqlConcept), new CqlConceptCqlComparer(this));
-            Comparers.TryAdd(typeof(CqlCode), new CqlCodeCqlComparer(StringComparer.OrdinalIgnoreCase));
+            Comparers.TryAdd(typeof(CqlCode), CqlCodeCqlComparer.CodeSystemAndVersion);
             Comparers.TryAdd(typeof(CqlDate), new InterfaceCqlComparer<CqlDate>());
             Comparers.TryAdd(typeof(CqlTime), new InterfaceCqlComparer<CqlTime>());
             Comparers.TryAdd(typeof(CqlDateTime), new InterfaceCqlComparer<CqlDateTime>());

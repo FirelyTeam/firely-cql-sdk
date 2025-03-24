@@ -3,8 +3,8 @@ Hl7.Cql.Fhir.Extensions.FhirDeserializationExtensions
 Hl7.Cql.Fhir.FhirCqlContext
 Hl7.Cql.Fhir.FhirCqlContextOptions
 Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorSemantics
-Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorSemantics.Equals = 0 -> Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorSemantics
-Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorSemantics.Equivalent = 1 -> Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorSemantics
+Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorSemantics.CodeAndSystem = 1 -> Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorSemantics
+Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorSemantics.CodeSystemAndVersion = 0 -> Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorSemantics
 Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorType.get -> Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorSemantics
 Hl7.Cql.Fhir.FhirCqlContextOptions.CodeInOperatorType.init -> void
 Hl7.Cql.Fhir.FhirCqlContextOptions.FhirCqlContextOptions() -> void
