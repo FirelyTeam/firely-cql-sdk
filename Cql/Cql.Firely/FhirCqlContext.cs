@@ -72,8 +72,9 @@ namespace Hl7.Cql.Fhir
             if (options?.ResourceIdComparer != null)
                 comparers.CompareResourcesById(options.ResourceIdComparer);
 
-            if (options?.CodeInOperatorType == FhirCqlContextOptions.CodeInOperatorSemantics.Equivalent)
-                comparers.Register(typeof(CqlCode), new CqlCodeCqlEquivalentComparer(StringComparer.OrdinalIgnoreCase));
+            // We already have CqlCodeCqlComparer.CodeSystemAndVersion registered, so we only need to register the other one if it's selected.
+            if (options?.CodeInOperatorType is FhirCqlContextOptions.CodeInOperatorSemantics.CodeAndSystem)
+                comparers.Register(typeof(CqlCode), CqlCodeCqlComparer.CodeAndSystem);
 
             return operators;
         }

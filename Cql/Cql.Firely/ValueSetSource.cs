@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using System.Runtime.CompilerServices;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
@@ -14,7 +15,6 @@ using Hl7.Fhir.Rest;
 using Hl7.Fhir.Specification.Source;
 using Hl7.Fhir.Specification.Terminology;
 using Hl7.Fhir.Utility;
-using Task = System.Threading.Tasks.Task;
 
 namespace Hl7.Cql.Fhir;
 
@@ -42,7 +42,7 @@ public class ValueSetSource : IValueSetDictionary
     /// </summary>
     public ValueSetSource(IAsyncResourceResolver? resourceResolver = null, ICodeValidationTerminologyService? termService = null)
     {
-        _internHash = new ConcurrentDictionary<CqlCode, CqlCode>(CqlCodeCqlComparer.DefaultCqlComparer.ToEqualityComparer());
+        _internHash = new ConcurrentDictionary<CqlCode, CqlCode>(CqlCodeCqlComparer.CodeAndSystem.ToEqualityComparer());
         _resourceResolver = resourceResolver;
         _termService = termService;
     }
@@ -125,23 +125,37 @@ public class ValueSetSource : IValueSetDictionary
     private IEnumerable<CqlCode> ToCodes(IEnumerable<ValueSet.ContainsComponent> expansion) =>
         expansion.SelectMany(c => ToCodes(c.Contains).Prepend(Intern(new CqlCode(c.Code, c.System, c.Version, c.Display))));
 
+    private static T Dump<T>(string input, T res)
+    {
+        // var stack = new StackTrace().ToString().ReplaceLineEndings("\\n");
+        // File.AppendAllLines("c:\\temp\\vs-new.txt", [$"{input} | {res} | {stack}"]);
+        return res;
+    }
+
     /// <inheritdoc />
     public bool IsCodeInValueSet(string valueSetUri, CqlCode code) =>
+        Dump($"valueSetUri:{valueSetUri}, code:({code.code}, {code.system}, {code.version})",
         CheckInternalAndExternalTs(valueSetUri,
-            vs => vs.IsCodeInValueSet(code),
-            pb => pb.WithCoding(new Coding(code.system, code.code, code.display) { Version = code.version }));
+            vs =>
+            {
+                var isCodeInValueSet = vs.IsCodeInValueSet(code);
+                return isCodeInValueSet;
+            },
+            pb => pb.WithCoding(new Coding(code.system, code.code, code.display) { Version = code.version })));
 
     /// <inheritdoc />
     public bool IsCodeInValueSet(string valueSetUri, string code) =>
+        Dump($"valueSetUri:{valueSetUri}, code:{code}",
         CheckInternalAndExternalTs(valueSetUri,
-                                   vs => vs.IsCodeInValueSet(code),
-                                   pb => pb.WithCode(code));
+                                        vs => vs.IsCodeInValueSet(code),
+                                        pb => pb.WithCode(code)));
 
     /// <inheritdoc />
     public bool IsCodeInValueSet(string valueSetUri, string code, string? system) =>
-        CheckInternalAndExternalTs(valueSetUri,
-                                   vs => vs.IsCodeInValueSet(code, system),
-                                   pb => pb.WithCode(code, system));
+        Dump($"valueSetUri:{valueSetUri}, code:{code}, system:{system}",
+             CheckInternalAndExternalTs(valueSetUri,
+                                        vs => vs.IsCodeInValueSet(code, system),
+                                        pb => pb.WithCode(code, system)));
 
     private bool CheckInternalAndExternalTs(
         string valueSetUri,

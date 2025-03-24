@@ -127,7 +127,8 @@ internal partial class LibrarySetCSharpCodeGenerator
                     buildExceptionHandlingStrategy);
     }
 
-    private record LibraryWriter(
+    private record LibraryWriter
+    (
         LibrarySetWriter LibrarySetWriter,
         Library Library,
         IndentedTextWriter IndentedTextWriter) : IAddIndentMutable<LibraryWriter>
@@ -352,11 +353,12 @@ internal partial class LibrarySetCSharpCodeGenerator
                 }
             }
 
-            var definitionToCSharpCodeProcessor =
-                new LibraryDefinitionCSharpCodeGenerator(tupleMetadataBuilder, libraryName, LibraryWriter.LibrarySetWriter.TypeToCSharpConverter,
-                                                         IndentedTextWriter.Indent);
-            var definition = definitionToCSharpCodeProcessor.ProcessDefinition(overload, MethodName, "public");
-            IndentedTextWriter.WriteLine(definition);
+            var definitionToCSharpCodeProcessor = new LibraryDefinitionCSharpCodeGenerator(
+                tupleMetadataBuilder,
+                libraryName,
+                LibraryWriter.LibrarySetWriter.TypeToCSharpConverter,
+                IndentedTextWriter.Indent);
+            definitionToCSharpCodeProcessor.WriteMethod(IndentedTextWriter.TextWriter, overload, MethodName, "public");
         }
 
         private void WriteTags()
@@ -374,8 +376,7 @@ internal partial class LibrarySetCSharpCodeGenerator
         }
 
         private static bool IsDefinition(LambdaExpression overload) =>
-            overload.Parameters.Count == 1
-            && overload.Parameters[0].Type == typeof(CqlContext);
+            overload.Parameters is [{ Type: { } t0 }] && t0 == typeof(CqlContext);
 
         private static Expression Transform(Expression body, params ExpressionVisitor[] visitors)
         {

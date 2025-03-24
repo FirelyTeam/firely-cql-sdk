@@ -58,7 +58,9 @@ namespace Hl7.Cql.CodeGeneration.NET
                         results.Add(library.GetVersionedIdentifier()!, assemblyBinaryWithSourceCode);
                         return (library, assemblyBinaryWithSourceCode);
                     },
-                    buildExceptionHandlingStrategy);
+                    buildExceptionHandlingStrategy,
+                    // When exceptions are thrown, we just return the library and the source code
+                    t => (t.library, new AssemblyBinaryWithSourceCode(null, $"{t.library.GetVersionedIdentifier()}.cs",t.csharp)));
         }
 
         private static CSharpCompilationOptions CreateCSharpCompilationOptions(
@@ -79,12 +81,18 @@ namespace Hl7.Cql.CodeGeneration.NET
             AssemblyCompilerDebugInformationFormat debugInformationFormat)
         {
             var libraryVersionedIdentifier = library.GetVersionedIdentifier()!;
-            var librarySourcePath = $"{libraryVersionedIdentifier}.cs";
+            var libraryFileName = $"{libraryVersionedIdentifier}.g.cs";
+            var librarySourcePath = libraryFileName;
             if (debugInformationFormat != AssemblyCompilerDebugInformationFormat.None)
             {
-                var tempDir = Path.Combine(Path.GetTempPath(), "CqlCompiler", $"{libraryVersionedIdentifier}.cs");
+                var tempDir = Path.Combine(
+                    Path.GetTempPath(),
+                    "CqlCompiler",
+                    libraryFileName,
+                    CreateMD5HashStringDirectory(librarySourceString)
+                    );
                 Directory.CreateDirectory(tempDir);
-                librarySourcePath = Path.Combine(tempDir, $"{CreateMD5HashStringDirectory(librarySourceString)}.cs");
+                librarySourcePath = Path.Combine(tempDir, libraryFileName);
                 File.WriteAllText(librarySourcePath, librarySourceString);
             }
 

@@ -39,6 +39,9 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
             ["--fhir"] = PackagerCliSection + nameof(PackagerCliOptions.FhirOutDirectory),
             ["--override-utc-date-time"] = PackagerCliSection + nameof(PackagerCliOptions.FhirOverrideDate),
 
+            // Assembles
+            ["--assemblies-debug-symbols-enable"] = PackagerCliSection + nameof(PackagerCliOptions.AssemblyDebugSymbolsEnable),
+
             // Serialization
             ["--json-indent-enable"] = PackagerCliSection + nameof(PackagerCliOptions.JsonIndentEnable),
         };

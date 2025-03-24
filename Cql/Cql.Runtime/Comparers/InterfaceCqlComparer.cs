@@ -8,12 +8,18 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Comparers
 {
     internal class InterfaceCqlComparer<T> : ICqlComparer<T>, ICqlComparer
         where T : class, ICqlComparable<T>, IEquivalentable<T>
     {
+        static InterfaceCqlComparer()
+        {
+            if (typeof(T) == typeof(CqlCode))
+                throw new ArgumentException("Use CqlCodeComparer for comparing CqlCode's, instead of InterfaceCqlComparer<T>");
+        }
         public int? Compare(T? x, T? y, string? precision)
         {
             if (x == null)
@@ -35,7 +41,7 @@ namespace Hl7.Cql.Comparers
         public bool? Equals(object? x, object? y, string? precision) => Equals((x as T)!, (y as T)!, precision);
 
         public bool Equivalent(T? x, T? y, string? precision) =>
-            CqlComparers.EquivalentOnNullsOnly(x, y)
+            CqlComparerMethods.EquivalentOnNullsOnly(x, y)
             ?? x!.Equivalent(y, precision);
 
         public bool Equivalent(object? x, object? y, string? precision) => Equivalent(x as T, y as T, precision);

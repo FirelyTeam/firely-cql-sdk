@@ -105,7 +105,7 @@ namespace Hl7.Cql.Comparers
 
         public bool Equivalent(IEnumerable? x, IEnumerable? y, string? precision = null)
         {
-            if (CqlComparers.EquivalentOnNullsOnly(x, y) is { } r)
+            if (CqlComparerMethods.EquivalentOnNullsOnly(x, y) is { } r)
                 return r;
 
             var lit = x!.GetEnumerator();

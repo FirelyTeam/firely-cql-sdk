@@ -16,30 +16,8 @@ namespace Hl7.Cql.Comparers
     /// </summary>
     internal sealed class CqlComparers : ICqlComparer
     {
-        /*
-         *
-         * Equivalence : https://cql.hl7.org/04-logicalspecification.html#equivalent
-         *
-         * The Equivalent operator returns:
-         * - true if the arguments are the same value, or if they are both null;
-         * - and false otherwise.
-         *
-         * With the exception of null behavior and the semantics for specific types defined below, equivalence is the same as equality.
-         */
-
-        internal static bool? EquivalentOnNullsOnly<T>(
-            [NoEnumeration, NotNullWhen(true)] T? left,
-            [NoEnumeration, NotNullWhen(true)] T? right) =>
-            (left, right) switch
-            {
-                (null, null) => true,
-                (null, _)  => false,
-                (_, null)  => false,
-                _            => null
-            };
-
-        internal ConcurrentDictionary<Type, ICqlComparer> Comparers { get; } = new ConcurrentDictionary<Type, ICqlComparer>();
-        internal ConcurrentDictionary<Type, Func<Type, CqlComparers, ICqlComparer>> ComparerFactories { get; } = new ConcurrentDictionary<Type, Func<Type, CqlComparers, ICqlComparer>>();
+        internal ConcurrentDictionary<Type, ICqlComparer> Comparers { get; } = new();
+        internal ConcurrentDictionary<Type, Func<Type, CqlComparers, ICqlComparer>> ComparerFactories { get; } = new();
 
         /// <summary>
         /// Creates an instance with built-in comparers for system types registerred.
@@ -74,7 +52,7 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(IEnumerable), new ListEqualComparer(this));
             Comparers.TryAdd(typeof(CqlQuantity), new CqlQuantityCqlComparer(this, this));
             Comparers.TryAdd(typeof(CqlConcept), new CqlConceptCqlComparer(this));
-            Comparers.TryAdd(typeof(CqlCode), new CqlCodeCqlComparer(StringComparer.OrdinalIgnoreCase));
+            Comparers.TryAdd(typeof(CqlCode), CqlCodeCqlComparer.CodeSystemAndVersion);
             Comparers.TryAdd(typeof(CqlDate), new InterfaceCqlComparer<CqlDate>());
             Comparers.TryAdd(typeof(CqlTime), new InterfaceCqlComparer<CqlTime>());
             Comparers.TryAdd(typeof(CqlDateTime), new InterfaceCqlComparer<CqlDateTime>());
@@ -192,8 +170,8 @@ namespace Hl7.Cql.Comparers
             }
 
             bool xySwapped = false;
-            var xType = GetKeyTypeForComparers(x);
-            var yType = GetKeyTypeForComparers(y);
+            var xType = CqlComparerMethods.GetKeyTypeForComparers(x);
+            var yType = CqlComparerMethods.GetKeyTypeForComparers(y);
             if (xType != yType)
             {
                 // if x and y are not the same type, we prioritize them based on the following order:
@@ -243,10 +221,10 @@ namespace Hl7.Cql.Comparers
         /// <inheritdoc />
         public bool Equivalent(object? x, object? y, string? precision)
         {
-            if (EquivalentOnNullsOnly(x, y) is { } r)
+            if (CqlComparerMethods.EquivalentOnNullsOnly(x, y) is { } r)
                 return r;
 
-            var xType = GetKeyTypeForComparers(x);
+            var xType = CqlComparerMethods.GetKeyTypeForComparers(x);
 
             if (Comparers.TryGetValue(xType, out ICqlComparer? comparer))
             {
@@ -267,28 +245,13 @@ namespace Hl7.Cql.Comparers
             }
             throw new ArgumentException($"Cannot check equivalence for type {xType.Name}");
         }
-
-        /// <summary>
-        /// Collapses derived types to their bases, since this makes it easier to find the comparer by the exact type.
-        /// </summary>
-        private static Type GetKeyTypeForComparers(object? x)
-        {
-            var type = x switch
-            {
-                TupleBaseType => typeof(TupleBaseType), // Tuple types generated in the LINQ expressions by the TupleBuilderCache
-                ITuple        => typeof(ITuple),        // .NET tuples (e.g. System.ValueTuple<...>) used in generated libraries
-                _             => x!.GetType()
-            };
-            return type;
-        }
-
         /// <inheritdoc />
         public int GetHashCode(object? x)
         {
             if (x == null)
                 return typeof(object).GetHashCode();
 
-            var xType = GetKeyTypeForComparers(x);
+            var xType = CqlComparerMethods.GetKeyTypeForComparers(x);
 
             if (Comparers.TryGetValue(xType, out ICqlComparer? comparer))
             {
@@ -306,9 +269,11 @@ namespace Hl7.Cql.Comparers
             }
             else throw new ArgumentException($"Cannot generate a hash code for {xType.Name}", nameof(x));
         }
-    }
+
+        }
 
     #endregion
-}
+    }
+
 
 #nullable restore

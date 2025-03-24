@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Comparers
 {
@@ -18,12 +19,17 @@ namespace Hl7.Cql.Comparers
         IEquivalenceComparer<T>, IEquivalenceComparer
         where T : class
     {
+        static CqlComparerBase()
+        {
+            if (typeof(T) == typeof(CqlCode))
+                throw new ArgumentException("Use CqlCodeComparer for comparing CqlCode's, instead of CqlComparerBase<T>");
+        }
 
         /// <inheritdoc />
         public abstract int? Compare(T? x, T? y, string? precision);
         /// <inheritdoc />
         public bool Equivalent(T? x, T? y, string? precision) =>
-            CqlComparers.EquivalentOnNullsOnly(x, y)
+            CqlComparerMethods.EquivalentOnNullsOnly(x, y)
             ?? EquivalentImpl(x!, y!, precision);
 
         protected abstract bool EquivalentImpl(T x, T y, string? precision);

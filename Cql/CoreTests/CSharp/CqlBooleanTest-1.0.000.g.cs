@@ -31,14 +31,13 @@ public partial class CqlBooleanTest_1_0_000 : ILibrary, ISingleton<CqlBooleanTes
     #region Definition Methods
 
     [CqlDeclaration("SomethingTrueEqualsTrue")]
-    public bool? SomethingTrueEqualsTrue(CqlContext context)
+public bool? SomethingTrueEqualsTrue(CqlContext context)
     {
         bool? a_ = context.Operators.Equal(1, 1);
         bool? b_ = context.Operators.Equal(a_, true);
 
         return b_;
     }
-
 
     #endregion Definition Methods
 

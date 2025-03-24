@@ -43,7 +43,7 @@ namespace Hl7.Cql.Comparers
 
         /// <inheritdoc />
         public bool Equivalent(T? x, T? y, string? precision = null) =>
-            CqlComparers.EquivalentOnNullsOnly(x, y)
+            CqlComparerMethods.EquivalentOnNullsOnly(x, y)
             ?? Compare(x, y, precision) == 0;
 
         /// <inheritdoc />

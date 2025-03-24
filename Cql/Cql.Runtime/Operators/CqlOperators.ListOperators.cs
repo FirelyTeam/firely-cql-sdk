@@ -816,30 +816,31 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region In
-        public bool? In<T>(T element, IEnumerable<T> argument)
+        private static T Dump<T>(string input, T res)
         {
-            if ((object)element! == null)
-                return null;
-            if (argument == null)
-                return false;
-            else
-            {
-                return argument.Any(t => Compare(element, t!, null) == 0);
-            }
-
+            // var stack = "";// new StackTrace().ToString().ReplaceLineEndings("\\n");
+            // File.AppendAllLines("c:\\temp\\vs-new.txt", [$"{input} | {res} | {stack}"]);
+            return res;
         }
 
-        public bool? CodeInList(CqlCode? element, IEnumerable<CqlCode>? argument)
-        {
-            if (element is null) return null;
-
-            return argument switch
+        public bool? In<T>(T element, IEnumerable<T>? argument) =>
+            (element, argument) switch
             {
-                null => false,
-                IValueSetFacade facade => facade.IsCodeInValueSet(element),
-                _ => argument.Any(t => Compare(element, t, null) == 0)
+                (null, _)                              => null,
+                (_, null)                              => false,
+                (CqlCode code, IValueSetFacade facade) => Dump($"{code.code}, {code.system}", facade.IsCodeInValueSet(code)),
+                _                                      => argument.Any(t => Compare(element, t!, null) == 0)
             };
-        }
+
+        [Obsolete("Use In<T> instead")]
+        public bool? CodeInList(CqlCode? element, IEnumerable<CqlCode>? argument) =>
+            (element, argument) switch
+            {
+                (null, _)                              => null,
+                (_, null)                              => false,
+                (CqlCode code, IValueSetFacade facade) => Dump($"{code.code}, {code.system}, {argument.Count()}", facade.IsCodeInValueSet(code)),
+                _                                      => argument.Any(t => Compare(element, t!, null) == 0)
+            };
 
         #endregion
 

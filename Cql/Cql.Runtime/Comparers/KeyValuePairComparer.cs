@@ -55,7 +55,7 @@ internal class KeyValuePairComparer<TKey,TValue>(ICqlComparer cqlComparer) : ICq
 
     /// <inheritdoc />
     public bool Equivalent(KeyValuePair<TKey, TValue> x, KeyValuePair<TKey, TValue> y, string? precision = null) =>
-        CqlComparers.EquivalentOnNullsOnly(x, y)
+        CqlComparerMethods.EquivalentOnNullsOnly(x, y)
         ?? Compare(x, y, precision) == 0;
 
     /// <inheritdoc />

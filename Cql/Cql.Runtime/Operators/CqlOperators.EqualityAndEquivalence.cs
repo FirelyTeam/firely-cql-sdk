@@ -91,7 +91,7 @@ internal partial class CqlOperators
      */
 
     public bool Equivalent(object? x, object? y, string? precision) =>
-        CqlComparers.EquivalentOnNullsOnly(x, y)
+        CqlComparerMethods.EquivalentOnNullsOnly(x, y)
         ?? Comparer.Equivalent(x, y, precision);
 
     public bool? Equivalent(object? x, object? y) => Equivalent(x!, y!, null);
@@ -100,7 +100,7 @@ internal partial class CqlOperators
     {
         // Spec: For list types, this means that two lists are equivalent if and only if the lists contain elements of the same type, have the same number of elements, and for each element in the lists, in order, the elements are equivalent.
 
-        if (CqlComparers.EquivalentOnNullsOnly(left, right) is {} r)
+        if (CqlComparerMethods.EquivalentOnNullsOnly(left, right) is {} r)
             return r;
 
         var lit = left!.GetEnumerator();

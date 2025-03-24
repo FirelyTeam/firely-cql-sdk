@@ -84,7 +84,7 @@ internal sealed class LibraryInvoker_2_0_8_0 : LibraryInvokerOnInstance
     /// </summary>
     public static bool SupportsVersion(Version cqlToolVersion) =>
         cqlToolVersion >= new Version(2, 0, 8, 0)
-        && cqlToolVersion <= new Version(2, 1, 0, 0);
+        && cqlToolVersion <= new Version(2, 1, 1, 0);
 }
 
 file class DefinitionInvoker_2_0_8_0(

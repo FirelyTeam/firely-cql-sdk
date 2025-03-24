@@ -11,118 +11,59 @@ using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Comparers
 {
-    /// <summary>
-    /// An <see cref="ICqlComparer"/> that compares two <see cref="CqlCode"/> instances.
-    /// </summary>
-    internal class CqlCodeCqlComparer : ICqlComparer<CqlCode>, ICqlComparer
+    internal interface ICqlCodeComparer : ICqlComparer
     {
-        /// <summary>
-        /// The default comparer, which uses <see cref="StringComparer.OrdinalIgnoreCase"/>.
-        /// </summary>
-        public static readonly CqlCodeCqlComparer DefaultCqlComparer = new();
+        CqlCodePrecision Precision { get; }
+    }
 
-        /// <summary>
-        /// Create a comparer that uses a given <see cref="IComparer{T}"/> to compare the code part of the CqlCode.
-        /// </summary>
-        public CqlCodeCqlComparer(IComparer<string> codeComparer)
+    internal class CqlCodeCqlComparer :
+        ICqlComparer<CqlCode>,
+        ICqlComparer,
+        ICqlCodeComparer
+    {
+        private CqlCodeCqlComparer(
+            CqlCodePrecision precision = CqlCodePrecision.CodeAndSystem)
         {
-            CodeComparer = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
+            Precision = precision;
         }
 
-        /// <summary>
-        /// Create a comparer that uses the default <see cref="IComparer{T}"/> to compare the code part of the CqlCode.
-        /// </summary>
-        /// <remarks>The default comparer uses <see cref="StringComparer.OrdinalIgnoreCase"/></remarks> to compare the code.
-        public CqlCodeCqlComparer() : this(StringComparer.OrdinalIgnoreCase)
-        {
-            // Nothing
-        }
-
-        /// <summary>
-        /// The comparer used by this instance.
-        /// </summary>
-        public IComparer<string> CodeComparer { get; }
-
-        /// <inheritdoc/>
-        public int? Compare(CqlCode? x, CqlCode? y, string? precision)
-        {
-            if (x == null || y == null)
-                return null;
-            if (x.code == null || y.code == null)
-                return null;
-            else
+        public static CqlCodeCqlComparer ForPrecision(CqlCodePrecision precision) =>
+            precision switch
             {
-                var cc = CodeComparer.Compare(x.code, y.code);
-                if (cc == 0)
-                {
-                    if ((x.system == null) ^ (y.system == null))
-                        return null;
-                    var sc = StringComparer.OrdinalIgnoreCase.Compare(x.system, y.system);
-                    if (sc == 0)
-                    {
-                        if ((x.version == null) ^ (y.version == null))
-                            return null;
-                        var vc = StringComparer.OrdinalIgnoreCase.Compare(x.version, y.version);
-                        if (vc == 0)
-                        {
-                            if ((x.display == null) ^ (y.display == null))
-                                return null;
-                            var dc = StringComparer.OrdinalIgnoreCase.Compare(x.display, y.display);
-                            return dc;
-                        }
-                        else return vc;
-                    }
-                    else return sc;
-                }
-                else return cc;
-            }
-        }
+                CqlCodePrecision.Code => Code,
+                CqlCodePrecision.CodeAndSystem => CodeAndSystem,
+                CqlCodePrecision.CodeSystemAndVersion => CodeSystemAndVersion,
+                _ => throw new ArgumentOutOfRangeException(nameof(precision), precision, null)
+            };
 
-        /// <inheritdoc/>
-        public int? Compare(object? x, object? y, string? precision) => Compare(x as CqlCode, y as CqlCode, precision);
+        public static CqlCodeCqlComparer Code { get; } = new(CqlCodePrecision.Code);
+        public static CqlCodeCqlComparer CodeAndSystem { get; } = new(CqlCodePrecision.CodeAndSystem);
+        public static CqlCodeCqlComparer CodeSystemAndVersion { get; } = new(CqlCodePrecision.CodeSystemAndVersion);
 
-        /// <inheritdoc/>
-        public bool? Equals(CqlCode? x, CqlCode? y, string? precision)
-        {
-            if (x == null || y == null)
-                return null;
-            var compare = Compare(x, y, precision);
-            if (compare == null)
-                return null;
-            else return compare == 0;
-        }
+        public CqlCodePrecision Precision { get; }
 
-        /// <inheritdoc/>
-        public bool? Equals(object? x, object? y, string? precision) => Equals(x as CqlCode, y as CqlCode, precision);
+        public int? Compare(CqlCode? x, CqlCode? y, string? precision) =>
+            CqlComparerMethods.CqlCodeCompare(x, y, Precision);
 
-        /// <inheritdoc/>
-        public bool Equivalent(CqlCode? x, CqlCode? y, string? precision)
-        {
-            if (CqlComparers.EquivalentOnNullsOnly(x?.code, y?.code) is { } r)
-                return r;
+        public int? Compare(object? x, object? y, string? precision) =>
+            CqlComparerMethods.CqlCodeCompare(x as CqlCode, y as CqlCode, Precision);
 
-            var cc = CodeComparer.Compare(x!.code, y!.code);
-            if (cc != 0)
-                return false;
+        public bool? Equals(CqlCode? x, CqlCode? y, string? precision) =>
+            CqlComparerMethods.CqlCodeCompare(x, y, Precision) == 0;
 
-            if ((x.system == null) ^ (y.system == null))
-                return false;
+        public bool? Equals(object? x, object? y, string? precision) =>
+            CqlComparerMethods.CqlCodeCompare(x as CqlCode, y as CqlCode, Precision) == 0;
 
-            var sc = StringComparer.OrdinalIgnoreCase.Compare(x.system, y.system);
-            return sc == 0;
-        }
+        public bool Equivalent(CqlCode? x, CqlCode? y, string? precision) =>
+            CqlComparerMethods.CqlCodeCompare(x, y, Precision) == 0;
 
-        /// <inheritdoc/>
-        public bool Equivalent(object? x, object? y, string? precision) => Equivalent((x as CqlCode)!, (y as CqlCode)!, precision);
+        public bool Equivalent(object? x, object? y, string? precision) =>
+            CqlComparerMethods.CqlCodeCompare(x as CqlCode, y as CqlCode, Precision) == 0;
 
-        /// <inheritdoc/>
         public int GetHashCode(CqlCode? x) =>
-            x == null
-            ? typeof(CqlCode).GetHashCode()
-            : StringComparer.OrdinalIgnoreCase.GetHashCode(x.code ?? string.Empty) ^
-              StringComparer.OrdinalIgnoreCase.GetHashCode(x.system ?? string.Empty);
+            CqlComparerMethods.CqlCodeGetHashCode(x, Precision);
 
-        /// <inheritdoc/>
-        public int GetHashCode(object? x) => GetHashCode(x as CqlCode);
+        public int GetHashCode(object? x) =>
+            CqlComparerMethods.CqlCodeGetHashCode(x as CqlCode, Precision);
     }
 }

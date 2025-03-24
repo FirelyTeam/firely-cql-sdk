@@ -9,6 +9,7 @@
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.ValueSets
 {
@@ -18,8 +19,6 @@ namespace Hl7.Cql.ValueSets
     public class InMemoryValueSet : IValueSetFacade
     {
         private const string NullCodeSystem = "\0";
-
-        private static readonly ICqlComparer<CqlCode> DefaultComparer = CqlCodeCqlComparer.DefaultCqlComparer;
 
         internal static readonly InMemoryValueSet Empty = new([]);
 
@@ -33,13 +32,12 @@ namespace Hl7.Cql.ValueSets
 
         /// <summary>
         /// Creates a new <see cref="InMemoryValueSet"/> with the given <paramref name="contents"/>.
-        /// If will use the default <see cref="CqlCodeCqlComparer.DefaultCqlComparer"/>.
+        /// If will use the default <see cref="CqlCodeCqlComparer.CodeAndSystem"/>.
         /// </summary>
-        public InMemoryValueSet(IEnumerable<CqlCode> contents) : this(contents, DefaultComparer)
+        public InMemoryValueSet(IEnumerable<CqlCode> contents) : this(contents, CqlCodeCqlComparer.CodeAndSystem)
         {
             // nothing
         }
-
 
         /// <summary>
         /// Creates a new <see cref="InMemoryValueSet"/> with the given <paramref name="contents"/>, which
@@ -60,6 +58,8 @@ namespace Hl7.Cql.ValueSets
                 var equalityComparer = comparer?.ToEqualityComparer() ?? throw new ArgumentNullException(nameof(comparer));
                 _lazyContents = new Lazy<IReadOnlySet<CqlCode>>(() => new HashSet<CqlCode>(contents, equalityComparer));
 
+                // _lazyContentsByCode = new Lazy<IReadOnlySet<CqlCode>>(
+                // () => new HashSet<CqlCode>(contents, EqualityComparerFactory.For<CqlCode>.CreateByKey(cqlCode => cqlCode.code ?? "\0")));
                 var equivalenceComparer = comparer.ToEqualityComparer(useEquivalence: true);
                 _lazyContentsByCode = new Lazy<IReadOnlySet<CqlCode>>(() => new HashSet<CqlCode>(contents.Concat(makeContentsWithNullSystem()), equivalenceComparer));
 
@@ -79,5 +79,10 @@ namespace Hl7.Cql.ValueSets
 
         /// <inheritdoc/>
         public bool IsCodeInValueSet(CqlCode code) => Contents.Contains(code);
+
+#pragma warning disable RS0016
+#pragma warning disable CS1591
+#pragma warning disable CS1503
+        public InMemoryValueSet Add(CqlCode code, ICqlComparer<CqlCode> comparer) => new(Contents.Append(code), comparer);
     }
 }
