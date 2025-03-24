@@ -46,22 +46,25 @@ public static class CqlCodeExtensions
     /// </summary>
     public static IValueSetFacade Union(this IValueSetFacade left, IValueSetFacade right) => new ValueSetUnion(left, right);
 
-    /// <summary>
-    /// Create an <see cref="IEqualityComparer"/> based on the given <see cref="ICqlComparer"/>.
-    /// </summary>
-    public static IEqualityComparer<T> ToEqualityComparer<T>(this ICqlComparer<T> comparer, string? precision = null, bool useEquivalence = false) =>
-        new CqlCodeEqualityComparer<T>(comparer ?? throw new ArgumentNullException(nameof(comparer)), precision, useEquivalence);
-
-    private class CqlCodeEqualityComparer<T>
-        (ICqlComparer<T> comparer, string? precision = null, bool useEquivalence = false)
-        : IEqualityComparer<T>
-    {
-        public ICqlComparer<T> Comparer { get; } = comparer ?? throw new ArgumentNullException(nameof(comparer));
-
-        public bool Equals(T? x, T? y) =>
-            ReferenceEquals(x, y) ||
-            useEquivalence ? Comparer.Equivalent(x, y, precision) : Comparer.Equals(x, y, precision) == true;
-
-        public int GetHashCode(T obj) => Comparer.GetHashCode(obj);
-    }
+    // /// <summary>
+    // /// Create an <see cref="IEqualityComparer"/> based on the given <see cref="ICqlComparer"/>.
+    // /// </summary>
+    // public static IEqualityComparer<T> ToEqualityComparer<T>(this ICqlComparer<T> comparer, string? precision = null, bool useEquivalence = false)
+    // {
+    //     Trace.Assert(precision == null);
+    //     return new CqlComparerToEqualityComparer<T>(comparer ?? throw new ArgumentNullException(nameof(comparer)), precision, useEquivalence);
+    // }
+    //
+    // private class CqlComparerToEqualityComparer<T>
+    //     (ICqlComparer<T> comparer, string? precision = null, bool useEquivalence = false)
+    //     : IEqualityComparer<T>
+    // {
+    //     public ICqlComparer<T> Comparer { get; } = comparer ?? throw new ArgumentNullException(nameof(comparer));
+    //
+    //     public bool Equals(T? x, T? y) =>
+    //         ReferenceEquals(x, y) ||
+    //         useEquivalence ? Comparer.Equivalent(x, y, precision) : Comparer.Equals(x, y, precision) == true;
+    //
+    //     public int GetHashCode(T obj) => Comparer.GetHashCode(obj);
+    // }
 }

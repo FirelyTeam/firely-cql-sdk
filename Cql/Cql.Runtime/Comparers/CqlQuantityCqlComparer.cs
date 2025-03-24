@@ -76,7 +76,7 @@ namespace Hl7.Cql.Comparers
         /// <inheritdoc />
         public bool Equivalent(CqlQuantity? x, CqlQuantity? y, string? precision = null)
         {
-            if (CqlComparers.EquivalentOnNullsOnly(x, y) is { } r)
+            if (CqlComparerMethods.EquivalentOnNullsOnly(x, y) is { } r)
                 return r;
 
             var unitCompare = UnitComparer.Equivalent(x!.unit, y!.unit, precision);

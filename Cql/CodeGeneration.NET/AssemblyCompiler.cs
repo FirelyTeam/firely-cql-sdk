@@ -81,12 +81,18 @@ namespace Hl7.Cql.CodeGeneration.NET
             AssemblyCompilerDebugInformationFormat debugInformationFormat)
         {
             var libraryVersionedIdentifier = library.GetVersionedIdentifier()!;
-            var librarySourcePath = $"{libraryVersionedIdentifier}.cs";
+            var libraryFileName = $"{libraryVersionedIdentifier}.g.cs";
+            var librarySourcePath = libraryFileName;
             if (debugInformationFormat != AssemblyCompilerDebugInformationFormat.None)
             {
-                var tempDir = Path.Combine(Path.GetTempPath(), "CqlCompiler", $"{libraryVersionedIdentifier}.cs");
+                var tempDir = Path.Combine(
+                    Path.GetTempPath(),
+                    "CqlCompiler",
+                    libraryFileName,
+                    CreateMD5HashStringDirectory(librarySourceString)
+                    );
                 Directory.CreateDirectory(tempDir);
-                librarySourcePath = Path.Combine(tempDir, $"{CreateMD5HashStringDirectory(librarySourceString)}.cs");
+                librarySourcePath = Path.Combine(tempDir, libraryFileName);
                 File.WriteAllText(librarySourcePath, librarySourceString);
             }
 

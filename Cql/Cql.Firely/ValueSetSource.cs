@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/cql-sdk/main/LICENSE
  */
 
+using System.Runtime.CompilerServices;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
@@ -14,8 +15,6 @@ using Hl7.Fhir.Rest;
 using Hl7.Fhir.Specification.Source;
 using Hl7.Fhir.Specification.Terminology;
 using Hl7.Fhir.Utility;
-using Newtonsoft.Json.Linq;
-using Task = System.Threading.Tasks.Task;
 
 namespace Hl7.Cql.Fhir;
 
@@ -43,7 +42,7 @@ public class ValueSetSource : IValueSetDictionary
     /// </summary>
     public ValueSetSource(IAsyncResourceResolver? resourceResolver = null, ICodeValidationTerminologyService? termService = null)
     {
-        _internHash = new ConcurrentDictionary<CqlCode, CqlCode>(CqlCodeCqlComparer.DefaultCqlComparer.ToEqualityComparer());
+        _internHash = new ConcurrentDictionary<CqlCode, CqlCode>(CqlCodeCqlComparer.Default.ToEqualityComparer());
         _resourceResolver = resourceResolver;
         _termService = termService;
     }
@@ -126,23 +125,37 @@ public class ValueSetSource : IValueSetDictionary
     private IEnumerable<CqlCode> ToCodes(IEnumerable<ValueSet.ContainsComponent> expansion) =>
         expansion.SelectMany(c => ToCodes(c.Contains).Prepend(Intern(new CqlCode(c.Code, c.System, c.Version, c.Display))));
 
+    private static T Dump<T>(string input, T res)
+    {
+        // var stack = new StackTrace().ToString().ReplaceLineEndings("\\n");
+        // File.AppendAllLines("c:\\temp\\vs-new.txt", [$"{input} | {res} | {stack}"]);
+        return res;
+    }
+
     /// <inheritdoc />
     public bool IsCodeInValueSet(string valueSetUri, CqlCode code) =>
+        Dump($"valueSetUri:{valueSetUri}, code:({code.code}, {code.system}, {code.version})",
         CheckInternalAndExternalTs(valueSetUri,
-            vs => vs.IsCodeInValueSet(code),
-            pb => pb.WithCoding(new Coding(code.system, code.code, code.display) { Version = code.version }));
+            vs =>
+            {
+                var isCodeInValueSet = vs.IsCodeInValueSet(code);
+                return isCodeInValueSet;
+            },
+            pb => pb.WithCoding(new Coding(code.system, code.code, code.display) { Version = code.version })));
 
     /// <inheritdoc />
     public bool IsCodeInValueSet(string valueSetUri, string code) =>
+        Dump($"valueSetUri:{valueSetUri}, code:{code}",
         CheckInternalAndExternalTs(valueSetUri,
-                                   vs => vs.IsCodeInValueSet(code),
-                                   pb => pb.WithCode(code));
+                                        vs => vs.IsCodeInValueSet(code),
+                                        pb => pb.WithCode(code)));
 
     /// <inheritdoc />
     public bool IsCodeInValueSet(string valueSetUri, string code, string? system) =>
-        CheckInternalAndExternalTs(valueSetUri,
-                                   vs => vs.IsCodeInValueSet(code, system),
-                                   pb => pb.WithCode(code, system));
+        Dump($"valueSetUri:{valueSetUri}, code:{code}, system:{system}",
+             CheckInternalAndExternalTs(valueSetUri,
+                                        vs => vs.IsCodeInValueSet(code, system),
+                                        pb => pb.WithCode(code, system)));
 
     private bool CheckInternalAndExternalTs(
         string valueSetUri,
@@ -210,139 +223,5 @@ public static class ValueSetExtensions
     public static IValueSetDictionary ToValueSetDictionary(this IEnumerable<ValueSet> values)
     {
        return TaskHelper.Await(() => ToValueSetDictionaryAsync(values));
-    }
-
-#pragma warning disable RS0016
-#pragma warning disable CS1591
-#pragma warning disable CS1503
-    public static IValueSetDictionary ToValueSetDictionaryLegacy(
-        this IEnumerable<ValueSet> valueSets)
-    {
-        return new ValueSetLoader(valueSets, false, null).Load();
-    }
-
-}
-
-
-internal class ValueSetLoader
-{
-
-    public ValueSetLoader(IEnumerable<ValueSet> valuesets,
-        bool activeOnly = true,
-        Func<ValueSet, bool>? onInvalidValueSet = null)
-    {
-        ValueSets = valuesets.ToDictionary(vs => vs.Url);
-        ActiveOnly = activeOnly;
-        OnInvalidValueSet = onInvalidValueSet;
-    }
-
-    protected IDictionary<string, ValueSet> ValueSets { get; }
-    public bool ActiveOnly { get; }
-    public Func<ValueSet, bool>? OnInvalidValueSet { get; }
-
-    public IValueSetDictionary Load()
-    {
-        var vsd = new HashValueSetDictionary();
-        Load(vsd);
-        return vsd;
-    }
-    public void Load(HashValueSetDictionary dictionary)
-    {
-        foreach (var vs in ValueSets)
-        {
-            Load(dictionary, vs.Value);
-        }
-    }
-
-    private void Load(HashValueSetDictionary dictionary, ValueSet vs, params string[] soFar)
-    {
-        if ((ActiveOnly && vs.Status != PublicationStatus.Active) || string.IsNullOrWhiteSpace(vs.Url))
-        {
-            var handler = OnInvalidValueSet;
-            if (handler != null)
-            {
-                var cancel = handler(vs);
-                if (cancel)
-                    return;
-            }
-        }
-        var contains = vs.Expansion?.Contains;
-        if (contains != null)
-        {
-            foreach (var component in contains)
-            {
-                var code = component.Code;
-                var system = component.System;
-                if (!string.IsNullOrWhiteSpace(code)
-                    && !string.IsNullOrWhiteSpace(system))
-                {
-                    if (!dictionary.IsCodeInValueSet(vs.Url, code, system))
-                    {
-                        dictionary.Add(vs.Url, new CqlCode(code, system, component.Version, component.Display));
-                    }
-                }
-
-            }
-        }
-        var include = vs.Compose?.Include;
-        if (include != null)
-        {
-            foreach (var component in include)
-            {
-                var system = component.System;
-                var concept = component.Concept;
-
-                if (concept != null)
-                {
-                    foreach (var conceptComponent in concept)
-                    {
-                        var code = conceptComponent.Code;
-
-                        if (!string.IsNullOrWhiteSpace(code)
-                            && !string.IsNullOrWhiteSpace(system))
-                        {
-                            if (!dictionary.IsCodeInValueSet(vs.Url, code, system))
-                                dictionary.Add(vs.Url, new CqlCode(code, system, component.Version, conceptComponent.Display));
-                        }
-                    }
-                }
-
-                var cValueSets = component.ValueSet;
-                if (cValueSets != null)
-                {
-                    foreach (var includedValueSetUri in cValueSets)
-                    {
-                        if (soFar.Contains(includedValueSetUri))
-                        {
-                            var cycle = string.Join(" => ", soFar);
-                            throw new InvalidOperationException($"Value set {vs.Id} has a cyclical reference in its composition: {cycle}");
-                        }
-                        if (!dictionary.TryGetCodesInValueSet(includedValueSetUri, out var cvsCodes))
-                        {
-                            if (ValueSets.TryGetValue(includedValueSetUri, out var includedVs))
-                            {
-                                var deeper = new string[soFar.Length + 1];
-                                Array.Copy(soFar, deeper, soFar.Length);
-                                deeper[deeper.Length - 1] = includedValueSetUri;
-                                Load(dictionary, includedVs, deeper);
-                                if (!dictionary.TryGetCodesInValueSet(includedValueSetUri, out cvsCodes))
-                                    throw new InvalidOperationException($"Couldn't load {includedValueSetUri}");
-                            }
-                            else throw new InvalidOperationException($"Intensional value set {vs.Id} includes value set {includedValueSetUri}, which was not provided to this loader.");
-                        }
-                        foreach (var code in cvsCodes!)
-                        {
-                            if (!string.IsNullOrWhiteSpace(code.code) && !string.IsNullOrWhiteSpace(code.system))
-                            {
-                                if (!dictionary.IsCodeInValueSet(vs.Url, code.code!, code.system))
-                                {
-                                    dictionary.Add(vs.Url, new CqlCode(code.code, code.system, code.version, code.display));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
     }
 }

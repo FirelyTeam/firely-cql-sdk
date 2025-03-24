@@ -43,6 +43,7 @@ namespace Hl7.Cql.Fhir.Comparers
         public override int GetHashCode(Identifier? x) =>
             x?.Value == null
                 ? typeof(Identifier).GetHashCode()
+                //: $"{x.Value}{x.System}".GetHashCode();
                 : HashCode.Combine(x.Value, x.System);
     }
 }

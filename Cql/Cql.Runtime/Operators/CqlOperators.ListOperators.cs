@@ -816,12 +816,19 @@ namespace Hl7.Cql.Runtime
         #endregion
 
         #region In
+        private static T Dump<T>(string input, T res)
+        {
+            // var stack = "";// new StackTrace().ToString().ReplaceLineEndings("\\n");
+            // File.AppendAllLines("c:\\temp\\vs-new.txt", [$"{input} | {res} | {stack}"]);
+            return res;
+        }
+
         public bool? In<T>(T element, IEnumerable<T>? argument) =>
             (element, argument) switch
             {
                 (null, _)                              => null,
                 (_, null)                              => false,
-                (CqlCode code, IValueSetFacade facade) => facade.IsCodeInValueSet(code),
+                (CqlCode code, IValueSetFacade facade) => Dump($"{code.code}, {code.system}", facade.IsCodeInValueSet(code)),
                 _                                      => argument.Any(t => Compare(element, t!, null) == 0)
             };
 
@@ -831,7 +838,7 @@ namespace Hl7.Cql.Runtime
             {
                 (null, _)                              => null,
                 (_, null)                              => false,
-                (CqlCode code, IValueSetFacade facade) => facade.IsCodeInValueSet(code),
+                (CqlCode code, IValueSetFacade facade) => Dump($"{code.code}, {code.system}, {argument.Count()}", facade.IsCodeInValueSet(code)),
                 _                                      => argument.Any(t => Compare(element, t!, null) == 0)
             };
 

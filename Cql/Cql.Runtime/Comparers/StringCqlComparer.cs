@@ -58,7 +58,7 @@ namespace Hl7.Cql.Comparers
         /// <inheritdoc/>
         public bool Equivalent(string? x, string? y, string? precision = null)
         {
-            if (CqlComparers.EquivalentOnNullsOnly(x, y) is { } r)
+            if (CqlComparerMethods.EquivalentOnNullsOnly(x, y) is { } r)
                 return r;
 
             var thisNormalized = x!.Normalize();

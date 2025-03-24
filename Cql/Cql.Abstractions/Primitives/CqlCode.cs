@@ -6,14 +6,33 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#pragma warning disable RS0016
 namespace Hl7.Cql.Primitives
 {
     /// <summary>
     /// Implements the System Code type.
     /// </summary>
+    /// <param name="code">The value of the code.</param>
+    /// <param name="system">The code system.</param>
+    /// <param name="version">The code version.</param>
+    /// <param name="display">The display value for this code.</param>
+    /// <remarks>
+    /// Be careful about superfluously populating <see cref="version"/> and <see cref="display"/>.
+    /// CQL equality semantics check these values for operators like In as well as with value set checks.
+    /// </remarks>
     /// <see href="https://cql.hl7.org/09-b-cqlreference.html#code-1"/>
     [CqlPrimitiveType(CqlPrimitiveType.Code)]
-    public class CqlCode
+    [DebuggerDisplay("{ToString()}")]
+
+    public record CqlCode(string? code, string? system, string? version = null, string? display = null)
+    {
+        /// <summary>
+        /// Creates an instance.
+        /// </summary>
+        public CqlCode() : this(null, null, null, null) {}
+    }
+
+    /*public class CqlCode
     {
         /// <summary>
         /// Creates an instance.
@@ -58,5 +77,5 @@ namespace Hl7.Cql.Primitives
         /// </summary>
         public string? version { get; init; }
 
-    }
+    }*/
 }
