@@ -50,14 +50,14 @@ namespace Hl7.Cql.Fhir.Extensions
                 var codeType = type.GetGenericArguments()[0];
                 var comparerType = typeof(CodeComparer<>).MakeGenericType(codeType);
                 var codeComparer = (ICqlComparer)Activator.CreateInstance(comparerType, _comparers)!;
-                var codeStringComparer = new CodeStringComparer(codeComparer);
-                return codeStringComparer;
+                var primitiveTypeAgainstStringComparer = new PrimitiveTypeAgainstStringComparer(codeComparer);
+                return primitiveTypeAgainstStringComparer;
             });
 
             return comparers;
         }
 
-        private class CodeStringComparer(ICqlComparer inner) : ICqlComparer
+        private class PrimitiveTypeAgainstStringComparer(ICqlComparer inner) : ICqlComparer
         {
             public int? Compare(
                 object? x,
