@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/*
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -11,13 +10,13 @@ using Hl7.Cql.Abstractions;
 
 namespace Hl7.Cql.Comparers
 {
-    internal class DecimalCqlComparer : ICqlComparer, ICqlComparer<decimal?>
+    internal class DecimalCqlComparer : ICqlComparer<decimal?>// ,ICqlComparer
     {
         // CQL only supports 8 digits of scale.
         private const int MaxDecimalDigits = 8;
 
-        public int? Compare(object? x, object? y, string? precision = null) =>
-            Compare(x as decimal?, y as decimal?, precision);
+        // public int? Compare(object? x, object? y, string? precision = null) =>
+        //     Compare(x as decimal?, y as decimal?, precision);
 
         public int? Compare(decimal? x, decimal? y, string? precision = null)
         {
@@ -33,8 +32,8 @@ namespace Hl7.Cql.Comparers
         }
 
 
-        public bool? Equals(object? x, object? y, string? precision = null) =>
-            Equals(x as decimal?, y as decimal?, precision);
+        // public bool? Equals(object? x, object? y, string? precision = null) =>
+        //     Equals(x as decimal?, y as decimal?, precision);
 
         public bool? Equals(decimal? x, decimal? y, string? precision = null)
         {
@@ -49,8 +48,8 @@ namespace Hl7.Cql.Comparers
             return Comparer<decimal?>.Default.Compare(x, y) == 0;
         }
 
-        public bool Equivalent(object? x, object? y, string? precision = null) =>
-            Equivalent(x as decimal?, y as decimal?, precision);
+        // public bool Equivalent(object? x, object? y, string? precision = null) =>
+        //     Equivalent(x as decimal?, y as decimal?, precision);
 
         public bool Equivalent(decimal? x, decimal? y, string? precision = null)
         {
@@ -70,8 +69,8 @@ namespace Hl7.Cql.Comparers
         public int GetHashCode(decimal? x) =>
             x?.GetHashCode() ?? typeof(decimal).GetHashCode();
 
-        public int GetHashCode(object? x) =>
-            GetHashCode(x as decimal?);
+        // public int GetHashCode(object? x) =>
+        //     GetHashCode(x as decimal?);
 
         public int GetPrecision(decimal value) => BitConverter.GetBytes(decimal.GetBits(value)[3])[2];
         private decimal TruncateDigits(decimal value, int places)
@@ -87,4 +86,3 @@ namespace Hl7.Cql.Comparers
 
     }
 }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

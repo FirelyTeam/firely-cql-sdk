@@ -10,80 +10,85 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
+using static System.StringComparer;
 
 namespace Hl7.Cql.Comparers
 {
-    internal class CqlCodeCqlEquivalentComparer : ICqlComparer<CqlCode>, ICqlComparer
+    internal class CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer) : ICqlComparer<CqlCode>//, ICqlComparer
     {
-        public CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer)
-        {
-            CodeComparer = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
-        }
-
-        public IComparer<string> CodeComparer { get; }
+        // public CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer)
+        // {
+        //     CodeComparer = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
+        // }
+        //
+        private IComparer<string> CodeComparer { get; } = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
 
         public int? Compare(CqlCode? x, CqlCode? y, string? precision)
         {
             if (x == null || y == null)
                 return null;
+
             if (x.code == null || y.code == null)
                 return null;
-            else
-            {
-                var cc = CodeComparer.Compare(x.code, y.code);
-                if (cc == 0)
-                {
-                    if ((x.system == null) ^ (y.system == null))
-                        return null;
 
-                    var sc = StringComparer.OrdinalIgnoreCase.Compare(x.system, y.system);
-                    return sc;
-                }
+            var result = CodeComparer.Compare(x.code, y.code);
+            if (result != 0)
+                return result;
 
-                return cc;
-            }
+            if ((x.system == null) ^ (y.system == null))
+                return null;
+
+            result = OrdinalIgnoreCase.Compare(x.system, y.system);
+            return result;
+
         }
 
-        public int? Compare(object? x, object? y, string? precision) => Compare(x as CqlCode, y as CqlCode, precision);
+        // public int? Compare(object? x, object? y, string? precision) =>
+        //     Compare(x as CqlCode, y as CqlCode, precision);
 
         public bool? Equals(CqlCode? x, CqlCode? y, string? precision)
         {
             if (x == null || y == null)
                 return null;
-            var compare = Compare(x, y, precision);
-            if (compare == null)
-                return null;
-            else return compare == 0;
+
+            bool? result = Compare(x, y, precision) switch
+            {
+                null  => null,
+                var r => r == 0
+            };
+            return result;
         }
 
-        public bool? Equals(object? x, object? y, string? precision) => Equals(x as CqlCode, y as CqlCode, precision);
+        // public bool? Equals(object? x, object? y, string? precision) =>
+        //     Equals(x as CqlCode, y as CqlCode, precision);
 
         public bool Equivalent(CqlCode? x, CqlCode? y, string? precision)
         {
             if (CqlComparers.EquivalentOnNullsOnly(x?.code, y?.code) is { } r)
                 return r;
 
-            var cc = CodeComparer.Compare(x!.code, y!.code);
-            if (cc != 0)
+            var result = CodeComparer.Compare(x!.code, y!.code);
+            if (result != 0)
                 return false;
 
             if ((x.system == null) ^ (y.system == null))
                 return false;
 
-            var sc = StringComparer.OrdinalIgnoreCase.Compare(x.system, y.system);
+            var sc = OrdinalIgnoreCase.Compare(x.system, y.system);
             return sc == 0;
         }
 
-        public bool Equivalent(object? x, object? y, string? precision) => Equivalent((x as CqlCode)!, (y as CqlCode)!, precision);
+        // public bool Equivalent(object? x, object? y, string? precision) =>
+        //     Equivalent((x as CqlCode)!, (y as CqlCode)!, precision);
 
         public int GetHashCode(CqlCode? x) =>
             x == null
             ? typeof(CqlCode).GetHashCode()
-            : StringComparer.OrdinalIgnoreCase.GetHashCode(x.code ?? string.Empty) ^
-              StringComparer.OrdinalIgnoreCase.GetHashCode(x.system ?? string.Empty);
+            : OrdinalIgnoreCase.GetHashCode(x.code ?? string.Empty) ^
+              OrdinalIgnoreCase.GetHashCode(x.system ?? string.Empty);
 
-        public int GetHashCode(object? x) =>
-            GetHashCode(x as CqlCode);
+        // public int GetHashCode(object? x) =>
+        //     GetHashCode(x as CqlCode);
     }
 }
 

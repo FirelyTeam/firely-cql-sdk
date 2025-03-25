@@ -1,6 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-
-/*
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -14,15 +12,9 @@ using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir.Comparers
 {
-    internal class ResourceIdCqlComparer : CqlComparerBase<Resource>
+    internal class ResourceIdCqlComparer(ICqlComparer<string> idComparer) : CqlComparerBase<Resource>
     {
-
-        public ResourceIdCqlComparer(ICqlComparer idComparer)
-        {
-            IdComparer = idComparer ?? throw new ArgumentNullException(nameof(idComparer));
-        }
-
-        public ICqlComparer IdComparer { get; }
+        private ICqlComparer<string> IdComparer { get; } = idComparer ?? throw new ArgumentNullException(nameof(idComparer));
 
         public override int? Compare(Resource? x, Resource? y, string? precision)
         {
@@ -53,4 +45,3 @@ namespace Hl7.Cql.Fhir.Comparers
         }
     }
 }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

@@ -12,9 +12,9 @@ using Hl7.Cql.Primitives;
 namespace Hl7.Cql.Comparers
 {
     /// <summary>
-    /// Implements <see cref="ICqlComparer"/> by dispatching to registerred typed comparers.
+    /// Implements <see cref="ICqlComparer{Object}"/> by dispatching to registerred typed comparers.
     /// </summary>
-    internal sealed class CqlComparers : ICqlComparer
+    internal sealed partial class CqlComparers : ICqlComparer<object>
     {
         /*
          *
@@ -38,8 +38,9 @@ namespace Hl7.Cql.Comparers
                 _            => null
             };
 
-        internal ConcurrentDictionary<Type, ICqlComparer> Comparers { get; } = new ConcurrentDictionary<Type, ICqlComparer>();
-        internal ConcurrentDictionary<Type, Func<Type, CqlComparers, ICqlComparer>> ComparerFactories { get; } = new ConcurrentDictionary<Type, Func<Type, CqlComparers, ICqlComparer>>();
+        private ConcurrentDictionary<Type, ICqlComparer<object>> Comparers { get; } = new();
+
+        private ConcurrentDictionary<Type, Func<Type, CqlComparers, ICqlComparer<object>>> ComparerFactories { get; } = new ();
 
         /// <summary>
         /// Creates an instance with built-in comparers for system types registerred.
@@ -85,14 +86,14 @@ namespace Hl7.Cql.Comparers
             ComparerFactories.TryAdd(typeof(Nullable<>), (type, @this) =>
             {
                 var genericType = typeof(NullComparer<>).MakeGenericType(Nullable.GetUnderlyingType(type)!);
-                var cqlComparer = (ICqlComparer)Activator.CreateInstance(genericType, @this)!;
+                var cqlComparer = (ICqlComparer<object>)Activator.CreateInstance(genericType, @this)!;
                 return cqlComparer;
             });
             ComparerFactories.TryAdd(typeof(KeyValuePair<,>), (type, @this) =>
             {
                 var genericArguments = type.GetGenericArguments();
                 var genericType = typeof(KeyValuePairComparer<,>).MakeGenericType(genericArguments);
-                var cqlComparer = (ICqlComparer)Activator.CreateInstance(genericType, args: [this])!;
+                var cqlComparer = (ICqlComparer<object>)Activator.CreateInstance(genericType, args: [this])!;
                 return cqlComparer;
             });
         }
@@ -108,7 +109,7 @@ namespace Hl7.Cql.Comparers
         /// <param name="comparer">The comparer to register.</param>
         /// <returns>This instance.</returns>
         /// <exception cref="ArgumentNullException">If any parameter is <see langword="null"/>.</exception>
-        public CqlComparers Register(Type type, ICqlComparer comparer)
+        public CqlComparers Register<T>(Type type, ICqlComparer<T> comparer)
         {
             if (type is null)
             {
@@ -139,7 +140,7 @@ namespace Hl7.Cql.Comparers
         /// <returns>This instance.</returns>
         /// <exception cref="ArgumentException">If <paramref name="genericTypeDefinition"/> is not a generic type definition.</exception>
         /// <exception cref="ArgumentNullException">If any parameter is <see langword="null"/>.</exception>
-        public CqlComparers Register(Type genericTypeDefinition, Func<Type, CqlComparers, ICqlComparer> comparerFactory)
+        public CqlComparers Register(Type genericTypeDefinition, Func<Type, CqlComparers, ICqlComparer<object>> comparerFactory)
         {
             if (genericTypeDefinition is null)
             {
@@ -206,8 +207,8 @@ namespace Hl7.Cql.Comparers
                 }
             }
 
-            ICqlComparer ? comparer = null;
-            if (Comparers.TryGetValue(xType, out ICqlComparer? c))
+            ICqlComparer<object>? comparer = null;
+            if (Comparers.TryGetValue(xType, out ICqlComparer<object>? c))
             {
                 comparer = c;
             }
@@ -220,12 +221,12 @@ namespace Hl7.Cql.Comparers
                     Comparers.TryAdd(xType, gc);
                     comparer = gc;
                 }
-                else if (x is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer? enumerableComparer))
+                else if (x is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer<object>? enumerableComparer))
                 {
                     comparer = enumerableComparer;
                 }
             }
-            else if (x is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer? listComparer))
+            else if (x is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer<object>? listComparer))
             {
                 comparer = listComparer;
             }
@@ -248,7 +249,7 @@ namespace Hl7.Cql.Comparers
 
             var xType = GetKeyTypeForComparers(x);
 
-            if (Comparers.TryGetValue(xType, out ICqlComparer? comparer))
+            if (Comparers.TryGetValue(xType, out ICqlComparer<object>? comparer))
             {
                 return comparer.Equivalent(x, y, precision);
             }
@@ -290,7 +291,7 @@ namespace Hl7.Cql.Comparers
 
             var xType = GetKeyTypeForComparers(x);
 
-            if (Comparers.TryGetValue(xType, out ICqlComparer? comparer))
+            if (Comparers.TryGetValue(xType, out ICqlComparer<object>? comparer))
             {
                 return comparer.GetHashCode(x);
             }
@@ -305,6 +306,30 @@ namespace Hl7.Cql.Comparers
                 return hash;
             }
             else throw new ArgumentException($"Cannot generate a hash code for {xType.Name}", nameof(x));
+        }
+    }
+
+    file static class LocalExtensions
+    {
+        public static void TryAdd<T>(
+            this ConcurrentDictionary<Type, ICqlComparer<object>> comparers,
+            Type type,
+            ICqlComparer<T> comparer)
+        {
+            throw new NotImplementedException();
+            // if (!comparers.TryAdd(type, comparer))
+            // {
+            //     throw new InvalidOperationException($"Type {type} is already registered.");
+            // }
+        }
+
+        public static ICqlComparer<T> AddOrUpdate<T>(
+            this ConcurrentDictionary<Type, ICqlComparer<object>> comparers,
+            Type key,
+            ICqlComparer<T> addValue,
+            Func<Type, ICqlComparer<T>, ICqlComparer<T>> updateValueFactory)
+        {
+            throw new NotImplementedException();
         }
     }
 

@@ -11,26 +11,19 @@ using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir.Comparers
 {
-    internal class IdentifierComparer : CqlComparerBase<Identifier>
+    internal class IdentifierComparer(
+        ICqlComparer<string> systemComparer,
+        ICqlComparer<string> valueComparer) : CqlComparerBase<Identifier>
     {
-        public IdentifierComparer(ICqlComparer systemComparer, ICqlComparer valueComparer)
-        {
-            SystemComparer = systemComparer;
-            ValueComparer = valueComparer;
-        }
-
-        public ICqlComparer SystemComparer { get; }
-        public ICqlComparer ValueComparer { get; }
-
         public override int? Compare(Identifier? x, Identifier? y, string? precision)
         {
             if (x == null || y == null) return null;
             else
             {
-                var systemComp = SystemComparer.Compare(x.System, y.System, precision);
+                var systemComp = systemComparer.Compare(x.System, y.System, precision);
                 if (systemComp == 0)
                 {
-                    var valueComp = ValueComparer.Compare(x.Value, y.Value, precision);
+                    var valueComp = valueComparer.Compare(x.Value, y.Value, precision);
                     return valueComp;
                 }
                 else return systemComp;

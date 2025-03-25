@@ -20,7 +20,7 @@ namespace Hl7.Cql.Operators
     /// <seealso gref="https://cql.hl7.org/09-b-cqlreference.html"/>
     public interface ICqlOperators
     {
-        ICqlComparer Comparer { get; }
+        ICqlComparer<object> Comparer { get; }
 
         IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet);
 

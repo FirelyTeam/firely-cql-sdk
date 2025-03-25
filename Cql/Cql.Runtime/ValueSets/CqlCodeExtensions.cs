@@ -47,7 +47,7 @@ public static class CqlCodeExtensions
     public static IValueSetFacade Union(this IValueSetFacade left, IValueSetFacade right) => new ValueSetUnion(left, right);
 
     /// <summary>
-    /// Create an <see cref="IEqualityComparer"/> based on the given <see cref="ICqlComparer"/>.
+    /// Create an <see cref="IEqualityComparer"/> based on the given <see cref="ICqlComparer{T}"/>.
     /// </summary>
     public static IEqualityComparer<T> ToEqualityComparer<T>(this ICqlComparer<T> comparer, string? precision = null, bool useEquivalence = false) =>
         new CqlCodeEqualityComparer<T>(comparer ?? throw new ArgumentNullException(nameof(comparer)), precision, useEquivalence);

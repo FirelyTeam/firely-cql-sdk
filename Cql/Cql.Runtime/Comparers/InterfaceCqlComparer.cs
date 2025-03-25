@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/*
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -9,9 +8,11 @@
 
 using Hl7.Cql.Abstractions;
 
-namespace Hl7.Cql.Comparers
+namespace Hl7.Cql.Comparers;
+
+partial class CqlComparers
 {
-    internal class InterfaceCqlComparer<T> : ICqlComparer<T>, ICqlComparer
+    internal class InterfaceCqlComparer<T> : ICqlComparer<T>//, ICqlComparer
         where T : class, ICqlComparable<T>, IEquivalentable<T>
     {
         public int? Compare(T? x, T? y, string? precision)
@@ -28,23 +29,21 @@ namespace Hl7.Cql.Comparers
             return x.CompareTo(y, precision);
         }
 
-        public int? Compare(object? x, object? y, string? precision) => (x as T)?.CompareTo(y as T, precision);
+        // public int? Compare(object? x, object? y, string? precision) => (x as T)?.CompareTo(y as T, precision);
 
         public bool? Equals(T? x, T? y, string? precision) => Compare(x, y, precision) == 0;
 
-        public bool? Equals(object? x, object? y, string? precision) => Equals((x as T)!, (y as T)!, precision);
+        // public bool? Equals(object? x, object? y, string? precision) => Equals((x as T)!, (y as T)!, precision);
 
         public bool Equivalent(T? x, T? y, string? precision) =>
             CqlComparers.EquivalentOnNullsOnly(x, y)
             ?? x!.Equivalent(y, precision);
 
-        public bool Equivalent(object? x, object? y, string? precision) => Equivalent(x as T, y as T, precision);
+        // public bool Equivalent(object? x, object? y, string? precision) => Equivalent(x as T, y as T, precision);
 
         public int GetHashCode(T? x) =>
             x?.GetHashCode() ?? typeof(T).GetHashCode();
 
-        public int GetHashCode(object? x) =>
-            GetHashCode(x as T);
+        // public int GetHashCode(object? x) => GetHashCode(x as T);
     }
 }
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

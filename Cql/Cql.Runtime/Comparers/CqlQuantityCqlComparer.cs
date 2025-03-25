@@ -11,25 +11,20 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Comparers
+namespace Hl7.Cql.Comparers;
+
+partial class CqlComparers
 {
     /// <summary>
     /// A comparer that compares to <see cref="CqlQuantity"/> instances, possibly by normalizing their values
     /// using the UCUM system.
     /// </summary>
-    internal class CqlQuantityCqlComparer : ICqlComparer<CqlQuantity>, ICqlComparer
+    internal class CqlQuantityCqlComparer(
+        CqlComparers valueComparer,
+        ICqlComparer<string> unitComparer) : ICqlComparer<CqlQuantity>//, ICqlComparer
     {
-        /// <summary>
-        /// Create a comparer, passing in sub-comparers for the value and the unit.
-        /// </summary>
-        public CqlQuantityCqlComparer(ICqlComparer valueComparer, ICqlComparer unitComparer)
-        {
-            ValueComparer = valueComparer ?? throw new ArgumentNullException(nameof(valueComparer));
-            UnitComparer = unitComparer ?? throw new ArgumentNullException(nameof(unitComparer));
-        }
-
-        private ICqlComparer ValueComparer { get; }
-        private ICqlComparer UnitComparer { get; }
+        private CqlComparers ValueComparer { get; } = valueComparer ?? throw new ArgumentNullException(nameof(valueComparer));
+        private ICqlComparer<string> UnitComparer { get; } = unitComparer ?? throw new ArgumentNullException(nameof(unitComparer));
 
         /// <inheritdoc />
         public int? Compare(CqlQuantity? x, CqlQuantity? y, string? precision = null)
@@ -64,14 +59,14 @@ namespace Hl7.Cql.Comparers
 
         }
 
-        /// <inheritdoc />
-        public int? Compare(object? x, object? y, string? precision = null) => Compare(x as CqlQuantity, y as CqlQuantity, precision);
+        // /// <inheritdoc />
+        // public int? Compare(object? x, object? y, string? precision = null) => Compare(x as CqlQuantity, y as CqlQuantity, precision);
 
         /// <inheritdoc />
         public bool? Equals(CqlQuantity? x, CqlQuantity? y, string? precision = null) => Compare(x, y, precision) == 0;
 
-        /// <inheritdoc />
-        public bool? Equals(object? x, object? y, string? precision = null) => Equals(x as CqlQuantity, y as CqlQuantity, precision);
+        // /// <inheritdoc />
+        // public bool? Equals(object? x, object? y, string? precision = null) => Equals(x as CqlQuantity, y as CqlQuantity, precision);
 
         /// <inheritdoc />
         public bool Equivalent(CqlQuantity? x, CqlQuantity? y, string? precision = null)
@@ -89,16 +84,16 @@ namespace Hl7.Cql.Comparers
             return false;
         }
 
-        /// <inheritdoc />
-        public bool Equivalent(object? x, object? y, string? precision = null) => Equivalent(x as CqlQuantity, y as CqlQuantity, precision);
+        // /// <inheritdoc />
+        // public bool Equivalent(object? x, object? y, string? precision = null) => Equivalent(x as CqlQuantity, y as CqlQuantity, precision);
 
         /// <inheritdoc />
         public int GetHashCode(CqlQuantity? x) =>
             x?.ToString()?.GetHashCode() ?? typeof(CqlQuantity).GetHashCode();
 
-        /// <inheritdoc />
-        public int GetHashCode(object? x) =>
-            GetHashCode(x as CqlQuantity);
+        // /// <inheritdoc />
+        // public int GetHashCode(object? x) =>
+        //     GetHashCode(x as CqlQuantity);
     }
 }
 

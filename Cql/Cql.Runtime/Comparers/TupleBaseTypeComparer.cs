@@ -7,11 +7,12 @@
 */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Comparers
 {
-    internal class TupleBaseTypeComparer(ICqlComparer memberComparer) : ICqlComparer<TupleBaseType?>, ICqlComparer
+    internal class TupleBaseTypeComparer(CqlComparers memberComparer) : ICqlComparer<TupleBaseType?>//, ICqlComparer
     {
         public int? Compare(TupleBaseType? x, TupleBaseType? y, string? precision = null)
         {
@@ -73,17 +74,17 @@ namespace Hl7.Cql.Comparers
             return true;
         }
 
-        int? ICqlComparer.Compare(object? x, object? y, string? precision) =>
-            Compare(x as TupleBaseType, y as TupleBaseType, precision);
-
-        bool? ICqlComparer.Equals(object? x, object? y, string? precision) =>
-            Equals(x as TupleBaseType, y as TupleBaseType, precision);
-
-        bool IEquivalenceComparer.Equivalent(object? x, object? y, string? precision) =>
-            Equivalent(x as TupleBaseType, y as TupleBaseType, precision);
-
-        int ICqlComparer.GetHashCode(object? obj) =>
-            GetHashCode(obj as TupleBaseType);
+        // int? ICqlComparer.Compare(object? x, object? y, string? precision) =>
+        //     Compare(x as TupleBaseType, y as TupleBaseType, precision);
+        //
+        // bool? ICqlComparer.Equals(object? x, object? y, string? precision) =>
+        //     Equals(x as TupleBaseType, y as TupleBaseType, precision);
+        //
+        // bool IEquivalenceComparer.Equivalent(object? x, object? y, string? precision) =>
+        //     Equivalent(x as TupleBaseType, y as TupleBaseType, precision);
+        //
+        // int ICqlComparer.GetHashCode(object? obj) =>
+        //     GetHashCode(obj as TupleBaseType);
     }
 }
 

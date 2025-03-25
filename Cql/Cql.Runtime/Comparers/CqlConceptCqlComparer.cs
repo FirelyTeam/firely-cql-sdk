@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/*
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -11,12 +10,14 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Abstractions.Infrastructure;
 
-namespace Hl7.Cql.Comparers
+namespace Hl7.Cql.Comparers;
+
+partial class CqlComparers
 {
     /// <summary>
     /// Compares the code and system using the specified comparers.
     /// </summary>
-    internal class CqlConceptCqlComparer : ICqlComparer<CqlConcept>, ICqlComparer
+    internal class CqlConceptCqlComparer : ICqlComparer<CqlConcept>//, ICqlComparer
     {
         private IEqualityComparer<CqlCode> NewCodeEquivalenceComparer(string precision) =>
             EqualityComparerFactory.Create<CqlCode>(
@@ -28,15 +29,15 @@ namespace Hl7.Cql.Comparers
         /// <summary>
         /// Compares the code and system using the specified comparers.
         /// </summary>
-        public CqlConceptCqlComparer(ICqlComparer codeComparer)
+        public CqlConceptCqlComparer(ICqlComparer<object> codeComparer)
         {
             CodeComparer = codeComparer;
             _codeEquivalenceComparerNoPrecision = NewCodeEquivalenceComparer(null!);
         }
 
-        public ICqlComparer CodeComparer { get; }
+        public ICqlComparer<object> CodeComparer { get; }
 
-        public int? Compare(object? x, object? y, string? precision = null) => Compare(x as CqlConcept, y as CqlConcept, precision);
+        // public int? Compare(object? x, object? y, string? precision = null) => Compare(x as CqlConcept, y as CqlConcept, precision);
 
         public int? Compare(CqlConcept? x, CqlConcept? y, string? precision = null)
         {
@@ -60,8 +61,8 @@ namespace Hl7.Cql.Comparers
             return 0;
         }
 
-        public bool? Equals(object? x, object? y, string? precision = null) =>
-            Equals(x as CqlConcept, y as CqlConcept, precision);
+        // public bool? Equals(object? x, object? y, string? precision = null) =>
+            // Equals(x as CqlConcept, y as CqlConcept, precision);
 
         public bool? Equals(CqlConcept? x, CqlConcept? y, string? precision = null)
         {
@@ -100,8 +101,8 @@ namespace Hl7.Cql.Comparers
             return isEquivalent;
         }
 
-        public bool Equivalent(object? x, object? y, string? precision = null) =>
-             Equivalent(x as CqlConcept, y as CqlConcept, precision);
+        // public bool Equivalent(object? x, object? y, string? precision = null) =>
+        //      Equivalent(x as CqlConcept, y as CqlConcept, precision);
 
         public int GetHashCode(CqlConcept? x)
         {
@@ -115,10 +116,8 @@ namespace Hl7.Cql.Comparers
             }
             return baseCode;
         }
-        public int GetHashCode(object? x) =>
-            GetHashCode(x as CqlConcept);
+        // public int GetHashCode(object? x) =>
+        //     GetHashCode(x as CqlConcept);
 
     }
 }
-
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

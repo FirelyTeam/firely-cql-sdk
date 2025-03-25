@@ -11,11 +11,11 @@ using Hl7.Cql.Abstractions;
 namespace Hl7.Cql.Comparers
 {
     /// <summary>
-    /// Implements base functionality for <see cref="ICqlComparer"/> and <see cref="IEquivalenceComparer"/>.
+    /// Base type to implement CQL comparison
     /// </summary>
     /// <typeparam name="T">The type to compare.</typeparam>
     internal abstract class CqlComparerBase<T> :
-        ICqlComparer<T>, ICqlComparer/*,
+        ICqlComparer<T>/*, ICqlComparer,
         IEquivalenceComparer<T>, IEquivalenceComparer
         where T : class*/
     {
@@ -41,19 +41,19 @@ namespace Hl7.Cql.Comparers
             return res;
         }
 
-        /// <inheritdoc />
-        public int? Compare(object? x, object? y, string? precision) => Compare((T?)x, (T?)y, precision);
-
-        /// <inheritdoc />
-        public bool? Equals(object? x, object? y, string? precision) => Equals((T?)x, (T?)y, precision);
-
-        /// <inheritdoc />
-        public bool Equivalent(object? x, object? y, string? precision) => Equivalent((T?)x, (T?)y, precision);
+        // /// <inheritdoc />
+        // public int? Compare(object? x, object? y, string? precision) => Compare((T?)x, (T?)y, precision);
+        //
+        // /// <inheritdoc />
+        // public bool? Equals(object? x, object? y, string? precision) => Equals((T?)x, (T?)y, precision);
+        //
+        // /// <inheritdoc />
+        // public bool Equivalent(object? x, object? y, string? precision) => Equivalent((T?)x, (T?)y, precision);
 
         /// <inheritdoc />
         public abstract int GetHashCode(T? x);
-
-        /// <inheritdoc />
-        public int GetHashCode(object? x) => GetHashCode((T?)x);
+        //
+        // /// <inheritdoc />
+        // public int GetHashCode(object? x) => GetHashCode((T?)x);
     }
 }

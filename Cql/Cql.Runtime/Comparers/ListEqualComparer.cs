@@ -9,19 +9,14 @@
 
 using Hl7.Cql.Abstractions;
 
-namespace Hl7.Cql.Comparers
+namespace Hl7.Cql.Comparers;
+
+partial class CqlComparers
 {
-    internal class ListEqualComparer : ICqlComparer, ICqlComparer<IEnumerable>
+    internal class ListEqualComparer(CqlComparers elementComparer) : ICqlComparer<IEnumerable> //, ICqlComparer
     {
-        public ListEqualComparer(ICqlComparer elementComparer)
-        {
-            ElementComparer = elementComparer;
-        }
-
-        public ICqlComparer ElementComparer { get; }
-
-        public int? Compare(object? x, object? y, string? precision = null) =>
-           Compare(x as IEnumerable, y as IEnumerable, precision);
+        // public int? Compare(object? x, object? y, string? precision = null) =>
+        //    Compare(x as IEnumerable, y as IEnumerable, precision);
 
         public int? Compare(IEnumerable? x, IEnumerable? y, string? precision = null)
         {
@@ -49,7 +44,7 @@ namespace Hl7.Cql.Comparers
                 else if (rv == null) return 1;
                 else
                 {
-                    var compare = ElementComparer.Compare(lv!, rv!, null);
+                    var compare = elementComparer.Compare(lv!, rv!, null);
                     if (compare != 0)
                         return compare;
                 }
@@ -60,8 +55,8 @@ namespace Hl7.Cql.Comparers
             return 0;
         }
 
-        public bool? Equals(object? x, object? y, string? precision = null) =>
-            Equals(x as IEnumerable, y as IEnumerable, precision);
+        // public bool? Equals(object? x, object? y, string? precision = null) =>
+        //     Equals(x as IEnumerable, y as IEnumerable, precision);
 
         public bool? Equals(IEnumerable? x, IEnumerable? y, string? precision = null)
         {
@@ -100,8 +95,8 @@ namespace Hl7.Cql.Comparers
                 return true;
         }
 
-        public bool Equivalent(object? x, object? y, string? precision = null) =>
-            Equivalent(x as IEnumerable, y as IEnumerable, precision);
+        // public bool Equivalent(object? x, object? y, string? precision = null) =>
+        //     Equivalent(x as IEnumerable, y as IEnumerable, precision);
 
         public bool Equivalent(IEnumerable? x, IEnumerable? y, string? precision = null)
         {
@@ -126,7 +121,7 @@ namespace Hl7.Cql.Comparers
                     if (rv != null) return false;
                 }
                 else if (rv == null) return false;
-                else if (ElementComparer.Equivalent(lv!, rv!, null) == false)
+                else if (elementComparer.Equivalent(lv!, rv!, null) == false)
                     return false;
             }
             if (rit.MoveNext()) // the 2nd list is longer than the 1st.
@@ -137,8 +132,8 @@ namespace Hl7.Cql.Comparers
         public int GetHashCode(IEnumerable? x) =>
             x?.GetHashCode() ?? typeof(IEnumerable).GetHashCode();
 
-        public int GetHashCode(object? x) =>
-            GetHashCode(x as IEnumerable);
+        // public int GetHashCode(object? x) =>
+        //     GetHashCode(x as IEnumerable);
     }
 }
 

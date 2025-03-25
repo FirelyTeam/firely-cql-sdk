@@ -21,7 +21,7 @@ namespace Hl7.Cql.Operators
     /// <summary>
     /// Implements <see cref="ICqlOperators"/>.
     /// </summary>
-    internal partial class CqlOperators : ICqlOperators, ICqlComparer, ICqlComparer<object>
+    internal partial class CqlOperators : ICqlOperators, ICqlComparer<object>//, ICqlComparer
     {
         /// <summary>
         /// Creates an instance.
@@ -39,11 +39,11 @@ namespace Hl7.Cql.Operators
             TypeResolver resolver,
             TypeConverter? converter = null,
             IDataSource? dataSource = null,
-            ICqlComparer? comparer = null,
+            ICqlComparer<object>? comparer = null,
             IValueSetDictionary? valueSets = null,
             IUnitConverter? unitConverter = null,
             DateTimeIso8601? now = null,
-            ICqlComparer? enumComparer = null)
+            ICqlComparer<object>? enumComparer = null)
         {
             var operators = new CqlOperators(
                 resolver,
@@ -61,11 +61,11 @@ namespace Hl7.Cql.Operators
             TypeResolver typeResolver,
             TypeConverter typeConverter,
             IDataSource dataSource,
-            ICqlComparer comparer,
+            ICqlComparer<object> comparer,
             IValueSetDictionary valueSets,
             IUnitConverter unitConverter,
             DateTimeIso8601 now,
-            ICqlComparer enumComparer)
+            ICqlComparer<object> enumComparer)
         {
             Comparer = comparer;
             ValueSets = valueSets;
@@ -80,13 +80,13 @@ namespace Hl7.Cql.Operators
         }
 
         /// <summary>
-        /// Gets the implementation of <see cref="ICqlComparer"/> this execution uses.
+        /// Gets the implementation of <see cref="ICqlComparer{Object}"/> this execution uses.
         /// </summary>
         /// <remarks>
         /// This implementation must be able to compare many different types.  <see cref="CqlComparers"/> provides this functionality.
         /// </remarks>
         /// <seealso cref="CqlComparers"/>
-        public ICqlComparer Comparer { get; set; }
+        public ICqlComparer<object> Comparer { get; set; }
 
         /// <summary>
         /// Gets the implementation of <see cref="IValueSetDictionary"/> to use.
@@ -104,7 +104,7 @@ namespace Hl7.Cql.Operators
         public CqlDateTime NowValue { get; }
 
         private ComparerBridge DataComparer { get; }
-        internal ICqlComparer EnumComparer { get; }
+        internal ICqlComparer<object> EnumComparer { get; }
 
         /// <summary>
         /// Raised when the <see cref="ICqlOperators.Message{T}(T, string, string, string)"/> method is called in a CQL library.

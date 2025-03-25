@@ -10,9 +10,11 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Comparers
+namespace Hl7.Cql.Comparers;
+
+partial class CqlComparers
 {
-    internal class CqlTupleTypeComparer(ICqlComparer memberComparer) : ICqlComparer<ITuple?>, ICqlComparer
+    internal class CqlTupleTypeComparer(CqlComparers memberComparer) : ICqlComparer<ITuple?>//, ICqlComparer
     {
         private static readonly int FallbackHashCode = typeof(ITuple).GetHashCode() ^ 098174506;
 
@@ -72,17 +74,17 @@ namespace Hl7.Cql.Comparers
             return true;
         }
 
-        int? ICqlComparer.Compare(object? x, object? y, string? precision) =>
-            Compare(x as ITuple, y as ITuple, precision);
-
-        bool? ICqlComparer.Equals(object? x, object? y, string? precision) =>
-            Equals(x as ITuple, y as ITuple, precision);
-
-        bool IEquivalenceComparer.Equivalent(object? x, object? y, string? precision) =>
-            Equivalent(x as ITuple, y as ITuple, precision);
-
-        int ICqlComparer.GetHashCode(object? obj) =>
-            GetHashCode(obj as ITuple);
+        // int? ICqlComparer.Compare(object? x, object? y, string? precision) =>
+        //     Compare(x as ITuple, y as ITuple, precision);
+        //
+        // bool? ICqlComparer.Equals(object? x, object? y, string? precision) =>
+        //     Equals(x as ITuple, y as ITuple, precision);
+        //
+        // bool IEquivalenceComparer.Equivalent(object? x, object? y, string? precision) =>
+        //     Equivalent(x as ITuple, y as ITuple, precision);
+        //
+        // int ICqlComparer.GetHashCode(object? obj) =>
+        //     GetHashCode(obj as ITuple);
     }
 }
 

@@ -14,7 +14,7 @@ namespace Hl7.Cql.Fhir.Comparers
     internal class CodeComparer<T> : CqlComparerBase<Code<T>>
         where T : struct, Enum
     {
-        public CodeComparer(ICqlComparer valueComparer)
+        public CodeComparer(ICqlComparer<T?> valueComparer)
         {
             ValueComparer = valueComparer;
             if (typeof(T).IsEnum ||
@@ -28,18 +28,19 @@ namespace Hl7.Cql.Fhir.Comparers
             }
             else
             {
-                CompareFunction = (x, y, precision) => valueComparer.Compare(x, y, precision);
-                EquivalentFunction = (x, y, precision) => valueComparer.Equivalent(x, y, precision);
+                CompareFunction = valueComparer.Compare;
+                EquivalentFunction = valueComparer.Equivalent;
             }
         }
 
-        public ICqlComparer ValueComparer { get; }
+        public ICqlComparer<T?> ValueComparer { get; }
 
         private readonly Func<T?, T?, string?, int?> CompareFunction;
         private readonly Func<T?, T?, string?, bool> EquivalentFunction;
 
-        private int? CompareEnums(T? x, T? y, string? precision) => Comparer<T?>.Default.Compare(x, y);
-        private bool EquivalentEnums(T? x, T? y, string? precision) => Equals(x, y);
+        private static int? CompareEnums(T? x, T? y, string? precision) => Comparer<T?>.Default.Compare(x, y);
+
+        private static bool EquivalentEnums(T? x, T? y, string? precision) => Equals(x, y);
 
         public override int? Compare(Code<T>? x, Code<T>? y, string? precision)
         {

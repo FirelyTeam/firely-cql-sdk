@@ -10,7 +10,7 @@ using Hl7.Fhir.Utility;
 
 namespace Hl7.Cql.Fhir.Comparers
 {
-    internal class FhirEnumComparer : ICqlComparer
+    internal class FhirEnumComparer : ICqlComparer<object>
     {
 
         public static readonly FhirEnumComparer Default = new FhirEnumComparer();
