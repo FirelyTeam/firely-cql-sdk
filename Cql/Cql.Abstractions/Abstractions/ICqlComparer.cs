@@ -47,23 +47,6 @@ namespace Hl7.Cql.Abstractions
         int GetHashCode(object? x);
     }
 
-    internal abstract class CqlComparerDecorator(ICqlComparer inner) : ICqlComparer
-    {
-        protected ICqlComparer Inner { get; } = inner;
-
-        public virtual bool? Equals(object? x, object? y, string? precision) =>
-            Inner.Equals(x, y, precision);
-
-        public virtual int? Compare(object? x, object? y, string? precision) =>
-            Inner.Compare(x, y, precision);
-
-        public virtual int GetHashCode(object? x) =>
-            Inner.GetHashCode(x);
-
-        public virtual bool Equivalent(object? x, object? y, string? precision) =>
-            Inner.Equivalent(x, y, precision);
-    }
-
     /// <summary>
     /// Defines a method that a type implements to compare two objects.
     /// </summary>

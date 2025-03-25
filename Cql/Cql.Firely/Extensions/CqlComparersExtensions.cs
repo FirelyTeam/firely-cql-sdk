@@ -57,9 +57,9 @@ namespace Hl7.Cql.Fhir.Extensions
             return comparers;
         }
 
-        private class CodeStringComparer(ICqlComparer inner) : CqlComparerDecorator(inner)
+        private class CodeStringComparer(ICqlComparer inner) : ICqlComparer
         {
-            public override int? Compare(
+            public int? Compare(
                 object? x,
                 object? y,
                 string? precision)
@@ -74,14 +74,23 @@ namespace Hl7.Cql.Fhir.Extensions
                     return StringComparer.Ordinal.Compare(xCode.ObjectValue, yString);
                 }
 
-                return base.Compare(x, y, precision);
+                return inner.Compare(x, y, precision);
             }
 
-            public override bool? Equals(
+            public int GetHashCode(object? x) =>
+                throw new UnreachableException("CqlComparers always goes through Compare, so we never reach here");
+
+            public bool? Equals(
                 object? x,
                 object? y,
                 string? precision) =>
                 throw new UnreachableException("CqlComparers always goes through Compare, so we never reach here");
+
+            public bool Equivalent(
+                object? x,
+                object? y,
+                string? precision) =>
+                Compare(x, y, precision) == 0;
         }
 
         /// <summary>
