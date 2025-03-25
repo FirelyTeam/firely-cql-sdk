@@ -11,13 +11,12 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Conversion;
 using Hl7.Cql.Iso8601;
-using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 
-namespace Hl7.Cql.Runtime
+namespace Hl7.Cql.Operators
 {
-    using TypeConverter = Hl7.Cql.Conversion.TypeConverter;
+    using TypeConverter = Conversion.TypeConverter;
 
     /// <summary>
     /// Implements <see cref="ICqlOperators"/>.
@@ -36,7 +35,8 @@ namespace Hl7.Cql.Runtime
         /// <param name="now">The value upon which <see cref="ICqlOperators.Now"/> and <see cref="ICqlOperators.Today"/> are based, or <see langword="null" />.  When <see langword="null" />, the result of <see cref="DateTimeIso8601.UtcNow"/> is used.</param>
         /// <param name="enumComparer">The comparer to  use to compare enumerated values.</param>
         /// <returns></returns>
-        public static CqlOperators Create(TypeResolver resolver,
+        public static CqlOperators Create(
+            TypeResolver resolver,
             TypeConverter? converter = null,
             IDataSource? dataSource = null,
             ICqlComparer? comparer = null,
@@ -45,7 +45,8 @@ namespace Hl7.Cql.Runtime
             DateTimeIso8601? now = null,
             ICqlComparer? enumComparer = null)
         {
-            var operators = new CqlOperators(resolver,
+            var operators = new CqlOperators(
+                resolver,
                 converter ?? TypeConverter.Create(),
                 dataSource ?? new CompositeDataSource(),
                 comparer ?? new CqlComparers(),
@@ -56,7 +57,7 @@ namespace Hl7.Cql.Runtime
             return operators;
         }
 
-        protected CqlOperators(
+        private CqlOperators(
             TypeResolver typeResolver,
             TypeConverter typeConverter,
             IDataSource dataSource,
@@ -74,9 +75,8 @@ namespace Hl7.Cql.Runtime
             TypeResolver = typeResolver ?? throw new ArgumentNullException(nameof(typeResolver));
             TypeConverter = typeConverter ?? throw new ArgumentNullException(nameof(typeConverter));
             DataSource = dataSource;
-            var bridge = new CqlComparerBridge<object>(this);
-            DataComparer = bridge;
-            EqualityComparer = bridge;
+            DataComparer = new ComparerBridge(this);
+            EqualityComparer = new EqualityComparerBridge(this);
         }
 
         /// <summary>
@@ -103,7 +103,7 @@ namespace Hl7.Cql.Runtime
         public IDataSource DataSource { get; }
         public CqlDateTime NowValue { get; }
 
-        internal IComparer<object> DataComparer { get; }
+        private ComparerBridge DataComparer { get; }
         internal ICqlComparer EnumComparer { get; }
 
         /// <summary>

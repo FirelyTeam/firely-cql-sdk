@@ -1,6 +1,6 @@
 ﻿using Hl7.Cql.Comparers;
 
-namespace Hl7.Cql.Runtime;
+namespace Hl7.Cql.Operators;
 
 internal partial class CqlOperators
 {
@@ -18,7 +18,7 @@ internal partial class CqlOperators
      *
      */
 
-    internal IEqualityComparer<object> EqualityComparer { get; }
+    private EqualityComparerBridge EqualityComparer { get; }
 
     public bool? Equals(object? x, object? y, string? precision) => Comparer.Equals(x, y, precision);
 

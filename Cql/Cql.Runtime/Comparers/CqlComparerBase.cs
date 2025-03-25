@@ -21,6 +21,7 @@ namespace Hl7.Cql.Comparers
 
         /// <inheritdoc />
         public abstract int? Compare(T? x, T? y, string? precision);
+
         /// <inheritdoc />
         public bool Equivalent(T? x, T? y, string? precision) =>
             CqlComparers.EquivalentOnNullsOnly(x, y)
@@ -31,10 +32,12 @@ namespace Hl7.Cql.Comparers
         /// <inheritdoc />
         public virtual bool? Equals(T? x, T? y, string? precision)
         {
-            var result = Compare(x, y, precision);
-            if (result == null)
-                return null;
-            else return result == 0;
+            bool? res = Compare(x, y, precision) switch
+            {
+                null  => null,
+                var r => r == 0
+            };
+            return res;
         }
 
         /// <inheritdoc />

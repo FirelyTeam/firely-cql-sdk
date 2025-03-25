@@ -12,7 +12,7 @@ using Hl7.Cql.ValueSets;
 
 namespace Hl7.Cql.Operators
 {
-    using ListSortDirection = System.ComponentModel.ListSortDirection;
+    using ListSortDirection = ListSortDirection;
 
     /// <summary>
     /// Defines the operators in the CQL specification.
