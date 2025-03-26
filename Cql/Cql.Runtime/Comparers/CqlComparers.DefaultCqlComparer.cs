@@ -16,32 +16,10 @@ partial class CqlComparers
     /// Implements comparison through <see cref="Comparer{T}.Default"/>.
     /// </summary>
     /// <typeparam name="T">The type to compare.</typeparam>
-    private class DefaultCqlComparer<T> : ICqlComparer<T>//, ICqlComparer
+    private class DefaultCqlComparer<T> : ICqlComparer<T>
     {
-        // /// <inheritdoc />
-        // public int? Compare(object? x, object? y, string? precision = null)
-        // {
-        //     if (x is T tx)
-        //     {
-        //         if (y is T ty)
-        //             return Compare(tx, ty, precision);
-        //     }
-        //     return -1;
-        // }
-
         /// <inheritdoc />
         public int? Compare(T? x, T? y, string? precision = null) => Comparer<T>.Default.Compare(x, y);
-
-        // /// <inheritdoc />
-        // public bool? Equals(object? x, object? y, string? precision = null) =>
-        //     Compare(x, y, precision) == 0;
-
-        /// <inheritdoc />
-        public bool? Equals(T? x, T? y, string? precision = null) => Comparer<T>.Default.Compare(x, y) == 0;
-
-        // /// <inheritdoc />
-        // public bool Equivalent(object? x, object? y, string? precision = null) =>
-        //     Compare(x, y, precision) == 0;
 
         /// <inheritdoc />
         public bool Equivalent(T? x, T? y, string? precision = null) =>
@@ -53,9 +31,5 @@ partial class CqlComparers
             x is null
                 ? typeof(T).GetHashCode()
                 : EqualityComparer<T>.Default.GetHashCode(x);
-
-        // /// <inheritdoc />
-        // public int GetHashCode(object? x) =>
-        //     GetHashCode((T?)x);
     }
 }

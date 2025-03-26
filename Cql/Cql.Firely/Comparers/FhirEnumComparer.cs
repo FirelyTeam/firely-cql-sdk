@@ -18,7 +18,9 @@ namespace Hl7.Cql.Fhir.Comparers
         /// <inheritdoc/>
         public int? Compare(object? x, object? y, string? precision)
         {
-            if (x == null || y == null) return null;
+            if (x == null || y == null)
+                return null;
+
             var xType = x.GetType();
             var yType = y.GetType();
             if (xType.IsEnum)

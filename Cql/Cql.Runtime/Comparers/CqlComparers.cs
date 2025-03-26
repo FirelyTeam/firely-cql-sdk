@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -81,7 +81,6 @@ namespace Hl7.Cql.Comparers
             {
                 var genericType = typeof(NullComparer<>).MakeGenericType(Nullable.GetUnderlyingType(type)!);
                 var cqlComparer = CreateCqlComparerAndUnwrapNonGeneric(genericType, self)!;
-                //var cqlComparer = (ICqlComparer<object>)Activator.CreateInstance(genericType, @this)!;
                 return cqlComparer;
             });
             ComparerFactories.TryAdd(typeof(KeyValuePair<,>), (type, @this) =>
@@ -92,7 +91,6 @@ namespace Hl7.Cql.Comparers
                 return cqlComparer;
             });
         }
-
 
         /// <summary>
         /// Registers a comparer for <see cref="Type"/>.
@@ -166,9 +164,6 @@ namespace Hl7.Cql.Comparers
         }
 
         #region ICqlComparer
-
-        /// <inheritdoc />
-        public bool? Equals(object? x, object? y, string? precision) => Compare(x, y, precision) == 0;
 
         /// <inheritdoc />
         public int? Compare(object? x, object? y, string? precision)
@@ -293,21 +288,18 @@ namespace Hl7.Cql.Comparers
         public static void TryAdd<T>(
             this ConcurrentDictionary<Type, ICqlComparer<object>> comparers,
             Type type,
-            ICqlComparer<T> comparer)
-        {
+            ICqlComparer<T> comparer) =>
             comparers.AddOrUpdate(
                 type,
                 _ => comparer.WrapNonGeneric(),
                 (_, prev) => prev);
-        }
 
-        public static ICqlComparer<T> AddOrUpdate<T>(
+        public static void AddOrUpdate<T>(
             this ConcurrentDictionary<Type, ICqlComparer<object>> comparers,
             Type type,
             ICqlComparer<T> addComparer,
-            Func<Type, ICqlComparer<T>, ICqlComparer<T>> updateComparerFactory)
-        {
-            var result = comparers.AddOrUpdate(
+            Func<Type, ICqlComparer<T>, ICqlComparer<T>> updateComparerFactory) =>
+            comparers.AddOrUpdate(
                 type,
                 _ => addComparer.WrapNonGeneric(),
                 (type, prev) =>
@@ -316,8 +308,5 @@ namespace Hl7.Cql.Comparers
                     var newTyped = updateComparerFactory(type, prevTyped);
                     return newTyped.WrapNonGeneric();
                 });
-
-            return result.UnwrapGeneric<T>()!;
-        }
     }
 }

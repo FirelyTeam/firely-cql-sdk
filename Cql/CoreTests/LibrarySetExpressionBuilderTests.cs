@@ -1,4 +1,3 @@
-using Hl7.Cql;
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Internal;
 using Hl7.Cql.Compiler;

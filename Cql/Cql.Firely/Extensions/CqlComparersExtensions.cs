@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -8,10 +8,8 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Comparers;
-using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Fhir.Comparers;
 using Hl7.Fhir.Model;
-using static Hl7.Cql.Comparers.CqlComparerSharedMethods;
 
 namespace Hl7.Cql.Fhir.Extensions
 {
@@ -82,17 +80,11 @@ namespace Hl7.Cql.Fhir.Extensions
             public int GetHashCode(object? x) =>
                 throw new UnreachableException("CqlComparers always goes through Compare, so we never reach here");
 
-            public bool? Equals(
-                object? x,
-                object? y,
-                string? precision) =>
-                throw new UnreachableException("CqlComparers always goes through Compare, so we never reach here");
-
             public bool Equivalent(
                 object? x,
                 object? y,
                 string? precision) =>
-                Compare(x, y, precision) == 0;
+                this.EquivalentViaCqlCompare(x, y, precision);
         }
 
         /// <summary>

@@ -12,32 +12,16 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    private class DecimalCqlComparer : ICqlComparer<decimal?>// ,ICqlComparer
+    private class DecimalCqlComparer : ICqlComparer<decimal?>
     {
         // CQL only supports 8 digits of scale.
         private const int MaxDecimalDigits = 8;
-
-        // public int? Compare(object? x, object? y, string? precision = null) =>
-        //     Compare(x as decimal?, y as decimal?, precision);
 
         public int? Compare(decimal? x, decimal? y, string? precision = null)
         {
             var result = CompareOnNullsOnly(x, y) ?? Comparer<decimal?>.Default.Compare(TruncateDigits(x ?? 0, MaxDecimalDigits), TruncateDigits(y ?? 0, MaxDecimalDigits));
             return result;
         }
-
-        // public bool? Equals(object? x, object? y, string? precision = null) =>
-        //     Equals(x as decimal?, y as decimal?, precision);
-
-        public bool? Equals(decimal? x, decimal? y, string? precision = null)
-        {
-            var result = EquivalentOnNullsOnly(x, y)
-                         ?? Comparer<decimal>.Default.Compare(x!.Value, y!.Value) == 0;
-            return result;
-        }
-
-        // public bool Equivalent(object? x, object? y, string? precision = null) =>
-        //     Equivalent(x as decimal?, y as decimal?, precision);
 
         public bool Equivalent(decimal? x, decimal? y, string? precision = null)
         {

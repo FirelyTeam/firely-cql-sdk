@@ -1,4 +1,12 @@
-﻿using Hl7.Cql.Comparers;
+/*
+ * Copyright (c) 2025, Firely, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+
+using Hl7.Cql.Abstractions;
 
 namespace Hl7.Cql.Operators;
 
@@ -20,9 +28,7 @@ internal partial class CqlOperators
 
     private EqualityComparerBridge EqualityComparer { get; }
 
-    // bool? ICqlComparer<object>.Equals(object? x, object? y, string? precision) => Comparer.Equals(x, y, precision);
-
-    public bool? Equal(object? x, object? y) => x == null || y == null ? null : Comparer.Equals(x, y, null);
+    public bool? Equal(object? left, object? right) => Comparer.Equals(left, right, null);
 
     public bool? ListEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right)
     {
@@ -65,7 +71,7 @@ internal partial class CqlOperators
             return true;
     }
 
-    public bool? NotEqual(object? left, object? right) => !Equal(left, right);
+    public bool? NotEqual(object? left, object? right) => !Comparer.Equals(left, right, null);
 
     public bool? ListNotEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right) => !ListEqual(left, right);
 
@@ -84,11 +90,11 @@ internal partial class CqlOperators
      * Spec: With the exception of null behavior and the semantics for specific types defined below, equivalence is the same as equality.
      */
 
-    public bool Equivalent(object? x, object? y, string? precision) =>
-        EquivalentOnNullsOnly(x, y)
-        ?? Comparer.Equivalent(x, y, precision);
+    public bool Equivalent(object? left, object? right, string? precision) =>
+        EquivalentOnNullsOnly(left, right)
+        ?? Comparer.Equivalent(left, right, precision);
 
-    public bool? Equivalent(object? x, object? y) => Equivalent(x!, y!, null);
+    public bool? Equivalent(object? left, object? right) => Equivalent(left!, right!, null);
 
     public bool? Equivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right)
     {

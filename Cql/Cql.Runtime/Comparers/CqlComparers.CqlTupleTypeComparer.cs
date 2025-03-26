@@ -1,11 +1,10 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
-
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
@@ -14,7 +13,7 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    private class CqlTupleTypeComparer(CqlComparers memberComparer) : ICqlComparer<ITuple?>//, ICqlComparer
+    private class CqlTupleTypeComparer(CqlComparers memberComparer) : ICqlComparer<ITuple?>
     {
         private static readonly int FallbackHashCode = typeof(ITuple).GetHashCode() ^ 098174506;
 
@@ -46,9 +45,6 @@ partial class CqlComparers
         public int GetHashCode(ITuple? obj) =>
             obj?.GetHashCode() ?? FallbackHashCode;
 
-        public bool? Equals(ITuple? x, ITuple? y, string? precision = null) =>
-            Compare(x, y, precision) == 0;
-
         public bool Equivalent(ITuple? x, ITuple? y, string? precision = null)
         {
             if (EquivalentOnNullsOnly(x, y) is { } r)
@@ -73,19 +69,5 @@ partial class CqlComparers
 
             return true;
         }
-
-        // int? ICqlComparer.Compare(object? x, object? y, string? precision) =>
-        //     Compare(x as ITuple, y as ITuple, precision);
-        //
-        // bool? ICqlComparer.Equals(object? x, object? y, string? precision) =>
-        //     Equals(x as ITuple, y as ITuple, precision);
-        //
-        // bool IEquivalenceComparer.Equivalent(object? x, object? y, string? precision) =>
-        //     Equivalent(x as ITuple, y as ITuple, precision);
-        //
-        // int ICqlComparer.GetHashCode(object? obj) =>
-        //     GetHashCode(obj as ITuple);
     }
 }
-
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2024, NCQA and contributors
+ * Copyright (c) 2024, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -166,8 +166,8 @@ namespace Hl7.Cql.Operators
         bool? Ends<T>(CqlInterval<T> left, CqlInterval<T> right, string? precision);
         bool? EndsWith(string argument, string suffix);
         bool? EnumEqualsString(object? @enum, string? value);
-        bool? Equal(object? x, object? y);
-        bool? Equivalent(object? x, object? y);
+        bool? Equal(object? left, object? right);
+        bool? Equivalent(object? left, object? right);
         bool? Exists<T>(IEnumerable<T> list);
         decimal? Exp(decimal? argument);
         IEnumerable<CqlInterval<CqlDate?>>? Expand(IEnumerable<CqlInterval<CqlDate?>?>? argument, CqlQuantity? per);

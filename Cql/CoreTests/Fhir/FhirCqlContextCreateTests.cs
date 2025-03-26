@@ -1,5 +1,4 @@
 ﻿#nullable enable
-using Hl7.Cql;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;

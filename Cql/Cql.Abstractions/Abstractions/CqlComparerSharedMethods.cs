@@ -1,17 +1,15 @@
 /*
- * Copyright (c) 2025, NCQA and contributors
+ * Copyright (c) 2025, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Infrastructure;
 
-namespace Hl7.Cql.Comparers;
-
+namespace Hl7.Cql.Abstractions;
 
 internal static class CqlComparerSharedMethods
 {
@@ -26,7 +24,7 @@ internal static class CqlComparerSharedMethods
      * With the exception of null behavior and the semantics for specific types defined below, equivalence is the same as equality.
      */
 
-    internal static bool? EquivalentOnNullsOnly<T>(
+    public static bool? EquivalentOnNullsOnly<T>(
         [NoEnumeration, NotNullWhen(true)] T? left,
         [NoEnumeration, NotNullWhen(true)] T? right) =>
         (left, right) switch
@@ -37,7 +35,7 @@ internal static class CqlComparerSharedMethods
             _            => null
         };
 
-    internal static int? CompareOnNullsOnly<T>(
+    public static int? CompareOnNullsOnly<T>(
         [NoEnumeration, NotNullWhen(true)] T? left,
         [NoEnumeration, NotNullWhen(true)] T? right) =>
         (left, right) switch
@@ -48,9 +46,12 @@ internal static class CqlComparerSharedMethods
             _            => null
         };
 
-    internal static int GetHashCodeForType<T>() => typeof(T).GetHashCode();
+    public static bool EquivalentViaCqlCompare<T>(this ICqlComparer<T> comparer, T? x, T? y, string? precision) =>
+        comparer.Compare(x, y, precision) is null or 0;
 
-    internal static ICqlComparer<object> CreateCqlComparerAndUnwrapNonGeneric(Type comparerType, params object[] args)
+    public static int GetHashCodeForType<T>() => typeof(T).GetHashCode();
+
+    public static ICqlComparer<object> CreateCqlComparerAndUnwrapNonGeneric(Type comparerType, params object[] args)
     {
         var icqlComparerType = comparerType.GetTypeImplementingGenericTypeDefinition(typeof(ICqlComparer<>));
         if (icqlComparerType is null)
@@ -68,60 +69,16 @@ internal static class CqlComparerSharedMethods
     private static readonly MethodInfo MethodInfo_WrapNonGeneric =
         ReflectionUtility.GenericMethodDefinitionOf(() => WrapNonGeneric<object>(default!));
 
-
-    internal static ICqlComparer<object> WrapNonGeneric<T>(this ICqlComparer<T> genericComparer) =>
+    public static ICqlComparer<object> WrapNonGeneric<T>(this ICqlComparer<T> genericComparer) =>
         genericComparer as ICqlComparer<object>
         ?? new NonGenericAdapterCqlComparer<T>(genericComparer);
 
-    internal static ICqlComparer<T>? UnwrapGeneric<T>(this ICqlComparer<object> prev) =>
+    public static ICqlComparer<T>? UnwrapGeneric<T>(this ICqlComparer<object> prev) =>
         prev is IAdapter { Inner: ICqlComparer<T> inner }
             ? inner
             : prev as ICqlComparer<T> // In this case T will be object
     ;
 }
 
-
-file interface IAdapter
-{
-    public object Inner { get; }
-}
-
-file class NonGenericAdapterCqlComparer<T>(ICqlComparer<T> genericComparer) : ICqlComparer<object>, IAdapter
-{
-    public bool Equivalent(
-        object? x,
-        object? y,
-        string? precision)
-    {
-        var result = EquivalentOnNullsOnly(x, y)
-                     ?? genericComparer.Equivalent((T)x!, (T)y!, precision);
-        return result;
-    }
-
-    public bool? Equals(
-        object? x,
-        object? y,
-        string? precision)
-    {
-        var result = EquivalentOnNullsOnly(x, y)
-                     ?? genericComparer.Equals((T)x!, (T)y!, precision);
-        return result;
-    }
-
-    public int? Compare(
-        object? x,
-        object? y,
-        string? precision)
-    {
-        var result = CompareOnNullsOnly(x, y) ?? genericComparer.Compare((T)x!, (T)y!, precision);
-        return result;
-    }
-
-    public int GetHashCode(object? x)
-    {
-        var result = x is null ? GetHashCodeForType<T>() : genericComparer.GetHashCode((T)x);
-        return result;
-    }
-
-    object IAdapter.Inner => genericComparer;
-}
+file class NonGenericAdapterCqlComparer<T>(ICqlComparer<T> genericComparer) :
+    CqlComparerAdapter<object, T>(genericComparer, o => (T?)o);

@@ -1,5 +1,4 @@
-﻿using Hl7.Cql;
-using Hl7.Cql.Iso8601;
+﻿using Hl7.Cql.Iso8601;
 using Hl7.Cql.Model;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;

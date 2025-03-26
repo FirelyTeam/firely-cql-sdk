@@ -1,5 +1,4 @@
-﻿using Hl7.Cql;
-using Hl7.Cql.Abstractions;
+﻿using Hl7.Cql.Abstractions;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Fhir;

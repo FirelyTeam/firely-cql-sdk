@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2024, NCQA and contributors
+ * Copyright (c) 2024, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -9,7 +9,6 @@
 using Hl7.Cql.Compiler.Expressions;
 using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
-using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 
 namespace Hl7.Cql.Compiler;

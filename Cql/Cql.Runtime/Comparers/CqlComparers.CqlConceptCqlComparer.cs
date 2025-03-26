@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -17,7 +17,7 @@ partial class CqlComparers
     /// <summary>
     /// Compares the code and system using the specified comparers.
     /// </summary>
-    private class CqlConceptCqlComparer : ICqlComparer<CqlConcept>//, ICqlComparer
+    private class CqlConceptCqlComparer : ICqlComparer<CqlConcept>
     {
         private IEqualityComparer<CqlCode> NewCodeEquivalenceComparer(string precision) =>
             EqualityComparerFactory.Create<CqlCode>(
@@ -36,8 +36,6 @@ partial class CqlComparers
         }
 
         private ICqlComparer<object> CodeComparer { get; }
-
-        // public int? Compare(object? x, object? y, string? precision = null) => Compare(x as CqlConcept, y as CqlConcept, precision);
 
         public int? Compare(CqlConcept? x, CqlConcept? y, string? precision = null)
         {
@@ -60,16 +58,6 @@ partial class CqlComparers
                     return compare;
             }
             return 0;
-        }
-
-        // public bool? Equals(object? x, object? y, string? precision = null) =>
-            // Equals(x as CqlConcept, y as CqlConcept, precision);
-
-        public bool? Equals(CqlConcept? x, CqlConcept? y, string? precision = null)
-        {
-            if (x == null || y == null)
-                return null;
-            else return Compare(x, y, precision) == 0;
         }
 
         public bool Equivalent(CqlConcept? x, CqlConcept? y, string? precision = null)
@@ -102,23 +90,14 @@ partial class CqlComparers
             return isEquivalent;
         }
 
-        // public bool Equivalent(object? x, object? y, string? precision = null) =>
-        //      Equivalent(x as CqlConcept, y as CqlConcept, precision);
-
         public int GetHashCode(CqlConcept? x)
         {
-            int baseCode = typeof(CqlConcept).GetHashCode();
-            if (x == null || x.codes == null)
+            int baseCode = GetHashCodeForType<CqlConcept>();
+            if (x?.codes == null)
                 return baseCode;
-            foreach (var code in x.codes)
-            {
-                var codeHashCode = CodeComparer.GetHashCode(code);
-                baseCode ^= codeHashCode;
-            }
-            return baseCode;
-        }
-        // public int GetHashCode(object? x) =>
-        //     GetHashCode(x as CqlConcept);
 
+            var result = x.codes.Select(CodeComparer.GetHashCode).Aggregate(baseCode, HashCode.Combine);
+            return result;
+        }
     }
 }

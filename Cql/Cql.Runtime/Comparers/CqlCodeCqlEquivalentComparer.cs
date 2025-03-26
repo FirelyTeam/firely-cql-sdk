@@ -1,7 +1,5 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-
-/*
- * Copyright (c) 2023, NCQA and contributors
+﻿/*
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -14,13 +12,8 @@ using static System.StringComparer;
 
 namespace Hl7.Cql.Comparers
 {
-    internal class CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer) : ICqlComparer<CqlCode>//, ICqlComparer
+    internal class CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer) : ICqlComparer<CqlCode>
     {
-        // public CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer)
-        // {
-        //     CodeComparer = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
-        // }
-        //
         private IComparer<string> CodeComparer { get; } = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
 
         public int? Compare(CqlCode? x, CqlCode? y, string? precision)
@@ -43,25 +36,6 @@ namespace Hl7.Cql.Comparers
 
         }
 
-        // public int? Compare(object? x, object? y, string? precision) =>
-        //     Compare(x as CqlCode, y as CqlCode, precision);
-
-        public bool? Equals(CqlCode? x, CqlCode? y, string? precision)
-        {
-            if (x == null || y == null)
-                return null;
-
-            bool? result = Compare(x, y, precision) switch
-            {
-                null  => null,
-                var r => r == 0
-            };
-            return result;
-        }
-
-        // public bool? Equals(object? x, object? y, string? precision) =>
-        //     Equals(x as CqlCode, y as CqlCode, precision);
-
         public bool Equivalent(CqlCode? x, CqlCode? y, string? precision)
         {
             if (EquivalentOnNullsOnly(x?.code, y?.code) is { } r)
@@ -78,18 +52,10 @@ namespace Hl7.Cql.Comparers
             return sc == 0;
         }
 
-        // public bool Equivalent(object? x, object? y, string? precision) =>
-        //     Equivalent((x as CqlCode)!, (y as CqlCode)!, precision);
-
         public int GetHashCode(CqlCode? x) =>
             x == null
             ? typeof(CqlCode).GetHashCode()
             : OrdinalIgnoreCase.GetHashCode(x.code ?? string.Empty) ^
               OrdinalIgnoreCase.GetHashCode(x.system ?? string.Empty);
-
-        // public int GetHashCode(object? x) =>
-        //     GetHashCode(x as CqlCode);
     }
 }
-
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

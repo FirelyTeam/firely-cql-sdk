@@ -1,13 +1,15 @@
 ﻿/*
- * Copyright (c) 2024, NCQA and contributors
+ * Copyright (c) 2024, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Comparers;
 using Hl7.Fhir.Model;
+using TypeExtensions = Hl7.Cql.Abstractions.Infrastructure.TypeExtensions;
 
 namespace Hl7.Cql.Fhir.Comparers
 {
@@ -16,14 +18,11 @@ namespace Hl7.Cql.Fhir.Comparers
     {
         public CodeComparer(CqlComparers valueComparer)
         {
-            if (typeof(T).IsEnum ||
-                (typeof(T).IsGenericType
-                    && typeof(T).GetGenericTypeDefinition() == typeof(Nullable<>)
-                    && Nullable.GetUnderlyingType(typeof(T))!.IsEnum))
+            // Comparing Code<TEnum> or Code<TEnum?>
+            if (TypeExtensions.IsEnum(typeof(T)))
             {
                 _compareFunction = CompareEnums;
                 _equivalentFunction = EquivalentEnums;
-
             }
             else
             {
@@ -36,21 +35,24 @@ namespace Hl7.Cql.Fhir.Comparers
         delegate bool EquivalentFunction<in TComp>(TComp? x, TComp? y, string? precision);
         private readonly EquivalentFunction<T?> _equivalentFunction;
 
-        private static int? CompareEnums(T? x, T? y, string? precision) => Comparer<T?>.Default.Compare(x, y);
+        private static int? CompareEnums(T? x, T? y, string? precision) =>
+            CompareOnNullsOnly(x, y)
+            ?? Comparer<T?>.Default.Compare(x, y);
 
-        private static bool EquivalentEnums(T? x, T? y, string? precision) => Equals(x, y);
+        private static bool EquivalentEnums(T? x, T? y, string? precision) =>
+            EquivalentOnNullsOnly(x, y)
+            ?? Equals(x, y);
 
-        public override int? Compare(Code<T>? x, Code<T>? y, string? precision)
-        {
-            if (x == null || y == null)
-                return null;
-            return _compareFunction(x.Value!, y.Value!, precision);
-        }
+        public override int? Compare(Code<T>? x, Code<T>? y, string? precision) =>
+            CompareOnNullsOnly(x?.Value, y?.Value)
+            ?? _compareFunction(x?.Value!, y?.Value!, precision);
 
         protected override bool EquivalentImpl(Code<T> x, Code<T> y, string? precision) =>
             _equivalentFunction(x.Value!, y.Value!, precision);
 
         public override int GetHashCode(Code<T>? x) =>
-            x == null ? typeof(Code<T>).GetHashCode() : typeof(Code<T>).GetHashCode() ^ x.Value.GetHashCode();
+            x?.Value == null
+                ? GetHashCodeForType<Code<T>>()
+                : HashCode.Combine(GetHashCodeForType<Code<T>>(), x.Value.GetHashCode());
     }
 }

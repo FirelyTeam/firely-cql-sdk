@@ -1,3 +1,11 @@
+/*
+ * Copyright (c) 2025, Firely, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+
 // Global using directives
 
 global using System;
@@ -16,3 +24,5 @@ global using System.Runtime.CompilerServices;
 global using System.Runtime.InteropServices;
 global using System.Security.Cryptography;
 global using System.Text;
+global using JetBrains.Annotations;
+global using static Hl7.Cql.Abstractions.CqlComparerSharedMethods;

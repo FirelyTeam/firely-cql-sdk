@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -15,7 +15,7 @@ namespace Hl7.Cql.Comparers;
 /// <summary>
 /// An CQL comparer that compares two <see cref="CqlCode"/> instances.
 /// </summary>
-internal class CqlCodeCqlComparer(StringComparer codeComparer) : ICqlComparer<CqlCode>//, ICqlComparer
+internal class CqlCodeCqlComparer(StringComparer codeComparer) : ICqlComparer<CqlCode>
 {
     /// <summary>
     /// The default comparer, which uses <see cref="StringComparer.OrdinalIgnoreCase"/>.
@@ -56,25 +56,6 @@ internal class CqlCodeCqlComparer(StringComparer codeComparer) : ICqlComparer<Cq
         return result;
     }
 
-    // /// <inheritdoc/>
-    // public int? Compare(object? x, object? y, string? precision) =>
-    //     Compare(x as CqlCode, y as CqlCode, precision);
-
-    /// <inheritdoc/>
-    public bool? Equals(CqlCode? x, CqlCode? y, string? precision)
-    {
-        bool? result = Compare(x, y, precision) switch
-        {
-            null  => null,
-            var c => c == 0
-        };
-        return result;
-    }
-
-    // /// <inheritdoc/>
-    // public bool? Equals(object? x, object? y, string? precision) =>
-    //     Equals(x as CqlCode, y as CqlCode, precision);
-
     /// <inheritdoc/>
     public bool Equivalent(CqlCode? x, CqlCode? y, string? precision)
     {
@@ -92,19 +73,11 @@ internal class CqlCodeCqlComparer(StringComparer codeComparer) : ICqlComparer<Cq
         return result == 0;
     }
 
-    // /// <inheritdoc/>
-    // public bool Equivalent(object? x, object? y, string? precision) =>
-    //     Equivalent((x as CqlCode)!, (y as CqlCode)!, precision);
-
     /// <inheritdoc/>
     public int GetHashCode(CqlCode? x) =>
         x == null
-            ? typeof(CqlCode).GetHashCode()
-            : OrdinalIgnoreCase.GetHashCode(x.code ?? string.Empty) ^
-              OrdinalIgnoreCase.GetHashCode(x.system ?? string.Empty);
-
-    /*
-    /// <inheritdoc/>
-    public int GetHashCode(object? x) => GetHashCode(x as CqlCode);
-*/
+            ? GetHashCodeForType<CqlCode>()
+            : HashCode.Combine(
+                OrdinalIgnoreCase.GetHashCode(x.code ?? string.Empty),
+                OrdinalIgnoreCase.GetHashCode(x.system ?? string.Empty));
 }

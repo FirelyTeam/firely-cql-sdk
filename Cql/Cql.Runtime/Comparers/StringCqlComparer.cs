@@ -36,31 +36,26 @@ internal class StringCqlComparer(StringComparer stringComparer) : ICqlComparer<s
     }
 
     /// <inheritdoc/>
-    public bool? Equals(
-        string? x,
-        string? y,
-        string? precision = null) => Compare(x, y, precision) == 0;
-
-    // /// <inheritdoc/>
-    // public bool? Equals(object? x, object? y, string? precision = null) => Compare(x as string, y as string, precision) == 0;
-    //
-    // /// <inheritdoc/>
-    // public bool Equivalent(object? x, object? y, string? precision = null) =>
-    //     Equivalent(x as string, y as string, precision);
-
-    /// <inheritdoc/>
     public bool Equivalent(
         string? x,
         string? y,
         string? precision = null)
     {
-        if (EquivalentOnNullsOnly(x, y) is { } r)
-            return r;
+        var oldWay = OldWay();
+        var newWay = this.EquivalentViaCqlCompare(x, y, precision);
+        Trace.Assert(oldWay == newWay);
+        return oldWay;
 
-        var thisNormalized = x!.Normalize();
-        var otherNormalized = y!.Normalize();
-        var areEqual = StringComparer.Equals(thisNormalized, otherNormalized);
-        return areEqual;
+        bool OldWay()
+        {
+            if (EquivalentOnNullsOnly(x, y) is { } r)
+                return r;
+
+            var thisNormalized = x!.Normalize();
+            var otherNormalized = y!.Normalize();
+            var areEqual = StringComparer.Equals(thisNormalized, otherNormalized);
+            return areEqual;
+        }
     }
 
     /// <inheritdoc/>
