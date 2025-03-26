@@ -21,7 +21,7 @@ namespace Hl7.Cql.Operators
     /// <summary>
     /// Implements <see cref="ICqlOperators"/>.
     /// </summary>
-    internal partial class CqlOperators : ICqlOperators, ICqlComparer<object>//, ICqlComparer
+    internal partial class CqlOperators : ICqlOperators//, ICqlComparer<object>//, ICqlComparer
     {
         /// <summary>
         /// Creates an instance.
@@ -178,16 +178,16 @@ namespace Hl7.Cql.Operators
 
         public object NotSupported() => throw new NotSupportedException();
 
-        public int? Compare(object? x, object? y, string? precision) =>
-            Comparer.Compare(x, y, precision);
-
-        public int GetHashCode(object? x) =>
-            Comparer.GetHashCode(x);
-
         public T? Convert<T>(object? from) => TypeConverter.Convert<T>(from);
 
         public IEnumerable<T> Retrieve<T>(RetrieveParameters? parameters) where T : class =>
             DataSource.Retrieve<T>(parameters);
+
+        // public int? Compare(object? x, object? y, string? precision) =>
+        //     Comparer.Compare(x, y, precision);
+        //
+        // public int GetHashCode(object? x) =>
+        //     Comparer.GetHashCode(x);
     }
 }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

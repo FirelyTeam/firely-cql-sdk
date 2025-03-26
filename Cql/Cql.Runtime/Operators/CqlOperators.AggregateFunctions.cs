@@ -140,7 +140,7 @@ namespace Hl7.Cql.Operators
                 var max = notNull[0];
                 for (int i = 1; i < notNull.Count; i++)
                 {
-                    if (Compare(notNull[i], max, null) > 0)
+                    if (Comparer.Compare(notNull[i], max, null) > 0)
                         max = notNull[i];
                 }
                 return (T)max;
@@ -165,7 +165,7 @@ namespace Hl7.Cql.Operators
                 var min = notNull[0];
                 for (int i = 1; i < notNull.Count; i++)
                 {
-                    if (Compare(notNull[i], min, null) < 0)
+                    if (Comparer.Compare(notNull[i], min, null) < 0)
                         min = notNull[i];
                 }
                 return (T)min;

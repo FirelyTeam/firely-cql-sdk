@@ -16,7 +16,7 @@ partial class CqlOperators
         : IComparer<object>, IComparer
     {
         public int Compare(object? x, object? y) =>
-            owningCqlOperators.Compare(x, y, null) ?? coalesceCompareTo;
+            owningCqlOperators.Comparer.Compare(x, y, null) ?? coalesceCompareTo;
     }
 
     private readonly struct EqualityComparerBridge(
@@ -25,9 +25,9 @@ partial class CqlOperators
         : IEqualityComparer<object>, IEqualityComparer
     {
         public new bool Equals(object? x, object? y) =>
-            owningCqlOperators.Equals(x, y, null) ?? coalesceEqualTo;
+            owningCqlOperators.Comparer.Equals(x, y, null) ?? coalesceEqualTo;
 
         public int GetHashCode(object obj) =>
-            owningCqlOperators.GetHashCode(obj);
+            owningCqlOperators.Comparer.GetHashCode(obj);
     }
 }

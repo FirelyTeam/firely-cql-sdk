@@ -25,7 +25,7 @@ namespace Hl7.Cql.Comparers
 
         /// <inheritdoc />
         public bool Equivalent(T? x, T? y, string? precision) =>
-            CqlComparers.EquivalentOnNullsOnly(x, y)
+            EquivalentOnNullsOnly(x, y)
             ?? EquivalentImpl(x!, y!, precision);
 
         protected abstract bool EquivalentImpl(T x, T y, string? precision);

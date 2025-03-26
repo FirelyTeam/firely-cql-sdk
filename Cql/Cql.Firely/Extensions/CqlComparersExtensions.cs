@@ -8,8 +8,10 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Comparers;
+using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Fhir.Comparers;
 using Hl7.Fhir.Model;
+using static Hl7.Cql.Comparers.CqlComparerSharedMethods;
 
 namespace Hl7.Cql.Fhir.Extensions
 {
@@ -47,10 +49,10 @@ namespace Hl7.Cql.Fhir.Extensions
 
             comparers.Register(typeof(Code<>), (type, _comparers) =>
             {
-                var codeType = type.GetGenericArguments()[0];
-                var comparerType = typeof(CodeComparer<>).MakeGenericType(codeType);
-                var codeComparer = (ICqlComparer<object>)Activator.CreateInstance(comparerType, _comparers)!;
-                var primitiveTypeAgainstStringComparer = new PrimitiveTypeAgainstStringComparer(codeComparer);
+                Type codeType = type.GetGenericArguments()[0];
+                Type comparerType = typeof(CodeComparer<>).MakeGenericType(codeType);
+                ICqlComparer<object> codeComparerNonGeneric = CreateCqlComparerAndUnwrapNonGeneric(comparerType, _comparers)!;
+                PrimitiveTypeAgainstStringComparer primitiveTypeAgainstStringComparer = new PrimitiveTypeAgainstStringComparer(codeComparerNonGeneric);
                 return primitiveTypeAgainstStringComparer;
             });
 

@@ -57,7 +57,7 @@ namespace Hl7.Cql.Operators
         {
             if (argument == null || low == null || high == null)
                 return null;
-            else if (Compare(argument, low, null) >= 0 && Compare(argument, high, null) <= 0)
+            else if (Comparer.Compare(argument, low, null) >= 0 && Comparer.Compare(argument, high, null) <= 0)
                 return true;
             else return false;
         }
@@ -66,7 +66,7 @@ namespace Hl7.Cql.Operators
         {
             if (argument == null || low == null || high == null)
                 return null;
-            else if (Compare(argument, low, null) >= 0 && Compare(argument, high, null) <= 0)
+            else if (Comparer.Compare(argument, low, null) >= 0 && Comparer.Compare(argument, high, null) <= 0)
                 return true;
             else return false;
         }
@@ -75,7 +75,7 @@ namespace Hl7.Cql.Operators
         {
             if (argument == null || low == null || high == null)
                 return null;
-            else if (Compare(argument, low, null) >= 0 && Compare(argument, high, null) <= 0)
+            else if (Comparer.Compare(argument, low, null) >= 0 && Comparer.Compare(argument, high, null) <= 0)
                 return true;
             else return false;
         }
@@ -84,7 +84,7 @@ namespace Hl7.Cql.Operators
         {
             if (argument == null || low == null || high == null)
                 return null;
-            else if (Compare(argument, low, null) >= 0 && Compare(argument, high, null) <= 0)
+            else if (Comparer.Compare(argument, low, null) >= 0 && Comparer.Compare(argument, high, null) <= 0)
                 return true;
             else return false;
         }
@@ -94,7 +94,7 @@ namespace Hl7.Cql.Operators
 
         public bool? Greater(object? left, object? right)
         {
-            var result = Compare(left!, right!, null);
+            var result = Comparer.Compare(left!, right!, null);
             if (result == null)
                 return null;
             else if (result > 0)
@@ -107,7 +107,7 @@ namespace Hl7.Cql.Operators
         #region  Greater Or Equal
         public bool? GreaterOrEqual(object? left, object? right)
         {
-            var result = Compare(left!, right!, null);
+            var result = Comparer.Compare(left!, right!, null);
             if (result == null)
                 return null;
             else if (result >= 0)
@@ -119,7 +119,7 @@ namespace Hl7.Cql.Operators
         #region Less
         public bool? Less(object? left, object? right)
         {
-            var result = Compare(left!, right!, null);
+            var result = Comparer.Compare(left!, right!, null);
             if (result == null)
                 return null;
             else if (result < 0)
@@ -131,7 +131,7 @@ namespace Hl7.Cql.Operators
         #region Less Or Equal
         public bool? LessOrEqual(object? left, object? right)
         {
-            var result = Compare(left!, right!, null);
+            var result = Comparer.Compare(left!, right!, null);
             if (result == null)
                 return null;
             else if (result <= 0)

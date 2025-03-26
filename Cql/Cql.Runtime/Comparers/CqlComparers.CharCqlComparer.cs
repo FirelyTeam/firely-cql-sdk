@@ -12,10 +12,9 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-
-    internal class CharCqlComparer(StringCqlComparer inner) : ICqlComparer<char?> //, ICqlComparer
+    private class CharCqlComparer(StringCqlComparer stringCqlComparer) : ICqlComparer<char?> //, ICqlComparer
     {
-        private StringCqlComparer Inner { get; } = inner ?? throw new ArgumentNullException(nameof(inner));
+        private StringCqlComparer StringCqlComparer { get; } = stringCqlComparer ?? throw new ArgumentNullException(nameof(stringCqlComparer));
 
         private static string? CharToString(char? c) => c?.ToString();
         // private static string? ObjectAsCharToString(object? c) => (c as char?).ToString();
@@ -27,7 +26,7 @@ partial class CqlComparers
             char? x,
             char? y,
             string? precision = null) =>
-            Inner.Compare(CharToString(x), CharToString(y), precision);
+            StringCqlComparer.Compare(CharToString(x), CharToString(y), precision);
 
         // public bool? Equals(object? x, object? y, string? precision = null) =>
         //     Inner.Equals(ObjectAsCharToString(x), ObjectAsCharToString(y), precision);
@@ -36,7 +35,7 @@ partial class CqlComparers
             char? x,
             char? y,
             string? precision = null) =>
-            Inner.Equals(CharToString(x), CharToString(y), precision);
+            StringCqlComparer.Equals(CharToString(x), CharToString(y), precision);
 
         // public bool Equivalent(object? x, object? y, string? precision = null) =>
         //     Inner.Equivalent(ObjectAsCharToString(x), ObjectAsCharToString(y), precision);
@@ -45,12 +44,12 @@ partial class CqlComparers
             char? x,
             char? y,
             string? precision = null) =>
-            Inner.Equivalent(CharToString(x), CharToString(y), precision);
+            StringCqlComparer.Equivalent(CharToString(x), CharToString(y), precision);
 
         // public int GetHashCode(object? x) =>
         //     Inner.GetHashCode(ObjectAsCharToString(x));
 
         public int GetHashCode(char? x) =>
-            Inner.GetHashCode(CharToString(x));
+            StringCqlComparer.GetHashCode(CharToString(x));
     }
 }

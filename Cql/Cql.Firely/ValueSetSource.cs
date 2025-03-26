@@ -14,7 +14,6 @@ using Hl7.Fhir.Rest;
 using Hl7.Fhir.Specification.Source;
 using Hl7.Fhir.Specification.Terminology;
 using Hl7.Fhir.Utility;
-using Task = System.Threading.Tasks.Task;
 
 namespace Hl7.Cql.Fhir;
 
@@ -42,7 +41,7 @@ public class ValueSetSource : IValueSetDictionary
     /// </summary>
     public ValueSetSource(IAsyncResourceResolver? resourceResolver = null, ICodeValidationTerminologyService? termService = null)
     {
-        _internHash = new ConcurrentDictionary<CqlCode, CqlCode>(CqlCodeCqlComparer.DefaultCqlComparer.ToEqualityComparer());
+        _internHash = new ConcurrentDictionary<CqlCode, CqlCode>(CqlCodeCqlComparer.Default.ToEqualityComparer());
         _resourceResolver = resourceResolver;
         _termService = termService;
     }

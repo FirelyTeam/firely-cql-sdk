@@ -11,22 +11,14 @@ using Hl7.Cql.Abstractions;
 namespace Hl7.Cql.Comparers;
 
 /// <summary>
-/// Compares normalized strings given <see cref="_comparer"/>.
+/// Compares normalized strings given <see cref="StringComparer"/>.
 /// </summary>
 /// <remarks>
 /// Strings are normalized using <see cref="string.Normalize()"/>.
 /// </remarks>
-internal class StringCqlComparer : ICqlComparer<string> //, ICqlComparer
+internal class StringCqlComparer(StringComparer stringComparer) : ICqlComparer<string> //, ICqlComparer
 {
-    private readonly StringComparer _comparer;
-
-    /// <summary>
-    /// Creates an instance that uses the indicated <see cref="StringComparer"/> on normalized string.
-    /// </summary>
-    public StringCqlComparer(StringComparer idComparer)
-    {
-        _comparer = idComparer ?? throw new ArgumentNullException(nameof(idComparer));
-    }
+    private StringComparer StringComparer { get; } = stringComparer ?? throw new ArgumentNullException(nameof(stringComparer));
 
     // /// <inheritdoc/>
     // public int? Compare(object? x, object? y, string? precision = null) => Compare(x as string, y as string, null);
@@ -37,16 +29,10 @@ internal class StringCqlComparer : ICqlComparer<string> //, ICqlComparer
         string? y,
         string? precision = null)
     {
-        if (x == null)
-        {
-            if (y == null)
-                return 0;
-            else return -1;
-        }
-        else if (y == null)
-            return 1;
+        var result = CompareOnNullsOnly(x, y)
+                     ?? StringComparer.Compare(x!.Normalize(), y!.Normalize());
 
-        return _comparer.Compare(x.Normalize(), y.Normalize());
+        return result;
     }
 
     /// <inheritdoc/>
@@ -68,12 +54,12 @@ internal class StringCqlComparer : ICqlComparer<string> //, ICqlComparer
         string? y,
         string? precision = null)
     {
-        if (CqlComparers.EquivalentOnNullsOnly(x, y) is { } r)
+        if (EquivalentOnNullsOnly(x, y) is { } r)
             return r;
 
         var thisNormalized = x!.Normalize();
         var otherNormalized = y!.Normalize();
-        var areEqual = _comparer.Equals(thisNormalized, otherNormalized);
+        var areEqual = StringComparer.Equals(thisNormalized, otherNormalized);
         return areEqual;
     }
 

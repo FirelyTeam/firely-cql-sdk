@@ -20,9 +20,9 @@ internal partial class CqlOperators
 
     private EqualityComparerBridge EqualityComparer { get; }
 
-    public bool? Equals(object? x, object? y, string? precision) => Comparer.Equals(x, y, precision);
+    // bool? ICqlComparer<object>.Equals(object? x, object? y, string? precision) => Comparer.Equals(x, y, precision);
 
-    public bool? Equal(object? x, object? y) => x == null || y == null ? null : Equals(x, y, null);
+    public bool? Equal(object? x, object? y) => x == null || y == null ? null : Comparer.Equals(x, y, null);
 
     public bool? ListEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right)
     {
@@ -52,7 +52,7 @@ internal partial class CqlOperators
             else
             {
                 onlyNull = false;
-                if (Compare(lv!, rv!, null) != 0)
+                if (Comparer.Compare(lv!, rv!, null) != 0)
                     return false;
             }
         }
@@ -65,13 +65,7 @@ internal partial class CqlOperators
             return true;
     }
 
-    public bool? NotEqual(object? left, object? right) =>
-        Equal(left, right) switch
-        {
-            null  => null,
-            true  => false,
-            false => true
-        };
+    public bool? NotEqual(object? left, object? right) => !Equal(left, right);
 
     public bool? ListNotEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right) => !ListEqual(left, right);
 
@@ -91,7 +85,7 @@ internal partial class CqlOperators
      */
 
     public bool Equivalent(object? x, object? y, string? precision) =>
-        CqlComparers.EquivalentOnNullsOnly(x, y)
+        EquivalentOnNullsOnly(x, y)
         ?? Comparer.Equivalent(x, y, precision);
 
     public bool? Equivalent(object? x, object? y) => Equivalent(x!, y!, null);
@@ -100,7 +94,7 @@ internal partial class CqlOperators
     {
         // Spec: For list types, this means that two lists are equivalent if and only if the lists contain elements of the same type, have the same number of elements, and for each element in the lists, in order, the elements are equivalent.
 
-        if (CqlComparers.EquivalentOnNullsOnly(left, right) is {} r)
+        if (EquivalentOnNullsOnly(left, right) is {} r)
             return r;
 
         var lit = left!.GetEnumerator();

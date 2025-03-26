@@ -71,7 +71,7 @@ partial class CqlComparers
             KeyValuePair<TKey, TValue> x,
             KeyValuePair<TKey, TValue> y,
             string? precision = null) =>
-            CqlComparers.EquivalentOnNullsOnly(x, y)
+            EquivalentOnNullsOnly(x, y)
             ?? Compare(x, y, precision) == 0;
 
         /// <inheritdoc />

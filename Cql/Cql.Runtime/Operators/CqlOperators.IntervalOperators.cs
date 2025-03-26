@@ -123,7 +123,7 @@ namespace Hl7.Cql.Operators
             var leftClosed = toClosed(left);
             var rightClosed = toClosed(right);
 
-            var after = Compare(leftClosed!.low!, rightClosed!.high!, precision);
+            var after = Comparer.Compare(leftClosed!.low!, rightClosed!.high!, precision);
             return after > 0;
         }
 
@@ -161,7 +161,7 @@ namespace Hl7.Cql.Operators
             var interval = new CqlInterval<T>(low, high, left.lowClosed, left.highClosed);
             var closed = toClosed(interval!);
 
-            var after = Compare(closed!.low!, right, precision);
+            var after = Comparer.Compare(closed!.low!, right, precision);
             return after > 0;
         }
 
@@ -199,7 +199,7 @@ namespace Hl7.Cql.Operators
             var interval = new CqlInterval<T>(low, high, right.lowClosed, right.highClosed);
             var closed = toClosed(interval!);
 
-            var after = Compare(left, closed!.high!, precision);
+            var after = Comparer.Compare(left, closed!.high!, precision);
             return after > 0;
         }
 
@@ -231,7 +231,7 @@ namespace Hl7.Cql.Operators
             var leftClosed = toClosed(left);
             var rightClosed = toClosed(right);
 
-            var before = Compare(leftClosed!.high!, rightClosed!.low!, precision);
+            var before = Comparer.Compare(leftClosed!.high!, rightClosed!.low!, precision);
 
             return before < 0;
         }
@@ -271,7 +271,7 @@ namespace Hl7.Cql.Operators
             var interval = new CqlInterval<T>(low, high, left.lowClosed, left.highClosed);
             var closed = toClosed(interval!);
 
-            var before = Compare(closed!.high!, right, precision);
+            var before = Comparer.Compare(closed!.high!, right, precision);
             return before < 0;
         }
 
@@ -309,7 +309,7 @@ namespace Hl7.Cql.Operators
             var interval = new CqlInterval<T>(low, high, right.lowClosed, right.highClosed);
             var closed = toClosed(interval!);
 
-            var before = Compare(left, closed!.low!, precision);
+            var before = Comparer.Compare(left, closed!.low!, precision);
             return before < 0;
         }
 
@@ -449,8 +449,8 @@ namespace Hl7.Cql.Operators
             var interval = new CqlInterval<T>(low, high, argument.lowClosed, argument.highClosed);
             var closed = toClosed(interval!);
 
-            var lowCompare = Compare(point, closed!.low!, precision);
-            var highCompare = Compare(point, closed!.high!, precision);
+            var lowCompare = Comparer.Compare(point, closed!.low!, precision);
+            var highCompare = Comparer.Compare(point, closed!.high!, precision);
             if (lowCompare == 0 || highCompare == 0)
                 return true;
             else if (lowCompare > 0 && highCompare < 0)
@@ -589,7 +589,7 @@ namespace Hl7.Cql.Operators
             if (left == null) return null;
             else if (right == null) return null;
 
-            if (Compare(left!.low!, right!.low!, precision) >= 0 && Compare(left.high!, right.high!, precision) == 0)
+            if (Comparer.Compare(left!.low!, right!.low!, precision) >= 0 && Comparer.Compare(left.high!, right.high!, precision) == 0)
                 return true;
             else
                 return false;
@@ -765,7 +765,7 @@ namespace Hl7.Cql.Operators
                 expanded.Add(listItem!);
                 listItem = listItem!.Add(per);
             }
-            while (Compare(listItem!, highInterval!, null) <= 0);
+            while (Comparer.Compare(listItem!, highInterval!, null) <= 0);
 
             return expanded;
         }
@@ -941,7 +941,7 @@ namespace Hl7.Cql.Operators
                 expanded.Add(listItem!);
                 listItem = listItem!.Add(per);
             }
-            while (Compare(listItem!, highInterval!, null) <= 0);
+            while (Comparer.Compare(listItem!, highInterval!, null) <= 0);
 
             return expanded;
         }
@@ -1081,7 +1081,7 @@ namespace Hl7.Cql.Operators
                 expanded.Add(listItem!);
                 listItem = listItem!.Add(per);
             }
-            while (Compare(listItem!, highInterval!, null) <= 0);
+            while (Comparer.Compare(listItem!, highInterval!, null) <= 0);
 
             return expanded;
         }
@@ -1117,7 +1117,7 @@ namespace Hl7.Cql.Operators
                 expanded.Add(listItem);
                 listItem = decimal.Add(listItem, per.value ?? 1);
             }
-            while (Compare(listItem, interval.high!, null) <= 0);
+            while (Comparer.Compare(listItem, interval.high!, null) <= 0);
 
             return expanded;
         }
@@ -1155,7 +1155,7 @@ namespace Hl7.Cql.Operators
                 listItem += intQuantity;
 
             }
-            while (Compare(listItem, interval.high!, null) <= 0);
+            while (Comparer.Compare(listItem, interval.high!, null) <= 0);
 
             return expanded;
         }
@@ -1192,7 +1192,7 @@ namespace Hl7.Cql.Operators
                 var intQuantity = decimal.ToInt64(per.value ?? 1);
                 listItem += intQuantity;
             }
-            while (Compare(listItem, interval.high!, null) <= 0);
+            while (Comparer.Compare(listItem, interval.high!, null) <= 0);
 
             return expanded;
         }
@@ -1214,8 +1214,8 @@ namespace Hl7.Cql.Operators
             // For closed interval boundaries, if the interval boundary is null, the result of the boundary comparison is considered true.
             var lowClosed = interval.lowClosed ?? false;
             var highClosed = interval.highClosed ?? false;
-            var lowCompare = Compare(t, interval.low ?? MinValue<T>()!, precision) ?? (lowClosed ? 0 : null);
-            var highCompare = Compare(t, interval.high ?? MaxValue<T>()!, precision) ?? (highClosed ? 0 : null);
+            var lowCompare = Comparer.Compare(t, interval.low ?? MinValue<T>()!, precision) ?? (lowClosed ? 0 : null);
+            var highCompare = Comparer.Compare(t, interval.high ?? MaxValue<T>()!, precision) ?? (highClosed ? 0 : null);
 
             var low = lowClosed ? lowCompare >= 0 : lowCompare > 0;
             var high = highClosed ? highCompare <= 0 : highCompare < 0;
@@ -1233,8 +1233,8 @@ namespace Hl7.Cql.Operators
             if (larger == null || smaller == null)
                 return null;
 
-            var lowCompare = Compare(larger.low ?? MinValue<T>()!, smaller.low ?? MinValue<T>()!, precision);
-            var highCompare = Compare(larger.high ?? MaxValue<T>()!, smaller.high ?? MaxValue<T>()!, precision);
+            var lowCompare = Comparer.Compare(larger.low ?? MinValue<T>()!, smaller.low ?? MinValue<T>()!, precision);
+            var highCompare = Comparer.Compare(larger.high ?? MaxValue<T>()!, smaller.high ?? MaxValue<T>()!, precision);
             return (lowCompare, highCompare) switch
             {
                 (null, null)  => null,
@@ -1270,7 +1270,7 @@ namespace Hl7.Cql.Operators
             var leftHigh = left.high ?? MaxValue<T>();
             var rightLow = right.low ?? MinValue<T>();
             var rightHigh = right.high ?? MaxValue<T>();
-            if (Compare(leftLow!, rightHigh!, null) > 0 || Compare(rightLow!, leftHigh!, null) > 0) return null;
+            if (Comparer.Compare(leftLow!, rightHigh!, null) > 0 || Comparer.Compare(rightLow!, leftHigh!, null) > 0) return null;
             else
             {
                 T LowValue;
@@ -1278,7 +1278,7 @@ namespace Hl7.Cql.Operators
                 T HighValue;
                 bool HighValueClosed;
 
-                var leftCompare = Compare(leftLow!, rightLow!, null);
+                var leftCompare = Comparer.Compare(leftLow!, rightLow!, null);
                 if (leftCompare > 0)
                 {
                     LowValue = left.low;
@@ -1295,7 +1295,7 @@ namespace Hl7.Cql.Operators
                     LowValueClosed = right.lowClosed ?? false;
                 }
 
-                var rightCompare = Compare(leftHigh!, rightHigh!, null);
+                var rightCompare = Comparer.Compare(leftHigh!, rightHigh!, null);
                 if (rightCompare < 0)
                 {
                     HighValue = left.high;
@@ -1393,14 +1393,14 @@ namespace Hl7.Cql.Operators
             // updates to fix returning true because the left.low and right.high are null
             if (left.high != null || right.low != null)
             {
-                if (Compare(left.high!, right.low!, precision) == 0
-                    || Compare(left.high!, predecessor(right.low)!, precision) == 0)
+                if (Comparer.Compare(left.high!, right.low!, precision) == 0
+                    || Comparer.Compare(left.high!, predecessor(right.low)!, precision) == 0)
                     return true;
             }
             if (left.low != null || right.high != null)
             {
-                if (Compare(left.low!, right.high!, precision) == 0
-                    || Compare(predecessor(left.low)!, right.high!, precision) == 0)
+                if (Comparer.Compare(left.low!, right.high!, precision) == 0
+                    || Comparer.Compare(predecessor(left.low)!, right.high!, precision) == 0)
                     return true;
             }
 
@@ -1483,9 +1483,9 @@ namespace Hl7.Cql.Operators
                 return null;
             else if (left.low == null && right.high == null)
                 return false;
-            else if (Compare(left.low!, right.high!, precision) == 0)
+            else if (Comparer.Compare(left.low!, right.high!, precision) == 0)
                 return true;
-            else if ((left.lowClosed ?? false) && (right.highClosed ?? false) && Compare(predecessor(left.low)!, right.high!, precision) == 0)
+            else if ((left.lowClosed ?? false) && (right.highClosed ?? false) && Comparer.Compare(predecessor(left.low)!, right.high!, precision) == 0)
                 return true;
 
             return false;
@@ -1495,10 +1495,10 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            if (Compare(left.low!, right.high!, precision) == 0)
+            if (Comparer.Compare(left.low!, right.high!, precision) == 0)
                 return true;
 
-            if (Compare(predecessor(left.low)!, right.high!, precision) == 0)
+            if (Comparer.Compare(predecessor(left.low)!, right.high!, precision) == 0)
                 return true;
 
             return false;
@@ -1576,10 +1576,10 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            if (Compare(left.high!, right.low!, precision) == 0)
+            if (Comparer.Compare(left.high!, right.low!, precision) == 0)
                 return true;
 
-            if (Compare(left.high!, predecessor(right.low)!, precision) == 0)
+            if (Comparer.Compare(left.high!, predecessor(right.low)!, precision) == 0)
                 return true;
 
             return false;
@@ -1590,9 +1590,9 @@ namespace Hl7.Cql.Operators
                 return null;
             else if (left.high == null && right.low == null)
                 return false;
-            else if (Compare(left.high!, right.low!, precision) == 0)
+            else if (Comparer.Compare(left.high!, right.low!, precision) == 0)
                 return true;
-            else if ((right.lowClosed ?? false) && (left.highClosed ?? false) && Compare(left.high!, predecessor(right.low)!, precision) == 0)
+            else if ((right.lowClosed ?? false) && (left.highClosed ?? false) && Comparer.Compare(left.high!, predecessor(right.low)!, precision) == 0)
                 return true;
             else return false;
         }
@@ -1606,7 +1606,7 @@ namespace Hl7.Cql.Operators
             if (@this == null || other == null)
                 return null;
             else
-                return Compare(@this, other, precision) == 0;
+                return Comparer.Compare(@this, other, precision) == 0;
         }
 
         #endregion
@@ -1641,11 +1641,11 @@ namespace Hl7.Cql.Operators
             var thisClosed = ToClosed(@this)!;
             var otherClosed = ToClosed(other)!;
 
-            var isSame = Compare(thisClosed, otherClosed, precision) == 0;
+            var isSame = Comparer.Compare(thisClosed, otherClosed, precision) == 0;
             if (isSame)
                 return true;
 
-            var boundaryHit = Compare(thisClosed.low!, otherClosed.high!, precision) == 0;
+            var boundaryHit = Comparer.Compare(thisClosed.low!, otherClosed.high!, precision) == 0;
             if (boundaryHit)
                 return true;
 
@@ -1671,11 +1671,11 @@ namespace Hl7.Cql.Operators
             var thisClosed = ToClosed(@this)!;
             var otherClosed = ToClosed(other)!;
 
-            var isSame = Compare(thisClosed, otherClosed, precision) == 0;
+            var isSame = Comparer.Compare(thisClosed, otherClosed, precision) == 0;
             if (isSame)
                 return true;
 
-            var boundaryHit = Compare(thisClosed.low!, otherClosed.high!, precision) == 0;
+            var boundaryHit = Comparer.Compare(thisClosed.low!, otherClosed.high!, precision) == 0;
             if (boundaryHit)
                 return true;
 
@@ -1702,11 +1702,11 @@ namespace Hl7.Cql.Operators
             var thisClosed = ToClosed(@this)!;
             var otherClosed = ToClosed(other)!;
 
-            var isSame = Compare(thisClosed, otherClosed, precision) == 0;
+            var isSame = Comparer.Compare(thisClosed, otherClosed, precision) == 0;
             if (isSame)
                 return true;
 
-            var boundaryHit = Compare(thisClosed.low!, otherClosed.high!, precision) == 0;
+            var boundaryHit = Comparer.Compare(thisClosed.low!, otherClosed.high!, precision) == 0;
             if (boundaryHit)
                 return true;
 
@@ -1724,11 +1724,11 @@ namespace Hl7.Cql.Operators
             var thisClosed = toClosed(@this!)!;
             var otherClosed = toClosed(other!)!;
 
-            var isSame = Compare(thisClosed, otherClosed, precision) == 0;
+            var isSame = Comparer.Compare(thisClosed, otherClosed, precision) == 0;
             if (isSame)
                 return true;
 
-            var boundaryHit = Compare(thisClosed.low!, otherClosed.high!, precision) == 0;
+            var boundaryHit = Comparer.Compare(thisClosed.low!, otherClosed.high!, precision) == 0;
             if (boundaryHit)
                 return true;
 
@@ -1767,10 +1767,10 @@ namespace Hl7.Cql.Operators
                     || GreaterOrSamePrecision(other.high!, precision) == false))
                 return null;
 
-            var isSame = Compare(thisClosed, otherClosed, precision) == 0;
+            var isSame = Comparer.Compare(thisClosed, otherClosed, precision) == 0;
             if (isSame) return true;
 
-            var boundaryHit = Compare(thisClosed.high!, otherClosed.low!, precision) == 0;
+            var boundaryHit = Comparer.Compare(thisClosed.high!, otherClosed.low!, precision) == 0;
             if (boundaryHit) return true;
 
             return Before(thisClosed, otherClosed, precision);
@@ -1796,10 +1796,10 @@ namespace Hl7.Cql.Operators
                     || GreaterOrSamePrecision(other.high!, precision) == false))
                 return null;
 
-            var isSame = Compare(thisClosed!, otherClosed!, precision) == 0;
+            var isSame = Comparer.Compare(thisClosed!, otherClosed!, precision) == 0;
             if (isSame) return true;
 
-            var boundaryHit = Compare(thisClosed.high!, otherClosed.low!, precision) == 0;
+            var boundaryHit = Comparer.Compare(thisClosed.high!, otherClosed.low!, precision) == 0;
             if (boundaryHit) return true;
 
             return Before(thisClosed, otherClosed, precision);
@@ -1825,10 +1825,10 @@ namespace Hl7.Cql.Operators
                     || GreaterOrSamePrecision(other.high!, precision) == false))
                 return null;
 
-            var isSame = Compare(thisClosed, otherClosed, precision) == 0;
+            var isSame = Comparer.Compare(thisClosed, otherClosed, precision) == 0;
             if (isSame) return true;
 
-            var boundaryHit = Compare(thisClosed.high!, otherClosed.low!, precision) == 0;
+            var boundaryHit = Comparer.Compare(thisClosed.high!, otherClosed.low!, precision) == 0;
             if (boundaryHit) return true;
 
             return Before(thisClosed, otherClosed, precision);
@@ -1845,10 +1845,10 @@ namespace Hl7.Cql.Operators
             var thisClosed = toClosed(@this!)!;
             var otherClosed = toClosed(other!)!;
 
-            var isSame = Compare(thisClosed, otherClosed, precision) == 0;
+            var isSame = Comparer.Compare(thisClosed, otherClosed, precision) == 0;
             if (isSame) return true;
 
-            var boundaryHit = Compare(thisClosed.high!, otherClosed.low!, precision) == 0;
+            var boundaryHit = Comparer.Compare(thisClosed.high!, otherClosed.low!, precision) == 0;
             if (boundaryHit) return true;
 
             return IntervalBeforeIntervalHelper(thisClosed, otherClosed, null, toClosed);
@@ -1881,8 +1881,8 @@ namespace Hl7.Cql.Operators
                 return null;
             left = toClosed!(left!)!;
             right = toClosed!(right!)!;
-            if (Compare(left.high ?? MaxValue<T>()!, right.low ?? MinValue<T>()!, precision) >= 0
-                && Compare(left.low ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, precision) <= 0)
+            if (Comparer.Compare(left.high ?? MaxValue<T>()!, right.low ?? MinValue<T>()!, precision) >= 0
+                && Comparer.Compare(left.low ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, precision) <= 0)
                 return true;
             else
                 return false;
@@ -1915,8 +1915,8 @@ namespace Hl7.Cql.Operators
                 return null;
             left = toClosed(left!)!;
             right = toClosed(right!)!;
-            if (Compare(left.low ?? MaxValue<T>()!, right.high ?? MinValue<T>()!, precision) <= 0
-                && Compare(left.high ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, precision) > 0)
+            if (Comparer.Compare(left.low ?? MaxValue<T>()!, right.high ?? MinValue<T>()!, precision) <= 0
+                && Comparer.Compare(left.high ?? MinValue<T>()!, right.high ?? MaxValue<T>()!, precision) > 0)
                 return true;
             else
                 return false;
@@ -1948,8 +1948,8 @@ namespace Hl7.Cql.Operators
             left = toClosed(left);
             right = toClosed(right);
 
-            if (Compare(left!.high ?? MaxValue<T>()!, right!.low ?? MinValue<T>()!, precision) >= 0
-                && Compare(left.low ?? MinValue<T>()!, right.low ?? MinValue<T>()!, precision) < 0)
+            if (Comparer.Compare(left!.high ?? MaxValue<T>()!, right!.low ?? MinValue<T>()!, precision) >= 0
+                && Comparer.Compare(left.low ?? MinValue<T>()!, right.low ?? MinValue<T>()!, precision) < 0)
                 return true;
             else
                 return false;
@@ -1960,7 +1960,7 @@ namespace Hl7.Cql.Operators
         #region Point from
 
         public T? PointFrom<T>(CqlInterval<T?>? argument) =>
-           argument == null ? default : (Compare(argument!.low!, argument!.high!, null) == 0 ? argument.low : throw new InvalidOperationException("PointFrom can not be extracted  - interval is too wide"));
+           argument == null ? default : (Comparer.Compare(argument!.low!, argument!.high!, null) == 0 ? argument.low : throw new InvalidOperationException("PointFrom can not be extracted  - interval is too wide"));
 
         #endregion
 
@@ -1979,11 +1979,11 @@ namespace Hl7.Cql.Operators
 
             var min = MinValue<T>()!;
 
-            var low = Compare(left!.low ?? min!, right.low ?? min, precision);
+            var low = Comparer.Compare(left!.low ?? min!, right.low ?? min, precision);
             if (low < 0)
                 return false;
             var max = MaxValue<T>()!;
-            var high = Compare(left.high ?? max, right.high ?? max, precision);
+            var high = Comparer.Compare(left.high ?? max, right.high ?? max, precision);
             if (high > 0)
                 return false;
             // and they are not the same interval.
@@ -2000,12 +2000,12 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null || right.low == null || right.high == null)
                 return null;
 
-            var low = Compare(left, right.low, null);
-            var high = Compare(left, right.high, null);
+            var low = Comparer.Compare(left, right.low, null);
+            var high = Comparer.Compare(left, right.high, null);
             if (low < 0)
                 return false;
             if (high > 0)
-                return false;                                        
+                return false;
             // an element is only properly contained if it is not equal to either endpoint
             if (low == 0 || high == 0)
                 return false;
@@ -2024,8 +2024,8 @@ namespace Hl7.Cql.Operators
                     || GreaterOrSamePrecision(right.high, precision) == false)
                 return null;
 
-            var low = Compare(left, right.low, precision);
-            var high = Compare(left, right.high, precision);
+            var low = Comparer.Compare(left, right.low, precision);
+            var high = Comparer.Compare(left, right.high, precision);
             if (low < 0)
                 return false;
             if (high > 0)
@@ -2049,8 +2049,8 @@ namespace Hl7.Cql.Operators
                     || GreaterOrSamePrecision(right.high, precision) == false)
                 return null;
 
-            var low = Compare(left, right.low, precision);
-            var high = Compare(left, right.high, precision);
+            var low = Comparer.Compare(left, right.low, precision);
+            var high = Comparer.Compare(left, right.high, precision);
             if (low < 0)
                 return false;
             if (high > 0)
@@ -2074,8 +2074,8 @@ namespace Hl7.Cql.Operators
                      || GreaterOrSamePrecision(right.high, precision) == false)
                 return null;
 
-            var low = Compare(left, right.low, precision);
-            var high = Compare(left, right.high, precision);
+            var low = Comparer.Compare(left, right.low, precision);
+            var high = Comparer.Compare(left, right.high, precision);
             if (low < 0)
                 return false;
             if (high > 0)
@@ -2258,7 +2258,7 @@ namespace Hl7.Cql.Operators
         {
             if (starts == null || other == null)
                 return null;
-            if (Compare(starts.low!, other.low!, precision) == 0 && Compare(starts.high!, other.high!, precision) <= 0)
+            if (Comparer.Compare(starts.low!, other.low!, precision) == 0 && Comparer.Compare(starts.high!, other.high!, precision) <= 0)
                 return true;
             return false;
         }
@@ -2272,20 +2272,20 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null) return null;
             else
             {
-                if (Compare(left.low!, right.low!, null) <= 0)
+                if (Comparer.Compare(left.low!, right.low!, null) <= 0)
                 {
-                    if (Compare(left.high!, right.low!, null) >= 0)
+                    if (Comparer.Compare(left.high!, right.low!, null) >= 0)
                     {
-                        if (Compare(left.high!, right.high!, null) < 0) return new CqlInterval<T>(left.low, right.high, left.lowClosed, right.highClosed);
+                        if (Comparer.Compare(left.high!, right.high!, null) < 0) return new CqlInterval<T>(left.low, right.high, left.lowClosed, right.highClosed);
                         else return left;
                     }
                     else return null;
                 }
                 else
                 {
-                    if (Compare(right.high!, left.low!, null) >= 0)
+                    if (Comparer.Compare(right.high!, left.low!, null) >= 0)
                     {
-                        if (Compare(left.high!, left.high!, null) > 0) return new CqlInterval<T>(right.low, left.high, right.lowClosed, left.highClosed);
+                        if (Comparer.Compare(left.high!, left.high!, null) > 0) return new CqlInterval<T>(right.low, left.high, right.lowClosed, left.highClosed);
                         else return right;
                     }
                     else return null;

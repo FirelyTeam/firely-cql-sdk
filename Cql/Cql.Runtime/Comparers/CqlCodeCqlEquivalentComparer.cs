@@ -64,7 +64,7 @@ namespace Hl7.Cql.Comparers
 
         public bool Equivalent(CqlCode? x, CqlCode? y, string? precision)
         {
-            if (CqlComparers.EquivalentOnNullsOnly(x?.code, y?.code) is { } r)
+            if (EquivalentOnNullsOnly(x?.code, y?.code) is { } r)
                 return r;
 
             var result = CodeComparer.Compare(x!.code, y!.code);

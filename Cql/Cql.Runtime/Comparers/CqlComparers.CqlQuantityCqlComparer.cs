@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/*
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -19,7 +18,7 @@ partial class CqlComparers
     /// A comparer that compares to <see cref="CqlQuantity"/> instances, possibly by normalizing their values
     /// using the UCUM system.
     /// </summary>
-    internal class CqlQuantityCqlComparer(
+    private class CqlQuantityCqlComparer(
         CqlComparers valueComparer,
         ICqlComparer<string> unitComparer) : ICqlComparer<CqlQuantity>//, ICqlComparer
     {
@@ -71,7 +70,7 @@ partial class CqlComparers
         /// <inheritdoc />
         public bool Equivalent(CqlQuantity? x, CqlQuantity? y, string? precision = null)
         {
-            if (CqlComparers.EquivalentOnNullsOnly(x, y) is { } r)
+            if (EquivalentOnNullsOnly(x, y) is { } r)
                 return r;
 
             var unitCompare = UnitComparer.Equivalent(x!.unit, y!.unit, precision);
@@ -96,5 +95,3 @@ partial class CqlComparers
         //     GetHashCode(x as CqlQuantity);
     }
 }
-
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

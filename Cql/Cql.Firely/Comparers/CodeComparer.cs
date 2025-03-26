@@ -5,7 +5,7 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
-using Hl7.Cql.Abstractions;
+
 using Hl7.Cql.Comparers;
 using Hl7.Fhir.Model;
 
@@ -14,29 +14,27 @@ namespace Hl7.Cql.Fhir.Comparers
     internal class CodeComparer<T> : CqlComparerBase<Code<T>>
         where T : struct, Enum
     {
-        public CodeComparer(ICqlComparer<T?> valueComparer)
+        public CodeComparer(CqlComparers valueComparer)
         {
-            ValueComparer = valueComparer;
             if (typeof(T).IsEnum ||
                 (typeof(T).IsGenericType
                     && typeof(T).GetGenericTypeDefinition() == typeof(Nullable<>)
                     && Nullable.GetUnderlyingType(typeof(T))!.IsEnum))
             {
-                CompareFunction = CompareEnums;
-                EquivalentFunction = EquivalentEnums;
+                _compareFunction = CompareEnums;
+                _equivalentFunction = EquivalentEnums;
 
             }
             else
             {
-                CompareFunction = valueComparer.Compare;
-                EquivalentFunction = valueComparer.Equivalent;
+                _compareFunction = (a,b, precision) => valueComparer.Compare(a, b, precision);
+                _equivalentFunction = (a, b, precision) => valueComparer.Equivalent(a, b, precision); ;
             }
         }
-
-        public ICqlComparer<T?> ValueComparer { get; }
-
-        private readonly Func<T?, T?, string?, int?> CompareFunction;
-        private readonly Func<T?, T?, string?, bool> EquivalentFunction;
+        delegate int? CompareFunction<in TComp>(TComp? x, TComp? y, string? precision);
+        private readonly CompareFunction<T?> _compareFunction;
+        delegate bool EquivalentFunction<in TComp>(TComp? x, TComp? y, string? precision);
+        private readonly EquivalentFunction<T?> _equivalentFunction;
 
         private static int? CompareEnums(T? x, T? y, string? precision) => Comparer<T?>.Default.Compare(x, y);
 
@@ -46,11 +44,11 @@ namespace Hl7.Cql.Fhir.Comparers
         {
             if (x == null || y == null)
                 return null;
-            return CompareFunction(x.Value!, y.Value!, precision);
+            return _compareFunction(x.Value!, y.Value!, precision);
         }
 
         protected override bool EquivalentImpl(Code<T> x, Code<T> y, string? precision) =>
-            EquivalentFunction(x.Value!, y.Value!, precision);
+            _equivalentFunction(x.Value!, y.Value!, precision);
 
         public override int GetHashCode(Code<T>? x) =>
             x == null ? typeof(Code<T>).GetHashCode() : typeof(Code<T>).GetHashCode() ^ x.Value.GetHashCode();

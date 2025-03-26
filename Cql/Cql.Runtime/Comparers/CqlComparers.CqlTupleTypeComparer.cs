@@ -14,7 +14,7 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    internal class CqlTupleTypeComparer(CqlComparers memberComparer) : ICqlComparer<ITuple?>//, ICqlComparer
+    private class CqlTupleTypeComparer(CqlComparers memberComparer) : ICqlComparer<ITuple?>//, ICqlComparer
     {
         private static readonly int FallbackHashCode = typeof(ITuple).GetHashCode() ^ 098174506;
 
@@ -51,7 +51,7 @@ partial class CqlComparers
 
         public bool Equivalent(ITuple? x, ITuple? y, string? precision = null)
         {
-            if (CqlComparers.EquivalentOnNullsOnly(x, y) is { } r)
+            if (EquivalentOnNullsOnly(x, y) is { } r)
                 return r;
 
             // Check the "type" via the metadata

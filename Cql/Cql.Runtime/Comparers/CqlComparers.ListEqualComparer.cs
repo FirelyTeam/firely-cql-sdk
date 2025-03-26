@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-/*
+﻿/*
  * Copyright (c) 2023, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
@@ -13,7 +12,7 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    internal class ListEqualComparer(CqlComparers elementComparer) : ICqlComparer<IEnumerable> //, ICqlComparer
+    private class ListEqualComparer(CqlComparers elementComparer) : ICqlComparer<IEnumerable> //, ICqlComparer
     {
         // public int? Compare(object? x, object? y, string? precision = null) =>
         //    Compare(x as IEnumerable, y as IEnumerable, precision);
@@ -100,7 +99,7 @@ partial class CqlComparers
 
         public bool Equivalent(IEnumerable? x, IEnumerable? y, string? precision = null)
         {
-            if (CqlComparers.EquivalentOnNullsOnly(x, y) is { } r)
+            if (EquivalentOnNullsOnly(x, y) is { } r)
                 return r;
 
             var lit = x!.GetEnumerator();
@@ -136,5 +135,3 @@ partial class CqlComparers
         //     GetHashCode(x as IEnumerable);
     }
 }
-
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

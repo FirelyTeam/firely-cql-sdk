@@ -17,7 +17,7 @@ partial class CqlComparers
     /// <summary>
     /// Compares the code and system using the specified comparers.
     /// </summary>
-    internal class CqlConceptCqlComparer : ICqlComparer<CqlConcept>//, ICqlComparer
+    private class CqlConceptCqlComparer : ICqlComparer<CqlConcept>//, ICqlComparer
     {
         private IEqualityComparer<CqlCode> NewCodeEquivalenceComparer(string precision) =>
             EqualityComparerFactory.Create<CqlCode>(
@@ -35,7 +35,7 @@ partial class CqlComparers
             _codeEquivalenceComparerNoPrecision = NewCodeEquivalenceComparer(null!);
         }
 
-        public ICqlComparer<object> CodeComparer { get; }
+        private ICqlComparer<object> CodeComparer { get; }
 
         // public int? Compare(object? x, object? y, string? precision = null) => Compare(x as CqlConcept, y as CqlConcept, precision);
 
@@ -43,12 +43,13 @@ partial class CqlComparers
         {
             if (x == null || y == null || x.codes == null || y.codes == null)
                 return null;
-            var xCodes = x.codes.OrderBy(code => code.code)
-                .ToArray();
-            var yCodes = y.codes.OrderBy(code => code.code)
-                .ToArray();
+
+            var xCodes = x.codes.OrderBy(code => code.code).ToArray();
+            var yCodes = y.codes.OrderBy(code => code.code).ToArray();
+
             if (xCodes.Length != yCodes.Length)
                 return xCodes.Length - yCodes.Length;
+
             for (int i = 0; i < xCodes.Length; i++)
             {
                 // Remark: ElementAtOrDefault(i) is used to handle the case where the two arrays are not the same length

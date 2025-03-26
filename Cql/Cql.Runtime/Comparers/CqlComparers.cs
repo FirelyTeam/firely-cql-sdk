@@ -16,27 +16,21 @@ namespace Hl7.Cql.Comparers
     /// </summary>
     internal sealed partial class CqlComparers : ICqlComparer<object>
     {
-        /*
-         *
-         * Equivalence : https://cql.hl7.org/04-logicalspecification.html#equivalent
-         *
-         * The Equivalent operator returns:
-         * - true if the arguments are the same value, or if they are both null;
-         * - and false otherwise.
-         *
-         * With the exception of null behavior and the semantics for specific types defined below, equivalence is the same as equality.
-         */
 
-        internal static bool? EquivalentOnNullsOnly<T>(
-            [NoEnumeration, NotNullWhen(true)] T? left,
-            [NoEnumeration, NotNullWhen(true)] T? right) =>
-            (left, right) switch
+        /// <summary>
+        /// Collapses derived types to their bases, since this makes it easier to find the comparer by the exact type.
+        /// </summary>
+        private static Type GetKeyTypeForComparers(object? x)
+        {
+            var type = x switch
             {
-                (null, null) => true,
-                (null, _)  => false,
-                (_, null)  => false,
-                _            => null
+                TupleBaseType => typeof(TupleBaseType), // Tuple types generated in the LINQ expressions by the TupleBuilderCache
+                ITuple        => typeof(ITuple),        // .NET tuples (e.g. System.ValueTuple<...>) used in generated libraries
+                _             => x!.GetType()
             };
+            return type;
+        }
+
 
         private ConcurrentDictionary<Type, ICqlComparer<object>> Comparers { get; } = new();
 
@@ -75,7 +69,7 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(IEnumerable), new ListEqualComparer(this));
             Comparers.TryAdd(typeof(CqlQuantity), new CqlQuantityCqlComparer(this, this));
             Comparers.TryAdd(typeof(CqlConcept), new CqlConceptCqlComparer(this));
-            Comparers.TryAdd(typeof(CqlCode), new CqlCodeCqlComparer(StringComparer.OrdinalIgnoreCase));
+            Comparers.TryAdd(typeof(CqlCode), CqlCodeCqlComparer.Default);
             Comparers.TryAdd(typeof(CqlDate), new InterfaceCqlComparer<CqlDate>());
             Comparers.TryAdd(typeof(CqlTime), new InterfaceCqlComparer<CqlTime>());
             Comparers.TryAdd(typeof(CqlDateTime), new InterfaceCqlComparer<CqlDateTime>());
@@ -83,17 +77,18 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(TupleBaseType), new TupleBaseTypeComparer(this)); // Legacy, will be removed!
             Comparers.TryAdd(typeof(ITuple), new CqlTupleTypeComparer(this));
 
-            ComparerFactories.TryAdd(typeof(Nullable<>), (type, @this) =>
+            ComparerFactories.TryAdd(typeof(Nullable<>), (type, self) =>
             {
                 var genericType = typeof(NullComparer<>).MakeGenericType(Nullable.GetUnderlyingType(type)!);
-                var cqlComparer = (ICqlComparer<object>)Activator.CreateInstance(genericType, @this)!;
+                var cqlComparer = CreateCqlComparerAndUnwrapNonGeneric(genericType, self)!;
+                //var cqlComparer = (ICqlComparer<object>)Activator.CreateInstance(genericType, @this)!;
                 return cqlComparer;
             });
             ComparerFactories.TryAdd(typeof(KeyValuePair<,>), (type, @this) =>
             {
                 var genericArguments = type.GetGenericArguments();
                 var genericType = typeof(KeyValuePairComparer<,>).MakeGenericType(genericArguments);
-                var cqlComparer = (ICqlComparer<object>)Activator.CreateInstance(genericType, args: [this])!;
+                var cqlComparer = CreateCqlComparerAndUnwrapNonGeneric(genericType, this);
                 return cqlComparer;
             });
         }
@@ -112,14 +107,10 @@ namespace Hl7.Cql.Comparers
         public CqlComparers Register<T>(Type type, ICqlComparer<T> comparer)
         {
             if (type is null)
-            {
                 throw new ArgumentNullException(nameof(type));
-            }
 
             if (comparer is null)
-            {
                 throw new ArgumentNullException(nameof(comparer));
-            }
 
             Comparers.AddOrUpdate(type, comparer, (t, existing) => comparer);
             return this;
@@ -169,8 +160,8 @@ namespace Hl7.Cql.Comparers
             {
                 throw new ArgumentNullException(nameof(type));
             }
-            Comparers.TryRemove(type, out var comparer);
-            ComparerFactories.TryRemove(type, out var factory);
+            Comparers.TryRemove(type, out _);
+            ComparerFactories.TryRemove(type, out _);
             return this;
         }
 
@@ -269,20 +260,6 @@ namespace Hl7.Cql.Comparers
             throw new ArgumentException($"Cannot check equivalence for type {xType.Name}");
         }
 
-        /// <summary>
-        /// Collapses derived types to their bases, since this makes it easier to find the comparer by the exact type.
-        /// </summary>
-        private static Type GetKeyTypeForComparers(object? x)
-        {
-            var type = x switch
-            {
-                TupleBaseType => typeof(TupleBaseType), // Tuple types generated in the LINQ expressions by the TupleBuilderCache
-                ITuple        => typeof(ITuple),        // .NET tuples (e.g. System.ValueTuple<...>) used in generated libraries
-                _             => x!.GetType()
-            };
-            return type;
-        }
-
         /// <inheritdoc />
         public int GetHashCode(object? x)
         {
@@ -307,6 +284,8 @@ namespace Hl7.Cql.Comparers
             }
             else throw new ArgumentException($"Cannot generate a hash code for {xType.Name}", nameof(x));
         }
+
+        #endregion ICqlComparer
     }
 
     file static class LocalExtensions
@@ -316,24 +295,29 @@ namespace Hl7.Cql.Comparers
             Type type,
             ICqlComparer<T> comparer)
         {
-            throw new NotImplementedException();
-            // if (!comparers.TryAdd(type, comparer))
-            // {
-            //     throw new InvalidOperationException($"Type {type} is already registered.");
-            // }
+            comparers.AddOrUpdate(
+                type,
+                _ => comparer.WrapNonGeneric(),
+                (_, prev) => prev);
         }
 
         public static ICqlComparer<T> AddOrUpdate<T>(
             this ConcurrentDictionary<Type, ICqlComparer<object>> comparers,
-            Type key,
-            ICqlComparer<T> addValue,
-            Func<Type, ICqlComparer<T>, ICqlComparer<T>> updateValueFactory)
+            Type type,
+            ICqlComparer<T> addComparer,
+            Func<Type, ICqlComparer<T>, ICqlComparer<T>> updateComparerFactory)
         {
-            throw new NotImplementedException();
+            var result = comparers.AddOrUpdate(
+                type,
+                _ => addComparer.WrapNonGeneric(),
+                (type, prev) =>
+                {
+                    var prevTyped = prev.UnwrapGeneric<T>()!;
+                    var newTyped = updateComparerFactory(type, prevTyped);
+                    return newTyped.WrapNonGeneric();
+                });
+
+            return result.UnwrapGeneric<T>()!;
         }
     }
-
-    #endregion
 }
-
-#nullable restore

@@ -36,7 +36,7 @@ partial class CqlComparers
         // public bool? Equals(object? x, object? y, string? precision) => Equals((x as T)!, (y as T)!, precision);
 
         public bool Equivalent(T? x, T? y, string? precision) =>
-            CqlComparers.EquivalentOnNullsOnly(x, y)
+            EquivalentOnNullsOnly(x, y)
             ?? x!.Equivalent(y, precision);
 
         // public bool Equivalent(object? x, object? y, string? precision) => Equivalent(x as T, y as T, precision);

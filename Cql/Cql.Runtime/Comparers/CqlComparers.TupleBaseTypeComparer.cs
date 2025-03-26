@@ -7,12 +7,13 @@
 */
 
 using Hl7.Cql.Abstractions;
-using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Comparers
+namespace Hl7.Cql.Comparers;
+
+partial class CqlComparers
 {
-    internal class TupleBaseTypeComparer(CqlComparers memberComparer) : ICqlComparer<TupleBaseType?>//, ICqlComparer
+    private class TupleBaseTypeComparer(CqlComparers memberComparer) : ICqlComparer<TupleBaseType?>//, ICqlComparer
     {
         public int? Compare(TupleBaseType? x, TupleBaseType? y, string? precision = null)
         {
@@ -50,7 +51,7 @@ namespace Hl7.Cql.Comparers
 
         public bool Equivalent(TupleBaseType? x, TupleBaseType? y, string? precision = null)
         {
-            if (CqlComparers.EquivalentOnNullsOnly(x, y) is { } r)
+            if (EquivalentOnNullsOnly(x, y) is { } r)
                 return r;
 
             var xType = x!.GetType();
@@ -87,5 +88,3 @@ namespace Hl7.Cql.Comparers
         //     GetHashCode(obj as TupleBaseType);
     }
 }
-
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

@@ -137,7 +137,7 @@ namespace Hl7.Cql.Operators
         {
             if (s == null)
                 return null;
-            else if (Primitives.CqlQuantity.TryParse(s, out CqlQuantity? value))
+            else if (CqlQuantity.TryParse(s, out CqlQuantity? value))
                 return value;
             else return null;
         }

@@ -8,9 +8,11 @@
 
 using Hl7.Cql.Abstractions;
 
-namespace Hl7.Cql.Comparers
+namespace Hl7.Cql.Comparers;
+
+partial class CqlComparers
 {
-    internal class DecimalCqlComparer : ICqlComparer<decimal?>// ,ICqlComparer
+    private class DecimalCqlComparer : ICqlComparer<decimal?>// ,ICqlComparer
     {
         // CQL only supports 8 digits of scale.
         private const int MaxDecimalDigits = 8;
@@ -20,32 +22,18 @@ namespace Hl7.Cql.Comparers
 
         public int? Compare(decimal? x, decimal? y, string? precision = null)
         {
-            if (x == null)
-            {
-                if (y == null)
-                    return 0;
-                else return -1;
-            }
-            else if (y == null)
-                return 1;
-            return Comparer<decimal?>.Default.Compare(TruncateDigits(x ?? 0, MaxDecimalDigits), TruncateDigits(y ?? 0, MaxDecimalDigits));
+            var result = CompareOnNullsOnly(x, y) ?? Comparer<decimal?>.Default.Compare(TruncateDigits(x ?? 0, MaxDecimalDigits), TruncateDigits(y ?? 0, MaxDecimalDigits));
+            return result;
         }
-
 
         // public bool? Equals(object? x, object? y, string? precision = null) =>
         //     Equals(x as decimal?, y as decimal?, precision);
 
         public bool? Equals(decimal? x, decimal? y, string? precision = null)
         {
-            if (x == null)
-            {
-                if (y == null)
-                    return true;
-                else return false;
-            }
-            else if (y == null)
-                return false;
-            return Comparer<decimal?>.Default.Compare(x, y) == 0;
+            var result = EquivalentOnNullsOnly(x, y)
+                         ?? Comparer<decimal>.Default.Compare(x!.Value, y!.Value) == 0;
+            return result;
         }
 
         // public bool Equivalent(object? x, object? y, string? precision = null) =>
@@ -53,7 +41,7 @@ namespace Hl7.Cql.Comparers
 
         public bool Equivalent(decimal? x, decimal? y, string? precision = null)
         {
-            if (CqlComparers.EquivalentOnNullsOnly(x, y) is { } r)
+            if (EquivalentOnNullsOnly(x, y) is { } r)
                 return r;
 
             var @thisPrecision = GetPrecision(x!.Value!);
@@ -67,7 +55,7 @@ namespace Hl7.Cql.Comparers
         }
 
         public int GetHashCode(decimal? x) =>
-            x?.GetHashCode() ?? typeof(decimal).GetHashCode();
+            x?.GetHashCode() ?? GetHashCodeForType<decimal>();
 
         // public int GetHashCode(object? x) =>
         //     GetHashCode(x as decimal?);

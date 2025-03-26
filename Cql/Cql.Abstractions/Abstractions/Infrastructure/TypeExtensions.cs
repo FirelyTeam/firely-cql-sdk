@@ -77,19 +77,36 @@ internal static class TypeExtensions
     /// <param name="type">The type to check.</param>
     /// <param name="genericTypeDefinition">The generic type definition to check against.</param>
     /// <returns>True if the type is implementing the generic type definition, false otherwise.</returns>
-    public static bool IsImplementingGenericTypeDefinition(this Type type, Type genericTypeDefinition)
+    public static bool IsImplementingGenericTypeDefinition(this Type type, Type genericTypeDefinition) =>
+        GetTypeImplementingGenericTypeDefinition(type, genericTypeDefinition) is not null;
+
+    /// <summary>
+    /// Checks if the specified type is implementing the specified generic type definition
+    /// and if it is, returns the type or the interface type that implements it; otherwise
+    /// returns <c>null</c>.
+    /// </summary>
+    /// <param name="type">The type to check.</param>
+    /// <param name="genericTypeDefinition">The generic type definition to check against.</param>
+    /// <returns>The type which implements the generic type definition, otherwise null.</returns>
+    public static Type? GetTypeImplementingGenericTypeDefinition(this Type type, Type genericTypeDefinition)
     {
         if (!genericTypeDefinition.IsGenericTypeDefinition)
             throw new ArgumentException("Must be a generic type definition.", nameof(genericTypeDefinition));
 
         if (type.IsGenericType && type.GetGenericTypeDefinition() == genericTypeDefinition)
-            return true;
+            return type;
 
-        var hasInterfaceImplementing = type.GetInterfaces()
-            .Where(ifc => ifc.IsGenericType)
-            .Select(ifc => ifc.GetGenericTypeDefinition())
-            .Any(ifc => ifc == genericTypeDefinition);
-        return hasInterfaceImplementing;
+        var result =  type
+                     .GetInterfaces()
+                     .SelectWhere(t =>
+                     {
+                         if (t.IsGenericType
+                             && t.GetGenericTypeDefinition() == genericTypeDefinition)
+                             return (true, t);
+                         return default;
+                     })
+                     .SingleOrDefault();
+        return result;
     }
 
     /// <summary>

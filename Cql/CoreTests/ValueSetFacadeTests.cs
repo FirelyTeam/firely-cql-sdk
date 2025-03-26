@@ -85,7 +85,7 @@ namespace CoreTests
         public void EnumerateUniqueCodes()
         {
             var mf = _unionVs!;
-            var comparer = new CqlCodeCqlComparer().ToEqualityComparer();
+            var comparer = CqlCodeCqlComparer.Default.ToEqualityComparer();
 
             mf.Count().Should().Be(9);  // b and B are the same, h should appear with and without description
 

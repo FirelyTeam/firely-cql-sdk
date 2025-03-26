@@ -33,6 +33,10 @@
 	  <Compile Update="Operators\CqlOperators.*.cs">
 	    <DependentUpon>Operators\CqlOperators.cs</DependentUpon>
 	  </Compile>
+
+	  <Compile Update="Comparers\CqlComparers.*.cs">
+	    <DependentUpon>Comparers\CqlComparers.cs</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

@@ -16,7 +16,7 @@ partial class CqlComparers
     /// Implements comparison through <see cref="Comparer{T}.Default"/>.
     /// </summary>
     /// <typeparam name="T">The type to compare.</typeparam>
-    internal class DefaultCqlComparer<T> : ICqlComparer<T>//, ICqlComparer
+    private class DefaultCqlComparer<T> : ICqlComparer<T>//, ICqlComparer
     {
         // /// <inheritdoc />
         // public int? Compare(object? x, object? y, string? precision = null)
@@ -45,7 +45,7 @@ partial class CqlComparers
 
         /// <inheritdoc />
         public bool Equivalent(T? x, T? y, string? precision = null) =>
-            CqlComparers.EquivalentOnNullsOnly(x, y)
+            EquivalentOnNullsOnly(x, y)
             ?? Compare(x, y, precision) == 0;
 
         /// <inheritdoc />

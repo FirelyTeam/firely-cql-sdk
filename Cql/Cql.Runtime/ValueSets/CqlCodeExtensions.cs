@@ -56,12 +56,12 @@ public static class CqlCodeExtensions
         (ICqlComparer<T> comparer, string? precision = null, bool useEquivalence = false)
         : IEqualityComparer<T>
     {
-        public ICqlComparer<T> Comparer { get; } = comparer ?? throw new ArgumentNullException(nameof(comparer));
+        private readonly ICqlComparer<T> _comparer = comparer ?? throw new ArgumentNullException(nameof(comparer));
 
         public bool Equals(T? x, T? y) =>
             ReferenceEquals(x, y) ||
-            useEquivalence ? Comparer.Equivalent(x, y, precision) : Comparer.Equals(x, y, precision) == true;
+            useEquivalence ? _comparer.Equivalent(x, y, precision) : _comparer.Equals(x, y, precision) == true;
 
-        public int GetHashCode(T obj) => Comparer.GetHashCode(obj);
+        public int GetHashCode(T obj) => _comparer.GetHashCode(obj);
     }
 }
