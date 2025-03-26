@@ -61,12 +61,33 @@ define type Vocabulary extends Any {
 	version String
  }
 
- 
- // Type operators
+ /*
+  * These functions are the basis of several other arithmetic operations and cannot be expressed purely in CQL.
+ */
+
+define public function IsZero(argument System.Decimal) returns System.Boolean:
+  external
+
+define public function IsNegative(argument System.Decimal) returns System.Boolean:
+  external
+
+define public function ChangeUnit(value System.Decimal, fromUnit System.String, toUnit System.String) returns System.Decimal:
+  external
 
 
- define public function ToInteger(argument Boolean) returns Integer: if argument = true then 1 else 0
- define public explicit conversion from Boolean b to Integer: ToInteger(b)
- 
- define public function Add(left Decimal, right Decimal) returns Integer: external
- define public operator+(left Decimal, right Decimal) returns Integer: Add(left,right)
+/*
+* Computes the resulting unit from dividing the numerator unit by the denominator unit.
+* For example, 'cm2' divided by 'cm' produces 'cm'.
+*/
+define public function DivideUnit(numerator System.String, denominator System.String) returns System.String:
+  external
+
+/* Computes the resulting unit from multiplying the left unit by the right unit.
+ * For example, 'cm' multiplied by 'cm' produces 'cm2'.  Incompatible compuations return null.
+ */
+define public function MultiplyUnit(left System.String, right System.String) returns System.String:
+  external
+
+define public function CompareUnit(left System.String, right System.String) returns System.Integer:
+  external
+

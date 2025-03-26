@@ -1,10 +1,13 @@
 ﻿using Antlr4.Runtime;
+using CqlToElm2Tests.Sql;
 using FluentAssertions;
 using Hl7.Cql.CqlToElm.Grammar.r2;
+using Hl7.Cql.CqlToElm2.Expressions;
 using Hl7.Cql.CqlToElm2.Symbols;
 using Hl7.Cql.CqlToElm2.Visitors;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,6 +36,8 @@ public class QueryTest
 
         define literal type String extends Any
 
+        define generic type List<T> extends Any {}      
+
         ";
         provider.Add("System", new(2, 0, 0), systemCql);
         var fhirCql =
@@ -56,5 +61,14 @@ public class QueryTest
         var globalScope = new SymbolTable(".global");
         var visitor = new SymbolVisitor(globalScope, provider);
         var library = visitor.Visit(getParser(libCql).library()).Should().BeOfType<LibrarySymbol>().Subject;
+
+        var patientSymbol = library.Symbols.GetUnique<ExpressionSymbol>("Patients");
+        patientSymbol.Should().NotBeNull();
+        var retrieve = patientSymbol!.Expression.Should().BeOfType<RetrieveExpression>().Subject;
+
+        var evaluator = new SqlEvaluator(new SqlKata.Compilers.PostgresCompiler(), new() { });
+        evaluator.Evaluate(retrieve, library.Symbols);
+
+
     }
 }

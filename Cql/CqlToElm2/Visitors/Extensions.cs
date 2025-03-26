@@ -50,7 +50,7 @@ internal static class Extensions
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T WithError<T>(this T symbol, ErrorType errorType, params object[] details)
-        where T: Element
+        where T : Element
     {
         symbol.Errors.Add(new(errorType, details));
         return symbol;
@@ -58,7 +58,7 @@ internal static class Extensions
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static T WithLocation<T>(this T symbol, ParserRuleContext rule)
-        where T: Element
+        where T : Element
     {
         var start = new Coordinate(rule.Start.Line, rule.Start.Column);
         var end = new Coordinate(rule.Stop.Line, rule.Stop.Column);
@@ -123,39 +123,35 @@ internal static class Extensions
             if (matchingArg is not null)
                 return [matchingArg];
         }
-        var typeDef = GetNamedType(typeNameParts, scope);
-        if (typeDef is not null)
-            return [typeDef];
-        else return [];
+        var typeDefs = GetNamedType(typeNameParts, scope);
+        return typeDefs;
     }
 
     public static TypeSymbol[] Parse(this cqlParser.GenericTypeSpecifierContext gts, SymbolTable scope,
          IEnumerable<TypeSymbol>? genericArgs)
     {
         var typeName = gts!.qualifiedIdentifier().Dequote();
-        var typeSymbol = GetNamedType(typeName, scope);
-        if (typeSymbol is null) // find matching types in all used models
-        {
-            var fromModels = scope.OfType<ModelSymbol>()
-                .Select(model => GetNamedType(typeName, model.Symbols))
-                .Where(type => type is not null)
-                .ToArray();
-            return fromModels!;
-        }
-        if (typeSymbol?.TypeDefinition is GenericTypeDefinition gtd)
-        {
-            var args = gts!.typeSpecifier();
-            var argSymbols = args.Select(arg => arg.Parse(scope, genericArgs)).ToList();
-            if (argSymbols.Any(s => s is null))
-                return [];
-            else
+        var typeSymbols = GetNamedType(typeName, scope);
+        return typeSymbols.Select(typeSymbol =>
             {
-                var specifiers = argSymbols.Select(symbol => symbol[0].TypeDefinition.ToTypeSpecifier()).ToArray();
-                var genericType = gtd.MakeGenericType(specifiers);
-                return [new TypeSymbol(genericType)];
-            }
-        }
-        else return [];
+                if (typeSymbol.TypeDefinition is GenericTypeDefinition gtd)
+                {
+                    var args = gts!.typeSpecifier();
+                    var argSymbols = args.Select(arg => arg.Parse(scope, genericArgs)).ToList();
+                    if (argSymbols.Any(s => s is null))
+                        return null;
+                    else
+                    {
+                        var specifiers = argSymbols.Select(symbol => symbol[0].TypeDefinition.ToTypeSpecifier()).ToArray();
+                        var genericType = gtd.MakeGenericType(specifiers);
+                        return new TypeSymbol(genericType);
+                    }
+                }
+                return null;
+            })
+            .Where(s => s is not null)
+            .Cast<TypeSymbol>()
+            .ToArray();
     }
 
     public static TypeSymbol[] Parse(this cqlParser.ChoiceTypeSpecifierContext cts, SymbolTable scope,
@@ -172,12 +168,25 @@ internal static class Extensions
         }
     }
 
-    private static TypeSymbol? GetNamedType(string[]? parts, SymbolTable scope)
+    private static TypeSymbol[] GetNamedType(string[]? parts, SymbolTable scope)
     {
         if (parts is null)
-            return null;
+            return [];
         else if (parts.Length == 1) // no model specified
-            return scope.GetUnique<TypeSymbol>(parts[0]);
+        {
+            var inThisLibrary = scope.GetUnique<TypeSymbol>(parts[0]);
+            if (inThisLibrary is not null)
+                return [inThisLibrary];
+            else
+            {
+                var inModels = scope.LocalOfType<ModelSymbol>()
+                    .Select(model => model.Symbols.GetUnique<TypeSymbol>(parts[0]))
+                    .Where(type => type is not null)
+                    .Cast<TypeSymbol>()
+                    .ToArray();
+                return inModels;
+            }
+        }
         else
         {
             for (int i = parts.Length; i > 0; i--)
@@ -189,11 +198,11 @@ internal static class Extensions
                     string typeName = string.Join(".", parts.Skip(i));
                     var modelType = model.Symbols.GetUnique<TypeSymbol>(typeName);
                     if (modelType is not null)
-                        return modelType;
+                        return [modelType];
                 }
             }
         }
-        return null;
+        return [];
     }
 }
 

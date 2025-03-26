@@ -168,13 +168,13 @@ internal class SymbolVisitor : cqlBaseVisitor<Symbol>
     {
         var name = context.identifier().Dequote();
         var accessModifier = context.accessModifier().Parse();
+        var isFluent = context.fluent() is not null;
         var operands = context.operandDefinition().Select(Visit).Cast<OperandSymbol>().ToArray();
         var returnTypes = context.returnClause()?.typeSpecifier().Parse(Scope, null);
 
         var bodyExpression = context.functionBody().expression();
-        Expression? body = null;
+        Expression? body;
         TypeSymbol returnType;
-
         if (bodyExpression is not null)
         {
             var functionScope = Scope.Enter(name!);
@@ -184,13 +184,23 @@ internal class SymbolVisitor : cqlBaseVisitor<Symbol>
             body = expressionVisitor.Visit(bodyExpression);
             returnType = body.Type;
         }
-        else if (returnTypes is null || returnTypes.Length != 0)
+        else if (returnTypes is null || returnTypes.Length != 1)
+        {
+            body = null;
             returnType = AnyType;
+        }
         else
+        {
+            body = null;
             returnType = returnTypes[0];
+        }
 
-        var symbol = new FunctionSymbol(name!, accessModifier, returnType!, operands, body)
-            .WithLocation(context);
+        var symbol = isFluent switch {
+            true => new FluentFunctionSymbol(name!, accessModifier, returnType!, operands, body)
+                .WithLocation(context),
+            false => new FunctionSymbol(name!, accessModifier, returnType!, operands, body)
+                .WithLocation(context)
+        };
         if (returnTypes is not null)
         {
             if (returnTypes.Length == 0)
@@ -497,7 +507,7 @@ internal class SymbolVisitor : cqlBaseVisitor<Symbol>
         if (functionName is not null)
         {
             TypeSymbol returnType;
-            Expression body;
+            Expression? body;
             var bodyContext = context.functionBody().expression();
             if (bodyContext is not null)
             {
@@ -509,11 +519,17 @@ internal class SymbolVisitor : cqlBaseVisitor<Symbol>
                 returnType = body.Type;
             }
             else if (returnTypes is null || returnTypes.Length != 0)
+            {
                 returnType = AnyType;
+                body = null;
+            }
             else
+            {
                 returnType = returnTypes[0];
+                body = null;
+            }
 
-            var symbol = new FunctionSymbol(functionName, accessModifier, returnType!, operands, null)
+            var symbol = new FunctionSymbol(functionName, accessModifier, returnType!, operands, body)
                 .WithLocation(context);
             if (returnTypes is not null)
             {

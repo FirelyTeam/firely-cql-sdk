@@ -54,11 +54,13 @@ operatorDefinition:
 	)* ')' returnClause? ':' functionBody;
 
 genericOperatorDefinition:
-	'define' accessModifier? 'generic' 'operator' overloadableOperator '<' genericArguments '>' '('
-		operandDefinition (',' operandDefinition)* ')' returnClause? ':' functionBody;
+	'define' accessModifier? fluent? 'generic' 'operator' overloadableOperator '<' genericArguments
+		'>' '(' operandDefinition (',' operandDefinition)* ')' returnClause? ':' functionBody;
+
+fluent: 'fluent';
 
 functionDefinition:
-	'define' accessModifier? 'function' identifier '(' operandDefinition (
+	'define' accessModifier? fluent? 'function' identifier '(' operandDefinition (
 		',' operandDefinition
 	)* ')' returnClause? ':' functionBody;
 
@@ -264,6 +266,52 @@ simplePath:
 	| simplePath '[' index ']';
 
 index: STRING | NUMBER;
+
+query:
+	sourceClause letClause? queryInclusionClause* whereClause? (
+		aggregateClause
+		| returnClause
+	)? sortClause?;
+
+querySource:
+	retrieve
+	| qualifiedIdentifier
+	| '(' expression ')';
+
+aliasedQuerySource: querySource alias;
+
+alias: identifier;
+
+sourceClause:
+	'from'? aliasedQuerySource (',' aliasedQuerySource)*;
+
+letClause: 'let' letClauseItem (',' letClauseItem)*;
+
+letClauseItem: identifier ':' expression;
+
+queryInclusionClause: withClause | withoutClause;
+
+withClause: 'with' aliasedQuerySource 'such' 'that' expression;
+
+withoutClause:
+	'without' aliasedQuerySource 'such' 'that' expression;
+
+whereClause: 'where' expression;
+
+aggregateClause:
+	'aggregate' ('all' | 'distinct')? identifier startingClause? ':' expression;
+
+startingValue: STRING | NUMBER;
+
+startingClause:
+	'starting' (startingValue | quantity | ('(' expression ')'));
+
+sortClause:
+	'sort' (sortDirection | ('by' sortByItem (',' sortByItem)*));
+
+sortDirection: 'asc' | 'ascending' | 'desc' | 'descending';
+
+sortByItem: expression sortDirection?;
 
 // lexicals
 

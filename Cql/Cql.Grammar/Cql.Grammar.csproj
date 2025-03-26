@@ -18,6 +18,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="fhirpath\" />
       <Folder Include="r2\" />
     </ItemGroup>
 

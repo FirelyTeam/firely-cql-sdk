@@ -3,22 +3,28 @@ using Hl7.Cql.CqlToElm2.Symbols;
 using Hl7.Cql.Model;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
+using SqlKata;
+using SqlKata.Compilers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CqlToElm2Tests;
-internal class PostgresEvaluator: IDisposable
+namespace CqlToElm2Tests.Sql;
+internal class SqlEvaluator : IDisposable
 {
-    public PostgresEvaluator()
+    public SqlEvaluator(Compiler queryCompiler, Dictionary<string, Retriever> retrievers)
     {
         Connection = Connect();
+        QueryCompiler = queryCompiler;
+        Retrievers = retrievers;
     }
 
-
-    public IDictionary<FunctionSymbol, Delegate> Implementations { get; } = new Dictionary<FunctionSymbol, Delegate>();
+    internal IDictionary<FunctionSymbol, Delegate> Implementations { get; } = new Dictionary<FunctionSymbol, Delegate>();
+    internal NpgsqlConnection Connection { get; }
+    internal Compiler QueryCompiler { get; }
+    internal Dictionary<string, Retriever> Retrievers { get; }
 
     /// <summary>
     /// Evaluate a library's defined expressions.
@@ -30,18 +36,38 @@ internal class PostgresEvaluator: IDisposable
     /// <summary>
     /// Evaluate a single symbol.
     /// </summary>
-    public object? Evaluate(Symbol symbol, SymbolTable scope) => symbol switch
+    public object? Evaluate(Symbol? symbol, SymbolTable scope) => symbol switch
     {
-        ExpressionSymbol expression => Evaluate(expression.Expression, scope),
+        ArgumentSymbol argument => Evaluate(argument.Expression, scope),
+        ExpressionSymbol expression => EvaluateExpression(expression, scope),
         FunctionSymbol function => InvokeFunction(function, scope),
+        OperandSymbol operandSymbol => scope.GetUnique<ArgumentSymbol>(operandSymbol.Name),
+        null => throw new ArgumentException("Symbol cannot be null", nameof(symbol)),
         _ => throw new NotSupportedException($"Unsupported symbol type {symbol.GetType()}")
     };
 
-    public object? Evaluate(Expression expression, SymbolTable symbols) => expression switch
+    private object? EvaluateExpression(ExpressionSymbol expression, SymbolTable scope)
     {
-        FunctionInvocationExpression function => InvokeFunction(function, symbols),
+        var value = Evaluate(expression.Expression, scope);
+        var query = new Query();
+        switch (value)
+        {
+            case string s: query = query.SelectRaw(s); break;
+            default: break;
+        }
+        var queryText = QueryCompiler.Compile(query).ToString();
+        using var command = new NpgsqlCommand(queryText, Connection);
+        var result = command.ExecuteScalar();
+        return result;
+    }
+
+    public object? Evaluate(Expression expression, SymbolTable scope) => expression switch
+    {
+
+        FunctionInvocationExpression function => InvokeFunction(function, scope),
         LiteralExpression literal => literal.Value,
-        RetrieveExpression retrieve => Retrieve(retrieve, symbols),
+        RefExpression @ref => Evaluate(@ref.To, scope),
+        RetrieveExpression retrieve => Retrieve(retrieve, scope),
         _ => throw new NotSupportedException($"Unsupported expression type {expression.GetType()}")
     };
 
@@ -71,7 +97,16 @@ internal class PostgresEvaluator: IDisposable
     {
         var functionScope = symbols.Enter(function.Function.Name);
         foreach (var arg in function.Arguments)
-            functionScope.AddSymbol(arg);
+        {
+            if (arg.Expression is RefExpression @ref)
+            {
+                var symbol = Evaluate(@ref.To, symbols);
+                if (symbol is ArgumentSymbol boundArgument)
+                    functionScope.AddSymbol(boundArgument);
+            }
+            else functionScope.AddSymbol(arg);
+        }
+
         return Evaluate(function.Function, functionScope);
     }
 
@@ -85,7 +120,6 @@ internal class PostgresEvaluator: IDisposable
         var config = new ConfigurationBuilder()
             .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
             .Build();
-
         string connectionString = config.GetConnectionString("PostgresDb") ??
             throw new InvalidOperationException("Connection string not found");
         var connection = new NpgsqlConnection(connectionString);
@@ -93,7 +127,7 @@ internal class PostgresEvaluator: IDisposable
         return connection;
     }
 
-    internal NpgsqlConnection Connection { get; }
+
 
     #region IDisposable
     private bool IsDisposed;

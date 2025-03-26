@@ -3,6 +3,7 @@ using Antlr4.Runtime.Misc;
 using Hl7.Cql.CqlToElm.Grammar.r2;
 using Hl7.Cql.CqlToElm2.Expressions;
 using Hl7.Cql.CqlToElm2.Symbols;
+using Hl7.Cql.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,9 +24,9 @@ internal class ExpressionVisitor(SymbolTable Scope, LiteralTypeNames LiteralType
         var expressions = new List<Expression>();
 
         var localFunctions = Scope.GetSymbols(functionName).OfType<FunctionSymbol>();
-        var inModels = Scope.OfType<ModelSymbol>().SelectMany(m =>
+        var inModels = Scope.LocalOfType<ModelSymbol>().SelectMany(m =>
             m.Symbols.GetSymbols(functionName).OfType<FunctionSymbol>());
-        var inIncludedLibraries = Scope.OfType<LibrarySymbol>().SelectMany(l =>
+        var inIncludedLibraries = Scope.LocalOfType<LibrarySymbol>().SelectMany(l =>
             l.Symbols.GetSymbols(functionName).OfType<FunctionSymbol>());
         var allFunctions = localFunctions
             .Concat(inModels)
@@ -176,15 +177,26 @@ internal class ExpressionVisitor(SymbolTable Scope, LiteralTypeNames LiteralType
         else retrieveContext = null;
 
         var types = context.namedTypeSpecifier().Parse(Scope, null);
-        var codePath = Visit(context.codePath());
-        var codeComparatorText = context.codeComparator().GetText();
+        var codePathContext = context.codePath();
+        var codePath = codePathContext switch
+        {
+            { } => Visit(codePathContext),
+            _ => null
+        };
+        var codeComparatorText = context.codeComparator()?.GetText();
         var isValidCodeComparator = Enum.TryParse<CodeComparator>(codeComparatorText, out var codeComparator);
-        var terminology = Visit(context.terminology());
+        var terminologyContext = context.terminology();
+        var terminology = terminologyContext switch
+        {
+            { } => Visit(terminologyContext),
+            _ => null
+        };
 
+        var elementType = types.Length == 1 ? types[0] : AnyType;
+        var retrieveType = new TypeSymbol(ListTypeTemplate.MakeGenericType(elementType.TypeDefinition.ToTypeSpecifier()));
         
-        var retrieve = new RetrieveExpression(types.Length == 1 ? types[0] : AnyType, codePath, terminology,
-            codeComparator, retrieveContext)
-                .WithLocation(context);
+        var retrieve = new RetrieveExpression(retrieveType, codePath, terminology, codeComparator, retrieveContext)
+            .WithLocation(context);
         if (types.Length == 0)
             retrieve = retrieve.WithError(ErrorType.InvalidTypeSpecifier, context.namedTypeSpecifier().GetText());
         else if (types.Length > 1)
@@ -243,5 +255,13 @@ internal class ExpressionVisitor(SymbolTable Scope, LiteralTypeNames LiteralType
     /// </summary>
     private TypeSymbol AnyType => Scope.GetUnique<TypeSymbol>(LiteralTypeNames.Any) ??
         throw new InvalidOperationException($"Type {LiteralTypeNames.Any} has not been loaded in any model.");
+
+    private GenericTypeDefinition ListTypeTemplate => Scope.GetUnique<TypeSymbol>(LiteralTypeNames.List) switch
+    {
+        TypeSymbol ts when ts.TypeDefinition is GenericTypeDefinition gtd && gtd.IsTemplate && gtd.Arguments.Count == 1 => gtd,
+        null => throw new InvalidOperationException($"Type {LiteralTypeNames.List} has not been loaded in any model."),
+        _ => throw new InvalidOperationException($"Literal list type must be a generic template with one argument.")
+    };
+        
 }
 

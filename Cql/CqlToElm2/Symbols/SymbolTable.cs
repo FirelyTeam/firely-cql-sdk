@@ -156,6 +156,9 @@ internal class SymbolTable: IEnumerable<Symbol>
         throw new NotImplementedException();
     }
 
+    public IEnumerable<T> LocalOfType<T>() where T : Symbol =>
+        Symbols.Values.SelectMany(s => s).OfType<T>();
+
     public IEnumerable<T> OfType<T>() where T : Symbol
     {
         var ofType = Symbols.Values.SelectMany(s => s).OfType<T>();

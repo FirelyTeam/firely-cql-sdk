@@ -63,7 +63,7 @@ public class TypeExpressionTest
         define literal type Integer extends Any
         define literal type String extends Any
 
-         define public function ToInteger(argument String) returns Integer: external
+        define public function ToInteger(argument String) returns Integer: external
         ";
 
         var globalScope = new SymbolTable(".global");

@@ -241,6 +241,18 @@ public partial class cqlBaseListener : IcqlListener {
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitGenericOperatorDefinition([NotNull] cqlParser.GenericOperatorDefinitionContext context) { }
 	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.fluent"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterFluent([NotNull] cqlParser.FluentContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.fluent"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitFluent([NotNull] cqlParser.FluentContext context) { }
+	/// <summary>
 	/// Enter a parse tree produced by <see cref="cqlParser.functionDefinition"/>.
 	/// <para>The default implementation does nothing.</para>
 	/// </summary>
@@ -1296,6 +1308,210 @@ public partial class cqlBaseListener : IcqlListener {
 	/// </summary>
 	/// <param name="context">The parse tree.</param>
 	public virtual void ExitIndex([NotNull] cqlParser.IndexContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.query"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterQuery([NotNull] cqlParser.QueryContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.query"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitQuery([NotNull] cqlParser.QueryContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.querySource"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterQuerySource([NotNull] cqlParser.QuerySourceContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.querySource"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitQuerySource([NotNull] cqlParser.QuerySourceContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.aliasedQuerySource"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAliasedQuerySource([NotNull] cqlParser.AliasedQuerySourceContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.aliasedQuerySource"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAliasedQuerySource([NotNull] cqlParser.AliasedQuerySourceContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.alias"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAlias([NotNull] cqlParser.AliasContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.alias"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAlias([NotNull] cqlParser.AliasContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.sourceClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterSourceClause([NotNull] cqlParser.SourceClauseContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.sourceClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitSourceClause([NotNull] cqlParser.SourceClauseContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.letClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterLetClause([NotNull] cqlParser.LetClauseContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.letClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitLetClause([NotNull] cqlParser.LetClauseContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.letClauseItem"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterLetClauseItem([NotNull] cqlParser.LetClauseItemContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.letClauseItem"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitLetClauseItem([NotNull] cqlParser.LetClauseItemContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.queryInclusionClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterQueryInclusionClause([NotNull] cqlParser.QueryInclusionClauseContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.queryInclusionClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitQueryInclusionClause([NotNull] cqlParser.QueryInclusionClauseContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.withClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterWithClause([NotNull] cqlParser.WithClauseContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.withClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitWithClause([NotNull] cqlParser.WithClauseContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.withoutClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterWithoutClause([NotNull] cqlParser.WithoutClauseContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.withoutClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitWithoutClause([NotNull] cqlParser.WithoutClauseContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.whereClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterWhereClause([NotNull] cqlParser.WhereClauseContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.whereClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitWhereClause([NotNull] cqlParser.WhereClauseContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.aggregateClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterAggregateClause([NotNull] cqlParser.AggregateClauseContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.aggregateClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitAggregateClause([NotNull] cqlParser.AggregateClauseContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.startingValue"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterStartingValue([NotNull] cqlParser.StartingValueContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.startingValue"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitStartingValue([NotNull] cqlParser.StartingValueContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.startingClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterStartingClause([NotNull] cqlParser.StartingClauseContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.startingClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitStartingClause([NotNull] cqlParser.StartingClauseContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.sortClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterSortClause([NotNull] cqlParser.SortClauseContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.sortClause"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitSortClause([NotNull] cqlParser.SortClauseContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.sortDirection"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterSortDirection([NotNull] cqlParser.SortDirectionContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.sortDirection"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitSortDirection([NotNull] cqlParser.SortDirectionContext context) { }
+	/// <summary>
+	/// Enter a parse tree produced by <see cref="cqlParser.sortByItem"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void EnterSortByItem([NotNull] cqlParser.SortByItemContext context) { }
+	/// <summary>
+	/// Exit a parse tree produced by <see cref="cqlParser.sortByItem"/>.
+	/// <para>The default implementation does nothing.</para>
+	/// </summary>
+	/// <param name="context">The parse tree.</param>
+	public virtual void ExitSortByItem([NotNull] cqlParser.SortByItemContext context) { }
 
 	/// <inheritdoc/>
 	/// <remarks>The default implementation does nothing.</remarks>

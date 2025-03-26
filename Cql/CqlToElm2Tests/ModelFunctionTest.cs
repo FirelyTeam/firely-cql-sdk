@@ -1,4 +1,5 @@
 ﻿using Antlr4.Runtime;
+using CqlToElm2Tests.Sql;
 using FluentAssertions;
 using Hl7.Cql.CqlToElm.Grammar.r2;
 using Hl7.Cql.CqlToElm2.Expressions;
@@ -8,6 +9,7 @@ using Hl7.Cql.Operators;
 using Npgsql;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -103,10 +105,9 @@ public class ModelFunctionTest
         var add = model!.Symbols.GetUnique<FunctionSymbol>("Add");
         add.Should().NotBeNull();
 
-        var evaluator = new PostgresEvaluator();
-        evaluator.Implementations[add!] =
-            (decimal? left, decimal? right) =>
-            $"{(left?.ToString() ?? "NULL")} + {(right?.ToString() ?? "NULL")}";
+        var evaluator = new SqlEvaluator(new SqlKata.Compilers.PostgresCompiler());
+        evaluator.Implementations[add!] = (decimal? left, decimal? right) =>
+            $"({(left?.ToString(CultureInfo.InvariantCulture) ?? "NULL")} + {(right?.ToString(CultureInfo.InvariantCulture) ?? "NULL")})";
 
         var three = library.Symbols.GetUnique<ExpressionSymbol>("Three");
         three.Should().NotBeNull();
@@ -114,6 +115,7 @@ public class ModelFunctionTest
         var invocation = three.Expression.Should().BeOfType<FunctionInvocationExpression>().Subject;
         evaluator.Evaluate(three!, library.Symbols).Should().Be(3.0m);
     }
+
 
 }
 
