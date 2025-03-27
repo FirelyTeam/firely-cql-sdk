@@ -35,6 +35,7 @@ namespace Hl7.Cql.Fhir.Comparers
 
         delegate int? CompareFunction<in TComp>(TComp? x, TComp? y, string? precision);
         private readonly CompareFunction<T?> _compareFunction;
+
         delegate bool EquivalentFunction<in TComp>(TComp? x, TComp? y, string? precision);
         private readonly EquivalentFunction<T?> _equivalentFunction;
 

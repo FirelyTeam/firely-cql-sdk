@@ -16,7 +16,7 @@ namespace Hl7.Cql.Comparers;
 /// An CQL comparer that compares two <see cref="CqlCode"/> instances.
 /// </summary>
 internal class CqlCodeCqlComparer(StringComparer codeComparer) :
-    CqlComparer<CqlCode>(CqlComparerEqualsStrategy.Compare, CqlComparerNullComparisonStrategy.Or)
+    CqlComparer<CqlCode>(CqlComparerEqualsMethod.Compare, CqlComparerNullComparisonStrategy.EitherNullReturnsNull)
 {
     /// <summary>
     /// The default comparer, which uses <see cref="StringComparer.OrdinalIgnoreCase"/>.
@@ -108,7 +108,7 @@ internal class CqlCodeCqlComparer(StringComparer codeComparer) :
         CqlCode right,
         string? precision)
     {
-        var result = codeComparer.Compare(left!.code, right!.code);
+        var result = codeComparer.Compare(left.code, right.code);
         if (result != 0)
             return false;
 

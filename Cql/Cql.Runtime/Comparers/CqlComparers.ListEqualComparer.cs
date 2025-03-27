@@ -20,8 +20,12 @@ partial class CqlComparers
             IEnumerable right,
             string? precision)
         {
-            var lit = left!.GetEnumerator();
-            var rit = right!.GetEnumerator();
+            var lit = left.GetEnumerator();
+            using var litd = lit as IDisposable;
+
+            var rit = right.GetEnumerator();
+            using var ritd = rit as IDisposable;
+
             while (lit.MoveNext())
             {
                 if (!rit.MoveNext())
@@ -35,7 +39,7 @@ partial class CqlComparers
                 else if (rv == null) return 1;
                 else
                 {
-                    var compare = elementComparer.Compare(lv!, rv!, null);
+                    var compare = elementComparer.Compare(lv, rv, null);
                     if (compare != 0)
                         return compare;
                 }
@@ -90,8 +94,13 @@ partial class CqlComparers
         {
             var onlyNull = true;
             var notEmpty = false;
-            var lit = left!.GetEnumerator();
-            var rit = right!.GetEnumerator();
+
+            var lit = left.GetEnumerator();
+            using var litd = lit as IDisposable;
+
+            var rit = right.GetEnumerator();
+            using var ritd = rit as IDisposable;
+
             while (lit.MoveNext())
             {
                 if (!rit.MoveNext())
@@ -107,7 +116,7 @@ partial class CqlComparers
                 else
                 {
                     onlyNull = false;
-                    if (Comparer.Default.Compare(lv!, rv!) != 0)
+                    if (Comparer.Default.Compare(lv, rv) != 0)
                         return false;
                 }
             }
@@ -162,10 +171,10 @@ partial class CqlComparers
             IEnumerable right,
             string? precision)
         {
-            var lit = left!.GetEnumerator();
+            var lit = left.GetEnumerator();
             using var litd = lit as IDisposable;
 
-            var rit = right!.GetEnumerator();
+            var rit = right.GetEnumerator();
             using var ritd = rit as IDisposable;
 
             while (lit.MoveNext())
@@ -180,7 +189,7 @@ partial class CqlComparers
                     if (rv != null) return false;
                 }
                 else if (rv == null) return false;
-                else if (elementComparer.Equivalent(lv!, rv!, null) == false)
+                else if (elementComparer.Equivalent(lv, rv, null) == false)
                     return false;
             }
             if (rit.MoveNext()) // the 2nd list is longer than the 1st.

@@ -8,14 +8,14 @@
 
 namespace Hl7.Cql.Abstractions;
 
-internal enum CqlComparerEquivalentStrategy
+internal enum CqlComparerEquivalentMethod
 {
     Equivalent = 0,
     Compare = 1,
     Equals = 2
 }
 
-internal enum CqlComparerEqualsStrategy
+internal enum CqlComparerEqualsMethod
 {
     Equal = 0,
     Compare = 1
@@ -26,39 +26,39 @@ internal enum CqlComparerNullComparisonStrategy
     /// <summary>
     /// Comparison is null when both left and right are null.
     /// </summary>
-    And = 0,
+    EitherNullReturnsValue = 0,
 
     /// <summary>
     /// Comparison is null when either/both left or right are null.
     /// </summary>
-    Or = 1
+    EitherNullReturnsNull = 1,
 }
 
 internal abstract class CqlComparer<T>(
-    CqlComparerEqualsStrategy equalsStrategy = CqlComparerEqualsStrategy.Equal,
-    CqlComparerNullComparisonStrategy nullComparisonStrategy = CqlComparerNullComparisonStrategy.And,
-    CqlComparerEquivalentStrategy equivalentStrategy = CqlComparerEquivalentStrategy.Equivalent) : ICqlComparer<T>
+    CqlComparerEqualsMethod equalsMethod = CqlComparerEqualsMethod.Equal,
+    CqlComparerNullComparisonStrategy nullComparisonStrategy = CqlComparerNullComparisonStrategy.EitherNullReturnsValue,
+    CqlComparerEquivalentMethod equivalentMethod = CqlComparerEquivalentMethod.Equivalent) : ICqlComparer<T>
 {
     public CqlComparerNullComparisonStrategy NullComparisonStrategy { get; } = nullComparisonStrategy;
-    public CqlComparerEqualsStrategy EqualsStrategy { get; } = equalsStrategy;
-    public CqlComparerEquivalentStrategy EquivalentStrategy { get; } = equivalentStrategy;
+    public CqlComparerEqualsMethod EqualsMethod { get; } = equalsMethod;
+    public CqlComparerEquivalentMethod EquivalentMethod { get; } = equivalentMethod;
 
     public virtual bool Equivalent(
         T? left,
         T? right,
         string? precision)
     {
-        switch (EquivalentStrategy)
+        switch (EquivalentMethod)
         {
-            case CqlComparerEquivalentStrategy.Compare:
+            case CqlComparerEquivalentMethod.Compare:
                 return Compare(left, right, precision) is 0;
 
-            case CqlComparerEquivalentStrategy.Equals:
+            case CqlComparerEquivalentMethod.Equals:
                 return Equals(left, right, precision) is true or null;
 
-            case CqlComparerEquivalentStrategy.Equivalent:
+            case CqlComparerEquivalentMethod.Equivalent:
                 var result = EquivalentNulls(left, right)
-                    .GetValueOr(EquivalentValues(left!, right!, precision));
+                    .GetValueOr(() => EquivalentValues(left!, right!, precision));
                 return result;
 
             default:
@@ -93,12 +93,12 @@ internal abstract class CqlComparer<T>(
         T? right,
         string? precision)
     {
-        switch (EqualsStrategy)
+        switch (EqualsMethod)
         {
-            case CqlComparerEqualsStrategy.Compare:
+            case CqlComparerEqualsMethod.Compare:
                 return EqualsViaCompare(left, right, precision);
 
-            case CqlComparerEqualsStrategy.Equal:
+            case CqlComparerEqualsMethod.Equal:
                 var result =
                     EqualsNulls(left, right)
                         .GetValueOr(() => EqualsValues(left!, right!, precision));
@@ -163,14 +163,14 @@ internal abstract class CqlComparer<T>(
             (true, true) => 0,
             (true, _) => NullComparisonStrategy switch
             {
-                CqlComparerNullComparisonStrategy.And => 1,
-                CqlComparerNullComparisonStrategy.Or => null,
+                CqlComparerNullComparisonStrategy.EitherNullReturnsValue => 1,
+                CqlComparerNullComparisonStrategy.EitherNullReturnsNull => null,
                 _ => throw new ArgumentOutOfRangeException(),
             },
             (_, true) => NullComparisonStrategy switch
             {
-                CqlComparerNullComparisonStrategy.And => -1,
-                CqlComparerNullComparisonStrategy.Or  => null,
+                CqlComparerNullComparisonStrategy.EitherNullReturnsValue => -1,
+                CqlComparerNullComparisonStrategy.EitherNullReturnsNull  => null,
                 _                       => throw new ArgumentOutOfRangeException(),
             },
             _ => NoValueOf<int?>(),

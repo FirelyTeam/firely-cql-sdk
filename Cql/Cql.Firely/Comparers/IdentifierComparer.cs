@@ -12,8 +12,8 @@ namespace Hl7.Cql.Fhir.Comparers
 {
     internal class IdentifierComparer(
         ICqlComparer<string> systemComparer,
-        ICqlComparer<string> valueComparer) : 
-        CqlComparer<Identifier>(CqlComparerEqualsStrategy.Compare, CqlComparerNullComparisonStrategy.Or)
+        ICqlComparer<string> valueComparer) :
+        CqlComparer<Identifier>(CqlComparerEqualsMethod.Compare, CqlComparerNullComparisonStrategy.EitherNullReturnsNull)
     {
         protected internal override int? CompareValues(
             Identifier left,
@@ -26,7 +26,8 @@ namespace Hl7.Cql.Fhir.Comparers
                 var valueComp = valueComparer.Compare(left.Value, right.Value, precision);
                 return valueComp;
             }
-            else return systemComp;
+
+            return systemComp;
         }
 
         // public override int? Compare(Identifier? x, Identifier? y, string? precision)

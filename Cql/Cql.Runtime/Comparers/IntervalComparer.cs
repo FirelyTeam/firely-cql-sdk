@@ -15,7 +15,7 @@ namespace Hl7.Cql.Comparers
         ICqlComparer<object> pointComparer,
         Func<T, T> predecessor,
         Func<T, T> successor) : 
-        CqlComparer<CqlInterval<T>>(CqlComparerEqualsStrategy.Compare)
+        CqlComparer<CqlInterval<T>>(CqlComparerEqualsMethod.Compare)
     {
         private ICqlComparer<object> PointComparer { get; } = pointComparer ?? throw new ArgumentNullException(nameof(pointComparer));
         private Func<T, T> Predecessor { get; } = predecessor ?? throw new ArgumentNullException(nameof(predecessor));

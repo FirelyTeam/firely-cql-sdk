@@ -11,8 +11,8 @@ using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir.Comparers
 {
-    internal class IValueComparer<T>() : 
-        CqlComparer<IValue<T>>(CqlComparerEqualsStrategy.Compare, CqlComparerNullComparisonStrategy.Or /* ##REVIEW Consider strategy */)
+    internal class IValueComparer<T>() :
+        CqlComparer<IValue<T>>(CqlComparerEqualsMethod.Compare, CqlComparerNullComparisonStrategy.EitherNullReturnsNull)
     {
         protected internal override bool EquivalentValues(
             IValue<T> left,

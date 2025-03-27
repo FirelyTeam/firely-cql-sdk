@@ -16,25 +16,28 @@ namespace Hl7.Cql.Fhir.Comparers
         public static readonly FhirEnumComparer Default = new();
 
         private FhirEnumComparer() : base(
-            CqlComparerEqualsStrategy.Compare, CqlComparerNullComparisonStrategy.Or, CqlComparerEquivalentStrategy.Equals) { }
+            CqlComparerEqualsMethod.Compare, CqlComparerNullComparisonStrategy.EitherNullReturnsNull, CqlComparerEquivalentMethod.Equals) { }
 
         /// <inheritdoc/>
         protected internal override int? CompareValues(object left, object right, string? precision)
         {
             var xType = left.GetType();
             var yType = right.GetType();
+
             if (xType.IsEnum)
             {
                 if (yType == xType)
                     return Comparer<object>.Default.Compare(left, right);
-                else if (typeof(string).IsAssignableFrom(yType))
+
+                if (typeof(string).IsAssignableFrom(yType))
                     return CompareEnumToString(left, (string)right);
             }
             else if (yType.IsEnum)
             {
                 if (yType == xType)
                     return Comparer<object>.Default.Compare(left, right);
-                else if (typeof(string).IsAssignableFrom(xType))
+
+                if (typeof(string).IsAssignableFrom(xType))
                     return CompareEnumToString(right, (string)left) * -1;
             }
             return null;

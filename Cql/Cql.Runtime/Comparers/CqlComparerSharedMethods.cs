@@ -60,12 +60,12 @@ internal static class CqlComparerSharedMethods
             return objComparer;
 
         var icqlComparerTypeArg = icqlComparerType.GetGenericArguments()[0];
-        ICqlComparer<object> nonGenericComparer = (ICqlComparer<object>)MethodInfo_WrapNonGeneric.MakeGenericMethod(icqlComparerTypeArg).Invoke(null, [comparer])!;
+        ICqlComparer<object> nonGenericComparer = (ICqlComparer<object>)MethodInfoWrapNonGeneric.MakeGenericMethod(icqlComparerTypeArg).Invoke(null, [comparer])!;
         return nonGenericComparer;
     }
 
-    private static readonly MethodInfo MethodInfo_WrapNonGeneric =
-        ReflectionUtility.GenericMethodDefinitionOf(() => WrapNonGeneric<object>(default!));
+    private static readonly MethodInfo MethodInfoWrapNonGeneric =
+        ReflectionUtility.GenericMethodDefinitionOf(() => WrapNonGeneric<object>(null!));
 
     internal static ICqlComparer<object> WrapNonGeneric<T>(this ICqlComparer<T> genericComparer) =>
         genericComparer as CqlComparer<object>

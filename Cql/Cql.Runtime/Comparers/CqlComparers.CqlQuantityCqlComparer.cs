@@ -20,8 +20,8 @@ partial class CqlComparers
     /// </summary>
     private class CqlQuantityCqlComparer(
         CqlComparers valueComparer,
-        ICqlComparer<string> unitComparer) : 
-        CqlComparer<CqlQuantity>(CqlComparerEqualsStrategy.Compare)
+        ICqlComparer<string> unitComparer) :
+        CqlComparer<CqlQuantity>(CqlComparerEqualsMethod.Compare)
     {
         private CqlComparers ValueComparer { get; } = valueComparer ?? throw new ArgumentNullException(nameof(valueComparer));
         private ICqlComparer<string> UnitComparer { get; } = unitComparer ?? throw new ArgumentNullException(nameof(unitComparer));

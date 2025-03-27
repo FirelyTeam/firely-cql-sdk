@@ -15,8 +15,8 @@ using static System.StringComparer;
 namespace Hl7.Cql.Comparers
 {
     internal class CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer) : CqlComparer<CqlCode>(
-        CqlComparerEqualsStrategy.Compare,
-        CqlComparerNullComparisonStrategy.Or)
+        CqlComparerEqualsMethod.Compare,
+        CqlComparerNullComparisonStrategy.EitherNullReturnsNull)
     {
         private IComparer<string> CodeComparer { get; } = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
 
@@ -79,7 +79,7 @@ namespace Hl7.Cql.Comparers
             CqlCode right,
             string? precision)
         {
-            var result = CodeComparer.Compare(left!.code, right!.code);
+            var result = CodeComparer.Compare(left.code, right.code);
             if (result != 0)
                 return false;
 

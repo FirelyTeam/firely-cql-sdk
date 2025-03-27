@@ -14,8 +14,7 @@ partial class CqlComparers
     {
         public int Compare(T? x, T? y)
         {
-            var result = CompareOnNullsOnly(x, y)
-                                     ?? through.Compare(x!, y!);
+            var result = CompareOnNullsOnly(x, y) ?? through.Compare(x!, y!);
             return result;
         }
 

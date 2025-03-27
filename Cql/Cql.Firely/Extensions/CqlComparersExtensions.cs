@@ -46,11 +46,11 @@ namespace Hl7.Cql.Fhir.Extensions
             comparers.Register(typeof(Uuid), new IValueComparer<string?>());
             comparers.Register(typeof(Identifier), new IdentifierComparer(comparers, comparers));
 
-            comparers.Register(typeof(Code<>), (type, _comparers) =>
+            comparers.Register(typeof(Code<>), (type, self) =>
             {
                 Type codeType = type.GetGenericArguments()[0];
                 Type comparerType = typeof(CodeComparer<>).MakeGenericType(codeType);
-                ICqlComparer<object> codeComparerNonGeneric = CreateCqlComparerAndUnwrapNonGeneric(comparerType, _comparers)!;
+                ICqlComparer<object> codeComparerNonGeneric = CreateCqlComparerAndUnwrapNonGeneric(comparerType, self);
                 PrimitiveTypeAgainstStringComparer primitiveTypeAgainstStringComparer = new PrimitiveTypeAgainstStringComparer(codeComparerNonGeneric);
                 return primitiveTypeAgainstStringComparer;
             });
@@ -59,9 +59,9 @@ namespace Hl7.Cql.Fhir.Extensions
         }
 
         private class PrimitiveTypeAgainstStringComparer(ICqlComparer<object> inner) :
-            CqlComparer<object>(equivalentStrategy: CqlComparerEquivalentStrategy.Compare)
+            CqlComparer<object>(equivalentMethod: CqlComparerEquivalentMethod.Compare)
         {
-            private CqlComparer<object>? _innerCqlComparer = inner as CqlComparer<object>;
+            private readonly CqlComparer<object>? _innerCqlComparer = inner as CqlComparer<object>;
 
             public override int? Compare(
                 object? left,

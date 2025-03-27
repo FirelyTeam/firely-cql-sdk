@@ -12,9 +12,9 @@ internal class CqlComparerAdapter<TInner, TOuter>(
     ICqlComparer<TInner> inner,
     Func<TOuter, TInner?> getInner) :
     CqlComparer<TOuter>(
-        inner is CqlComparer<TInner> c1 ? c1.EqualsStrategy : default,
+        inner is CqlComparer<TInner> c1 ? c1.EqualsMethod : default,
         inner is CqlComparer<TInner> c2 ? c2.NullComparisonStrategy : default,
-        inner is CqlComparer<TInner> c3 ? c3.EquivalentStrategy : default), IAdapter
+        inner is CqlComparer<TInner> c3 ? c3.EquivalentMethod : default), IAdapter
 {
     private TInner? GetInner(TOuter? value) => value is null ? default : getInner(value);
 

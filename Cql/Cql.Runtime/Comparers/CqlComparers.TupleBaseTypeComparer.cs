@@ -14,12 +14,12 @@ namespace Hl7.Cql.Comparers;
 partial class CqlComparers
 {
     private class TupleBaseTypeComparer(CqlComparers memberComparer) : 
-        CqlComparer<TupleBaseType?>(CqlComparerEqualsStrategy.Compare, CqlComparerNullComparisonStrategy.Or)
+        CqlComparer<TupleBaseType?>(CqlComparerEqualsMethod.Compare, CqlComparerNullComparisonStrategy.EitherNullReturnsNull)
     {
         protected internal override int? CompareValues(
             TupleBaseType left,
             TupleBaseType right,
-            string? precision = null)
+            string? precision)
         {
             var xType = left.GetType();
             var yType = right.GetType();
@@ -79,12 +79,12 @@ partial class CqlComparers
         //     Compare(left, right, null) == 0;
 
         protected internal override bool EquivalentValues(
-            TupleBaseType? left,
-            TupleBaseType? right,
-            string? precision = null)
+            TupleBaseType left,
+            TupleBaseType right,
+            string? precision)
         {
-            var xType = left!.GetType();
-            var yType = right!.GetType();
+            var xType = left.GetType();
+            var yType = right.GetType();
             if (xType != yType)
                 return false;
             var joined = from xProp in xType.GetProperties()

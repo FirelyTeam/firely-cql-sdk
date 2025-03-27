@@ -23,7 +23,7 @@ partial class CqlComparers
         /// Compares the code and system using the specified comparers.
         /// </summary>
         public CqlConceptCqlComparer(ICqlComparer<object> codeComparer) : base(
-            CqlComparerEqualsStrategy.Compare)
+            CqlComparerEqualsMethod.Compare)
         {
             CodeComparer = codeComparer;
             _codeEquivalenceComparerNoPrecision = NewCodeEquivalenceComparer(null!);

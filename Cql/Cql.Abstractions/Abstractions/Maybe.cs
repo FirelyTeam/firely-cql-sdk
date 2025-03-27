@@ -61,8 +61,7 @@ internal readonly struct Maybe<T>(T value) : IEquatable<Maybe<T>>
 
     public T GetValueOr(T value)
     {
-        if (HasValue) return Value;
-        else return value;
+        return HasValue ? Value : value;
     }
 
     public T GetValueOrDefault()

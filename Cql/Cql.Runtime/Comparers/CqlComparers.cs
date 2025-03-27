@@ -20,8 +20,12 @@ namespace Hl7.Cql.Comparers
         /// Creates an instance with built-in comparers for system types registerred.
         /// </summary>
         public CqlComparers() : base(
-            CqlComparerEqualsStrategy.Compare,
-            CqlComparerNullComparisonStrategy.Or)
+            CqlComparerEqualsMethod.Compare,
+
+            // if x or y is null it must return null and if both are null then it's a match
+            // if we return 1 or -1 when only 1 side is null then we hit a lot of issues with Stratification: Race - Two or More Races on a lot of measures
+            // because it expects null/false but gets true because 1 was returned (x null, y = 2) so 2 > null => return 1
+            CqlComparerNullComparisonStrategy.EitherNullReturnsNull)
         {
             // C# erases nullability for constant ints in some cases, e.g. literals, so we need comparers for both, even though
             // all values in CQL should be considered nullable
@@ -62,14 +66,14 @@ namespace Hl7.Cql.Comparers
             ComparerFactories.TryAdd(typeof(Nullable<>), (type, self) =>
             {
                 var genericType = typeof(NullComparer<>).MakeGenericType(Nullable.GetUnderlyingType(type)!);
-                var cqlComparer = CreateCqlComparerAndUnwrapNonGeneric(genericType, self)!;
+                var cqlComparer = CreateCqlComparerAndUnwrapNonGeneric(genericType, self);
                 return cqlComparer;
             });
-            ComparerFactories.TryAdd(typeof(KeyValuePair<,>), (type, @this) =>
+            ComparerFactories.TryAdd(typeof(KeyValuePair<,>), (type, self) =>
             {
                 var genericArguments = type.GetGenericArguments();
                 var genericType = typeof(KeyValuePairComparer<,>).MakeGenericType(genericArguments);
-                var cqlComparer = CreateCqlComparerAndUnwrapNonGeneric(genericType, this);
+                var cqlComparer = CreateCqlComparerAndUnwrapNonGeneric(genericType, self);
                 return cqlComparer;
             });
         }
@@ -77,7 +81,7 @@ namespace Hl7.Cql.Comparers
         /// <summary>
         /// Collapses derived types to their bases, since this makes it easier to find the comparer by the exact type.
         /// </summary>
-        private static Type GetKeyTypeForComparers(object? x)
+        private static Type GetKeyTypeForComparers(object x)
         {
             var type = x switch
             {
@@ -111,7 +115,7 @@ namespace Hl7.Cql.Comparers
             if (comparer is null)
                 throw new ArgumentNullException(nameof(comparer));
 
-            Comparers.AddOrUpdate(type, comparer, (t, existing) => comparer);
+            Comparers.AddOrUpdate(type, comparer, (_, _) => comparer);
             return this;
         }
 
@@ -144,7 +148,7 @@ namespace Hl7.Cql.Comparers
             if (genericTypeDefinition.IsGenericTypeDefinition == false)
                 throw new ArgumentException($"Type {genericTypeDefinition} is not a generic type definition.");
 
-            ComparerFactories.AddOrUpdate(genericTypeDefinition, comparerFactory, (t, existing) => comparerFactory);
+            ComparerFactories.AddOrUpdate(genericTypeDefinition, comparerFactory, (_, _) => comparerFactory);
             return this;
         }
 
@@ -169,42 +173,25 @@ namespace Hl7.Cql.Comparers
         #region ICqlComparer
 
         /// <inheritdoc />
-        public override bool? Equals(
-            object? left,
-            object? right,
-            string? precision) => Compare(left, right, precision) == 0;
-
-        /// <inheritdoc />
-        public override int? Compare(
-            object? left,
-            object? right,
+        protected internal override int? CompareValues(
+            object left,
+            object right,
             string? precision)
         {
-            // if x or y is null it must return null and if both are null then it's a match
-            // if we return 1 or -1 when only 1 side is null then we hit a lot of issues with Stratification: Race - Two or More Races on a lot of measures
-            // because it expects null/false but gets true because 1 was returned (x null, y = 2) so 2 > null => return 1
-            switch (x: left, y: right)
-            {
-                case (null, null):
-                    return 0;
-
-                case (null, _):
-                case (_, null):
-                    return null;
-            }
-
             bool xySwapped = false;
             var xType = GetKeyTypeForComparers(left);
-            var yType = GetKeyTypeForComparers(right);
-            if (xType != yType)
             {
-                // if x and y are not the same type, we prioritize them based on the following order:
-                // 1. If only one type is in the System namespace, we prioritize the other type
-                if (xType.Namespace == "System" && yType.Namespace != "System")
+                var yType = GetKeyTypeForComparers(right);
+                if (xType != yType)
                 {
-                    xySwapped = true;
-                    (left, right) = (right, left);
-                    (xType, yType) = (yType, xType);
+                    // if x and y are not the same type, we prioritize them based on the following order:
+                    // 1. If only one type is in the System namespace, we prioritize the other type
+                    if (xType.Namespace == "System" && yType.Namespace != "System")
+                    {
+                        xySwapped = true;
+                        (left, right) = (right, left);
+                        xType = yType; // yType won't be used again, so no need to swap it
+                    }
                 }
             }
 
@@ -243,14 +230,11 @@ namespace Hl7.Cql.Comparers
         }
 
         /// <inheritdoc />
-        public override bool Equivalent(
-            object? left,
-            object? right,
+        protected internal override bool EquivalentValues(
+            object left,
+            object right,
             string? precision)
         {
-            if (EquivalentOnNullsOnly(left, right) is { } r)
-                return r;
-
             var xType = GetKeyTypeForComparers(left);
 
             if (Comparers.TryGetValue(xType, out ICqlComparer<object>? comparer))
@@ -290,9 +274,9 @@ namespace Hl7.Cql.Comparers
             {
                 int hash = typeof(IEnumerable).GetHashCode();
                 var i = 1;
-                foreach (var _x in enumerable)
+                foreach (var x in enumerable)
                 {
-                    hash ^= i ^ GetHashCode(_x);
+                    hash ^= i ^ GetHashCode(x);
                 }
 
                 return hash;
