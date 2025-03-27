@@ -14,9 +14,9 @@ namespace Hl7.Cql.Fhir.Comparers
         ICqlComparer<string> systemComparer,
         ICqlComparer<string> valueComparer) : CqlComparer<Identifier>
     {
-        protected internal override int GetEqualsStrategy() => EQUALS_VIA_COMPARE;
+        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy() => CqlComparerEqualsStrategy.Compare;
 
-        protected internal override bool CompareReturnNullOnAnyNull() => true;
+        protected internal override CqlComparerNullComparisonStrategy GetNullComparisonStrategy() => CqlComparerNullComparisonStrategy.Or;
 
         protected override int? CompareValues(
             Identifier left,

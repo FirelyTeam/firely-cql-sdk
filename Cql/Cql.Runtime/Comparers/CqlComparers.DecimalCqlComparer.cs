@@ -14,9 +14,9 @@ partial class CqlComparers
 {
     private class DecimalCqlComparer : CqlComparer<decimal?>
     {
-        protected internal override int GetEqualsStrategy()
+        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy()
         {
-            return EQUALS_VIA_COMPARE;
+            return CqlComparerEqualsStrategy.Compare;
         }
 
         // CQL only supports 8 digits of scale.

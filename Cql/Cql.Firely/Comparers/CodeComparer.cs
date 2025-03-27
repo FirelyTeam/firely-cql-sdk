@@ -67,6 +67,6 @@ namespace Hl7.Cql.Fhir.Comparers
         //     x == null ? typeof(Code<T>).GetHashCode() : typeof(Code<T>).GetHashCode() ^ x.Value.GetHashCode();
 
         protected override int GetHashCodeValue(Code<T> value) =>
-            GetHashCodeNull() ^ value.Value.GetHashCode();
+            GetHashCodeForNull() ^ value.Value.GetHashCode();
     }
 }

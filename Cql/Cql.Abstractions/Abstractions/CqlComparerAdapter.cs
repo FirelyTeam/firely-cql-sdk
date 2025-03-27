@@ -16,7 +16,7 @@ internal class CqlComparerAdapter<TInner, TOuter>(
 
     private TInner? GetInner(TOuter? value) => value is null ? default : getInner(value);
 
-    protected internal override int GetEquivalentStrategy()
+    protected internal override CqlComparerEquivalentStrategy GetEquivalentStrategy()
     {
         var equivalentStrategy = base.GetEquivalentStrategy();
         Trace.Assert(
@@ -25,7 +25,7 @@ internal class CqlComparerAdapter<TInner, TOuter>(
         return equivalentStrategy;
     }
 
-    protected internal override int GetEqualsStrategy()
+    protected internal override CqlComparerEqualsStrategy GetEqualsStrategy()
     {
         var equalsStrategy = base.GetEqualsStrategy();
         Trace.Assert(
@@ -34,13 +34,13 @@ internal class CqlComparerAdapter<TInner, TOuter>(
         return equalsStrategy;
     }
 
-    protected internal override bool CompareReturnNullOnAnyNull()
+    protected internal override CqlComparerNullComparisonStrategy GetNullComparisonStrategy()
     {
-        var compareReturnNullOnAnyNull = base.CompareReturnNullOnAnyNull();
+        var nullComparisonStrategy = base.GetNullComparisonStrategy();
         Trace.Assert(
             _innerCqlComparer is null
-            || compareReturnNullOnAnyNull == _innerCqlComparer.CompareReturnNullOnAnyNull());
-        return compareReturnNullOnAnyNull;
+            || nullComparisonStrategy == _innerCqlComparer.GetNullComparisonStrategy());
+        return nullComparisonStrategy;
     }
 
     protected override bool EquivalentValues(

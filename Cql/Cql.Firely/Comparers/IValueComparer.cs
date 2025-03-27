@@ -13,10 +13,10 @@ namespace Hl7.Cql.Fhir.Comparers
 {
     internal class IValueComparer<T> : CqlComparer<IValue<T>>
     {
-        protected internal override bool CompareReturnNullOnAnyNull()
-        {
-            return true;
-        }
+        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy() => CqlComparerEqualsStrategy.Compare;
+
+        protected internal override CqlComparerNullComparisonStrategy GetNullComparisonStrategy() => CqlComparerNullComparisonStrategy.Or;
+
 
         protected override bool EquivalentValues(
             IValue<T> left,
@@ -24,11 +24,6 @@ namespace Hl7.Cql.Fhir.Comparers
             string? precision)
         {
             return CompareValues(left, right, precision) == 0;
-        }
-
-        protected internal override int GetEqualsStrategy()
-        {
-            return EQUALS_VIA_COMPARE;
         }
 
         protected override int? CompareValues(
@@ -46,7 +41,7 @@ namespace Hl7.Cql.Fhir.Comparers
 
         protected override int GetHashCodeValue(IValue<T> value) =>
             value.Value?.GetHashCode()
-            ?? typeof(int).GetHashCode(); // ##REVIEW: Why not typeof(T).GetHashCode()?
+            ?? GetHashCodeForNull();
 
         // public override int? Compare(IValue<T>? x, IValue<T>? y, string? precision) =>
         //     x == null || y == null || x.Value == null || y.Value == null

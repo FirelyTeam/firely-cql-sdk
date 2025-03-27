@@ -7,20 +7,37 @@
  */
 
 namespace Hl7.Cql.Abstractions;
+internal enum CqlComparerEquivalentStrategy
+{
+    Default = 0,
+    Compare = 1,
+    Equals = 2
+}
+
+internal enum CqlComparerEqualsStrategy
+{
+    Default = 0,
+    Compare = 1
+}
+
+internal enum CqlComparerNullComparisonStrategy
+{
+    /// <summary>
+    /// Comparison is null when both left and right are null.
+    /// </summary>
+    And = 0,
+
+    /// <summary>
+    /// Comparison is null when either/both left or right are null.
+    /// </summary>
+    Or = 1
+}
 
 internal abstract class CqlComparer<T> : ICqlComparer<T>
 {
-    protected const int EQUIVALENT_VIA_DEFAULT = 0;
-    protected const int EQUIVALENT_VIA_COMPARE = 1;
-    protected const int EQUIVALENT_VIA_EQUALS = 2;
-    protected internal virtual int GetEquivalentStrategy() => EQUIVALENT_VIA_DEFAULT;
-
-    protected const int EQUALS_VIA_DEFAULT = 0;
-    protected const int EQUALS_VIA_COMPARE = 1;
-    protected internal virtual int GetEqualsStrategy() => EQUALS_VIA_DEFAULT;
-
-    protected internal virtual bool CompareReturnNullOnAnyNull() => false;
-
+    protected internal virtual CqlComparerEquivalentStrategy GetEquivalentStrategy() => CqlComparerEquivalentStrategy.Default;
+    protected internal virtual CqlComparerEqualsStrategy GetEqualsStrategy() => CqlComparerEqualsStrategy.Default;
+    protected internal virtual CqlComparerNullComparisonStrategy GetNullComparisonStrategy() => CqlComparerNullComparisonStrategy.And;
 
     public virtual bool Equivalent(
         T? left,
@@ -29,13 +46,13 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
     {
         switch (GetEquivalentStrategy())
         {
-            case EQUIVALENT_VIA_COMPARE:
+            case CqlComparerEquivalentStrategy.Compare:
                 return Compare(left, right, precision) is 0;
 
-            case EQUIVALENT_VIA_EQUALS:
+            case CqlComparerEquivalentStrategy.Equals:
                 return Equals(left, right, precision) is true or null;
 
-            case EQUALS_VIA_DEFAULT:
+            case CqlComparerEquivalentStrategy.Default:
                 var result = EquivalentNulls(left, right)
                     .GetValueOr(EquivalentValues(left!, right!, precision));
                 return result;
@@ -52,9 +69,9 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
         var result = (IsNull(left), IsNull(right)) switch
         {
             (true, true) => true,
-            (true, _)    => false,
-            (_, true)    => false,
-            _            => NoValueOf<bool>(),
+            (true, _) => false,
+            (_, true) => false,
+            _ => NoValueOf<bool>(),
         };
         return result;
     }
@@ -80,10 +97,10 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
     {
         switch (GetEqualsStrategy())
         {
-            case EQUALS_VIA_COMPARE:
+            case CqlComparerEqualsStrategy.Compare:
                 return EqualsViaCompare(left, right, precision);
 
-            case EQUALS_VIA_DEFAULT:
+            case CqlComparerEqualsStrategy.Default:
                 var result =
                     EqualsNulls(left, right)
                         .GetValueOr(() => EqualsValues(left!, right!, precision));
@@ -101,16 +118,12 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
         var result = (IsNull(left), IsNull(right)) switch
         {
             (true, true) => true,
-            (true, _)    => false,
-            (_, true)    => false,
-            _            => Maybe.NoValueOf<bool?>(),
+            (true, _) => false,
+            (_, true) => false,
+            _ => Maybe.NoValueOf<bool?>(),
         };
         return result;
     }
-
-    // protected virtual bool? EqualsLeftNull() => false;
-    //
-    // protected virtual bool? EqualsRightNull() => false;
 
     protected virtual bool? EqualsValues(
         [DisallowNull] T left,
@@ -131,40 +144,12 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
     {
         bool? result = Compare(left, right, precision) switch
         {
-            null  => null,
+            null => null,
             var r => r is 0
         };
 
-        // var result2 = EqualsNulls(left, right)
-        //     .Match(val => val, () => EqualsValuesViaCompare(left!, right!, precision));
-        //
-        // Trace.Assert(result == result2);
-
         return result;
     }
-
-    // /// <summary>
-    // /// <code>
-    // /// bool? (int?) switch
-    // /// {
-    // ///   null => null
-    // ///   i => i == 0
-    // /// }
-    // /// </code>
-    // /// </summary>
-    // private bool? EqualsValuesViaCompare(
-    //     [DisallowNull] T left,
-    //     [DisallowNull] T right,
-    //     string? precision)
-    // {
-    //     // From old CqlComparerBase<T>.Equals
-    //     bool? result = CompareValues(left, right, precision) switch
-    //     {
-    //         null  => null,
-    //         var r => r is 0
-    //     };
-    //     return result;
-    // }
 
     public virtual int? Compare(
         T? left,
@@ -184,9 +169,19 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
         var result = (IsNull(left), IsNull(right)) switch
         {
             (true, true) => 0,
-            (true, _)    => CompareReturnNullOnAnyNull() ? null : 1,
-            (_, true)    => CompareReturnNullOnAnyNull() ? null : -1,
-            _            => NoValueOf<int?>(),
+            (true, _) => GetNullComparisonStrategy() switch
+            {
+                CqlComparerNullComparisonStrategy.And => 1,
+                CqlComparerNullComparisonStrategy.Or => null,
+                _ => throw new ArgumentOutOfRangeException(),
+            },
+            (_, true) => GetNullComparisonStrategy() switch
+            {
+                CqlComparerNullComparisonStrategy.And => -1,
+                CqlComparerNullComparisonStrategy.Or  => null,
+                _                       => throw new ArgumentOutOfRangeException(),
+            },
+            _ => NoValueOf<int?>(),
         };
         return result;
     }
@@ -206,17 +201,17 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
     public virtual int GetHashCode(T? value)
     {
         var result = IsNull(value)
-                         ? GetHashCodeNull()
+                         ? GetHashCodeForNull()
                          : GetHashCodeValue(value);
         return result;
     }
 
-    protected virtual bool IsNull([NotNullWhen(false)]T? value) =>
+    protected virtual bool IsNull([NotNullWhen(false)] T? value) =>
         value is null;
 
-    protected static int GetHashCodeNull() => typeof(T).GetHashCode();
+    protected static int GetHashCodeForNull() => typeof(T).GetHashCode();
 
-    protected virtual int GetHashCodeValue([DisallowNull]T value) =>
+    protected virtual int GetHashCodeValue([DisallowNull] T value) =>
         value.GetHashCode();
 
     int ICqlComparer<T>.GetHashCodeValue([DisallowNull] T value) =>

@@ -15,9 +15,9 @@ partial class CqlComparers
     internal class InterfaceCqlComparer<T> : CqlComparer<T>
         where T : class, ICqlComparable<T>, IEquivalentable<T>
     {
-        protected internal override int GetEqualsStrategy()
+        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy()
         {
-            return EQUALS_VIA_COMPARE;
+            return CqlComparerEqualsStrategy.Compare;
         }
 
         protected override int? CompareValues(

@@ -19,9 +19,9 @@ partial class CqlComparers
     /// </summary>
     private class CqlConceptCqlComparer : CqlComparer<CqlConcept>
     {
-        protected internal override int GetEqualsStrategy()
+        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy()
         {
-            return EQUALS_VIA_COMPARE;
+            return CqlComparerEqualsStrategy.Compare;
         }
 
         private IEqualityComparer<CqlCode> NewCodeEquivalenceComparer(string precision) =>
@@ -162,7 +162,7 @@ partial class CqlComparers
 
         protected override int GetHashCodeValue(CqlConcept value)
         {
-            int baseCode = GetHashCodeNull();
+            int baseCode = GetHashCodeForNull();
             foreach (var code in value.codes!)
             {
                 var codeHashCode = CodeComparer.GetHashCode(code);

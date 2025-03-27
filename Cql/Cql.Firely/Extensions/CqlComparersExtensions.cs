@@ -60,9 +60,9 @@ namespace Hl7.Cql.Fhir.Extensions
 
         private class PrimitiveTypeAgainstStringComparer(ICqlComparer<object> inner) : CqlComparer<object>
         {
-            protected internal override int GetEquivalentStrategy()
+            protected internal override CqlComparerEquivalentStrategy GetEquivalentStrategy()
             {
-                return EQUIVALENT_VIA_COMPARE;
+                return CqlComparerEquivalentStrategy.Compare;
             }
 
             public override int? Compare(

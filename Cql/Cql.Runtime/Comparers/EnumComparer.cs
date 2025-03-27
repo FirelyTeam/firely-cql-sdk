@@ -15,11 +15,11 @@ namespace Hl7.Cql.Comparers;
 /// </summary>
 internal class EnumComparer : CqlComparer<object>
 {
-    protected internal override int GetEquivalentStrategy() => EQUIVALENT_VIA_EQUALS;
+    protected internal override CqlComparerEqualsStrategy GetEqualsStrategy() => CqlComparerEqualsStrategy.Compare;
 
-    protected internal override int GetEqualsStrategy() => EQUIVALENT_VIA_COMPARE;
+    protected internal override CqlComparerNullComparisonStrategy GetNullComparisonStrategy() => CqlComparerNullComparisonStrategy.Or;
 
-    protected internal override bool CompareReturnNullOnAnyNull() => true;
+    protected internal override CqlComparerEquivalentStrategy GetEquivalentStrategy() => CqlComparerEquivalentStrategy.Equals;
 
     /// <summary>
     /// Gets the default instance of this comparer.

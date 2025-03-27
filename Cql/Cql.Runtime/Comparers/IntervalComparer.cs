@@ -17,14 +17,14 @@ namespace Hl7.Cql.Comparers
         Func<T, T> successor)
         : CqlComparer<CqlInterval<T>>
     {
+        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy()
+        {
+            return CqlComparerEqualsStrategy.Compare;
+        }
+
         private ICqlComparer<object> PointComparer { get; } = pointComparer ?? throw new ArgumentNullException(nameof(pointComparer));
         private Func<T, T> Predecessor { get; } = predecessor ?? throw new ArgumentNullException(nameof(predecessor));
         private Func<T, T> Successor { get; } = successor ?? throw new ArgumentNullException(nameof(successor));
-
-        protected internal override int GetEqualsStrategy()
-        {
-            return EQUALS_VIA_COMPARE;
-        }
 
         protected override int? CompareValues(
             CqlInterval<T> left,

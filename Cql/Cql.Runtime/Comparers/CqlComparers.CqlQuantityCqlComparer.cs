@@ -22,9 +22,9 @@ partial class CqlComparers
         CqlComparers valueComparer,
         ICqlComparer<string> unitComparer) : CqlComparer<CqlQuantity>
     {
-        protected internal override int GetEqualsStrategy()
+        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy()
         {
-            return EQUALS_VIA_COMPARE;
+            return CqlComparerEqualsStrategy.Compare;
         }
 
         private CqlComparers ValueComparer { get; } = valueComparer ?? throw new ArgumentNullException(nameof(valueComparer));

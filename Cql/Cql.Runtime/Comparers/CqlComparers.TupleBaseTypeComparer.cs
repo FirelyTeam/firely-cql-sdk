@@ -15,9 +15,9 @@ partial class CqlComparers
 {
     private class TupleBaseTypeComparer(CqlComparers memberComparer) : CqlComparer<TupleBaseType?>
     {
-        protected internal override int GetEqualsStrategy() => EQUALS_VIA_COMPARE;
+        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy() => CqlComparerEqualsStrategy.Compare;
 
-        protected internal override bool CompareReturnNullOnAnyNull() => true;
+        protected internal override CqlComparerNullComparisonStrategy GetNullComparisonStrategy() => CqlComparerNullComparisonStrategy.Or;
 
         protected override int? CompareValues(
             TupleBaseType left,

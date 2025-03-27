@@ -17,9 +17,9 @@ namespace Hl7.Cql.Comparers;
 /// </summary>
 internal class CqlCodeCqlComparer(StringComparer codeComparer) : CqlComparer<CqlCode>
 {
-    protected internal override int GetEqualsStrategy() => EQUALS_VIA_COMPARE;
+    protected internal override CqlComparerEqualsStrategy GetEqualsStrategy() => CqlComparerEqualsStrategy.Compare;
 
-    protected internal override bool CompareReturnNullOnAnyNull() => true;
+    protected internal override CqlComparerNullComparisonStrategy GetNullComparisonStrategy() => CqlComparerNullComparisonStrategy.Or;
 
     /// <summary>
     /// The default comparer, which uses <see cref="StringComparer.OrdinalIgnoreCase"/>.
@@ -142,7 +142,7 @@ internal class CqlCodeCqlComparer(StringComparer codeComparer) : CqlComparer<Cql
     /// <inheritdoc/>
     public override int GetHashCode(CqlCode? value) =>
         value == null
-            ? GetHashCodeNull()
+            ? GetHashCodeForNull()
             : OrdinalIgnoreCase.GetHashCode(value.code ?? string.Empty) ^
               OrdinalIgnoreCase.GetHashCode(value.system ?? string.Empty);
 

@@ -16,9 +16,9 @@ namespace Hl7.Cql.Comparers
     /// </summary>
     internal sealed partial class CqlComparers : CqlComparer<object>
     {
-        protected internal override int GetEqualsStrategy() => EQUALS_VIA_COMPARE;
+        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy() => CqlComparerEqualsStrategy.Compare;
 
-        protected internal override bool CompareReturnNullOnAnyNull() => true;
+        protected internal override CqlComparerNullComparisonStrategy GetNullComparisonStrategy() => CqlComparerNullComparisonStrategy.Or;
 
         /// <summary>
         /// Collapses derived types to their bases, since this makes it easier to find the comparer by the exact type.
