@@ -26,6 +26,13 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 var hasScalarSource = source.All(s => s.resultTypeSpecifier is not ListTypeSpecifier);
                 query.let = handleLetClause(context.letClause(), scope);
                 query.relationship = handleRelationship(context.queryInclusionClause());
+
+                if (context.whereClause() is { } whereClause)
+                {
+                    var where = handleWhere(whereClause);
+                    query.where = where;
+                }
+
                 if (context.returnClause() is { } returnClause) {
                     var @return = handleReturn(returnClause, hasScalarSource);
                     returnType = @return.resultTypeSpecifier;
@@ -284,8 +291,14 @@ namespace Hl7.Cql.CqlToElm.Visitors
                     .WithLocator(acCtx.Locator())
                     .WithResultType(aggregate.expression.resultTypeSpecifier);
             }
-        }
 
-      
+            Expression handleWhere(cqlParser.WhereClauseContext whereClauseCtx)
+            {
+                var expression = Visit(whereClauseCtx);
+                return expression
+                       .WithLocator(whereClauseCtx.Locator())
+                       .WithResultType(expression.resultTypeSpecifier);
+            }
+        }
     }
 }
