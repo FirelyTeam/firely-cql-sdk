@@ -1,39 +1,34 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 
 	<PropertyGroup>
+		<!-- ## Compiler settings -->
+		<Nullable>enable</Nullable>
 		<TargetFramework>net8.0</TargetFramework>
 	</PropertyGroup>
 
 	<PropertyGroup>
 		<!--
-			Keep this in sync between cql-base.props and cql-demo.props
+			Keep FirelySdkVersion in sync between cql-base.props and cql-demo.props
 			The verion must be the same as FhirNetApiVersion in https://github.com/FirelyTeam/Vonk/blob/develop/src/Vonk.props
 			-->
 		<FirelySdkVersion>5.11.4</FirelySdkVersion>
 
 		<!-- https://hl7.org/fhir/R4/ -->
 		<FhirRelease>R4</FhirRelease>
-	</PropertyGroup>
-
-	<PropertyGroup>
 		<DefineConstants Condition="'$(FhirRelease)'!=''">$(DefineConstants);FhirRelease$(FhirRelease)</DefineConstants>
 	</PropertyGroup>
 
-
-	<!-- Solution-wide properties for NuGet packaging -->
 	<PropertyGroup>
+		<!-- ## CQL-related properties (also in BuildArtifacts.csproj, cql-base.props, cql-demo.props)  -->
 		<CqlSolutionDir>$(MSBuildThisFileDirectory)</CqlSolutionDir>
-	</PropertyGroup>
-
-	<!-- Compiler settings -->
-	<PropertyGroup>
-		<Nullable>enable</Nullable>
-		<!-- CqlToElmEnabled and ElmToCSharpEnabled declared in BuildArtifacts.csproj, cql-base.props, cql-demo.props  -->
-		<!-- ElmToCSharpEnabled must be true here for build to pass -->
-		<CqlToElmEnabled>false</CqlToElmEnabled>
+		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' != 'Release'">true</EmbedDebugSymbolsEnable>
+		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' == 'Release'">false</EmbedDebugSymbolsEnable>
+		<JsonIndentEnable>true</JsonIndentEnable>
+		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
+		<!-- ## ElmToCSharpEnabled must be true in Release mode, for build pipeline to pass -->
+		<ElmToCSharpEnabled Condition="'$(Configuration)' != 'Release'">false</ElmToCSharpEnabled>
+		<ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release'">true</ElmToCSharpEnabled>
 		<!-- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
-		<!-- <ElmToCSharpEnabled Condition="'$(Configuration)' != 'Release'">false</ElmToCSharpEnabled> -->
-		<!-- <ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release'">true</ElmToCSharpEnabled> -->
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
