@@ -12,8 +12,7 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-
-    internal class KeyValuePairComparer<TKey, TValue>(ICqlComparer<object> cqlComparer) : ICqlComparer<KeyValuePair<TKey, TValue>> //, ICqlComparer
+    internal class KeyValuePairComparer<TKey, TValue>(ICqlComparer<object> cqlComparer) : ICqlComparer<KeyValuePair<TKey, TValue>> 
     {
         /// <inheritdoc />
         public int? Compare(
@@ -41,13 +40,6 @@ partial class CqlComparers
                 var i => i
             };
 
-        // /// <inheritdoc />
-        // public bool? Equals(
-        //     object? x,
-        //     object? y,
-        //     string? precision = null) =>
-        //     Compare(x, y, precision) == 0;
-
         /// <inheritdoc />
         public bool? Equals(
             KeyValuePair<TKey, TValue> x,
@@ -58,13 +50,6 @@ partial class CqlComparers
                 true  => cqlComparer.Equals(x.Value, y.Value, precision),
                 var b => b
             };
-
-        // /// <inheritdoc />
-        // public bool Equivalent(
-        //     object? x,
-        //     object? y,
-        //     string? precision = null) =>
-        //     Compare(x, y, precision) == 0;
 
         /// <inheritdoc />
         public bool Equivalent(
@@ -79,11 +64,5 @@ partial class CqlComparers
             HashCode.Combine(
                 cqlComparer.GetHashCode(x.Key),
                 cqlComparer.GetHashCode(x.Value));
-
-        // /// <inheritdoc />
-        // public int GetHashCode(object? x) =>
-        //     x is null
-        //         ? typeof(KeyValuePair<TKey, TValue>).GetHashCode()
-        //         : GetHashCode((KeyValuePair<TKey, TValue>)x);
     }
 }

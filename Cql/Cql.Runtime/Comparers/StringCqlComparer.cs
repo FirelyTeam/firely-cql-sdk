@@ -16,12 +16,9 @@ namespace Hl7.Cql.Comparers;
 /// <remarks>
 /// Strings are normalized using <see cref="string.Normalize()"/>.
 /// </remarks>
-internal class StringCqlComparer(StringComparer stringComparer) : ICqlComparer<string> //, ICqlComparer
+internal class StringCqlComparer(StringComparer stringComparer) : ICqlComparer<string> 
 {
     private StringComparer StringComparer { get; } = stringComparer ?? throw new ArgumentNullException(nameof(stringComparer));
-
-    // /// <inheritdoc/>
-    // public int? Compare(object? x, object? y, string? precision = null) => Compare(x as string, y as string, null);
 
     /// <inheritdoc/>
     public int? Compare(
@@ -41,13 +38,6 @@ internal class StringCqlComparer(StringComparer stringComparer) : ICqlComparer<s
         string? y,
         string? precision = null) => Compare(x, y, precision) == 0;
 
-    // /// <inheritdoc/>
-    // public bool? Equals(object? x, object? y, string? precision = null) => Compare(x as string, y as string, precision) == 0;
-    //
-    // /// <inheritdoc/>
-    // public bool Equivalent(object? x, object? y, string? precision = null) =>
-    //     Equivalent(x as string, y as string, precision);
-
     /// <inheritdoc/>
     public bool Equivalent(
         string? x,
@@ -66,7 +56,4 @@ internal class StringCqlComparer(StringComparer stringComparer) : ICqlComparer<s
     /// <inheritdoc/>
     public int GetHashCode(string? x) =>
         x?.GetHashCode() ?? typeof(string).GetHashCode();
-
-    // /// <inheritdoc/>
-    // public int GetHashCode(object? x) => GetHashCode(x as string);
 }

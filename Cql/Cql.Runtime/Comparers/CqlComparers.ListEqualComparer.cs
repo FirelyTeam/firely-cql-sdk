@@ -12,11 +12,8 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    private class ListEqualComparer(CqlComparers elementComparer) : ICqlComparer<IEnumerable> //, ICqlComparer
+    private class ListEqualComparer(CqlComparers elementComparer) : ICqlComparer<IEnumerable>
     {
-        // public int? Compare(object? x, object? y, string? precision = null) =>
-        //    Compare(x as IEnumerable, y as IEnumerable, precision);
-
         public int? Compare(IEnumerable? x, IEnumerable? y, string? precision = null)
         {
             if (x == null)
@@ -53,9 +50,6 @@ partial class CqlComparers
 
             return 0;
         }
-
-        // public bool? Equals(object? x, object? y, string? precision = null) =>
-        //     Equals(x as IEnumerable, y as IEnumerable, precision);
 
         public bool? Equals(IEnumerable? x, IEnumerable? y, string? precision = null)
         {
@@ -94,9 +88,6 @@ partial class CqlComparers
                 return true;
         }
 
-        // public bool Equivalent(object? x, object? y, string? precision = null) =>
-        //     Equivalent(x as IEnumerable, y as IEnumerable, precision);
-
         public bool Equivalent(IEnumerable? x, IEnumerable? y, string? precision = null)
         {
             if (EquivalentOnNullsOnly(x, y) is { } r)
@@ -130,8 +121,5 @@ partial class CqlComparers
 
         public int GetHashCode(IEnumerable? x) =>
             x?.GetHashCode() ?? typeof(IEnumerable).GetHashCode();
-
-        // public int GetHashCode(object? x) =>
-        //     GetHashCode(x as IEnumerable);
     }
 }

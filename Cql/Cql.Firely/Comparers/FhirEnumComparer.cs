@@ -14,7 +14,9 @@ namespace Hl7.Cql.Fhir.Comparers
     {
 
         public static readonly FhirEnumComparer Default = new FhirEnumComparer();
+
         private FhirEnumComparer() { }
+
         /// <inheritdoc/>
         public int? Compare(object? x, object? y, string? precision)
         {

@@ -14,13 +14,8 @@ using static System.StringComparer;
 
 namespace Hl7.Cql.Comparers
 {
-    internal class CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer) : ICqlComparer<CqlCode>//, ICqlComparer
+    internal class CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer) : ICqlComparer<CqlCode>
     {
-        // public CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer)
-        // {
-        //     CodeComparer = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
-        // }
-        //
         private IComparer<string> CodeComparer { get; } = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
 
         public int? Compare(CqlCode? x, CqlCode? y, string? precision)
@@ -43,9 +38,6 @@ namespace Hl7.Cql.Comparers
 
         }
 
-        // public int? Compare(object? x, object? y, string? precision) =>
-        //     Compare(x as CqlCode, y as CqlCode, precision);
-
         public bool? Equals(CqlCode? x, CqlCode? y, string? precision)
         {
             if (x == null || y == null)
@@ -58,9 +50,6 @@ namespace Hl7.Cql.Comparers
             };
             return result;
         }
-
-        // public bool? Equals(object? x, object? y, string? precision) =>
-        //     Equals(x as CqlCode, y as CqlCode, precision);
 
         public bool Equivalent(CqlCode? x, CqlCode? y, string? precision)
         {
@@ -78,17 +67,11 @@ namespace Hl7.Cql.Comparers
             return sc == 0;
         }
 
-        // public bool Equivalent(object? x, object? y, string? precision) =>
-        //     Equivalent((x as CqlCode)!, (y as CqlCode)!, precision);
-
         public int GetHashCode(CqlCode? x) =>
             x == null
             ? typeof(CqlCode).GetHashCode()
             : OrdinalIgnoreCase.GetHashCode(x.code ?? string.Empty) ^
               OrdinalIgnoreCase.GetHashCode(x.system ?? string.Empty);
-
-        // public int GetHashCode(object? x) =>
-        //     GetHashCode(x as CqlCode);
     }
 }
 

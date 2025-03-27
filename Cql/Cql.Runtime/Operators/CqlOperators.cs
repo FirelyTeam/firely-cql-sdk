@@ -21,7 +21,7 @@ namespace Hl7.Cql.Operators
     /// <summary>
     /// Implements <see cref="ICqlOperators"/>.
     /// </summary>
-    internal partial class CqlOperators : ICqlOperators//, ICqlComparer<object>//, ICqlComparer
+    internal partial class CqlOperators : ICqlOperators<object>
     {
         /// <summary>
         /// Creates an instance.

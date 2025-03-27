@@ -16,7 +16,6 @@ namespace Hl7.Cql.Comparers
     /// </summary>
     internal sealed partial class CqlComparers : ICqlComparer<object>
     {
-
         /// <summary>
         /// Collapses derived types to their bases, since this makes it easier to find the comparer by the exact type.
         /// </summary>
@@ -34,7 +33,7 @@ namespace Hl7.Cql.Comparers
 
         private ConcurrentDictionary<Type, ICqlComparer<object>> Comparers { get; } = new();
 
-        private ConcurrentDictionary<Type, Func<Type, CqlComparers, ICqlComparer<object>>> ComparerFactories { get; } = new ();
+        private ConcurrentDictionary<Type, Func<Type, CqlComparers, ICqlComparer<object>>> ComparerFactories { get; } = new();
 
         /// <summary>
         /// Creates an instance with built-in comparers for system types registerred.
@@ -81,7 +80,6 @@ namespace Hl7.Cql.Comparers
             {
                 var genericType = typeof(NullComparer<>).MakeGenericType(Nullable.GetUnderlyingType(type)!);
                 var cqlComparer = CreateCqlComparerAndUnwrapNonGeneric(genericType, self)!;
-                //var cqlComparer = (ICqlComparer<object>)Activator.CreateInstance(genericType, @this)!;
                 return cqlComparer;
             });
             ComparerFactories.TryAdd(typeof(KeyValuePair<,>), (type, @this) =>
@@ -114,7 +112,6 @@ namespace Hl7.Cql.Comparers
 
             Comparers.AddOrUpdate(type, comparer, (t, existing) => comparer);
             return this;
-
         }
 
         /// <summary>
@@ -137,10 +134,12 @@ namespace Hl7.Cql.Comparers
             {
                 throw new ArgumentNullException(nameof(genericTypeDefinition));
             }
+
             if (comparerFactory is null)
             {
                 throw new ArgumentNullException(nameof(comparerFactory));
             }
+
             if (genericTypeDefinition.IsGenericTypeDefinition == false)
                 throw new ArgumentException($"Type {genericTypeDefinition} is not a generic type definition.");
 
@@ -160,6 +159,7 @@ namespace Hl7.Cql.Comparers
             {
                 throw new ArgumentNullException(nameof(type));
             }
+
             Comparers.TryRemove(type, out _);
             ComparerFactories.TryRemove(type, out _);
             return this;
@@ -168,19 +168,28 @@ namespace Hl7.Cql.Comparers
         #region ICqlComparer
 
         /// <inheritdoc />
-        public bool? Equals(object? x, object? y, string? precision) => Compare(x, y, precision) == 0;
+        public bool? Equals(
+            object? x,
+            object? y,
+            string? precision) => Compare(x, y, precision) == 0;
 
         /// <inheritdoc />
-        public int? Compare(object? x, object? y, string? precision)
+        public int? Compare(
+            object? x,
+            object? y,
+            string? precision)
         {
             // if x or y is null it must return null and if both are null then it's a match
             // if we return 1 or -1 when only 1 side is null then we hit a lot of issues with Stratification: Race - Two or More Races on a lot of measures
             // because it expects null/false but gets true because 1 was returned (x null, y = 2) so 2 > null => return 1
             switch (x, y)
             {
-                case (null, null):         return 0;
-                case (not null, not null): break;
-                default:                        return null;
+                case (null, null):
+                    return 0;
+
+                case (null, _):
+                case (_, null):
+                    return null;
             }
 
             bool xySwapped = false;
@@ -193,7 +202,7 @@ namespace Hl7.Cql.Comparers
                 if (xType.Namespace == "System" && yType.Namespace != "System")
                 {
                     xySwapped = true;
-                    (x,y) = (y, x);
+                    (x, y) = (y, x);
                     (xType, yType) = (yType, xType);
                 }
             }
@@ -233,7 +242,10 @@ namespace Hl7.Cql.Comparers
         }
 
         /// <inheritdoc />
-        public bool Equivalent(object? x, object? y, string? precision)
+        public bool Equivalent(
+            object? x,
+            object? y,
+            string? precision)
         {
             if (EquivalentOnNullsOnly(x, y) is { } r)
                 return r;
@@ -257,6 +269,7 @@ namespace Hl7.Cql.Comparers
                     }
                 }
             }
+
             throw new ArgumentException($"Cannot check equivalence for type {xType.Name}");
         }
 
@@ -280,6 +293,7 @@ namespace Hl7.Cql.Comparers
                 {
                     hash ^= i ^ GetHashCode(_x);
                 }
+
                 return hash;
             }
             else throw new ArgumentException($"Cannot generate a hash code for {xType.Name}", nameof(x));
@@ -301,13 +315,13 @@ namespace Hl7.Cql.Comparers
                 (_, prev) => prev);
         }
 
-        public static ICqlComparer<T> AddOrUpdate<T>(
+        public static void AddOrUpdate<T>(
             this ConcurrentDictionary<Type, ICqlComparer<object>> comparers,
             Type type,
             ICqlComparer<T> addComparer,
             Func<Type, ICqlComparer<T>, ICqlComparer<T>> updateComparerFactory)
         {
-            var result = comparers.AddOrUpdate(
+            comparers.AddOrUpdate(
                 type,
                 _ => addComparer.WrapNonGeneric(),
                 (type, prev) =>
@@ -316,8 +330,6 @@ namespace Hl7.Cql.Comparers
                     var newTyped = updateComparerFactory(type, prevTyped);
                     return newTyped.WrapNonGeneric();
                 });
-
-            return result.UnwrapGeneric<T>()!;
         }
     }
 }

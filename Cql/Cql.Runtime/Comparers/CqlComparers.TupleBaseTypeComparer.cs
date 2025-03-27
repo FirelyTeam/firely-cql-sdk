@@ -13,7 +13,7 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    private class TupleBaseTypeComparer(CqlComparers memberComparer) : ICqlComparer<TupleBaseType?>//, ICqlComparer
+    private class TupleBaseTypeComparer(CqlComparers memberComparer) : ICqlComparer<TupleBaseType?>
     {
         public int? Compare(TupleBaseType? x, TupleBaseType? y, string? precision = null)
         {
@@ -74,17 +74,5 @@ partial class CqlComparers
             }
             return true;
         }
-
-        // int? ICqlComparer.Compare(object? x, object? y, string? precision) =>
-        //     Compare(x as TupleBaseType, y as TupleBaseType, precision);
-        //
-        // bool? ICqlComparer.Equals(object? x, object? y, string? precision) =>
-        //     Equals(x as TupleBaseType, y as TupleBaseType, precision);
-        //
-        // bool IEquivalenceComparer.Equivalent(object? x, object? y, string? precision) =>
-        //     Equivalent(x as TupleBaseType, y as TupleBaseType, precision);
-        //
-        // int ICqlComparer.GetHashCode(object? obj) =>
-        //     GetHashCode(obj as TupleBaseType);
     }
 }

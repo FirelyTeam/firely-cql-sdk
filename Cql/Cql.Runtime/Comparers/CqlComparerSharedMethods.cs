@@ -12,7 +12,6 @@ using Hl7.Cql.Compiler.Infrastructure;
 
 namespace Hl7.Cql.Comparers;
 
-
 internal static class CqlComparerSharedMethods
 {
     /*
@@ -68,7 +67,6 @@ internal static class CqlComparerSharedMethods
     private static readonly MethodInfo MethodInfo_WrapNonGeneric =
         ReflectionUtility.GenericMethodDefinitionOf(() => WrapNonGeneric<object>(default!));
 
-
     internal static ICqlComparer<object> WrapNonGeneric<T>(this ICqlComparer<T> genericComparer) =>
         genericComparer as ICqlComparer<object>
         ?? new NonGenericAdapterCqlComparer<T>(genericComparer);
@@ -79,7 +77,6 @@ internal static class CqlComparerSharedMethods
             : prev as ICqlComparer<T> // In this case T will be object
     ;
 }
-
 
 file interface IAdapter
 {

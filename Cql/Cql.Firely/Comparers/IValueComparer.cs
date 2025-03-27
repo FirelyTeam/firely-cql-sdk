@@ -23,6 +23,7 @@ namespace Hl7.Cql.Fhir.Comparers
         {
             if (x == null || x.Value == null)
                 return typeof(Integer).GetHashCode();
+
             return x.Value.GetHashCode();
         }
 

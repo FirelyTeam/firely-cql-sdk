@@ -20,7 +20,7 @@ partial class CqlComparers
     /// </summary>
     private class CqlQuantityCqlComparer(
         CqlComparers valueComparer,
-        ICqlComparer<string> unitComparer) : ICqlComparer<CqlQuantity>//, ICqlComparer
+        ICqlComparer<string> unitComparer) : ICqlComparer<CqlQuantity>
     {
         private CqlComparers ValueComparer { get; } = valueComparer ?? throw new ArgumentNullException(nameof(valueComparer));
         private ICqlComparer<string> UnitComparer { get; } = unitComparer ?? throw new ArgumentNullException(nameof(unitComparer));
@@ -58,14 +58,8 @@ partial class CqlComparers
 
         }
 
-        // /// <inheritdoc />
-        // public int? Compare(object? x, object? y, string? precision = null) => Compare(x as CqlQuantity, y as CqlQuantity, precision);
-
         /// <inheritdoc />
         public bool? Equals(CqlQuantity? x, CqlQuantity? y, string? precision = null) => Compare(x, y, precision) == 0;
-
-        // /// <inheritdoc />
-        // public bool? Equals(object? x, object? y, string? precision = null) => Equals(x as CqlQuantity, y as CqlQuantity, precision);
 
         /// <inheritdoc />
         public bool Equivalent(CqlQuantity? x, CqlQuantity? y, string? precision = null)
@@ -83,15 +77,8 @@ partial class CqlComparers
             return false;
         }
 
-        // /// <inheritdoc />
-        // public bool Equivalent(object? x, object? y, string? precision = null) => Equivalent(x as CqlQuantity, y as CqlQuantity, precision);
-
         /// <inheritdoc />
         public int GetHashCode(CqlQuantity? x) =>
             x?.ToString()?.GetHashCode() ?? typeof(CqlQuantity).GetHashCode();
-
-        // /// <inheritdoc />
-        // public int GetHashCode(object? x) =>
-        //     GetHashCode(x as CqlQuantity);
     }
 }

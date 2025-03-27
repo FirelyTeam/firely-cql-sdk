@@ -15,7 +15,7 @@ namespace Hl7.Cql.Abstractions
     /// <typeparam name="T">
     /// The type of object to compare.
     /// </typeparam>
-    public interface ICqlComparable<T>
+    public interface ICqlComparable<in T>
         where T : class
     {
         /// <summary>

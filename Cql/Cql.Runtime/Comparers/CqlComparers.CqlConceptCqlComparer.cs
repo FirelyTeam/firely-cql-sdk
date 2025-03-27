@@ -17,7 +17,7 @@ partial class CqlComparers
     /// <summary>
     /// Compares the code and system using the specified comparers.
     /// </summary>
-    private class CqlConceptCqlComparer : ICqlComparer<CqlConcept>//, ICqlComparer
+    private class CqlConceptCqlComparer : ICqlComparer<CqlConcept>
     {
         private IEqualityComparer<CqlCode> NewCodeEquivalenceComparer(string precision) =>
             EqualityComparerFactory.Create<CqlCode>(
@@ -36,8 +36,6 @@ partial class CqlComparers
         }
 
         private ICqlComparer<object> CodeComparer { get; }
-
-        // public int? Compare(object? x, object? y, string? precision = null) => Compare(x as CqlConcept, y as CqlConcept, precision);
 
         public int? Compare(CqlConcept? x, CqlConcept? y, string? precision = null)
         {
@@ -61,9 +59,6 @@ partial class CqlComparers
             }
             return 0;
         }
-
-        // public bool? Equals(object? x, object? y, string? precision = null) =>
-            // Equals(x as CqlConcept, y as CqlConcept, precision);
 
         public bool? Equals(CqlConcept? x, CqlConcept? y, string? precision = null)
         {
@@ -102,9 +97,6 @@ partial class CqlComparers
             return isEquivalent;
         }
 
-        // public bool Equivalent(object? x, object? y, string? precision = null) =>
-        //      Equivalent(x as CqlConcept, y as CqlConcept, precision);
-
         public int GetHashCode(CqlConcept? x)
         {
             int baseCode = typeof(CqlConcept).GetHashCode();
@@ -117,8 +109,5 @@ partial class CqlComparers
             }
             return baseCode;
         }
-        // public int GetHashCode(object? x) =>
-        //     GetHashCode(x as CqlConcept);
-
     }
 }

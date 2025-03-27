@@ -31,6 +31,7 @@ namespace Hl7.Cql.Fhir.Comparers
                 _equivalentFunction = (a, b, precision) => valueComparer.Equivalent(a, b, precision); ;
             }
         }
+
         delegate int? CompareFunction<in TComp>(TComp? x, TComp? y, string? precision);
         private readonly CompareFunction<T?> _compareFunction;
         delegate bool EquivalentFunction<in TComp>(TComp? x, TComp? y, string? precision);
