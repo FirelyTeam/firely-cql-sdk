@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2024, NCQA and contributors
+ * Copyright (c) 2024, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -55,27 +55,5 @@ namespace Hl7.Cql.Fhir.Comparers
             }
             else return string.Compare(enumStringValue, value, StringComparison.OrdinalIgnoreCase);
         }
-
-        // /// <inheritdoc/>
-        // public bool? Equals(object? left, object? right, string? precision)
-        // {
-        //     var result = Compare(left, right, precision);
-        //     if (result == null) return null;
-        //     else return result == 0;
-        // }
-
-        // /// <inheritdoc/>
-        // public override bool Equivalent(object? left, object? right, string? precision) =>
-        //     EquivalentViaEquals(left, right, precision);
-
-        //
-        // /// <inheritdoc/>
-        // public bool Equivalent(object? left, object? right, string? precision) =>
-        //     (Equals(left, right, precision) ?? false) == false;
-        //
-
-        // /// <inheritdoc/>
-        // public int GetHashCode(object? value) =>
-        //     value?.GetHashCode() ?? typeof(object).GetHashCode();
     }
 }

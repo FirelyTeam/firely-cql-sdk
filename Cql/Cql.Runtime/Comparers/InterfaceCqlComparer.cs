@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -22,34 +22,10 @@ partial class CqlComparers
             string? precision) =>
             left.CompareTo(right, precision);
 
-        // public int? Compare(T? left, T? right, string? precision)
-        // {
-        //     if (left == null)
-        //     {
-        //         if (right == null)
-        //             return 0;
-        //         else return 1;
-        //     }
-        //     else if (right == null)
-        //         return -1;
-        //
-        //     return left.CompareTo(right, precision);
-        // }
-
-        // public bool? Equals(T? left, T? right, string? precision) =>
-        //     Compare(left, right, precision) == 0;
-
         protected internal override bool EquivalentValues(
             T left,
             T right,
             string? precision) =>
             left.Equivalent(right, precision);
-
-        // public bool Equivalent(T? left, T? right, string? precision) =>
-        //     EquivalentOnNullsOnly(left, right)
-        //     ?? left!.Equivalent(right, precision);
-
-        // public int GetHashCode(T? value) =>
-        //     value?.GetHashCode() ?? typeof(T).GetHashCode();
     }
 }

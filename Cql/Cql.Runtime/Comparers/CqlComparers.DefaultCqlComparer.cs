@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -20,23 +20,14 @@ partial class CqlComparers
         equivalentMethod: CqlComparerEquivalentMethod.Compare)
     {
         /// <inheritdoc />
-        public override int? Compare(T? left, T? right, string? precision) => Comparer<T>.Default.Compare(left, right);
+        public override int? Compare(T? left, T? right, string? precision) =>
+            Comparer<T>.Default.Compare(left, right);
 
         /// <inheritdoc />
-        public override bool? Equals(T? left, T? right, string? precision) => Comparer<T>.Default.Compare(left, right) == 0;
-
-        // /// <inheritdoc />
-        // public override bool Equivalent(T? left, T? right, string? precision) =>
-        //     EquivalentOnNullsOnly(left, right)
-        //     ?? Compare(left, right, precision) == 0;
+        public override bool? Equals(T? left, T? right, string? precision) =>
+            Comparer<T>.Default.Compare(left, right) == 0;
 
         protected override int GetHashCodeValue([DisallowNull] T value) =>
             EqualityComparer<T>.Default.GetHashCode(value);
-
-        // /// <inheritdoc />
-        // public int GetHashCode(T? value) =>
-        //     value is null
-        //         ? typeof(T).GetHashCode()
-        //         : EqualityComparer<T>.Default.GetHashCode(value);
     }
 }

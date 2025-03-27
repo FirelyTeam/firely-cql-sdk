@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -90,21 +90,6 @@ namespace Hl7.Cql.Fhir.Extensions
                            ? _innerCqlComparer.CompareValues(left, right, precision)
                            : inner.Compare(left, right, precision);
             }
-
-            // public int GetHashCode(object? value) =>
-            //     throw new UnreachableException("CqlComparers always goes through Compare, so we never reach here");
-
-            // public bool? Equals(
-            //     object? left,
-            //     object? right,
-            //     string? precision) =>
-            //     throw new UnreachableException("CqlComparers always goes through Compare, so we never reach here");
-
-            // public bool Equivalent(
-            //     object? left,
-            //     object? right,
-            //     string? precision) =>
-            //     Compare(left, right, precision) == 0;
         }
 
         /// <summary>

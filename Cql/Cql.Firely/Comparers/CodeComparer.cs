@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2024, NCQA and contributors
+ * Copyright (c) 2024, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -43,13 +43,6 @@ namespace Hl7.Cql.Fhir.Comparers
 
         private static bool EquivalentEnums(T? x, T? y, string? precision) => Equals(x, y);
 
-        // public override int? Compare(Code<T>? x, Code<T>? y, string? precision)
-        // {
-        //     if (x == null || y == null)
-        //         return null;
-        //     return _compareFunction(x.Value!, y.Value!, precision);
-        // }
-
         protected override bool IsNull(Code<T>? value) => value?.Value is null;
 
         public override int? Compare(
@@ -60,12 +53,6 @@ namespace Hl7.Cql.Fhir.Comparers
 
         protected internal override bool EquivalentValues(Code<T> x, Code<T> y, string? precision) =>
             _equivalentFunction(x.Value!, y.Value!, precision);
-
-        // protected override bool EquivalentImpl(Code<T> x, Code<T> y, string? precision) =>
-        //     _equivalentFunction(x.Value!, y.Value!, precision);
-
-        // public override int GetHashCode(Code<T>? x) =>
-        //     x == null ? typeof(Code<T>).GetHashCode() : typeof(Code<T>).GetHashCode() ^ x.Value.GetHashCode();
 
         protected override int GetHashCodeValue(Code<T> value) =>
             GetHashCodeForNull() ^ value.Value.GetHashCode();

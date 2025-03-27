@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -25,19 +25,6 @@ partial class CqlComparers
             return Comparer<decimal?>.Default.Compare(TruncateDigits(left ?? 0, MaxDecimalDigits), TruncateDigits(right ?? 0, MaxDecimalDigits));
         }
 
-        // public int? Compare(decimal? left, decimal? right, string? precision = null)
-        // {
-        //     var result = CompareOnNullsOnly(left, right) ?? Comparer<decimal?>.Default.Compare(TruncateDigits(left ?? 0, MaxDecimalDigits), TruncateDigits(right ?? 0, MaxDecimalDigits));
-        //     return result;
-        // }
-
-        // public bool? Equals(decimal? left, decimal? right, string? precision = null)
-        // {
-        //     var result = EquivalentOnNullsOnly(left, right)
-        //                  ?? Comparer<decimal>.Default.Compare(left!.Value, right!.Value) == 0;
-        //     return result;
-        // }
-
         protected internal override bool EquivalentValues(
             [DisallowNull] decimal? left,
             [DisallowNull] decimal? right,
@@ -53,24 +40,6 @@ partial class CqlComparers
             return areEqual;
         }
 
-        // public bool Equivalent(decimal? left, decimal? right, string? precision = null)
-        // {
-        //     if (EquivalentOnNullsOnly(left, right) is { } r)
-        //         return r;
-        //
-        //     var @thisPrecision = GetPrecision(left!.Value);
-        //     var otherPrecision = GetPrecision(right!.Value);
-        //     if (@thisPrecision < otherPrecision)
-        //         right = decimal.Round(right.Value, thisPrecision);
-        //     else if (thisPrecision > otherPrecision)
-        //         left = decimal.Round(left.Value, otherPrecision);
-        //     var areEqual = left == right;
-        //     return areEqual;
-        // }
-
-        // public int GetHashCode(decimal? value) =>
-        //     value?.GetHashCode() ?? GetHashCodeForType<decimal>();
-
         private static int GetPrecision(decimal value) => BitConverter.GetBytes(decimal.GetBits(value)[3])[2];
 
         private static decimal TruncateDigits(decimal value, int places)
@@ -83,6 +52,5 @@ partial class CqlComparers
 
             return integral + truncatedFraction;
         }
-
     }
 }
