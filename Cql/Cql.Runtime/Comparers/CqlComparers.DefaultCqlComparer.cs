@@ -16,7 +16,7 @@ partial class CqlComparers
     /// Implements comparison through <see cref="Comparer{T}.Default"/>.
     /// </summary>
     /// <typeparam name="T">The type to compare.</typeparam>
-    private class DefaultCqlComparer<T> : CqlComparerNew<T>
+    private class DefaultCqlComparer<T> : CqlComparer<T>
     {
         /// <inheritdoc />
         public override int? Compare(T? left, T? right, string? precision = null) => Comparer<T>.Default.Compare(left, right);

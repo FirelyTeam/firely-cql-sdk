@@ -6,15 +6,21 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
+
 namespace Hl7.Cql.Comparers;
 
 /// <summary>
 /// Compares enum values against strings and each other.
 /// </summary>
-internal class EnumComparer :
-    //ICqlComparer<object>
-    CqlComparer<object>
+internal class EnumComparer : CqlComparer<object>
 {
+    protected internal override int GetEquivalentStrategy() => EQUIVALENT_VIA_EQUALS;
+
+    protected internal override int GetEqualsStrategy() => EQUIVALENT_VIA_COMPARE;
+
+    protected internal override bool CompareReturnNullOnAnyNull() => true;
+
     /// <summary>
     /// Gets the default instance of this comparer.
     /// </summary>
@@ -83,8 +89,6 @@ internal class EnumComparer :
     //     return EquivalentViaEquals(left, right, precision);
     // }
 
-    protected override int GetEquivalentStrategy() => EQUIVALENT_VIA_EQUALS;
-
     // public override bool? Equals(
     //     object? left,
     //     object? right,
@@ -92,8 +96,6 @@ internal class EnumComparer :
     // {
     //     return EqualsViaCompare(left, right, precision);
     // }
-
-    protected override int GetEqualsStrategy() => EQUIVALENT_VIA_COMPARE;
 
     // /// <inheritdoc/>
     // public bool? Equals(object? left, object? right, string? precision)

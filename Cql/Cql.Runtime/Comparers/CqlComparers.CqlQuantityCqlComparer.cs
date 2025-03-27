@@ -20,8 +20,13 @@ partial class CqlComparers
     /// </summary>
     private class CqlQuantityCqlComparer(
         CqlComparers valueComparer,
-        ICqlComparer<string> unitComparer) : CqlComparerNew<CqlQuantity>
+        ICqlComparer<string> unitComparer) : CqlComparer<CqlQuantity>
     {
+        protected internal override int GetEqualsStrategy()
+        {
+            return EQUALS_VIA_COMPARE;
+        }
+
         private CqlComparers ValueComparer { get; } = valueComparer ?? throw new ArgumentNullException(nameof(valueComparer));
         private ICqlComparer<string> UnitComparer { get; } = unitComparer ?? throw new ArgumentNullException(nameof(unitComparer));
 
@@ -83,10 +88,6 @@ partial class CqlComparers
         //
         // }
 
-        protected override int GetEqualsStrategy()
-        {
-            return EQUALS_VIA_COMPARE;
-        }
         // /// <inheritdoc />
         // public bool? Equals(CqlQuantity? left, CqlQuantity? right, string? precision = null) => Compare(left, right, precision) == 0;
 

@@ -11,7 +11,7 @@ using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir.Comparers
 {
-    internal class ResourceIdCqlComparer(ICqlComparer<string> idComparer) : CqlComparerNew<Resource>
+    internal class ResourceIdCqlComparer(ICqlComparer<string> idComparer) : CqlComparer<Resource>
     {
         protected override bool EquivalentValues(
             Resource left,

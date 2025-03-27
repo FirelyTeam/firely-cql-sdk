@@ -16,7 +16,7 @@ namespace Hl7.Cql.Comparers;
 /// <remarks>
 /// Strings are normalized using <see cref="string.Normalize()"/>.
 /// </remarks>
-internal class StringCqlComparer(StringComparer stringComparer) : CqlComparerNew<string>
+internal class StringCqlComparer(StringComparer stringComparer) : CqlComparer<string>
 {
     private StringComparer StringComparer { get; } = stringComparer ?? throw new ArgumentNullException(nameof(stringComparer));
 

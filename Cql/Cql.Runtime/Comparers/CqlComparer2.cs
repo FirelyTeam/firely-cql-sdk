@@ -10,12 +10,6 @@ using Hl7.Cql.Abstractions;
 
 namespace Hl7.Cql.Comparers
 {
-    internal abstract class CqlComparer<T> : CqlComparerNew<T>
-    {
-        protected override int GetEqualsStrategy() => EQUALS_VIA_COMPARE;
-        protected override bool CompareReturnNullOnAnyNull() => true;
-    }
-
     /*/// <summary>
     /// Base type to implement CQL comparison
     /// </summary>

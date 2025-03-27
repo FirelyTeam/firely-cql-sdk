@@ -12,8 +12,13 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    private class DecimalCqlComparer : CqlComparerNew<decimal?>
+    private class DecimalCqlComparer : CqlComparer<decimal?>
     {
+        protected internal override int GetEqualsStrategy()
+        {
+            return EQUALS_VIA_COMPARE;
+        }
+
         // CQL only supports 8 digits of scale.
         private const int MaxDecimalDigits = 8;
 
@@ -30,11 +35,6 @@ partial class CqlComparers
         //     var result = CompareOnNullsOnly(left, right) ?? Comparer<decimal?>.Default.Compare(TruncateDigits(left ?? 0, MaxDecimalDigits), TruncateDigits(right ?? 0, MaxDecimalDigits));
         //     return result;
         // }
-
-        protected override int GetEqualsStrategy()
-        {
-            return EQUALS_VIA_COMPARE;
-        }
 
         // public bool? Equals(decimal? left, decimal? right, string? precision = null)
         // {

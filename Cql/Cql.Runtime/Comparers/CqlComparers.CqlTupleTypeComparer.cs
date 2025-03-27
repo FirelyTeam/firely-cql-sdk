@@ -7,6 +7,7 @@
  */
 
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Comparers;
@@ -15,7 +16,11 @@ partial class CqlComparers
 {
     private class CqlTupleTypeComparer(CqlComparers memberComparer) : CqlComparer<ITuple?>
     {
-        private static readonly int FallbackHashCode = typeof(ITuple).GetHashCode() ^ 098174506;
+        protected internal override int GetEqualsStrategy() => EQUALS_VIA_COMPARE;
+
+        protected internal override bool CompareReturnNullOnAnyNull() => true;
+
+        // private static readonly int FallbackHashCode = typeof(ITuple).GetHashCode() ^ 098174506;
 
         protected override int? CompareValues(
             ITuple left,

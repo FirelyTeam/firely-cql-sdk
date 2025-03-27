@@ -6,17 +6,22 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Comparers;
+using Hl7.Cql.Abstractions;
 using Hl7.Fhir.Utility;
 
 namespace Hl7.Cql.Fhir.Comparers
 {
     internal class FhirEnumComparer : CqlComparer<object>
     {
-
-        public static readonly FhirEnumComparer Default = new FhirEnumComparer();
+        public static readonly FhirEnumComparer Default = new();
 
         private FhirEnumComparer() { }
+
+        protected internal override int GetEqualsStrategy() => EQUALS_VIA_COMPARE;
+
+        protected internal override int GetEquivalentStrategy() => EQUIVALENT_VIA_EQUALS;
+
+        protected internal override bool CompareReturnNullOnAnyNull() => true;
 
         /// <inheritdoc/>
         protected override int? CompareValues(object left, object right, string? precision)
@@ -64,22 +69,6 @@ namespace Hl7.Cql.Fhir.Comparers
         // /// <inheritdoc/>
         // public override bool Equivalent(object? left, object? right, string? precision) =>
         //     EquivalentViaEquals(left, right, precision);
-
-        protected override bool? EqualsValues(
-            object left,
-            object right,
-            string? precision) =>
-            throw new UnreachableException();
-
-        protected override int GetEqualsStrategy() => EQUALS_VIA_COMPARE;
-
-        protected override int GetEquivalentStrategy() => EQUIVALENT_VIA_EQUALS;
-
-        protected override bool EquivalentValues(
-            object left,
-            object right,
-            string? precision) =>
-            throw new UnreachableException();
 
         //
         // /// <inheritdoc/>

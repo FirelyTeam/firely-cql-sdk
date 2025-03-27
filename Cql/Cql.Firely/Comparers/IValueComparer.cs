@@ -11,8 +11,13 @@ using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir.Comparers
 {
-    internal class IValueComparer<T> : CqlComparerNew<IValue<T>>
+    internal class IValueComparer<T> : CqlComparer<IValue<T>>
     {
+        protected internal override bool CompareReturnNullOnAnyNull()
+        {
+            return true;
+        }
+
         protected override bool EquivalentValues(
             IValue<T> left,
             IValue<T> right,
@@ -21,7 +26,7 @@ namespace Hl7.Cql.Fhir.Comparers
             return CompareValues(left, right, precision) == 0;
         }
 
-        protected override int GetEqualsStrategy()
+        protected internal override int GetEqualsStrategy()
         {
             return EQUALS_VIA_COMPARE;
         }
@@ -32,11 +37,6 @@ namespace Hl7.Cql.Fhir.Comparers
             string? precision)
         {
             return Comparer<T>.Default.Compare(left.Value, right.Value);
-        }
-
-        protected override bool CompareReturnNullOnAnyNull()
-        {
-            return true;
         }
 
         protected override bool IsNull([NotNullWhen(false)] IValue<T>? value)

@@ -8,16 +8,18 @@
 
 namespace Hl7.Cql.Abstractions;
 
-internal abstract class CqlComparerNew<T> : ICqlComparer<T>
+internal abstract class CqlComparer<T> : ICqlComparer<T>
 {
     protected const int EQUIVALENT_VIA_DEFAULT = 0;
     protected const int EQUIVALENT_VIA_COMPARE = 1;
     protected const int EQUIVALENT_VIA_EQUALS = 2;
-    protected virtual int GetEquivalentStrategy() => EQUIVALENT_VIA_DEFAULT;
+    protected internal virtual int GetEquivalentStrategy() => EQUIVALENT_VIA_DEFAULT;
 
     protected const int EQUALS_VIA_DEFAULT = 0;
     protected const int EQUALS_VIA_COMPARE = 1;
-    protected virtual int GetEqualsStrategy() => EQUALS_VIA_DEFAULT;
+    protected internal virtual int GetEqualsStrategy() => EQUALS_VIA_DEFAULT;
+
+    protected internal virtual bool CompareReturnNullOnAnyNull() => false;
 
 
     public virtual bool Equivalent(
@@ -28,10 +30,10 @@ internal abstract class CqlComparerNew<T> : ICqlComparer<T>
         switch (GetEquivalentStrategy())
         {
             case EQUIVALENT_VIA_COMPARE:
-                return EquivalentViaCompare(left, right, precision);
+                return Compare(left, right, precision) is 0;
 
             case EQUIVALENT_VIA_EQUALS:
-                return EquivalentViaEquals(left, right, precision);
+                return Equals(left, right, precision) is true or null;
 
             case EQUALS_VIA_DEFAULT:
                 var result = EquivalentNulls(left, right)
@@ -43,7 +45,7 @@ internal abstract class CqlComparerNew<T> : ICqlComparer<T>
         }
     }
 
-    protected virtual Maybe<bool> EquivalentNulls(
+    private Maybe<bool> EquivalentNulls(
         T? left,
         T? right)
     {
@@ -69,23 +71,6 @@ internal abstract class CqlComparerNew<T> : ICqlComparer<T>
         string? precision)
     {
         throw new NotImplementedException();
-    }
-
-    /// <summary>
-    /// <code>
-    /// bool (bool? Equals) switch
-    /// {
-    ///   true or null => true
-    ///   false => false
-    /// }
-    /// </code>
-    /// </summary>
-    protected bool EquivalentViaEquals(
-        T? left,
-        T? right,
-        string? precision)
-    {
-        return Equals(left, right, precision) is true or null;
     }
 
     public virtual bool? Equals(
@@ -158,16 +143,6 @@ internal abstract class CqlComparerNew<T> : ICqlComparer<T>
         return result;
     }
 
-    private bool EquivalentViaCompare(
-        T? left,
-        T? right,
-        string? precision)
-    {
-        // From old CqlComparerBase<T>.Equals
-        bool result = Compare(left, right, precision) is 0;
-        return result;
-    }
-
     // /// <summary>
     // /// <code>
     // /// bool? (int?) switch
@@ -215,8 +190,6 @@ internal abstract class CqlComparerNew<T> : ICqlComparer<T>
         };
         return result;
     }
-
-    protected virtual bool CompareReturnNullOnAnyNull() => false;
 
     protected virtual int? CompareValues(
         [DisallowNull] T left,

@@ -15,13 +15,13 @@ namespace Hl7.Cql.Comparers
         ICqlComparer<object> pointComparer,
         Func<T, T> predecessor,
         Func<T, T> successor)
-        : CqlComparerNew<CqlInterval<T>>
+        : CqlComparer<CqlInterval<T>>
     {
         private ICqlComparer<object> PointComparer { get; } = pointComparer ?? throw new ArgumentNullException(nameof(pointComparer));
         private Func<T, T> Predecessor { get; } = predecessor ?? throw new ArgumentNullException(nameof(predecessor));
         private Func<T, T> Successor { get; } = successor ?? throw new ArgumentNullException(nameof(successor));
 
-        protected override int GetEqualsStrategy()
+        protected internal override int GetEqualsStrategy()
         {
             return EQUALS_VIA_COMPARE;
         }

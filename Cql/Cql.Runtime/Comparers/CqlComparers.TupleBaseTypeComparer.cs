@@ -6,6 +6,7 @@
 * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
 */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Comparers;
@@ -14,6 +15,10 @@ partial class CqlComparers
 {
     private class TupleBaseTypeComparer(CqlComparers memberComparer) : CqlComparer<TupleBaseType?>
     {
+        protected internal override int GetEqualsStrategy() => EQUALS_VIA_COMPARE;
+
+        protected internal override bool CompareReturnNullOnAnyNull() => true;
+
         protected override int? CompareValues(
             TupleBaseType left,
             TupleBaseType right,

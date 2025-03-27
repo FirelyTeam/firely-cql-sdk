@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025, NCQA and contributors
+ * Copyright (c) 2025, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -68,78 +68,15 @@ internal static class CqlComparerSharedMethods
         ReflectionUtility.GenericMethodDefinitionOf(() => WrapNonGeneric<object>(default!));
 
     internal static ICqlComparer<object> WrapNonGeneric<T>(this ICqlComparer<T> genericComparer) =>
-        genericComparer as ICqlComparer<object>
+        genericComparer as CqlComparer<object>
         ?? new NonGenericAdapterCqlComparer<T>(genericComparer);
 
     internal static ICqlComparer<T>? UnwrapGeneric<T>(this ICqlComparer<object> prev) =>
-        prev is IAdapter { Inner: ICqlComparer<T> inner }
+        prev is IAdapter { Inner: CqlComparer<T> inner }
             ? inner
-            : prev as ICqlComparer<T> // In this case T will be object
+            : prev as CqlComparer<T> // In this case T will be object
     ;
 }
 
-file interface IAdapter
-{
-    public object Inner { get; }
-}
-
-file class NonGenericAdapterCqlComparer<T>(ICqlComparer<T> genericComparer) : CqlComparerNew<object>, IAdapter
-{
-    protected override bool EquivalentValues(
-        object left,
-        object right,
-        string? precision) =>
-        genericComparer.Equivalent((T)left, (T)right, precision);
-
-    protected override bool? EqualsValues(
-        object left,
-        object right,
-        string? precision) =>
-        genericComparer.Equals((T)left, (T)right, precision);
-
-    protected override int? CompareValues(
-        object left,
-        object right,
-        string? precision) =>
-        genericComparer.Compare((T)left, (T)right, precision);
-
-    protected override int GetHashCodeValue(object value) =>
-        genericComparer.GetHashCode((T)value);
-
-    // public bool Equivalent(
-    //     object? x,
-    //     object? y,
-    //     string? precision)
-    // {
-    //     var result = EquivalentOnNullsOnly(x, y)
-    //                  ?? genericComparer.Equivalent((T)x!, (T)y!, precision);
-    //     return result;
-    // }
-    //
-    // public bool? Equals(
-    //     object? left,
-    //     object? right,
-    //     string? precision)
-    // {
-    //     var result = EquivalentOnNullsOnly(left, right)
-    //                  ?? genericComparer.Equals((T)left!, (T)right!, precision);
-    //     return result;
-    // }
-    //
-    // public int? Compare(
-    //     object? left,
-    //     object? right,
-    //     string? precision)
-    // {
-    //     var result = CompareOnNullsOnly(left, right) ?? genericComparer.Compare((T)left!, (T)right!, precision);
-    //     return result;
-    // }
-    //
-    // public int GetHashCode(object? value)
-    // {
-    //     var result = value is null ? GetHashCodeForType<T>() : genericComparer.GetHashCode((T)value);
-    //     return result;
-    // }
-
-    object IAdapter.Inner => genericComparer;
-}
+file class NonGenericAdapterCqlComparer<T>(
+    ICqlComparer<T> genericComparer) : CqlComparerAdapter<T, object>(genericComparer, t => (T?)t);

@@ -12,11 +12,9 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    private class CharCqlComparer(ICqlComparer<string> stringCqlComparer) : CqlComparerNew<char?>
+    private class CharCqlComparer(ICqlComparer<string> stringCqlComparer) : CqlComparer<char?>
     {
         private ICqlComparer<string> StringCqlComparer { get; } = stringCqlComparer ?? throw new ArgumentNullException(nameof(stringCqlComparer));
-
-        private static string? CharToString(char? c) => c?.ToString();
 
         protected override int? CompareValues(
             [DisallowNull] char? left,

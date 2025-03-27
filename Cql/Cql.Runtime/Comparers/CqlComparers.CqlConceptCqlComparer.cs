@@ -17,8 +17,13 @@ partial class CqlComparers
     /// <summary>
     /// Compares the code and system using the specified comparers.
     /// </summary>
-    private class CqlConceptCqlComparer : CqlComparerNew<CqlConcept>
+    private class CqlConceptCqlComparer : CqlComparer<CqlConcept>
     {
+        protected internal override int GetEqualsStrategy()
+        {
+            return EQUALS_VIA_COMPARE;
+        }
+
         private IEqualityComparer<CqlCode> NewCodeEquivalenceComparer(string precision) =>
             EqualityComparerFactory.Create<CqlCode>(
                 (a, b) => CodeComparer.Equivalent(a, b, precision),
@@ -87,11 +92,6 @@ partial class CqlComparers
         //     }
         //     return 0;
         // }
-
-        protected override int GetEqualsStrategy()
-        {
-            return EQUALS_VIA_COMPARE;
-        }
 
         // public bool? Equals(CqlConcept? left, CqlConcept? right, string? precision = null)
         // {

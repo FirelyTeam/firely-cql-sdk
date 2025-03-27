@@ -12,7 +12,7 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    internal class KeyValuePairComparer<TKey, TValue>(ICqlComparer<object> cqlComparer) : CqlComparerNew<KeyValuePair<TKey, TValue>> 
+    internal class KeyValuePairComparer<TKey, TValue>(ICqlComparer<object> cqlComparer) : CqlComparer<KeyValuePair<TKey, TValue>> 
     {
         /// <inheritdoc />
         protected override int? CompareValues(

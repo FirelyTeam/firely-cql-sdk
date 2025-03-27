@@ -12,7 +12,7 @@ using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir.Comparers
 {
-    internal class CodeComparer<T> : CqlComparerNew<Code<T>>
+    internal class CodeComparer<T> : CqlComparer<Code<T>>
         where T : struct, Enum
     {
         public CodeComparer(CqlComparers valueComparer)

@@ -58,8 +58,13 @@ namespace Hl7.Cql.Fhir.Extensions
             return comparers;
         }
 
-        private class PrimitiveTypeAgainstStringComparer(ICqlComparer<object> inner) : CqlComparerNew<object>
+        private class PrimitiveTypeAgainstStringComparer(ICqlComparer<object> inner) : CqlComparer<object>
         {
+            protected internal override int GetEquivalentStrategy()
+            {
+                return EQUIVALENT_VIA_COMPARE;
+            }
+
             public override int? Compare(
                 object? left,
                 object? right,
@@ -100,11 +105,6 @@ namespace Hl7.Cql.Fhir.Extensions
             //     object? right,
             //     string? precision) =>
             //     Compare(left, right, precision) == 0;
-
-            protected override int GetEquivalentStrategy()
-            {
-                return EQUIVALENT_VIA_COMPARE;
-            }
         }
 
         /// <summary>

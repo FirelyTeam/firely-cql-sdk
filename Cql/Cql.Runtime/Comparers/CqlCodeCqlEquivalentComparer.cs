@@ -8,6 +8,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 using static System.StringComparer;
 
@@ -15,6 +16,10 @@ namespace Hl7.Cql.Comparers
 {
     internal class CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer) : CqlComparer<CqlCode>
     {
+        protected internal override int GetEqualsStrategy() => EQUALS_VIA_COMPARE;
+
+        protected internal override bool CompareReturnNullOnAnyNull() => true;
+
         private IComparer<string> CodeComparer { get; } = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
 
         protected override int? CompareValues(
