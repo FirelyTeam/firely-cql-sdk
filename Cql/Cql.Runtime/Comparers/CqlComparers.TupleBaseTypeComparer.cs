@@ -13,13 +13,10 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    private class TupleBaseTypeComparer(CqlComparers memberComparer) : CqlComparer<TupleBaseType?>
+    private class TupleBaseTypeComparer(CqlComparers memberComparer) : 
+        CqlComparer<TupleBaseType?>(CqlComparerEqualsStrategy.Compare, CqlComparerNullComparisonStrategy.Or)
     {
-        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy() => CqlComparerEqualsStrategy.Compare;
-
-        protected internal override CqlComparerNullComparisonStrategy GetNullComparisonStrategy() => CqlComparerNullComparisonStrategy.Or;
-
-        protected override int? CompareValues(
+        protected internal override int? CompareValues(
             TupleBaseType left,
             TupleBaseType right,
             string? precision = null)
@@ -81,7 +78,7 @@ partial class CqlComparers
         // public bool? Equals(TupleBaseType? left, TupleBaseType? right, string? precision = null) =>
         //     Compare(left, right, null) == 0;
 
-        protected override bool EquivalentValues(
+        protected internal override bool EquivalentValues(
             TupleBaseType? left,
             TupleBaseType? right,
             string? precision = null)

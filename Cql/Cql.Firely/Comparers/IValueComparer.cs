@@ -11,14 +11,10 @@ using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir.Comparers
 {
-    internal class IValueComparer<T> : CqlComparer<IValue<T>>
+    internal class IValueComparer<T>() : 
+        CqlComparer<IValue<T>>(CqlComparerEqualsStrategy.Compare, CqlComparerNullComparisonStrategy.Or /* ##REVIEW Consider strategy */)
     {
-        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy() => CqlComparerEqualsStrategy.Compare;
-
-        protected internal override CqlComparerNullComparisonStrategy GetNullComparisonStrategy() => CqlComparerNullComparisonStrategy.Or;
-
-
-        protected override bool EquivalentValues(
+        protected internal override bool EquivalentValues(
             IValue<T> left,
             IValue<T> right,
             string? precision)
@@ -26,7 +22,7 @@ namespace Hl7.Cql.Fhir.Comparers
             return CompareValues(left, right, precision) == 0;
         }
 
-        protected override int? CompareValues(
+        protected internal override int? CompareValues(
             IValue<T> left,
             IValue<T> right,
             string? precision)

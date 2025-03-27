@@ -11,32 +11,33 @@ using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir.Comparers
 {
-    internal class ResourceIdCqlComparer(ICqlComparer<string> idComparer) : CqlComparer<Resource>
-    {
-        protected override bool EquivalentValues(
-            Resource left,
-            Resource right,
-            string? precision) =>
-            idComparer.Equivalent(left.Id, right.Id, precision);
+    internal class ResourceIdCqlComparer(ICqlComparer<string> idComparer) : CqlComparerAdapter<string, Resource>(idComparer, r => r.Id);
 
-        protected override bool? EqualsValues(
-            Resource left,
-            Resource right,
-            string? precision) =>
-            idComparer.Equals(left.Id, right.Id, precision);
-
-        protected override int? CompareValues(
-            Resource left,
-            Resource right,
-            string? precision) =>
-            idComparer.Compare(left.Id, right.Id, precision);
-
-        protected override bool IsNull([NotNullWhen(false)] Resource? value) =>
-            value?.Id is null;
-
-        protected override int GetHashCodeValue(Resource value) =>
-            idComparer.GetHashCode(value.Id);
-    }
+    // {
+    // protected override bool EquivalentValues(
+    //     Resource left,
+    //     Resource right,
+    //     string? precision) =>
+    //     idComparer.Equivalent(left.Id, right.Id, precision);
+    //
+    // protected override bool? EqualsValues(
+    //     Resource left,
+    //     Resource right,
+    //     string? precision) =>
+    //     idComparer.Equals(left.Id, right.Id, precision);
+    //
+    // protected override int? CompareValues(
+    //     Resource left,
+    //     Resource right,
+    //     string? precision) =>
+    //     idComparer.Compare(left.Id, right.Id, precision);
+    //
+    // protected override bool IsNull([NotNullWhen(false)] Resource? value) =>
+    //     value?.Id is null;
+    //
+    // protected override int GetHashCodeValue(Resource value) =>
+    //     idComparer.GetHashCode(value.Id);
+    // }
 
     /*
     internal class ResourceIdCqlComparer(ICqlComparer<string> idComparer) : CqlComparerBase<Resource>

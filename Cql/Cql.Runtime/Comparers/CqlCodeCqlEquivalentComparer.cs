@@ -14,15 +14,13 @@ using static System.StringComparer;
 
 namespace Hl7.Cql.Comparers
 {
-    internal class CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer) : CqlComparer<CqlCode>
+    internal class CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer) : CqlComparer<CqlCode>(
+        CqlComparerEqualsStrategy.Compare,
+        CqlComparerNullComparisonStrategy.Or)
     {
-        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy() => CqlComparerEqualsStrategy.Compare;
-
-        protected internal override CqlComparerNullComparisonStrategy GetNullComparisonStrategy() => CqlComparerNullComparisonStrategy.Or;
-
         private IComparer<string> CodeComparer { get; } = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
 
-        protected override int? CompareValues(
+        protected internal override int? CompareValues(
             CqlCode left,
             CqlCode right,
             string? precision)
@@ -76,7 +74,7 @@ namespace Hl7.Cql.Comparers
         //     return result;
         // }
 
-        protected override bool EquivalentValues(
+        protected internal override bool EquivalentValues(
             CqlCode left,
             CqlCode right,
             string? precision)

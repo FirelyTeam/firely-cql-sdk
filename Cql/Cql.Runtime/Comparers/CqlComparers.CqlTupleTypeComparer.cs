@@ -14,15 +14,12 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    private class CqlTupleTypeComparer(CqlComparers memberComparer) : CqlComparer<ITuple?>
+    private class CqlTupleTypeComparer(CqlComparers memberComparer) :
+        CqlComparer<ITuple?>(CqlComparerEqualsStrategy.Compare, CqlComparerNullComparisonStrategy.Or)
     {
-        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy() => CqlComparerEqualsStrategy.Compare;
-
-        protected internal override CqlComparerNullComparisonStrategy GetNullComparisonStrategy() => CqlComparerNullComparisonStrategy.Or;
-
         // private static readonly int FallbackHashCode = typeof(ITuple).GetHashCode() ^ 098174506;
 
-        protected override int? CompareValues(
+        protected internal override int? CompareValues(
             ITuple left,
             ITuple right,
             string? precision)
@@ -78,7 +75,7 @@ partial class CqlComparers
         // public bool? Equals(ITuple? left, ITuple? right, string? precision = null) =>
         //     Compare(left, right, precision) == 0;
 
-        protected override bool EquivalentValues(
+        protected internal override bool EquivalentValues(
             ITuple left,
             ITuple right,
             string? precision)

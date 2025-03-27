@@ -14,19 +14,14 @@ namespace Hl7.Cql.Comparers
     internal class IntervalComparer<T>(
         ICqlComparer<object> pointComparer,
         Func<T, T> predecessor,
-        Func<T, T> successor)
-        : CqlComparer<CqlInterval<T>>
+        Func<T, T> successor) : 
+        CqlComparer<CqlInterval<T>>(CqlComparerEqualsStrategy.Compare)
     {
-        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy()
-        {
-            return CqlComparerEqualsStrategy.Compare;
-        }
-
         private ICqlComparer<object> PointComparer { get; } = pointComparer ?? throw new ArgumentNullException(nameof(pointComparer));
         private Func<T, T> Predecessor { get; } = predecessor ?? throw new ArgumentNullException(nameof(predecessor));
         private Func<T, T> Successor { get; } = successor ?? throw new ArgumentNullException(nameof(successor));
 
-        protected override int? CompareValues(
+        protected internal override int? CompareValues(
             CqlInterval<T> left,
             CqlInterval<T> right,
             string? precision)
@@ -120,7 +115,7 @@ namespace Hl7.Cql.Comparers
             }
         }
 
-        protected override bool EquivalentValues(CqlInterval<T> x, CqlInterval<T> y, string? precision) =>
+        protected internal override bool EquivalentValues(CqlInterval<T> x, CqlInterval<T> y, string? precision) =>
             Compare(x, y, precision) == 0;
 
         public override int GetHashCode(CqlInterval<T>? value) =>

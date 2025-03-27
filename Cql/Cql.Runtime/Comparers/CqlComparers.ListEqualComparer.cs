@@ -12,9 +12,10 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    private class ListEqualComparer(CqlComparers elementComparer) : CqlComparer<IEnumerable>
+    private class ListEqualComparer(CqlComparers elementComparer) :
+        CqlComparer<IEnumerable>
     {
-        protected override int? CompareValues(
+        protected internal override int? CompareValues(
             IEnumerable left,
             IEnumerable right,
             string? precision)
@@ -156,7 +157,7 @@ partial class CqlComparers
         //         return true;
         // }
 
-        protected override bool EquivalentValues(
+        protected internal override bool EquivalentValues(
             IEnumerable left,
             IEnumerable right,
             string? precision)

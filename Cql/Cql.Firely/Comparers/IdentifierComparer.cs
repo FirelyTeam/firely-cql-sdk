@@ -12,13 +12,10 @@ namespace Hl7.Cql.Fhir.Comparers
 {
     internal class IdentifierComparer(
         ICqlComparer<string> systemComparer,
-        ICqlComparer<string> valueComparer) : CqlComparer<Identifier>
+        ICqlComparer<string> valueComparer) : 
+        CqlComparer<Identifier>(CqlComparerEqualsStrategy.Compare, CqlComparerNullComparisonStrategy.Or)
     {
-        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy() => CqlComparerEqualsStrategy.Compare;
-
-        protected internal override CqlComparerNullComparisonStrategy GetNullComparisonStrategy() => CqlComparerNullComparisonStrategy.Or;
-
-        protected override int? CompareValues(
+        protected internal override int? CompareValues(
             Identifier left,
             Identifier right,
             string? precision)
@@ -47,7 +44,7 @@ namespace Hl7.Cql.Fhir.Comparers
         //     }
         // }
 
-        protected override bool EquivalentValues(Identifier x, Identifier y, string? precision) =>
+        protected internal override bool EquivalentValues(Identifier x, Identifier y, string? precision) =>
             (Compare(x, y, precision) ?? -1) == 0;
 
         // public override int GetHashCode(Identifier? x) =>

@@ -21,30 +21,17 @@ internal class StringCqlComparer(StringComparer stringComparer) : CqlComparer<st
     private StringComparer StringComparer { get; } = stringComparer ?? throw new ArgumentNullException(nameof(stringComparer));
 
     /// <inheritdoc/>
-    protected override int? CompareValues(
+    protected internal override int? CompareValues(
         string left,
         string right,
-        string? precision = null)
+        string? precision)
     {
         var result = StringComparer.Compare(left.Normalize(), right.Normalize());
         return result;
     }
 
     /// <inheritdoc/>
-    public override bool? Equals(
-        string? left,
-        string? right,
-        string? precision) =>
-        Compare(left, right, precision) == 0;
-
-    protected override bool? EqualsValues(
-        string left,
-        string right,
-        string? precision) =>
-        throw new UnreachableException();
-
-    /// <inheritdoc/>
-    protected override bool EquivalentValues(
+    protected internal override bool EquivalentValues(
         string left,
         string right,
         string? precision)

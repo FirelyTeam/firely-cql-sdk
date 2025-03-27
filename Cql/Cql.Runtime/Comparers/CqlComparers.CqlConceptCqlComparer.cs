@@ -19,9 +19,14 @@ partial class CqlComparers
     /// </summary>
     private class CqlConceptCqlComparer : CqlComparer<CqlConcept>
     {
-        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy()
+        /// <summary>
+        /// Compares the code and system using the specified comparers.
+        /// </summary>
+        public CqlConceptCqlComparer(ICqlComparer<object> codeComparer) : base(
+            CqlComparerEqualsStrategy.Compare)
         {
-            return CqlComparerEqualsStrategy.Compare;
+            CodeComparer = codeComparer;
+            _codeEquivalenceComparerNoPrecision = NewCodeEquivalenceComparer(null!);
         }
 
         private IEqualityComparer<CqlCode> NewCodeEquivalenceComparer(string precision) =>
@@ -31,15 +36,6 @@ partial class CqlComparers
 
         private readonly IEqualityComparer<CqlCode> _codeEquivalenceComparerNoPrecision;
 
-        /// <summary>
-        /// Compares the code and system using the specified comparers.
-        /// </summary>
-        public CqlConceptCqlComparer(ICqlComparer<object> codeComparer)
-        {
-            CodeComparer = codeComparer;
-            _codeEquivalenceComparerNoPrecision = NewCodeEquivalenceComparer(null!);
-        }
-
         private ICqlComparer<object> CodeComparer { get; }
 
         protected override bool IsNull([NotNullWhen(false)] CqlConcept? value)
@@ -47,7 +43,7 @@ partial class CqlComparers
             return value?.codes is null;
         }
 
-        protected override int? CompareValues(
+        protected internal override int? CompareValues(
             CqlConcept left,
             CqlConcept right,
             string? precision)
@@ -100,7 +96,7 @@ partial class CqlComparers
         //     else return Compare(left, right, precision) == 0;
         // }
 
-        protected override bool EquivalentValues(
+        protected internal override bool EquivalentValues(
             CqlConcept left,
             CqlConcept right,
             string? precision)

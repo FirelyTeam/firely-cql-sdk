@@ -15,16 +15,11 @@ namespace Hl7.Cql.Fhir.Comparers
     {
         public static readonly FhirEnumComparer Default = new();
 
-        private FhirEnumComparer() { }
-
-        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy() => CqlComparerEqualsStrategy.Compare;
-
-        protected internal override CqlComparerNullComparisonStrategy GetNullComparisonStrategy() => CqlComparerNullComparisonStrategy.Or;
-
-        protected internal override CqlComparerEquivalentStrategy GetEquivalentStrategy() => CqlComparerEquivalentStrategy.Equals;
+        private FhirEnumComparer() : base(
+            CqlComparerEqualsStrategy.Compare, CqlComparerNullComparisonStrategy.Or, CqlComparerEquivalentStrategy.Equals) { }
 
         /// <inheritdoc/>
-        protected override int? CompareValues(object left, object right, string? precision)
+        protected internal override int? CompareValues(object left, object right, string? precision)
         {
             var xType = left.GetType();
             var yType = right.GetType();

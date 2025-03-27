@@ -78,5 +78,4 @@ internal static class CqlComparerSharedMethods
     ;
 }
 
-file class NonGenericAdapterCqlComparer<T>(
-    ICqlComparer<T> genericComparer) : CqlComparerAdapter<T, object>(genericComparer, t => (T?)t);
+file class NonGenericAdapterCqlComparer<T>(ICqlComparer<T> genericComparer) : CqlComparerAdapter<T, object>(genericComparer, t => (T?)t);

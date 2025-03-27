@@ -15,18 +15,15 @@ namespace Hl7.Cql.Comparers;
 /// <summary>
 /// An CQL comparer that compares two <see cref="CqlCode"/> instances.
 /// </summary>
-internal class CqlCodeCqlComparer(StringComparer codeComparer) : CqlComparer<CqlCode>
+internal class CqlCodeCqlComparer(StringComparer codeComparer) :
+    CqlComparer<CqlCode>(CqlComparerEqualsStrategy.Compare, CqlComparerNullComparisonStrategy.Or)
 {
-    protected internal override CqlComparerEqualsStrategy GetEqualsStrategy() => CqlComparerEqualsStrategy.Compare;
-
-    protected internal override CqlComparerNullComparisonStrategy GetNullComparisonStrategy() => CqlComparerNullComparisonStrategy.Or;
-
     /// <summary>
     /// The default comparer, which uses <see cref="StringComparer.OrdinalIgnoreCase"/>.
     /// </summary>
     public static readonly CqlCodeCqlComparer Default = new(OrdinalIgnoreCase);
 
-    protected override int? CompareValues(
+    protected internal override int? CompareValues(
         CqlCode left,
         CqlCode right,
         string? precision)
@@ -106,7 +103,7 @@ internal class CqlCodeCqlComparer(StringComparer codeComparer) : CqlComparer<Cql
     //     return result;
     // }
 
-    protected override bool EquivalentValues(
+    protected internal override bool EquivalentValues(
         CqlCode left,
         CqlCode right,
         string? precision)

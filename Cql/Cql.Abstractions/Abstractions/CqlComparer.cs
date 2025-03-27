@@ -7,16 +7,17 @@
  */
 
 namespace Hl7.Cql.Abstractions;
+
 internal enum CqlComparerEquivalentStrategy
 {
-    Default = 0,
+    Equivalent = 0,
     Compare = 1,
     Equals = 2
 }
 
 internal enum CqlComparerEqualsStrategy
 {
-    Default = 0,
+    Equal = 0,
     Compare = 1
 }
 
@@ -33,18 +34,21 @@ internal enum CqlComparerNullComparisonStrategy
     Or = 1
 }
 
-internal abstract class CqlComparer<T> : ICqlComparer<T>
+internal abstract class CqlComparer<T>(
+    CqlComparerEqualsStrategy equalsStrategy = CqlComparerEqualsStrategy.Equal,
+    CqlComparerNullComparisonStrategy nullComparisonStrategy = CqlComparerNullComparisonStrategy.And,
+    CqlComparerEquivalentStrategy equivalentStrategy = CqlComparerEquivalentStrategy.Equivalent) : ICqlComparer<T>
 {
-    protected internal virtual CqlComparerEquivalentStrategy GetEquivalentStrategy() => CqlComparerEquivalentStrategy.Default;
-    protected internal virtual CqlComparerEqualsStrategy GetEqualsStrategy() => CqlComparerEqualsStrategy.Default;
-    protected internal virtual CqlComparerNullComparisonStrategy GetNullComparisonStrategy() => CqlComparerNullComparisonStrategy.And;
+    public CqlComparerNullComparisonStrategy NullComparisonStrategy { get; } = nullComparisonStrategy;
+    public CqlComparerEqualsStrategy EqualsStrategy { get; } = equalsStrategy;
+    public CqlComparerEquivalentStrategy EquivalentStrategy { get; } = equivalentStrategy;
 
     public virtual bool Equivalent(
         T? left,
         T? right,
         string? precision)
     {
-        switch (GetEquivalentStrategy())
+        switch (EquivalentStrategy)
         {
             case CqlComparerEquivalentStrategy.Compare:
                 return Compare(left, right, precision) is 0;
@@ -52,7 +56,7 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
             case CqlComparerEquivalentStrategy.Equals:
                 return Equals(left, right, precision) is true or null;
 
-            case CqlComparerEquivalentStrategy.Default:
+            case CqlComparerEquivalentStrategy.Equivalent:
                 var result = EquivalentNulls(left, right)
                     .GetValueOr(EquivalentValues(left!, right!, precision));
                 return result;
@@ -76,13 +80,7 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
         return result;
     }
 
-    bool IEquivalenceComparer<T>.EquivalentValues(
-        [DisallowNull] T left,
-        [DisallowNull] T right,
-        string? precision) =>
-        EquivalentValues(left, right, precision);
-
-    protected virtual bool EquivalentValues(
+    protected internal virtual bool EquivalentValues(
         [DisallowNull] T left,
         [DisallowNull] T right,
         string? precision)
@@ -95,12 +93,12 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
         T? right,
         string? precision)
     {
-        switch (GetEqualsStrategy())
+        switch (EqualsStrategy)
         {
             case CqlComparerEqualsStrategy.Compare:
                 return EqualsViaCompare(left, right, precision);
 
-            case CqlComparerEqualsStrategy.Default:
+            case CqlComparerEqualsStrategy.Equal:
                 var result =
                     EqualsNulls(left, right)
                         .GetValueOr(() => EqualsValues(left!, right!, precision));
@@ -130,12 +128,6 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
         [DisallowNull] T right,
         string? precision) =>
         throw new NotImplementedException();
-
-    bool? ICqlComparer<T>.EqualsValues(
-        [DisallowNull] T left,
-        [DisallowNull] T right,
-        string? precision) =>
-        EqualsValues(left, right, precision);
 
     private bool? EqualsViaCompare(
         T? left,
@@ -169,13 +161,13 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
         var result = (IsNull(left), IsNull(right)) switch
         {
             (true, true) => 0,
-            (true, _) => GetNullComparisonStrategy() switch
+            (true, _) => NullComparisonStrategy switch
             {
                 CqlComparerNullComparisonStrategy.And => 1,
                 CqlComparerNullComparisonStrategy.Or => null,
                 _ => throw new ArgumentOutOfRangeException(),
             },
-            (_, true) => GetNullComparisonStrategy() switch
+            (_, true) => NullComparisonStrategy switch
             {
                 CqlComparerNullComparisonStrategy.And => -1,
                 CqlComparerNullComparisonStrategy.Or  => null,
@@ -186,17 +178,11 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
         return result;
     }
 
-    protected virtual int? CompareValues(
+    protected internal virtual int? CompareValues(
         [DisallowNull] T left,
         [DisallowNull] T right,
         string? precision) =>
         throw new NotImplementedException();
-
-    int? ICqlComparer<T>.CompareValues(
-        [DisallowNull] T left,
-        [DisallowNull] T right,
-        string? precision) =>
-        CompareValues(left, right, precision);
 
     public virtual int GetHashCode(T? value)
     {
@@ -213,7 +199,4 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
 
     protected virtual int GetHashCodeValue([DisallowNull] T value) =>
         value.GetHashCode();
-
-    int ICqlComparer<T>.GetHashCodeValue([DisallowNull] T value) =>
-        GetHashCodeValue(value);
 }

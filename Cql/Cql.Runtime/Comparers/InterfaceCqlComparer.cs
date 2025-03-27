@@ -12,15 +12,11 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    internal class InterfaceCqlComparer<T> : CqlComparer<T>
+    internal class InterfaceCqlComparer<T>() : 
+        CqlComparer<T>(CqlComparerEqualsStrategy.Compare)
         where T : class, ICqlComparable<T>, IEquivalentable<T>
     {
-        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy()
-        {
-            return CqlComparerEqualsStrategy.Compare;
-        }
-
-        protected override int? CompareValues(
+        protected internal override int? CompareValues(
             T left,
             T right,
             string? precision)
@@ -45,7 +41,7 @@ partial class CqlComparers
         // public bool? Equals(T? left, T? right, string? precision) =>
         //     Compare(left, right, precision) == 0;
 
-        protected override bool EquivalentValues(
+        protected internal override bool EquivalentValues(
             T left,
             T right,
             string? precision)

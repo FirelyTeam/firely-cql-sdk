@@ -16,33 +16,12 @@ namespace Hl7.Cql.Comparers
     /// </summary>
     internal sealed partial class CqlComparers : CqlComparer<object>
     {
-        protected internal override CqlComparerEqualsStrategy GetEqualsStrategy() => CqlComparerEqualsStrategy.Compare;
-
-        protected internal override CqlComparerNullComparisonStrategy GetNullComparisonStrategy() => CqlComparerNullComparisonStrategy.Or;
-
-        /// <summary>
-        /// Collapses derived types to their bases, since this makes it easier to find the comparer by the exact type.
-        /// </summary>
-        private static Type GetKeyTypeForComparers(object? x)
-        {
-            var type = x switch
-            {
-                TupleBaseType => typeof(TupleBaseType), // Tuple types generated in the LINQ expressions by the TupleBuilderCache
-                ITuple        => typeof(ITuple),        // .NET tuples (e.g. System.ValueTuple<...>) used in generated libraries
-                _             => x!.GetType()
-            };
-            return type;
-        }
-
-
-        private ConcurrentDictionary<Type, ICqlComparer<object>> Comparers { get; } = new();
-
-        private ConcurrentDictionary<Type, Func<Type, CqlComparers, ICqlComparer<object>>> ComparerFactories { get; } = new();
-
         /// <summary>
         /// Creates an instance with built-in comparers for system types registerred.
         /// </summary>
-        public CqlComparers()
+        public CqlComparers() : base(
+            CqlComparerEqualsStrategy.Compare,
+            CqlComparerNullComparisonStrategy.Or)
         {
             // C# erases nullability for constant ints in some cases, e.g. literals, so we need comparers for both, even though
             // all values in CQL should be considered nullable
@@ -95,6 +74,24 @@ namespace Hl7.Cql.Comparers
             });
         }
 
+        /// <summary>
+        /// Collapses derived types to their bases, since this makes it easier to find the comparer by the exact type.
+        /// </summary>
+        private static Type GetKeyTypeForComparers(object? x)
+        {
+            var type = x switch
+            {
+                TupleBaseType => typeof(TupleBaseType), // Tuple types generated in the LINQ expressions by the TupleBuilderCache
+                ITuple        => typeof(ITuple),        // .NET tuples (e.g. System.ValueTuple<...>) used in generated libraries
+                _             => x!.GetType()
+            };
+            return type;
+        }
+
+
+        private ConcurrentDictionary<Type, ICqlComparer<object>> Comparers { get; } = new();
+
+        private ConcurrentDictionary<Type, Func<Type, CqlComparers, ICqlComparer<object>>> ComparerFactories { get; } = new();
 
         /// <summary>
         /// Registers a comparer for <see cref="Type"/>.

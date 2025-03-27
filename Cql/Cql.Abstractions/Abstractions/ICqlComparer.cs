@@ -26,8 +26,6 @@ namespace Hl7.Cql.Abstractions
         /// <returns><see langword="true"/> if the objects are equal, <see langword="false"/> if not, and <see langword="null"/> if the answer cannot be computed due to uncertainty related to <paramref name="precision"/>.</returns>
         bool? Equals(T? left, T? right, string? precision);
 
-        bool? EqualsValues([DisallowNull] T left, [DisallowNull] T right, string? precision);
-
         /// <summary>
         /// Compares two objects and returns a value indicating whether one is less than, equal to, or greater than the other.
         /// </summary>
@@ -43,8 +41,6 @@ namespace Hl7.Cql.Abstractions
         /// </returns>
         int? Compare(T? left, T? right, string? precision);
 
-        int? CompareValues([DisallowNull] T left, [DisallowNull] T right, string? precision);
-
         /// <summary>
         /// Computes a hash code for <paramref name="value"/>.
         /// If <see cref="Equals(T, T, string?)"/> returns <see langword="true"/> for two objects x and y, this method must return the same value for both x and y.
@@ -53,7 +49,5 @@ namespace Hl7.Cql.Abstractions
         /// <param name="value">The object whose hash code to compute.</param>
         /// <returns>The hash code for <paramref name="value"/>.</returns>
         int GetHashCode(T? value);
-
-        int GetHashCodeValue([DisallowNull]  T value);
     }
 }

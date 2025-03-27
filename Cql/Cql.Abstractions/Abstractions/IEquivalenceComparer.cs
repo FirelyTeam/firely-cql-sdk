@@ -26,7 +26,5 @@ namespace Hl7.Cql.Abstractions
         /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if the objects are equivalent, and <see langword="false"/> if not.  Equivalence computations are never <see langword="null"/> and will return <see langword="false"/> in uncertainty situations.</returns>
         bool Equivalent(T? left, T? right, string? precision);
-
-        bool EquivalentValues([DisallowNull] T left, [DisallowNull] T right, string? precision);
     }
 }

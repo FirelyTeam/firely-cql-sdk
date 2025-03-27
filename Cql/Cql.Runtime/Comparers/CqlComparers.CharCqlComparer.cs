@@ -12,6 +12,10 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
+    private class CharCqlComparer(ICqlComparer<string> stringCqlComparer) :
+        CqlComparerAdapter<string, char?>(stringCqlComparer, c => c?.ToString());
+
+    /*
     private class CharCqlComparer(ICqlComparer<string> stringCqlComparer) : CqlComparer<char?>
     {
         private ICqlComparer<string> StringCqlComparer { get; } = stringCqlComparer ?? throw new ArgumentNullException(nameof(stringCqlComparer));
@@ -66,4 +70,5 @@ partial class CqlComparers
         // public int GetHashCode(char? value) =>
         //     StringCqlComparer.GetHashCode(CharToString(value));
     }
+*/
 }

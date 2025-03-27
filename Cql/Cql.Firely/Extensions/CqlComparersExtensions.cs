@@ -58,12 +58,10 @@ namespace Hl7.Cql.Fhir.Extensions
             return comparers;
         }
 
-        private class PrimitiveTypeAgainstStringComparer(ICqlComparer<object> inner) : CqlComparer<object>
+        private class PrimitiveTypeAgainstStringComparer(ICqlComparer<object> inner) :
+            CqlComparer<object>(equivalentStrategy: CqlComparerEquivalentStrategy.Compare)
         {
-            protected internal override CqlComparerEquivalentStrategy GetEquivalentStrategy()
-            {
-                return CqlComparerEquivalentStrategy.Compare;
-            }
+            private CqlComparer<object>? _innerCqlComparer = inner as CqlComparer<object>;
 
             public override int? Compare(
                 object? left,
@@ -83,12 +81,14 @@ namespace Hl7.Cql.Fhir.Extensions
                 return base.Compare(left, right, precision);
             }
 
-            protected override int? CompareValues(
+            protected internal override int? CompareValues(
                 object left,
                 object right,
                 string? precision)
             {
-                return inner.CompareValues(left, right, precision);
+                return _innerCqlComparer != null
+                           ? _innerCqlComparer.CompareValues(left, right, precision)
+                           : inner.Compare(left, right, precision);
             }
 
             // public int GetHashCode(object? value) =>

@@ -57,7 +57,7 @@ namespace Hl7.Cql.Fhir.Comparers
             string? precision) =>
             _compareFunction(left?.Value!, right?.Value!, precision);
 
-        protected override bool EquivalentValues(Code<T> x, Code<T> y, string? precision) =>
+        protected internal override bool EquivalentValues(Code<T> x, Code<T> y, string? precision) =>
             _equivalentFunction(x.Value!, y.Value!, precision);
 
         // protected override bool EquivalentImpl(Code<T> x, Code<T> y, string? precision) =>
