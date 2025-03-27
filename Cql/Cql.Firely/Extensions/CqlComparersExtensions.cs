@@ -8,7 +8,6 @@
 
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Comparers;
-using Hl7.Cql.Compiler.Infrastructure;
 using Hl7.Cql.Fhir.Comparers;
 using Hl7.Fhir.Model;
 using static Hl7.Cql.Comparers.CqlComparerSharedMethods;
@@ -59,15 +58,15 @@ namespace Hl7.Cql.Fhir.Extensions
             return comparers;
         }
 
-        private class PrimitiveTypeAgainstStringComparer(ICqlComparer<object> inner) : ICqlComparer<object>
+        private class PrimitiveTypeAgainstStringComparer(ICqlComparer<object> inner) : CqlComparerNew<object>
         {
-            public int? Compare(
-                object? x,
-                object? y,
+            public override int? Compare(
+                object? left,
+                object? right,
                 string? precision)
             {
                 // We always expect x to be a Code<T> but we only need the ObjectValue on the non-generic base type PrimitiveType.
-                if (x is PrimitiveType xCode && y is string yString)
+                if (left is PrimitiveType xCode && right is string yString)
                 {
                     if (precision != null)
                         throw new InvalidOperationException(
@@ -76,23 +75,36 @@ namespace Hl7.Cql.Fhir.Extensions
                     return StringComparer.Ordinal.Compare(xCode.ObjectValue, yString);
                 }
 
-                return inner.Compare(x, y, precision);
+                return base.Compare(left, right, precision);
             }
 
-            public int GetHashCode(object? x) =>
-                throw new UnreachableException("CqlComparers always goes through Compare, so we never reach here");
+            protected override int? CompareValues(
+                object left,
+                object right,
+                string? precision)
+            {
+                return inner.CompareValues(left, right, precision);
+            }
 
-            public bool? Equals(
-                object? x,
-                object? y,
-                string? precision) =>
-                throw new UnreachableException("CqlComparers always goes through Compare, so we never reach here");
+            // public int GetHashCode(object? value) =>
+            //     throw new UnreachableException("CqlComparers always goes through Compare, so we never reach here");
 
-            public bool Equivalent(
-                object? x,
-                object? y,
-                string? precision) =>
-                Compare(x, y, precision) == 0;
+            // public bool? Equals(
+            //     object? left,
+            //     object? right,
+            //     string? precision) =>
+            //     throw new UnreachableException("CqlComparers always goes through Compare, so we never reach here");
+
+            // public bool Equivalent(
+            //     object? left,
+            //     object? right,
+            //     string? precision) =>
+            //     Compare(left, right, precision) == 0;
+
+            protected override int GetEquivalentStrategy()
+            {
+                return EQUIVALENT_VIA_COMPARE;
+            }
         }
 
         /// <summary>

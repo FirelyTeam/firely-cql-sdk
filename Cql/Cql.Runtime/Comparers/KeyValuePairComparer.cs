@@ -12,57 +12,42 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    internal class KeyValuePairComparer<TKey, TValue>(ICqlComparer<object> cqlComparer) : ICqlComparer<KeyValuePair<TKey, TValue>> 
+    internal class KeyValuePairComparer<TKey, TValue>(ICqlComparer<object> cqlComparer) : CqlComparerNew<KeyValuePair<TKey, TValue>> 
     {
         /// <inheritdoc />
-        public int? Compare(
-            object? x,
-            object? y,
-            string? precision = null)
-        {
-            if (x is KeyValuePair<TKey, TValue> tx)
+        protected override int? CompareValues(
+            KeyValuePair<TKey, TValue> left,
+            KeyValuePair<TKey, TValue> right,
+            string? precision) =>
+            cqlComparer.Compare(left.Key, right.Key, precision) switch
             {
-                if (y is KeyValuePair<TKey, TValue> ty)
-                    return Compare(tx, ty, precision);
-            }
-
-            return -1;
-        }
-
-        /// <inheritdoc />
-        public int? Compare(
-            KeyValuePair<TKey, TValue> x,
-            KeyValuePair<TKey, TValue> y,
-            string? precision = null) =>
-            cqlComparer.Compare(x.Key, y.Key, precision) switch
-            {
-                0     => cqlComparer.Compare(x.Value, y.Value, precision),
+                0     => cqlComparer.Compare(left.Value, right.Value, precision),
                 var i => i
             };
 
         /// <inheritdoc />
-        public bool? Equals(
-            KeyValuePair<TKey, TValue> x,
-            KeyValuePair<TKey, TValue> y,
-            string? precision = null) =>
-            cqlComparer.Equals(x.Key, y.Key, precision) switch
+        protected override bool? EqualsValues(
+            KeyValuePair<TKey, TValue> left,
+            KeyValuePair<TKey, TValue> right,
+            string? precision) =>
+            cqlComparer.Equals(left.Key, right.Key, precision) switch
             {
-                true  => cqlComparer.Equals(x.Value, y.Value, precision),
+                true  => cqlComparer.Equals(left.Value, right.Value, precision),
                 var b => b
             };
 
         /// <inheritdoc />
-        public bool Equivalent(
-            KeyValuePair<TKey, TValue> x,
-            KeyValuePair<TKey, TValue> y,
-            string? precision = null) =>
-            EquivalentOnNullsOnly(x, y)
-            ?? Compare(x, y, precision) == 0;
+        protected override bool EquivalentValues(
+            KeyValuePair<TKey, TValue> left,
+            KeyValuePair<TKey, TValue> right,
+            string? precision) =>
+            EquivalentOnNullsOnly(left, right)
+            ?? Compare(left, right, precision) == 0;
 
         /// <inheritdoc />
-        public int GetHashCode(KeyValuePair<TKey, TValue> x) =>
+        protected override int GetHashCodeValue(KeyValuePair<TKey, TValue> value) =>
             HashCode.Combine(
-                cqlComparer.GetHashCode(x.Key),
-                cqlComparer.GetHashCode(x.Value));
+                cqlComparer.GetHashCode(value.Key),
+                cqlComparer.GetHashCode(value.Value));
     }
 }

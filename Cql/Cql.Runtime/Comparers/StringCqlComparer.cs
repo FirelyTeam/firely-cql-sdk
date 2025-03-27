@@ -16,44 +16,45 @@ namespace Hl7.Cql.Comparers;
 /// <remarks>
 /// Strings are normalized using <see cref="string.Normalize()"/>.
 /// </remarks>
-internal class StringCqlComparer(StringComparer stringComparer) : ICqlComparer<string> 
+internal class StringCqlComparer(StringComparer stringComparer) : CqlComparerNew<string>
 {
     private StringComparer StringComparer { get; } = stringComparer ?? throw new ArgumentNullException(nameof(stringComparer));
 
     /// <inheritdoc/>
-    public int? Compare(
-        string? x,
-        string? y,
+    protected override int? CompareValues(
+        string left,
+        string right,
         string? precision = null)
     {
-        var result = CompareOnNullsOnly(x, y)
-                     ?? StringComparer.Compare(x!.Normalize(), y!.Normalize());
-
+        var result = StringComparer.Compare(left.Normalize(), right.Normalize());
         return result;
     }
 
     /// <inheritdoc/>
-    public bool? Equals(
-        string? x,
-        string? y,
-        string? precision = null) => Compare(x, y, precision) == 0;
+    public override bool? Equals(
+        string? left,
+        string? right,
+        string? precision) =>
+        Compare(left, right, precision) == 0;
+
+    protected override bool? EqualsValues(
+        string left,
+        string right,
+        string? precision) =>
+        throw new UnreachableException();
 
     /// <inheritdoc/>
-    public bool Equivalent(
-        string? x,
-        string? y,
-        string? precision = null)
+    protected override bool EquivalentValues(
+        string left,
+        string right,
+        string? precision)
     {
-        if (EquivalentOnNullsOnly(x, y) is { } r)
-            return r;
-
-        var thisNormalized = x!.Normalize();
-        var otherNormalized = y!.Normalize();
+        var thisNormalized = left.Normalize();
+        var otherNormalized = right.Normalize();
         var areEqual = StringComparer.Equals(thisNormalized, otherNormalized);
         return areEqual;
     }
 
     /// <inheritdoc/>
-    public int GetHashCode(string? x) =>
-        x?.GetHashCode() ?? typeof(string).GetHashCode();
+    protected override int GetHashCodeValue(string value) => value.GetHashCode();
 }

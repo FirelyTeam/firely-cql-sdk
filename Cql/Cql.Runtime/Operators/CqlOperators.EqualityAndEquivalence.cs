@@ -1,6 +1,4 @@
-﻿using Hl7.Cql.Comparers;
-
-namespace Hl7.Cql.Operators;
+﻿namespace Hl7.Cql.Operators;
 
 internal partial class CqlOperators
 {

@@ -14,28 +14,28 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    private class CqlTupleTypeComparer(CqlComparers memberComparer) : ICqlComparer<ITuple?>
+    private class CqlTupleTypeComparer(CqlComparers memberComparer) : CqlComparer<ITuple?>
     {
         private static readonly int FallbackHashCode = typeof(ITuple).GetHashCode() ^ 098174506;
 
-        public int? Compare(ITuple? x, ITuple? y, string? precision = null)
+        protected override int? CompareValues(
+            ITuple left,
+            ITuple right,
+            string? precision)
         {
-            if (x == null || y == null)
-                return null;
-
             // Check the "type" via the metadata
-            if (x.Length == 0 || x.Length != y.Length)
+            if (left.Length == 0 || left.Length != right.Length)
                 return null;
 
-            var xMetadata = x[0] as CqlTupleMetadata;
-            var yMetadata = y[0] as CqlTupleMetadata;
+            var xMetadata = left[0] as CqlTupleMetadata;
+            var yMetadata = right[0] as CqlTupleMetadata;
             if (xMetadata == null || xMetadata != yMetadata)
                 return null;
 
             // Compare the items on the tuple
-            for (int i = 1; i < x.Length; i++)
+            for (int i = 1; i < left.Length; i++)
             {
-                var compare = memberComparer.Compare(x[i], y[i], precision);
+                var compare = memberComparer.Compare(left[i], right[i], precision);
                 if (compare is null or not 0)
                     return compare;
             }
@@ -43,35 +43,85 @@ partial class CqlComparers
             return 0;
         }
 
-        public int GetHashCode(ITuple? obj) =>
-            obj?.GetHashCode() ?? FallbackHashCode;
+        // public int? Compare(ITuple? left, ITuple? right, string? precision = null)
+        // {
+        //     if (left == null || right == null)
+        //         return null;
+        //
+        //     // Check the "type" via the metadata
+        //     if (left.Length == 0 || left.Length != right.Length)
+        //         return null;
+        //
+        //     var xMetadata = left[0] as CqlTupleMetadata;
+        //     var yMetadata = right[0] as CqlTupleMetadata;
+        //     if (xMetadata == null || xMetadata != yMetadata)
+        //         return null;
+        //
+        //     // Compare the items on the tuple
+        //     for (int i = 1; i < left.Length; i++)
+        //     {
+        //         var compare = memberComparer.Compare(left[i], right[i], precision);
+        //         if (compare is null or not 0)
+        //             return compare;
+        //     }
+        //
+        //     return 0;
+        // }
 
-        public bool? Equals(ITuple? x, ITuple? y, string? precision = null) =>
-            Compare(x, y, precision) == 0;
+        // public int GetHashCode(ITuple? value) =>
+        //     value?.GetHashCode() ?? FallbackHashCode;
 
-        public bool Equivalent(ITuple? x, ITuple? y, string? precision = null)
+        // public bool? Equals(ITuple? left, ITuple? right, string? precision = null) =>
+        //     Compare(left, right, precision) == 0;
+
+        protected override bool EquivalentValues(
+            ITuple left,
+            ITuple right,
+            string? precision)
         {
-            if (EquivalentOnNullsOnly(x, y) is { } r)
-                return r;
-
             // Check the "type" via the metadata
-            if (x!.Length == 0 || x.Length != y!.Length)
+            if (left!.Length == 0 || left.Length != right!.Length)
                 return false;
 
-            var xMetadata = x[0] as CqlTupleMetadata;
-            var yMetadata = y[0] as CqlTupleMetadata;
+            var xMetadata = left[0] as CqlTupleMetadata;
+            var yMetadata = right[0] as CqlTupleMetadata;
             if (xMetadata == null || xMetadata != yMetadata)
                 return false;
 
             // Compare the items on the tuple
-            for (int i = 1; i < x.Length; i++)
+            for (int i = 1; i < left.Length; i++)
             {
-                var equivalent = memberComparer.Equivalent(x[i], y[i], precision);
+                var equivalent = memberComparer.Equivalent(left[i], right[i], precision);
                 if (!equivalent)
                     return false;
             }
 
             return true;
         }
+
+        // public bool Equivalent(ITuple? left, ITuple? right, string? precision = null)
+        // {
+        //     if (EquivalentOnNullsOnly(left, right) is { } r)
+        //         return r;
+        //
+        //     // Check the "type" via the metadata
+        //     if (left!.Length == 0 || left.Length != right!.Length)
+        //         return false;
+        //
+        //     var xMetadata = left[0] as CqlTupleMetadata;
+        //     var yMetadata = right[0] as CqlTupleMetadata;
+        //     if (xMetadata == null || xMetadata != yMetadata)
+        //         return false;
+        //
+        //     // Compare the items on the tuple
+        //     for (int i = 1; i < left.Length; i++)
+        //     {
+        //         var equivalent = memberComparer.Equivalent(left[i], right[i], precision);
+        //         if (!equivalent)
+        //             return false;
+        //     }
+        //
+        //     return true;
+        // }
     }
 }

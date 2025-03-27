@@ -16,3 +16,4 @@ global using System.Runtime.CompilerServices;
 global using System.Runtime.InteropServices;
 global using System.Security.Cryptography;
 global using System.Text;
+global using static Hl7.Cql.Abstractions.Maybe;

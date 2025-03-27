@@ -6,14 +6,14 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
-
 namespace Hl7.Cql.Comparers;
 
 /// <summary>
 /// Compares enum values against strings and each other.
 /// </summary>
-internal class EnumComparer : ICqlComparer<object>
+internal class EnumComparer :
+    //ICqlComparer<object>
+    CqlComparer<object>
 {
     /// <summary>
     /// Gets the default instance of this comparer.
@@ -22,28 +22,52 @@ internal class EnumComparer : ICqlComparer<object>
 
     private EnumComparer() { }
 
-    /// <inheritdoc/>
-    public int? Compare(object? x, object? y, string? precision)
+    protected override int? CompareValues(
+        object left,
+        object right,
+        string? precision)
     {
-        if (x == null || y == null) return null;
-        var xType = x.GetType();
-        var yType = y.GetType();
+        var xType = left.GetType();
+        var yType = right.GetType();
         if (xType.IsEnum)
         {
             if (yType == xType)
-                return Comparer<object>.Default.Compare(x, y);
+                return Comparer<object>.Default.Compare(left, right);
             else if (typeof(string).IsAssignableFrom(yType))
-                return CompareEnumToString(x, (string)y);
+                return CompareEnumToString(left, (string)right);
         }
         else if (yType.IsEnum)
         {
             if (yType == xType)
-                return Comparer<object>.Default.Compare(x, y);
+                return Comparer<object>.Default.Compare(left, right);
             else if (typeof(string).IsAssignableFrom(xType))
-                return CompareEnumToString(y, (string)x) * -1;
+                return CompareEnumToString(right, (string)left) * -1;
         }
         return null;
     }
+
+    // /// <inheritdoc/>
+    // public int? Compare(object? left, object? right, string? precision)
+    // {
+    //     if (left == null || right == null) return null;
+    //     var xType = left.GetType();
+    //     var yType = right.GetType();
+    //     if (xType.IsEnum)
+    //     {
+    //         if (yType == xType)
+    //             return Comparer<object>.Default.Compare(left, right);
+    //         else if (typeof(string).IsAssignableFrom(yType))
+    //             return CompareEnumToString(left, (string)right);
+    //     }
+    //     else if (yType.IsEnum)
+    //     {
+    //         if (yType == xType)
+    //             return Comparer<object>.Default.Compare(left, right);
+    //         else if (typeof(string).IsAssignableFrom(xType))
+    //             return CompareEnumToString(right, (string)left) * -1;
+    //     }
+    //     return null;
+    // }
 
     private static int CompareEnumToString(object @enum, string value)
     {
@@ -51,18 +75,38 @@ internal class EnumComparer : ICqlComparer<object>
         return string.Compare(leftValue, value, StringComparison.OrdinalIgnoreCase);
     }
 
-    /// <inheritdoc/>
-    public bool? Equals(object? x, object? y, string? precision)
-    {
-        var result = Compare(x, y, precision);
-        if (result == null) return null;
-        else return result == 0;
-    }
+    // public override bool Equivalent(
+    //     object? left,
+    //     object? right,
+    //     string? precision)
+    // {
+    //     return EquivalentViaEquals(left, right, precision);
+    // }
 
-    /// <inheritdoc/>
-    public bool Equivalent(object? x, object? y, string? precision) => (Equals(x, y, precision) ?? false) == false;
+    protected override int GetEquivalentStrategy() => EQUIVALENT_VIA_EQUALS;
 
-    /// <inheritdoc/>
-    public int GetHashCode(object? x) =>
-        x?.GetHashCode() ?? typeof(object).GetHashCode();
+    // public override bool? Equals(
+    //     object? left,
+    //     object? right,
+    //     string? precision)
+    // {
+    //     return EqualsViaCompare(left, right, precision);
+    // }
+
+    protected override int GetEqualsStrategy() => EQUIVALENT_VIA_COMPARE;
+
+    // /// <inheritdoc/>
+    // public bool? Equals(object? left, object? right, string? precision)
+    // {
+    //     var result = Compare(left, right, precision);
+    //     if (result == null) return null;
+    //     else return result == 0;
+    // }
+    //
+    // /// <inheritdoc/>
+    // public bool Equivalent(object? left, object? right, string? precision) => (Equals(left, right, precision) ?? false) == false;
+    //
+    // /// <inheritdoc/>
+    // public int GetHashCode(object? value) =>
+    //     value?.GetHashCode() ?? typeof(object).GetHashCode();
 }

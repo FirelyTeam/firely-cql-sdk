@@ -5,12 +5,13 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
-using Hl7.Cql.Abstractions;
+
+using Hl7.Cql.Comparers;
 using Hl7.Fhir.Utility;
 
 namespace Hl7.Cql.Fhir.Comparers
 {
-    internal class FhirEnumComparer : ICqlComparer<object>
+    internal class FhirEnumComparer : CqlComparer<object>
     {
 
         public static readonly FhirEnumComparer Default = new FhirEnumComparer();
@@ -18,24 +19,23 @@ namespace Hl7.Cql.Fhir.Comparers
         private FhirEnumComparer() { }
 
         /// <inheritdoc/>
-        public int? Compare(object? x, object? y, string? precision)
+        protected override int? CompareValues(object left, object right, string? precision)
         {
-            if (x == null || y == null) return null;
-            var xType = x.GetType();
-            var yType = y.GetType();
+            var xType = left.GetType();
+            var yType = right.GetType();
             if (xType.IsEnum)
             {
                 if (yType == xType)
-                    return Comparer<object>.Default.Compare(x, y);
+                    return Comparer<object>.Default.Compare(left, right);
                 else if (typeof(string).IsAssignableFrom(yType))
-                    return CompareEnumToString(x, (string)y);
+                    return CompareEnumToString(left, (string)right);
             }
             else if (yType.IsEnum)
             {
                 if (yType == xType)
-                    return Comparer<object>.Default.Compare(x, y);
+                    return Comparer<object>.Default.Compare(left, right);
                 else if (typeof(string).IsAssignableFrom(xType))
-                    return CompareEnumToString(y, (string)x) * -1;
+                    return CompareEnumToString(right, (string)left) * -1;
             }
             return null;
         }
@@ -53,20 +53,42 @@ namespace Hl7.Cql.Fhir.Comparers
             else return string.Compare(enumStringValue, value, StringComparison.OrdinalIgnoreCase);
         }
 
-        /// <inheritdoc/>
-        public bool? Equals(object? x, object? y, string? precision)
-        {
-            var result = Compare(x, y, precision);
-            if (result == null) return null;
-            else return result == 0;
-        }
+        // /// <inheritdoc/>
+        // public bool? Equals(object? left, object? right, string? precision)
+        // {
+        //     var result = Compare(left, right, precision);
+        //     if (result == null) return null;
+        //     else return result == 0;
+        // }
 
-        /// <inheritdoc/>
-        public bool Equivalent(object? x, object? y, string? precision) =>
-            (Equals(x, y, precision) ?? false) == false;
+        // /// <inheritdoc/>
+        // public override bool Equivalent(object? left, object? right, string? precision) =>
+        //     EquivalentViaEquals(left, right, precision);
 
-        /// <inheritdoc/>
-        public int GetHashCode(object? x) =>
-            x?.GetHashCode() ?? typeof(object).GetHashCode();
+        protected override bool? EqualsValues(
+            object left,
+            object right,
+            string? precision) =>
+            throw new UnreachableException();
+
+        protected override int GetEqualsStrategy() => EQUALS_VIA_COMPARE;
+
+        protected override int GetEquivalentStrategy() => EQUIVALENT_VIA_EQUALS;
+
+        protected override bool EquivalentValues(
+            object left,
+            object right,
+            string? precision) =>
+            throw new UnreachableException();
+
+        //
+        // /// <inheritdoc/>
+        // public bool Equivalent(object? left, object? right, string? precision) =>
+        //     (Equals(left, right, precision) ?? false) == false;
+        //
+
+        // /// <inheritdoc/>
+        // public int GetHashCode(object? value) =>
+        //     value?.GetHashCode() ?? typeof(object).GetHashCode();
     }
 }

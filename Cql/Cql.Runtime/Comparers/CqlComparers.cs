@@ -14,7 +14,7 @@ namespace Hl7.Cql.Comparers
     /// <summary>
     /// Implements <see cref="ICqlComparer{Object}"/> by dispatching to registerred typed comparers.
     /// </summary>
-    internal sealed partial class CqlComparers : ICqlComparer<object>
+    internal sealed partial class CqlComparers : CqlComparer<object>
     {
         /// <summary>
         /// Collapses derived types to their bases, since this makes it easier to find the comparer by the exact type.
@@ -168,21 +168,21 @@ namespace Hl7.Cql.Comparers
         #region ICqlComparer
 
         /// <inheritdoc />
-        public bool? Equals(
-            object? x,
-            object? y,
-            string? precision) => Compare(x, y, precision) == 0;
+        public override bool? Equals(
+            object? left,
+            object? right,
+            string? precision) => Compare(left, right, precision) == 0;
 
         /// <inheritdoc />
-        public int? Compare(
-            object? x,
-            object? y,
+        public override int? Compare(
+            object? left,
+            object? right,
             string? precision)
         {
             // if x or y is null it must return null and if both are null then it's a match
             // if we return 1 or -1 when only 1 side is null then we hit a lot of issues with Stratification: Race - Two or More Races on a lot of measures
             // because it expects null/false but gets true because 1 was returned (x null, y = 2) so 2 > null => return 1
-            switch (x, y)
+            switch (x: left, y: right)
             {
                 case (null, null):
                     return 0;
@@ -193,8 +193,8 @@ namespace Hl7.Cql.Comparers
             }
 
             bool xySwapped = false;
-            var xType = GetKeyTypeForComparers(x);
-            var yType = GetKeyTypeForComparers(y);
+            var xType = GetKeyTypeForComparers(left);
+            var yType = GetKeyTypeForComparers(right);
             if (xType != yType)
             {
                 // if x and y are not the same type, we prioritize them based on the following order:
@@ -202,7 +202,7 @@ namespace Hl7.Cql.Comparers
                 if (xType.Namespace == "System" && yType.Namespace != "System")
                 {
                     xySwapped = true;
-                    (x, y) = (y, x);
+                    (left, right) = (right, left);
                     (xType, yType) = (yType, xType);
                 }
             }
@@ -221,19 +221,19 @@ namespace Hl7.Cql.Comparers
                     Comparers.TryAdd(xType, gc);
                     comparer = gc;
                 }
-                else if (x is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer<object>? enumerableComparer))
+                else if (left is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer<object>? enumerableComparer))
                 {
                     comparer = enumerableComparer;
                 }
             }
-            else if (x is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer<object>? listComparer))
+            else if (left is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer<object>? listComparer))
             {
                 comparer = listComparer;
             }
 
             if (comparer != null)
             {
-                var result = comparer.Compare(x, y, precision);
+                var result = comparer.Compare(left, right, precision);
                 if (xySwapped) result = -result;
                 return result;
             }
@@ -242,19 +242,19 @@ namespace Hl7.Cql.Comparers
         }
 
         /// <inheritdoc />
-        public bool Equivalent(
-            object? x,
-            object? y,
+        public override bool Equivalent(
+            object? left,
+            object? right,
             string? precision)
         {
-            if (EquivalentOnNullsOnly(x, y) is { } r)
+            if (EquivalentOnNullsOnly(left, right) is { } r)
                 return r;
 
-            var xType = GetKeyTypeForComparers(x);
+            var xType = GetKeyTypeForComparers(left);
 
             if (Comparers.TryGetValue(xType, out ICqlComparer<object>? comparer))
             {
-                return comparer.Equivalent(x, y, precision);
+                return comparer.Equivalent(left, right, precision);
             }
             else
             {
@@ -265,7 +265,7 @@ namespace Hl7.Cql.Comparers
                     {
                         var gc = factory(xType, this);
                         Comparers.TryAdd(xType, gc);
-                        return gc.Equivalent(x, y, precision);
+                        return gc.Equivalent(left, right, precision);
                     }
                 }
             }
@@ -274,18 +274,18 @@ namespace Hl7.Cql.Comparers
         }
 
         /// <inheritdoc />
-        public int GetHashCode(object? x)
+        public override int GetHashCode(object? value)
         {
-            if (x == null)
+            if (value == null)
                 return typeof(object).GetHashCode();
 
-            var xType = GetKeyTypeForComparers(x);
+            var xType = GetKeyTypeForComparers(value);
 
             if (Comparers.TryGetValue(xType, out ICqlComparer<object>? comparer))
             {
-                return comparer.GetHashCode(x);
+                return comparer.GetHashCode(value);
             }
-            else if (x is IEnumerable<object> enumerable)
+            else if (value is IEnumerable<object> enumerable)
             {
                 int hash = typeof(IEnumerable).GetHashCode();
                 var i = 1;
@@ -296,7 +296,7 @@ namespace Hl7.Cql.Comparers
 
                 return hash;
             }
-            else throw new ArgumentException($"Cannot generate a hash code for {xType.Name}", nameof(x));
+            else throw new ArgumentException($"Cannot generate a hash code for {xType.Name}", nameof(value));
         }
 
         #endregion ICqlComparer

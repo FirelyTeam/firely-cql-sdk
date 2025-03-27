@@ -14,64 +14,108 @@ using static System.StringComparer;
 
 namespace Hl7.Cql.Comparers
 {
-    internal class CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer) : ICqlComparer<CqlCode>
+    internal class CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer) : CqlComparer<CqlCode>
     {
         private IComparer<string> CodeComparer { get; } = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
 
-        public int? Compare(CqlCode? x, CqlCode? y, string? precision)
+        protected override int? CompareValues(
+            CqlCode left,
+            CqlCode right,
+            string? precision)
         {
-            if (x == null || y == null)
-                return null;
-
-            if (x.code == null || y.code == null)
-                return null;
-
-            var result = CodeComparer.Compare(x.code, y.code);
+            var result = CodeComparer.Compare(left.code, right.code);
             if (result != 0)
                 return result;
 
-            if ((x.system == null) ^ (y.system == null))
+            if ((left.system == null) ^ (right.system == null))
                 return null;
 
-            result = OrdinalIgnoreCase.Compare(x.system, y.system);
-            return result;
-
-        }
-
-        public bool? Equals(CqlCode? x, CqlCode? y, string? precision)
-        {
-            if (x == null || y == null)
-                return null;
-
-            bool? result = Compare(x, y, precision) switch
-            {
-                null  => null,
-                var r => r == 0
-            };
+            result = OrdinalIgnoreCase.Compare(left.system, right.system);
             return result;
         }
 
-        public bool Equivalent(CqlCode? x, CqlCode? y, string? precision)
+        protected override bool IsNull([NotNullWhen(false)] CqlCode? value)
         {
-            if (EquivalentOnNullsOnly(x?.code, y?.code) is { } r)
-                return r;
+            return value?.code is null;
+        }
 
-            var result = CodeComparer.Compare(x!.code, y!.code);
+        // public int? Compare(CqlCode? left, CqlCode? right, string? precision)
+        // {
+        //     if (left == null || right == null)
+        //         return null;
+        //
+        //     if (left.code == null || right.code == null)
+        //         return null;
+        //
+        //     var result = CodeComparer.Compare(left.code, right.code);
+        //     if (result != 0)
+        //         return result;
+        //
+        //     if ((left.system == null) ^ (right.system == null))
+        //         return null;
+        //
+        //     result = OrdinalIgnoreCase.Compare(left.system, right.system);
+        //     return result;
+        //
+        // }
+
+        // public bool? Equals(CqlCode? left, CqlCode? right, string? precision)
+        // {
+        //     if (left == null || right == null)
+        //         return null;
+        //
+        //     bool? result = Compare(left, right, precision) switch
+        //     {
+        //         null  => null,
+        //         var r => r == 0
+        //     };
+        //     return result;
+        // }
+
+        protected override bool EquivalentValues(
+            CqlCode left,
+            CqlCode right,
+            string? precision)
+        {
+            var result = CodeComparer.Compare(left!.code, right!.code);
             if (result != 0)
                 return false;
 
-            if ((x.system == null) ^ (y.system == null))
+            if ((left.system == null) ^ (right.system == null))
                 return false;
 
-            var sc = OrdinalIgnoreCase.Compare(x.system, y.system);
+            var sc = OrdinalIgnoreCase.Compare(left.system, right.system);
             return sc == 0;
         }
 
-        public int GetHashCode(CqlCode? x) =>
-            x == null
-            ? typeof(CqlCode).GetHashCode()
-            : OrdinalIgnoreCase.GetHashCode(x.code ?? string.Empty) ^
-              OrdinalIgnoreCase.GetHashCode(x.system ?? string.Empty);
+        // public bool Equivalent(CqlCode? left, CqlCode? right, string? precision)
+        // {
+        //     if (EquivalentOnNullsOnly(left?.code, right?.code) is { } r)
+        //         return r;
+        //
+        //     var result = CodeComparer.Compare(left!.code, right!.code);
+        //     if (result != 0)
+        //         return false;
+        //
+        //     if ((left.system == null) ^ (right.system == null))
+        //         return false;
+        //
+        //     var sc = OrdinalIgnoreCase.Compare(left.system, right.system);
+        //     return sc == 0;
+        // }
+
+        /// <inheritdoc/>
+        public override int GetHashCode(CqlCode? value) =>
+            value == null
+                ? GetHashCodeNull()
+                : OrdinalIgnoreCase.GetHashCode(value.code ?? string.Empty) ^
+                  OrdinalIgnoreCase.GetHashCode(value.system ?? string.Empty);
+
+        // public int GetHashCode(CqlCode? value) =>
+        //     value == null
+        //     ? typeof(CqlCode).GetHashCode()
+        //     : OrdinalIgnoreCase.GetHashCode(value.code ?? string.Empty) ^
+        //       OrdinalIgnoreCase.GetHashCode(value.system ?? string.Empty);
     }
 }
 

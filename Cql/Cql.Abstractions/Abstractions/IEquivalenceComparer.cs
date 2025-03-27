@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 namespace Hl7.Cql.Abstractions
 {
     /// <summary>
@@ -20,10 +21,12 @@ namespace Hl7.Cql.Abstractions
         /// <summary>
         /// Compares two objects for equivalence.
         /// </summary>
-        /// <param name="x">The first object to compare.</param>
-        /// <param name="y">The second object to compare.</param>
+        /// <param name="left">The first object to compare.</param>
+        /// <param name="right">The second object to compare.</param>
         /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if the objects are equivalent, and <see langword="false"/> if not.  Equivalence computations are never <see langword="null"/> and will return <see langword="false"/> in uncertainty situations.</returns>
-        bool Equivalent(T? x, T? y, string? precision);
+        bool Equivalent(T? left, T? right, string? precision);
+
+        bool EquivalentValues([DisallowNull] T left, [DisallowNull] T right, string? precision);
     }
 }

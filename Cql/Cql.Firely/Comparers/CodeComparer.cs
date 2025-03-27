@@ -6,12 +6,13 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Comparers;
 using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir.Comparers
 {
-    internal class CodeComparer<T> : CqlComparerBase<Code<T>>
+    internal class CodeComparer<T> : CqlComparerNew<Code<T>>
         where T : struct, Enum
     {
         public CodeComparer(CqlComparers valueComparer)
@@ -41,17 +42,31 @@ namespace Hl7.Cql.Fhir.Comparers
 
         private static bool EquivalentEnums(T? x, T? y, string? precision) => Equals(x, y);
 
-        public override int? Compare(Code<T>? x, Code<T>? y, string? precision)
-        {
-            if (x == null || y == null)
-                return null;
-            return _compareFunction(x.Value!, y.Value!, precision);
-        }
+        // public override int? Compare(Code<T>? x, Code<T>? y, string? precision)
+        // {
+        //     if (x == null || y == null)
+        //         return null;
+        //     return _compareFunction(x.Value!, y.Value!, precision);
+        // }
 
-        protected override bool EquivalentImpl(Code<T> x, Code<T> y, string? precision) =>
+        protected override bool IsNull(Code<T>? value) => value?.Value is null;
+
+        public override int? Compare(
+            Code<T>? left,
+            Code<T>? right,
+            string? precision) =>
+            _compareFunction(left?.Value!, right?.Value!, precision);
+
+        protected override bool EquivalentValues(Code<T> x, Code<T> y, string? precision) =>
             _equivalentFunction(x.Value!, y.Value!, precision);
 
-        public override int GetHashCode(Code<T>? x) =>
-            x == null ? typeof(Code<T>).GetHashCode() : typeof(Code<T>).GetHashCode() ^ x.Value.GetHashCode();
+        // protected override bool EquivalentImpl(Code<T> x, Code<T> y, string? precision) =>
+        //     _equivalentFunction(x.Value!, y.Value!, precision);
+
+        // public override int GetHashCode(Code<T>? x) =>
+        //     x == null ? typeof(Code<T>).GetHashCode() : typeof(Code<T>).GetHashCode() ^ x.Value.GetHashCode();
+
+        protected override int GetHashCodeValue(Code<T> value) =>
+            GetHashCodeNull() ^ value.Value.GetHashCode();
     }
 }

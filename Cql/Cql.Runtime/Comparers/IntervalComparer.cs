@@ -15,21 +15,26 @@ namespace Hl7.Cql.Comparers
         ICqlComparer<object> pointComparer,
         Func<T, T> predecessor,
         Func<T, T> successor)
-        : CqlComparerBase<CqlInterval<T>>
+        : CqlComparerNew<CqlInterval<T>>
     {
         private ICqlComparer<object> PointComparer { get; } = pointComparer ?? throw new ArgumentNullException(nameof(pointComparer));
         private Func<T, T> Predecessor { get; } = predecessor ?? throw new ArgumentNullException(nameof(predecessor));
         private Func<T, T> Successor { get; } = successor ?? throw new ArgumentNullException(nameof(successor));
 
-        public override int? Compare(CqlInterval<T>? x, CqlInterval<T>? y, string? precision)
+        protected override int GetEqualsStrategy()
         {
-            if (x == null || y == null)
-                return null;
+            return EQUALS_VIA_COMPARE;
+        }
 
-            var xLow = x.lowClosed ?? false ? x.low : Successor(x.low);
-            var yLow = y.lowClosed ?? false ? y.low : Successor(y.low);
-            var xHigh = x.highClosed ?? false ? x.high : Predecessor(x.high);
-            var yHigh = y.highClosed ?? false ? y.high : Predecessor(y.high);
+        protected override int? CompareValues(
+            CqlInterval<T> left,
+            CqlInterval<T> right,
+            string? precision)
+        {
+            var xLow = left.lowClosed ?? false ? left.low : Successor(left.low);
+            var yLow = right.lowClosed ?? false ? right.low : Successor(right.low);
+            var xHigh = left.highClosed ?? false ? left.high : Predecessor(left.high);
+            var yHigh = right.highClosed ?? false ? right.high : Predecessor(right.high);
 
             if (xLow == null)
             {
@@ -68,12 +73,59 @@ namespace Hl7.Cql.Comparers
             }
         }
 
-        protected override bool EquivalentImpl(CqlInterval<T> x, CqlInterval<T> y, string? precision) =>
+        public override int? Compare(CqlInterval<T>? left, CqlInterval<T>? right, string? precision)
+        {
+            if (left == null || right == null)
+                return null;
+
+            var xLow = left.lowClosed ?? false ? left.low : Successor(left.low);
+            var yLow = right.lowClosed ?? false ? right.low : Successor(right.low);
+            var xHigh = left.highClosed ?? false ? left.high : Predecessor(left.high);
+            var yHigh = right.highClosed ?? false ? right.high : Predecessor(right.high);
+
+            if (xLow == null)
+            {
+                if (yLow == null)
+                {
+                    if (xHigh == null)
+                    {
+                        if (yHigh == null)
+                            return 0;
+                        else return -1;
+                    }
+                    else if (yHigh == null)
+                        return 1;
+                    else return PointComparer.Compare(xHigh, yHigh, precision);
+                }
+                else return -1;
+            }
+            else if (yLow == null)
+                return 1;
+            else
+            {
+                var low = PointComparer.Compare(xLow, yLow, precision);
+                if (low == 0)
+                {
+                    if (xHigh == null)
+                    {
+                        if (yHigh == null)
+                            return 0;
+                        else return -1;
+                    }
+                    else if (yHigh == null)
+                        return 1;
+                    else return PointComparer.Compare(xHigh, yHigh, precision);
+                }
+                else return low;
+            }
+        }
+
+        protected override bool EquivalentValues(CqlInterval<T> x, CqlInterval<T> y, string? precision) =>
             Compare(x, y, precision) == 0;
 
-        public override int GetHashCode(CqlInterval<T>? x) =>
-            x == null
+        public override int GetHashCode(CqlInterval<T>? value) =>
+            value == null
             ? typeof(object).GetHashCode()
-            : x.ToString()!.GetHashCode();
+            : value.ToString()!.GetHashCode();
     }
 }

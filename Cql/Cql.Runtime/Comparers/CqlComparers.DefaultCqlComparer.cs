@@ -16,23 +16,31 @@ partial class CqlComparers
     /// Implements comparison through <see cref="Comparer{T}.Default"/>.
     /// </summary>
     /// <typeparam name="T">The type to compare.</typeparam>
-    private class DefaultCqlComparer<T> : ICqlComparer<T>
+    private class DefaultCqlComparer<T> : CqlComparerNew<T>
     {
         /// <inheritdoc />
-        public int? Compare(T? x, T? y, string? precision = null) => Comparer<T>.Default.Compare(x, y);
+        public override int? Compare(T? left, T? right, string? precision = null) => Comparer<T>.Default.Compare(left, right);
 
         /// <inheritdoc />
-        public bool? Equals(T? x, T? y, string? precision = null) => Comparer<T>.Default.Compare(x, y) == 0;
+        public override bool? Equals(T? left, T? right, string? precision = null) => Comparer<T>.Default.Compare(left, right) == 0;
 
         /// <inheritdoc />
-        public bool Equivalent(T? x, T? y, string? precision = null) =>
-            EquivalentOnNullsOnly(x, y)
-            ?? Compare(x, y, precision) == 0;
+        public override bool Equivalent(T? left, T? right, string? precision = null) =>
+            EquivalentOnNullsOnly(left, right)
+            ?? Compare(left, right, precision) == 0;
 
-        /// <inheritdoc />
-        public int GetHashCode(T? x) =>
-            x is null
-                ? typeof(T).GetHashCode()
-                : EqualityComparer<T>.Default.GetHashCode(x);
+        protected override int GetHashCodeValue([DisallowNull] T value)
+        {
+            var hash = EqualityComparer<T>.Default.GetHashCode(value);
+            var hash2 = value.GetHashCode();
+            Trace.Assert(hash == hash2);
+            return hash;
+        }
+
+        // /// <inheritdoc />
+        // public int GetHashCode(T? value) =>
+        //     value is null
+        //         ? typeof(T).GetHashCode()
+        //         : EqualityComparer<T>.Default.GetHashCode(value);
     }
 }

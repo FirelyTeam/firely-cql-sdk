@@ -13,14 +13,15 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    private class TupleBaseTypeComparer(CqlComparers memberComparer) : ICqlComparer<TupleBaseType?>
+    private class TupleBaseTypeComparer(CqlComparers memberComparer) : CqlComparer<TupleBaseType?>
     {
-        public int? Compare(TupleBaseType? x, TupleBaseType? y, string? precision = null)
+        protected override int? CompareValues(
+            TupleBaseType left,
+            TupleBaseType right,
+            string? precision = null)
         {
-            if (x == null || y == null)
-                return null;
-            var xType = x.GetType();
-            var yType = y.GetType();
+            var xType = left.GetType();
+            var yType = right.GetType();
             if (xType != yType)
                 return null;
             var joined = from xProp in xType.GetProperties()
@@ -29,8 +30,8 @@ partial class CqlComparers
                          select new
                          {
                              Property = xProp,
-                             XValue = xProp.GetValue(x),
-                             YValue = foundY == null ? null : foundY.GetValue(y)
+                             XValue = xProp.GetValue(left),
+                             YValue = foundY == null ? null : foundY.GetValue(right)
                          };
 
             foreach (var prop in joined)
@@ -42,20 +43,47 @@ partial class CqlComparers
 
             return 0;
         }
+        // public int? Compare(TupleBaseType? left, TupleBaseType? right, string? precision = null)
+        // {
+        //     if (left == null || right == null)
+        //         return null;
+        //     var xType = left.GetType();
+        //     var yType = right.GetType();
+        //     if (xType != yType)
+        //         return null;
+        //     var joined = from xProp in xType.GetProperties()
+        //                  join yProp in yType.GetProperties() on xProp equals yProp into g
+        //                  from foundY in g.DefaultIfEmpty()
+        //                  select new
+        //                  {
+        //                      Property = xProp,
+        //                      XValue = xProp.GetValue(left),
+        //                      YValue = foundY == null ? null : foundY.GetValue(right)
+        //                  };
+        //
+        //     foreach (var prop in joined)
+        //     {
+        //         var compare = memberComparer.Compare(prop.XValue, prop.YValue, precision);
+        //         if (compare is null or not 0)
+        //             return compare;
+        //     }
+        //
+        //     return 0;
+        // }
 
-        public int GetHashCode(TupleBaseType? obj) =>
-            obj?.GetHashCode() ?? typeof(TupleBaseType).GetHashCode() ^ 098174506;
+        // public int GetHashCode(TupleBaseType? value) =>
+        //     value?.GetHashCode() ?? typeof(TupleBaseType).GetHashCode() ^ 098174506;
 
-        public bool? Equals(TupleBaseType? x, TupleBaseType? y, string? precision = null) =>
-            Compare(x, y, null) == 0;
+        // public bool? Equals(TupleBaseType? left, TupleBaseType? right, string? precision = null) =>
+        //     Compare(left, right, null) == 0;
 
-        public bool Equivalent(TupleBaseType? x, TupleBaseType? y, string? precision = null)
+        protected override bool EquivalentValues(
+            TupleBaseType? left,
+            TupleBaseType? right,
+            string? precision = null)
         {
-            if (EquivalentOnNullsOnly(x, y) is { } r)
-                return r;
-
-            var xType = x!.GetType();
-            var yType = y!.GetType();
+            var xType = left!.GetType();
+            var yType = right!.GetType();
             if (xType != yType)
                 return false;
             var joined = from xProp in xType.GetProperties()
@@ -64,8 +92,8 @@ partial class CqlComparers
                          select new
                          {
                              Property = xProp,
-                             XValue = xProp.GetValue(x),
-                             YValue = foundY == null ? null : foundY.GetValue(y)
+                             XValue = xProp.GetValue(left),
+                             YValue = foundY == null ? null : foundY.GetValue(right)
                          };
             foreach (var prop in joined)
             {
@@ -74,5 +102,30 @@ partial class CqlComparers
             }
             return true;
         }
+        // public bool Equivalent(TupleBaseType? left, TupleBaseType? right, string? precision = null)
+        // {
+        //     if (EquivalentOnNullsOnly(left, right) is { } r)
+        //         return r;
+        //
+        //     var xType = left!.GetType();
+        //     var yType = right!.GetType();
+        //     if (xType != yType)
+        //         return false;
+        //     var joined = from xProp in xType.GetProperties()
+        //                  join yProp in yType.GetProperties() on xProp equals yProp into g
+        //                  from foundY in g.DefaultIfEmpty()
+        //                  select new
+        //                  {
+        //                      Property = xProp,
+        //                      XValue = xProp.GetValue(left),
+        //                      YValue = foundY == null ? null : foundY.GetValue(right)
+        //                  };
+        //     foreach (var prop in joined)
+        //     {
+        //         if (!memberComparer.Equivalent(prop.XValue, prop.YValue, precision))
+        //             return false;
+        //     }
+        //     return true;
+        // }
     }
 }

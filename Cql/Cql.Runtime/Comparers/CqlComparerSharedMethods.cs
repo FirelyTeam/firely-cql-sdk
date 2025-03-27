@@ -83,42 +83,63 @@ file interface IAdapter
     public object Inner { get; }
 }
 
-file class NonGenericAdapterCqlComparer<T>(ICqlComparer<T> genericComparer) : ICqlComparer<object>, IAdapter
+file class NonGenericAdapterCqlComparer<T>(ICqlComparer<T> genericComparer) : CqlComparerNew<object>, IAdapter
 {
-    public bool Equivalent(
-        object? x,
-        object? y,
-        string? precision)
-    {
-        var result = EquivalentOnNullsOnly(x, y)
-                     ?? genericComparer.Equivalent((T)x!, (T)y!, precision);
-        return result;
-    }
+    protected override bool EquivalentValues(
+        object left,
+        object right,
+        string? precision) =>
+        genericComparer.Equivalent((T)left, (T)right, precision);
 
-    public bool? Equals(
-        object? x,
-        object? y,
-        string? precision)
-    {
-        var result = EquivalentOnNullsOnly(x, y)
-                     ?? genericComparer.Equals((T)x!, (T)y!, precision);
-        return result;
-    }
+    protected override bool? EqualsValues(
+        object left,
+        object right,
+        string? precision) =>
+        genericComparer.Equals((T)left, (T)right, precision);
 
-    public int? Compare(
-        object? x,
-        object? y,
-        string? precision)
-    {
-        var result = CompareOnNullsOnly(x, y) ?? genericComparer.Compare((T)x!, (T)y!, precision);
-        return result;
-    }
+    protected override int? CompareValues(
+        object left,
+        object right,
+        string? precision) =>
+        genericComparer.Compare((T)left, (T)right, precision);
 
-    public int GetHashCode(object? x)
-    {
-        var result = x is null ? GetHashCodeForType<T>() : genericComparer.GetHashCode((T)x);
-        return result;
-    }
+    protected override int GetHashCodeValue(object value) =>
+        genericComparer.GetHashCode((T)value);
+
+    // public bool Equivalent(
+    //     object? x,
+    //     object? y,
+    //     string? precision)
+    // {
+    //     var result = EquivalentOnNullsOnly(x, y)
+    //                  ?? genericComparer.Equivalent((T)x!, (T)y!, precision);
+    //     return result;
+    // }
+    //
+    // public bool? Equals(
+    //     object? left,
+    //     object? right,
+    //     string? precision)
+    // {
+    //     var result = EquivalentOnNullsOnly(left, right)
+    //                  ?? genericComparer.Equals((T)left!, (T)right!, precision);
+    //     return result;
+    // }
+    //
+    // public int? Compare(
+    //     object? left,
+    //     object? right,
+    //     string? precision)
+    // {
+    //     var result = CompareOnNullsOnly(left, right) ?? genericComparer.Compare((T)left!, (T)right!, precision);
+    //     return result;
+    // }
+    //
+    // public int GetHashCode(object? value)
+    // {
+    //     var result = value is null ? GetHashCodeForType<T>() : genericComparer.GetHashCode((T)value);
+    //     return result;
+    // }
 
     object IAdapter.Inner => genericComparer;
 }

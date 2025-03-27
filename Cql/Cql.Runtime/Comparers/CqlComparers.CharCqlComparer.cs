@@ -12,31 +12,60 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    private class CharCqlComparer(StringCqlComparer stringCqlComparer) : ICqlComparer<char?>
+    private class CharCqlComparer(ICqlComparer<string> stringCqlComparer) : CqlComparerNew<char?>
     {
-        private StringCqlComparer StringCqlComparer { get; } = stringCqlComparer ?? throw new ArgumentNullException(nameof(stringCqlComparer));
+        private ICqlComparer<string> StringCqlComparer { get; } = stringCqlComparer ?? throw new ArgumentNullException(nameof(stringCqlComparer));
 
         private static string? CharToString(char? c) => c?.ToString();
 
-        public int? Compare(
-            char? x,
-            char? y,
-            string? precision = null) =>
-            StringCqlComparer.Compare(CharToString(x), CharToString(y), precision);
+        protected override int? CompareValues(
+            [DisallowNull] char? left,
+            [DisallowNull] char? right,
+            string? precision)
+        {
+            return StringCqlComparer.CompareValues(left.Value.ToString(), right.Value.ToString(), precision);
+        }
 
-        public bool? Equals(
-            char? x,
-            char? y,
-            string? precision = null) =>
-            StringCqlComparer.Equals(CharToString(x), CharToString(y), precision);
+        // public int? Compare(
+        //     char? left,
+        //     char? right,
+        //     string? precision = null) =>
+        //     StringCqlComparer.Compare(CharToString(left), CharToString(right), precision);
 
-        public bool Equivalent(
-            char? x,
-            char? y,
-            string? precision = null) =>
-            StringCqlComparer.Equivalent(CharToString(x), CharToString(y), precision);
+        protected override bool? EqualsValues(
+            [DisallowNull] char? left,
+            [DisallowNull] char? right,
+            string? precision)
+        {
+            return StringCqlComparer.EqualsValues(left.Value.ToString(), right.Value.ToString(), precision);
+        }
 
-        public int GetHashCode(char? x) =>
-            StringCqlComparer.GetHashCode(CharToString(x));
+        // public bool? Equals(
+        //     char? left,
+        //     char? right,
+        //     string? precision = null) =>
+        //     StringCqlComparer.Equals(CharToString(left), CharToString(right), precision);
+
+        protected override bool EquivalentValues(
+            [DisallowNull] char? left,
+            [DisallowNull] char? right,
+            string? precision)
+        {
+            return StringCqlComparer.EquivalentValues(left.Value.ToString(), right.Value.ToString(), precision);
+        }
+
+        // public bool Equivalent(
+        //     char? left,
+        //     char? right,
+        //     string? precision = null) =>
+        //     StringCqlComparer.Equivalent(CharToString(left), CharToString(right), precision);
+
+        protected override int GetHashCodeValue([DisallowNull] char? value)
+        {
+            return StringCqlComparer.GetHashCodeValue(value.Value.ToString());
+        }
+
+        // public int GetHashCode(char? value) =>
+        //     StringCqlComparer.GetHashCode(CharToString(value));
     }
 }

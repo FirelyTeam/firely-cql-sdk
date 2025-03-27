@@ -12,41 +12,69 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    private class DecimalCqlComparer : ICqlComparer<decimal?>
+    private class DecimalCqlComparer : CqlComparerNew<decimal?>
     {
         // CQL only supports 8 digits of scale.
         private const int MaxDecimalDigits = 8;
 
-        public int? Compare(decimal? x, decimal? y, string? precision = null)
+        protected override int? CompareValues(
+            [DisallowNull] decimal? left,
+            [DisallowNull] decimal? right,
+            string? precision)
         {
-            var result = CompareOnNullsOnly(x, y) ?? Comparer<decimal?>.Default.Compare(TruncateDigits(x ?? 0, MaxDecimalDigits), TruncateDigits(y ?? 0, MaxDecimalDigits));
-            return result;
+            return Comparer<decimal?>.Default.Compare(TruncateDigits(left ?? 0, MaxDecimalDigits), TruncateDigits(right ?? 0, MaxDecimalDigits));
         }
 
-        public bool? Equals(decimal? x, decimal? y, string? precision = null)
+        // public int? Compare(decimal? left, decimal? right, string? precision = null)
+        // {
+        //     var result = CompareOnNullsOnly(left, right) ?? Comparer<decimal?>.Default.Compare(TruncateDigits(left ?? 0, MaxDecimalDigits), TruncateDigits(right ?? 0, MaxDecimalDigits));
+        //     return result;
+        // }
+
+        protected override int GetEqualsStrategy()
         {
-            var result = EquivalentOnNullsOnly(x, y)
-                         ?? Comparer<decimal>.Default.Compare(x!.Value, y!.Value) == 0;
-            return result;
+            return EQUALS_VIA_COMPARE;
         }
 
-        public bool Equivalent(decimal? x, decimal? y, string? precision = null)
-        {
-            if (EquivalentOnNullsOnly(x, y) is { } r)
-                return r;
+        // public bool? Equals(decimal? left, decimal? right, string? precision = null)
+        // {
+        //     var result = EquivalentOnNullsOnly(left, right)
+        //                  ?? Comparer<decimal>.Default.Compare(left!.Value, right!.Value) == 0;
+        //     return result;
+        // }
 
-            var @thisPrecision = GetPrecision(x!.Value!);
-            var otherPrecision = GetPrecision(y!.Value!);
+        protected override bool EquivalentValues(
+            [DisallowNull] decimal? left,
+            [DisallowNull] decimal? right,
+            string? precision)
+        {
+            var @thisPrecision = GetPrecision(left.Value);
+            var otherPrecision = GetPrecision(right.Value);
             if (@thisPrecision < otherPrecision)
-                y = decimal.Round(y!.Value!, thisPrecision);
+                right = decimal.Round(right.Value, thisPrecision);
             else if (thisPrecision > otherPrecision)
-                x = decimal.Round(x!.Value!, otherPrecision);
-            var areEqual = x == y;
+                left = decimal.Round(left.Value, otherPrecision);
+            var areEqual = left == right;
             return areEqual;
         }
 
-        public int GetHashCode(decimal? x) =>
-            x?.GetHashCode() ?? GetHashCodeForType<decimal>();
+        // public bool Equivalent(decimal? left, decimal? right, string? precision = null)
+        // {
+        //     if (EquivalentOnNullsOnly(left, right) is { } r)
+        //         return r;
+        //
+        //     var @thisPrecision = GetPrecision(left!.Value);
+        //     var otherPrecision = GetPrecision(right!.Value);
+        //     if (@thisPrecision < otherPrecision)
+        //         right = decimal.Round(right.Value, thisPrecision);
+        //     else if (thisPrecision > otherPrecision)
+        //         left = decimal.Round(left.Value, otherPrecision);
+        //     var areEqual = left == right;
+        //     return areEqual;
+        // }
+
+        // public int GetHashCode(decimal? value) =>
+        //     value?.GetHashCode() ?? GetHashCodeForType<decimal>();
 
         private static int GetPrecision(decimal value) => BitConverter.GetBytes(decimal.GetBits(value)[3])[2];
 
