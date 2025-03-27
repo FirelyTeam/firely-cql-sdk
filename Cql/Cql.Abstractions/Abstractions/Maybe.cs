@@ -6,15 +6,18 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-#pragma warning disable CS0414 // Field is assigned but its value is never used
+using JetBrains.Annotations;
+
 namespace Hl7.Cql.Abstractions;
 
 internal readonly struct Maybe
 {
+    [UsedImplicitly]
     public static readonly Maybe NoValue = default;
+
     public static Maybe<T> NoValueOf<T>() => default;
 
-    public static Maybe<T> Value<T>(T value) => new(value);
+    public static Maybe<T> ValueOf<T>(T value) => new(value);
 }
 
 internal readonly struct Maybe<T>(T value) : IEquatable<Maybe<T>>
@@ -27,7 +30,7 @@ internal readonly struct Maybe<T>(T value) : IEquatable<Maybe<T>>
     public static implicit operator Maybe<T>(Maybe _) => default;
 
     /// <summary>
-    /// This will always be true, when the Maybe is created with the <see cref="Maybe.Value{T}(T)"/> method or via the <see cref="Maybe{T}(T)"/> constructor.
+    /// This will always be true, when the Maybe is created with the <see cref="Maybe.ValueOf{T}"/> method or via the <see cref="Maybe{T}(T)"/> constructor.
     /// Default constructed Maybe will always have HasValue as false.
     /// </summary>
     public bool HasValue { get; } = true; // NOTE: Do NOT change this to `public bool HasValue => true;`
