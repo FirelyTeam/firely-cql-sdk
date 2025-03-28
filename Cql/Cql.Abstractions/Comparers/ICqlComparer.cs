@@ -6,7 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Abstractions
+namespace Hl7.Cql.Comparers
 {
     /// <summary>
     /// Defines a method that a type implements to compare two objects.

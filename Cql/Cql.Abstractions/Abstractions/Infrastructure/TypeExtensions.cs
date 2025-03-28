@@ -72,41 +72,38 @@ internal static class TypeExtensions
     }
 
     /// <summary>
-    /// Checks if the specified type is implementing the specified generic type definition.
+    /// Checks if the specified type is implementing the specified type.
     /// </summary>
     /// <param name="type">The type to check.</param>
-    /// <param name="genericTypeDefinition">The generic type definition to check against.</param>
+    /// <param name="typeOrTypeDef">The type of generic type definition to check against.</param>
     /// <returns>True if the type is implementing the generic type definition, false otherwise.</returns>
-    public static bool IsImplementingGenericTypeDefinition(this Type type, Type genericTypeDefinition) =>
-        GetTypeImplementingGenericTypeDefinition(type, genericTypeDefinition) is not null;
+    public static bool IsImplementingInterface(this Type type, Type typeOrTypeDef) =>
+        GetTypeImplementingInterface(type, typeOrTypeDef) is not null;
 
     /// <summary>
-    /// Checks if the specified type is implementing the specified generic type definition
-    /// and if it is, returns the type or the interface type that implements it; otherwise
-    /// returns <c>null</c>.
+    /// Checks if the specified type is implementing the specified type and if it is,
+    /// returns the type or the interface type that implements it;
+    /// otherwise returns <c>null</c>.
     /// </summary>
     /// <param name="type">The type to check.</param>
-    /// <param name="genericTypeDefinition">The generic type definition to check against.</param>
+    /// <param name="typeOrTypeDef">The type of generic type definition to check against.</param>
     /// <returns>The type which implements the generic type definition, otherwise null.</returns>
-    public static Type? GetTypeImplementingGenericTypeDefinition(this Type type, Type genericTypeDefinition)
+    public static Type? GetTypeImplementingInterface(this Type type, Type typeOrTypeDef)
     {
-        if (!genericTypeDefinition.IsGenericTypeDefinition)
-            throw new ArgumentException("Must be a generic type definition.", nameof(genericTypeDefinition));
+        if (!typeOrTypeDef.IsGenericTypeDefinition)
+            return typeOrTypeDef.IsAssignableFrom(type) ? type : null;
 
-        if (type.IsGenericType && type.GetGenericTypeDefinition() == genericTypeDefinition)
+        if (MatchesGenericTypeDef(type))
             return type;
 
         var result =  type
                      .GetInterfaces()
-                     .SelectWhere(t =>
-                     {
-                         if (t.IsGenericType
-                             && t.GetGenericTypeDefinition() == genericTypeDefinition)
-                             return (true, t);
-                         return default;
-                     })
+                     .SelectWhere(t => MatchesGenericTypeDef(t) ? (true, t) : default)
                      .SingleOrDefault();
         return result;
+
+        bool MatchesGenericTypeDef(Type t) =>
+            t.IsGenericType && t.GetGenericTypeDefinition() == typeOrTypeDef;
     }
 
     /// <summary>

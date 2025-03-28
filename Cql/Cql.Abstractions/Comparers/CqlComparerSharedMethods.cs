@@ -9,21 +9,48 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Infrastructure;
+using JetBrains.Annotations;
 
 namespace Hl7.Cql.Comparers;
 
 internal static class CqlComparerSharedMethods
 {
-    /*
-     *
-     * Equivalence : https://cql.hl7.org/04-logicalspecification.html#equivalent
-     *
-     * The Equivalent operator returns:
-     * - true if the arguments are the same value, or if they are both null;
-     * - and false otherwise.
-     *
-     * With the exception of null behavior and the semantics for specific types defined below, equivalence is the same as equality.
-     */
+    internal static Maybe<bool?> EqualsNulls(bool leftIsNull, bool rightIsNull)
+    {
+        var result = (leftIsNull, rightIsNull) switch
+        {
+            (true, true) => true,
+            (true, _)    => false,
+            (_, true)    => false,
+            _            => Maybe.NoValueOf<bool?>(),
+        };
+        return result;
+    }
+
+    /// <summary>
+    /// The Equivalent operator returns:
+    /// <list type="bullet">
+    ///     <item>true if the arguments are the same value, or if they are both null;</item>
+    ///     <item>false otherwise</item>
+    /// </list>
+    /// <para>
+    ///     Equivalence is the same as equality except for null behavior and the semantics for specific types.
+    /// </para>
+    /// <para>
+    ///     For more read <a href="https://cql.hl7.org/04-logicalspecification.html#equivalent">the spec</a>.
+    /// </para>
+    /// </summary>
+    internal static Maybe<bool> EquivalentNulls(bool leftIsNull, bool rightIsNull)
+    {
+        var result = (leftIsNull, rightIsNull) switch
+        {
+            (true, true) => true,
+            (true, _)    => false,
+            (_, true)    => false,
+            _            => NoValueOf<bool>(),
+        };
+        return result;
+    }
 
     internal static bool? EquivalentOnNullsOnly<T>(
         [NoEnumeration, NotNullWhen(true)] T? left,
@@ -31,27 +58,40 @@ internal static class CqlComparerSharedMethods
         (left, right) switch
         {
             (null, null) => true,
-            (null, _)    => false,
-            (_, null)    => false,
-            _            => null
+            (null, _) => false,
+            (_, null) => false,
+            _ => null
         };
 
-    internal static int? CompareOnNullsOnly<T>(
-        [NoEnumeration, NotNullWhen(true)] T? left,
-        [NoEnumeration, NotNullWhen(true)] T? right) =>
-        (left, right) switch
+    internal static Maybe<int?> CompareEitherNullReturnsNull(
+        bool leftIsNull,
+        bool rightIsNull)
+    {
+        return (leftIsNull, rightIsNull) switch
         {
-            (null, null) => 0,
-            (null, _)    => -1,
-            (_, null)    => 1,
-            _            => null
+            (true, true) => 0,
+            (true, _) => null,
+            (_, true) => null,
+            _ => NoValueOf<int?>(),
         };
+    }
 
-    internal static int GetHashCodeForType<T>() => typeof(T).GetHashCode();
+    internal static Maybe<int?> CompareEitherNullReturnsValue(
+        bool leftIsNull,
+        bool rightIsNull)
+    {
+        return (leftIsNull, rightIsNull) switch
+        {
+            (true, true) => 0,
+            (true, _) => 1,
+            (_, true) => -1,
+            _ => NoValueOf<int?>(),
+        };
+    }
 
     internal static ICqlComparer<object> CreateCqlComparerAndUnwrapNonGeneric(Type comparerType, params object[] args)
     {
-        var icqlComparerType = comparerType.GetTypeImplementingGenericTypeDefinition(typeof(ICqlComparer<>));
+        var icqlComparerType = comparerType.GetTypeImplementingInterface(typeof(ICqlComparer<>));
         if (icqlComparerType is null)
             throw new ArgumentException("comparerType must be ICqlComparer<T>", nameof(comparerType));
 

@@ -14,10 +14,20 @@ partial class CqlComparers
     {
         public int Compare(T? x, T? y)
         {
-            var result = CompareOnNullsOnly(x, y) ?? through.Compare(x!, y!);
+            var result = CompareEitherNullReturnsValue(x is null, y is null)
+                             .OrValue(() => null)
+                         ?? CompareValues(x, y);
             return result;
         }
 
-        public int Compare(object? x, object? y) => Compare((T?)x, (T?)y);
+        private int CompareValues(T? x, T? y)
+        {
+            return through.Compare(x!, y!);
+        }
+
+        public int Compare(object? x, object? y)
+        {
+            return Compare((T?)x, (T?)y);
+        }
     }
 }

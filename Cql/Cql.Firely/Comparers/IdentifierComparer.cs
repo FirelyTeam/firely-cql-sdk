@@ -5,7 +5,7 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
-using Hl7.Cql.Abstractions;
+using Hl7.Cql.Comparers;
 using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir.Comparers

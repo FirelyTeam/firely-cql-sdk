@@ -8,7 +8,6 @@
 
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
-using Hl7.Cql.Abstractions;
 
 namespace Hl7.Cql.ValueSets
 {

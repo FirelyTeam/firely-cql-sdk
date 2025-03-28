@@ -6,7 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Abstractions;
+using Hl7.Cql.Abstractions;
+
+namespace Hl7.Cql.Comparers;
 
 internal class CqlComparerAdapter<TInner, TOuter>(
     ICqlComparer<TInner> inner,

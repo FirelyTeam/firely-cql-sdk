@@ -56,20 +56,20 @@ internal readonly struct Maybe<T>(T value) : IEquatable<Maybe<T>>
         else none?.Invoke();
     }
 
-    public T GetValueOr(Func<T> fn)
+    public T OrValue(Func<T> fn)
     {
         if (HasValue) return Value;
         else return fn();
     }
 
-    public T GetValueOr(T value)
+    public T OrValue(T value)
     {
         return HasValue ? Value : value;
     }
 
-    public T GetValueOrDefault()
+    public T OrDefault()
     {
-        return GetValueOr(default(T)!);
+        return OrValue(default(T)!);
     }
 
     public override string? ToString() => Match(v => v?.ToString(), () => "(n/a)");
