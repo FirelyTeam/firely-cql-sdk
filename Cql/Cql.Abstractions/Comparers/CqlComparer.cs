@@ -53,7 +53,7 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
         NullComparisonStrategy = nullComparisonStrategy;
         EqualsMethod = equalsMethod;
         EquivalentMethod = equivalentMethod;
-        //Dump();
+        Dump();
     }
 
     private void Dump()
@@ -122,7 +122,16 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
             case CqlComparerEquivalentMethod.Equivalent:
                 var result =
                     EquivalentNulls(IsNull(left), IsNull(right))
-                        .OrValue(() => EquivalentValues(left!, right!, precision));
+                        .OrValue(() =>
+                        {
+                            if (ReferenceEquals(left, right))
+                                return true;
+
+                            if (Equals(left, right))
+                                return true;
+
+                            return EquivalentValues(left!, right!, precision);
+                        });
                 return result;
 
             default:
@@ -150,7 +159,13 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
 
             case CqlComparerEqualsMethod.Equal:
                 var result = EqualsNulls(IsNull(left), IsNull(right))
-                    .OrValue(() => EqualsValues(left!, right!, precision));
+                    .OrValue(() =>
+                    {
+                        if (Equals(left, right))
+                            return true;
+
+                        return EqualsValues(left!, right!, precision);
+                    });
                 return result;
 
             default:
@@ -185,7 +200,13 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
     {
         var result =
             CompareNulls(left, right)
-                .OrValue(() => CompareValues(left!, right!, precision));
+                .OrValue(() =>
+                {
+                    if (Equals(left, right))
+                        return 0;
+
+                    return CompareValues(left!, right!, precision);
+                });
         return result;
     }
 

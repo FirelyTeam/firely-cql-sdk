@@ -66,13 +66,15 @@ namespace Hl7.Cql.Fhir.Extensions
         private enum DummyEnum {}
 
         private class PrimitiveTypeAgainstStringComparer(ICqlComparer<object> inner) :
-            CqlComparer<object>(equivalentMethod: CqlComparerEquivalentMethod.Compare)
+            CqlComparer<object>(
+                equalsMethod: CqlComparerEqualsMethod.Compare,
+                equivalentMethod: CqlComparerEquivalentMethod.Compare)
         {
             private readonly CqlComparer<object>? _innerCqlComparer = inner as CqlComparer<object>;
 
-            public override int? Compare(
-                object? left,
-                object? right,
+            protected internal override int? CompareValues(
+                object left,
+                object right,
                 string? precision)
             {
                 // We always expect x to be a Code<T> but we only need the ObjectValue on the non-generic base type PrimitiveType.
@@ -85,14 +87,6 @@ namespace Hl7.Cql.Fhir.Extensions
                     return StringComparer.Ordinal.Compare(xCode.ObjectValue, yString);
                 }
 
-                return base.Compare(left, right, precision);
-            }
-
-            protected internal override int? CompareValues(
-                object left,
-                object right,
-                string? precision)
-            {
                 return _innerCqlComparer != null
                            ? _innerCqlComparer.CompareValues(left, right, precision)
                            : inner.Compare(left, right, precision);

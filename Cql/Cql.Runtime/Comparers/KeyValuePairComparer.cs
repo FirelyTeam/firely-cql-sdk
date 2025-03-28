@@ -10,7 +10,7 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    internal class KeyValuePairComparer<TKey, TValue>(ICqlComparer<object> cqlComparer) :
+    internal class KeyValuePairComparer<TKey, TValue>(CqlComparers keyValueComparer) :
         CqlComparer<KeyValuePair<TKey, TValue>>
     {
         /// <inheritdoc />
@@ -18,9 +18,9 @@ partial class CqlComparers
             KeyValuePair<TKey, TValue> left,
             KeyValuePair<TKey, TValue> right,
             string? precision) =>
-            cqlComparer.Compare(left.Key, right.Key, precision) switch
+            keyValueComparer.Compare(left.Key, right.Key, precision) switch
             {
-                0     => cqlComparer.Compare(left.Value, right.Value, precision),
+                0     => keyValueComparer.Compare(left.Value, right.Value, precision),
                 var i => i
             };
 
@@ -29,9 +29,9 @@ partial class CqlComparers
             KeyValuePair<TKey, TValue> left,
             KeyValuePair<TKey, TValue> right,
             string? precision) =>
-            cqlComparer.Equals(left.Key, right.Key, precision) switch
+            keyValueComparer.Equals(left.Key, right.Key, precision) switch
             {
-                true  => cqlComparer.Equals(left.Value, right.Value, precision),
+                true  => keyValueComparer.Equals(left.Value, right.Value, precision),
                 var b => b
             };
 
@@ -46,7 +46,7 @@ partial class CqlComparers
         /// <inheritdoc />
         protected override int GetHashCodeValue(KeyValuePair<TKey, TValue> value) =>
             HashCode.Combine(
-                cqlComparer.GetHashCode(value.Key),
-                cqlComparer.GetHashCode(value.Value));
+                keyValueComparer.GetHashCode(value.Key),
+                keyValueComparer.GetHashCode(value.Value));
     }
 }

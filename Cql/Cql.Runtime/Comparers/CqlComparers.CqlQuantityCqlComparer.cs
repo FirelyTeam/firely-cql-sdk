@@ -37,18 +37,16 @@ partial class CqlComparers
                 var valueComparison = ValueComparer.Compare(left.value, right.value, precision);
                 return valueComparison;
             }
-            else
+
+            // If no direct comparison is possible, normalize the units using UCUM and
+            // redo the comparison.
+            if (left.TryCanonicalize(out var left1) && right.TryCanonicalize(out var right1))
             {
-                // If no direct comparison is possible, normalize the units using UCUM and
-                // redo the comparison.
-                if (left.TryCanonicalize(out var left1) && right.TryCanonicalize(out var right1))
-                {
-                    var valueComparison = ValueComparer.Compare(left1!.value!, right1!.value!, precision);
-                    return valueComparison;
-                }
-                else
-                    throw new NotSupportedException($"Comparison against unlike units {left.unit} and {right.unit} is not supported.");
+                var valueComparison = ValueComparer.Compare(left1!.value!, right1!.value!, precision);
+                return valueComparison;
             }
+
+            throw new NotSupportedException($"Comparison against unlike units {left.unit} and {right.unit} is not supported.");
         }
 
         protected internal override bool EquivalentValues(
@@ -68,7 +66,7 @@ partial class CqlComparers
 
         protected override int GetHashCodeValue(CqlQuantity value)
         {
-            return value.ToString()?.GetHashCode() ?? 0;
+            return value.ToString()?.GetHashCode() ?? GetHashCodeForNull();
         }
     }
 }

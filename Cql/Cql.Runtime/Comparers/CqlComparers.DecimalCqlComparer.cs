@@ -38,7 +38,8 @@ partial class CqlComparers
             return areEqual;
         }
 
-        private static int GetPrecision(decimal value) => BitConverter.GetBytes(decimal.GetBits(value)[3])[2];
+        private static int GetPrecision(decimal value) =>
+            BitConverter.GetBytes(decimal.GetBits(value)[3])[2];
 
         private static decimal TruncateDigits(decimal value, int places)
         {
