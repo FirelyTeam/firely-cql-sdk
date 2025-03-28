@@ -53,7 +53,7 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
         NullComparisonStrategy = nullComparisonStrategy;
         EqualsMethod = equalsMethod;
         EquivalentMethod = equivalentMethod;
-        Dump();
+        //Dump();
     }
 
     private void Dump()
