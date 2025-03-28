@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Comparers
@@ -14,7 +13,7 @@ namespace Hl7.Cql.Comparers
     /// <summary>
     /// Implements <see cref="ICqlComparer{Object}"/> by dispatching to registerred typed comparers.
     /// </summary>
-    internal sealed partial class CqlComparers : CqlComparer<object>
+    internal sealed partial class CqlComparers
     {
         /// <summary>
         /// Creates an instance with built-in comparers for system types registerred.
@@ -55,7 +54,7 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(IEnumerable), new ListEqualComparer(this));
             Comparers.TryAdd(typeof(CqlQuantity), new CqlQuantityCqlComparer(this, this));
             Comparers.TryAdd(typeof(CqlConcept), new CqlConceptCqlComparer(this));
-            Comparers.TryAdd(typeof(CqlCode), CqlCodeCqlComparer.Default);
+            Comparers.TryAdd(typeof(CqlCode), CqlCodeCqlComparer.OrdinalIgnoreCase);
             Comparers.TryAdd(typeof(CqlDate), new InterfaceCqlComparer<CqlDate>());
             Comparers.TryAdd(typeof(CqlTime), new InterfaceCqlComparer<CqlTime>());
             Comparers.TryAdd(typeof(CqlDateTime), new InterfaceCqlComparer<CqlDateTime>());
@@ -66,14 +65,16 @@ namespace Hl7.Cql.Comparers
             ComparerFactories.TryAdd(typeof(Nullable<>), (type, self) =>
             {
                 var genericType = typeof(NullComparer<>).MakeGenericType(Nullable.GetUnderlyingType(type)!);
-                var cqlComparer = CreateCqlComparerAndUnwrapNonGeneric(genericType, self);
+                object comparer = Activator.CreateInstance(genericType, [self])!;
+                ICqlComparer<object> cqlComparer = ToObjectCqlComparer(comparer);
                 return cqlComparer;
             });
             ComparerFactories.TryAdd(typeof(KeyValuePair<,>), (type, self) =>
             {
                 var genericArguments = type.GetGenericArguments();
                 var genericType = typeof(KeyValuePairComparer<,>).MakeGenericType(genericArguments);
-                var cqlComparer = CreateCqlComparerAndUnwrapNonGeneric(genericType, self);
+                object comparer = Activator.CreateInstance(genericType, [self])!;
+                ICqlComparer<object> cqlComparer = ToObjectCqlComparer(comparer);
                 return cqlComparer;
             });
         }
@@ -169,122 +170,6 @@ namespace Hl7.Cql.Comparers
             ComparerFactories.TryRemove(type, out _);
             return this;
         }
-
-        #region ICqlComparer
-
-        /// <inheritdoc />
-        protected internal override int? CompareValues(
-            object left,
-            object right,
-            string? precision)
-        {
-            bool xySwapped = false;
-            var xType = GetKeyTypeForComparers(left);
-            {
-                var yType = GetKeyTypeForComparers(right);
-                if (xType != yType)
-                {
-                    // if x and y are not the same type, we prioritize them based on the following order:
-                    // 1. If only one type is in the System namespace, we prioritize the other type
-                    if (xType.Namespace == "System" && yType.Namespace != "System")
-                    {
-                        xySwapped = true;
-                        (left, right) = (right, left);
-                        xType = yType; // yType won't be used again, so no need to swap it
-                    }
-                }
-            }
-
-            ICqlComparer<object>? comparer = null;
-            if (Comparers.TryGetValue(xType, out ICqlComparer<object>? c))
-            {
-                comparer = c;
-            }
-            else if (xType.IsGenericType)
-            {
-                var gtd = xType.GetGenericTypeDefinition();
-                if (ComparerFactories.TryGetValue(gtd, out var factory))
-                {
-                    var gc = factory(xType, this);
-                    Comparers.TryAdd(xType, gc);
-                    comparer = gc;
-                }
-                else if (left is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer<object>? enumerableComparer))
-                {
-                    comparer = enumerableComparer;
-                }
-            }
-            else if (left is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer<object>? listComparer))
-            {
-                comparer = listComparer;
-            }
-
-            if (comparer != null)
-            {
-                var result = comparer.Compare(left, right, precision);
-                if (xySwapped) result = -result;
-                return result;
-            }
-            else
-                throw new ArgumentException($"Cannot compare type {xType.Name}");
-        }
-
-        /// <inheritdoc />
-        protected internal override bool EquivalentValues(
-            object left,
-            object right,
-            string? precision)
-        {
-            var xType = GetKeyTypeForComparers(left);
-
-            if (Comparers.TryGetValue(xType, out ICqlComparer<object>? comparer))
-            {
-                return comparer.Equivalent(left, right, precision);
-            }
-            else
-            {
-                if (xType.IsGenericType)
-                {
-                    var gtd = xType.GetGenericTypeDefinition();
-                    if (ComparerFactories.TryGetValue(gtd, out var factory))
-                    {
-                        var gc = factory(xType, this);
-                        Comparers.TryAdd(xType, gc);
-                        return gc.Equivalent(left, right, precision);
-                    }
-                }
-            }
-
-            throw new ArgumentException($"Cannot check equivalence for type {xType.Name}");
-        }
-
-        /// <inheritdoc />
-        public override int GetHashCode(object? value)
-        {
-            if (value == null)
-                return typeof(object).GetHashCode();
-
-            var xType = GetKeyTypeForComparers(value);
-
-            if (Comparers.TryGetValue(xType, out ICqlComparer<object>? comparer))
-            {
-                return comparer.GetHashCode(value);
-            }
-            else if (value is IEnumerable<object> enumerable)
-            {
-                int hash = typeof(IEnumerable).GetHashCode();
-                var i = 1;
-                foreach (var x in enumerable)
-                {
-                    hash ^= i ^ GetHashCode(x);
-                }
-
-                return hash;
-            }
-            else throw new ArgumentException($"Cannot generate a hash code for {xType.Name}", nameof(value));
-        }
-
-        #endregion ICqlComparer
     }
 
     file static class LocalExtensions
@@ -296,7 +181,7 @@ namespace Hl7.Cql.Comparers
         {
             comparers.AddOrUpdate(
                 type,
-                _ => comparer.WrapNonGeneric(),
+                _ => comparer.ToObjectCqlComparer(),
                 (_, prev) => prev);
         }
 
@@ -308,12 +193,12 @@ namespace Hl7.Cql.Comparers
         {
             comparers.AddOrUpdate(
                 type,
-                _ => addComparer.WrapNonGeneric(),
+                _ => addComparer.ToObjectCqlComparer(),
                 (type, prev) =>
                 {
-                    var prevTyped = prev.UnwrapGeneric<T>()!;
+                    var prevTyped = prev.ToTypedCqlComparer<T>()!;
                     var newTyped = updateComparerFactory(type, prevTyped);
-                    return newTyped.WrapNonGeneric();
+                    return newTyped.ToObjectCqlComparer();
                 });
         }
     }

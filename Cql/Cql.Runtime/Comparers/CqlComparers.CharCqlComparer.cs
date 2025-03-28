@@ -11,5 +11,5 @@ namespace Hl7.Cql.Comparers;
 partial class CqlComparers
 {
     private class CharCqlComparer(ICqlComparer<string> stringCqlComparer) :
-        CqlComparerAdapter<string, char?>(stringCqlComparer, c => c?.ToString());
+        CqlComparerWrapper<char?, string>(stringCqlComparer, c => c?.ToString());
 }

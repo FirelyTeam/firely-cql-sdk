@@ -10,36 +10,36 @@ using Hl7.Cql.Abstractions;
 
 namespace Hl7.Cql.Comparers;
 
-internal class CqlComparerAdapter<TInner, TOuter>(
+internal class CqlComparerWrapper<T, TInner>(
     ICqlComparer<TInner> inner,
-    Func<TOuter, TInner?> getInner) :
-    CqlComparer<TOuter>(
+    Func<T, TInner?> getInner) :
+    CqlComparer<T>(
         inner is CqlComparer<TInner> c1 ? c1.EqualsMethod : default,
         inner is CqlComparer<TInner> c2 ? c2.NullComparisonStrategy : default,
-        inner is CqlComparer<TInner> c3 ? c3.EquivalentMethod : default), IAdapter
+        inner is CqlComparer<TInner> c3 ? c3.EquivalentMethod : default), IWrapper
 {
-    private TInner? GetInner(TOuter? value) => value is null ? default : getInner(value);
+    private TInner? GetInner(T? value) => value is null ? default : getInner(value);
 
     protected internal override bool EquivalentValues(
-        [DisallowNull] TOuter left,
-        [DisallowNull] TOuter right,
+        [DisallowNull] T left,
+        [DisallowNull] T right,
         string? precision) =>
         inner.Equivalent(GetInner(left), GetInner(right), precision);
 
-    protected override bool? EqualsValues(
-        [DisallowNull] TOuter x,
-        [DisallowNull] TOuter y,
+    protected internal override bool? EqualsValues(
+        [DisallowNull] T x,
+        [DisallowNull] T y,
         string? precision) =>
         inner.Equals(GetInner(x), GetInner(y), precision);
 
     protected internal override int? CompareValues(
-        [DisallowNull] TOuter left,
-        [DisallowNull] TOuter right,
+        [DisallowNull] T left,
+        [DisallowNull] T right,
         string? precision) =>
         inner.Compare(GetInner(left), GetInner(right), precision);
 
-    protected override int GetHashCodeValue([DisallowNull] TOuter value) =>
+    protected override int GetHashCodeValue([DisallowNull] T value) =>
         inner.GetHashCode(GetInner(value));
 
-    object IAdapter.Inner => inner;
+    object IWrapper.Inner => inner;
 }

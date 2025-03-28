@@ -25,7 +25,7 @@ partial class CqlComparers
             };
 
         /// <inheritdoc />
-        protected override bool? EqualsValues(
+        protected internal override bool? EqualsValues(
             KeyValuePair<TKey, TValue> left,
             KeyValuePair<TKey, TValue> right,
             string? precision) =>

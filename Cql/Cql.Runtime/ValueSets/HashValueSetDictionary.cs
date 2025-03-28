@@ -38,7 +38,7 @@ namespace Hl7.Cql.ValueSets
         /// <summary>
         /// Creates a new <see cref="HashValueSetDictionary"/> with the default comparer.
         /// </summary>
-        public HashValueSetDictionary() : this(CqlCodeCqlComparer.Default)
+        public HashValueSetDictionary() : this(CqlCodeCqlComparer.OrdinalIgnoreCase)
         {
             // nothing
         }

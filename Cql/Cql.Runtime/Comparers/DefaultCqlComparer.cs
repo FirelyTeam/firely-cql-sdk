@@ -1,0 +1,28 @@
+﻿/*
+ * Copyright (c) 2023, Firely, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+
+namespace Hl7.Cql.Comparers;
+
+/// <summary>
+/// Implements comparison through <see cref="Comparer{T}.Default"/>.
+/// </summary>
+/// <typeparam name="T">The type to compare.</typeparam>
+internal class DefaultCqlComparer<T>() : CqlComparer<T>(
+    equivalentMethod: CqlComparerEquivalentMethod.Compare)
+{
+    public static DefaultCqlComparer<T> Instance { get; } = new();
+
+    protected internal override int? CompareValues(T left, T right, string? precision) =>
+        Comparer<T>.Default.Compare(left, right);
+
+    protected internal override bool? EqualsValues(T left, T right, string? precision) =>
+        Comparer<T>.Default.Compare(left, right) == 0;
+
+    protected override int GetHashCodeValue([DisallowNull] T value) =>
+        EqualityComparer<T>.Default.GetHashCode(value);
+}

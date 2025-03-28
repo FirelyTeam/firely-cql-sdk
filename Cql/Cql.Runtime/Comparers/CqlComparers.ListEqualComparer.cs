@@ -48,7 +48,7 @@ partial class CqlComparers
             return 0;
         }
 
-        protected override bool? EqualsValues(
+        protected internal override bool? EqualsValues(
             IEnumerable left,
             IEnumerable right,
             string? precision)

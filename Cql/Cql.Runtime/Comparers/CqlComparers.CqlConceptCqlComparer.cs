@@ -23,7 +23,7 @@ partial class CqlComparers
             string? precision) =>
             EqualityComparerFactory.Create<CqlCode>(
                 (a, b) => codeComparer.Equivalent(a, b, precision),
-                c => codeComparer.GetHashCode(c));
+                c => codeComparer.GetHashCodeValue(c));
 
         private readonly IEqualityComparer<CqlCode> _codeEquivalenceComparerNoPrecision = NewCodeEquivalenceComparer(codeComparer, null);
 

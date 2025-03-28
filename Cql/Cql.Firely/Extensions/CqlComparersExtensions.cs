@@ -9,7 +9,7 @@
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Fhir.Comparers;
 using Hl7.Fhir.Model;
-using static Hl7.Cql.Comparers.CqlComparerSharedMethods;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Fhir.Extensions
 {
@@ -48,14 +48,22 @@ namespace Hl7.Cql.Fhir.Extensions
             comparers.Register(typeof(Code<>), (type, self) =>
             {
                 Type codeType = type.GetGenericArguments()[0];
-                Type comparerType = typeof(CodeComparer<>).MakeGenericType(codeType);
-                ICqlComparer<object> codeComparerNonGeneric = CreateCqlComparerAndUnwrapNonGeneric(comparerType, self);
+                Trace.Assert(codeType.IsEnum());
+                Type comparerType = typeof(CodeOfEnumCqlComparer<>).MakeGenericType(codeType);
+                var codeOfEnumCqlComparerInstance = comparerType.InvokeMember(
+                    nameof(CodeOfEnumCqlComparer<DummyEnum>.Instance),
+                    BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty,
+                    null, null, [])!;
+                ICqlComparer<object> codeComparerNonGeneric = ToObjectCqlComparer(codeOfEnumCqlComparerInstance);
+                    //CreateCqlComparerAndUnwrapNonGeneric(comparerType, self);
                 PrimitiveTypeAgainstStringComparer primitiveTypeAgainstStringComparer = new PrimitiveTypeAgainstStringComparer(codeComparerNonGeneric);
                 return primitiveTypeAgainstStringComparer;
             });
 
             return comparers;
         }
+
+        private enum DummyEnum {}
 
         private class PrimitiveTypeAgainstStringComparer(ICqlComparer<object> inner) :
             CqlComparer<object>(equivalentMethod: CqlComparerEquivalentMethod.Compare)

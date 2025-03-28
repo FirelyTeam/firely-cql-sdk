@@ -54,7 +54,6 @@ internal class CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer) : Cq
         return sc == 0;
     }
 
-    /// <inheritdoc/>
     public override int GetHashCode(CqlCode? value) =>
         value == null
             ? GetHashCodeForNull()

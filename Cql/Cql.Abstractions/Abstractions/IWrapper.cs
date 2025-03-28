@@ -8,7 +8,7 @@
 
 namespace Hl7.Cql.Abstractions;
 
-internal interface IAdapter
+internal interface IWrapper
 {
     public object Inner { get; }
 }

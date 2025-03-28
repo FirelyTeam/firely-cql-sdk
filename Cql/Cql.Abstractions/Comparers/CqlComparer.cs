@@ -79,7 +79,7 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
             Type type = instance.GetType();
             yield return type;
 
-            while (type.IsImplementingInterface(typeof(IAdapter)))
+            while (type.IsImplementingInterface(typeof(IWrapper)))
             {
                 // var typeName = type.ToCSharpString(TypeCSharpFormat);
                 //
@@ -91,10 +91,10 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
                 //     // comparerType.Append(typeName).Append(" -> ");
                 // }
 
-                var interfaceMapping = type.GetInterfaceMap(typeof(IAdapter));
+                var interfaceMapping = type.GetInterfaceMap(typeof(IWrapper));
                 instance = interfaceMapping
                            .InterfaceMethods
-                           .First(m => m.Name == $"get_{nameof(IAdapter.Inner)}")
+                           .First(m => m.Name == $"get_{nameof(IWrapper.Inner)}")
                            .Invoke(instance, [])!;
                 type = instance.GetType();
                 yield return type;
@@ -138,7 +138,7 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
         throw new NotImplementedException();
     }
 
-    public virtual bool? Equals(
+    public bool? Equals(
         T? left,
         T? right,
         string? precision)
@@ -158,7 +158,7 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
         }
     }
 
-    protected virtual bool? EqualsValues(
+    protected internal virtual bool? EqualsValues(
         [DisallowNull] T left,
         [DisallowNull] T right,
         string? precision) =>
