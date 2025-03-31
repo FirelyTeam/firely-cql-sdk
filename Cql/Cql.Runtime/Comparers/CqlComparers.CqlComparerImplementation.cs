@@ -92,6 +92,32 @@ partial class CqlComparers : CqlComparer<object>
         throw new ArgumentException($"Cannot check equivalence for type {xType.Name}");
     }
 
+    protected override bool? EqualsValues(
+        object left,
+        object right,
+        string? precision)
+    {
+        var xType = GetKeyTypeForComparers(left);
+
+        if (Comparers.TryGetValue(xType, out var comparer))
+        {
+            return comparer.Equals(left, right, precision);
+        }
+
+        if (xType.IsGenericType)
+        {
+            var gtd = xType.GetGenericTypeDefinition();
+            if (ComparerFactories.TryGetValue(gtd, out var factory))
+            {
+                var gc = factory(xType, this);
+                Comparers.TryAdd(xType, gc);
+                return gc.Equals(left, right, precision);
+            }
+        }
+
+        throw new ArgumentException($"Cannot check equivalence for type {xType.Name}");
+    }
+
     protected override int GetHashCodeValue(object value)
     {
         var xType = GetKeyTypeForComparers(value);

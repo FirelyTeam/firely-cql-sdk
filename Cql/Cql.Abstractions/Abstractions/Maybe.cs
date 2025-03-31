@@ -74,3 +74,9 @@ internal readonly struct Maybe<T>(T value) : IEquatable<Maybe<T>>
 
     public override string? ToString() => Match(v => v?.ToString(), () => "(n/a)");
 }
+
+internal static class MaybeExtensions
+{
+    public static T? OrNullableValue<T>(this Maybe<T> maybe, Func<T?> fn)
+        where T:struct => maybe.HasValue ? maybe.Value : fn();
+}
