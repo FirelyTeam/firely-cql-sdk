@@ -25,7 +25,7 @@ partial class CqlComparers
             };
 
         /// <inheritdoc />
-        protected internal override bool? EqualsValues(
+        protected override bool? EqualsValues(
             KeyValuePair<TKey, TValue> left,
             KeyValuePair<TKey, TValue> right,
             string? precision) =>
@@ -36,12 +36,15 @@ partial class CqlComparers
             };
 
         /// <inheritdoc />
-        protected internal override bool EquivalentValues(
+        protected override bool EquivalentValues(
             KeyValuePair<TKey, TValue> left,
             KeyValuePair<TKey, TValue> right,
             string? precision) =>
-            EquivalentOnNullsOnly(left, right)
-            ?? Compare(left, right, precision) == 0;
+            keyValueComparer.Equivalent(left.Key, right.Key, precision) switch
+            {
+                true     => keyValueComparer.Equivalent(left.Value, right.Value, precision),
+                var b => b
+            };
 
         /// <inheritdoc />
         protected override int GetHashCodeValue(KeyValuePair<TKey, TValue> value) =>

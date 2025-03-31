@@ -49,7 +49,7 @@ partial class CqlComparers
             throw new NotSupportedException($"Comparison against unlike units {left.unit} and {right.unit} is not supported.");
         }
 
-        protected internal override bool EquivalentValues(
+        protected override bool EquivalentValues(
             CqlQuantity left,
             CqlQuantity right,
             string? precision)

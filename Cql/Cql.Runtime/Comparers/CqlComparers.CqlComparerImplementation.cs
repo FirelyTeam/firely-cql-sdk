@@ -7,6 +7,14 @@ partial class CqlComparers : CqlComparer<object>
         object right,
         string? precision)
     {
+    // public override int? Compare(
+    //     object? left,
+    //     object? right,
+    //     string? precision)
+    // {
+    //     if (left == null || right == null)
+    //         return null;
+
         bool xySwapped = false;
         var xType = GetKeyTypeForComparers(left);
         {
@@ -58,7 +66,7 @@ partial class CqlComparers : CqlComparer<object>
         throw new ArgumentException($"Cannot compare type {xType.Name}");
     }
 
-    protected internal override bool EquivalentValues(
+    protected override bool EquivalentValues(
         object left,
         object right,
         string? precision)

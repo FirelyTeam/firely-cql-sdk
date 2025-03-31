@@ -23,7 +23,7 @@ partial class CqlComparers
             return Comparer<decimal?>.Default.Compare(TruncateDigits(left ?? 0, MaxDecimalDigits), TruncateDigits(right ?? 0, MaxDecimalDigits));
         }
 
-        protected internal override bool EquivalentValues(
+        protected override bool EquivalentValues(
             [DisallowNull] decimal? left,
             [DisallowNull] decimal? right,
             string? precision)

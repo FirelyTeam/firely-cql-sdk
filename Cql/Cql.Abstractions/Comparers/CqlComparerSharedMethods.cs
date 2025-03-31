@@ -58,42 +58,68 @@ internal static class CqlComparerSharedMethods
         (left, right) switch
         {
             (null, null) => true,
-            (null, _) => false,
-            (_, null) => false,
-            _ => null
+            (null, _)    => false,
+            (_, null)    => false,
+            _            => null
+        };
+
+
+    internal static Maybe<int?> CompareAnyNullReturnsNull(
+        bool leftIsNull,
+        bool rightIsNull) =>
+        (leftIsNull, rightIsNull) switch
+        {
+            (true, true) => null,
+            (true, _)    => null,
+            (_, true)    => null,
+            _            => NoValueOf<int?>(),
         };
 
     internal static Maybe<int?> CompareEitherNullReturnsNull(
         bool leftIsNull,
-        bool rightIsNull)
-    {
-        return (leftIsNull, rightIsNull) switch
+        bool rightIsNull) =>
+        (leftIsNull, rightIsNull) switch
         {
             (true, true) => 0,
-            (true, _) => null,
-            (_, true) => null,
-            _ => NoValueOf<int?>(),
+            (true, _)    => null,
+            (_, true)    => null,
+            _            => NoValueOf<int?>(),
         };
-    }
 
     internal static Maybe<int?> CompareEitherNullReturnsValue(
         bool leftIsNull,
-        bool rightIsNull)
-    {
-        return (leftIsNull, rightIsNull) switch
+        bool rightIsNull) =>
+        (leftIsNull, rightIsNull) switch
         {
             (true, true) => 0,
-            (true, _) => 1,
-            (_, true) => -1,
-            _ => NoValueOf<int?>(),
+            (true, _)    => 1,
+            (_, true)    => -1,
+            _            => NoValueOf<int?>(),
         };
-    }
 
-    internal static ICqlComparer<object> CreateCqlComparerAndUnwrapNonGeneric(Type comparerType, params object[] args)
-    {
-        object comparer = Activator.CreateInstance(comparerType, args)!;
-        return ToObjectCqlComparer(comparer);
-    }
+    internal static bool? EqualsFromCompare(int? comparison) =>
+        comparison switch
+        {
+            null => null,
+            0    => true,
+            _    => false,
+        };
+
+    internal static bool EquivalenceFromCompare(int? comparison) =>
+        comparison switch
+        {
+            null => true,
+            0    => true,
+            _    => false,
+        };
+
+    internal static bool EquivalenceFromEquals(bool? equals) =>
+        equals switch
+        {
+            null  => true,
+            true  => true,
+            false => false,
+        };
 
     internal static ICqlComparer<object> ToObjectCqlComparer(object comparer)
     {
@@ -106,7 +132,8 @@ internal static class CqlComparerSharedMethods
             throw new ArgumentException("comparerType must be ICqlComparer<T>", nameof(comparerType));
 
         var icqlComparerTypeArg = icqlComparerType.GetGenericArguments()[0];
-        ICqlComparer<object> nonGenericComparer = (ICqlComparer<object>)MethodInfoWrapNonGeneric.MakeGenericMethod(icqlComparerTypeArg).Invoke(null, [comparer])!;
+        ICqlComparer<object> nonGenericComparer =
+            (ICqlComparer<object>)MethodInfoWrapNonGeneric.MakeGenericMethod(icqlComparerTypeArg).Invoke(null, [comparer])!;
         return nonGenericComparer;
     }
 

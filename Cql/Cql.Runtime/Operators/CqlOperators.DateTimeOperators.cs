@@ -204,7 +204,7 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
             else 
-                return left.CompareTo(right, precision) switch
+                return left.CompareToValue(right, precision) switch
                 {
                     null => null,
                     >= 0 => true,
@@ -217,7 +217,7 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
             else
-                return left.CompareTo(right, precision) switch
+                return left.CompareToValue(right, precision) switch
                 {
                     null => null,
                     >= 0 => true,
@@ -229,7 +229,7 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
             else
-                return left.CompareTo(right, precision) switch
+                return left.CompareToValue(right, precision) switch
                 {
                     null => null,
                     >= 0 => true,
@@ -245,7 +245,7 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
             else 
-                return left.CompareTo(right, precision) switch
+                return left.CompareToValue(right, precision) switch
                 {
                     null => null,
                     <= 0 => true,
@@ -257,7 +257,7 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
             else
-                return left.CompareTo(right, precision) switch
+                return left.CompareToValue(right, precision) switch
                 {
                     null => null,
                     <= 0 => true,
@@ -269,7 +269,7 @@ namespace Hl7.Cql.Operators
             if (left == null || right == null)
                 return null;
             else
-                return left.CompareTo(right, precision) switch
+                return left.CompareToValue(right, precision) switch
                 {
                     null => null,
                     <= 0 => true,
@@ -283,7 +283,7 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) switch
+            else return left.CompareToValue(right, precision) switch
                 {
                     null => null,
                     0 => true,
@@ -294,7 +294,7 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) switch
+            else return left.CompareToValue(right, precision) switch
             {
                 null => null,
                 0 => true,
@@ -305,7 +305,7 @@ namespace Hl7.Cql.Operators
         {
             if (left == null || right == null)
                 return null;
-            else return left.CompareTo(right, precision) switch
+            else return left.CompareToValue(right, precision) switch
             {
                 null => null,
                 0 => true,

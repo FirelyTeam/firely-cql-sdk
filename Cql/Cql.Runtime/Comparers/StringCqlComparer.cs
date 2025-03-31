@@ -29,7 +29,7 @@ internal class StringCqlComparer(StringComparer stringComparer) : CqlComparer<st
     }
 
     /// <inheritdoc/>
-    protected internal override bool EquivalentValues(
+    protected override bool EquivalentValues(
         string left,
         string right,
         string? precision)

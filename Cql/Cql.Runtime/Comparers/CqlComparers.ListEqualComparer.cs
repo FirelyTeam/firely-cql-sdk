@@ -48,7 +48,7 @@ partial class CqlComparers
             return 0;
         }
 
-        protected internal override bool? EqualsValues(
+        protected override bool? EqualsValues(
             IEnumerable left,
             IEnumerable right,
             string? precision)
@@ -90,7 +90,7 @@ partial class CqlComparers
                 return true;
         }
 
-        protected internal override bool EquivalentValues(
+        protected override bool EquivalentValues(
             IEnumerable left,
             IEnumerable right,
             string? precision)

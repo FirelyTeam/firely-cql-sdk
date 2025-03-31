@@ -243,7 +243,9 @@ namespace Hl7.Cql.Primitives
         public int? WholeCalendarPeriodsBetween(CqlDate high, string precision) => CqlDateTimeMath.WholeCalendarPeriodsBetween(Value.DateTimeOffset, high?.Value?.DateTimeOffset, precision);
 
         /// <summary>
-        /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
+        /// Compares the current instance with another object of the same type
+        /// and returns an integer that indicates whether the current instance precedes,
+        /// follows, or occurs in the same position in the sort order as the other object.
         /// </summary>
         /// <param name="other">An object to compare with this instance.</param>
         /// <param name="precision">The specified precision, or <see langword="null"/>.</param>
@@ -254,13 +256,17 @@ namespace Hl7.Cql.Primitives
         /// If the value is greater than zero, this object is greater than <paramref name="other"/>.
         /// If the value is <see langword="null"/>, this comparison is uncertain because of <paramref name="precision"/>.
         /// </returns>
-        public int? CompareTo(CqlDate? other, string? precision)
+        public int? CompareToValue(CqlDate other, string? precision) => 
+            CompareValues(Value, other!.Value, precision);
+
+        private static int? CompareValues(
+            DateIso8601 self,
+            DateIso8601 other,
+            string? precision)
         {
-            if (other == null)
-                return null;
             DateTimePrecision dtp = DateTimePrecision.Unknown;
             if (precision == null)
-                dtp = (DateTimePrecision)Math.Max((byte)Value.Precision, (byte)other.Value.Precision);
+                dtp = (DateTimePrecision)Math.Max((byte)self.Precision, (byte)other.Precision);
             else
             {
                 if (Units.CqlUnitsToUCUM.TryGetValue(precision, out var converted))
@@ -268,16 +274,16 @@ namespace Hl7.Cql.Primitives
                 // weeks isn't part of the precision enumeration
                 if (precision[0] == 'w')
                 {
-                    var yearComparison = Compare(Value.Year, other.Value.Year);
+                    var yearComparison = Compare(self.Year, other.Year);
                     if (yearComparison == 0)
                     {
-                        var monthComparison = Compare(Value.Month, other.Value.Month);
+                        var monthComparison = Compare(self.Month, other.Month);
                         if (monthComparison == 0)
                         {
-                            if (Value.Day != null && other.Value.Day != null)
+                            if (self.Day != null && other.Day != null)
                             {
-                                var thisWeeks = (int)(Value.Day / CqlDateTimeMath.DaysPerWeek);
-                                var otherWeeks = (int)(other.Value.Day / CqlDateTimeMath.DaysPerWeek);
+                                var thisWeeks = (int)(self.Day / CqlDateTimeMath.DaysPerWeek);
+                                var otherWeeks = (int)(other.Day / CqlDateTimeMath.DaysPerWeek);
                                 return Compare(thisWeeks, otherWeeks);
                             }
                             else return 1;
@@ -293,26 +299,26 @@ namespace Hl7.Cql.Primitives
             switch (dtp)
             {
                 case DateTimePrecision.Year:
-                    return Compare(Value.Year, other.Value.Year);
+                    return Compare(self.Year, other.Year);
                 case DateTimePrecision.Month:
                     {
-                        var yearComparison = Compare(Value.Year, other.Value.Year);
+                        var yearComparison = Compare(self.Year, other.Year);
                         if (yearComparison == 0)
                         {
-                            var monthComparison = Compare(Value.Month, other.Value.Month);
+                            var monthComparison = Compare(self.Month, other.Month);
                             return monthComparison;
                         }
                         else return yearComparison;
                     }
                 case DateTimePrecision.Day:
                     {
-                        var yearComparison = Compare(Value.Year, other.Value.Year);
+                        var yearComparison = Compare(self.Year, other.Year);
                         if (yearComparison == 0)
                         {
-                            var monthComparison = Compare(Value.Month, other.Value.Month);
+                            var monthComparison = Compare(self.Month, other.Month);
                             if (monthComparison == 0)
                             {
-                                var dayComparison = Compare(Value.Day, other.Value.Day);
+                                var dayComparison = Compare(self.Day, other.Day);
                                 return dayComparison;
                             }
                             else return monthComparison;
@@ -328,6 +334,10 @@ namespace Hl7.Cql.Primitives
                     throw new ArgumentException($"Invalid UCUM precision {precision}", nameof(precision));
             }
         }
+
+        private static int? Compare(int? x, int? y) =>
+            CompareAnyNullReturnsNull(x is null, y is null)
+                .OrValue(() => Comparer<int>.Default.Compare(x!.Value, y!.Value));
 
         /// <summary>
         /// Gets the immediate predecessor of this value in its precision.
@@ -347,16 +357,14 @@ namespace Hl7.Cql.Primitives
         /// <returns>The immediate predecessor value.</returns>
         public CqlDate Successor() => Add(CqlDateTimeMath.UnitDateTimeQuantity[Value.Precision])!;
 
-        private int? Compare(int? x, int? y) => x == null || y == null ? null : Comparer<int>.Default.Compare(x.Value, y.Value);
-
-
         /// <summary>
         /// Compares this object to <paramref name="other"/> for equivalence.
         /// </summary>
         /// <param name="other">The object to compare.</param>
         /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if this object is equivalent to <paramref name="other"/>, else <see langword="false"/>.</returns>
-        public bool Equivalent(CqlDate? other, string? precision) => (CompareTo(other, precision) ?? 0) == 0;
+        public bool EquivalentToValue(CqlDate other, string? precision) =>
+            EquivalenceFromCompare(CompareToValue(other, precision));
 
         /// <summary>
         /// Returns <see cref="DateIso8601.ToString"/> for <see cref="Value"/>.

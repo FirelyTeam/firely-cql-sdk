@@ -109,43 +109,39 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
     public virtual bool Equivalent(
         T? left,
         T? right,
-        string? precision)
-    {
-        switch (EquivalentMethod)
-        {
-            case CqlComparerEquivalentMethod.Compare:
-                return Compare(left, right, precision) is 0;
+        string? precision) =>
+        EquivalentNulls(IsNull(left), IsNull(right))
+            .OrValue(() =>
+            {
+                if (Equals(left, right))
+                    return true;
 
-            case CqlComparerEquivalentMethod.Equals:
-                return Equals(left, right, precision) is true or null;
+                switch (EquivalentMethod)
+                {
+                    case CqlComparerEquivalentMethod.Compare:
+                        int? compareValues = CompareValues(left!, right!, precision);
+                        var equivalenceFromCompare = EquivalenceFromCompare(compareValues);
+                        return equivalenceFromCompare;
 
-            case CqlComparerEquivalentMethod.Equivalent:
-                var result =
-                    EquivalentNulls(IsNull(left), IsNull(right))
-                        .OrValue(() =>
-                        {
-                            if (ReferenceEquals(left, right))
-                                return true;
+                    case CqlComparerEquivalentMethod.Equals:
+                        bool? equalsValues = EqualsValues(left!, right!, precision);
+                        var equivalenceFromEquals = EquivalenceFromEquals(equalsValues);
+                        return equivalenceFromEquals;
 
-                            if (Equals(left, right))
-                                return true;
+                    case CqlComparerEquivalentMethod.Equivalent:
+                        var equivalentValues = EquivalentValues(left!, right!, precision);
+                        return equivalentValues;
 
-                            return EquivalentValues(left!, right!, precision);
-                        });
-                return result;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            });
 
-            default:
-                throw new ArgumentOutOfRangeException();
-        }
-    }
-
-    protected internal virtual bool EquivalentValues(
+    protected virtual bool EquivalentValues(
         [DisallowNull] T left,
         [DisallowNull] T right,
-        string? precision)
-    {
+        string? precision) =>
         throw new NotImplementedException();
-    }
 
     public bool? Equals(
         T? left,
@@ -155,7 +151,8 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
         switch (EqualsMethod)
         {
             case CqlComparerEqualsMethod.Compare:
-                return EqualsViaCompare(left, right, precision);
+                var compare = Compare(left, right, precision);
+                return EqualsFromCompare(compare);
 
             case CqlComparerEqualsMethod.Equal:
                 var result = EqualsNulls(IsNull(left), IsNull(right))
@@ -173,25 +170,11 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
         }
     }
 
-    protected internal virtual bool? EqualsValues(
+    protected virtual bool? EqualsValues(
         [DisallowNull] T left,
         [DisallowNull] T right,
         string? precision) =>
         throw new NotImplementedException();
-
-    private bool? EqualsViaCompare(
-        T? left,
-        T? right,
-        string? precision)
-    {
-        bool? result = Compare(left, right, precision) switch
-        {
-            null  => null,
-            var r => r is 0
-        };
-
-        return result;
-    }
 
     public virtual int? Compare(
         T? left,
@@ -202,7 +185,7 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
             CompareNulls(left, right)
                 .OrValue(() =>
                 {
-                    if (Equals(left, right))
+                    if (Equals(left, right)) 
                         return 0;
 
                     return CompareValues(left!, right!, precision);
@@ -218,9 +201,9 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
         var rightIsNull = IsNull(right);
         var result = NullComparisonStrategy switch
         {
-            CqlComparerNullComparisonStrategy.EitherNullReturnsNull  => CompareEitherNullReturnsNull(leftIsNull, rightIsNull),
             CqlComparerNullComparisonStrategy.EitherNullReturnsValue => CompareEitherNullReturnsValue(leftIsNull, rightIsNull),
-            _                                                        => throw new ArgumentOutOfRangeException(),
+            CqlComparerNullComparisonStrategy.EitherNullReturnsNull  => CompareEitherNullReturnsNull(leftIsNull, rightIsNull),
+            _ => throw new ArgumentOutOfRangeException(),
         };
         return result;
     }

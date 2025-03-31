@@ -38,7 +38,7 @@ internal class CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer) : Cq
         return value?.code is null;
     }
 
-    protected internal override bool EquivalentValues(
+    protected override bool EquivalentValues(
         CqlCode left,
         CqlCode right,
         string? precision)

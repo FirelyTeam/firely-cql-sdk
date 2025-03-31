@@ -20,13 +20,13 @@ internal class CqlComparerWrapper<T, TInner>(
 {
     private TInner? GetInner(T? value) => value is null ? default : getInner(value);
 
-    protected internal override bool EquivalentValues(
+    protected override bool EquivalentValues(
         [DisallowNull] T left,
         [DisallowNull] T right,
         string? precision) =>
         inner.Equivalent(GetInner(left), GetInner(right), precision);
 
-    protected internal override bool? EqualsValues(
+    protected override bool? EqualsValues(
         [DisallowNull] T x,
         [DisallowNull] T y,
         string? precision) =>

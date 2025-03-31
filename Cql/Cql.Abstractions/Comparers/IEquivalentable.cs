@@ -25,7 +25,7 @@ namespace Hl7.Cql.Comparers
         /// <param name="other">The object to compare.</param>
         /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if this object is equivalent to <paramref name="other"/>, else <see langword="false"/>.</returns>
-        bool Equivalent(T? other, string? precision);
+        bool EquivalentToValue([DisallowNull] T other, string? precision);
 
     }
 }
