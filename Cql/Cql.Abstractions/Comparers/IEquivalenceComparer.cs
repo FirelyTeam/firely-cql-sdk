@@ -12,6 +12,23 @@ namespace Hl7.Cql.Comparers
     /// Defines a method that a type implements to compare two objects for equivalence.
     /// See https://cql.hl7.org/09-b-cqlreference.html#equivalent.
     /// </summary>
+    /// The type of object to compare.
+    public interface IEquivalenceComparer
+    {
+        /// <summary>
+        /// Compares two objects for equivalence.
+        /// </summary>
+        /// <param name="left">The first object to compare.</param>
+        /// <param name="right">The second object to compare.</param>
+        /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
+        /// <returns><see langword="true"/> if the objects are equivalent, and <see langword="false"/> if not.  Equivalence computations are never <see langword="null"/> and will return <see langword="false"/> in uncertainty situations.</returns>
+        bool Equivalent(object? left, object? right, string? precision);
+    }
+
+    /// <summary>
+    /// Defines a method that a type implements to compare two objects for equivalence.
+    /// See https://cql.hl7.org/09-b-cqlreference.html#equivalent.
+    /// </summary>
     /// <typeparam name="T">
     /// The type of object to compare.
     /// </typeparam>

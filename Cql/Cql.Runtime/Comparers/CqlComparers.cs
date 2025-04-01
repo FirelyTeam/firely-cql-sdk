@@ -71,7 +71,7 @@ namespace Hl7.Cql.Comparers
             {
                 var genericType = typeof(NullComparer<>).MakeGenericType(Nullable.GetUnderlyingType(type)!);
                 object comparer = Activator.CreateInstance(genericType, [self])!;
-                ICqlComparer<object> cqlComparer = ToObjectCqlComparer(comparer);
+                ICqlComparer cqlComparer = ToPlainCqlComparer(comparer);
                 return cqlComparer;
             });
             ComparerFactories.TryAdd(typeof(KeyValuePair<,>), (type, self) =>
@@ -79,7 +79,7 @@ namespace Hl7.Cql.Comparers
                 var genericArguments = type.GetGenericArguments();
                 var genericType = typeof(KeyValuePairComparer<,>).MakeGenericType(genericArguments);
                 object comparer = Activator.CreateInstance(genericType, [self])!;
-                ICqlComparer<object> cqlComparer = ToObjectCqlComparer(comparer);
+                ICqlComparer cqlComparer = ToPlainCqlComparer(comparer);
                 return cqlComparer;
             });
         }
@@ -99,9 +99,9 @@ namespace Hl7.Cql.Comparers
         }
 
 
-        private ConcurrentDictionary<Type, ICqlComparer<object>> Comparers { get; } = new();
+        private ConcurrentDictionary<Type, ICqlComparer> Comparers { get; } = new();
 
-        private ConcurrentDictionary<Type, Func<Type, CqlComparers, ICqlComparer<object>>> ComparerFactories { get; } = new();
+        private ConcurrentDictionary<Type, Func<Type, CqlComparers, ICqlComparer>> ComparerFactories { get; } = new();
 
         /// <summary>
         /// Registers a comparer for <see cref="Type"/>.
@@ -139,7 +139,7 @@ namespace Hl7.Cql.Comparers
         /// <returns>This instance.</returns>
         /// <exception cref="ArgumentException">If <paramref name="genericTypeDefinition"/> is not a generic type definition.</exception>
         /// <exception cref="ArgumentNullException">If any parameter is <see langword="null"/>.</exception>
-        public CqlComparers Register(Type genericTypeDefinition, Func<Type, CqlComparers, ICqlComparer<object>> comparerFactory)
+        public CqlComparers Register(Type genericTypeDefinition, Func<Type, CqlComparers, ICqlComparer> comparerFactory)
         {
             if (genericTypeDefinition is null)
             {
@@ -179,31 +179,31 @@ namespace Hl7.Cql.Comparers
 
     file static class LocalExtensions
     {
-        public static void TryAdd<T>(
-            this ConcurrentDictionary<Type, ICqlComparer<object>> comparers,
-            Type type,
-            ICqlComparer<T> comparer)
-        {
-            comparers.AddOrUpdate(
-                type,
-                _ => comparer.ToObjectCqlComparer(),
-                (_, prev) => prev);
-        }
+        // public static void TryAdd<T>(
+        //     this ConcurrentDictionary<Type, ICqlComparer> comparers,
+        //     Type type,
+        //     ICqlComparer<T> comparer)
+        // {
+        //     comparers.AddOrUpdate(
+        //         type,
+        //         _ => comparer.ToPlainCqlComparer(),
+        //         (_, prev) => prev);
+        // }
 
         public static void AddOrUpdate<T>(
-            this ConcurrentDictionary<Type, ICqlComparer<object>> comparers,
+            this ConcurrentDictionary<Type, ICqlComparer> comparers,
             Type type,
             ICqlComparer<T> addComparer,
             Func<Type, ICqlComparer<T>, ICqlComparer<T>> updateComparerFactory)
         {
             comparers.AddOrUpdate(
                 type,
-                _ => addComparer.ToObjectCqlComparer(),
+                _ => addComparer.ToPlainCqlComparer(),
                 (type, prev) =>
                 {
                     var prevTyped = prev.ToTypedCqlComparer<T>()!;
                     var newTyped = updateComparerFactory(type, prevTyped);
-                    return newTyped.ToObjectCqlComparer();
+                    return newTyped.ToPlainCqlComparer();
                 });
         }
     }

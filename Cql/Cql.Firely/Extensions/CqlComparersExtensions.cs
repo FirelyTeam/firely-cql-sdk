@@ -54,7 +54,7 @@ namespace Hl7.Cql.Fhir.Extensions
                     nameof(CodeOfEnumCqlComparer<DummyEnum>.Instance),
                     BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty,
                     null, null, [])!;
-                ICqlComparer<object> codeComparerNonGeneric = ToObjectCqlComparer(codeOfEnumCqlComparerInstance);
+                ICqlComparer codeComparerNonGeneric = ToPlainCqlComparer(codeOfEnumCqlComparerInstance);
                     //CreateCqlComparerAndUnwrapNonGeneric(comparerType, self);
                 PrimitiveTypeAgainstStringComparer primitiveTypeAgainstStringComparer = new PrimitiveTypeAgainstStringComparer(codeComparerNonGeneric);
                 return primitiveTypeAgainstStringComparer;
@@ -65,7 +65,7 @@ namespace Hl7.Cql.Fhir.Extensions
 
         private enum DummyEnum {}
 
-        private class PrimitiveTypeAgainstStringComparer(ICqlComparer<object> inner) :
+        private class PrimitiveTypeAgainstStringComparer(ICqlComparer inner) :
             CqlComparer<object>(
                 equalsMethod: CqlComparerEqualsMethod.Compare,
                 equivalentMethod: CqlComparerEquivalentMethod.Compare)

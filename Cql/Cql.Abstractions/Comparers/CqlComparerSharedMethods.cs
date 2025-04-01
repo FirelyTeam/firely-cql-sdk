@@ -108,9 +108,9 @@ internal static class CqlComparerSharedMethods
             false => false,
         };
 
-    internal static ICqlComparer<object> ToObjectCqlComparer(object comparer)
+    internal static ICqlComparer ToPlainCqlComparer(object comparer)
     {
-        if (comparer is ICqlComparer<object> objComparer)
+        if (comparer is ICqlComparer objComparer)
             return objComparer;
 
         var comparerType = comparer.GetType();
@@ -119,24 +119,26 @@ internal static class CqlComparerSharedMethods
             throw new ArgumentException("comparerType must be ICqlComparer<T>", nameof(comparerType));
 
         var icqlComparerTypeArg = icqlComparerType.GetGenericArguments()[0];
-        ICqlComparer<object> nonGenericComparer =
-            (ICqlComparer<object>)MethodInfoWrapNonGeneric.MakeGenericMethod(icqlComparerTypeArg).Invoke(null, [comparer])!;
+        ICqlComparer nonGenericComparer = (ICqlComparer)MethodInfoWrapNonGeneric.MakeGenericMethod(icqlComparerTypeArg).Invoke(null, [comparer])!;
         return nonGenericComparer;
     }
 
     private static readonly MethodInfo MethodInfoWrapNonGeneric =
-        ReflectionUtility.GenericMethodDefinitionOf(() => ToObjectCqlComparer<object>(null!));
+        ReflectionUtility.GenericMethodDefinitionOf(() => ToPlainCqlComparer<object>(null!));
 
-    internal static ICqlComparer<object> ToObjectCqlComparer<T>(this ICqlComparer<T> genericComparer) =>
-        genericComparer as CqlComparer<object>
-        ?? new ObjectCqlComparerWrapper<T>(genericComparer);
+    internal static ICqlComparer ToPlainCqlComparer<T>(this ICqlComparer<T> genericComparer) =>
+        genericComparer as ICqlComparer // All derived from CqlComparer<T> will also be ICqlComparer
+        ?? new PlainCqlComparerWrapper<T>(genericComparer); // This is a fallback for external ICqlComparer<T> implementations
 
-    internal static ICqlComparer<T>? ToTypedCqlComparer<T>(this ICqlComparer<object> prev) =>
-        prev is IWrapper { Inner: CqlComparer<T> inner }
-            ? inner
-            : prev as CqlComparer<T> // In this case T will be object
+    internal static ICqlComparer<T>? ToTypedCqlComparer<T>(this ICqlComparer prev) =>
+        prev switch
+        {
+            ICqlComparer<T> typedCqlComparer => typedCqlComparer,
+            IWrapper { Inner: ICqlComparer<T> inner } => inner,
+            _                                        => null
+        }
     ;
 }
 
-file class ObjectCqlComparerWrapper<T>(ICqlComparer<T> genericComparer) :
+file class PlainCqlComparerWrapper<T>(ICqlComparer<T> genericComparer) :
     CqlComparerWrapper<object, T>(genericComparer, t => (T?)t);

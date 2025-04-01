@@ -32,7 +32,7 @@ partial class CqlComparers : CqlComparer<object>
             }
         }
 
-        ICqlComparer<object>? comparer = null;
+        ICqlComparer? comparer = null;
         if (Comparers.TryGetValue(xType, out var c))
         {
             comparer = c;
@@ -46,12 +46,12 @@ partial class CqlComparers : CqlComparer<object>
                 Comparers.TryAdd(xType, gc);
                 comparer = gc;
             }
-            else if (left is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer<object>? enumerableComparer))
+            else if (left is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer? enumerableComparer))
             {
                 comparer = enumerableComparer;
             }
         }
-        else if (left is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer<object>? listComparer))
+        else if (left is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer? listComparer))
         {
             comparer = listComparer;
         }

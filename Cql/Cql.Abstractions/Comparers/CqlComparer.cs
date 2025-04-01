@@ -38,7 +38,7 @@ internal enum CqlComparerNullComparisonStrategy
     EitherNullReturnsNull = 1,
 }
 
-internal abstract class CqlComparer<T> : ICqlComparer<T>
+internal abstract class CqlComparer<T> : ICqlComparer<T>, ICqlComparer
 {
     private static readonly TypeCSharpFormat TypeCSharpFormat = TypeCSharpFormat.Default with
     {
@@ -224,4 +224,25 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
 
     protected virtual int GetHashCodeValue([DisallowNull] T value) =>
         value.GetHashCode();
+
+    bool IEquivalenceComparer.Equivalent(
+        object? left,
+        object? right,
+        string? precision) =>
+        Equivalent((T?)left, (T?)right, precision);
+
+    bool? ICqlComparer.Equals(
+        object? left,
+        object? right,
+        string? precision) =>
+        Equals((T?)left, (T?)right, precision);
+
+    int? ICqlComparer.Compare(
+        object? left,
+        object? right,
+        string? precision) =>
+        Compare((T?)left, (T?)right, precision);
+
+    int ICqlComparer.GetHashCode(object? value) =>
+        GetHashCode((T?)value);
 }
