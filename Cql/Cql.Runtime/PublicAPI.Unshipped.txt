@@ -209,6 +209,7 @@ Hl7.Cql.Operators.ICqlOperators.EndsWith(string! argument, string! suffix) -> bo
 Hl7.Cql.Operators.ICqlOperators.EnumEqualsString(object? enum, string? value) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Equal(object? x, object? y) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Equivalent(object? x, object? y) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Equivalent(string? x, string? y) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Equivalent<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Except(Hl7.Cql.Primitives.CqlInterval<decimal?>? left, Hl7.Cql.Primitives.CqlInterval<decimal?>? right) -> Hl7.Cql.Primitives.CqlInterval<decimal?>?
 Hl7.Cql.Operators.ICqlOperators.Except(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? right) -> Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>?
