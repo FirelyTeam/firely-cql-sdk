@@ -9,7 +9,6 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Compiler.Infrastructure;
-using JetBrains.Annotations;
 
 namespace Hl7.Cql.Comparers;
 
@@ -19,9 +18,9 @@ internal static class CqlComparerSharedMethods
     {
         var result = (leftIsNull, rightIsNull) switch
         {
-            (true, true) => true,
-            (true, _)    => false,
-            (_, true)    => false,
+            (true, true) => true,   // null,
+            (true, _)    => false,  // null,
+            (_, true)    => false,  // null,
             _            => Maybe.NoValueOf<bool?>(),
         };
         return result;
@@ -51,18 +50,6 @@ internal static class CqlComparerSharedMethods
         };
         return result;
     }
-
-    internal static bool? EquivalentOnNullsOnly<T>(
-        [NoEnumeration, NotNullWhen(true)] T? left,
-        [NoEnumeration, NotNullWhen(true)] T? right) =>
-        (left, right) switch
-        {
-            (null, null) => true,
-            (null, _)    => false,
-            (_, null)    => false,
-            _            => null
-        };
-
 
     internal static Maybe<int?> CompareAnyNullReturnsNull(
         bool leftIsNull,

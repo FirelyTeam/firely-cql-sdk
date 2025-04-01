@@ -20,7 +20,7 @@ internal enum CqlComparerEquivalentMethod
 
 internal enum CqlComparerEqualsMethod
 {
-    Equal = 0,
+    Equals = 0,
     Compare = 1,
     Equivalent = 2,
 }
@@ -47,7 +47,7 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
     };
 
     protected CqlComparer(
-        CqlComparerEqualsMethod equalsMethod = CqlComparerEqualsMethod.Equal,
+        CqlComparerEqualsMethod equalsMethod = CqlComparerEqualsMethod.Equals,
         CqlComparerNullComparisonStrategy nullComparisonStrategy = CqlComparerNullComparisonStrategy.EitherNullReturnsValue,
         CqlComparerEquivalentMethod equivalentMethod = CqlComparerEquivalentMethod.Equivalent)
     {
@@ -152,8 +152,8 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
         T? right,
         string? precision)
     {
-        return EquivalentNulls(IsNull(left), IsNull(right))
-            .OrNullableValue(() =>
+        return EqualsNulls(IsNull(left), IsNull(right))
+            .OrValue(() =>
             {
                 if (Object.Equals(left, right))
                     return true;
@@ -165,7 +165,7 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>
                         bool? equalsFromCompare = EqualsFromCompare(compareValues);
                         return equalsFromCompare;
 
-                    case CqlComparerEqualsMethod.Equal:
+                    case CqlComparerEqualsMethod.Equals:
                         bool? equalsValues = EqualsValues(left!, right!, precision);
                         return equalsValues;
 

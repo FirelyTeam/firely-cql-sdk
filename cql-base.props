@@ -28,7 +28,7 @@
 		<!-- ## ElmToCSharpEnabled must be true in Release mode, for build pipeline to pass -->
 		<ElmToCSharpEnabled Condition="'$(Configuration)' != 'Release'">false</ElmToCSharpEnabled>
 		<ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release'">true</ElmToCSharpEnabled>
-		<!-- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
+		<!--- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
 	</PropertyGroup>
 
 	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">

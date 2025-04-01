@@ -14,6 +14,11 @@ namespace Hl7.Cql.CqlToElm.Test
         private static readonly DateTimeOffset NowValue = new(2020, 1, 2, 3, 4, 0, TimeSpan.Zero);
         private static readonly CqlContext CqlContext = FhirCqlContext.ForBundle(now: NowValue);
 
+        private static void WriteLineToFile(string path, string line)
+        {
+            //File.WriteAllLines(path, lines)
+        }
+
 
         [DynamicData(nameof(GetTests), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(DisplayName))]
         [TestMethod]
@@ -24,21 +29,23 @@ namespace Hl7.Cql.CqlToElm.Test
             if (SkippedTests.DoesNotCompile.TryGetValue(testCase.TestName, out var reason))
                 Assert.Inconclusive($"Case {testFullName} skipped: {reason}");
 
-            // If you want to test a particular case, you can uncomment the following lines
-            // if (testCase.TestName != "AgeInYearsAt")
-            //     Assert.Inconclusive("Skipped!");
-
             var cqlToolkit = CreateCqlToolkit(AllowNullIntervals:true);
             var expression = cqlToolkit.Expression(testCase.Expression);
             var expressionErrors = expression.GetErrors();
             if (expressionErrors.Any())
             {
+                WriteLineToFile("c:\\temp\\XmlTest.does-not-compile.txt",
+                    $"{{ \"{testCase.TestName}\", \"{string.Join("; ", expressionErrors.Select(e=>e.message))}.\" }},"
+                );
                 Assert.Fail($"Case {testFullName} expression compiled with errors: {expressionErrors.First().message}");
                 return;
             }
 
             if (testCase.Expectation is null)
             {
+                WriteLineToFile("c:\\temp\\XmlTest.missing-expectation.txt",
+                    $"{{ \"{testCase.TestName}\", \"{string.Join("; ", expressionErrors.Select(e=>e.message))}.\" }},"
+                );
                 Assert.Inconclusive($"Case {testFullName} is inconclusive; no expectation provided.");
                 return;
             }
@@ -47,6 +54,9 @@ namespace Hl7.Cql.CqlToElm.Test
             var expectationErrors = expectation.GetErrors();
             if (expectationErrors.Any())
             {
+                WriteLineToFile("c:\\temp\\XmlTest.expectation-did-not-compile.txt",
+                    $"{{ \"{testCase.TestName}\", \"{string.Join("; ", expectationErrors.Select(e=>e.message))}.\" }},"
+                );
                 Assert.Fail($"Case {testFullName} expectation compiled with errors: {expressionErrors.First().message}");
                 return;
             }
@@ -67,6 +77,9 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 var expressionValue = CreateElmToolkit().Lambda(expression).Compile().DynamicInvoke(CqlContext);
                 var expectationValue = CreateElmToolkit().Lambda(expectation).Compile().DynamicInvoke(CqlContext);
+                WriteLineToFile("c:\\temp\\XmlTest.assertion-failed.txt",
+                    $"{{ \"{testCase.TestName}\", \"actual: {expressionValue} does not meet expectation: {expectationValue}"
+                );
                 Assert.Fail($"Case {testFullName} assertion failed. Expected '{expectationValue}', but got '{expressionValue}'.");
             }
         }

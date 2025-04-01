@@ -71,29 +71,23 @@ internal partial class CqlOperators
 
     #region Equivalence
 
-    /*
-     *
-     * Equivalence : https://cql.hl7.org/04-logicalspecification.html#equivalent
-     *
-     * Spec: The Equivalent operator returns:
-     * - true if the arguments are the same value, or if they are both null;
-     * - and false otherwise.
-     *
-     * Spec: With the exception of null behavior and the semantics for specific types defined below, equivalence is the same as equality.
-     */
-
     public bool Equivalent(object? x, object? y, string? precision) =>
-        EquivalentOnNullsOnly(x, y)
-        ?? Comparer.Equivalent(x, y, precision);
+        EquivalentNulls(x is null, y is null)
+            .OrValue(() => Comparer.Equivalent(x, y, precision));
 
     public bool? Equivalent(object? x, object? y) => Equivalent(x!, y!, null);
+
+    public bool? Equivalent(string? x, string? y) => Equivalent(x!, y!, null);
 
     public bool? Equivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right)
     {
         // Spec: For list types, this means that two lists are equivalent if and only if the lists contain elements of the same type, have the same number of elements, and for each element in the lists, in order, the elements are equivalent.
 
-        if (EquivalentOnNullsOnly(left, right) is {} r)
-            return r;
+        if (EquivalentNulls(left is null, right is null) is { HasValue: true } r)
+            return r.Value;
+
+        if ((left, right) is (string sLeft, string sRight))
+            return Equivalent(sLeft, sRight);
 
         var lit = left!.GetEnumerator();
         using var litd = lit as IDisposable;

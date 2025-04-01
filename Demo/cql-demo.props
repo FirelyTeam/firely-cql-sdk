@@ -39,7 +39,7 @@
 		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
 		<!-- <ElmToCSharpEnabled Condition="'$(Configuration)' != 'Release'">false</ElmToCSharpEnabled> -->
 		<!-- <ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release'">true</ElmToCSharpEnabled> -->
-		<!-- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
+		<!--- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
 	</PropertyGroup>
 
 	<!-- ignore sdk warnings -->
