@@ -77,12 +77,7 @@ internal abstract class CqlComparer<T>(
         {
             case CqlComparerEqualsMethod.Compare:
                 int? compareValues = CompareValues(x, y, precision);
-                bool? equalsFromCompare = compareValues switch
-                {
-                    null => null,
-                    0    => true,
-                    _    => false,
-                };
+                bool? equalsFromCompare = CqlComparisonToEquals(compareValues);
                 return equalsFromCompare;
 
             case CqlComparerEqualsMethod.Equals:
@@ -143,12 +138,12 @@ internal abstract class CqlComparer<T>(
         {
             case CqlComparerEquivalentMethod.Compare:
                 int? compareValues = CompareValues(x!, y!, precision);
-                var equivalenceFromCompare = compareValues is null or 0;
+                var equivalenceFromCompare = CqlComparisonToEquivalence(compareValues);
                 return equivalenceFromCompare;
 
             case CqlComparerEquivalentMethod.Equals:
                 bool? equalsValues = EqualsValues(x!, y!, precision);
-                var equivalenceFromEquals = equalsValues is null or true;
+                var equivalenceFromEquals = CqlEqualiltyToEquivalence(equalsValues);
 
                 return equivalenceFromEquals;
 

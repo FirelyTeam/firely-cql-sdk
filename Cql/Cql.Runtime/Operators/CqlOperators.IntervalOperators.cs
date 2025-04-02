@@ -1749,8 +1749,8 @@ namespace Hl7.Cql.Operators
             => IntervalSameOrBeforeHelper(@this, other, null, ToClosed);
         public bool? SameOrBefore(CqlInterval<CqlDate?>? @this, CqlInterval<CqlDate?>? other, string? precision)
         {
-            if (EqualsNulls(@this is null, other is null) is {HasValue:true} m)
-                return m.Value;
+            if (@this is null || other is null)
+                return null;
 
             var thisClosed = ToClosed(@this!)!;
             var otherClosed = ToClosed(other!)!;

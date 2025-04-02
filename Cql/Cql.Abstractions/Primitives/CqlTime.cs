@@ -291,7 +291,7 @@ namespace Hl7.Cql.Primitives
                             left = self;
                             right = other;
                         }
-                        var hourComparison = Compare(left.Hour, right.Hour);
+                        var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
                         return hourComparison;
                     }
                 case DateTimePrecision.Minute:
@@ -304,10 +304,10 @@ namespace Hl7.Cql.Primitives
                             right = other;
                         }
 
-                        var hourComparison = Compare(left.Hour, right.Hour);
+                        var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
                         if (hourComparison == 0)
                         {
-                            var minuteComparison = Compare(left.Minute, right.Minute);
+                            var minuteComparison = CompareTemporalIntegers(left.Minute, right.Minute);
                             return minuteComparison;
                         }
                         else return hourComparison;
@@ -321,13 +321,13 @@ namespace Hl7.Cql.Primitives
                             left = self;
                             right = other;
                         }
-                        var hourComparison = Compare(left.Hour, right.Hour);
+                        var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
                         if (hourComparison == 0)
                         {
-                            var minuteComparison = Compare(left.Minute, right.Minute);
+                            var minuteComparison = CompareTemporalIntegers(left.Minute, right.Minute);
                             if (minuteComparison == 0)
                             {
-                                var secondComparison = Compare(left.Second, right.Second);
+                                var secondComparison = CompareTemporalIntegers(left.Second, right.Second);
                                 return secondComparison;
                             }
                             else return minuteComparison;
@@ -344,16 +344,16 @@ namespace Hl7.Cql.Primitives
                             left = self;
                             right = other;
                         }
-                        var hourComparison = Compare(left.Hour, right.Hour);
+                        var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
                         if (hourComparison == 0)
                         {
-                            var minuteComparison = Compare(left.Minute, right.Minute);
+                            var minuteComparison = CompareTemporalIntegers(left.Minute, right.Minute);
                             if (minuteComparison == 0)
                             {
-                                var secondComparison = Compare(left.Second, right.Second);
+                                var secondComparison = CompareTemporalIntegers(left.Second, right.Second);
                                 if (secondComparison == 0)
                                 {
-                                    var milliComparison = Compare(left.Millisecond, right.Millisecond);
+                                    var milliComparison = CompareTemporalIntegers(left.Millisecond, right.Millisecond);
                                     return milliComparison;
                                 }
                                 return secondComparison;
@@ -371,10 +371,6 @@ namespace Hl7.Cql.Primitives
             }
         }
 
-        private static int? Compare(int? x, int? y) =>
-            CompareAnyNullReturnsNull(x is null, y is null)
-                .OrValue(() => Comparer<int>.Default.Compare(x!.Value, y!.Value));
-
         /// <summary>
         /// Compares this object to <paramref name="other"/> for equivalence.
         /// </summary>
@@ -382,7 +378,7 @@ namespace Hl7.Cql.Primitives
         /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if this object is equivalent to <paramref name="other"/>, else <see langword="false"/>.</returns>
         public bool EquivalentToValue(CqlTime other, string? precision) =>
-            EquivalenceFromCompare(CompareToValue(other, precision));
+            CqlComparisonToEquivalence(CompareToValue(other, precision));
 
         /// <summary>
         /// Returns <see cref="DateTimeIso8601.ToString"/> for <see cref="Value"/>.

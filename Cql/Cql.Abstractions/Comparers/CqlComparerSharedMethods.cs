@@ -6,50 +6,24 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
-
 namespace Hl7.Cql.Comparers;
 
 internal static class CqlComparerSharedMethods
 {
-    internal static Maybe<bool?> EqualsNulls(bool leftIsNull, bool rightIsNull)
-    {
-        var result = (leftIsNull, rightIsNull) switch
-        {
-            (true, true) => null,
-            (true, _)    => null,
-            (_, true)    => null,
-            // (true, true) => true,   // null,
-            // (true, _)    => false,  // null,
-            // (_, true)    => false,  // null,
-            _            => Maybe.NoValueOf<bool?>(),
-        };
-        return result;
-    }
+    public static bool CqlComparisonToEquivalence(int? cqlComparisonResult) => cqlComparisonResult is null or 0;
 
-    internal static Maybe<int?> CompareAnyNullReturnsNull(
-        bool leftIsNull,
-        bool rightIsNull) =>
-        (leftIsNull, rightIsNull) switch
-        {
-            (true, true) => null,
-            (true, _)    => null,
-            (_, true)    => null,
-            _            => NoValueOf<int?>(),
-        };
+    public static int? CompareTemporalIntegers(int? x, int? y) =>
+        x is null || y is null
+            ? null
+            : Math.Sign(x.Value - y.Value);
 
-    internal static bool EquivalenceFromCompare(int? comparison) =>
-        comparison switch
+    public static bool CqlEqualiltyToEquivalence(bool? cqlEqualsResult) => cqlEqualsResult is null or true;
+
+    public static bool? CqlComparisonToEquals(int? compareValues) =>
+        compareValues switch
         {
-            null => true,
+            null => null,
             0    => true,
             _    => false,
         };
-
-    internal static ICqlComparer ToPlainCqlComparer<T>(this ICqlComparer<T> genericComparer) =>
-        genericComparer as ICqlComparer // All derived from CqlComparer<T> will also be ICqlComparer
-        ?? new PlainCqlComparerWrapper<T>(genericComparer); // This is a fallback for external ICqlComparer<T> implementations
 }
-
-file class PlainCqlComparerWrapper<T>(ICqlComparer<T> genericComparer) :
-    CqlComparerWrapper<object, T>(genericComparer, t => (T?)t);

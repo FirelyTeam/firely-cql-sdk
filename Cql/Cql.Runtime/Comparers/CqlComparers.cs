@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Comparers
@@ -100,7 +101,8 @@ namespace Hl7.Cql.Comparers
             if (comparer is null)
                 throw new ArgumentNullException(nameof(comparer));
 
-            ICqlComparer cqlComparer = comparer.ToPlainCqlComparer();
+            ICqlComparer cqlComparer = comparer as ICqlComparer // All derived from CqlComparer<T> will also be ICqlComparer
+                                       ?? new PlainCqlComparerWrapper<T>(comparer);
             Comparers.AddOrUpdate(type, cqlComparer, (_, _) => cqlComparer);
             return this;
         }
@@ -157,3 +159,6 @@ namespace Hl7.Cql.Comparers
         }
     }
 }
+
+file class PlainCqlComparerWrapper<T>(ICqlComparer<T> genericComparer) :
+    CqlComparerWrapper<object, T>(genericComparer, t => (T?)t);

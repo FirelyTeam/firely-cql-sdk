@@ -274,17 +274,17 @@ namespace Hl7.Cql.Primitives
                 // weeks isn't part of the precision enumeration
                 if (precision[0] == 'w')
                 {
-                    var yearComparison = Compare(self.Year, other.Year);
+                    var yearComparison = CompareTemporalIntegers(self.Year, other.Year);
                     if (yearComparison == 0)
                     {
-                        var monthComparison = Compare(self.Month, other.Month);
+                        var monthComparison = CompareTemporalIntegers(self.Month, other.Month);
                         if (monthComparison == 0)
                         {
                             if (self.Day != null && other.Day != null)
                             {
                                 var thisWeeks = (int)(self.Day / CqlDateTimeMath.DaysPerWeek);
                                 var otherWeeks = (int)(other.Day / CqlDateTimeMath.DaysPerWeek);
-                                return Compare(thisWeeks, otherWeeks);
+                                return CompareTemporalIntegers(thisWeeks, otherWeeks);
                             }
                             else return 1;
                         }
@@ -299,26 +299,26 @@ namespace Hl7.Cql.Primitives
             switch (dtp)
             {
                 case DateTimePrecision.Year:
-                    return Compare(self.Year, other.Year);
+                    return CompareTemporalIntegers(self.Year, other.Year);
                 case DateTimePrecision.Month:
                     {
-                        var yearComparison = Compare(self.Year, other.Year);
+                        var yearComparison = CompareTemporalIntegers(self.Year, other.Year);
                         if (yearComparison == 0)
                         {
-                            var monthComparison = Compare(self.Month, other.Month);
+                            var monthComparison = CompareTemporalIntegers(self.Month, other.Month);
                             return monthComparison;
                         }
                         else return yearComparison;
                     }
                 case DateTimePrecision.Day:
                     {
-                        var yearComparison = Compare(self.Year, other.Year);
+                        var yearComparison = CompareTemporalIntegers(self.Year, other.Year);
                         if (yearComparison == 0)
                         {
-                            var monthComparison = Compare(self.Month, other.Month);
+                            var monthComparison = CompareTemporalIntegers(self.Month, other.Month);
                             if (monthComparison == 0)
                             {
-                                var dayComparison = Compare(self.Day, other.Day);
+                                var dayComparison = CompareTemporalIntegers(self.Day, other.Day);
                                 return dayComparison;
                             }
                             else return monthComparison;
@@ -334,10 +334,6 @@ namespace Hl7.Cql.Primitives
                     throw new ArgumentException($"Invalid UCUM precision {precision}", nameof(precision));
             }
         }
-
-        private static int? Compare(int? x, int? y) =>
-            CompareAnyNullReturnsNull(x is null, y is null)
-                .OrValue(() => Comparer<int>.Default.Compare(x!.Value, y!.Value));
 
         /// <summary>
         /// Gets the immediate predecessor of this value in its precision.
@@ -364,7 +360,7 @@ namespace Hl7.Cql.Primitives
         /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if this object is equivalent to <paramref name="other"/>, else <see langword="false"/>.</returns>
         public bool EquivalentToValue(CqlDate other, string? precision) =>
-            EquivalenceFromCompare(CompareToValue(other, precision));
+            CqlComparisonToEquivalence(CompareToValue(other, precision));
 
         /// <summary>
         /// Returns <see cref="DateIso8601.ToString"/> for <see cref="Value"/>.

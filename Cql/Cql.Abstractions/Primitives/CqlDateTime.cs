@@ -345,17 +345,17 @@ namespace Hl7.Cql.Primitives
                 // weeks isn't part of the precision enumeration
                 if (precision[0] == 'w')
                 {
-                    var yearComparison = Compare(self.Year, other.Year);
+                    var yearComparison = CompareTemporalIntegers(self.Year, other.Year);
                     if (yearComparison == 0)
                     {
-                        var monthComparison = Compare(self.Month, other.Month);
+                        var monthComparison = CompareTemporalIntegers(self.Month, other.Month);
                         if (monthComparison == 0)
                         {
                             if (self.Day != null && other.Day != null)
                             {
                                 var thisWeeks = (int)(self.Day / CqlDateTimeMath.DaysPerWeek);
                                 var otherWeeks = (int)(other.Day / CqlDateTimeMath.DaysPerWeek);
-                                return Compare(thisWeeks, otherWeeks);
+                                return CompareTemporalIntegers(thisWeeks, otherWeeks);
                             }
                             else return 1;
                         }
@@ -373,26 +373,26 @@ namespace Hl7.Cql.Primitives
                 case DateTimePrecision.Unknown:
                     throw new ArgumentException($"Invalid UCUM precision {precision}", nameof(precision));
                 case DateTimePrecision.Year:
-                    return Compare(self.Year, other.Year);
+                    return CompareTemporalIntegers(self.Year, other.Year);
                 case DateTimePrecision.Month:
                     {
-                        var yearComparison = Compare(self.Year, other.Year);
+                        var yearComparison = CompareTemporalIntegers(self.Year, other.Year);
                         if (yearComparison == 0)
                         {
-                            var monthComparison = Compare(self.Month, other.Month);
+                            var monthComparison = CompareTemporalIntegers(self.Month, other.Month);
                             return monthComparison;
                         }
                         else return yearComparison;
                     }
                 case DateTimePrecision.Day:
                     {
-                        var yearComparison = Compare(self.Year, other.Year);
+                        var yearComparison = CompareTemporalIntegers(self.Year, other.Year);
                         if (yearComparison == 0)
                         {
-                            var monthComparison = Compare(self.Month, other.Month);
+                            var monthComparison = CompareTemporalIntegers(self.Month, other.Month);
                             if (monthComparison == 0)
                             {
-                                var dayComparison = Compare(self.Day, other.Day);
+                                var dayComparison = CompareTemporalIntegers(self.Day, other.Day);
                                 return dayComparison;
                             }
                             else return monthComparison;
@@ -414,18 +414,18 @@ namespace Hl7.Cql.Primitives
                             left = self;
                             right = other;
                         }
-                        var yearComparison = Compare(left.Year, right.Year);
+                        var yearComparison = CompareTemporalIntegers(left.Year, right.Year);
                         if (yearComparison == 0)
                         {
-                            var monthComparison = Compare(left.Month, right.Month);
+                            var monthComparison = CompareTemporalIntegers(left.Month, right.Month);
 
                             if (monthComparison == 0)
                             {
-                                var dayComparison = Compare(left.Day, right.Day);
+                                var dayComparison = CompareTemporalIntegers(left.Day, right.Day);
 
                                 if (dayComparison == 0)
                                 {
-                                    var hourComparison = Compare(left.Hour, right.Hour);
+                                    var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
                                     return hourComparison;
                                 }
                                 else return dayComparison;
@@ -443,19 +443,19 @@ namespace Hl7.Cql.Primitives
                             left = self;
                             right = other;
                         }
-                        var yearComparison = Compare(left.Year, right.Year);
+                        var yearComparison = CompareTemporalIntegers(left.Year, right.Year);
                         if (yearComparison == 0)
                         {
-                            var monthComparison = Compare(left.Month, right.Month);
+                            var monthComparison = CompareTemporalIntegers(left.Month, right.Month);
                             if (monthComparison == 0)
                             {
-                                var dayComparison = Compare(left.Day, right.Day);
+                                var dayComparison = CompareTemporalIntegers(left.Day, right.Day);
                                 if (dayComparison == 0)
                                 {
-                                    var hourComparison = Compare(left.Hour, right.Hour);
+                                    var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
                                     if (hourComparison == 0)
                                     {
-                                        var minuteComparison = Compare(left.Minute, right.Minute);
+                                        var minuteComparison = CompareTemporalIntegers(left.Minute, right.Minute);
                                         return minuteComparison;
                                     }
                                     else return hourComparison;
@@ -475,24 +475,24 @@ namespace Hl7.Cql.Primitives
                             left = self;
                             right = other;
                         }
-                        var yearComparison = Compare(left.Year, right.Year);
+                        var yearComparison = CompareTemporalIntegers(left.Year, right.Year);
                         if (yearComparison == 0)
                         {
-                            var monthComparison = Compare(left.Month, right.Month);
+                            var monthComparison = CompareTemporalIntegers(left.Month, right.Month);
 
                             if (monthComparison == 0)
                             {
-                                var dayComparison = Compare(left.Day, right.Day);
+                                var dayComparison = CompareTemporalIntegers(left.Day, right.Day);
 
                                 if (dayComparison == 0)
                                 {
-                                    var hourComparison = Compare(left.Hour, right.Hour);
+                                    var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
                                     if (hourComparison == 0)
                                     {
-                                        var minuteComparison = Compare(left.Minute, right.Minute);
+                                        var minuteComparison = CompareTemporalIntegers(left.Minute, right.Minute);
                                         if (minuteComparison == 0)
                                         {
-                                            var secondComparison = Compare(left.Second, right.Second);
+                                            var secondComparison = CompareTemporalIntegers(left.Second, right.Second);
                                             return secondComparison;
                                         }
                                         else return minuteComparison;
@@ -514,27 +514,27 @@ namespace Hl7.Cql.Primitives
                             left = self;
                             right = other;
                         }
-                        var yearComparison = Compare(left.Year, right.Year);
+                        var yearComparison = CompareTemporalIntegers(left.Year, right.Year);
                         if (yearComparison == 0)
                         {
-                            var monthComparison = Compare(left.Month, right.Month);
+                            var monthComparison = CompareTemporalIntegers(left.Month, right.Month);
 
                             if (monthComparison == 0)
                             {
-                                var dayComparison = Compare(left.Day, right.Day);
+                                var dayComparison = CompareTemporalIntegers(left.Day, right.Day);
 
                                 if (dayComparison == 0)
                                 {
-                                    var hourComparison = Compare(left.Hour, right.Hour);
+                                    var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
                                     if (hourComparison == 0)
                                     {
-                                        var minuteComparison = Compare(left.Minute, right.Minute);
+                                        var minuteComparison = CompareTemporalIntegers(left.Minute, right.Minute);
                                         if (minuteComparison == 0)
                                         {
-                                            var secondComparison = Compare(left.Second, right.Second);
+                                            var secondComparison = CompareTemporalIntegers(left.Second, right.Second);
                                             if (secondComparison == 0)
                                             {
-                                                var milliComparison = Compare(left.Millisecond, right.Millisecond);
+                                                var milliComparison = CompareTemporalIntegers(left.Millisecond, right.Millisecond);
                                                 return milliComparison;
                                             }
                                             return secondComparison;
@@ -552,10 +552,6 @@ namespace Hl7.Cql.Primitives
             }
         }
 
-        private static int? Compare(int? x, int? y) =>
-            CompareAnyNullReturnsNull(x is null, y is null)
-            .OrValue(() => Comparer<int>.Default.Compare(x!.Value, y!.Value));
-
         /// <summary>
         /// Compares this object to <paramref name="other"/> for equivalence.
         /// </summary>
@@ -563,7 +559,7 @@ namespace Hl7.Cql.Primitives
         /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if this object is equivalent to <paramref name="other"/>, else <see langword="false"/>.</returns>
         public bool EquivalentToValue(CqlDateTime other, string? precision) =>
-            EquivalenceFromCompare(CompareToValue(other, precision));
+            CqlComparisonToEquivalence(CompareToValue(other, precision));
 
         /// <summary>
         /// Returns <see cref="DateTimeIso8601.ToString"/> for <see cref="Value"/>.
