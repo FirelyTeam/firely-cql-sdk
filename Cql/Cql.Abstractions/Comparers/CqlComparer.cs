@@ -22,7 +22,6 @@ internal enum CqlComparerEqualsMethod
 {
     Equals = 0,
     Compare = 1,
-    //Equivalent = 2,
 }
 
 internal enum CqlComparerNullComparisonStrategy
@@ -45,7 +44,7 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>, ICqlComparer
         CqlComparerNullComparisonStrategy nullComparisonStrategy = CqlComparerNullComparisonStrategy.EitherNullReturnsValue,
         CqlComparerEquivalentMethod equivalentMethod = CqlComparerEquivalentMethod.Equivalent)
     {
-        //NullComparisonStrategy = nullComparisonStrategy;
+        NullComparisonStrategy = nullComparisonStrategy;
         EqualsMethod = equalsMethod;
         EquivalentMethod = equivalentMethod;
         //Dump();
@@ -168,10 +167,6 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>, ICqlComparer
             case CqlComparerEqualsMethod.Equals:
                 bool? equalsValues = EqualsValues(x, y, precision);
                 return equalsValues;
-
-            // case CqlComparerEqualsMethod.Equivalent:
-            //     bool equivalentValues = EquivalentValues(x, y, precision);
-            //     return equivalentValues;
 
             default:
                 throw new ArgumentOutOfRangeException();
