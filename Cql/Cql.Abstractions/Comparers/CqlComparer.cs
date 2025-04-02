@@ -206,7 +206,7 @@ internal abstract class CqlComparer<T>(
     #region HashCoding
 
     public virtual int GetHashCode(T? value) =>
-        IsNull(value)
+        value is null || IsNull(value)
             ? GetHashCodeForNull()
             : GetHashCodeValue(value);
 
@@ -216,7 +216,9 @@ internal abstract class CqlComparer<T>(
     protected static int GetHashCodeForNull() => typeof(T).GetHashCode();
 
     int ICqlComparer.GetHashCode(object? value) =>
-        GetHashCode((T?)value);
+        value is null
+            ? GetHashCodeForNull()
+            : GetHashCode((T?)value);
 
     int ICqlComparer.GetHashCodeValue(object value) =>
         GetHashCodeValue((T)value);
