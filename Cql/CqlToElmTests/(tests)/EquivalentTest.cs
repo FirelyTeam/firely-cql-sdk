@@ -1378,6 +1378,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         #endregion
 
+        #region String
 
         [TestMethod]
         public void String_EquivalentTo_String()
@@ -1450,5 +1451,97 @@ namespace Hl7.Cql.CqlToElm.Test
             var equal = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Equivalent>();
             AssertResult(equal, false);
         }
+
+        #endregion
+
+        #region Code and Concept
+
+        [TestMethod]
+        public void Concept_EquivalentTo_Code()
+        {
+            var cqlToolkit = CreateCqlToolkit();
+            var library = cqlToolkit.MakeLibrary("""
+                 library EqualsTest version '1.0.0'
+                 using FHIR version '4.0.1'
+
+                 define "Code1": Code { system: 'http://loinc.org', code: '8480-6', display: 'Systolic blood pressure' }
+
+                 define "Concept1":
+                    Concept {
+                        codes: { "Code1" },
+                        display: 'Concept1'
+                    }
+
+                 define "AreEquivalent": "Concept1" ~ "Code1"
+                 """);
+            Assert.IsNotNull(library.statements);
+            Assert.AreEqual(3, library.statements.Length);
+        }
+
+        [TestMethod]
+        public void FhirCodeableConcept_EquivalentTo_Concept()
+        {
+            var cqlToolkit = CreateCqlToolkit().AddFHIRHelpers();
+            var library = cqlToolkit.MakeLibrary("""
+                 library EqualsTest version '1.0.0'
+                 using FHIR version '4.0.1'
+
+                 include FHIRHelpers version '4.0.1'
+
+                 define "Fhir Codeable Concept":
+                    FHIR.CodeableConcept {
+                        coding: {
+                            FHIR.Coding {
+                                system: FHIR.uri {value: 'http://loinc.org'},
+                                code: FHIR.code {value: '8480-6'},
+                                display: FHIR.string { value: 'Systolic blood pressure'}
+                            }
+                        },
+                        text: FHIR.string{value: 'FhirCodeableConcept'}
+                    }
+
+                 define "Concept1":
+                     Concept {
+                         codes: {
+                            Code { system: 'http://loinc.org', code: '8480-6', display: 'Systolic blood pressure' }
+                         },
+                         display: 'Concept1'
+                     }
+
+                 define "AreEquivalent": "Fhir Codeable Concept" ~ "Concept1"
+                 """);
+            Assert.IsNotNull(library.statements);
+        }
+
+        [TestMethod]
+        public void FhirCodeableConcept_EquivalentTo_Code()
+        {
+            var cqlToolkit = CreateCqlToolkit().AddFHIRHelpers();
+            var library = cqlToolkit.MakeLibrary("""
+                 library EqualsTest version '1.0.0'
+                 using FHIR version '4.0.1'
+
+                 include FHIRHelpers version '4.0.1'
+
+                 define "Fhir Codeable Concept":
+                    FHIR.CodeableConcept {
+                        coding: {
+                            FHIR.Coding {
+                                system: FHIR.uri {value: 'http://loinc.org'},
+                                code: FHIR.code {value: '8480-6'},
+                                display: FHIR.string { value: 'Systolic blood pressure'}
+                            }
+                        },
+                        text: FHIR.string{value: 'FhirCodeableConcept'}
+                    }
+
+                 define "Code1": Code { system: 'http://loinc.org', code: '8480-6', display: 'Systolic blood pressure' }
+
+                 define "AreEquivalent": "Fhir Codeable Concept" ~ "Code1"
+                 """);
+            Assert.IsNotNull(library.statements);
+        }
+
+        #endregion
     }
 }
