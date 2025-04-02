@@ -63,12 +63,6 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(TupleBaseType), new TupleBaseTypeComparer(this)); // Legacy, will be removed!
             Comparers.TryAdd(typeof(ITuple), new CqlTupleTypeComparer(this));
 
-            ComparerFactories.TryAdd(typeof(Nullable<>), (type, self) =>
-            {
-                var genericType = typeof(NullableComparer<>).MakeGenericType(Nullable.GetUnderlyingType(type)!);
-                ICqlComparer cqlComparer = (ICqlComparer)Activator.CreateInstance(genericType, [self])!;
-                return cqlComparer;
-            });
             ComparerFactories.TryAdd(typeof(KeyValuePair<,>), (type, self) =>
             {
                 var genericArguments = type.GetGenericArguments();
