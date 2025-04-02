@@ -20,6 +20,9 @@ internal partial class CqlOperators
 
     public bool? Equal(object? left, object? right)
     {
+        // https://cql.hl7.org/09-b-cqlreference.html#equal
+        // Spec: If either argument is null, the result is null.
+
         if (EqualsNulls(left is null, right is null) is { HasValue: true } m)
             return m.Value;
 
@@ -67,7 +70,12 @@ internal partial class CqlOperators
             return true;
     }
 
-    public bool? NotEqual(object? left, object? right) => !Equal(left, right);
+    public bool? NotEqual(object? left, object? right)
+    {
+        // https://cql.hl7.org/09-b-cqlreference.html#not-equal
+
+        return !Equal(left, right);
+    }
 
     public bool? ListNotEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right) => !ListEqual(left, right);
 
@@ -77,16 +85,22 @@ internal partial class CqlOperators
 
     public bool Equivalent(object? left, object? right, string? precision)
     {
+        // https://cql.hl7.org/09-b-cqlreference.html#equivalent
+        // Spec: The equivalent (~) operator returns true if the arguments are equivalent in value, or if they are both null; and false otherwise.
+
         if (EquivalentNulls(left is null, right is null) is { HasValue: true } m)
             return m.Value;
 
         return Comparer.Equivalent(left, right, precision);
     }
 
-    public bool? Equivalent(object? left, object? right) => Equivalent(left!, right!, null);
+    public bool? Equivalent(object? left, object? right) =>
+        Equivalent(left!, right!, null);
 
     public bool? Equivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right)
     {
+        // https://cql.hl7.org/09-b-cqlreference.html#equivalent
+        // Spec: The equivalent (~) operator returns true if the arguments are equivalent in value, or if they are both null; and false otherwise.
         // Spec: For list types, this means that two lists are equivalent if and only if the lists contain elements of the same type, have the same number of elements, and for each element in the lists, in order, the elements are equivalent.
 
         if (EquivalentNulls(left is null, right is null) is { HasValue: true } m)
@@ -121,7 +135,11 @@ internal partial class CqlOperators
         return true;
     }
 
-    public bool? NotEquivalent(object? left, object? right) => !Equivalent(left, right);
+    public bool? NotEquivalent(object? left, object? right)
+    {
+        // https://cql.hl7.org/09-b-cqlreference.html#not-equivalent
+        return !Equivalent(left, right);
+    }
 
     public bool? ListNotEquivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right) => !Equivalent(left, right);
 

@@ -7,6 +7,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Operators
@@ -94,12 +95,18 @@ namespace Hl7.Cql.Operators
 
         public bool? Greater(object? left, object? right)
         {
+            // https://cql.hl7.org/09-b-cqlreference.html#greater
+            // Spec:If either argument is null, the result is null.
+            if (EqualsNulls(left is null, right is null) is {HasValue:true} m)
+                return m.Value;
+
             var result = Comparer.Compare(left!, right!, null);
-            if (result == null)
-                return null;
-            else if (result > 0)
-                return true;
-            else return false;
+            return result switch
+            {
+                null => null,
+                > 0  => true,
+                _    => false
+            };
         }
 
         #endregion
@@ -107,30 +114,47 @@ namespace Hl7.Cql.Operators
         #region  Greater Or Equal
         public bool? GreaterOrEqual(object? left, object? right)
         {
+            // https://cql.hl7.org/09-b-cqlreference.html#greater-or-equal
+            // Spec:If either argument is null, the result is null.
+            if (EqualsNulls(left is null, right is null) is { HasValue: true } m)
+                return m.Value;
+
             var result = Comparer.Compare(left!, right!, null);
-            if (result == null)
-                return null;
-            else if (result >= 0)
-                return true;
-            else return false;
+            return result switch
+            {
+                null => null,
+                >= 0 => true,
+                _    => false
+            };
         }
         #endregion
 
         #region Less
         public bool? Less(object? left, object? right)
         {
+            // https://cql.hl7.org/09-b-cqlreference.html#less
+            // Spec:If either argument is null, the result is null.
+            if (EqualsNulls(left is null, right is null) is { HasValue: true } m)
+                return m.Value;
+
             var result = Comparer.Compare(left!, right!, null);
-            if (result == null)
-                return null;
-            else if (result < 0)
-                return true;
-            else return false;
+            return result switch
+            {
+                null => null,
+                < 0  => true,
+                _    => false
+            };
         }
         #endregion
 
         #region Less Or Equal
         public bool? LessOrEqual(object? left, object? right)
         {
+            // https://cql.hl7.org/09-b-cqlreference.html#less-or-equal
+            // Spec:If either argument is null, the result is null.
+            if (EqualsNulls(left is null, right is null) is { HasValue: true } m)
+                return m.Value;
+
             var result = Comparer.Compare(left!, right!, null);
             if (result == null)
                 return null;
@@ -138,12 +162,6 @@ namespace Hl7.Cql.Operators
                 return true;
             else return false;
         }
-        #endregion
-
-        #region  Not Equal
-
-        // bool? NotEqual(object? left, object? right) is located in CqlOperators.EqualityAndEquivalence.cs
-
         #endregion
 
         #region  Not Equivalent

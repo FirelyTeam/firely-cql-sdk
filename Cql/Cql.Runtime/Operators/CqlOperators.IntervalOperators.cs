@@ -1749,12 +1749,13 @@ namespace Hl7.Cql.Operators
             => IntervalSameOrBeforeHelper(@this, other, null, ToClosed);
         public bool? SameOrBefore(CqlInterval<CqlDate?>? @this, CqlInterval<CqlDate?>? other, string? precision)
         {
-            if (@this == null || other == null)
-                return null;
+            if (EqualsNulls(@this is null, other is null) is {HasValue:true} m)
+                return m.Value;
+
             var thisClosed = ToClosed(@this!)!;
             var otherClosed = ToClosed(other!)!;
 
-            if (SamePrecision(@this.low, other.low) == false || SamePrecision(@this.high, other.high) == false)
+            if (SamePrecision(@this!.low, other!.low) == false || SamePrecision(@this.high, other.high) == false)
                 return null;
 
             // if one of the dates has a lower precision than what's passed in, return null
@@ -1767,11 +1768,11 @@ namespace Hl7.Cql.Operators
                     || GreaterOrSamePrecision(other.high!, precision) == false))
                 return null;
 
-            var isSame = Comparer.Compare(thisClosed, otherClosed, precision) == 0;
-            if (isSame) return true;
+            var compare = Comparer.Compare(thisClosed, otherClosed, precision);
+            if (compare == 0) return true;
 
-            var boundaryHit = Comparer.Compare(thisClosed.high!, otherClosed.low!, precision) == 0;
-            if (boundaryHit) return true;
+            var compareBoundary = Comparer.Compare(thisClosed.high!, otherClosed.low!, precision);
+            if (compareBoundary == 0) return true;
 
             return Before(thisClosed, otherClosed, precision);
         }

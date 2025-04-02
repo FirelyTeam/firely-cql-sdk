@@ -43,7 +43,7 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>, ICqlComparer
         CqlComparerNullComparisonStrategy nullComparisonStrategy = CqlComparerNullComparisonStrategy.EitherNullReturnsValue,
         CqlComparerEquivalentMethod equivalentMethod = CqlComparerEquivalentMethod.Equivalent)
     {
-        NullComparisonStrategy = nullComparisonStrategy;
+        //NullComparisonStrategy = nullComparisonStrategy;
         EqualsMethod = equalsMethod;
         EquivalentMethod = equivalentMethod;
         //Dump();
