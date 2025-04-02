@@ -19,14 +19,14 @@ namespace Hl7.Cql.Fhir.Comparers
             CqlComparerEquivalentMethod.Compare)
     {
         protected internal override int? CompareValues(
-            Identifier left,
-            Identifier right,
+            Identifier x,
+            Identifier y,
             string? precision)
         {
-            var systemComp = systemComparer.Compare(left.System, right.System, precision);
+            var systemComp = systemComparer.Compare(x.System, y.System, precision);
             if (systemComp == 0)
             {
-                var valueComp = valueComparer.Compare(left.Value, right.Value, precision);
+                var valueComp = valueComparer.Compare(x.Value, y.Value, precision);
                 return valueComp;
             }
 

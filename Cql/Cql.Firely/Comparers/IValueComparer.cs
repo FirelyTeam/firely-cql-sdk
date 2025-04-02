@@ -18,11 +18,11 @@ namespace Hl7.Cql.Fhir.Comparers
             CqlComparerEquivalentMethod.Compare)
     {
         protected internal override int? CompareValues(
-            IValue<T> left,
-            IValue<T> right,
+            IValue<T> x,
+            IValue<T> y,
             string? precision)
         {
-            return Comparer<T>.Default.Compare(left.Value, right.Value);
+            return Comparer<T>.Default.Compare(x.Value, y.Value);
         }
 
         protected override bool IsNull([NotNullWhen(false)] IValue<T>? value)

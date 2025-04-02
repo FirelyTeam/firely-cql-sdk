@@ -54,23 +54,23 @@ internal static class CqlComparerSharedMethods
         return result;
     }
 
-    internal static Maybe<int?> CompareAnyNullReturnsNull(
-        bool leftIsNull,
-        bool rightIsNull) =>
-        (leftIsNull, rightIsNull) switch
-        {
-            (true, true) => null,
-            (true, _)    => null,
-            (_, true)    => null,
-            _            => NoValueOf<int?>(),
-        };
-
     internal static Maybe<int?> CompareEitherNullReturnsNull(
         bool leftIsNull,
         bool rightIsNull) =>
         (leftIsNull, rightIsNull) switch
         {
             (true, true) => 0,
+            (true, _)    => null,
+            (_, true)    => null,
+            _            => NoValueOf<int?>(),
+        };
+
+    internal static Maybe<int?> CompareAnyNullReturnsNull(
+        bool leftIsNull,
+        bool rightIsNull) =>
+        (leftIsNull, rightIsNull) switch
+        {
+            (true, true) => null,
             (true, _)    => null,
             (_, true)    => null,
             _            => NoValueOf<int?>(),
@@ -132,15 +132,6 @@ internal static class CqlComparerSharedMethods
     internal static ICqlComparer ToPlainCqlComparer<T>(this ICqlComparer<T> genericComparer) =>
         genericComparer as ICqlComparer // All derived from CqlComparer<T> will also be ICqlComparer
         ?? new PlainCqlComparerWrapper<T>(genericComparer); // This is a fallback for external ICqlComparer<T> implementations
-
-    internal static ICqlComparer<T>? ToTypedCqlComparer<T>(this ICqlComparer prev) =>
-        prev switch
-        {
-            ICqlComparer<T> typedCqlComparer => typedCqlComparer,
-            IWrapper { Inner: ICqlComparer<T> inner } => inner,
-            _                                        => null
-        }
-    ;
 }
 
 file class PlainCqlComparerWrapper<T>(ICqlComparer<T> genericComparer) :

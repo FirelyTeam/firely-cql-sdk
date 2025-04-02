@@ -19,12 +19,12 @@ partial class CqlComparers
             CqlComparerEquivalentMethod.Compare)
     {
         protected internal override int? CompareValues(
-            TupleBaseType left,
-            TupleBaseType right,
+            TupleBaseType x,
+            TupleBaseType y,
             string? precision)
         {
-            var xType = left.GetType();
-            var yType = right.GetType();
+            var xType = x.GetType();
+            var yType = y.GetType();
             if (xType != yType)
                 return null;
 
@@ -34,8 +34,8 @@ partial class CqlComparers
                          select new
                          {
                              Property = xProp,
-                             XValue = xProp.GetValue(left),
-                             YValue = foundY == null ? null : foundY.GetValue(right)
+                             XValue = xProp.GetValue(x),
+                             YValue = foundY == null ? null : foundY.GetValue(y)
                          };
 
             foreach (var prop in joined)

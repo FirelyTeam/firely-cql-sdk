@@ -16,25 +16,25 @@ partial class CqlComparers
         private const int MaxDecimalDigits = 8;
 
         protected internal override int? CompareValues(
-            [DisallowNull] decimal? left,
-            [DisallowNull] decimal? right,
+            [DisallowNull] decimal? x,
+            [DisallowNull] decimal? y,
             string? precision)
         {
-            return Comparer<decimal?>.Default.Compare(TruncateDigits(left ?? 0, MaxDecimalDigits), TruncateDigits(right ?? 0, MaxDecimalDigits));
+            return Comparer<decimal?>.Default.Compare(TruncateDigits(x ?? 0, MaxDecimalDigits), TruncateDigits(y ?? 0, MaxDecimalDigits));
         }
 
         protected override bool EquivalentValues(
-            [DisallowNull] decimal? left,
-            [DisallowNull] decimal? right,
+            [DisallowNull] decimal? x,
+            [DisallowNull] decimal? y,
             string? precision)
         {
-            var @thisPrecision = GetPrecision(left.Value);
-            var otherPrecision = GetPrecision(right.Value);
+            var @thisPrecision = GetPrecision(x.Value);
+            var otherPrecision = GetPrecision(y.Value);
             if (@thisPrecision < otherPrecision)
-                right = decimal.Round(right.Value, thisPrecision);
+                y = decimal.Round(y.Value, thisPrecision);
             else if (thisPrecision > otherPrecision)
-                left = decimal.Round(left.Value, otherPrecision);
-            var areEqual = left == right;
+                x = decimal.Round(x.Value, otherPrecision);
+            var areEqual = x == y;
             return areEqual;
         }
 

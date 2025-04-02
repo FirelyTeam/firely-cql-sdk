@@ -23,14 +23,14 @@ namespace Hl7.Cql.Comparers
         private Func<T, T> Successor { get; } = successor ?? throw new ArgumentNullException(nameof(successor));
 
         protected internal override int? CompareValues(
-            CqlInterval<T> left,
-            CqlInterval<T> right,
+            CqlInterval<T> x,
+            CqlInterval<T> y,
             string? precision)
         {
-            var xLow = left.lowClosed ?? false ? left.low : Successor(left.low);
-            var yLow = right.lowClosed ?? false ? right.low : Successor(right.low);
-            var xHigh = left.highClosed ?? false ? left.high : Predecessor(left.high);
-            var yHigh = right.highClosed ?? false ? right.high : Predecessor(right.high);
+            var xLow = x.lowClosed ?? false ? x.low : Successor(x.low);
+            var yLow = y.lowClosed ?? false ? y.low : Successor(y.low);
+            var xHigh = x.highClosed ?? false ? x.high : Predecessor(x.high);
+            var yHigh = y.highClosed ?? false ? y.high : Predecessor(y.high);
 
             if (xLow == null)
             {

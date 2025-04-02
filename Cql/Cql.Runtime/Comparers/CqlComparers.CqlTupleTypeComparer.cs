@@ -17,23 +17,23 @@ partial class CqlComparers
         CqlComparer<ITuple?>(CqlComparerEqualsMethod.Compare, CqlComparerNullComparisonStrategy.EitherNullReturnsNull)
     {
         protected internal override int? CompareValues(
-            ITuple left,
-            ITuple right,
+            ITuple x,
+            ITuple y,
             string? precision)
         {
             // Check the "type" via the metadata
-            if (left.Length == 0 || left.Length != right.Length)
+            if (x.Length == 0 || x.Length != y.Length)
                 return null;
 
-            var xMetadata = left[0] as CqlTupleMetadata;
-            var yMetadata = right[0] as CqlTupleMetadata;
+            var xMetadata = x[0] as CqlTupleMetadata;
+            var yMetadata = y[0] as CqlTupleMetadata;
             if (xMetadata == null || xMetadata != yMetadata)
                 return null;
 
             // Compare the items on the tuple
-            for (int i = 1; i < left.Length; i++)
+            for (int i = 1; i < x.Length; i++)
             {
-                var compare = memberComparer.Compare(left[i], right[i], precision);
+                var compare = memberComparer.Compare(x[i], y[i], precision);
                 if (compare is null or not 0)
                     return compare;
             }
@@ -42,23 +42,23 @@ partial class CqlComparers
         }
 
         protected override bool EquivalentValues(
-            ITuple left,
-            ITuple right,
+            ITuple x,
+            ITuple y,
             string? precision)
         {
             // Check the "type" via the metadata
-            if (left!.Length == 0 || left.Length != right!.Length)
+            if (x!.Length == 0 || x.Length != y!.Length)
                 return false;
 
-            var xMetadata = left[0] as CqlTupleMetadata;
-            var yMetadata = right[0] as CqlTupleMetadata;
+            var xMetadata = x[0] as CqlTupleMetadata;
+            var yMetadata = y[0] as CqlTupleMetadata;
             if (xMetadata == null || xMetadata != yMetadata)
                 return false;
 
             // Compare the items on the tuple
-            for (int i = 1; i < left.Length; i++)
+            for (int i = 1; i < x.Length; i++)
             {
-                var equivalent = memberComparer.Equivalent(left[i], right[i], precision);
+                var equivalent = memberComparer.Equivalent(x[i], y[i], precision);
                 if (!equivalent)
                     return false;
             }

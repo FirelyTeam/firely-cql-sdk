@@ -3,8 +3,8 @@ namespace Hl7.Cql.Comparers;
 partial class CqlComparers : CqlComparer<object>
 {
     protected internal override int? CompareValues(
-        object left,
-        object right,
+        object x,
+        object y,
         string? precision)
     {
     // public override int? Compare(
@@ -16,9 +16,9 @@ partial class CqlComparers : CqlComparer<object>
     //         return null;
 
         bool xySwapped = false;
-        var xType = GetKeyTypeForComparers(left);
+        var xType = GetKeyTypeForComparers(x);
         {
-            var yType = GetKeyTypeForComparers(right);
+            var yType = GetKeyTypeForComparers(y);
             if (xType != yType)
             {
                 // if x and y are not the same type, we prioritize them based on the following order:
@@ -26,7 +26,7 @@ partial class CqlComparers : CqlComparer<object>
                 if (xType.Namespace == "System" && yType.Namespace != "System")
                 {
                     xySwapped = true;
-                    (left, right) = (right, left);
+                    (x, y) = (y, x);
                     xType = yType; // yType won't be used again, so no need to swap it
                 }
             }
@@ -46,19 +46,19 @@ partial class CqlComparers : CqlComparer<object>
                 Comparers.TryAdd(xType, gc);
                 comparer = gc;
             }
-            else if (left is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer? enumerableComparer))
+            else if (x is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer? enumerableComparer))
             {
                 comparer = enumerableComparer;
             }
         }
-        else if (left is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer? listComparer))
+        else if (x is IEnumerable && Comparers.TryGetValue(typeof(IEnumerable), out ICqlComparer? listComparer))
         {
             comparer = listComparer;
         }
 
         if (comparer != null)
         {
-            var result = comparer.Compare(left, right, precision);
+            var result = comparer.Compare(x, y, precision);
             if (xySwapped) result = -result;
             return result;
         }
@@ -67,15 +67,15 @@ partial class CqlComparers : CqlComparer<object>
     }
 
     protected override bool EquivalentValues(
-        object left,
-        object right,
+        object x,
+        object y,
         string? precision)
     {
-        var xType = GetKeyTypeForComparers(left);
+        var xType = GetKeyTypeForComparers(x);
 
         if (Comparers.TryGetValue(xType, out var comparer))
         {
-            return comparer.Equivalent(left, right, precision);
+            return comparer.Equivalent(x, y, precision);
         }
 
         if (xType.IsGenericType)
@@ -85,7 +85,7 @@ partial class CqlComparers : CqlComparer<object>
             {
                 var gc = factory(xType, this);
                 Comparers.TryAdd(xType, gc);
-                return gc.Equivalent(left, right, precision);
+                return gc.Equivalent(x, y, precision);
             }
         }
 

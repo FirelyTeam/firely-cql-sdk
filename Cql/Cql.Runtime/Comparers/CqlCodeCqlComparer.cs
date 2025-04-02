@@ -22,32 +22,32 @@ internal class CqlCodeCqlComparer(StringComparer codeComparer) :
     public static readonly CqlCodeCqlComparer OrdinalIgnoreCase = new(StringComparer.OrdinalIgnoreCase);
 
     protected internal override int? CompareValues(
-        CqlCode left,
-        CqlCode right,
+        CqlCode x,
+        CqlCode y,
         string? precision)
     {
-        var result = codeComparer.Compare(left.code, right.code);
+        var result = codeComparer.Compare(x.code, y.code);
         if (result != 0)
             return result;
 
-        if ((left.system == null) ^ (right.system == null))
+        if ((x.system == null) ^ (y.system == null))
             return null;
 
-        result = StringComparer.OrdinalIgnoreCase.Compare(left.system, right.system);
+        result = StringComparer.OrdinalIgnoreCase.Compare(x.system, y.system);
         if (result != 0)
             return result;
 
-        if ((left.version == null) ^ (right.version == null))
+        if ((x.version == null) ^ (y.version == null))
             return null;
 
-        result = StringComparer.OrdinalIgnoreCase.Compare(left.version, right.version);
+        result = StringComparer.OrdinalIgnoreCase.Compare(x.version, y.version);
         if (result != 0)
             return result;
 
-        if ((left.display == null) ^ (right.display == null))
+        if ((x.display == null) ^ (y.display == null))
             return null;
 
-        result = StringComparer.OrdinalIgnoreCase.Compare(left.display, right.display);
+        result = StringComparer.OrdinalIgnoreCase.Compare(x.display, y.display);
         return result;
     }
 
@@ -57,18 +57,18 @@ internal class CqlCodeCqlComparer(StringComparer codeComparer) :
     }
 
     protected override bool EquivalentValues(
-        CqlCode left,
-        CqlCode right,
+        CqlCode x,
+        CqlCode y,
         string? precision)
     {
-        var result = codeComparer.Compare(left.code, right.code);
+        var result = codeComparer.Compare(x.code, y.code);
         if (result != 0)
             return false;
 
-        if ((left.system == null) ^ (right.system == null))
+        if ((x.system == null) ^ (y.system == null))
             return false;
 
-        result = StringComparer.OrdinalIgnoreCase.Compare(left.system, right.system);
+        result = StringComparer.OrdinalIgnoreCase.Compare(x.system, y.system);
         return result == 0;
     }
 

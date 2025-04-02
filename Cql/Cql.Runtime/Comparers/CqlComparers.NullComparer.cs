@@ -10,7 +10,7 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    private class NullComparer<T>(IComparer<T> through) : IComparer<T>, IComparer
+    private class NullableComparer<T>(IComparer<T> through) : IComparer<T>, IComparer
     {
         public int Compare(T? x, T? y)
         {

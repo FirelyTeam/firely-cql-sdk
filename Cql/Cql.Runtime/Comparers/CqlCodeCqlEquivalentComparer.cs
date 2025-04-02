@@ -18,18 +18,18 @@ internal class CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer) : Cq
     private IComparer<string> CodeComparer { get; } = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
 
     protected internal override int? CompareValues(
-        CqlCode left,
-        CqlCode right,
+        CqlCode x,
+        CqlCode y,
         string? precision)
     {
-        var result = CodeComparer.Compare(left.code, right.code);
+        var result = CodeComparer.Compare(x.code, y.code);
         if (result != 0)
             return result;
 
-        if ((left.system == null) ^ (right.system == null))
+        if ((x.system == null) ^ (y.system == null))
             return null;
 
-        result = OrdinalIgnoreCase.Compare(left.system, right.system);
+        result = OrdinalIgnoreCase.Compare(x.system, y.system);
         return result;
     }
 
@@ -39,18 +39,18 @@ internal class CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer) : Cq
     }
 
     protected override bool EquivalentValues(
-        CqlCode left,
-        CqlCode right,
+        CqlCode x,
+        CqlCode y,
         string? precision)
     {
-        var result = CodeComparer.Compare(left.code, right.code);
+        var result = CodeComparer.Compare(x.code, y.code);
         if (result != 0)
             return false;
 
-        if ((left.system == null) ^ (right.system == null))
+        if ((x.system == null) ^ (y.system == null))
             return false;
 
-        var sc = OrdinalIgnoreCase.Compare(left.system, right.system);
+        var sc = OrdinalIgnoreCase.Compare(x.system, y.system);
         return sc == 0;
     }
 

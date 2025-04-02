@@ -14,14 +14,14 @@ partial class CqlComparers
         CqlComparer<IEnumerable>
     {
         protected internal override int? CompareValues(
-            IEnumerable left,
-            IEnumerable right,
+            IEnumerable x,
+            IEnumerable y,
             string? precision)
         {
-            var lit = left.GetEnumerator();
+            var lit = x.GetEnumerator();
             using var litd = lit as IDisposable;
 
-            var rit = right.GetEnumerator();
+            var rit = y.GetEnumerator();
             using var ritd = rit as IDisposable;
 
             while (lit.MoveNext())
@@ -91,14 +91,14 @@ partial class CqlComparers
         }
 
         protected override bool EquivalentValues(
-            IEnumerable left,
-            IEnumerable right,
+            IEnumerable x,
+            IEnumerable y,
             string? precision)
         {
-            var lit = left.GetEnumerator();
+            var lit = x.GetEnumerator();
             using var litd = lit as IDisposable;
 
-            var rit = right.GetEnumerator();
+            var rit = y.GetEnumerator();
             using var ritd = rit as IDisposable;
 
             while (lit.MoveNext())

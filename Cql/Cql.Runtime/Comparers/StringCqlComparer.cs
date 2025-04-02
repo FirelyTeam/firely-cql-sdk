@@ -15,28 +15,30 @@ namespace Hl7.Cql.Comparers;
 /// Strings are normalized using <see cref="string.Normalize()"/>.
 /// </remarks>
 internal class StringCqlComparer(StringComparer stringComparer) : CqlComparer<string>(
-    equalsMethod: CqlComparerEqualsMethod.Equivalent)
+    //equalsMethod: CqlComparerEqualsMethod.Equivalent
+    equivalentMethod: CqlComparerEquivalentMethod.Equals
+    )
 {
     private StringComparer StringComparer { get; } = stringComparer ?? throw new ArgumentNullException(nameof(stringComparer));
 
     /// <inheritdoc/>
     protected internal override int? CompareValues(
-        string left,
-        string right,
+        string x,
+        string y,
         string? precision)
     {
-        var result = StringComparer.Compare(left.Normalize(), right.Normalize());
+        var result = StringComparer.Compare(x.Normalize(), y.Normalize());
         return result;
     }
 
     /// <inheritdoc/>
-    protected override bool EquivalentValues(
-        string left,
-        string right,
+    protected override bool? EqualsValues(
+        string x,
+        string y,
         string? precision)
     {
-        var thisNormalized = left.Normalize();
-        var otherNormalized = right.Normalize();
+        var thisNormalized = x.Normalize();
+        var otherNormalized = y.Normalize();
         var areEqual = StringComparer.Equals(thisNormalized, otherNormalized);
         return areEqual;
     }

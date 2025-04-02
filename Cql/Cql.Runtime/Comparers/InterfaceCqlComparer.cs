@@ -20,15 +20,15 @@ partial class CqlComparers
         where T : class, ICqlComparable<T>, IEquivalentable<T>
     {
         protected internal override int? CompareValues(
-            T left,
-            T right,
+            T x,
+            T y,
             string? precision) =>
-            left.CompareToValue(right, precision);
+            x.CompareToValue(y, precision);
 
         protected override bool EquivalentValues(
-            T left,
-            T right,
+            T x,
+            T y,
             string? precision) =>
-            left.EquivalentToValue(right, precision);
+            x.EquivalentToValue(y, precision);
     }
 }

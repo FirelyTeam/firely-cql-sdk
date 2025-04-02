@@ -50,13 +50,11 @@ namespace Hl7.Cql.Fhir.Extensions
                 Type codeType = type.GetGenericArguments()[0];
                 Trace.Assert(codeType.IsEnum());
                 Type comparerType = typeof(CodeOfEnumCqlComparer<>).MakeGenericType(codeType);
-                var codeOfEnumCqlComparerInstance = comparerType.InvokeMember(
+                ICqlComparer codeOfEnumCqlComparerInstance = (ICqlComparer)comparerType.InvokeMember(
                     nameof(CodeOfEnumCqlComparer<DummyEnum>.Instance),
                     BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty,
                     null, null, [])!;
-                ICqlComparer codeComparerNonGeneric = ToPlainCqlComparer(codeOfEnumCqlComparerInstance);
-                    //CreateCqlComparerAndUnwrapNonGeneric(comparerType, self);
-                PrimitiveTypeAgainstStringComparer primitiveTypeAgainstStringComparer = new PrimitiveTypeAgainstStringComparer(codeComparerNonGeneric);
+                PrimitiveTypeAgainstStringComparer primitiveTypeAgainstStringComparer = new PrimitiveTypeAgainstStringComparer(codeOfEnumCqlComparerInstance);
                 return primitiveTypeAgainstStringComparer;
             });
 
@@ -64,34 +62,6 @@ namespace Hl7.Cql.Fhir.Extensions
         }
 
         private enum DummyEnum {}
-
-        private class PrimitiveTypeAgainstStringComparer(ICqlComparer inner) :
-            CqlComparer<object>(
-                equalsMethod: CqlComparerEqualsMethod.Compare,
-                equivalentMethod: CqlComparerEquivalentMethod.Compare)
-        {
-            private readonly CqlComparer<object>? _innerCqlComparer = inner as CqlComparer<object>;
-
-            protected internal override int? CompareValues(
-                object left,
-                object right,
-                string? precision)
-            {
-                // We always expect x to be a Code<T> but we only need the ObjectValue on the non-generic base type PrimitiveType.
-                if (left is PrimitiveType xCode && right is string yString)
-                {
-                    if (precision != null)
-                        throw new InvalidOperationException(
-                            $"Precision '{precision}' is not supported for comparing Code<T> to string.");
-
-                    return StringComparer.Ordinal.Compare(xCode.ObjectValue, yString);
-                }
-
-                return _innerCqlComparer != null
-                           ? _innerCqlComparer.CompareValues(left, right, precision)
-                           : inner.Compare(left, right, precision);
-            }
-        }
 
         /// <summary>
         /// Adds comparers for all types derived from <see cref="Resource"/> which compare them by their <see cref="Resource.Id"/> property only.

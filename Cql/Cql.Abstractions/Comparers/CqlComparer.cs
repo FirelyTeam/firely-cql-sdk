@@ -22,7 +22,7 @@ internal enum CqlComparerEqualsMethod
 {
     Equals = 0,
     Compare = 1,
-    Equivalent = 2,
+    //Equivalent = 2,
 }
 
 internal enum CqlComparerNullComparisonStrategy
@@ -45,7 +45,7 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>, ICqlComparer
         CqlComparerNullComparisonStrategy nullComparisonStrategy = CqlComparerNullComparisonStrategy.EitherNullReturnsValue,
         CqlComparerEquivalentMethod equivalentMethod = CqlComparerEquivalentMethod.Equivalent)
     {
-        NullComparisonStrategy = nullComparisonStrategy;
+        //NullComparisonStrategy = nullComparisonStrategy;
         EqualsMethod = equalsMethod;
         EquivalentMethod = equivalentMethod;
         //Dump();
@@ -67,9 +67,10 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>, ICqlComparer
 
     private void Dump()
     {
-        var comparerType = UnwrapAdapters(this)
-            // Skip runtime generated types e.g. <CqlComparerSharedMethods>F0099A10EF23C2A25539B874EADF672CDBD24D153A61E14DA4AEE655EBD616BB6__NonGenericAdapterCqlComparer<int>
-            .First(t => !t.Name.Contains("__"));
+        var comparerType = GetType();
+            // UnwrapAdapters(this)
+            // // Skip runtime generated types e.g. <CqlComparerSharedMethods>F0099A10EF23C2A25539B874EADF672CDBD24D153A61E14DA4AEE655EBD616BB6__NonGenericAdapterCqlComparer<int>
+            // .First(t => !t.Name.Contains("__"));
 
         string line = $"{EqualsMethod}, {NullComparisonStrategy}, {EquivalentMethod}, {comparerType.ToCSharpString(TypeCSharpFormat)}";
 
@@ -83,32 +84,32 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>, ICqlComparer
             goto Again;
         }
 
-        static IEnumerable<Type> UnwrapAdapters(object instance)
-        {
-            Type type = instance.GetType();
-            yield return type;
-
-            while (type.IsImplementingInterface(typeof(IWrapper)))
-            {
-                // var typeName = type.ToCSharpString(TypeCSharpFormat);
-                //
-                // // Skip runtime generated types e.g. <CqlComparerSharedMethods>F0099A10EF23C2A25539B874EADF672CDBD24D153A61E14DA4AEE655EBD616BB6__NonGenericAdapterCqlComparer<int>
-                // if (typeName.Contains("__"))
-                // {
-                //     continue;
-                //     // typeName = typeName.Split("__").Last();
-                //     // comparerType.Append(typeName).Append(" -> ");
-                // }
-
-                var interfaceMapping = type.GetInterfaceMap(typeof(IWrapper));
-                instance = interfaceMapping
-                           .InterfaceMethods
-                           .First(m => m.Name == $"get_{nameof(IWrapper.Inner)}")
-                           .Invoke(instance, [])!;
-                type = instance.GetType();
-                yield return type;
-            }
-        }
+        // static IEnumerable<Type> UnwrapAdapters(object instance)
+        // {
+        //     Type type = instance.GetType();
+        //     yield return type;
+        //
+        //     while (type.IsImplementingInterface(typeof(IWrapper)))
+        //     {
+        //         // var typeName = type.ToCSharpString(TypeCSharpFormat);
+        //         //
+        //         // // Skip runtime generated types e.g. <CqlComparerSharedMethods>F0099A10EF23C2A25539B874EADF672CDBD24D153A61E14DA4AEE655EBD616BB6__NonGenericAdapterCqlComparer<int>
+        //         // if (typeName.Contains("__"))
+        //         // {
+        //         //     continue;
+        //         //     // typeName = typeName.Split("__").Last();
+        //         //     // comparerType.Append(typeName).Append(" -> ");
+        //         // }
+        //
+        //         var interfaceMapping = type.GetInterfaceMap(typeof(IWrapper));
+        //         instance = interfaceMapping
+        //                    .InterfaceMethods
+        //                    .First(m => m.Name == $"get_{nameof(IWrapper.Inner)}")
+        //                    .Invoke(instance, [])!;
+        //         type = instance.GetType();
+        //         yield return type;
+        //     }
+        // }
     }
 
     #endregion
@@ -168,9 +169,9 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>, ICqlComparer
                 bool? equalsValues = EqualsValues(x, y, precision);
                 return equalsValues;
 
-            case CqlComparerEqualsMethod.Equivalent:
-                bool equivalentValues = EquivalentValues(x, y, precision);
-                return equivalentValues;
+            // case CqlComparerEqualsMethod.Equivalent:
+            //     bool equivalentValues = EquivalentValues(x, y, precision);
+            //     return equivalentValues;
 
             default:
                 throw new ArgumentOutOfRangeException();
@@ -190,8 +191,8 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>, ICqlComparer
             : EquivalentValuesSwitch(left!, right!, precision);
 
     protected virtual bool EquivalentValues(
-        [DisallowNull] T left,
-        [DisallowNull] T right,
+        [DisallowNull] T x,
+        [DisallowNull] T y,
         string? precision) =>
         throw new NotImplementedException();
 
@@ -262,8 +263,8 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>, ICqlComparer
     }
 
     protected internal virtual int? CompareValues(
-        [DisallowNull] T left,
-        [DisallowNull] T right,
+        [DisallowNull] T x,
+        [DisallowNull] T y,
         string? precision) =>
         throw new NotImplementedException();
 
@@ -304,7 +305,7 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>, ICqlComparer
     int ICqlComparer.GetHashCode(object? value) =>
         GetHashCode((T?)value);
 
-    public int GetHashCodeValue(object value) =>
+    int ICqlComparer.GetHashCodeValue(object value) =>
         GetHashCodeValue((T)value);
 
     #endregion

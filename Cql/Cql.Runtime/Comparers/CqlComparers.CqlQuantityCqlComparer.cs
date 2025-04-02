@@ -27,37 +27,37 @@ partial class CqlComparers
         private ICqlComparer<string> UnitComparer { get; } = unitComparer ?? throw new ArgumentNullException(nameof(unitComparer));
 
         protected internal override int? CompareValues(
-            CqlQuantity left,
-            CqlQuantity right,
+            CqlQuantity x,
+            CqlQuantity y,
             string? precision)
         {
-            var unitCompare = UnitComparer.Compare(left.unit, right.unit, precision);
-            if (unitCompare == 0 || left.unit == "1" || right.unit == "1")
+            var unitCompare = UnitComparer.Compare(x.unit, y.unit, precision);
+            if (unitCompare == 0 || x.unit == "1" || y.unit == "1")
             {
-                var valueComparison = ValueComparer.Compare(left.value, right.value, precision);
+                var valueComparison = ValueComparer.Compare(x.value, y.value, precision);
                 return valueComparison;
             }
 
             // If no direct comparison is possible, normalize the units using UCUM and
             // redo the comparison.
-            if (left.TryCanonicalize(out var left1) && right.TryCanonicalize(out var right1))
+            if (x.TryCanonicalize(out var left1) && y.TryCanonicalize(out var right1))
             {
                 var valueComparison = ValueComparer.Compare(left1!.value!, right1!.value!, precision);
                 return valueComparison;
             }
 
-            throw new NotSupportedException($"Comparison against unlike units {left.unit} and {right.unit} is not supported.");
+            throw new NotSupportedException($"Comparison against unlike units {x.unit} and {y.unit} is not supported.");
         }
 
         protected override bool EquivalentValues(
-            CqlQuantity left,
-            CqlQuantity right,
+            CqlQuantity x,
+            CqlQuantity y,
             string? precision)
         {
-            var unitCompare = UnitComparer.Equivalent(left!.unit, right!.unit, precision);
-            if (unitCompare || left.unit == "1" || right.unit == "1")
+            var unitCompare = UnitComparer.Equivalent(x!.unit, y!.unit, precision);
+            if (unitCompare || x.unit == "1" || y.unit == "1")
             {
-                var valueComparison = ValueComparer.Equivalent(left.value, right.value, precision);
+                var valueComparison = ValueComparer.Equivalent(x.value, y.value, precision);
                 return valueComparison;
             }
 

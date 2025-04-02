@@ -19,26 +19,26 @@ namespace Hl7.Cql.Fhir.Comparers
             CqlComparerEqualsMethod.Compare, CqlComparerNullComparisonStrategy.EitherNullReturnsNull, CqlComparerEquivalentMethod.Equals) { }
 
         /// <inheritdoc/>
-        protected internal override int? CompareValues(object left, object right, string? precision)
+        protected internal override int? CompareValues(object x, object y, string? precision)
         {
-            var xType = left.GetType();
-            var yType = right.GetType();
+            var xType = x.GetType();
+            var yType = y.GetType();
 
             if (xType.IsEnum)
             {
                 if (yType == xType)
-                    return Comparer<object>.Default.Compare(left, right);
+                    return Comparer<object>.Default.Compare(x, y);
 
                 if (typeof(string).IsAssignableFrom(yType))
-                    return CompareEnumToString(left, (string)right);
+                    return CompareEnumToString(x, (string)y);
             }
             else if (yType.IsEnum)
             {
                 if (yType == xType)
-                    return Comparer<object>.Default.Compare(left, right);
+                    return Comparer<object>.Default.Compare(x, y);
 
                 if (typeof(string).IsAssignableFrom(xType))
-                    return CompareEnumToString(right, (string)left) * -1;
+                    return CompareEnumToString(y, (string)x) * -1;
             }
             return null;
         }

@@ -15,12 +15,12 @@ partial class CqlComparers
     {
         /// <inheritdoc />
         protected internal override int? CompareValues(
-            KeyValuePair<TKey, TValue> left,
-            KeyValuePair<TKey, TValue> right,
+            KeyValuePair<TKey, TValue> x,
+            KeyValuePair<TKey, TValue> y,
             string? precision) =>
-            keyValueComparer.Compare(left.Key, right.Key, precision) switch
+            keyValueComparer.Compare(x.Key, y.Key, precision) switch
             {
-                0     => keyValueComparer.Compare(left.Value, right.Value, precision),
+                0     => keyValueComparer.Compare(x.Value, y.Value, precision),
                 var i => i
             };
 
@@ -37,12 +37,12 @@ partial class CqlComparers
 
         /// <inheritdoc />
         protected override bool EquivalentValues(
-            KeyValuePair<TKey, TValue> left,
-            KeyValuePair<TKey, TValue> right,
+            KeyValuePair<TKey, TValue> x,
+            KeyValuePair<TKey, TValue> y,
             string? precision) =>
-            keyValueComparer.Equivalent(left.Key, right.Key, precision) switch
+            keyValueComparer.Equivalent(x.Key, y.Key, precision) switch
             {
-                true     => keyValueComparer.Equivalent(left.Value, right.Value, precision),
+                true     => keyValueComparer.Equivalent(x.Value, y.Value, precision),
                 var b => b
             };
 

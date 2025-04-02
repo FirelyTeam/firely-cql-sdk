@@ -65,17 +65,15 @@ namespace Hl7.Cql.Comparers
 
             ComparerFactories.TryAdd(typeof(Nullable<>), (type, self) =>
             {
-                var genericType = typeof(NullComparer<>).MakeGenericType(Nullable.GetUnderlyingType(type)!);
-                object comparer = Activator.CreateInstance(genericType, [self])!;
-                ICqlComparer cqlComparer = ToPlainCqlComparer(comparer);
+                var genericType = typeof(NullableComparer<>).MakeGenericType(Nullable.GetUnderlyingType(type)!);
+                ICqlComparer cqlComparer = (ICqlComparer)Activator.CreateInstance(genericType, [self])!;
                 return cqlComparer;
             });
             ComparerFactories.TryAdd(typeof(KeyValuePair<,>), (type, self) =>
             {
                 var genericArguments = type.GetGenericArguments();
                 var genericType = typeof(KeyValuePairCqlComparer<,>).MakeGenericType(genericArguments);
-                object comparer = Activator.CreateInstance(genericType, [self])!;
-                ICqlComparer cqlComparer = ToPlainCqlComparer(comparer);
+                ICqlComparer cqlComparer = (ICqlComparer)Activator.CreateInstance(genericType, [self])!;
                 return cqlComparer;
             });
         }
@@ -117,7 +115,8 @@ namespace Hl7.Cql.Comparers
             if (comparer is null)
                 throw new ArgumentNullException(nameof(comparer));
 
-            Comparers.AddOrUpdate(type, comparer, (_, _) => comparer);
+            ICqlComparer cqlComparer = comparer.ToPlainCqlComparer();
+            Comparers.AddOrUpdate(type, cqlComparer, (_, _) => cqlComparer);
             return this;
         }
 
@@ -170,37 +169,6 @@ namespace Hl7.Cql.Comparers
             Comparers.TryRemove(type, out _);
             ComparerFactories.TryRemove(type, out _);
             return this;
-        }
-    }
-
-    file static class LocalExtensions
-    {
-        // public static void TryAdd<T>(
-        //     this ConcurrentDictionary<Type, ICqlComparer> comparers,
-        //     Type type,
-        //     ICqlComparer<T> comparer)
-        // {
-        //     comparers.AddOrUpdate(
-        //         type,
-        //         _ => comparer.ToPlainCqlComparer(),
-        //         (_, prev) => prev);
-        // }
-
-        public static void AddOrUpdate<T>(
-            this ConcurrentDictionary<Type, ICqlComparer> comparers,
-            Type type,
-            ICqlComparer<T> addComparer,
-            Func<Type, ICqlComparer<T>, ICqlComparer<T>> updateComparerFactory)
-        {
-            comparers.AddOrUpdate(
-                type,
-                _ => addComparer.ToPlainCqlComparer(),
-                (type, prev) =>
-                {
-                    var prevTyped = prev.ToTypedCqlComparer<T>()!;
-                    var newTyped = updateComparerFactory(type, prevTyped);
-                    return newTyped.ToPlainCqlComparer();
-                });
         }
     }
 }
