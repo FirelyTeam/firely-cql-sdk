@@ -1,14 +1,16 @@
 ﻿using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
+using Hl7.Cql.Comparers;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
+using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Test;
 
 using Expression = Hl7.Cql.Elm.Expression;
 
-internal static class FluentElmToolkitExtensions
+internal static class ElmToolkitExtensions
 {
     public static LibrarySetCSharpCodeGenerator GetLibrarySetCSharpCodeGenerator(this ElmToolkit elmToolkit) =>
         elmToolkit.ServiceProvider.GetRequiredService<LibrarySetCSharpCodeGenerator>();
@@ -53,6 +55,4 @@ internal static class FluentElmToolkitExtensions
         LambdaExpression lambda = System.Linq.Expressions.Expression.Lambda(translated, contextParameter);
         return lambda;
     }
-
-
 }

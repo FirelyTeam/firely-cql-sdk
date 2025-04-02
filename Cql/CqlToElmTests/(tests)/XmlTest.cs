@@ -1,6 +1,9 @@
+using Hl7.Cql.Comparers;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Operators;
+using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -10,9 +13,17 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class XmlTest : Base
     {
+        static XmlTest()
+        {
+            CqlContext = FhirCqlContext.ForBundle(now: NowValue);
+
+            var cqlComparers = (CqlComparers)CqlContext.Operators.Comparer;
+            cqlComparers.Register(typeof(TupleBaseType), new LegacyTupleBaseTypeComparer(cqlComparers));
+        }
+
         private static readonly XmlSerializer Serializer = new(typeof(Xml.Tests));
         private static readonly DateTimeOffset NowValue = new(2020, 1, 2, 3, 4, 0, TimeSpan.Zero);
-        private static readonly CqlContext CqlContext = FhirCqlContext.ForBundle(now: NowValue);
+        private static readonly CqlContext CqlContext;
 
         private static void WriteLineToFile(string path, string line)
         {
@@ -135,4 +146,47 @@ namespace Hl7.Cql.CqlToElm.Test
 
         public record TestCase(string File, string Category, string TestName, string Expression, string? Expectation);
     }
+
+    /// <summary>
+    /// Legacy tuple comparer, only needed when invoking definitions directly.
+    /// When generating C#, different value tuples are generated
+    /// </summary>
+    file class LegacyTupleBaseTypeComparer(CqlComparers memberComparer) :
+        CqlComparer<TupleBaseType?>(
+            CqlComparerEqualsMethod.Compare,
+            CqlComparerNullComparisonStrategy.EitherNullReturnsNull,
+            CqlComparerEquivalentMethod.Compare)
+    {
+
+        protected internal override int? CompareValues(
+            TupleBaseType x,
+            TupleBaseType y,
+            string? precision)
+        {
+            var xType = x.GetType();
+            var yType = y.GetType();
+            if (xType != yType)
+                return null;
+
+            var joined = from xProp in xType.GetProperties()
+                         join yProp in yType.GetProperties() on xProp equals yProp into g
+                         from foundY in g.DefaultIfEmpty()
+                         select new
+                         {
+                             Property = xProp,
+                             XValue = xProp.GetValue(x),
+                             YValue = foundY == null ? null : foundY.GetValue(y)
+                         };
+
+            foreach (var prop in joined)
+            {
+                var compare = memberComparer.Compare(prop.XValue, prop.YValue, precision);
+                if (compare is null or not 0)
+                    return compare;
+            }
+
+            return 0;
+        }
+    }
+
 }

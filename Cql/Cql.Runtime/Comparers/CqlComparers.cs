@@ -60,7 +60,6 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(CqlTime), new InterfaceCqlComparer<CqlTime>());
             Comparers.TryAdd(typeof(CqlDateTime), new InterfaceCqlComparer<CqlDateTime>());
 
-            Comparers.TryAdd(typeof(TupleBaseType), new TupleBaseTypeComparer(this)); // Legacy, will be removed!
             Comparers.TryAdd(typeof(ITuple), new CqlTupleTypeComparer(this));
 
             ComparerFactories.TryAdd(typeof(KeyValuePair<,>), (type, self) =>
