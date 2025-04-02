@@ -21,18 +21,23 @@ internal partial class CqlOperators
     public bool? Equal(object? left, object? right)
     {
         // https://cql.hl7.org/09-b-cqlreference.html#equal
-        // Spec: If either argument is null, the result is null.
-
-        if (EqualsNulls(left is null, right is null) is { HasValue: true } m)
-            return m.Value;
+        // Spec:If either argument is null, the result is null.
+        if (left is null || right is null)
+            return null;
 
         return Comparer.EqualsValues(left!, right!, null);
     }
 
     public bool? ListEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right)
     {
-        if (EqualsNulls(left is null, right is null) is {HasValue:true} m)
-            return m.Value;
+        if (left is null || right is null)
+            return null;
+
+        // If their sizes are different, they are not equal.
+        if (left.TryGetNonEnumeratedCount(out var leftCount)
+            && right.TryGetNonEnumeratedCount(out var rightCount)
+            && leftCount != rightCount)
+            return false;
 
         var onlyNull = true;
         var notEmpty = false;
@@ -46,18 +51,21 @@ internal partial class CqlOperators
         {
             if (!rit.MoveNext())
                 return false;
+
             notEmpty = true;
             var lv = lit.Current;
             var rv = rit.Current;
-            if (lv == null)
+            switch ((lv, rv))
             {
-                if (rv != null) return false;
-            }
-            else if (rv == null) return false;
-            else
-            {
-                onlyNull = false;
-                if (Comparer.Compare(lv!, rv!, null) != 0)
+                case (null, null):
+                    continue;
+
+                case (null, not null)
+                    or (not null, null):
+                    return false;
+
+                case (not null, not null) when Comparer.Equals(lv!, rv!, null) is false:
+                    onlyNull = false;
                     return false;
             }
         }
@@ -87,11 +95,12 @@ internal partial class CqlOperators
     {
         // https://cql.hl7.org/09-b-cqlreference.html#equivalent
         // Spec: The equivalent (~) operator returns true if the arguments are equivalent in value, or if they are both null; and false otherwise.
-
-        if (EquivalentNulls(left is null, right is null) is { HasValue: true } m)
-            return m.Value;
-
-        return Comparer.Equivalent(left, right, precision);
+        return (left, right) switch
+        {
+            (null, null)           => true,
+            (null, _) or (_, null) => false,
+            _                      => Comparer.EquivalentValues(left, right, precision)
+        };
     }
 
     public bool? Equivalent(object? left, object? right) =>
@@ -102,12 +111,22 @@ internal partial class CqlOperators
         // https://cql.hl7.org/09-b-cqlreference.html#equivalent
         // Spec: The equivalent (~) operator returns true if the arguments are equivalent in value, or if they are both null; and false otherwise.
         // Spec: For list types, this means that two lists are equivalent if and only if the lists contain elements of the same type, have the same number of elements, and for each element in the lists, in order, the elements are equivalent.
+        return (left, right) switch
+        {
+            (null, null)                  => true,
+            (null, _) or (_, null)        => false,
+            (string, string) => Comparer.EquivalentValues(left, right, null),
+            _                             => ListEquivalent(left, right)
+        };
+    }
 
-        if (EquivalentNulls(left is null, right is null) is { HasValue: true } m)
-            return m.Value;
-
-        if ((left, right) is (string sLeft, string sRight))
-            return Equivalent(sLeft, sRight, null);
+    private bool? ListEquivalent<T>(IEnumerable<T> left, IEnumerable<T> right)
+    {
+        // If their sizes are different, they are not equivalent.
+        if (left.TryGetNonEnumeratedCount(out var leftCount)
+            && right.TryGetNonEnumeratedCount(out var rightCount)
+            && leftCount != rightCount)
+            return false;
 
         var lit = left!.GetEnumerator();
         using var litd = lit as IDisposable;
@@ -122,16 +141,23 @@ internal partial class CqlOperators
 
             var lv = lit.Current;
             var rv = rit.Current;
-            if (lv == null)
+            switch ((lv, rv))
             {
-                if (rv != null) return false;
+                case (null, null):
+                    continue;
+
+                case (null, not null)
+                    or (not null, null):
+                    return false;
+
+                case (not null, not null) when Comparer.Equivalent(lv!, rv!, null) is false:
+                    return false;
             }
-            else if (rv == null) return false;
-            else if (Equivalent(lv!, rv!, null) == false)
-                return false;
         }
+
         if (rit.MoveNext()) // the 2nd list is longer than the 1st.
             return false;
+
         return true;
     }
 

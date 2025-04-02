@@ -14,7 +14,7 @@ partial class CqlComparers
         CqlComparer<KeyValuePair<TKey, TValue>>
     {
         /// <inheritdoc />
-        protected internal override int? CompareValues(
+        protected override int? CompareValues(
             KeyValuePair<TKey, TValue> x,
             KeyValuePair<TKey, TValue> y,
             string? precision) =>

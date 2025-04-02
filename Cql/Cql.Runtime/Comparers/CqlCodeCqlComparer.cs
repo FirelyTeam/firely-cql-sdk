@@ -14,14 +14,14 @@ namespace Hl7.Cql.Comparers;
 /// An CQL comparer that compares two <see cref="CqlCode"/> instances.
 /// </summary>
 internal class CqlCodeCqlComparer(StringComparer codeComparer) :
-    CqlComparer<CqlCode>(CqlComparerEqualsMethod.Compare, CqlComparerNullComparisonStrategy.EitherNullReturnsNull)
+    CqlComparer<CqlCode>(CqlComparerEqualsMethod.Compare)
 {
     /// <summary>
     /// The default comparer, which uses <see cref="StringComparer.OrdinalIgnoreCase"/>.
     /// </summary>
     public static readonly CqlCodeCqlComparer OrdinalIgnoreCase = new(StringComparer.OrdinalIgnoreCase);
 
-    protected internal override int? CompareValues(
+    protected override int? CompareValues(
         CqlCode x,
         CqlCode y,
         string? precision)

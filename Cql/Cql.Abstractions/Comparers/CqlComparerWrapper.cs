@@ -13,7 +13,6 @@ internal class CqlComparerWrapper<T, TInner>(
     Func<T, TInner?> getInner) :
     CqlComparer<T>(
         equalsMethod: inner is CqlComparer<TInner> c1 ? c1.EqualsMethod : default,
-        nullComparisonStrategy: inner is CqlComparer<TInner> c2 ? c2.NullComparisonStrategy : default,
         equivalentMethod: inner is CqlComparer<TInner> c3 ? c3.EquivalentMethod : default)
 {
     private TInner? GetInner(T? value) => value is null ? default : getInner(value);
@@ -30,7 +29,7 @@ internal class CqlComparerWrapper<T, TInner>(
         string? precision) =>
         inner.Equals(GetInner(x), GetInner(y), precision);
 
-    protected internal override int? CompareValues(
+    protected override int? CompareValues(
         [DisallowNull] T x,
         [DisallowNull] T y,
         string? precision) =>

@@ -19,16 +19,7 @@ namespace Hl7.Cql.Comparers
         /// Creates an instance with built-in comparers for system types registerred.
         /// </summary>
         public CqlComparers() : base(
-            equalsMethod: CqlComparerEqualsMethod.Compare,
-            //equalsMethod: CqlComparerEqualsMethod.Equal,
-
-            //equivalentMethod: CqlComparerEquivalentMethod.Compare,
-
-            // if x or y is null it must return null and if both are null then it's a match
-            // if we return 1 or -1 when only 1 side is null then we hit a lot of issues
-            // with Stratification: Race - Two or More Races on a lot of measures
-            // because it expects null/false but gets true because 1 was returned (x null, y = 2) so 2 > null => return 1
-            nullComparisonStrategy: CqlComparerNullComparisonStrategy.EitherNullReturnsNull
+            equalsMethod: CqlComparerEqualsMethod.Compare
             )
         {
             // C# erases nullability for constant ints in some cases, e.g. literals, so we need comparers for both, even though

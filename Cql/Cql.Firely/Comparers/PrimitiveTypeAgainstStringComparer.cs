@@ -16,7 +16,7 @@ internal class PrimitiveTypeAgainstStringComparer(ICqlComparer inner) :
         equalsMethod: CqlComparerEqualsMethod.Compare,
         equivalentMethod: CqlComparerEquivalentMethod.Compare)
 {
-    protected internal override int? CompareValues(
+    protected override int? CompareValues(
         object x,
         object y,
         string? precision)

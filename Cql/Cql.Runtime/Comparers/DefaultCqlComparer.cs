@@ -17,7 +17,7 @@ internal class DefaultCqlComparer<T>() : CqlComparer<T>(
 {
     public static DefaultCqlComparer<T> Instance { get; } = new();
 
-    protected internal override int? CompareValues(T x, T y, string? precision) =>
+    protected override int? CompareValues(T x, T y, string? precision) =>
         Comparer<T>.Default.Compare(x, y);
 
     protected override bool? EqualsValues(T x, T y, string? precision) =>

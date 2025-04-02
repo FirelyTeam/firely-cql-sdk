@@ -16,10 +16,10 @@ namespace Hl7.Cql.Fhir.Comparers
         public static readonly FhirEnumComparer Default = new();
 
         private FhirEnumComparer() : base(
-            CqlComparerEqualsMethod.Compare, CqlComparerNullComparisonStrategy.EitherNullReturnsNull, CqlComparerEquivalentMethod.Equals) { }
+            CqlComparerEqualsMethod.Compare, CqlComparerEquivalentMethod.Equals) { }
 
         /// <inheritdoc/>
-        protected internal override int? CompareValues(object x, object y, string? precision)
+        protected override int? CompareValues(object x, object y, string? precision)
         {
             var xType = x.GetType();
             var yType = y.GetType();

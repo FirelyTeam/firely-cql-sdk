@@ -22,7 +22,7 @@ internal class StringCqlComparer(StringComparer stringComparer) : CqlComparer<st
     private StringComparer StringComparer { get; } = stringComparer ?? throw new ArgumentNullException(nameof(stringComparer));
 
     /// <inheritdoc/>
-    protected internal override int? CompareValues(
+    protected override int? CompareValues(
         string x,
         string y,
         string? precision)

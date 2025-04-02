@@ -97,8 +97,8 @@ namespace Hl7.Cql.Operators
         {
             // https://cql.hl7.org/09-b-cqlreference.html#greater
             // Spec:If either argument is null, the result is null.
-            if (EqualsNulls(left is null, right is null) is {HasValue:true} m)
-                return m.Value;
+            if (left is null || right is null)
+                return null;
 
             var result = Comparer.Compare(left!, right!, null);
             return result switch
@@ -116,8 +116,8 @@ namespace Hl7.Cql.Operators
         {
             // https://cql.hl7.org/09-b-cqlreference.html#greater-or-equal
             // Spec:If either argument is null, the result is null.
-            if (EqualsNulls(left is null, right is null) is { HasValue: true } m)
-                return m.Value;
+            if (left is null || right is null)
+                return null;
 
             var result = Comparer.Compare(left!, right!, null);
             return result switch
@@ -134,8 +134,8 @@ namespace Hl7.Cql.Operators
         {
             // https://cql.hl7.org/09-b-cqlreference.html#less
             // Spec:If either argument is null, the result is null.
-            if (EqualsNulls(left is null, right is null) is { HasValue: true } m)
-                return m.Value;
+            if (left is null || right is null)
+                return null;
 
             var result = Comparer.Compare(left!, right!, null);
             return result switch
@@ -152,8 +152,8 @@ namespace Hl7.Cql.Operators
         {
             // https://cql.hl7.org/09-b-cqlreference.html#less-or-equal
             // Spec:If either argument is null, the result is null.
-            if (EqualsNulls(left is null, right is null) is { HasValue: true } m)
-                return m.Value;
+            if (left is null || right is null)
+                return null;
 
             var result = Comparer.Compare(left!, right!, null);
             if (result == null)
@@ -163,13 +163,6 @@ namespace Hl7.Cql.Operators
             else return false;
         }
         #endregion
-
-        #region  Not Equivalent
-
-        // bool? NotEquivalent(object? left, object? right) is located in CqlOperators.EqualityAndEquivalence.cs
-
-        #endregion
-
     }
 }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member

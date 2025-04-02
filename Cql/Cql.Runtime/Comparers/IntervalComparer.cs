@@ -22,7 +22,7 @@ namespace Hl7.Cql.Comparers
 
         private Func<T, T> Successor { get; } = successor ?? throw new ArgumentNullException(nameof(successor));
 
-        protected internal override int? CompareValues(
+        protected override int? CompareValues(
             CqlInterval<T> x,
             CqlInterval<T> y,
             string? precision)

@@ -15,7 +15,7 @@ partial class CqlComparers
         // CQL only supports 8 digits of scale.
         private const int MaxDecimalDigits = 8;
 
-        protected internal override int? CompareValues(
+        protected override int? CompareValues(
             [DisallowNull] decimal? x,
             [DisallowNull] decimal? y,
             string? precision)

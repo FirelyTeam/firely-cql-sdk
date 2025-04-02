@@ -12,12 +12,11 @@ using static System.StringComparer;
 namespace Hl7.Cql.Comparers;
 
 internal class CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer) : CqlComparer<CqlCode>(
-    CqlComparerEqualsMethod.Compare,
-    CqlComparerNullComparisonStrategy.EitherNullReturnsNull)
+    CqlComparerEqualsMethod.Compare)
 {
     private IComparer<string> CodeComparer { get; } = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
 
-    protected internal override int? CompareValues(
+    protected override int? CompareValues(
         CqlCode x,
         CqlCode y,
         string? precision)

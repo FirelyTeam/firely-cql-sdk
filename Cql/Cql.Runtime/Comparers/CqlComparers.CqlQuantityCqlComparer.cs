@@ -26,7 +26,7 @@ partial class CqlComparers
 
         private ICqlComparer<string> UnitComparer { get; } = unitComparer ?? throw new ArgumentNullException(nameof(unitComparer));
 
-        protected internal override int? CompareValues(
+        protected override int? CompareValues(
             CqlQuantity x,
             CqlQuantity y,
             string? precision)

@@ -12,14 +12,13 @@ partial class CqlComparers
 {
     internal class InterfaceCqlComparer<T>() :
         CqlComparer<T>(
-            CqlComparerEqualsMethod.Compare,
-            CqlComparerNullComparisonStrategy.EitherNullReturnsNull
+            CqlComparerEqualsMethod.Compare
             /*,
         equivalentMethod:CqlComparerEquivalentMethod.Compare */
         )
         where T : class, ICqlComparable<T>, IEquivalentable<T>
     {
-        protected internal override int? CompareValues(
+        protected override int? CompareValues(
             T x,
             T y,
             string? precision) =>

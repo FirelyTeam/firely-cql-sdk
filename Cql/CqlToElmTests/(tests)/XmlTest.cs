@@ -163,11 +163,10 @@ namespace Hl7.Cql.CqlToElm.Test
     file class LegacyTupleBaseTypeComparer(CqlComparers memberComparer) :
         CqlComparer<TupleBaseType?>(
             CqlComparerEqualsMethod.Compare,
-            CqlComparerNullComparisonStrategy.EitherNullReturnsNull,
             CqlComparerEquivalentMethod.Compare)
     {
 
-        protected internal override int? CompareValues(
+        protected override int? CompareValues(
             TupleBaseType x,
             TupleBaseType y,
             string? precision)

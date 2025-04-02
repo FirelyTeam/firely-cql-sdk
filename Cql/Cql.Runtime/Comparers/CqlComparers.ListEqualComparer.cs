@@ -13,7 +13,7 @@ partial class CqlComparers
     private class ListEqualComparer(CqlComparers elementComparer) :
         CqlComparer<IEnumerable>
     {
-        protected internal override int? CompareValues(
+        protected override int? CompareValues(
             IEnumerable x,
             IEnumerable y,
             string? precision)

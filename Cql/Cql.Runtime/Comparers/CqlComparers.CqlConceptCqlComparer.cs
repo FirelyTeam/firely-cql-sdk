@@ -32,7 +32,7 @@ partial class CqlComparers
             return value?.codes is null;
         }
 
-        protected internal override int? CompareValues(
+        protected override int? CompareValues(
             CqlConcept x,
             CqlConcept y,
             string? precision)

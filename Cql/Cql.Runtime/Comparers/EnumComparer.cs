@@ -19,9 +19,9 @@ internal class EnumComparer : CqlComparer<object>
     public static readonly EnumComparer Default = new();
 
     private EnumComparer() :
-        base(CqlComparerEqualsMethod.Compare, CqlComparerNullComparisonStrategy.EitherNullReturnsNull, CqlComparerEquivalentMethod.Equals){ }
+        base(CqlComparerEqualsMethod.Compare, CqlComparerEquivalentMethod.Equals){ }
 
-    protected internal override int? CompareValues(
+    protected override int? CompareValues(
         object x,
         object y,
         string? precision)

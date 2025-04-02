@@ -14,10 +14,9 @@ namespace Hl7.Cql.Fhir.Comparers
     internal class IValueComparer<T>() :
         CqlComparer<IValue<T>>(
             CqlComparerEqualsMethod.Compare,
-            CqlComparerNullComparisonStrategy.EitherNullReturnsNull,
             CqlComparerEquivalentMethod.Compare)
     {
-        protected internal override int? CompareValues(
+        protected override int? CompareValues(
             IValue<T> x,
             IValue<T> y,
             string? precision)

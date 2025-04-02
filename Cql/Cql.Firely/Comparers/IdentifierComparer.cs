@@ -15,10 +15,9 @@ namespace Hl7.Cql.Fhir.Comparers
         ICqlComparer<string> valueComparer) :
         CqlComparer<Identifier>(
             CqlComparerEqualsMethod.Compare,
-            CqlComparerNullComparisonStrategy.EitherNullReturnsNull,
             CqlComparerEquivalentMethod.Compare)
     {
-        protected internal override int? CompareValues(
+        protected override int? CompareValues(
             Identifier x,
             Identifier y,
             string? precision)
