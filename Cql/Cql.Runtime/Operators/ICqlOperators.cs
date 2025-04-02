@@ -219,7 +219,6 @@ namespace Hl7.Cql.Operators
         bool?                                    EnumEqualsString(object? @enum, string? value);
         bool?                                    Equal(object? left, object? right);
         bool?                                    Equivalent(object? left, object? right);
-        bool?                                    Equivalent(string? left, string? right); // If we don't have this, the IEnumerable<T> overload gets picked instead of object
         bool?                                    Equivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         event                                    EventHandler<MessageEventArgs>? MessageReceived;
         CqlInterval<CqlDate?>?                   Except(CqlInterval<CqlDate?>? left, CqlInterval<CqlDate?>? right);

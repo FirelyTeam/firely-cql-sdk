@@ -85,8 +85,6 @@ internal partial class CqlOperators
 
     public bool? Equivalent(object? left, object? right) => Equivalent(left!, right!, null);
 
-    public bool? Equivalent(string? left, string? right) => Equivalent(left!, right!, null);
-
     public bool? Equivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right)
     {
         // Spec: For list types, this means that two lists are equivalent if and only if the lists contain elements of the same type, have the same number of elements, and for each element in the lists, in order, the elements are equivalent.
@@ -95,7 +93,7 @@ internal partial class CqlOperators
             return m.Value;
 
         if ((left, right) is (string sLeft, string sRight))
-            return Equivalent(sLeft, sRight);
+            return Equivalent(sLeft, sRight, null);
 
         var lit = left!.GetEnumerator();
         using var litd = lit as IDisposable;

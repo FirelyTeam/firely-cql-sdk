@@ -1,9 +1,7 @@
 ﻿using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
-using Hl7.Cql.Comparers;
 using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
-using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Test;

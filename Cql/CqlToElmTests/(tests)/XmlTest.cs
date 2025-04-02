@@ -2,7 +2,6 @@ using Hl7.Cql.Comparers;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 
@@ -19,13 +18,6 @@ namespace Hl7.Cql.CqlToElm.Test
 
             var cqlComparers = (CqlComparers)CqlContext.Operators.Comparer;
             cqlComparers.Register(typeof(TupleBaseType), new LegacyTupleBaseTypeComparer(cqlComparers));
-            cqlComparers.Register(typeof(TupleBaseType), (type,_) =>
-            {
-                var genericArguments = type.GetGenericArguments();
-                var genericType = typeof(KeyValuePairCqlComparer<,>).MakeGenericType(genericArguments);
-                ICqlComparer cqlComparer = (ICqlComparer)Activator.CreateInstance(genericType, cqlComparers)!;
-                return cqlComparer;
-            });
         }
 
         private static readonly XmlSerializer Serializer = new(typeof(Xml.Tests));
@@ -195,48 +187,4 @@ namespace Hl7.Cql.CqlToElm.Test
             return 0;
         }
     }
-
-    file class KeyValuePairCqlComparer<TKey, TValue>(CqlComparers keyValueComparer) :
-        CqlComparer<KeyValuePair<TKey, TValue>>
-    {
-        /// <inheritdoc />
-        protected internal override int? CompareValues(
-            KeyValuePair<TKey, TValue> x,
-            KeyValuePair<TKey, TValue> y,
-            string? precision) =>
-            keyValueComparer.Compare(x.Key, y.Key, precision) switch
-            {
-                0     => keyValueComparer.Compare(x.Value, y.Value, precision),
-                var i => i
-            };
-
-        /// <inheritdoc />
-        protected override bool? EqualsValues(
-            KeyValuePair<TKey, TValue> x,
-            KeyValuePair<TKey, TValue> y,
-            string? precision) =>
-            keyValueComparer.Equals(x.Key, y.Key, precision) switch
-            {
-                true  => keyValueComparer.Equals(x.Value, y.Value, precision),
-                var b => b
-            };
-
-        /// <inheritdoc />
-        protected override bool EquivalentValues(
-            KeyValuePair<TKey, TValue> x,
-            KeyValuePair<TKey, TValue> y,
-            string? precision) =>
-            keyValueComparer.Equivalent(x.Key, y.Key, precision) switch
-            {
-                true  => keyValueComparer.Equivalent(x.Value, y.Value, precision),
-                var b => b
-            };
-
-        /// <inheritdoc />
-        protected override int GetHashCodeValue(KeyValuePair<TKey, TValue> value) =>
-            HashCode.Combine(
-                keyValueComparer.GetHashCode(value.Key),
-                keyValueComparer.GetHashCode(value.Value));
-    }
-
 }

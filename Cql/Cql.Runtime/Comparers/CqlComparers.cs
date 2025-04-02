@@ -61,6 +61,15 @@ namespace Hl7.Cql.Comparers
             Comparers.TryAdd(typeof(CqlDateTime), new InterfaceCqlComparer<CqlDateTime>());
 
             Comparers.TryAdd(typeof(ITuple), new CqlTupleTypeComparer(this));
+
+            ComparerFactories.TryAdd(typeof(TupleBaseType), (type, _) =>
+            {
+                var genericArguments = type.GetGenericArguments();
+                var genericType = typeof(KeyValuePairCqlComparer<,>).MakeGenericType(genericArguments);
+                ICqlComparer cqlComparer = (ICqlComparer)Activator.CreateInstance(genericType, this)!;
+                return cqlComparer;
+            });
+
         }
 
         /// <summary>
