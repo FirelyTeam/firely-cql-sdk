@@ -36,9 +36,13 @@
 		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' != 'Release'">true</EmbedDebugSymbolsEnable>
 		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' == 'Release'">false</EmbedDebugSymbolsEnable>
 		<JsonIndentEnable>true</JsonIndentEnable>
+
+		<!-- CqlToElmEnabled and ElmToCSharpEnabled declared in BuildArtifacts.csproj, cql-base.props, cql-demo.props -->
 		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->
-		<!-- <ElmToCSharpEnabled Condition="'$(Configuration)' != 'Release'">false</ElmToCSharpEnabled> -->
-		<!-- <ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release'">true</ElmToCSharpEnabled> -->
+
+		<!-- ElmToCSharpEnabled must be true here for build to pass -->
+		<ElmToCSharpEnabled Condition="'$(Configuration)' != 'Release'">false</ElmToCSharpEnabled>
+		<ElmToCSharpEnabled Condition="'$(Configuration)' == 'Release'">true</ElmToCSharpEnabled>
 		<!--- <ElmToCSharpEnabled>true</ElmToCSharpEnabled> -->
 	</PropertyGroup>
 
