@@ -12,7 +12,7 @@ using static System.StringComparer;
 namespace Hl7.Cql.Comparers;
 
 internal class CqlCodeCqlEquivalentComparer(IComparer<string> codeComparer) : CqlComparer<CqlCode>(
-    CqlComparerEqualsMethod.Compare)
+    CqlComparerEqualsImplementation.Compare)
 {
     private IComparer<string> CodeComparer { get; } = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
 

@@ -7,7 +7,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
 
 namespace Hl7.Cql.Operators

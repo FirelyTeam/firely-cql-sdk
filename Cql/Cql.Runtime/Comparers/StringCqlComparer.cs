@@ -16,7 +16,7 @@ namespace Hl7.Cql.Comparers;
 /// </remarks>
 internal class StringCqlComparer(StringComparer stringComparer) : CqlComparer<string>(
     //equalsMethod: CqlComparerEqualsMethod.Equivalent
-    equivalentMethod: CqlComparerEquivalentMethod.Equals
+    equivalentImplementation: CqlComparerEquivalentImplementation.Equals
     )
 {
     private StringComparer StringComparer { get; } = stringComparer ?? throw new ArgumentNullException(nameof(stringComparer));

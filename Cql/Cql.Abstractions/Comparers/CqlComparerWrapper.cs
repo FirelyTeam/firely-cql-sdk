@@ -12,8 +12,8 @@ internal class CqlComparerWrapper<T, TInner>(
     ICqlComparer<TInner> inner,
     Func<T, TInner?> getInner) :
     CqlComparer<T>(
-        equalsMethod: inner is CqlComparer<TInner> c1 ? c1.EqualsMethod : default,
-        equivalentMethod: inner is CqlComparer<TInner> c3 ? c3.EquivalentMethod : default)
+        equalsImplementation: inner is CqlComparer<TInner> c1 ? c1.EqualsImplementation : default,
+        equivalentImplementation: inner is CqlComparer<TInner> c3 ? c3.EquivalentImplementation : default)
 {
     private TInner? GetInner(T? value) => value is null ? default : getInner(value);
 

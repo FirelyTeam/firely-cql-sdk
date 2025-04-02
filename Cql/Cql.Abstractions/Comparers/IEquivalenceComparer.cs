@@ -18,20 +18,20 @@ namespace Hl7.Cql.Comparers
         /// <summary>
         /// Compares two objects for equivalence.
         /// </summary>
-        /// <param name="left">The first object to compare.</param>
-        /// <param name="right">The second object to compare.</param>
+        /// <param name="x">The first object to compare.</param>
+        /// <param name="y">The second object to compare.</param>
         /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if the objects are equivalent, and <see langword="false"/> if not.  Equivalence computations are never <see langword="null"/> and will return <see langword="false"/> in uncertainty situations.</returns>
-        bool Equivalent(object? left, object? right, string? precision);
+        bool Equivalent(object? x, object? y, string? precision);
 
         /// <summary>
         /// Compares two objects for equivalence.
         /// </summary>
-        /// <param name="left">The first object to compare.</param>
-        /// <param name="right">The second object to compare.</param>
+        /// <param name="x">The first object to compare.</param>
+        /// <param name="y">The second object to compare.</param>
         /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if the objects are equivalent, and <see langword="false"/> if not.  Equivalence computations are never <see langword="null"/> and will return <see langword="false"/> in uncertainty situations.</returns>
-        bool EquivalentValues(object left, object right, string? precision);
+        bool EquivalentValues(object x, object y, string? precision);
     }
 
     /// <summary>
@@ -46,10 +46,10 @@ namespace Hl7.Cql.Comparers
         /// <summary>
         /// Compares two objects for equivalence.
         /// </summary>
-        /// <param name="left">The first object to compare.</param>
-        /// <param name="right">The second object to compare.</param>
+        /// <param name="x">The first object to compare.</param>
+        /// <param name="y">The second object to compare.</param>
         /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if the objects are equivalent, and <see langword="false"/> if not.  Equivalence computations are never <see langword="null"/> and will return <see langword="false"/> in uncertainty situations.</returns>
-        bool Equivalent(T? left, T? right, string? precision);
+        bool Equivalent(T? x, T? y, string? precision);
     }
 }

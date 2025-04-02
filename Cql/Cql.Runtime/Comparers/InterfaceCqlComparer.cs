@@ -12,7 +12,7 @@ partial class CqlComparers
 {
     internal class InterfaceCqlComparer<T>() :
         CqlComparer<T>(
-            CqlComparerEqualsMethod.Compare
+            CqlComparerEqualsImplementation.Compare
             /*,
         equivalentMethod:CqlComparerEquivalentMethod.Compare */
         )

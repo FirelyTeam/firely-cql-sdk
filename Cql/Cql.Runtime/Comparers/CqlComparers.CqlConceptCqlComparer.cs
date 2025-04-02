@@ -16,7 +16,7 @@ partial class CqlComparers
     /// Compares the code and system using the specified comparers.
     /// </summary>
     private class CqlConceptCqlComparer(CqlComparers codeComparer) :
-        CqlComparer<CqlConcept>(CqlComparerEqualsMethod.Compare)
+        CqlComparer<CqlConcept>(CqlComparerEqualsImplementation.Compare)
     {
         private static IEqualityComparer<CqlCode> NewCodeEquivalenceComparer(
             CqlComparers codeComparer,

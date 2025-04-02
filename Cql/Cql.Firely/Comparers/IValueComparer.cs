@@ -13,8 +13,8 @@ namespace Hl7.Cql.Fhir.Comparers
 {
     internal class IValueComparer<T>() :
         CqlComparer<IValue<T>>(
-            CqlComparerEqualsMethod.Compare,
-            CqlComparerEquivalentMethod.Compare)
+            CqlComparerEqualsImplementation.Compare,
+            CqlComparerEquivalentImplementation.Compare)
     {
         protected override int? CompareValues(
             IValue<T> x,

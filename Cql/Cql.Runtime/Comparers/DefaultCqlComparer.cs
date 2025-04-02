@@ -13,7 +13,7 @@ namespace Hl7.Cql.Comparers;
 /// </summary>
 /// <typeparam name="T">The type to compare.</typeparam>
 internal class DefaultCqlComparer<T>() : CqlComparer<T>(
-    equivalentMethod: CqlComparerEquivalentMethod.Compare)
+    equivalentImplementation: CqlComparerEquivalentImplementation.Compare)
 {
     public static DefaultCqlComparer<T> Instance { get; } = new();
 

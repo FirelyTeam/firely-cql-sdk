@@ -20,7 +20,7 @@ partial class CqlComparers
     private class CqlQuantityCqlComparer(
         CqlComparers valueComparer,
         ICqlComparer<string> unitComparer) :
-        CqlComparer<CqlQuantity>(CqlComparerEqualsMethod.Compare)
+        CqlComparer<CqlQuantity>(CqlComparerEqualsImplementation.Compare)
     {
         private CqlComparers ValueComparer { get; } = valueComparer ?? throw new ArgumentNullException(nameof(valueComparer));
 

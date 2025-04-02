@@ -20,7 +20,7 @@ namespace Hl7.Cql.Comparers
         /// Creates an instance with built-in comparers for system types registerred.
         /// </summary>
         public CqlComparers() : base(
-            equalsMethod: CqlComparerEqualsMethod.Compare
+            equalsImplementation: CqlComparerEqualsImplementation.Compare
             )
         {
             // C# erases nullability for constant ints in some cases, e.g. literals, so we need comparers for both, even though

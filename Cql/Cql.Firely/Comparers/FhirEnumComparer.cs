@@ -16,7 +16,7 @@ namespace Hl7.Cql.Fhir.Comparers
         public static readonly FhirEnumComparer Default = new();
 
         private FhirEnumComparer() : base(
-            CqlComparerEqualsMethod.Compare, CqlComparerEquivalentMethod.Equals) { }
+            CqlComparerEqualsImplementation.Compare, CqlComparerEquivalentImplementation.Equals) { }
 
         /// <inheritdoc/>
         protected override int? CompareValues(object x, object y, string? precision)

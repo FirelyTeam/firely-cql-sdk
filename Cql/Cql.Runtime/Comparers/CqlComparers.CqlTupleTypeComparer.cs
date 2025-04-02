@@ -14,7 +14,7 @@ namespace Hl7.Cql.Comparers;
 partial class CqlComparers
 {
     private class CqlTupleTypeComparer(CqlComparers memberComparer) :
-        CqlComparer<ITuple?>(CqlComparerEqualsMethod.Compare)
+        CqlComparer<ITuple?>(CqlComparerEqualsImplementation.Compare)
     {
         protected override int? CompareValues(
             ITuple x,

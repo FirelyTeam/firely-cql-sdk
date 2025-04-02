@@ -13,8 +13,8 @@ namespace Hl7.Cql.Fhir.Comparers;
 
 internal class PrimitiveTypeAgainstStringComparer(ICqlComparer inner) :
     CqlComparer<object>(
-        equalsMethod: CqlComparerEqualsMethod.Compare,
-        equivalentMethod: CqlComparerEquivalentMethod.Compare)
+        equalsImplementation: CqlComparerEqualsImplementation.Compare,
+        equivalentImplementation: CqlComparerEquivalentImplementation.Compare)
 {
     protected override int? CompareValues(
         object x,

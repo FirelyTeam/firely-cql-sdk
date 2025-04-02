@@ -6,32 +6,29 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
-using Hl7.Cql.Abstractions.Infrastructure;
-
 namespace Hl7.Cql.Comparers;
 
-internal enum CqlComparerEquivalentMethod
+internal enum CqlComparerEquivalentImplementation
 {
     Equivalent = 0,
     Compare = 1,
     Equals = 2
 }
 
-internal enum CqlComparerEqualsMethod
+internal enum CqlComparerEqualsImplementation
 {
     Equals = 0,
     Compare = 1,
 }
 
 internal abstract class CqlComparer<T>(
-    CqlComparerEqualsMethod equalsMethod = CqlComparerEqualsMethod.Equals,
-    CqlComparerEquivalentMethod equivalentMethod = CqlComparerEquivalentMethod.Equivalent)
+    CqlComparerEqualsImplementation equalsImplementation = CqlComparerEqualsImplementation.Equals,
+    CqlComparerEquivalentImplementation equivalentImplementation = CqlComparerEquivalentImplementation.Equivalent)
     : ICqlComparer<T>, ICqlComparer
 {
-    public CqlComparerEqualsMethod EqualsMethod { get; } = equalsMethod;
+    public CqlComparerEqualsImplementation EqualsImplementation { get; } = equalsImplementation;
 
-    public CqlComparerEquivalentMethod EquivalentMethod { get; } = equivalentMethod;
+    public CqlComparerEquivalentImplementation EquivalentImplementation { get; } = equivalentImplementation;
 
     #region Equality
 
@@ -42,7 +39,7 @@ internal abstract class CqlComparer<T>(
     {
         // https://cql.hl7.org/04-logicalspecification.html#equal
         // Spec:If either argument is null, the result is null.
-        return IsNull(x) || IsNull(y)
+        return x is null || y is null || IsNull(x) || IsNull(y)
                    ? null
                    : EqualsValuesSwitch(x!, y!, precision);
     }
@@ -70,17 +67,18 @@ internal abstract class CqlComparer<T>(
         [DisallowNull] T y,
         string? precision)
     {
+        // Do a quick check for equality
         if (Equals(x, y))
            return true;
 
-        switch (EqualsMethod)
+        switch (EqualsImplementation)
         {
-            case CqlComparerEqualsMethod.Compare:
+            case CqlComparerEqualsImplementation.Compare:
                 int? compareValues = CompareValues(x, y, precision);
                 bool? equalsFromCompare = CqlComparisonToEquals(compareValues);
                 return equalsFromCompare;
 
-            case CqlComparerEqualsMethod.Equals:
+            case CqlComparerEqualsImplementation.Equals:
                 bool? equalsValues = EqualsValues(x, y, precision);
                 return equalsValues;
 
@@ -94,17 +92,17 @@ internal abstract class CqlComparer<T>(
     #region Equivalence
 
     public virtual bool Equivalent(
-        T? left,
-        T? right,
+        T? x,
+        T? y,
         string? precision)
     {
         // https://cql.hl7.org/04-logicalspecification.html#equivalent
         // Spec:The Equivalent operator returns true if the arguments are the same value, or if they are both null; and false otherwise.
-        return (IsNull(left), IsNull(right)) switch
+        return (IsNull(x), IsNull(y)) switch
         {
             (true, true)           => true,
             (true, _) or (_, true) => false,
-            _                      => EquivalentValuesSwitch(left!, right!, precision)
+            _                      => EquivalentValuesSwitch(x!, y!, precision)
         };
     }
 
@@ -131,23 +129,24 @@ internal abstract class CqlComparer<T>(
         T y,
         string? precision)
     {
+        // Do a quick check for equality
         if (Equals(x, y))
             return true;
 
-        switch (EquivalentMethod)
+        switch (EquivalentImplementation)
         {
-            case CqlComparerEquivalentMethod.Compare:
+            case CqlComparerEquivalentImplementation.Compare:
                 int? compareValues = CompareValues(x!, y!, precision);
                 var equivalenceFromCompare = CqlComparisonToEquivalence(compareValues);
                 return equivalenceFromCompare;
 
-            case CqlComparerEquivalentMethod.Equals:
+            case CqlComparerEquivalentImplementation.Equals:
                 bool? equalsValues = EqualsValues(x!, y!, precision);
                 var equivalenceFromEquals = CqlEqualiltyToEquivalence(equalsValues);
 
                 return equivalenceFromEquals;
 
-            case CqlComparerEquivalentMethod.Equivalent:
+            case CqlComparerEquivalentImplementation.Equivalent:
                 var equivalentValues = EquivalentValues(x!, y!, precision);
                 return equivalentValues;
 
@@ -193,10 +192,14 @@ internal abstract class CqlComparer<T>(
     private int? CompareValuesShared(
         T x,
         T y,
-        string? precision) =>
-        Equals(x, y)
-            ? 0
-            : CompareValues(x!, y!, precision);
+        string? precision)
+    {
+        // Do a quick check for equality
+        if (Equals(x, y))
+            return 0;
+
+        return CompareValues(x!, y!, precision);
+    }
 
     #endregion
 
@@ -219,7 +222,6 @@ internal abstract class CqlComparer<T>(
         GetHashCodeValue((T)value);
 
     #endregion
-
 
     #region Nullability
 
