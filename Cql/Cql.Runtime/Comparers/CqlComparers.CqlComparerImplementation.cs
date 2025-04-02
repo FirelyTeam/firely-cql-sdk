@@ -10,21 +10,21 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers : CqlComparer<object>
 {
-    public override int? Compare(
-        object? x,
-        object? y,
-        string? precision)
-    {
-        // if x or y is null it must return null and if both are null then it's a match
-        // if we return 1 or -1 when only 1 side is null then we hit a lot of issues with Stratification: Race - Two or More Races on a lot of measures
-        // because it expects null/false but gets true because 1 was returned (x null, y = 2) so 2 > null => return 1
-        switch (x, y)
-        {
-            case (null, null):         return 0;
-            case (not null, not null): return ((ICqlComparer)this).CompareValues(x, y, precision);
-            default:                   return null;
-        }
-    }
+    // public override int? Compare(
+    //     object? x,
+    //     object? y,
+    //     string? precision)
+    // {
+    //     // if x or y is null it must return null and if both are null then it's a match
+    //     // if we return 1 or -1 when only 1 side is null then we hit a lot of issues with Stratification: Race - Two or More Races on a lot of measures
+    //     // because it expects null/false but gets true because 1 was returned (x null, y = 2) so 2 > null => return 1
+    //     switch (x, y)
+    //     {
+    //         case (null, null):         return 0;
+    //         case (not null, not null): return ((ICqlComparer)this).CompareValues(x, y, precision);
+    //         default:                   return null;
+    //     }
+    // }
 
     protected override int? CompareValues(
         object x,
