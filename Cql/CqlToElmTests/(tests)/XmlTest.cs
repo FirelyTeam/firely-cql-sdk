@@ -26,7 +26,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private static void WriteLineToFile(string path, string line)
         {
-            //File.WriteAllLines(path, lines)
+            //File.AppendAllLines(path, [line]);
         }
 
 
@@ -44,19 +44,22 @@ namespace Hl7.Cql.CqlToElm.Test
             var expressionErrors = expression.GetErrors();
             if (expressionErrors.Any())
             {
-                WriteLineToFile("c:\\temp\\XmlTest.does-not-compile.txt",
-                    $"{{ \"{testCase.TestName}\", \"{string.Join("; ", expressionErrors.Select(e=>e.message))}.\" }},"
+                var joinedExpressionMessages = string.Join("; ", expressionErrors.Select(e=>e.message));
+                WriteLineToFile(
+                    """c:\temp\XmlTest.does-not-compile.txt""",
+                    $$"""{ "{{testCase.TestName}}", "{{joinedExpressionMessages}}" },"""
                 );
-                Assert.Fail($"Case {testFullName} expression compiled with errors: {expressionErrors.First().message}");
+                Assert.Fail($"Case {testFullName} expression compiled with errors: {joinedExpressionMessages}");
                 return;
             }
 
             if (testCase.Expectation is null)
             {
-                WriteLineToFile("c:\\temp\\XmlTest.missing-expectation.txt",
-                    $"{{ \"{testCase.TestName}\", \"{string.Join("; ", expressionErrors.Select(e=>e.message))}.\" }},"
+                WriteLineToFile(
+                    """c:\temp\XmlTest.missing-expectation.txt""",
+                    $$"""{ "{{testCase.TestName}}", "Missing expectation" },"""
                 );
-                Assert.Inconclusive($"Case {testFullName} is inconclusive; no expectation provided.");
+                Assert.Inconclusive($"Case {testFullName} is inconclusive; no expectation provided");
                 return;
             }
 
@@ -64,15 +67,21 @@ namespace Hl7.Cql.CqlToElm.Test
             var expectationErrors = expectation.GetErrors();
             if (expectationErrors.Any())
             {
-                WriteLineToFile("c:\\temp\\XmlTest.expectation-did-not-compile.txt",
-                    $"{{ \"{testCase.TestName}\", \"{string.Join("; ", expectationErrors.Select(e=>e.message))}.\" }},"
+                var joinedMessages = string.Join("; ", expectationErrors.Select(e=>e.message));
+                WriteLineToFile(
+                    """c:\temp\XmlTest.expectation-did-not-compile.txt""",
+                    $$"""{ "{{testCase.TestName}}", "{{joinedMessages}}" },"""
                 );
-                Assert.Fail($"Case {testFullName} expectation compiled with errors: {expressionErrors.First().message}");
+                Assert.Fail($"Case {testFullName} expectation compiled with errors: {joinedMessages}");
                 return;
             }
 
             if (SkippedTests.DoesNotMatchExpectation.TryGetValue(testCase.TestName, out var doesNotMatchReason))
             {
+                WriteLineToFile(
+                    """c:\temp\XmlTest.expectation-did-not-match.txt""",
+                    $$"""{ "{{testCase.TestName}}", "{{doesNotMatchReason}}" },"""
+                );
                 Assert.Inconclusive($"Cannot evaluate case {testFullName}: {testCase.TestName}: {doesNotMatchReason}");
                 return;
             }
@@ -87,10 +96,11 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 var expressionValue = CreateElmToolkit().Lambda(expression).Compile().DynamicInvoke(CqlContext);
                 var expectationValue = CreateElmToolkit().Lambda(expectation).Compile().DynamicInvoke(CqlContext);
-                WriteLineToFile("c:\\temp\\XmlTest.assertion-failed.txt",
-                    $"{{ \"{testCase.TestName}\", \"actual: {expressionValue} does not meet expectation: {expectationValue}"
+                WriteLineToFile(
+                    """c:\temp\XmlTest.assertion-failed.txt""",
+                    $$"""{ "{{testCase.TestName}}", "actual: {{expressionValue}} does not meet expectation: {{expectationValue}}"""
                 );
-                Assert.Fail($"Case {testFullName} assertion failed. Expected '{expectationValue}', but got '{expressionValue}'.");
+                Assert.Fail($"Case {testFullName} assertion failed. Expected '{expectationValue}', but got '{expressionValue}'");
             }
         }
 
