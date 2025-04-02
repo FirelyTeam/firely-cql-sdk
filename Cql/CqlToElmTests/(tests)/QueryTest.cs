@@ -46,7 +46,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 from(true) t
                 with(false) f
                 such that t != f
-                where t 
+                where t
                 return t
                 """);
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
@@ -60,7 +60,7 @@ namespace Hl7.Cql.CqlToElm.Test
                 define f: from (true) t
                     with(false) fl
                     such that t != x
-                    where t is true 
+                    where t is true
                     return t
                 """, "Could not resolve identifier x in the current library.");
         }
@@ -247,8 +247,8 @@ namespace Hl7.Cql.CqlToElm.Test
 
                 define q:
                     from [Claim] singleClaim
-                        with singleClaim.careTeam careTeam 
-                        such that careTeam.provider is FHIR.Reference 
+                        with singleClaim.careTeam careTeam
+                        such that careTeam.provider is FHIR.Reference
                         and (careTeam.provider as FHIR.Reference).reference is null
                 """);
             var q = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
@@ -272,6 +272,55 @@ namespace Hl7.Cql.CqlToElm.Test
             ((ListTypeSpecifier)q.resultTypeSpecifier).elementType.Should().BeOfType<ListTypeSpecifier>();
         }
 
+        [TestMethod]
+        public void Where_Query()
+        {
+            var lib = CreateCqlToolkit().MakeLibrary("""
+                library Where version '1.0.0'
+
+                using FHIR version '4.0.1'
+
+                define q:
+                    [Observation] o where o.status = 'final'
+                """);
+            var q = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            q.where.Should().NotBeNull();
+            q.@return.Should().BeNull();
+        }
+
+        [TestMethod]
+        public void WhereAndReturn_Query()
+        {
+            var lib = CreateCqlToolkit().MakeLibrary("""
+                 library Where version '1.0.0'
+
+                 using FHIR version '4.0.1'
+
+                 define q:
+                     [Observation] o where o.status = 'final' return o.value
+                 """);
+            var q = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
+            q.where.Should().NotBeNull();
+            q.@return.Should().NotBeNull();
+        }
+
+        [TestMethod]
+        public void WhereAndCountAggregate_Query()
+        {
+            var lib = CreateCqlToolkit().MakeLibrary("""
+                 library Where version '1.0.0'
+
+                 using FHIR version '4.0.1'
+
+                 define q:
+                     Count([Observation] o where o.status = 'final')
+                 """);
+            var c = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Count>();
+            var q = c.source as Query;
+            q.Should().NotBeNull();
+            q.where.Should().NotBeNull();
+            q.@return.Should().BeNull();
+        }
 
         [TestMethod]
         public void Aggregate_Factorial()
