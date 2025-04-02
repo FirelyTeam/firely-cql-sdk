@@ -20,8 +20,8 @@ internal class DefaultCqlComparer<T>() : CqlComparer<T>(
     protected internal override int? CompareValues(T left, T right, string? precision) =>
         Comparer<T>.Default.Compare(left, right);
 
-    protected override bool? EqualsValues(T left, T right, string? precision) =>
-        Comparer<T>.Default.Compare(left, right) == 0;
+    protected override bool? EqualsValues(T x, T y, string? precision) =>
+        Comparer<T>.Default.Compare(x, y) == 0;
 
     protected override int GetHashCodeValue([DisallowNull] T value) =>
         EqualityComparer<T>.Default.GetHashCode(value);

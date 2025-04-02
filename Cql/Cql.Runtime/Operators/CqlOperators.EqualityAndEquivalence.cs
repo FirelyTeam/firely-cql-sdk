@@ -18,14 +18,18 @@ internal partial class CqlOperators
 
     private EqualityComparerBridge EqualityComparer { get; }
 
-    // bool? ICqlComparer<object>.Equals(object? x, object? y, string? precision) => Comparer.Equals(x, y, precision);
+    public bool? Equal(object? left, object? right)
+    {
+        if (EqualsNulls(left is null, right is null) is { HasValue: true } m)
+            return m.Value;
 
-    public bool? Equal(object? x, object? y) => x == null || y == null ? null : Comparer.Equals(x, y, null);
+        return Comparer.EqualsValues(left!, right!, null);
+    }
 
     public bool? ListEqual<T>(IEnumerable<T>? left, IEnumerable<T>? right)
     {
-        if (left == null || right == null)
-            return null;
+        if (EqualsNulls(left is null, right is null) is {HasValue:true} m)
+            return m.Value;
 
         var onlyNull = true;
         var notEmpty = false;
@@ -71,20 +75,24 @@ internal partial class CqlOperators
 
     #region Equivalence
 
-    public bool Equivalent(object? x, object? y, string? precision) =>
-        EquivalentNulls(x is null, y is null)
-            .OrValue(() => Comparer.Equivalent(x, y, precision));
+    public bool Equivalent(object? left, object? right, string? precision)
+    {
+        if (EquivalentNulls(left is null, right is null) is { HasValue: true } m)
+            return m.Value;
 
-    public bool? Equivalent(object? x, object? y) => Equivalent(x!, y!, null);
+        return Comparer.Equivalent(left, right, precision);
+    }
 
-    public bool? Equivalent(string? x, string? y) => Equivalent(x!, y!, null);
+    public bool? Equivalent(object? left, object? right) => Equivalent(left!, right!, null);
+
+    public bool? Equivalent(string? left, string? right) => Equivalent(left!, right!, null);
 
     public bool? Equivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right)
     {
         // Spec: For list types, this means that two lists are equivalent if and only if the lists contain elements of the same type, have the same number of elements, and for each element in the lists, in order, the elements are equivalent.
 
-        if (EquivalentNulls(left is null, right is null) is { HasValue: true } r)
-            return r.Value;
+        if (EquivalentNulls(left is null, right is null) is { HasValue: true } m)
+            return m.Value;
 
         if ((left, right) is (string sLeft, string sRight))
             return Equivalent(sLeft, sRight);

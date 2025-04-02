@@ -43,10 +43,16 @@ Hl7.Cql.Abstractions.UCUMUnits
 Hl7.Cql.Abstractions.Units
 Hl7.Cql.Comparers.ICqlComparable<T>
 Hl7.Cql.Comparers.ICqlComparable<T>.CompareToValue(T! other, string? precision = null) -> int?
+Hl7.Cql.Comparers.ICqlComparer
+Hl7.Cql.Comparers.ICqlComparer.Compare(object? x, object? y, string? precision) -> int?
+Hl7.Cql.Comparers.ICqlComparer.Equals(object? x, object? y, string? precision) -> bool?
+Hl7.Cql.Comparers.ICqlComparer.GetHashCode(object? x) -> int
 Hl7.Cql.Comparers.ICqlComparer<T>
 Hl7.Cql.Comparers.ICqlComparer<T>.Compare(T? left, T? right, string? precision) -> int?
 Hl7.Cql.Comparers.ICqlComparer<T>.Equals(T? left, T? right, string? precision) -> bool?
 Hl7.Cql.Comparers.ICqlComparer<T>.GetHashCode(T? value) -> int
+Hl7.Cql.Comparers.IEquivalenceComparer
+Hl7.Cql.Comparers.IEquivalenceComparer.Equivalent(object? left, object? right, string? precision) -> bool
 Hl7.Cql.Comparers.IEquivalenceComparer<T>
 Hl7.Cql.Comparers.IEquivalenceComparer<T>.Equivalent(T? left, T? right, string? precision) -> bool
 Hl7.Cql.Comparers.IEquivalentable<T>

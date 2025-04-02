@@ -37,46 +37,51 @@ internal readonly struct Maybe<T>(T value) : IEquatable<Maybe<T>>
 
     public T Value { get; } = value;
 
-    public bool Equals(Maybe<T> other) => HasValue == other.HasValue && EqualityComparer<T>.Default.Equals(Value, other.Value);
+    public bool Equals(Maybe<T> other) =>
+        HasValue == other.HasValue && EqualityComparer<T>.Default.Equals(Value, other.Value);
 
-    public override bool Equals(object? other) => other is Maybe<T> m && Equals(m);
+    public override bool Equals(object? other) =>
+        other is Maybe<T> m && Equals(m);
 
-    public override int GetHashCode() => HasValue ? EqualityComparer<T>.Default.GetHashCode(Value!) : 0;
+    public override int GetHashCode() =>
+        HasValue ? EqualityComparer<T>.Default.GetHashCode(Value!) : 0;
 
-    public TResult Match<TResult>(Func<T, TResult>? some, Func<TResult>? none, TResult defaultResult = default)
-    {
-        TResult result = defaultResult;
-        Switch(some is null ? null : v => result = some(v), none is null ? null : () => none());
-        return result;
-    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public TResult Match<TResult>(Func<T, TResult>? some, Func<TResult>? none, TResult defaultResult = default) =>
+        (HasValue, some, none) switch
+        {
+            (true, not null, _) => some(Value),
+            (true, _, not null) => none(),
+            _                   => defaultResult
+        };
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void Switch(Action<T>? some, Action? none)
     {
         if (HasValue) some?.Invoke(Value);
         else none?.Invoke();
     }
 
-    public T OrValue(Func<T> fn)
-    {
-        if (HasValue) return Value;
-        else return fn();
-    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public T OrValue(Func<T> getValue) =>
+        HasValue ? Value : getValue();
 
-    public T OrValue(T value)
-    {
-        return HasValue ? Value : value;
-    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public T OrValue(T value) =>
+        HasValue ? Value : value;
 
-    public T OrDefault()
-    {
-        return OrValue(default(T)!);
-    }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public T OrDefault() =>
+        OrValue(default(T)!);
 
-    public override string? ToString() => Match(v => v?.ToString(), () => "(n/a)");
+    public override string? ToString() =>
+        Match(v => v?.ToString(), () => "(n/a)");
 }
 
 internal static class MaybeExtensions
 {
-    public static T? OrNullableValue<T>(this Maybe<T> maybe, Func<T?> fn)
-        where T:struct => maybe.HasValue ? maybe.Value : fn();
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public static T? OrNullableValue<T>(this Maybe<T> maybe, Func<T?> getNullableValue)
+        where T:struct =>
+        maybe.HasValue ? maybe.Value : getNullableValue();
 }

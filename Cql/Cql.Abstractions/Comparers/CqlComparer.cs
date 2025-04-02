@@ -40,12 +40,6 @@ internal enum CqlComparerNullComparisonStrategy
 
 internal abstract class CqlComparer<T> : ICqlComparer<T>, ICqlComparer
 {
-    private static readonly TypeCSharpFormat TypeCSharpFormat = TypeCSharpFormat.Default with
-    {
-        UseKeywords = true,
-        NoNamespaces = true,
-    };
-
     protected CqlComparer(
         CqlComparerEqualsMethod equalsMethod = CqlComparerEqualsMethod.Equals,
         CqlComparerNullComparisonStrategy nullComparisonStrategy = CqlComparerNullComparisonStrategy.EitherNullReturnsValue,
@@ -56,6 +50,20 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>, ICqlComparer
         EquivalentMethod = equivalentMethod;
         //Dump();
     }
+
+    public CqlComparerNullComparisonStrategy NullComparisonStrategy { get; }
+
+    public CqlComparerEqualsMethod EqualsMethod { get; }
+
+    public CqlComparerEquivalentMethod EquivalentMethod { get; }
+
+    #region Debug Dumping ##REVIEW: Remove before merging
+
+    private static readonly TypeCSharpFormat TypeCSharpFormat = TypeCSharpFormat.Default with
+    {
+        UseKeywords = true,
+        NoNamespaces = true,
+    };
 
     private void Dump()
     {
@@ -103,43 +111,83 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>, ICqlComparer
         }
     }
 
-    public CqlComparerNullComparisonStrategy NullComparisonStrategy { get; }
-    public CqlComparerEqualsMethod EqualsMethod { get; }
-    public CqlComparerEquivalentMethod EquivalentMethod { get; }
+    #endregion
+
+    #region Equality
+
+    public bool? Equals(
+        T? x,
+        T? y,
+        string? precision)
+    {
+        if (EqualsNulls(IsNull(x), IsNull(y)) is { HasValue: true } m)
+            return m.Value;
+
+        if (Object.Equals(x, y))
+            return true;
+
+        return EqualsValuesSwitch(x!, y!, precision);
+    }
+
+    protected virtual bool? EqualsValues(
+        [DisallowNull] T x,
+        [DisallowNull] T y,
+        string? precision) =>
+        throw new NotImplementedException();
+
+    bool? ICqlComparer.Equals(
+        object? x,
+        object? y,
+        string? precision) =>
+        Equals((T?)x, (T?)y, precision);
+
+    bool? ICqlComparer.EqualsValues(
+        object x,
+        object y,
+        string? precision)
+    {
+        if (Object.Equals(x, y))
+            return true;
+
+        return EqualsValuesSwitch((T)x, (T)y, precision);
+    }
+
+    private bool? EqualsValuesSwitch(
+        [DisallowNull] T x,
+        [DisallowNull] T y,
+        string? precision)
+    {
+        switch (EqualsMethod)
+        {
+            case CqlComparerEqualsMethod.Compare:
+                int? compareValues = CompareValues(x, y, precision);
+                bool? equalsFromCompare = EqualsFromCompare(compareValues);
+                return equalsFromCompare;
+
+            case CqlComparerEqualsMethod.Equals:
+                bool? equalsValues = EqualsValues(x, y, precision);
+                return equalsValues;
+
+            case CqlComparerEqualsMethod.Equivalent:
+                bool equivalentValues = EquivalentValues(x, y, precision);
+                return equivalentValues;
+
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    }
+
+    #endregion
+
+    #region Equivalence
 
     public virtual bool Equivalent(
         T? left,
         T? right,
         string? precision) =>
-        EquivalentNulls(IsNull(left), IsNull(right))
-            .OrValue(() =>
-            {
-                if (Equals(left, right))
-                    return true;
-
-                switch (EquivalentMethod)
-                {
-                    case CqlComparerEquivalentMethod.Compare:
-                        int? compareValues = CompareValues(left!, right!, precision);
-                        var equivalenceFromCompare = EquivalenceFromCompare(compareValues);
-
-                        return equivalenceFromCompare;
-
-                    case CqlComparerEquivalentMethod.Equals:
-                        bool? equalsValues = EqualsValues(left!, right!, precision);
-                        var equivalenceFromEquals = EquivalenceFromEquals(equalsValues);
-
-                        return equivalenceFromEquals;
-
-                    case CqlComparerEquivalentMethod.Equivalent:
-                        var equivalentValues = EquivalentValues(left!, right!, precision);
-
-                        return equivalentValues;
-
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            });
+        EquivalentNulls(IsNull(left), IsNull(right)) is { HasValue: true } m
+            ? m.Value
+            : EquivalentValuesSwitch(left!, right!, precision);
 
     protected virtual bool EquivalentValues(
         [DisallowNull] T left,
@@ -147,63 +195,70 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>, ICqlComparer
         string? precision) =>
         throw new NotImplementedException();
 
-    public bool? Equals(
-        T? left,
-        T? right,
+    bool IEquivalenceComparer.Equivalent(
+        object? x,
+        object? y,
+        string? precision) =>
+        Equivalent((T?)x, (T?)y, precision);
+
+    bool IEquivalenceComparer.EquivalentValues(
+        object x,
+        object y,
+        string? precision) =>
+        EquivalentValuesSwitch((T)x, (T)y, precision);
+
+    private bool EquivalentValuesSwitch(
+        T x,
+        T y,
         string? precision)
     {
-        return EqualsNulls(IsNull(left), IsNull(right))
-            .OrValue(() =>
-            {
-                if (Object.Equals(left, right))
-                    return true;
+        if (Equals(x, y))
+            return true;
 
-                switch (EqualsMethod)
-                {
-                    case CqlComparerEqualsMethod.Compare:
-                        int? compareValues = CompareValues(left!, right!, precision);
-                        bool? equalsFromCompare = EqualsFromCompare(compareValues);
-                        return equalsFromCompare;
+        switch (EquivalentMethod)
+        {
+            case CqlComparerEquivalentMethod.Compare:
+                int? compareValues = CompareValues(x!, y!, precision);
+                var equivalenceFromCompare = EquivalenceFromCompare(compareValues);
 
-                    case CqlComparerEqualsMethod.Equals:
-                        bool? equalsValues = EqualsValues(left!, right!, precision);
-                        return equalsValues;
+                return equivalenceFromCompare;
 
-                    case CqlComparerEqualsMethod.Equivalent:
-                        bool equivalentValues = EquivalentValues(left!, right!, precision);
-                        return equivalentValues;
+            case CqlComparerEquivalentMethod.Equals:
+                bool? equalsValues = EqualsValues(x!, y!, precision);
+                var equivalenceFromEquals = EquivalenceFromEquals(equalsValues);
 
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            });
+                return equivalenceFromEquals;
+
+            case CqlComparerEquivalentMethod.Equivalent:
+                var equivalentValues = EquivalentValues(x!, y!, precision);
+
+                return equivalentValues;
+
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
     }
 
-    protected virtual bool? EqualsValues(
-        [DisallowNull] T left,
-        [DisallowNull] T right,
-        string? precision) =>
-        throw new NotImplementedException();
+    #endregion
+
+    #region Comparison
 
     public virtual int? Compare(
-        T? left,
-        T? right,
+        T? x,
+        T? y,
         string? precision)
     {
         var compareNulls = NullComparisonStrategy switch
         {
-            CqlComparerNullComparisonStrategy.EitherNullReturnsValue => CompareEitherNullReturnsValue(IsNull(left), IsNull(right)),
-            CqlComparerNullComparisonStrategy.EitherNullReturnsNull  => CompareEitherNullReturnsNull(IsNull(left), IsNull(right)),
+            CqlComparerNullComparisonStrategy.EitherNullReturnsValue => CompareEitherNullReturnsValue(IsNull(x), IsNull(y)),
+            CqlComparerNullComparisonStrategy.EitherNullReturnsNull  => CompareEitherNullReturnsNull(IsNull(x), IsNull(y)),
             _                                                        => throw new ArgumentOutOfRangeException(),
         };
-        return compareNulls
-            .OrValue(() =>
-            {
-                if (Equals(left, right))
-                    return 0;
 
-                return CompareValues(left!, right!, precision);
-            });
+        if (compareNulls is { HasValue: true } m)
+            return m.Value;
+
+        return CompareValuesShared(x!, y!, precision);
     }
 
     protected internal virtual int? CompareValues(
@@ -212,37 +267,53 @@ internal abstract class CqlComparer<T> : ICqlComparer<T>, ICqlComparer
         string? precision) =>
         throw new NotImplementedException();
 
+    int? ICqlComparer.Compare(
+        object? x,
+        object? y,
+        string? precision) =>
+        Compare((T?)x, (T?)y, precision);
+
+    int? ICqlComparer.CompareValues(
+        object x,
+        object y,
+        string? precision) =>
+        CompareValuesShared((T)x, (T)y, precision);
+
+    private int? CompareValuesShared(
+        T x,
+        T y,
+        string? precision) =>
+        Equals(x, y)
+            ? 0
+            : CompareValues(x!, y!, precision);
+
+    #endregion
+
+    #region HashCoding
+
     public virtual int GetHashCode(T? value) =>
         IsNull(value)
             ? GetHashCodeForNull()
             : GetHashCodeValue(value);
 
-    protected virtual bool IsNull([NotNullWhen(false)] T? value) =>
-        value is null;
-
-    protected static int GetHashCodeForNull() => typeof(T).GetHashCode();
-
     protected virtual int GetHashCodeValue([DisallowNull] T value) =>
         value.GetHashCode();
 
-    bool IEquivalenceComparer.Equivalent(
-        object? left,
-        object? right,
-        string? precision) =>
-        Equivalent((T?)left, (T?)right, precision);
-
-    bool? ICqlComparer.Equals(
-        object? left,
-        object? right,
-        string? precision) =>
-        Equals((T?)left, (T?)right, precision);
-
-    int? ICqlComparer.Compare(
-        object? left,
-        object? right,
-        string? precision) =>
-        Compare((T?)left, (T?)right, precision);
+    protected static int GetHashCodeForNull() => typeof(T).GetHashCode();
 
     int ICqlComparer.GetHashCode(object? value) =>
         GetHashCode((T?)value);
+
+    public int GetHashCodeValue(object value) =>
+        GetHashCodeValue((T)value);
+
+    #endregion
+
+
+    #region Nullability
+
+    protected virtual bool IsNull([NotNullWhen(false)] T? value) =>
+        value is null;
+
+    #endregion
 }

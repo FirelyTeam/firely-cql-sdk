@@ -93,15 +93,15 @@ partial class CqlComparers : CqlComparer<object>
     }
 
     protected override bool? EqualsValues(
-        object left,
-        object right,
+        object x,
+        object y,
         string? precision)
     {
-        var xType = GetKeyTypeForComparers(left);
+        var xType = GetKeyTypeForComparers(x);
 
         if (Comparers.TryGetValue(xType, out var comparer))
         {
-            return comparer.Equals(left, right, precision);
+            return comparer.Equals(x, y, precision);
         }
 
         if (xType.IsGenericType)
@@ -111,7 +111,7 @@ partial class CqlComparers : CqlComparer<object>
             {
                 var gc = factory(xType, this);
                 Comparers.TryAdd(xType, gc);
-                return gc.Equals(left, right, precision);
+                return gc.Equals(x, y, precision);
             }
         }
 

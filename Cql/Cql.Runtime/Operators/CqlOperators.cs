@@ -39,11 +39,11 @@ namespace Hl7.Cql.Operators
             TypeResolver resolver,
             TypeConverter? converter = null,
             IDataSource? dataSource = null,
-            ICqlComparer<object>? comparer = null,
+            ICqlComparer? comparer = null,
             IValueSetDictionary? valueSets = null,
             IUnitConverter? unitConverter = null,
             DateTimeIso8601? now = null,
-            ICqlComparer<object>? enumComparer = null)
+            ICqlComparer? enumComparer = null)
         {
             var operators = new CqlOperators(
                 resolver,
@@ -61,11 +61,11 @@ namespace Hl7.Cql.Operators
             TypeResolver typeResolver,
             TypeConverter typeConverter,
             IDataSource dataSource,
-            ICqlComparer<object> comparer,
+            ICqlComparer comparer,
             IValueSetDictionary valueSets,
             IUnitConverter unitConverter,
             DateTimeIso8601 now,
-            ICqlComparer<object> enumComparer)
+            ICqlComparer enumComparer)
         {
             Comparer = comparer;
             ValueSets = valueSets;
@@ -86,7 +86,7 @@ namespace Hl7.Cql.Operators
         /// This implementation must be able to compare many different types.  <see cref="CqlComparers"/> provides this functionality.
         /// </remarks>
         /// <seealso cref="CqlComparers"/>
-        public ICqlComparer<object> Comparer { get; set; }
+        public ICqlComparer Comparer { get; set; }
 
         /// <summary>
         /// Gets the implementation of <see cref="IValueSetDictionary"/> to use.
@@ -104,7 +104,7 @@ namespace Hl7.Cql.Operators
         public CqlDateTime NowValue { get; }
 
         private ComparerBridge DataComparer { get; }
-        internal ICqlComparer<object> EnumComparer { get; }
+        internal ICqlComparer EnumComparer { get; }
 
         /// <summary>
         /// Raised when the <see cref="ICqlOperators.Message{T}(T, string, string, string)"/> method is called in a CQL library.

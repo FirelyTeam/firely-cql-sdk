@@ -10,7 +10,7 @@ namespace Hl7.Cql.Comparers;
 
 partial class CqlComparers
 {
-    internal class KeyValuePairComparer<TKey, TValue>(CqlComparers keyValueComparer) :
+    internal class KeyValuePairCqlComparer<TKey, TValue>(CqlComparers keyValueComparer) :
         CqlComparer<KeyValuePair<TKey, TValue>>
     {
         /// <inheritdoc />
@@ -26,12 +26,12 @@ partial class CqlComparers
 
         /// <inheritdoc />
         protected override bool? EqualsValues(
-            KeyValuePair<TKey, TValue> left,
-            KeyValuePair<TKey, TValue> right,
+            KeyValuePair<TKey, TValue> x,
+            KeyValuePair<TKey, TValue> y,
             string? precision) =>
-            keyValueComparer.Equals(left.Key, right.Key, precision) switch
+            keyValueComparer.Equals(x.Key, y.Key, precision) switch
             {
-                true  => keyValueComparer.Equals(left.Value, right.Value, precision),
+                true  => keyValueComparer.Equals(x.Value, y.Value, precision),
                 var b => b
             };
 

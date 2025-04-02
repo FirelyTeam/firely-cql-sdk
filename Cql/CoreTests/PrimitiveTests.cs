@@ -3484,6 +3484,7 @@ namespace CoreTests
             var result = ops.ListProperlyIncludesElement(list, element);
             Assert.IsFalse(result);
         }
+
         [TestMethod]
         public void UnionListNullAndListNull()
         {

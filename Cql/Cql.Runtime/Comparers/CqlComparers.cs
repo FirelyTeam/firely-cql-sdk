@@ -44,10 +44,6 @@ namespace Hl7.Cql.Comparers
             var stringCqlComparer = new StringCqlComparer(StringComparer.Ordinal);
             Comparers.TryAdd(typeof(string), stringCqlComparer);
 
-            var charCqlComparer = new CharCqlComparer(stringCqlComparer);
-            Comparers.TryAdd(typeof(char), charCqlComparer);
-            Comparers.TryAdd(typeof(char?), charCqlComparer);
-
             var decimalCqlComparer = new DecimalCqlComparer();
             Comparers.TryAdd(typeof(decimal?), decimalCqlComparer);
             Comparers.TryAdd(typeof(decimal), decimalCqlComparer);
@@ -77,7 +73,7 @@ namespace Hl7.Cql.Comparers
             ComparerFactories.TryAdd(typeof(KeyValuePair<,>), (type, self) =>
             {
                 var genericArguments = type.GetGenericArguments();
-                var genericType = typeof(KeyValuePairComparer<,>).MakeGenericType(genericArguments);
+                var genericType = typeof(KeyValuePairCqlComparer<,>).MakeGenericType(genericArguments);
                 object comparer = Activator.CreateInstance(genericType, [self])!;
                 ICqlComparer cqlComparer = ToPlainCqlComparer(comparer);
                 return cqlComparer;

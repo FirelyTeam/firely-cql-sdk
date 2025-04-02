@@ -18,9 +18,12 @@ internal static class CqlComparerSharedMethods
     {
         var result = (leftIsNull, rightIsNull) switch
         {
-            (true, true) => true,   // null,
-            (true, _)    => false,  // null,
-            (_, true)    => false,  // null,
+            (true, true) => null,
+            (true, _)    => null,
+            (_, true)    => null,
+            // (true, true) => true,   // null,
+            // (true, _)    => false,  // null,
+            // (_, true)    => false,  // null,
             _            => Maybe.NoValueOf<bool?>(),
         };
         return result;

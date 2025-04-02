@@ -49,17 +49,17 @@ partial class CqlComparers
         }
 
         protected override bool? EqualsValues(
-            IEnumerable left,
-            IEnumerable right,
+            IEnumerable x,
+            IEnumerable y,
             string? precision)
         {
             var onlyNull = true;
             var notEmpty = false;
 
-            var lit = left.GetEnumerator();
+            var lit = x.GetEnumerator();
             using var litd = lit as IDisposable;
 
-            var rit = right.GetEnumerator();
+            var rit = y.GetEnumerator();
             using var ritd = rit as IDisposable;
 
             while (lit.MoveNext())

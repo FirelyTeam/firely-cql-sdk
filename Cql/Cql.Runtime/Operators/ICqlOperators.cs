@@ -20,7 +20,7 @@ namespace Hl7.Cql.Operators
     /// <seealso gref="https://cql.hl7.org/09-b-cqlreference.html"/>
     public interface ICqlOperators
     {
-        ICqlComparer<object> Comparer { get; }
+        ICqlComparer Comparer { get; }
 
         IValueSetFacade CreateValueSetFacade(CqlValueSet valueSet);
 
@@ -217,9 +217,9 @@ namespace Hl7.Cql.Operators
         bool?                                    Ends<T>(CqlInterval<T> left,CqlInterval<T> right,string? precision);
         bool?                                    EndsWith(string argument, string suffix);
         bool?                                    EnumEqualsString(object? @enum, string? value);
-        bool?                                    Equal(object? x, object? y);
-        bool?                                    Equivalent(object? x, object? y);
-        bool?                                    Equivalent(string? x, string? y); // If we don't have this, the IEnumerable<T> overload gets picked instead of object
+        bool?                                    Equal(object? left, object? right);
+        bool?                                    Equivalent(object? left, object? right);
+        bool?                                    Equivalent(string? left, string? right); // If we don't have this, the IEnumerable<T> overload gets picked instead of object
         bool?                                    Equivalent<T>(IEnumerable<T>? left, IEnumerable<T>? right);
         event                                    EventHandler<MessageEventArgs>? MessageReceived;
         CqlInterval<CqlDate?>?                   Except(CqlInterval<CqlDate?>? left, CqlInterval<CqlDate?>? right);
