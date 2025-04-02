@@ -98,7 +98,7 @@ internal abstract class CqlComparer<T>(
     {
         // https://cql.hl7.org/04-logicalspecification.html#equivalent
         // Spec:The Equivalent operator returns true if the arguments are the same value, or if they are both null; and false otherwise.
-        return (IsNull(x), IsNull(y)) switch
+        return (x is null || IsNull(x), y is null || IsNull(y)) switch
         {
             (true, true)           => true,
             (true, _) or (_, true) => false,
@@ -163,7 +163,7 @@ internal abstract class CqlComparer<T>(
         T? x,
         T? y,
         string? precision) =>
-        (IsNull(x), IsNull(y)) switch
+        (x is null || IsNull(x), y is null || IsNull(y)) switch
         {
             (true, true) => 0,
             (true, _)    => 1,

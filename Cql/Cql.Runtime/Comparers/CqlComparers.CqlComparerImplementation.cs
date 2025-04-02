@@ -21,7 +21,7 @@ partial class CqlComparers : CqlComparer<object>
         switch (x, y)
         {
             case (null, null):         return 0;
-            case (not null, not null): return base.CompareValues(x, y, precision);
+            case (not null, not null): return ((ICqlComparer)this).CompareValues(x, y, precision);
             default:                   return null;
         }
     }
