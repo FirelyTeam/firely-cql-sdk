@@ -270,6 +270,7 @@ public class TypeExtensionsTests
             }
         }
     }
+
     [TestMethod]
     public void IsAssignableTo_ShouldReturnCorrectResults()
     {

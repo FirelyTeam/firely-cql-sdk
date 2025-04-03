@@ -86,9 +86,9 @@ internal static class TypeExtensions
             return true;
 
         var hasInterfaceImplementing = type.GetInterfaces()
-                                           .Where(ifc => ifc.IsGenericType)
-                                           .Select(ifc => ifc.GetGenericTypeDefinition())
-                                           .Any(ifc => ifc == genericTypeDefinition);
+            .Where(ifc => ifc.IsGenericType)
+            .Select(ifc => ifc.GetGenericTypeDefinition())
+            .Any(ifc => ifc == genericTypeDefinition);
         return hasInterfaceImplementing;
     }
 
