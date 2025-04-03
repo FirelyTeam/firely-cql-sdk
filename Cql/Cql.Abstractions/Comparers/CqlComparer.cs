@@ -195,8 +195,8 @@ internal abstract class CqlComparer<T>(
         string? precision)
     {
         // Do a quick check for equality
-        // if (Equals(x, y))
-            // return 0;
+        if (Equals(x, y))
+            return 0;
 
         return CompareValues(x!, y!, precision);
     }
