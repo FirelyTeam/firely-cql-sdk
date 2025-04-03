@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Primitives;
-using Hl7.Cql.Comparers;
 
 namespace Hl7.Cql.ValueSets;
 
@@ -45,23 +44,4 @@ public static class CqlCodeExtensions
     /// Create a union from two <see cref="IValueSetFacade"/>s.
     /// </summary>
     public static IValueSetFacade Union(this IValueSetFacade left, IValueSetFacade right) => new ValueSetUnion(left, right);
-
-    /// <summary>
-    /// Create an <see cref="IEqualityComparer"/> based on the given <see cref="ICqlComparer{T}"/>.
-    /// </summary>
-    public static IEqualityComparer<T> ToEqualityComparer<T>(this ICqlComparer<T> comparer, string? precision = null, bool useEquivalence = false) =>
-        new CqlCodeEqualityComparer<T>(comparer ?? throw new ArgumentNullException(nameof(comparer)), precision, useEquivalence);
-
-    private class CqlCodeEqualityComparer<T>
-        (ICqlComparer<T> comparer, string? precision = null, bool useEquivalence = false)
-        : IEqualityComparer<T>
-    {
-        private readonly ICqlComparer<T> _comparer = comparer ?? throw new ArgumentNullException(nameof(comparer));
-
-        public bool Equals(T? x, T? y) =>
-            ReferenceEquals(x, y) ||
-            useEquivalence ? _comparer.Equivalent(x, y, precision) : _comparer.Equals(x, y, precision) == true;
-
-        public int GetHashCode(T obj) => _comparer.GetHashCode(obj);
-    }
 }

@@ -23,6 +23,8 @@ namespace Hl7.Cql.Fhir;
 /// <remarks>Aggresively caches the loaded valuesets to improve performance.</remarks>
 public class ValueSetSource : IValueSetDictionary
 {
+    private static readonly IEqualityComparer<CqlCode> OrdinalIgnoreCaseEqualityComparer = CqlCodeCqlComparer.OrdinalIgnoreCase.ToEqualityComparer();
+
     private readonly ConcurrentDictionary<CqlCode, CqlCode> _internHash;
 
     /// <summary>
@@ -41,7 +43,7 @@ public class ValueSetSource : IValueSetDictionary
     /// </summary>
     public ValueSetSource(IAsyncResourceResolver? resourceResolver = null, ICodeValidationTerminologyService? termService = null)
     {
-        _internHash = new ConcurrentDictionary<CqlCode, CqlCode>(CqlCodeCqlComparer.OrdinalIgnoreCase.ToEqualityComparer());
+        _internHash = new ConcurrentDictionary<CqlCode, CqlCode>(OrdinalIgnoreCaseEqualityComparer);
         _resourceResolver = resourceResolver;
         _termService = termService;
     }

@@ -668,7 +668,6 @@ static Hl7.Cql.Toolkit.ToolkitExtensions.SetIgnoreEnumerationExceptions<TSelf>(t
 static Hl7.Cql.Toolkit.ToolkitExtensions.SetThrowEnumerationExceptions<TSelf>(this Hl7.Cql.Toolkit.IToolkit<TSelf>! toolkit) -> TSelf
 static Hl7.Cql.ValueSets.CqlCodeExtensions.GetValueSet(this Hl7.Cql.ValueSets.IValueSetDictionary! all, Hl7.Cql.Primitives.CqlValueSet! valueset) -> Hl7.Cql.ValueSets.IValueSetFacade!
 static Hl7.Cql.ValueSets.CqlCodeExtensions.GetValueSet(this Hl7.Cql.ValueSets.IValueSetDictionary! all, string! canonical) -> Hl7.Cql.ValueSets.IValueSetFacade!
-static Hl7.Cql.ValueSets.CqlCodeExtensions.ToEqualityComparer<T>(this Hl7.Cql.Comparers.ICqlComparer<T>! comparer, string? precision = null, bool useEquivalence = false) -> System.Collections.Generic.IEqualityComparer<T>!
 static Hl7.Cql.ValueSets.CqlCodeExtensions.Union(this Hl7.Cql.ValueSets.IValueSetFacade! left, Hl7.Cql.ValueSets.IValueSetFacade! right) -> Hl7.Cql.ValueSets.IValueSetFacade!
 static Hl7.Cql.ValueSets.CqlCodeExtensions.Union(this System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>! left, System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>! right) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>!
 virtual Hl7.Cql.Operators.RetrieveParameters.<Clone>$() -> Hl7.Cql.Operators.RetrieveParameters!
