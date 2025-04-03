@@ -126,7 +126,7 @@ namespace Hl7.Cql.Abstractions
             if (type == typeof(string))
                 return false;
 
-            var isImplementing = type.IsImplementingInterface(typeof(IEnumerable<>));
+            var isImplementing = type.IsImplementingGenericTypeDefinition(typeof(IEnumerable<>));
             return isImplementing;
         }
 

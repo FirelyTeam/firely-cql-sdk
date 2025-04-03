@@ -693,7 +693,7 @@ partial class ExpressionBuilderContext(
                     }
                 }
             }
-            else if (property.PropertyType.IsImplementingInterface(typeof(ICollection<>)))
+            else if (property.PropertyType.IsImplementingGenericTypeDefinition(typeof(ICollection<>)))
             {
                 if (_typeResolver.IsListType(value.Type))
                 {

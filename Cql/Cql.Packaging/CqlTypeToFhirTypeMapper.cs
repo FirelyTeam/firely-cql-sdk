@@ -238,7 +238,7 @@ namespace Hl7.Cql.Packaging
                 }
                 return TypeEntryFor(cqlPrimitiveAttribute.Type);
             }
-            if (type.IsImplementingInterface(typeof(IEnumerable<>)))
+            if (type.IsImplementingGenericTypeDefinition(typeof(IEnumerable<>)))
             {
                 var elementType = TypeResolver.GetListElementType(type);
                 if (elementType is null)
@@ -340,7 +340,7 @@ namespace Hl7.Cql.Packaging
                 _ => element.resultTypeName != null ? TypeEntryFor(element.resultTypeName.Name) : TypeEntryFor(element.resultTypeSpecifier)
             };
         }
-        private bool IsOrImplementsIEnumerableOfT(Type type) => type.IsImplementingInterface(typeof(IEnumerable<>));
+        private bool IsOrImplementsIEnumerableOfT(Type type) => type.IsImplementingGenericTypeDefinition(typeof(IEnumerable<>));
 
         private FHIRAllTypes? PrimitiveToFhir(Type type)
         {

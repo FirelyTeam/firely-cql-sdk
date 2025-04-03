@@ -240,7 +240,7 @@ public class TypeExtensionsTests
     }
 
     [TestMethod]
-    public void IsImplementingInterface_ShouldReturnCorrectResults()
+    public void IsImplementingGenericTypeDefinition_ShouldReturnCorrectResults()
     {
         // Arrange
         var nonGenericInterface = typeof(INonGenericInterface);
@@ -248,16 +248,28 @@ public class TypeExtensionsTests
         var genericType = typeof(IGenericInterface<int>);
 
         // Act / Assert
-        Assert.IsTrue(condition: MyClassType.IsImplementingInterface(typeOrTypeDef: genericTypeDefinition));
-        Assert.IsTrue(condition: MyClassGenericType.IsImplementingInterface(typeOrTypeDef: genericTypeDefinition));
-        Assert.IsTrue(condition: MyClassGenericDefinitionType.IsImplementingInterface(typeOrTypeDef: genericTypeDefinition));
+        Assert.IsTrue(condition: MyClassType.IsImplementingGenericTypeDefinition(genericTypeDefinition: genericTypeDefinition));
+        Assert.IsTrue(condition: MyClassGenericType.IsImplementingGenericTypeDefinition(genericTypeDefinition: genericTypeDefinition));
+        Assert.IsTrue(condition: MyClassGenericDefinitionType.IsImplementingGenericTypeDefinition(genericTypeDefinition: genericTypeDefinition));
 
-        Assert.IsTrue(condition: MyClassType.IsImplementingInterface(typeOrTypeDef: genericType));
-        Assert.IsFalse(condition: MyClassType.IsImplementingInterface(typeOrTypeDef: nonGenericInterface));
-        Assert.IsFalse(condition: MyClassType.IsImplementingInterface(typeOrTypeDef: ReferenceType));
-        Assert.IsFalse(condition: MyClassType.IsImplementingInterface(typeOrTypeDef: StructType));
+        Assert.IsInstanceOfType<ArgumentException>(value: Catch(action: () => MyClassType.IsImplementingGenericTypeDefinition(genericTypeDefinition: genericType)));
+        Assert.IsInstanceOfType<ArgumentException>(value: Catch(action: () => MyClassType.IsImplementingGenericTypeDefinition(genericTypeDefinition: nonGenericInterface)));
+        Assert.IsInstanceOfType<ArgumentException>(value: Catch(action: () => MyClassType.IsImplementingGenericTypeDefinition(genericTypeDefinition: ReferenceType)));
+        Assert.IsInstanceOfType<ArgumentException>(value: Catch(action: () => MyClassType.IsImplementingGenericTypeDefinition(genericTypeDefinition: StructType)));
+
+        static Exception? Catch(Action action)
+        {
+            try
+            {
+                action();
+                return null!;
+            }
+            catch (Exception ex)
+            {
+                return ex;
+            }
+        }
     }
-
     [TestMethod]
     public void IsAssignableTo_ShouldReturnCorrectResults()
     {
