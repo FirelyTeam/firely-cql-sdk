@@ -17,7 +17,7 @@ internal static class CqlComparerSharedMethods
             ? null
             : Math.Sign(x.Value - y.Value);
 
-    public static bool CqlEqualiltyToEquivalence(bool? cqlEqualsResult) => cqlEqualsResult is null or true;
+    public static bool CqlEqualityToEquivalence(bool? cqlEqualsResult) => cqlEqualsResult is null or true;
 
     public static bool? CqlComparisonToEquals(int? compareValues) =>
         compareValues switch

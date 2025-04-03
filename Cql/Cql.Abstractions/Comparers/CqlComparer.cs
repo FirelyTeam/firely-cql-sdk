@@ -142,7 +142,7 @@ internal abstract class CqlComparer<T>(
 
             case CqlComparerEquivalentImplementation.Equals:
                 bool? equalsValues = EqualsValues(x!, y!, precision);
-                var equivalenceFromEquals = CqlEqualiltyToEquivalence(equalsValues);
+                var equivalenceFromEquals = CqlEqualityToEquivalence(equalsValues);
 
                 return equivalenceFromEquals;
 
