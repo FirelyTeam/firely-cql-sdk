@@ -41,7 +41,7 @@ internal abstract class CqlComparer<T>(
         // Spec:If either argument is null, the result is null.
         return x is null || y is null || IsNull(x) || IsNull(y)
                    ? null
-                   : EqualsValuesSwitch(x!, y!, precision);
+                   : EqualsValuesShared(x!, y!, precision);
     }
 
     protected virtual bool? EqualsValues(
@@ -60,9 +60,9 @@ internal abstract class CqlComparer<T>(
         object x,
         object y,
         string? precision) =>
-        EqualsValuesSwitch((T)x, (T)y, precision);
+        EqualsValuesShared((T)x, (T)y, precision);
 
-    private bool? EqualsValuesSwitch(
+    private bool? EqualsValuesShared(
         [DisallowNull] T x,
         [DisallowNull] T y,
         string? precision)
@@ -102,7 +102,7 @@ internal abstract class CqlComparer<T>(
         {
             (true, true)           => true,
             (true, _) or (_, true) => false,
-            _                      => EquivalentValuesSwitch(x!, y!, precision)
+            _                      => EquivalentValuesShared(x!, y!, precision)
         };
     }
 
@@ -122,9 +122,9 @@ internal abstract class CqlComparer<T>(
         object x,
         object y,
         string? precision) =>
-        EquivalentValuesSwitch((T)x, (T)y, precision);
+        EquivalentValuesShared((T)x, (T)y, precision);
 
-    private bool EquivalentValuesSwitch(
+    private bool EquivalentValuesShared(
         T x,
         T y,
         string? precision)
@@ -195,8 +195,8 @@ internal abstract class CqlComparer<T>(
         string? precision)
     {
         // Do a quick check for equality
-        if (Equals(x, y))
-            return 0;
+        // if (Equals(x, y))
+            // return 0;
 
         return CompareValues(x!, y!, precision);
     }
