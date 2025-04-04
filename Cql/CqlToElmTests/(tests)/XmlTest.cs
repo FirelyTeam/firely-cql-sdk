@@ -26,7 +26,7 @@ namespace Hl7.Cql.CqlToElm.Test
 
         private static void WriteLineToFile(string path, string line)
         {
-            //File.AppendAllLines(path, [line]);
+            File.AppendAllLines(path, [line]);
         }
 
 
@@ -40,7 +40,31 @@ namespace Hl7.Cql.CqlToElm.Test
                 Assert.Inconclusive($"Case {testFullName} skipped: {reason}");
 
             var cqlToolkit = CreateCqlToolkit(AllowNullIntervals:true);
-            var expression = cqlToolkit.Expression(testCase.Expression);
+            Expression expression;
+            try
+            {
+                expression = cqlToolkit.Expression(testCase.Expression);
+            }
+            catch (Exception e)
+            {
+                var joinedExpressionMessages = string.Join("; ", ExceptionMessages());
+                IEnumerable<string> ExceptionMessages()
+                {
+                    Exception? e1 = e;
+                    while (e1 is not null)
+                    {
+                        yield return e1.Message;
+                        e1 = e1.InnerException;
+                    }
+                }
+                WriteLineToFile(
+                    """c:\temp\XmlTest.does-not-compile.txt""",
+                    $$"""{ "{{testCase.TestName}}", "Exceptions: {{joinedExpressionMessages}}" },"""
+                );
+                Assert.Fail($"Case {testFullName} expression compiled with exceptions: {joinedExpressionMessages}");
+                return;
+            }
+
             var expressionErrors = expression.GetErrors();
             if (expressionErrors.Any())
             {
