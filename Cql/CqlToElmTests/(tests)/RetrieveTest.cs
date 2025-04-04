@@ -108,5 +108,88 @@ namespace Hl7.Cql.CqlToElm.Test
             }
         }
 
+
+        [TestMethod]
+        public void Retrieve_FilteredByCode()
+        {
+            var cqlToolkit = CreateCqlToolkit();
+            var cqlLibraryString = CqlLibraryString.Parse("""
+                library FilteredRetrieve version '1.0.0'
+
+                using FHIR version '4.0.1'
+                codesystem LOINC: 'http://loinc.org'
+                code "Body height": '8302-2' from LOINC
+
+                define "Body height observations":
+                    [Observation: "Body height"]
+                """);
+            var lib = cqlToolkit.MakeLibrary(cqlLibraryString.Cql);
+
+            var r = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Retrieve>();
+            r.Should().NotBeNull();
+
+            Assert.AreEqual(1, lib.codeSystems.Length);
+            Assert.AreEqual(1, lib.codes.Length);
+            Assert.AreEqual(1, lib.statements.Length);
+            Assert.IsInstanceOfType(lib.statements[0].expression, typeof(Retrieve));
+
+            var retrieve = (Retrieve)lib.statements[0].expression;
+            Assert.AreEqual("code", retrieve.codeProperty);
+            Assert.AreEqual("~", retrieve.codeComparator);
+            Assert.IsNotNull(retrieve.codes);
+            Assert.IsInstanceOfType(retrieve.codes, typeof(ToList));
+
+            var toList = (ToList)retrieve.codes;
+            Assert.IsInstanceOfType(toList.operand, typeof(CodeRef));
+
+            var codeRef = (CodeRef)toList.operand;
+            Assert.AreEqual("Body height", codeRef.name);
+
+            using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
+
+            var bundle = new Bundle
+            {
+                Entry = new List<Bundle.EntryComponent>
+                {
+                    new Bundle.EntryComponent
+                    {
+                        Resource = new Observation
+                        {
+                            Id = "1",
+                            Code = new CodeableConcept
+                            {
+                                Coding = new List<Coding>
+                                {
+                                    new Coding { Code = "8302-2",  System = "http://loinc.org" }
+                                }
+                            }
+                        }
+                    },
+                    new Bundle.EntryComponent
+                    {
+                        Resource = new Observation
+                        {
+                            Id = "2",
+                            Code = new CodeableConcept
+                            {
+                                Coding = new List<Coding>
+                                {
+                                    new Coding { Code = "29463-7",  System = "http://loinc.org" }
+                                }
+                            }
+                        }
+                    }
+                }
+            };
+
+            var result = librarySetInvoker.GetLibraryDefinitionResult(
+                FhirCqlContext.ForBundle(bundle),
+                cqlLibraryString.LibraryIdentifier, "Body height observations");
+
+            result.Should().NotBeNull();
+            Assert.IsInstanceOfType(result, typeof(IEnumerable<Observation>));
+            var observations = (IEnumerable<Observation>)result;
+            Assert.AreEqual(1, observations.Count());
+        }
     }
 }
