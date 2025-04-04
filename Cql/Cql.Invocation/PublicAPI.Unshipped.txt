@@ -4,12 +4,12 @@ abstract Hl7.Cql.Invocation.Toolkit.LibraryInvoker.Definitions.get -> System.Col
 abstract Hl7.Cql.Invocation.Toolkit.LibraryInvoker.DependencyLibraryIdentifiers.get -> System.Collections.Generic.IReadOnlyCollection<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier>!
 abstract Hl7.Cql.Invocation.Toolkit.LibraryInvoker.LibraryIdentifier.get -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker
-Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.DefinitionInvoker(Hl7.Cql.Invocation.Toolkit.LibraryInvoker! libraryInvoker, string! definitionName, System.Reflection.MethodInfo! methodInfo, System.Collections.Generic.IReadOnlyDictionary<string!, string!>! tagValuesByName, string? valueSetId) -> void
+Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.DefinitionInvoker(Hl7.Cql.Invocation.Toolkit.LibraryInvoker! libraryInvoker, string! definitionName, System.Reflection.MethodInfo! methodInfo, System.Collections.Generic.IReadOnlyDictionary<string!, System.Collections.Generic.IReadOnlySet<string!>!>! tagValuesByName, string? valueSetId) -> void
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.DefinitionName.get -> string!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.LibraryInvoker.get -> Hl7.Cql.Invocation.Toolkit.LibraryInvoker!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.MethodInfo.get -> System.Reflection.MethodInfo!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ReturnType.get -> System.Type!
-Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.TagValuesByName.get -> System.Collections.Generic.IReadOnlyDictionary<string!, string!>!
+Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.TagValuesByName.get -> System.Collections.Generic.IReadOnlyDictionary<string!, System.Collections.Generic.IReadOnlySet<string!>!>!
 Hl7.Cql.Invocation.Toolkit.DefinitionInvoker.ValueSetId.get -> string?
 Hl7.Cql.Invocation.Toolkit.Extensions.CqlToolkitExtensions
 Hl7.Cql.Invocation.Toolkit.Extensions.ElmToolkitExtensions
