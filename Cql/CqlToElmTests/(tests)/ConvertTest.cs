@@ -58,8 +58,8 @@ namespace Hl7.Cql.CqlToElm.Test
             q.unit.Should().Be("cm");
         }
 
-        /* Mass units are not yet defined and respective conversions not yet implemented, see UcumUnits.cs and UnitConverter.cs
         [TestMethod]
+        [Ignore("Mass units are not yet defined and respective conversions not yet implemented, see UcumUnits.cs and UnitConverter.cs")]
         public void Convert_Grams_to_Kilograms()
         {
             var library = CreateCqlToolkit().MakeLibraryFromExpression("convert 500 'g' to 'kg'");
@@ -69,6 +69,5 @@ namespace Hl7.Cql.CqlToElm.Test
             q.value.Should().Be(0.5m);
             q.unit.Should().Be("kg");
         }
-        */
     }
 }
