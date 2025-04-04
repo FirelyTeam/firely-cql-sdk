@@ -47,5 +47,28 @@ namespace Hl7.Cql.CqlToElm.Test
 
         }
 
+        [TestMethod]
+        public void Convert_Meters_to_Centimeters()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("convert 5 'm' to 'cm'");
+            var quantity = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ConvertQuantity>();
+            var result = Run(quantity, library);
+            var q = result.Should().BeOfType<CqlQuantity>().Subject;
+            q.value.Should().Be(500m);
+            q.unit.Should().Be("cm");
+        }
+
+        /* Mass units are not yet defined and respective conversions not yet implemented, see UcumUnits.cs and UnitConverter.cs
+        [TestMethod]
+        public void Convert_Grams_to_Kilograms()
+        {
+            var library = CreateCqlToolkit().MakeLibraryFromExpression("convert 500 'g' to 'kg'");
+            var quantity = library.Should().BeACorrectlyInitializedLibraryWithStatementOfType<ConvertQuantity>();
+            var result = Run(quantity, library);
+            var q = result.Should().BeOfType<CqlQuantity>().Subject;
+            q.value.Should().Be(0.5m);
+            q.unit.Should().Be("kg");
+        }
+        */
     }
 }
