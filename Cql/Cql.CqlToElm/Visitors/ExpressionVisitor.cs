@@ -185,7 +185,7 @@ namespace Hl7.Cql.CqlToElm.Visitors
                 _ => null
             };
 
-            if (terminology?.GetType() == typeof(CodeRef))
+            if (terminology is CodeRef)
             {
                 codeComparator = "~";
                 codePath = "code";
