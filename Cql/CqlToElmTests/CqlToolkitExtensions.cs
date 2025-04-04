@@ -43,7 +43,7 @@ internal static class CqlToolkitExtensions
         var library = cqlToolkit
                       .AddCqlLibraries(cqlLibraryString)
                       .ConvertCqlToElm()
-                      .Conversions[cqlLibraryString.LibraryIdentifier]
+                      .Conversions[cqlLibraryString]
                       .ResultElmLibrary!;
 
         if (expectedErrors.Any())

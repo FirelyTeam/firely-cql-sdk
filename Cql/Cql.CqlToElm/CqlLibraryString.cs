@@ -121,6 +121,12 @@ public readonly partial record struct CqlLibraryString
     public static implicit operator string(CqlLibraryString cqlLibraryString) => cqlLibraryString.Cql;
 
     /// <summary>
+    /// Implicitly converts a <see cref="CqlLibraryString"/> to a <see cref="CqlVersionedLibraryIdentifier"/> using the LibraryIdentifier.
+    /// </summary>
+    /// <returns>Returns the <see cref="CqlVersionedLibraryIdentifier"/>.</returns>
+    public static implicit operator CqlVersionedLibraryIdentifier(CqlLibraryString cqlLibraryString) => cqlLibraryString.LibraryIdentifier;
+
+    /// <summary>
     /// Explicitly parses a <see cref="string"/> to a <see cref="CqlLibraryString"/>.
     /// </summary>
     /// <returns>Returns the <see cref="CqlLibraryString"/>.</returns>

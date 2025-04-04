@@ -69,7 +69,7 @@ public class InvocationToolkitTests
                 .ConvertCqlToElm();
 
         // WORKAROUND: The cql to elm toolkit doesn't support annotations yet.
-        var resultElmLibrary = cqlToolkit.Conversions[cqlMeasuresExample.LibraryIdentifier].ResultElmLibrary;
+        var resultElmLibrary = cqlToolkit.Conversions[cqlMeasuresExample].ResultElmLibrary;
         resultElmLibrary.Should().NotBeNull();
         var stmtInitialPopulation = resultElmLibrary!.statements.Single(s => s.Name == "Initial population");
         stmtInitialPopulation.annotation.Should().BeNull(
@@ -94,7 +94,7 @@ public class InvocationToolkitTests
 
         using var librarySetInvoker = cqlToolkit.CreateLibrarySetInvoker();
 
-        librarySetInvoker.LibraryInvokers[cqlMeasuresExample.LibraryIdentifier]
+        librarySetInvoker.LibraryInvokers[cqlMeasuresExample]
                          .Definitions["Initial population"]
                          .TagValuesByName
                          .Should().BeEquivalentTo(
