@@ -123,6 +123,6 @@ public readonly partial record struct CqlLibraryString
     /// <summary>
     /// Explicitly parses a <see cref="string"/> to a <see cref="CqlLibraryString"/>.
     /// </summary>
-    /// /// <returns>Returns the <see cref="CqlLibraryString"/>.</returns>
+    /// <returns>Returns the <see cref="CqlLibraryString"/>.</returns>
     public static explicit operator CqlLibraryString(string cqlLibraryString) => Parse(cqlLibraryString);
 }
