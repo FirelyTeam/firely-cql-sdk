@@ -53,7 +53,7 @@ public readonly partial record struct CqlLibraryString
                          (?:
                            \s+              # at least one space
                            version          # version keyword
-                           \s+              # at least one space
+                           \s*              # optional spaces
                            '(?<ver>[^']+)'  # The version of the library between single quotes
                          )?                 # Version is optional
                      """,
@@ -113,4 +113,16 @@ public readonly partial record struct CqlLibraryString
         libraryIdentifier = LibraryIdentifier;
         cql = Cql;
     }
+
+    /// <summary>
+    /// Implicitly converts a <see cref="CqlLibraryString"/> to a <see cref="string"/> using the CQL content.
+    /// </summary>
+    /// <returns>Returns the CQL.</returns>
+    public static implicit operator string(CqlLibraryString cqlLibraryString) => cqlLibraryString.Cql;
+
+    /// <summary>
+    /// Explicitly parses a <see cref="string"/> to a <see cref="CqlLibraryString"/>.
+    /// </summary>
+    /// /// <returns>Returns the <see cref="CqlLibraryString"/>.</returns>
+    public static explicit operator CqlLibraryString(string cqlLibraryString) => Parse(cqlLibraryString);
 }

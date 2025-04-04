@@ -118,7 +118,7 @@ public sealed class InvocationToolkit : IToolkit<InvocationToolkit>
 
         return new LibrarySetInvoker(
             alc,
-            this.LoggerFactory,
-            this.BatchProcessExceptionContinuation);
+            LoggerFactory,
+            BatchProcessExceptionContinuation);
     }
 }
