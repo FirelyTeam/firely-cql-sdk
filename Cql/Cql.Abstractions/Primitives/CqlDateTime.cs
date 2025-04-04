@@ -312,7 +312,7 @@ namespace Hl7.Cql.Primitives
         /// </remarks>
         /// <returns>The immediate predecessor value.</returns>
         public CqlDateTime Successor() => Add(CqlDateTimeMath.UnitDateTimeQuantity[Value.Precision])!;
-        
+
         /// <summary>
         /// Compares the current instance with another object of the same type and returns an integer that indicates whether the current instance precedes, follows, or occurs in the same position in the sort order as the other object.
         /// </summary>
@@ -325,8 +325,8 @@ namespace Hl7.Cql.Primitives
         /// If the value is greater than zero, this object is greater than <paramref name="other"/>.
         /// If the value is <see langword="null"/>, this comparison is uncertain because of <paramref name="precision"/>.
         /// </returns>
-        public int? CompareToValue(CqlDateTime other, string? precision) => 
-            CompareValues(Value, InUtc, other!.Value, other.InUtc, precision);
+        public int? CompareToValue(CqlDateTime other, string? precision) =>
+            CompareValues(Value, InUtc, other.Value, other.InUtc, precision);
 
         private static int? CompareValues(
             DateTimeIso8601 self,

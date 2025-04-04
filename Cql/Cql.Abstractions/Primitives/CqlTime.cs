@@ -259,7 +259,7 @@ namespace Hl7.Cql.Primitives
         /// If the value is <see langword="null"/>, this comparison is uncertain because of <paramref name="precision"/>.
         /// </returns>
         public int? CompareToValue(CqlTime other, string? precision = null) =>
-            CompareValues(Value, InUtc, other!.Value, otherInUtc: other.InUtc, precision);
+            CompareValues(Value, InUtc, other.Value, otherInUtc: other.InUtc, precision);
 
         private static int? CompareValues(
             TimeIso8601 self,
@@ -268,7 +268,7 @@ namespace Hl7.Cql.Primitives
             TimeIso8601 otherInUtc,
             string? precision)
         {
-            DateTimePrecision dtp = DateTimePrecision.Unknown;
+            DateTimePrecision dtp;
             if (precision == null)
                 dtp = (DateTimePrecision)Math.Max((byte)self.Precision, (byte)other.Precision);
             else

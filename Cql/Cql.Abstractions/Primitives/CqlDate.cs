@@ -257,7 +257,7 @@ namespace Hl7.Cql.Primitives
         /// If the value is <see langword="null"/>, this comparison is uncertain because of <paramref name="precision"/>.
         /// </returns>
         public int? CompareToValue(CqlDate other, string? precision) => 
-            CompareValues(Value, other!.Value, precision);
+            CompareValues(Value, other.Value, precision);
 
         private static int? CompareValues(
             DateIso8601 self,
