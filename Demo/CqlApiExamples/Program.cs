@@ -26,19 +26,19 @@ internal static class Program
         // Create a logger factory via the Microsoft.Extensions.Logging API
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
-        // AddDuplicates(loggerFactory);
-        // Add3And2Example(loggerFactory);
+        AddDuplicates(loggerFactory);
+        Add3And2Example(loggerFactory);
         InvokeCqlExample(loggerFactory);
-        // InvokeCqlFromExamplesFolder(loggerFactory);
-        // PackageFromExamplesFolder(loggerFactory);
-        //
-        // var shouldBuildCqlToElm = true;
-        // string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests"];
-        // foreach (var exampleSetName in exampleSetNames)
-        // {
-        //     Directories dirs = Directories.Create(exampleSetName);
-        //     FullExample(loggerFactory, dirs, shouldBuildCqlToElm);
-        // }
+        InvokeCqlFromExamplesFolder(loggerFactory);
+        PackageFromExamplesFolder(loggerFactory);
+
+        var shouldBuildCqlToElm = true;
+        string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests"];
+        foreach (var exampleSetName in exampleSetNames)
+        {
+            Directories dirs = Directories.Create(exampleSetName);
+            FullExample(loggerFactory, dirs, shouldBuildCqlToElm);
+        }
     }
 
     private static void AddDuplicates(ILoggerFactory loggerFactory)
@@ -128,30 +128,22 @@ internal static class Program
     private static void InvokeCqlExample(
         ILoggerFactory loggerFactory)
     {
-        var resDir = @"C:\Dev\VonkV6\test\Vonk.Plugin.Cql.Tests\Resources";
-        InvocationToolkit it = new InvocationToolkit(loggerFactory, BatchProcessExceptionContinuation.Throw)
-            .AddAssemblyBinariesInFhirLibrariesFromDirectory(new DirectoryInfo(resDir));
-        using var lsi = it.CreateLibrarySetInvoker();
-        var cqlContext = FhirCqlContext.ForBundle();
-        var results = lsi.EnumerateLibrarySetDefinitionsResults(cqlContext).ToArray();
-        ;
-
         // Create fluent cql toolkit
-        // var cqlToElmProcessorSettings = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
-        // CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
-        //
-        //         var cqlLibraryString = CqlLibraryString.Parse(
-        //             """
-        //             library AdditionLib version '0.0.0'
-        //
-        //             define private Three: 1 + 2
-        //             """);
-        //         var cqlContext = FhirCqlContext.ForBundle();
-        //         using var librarySetInvoker = cqlToolkit
-        //                                       .AddCqlLibraries(cqlLibraryString)
-        //                                       .CreateLibrarySetInvoker(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded));
-        //         var result = librarySetInvoker.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.LibraryIdentifier, "Three");
-        //         Debug.Assert(result is 3);
+        var cqlToElmProcessorSettings = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
+        CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
+
+                var cqlLibraryString = CqlLibraryString.Parse(
+                    """
+                    library AdditionLib version '0.0.0'
+
+                    define private Three: 1 + 2
+                    """);
+                var cqlContext = FhirCqlContext.ForBundle();
+                using var librarySetInvoker = cqlToolkit
+                                              .AddCqlLibraries(cqlLibraryString)
+                                              .CreateLibrarySetInvoker(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded));
+                var result = librarySetInvoker.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.LibraryIdentifier, "Three");
+                Debug.Assert(result is 3);
     }
 
     /// <summary>
