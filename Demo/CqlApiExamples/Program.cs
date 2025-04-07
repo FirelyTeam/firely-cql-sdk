@@ -57,14 +57,14 @@ internal static class Program
                     CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:A"),
                     CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:B"),
                     CqlLibraryString.Parse("library Lib version '0.0.0' define:B"));
-                Debug.Fail("Expected an exception when adding duplicate cql libraries.");
+                Trace.Fail("Expected an exception when adding duplicate cql libraries.");
             }
             catch (Exception e)
             {
-                Debug.Assert(e is not null);
+                Trace.Assert(e is not null);
             }
 
-            Debug.Assert(cqlToolkit.Conversions.Count is 0);
+            Trace.Assert(cqlToolkit.Conversions.Count is 0);
         }
 
         void AddCqlDifferentValuesContinue()
@@ -80,10 +80,10 @@ internal static class Program
             }
             catch (Exception e)
             {
-                Debug.Fail("No exception expected");
+                Trace.Fail("No exception expected");
             }
 
-            Debug.Assert(cqlToolkit.Conversions.Count is 2);
+            Trace.Assert(cqlToolkit.Conversions.Count is 2);
         }
 
         void AddCqlDifferentValuesBreak()
@@ -99,10 +99,10 @@ internal static class Program
             }
             catch (Exception e)
             {
-                Debug.Fail("No exception expected");
+                Trace.Fail("No exception expected");
             }
 
-            Debug.Assert(cqlToolkit.Conversions.Count is 1);
+            Trace.Assert(cqlToolkit.Conversions.Count is 1);
         }
     }
 
@@ -132,20 +132,18 @@ internal static class Program
         var cqlToElmProcessorSettings = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
 
+                var cqlLibraryString = CqlLibraryString.Parse(
+                    """
+                    library AdditionLib version '0.0.0'
 
-        // NICE TO HAVE: Would be nice to parse the CqlLibraryString only from the CQL and extract the identifier from the CQL
-        var cqlLibraryString = CqlLibraryString.Parse(
-            """
-            library AdditionLib version '0.0.0'
-
-            define private Three: 1 + 2
-            """);
-        var cqlContext = FhirCqlContext.ForBundle();
-        using var librarySetInvoker = cqlToolkit
-                                      .AddCqlLibraries(cqlLibraryString)
-                                      .CreateLibrarySetInvoker(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded));
-        var result = librarySetInvoker.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.LibraryIdentifier, "Three");
-        Debug.Assert(result is 3);
+                    define private Three: 1 + 2
+                    """);
+                var cqlContext = FhirCqlContext.ForBundle();
+                using var librarySetInvoker = cqlToolkit
+                                              .AddCqlLibraries(cqlLibraryString)
+                                              .CreateLibrarySetInvoker(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded));
+                var result = librarySetInvoker.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.LibraryIdentifier, "Three");
+                Trace.Assert(result is 3);
     }
 
     /// <summary>
@@ -171,9 +169,9 @@ internal static class Program
                                                 .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory)
                                                 .CreateLibrarySetInvoker();
         logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDeclarations());
-        Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
-        Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
-        Debug.Assert(Invoke("CqlStringOperatorsTest-1.0.000", "Combine.CombineABCSepDash") is "a-b-c");
+        Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
+        Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
+        Trace.Assert(Invoke("CqlStringOperatorsTest-1.0.000", "Combine.CombineABCSepDash") is "a-b-c");
 
         object? Invoke(string libraryName, string declarationName)
         {
@@ -185,7 +183,7 @@ internal static class Program
 
     /// <summary>
     /// This example loads the CQL libraries, translates them to ELM, and compiles them to assemblies.
-    /// Each intermediate format is saved to directory (e.g. ELM, C#, and assembly binaries with their debug symbols).
+    /// Each intermediate format is saved to directory (e.g. ELM, C#, and assembly binaries with their Trace symbols).
     /// It also demonstrates how to execute a library.
     /// </summary>
     private static void FullExample(
@@ -267,7 +265,7 @@ internal static class Program
             CqlVersionedLibraryIdentifier.ParseFromNameAndVersion("Add3and2", "1.0.0"),
             "ThreePlusTwo");
 
-        Debug.Assert(threePlusTwo is 5);
+        Trace.Assert(threePlusTwo is 5);
     }
 }
 
