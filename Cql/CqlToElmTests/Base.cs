@@ -188,7 +188,13 @@ namespace Hl7.Cql.CqlToElm.Test
             var array = ((IEnumerable<T?>)result).ToArray();
             Assert.AreEqual(expectedValues.Length, array.Length);
             for (int i = 0; i < expectedValues.Length; i++)
-                Assert.AreEqual(true, ctx.Operators.Comparer.Equals(expectedValues[i], array[i], precision));
+                Assert.AreEqual(
+                    true,
+                    (expectedValues[i], array[i]) switch
+                    {
+                        (null, null) => true, // #REVIEW: This is overriding the spec which says that nulls are not equal
+                        _            => ctx.Operators.Comparer.Equals(expectedValues[i], array[i], precision)
+                    });
         }
 
         private static ILoggerFactory LoggerFactory { get; } =

@@ -8,11 +8,6 @@
 
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Primitives;
-using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-using Hl7.Cql.Abstractions;
 
 namespace Hl7.Cql.ValueSets
 {
@@ -43,7 +38,7 @@ namespace Hl7.Cql.ValueSets
         /// <summary>
         /// Creates a new <see cref="HashValueSetDictionary"/> with the default comparer.
         /// </summary>
-        public HashValueSetDictionary() : this(CqlCodeCqlComparer.DefaultCqlComparer)
+        public HashValueSetDictionary() : this(CqlCodeCqlComparer.OrdinalIgnoreCase)
         {
             // nothing
         }

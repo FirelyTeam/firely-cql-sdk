@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Primitives;
-using System.Collections.Generic;
 
 namespace Hl7.Cql.ValueSets
 {

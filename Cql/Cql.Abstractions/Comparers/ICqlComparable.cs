@@ -1,21 +1,21 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Abstractions
+namespace Hl7.Cql.Comparers
 {
     /// <summary>
     /// <para>Defines a generalized type-specific comparison method that a value type or class implements to order or sort its instances.</para>
-    /// <para>This interface differs from <see cref="IComparable{T}"/> because it includes a precision paramter in its <see cref="CompareTo(T?, string?)"/> method.</para>
+    /// <para>This interface differs from <see cref="IComparable{T}"/> because it includes a precision paramter in its <see cref="CompareToValue"/> method.</para>
     /// </summary>
     /// <typeparam name="T">
     /// The type of object to compare.
     /// </typeparam>
-    public interface ICqlComparable<T>
+    public interface ICqlComparable<in T>
         where T : class
     {
         /// <summary>
@@ -30,6 +30,6 @@ namespace Hl7.Cql.Abstractions
         /// If the value is greater than zero, this object is greater than <paramref name="other"/>.
         /// If the value is <see langword="null"/>, this comparison is uncertain because of <paramref name="precision"/>.
         /// </returns>
-        int? CompareTo(T? other, string? precision = null);
+        int? CompareToValue([DisallowNull]T other, string? precision = null);
     }
 }

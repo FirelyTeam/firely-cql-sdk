@@ -10,7 +10,7 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Runtime
+namespace Hl7.Cql.Operators
 {
     internal partial class CqlOperators
     {
@@ -137,7 +137,7 @@ namespace Hl7.Cql.Runtime
         {
             if (s == null)
                 return null;
-            else if (Primitives.CqlQuantity.TryParse(s, out CqlQuantity? value))
+            else if (CqlQuantity.TryParse(s, out CqlQuantity? value))
                 return value;
             else return null;
         }

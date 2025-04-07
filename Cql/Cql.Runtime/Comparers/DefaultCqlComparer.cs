@@ -1,59 +1,28 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
+namespace Hl7.Cql.Comparers;
 
-namespace Hl7.Cql.Comparers
+/// <summary>
+/// Implements comparison through <see cref="Comparer{T}.Default"/>.
+/// </summary>
+/// <typeparam name="T">The type to compare.</typeparam>
+internal class DefaultCqlComparer<T>() : CqlComparer<T>(
+    equivalentImplementation: CqlComparerEquivalentImplementation.Compare)
 {
-    /// <summary>
-    /// Implements comparison through <see cref="Comparer{T}.Default"/>.
-    /// </summary>
-    /// <typeparam name="T">The type to compare.</typeparam>
-    internal class DefaultCqlComparer<T> : ICqlComparer, ICqlComparer<T>
-    {
-        /// <inheritdoc />
-        public int? Compare(object? x, object? y, string? precision = null)
-        {
-            if (x is T tx)
-            {
-                if (y is T ty)
-                    return Compare(tx, ty, precision);
-            }
-            return -1;
-        }
+    public static DefaultCqlComparer<T> Instance { get; } = new();
 
-        /// <inheritdoc />
-        public int? Compare(T? x, T? y, string? precision = null) => Comparer<T>.Default.Compare(x, y);
+    protected override int? CompareValues(T x, T y, string? precision) =>
+        Comparer<T>.Default.Compare(x, y);
 
-        /// <inheritdoc />
-        public bool? Equals(object? x, object? y, string? precision = null) =>
-            Compare(x, y, precision) == 0;
+    protected override bool? EqualsValues(T x, T y, string? precision) =>
+        Comparer<T>.Default.Compare(x, y) == 0;
 
-        /// <inheritdoc />
-        public bool? Equals(T? x, T? y, string? precision = null) => Comparer<T>.Default.Compare(x, y) == 0;
-
-        /// <inheritdoc />
-        public bool Equivalent(object? x, object? y, string? precision = null) =>
-            Compare(x, y, precision) == 0;
-
-        /// <inheritdoc />
-        public bool Equivalent(T? x, T? y, string? precision = null) =>
-            CqlComparers.EquivalentOnNullsOnly(x, y)
-            ?? Compare(x, y, precision) == 0;
-
-        /// <inheritdoc />
-        public int GetHashCode(T? x) =>
-            x is null
-                ? typeof(T).GetHashCode()
-                : EqualityComparer<T>.Default.GetHashCode(x);
-
-        /// <inheritdoc />
-        public int GetHashCode(object? x) =>
-            GetHashCode((T?)x);
-    }
+    protected override int GetHashCodeValue([DisallowNull] T value) =>
+        EqualityComparer<T>.Default.GetHashCode(value);
 }

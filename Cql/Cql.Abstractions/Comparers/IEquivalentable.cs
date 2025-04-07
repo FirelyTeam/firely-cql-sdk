@@ -6,7 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Abstractions
+namespace Hl7.Cql.Comparers
 {
     /// <summary>
     /// <para>Defines a generalized type-specific comparison method that a value type or class implements to order or sort its instances.</para>
@@ -16,7 +16,7 @@ namespace Hl7.Cql.Abstractions
     /// <typeparam name="T">
     /// The type of object to compare.
     /// </typeparam>
-    public interface IEquivalentable<T>
+    public interface IEquivalentable<in T>
         where T : class
     {
         /// <summary>
@@ -25,7 +25,7 @@ namespace Hl7.Cql.Abstractions
         /// <param name="other">The object to compare.</param>
         /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if this object is equivalent to <paramref name="other"/>, else <see langword="false"/>.</returns>
-        bool Equivalent(T? other, string? precision);
+        bool EquivalentToValue([DisallowNull] T other, string? precision);
 
     }
 }

@@ -1,6 +1,7 @@
 // Global using directives
 
 global using System;
+global using System.Collections;
 global using System.Collections.Concurrent;
 global using System.Collections.Generic;
 global using System.Collections.Immutable;
@@ -16,3 +17,4 @@ global using System.Runtime.CompilerServices;
 global using System.Runtime.InteropServices;
 global using System.Security.Cryptography;
 global using System.Text;
+global using static Hl7.Cql.Comparers.CqlComparerSharedMethods;

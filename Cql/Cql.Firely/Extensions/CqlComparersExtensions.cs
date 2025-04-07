@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.Comparers;
 using Hl7.Cql.Fhir.Comparers;
 using Hl7.Fhir.Model;
+using Hl7.Cql.Abstractions.Infrastructure;
 
 namespace Hl7.Cql.Fhir.Extensions
 {
@@ -45,44 +45,28 @@ namespace Hl7.Cql.Fhir.Extensions
             comparers.Register(typeof(Uuid), new IValueComparer<string?>());
             comparers.Register(typeof(Identifier), new IdentifierComparer(comparers, comparers));
 
-            comparers.Register(typeof(Code<>), (type, _comparers) =>
+            comparers.Register(typeof(Code<>), (type, self) =>
             {
-                var codeType = type.GetGenericArguments()[0];
-                var comparerType = typeof(CodeComparer<>).MakeGenericType(codeType);
-                var codeComparer = (ICqlComparer)Activator.CreateInstance(comparerType, _comparers)!;
-                var codeStringComparer = new CodeStringComparer(codeComparer);
-                return codeStringComparer;
+                Type codeType = type.GetGenericArguments()[0];
+                Trace.Assert(codeType.IsEnum());
+                Type comparerType = typeof(CodeOfEnumCqlComparer<>).MakeGenericType(codeType);
+                ICqlComparer codeOfEnumCqlComparerInstance = (ICqlComparer)comparerType.InvokeMember(
+                    nameof(CodeOfEnumCqlComparer<DummyEnum>.Instance),
+                    BindingFlags.Static | BindingFlags.Public | BindingFlags.GetProperty,
+                    null, null, [])!;
+                PrimitiveTypeAgainstStringComparer primitiveTypeAgainstStringComparer = new PrimitiveTypeAgainstStringComparer(codeOfEnumCqlComparerInstance);
+                return primitiveTypeAgainstStringComparer;
             });
 
             return comparers;
         }
 
-        private class CodeStringComparer(ICqlComparer inner) : CqlComparerDecorator(inner)
-        {
-            public override int? Compare(
-                object? x,
-                object? y,
-                string? precision)
-            {
-                // We always expect x to be a Code<T> but we only need the ObjectValue on the non-generic base type PrimitiveType.
-                if (x is PrimitiveType xCode && y is string yString)
-                {
-                    if (precision != null)
-                        throw new InvalidOperationException(
-                            $"Precision '{precision}' is not supported for comparing Code<T> to string.");
-
-                    return StringComparer.Ordinal.Compare(xCode.ObjectValue, yString);
-                }
-
-                return base.Compare(x, y, precision);
-            }
-
-            public override bool? Equals(
-                object? x,
-                object? y,
-                string? precision) =>
-                throw new UnreachableException("CqlComparers always goes through Compare, so we never reach here");
-        }
+        /// <remarks>
+        /// It is impossible to get a nameof of a member on a type definition, e.g. nameof(CodeOfEnumCqlComparer&lt;>.Instance),
+        /// so we have to use a dummy enum type here. We can also not substitute the type parameter with the type <see cref="Enum"/>
+        /// since it is not a struct and not an enum, even though it's the base type of all enums.
+        /// </remarks>
+        private enum DummyEnum {}
 
         /// <summary>
         /// Adds comparers for all types derived from <see cref="Resource"/> which compare them by their <see cref="Resource.Id"/> property only.

@@ -6,7 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Abstractions.Infrastructure;
+namespace Hl7.Cql.Comparers;
 
 
 #region Comparer

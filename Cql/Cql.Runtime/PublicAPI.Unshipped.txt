@@ -108,7 +108,7 @@ Hl7.Cql.Operators.ICqlOperators.Collapse(System.Collections.Generic.IEnumerable<
 Hl7.Cql.Operators.ICqlOperators.Collapse(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlInterval<int?>?>? intervals, string? precision) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlInterval<int?>?>?
 Hl7.Cql.Operators.ICqlOperators.Collapse(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlInterval<long?>?>? intervals, string? precision) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlInterval<long?>?>?
 Hl7.Cql.Operators.ICqlOperators.Combine(System.Collections.Generic.IEnumerable<string!>! source, string? separator) -> string?
-Hl7.Cql.Operators.ICqlOperators.Comparer.get -> Hl7.Cql.Abstractions.ICqlComparer!
+Hl7.Cql.Operators.ICqlOperators.Comparer.get -> Hl7.Cql.Comparers.ICqlComparer!
 Hl7.Cql.Operators.ICqlOperators.Concatenate(string? left, string? right) -> string?
 Hl7.Cql.Operators.ICqlOperators.ConceptInValueSet(Hl7.Cql.Primitives.CqlConcept? concept, Hl7.Cql.Primitives.CqlValueSet? valueSet) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ConceptsInValueSet(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlConcept?>? concept, Hl7.Cql.Primitives.CqlValueSet? valueSet) -> bool?
@@ -207,8 +207,8 @@ Hl7.Cql.Operators.ICqlOperators.End(Hl7.Cql.Primitives.CqlInterval<long?>? argum
 Hl7.Cql.Operators.ICqlOperators.Ends<T>(Hl7.Cql.Primitives.CqlInterval<T>! left, Hl7.Cql.Primitives.CqlInterval<T>! right, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.EndsWith(string! argument, string! suffix) -> bool?
 Hl7.Cql.Operators.ICqlOperators.EnumEqualsString(object? enum, string? value) -> bool?
-Hl7.Cql.Operators.ICqlOperators.Equal(object? x, object? y) -> bool?
-Hl7.Cql.Operators.ICqlOperators.Equivalent(object? x, object? y) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Equal(object? left, object? right) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Equivalent(object? left, object? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Equivalent<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Except(Hl7.Cql.Primitives.CqlInterval<decimal?>? left, Hl7.Cql.Primitives.CqlInterval<decimal?>? right) -> Hl7.Cql.Primitives.CqlInterval<decimal?>?
 Hl7.Cql.Operators.ICqlOperators.Except(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? right) -> Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>?
@@ -597,7 +597,7 @@ Hl7.Cql.ValueSets.CqlCodeExtensions
 Hl7.Cql.ValueSets.HashValueSetDictionary
 Hl7.Cql.ValueSets.HashValueSetDictionary.Add(string! valueSetUri, System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>! codes) -> void
 Hl7.Cql.ValueSets.HashValueSetDictionary.HashValueSetDictionary() -> void
-Hl7.Cql.ValueSets.HashValueSetDictionary.HashValueSetDictionary(Hl7.Cql.Abstractions.ICqlComparer<Hl7.Cql.Primitives.CqlCode!>! comparer) -> void
+Hl7.Cql.ValueSets.HashValueSetDictionary.HashValueSetDictionary(Hl7.Cql.Comparers.ICqlComparer<Hl7.Cql.Primitives.CqlCode!>! comparer) -> void
 Hl7.Cql.ValueSets.HashValueSetDictionary.Intern(Hl7.Cql.Primitives.CqlCode! code) -> Hl7.Cql.Primitives.CqlCode!
 Hl7.Cql.ValueSets.HashValueSetDictionary.IsCodeInValueSet(string! valueSetUri, Hl7.Cql.Primitives.CqlCode! code) -> bool
 Hl7.Cql.ValueSets.HashValueSetDictionary.IsCodeInValueSet(string! valueSetUri, string! code) -> bool
@@ -605,7 +605,7 @@ Hl7.Cql.ValueSets.HashValueSetDictionary.IsCodeInValueSet(string! valueSetUri, s
 Hl7.Cql.ValueSets.HashValueSetDictionary.TryGetCodesInValueSet(string! valueSetUri, out System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>? codes) -> bool
 Hl7.Cql.ValueSets.InMemoryValueSet
 Hl7.Cql.ValueSets.InMemoryValueSet.InMemoryValueSet(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>! contents) -> void
-Hl7.Cql.ValueSets.InMemoryValueSet.InMemoryValueSet(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>! contents, Hl7.Cql.Abstractions.ICqlComparer<Hl7.Cql.Primitives.CqlCode!>! comparer) -> void
+Hl7.Cql.ValueSets.InMemoryValueSet.InMemoryValueSet(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>! contents, Hl7.Cql.Comparers.ICqlComparer<Hl7.Cql.Primitives.CqlCode!>! comparer) -> void
 Hl7.Cql.ValueSets.InMemoryValueSet.IsCodeInValueSet(Hl7.Cql.Primitives.CqlCode! code) -> bool
 Hl7.Cql.ValueSets.InMemoryValueSet.IsCodeInValueSet(string! code) -> bool
 Hl7.Cql.ValueSets.InMemoryValueSet.IsCodeInValueSet(string! code, string? system) -> bool
@@ -668,7 +668,6 @@ static Hl7.Cql.Toolkit.ToolkitExtensions.SetIgnoreEnumerationExceptions<TSelf>(t
 static Hl7.Cql.Toolkit.ToolkitExtensions.SetThrowEnumerationExceptions<TSelf>(this Hl7.Cql.Toolkit.IToolkit<TSelf>! toolkit) -> TSelf
 static Hl7.Cql.ValueSets.CqlCodeExtensions.GetValueSet(this Hl7.Cql.ValueSets.IValueSetDictionary! all, Hl7.Cql.Primitives.CqlValueSet! valueset) -> Hl7.Cql.ValueSets.IValueSetFacade!
 static Hl7.Cql.ValueSets.CqlCodeExtensions.GetValueSet(this Hl7.Cql.ValueSets.IValueSetDictionary! all, string! canonical) -> Hl7.Cql.ValueSets.IValueSetFacade!
-static Hl7.Cql.ValueSets.CqlCodeExtensions.ToEqualityComparer<T>(this Hl7.Cql.Abstractions.ICqlComparer<T>! comparer, string? precision = null, bool useEquivalence = false) -> System.Collections.Generic.IEqualityComparer<T>!
 static Hl7.Cql.ValueSets.CqlCodeExtensions.Union(this Hl7.Cql.ValueSets.IValueSetFacade! left, Hl7.Cql.ValueSets.IValueSetFacade! right) -> Hl7.Cql.ValueSets.IValueSetFacade!
 static Hl7.Cql.ValueSets.CqlCodeExtensions.Union(this System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>! left, System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>! right) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>!
 virtual Hl7.Cql.Operators.RetrieveParameters.<Clone>$() -> Hl7.Cql.Operators.RetrieveParameters!

@@ -1,5 +1,5 @@
 ﻿/*
- * Copyright (c) 2023, NCQA and contributors
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -7,20 +7,20 @@
  */
 
 
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Comparers
+namespace Hl7.Cql.Comparers;
+
+partial class CqlComparers
 {
-    internal class CqlTupleTypeComparer(ICqlComparer memberComparer) : ICqlComparer<ITuple?>, ICqlComparer
+    private class CqlTupleTypeComparer(CqlComparers memberComparer) :
+        CqlComparer<ITuple?>(CqlComparerEqualsImplementation.Compare)
     {
-        private static readonly int FallbackHashCode = typeof(ITuple).GetHashCode() ^ 098174506;
-
-        public int? Compare(ITuple? x, ITuple? y, string? precision = null)
+        protected override int? CompareValues(
+            ITuple x,
+            ITuple y,
+            string? precision)
         {
-            if (x == null || y == null)
-                return null;
-
             // Check the "type" via the metadata
             if (x.Length == 0 || x.Length != y.Length)
                 return null;
@@ -41,17 +41,11 @@ namespace Hl7.Cql.Comparers
             return 0;
         }
 
-        public int GetHashCode(ITuple? obj) =>
-            obj?.GetHashCode() ?? FallbackHashCode;
-
-        public bool? Equals(ITuple? x, ITuple? y, string? precision = null) =>
-            Compare(x, y, precision) == 0;
-
-        public bool Equivalent(ITuple? x, ITuple? y, string? precision = null)
+        protected override bool EquivalentValues(
+            ITuple x,
+            ITuple y,
+            string? precision)
         {
-            if (CqlComparers.EquivalentOnNullsOnly(x, y) is { } r)
-                return r;
-
             // Check the "type" via the metadata
             if (x!.Length == 0 || x.Length != y!.Length)
                 return false;
@@ -71,19 +65,5 @@ namespace Hl7.Cql.Comparers
 
             return true;
         }
-
-        int? ICqlComparer.Compare(object? x, object? y, string? precision) =>
-            Compare(x as ITuple, y as ITuple, precision);
-
-        bool? ICqlComparer.Equals(object? x, object? y, string? precision) =>
-            Equals(x as ITuple, y as ITuple, precision);
-
-        bool IEquivalenceComparer.Equivalent(object? x, object? y, string? precision) =>
-            Equivalent(x as ITuple, y as ITuple, precision);
-
-        int ICqlComparer.GetHashCode(object? obj) =>
-            GetHashCode(obj as ITuple);
     }
 }
-
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
