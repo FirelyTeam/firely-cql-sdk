@@ -61,6 +61,11 @@ namespace Hl7.Cql.Fhir.Extensions
             return comparers;
         }
 
+        /// <remarks>
+        /// It is impossible to get a nameof of a member on a type definition, e.g. nameof(CodeOfEnumCqlComparer&lt;>.Instance),
+        /// so we have to use a dummy enum type here. We can also not substitute the type parameter with the type <see cref="Enum"/>
+        /// since it is not a struct and not an enum, even though it's the base type of all enums.
+        /// </remarks>
         private enum DummyEnum {}
 
         /// <summary>
