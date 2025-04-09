@@ -35,7 +35,7 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
             // Packaging
             ["--canonical-root-url"] = Section(PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)),
             ["--fhir"] = Section(PackagingOptions.ConfigSection, nameof(PackagingOptions.ResourceOutDir)),
-            ["--override-utc-date-time"] = Section(PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)),
+            ["--override-date-time"] = Section(PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)),
 
             // Serialization
             ["--json-indent-enable"] = Section(PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonIndentEnable)),
