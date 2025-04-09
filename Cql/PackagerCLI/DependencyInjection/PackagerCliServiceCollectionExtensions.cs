@@ -8,11 +8,10 @@
 
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.Packager;
-using Hl7.Fhir.Model.CdsHooks;
 using System.Collections.Immutable;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Reflection;
+using Hl7.Cql.CodeGeneration.NET.Toolkit;
 
 // ReSharper disable once CheckNamespace
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -20,6 +19,10 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 internal static class PackagerCliServiceCollectionExtensions
 {
+    private const string CqlSectionName = "Cql";
+    private const string ElmSectionName = "Elm";
+    private const string CqlModelsSectionName = nameof(CqlToolkitConfig.Models);
+
     internal static IServiceCollection AddPackagerCliServices(
         this IServiceCollection services)
     {
@@ -29,34 +32,37 @@ internal static class PackagerCliServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddPackagerCliOptionsV2(
+    public static IServiceCollection AddToolkitConfigs(
         this IServiceCollection services)
     {
         services.AddOptions<CqlToolkitConfig>()
-                .WithFactoryMethod(CreateCqlToolkitConfig);
+                .UseFactoryMethod(CreateCqlToolkitConfig)
+                .BindConfiguration(CqlSectionName);
+
+        services.AddOptions<ElmToolkitConfig>()
+                .BindConfiguration(ElmSectionName);
 
         return services;
 
         static CqlToolkitConfig CreateCqlToolkitConfig(IConfiguration configuration)
         {
-            var section = configuration.GetSection("Cql");
+            var section = configuration.GetSection(CqlSectionName);
 
             // Special handling to load Models from the configuration
-            var models = section.GetSection("Models").Get<CqlModel[]>();
+            var models = section.GetSection(CqlModelsSectionName).Get<CqlModel[]>();
 
             // Validate
             if (models is not null)
                 foreach (var model in models)
                     if (!Enum.IsDefined(typeof(CqlModel), model))
-                        throw new InvalidEnumArgumentException("Models", (int)model, typeof(CqlModel));
+                        throw new InvalidEnumArgumentException(CqlModelsSectionName, (int)model, typeof(CqlModel));
 
             CqlToolkitConfig config = new CqlToolkitConfig(Models: models?.ToImmutableHashSet());
-            section.Bind(config);
             return config;
         }
     }
 
-    private static OptionsBuilder<TOptions> WithFactoryMethod<TOptions>(
+    private static OptionsBuilder<TOptions> UseFactoryMethod<TOptions>(
         this OptionsBuilder<TOptions> optionsBuilder,
         Func<IConfiguration, TOptions> factoryMethod) where TOptions : class
     {
@@ -76,13 +82,6 @@ internal static class PackagerCliServiceCollectionExtensions
     public static IServiceCollection AddPackagerCliOptions(
         this IServiceCollection services)
     {
-        /*
-        if (services.Any(s => s.ServiceType == typeof(IValidateOptions<PackagerCliOptions>)))
-            return services;
-
-        services.AddSingleton<IValidateOptions<PackagerCliOptions>, PackagerCliOptions.Validator>();
-        */
-
         services
             .AddOptions<PackagerCliOptions>()
             .Configure<IConfiguration>(PackagerCliOptions.BindConfig)
@@ -111,7 +110,7 @@ file class CustomOptionsFactory<TOptions>(
             }
             catch (Exception e)
             {
-                throw new ValidationException($"Could not configure {typeof(TOptions).FullName}", e);
+                throw new OptionsValidationException( name, typeof(TOptions), [e.Message]);
             }
         }
 

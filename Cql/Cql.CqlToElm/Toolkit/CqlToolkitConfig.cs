@@ -7,6 +7,7 @@
  */
 
 using System.Collections.Immutable;
+using System.Text.Json.Serialization;
 using Hl7.Cql.Model;
 
 namespace Hl7.Cql.CqlToElm.Toolkit;
@@ -149,6 +150,7 @@ public sealed record CqlToolkitConfig(
     /// <summary>
     /// The model information to use when translating CQL to ELM.
     /// </summary>
+    [JsonIgnore]
     public ImmutableHashSet<ModelInfo> ModelInfos { get; init; } = ModelInfos ?? [];
 
 
@@ -212,6 +214,7 @@ public sealed record CqlToolkitConfig(
     /// The default value is <see langword="true"/>.
     /// </summary>
     /// <seealso href="https://cql.hl7.org/09-b-cqlreference.html#predecessor" />
+    [DefaultValue(true)]
     public bool ValidateIntervals { get; init; } = ValidateIntervals;
 
     /// <summary>

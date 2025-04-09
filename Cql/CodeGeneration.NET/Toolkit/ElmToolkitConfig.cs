@@ -28,6 +28,11 @@ public sealed record ElmToolkitConfig(
     bool AllowUnresolvedExternals = true,
     int LRUCacheSize = 0)
 {
+    /// <nodoc />
+    public ElmToolkitConfig()
+        : this(AssemblyCompilerDebugInformationFormat: AssemblyCompilerDebugInformationFormat.None)
+    { } // We need a public parameterless constructor for DI
+
     /// <summary>
     /// Gets the default configuration settings.
     /// </summary>

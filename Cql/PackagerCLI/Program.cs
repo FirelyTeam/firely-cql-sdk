@@ -10,10 +10,6 @@
 
 using Hl7.Cql.CqlToElm.Toolkit;
 using System.Collections.Immutable;
-using System.ComponentModel;
-using System.Configuration;
-using System.Text.Json.Serialization;
-using Hl7.Fhir.Utility;
 using Log = Serilog.Log;
 
 namespace Hl7.Cql.Packager;
@@ -47,8 +43,8 @@ public abstract class Program
                 config
 #if V2
                     .AddPackagerCliAppSettingsV2(args)
-#else
                     .AddPackagerCliCommandLineSwitches(args)
+#else
 #endif
                     ;
             })
@@ -57,8 +53,10 @@ public abstract class Program
             {
                 services
 #if V2
-                    .AddPackagerCliOptionsV2()
-                    .AddScoped<PackagerCliV2>()
+                    .AddToolkitConfigs()
+                    // .AddScoped<PackagerCliV2>()
+                    .AddPackagerCliOptions()
+                    .AddPackagerCliServices()
 #else
                     .AddPackagerCliOptions()
                     .AddPackagerCliServices()
@@ -109,7 +107,8 @@ public abstract class Program
             using IServiceScope mainScope = host.Services.CreateScope();
             var packagerCliProgram = mainScope.ServiceProvider
 #if V2
-                                              .GetRequiredService<PackagerCliV2>()
+                                              //.GetRequiredService<PackagerCliV2>()
+                                              .GetRequiredService<PackagerCli>()
 #else
                                               .GetRequiredService<PackagerCli>()
 #endif
@@ -147,7 +146,7 @@ public abstract class Program
     }
 }
 
-public class PackagerCliV2(
+file sealed class PackagerCliV2(
     IOptions<CqlToolkitConfig> cqlToolkitConfigOpt)
 {
     private readonly CqlToolkitConfig _cqlToolkitConfig = cqlToolkitConfigOpt.Value;
