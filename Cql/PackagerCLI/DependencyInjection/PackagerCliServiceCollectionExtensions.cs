@@ -6,15 +6,14 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Reflection;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.Packager;
-using System.Collections.Immutable;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 
 // ReSharper disable once CheckNamespace
 #pragma warning disable IDE0130 // Namespace does not match folder structure
+
 namespace Microsoft.Extensions.DependencyInjection;
 
 internal static class PackagerCliServiceCollectionExtensions
@@ -48,7 +47,7 @@ internal static class PackagerCliServiceCollectionExtensions
         {
             var section = configuration.GetSection(CqlSectionName);
 
-            // Special handling to load Models from the configuration
+            // Special handling to load Models from the configuration and pass it to the constructor
             var models = section.GetSection(CqlModelsSectionName).Get<CqlModel[]>();
 
             // Validate
@@ -88,6 +87,21 @@ internal static class PackagerCliServiceCollectionExtensions
             .ValidateOnStart();
 
         return services;
+    }
+
+    public static IConfigurationBuilder AddPackagerCliAppSettings(
+        this IConfigurationBuilder config,
+        string[] args)
+    {
+        var buildConfiguration = typeof(PackagerCli).Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration?.ToLowerInvariant();
+        var environmentName = buildConfiguration ?? "release";
+
+        config
+            //.SetBasePath()
+            .AddJsonFile("Hl7.Cql.Packager.appsettings.json", optional: true, reloadOnChange: false)
+            .AddJsonFile($"Hl7.Cql.Packager.appsettings.{environmentName}.json", optional: true, reloadOnChange: false)
+            ;
+        return config;
     }
 }
 

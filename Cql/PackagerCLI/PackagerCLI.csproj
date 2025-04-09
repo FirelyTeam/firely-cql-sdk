@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<Import Project="..\..\cql-sdk.props" />
 
@@ -21,7 +21,6 @@
 
 	<ItemGroup>
 		<None Remove="..\..\README.md" />
-		<None Remove="appsettings.json" />
 		<None Include="README.md" Pack="true" PackagePath="" />
 	</ItemGroup>
 
@@ -45,7 +44,13 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Content Include="appsettings.json">
+	  <Content Include="Hl7.Cql.Packager.appsettings.debug.json">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Hl7.Cql.Packager.appsettings.json">
 	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
 	  </Content>
 	</ItemGroup>

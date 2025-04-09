@@ -29,8 +29,14 @@ internal class PackagerCliOptions
         }
     }
 
+    [JsonIgnore]
+    [Obsolete("Not implemented")]
     public bool LoggingIncludeDebug { get; set; }
+
+    [JsonIgnore]
+    [Obsolete("Not implemented")]
     public bool LoggingKeepPrevious { get; set; }
+
     public DirectoryInfo? CqlFromDirectory { get; set; }
     public DirectoryInfo? ElmFromDirectory { get; set; }
     public DirectoryInfo? ElmOutDirectory { get; set; }

@@ -31,8 +31,8 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
             ["--dll"] = PackagerCliSection + nameof(PackagerCliOptions.AssemblyOutDirectory),
 
             // Logging
-            ["--log-debug"] = PackagerCliSection + nameof(PackagerCliOptions.LoggingIncludeDebug),
-            ["--log-dont-clear"] = PackagerCliSection + nameof(PackagerCliOptions.LoggingKeepPrevious),
+            // ["--log-debug"] = PackagerCliSection + nameof(PackagerCliOptions.LoggingIncludeDebug),
+            // ["--log-dont-clear"] = PackagerCliSection + nameof(PackagerCliOptions.LoggingKeepPrevious),
 
             // Packaging
             ["--canonical-root-url"] = PackagerCliSection + nameof(PackagerCliOptions.FhirCanonicalRootUrl),
@@ -54,21 +54,6 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
         string[] args)
     {
         config.AddCommandLine(args, CommandLineSwitchMappings);
-        return config;
-    }
-
-    public static IConfigurationBuilder AddPackagerCliAppSettingsV2(
-        this IConfigurationBuilder config,
-        string[] args)
-    {
-        var environmentName = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT")?.ToLowerInvariant()
-                              ?? "release";
-
-        config
-            //.SetBasePath()
-            .AddJsonFile("appsettings.json", optional: true, reloadOnChange: false)
-            .AddJsonFile($"appsettings.{environmentName}.json", optional: true, reloadOnChange: false)
-            ;
         return config;
     }
 }
