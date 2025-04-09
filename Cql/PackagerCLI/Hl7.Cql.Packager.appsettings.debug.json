@@ -1,8 +1,7 @@
 ﻿{
     "Cql": {
-        "Models": [ ]
     },
     "Elm": {
-        "AssemblyCompilerDebugInformationFormat": "None"
+        "AssemblyCompilerDebugInformationFormat": "Embedded"
     }
 }

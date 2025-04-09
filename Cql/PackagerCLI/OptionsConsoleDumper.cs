@@ -6,17 +6,13 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.CodeGeneration.NET.Toolkit;
-using Hl7.Cql.CqlToElm.Toolkit;
-using System.Reflection;
-
 namespace Hl7.Cql.Packager;
 
 internal class OptionsConsoleDumper(
     ILogger<OptionsConsoleDumper> logger,
     IOptions<PackagerCliOptions> packagerCliProgramOptions,
-    IOptions<CqlToolkitConfig> cqlToolkitConfigOptions,
-    IOptions<ElmToolkitConfig> elmToolkitConfigOptions)
+    IOptions<CqlOptions> cqlOptions,
+    IOptions<ElmOptions> elmOptions)
 {
     public void DumpToConsole()
     {
@@ -38,8 +34,8 @@ internal class OptionsConsoleDumper(
         var root = new
         {
             Packager = packagerCliProgramOptions.Value,
-            Cql = cqlToolkitConfigOptions.Value,
-            Elm = elmToolkitConfigOptions.Value,
+            Cql = cqlOptions.Value,
+            Elm = elmOptions.Value,
         };
 
         WriteLine(JsonSerializer.Serialize(root, jsonOpt));

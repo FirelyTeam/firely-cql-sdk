@@ -114,7 +114,7 @@ namespace Hl7.Cql.CqlToElm.Toolkit;
 /// When <see langword="true"/>, illegal literals that would fall outside the range of their minimum and maximum values will raise errors.
 /// The default value is <see langword="true"/>.
 /// </param>
-public sealed record CqlToolkitConfig(
+public record CqlToolkitConfig(
     ImmutableHashSet<CqlModel>? Models = null,
     ImmutableHashSet<ModelInfo>? ModelInfos = null,
     AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.PreferModel,

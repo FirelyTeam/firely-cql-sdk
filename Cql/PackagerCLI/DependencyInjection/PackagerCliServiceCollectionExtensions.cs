@@ -6,8 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Reflection;
-using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.Packager;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 
@@ -18,10 +16,6 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 internal static class PackagerCliServiceCollectionExtensions
 {
-    private const string CqlSectionName = "Cql";
-    private const string ElmSectionName = "Elm";
-    private const string CqlModelsSectionName = nameof(CqlToolkitConfig.Models);
-
     internal static IServiceCollection AddPackagerCliServices(
         this IServiceCollection services)
     {
@@ -34,31 +28,14 @@ internal static class PackagerCliServiceCollectionExtensions
     public static IServiceCollection AddToolkitConfigs(
         this IServiceCollection services)
     {
-        services.AddOptions<CqlToolkitConfig>()
-                .UseFactoryMethod(CreateCqlToolkitConfig)
-                .BindConfiguration(CqlSectionName);
+        services.AddOptions<CqlOptions>()
+                .UseFactoryMethod(CqlOptions.CreateCqlOptions)
+                .BindConfiguration(CqlOptions.ConfigSection);
 
         services.AddOptions<ElmToolkitConfig>()
-                .BindConfiguration(ElmSectionName);
+                .BindConfiguration(ElmOptions.ConfigSection);
 
         return services;
-
-        static CqlToolkitConfig CreateCqlToolkitConfig(IConfiguration configuration)
-        {
-            var section = configuration.GetSection(CqlSectionName);
-
-            // Special handling to load Models from the configuration and pass it to the constructor
-            var models = section.GetSection(CqlModelsSectionName).Get<CqlModel[]>();
-
-            // Validate
-            if (models is not null)
-                foreach (var model in models)
-                    if (!Enum.IsDefined(typeof(CqlModel), model))
-                        throw new InvalidEnumArgumentException(CqlModelsSectionName, (int)model, typeof(CqlModel));
-
-            CqlToolkitConfig config = new CqlToolkitConfig(Models: models?.ToImmutableHashSet());
-            return config;
-        }
     }
 
     private static OptionsBuilder<TOptions> UseFactoryMethod<TOptions>(

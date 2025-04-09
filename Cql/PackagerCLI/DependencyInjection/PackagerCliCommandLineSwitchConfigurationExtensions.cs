@@ -31,8 +31,8 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
             ["--dll"] = PackagerCliSection + nameof(PackagerCliOptions.AssemblyOutDirectory),
 
             // Logging
-            // ["--log-debug"] = PackagerCliSection + nameof(PackagerCliOptions.LoggingIncludeDebug),
-            // ["--log-dont-clear"] = PackagerCliSection + nameof(PackagerCliOptions.LoggingKeepPrevious),
+            ["--log-debug"] = PackagerCliSection + nameof(PackagerCliOptions.LoggingIncludeDebug),
+            ["--log-dont-clear"] = PackagerCliSection + nameof(PackagerCliOptions.LoggingKeepPrevious),
 
             // Packaging
             ["--canonical-root-url"] = PackagerCliSection + nameof(PackagerCliOptions.FhirCanonicalRootUrl),

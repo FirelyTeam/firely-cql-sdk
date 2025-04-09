@@ -25,31 +25,45 @@ internal class PackagerCli
     ILogger<PackagerCli> logger,
     OptionsConsoleDumper optionsConsoleDumper,
     IOptions<PackagerCliOptions> packagerCliOptions,
-    IOptions<CqlToolkitConfig> cqlToolkitConfigOptions,
-    IOptions<ElmToolkitConfig> elmToolkitConfigOptions)
+    IOptions<CqlOptions> cqlOptions,
+    IOptions<ElmOptions> elmOptions)
 {
     public int Run(bool translateCql = false)
     {
         try
         {
             optionsConsoleDumper.DumpToConsole();
+            CqlOptions cqlOpt = cqlOptions.Value;
+            ElmOptions elmOpt = elmOptions.Value;
+
+            var opt = packagerCliOptions.Value;
+            var cqlFromDirectory = opt.CqlFromDirectory;
+            var elmFromDirectory = opt.ElmFromDirectory;
+            var elmOutDirectory = opt.ElmOutDirectory;
+            var cSharpOutDirectory = opt.CSharpOutDirectory;
+            var assemblyOutDirectory = opt.AssemblyOutDirectory;
+            var fhirOutDirectory = opt.FhirOutDirectory;
+            var fhirCanonicalRootUrl = opt.FhirCanonicalRootUrl;
+            var fhirOverrideDate = opt.FhirOverrideDate;
+            var jsonIndentEnable = opt.JsonIndentEnable;
+            var outDirectories = opt.GetOutDirectories();
+
             if (DateTime.Now.Day > 0)
                 return 0;
 
-            var opt = packagerCliOptions.Value;
-            if (opt.CqlFromDirectory is not { Exists: true })
+            if (cqlFromDirectory is not { Exists: true })
             {
                 logger.LogWarning("Exiting: Cql input directory must be specified and exist.");
                 return -1;
             }
 
-            if (!translateCql && opt.ElmFromDirectory is not { Exists: true })
+            if (!translateCql && elmFromDirectory is not { Exists: true })
             {
                 logger.LogWarning("Exiting: ELM input directory must be specified and exist.");
                 return -1;
             }
 
-            if (opt.GetOutDirectories().All(o => o.dir is null))
+            if (outDirectories.All(o => o.dir is null))
             {
                 logger.LogWarning("Exiting: At least one output directory must be specified for a particular type.");
                 return -1;
@@ -58,9 +72,9 @@ internal class PackagerCli
             var packagingToolkit = new PackagingToolkit(loggerFactory)
                 .SetIgnoreEnumerationExceptions();
 
-            CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToolkitConfigOptions.Value)
+            CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt)
                                     .SetIgnoreEnumerationExceptions()
-                                    .AddCqlLibrariesFromDirectory(opt.CqlFromDirectory);
+                                    .AddCqlLibrariesFromDirectory(cqlFromDirectory);
 
             if (!cqlToolkit.Conversions.Any())
                 logger.LogWarning("Exiting: No CQL libraries were found in the CQL input directory.");
@@ -70,43 +84,37 @@ internal class PackagerCli
             {
                 cqlToolkit.ConvertCqlToElm();
 
-                if (opt.ElmOutDirectory is { } elmOutDir)
+                if (elmOutDirectory is { } elmOutDir)
                     cqlToolkit.SaveElmFilesToDirectory(
                         elmOutDir,
                         writeIndented: true,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
 
-                elmToolkit = cqlToolkit.CreateElmToolkit(elmToolkitConfigOptions.Value);
+                elmToolkit = cqlToolkit.CreateElmToolkit(elmOpt);
             }
             else
             {
-                elmToolkit = new ElmToolkit(loggerFactory, elmToolkitConfigOptions.Value)
+                elmToolkit = new ElmToolkit(loggerFactory, elmOpt)
                              .SetIgnoreEnumerationExceptions(false)
                              .AddElmFilesFromDirectory(
-                                 opt.ElmFromDirectory!,
+                                 elmFromDirectory!,
                                  filePredicate: file => !HardCodedSkipElmFiles.FileNames.Contains(file.Name));
             }
 
-            if (opt.CSharpOutDirectory is { } dirOutCS)
+            if (cSharpOutDirectory is not null)
                 elmToolkit
                     .ConvertElmToAssemblies()
-                    .SaveCSharpFilesToDirectory(dirOutCS, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
+                    .SaveCSharpFilesToDirectory(cSharpOutDirectory, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
 
-            if (opt.AssemblyOutDirectory is { } dirOutDll)
+            if (assemblyOutDirectory is not null)
                 elmToolkit
                     .ConvertElmToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
-                    .SaveAssemblyBinariesToDirectory(dirOutDll, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"));
+                    .SaveAssemblyBinariesToDirectory(assemblyOutDirectory, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"));
 
-            if (opt is
-                {
-                    FhirOutDirectory: { } dirOutFhir,
-                    FhirCanonicalRootUrl: var canonicalRootUrl,
-                    FhirOverrideDate: var overrideDate,
-                    JsonIndentEnable: { } indentJson,
-                })
+            if (fhirOutDirectory is not null)
             {
                 Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null;
-                if (indentJson)
+                if (jsonIndentEnable)
                     configureJsonSerializerOptions = options =>
                     {
                         options.WriteIndented = true;
@@ -115,9 +123,9 @@ internal class PackagerCli
 
                 packagingToolkit
                     .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
-                    .ConvertToFhirResources(canonicalRootUrl, overrideDate)
+                    .ConvertToFhirResources(fhirCanonicalRootUrl, fhirOverrideDate)
                     .SaveFhirResourcesToDirectory(
-                        dirOutFhir,
+                        fhirOutDirectory,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"),
                         configureJsonSerializerOptions);
             }

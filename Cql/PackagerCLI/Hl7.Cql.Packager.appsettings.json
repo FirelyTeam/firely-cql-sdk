@@ -3,6 +3,5 @@
     "Models": [ "ElmR1", "Fhir401" ],
   },
   "Elm": {
-    "AssemblyCompilerDebugInformationFormat": "Embedded"
   }
 }
