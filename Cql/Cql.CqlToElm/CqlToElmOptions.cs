@@ -59,7 +59,7 @@ namespace Hl7.Cql.CqlToElm
         /// The default value is <see langword="true"/>.
         /// </summary>
         /// <remarks>
-        /// If your execution enviornment has different minimum and maximum values for some types, you should set this value to <see langword="false"/> as necessary.
+        /// If your execution environment has different minimum and maximum values for some types, you should set this value to <see langword="false"/> as necessary.
         /// Note that doing so will run the risk of creating ELM libraries that cannot be used by other execution environments.
         /// </remarks>
         public bool? ValidateLiterals { get; set; } = true;

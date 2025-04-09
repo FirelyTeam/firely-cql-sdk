@@ -5,8 +5,15 @@
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
-#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
+#define V2
+
+using Hl7.Cql.CqlToElm.Toolkit;
+using System.Collections.Immutable;
+using System.ComponentModel;
+using System.Configuration;
+using System.Text.Json.Serialization;
+using Hl7.Fhir.Utility;
 using Log = Serilog.Log;
 
 namespace Hl7.Cql.Packager;
@@ -35,13 +42,28 @@ public abstract class Program
 
     private static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder()
-            .ConfigureAppConfiguration((context, config) => config.AddPackagerCliCommandLineSwitches(args))
+            .ConfigureAppConfiguration((context, config) =>
+            {
+                config
+#if V2
+                    .AddPackagerCliAppSettingsV2(args)
+#else
+                    .AddPackagerCliCommandLineSwitches(args)
+#endif
+                    ;
+            })
             .ConfigureLogging((context, logging) => logging.AddPackagerCLiLogging(context.Configuration))
             .ConfigureServices((context, services) =>
             {
                 services
+#if V2
+                    .AddPackagerCliOptionsV2()
+                    .AddScoped<PackagerCliV2>()
+#else
                     .AddPackagerCliOptions()
-                    .AddPackagerCliServices();
+                    .AddPackagerCliServices()
+#endif
+                    ;
             })
             .UseConsoleLifetime()
             ;
@@ -81,15 +103,22 @@ public abstract class Program
             return -1;
         }
 
+        var hostApplicationLifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
         try
         {
             using IServiceScope mainScope = host.Services.CreateScope();
-            var packagerCliProgram = mainScope.ServiceProvider.GetRequiredService<PackagerCli>();
+            var packagerCliProgram = mainScope.ServiceProvider
+#if V2
+                                              .GetRequiredService<PackagerCliV2>()
+#else
+                                              .GetRequiredService<PackagerCli>()
+#endif
+                                              ;
             return packagerCliProgram.Run();
         }
         finally
         {
-            var hostLifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
+            var hostLifetime = hostApplicationLifetime;
             hostLifetime.StopApplication();
         }
     }
@@ -115,5 +144,54 @@ public abstract class Program
     private static void ShowHelp()
     {
         Console.WriteLine(Usage);
+    }
+}
+
+public class PackagerCliV2(
+    IOptions<CqlToolkitConfig> cqlToolkitConfigOpt)
+{
+    private readonly CqlToolkitConfig _cqlToolkitConfig = cqlToolkitConfigOpt.Value;
+
+    public int Run()
+    {
+        var jsonSerializerOptions = new JsonSerializerOptions
+        {
+            WriteIndented = true,
+            Converters =
+            {
+                new ImmutableHashSetEnumConverter<CqlModel>(),
+            }
+        };
+
+        Console.WriteLine("1.");
+        Console.WriteLine(JsonSerializer.Serialize(_cqlToolkitConfig, jsonSerializerOptions));
+
+
+        // var config = ConfigureCqlToolkitConfig(configuration);
+        //
+        // /*
+        // var cqlToolkitConfig = section.Get<CqlToolkitConfig>()!;
+        // if (models is not null)
+        //     typeof(CqlToolkitConfig).GetProperty(nameof(CqlToolkitConfig.Models))!.SetValue(cqlToolkitConfig, models);
+        //     */
+        //
+        // Console.WriteLine("2.");
+        // Console.WriteLine(JsonSerializer.Serialize(config, jsonSerializerOptions));
+
+        return 0;
+    }
+}
+
+public class ImmutableHashSetEnumConverter<T> : JsonConverter<ImmutableHashSet<T>> where T : Enum
+{
+    public override ImmutableHashSet<T> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        var list = JsonSerializer.Deserialize<List<T>>(ref reader, options)!;
+        return list.ToImmutableHashSet();
+    }
+
+    public override void Write(Utf8JsonWriter writer, ImmutableHashSet<T> value, JsonSerializerOptions options)
+    {
+        JsonSerializer.Serialize(writer, value.ToList(), options);
     }
 }

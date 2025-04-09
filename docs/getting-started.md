@@ -62,7 +62,7 @@ The demo project showcases the process of turning a measure written in CQL into 
 
 Just like with the CQL, building the solution should be a simple matter of hitting build, or `dotnet build`, but in this case, it is more instructive to break the build process into pieces to get a sense of what is going on. Basically, there are three steps:
 
-### 1. Turning CQL into ELM
+### 1. Turning CQL into ELM (using Java Tooling)
 
 Surprisingly, this is the hardest step. It takes the human-readable CQL source code and turns it into ELM, basically a serialized abstract syntax tree (just like CQL defined by HL7) that represents the source code in a more processable way. Unfortunately, there is no .NET tool for doing this yet, so this step involves running the existing CQL-to-ELM [command line tool](https://github.com/cqframework/clinical_quality_language/tree/master/Src/java).  The first time you run the build, it will also download all the necessary Java CQL/ELM tools.
 
@@ -148,10 +148,16 @@ This project can also be copied to a new project for your development. For examp
 
 	<PropertyGroup>
 		<LibrarySet>Measures.Authoring</LibrarySet>
+		<!-- Directories -->
 		<CqlDirectory>$(MSBuildProjectDirectory)/input/cql</CqlDirectory>
 		<ElmDirectory>$(MSBuildProjectDirectory)/Elm</ElmDirectory>
 		<ResourcesDirectory>$(MSBuildProjectDirectory)/Resources</ResourcesDirectory>
 		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
+		<DllDirectory>$(MSBuildProjectDirectory)/Dll</DllDirectory>
+		<! -- Settings (all optional) -->
+		<JsonIndentEnable>true</JsonIndentEnable>
+		<CanonicalRootUrl>https://fire.ly/fhir/</CanonicalRootUrl>
+		<OverrideUtcDateTime>1970-01-01T00:00:00</MyMeasureProject>
 	</PropertyGroup>
 
 In most scenarios, simply changing the LibrarySet is all that is needed. See the `Measures.Demo` project for a sample on loading data from directories that are not local to your authoring project.

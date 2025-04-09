@@ -17,12 +17,8 @@ Hl7.Cql.CqlToElm.CqlToElmConverter.CqlToElmConverter(System.IServiceProvider! se
 Hl7.Cql.CqlToElm.CqlToElmOptions
 Hl7.Cql.CqlToElm.CqlToElmOptions.AllowNullIntervals.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.AllowNullIntervals.set -> void
-Hl7.Cql.CqlToElm.CqlToElmOptions.AllowScopeRedefinition.get -> bool?
-Hl7.Cql.CqlToElm.CqlToElmOptions.AllowScopeRedefinition.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.AmbiguousTypeBehavior.get -> Hl7.Cql.CqlToElm.AmbiguousTypeBehavior?
 Hl7.Cql.CqlToElm.CqlToElmOptions.AmbiguousTypeBehavior.set -> void
-Hl7.Cql.CqlToElm.CqlToElmOptions.AssumeInputExtensions.get -> bool?
-Hl7.Cql.CqlToElm.CqlToElmOptions.AssumeInputExtensions.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.CqlToElmOptions() -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.EnableIntervalDemotion.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.EnableIntervalDemotion.set -> void
@@ -32,8 +28,6 @@ Hl7.Cql.CqlToElm.CqlToElmOptions.EnableListDemotion.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.EnableListDemotion.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.EnableListPromotion.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.EnableListPromotion.set -> void
-Hl7.Cql.CqlToElm.CqlToElmOptions.Input.get -> string?
-Hl7.Cql.CqlToElm.CqlToElmOptions.Input.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.LongsRequireSuffix.get -> bool?
 Hl7.Cql.CqlToElm.CqlToElmOptions.LongsRequireSuffix.set -> void
 Hl7.Cql.CqlToElm.CqlToElmOptions.SystemElmModelUri.get -> string?
@@ -70,8 +64,8 @@ Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.AllowNullIntervals.get -> bool
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.AllowNullIntervals.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.AmbiguousTypeBehavior.get -> Hl7.Cql.CqlToElm.AmbiguousTypeBehavior
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.AmbiguousTypeBehavior.init -> void
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.CqlToolkitConfig(System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CqlToElm.Toolkit.CqlModel>? Models = null, System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.Model.ModelInfo!>? ModelInfos = null, Hl7.Cql.CqlToElm.AmbiguousTypeBehavior AmbiguousTypeBehavior = Hl7.Cql.CqlToElm.AmbiguousTypeBehavior.Error, bool EnableListDemotion = false, bool EnableListPromotion = false, bool EnableIntervalPromotion = false, bool EnableIntervalDemotion = false, bool AllowNullIntervals = false) -> void
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.Deconstruct(out System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CqlToElm.Toolkit.CqlModel>? Models, out System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.Model.ModelInfo!>? ModelInfos, out Hl7.Cql.CqlToElm.AmbiguousTypeBehavior AmbiguousTypeBehavior, out bool EnableListDemotion, out bool EnableListPromotion, out bool EnableIntervalPromotion, out bool EnableIntervalDemotion, out bool AllowNullIntervals) -> void
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.CqlToolkitConfig(System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CqlToElm.Toolkit.CqlModel>? Models = null, System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.Model.ModelInfo!>? ModelInfos = null, Hl7.Cql.CqlToElm.AmbiguousTypeBehavior AmbiguousTypeBehavior = Hl7.Cql.CqlToElm.AmbiguousTypeBehavior.PreferModel, string? SystemElmModelUri = "urn:hl7-org:elm-types:r1", string? SystemElmModelVersion = "1.0.0", bool EnableListDemotion = false, bool EnableListPromotion = false, bool EnableIntervalDemotion = false, bool EnableIntervalPromotion = false, bool AllowNullIntervals = false, bool ValidateIntervals = true, bool LongsRequireSuffix = true, bool ValidateLiterals = true) -> void
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.Deconstruct(out System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CqlToElm.Toolkit.CqlModel>? Models, out System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.Model.ModelInfo!>? ModelInfos, out Hl7.Cql.CqlToElm.AmbiguousTypeBehavior AmbiguousTypeBehavior, out string? SystemElmModelUri, out string? SystemElmModelVersion, out bool EnableListDemotion, out bool EnableListPromotion, out bool EnableIntervalDemotion, out bool EnableIntervalPromotion, out bool AllowNullIntervals, out bool ValidateIntervals, out bool LongsRequireSuffix, out bool ValidateLiterals) -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableIntervalDemotion.get -> bool
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableIntervalDemotion.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableIntervalPromotion.get -> bool
@@ -81,10 +75,20 @@ Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableListDemotion.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableListPromotion.get -> bool
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.EnableListPromotion.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.Equals(Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig? other) -> bool
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.LongsRequireSuffix.get -> bool
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.LongsRequireSuffix.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.ModelInfos.get -> System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.Model.ModelInfo!>!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.ModelInfos.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.Models.get -> System.Collections.Immutable.ImmutableHashSet<Hl7.Cql.CqlToElm.Toolkit.CqlModel>!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.Models.init -> void
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.SystemElmModelUri.get -> string?
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.SystemElmModelUri.init -> void
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.SystemElmModelVersion.get -> string?
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.SystemElmModelVersion.init -> void
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.ValidateIntervals.get -> bool
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.ValidateIntervals.init -> void
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.ValidateLiterals.get -> bool
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.ValidateLiterals.init -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord.CqlToolkitConversionRecord() -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord.CqlToolkitConversionRecord(Hl7.Cql.CqlToElm.CqlLibraryString SourceCqlLibrary, Hl7.Cql.Elm.Library? ResultElmLibrary = null) -> void

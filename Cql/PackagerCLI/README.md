@@ -6,9 +6,14 @@ A .NET tool that packages CQL, ELM, and build outputs into a FHIR Library resour
 
 The HL7 CQL Packager performs the following steps:
 
-1. **Translation**: Converts ELM JSON files into Linq.Expressions, then translates these expressions into C# code. Each ELM file is converted into a class, with each function within that file becoming a public method in the class.
-2. **Compilation**: Compiles the generated C# code into a single assembly per ELM file.
-3. **Packaging**: Packages the assembly (and optionally the original CQL, ELM, and C# source code) into a FHIR Library resource, creating one resource per original ELM file.
+1. **CQL to ELM Conversion**: Converts CQL files into ELM JSON files.
+2. **ELM to C#**: Converts ELM JSON files into Linq.Expressions, then translates these expressions into C# code. Each ELM file is converted into a class, with each function within that file becoming a public method in the class.
+3. **C# to .NET DLL Compilation**: Compiles the generated C# code into a single assembly per ELM file.
+4. **Packaging to FHIR Libraries/Measures**: Packages the assembly (and optionally the original CQL, ELM, and C# source code) into a FHIR Library resource, creating one resource per original ELM file. Where applicable, FHIR Measure resources are also generated.
+
+### Limitations
+
+The tool does not convert CQL into ELM yet. You need to use the existing Java-based tooling for this conversion.
 
 ## Getting Started
 
@@ -22,10 +27,6 @@ dotnet tool install Hl7.Cql.Packager --global --prerelease
 
 > **Note**: The `--prerelease` option is required because only prerelease versions are currently available.
 
-### Prerequisites
-
-The tool does not convert CQL into ELM. You need to use the existing Java-based tooling for this conversion.
-
 ## Usage
 
 Run the tool with the following command:
@@ -33,6 +34,12 @@ Run the tool with the following command:
 ```shell
 cql-package --elm <directory> --cql <directory> [options]
 ```
+
+## Configurtion
+
+### CQL to ELM
+
+
 
 ### Mandatory Parameters
 
