@@ -10,9 +10,10 @@ namespace Hl7.Cql.Packager;
 
 internal class OptionsConsoleDumper(
     ILogger<OptionsConsoleDumper> logger,
-    IOptions<PackagerCliOptions> packagerCliProgramOptions,
     IOptions<CqlOptions> cqlOptions,
-    IOptions<ElmOptions> elmOptions)
+    IOptions<ElmOptions> elmOptions,
+    IOptions<PackagingOptions> packagingOptions,
+    IOptions<LoggingOptions> loggingOptions)
 {
     public void DumpToConsole()
     {
@@ -33,9 +34,10 @@ internal class OptionsConsoleDumper(
 
         var root = new
         {
-            Packager = packagerCliProgramOptions.Value,
             Cql = cqlOptions.Value,
             Elm = elmOptions.Value,
+            Packaging = packagingOptions.Value,
+            Logging = loggingOptions.Value,
         };
 
         WriteLine(JsonSerializer.Serialize(root, jsonOpt));

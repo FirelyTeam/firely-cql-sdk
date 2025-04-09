@@ -11,6 +11,9 @@ internal record CqlOptions : CqlToolkitConfig
     {
     }
 
+    public string? CqlInDir { get; init; }
+    public string? ElmOutDir { get; init; }
+
     /// <summary>
     /// This only creates the CqlOptions object with the models, it does not do a full binding.
     /// </summary>

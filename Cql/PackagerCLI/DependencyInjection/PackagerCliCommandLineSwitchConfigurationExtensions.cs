@@ -18,30 +18,30 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
 
     static IDictionary<string, string> BuildCommandLineSwitchMappings()
     {
-        const string PackagerCliSection = PackagerCliOptions.ConfigSection + ":";
-
         return new SortedDictionary<string, string>
         {
             // Input
-            ["--elm"] = PackagerCliSection + nameof(PackagerCliOptions.ElmFromDirectory),
-            ["--cql"] = PackagerCliSection + nameof(PackagerCliOptions.CqlFromDirectory),
+            ["--elm"] = Section(ElmOptions.ConfigSection, nameof(ElmOptions.ElmInDir)),
+            ["--cql"] = Section(CqlOptions.ConfigSection, nameof(CqlOptions.CqlInDir)),
 
             // Output
-            ["--cs"] = PackagerCliSection + nameof(PackagerCliOptions.CSharpOutDirectory),
-            ["--dll"] = PackagerCliSection + nameof(PackagerCliOptions.AssemblyOutDirectory),
+            ["--cs"] = Section(ElmOptions.ConfigSection, nameof(ElmOptions.CSharpOutDir)),
+            ["--dll"] = Section(ElmOptions.ConfigSection, nameof(ElmOptions.DllOutDir)),
 
             // Logging
-            ["--log-debug"] = PackagerCliSection + nameof(PackagerCliOptions.LoggingIncludeDebug),
-            ["--log-dont-clear"] = PackagerCliSection + nameof(PackagerCliOptions.LoggingKeepPrevious),
+            ["--log-debug"] = Section(LoggingOptions.ConfigSection, nameof(LoggingOptions.IncludeDebug)),
+            ["--log-dont-clear"] = Section(LoggingOptions.ConfigSection, nameof(LoggingOptions.KeepPrevious)),
 
             // Packaging
-            ["--canonical-root-url"] = PackagerCliSection + nameof(PackagerCliOptions.FhirCanonicalRootUrl),
-            ["--fhir"] = PackagerCliSection + nameof(PackagerCliOptions.FhirOutDirectory),
-            ["--override-utc-date-time"] = PackagerCliSection + nameof(PackagerCliOptions.FhirOverrideDate),
+            ["--canonical-root-url"] = Section(PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)),
+            ["--fhir"] = Section(PackagingOptions.ConfigSection, nameof(PackagingOptions.ResourceOutDir)),
+            ["--override-utc-date-time"] = Section(PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)),
 
             // Serialization
-            ["--json-indent-enable"] = PackagerCliSection + nameof(PackagerCliOptions.JsonIndentEnable),
+            ["--json-indent-enable"] = Section(PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonIndentEnable)),
         };
+
+        static string Section(params string[] sections) => string.Join(':', sections);
     }
 
     public static T? GetCommandLineSwitchValue<T>(

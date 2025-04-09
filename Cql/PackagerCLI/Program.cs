@@ -45,7 +45,6 @@ public abstract class Program
             .ConfigureServices((context, services) =>
             {
                 services
-                    .AddToolkitConfigs()
                     .AddPackagerCliOptions()
                     .AddPackagerCliServices()
                     ;
@@ -108,7 +107,7 @@ public abstract class Program
         {
             return hostBuilder.Build();
         }
-        catch (OptionsValidationException e) when (e.OptionsType == typeof(PackagerCliOptions))
+        catch (OptionsValidationException e) //when (e.OptionsType == typeof(PackagerCliOptions))
         {
             foreach (var failure in e.Failures)
             {

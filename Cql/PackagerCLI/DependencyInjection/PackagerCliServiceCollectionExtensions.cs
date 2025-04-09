@@ -25,15 +25,22 @@ internal static class PackagerCliServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddToolkitConfigs(
+    public static IServiceCollection AddPackagerCliOptions(
         this IServiceCollection services)
     {
         services.AddOptions<CqlOptions>()
                 .UseFactoryMethod(CqlOptions.CreateCqlOptions)
                 .BindConfiguration(CqlOptions.ConfigSection);
 
-        services.AddOptions<ElmToolkitConfig>()
+        services.AddOptions<ElmOptions>()
                 .BindConfiguration(ElmOptions.ConfigSection);
+
+        services.AddOptions<PackagingOptions>()
+                .BindConfiguration(PackagingOptions.ConfigSection)
+                .Configure(PackagingOptions.Configure);
+
+        services.AddOptions<LoggingOptions>()
+                .BindConfiguration(LoggingOptions.ConfigSection);
 
         return services;
     }
@@ -53,17 +60,6 @@ internal static class PackagerCliServiceCollectionExtensions
 
         services.AddSingleton(factoryMethod);
         return optionsBuilder;
-    }
-
-    public static IServiceCollection AddPackagerCliOptions(
-        this IServiceCollection services)
-    {
-        services
-            .AddOptions<PackagerCliOptions>()
-            .Configure<IConfiguration>(PackagerCliOptions.BindConfig)
-            .ValidateOnStart();
-
-        return services;
     }
 
     public static IConfigurationBuilder AddPackagerCliAppSettings(
