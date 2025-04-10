@@ -37,10 +37,38 @@ internal class PackagerCli
             ElmOptions elmOpt = elmOptions.Value;
             PackagingOptions packOpt = packagingOptions.Value;
 
+            /*
+
+            1. CQL + ELM -> FHIR
+
+            | CQL       | ELM       | C#        | DLL/PDB   | FHIR  (Directories)
+            . o (read)  . o (read)  .           .           .
+            . |         . |         .           .           .
+            . |         . `-convert ->o (optional write)    .
+            . |         .           . |         .           .
+            . |         .           . `-compile-->o (optional write)
+            . |         .           .           . |         .
+            . `-----------------------------------`-package-->o (write)
+
+            2. CQL -> FHIR
+
+            | CQL       | ELM       | C#        | DLL/PDB   | FHIR  (Directories)
+            . o (read)  .           .           .           .
+            . |         .           .           .           .
+            . `-convert-->o (optional write)    .           .
+            .           . |         .           .           .
+            .           . `-convert ->o (optional write)    .
+            .           .           . |         .           .
+            .           .           . `-compile-->o (optional write)
+            .           .           .           . |         .
+            .           .           .           . `-package-->o (write)
+            .           .           .           .           .
+            */
+
             //var opt = packagerCliOptions.Value;
             var cqlInDir = Dir(cqlOpt.CqlInDir);
             var elmOutDir = Dir(cqlOpt.ElmOutDir);
-            var elmInDir = Dir(elmOpt.ElmInDir);
+            var elmDir = Dir(elmOpt.ElmInDir);
             var csharpOutDir = Dir(elmOpt.CSharpOutDir);
             var dllOutDir = Dir(elmOpt.DllOutDir);
             var fhirOutDir = Dir(packOpt.FhirOutDir);
