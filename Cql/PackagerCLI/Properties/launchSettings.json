@@ -2,19 +2,19 @@
   "profiles": {
     "PackageCLI (Demo)": {
       "commandName": "Project",
-      "commandLineArgs": "--elm \"$(CqlSolutionDir)/LibrarySets/Demo/Elm\" --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\""
+      "commandLineArgs": "--elm-in-dir \"$(CqlSolutionDir)/LibrarySets/Demo/Elm\" --cql-in-dir \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir-out-dir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll-out-dir \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs-out-dir \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\""
     },
     "PackageCLI (CMS Measures)": {
       "commandName": "Project",
-      "commandLineArgs": "--elm \"$(CqlSolutionDir)/LibrarySets/Cms/Elm\" --cql \"$(CqlSolutionDir)/LibrarySets/Cms/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Cms/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Cms/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.CMS/CSharp\""
+      "commandLineArgs": "--elm-in-dir \"$(CqlSolutionDir)/LibrarySets/Cms/Elm\" --cql-in-dir \"$(CqlSolutionDir)/LibrarySets/Cms/Cql\" --fhir-out-dir \"$(CqlSolutionDir)/LibrarySets/Cms/Resources\" --dll-out-dir \"$(CqlSolutionDir)/LibrarySets/Cms/Assemblies\" --cs-out-dir \"$(CqlSolutionDir)/Demo/Measures.CMS/CSharp\""
     },
     "PackageCLI (Measures.Authoring)": {
       "commandName": "Project",
-      "commandLineArgs": "--elm \"$(CqlSolutionDir)/Demo/Measures.Authoring/Elm\" --cql \"$(CqlSolutionDir)/Demo/Measures.Authoring/input/cql\" --fhir \"$(CqlSolutionDir)/Demo/Measures.Authoring/Resources\" --cs \"$(CqlSolutionDir)/Demo/Measures.Authoring/CSharp\""
+      "commandLineArgs": "--elm-in-dir \"$(CqlSolutionDir)/Demo/Measures.Authoring/Elm\" --cql-in-dir \"$(CqlSolutionDir)/Demo/Measures.Authoring/input/cql\" --fhir-out-dir-out-dir \"$(CqlSolutionDir)/Demo/Measures.Authoring/Resources\" --cs-out-dir \"$(CqlSolutionDir)/Demo/Measures.Authoring/CSharp\""
     },
     "PackageCLI (Ncqa.DQIC\\BuildArtifacts)": {
       "commandName": "Project",
-      "commandLineArgs": "--elm \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Elm\" --cql \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Cql\" --fhir \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Resources\" --cs \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/CSharp\""
+      "commandLineArgs": "--elm-in-dir \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Elm\" --cql-in-dir \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Cql\" --fhir-out-dir \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/Resources\" --cs-out-dir \"$(CqlSolutionDir)/submodules/Ncqa.DQIC/BuildArtifacts/CSharp\""
     }
   }
 }

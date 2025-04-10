@@ -6,7 +6,7 @@ internal record PackagingOptions
     public Uri? CanonicalRootUrl { get; init; }
     public DateTime? OverrideDate { get; set; }
     public bool JsonIndentEnable { get; init; }
-    public string? ResourceOutDir { get; init; }
+    public string? FhirOutDir { get; init; }
 
     public static void Configure(PackagingOptions opt)
     {

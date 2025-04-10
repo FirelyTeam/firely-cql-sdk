@@ -20,13 +20,15 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
     {
         return new SortedDictionary<string, string>
         {
-            // Input
-            ["--elm"] = Section(ElmOptions.ConfigSection, nameof(ElmOptions.ElmInDir)),
-            ["--cql"] = Section(CqlOptions.ConfigSection, nameof(CqlOptions.CqlInDir)),
+            // Input Dirs
+            ["--cql-in-dir"] = Section(CqlOptions.ConfigSection, nameof(CqlOptions.CqlInDir)),
+            ["--elm-in-dir"] = Section(ElmOptions.ConfigSection, nameof(ElmOptions.ElmInDir)),
 
-            // Output
-            ["--cs"] = Section(ElmOptions.ConfigSection, nameof(ElmOptions.CSharpOutDir)),
-            ["--dll"] = Section(ElmOptions.ConfigSection, nameof(ElmOptions.DllOutDir)),
+            // Output Dirs
+            ["--elm-out-dir"] = Section(ElmOptions.ConfigSection, nameof(CqlOptions.ElmOutDir)),
+            ["--csharp-out-dir"] = Section(ElmOptions.ConfigSection, nameof(ElmOptions.CSharpOutDir)),
+            ["--dll-out-dir"] = Section(ElmOptions.ConfigSection, nameof(ElmOptions.DllOutDir)),
+            ["--fhir-out-dir"] = Section(PackagingOptions.ConfigSection, nameof(PackagingOptions.FhirOutDir)),
 
             // Logging
             ["--log-debug"] = Section(LoggingOptions.ConfigSection, nameof(LoggingOptions.IncludeDebug)),
@@ -34,7 +36,6 @@ internal static class PackagerCliCommandLineSwitchConfigurationExtensions
 
             // Packaging
             ["--canonical-root-url"] = Section(PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)),
-            ["--fhir"] = Section(PackagingOptions.ConfigSection, nameof(PackagingOptions.ResourceOutDir)),
             ["--override-date-time"] = Section(PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)),
 
             // Serialization

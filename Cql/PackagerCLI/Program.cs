@@ -92,7 +92,7 @@ public abstract class Program
         {
             using IServiceScope mainScope = host.Services.CreateScope();
             var packagerCliProgram = mainScope.ServiceProvider.GetRequiredService<PackagerCli>();
-            return packagerCliProgram.Run();
+            return packagerCliProgram.Run(translateCql:true);
         }
         finally
         {
