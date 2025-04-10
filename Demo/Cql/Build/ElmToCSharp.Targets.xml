@@ -14,7 +14,7 @@
 
 	<!-- ELM to CSharp -->
 	<PropertyGroup>
-		<JsonIndentEnable>true</JsonIndentEnable>
+		<JsonPretty>true</JsonPretty>
 		<!-- This PackagerCLI reference can remain relative to the is file. -->
 		<PackagerCLI>$(MSBuildThisFileDirectory)../../../Cql/PackagerCLI/bin/$(Configuration)/$(TargetFramework)/Hl7.Cql.Packager.exe</PackagerCLI>
 	</PropertyGroup>
@@ -41,7 +41,7 @@
 			<PackagerCliArgs Condition="'$(DllDirectory)'!=''">$(PackagerCLIArgs) --dll "$(DllDirectory)"</PackagerCliArgs>
 			<PackagerCLIArgs Condition="'$(ResourcesDirectory)'!=''">$(PackagerCLIArgs) --fhir "$(ResourcesDirectory)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(CSharpTypeFormat)'!=''">$(PackagerCLIArgs) --cs-typeformat "$(CSharpTypeFormat)"</PackagerCLIArgs>
-			<PackagerCLIArgs Condition="'$(JsonIndentEnable)'!=''">$(PackagerCLIArgs) --json-indent-enable "$(JsonIndentEnable)"</PackagerCLIArgs>
+			<PackagerCLIArgs Condition="'$(JsonPretty)'!=''">$(PackagerCLIArgs) --json-pretty "$(JsonPretty)"</PackagerCLIArgs>
 			<PackagerCLICommand>"$(PackagerCLI)" $(PackagerClIArgs)</PackagerCLICommand>
 			<!-- <PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs) &gt; NUL 2&gt; NUL</PackagerCLICommand> -->
 		</PropertyGroup>

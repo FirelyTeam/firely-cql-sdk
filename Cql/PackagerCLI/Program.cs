@@ -6,121 +6,57 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Log = Serilog.Log;
-
 namespace Hl7.Cql.Packager;
 
-public abstract class Program
+public partial class Program
 {
     public static int Main(string[] args)
     {
-        if (args.Length == 0 ||
-            new[] { "-?", "-h", "-help" }.Any(s => args.Contains(s, StringComparer.InvariantCultureIgnoreCase)))
-        {
-            ShowHelp();
-            return -1;
-        }
-
-        var hostBuilder = CreateHostBuilder(args);
-        try
-        {
-            return Run(hostBuilder);
-        }
-        finally
-        {
-            Log.CloseAndFlush();
-        }
+        RootCommand rootCommand = BuildRootCommand();
+        var systemConsole = new SystemConsole();
+        var result = rootCommand.Invoke(args, systemConsole);
+        return result;
     }
 
-    private static IHostBuilder CreateHostBuilder(string[] args) =>
+    private static Option<T> Option<T>(string name, string description) => new(name, description);
+
+    private static IHostBuilder CreateHostBuilder(
+        IConsole console,
+        LegacyProgramArgs legacyProgramArgs) =>
         Host.CreateDefaultBuilder()
-            .ConfigureAppConfiguration((context, config) =>
-            {
-                config
-                    .AddPackagerCliAppSettings(args)
-                    .AddPackagerCliCommandLineSwitches(args)
-                    ;
-            })
-            .ConfigureLogging((context, logging) => logging.AddPackagerCLiLogging(context.Configuration))
-            .ConfigureServices((context, services) =>
-            {
-                services
-                    .AddPackagerCliOptions()
-                    .AddPackagerCliServices()
-                    ;
-            })
-            .UseConsoleLifetime()
-            ;
+            .ConfigureAppConfiguration(
+                (context, config) =>
+                    config.AddPackagerCliAppSettings(legacyProgramArgs))
+            .ConfigureLogging(
+                (context, logging) =>
+                    logging.AddPackagerCLiLogging(context.Configuration))
+            .ConfigureServices(
+                (context, services) =>
+                    services
+                        .AddPackagerCliOptions()
+                        .AddSingleton(legacyProgramArgs)
+                        .AddSingleton(console))
+            .UseConsoleLifetime();
+}
 
-    private static string Usage { get; }
-
-    static Program()
+internal static class X
+{
+    public static Option<T> Required<T>(this Option<T> option)
     {
-        CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
-        Usage = $"""
-                 Packager CLI Usage:
-
-                     {"-?|-h|-help",-26} Show this help
-
-                     {"--elm",-26} {"<directory>",-19} Required: Library root directory
-                     {"--cql",-26} {"<directory>",-19} Required: CQL root directory
-                     {Optional("--fhir"),-26} {"<directory>",-19} Resource directory
-                     {Optional("--cs"),-26} {"<directory>",-19} C# output directory
-                     {Optional("--dll"),-26}{"<directory>",-19} DLL output directory
-                     {Optional("--log-debug"),-26} {"<true|false>",-19} Enable debug logging or not (default)
-                     {Optional("--canonical-root-url"),-26} {"<url>",-19} The root url used for the resource canonical
-                     {"",-26 - 19 - 1} If omitted a '#' will be used
-                     {Optional("--override-utc-date-time"),-26} {"<ISO8601-date-time>",-19} The UTC date to override in the generated FHIR resource libraries
-                     {"",-26 - 19 - 1} (example: 2000-12-31T23:59:59.99Z)
-                     {"",-26 - 19 - 1} If omitted the current date time will be used
-                 """;
-
-        static string Optional(string s) => $"[{s}]";
+        option.IsRequired = true;
+        return option;
     }
 
-    private static int Run(IHostBuilder hostBuilder)
+    public static TCommand SetHandler<TCommand>(
+        this TCommand command,
+        string methodName)
+        where TCommand : Command
     {
-        using var host = CreateHost(hostBuilder);
-        if (host is null)
-        {
-            ShowHelp();
-            return -1;
-        }
+        var methodInfo = typeof(Program).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+                         ?? throw new MissingMethodException(typeof(Program).AssemblyQualifiedName, methodName);
 
-        var hostApplicationLifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
-        try
-        {
-            using IServiceScope mainScope = host.Services.CreateScope();
-            var packagerCliProgram = mainScope.ServiceProvider.GetRequiredService<PackagerCli>();
-            return packagerCliProgram.Run(translateCql:false);
-        }
-        finally
-        {
-            var hostLifetime = hostApplicationLifetime;
-            hostLifetime.StopApplication();
-        }
-    }
-
-    private static IHost? CreateHost(IHostBuilder hostBuilder)
-    {
-        try
-        {
-            return hostBuilder.Build();
-        }
-        catch (OptionsValidationException e) //when (e.OptionsType == typeof(PackagerCliOptions))
-        {
-            foreach (var failure in e.Failures)
-            {
-                Console.Error.WriteLine(failure);
-            }
-
-            ShowHelp();
-            return null;
-        }
-    }
-
-    private static void ShowHelp()
-    {
-        Console.WriteLine(Usage);
+        var commandHandler = CommandHandler.Create(methodInfo);
+        command.Handler = commandHandler;
+        return command;
     }
 }

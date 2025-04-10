@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Packager.Logging;
+using Hl7.Cql.Packager.Options;
 using Serilog;
 using Serilog.Events;
 
@@ -18,27 +19,25 @@ internal static class PackagerCLiLoggingBuilderExtensions
 {
     public static ILoggingBuilder AddPackagerCLiLogging(
         this ILoggingBuilder logging,
-        IConfiguration configuration)
+        IConfiguration configuration,
+        bool? logDebug = null,
+        bool? logAppend = null)
     {
         logging.ClearProviders();
 
-         // If we debugging, keep the existing console logger
-         bool enableDebugLogging = false;//Debugger.IsAttached;
-        enableDebugLogging = enableDebugLogging || configuration.GetCommandLineSwitchValue<bool>("--log-debug");
-        var minLogLevel = enableDebugLogging ? LogLevel.Trace : LogLevel.Information;
+        var loggingOptions = configuration.GetSection(LoggingOptions.ConfigSection).Get<LoggingOptions>();
+        loggingOptions ??= LoggingOptions.Default;
 
+        // If we debugging, keep the existing console logger
+        bool enableDebugLogging = logDebug ?? loggingOptions.Debug;
         if (enableDebugLogging) logging.AddDebug();
-
-        bool shouldClearLog = !configuration.GetCommandLineSwitchValue<bool>("--log-dont-clear");
-
+        var minLogLevel = enableDebugLogging ? LogLevel.Trace : LogLevel.Information;
         logging.AddFilter(level => level >= minLogLevel);
-        logging.AddProvider(new ColorConsoleLoggerProvider());
 
-        var logFile = Path.Combine(".", "build.log");
-
+        bool shouldClearLog = !(logAppend ?? loggingOptions.Append);
+        var logFile = "build.log";
         if (shouldClearLog)
             File.WriteAllText(logFile, ""); // Create or clear the log file
-        //File.Delete(logFile);
         else
             File.OpenText(logFile).Close(); // Touch the file
 
@@ -51,6 +50,7 @@ internal static class PackagerCLiLoggingBuilderExtensions
                          formatProvider: CultureInfo.InvariantCulture)
                      .CreateLogger();
 
+        logging.AddProvider(new ColorConsoleLoggerProvider());
         return logging.AddSerilog();
     }
 

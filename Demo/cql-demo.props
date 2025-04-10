@@ -35,7 +35,7 @@
 		<CqlSolutionDir>$(MSBuildThisFileDirectory)/../</CqlSolutionDir>
 		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' != 'Release'">true</EmbedDebugSymbolsEnable>
 		<EmbedDebugSymbolsEnable Condition="'$(Configuration)' == 'Release'">false</EmbedDebugSymbolsEnable>
-		<JsonIndentEnable>true</JsonIndentEnable>
+		<JsonPretty>true</JsonPretty>
 
 		<!-- CqlToElmEnabled and ElmToCSharpEnabled declared in BuildArtifacts.csproj, cql-base.props, cql-demo.props -->
 		<!-- <CqlToElmEnabled>true</CqlToElmEnabled> -->

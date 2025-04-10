@@ -6,10 +6,13 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Packager.Options;
+
 namespace Hl7.Cql.Packager;
 
 internal class OptionsConsoleDumper(
     ILogger<OptionsConsoleDumper> logger,
+    IConsole console,
     IOptions<CqlOptions> cqlOptions,
     IOptions<ElmOptions> elmOptions,
     IOptions<PackagingOptions> packagingOptions,
@@ -19,19 +22,22 @@ internal class OptionsConsoleDumper(
     {
         StringBuilder? sb = logger.IsEnabled(LogLevel.Information) ? new() : null;
 
-        WriteLine("PackageCLI");
-        WriteLine("- Environment -----------------------------------");
-        WriteLine($"{"Time",-45} : {DateTimeOffset.Now}");
-        WriteLine($"{"Current Directory",-45} : {Environment.CurrentDirectory}");
-        WriteLine($"{"Build",-45} : {typeof(PackagerCli).Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration}");
-        WriteLine("- Configuration ---------------------------------");
+        var assembly = typeof(Program).Assembly;
+        //var attr = assembly.GetCustomAttributes();
 
+        WriteLine("- PackageCLI ------------------------------------");
+        WriteLine($"{"Build",-20} : {assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration}");
+        WriteLine($"{"Version",-20} : {assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion.Split('+')[0]}");
+        WriteLine("- Environment -----------------------------------");
+        WriteLine($"{"Command Line Args",-20} : {string.Join(' ', Environment.GetCommandLineArgs()[1..])}");
+        WriteLine($"{"Time",-20} : {DateTimeOffset.Now}");
+        WriteLine($"{"Current Directory",-20} : {Environment.CurrentDirectory}");
+        WriteLine("- Configuration ---------------------------------");
         JsonSerializerOptions jsonOpt = new();
         jsonOpt.WriteIndented = true;
         jsonOpt.Converters.Add(new JsonStringEnumConverter());
         jsonOpt.Converters.Add(new FileSystemInfoJsonConverter<FileInfo>());
         jsonOpt.Converters.Add(new FileSystemInfoJsonConverter<DirectoryInfo>());
-
         var root = new
         {
             Cql = cqlOptions.Value,
@@ -50,7 +56,7 @@ internal class OptionsConsoleDumper(
             if (sb is not null)
                 sb.AppendLine(s);
             else
-                Console.WriteLine(s);
+                console.WriteLine(s);
         }
     }
 }

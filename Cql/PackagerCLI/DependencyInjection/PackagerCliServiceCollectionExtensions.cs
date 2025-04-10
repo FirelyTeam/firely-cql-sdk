@@ -6,8 +6,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using System.Collections.ObjectModel;
 using Hl7.Cql.Packager;
-using Hl7.Cql.CodeGeneration.NET.Toolkit;
+using Hl7.Cql.Packager.Options;
 
 // ReSharper disable once CheckNamespace
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -16,28 +17,22 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 internal static class PackagerCliServiceCollectionExtensions
 {
-    internal static IServiceCollection AddPackagerCliServices(
-        this IServiceCollection services)
-    {
-        services.AddCqlPackagingServices();
-        services.TryAddScoped<PackagerCli>();
-        services.TryAddSingleton<OptionsConsoleDumper>();
-        return services;
-    }
-
     public static IServiceCollection AddPackagerCliOptions(
         this IServiceCollection services)
     {
         services.AddOptions<CqlOptions>()
-                .UseFactoryMethod(CqlOptions.CreateCqlOptions)
-                .BindConfiguration(CqlOptions.ConfigSection);
+                .BindConfiguration(CqlOptions.ConfigSection)
+                .Configure<IConfiguration>(CqlOptions.Configure)
+                .ValidateOnStart();
 
         services.AddOptions<ElmOptions>()
-                .BindConfiguration(ElmOptions.ConfigSection);
+                .BindConfiguration(ElmOptions.ConfigSection)
+                .ValidateOnStart();
 
         services.AddOptions<PackagingOptions>()
                 .BindConfiguration(PackagingOptions.ConfigSection)
-                .Configure(PackagingOptions.Configure);
+                .Configure(PackagingOptions.Configure)
+                .ValidateOnStart();
 
         services.AddOptions<LoggingOptions>()
                 .BindConfiguration(LoggingOptions.ConfigSection);
@@ -45,28 +40,11 @@ internal static class PackagerCliServiceCollectionExtensions
         return services;
     }
 
-    private static OptionsBuilder<TOptions> UseFactoryMethod<TOptions>(
-        this OptionsBuilder<TOptions> optionsBuilder,
-        Func<IConfiguration, TOptions> factoryMethod) where TOptions : class
-    {
-        var services = optionsBuilder.Services;
-
-        if (!services.Any(s =>
-                              s.ServiceType == typeof(IOptionsFactory<>)
-                              && s.ImplementationType == typeof(CustomOptionsFactory<>)))
-        {
-            services.Replace(ServiceDescriptor.Transient(typeof(IOptionsFactory<>), typeof(CustomOptionsFactory<>)));
-        }
-
-        services.AddSingleton(factoryMethod);
-        return optionsBuilder;
-    }
-
     public static IConfigurationBuilder AddPackagerCliAppSettings(
         this IConfigurationBuilder config,
-        string[] args)
+        LegacyProgramArgs legacyProgramArgs)
     {
-        var buildConfiguration = typeof(PackagerCli).Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration?.ToLowerInvariant();
+        var buildConfiguration = typeof(Program).Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration?.ToLowerInvariant();
         var environmentName = buildConfiguration ?? "release";
 
         config
@@ -74,33 +52,33 @@ internal static class PackagerCliServiceCollectionExtensions
             .AddJsonFile("Hl7.Cql.Packager.appsettings.json", optional: true, reloadOnChange: false)
             .AddJsonFile($"Hl7.Cql.Packager.appsettings.{environmentName}.json", optional: true, reloadOnChange: false)
             ;
+
+        config.Sources.Add(new LegacyConfigurationSource(legacyProgramArgs));
         return config;
     }
 }
 
-file class CustomOptionsFactory<TOptions>(
-    IEnumerable<IConfigureOptions<TOptions>> configureOptions,
-    IEnumerable<IPostConfigureOptions<TOptions>> postConfigureOptions,
-    IEnumerable<IValidateOptions<TOptions>> validations,
-    IConfiguration configuration,
-    Func<IConfiguration, TOptions>? overrideFactoryMethod = null) :
-    OptionsFactory<TOptions>(configureOptions, postConfigureOptions, validations)
-    where TOptions : class
+file class LegacyConfigurationSource(LegacyProgramArgs legacyProgramArgs) : IConfigurationSource
 {
-    protected override TOptions CreateInstance(string name)
-    {
-        if (overrideFactoryMethod is not null)
-        {
-            try
-            {
-                return overrideFactoryMethod(configuration);
-            }
-            catch (Exception e)
-            {
-                throw new OptionsValidationException( name, typeof(TOptions), [e.Message]);
-            }
-        }
+    public IConfigurationProvider Build(IConfigurationBuilder builder) =>
+        new LegacyConfigurationProvider(legacyProgramArgs);
+}
 
-        return base.CreateInstance(name);
+file class LegacyConfigurationProvider(LegacyProgramArgs legacyProgramArgs) : ConfigurationProvider
+{
+    public override void Load()
+    {
+        var dictionary = new Dictionary<string, string?>();
+        if (legacyProgramArgs.canonicalRootUrl is { } canonicalRootUrl)
+            dictionary.Add($"{PackagingOptions.ConfigSection}:{nameof(PackagingOptions.CanonicalRootUrl)}", canonicalRootUrl);
+        if (legacyProgramArgs.overrideUtcDateTime is { } overrideDate)
+            dictionary.Add($"{PackagingOptions.ConfigSection}:{nameof(PackagingOptions.OverrideDate)}", overrideDate.ToString("u"));
+        if (legacyProgramArgs.jsonPretty is {} jsonPretty)
+            dictionary.Add($"{PackagingOptions.ConfigSection}:{nameof(PackagingOptions.JsonPretty)}", JsonSerializer.Serialize(jsonPretty));
+        if (legacyProgramArgs.logDebug is { } logDebug)
+            dictionary.Add($"{LoggingOptions.ConfigSection}:{nameof(LoggingOptions.Debug)}", JsonSerializer.Serialize(logDebug));
+        if (legacyProgramArgs.logAppend is { } logAppend )
+            dictionary.Add($"{LoggingOptions.ConfigSection}:{nameof(LoggingOptions.Append)}", JsonSerializer.Serialize(logAppend));
+        Data = new ReadOnlyDictionary<string, string?>(dictionary);
     }
 }

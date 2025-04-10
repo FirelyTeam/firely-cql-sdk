@@ -155,7 +155,7 @@ This project can also be copied to a new project for your development. For examp
 		<CSharpDirectory>$(MSBuildProjectDirectory)/CSharp</CSharpDirectory>
 		<DllDirectory>$(MSBuildProjectDirectory)/Dll</DllDirectory>
 		<! -- Settings (all optional) -->
-		<JsonIndentEnable>true</JsonIndentEnable>
+		<JsonPretty>true</JsonPretty>
 		<CanonicalRootUrl>https://fire.ly/fhir/</CanonicalRootUrl>
 		<OverrideUtcDateTime>1970-01-01T00:00:00</MyMeasureProject>
 	</PropertyGroup>

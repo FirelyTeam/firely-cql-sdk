@@ -6,10 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Collections.Concurrent;
-using System.Text.RegularExpressions;
-using Microsoft.Extensions.Logging.Abstractions;
-
 namespace Hl7.Cql.Packager.Logging;
 
 /// <remarks>
