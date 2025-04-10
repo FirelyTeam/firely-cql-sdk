@@ -8,6 +8,10 @@ internal static class Extensions
         hostBuilder.ConfigureServices((_, services) => services.AddScoped<IProgram, TProgram>());
         using var host = hostBuilder.Build();
         var rootServices = host.Services;
+
+        var dumper = rootServices.GetRequiredService<OptionsConsoleDumper>();
+        dumper.DumpToConsole();
+
         var hostApplicationLifetime = rootServices.GetRequiredService<IHostApplicationLifetime>();
         try
         {
@@ -32,10 +36,36 @@ internal static class Extensions
         }
     }
 
-    public static Option<T> Required<T>(this Option<T> option)
+    public static Option<T> IsRequired<T>(this Option<T> option)
     {
         option.IsRequired = true;
         return option;
+    }
+
+    public static Option<T> IsGlobalOption<T>(this Option<T> option, ref Action<Command> actions)
+    {
+        actions += command => command.AddGlobalOption(option);
+        return option;
+    }
+
+    public static TCommand AddOptions<TCommand>(
+        this TCommand command,
+        params Option[] options)
+        where TCommand : Command
+    {
+        foreach (var option in options)
+            command.AddOption(option);
+        return command;
+    }
+
+    public static TCommand AddGlobalOptions<TCommand>(
+        this TCommand command,
+        params Option[] options)
+        where TCommand : Command
+    {
+        foreach (var option in options)
+            command.AddGlobalOption(option);
+        return command;
     }
 
     public static TCommand SetHandler<TCommand>(

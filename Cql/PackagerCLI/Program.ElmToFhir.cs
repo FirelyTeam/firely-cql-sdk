@@ -13,58 +13,58 @@ namespace Hl7.Cql.Packager;
 
 partial class Program
 {
-    private static RootCommand BuildRootCommand() =>
-        new RootCommand("Convert ELM to C# and .NET assemblies, and package them together with CQL into FHIR resources.")
-            {
-                Option<DirectoryInfo>("--elm", "ELM input directory")
-                    .Required()
-                    .ExistingOnly(),
+    private static readonly Option[] ElmToFhirOptions = [
+        Option<DirectoryInfo>("--elm", "ELM input directory")
+            .IsRequired()
+            .ExistingOnly(),
 
-                Option<DirectoryInfo>("--cql", "CQL input directory")
-                    .Required()
-                    .ExistingOnly(),
+        Option<DirectoryInfo>("--cql", "CQL input directory")
+            .IsRequired()
+            .ExistingOnly(),
 
-                Option<DirectoryInfo>("--cs", "C# output directory"),
+        Option<DirectoryInfo>("--cs", "C# output directory"),
 
-                Option<DirectoryInfo>("--dll", "DLL/PDB output directory"),
+        Option<DirectoryInfo>("--dll", "DLL/PDB output directory"),
 
-                Option<DirectoryInfo>("--fhir", "FHIR Resource output directory")
-                    .Required(),
+        Option<DirectoryInfo>("--fhir", "FHIR Resource output directory")
+            .IsRequired(),
 
-                Option<bool>("--log-debug", "Debug-level logging"),
+        Option<bool>("--json-pretty", "Output JSON using multiline and indentation"),
 
-                Option<bool>("--log-append", "Append to existing log file, instead of clearing"),
+        Option<string>("--canonical-root-url", "The root canonical url output in FHIR library"),
 
-                Option<bool>("--json-pretty", "Output JSON using multiline and indentation"),
+        Option<DateTimeOffset>("--override-utc-date-time", "Override date output in FHIR library"),
+    ];
 
-                Option<string>("--canonical-root-url", "The root canonical url output in FHIR library"),
+    private const string ElmToFhirDescription =
+        "Convert ELM to C# and .NET assemblies, and package them together with CQL into FHIR resources.";
 
-                Option<DateTimeOffset>("--override-utc-date-time", "Override date output in FHIR library"),
-            }
-            .SetHandler(nameof(LegacyProgram));
+    private static Command BuildElmToFhirCommand() =>
+        new Command("elm-to-fhir", ElmToFhirDescription)
+            .AddOptions(ElmToFhirOptions)
+            .SetHandler(nameof(RunElmToFhir));
 
-    private static int LegacyProgram(
+    private static int RunElmToFhir(
         IConsole console,
-        LegacyCommandArgs legacyCommandArgs) =>
-        RunProgram<LegacyProgram>(
+        LoggingCommandArgs loggingCommandArgs,
+        ElmToFhirCommandArgs elmToFhirCommandArgs) =>
+        RunProgram<ElmToFhirProgram>(
             console,
-            legacyCommandArgs,
-            (context, services) => services.AddSingleton<OptionsConsoleDumper>());
+            loggingCommandArgs,
+            elmToFhirCommandArgs.MapToConfiguration,
+            (_, services) => services.AddSingleton(elmToFhirCommandArgs));
 }
 
-internal sealed class LegacyProgram(
+internal sealed class ElmToFhirProgram(
     ILoggerFactory loggerFactory,
-    ILogger<LegacyProgram> logger,
+    ILogger<ElmToFhirProgram> logger,
     IOptions<CqlOptions> cqlOptions,
     IOptions<ElmOptions> elmOptions,
     IOptions<PackagingOptions> packagingOptions,
-    LegacyCommandArgs args,
-    OptionsConsoleDumper optionsConsoleDumper) : IProgram
+    ElmToFhirCommandArgs args) : IProgram
 {
     public int Run()
     {
-        optionsConsoleDumper.DumpToConsole();
-
         var cqlOpt = cqlOptions.Value;
         var elmOpt = elmOptions.Value;
         var packOpt = packagingOptions.Value;

@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Collections.ObjectModel;
 using Hl7.Cql.Packager;
 using Hl7.Cql.Packager.Options;
 
@@ -42,43 +41,25 @@ internal static class PackagerCliServiceCollectionExtensions
 
     public static IConfigurationBuilder AddPackagerCliAppSettings(
         this IConfigurationBuilder config,
-        LegacyCommandArgs legacyCommandArgs)
+        Func<IEnumerable<KeyValuePair<string, string?>>>? additionalConfiguration = null)
     {
         var buildConfiguration = typeof(Program).Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration?.ToLowerInvariant();
         var environmentName = buildConfiguration ?? "release";
 
         config
-            //.SetBasePath()
+            .AddEnvironmentVariables("CQLPACKAGER")
             .AddJsonFile("Hl7.Cql.Packager.appsettings.json", optional: true, reloadOnChange: false)
             .AddJsonFile($"Hl7.Cql.Packager.appsettings.{environmentName}.json", optional: true, reloadOnChange: false)
             ;
 
-        config.Sources.Add(new LegacyConfigurationSource(legacyCommandArgs));
+        if (additionalConfiguration?.Invoke().ToList() is { } additionalData)
+        {
+            config.Sources.Add(new MemoryConfigurationSource()
+            {
+                InitialData = additionalData
+            });
+        }
+
         return config;
-    }
-}
-
-file class LegacyConfigurationSource(LegacyCommandArgs legacyCommandArgs) : IConfigurationSource
-{
-    public IConfigurationProvider Build(IConfigurationBuilder builder) =>
-        new LegacyConfigurationProvider(legacyCommandArgs);
-}
-
-file class LegacyConfigurationProvider(LegacyCommandArgs legacyCommandArgs) : ConfigurationProvider
-{
-    public override void Load()
-    {
-        var dictionary = new Dictionary<string, string?>();
-        if (legacyCommandArgs.CanonicalRootUrl is { } canonicalRootUrl)
-            dictionary.Add($"{PackagingOptions.ConfigSection}:{nameof(PackagingOptions.CanonicalRootUrl)}", canonicalRootUrl);
-        if (legacyCommandArgs.OverrideUtcDateTime is { } overrideDate)
-            dictionary.Add($"{PackagingOptions.ConfigSection}:{nameof(PackagingOptions.OverrideDate)}", overrideDate.ToString("u"));
-        if (legacyCommandArgs.JsonPretty is {} jsonPretty)
-            dictionary.Add($"{PackagingOptions.ConfigSection}:{nameof(PackagingOptions.JsonPretty)}", JsonSerializer.Serialize(jsonPretty));
-        if (legacyCommandArgs.LogDebug is { } logDebug)
-            dictionary.Add($"{LoggingOptions.ConfigSection}:{nameof(LoggingOptions.Debug)}", JsonSerializer.Serialize(logDebug));
-        if (legacyCommandArgs.LogAppend is { } logAppend )
-            dictionary.Add($"{LoggingOptions.ConfigSection}:{nameof(LoggingOptions.Append)}", JsonSerializer.Serialize(logAppend));
-        Data = new ReadOnlyDictionary<string, string?>(dictionary);
     }
 }
