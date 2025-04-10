@@ -31,4 +31,23 @@ internal static class Extensions
             hostLifetime.StopApplication();
         }
     }
+
+    public static Option<T> Required<T>(this Option<T> option)
+    {
+        option.IsRequired = true;
+        return option;
+    }
+
+    public static TCommand SetHandler<TCommand>(
+        this TCommand command,
+        string methodName)
+        where TCommand : Command
+    {
+        var methodInfo = typeof(Program).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
+                         ?? throw new MissingMethodException(typeof(Program).AssemblyQualifiedName, methodName);
+
+        var commandHandler = CommandHandler.Create(methodInfo);
+        command.Handler = commandHandler;
+        return command;
+    }
 }

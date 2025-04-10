@@ -14,7 +14,7 @@ namespace Hl7.Cql.Packager;
 partial class Program
 {
     private static RootCommand BuildRootCommand() =>
-        new RootCommand("Firely CQL Packager")
+        new RootCommand("Convert ELM to C# and .NET assemblies, and package them together with CQL into FHIR resources.")
             {
                 Option<DirectoryInfo>("--elm", "ELM input directory")
                     .Required()
@@ -45,16 +45,11 @@ partial class Program
 
     private static int LegacyProgram(
         IConsole console,
-        LegacyCommandArgs legacyCommandArgs)
-    {
-        var result =
-            CreateHostBuilder(console, legacyCommandArgs)
-                .ConfigureServices(
-                    (context, services) =>
-                        services.AddSingleton<OptionsConsoleDumper>())
-                .RunProgram<LegacyProgram>();
-        return result;
-    }
+        LegacyCommandArgs legacyCommandArgs) =>
+        RunProgram<LegacyProgram>(
+            console,
+            legacyCommandArgs,
+            (context, services) => services.AddSingleton<OptionsConsoleDumper>());
 }
 
 internal sealed class LegacyProgram(

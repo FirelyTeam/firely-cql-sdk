@@ -12,7 +12,7 @@ public partial class Program
 {
     public static int Main(string[] args)
     {
-        RootCommand rootCommand = BuildRootCommand();
+        var rootCommand = BuildRootCommand();
         var systemConsole = new SystemConsole();
         var result = rootCommand.Invoke(args, systemConsole);
         return result;
@@ -37,26 +37,13 @@ public partial class Program
                         .AddSingleton(legacyCommandArgs)
                         .AddSingleton(console))
             .UseConsoleLifetime();
-}
 
-internal static class X
-{
-    public static Option<T> Required<T>(this Option<T> option)
-    {
-        option.IsRequired = true;
-        return option;
-    }
-
-    public static TCommand SetHandler<TCommand>(
-        this TCommand command,
-        string methodName)
-        where TCommand : Command
-    {
-        var methodInfo = typeof(Program).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
-                         ?? throw new MissingMethodException(typeof(Program).AssemblyQualifiedName, methodName);
-
-        var commandHandler = CommandHandler.Create(methodInfo);
-        command.Handler = commandHandler;
-        return command;
-    }
+    private static int RunProgram<TProgram>(
+        IConsole console,
+        LegacyCommandArgs legacyCommandArgs,
+        Action<HostBuilderContext, IServiceCollection>? configureAdditionalServices = null)
+        where TProgram : class, IProgram =>
+        CreateHostBuilder(console, legacyCommandArgs)
+            .ConfigureServices(configureAdditionalServices ?? delegate { })
+            .RunProgram<TProgram>();
 }
