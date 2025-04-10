@@ -10,6 +10,10 @@
     },
     "PackageCLI (Demo)": {
       "commandName": "Project",
+      "commandLineArgs": "--elm \"$(CqlSolutionDir)/LibrarySets/Demo/Elm\" --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\""
+    },
+    "PackageCLI (Demo with Command Line Args override)": {
+      "commandName": "Project",
       "commandLineArgs": "--elm \"$(CqlSolutionDir)/LibrarySets/Demo/Elm\" --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --json-pretty --override-utc-date-time \"2000-01-01T00:00:00.000Z\" --log-debug --log-append --canonical-root-url \"https://fire.ly/acme/\""
     },
     "PackageCLI (CMS Measures)": {

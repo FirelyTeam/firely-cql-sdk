@@ -22,11 +22,11 @@ public partial class Program
 
     private static IHostBuilder CreateHostBuilder(
         IConsole console,
-        LegacyProgramArgs legacyProgramArgs) =>
+        LegacyCommandArgs legacyCommandArgs) =>
         Host.CreateDefaultBuilder()
             .ConfigureAppConfiguration(
                 (context, config) =>
-                    config.AddPackagerCliAppSettings(legacyProgramArgs))
+                    config.AddPackagerCliAppSettings(legacyCommandArgs))
             .ConfigureLogging(
                 (context, logging) =>
                     logging.AddPackagerCLiLogging(context.Configuration))
@@ -34,7 +34,7 @@ public partial class Program
                 (context, services) =>
                     services
                         .AddPackagerCliOptions()
-                        .AddSingleton(legacyProgramArgs)
+                        .AddSingleton(legacyCommandArgs)
                         .AddSingleton(console))
             .UseConsoleLifetime();
 }

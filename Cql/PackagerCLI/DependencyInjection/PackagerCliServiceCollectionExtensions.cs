@@ -42,7 +42,7 @@ internal static class PackagerCliServiceCollectionExtensions
 
     public static IConfigurationBuilder AddPackagerCliAppSettings(
         this IConfigurationBuilder config,
-        LegacyProgramArgs legacyProgramArgs)
+        LegacyCommandArgs legacyCommandArgs)
     {
         var buildConfiguration = typeof(Program).Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration?.ToLowerInvariant();
         var environmentName = buildConfiguration ?? "release";
@@ -53,31 +53,31 @@ internal static class PackagerCliServiceCollectionExtensions
             .AddJsonFile($"Hl7.Cql.Packager.appsettings.{environmentName}.json", optional: true, reloadOnChange: false)
             ;
 
-        config.Sources.Add(new LegacyConfigurationSource(legacyProgramArgs));
+        config.Sources.Add(new LegacyConfigurationSource(legacyCommandArgs));
         return config;
     }
 }
 
-file class LegacyConfigurationSource(LegacyProgramArgs legacyProgramArgs) : IConfigurationSource
+file class LegacyConfigurationSource(LegacyCommandArgs legacyCommandArgs) : IConfigurationSource
 {
     public IConfigurationProvider Build(IConfigurationBuilder builder) =>
-        new LegacyConfigurationProvider(legacyProgramArgs);
+        new LegacyConfigurationProvider(legacyCommandArgs);
 }
 
-file class LegacyConfigurationProvider(LegacyProgramArgs legacyProgramArgs) : ConfigurationProvider
+file class LegacyConfigurationProvider(LegacyCommandArgs legacyCommandArgs) : ConfigurationProvider
 {
     public override void Load()
     {
         var dictionary = new Dictionary<string, string?>();
-        if (legacyProgramArgs.canonicalRootUrl is { } canonicalRootUrl)
+        if (legacyCommandArgs.CanonicalRootUrl is { } canonicalRootUrl)
             dictionary.Add($"{PackagingOptions.ConfigSection}:{nameof(PackagingOptions.CanonicalRootUrl)}", canonicalRootUrl);
-        if (legacyProgramArgs.overrideUtcDateTime is { } overrideDate)
+        if (legacyCommandArgs.OverrideUtcDateTime is { } overrideDate)
             dictionary.Add($"{PackagingOptions.ConfigSection}:{nameof(PackagingOptions.OverrideDate)}", overrideDate.ToString("u"));
-        if (legacyProgramArgs.jsonPretty is {} jsonPretty)
+        if (legacyCommandArgs.JsonPretty is {} jsonPretty)
             dictionary.Add($"{PackagingOptions.ConfigSection}:{nameof(PackagingOptions.JsonPretty)}", JsonSerializer.Serialize(jsonPretty));
-        if (legacyProgramArgs.logDebug is { } logDebug)
+        if (legacyCommandArgs.LogDebug is { } logDebug)
             dictionary.Add($"{LoggingOptions.ConfigSection}:{nameof(LoggingOptions.Debug)}", JsonSerializer.Serialize(logDebug));
-        if (legacyProgramArgs.logAppend is { } logAppend )
+        if (legacyCommandArgs.LogAppend is { } logAppend )
             dictionary.Add($"{LoggingOptions.ConfigSection}:{nameof(LoggingOptions.Append)}", JsonSerializer.Serialize(logAppend));
         Data = new ReadOnlyDictionary<string, string?>(dictionary);
     }

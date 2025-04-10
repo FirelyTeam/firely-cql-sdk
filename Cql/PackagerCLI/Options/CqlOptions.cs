@@ -5,7 +5,6 @@ namespace Hl7.Cql.Packager.Options;
 internal record CqlOptions : CqlToolkitConfig
 {
     public const string ConfigSection = "Cql";
-    private const string ModelsConfigSection = nameof(Models);
 
     /// <summary>
     /// Configures the Models
@@ -14,15 +13,14 @@ internal record CqlOptions : CqlToolkitConfig
         CqlOptions options,
         IConfiguration configuration)
     {
-        var cqlModels = configuration
+        if (configuration
             .GetSection(ConfigSection)
-            .GetSection(ModelsConfigSection)
-            .Get<CqlModel[]>();
-        if (cqlModels is not null)
+            .GetSection(nameof(Models))
+            .Get<CqlModel[]>() is {} cqlModels)
         {
             var cqlModelsSet = options.Models.NewImmutableHashSet(cqlModels);
             typeof(CqlOptions)
-                .GetProperty(ModelsConfigSection)!
+                .GetProperty(nameof(Models))!
                 .SetValue(options, cqlModelsSet);
         }
     }

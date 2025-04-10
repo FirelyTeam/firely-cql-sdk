@@ -45,10 +45,10 @@ partial class Program
 
     private static int LegacyProgram(
         IConsole console,
-        LegacyProgramArgs legacyProgramArgs)
+        LegacyCommandArgs legacyCommandArgs)
     {
         var result =
-            CreateHostBuilder(console, legacyProgramArgs)
+            CreateHostBuilder(console, legacyCommandArgs)
                 .ConfigureServices(
                     (context, services) =>
                         services.AddSingleton<OptionsConsoleDumper>())
@@ -57,25 +57,13 @@ partial class Program
     }
 }
 
-internal record LegacyProgramArgs(
-    DirectoryInfo cql,
-    DirectoryInfo elm,
-    DirectoryInfo? cs,
-    DirectoryInfo? dll,
-    DirectoryInfo fhir,
-    bool? logDebug,
-    bool? logAppend,
-    bool? jsonPretty,
-    DateTimeOffset? overrideUtcDateTime,
-    string? canonicalRootUrl);
-
 internal sealed class LegacyProgram(
     ILoggerFactory loggerFactory,
     ILogger<LegacyProgram> logger,
     IOptions<CqlOptions> cqlOptions,
     IOptions<ElmOptions> elmOptions,
     IOptions<PackagingOptions> packagingOptions,
-    LegacyProgramArgs args,
+    LegacyCommandArgs args,
     OptionsConsoleDumper optionsConsoleDumper) : IProgram
 {
     public int Run()
@@ -88,22 +76,22 @@ internal sealed class LegacyProgram(
 
         CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt)
                                 .SetIgnoreEnumerationExceptions()
-                                .AddCqlLibrariesFromDirectory(args.cql);
+                                .AddCqlLibrariesFromDirectory(args.Cql);
 
         if (cqlToolkit.Conversions.Count == 0)
         {
-            logger.LogInformation($"Exiting. No CQL libraries found in directory {args.cql}.");
+            logger.LogInformation($"Exiting. No CQL libraries found in directory {args.Cql}.");
             return 1;
         }
 
         ElmToolkit elmToolkit = new ElmToolkit(loggerFactory, elmOpt)
                                 .SetIgnoreEnumerationExceptions()
                                 .AddElmFilesFromDirectory(
-                                    args.elm,
+                                    args.Elm,
                                     filePredicate: file => !elmOpt.SkipFiles.Contains(file.Name));
         if (elmToolkit.Conversions.Count == 0)
         {
-            logger.LogInformation($"Exiting. No ELM libraries found in directory {args.elm}.");
+            logger.LogInformation($"Exiting. No ELM libraries found in directory {args.Elm}.");
             return 2;
         }
 
@@ -117,16 +105,16 @@ internal sealed class LegacyProgram(
             return 3;
         }
 
-        if (args.cs is not null)
+        if (args.Cs is not null)
             elmToolkit
                 .SaveCSharpFilesToDirectory(
-                    args.cs,
+                    args.Cs,
                     DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
 
-        if (args.dll is not null)
+        if (args.Dll is not null)
             elmToolkit
                 .ConvertElmToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
-                .SaveAssemblyBinariesToDirectory(args.dll, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"));
+                .SaveAssemblyBinariesToDirectory(args.Dll, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"));
 
         var packagingToolkit = new PackagingToolkit(loggerFactory)
             .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit);
@@ -148,7 +136,7 @@ internal sealed class LegacyProgram(
             .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
             .ConvertToFhirResources(packOpt.CanonicalRootUrl, packOpt.OverrideDate)
             .SaveFhirResourcesToDirectory(
-                args.fhir,
+                args.Fhir,
                 DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"),
                 configureJsonSerializerOptions);
 
