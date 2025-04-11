@@ -12,21 +12,20 @@ namespace Hl7.Cql.Packager;
 public record LoggingCommand(
     bool? LogDebug,
     bool? LogAppend,
-    LogLevel? ConsoleLogLevel,
+    LogLevel ConsoleLogLevel,
     LogLevel FileLogLevel) {
 
     public static readonly Option[] Options =
     [
         Option<bool>("--log-append", "Append to existing log file, instead of clearing"),
         Option<LogLevel?>("--console-log-level", "The minimum log level to output to the console")
-            .HasDefaultValue(null),
+            .HasDefaultValue(LogLevel.Information),
         Option<LogLevel>("--file-log-level", "The minimum log level to output to file")
             .HasDefaultValue(LogLevel.Information),
     ];
 
     public IEnumerable<(object? value, string[] sectionPath)> GetConfigMapping() =>
     [
-        // (LogDebug, [Packager.Options.LoggingOptions.ConfigSection, nameof(Packager.Options.LoggingOptions.Debug)]),
         (LogAppend, [Packager.Options.LoggingOptions.ConfigSection, nameof(Packager.Options.LoggingOptions.Append)]),
         (ConsoleLogLevel, [Packager.Options.LoggingOptions.ConfigSection, nameof(Packager.Options.LoggingOptions.ConsoleLogLevel)]),
         (FileLogLevel, [Packager.Options.LoggingOptions.ConfigSection, nameof(Packager.Options.LoggingOptions.FileLogLevel)]),

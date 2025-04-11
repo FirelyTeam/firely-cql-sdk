@@ -26,7 +26,7 @@ internal static class PackagerCLiLoggingBuilderExtensions
         var loggingOptions = configuration.GetSection(LoggingOptions.ConfigSection).Get<LoggingOptions>();
         loggingOptions ??= LoggingOptions.Default;
 
-        LogLevel minLogLevel = (LogLevel)Math.Min((int)loggingOptions.FileLogLevel, (int?)loggingOptions.ConsoleLogLevel ?? int.MaxValue);
+        LogLevel minLogLevel = (LogLevel)Math.Min((int)loggingOptions.FileLogLevel, (int)loggingOptions.ConsoleLogLevel);
         logging.AddFilter(level => level >= minLogLevel);
 
         var logFile = "build.log";

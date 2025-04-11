@@ -15,6 +15,6 @@ internal record LoggingOptions : IBindOptions
     public static LoggingOptions Default { get; } = new();
     public bool Debug { get; init; }
     public bool Append { get; init; }
-    public LogLevel? ConsoleLogLevel { get; init; } = LogLevel.Warning;
-    public LogLevel FileLogLevel { get; init; } = LogLevel.Trace;
+    public LogLevel ConsoleLogLevel { get; init; } = LogLevel.Information;
+    public LogLevel FileLogLevel { get; init; } = LogLevel.Information;
 }

@@ -65,13 +65,17 @@ public class CqlToFhirProgram
                 logger.LogInformation($"Exiting. No CQL libraries found in directory {opt.CqlInDir}.");
                 return ExitCode.NoCqlLibsInDir;
             }
+            sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.Conversions.Count} CQL libraries from directory {opt.CqlInDir}."));
 
-            if (cqlToolkit.Conversions.Count == 0)
+            var cqlToolkitResultRecords = cqlToolkit.ConvertCqlToElm()
+                      .GetCqlToolkitResults()
+                      .ToList();
+
+            if (cqlToolkitResultRecords.Count == 0)
             {
-                logger.LogInformation("Exiting. No CQL libraries converted.");
+                logger.LogInformation("Exiting. No CQL libraries converted to ELM.");
                 return ExitCode.NoElmLibsCompiled;
             }
-            sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.Conversions.Count} CQL libraries from directory {opt.CqlInDir}."));
 
             if (opt.ElmOutDir is not null)
             {
@@ -79,15 +83,10 @@ public class CqlToFhirProgram
                     opt.ElmOutDir,
                     writeIndented: opt.JsonPretty,
                     DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
-                sbSummary.AppendLine(Invariant($"Saved {cqlToolkit.GetCqlToolkitResults().Count()} ELM files to directory {opt.ElmOutDir}."));
+                sbSummary.AppendLine(Invariant($"Saved {cqlToolkitResultRecords.Count} ELM files to directory {opt.ElmOutDir}."));
             }
 
             ElmToolkit elmToolkit = cqlToolkit.CreateElmToolkit(elmOpt);
-            if (elmToolkit.Conversions.Count == 0)
-            {
-                logger.LogInformation($"Exiting. No ELM libraries.");
-                return ExitCode.NoElmLibsInDir;
-            }
 
             var elmToolkitResultRecords = elmToolkit
                                           .ConvertElmToAssemblies()
@@ -95,7 +94,7 @@ public class CqlToFhirProgram
                                           .ToList();
             if (elmToolkitResultRecords.Count == 0)
             {
-                logger.LogInformation("Exiting. No ELM libraries compiled.");
+                logger.LogInformation("Exiting. No ELM libraries compiled to C#/DLL.");
                 return ExitCode.NoElmLibsCompiled;
             }
 
