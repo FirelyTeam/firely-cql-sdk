@@ -8,7 +8,7 @@ internal record ElmToFhirCommand(
     DirectoryInfo Elm,
     DirectoryInfo? Cs,
     DirectoryInfo? Dll,
-    DirectoryInfo Fhir,
+    DirectoryInfo? Fhir,
     DateTimeOffset? OverrideUtcDateTime,
     string? CanonicalRootUrl,
     bool? JsonPretty)
@@ -29,8 +29,7 @@ internal record ElmToFhirCommand(
             .ExistingOnly(),
         Option<DirectoryInfo>("--cs", "C# output directory"),
         Option<DirectoryInfo>("--dll", "DLL/PDB output directory"),
-        Option<DirectoryInfo>("--fhir", "FHIR Resource output directory")
-            .IsRequired(),
+        Option<DirectoryInfo>("--fhir", "FHIR Resource output directory"),
         Option<string>("--canonical-root-url", "The root canonical url output in FHIR library"),
         Option<DateTimeOffset>("--override-utc-date-time", "Override date output in FHIR library"),
         Option<bool>("--json-pretty", "Output JSON using multiline and indentation"),

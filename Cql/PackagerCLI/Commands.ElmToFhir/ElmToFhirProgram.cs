@@ -11,7 +11,8 @@ using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.Packager.Commands.ElmToFhir;
 
-internal sealed class ElmToFhirProgram(
+internal sealed class ElmToFhirProgram
+(
     ILoggerFactory loggerFactory,
     ILogger<ElmToFhirProgram> logger,
     IOptions<CqlOptions> cqlOptions,
@@ -25,6 +26,12 @@ internal sealed class ElmToFhirProgram(
         var cqlOpt = cqlOptions.Value;
         var elmOpt = elmOptions.Value;
         var packOpt = packagingOptions.Value;
+
+        if ((opt.Cs, opt.Dll, opt.Fhir) == (null, null, null))
+        {
+            logger.LogInformation("Exiting. No output directories specified.");
+            return ExitCode.NoOutputDirs;
+        }
 
         CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt)
                                 .SetIgnoreEnumerationExceptions()
@@ -84,13 +91,14 @@ internal sealed class ElmToFhirProgram(
                 return options;
             };
 
-        packagingToolkit
-            .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
-            .ConvertToFhirResources(packOpt.CanonicalRootUrl, packOpt.OverrideDate)
-            .SaveFhirResourcesToDirectory(
-                opt.Fhir,
-                DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"),
-                configureJsonSerializerOptions);
+        if (opt.Fhir is not null)
+            packagingToolkit
+                .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
+                .ConvertToFhirResources(packOpt.CanonicalRootUrl, packOpt.OverrideDate)
+                .SaveFhirResourcesToDirectory(
+                    opt.Fhir,
+                    DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"),
+                    configureJsonSerializerOptions);
 
         return ExitCode.Normal;
     }

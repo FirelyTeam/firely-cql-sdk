@@ -9,5 +9,5 @@ internal record ElmToFhirOptions : IOptionsEx
     public required DirectoryInfo Elm { get; set; }
     public DirectoryInfo? Cs { get; set; }
     public DirectoryInfo? Dll { get; set; }
-    public required DirectoryInfo Fhir { get; set; }
+    public required DirectoryInfo? Fhir { get; set; }
 }

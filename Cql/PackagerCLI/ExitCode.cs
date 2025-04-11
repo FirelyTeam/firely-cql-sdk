@@ -7,4 +7,5 @@ internal static class ExitCode
     public const int NoElmLibsInDir = 2;
     public const int NoElmLibsCompiled = 3;
     public const int CantPackageNoCqlElmMatches = 4;
+    public const int NoOutputDirs = 5;
 }
