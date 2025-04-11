@@ -87,6 +87,12 @@ public class CqlToFhirProgram
                 sbSummary.AppendLine(Invariant($"Saved {cqlToolkitResultRecords.Count} ELM files to directory {opt.ElmOutDir}."));
             }
 
+            switch (opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir)
+            {
+                case (null, null, null):
+                    return ExitCode.Normal;
+            }
+
             ElmToolkit elmToolkit = cqlToolkit.CreateElmToolkit(elmOpt);
 
             var elmToolkitResultRecords = elmToolkit
