@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Packager;
 using Hl7.Cql.Packager.Options;
+using Microsoft.Extensions.Configuration;
 
 // ReSharper disable once CheckNamespace
 #pragma warning disable IDE0130 // Namespace does not match folder structure
@@ -29,12 +30,19 @@ internal static class PackagerCliServiceCollectionExtensions
     {
         var buildConfiguration = typeof(Program).Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration?.ToLowerInvariant();
         var environmentName = buildConfiguration ?? "release";
+        var exeDir = Path.GetDirectoryName(typeof(Program).Assembly.Location)!;
 
-        config
-            .AddEnvironmentVariables("CQLPACKAGER")
-            .AddJsonFile("Hl7.Cql.Packager.appsettings.json", optional: true, reloadOnChange: false)
-            .AddJsonFile($"Hl7.Cql.Packager.appsettings.{environmentName}.json", optional: true, reloadOnChange: false)
-            ;
+        config.AddEnvironmentVariables("CQLPACKAGER");
+
+        config.AddJsonFile(Path.Combine(exeDir, "Hl7.Cql.Packager.appsettings.json"), optional: true, reloadOnChange: false);
+
+        if (exeDir != Environment.CurrentDirectory)
+            config.AddJsonFile(Path.Combine(Environment.CurrentDirectory, "Hl7.Cql.Packager.appsettings.json"), optional: true, reloadOnChange: false);
+
+        config.AddJsonFile(Path.Combine(exeDir, $"Hl7.Cql.Packager.appsettings.{environmentName}.json"), optional: true, reloadOnChange: false);
+
+        if (exeDir != Environment.CurrentDirectory)
+            config.AddJsonFile(Path.Combine(Environment.CurrentDirectory, $"Hl7.Cql.Packager.appsettings.{environmentName}.json"), optional: true, reloadOnChange: false);
 
         // Add additionalData (which can be from the command line)
         if (additionalConfiguration

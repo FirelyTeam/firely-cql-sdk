@@ -26,6 +26,7 @@ internal class OptionsConsoleDumper(
         //var attr = assembly.GetCustomAttributes();
 
         WriteLine("- PackageCLI ------------------------------------");
+        WriteLine($"{"Path",-20} : {assembly.Location}");
         WriteLine($"{"Build",-20} : {assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration}");
         WriteLine($"{"Version",-20} : {assembly.GetCustomAttribute<AssemblyInformationalVersionAttribute>()?.InformationalVersion.Split('+')[0]}");
         WriteLine("- Environment -----------------------------------");
