@@ -11,31 +11,44 @@ using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
+using Hl7.Cql.Packager.Commands.ElmToFhir;
 using Hl7.Cql.Packager.Options;
 using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
+using Hl7.Cql.Runtime;
 using Hl7.Cql.Runtime.IO;
 using Hl7.Cql.Toolkit;
 
-namespace Hl7.Cql.Packager.Commands.ElmToFhir;
+namespace Hl7.Cql.Packager.Commands.CqlToFhir;
 
-internal sealed class ElmToFhirProgram
+public class CqlToFhirProgram
 (
     ILoggerFactory loggerFactory,
-    ILogger<ElmToFhirProgram> logger,
+    ILogger<CqlToFhirProgram> logger,
     IOptions<CqlOptions> cqlOptions,
     IOptions<ElmOptions> elmOptions,
     IOptions<FhirOptions> fhirOptions,
-    IOptions<ElmToFhirOptions> elmToFhirOptions) : IProgram
+    IOptions<CqlToFhirOptions> cqlToElmOptions) : IProgram
 {
+    public static int CommandHandler(
+        IConsole console,
+        LoggingCommand loggingCommand,
+        CqlToFhirCommand cqlToFhirCommand) =>
+        RunProgram<CqlToFhirProgram>(
+            console,
+            loggingCommand,
+            cqlToFhirCommand.GetConfigMapping,
+            (_, services) =>
+                services.AddAndBindOptions<CqlToFhirOptions>());
+
     public int Run()
     {
-        var opt = elmToFhirOptions.Value;
+        var opt = cqlToElmOptions.Value;
         var cqlOpt = cqlOptions.Value;
         var elmOpt = elmOptions.Value;
         var fhirOpt = fhirOptions.Value;
 
-        if ((opt.Cs, opt.Dll, opt.Fhir) == (null, null, null))
+        if ((opt.Elm, opt.Cs, opt.Dll, opt.Fhir) == (null, null, null, null))
         {
             logger.LogInformation("Exiting. No output directories specified.");
             return ExitCode.NoOutputDirs;
@@ -51,14 +64,30 @@ internal sealed class ElmToFhirProgram
             return ExitCode.NoCqlLibsInDir;
         }
 
-        ElmToolkit elmToolkit = new ElmToolkit(loggerFactory, elmOpt)
-                                .SetIgnoreEnumerationExceptions()
-                                .AddElmFilesFromDirectory(
-                                    opt.Elm,
-                                    filePredicate: file => !elmOpt.SkipFiles.Contains(file.Name));
+        var cqlToolkitResultRecords =
+            cqlToolkit.ConvertCqlToElm()
+                      .GetCqlToolkitResults()
+                      .ToList();
+
+        if (cqlToolkitResultRecords.Count == 0)
+        {
+            logger.LogInformation("Exiting. No CQL libraries converted.");
+            return ExitCode.NoElmLibsCompiled;
+        }
+
+        if (opt.Elm is not null)
+            cqlToolkit.SaveElmFilesToDirectory(
+                opt.Elm,
+                writeIndented: opt.JsonPretty,
+                DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
+
+        if ((opt.Cs, opt.Dll, opt.Fhir) == (null, null, null))
+            return ExitCode.Normal;
+
+        ElmToolkit elmToolkit = cqlToolkit.CreateElmToolkit(elmOpt);
         if (elmToolkit.Conversions.Count == 0)
         {
-            logger.LogInformation($"Exiting. No ELM libraries found in directory {opt.Elm}.");
+            logger.LogInformation($"Exiting. No ELM libraries.");
             return ExitCode.NoElmLibsInDir;
         }
 
@@ -110,15 +139,4 @@ internal sealed class ElmToFhirProgram
 
         return ExitCode.Normal;
     }
-
-    internal static int CommandHandler(
-        IConsole console,
-        LoggingCommand loggingCommand,
-        ElmToFhirCommand elmToFhirCommand) =>
-        RunProgram<ElmToFhirProgram>(
-            console,
-            loggingCommand,
-            elmToFhirCommand.GetConfigMapping,
-            (_, services) =>
-                services.AddAndBindOptions<ElmToFhirOptions>());
 }

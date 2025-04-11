@@ -10,7 +10,7 @@ using Hl7.Cql.CodeGeneration.NET.Toolkit;
 
 namespace Hl7.Cql.Packager.Options;
 
-internal record ElmOptions : ElmToolkitConfig, IBindOptions
+public record ElmOptions : ElmToolkitConfig, IBindOptions
 {
     public const string ConfigSection = "Elm";
     static string IBindOptions.ConfigSection => ConfigSection;

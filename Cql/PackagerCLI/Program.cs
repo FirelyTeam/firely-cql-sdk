@@ -6,7 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Packager.Commands.CqlToElm;
+using Hl7.Cql.Packager.Commands.CqlToFhir;
 using Hl7.Cql.Packager.Commands.ElmToFhir;
 
 namespace Hl7.Cql.Packager;
@@ -22,7 +22,7 @@ public class Program
                 .SetHandler(typeof(ElmToFhirProgram), nameof(ElmToFhirProgram.CommandHandler));
 
         rootCommand.AddCommand(ElmToFhirCommand.CreateCommand());
-        rootCommand.AddCommand(CqlToElmCommand.CreateCommand());
+        rootCommand.AddCommand(CqlToFhirCommand.CreateCommand());
 
         var systemConsole = new SystemConsole();
         var result = rootCommand.Invoke(args, systemConsole);

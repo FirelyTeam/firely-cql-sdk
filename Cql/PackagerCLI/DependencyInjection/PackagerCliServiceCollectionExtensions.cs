@@ -18,9 +18,9 @@ internal static class PackagerCliServiceCollectionExtensions
 {
     public static IServiceCollection AddPackagerCliOptions(
         this IServiceCollection services) =>
-        services.AddBindAndConfigureOptions<CqlBindOptions>()
+        services.AddBindAndConfigureOptions<CqlOptions>()
                 .AddAndBindOptions<ElmOptions>()
-                .AddBindAndConfigureOptions<PackagingBindOptions>()
+                .AddBindAndConfigureOptions<FhirOptions>()
                 .AddAndBindOptions<LoggingOptions>();
 
     public static IConfigurationBuilder AddPackagerCliAppSettings(

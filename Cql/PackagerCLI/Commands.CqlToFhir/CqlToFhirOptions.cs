@@ -6,16 +6,17 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-namespace Hl7.Cql.Packager.Commands.CqlToElm;
+namespace Hl7.Cql.Packager.Commands.CqlToFhir;
 
-public class CqlToElmOptions : IBindOptions
+public class CqlToFhirOptions : IBindOptions
 {
     public const string ConfigSection = "CqlToElm";
     static string IBindOptions.ConfigSection => ConfigSection;
 
     public required DirectoryInfo Cql { get; set; }
-
-    public required DirectoryInfo Elm { get; set; }
-
+    public DirectoryInfo? Elm { get; set; }
+    public DirectoryInfo? Cs { get; set; }
+    public DirectoryInfo? Dll { get; set; }
+    public required DirectoryInfo? Fhir { get; set; }
     public bool JsonPretty { get; set; }
 }

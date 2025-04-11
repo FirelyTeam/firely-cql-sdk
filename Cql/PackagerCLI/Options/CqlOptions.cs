@@ -10,7 +10,7 @@ using Hl7.Cql.CqlToElm.Toolkit;
 
 namespace Hl7.Cql.Packager.Options;
 
-public record CqlBindOptions : CqlToolkitConfig, IConfigureBindOptions<CqlBindOptions>
+public record CqlOptions : CqlToolkitConfig, IConfigureBindOptions<CqlOptions>
 {
     public const string ConfigSection = "Cql";
     static string IBindOptions.ConfigSection => ConfigSection;
@@ -19,7 +19,7 @@ public record CqlBindOptions : CqlToolkitConfig, IConfigureBindOptions<CqlBindOp
     /// Configures the Models
     /// </summary>
     public static void Configure(
-        CqlBindOptions bindOptions,
+        CqlOptions options,
         IConfiguration configuration)
     {
         if (configuration
@@ -27,10 +27,10 @@ public record CqlBindOptions : CqlToolkitConfig, IConfigureBindOptions<CqlBindOp
             .GetSection(nameof(Models))
             .Get<CqlModel[]>() is {} cqlModels)
         {
-            var cqlModelsSet = bindOptions.Models.NewImmutableHashSet(cqlModels);
-            typeof(CqlBindOptions)
+            var cqlModelsSet = options.Models.NewImmutableHashSet(cqlModels);
+            typeof(CqlOptions)
                 .GetProperty(nameof(Models))!
-                .SetValue(bindOptions, cqlModelsSet);
+                .SetValue(options, cqlModelsSet);
         }
     }
 }
