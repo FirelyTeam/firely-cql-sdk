@@ -50,7 +50,6 @@ cql-package --elm <directory> --cql <directory> [options]
 
 - `[--fhir <directory>]`: Specifies the output directory for the FHIR resources
 - `[--cs <directory>]`: Specifies the output directory for generated C# code
-- `[--cs-typeformat <var|explicit>]`: Specifies whether to use 'var' (default) or explicit types in the generated C# output
 - `[--dll <directory>]`: Specifies the DLL output directory
 - `[--log-debug <true|false>]`: Enable debug logging or not (default)
 - `[--canonical-root-url <url>]`: Specifies the root url used for the resource canonical. If omitted a '#' will be used.

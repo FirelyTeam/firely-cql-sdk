@@ -1,5 +1,9 @@
 {
   "profiles": {
+    "PackageCLI (TEST)": {
+      "commandName": "Project",
+      "commandLineArgs": " --override-utc-date-time \"1970-01-01T00:00:00Z\" --canonical-root-url \"https://fire.ly/fhir/\" --elm \"C:\\Dev\\firely-cql-sdk\\submodules\\Ncqa.DQIC\\BuildArtifacts/Elm\" --cql \"C:\\Dev\\firely-cql-sdk\\submodules\\Ncqa.DQIC\\BuildArtifacts/Cql\" --cs \"C:\\Dev\\firely-cql-sdk\\submodules\\Ncqa.DQIC\\BuildArtifacts/CSharp\" --fhir \"C:\\Dev\\firely-cql-sdk\\submodules\\Ncqa.DQIC\\BuildArtifacts/Resources\" --cs-typeformat \"explicit\" --json-pretty \"true\" "
+    },
     "PackageCLI (Help)": {
       "commandName": "Project",
       "commandLineArgs": "--help"

@@ -28,8 +28,6 @@
 
 			<!-- Comment out these if you don't need them -->
 			<CanonicalRootUrl>https://fire.ly/fhir/</CanonicalRootUrl>
-			<CSharpTypeFormat>explicit</CSharpTypeFormat>
-			<!--CSharpTypeFormat: explicit|var -->
 
 			<!-- Leave these alone, they are automatically picked up from the properties above -->
 			<PackagerCLIArgs Condition="'$(OverrideUtcDateTime)'==''">$(PackagerCLIArgs) --override-utc-date-time "1970-01-01T00:00:00Z"</PackagerCLIArgs>
@@ -40,7 +38,6 @@
 			<PackagerCLIArgs Condition="'$(CSharpDirectory)'!=''">$(PackagerCLIArgs) --cs "$(CSharpDirectory)"</PackagerCLIArgs>
 			<PackagerCliArgs Condition="'$(DllDirectory)'!=''">$(PackagerCLIArgs) --dll "$(DllDirectory)"</PackagerCliArgs>
 			<PackagerCLIArgs Condition="'$(ResourcesDirectory)'!=''">$(PackagerCLIArgs) --fhir "$(ResourcesDirectory)"</PackagerCLIArgs>
-			<PackagerCLIArgs Condition="'$(CSharpTypeFormat)'!=''">$(PackagerCLIArgs) --cs-typeformat "$(CSharpTypeFormat)"</PackagerCLIArgs>
 			<PackagerCLIArgs Condition="'$(JsonPretty)'!=''">$(PackagerCLIArgs) --json-pretty "$(JsonPretty)"</PackagerCLIArgs>
 			<PackagerCLICommand>"$(PackagerCLI)" $(PackagerClIArgs)</PackagerCLICommand>
 			<!-- <PackagerCLICommand>$(PackagerCLI) $(PackagerClIArgs) &gt; NUL 2&gt; NUL</PackagerCLICommand> -->
