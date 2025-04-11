@@ -29,7 +29,7 @@ internal record ElmToFhirCommand(
 
     public static readonly Option[] Options =
     [
-        Option<DirectoryInfo>("--cql", "CQL input directory. (REQUIRED wheh using --fhir)"),
+        Option<DirectoryInfo>("--cql", "CQL input directory. (REQUIRED when using --fhir)"),
         Option<DirectoryInfo>("--elm", "ELM input directory")
             .IsRequired()
             .ExistingOnly(),
