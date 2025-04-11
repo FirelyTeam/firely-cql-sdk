@@ -45,12 +45,10 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
         bool? a_(AllergyIntolerance A)
         {
             CodeableConcept c_ = A?.ClinicalStatus;
-            CqlConcept d_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, c_);
-            CqlCode e_ = NCQATerminology_1_0_0.Instance.allergy_active(context);
-            CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
-            bool? g_ = context.Operators.Equal(d_, f_);
+            CqlCode d_ = NCQATerminology_1_0_0.Instance.allergy_active(context);
+            bool? e_ = context.Operators.Equal(c_, d_);
 
-            return g_;
+            return e_;
         };
         IEnumerable<AllergyIntolerance> b_ = context.Operators.Where<AllergyIntolerance>(Allergy, a_);
 
@@ -63,12 +61,10 @@ public partial class NCQAStatus_1_0_0 : ILibrary, ISingleton<NCQAStatus_1_0_0>
         bool? a_(Condition C)
         {
             CodeableConcept c_ = C?.ClinicalStatus;
-            CqlConcept d_ = FHIRHelpers_4_0_001.Instance.ToConcept(context, c_);
-            CqlCode e_ = NCQATerminology_1_0_0.Instance.active(context);
-            CqlConcept f_ = context.Operators.ConvertCodeToConcept(e_);
-            bool? g_ = context.Operators.Equal(d_, f_);
+            CqlCode d_ = NCQATerminology_1_0_0.Instance.active(context);
+            bool? e_ = context.Operators.Equal(c_, d_);
 
-            return g_;
+            return e_;
         };
         IEnumerable<Condition> b_ = context.Operators.Where<Condition>(Condition, a_);
 

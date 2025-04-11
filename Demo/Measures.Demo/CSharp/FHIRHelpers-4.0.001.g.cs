@@ -44,7 +44,7 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
     {
         CqlInterval<CqlDateTime> a_()
         {
-            if (period is null)
+            if ((period as object) is null)
             {
                 return null as CqlInterval<CqlDateTime>;
             }
@@ -68,16 +68,16 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
     {
         CqlInterval<CqlQuantity> a_()
         {
-            if (range is null)
+            if ((range as object) is null)
             {
                 return null as CqlInterval<CqlQuantity>;
             }
             else
             {
                 Quantity b_ = range?.Low;
-                CqlQuantity c_ = this.ToQuantity(context, b_);
+                CqlQuantity c_ = this.ToQuantity(context, b_ as Quantity);
                 Quantity d_ = range?.High;
-                CqlQuantity e_ = this.ToQuantity(context, d_);
+                CqlQuantity e_ = this.ToQuantity(context, d_ as Quantity);
                 CqlInterval<CqlQuantity> f_ = context.Operators.Interval(c_, e_, true, true);
 
                 return f_;
@@ -92,9 +92,9 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
     {
         CqlQuantity a_()
         {
-            if (quantity is null)
+            if ((quantity as object) is null)
             {
-                return default;
+                return null as CqlQuantity;
             }
             else
             {
@@ -115,9 +115,9 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
     {
         CqlRatio a_()
         {
-            if (ratio is null)
+            if ((ratio as object) is null)
             {
-                return default;
+                return null as CqlRatio;
             }
             else
             {
@@ -138,9 +138,9 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
     {
         CqlCode a_()
         {
-            if (coding is null)
+            if ((coding as object) is null)
             {
-                return default;
+                return null as CqlCode;
             }
             else
             {
@@ -165,9 +165,9 @@ public partial class FHIRHelpers_4_0_001 : ILibrary, ISingleton<FHIRHelpers_4_0_
     {
         CqlConcept a_()
         {
-            if (concept is null)
+            if ((concept as object) is null)
             {
-                return default;
+                return null as CqlConcept;
             }
             else
             {

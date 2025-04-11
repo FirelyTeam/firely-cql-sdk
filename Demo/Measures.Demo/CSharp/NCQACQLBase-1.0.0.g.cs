@@ -41,7 +41,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 
                 return d_ ?? false;
             };
-            if (intervals is null)
+            if ((intervals as object) is null)
             {
                 CqlInterval<CqlDate>[] e_ = []
 ;
@@ -61,7 +61,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 {
                     CqlDate o_()
                     {
-                        if ((context.Operators.Start(I)) is null)
+                        if (((context.Operators.Start(I)) as object) is null)
                         {
                             CqlDate q_ = context.Operators.MinValue<CqlDate>();
 
@@ -115,7 +115,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 
                 return d_ ?? false;
             };
-            if (intervals is null)
+            if ((intervals as object) is null)
             {
                 CqlInterval<CqlDateTime>[] e_ = []
 ;
@@ -135,7 +135,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 {
                     CqlDateTime o_()
                     {
-                        if ((context.Operators.Start(I)) is null)
+                        if (((context.Operators.Start(I)) as object) is null)
                         {
                             CqlDateTime q_ = context.Operators.MinValue<CqlDateTime>();
 
@@ -189,7 +189,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 
                 return d_ ?? false;
             };
-            if (intervals is null)
+            if ((intervals as object) is null)
             {
                 CqlInterval<CqlDate>[] e_ = []
 ;
@@ -242,7 +242,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 
                 return d_ ?? false;
             };
-            if (intervals is null)
+            if ((intervals as object) is null)
             {
                 CqlInterval<CqlDateTime>[] e_ = []
 ;
@@ -339,103 +339,103 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 };
                 if (p_())
                 {
-                    CqlInterval<CqlDate>[] t_ = [
-                        baseInterval,
-                    ];
+                    CqlInterval<CqlDate>[] t_ = []
+;
 
                     return t_ as IEnumerable<CqlInterval<CqlDate>>;
                 }
                 else
                 {
                     IEnumerable<CqlInterval<CqlDate>> u_ = variableDeclarations?.sortedCoverings;
-                    CqlInterval<CqlDate> v_(CqlInterval<CqlDate> sortedCovering)
-                    {
-                        CqlInterval<CqlDate> y_()
-                        {
-                            bool z_()
-                            {
-                                IEnumerable<CqlInterval<CqlDate>> aa_ = variableDeclarations?.sortedCoverings;
-                                int? ab_ = context.Operators.IndexOf<CqlInterval<CqlDate>>(aa_, sortedCovering);
-                                bool? ac_ = context.Operators.Equal(ab_, 0);
+                    CqlInterval<CqlDate> v_ = context.Operators.Last<CqlInterval<CqlDate>>(u_);
+                    CqlDate w_ = context.Operators.Start(v_);
+                    CqlDate x_ = context.Operators.End(baseInterval);
+                    CqlInterval<CqlDate> y_ = context.Operators.Interval(w_, x_, false, true);
+                    CqlInterval<CqlDate> aa_ = context.Operators.Last<CqlInterval<CqlDate>>(u_);
+                    CqlInterval<CqlDate> ab_ = context.Operators.Except(y_, aa_);
+                    CqlInterval<CqlDate> ac_ = context.Operators.Intersect<CqlDate>(ab_, baseInterval);
+                    CqlInterval<CqlDate>[] ad_ = [
+                        ac_,
+                    ];
 
-                                return ac_ ?? false;
-                            };
-                            if (z_())
-                            {
-                                CqlDate ad_ = context.Operators.Start(baseInterval);
-                                CqlDate ae_ = context.Operators.Start(sortedCovering);
-                                CqlInterval<CqlDate> af_ = context.Operators.Interval(ad_, ae_, true, true);
-                                CqlInterval<CqlDate> ag_ = context.Operators.Intersect<CqlDate>(af_, baseInterval);
-                                CqlInterval<CqlDate> ah_ = context.Operators.Except(ag_, sortedCovering);
-
-                                return ah_;
-                            }
-                            else
-                            {
-                                IEnumerable<CqlInterval<CqlDate>> ai_ = variableDeclarations?.sortedCoverings;
-                                int? ak_ = context.Operators.IndexOf<CqlInterval<CqlDate>>(ai_, sortedCovering);
-                                int? al_ = context.Operators.Subtract(ak_, 1);
-                                CqlInterval<CqlDate> am_ = context.Operators.Indexer<CqlInterval<CqlDate>>(ai_, al_);
-                                CqlDate an_ = context.Operators.Start(am_);
-                                CqlDate ao_ = context.Operators.End(sortedCovering);
-                                CqlInterval<CqlDate> ap_ = context.Operators.Interval(an_, ao_, false, false);
-                                int? as_ = context.Operators.IndexOf<CqlInterval<CqlDate>>(ai_, sortedCovering);
-                                int? at_ = context.Operators.Subtract(as_, 1);
-                                CqlInterval<CqlDate> au_ = context.Operators.Indexer<CqlInterval<CqlDate>>(ai_, at_);
-                                CqlInterval<CqlDate> av_ = context.Operators.Except(ap_, au_);
-                                CqlInterval<CqlDate> aw_ = context.Operators.Except(av_, sortedCovering);
-
-                                return aw_;
-                            }
-                        };
-
-                        return y_();
-                    };
-                    IEnumerable<CqlInterval<CqlDate>> w_ = context.Operators.Select<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(u_, v_);
-                    IEnumerable<CqlInterval<CqlDate>> x_ = context.Operators.Distinct<CqlInterval<CqlDate>>(w_);
-
-                    return x_;
+                    return ad_ as IEnumerable<CqlInterval<CqlDate>>;
                 }
             };
             IEnumerable<CqlInterval<CqlDate>> i_()
             {
-                bool ax_()
+                bool ae_()
                 {
-                    IEnumerable<CqlInterval<CqlDate>> ay_ = variableDeclarations?.sortedCoverings;
-                    int? az_ = context.Operators.Count<CqlInterval<CqlDate>>(ay_);
-                    bool? ba_ = context.Operators.Equal(az_, 0);
+                    IEnumerable<CqlInterval<CqlDate>> af_ = variableDeclarations?.sortedCoverings;
+                    int? ag_ = context.Operators.Count<CqlInterval<CqlDate>>(af_);
+                    bool? ah_ = context.Operators.Equal(ag_, 0);
 
-                    return ba_ ?? false;
+                    return ah_ ?? false;
                 };
-                if (ax_())
+                if (ae_())
                 {
-                    CqlInterval<CqlDate>[] bb_ = []
-;
+                    CqlInterval<CqlDate>[] ai_ = [
+                        baseInterval,
+                    ];
 
-                    return bb_ as IEnumerable<CqlInterval<CqlDate>>;
+                    return ai_ as IEnumerable<CqlInterval<CqlDate>>;
                 }
                 else
                 {
-                    IEnumerable<CqlInterval<CqlDate>> bc_ = variableDeclarations?.sortedCoverings;
-                    CqlInterval<CqlDate> bd_ = context.Operators.Last<CqlInterval<CqlDate>>(bc_);
-                    CqlDate be_ = context.Operators.Start(bd_);
-                    CqlDate bf_ = context.Operators.End(baseInterval);
-                    CqlInterval<CqlDate> bg_ = context.Operators.Interval(be_, bf_, false, true);
-                    CqlInterval<CqlDate> bi_ = context.Operators.Last<CqlInterval<CqlDate>>(bc_);
-                    CqlInterval<CqlDate> bj_ = context.Operators.Except(bg_, bi_);
-                    CqlInterval<CqlDate> bk_ = context.Operators.Intersect<CqlDate>(bj_, baseInterval);
-                    CqlInterval<CqlDate>[] bl_ = [
-                        bk_,
-                    ];
+                    IEnumerable<CqlInterval<CqlDate>> aj_ = variableDeclarations?.sortedCoverings;
+                    CqlInterval<CqlDate> ak_(CqlInterval<CqlDate> sortedCovering)
+                    {
+                        CqlInterval<CqlDate> an_()
+                        {
+                            bool ao_()
+                            {
+                                IEnumerable<CqlInterval<CqlDate>> ap_ = variableDeclarations?.sortedCoverings;
+                                int? aq_ = context.Operators.IndexOf<CqlInterval<CqlDate>>(ap_, sortedCovering);
+                                bool? ar_ = context.Operators.Equal(aq_, 0);
 
-                    return bl_ as IEnumerable<CqlInterval<CqlDate>>;
+                                return ar_ ?? false;
+                            };
+                            if (ao_())
+                            {
+                                CqlDate as_ = context.Operators.Start(baseInterval);
+                                CqlDate at_ = context.Operators.Start(sortedCovering);
+                                CqlInterval<CqlDate> au_ = context.Operators.Interval(as_, at_, true, true);
+                                CqlInterval<CqlDate> av_ = context.Operators.Intersect<CqlDate>(au_, baseInterval);
+                                CqlInterval<CqlDate> aw_ = context.Operators.Except(av_, sortedCovering);
+
+                                return aw_;
+                            }
+                            else
+                            {
+                                IEnumerable<CqlInterval<CqlDate>> ax_ = variableDeclarations?.sortedCoverings;
+                                int? az_ = context.Operators.IndexOf<CqlInterval<CqlDate>>(ax_, sortedCovering);
+                                int? ba_ = context.Operators.Subtract(az_, 1);
+                                CqlInterval<CqlDate> bb_ = context.Operators.Indexer<CqlInterval<CqlDate>>(ax_, ba_);
+                                CqlDate bc_ = context.Operators.Start(bb_);
+                                CqlDate bd_ = context.Operators.End(sortedCovering);
+                                CqlInterval<CqlDate> be_ = context.Operators.Interval(bc_, bd_, false, false);
+                                int? bh_ = context.Operators.IndexOf<CqlInterval<CqlDate>>(ax_, sortedCovering);
+                                int? bi_ = context.Operators.Subtract(bh_, 1);
+                                CqlInterval<CqlDate> bj_ = context.Operators.Indexer<CqlInterval<CqlDate>>(ax_, bi_);
+                                CqlInterval<CqlDate> bk_ = context.Operators.Except(be_, bj_);
+                                CqlInterval<CqlDate> bl_ = context.Operators.Except(bk_, sortedCovering);
+
+                                return bl_;
+                            }
+                        };
+
+                        return an_();
+                    };
+                    IEnumerable<CqlInterval<CqlDate>> al_ = context.Operators.Select<CqlInterval<CqlDate>, CqlInterval<CqlDate>>(aj_, ak_);
+                    IEnumerable<CqlInterval<CqlDate>> am_ = context.Operators.Distinct<CqlInterval<CqlDate>>(al_);
+
+                    return am_;
                 }
             };
-            (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> frontgaps, IEnumerable<CqlInterval<CqlDate>> endgap)? j_ = (CqlTupleMetadata_FKcLSALRMRfDigEFaJgDOPFRK, h_(), i_());
-            (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> frontgaps, IEnumerable<CqlInterval<CqlDate>> endgap)?[] k_ = [
+            (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> endgap, IEnumerable<CqlInterval<CqlDate>> frontgaps)? j_ = (CqlTupleMetadata_DECPbSATOETPaGfFJifhEcWWB, h_(), i_());
+            (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> endgap, IEnumerable<CqlInterval<CqlDate>> frontgaps)?[] k_ = [
                 j_,
             ];
-            IEnumerable<CqlInterval<CqlDate>> l_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> frontgaps, IEnumerable<CqlInterval<CqlDate>> endgap)? calculations)
+            IEnumerable<CqlInterval<CqlDate>> l_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> endgap, IEnumerable<CqlInterval<CqlDate>> frontgaps)? calculations)
             {
                 IEnumerable<CqlInterval<CqlDate>> bm_ = calculations?.frontgaps;
                 IEnumerable<CqlInterval<CqlDate>> bn_ = calculations?.endgap;
@@ -444,7 +444,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 
                 return bp_;
             };
-            IEnumerable<IEnumerable<CqlInterval<CqlDate>>> m_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> frontgaps, IEnumerable<CqlInterval<CqlDate>> endgap)?, IEnumerable<CqlInterval<CqlDate>>>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> frontgaps, IEnumerable<CqlInterval<CqlDate>> endgap)?>)k_, l_);
+            IEnumerable<IEnumerable<CqlInterval<CqlDate>>> m_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> endgap, IEnumerable<CqlInterval<CqlDate>> frontgaps)?, IEnumerable<CqlInterval<CqlDate>>>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> endgap, IEnumerable<CqlInterval<CqlDate>> frontgaps)?>)k_, l_);
             IEnumerable<IEnumerable<CqlInterval<CqlDate>>> n_ = context.Operators.Distinct<IEnumerable<CqlInterval<CqlDate>>>(m_);
             IEnumerable<CqlInterval<CqlDate>> o_ = context.Operators.SingletonFrom<IEnumerable<CqlInterval<CqlDate>>>(n_);
 
@@ -479,103 +479,103 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 };
                 if (p_())
                 {
-                    CqlInterval<CqlDateTime>[] t_ = [
-                        baseInterval,
-                    ];
+                    CqlInterval<CqlDateTime>[] t_ = []
+;
 
                     return t_ as IEnumerable<CqlInterval<CqlDateTime>>;
                 }
                 else
                 {
                     IEnumerable<CqlInterval<CqlDateTime>> u_ = variableDeclarations?.sortedCoverings;
-                    CqlInterval<CqlDateTime> v_(CqlInterval<CqlDateTime> sortedCovering)
-                    {
-                        CqlInterval<CqlDateTime> y_()
-                        {
-                            bool z_()
-                            {
-                                IEnumerable<CqlInterval<CqlDateTime>> aa_ = variableDeclarations?.sortedCoverings;
-                                int? ab_ = context.Operators.IndexOf<CqlInterval<CqlDateTime>>(aa_, sortedCovering);
-                                bool? ac_ = context.Operators.Equal(ab_, 0);
+                    CqlInterval<CqlDateTime> v_ = context.Operators.Last<CqlInterval<CqlDateTime>>(u_);
+                    CqlDateTime w_ = context.Operators.Start(v_);
+                    CqlDateTime x_ = context.Operators.End(baseInterval);
+                    CqlInterval<CqlDateTime> y_ = context.Operators.Interval(w_, x_, false, true);
+                    CqlInterval<CqlDateTime> aa_ = context.Operators.Last<CqlInterval<CqlDateTime>>(u_);
+                    CqlInterval<CqlDateTime> ab_ = context.Operators.Except(y_, aa_);
+                    CqlInterval<CqlDateTime> ac_ = context.Operators.Intersect<CqlDateTime>(ab_, baseInterval);
+                    CqlInterval<CqlDateTime>[] ad_ = [
+                        ac_,
+                    ];
 
-                                return ac_ ?? false;
-                            };
-                            if (z_())
-                            {
-                                CqlDateTime ad_ = context.Operators.Start(baseInterval);
-                                CqlDateTime ae_ = context.Operators.Start(sortedCovering);
-                                CqlInterval<CqlDateTime> af_ = context.Operators.Interval(ad_, ae_, true, true);
-                                CqlInterval<CqlDateTime> ag_ = context.Operators.Intersect<CqlDateTime>(af_, baseInterval);
-                                CqlInterval<CqlDateTime> ah_ = context.Operators.Except(ag_, sortedCovering);
-
-                                return ah_;
-                            }
-                            else
-                            {
-                                IEnumerable<CqlInterval<CqlDateTime>> ai_ = variableDeclarations?.sortedCoverings;
-                                int? ak_ = context.Operators.IndexOf<CqlInterval<CqlDateTime>>(ai_, sortedCovering);
-                                int? al_ = context.Operators.Subtract(ak_, 1);
-                                CqlInterval<CqlDateTime> am_ = context.Operators.Indexer<CqlInterval<CqlDateTime>>(ai_, al_);
-                                CqlDateTime an_ = context.Operators.Start(am_);
-                                CqlDateTime ao_ = context.Operators.End(sortedCovering);
-                                CqlInterval<CqlDateTime> ap_ = context.Operators.Interval(an_, ao_, false, false);
-                                int? as_ = context.Operators.IndexOf<CqlInterval<CqlDateTime>>(ai_, sortedCovering);
-                                int? at_ = context.Operators.Subtract(as_, 1);
-                                CqlInterval<CqlDateTime> au_ = context.Operators.Indexer<CqlInterval<CqlDateTime>>(ai_, at_);
-                                CqlInterval<CqlDateTime> av_ = context.Operators.Except(ap_, au_);
-                                CqlInterval<CqlDateTime> aw_ = context.Operators.Except(av_, sortedCovering);
-
-                                return aw_;
-                            }
-                        };
-
-                        return y_();
-                    };
-                    IEnumerable<CqlInterval<CqlDateTime>> w_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(u_, v_);
-                    IEnumerable<CqlInterval<CqlDateTime>> x_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(w_);
-
-                    return x_;
+                    return ad_ as IEnumerable<CqlInterval<CqlDateTime>>;
                 }
             };
             IEnumerable<CqlInterval<CqlDateTime>> i_()
             {
-                bool ax_()
+                bool ae_()
                 {
-                    IEnumerable<CqlInterval<CqlDateTime>> ay_ = variableDeclarations?.sortedCoverings;
-                    int? az_ = context.Operators.Count<CqlInterval<CqlDateTime>>(ay_);
-                    bool? ba_ = context.Operators.Equal(az_, 0);
+                    IEnumerable<CqlInterval<CqlDateTime>> af_ = variableDeclarations?.sortedCoverings;
+                    int? ag_ = context.Operators.Count<CqlInterval<CqlDateTime>>(af_);
+                    bool? ah_ = context.Operators.Equal(ag_, 0);
 
-                    return ba_ ?? false;
+                    return ah_ ?? false;
                 };
-                if (ax_())
+                if (ae_())
                 {
-                    CqlInterval<CqlDateTime>[] bb_ = []
-;
+                    CqlInterval<CqlDateTime>[] ai_ = [
+                        baseInterval,
+                    ];
 
-                    return bb_ as IEnumerable<CqlInterval<CqlDateTime>>;
+                    return ai_ as IEnumerable<CqlInterval<CqlDateTime>>;
                 }
                 else
                 {
-                    IEnumerable<CqlInterval<CqlDateTime>> bc_ = variableDeclarations?.sortedCoverings;
-                    CqlInterval<CqlDateTime> bd_ = context.Operators.Last<CqlInterval<CqlDateTime>>(bc_);
-                    CqlDateTime be_ = context.Operators.Start(bd_);
-                    CqlDateTime bf_ = context.Operators.End(baseInterval);
-                    CqlInterval<CqlDateTime> bg_ = context.Operators.Interval(be_, bf_, false, true);
-                    CqlInterval<CqlDateTime> bi_ = context.Operators.Last<CqlInterval<CqlDateTime>>(bc_);
-                    CqlInterval<CqlDateTime> bj_ = context.Operators.Except(bg_, bi_);
-                    CqlInterval<CqlDateTime> bk_ = context.Operators.Intersect<CqlDateTime>(bj_, baseInterval);
-                    CqlInterval<CqlDateTime>[] bl_ = [
-                        bk_,
-                    ];
+                    IEnumerable<CqlInterval<CqlDateTime>> aj_ = variableDeclarations?.sortedCoverings;
+                    CqlInterval<CqlDateTime> ak_(CqlInterval<CqlDateTime> sortedCovering)
+                    {
+                        CqlInterval<CqlDateTime> an_()
+                        {
+                            bool ao_()
+                            {
+                                IEnumerable<CqlInterval<CqlDateTime>> ap_ = variableDeclarations?.sortedCoverings;
+                                int? aq_ = context.Operators.IndexOf<CqlInterval<CqlDateTime>>(ap_, sortedCovering);
+                                bool? ar_ = context.Operators.Equal(aq_, 0);
 
-                    return bl_ as IEnumerable<CqlInterval<CqlDateTime>>;
+                                return ar_ ?? false;
+                            };
+                            if (ao_())
+                            {
+                                CqlDateTime as_ = context.Operators.Start(baseInterval);
+                                CqlDateTime at_ = context.Operators.Start(sortedCovering);
+                                CqlInterval<CqlDateTime> au_ = context.Operators.Interval(as_, at_, true, true);
+                                CqlInterval<CqlDateTime> av_ = context.Operators.Intersect<CqlDateTime>(au_, baseInterval);
+                                CqlInterval<CqlDateTime> aw_ = context.Operators.Except(av_, sortedCovering);
+
+                                return aw_;
+                            }
+                            else
+                            {
+                                IEnumerable<CqlInterval<CqlDateTime>> ax_ = variableDeclarations?.sortedCoverings;
+                                int? az_ = context.Operators.IndexOf<CqlInterval<CqlDateTime>>(ax_, sortedCovering);
+                                int? ba_ = context.Operators.Subtract(az_, 1);
+                                CqlInterval<CqlDateTime> bb_ = context.Operators.Indexer<CqlInterval<CqlDateTime>>(ax_, ba_);
+                                CqlDateTime bc_ = context.Operators.Start(bb_);
+                                CqlDateTime bd_ = context.Operators.End(sortedCovering);
+                                CqlInterval<CqlDateTime> be_ = context.Operators.Interval(bc_, bd_, false, false);
+                                int? bh_ = context.Operators.IndexOf<CqlInterval<CqlDateTime>>(ax_, sortedCovering);
+                                int? bi_ = context.Operators.Subtract(bh_, 1);
+                                CqlInterval<CqlDateTime> bj_ = context.Operators.Indexer<CqlInterval<CqlDateTime>>(ax_, bi_);
+                                CqlInterval<CqlDateTime> bk_ = context.Operators.Except(be_, bj_);
+                                CqlInterval<CqlDateTime> bl_ = context.Operators.Except(bk_, sortedCovering);
+
+                                return bl_;
+                            }
+                        };
+
+                        return an_();
+                    };
+                    IEnumerable<CqlInterval<CqlDateTime>> al_ = context.Operators.Select<CqlInterval<CqlDateTime>, CqlInterval<CqlDateTime>>(aj_, ak_);
+                    IEnumerable<CqlInterval<CqlDateTime>> am_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(al_);
+
+                    return am_;
                 }
             };
-            (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> frontgaps, IEnumerable<CqlInterval<CqlDateTime>> endgap)? j_ = (CqlTupleMetadata_BBLSSiNBQBGUDJaVjMDZMSAXg, h_(), i_());
-            (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> frontgaps, IEnumerable<CqlInterval<CqlDateTime>> endgap)?[] k_ = [
+            (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> endgap, IEnumerable<CqlInterval<CqlDateTime>> frontgaps)? j_ = (CqlTupleMetadata_XhWJFQcLdRRLTdZNdjjLiSUI, h_(), i_());
+            (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> endgap, IEnumerable<CqlInterval<CqlDateTime>> frontgaps)?[] k_ = [
                 j_,
             ];
-            IEnumerable<CqlInterval<CqlDateTime>> l_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> frontgaps, IEnumerable<CqlInterval<CqlDateTime>> endgap)? calculations)
+            IEnumerable<CqlInterval<CqlDateTime>> l_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> endgap, IEnumerable<CqlInterval<CqlDateTime>> frontgaps)? calculations)
             {
                 IEnumerable<CqlInterval<CqlDateTime>> bm_ = calculations?.frontgaps;
                 IEnumerable<CqlInterval<CqlDateTime>> bn_ = calculations?.endgap;
@@ -584,7 +584,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 
                 return bp_;
             };
-            IEnumerable<IEnumerable<CqlInterval<CqlDateTime>>> m_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> frontgaps, IEnumerable<CqlInterval<CqlDateTime>> endgap)?, IEnumerable<CqlInterval<CqlDateTime>>>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> frontgaps, IEnumerable<CqlInterval<CqlDateTime>> endgap)?>)k_, l_);
+            IEnumerable<IEnumerable<CqlInterval<CqlDateTime>>> m_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> endgap, IEnumerable<CqlInterval<CqlDateTime>> frontgaps)?, IEnumerable<CqlInterval<CqlDateTime>>>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> endgap, IEnumerable<CqlInterval<CqlDateTime>> frontgaps)?>)k_, l_);
             IEnumerable<IEnumerable<CqlInterval<CqlDateTime>>> n_ = context.Operators.Distinct<IEnumerable<CqlInterval<CqlDateTime>>>(m_);
             IEnumerable<CqlInterval<CqlDateTime>> o_ = context.Operators.SingletonFrom<IEnumerable<CqlInterval<CqlDateTime>>>(n_);
 
@@ -598,10 +598,10 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
     }
 
 
-    public (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? Collapsed_Date_Interval_Stats(CqlContext context, IEnumerable<CqlInterval<CqlDate>> collapsedIntervals)
+    public (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? Collapsed_Date_Interval_Stats(CqlContext context, IEnumerable<CqlInterval<CqlDate>> collapsedIntervals)
     {
         int? a_ = context.Operators.Count<CqlInterval<CqlDate>>(collapsedIntervals);
-        int? b_()
+        CqlInterval<CqlDate> b_()
         {
             bool f_()
             {
@@ -612,74 +612,74 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             };
             if (f_())
             {
-                return 0;
-            }
-            else
-            {
-                int? i_(CqlInterval<CqlDate> I)
-                {
-                    CqlDate m_ = context.Operators.Start(I);
-                    CqlDate n_ = context.Operators.End(I);
-                    int? o_ = context.Operators.DurationBetween(m_, n_, "day");
-                    int? p_ = context.Operators.Add(o_, 1);
-                    int?[] q_ = [
-                        p_,
-                        0,
-                    ];
-                    int? r_ = context.Operators.Max<int?>(q_ as IEnumerable<int?>);
-
-                    return r_;
-                };
-                IEnumerable<int?> j_ = context.Operators.Select<CqlInterval<CqlDate>, int?>(collapsedIntervals, i_);
-                IEnumerable<int?> k_ = context.Operators.Distinct<int?>(j_);
-                int? l_ = context.Operators.Sum(k_);
-
-                return l_;
-            }
-        };
-        CqlInterval<CqlDate> c_()
-        {
-            bool s_()
-            {
-                int? t_ = context.Operators.Count<CqlInterval<CqlDate>>(collapsedIntervals);
-                bool? u_ = context.Operators.Equal(t_, 0);
-
-                return u_ ?? false;
-            };
-            if (s_())
-            {
                 return null as CqlInterval<CqlDate>;
             }
             else
             {
-                (CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)? v_(CqlInterval<CqlDate> I)
+                (CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)? i_(CqlInterval<CqlDate> I)
                 {
-                    CqlDate ac_ = context.Operators.Start(I);
-                    CqlDate ad_ = context.Operators.End(I);
-                    int? ae_ = context.Operators.DurationBetween(ac_, ad_, "day");
-                    int? af_ = context.Operators.Add(ae_, 1);
-                    int?[] ag_ = [
-                        af_,
+                    CqlDate p_ = context.Operators.Start(I);
+                    CqlDate q_ = context.Operators.End(I);
+                    int? r_ = context.Operators.DurationBetween(p_, q_, "day");
+                    int? s_ = context.Operators.Add(r_, 1);
+                    int?[] t_ = [
+                        s_,
                         0,
                     ];
-                    int? ah_ = context.Operators.Max<int?>(ag_ as IEnumerable<int?>);
-                    (CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)? ai_ = (CqlTupleMetadata_HEjPGjPEhLgQPGjROeWMgiGfC, I, ah_);
+                    int? u_ = context.Operators.Max<int?>(t_ as IEnumerable<int?>);
+                    (CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)? v_ = (CqlTupleMetadata_CaKfRdNEDgKGCjhSPMGWIWQVV, u_, I);
 
-                    return ai_;
+                    return v_;
                 };
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?> w_ = context.Operators.Select<CqlInterval<CqlDate>, (CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?>(collapsedIntervals, v_);
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?> x_ = context.Operators.Distinct<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?>(w_);
-                object y_((CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)? @this)
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?> j_ = context.Operators.Select<CqlInterval<CqlDate>, (CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?>(collapsedIntervals, i_);
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?> k_ = context.Operators.Distinct<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?>(j_);
+                object l_((CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)? @this)
                 {
-                    int? aj_ = @this?.days;
+                    int? w_ = @this?.days;
+
+                    return w_;
+                };
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?> m_ = context.Operators.SortBy<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?>(k_, l_, System.ComponentModel.ListSortDirection.Descending);
+                (CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)? n_ = context.Operators.First<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?>(m_);
+                CqlInterval<CqlDate> o_ = n_?.interval;
+
+                return o_;
+            }
+        };
+        int? c_()
+        {
+            bool x_()
+            {
+                int? y_ = context.Operators.Count<CqlInterval<CqlDate>>(collapsedIntervals);
+                bool? z_ = context.Operators.Equal(y_, 0);
+
+                return z_ ?? false;
+            };
+            if (x_())
+            {
+                return 0;
+            }
+            else
+            {
+                int? aa_(CqlInterval<CqlDate> I)
+                {
+                    CqlDate ae_ = context.Operators.Start(I);
+                    CqlDate af_ = context.Operators.End(I);
+                    int? ag_ = context.Operators.DurationBetween(ae_, af_, "day");
+                    int? ah_ = context.Operators.Add(ag_, 1);
+                    int?[] ai_ = [
+                        ah_,
+                        0,
+                    ];
+                    int? aj_ = context.Operators.Max<int?>(ai_ as IEnumerable<int?>);
 
                     return aj_;
                 };
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?> z_ = context.Operators.SortBy<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?>(x_, y_, System.ComponentModel.ListSortDirection.Descending);
-                (CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)? aa_ = context.Operators.First<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?>(z_);
-                CqlInterval<CqlDate> ab_ = aa_?.interval;
+                IEnumerable<int?> ab_ = context.Operators.Select<CqlInterval<CqlDate>, int?>(collapsedIntervals, aa_);
+                IEnumerable<int?> ac_ = context.Operators.Distinct<int?>(ab_);
+                int? ad_ = context.Operators.Sum(ac_);
 
-                return ab_;
+                return ad_;
             }
         };
         int? d_()
@@ -697,7 +697,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             }
             else
             {
-                (CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)? an_(CqlInterval<CqlDate> I)
+                (CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)? an_(CqlInterval<CqlDate> I)
                 {
                     CqlDate bh_ = context.Operators.Start(I);
                     CqlDate bi_ = context.Operators.End(I);
@@ -708,23 +708,23 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                         0,
                     ];
                     int? bm_ = context.Operators.Max<int?>(bl_ as IEnumerable<int?>);
-                    (CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)? bn_ = (CqlTupleMetadata_HEjPGjPEhLgQPGjROeWMgiGfC, I, bm_);
+                    (CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)? bn_ = (CqlTupleMetadata_CaKfRdNEDgKGCjhSPMGWIWQVV, bm_, I);
 
                     return bn_;
                 };
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?> ao_ = context.Operators.Select<CqlInterval<CqlDate>, (CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?>(collapsedIntervals, an_);
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?> ap_ = context.Operators.Distinct<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?>(ao_);
-                object aq_((CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)? @this)
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?> ao_ = context.Operators.Select<CqlInterval<CqlDate>, (CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?>(collapsedIntervals, an_);
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?> ap_ = context.Operators.Distinct<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?>(ao_);
+                object aq_((CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)? @this)
                 {
                     int? bo_ = @this?.days;
 
                     return bo_;
                 };
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?> ar_ = context.Operators.SortBy<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?>(ap_, aq_, System.ComponentModel.ListSortDirection.Descending);
-                (CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)? as_ = context.Operators.First<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?>(ar_);
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?> ar_ = context.Operators.SortBy<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?>(ap_, aq_, System.ComponentModel.ListSortDirection.Descending);
+                (CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)? as_ = context.Operators.First<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?>(ar_);
                 CqlInterval<CqlDate> at_ = as_?.interval;
                 CqlDate au_ = context.Operators.Start(at_);
-                (CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)? av_(CqlInterval<CqlDate> I)
+                (CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)? av_(CqlInterval<CqlDate> I)
                 {
                     CqlDate bp_ = context.Operators.Start(I);
                     CqlDate bq_ = context.Operators.End(I);
@@ -735,20 +735,20 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                         0,
                     ];
                     int? bu_ = context.Operators.Max<int?>(bt_ as IEnumerable<int?>);
-                    (CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)? bv_ = (CqlTupleMetadata_HEjPGjPEhLgQPGjROeWMgiGfC, I, bu_);
+                    (CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)? bv_ = (CqlTupleMetadata_CaKfRdNEDgKGCjhSPMGWIWQVV, bu_, I);
 
                     return bv_;
                 };
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?> aw_ = context.Operators.Select<CqlInterval<CqlDate>, (CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?>(collapsedIntervals, av_);
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?> ax_ = context.Operators.Distinct<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?>(aw_);
-                object ay_((CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)? @this)
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?> aw_ = context.Operators.Select<CqlInterval<CqlDate>, (CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?>(collapsedIntervals, av_);
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?> ax_ = context.Operators.Distinct<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?>(aw_);
+                object ay_((CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)? @this)
                 {
                     int? bw_ = @this?.days;
 
                     return bw_;
                 };
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?> az_ = context.Operators.SortBy<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?>(ax_, ay_, System.ComponentModel.ListSortDirection.Descending);
-                (CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)? ba_ = context.Operators.First<(CqlTupleMetadata, CqlInterval<CqlDate> interval, int? days)?>(az_);
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?> az_ = context.Operators.SortBy<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?>(ax_, ay_, System.ComponentModel.ListSortDirection.Descending);
+                (CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)? ba_ = context.Operators.First<(CqlTupleMetadata, int? days, CqlInterval<CqlDate> interval)?>(az_);
                 CqlInterval<CqlDate> bb_ = ba_?.interval;
                 CqlDate bc_ = context.Operators.End(bb_);
                 int? bd_ = context.Operators.DurationBetween(au_, bc_, "day");
@@ -762,51 +762,51 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 return bg_;
             }
         };
-        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? e_ = (CqlTupleMetadata_HRbPDRZiOGGBceePOZWjVbXdP, collapsedIntervals, a_, b_(), c_(), d_());
+        (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? e_ = (CqlTupleMetadata_GPAfNUdCHUQcLMLShHLcEPiEB, a_, collapsedIntervals, b_(), c_(), d_());
 
         return e_;
     }
 
 
-    public (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? Date_Interval_Covering_Relative_to_Base_Interval_Stats(CqlContext context, CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
+    public (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? Date_Interval_Covering_Relative_to_Base_Interval_Stats(CqlContext context, CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
     {
         IEnumerable<CqlInterval<CqlDate>> a_ = this.Date_Interval_Covering_Relative_to_Base_Interval(context, baseInterval, coveringIntervals);
         (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Covering_Intervals)? b_ = (CqlTupleMetadata_DUiZjXRKgCPYVZQJbFVDKNMOi, a_);
         (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Covering_Intervals)?[] c_ = [
             b_,
         ];
-        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? d_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Covering_Intervals)? variableDeclarations)
+        (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? d_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Covering_Intervals)? variableDeclarations)
         {
             IEnumerable<CqlInterval<CqlDate>> h_ = variableDeclarations?.Covering_Intervals;
-            (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? i_ = this.Collapsed_Date_Interval_Stats(context, h_);
+            (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? i_ = this.Collapsed_Date_Interval_Stats(context, h_);
 
             return i_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?> e_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Covering_Intervals)?, (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Covering_Intervals)?>)c_, d_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?> f_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>(e_);
-        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? g_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>(f_);
+        IEnumerable<(CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?> e_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Covering_Intervals)?, (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Covering_Intervals)?>)c_, d_);
+        IEnumerable<(CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?> f_ = context.Operators.Distinct<(CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?>(e_);
+        (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? g_ = context.Operators.SingletonFrom<(CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?>(f_);
 
         return g_;
     }
 
 
-    public (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? Date_Interval_Gaps_Relative_to_Base_Interval_Stats(CqlContext context, CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
+    public (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? Date_Interval_Gaps_Relative_to_Base_Interval_Stats(CqlContext context, CqlInterval<CqlDate> baseInterval, IEnumerable<CqlInterval<CqlDate>> coveringIntervals)
     {
         IEnumerable<CqlInterval<CqlDate>> a_ = this.Date_Interval_Gaps_Relative_to_Base_Interval(context, baseInterval, coveringIntervals);
         (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Gap_Intervals)? b_ = (CqlTupleMetadata_GQPbYTYABjXFVLRKjXgcDJFSj, a_);
         (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Gap_Intervals)?[] c_ = [
             b_,
         ];
-        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? d_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Gap_Intervals)? variableDeclarations)
+        (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? d_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Gap_Intervals)? variableDeclarations)
         {
             IEnumerable<CqlInterval<CqlDate>> h_ = variableDeclarations?.Gap_Intervals;
-            (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? i_ = this.Collapsed_Date_Interval_Stats(context, h_);
+            (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? i_ = this.Collapsed_Date_Interval_Stats(context, h_);
 
             return i_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?> e_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Gap_Intervals)?, (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Gap_Intervals)?>)c_, d_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?> f_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>(e_);
-        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)? g_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Longest_Interval)?>(f_);
+        IEnumerable<(CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?> e_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Gap_Intervals)?, (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDate>> Gap_Intervals)?>)c_, d_);
+        IEnumerable<(CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?> f_ = context.Operators.Distinct<(CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?>(e_);
+        (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? g_ = context.Operators.SingletonFrom<(CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDate>> Intervals, CqlInterval<CqlDate> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?>(f_);
 
         return g_;
     }
@@ -814,14 +814,12 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 
     public CqlInterval<CqlDateTime> DateTime_Interval_Set_Nulls_to_Zero(CqlContext context, CqlInterval<CqlDateTime> interval)
     {
-        CqlDateTime a_ = context.Operators.Start(interval);
-        int? b_ = context.Operators.DateTimeComponentFrom(a_, "year");
-        int? c_()
+        int? a_()
         {
             bool w_()
             {
-                CqlDateTime x_ = context.Operators.Start(interval);
-                int? y_ = context.Operators.DateTimeComponentFrom(x_, "month");
+                CqlDateTime x_ = context.Operators.End(interval);
+                int? y_ = context.Operators.DateTimeComponentFrom(x_, "day");
 
                 return y_ is null;
             };
@@ -831,18 +829,18 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             }
             else
             {
-                CqlDateTime z_ = context.Operators.Start(interval);
-                int? aa_ = context.Operators.DateTimeComponentFrom(z_, "month");
+                CqlDateTime z_ = context.Operators.End(interval);
+                int? aa_ = context.Operators.DateTimeComponentFrom(z_, "day");
 
                 return aa_;
             }
         };
-        int? d_()
+        int? b_()
         {
             bool ab_()
             {
-                CqlDateTime ac_ = context.Operators.Start(interval);
-                int? ad_ = context.Operators.DateTimeComponentFrom(ac_, "day");
+                CqlDateTime ac_ = context.Operators.End(interval);
+                int? ad_ = context.Operators.DateTimeComponentFrom(ac_, "hour");
 
                 return ad_ is null;
             };
@@ -852,18 +850,18 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             }
             else
             {
-                CqlDateTime ae_ = context.Operators.Start(interval);
-                int? af_ = context.Operators.DateTimeComponentFrom(ae_, "day");
+                CqlDateTime ae_ = context.Operators.End(interval);
+                int? af_ = context.Operators.DateTimeComponentFrom(ae_, "hour");
 
                 return af_;
             }
         };
-        int? e_()
+        int? c_()
         {
             bool ag_()
             {
-                CqlDateTime ah_ = context.Operators.Start(interval);
-                int? ai_ = context.Operators.DateTimeComponentFrom(ah_, "hour");
+                CqlDateTime ah_ = context.Operators.End(interval);
+                int? ai_ = context.Operators.DateTimeComponentFrom(ah_, "millisecond");
 
                 return ai_ is null;
             };
@@ -873,17 +871,17 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             }
             else
             {
-                CqlDateTime aj_ = context.Operators.Start(interval);
-                int? ak_ = context.Operators.DateTimeComponentFrom(aj_, "hour");
+                CqlDateTime aj_ = context.Operators.End(interval);
+                int? ak_ = context.Operators.DateTimeComponentFrom(aj_, "millisecond");
 
                 return ak_;
             }
         };
-        int? f_()
+        int? d_()
         {
             bool al_()
             {
-                CqlDateTime am_ = context.Operators.Start(interval);
+                CqlDateTime am_ = context.Operators.End(interval);
                 int? an_ = context.Operators.DateTimeComponentFrom(am_, "minute");
 
                 return an_ is null;
@@ -894,18 +892,18 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             }
             else
             {
-                CqlDateTime ao_ = context.Operators.Start(interval);
+                CqlDateTime ao_ = context.Operators.End(interval);
                 int? ap_ = context.Operators.DateTimeComponentFrom(ao_, "minute");
 
                 return ap_;
             }
         };
-        int? g_()
+        int? e_()
         {
             bool aq_()
             {
-                CqlDateTime ar_ = context.Operators.Start(interval);
-                int? as_ = context.Operators.DateTimeComponentFrom(ar_, "second");
+                CqlDateTime ar_ = context.Operators.End(interval);
+                int? as_ = context.Operators.DateTimeComponentFrom(ar_, "month");
 
                 return as_ is null;
             };
@@ -915,18 +913,18 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             }
             else
             {
-                CqlDateTime at_ = context.Operators.Start(interval);
-                int? au_ = context.Operators.DateTimeComponentFrom(at_, "second");
+                CqlDateTime at_ = context.Operators.End(interval);
+                int? au_ = context.Operators.DateTimeComponentFrom(at_, "month");
 
                 return au_;
             }
         };
-        int? h_()
+        int? f_()
         {
             bool av_()
             {
-                CqlDateTime aw_ = context.Operators.Start(interval);
-                int? ax_ = context.Operators.DateTimeComponentFrom(aw_, "millisecond");
+                CqlDateTime aw_ = context.Operators.End(interval);
+                int? ax_ = context.Operators.DateTimeComponentFrom(aw_, "second");
 
                 return ax_ is null;
             };
@@ -936,20 +934,20 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             }
             else
             {
-                CqlDateTime ay_ = context.Operators.Start(interval);
-                int? az_ = context.Operators.DateTimeComponentFrom(ay_, "millisecond");
+                CqlDateTime ay_ = context.Operators.End(interval);
+                int? az_ = context.Operators.DateTimeComponentFrom(ay_, "second");
 
                 return az_;
             }
         };
-        CqlDateTime i_ = context.Operators.End(interval);
-        int? j_ = context.Operators.DateTimeComponentFrom(i_, "year");
-        int? k_()
+        CqlDateTime g_ = context.Operators.End(interval);
+        int? h_ = context.Operators.DateTimeComponentFrom(g_, "year");
+        int? i_()
         {
             bool ba_()
             {
-                CqlDateTime bb_ = context.Operators.End(interval);
-                int? bc_ = context.Operators.DateTimeComponentFrom(bb_, "month");
+                CqlDateTime bb_ = context.Operators.Start(interval);
+                int? bc_ = context.Operators.DateTimeComponentFrom(bb_, "day");
 
                 return bc_ is null;
             };
@@ -959,18 +957,18 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             }
             else
             {
-                CqlDateTime bd_ = context.Operators.End(interval);
-                int? be_ = context.Operators.DateTimeComponentFrom(bd_, "month");
+                CqlDateTime bd_ = context.Operators.Start(interval);
+                int? be_ = context.Operators.DateTimeComponentFrom(bd_, "day");
 
                 return be_;
             }
         };
-        int? l_()
+        int? j_()
         {
             bool bf_()
             {
-                CqlDateTime bg_ = context.Operators.End(interval);
-                int? bh_ = context.Operators.DateTimeComponentFrom(bg_, "day");
+                CqlDateTime bg_ = context.Operators.Start(interval);
+                int? bh_ = context.Operators.DateTimeComponentFrom(bg_, "hour");
 
                 return bh_ is null;
             };
@@ -980,18 +978,18 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             }
             else
             {
-                CqlDateTime bi_ = context.Operators.End(interval);
-                int? bj_ = context.Operators.DateTimeComponentFrom(bi_, "day");
+                CqlDateTime bi_ = context.Operators.Start(interval);
+                int? bj_ = context.Operators.DateTimeComponentFrom(bi_, "hour");
 
                 return bj_;
             }
         };
-        int? m_()
+        int? k_()
         {
             bool bk_()
             {
-                CqlDateTime bl_ = context.Operators.End(interval);
-                int? bm_ = context.Operators.DateTimeComponentFrom(bl_, "hour");
+                CqlDateTime bl_ = context.Operators.Start(interval);
+                int? bm_ = context.Operators.DateTimeComponentFrom(bl_, "millisecond");
 
                 return bm_ is null;
             };
@@ -1001,17 +999,17 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             }
             else
             {
-                CqlDateTime bn_ = context.Operators.End(interval);
-                int? bo_ = context.Operators.DateTimeComponentFrom(bn_, "hour");
+                CqlDateTime bn_ = context.Operators.Start(interval);
+                int? bo_ = context.Operators.DateTimeComponentFrom(bn_, "millisecond");
 
                 return bo_;
             }
         };
-        int? n_()
+        int? l_()
         {
             bool bp_()
             {
-                CqlDateTime bq_ = context.Operators.End(interval);
+                CqlDateTime bq_ = context.Operators.Start(interval);
                 int? br_ = context.Operators.DateTimeComponentFrom(bq_, "minute");
 
                 return br_ is null;
@@ -1022,18 +1020,18 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             }
             else
             {
-                CqlDateTime bs_ = context.Operators.End(interval);
+                CqlDateTime bs_ = context.Operators.Start(interval);
                 int? bt_ = context.Operators.DateTimeComponentFrom(bs_, "minute");
 
                 return bt_;
             }
         };
-        int? o_()
+        int? m_()
         {
             bool bu_()
             {
-                CqlDateTime bv_ = context.Operators.End(interval);
-                int? bw_ = context.Operators.DateTimeComponentFrom(bv_, "second");
+                CqlDateTime bv_ = context.Operators.Start(interval);
+                int? bw_ = context.Operators.DateTimeComponentFrom(bv_, "month");
 
                 return bw_ is null;
             };
@@ -1043,18 +1041,18 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             }
             else
             {
-                CqlDateTime bx_ = context.Operators.End(interval);
-                int? by_ = context.Operators.DateTimeComponentFrom(bx_, "second");
+                CqlDateTime bx_ = context.Operators.Start(interval);
+                int? by_ = context.Operators.DateTimeComponentFrom(bx_, "month");
 
                 return by_;
             }
         };
-        int? p_()
+        int? n_()
         {
             bool bz_()
             {
-                CqlDateTime ca_ = context.Operators.End(interval);
-                int? cb_ = context.Operators.DateTimeComponentFrom(ca_, "millisecond");
+                CqlDateTime ca_ = context.Operators.Start(interval);
+                int? cb_ = context.Operators.DateTimeComponentFrom(ca_, "second");
 
                 return cb_ is null;
             };
@@ -1064,17 +1062,19 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             }
             else
             {
-                CqlDateTime cc_ = context.Operators.End(interval);
-                int? cd_ = context.Operators.DateTimeComponentFrom(cc_, "millisecond");
+                CqlDateTime cc_ = context.Operators.Start(interval);
+                int? cd_ = context.Operators.DateTimeComponentFrom(cc_, "second");
 
                 return cd_;
             }
         };
-        (CqlTupleMetadata, int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)? q_ = (CqlTupleMetadata_FcQREFSfPJSKYAhSEWVJcZVED, b_, c_(), d_(), e_(), f_(), g_(), h_(), j_, k_(), l_(), m_(), n_(), o_(), p_());
-        (CqlTupleMetadata, int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)?[] r_ = [
+        CqlDateTime o_ = context.Operators.Start(interval);
+        int? p_ = context.Operators.DateTimeComponentFrom(o_, "year");
+        (CqlTupleMetadata, int? EndDay, int? EndHour, int? EndMillisecond, int? EndMinute, int? EndMonth, int? EndSecond, int? EndYear, int? StartDay, int? StartHour, int? StartMillisecond, int? StartMinute, int? StartMonth, int? StartSecond, int? StartYear)? q_ = (CqlTupleMetadata_EgjgcAJPQYUjXRQgLXSaIjTai, a_(), b_(), c_(), d_(), e_(), f_(), h_, i_(), j_(), k_(), l_(), m_(), n_(), p_);
+        (CqlTupleMetadata, int? EndDay, int? EndHour, int? EndMillisecond, int? EndMinute, int? EndMonth, int? EndSecond, int? EndYear, int? StartDay, int? StartHour, int? StartMillisecond, int? StartMinute, int? StartMonth, int? StartSecond, int? StartYear)?[] r_ = [
             q_,
         ];
-        CqlInterval<CqlDateTime> s_((CqlTupleMetadata, int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)? i)
+        CqlInterval<CqlDateTime> s_((CqlTupleMetadata, int? EndDay, int? EndHour, int? EndMillisecond, int? EndMinute, int? EndMonth, int? EndSecond, int? EndYear, int? StartDay, int? StartHour, int? StartMillisecond, int? StartMinute, int? StartMonth, int? StartSecond, int? StartYear)? i)
         {
             int? ce_ = i?.StartYear;
             int? cf_ = i?.StartMonth;
@@ -1096,7 +1096,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 
             return cu_;
         };
-        IEnumerable<CqlInterval<CqlDateTime>> t_ = context.Operators.Select<(CqlTupleMetadata, int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)?, CqlInterval<CqlDateTime>>((IEnumerable<(CqlTupleMetadata, int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)?>)r_, s_);
+        IEnumerable<CqlInterval<CqlDateTime>> t_ = context.Operators.Select<(CqlTupleMetadata, int? EndDay, int? EndHour, int? EndMillisecond, int? EndMinute, int? EndMonth, int? EndSecond, int? EndYear, int? StartDay, int? StartHour, int? StartMillisecond, int? StartMinute, int? StartMonth, int? StartSecond, int? StartYear)?, CqlInterval<CqlDateTime>>((IEnumerable<(CqlTupleMetadata, int? EndDay, int? EndHour, int? EndMillisecond, int? EndMinute, int? EndMonth, int? EndSecond, int? EndYear, int? StartDay, int? StartHour, int? StartMillisecond, int? StartMinute, int? StartMonth, int? StartSecond, int? StartYear)?>)r_, s_);
         IEnumerable<CqlInterval<CqlDateTime>> u_ = context.Operators.Distinct<CqlInterval<CqlDateTime>>(t_);
         CqlInterval<CqlDateTime> v_ = context.Operators.SingletonFrom<CqlInterval<CqlDateTime>>(u_);
 
@@ -1104,10 +1104,10 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
     }
 
 
-    public (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? Collapsed_DateTime_Interval_Stats(CqlContext context, IEnumerable<CqlInterval<CqlDateTime>> collapsedIntervals)
+    public (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? Collapsed_DateTime_Interval_Stats(CqlContext context, IEnumerable<CqlInterval<CqlDateTime>> collapsedIntervals)
     {
         int? a_ = context.Operators.Count<CqlInterval<CqlDateTime>>(collapsedIntervals);
-        int? b_()
+        CqlInterval<CqlDateTime> b_()
         {
             bool f_()
             {
@@ -1118,76 +1118,76 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             };
             if (f_())
             {
-                return 0;
-            }
-            else
-            {
-                int? i_(CqlInterval<CqlDateTime> I)
-                {
-                    CqlInterval<CqlDateTime> m_ = this.DateTime_Interval_Set_Nulls_to_Zero(context, I);
-                    CqlDateTime n_ = context.Operators.Start(m_);
-                    CqlDateTime p_ = context.Operators.End(m_);
-                    int? q_ = context.Operators.DurationBetween(n_, p_, "day");
-                    int? r_ = context.Operators.Add(q_, 1);
-                    int?[] s_ = [
-                        r_,
-                        0,
-                    ];
-                    int? t_ = context.Operators.Max<int?>(s_ as IEnumerable<int?>);
-
-                    return t_;
-                };
-                IEnumerable<int?> j_ = context.Operators.Select<CqlInterval<CqlDateTime>, int?>(collapsedIntervals, i_);
-                IEnumerable<int?> k_ = context.Operators.Distinct<int?>(j_);
-                int? l_ = context.Operators.Sum(k_);
-
-                return l_;
-            }
-        };
-        CqlInterval<CqlDateTime> c_()
-        {
-            bool u_()
-            {
-                int? v_ = context.Operators.Count<CqlInterval<CqlDateTime>>(collapsedIntervals);
-                bool? w_ = context.Operators.Equal(v_, 0);
-
-                return w_ ?? false;
-            };
-            if (u_())
-            {
                 return null as CqlInterval<CqlDateTime>;
             }
             else
             {
-                (CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)? x_(CqlInterval<CqlDateTime> I)
+                (CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)? i_(CqlInterval<CqlDateTime> I)
                 {
-                    CqlInterval<CqlDateTime> ae_ = this.DateTime_Interval_Set_Nulls_to_Zero(context, I);
-                    CqlDateTime af_ = context.Operators.Start(ae_);
-                    CqlDateTime ah_ = context.Operators.End(ae_);
-                    int? ai_ = context.Operators.DurationBetween(af_, ah_, "day");
-                    int? aj_ = context.Operators.Add(ai_, 1);
-                    int?[] ak_ = [
-                        aj_,
+                    CqlInterval<CqlDateTime> p_ = this.DateTime_Interval_Set_Nulls_to_Zero(context, I);
+                    CqlDateTime q_ = context.Operators.Start(p_);
+                    CqlDateTime s_ = context.Operators.End(p_);
+                    int? t_ = context.Operators.DurationBetween(q_, s_, "day");
+                    int? u_ = context.Operators.Add(t_, 1);
+                    int?[] v_ = [
+                        u_,
                         0,
                     ];
-                    int? al_ = context.Operators.Max<int?>(ak_ as IEnumerable<int?>);
-                    (CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)? am_ = (CqlTupleMetadata_CGHEUIgjaCjJVKEADTSZEbdCL, I, al_);
+                    int? w_ = context.Operators.Max<int?>(v_ as IEnumerable<int?>);
+                    (CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)? x_ = (CqlTupleMetadata_ELOhVFTXRQKHEUZWiNcOZVYWD, w_, I);
 
-                    return am_;
+                    return x_;
                 };
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?> y_ = context.Operators.Select<CqlInterval<CqlDateTime>, (CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?>(collapsedIntervals, x_);
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?> z_ = context.Operators.Distinct<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?>(y_);
-                object aa_((CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)? @this)
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?> j_ = context.Operators.Select<CqlInterval<CqlDateTime>, (CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?>(collapsedIntervals, i_);
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?> k_ = context.Operators.Distinct<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?>(j_);
+                object l_((CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)? @this)
                 {
-                    int? an_ = @this?.days;
+                    int? y_ = @this?.days;
+
+                    return y_;
+                };
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?> m_ = context.Operators.SortBy<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?>(k_, l_, System.ComponentModel.ListSortDirection.Descending);
+                (CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)? n_ = context.Operators.First<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?>(m_);
+                CqlInterval<CqlDateTime> o_ = n_?.interval;
+
+                return o_;
+            }
+        };
+        int? c_()
+        {
+            bool z_()
+            {
+                int? aa_ = context.Operators.Count<CqlInterval<CqlDateTime>>(collapsedIntervals);
+                bool? ab_ = context.Operators.Equal(aa_, 0);
+
+                return ab_ ?? false;
+            };
+            if (z_())
+            {
+                return 0;
+            }
+            else
+            {
+                int? ac_(CqlInterval<CqlDateTime> I)
+                {
+                    CqlInterval<CqlDateTime> ag_ = this.DateTime_Interval_Set_Nulls_to_Zero(context, I);
+                    CqlDateTime ah_ = context.Operators.Start(ag_);
+                    CqlDateTime aj_ = context.Operators.End(ag_);
+                    int? ak_ = context.Operators.DurationBetween(ah_, aj_, "day");
+                    int? al_ = context.Operators.Add(ak_, 1);
+                    int?[] am_ = [
+                        al_,
+                        0,
+                    ];
+                    int? an_ = context.Operators.Max<int?>(am_ as IEnumerable<int?>);
 
                     return an_;
                 };
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?> ab_ = context.Operators.SortBy<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?>(z_, aa_, System.ComponentModel.ListSortDirection.Descending);
-                (CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)? ac_ = context.Operators.First<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?>(ab_);
-                CqlInterval<CqlDateTime> ad_ = ac_?.interval;
+                IEnumerable<int?> ad_ = context.Operators.Select<CqlInterval<CqlDateTime>, int?>(collapsedIntervals, ac_);
+                IEnumerable<int?> ae_ = context.Operators.Distinct<int?>(ad_);
+                int? af_ = context.Operators.Sum(ae_);
 
-                return ad_;
+                return af_;
             }
         };
         int? d_()
@@ -1205,7 +1205,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             }
             else
             {
-                (CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)? ar_(CqlInterval<CqlDateTime> I)
+                (CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)? ar_(CqlInterval<CqlDateTime> I)
                 {
                     CqlInterval<CqlDateTime> bn_ = this.DateTime_Interval_Set_Nulls_to_Zero(context, I);
                     CqlDateTime bo_ = context.Operators.Start(bn_);
@@ -1217,24 +1217,24 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                         0,
                     ];
                     int? bu_ = context.Operators.Max<int?>(bt_ as IEnumerable<int?>);
-                    (CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)? bv_ = (CqlTupleMetadata_CGHEUIgjaCjJVKEADTSZEbdCL, I, bu_);
+                    (CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)? bv_ = (CqlTupleMetadata_ELOhVFTXRQKHEUZWiNcOZVYWD, bu_, I);
 
                     return bv_;
                 };
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?> as_ = context.Operators.Select<CqlInterval<CqlDateTime>, (CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?>(collapsedIntervals, ar_);
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?> at_ = context.Operators.Distinct<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?>(as_);
-                object au_((CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)? @this)
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?> as_ = context.Operators.Select<CqlInterval<CqlDateTime>, (CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?>(collapsedIntervals, ar_);
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?> at_ = context.Operators.Distinct<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?>(as_);
+                object au_((CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)? @this)
                 {
                     int? bw_ = @this?.days;
 
                     return bw_;
                 };
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?> av_ = context.Operators.SortBy<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?>(at_, au_, System.ComponentModel.ListSortDirection.Descending);
-                (CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)? aw_ = context.Operators.First<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?>(av_);
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?> av_ = context.Operators.SortBy<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?>(at_, au_, System.ComponentModel.ListSortDirection.Descending);
+                (CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)? aw_ = context.Operators.First<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?>(av_);
                 CqlInterval<CqlDateTime> ax_ = aw_?.interval;
                 CqlInterval<CqlDateTime> ay_ = this.DateTime_Interval_Set_Nulls_to_Zero(context, ax_);
                 CqlDateTime az_ = context.Operators.Start(ay_);
-                (CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)? ba_(CqlInterval<CqlDateTime> I)
+                (CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)? ba_(CqlInterval<CqlDateTime> I)
                 {
                     CqlInterval<CqlDateTime> bx_ = this.DateTime_Interval_Set_Nulls_to_Zero(context, I);
                     CqlDateTime by_ = context.Operators.Start(bx_);
@@ -1246,20 +1246,20 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                         0,
                     ];
                     int? ce_ = context.Operators.Max<int?>(cd_ as IEnumerable<int?>);
-                    (CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)? cf_ = (CqlTupleMetadata_CGHEUIgjaCjJVKEADTSZEbdCL, I, ce_);
+                    (CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)? cf_ = (CqlTupleMetadata_ELOhVFTXRQKHEUZWiNcOZVYWD, ce_, I);
 
                     return cf_;
                 };
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?> bb_ = context.Operators.Select<CqlInterval<CqlDateTime>, (CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?>(collapsedIntervals, ba_);
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?> bc_ = context.Operators.Distinct<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?>(bb_);
-                object bd_((CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)? @this)
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?> bb_ = context.Operators.Select<CqlInterval<CqlDateTime>, (CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?>(collapsedIntervals, ba_);
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?> bc_ = context.Operators.Distinct<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?>(bb_);
+                object bd_((CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)? @this)
                 {
                     int? cg_ = @this?.days;
 
                     return cg_;
                 };
-                IEnumerable<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?> be_ = context.Operators.SortBy<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?>(bc_, bd_, System.ComponentModel.ListSortDirection.Descending);
-                (CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)? bf_ = context.Operators.First<(CqlTupleMetadata, CqlInterval<CqlDateTime> interval, int? days)?>(be_);
+                IEnumerable<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?> be_ = context.Operators.SortBy<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?>(bc_, bd_, System.ComponentModel.ListSortDirection.Descending);
+                (CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)? bf_ = context.Operators.First<(CqlTupleMetadata, int? days, CqlInterval<CqlDateTime> interval)?>(be_);
                 CqlInterval<CqlDateTime> bg_ = bf_?.interval;
                 CqlInterval<CqlDateTime> bh_ = this.DateTime_Interval_Set_Nulls_to_Zero(context, bg_);
                 CqlDateTime bi_ = context.Operators.End(bh_);
@@ -1274,51 +1274,51 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
                 return bm_;
             }
         };
-        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? e_ = (CqlTupleMetadata_HDihbLieYfQbgeSbOWZBAMUIQ, collapsedIntervals, a_, b_(), c_(), d_());
+        (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? e_ = (CqlTupleMetadata_BCOQgagVPjGKjGhZbJGYVGIKJ, a_, collapsedIntervals, b_(), c_(), d_());
 
         return e_;
     }
 
 
-    public (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? DateTime_Interval_Covering_Relative_to_Base_Interval_Stats(CqlContext context, CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
+    public (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? DateTime_Interval_Covering_Relative_to_Base_Interval_Stats(CqlContext context, CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
     {
         IEnumerable<CqlInterval<CqlDateTime>> a_ = this.DateTime_Interval_Covering_Relative_to_Base_Interval(context, baseInterval, coveringIntervals);
         (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Covering_Intervals)? b_ = (CqlTupleMetadata_GZMPWdGOJiTNjfWAcbZMePdXV, a_);
         (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Covering_Intervals)?[] c_ = [
             b_,
         ];
-        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? d_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Covering_Intervals)? variableDeclarations)
+        (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? d_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Covering_Intervals)? variableDeclarations)
         {
             IEnumerable<CqlInterval<CqlDateTime>> h_ = variableDeclarations?.Covering_Intervals;
-            (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? i_ = this.Collapsed_DateTime_Interval_Stats(context, h_);
+            (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? i_ = this.Collapsed_DateTime_Interval_Stats(context, h_);
 
             return i_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)?> e_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Covering_Intervals)?, (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Covering_Intervals)?>)c_, d_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)?> f_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)?>(e_);
-        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? g_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)?>(f_);
+        IEnumerable<(CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?> e_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Covering_Intervals)?, (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Covering_Intervals)?>)c_, d_);
+        IEnumerable<(CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?> f_ = context.Operators.Distinct<(CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?>(e_);
+        (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? g_ = context.Operators.SingletonFrom<(CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?>(f_);
 
         return g_;
     }
 
 
-    public (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? DateTime_Interval_Gaps_Relative_to_Base_Interval_Stats(CqlContext context, CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
+    public (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? DateTime_Interval_Gaps_Relative_to_Base_Interval_Stats(CqlContext context, CqlInterval<CqlDateTime> baseInterval, IEnumerable<CqlInterval<CqlDateTime>> coveringIntervals)
     {
         IEnumerable<CqlInterval<CqlDateTime>> a_ = this.DateTime_Interval_Gaps_Relative_to_Base_Interval(context, baseInterval, coveringIntervals);
         (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Gap_Intervals)? b_ = (CqlTupleMetadata_CKbERRbOPGNBBERUOghhaOYSE, a_);
         (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Gap_Intervals)?[] c_ = [
             b_,
         ];
-        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? d_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Gap_Intervals)? variableDeclarations)
+        (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? d_((CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Gap_Intervals)? variableDeclarations)
         {
             IEnumerable<CqlInterval<CqlDateTime>> h_ = variableDeclarations?.Gap_Intervals;
-            (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? i_ = this.Collapsed_DateTime_Interval_Stats(context, h_);
+            (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? i_ = this.Collapsed_DateTime_Interval_Stats(context, h_);
 
             return i_;
         };
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)?> e_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Gap_Intervals)?, (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Gap_Intervals)?>)c_, d_);
-        IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)?> f_ = context.Operators.Distinct<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)?>(e_);
-        (CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)? g_ = context.Operators.SingletonFrom<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Intervals, int? Interval_Count, int? Total_Days_In_Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Longest_Interval)?>(f_);
+        IEnumerable<(CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?> e_ = context.Operators.Select<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Gap_Intervals)?, (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?>((IEnumerable<(CqlTupleMetadata, IEnumerable<CqlInterval<CqlDateTime>> Gap_Intervals)?>)c_, d_);
+        IEnumerable<(CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?> f_ = context.Operators.Distinct<(CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?>(e_);
+        (CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)? g_ = context.Operators.SingletonFrom<(CqlTupleMetadata, int? Interval_Count, IEnumerable<CqlInterval<CqlDateTime>> Intervals, CqlInterval<CqlDateTime> Longest_Interval, int? Total_Days_In_Intervals, int? Total_Days_In_Longest_Interval)?>(f_);
 
         return g_;
     }
@@ -1326,7 +1326,19 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 
     public CqlDateTime Convert_To_UTC_DateTime(CqlContext context, CqlDate d)
     {
-        int? a_ = context.Operators.DateTimeComponentFrom(d, "year");
+        int? a_()
+        {
+            if ((context.Operators.DateTimeComponentFrom(d, "day")) is null)
+            {
+                return 0;
+            }
+            else
+            {
+                int? j_ = context.Operators.DateTimeComponentFrom(d, "day");
+
+                return j_;
+            }
+        };
         int? b_()
         {
             if ((context.Operators.DateTimeComponentFrom(d, "month")) is null)
@@ -1335,29 +1347,17 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
             }
             else
             {
-                int? j_ = context.Operators.DateTimeComponentFrom(d, "month");
-
-                return j_;
-            }
-        };
-        int? c_()
-        {
-            if ((context.Operators.DateTimeComponentFrom(d, "day")) is null)
-            {
-                return 0;
-            }
-            else
-            {
-                int? k_ = context.Operators.DateTimeComponentFrom(d, "day");
+                int? k_ = context.Operators.DateTimeComponentFrom(d, "month");
 
                 return k_;
             }
         };
-        (CqlTupleMetadata, int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)? d_ = (CqlTupleMetadata_FcQREFSfPJSKYAhSEWVJcZVED, a_, b_(), c_(), default, default, default, default, default, default, default, default, default, default, default);
-        (CqlTupleMetadata, int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)?[] e_ = [
+        int? c_ = context.Operators.DateTimeComponentFrom(d, "year");
+        (CqlTupleMetadata, int? EndDay, int? EndHour, int? EndMillisecond, int? EndMinute, int? EndMonth, int? EndSecond, int? EndYear, int? StartDay, int? StartHour, int? StartMillisecond, int? StartMinute, int? StartMonth, int? StartSecond, int? StartYear)? d_ = (CqlTupleMetadata_EgjgcAJPQYUjXRQgLXSaIjTai, default, default, default, default, default, default, default, a_(), default, default, default, b_(), default, c_);
+        (CqlTupleMetadata, int? EndDay, int? EndHour, int? EndMillisecond, int? EndMinute, int? EndMonth, int? EndSecond, int? EndYear, int? StartDay, int? StartHour, int? StartMillisecond, int? StartMinute, int? StartMonth, int? StartSecond, int? StartYear)?[] e_ = [
             d_,
         ];
-        CqlDateTime f_((CqlTupleMetadata, int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)? i)
+        CqlDateTime f_((CqlTupleMetadata, int? EndDay, int? EndHour, int? EndMillisecond, int? EndMinute, int? EndMonth, int? EndSecond, int? EndYear, int? StartDay, int? StartHour, int? StartMillisecond, int? StartMinute, int? StartMonth, int? StartSecond, int? StartYear)? i)
         {
             int? l_ = i?.StartYear;
             int? m_ = i?.StartMonth;
@@ -1367,7 +1367,7 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 
             return p_;
         };
-        IEnumerable<CqlDateTime> g_ = context.Operators.Select<(CqlTupleMetadata, int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)?, CqlDateTime>((IEnumerable<(CqlTupleMetadata, int? StartYear, int? StartMonth, int? StartDay, int? StartHour, int? StartMinute, int? StartSecond, int? StartMillisecond, int? EndYear, int? EndMonth, int? EndDay, int? EndHour, int? EndMinute, int? EndSecond, int? EndMillisecond)?>)e_, f_);
+        IEnumerable<CqlDateTime> g_ = context.Operators.Select<(CqlTupleMetadata, int? EndDay, int? EndHour, int? EndMillisecond, int? EndMinute, int? EndMonth, int? EndSecond, int? EndYear, int? StartDay, int? StartHour, int? StartMillisecond, int? StartMinute, int? StartMonth, int? StartSecond, int? StartYear)?, CqlDateTime>((IEnumerable<(CqlTupleMetadata, int? EndDay, int? EndHour, int? EndMillisecond, int? EndMinute, int? EndMonth, int? EndSecond, int? EndYear, int? StartDay, int? StartHour, int? StartMillisecond, int? StartMinute, int? StartMonth, int? StartSecond, int? StartYear)?>)e_, f_);
         IEnumerable<CqlDateTime> h_ = context.Operators.Distinct<CqlDateTime>(g_);
         CqlDateTime i_ = context.Operators.SingletonFrom<CqlDateTime>(h_);
 
@@ -1391,17 +1391,21 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
 
     #region CqlTupleMetadata Properties
 
-    private static CqlTupleMetadata CqlTupleMetadata_BBLSSiNBQBGUDJaVjMDZMSAXg = new(
-        [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
-        ["frontgaps", "endgap"]);
+    private static CqlTupleMetadata CqlTupleMetadata_BCOQgagVPjGKjGhZbJGYVGIKJ = new(
+        [typeof(int?), typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(CqlInterval<CqlDateTime>), typeof(int?), typeof(int?)],
+        ["Interval_Count", "Intervals", "Longest_Interval", "Total_Days_In_Intervals", "Total_Days_In_Longest_Interval"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_CGHEUIgjaCjJVKEADTSZEbdCL = new(
-        [typeof(CqlInterval<CqlDateTime>), typeof(int?)],
-        ["interval", "days"]);
+    private static CqlTupleMetadata CqlTupleMetadata_CaKfRdNEDgKGCjhSPMGWIWQVV = new(
+        [typeof(int?), typeof(CqlInterval<CqlDate>)],
+        ["days", "interval"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_CKbERRbOPGNBBERUOghhaOYSE = new(
         [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
         ["Gap_Intervals"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_DECPbSATOETPaGfFJifhEcWWB = new(
+        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
+        ["endgap", "frontgaps"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_DUiZjXRKgCPYVZQJbFVDKNMOi = new(
         [typeof(IEnumerable<CqlInterval<CqlDate>>)],
@@ -1411,6 +1415,14 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
         [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
         ["sortedCoverings"]);
 
+    private static CqlTupleMetadata CqlTupleMetadata_EgjgcAJPQYUjXRQgLXSaIjTai = new(
+        [typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?)],
+        ["EndDay", "EndHour", "EndMillisecond", "EndMinute", "EndMonth", "EndSecond", "EndYear", "StartDay", "StartHour", "StartMillisecond", "StartMinute", "StartMonth", "StartSecond", "StartYear"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_ELOhVFTXRQKHEUZWiNcOZVYWD = new(
+        [typeof(int?), typeof(CqlInterval<CqlDateTime>)],
+        ["days", "interval"]);
+
     private static CqlTupleMetadata CqlTupleMetadata_EQHOUSiiWahbJPOUjJGEhIAOV = new(
         [typeof(CqlInterval<CqlDateTime>), typeof(CqlDateTime)],
         ["interval", "startOfInterval"]);
@@ -1419,17 +1431,13 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
         [typeof(IEnumerable<CqlInterval<CqlDate>>)],
         ["sortedCoverings"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_FcQREFSfPJSKYAhSEWVJcZVED = new(
-        [typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?), typeof(int?)],
-        ["StartYear", "StartMonth", "StartDay", "StartHour", "StartMinute", "StartSecond", "StartMillisecond", "EndYear", "EndMonth", "EndDay", "EndHour", "EndMinute", "EndSecond", "EndMillisecond"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_FKcLSALRMRfDigEFaJgDOPFRK = new(
-        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(IEnumerable<CqlInterval<CqlDate>>)],
-        ["frontgaps", "endgap"]);
-
     private static CqlTupleMetadata CqlTupleMetadata_GIMHfXDcFiAjSJBDGYeUeZLhW = new(
         [typeof(CqlInterval<CqlDate>), typeof(CqlDate)],
         ["interval", "startOfInterval"]);
+
+    private static CqlTupleMetadata CqlTupleMetadata_GPAfNUdCHUQcLMLShHLcEPiEB = new(
+        [typeof(int?), typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(CqlInterval<CqlDate>), typeof(int?), typeof(int?)],
+        ["Interval_Count", "Intervals", "Longest_Interval", "Total_Days_In_Intervals", "Total_Days_In_Longest_Interval"]);
 
     private static CqlTupleMetadata CqlTupleMetadata_GQPbYTYABjXFVLRKjXgcDJFSj = new(
         [typeof(IEnumerable<CqlInterval<CqlDate>>)],
@@ -1439,17 +1447,9 @@ public partial class NCQACQLBase_1_0_0 : ILibrary, ISingleton<NCQACQLBase_1_0_0>
         [typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
         ["Covering_Intervals"]);
 
-    private static CqlTupleMetadata CqlTupleMetadata_HDihbLieYfQbgeSbOWZBAMUIQ = new(
-        [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(int?), typeof(int?), typeof(CqlInterval<CqlDateTime>), typeof(int?)],
-        ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HEjPGjPEhLgQPGjROeWMgiGfC = new(
-        [typeof(CqlInterval<CqlDate>), typeof(int?)],
-        ["interval", "days"]);
-
-    private static CqlTupleMetadata CqlTupleMetadata_HRbPDRZiOGGBceePOZWjVbXdP = new(
-        [typeof(IEnumerable<CqlInterval<CqlDate>>), typeof(int?), typeof(int?), typeof(CqlInterval<CqlDate>), typeof(int?)],
-        ["Intervals", "Interval_Count", "Total_Days_In_Intervals", "Longest_Interval", "Total_Days_In_Longest_Interval"]);
+    private static CqlTupleMetadata CqlTupleMetadata_XhWJFQcLdRRLTdZNdjjLiSUI = new(
+        [typeof(IEnumerable<CqlInterval<CqlDateTime>>), typeof(IEnumerable<CqlInterval<CqlDateTime>>)],
+        ["endgap", "frontgaps"]);
 
     #endregion CqlTupleMetadata Properties
 

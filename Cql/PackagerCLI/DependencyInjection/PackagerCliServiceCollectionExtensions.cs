@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Packager;
+using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Cql.Packager.Options;
 
 // ReSharper disable once CheckNamespace

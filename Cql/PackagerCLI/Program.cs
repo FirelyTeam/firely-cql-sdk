@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Packager.Commands.CqlToFhir;
 using Hl7.Cql.Packager.Commands.ElmToFhir;
+using Hl7.Cql.Packager.Commands.Logging;
 
 namespace Hl7.Cql.Packager;
 

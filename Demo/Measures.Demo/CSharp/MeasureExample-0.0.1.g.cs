@@ -41,29 +41,11 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
 
 
     [CqlDeclaration("Initial population")]
-    [CqlTag("measure", "Measure Resource Example")]
-    [CqlTag("year", "2024")]
-    [CqlTag("domain", "Testing Measures")]
-    [CqlTag("group", "1")]
-    [CqlTag("group", "2")]
-    [CqlTag("population", "initial-population")]
-    [CqlTag("description", "Patients in the IP")]
     public bool? Initial_population(CqlContext context) =>
         true;
 
 
-    [CqlDeclaration("Exclusion")]
-    [CqlTag("group", "1")]
-    [CqlTag("group", "2")]
-    [CqlTag("population", "denominator-exclusion")]
-    public bool? Exclusion(CqlContext context) =>
-        false;
-
-
     [CqlDeclaration("Denominator")]
-    [CqlTag("group", "1")]
-    [CqlTag("group", "2")]
-    [CqlTag("population", "denominator")]
     public bool? Denominator(CqlContext context)
     {
         bool? a_ = this.Initial_population(context);
@@ -75,16 +57,17 @@ public partial class MeasureExample_0_0_1 : ILibrary, ISingleton<MeasureExample_
     }
 
 
+    [CqlDeclaration("Exclusion")]
+    public bool? Exclusion(CqlContext context) =>
+        false;
+
+
     [CqlDeclaration("Numerator 1")]
-    [CqlTag("group", "1")]
-    [CqlTag("population", "numerator")]
     public bool? Numerator_1(CqlContext context) =>
         true;
 
 
     [CqlDeclaration("Numerator 2")]
-    [CqlTag("group", "2")]
-    [CqlTag("population", "numerator")]
     public bool? Numerator_2(CqlContext context) =>
         false;
 
