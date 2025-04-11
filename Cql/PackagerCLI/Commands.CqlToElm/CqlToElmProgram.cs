@@ -12,7 +12,7 @@ public class CqlToElmProgram
 (
     ILoggerFactory loggerFactory,
     ILogger<CqlToElmProgram> logger,
-    IOptions<CqlOptions> cqlOptions,
+    IOptions<CqlBindOptions> cqlOptions,
     IOptions<CqlToElmOptions> cqlToElmOptions) : IProgram
 {
     public static int CommandHandler(

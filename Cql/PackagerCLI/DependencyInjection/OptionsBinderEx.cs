@@ -16,56 +16,43 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class OptionsBinderEx
 {
-    // Copied from OptionsBuilderConfigurationExtensions
-    private const string RequiresDynamicCodeMessage = "Binding strongly typed objects to configuration values may require generating dynamic code at runtime.";
-
-    private const string TrimmingRequiredUnreferencedCodeMessage =
-        "TOptions's dependent types may have their members trimmed. Ensure all required members are preserved.";
-
-    [RequiresDynamicCode(RequiresDynamicCodeMessage)]
-    [RequiresUnreferencedCode(TrimmingRequiredUnreferencedCodeMessage)]
-    public static OptionsBuilder<TOptions> BindConfigurationEx<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TOptions>(
+    /// <summary>
+    /// Binds additional properties of the options class to the configuration
+    /// that is not supported out of the box by the Options pattern.
+    /// e.g. DirectoryInfo properties.
+    /// </summary>
+    private static OptionsBuilder<TOptions> BindAdditionalProperties<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] TOptions>(
         this OptionsBuilder<TOptions> optionsBuilder,
-        string configSectionPath,
-        Action<BinderOptions>? configureBinder = null)
+        string configSectionPath)
         where TOptions : class =>
         optionsBuilder
-            .BindConfiguration(configSectionPath, configureBinder)
             .Configure<IConfiguration>(
-                (opt, config) =>
-                    BindDirectoryInfoProperties(config, configSectionPath, opt));
+                (options, configuration) =>
+                {
+                    var properties = options.GetType().GetProperties();
+                    foreach (var property in properties)
+                        if (property.PropertyType == typeof(DirectoryInfo))
+                        {
+                            var value = configuration[$"{configSectionPath}:{property.Name}"];
+                            if (!string.IsNullOrEmpty(value))
+                                property.SetValue(options, new DirectoryInfo(value));
+                        }
+                });
 
-    private static void BindDirectoryInfoProperties(
-        IConfiguration configuration,
-        string key,
-        object instance)
-    {
-        var properties = instance.GetType().GetProperties();
-        foreach (var property in properties)
-            if (property.PropertyType == typeof(DirectoryInfo))
-            {
-                var value = configuration[key + ":" + property.Name];
-                if (!string.IsNullOrEmpty(value))
-                    property.SetValue(instance, new DirectoryInfo(value));
-            }
-    }
-}
-
-public static class OptionsExServiceCollectionExtensions
-{
-    public static IServiceCollection AddAndBindOptions<TOptions>(this IServiceCollection services) where TOptions : class, IOptionsEx =>
+    public static IServiceCollection AddAndBindOptions<TOptions>(this IServiceCollection services)
+        where TOptions : class, IBindOptions =>
         services.AddOptions<TOptions>(Options.Options.DefaultName)
-                .BindConfigurationEx(TOptions.ConfigSection)
+                .BindConfiguration(TOptions.ConfigSection)
+                .BindAdditionalProperties(TOptions.ConfigSection)
                 .ValidateOnStart()
                 .Services;
-}
 
-public static class ConfigureOptionsExServiceCollectionExtensions
-{
     public static IServiceCollection AddBindAndConfigureOptions<TOptions>(this IServiceCollection services)
-        where TOptions : class, IConfigureOptionsEx<TOptions> =>
+        where TOptions : class, IConfigureBindOptions<TOptions> =>
         services.AddOptions<TOptions>(Options.Options.DefaultName)
-                .BindConfigurationEx(TOptions.ConfigSection)
+                .BindConfiguration(TOptions.ConfigSection)
+                .BindAdditionalProperties(TOptions.ConfigSection)
                 .ValidateOnStart()
                 .Configure<IConfiguration>(TOptions.Configure)
                 .Services;

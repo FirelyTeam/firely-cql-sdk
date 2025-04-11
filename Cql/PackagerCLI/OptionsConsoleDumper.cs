@@ -13,9 +13,9 @@ namespace Hl7.Cql.Packager;
 internal class OptionsConsoleDumper(
     ILogger<OptionsConsoleDumper> logger,
     IConsole console,
-    IOptions<CqlOptions> cqlOptions,
+    IOptions<CqlBindOptions> cqlOptions,
     IOptions<ElmOptions> elmOptions,
-    IOptions<PackagingOptions> packagingOptions,
+    IOptions<PackagingBindOptions> packagingOptions,
     IOptions<LoggingOptions> loggingOptions)
 {
     public void DumpToConsole()

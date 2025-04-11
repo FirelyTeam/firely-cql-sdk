@@ -15,9 +15,9 @@ internal sealed class ElmToFhirProgram
 (
     ILoggerFactory loggerFactory,
     ILogger<ElmToFhirProgram> logger,
-    IOptions<CqlOptions> cqlOptions,
+    IOptions<CqlBindOptions> cqlOptions,
     IOptions<ElmOptions> elmOptions,
-    IOptions<PackagingOptions> packagingOptions,
+    IOptions<PackagingBindOptions> packagingOptions,
     IOptions<ElmToFhirOptions> elmToFhirOptions) : IProgram
 {
     public int Run()

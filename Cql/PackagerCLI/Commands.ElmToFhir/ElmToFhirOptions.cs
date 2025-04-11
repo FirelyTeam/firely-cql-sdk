@@ -1,9 +1,9 @@
 ﻿namespace Hl7.Cql.Packager.Commands.ElmToFhir;
 
-internal record ElmToFhirOptions : IOptionsEx
+internal record ElmToFhirOptions : IBindOptions
 {
     public const string ConfigSection = "ElmToFhir";
-    static string IOptionsEx.ConfigSection => ConfigSection;
+    static string IBindOptions.ConfigSection => ConfigSection;
 
     public required DirectoryInfo Cql { get; set; }
     public required DirectoryInfo Elm { get; set; }

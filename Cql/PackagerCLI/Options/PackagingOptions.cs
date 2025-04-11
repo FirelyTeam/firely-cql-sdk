@@ -8,20 +8,20 @@
 
 namespace Hl7.Cql.Packager.Options;
 
-internal record PackagingOptions : IConfigureOptionsEx<PackagingOptions>
+internal record PackagingBindOptions : IConfigureBindOptions<PackagingBindOptions>
 {
     public const string ConfigSection = "Packaging";
-    static string IOptionsEx.ConfigSection => ConfigSection;
+    static string IBindOptions.ConfigSection => ConfigSection;
 
     public Uri? CanonicalRootUrl { get; init; }
     public DateTime? OverrideDate { get; init; }
     public bool JsonPretty { get; init; }
 
-    public static void Configure(PackagingOptions opt, IConfiguration configuration)
+    public static void Configure(PackagingBindOptions opt, IConfiguration configuration)
     {
         // While DateTimes can be bound directly from IConfiguration, we convert to UTC
         var localTime = opt.OverrideDate?.ToLocalTime();
-        typeof(PackagingOptions)
+        typeof(PackagingBindOptions)
             .GetProperty(nameof(OverrideDate))!
             .SetValue(opt, localTime);
     }
