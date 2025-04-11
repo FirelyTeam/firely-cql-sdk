@@ -12,7 +12,7 @@ namespace Hl7.Cql.Packager.Commands.ElmToFhir;
 
 [UsedImplicitly]
 internal record ElmToFhirCommand(
-    DirectoryInfo Cql,
+    DirectoryInfo? Cql,
     DirectoryInfo Elm,
     DirectoryInfo? Cs,
     DirectoryInfo? Dll,
@@ -25,22 +25,20 @@ internal record ElmToFhirCommand(
         "elm";
 
     public const string Description =
-        "Converts ELM to C# and .NET assemblies, and package them together with CQL into FHIR resources.";
+        "Start from CQL and convert to one or more of the following outputs: ELM, C#, DLL/PDB, FHIR Resources";
 
     public static readonly Option[] Options =
     [
-        Option<DirectoryInfo>("--cql", "CQL input directory")
-            .IsRequired()
-            .ExistingOnly(),
+        Option<DirectoryInfo>("--cql", "CQL input directory. (REQUIRED wheh using --fhir)"),
         Option<DirectoryInfo>("--elm", "ELM input directory")
             .IsRequired()
             .ExistingOnly(),
         Option<DirectoryInfo>("--cs", "C# output directory"),
         Option<DirectoryInfo>("--dll", "DLL/PDB output directory"),
         Option<DirectoryInfo>("--fhir", "FHIR Resource output directory"),
-        Option<string>("--canonical-root-url", "The root canonical url output in FHIR library"),
-        Option<DateTimeOffset>("--override-utc-date-time", "Override date output in FHIR library"),
-        Option<bool>("--json-pretty", "Output JSON using multiline and indentation"),
+        Option<string>("--canonical-root-url", "The root canonical url output in FHIR library.  (used with --fhir)"),
+        Option<DateTimeOffset>("--override-utc-date-time", "Override date output in FHIR library.  (used with --fhir)"),
+        Option<bool>("--json-pretty", "Output JSON using multiline and indentation. (used with --fhir)"),
     ];
 
     public static Command CreateCommand() =>
@@ -50,11 +48,11 @@ internal record ElmToFhirCommand(
 
     public IEnumerable<(object? value, string[] sectionPath)> GetConfigMapping() =>
     [
-        (Cql, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.Cql)]),
-        (Elm, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.Elm)]),
-        (Cs, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.Cs)]),
-        (Dll, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.Dll)]),
-        (Fhir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.Fhir)]),
+        (Cql, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.CqlInDir)]),
+        (Elm, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.ElmInDir)]),
+        (Cs, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.CSharpOutDir)]),
+        (Dll, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.DllOutDir)]),
+        (Fhir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FhirOutDir)]),
         (CanonicalRootUrl, [FhirOptions.ConfigSection, nameof(FhirOptions.CanonicalRootUrl)]),
         (OverrideUtcDateTime, [FhirOptions.ConfigSection, nameof(FhirOptions.OverrideDate)]),
         (JsonPretty, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.JsonPretty)]),

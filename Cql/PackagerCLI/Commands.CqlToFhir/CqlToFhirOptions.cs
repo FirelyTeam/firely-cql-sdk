@@ -13,10 +13,10 @@ public class CqlToFhirOptions : IBindOptions
     public const string ConfigSection = "CqlToElm";
     static string IBindOptions.ConfigSection => ConfigSection;
 
-    public required DirectoryInfo Cql { get; set; }
-    public DirectoryInfo? Elm { get; set; }
-    public DirectoryInfo? Cs { get; set; }
-    public DirectoryInfo? Dll { get; set; }
-    public required DirectoryInfo? Fhir { get; set; }
+    public required DirectoryInfo CqlInDir { get; set; }
+    public DirectoryInfo? ElmOutDir { get; set; }
+    public DirectoryInfo? CSharpOutDir { get; set; }
+    public DirectoryInfo? DllOutDir { get; set; }
+    public required DirectoryInfo? FhirOutDir { get; set; }
     public bool JsonPretty { get; set; }
 }

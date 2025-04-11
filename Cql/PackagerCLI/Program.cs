@@ -14,7 +14,7 @@ namespace Hl7.Cql.Packager;
 public class Program
 {
     private const string Description =
-        "Utilities for converting CQL or ELM into other types, such as C#, .NET assemblies or FHIR Resources. " +
+        "Utilities for converting CQL or ELM into other artefacts, such as C#, .NET assemblies or FHIR Resources. " +
         "Pick from a command listed below, or type [command] --help for more information on it.";
 
     public static int Main(string[] args)
