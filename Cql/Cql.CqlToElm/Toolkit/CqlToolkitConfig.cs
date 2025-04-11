@@ -154,7 +154,7 @@ public record CqlToolkitConfig(
     /// <summary>
     /// <para>
     /// Sets the default URI of the ELM model that will be automatically included
-    /// as a <code>using</code> directive, using the local identifer <code>System</code>.
+    /// as a <code>using</code> directive, using the local identifier <code>System</code>.
     /// </para>
     /// <para>
     /// If <see langword="null"/>, no ELM model will be automatically included, and the CQL
@@ -172,7 +172,7 @@ public record CqlToolkitConfig(
     /// <summary>
     /// <para>
     /// Sets the default version of the ELM model that will be automatically included
-    /// as a <code>using</code> directive, using the local identifer <code>System</code>.
+    /// as a <code>using</code> directive, using the local identifier <code>System</code>.
     /// </para>
     /// <para>
     /// If <see langword="null"/>, no ELM model will be automatically included, and the CQL

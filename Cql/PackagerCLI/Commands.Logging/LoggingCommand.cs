@@ -10,7 +10,6 @@ namespace Hl7.Cql.Packager.Commands.Logging;
 
 [UsedImplicitly]
 public record LoggingCommand(
-    bool? LogDebug,
     bool? LogAppend,
     LogLevel? ConsoleLogLevel,
     LogLevel? FileLogLevel) {
@@ -18,12 +17,8 @@ public record LoggingCommand(
     public static readonly Option[] Options =
     [
         Option<bool>("--log-append", "Append to existing log file, instead of clearing"),
-        Option<LogLevel?>("--console-log-level", "The minimum log level to output to the console")
-        //    .HasDefaultValue(LogLevel.Information)
-        ,
-        Option<LogLevel>("--file-log-level", "The minimum log level to output to file")
-        //    .HasDefaultValue(LogLevel.Information)
-        ,
+        Option<LogLevel?>("--console-log-level", "The minimum log level to output to the console"),
+        Option<LogLevel>("--file-log-level", "The minimum log level to output to file"),
     ];
 
     public IEnumerable<(object? value, string[] sectionPath)> GetConfigMapping() =>
