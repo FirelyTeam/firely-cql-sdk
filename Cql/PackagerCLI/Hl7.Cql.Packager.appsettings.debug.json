@@ -1,5 +1,9 @@
 ﻿{
-    "Elm": {
-        "AssemblyCompilerDebugInformationFormat": "Embedded"
-    }
+  "Logging": {
+    "ConsoleLogLevel": "Information",
+    "FileLogLevel": "Debug"
+  },
+  "Elm": {
+    "AssemblyCompilerDebugInformationFormat": "Embedded"
+  }
 }

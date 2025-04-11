@@ -26,14 +26,7 @@ internal static class PackagerCLiLoggingBuilderExtensions
         var loggingOptions = configuration.GetSection(LoggingOptions.ConfigSection).Get<LoggingOptions>();
         loggingOptions ??= LoggingOptions.Default;
 
-        // If we debugging, keep the existing console logger
-        bool enableDebugLogging = loggingOptions.Debug;
-        LogLevel minLogLevel = LogLevel.Information;
-        if (enableDebugLogging)
-        {
-            logging.AddDebug();
-            minLogLevel = LogLevel.Trace;
-        }
+        LogLevel minLogLevel = (LogLevel)Math.Min((int)loggingOptions.FileLogLevel, (int?)loggingOptions.ConsoleLogLevel ?? int.MaxValue);
         logging.AddFilter(level => level >= minLogLevel);
 
         var logFile = "build.log";
@@ -51,7 +44,7 @@ internal static class PackagerCLiLoggingBuilderExtensions
                          formatProvider: CultureInfo.InvariantCulture)
                      .CreateLogger();
 
-        logging.AddProvider(new ColorConsoleLoggerProvider());
+        logging.AddProvider(new ColorConsoleLoggerProvider(minLogLevel: loggingOptions.ConsoleLogLevel));
         return logging.AddSerilog();
     }
 

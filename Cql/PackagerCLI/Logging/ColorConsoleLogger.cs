@@ -13,16 +13,18 @@ namespace Hl7.Cql.Packager.Logging;
 /// It will be moved to the PackagerCLI once the prototype is complete,
 /// and then it will move to the PackagerCLI and made internal.
 /// </remarks>
-public sealed partial class ColorConsoleLogger(string categoryName, ColorConsoleLoggerProvider provider) : ILogger
+public sealed partial class ColorConsoleLogger(
+    string categoryName,
+    ColorConsoleLoggerProvider provider) : ILogger
 {
     private readonly string _categoryName = categoryName.Length == 0 ? "" : $"{categoryName}: ";
-    private readonly ColorConsoleLoggerProvider _provider = provider;
 
     public IDisposable BeginScope<TState>(TState state)
         where TState : notnull =>
         throw new NotSupportedException();
 
-    public bool IsEnabled(LogLevel logLevel) => true;
+    public bool IsEnabled(LogLevel logLevel) =>
+        logLevel >= provider.MinLogLevel;
 
     public void Log<TState>(
         LogLevel logLevel,

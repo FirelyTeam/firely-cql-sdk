@@ -15,10 +15,14 @@ namespace Hl7.Cql.Packager.Logging;
 /// </remarks>
 public sealed class ColorConsoleLoggerProvider : ILoggerProvider
 {
+    public LogLevel? MinLogLevel { get; }
     private readonly Func<string, string> _updateCategoryName;
 
-    public ColorConsoleLoggerProvider(Func<string,string>? updateCategoryName = null)
+    public ColorConsoleLoggerProvider(
+        Func<string,string>? updateCategoryName = null,
+        LogLevel? minLogLevel = null)
     {
+        MinLogLevel = minLogLevel;
         _updateCategoryName = updateCategoryName ?? MakeShortCategory;
         Console.OutputEncoding = Encoding.Default;
     }

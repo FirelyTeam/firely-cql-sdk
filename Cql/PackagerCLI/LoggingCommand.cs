@@ -11,17 +11,24 @@ namespace Hl7.Cql.Packager;
 [UsedImplicitly]
 public record LoggingCommand(
     bool? LogDebug,
-    bool? LogAppend) {
+    bool? LogAppend,
+    LogLevel? ConsoleLogLevel,
+    LogLevel FileLogLevel) {
 
     public static readonly Option[] Options =
     [
-        Option<bool>("--log-debug", "Debug-level logging"),
         Option<bool>("--log-append", "Append to existing log file, instead of clearing"),
+        Option<LogLevel?>("--console-log-level", "The minimum log level to output to the console")
+            .HasDefaultValue(null),
+        Option<LogLevel>("--file-log-level", "The minimum log level to output to file")
+            .HasDefaultValue(LogLevel.Information),
     ];
 
     public IEnumerable<(object? value, string[] sectionPath)> GetConfigMapping() =>
     [
-        (LogDebug, [Packager.Options.LoggingOptions.ConfigSection, nameof(Packager.Options.LoggingOptions.Debug)]),
-        (LogAppend, [Packager.Options.LoggingOptions.ConfigSection, nameof(Packager.Options.LoggingOptions.Append)])
+        // (LogDebug, [Packager.Options.LoggingOptions.ConfigSection, nameof(Packager.Options.LoggingOptions.Debug)]),
+        (LogAppend, [Packager.Options.LoggingOptions.ConfigSection, nameof(Packager.Options.LoggingOptions.Append)]),
+        (ConsoleLogLevel, [Packager.Options.LoggingOptions.ConfigSection, nameof(Packager.Options.LoggingOptions.ConsoleLogLevel)]),
+        (FileLogLevel, [Packager.Options.LoggingOptions.ConfigSection, nameof(Packager.Options.LoggingOptions.FileLogLevel)]),
     ];
 }

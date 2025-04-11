@@ -34,7 +34,7 @@
     },
     "PackageCLI (Demo with Command Line Args override)": {
       "commandName": "Project",
-      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/Demo/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --json-pretty --override-utc-date-time \"2000-01-01T00:00:00.000Z\" --log-debug --log-append --canonical-root-url \"https://fire.ly/acme/\" "
+      "commandLineArgs": "elm --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --elm \"$(CqlSolutionDir)/LibrarySets/Demo/Elm\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" --json-pretty --override-utc-date-time \"2000-01-01T00:00:00.000Z\" --console-log-level \"Debug\" --log-append --canonical-root-url \"https://fire.ly/acme/\" "
     },
     "PackageCLI (CMS Measures)": {
       "commandName": "Project",

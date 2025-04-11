@@ -29,44 +29,46 @@ internal static class PackagerCliServiceCollectionExtensions
     {
         var buildConfiguration = typeof(Program).Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration?.ToLowerInvariant();
         var environmentName = buildConfiguration ?? "release";
-        var exeDir = Path.GetDirectoryName(typeof(Program).Assembly.Location)!;
+        var curDirName = Environment.CurrentDirectory;
+        var asmFileInfo = new FileInfo(Path.GetFullPath(typeof(Program).Assembly.Location));
+        var asmDirName = asmFileInfo.DirectoryName!;
+        var asmFileNameNoExt = asmFileInfo.Name[..^4]; // Trim ".dll"
 
         config.AddEnvironmentVariables("CQLPACKAGER");
 
-        config.AddJsonFile(Path.Combine(exeDir, "Hl7.Cql.Packager.appsettings.json"), optional: true, reloadOnChange: false);
-
-        if (exeDir != Environment.CurrentDirectory)
-            config.AddJsonFile(Path.Combine(Environment.CurrentDirectory, "Hl7.Cql.Packager.appsettings.json"), optional: true, reloadOnChange: false);
-
-        config.AddJsonFile(Path.Combine(exeDir, $"Hl7.Cql.Packager.appsettings.{environmentName}.json"), optional: true, reloadOnChange: false);
-
-        if (exeDir != Environment.CurrentDirectory)
-            config.AddJsonFile(Path.Combine(Environment.CurrentDirectory, $"Hl7.Cql.Packager.appsettings.{environmentName}.json"), optional: true, reloadOnChange: false);
+        IEnumerable<string> files =
+        [
+            Path.Combine(asmDirName, $"{asmFileNameNoExt}.appsettings.json"),
+            Path.Combine(curDirName, $"{asmFileNameNoExt}.appsettings.json"),
+            Path.Combine(asmDirName, $"{asmFileNameNoExt}.appsettings.{environmentName}.json"),
+            Path.Combine(curDirName, $"{asmFileNameNoExt}.appsettings.{environmentName}.json")
+        ];
+        files = files.Distinct();
+        foreach (var file in files)
+            config.AddJsonFile(file, optional: true, reloadOnChange: false);
 
         // Add additionalData (which can be from the command line)
         if (additionalConfiguration
             ?.Invoke()
             .Where(ad => ad.value is not null)
-            .Select(ad => KeyValue(
-                        ad.sectionPath,
-                        ad.value switch
-                        {
-                            bool b            => b ? "true" : "false",
-                            string s          => s,
-                            DirectoryInfo di  => di.FullName,
-                            DateTimeOffset dt => dt.ToString("u", CultureInfo.InvariantCulture),
-                            object o          => throw new NotSupportedException($"Unsupported type: {o.GetType()}"),
-                            _                 => throw new UnreachableException()
-                        }))
+            .Select(KeyValuePair!)
             .ToArray() is { } additionalData)
-            config.Sources.Add(new MemoryConfigurationSource()
-            {
-                InitialData = additionalData
-            });
-
-        static KeyValuePair<string, string?> KeyValue(string[] sectionPath, string value) =>
-            new(string.Join(':', sectionPath), value);
+            config.Sources.Add(new MemoryConfigurationSource { InitialData = additionalData });
 
         return config;
+
+        KeyValuePair<string, string?> KeyValuePair((object value, string[] sectionPath) ad)
+        {
+            string value = ad.value switch
+            {
+                bool b            => b ? "true" : "false",
+                string s          => s,
+                DirectoryInfo di  => di.FullName,
+                DateTimeOffset dt => dt.ToString("u", CultureInfo.InvariantCulture),
+                Enum e            => e.ToString(),
+                { } o             => throw new NotSupportedException($"Unsupported type: {o.GetType()}"),
+            };
+            return new(string.Join(':', ad.sectionPath), value);
+        }
     }
 }

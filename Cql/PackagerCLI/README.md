@@ -29,36 +29,18 @@ dotnet tool install Hl7.Cql.Packager --global --prerelease
 
 ## Usage
 
-Run the tool with the following command:
+Get help for the command line tool by running any of the following commands:
 
 ```shell
-cql-package --elm <directory> --cql <directory> [options]
+cql-package --help
+cql-package cql --help
+cql-package elm --help
 ```
-
-## Configurtion
-
-### CQL to ELM
-
-
-
-### Mandatory Parameters
-
-- `--elm <directory>`: Specifies the root directory for the ELM files. This parameter is required.
-- `--cql <directory>`: Specifies the root directory for the CQL files. This parameter is required.
-
-### Optional Parameters
-
-- `[--fhir <directory>]`: Specifies the output directory for the FHIR resources
-- `[--cs <directory>]`: Specifies the output directory for generated C# code
-- `[--dll <directory>]`: Specifies the DLL output directory
-- `[--log-debug <true|false>]`: Enable debug logging or not (default)
-- `[--canonical-root-url <url>]`: Specifies the root url used for the resource canonical. If omitted a '#' will be used.
-- `[--override-utc-date-time <ISO8601-date-time>]`: Defines the UTC date to override in the generated FHIR resource libraries (example: 2000-12-31T23:59:59.99Z). If omitted the current date time will be used.
 
 ### Example
 
 ```
-cql-package --elm Elm\json --cql Cql\input --fhir c:\packager-output-fhir --cs c:\packager-output-cs
+cql-package elm --elm Elm\json --cql Cql\input --fhir c:\packager-output-fhir --cs c:\packager-output-cs
 ```
 
 This command packages the ELM and CQL files from the specified directories and writes the generated FHIR Resources and C# code to the respective directories.

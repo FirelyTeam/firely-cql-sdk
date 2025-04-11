@@ -1,6 +1,10 @@
 {
+  "Logging": {
+    "ConsoleLogLevel": "Information",
+    "FileLogLevel": "Information"
+  },
   "Cql": {
-    "Models": [ "ElmR1", "Fhir401" ],
+    "Models": [ "ElmR1", "Fhir401" ]
   },
   "Elm": {
     "SkipFiles": [
@@ -30,6 +34,6 @@
   "Packaging": {
     "CanonicalRootUrl": "https://fire.ly/fhir/",
     "OverrideDate": "1970-01-01T00:00:00.000Z",
-    "JsonPretty": true,
+    "JsonPretty": true
   }
 }

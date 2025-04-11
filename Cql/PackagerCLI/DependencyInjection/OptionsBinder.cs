@@ -29,7 +29,7 @@ public static class OptionsBinder
     /// that is not supported out of the box by the Options pattern.
     /// e.g. DirectoryInfo properties.
     /// </summary>
-    private static OptionsBuilder<TOptions> BindAdditionalProperties<
+    private static OptionsBuilder<TOptions> BindConfigurationSpecialPropertyTypes<
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
         TOptions>(
         this OptionsBuilder<TOptions> optionsBuilder,
@@ -78,7 +78,7 @@ public static class OptionsBinder
         where TOptions : class, IBindOptions =>
         services.AddOptions<TOptions>(Options.Options.DefaultName)
                 .BindConfiguration(TOptions.ConfigSection)
-                .BindAdditionalProperties(TOptions.ConfigSection)
+                .BindConfigurationSpecialPropertyTypes(TOptions.ConfigSection)
                 .ValidateOnStart()
                 .Services;
 

@@ -50,6 +50,12 @@ internal static class Extensions
         return option;
     }
 
+    public static Option<T> HasDefaultValue<T>(this Option<T> option, T value)
+    {
+        option.SetDefaultValue(value);
+        return option;
+    }
+
     public static TCommand AddOptions<TCommand>(
         this TCommand command,
         params Option[] options)
