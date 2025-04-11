@@ -1,5 +1,6 @@
 ﻿namespace Hl7.Cql.Packager.Commands.CqlToElm;
 
+[UsedImplicitly]
 public record CqlToElmCommand(
     DirectoryInfo Cql,
     DirectoryInfo Elm,

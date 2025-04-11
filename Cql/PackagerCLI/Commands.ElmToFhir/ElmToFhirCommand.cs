@@ -2,6 +2,7 @@
 
 namespace Hl7.Cql.Packager.Commands.ElmToFhir;
 
+[UsedImplicitly]
 internal record ElmToFhirCommand(
     DirectoryInfo Cql,
     DirectoryInfo Elm,

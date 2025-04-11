@@ -4,6 +4,14 @@
       "commandName": "Project",
       "commandLineArgs": "--help"
     },
+    "PackageCLI (Help cql-to-elm)": {
+      "commandName": "Project",
+      "commandLineArgs": "cql-to-elm --help"
+    },
+    "PackageCLI (Help elm-to-fhir)": {
+      "commandName": "Project",
+      "commandLineArgs": "elm-to-fhir --help"
+    },
     "PackageCLI (Version)": {
       "commandName": "Project",
       "commandLineArgs": "--version"
