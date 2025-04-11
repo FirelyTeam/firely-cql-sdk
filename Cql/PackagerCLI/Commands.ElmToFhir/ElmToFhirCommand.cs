@@ -41,7 +41,6 @@ internal record ElmToFhirCommand(
         Option<string>("--canonical-root-url", "The root canonical url output in FHIR library"),
         Option<DateTimeOffset>("--override-utc-date-time", "Override date output in FHIR library"),
         Option<bool>("--json-pretty", "Output JSON using multiline and indentation"),
-        Option<string>("--cs-typeformat", "Obsolete - Not effect"),
     ];
 
     public static Command CreateCommand() =>
