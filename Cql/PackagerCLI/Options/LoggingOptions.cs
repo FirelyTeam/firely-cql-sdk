@@ -12,9 +12,7 @@ internal record LoggingOptions : IBindOptions
 {
     public const string ConfigSection = "Logging";
     static string IBindOptions.ConfigSection => ConfigSection;
-
     public static LoggingOptions Default { get; } = new();
-
     public bool Debug { get; init; }
     public bool Append { get; init; }
 }

@@ -8,19 +8,11 @@
 
 namespace Hl7.Cql.Packager.Options;
 
-public record FhirOptions : IConfigureBindOptions<FhirOptions>
+public record FhirOptions : IBindOptions
 {
     public const string ConfigSection = "Packaging";
     static string IBindOptions.ConfigSection => ConfigSection;
 
     public Uri? CanonicalRootUrl { get; init; }
     public DateTime? OverrideDate { get; init; }
-    public static void Configure(FhirOptions opt, IConfiguration configuration)
-    {
-        // While DateTimes can be bound directly from IConfiguration, we convert to UTC
-        var localTime = opt.OverrideDate?.ToLocalTime();
-        typeof(FhirOptions)
-            .GetProperty(nameof(OverrideDate))!
-            .SetValue(opt, localTime);
-    }
 }
