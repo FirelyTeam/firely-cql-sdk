@@ -1,0 +1,13 @@
+﻿namespace Hl7.Cql.Packager.Commands.ElmToFhir;
+
+internal record ElmToFhirOptions : IOptionsEx
+{
+    public const string ConfigSection = "ElmToFhir";
+    static string IOptionsEx.ConfigSection => ConfigSection;
+
+    public required DirectoryInfo Cql { get; set; }
+    public required DirectoryInfo Elm { get; set; }
+    public DirectoryInfo? Cs { get; set; }
+    public DirectoryInfo? Dll { get; set; }
+    public required DirectoryInfo Fhir { get; set; }
+}

@@ -20,7 +20,7 @@ public sealed class ColorConsoleLoggerProvider : ILoggerProvider
     public ColorConsoleLoggerProvider(Func<string,string>? updateCategoryName = null)
     {
         _updateCategoryName = updateCategoryName ?? MakeShortCategory;
-        Console.OutputEncoding = System.Text.Encoding.Default;
+        Console.OutputEncoding = Encoding.Default;
     }
 
     private static string MakeShortCategory(string cat)

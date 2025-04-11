@@ -1,4 +1,12 @@
-﻿namespace Hl7.Cql.Packager;
+﻿/*
+ * Copyright(c) 2024, Firely, NCQA and contributors
+ * See the file CONTRIBUTORS for details.
+ *
+ * This file is licensed under the BSD 3-Clause license
+ * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
+ */
+
+namespace Hl7.Cql.Packager;
 
 internal static class Extensions
 {
@@ -42,12 +50,6 @@ internal static class Extensions
         return option;
     }
 
-    public static Option<T> IsGlobalOption<T>(this Option<T> option, ref Action<Command> actions)
-    {
-        actions += command => command.AddGlobalOption(option);
-        return option;
-    }
-
     public static TCommand AddOptions<TCommand>(
         this TCommand command,
         params Option[] options)
@@ -70,12 +72,12 @@ internal static class Extensions
 
     public static TCommand SetHandler<TCommand>(
         this TCommand command,
+        Type type,
         string methodName)
         where TCommand : Command
     {
-        var methodInfo = typeof(Program).GetMethod(methodName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)
-                         ?? throw new MissingMethodException(typeof(Program).AssemblyQualifiedName, methodName);
-
+        var methodInfo = type.GetMethod(methodName, BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+        methodInfo = methodInfo ?? throw new MissingMethodException(typeof(Program).AssemblyQualifiedName, methodName);
         var commandHandler = CommandHandler.Create(methodInfo);
         command.Handler = commandHandler;
         return command;

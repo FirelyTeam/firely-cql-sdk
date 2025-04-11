@@ -1,5 +1,5 @@
 ﻿/*
- *Copyright(c) 2024, NCQA and contributors
+ *Copyright(c) 2024, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
@@ -19,9 +19,7 @@ internal static class PackagerCLiLoggingBuilderExtensions
 {
     public static ILoggingBuilder AddPackagerCLiLogging(
         this ILoggingBuilder logging,
-        IConfiguration configuration,
-        bool? logDebug = null,
-        bool? logAppend = null)
+        IConfiguration configuration)
     {
         logging.ClearProviders();
 
@@ -29,14 +27,17 @@ internal static class PackagerCLiLoggingBuilderExtensions
         loggingOptions ??= LoggingOptions.Default;
 
         // If we debugging, keep the existing console logger
-        bool enableDebugLogging = logDebug ?? loggingOptions.Debug;
-        if (enableDebugLogging) logging.AddDebug();
-        var minLogLevel = enableDebugLogging ? LogLevel.Trace : LogLevel.Information;
+        bool enableDebugLogging = loggingOptions.Debug;
+        LogLevel minLogLevel = LogLevel.Information;
+        if (enableDebugLogging)
+        {
+            logging.AddDebug();
+            minLogLevel = LogLevel.Trace;
+        }
         logging.AddFilter(level => level >= minLogLevel);
 
-        bool shouldClearLog = !(logAppend ?? loggingOptions.Append);
         var logFile = "build.log";
-        if (shouldClearLog)
+        if (!loggingOptions.Append)
             File.WriteAllText(logFile, ""); // Create or clear the log file
         else
             File.OpenText(logFile).Close(); // Touch the file

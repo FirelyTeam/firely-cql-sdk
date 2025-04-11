@@ -134,9 +134,6 @@ public record CqlToolkitConfig(
     bool ValidateLiterals = true
     )
 {
-    /// <nodoc />
-    public CqlToolkitConfig() : this(Models:null) { } // We need a public parameterless constructor for DI
-
     /// <summary>
     /// The default configuration for the CQL toolkit.
     /// </summary>

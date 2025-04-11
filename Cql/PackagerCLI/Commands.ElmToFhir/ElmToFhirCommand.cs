@@ -1,0 +1,54 @@
+﻿using Hl7.Cql.Packager.Options;
+
+namespace Hl7.Cql.Packager.Commands.ElmToFhir;
+
+internal record ElmToFhirCommand(
+    DirectoryInfo Cql,
+    DirectoryInfo Elm,
+    DirectoryInfo? Cs,
+    DirectoryInfo? Dll,
+    DirectoryInfo Fhir,
+    DateTimeOffset? OverrideUtcDateTime,
+    string? CanonicalRootUrl,
+    bool? JsonPretty)
+{
+    public const string Name =
+        "elm-to-fhir";
+
+    public const string Description =
+        "Converts ELM to C# and .NET assemblies, and package them together with CQL into FHIR resources.";
+
+    public static readonly Option[] Options =
+    [
+        Option<DirectoryInfo>("--cql", "CQL input directory")
+            .IsRequired()
+            .ExistingOnly(),
+        Option<DirectoryInfo>("--elm", "ELM input directory")
+            .IsRequired()
+            .ExistingOnly(),
+        Option<DirectoryInfo>("--cs", "C# output directory"),
+        Option<DirectoryInfo>("--dll", "DLL/PDB output directory"),
+        Option<DirectoryInfo>("--fhir", "FHIR Resource output directory")
+            .IsRequired(),
+        Option<string>("--canonical-root-url", "The root canonical url output in FHIR library"),
+        Option<DateTimeOffset>("--override-utc-date-time", "Override date output in FHIR library"),
+        Option<bool>("--json-pretty", "Output JSON using multiline and indentation"),
+    ];
+
+    public static Command CreateCommand() =>
+        new Command(Name, Description)
+            .AddOptions(Options)
+            .SetHandler(typeof(ElmToFhirProgram), nameof(ElmToFhirProgram.CommandHandler));
+
+    public IEnumerable<(object? value, string[] sectionPath)> GetConfigMapping() =>
+    [
+        (Cql, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.Cql)]),
+        (Elm, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.Elm)]),
+        (Cs, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.Cs)]),
+        (Dll, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.Dll)]),
+        (Fhir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.Fhir)]),
+        (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
+        (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
+        (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),
+    ];
+}

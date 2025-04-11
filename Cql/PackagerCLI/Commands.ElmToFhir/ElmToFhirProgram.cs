@@ -9,51 +9,7 @@ using Hl7.Cql.Packaging.Toolkit.Extensions;
 using Hl7.Cql.Runtime.IO;
 using Hl7.Cql.Toolkit;
 
-namespace Hl7.Cql.Packager;
-
-partial class Program
-{
-    private static readonly Option[] ElmToFhirOptions = [
-        Option<DirectoryInfo>("--elm", "ELM input directory")
-            .IsRequired()
-            .ExistingOnly(),
-
-        Option<DirectoryInfo>("--cql", "CQL input directory")
-            .IsRequired()
-            .ExistingOnly(),
-
-        Option<DirectoryInfo>("--cs", "C# output directory"),
-
-        Option<DirectoryInfo>("--dll", "DLL/PDB output directory"),
-
-        Option<DirectoryInfo>("--fhir", "FHIR Resource output directory")
-            .IsRequired(),
-
-        Option<bool>("--json-pretty", "Output JSON using multiline and indentation"),
-
-        Option<string>("--canonical-root-url", "The root canonical url output in FHIR library"),
-
-        Option<DateTimeOffset>("--override-utc-date-time", "Override date output in FHIR library"),
-    ];
-
-    private const string ElmToFhirDescription =
-        "Convert ELM to C# and .NET assemblies, and package them together with CQL into FHIR resources.";
-
-    private static Command BuildElmToFhirCommand() =>
-        new Command("elm-to-fhir", ElmToFhirDescription)
-            .AddOptions(ElmToFhirOptions)
-            .SetHandler(nameof(RunElmToFhir));
-
-    private static int RunElmToFhir(
-        IConsole console,
-        LoggingCommandArgs loggingCommandArgs,
-        ElmToFhirCommandArgs elmToFhirCommandArgs) =>
-        RunProgram<ElmToFhirProgram>(
-            console,
-            loggingCommandArgs,
-            elmToFhirCommandArgs.MapToConfiguration,
-            (_, services) => services.AddSingleton(elmToFhirCommandArgs));
-}
+namespace Hl7.Cql.Packager.Commands.ElmToFhir;
 
 internal sealed class ElmToFhirProgram(
     ILoggerFactory loggerFactory,
@@ -61,33 +17,34 @@ internal sealed class ElmToFhirProgram(
     IOptions<CqlOptions> cqlOptions,
     IOptions<ElmOptions> elmOptions,
     IOptions<PackagingOptions> packagingOptions,
-    ElmToFhirCommandArgs args) : IProgram
+    IOptions<ElmToFhirOptions> elmToFhirOptions) : IProgram
 {
     public int Run()
     {
+        var opt = elmToFhirOptions.Value;
         var cqlOpt = cqlOptions.Value;
         var elmOpt = elmOptions.Value;
         var packOpt = packagingOptions.Value;
 
         CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt)
                                 .SetIgnoreEnumerationExceptions()
-                                .AddCqlLibrariesFromDirectory(args.Cql);
+                                .AddCqlLibrariesFromDirectory(opt.Cql);
 
         if (cqlToolkit.Conversions.Count == 0)
         {
-            logger.LogInformation($"Exiting. No CQL libraries found in directory {args.Cql}.");
-            return 1;
+            logger.LogInformation($"Exiting. No CQL libraries found in directory {opt.Cql}.");
+            return ExitCode.NoCqlLibsInDir;
         }
 
         ElmToolkit elmToolkit = new ElmToolkit(loggerFactory, elmOpt)
                                 .SetIgnoreEnumerationExceptions()
                                 .AddElmFilesFromDirectory(
-                                    args.Elm,
+                                    opt.Elm,
                                     filePredicate: file => !elmOpt.SkipFiles.Contains(file.Name));
         if (elmToolkit.Conversions.Count == 0)
         {
-            logger.LogInformation($"Exiting. No ELM libraries found in directory {args.Elm}.");
-            return 2;
+            logger.LogInformation($"Exiting. No ELM libraries found in directory {opt.Elm}.");
+            return ExitCode.NoElmLibsInDir;
         }
 
         var elmToolkitResultRecords = elmToolkit
@@ -97,26 +54,26 @@ internal sealed class ElmToFhirProgram(
         if (elmToolkitResultRecords.Count == 0)
         {
             logger.LogInformation("Exiting. No ELM libraries compiled.");
-            return 3;
+            return ExitCode.NoElmLibsCompiled;
         }
 
-        if (args.Cs is not null)
+        if (opt.Cs is not null)
             elmToolkit
                 .SaveCSharpFilesToDirectory(
-                    args.Cs,
+                    opt.Cs,
                     DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
 
-        if (args.Dll is not null)
+        if (opt.Dll is not null)
             elmToolkit
                 .ConvertElmToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
-                .SaveAssemblyBinariesToDirectory(args.Dll, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"));
+                .SaveAssemblyBinariesToDirectory(opt.Dll, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"));
 
         var packagingToolkit = new PackagingToolkit(loggerFactory)
             .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit);
         if (packagingToolkit.Conversions.Count == 0)
         {
             logger.LogInformation("Exiting. No CQL or ELM libraries matched with each other for packaging.");
-            return 4;
+            return ExitCode.CantPackageNoCqlElmMatches;
         }
 
         Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null;
@@ -131,10 +88,21 @@ internal sealed class ElmToFhirProgram(
             .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
             .ConvertToFhirResources(packOpt.CanonicalRootUrl, packOpt.OverrideDate)
             .SaveFhirResourcesToDirectory(
-                args.Fhir,
+                opt.Fhir,
                 DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"),
                 configureJsonSerializerOptions);
 
-        return 0;
+        return ExitCode.Normal;
     }
+
+    internal static int CommandHandler(
+        IConsole console,
+        LoggingCommand loggingCommand,
+        ElmToFhirCommand elmToFhirCommand) =>
+        RunProgram<ElmToFhirProgram>(
+            console,
+            loggingCommand,
+            elmToFhirCommand.GetConfigMapping,
+            (_, services) =>
+                services.AddAndBindOptions<ElmToFhirOptions>());
 }

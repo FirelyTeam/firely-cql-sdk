@@ -1,0 +1,40 @@
+﻿namespace Hl7.Cql.Packager;
+
+internal static class GlobalMethods
+{
+    public static Option<T> Option<T>(string name, string description) => new(name, description);
+
+    private static IHostBuilder CreateHostBuilder(
+        IConsole console,
+        Func<IEnumerable<(object? value, string[] sectionPath)>>? additionalConfiguration = null) =>
+        Host.CreateDefaultBuilder()
+            .ConfigureAppConfiguration(
+                (context, config) =>
+                    config.AddPackagerCliAppSettings(additionalConfiguration))
+            .ConfigureLogging(
+                (context, logging) =>
+                    logging.AddPackagerCLiLogging(context.Configuration))
+            .ConfigureServices(
+                (context, services) =>
+                    services
+                        .AddPackagerCliOptions()
+                        .AddSingleton<OptionsConsoleDumper>()
+                        .AddSingleton(console))
+            .UseConsoleLifetime();
+
+    internal static int RunProgram<TProgram>(
+        IConsole console,
+        LoggingCommand loggingCommand,
+        Func<IEnumerable<(object? value, string[] sectionPath)>>? additionalConfiguration = null,
+        Action<HostBuilderContext, IServiceCollection>? configureAdditionalServices = null)
+        where TProgram : class, IProgram =>
+        CreateHostBuilder(console, () =>
+            {
+                var loggingConfig = loggingCommand.GetConfigMapping();
+                if (additionalConfiguration?.Invoke() is {} additionalConfig)
+                    loggingConfig = loggingConfig.Concat(additionalConfig);
+                return loggingConfig;
+            })
+          .ConfigureServices(configureAdditionalServices ?? delegate { })
+          .RunProgram<TProgram>();
+}
