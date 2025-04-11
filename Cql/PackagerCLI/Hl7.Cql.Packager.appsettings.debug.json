@@ -1,9 +1,9 @@
 ﻿{
   "Logging": {
-    "ConsoleLogLevel": "None",
+    "ConsoleLogLevel": "Information",
     "FileLogLevel": "Debug"
   },
   "Elm": {
-    "AssemblyCompilerDebugInformationFormat": "Embedded"
+    "AssemblyCompilerDebugInformationFormat": "PortablePdb"
   }
 }
