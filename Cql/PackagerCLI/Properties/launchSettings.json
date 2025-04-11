@@ -16,6 +16,10 @@
       "commandName": "Project",
       "commandLineArgs": "--version"
     },
+    "PackageCLI (No commands)": {
+      "commandName": "Project",
+      "commandLineArgs": ""
+    },
     "PackageCLI (Demo CQL->FHIR)": {
       "commandName": "Project",
       "commandLineArgs": "cql --cql \"$(CqlSolutionDir)/LibrarySets/Demo/Cql\" --fhir \"$(CqlSolutionDir)/LibrarySets/Demo/Resources\" --dll \"$(CqlSolutionDir)/LibrarySets/Demo/Assemblies\" --cs \"$(CqlSolutionDir)/Demo/Measures.Demo/CSharp\" "

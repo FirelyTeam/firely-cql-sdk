@@ -13,13 +13,18 @@ namespace Hl7.Cql.Packager;
 
 public class Program
 {
+    private const string Description =
+        "Utilities for converting CQL or ELM into other types, such as C#, .NET assemblies or FHIR Resources. " +
+        "Pick from a command listed below, or type [command] --help for more information on it.";
+
     public static int Main(string[] args)
     {
         var rootCommand =
-            new RootCommand(ElmToFhirCommand.Description)
-                .AddOptions(ElmToFhirCommand.Options)
+            new RootCommand(Description)
+                //.AddOptions(ElmToFhirCommand.Options)
                 .AddGlobalOptions(LoggingCommand.Options)
-                .SetHandler(typeof(ElmToFhirProgram), nameof(ElmToFhirProgram.CommandHandler));
+                //.SetHandler(typeof(ElmToFhirProgram), nameof(ElmToFhirProgram.CommandHandler))
+            ;
 
         rootCommand.AddCommand(ElmToFhirCommand.CreateCommand());
         rootCommand.AddCommand(CqlToFhirCommand.CreateCommand());
