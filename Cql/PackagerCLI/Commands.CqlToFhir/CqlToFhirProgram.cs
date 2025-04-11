@@ -41,100 +41,123 @@ public class CqlToFhirProgram
 
     public int Run()
     {
-        var opt = cqlToElmOptions.Value;
-        var cqlOpt = cqlOptions.Value;
-        var elmOpt = elmOptions.Value;
-        var fhirOpt = fhirOptions.Value;
-
-        switch (opt.ElmOutDir, opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir)
+        StringBuilder sbSummary = new StringBuilder();
+        try
         {
-            case (null, null, null, null):
-                logger.LogInformation("Exiting. No output directories specified.");
-                return ExitCode.NoOutputDirs;
-        }
+            var opt = cqlToElmOptions.Value;
+            var cqlOpt = cqlOptions.Value;
+            var elmOpt = elmOptions.Value;
+            var fhirOpt = fhirOptions.Value;
 
-        CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt)
-                                .SetIgnoreEnumerationExceptions()
-                                .AddCqlLibrariesFromDirectory(opt.CqlInDir);
-
-        if (cqlToolkit.Conversions.Count == 0)
-        {
-            logger.LogInformation($"Exiting. No CQL libraries found in directory {opt.CqlInDir}.");
-            return ExitCode.NoCqlLibsInDir;
-        }
-
-        var cqlToolkitResultRecords =
-            cqlToolkit.ConvertCqlToElm()
-                      .GetCqlToolkitResults()
-                      .ToList();
-
-        if (cqlToolkitResultRecords.Count == 0)
-        {
-            logger.LogInformation("Exiting. No CQL libraries converted.");
-            return ExitCode.NoElmLibsCompiled;
-        }
-
-        if (opt.ElmOutDir is not null)
-            cqlToolkit.SaveElmFilesToDirectory(
-                opt.ElmOutDir,
-                writeIndented: opt.JsonPretty,
-                DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
-
-        ElmToolkit elmToolkit = cqlToolkit.CreateElmToolkit(elmOpt);
-        if (elmToolkit.Conversions.Count == 0)
-        {
-            logger.LogInformation($"Exiting. No ELM libraries.");
-            return ExitCode.NoElmLibsInDir;
-        }
-
-        var elmToolkitResultRecords = elmToolkit
-                                      .ConvertElmToAssemblies()
-                                      .GetElmToAssemblyResults()
-                                      .ToList();
-        if (elmToolkitResultRecords.Count == 0)
-        {
-            logger.LogInformation("Exiting. No ELM libraries compiled.");
-            return ExitCode.NoElmLibsCompiled;
-        }
-
-        if (opt.CSharpOutDir is not null)
-            elmToolkit
-                .SaveCSharpFilesToDirectory(
-                    opt.CSharpOutDir,
-                    DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
-
-        if (opt.DllOutDir is not null)
-            elmToolkit
-                .ConvertElmToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
-                .SaveAssemblyBinariesToDirectory(opt.DllOutDir, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"));
-
-        if (opt.FhirOutDir is not null)
-        {
-            var packagingToolkit = new PackagingToolkit(loggerFactory)
-                .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit);
-            if (packagingToolkit.Conversions.Count == 0)
+            switch (opt.ElmOutDir, opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir)
             {
-                logger.LogInformation("Exiting. No CQL or ELM libraries matched with each other for packaging.");
-                return ExitCode.CantPackageNoCqlElmMatches;
+                case (null, null, null, null):
+                    logger.LogInformation("Exiting. No output directories specified.");
+                    return ExitCode.NoOutputDirs;
             }
 
-            Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null;
-            if (opt.JsonPretty)
-                configureJsonSerializerOptions = options =>
+            CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlOpt)
+                                    .SetIgnoreEnumerationExceptions()
+                                    .AddCqlLibrariesFromDirectory(opt.CqlInDir);
+
+            if (cqlToolkit.Conversions.Count == 0)
+            {
+                logger.LogInformation($"Exiting. No CQL libraries found in directory {opt.CqlInDir}.");
+                return ExitCode.NoCqlLibsInDir;
+            }
+
+            if (cqlToolkit.Conversions.Count == 0)
+            {
+                logger.LogInformation("Exiting. No CQL libraries converted.");
+                return ExitCode.NoElmLibsCompiled;
+            }
+            sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.Conversions.Count} CQL libraries from directory {opt.CqlInDir}."));
+
+            if (opt.ElmOutDir is not null)
+            {
+                cqlToolkit.SaveElmFilesToDirectory(
+                    opt.ElmOutDir,
+                    writeIndented: opt.JsonPretty,
+                    DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
+                sbSummary.AppendLine(Invariant($"Saved {cqlToolkit.GetCqlToolkitResults().Count()} ELM files to directory {opt.ElmOutDir}."));
+            }
+
+            ElmToolkit elmToolkit = cqlToolkit.CreateElmToolkit(elmOpt);
+            if (elmToolkit.Conversions.Count == 0)
+            {
+                logger.LogInformation($"Exiting. No ELM libraries.");
+                return ExitCode.NoElmLibsInDir;
+            }
+
+            var elmToolkitResultRecords = elmToolkit
+                                          .ConvertElmToAssemblies()
+                                          .GetElmToAssemblyResults()
+                                          .ToList();
+            if (elmToolkitResultRecords.Count == 0)
+            {
+                logger.LogInformation("Exiting. No ELM libraries compiled.");
+                return ExitCode.NoElmLibsCompiled;
+            }
+
+            if (opt.CSharpOutDir is not null)
+            {
+                elmToolkit
+                    .SaveCSharpFilesToDirectory(
+                        opt.CSharpOutDir,
+                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.g.cs"));
+                sbSummary.AppendLine(Invariant($"Saved {elmToolkitResultRecords.Count} C# files to directory {opt.CSharpOutDir}."));
+            }
+
+            if (opt.DllOutDir is not null)
+            {
+                elmToolkit
+                    .ConvertElmToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
+                    .SaveAssemblyBinariesToDirectory(opt.DllOutDir, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"));
+                sbSummary.AppendLine(Invariant($"Saved {elmToolkitResultRecords.Count} DLLs files to directory {opt.DllOutDir}."));
+            }
+
+            if (opt.FhirOutDir is not null)
+            {
+                var packagingToolkit = new PackagingToolkit(loggerFactory)
+                    .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit);
+                if (packagingToolkit.Conversions.Count == 0)
                 {
-                    options.WriteIndented = true;
-                    return options;
-                };
+                    logger.LogInformation("Exiting. No CQL or ELM libraries matched with each other for packaging.");
+                    return ExitCode.CantPackageNoCqlElmMatches;
+                }
 
-            packagingToolkit
-                .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
-                .ConvertToFhirResources(fhirOpt.CanonicalRootUrl, fhirOpt.OverrideDate)
-                .SaveFhirResourcesToDirectory(
-                    opt.FhirOutDir,
-                    DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"),
-                    configureJsonSerializerOptions);
+                Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null;
+                if (opt.JsonPretty)
+                    configureJsonSerializerOptions = options =>
+                    {
+                        options.WriteIndented = true;
+                        return options;
+                    };
+
+                packagingToolkit
+                    .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
+                    .ConvertToFhirResources(fhirOpt.CanonicalRootUrl, fhirOpt.OverrideDate)
+                    .SaveFhirResourcesToDirectory(
+                        opt.FhirOutDir,
+                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"),
+                        configureJsonSerializerOptions);
+
+                var packagingResults = packagingToolkit.GetPackagingResults().ToList();
+                var librariesCount = packagingResults.Count;
+                var measuresCount = packagingResults.Count(r => r.FhirMeasure is { });
+                sbSummary.AppendLine(Invariant($"Saved {librariesCount} FHIR libraries and {measuresCount} measures to directory {opt.FhirOutDir}."));
+            }
+
+            return ExitCode.Normal;
         }
-
-        return ExitCode.Normal;
+        finally
+        {
+            if (sbSummary.Length > 0)
+            {
+                sbSummary.Insert(0, Environment.NewLine);
+                sbSummary.Insert(0, "Summary:");
+                logger.LogInformation(sbSummary.ToString());
+            }
+        }
     }
 }
