@@ -29,7 +29,8 @@ internal static class PackagerCliServiceCollectionExtensions
         Func<IEnumerable<(object? value, string[] sectionPath)>>? additionalConfiguration = null)
     {
         var buildConfiguration = typeof(Program).Assembly.GetCustomAttribute<AssemblyConfigurationAttribute>()?.Configuration?.ToLowerInvariant();
-        var environmentName = buildConfiguration ?? "release";
+        buildConfiguration ??= "release";
+
         var curDirName = Environment.CurrentDirectory;
         var asmFileInfo = new FileInfo(Path.GetFullPath(typeof(Program).Assembly.Location));
         var asmDirName = asmFileInfo.DirectoryName!;
@@ -41,8 +42,8 @@ internal static class PackagerCliServiceCollectionExtensions
         [
             Path.Combine(asmDirName, $"{asmFileNameNoExt}.appsettings.json"),
             Path.Combine(curDirName, $"{asmFileNameNoExt}.appsettings.json"),
-            Path.Combine(asmDirName, $"{asmFileNameNoExt}.appsettings.{environmentName}.json"),
-            Path.Combine(curDirName, $"{asmFileNameNoExt}.appsettings.{environmentName}.json")
+            Path.Combine(asmDirName, $"{asmFileNameNoExt}.appsettings.{buildConfiguration}.json"),
+            Path.Combine(curDirName, $"{asmFileNameNoExt}.appsettings.{buildConfiguration}.json")
         ];
         files = files.Distinct();
         foreach (var file in files)
