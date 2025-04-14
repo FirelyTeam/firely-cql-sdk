@@ -36,6 +36,18 @@ public static class LibrarySetInvokerExtensions
     /// </para>
     /// </param>
     /// <returns>An enumeration of tuples containing the library invoker, definition invoker, and the definition result.</returns>
+    ///
+    /// <remarks>
+    /// <para>
+    /// Exceptions are enriched such that the last <see cref="DefinitionInvoker"/> that caused
+    /// the exception is available when inspecting the <see cref="Exception.Data">Exception.Data["Current"]</see> property.
+    /// </para>
+    ///
+    /// <para>
+    /// From the <see cref="DefinitionInvoker"/> it is possible which library and library set it belongs to via
+    /// <see cref="DefinitionInvoker.LibraryInvoker"/> and <see cref="LibraryInvoker.LibrarySetInvoker"/>.
+    /// </para>
+    /// </remarks>
     public static IEnumerable<(DefinitionInvoker definitionInvoker, object? definitionResult)> EnumerateLibrarySetDefinitionsResults(
         this LibrarySetInvoker librarySetInvoker,
         CqlContext cqlContext,
@@ -69,6 +81,18 @@ public static class LibrarySetInvokerExtensions
     /// </para>
     /// </param>
     /// <returns>An enumeration of tuples containing the library invoker, definition invoker, and the definition result.</returns>
+    ///
+    /// <remarks>
+    /// <para>
+    /// Exceptions are enriched such that the last <see cref="DefinitionInvoker"/> that caused
+    /// the exception is available when inspecting the <see cref="Exception.Data">Exception.Data["Current"]</see> property.
+    /// </para>
+    ///
+    /// <para>
+    /// From the <see cref="DefinitionInvoker"/> it is possible which library and library set it belongs to via
+    /// <see cref="DefinitionInvoker.LibraryInvoker"/> and <see cref="LibraryInvoker.LibrarySetInvoker"/>.
+    /// </para>
+    /// </remarks>
     public static IEnumerable<(DefinitionInvoker definitionInvoker, object? definitionResult)> EnumerateLibraryDefinitionsResults(
         this LibrarySetInvoker librarySetInvoker,
         CqlContext cqlContext,
