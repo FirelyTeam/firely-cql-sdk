@@ -17,7 +17,9 @@ public sealed partial class ColorConsoleLogger(
     string categoryName,
     ColorConsoleLoggerProvider provider) : ILogger
 {
-    private readonly string _categoryName = categoryName.Length == 0 ? "" : $"{categoryName}: ";
+    private readonly string _categoryName =
+        categoryName.Length == 0 || provider.MinLogLevel >= LogLevel.Information
+            ? "" : $"{categoryName}: ";
 
     public IDisposable BeginScope<TState>(TState state)
         where TState : notnull =>
