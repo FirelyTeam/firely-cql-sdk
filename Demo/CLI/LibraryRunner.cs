@@ -1,14 +1,14 @@
 ﻿using CLI.Helpers;
 using Dumpify;
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Invocation.Toolkit;
+using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.ValueSets;
 using Hl7.Fhir.Model;
 using Hl7.Fhir.Serialization;
-using Hl7.Cql.CodeGeneration.NET;
-using Hl7.Cql.Invocation.Toolkit;
-using Hl7.Cql.Invocation.Toolkit.Extensions;
 
 namespace CLI
 {
@@ -42,8 +42,11 @@ namespace CLI
         {
             //run using Library Resource files - production scenario, no debugging inline with measures project
             Console.WriteLine($"Loading resources for Library: {_opts.Library}");
-            using var scope = ResourceHelper.CreateRuntimeScopeFromFhirLibraryFile(new(_opts.ResourcesDirectory), _opts.LibraryName, _opts.LibraryVersion);
-            RunShared(_opts, scope);
+            var librarySetName = CqlVersionedLibraryIdentifier.ParseFromNameAndVersion(_opts.LibraryName, _opts.LibraryVersion);
+            using var librarySetInvoker = new InvocationToolkit()
+                                          .AddAssemblyBinariesInFhirLibrariesFromDirectory(new (_opts.ResourcesDirectory))
+                                          .CreateLibrarySetInvoker(librarySetName);
+            RunShared(_opts, librarySetInvoker);
         }
 
         private void RunShared(CommandLineOptions opt, LibrarySetInvoker librarySetInvoker)
@@ -153,19 +156,19 @@ namespace CLI
         {
             if (filesInPatientDir.Length == 1)
             {
-                string firstFileInDirectory = filesInPatientDir[0];
+                string firstFileFromDirectory = filesInPatientDir[0];
                 Console.WriteLine("Loading test case bundle");
                 try
                 {
-                    Bundle patientBundle = ResourceHelper.LoadBundle(firstFileInDirectory);
-                    Console.WriteLine($"Checking first file in directory {testPatient}: {firstFileInDirectory}");
+                    Bundle patientBundle = ResourceHelper.LoadBundle(firstFileFromDirectory);
+                    Console.WriteLine($"Checking first file in directory {testPatient}: {firstFileFromDirectory}");
                     var result = ProcessBundle(libraryType, testPatient, patientBundle, inputParameters, valueSets);
                     return result;
                 }
                 catch (ArgumentException ex)
                 {
                     Console.WriteLine($"{ex.Message}");
-                    Console.WriteLine($"Trying to add bundle wrapper to {firstFileInDirectory}");
+                    Console.WriteLine($"Trying to add bundle wrapper to {firstFileFromDirectory}");
                 }
             }
 

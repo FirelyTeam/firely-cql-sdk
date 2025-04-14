@@ -108,7 +108,7 @@ Hl7.Cql.Operators.ICqlOperators.Collapse(System.Collections.Generic.IEnumerable<
 Hl7.Cql.Operators.ICqlOperators.Collapse(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlInterval<int?>?>? intervals, string? precision) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlInterval<int?>?>?
 Hl7.Cql.Operators.ICqlOperators.Collapse(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlInterval<long?>?>? intervals, string? precision) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlInterval<long?>?>?
 Hl7.Cql.Operators.ICqlOperators.Combine(System.Collections.Generic.IEnumerable<string!>! source, string? separator) -> string?
-Hl7.Cql.Operators.ICqlOperators.Comparer.get -> Hl7.Cql.Abstractions.ICqlComparer!
+Hl7.Cql.Operators.ICqlOperators.Comparer.get -> Hl7.Cql.Comparers.ICqlComparer!
 Hl7.Cql.Operators.ICqlOperators.Concatenate(string? left, string? right) -> string?
 Hl7.Cql.Operators.ICqlOperators.ConceptInValueSet(Hl7.Cql.Primitives.CqlConcept? concept, Hl7.Cql.Primitives.CqlValueSet? valueSet) -> bool?
 Hl7.Cql.Operators.ICqlOperators.ConceptsInValueSet(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlConcept?>? concept, Hl7.Cql.Primitives.CqlValueSet? valueSet) -> bool?
@@ -207,8 +207,8 @@ Hl7.Cql.Operators.ICqlOperators.End(Hl7.Cql.Primitives.CqlInterval<long?>? argum
 Hl7.Cql.Operators.ICqlOperators.Ends<T>(Hl7.Cql.Primitives.CqlInterval<T>! left, Hl7.Cql.Primitives.CqlInterval<T>! right, string? precision) -> bool?
 Hl7.Cql.Operators.ICqlOperators.EndsWith(string! argument, string! suffix) -> bool?
 Hl7.Cql.Operators.ICqlOperators.EnumEqualsString(object? enum, string? value) -> bool?
-Hl7.Cql.Operators.ICqlOperators.Equal(object? x, object? y) -> bool?
-Hl7.Cql.Operators.ICqlOperators.Equivalent(object? x, object? y) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Equal(object? left, object? right) -> bool?
+Hl7.Cql.Operators.ICqlOperators.Equivalent(object? left, object? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Equivalent<T>(System.Collections.Generic.IEnumerable<T>? left, System.Collections.Generic.IEnumerable<T>? right) -> bool?
 Hl7.Cql.Operators.ICqlOperators.Except(Hl7.Cql.Primitives.CqlInterval<decimal?>? left, Hl7.Cql.Primitives.CqlInterval<decimal?>? right) -> Hl7.Cql.Primitives.CqlInterval<decimal?>?
 Hl7.Cql.Operators.ICqlOperators.Except(Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? left, Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>? right) -> Hl7.Cql.Primitives.CqlInterval<Hl7.Cql.Primitives.CqlDate?>?
@@ -550,7 +550,6 @@ Hl7.Cql.Runtime.CqlLibraryIdentifier.CompareTo(Hl7.Cql.Runtime.CqlLibraryIdentif
 Hl7.Cql.Runtime.CqlLibraryIdentifier.CqlLibraryIdentifier() -> void
 Hl7.Cql.Runtime.CqlLibraryIdentifier.Equals(Hl7.Cql.Runtime.CqlLibraryIdentifier other) -> bool
 Hl7.Cql.Runtime.CqlLibraryVersion
-Hl7.Cql.Runtime.CqlLibraryVersion.CompareTo(Hl7.Cql.Runtime.CqlLibraryVersion other) -> int
 Hl7.Cql.Runtime.CqlLibraryVersion.CqlLibraryVersion() -> void
 Hl7.Cql.Runtime.CqlLibraryVersion.Equals(Hl7.Cql.Runtime.CqlLibraryVersion other) -> bool
 Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
@@ -594,13 +593,31 @@ Hl7.Cql.Toolkit.IToolkit.LoggerFactory.get -> Microsoft.Extensions.Logging.ILogg
 Hl7.Cql.Toolkit.IToolkit<TSelf>
 Hl7.Cql.Toolkit.IToolkit<TSelf>.SetBatchProcessExceptionContinuation(Hl7.Cql.Runtime.BatchProcessExceptionContinuation continuation) -> TSelf
 Hl7.Cql.Toolkit.ToolkitExtensions
+Hl7.Cql.ValueSets.CqlCodeExtensions
+Hl7.Cql.ValueSets.HashValueSetDictionary
+Hl7.Cql.ValueSets.HashValueSetDictionary.Add(string! valueSetUri, System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>! codes) -> void
+Hl7.Cql.ValueSets.HashValueSetDictionary.HashValueSetDictionary() -> void
+Hl7.Cql.ValueSets.HashValueSetDictionary.HashValueSetDictionary(Hl7.Cql.Comparers.ICqlComparer<Hl7.Cql.Primitives.CqlCode!>! comparer) -> void
+Hl7.Cql.ValueSets.HashValueSetDictionary.Intern(Hl7.Cql.Primitives.CqlCode! code) -> Hl7.Cql.Primitives.CqlCode!
+Hl7.Cql.ValueSets.HashValueSetDictionary.IsCodeInValueSet(string! valueSetUri, Hl7.Cql.Primitives.CqlCode! code) -> bool
+Hl7.Cql.ValueSets.HashValueSetDictionary.IsCodeInValueSet(string! valueSetUri, string! code) -> bool
+Hl7.Cql.ValueSets.HashValueSetDictionary.IsCodeInValueSet(string! valueSetUri, string! code, string? systemUriOrOid) -> bool
+Hl7.Cql.ValueSets.HashValueSetDictionary.TryGetCodesInValueSet(string! valueSetUri, out System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>? codes) -> bool
+Hl7.Cql.ValueSets.InMemoryValueSet
+Hl7.Cql.ValueSets.InMemoryValueSet.InMemoryValueSet(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>! contents) -> void
+Hl7.Cql.ValueSets.InMemoryValueSet.InMemoryValueSet(System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>! contents, Hl7.Cql.Comparers.ICqlComparer<Hl7.Cql.Primitives.CqlCode!>! comparer) -> void
+Hl7.Cql.ValueSets.InMemoryValueSet.IsCodeInValueSet(Hl7.Cql.Primitives.CqlCode! code) -> bool
+Hl7.Cql.ValueSets.InMemoryValueSet.IsCodeInValueSet(string! code) -> bool
+Hl7.Cql.ValueSets.InMemoryValueSet.IsCodeInValueSet(string! code, string? system) -> bool
 Hl7.Cql.ValueSets.IValueSetDictionary
+Hl7.Cql.ValueSets.IValueSetDictionary.IsCodeInValueSet(string! valueSetUri, Hl7.Cql.Primitives.CqlCode! code) -> bool
 Hl7.Cql.ValueSets.IValueSetDictionary.IsCodeInValueSet(string! valueSetUri, string! code) -> bool
-Hl7.Cql.ValueSets.IValueSetDictionary.IsCodeInValueSet(string! valueSetUri, string! code, string! systemUriOrOid) -> bool
-Hl7.Cql.ValueSets.IValueSetDictionary.TryGetCodesInValueSet(string! valueSetUri, out System.Collections.Generic.IReadOnlyCollection<Hl7.Cql.Primitives.CqlCode!>? codes) -> bool
+Hl7.Cql.ValueSets.IValueSetDictionary.IsCodeInValueSet(string! valueSetUri, string! code, string? system) -> bool
+Hl7.Cql.ValueSets.IValueSetDictionary.TryGetCodesInValueSet(string! valueSetUri, out System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>? codes) -> bool
 Hl7.Cql.ValueSets.IValueSetFacade
-Hl7.Cql.ValueSets.IValueSetFacade.IsCodeInValueSet(Hl7.Cql.Primitives.CqlCode? code) -> bool?
-Hl7.Cql.ValueSets.IValueSetFacade.IsCodeInValueSet(string? code, string? system) -> bool?
+Hl7.Cql.ValueSets.IValueSetFacade.IsCodeInValueSet(Hl7.Cql.Primitives.CqlCode! code) -> bool
+Hl7.Cql.ValueSets.IValueSetFacade.IsCodeInValueSet(string! code) -> bool
+Hl7.Cql.ValueSets.IValueSetFacade.IsCodeInValueSet(string! code, string? system) -> bool
 override Hl7.Cql.Operators.RetrieveParameters.Equals(object? obj) -> bool
 override Hl7.Cql.Operators.RetrieveParameters.GetHashCode() -> int
 override Hl7.Cql.Operators.RetrieveParameters.ToString() -> string!
@@ -621,16 +638,23 @@ static Hl7.Cql.Conversion.TypeConverter.Create() -> Hl7.Cql.Conversion.TypeConve
 static Hl7.Cql.Logging.LoggingExtensions.AddMessageLogging(this Hl7.Cql.Runtime.CqlContext! ctx, Microsoft.Extensions.Logging.ILogger! logger) -> Hl7.Cql.Runtime.CqlContext!
 static Hl7.Cql.Operators.RetrieveParameters.operator !=(Hl7.Cql.Operators.RetrieveParameters? left, Hl7.Cql.Operators.RetrieveParameters? right) -> bool
 static Hl7.Cql.Operators.RetrieveParameters.operator ==(Hl7.Cql.Operators.RetrieveParameters? left, Hl7.Cql.Operators.RetrieveParameters? right) -> bool
+static Hl7.Cql.Runtime.CqlLibraryIdentifier.explicit operator Hl7.Cql.Runtime.CqlLibraryIdentifier(string! identifier) -> Hl7.Cql.Runtime.CqlLibraryIdentifier
+static Hl7.Cql.Runtime.CqlLibraryIdentifier.implicit operator string!(Hl7.Cql.Runtime.CqlLibraryIdentifier identifier) -> string!
 static Hl7.Cql.Runtime.CqlLibraryIdentifier.operator !=(Hl7.Cql.Runtime.CqlLibraryIdentifier left, Hl7.Cql.Runtime.CqlLibraryIdentifier right) -> bool
 static Hl7.Cql.Runtime.CqlLibraryIdentifier.operator ==(Hl7.Cql.Runtime.CqlLibraryIdentifier left, Hl7.Cql.Runtime.CqlLibraryIdentifier right) -> bool
 static Hl7.Cql.Runtime.CqlLibraryIdentifier.Parse(string! s) -> Hl7.Cql.Runtime.CqlLibraryIdentifier
 static Hl7.Cql.Runtime.CqlLibraryIdentifier.TryParse(string? s, out Hl7.Cql.Runtime.CqlLibraryIdentifier result) -> bool
+static Hl7.Cql.Runtime.CqlLibraryVersion.explicit operator Hl7.Cql.Runtime.CqlLibraryVersion(string! version) -> Hl7.Cql.Runtime.CqlLibraryVersion
+static Hl7.Cql.Runtime.CqlLibraryVersion.implicit operator string!(Hl7.Cql.Runtime.CqlLibraryVersion version) -> string!
 static Hl7.Cql.Runtime.CqlLibraryVersion.operator !=(Hl7.Cql.Runtime.CqlLibraryVersion left, Hl7.Cql.Runtime.CqlLibraryVersion right) -> bool
 static Hl7.Cql.Runtime.CqlLibraryVersion.operator ==(Hl7.Cql.Runtime.CqlLibraryVersion left, Hl7.Cql.Runtime.CqlLibraryVersion right) -> bool
 static Hl7.Cql.Runtime.CqlLibraryVersion.Parse(string! s) -> Hl7.Cql.Runtime.CqlLibraryVersion
 static Hl7.Cql.Runtime.CqlLibraryVersion.TryParse(string? s, out Hl7.Cql.Runtime.CqlLibraryVersion result) -> bool
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.explicit operator Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier(string! versionedIdentifier) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.FormatString(string! identifier, string? version = null) -> string!
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.FromNameAndVersion(Hl7.Cql.Runtime.CqlLibraryIdentifier identifier, Hl7.Cql.Runtime.CqlLibraryVersion? version = null) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.implicit operator Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier(Hl7.Cql.Runtime.CqlLibraryIdentifier identifier) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
+static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.implicit operator string!(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier versionedIdentifier) -> string!
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.operator !=(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier left, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier right) -> bool
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.operator ==(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier left, Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier right) -> bool
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.Parse(string! s) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
@@ -642,6 +666,10 @@ static Hl7.Cql.Runtime.IO.DirectoryPreparationStrategy.Recreate.get -> Hl7.Cql.R
 static Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter.Default.get -> Hl7.Cql.Runtime.Serialization.CqlValueTupleJsonConverter!
 static Hl7.Cql.Toolkit.ToolkitExtensions.SetIgnoreEnumerationExceptions<TSelf>(this Hl7.Cql.Toolkit.IToolkit<TSelf>! toolkit, bool breakAfterFirstException = false) -> TSelf
 static Hl7.Cql.Toolkit.ToolkitExtensions.SetThrowEnumerationExceptions<TSelf>(this Hl7.Cql.Toolkit.IToolkit<TSelf>! toolkit) -> TSelf
+static Hl7.Cql.ValueSets.CqlCodeExtensions.GetValueSet(this Hl7.Cql.ValueSets.IValueSetDictionary! all, Hl7.Cql.Primitives.CqlValueSet! valueset) -> Hl7.Cql.ValueSets.IValueSetFacade!
+static Hl7.Cql.ValueSets.CqlCodeExtensions.GetValueSet(this Hl7.Cql.ValueSets.IValueSetDictionary! all, string! canonical) -> Hl7.Cql.ValueSets.IValueSetFacade!
+static Hl7.Cql.ValueSets.CqlCodeExtensions.Union(this Hl7.Cql.ValueSets.IValueSetFacade! left, Hl7.Cql.ValueSets.IValueSetFacade! right) -> Hl7.Cql.ValueSets.IValueSetFacade!
+static Hl7.Cql.ValueSets.CqlCodeExtensions.Union(this System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>! left, System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>! right) -> System.Collections.Generic.IEnumerable<Hl7.Cql.Primitives.CqlCode!>!
 virtual Hl7.Cql.Operators.RetrieveParameters.<Clone>$() -> Hl7.Cql.Operators.RetrieveParameters!
 virtual Hl7.Cql.Operators.RetrieveParameters.EqualityContract.get -> System.Type!
 virtual Hl7.Cql.Operators.RetrieveParameters.Equals(Hl7.Cql.Operators.RetrieveParameters? other) -> bool

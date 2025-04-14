@@ -47,8 +47,8 @@ foreach (MeasuresDirSet dirSet in measureDirSets)
 					 {Arg("fhir", dirSet.FhirDir)}
 					 {Arg("dll", dirSet.DllDir)}
 					 {Arg("cs", dirSet.CSharpDir)}
-					 --log-debug true
-					 {(first ? "" : "--log-dont-clear true")}
+					 --console-log-level "Debug"
+					 {(first ? "" : "--log-append true")}
 					 """.Replace("\n", " "),
 				removeHashComments: true)
 			.ToArray();

@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.Abstractions;
+using Hl7.Cql.Comparers;
 using Hl7.Cql.Iso8601;
 
 namespace Hl7.Cql.Primitives
@@ -257,13 +258,19 @@ namespace Hl7.Cql.Primitives
         /// If the value is greater than zero, this object is greater than <paramref name="other"/>.
         /// If the value is <see langword="null"/>, this comparison is uncertain because of <paramref name="precision"/>.
         /// </returns>
-        public int? CompareTo(CqlTime? other, string? precision = null)
+        public int? CompareToValue(CqlTime other, string? precision = null) =>
+            CompareValues(Value, InUtc, other.Value, otherInUtc: other.InUtc, precision);
+
+        private static int? CompareValues(
+            TimeIso8601 self,
+            TimeIso8601 selfInUtc,
+            TimeIso8601 other,
+            TimeIso8601 otherInUtc,
+            string? precision)
         {
-            if (other == null)
-                return null;
-            DateTimePrecision dtp = DateTimePrecision.Unknown;
+            DateTimePrecision dtp;
             if (precision == null)
-                dtp = (DateTimePrecision)Math.Max((byte)Value.Precision, (byte)other.Value.Precision);
+                dtp = (DateTimePrecision)Math.Max((byte)self.Precision, (byte)other.Precision);
             else
             {
                 if (Units.CqlUnitsToUCUM.TryGetValue(precision, out var converted))
@@ -277,50 +284,50 @@ namespace Hl7.Cql.Primitives
 
                 case DateTimePrecision.Hour:
                     {
-                        var left = InUtc;
-                        var right = other.InUtc;
-                        if (Value.RationalOffset.HasValue ^ other.Value.RationalOffset.HasValue)
+                        var left = selfInUtc;
+                        var right = otherInUtc;
+                        if (self.RationalOffset.HasValue ^ other.RationalOffset.HasValue)
                         {
-                            left = Value;
-                            right = other.Value;
+                            left = self;
+                            right = other;
                         }
-                        var hourComparison = Compare(left.Hour, right.Hour);
+                        var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
                         return hourComparison;
                     }
                 case DateTimePrecision.Minute:
                     {
-                        var left = InUtc;
-                        var right = other.InUtc;
-                        if (Value.RationalOffset.HasValue ^ other.Value.RationalOffset.HasValue)
+                        var left = selfInUtc;
+                        var right = otherInUtc;
+                        if (self.RationalOffset.HasValue ^ other.RationalOffset.HasValue)
                         {
-                            left = Value;
-                            right = other.Value;
+                            left = self;
+                            right = other;
                         }
 
-                        var hourComparison = Compare(left.Hour, right.Hour);
+                        var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
                         if (hourComparison == 0)
                         {
-                            var minuteComparison = Compare(left.Minute, right.Minute);
+                            var minuteComparison = CompareTemporalIntegers(left.Minute, right.Minute);
                             return minuteComparison;
                         }
                         else return hourComparison;
                     }
                 case DateTimePrecision.Second:
                     {
-                        var left = InUtc;
-                        var right = other.InUtc;
-                        if (Value.RationalOffset.HasValue ^ other.Value.RationalOffset.HasValue)
+                        var left = selfInUtc;
+                        var right = otherInUtc;
+                        if (self.RationalOffset.HasValue ^ other.RationalOffset.HasValue)
                         {
-                            left = Value;
-                            right = other.Value;
+                            left = self;
+                            right = other;
                         }
-                        var hourComparison = Compare(left.Hour, right.Hour);
+                        var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
                         if (hourComparison == 0)
                         {
-                            var minuteComparison = Compare(left.Minute, right.Minute);
+                            var minuteComparison = CompareTemporalIntegers(left.Minute, right.Minute);
                             if (minuteComparison == 0)
                             {
-                                var secondComparison = Compare(left.Second, right.Second);
+                                var secondComparison = CompareTemporalIntegers(left.Second, right.Second);
                                 return secondComparison;
                             }
                             else return minuteComparison;
@@ -330,23 +337,23 @@ namespace Hl7.Cql.Primitives
                     }
                 case DateTimePrecision.Millisecond:
                     {
-                        var left = InUtc;
-                        var right = other.InUtc;
-                        if (Value.RationalOffset.HasValue ^ other.Value.RationalOffset.HasValue)
+                        var left = selfInUtc;
+                        var right = otherInUtc;
+                        if (self.RationalOffset.HasValue ^ other.RationalOffset.HasValue)
                         {
-                            left = Value;
-                            right = other.Value;
+                            left = self;
+                            right = other;
                         }
-                        var hourComparison = Compare(left.Hour, right.Hour);
+                        var hourComparison = CompareTemporalIntegers(left.Hour, right.Hour);
                         if (hourComparison == 0)
                         {
-                            var minuteComparison = Compare(left.Minute, right.Minute);
+                            var minuteComparison = CompareTemporalIntegers(left.Minute, right.Minute);
                             if (minuteComparison == 0)
                             {
-                                var secondComparison = Compare(left.Second, right.Second);
+                                var secondComparison = CompareTemporalIntegers(left.Second, right.Second);
                                 if (secondComparison == 0)
                                 {
-                                    var milliComparison = Compare(left.Millisecond, right.Millisecond);
+                                    var milliComparison = CompareTemporalIntegers(left.Millisecond, right.Millisecond);
                                     return milliComparison;
                                 }
                                 return secondComparison;
@@ -364,15 +371,14 @@ namespace Hl7.Cql.Primitives
             }
         }
 
-        private int? Compare(int? x, int? y) => x == null || y == null ? null : Comparer<int>.Default.Compare(x.Value, y.Value);
-
         /// <summary>
         /// Compares this object to <paramref name="other"/> for equivalence.
         /// </summary>
         /// <param name="other">The object to compare.</param>
         /// <param name="precision">The precision to use in this comparison, or <see langword="null"/>.</param>
         /// <returns><see langword="true"/> if this object is equivalent to <paramref name="other"/>, else <see langword="false"/>.</returns>
-        public bool Equivalent(CqlTime? other, string? precision) => (CompareTo(other, precision) ?? 0) == 0;
+        public bool EquivalentToValue(CqlTime other, string? precision) =>
+            CqlComparisonToEquivalence(CompareToValue(other, precision));
 
         /// <summary>
         /// Returns <see cref="DateTimeIso8601.ToString"/> for <see cref="Value"/>.

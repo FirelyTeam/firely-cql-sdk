@@ -1,6 +1,8 @@
+using Hl7.Cql.Comparers;
 using Hl7.Cql.CqlToElm.Builtin;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CqlToElm.Test
@@ -10,9 +12,22 @@ namespace Hl7.Cql.CqlToElm.Test
     [TestClass]
     public class XmlTest : Base
     {
+        static XmlTest()
+        {
+            CqlContext = FhirCqlContext.ForBundle(now: NowValue);
+
+            var cqlComparers = (CqlComparers)CqlContext.Operators.Comparer;
+            cqlComparers.Register(typeof(TupleBaseType), new LegacyTupleBaseTypeComparer(cqlComparers));
+        }
+
         private static readonly XmlSerializer Serializer = new(typeof(Xml.Tests));
         private static readonly DateTimeOffset NowValue = new(2020, 1, 2, 3, 4, 0, TimeSpan.Zero);
-        private static readonly CqlContext CqlContext = FhirCqlContext.ForBundle(now: NowValue);
+        private static readonly CqlContext CqlContext;
+
+        private static void WriteLineToFile(string path, string line)
+        {
+            //File.AppendAllLines(path, [line]);
+        }
 
 
         [DynamicData(nameof(GetTests), DynamicDataSourceType.Method, DynamicDataDisplayName = nameof(DisplayName))]
@@ -24,22 +39,27 @@ namespace Hl7.Cql.CqlToElm.Test
             if (SkippedTests.DoesNotCompile.TryGetValue(testCase.TestName, out var reason))
                 Assert.Inconclusive($"Case {testFullName} skipped: {reason}");
 
-            // If you want to test a particular case, you can uncomment the following lines
-            // if (testCase.TestName != "AgeInYearsAt")
-            //     Assert.Inconclusive("Skipped!");
-
             var cqlToolkit = CreateCqlToolkit(AllowNullIntervals:true);
             var expression = cqlToolkit.Expression(testCase.Expression);
             var expressionErrors = expression.GetErrors();
             if (expressionErrors.Any())
             {
-                Assert.Fail($"Case {testFullName} expression compiled with errors: {expressionErrors.First().message}");
+                var joinedExpressionMessages = string.Join("; ", expressionErrors.Select(e=>e.message));
+                WriteLineToFile(
+                    """c:\temp\XmlTest.does-not-compile.txt""",
+                    $$"""{ "{{testCase.TestName}}", "{{joinedExpressionMessages}}" },"""
+                );
+                Assert.Fail($"Case {testFullName} expression compiled with errors: {joinedExpressionMessages}");
                 return;
             }
 
             if (testCase.Expectation is null)
             {
-                Assert.Inconclusive($"Case {testFullName} is inconclusive; no expectation provided.");
+                WriteLineToFile(
+                    """c:\temp\XmlTest.missing-expectation.txt""",
+                    $$"""{ "{{testCase.TestName}}", "Missing expectation" },"""
+                );
+                Assert.Inconclusive($"Case {testFullName} is inconclusive; no expectation provided");
                 return;
             }
 
@@ -47,12 +67,21 @@ namespace Hl7.Cql.CqlToElm.Test
             var expectationErrors = expectation.GetErrors();
             if (expectationErrors.Any())
             {
-                Assert.Fail($"Case {testFullName} expectation compiled with errors: {expressionErrors.First().message}");
+                var joinedMessages = string.Join("; ", expectationErrors.Select(e=>e.message));
+                WriteLineToFile(
+                    """c:\temp\XmlTest.expectation-did-not-compile.txt""",
+                    $$"""{ "{{testCase.TestName}}", "{{joinedMessages}}" },"""
+                );
+                Assert.Fail($"Case {testFullName} expectation compiled with errors: {joinedMessages}");
                 return;
             }
 
             if (SkippedTests.DoesNotMatchExpectation.TryGetValue(testCase.TestName, out var doesNotMatchReason))
             {
+                WriteLineToFile(
+                    """c:\temp\XmlTest.expectation-did-not-match.txt""",
+                    $$"""{ "{{testCase.TestName}}", "{{doesNotMatchReason}}" },"""
+                );
                 Assert.Inconclusive($"Cannot evaluate case {testFullName}: {testCase.TestName}: {doesNotMatchReason}");
                 return;
             }
@@ -67,7 +96,11 @@ namespace Hl7.Cql.CqlToElm.Test
             {
                 var expressionValue = CreateElmToolkit().Lambda(expression).Compile().DynamicInvoke(CqlContext);
                 var expectationValue = CreateElmToolkit().Lambda(expectation).Compile().DynamicInvoke(CqlContext);
-                Assert.Fail($"Case {testFullName} assertion failed. Expected '{expectationValue}', but got '{expressionValue}'.");
+                WriteLineToFile(
+                    """c:\temp\XmlTest.assertion-failed.txt""",
+                    $$"""{ "{{testCase.TestName}}", "actual: {{expressionValue}} does not meet expectation: {{expectationValue}}"""
+                );
+                Assert.Fail($"Case {testFullName} assertion failed. Expected '{expectationValue}', but got '{expressionValue}'");
             }
         }
 
@@ -121,5 +154,46 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         public record TestCase(string File, string Category, string TestName, string Expression, string? Expectation);
+    }
+
+    /// <summary>
+    /// Legacy tuple comparer, only needed when invoking definitions directly.
+    /// When generating C#, different value tuples are generated
+    /// </summary>
+    file class LegacyTupleBaseTypeComparer(CqlComparers memberComparer) :
+        CqlComparer<TupleBaseType?>(
+            CqlComparerEqualsImplementation.Compare,
+            CqlComparerEquivalentImplementation.Compare)
+    {
+
+        protected override int? CompareValues(
+            TupleBaseType x,
+            TupleBaseType y,
+            string? precision)
+        {
+            var xType = x.GetType();
+            var yType = y.GetType();
+            if (xType != yType)
+                return null;
+
+            var joined = from xProp in xType.GetProperties()
+                         join yProp in yType.GetProperties() on xProp equals yProp into g
+                         from foundY in g.DefaultIfEmpty()
+                         select new
+                         {
+                             Property = xProp,
+                             XValue = xProp.GetValue(x),
+                             YValue = foundY == null ? null : foundY.GetValue(y)
+                         };
+
+            foreach (var prop in joined)
+            {
+                var compare = memberComparer.Compare(prop.XValue, prop.YValue, precision);
+                if (compare is null or not 0)
+                    return compare;
+            }
+
+            return 0;
+        }
     }
 }

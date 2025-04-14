@@ -39,6 +39,27 @@ public abstract class LibraryInvoker
     public abstract CqlVersionedLibraryIdentifier LibraryIdentifier { get; }
 
     /// <summary>
+    /// Gets the versioned identifiers of the CQL library's library dependencies.
+    /// </summary>
+    public abstract IReadOnlyCollection<CqlVersionedLibraryIdentifier> DependencyLibraryIdentifiers { get; }
+
+    /// <summary>
+    /// Gets the library invokers for the dependencies of the specified library invoker.
+    /// </summary>
+    /// <returns>An enumeration of <see cref="LibraryInvoker"/> instances representing the dependencies of the specified library invoker.</returns>
+    public IEnumerable<LibraryInvoker> GetDependencyLibraryInvokers()
+    {
+        var libraryInvokers = LibrarySetInvoker.LibraryInvokers;
+        var logger = LibrarySetInvoker.CreateLogger<LibraryInvoker>();
+        return DependencyLibraryIdentifiers
+            .TrySelect(
+                depId => libraryInvokers[depId],
+                s => s
+                    .SetContinuation(LibrarySetInvoker.BatchProcessExceptionContinuation)
+                    .AddLoggerExceptionHandler(logger, (depId, logMessage) => logMessage("No library invoker was found for {lib}", depId)));
+    }
+
+    /// <summary>
     /// Gets the dictionary of definition invokers for the CQL library.
     /// </summary>
     public abstract IReadOnlyDictionary<string, DefinitionInvoker> Definitions { get; }

@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Compiler;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging.Toolkit.Internal;
 using Hl7.Cql.Runtime;
@@ -106,9 +105,9 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// Converts the added packaging inputs to FHIR resources.
     /// </summary>
     /// <param name="canonicalRootUrl">The canonical root URL for the FHIR resources.</param>
-    /// <param name="overrideDate">The date to override in the FHIR resources.</param>
+    /// <param name="overrideDate">The date to override in the FHIR resources. If not specified, the current time will be used.</param>
     /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
-    public PackagingToolkit ConvertToFhirResources(Uri? canonicalRootUrl, SysDateTime? overrideDate)
+    public PackagingToolkit ConvertToFhirResources(Uri? canonicalRootUrl, SysDateTime? overrideDate = null)
     {
         var builder = _conversions.ToBuilder();
 
@@ -171,7 +170,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     }
 
     private static ResourcePackager.SourceArtefacts ToResourcePackagerInput(PackagingToolkitConversionRecord o) => new(
-        o.LibraryIdentifier.ToString(),
+        o.LibraryIdentifier,
         o.SourceCqlLibrary.Cql,
         o.SourceElmLibrary,
         o.SourceCSharpSourceCode,

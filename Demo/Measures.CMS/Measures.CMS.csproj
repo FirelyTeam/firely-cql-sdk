@@ -19,8 +19,9 @@
 		<CqlDirectory>$(LibrarySetRoot)/Cql</CqlDirectory>
 		<ElmDirectory>$(LibrarySetRoot)/Elm</ElmDirectory>
 		<!-- Copy dll's to IntegrationRunner -->
-		<DllDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Assemblies</DllDirectory>
-		<ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory>
+		<!-- <DllDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Assemblies</DllDirectory> -->
+		<ResourcesDirectory>$(CqlSolutionDir)/submodules/Firely.Cql.Sdk.Integration.Runner/IntegrationRunner/CMS Resources</ResourcesDirectory>
+		<!-- <ResourcesDirectory>$(LibrarySetRoot)/Resources</ResourcesDirectory> -->
 		<TestResultsDirectory>$(MSBuildProjectDirectory)/input/tests/results</TestResultsDirectory>
 	</PropertyGroup>
 
@@ -55,9 +56,5 @@
 			<CopyToOutputDirectory>Never</CopyToOutputDirectory>
 		</Content>
 		<Content Remove="input/tests/results" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="CSharp\" />
 	</ItemGroup>
 </Project>

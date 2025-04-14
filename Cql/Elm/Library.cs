@@ -10,7 +10,7 @@
 
 
 using Hl7.Cql.Abstractions.Exceptions;
-using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Comparers;
 
 namespace Hl7.Cql.Elm;
 

@@ -7,6 +7,7 @@
  */
 
 using Hl7.Cql.CqlToElm.Toolkit;
+using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 
@@ -20,12 +21,14 @@ public static class CqlToolkitExtensions
     /// </summary>
     /// <param name="cqlToolkit">The <see cref="CqlToolkit"/> instance to use for creating the <see cref="ElmToolkit"/>.</param>
     /// <param name="elmToolkitConfig">The configuration for the ELM toolkit.</param>
+    /// <param name="libraryPredicate">The optional handler which libraries to add.</param>
     /// <returns>An instance of <see cref="ElmToolkit"/>.</returns>
     public static ElmToolkit CreateElmToolkit(
         this CqlToolkit cqlToolkit,
-        ElmToolkitConfig? elmToolkitConfig = null) =>
+        ElmToolkitConfig? elmToolkitConfig = null,
+        Func<CqlVersionedLibraryIdentifier, bool>? libraryPredicate = null) =>
         new ElmToolkit(cqlToolkit.LoggerFactory, elmToolkitConfig, cqlToolkit.BatchProcessExceptionContinuation)
-            .AddElmFromCqlToolkit(cqlToolkit);
+            .AddElmFromCqlToolkit(cqlToolkit, libraryPredicate);
 
     /// <summary>
     /// Compiles CQL to assemblies using the provided <see cref="CqlToolkit"/>.

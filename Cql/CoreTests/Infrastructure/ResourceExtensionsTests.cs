@@ -13,7 +13,7 @@ public class ResourceExtensionsTests
     {
         // Arrange
         var resource = new Patient();
-         
+
         // Act & Assert
         Assert.ThrowsException<UnreachableException>(() => resource.GetResourceFileName());
     }

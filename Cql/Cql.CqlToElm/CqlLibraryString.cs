@@ -37,24 +37,24 @@ public readonly partial record struct CqlLibraryString
     /// <returns>A <see cref="Regex"/> to extract the library name and version.</returns>
     [GeneratedRegex("""
                          \A
-                         (?:                # Non-capturing group for comments and whitespace
+                         (?:                # Non-capturing group for block comments, line comments and whitespace
                            /\*              #   Start of block comment
                            [\s\S]*?         #   Match any characters (including newlines) non-greedily
                            \*/              #   End of block comment
-                         |                  #   OR
+                         |                  # OR
                            //               #   Start of line comment
-                           [^\r\n]*         # Match any characters except newlines
-                         |                  #   OR
-                           \s               # Match any whitespace character
-                         )*                 # Zero or more occurrences of the above                     
+                           [^\r\n]*         #   Match any characters except newlines
+                         |                  # OR
+                           \s               #   Match any whitespace character
+                         )*                 # Zero or more occurrences of the above
                          library            # until "library" is found
                          \s+                # at least one space
                          (?<lib>\S+)        # The name of the library
-                         (
-                         \s+                # at least one space
-                         version            # version keyword
-                         \s+                # at least one space
-                         '(?<ver>[^']+)'    # The version of the library between single quotes
+                         (?:
+                           \s+              # at least one space
+                           version          # version keyword
+                           \s*              # optional spaces
+                           '(?<ver>[^']+)'  # The version of the library between single quotes
                          )?                 # Version is optional
                      """,
                     RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline)]
@@ -113,4 +113,22 @@ public readonly partial record struct CqlLibraryString
         libraryIdentifier = LibraryIdentifier;
         cql = Cql;
     }
+
+    /// <summary>
+    /// Implicitly converts a <see cref="CqlLibraryString"/> to a <see cref="string"/> using the CQL content.
+    /// </summary>
+    /// <returns>Returns the CQL.</returns>
+    public static implicit operator string(CqlLibraryString cqlLibraryString) => cqlLibraryString.Cql;
+
+    /// <summary>
+    /// Implicitly converts a <see cref="CqlLibraryString"/> to a <see cref="CqlVersionedLibraryIdentifier"/> using the LibraryIdentifier.
+    /// </summary>
+    /// <returns>Returns the <see cref="CqlVersionedLibraryIdentifier"/>.</returns>
+    public static implicit operator CqlVersionedLibraryIdentifier(CqlLibraryString cqlLibraryString) => cqlLibraryString.LibraryIdentifier;
+
+    /// <summary>
+    /// Explicitly parses a <see cref="string"/> to a <see cref="CqlLibraryString"/>.
+    /// </summary>
+    /// <returns>Returns the <see cref="CqlLibraryString"/>.</returns>
+    public static explicit operator CqlLibraryString(string cqlLibraryString) => Parse(cqlLibraryString);
 }

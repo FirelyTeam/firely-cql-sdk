@@ -13,7 +13,6 @@ using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace CqlApiExamples;
@@ -25,7 +24,7 @@ internal static class Program
     private static void Main(string[] args)
     {
         // Create a logger factory via the Microsoft.Extensions.Logging API
-        var loggerFactory = CreateConsoleLoggerFactory();
+        var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
         AddDuplicates(loggerFactory);
         Add3And2Example(loggerFactory);
@@ -58,14 +57,14 @@ internal static class Program
                     CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:A"),
                     CqlLibraryString.Parse("library DuplicateLib version '0.0.0' define:B"),
                     CqlLibraryString.Parse("library Lib version '0.0.0' define:B"));
-                Debug.Fail("Expected an exception when adding duplicate cql libraries.");
+                Trace.Fail("Expected an exception when adding duplicate cql libraries.");
             }
             catch (Exception e)
             {
-                Debug.Assert(e is not null);
+                Trace.Assert(e is not null);
             }
 
-            Debug.Assert(cqlToolkit.Conversions.Count is 0);
+            Trace.Assert(cqlToolkit.Conversions.Count is 0);
         }
 
         void AddCqlDifferentValuesContinue()
@@ -81,10 +80,10 @@ internal static class Program
             }
             catch (Exception e)
             {
-                Debug.Fail("No exception expected");
+                Trace.Fail("No exception expected");
             }
 
-            Debug.Assert(cqlToolkit.Conversions.Count is 2);
+            Trace.Assert(cqlToolkit.Conversions.Count is 2);
         }
 
         void AddCqlDifferentValuesBreak()
@@ -100,10 +99,10 @@ internal static class Program
             }
             catch (Exception e)
             {
-                Debug.Fail("No exception expected");
+                Trace.Fail("No exception expected");
             }
 
-            Debug.Assert(cqlToolkit.Conversions.Count is 1);
+            Trace.Assert(cqlToolkit.Conversions.Count is 1);
         }
     }
 
@@ -117,7 +116,7 @@ internal static class Program
         var dirs = Directories.Create("Examples");
 
         // Load CQL libraries from a directory and process them to ELM, C#, and assemblies
-        cqlToolkit.AddCqlLibrariesFromDirectory(dirs.CqlInDirectory).ConvertCqlToElm();
+        cqlToolkit.AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory).ConvertCqlToElm();
         var elmToolkit = cqlToolkit.CreateElmToolkit().ConvertElmToAssemblies();
         var packagingToolkit = new PackagingToolkit(loggerFactory);
         packagingToolkit.AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit);
@@ -133,20 +132,18 @@ internal static class Program
         var cqlToElmProcessorSettings = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
 
+                var cqlLibraryString = CqlLibraryString.Parse(
+                    """
+                    library AdditionLib version '0.0.0'
 
-        // NICE TO HAVE: Would be nice to parse the CqlLibraryString only from the CQL and extract the identifier from the CQL
-        var cqlLibraryString = CqlLibraryString.Parse(
-            """
-            library AdditionLib version '0.0.0'
-
-            define private Three: 1 + 2
-            """);
-        var cqlContext = FhirCqlContext.ForBundle();
-        using var librarySetInvoker = cqlToolkit
-                                      .AddCqlLibraries(cqlLibraryString)
-                                      .CreateLibrarySetInvoker(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded));
-        var result = librarySetInvoker.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.LibraryIdentifier, "Three");
-        Debug.Assert(result is 3);
+                    define private Three: 1 + 2
+                    """);
+                var cqlContext = FhirCqlContext.ForBundle();
+                using var librarySetInvoker = cqlToolkit
+                                              .AddCqlLibraries(cqlLibraryString)
+                                              .CreateLibrarySetInvoker(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded));
+                var result = librarySetInvoker.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.LibraryIdentifier, "Three");
+                Trace.Assert(result is 3);
     }
 
     /// <summary>
@@ -169,12 +166,12 @@ internal static class Program
 
         // We need a disposable invocation scope, which contains the AssemblyLoadContext and the related library Assemblies.
         using var librarySetInvoker = cqlToolkit.SetIgnoreEnumerationExceptions(false)
-                                                .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory)
+                                                .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory)
                                                 .CreateLibrarySetInvoker();
         logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDeclarations());
-        Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
-        Debug.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
-        Debug.Assert(Invoke("CqlStringOperatorsTest-1.0.000", "Combine.CombineABCSepDash") is "a-b-c");
+        Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
+        Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
+        Trace.Assert(Invoke("CqlStringOperatorsTest-1.0.000", "Combine.CombineABCSepDash") is "a-b-c");
 
         object? Invoke(string libraryName, string declarationName)
         {
@@ -186,7 +183,7 @@ internal static class Program
 
     /// <summary>
     /// This example loads the CQL libraries, translates them to ELM, and compiles them to assemblies.
-    /// Each intermediate format is saved to directory (e.g. ELM, C#, and assembly binaries with their debug symbols).
+    /// Each intermediate format is saved to directory (e.g. ELM, C#, and assembly binaries with their Trace symbols).
     /// It also demonstrates how to execute a library.
     /// </summary>
     private static void FullExample(
@@ -205,7 +202,7 @@ internal static class Program
         if (shouldBuildCqlToElm)
         {
             cqlToolkit
-                .AddCqlLibrariesFromDirectory(dirs.CqlInDirectory)
+                .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory)
                 .ConvertCqlToElm()
                 .SaveElmFilesToDirectory(dirs.ElmOutDirectory)
                 ;
@@ -213,7 +210,7 @@ internal static class Program
 
         var elmToolkit = cqlToolkit
                          .CreateElmToolkit(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded))
-                         .AddElmFilesFromDirectory(dirs.ElmInDirectory)
+                         .AddElmFilesFromDirectory(dirs.ElmFromDirectory)
                          .ConvertElmToAssemblies()
                          .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
                          .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory);
@@ -268,16 +265,7 @@ internal static class Program
             CqlVersionedLibraryIdentifier.ParseFromNameAndVersion("Add3and2", "1.0.0"),
             "ThreePlusTwo");
 
-        Debug.Assert(threePlusTwo is 5);
-    }
-
-    private static ILoggerFactory CreateConsoleLoggerFactory()
-    {
-        var services = new ServiceCollection();
-        services.AddLogging(builder => builder.AddConsole());
-        IServiceProvider serviceProvider = services.BuildServiceProvider();
-        var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();
-        return loggerFactory;
+        Trace.Assert(threePlusTwo is 5);
     }
 }
 

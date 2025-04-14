@@ -7,10 +7,9 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Operators;
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Runtime
+namespace Hl7.Cql.Operators
 {
     internal partial class CqlOperators
     {

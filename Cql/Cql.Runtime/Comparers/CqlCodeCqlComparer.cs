@@ -1,101 +1,80 @@
-﻿#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
-
-/*
- * Copyright (c) 2023, NCQA and contributors
+﻿/*
+ * Copyright (c) 2023, Firely, NCQA and contributors
  * See the file CONTRIBUTORS for details.
  *
  * This file is licensed under the BSD 3-Clause license
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 
-namespace Hl7.Cql.Comparers
+namespace Hl7.Cql.Comparers;
+
+/// <summary>
+/// An CQL comparer that compares two <see cref="CqlCode"/> instances.
+/// </summary>
+internal class CqlCodeCqlComparer(StringComparer codeComparer) :
+    CqlComparer<CqlCode>(CqlComparerEqualsImplementation.Compare)
 {
-    internal class CqlCodeCqlComparer : ICqlComparer<CqlCode>, ICqlComparer
+    /// <summary>
+    /// The default comparer, which uses <see cref="StringComparer.OrdinalIgnoreCase"/>.
+    /// </summary>
+    public static readonly CqlCodeCqlComparer OrdinalIgnoreCase = new(StringComparer.OrdinalIgnoreCase);
+
+    protected override int? CompareValues(
+        CqlCode x,
+        CqlCode y,
+        string? precision)
     {
-        public CqlCodeCqlComparer(IComparer<string> codeComparer)
-        {
-            CodeComparer = codeComparer ?? throw new ArgumentNullException(nameof(codeComparer));
-        }
+        var result = codeComparer.Compare(x.code, y.code);
+        if (result != 0)
+            return result;
 
-        public IComparer<string> CodeComparer { get; }
+        if ((x.system == null) ^ (y.system == null))
+            return null;
 
-        public int? Compare(CqlCode? x, CqlCode? y, string? precision)
-        {
-            if (x == null || y == null)
-                return null;
-            if (x.code == null || y.code == null)
-                return null;
-            else
-            {
-                var cc = CodeComparer.Compare(x.code, y.code);
-                if (cc == 0)
-                {
-                    if ((x.system == null) ^ (y.system == null))
-                        return null;
-                    var sc = StringComparer.OrdinalIgnoreCase.Compare(x.system, y.system);
-                    if (sc == 0)
-                    {
-                        if ((x.version == null) ^ (y.version == null))
-                            return null;
-                        var vc = StringComparer.OrdinalIgnoreCase.Compare(x.version, y.version);
-                        if (vc == 0)
-                        {
-                            if ((x.display == null) ^ (y.display == null))
-                                return null;
-                            var dc = StringComparer.OrdinalIgnoreCase.Compare(x.display, y.display);
-                            return dc;
-                        }
-                        else return vc;
-                    }
-                    else return sc;
-                }
-                else return cc;
-            }
-        }
+        result = StringComparer.OrdinalIgnoreCase.Compare(x.system, y.system);
+        if (result != 0)
+            return result;
 
-        public int? Compare(object? x, object? y, string? precision) => Compare(x as CqlCode, y as CqlCode, precision);
+        if ((x.version == null) ^ (y.version == null))
+            return null;
 
-        public bool? Equals(CqlCode? x, CqlCode? y, string? precision)
-        {
-            if (x == null || y == null)
-                return null;
-            var compare = Compare(x, y, precision);
-            if (compare == null)
-                return null;
-            else return compare == 0;
-        }
+        result = StringComparer.OrdinalIgnoreCase.Compare(x.version, y.version);
+        if (result != 0)
+            return result;
 
-        public bool? Equals(object? x, object? y, string? precision) => Equals(x as CqlCode, y as CqlCode, precision);
+        if ((x.display == null) ^ (y.display == null))
+            return null;
 
-        public bool Equivalent(CqlCode x, CqlCode y, string? precision)
-        {
-            if (CqlComparers.EquivalentOnNullsOnly(x?.code, y?.code) is { } r)
-                return r;
-
-            var cc = CodeComparer.Compare(x!.code, y!.code);
-            if (cc != 0)
-                return false;
-
-            if ((x.system == null) ^ (y.system == null))
-                return false;
-
-            var sc = StringComparer.OrdinalIgnoreCase.Compare(x.system, y.system);
-            return sc == 0;
-        }
-
-        public bool Equivalent(object? x, object? y, string? precision) => Equivalent((x as CqlCode)!, (y as CqlCode)!, precision);
-
-        public int GetHashCode(CqlCode? x) =>
-            x == null
-            ? typeof(CqlCode).GetHashCode()
-            : $"{x.code ?? "null"}\0{x.system}\0".GetHashCode();
-
-        public int GetHashCode(object? x) =>
-            GetHashCode(x as CqlCode);
+        result = StringComparer.OrdinalIgnoreCase.Compare(x.display, y.display);
+        return result;
     }
-}
 
-#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
+    protected override bool IsNull([NotNullWhen(false)] CqlCode? value)
+    {
+        return value?.code is null;
+    }
+
+    protected override bool EquivalentValues(
+        CqlCode x,
+        CqlCode y,
+        string? precision)
+    {
+        var result = codeComparer.Compare(x.code, y.code);
+        if (result != 0)
+            return false;
+
+        if ((x.system == null) ^ (y.system == null))
+            return false;
+
+        result = StringComparer.OrdinalIgnoreCase.Compare(x.system, y.system);
+        return result == 0;
+    }
+
+    public override int GetHashCode(CqlCode? value) =>
+        value == null
+            ? GetHashCodeForNull()
+            : StringComparer.OrdinalIgnoreCase.GetHashCode(value.code ?? string.Empty) ^
+              StringComparer.OrdinalIgnoreCase.GetHashCode(value.system ?? string.Empty);
+}

@@ -6,23 +6,41 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Runtime.Serialization;
+
 namespace Hl7.Cql.Runtime;
 
 /// <summary>
 /// Represents an identifier for a CQL library.
 /// </summary>
+[JsonConverter(typeof(StringEncapsulatedValueJsonConverter<CqlLibraryIdentifier>))]
 public readonly record struct CqlLibraryIdentifier :
     IParsable<CqlLibraryIdentifier>,
     IComparable<CqlLibraryIdentifier>,
     IComparable
 {
+    /// <summary>
+    /// Implicitly converts a <see cref="CqlLibraryIdentifier"/> to a <see cref="string"/>.
+    /// </summary>
+    /// <param name="identifier">The <see cref="CqlLibraryIdentifier"/> to convert.</param>
+    /// <returns>The string representation of the identifier.</returns>
+    public static implicit operator string(CqlLibraryIdentifier identifier) => identifier._value;
+
+    /// <summary>
+    /// Explicitly converts a <see cref="string"/> to a <see cref="CqlLibraryIdentifier"/>.
+    /// </summary>
+    /// <param name="identifier">The string to convert.</param>
+    /// <returns>The <see cref="CqlLibraryIdentifier"/> representation of the string.</returns>
+    /// <exception cref="FormatException">Thrown when the string is not a valid identifier.</exception>
+    public static explicit operator CqlLibraryIdentifier(string identifier) => Parse(identifier);
+
     private readonly string _value;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CqlLibraryIdentifier"/> struct.
     /// </summary>
     /// <param name="value">The string value of the identifier.</param>
-    private CqlLibraryIdentifier(string value) => _value = value;
+    private CqlLibraryIdentifier(string value) => _value = value ?? throw new ArgumentNullException(nameof(value));
 
     /// <summary>
     /// Returns the string representation of the identifier.

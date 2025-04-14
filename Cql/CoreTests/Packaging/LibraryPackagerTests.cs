@@ -2,6 +2,7 @@ using Hl7.Cql.Compiler;
 using Hl7.Cql.Fhir;
 using Hl7.Cql.Packaging;
 using Hl7.Fhir.Model;
+using Microsoft.Extensions.Logging.Abstractions;
 using Library = Hl7.Cql.Elm.Library;
 
 namespace CoreTests.Packaging;
@@ -24,6 +25,7 @@ public class LibraryPackagerTests
         var elmLibrary = Library.LoadFromJson(new FileInfo(filename));
         // Act
         var library = LibraryPackager.CreateLibraryResource(
+            NullLoggerFactory.Instance.CreateLogger("Dummy"),
             typeCrosswalk: _mapper,
             elmLibrary: elmLibrary,
             elmBytes: File.ReadAllBytes(filename),

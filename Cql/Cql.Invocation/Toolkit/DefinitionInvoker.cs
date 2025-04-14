@@ -23,7 +23,7 @@ public abstract class DefinitionInvoker(
     LibraryInvoker libraryInvoker,
     string definitionName,
     MethodInfo methodInfo,
-    IReadOnlyDictionary<string, string> tagValuesByName,
+    IReadOnlyDictionary<string, IReadOnlySet<string>> tagValuesByName,
     string? valueSetId)
 {
     /// <summary>
@@ -42,9 +42,10 @@ public abstract class DefinitionInvoker(
     public Type ReturnType => MethodInfo.ReturnType;
 
     /// <summary>
-    /// Gets the tag values associated with the definition.
+    /// Gets the tag values by tag name that is associated with the definition.
+    /// Where there duplicate tags by name, their values will be combined into a set.
     /// </summary>
-    public IReadOnlyDictionary<string, string> TagValuesByName { get; } = tagValuesByName;
+    public IReadOnlyDictionary<string, IReadOnlySet<string>> TagValuesByName { get; } = tagValuesByName;
 
     /// <summary>
     /// Gets the value set identifier, if any.
@@ -54,7 +55,7 @@ public abstract class DefinitionInvoker(
     /// <summary>
     /// Gets the method information for the definition.
     /// </summary>
-    private MethodInfo MethodInfo { get; } = methodInfo;
+    protected MethodInfo MethodInfo { get; } = methodInfo;
 
     /// <summary>
     /// Invokes the definition with the given CQL context.
@@ -62,16 +63,4 @@ public abstract class DefinitionInvoker(
     /// <param name="cqlContext">The CQL context.</param>
     /// <returns>The result of the invocation.</returns>
     public abstract object? Invoke(CqlContext cqlContext);
-
-    /// <summary>
-    /// Invokes the definition with the specified parameters.
-    /// </summary>
-    /// <param name="library">The library on which to invoke the definition.</param>
-    /// <param name="parameters">The parameters to pass.</param>
-    /// <returns>The result of the invocation.</returns>
-    protected object? InvokeDefinition(object? library, params object?[] parameters)
-    {
-        var result = MethodInfo.Invoke(library, BindingFlags.DoNotWrapExceptions, null, parameters, CultureInfo.InvariantCulture);
-        return result;
-    }
 }

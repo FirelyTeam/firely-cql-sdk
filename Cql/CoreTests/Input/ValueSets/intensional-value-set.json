@@ -7,7 +7,11 @@
     "include": [
       {
         "valueSet": [
-          "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1009",
+          "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1009"
+        ]
+      },
+      {
+        "valueSet": [
           "https://www.ncqa.org/fhir/valueset/2.16.840.1.113883.3.464.1004.1013"
         ]
       }

@@ -59,13 +59,19 @@ public static partial class CqlToolkitExtensions
     {
         var logger = cqlToolkit.CreateLogger();
         var cqlLibraries = files
-            .Select(f =>
-            {
-                logger.LogInformation("Loading CQL from file: {file}", f);
-                var cqlContent = File.ReadAllText(f.FullName);
-                var cqlLibrary = CqlLibraryString.Parse(cqlContent);
-                return cqlLibrary;
-            }); // Log errors
+            .TrySelect(f =>
+                       {
+                           logger.LogInformation("Loading CQL from file: {file}", f);
+                           var cqlContent = File.ReadAllText(f.FullName);
+                           var cqlLibrary = CqlLibraryString.Parse(cqlContent);
+                           return cqlLibrary;
+                       },
+                       s => s
+                            .SetContinuation(cqlToolkit.BatchProcessExceptionContinuation)
+                            .AddLoggerExceptionHandler(
+                                logger,
+                                (fileInfo, logMessage) =>
+                                    logMessage("Could not load CQL from file: {file}", fileInfo.FullName))); // Log errors
 
         return cqlToolkit.AddCqlLibraries(cqlLibraries);
     }

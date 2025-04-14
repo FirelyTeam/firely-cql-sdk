@@ -1,3 +1,6 @@
+using System.Text.Json.Serialization;
+using Hl7.Cql.Runtime.Serialization;
+
 namespace Hl7.Cql.Packaging;
 
 /// <summary>
@@ -8,6 +11,7 @@ namespace Hl7.Cql.Packaging;
 /// <remarks>
 /// A new instance is created using the <see cref="Create"/> method.
 /// </remarks>
+[JsonConverter(typeof(StringEncapsulatedValueJsonConverter<ResourceFileName>))]
 public readonly record struct ResourceFileName : IParsable<ResourceFileName>
 {
     // Should not contain underscores - https://build.fhir.org/ig/HL7/cql-ig/conformance.html#library-name-and-url

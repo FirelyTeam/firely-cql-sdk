@@ -3272,7 +3272,7 @@ namespace CoreTests
 
             var sameOrBefore = fcq.SameOrBefore(thru2022, thru2023, null);
 
-            Assert.AreEqual(false, sameOrBefore);
+            Assert.AreEqual(true, sameOrBefore);
         }
 
         /// <summary>
@@ -3484,6 +3484,7 @@ namespace CoreTests
             var result = ops.ListProperlyIncludesElement(list, element);
             Assert.IsFalse(result);
         }
+
         [TestMethod]
         public void UnionListNullAndListNull()
         {

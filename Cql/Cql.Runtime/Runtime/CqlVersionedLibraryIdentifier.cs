@@ -6,6 +6,8 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Runtime.Serialization;
+
 namespace Hl7.Cql.Runtime;
 
 /// <summary>
@@ -13,10 +15,32 @@ namespace Hl7.Cql.Runtime;
 /// </summary>
 /// <param name="Identifier">The identifier of the CQL library.</param>
 /// <param name="Version">The version of the CQL library.</param>
+[JsonConverter(typeof(StringEncapsulatedValueJsonConverter<CqlVersionedLibraryIdentifier>))]
 public readonly record struct CqlVersionedLibraryIdentifier(
     CqlLibraryIdentifier Identifier,
     CqlLibraryVersion? Version = null) : IParsable<CqlVersionedLibraryIdentifier>
 {
+    /// <summary>
+    /// The delimiter to use between the identifier and version part in the string representation.
+    /// </summary>
+    [UsedImplicitly]
+    public const string IdentifierVersionDelimiter = "-";
+
+    /// <summary>
+    /// Implicitly converts a <see cref="CqlVersionedLibraryIdentifier"/> to a <see cref="string"/>.
+    /// </summary>
+    /// <param name="versionedIdentifier">The <see cref="CqlVersionedLibraryIdentifier"/> to convert.</param>
+    /// <returns>The string representation of the versioned identifier.</returns>
+    public static implicit operator string(CqlVersionedLibraryIdentifier versionedIdentifier) => versionedIdentifier.ToString();
+
+    /// <summary>
+    /// Explicitly converts a <see cref="string"/> to a <see cref="CqlVersionedLibraryIdentifier"/>.
+    /// </summary>
+    /// <param name="versionedIdentifier">The string to convert.</param>
+    /// <returns>The <see cref="CqlVersionedLibraryIdentifier"/> representation of the string.</returns>
+    /// <exception cref="FormatException">Thrown when the string is not a valid versioned identifier.</exception>
+    public static explicit operator CqlVersionedLibraryIdentifier(string versionedIdentifier) => Parse(versionedIdentifier);
+
     /// <summary>
     /// Parses a CQL versioned library identifier from the given name and version strings.
     /// </summary>
@@ -25,8 +49,8 @@ public readonly record struct CqlVersionedLibraryIdentifier(
     /// <returns>A <see cref="CqlVersionedLibraryIdentifier"/> instance.</returns>
     public static CqlVersionedLibraryIdentifier ParseFromNameAndVersion(string identifier, string? version = null)
     {
-        var cqlLibraryIdentifier = CqlLibraryIdentifier.Parse(identifier);
-        CqlLibraryVersion? cqlLibraryVersion = version is null ? null : CqlLibraryVersion.Parse(version);
+        CqlLibraryIdentifier cqlLibraryIdentifier = (CqlLibraryIdentifier)identifier;
+        CqlLibraryVersion? cqlLibraryVersion = version is null ? null : (CqlLibraryVersion?)version;
         return FromNameAndVersion(cqlLibraryIdentifier, cqlLibraryVersion);
     }
 
@@ -47,7 +71,7 @@ public readonly record struct CqlVersionedLibraryIdentifier(
     /// <returns>A string representation of the CQL versioned library identifier.</returns>
     public override string ToString()
     {
-        return ToString("-");
+        return ToString(IdentifierVersionDelimiter);
     }
 
     /// <summary>

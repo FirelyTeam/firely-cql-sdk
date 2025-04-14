@@ -11,7 +11,7 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Primitives;
 using Hl7.Cql.ValueSets;
 
-namespace Hl7.Cql.Runtime
+namespace Hl7.Cql.Operators
 {
     internal partial class CqlOperators
     {
@@ -21,7 +21,7 @@ namespace Hl7.Cql.Runtime
             if (list == null) return false;
             if (item == null) return null;
             foreach (var i in list.Cast<object>())
-                if (Compare(item, i, null) == 0)
+                if (Comparer.Compare(item, i, null) == 0)
                     return true;
             return false;
         }
@@ -254,7 +254,7 @@ namespace Hl7.Cql.Runtime
                         expanded.Add(listInterval);
                         listItem = next;
                     }
-                    while (Compare(listItem!, highInterval!, null) <= 0);
+                    while (Comparer.Compare(listItem!, highInterval!, null) <= 0);
                 }
             }
             return expanded;
@@ -444,7 +444,7 @@ namespace Hl7.Cql.Runtime
                         expanded.Add(listInterval);
                         listItem = next;
                     }
-                    while (Compare(listItem!, highInterval, null) <= 0);
+                    while (Comparer.Compare(listItem!, highInterval, null) <= 0);
                 }
             }
 
@@ -600,7 +600,7 @@ namespace Hl7.Cql.Runtime
                         expanded.Add(listInterval);
                         listItem = next;
                     }
-                    while (Compare(listItem!, highInterval!, null) <= 0);
+                    while (Comparer.Compare(listItem!, highInterval!, null) <= 0);
                 }
             }
 
@@ -648,7 +648,7 @@ namespace Hl7.Cql.Runtime
                         expanded.Add(listInterval);
                         listItem = high;
                     }
-                    while (Compare(listItem, interval.high!, null) <= 0);
+                    while (Comparer.Compare(listItem, interval.high!, null) <= 0);
                 }
             }
 
@@ -696,7 +696,7 @@ namespace Hl7.Cql.Runtime
 
                         listItem = high;
                     }
-                    while (Compare(listItem, interval.high!, null) <= 0);
+                    while (Comparer.Compare(listItem, interval.high!, null) <= 0);
                 }
             }
 
@@ -744,7 +744,7 @@ namespace Hl7.Cql.Runtime
 
                         listItem = high;
                     }
-                    while (Compare(listItem, interval.high!, null) <= 0);
+                    while (Comparer.Compare(listItem, interval.high!, null) <= 0);
                 }
             }
 
@@ -824,7 +824,7 @@ namespace Hl7.Cql.Runtime
                 return false;
             else
             {
-                return argument.Any(t => Compare(element, t!, null) == 0);
+                return argument.Any(t => Comparer.Compare(element, t!, null) == 0);
             }
 
         }
@@ -837,7 +837,7 @@ namespace Hl7.Cql.Runtime
             {
                 null => false,
                 IValueSetFacade facade => facade.IsCodeInValueSet(element),
-                _ => argument.Any(t => Compare(element, t, null) == 0)
+                _ => argument.Any(t => Comparer.Compare(element, t, null) == 0)
             };
         }
 
