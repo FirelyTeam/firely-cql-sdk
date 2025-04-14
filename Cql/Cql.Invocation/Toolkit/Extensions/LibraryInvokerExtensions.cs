@@ -22,13 +22,26 @@ public static class LibraryInvokerExtensions
     /// <param name="libraryInvoker">The library invoker containing the definitions.</param>
     /// <param name="cqlContext">The CQL context used for invocation.</param>
     /// <param name="includeDefinition">The selector for the definition</param>
-    /// <param name="definitionInvokerExceptionHandler">An exception handler for invoking a definition. (optional)</param>
+    /// <param name="definitionInvocationExceptionCallback">
+    /// <para>
+    /// An optional callback right after an exception is caught, and before it rethrown or ignored,
+    /// based on the currently selected
+    /// <see cref="LibrarySetInvoker.BatchProcessExceptionContinuation">LibrarySetInvoker.BatchProcessExceptionContinuation</see>.
+    /// </para>
+    /// <para>
+    /// In most cases this is only necessary when the selected strategy is set to Ignore exceptions and when the caller
+    /// has a special use case for it, e.g. to keep track of these exceptions.
+    /// </para>
+    /// <para>
+    /// Otherwise, it's best to just catch the exception the normal way.
+    /// </para>
+    /// </param>
     /// <returns>An enumeration of tuples containing the definition invoker and the result.</returns>
     public static IEnumerable<(DefinitionInvoker definitionInvoker, object? definitionResult)> EnumerateLibraryDefinitionsResults(
         this LibraryInvoker libraryInvoker,
         CqlContext cqlContext,
         Func<DefinitionInvoker, bool>? includeDefinition = null,
-        ValueExceptionHandler<DefinitionInvoker>? definitionInvokerExceptionHandler = null)
+        ValueExceptionHandler<DefinitionInvoker>? definitionInvocationExceptionCallback = null)
     {
         var logger = libraryInvoker.LibrarySetInvoker.CreateLogger(typeof(LibraryInvokerExtensions));
         var continuation = libraryInvoker.LibrarySetInvoker.BatchProcessExceptionContinuation;
@@ -45,7 +58,7 @@ public static class LibraryInvokerExtensions
                                                       (definitionInvoker, logMessage) =>
                                                           logMessage("Could not invoke definition {definition} on library {id}",
                                                                      definitionInvoker.DefinitionName, libraryInvoker.LibraryIdentifier))
-                                                  .AddExceptionHandler(definitionInvokerExceptionHandler)
+                                                  .AddExceptionHandler(definitionInvocationExceptionCallback)
                              );
     }
 }
