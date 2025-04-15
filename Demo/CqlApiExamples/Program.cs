@@ -280,8 +280,8 @@ file static class Extensions
         foreach (var (libId, lib) in scope.LibraryInvokers)
         {
             sb.AppendLine(Invariant($"- {libId}"));
-            foreach (var (declId, decl) in lib.Definitions)
-                sb.AppendLine(Invariant($"  - {declId} : {decl.ReturnType}"));
+            foreach (var (defName, def) in lib.Definitions)
+                sb.AppendLine(Invariant($"  - {defName} : {def.ReturnType}"));
         }
 
         return sb;
