@@ -17,6 +17,7 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// <summary>
 /// Abstract base class for invoking CQL libraries.
 /// </summary>
+[DebuggerDisplay("ToString(),nq")]
 public abstract class LibraryInvoker
 {
     /// <summary>
@@ -115,4 +116,8 @@ public abstract class LibraryInvoker
 
         return false;
     }
+
+    /// <inheritdoc />
+    public override string ToString() =>
+        $"{{{nameof(LibraryIdentifier)}: {LibraryIdentifier}}}";
 }

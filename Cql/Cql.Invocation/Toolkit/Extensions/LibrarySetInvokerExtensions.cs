@@ -44,8 +44,8 @@ public static class LibrarySetInvokerExtensions
     /// </para>
     ///
     /// <para>
-    /// From the <see cref="DefinitionInvoker"/> it is possible which library and library set it belongs to via
-    /// <see cref="DefinitionInvoker.LibraryInvoker"/> and <see cref="LibraryInvoker.LibrarySetInvoker"/>.
+    /// From the <see cref="DefinitionInvoker"/> the name of the
+    /// <see cref="DefinitionInvoker.LibraryIdentifier"/> and <see cref="DefinitionInvoker.DefinitionName"/> are available.
     /// </para>
     /// </remarks>
     public static IEnumerable<(DefinitionInvoker definitionInvoker, object? definitionResult)> EnumerateLibrarySetDefinitionsResults(
@@ -89,8 +89,8 @@ public static class LibrarySetInvokerExtensions
     /// </para>
     ///
     /// <para>
-    /// From the <see cref="DefinitionInvoker"/> it is possible which library and library set it belongs to via
-    /// <see cref="DefinitionInvoker.LibraryInvoker"/> and <see cref="LibraryInvoker.LibrarySetInvoker"/>.
+    /// From the <see cref="DefinitionInvoker"/> the name of the
+    /// <see cref="DefinitionInvoker.LibraryIdentifier"/> and <see cref="DefinitionInvoker.DefinitionName"/> are available.
     /// </para>
     /// </remarks>
     public static IEnumerable<(DefinitionInvoker definitionInvoker, object? definitionResult)> EnumerateLibraryDefinitionsResults(
