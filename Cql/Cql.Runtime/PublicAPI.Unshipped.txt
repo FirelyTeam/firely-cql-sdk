@@ -1,4 +1,5 @@
 ﻿#nullable enable
+const Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.IdentifierVersionDelimiter = "-" -> string!
 Hl7.Cql.Conversion.ITypeConverterEntry
 Hl7.Cql.Conversion.ITypeConverterEntry.Convert(object? instance, System.Type! to) -> object?
 Hl7.Cql.Conversion.ITypeConverterEntry.Handles(System.Type! from, System.Type! to) -> bool
@@ -651,7 +652,6 @@ static Hl7.Cql.Runtime.CqlLibraryVersion.operator ==(Hl7.Cql.Runtime.CqlLibraryV
 static Hl7.Cql.Runtime.CqlLibraryVersion.Parse(string! s) -> Hl7.Cql.Runtime.CqlLibraryVersion
 static Hl7.Cql.Runtime.CqlLibraryVersion.TryParse(string? s, out Hl7.Cql.Runtime.CqlLibraryVersion result) -> bool
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.explicit operator Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier(string! versionedIdentifier) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
-static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.FormatString(string! identifier, string? version = null) -> string!
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.FromNameAndVersion(Hl7.Cql.Runtime.CqlLibraryIdentifier identifier, Hl7.Cql.Runtime.CqlLibraryVersion? version = null) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.implicit operator Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier(Hl7.Cql.Runtime.CqlLibraryIdentifier identifier) -> Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier
 static Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier.implicit operator string!(Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier versionedIdentifier) -> string!
