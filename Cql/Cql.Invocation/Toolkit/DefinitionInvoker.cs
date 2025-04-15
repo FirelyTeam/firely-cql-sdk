@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Invocation.Toolkit;
@@ -37,6 +38,11 @@ public abstract class DefinitionInvoker(
     public string DefinitionName { get; } = definitionName;
 
     /// <summary>
+    /// A convenience property to get the library identifier of the library that contains this definition.
+    /// </summary>
+    public string LibraryIdentifier => LibraryInvoker.LibraryIdentifier;
+
+    /// <summary>
     /// Gets the return type of the method.
     /// </summary>
     public Type ReturnType => MethodInfo.ReturnType;
@@ -63,4 +69,8 @@ public abstract class DefinitionInvoker(
     /// <param name="cqlContext">The CQL context.</param>
     /// <returns>The result of the invocation.</returns>
     public abstract object? Invoke(CqlContext cqlContext);
+
+    /// <inheritdoc />
+    public override string ToString() =>
+        $"{{{nameof(LibraryIdentifier)}: {LibraryIdentifier}, {nameof(DefinitionName)}: {DefinitionName}, {nameof(ReturnType)}: {ReturnType.ToCSharpString()}}}";
 }
