@@ -12,7 +12,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void PowerIntegerByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Power_Integer_to_Integer version '1.0.0'
+                library PowerIntegerByInteger version '1.0.0'
 
                 define private Power_Integer_to_Integer: 2 ^ 3
                 """);
@@ -68,7 +68,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void PowerIntegerByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Power_Integer_to_Integer version '1.0.0'
+                library PowerIntegerByLong version '1.0.0'
 
                 define private Power_Integer_to_Integer: 2 ^ 3L
                 """);
@@ -124,7 +124,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void PowerIntegerByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Power_Integer_to_Integer version '1.0.0'
+                library PowerIntegerByDecimal version '1.0.0'
 
                 define private Power_Integer_to_Integer: 2 ^ 3.0
                 """);

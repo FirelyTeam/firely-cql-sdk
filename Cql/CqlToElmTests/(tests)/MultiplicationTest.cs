@@ -14,7 +14,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void MultiplyIntegerByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Integer_to_Integer version '1.0.0'
+                library MultiplyIntegerByInteger version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: 2 * 3
                 """);
@@ -70,7 +70,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void MultiplyIntegerByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Integer_to_Integer version '1.0.0'
+                library MultiplyIntegerByLong version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: 2 * 3L
                 """);
@@ -126,7 +126,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void MultiplyIntegerByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Integer_to_Integer version '1.0.0'
+                library MultiplyIntegerByDecimal version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: 2 * 3.0
                 """);
