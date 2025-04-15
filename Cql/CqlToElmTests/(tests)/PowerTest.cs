@@ -9,7 +9,7 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Integer
 
         [TestMethod]
-        public void Power_Integer_by_Integer()
+        public void PowerIntegerByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
                 library Power_Integer_to_Integer version '1.0.0'
@@ -65,7 +65,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Power_Integer_by_Long()
+        public void PowerIntegerByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
                 library Power_Integer_to_Integer version '1.0.0'
@@ -121,7 +121,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Power_Integer_by_Decimal()
+        public void PowerIntegerByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
                 library Power_Integer_to_Integer version '1.0.0'
@@ -177,10 +177,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Power_Integer_by_Null()
+        public void PowerIntegerByNull()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Power_Integer_by_Null version '1.0.0'
+                library PowerIntegerByNull version '1.0.0'
 
                 define private Product: 1 ^ null
                 """);
@@ -231,10 +231,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Power_Null_by_Integer()
+        public void PowerNullByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Power_Integer_by_Null version '1.0.0'
+                library PowerIntegerByNull version '1.0.0'
 
                 define private Product: null ^ 1
                 """);
@@ -289,10 +289,10 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Long
 
         [TestMethod]
-        public void Power_Long_by_Integer()
+        public void PowerLongByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Power_Long_by_Integer version '1.0.0'
+                library PowerLongByInteger version '1.0.0'
 
                 define private Power_Integer_to_Integer: -2L ^ 3
                 """);
@@ -345,10 +345,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Power_Long_by_Long()
+        public void PowerLongByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Power_Long_by_Integer version '1.0.0'
+                library PowerLongByInteger version '1.0.0'
 
                 define private Power_Integer_to_Integer: -2L ^ 3L
                 """);
@@ -401,10 +401,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Power_Long_by_Decimal()
+        public void PowerLongByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Power_Long_by_Integer version '1.0.0'
+                library PowerLongByInteger version '1.0.0'
 
                 define private Power_Integer_to_Integer: -2L ^ 3.0
                 """);
@@ -457,10 +457,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Power_Long_by_Null()
+        public void PowerLongByNull()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Power_Long_by_Null version '1.0.0'
+                library PowerLongByNull version '1.0.0'
 
                 define private Product: 1L ^ null
                 """);
@@ -511,10 +511,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Power_Null_by_Long()
+        public void PowerNullByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Power_Integer_by_Null version '1.0.0'
+                library PowerIntegerByNull version '1.0.0'
 
                 define private Product: null ^ 1L
                 """);
@@ -569,10 +569,10 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Decimal
 
         [TestMethod]
-        public void Power_Decimal_by_Integer()
+        public void PowerDecimalByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Power_Decimal_by_Integer version '1.0.0'
+                library PowerDecimalByInteger version '1.0.0'
 
                 define private Power_Integer_to_Integer: 0.0 ^ 3
                 """);
@@ -625,10 +625,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Power_Decimal_by_Long()
+        public void PowerDecimalByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Power_Decimal_by_Integer version '1.0.0'
+                library PowerDecimalByInteger version '1.0.0'
 
                 define private Power_Integer_to_Integer: 5.0 ^ 5L
                 """);
@@ -681,10 +681,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Power_Decimal_by_Decimal()
+        public void PowerDecimalByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Power_Decimal_by_Integer version '1.0.0'
+                library PowerDecimalByInteger version '1.0.0'
 
                 define private Power_Integer_to_Integer: -10.0 ^ 10.0
                 """);
@@ -737,10 +737,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Power_Decimal_by_Null()
+        public void PowerDecimalByNull()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Power_Decimal_by_Null version '1.0.0'
+                library PowerDecimalByNull version '1.0.0'
 
                 define private Product: 1.0 ^ null
                 """);
@@ -791,10 +791,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Power_Null_by_Decimal()
+        public void PowerNullByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Power_Integer_by_Null version '1.0.0'
+                library PowerIntegerByNull version '1.0.0'
 
                 define private Product: null ^ 1.0
                 """);

@@ -11,12 +11,12 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Integer
 
         [TestMethod]
-        public void Modulo_Integer_by_Integer()
+        public void ModuloIntegerByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Integer_by_Integer version '1.0.0'
+                library ModuloIntegerByInteger version '1.0.0'
 
-                define private Modulo_Integer_by_Integer: 4 mod 2
+                define private ModuloIntegerByInteger: 4 mod 2
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -67,12 +67,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Modulo_Integer_by_Long()
+        public void ModuloIntegerByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Integer_by_Long version '1.0.0'
+                library ModuloIntegerByLong version '1.0.0'
 
-                define private Modulo_Integer_by_Long: 3 mod 2L
+                define private ModuloIntegerByLong: 3 mod 2L
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -123,12 +123,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Modulo_Integer_by_Decimal()
+        public void ModuloIntegerByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Integer_by_Decimal version '1.0.0'
+                library ModuloIntegerByDecimal version '1.0.0'
 
-                define private Modulo_Integer_by_Decimal: 3 mod 2.0
+                define private ModuloIntegerByDecimal: 3 mod 2.0
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -179,12 +179,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Modulo_Integer_by_Quantity()
+        public void ModuloIntegerByQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Integer_by_Quantity version '1.0.0'
+                library ModuloIntegerByQuantity version '1.0.0'
 
-                define private Modulo_Integer_by_Quantity: 10 mod 6.0 '1'
+                define private ModuloIntegerByQuantity: 10 mod 6.0 '1'
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -239,12 +239,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Modulo_Integer_by_Null()
+        public void ModuloIntegerByNull()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Integer_by_Null version '1.0.0'
+                library ModuloIntegerByNull version '1.0.0'
 
-                define private Modulo_Integer_by_Null: 1 mod null
+                define private ModuloIntegerByNull: 1 mod null
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -293,12 +293,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Modulo_Null_by_Integer()
+        public void ModuloNullByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Null_by_Integer version '1.0.0'
+                library ModuloNullByInteger version '1.0.0'
 
-                define private Modulo_Null_by_Integer: null mod 1
+                define private ModuloNullByInteger: null mod 1
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -351,12 +351,12 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Long
 
         [TestMethod]
-        public void Modulo_Long_by_Integer()
+        public void ModuloLongByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Long_by_Integer version '1.0.0'
+                library ModuloLongByInteger version '1.0.0'
 
-                define private Modulo_Long_by_Integer: 10L mod 2
+                define private ModuloLongByInteger: 10L mod 2
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -407,12 +407,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Modulo_Long_by_Long()
+        public void ModuloLongByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Long_by_Long version '1.0.0'
+                library ModuloLongByLong version '1.0.0'
 
-                define private Modulo_Long_by_Long: 100L mod 9L
+                define private ModuloLongByLong: 100L mod 9L
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -463,12 +463,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Modulo_Long_by_Decimal()
+        public void ModuloLongByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Long_by_Decimal version '1.0.0'
+                library ModuloLongByDecimal version '1.0.0'
 
-                define private Modulo_Long_by_Decimal: -3L mod 2.0
+                define private ModuloLongByDecimal: -3L mod 2.0
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -519,12 +519,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Modulo_Long_by_Quantity()
+        public void ModuloLongByQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Long_by_Quantity version '1.0.0'
+                library ModuloLongByQuantity version '1.0.0'
 
-                define private Modulo_Long_by_Quantity: 20L mod 3.0 '1'
+                define private ModuloLongByQuantity: 20L mod 3.0 '1'
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -578,12 +578,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Modulo_Long_by_Null()
+        public void ModuloLongByNull()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Long_by_Null version '1.0.0'
+                library ModuloLongByNull version '1.0.0'
 
-                define private Modulo_Long_by_Null: 1L mod null
+                define private ModuloLongByNull: 1L mod null
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -632,12 +632,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Modulo_Null_by_Long()
+        public void ModuloNullByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Null_by_Long version '1.0.0'
+                library ModuloNullByLong version '1.0.0'
 
-                define private Modulo_Null_by_Long: null mod 1L
+                define private ModuloNullByLong: null mod 1L
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -690,12 +690,12 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Decimal
 
         [TestMethod]
-        public void Modulo_Decimal_by_Integer()
+        public void ModuloDecimalByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Decimal_by_Integer version '1.0.0'
+                library ModuloDecimalByInteger version '1.0.0'
 
-                define private Modulo_Decimal_by_Integer: 0.0 mod 3
+                define private ModuloDecimalByInteger: 0.0 mod 3
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -746,7 +746,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Modulo_Decimal_by_Long()
+        public void ModuloDecimalByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
                 library DefaultConverter version '1.0.0'
@@ -802,12 +802,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Modulo_Decimal_by_Decimal()
+        public void ModuloDecimalByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Decimal_by_Decimal version '1.0.0'
+                library ModuloDecimalByDecimal version '1.0.0'
 
-                define private Modulo_Decimal_by_Decimal: 10.0 mod 3.0
+                define private ModuloDecimalByDecimal: 10.0 mod 3.0
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -858,12 +858,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Modulo_Decimal_by_Quantity()
+        public void ModuloDecimalByQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Decimal_by_Quantity version '1.0.0'
+                library ModuloDecimalByQuantity version '1.0.0'
 
-                define private Modulo_Decimal_by_Quantity: 3.0 mod 2.0 '1'
+                define private ModuloDecimalByQuantity: 3.0 mod 2.0 '1'
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -917,12 +917,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Modulo_Decimal_by_Null()
+        public void ModuloDecimalByNull()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Decimal_by_Null version '1.0.0'
+                library ModuloDecimalByNull version '1.0.0'
 
-                define private Modulo_Decimal_by_Null: 1.0 mod null
+                define private ModuloDecimalByNull: 1.0 mod null
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -971,12 +971,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Modulo_Null_by_Decimal()
+        public void ModuloNullByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Null_by_Decimal version '1.0.0'
+                library ModuloNullByDecimal version '1.0.0'
 
-                define private Modulo_Null_by_Decimal: null mod 1.0
+                define private ModuloNullByDecimal: null mod 1.0
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -1029,12 +1029,12 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Quantity
 
         [TestMethod]
-        public void Modulo_Quantity_by_Quantity()
+        public void ModuloQuantityByQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Quantity_by_Quantity version '1.0.0'
+                library ModuloQuantityByQuantity version '1.0.0'
 
-                define private Modulo_Quantity_by_Quantity: 3.0 '1' mod 2.0 '1'
+                define private ModuloQuantityByQuantity: 3.0 '1' mod 2.0 '1'
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -1088,12 +1088,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Modulo_Quantity_by_Null()
+        public void ModuloQuantityByNull()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Quantity_by_Null version '1.0.0'
+                library ModuloQuantityByNull version '1.0.0'
 
-                define private Modulo_Quantity_by_Null: 3.0 '1' mod null
+                define private ModuloQuantityByNull: 3.0 '1' mod null
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -1143,12 +1143,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Modulo_Null_by_Quantity()
+        public void ModuloNullByQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Modulo_Null_by_Quantity version '1.0.0'
+                library ModuloNullByQuantity version '1.0.0'
 
-                define private Modulo_Null_by_Quantity: null mod 3.0 '1'
+                define private ModuloNullByQuantity: null mod 3.0 '1'
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);

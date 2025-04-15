@@ -11,7 +11,7 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Integer
 
         [TestMethod]
-        public void Multiply_Integer_by_Integer()
+        public void MultiplyIntegerByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
                 library Multiply_Integer_to_Integer version '1.0.0'
@@ -67,7 +67,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multiply_Integer_by_Long()
+        public void MultiplyIntegerByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
                 library Multiply_Integer_to_Integer version '1.0.0'
@@ -123,7 +123,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multiply_Integer_by_Decimal()
+        public void MultiplyIntegerByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
                 library Multiply_Integer_to_Integer version '1.0.0'
@@ -179,12 +179,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multiply_Integer_by_Quantity()
+        public void MultiplyIntegerByQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Integer_by_Quantity version '1.0.0'
+                library MultiplyIntegerByQuantity version '1.0.0'
 
-                define private Multiply_Integer_by_Quantity: 2 * 3.0 '1'
+                define private MultiplyIntegerByQuantity: 2 * 3.0 '1'
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -239,10 +239,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multiply_Integer_by_Null()
+        public void MultiplyIntegerByNull()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Integer_by_Null version '1.0.0'
+                library MultiplyIntegerByNull version '1.0.0'
 
                 define private Product: 1 * null
                 """);
@@ -293,10 +293,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multiply_Null_by_Integer()
+        public void MultiplyNullByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Integer_by_Null version '1.0.0'
+                library MultiplyIntegerByNull version '1.0.0'
 
                 define private Product: null * 1
                 """);
@@ -351,10 +351,10 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Long
 
         [TestMethod]
-        public void Multiply_Long_by_Integer()
+        public void MultiplyLongByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Long_by_Integer version '1.0.0'
+                library MultiplyLongByInteger version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: -2L * 3
                 """);
@@ -407,10 +407,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multiply_Long_by_Long()
+        public void MultiplyLongByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Long_by_Integer version '1.0.0'
+                library MultiplyLongByInteger version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: -2L * 3L
                 """);
@@ -463,10 +463,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multiply_Long_by_Decimal()
+        public void MultiplyLongByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Long_by_Integer version '1.0.0'
+                library MultiplyLongByInteger version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: -2L * 3.0
                 """);
@@ -519,12 +519,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multiply_Long_by_Quantity()
+        public void MultiplyLongByQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Integer_by_Quantity version '1.0.0'
+                library MultiplyIntegerByQuantity version '1.0.0'
 
-                define private Multiply_Integer_by_Quantity: 2L * 3.0 '1'
+                define private MultiplyIntegerByQuantity: 2L * 3.0 '1'
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -578,10 +578,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multiply_Long_by_Null()
+        public void MultiplyLongByNull()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Long_by_Null version '1.0.0'
+                library MultiplyLongByNull version '1.0.0'
 
                 define private Product: 1L * null
                 """);
@@ -632,10 +632,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multiply_Null_by_Long()
+        public void MultiplyNullByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Integer_by_Null version '1.0.0'
+                library MultiplyIntegerByNull version '1.0.0'
 
                 define private Product: null * 1L
                 """);
@@ -690,10 +690,10 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Decimal
 
         [TestMethod]
-        public void Multiply_Decimal_by_Integer()
+        public void MultiplyDecimalByInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Decimal_by_Integer version '1.0.0'
+                library MultiplyDecimalByInteger version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: 0.0 * 3
                 """);
@@ -746,10 +746,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multiply_Decimal_by_Long()
+        public void MultiplyDecimalByLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Decimal_by_Integer version '1.0.0'
+                library MultiplyDecimalByInteger version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: 5.0 * 5L
                 """);
@@ -802,10 +802,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multiply_Decimal_by_Decimal()
+        public void MultiplyDecimalByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Decimal_by_Integer version '1.0.0'
+                library MultiplyDecimalByInteger version '1.0.0'
 
                 define private Multiply_Integer_to_Integer: -10.0 * 10.0
                 """);
@@ -858,12 +858,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multiply_Decimal_by_Quantity()
+        public void MultiplyDecimalByQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Integer_by_Quantity version '1.0.0'
+                library MultiplyIntegerByQuantity version '1.0.0'
 
-                define private Multiply_Integer_by_Quantity: 2.0 * 3.0 '1'
+                define private MultiplyIntegerByQuantity: 2.0 * 3.0 '1'
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -917,10 +917,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multiply_Decimal_by_Null()
+        public void MultiplyDecimalByNull()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Decimal_by_Null version '1.0.0'
+                library MultiplyDecimalByNull version '1.0.0'
 
                 define private Product: 1.0 * null
                 """);
@@ -971,10 +971,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multiply_Null_by_Decimal()
+        public void MultiplyNullByDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Integer_by_Null version '1.0.0'
+                library MultiplyIntegerByNull version '1.0.0'
 
                 define private Product: null * 1.0
                 """);
@@ -1029,12 +1029,12 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Quantity
 
         [TestMethod]
-        public void Multiply_Quantity_by_Quantity()
+        public void MultiplyQuantityByQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Quantity_by_Quantity version '1.0.0'
+                library MultiplyQuantityByQuantity version '1.0.0'
 
-                define private Multiply_Quantity_by_Quantity: 3.0 '1' * 2.0 '1'
+                define private MultiplyQuantityByQuantity: 3.0 '1' * 2.0 '1'
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -1088,12 +1088,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multiply_Quantity_by_Null()
+        public void MultiplyQuantityByNull()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Quantity_by_Null version '1.0.0'
+                library MultiplyQuantityByNull version '1.0.0'
 
-                define private Multiply_Quantity_by_Null: 3.0 '1' * null
+                define private MultiplyQuantityByNull: 3.0 '1' * null
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
@@ -1143,12 +1143,12 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multiply_Null_by_Quantity()
+        public void MultiplyNullByQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Multiply_Null_by_Quantity version '1.0.0'
+                library MultiplyNullByQuantity version '1.0.0'
 
-                define private Multiply_Null_by_Quantity: null * 3.0 '1'
+                define private MultiplyNullByQuantity: null * 3.0 '1'
                 """);
             Assert.IsNotNull(library.statements);
             Assert.AreEqual(1, library.statements.Length);
