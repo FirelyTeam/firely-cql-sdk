@@ -40,7 +40,11 @@ public readonly record struct CqlLibraryIdentifier :
     /// Initializes a new instance of the <see cref="CqlLibraryIdentifier"/> struct.
     /// </summary>
     /// <param name="value">The string value of the identifier.</param>
-    private CqlLibraryIdentifier(string value) => _value = value ?? throw new ArgumentNullException(nameof(value));
+    private CqlLibraryIdentifier(string value) => _value = value; // TryParse will already do validation
+
+    internal static bool IsValid([NotNullWhen(true)]string? value) =>
+        value is not null
+        && !value.Contains('_');
 
     /// <summary>
     /// Returns the string representation of the identifier.
@@ -71,7 +75,7 @@ public readonly record struct CqlLibraryIdentifier :
     {
         return TryParse(s, out var result)
                    ? result
-                   : throw new FormatException("Not a valid ElmLibraryName");
+                   : throw new FormatException($"Not a valid {nameof(CqlLibraryIdentifier)}");
     }
 
     /// <summary>
@@ -97,14 +101,14 @@ public readonly record struct CqlLibraryIdentifier :
     /// <returns><c>true</c> if the string was successfully parsed; otherwise, <c>false</c>.</returns>
     public static bool TryParse(string? s, out CqlLibraryIdentifier result)
     {
-        if (s is null)
+        if (IsValid(s))
         {
-            result = default;
-            return false;
+            result = new CqlLibraryIdentifier(s);
+            return true;
         }
 
-        result = new CqlLibraryIdentifier(s);
-        return true;
+        result = default;
+        return false;
     }
 
     #endregion

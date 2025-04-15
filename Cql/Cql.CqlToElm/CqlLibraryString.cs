@@ -56,7 +56,7 @@ public readonly partial record struct CqlLibraryString
                            \s*              # optional spaces
                            '(?<ver>[^']+)'  # The version of the library between single quotes
                          )?                 # Version is optional
-                     """,
+                         """,
                     RegexOptions.IgnorePatternWhitespace | RegexOptions.Multiline)]
     private static partial Regex LibraryNameAndVersionRegex();
 
