@@ -117,7 +117,7 @@ namespace Hl7.Cql.CqlToElm.Toolkit;
 public record CqlToolkitConfig(
     ImmutableHashSet<CqlModel>? Models = null,
     ImmutableHashSet<ModelInfo>? ModelInfos = null,
-    AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.PreferModel,
+    AmbiguousTypeBehavior AmbiguousTypeBehavior = AmbiguousTypeBehavior.Error,
     string? SystemElmModelUri = "urn:hl7-org:elm-types:r1",
     string? SystemElmModelVersion = "1.0.0",
     // Lists
