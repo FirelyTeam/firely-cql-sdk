@@ -10,6 +10,9 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Invocation.Toolkit.Internal;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
+using System.Text;
+using System.Xml.Linq;
+using static Hl7.Cql.Invocation.Toolkit.StringBuilderExtensions;
 
 namespace Hl7.Cql.Invocation.Toolkit;
 
@@ -17,7 +20,6 @@ namespace Hl7.Cql.Invocation.Toolkit;
 /// <summary>
 /// Abstract base class for invoking CQL libraries.
 /// </summary>
-[DebuggerDisplay("ToString(),nq")]
 public abstract class LibraryInvoker
 {
     /// <summary>
@@ -33,6 +35,8 @@ public abstract class LibraryInvoker
     /// Gets the library set invoker that created the <see cref="LibraryInvoker"/>.
     /// </summary>
     public LibrarySetInvoker LibrarySetInvoker { get; }
+
+    public string LibrarySetName => LibrarySetInvoker.LibrarySetName;
 
     /// <summary>
     /// Gets the versioned identifier of the CQL library.
@@ -117,7 +121,11 @@ public abstract class LibraryInvoker
         return false;
     }
 
+
     /// <inheritdoc />
     public override string ToString() =>
-        $"{{{nameof(LibraryIdentifier)}: {LibraryIdentifier}}}";
+        StartBrace()
+            .AppendMemberIf(LibrarySetName, LibrarySetName is {Length:>0})
+            .AppendMember(LibraryIdentifier)
+            .EndBrace();
 }

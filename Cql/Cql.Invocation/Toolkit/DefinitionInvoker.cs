@@ -8,6 +8,7 @@
 
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
+using static Hl7.Cql.Invocation.Toolkit.StringBuilderExtensions;
 
 namespace Hl7.Cql.Invocation.Toolkit;
 
@@ -33,14 +34,19 @@ public abstract class DefinitionInvoker(
     public LibraryInvoker LibraryInvoker { get; } = libraryInvoker;
 
     /// <summary>
-    /// Gets the name of the definition.
+    /// A convenience property to get the library set name
     /// </summary>
-    public string DefinitionName { get; } = definitionName;
+    public string LibrarySetName => LibraryInvoker.LibrarySetName;
 
     /// <summary>
     /// A convenience property to get the library identifier of the library that contains this definition.
     /// </summary>
     public CqlVersionedLibraryIdentifier LibraryIdentifier => LibraryInvoker.LibraryIdentifier;
+
+    /// <summary>
+    /// Gets the name of the definition.
+    /// </summary>
+    public string DefinitionName { get; } = definitionName;
 
     /// <summary>
     /// Gets the return type of the method.
@@ -72,5 +78,9 @@ public abstract class DefinitionInvoker(
 
     /// <inheritdoc />
     public override string ToString() =>
-        $"{{{nameof(LibraryIdentifier)}: {LibraryIdentifier}, {nameof(DefinitionName)}: {DefinitionName}, {nameof(ReturnType)}: {ReturnType.ToCSharpString()}}}";
+        StartBrace()
+            .AppendMemberIf(LibrarySetName, LibrarySetName is { Length: > 0 })
+            .AppendMember(LibraryIdentifier)
+            .AppendMember(DefinitionName)
+            .EndBrace();
 }

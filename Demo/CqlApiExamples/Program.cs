@@ -167,7 +167,7 @@ internal static class Program
         // We need a disposable invocation scope, which contains the AssemblyLoadContext and the related library Assemblies.
         using var librarySetInvoker = cqlToolkit.SetIgnoreEnumerationExceptions(false)
                                                 .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory)
-                                                .CreateLibrarySetInvoker();
+                                                .CreateLibrarySetInvoker(name:"Examples");
         logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDeclarations());
         Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
         Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
