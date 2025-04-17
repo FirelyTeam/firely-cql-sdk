@@ -11,6 +11,10 @@ public class ResourceCanonicalBuilderTests
     [DataRow("", null, "/Library/Identifier")]
     [DataRow("", "", "/Library/Identifier")]
     [DataRow("", "Version", "/Library/Identifier|Version")]
+
+    [DataRow("RootUrl", null, "RootUrl/Library/Identifier")]
+    [DataRow("RootUrl", "", "RootUrl/Library/Identifier")]
+    [DataRow("RootUrl", "Version", "RootUrl/Library/Identifier|Version")]
     public void BuildCanonical_ShouldReturnValidCanonical(
         string rootCanonical,
         string? version,
