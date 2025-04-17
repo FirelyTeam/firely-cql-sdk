@@ -101,8 +101,9 @@ internal sealed class ElmToFhirProgram
                 }
                 sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.Conversions.Count} CQL libraries from directory {opt.CqlInDir}."));
 
-                var packagingToolkit = new PackagingToolkit(loggerFactory)
+                var packagingToolkit = new PackagingToolkit(loggerFactory, fhirOpt, elmToolkit.BatchProcessExceptionContinuation)
                     .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit);
+
                 if (packagingToolkit.Conversions.Count == 0)
                 {
                     logger.LogInformation("Exiting. No CQL or ELM libraries matched with each other for packaging.");
@@ -119,7 +120,7 @@ internal sealed class ElmToFhirProgram
 
                 packagingToolkit
                     .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
-                    .ConvertToFhirResources(fhirOpt.CanonicalRootUrl, fhirOpt.OverrideDate)
+                    .ConvertToFhirResources()
                     .SaveFhirResourcesToDirectory(
                         opt.FhirOutDir,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"),

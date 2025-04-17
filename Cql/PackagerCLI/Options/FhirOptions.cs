@@ -6,13 +6,13 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Packaging.Toolkit;
+
 namespace Hl7.Cql.Packager.Options;
 
-public record FhirOptions : IBindOptions
+public record FhirOptions : PackagingToolkitConfig, IBindOptions
 {
     public const string ConfigSection = "Packaging";
-    static string IBindOptions.ConfigSection => ConfigSection;
 
-    public Uri? CanonicalRootUrl { get; init; }
-    public DateTime? OverrideDate { get; init; }
+    static string IBindOptions.ConfigSection => ConfigSection;
 }
