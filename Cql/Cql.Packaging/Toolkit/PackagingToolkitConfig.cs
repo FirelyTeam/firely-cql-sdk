@@ -11,7 +11,8 @@ public record PackagingToolkitConfig(
     SysDateTime? OverrideDate = null,
     IReadOnlyDictionary<CqlLibraryIdentifier, string>? FixedLibraryCanonicals = null)
 {
-    public IReadOnlyDictionary<CqlLibraryIdentifier, string> FixedLibraryCanonicals { get; } = FixedLibraryCanonicals ?? ReadOnlyDictionary<CqlLibraryIdentifier, string>.Empty;
+    public IReadOnlyDictionary<CqlLibraryIdentifier, string> FixedLibraryCanonicals { get; init; }
+        = FixedLibraryCanonicals ?? ReadOnlyDictionary<CqlLibraryIdentifier, string>.Empty;
 
     /// <summary>
     /// The default configuration for the CQL toolkit.

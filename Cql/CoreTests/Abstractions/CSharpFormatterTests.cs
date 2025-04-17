@@ -35,6 +35,8 @@ public class CSharpFormatterTests
             (typeof(decimal), "decimal"),
             (typeof(string), "string"),
             (typeof(object), "object"),
+            // IsByRef
+            (typeof(int).MakeByRefType(), "int"),
             // Arrays
             (typeof(int[]), "int[]"),
             (typeof(int[][]), "int[][]"),

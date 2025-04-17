@@ -140,7 +140,7 @@ internal record TypeCSharpFormat(
                 WriteName();
             }
         }
-        else if (type.IsArray)
+        else if (type.IsArray || type.IsByRef)
         {
             WriteTo(type.GetElementType()!, textWriter);
         }

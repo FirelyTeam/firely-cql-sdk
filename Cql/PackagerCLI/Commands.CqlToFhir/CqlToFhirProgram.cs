@@ -26,7 +26,7 @@ public class CqlToFhirProgram
     ILogger<CqlToFhirProgram> logger,
     IOptions<CqlOptions> cqlOptions,
     IOptions<ElmOptions> elmOptions,
-    IOptions<FhirOptions> fhirOptions,
+    IOptions<PackagingOptions> packagingOptions,
     IOptions<CqlToFhirOptions> cqlToElmOptions) : IProgram
 {
     public static int CommandHandler(
@@ -48,7 +48,7 @@ public class CqlToFhirProgram
             var opt = cqlToElmOptions.Value;
             var cqlOpt = cqlOptions.Value;
             var elmOpt = elmOptions.Value;
-            var fhirOpt = fhirOptions.Value;
+            var packOpt = packagingOptions.Value;
 
             switch (opt.ElmOutDir, opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir)
             {
@@ -124,7 +124,7 @@ public class CqlToFhirProgram
 
             if (opt.FhirOutDir is not null)
             {
-                var packagingToolkit = new PackagingToolkit(loggerFactory, fhirOpt, elmToolkit.BatchProcessExceptionContinuation)
+                var packagingToolkit = new PackagingToolkit(loggerFactory, packOpt, elmToolkit.BatchProcessExceptionContinuation)
                     .AddPackagingInputs(cqlToolkit, elmToolkit);
 
                 if (packagingToolkit.Conversions.Count == 0)

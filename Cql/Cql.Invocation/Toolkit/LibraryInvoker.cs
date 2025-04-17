@@ -10,8 +10,6 @@ using Hl7.Cql.Abstractions;
 using Hl7.Cql.Invocation.Toolkit.Internal;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
-using System.Text;
-using System.Xml.Linq;
 using static Hl7.Cql.Invocation.Toolkit.StringBuilderExtensions;
 
 namespace Hl7.Cql.Invocation.Toolkit;

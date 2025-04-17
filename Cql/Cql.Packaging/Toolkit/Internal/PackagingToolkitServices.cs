@@ -29,7 +29,7 @@ internal readonly record struct PackagingToolkitServices(
         services.TryAddSingleton(_ => FhirModelInfo.ModelInspector);
         services.TryAddSingleton<TypeResolver, FhirTypeResolver>();
         services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
-        services.TryAddSingleton(_ => ResourceCanonicalBuilderFactory.CreateWithRootUrl(config.CanonicalRootUrl));
+        services.TryAddSingleton(_ => ResourceCanonicalBuilderFactory.CreateWithRootUrl(config.CanonicalRootUrl, config.FixedLibraryCanonicals));
         services.TryAddSingleton<ResourcePackager>();
         services.TryAddSingleton((IServiceProvider _, ModelInspector modelInspector) => new JsonSerializerOptions().ForFhir(modelInspector));
         var serviceProvider = services.BuildServiceProvider();

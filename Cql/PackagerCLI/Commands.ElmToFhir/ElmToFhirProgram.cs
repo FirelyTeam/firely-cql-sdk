@@ -26,7 +26,7 @@ internal sealed class ElmToFhirProgram
     ILogger<ElmToFhirProgram> logger,
     IOptions<CqlOptions> cqlOptions,
     IOptions<ElmOptions> elmOptions,
-    IOptions<FhirOptions> fhirOptions,
+    IOptions<PackagingOptions> packagingOptions,
     IOptions<ElmToFhirOptions> elmToFhirOptions) : IProgram
 {
     public int Run()
@@ -37,7 +37,7 @@ internal sealed class ElmToFhirProgram
             var opt = elmToFhirOptions.Value;
             var cqlOpt = cqlOptions.Value;
             var elmOpt = elmOptions.Value;
-            var fhirOpt = fhirOptions.Value;
+            var packOpt = packagingOptions.Value;
 
             switch (opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir)
             {
@@ -101,7 +101,7 @@ internal sealed class ElmToFhirProgram
                 }
                 sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.Conversions.Count} CQL libraries from directory {opt.CqlInDir}."));
 
-                var packagingToolkit = new PackagingToolkit(loggerFactory, fhirOpt, elmToolkit.BatchProcessExceptionContinuation)
+                var packagingToolkit = new PackagingToolkit(loggerFactory, packOpt, elmToolkit.BatchProcessExceptionContinuation)
                     .AddPackagingInputs(cqlToolkit, elmToolkit);
 
                 if (packagingToolkit.Conversions.Count == 0)

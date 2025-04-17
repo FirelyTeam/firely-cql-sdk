@@ -7,6 +7,7 @@ global using System.CommandLine.IO;
 global using System.CommandLine.NamingConventionBinder;
 global using System.ComponentModel;
 global using System.Diagnostics;
+global using System.Diagnostics.CodeAnalysis;
 global using System.Globalization;
 global using System.Reflection;
 global using System.Runtime.CompilerServices;

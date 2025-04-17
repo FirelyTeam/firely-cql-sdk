@@ -14,4 +14,12 @@ public record CqlOptions : CqlToolkitConfig, IBindOptions
 {
     public const string ConfigSection = "Cql";
     static string IBindOptions.ConfigSection => ConfigSection;
+
+    /// <remarks>Called by convention from <see cref="OptionsBinder"/></remarks>>
+    [UsedImplicitly]
+    public static bool TryBindModels(IConfiguration config, out ImmutableHashSet<CqlModel>? value)
+    {
+        value = config.Get<CqlModel[]>()?.ToImmutableHashSet();
+        return value is not null;
+    }
 }
