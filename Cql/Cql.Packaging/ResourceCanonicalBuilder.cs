@@ -10,14 +10,16 @@ using Hl7.Fhir.Utility;
 
 namespace Hl7.Cql.Packaging;
 
-internal class ResourceUriBuilder(string rootUrl) : IResourceCanonicalBuilder
+internal class ResourceCanonicalBuilder(string rootUrl = "") : IResourceCanonicalBuilder
 {
-    public string RootUrl { get; } = rootUrl.EnsureEndsWith("/");
+    public static readonly ResourceCanonicalBuilder Default = new();
+
+    private readonly string _rootUrl = rootUrl.EnsureEndsWith("/");
 
     public string BuildCanonical(string resourceType, string identifier, string? version = null)
     {
         string includeVersionString = string.IsNullOrEmpty(version) ? string.Empty : $"|{version}";
-        string includeIdMaybeVersion = $"{RootUrl}{resourceType}/{identifier}{includeVersionString}";
+        string includeIdMaybeVersion = $"{_rootUrl}{resourceType}/{identifier}{includeVersionString}";
         return includeIdMaybeVersion;
     }
 }

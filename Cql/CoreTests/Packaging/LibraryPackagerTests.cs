@@ -32,7 +32,7 @@ public class LibraryPackagerTests
             assemblyBytes: [],
             elmLibrarySet: new LibrarySet("", [elmLibrary] ),
             cSharpSourceCodeById: [],
-            resourceCanonicalBuilder: new ResourceUriBuilder(""));
+            resourceCanonicalBuilder: new ResourceCanonicalBuilder(""));
 
         // Assert
         Assert.IsNotNull(library);
