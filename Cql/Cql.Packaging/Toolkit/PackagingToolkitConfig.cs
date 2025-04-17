@@ -18,7 +18,11 @@ public record PackagingToolkitConfig(
     /// Mapping for special libraries with fixed canonicals, that are not rooted in the <see cref="CanonicalRootUrl"/>.
     /// </summary>
     public IReadOnlyDictionary<CqlLibraryIdentifier, string> FixedLibraryCanonicals { get; init; }
-        = FixedLibraryCanonicals ?? ReadOnlyDictionary<CqlLibraryIdentifier, string>.Empty;
+        = FixedLibraryCanonicals ?? CreateDefaultFixedLibraryCanonicals();
+
+    private static ReadOnlyDictionary<CqlLibraryIdentifier, string> CreateDefaultFixedLibraryCanonicals() =>
+        new Dictionary<CqlLibraryIdentifier, string> { { (CqlLibraryIdentifier)"FHIRHelpers", "https://fhir.org/guides/cqf/common/Library/FHIRHelpers" } }
+            .AsReadOnly();
 
     /// <summary>
     /// The default configuration for the CQL toolkit.
