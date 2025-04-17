@@ -16,4 +16,5 @@ public record ElmOptions : ElmToolkitConfig, IBindOptions
     static string IBindOptions.ConfigSection => ConfigSection;
 
     public string[] SkipFiles { get; init; } = [];
+    public bool JsonPretty { get; init; }
 }

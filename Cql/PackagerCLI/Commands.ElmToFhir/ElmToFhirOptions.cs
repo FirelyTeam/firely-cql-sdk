@@ -18,5 +18,5 @@ internal record ElmToFhirOptions : IBindOptions
     public DirectoryInfo? CSharpOutDir { get; set; }
     public DirectoryInfo? DllOutDir { get; set; }
     public required DirectoryInfo? FhirOutDir { get; set; }
-    public bool JsonPretty { get; set; }
+    // public bool JsonPretty { get; set; }
 }

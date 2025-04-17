@@ -111,7 +111,7 @@ internal sealed class ElmToFhirProgram
                 }
 
                 Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null;
-                if (opt.JsonPretty)
+                if (packOpt.JsonPretty)
                     configureJsonSerializerOptions = options =>
                     {
                         options.WriteIndented = true;

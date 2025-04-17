@@ -57,6 +57,6 @@ public record CqlToFhirCommand(
         (Fhir, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.FhirOutDir)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
-        (JsonPretty, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.JsonPretty)]),
+        (JsonPretty, [ElmOptions.ConfigSection, nameof(ElmOptions.JsonPretty)]),
     ];
 }

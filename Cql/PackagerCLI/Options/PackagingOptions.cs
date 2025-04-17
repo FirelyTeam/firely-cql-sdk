@@ -31,5 +31,7 @@ public record PackagingOptions : PackagingToolkitConfig, IBindOptions
         return value.Count > 0;
     }
 
+    public bool JsonPretty { get; init; }
+
     static string IBindOptions.ConfigSection => ConfigSection;
 }

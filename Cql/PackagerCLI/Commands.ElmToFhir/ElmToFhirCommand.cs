@@ -55,6 +55,6 @@ internal record ElmToFhirCommand(
         (Fhir, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.FhirOutDir)]),
         (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
         (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
-        (JsonPretty, [ElmToFhirOptions.ConfigSection, nameof(ElmToFhirOptions.JsonPretty)]),
+        (JsonPretty, [PackagingOptions.ConfigSection, nameof(PackagingOptions.JsonPretty)]),
     ];
 }
