@@ -65,6 +65,9 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
     /// <inheritdoc />
     public BatchProcessExceptionContinuation BatchProcessExceptionContinuation { get; private set; }
 
+    /// <summary>
+    /// Represents the name of a library set or empty.
+    /// </summary>
     public string LibrarySetName { get; }
 
     /// <inheritdoc />

@@ -33,7 +33,7 @@ public abstract class DefinitionInvoker(
     public LibraryInvoker LibraryInvoker { get; } = libraryInvoker;
 
     /// <summary>
-    /// A convenience property to get the library set name
+    /// A convenience property to get the library set name.
     /// </summary>
     public string LibrarySetName => LibraryInvoker.LibrarySetName;
 

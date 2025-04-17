@@ -114,8 +114,6 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// <summary>
     /// Converts the added packaging inputs to FHIR resources.
     /// </summary>
-    /// <param name="canonicalRootUrl">The canonical root URL for the FHIR resources.</param>
-    /// <param name="overrideDate">The date to override in the FHIR resources. If not specified, the current time will be used.</param>
     /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
     public PackagingToolkit ConvertToFhirResources()
     {

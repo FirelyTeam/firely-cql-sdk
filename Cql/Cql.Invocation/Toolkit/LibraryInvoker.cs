@@ -34,6 +34,9 @@ public abstract class LibraryInvoker
     /// </summary>
     public LibrarySetInvoker LibrarySetInvoker { get; }
 
+    /// <summary>
+    /// A convenience property to get the library set name.
+    /// </summary>
     public string LibrarySetName => LibrarySetInvoker.LibrarySetName;
 
     /// <summary>
