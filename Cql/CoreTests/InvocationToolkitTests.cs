@@ -66,7 +66,7 @@ public class InvocationToolkitTests
                     Models = [CqlModel.ElmR1, CqlModel.Fhir401],
                 })
                 .AddCqlLibraries(cqlMeasuresExample)
-                .ConvertCqlToElm();
+                .TranslateToElm();
 
         // WORKAROUND: The cql to elm toolkit doesn't support annotations yet.
         var resultElmLibrary = cqlToolkit.Conversions[cqlMeasuresExample].ResultElmLibrary;

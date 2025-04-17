@@ -30,7 +30,7 @@ public readonly record struct CqlToolkitConversionRecord(
     /// <summary>
     /// The library builder service for the ELM library.
     /// This is set from <seealso cref="LibraryBuilderProvider.TryResolveLibrary"/>
-    /// when the ELM library is resolved in <see cref="CqlToolkit.ConvertCqlToElm"/>.
+    /// when the ELM library is resolved in <see cref="CqlToolkit.TranslateToElm"/>.
     /// </summary>
     internal LibraryBuilder? LibraryBuilder { get; init; }
 }

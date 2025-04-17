@@ -68,7 +68,7 @@ public class CqlToFhirProgram
             }
             sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.Conversions.Count} CQL libraries from directory {opt.CqlInDir}."));
 
-            var cqlToolkitResultRecords = cqlToolkit.ConvertCqlToElm()
+            var cqlToolkitResultRecords = cqlToolkit.TranslateToElm()
                       .GetCqlToolkitResults()
                       .ToList();
 
@@ -96,7 +96,7 @@ public class CqlToFhirProgram
             ElmToolkit elmToolkit = cqlToolkit.CreateElmToolkit(elmOpt);
 
             var elmToolkitResultRecords = elmToolkit
-                                          .ConvertElmToAssemblies()
+                                          .CompileToAssemblies()
                                           .GetElmToAssemblyResults()
                                           .ToList();
             if (elmToolkitResultRecords.Count == 0)
@@ -117,7 +117,7 @@ public class CqlToFhirProgram
             if (opt.DllOutDir is not null)
             {
                 elmToolkit
-                    .ConvertElmToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
+                    .CompileToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
                     .SaveAssemblyBinariesToDirectory(opt.DllOutDir, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"));
                 sbSummary.AppendLine(Invariant($"Saved {elmToolkitResultRecords.Count} DLLs files to directory {opt.DllOutDir}."));
             }
@@ -125,7 +125,7 @@ public class CqlToFhirProgram
             if (opt.FhirOutDir is not null)
             {
                 var packagingToolkit = new PackagingToolkit(loggerFactory, fhirOpt, elmToolkit.BatchProcessExceptionContinuation)
-                    .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit);
+                    .AddPackagingInputs(cqlToolkit, elmToolkit);
 
                 if (packagingToolkit.Conversions.Count == 0)
                 {
@@ -142,7 +142,7 @@ public class CqlToFhirProgram
                     };
 
                 packagingToolkit
-                    .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
+                    .AddPackagingInputs(cqlToolkit, elmToolkit)
                     .ConvertToFhirResources()
                     .SaveFhirResourcesToDirectory(
                         opt.FhirOutDir,

@@ -11,6 +11,7 @@ internal class Directories(string librarySetName)
                "Demo"
             or "CMS"
             or "Authoring"
+            or "Examples"
             or "Tests");
         return new Directories(librarySetName);
     }

@@ -63,7 +63,7 @@ internal sealed class ElmToFhirProgram
             sbSummary.AppendLine(Invariant($"Loaded {elmToolkit.Conversions.Count} ELM libraries from directory {opt.ElmInDir}."));
 
             var elmToolkitResultRecords = elmToolkit
-                                          .ConvertElmToAssemblies()
+                                          .CompileToAssemblies()
                                           .GetElmToAssemblyResults()
                                           .ToList();
             if (elmToolkitResultRecords.Count == 0)
@@ -102,7 +102,7 @@ internal sealed class ElmToFhirProgram
                 sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.Conversions.Count} CQL libraries from directory {opt.CqlInDir}."));
 
                 var packagingToolkit = new PackagingToolkit(loggerFactory, fhirOpt, elmToolkit.BatchProcessExceptionContinuation)
-                    .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit);
+                    .AddPackagingInputs(cqlToolkit, elmToolkit);
 
                 if (packagingToolkit.Conversions.Count == 0)
                 {
@@ -119,7 +119,7 @@ internal sealed class ElmToFhirProgram
                     };
 
                 packagingToolkit
-                    .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
+                    .AddPackagingInputs(cqlToolkit, elmToolkit)
                     .ConvertToFhirResources()
                     .SaveFhirResourcesToDirectory(
                         opt.FhirOutDir,

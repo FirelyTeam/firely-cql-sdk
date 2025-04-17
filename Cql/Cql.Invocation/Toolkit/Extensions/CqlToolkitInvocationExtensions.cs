@@ -15,7 +15,7 @@ namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 /// <summary>
 /// Provides extension methods for the <see cref="CqlToolkit"/> class.
 /// </summary>
-public static class CqlToolkitExtensions
+public static class CqlToolkitInvocationExtensions
 {
     /// <summary>
     /// Creates a <see cref="LibrarySetInvoker"/> from the specified <see cref="CqlToolkit"/>.
@@ -29,7 +29,7 @@ public static class CqlToolkitExtensions
         ElmToolkitConfig? elmToolkitConfig = null,
         string name = "") =>
         cqlToolkit
-            .ConvertCqlToElm()
+            .TranslateToElm()
             .CreateElmToolkit(elmToolkitConfig)
             .CreateLibrarySetInvoker(name);
 }

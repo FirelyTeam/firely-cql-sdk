@@ -29,7 +29,7 @@ internal static class Program
         // AddDuplicates(loggerFactory);
         // Add3And2Example(loggerFactory);
         // InvokeCqlExample(loggerFactory);
-        InvokeCqlFromExamplesFolder(loggerFactory);
+        //InvokeCqlFromExamplesFolder(loggerFactory);
         PackageFromExamplesFolder(loggerFactory);
 
         var shouldBuildCqlToElm = true;
@@ -116,10 +116,10 @@ internal static class Program
         var dirs = Directories.Create("Examples");
 
         // Load CQL libraries from a directory and process them to ELM, C#, and assemblies
-        cqlToolkit.AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory).ConvertCqlToElm();
-        var elmToolkit = cqlToolkit.CreateElmToolkit().ConvertElmToAssemblies();
-        var packagingToolkit = new PackagingToolkit(loggerFactory);
-        packagingToolkit.AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit);
+        cqlToolkit.AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory).TranslateToElm();
+        var elmToolkit = cqlToolkit.CompileToAssemblies();
+        var packagingToolkit = elmToolkit.PackageToFhirResources(cqlToolkit, PackagingToolkitConfig.Default);
+        var results = packagingToolkit.GetPackagingResults().ToList();
     }
 
     /// <summary>
@@ -203,7 +203,7 @@ internal static class Program
         {
             cqlToolkit
                 .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory)
-                .ConvertCqlToElm()
+                .TranslateToElm()
                 .SaveElmFilesToDirectory(dirs.ElmOutDirectory)
                 ;
         }
@@ -211,7 +211,7 @@ internal static class Program
         var elmToolkit = cqlToolkit
                          .CreateElmToolkit(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded))
                          .AddElmFilesFromDirectory(dirs.ElmFromDirectory)
-                         .ConvertElmToAssemblies()
+                         .CompileToAssemblies()
                          .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
                          .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory);
 
@@ -243,7 +243,7 @@ internal static class Program
         // Add CQL libraries from a directory and process them to ELM, then save the ELM files to a directory
         cqlToolkit
             .AddCqlLibrariesFromDirectory(new DirectoryInfo("input/Add/cql"))
-            .ConvertCqlToElm()
+            .TranslateToElm()
             .SaveElmFilesToDirectory(new DirectoryInfo("output/Add/elm/"));
 
         // Create fluent elm toolkit as a continuation of the cql toolkit
@@ -251,7 +251,7 @@ internal static class Program
 
         // Process the ELM files to assemblies, then save the C# files and assembly binaries to directories
         elmToolkit
-            .ConvertElmToAssemblies() // TODO:ConvertElmToAssemblies
+            .CompileToAssemblies() // TODO:ConvertElmToAssemblies
             .SaveCSharpFilesToDirectory(new DirectoryInfo("output/Add/csharp/"))
             .SaveAssemblyBinariesToDirectory(new DirectoryInfo("output/Add/assemblies/"));
 
