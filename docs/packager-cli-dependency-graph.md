@@ -38,6 +38,7 @@ classDiagram
 
     namespace Packaging {
         class ResourcePackager { }
+        class ResourceCanonicalBuilder {}
     }
 
     namespace Abstraction {
@@ -94,4 +95,5 @@ classDiagram
     TypeResolver ..> AssemblyCompiler : injected
 
     TypeResolver ..> ResourcePackager : injected
+    ResourceCanonicalBuilder ..> ResourcePackager : injected
 ```

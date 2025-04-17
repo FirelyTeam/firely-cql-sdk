@@ -18,7 +18,7 @@ namespace Hl7.Cql.Packaging;
 internal class ResourcePackager(
     ILoggerFactory loggerFactory,
     TypeResolver typeResolver,
-    IResourceCanonicalBuilder resourceCanonicalBuilder)
+    ResourceCanonicalBuilder resourceCanonicalBuilder)
 {
     private readonly CqlTypeToFhirTypeMapper _cqlTypeToFhirTypeMapper = new(typeResolver);
 
@@ -94,7 +94,7 @@ file static class MeasurePackager
         ElmLibrary elmLibrary,
         FhirLibrary fhirLibrary,
         [NotNullWhen(true)] out FhirMeasure? fhirMeasure,
-        IResourceCanonicalBuilder resourceCanonicalBuilder,
+        ResourceCanonicalBuilder resourceCanonicalBuilder,
         SysDateTime overrideDate)
     {
         var tags = elmLibrary.statements?
@@ -128,7 +128,7 @@ file static class MeasurePackager
         Tag measureAnnotation,
         int measureYear,
         ElmLibrary elmLibrary,
-        IResourceCanonicalBuilder resourceCanonicalBuilder,
+        ResourceCanonicalBuilder resourceCanonicalBuilder,
         SysDateTime overrideDate)
     {
         var measure = new FhirMeasure();
@@ -139,7 +139,7 @@ file static class MeasurePackager
         measure.Version = libVer;
         measure.Name = libName;
         measure.Title = measureAnnotation.value;
-        measure.Url = resourceCanonicalBuilder.BuildCanonical(measure.TypeName, libName);
+        measure.Url = resourceCanonicalBuilder(measure.TypeName, libName);
 
         measure.Status = PublicationStatus.Active;
         measure.Date = new DateTimeIso8601(overrideDate, Iso8601DateTimePrecision.Millisecond).ToString();
@@ -151,7 +151,7 @@ file static class MeasurePackager
         measure.Group = [];
 
         AnnotateMeasurePopulations(measure, elmLibrary);
-        string[] library = [resourceCanonicalBuilder.BuildCanonical("Library", libName, libVer)];
+        string[] library = [resourceCanonicalBuilder("Library", libName, libVer)];
         measure.Library = library;
         return measure;
     }
@@ -272,7 +272,7 @@ internal static class LibraryPackager
         byte[]? assemblyBytes,
         IEnumerable<KeyValuePair<string, string>>? cSharpSourceCodeById,
         ElmLibrarySet elmLibrarySet,
-        IResourceCanonicalBuilder resourceCanonicalBuilder,
+        ResourceCanonicalBuilder resourceCanonicalBuilder,
         SysDateTime? elmFileLastWriteTimeUtc = null)
     {
         switch (elmLibrary, elmBytes)
@@ -331,7 +331,7 @@ internal static class LibraryPackager
 
     private static FhirLibrary CreateFhirLibrary(
         ElmLibrary elmLibrary,
-        IResourceCanonicalBuilder resourceCanonicalBuilder,
+        ResourceCanonicalBuilder resourceCanonicalBuilder,
         SysDateTime date)
     {
         // https://hl7.org/fhir/uv/cql/STU1/StructureDefinition-cql-library.html
@@ -340,7 +340,7 @@ internal static class LibraryPackager
         fhirLibrary.Id = FhirIdGenerator.GenerateFhirId(elmLibrary.identifier.ToCqlVersionedLibraryIdentifier());
         fhirLibrary.Version = elmLibrary.identifier?.version!;
         fhirLibrary.Name = elmLibrary.identifier?.id!;
-        fhirLibrary.Url = resourceCanonicalBuilder.BuildCanonical(fhirLibrary.TypeName, elmLibrary.identifier?.id!); // NOTE: We do NOT include the version
+        fhirLibrary.Url = resourceCanonicalBuilder(fhirLibrary.TypeName, elmLibrary.identifier?.id!); // NOTE: We do NOT include the version
         fhirLibrary.Title = fhirLibrary.Name;
         fhirLibrary.Status = PublicationStatus.Active;
         fhirLibrary.Date = new DateTimeIso8601(date.ToLocalTime(), Iso8601DateTimePrecision.Millisecond).ToString();
@@ -355,8 +355,7 @@ internal static class LibraryPackager
         ElmLibrary elmLibrary,
         FhirLibrary library,
         ElmLibrarySet elmLibrarySet,
-        IResourceCanonicalBuilder resourceCanonicalRootUrl
-        )
+        ResourceCanonicalBuilder resourceCanonicalBuilder)
     {
         List<RelatedArtifact> result = [];
         var dependencies = elmLibrarySet.GetLibraryDependencies(elmLibrary);
@@ -364,7 +363,7 @@ internal static class LibraryPackager
         {
             foreach (IncludeDef include in dependency?.includes ?? [])
             {
-                var resourceUrl = resourceCanonicalRootUrl.BuildCanonical("Library", include.path, include.version);
+                var resourceUrl = resourceCanonicalBuilder("Library", include.path, include.version);
                 var ra = new RelatedArtifact
                 {
                     Display = $"Library {include.localIdentifier}",

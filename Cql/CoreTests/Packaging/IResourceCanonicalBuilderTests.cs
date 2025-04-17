@@ -15,16 +15,16 @@ public class ResourceCanonicalBuilderTests
     [DataRow("RootUrl", null, "RootUrl/Library/Identifier")]
     [DataRow("RootUrl", "", "RootUrl/Library/Identifier")]
     [DataRow("RootUrl", "Version", "RootUrl/Library/Identifier|Version")]
-    public void BuildCanonical_ShouldReturnValidCanonical(
+    public void BuildCanonical_ShouldReturnValidCanonical_WhenCreatedWithRootedUrl(
         string rootCanonical,
         string? version,
         string expectedCanonical)
     {
         // Arrange
-        var rb = new ResourceCanonicalBuilder(rootCanonical);
+        var resourceCanonicalBuilder = ResourceCanonicalBuilderFactory.CreateWithRootUrl(rootCanonical);
 
         // Act
-        var canonical = rb.BuildCanonical("Library", "Identifier", version);
+        var canonical = resourceCanonicalBuilder("Library", "Identifier", version);
 
         // Assert
         canonical.Should().Be(expectedCanonical);
