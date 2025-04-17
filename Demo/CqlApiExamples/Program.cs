@@ -26,19 +26,19 @@ internal static class Program
         // Create a logger factory via the Microsoft.Extensions.Logging API
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
-        AddDuplicates(loggerFactory);
-        Add3And2Example(loggerFactory);
-        InvokeCqlExample(loggerFactory);
-        InvokeCqlFromExamplesFolder(loggerFactory);
+        // AddDuplicates(loggerFactory);
+        // Add3And2Example(loggerFactory);
+        // InvokeCqlExample(loggerFactory);
+        // InvokeCqlFromExamplesFolder(loggerFactory);
         PackageFromExamplesFolder(loggerFactory);
 
-        var shouldBuildCqlToElm = true;
-        string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests"];
-        foreach (var exampleSetName in exampleSetNames)
-        {
-            Directories dirs = Directories.Create(exampleSetName);
-            FullExample(loggerFactory, dirs, shouldBuildCqlToElm);
-        }
+        // var shouldBuildCqlToElm = true;
+        // string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests"];
+        // foreach (var exampleSetName in exampleSetNames)
+        // {
+        //     Directories dirs = Directories.Create(exampleSetName);
+        //     FullExample(loggerFactory, dirs, shouldBuildCqlToElm);
+        // }
     }
 
     private static void AddDuplicates(ILoggerFactory loggerFactory)
@@ -113,13 +113,14 @@ internal static class Program
         CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
 
         // "Directories" is not a part of the API, but a helper class for this example
-        var dirs = Directories.Create("Examples");
+        var dirs = Directories.Create("Demo");
 
         // Load CQL libraries from a directory and process them to ELM, C#, and assemblies
         cqlToolkit.AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory).TranslateToElm();
         var elmToolkit = cqlToolkit.CompileToAssemblies();
         var packagingToolkit = elmToolkit.PackageToFhirResources(cqlToolkit, PackagingToolkitConfig.Default);
         var results = packagingToolkit.GetPackagingResults().ToList();
+        var fhirHelpersResult = results.FirstOrDefault(r => r.LibraryIdentifier.Identifier == "FHIRHelpers");
     }
 
     /// <summary>

@@ -58,7 +58,7 @@ internal static class LibraryExtensions
                     break;
             }
 
-            for (int i = 2; i >= 1; i--)
+            for (int i = arr.Length; i >= 1; i--)
             {
                 var resourceFileName = i switch
                 {

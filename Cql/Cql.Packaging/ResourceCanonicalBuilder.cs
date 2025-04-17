@@ -28,16 +28,13 @@ internal static class ResourceCanonicalBuilderFactory
             string identifier,
             string? version = null) =>
         {
-            if (fixedLibraryCanonicals is { Count: > 0 }
-                && CqlLibraryIdentifier.TryParse(identifier, out var cqlLibraryIdentifier)
-                && fixedLibraryCanonicals.TryGetValue(cqlLibraryIdentifier, out var canonical))
-            {
-                return canonical;
-            }
-
             string includeVersionString = string.IsNullOrEmpty(version) ? string.Empty : $"|{version}";
-            string includeIdMaybeVersion = $"{rootUrl}{resourceType}/{identifier}{includeVersionString}";
-            return includeIdMaybeVersion;
+            var resultCanonical = fixedLibraryCanonicals is { Count: > 0 }
+                    && CqlLibraryIdentifier.TryParse(identifier, out var cqlLibraryIdentifier)
+                    && fixedLibraryCanonicals.TryGetValue(cqlLibraryIdentifier, out var canonical)
+                        ? $"{canonical}{includeVersionString}"
+                        : $"{rootUrl}{resourceType}/{identifier}{includeVersionString}";
+            return resultCanonical;
         };
     }
 }
