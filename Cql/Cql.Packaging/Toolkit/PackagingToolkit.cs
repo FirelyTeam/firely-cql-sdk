@@ -184,10 +184,17 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
         o.SourceCSharpSourceCode,
         o.SourceAssemblyBinary);
 
+    /// <summary>
+    /// A utility method that serializes FHIR resources to JSON format.
+    /// </summary>
+    /// <param name="fhirResources">The collection of FHIR resources to serialize.</param>
+    /// <param name="writeIndented">Specifies whether the JSON output should be indented.</param>
+    /// <param name="configureJsonSerializerOptions">Optional mutator to configure JSON serializer options.</param>
+    /// <returns>A collection of tuples containing the resource file name and its JSON representation.</returns>
     public IEnumerable<(ResourceFileName resourceFileName, string resourceJson)> SerializeFhirResourcesToJson(
-        IEnumerable<FhirResource> fhirResources,
-        bool writeIndented = false,
-        Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
+       IEnumerable<FhirResource> fhirResources,
+       bool writeIndented = false,
+       Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
     {
         var jsonSerializerOptions = ServiceProvider.GetRequiredService<JsonSerializerOptions>();
 
@@ -195,7 +202,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
         var mutateOptions = configureJsonSerializerOptions != null;
         if (updateWriteIndented || mutateOptions)
         {
-            // We have to clone the options, since we're using an instance shared as a singleton.
+            // Clone the options since the instance is shared as a singleton.
             jsonSerializerOptions = new JsonSerializerOptions(jsonSerializerOptions);
 
             if (updateWriteIndented)
