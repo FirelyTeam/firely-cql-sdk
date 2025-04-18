@@ -50,6 +50,11 @@ internal static class CSharpFormatterExtensions
         MethodCSharpFormat? methodFormatterOptions = null) =>
         (methodFormatterOptions ?? MethodCSharpFormat.Default).WriteToString(methodInfo);
 
+    public static string ToCSharpString(
+        this ParameterInfo parameterInfo,
+        ParameterCSharpFormat? parameterInfoCSharpFormat = null) =>
+        (parameterInfoCSharpFormat ?? ParameterCSharpFormat.Default).WriteToString(parameterInfo);
+
     public static StringBuilder AppendCSharp(
         this StringBuilder sb,
         MethodInfo methodInfo,
@@ -68,7 +73,8 @@ internal record TypeCSharpFormat(
     bool NoNamespaces = false,
     bool UseKeywords = false,
     bool NoNullableOperator = false,          // e.g. Nullable<int> instead of int?
-    bool NoGenericTypeParameterNames = false, // e.g.IDictionary<,> instead of  IDictionary<TKey,TValue>
+    bool NoGenericTypeParameterNames = false, // e.g. IDictionary<,> instead of  IDictionary<TKey,TValue>
+    bool UseRefOperator = false,              // e.g. int& instead of only int
     ListTokens? GenericArgumentTokens = null,
     ListTokens? ArrayTokens = null,
     string NestedTypeSeparator = ".")         // A.Nested.Nested
@@ -78,6 +84,7 @@ internal record TypeCSharpFormat(
     public static readonly FormattableStringProvider<ITypeNameCSharpFormatContext> DefaultNamePartFormat = type => $"{type.Name}";
     public static readonly TypeCSharpFormat Default = new();
 
+    private const char RefOperator= '&';
     private const char NullOperator = '?';
     private const char PointerOperator = '*';
 
@@ -143,6 +150,10 @@ internal record TypeCSharpFormat(
         else if (type.IsArray || type.IsByRef)
         {
             WriteTo(type.GetElementType()!, textWriter);
+            if (UseRefOperator && type.IsByRef)
+            {
+                textWriter.Write(RefOperator);
+            }
         }
         else if (!NoNullableOperator && type.IsValueType && type.IsNullableValueType(out var underlyingType))
         {
@@ -284,12 +295,15 @@ internal readonly record struct TypeNameCSharpFormatContext(
 
 internal record ParameterCSharpFormat(
     FormattableStringProvider<IParameterCSharpFormatContext>? ParameterFormat = null,
-    TypeCSharpFormat? TypeFormat = null)
+    TypeCSharpFormat? TypeFormat = null,
+    bool NoModifiers = false    // e.g. in, out, ref, params
+    )
     : CSharpFormat<ParameterInfo>
 {
-    private static readonly FormattableStringProvider<IParameterCSharpFormatContext> DefaultParameterFormat = (parameter => $"{parameter.Type} {parameter.Name}");
+    private static readonly FormattableStringProvider<IParameterCSharpFormatContext> DefaultParameterFormat = (parameter => $"{parameter.Modifier}{parameter.Type} {parameter.Name}");
+    private static readonly FormattableStringProvider<IParameterCSharpFormatContext> NoModifiersParameterFormat = (parameter => $"{parameter.Type} {parameter.Name}");
     public static ParameterCSharpFormat Default { get; } = new();
-    public FormattableStringProvider<IParameterCSharpFormatContext> ParameterFormat { get; init;  } = ParameterFormat ?? DefaultParameterFormat;
+    public FormattableStringProvider<IParameterCSharpFormatContext> ParameterFormat { get; init;  } = ParameterFormat ?? (NoModifiers ? NoModifiersParameterFormat : DefaultParameterFormat);
     public TypeCSharpFormat TypeFormat { get; init;  } = TypeFormat ?? TypeCSharpFormat.Default;
 
     public override TextWriterFormattableString GetFormattableString(ParameterInfo parameterInfo) =>
@@ -300,6 +314,7 @@ internal interface IParameterCSharpFormatContext
 {
     int Position { get; }
     string Name { get; }
+    string Modifier { get; }
     TextWriterFormattableString Type { get; }
 }
 
@@ -310,6 +325,19 @@ internal readonly record struct ParameterCSharpFormatContext(
     public ParameterInfo ParameterInfo { get; } = ParameterInfo;
     public int Position => ParameterInfo.Position;
     public string Name => ParameterInfo.Name!;
+    public string Modifier =>
+        ParameterFormat.NoModifiers
+            ? ""
+            : ParameterInfo switch
+            {
+                { IsIn: true }     => "in ",
+                { IsOut: true }    => "out ",
+                { ParameterType.IsByRef: true } => "ref ",
+                { ParameterType.IsArray: true } p
+                    when p.GetCustomAttribute<ParamArrayAttribute>() is { }
+                    => "params ",
+                _ => ""
+            };
     public TextWriterFormattableString Type =>
         ParameterFormat
             .TypeFormat

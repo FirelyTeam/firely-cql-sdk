@@ -127,10 +127,62 @@ public class CSharpFormatterTests
     }
 
     [TestMethod]
+    public void MethodToCSharpString_ParameterModifiers_ShouldReturnCorrectResults()
+    {
+        object o = null!;
+        MethodInfo m = ReflectionUtility.MethodOf(fnToMethodCall: () => default(TypeExtensionsTests.IGenericInterface<object>)!.ParameterModifiers(o, in o, out o, ref o));
+
+        Assert.AreEqual(
+            expected: "System.Void ParameterModifiers(System.Object value, in System.Object valueIn, out System.Object valueOut, ref System.Object valueRef, params System.Object[] values)",
+            actual: m.ToCSharpString());
+
+        Assert.AreEqual(
+            expected: "System.Void ParameterModifiers(System.Object value, System.Object valueIn, System.Object valueOut, System.Object valueRef, System.Object[] values)",
+            actual: m.ToCSharpString(
+                MethodCSharpFormat.Default with
+                {
+                    ParameterFormat = ParameterCSharpFormat.Default with
+                    {
+                        NoModifiers = true,
+                    }
+                }));
+
+        Assert.AreEqual(
+            expected: "void ParameterModifiers(object value, in object& valueIn, out object& valueOut, ref object& valueRef, params object[] values)",
+            actual: m.ToCSharpString(
+                MethodCSharpFormat.Default with
+                {
+                    ParameterFormat = ParameterCSharpFormat.Default with
+                    {
+                        TypeFormat = TypeCSharpFormat.Default with
+                        {
+                            UseRefOperator = true,
+                            UseKeywords = true,
+                        }
+                    }
+                }));
+
+        Assert.AreEqual(
+            expected: "void ParameterModifiers(object, in object&, out object&, ref object&, params object[])",
+            actual: m.ToCSharpString(
+                MethodCSharpFormat.Default with
+                {
+                    ParameterFormat = ParameterCSharpFormat.Default with
+                    {
+                        ParameterFormat = p => $"{p.Modifier}{p.Type}",
+                        TypeFormat = TypeCSharpFormat.Default with
+                        {
+                            UseRefOperator = true,
+                            UseKeywords = true,
+                        }
+                    }
+                }));
+    }
+
+    [TestMethod]
     public void MethodToCSharpString_NonGeneric_ShouldReturnCorrectResults()
     {
         MethodInfo m = ReflectionUtility.MethodOf(fnToMethodCall: () => default(TypeExtensionsTests.INonGenericInterface)!.NonGenericMethod(0, 0, 0));
-
 
         // NOTE: We do not show the declaring type name for methods
         TestTextWriter tw = new TestTextWriter(new StringWriter());
@@ -141,9 +193,9 @@ public class CSharpFormatterTests
 
         Assert.AreEqual(
             """
-            System.Collections.Generic.IList|<|System.Int32|>| |NonGenericMethod|(|System.Int32| |a|, |System.Int32| |b|, |System.Int32| |c|)
+            System.Collections.Generic.IList#<#System.Int32#># #NonGenericMethod#(##System.Int32# #a#, ##System.Int32# #b#, ##System.Int32# #c#)
             """,
-            string.Join('|', tw.Tokens));
+            string.Join('#', tw.Tokens));
 
         // Delphi-ish style to demonstrate flexibility
         tw = new TestTextWriter(new StringWriter());
