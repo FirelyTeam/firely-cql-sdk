@@ -5,12 +5,10 @@ using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Fhir;
-using Hl7.Cql.Fhir.Extensions;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
-using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
 using Hl7.Fhir.Model;
@@ -45,7 +43,7 @@ internal static class Program
         foreach (var exampleSetName in exampleSetNames)
         {
             Directories dirs = Directories.Create(exampleSetName);
-            PackageCqlToFhirExample(loggerFactory, dirs);
+            //PackageCqlToFhirExample(loggerFactory, dirs);
             //PackageElmToFhirExample(loggerFactory, dirs);
             InvokeResourceExample(loggerFactory, dirs);
         }
