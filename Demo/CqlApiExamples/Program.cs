@@ -21,6 +21,9 @@ using static FormattableString;
 
 internal static class Program
 {
+    private static readonly string ResourceCanonicalRoot = "https://fire.ly/fhir/";
+    private static readonly PackagingToolkitConfig? PackagingToolkitConfig = new() { CanonicalRootUrl = ResourceCanonicalRoot };
+
     private static void Main(string[] args)
     {
         // Create a logger factory via the Microsoft.Extensions.Logging API
@@ -30,15 +33,17 @@ internal static class Program
         // Add3And2Example(loggerFactory);
         // InvokeCqlExample(loggerFactory);
         // InvokeCqlFromExamplesFolder(loggerFactory);
-        PackageFromExamplesFolder(loggerFactory);
+        //PackageFromExamplesFolder(loggerFactory);
 
-        // var shouldBuildCqlToElm = true;
-        // string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests"];
-        // foreach (var exampleSetName in exampleSetNames)
-        // {
-        //     Directories dirs = Directories.Create(exampleSetName);
-        //     FullExample(loggerFactory, dirs, shouldBuildCqlToElm);
-        // }
+        string[] exampleSetNames = ["RR23"];
+        //string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests", "RR23"];
+        foreach (var exampleSetName in exampleSetNames)
+        {
+            Directories dirs = Directories.Create(exampleSetName);
+            //PackageCqlToFhirExample(loggerFactory, dirs);
+            //PackageElmToFhirExample(loggerFactory, dirs);
+            InvokeResourceExample(loggerFactory, dirs);
+        }
     }
 
     private static void AddDuplicates(ILoggerFactory loggerFactory)
@@ -118,7 +123,7 @@ internal static class Program
         // Load CQL libraries from a directory and process them to ELM, C#, and assemblies
         cqlToolkit.AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory).TranslateToElm();
         var elmToolkit = cqlToolkit.CompileToAssemblies();
-        var packagingToolkit = elmToolkit.PackageToFhirResources(cqlToolkit, PackagingToolkitConfig.Default);
+        var packagingToolkit = elmToolkit.PackageToFhirResources(cqlToolkit, PackagingToolkitConfig);
         var results = packagingToolkit.GetPackagingResults().ToList();
         var fhirHelpersResult = results.FirstOrDefault(r => r.LibraryIdentifier.Identifier == "FHIRHelpers");
     }
@@ -133,19 +138,36 @@ internal static class Program
         var cqlToElmProcessorSettings = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
         CqlToolkit cqlToolkit = new CqlToolkit(loggerFactory, cqlToElmProcessorSettings);
 
-                var cqlLibraryString = CqlLibraryString.Parse(
-                    """
-                    library AdditionLib version '0.0.0'
+        var cqlLibraryString = CqlLibraryString.Parse(
+            """
+            library AdditionLib version '0.0.0'
 
-                    define private Three: 1 + 2
-                    """);
-                var cqlContext = FhirCqlContext.ForBundle();
-                using var librarySetInvoker = cqlToolkit
-                                              .AddCqlLibraries(cqlLibraryString)
-                                              .CreateLibrarySetInvoker(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded));
-                var result = librarySetInvoker.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.LibraryIdentifier, "Three");
-                Trace.Assert(result is 3);
+            define private Three: 1 + 2
+            """);
+        var cqlContext = FhirCqlContext.ForBundle();
+        using var librarySetInvoker = cqlToolkit
+                                      .AddCqlLibraries(cqlLibraryString)
+                                      .CreateLibrarySetInvoker(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded));
+        var result = librarySetInvoker.GetLibraryDefinitionResult(cqlContext, cqlLibraryString.LibraryIdentifier, "Three");
+        Trace.Assert(result is 3);
     }
+
+    /// <summary>
+    /// This example demonstrates how to load FHIR resources and invoke all library definitions on the set.
+    /// </summary>
+    private static void InvokeResourceExample(
+        ILoggerFactory loggerFactory,
+        Directories dirs)
+    {
+        var logger = loggerFactory.CreateLogger(typeof(Program));
+        using var librarySetInvoker =
+            new InvocationToolkit(loggerFactory)
+                //.SetIgnoreEnumerationExceptions()
+                .AddAssemblyBinariesInFhirLibrariesFromDirectory(dirs.FhirOutDirectory)
+                .CreateLibrarySetInvoker(dirs.LibrarySetName);
+        logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDeclarations());
+    }
+
 
     /// <summary>
     /// This example demonstrates how to load CQL libraries from a directory and invoke a library declarations directly.
@@ -168,7 +190,7 @@ internal static class Program
         // We need a disposable invocation scope, which contains the AssemblyLoadContext and the related library Assemblies.
         using var librarySetInvoker = cqlToolkit.SetIgnoreEnumerationExceptions(false)
                                                 .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory)
-                                                .CreateLibrarySetInvoker(name:"Examples");
+                                                .CreateLibrarySetInvoker(name: "Examples");
         logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDeclarations());
         Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
         Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
@@ -185,12 +207,62 @@ internal static class Program
     /// <summary>
     /// This example loads the CQL libraries, translates them to ELM, and compiles them to assemblies.
     /// Each intermediate format is saved to directory (e.g. ELM, C#, and assembly binaries with their Trace symbols).
-    /// It also demonstrates how to execute a library.
     /// </summary>
-    private static void FullExample(
+    private static void PackageCqlToFhirExample(
         ILoggerFactory loggerFactory,
-        Directories dirs,
-        bool shouldBuildCqlToElm = false)
+        Directories dirs)
+    {
+        var logger = loggerFactory.CreateLogger(typeof(Program));
+        dirs.GeneratedDirectory.Delete(recursive: true);
+
+        // Create fluent cql toolkit
+        var config = new CqlToolkitConfig(Models: [CqlModel.ElmR1, CqlModel.Fhir401]);
+        var cqlToolkit = new CqlToolkit(loggerFactory, config);
+        _ =
+            cqlToolkit
+                .SetIgnoreEnumerationExceptions()
+                // CQL -> ELM
+                .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory)
+                .TranslateToElm()
+                .SaveElmFilesToDirectory(dirs.ElmOutDirectory)
+                .With(cqlToolkit =>
+                          cqlToolkit.TryGetFirstElmFileLines()
+                                    .IfNotNull(t => logger.LogInformation(
+                                                   $"""
+                                                    First 50 ELM lines for {t.LibraryIdentifier}:
+                                                    {t.ElmLibraryJson.TakeLines(50)}
+                                                    """)))
+                // ELM -> Assemblies
+                .CompileToAssemblies(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded))
+                .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
+                .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
+                .With(elmToolkit =>
+                          elmToolkit.TryGetFirstCSharpFileLines()
+                                    .IfNotNull(t => logger.LogInformation(
+                                                   $"""
+                                                    First 50 C# lines for {t.LibraryIdentifier}:
+                                                    {t.CSharpSourceCode.TakeLines(50)}
+                                                    """)))
+                .PackageToFhirResources(cqlToolkit, PackagingToolkitConfig)
+                .SaveFhirResourcesToDirectory(dirs.FhirOutDirectory)
+                .With(packagingToolkit =>
+                {
+                    packagingToolkit.TryGetFirstPackageFileLines()
+                                    .IfNotNull(t => logger.LogInformation(
+                                                   $"""
+                                                    First 50 FHIR lines for {t.LibraryIdentifier}:
+                                                    {t.FhirLibraryJson.TakeLines(50)}
+                                                    """));
+                });
+    }
+
+    /// <summary>
+    /// This example loads the ELM libraries, compiles them to assemblies.
+    /// Each intermediate format is saved to directory (e.g. ELM, C#, and assembly binaries with their Trace symbols).
+    /// </summary>
+    private static void PackageElmToFhirExample(
+        ILoggerFactory loggerFactory,
+        Directories dirs)
     {
         var logger = loggerFactory.CreateLogger(typeof(Program));
         dirs.GeneratedDirectory.Delete(recursive: true);
@@ -200,35 +272,31 @@ internal static class Program
         CqlToolkit cqlToolkit =
             new CqlToolkit(loggerFactory, config).SetIgnoreEnumerationExceptions();
 
-        if (shouldBuildCqlToElm)
-        {
-            cqlToolkit
-                .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory)
-                .TranslateToElm()
-                .SaveElmFilesToDirectory(dirs.ElmOutDirectory)
-                ;
-        }
-
-        var elmToolkit = cqlToolkit
-                         .CreateElmToolkit(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded))
-                         .AddElmFilesFromDirectory(dirs.ElmFromDirectory)
-                         .CompileToAssemblies()
-                         .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
-                         .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory);
-
-        cqlToolkit.TryGetFirstElmFileLines()
-                  .IfNotNull(t => logger.LogInformation(
-                                 $"""
-                                  First 50 ELM lines for {t.LibraryIdentifier}:
-                                  {t.ElmLibraryJson.TakeLines(50)}
-                                  """));
-
-        elmToolkit.TryGetFirstCSharpFileLines()
-                  .IfNotNull(t => logger.LogInformation(
-                                 $"""
-                                  First 50 C# lines for {t.LibraryIdentifier}:
-                                  {t.CSharpSourceCode.TakeLines(50)}
-                                  """));
+        var elmToolkit =
+            cqlToolkit.CreateElmToolkit(new ElmToolkitConfig(AssemblyCompilerDebugInformationFormat.Embedded))
+                      .AddElmFilesFromDirectory(dirs.ElmFromDirectory)
+                      // ELM -> Assemblies
+                      .CompileToAssemblies()
+                      .SaveCSharpFilesToDirectory(dirs.CSharpOutDirectory)
+                      .SaveAssemblyBinariesToDirectory(dirs.AssembliesOutDirectory)
+                      .With(elmToolkit =>
+                                elmToolkit.TryGetFirstCSharpFileLines()
+                                          .IfNotNull(t => logger.LogInformation(
+                                                         $"""
+                                                          First 50 C# lines for {t.LibraryIdentifier}:
+                                                          {t.CSharpSourceCode.TakeLines(50)}
+                                                          """)))
+                      .PackageToFhirResources(cqlToolkit, PackagingToolkitConfig)
+                      .SaveFhirResourcesToDirectory(dirs.FhirOutDirectory)
+                      .With(packagingToolkit =>
+                      {
+                          packagingToolkit.TryGetFirstPackageFileLines()
+                                          .IfNotNull(t => logger.LogInformation(
+                                                         $"""
+                                                          First 50 FHIR lines for {t.LibraryIdentifier}:
+                                                          {t.FhirLibraryJson.TakeLines(50)}
+                                                          """));
+                      });
     }
 
     /// <summary>
@@ -272,6 +340,12 @@ internal static class Program
 
 file static class Extensions
 {
+    public static T With<T>(this T value, Action<T> action)
+    {
+        action(value);
+        return value;
+    }
+
     public static StringBuilder DumpLibraryDeclarations(
         this LibrarySetInvoker scope,
         StringBuilder? sb = null)
@@ -307,6 +381,15 @@ file static class Extensions
         cqlToolkit.GetCqlToolkitResults()
                   .Select(t => (t.LibraryIdentifier, t.ElmLibrary.SerializeToJson()))
                   .FirstOrNull();
+
+    public static (CqlVersionedLibraryIdentifier LibraryIdentifier, string FhirLibraryJson)? TryGetFirstPackageFileLines(
+        this PackagingToolkit packagingToolkit) =>
+        packagingToolkit.GetPackagingResults()
+                        .Select(t => (
+                                         t.LibraryIdentifier,
+                                         packagingToolkit.SerializeFhirResourcesToJson([t.FhirLibrary], writeIndented: true).First().resourceJson
+                                     ))
+                        .FirstOrNull();
 
     public static void IfNotNull<T>(this T? value, Action<T> withNotNullValue)
         where T : struct

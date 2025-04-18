@@ -9,7 +9,6 @@
 using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime.IO;
-using Microsoft.Extensions.DependencyInjection;
 
 namespace Hl7.Cql.Packaging.Toolkit.Extensions;
 
@@ -20,33 +19,29 @@ public static partial class PackagingToolkitExtensions
     /// </summary>
     /// <param name="packagingToolkit">The packaging toolkit instance.</param>
     /// <param name="directory">The directory where the FHIR resources will be saved.</param>
+    /// <param name="writeIndented">if set to <c>true</c> [write indented].</param>
     /// <param name="directoryPreparationStrategy">Optional strategy for preparing the directory.</param>
     /// <param name="configureJsonSerializerOptions">Optional mutator for JSON serialization options.</param>
     /// <returns>The packaging toolkit instance.</returns>
     public static PackagingToolkit SaveFhirResourcesToDirectory(
         this PackagingToolkit packagingToolkit,
         DirectoryInfo directory,
+        bool writeIndented = false,
         DirectoryInfoHandler? directoryPreparationStrategy = null,
         Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
     {
         (directoryPreparationStrategy ?? DirectoryPreparationStrategy.Recreate)(directory);
 
-        var logger = packagingToolkit.LoggerFactory.CreateLogger(typeof(PackagingToolkitExtensions));
-        var jsonSerializerOptions = packagingToolkit.ServiceProvider.GetRequiredService<JsonSerializerOptions>();
-        if (configureJsonSerializerOptions != null)
+        ILogger? logger = null;
+        var fhirResources = packagingToolkit
+                            .GetPackagingResults()
+                            .SelectMany(t => t.GetFhirResources());
+        foreach (var (resourceFileName, resourceJson) in
+                 packagingToolkit.SerializeFhirResourcesToJson(fhirResources, writeIndented, configureJsonSerializerOptions))
         {
-            // We have to clone the options, since we're using an instance shared as a singleton.
-            jsonSerializerOptions = configureJsonSerializerOptions(new (jsonSerializerOptions));
-        }
-
-        foreach (var resource in packagingToolkit
-                                 .GetPackagingResults()
-                                 .SelectMany(t => t.GetFhirResources()))
-        {
-            var resourceJson = JsonSerializer.Serialize(resource, jsonSerializerOptions);
-            var resourceFileName = resource.GetResourceFileName();
+            logger ??= packagingToolkit.LoggerFactory.CreateLogger(typeof(PackagingToolkitExtensions));
             var fullFilePath = Path.Combine(directory.FullName, resourceFileName.ToString());
-            logger.LogInformation("Saving FHIR " + resource.GetType().Name + " {file}", fullFilePath);
+            logger.LogInformation("Saving FHIR Resource: {file}", fullFilePath);
             File.WriteAllText(fullFilePath, resourceJson);
         }
 

@@ -110,21 +110,13 @@ internal sealed class ElmToFhirProgram
                     return ExitCode.CantPackageNoCqlElmMatches;
                 }
 
-                Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null;
-                if (packOpt.JsonPretty)
-                    configureJsonSerializerOptions = options =>
-                    {
-                        options.WriteIndented = true;
-                        return options;
-                    };
-
                 packagingToolkit
                     .AddPackagingInputs(cqlToolkit, elmToolkit)
                     .ConvertToFhirResources()
                     .SaveFhirResourcesToDirectory(
                         opt.FhirOutDir,
-                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"),
-                        configureJsonSerializerOptions);
+                        packOpt.JsonPretty,
+                        DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
 
                 var packagingResults = packagingToolkit.GetPackagingResults().ToList();
                 var librariesCount = packagingResults.Count;

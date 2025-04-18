@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging.Toolkit.Internal;
@@ -182,4 +183,33 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
         o.SourceElmLibrary,
         o.SourceCSharpSourceCode,
         o.SourceAssemblyBinary);
+
+    public IEnumerable<(ResourceFileName resourceFileName, string resourceJson)> SerializeFhirResourcesToJson(
+        IEnumerable<FhirResource> fhirResources,
+        bool writeIndented = false,
+        Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
+    {
+        var jsonSerializerOptions = ServiceProvider.GetRequiredService<JsonSerializerOptions>();
+
+        var updateWriteIndented = writeIndented != jsonSerializerOptions.WriteIndented;
+        var mutateOptions = configureJsonSerializerOptions != null;
+        if (updateWriteIndented || mutateOptions)
+        {
+            // We have to clone the options, since we're using an instance shared as a singleton.
+            jsonSerializerOptions = new JsonSerializerOptions(jsonSerializerOptions);
+
+            if (updateWriteIndented)
+                jsonSerializerOptions.WriteIndented = writeIndented;
+
+            if (mutateOptions)
+                jsonSerializerOptions = configureJsonSerializerOptions!(jsonSerializerOptions);
+        }
+
+        foreach (var resource in fhirResources)
+        {
+            var resourceJson = JsonSerializer.Serialize(resource, jsonSerializerOptions);
+            var resourceFileName = resource.GetResourceFileName();
+            yield return (resourceFileName, resourceJson);
+        }
+    }
 }

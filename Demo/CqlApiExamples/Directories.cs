@@ -11,7 +11,7 @@ internal class Directories(string librarySetName)
                "Demo"
             or "CMS"
             or "Authoring"
-            or "Examples"
+            or "RR23"
             or "Tests");
         return new Directories(librarySetName);
     }
@@ -36,7 +36,9 @@ internal class Directories(string librarySetName)
     public static DirectoryInfo LibrarySetsDirectory { get; } = CurrentSolutionDirectory.CreateSubdirectory("LibrarySets");
 
     public string LibrarySetName { get; } = librarySetName;
-    public DirectoryInfo GeneratedDirectory => CurrentDirectory.CreateSubdirectory("output").CreateSubdirectory(LibrarySetName);
+    public DirectoryInfo GeneratedDirectory =>
+        CurrentDirectory.CreateSubdirectory("output").CreateSubdirectory(LibrarySetName);
+
     public DirectoryInfo CqlFromDirectory =>
         LibrarySetName switch
         {
