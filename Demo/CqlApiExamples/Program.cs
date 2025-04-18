@@ -1,19 +1,24 @@
-﻿using System.Diagnostics;
-using System.Text;
-using Hl7.Cql.CodeGeneration.NET;
+﻿using Hl7.Cql.CodeGeneration.NET;
 using Hl7.Cql.CodeGeneration.NET.Toolkit;
 using Hl7.Cql.CodeGeneration.NET.Toolkit.Extensions;
 using Hl7.Cql.CqlToElm;
 using Hl7.Cql.CqlToElm.Toolkit;
 using Hl7.Cql.CqlToElm.Toolkit.Extensions;
 using Hl7.Cql.Fhir;
+using Hl7.Cql.Fhir.Extensions;
 using Hl7.Cql.Invocation.Toolkit;
 using Hl7.Cql.Invocation.Toolkit.Extensions;
 using Hl7.Cql.Packaging.Toolkit;
 using Hl7.Cql.Packaging.Toolkit.Extensions;
+using Hl7.Cql.Primitives;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
+using Hl7.Fhir.Model;
+using Hl7.Fhir.Serialization;
 using Microsoft.Extensions.Logging;
+using System.Diagnostics;
+using System.Runtime.Serialization;
+using System.Text;
 
 namespace CqlApiExamples;
 
@@ -40,7 +45,7 @@ internal static class Program
         foreach (var exampleSetName in exampleSetNames)
         {
             Directories dirs = Directories.Create(exampleSetName);
-            //PackageCqlToFhirExample(loggerFactory, dirs);
+            PackageCqlToFhirExample(loggerFactory, dirs);
             //PackageElmToFhirExample(loggerFactory, dirs);
             InvokeResourceExample(loggerFactory, dirs);
         }
@@ -165,7 +170,23 @@ internal static class Program
                 //.SetIgnoreEnumerationExceptions()
                 .AddAssemblyBinariesInFhirLibrariesFromDirectory(dirs.FhirOutDirectory)
                 .CreateLibrarySetInvoker(dirs.LibrarySetName);
-        logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDeclarations());
+
+        if (dirs.LibrarySetName == "RR23")
+        {
+            var bundlesDir = Directories.LibrarySetsDirectory.CreateSubdirectory(dirs.LibrarySetName).CreateSubdirectory("TestData");
+            var bundleFile = new FileInfo(Path.Combine(bundlesDir.FullName, "RR23_EX_wile_e_coyote_falling_rock_transaction.json"));
+            var bundle = bundleFile.DeserializeResource<Bundle>() ?? throw new SerializationException("Could not deserialize bundle");
+            var cqlContext = FhirCqlContext.ForBundle(bundle);
+            var result = librarySetInvoker.GetLibraryDefinitionResult(
+                cqlContext,
+                (CqlVersionedLibraryIdentifier)"RR23-1.0.0",
+                "Tiny Umbrella Supply within 7 days after most recent injury due to falling rock");
+            logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDefinitionsResults(cqlContext));
+        }
+        else
+        {
+            logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDefinitions());
+        }
     }
 
 
@@ -191,7 +212,7 @@ internal static class Program
         using var librarySetInvoker = cqlToolkit.SetIgnoreEnumerationExceptions(false)
                                                 .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory)
                                                 .CreateLibrarySetInvoker(name: "Examples");
-        logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDeclarations());
+        logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDefinitions());
         Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
         Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
         Trace.Assert(Invoke("CqlStringOperatorsTest-1.0.000", "Combine.CombineABCSepDash") is "a-b-c");
@@ -346,17 +367,38 @@ file static class Extensions
         return value;
     }
 
-    public static StringBuilder DumpLibraryDeclarations(
+    public static StringBuilder DumpLibraryDefinitions(
         this LibrarySetInvoker scope,
         StringBuilder? sb = null)
     {
         sb ??= new();
-        sb.AppendLine("Libraries and Declarations:");
+        sb.AppendLine("Libraries and Definitions:");
+        if (scope.LibrarySetName is {Length:>0})
+            sb.AppendLine(scope.LibrarySetName);
         foreach (var (libId, lib) in scope.LibraryInvokers)
         {
             sb.AppendLine(Invariant($"- {libId}"));
             foreach (var (defName, def) in lib.Definitions)
                 sb.AppendLine(Invariant($"  - {defName} : {def.ReturnType}"));
+        }
+
+        return sb;
+    }
+
+    public static StringBuilder DumpLibraryDefinitionsResults(
+        this LibrarySetInvoker scope,
+        CqlContext cqlContext,
+        StringBuilder? sb = null)
+    {
+        sb ??= new();
+        sb.AppendLine("Libraries and Definitions:");
+        if (scope.LibrarySetName is { Length: > 0 })
+            sb.AppendLine(scope.LibrarySetName);
+        foreach (var (libId, lib) in scope.LibraryInvokers)
+        {
+            sb.AppendLine(Invariant($"- {libId}"));
+            foreach (var (defName, def) in lib.Definitions)
+                sb.AppendLine(Invariant($"  - {defName} : {def.ReturnType} = {def.Invoke(cqlContext)}"));
         }
 
         return sb;
@@ -410,5 +452,35 @@ file static class Extensions
         foreach (var item in source)
             return item;
         return null;
+    }
+}
+
+file static class BundleDeserializationExtensions
+{
+    private static readonly IFhirSerializationEngine Serializer =
+        FhirSerializationEngineFactory.Ostrich(ModelInfo.ModelInspector, new FhirJsonPocoSerializerSettings { });
+
+    public static T? DeserializeResource<T>(this Stream stream)
+        where T: Resource
+    {
+        using var sr = new StreamReader(stream);
+        var json = sr.ReadToEnd();
+        if (json == "")
+            return null;
+
+        var resource = Serializer.DeserializeFromJson(json);
+        if (resource is null)
+            return null;
+
+        var typed = (resource as T) ?? throw new InvalidOperationException(
+                        $"Could not serialize to {typeof(T).Name}, resource type was {resource.GetType().Name}");
+        return typed;
+    }
+
+    public static T? DeserializeResource<T>(this FileInfo file)
+        where T : Resource
+    {
+        using var stream = file.OpenRead();
+        return stream.DeserializeResource<T>();
     }
 }

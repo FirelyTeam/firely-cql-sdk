@@ -1,0 +1,48 @@
+{
+  "resourceType": "ValueSet",
+  "url": "http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock",
+  "version": "1.0.0",
+  "title": "Injury due to falling rock Diagnosis codes",
+  "status": "active",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "21902005",
+            "display": "Struck by falling rock or stone"
+          },
+          {
+            "code": "71893005",
+            "display": "Struck by falling object"
+          }
+        ]
+      }
+    ]
+  },
+  "description": "Diagnosis codes that indicate an injury due to falling rock.",
+  "text": {
+    "status": "generated",
+    "div": "<div xmlns=\"http://www.w3.org/1999/xhtml\"><h2>Injury due to falling rock Diagnosis codes</h2><tt>http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock</tt><p>Diagnosis codes that are an indication for the presence of Roadrunners Syndrome</p></div>"
+  },
+  "name": "Injury_Falling_Rock_Diagnosis_codes",
+  "date": "2023-06-21T00:00:00.000Z",
+  "publisher": "MOH Alpha",
+  "expansion": {
+    "identifier": "20231205",
+    "timestamp": "2023-12-05T20:59:46+01:00",
+    "contains": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "21902005",
+        "display": "Struck by falling rock or stone"
+      },
+      {
+        "system": "http://snomed.info/sct",
+        "code": "71893005",
+        "display": "Struck by falling object"
+      }
+    ]
+  }
+}
