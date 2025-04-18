@@ -21,7 +21,7 @@ public class ResourceCanonicalBuilderTests
         string expectedCanonical)
     {
         // Arrange
-        var resourceCanonicalBuilder = ResourceCanonicalBuilderFactory.CreateWithRootUrl(rootCanonical);
+        var resourceCanonicalBuilder = ResourceCanonicalBuilderFactory.Create(rootCanonical);
 
         // Act
         var canonical = resourceCanonicalBuilder("Library", "Identifier", version);
