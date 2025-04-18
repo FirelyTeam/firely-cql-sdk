@@ -169,7 +169,7 @@ public class CSharpFormatterTests
                 {
                     ParameterFormat = ParameterCSharpFormat.Default with
                     {
-                        ParameterFormat = p => $"{p.Modifier}{p.Type}",
+                        Format = p => $"{p.Modifier}{p.Type}",
                         TypeFormat = TypeCSharpFormat.Default with
                         {
                             UseRefOperator = true,
@@ -200,9 +200,9 @@ public class CSharpFormatterTests
         // Delphi-ish style to demonstrate flexibility
         tw = new TestTextWriter(new StringWriter());
         var methodCSharpFormat = new MethodCSharpFormat(
-            MethodFormat: method => $"function {method.Name}{method.GenericArguments}{method.Parameters}: {method.ReturnType};",
+            Format: method => $"function {method.Name}{method.GenericArguments}{method.Parameters}: {method.ReturnType};",
             ParameterFormat: new(
-                ParameterFormat: parameter => $"{parameter.Name}: {parameter.Type}",
+                Format: parameter => $"{parameter.Name}: {parameter.Type}",
                 TypeFormat: new(
                     UseKeywords: true,
                     NoNamespaces: true)),
