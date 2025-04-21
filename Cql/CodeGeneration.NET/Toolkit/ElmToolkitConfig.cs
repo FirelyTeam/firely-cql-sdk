@@ -22,7 +22,7 @@ namespace Hl7.Cql.CodeGeneration.NET.Toolkit;
 /// The default value is <see langword="true"/>.
 /// </param>
 /// <param name="LRUCacheSize">The size of the Least Recently Used (LRU) cache.</param>
-public sealed record ElmToolkitConfig(
+public record ElmToolkitConfig(
     AssemblyCompilerDebugInformationFormat AssemblyCompilerDebugInformationFormat = AssemblyCompilerDebugInformationFormat.None,
     bool AllowScopeRedefinition = true,
     bool AllowUnresolvedExternals = true,

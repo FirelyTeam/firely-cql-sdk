@@ -332,7 +332,7 @@ internal static class LibraryPackager
 
         if (fhirLibrary.Meta is { } meta)
         {
-            meta.LastUpdated = date;
+            meta.LastUpdated = date.ToLocalTime();
         }
 
         return fhirLibrary;

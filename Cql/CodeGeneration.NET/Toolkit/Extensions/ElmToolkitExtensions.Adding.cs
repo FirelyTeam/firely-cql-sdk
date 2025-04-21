@@ -19,13 +19,18 @@ public static partial class ElmToolkitExtensions
     /// </summary>
     /// <param name="elmToolkit">The ELM toolkit to add libraries to.</param>
     /// <param name="cqlToolkit">The CQL toolkit containing the libraries to add.</param>
+    /// <param name="libraryPredicate">The optional handler which libraries to add.</param>
     /// <returns>The updated ELM toolkit.</returns>
     public static ElmToolkit AddElmFromCqlToolkit(
         this ElmToolkit elmToolkit,
-        CqlToolkit cqlToolkit) =>
+        CqlToolkit cqlToolkit,
+        Func<CqlVersionedLibraryIdentifier, bool>? libraryPredicate = null) =>
         elmToolkit.AddElmLibraries(
             cqlToolkit
                 .GetCqlToolkitResults()
+                .Where(libraryPredicate is not null
+                           ? result => libraryPredicate(result.LibraryIdentifier)
+                           : _ => true)
                 .Select(t => t.ElmLibrary));
 
     /// <summary>

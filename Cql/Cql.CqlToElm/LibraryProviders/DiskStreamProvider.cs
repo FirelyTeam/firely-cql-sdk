@@ -3,7 +3,7 @@ using Hl7.Cql.CqlToElm.Grammar;
 
 namespace Hl7.Cql.CqlToElm.LibraryProviders
 {
-    internal class DiskStreamProvider: IStreamProvider
+    internal class DiskStreamProvider : IStreamProvider
     {
         public DiskStreamProvider(IOptions<CqlToElmOptions> options)
         {

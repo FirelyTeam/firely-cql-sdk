@@ -35,16 +35,17 @@ public static class LibraryInvokerExtensions
         includeDefinition ??= _ => true;
 
         return libraryInvoker.Definitions.Values
-                      .Where(includeDefinition)
-                      .TrySelect(
-                          definitionInvoker => (definitionInvoker,definitionInvoker.Invoke(cqlContext)),
-                          errorStrategy => errorStrategy
-                                           .SetContinuation(continuation)
-                                           .AddLoggerExceptionHandler(
-                                               logger,
-                                               (definitionInvoker, logMessage) =>
-                                                   logMessage("Could not invoke definition {definition} on library {id}", definitionInvoker.DefinitionName, libraryInvoker.LibraryIdentifier))
-                                           .AddExceptionHandler(definitionInvokerExceptionHandler)
-                          );
+                             .Where(includeDefinition)
+                             .TrySelect(
+                                 definitionInvoker => (definitionInvoker, definitionInvoker.Invoke(cqlContext)),
+                                 errorStrategy => errorStrategy
+                                                  .SetContinuation(continuation)
+                                                  .AddLoggerExceptionHandler(
+                                                      logger,
+                                                      (definitionInvoker, logMessage) =>
+                                                          logMessage("Could not invoke definition {definition} on library {id}",
+                                                                     definitionInvoker.DefinitionName, libraryInvoker.LibraryIdentifier))
+                                                  .AddExceptionHandler(definitionInvokerExceptionHandler)
+                             );
     }
 }
