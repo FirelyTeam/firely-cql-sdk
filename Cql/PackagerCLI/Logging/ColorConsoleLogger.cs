@@ -99,7 +99,7 @@ public sealed partial class ColorConsoleLogger(
                 return finalFormat;
             });
 
-    [GeneratedRegex("""\{(?<tagName>[^:,}]+)(?<rest>[^}]*)\}""", RegexOptions.Compiled)]
+    [GeneratedRegex("""\{(?<tagName>[^:,}]+)(?<rest>[^}]*)\}""")]
     private static partial Regex ExtractTagsRegex();
 
 

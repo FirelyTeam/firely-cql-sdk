@@ -40,7 +40,7 @@ public abstract class DefinitionInvoker(
     /// <summary>
     /// A convenience property to get the library identifier of the library that contains this definition.
     /// </summary>
-    public string LibraryIdentifier => LibraryInvoker.LibraryIdentifier;
+    public CqlVersionedLibraryIdentifier LibraryIdentifier => LibraryInvoker.LibraryIdentifier;
 
     /// <summary>
     /// Gets the return type of the method.

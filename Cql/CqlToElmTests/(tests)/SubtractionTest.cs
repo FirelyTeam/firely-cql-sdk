@@ -12,10 +12,10 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Same type
 
         [TestMethod]
-        public void Subtract_Integer_from_Integer()
+        public void SubtractIntegerFromInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Integer_from_Integer version '1.0.0'
+                library SubtractIntegerFromInteger version '1.0.0'
 
                 define private Subtract: 2 - 1
                 """);
@@ -71,10 +71,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Subtract_Long_from_Long()
+        public void SubtractLongFromLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Long_from_Long version '1.0.0'
+                library SubtractLongFromLong version '1.0.0'
 
                 define private Subtract: 1L - 2L
                 """);
@@ -127,10 +127,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Subtract_Decimal_from_Decimal()
+        public void SubtractDecimalFromDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Decimal_from_Decimal version '1.0.0'
+                library SubtractDecimalFromDecimal version '1.0.0'
 
                 define private Subtract: 2.0 - 1.0
                 """);
@@ -184,10 +184,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Subtract_Quantity_from_Quantity()
+        public void SubtractQuantityFromQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Decimal_from_Quantity version '1.0.0'
+                library SubtractDecimalFromQuantity version '1.0.0'
 
                 define private Subtract: -1.0 '1' - 2.0 '1'
                 """);
@@ -247,10 +247,10 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Left-hand conversions
 
         [TestMethod]
-        public void Subtract_Integer_from_Long()
+        public void SubtractIntegerFromLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Integer_from_Long version '1.0.0'
+                library SubtractIntegerFromLong version '1.0.0'
 
                 define private Subtract: 2 - 1L
                 """);
@@ -306,10 +306,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Subtract_Integer_from_Decimal()
+        public void SubtractIntegerFromDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Integer_from_Decimal version '1.0.0'
+                library SubtractIntegerFromDecimal version '1.0.0'
 
                 define private Subtract: 2 - 1.0
                 """);
@@ -365,10 +365,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Subtract_Integer_from_Quantity()
+        public void SubtractIntegerFromQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Integer_from_Quantity version '1.0.0'
+                library SubtractIntegerFromQuantity version '1.0.0'
 
                 define private Subtract: 2 - 1.0 '1'
                 """);
@@ -424,10 +424,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Subtract_Long_from_Decimal()
+        public void SubtractLongFromDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Long_from_Decimal version '1.0.0'
+                library SubtractLongFromDecimal version '1.0.0'
 
                 define private Subtract: 1L - 2.0
                 """);
@@ -483,10 +483,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Subtract_Long_from_Quantity()
+        public void SubtractLongFromQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Integer_from_Quantity version '1.0.0'
+                library SubtractIntegerFromQuantity version '1.0.0'
 
                 define private Subtract: 1L - 2.0 '1'
                 """);
@@ -542,10 +542,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Subtract_Decimal_from_Quantity()
+        public void SubtractDecimalFromQuantity()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Decimal_from_Quantity version '1.0.0'
+                library SubtractDecimalFromQuantity version '1.0.0'
 
                 define private Subtract: -1.0 - 2.0 '1'
                 """);
@@ -610,10 +610,10 @@ namespace Hl7.Cql.CqlToElm.Test
         #region Right-hand conversions
 
         [TestMethod]
-        public void Subtract_Long_from_Integer()
+        public void SubtractLongFromInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Long_from_Integer version '1.0.0'
+                library SubtractLongFromInteger version '1.0.0'
 
                 define private Subtract: 1L - 2
                 """);
@@ -666,10 +666,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Subtract_Decimal_from_Integer()
+        public void SubtractDecimalFromInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Decimal_from_Integer version '1.0.0'
+                library SubtractDecimalFromInteger version '1.0.0'
 
                 define private Subtract: 5.25 - 2
                 """);
@@ -722,10 +722,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Subtract_Quantity_from_Integer()
+        public void SubtractQuantityFromInteger()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Decimal_from_Integer version '1.0.0'
+                library SubtractDecimalFromInteger version '1.0.0'
 
                 define private Subtract: 5.25 '1' - 2
                 """);
@@ -781,10 +781,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Subtract_Decimal_from_Long()
+        public void SubtractDecimalFromLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Decimal_from_Long version '1.0.0'
+                library SubtractDecimalFromLong version '1.0.0'
 
                 define private Subtract: 5.25 - 2L
                 """);
@@ -837,10 +837,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Subtract_Quantity_from_Long()
+        public void SubtractQuantityFromLong()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Quantity_from_Long version '1.0.0'
+                library SubtractQuantityFromLong version '1.0.0'
 
                 define private Subtract: 5.25 '1' - 2L
                 """);
@@ -896,10 +896,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Subtract_Quantity_from_Decimal()
+        public void SubtractQuantityFromDecimal()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Quantity_from_Decimal version '1.0.0'
+                library SubtractQuantityFromDecimal version '1.0.0'
 
                 define private Subtract: 5.25 '1' - 2.0
                 """);
@@ -960,7 +960,7 @@ namespace Hl7.Cql.CqlToElm.Test
         public void Subtract_Three_Decimals()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Decimal_from_Decimal version '1.0.0'
+                library SubtractDecimalFromDecimal version '1.0.0'
 
                 define private Subtract: 6.0 - (2.0 - 3.0)
                 """);
@@ -1013,10 +1013,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Subtract_Quantity_from_Two_Decimals()
+        public void SubtractQuantityFromTwo_Decimals()
         {
             var library = CreateCqlToolkit().MakeLibrary("""
-                library Subtract_Decimal_from_Decimal version '1.0.0'
+                library SubtractDecimalFromDecimal version '1.0.0'
 
                 define private Subtract: 6.0 '1' - (2.0 - 3.0)
                 """);

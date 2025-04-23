@@ -40,7 +40,7 @@ namespace Hl7.Cql.CqlToElm.Test
             query.@return.Should().HaveType(SystemTypes.BooleanType.ToListType());
         }
         [TestMethod]
-        public void Relationship_with_scalar_sources()
+        public void Relationship_withscalarsources()
         {
             var lib = CreateCqlToolkit().MakeLibraryFromExpression("""
                 from(true) t
@@ -52,7 +52,7 @@ namespace Hl7.Cql.CqlToElm.Test
             var query = lib.Should().BeACorrectlyInitializedLibraryWithStatementOfType<Query>();
         }
         [TestMethod]
-        public void Relationship_with_bad_identifier()
+        public void Relationship_withbadidentifier()
         {
             CreateCqlToolkit().MakeLibrary($"""
                 library Test version '1.0.0'
@@ -66,7 +66,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multi_scalar_source()
+        public void Multiscalarsource()
         {
             var lib = CreateCqlToolkit().MakeLibraryFromExpression("""
                 from
@@ -83,7 +83,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Multi_vector_source()
+        public void Multivectorsource()
         {
             var lib = CreateCqlToolkit().MakeLibraryFromExpression("""
                 from
@@ -100,10 +100,10 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Sort_Calls_Function()
+        public void SortCallsFunction()
         {
             var lib = CreateCqlToolkit().MakeLibrary("""
-                library Sort_Calls_Fluent version '1.0.0'
+                library SortCallsFluent version '1.0.0'
 
                 define function foo(): 1
 
@@ -128,10 +128,10 @@ namespace Hl7.Cql.CqlToElm.Test
 
 
         [TestMethod]
-        public void Sort_Calls_Fluent()
+        public void SortCallsFluent()
         {
             var lib = CreateCqlToolkit().MakeLibrary("""
-                library Sort_Calls_Fluent version '1.0.0'
+                library SortCallsFluent version '1.0.0'
 
                 define fluent function foo(i Integer): i
 
@@ -158,10 +158,10 @@ namespace Hl7.Cql.CqlToElm.Test
 
 
         [TestMethod]
-        public void Sort_Prefers_Fluent()
+        public void SortPrefersFluent()
         {
             var lib = CreateCqlToolkit().MakeLibrary("""
-                library Sort_Calls_Fluent version '1.0.0'
+                library SortCallsFluent version '1.0.0'
 
                 define fluent function foo(i Integer): i
                 define function foo(): 1
@@ -221,7 +221,7 @@ namespace Hl7.Cql.CqlToElm.Test
             //", "Identifier x is already in use in this scope.");
         }
         [TestMethod]
-        public void Let_Redefine_Operand()
+        public void LetRedefineOperand()
         {
             // TODO: make this optionally fail w/ config options
 
@@ -347,7 +347,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Aggregate_Factorial_Distinct()
+        public void AggregateFactorialDistinct()
         {
             var lib = CreateCqlToolkit().MakeLibrary("""
                 library Claims version '1.0.0'
@@ -370,7 +370,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Aggregate_Factorial_No_Starting()
+        public void Aggregate_FactorialNoStarting()
         {
             var lib = CreateCqlToolkit().MakeLibrary("""
                 library Claims version '1.0.0'
@@ -393,7 +393,7 @@ namespace Hl7.Cql.CqlToElm.Test
         }
 
         [TestMethod]
-        public void Aggregate_List_Accumulator()
+        public void AggregateListAccumulator()
         {
             var lib = CreateCqlToolkit().MakeLibrary("""
                 library Claims version '1.0.0'

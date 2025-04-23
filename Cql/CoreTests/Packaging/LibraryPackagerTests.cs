@@ -32,7 +32,8 @@ public class LibraryPackagerTests
             cqlBytes: [],
             assemblyBytes: [],
             elmLibrarySet: new LibrarySet("", [elmLibrary] ),
-            cSharpSourceCodeById: []);
+            cSharpSourceCodeById: [],
+            resourceCanonicalRootUrl: "");
 
         // Assert
         Assert.IsNotNull(library);

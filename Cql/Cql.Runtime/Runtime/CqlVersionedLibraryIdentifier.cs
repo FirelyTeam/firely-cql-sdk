@@ -21,6 +21,12 @@ public readonly record struct CqlVersionedLibraryIdentifier(
     CqlLibraryVersion? Version = null) : IParsable<CqlVersionedLibraryIdentifier>
 {
     /// <summary>
+    /// The delimiter to use between the identifier and version part in the string representation.
+    /// </summary>
+    [UsedImplicitly]
+    public const string IdentifierVersionDelimiter = "-";
+
+    /// <summary>
     /// Implicitly converts a <see cref="CqlVersionedLibraryIdentifier"/> to a <see cref="string"/>.
     /// </summary>
     /// <param name="versionedIdentifier">The <see cref="CqlVersionedLibraryIdentifier"/> to convert.</param>
@@ -65,21 +71,21 @@ public readonly record struct CqlVersionedLibraryIdentifier(
     /// <returns>A string representation of the CQL versioned library identifier.</returns>
     public override string ToString()
     {
-        return FormatString(Identifier, Version);
+        return ToString(IdentifierVersionDelimiter);
     }
 
     /// <summary>
     /// Returns a string representation of the CQL versioned library identifier.
     /// </summary>
-    /// <param name="identifier">The identifier string.</param>
-    /// <param name="version">The version string (optional).</param>
     /// <returns>A string representation of the CQL versioned library identifier.</returns>
-    public static string FormatString(string identifier, string? version = null) =>
-        version switch
+    internal string ToString(string delimiter)
+    {
+        return (Identifier, Version) switch
         {
-            not null => $"{identifier}-{version}",
-            _ => identifier,
+            ({ } identifier, { } version) => $"{identifier}{delimiter}{version}",
+            ({ } identifier, _)           => identifier.ToString(),
         };
+    }
 
     #region Parsing
 
