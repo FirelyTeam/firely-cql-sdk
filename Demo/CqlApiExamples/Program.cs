@@ -17,8 +17,6 @@ using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Text;
-using Hl7.Cql.Abstractions.Infrastructure;
-using Hl7.Cql.Primitives;
 
 namespace CqlApiExamples;
 
@@ -186,19 +184,19 @@ internal static class Program
                 .AddAssemblyBinariesInFhirLibrariesFromDirectory(dir)
                 .CreateLibrarySetInvoker(dirs.LibrarySetName);
 
-        // if (dirs.LibrarySetName == "RR23")
-        // {
-        //     var bundlesDir = Directories.LibrarySetsDirectory.CreateSubdirectory(dirs.LibrarySetName).CreateSubdirectory("TestData");
-        //     var bundleFile = new FileInfo(Path.Combine(bundlesDir.FullName, "RR23_EX_wile_e_coyote_falling_rock_transaction.json"));
-        //     var bundle = bundleFile.DeserializeResource<Bundle>() ?? throw new SerializationException("Could not deserialize bundle");
-        //     var cqlContext = FhirCqlContext.ForBundle(bundle);
-        //     var result = librarySetInvoker.GetLibraryDefinitionResult(
-        //         cqlContext,
-        //         (CqlVersionedLibraryIdentifier)"RR23-1.0.0",
-        //         "Tiny Umbrella Supply within 7 days after most recent injury due to falling rock");
-        //     logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDefinitionsResults(cqlContext));
-        // }
-        // else
+        if (dirs.LibrarySetName == "RR23")
+        {
+            var bundlesDir = Directories.LibrarySetsDirectory.CreateSubdirectory(dirs.LibrarySetName).CreateSubdirectory("TestData");
+            var bundleFile = new FileInfo(Path.Combine(bundlesDir.FullName, "RR23_EX_wile_e_coyote_falling_rock_transaction.json"));
+            var bundle = bundleFile.DeserializeResource<Bundle>() ?? throw new SerializationException("Could not deserialize bundle");
+            var cqlContext = FhirCqlContext.ForBundle(bundle);
+            var result = librarySetInvoker.GetLibraryDefinitionResult(
+                cqlContext,
+                (CqlVersionedLibraryIdentifier)"RR23-1.0.0",
+                "Tiny Umbrella Supply within 7 days after most recent injury due to falling rock");
+            logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDefinitionsResults(cqlContext));
+        }
+        else
         {
             logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDefinitions());
         }
@@ -393,26 +391,32 @@ file static class Extensions
     }
 
     public static StringBuilder DumpLibraryDefinitions(
-        this LibrarySetInvoker scope,
-        StringBuilder? sb = null)
+        this LibrarySetInvoker librarySetInvoker,
+        StringBuilder? sb = null,
+        CqlContext? cqlContext = null)
     {
         sb ??= new();
         sb.AppendLine("LibrarySet:");
-        if (scope.LibrarySetName is { Length: > 0 } name)
+        if (librarySetInvoker.LibrarySetName is { Length: > 0 } name)
             sb.AppendLine($"- LibrarySetName: {name}");
         sb.AppendLine("- Libraries:");
 
-        foreach (var libraryDefinitions in scope.EnumerateLibrarySetDefinitions()
-                               .GroupBy(o => o.LibraryIdentifier))
+        IEnumerable<(DefinitionInvoker def, object? result)> definitions =
+            cqlContext is null
+            ? librarySetInvoker.EnumerateLibrarySetDefinitions().Select(def=> (def, default(object)))
+            : librarySetInvoker.EnumerateLibrarySetDefinitionsResults(cqlContext);
+
+        foreach (var grouping1 in
+                 definitions.GroupBy(o => o.def.LibraryIdentifier))
         {
-            var libId = libraryDefinitions.Key;
+            var libId = grouping1.Key;
             sb.AppendLine($"  - LibraryName: {libId}");
-            foreach (var (index, def) in libraryDefinitions
-                         .GroupBy(def => def.ValueSetId is not null)
-                         .OrderBy(t => !t.Key)
-                         .SelectMany(g => g.Indexed())
-                         //.Indexed()
-                         )
+            foreach (var (index, (def, result)) in grouping1
+                                         .GroupBy(def => def.def.ValueSetId is not null)
+                                         .OrderBy(t => !t.Key)
+                                         .SelectMany(g => g.Indexed())
+                     //.Indexed()
+                    )
             {
                 if (def.ValueSetId is { } vsid)
                 {
@@ -420,7 +424,6 @@ file static class Extensions
                         sb.AppendLine($"    ValueSets:");
                     sb.AppendLine($"      - ValueSetNane: {def.DefinitionName}");
                     sb.AppendLine($"      - ValueSetId: {vsid}");
-                    //sb.AppendLine($"        ReturnType: {TypeHierarchy(def.ReturnType)}"); // Always CqlValueSet
                 }
                 else
                 {
@@ -428,6 +431,8 @@ file static class Extensions
                         sb.AppendLine($"    Definitions:");
                     sb.AppendLine($"      - DefinitionName: {def.DefinitionName}");
                     sb.AppendLine($"        ReturnType: {TypeHierarchy(def.ReturnType)}");
+                    if (cqlContext is not null)
+                        sb.AppendLine($"        Result: {result}");
                 }
 
                 foreach (var (tagIndex, (key, value)) in def.TagValuesByName.Indexed())
@@ -465,23 +470,10 @@ file static class Extensions
     }
 
     public static StringBuilder DumpLibraryDefinitionsResults(
-        this LibrarySetInvoker scope,
+        this LibrarySetInvoker librarySetInvoker,
         CqlContext cqlContext,
-        StringBuilder? sb = null)
-    {
-        sb ??= new();
-        sb.AppendLine("Libraries and Definitions:");
-        if (scope.LibrarySetName is { Length: > 0 })
-            sb.AppendLine(scope.LibrarySetName);
-        foreach (var (libId, lib) in scope.LibraryInvokers)
-        {
-            sb.AppendLine(Invariant($"- {libId}"));
-            foreach (var (defName, def) in lib.Definitions)
-                sb.AppendLine(Invariant($"  - {defName} : {def.ReturnType} = {def.Invoke(cqlContext)}"));
-        }
-
-        return sb;
-    }
+        StringBuilder? sb = null) =>
+        librarySetInvoker.DumpLibraryDefinitions(sb, cqlContext);
 
     private static string[] SplitLines(this string multilineString) =>
         multilineString.Split([Environment.NewLine], StringSplitOptions.None);

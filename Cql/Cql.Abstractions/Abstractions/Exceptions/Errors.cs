@@ -13,16 +13,13 @@ internal readonly record struct KeyNotFoundError(string Key, string? TypeName = 
     public string GetMessage() => $"{TypeName ?? "Object"} not found by key. Key: '{Key}'";
 }
 
-internal readonly record struct CouldNotDeserializeFileError(string? FilePath = null, string? TypeName = null) : ICqlError
-{
-    public string GetMessage() => $"Could not deserialize to a valid {TypeName ?? "Object"}."
-                                  + FilePath is {Length:>0} filePath ? $" Path: '{filePath}'" : "";
-}
-
 internal readonly record struct CouldNotValidateLibraryError(string? FilePath, string? TypeName = null) : ICqlError
 {
     public string GetMessage() => $"Could not validate {TypeName ?? "Object"}. " +
-                                  (FilePath is not null
-                                      ? $"Path: '{FilePath}'"
-                                      : string.Empty);
+                                  (FilePath is not null ? $"Path: '{FilePath}'" : "");
+}
+
+internal readonly record struct CouldNotConvertInstanceToTargetType(object Instance, Type TargetType) : ICqlError
+{
+    public string GetMessage() => $"Could not convert instance '{Instance}' of type '{Instance?.GetType()} to type {TargetType}";
 }

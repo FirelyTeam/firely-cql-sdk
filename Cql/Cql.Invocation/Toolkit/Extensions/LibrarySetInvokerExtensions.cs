@@ -132,6 +132,7 @@ public static class LibrarySetInvokerExtensions
     /// <param name="libraryIdentifier">The identifier of the library.</param>
     /// <param name="definitionName">The name of the definition.</param>
     /// <returns>The result of the definition invocation.</returns>
+    [DebuggerStepperBoundary]
     public static object? GetLibraryDefinitionResult(
         this LibrarySetInvoker librarySetInvoker,
         CqlContext cqlContext,

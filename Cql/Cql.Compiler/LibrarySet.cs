@@ -116,7 +116,6 @@ internal class LibrarySet : IReadOnlyCollection<Library> //, IReadOnlyDictionary
     /// </summary>
     /// <param name="files">The collection of files to load the libraries from.</param>
     /// <exception cref="FileNotFoundException"></exception>
-    /// <exception cref="CouldNotDeserializeFileError"></exception>
     /// <exception cref="CouldNotValidateLibraryError"></exception>
     /// <exception cref="LibraryMissingIncludeDefPathError"></exception>
     public IReadOnlyCollection<Library> LoadLibraries(IReadOnlyCollection<FileInfo> files)
