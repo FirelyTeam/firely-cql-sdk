@@ -26,9 +26,9 @@ internal static class Program
         // Create a logger factory via the Microsoft.Extensions.Logging API
         var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
-        AddDuplicates(loggerFactory);
-        Add3And2Example(loggerFactory);
-        InvokeCqlExample(loggerFactory);
+        // AddDuplicates(loggerFactory);
+        // Add3And2Example(loggerFactory);
+        // InvokeCqlExample(loggerFactory);
         InvokeCqlFromExamplesFolder(loggerFactory);
         PackageFromExamplesFolder(loggerFactory);
 

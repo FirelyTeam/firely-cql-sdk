@@ -16,12 +16,10 @@ namespace Hl7.Cql.Runtime;
 /// <param name="Identifier">The identifier of the CQL library.</param>
 /// <param name="Version">The version of the CQL library.</param>
 [JsonConverter(typeof(StringEncapsulatedValueJsonConverter<CqlVersionedLibraryIdentifier>))]
-public readonly partial record struct CqlVersionedLibraryIdentifier(
+public readonly record struct CqlVersionedLibraryIdentifier(
     CqlLibraryIdentifier Identifier,
     CqlLibraryVersion? Version = null) : IParsable<CqlVersionedLibraryIdentifier>
 {
-    internal partial class JsonConverter { }
-
     /// <summary>
     /// Implicitly converts a <see cref="CqlVersionedLibraryIdentifier"/> to a <see cref="string"/>.
     /// </summary>
