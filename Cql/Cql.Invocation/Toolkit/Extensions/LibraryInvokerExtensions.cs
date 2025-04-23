@@ -7,7 +7,6 @@
  */
 
 using Hl7.Cql.Runtime;
-using Hl7.Cql.Toolkit;
 
 namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 
@@ -47,7 +46,7 @@ public static class LibraryInvokerExtensions
     /// <para>
     /// From the <see cref="DefinitionInvoker"/> the name of the
     /// <see cref="DefinitionInvoker.LibraryIdentifier"/> and <see cref="DefinitionInvoker.DefinitionName"/> are available.
-    /// </para>
+    /// </para> 
     /// </remarks>
     public static IEnumerable<(DefinitionInvoker definitionInvoker, object? definitionResult)> EnumerateLibraryDefinitionsResults(
         this LibraryInvoker libraryInvoker,
@@ -55,22 +54,11 @@ public static class LibraryInvokerExtensions
         Func<DefinitionInvoker, bool>? includeDefinition = null,
         ValueExceptionHandler<DefinitionInvoker>? definitionInvocationExceptionCallback = null)
     {
-        var logger = libraryInvoker.LibrarySetInvoker.CreateLogger(typeof(LibraryInvokerExtensions));
-        var continuation = libraryInvoker.LibrarySetInvoker.BatchProcessExceptionContinuation;
-        includeDefinition ??= _ => true;
+        var definitionInvokers = libraryInvoker.Definitions.Values.AsEnumerable();
+        if (includeDefinition is {} fn)
+            definitionInvokers = definitionInvokers
+                .Where(definitionInvoker => fn(definitionInvoker));
 
-        return libraryInvoker.Definitions.Values
-                             .Where(includeDefinition)
-                             .TrySelect(
-                                 definitionInvoker => (definitionInvoker, definitionInvoker.Invoke(cqlContext)),
-                                 errorStrategy => errorStrategy
-                                                  .SetContinuation(continuation)
-                                                  .AddLoggerExceptionHandler(
-                                                      logger,
-                                                      (definitionInvoker, logMessage) =>
-                                                          logMessage("Could not invoke definition {definition} on library {id}",
-                                                                     definitionInvoker.DefinitionName, libraryInvoker.LibraryIdentifier))
-                                                  .AddExceptionHandler(definitionInvocationExceptionCallback)
-                             );
+        return definitionInvokers.EnumerateResults(cqlContext, definitionInvocationExceptionCallback);
     }
 }
