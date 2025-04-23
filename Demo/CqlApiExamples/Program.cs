@@ -17,6 +17,8 @@ using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 using System.Runtime.Serialization;
 using System.Text;
+using Hl7.Cql.Abstractions.Infrastructure;
+using Hl7.Cql.Primitives;
 
 namespace CqlApiExamples;
 
@@ -30,16 +32,17 @@ internal static class Program
     private static void Main(string[] args)
     {
         // Create a logger factory via the Microsoft.Extensions.Logging API
-        var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
+        using var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole());
 
         // AddDuplicates(loggerFactory);
         // Add3And2Example(loggerFactory);
         // InvokeCqlExample(loggerFactory);
-        // InvokeCqlFromExamplesFolder(loggerFactory);
+        //InvokeCqlFromExamplesFolder(loggerFactory);
         //PackageFromExamplesFolder(loggerFactory);
-
+        //
         string[] exampleSetNames = ["RR23"];
         //string[] exampleSetNames = ["CMS", "Authoring", "CMS", "Demo", "Tests", "RR23"];
+        //string[] exampleSetNames = ["CMS"];
         foreach (var exampleSetName in exampleSetNames)
         {
             Directories dirs = Directories.Create(exampleSetName);
@@ -143,7 +146,7 @@ internal static class Program
 
         var cqlLibraryString = CqlLibraryString.Parse(
             """
-            library AdditionLib version '0.0.0'
+            library "num-con-mon" version '1.0.0'
 
             define private Three: 1 + 2
             """);
@@ -163,25 +166,39 @@ internal static class Program
         Directories dirs)
     {
         var logger = loggerFactory.CreateLogger(typeof(Program));
+
+        var dir = dirs.FhirInDirectory;
+        if (!dir.Exists)
+        {
+            logger.LogWarning("Directory doesnt exist: {dir}", dir);
+            return;
+        }
+
+        if (!dir.EnumerateFiles("Library-*.json").Any())
+        {
+            logger.LogWarning("Directory has no resource files: {dir}", dir);
+            return;
+        }
+
         using var librarySetInvoker =
             new InvocationToolkit(loggerFactory)
                 //.SetIgnoreEnumerationExceptions()
-                .AddAssemblyBinariesInFhirLibrariesFromDirectory(dirs.FhirOutDirectory)
+                .AddAssemblyBinariesInFhirLibrariesFromDirectory(dir)
                 .CreateLibrarySetInvoker(dirs.LibrarySetName);
 
-        if (dirs.LibrarySetName == "RR23")
-        {
-            var bundlesDir = Directories.LibrarySetsDirectory.CreateSubdirectory(dirs.LibrarySetName).CreateSubdirectory("TestData");
-            var bundleFile = new FileInfo(Path.Combine(bundlesDir.FullName, "RR23_EX_wile_e_coyote_falling_rock_transaction.json"));
-            var bundle = bundleFile.DeserializeResource<Bundle>() ?? throw new SerializationException("Could not deserialize bundle");
-            var cqlContext = FhirCqlContext.ForBundle(bundle);
-            var result = librarySetInvoker.GetLibraryDefinitionResult(
-                cqlContext,
-                (CqlVersionedLibraryIdentifier)"RR23-1.0.0",
-                "Tiny Umbrella Supply within 7 days after most recent injury due to falling rock");
-            logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDefinitionsResults(cqlContext));
-        }
-        else
+        // if (dirs.LibrarySetName == "RR23")
+        // {
+        //     var bundlesDir = Directories.LibrarySetsDirectory.CreateSubdirectory(dirs.LibrarySetName).CreateSubdirectory("TestData");
+        //     var bundleFile = new FileInfo(Path.Combine(bundlesDir.FullName, "RR23_EX_wile_e_coyote_falling_rock_transaction.json"));
+        //     var bundle = bundleFile.DeserializeResource<Bundle>() ?? throw new SerializationException("Could not deserialize bundle");
+        //     var cqlContext = FhirCqlContext.ForBundle(bundle);
+        //     var result = librarySetInvoker.GetLibraryDefinitionResult(
+        //         cqlContext,
+        //         (CqlVersionedLibraryIdentifier)"RR23-1.0.0",
+        //         "Tiny Umbrella Supply within 7 days after most recent injury due to falling rock");
+        //     logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDefinitionsResults(cqlContext));
+        // }
+        // else
         {
             logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDefinitions());
         }
@@ -210,6 +227,16 @@ internal static class Program
         using var librarySetInvoker = cqlToolkit.SetIgnoreEnumerationExceptions(false)
                                                 .AddCqlLibrariesFromDirectory(dirs.CqlFromDirectory)
                                                 .CreateLibrarySetInvoker(name: "Examples");
+
+        var results = librarySetInvoker
+            .EnumerateLibrarySetDefinitionsResults(
+                cqlContext,
+                definition => !IsAnyTypeOf(definition.ReturnType, typeof(ValueSet), typeof(Code), typeof(CodeSystem)));
+
+        static bool IsAnyTypeOf(Type target, params Type[] types) =>
+            types.Any(type => type.IsAssignableFrom(target));
+
+
         logger.LogInformation("{dump}", librarySetInvoker.DumpLibraryDefinitions());
         Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestTime") is 3);
         Trace.Assert(Invoke("CqlAggregateFunctionsTest-1.0.000", "Count.CountTestNull") is 0);
@@ -370,14 +397,68 @@ file static class Extensions
         StringBuilder? sb = null)
     {
         sb ??= new();
-        sb.AppendLine("Libraries and Definitions:");
-        if (scope.LibrarySetName is {Length:>0})
-            sb.AppendLine(scope.LibrarySetName);
-        foreach (var (libId, lib) in scope.LibraryInvokers)
+        sb.AppendLine("LibrarySet:");
+        if (scope.LibrarySetName is { Length: > 0 } name)
+            sb.AppendLine($"- LibrarySetName: {name}");
+        sb.AppendLine("- Libraries:");
+
+        foreach (var libraryDefinitions in scope.EnumerateLibrarySetDefinitions()
+                               .GroupBy(o => o.LibraryIdentifier))
         {
-            sb.AppendLine(Invariant($"- {libId}"));
-            foreach (var (defName, def) in lib.Definitions)
-                sb.AppendLine(Invariant($"  - {defName} : {def.ReturnType}"));
+            var libId = libraryDefinitions.Key;
+            sb.AppendLine($"  - LibraryName: {libId}");
+            foreach (var (index, def) in libraryDefinitions
+                         .GroupBy(def => def.ValueSetId is not null)
+                         .OrderBy(t => !t.Key)
+                         .SelectMany(g => g.Indexed())
+                         //.Indexed()
+                         )
+            {
+                if (def.ValueSetId is { } vsid)
+                {
+                    if (index is 0)
+                        sb.AppendLine($"    ValueSets:");
+                    sb.AppendLine($"      - ValueSetNane: {def.DefinitionName}");
+                    sb.AppendLine($"      - ValueSetId: {vsid}");
+                    //sb.AppendLine($"        ReturnType: {TypeHierarchy(def.ReturnType)}"); // Always CqlValueSet
+                }
+                else
+                {
+                    if (index is 0)
+                        sb.AppendLine($"    Definitions:");
+                    sb.AppendLine($"      - DefinitionName: {def.DefinitionName}");
+                    sb.AppendLine($"        ReturnType: {TypeHierarchy(def.ReturnType)}");
+                }
+
+                foreach (var (tagIndex, (key, value)) in def.TagValuesByName.Indexed())
+                {
+                    if (tagIndex == 0)
+                        sb.AppendLine($"        Tags:");
+                    sb.AppendLine($"          - {key}: {string.Join(", ", value)}");
+                }
+            }
+        }
+
+        // Code: [FhirType("code","http://hl7.org/fhir/StructureDefinition/code")]
+        // Code<>: [FhirType("codeOfT")]
+        // CodeSystem: [FhirType("CodeSystem","http://hl7.org/fhir/StructureDefinition/CodeSystem", IsResource=true)]
+        // ValueSet: [FhirType("ValueSet","http://hl7.org/fhir/StructureDefinition/ValueSet", IsResource=true)]
+
+        static string TypeHierarchy(Type t) => string.Join(
+            " -> ",
+            BaseTypes(t).Select(t => t.ToString()));
+
+
+        static IEnumerable<Type> BaseTypes(Type t)
+        {
+            while (t is not null)
+            {
+                yield return t;
+                t = t.BaseType;
+
+                if (t == typeof(object) || t == typeof(ValueType) || t == typeof(System.Array))
+                    break;
+            }
         }
 
         return sb;
@@ -451,6 +532,9 @@ file static class Extensions
             return item;
         return null;
     }
+
+    public static IEnumerable<(int Index, T Value)> Indexed<T>(this IEnumerable<T> source) =>
+        source.Select((v, i) => (i, v));
 }
 
 file static class BundleDeserializationExtensions
@@ -459,7 +543,7 @@ file static class BundleDeserializationExtensions
         FhirSerializationEngineFactory.Ostrich(ModelInfo.ModelInspector, new FhirJsonPocoSerializerSettings { });
 
     public static T? DeserializeResource<T>(this Stream stream)
-        where T: Resource
+        where T : Resource
     {
         using var sr = new StreamReader(stream);
         var json = sr.ReadToEnd();

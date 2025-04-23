@@ -52,6 +52,7 @@ internal class Directories(string librarySetName)
     public DirectoryInfo CSharpOutDirectory => GeneratedDirectory.CreateSubdirectory("CSharp");
     public DirectoryInfo AssembliesOutDirectory => GeneratedDirectory.CreateSubdirectory("Assemblies");
     public DirectoryInfo FhirOutDirectory => GeneratedDirectory.CreateSubdirectory("Fhir");
+    public DirectoryInfo FhirInDirectory => LibrarySetsDirectory.CreateSubdirectory(LibrarySetName).CreateSubdirectory("Resources");
     public DirectoryInfo? ValueSetsFromDirectory =>
         LibrarySetName switch
         {
