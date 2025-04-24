@@ -13,6 +13,13 @@ using Hl7.Fhir.Model;
 
 namespace Hl7.Cql.Fhir.Comparers;
 
+/// <summary>
+/// This comparer enabled comparison between <see cref="CodeableConcept"/> and <see cref="CqlCode"/>,
+/// by comparing the latter to the single <see cref="CodeableConcept.Coding"/>.
+/// </summary>
+/// <remarks>
+/// This comparer must be registered against <see cref="CodeableConcept"/>.
+/// </remarks>
 internal class CodeableConceptVsCqlCodeComparer() : CqlComparerWrapper<object /*CodeableConcept or CqlCode*/, CqlCode>(
     CqlCodeCqlComparer.OrdinalIgnoreCase,
     outer => outer switch
