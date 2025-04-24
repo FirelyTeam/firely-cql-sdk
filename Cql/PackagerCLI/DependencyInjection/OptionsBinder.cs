@@ -6,7 +6,6 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
-using System.Diagnostics.CodeAnalysis;
 using Hl7.Cql.Packager;
 
 // ReSharper disable once CheckNamespace
@@ -16,14 +15,6 @@ namespace Microsoft.Extensions.DependencyInjection;
 
 public static class OptionsBinder
 {
-    private static readonly MethodInfo ConfigurationGetMethodDef =
-            Hl7.Cql.Compiler.Infrastructure.ReflectionUtility
-               .GenericMethodDefinitionOf(() => default(IConfiguration)!.Get<object>());
-
-    private static readonly MethodInfo ToImmutableHashSetMethodDef =
-            Hl7.Cql.Compiler.Infrastructure.ReflectionUtility
-               .GenericMethodDefinitionOf(() => default(IEnumerable<object>)!.ToImmutableHashSet());
-
     /// <summary>
     /// Binds additional properties of the options class to the configuration
     /// that is not supported out of the box by the Options pattern.
@@ -39,28 +30,16 @@ public static class OptionsBinder
             .Configure<IConfiguration>(
                 (options, configuration) =>
                 {
-                    var properties = options.GetType().GetProperties();
+                    var optionsType = options.GetType();
+                    var properties = optionsType
+                                     .GetProperties()
+                                     .Where(p => p.CanWrite && p.GetIndexParameters() is [])
+                                     .AsEnumerable();
+
                     foreach (var property in properties)
                     {
                         switch (Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType)
                         {
-                            case
-                            {
-                                Name: "ImmutableHashSet`1",
-                            } type when type.GetGenericTypeDefinition() == typeof(ImmutableHashSet<>)
-                                        && type.GetGenericArguments()[0] is { IsEnum: true } enumType:
-
-                                var getEnumArray = ConfigurationGetMethodDef.MakeGenericMethod(enumType.MakeArrayType())!;
-                                var section = configuration.GetSection($"{configSectionPath}:{property.Name}");
-                                var enumArray = getEnumArray.Invoke(null, [section]);
-                                if (enumArray is not null)
-                                {
-                                    var toImmutableHashSet = ToImmutableHashSetMethodDef.MakeGenericMethod(enumType);
-                                    var enumImmutableHashSet = toImmutableHashSet.Invoke(null, [enumArray]);
-                                    property.SetValue(options, enumImmutableHashSet);
-                                }
-                                break;
-
                             case
                             {
                                 Name: "DirectoryInfo"
@@ -69,6 +48,22 @@ public static class OptionsBinder
                                 var dirValue = configuration[$"{configSectionPath}:{property.Name}"];
                                 if (!string.IsNullOrEmpty(dirValue))
                                     property.SetValue(options, new DirectoryInfo(dirValue));
+                                break;
+
+                            case var type:
+                                var tryBindMethod = optionsType.GetMethod($"TryBind{property.Name}");
+                                if (tryBindMethod is { } m
+                                    && m.ReturnType == typeof(bool)
+                                    && m.GetParameters() is [{} p1, { IsOut: true } p2]
+                                    && p1.ParameterType == typeof(IConfiguration)
+                                    && p2.ParameterType.GetElementType() /* IsOut parameter will have its property type IsByRef */ == type
+                                    && configuration.GetSection(configSectionPath)?.GetSection(property.Name) is {} configSection)
+                                {
+                                    object?[] inputs = [configSection, null];
+                                    var success = (bool)m.Invoke(options, inputs)!;
+                                    if (success)
+                                        property.SetValue(options, inputs[1]);
+                                }
                                 break;
                         }
                     }

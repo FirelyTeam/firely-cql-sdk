@@ -115,7 +115,7 @@ public sealed class CqlToolkit : IToolkit<CqlToolkit>
     /// <summary>
     /// Translates the CQL libraries to ELM libraries.
     /// </summary>
-    public CqlToolkit ConvertCqlToElm()
+    public CqlToolkit TranslateToElm()
     {
         CqlToolkitConversionDictionary.Builder conversions = _services.LibraryBuilderProvider.ConversionsBuilder;
 

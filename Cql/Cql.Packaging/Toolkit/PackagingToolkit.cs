@@ -16,8 +16,6 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Hl7.Cql.Packaging.Toolkit;
 
-using SysDateTime = System.DateTime;
-
 /// <summary>
 /// Provides functionality for packaging FHIR resources.
 /// </summary>
@@ -27,13 +25,20 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// Initializes a new instance of the <see cref="PackagingToolkit"/> class.
     /// </summary>
     /// <param name="loggerFactory">The logger factory to use for logging.</param>
+    /// <param name="config">The configuration settings for the toolkit.</param>
+    /// <param name="batchProcessExceptionContinuation">The continuation policy to use when an exception occurs during batch processing.</param>
     public PackagingToolkit(
-        ILoggerFactory? loggerFactory = null)
+        ILoggerFactory? loggerFactory = null,
+        PackagingToolkitConfig? config = null,
+        BatchProcessExceptionContinuation batchProcessExceptionContinuation = BatchProcessExceptionContinuation.Throw)
     {
+        config ??= PackagingToolkitConfig.Default;
         loggerFactory ??= NullLoggerFactory.Instance;
         LoggerFactory = loggerFactory;
         _conversions = PackagingToolkitConversionsDictionary.Empty;
-        _services = PackagingToolkitServices.Create(loggerFactory);
+        Config = config;
+        BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
+        _services = PackagingToolkitServices.Create(loggerFactory, config);
     }
 
     private PackagingToolkitConversionsDictionary _conversions;
@@ -57,6 +62,11 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// Gets the service provider used by tests.
     /// </summary>
     internal ServiceProvider ServiceProvider => _services.ServiceProvider;
+
+    /// <summary>
+    /// Gets the configuration used by the toolkit.
+    /// </summary>
+    public PackagingToolkitConfig Config { get; }
 
     /// <summary>
     /// Gets the dictionary of conversions.
@@ -104,10 +114,8 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
     /// <summary>
     /// Converts the added packaging inputs to FHIR resources.
     /// </summary>
-    /// <param name="canonicalRootUrl">The canonical root URL for the FHIR resources.</param>
-    /// <param name="overrideDate">The date to override in the FHIR resources. If not specified, the current time will be used.</param>
     /// <returns>The updated <see cref="PackagingToolkit"/> instance.</returns>
-    public PackagingToolkit ConvertToFhirResources(Uri? canonicalRootUrl, SysDateTime? overrideDate = null)
+    public PackagingToolkit ConvertToFhirResources()
     {
         var builder = _conversions.ToBuilder();
 
@@ -142,8 +150,7 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
                      .PackageEachElmLibraryToFhirResources(
                          librarySet: librarySet,
                          inputsById: id => inputsById[id],
-                         resourceCanonicalRootUrl: canonicalRootUrl?.ToString(),
-                         overrideDate: overrideDate,
+                         overrideDate: Config.OverrideDate,
                          errorStrategy => errorStrategy
                              .SetContinuation(BatchProcessExceptionContinuation)
                              .AddLoggerExceptionHandler(logger, (library, logMessage) => logMessage("Could not package FHIR resources for library {lib}", library.GetVersionedIdentifier()!)),

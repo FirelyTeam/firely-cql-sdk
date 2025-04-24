@@ -26,7 +26,7 @@ public class CqlToFhirProgram
     ILogger<CqlToFhirProgram> logger,
     IOptions<CqlOptions> cqlOptions,
     IOptions<ElmOptions> elmOptions,
-    IOptions<FhirOptions> fhirOptions,
+    IOptions<PackagingOptions> packagingOptions,
     IOptions<CqlToFhirOptions> cqlToElmOptions) : IProgram
 {
     public static int CommandHandler(
@@ -48,7 +48,7 @@ public class CqlToFhirProgram
             var opt = cqlToElmOptions.Value;
             var cqlOpt = cqlOptions.Value;
             var elmOpt = elmOptions.Value;
-            var fhirOpt = fhirOptions.Value;
+            var packOpt = packagingOptions.Value;
 
             switch (opt.ElmOutDir, opt.CSharpOutDir, opt.DllOutDir, opt.FhirOutDir)
             {
@@ -68,7 +68,7 @@ public class CqlToFhirProgram
             }
             sbSummary.AppendLine(Invariant($"Loaded {cqlToolkit.Conversions.Count} CQL libraries from directory {opt.CqlInDir}."));
 
-            var cqlToolkitResultRecords = cqlToolkit.ConvertCqlToElm()
+            var cqlToolkitResultRecords = cqlToolkit.TranslateToElm()
                       .GetCqlToolkitResults()
                       .ToList();
 
@@ -82,7 +82,7 @@ public class CqlToFhirProgram
             {
                 cqlToolkit.SaveElmFilesToDirectory(
                     opt.ElmOutDir,
-                    writeIndented: opt.JsonPretty,
+                    writeIndented: elmOpt.JsonPretty,
                     DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"));
                 sbSummary.AppendLine(Invariant($"Saved {cqlToolkitResultRecords.Count} ELM files to directory {opt.ElmOutDir}."));
             }
@@ -96,7 +96,7 @@ public class CqlToFhirProgram
             ElmToolkit elmToolkit = cqlToolkit.CreateElmToolkit(elmOpt);
 
             var elmToolkitResultRecords = elmToolkit
-                                          .ConvertElmToAssemblies()
+                                          .CompileToAssemblies()
                                           .GetElmToAssemblyResults()
                                           .ToList();
             if (elmToolkitResultRecords.Count == 0)
@@ -117,15 +117,16 @@ public class CqlToFhirProgram
             if (opt.DllOutDir is not null)
             {
                 elmToolkit
-                    .ConvertElmToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
+                    .CompileToAssemblies() // This is a no-op if the ElmToolkit has already compiled the ELM to assemblies
                     .SaveAssemblyBinariesToDirectory(opt.DllOutDir, DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.dll"));
                 sbSummary.AppendLine(Invariant($"Saved {elmToolkitResultRecords.Count} DLLs files to directory {opt.DllOutDir}."));
             }
 
             if (opt.FhirOutDir is not null)
             {
-                var packagingToolkit = new PackagingToolkit(loggerFactory)
-                    .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit);
+                var packagingToolkit = new PackagingToolkit(loggerFactory, packOpt, elmToolkit.BatchProcessExceptionContinuation)
+                    .AddPackagingInputs(cqlToolkit, elmToolkit);
+
                 if (packagingToolkit.Conversions.Count == 0)
                 {
                     logger.LogInformation("Exiting. No CQL or ELM libraries matched with each other for packaging.");
@@ -133,7 +134,7 @@ public class CqlToFhirProgram
                 }
 
                 Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null;
-                if (opt.JsonPretty)
+                if (elmOpt.JsonPretty)
                     configureJsonSerializerOptions = options =>
                     {
                         options.WriteIndented = true;
@@ -141,8 +142,8 @@ public class CqlToFhirProgram
                     };
 
                 packagingToolkit
-                    .AddPackagingInputsFromCqlAndElmToolkits(cqlToolkit, elmToolkit)
-                    .ConvertToFhirResources(fhirOpt.CanonicalRootUrl, fhirOpt.OverrideDate)
+                    .AddPackagingInputs(cqlToolkit, elmToolkit)
+                    .ConvertToFhirResources()
                     .SaveFhirResourcesToDirectory(
                         opt.FhirOutDir,
                         DirectoryPreparationStrategy.CreateFileDeletionDirectoryHandler("*.json"),

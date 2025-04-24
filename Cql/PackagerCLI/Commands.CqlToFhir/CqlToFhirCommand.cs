@@ -55,8 +55,8 @@ public record CqlToFhirCommand(
         (Cs, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.CSharpOutDir)]),
         (Dll, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.DllOutDir)]),
         (Fhir, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.FhirOutDir)]),
-        (CanonicalRootUrl, [FhirOptions.ConfigSection, nameof(FhirOptions.CanonicalRootUrl)]),
-        (OverrideUtcDateTime, [FhirOptions.ConfigSection, nameof(FhirOptions.OverrideDate)]),
-        (JsonPretty, [CqlToFhirOptions.ConfigSection, nameof(CqlToFhirOptions.JsonPretty)]),
+        (CanonicalRootUrl, [PackagingOptions.ConfigSection, nameof(PackagingOptions.CanonicalRootUrl)]),
+        (OverrideUtcDateTime, [PackagingOptions.ConfigSection, nameof(PackagingOptions.OverrideDate)]),
+        (JsonPretty, [ElmOptions.ConfigSection, nameof(ElmOptions.JsonPretty)]),
     ];
 }

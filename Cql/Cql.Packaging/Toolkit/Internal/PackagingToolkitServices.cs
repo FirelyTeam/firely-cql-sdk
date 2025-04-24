@@ -18,21 +18,22 @@ namespace Hl7.Cql.Packaging.Toolkit.Internal;
 internal readonly record struct PackagingToolkitServices(
     ServiceProvider ServiceProvider,
     ILogger<PackagingToolkit> Logger,
-    ResourcePackager ResourcePackager,
-    JsonSerializerOptions JsonSerializerOptions)
+    ResourcePackager ResourcePackager)
 {
-    public static PackagingToolkitServices Create(ILoggerFactory loggerFactory)
+    public static PackagingToolkitServices Create(
+        ILoggerFactory loggerFactory,
+        PackagingToolkitConfig config)
     {
         var services = new ServiceCollection();
         services.AddExternalLogging(loggerFactory);
         services.TryAddSingleton(_ => FhirModelInfo.ModelInspector);
         services.TryAddSingleton<TypeResolver, FhirTypeResolver>();
         services.TryAddSingleton<CqlTypeToFhirTypeMapper>();
+        services.TryAddSingleton(_ => ResourceCanonicalBuilderFactory.Create(config.CanonicalRootUrl, config.FixedLibraryCanonicals));
         services.TryAddSingleton<ResourcePackager>();
         services.TryAddSingleton((IServiceProvider _, ModelInspector modelInspector) => new JsonSerializerOptions().ForFhir(modelInspector));
         var serviceProvider = services.BuildServiceProvider();
         return ActivatorUtilities.CreateInstance<PackagingToolkitServices>(serviceProvider, serviceProvider);
-
     }
 }
 

@@ -8,6 +8,8 @@
 
 using Hl7.Cql.Packager.Commands.Logging;
 using Hl7.Cql.Packager.Options;
+using Hl7.Cql.Packaging.Toolkit;
+using Hl7.Cql.Runtime;
 
 namespace Hl7.Cql.Packager;
 
@@ -16,7 +18,7 @@ internal class OptionsConsoleDumper(
     IConsole console,
     IOptions<CqlOptions> cqlOptions,
     IOptions<ElmOptions> elmOptions,
-    IOptions<FhirOptions> packagingOptions,
+    IOptions<PackagingOptions> packagingOptions,
     IOptions<LoggingOptions> loggingOptions)
 {
     public void DumpToConsole()
@@ -40,6 +42,7 @@ internal class OptionsConsoleDumper(
         jsonOpt.Converters.Add(new JsonStringEnumConverter());
         jsonOpt.Converters.Add(new FileSystemInfoJsonConverter<FileInfo>());
         jsonOpt.Converters.Add(new FileSystemInfoJsonConverter<DirectoryInfo>());
+        jsonOpt.Converters.Add(new KeyToStringDictionaryJsonConverter<CqlLibraryIdentifier, string>());
         var root = new
         {
             Cql = cqlOptions.Value,
@@ -70,7 +73,7 @@ file class FileSystemInfoJsonConverter<TFileSystemInfo > : JsonConverter<TFileSy
         ref Utf8JsonReader reader,
         Type typeToConvert,
         JsonSerializerOptions options) =>
-        throw new NotImplementedException();
+        throw new NotImplementedException("Deserialization is not implemented.");
 
     public override void Write(
         Utf8JsonWriter writer,
@@ -81,5 +84,33 @@ file class FileSystemInfoJsonConverter<TFileSystemInfo > : JsonConverter<TFileSy
             writer.WriteStringValue(fn);
         else
             writer.WriteNullValue();
+    }
+}
+
+
+/// <remarks>For serializing <see cref="PackagingToolkitConfig.FixedLibraryCanonicals"/></remarks>
+file class KeyToStringDictionaryJsonConverter<TKey, TValue> :
+    JsonConverter<IReadOnlyDictionary<TKey, TValue>>
+{
+    public override IReadOnlyDictionary<TKey, TValue>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) =>
+        throw new NotImplementedException("Deserialization is not implemented.");
+
+    public override void Write(
+        Utf8JsonWriter writer,
+        IReadOnlyDictionary<TKey, TValue> value,
+        JsonSerializerOptions options)
+    {
+        writer.WriteStartObject();
+        foreach (var kvp in value)
+        {
+            var propertyName = kvp.Key?.ToString();
+            if (propertyName is { })
+            {
+                writer.WritePropertyName(propertyName ?? "");
+                // Serialize the key as a string
+                JsonSerializer.Serialize(writer, kvp.Value, options);
+            }
+        }
+        writer.WriteEndObject();
     }
 }

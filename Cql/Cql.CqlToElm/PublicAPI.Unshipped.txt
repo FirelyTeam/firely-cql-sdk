@@ -60,10 +60,10 @@ Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.AddCqlLibraries(System.Collections.Generic.I
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.BatchProcessExceptionContinuation.get -> Hl7.Cql.Runtime.BatchProcessExceptionContinuation
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.Config.get -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.Conversions.get -> System.Collections.Generic.IReadOnlyDictionary<Hl7.Cql.Runtime.CqlVersionedLibraryIdentifier, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConversionRecord>!
-Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.ConvertCqlToElm() -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.CqlToolkit(Microsoft.Extensions.Logging.ILoggerFactory? loggerFactory = null, Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig? config = null, Hl7.Cql.Runtime.BatchProcessExceptionContinuation batchProcessExceptionContinuation = Hl7.Cql.Runtime.BatchProcessExceptionContinuation.Throw) -> void
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.LoggerFactory.get -> Microsoft.Extensions.Logging.ILoggerFactory!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.SetBatchProcessExceptionContinuation(Hl7.Cql.Runtime.BatchProcessExceptionContinuation continuation) -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
+Hl7.Cql.CqlToElm.Toolkit.CqlToolkit.TranslateToElm() -> Hl7.Cql.CqlToElm.Toolkit.CqlToolkit!
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.AllowNullIntervals.get -> bool
 Hl7.Cql.CqlToElm.Toolkit.CqlToolkitConfig.AllowNullIntervals.init -> void

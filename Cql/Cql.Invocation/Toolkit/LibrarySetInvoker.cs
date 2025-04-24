@@ -9,6 +9,7 @@
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Runtime;
 using Hl7.Cql.Toolkit;
+using static Hl7.Cql.Invocation.Toolkit.StringBuilderExtensions;
 
 namespace Hl7.Cql.Invocation.Toolkit;
 
@@ -26,11 +27,13 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
     internal LibrarySetInvoker(
         AssemblyLoadContext alc,
         ILoggerFactory loggerFactory,
-        BatchProcessExceptionContinuation batchProcessExceptionContinuation)
+        BatchProcessExceptionContinuation batchProcessExceptionContinuation,
+        string librarySetName)
     {
         _alc = alc;
         LoggerFactory = loggerFactory;
         BatchProcessExceptionContinuation = batchProcessExceptionContinuation;
+        LibrarySetName = librarySetName;
         LibraryInvokers =
             _alc.Assemblies
                 .SelectMany(a => a.GetTypes())
@@ -62,10 +65,21 @@ public sealed class LibrarySetInvoker : IDisposable, IToolkit<LibrarySetInvoker>
     /// <inheritdoc />
     public BatchProcessExceptionContinuation BatchProcessExceptionContinuation { get; private set; }
 
+    /// <summary>
+    /// Represents the name of a library set or empty.
+    /// </summary>
+    public string LibrarySetName { get; }
+
     /// <inheritdoc />
     public LibrarySetInvoker SetBatchProcessExceptionContinuation(BatchProcessExceptionContinuation continuation)
     {
         BatchProcessExceptionContinuation = continuation;
         return this;
     }
+
+    /// <inheritdoc />
+    public override string? ToString() =>
+        string.IsNullOrEmpty(LibrarySetName)
+            ? base.ToString()
+            : StartBrace().AppendMember(LibrarySetName).EndBrace();
 }
