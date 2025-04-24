@@ -6,6 +6,7 @@
  * available at https://raw.githubusercontent.com/FirelyTeam/firely-cql-sdk/main/LICENSE
  */
 
+using Hl7.Cql.Abstractions;
 using Hl7.Cql.Abstractions.Infrastructure;
 using Hl7.Cql.Elm;
 using Hl7.Cql.Packaging.Toolkit.Internal;
@@ -182,4 +183,40 @@ public sealed class PackagingToolkit : IToolkit<PackagingToolkit>
         o.SourceElmLibrary,
         o.SourceCSharpSourceCode,
         o.SourceAssemblyBinary);
+
+    /// <summary>
+    /// A utility method that serializes FHIR resources to JSON format.
+    /// </summary>
+    /// <param name="fhirResources">The collection of FHIR resources to serialize.</param>
+    /// <param name="writeIndented">Specifies whether the JSON output should be indented.</param>
+    /// <param name="configureJsonSerializerOptions">Optional mutator to configure JSON serializer options.</param>
+    /// <returns>A collection of tuples containing the resource file name and its JSON representation.</returns>
+    public IEnumerable<(ResourceFileName resourceFileName, string resourceJson)> SerializeFhirResourcesToJson(
+       IEnumerable<FhirResource> fhirResources,
+       bool writeIndented = false,
+       Mutator<JsonSerializerOptions>? configureJsonSerializerOptions = null)
+    {
+        var jsonSerializerOptions = ServiceProvider.GetRequiredService<JsonSerializerOptions>();
+
+        var updateWriteIndented = writeIndented != jsonSerializerOptions.WriteIndented;
+        var mutateOptions = configureJsonSerializerOptions != null;
+        if (updateWriteIndented || mutateOptions)
+        {
+            // Clone the options since the instance is shared as a singleton.
+            jsonSerializerOptions = new JsonSerializerOptions(jsonSerializerOptions);
+
+            if (updateWriteIndented)
+                jsonSerializerOptions.WriteIndented = writeIndented;
+
+            if (mutateOptions)
+                jsonSerializerOptions = configureJsonSerializerOptions!(jsonSerializerOptions);
+        }
+
+        foreach (var resource in fhirResources)
+        {
+            var resourceJson = JsonSerializer.Serialize(resource, jsonSerializerOptions);
+            var resourceFileName = resource.GetResourceFileName();
+            yield return (resourceFileName, resourceJson);
+        }
+    }
 }

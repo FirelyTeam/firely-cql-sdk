@@ -16,6 +16,16 @@ namespace Hl7.Cql.Invocation.Toolkit.Extensions;
 public static class LibrarySetInvokerExtensions
 {
     /// <summary>
+    /// Enumerates the definitions in the library set.
+    /// </summary>
+    /// <param name="librarySetInvoker">The library set invoker.</param>
+    public static IEnumerable<DefinitionInvoker> EnumerateLibrarySetDefinitions(
+        this LibrarySetInvoker librarySetInvoker) =>
+        librarySetInvoker
+            .LibraryInvokers.Values
+            .SelectMany(libraryInvoker => libraryInvoker.Definitions.Values);
+
+    /// <summary>
     /// Enumerates the results of all definitions in the library set.
     /// </summary>
     /// <param name="librarySetInvoker">The library set invoker.</param>
@@ -54,9 +64,12 @@ public static class LibrarySetInvokerExtensions
         Func<DefinitionInvoker, bool>? includeDefinition = null,
         ValueExceptionHandler<DefinitionInvoker>? definitionInvocationExceptionCallback = null)
     {
-        foreach (var libraryInvoker in librarySetInvoker.LibraryInvokers.Values)
-            foreach (var (definition, definitionResult) in libraryInvoker.EnumerateLibraryDefinitionsResults(cqlContext, includeDefinition, definitionInvocationExceptionCallback))
-                yield return (definition, definitionResult);
+        var definitions = librarySetInvoker.EnumerateLibrarySetDefinitions();
+
+        if (includeDefinition is {} fn)
+            definitions = definitions.Where(definitionInvoker => fn(definitionInvoker));
+
+        return definitions.EnumerateResults(cqlContext, definitionInvocationExceptionCallback);
     }
 
     /// <summary>
@@ -100,11 +113,15 @@ public static class LibrarySetInvokerExtensions
         Func<DefinitionInvoker, bool>? includeDefinition = null,
         ValueExceptionHandler<DefinitionInvoker>? definitionInvocationExceptionCallback = null)
     {
-        if (librarySetInvoker.LibraryInvokers.GetValueOrDefault(libraryIdentifier) is { } libraryInvoker)
+        if (librarySetInvoker.LibraryInvokers.GetValueOrDefault(libraryIdentifier) is { Definitions.Values: {} definitions })
         {
-            foreach (var (definition, definitionResult) in libraryInvoker.EnumerateLibraryDefinitionsResults(cqlContext, includeDefinition, definitionInvocationExceptionCallback))
-                yield return (definition, definitionResult);
+            if (includeDefinition is { } fn)
+                definitions = definitions.Where(definitionInvoker => fn(definitionInvoker));
+
+            return definitions.EnumerateResults(cqlContext, definitionInvocationExceptionCallback);
         }
+
+        return [];
     }
 
     /// <summary>
@@ -115,6 +132,7 @@ public static class LibrarySetInvokerExtensions
     /// <param name="libraryIdentifier">The identifier of the library.</param>
     /// <param name="definitionName">The name of the definition.</param>
     /// <returns>The result of the definition invocation.</returns>
+    [DebuggerStepperBoundary]
     public static object? GetLibraryDefinitionResult(
         this LibrarySetInvoker librarySetInvoker,
         CqlContext cqlContext,

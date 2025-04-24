@@ -1,0 +1,1194 @@
+{
+  "library": {
+    "identifier": {
+      "id": "RR23",
+      "system": "",
+      "version": "1.0.0"
+    },
+    "schemaIdentifier": {
+      "id": "urn:hl7-org:elm",
+      "version": "r1"
+    },
+    "usings": {
+      "def": [
+        {
+          "localIdentifier": "System",
+          "uri": "urn:hl7-org:elm-types:r1",
+          "version": "1.0.0"
+        },
+        {
+          "localIdentifier": "FHIR",
+          "uri": "http://hl7.org/fhir",
+          "version": "4.0.1",
+          "localId": "1397",
+          "locator": "8:0-8:19"
+        }
+      ]
+    },
+    "includes": {
+      "def": [
+        {
+          "localIdentifier": "FHIRHelpers",
+          "path": "FHIRHelpers",
+          "version": "4.0.1",
+          "localId": "1932",
+          "locator": "9:0-9:28"
+        }
+      ]
+    },
+    "parameters": {
+      "def": [
+        {
+          "default": {
+            "type": "Interval",
+            "low": {
+              "type": "DateTime",
+              "year": {
+                "type": "Literal",
+                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                "value": "2023",
+                "resultTypeSpecifier": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{urn:hl7-org:elm-types:r1}Integer"
+                },
+                "localId": "1943",
+                "locator": "23:48-23:52",
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+              },
+              "month": {
+                "type": "Literal",
+                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                "value": "1",
+                "resultTypeSpecifier": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{urn:hl7-org:elm-types:r1}Integer"
+                },
+                "localId": "1944",
+                "locator": "28:48-23:55",
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+              },
+              "day": {
+                "type": "Literal",
+                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                "value": "1",
+                "resultTypeSpecifier": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{urn:hl7-org:elm-types:r1}Integer"
+                },
+                "localId": "1945",
+                "locator": "31:48-23:58",
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+              },
+              "resultTypeSpecifier": {
+                "type": "NamedTypeSpecifier",
+                "name": "{urn:hl7-org:elm-types:r1}DateTime"
+              },
+              "localId": "1942",
+              "locator": "23:48-23:48",
+              "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime"
+            },
+            "high": {
+              "type": "DateTime",
+              "year": {
+                "type": "Literal",
+                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                "value": "2023",
+                "resultTypeSpecifier": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{urn:hl7-org:elm-types:r1}Integer"
+                },
+                "localId": "1947",
+                "locator": "23:62-23:66",
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+              },
+              "month": {
+                "type": "Literal",
+                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                "value": "12",
+                "resultTypeSpecifier": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{urn:hl7-org:elm-types:r1}Integer"
+                },
+                "localId": "1948",
+                "locator": "28:62-23:69",
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+              },
+              "day": {
+                "type": "Literal",
+                "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                "value": "31",
+                "resultTypeSpecifier": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{urn:hl7-org:elm-types:r1}Integer"
+                },
+                "localId": "1949",
+                "locator": "31:62-23:72",
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+              },
+              "resultTypeSpecifier": {
+                "type": "NamedTypeSpecifier",
+                "name": "{urn:hl7-org:elm-types:r1}DateTime"
+              },
+              "localId": "1946",
+              "locator": "23:62-23:62",
+              "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime"
+            },
+            "lowClosed": true,
+            "highClosed": true,
+            "resultTypeSpecifier": {
+              "type": "IntervalTypeSpecifier",
+              "pointType": {
+                "type": "NamedTypeSpecifier",
+                "name": "{urn:hl7-org:elm-types:r1}DateTime"
+              }
+            },
+            "localId": "1950",
+            "locator": "23:39-23:74"
+          },
+          "parameterTypeSpecifier": {
+            "type": "IntervalTypeSpecifier",
+            "pointType": {
+              "type": "NamedTypeSpecifier",
+              "name": "{urn:hl7-org:elm-types:r1}DateTime"
+            }
+          },
+          "name": "Measurement Period",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "IntervalTypeSpecifier",
+            "pointType": {
+              "type": "NamedTypeSpecifier",
+              "name": "{urn:hl7-org:elm-types:r1}DateTime"
+            }
+          },
+          "localId": "1941",
+          "locator": "23:0-23:74"
+        }
+      ]
+    },
+    "codeSystems": {
+      "def": [
+        {
+          "name": "ACME Product Catalog",
+          "id": "http://acme.org/product-catalog",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}CodeSystem"
+          },
+          "localId": "1933",
+          "locator": "11:0-11:35",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}CodeSystem"
+        },
+        {
+          "name": "ConditionVerificationStatusCodes",
+          "id": "http://terminology.hl7.org/CodeSystem/condition-ver-status",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}CodeSystem"
+          },
+          "localId": "1934",
+          "locator": "12:0-12:47",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}CodeSystem"
+        }
+      ]
+    },
+    "valueSets": {
+      "def": [
+        {
+          "name": "Injury due to falling rock",
+          "id": "http://moh.alpha.alp/ValueSet/DiagnosisInjuryDueToFallingRock",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}ValueSet"
+          },
+          "localId": "1935",
+          "locator": "14:0-14:39",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}ValueSet"
+        },
+        {
+          "name": "Roadrunners Syndrome Indicators",
+          "id": "http://moh.alpha.alp/ValueSet/DiagnosisRoadrunnerSyndrome",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}ValueSet"
+          },
+          "localId": "1936",
+          "locator": "15:0-15:44",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}ValueSet"
+        }
+      ]
+    },
+    "codes": {
+      "def": [
+        {
+          "codeSystem": {
+            "name": "ACME Product Catalog",
+            "localId": "1937",
+            "locator": "17:34-17:34"
+          },
+          "name": "Tiny Umbrella",
+          "id": "U707",
+          "display": "ACME Tiny Umbrella",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}Code"
+          },
+          "localId": "1938",
+          "locator": "17:0-17:65",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}Code"
+        },
+        {
+          "codeSystem": {
+            "name": "ConditionVerificationStatusCodes",
+            "localId": "1939",
+            "locator": "18:49-18:49"
+          },
+          "name": "entered-in-error",
+          "id": "entered-in-error",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}Code"
+          },
+          "localId": "1940",
+          "locator": "18:0-18:49",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}Code"
+        }
+      ]
+    },
+    "concepts": {
+      "def": []
+    },
+    "contexts": {
+      "def": [
+        {
+          "name": "Patient",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{http://hl7.org/fhir}Patient"
+          },
+          "localId": "1951",
+          "locator": "25:0-25:8",
+          "resultTypeName": "{http://hl7.org/fhir}Patient"
+        }
+      ]
+    },
+    "statements": {
+      "def": [
+        {
+          "expression": {
+            "type": "SingletonFrom",
+            "operand": {
+              "type": "Retrieve",
+              "dataType": "{http://hl7.org/fhir}Patient",
+              "templateId": "http://hl7.org/fhir/StructureDefinition/Patient",
+              "resultTypeSpecifier": {
+                "type": "ListTypeSpecifier",
+                "elementType": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{http://hl7.org/fhir}Patient"
+                }
+              },
+              "localId": "1952",
+              "locator": "25:0-25:8"
+            },
+            "resultTypeSpecifier": {
+              "type": "NamedTypeSpecifier",
+              "name": "{http://hl7.org/fhir}Patient"
+            },
+            "resultTypeName": "{http://hl7.org/fhir}Patient"
+          },
+          "name": "Patient",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{http://hl7.org/fhir}Patient"
+          },
+          "localId": "1953",
+          "locator": "25:0-25:8",
+          "resultTypeName": "{http://hl7.org/fhir}Patient"
+        },
+        {
+          "expression": {
+            "type": "And",
+            "operand": [
+              {
+                "type": "GreaterOrEqual",
+                "operand": [
+                  {
+                    "type": "CalculateAgeAt",
+                    "precision": "Year",
+                    "operand": [
+                      {
+                        "type": "ToDateTime",
+                        "operand": {
+                          "type": "Property",
+                          "source": {
+                            "type": "ExpressionRef",
+                            "name": "Patient",
+                            "resultTypeSpecifier": {
+                              "type": "NamedTypeSpecifier",
+                              "name": "{http://hl7.org/fhir}Patient",
+                              "resultTypeName": "{http://hl7.org/fhir}Patient"
+                            },
+                            "resultTypeName": "{http://hl7.org/fhir}Patient"
+                          },
+                          "path": "birthDate",
+                          "resultTypeSpecifier": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{http://hl7.org/fhir}date",
+                            "resultTypeName": "{http://hl7.org/fhir}date"
+                          },
+                          "resultTypeName": "{http://hl7.org/fhir}date"
+                        },
+                        "resultTypeSpecifier": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime"
+                        },
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime"
+                      },
+                      {
+                        "type": "Start",
+                        "operand": {
+                          "type": "ParameterRef",
+                          "name": "Measurement Period",
+                          "resultTypeSpecifier": {
+                            "type": "IntervalTypeSpecifier",
+                            "pointType": {
+                              "type": "NamedTypeSpecifier",
+                              "name": "{urn:hl7-org:elm-types:r1}DateTime"
+                            }
+                          },
+                          "localId": "1954",
+                          "locator": "32:24-32:24"
+                        },
+                        "resultTypeSpecifier": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{urn:hl7-org:elm-types:r1}DateTime"
+                        },
+                        "localId": "1955",
+                        "locator": "32:15-32:24",
+                        "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime"
+                      }
+                    ],
+                    "resultTypeSpecifier": {
+                      "type": "NamedTypeSpecifier",
+                      "name": "{urn:hl7-org:elm-types:r1}Integer"
+                    },
+                    "localId": "1956",
+                    "locator": "32:2-32:44",
+                    "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+                  },
+                  {
+                    "type": "Literal",
+                    "valueType": "{urn:hl7-org:elm-types:r1}Integer",
+                    "value": "16",
+                    "resultTypeSpecifier": {
+                      "type": "NamedTypeSpecifier",
+                      "name": "{urn:hl7-org:elm-types:r1}Integer"
+                    },
+                    "localId": "1957",
+                    "locator": "32:49-32:49",
+                    "resultTypeName": "{urn:hl7-org:elm-types:r1}Integer"
+                  }
+                ],
+                "resultTypeSpecifier": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{urn:hl7-org:elm-types:r1}Boolean"
+                },
+                "localId": "1964",
+                "locator": "32:2-32:49",
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+              },
+              {
+                "type": "Exists",
+                "operand": {
+                  "type": "ExpressionRef",
+                  "name": "Injury due to falling rock within measurement period",
+                  "resultTypeSpecifier": {
+                    "type": "ListTypeSpecifier",
+                    "elementType": {
+                      "type": "NamedTypeSpecifier",
+                      "name": "{http://hl7.org/fhir}Condition",
+                      "localId": "1966",
+                      "locator": "55:5-55:5"
+                    }
+                  },
+                  "localId": "1977",
+                  "locator": "32:63-32:63"
+                },
+                "resultTypeSpecifier": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{urn:hl7-org:elm-types:r1}Boolean"
+                },
+                "localId": "1978",
+                "locator": "32:56-32:117",
+                "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+              }
+            ],
+            "resultTypeSpecifier": {
+              "type": "NamedTypeSpecifier",
+              "name": "{urn:hl7-org:elm-types:r1}Boolean"
+            },
+            "localId": "1979",
+            "locator": "32:2-32:117",
+            "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+          },
+          "name": "Initial Population",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}Boolean"
+          },
+          "localId": "1980",
+          "locator": "31:0-32:117",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        {
+          "expression": {
+            "type": "ExpressionRef",
+            "name": "Initial Population",
+            "resultTypeSpecifier": {
+              "type": "NamedTypeSpecifier",
+              "name": "{urn:hl7-org:elm-types:r1}Boolean"
+            },
+            "localId": "1981",
+            "locator": "39:4-39:4",
+            "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+          },
+          "name": "Denominator",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}Boolean"
+          },
+          "localId": "1982",
+          "locator": "38:0-39:4",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        {
+          "expression": {
+            "type": "Exists",
+            "operand": {
+              "type": "ExpressionRef",
+              "name": "Tiny Umbrella Supply within 7 days after most recent injury due to falling rock",
+              "resultTypeSpecifier": {
+                "type": "ListTypeSpecifier",
+                "elementType": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{http://hl7.org/fhir}SupplyDelivery",
+                  "localId": "1983",
+                  "locator": "67:5-67:5"
+                }
+              },
+              "localId": "2017",
+              "locator": "46:11-46:11"
+            },
+            "resultTypeSpecifier": {
+              "type": "NamedTypeSpecifier",
+              "name": "{urn:hl7-org:elm-types:r1}Boolean"
+            },
+            "localId": "2018",
+            "locator": "46:4-46:11",
+            "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+          },
+          "name": "Numerator",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{urn:hl7-org:elm-types:r1}Boolean"
+          },
+          "localId": "2019",
+          "locator": "45:0-46:11",
+          "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+        },
+        {
+          "expression": {
+            "type": "Query",
+            "source": [
+              {
+                "expression": {
+                  "type": "Retrieve",
+                  "codes": {
+                    "type": "ValueSetRef",
+                    "name": "Injury due to falling rock",
+                    "resultTypeSpecifier": {
+                      "type": "NamedTypeSpecifier",
+                      "name": "{urn:hl7-org:elm-types:r1}ValueSet"
+                    },
+                    "localId": "1965",
+                    "resultTypeName": "{urn:hl7-org:elm-types:r1}ValueSet"
+                  },
+                  "dataType": "{http://hl7.org/fhir}Condition",
+                  "templateId": "http://hl7.org/fhir/StructureDefinition/Condition",
+                  "resultTypeSpecifier": {
+                    "type": "ListTypeSpecifier",
+                    "elementType": {
+                      "type": "NamedTypeSpecifier",
+                      "name": "{http://hl7.org/fhir}Condition",
+                      "localId": "1966",
+                      "locator": "55:5-55:5"
+                    }
+                  },
+                  "localId": "1967",
+                  "locator": "55:4-55:44"
+                },
+                "alias": "C",
+                "resultTypeSpecifier": {
+                  "type": "ListTypeSpecifier",
+                  "elementType": {
+                    "type": "NamedTypeSpecifier",
+                    "name": "{http://hl7.org/fhir}Condition",
+                    "localId": "1966",
+                    "locator": "55:5-55:5"
+                  }
+                },
+                "localId": "1968",
+                "locator": "55:4-55:46"
+              }
+            ],
+            "let": [],
+            "relationship": [],
+            "where": {
+              "type": "In",
+              "operand": [
+                {
+                  "type": "FunctionRef",
+                  "operand": [
+                    {
+                      "type": "As",
+                      "asTypeSpecifier": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{http://hl7.org/fhir}dateTime",
+                        "localId": "1971",
+                        "locator": "56:25-56:25"
+                      },
+                      "operand": {
+                        "type": "Property",
+                        "source": {
+                          "type": "AliasRef",
+                          "name": "C",
+                          "resultTypeSpecifier": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{http://hl7.org/fhir}Condition",
+                            "localId": "1966",
+                            "locator": "55:5-55:5"
+                          },
+                          "localId": "1969",
+                          "locator": "56:14-56:14",
+                          "resultTypeName": "{http://hl7.org/fhir}Condition"
+                        },
+                        "path": "onset",
+                        "resultTypeSpecifier": {
+                          "type": "ChoiceTypeSpecifier",
+                          "choice": [
+                            {
+                              "type": "NamedTypeSpecifier",
+                              "name": "{http://hl7.org/fhir}dateTime"
+                            },
+                            {
+                              "type": "NamedTypeSpecifier",
+                              "name": "{http://hl7.org/fhir}Age"
+                            },
+                            {
+                              "type": "NamedTypeSpecifier",
+                              "name": "{http://hl7.org/fhir}Period"
+                            },
+                            {
+                              "type": "NamedTypeSpecifier",
+                              "name": "{http://hl7.org/fhir}Range"
+                            },
+                            {
+                              "type": "NamedTypeSpecifier",
+                              "name": "{http://hl7.org/fhir}string"
+                            }
+                          ]
+                        },
+                        "localId": "1970",
+                        "locator": "56:14-56:16"
+                      },
+                      "resultTypeSpecifier": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{http://hl7.org/fhir}dateTime",
+                        "localId": "1971",
+                        "locator": "56:25-56:25"
+                      },
+                      "localId": "1972",
+                      "locator": "56:14-56:25",
+                      "resultTypeName": "{http://hl7.org/fhir}dateTime"
+                    }
+                  ],
+                  "name": "ToDateTime",
+                  "libraryName": "FHIRHelpers",
+                  "resultTypeSpecifier": {
+                    "type": "NamedTypeSpecifier",
+                    "name": "{urn:hl7-org:elm-types:r1}DateTime"
+                  },
+                  "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime"
+                },
+                {
+                  "type": "ParameterRef",
+                  "name": "Measurement Period",
+                  "resultTypeSpecifier": {
+                    "type": "IntervalTypeSpecifier",
+                    "pointType": {
+                      "type": "NamedTypeSpecifier",
+                      "name": "{urn:hl7-org:elm-types:r1}DateTime"
+                    }
+                  },
+                  "localId": "1973",
+                  "locator": "56:42-56:42"
+                }
+              ],
+              "resultTypeSpecifier": {
+                "type": "NamedTypeSpecifier",
+                "name": "{urn:hl7-org:elm-types:r1}Boolean"
+              },
+              "localId": "1974",
+              "locator": "56:7-56:42",
+              "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+            },
+            "resultTypeSpecifier": {
+              "type": "ListTypeSpecifier",
+              "elementType": {
+                "type": "NamedTypeSpecifier",
+                "name": "{http://hl7.org/fhir}Condition",
+                "localId": "1966",
+                "locator": "55:5-55:5"
+              }
+            },
+            "localId": "1975",
+            "locator": "55:4-56:42"
+          },
+          "name": "Injury due to falling rock within measurement period",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "ListTypeSpecifier",
+            "elementType": {
+              "type": "NamedTypeSpecifier",
+              "name": "{http://hl7.org/fhir}Condition",
+              "localId": "1966",
+              "locator": "55:5-55:5"
+            }
+          },
+          "localId": "1976",
+          "locator": "54:0-56:42"
+        },
+        {
+          "expression": {
+            "type": "Last",
+            "source": {
+              "type": "Query",
+              "source": [
+                {
+                  "expression": {
+                    "type": "ExpressionRef",
+                    "name": "Injury due to falling rock within measurement period",
+                    "resultTypeSpecifier": {
+                      "type": "ListTypeSpecifier",
+                      "elementType": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{http://hl7.org/fhir}Condition",
+                        "localId": "1966",
+                        "locator": "55:5-55:5"
+                      }
+                    },
+                    "localId": "1991"
+                  },
+                  "alias": "C",
+                  "resultTypeSpecifier": {
+                    "type": "ListTypeSpecifier",
+                    "elementType": {
+                      "type": "NamedTypeSpecifier",
+                      "name": "{http://hl7.org/fhir}Condition",
+                      "localId": "1966",
+                      "locator": "55:5-55:5"
+                    }
+                  },
+                  "localId": "1992",
+                  "locator": "59:12-59:67"
+                }
+              ],
+              "let": [],
+              "relationship": [],
+              "sort": {
+                "by": [
+                  {
+                    "type": "ByExpression",
+                    "expression": {
+                      "type": "Property",
+                      "source": {
+                        "type": "As",
+                        "asTypeSpecifier": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{http://hl7.org/fhir}dateTime",
+                          "localId": "1993",
+                          "locator": "59:87-59:87"
+                        },
+                        "operand": {
+                          "type": "Property",
+                          "source": {
+                            "type": "IdentifierRef",
+                            "name": "$this",
+                            "resultTypeSpecifier": {
+                              "type": "NamedTypeSpecifier",
+                              "name": "{http://hl7.org/fhir}Condition",
+                              "localId": "1966",
+                              "locator": "55:5-55:5"
+                            },
+                            "resultTypeName": "{http://hl7.org/fhir}Condition"
+                          },
+                          "path": "onset",
+                          "resultTypeSpecifier": {
+                            "type": "ChoiceTypeSpecifier",
+                            "choice": [
+                              {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{http://hl7.org/fhir}dateTime"
+                              },
+                              {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{http://hl7.org/fhir}Age"
+                              },
+                              {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{http://hl7.org/fhir}Period"
+                              },
+                              {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{http://hl7.org/fhir}Range"
+                              },
+                              {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{http://hl7.org/fhir}string"
+                              }
+                            ]
+                          }
+                        },
+                        "resultTypeSpecifier": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{http://hl7.org/fhir}dateTime",
+                          "localId": "1993",
+                          "locator": "59:87-59:87"
+                        },
+                        "localId": "1994",
+                        "locator": "59:78-59:87",
+                        "resultTypeName": "{http://hl7.org/fhir}dateTime"
+                      },
+                      "path": "value",
+                      "resultTypeSpecifier": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}DateTime"
+                      },
+                      "localId": "1995",
+                      "locator": "59:77-59:97",
+                      "resultTypeName": "{urn:hl7-org:elm-types:r1}DateTime"
+                    },
+                    "direction": "asc",
+                    "localId": "1996",
+                    "locator": "59:77-59:97"
+                  }
+                ],
+                "localId": "1997",
+                "locator": "59:69-59:97"
+              },
+              "resultTypeSpecifier": {
+                "type": "ListTypeSpecifier",
+                "elementType": {
+                  "type": "NamedTypeSpecifier",
+                  "name": "{http://hl7.org/fhir}Condition",
+                  "localId": "1966",
+                  "locator": "55:5-55:5"
+                }
+              },
+              "localId": "1998",
+              "locator": "59:12-59:97"
+            },
+            "resultTypeSpecifier": {
+              "type": "NamedTypeSpecifier",
+              "name": "{http://hl7.org/fhir}Condition",
+              "localId": "1966",
+              "locator": "55:5-55:5"
+            },
+            "localId": "1999",
+            "locator": "59:6-59:103",
+            "resultTypeName": "{http://hl7.org/fhir}Condition"
+          },
+          "name": "Latest injury due to falling rock",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "NamedTypeSpecifier",
+            "name": "{http://hl7.org/fhir}Condition",
+            "localId": "1966",
+            "locator": "55:5-55:5"
+          },
+          "localId": "2000",
+          "locator": "58:0-59:103",
+          "resultTypeName": "{http://hl7.org/fhir}Condition"
+        },
+        {
+          "expression": {
+            "type": "Query",
+            "source": [
+              {
+                "expression": {
+                  "type": "Retrieve",
+                  "dataType": "{http://hl7.org/fhir}SupplyDelivery",
+                  "templateId": "http://hl7.org/fhir/StructureDefinition/SupplyDelivery",
+                  "resultTypeSpecifier": {
+                    "type": "ListTypeSpecifier",
+                    "elementType": {
+                      "type": "NamedTypeSpecifier",
+                      "name": "{http://hl7.org/fhir}SupplyDelivery",
+                      "localId": "1983",
+                      "locator": "67:5-67:5"
+                    }
+                  },
+                  "localId": "1984",
+                  "locator": "67:4-67:19"
+                },
+                "alias": "SD",
+                "resultTypeSpecifier": {
+                  "type": "ListTypeSpecifier",
+                  "elementType": {
+                    "type": "NamedTypeSpecifier",
+                    "name": "{http://hl7.org/fhir}SupplyDelivery",
+                    "localId": "1983",
+                    "locator": "67:5-67:5"
+                  }
+                },
+                "localId": "1985",
+                "locator": "67:4-67:21"
+              }
+            ],
+            "let": [],
+            "relationship": [],
+            "where": {
+              "type": "And",
+              "operand": [
+                {
+                  "type": "Equivalent",
+                  "operand": [
+                    {
+                      "type": "Property",
+                      "source": {
+                        "type": "Property",
+                        "source": {
+                          "type": "AliasRef",
+                          "name": "SD",
+                          "resultTypeSpecifier": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{http://hl7.org/fhir}SupplyDelivery",
+                            "localId": "1983",
+                            "locator": "67:5-67:5"
+                          },
+                          "localId": "1986",
+                          "locator": "68:13-68:13",
+                          "resultTypeName": "{http://hl7.org/fhir}SupplyDelivery"
+                        },
+                        "path": "suppliedItem",
+                        "resultTypeSpecifier": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{http://hl7.org/fhir}SupplyDelivery.SuppliedItem"
+                        },
+                        "localId": "1987",
+                        "locator": "68:13-68:16",
+                        "resultTypeName": "{http://hl7.org/fhir}SupplyDelivery.SuppliedItem"
+                      },
+                      "path": "item",
+                      "resultTypeSpecifier": {
+                        "type": "ChoiceTypeSpecifier",
+                        "choice": [
+                          {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{http://hl7.org/fhir}CodeableConcept"
+                          },
+                          {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{http://hl7.org/fhir}Reference"
+                          }
+                        ]
+                      },
+                      "localId": "1988",
+                      "locator": "68:13-68:29"
+                    },
+                    {
+                      "type": "CodeRef",
+                      "name": "Tiny Umbrella",
+                      "resultTypeSpecifier": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Code"
+                      },
+                      "localId": "1989",
+                      "locator": "68:36-68:36",
+                      "resultTypeName": "{urn:hl7-org:elm-types:r1}Code"
+                    }
+                  ],
+                  "annotation": [
+                    {
+                      "type": "CqlToElmError",
+                      "message": "Could not resolve call to operator Equivalent with signature (Choice\u003C{http://hl7.org/fhir}CodeableConcept, {http://hl7.org/fhir}Reference\u003E, Code).",
+                      "errorType": "semantic",
+                      "errorSeverity": "error"
+                    }
+                  ],
+                  "resultTypeSpecifier": {
+                    "type": "NamedTypeSpecifier",
+                    "name": "{urn:hl7-org:elm-types:r1}Boolean"
+                  },
+                  "localId": "1990",
+                  "locator": "68:13-68:36",
+                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+                },
+                {
+                  "type": "Not",
+                  "operand": {
+                    "type": "IsNull",
+                    "operand": {
+                      "type": "As",
+                      "asTypeSpecifier": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any"
+                      },
+                      "asType": "{urn:hl7-org:elm-types:r1}Any",
+                      "operand": {
+                        "type": "Query",
+                        "source": [
+                          {
+                            "expression": {
+                              "type": "ExpressionRef",
+                              "name": "Latest injury due to falling rock",
+                              "resultTypeSpecifier": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{http://hl7.org/fhir}Condition",
+                                "localId": "1966",
+                                "locator": "55:5-55:5"
+                              },
+                              "localId": "2001",
+                              "resultTypeName": "{http://hl7.org/fhir}Condition"
+                            },
+                            "alias": "C",
+                            "resultTypeSpecifier": {
+                              "type": "NamedTypeSpecifier",
+                              "name": "{http://hl7.org/fhir}Condition",
+                              "localId": "1966",
+                              "locator": "55:5-55:5"
+                            },
+                            "localId": "2002",
+                            "locator": "69:13-69:49",
+                            "resultTypeName": "{http://hl7.org/fhir}Condition"
+                          }
+                        ],
+                        "let": [],
+                        "relationship": [],
+                        "where": {
+                          "type": "Before",
+                          "operand": [
+                            {
+                              "type": "As",
+                              "asTypeSpecifier": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{http://hl7.org/fhir}dateTime",
+                                "localId": "2005",
+                                "locator": "69:69-69:69"
+                              },
+                              "operand": {
+                                "type": "Property",
+                                "source": {
+                                  "type": "AliasRef",
+                                  "name": "C",
+                                  "resultTypeSpecifier": {
+                                    "type": "NamedTypeSpecifier",
+                                    "name": "{http://hl7.org/fhir}Condition",
+                                    "localId": "1966",
+                                    "locator": "55:5-55:5"
+                                  },
+                                  "localId": "2003",
+                                  "locator": "69:58-69:58",
+                                  "resultTypeName": "{http://hl7.org/fhir}Condition"
+                                },
+                                "path": "onset",
+                                "resultTypeSpecifier": {
+                                  "type": "ChoiceTypeSpecifier",
+                                  "choice": [
+                                    {
+                                      "type": "NamedTypeSpecifier",
+                                      "name": "{http://hl7.org/fhir}dateTime"
+                                    },
+                                    {
+                                      "type": "NamedTypeSpecifier",
+                                      "name": "{http://hl7.org/fhir}Age"
+                                    },
+                                    {
+                                      "type": "NamedTypeSpecifier",
+                                      "name": "{http://hl7.org/fhir}Period"
+                                    },
+                                    {
+                                      "type": "NamedTypeSpecifier",
+                                      "name": "{http://hl7.org/fhir}Range"
+                                    },
+                                    {
+                                      "type": "NamedTypeSpecifier",
+                                      "name": "{http://hl7.org/fhir}string"
+                                    }
+                                  ]
+                                },
+                                "localId": "2004",
+                                "locator": "69:58-69:60"
+                              },
+                              "resultTypeSpecifier": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{http://hl7.org/fhir}dateTime",
+                                "localId": "2005",
+                                "locator": "69:69-69:69"
+                              },
+                              "localId": "2006",
+                              "locator": "69:58-69:69",
+                              "resultTypeName": "{http://hl7.org/fhir}dateTime"
+                            },
+                            {
+                              "type": "As",
+                              "asTypeSpecifier": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{http://hl7.org/fhir}dateTime",
+                                "localId": "2009",
+                                "locator": "69:119-69:119"
+                              },
+                              "operand": {
+                                "type": "Property",
+                                "source": {
+                                  "type": "AliasRef",
+                                  "name": "SD",
+                                  "resultTypeSpecifier": {
+                                    "type": "NamedTypeSpecifier",
+                                    "name": "{http://hl7.org/fhir}SupplyDelivery",
+                                    "localId": "1983",
+                                    "locator": "67:5-67:5"
+                                  },
+                                  "localId": "2007",
+                                  "locator": "69:102-69:102",
+                                  "resultTypeName": "{http://hl7.org/fhir}SupplyDelivery"
+                                },
+                                "path": "occurrence",
+                                "resultTypeSpecifier": {
+                                  "type": "ChoiceTypeSpecifier",
+                                  "choice": [
+                                    {
+                                      "type": "NamedTypeSpecifier",
+                                      "name": "{http://hl7.org/fhir}dateTime"
+                                    },
+                                    {
+                                      "type": "NamedTypeSpecifier",
+                                      "name": "{http://hl7.org/fhir}Period"
+                                    },
+                                    {
+                                      "type": "NamedTypeSpecifier",
+                                      "name": "{http://hl7.org/fhir}Timing"
+                                    }
+                                  ]
+                                },
+                                "localId": "2008",
+                                "locator": "69:102-69:105"
+                              },
+                              "resultTypeSpecifier": {
+                                "type": "NamedTypeSpecifier",
+                                "name": "{http://hl7.org/fhir}dateTime",
+                                "localId": "2009",
+                                "locator": "69:119-69:119"
+                              },
+                              "localId": "2010",
+                              "locator": "69:102-69:119",
+                              "resultTypeName": "{http://hl7.org/fhir}dateTime"
+                            }
+                          ],
+                          "resultTypeSpecifier": {
+                            "type": "NamedTypeSpecifier",
+                            "name": "{urn:hl7-org:elm-types:r1}Boolean"
+                          },
+                          "localId": "2011",
+                          "locator": "69:51-69:127",
+                          "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+                        },
+                        "resultTypeSpecifier": {
+                          "type": "NamedTypeSpecifier",
+                          "name": "{http://hl7.org/fhir}Condition",
+                          "localId": "1966",
+                          "locator": "55:5-55:5"
+                        },
+                        "localId": "2012",
+                        "locator": "69:13-69:127",
+                        "resultTypeName": "{http://hl7.org/fhir}Condition"
+                      },
+                      "resultTypeSpecifier": {
+                        "type": "NamedTypeSpecifier",
+                        "name": "{urn:hl7-org:elm-types:r1}Any"
+                      },
+                      "locator": "69:13-69:127",
+                      "resultTypeName": "{urn:hl7-org:elm-types:r1}Any"
+                    },
+                    "resultTypeSpecifier": {
+                      "type": "NamedTypeSpecifier",
+                      "name": "{urn:hl7-org:elm-types:r1}Boolean"
+                    },
+                    "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+                  },
+                  "resultTypeSpecifier": {
+                    "type": "NamedTypeSpecifier",
+                    "name": "{urn:hl7-org:elm-types:r1}Boolean"
+                  },
+                  "localId": "2013",
+                  "locator": "69:12-69:137",
+                  "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+                }
+              ],
+              "resultTypeSpecifier": {
+                "type": "NamedTypeSpecifier",
+                "name": "{urn:hl7-org:elm-types:r1}Boolean"
+              },
+              "localId": "2014",
+              "locator": "68:6-69:141",
+              "resultTypeName": "{urn:hl7-org:elm-types:r1}Boolean"
+            },
+            "resultTypeSpecifier": {
+              "type": "ListTypeSpecifier",
+              "elementType": {
+                "type": "NamedTypeSpecifier",
+                "name": "{http://hl7.org/fhir}SupplyDelivery",
+                "localId": "1983",
+                "locator": "67:5-67:5"
+              }
+            },
+            "localId": "2015",
+            "locator": "67:4-69:141"
+          },
+          "name": "Tiny Umbrella Supply within 7 days after most recent injury due to falling rock",
+          "context": "Patient",
+          "accessLevel": "Public",
+          "resultTypeSpecifier": {
+            "type": "ListTypeSpecifier",
+            "elementType": {
+              "type": "NamedTypeSpecifier",
+              "name": "{http://hl7.org/fhir}SupplyDelivery",
+              "localId": "1983",
+              "locator": "67:5-67:5"
+            }
+          },
+          "localId": "2016",
+          "locator": "66:0-69:141"
+        }
+      ]
+    },
+    "annotation": []
+  }
+}

@@ -26,7 +26,7 @@ public static partial class CqlToolkitExtensions
     public static CqlToolkit SaveElmFilesToDirectory(
         this CqlToolkit cqlToolkit,
         DirectoryInfo directory,
-        bool writeIndented = true,
+        bool writeIndented = false,
         DirectoryInfoHandler? directoryPreparationStrategy = null)
     {
         (directoryPreparationStrategy ?? DirectoryPreparationStrategy.CreateIfNotExists)(directory);

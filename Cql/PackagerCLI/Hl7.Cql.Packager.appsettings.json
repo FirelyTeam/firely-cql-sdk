@@ -1,12 +1,25 @@
 {
   "Logging": {
-    "ConsoleLogLevel": "Information",
-    "FileLogLevel": "Information"
+    "ConsoleLogLevel": "Information", // "Trace", "Debug", "Information", "Warning", "Error", "Critical" or "None"
+    "FileLogLevel": "Information", // "Trace", "Debug", "Information", "Warning", "Error", "Critical" or "None"
+    "Append": false
   },
   "Cql": {
-    "Models": [ "ElmR1", "Fhir401" ]
+    "Models": [ "ElmR1", "Fhir401" ],
+    "AmbiguousTypeBehavior": "PreferModel", // "Error", "PreferSystem" or "PreferModel"
+    "SystemElmModelUri": "urn:hl7-org:elm-types:r1",
+    "SystemElmModelVersion": "1.0.0",
+    "EnableListDemotion": false,
+    "EnableListPromotion": false,
+    "EnableIntervalDemotion": false,
+    "EnableIntervalPromotion": false,
+    "AllowNullIntervals": false,
+    "ValidateIntervals": false,
+    "LongsRequireSuffix": true,
+    "ValidateLiterals": true
   },
   "Elm": {
+    "JsonPretty": false,
     "SkipFiles": [
 
       // These contain a union between incompatible tuples,
@@ -32,7 +45,9 @@
     ]
   },
   "Packaging": {
+    "JsonPretty": false,
     "CanonicalRootUrl": "https://fire.ly/fhir/",
+    "OverrideDate": null, // eg. "2023-10-01T00:00:00Z",
     "FixedLibraryCanonicals": {
       "FHIRHelpers": "https://fhir.org/guides/cqf/common/Library/FHIRHelpers"
     }
